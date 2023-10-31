@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
+import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -212,7 +213,13 @@ class MoreDetailsTile {
           Icons.notifications_none_outlined,
           color: ZPColors.greenIconColor,
         ),
+        key: WidgetKeys.notificationTile,
         label: 'Notifications',
-        onTap: () => context.navigateTo(const NotificationTabRoute()),
+        onTap: () {
+          context.read<NotificationSettingsBloc>().add(
+                const NotificationSettingsEvent.fetch(),
+              );
+          context.navigateTo(const NotificationSettingsPageRoute());
+        },
       );
 }

@@ -137,6 +137,7 @@ class WidgetKeys {
   static const Key eZPointTile = Key('eZPointTile');
   static const Key returnsTile = Key('returnsTile');
   static const Key securityTile = Key('securityTile');
+  static const Key notificationTile = Key('notificationTile');
   static const Key contactUsTile = Key('contactUsTile');
   static const Key proxyLoginUserNameField = Key('proxyLoginUserNameField');
   static const Key proxyLoginButton = Key('proxyLoginButton');
@@ -1140,5 +1141,17 @@ class WidgetKeys {
   //============================================================
   static Key ezPointWebviewPage = const Key('ezPointWebviewPage');
   static Key ezPointErrorPage = const Key('ezPointErrorPage');
+  //============================================================
+  // Notification Settings Page
+  //============================================================
+  static Key notificationSettingsPage = const Key('notificationSettingsPage');
+  static Key notificationSettingsClearButton =
+      const Key('notificationSettingsClearButton');
+  static Key notificationSettingsSubmitButton =
+      const Key('notificationSettingsSubmitButton');
+  static Key notificationSettingsSuccessSnackBar =
+      const Key('notificationSettingsSuccessSnackBar');
+  static Key orderConfirmationTile = const Key('orderConfirmationTile');
+  static Key paymentConfirmationTile = const Key('paymentConfirmationTile');
   //============================================================
 }

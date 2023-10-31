@@ -469,3 +469,13 @@ class PaymentAdviceResponseMessage extends ValueObject<String> {
 
   const PaymentAdviceResponseMessage._(this.value);
 }
+
+class NotificationSetting extends ValueObject<bool> {
+  @override
+  final Either<ValueFailure<bool>, bool> value;
+
+  factory NotificationSetting(bool input) =>
+      NotificationSetting._(Right(input));
+
+  const NotificationSetting._(this.value);
+}

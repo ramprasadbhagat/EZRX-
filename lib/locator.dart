@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
+import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
@@ -11,7 +12,6 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_met
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -134,6 +134,9 @@ import 'package:ezrxmobile/infrastructure/account/datasource/ez_point_remote.dar
 import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_footer_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_footer_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_query_mutation.dart';
@@ -149,9 +152,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.da
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_notification_local_datasource.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_notification_mutation.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_notification_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_remote.dart';
@@ -165,12 +165,12 @@ import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repos
 import 'package:ezrxmobile/infrastructure/account/repository/customer_license_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/deduction_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/ez_point_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/notification_settings_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_advice_footer_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_methods_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_district_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_rep_repository.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/update_payment_notification_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/update_sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
@@ -2275,39 +2275,6 @@ void setupLocator() {
   );
 
   //============================================================
-  // Update Payment Notification
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => PaymentNotificationBloc(
-      updatePaymentNotificationRepository:
-          locator<UpdatePaymentNotificationRepository>(),
-    ),
-  );
-  locator.registerLazySingleton(
-    () => UpdatePaymentNotificationLocalDataSource(),
-  );
-  locator.registerLazySingleton(
-    () => UpdatePaymentNotificationMutation(),
-  );
-  locator.registerLazySingleton(
-    () => UpdatePaymentNotificationRemoteDataSource(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      updatePaymentNotificationMutation:
-          locator<UpdatePaymentNotificationMutation>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-  locator.registerLazySingleton(
-    () => UpdatePaymentNotificationRepository(
-      config: locator<Config>(),
-      localDataSource: locator<UpdatePaymentNotificationLocalDataSource>(),
-      remoteDataSource: locator<UpdatePaymentNotificationRemoteDataSource>(),
-    ),
-  );
-  //============================================================
 
   //  Manage Bank Beneficiary
   //
@@ -3184,6 +3151,35 @@ void setupLocator() {
   locator.registerFactory(
     () => EZPointBloc(
       eZPointRepository: locator<EZPointRepository>(),
+    ),
+  );
+  //============================================================
+  //  Notification Settings
+  //
+  //============================================================
+  locator.registerLazySingleton(() => NotificationSettingsMutation());
+
+  locator.registerLazySingleton(() => NotificationSettingsLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => NotificationSettingsRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      notificationSettingsMutation: locator<NotificationSettingsMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => NotificationSettingsRepository(
+      config: locator<Config>(),
+      localDataSource: locator<NotificationSettingsLocalDataSource>(),
+      remoteDataSource: locator<NotificationSettingsRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => NotificationSettingsBloc(
+      notificationSettingsRepository: locator<NotificationSettingsRepository>(),
     ),
   );
 }

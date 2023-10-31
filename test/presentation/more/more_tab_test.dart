@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
+import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -66,6 +67,10 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class EZPointBlocMock extends MockBloc<EZPointEvent, EZPointState>
     implements EZPointBloc {}
 
+class NotificationSettingsBlocMock
+    extends MockBloc<NotificationSettingsEvent, NotificationSettingsState>
+    implements NotificationSettingsBloc {}
+
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late CartBloc cartBlocMock;
@@ -78,6 +83,7 @@ void main() {
   late AnnouncementInfoBloc announcementInfoBlocMock;
   late AnnouncementBlocMock announcementBlocMock;
   late EZPointBlocMock eZPointBlocMock;
+  late NotificationSettingsBlocMock notificationSettingsBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
 
@@ -88,6 +94,9 @@ void main() {
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
     locator.registerFactory<EZPointBlocMock>(() => eZPointBlocMock);
     locator.registerLazySingleton(() => PackageInfoService());
+    locator.registerFactory<NotificationSettingsBlocMock>(
+      () => notificationSettingsBlocMock,
+    );
 
     autoRouterMock = locator<AppRouter>();
   });
@@ -121,6 +130,9 @@ void main() {
         .thenReturn(AnnouncementInfoState.initial());
     eZPointBlocMock = EZPointBlocMock();
     when(() => eZPointBlocMock.state).thenReturn(EZPointState.initial());
+    notificationSettingsBlocMock = NotificationSettingsBlocMock();
+    when(() => notificationSettingsBlocMock.state)
+        .thenReturn(NotificationSettingsState.initial());
   });
 
   Future getWidget(tester) async {
@@ -159,6 +171,9 @@ void main() {
           ),
           BlocProvider<EZPointBloc>(
             create: (context) => eZPointBlocMock,
+          ),
+          BlocProvider<NotificationSettingsBloc>(
+            create: (context) => notificationSettingsBlocMock,
           ),
         ],
         child: const MoreTab(),
@@ -438,6 +453,28 @@ void main() {
           ),
         ).called(1);
         expect(autoRouterMock.current.path, 'eZPoint');
+      },
+    );
+
+    testWidgets(
+      ' -> Show Notification Settings Page for ID Market',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final notificationTileFinder = find.byKey(WidgetKeys.notificationTile);
+        expect(notificationTileFinder, findsOneWidget);
+        await tester.tap(notificationTileFinder);
+        verify(
+          () => notificationSettingsBlocMock.add(
+            const NotificationSettingsEvent.fetch(),
+          ),
+        ).called(1);
+        expect(autoRouterMock.current.path, 'notification_settings');
       },
     );
   });

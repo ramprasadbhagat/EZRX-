@@ -3,6 +3,7 @@ import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
+import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
@@ -128,7 +129,6 @@ import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
@@ -344,9 +344,6 @@ class App extends StatelessWidget {
         BlocProvider<ComboDealMaterialDetailBloc>(
           create: (context) => locator<ComboDealMaterialDetailBloc>(),
         ),
-        BlocProvider<PaymentNotificationBloc>(
-          create: (context) => locator<PaymentNotificationBloc>(),
-        ),
         BlocProvider<ScanMaterialInfoBloc>(
           create: (context) => locator<ScanMaterialInfoBloc>(),
         ),
@@ -529,6 +526,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<EZPointBloc>(
           create: (context) => locator<EZPointBloc>(),
+        ),
+        BlocProvider<NotificationSettingsBloc>(
+          create: (context) => locator<NotificationSettingsBloc>(),
         ),
       ],
       child: MaterialApp.router(

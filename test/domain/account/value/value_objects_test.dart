@@ -1537,4 +1537,16 @@ void main() {
       },
     );
   });
+
+  group('NotificationSetting value object', () {
+    test(
+      'should return value',
+      () async {
+        const input = true;
+        final value = NotificationSetting(input);
+        final result = value.getOrCrash();
+        expect(result, input);
+      },
+    );
+  });
 }
