@@ -6,6 +6,8 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/detai
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/new_request_success/new_request_successful_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -84,6 +86,7 @@ void main() {
   late String fakeOverridePriceString;
   late int fakeBalanceQuantity;
   late int fakeReturnQuantity;
+  late ReturnMaterialList fakeListMaterial;
 
   final fakeSalesOrganisation = SalesOrganisation.empty().copyWith(
     salesOrg: SalesOrg('fake-SalesOrg'),
@@ -96,7 +99,7 @@ void main() {
     fakeOverridePriceString = '12.00';
     fakeBalanceQuantity = 5;
     fakeReturnQuantity = 2;
-    final fakeListMaterial =
+    fakeListMaterial =
         await ReturnRequestLocalDataSource().searchReturnMaterials();
     fakeReturnMaterial = fakeListMaterial.items.first.copyWith(
       unitPrice: RangeValue(fakeUnitPrice.toString()),
@@ -341,5 +344,34 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byKey(WidgetKeys.returnBonusItemSection), findsOneWidget);
     });
+
+    testWidgets(
+      '=> display outside return policy tag',
+      (tester) async {
+        when(() => newRequestBlocMock.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: fakeListMaterial.items,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cardFinder = find.byType(CustomCard);
+        expect(cardFinder, findsNWidgets(2));
+        expect(
+          find.descendant(
+            of: cardFinder.first,
+            matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: cardFinder.last,
+            matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+          ),
+          findsNothing,
+        );
+      },
+    );
   });
 }

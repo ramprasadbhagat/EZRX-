@@ -208,6 +208,44 @@ void main() {
           expect(find.byKey(WidgetKeys.returnDetailSummary), findsOneWidget);
         },
       );
+
+      testWidgets(
+        '=> display outside return policy tag',
+        (tester) async {
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                outsidePolicy: true,
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(
+            find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> hide outside return policy tag',
+        (tester) async {
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                outsidePolicy: false,
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(
+            find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            findsNothing,
+          );
+        },
+      );
     },
   );
 }

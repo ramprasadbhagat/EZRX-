@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_item_page.dart';
@@ -272,6 +273,38 @@ void main() {
             autoRouterMock.current.name ==
                 'ReturnRequestSummaryByItemDetailsRoute',
             true,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> display outside return policy tag',
+        (tester) async {
+          when(() => mockReturnListByItemBloc.state).thenReturn(
+            ReturnListByItemState.initial().copyWith(
+              returnItemList: [
+                ReturnItem.empty().copyWith(outsidePolicy: true),
+                ReturnItem.empty().copyWith(outsidePolicy: false),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWUT());
+          await tester.pump();
+          final cardFinder = find.byType(CommonTileItem);
+          expect(cardFinder, findsNWidgets(2));
+          expect(
+            find.descendant(
+              of: cardFinder.first,
+              matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: cardFinder.last,
+              matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            ),
+            findsNothing,
           );
         },
       );

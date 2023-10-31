@@ -301,6 +301,7 @@ class WidgetKeys {
   static const Key toReturnDateField = Key('toReturnDateField');
   static Key returnStatusFilter(String name, bool value) =>
       Key('returnStatusFilter$name$value');
+  static const Key outsideReturnPolicyTag = Key('outsideReturnPolicyTag');
 
   //============================================================
   //  New Return Request

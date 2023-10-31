@@ -9,10 +9,12 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_local.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/return_review_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -80,6 +82,7 @@ void main() {
   late int fakeBalanceQuantity;
   late int fakeReturnQuantity;
   late List<Usage> fakeUsageList;
+  late ReturnMaterialList fakeReturnMaterialList;
 
   ///////////////////////////Finder/////////////////////////////////////////
   final specialInstructionsField =
@@ -94,18 +97,12 @@ void main() {
     fakeOverridePriceString = '12.00';
     fakeBalanceQuantity = 5;
     fakeReturnQuantity = 2;
-    fakeReturnMaterial =
-        (await ReturnRequestLocalDataSource().searchReturnMaterials())
-            .items
-            .first
-            .copyWith(
+    fakeReturnMaterialList =
+        await ReturnRequestLocalDataSource().searchReturnMaterials();
+    fakeReturnMaterial = fakeReturnMaterialList.items.first.copyWith(
       unitPrice: RangeValue(fakeUnitPrice.toString()),
       balanceQuantity: IntegerValue(fakeBalanceQuantity.toString()),
-      bonusItems: [
-        (await ReturnRequestLocalDataSource().searchReturnMaterials())
-            .items
-            .first
-      ],
+      bonusItems: [fakeReturnMaterialList.items.first],
     );
     fakeReturnItemDetails = fakeReturnMaterial.validatedItemDetails.copyWith(
       returnQuantity: ReturnQuantity(fakeReturnQuantity.toString()),
@@ -446,6 +443,35 @@ void main() {
         await tester.pump();
         expect(find.text(link), findsNothing);
       });
+
+      testWidgets(
+        '=> display outside return policy tag',
+        (tester) async {
+          when(() => newRequestBlocMock.state).thenReturn(
+            NewRequestState.initial().copyWith(
+              selectedItems: fakeReturnMaterialList.items,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final cardFinder = find.byType(CustomCard);
+          expect(cardFinder, findsNWidgets(2));
+          expect(
+            find.descendant(
+              of: cardFinder.first,
+              matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: cardFinder.last,
+              matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            ),
+            findsNothing,
+          );
+        },
+      );
     });
   });
 }
