@@ -164,7 +164,7 @@ class _CartPageState extends State<CartPage> {
           if ((!state.isUpserting || !state.isClearing) &&
               context.router.current.path == 'orders/cart') {
             CustomSnackBar(
-              messageText: context.tr('Item has been removed from cart.'),
+              messageText: context.tr('Cart has been emptied.'),
             ).show(context);
           }
         },

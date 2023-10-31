@@ -689,7 +689,7 @@ void main() {
         await tester.pump();
         await tester.pump(const Duration(seconds: 1));
         final msg = find.textContaining(
-          'Item has been removed from cart.'.tr(),
+          'Cart has been emptied.'.tr(),
         );
         expect(msg, findsOneWidget);
       });
@@ -729,6 +729,10 @@ void main() {
           Icons.close,
         );
         expect(closeIcon, findsOneWidget);
+        final msg = find.textContaining(
+          'Cart has been emptied.'.tr(),
+        );
+        expect(msg, findsOneWidget);
       });
 
       testWidgets('Bundle item allowed out of stock material', (tester) async {

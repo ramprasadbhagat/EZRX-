@@ -46,7 +46,7 @@ class CartRobot {
   Future<void> verifyClearCartSuccessMessage() async {
     final clearCartSuccessMessage = find.descendant(
       of: find.byKey(WidgetKeys.customSnackBar),
-      matching: find.text('Item has been removed from cart.'.tr()),
+      matching: find.text('Cart has been emptied.'.tr()),
     );
 
     const maxIteration = 15;
