@@ -4,7 +4,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
@@ -31,7 +30,6 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           salesOrganisation: event.salesOrganisation,
           salesOrgConfigs: event.salesOrgConfigs,
           customerCodeInfo: event.customerCodeInfo,
-          shipToInfo: event.shipToInfo,
           user: event.user,
           sortDirection: event.sortDirection,
         ),
@@ -63,7 +61,6 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           salesOrganisation: state.salesOrganisation,
           salesOrgConfig: state.salesOrgConfigs,
           soldTo: state.customerCodeInfo,
-          shipTo: state.shipToInfo,
           user: state.user,
           pageSize: config.pageSize,
           offset: 0,
@@ -102,7 +99,6 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
         final failureOrSuccess = await viewByOrderRepository.getViewByOrders(
           salesOrgConfig: state.salesOrgConfigs,
           soldTo: state.customerCodeInfo,
-          shipTo: state.shipToInfo,
           user: state.user,
           pageSize: config.pageSize,
           offset: state.viewByOrderList.orderHeaders.length,

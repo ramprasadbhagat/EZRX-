@@ -3,7 +3,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -32,7 +31,6 @@ class ViewByOrderRepository implements IViewByOrderRepository {
   Future<Either<ApiFailure, ViewByOrder>> getViewByOrders({
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo soldTo,
-    required ShipToInfo shipTo,
     required User user,
     required int pageSize,
     required int offset,
@@ -55,7 +53,6 @@ class ViewByOrderRepository implements IViewByOrderRepository {
 
     try {
       final orderHistoryItemList = await remoteDataSource.getViewByOrders(
-        shipTo: shipTo.shipToCustomerCode,
         soldTo: soldTo.customerCodeSoldTo,
         pageSize: pageSize,
         offset: offset,

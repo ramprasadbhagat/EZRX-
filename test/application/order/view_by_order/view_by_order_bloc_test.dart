@@ -23,7 +23,7 @@ void main() {
   late ViewByOrderRepository viewByOrderRepository;
   late ViewByOrder viewByOrderMockData;
   late Config config;
-  final fakeShipTo = fakeCustomerCodeInfo.shipToInfos.first;
+
   const fakeSort = 'desc';
   const fakeOrderBy = 'datetime';
   final searchKey = SearchKey('');
@@ -52,7 +52,6 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               salesOrgConfig: fakeEmptySalesConfigs,
               soldTo: fakeCustomerCodeInfo,
-              shipTo: fakeShipTo,
               user: fakeClient,
               pageSize: config.pageSize,
               offset: offSet,
@@ -73,7 +72,6 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipTo,
             user: fakeClient,
             sortDirection: fakeSort,
           ),
@@ -83,7 +81,6 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipTo,
             user: fakeClient,
             sortDirection: fakeSort,
           ),
@@ -91,7 +88,6 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipTo,
             user: fakeClient,
             sortDirection: fakeSort,
             isFetching: true,
@@ -102,7 +98,6 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipTo,
             user: fakeClient,
             sortDirection: fakeSort,
             appliedFilter: viewByOrdersFilter,
@@ -126,7 +121,6 @@ void main() {
         seed: () => ViewByOrderState.initial().copyWith(
           salesOrgConfigs: fakeEmptySalesConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipTo,
           user: fakeClient,
           sortDirection: fakeSort,
           salesOrganisation: fakeSalesOrganisation,
@@ -137,7 +131,6 @@ void main() {
               orderBy: fakeOrderBy,
               salesOrgConfig: fakeEmptySalesConfigs,
               soldTo: fakeCustomerCodeInfo,
-              shipTo: fakeShipTo,
               user: fakeClient,
               pageSize: config.pageSize,
               offset: offSet,
@@ -163,7 +156,6 @@ void main() {
           ViewByOrderState.initial().copyWith(
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipTo,
             user: fakeClient,
             sortDirection: fakeSort,
             isFetching: true,
@@ -174,7 +166,6 @@ void main() {
           ViewByOrderState.initial().copyWith(
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipTo,
             user: fakeClient,
             sortDirection: fakeSort,
             failureOrSuccessOption: optionOf(
@@ -200,7 +191,6 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           salesOrgConfigs: fakeEmptySalesConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipTo,
           user: fakeClient,
           sortDirection: fakeSort,
           appliedFilter: viewByOrdersFilter,
@@ -212,7 +202,6 @@ void main() {
             () => viewByOrderRepository.getViewByOrders(
               salesOrgConfig: fakeEmptySalesConfigs,
               soldTo: fakeCustomerCodeInfo,
-              shipTo: fakeShipTo,
               user: fakeClient,
               pageSize: config.pageSize,
               offset: viewByOrderMockData.orderHeaders.length,
@@ -237,7 +226,6 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipTo,
             user: fakeClient,
             sortDirection: fakeSort,
             appliedFilter: viewByOrdersFilter,
@@ -249,7 +237,6 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipTo,
             user: fakeClient,
             sortDirection: fakeSort,
             appliedFilter: viewByOrdersFilter,
@@ -274,7 +261,6 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           salesOrgConfigs: fakeEmptySalesConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipTo,
           user: fakeClient,
           sortDirection: fakeSort,
           appliedFilter: viewByOrdersFilter,
@@ -286,7 +272,6 @@ void main() {
             () => viewByOrderRepository.getViewByOrders(
               salesOrgConfig: fakeEmptySalesConfigs,
               soldTo: fakeCustomerCodeInfo,
-              shipTo: fakeShipTo,
               user: fakeClient,
               pageSize: config.pageSize,
               offset: viewByOrderMockData.orderHeaders.length,
@@ -309,7 +294,6 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipTo,
             user: fakeClient,
             sortDirection: fakeSort,
             appliedFilter: viewByOrdersFilter,
@@ -321,7 +305,6 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipTo,
             user: fakeClient,
             sortDirection: fakeSort,
             appliedFilter: viewByOrdersFilter,

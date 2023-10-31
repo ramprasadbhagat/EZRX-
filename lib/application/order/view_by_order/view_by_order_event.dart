@@ -6,7 +6,6 @@ class ViewByOrderEvent with _$ViewByOrderEvent {
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
     required User user,
     required String sortDirection,
   }) = _Initialized;

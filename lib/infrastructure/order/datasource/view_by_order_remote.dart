@@ -25,7 +25,6 @@ class ViewByOrderRemoteDataSource {
 
   Future<ViewByOrder> getViewByOrders({
     required String soldTo,
-    required String shipTo,
     required int pageSize,
     required int offset,
     required String language,
@@ -40,7 +39,6 @@ class ViewByOrderRemoteDataSource {
 
       final variables = {
         'soldTo': soldTo,
-        'shipTo': [shipTo],
         'first': pageSize,
         'after': offset,
         'language': language,

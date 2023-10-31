@@ -1122,7 +1122,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 salesOrganisation: salesOrgState.salesOrganisation,
                 customerCodeInfo: state.customerCodeInfo,
                 salesOrgConfigs: salesOrgState.configs,
-                shipToInfo: state.shipToInfo,
                 user: user,
                 sortDirection: 'desc',
               ),
@@ -1140,17 +1139,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               ),
             );
       }
-
-      context.read<ViewByOrderBloc>().add(
-            ViewByOrderEvent.initialized(
-              salesOrganisation: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-              salesOrgConfigs: salesOrgState.configs,
-              shipToInfo: state.shipToInfo,
-              user: user,
-              sortDirection: 'desc',
-            ),
-          );
 
       context.read<PaymentSummaryFilterBloc>().add(
             PaymentSummaryFilterEvent.initialized(
