@@ -89,11 +89,7 @@ class _DeliveryInfoState extends State<_DeliveryInfo> {
                                     FocusNode(),
                               ),
                               if (config.enableFutureDeliveryDay)
-                                _RequestDeliveryDate(
-                                  deliveryInfoData: state.deliveryInfoData,
-                                  nextDayNumber:
-                                      config.futureDeliveryDay.intValue,
-                                ),
+                                const _RequestDeliveryDate(),
                               if (config.enableReferenceNote)
                                 _TextFormField(
                                   labelText: 'Reference Note',

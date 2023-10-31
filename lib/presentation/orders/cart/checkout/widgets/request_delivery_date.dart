@@ -1,14 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 
 class _RequestDeliveryDate extends StatefulWidget {
-  final DeliveryInfoData deliveryInfoData;
-  final int nextDayNumber;
-
-  const _RequestDeliveryDate({
-    required this.nextDayNumber,
-    required this.deliveryInfoData,
-    Key? key,
-  }) : super(key: key);
+  const _RequestDeliveryDate({Key? key}) : super(key: key);
 
   @override
   State<_RequestDeliveryDate> createState() => _RequestDeliveryDateState();
@@ -16,15 +9,16 @@ class _RequestDeliveryDate extends StatefulWidget {
 
 class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
   late TextEditingController _deliveryDateText;
-  late DateTime _currentDate;
+  late DateTime _startDate;
+  late DateTime _endDate;
 
   @override
   void initState() {
-    _currentDate = DateTime.now();
+    final salesConfig = context.read<EligibilityBloc>().state.salesOrgConfigs;
+    _startDate = salesConfig.deliveryStartDate;
+    _endDate = salesConfig.deliveryEndDate;
     _deliveryDateText = TextEditingController.fromValue(
-      TextEditingValue(
-        text: DateTimeUtils.getNearestDeliveryDateString(_currentDate),
-      ),
+      TextEditingValue(text: DateTimeUtils.getDeliveryDateString(_startDate)),
     );
     super.initState();
   }
@@ -102,21 +96,15 @@ class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
     );
   }
 
-  Future<DateTime> pickDate(
-    BuildContext context,
-  ) async {
-    final nearestWorkingDate =
-        DateTimeUtils.getNearestWorkingDate(_currentDate);
+  Future<DateTime> pickDate(BuildContext context) async {
     final orderDate = await showDatePicker(
       context: context,
-      firstDate: nearestWorkingDate,
-      lastDate: nearestWorkingDate.add(
-        Duration(days: widget.nextDayNumber),
-      ),
-      initialDate: nearestWorkingDate,
+      firstDate: _startDate,
+      lastDate: _endDate,
+      initialDate: _startDate,
       selectableDayPredicate: (DateTime val) => !DateTimeUtils.isWeekend(val),
     );
 
-    return orderDate ?? nearestWorkingDate;
+    return orderDate ?? _startDate;
   }
 }

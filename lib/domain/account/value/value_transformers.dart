@@ -508,3 +508,11 @@ String getPaymentDateLabelText(String country) {
 
   return salesOrgCountryMap[country] ?? 'Payment date';
 }
+
+int countryCutOffTime(String country) {
+  final salesOrgCountryMap = {
+    'SG': 15,
+  };
+
+  return salesOrgCountryMap[country] ?? 15;
+}

@@ -1,10 +1,10 @@
-import 'dart:ui';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'sales_organisation_configs.freezed.dart';
@@ -228,4 +228,18 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
 
   bool get isMarketEligibleForTaxClassification =>
       currency.isVN || currency.isMM || currency.isKH || currency.isTH;
+
+  DateTime get deliveryStartDate {
+    final currentTime = DateTime.now();
+
+    return DateTimeUtils.getNearestWorkingDate(
+      currentTime.hour < salesOrg.cutOffTime
+          ? currentTime
+          : currentTime.add(const Duration(days: 1)),
+    );
+  }
+
+  DateTime get deliveryEndDate => DateUtils.dateOnly(
+        DateTime.now().add(Duration(days: futureDeliveryDay.intValue)),
+      );
 }

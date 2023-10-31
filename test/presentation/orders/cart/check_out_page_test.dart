@@ -730,10 +730,18 @@ void main() {
 
     testWidgets('=> Selecting a date updates the delivery date text',
         (WidgetTester tester) async {
+      const dayOfWeek = 7;
+      final currentDate = DateTime.now();
+      final futureDeliveryDay =
+          dayOfWeek - currentDate.weekday + dayOfWeek + DateTime.monday;
+
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
-          salesOrgConfigs: fakeMYSalesOrgConfigFutureDeliveryDayEnabled,
+          salesOrgConfigs:
+              fakeMYSalesOrgConfigFutureDeliveryDayEnabled.copyWith(
+            futureDeliveryDay: FutureDeliveryDay(futureDeliveryDay.toString()),
+          ),
         ),
       );
 
@@ -749,6 +757,13 @@ void main() {
         find.textContaining('Select date'.tr(), findRichText: true),
         findsOneWidget,
       );
+      var selectedDate =
+          fakeMYSalesOrgConfigFutureDeliveryDayEnabled.deliveryStartDate;
+
+      expect(
+        find.text(DateTimeUtils.getDeliveryDateString(selectedDate)),
+        findsOneWidget,
+      );
 
       // Simulate tapping the select date button
       await tester.tap(find.byKey(WidgetKeys.selectDate));
@@ -757,16 +772,9 @@ void main() {
       // Verify that the date picker is displayed
       final okButton = find.text('OK');
       expect(okButton, findsOneWidget);
-
-      // Select a date from the date picker
-      final selectedDate = DateTime.now().add(
-        Duration(
-          days: fakeMYSalesOrgConfigFutureDeliveryDayEnabled
-              .futureDeliveryDay.intValue,
-        ),
-      );
       await tester.tap(find.widgetWithIcon(IconButton, Icons.edit));
       await tester.pump();
+      selectedDate = currentDate.add(Duration(days: futureDeliveryDay + 1));
       await tester.enterText(
         find.byType(InputDatePickerFormField),
         '${selectedDate.month}/${selectedDate.day}/${selectedDate.year}',
@@ -774,7 +782,16 @@ void main() {
       await tester.pump();
       await tester.tap(okButton);
       await tester.pumpAndSettle();
+      expect(find.text('Out of range.'), findsOneWidget);
 
+      selectedDate = currentDate.add(Duration(days: futureDeliveryDay));
+      await tester.enterText(
+        find.byType(InputDatePickerFormField),
+        '${selectedDate.month}/${selectedDate.day}/${selectedDate.year}',
+      );
+      await tester.pump();
+      await tester.tap(okButton);
+      await tester.pumpAndSettle();
       // Verify that the selected date is updated in the delivery date text field
       expect(
         find.text(DateTimeUtils.getDeliveryDateString(selectedDate)),
