@@ -115,7 +115,9 @@ class _InvoiceItemDetail extends StatelessWidget {
       priceComponent: PriceComponent(
         key: WidgetKeys.invoiceDetailMaterialUnitPrice,
         salesOrgConfig: salesOrgConfigs,
-        price: customerDocumentDetail.grossAmount.toString(),
+        price: salesOrgConfigs.salesOrg.isID
+            ? customerDocumentDetail.unitPrice.toString()
+            : customerDocumentDetail.grossAmount.toString(),
       ),
     );
   }

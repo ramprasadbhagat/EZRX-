@@ -27,6 +27,10 @@ class AllCreditsAndInvoicesQueryMutation {
           accountingDocumentType
           accountingDocument
           postingKeyName
+          deliveryFee
+          discount
+          manualFee
+          taxAmount
         }
         totalCount
       }

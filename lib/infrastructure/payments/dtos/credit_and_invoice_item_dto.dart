@@ -65,6 +65,26 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
     )
         required double amountInTransactionCurrency,
     @JsonKey(
+      name: 'deliveryFee',
+      defaultValue: 0.0,
+    )
+        required double deliveryFee,
+    @JsonKey(
+      name: 'discount',
+      defaultValue: 0.0,
+    )
+        required double discount,
+    @JsonKey(
+      name: 'manualFee',
+      defaultValue: 0.0,
+    )
+        required double manualFee,
+    @JsonKey(
+      name: 'taxAmount',
+      defaultValue: 0.0,
+    )
+        required double taxAmount,
+    @JsonKey(
       name: 'invoiceReference',
       defaultValue: '',
     )
@@ -94,6 +114,10 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       referenceDocumentNumber: StringValue(referenceDocumentNumber),
       documentDate: DateTimeStringValue(documentDate),
       amountInTransactionCurrency: amountInTransactionCurrency,
+      deliveryFee: deliveryFee,
+      discount: discount,
+      manualFee: manualFee,
+      taxAmount: taxAmount,
       invoiceReference: StringValue(invoiceReference),
       invoiceProcessingStatus: StatusType(invoiceProcessingStatus),
       orderId: StringValue(orderId),

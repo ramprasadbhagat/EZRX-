@@ -66,6 +66,10 @@ class SalesOrg extends ValueObject<String> {
     return salesOrgTaxCode(country);
   }
 
+  String get subTotalText {
+    return subTotalTextString(country);
+  }
+
   bool get isVN {
     return country == 'VN';
   }

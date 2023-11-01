@@ -31,7 +31,7 @@
                     "openAmountInTransCrcy": 0,
                     "grossAmount": 0,
                     "netAmount": 0,
-                    "taxAmount": 0,
+                    "taxAmount": 1000.0,
                     "paymentAmount": 0,
                     "iban": "",
                     "bankAccountNumber": "",
@@ -58,7 +58,10 @@
                     "invoiceIsResidualForInference": "",
                     "returnId": null,
                     "orderId": "",
-                    "referenceId": ""
+                    "referenceId": "",
+                    "deliveryFee":1250.0,
+                    "discount":23420.0,
+                    "manualFee":2000.0
                 },
                 {
                     "companyCode": "2001",
@@ -116,7 +119,10 @@
                     "invoiceIsResidualForInference": "",
                     "returnId": null,
                     "orderId": "",
-                    "referenceId": ""
+                    "referenceId": "",
+                    "deliveryFee":0.0,
+                    "discount":0.0,
+                    "manualFee":0.0
                 },
                 {
                     "companyCode": "2001",
@@ -174,7 +180,10 @@
                     "invoiceIsResidualForInference": "",
                     "returnId": null,
                     "orderId": "",
-                    "referenceId": ""
+                    "referenceId": "",
+                    "deliveryFee":0.0,
+                    "discount":0.0,
+                    "manualFee":0.0
                 },
                 {
                     "companyCode": "2001",
@@ -232,7 +241,10 @@
                     "invoiceIsResidualForInference": "",
                     "returnId": null,
                     "orderId": "",
-                    "referenceId": ""
+                    "referenceId": "",
+                    "deliveryFee":0.0,
+                    "discount":0.0,
+                    "manualFee":0.0
                 },
                 {
                     "companyCode": "2001",
@@ -290,7 +302,10 @@
                     "invoiceIsResidualForInference": "",
                     "returnId": null,
                     "orderId": "",
-                    "referenceId": ""
+                    "referenceId": "",
+                    "deliveryFee":0.0,
+                    "discount":0.0,
+                    "manualFee":0.0
                 },
                 {
                     "companyCode": "2001",
@@ -348,7 +363,10 @@
                     "invoiceIsResidualForInference": "",
                     "returnId": null,
                     "orderId": "",
-                    "referenceId": ""
+                    "referenceId": "",
+                    "deliveryFee":0.0,
+                    "discount":0.0,
+                    "manualFee":0.0
                 },
                 {
                     "companyCode": "2001",
@@ -406,7 +424,10 @@
                     "invoiceIsResidualForInference": "",
                     "returnId": null,
                     "orderId": "",
-                    "referenceId": ""
+                    "referenceId": "",
+                    "deliveryFee":0.0,
+                    "discount":0.0,
+                    "manualFee":0.0
                 },
                 {
                     "companyCode": "2001",
@@ -464,7 +485,10 @@
                     "invoiceIsResidualForInference": "",
                     "returnId": null,
                     "orderId": "",
-                    "referenceId": ""
+                    "referenceId": "",
+                    "deliveryFee":0.0,
+                    "discount":0.0,
+                    "manualFee":0.0
                 },
                 {
                     "companyCode": "2001",
@@ -522,7 +546,10 @@
                     "invoiceIsResidualForInference": "",
                     "returnId": null,
                     "orderId": "",
-                    "referenceId": ""
+                    "referenceId": "",
+                    "deliveryFee":0.0,
+                    "discount":0.0,
+                    "manualFee":0.0
                 },
                 {
                     "companyCode": "2001",
@@ -580,7 +607,10 @@
                     "invoiceIsResidualForInference": "",
                     "returnId": null,
                     "orderId": "",
-                    "referenceId": ""
+                    "referenceId": "",
+                    "deliveryFee":0.0,
+                    "discount":0.0,
+                    "manualFee":0.0
                 }
             ],
             "totalCount": 1556

@@ -373,6 +373,10 @@ String salesOrgTaxCode(String country) {
   }
 }
 
+String subTotalTextString(String country) {
+  return country == 'ID' ? 'Subtotal (excl. tax)' : 'Subtotal with tax';
+}
+
 bool countrySupportOrderType(country) {
   switch (country) {
     case 'TH':

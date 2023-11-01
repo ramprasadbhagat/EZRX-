@@ -54,6 +54,8 @@ class CustomerDocumentDetail with _$CustomerDocumentDetail {
         ),
         productImages: ProductImages.empty(),
       );
+
+  double get unitPrice => grossAmount / billingQuantity.getOrDefaultValue(1);
 }
 
 extension CustomerDocumentDetailExtension on List<CustomerDocumentDetail> {
@@ -70,5 +72,7 @@ extension CustomerDocumentDetailExtension on List<CustomerDocumentDetail> {
   }
 
   int get itemCount => fold<int>(
-      0, (previous, current) => previous + current.billingQuantity.getValue(),);
+        0,
+        (previous, current) => previous + current.billingQuantity.getValue(),
+      );
 }

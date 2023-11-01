@@ -27,6 +27,10 @@ mixin _$CreditAndInvoiceItem {
   StringValue get referenceDocumentNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get documentDate => throw _privateConstructorUsedError;
   double get amountInTransactionCurrency => throw _privateConstructorUsedError;
+  double get deliveryFee => throw _privateConstructorUsedError;
+  double get discount => throw _privateConstructorUsedError;
+  double get manualFee => throw _privateConstructorUsedError;
+  double get taxAmount => throw _privateConstructorUsedError;
   StringValue get invoiceReference => throw _privateConstructorUsedError;
   StatusType get invoiceProcessingStatus => throw _privateConstructorUsedError;
   StringValue get orderId => throw _privateConstructorUsedError;
@@ -54,6 +58,10 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
       StringValue referenceDocumentNumber,
       DateTimeStringValue documentDate,
       double amountInTransactionCurrency,
+      double deliveryFee,
+      double discount,
+      double manualFee,
+      double taxAmount,
       StringValue invoiceReference,
       StatusType invoiceProcessingStatus,
       StringValue orderId});
@@ -84,6 +92,10 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
     Object? referenceDocumentNumber = null,
     Object? documentDate = null,
     Object? amountInTransactionCurrency = null,
+    Object? deliveryFee = null,
+    Object? discount = null,
+    Object? manualFee = null,
+    Object? taxAmount = null,
     Object? invoiceReference = null,
     Object? invoiceProcessingStatus = null,
     Object? orderId = null,
@@ -133,6 +145,22 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
           ? _value.amountInTransactionCurrency
           : amountInTransactionCurrency // ignore: cast_nullable_to_non_nullable
               as double,
+      deliveryFee: null == deliveryFee
+          ? _value.deliveryFee
+          : deliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      discount: null == discount
+          ? _value.discount
+          : discount // ignore: cast_nullable_to_non_nullable
+              as double,
+      manualFee: null == manualFee
+          ? _value.manualFee
+          : manualFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      taxAmount: null == taxAmount
+          ? _value.taxAmount
+          : taxAmount // ignore: cast_nullable_to_non_nullable
+              as double,
       invoiceReference: null == invoiceReference
           ? _value.invoiceReference
           : invoiceReference // ignore: cast_nullable_to_non_nullable
@@ -169,6 +197,10 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
       StringValue referenceDocumentNumber,
       DateTimeStringValue documentDate,
       double amountInTransactionCurrency,
+      double deliveryFee,
+      double discount,
+      double manualFee,
+      double taxAmount,
       StringValue invoiceReference,
       StatusType invoiceProcessingStatus,
       StringValue orderId});
@@ -196,6 +228,10 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
     Object? referenceDocumentNumber = null,
     Object? documentDate = null,
     Object? amountInTransactionCurrency = null,
+    Object? deliveryFee = null,
+    Object? discount = null,
+    Object? manualFee = null,
+    Object? taxAmount = null,
     Object? invoiceReference = null,
     Object? invoiceProcessingStatus = null,
     Object? orderId = null,
@@ -245,6 +281,22 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
           ? _value.amountInTransactionCurrency
           : amountInTransactionCurrency // ignore: cast_nullable_to_non_nullable
               as double,
+      deliveryFee: null == deliveryFee
+          ? _value.deliveryFee
+          : deliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      discount: null == discount
+          ? _value.discount
+          : discount // ignore: cast_nullable_to_non_nullable
+              as double,
+      manualFee: null == manualFee
+          ? _value.manualFee
+          : manualFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      taxAmount: null == taxAmount
+          ? _value.taxAmount
+          : taxAmount // ignore: cast_nullable_to_non_nullable
+              as double,
       invoiceReference: null == invoiceReference
           ? _value.invoiceReference
           : invoiceReference // ignore: cast_nullable_to_non_nullable
@@ -276,6 +328,10 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
       required this.referenceDocumentNumber,
       required this.documentDate,
       required this.amountInTransactionCurrency,
+      required this.deliveryFee,
+      required this.discount,
+      required this.manualFee,
+      required this.taxAmount,
       required this.invoiceReference,
       required this.invoiceProcessingStatus,
       required this.orderId})
@@ -304,6 +360,14 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final double amountInTransactionCurrency;
   @override
+  final double deliveryFee;
+  @override
+  final double discount;
+  @override
+  final double manualFee;
+  @override
+  final double taxAmount;
+  @override
   final StringValue invoiceReference;
   @override
   final StatusType invoiceProcessingStatus;
@@ -312,7 +376,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId)';
+    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId)';
   }
 
   @override
@@ -345,6 +409,14 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
                     amountInTransactionCurrency) ||
                 other.amountInTransactionCurrency ==
                     amountInTransactionCurrency) &&
+            (identical(other.deliveryFee, deliveryFee) ||
+                other.deliveryFee == deliveryFee) &&
+            (identical(other.discount, discount) ||
+                other.discount == discount) &&
+            (identical(other.manualFee, manualFee) ||
+                other.manualFee == manualFee) &&
+            (identical(other.taxAmount, taxAmount) ||
+                other.taxAmount == taxAmount) &&
             (identical(other.invoiceReference, invoiceReference) ||
                 other.invoiceReference == invoiceReference) &&
             (identical(
@@ -367,6 +439,10 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
       referenceDocumentNumber,
       documentDate,
       amountInTransactionCurrency,
+      deliveryFee,
+      discount,
+      manualFee,
+      taxAmount,
       invoiceReference,
       invoiceProcessingStatus,
       orderId);
@@ -392,6 +468,10 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
       required final StringValue referenceDocumentNumber,
       required final DateTimeStringValue documentDate,
       required final double amountInTransactionCurrency,
+      required final double deliveryFee,
+      required final double discount,
+      required final double manualFee,
+      required final double taxAmount,
       required final StringValue invoiceReference,
       required final StatusType invoiceProcessingStatus,
       required final StringValue orderId}) = _$_CreditAndInvoiceItem;
@@ -419,6 +499,14 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   DateTimeStringValue get documentDate;
   @override
   double get amountInTransactionCurrency;
+  @override
+  double get deliveryFee;
+  @override
+  double get discount;
+  @override
+  double get manualFee;
+  @override
+  double get taxAmount;
   @override
   StringValue get invoiceReference;
   @override

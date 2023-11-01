@@ -20,6 +20,10 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
     required StringValue referenceDocumentNumber,
     required DateTimeStringValue documentDate,
     required double amountInTransactionCurrency,
+    required double deliveryFee,
+    required double discount,
+    required double manualFee,
+    required double taxAmount,
     required StringValue invoiceReference,
     required StatusType invoiceProcessingStatus,
     required StringValue orderId,
@@ -40,11 +44,16 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
         invoiceReference: StringValue(''),
         invoiceProcessingStatus: StatusType(''),
         orderId: StringValue(''),
+        deliveryFee: 0.0,
+        discount: 0.0,
+        manualFee: 0.0,
+        taxAmount: 0.0,
       );
 
 //to convert if amountInTransactionCurrency value is negative
   double get convertIfAmountInTransactionCurrencyIsNegative =>
       amountInTransactionCurrency * -1;
+  double get totalExcludeTax => amountInTransactionCurrency - taxAmount;
 }
 
 extension CreditAndInvoiceListExtension on List<CreditAndInvoiceItem> {
