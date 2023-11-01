@@ -62,6 +62,14 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
             );
           },
         ),
+         leading: IconButton(
+          key: WidgetKeys.backButton,
+          icon: const Icon(
+            Icons.arrow_back_ios,
+          ),
+          iconSize: 14,
+          onPressed: () => context.router.pop(),
+        ),
       ),
       body: const _BodyContent(),
     );

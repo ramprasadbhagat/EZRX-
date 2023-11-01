@@ -97,7 +97,7 @@ class ConfirmBottomSheet extends StatelessWidget {
                                 ZPColors.primary,
                               ),
                               padding: const MaterialStatePropertyAll(
-                                EdgeInsets.symmetric(horizontal: 9.5),
+                                EdgeInsets.symmetric(horizontal: 5),
                               ),
                               shape: const MaterialStatePropertyAll(
                                 RoundedRectangleBorder(

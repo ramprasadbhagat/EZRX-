@@ -35,7 +35,7 @@ class NewPaymentPage extends StatelessWidget {
   ];
 
   static const paymentErrorMessage =
-      'At least one of the selected invoices/credit notes have already been used to create another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.';
+      'Unable to generate payment advice as at least one of the selected invoices/credit notes have already been selected for another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.';
 
   Future<bool?> _showConfirmBottomSheet(BuildContext context) {
     return showModalBottomSheet<bool>(
@@ -43,7 +43,7 @@ class NewPaymentPage extends StatelessWidget {
       enableDrag: false,
       builder: (_) => ConfirmBottomSheet(
         key: WidgetKeys.confirmBottomSheet,
-        title: 'Error creating payment advice',
+        title: 'Invoice/credit already in use',
         content: paymentErrorMessage,
         confirmButtonText: 'Payment summary',
         iconWidget: SvgPicture.asset(

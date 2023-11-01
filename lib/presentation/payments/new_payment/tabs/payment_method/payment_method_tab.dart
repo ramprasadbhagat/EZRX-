@@ -144,8 +144,16 @@ class _PaymentMethodSelector extends StatelessWidget {
                                 leading: Radio(
                                   value: paymentMethod,
                                   groupValue: state.selectedPaymentMethod,
-                                  onChanged: null,
+                                  onChanged:null,
                                 ),
+                                onTap: () {
+                                  context.read<NewPaymentBloc>().add(
+                                        NewPaymentEvent
+                                            .updatePaymentMethodSelected(
+                                          paymentMethodSelected: paymentMethod,
+                                        ),
+                                      );
+                                },
                                 title: Text(
                                   paymentMethod.getValue(),
                                   style:
