@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -84,6 +85,48 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
       );
 
       return Right(paymentItemList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, bool>> deletePaymentAdvice({
+    required SalesOrganisation salesOrganization,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required PaymentSummaryDetails paymentSummaryDetails,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final isDeleted = await localDataSource.deleteCustomerPayment();
+
+        return Right(isDeleted);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final isDeleted = await remoteDataSource.deleteCustomerPayment(
+        salesOrg: salesOrganization.salesOrg.getOrCrash(),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        shipToCode: shipToInfo.shipToCustomerCode,
+        paymentAmount: paymentSummaryDetails.paymentAmount.toString(),
+        paymentBatchAdditionalInfo:
+            paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
+        paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
+        transactionCurrency: paymentSummaryDetails.transactionCurrency,
+        valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
+        zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
+      );
+
+      return isDeleted
+          ? Right(isDeleted)
+          : Left(
+              ApiFailure.paymentAdviceDeleteFailed(
+                paymentSummaryDetails.zzAdvice.displayDashIfEmpty,
+              ),
+            );
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

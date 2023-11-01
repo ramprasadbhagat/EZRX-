@@ -57,6 +57,8 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.cameraPermissionFailed() = _CameraPermissionFailed;
   const factory ApiFailure.userNameNotFound() = _UserNameNotFound;
   const factory ApiFailure.uploadedFileSizeExceed() = _UploadedFileSizeExceed;
+  const factory ApiFailure.paymentAdviceDeleteFailed(String adviceNumber) =
+      _PaymentAdviceDeleteFailed;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -103,5 +105,7 @@ extension ApiFailureExt on ApiFailure {
         userNameNotFound: (_) => 'Incorrect username',
         uploadedFileSizeExceed: (_) =>
             'Can’t upload.This file is larger than 20 MB',
+        paymentAdviceDeleteFailed: (paymentAdvice) =>
+            'PA #${paymentAdvice.adviceNumber} delete failed',
       );
 }

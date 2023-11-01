@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -18,6 +19,13 @@ abstract class IPaymentSummaryDetailsRepository {
   Future<Either<ApiFailure, List<PaymentItem>>> fetchPaymentList({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
+    required PaymentSummaryDetails paymentSummaryDetails,
+  });
+
+  Future<Either<ApiFailure, bool>> deletePaymentAdvice({
+    required SalesOrganisation salesOrganization,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
     required PaymentSummaryDetails paymentSummaryDetails,
   });
 }

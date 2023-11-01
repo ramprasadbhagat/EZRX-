@@ -12,9 +12,12 @@ class PaymentSummaryDetailsEvent with _$PaymentSummaryDetailsEvent {
     required PaymentSummaryDetails paymentSummaryDetails,
   }) = _FetchPaymentSummaryDetailsEvent;
 
-  const factory PaymentSummaryDetailsEvent.fetchPaymentSummaryList({
-    required PaymentSummaryDetails paymentSummaryDetails,
-  }) = _FetchPaymentSummaryListEvent;
+  const factory PaymentSummaryDetailsEvent.fetchPaymentSummaryList() =
+      _FetchPaymentSummaryListEvent;
+
   const factory PaymentSummaryDetailsEvent.fetchAdvice() = _FetchAdvice;
+
   const factory PaymentSummaryDetailsEvent.saveAdvice() = _SaveAdvice;
+
+  const factory PaymentSummaryDetailsEvent.deleteAdvice() = _DeleteAdvice;
 }

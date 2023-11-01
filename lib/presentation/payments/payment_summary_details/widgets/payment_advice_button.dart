@@ -27,7 +27,8 @@ class _PaymentAdviceButton extends StatelessWidget {
           previous.isListLoading != current.isListLoading ||
           previous.isDetailFetching != current.isDetailFetching ||
           previous.isSavingAdvice != current.isSavingAdvice ||
-          previous.isFetchingAdvice != current.isFetchingAdvice,
+          previous.isFetchingAdvice != current.isFetchingAdvice ||
+          previous.isDeletingPayment != current.isDeletingPayment,
       builder: (context, state) {
         return state.isLoading ||
                 state.paymentItemList.isEmpty ||
@@ -64,14 +65,27 @@ class _PaymentAdviceButton extends StatelessWidget {
                               color: ZPColors.red,
                             ),
                           ),
-                          child: Text(
-                            'Delete advice'.tr(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(color: ZPColors.red),
-                          ).tr(),
-                          onPressed: () {},
+                          child: SizedBox(
+                            height: 20,
+                            child: LoadingShimmer.withChild(
+                              enabled: state.isSavingOrDeleting,
+                              child: Text(
+                                'Delete advice'.tr(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium
+                                    ?.copyWith(color: ZPColors.red),
+                              ).tr(),
+                            ),
+                          ),
+                          onPressed: () {
+                            if (state.isDeletingPayment) return;
+                            _showDeleteAdviceBottomSheet(
+                              context,
+                              paymentAdviceNumber: state.paymentSummaryDetails
+                                  .zzAdvice.displayDashIfEmpty,
+                            );
+                          },
                         ),
                       ),
                     if (!state.paymentSummaryDetails.status
@@ -90,7 +104,7 @@ class _PaymentAdviceButton extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: LoadingShimmer.withChild(
-                            enabled: state.isSavingAdvice,
+                            enabled: state.isSavingOrDeleting,
                             child: Text(
                               context.tr('Download advice'),
                               style: Theme.of(context)
@@ -113,6 +127,21 @@ class _PaymentAdviceButton extends StatelessWidget {
                 ),
               );
       },
+    );
+  }
+
+  void _showDeleteAdviceBottomSheet(
+    BuildContext context, {
+    required String paymentAdviceNumber,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      isDismissible: false,
+      isScrollControlled: true,
+      builder: (_) => _DeleteAdviceBottomSheet(
+        paymentAdviceNumber: paymentAdviceNumber,
+      ),
     );
   }
 }

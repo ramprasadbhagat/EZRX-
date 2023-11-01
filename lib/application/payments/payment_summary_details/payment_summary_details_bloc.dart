@@ -76,9 +76,7 @@ class PaymentSummaryDetailsBloc
               );
               if (paymentSummaryDetails.paymentBatchAdditionalInfo.isValid()) {
                 add(
-                  PaymentSummaryDetailsEvent.fetchPaymentSummaryList(
-                    paymentSummaryDetails: paymentSummaryDetails,
-                  ),
+                  const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
                 );
               }
             },
@@ -90,9 +88,7 @@ class PaymentSummaryDetailsBloc
             ),
           );
           add(
-            PaymentSummaryDetailsEvent.fetchPaymentSummaryList(
-              paymentSummaryDetails: event.paymentSummaryDetails,
-            ),
+            const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
           );
         }
       },
@@ -101,7 +97,7 @@ class PaymentSummaryDetailsBloc
         final failureOrSuccess = await paymentItemRepository.fetchPaymentList(
           customerCodeInfo: state.customerCodeInfo,
           salesOrganization: state.salesOrganization,
-          paymentSummaryDetails: event.paymentSummaryDetails,
+          paymentSummaryDetails: state.paymentSummaryDetails,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -202,6 +198,36 @@ class PaymentSummaryDetailsBloc
               ),
             );
           },
+        );
+      },
+      deleteAdvice: (_) async {
+        emit(
+          state.copyWith(
+            isDeletingPayment: true,
+          ),
+        );
+
+        final failureOrSuccess =
+            await paymentItemRepository.deletePaymentAdvice(
+          salesOrganization: state.salesOrganization,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          paymentSummaryDetails: state.paymentSummaryDetails,
+        );
+
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              isDeletingPayment: false,
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (deleteResponse) => emit(
+            state.copyWith(
+              isDeletingPayment: false,
+              failureOrSuccessOption: none(),
+            ),
+          ),
         );
       },
     );

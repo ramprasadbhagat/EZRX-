@@ -91,6 +91,54 @@ class PaymentItemRemoteDataSource {
     return PaymentSummaryDetailsDto.fromJson(data[0]).toDomain();
   }
 
+  Future<bool> deleteCustomerPayment({
+    required String customerCode,
+    required String salesOrg,
+    required String shipToCode,
+    required String paymentAmount,
+    required String paymentBatchAdditionalInfo,
+    required String paymentId,
+    required String transactionCurrency,
+    required String valueDate,
+    required String zzAdvice,
+  }) async {
+    final queryData = paymentItemQuery.deleteCustomerPaymentQuery();
+    final request = {
+      'customerCode': customerCode,
+      'salesOrg': salesOrg,
+      'shipToCode': shipToCode,
+      'paymentAmount': paymentAmount,
+      'paymentBatchAdditionalInfo': paymentBatchAdditionalInfo,
+      'paymentID': paymentId,
+      'transactionCurrency': transactionCurrency,
+      'valueDate': valueDate,
+      'zzAdvice': zzAdvice,
+    };
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query': queryData,
+          'variables': {
+            'input': request,
+          },
+        },
+      ),
+    );
+    _checkPaymentSummaryDetailsExceptionChecker(res: res);
+    final data = res.data['data']['deleteCustomerPayment'];
+
+    if (data != null) {
+      final statusMessage = data['statusMessage'];
+
+      return statusMessage ==
+          'Customer Payment Advice has been Deleted Successfully';
+    }
+
+    throw ServerException(message: data['statusMessage']);
+  }
+
   void _checkPaymentSummaryDetailsExceptionChecker({
     required Response<dynamic> res,
   }) {

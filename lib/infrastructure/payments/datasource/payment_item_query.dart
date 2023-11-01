@@ -76,4 +76,14 @@ class PaymentItemQuery {
       }
     ''';
   }
+
+  String deleteCustomerPaymentQuery() {
+    return '''
+        mutation deleteCustomerPayment(\$input: deleteCustomerPaymentInput!) {
+          deleteCustomerPayment(input: \$input) {
+              statusMessage
+          }
+      }
+    ''';
+  }
 }

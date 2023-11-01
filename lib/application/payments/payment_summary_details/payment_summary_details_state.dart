@@ -15,6 +15,7 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
     required bool isSavingAdvice,
     required ShipToInfo shipToInfo,
     required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
+    required bool isDeletingPayment,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _PaymentSummaryDetailsState;
   factory PaymentSummaryDetailsState.initial() => PaymentSummaryDetailsState(
@@ -30,7 +31,10 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
         isSavingAdvice: false,
         shipToInfo: ShipToInfo.empty(),
         paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
+        isDeletingPayment: false,
       );
 
   bool get isLoading => isDetailFetching || isListLoading;
+
+  bool get isSavingOrDeleting => isSavingAdvice || isDeletingPayment;
 }

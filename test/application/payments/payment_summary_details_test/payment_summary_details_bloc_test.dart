@@ -252,9 +252,7 @@ void main() {
         paymentSummaryDetails: details,
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
-        PaymentSummaryDetailsEvent.fetchPaymentSummaryList(
-          paymentSummaryDetails: details,
-        ),
+        const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
       ),
       skip: 3,
       expect: () => [
@@ -342,15 +340,15 @@ void main() {
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
+        paymentSummaryDetails: details,
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
-        PaymentSummaryDetailsEvent.fetchPaymentSummaryList(
-          paymentSummaryDetails: details,
-        ),
+        const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
       ),
       skip: 1,
       expect: () => [
         PaymentSummaryDetailsState.initial().copyWith(
+          paymentSummaryDetails: details,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
           salesOrganization: fakeSalesOrganisation,

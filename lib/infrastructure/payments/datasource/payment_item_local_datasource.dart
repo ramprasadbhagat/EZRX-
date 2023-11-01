@@ -33,4 +33,18 @@ class PaymentItemLocalDataSource {
       data['data']['customerPayment']['customerPaymentResponse'][0],
     ).toDomain();
   }
+
+  Future<bool> deleteCustomerPayment() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/deleteCustomerPaymentResponse.json',
+      ),
+    );
+
+    final statusMessage =
+        data['data']['deleteCustomerPayment']['statusMessage'];
+
+    return statusMessage ==
+        'Customer Payment Advice has been Deleted Successfully';
+  }
 }
