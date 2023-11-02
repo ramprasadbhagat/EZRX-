@@ -439,7 +439,10 @@ void setupLocator() {
   locator.registerLazySingleton(() => AppRouter());
 
   locator.registerLazySingleton(
-    () => PushNotificationService(appRouter: locator<AppRouter>()),
+    () => PushNotificationService(
+      appRouter: locator<AppRouter>(),
+      config: locator<Config>(),
+    ),
   );
 
   locator.registerLazySingleton(

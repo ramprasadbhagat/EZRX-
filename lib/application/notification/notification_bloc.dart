@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -15,15 +16,11 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   final Config config;
   NotificationBloc({required this.notificationRepository, required this.config})
       : super(NotificationState.initial()) {
-    on<NotificationEvent>(_onEvent);
-  }
-  Future<void> _onEvent(
-    NotificationEvent event,
-    Emitter<NotificationState> emit,
-  ) async {
-    await event.map(
-      initialized: (e) async => emit(NotificationState.initial()),
-      fetch: (e) async {
+    on<_Initialized>(
+      (event, emit) async => emit(NotificationState.initial()),
+    );
+    on<_Fetch>(
+      (_, emit) async {
         emit(
           NotificationState.initial().copyWith(
             isFetching: true,
@@ -57,7 +54,10 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
           },
         );
       },
-      deleteAllNotifications: (e) async {
+      transformer: restartable(),
+    );
+    on<_DeleteAllNotifications>(
+      (event, emit) async {
         emit(
           state.copyWith(
             notificationFailureOrSuccessOption: none(),
@@ -83,7 +83,9 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
           ),
         );
       },
-      readNotifications: (e) async {
+    );
+    on<_ReadNotifications>(
+      (e, emit) async {
         emit(
           state.copyWith(
             notificationFailureOrSuccessOption: none(),
@@ -116,7 +118,10 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
           },
         );
       },
-      loadMore: (e) async {
+      transformer: restartable(),
+    );
+    on<_LoadMore>(
+      (event, emit) async {
         if (state.isFetching || !state.canLoadMore) return;
         emit(
           state.copyWith(

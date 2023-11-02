@@ -127,6 +127,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       case AppLifecycleState.resumed:
         if (_checkIfRefreshIsNeeded()) {
           context.read<AuthBloc>().add(const AuthEvent.init());
+        } else {
+          context.read<NotificationBloc>().add(const NotificationEvent.fetch());
         }
         break;
       case AppLifecycleState.inactive:

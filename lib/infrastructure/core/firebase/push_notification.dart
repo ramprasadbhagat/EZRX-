@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:ezrxmobile/application/notification/notification_bloc.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/notification/value/value_object.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -12,8 +16,12 @@ class PushNotificationService {
   static final _fcm = FirebaseMessaging.instance;
   static final _localNotificationsPlugin = FlutterLocalNotificationsPlugin();
   final AppRouter appRouter;
+  final Config config;
 
-  PushNotificationService({required this.appRouter}) {
+  PushNotificationService({
+    required this.appRouter,
+    required this.config,
+  }) {
     _initFirebaseMessaging();
     debugPrint('Push notification initialized!');
   }
@@ -148,6 +156,7 @@ class PushNotificationService {
       );
       if (message == null) return;
       final cleverTapId = message.data['wzrk_acct_id'] ?? '';
+      _callNotificationApi(message);
       if (cleverTapId.isEmpty) {
         await _showLocalNotification(
           message.notification.hashCode,
@@ -179,6 +188,19 @@ class PushNotificationService {
   void _redirectTothePage(RemoteMessage message) {
     if (message.data['action'] == 'redirect') {
       appRouter.pushNamed(message.data['route_name']);
+    }
+  }
+
+  void _callNotificationApi(RemoteMessage message) {
+    final cleverTapId = message.data['wzrk_acct_id'] ?? '';
+    final notificationType = NotificationType(message.data['type'] ?? '');
+    if (!notificationType.isValid()) return;
+    //check cleverTapId && notification type
+    if (config.getCleverTapId == cleverTapId &&
+        (notificationType.isOrder ||
+            notificationType.isReturn ||
+            notificationType.isPayment)) {
+      locator<NotificationBloc>().add(const NotificationEvent.fetch());
     }
   }
 }

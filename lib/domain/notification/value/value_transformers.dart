@@ -63,11 +63,11 @@ Color getIconColor(
   return titleMap[title] ?? ZPColors.primary;
 }
 
-bool isReturnDetailPage(String val) =>
+bool checkReturn(String val) =>
     val == 'ReturnRequestReminder' ||
     val == 'ReturnRequestCreatedForApprover' ||
     val == 'ReturnRequestCreated';
 
-bool isOrderDetailPage(String val) => val == 'OrderCreated';
+bool checkOrder(String val) => val == 'OrderCreated';
 
-bool isPaymentDetailPage(String val) => val == 'PaymentAdviceCreated';
+bool checkPayment(String val) => val == 'PaymentAdviceCreated';

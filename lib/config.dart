@@ -401,4 +401,16 @@ class Config {
         return '';
     }
   }
+
+  String get getCleverTapId {
+    switch (appFlavor) {
+      case Flavor.prod:
+        return '698-WW8-476Z';
+      case Flavor.mock:
+      case Flavor.uat:
+        return 'TEST-798-WW8-476Z';
+      case Flavor.dev:
+        return 'TEST-464-R68-876Z';
+    }
+  }
 }

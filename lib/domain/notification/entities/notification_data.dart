@@ -35,11 +35,9 @@ class NotificationData with _$NotificationData {
       );
 
   bool get isReturnEligible =>
-      type.navigateToReturnDetailPage && returnRequestId.isValidRequestId;
+      type.isReturn && returnRequestId.isValidRequestId;
 
-  bool get isOrderEligible =>
-      type.navigateToOrderDetailPage && orderNumber.isValid();
+  bool get isOrderEligible => type.isOrder && orderNumber.isValid();
 
-  bool get isPaymentEligible =>
-      type.navigateToPaymentDetailPage && saleDocument.isValid();
+  bool get isPaymentEligible => type.isPayment && saleDocument.isValid();
 }
