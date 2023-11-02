@@ -69,6 +69,7 @@ class _CustomTabBar extends StatefulWidget {
 class _CustomTabBarState extends State<_CustomTabBar>
     with TickerProviderStateMixin {
   TabController? tabController;
+  List<RouteItem> _currentRoutes = [];
 
   @override
   void initState() {
@@ -97,6 +98,12 @@ class _CustomTabBarState extends State<_CustomTabBar>
     super.dispose();
   }
 
+  void _updatePageViewStack(TabsRouter tabsRouter) {
+    if (listEquals(_currentRoutes, widget.routes)) return;
+    _currentRoutes = widget.routes;
+    tabsRouter.notifyAll();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -106,6 +113,7 @@ class _CustomTabBarState extends State<_CustomTabBar>
         builder: (context, child, _) {
           final tabsRouter = AutoTabsRouter.of(context);
           tabController?.animateTo(tabsRouter.activeIndex);
+          _updatePageViewStack(tabsRouter);
 
           return Column(
             children: [
