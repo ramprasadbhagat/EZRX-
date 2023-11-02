@@ -77,8 +77,6 @@ class ProductsTab extends StatelessWidget {
                           emptyImage: isFavourite
                               ? SvgImage.emptyFavourite
                               : SvgImage.faqSearch,
-                          emptyMessage:
-                              'Try adjusting your search or filter selection to find what you’re looking for.',
                           emptyTitle: isFavourite
                               ? 'No favourites yet'
                               : 'That didn’t match anything',

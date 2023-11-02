@@ -35,9 +35,6 @@ class _ComboDetailBodyContent extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 5.0),
           child: ScrollList<PriceAggregate>(
             noRecordFoundWidget: const NoRecordFound(
-              title: 'That didn’t match anything',
-              subTitle:
-                  'Try adjusting your search selection to find what you’re looking for.',
               svgImage: SvgImage.faqSearch,
             ),
             header: Column(

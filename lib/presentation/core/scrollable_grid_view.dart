@@ -12,7 +12,6 @@ class ScrollableGridView<T> extends StatefulWidget {
   final VoidCallback? onLoadingMore;
   final bool isLoading;
   final List<T> items;
-  final String emptyMessage;
   final String? emptyTitle;
   final Widget? emptyMessageWidget;
   final String? emptyImage;
@@ -26,7 +25,6 @@ class ScrollableGridView<T> extends StatefulWidget {
     required this.isLoading,
     required this.itemBuilder,
     required this.items,
-    required this.emptyMessage,
     this.onRefresh,
     this.onLoadingMore,
     this.header = const SizedBox.shrink(),
@@ -79,7 +77,6 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
           widget.items.isEmpty && !widget.isLoading
               ? SliverFillRemaining(
                   child: NoRecordFound(
-                    subTitle: widget.emptyMessage,
                     title: widget.emptyTitle ?? '',
                     svgImage: widget.emptyImage,
                     subTitleWidget: widget.emptyMessageWidget,

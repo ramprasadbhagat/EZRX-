@@ -76,6 +76,8 @@ void main() {
 
   Widget getPaymentMethodListPage() {
     return WidgetUtils.getScopedWidget(
+      usingLocalization: true,
+      useMediaQuery: true,
       autoRouterMock: autoRouterMock,
       providers: [
         BlocProvider<PaymentMethodsBloc>(
@@ -105,7 +107,7 @@ void main() {
         'Load Payment Methods with no data',
         (tester) async {
           await tester.pumpWidget(getPaymentMethodListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Payment Methods Management');
           final noDataError = find.text('No payment method found');
           expect(appBarTitle, findsOneWidget);
@@ -375,17 +377,11 @@ void main() {
       testWidgets(
         'Load Payment Methods delete shimmer',
         (tester) async {
-          final expectedState = Stream.fromIterable(
-            [
-              ManagePaymentMethodsState.initial().copyWith(
-                deleteIndex: -1,
-              ),
-              ManagePaymentMethodsState.initial().copyWith(
-                deleteIndex: 0,
-              ),
-            ],
+          when(() => managePaymentMethodsBlocMock.state).thenReturn(
+            ManagePaymentMethodsState.initial().copyWith(
+              deleteIndex: 0,
+            ),
           );
-          whenListen(managePaymentMethodsBlocMock, expectedState);
           when(() => paymentMethodsMock.state).thenReturn(
             PaymentMethodsState.initial().copyWith(
               paymentMethodList: [paymentMethodList.first],

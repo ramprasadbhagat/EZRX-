@@ -94,7 +94,7 @@ class StatementAccountsPage extends StatelessWidget {
                   key: WidgetKeys.soaNotFoundRecordKey,
                   title: 'No statements available',
                   subTitle: '',
-                  svgImage: SvgImage.emptyOrder,
+                  svgImage: SvgImage.emptyBox,
                 ),
               ),
               controller: _scrollController,

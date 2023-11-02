@@ -10,14 +10,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 class NoRecordFound extends StatelessWidget {
   const NoRecordFound({
     Key? key,
-    this.title = '',
+    this.title = "That didn't match anything",
     this.subTitle =
-        'Try adjusting your search or filter selection to find what you’re looking for.',
+        'Try adjusting your search or filter selection to find what you’re looking for',
     this.svgImage,
+    this.isSearchKeyEmpty = true,
     this.actionButton = const SizedBox.shrink(),
     this.subTitleWidget,
   }) : super(key: key);
   final String title;
+  final bool isSearchKeyEmpty;
   final String subTitle;
   final String? svgImage;
   final Widget actionButton;
@@ -26,7 +28,7 @@ class NoRecordFound extends StatelessWidget {
   factory NoRecordFound.ordersHistory(BuildContext context) => NoRecordFound(
         title: 'No past orders to show',
         subTitle: 'Items ordered on eZRx+ will be shown here',
-        svgImage: SvgImage.emptyOrder,
+        svgImage: SvgImage.emptyBox,
         actionButton: ElevatedButton(
           key: WidgetKeys.startBrowsingViewByItem,
           style: ElevatedButton.styleFrom(
@@ -39,6 +41,17 @@ class NoRecordFound extends StatelessWidget {
           child: Text(context.tr('Start browsing')),
         ),
       );
+
+  factory NoRecordFound.returnItems({
+    required bool isSearchKeyEmpty,
+  }) =>
+      isSearchKeyEmpty
+          ? const NoRecordFound(
+              title: 'No return request to show',
+              subTitle: 'Returns requested on eZRx+ will be shown here',
+              svgImage: SvgImage.emptyBox,
+            )
+          : const NoRecordFound();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +71,7 @@ class NoRecordFound extends StatelessWidget {
           ),
           if (title.isNotEmpty)
             Text(
-              title.tr(),
+              context.tr(title),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color: ZPColors.neutralsDarkBlack,
@@ -68,7 +81,7 @@ class NoRecordFound extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10, bottom: 30),
             child: subTitleWidget ??
                 Text(
-                  subTitle.tr(),
+                  '${context.tr(subTitle)}.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: ZPColors.neutralsDarkBlack,

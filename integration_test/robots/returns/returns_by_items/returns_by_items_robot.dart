@@ -122,7 +122,7 @@ class ReturnsByItemsRobot {
   void verifyNoRecordFoundVisible() {
     expect(item, findsNothing);
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
-    expect(find.text('No Return by Item found'.tr()), findsOneWidget);
+    expect(find.text('No return request to show'.tr()), findsOneWidget);
   }
 
   void verifyReturnsWithProductNameVisible(String searchKey) {

@@ -80,7 +80,7 @@ class ReturnsByRequestRobot {
   void verifyNoRecordFoundVisible() {
     expect(item, findsNothing);
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
-    expect(find.text('No Return by Request found'.tr()), findsOneWidget);
+    expect(find.text('No return request to show'.tr()), findsOneWidget);
     expect(
       find.text(
         'Try adjusting your search or filter selection to find what you’re looking for.'

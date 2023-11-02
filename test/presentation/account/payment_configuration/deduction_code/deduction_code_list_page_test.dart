@@ -63,6 +63,7 @@ void main() {
   Widget getDeductionCodeListPage() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<ManageDeductionCodeBloc>(
           create: (context) => deductionCodeBlocMock,
@@ -92,7 +93,7 @@ void main() {
         'Load Deduction code with no data',
         (tester) async {
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           verifyAppBarTitleAndScaffoldKey();
         },
       );
@@ -123,7 +124,7 @@ void main() {
             ),
           );
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Configure Deduction Code');
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
@@ -145,7 +146,7 @@ void main() {
           );
           whenListen(deductionCodeBlocMock, expectedState);
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Configure Deduction Code');
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
@@ -163,7 +164,7 @@ void main() {
           );
           final handle = tester.ensureSemantics();
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
           tester.binding.window.devicePixelRatioTestValue = 1.0;
           final appBarTitle = find.text('Configure Deduction Code');
@@ -212,7 +213,7 @@ void main() {
             ),
           );
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Configure Deduction Code');
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
@@ -238,7 +239,7 @@ void main() {
             ),
           );
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Configure Deduction Code');
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
@@ -284,7 +285,7 @@ void main() {
             ),
           );
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Configure Deduction Code');
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
@@ -311,7 +312,7 @@ void main() {
             ),
           );
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Configure Deduction Code');
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
@@ -337,7 +338,7 @@ void main() {
             ),
           );
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Configure Deduction Code');
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
@@ -387,7 +388,7 @@ void main() {
           );
           whenListen(deductionCodeBlocMock, expectedState);
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Configure Deduction Code');
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
@@ -417,7 +418,7 @@ void main() {
           );
           whenListen(deductionCodeBlocMock, expectedState);
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Configure Deduction Code');
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
@@ -448,7 +449,7 @@ void main() {
           );
           whenListen(deductionCodeBlocMock, expectedState);
           await tester.pumpWidget(getDeductionCodeListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Configure Deduction Code');
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);

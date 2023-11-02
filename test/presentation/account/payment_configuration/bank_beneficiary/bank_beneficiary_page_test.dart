@@ -60,6 +60,7 @@ void main() {
 
   Widget getBankBeneficiaryPage() {
     return WidgetUtils.getScopedWidget(
+      usingLocalization: true,
       autoRouterMock: autoRouterMock,
       providers: [
         BlocProvider<ManageBankBeneficiaryBloc>(
@@ -391,7 +392,7 @@ void main() {
           );
           whenListen(manageBankBeneficiaryBlocMock, expectedState);
           await tester.pumpWidget(getBankBeneficiaryPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Bank Beneficiary Management');
           final noDataError = find.text('No Beneficiary found');
           expect(appBarTitle, findsOneWidget);
@@ -421,7 +422,7 @@ void main() {
           );
           whenListen(manageBankBeneficiaryBlocMock, expectedState);
           await tester.pumpWidget(getBankBeneficiaryPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           final appBarTitle = find.text('Bank Beneficiary Management');
           final noDataError = find.text('No Beneficiary found');
           expect(appBarTitle, findsOneWidget);

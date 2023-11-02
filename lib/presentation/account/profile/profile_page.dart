@@ -59,7 +59,7 @@ class ProfilePage extends StatelessWidget {
               noRecordFoundWidget: const NoRecordFound(
                 title: 'Looks like you don`t have any license here',
                 subTitle: '',
-                svgImage: SvgImage.emptyOrder,
+                svgImage: SvgImage.emptyBox,
               ),
               controller: ScrollController(),
               onRefresh: () => context.read<CustomerLicenseBloc>().add(

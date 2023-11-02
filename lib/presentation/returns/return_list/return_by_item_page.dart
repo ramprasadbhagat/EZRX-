@@ -56,13 +56,14 @@ class _ReturnByItemPageState extends State<ReturnByItemPage> {
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching,
           builder: (context, state) {
-            return state.isFetching && state.returnItemList.isEmpty
+            return state.isFetching
                 ? LoadingShimmer.logo(
                     key: WidgetKeys.loaderImage,
                   )
                 : ScrollList<ReturnItem>(
-                    noRecordFoundWidget:
-                        const NoRecordFound(title: 'No Return by Item found'),
+                    noRecordFoundWidget: NoRecordFound.returnItems(
+                      isSearchKeyEmpty: state.searchKey.isValueEmpty,
+                    ),
                     controller: _controller,
                     onRefresh: () => context.read<ReturnListByItemBloc>().add(
                           ReturnListByItemEvent.fetch(

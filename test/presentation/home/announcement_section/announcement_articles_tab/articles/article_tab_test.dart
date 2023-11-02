@@ -113,6 +113,7 @@ void main() {
     Widget getWUT() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<ArticlesInfoBloc>(
             create: (context) => articlesInfoBlocMock,
@@ -126,10 +127,9 @@ void main() {
     }
 
     testWidgets('should show loading for the first time', (tester) async {
-      whenListen(
-        articlesInfoBlocMock,
-        Stream.fromIterable(
-          [ArticlesInfoState.initial().copyWith(isFetching: true)],
+      when(() => articlesInfoBlocMock.state).thenReturn(
+        ArticlesInfoState.initial().copyWith(
+          isFetching: true,
         ),
       );
       await tester.pumpWidget(getWUT());
@@ -175,6 +175,7 @@ void main() {
         Stream.fromIterable(articlesInfoState),
       );
       await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
       await tester.fling(
         find.byType(CustomScrollView),
         const Offset(0.0, 300.0),
@@ -243,6 +244,7 @@ void main() {
         Stream.fromIterable(articlesInfoState),
       );
       await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
       await tester.fling(
         find.byType(CustomScrollView),
         const Offset(0.0, -1000.0),

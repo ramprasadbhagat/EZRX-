@@ -72,13 +72,13 @@ class _ReturnByRequestPageState extends State<ReturnByRequestPage> {
               previous.isFetching != current.isFetching ||
               previous.returnItemList != current.returnItemList,
           builder: (context, state) {
-            return state.isFetching && state.returnItemList.isEmpty
+            return state.isFetching
                 ? LoadingShimmer.logo(
                     key: WidgetKeys.loaderImage,
                   )
                 : ScrollList<ReturnItem>(
-                    noRecordFoundWidget: const NoRecordFound(
-                      title: 'No Return by Request found',
+                    noRecordFoundWidget: NoRecordFound.returnItems(
+                      isSearchKeyEmpty: state.searchKey.isValueEmpty,
                     ),
                     controller: _controller,
                     onRefresh: () =>

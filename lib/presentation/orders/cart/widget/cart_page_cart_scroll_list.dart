@@ -71,8 +71,7 @@ class _CartPageCartScrollList extends StatelessWidget {
                     noRecordFoundWidget: NoRecordFound(
                       title: 'Your cart is empty',
                       subTitle:
-                          'Looks like you haven’t added anything to your cart yet.'
-                              .tr(),
+                          'Looks like you haven’t added anything to your cart yet',
                       actionButton: ElevatedButton(
                         key: WidgetKeys.startBrowsingProducts,
                         style: ElevatedButton.styleFrom(
