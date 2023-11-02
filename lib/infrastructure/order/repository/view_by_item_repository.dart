@@ -13,8 +13,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_local.dart';
-import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_filter_dto.dart';
@@ -23,12 +21,8 @@ class ViewByItemRepository implements IViewByItemRepository {
   final Config config;
   final ViewByItemLocalDataSource localDataSource;
   final OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
-  final ProductImageLocalDataSource productImageLocalDataSource;
-  final ProductImageRemoteDataSource productImageRemoteDataSource;
 
   ViewByItemRepository({
-    required this.productImageLocalDataSource,
-    required this.productImageRemoteDataSource,
     required this.config,
     required this.localDataSource,
     required this.orderHistoryRemoteDataSource,

@@ -1156,8 +1156,6 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<ViewByItemLocalDataSource>(),
       orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
-      productImageLocalDataSource: locator<ProductImageLocalDataSource>(),
-      productImageRemoteDataSource: locator<ProductImageRemoteDataSource>(),
     ),
   );
   locator.registerFactory(
