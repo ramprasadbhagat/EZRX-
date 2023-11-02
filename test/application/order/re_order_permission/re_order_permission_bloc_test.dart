@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/order/entities/re_order_permission.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/re_order_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/re_order_permission_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

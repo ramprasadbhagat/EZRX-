@@ -340,7 +340,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_reposit
 import 'package:ezrxmobile/infrastructure/order/repository/price_override_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_search_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/re_order_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/re_order_permission_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/scan_material_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
