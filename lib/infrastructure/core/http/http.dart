@@ -34,6 +34,7 @@ class HttpService {
     ResponseType responseType = ResponseType.json,
     String apiEndpoint = '',
     bool overrideBaseUrl = false,
+    String cacheControl = '',
   }) async {
     try {
       if (overrideBaseUrl) _dio.options.baseUrl = url;
@@ -41,6 +42,7 @@ class HttpService {
       _dio.options.method = method;
       _dio.options.responseType = responseType;
       _dio.options.headers['apiEndpoint'] = apiEndpoint;
+      _dio.options.headers['cache-control'] = cacheControl;
 
       return await _dio.request(
         url,

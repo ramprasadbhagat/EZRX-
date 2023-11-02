@@ -80,6 +80,7 @@ class NewPaymentRemoteDataSource {
     final res = await httpService.request(
       method: 'POST',
       url: '${config.urlConstants}ezpay',
+      cacheControl: 'no-cache',
       data: jsonEncode(
         {
           'query': newPaymentQuery.payQuery(),
@@ -195,6 +196,7 @@ class NewPaymentRemoteDataSource {
     final res = await httpService.request(
       method: 'POST',
       url: '${config.urlConstants}ezpay',
+      cacheControl: 'no-cache',
       data: jsonEncode(
         {
           'query': newPaymentQuery.getCustomerOpenItemsQuery(),
