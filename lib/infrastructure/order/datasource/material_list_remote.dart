@@ -42,6 +42,7 @@ class MaterialListRemoteDataSource {
     required String principalCode,
     required String searchKey,
     required List<String> salesDeal,
+    required bool isComboOffers,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery();
@@ -79,9 +80,11 @@ class MaterialListRemoteDataSource {
         variables['request']!['principalCode'] = principalCode;
       }
 
-      if (salesDeal.isNotEmpty) {
-        variables['request']!['salesDeal'] = salesDeal;
+      if (isComboOffers) {
+        variables['request']!['salesDeal'] =
+            salesDeal.isNotEmpty ? salesDeal : '';
       }
+
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}price',

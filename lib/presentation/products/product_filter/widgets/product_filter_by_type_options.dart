@@ -72,18 +72,23 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
               },
               title: 'Bundle offers',
             ),
-            _ListTileThemeWidget(
-              value: state.materialFilter.comboOffers,
-              onChanged: (value) {
-                context.read<MaterialFilterBloc>().add(
-                      MaterialFilterEvent.updateSelectedMaterialFilter(
-                        MaterialFilterType.comboOffers,
-                        !state.materialFilter.comboOffers,
-                      ),
-                    );
-              },
-              title: 'Combo offers',
-            ),
+            if (context
+                .read<EligibilityBloc>()
+                .state
+                .salesOrgConfigs
+                .enableComboDeals)
+              _ListTileThemeWidget(
+                value: state.materialFilter.comboOffers,
+                onChanged: (value) {
+                  context.read<MaterialFilterBloc>().add(
+                        MaterialFilterEvent.updateSelectedMaterialFilter(
+                          MaterialFilterType.comboOffers,
+                          !state.materialFilter.comboOffers,
+                        ),
+                      );
+                },
+                title: 'Combo offers',
+              ),
           ],
         );
       },

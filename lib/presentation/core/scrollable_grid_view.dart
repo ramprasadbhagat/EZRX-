@@ -29,7 +29,7 @@ class ScrollableGridView<T> extends StatefulWidget {
     required this.emptyMessage,
     this.onRefresh,
     this.onLoadingMore,
-    this.header,
+    this.header = const SizedBox.shrink(),
     this.crossAxisSpacing = 12.0,
     this.mainAxisSpacing = 12.0,
     this.emptyTitle,
@@ -74,9 +74,7 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
         controller: _scrollController,
         slivers: [
           SliverToBoxAdapter(
-            child: widget.items.isNotEmpty
-                ? widget.header ?? const SizedBox.shrink()
-                : const SizedBox.shrink(),
+            child: widget.header,
           ),
           widget.items.isEmpty && !widget.isLoading
               ? SliverFillRemaining(

@@ -74,10 +74,14 @@ class ProductsTab extends StatelessWidget {
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: ScrollableGridView<MaterialInfo>(
-                          emptyImage:
-                              isFavourite ? SvgImage.emptyFavourite : null,
-                          emptyMessage: 'No material found',
-                          emptyTitle: isFavourite ? 'No favourites yet' : null,
+                          emptyImage: isFavourite
+                              ? SvgImage.emptyFavourite
+                              : SvgImage.faqSearch,
+                          emptyMessage:
+                              'Try adjusting your search or filter selection to find what you’re looking for.',
+                          emptyTitle: isFavourite
+                              ? 'No favourites yet'
+                              : 'That didn’t match anything',
                           emptyMessageWidget:
                               isFavourite ? const _EmptyMessageWidget() : null,
                           header: const _TotalMaterialCount(),
@@ -231,47 +235,45 @@ class _TotalMaterialCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Row(
-        key: WidgetKeys.totalMaterialItemCount,
-        children: [
-          Text(
-            context.tr('All products'),
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              vertical: 2,
-              horizontal: 5,
-            ),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
-              color: ZPColors.accentColor,
-            ),
-            child: BlocBuilder<MaterialListBloc, MaterialListState>(
-              buildWhen: (previous, current) =>
-                  previous.materialList != current.materialList,
-              builder: (context, state) {
-                return Text(
-                  state.selectedMaterialFilter.isFavourite
-                      //if favourite filter is true show the material list length
-                      ? '${state.materialList.length}'
-                      //if favourite filter is false show the material count
-                      : '${state.materialCount}',
+    return BlocBuilder<MaterialListBloc, MaterialListState>(
+      buildWhen: (previous, current) =>
+          previous.materialList != current.materialList,
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            key: WidgetKeys.totalMaterialItemCount,
+            children: [
+              Text(
+                state.displaySearchResult
+                    ? context.tr('Search results')
+                    : context.tr('All products'),
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 2,
+                  horizontal: 5,
+                ),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: ZPColors.accentColor,
+                ),
+                child: Text(
+                  '${state.materialCount}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkGray,
                       ),
-                );
-              },
-            ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

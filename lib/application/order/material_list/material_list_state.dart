@@ -28,4 +28,6 @@ class MaterialListState with _$MaterialListState {
       );
 
   bool get isFilterSelected => selectedMaterialFilter != MaterialFilter.empty();
+
+  bool get displaySearchResult => isFilterSelected || searchKey.isValid();
 }

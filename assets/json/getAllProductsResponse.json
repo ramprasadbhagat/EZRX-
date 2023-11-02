@@ -4,7 +4,7 @@
             "Count": 13,
             "Products": [
                 {
-                    "Code": "000000000023270469",
+                    "Code": "000000000021041772",
                     "Name": "BIPOLAR PENANG 61",
                     "PrincipalCode": "0000102575",
                     "materialNumber": "",
@@ -16,7 +16,7 @@
                     "BundleInformation": null,
                     "Data": [
                         {
-                            "MaterialCode": "000000000023270469",
+                            "MaterialCode": "000000000021041772",
                             "Manufactured": "STRYKER CORPORATION (M) SDN BHD",
                             "MaterialDescription": "BIPOLAR PENANG 61",
                             "DefaultMaterialDescription": "BIPOLAR PENANG 61",

@@ -14,8 +14,11 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -74,12 +77,15 @@ void main() {
   late MaterialFilterBlocMock materialFilterBlocMock;
   late ProductImageBlocMock productImageBlocMock;
   late MaterialResponse materialResponseMock;
+  late List<Price> priceList;
+  late Map<MaterialNumber, Price> materialPriceMock;
 
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
     materialResponseMock = await MaterialListLocalDataSource().getProductList();
+    priceList = await MaterialPriceLocalDataSource().getPriceList();
   });
 
   group(
@@ -96,6 +102,9 @@ void main() {
         materialFilterBlocMock = MaterialFilterBlocMock();
         productImageBlocMock = ProductImageBlocMock();
         cartBlocMock = CartBlocMock();
+        materialPriceMock = Map.fromEntries(
+          priceList.map((price) => MapEntry(price.materialNumber, price)),
+        );
         when(() => materialListBlocMock.state)
             .thenReturn(MaterialListState.initial());
         when(() => eligibilityBlocMock.state)
@@ -367,8 +376,13 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
           expect(
+            find.text('That didn’t match anything'.tr()),
+            findsOneWidget,
+          );
+          expect(
             find.text(
-              'No material found'.tr(),
+              'Try adjusting your search or filter selection to find what you’re looking for.'
+                  .tr(),
             ),
             findsOneWidget,
           );
@@ -407,6 +421,62 @@ void main() {
             ),
             findsOneWidget,
           );
+        },
+      );
+
+      testWidgets(
+        '=> Test Filter combo material not found',
+        (tester) async {
+          when(() => materialFilterBlocMock.state).thenReturn(
+            MaterialFilterState.initial().copyWith.materialFilter(
+                  comboOffers: true,
+                ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.text('That didn’t match anything'.tr()),
+            findsOneWidget,
+          );
+          expect(
+            find.text(
+              'Try adjusting your search or filter selection to find what you’re looking for.'
+                  .tr(),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> Test Filter combo material found',
+        (tester) async {
+          when(() => materialFilterBlocMock.state).thenReturn(
+            MaterialFilterState.initial().copyWith.materialFilter(
+                  comboOffers: true,
+                ),
+          );
+          when(() => materialListBlocMock.state).thenReturn(
+            MaterialListState.initial().copyWith(
+              materialList: [
+                materialResponseMock.products.first.copyWith(
+                  type: MaterialInfoType('material'),
+                )
+              ],
+            ),
+          );
+          when(() => materialPriceBlocMock.state).thenReturn(
+            MaterialPriceState.initial().copyWith(
+              materialPrice: materialPriceMock,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          final materialCardFinder =
+              find.byKey(WidgetKeys.materialListMaterialCard);
+          final comboOfferTextFinder = find.text('Combo offer');
+          expect(materialCardFinder, findsOneWidget);
+          expect(comboOfferTextFinder, findsOneWidget);
         },
       );
     },

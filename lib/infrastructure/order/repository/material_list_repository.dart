@@ -81,11 +81,10 @@ class MaterialListRepository implements IMaterialListRepository {
             .map((e) => e.code)
             .toList(),
         searchKey: '',
-        salesDeal: selectedMaterialFilter.comboOffers
-            ? customerCodeInfo.salesDeals
-                .map((e) => e.getOrDefaultValue(''))
-                .toList()
-            : [],
+        salesDeal: customerCodeInfo.salesDeals
+            .map((e) => e.getOrDefaultValue(''))
+            .toList(),
+        isComboOffers: selectedMaterialFilter.comboOffers,
       );
 
       final stockInfoList = await getStockInfoList(
@@ -342,6 +341,7 @@ class MaterialListRepository implements IMaterialListRepository {
         principalCode: principalData.principalCode.getOrCrash(),
         searchKey: searchKey.getOrCrash(),
         salesDeal: [],
+        isComboOffers: false,
       );
 
       return Right(materialListData);

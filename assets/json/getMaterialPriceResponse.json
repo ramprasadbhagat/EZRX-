@@ -88,7 +88,8 @@
         "ExceedQty": false,
         "OverridenRulePresent": false,
         "OverridenRules": [],
-        "OverridenRuleTier": []
+        "OverridenRuleTier": [],
+        "ComboDeals": null
       },
       {
         "MaterialNumber": "000000000021038302",
@@ -120,7 +121,8 @@
         "ExceedQty": false,
         "OverridenRulePresent": false,
         "OverridenRules": [],
-        "OverridenRuleTier": []
+        "OverridenRuleTier": [],
+        "ComboDeals": null
       },
       {
         "MaterialNumber": "000000000021041773",
@@ -175,7 +177,8 @@
         "ExceedQty": false,
         "OverridenRulePresent": false,
         "OverridenRules": [],
-        "OverridenRuleTier": []
+        "OverridenRuleTier": [],
+        "ComboDeals": null
       },
       {
         "MaterialNumber": "000000000021041769",
@@ -230,7 +233,8 @@
         "ExceedQty": false,
         "OverridenRulePresent": false,
         "OverridenRules": [],
-        "OverridenRuleTier": []
+        "OverridenRuleTier": [],
+        "ComboDeals": null
       },
       {
         "MaterialNumber": "000000000021041768",
@@ -285,7 +289,8 @@
         "ExceedQty": false,
         "OverridenRulePresent": false,
         "OverridenRules": [],
-        "OverridenRuleTier": []
+        "OverridenRuleTier": [],
+        "ComboDeals": null
       },
       {
         "MaterialNumber": "000000000021041805",
@@ -340,7 +345,8 @@
         "ExceedQty": false,
         "OverridenRulePresent": false,
         "OverridenRules": [],
-        "OverridenRuleTier": []
+        "OverridenRuleTier": [],
+        "ComboDeals": null
       },
       {
         "MaterialNumber": "000000000021041779",
@@ -395,7 +401,8 @@
         "ExceedQty": false,
         "OverridenRulePresent": false,
         "OverridenRules": [],
-        "OverridenRuleTier": []
+        "OverridenRuleTier": [],
+        "ComboDeals": null
       },
       {
         "MaterialNumber": "000000000021041772",
@@ -427,7 +434,20 @@
         "ExceedQty": false,
         "OverridenRulePresent": false,
         "OverridenRules": [],
-        "OverridenRuleTier": []
+        "OverridenRuleTier": [],
+        "ComboDeals": {
+          "Eligible": true,
+          "FlexibleGroup": "5000000018",
+          "SalesDeal": "0040000110",
+          "Category": {
+              "Type": "MATNR",
+              "Value": [
+                  "000000000021130726",
+                  "000000000021130718",
+                  "000000000021222875"
+              ]
+          }
+        }
       }
     ]
   }

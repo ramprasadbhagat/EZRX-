@@ -227,6 +227,7 @@ void main() {
       shipToCode: 'fake-shipto-code',
       searchKey: '',
       salesDeal: [],
+      isComboOffers: false,
     );
 
     final finalData =

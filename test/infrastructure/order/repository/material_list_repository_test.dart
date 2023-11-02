@@ -199,6 +199,7 @@ void main() {
                 .toList(),
             searchKey: '',
             salesDeal: [],
+            isComboOffers: fakeMaterialFilter.comboOffers,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -250,6 +251,7 @@ void main() {
                 .toList(),
             searchKey: '',
             salesDeal: [],
+            isComboOffers: fakeMaterialFilterWithComboOffers.comboOffers,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,
@@ -727,6 +729,7 @@ void main() {
             salesDeal: [],
             offset: 0,
             pageSize: 10,
+            isComboOffers: fakeMaterialFilter.comboOffers,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -771,6 +774,7 @@ void main() {
             salesDeal: [],
             offset: 0,
             pageSize: 10,
+            isComboOffers: fakeMaterialFilter.comboOffers,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,

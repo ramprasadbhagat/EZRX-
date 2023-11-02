@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -26,6 +27,9 @@ class MockMaterialListBloc
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class MockMixpanelService extends Mock implements MixpanelService {}
 
 final locator = GetIt.instance;
@@ -34,6 +38,7 @@ void main() {
   late AppRouter autoRouterMock;
   late MaterialFilterBloc mockMaterialFilterBloc;
   late MaterialListBloc mockMaterialListBloc;
+  late EligibilityBlocMock eligibilityBlocMock;
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -45,17 +50,23 @@ void main() {
   setUp(() async {
     mockMaterialFilterBloc = MockMaterialFilterBloc();
     mockMaterialListBloc = MockMaterialListBloc();
+    eligibilityBlocMock = EligibilityBlocMock();
     autoRouterMock = locator<AppRouter>();
     when(() => mockMaterialFilterBloc.state)
         .thenReturn(MaterialFilterState.initial());
     when(() => mockMaterialListBloc.state)
         .thenReturn(MaterialListState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
   Widget getScopedWidget() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
       providers: [
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
+        ),
         BlocProvider<MaterialFilterBloc>(
           create: (context) => mockMaterialFilterBloc,
         ),
