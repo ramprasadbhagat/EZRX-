@@ -46,7 +46,7 @@ class ReturnItemPrice extends StatelessWidget {
               price: details.priceOverride.isValid()
                   ? details.priceOverride.stringValue
                   : details.unitPrice.apiParameterValue,
-              type: PriceStyle.totalPrice,
+              type: PriceStyle.summaryPrice,
             ),
           ],
         ),

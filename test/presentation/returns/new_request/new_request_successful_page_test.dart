@@ -223,6 +223,32 @@ void main() {
       );
       expect(unitPrice, findsOneWidget);
     });
+
+    testWidgets(' => check Batch and EXP', (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails,
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final batch = find.textContaining(
+        'Batch'.tr(),
+      );
+      expect(batch, findsOneWidget);
+      final expires = find.textContaining(
+        'EXP:'.tr(),
+      );
+      expect(expires, findsOneWidget);
+    });
     testWidgets(' => display Override Price for return material item',
         (WidgetTester tester) async {
       when(() => newRequestBlocMock.state).thenReturn(
