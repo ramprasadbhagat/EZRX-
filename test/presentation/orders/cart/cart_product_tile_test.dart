@@ -15,7 +15,6 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -95,7 +94,6 @@ void main() {
   late Map<MaterialNumber, Price> mockPriceList;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
-  final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
   late PriceOverrideBloc priceOverrideBloc;
   late AppRouter autoRouter;
   late OrderSummaryBloc orderSummaryBlocMock;
@@ -107,7 +105,6 @@ void main() {
     );
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerFactory(() => AppRouter());
-    locator.registerFactory<AddToCartBloc>(() => addToCartBlocMock);
     autoRouter = locator<AppRouter>();
   });
   setUp(
@@ -227,9 +224,6 @@ void main() {
               create: (context) => customerCodeBloc,
             ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-            BlocProvider<AddToCartBloc>(
-              create: ((context) => addToCartBlocMock),
-            ),
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
             BlocProvider<OrderDocumentTypeBloc>(
               create: (context) => orderDocumentTypeBlocMock,

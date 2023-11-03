@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -99,9 +98,6 @@ class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
 
-class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
-    implements AddToCartBloc {}
-
 class TenderContractBlocMock
     extends MockBloc<TenderContractEvent, TenderContractState>
     implements TenderContractBloc {}
@@ -147,7 +143,6 @@ void main() {
   late PoAttachmentBloc downloadAttachmentBlocMock;
   late OrderHistory orderHistory;
   late MaterialPriceBlocMock materialPriceBlocMock;
-  late AddToCartBlocMock addToCartBlocMock;
   late TenderContractBlocMock tenderContractBlocMock;
   late AdditionalDetailsBlocMock additionalDetailsBlocMock;
   late PermissionService permissionService;
@@ -183,7 +178,6 @@ void main() {
     locator.registerLazySingleton(
       () => MixpanelService(config: locator<Config>()),
     );
-    locator.registerFactory<AddToCartBloc>(() => addToCartBlocMock);
     locator.registerFactory<TenderContractBloc>(() => tenderContractBlocMock);
     orderHistoryDetails =
         await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
@@ -197,7 +191,6 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       downloadAttachmentBlocMock = MockDownloadAttachmentBloc();
       materialPriceBlocMock = MaterialPriceBlocMock();
-      addToCartBlocMock = AddToCartBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
@@ -242,7 +235,6 @@ void main() {
           .thenReturn(PoAttachmentState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
-      when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => tenderContractBlocMock.state)
@@ -282,9 +274,6 @@ void main() {
           ),
           BlocProvider<MaterialPriceBloc>(
             create: (context) => materialPriceBlocMock,
-          ),
-          BlocProvider<AddToCartBloc>(
-            create: (context) => addToCartBlocMock,
           ),
           BlocProvider<TenderContractBloc>(
             create: (context) => tenderContractBlocMock,

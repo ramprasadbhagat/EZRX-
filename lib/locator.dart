@@ -37,7 +37,6 @@ import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -1672,12 +1671,6 @@ void setupLocator() {
   //  Cart
   //
   //============================================================
-
-  locator.registerFactory(
-    () => AddToCartBloc(
-      materialPriceDetailRepository: locator<MaterialPriceDetailRepository>(),
-    ),
-  );
 
   locator.registerLazySingleton(() => StockInfoLocalDataSource());
   locator.registerLazySingleton(() => StockInfoQueryMutation());

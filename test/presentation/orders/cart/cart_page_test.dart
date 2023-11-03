@@ -22,7 +22,6 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -84,9 +83,6 @@ class AnnouncementBlocMock
     implements AnnouncementBloc {}
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
-    implements AddToCartBloc {}
 
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
@@ -157,7 +153,6 @@ void main() {
   late OrderEligibilityBloc orderEligibilityBlocMock;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
-  final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
   late PriceOverrideBloc priceOverrideBloc;
   late AppRouter autoRouterMock;
   late OrderSummaryBloc orderSummaryBlocMock;
@@ -187,7 +182,6 @@ void main() {
       () => DiscountOverrideBloc(repository: DiscountOverrideRepositoryMock()),
     );
     locator.registerFactory(() => AppRouter());
-    locator.registerFactory<AddToCartBloc>(() => addToCartBlocMock);
     locator.registerFactory<TenderContractBloc>(() => tenderContractBlocMock);
     autoRouterMock = MockAppRouter();
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
@@ -555,9 +549,6 @@ void main() {
               create: (context) => customerCodeBloc,
             ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-            BlocProvider<AddToCartBloc>(
-              create: ((context) => addToCartBlocMock),
-            ),
             BlocProvider<MaterialListBloc>(
               create: ((context) => materialListBlocMock),
             ),

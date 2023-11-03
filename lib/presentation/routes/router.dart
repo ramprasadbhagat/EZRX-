@@ -22,8 +22,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
 import 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/payment_methods_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
@@ -318,18 +316,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(
       path: 'payments/payment_completed',
       page: PaymentCompletedPage,
-    ),
-    CustomRoute(
-      path: 'orders/add_to_cart',
-      page: AddToCart,
-      transitionsBuilder: TransitionsBuilders.slideBottom,
-      fullscreenDialog: true,
-    ),
-    CustomRoute(
-      path: 'orders/update_cart',
-      page: UpdateCart,
-      transitionsBuilder: TransitionsBuilders.slideBottom,
-      fullscreenDialog: true,
     ),
     AutoRoute(
       path: 'admin_po_attachment',
