@@ -98,8 +98,8 @@ class ReturnItemsTab extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: ScrollList<ReturnMaterial>(
                   key: WidgetKeys.newRequestListItemAbleToReturn,
-                  noRecordFoundWidget: const NoRecordFound(
-                    title: 'No record found',
+                  noRecordFoundWidget: NoRecordFound.newReturnItems(
+                    isSearchKeyEmpty: state.searchKey.isValueEmpty,
                   ),
                   controller: ScrollController(),
                   onRefresh: () => context.read<ReturnItemsBloc>().add(

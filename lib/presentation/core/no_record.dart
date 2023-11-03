@@ -52,6 +52,17 @@ class NoRecordFound extends StatelessWidget {
               svgImage: SvgImage.emptyBox,
             )
           : const NoRecordFound();
+  factory NoRecordFound.newReturnItems({
+    required bool isSearchKeyEmpty,
+  }) =>
+      isSearchKeyEmpty
+          ? const NoRecordFound(
+              title: 'No record found',
+              subTitle:
+                  'Items that may be selected for returns will be shown here.',
+              svgImage: SvgImage.emptyBox,
+            )
+          : const NoRecordFound();
 
   @override
   Widget build(BuildContext context) {
