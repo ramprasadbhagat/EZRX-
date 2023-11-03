@@ -89,8 +89,10 @@ class ViewByItemRepository implements IViewByItemRepository {
     }
 
     try {
-      final queryOrderNumbers =
-          orderNumbers.map((e) => e.getOrCrash()).toList();
+      final queryOrderNumbers = orderNumbers
+          .where((e) => e.isValid())
+          .map((e) => e.getOrCrash())
+          .toList();
 
       final ordersInvoiceData = await orderHistoryRemoteDataSource
           .getInvoiceDataForOrders(orderNumbers: queryOrderNumbers);

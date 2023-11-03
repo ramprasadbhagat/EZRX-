@@ -151,6 +151,23 @@ void main() async {
 
         expect(result, Right(fakeOrderHistory));
       });
+
+      test('test data', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => orderHistoryRemoteDataSource
+              .getInvoiceDataForOrders(orderNumbers: ['0200261763']),
+        ).thenAnswer((_) async => [fakeInvoice.first]);
+
+        final result = await repository.getOrdersInvoiceData(
+          orderNumbers: [OrderNumber('0200261763'), OrderNumber('')],
+        );
+
+        expect(
+          result.fold((l) => {}, (r) => r),
+          {OrderNumber('0200261763'): fakeInvoice.first},
+        );
+      });
     });
 
     group('Get invoice data', () {
