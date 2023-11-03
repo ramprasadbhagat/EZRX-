@@ -106,8 +106,8 @@ class OutstandingInvoicesTab extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: ScrollList<CustomerOpenItem>(
-                        noRecordFoundWidget: const NoRecordFound(
-                          title: 'No record found',
+                        noRecordFoundWidget: NoRecordFound.newPaymentInvoices(
+                          isSearchAndFilterEmpty: state.isSearchAndFilterEmpty,
                         ),
                         controller: ScrollController(),
                         onRefresh: () {

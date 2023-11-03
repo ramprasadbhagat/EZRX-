@@ -376,13 +376,12 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
           expect(
-            find.text('That didn’t match anything'.tr()),
+            find.text("That didn't match anything"),
             findsOneWidget,
           );
           expect(
-            find.text(
-              'Try adjusting your search or filter selection to find what you’re looking for.'
-                  .tr(),
+            find.textContaining(
+              'Try adjusting your search or filter selection to find what you’re looking for.',
             ),
             findsOneWidget,
           );
@@ -435,13 +434,12 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
           expect(
-            find.text('That didn’t match anything'.tr()),
+            find.text("That didn't match anything"),
             findsOneWidget,
           );
           expect(
-            find.text(
-              'Try adjusting your search or filter selection to find what you’re looking for.'
-                  .tr(),
+            find.textContaining(
+              'Try adjusting your search or filter selection to find what you’re looking for.',
             ),
             findsOneWidget,
           );

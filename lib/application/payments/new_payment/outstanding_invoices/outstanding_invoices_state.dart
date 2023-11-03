@@ -24,4 +24,8 @@ class OutstandingInvoicesState with _$OutstandingInvoicesState {
         appliedFilter: OutstandingInvoiceFilter.empty(),
         searchKey: SearchKey.searchFilter(''),
       );
+
+  bool get isSearchAndFilterEmpty =>
+      searchKey.isValueEmpty &&
+      appliedFilter == OutstandingInvoiceFilter.empty();
 }

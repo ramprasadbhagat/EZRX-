@@ -24,4 +24,7 @@ class AvailableCreditsState with _$AvailableCreditsState {
         customerCodeInfo: CustomerCodeInfo.empty(),
         salesOrganization: SalesOrganisation.empty(),
       );
+
+  bool get isSearchAndFilterEmpty =>
+      searchKey.isValueEmpty && appliedFilter == AvailableCreditFilter.empty();
 }

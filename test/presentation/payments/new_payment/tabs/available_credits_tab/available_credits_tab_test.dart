@@ -228,8 +228,11 @@ void main() {
 
       await tester.pumpWidget(getWidget());
       await tester.pump();
-      final availableText = find.text('No record found');
-      expect(availableText, findsOneWidget);
+      final noRecordTitleText = find.text('No available credits');
+      final noRecordSubTitleText =
+          find.textContaining('Available credit notes will be shown here');
+      expect(noRecordTitleText, findsOneWidget);
+      expect(noRecordSubTitleText, findsOneWidget);
     });
 
     testWidgets('First item credit show', (tester) async {

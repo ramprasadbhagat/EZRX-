@@ -239,8 +239,11 @@ void main() {
 
       await tester.pumpWidget(getWidget());
       await tester.pump();
-      final noRecordText = find.text('No record found');
-      expect(noRecordText, findsOneWidget);
+      final noRecordTitleText = find.text('No available invoices');
+      final noRecordSubTitleText =
+          find.textContaining('Available invoices will be shown here');
+      expect(noRecordTitleText, findsOneWidget);
+      expect(noRecordSubTitleText, findsOneWidget);
     });
 
     testWidgets('First item show', (tester) async {

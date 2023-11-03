@@ -70,8 +70,8 @@ class AvailableCreditsTab extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: ScrollList<CustomerOpenItem>(
-                        noRecordFoundWidget: const NoRecordFound(
-                          title: 'No record found',
+                        noRecordFoundWidget: NoRecordFound.newPaymentCredits(
+                          isSearchAndFilterEmpty: state.isSearchAndFilterEmpty,
                         ),
                         controller: ScrollController(),
                         onRefresh: () {
