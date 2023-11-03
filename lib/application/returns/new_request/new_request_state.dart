@@ -34,19 +34,26 @@ class NewRequestState with _$NewRequestState {
       );
 
   bool get isAdditionInfoValid =>
-      allItemDetails.isNotEmpty &&
-      allItemDetails.every((details) => details.isValid);
+      validItemDetails.isNotEmpty &&
+      validItemDetails.every((details) => details.isValid);
 
-  bool get isReturnQuantityValid => !allItemDetails.any(
+  bool get isReturnQuantityValid => !validItemDetails.any(
         (details) =>
             details.returnQuantity.getIntValue >
-            getReturnMaterial(details.itemNumber)
-                .balanceQuantity
-                .getOrDefaultValue(0),
+            details.balanceQty.getOrDefaultValue(0),
       );
 
   List<ReturnItemDetails> get allItemDetails =>
       invoiceDetails.expand((e) => e.returnItemDetailsList).toList();
+
+  List<ReturnItemDetails> get validItemDetails =>
+      invoiceDetails.expand((e) => e.validReturnItemDetailsList).toList();
+
+  List<InvoiceDetails> get validInvoiceDetails => invoiceDetails
+      .map(
+        (e) => e.copyWith(returnItemDetailsList: e.validReturnItemDetailsList),
+      )
+      .toList();
 
   ReturnItemDetails getReturnItemDetails(String uuid) =>
       allItemDetails.firstWhere(

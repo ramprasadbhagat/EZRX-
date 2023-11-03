@@ -7,6 +7,7 @@ class ReturnRequestQuery {
           material
           materialDescription
           balanceQuantity
+          targetQuantity
           batch
           eligibleForReturn
           priceDate

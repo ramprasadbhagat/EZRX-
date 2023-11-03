@@ -29,6 +29,7 @@ mixin _$ReturnItemDetails {
   bool get outsidePolicy => throw _privateConstructorUsedError;
   CounterOfferValue get priceOverride => throw _privateConstructorUsedError;
   String get returnReason => throw _privateConstructorUsedError;
+  IntegerValue get balanceQty => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnItemDetailsCopyWith<ReturnItemDetails> get copyWith =>
@@ -53,7 +54,8 @@ abstract class $ReturnItemDetailsCopyWith<$Res> {
       Remarks remarks,
       bool outsidePolicy,
       CounterOfferValue priceOverride,
-      String returnReason});
+      String returnReason,
+      IntegerValue balanceQty});
 
   $UsageCopyWith<$Res> get usage;
 }
@@ -83,6 +85,7 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
     Object? outsidePolicy = null,
     Object? priceOverride = null,
     Object? returnReason = null,
+    Object? balanceQty = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -133,6 +136,10 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
           ? _value.returnReason
           : returnReason // ignore: cast_nullable_to_non_nullable
               as String,
+      balanceQty: null == balanceQty
+          ? _value.balanceQty
+          : balanceQty // ignore: cast_nullable_to_non_nullable
+              as IntegerValue,
     ) as $Val);
   }
 
@@ -165,7 +172,8 @@ abstract class _$$_ReturnItemDetailsCopyWith<$Res>
       Remarks remarks,
       bool outsidePolicy,
       CounterOfferValue priceOverride,
-      String returnReason});
+      String returnReason,
+      IntegerValue balanceQty});
 
   @override
   $UsageCopyWith<$Res> get usage;
@@ -194,6 +202,7 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
     Object? outsidePolicy = null,
     Object? priceOverride = null,
     Object? returnReason = null,
+    Object? balanceQty = null,
   }) {
     return _then(_$_ReturnItemDetails(
       materialNumber: null == materialNumber
@@ -244,6 +253,10 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
           ? _value.returnReason
           : returnReason // ignore: cast_nullable_to_non_nullable
               as String,
+      balanceQty: null == balanceQty
+          ? _value.balanceQty
+          : balanceQty // ignore: cast_nullable_to_non_nullable
+              as IntegerValue,
     ));
   }
 }
@@ -263,7 +276,8 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
       required this.remarks,
       required this.outsidePolicy,
       required this.priceOverride,
-      required this.returnReason})
+      required this.returnReason,
+      required this.balanceQty})
       : _uploadedFiles = uploadedFiles,
         super._();
 
@@ -297,10 +311,12 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
   final CounterOfferValue priceOverride;
   @override
   final String returnReason;
+  @override
+  final IntegerValue balanceQty;
 
   @override
   String toString() {
-    return 'ReturnItemDetails(materialNumber: $materialNumber, itemNumber: $itemNumber, assignmentNumber: $assignmentNumber, batch: $batch, returnQuantity: $returnQuantity, unitPrice: $unitPrice, usage: $usage, uploadedFiles: $uploadedFiles, remarks: $remarks, outsidePolicy: $outsidePolicy, priceOverride: $priceOverride, returnReason: $returnReason)';
+    return 'ReturnItemDetails(materialNumber: $materialNumber, itemNumber: $itemNumber, assignmentNumber: $assignmentNumber, batch: $batch, returnQuantity: $returnQuantity, unitPrice: $unitPrice, usage: $usage, uploadedFiles: $uploadedFiles, remarks: $remarks, outsidePolicy: $outsidePolicy, priceOverride: $priceOverride, returnReason: $returnReason, balanceQty: $balanceQty)';
   }
 
   @override
@@ -328,7 +344,9 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
             (identical(other.priceOverride, priceOverride) ||
                 other.priceOverride == priceOverride) &&
             (identical(other.returnReason, returnReason) ||
-                other.returnReason == returnReason));
+                other.returnReason == returnReason) &&
+            (identical(other.balanceQty, balanceQty) ||
+                other.balanceQty == balanceQty));
   }
 
   @override
@@ -345,7 +363,8 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
       remarks,
       outsidePolicy,
       priceOverride,
-      returnReason);
+      returnReason,
+      balanceQty);
 
   @JsonKey(ignore: true)
   @override
@@ -368,7 +387,8 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
       required final Remarks remarks,
       required final bool outsidePolicy,
       required final CounterOfferValue priceOverride,
-      required final String returnReason}) = _$_ReturnItemDetails;
+      required final String returnReason,
+      required final IntegerValue balanceQty}) = _$_ReturnItemDetails;
   const _ReturnItemDetails._() : super._();
 
   @override
@@ -395,6 +415,8 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
   CounterOfferValue get priceOverride;
   @override
   String get returnReason;
+  @override
+  IntegerValue get balanceQty;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnItemDetailsCopyWith<_$_ReturnItemDetails> get copyWith =>

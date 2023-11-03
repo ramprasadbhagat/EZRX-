@@ -50,6 +50,8 @@ mixin _$ReturnMaterialDto {
   List<ReturnMaterialDto> get bonusItems => throw _privateConstructorUsedError;
   @JsonKey(name: 'outsidePolicy', defaultValue: false)
   bool get outsidePolicy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'targetQuantity', defaultValue: '')
+  String get targetQuantity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,35 +67,27 @@ abstract class $ReturnMaterialDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'balanceQuantity', defaultValue: '')
-          String balanceQuantity,
-      @JsonKey(name: 'unitPrice', defaultValue: '')
-          String unitPrice,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          String totalPrice,
-      @JsonKey(name: 'material', defaultValue: '')
-          String materialNumber,
+      String balanceQuantity,
+      @JsonKey(name: 'unitPrice', defaultValue: '') String unitPrice,
+      @JsonKey(name: 'totalPrice', defaultValue: '') String totalPrice,
+      @JsonKey(name: 'material', defaultValue: '') String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'itemNumber', defaultValue: '')
-          String itemNumber,
-      @JsonKey(name: 'batch', defaultValue: '')
-          String batch,
+      String materialDescription,
+      @JsonKey(name: 'itemNumber', defaultValue: '') String itemNumber,
+      @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'eligibleForReturn', defaultValue: false)
-          bool eligibleForReturn,
+      bool eligibleForReturn,
       @JsonKey(name: 'assignmentNumber', defaultValue: '')
-          String assignmentNumber,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-          String principalCode,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-          String expiryDate,
-      @JsonKey(name: 'priceDate', defaultValue: '')
-          String priceDate,
+      String assignmentNumber,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
+      @JsonKey(name: 'priceDate', defaultValue: '') String priceDate,
       @JsonKey(name: 'bonusItem', defaultValue: <ReturnMaterialDto>[])
-          List<ReturnMaterialDto> bonusItems,
-      @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          bool outsidePolicy});
+      List<ReturnMaterialDto> bonusItems,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
+      @JsonKey(name: 'targetQuantity', defaultValue: '')
+      String targetQuantity});
 }
 
 /// @nodoc
@@ -124,6 +118,7 @@ class _$ReturnMaterialDtoCopyWithImpl<$Res, $Val extends ReturnMaterialDto>
     Object? priceDate = null,
     Object? bonusItems = null,
     Object? outsidePolicy = null,
+    Object? targetQuantity = null,
   }) {
     return _then(_value.copyWith(
       balanceQuantity: null == balanceQuantity
@@ -186,6 +181,10 @@ class _$ReturnMaterialDtoCopyWithImpl<$Res, $Val extends ReturnMaterialDto>
           ? _value.outsidePolicy
           : outsidePolicy // ignore: cast_nullable_to_non_nullable
               as bool,
+      targetQuantity: null == targetQuantity
+          ? _value.targetQuantity
+          : targetQuantity // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -200,35 +199,27 @@ abstract class _$$_ReturnMaterialDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'balanceQuantity', defaultValue: '')
-          String balanceQuantity,
-      @JsonKey(name: 'unitPrice', defaultValue: '')
-          String unitPrice,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          String totalPrice,
-      @JsonKey(name: 'material', defaultValue: '')
-          String materialNumber,
+      String balanceQuantity,
+      @JsonKey(name: 'unitPrice', defaultValue: '') String unitPrice,
+      @JsonKey(name: 'totalPrice', defaultValue: '') String totalPrice,
+      @JsonKey(name: 'material', defaultValue: '') String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'itemNumber', defaultValue: '')
-          String itemNumber,
-      @JsonKey(name: 'batch', defaultValue: '')
-          String batch,
+      String materialDescription,
+      @JsonKey(name: 'itemNumber', defaultValue: '') String itemNumber,
+      @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'eligibleForReturn', defaultValue: false)
-          bool eligibleForReturn,
+      bool eligibleForReturn,
       @JsonKey(name: 'assignmentNumber', defaultValue: '')
-          String assignmentNumber,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-          String principalCode,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-          String expiryDate,
-      @JsonKey(name: 'priceDate', defaultValue: '')
-          String priceDate,
+      String assignmentNumber,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
+      @JsonKey(name: 'priceDate', defaultValue: '') String priceDate,
       @JsonKey(name: 'bonusItem', defaultValue: <ReturnMaterialDto>[])
-          List<ReturnMaterialDto> bonusItems,
-      @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          bool outsidePolicy});
+      List<ReturnMaterialDto> bonusItems,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
+      @JsonKey(name: 'targetQuantity', defaultValue: '')
+      String targetQuantity});
 }
 
 /// @nodoc
@@ -257,6 +248,7 @@ class __$$_ReturnMaterialDtoCopyWithImpl<$Res>
     Object? priceDate = null,
     Object? bonusItems = null,
     Object? outsidePolicy = null,
+    Object? targetQuantity = null,
   }) {
     return _then(_$_ReturnMaterialDto(
       balanceQuantity: null == balanceQuantity
@@ -319,6 +311,10 @@ class __$$_ReturnMaterialDtoCopyWithImpl<$Res>
           ? _value.outsidePolicy
           : outsidePolicy // ignore: cast_nullable_to_non_nullable
               as bool,
+      targetQuantity: null == targetQuantity
+          ? _value.targetQuantity
+          : targetQuantity // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -328,35 +324,30 @@ class __$$_ReturnMaterialDtoCopyWithImpl<$Res>
 class _$_ReturnMaterialDto extends _ReturnMaterialDto {
   const _$_ReturnMaterialDto(
       {@JsonKey(name: 'balanceQuantity', defaultValue: '')
-          required this.balanceQuantity,
-      @JsonKey(name: 'unitPrice', defaultValue: '')
-          required this.unitPrice,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          required this.totalPrice,
-      @JsonKey(name: 'material', defaultValue: '')
-          required this.materialNumber,
+      required this.balanceQuantity,
+      @JsonKey(name: 'unitPrice', defaultValue: '') required this.unitPrice,
+      @JsonKey(name: 'totalPrice', defaultValue: '') required this.totalPrice,
+      @JsonKey(name: 'material', defaultValue: '') required this.materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          required this.materialDescription,
-      @JsonKey(name: 'itemNumber', defaultValue: '')
-          required this.itemNumber,
-      @JsonKey(name: 'batch', defaultValue: '')
-          required this.batch,
+      required this.materialDescription,
+      @JsonKey(name: 'itemNumber', defaultValue: '') required this.itemNumber,
+      @JsonKey(name: 'batch', defaultValue: '') required this.batch,
       @JsonKey(name: 'eligibleForReturn', defaultValue: false)
-          required this.eligibleForReturn,
+      required this.eligibleForReturn,
       @JsonKey(name: 'assignmentNumber', defaultValue: '')
-          required this.assignmentNumber,
+      required this.assignmentNumber,
       @JsonKey(name: 'principalCode', defaultValue: '')
-          required this.principalCode,
+      required this.principalCode,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required this.principalName,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-          required this.expiryDate,
-      @JsonKey(name: 'priceDate', defaultValue: '')
-          required this.priceDate,
+      required this.principalName,
+      @JsonKey(name: 'expiryDate', defaultValue: '') required this.expiryDate,
+      @JsonKey(name: 'priceDate', defaultValue: '') required this.priceDate,
       @JsonKey(name: 'bonusItem', defaultValue: <ReturnMaterialDto>[])
-          required final List<ReturnMaterialDto> bonusItems,
+      required final List<ReturnMaterialDto> bonusItems,
       @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          required this.outsidePolicy})
+      required this.outsidePolicy,
+      @JsonKey(name: 'targetQuantity', defaultValue: '')
+      required this.targetQuantity})
       : _bonusItems = bonusItems,
         super._();
 
@@ -414,10 +405,13 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
   @override
   @JsonKey(name: 'outsidePolicy', defaultValue: false)
   final bool outsidePolicy;
+  @override
+  @JsonKey(name: 'targetQuantity', defaultValue: '')
+  final String targetQuantity;
 
   @override
   String toString() {
-    return 'ReturnMaterialDto(balanceQuantity: $balanceQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, bonusItems: $bonusItems, outsidePolicy: $outsidePolicy)';
+    return 'ReturnMaterialDto(balanceQuantity: $balanceQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, bonusItems: $bonusItems, outsidePolicy: $outsidePolicy, targetQuantity: $targetQuantity)';
   }
 
   @override
@@ -453,7 +447,9 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
             const DeepCollectionEquality()
                 .equals(other._bonusItems, _bonusItems) &&
             (identical(other.outsidePolicy, outsidePolicy) ||
-                other.outsidePolicy == outsidePolicy));
+                other.outsidePolicy == outsidePolicy) &&
+            (identical(other.targetQuantity, targetQuantity) ||
+                other.targetQuantity == targetQuantity));
   }
 
   @JsonKey(ignore: true)
@@ -474,7 +470,8 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
       expiryDate,
       priceDate,
       const DeepCollectionEquality().hash(_bonusItems),
-      outsidePolicy);
+      outsidePolicy,
+      targetQuantity);
 
   @JsonKey(ignore: true)
   @override
@@ -494,35 +491,36 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
 abstract class _ReturnMaterialDto extends ReturnMaterialDto {
   const factory _ReturnMaterialDto(
       {@JsonKey(name: 'balanceQuantity', defaultValue: '')
-          required final String balanceQuantity,
+      required final String balanceQuantity,
       @JsonKey(name: 'unitPrice', defaultValue: '')
-          required final String unitPrice,
+      required final String unitPrice,
       @JsonKey(name: 'totalPrice', defaultValue: '')
-          required final String totalPrice,
+      required final String totalPrice,
       @JsonKey(name: 'material', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          required final String materialDescription,
+      required final String materialDescription,
       @JsonKey(name: 'itemNumber', defaultValue: '')
-          required final String itemNumber,
-      @JsonKey(name: 'batch', defaultValue: '')
-          required final String batch,
+      required final String itemNumber,
+      @JsonKey(name: 'batch', defaultValue: '') required final String batch,
       @JsonKey(name: 'eligibleForReturn', defaultValue: false)
-          required final bool eligibleForReturn,
+      required final bool eligibleForReturn,
       @JsonKey(name: 'assignmentNumber', defaultValue: '')
-          required final String assignmentNumber,
+      required final String assignmentNumber,
       @JsonKey(name: 'principalCode', defaultValue: '')
-          required final String principalCode,
+      required final String principalCode,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required final String principalName,
+      required final String principalName,
       @JsonKey(name: 'expiryDate', defaultValue: '')
-          required final String expiryDate,
+      required final String expiryDate,
       @JsonKey(name: 'priceDate', defaultValue: '')
-          required final String priceDate,
+      required final String priceDate,
       @JsonKey(name: 'bonusItem', defaultValue: <ReturnMaterialDto>[])
-          required final List<ReturnMaterialDto> bonusItems,
+      required final List<ReturnMaterialDto> bonusItems,
       @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          required final bool outsidePolicy}) = _$_ReturnMaterialDto;
+      required final bool outsidePolicy,
+      @JsonKey(name: 'targetQuantity', defaultValue: '')
+      required final String targetQuantity}) = _$_ReturnMaterialDto;
   const _ReturnMaterialDto._() : super._();
 
   factory _ReturnMaterialDto.fromJson(Map<String, dynamic> json) =
@@ -573,6 +571,9 @@ abstract class _ReturnMaterialDto extends ReturnMaterialDto {
   @override
   @JsonKey(name: 'outsidePolicy', defaultValue: false)
   bool get outsidePolicy;
+  @override
+  @JsonKey(name: 'targetQuantity', defaultValue: '')
+  String get targetQuantity;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnMaterialDtoCopyWith<_$_ReturnMaterialDto> get copyWith =>

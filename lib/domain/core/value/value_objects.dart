@@ -210,6 +210,10 @@ class IntegerValue extends ValueObject<int> {
 
   String get apiParameterValue => emptyIfZero(value.getOrElse(() => 0));
 
+  String get stringValue => value.getOrElse(() => 0).toString();
+
+  bool get isGreaterThanZero => value.getOrElse(() => 0) > 0;
+
   const IntegerValue._(this.value);
 }
 

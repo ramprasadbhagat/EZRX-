@@ -24,6 +24,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
     required bool outsidePolicy,
     required CounterOfferValue priceOverride,
     required String returnReason,
+    required IntegerValue balanceQty,
   }) = _ReturnItemDetails;
 
   factory ReturnItemDetails.empty() => ReturnItemDetails(
@@ -39,6 +40,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
         outsidePolicy: false,
         priceOverride: CounterOfferValue(''),
         returnReason: '',
+        balanceQty: IntegerValue('0'),
       );
 
   String get uuid => '$assignmentNumber$itemNumber';

@@ -23,6 +23,8 @@ class _ReturnMaterialWidget extends StatelessWidget {
           margin: const EdgeInsets.only(top: 12),
           child: Column(
             children: [
+              if (!item.balanceQuantity.isGreaterThanZero)
+                const _ReturnRequestWarning(),
               if (item.outsidePolicy) const OutsideReturnPolicyTag(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +53,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
                 ],
               ),
               MaterialQuantityAndPrice(
-                quantity: item.balanceQuantity.getOrDefaultValue(0),
+                quantity: item.targetQuantity.getOrDefaultValue(0),
                 totalPrice: item.totalPrice.getOrDefaultValue(0),
                 key: WidgetKeys.newRequestStep2QuantityAndPrice,
               ),
@@ -60,11 +62,12 @@ class _ReturnMaterialWidget extends StatelessWidget {
                 data: item,
                 expandable: true,
               ),
-              _MaterialReturnDetailsSection(
-                key: WidgetKeys.materialReturnDetailsSection,
-                item: item,
-                detail: detail,
-              ),
+              if (item.balanceQuantity.isGreaterThanZero)
+                _MaterialReturnDetailsSection(
+                  key: WidgetKeys.materialReturnDetailsSection,
+                  item: item,
+                  detail: detail,
+                ),
               _BonusItemSection(
                 key: WidgetKeys.bonusItemSection,
                 items: item.bonusItems,
@@ -105,6 +108,31 @@ class _ReturnMaterialWidget extends StatelessWidget {
         title: 'Remove item?',
         content: 'This action cannot be undone',
         confirmButtonText: 'Remove',
+      ),
+    );
+  }
+}
+
+class _ReturnRequestWarning extends StatelessWidget {
+  const _ReturnRequestWarning({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(5),
+        ),
+        color: ZPColors.lightBorderYellow,
+      ),
+      child: Text(
+        context.tr(
+          'You cannot return this commercial item as there is no balance quantity.',
+        ),
+        style: Theme.of(context).textTheme.titleSmall,
       ),
     );
   }

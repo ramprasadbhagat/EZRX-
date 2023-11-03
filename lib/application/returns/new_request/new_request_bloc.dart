@@ -257,7 +257,7 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
 
         final failureOrSuccess = await newRequestRepository.addRequest(
           requestParams: AddRequestParams.empty().copyWith(
-            invoiceDetails: state.invoiceDetails,
+            invoiceDetails: state.validInvoiceDetails,
             orderSource: 'DSS',
             returnReference: state.returnReference,
             specialInstruction: state.specialInstructions,

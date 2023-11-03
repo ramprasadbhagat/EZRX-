@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ReturnMaterial {
   IntegerValue get balanceQuantity => throw _privateConstructorUsedError;
+  IntegerValue get targetQuantity => throw _privateConstructorUsedError;
   RangeValue get unitPrice => throw _privateConstructorUsedError;
   RangeValue get totalPrice => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $ReturnMaterialCopyWith<$Res> {
   @useResult
   $Res call(
       {IntegerValue balanceQuantity,
+      IntegerValue targetQuantity,
       RangeValue unitPrice,
       RangeValue totalPrice,
       MaterialNumber materialNumber,
@@ -75,6 +77,7 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
   @override
   $Res call({
     Object? balanceQuantity = null,
+    Object? targetQuantity = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
     Object? materialNumber = null,
@@ -94,6 +97,10 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
       balanceQuantity: null == balanceQuantity
           ? _value.balanceQuantity
           : balanceQuantity // ignore: cast_nullable_to_non_nullable
+              as IntegerValue,
+      targetQuantity: null == targetQuantity
+          ? _value.targetQuantity
+          : targetQuantity // ignore: cast_nullable_to_non_nullable
               as IntegerValue,
       unitPrice: null == unitPrice
           ? _value.unitPrice
@@ -165,6 +172,7 @@ abstract class _$$_ReturnMaterialCopyWith<$Res>
   @useResult
   $Res call(
       {IntegerValue balanceQuantity,
+      IntegerValue targetQuantity,
       RangeValue unitPrice,
       RangeValue totalPrice,
       MaterialNumber materialNumber,
@@ -193,6 +201,7 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
   @override
   $Res call({
     Object? balanceQuantity = null,
+    Object? targetQuantity = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
     Object? materialNumber = null,
@@ -212,6 +221,10 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
       balanceQuantity: null == balanceQuantity
           ? _value.balanceQuantity
           : balanceQuantity // ignore: cast_nullable_to_non_nullable
+              as IntegerValue,
+      targetQuantity: null == targetQuantity
+          ? _value.targetQuantity
+          : targetQuantity // ignore: cast_nullable_to_non_nullable
               as IntegerValue,
       unitPrice: null == unitPrice
           ? _value.unitPrice
@@ -278,6 +291,7 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
 class _$_ReturnMaterial extends _ReturnMaterial {
   const _$_ReturnMaterial(
       {required this.balanceQuantity,
+      required this.targetQuantity,
       required this.unitPrice,
       required this.totalPrice,
       required this.materialNumber,
@@ -297,6 +311,8 @@ class _$_ReturnMaterial extends _ReturnMaterial {
 
   @override
   final IntegerValue balanceQuantity;
+  @override
+  final IntegerValue targetQuantity;
   @override
   final RangeValue unitPrice;
   @override
@@ -333,7 +349,7 @@ class _$_ReturnMaterial extends _ReturnMaterial {
 
   @override
   String toString() {
-    return 'ReturnMaterial(balanceQuantity: $balanceQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, outsidePolicy: $outsidePolicy, bonusItems: $bonusItems)';
+    return 'ReturnMaterial(balanceQuantity: $balanceQuantity, targetQuantity: $targetQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, outsidePolicy: $outsidePolicy, bonusItems: $bonusItems)';
   }
 
   @override
@@ -343,6 +359,8 @@ class _$_ReturnMaterial extends _ReturnMaterial {
             other is _$_ReturnMaterial &&
             (identical(other.balanceQuantity, balanceQuantity) ||
                 other.balanceQuantity == balanceQuantity) &&
+            (identical(other.targetQuantity, targetQuantity) ||
+                other.targetQuantity == targetQuantity) &&
             (identical(other.unitPrice, unitPrice) ||
                 other.unitPrice == unitPrice) &&
             (identical(other.totalPrice, totalPrice) ||
@@ -376,6 +394,7 @@ class _$_ReturnMaterial extends _ReturnMaterial {
   int get hashCode => Object.hash(
       runtimeType,
       balanceQuantity,
+      targetQuantity,
       unitPrice,
       totalPrice,
       materialNumber,
@@ -401,6 +420,7 @@ class _$_ReturnMaterial extends _ReturnMaterial {
 abstract class _ReturnMaterial extends ReturnMaterial {
   const factory _ReturnMaterial(
       {required final IntegerValue balanceQuantity,
+      required final IntegerValue targetQuantity,
       required final RangeValue unitPrice,
       required final RangeValue totalPrice,
       required final MaterialNumber materialNumber,
@@ -419,6 +439,8 @@ abstract class _ReturnMaterial extends ReturnMaterial {
 
   @override
   IntegerValue get balanceQuantity;
+  @override
+  IntegerValue get targetQuantity;
   @override
   RangeValue get unitPrice;
   @override

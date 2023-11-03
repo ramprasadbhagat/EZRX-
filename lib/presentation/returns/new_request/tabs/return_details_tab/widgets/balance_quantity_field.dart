@@ -19,7 +19,7 @@ class BalanceQuantityField extends StatelessWidget {
       fieldKey: WidgetKeys.returnBalanceQuantityField(data.uuid),
       labelText: context.tr('Balance quantity'),
       onChanged: (value) {},
-      initValue: data.balanceQuantity.apiParameterValue,
+      initValue: data.balanceQuantity.stringValue,
       isEnabled: false,
       decoration: const InputDecoration(
         fillColor: ZPColors.inputBorderColor,

@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
 import 'package:ezrxmobile/presentation/core/regexes.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/widgets/bonus_material_return_widget.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_return_info.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/upload_file_list.dart';
 import 'package:flutter/material.dart';
@@ -52,13 +53,26 @@ class ReturnReviewTab extends StatelessWidget {
                 const SpecialInstructionsField(),
                 ...state.selectedItems
                     .map(
-                      (item) => _ReturnMaterialWidget(
-                        key: WidgetKeys.genericKey(
-                          key:
-                              'selectedItem#${state.selectedItems.indexOf(item)}',
-                        ),
-                        item: item,
-                      ),
+                      (item) => item.balanceQuantity.isGreaterThanZero
+                          ? _ReturnMaterialWidget(
+                              key: WidgetKeys.genericKey(
+                                key:
+                                    'selectedItem#${state.selectedItems.indexOf(item)}',
+                              ),
+                              item: item,
+                            )
+                          : Column(
+                              children: state
+                                  .getReturnBonusItemsOfMainItem(item)
+                                  .map(
+                                    (item) => BonusMaterialReturnWidget(
+                                      returnMaterial: item,
+                                      returnItemDetail:
+                                          state.getReturnItemDetails(item.uuid),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
                     )
                     .toList(),
               ],

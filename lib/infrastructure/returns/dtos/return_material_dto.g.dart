@@ -27,6 +27,7 @@ _$_ReturnMaterialDto _$$_ReturnMaterialDtoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       outsidePolicy: json['outsidePolicy'] as bool? ?? false,
+      targetQuantity: json['targetQuantity'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ReturnMaterialDtoToJson(
@@ -47,4 +48,5 @@ Map<String, dynamic> _$$_ReturnMaterialDtoToJson(
       'priceDate': instance.priceDate,
       'bonusItem': instance.bonusItems.map((e) => e.toJson()).toList(),
       'outsidePolicy': instance.outsidePolicy,
+      'targetQuantity': instance.targetQuantity,
     };

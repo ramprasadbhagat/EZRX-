@@ -13,63 +13,25 @@ class _ReturnMaterialWidget extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(top: 12),
-          child: data.eligibleForReturn
-              ? EdgeCheckbox(
-                  onChanged: (bool value) {
-                    context.read<NewRequestBloc>().add(
-                          NewRequestEvent.toggleReturnItem(
-                            selected: value,
-                            item: data,
-                          ),
-                        );
-                    context.read<NewRequestBloc>().add(
-                          const NewRequestEvent.validateStep(
-                            step: 1,
-                          ),
-                        );
-                  },
-                  value: state.selectedItems.contains(data),
-                  body: _ReturnMaterialInfo(data: data),
-                )
-              : _DisabledBox(
-                  child: _ReturnMaterialInfo(data: data),
-                  onTap: () {
-                    CustomSnackBar(
-                      icon: const Icon(
-                        Icons.warning,
-                        color: ZPColors.warning,
-                      ),
-                      backgroundColor: ZPColors.warning,
-                      messageText: 'Material is not eligible for return'.tr(),
-                    ).show(context);
-                  },
-                ),
+          child: EdgeCheckbox(
+            onChanged: (bool value) {
+              context.read<NewRequestBloc>().add(
+                    NewRequestEvent.toggleReturnItem(
+                      selected: value,
+                      item: data,
+                    ),
+                  );
+              context.read<NewRequestBloc>().add(
+                    const NewRequestEvent.validateStep(
+                      step: 1,
+                    ),
+                  );
+            },
+            value: state.selectedItems.contains(data),
+            body: _ReturnMaterialInfo(data: data),
+          ),
         );
       },
-    );
-  }
-}
-
-class _DisabledBox extends StatelessWidget {
-  const _DisabledBox({
-    Key? key,
-    required this.child,
-    required this.onTap,
-  }) : super(key: key);
-  final Widget child;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: ColorFiltered(
-        colorFilter: const ColorFilter.mode(
-          ZPColors.translucentWhite,
-          BlendMode.dstATop,
-        ),
-        child: child,
-      ),
     );
   }
 }

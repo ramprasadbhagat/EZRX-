@@ -20,4 +20,9 @@ class InvoiceDetails with _$InvoiceDetails {
         salesOrg: SalesOrg(''),
         returnItemDetailsList: <ReturnItemDetails>[],
       );
+
+  List<ReturnItemDetails> get validReturnItemDetailsList =>
+      returnItemDetailsList
+          .where((element) => element.balanceQty.isGreaterThanZero)
+          .toList();
 }

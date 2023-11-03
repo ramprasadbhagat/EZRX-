@@ -11,6 +11,7 @@ class ReturnMaterial with _$ReturnMaterial {
 
   const factory ReturnMaterial({
     required IntegerValue balanceQuantity,
+    required IntegerValue targetQuantity,
     required RangeValue unitPrice,
     required RangeValue totalPrice,
     required MaterialNumber materialNumber,
@@ -29,6 +30,7 @@ class ReturnMaterial with _$ReturnMaterial {
 
   factory ReturnMaterial.empty() => ReturnMaterial(
         balanceQuantity: IntegerValue(''),
+        targetQuantity: IntegerValue(''),
         unitPrice: RangeValue(''),
         totalPrice: RangeValue(''),
         materialNumber: MaterialNumber(''),
@@ -54,5 +56,6 @@ class ReturnMaterial with _$ReturnMaterial {
         assignmentNumber: assignmentNumber,
         batch: batch,
         unitPrice: unitPrice,
+        balanceQty: balanceQuantity,
       );
 }

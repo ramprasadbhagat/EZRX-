@@ -32,7 +32,7 @@ class _ReturnMaterialInfo extends StatelessWidget {
             ],
           ),
           MaterialQuantityAndPrice(
-            quantity: data.balanceQuantity.getOrDefaultValue(0),
+            quantity: data.targetQuantity.getOrDefaultValue(0),
             totalPrice: data.totalPrice.getOrDefaultValue(0),
           ),
           ExpandableSection(

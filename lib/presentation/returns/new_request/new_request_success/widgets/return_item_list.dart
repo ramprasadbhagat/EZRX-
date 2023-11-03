@@ -23,10 +23,24 @@ class _ReturnItemList extends StatelessWidget {
               const SizedBox(height: 12),
               ...state.selectedItems
                   .map(
-                    (e) => _ReturnItem(
-                      returnMaterial: e,
-                      returnItemDetail: state.getReturnItemDetails(e.uuid),
-                    ),
+                    (e) => e.balanceQuantity.isGreaterThanZero
+                        ? _ReturnItem(
+                            returnMaterial: e,
+                            returnItemDetail:
+                                state.getReturnItemDetails(e.uuid),
+                          )
+                        : Column(
+                            children: state
+                                .getReturnBonusItemsOfMainItem(e)
+                                .map(
+                                  (item) => BonusMaterialReturnWidget(
+                                    returnMaterial: item,
+                                    returnItemDetail:
+                                        state.getReturnItemDetails(item.uuid),
+                                  ),
+                                )
+                                .toList(),
+                          ),
                   )
                   .toList(),
             ],
