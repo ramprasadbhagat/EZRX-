@@ -21,7 +21,9 @@ class BundleAddToCartState with _$BundleAddToCartState {
   BundleInfo get bundleOffer =>
       bundle.bundle.sortedBundleInformation.reversed.firstWhere(
         (element) => element.quantity <= totalCount,
-        orElse: () => bundle.bundle.sortedBundleInformation.first,
+        orElse: () =>
+            bundle.bundle.sortedBundleInformation.firstOrNull ??
+            BundleInfo.empty(),
       );
 
   List<MaterialInfo> get bundleMaterialsSelected => bundleMaterials
