@@ -6,20 +6,27 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
+import '../../../utils/widget_utils.dart';
+
 class MockHTTPService extends Mock implements HttpService {}
+
+class MixpanelServiceMock extends Mock implements MixpanelService {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -45,9 +52,14 @@ class MockMaterialFilterBloc
     extends MockBloc<MaterialFilterEvent, MaterialFilterState>
     implements MaterialFilterBloc {}
 
+class MockProductSearchBloc
+    extends MockBloc<ProductSearchEvent, ProductSearchState>
+    implements ProductSearchBloc {}
+
 void main() {
   late GetIt locator;
   late HttpService mockHTTPService;
+  late MixpanelService mixpanelServiceMock;
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AuthBloc authBlocMock;
@@ -55,13 +67,16 @@ void main() {
   late MaterialListBloc materialListBloc;
   late EligibilityBlocMock eligibilityBlocMock;
   late MaterialFilterBloc materialfilterBlocMock;
+  late ProductSearchBloc productSearchBlocMock;
+  late AppRouter autoRouterMock;
+  const fakeKeyword = 'Test Keyword';
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     WidgetsFlutterBinding.ensureInitialized();
     locator = GetIt.instance;
     locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
+      () => mixpanelServiceMock,
     );
 
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -70,31 +85,33 @@ void main() {
     locator.registerLazySingleton<HttpService>(
       () => mockHTTPService,
     );
+    mixpanelServiceMock = MixpanelServiceMock();
+    userBlocMock = UserBlocMock();
+    salesOrgBlocMock = SalesOrgBlocMock();
+    authBlocMock = AuthBlocMock();
+    customerCodeBlocMock = CustomerCodeBlocMock();
+    materialListBloc = MaterialListBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
+    materialfilterBlocMock = MockMaterialFilterBloc();
+    productSearchBlocMock = MockProductSearchBloc();
+    autoRouterMock = locator<AppRouter>();
+
+    when(() => userBlocMock.state).thenReturn(UserState.initial());
+    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => customerCodeBlocMock.state)
+        .thenReturn(CustomerCodeState.initial());
+    when(() => materialListBloc.state).thenReturn(MaterialListState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
+    when(() => materialfilterBlocMock.state)
+        .thenReturn(MaterialFilterState.initial());
+
+    when(() => productSearchBlocMock.state)
+        .thenReturn(ProductSearchState.initial());
   });
 
   group('Banner Tile', () {
-    setUp(() {
-      userBlocMock = UserBlocMock();
-      salesOrgBlocMock = SalesOrgBlocMock();
-      authBlocMock = AuthBlocMock();
-      customerCodeBlocMock = CustomerCodeBlocMock();
-      materialListBloc = MaterialListBlocMock();
-      eligibilityBlocMock = EligibilityBlocMock();
-      materialfilterBlocMock = MockMaterialFilterBloc();
-
-      when(() => userBlocMock.state).thenReturn(UserState.initial());
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-      when(() => customerCodeBlocMock.state)
-          .thenReturn(CustomerCodeState.initial());
-      when(() => materialListBloc.state)
-          .thenReturn(MaterialListState.initial());
-      when(() => eligibilityBlocMock.state)
-          .thenReturn(EligibilityState.initial());
-      when(() => materialfilterBlocMock.state)
-          .thenReturn(MaterialFilterState.initial());
-    });
-
     Widget getWUT() {
       final banner = EZReachBanner.empty().copyWith(
         id: '1',
@@ -102,12 +119,18 @@ void main() {
         url: 'https://test.com/banner.jpg',
         urlLink: 'https://test.com',
         isKeyword: true,
-        keyword: 'Test Keyword',
+        keyword: fakeKeyword,
       );
       final bannerTile = CarouselBannerTile(banner: banner, bannerPosition: 1);
-      return MaterialApp(
-        home: Scaffold(
-          body: bannerTile,
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<ProductSearchBloc>(
+            create: (context) => productSearchBlocMock,
+          ),
+        ],
+        child: Material(
+          child: bannerTile,
         ),
       );
     }
@@ -143,6 +166,23 @@ void main() {
       expect(find.text('Test Banner'), findsNothing);
       expect(find.byType(CachedNetworkImage), findsOneWidget);
       expect(find.byType(LoadingShimmer), findsOneWidget);
+    });
+
+    testWidgets('Tap on banner and search keyword', (tester) async {
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      final bannerTile = find.byType(CarouselBannerTile);
+      await tester.tap(bannerTile);
+      verify(
+        () => productSearchBlocMock.add(
+          ProductSearchEvent.searchProduct(
+            searchKey: SearchKey.search(
+              fakeKeyword,
+            ),
+          ),
+        ),
+      ).called(1);
+      expect(autoRouterMock.current.path, 'product_suggestion_page');
     });
   });
 }

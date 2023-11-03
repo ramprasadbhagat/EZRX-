@@ -48,6 +48,7 @@ class EZReachBannerDto with _$EZReachBannerDto {
       isCustomer: customers,
       keyword: keyWord,
       isEZRXBanner: false,
+      isKeyword: websiteUrl.isEmpty && keyWord.isNotEmpty,
     );
   }
 

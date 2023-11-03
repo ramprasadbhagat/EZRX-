@@ -310,11 +310,6 @@ void main() {
           );
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
-          verify(
-            () => productSearchBlocMock.add(
-              const ProductSearchEvent.clearSearch(),
-            ),
-          ).called(1);
           await tester.fling(
             find.byKey(WidgetKeys.productSearchSuggestion),
             const Offset(0.0, 150.0),
@@ -332,6 +327,27 @@ void main() {
           ).called(1);
         },
       );
+
+      testWidgets('=> Test Product Suggestion Section Dispose', (tester) async {
+        when(() => productSearchBlocMock.state).thenReturn(
+          ProductSearchState.initial().copyWith(
+            searchKey: SearchKey.search(fakeSearchText),
+            suggestedProductList: List<MaterialInfo>.generate(
+              10,
+              (i) => MaterialInfo.empty(),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        await tester.pumpWidget(Container());
+        await tester.pumpAndSettle();
+        verify(
+          () => productSearchBlocMock.add(
+            const ProductSearchEvent.clearSearch(),
+          ),
+        ).called(1);
+      });
 
       testWidgets(
         '=> Test Product Suggestion Section Load More',

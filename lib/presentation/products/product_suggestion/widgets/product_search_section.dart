@@ -1,6 +1,6 @@
 part of 'package:ezrxmobile/presentation/products/product_suggestion/product_suggestion_page.dart';
 
-class _ProductSearchSection extends StatelessWidget {
+class _ProductSearchSection extends StatefulWidget {
   final String parentRoute;
 
   const _ProductSearchSection({
@@ -9,11 +9,27 @@ class _ProductSearchSection extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    context.read<ProductSearchBloc>().add(
-          const ProductSearchEvent.clearSearch(),
-        );
+  State<_ProductSearchSection> createState() => _ProductSearchSectionState();
+}
 
+class _ProductSearchSectionState extends State<_ProductSearchSection> {
+  late ProductSearchBloc _productSearchBloc;
+  @override
+  void initState() {
+    super.initState();
+    _productSearchBloc = context.read<ProductSearchBloc>();
+  }
+
+  @override
+  void dispose() {
+    _productSearchBloc.add(
+      const ProductSearchEvent.clearSearch(),
+    );
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<ProductSearchBloc, ProductSearchState>(
       buildWhen: (previous, current) =>
           previous.isSearching != current.isSearching ||
@@ -87,7 +103,7 @@ class _ProductSearchSection extends StatelessWidget {
       props: {
         MixpanelProps.searchKeyword: keyword,
         MixpanelProps.searchFrom:
-            RouterUtils.buildRouteTrackingName(parentRoute),
+            RouterUtils.buildRouteTrackingName(widget.parentRoute),
       },
     );
   }
