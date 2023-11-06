@@ -56,28 +56,27 @@ abstract class $BankBeneficiaryDtoCopyWith<$Res> {
       _$BankBeneficiaryDtoCopyWithImpl<$Res, BankBeneficiaryDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          String salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
       @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
-          String bankAccount,
+      String bankAccount,
       @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
-          String bankAddress,
+      String bankAddress,
       @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
-          String bankCode,
+      String bankCode,
       @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
-          String bankName,
+      String bankName,
       @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
-          String beneficiaryName,
+      String beneficiaryName,
       @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
-          String branch,
+      String branch,
       @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
-          String emailId,
+      String emailId,
       @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
-          String hdbcSwiftCode,
+      String hdbcSwiftCode,
       @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
-          String payNowUen,
+      String payNowUen,
       @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
-          String salesDistrict});
+      String salesDistrict});
 }
 
 /// @nodoc
@@ -163,28 +162,27 @@ abstract class _$$_BankBeneficiaryDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          String salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
       @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
-          String bankAccount,
+      String bankAccount,
       @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
-          String bankAddress,
+      String bankAddress,
       @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
-          String bankCode,
+      String bankCode,
       @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
-          String bankName,
+      String bankName,
       @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
-          String beneficiaryName,
+      String beneficiaryName,
       @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
-          String branch,
+      String branch,
       @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
-          String emailId,
+      String emailId,
       @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
-          String hdbcSwiftCode,
+      String hdbcSwiftCode,
       @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
-          String payNowUen,
+      String payNowUen,
       @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
-          String salesDistrict});
+      String salesDistrict});
 }
 
 /// @nodoc
@@ -263,28 +261,27 @@ class __$$_BankBeneficiaryDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BankBeneficiaryDto extends _BankBeneficiaryDto {
   const _$_BankBeneficiaryDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required this.salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
-          required this.bankAccount,
+      required this.bankAccount,
       @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
-          required this.bankAddress,
+      required this.bankAddress,
       @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
-          required this.bankCode,
+      required this.bankCode,
       @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
-          required this.bankName,
+      required this.bankName,
       @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
-          required this.beneficiaryName,
+      required this.beneficiaryName,
       @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
-          required this.branch,
+      required this.branch,
       @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
-          required this.emailId,
+      required this.emailId,
       @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
-          required this.hdbcSwiftCode,
+      required this.hdbcSwiftCode,
       @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
-          required this.payNowUen,
+      required this.payNowUen,
       @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
-          required this.salesDistrict})
+      required this.salesDistrict})
       : super._();
 
   factory _$_BankBeneficiaryDto.fromJson(Map<String, dynamic> json) =>
@@ -390,27 +387,27 @@ class _$_BankBeneficiaryDto extends _BankBeneficiaryDto {
 abstract class _BankBeneficiaryDto extends BankBeneficiaryDto {
   const factory _BankBeneficiaryDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
-          required final String bankAccount,
+      required final String bankAccount,
       @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
-          required final String bankAddress,
+      required final String bankAddress,
       @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
-          required final String bankCode,
+      required final String bankCode,
       @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
-          required final String bankName,
+      required final String bankName,
       @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
-          required final String beneficiaryName,
+      required final String beneficiaryName,
       @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
-          required final String branch,
+      required final String branch,
       @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
-          required final String emailId,
+      required final String emailId,
       @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
-          required final String hdbcSwiftCode,
+      required final String hdbcSwiftCode,
       @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
-          required final String payNowUen,
+      required final String payNowUen,
       @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
-          required final String salesDistrict}) = _$_BankBeneficiaryDto;
+      required final String salesDistrict}) = _$_BankBeneficiaryDto;
   const _BankBeneficiaryDto._() : super._();
 
   factory _BankBeneficiaryDto.fromJson(Map<String, dynamic> json) =

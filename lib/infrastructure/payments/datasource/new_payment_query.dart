@@ -103,15 +103,17 @@ class NewPaymentQuery {
         paymentMethod
         customerName
         payer
-        beneficiaryName
-        bankName
-        branch
-        bankCode
-        bankAccount
-        hdbcSwiftCode
-        bankAddress
-        payNowUen
-        emailId
+        bankBeneficiary {
+         beneficiaryName
+         bankName
+         branch
+         bankCode
+         bankAccount
+         hdbcSwiftCode
+         bankAddress
+         payNowUen
+         emailId
+        }
         qrCode
         paymentBatchAdditionalInfo
         paymentItems {

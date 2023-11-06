@@ -1,39 +1,54 @@
 {
   "data":{
-    "paymentInvoicePdf":{
-      "valueDate":"2023-09-21",
-      "paymentID":"2        3",
-      "zzAdvice":"09EZ230000977801",
-      "paymentDue":"MYR 480.900000",
-      "paymentMethod":"Payment Gateway",
-      "customerName":"rootadmin",
-      "payer":"0000101215",
-      "beneficiaryName":null,
-      "bankName":null,
-      "branch":null,
-      "bankCode":null,
-      "bankAccount":null,
-      "hdbcSwiftCode":null,
-      "bankAddress":null,
-      "payNowUen":null,
-      "emailId":null,
-      "qrCode":"",
-      "paymentBatchAdditionalInfo":"23C2DF54DCD7876",
-      "paymentItems":[
+    "paymentInvoicePdf": {
+      "valueDate": "2023-11-03",
+      "paymentID": "2        9",
+      "zzAdvice": "09EZ230001312201",
+      "paymentDue": "PHP 3.290000",
+      "paymentMethod": "Bank-In",
+      "customerName": "rootadmin rootadmin",
+      "payer": "0000100294",
+      "bankBeneficiary": [
         {
-          "postingKeyName":"Invoice",
-          "accountingDocument":"0180000087",
-          "documentDate":"2021-09-03T00:00:00Z",
-          "transactionCurrency":"MYR",
-          "paymentAmountInDisplayCrcy":24845.34,
-          "documentReferenceID":"JUS DC 20210903"
+          "beneficiaryName": "HSBC FAO Zuellig Pharma Corporation",
+          "bankName": "Banco de Oro",
+          "branch": null,
+          "bankCode": null,
+          "bankAccount": "0006-6108-0676",
+          "hdbcSwiftCode": null,
+          "bankAddress": null,
+          "payNowUen": null,
+          "emailId": null
+        },
+        {
+          "beneficiaryName": "HSBC FAO Zuellig Pharma Corporation",
+          "bankName": "Bank of the Philippine Island",
+          "branch": null,
+          "bankCode": null,
+          "bankAccount": "1623-0304-54",
+          "hdbcSwiftCode": null,
+          "bankAddress": null,
+          "payNowUen": null,
+          "emailId": null
         }
       ],
-      "salesDistrict":"",
-      "footer":"Zuellig Pharma Sdn Bhd. All rights reserved. This document is automatically generated.",
-      "headerLogoPath":"https://zpdigitalproducts.blob.core.windows.net/ezrx/prod/ezpay/payment_advice_165320554711111.png",
-      "pleaseNote":"\u003cul\u003e\r\n \u003cli\u003eIf you encountered an error with the payment, delete the system-generated payment advice in the eZRx+ Payment Summary, regenerate a new payment advice by repeating the payment process.\u003c/li\u003e\r\n \u003cli\u003eWe are retrieving your payment status from the bank. It may take up to 3 hours for the new payment status to be reflected on eZRx.\u003c/li\u003e\r\n \u003cli\u003ePayment is only valid when the Payment Due amount is reflected in Zuellig Pharma’s bank account, which will be updated in our monthly statement.\u003c/li\u003e\r\n \u003cli\u003ePlease note that system-generated payment advice(s) will be automatically deleted if payment is not received before expier day (30 days).\u003c/li\u003e\r\n\u003c/ul\u003e",
-      "header":""
+      "qrCode": "",
+      "paymentBatchAdditionalInfo": "23C5C466E9364F6",
+      "paymentItems": [
+        {
+          "postingKeyName": "Other receivables",
+          "accountingDocument": "0040071656",
+          "documentDate": "2012-09-26T00:00:00Z",
+          "transactionCurrency": "PHP",
+          "paymentAmountInDisplayCrcy": 3.29,
+          "documentReferenceID": "1209-10-12IV0593"
+        }
+      ],
+      "salesDistrict": "",
+      "footer": null,
+      "headerLogoPath": null,
+      "pleaseNote": null,
+      "header": null
     }
   }
 }

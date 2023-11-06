@@ -16,15 +16,11 @@ _$_PaymentInvoiceInfoPdfDto _$$_PaymentInvoiceInfoPdfDtoFromJson(
       paymentMethod: json['paymentMethod'] as String? ?? '',
       customerName: json['customerName'] as String? ?? '',
       payer: json['payer'] as String? ?? '',
-      beneficiaryName: json['beneficiaryName'] as String? ?? '',
-      bankName: json['bankName'] as String? ?? '',
-      branch: json['branch'] as String? ?? '',
-      bankCode: json['bankCode'] as String? ?? '',
-      bankAccount: json['bankAccount'] as String? ?? '',
-      hdbcSwiftCode: json['hdbcSwiftCode'] as String? ?? '',
-      bankAddress: json['bankAddress'] as String? ?? '',
-      payNowUen: json['payNowUen'] as String? ?? '',
-      emailId: json['emailId'] as String? ?? '',
+      bankBeneficiary: (json['bankBeneficiary'] as List<dynamic>?)
+              ?.map((e) =>
+                  BankBeneficiaryInvoiceDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       qrCode: json['qrCode'] as String? ?? '',
       paymentBatchAdditionalInfo:
           json['paymentBatchAdditionalInfo'] as String? ?? '',
@@ -49,15 +45,8 @@ Map<String, dynamic> _$$_PaymentInvoiceInfoPdfDtoToJson(
       'paymentMethod': instance.paymentMethod,
       'customerName': instance.customerName,
       'payer': instance.payer,
-      'beneficiaryName': instance.beneficiaryName,
-      'bankName': instance.bankName,
-      'branch': instance.branch,
-      'bankCode': instance.bankCode,
-      'bankAccount': instance.bankAccount,
-      'hdbcSwiftCode': instance.hdbcSwiftCode,
-      'bankAddress': instance.bankAddress,
-      'payNowUen': instance.payNowUen,
-      'emailId': instance.emailId,
+      'bankBeneficiary':
+          instance.bankBeneficiary.map((e) => e.toJson()).toList(),
       'qrCode': instance.qrCode,
       'paymentBatchAdditionalInfo': instance.paymentBatchAdditionalInfo,
       'paymentItems': instance.paymentItems.map((e) => e.toJson()).toList(),

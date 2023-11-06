@@ -25,6 +25,7 @@ class BankBeneficiary with _$BankBeneficiary {
     required bool isDeleteInProgress,
   }) = _BankBeneficiary;
 
+
   factory BankBeneficiary.empty() => BankBeneficiary(
         key: 0,
         salesOrg: SalesOrg(''),

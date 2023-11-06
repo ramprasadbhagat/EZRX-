@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,15 +18,7 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
     required String paymentMethod,
     required String customerName,
     required String payer,
-    required String beneficiaryName,
-    required String bankName,
-    required String branch,
-    required String bankCode,
-    required String bankAccount,
-    required String hdbcSwiftCode,
-    required String bankAddress,
-    required String payNowUen,
-    required String emailId,
+    required List<BankBeneficiary> bankBeneficiary,
     required String qrCode,
     required String paymentBatchAdditionalInfo,
     required List<PaymentItem> paymentItems,
@@ -43,15 +37,7 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
         paymentMethod: '',
         customerName: '',
         payer: '',
-        beneficiaryName: '',
-        bankName: '',
-        branch: '',
-        bankCode: '',
-        bankAccount: '',
-        hdbcSwiftCode: '',
-        bankAddress: '',
-        payNowUen: '',
-        emailId: '',
+        bankBeneficiary: <BankBeneficiary>[],
         qrCode: '',
         paymentBatchAdditionalInfo: '',
         paymentItems: <PaymentItem>[],
@@ -61,4 +47,7 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
         pleaseNote: '',
         header: '',
       );
+
+  BankBeneficiary get firstBankBeneficiary =>
+      bankBeneficiary.firstOrNull ?? BankBeneficiary.empty();
 }

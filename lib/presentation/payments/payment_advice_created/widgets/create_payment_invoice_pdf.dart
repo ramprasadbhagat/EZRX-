@@ -619,14 +619,23 @@ class CreatePaymentInvoicePdf {
               salesOrganisation.salesOrg.isSg
                   ? _qrCodeAndBankInfo(
                       qrCode: paymentInvoiceInfoPdf.qrCode,
-                      beneficiaryName: paymentInvoiceInfoPdf.beneficiaryName,
-                      bankName: paymentInvoiceInfoPdf.bankName,
-                      branch: paymentInvoiceInfoPdf.branch,
-                      bankCode: paymentInvoiceInfoPdf.bankCode,
-                      bankAccount: paymentInvoiceInfoPdf.bankAccount,
-                      hdbcSwiftCode: paymentInvoiceInfoPdf.hdbcSwiftCode,
-                      bankAddress: paymentInvoiceInfoPdf.bankAddress,
-                      payNowUen: paymentInvoiceInfoPdf.payNowUen,
+                      beneficiaryName: paymentInvoiceInfoPdf
+                          .firstBankBeneficiary
+                          .beneficiaryName
+                          .displayNAIfEmpty,
+                      bankName: paymentInvoiceInfoPdf
+                          .firstBankBeneficiary.bankName.displayNAIfEmpty,
+                      branch: paymentInvoiceInfoPdf.firstBankBeneficiary.branch,
+                      bankCode:
+                          paymentInvoiceInfoPdf.firstBankBeneficiary.bankCode,
+                      bankAccount: paymentInvoiceInfoPdf
+                          .firstBankBeneficiary.bankAccount.displayNAIfEmpty,
+                      hdbcSwiftCode: paymentInvoiceInfoPdf
+                          .firstBankBeneficiary.hdbcSwiftCode,
+                      bankAddress: paymentInvoiceInfoPdf
+                          .firstBankBeneficiary.bankAddress,
+                      payNowUen:
+                          paymentInvoiceInfoPdf.firstBankBeneficiary.payNowUen,
                     )
                   : pw.SizedBox.shrink(),
               _item(paymentItems: paymentInvoiceInfoPdf.paymentItems),
