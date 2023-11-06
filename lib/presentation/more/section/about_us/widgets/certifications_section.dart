@@ -10,6 +10,7 @@ class _OurCertificationsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.aboutUsCertificationsSection,
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

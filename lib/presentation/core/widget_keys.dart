@@ -1160,4 +1160,15 @@ class WidgetKeys {
   static Key orderConfirmationTile = const Key('orderConfirmationTile');
   static Key paymentConfirmationTile = const Key('paymentConfirmationTile');
   //============================================================
+  // About Us Page
+  //============================================================
+  static Key aboutUsHeaderSection = const Key('aboutUsHeaderSection');
+  static Key aboutUsCertificationsSection =
+      const Key('aboutUsCertificationsSection');
+  static Key aboutUsWhoWeAreSection = const Key('aboutUsWhoWeAreSection');
+  static Key aboutUsWhyUsSection = const Key('aboutUsWhyUsSection');
+  static Key aboutUsOutPartnersSection = const Key('aboutUsOutPartnersSection');
+  static Key aboutUsReachUsSection = const Key('aboutUsReachUsSection');
+  static Key aboutUsListContent = const Key('aboutUsListContent');
+  //============================================================
 }

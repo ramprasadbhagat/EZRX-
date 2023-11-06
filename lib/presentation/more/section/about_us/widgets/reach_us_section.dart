@@ -10,6 +10,7 @@ class _ReachUsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.aboutUsReachUsSection,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

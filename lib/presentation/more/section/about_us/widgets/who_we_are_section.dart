@@ -10,6 +10,7 @@ class _WhoWeAreSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.aboutUsWhoWeAreSection,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

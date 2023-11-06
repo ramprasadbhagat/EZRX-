@@ -10,6 +10,7 @@ class _WhyUsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.aboutUsWhyUsSection,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

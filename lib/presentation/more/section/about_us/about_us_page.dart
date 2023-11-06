@@ -111,6 +111,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   ),
               child: aboutUsInfo != AboutUs.empty()
                   ? ListView(
+                      key: WidgetKeys.aboutUsListContent,
                       controller: _scrollController,
                       children: [
                         CustomImage(
@@ -175,6 +176,7 @@ class _HeaderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
+      key: WidgetKeys.aboutUsHeaderSection,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
