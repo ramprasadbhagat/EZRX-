@@ -52,7 +52,7 @@ class _OrderDetailHeader extends StatelessWidget {
                       color: ZPColors.white,
                     ),
                 valueText:
-                    state.orderHistoryDetails.pOReference.getOrDefaultValue(''),
+                    state.orderHistoryDetails.pOReference.displayPOReference,
                 valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),

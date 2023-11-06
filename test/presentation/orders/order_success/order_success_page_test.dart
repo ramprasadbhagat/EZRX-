@@ -187,6 +187,26 @@ void main() {
   );
 
   testWidgets(
+    'Find NA if Po Reference is left empty',
+    (tester) async {
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            invoiceNumber: StringValue('fake-number'),
+            pOReference: POReference(''),
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+
+      final poReference =
+          find.byKey(WidgetKeys.balanceTextRow('PO reference', 'NA'));
+      expect(poReference, findsOneWidget);
+    },
+  );
+
+  testWidgets(
     'Order History navigation check',
     (tester) async {
       when(() => autoRouterMock.navigateNamed('main/orders_tab'))
