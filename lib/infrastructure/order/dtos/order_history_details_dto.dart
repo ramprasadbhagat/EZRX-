@@ -13,16 +13,26 @@ part 'order_history_details_dto.g.dart';
 class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
   const OrderHistoryDetailsDto._();
   const factory OrderHistoryDetailsDto({
+    @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+        required double orderValue,
     @JsonKey(name: 'TotalTax', defaultValue: 0)
         required double totalTax,
+    @JsonKey(name: 'DeliveryFee', defaultValue: 0)
+        required double deliveryFee,
+    @JsonKey(name: 'ManualFee', defaultValue: 0)
+        required double manualFee,
+    @JsonKey(name: 'TotalValue', defaultValue: 0)
+        required double totalValue,
+    @JsonKey(name: 'TotalDiscount', defaultValue: 0)
+        required double totalDiscount,
+    @JsonKey(name: 'ProcessingStatus', defaultValue: '')
+        required String processingStatus,
     @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
         required String requestedDeliveryDate,
     @JsonKey(name: 'Type', defaultValue: '')
         required String type,
     @JsonKey(name: 'TelephoneNumber', defaultValue: '')
         required String telephoneNumber,
-    @JsonKey(name: 'OrderValue', defaultValue: 0.0)
-        required double orderValue,
     @JsonKey(name: 'CreatedDate', defaultValue: '')
         required String createdDate,
     @JsonKey(name: 'EZRXNumber', defaultValue: '')
@@ -71,6 +81,12 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
   ) {
     return OrderHistoryDetailsDto(
       totalTax: orderHistoryDetails.totalTax,
+      deliveryFee: orderHistoryDetails.deliveryFee,
+      manualFee: orderHistoryDetails.manualFee,
+      totalDiscount: orderHistoryDetails.manualFee,
+      totalValue: orderHistoryDetails.totalValue,
+      processingStatus:
+          orderHistoryDetails.processingStatus.getOrDefaultValue(''),
       requestedDeliveryDate:
           orderHistoryDetails.requestedDeliveryDate.dateString,
       type: orderHistoryDetails.type,
@@ -110,7 +126,12 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
 
   OrderHistoryDetails toDomain() {
     return OrderHistoryDetails(
+      deliveryFee: deliveryFee,
+      manualFee: manualFee,
+      totalDiscount: totalDiscount,
+      totalValue: totalValue,
       totalTax: totalTax,
+      processingStatus: StatusType(processingStatus),
       requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),
       type: type,
       telephoneNumber: PhoneNumber(telephoneNumber),

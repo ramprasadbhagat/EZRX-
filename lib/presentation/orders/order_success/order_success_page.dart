@@ -76,8 +76,9 @@ class OrderSuccessPage extends StatelessWidget {
   }
 
   void _trackOrderSuccess(BuildContext context, OrderSummaryState state) {
-    final isMYExternalSalesRep =
-        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final isIDMarket = eligibilityState.salesOrg.isID;
+    final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
     final orderDetail = state.orderHistoryDetails;
     final orderNumber = orderDetail.orderNumber.getOrDefaultValue('');
     final invoiceNumber = orderDetail.invoiceNumber;
@@ -100,10 +101,16 @@ class OrderSuccessPage extends StatelessWidget {
           MixpanelProps.productName: item.materialDescription,
           MixpanelProps.productCode: item.materialNumber.displayMatNo,
           MixpanelProps.productQty: item.qty,
-          MixpanelProps.grandTotal:
-              item.itemTotalPrice(invoiceNumber, isMYExternalSalesRep),
-          MixpanelProps.unitPrice:
-              item.itemUnitPrice(invoiceNumber, isMYExternalSalesRep),
+          MixpanelProps.grandTotal: item.itemTotalPrice(
+            invoiceNumber,
+            isMYExternalSalesRep,
+            isIDMarket,
+          ),
+          MixpanelProps.unitPrice: item.itemUnitPrice(
+            invoiceNumber,
+            isMYExternalSalesRep,
+            isIDMarket,
+          ),
         },
       );
 

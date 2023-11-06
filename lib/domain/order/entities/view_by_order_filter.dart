@@ -10,11 +10,13 @@ class ViewByOrdersFilter with _$ViewByOrdersFilter {
   factory ViewByOrdersFilter({
     required DateTimeStringValue orderDateFrom,
     required DateTimeStringValue orderDateTo,
+    required List<StatusType> orderStatusList,
   }) = _ViewByOrderHistoryFilter;
 
   factory ViewByOrdersFilter.empty() => ViewByOrdersFilter(
         orderDateFrom: DateTimeStringValue(''),
         orderDateTo: DateTimeStringValue(''),
+        orderStatusList: <StatusType>[],
       );
 
   DateTimeRange get getOrderDateFilterDateRange => DateTimeRange(
@@ -22,10 +24,11 @@ class ViewByOrdersFilter with _$ViewByOrdersFilter {
         end: orderDateTo.dateTime,
       );
 
-  //TODO: this is the number which will be displayed on top of tune icon, for view_by_order,
-  //there will be only date range filter always applied.
-  //In future, if there is more filter we can modify here.
   int get appliedFilterCount {
-    return 1;
+    var filterCount = 0;
+    if (orderDateFrom.isValid() && orderDateTo.isValid()) filterCount++;
+    if (orderStatusList.isNotEmpty) filterCount++;
+
+    return filterCount;
   }
 }

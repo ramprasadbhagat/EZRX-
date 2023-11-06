@@ -20,6 +20,7 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
@@ -909,6 +910,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     context
         .read<ViewByItemFilterBloc>()
         .add(const ViewByItemFilterEvent.initialize());
+
+    context.read<ViewByOrderFilterBloc>().add(
+          ViewByOrderFilterEvent.initialized(
+            salesOrganisation: salesOrgState.salesOrganisation,
+          ),
+        );
+
     context.read<AccountSummaryBloc>().add(
           const AccountSummaryEvent.initialize(),
         );
@@ -1122,15 +1130,17 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           );
 
       if (user.userCanAccessOrderHistory) {
-        context.read<ViewByItemsBloc>().add(
-              ViewByItemsEvent.initialized(
-                customerCodeInfo: state.customerCodeInfo,
-                salesOrgConfigs: salesOrgState.configs,
-                shipToInfo: state.shipToInfo,
-                user: user,
-                salesOrganisation: salesOrgState.salesOrganisation,
-              ),
-            );
+        if (!salesOrgState.salesOrg.isID) {
+          context.read<ViewByItemsBloc>().add(
+                ViewByItemsEvent.initialized(
+                  customerCodeInfo: state.customerCodeInfo,
+                  salesOrgConfigs: salesOrgState.configs,
+                  shipToInfo: state.shipToInfo,
+                  user: user,
+                  salesOrganisation: salesOrgState.salesOrganisation,
+                ),
+              );
+        }
 
         context.read<ViewByOrderBloc>().add(
               ViewByOrderEvent.initialized(

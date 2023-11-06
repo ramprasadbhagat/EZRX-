@@ -33,6 +33,7 @@ class OrderItemDetailsSection extends StatelessWidget {
         .orderHistoryDetails
         .invoiceNumber;
     final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
+    final isIDMarket = eligibilityState.salesOrganisation.salesOrg.isID;
 
     return Padding(
       key: WidgetKeys.viewByOrderDetailItemsSection,
@@ -69,17 +70,17 @@ class OrderItemDetailsSection extends StatelessWidget {
                               price: e.itemUnitPrice(
                                 invoiceNumber,
                                 isMYExternalSalesRep,
+                                isIDMarket,
                               ),
-                              salesOrgConfig: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .salesOrgConfigs,
+                              salesOrgConfig: salesOrgConfig,
                             ),
-                            statusWidget: StatusLabel(
-                              status: StatusType(
-                                e.sAPStatus.displayOrderStatus,
-                              ),
-                            ),
+                            statusWidget: isIDMarket
+                                ? null
+                                : StatusLabel(
+                                    status: StatusType(
+                                      e.sAPStatus.displayOrderStatus,
+                                    ),
+                                  ),
                             quantity: '',
                             materialNumber: e.materialNumber,
                             isQuantityBelowImage: true,
@@ -91,22 +92,39 @@ class OrderItemDetailsSection extends StatelessWidget {
                                 : '',
                             subtitle: '',
                             footerWidget: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  '${context.tr('Qty')}: ${e.qty}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                        color: ZPColors.black,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${context.tr('Qty')}: ${e.qty}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                            color: ZPColors.black,
+                                          ),
+                                    ),
+                                    if (isIDMarket)
+                                      Text(
+                                        '${e.pickedQuantity} ${context.tr('of')} ${e.qty} ${context.tr('stocks fulfilled')}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              color: ZPColors.black,
+                                            ),
                                       ),
+                                  ],
                                 ),
                                 PriceComponent(
                                   salesOrgConfig: salesOrgConfig,
                                   price: e.itemTotalPrice(
                                     invoiceNumber,
                                     isMYExternalSalesRep,
+                                    isIDMarket,
                                   ),
                                 ),
                               ],

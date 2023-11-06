@@ -21,16 +21,26 @@ OrderHistoryDetailsDto _$OrderHistoryDetailsDtoFromJson(
 
 /// @nodoc
 mixin _$OrderHistoryDetailsDto {
+  @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+  double get orderValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'TotalTax', defaultValue: 0)
   double get totalTax => throw _privateConstructorUsedError;
+  @JsonKey(name: 'DeliveryFee', defaultValue: 0)
+  double get deliveryFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ManualFee', defaultValue: 0)
+  double get manualFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TotalValue', defaultValue: 0)
+  double get totalValue => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TotalDiscount', defaultValue: 0)
+  double get totalDiscount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ProcessingStatus', defaultValue: '')
+  String get processingStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'Type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   String get telephoneNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'OrderValue', defaultValue: 0.0)
-  double get orderValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'CreatedDate', defaultValue: '')
   String get createdDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'EZRXNumber', defaultValue: '')
@@ -85,13 +95,19 @@ abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
       _$OrderHistoryDetailsDtoCopyWithImpl<$Res, OrderHistoryDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'TotalTax', defaultValue: 0) double totalTax,
+      {@JsonKey(name: 'OrderValue', defaultValue: 0.0) double orderValue,
+      @JsonKey(name: 'TotalTax', defaultValue: 0) double totalTax,
+      @JsonKey(name: 'DeliveryFee', defaultValue: 0) double deliveryFee,
+      @JsonKey(name: 'ManualFee', defaultValue: 0) double manualFee,
+      @JsonKey(name: 'TotalValue', defaultValue: 0) double totalValue,
+      @JsonKey(name: 'TotalDiscount', defaultValue: 0) double totalDiscount,
+      @JsonKey(name: 'ProcessingStatus', defaultValue: '')
+      String processingStatus,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       String requestedDeliveryDate,
       @JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       String telephoneNumber,
-      @JsonKey(name: 'OrderValue', defaultValue: 0.0) double orderValue,
       @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
@@ -134,11 +150,16 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? orderValue = null,
     Object? totalTax = null,
+    Object? deliveryFee = null,
+    Object? manualFee = null,
+    Object? totalValue = null,
+    Object? totalDiscount = null,
+    Object? processingStatus = null,
     Object? requestedDeliveryDate = null,
     Object? type = null,
     Object? telephoneNumber = null,
-    Object? orderValue = null,
     Object? createdDate = null,
     Object? eZRXNumber = null,
     Object? orderBy = null,
@@ -159,10 +180,34 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
     Object? itemCount = null,
   }) {
     return _then(_value.copyWith(
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
       totalTax: null == totalTax
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
+      deliveryFee: null == deliveryFee
+          ? _value.deliveryFee
+          : deliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      manualFee: null == manualFee
+          ? _value.manualFee
+          : manualFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalValue: null == totalValue
+          ? _value.totalValue
+          : totalValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalDiscount: null == totalDiscount
+          ? _value.totalDiscount
+          : totalDiscount // ignore: cast_nullable_to_non_nullable
+              as double,
+      processingStatus: null == processingStatus
+          ? _value.processingStatus
+          : processingStatus // ignore: cast_nullable_to_non_nullable
+              as String,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -175,10 +220,6 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      orderValue: null == orderValue
-          ? _value.orderValue
-          : orderValue // ignore: cast_nullable_to_non_nullable
-              as double,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -276,13 +317,19 @@ abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'TotalTax', defaultValue: 0) double totalTax,
+      {@JsonKey(name: 'OrderValue', defaultValue: 0.0) double orderValue,
+      @JsonKey(name: 'TotalTax', defaultValue: 0) double totalTax,
+      @JsonKey(name: 'DeliveryFee', defaultValue: 0) double deliveryFee,
+      @JsonKey(name: 'ManualFee', defaultValue: 0) double manualFee,
+      @JsonKey(name: 'TotalValue', defaultValue: 0) double totalValue,
+      @JsonKey(name: 'TotalDiscount', defaultValue: 0) double totalDiscount,
+      @JsonKey(name: 'ProcessingStatus', defaultValue: '')
+      String processingStatus,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       String requestedDeliveryDate,
       @JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       String telephoneNumber,
-      @JsonKey(name: 'OrderValue', defaultValue: 0.0) double orderValue,
       @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
@@ -324,11 +371,16 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? orderValue = null,
     Object? totalTax = null,
+    Object? deliveryFee = null,
+    Object? manualFee = null,
+    Object? totalValue = null,
+    Object? totalDiscount = null,
+    Object? processingStatus = null,
     Object? requestedDeliveryDate = null,
     Object? type = null,
     Object? telephoneNumber = null,
-    Object? orderValue = null,
     Object? createdDate = null,
     Object? eZRXNumber = null,
     Object? orderBy = null,
@@ -349,10 +401,34 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
     Object? itemCount = null,
   }) {
     return _then(_$_OrderHistoryDetailsDto(
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
       totalTax: null == totalTax
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
+      deliveryFee: null == deliveryFee
+          ? _value.deliveryFee
+          : deliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      manualFee: null == manualFee
+          ? _value.manualFee
+          : manualFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalValue: null == totalValue
+          ? _value.totalValue
+          : totalValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalDiscount: null == totalDiscount
+          ? _value.totalDiscount
+          : totalDiscount // ignore: cast_nullable_to_non_nullable
+              as double,
+      processingStatus: null == processingStatus
+          ? _value.processingStatus
+          : processingStatus // ignore: cast_nullable_to_non_nullable
+              as String,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -365,10 +441,6 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      orderValue: null == orderValue
-          ? _value.orderValue
-          : orderValue // ignore: cast_nullable_to_non_nullable
-              as double,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -450,13 +522,20 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   const _$_OrderHistoryDetailsDto(
-      {@JsonKey(name: 'TotalTax', defaultValue: 0) required this.totalTax,
+      {@JsonKey(name: 'OrderValue', defaultValue: 0.0) required this.orderValue,
+      @JsonKey(name: 'TotalTax', defaultValue: 0) required this.totalTax,
+      @JsonKey(name: 'DeliveryFee', defaultValue: 0) required this.deliveryFee,
+      @JsonKey(name: 'ManualFee', defaultValue: 0) required this.manualFee,
+      @JsonKey(name: 'TotalValue', defaultValue: 0) required this.totalValue,
+      @JsonKey(name: 'TotalDiscount', defaultValue: 0)
+      required this.totalDiscount,
+      @JsonKey(name: 'ProcessingStatus', defaultValue: '')
+      required this.processingStatus,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       required this.requestedDeliveryDate,
       @JsonKey(name: 'Type', defaultValue: '') required this.type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       required this.telephoneNumber,
-      @JsonKey(name: 'OrderValue', defaultValue: 0.0) required this.orderValue,
       @JsonKey(name: 'CreatedDate', defaultValue: '') required this.createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') required this.eZRXNumber,
       @JsonKey(name: 'OrderBy', defaultValue: '') required this.orderBy,
@@ -493,8 +572,26 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
       _$$_OrderHistoryDetailsDtoFromJson(json);
 
   @override
+  @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+  final double orderValue;
+  @override
   @JsonKey(name: 'TotalTax', defaultValue: 0)
   final double totalTax;
+  @override
+  @JsonKey(name: 'DeliveryFee', defaultValue: 0)
+  final double deliveryFee;
+  @override
+  @JsonKey(name: 'ManualFee', defaultValue: 0)
+  final double manualFee;
+  @override
+  @JsonKey(name: 'TotalValue', defaultValue: 0)
+  final double totalValue;
+  @override
+  @JsonKey(name: 'TotalDiscount', defaultValue: 0)
+  final double totalDiscount;
+  @override
+  @JsonKey(name: 'ProcessingStatus', defaultValue: '')
+  final String processingStatus;
   @override
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   final String requestedDeliveryDate;
@@ -504,9 +601,6 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   @override
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   final String telephoneNumber;
-  @override
-  @JsonKey(name: 'OrderValue', defaultValue: 0.0)
-  final double orderValue;
   @override
   @JsonKey(name: 'CreatedDate', defaultValue: '')
   final String createdDate;
@@ -578,7 +672,7 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsDto(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, companyName: $companyName, orderNumber: $orderNumber, pOReference: $pOReference, shipTo: $shipTo, soldTo: $soldTo, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, itemCount: $itemCount)';
+    return 'OrderHistoryDetailsDto(orderValue: $orderValue, totalTax: $totalTax, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, companyName: $companyName, orderNumber: $orderNumber, pOReference: $pOReference, shipTo: $shipTo, soldTo: $soldTo, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, itemCount: $itemCount)';
   }
 
   @override
@@ -586,15 +680,25 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsDto &&
+            (identical(other.orderValue, orderValue) ||
+                other.orderValue == orderValue) &&
             (identical(other.totalTax, totalTax) ||
                 other.totalTax == totalTax) &&
+            (identical(other.deliveryFee, deliveryFee) ||
+                other.deliveryFee == deliveryFee) &&
+            (identical(other.manualFee, manualFee) ||
+                other.manualFee == manualFee) &&
+            (identical(other.totalValue, totalValue) ||
+                other.totalValue == totalValue) &&
+            (identical(other.totalDiscount, totalDiscount) ||
+                other.totalDiscount == totalDiscount) &&
+            (identical(other.processingStatus, processingStatus) ||
+                other.processingStatus == processingStatus) &&
             (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.telephoneNumber, telephoneNumber) ||
                 other.telephoneNumber == telephoneNumber) &&
-            (identical(other.orderValue, orderValue) ||
-                other.orderValue == orderValue) &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
             (identical(other.eZRXNumber, eZRXNumber) ||
@@ -640,11 +744,16 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        orderValue,
         totalTax,
+        deliveryFee,
+        manualFee,
+        totalValue,
+        totalDiscount,
+        processingStatus,
         requestedDeliveryDate,
         type,
         telephoneNumber,
-        orderValue,
         createdDate,
         eZRXNumber,
         orderBy,
@@ -682,15 +791,25 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
 
 abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   const factory _OrderHistoryDetailsDto(
-      {@JsonKey(name: 'TotalTax', defaultValue: 0)
+      {@JsonKey(name: 'OrderValue', defaultValue: 0.0)
+      required final double orderValue,
+      @JsonKey(name: 'TotalTax', defaultValue: 0)
       required final double totalTax,
+      @JsonKey(name: 'DeliveryFee', defaultValue: 0)
+      required final double deliveryFee,
+      @JsonKey(name: 'ManualFee', defaultValue: 0)
+      required final double manualFee,
+      @JsonKey(name: 'TotalValue', defaultValue: 0)
+      required final double totalValue,
+      @JsonKey(name: 'TotalDiscount', defaultValue: 0)
+      required final double totalDiscount,
+      @JsonKey(name: 'ProcessingStatus', defaultValue: '')
+      required final String processingStatus,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       required final String requestedDeliveryDate,
       @JsonKey(name: 'Type', defaultValue: '') required final String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       required final String telephoneNumber,
-      @JsonKey(name: 'OrderValue', defaultValue: 0.0)
-      required final double orderValue,
       @JsonKey(name: 'CreatedDate', defaultValue: '')
       required final String createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '')
@@ -733,8 +852,26 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
       _$_OrderHistoryDetailsDto.fromJson;
 
   @override
+  @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+  double get orderValue;
+  @override
   @JsonKey(name: 'TotalTax', defaultValue: 0)
   double get totalTax;
+  @override
+  @JsonKey(name: 'DeliveryFee', defaultValue: 0)
+  double get deliveryFee;
+  @override
+  @JsonKey(name: 'ManualFee', defaultValue: 0)
+  double get manualFee;
+  @override
+  @JsonKey(name: 'TotalValue', defaultValue: 0)
+  double get totalValue;
+  @override
+  @JsonKey(name: 'TotalDiscount', defaultValue: 0)
+  double get totalDiscount;
+  @override
+  @JsonKey(name: 'ProcessingStatus', defaultValue: '')
+  String get processingStatus;
   @override
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate;
@@ -744,9 +881,6 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   @override
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   String get telephoneNumber;
-  @override
-  @JsonKey(name: 'OrderValue', defaultValue: 0.0)
-  double get orderValue;
   @override
   @JsonKey(name: 'CreatedDate', defaultValue: '')
   String get createdDate;

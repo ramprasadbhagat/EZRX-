@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ViewByOrdersFilter {
   DateTimeStringValue get orderDateFrom => throw _privateConstructorUsedError;
   DateTimeStringValue get orderDateTo => throw _privateConstructorUsedError;
+  List<StatusType> get orderStatusList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByOrdersFilterCopyWith<ViewByOrdersFilter> get copyWith =>
@@ -31,7 +32,9 @@ abstract class $ViewByOrdersFilterCopyWith<$Res> {
       _$ViewByOrdersFilterCopyWithImpl<$Res, ViewByOrdersFilter>;
   @useResult
   $Res call(
-      {DateTimeStringValue orderDateFrom, DateTimeStringValue orderDateTo});
+      {DateTimeStringValue orderDateFrom,
+      DateTimeStringValue orderDateTo,
+      List<StatusType> orderStatusList});
 }
 
 /// @nodoc
@@ -49,6 +52,7 @@ class _$ViewByOrdersFilterCopyWithImpl<$Res, $Val extends ViewByOrdersFilter>
   $Res call({
     Object? orderDateFrom = null,
     Object? orderDateTo = null,
+    Object? orderStatusList = null,
   }) {
     return _then(_value.copyWith(
       orderDateFrom: null == orderDateFrom
@@ -59,6 +63,10 @@ class _$ViewByOrdersFilterCopyWithImpl<$Res, $Val extends ViewByOrdersFilter>
           ? _value.orderDateTo
           : orderDateTo // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      orderStatusList: null == orderStatusList
+          ? _value.orderStatusList
+          : orderStatusList // ignore: cast_nullable_to_non_nullable
+              as List<StatusType>,
     ) as $Val);
   }
 }
@@ -73,7 +81,9 @@ abstract class _$$_ViewByOrderHistoryFilterCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DateTimeStringValue orderDateFrom, DateTimeStringValue orderDateTo});
+      {DateTimeStringValue orderDateFrom,
+      DateTimeStringValue orderDateTo,
+      List<StatusType> orderStatusList});
 }
 
 /// @nodoc
@@ -89,6 +99,7 @@ class __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>
   $Res call({
     Object? orderDateFrom = null,
     Object? orderDateTo = null,
+    Object? orderStatusList = null,
   }) {
     return _then(_$_ViewByOrderHistoryFilter(
       orderDateFrom: null == orderDateFrom
@@ -99,6 +110,10 @@ class __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>
           ? _value.orderDateTo
           : orderDateTo // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      orderStatusList: null == orderStatusList
+          ? _value._orderStatusList
+          : orderStatusList // ignore: cast_nullable_to_non_nullable
+              as List<StatusType>,
     ));
   }
 }
@@ -107,17 +122,27 @@ class __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>
 
 class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
   _$_ViewByOrderHistoryFilter(
-      {required this.orderDateFrom, required this.orderDateTo})
-      : super._();
+      {required this.orderDateFrom,
+      required this.orderDateTo,
+      required final List<StatusType> orderStatusList})
+      : _orderStatusList = orderStatusList,
+        super._();
 
   @override
   final DateTimeStringValue orderDateFrom;
   @override
   final DateTimeStringValue orderDateTo;
+  final List<StatusType> _orderStatusList;
+  @override
+  List<StatusType> get orderStatusList {
+    if (_orderStatusList is EqualUnmodifiableListView) return _orderStatusList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_orderStatusList);
+  }
 
   @override
   String toString() {
-    return 'ViewByOrdersFilter(orderDateFrom: $orderDateFrom, orderDateTo: $orderDateTo)';
+    return 'ViewByOrdersFilter(orderDateFrom: $orderDateFrom, orderDateTo: $orderDateTo, orderStatusList: $orderStatusList)';
   }
 
   @override
@@ -128,11 +153,14 @@ class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
             (identical(other.orderDateFrom, orderDateFrom) ||
                 other.orderDateFrom == orderDateFrom) &&
             (identical(other.orderDateTo, orderDateTo) ||
-                other.orderDateTo == orderDateTo));
+                other.orderDateTo == orderDateTo) &&
+            const DeepCollectionEquality()
+                .equals(other._orderStatusList, _orderStatusList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, orderDateFrom, orderDateTo);
+  int get hashCode => Object.hash(runtimeType, orderDateFrom, orderDateTo,
+      const DeepCollectionEquality().hash(_orderStatusList));
 
   @JsonKey(ignore: true)
   @override
@@ -145,7 +173,8 @@ class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
 abstract class _ViewByOrderHistoryFilter extends ViewByOrdersFilter {
   factory _ViewByOrderHistoryFilter(
           {required final DateTimeStringValue orderDateFrom,
-          required final DateTimeStringValue orderDateTo}) =
+          required final DateTimeStringValue orderDateTo,
+          required final List<StatusType> orderStatusList}) =
       _$_ViewByOrderHistoryFilter;
   _ViewByOrderHistoryFilter._() : super._();
 
@@ -153,6 +182,8 @@ abstract class _ViewByOrderHistoryFilter extends ViewByOrdersFilter {
   DateTimeStringValue get orderDateFrom;
   @override
   DateTimeStringValue get orderDateTo;
+  @override
+  List<StatusType> get orderStatusList;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByOrderHistoryFilterCopyWith<_$_ViewByOrderHistoryFilter>

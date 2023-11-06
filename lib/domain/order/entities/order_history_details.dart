@@ -18,10 +18,15 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
   const OrderHistoryDetails._();
   factory OrderHistoryDetails({
     required double totalTax,
+    required double orderValue,
+    required double deliveryFee,
+    required double manualFee,
+    required double totalValue,
+    required double totalDiscount,
+    required StatusType processingStatus,
     required DateTimeStringValue requestedDeliveryDate,
     required String type,
     required PhoneNumber telephoneNumber,
-    required double orderValue,
     required DateTimeStringValue createdDate,
     required String eZRXNumber,
     required String orderBy,
@@ -44,6 +49,11 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
   }) = _OrderHistoryDetails;
   factory OrderHistoryDetails.empty() => OrderHistoryDetails(
         totalTax: 0.0,
+        deliveryFee: 0.0,
+        manualFee: 0.0,
+        totalDiscount: 0.0,
+        totalValue: 0.0,
+        processingStatus: StatusType(''),
         requestedDeliveryDate: DateTimeStringValue(''),
         type: '',
         telephoneNumber: PhoneNumber(''),

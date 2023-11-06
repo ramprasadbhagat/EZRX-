@@ -13,6 +13,7 @@ class ViewByOrderDetailsQueryMutation {
   \$language: String, 
   \$searchKey: String,   
   \$salesOrg: [String],
+  \$status: [String],
  ) {
   orderHistoryV3(
    request: {
@@ -27,6 +28,7 @@ class ViewByOrderDetailsQueryMutation {
       language: \$language, 
       searchKey: \$searchKey,  
       salesOrg: \$salesOrg,
+      status: \$status,
      }
   ) {
     orderCount
@@ -60,6 +62,7 @@ class ViewByOrderDetailsQueryMutation {
           PaymentTermCode
           PaymentTermDescription
         }
+      TotalDiscount
       ItmCount
       HasPOAttachment
       ItmDescription

@@ -123,31 +123,46 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
   bool get isBonus => type.isMaterialTypeBonus && unitPrice.isZPPriceZero;
 
-  String get unitPriceByMaterialType =>
-      type.isMaterialTypeBonus ? 'FREE' : unitPrice.getOrDefaultValue('');
-
-  String get totalPriceByMaterialType =>
-      type.isMaterialTypeBonus ? 'FREE' : totalPrice.getOrDefaultValue('');
-
   bool get isPnGMaterial =>
       type.isMaterialTypeComm && principalData.principalCode.isPnG;
 
-  String itemUnitPrice(StringValue invoiceNumber, bool isMYExternalSalesRep) {
+  String itemUnitPrice(
+    StringValue invoiceNumber,
+    bool isMYExternalSalesRep,
+    bool isIDMarket,
+  ) =>
+      _itemPrice(
+        unitPrice.getOrDefaultValue(''),
+        invoiceNumber,
+        isMYExternalSalesRep,
+        isIDMarket,
+      );
+
+  String itemTotalPrice(
+    StringValue invoiceNumber,
+    bool isMYExternalSalesRep,
+    bool isIDMarket,
+  ) =>
+      _itemPrice(
+        totalPrice.getOrDefaultValue(''),
+        invoiceNumber,
+        isMYExternalSalesRep,
+        isIDMarket,
+      );
+
+  String _itemPrice(
+    String price,
+    StringValue invoiceNumber,
+    bool isMYExternalSalesRep,
+    bool isIDMarket,
+  ) {
     final displayPriceNotAvailable =
         isMYExternalSalesRep && isPnGMaterial && !invoiceNumber.isValid();
 
-    return displayPriceNotAvailable
-        ? 'Price Not Available'
-        : unitPriceByMaterialType;
-  }
-
-  String itemTotalPrice(StringValue invoiceNumber, bool isMYExternalSalesRep) {
-    final displayPriceNotAvailable =
-        isMYExternalSalesRep && isPnGMaterial && !invoiceNumber.isValid();
-
-    return displayPriceNotAvailable
-        ? 'Price Not Available'
-        : totalPriceByMaterialType;
+    if (displayPriceNotAvailable) return 'Price Not Available';
+    if (type.isMaterialTypeBonus) return isIDMarket ? '0' : 'FREE';
+    
+    return price;
   }
 }
 

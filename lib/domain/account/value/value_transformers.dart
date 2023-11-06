@@ -520,3 +520,19 @@ int countryCutOffTime(String country) {
 
   return salesOrgCountryMap[country] ?? 15;
 }
+
+double countrySmallOrderThreshold(String country) {
+  final salesOrgCountryMap = {
+    'ID': 300000.0,
+  };
+
+  return salesOrgCountryMap[country] ?? 0;
+}
+
+num countryOrderTaxValue(String country) {
+  final salesOrgCountryMap = {
+    'ID': 11,
+  };
+
+  return salesOrgCountryMap[country] ?? 0;
+}

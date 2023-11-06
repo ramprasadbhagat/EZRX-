@@ -69,7 +69,8 @@ class OrderHeaderSection extends StatelessWidget {
               if (eligibilityState.salesOrgConfigs.enableFutureDeliveryDay)
                 BalanceTextRow(
                   keyText: context.tr('Requested Delivery Date'),
-                  valueText: orderDetails.requestedDeliveryDate.dateString,
+                  valueText:
+                      orderDetails.requestedDeliveryDate.dateTimeOrNaString,
                   keyTextStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.white,
@@ -113,7 +114,7 @@ class OrderHeaderSection extends StatelessWidget {
                   keyFlex: 8,
                   valueFlex: 7,
                 ),
-              if (eligibilityState.salesOrgConfigs.enableMobileNumber)
+              if (eligibilityState.salesOrgConfigs.enableMobileNumber) ...[
                 BalanceTextRow(
                   keyText: context.tr('Contact person'),
                   valueText: orderDetails.orderBy,
@@ -128,7 +129,6 @@ class OrderHeaderSection extends StatelessWidget {
                   keyFlex: 8,
                   valueFlex: 7,
                 ),
-              if (eligibilityState.salesOrgConfigs.enableMobileNumber)
                 BalanceTextRow(
                   keyText: context.tr('Contact number'),
                   valueText:
@@ -144,6 +144,7 @@ class OrderHeaderSection extends StatelessWidget {
                   keyFlex: 8,
                   valueFlex: 7,
                 ),
+              ],
               if (eligibilityState.salesOrgConfigs.enableSpecialInstructions)
                 BalanceTextRow(
                   keyText: context.tr('Delivery instructions'),

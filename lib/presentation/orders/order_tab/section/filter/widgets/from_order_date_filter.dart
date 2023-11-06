@@ -25,16 +25,7 @@ class _FromOrderDateFilter extends StatelessWidget {
             );
             if (documentDateRange == null) return;
             viewByOrderFilterBloc.add(
-              ViewByOrderFilterEvent.setDateRange(
-                ViewByOrdersFilter.empty().copyWith(
-                  orderDateFrom: DateTimeStringValue(
-                    getDateStringByDateTime(documentDateRange.start),
-                  ),
-                  orderDateTo: DateTimeStringValue(
-                    getDateStringByDateTime(documentDateRange.end),
-                  ),
-                ),
-              ),
+              ViewByOrderFilterEvent.setDateRange(documentDateRange),
             );
           },
           readOnly: true,

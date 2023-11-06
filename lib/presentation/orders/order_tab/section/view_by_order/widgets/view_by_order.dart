@@ -39,10 +39,26 @@ class _ViewByOrder extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${context.tr('Order')} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
-              key: WidgetKeys.viewByOrdersCodeLabelKey,
-              style: Theme.of(context).textTheme.labelSmall,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    '${context.tr('Order')} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                    key: WidgetKeys.viewByOrdersCodeLabelKey,
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ),
+                if (eligibilityState.salesOrg.isID)
+                  StatusLabel(
+                    status: StatusType(
+                      context.tr(
+                        viewByOrderHistoryItem.processingStatus
+                            .getOrDefaultValue(''),
+                      ),
+                    ),
+                  ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),

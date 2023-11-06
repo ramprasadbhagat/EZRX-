@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -16,18 +16,13 @@ class OrderSummarySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final salesOrgConfigs =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
-    final taxDisplayForOrderHistoryAndDetails = context
-        .read<SalesOrgBloc>()
-        .state
-        .configs
-        .taxDisplayForOrderHistoryAndDetails;
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final salesOrgConfigs = eligibilityState.salesOrgConfigs;
+    final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
+    final taxDisplayForOrderHistoryAndDetails =
+        salesOrgConfigs.taxDisplayForOrderHistoryAndDetails;
     final orderDetails =
         context.read<ViewByOrderDetailsBloc>().state.orderHistoryDetails;
-
-    final isMYExternalSalesRep =
-        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -44,70 +39,133 @@ class OrderSummarySection extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text('${context.tr('Subtotal (excl. tax)')}:'),
-              PriceComponent(
-                key: WidgetKeys.viewByOrderSubtotalKey,
-                type: PriceStyle.summaryPrice,
-                price: orderDetails.orderNumber.isValid()
-                    ? StringUtils.displayPrice(
-                        salesOrgConfigs,
-                        orderDetails.orderedItemsValue(isMYExternalSalesRep),
-                      )
-                    : context.tr('NA'),
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-              ),
-            ],
-          ),
-          /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web
-          keyText: 'Tax at x%',
-          valueText: viewByOrderHistoryItem.totalTax.toString(),
-        ),
-        const BalanceTextRow(
-          keyText: 'Stamp duty',
-          valueText: '',
-        ),
-        const BalanceTextRow(
-          keyText: 'Small order fee',
-          valueText: '',
-        ),*/
-          const Divider(
-            indent: 0,
-            height: 15,
-            endIndent: 0,
-            thickness: 1,
-            color: ZPColors.lightGray2,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text('${context.tr('Grand total')}:'),
-              PriceComponent(
-                key: WidgetKeys.viewByOrderGrandTotalKey,
-                type: PriceStyle.grandTotalPrice,
-                price: orderDetails.orderNumber.isValid()
-                    ? StringUtils.displayPrice(
-                        context.read<EligibilityBloc>().state.salesOrgConfigs,
-                        taxDisplayForOrderHistoryAndDetails
-                            ? orderDetails.grandTotal(isMYExternalSalesRep)
-                            : orderDetails
-                                .orderedItemsValue(isMYExternalSalesRep),
-                      )
-                    : context.tr('NA'),
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-              ),
-            ],
-          ),
-          // const BalanceTextRow(
-          //   keyText: 'Total savings', // TODO: after getting information will enhance and allign with web
-          //   valueText: '',
-          // ),
+          if (eligibilityState.salesOrg.isID) ...[
+            _PriceTile(
+              orderNumber: orderDetails.orderNumber,
+              title: context.tr('Subtotal (excl. tax)'),
+              value: orderDetails.orderValue,
+            ),
+            const SizedBox(height: 10),
+            _PriceTile(
+              orderNumber: orderDetails.orderNumber,
+              title:
+                  '${context.tr('Tax at')} ${eligibilityState.salesOrg.orderTaxValue}%',
+              value: orderDetails.totalTax,
+            ),
+            const SizedBox(height: 10),
+            _PriceTile(
+              orderNumber: orderDetails.orderNumber,
+              title: context.tr('Small order fee'),
+              value: orderDetails.deliveryFee,
+            ),
+            Text(
+              '${context.tr('Applies to orders less than')} ${StringUtils.displayPrice(salesOrgConfigs, eligibilityState.salesOrg.smallOrderThreshold)}',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: ZPColors.darkGray,
+                  ),
+            ),
+            const SizedBox(height: 10),
+            _PriceTile(
+              orderNumber: orderDetails.orderNumber,
+              title: context.tr('Manual fee'),
+              value: orderDetails.manualFee,
+            ),
+            const _SectionDivider(),
+            _PriceTile(
+              orderNumber: orderDetails.orderNumber,
+              title: context.tr('Grand total'),
+              value: orderDetails.totalValue,
+              priceStyle: PriceStyle.grandTotalPrice,
+            ),
+            const SizedBox(height: 10),
+            _PriceTile(
+              orderNumber: orderDetails.orderNumber,
+              title: context.tr('Total savings'),
+              value: orderDetails.totalDiscount,
+            ),
+          ] else ...[
+            _PriceTile(
+              key: WidgetKeys.viewByOrderSubtotalKey,
+              orderNumber: orderDetails.orderNumber,
+              title: context.tr('Subtotal (excl. tax)'),
+              value: orderDetails.orderedItemsValue(isMYExternalSalesRep),
+            ),
+            /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web
+            keyText: 'Tax at x%',
+            valueText: viewByOrderHistoryItem.totalTax.toString(),
+            ),
+            const BalanceTextRow(
+              keyText: 'Stamp duty',
+              valueText: '',
+            ),
+            const BalanceTextRow(
+              keyText: 'Small order fee',
+              valueText: '',
+            ),*/
+            const _SectionDivider(),
+            _PriceTile(
+              key: WidgetKeys.viewByOrderGrandTotalKey,
+              orderNumber: orderDetails.orderNumber,
+              title: context.tr('Grand total'),
+              priceStyle: PriceStyle.grandTotalPrice,
+              value: taxDisplayForOrderHistoryAndDetails
+                  ? orderDetails.grandTotal(isMYExternalSalesRep)
+                  : orderDetails.orderedItemsValue(isMYExternalSalesRep),
+            ),
+            // const BalanceTextRow(
+            //   keyText: 'Total savings', // TODO: after getting information will enhance and allign with web
+            //   valueText: '',
+            // ),
+          ],
         ],
       ),
+    );
+  }
+}
+
+class _PriceTile extends StatelessWidget {
+  const _PriceTile({
+    Key? key,
+    required this.value,
+    required this.title,
+    required this.orderNumber,
+    this.priceStyle = PriceStyle.summaryPrice,
+  }) : super(key: key);
+
+  final PriceStyle priceStyle;
+  final double value;
+  final String title;
+  final OrderNumber orderNumber;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text('$title:'),
+        PriceComponent(
+          type: priceStyle,
+          price: orderNumber.isValid() ? value.toString() : context.tr('NA'),
+          salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
+        ),
+      ],
+    );
+  }
+}
+
+class _SectionDivider extends StatelessWidget {
+  const _SectionDivider({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Divider(
+      indent: 0,
+      height: 15,
+      endIndent: 0,
+      thickness: 1,
+      color: ZPColors.lightGray2,
     );
   }
 }

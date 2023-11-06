@@ -7,16 +7,10 @@ part 'view_by_order_filter_dto.g.dart';
 class ViewByOrdersFilterDto with _$ViewByOrdersFilterDto {
   const ViewByOrdersFilterDto._();
   const factory ViewByOrdersFilterDto({
-    @JsonKey(
-      name: 'toDate',
-      defaultValue: '',
-    )
-        required String dateTo,
-    @JsonKey(
-      name: 'fromDate',
-      defaultValue: '',
-    )
-        required String dateFrom,
+    @JsonKey(name: 'toDate', defaultValue: '') required String dateTo,
+    @JsonKey(name: 'fromDate', defaultValue: '') required String dateFrom,
+    @JsonKey(name: 'status', defaultValue: <String>[])
+        required List<String> orderStatus,
   }) = _ViewByOrdersFilterDto;
 
   factory ViewByOrdersFilterDto.fromDomain(
@@ -25,6 +19,9 @@ class ViewByOrdersFilterDto with _$ViewByOrdersFilterDto {
     return ViewByOrdersFilterDto(
       dateTo: viewByOrdersFilter.orderDateTo.apiDateTimeString,
       dateFrom: viewByOrdersFilter.orderDateFrom.apiDateTimeString,
+      orderStatus: viewByOrdersFilter.orderStatusList
+          .map((e) => e.getOrDefaultValue(''))
+          .toList(),
     );
   }
 

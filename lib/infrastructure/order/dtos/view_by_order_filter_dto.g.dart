@@ -11,6 +11,10 @@ _$_ViewByOrdersFilterDto _$$_ViewByOrdersFilterDtoFromJson(
     _$_ViewByOrdersFilterDto(
       dateTo: json['toDate'] as String? ?? '',
       dateFrom: json['fromDate'] as String? ?? '',
+      orderStatus: (json['status'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_ViewByOrdersFilterDtoToJson(
@@ -18,4 +22,5 @@ Map<String, dynamic> _$$_ViewByOrdersFilterDtoToJson(
     <String, dynamic>{
       'toDate': instance.dateTo,
       'fromDate': instance.dateFrom,
+      'status': instance.orderStatus,
     };

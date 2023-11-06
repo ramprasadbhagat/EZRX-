@@ -9,11 +9,16 @@ part of 'order_history_details_dto.dart';
 _$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
         Map<String, dynamic> json) =>
     _$_OrderHistoryDetailsDto(
+      orderValue: (json['OrderValue'] as num?)?.toDouble() ?? 0.0,
       totalTax: (json['TotalTax'] as num?)?.toDouble() ?? 0,
+      deliveryFee: (json['DeliveryFee'] as num?)?.toDouble() ?? 0,
+      manualFee: (json['ManualFee'] as num?)?.toDouble() ?? 0,
+      totalValue: (json['TotalValue'] as num?)?.toDouble() ?? 0,
+      totalDiscount: (json['TotalDiscount'] as num?)?.toDouble() ?? 0,
+      processingStatus: json['ProcessingStatus'] as String? ?? '',
       requestedDeliveryDate: json['RequestedDeliveryDate'] as String? ?? '',
       type: json['Type'] as String? ?? '',
       telephoneNumber: json['TelephoneNumber'] as String? ?? '',
-      orderValue: (json['OrderValue'] as num?)?.toDouble() ?? 0.0,
       createdDate: json['CreatedDate'] as String? ?? '',
       eZRXNumber: json['EZRXNumber'] as String? ?? '',
       orderBy: json['OrderBy'] as String? ?? '',
@@ -47,11 +52,16 @@ _$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
 Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(
         _$_OrderHistoryDetailsDto instance) =>
     <String, dynamic>{
+      'OrderValue': instance.orderValue,
       'TotalTax': instance.totalTax,
+      'DeliveryFee': instance.deliveryFee,
+      'ManualFee': instance.manualFee,
+      'TotalValue': instance.totalValue,
+      'TotalDiscount': instance.totalDiscount,
+      'ProcessingStatus': instance.processingStatus,
       'RequestedDeliveryDate': instance.requestedDeliveryDate,
       'Type': instance.type,
       'TelephoneNumber': instance.telephoneNumber,
-      'OrderValue': instance.orderValue,
       'CreatedDate': instance.createdDate,
       'EZRXNumber': instance.eZRXNumber,
       'OrderBy': instance.orderBy,

@@ -17,11 +17,16 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$OrderHistoryDetails {
   double get totalTax => throw _privateConstructorUsedError;
+  double get orderValue => throw _privateConstructorUsedError;
+  double get deliveryFee => throw _privateConstructorUsedError;
+  double get manualFee => throw _privateConstructorUsedError;
+  double get totalValue => throw _privateConstructorUsedError;
+  double get totalDiscount => throw _privateConstructorUsedError;
+  StatusType get processingStatus => throw _privateConstructorUsedError;
   DateTimeStringValue get requestedDeliveryDate =>
       throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
-  double get orderValue => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get eZRXNumber => throw _privateConstructorUsedError;
   String get orderBy => throw _privateConstructorUsedError;
@@ -59,10 +64,15 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
   @useResult
   $Res call(
       {double totalTax,
+      double orderValue,
+      double deliveryFee,
+      double manualFee,
+      double totalValue,
+      double totalDiscount,
+      StatusType processingStatus,
       DateTimeStringValue requestedDeliveryDate,
       String type,
       PhoneNumber telephoneNumber,
-      double orderValue,
       DateTimeStringValue createdDate,
       String eZRXNumber,
       String orderBy,
@@ -100,10 +110,15 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
   @override
   $Res call({
     Object? totalTax = null,
+    Object? orderValue = null,
+    Object? deliveryFee = null,
+    Object? manualFee = null,
+    Object? totalValue = null,
+    Object? totalDiscount = null,
+    Object? processingStatus = null,
     Object? requestedDeliveryDate = null,
     Object? type = null,
     Object? telephoneNumber = null,
-    Object? orderValue = null,
     Object? createdDate = null,
     Object? eZRXNumber = null,
     Object? orderBy = null,
@@ -128,6 +143,30 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      deliveryFee: null == deliveryFee
+          ? _value.deliveryFee
+          : deliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      manualFee: null == manualFee
+          ? _value.manualFee
+          : manualFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalValue: null == totalValue
+          ? _value.totalValue
+          : totalValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalDiscount: null == totalDiscount
+          ? _value.totalDiscount
+          : totalDiscount // ignore: cast_nullable_to_non_nullable
+              as double,
+      processingStatus: null == processingStatus
+          ? _value.processingStatus
+          : processingStatus // ignore: cast_nullable_to_non_nullable
+              as StatusType,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -140,10 +179,6 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as PhoneNumber,
-      orderValue: null == orderValue
-          ? _value.orderValue
-          : orderValue // ignore: cast_nullable_to_non_nullable
-              as double,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -242,10 +277,15 @@ abstract class _$$_OrderHistoryDetailsCopyWith<$Res>
   @useResult
   $Res call(
       {double totalTax,
+      double orderValue,
+      double deliveryFee,
+      double manualFee,
+      double totalValue,
+      double totalDiscount,
+      StatusType processingStatus,
       DateTimeStringValue requestedDeliveryDate,
       String type,
       PhoneNumber telephoneNumber,
-      double orderValue,
       DateTimeStringValue createdDate,
       String eZRXNumber,
       String orderBy,
@@ -282,10 +322,15 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? totalTax = null,
+    Object? orderValue = null,
+    Object? deliveryFee = null,
+    Object? manualFee = null,
+    Object? totalValue = null,
+    Object? totalDiscount = null,
+    Object? processingStatus = null,
     Object? requestedDeliveryDate = null,
     Object? type = null,
     Object? telephoneNumber = null,
-    Object? orderValue = null,
     Object? createdDate = null,
     Object? eZRXNumber = null,
     Object? orderBy = null,
@@ -310,6 +355,30 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      deliveryFee: null == deliveryFee
+          ? _value.deliveryFee
+          : deliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      manualFee: null == manualFee
+          ? _value.manualFee
+          : manualFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalValue: null == totalValue
+          ? _value.totalValue
+          : totalValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalDiscount: null == totalDiscount
+          ? _value.totalDiscount
+          : totalDiscount // ignore: cast_nullable_to_non_nullable
+              as double,
+      processingStatus: null == processingStatus
+          ? _value.processingStatus
+          : processingStatus // ignore: cast_nullable_to_non_nullable
+              as StatusType,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -322,10 +391,6 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as PhoneNumber,
-      orderValue: null == orderValue
-          ? _value.orderValue
-          : orderValue // ignore: cast_nullable_to_non_nullable
-              as double,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -408,10 +473,15 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
 class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   _$_OrderHistoryDetails(
       {required this.totalTax,
+      required this.orderValue,
+      required this.deliveryFee,
+      required this.manualFee,
+      required this.totalValue,
+      required this.totalDiscount,
+      required this.processingStatus,
       required this.requestedDeliveryDate,
       required this.type,
       required this.telephoneNumber,
-      required this.orderValue,
       required this.createdDate,
       required this.eZRXNumber,
       required this.orderBy,
@@ -438,13 +508,23 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   @override
   final double totalTax;
   @override
+  final double orderValue;
+  @override
+  final double deliveryFee;
+  @override
+  final double manualFee;
+  @override
+  final double totalValue;
+  @override
+  final double totalDiscount;
+  @override
+  final StatusType processingStatus;
+  @override
   final DateTimeStringValue requestedDeliveryDate;
   @override
   final String type;
   @override
   final PhoneNumber telephoneNumber;
-  @override
-  final double orderValue;
   @override
   final DateTimeStringValue createdDate;
   @override
@@ -498,7 +578,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
 
   @override
   String toString() {
-    return 'OrderHistoryDetails(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, pOReference: $pOReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, itemCount: $itemCount, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments)';
+    return 'OrderHistoryDetails(totalTax: $totalTax, orderValue: $orderValue, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, pOReference: $pOReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, itemCount: $itemCount, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments)';
   }
 
   @override
@@ -508,13 +588,23 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
             other is _$_OrderHistoryDetails &&
             (identical(other.totalTax, totalTax) ||
                 other.totalTax == totalTax) &&
+            (identical(other.orderValue, orderValue) ||
+                other.orderValue == orderValue) &&
+            (identical(other.deliveryFee, deliveryFee) ||
+                other.deliveryFee == deliveryFee) &&
+            (identical(other.manualFee, manualFee) ||
+                other.manualFee == manualFee) &&
+            (identical(other.totalValue, totalValue) ||
+                other.totalValue == totalValue) &&
+            (identical(other.totalDiscount, totalDiscount) ||
+                other.totalDiscount == totalDiscount) &&
+            (identical(other.processingStatus, processingStatus) ||
+                other.processingStatus == processingStatus) &&
             (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.telephoneNumber, telephoneNumber) ||
                 other.telephoneNumber == telephoneNumber) &&
-            (identical(other.orderValue, orderValue) ||
-                other.orderValue == orderValue) &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
             (identical(other.eZRXNumber, eZRXNumber) ||
@@ -560,10 +650,15 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   int get hashCode => Object.hashAll([
         runtimeType,
         totalTax,
+        orderValue,
+        deliveryFee,
+        manualFee,
+        totalValue,
+        totalDiscount,
+        processingStatus,
         requestedDeliveryDate,
         type,
         telephoneNumber,
-        orderValue,
         createdDate,
         eZRXNumber,
         orderBy,
@@ -595,10 +690,15 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
 abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   factory _OrderHistoryDetails(
       {required final double totalTax,
+      required final double orderValue,
+      required final double deliveryFee,
+      required final double manualFee,
+      required final double totalValue,
+      required final double totalDiscount,
+      required final StatusType processingStatus,
       required final DateTimeStringValue requestedDeliveryDate,
       required final String type,
       required final PhoneNumber telephoneNumber,
-      required final double orderValue,
       required final DateTimeStringValue createdDate,
       required final String eZRXNumber,
       required final String orderBy,
@@ -625,13 +725,23 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   @override
   double get totalTax;
   @override
+  double get orderValue;
+  @override
+  double get deliveryFee;
+  @override
+  double get manualFee;
+  @override
+  double get totalValue;
+  @override
+  double get totalDiscount;
+  @override
+  StatusType get processingStatus;
+  @override
   DateTimeStringValue get requestedDeliveryDate;
   @override
   String get type;
   @override
   PhoneNumber get telephoneNumber;
-  @override
-  double get orderValue;
   @override
   DateTimeStringValue get createdDate;
   @override

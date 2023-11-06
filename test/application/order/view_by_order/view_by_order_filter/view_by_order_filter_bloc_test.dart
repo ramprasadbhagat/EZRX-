@@ -7,6 +7,8 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../common_mock_data/sales_organsiation_mock.dart';
+
 void main() {
   late ViewByOrdersFilter viewByOrdersFilter;
   late DateTime fakeStartDate;
@@ -36,7 +38,9 @@ void main() {
       build: () => ViewByOrderFilterBloc(),
       act: (ViewByOrderFilterBloc bloc) {
         bloc.add(
-          const ViewByOrderFilterEvent.initialized(),
+          ViewByOrderFilterEvent.initialized(
+            salesOrganisation: fakeSalesOrganisation,
+          ),
         );
       },
       expect: () => [
@@ -49,14 +53,7 @@ void main() {
       act: (ViewByOrderFilterBloc bloc) {
         bloc.add(
           ViewByOrderFilterEvent.setDateRange(
-            viewByOrdersFilter.copyWith(
-              orderDateFrom: DateTimeStringValue(
-                getDateStringByDateTime(fakeStartDate),
-              ),
-              orderDateTo: DateTimeStringValue(
-                getDateStringByDateTime(fakeEndDate),
-              ),
-            ),
+            DateTimeRange(start: fakeStartDate, end: fakeEndDate),
           ),
         );
       },

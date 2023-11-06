@@ -41,10 +41,11 @@ class _OrderItems extends StatelessWidget {
                                 .state
                                 .orderHistoryDetails
                                 .invoiceNumber;
-                            final isMYExternalSalesRep = context
-                                .read<EligibilityBloc>()
-                                .state
-                                .isMYExternalSalesRepUser;
+                            final eligibilityState =
+                                context.read<EligibilityBloc>().state;
+                            final isMYExternalSalesRep =
+                                eligibilityState.isMYExternalSalesRepUser;
+                            final isIDMarket = eligibilityState.salesOrg.isID;
 
                             return CommonTileItem(
                               key: WidgetKeys.orderSuccessItem(index),
@@ -58,6 +59,7 @@ class _OrderItems extends StatelessWidget {
                                 price: e.itemUnitPrice(
                                   invoiceNumber,
                                   isMYExternalSalesRep,
+                                  isIDMarket,
                                 ),
                                 salesOrgConfig: context
                                     .read<EligibilityBloc>()
@@ -92,6 +94,7 @@ class _OrderItems extends StatelessWidget {
                                     price: e.itemTotalPrice(
                                       invoiceNumber,
                                       isMYExternalSalesRep,
+                                      isIDMarket,
                                     ),
                                   ),
                                 ],
