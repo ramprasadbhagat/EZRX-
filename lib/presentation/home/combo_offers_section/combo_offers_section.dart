@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class ComboOffersSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: WidgetKeys.combodealsBody,
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(horizontal: 12).copyWith(top: 32),
       decoration: BoxDecoration(
@@ -51,6 +53,7 @@ class ComboOffersSection extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               OutlinedButton(
+                key: WidgetKeys.exploreComboDealsButtton,
                 style: OutlinedButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 8),

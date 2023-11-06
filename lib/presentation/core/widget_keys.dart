@@ -252,6 +252,8 @@ class WidgetKeys {
   static const Key comboDealDetailPage = Key('comboDealDetailPage');
   static const Key getComboDealButton = Key('getComboDealButton');
   static const Key comboTitleLoading = Key('comboTitleLoading');
+  static const Key combodealsBody = Key('combodealsBody');
+  static const Key exploreComboDealsButtton = Key('exploreComboDealsButtton');
 
   //============================================================
   //  PolicyConfiguration page Keys
