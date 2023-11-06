@@ -83,39 +83,19 @@ class CartItemQuantityInput extends StatelessWidget {
               },
               onDone: (String text) {
                 if (text.isEmpty) {
-                  controller.value = TextEditingValue(
-                    text: 1.toString(),
-                    selection: TextSelection.collapsed(
-                      offset: controller.selection.base.offset,
-                    ),
-                  );
-                  onSubmit(1);
+                  _updateTextControllerValue(1.toString());
 
                   return;
                 }
                 final value = (int.tryParse(controller.text) ?? 0);
                 if (value < minimumQty) {
-                  final text = minimumQty.toString();
-                  controller.value = TextEditingValue(
-                    text: text,
-                    selection: TextSelection.collapsed(
-                      offset: controller.selection.base.offset,
-                    ),
-                  );
-                  onSubmit(int.parse(text));
+                  _updateTextControllerValue(minimumQty.toString());
 
                   return;
                 }
 
                 if (value > maximumQty) {
-                  final text = maximumQty.toString();
-                  controller.value = TextEditingValue(
-                    text: text,
-                    selection: TextSelection.collapsed(
-                      offset: controller.selection.base.offset,
-                    ),
-                  );
-                  onSubmit(int.parse(text));
+                  _updateTextControllerValue(maximumQty.toString());
 
                   return;
                 }
@@ -179,6 +159,14 @@ class CartItemQuantityInput extends StatelessWidget {
               ),
             ),
           );
+  }
+
+  void _updateTextControllerValue(String newText) {
+    controller.value = TextEditingValue(
+      text: newText,
+      selection: TextSelection.collapsed(offset: newText.length),
+    );
+    onSubmit(int.parse(newText));
   }
 }
 
