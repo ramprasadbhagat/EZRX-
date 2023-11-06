@@ -145,7 +145,7 @@ void main() async {
     setUpAll(() async {
       fakeJson = json.decode(
         await rootBundle.loadString(
-          'assets/json/getComboDealForPrincipleGroupResponseK5.json',
+          'assets/json/getComboDealForPrincipleResponseK5.json',
         ),
       );
     });

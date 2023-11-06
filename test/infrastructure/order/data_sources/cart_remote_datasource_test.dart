@@ -171,6 +171,122 @@ void main() async {
     },
   );
 
+  group(
+    'Cart Remote data source upsertCartItemsWithComboOffer',
+    () {
+      late Map<String, dynamic> upsertCartItemsWithComboOfferJson;
+
+      setUpAll(() async {
+        upsertCartItemsWithComboOfferJson = json.decode(
+          await rootBundle.loadString(
+            'assets/json/upsertCartItemsWithComboOffersResponse.json',
+          ),
+        );
+      });
+
+      test(
+        'Cart Remote data source Success',
+        () async {
+          final finalData = upsertCartItemsWithComboOfferJson['data']
+              ['upsertCartItems']['EzRxItems'];
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              upsertCartItemsWithComboOfferJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.upsertCartItems(),
+              'variables': {
+                'itemInput': [{}],
+              },
+            }),
+          );
+
+          final result = await remoteDataSource
+              .upsertCartItemsWithComboOffer(requestParams: [{}]);
+
+          expect(
+            result,
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
+                .map((e) => CartProductDto.fromJson(e).toDomain)
+                .toList(),
+          );
+        },
+      );
+
+      test(
+        'Cart Remote data source success fail status 200 and error in response',
+        () async {
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              upsertCartItemsWithComboOfferJson
+                ..putIfAbsent(
+                  'errors',
+                  () => [
+                    {'message': 'fake-error'}
+                  ],
+                ),
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.upsertCartItems(),
+              'variables': {
+                'itemInput': [{}],
+              },
+            }),
+          );
+          await remoteDataSource.upsertCartItemsWithComboOffer(
+            requestParams: [{}],
+          ).onError((error, _) {
+            expect(
+              error,
+              isA<ServerException>(),
+            );
+            return Future.value(<PriceAggregate>[]);
+          });
+        },
+      );
+
+      test(
+        'Cart Remote data source success fail status 200 and error as no cart found',
+        () async {
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              {
+                'data': {
+                  'upsertCartItems': {'EzRxItems': []}
+                },
+                'errors': [
+                  {'message': 'no cart found'}
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.cart(),
+              'variables': {}
+            }),
+          );
+          final result = await remoteDataSource.getAddedToCartProductList();
+
+          expect(
+            result,
+            <PriceAggregate>[],
+          );
+        },
+      );
+    },
+  );
+
 //Todo will revisit and fix the testcase
   // group(
   //   'Cart Remote data source upsertCartListJson',

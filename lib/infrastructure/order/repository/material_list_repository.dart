@@ -159,21 +159,16 @@ class MaterialListRepository implements IMaterialListRepository {
     required List<String> principles,
     required SalesOrganisationConfigs salesOrgConfig,
   }) async {
-    // if (config.appFlavor == Flavor.mock) {
-    //   try {
-    //     final materialListData = user.role.type.isSalesRepRole
-    //         ? await materialListLocalDataSource.getMaterialListSalesRep()
-    //         : await materialListLocalDataSource.getMaterialList();
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final materialListData = await materialListLocalDataSource
+            .getComboDealMaterialsPrincipalCode();
 
-    //     return Right(materialListData);
-    //   } catch (e) {
-    //     return Left(FailureHandler.handleFailure(e));
-    //   }
-    // }
-
-    // // Because principle code from response is something like 140132
-    // // We need to transform it to valid one (0000140132)
-    // final validPrinciples = principles.map((e) => e.padLeft(10, '0')).toList();
+        return Right(materialListData);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
 
     try {
       final materialListData =
@@ -183,7 +178,7 @@ class MaterialListRepository implements IMaterialListRepository {
         shipToCode: shipToInfo.shipToCustomerCode,
         pageSize: pageSize,
         offset: offset,
-        principalNameList: principles,
+        principalCodeList: principles,
         language: salesOrgConfig.getConfigLanguage,
       );
 

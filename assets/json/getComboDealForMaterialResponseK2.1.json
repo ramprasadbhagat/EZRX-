@@ -6,10 +6,9 @@
           "minTotalAmount": "",
           "maxTotalAmount": "",
           "minTotalQuantity": "",
-          "rate": "-15.00",
+          "rate": "-12.00",
           "type": "%",
-          "conditionNumber": "0015958839",
-          "__typename": "GroupDeal"
+          "conditionNumber": "0016003391"
         },
         "flexiSKUTier": [],
         "flexiQtyTier": [],
@@ -19,47 +18,41 @@
             "setNo": "00000001",
             "materials": [
               {
-                "minQty": "2.000",
-                "materialNumber": "000000000021130726",
+                "minQty": "3.000",
+                "materialNumber": "000000000023340297",
                 "rate": "",
                 "type": "",
                 "conditionNumber": "",
                 "mandatory": true,
-                "__typename": "FlexiMaterialDeal"
+                "suffix": ""
               }
-            ],
-            "__typename": "FlexiDealSet"
+            ]
           },
           {
             "setNo": "00000002",
             "materials": [
               {
                 "minQty": "0.000",
-                "materialNumber": "000000000021130718",
+                "materialNumber": "000000000023340303",
                 "rate": "",
                 "type": "",
                 "conditionNumber": "",
                 "mandatory": false,
-                "__typename": "FlexiMaterialDeal"
+                "suffix": ""
               },
               {
                 "minQty": "0.000",
-                "materialNumber": "000000000021222875",
+                "materialNumber": "000000000023340157",
                 "rate": "",
                 "type": "",
                 "conditionNumber": "",
                 "mandatory": false,
-                "__typename": "FlexiMaterialDeal"
+                "suffix": ""
               }
-            ],
-            "__typename": "FlexiDealSet"
+            ]
           }
-        ],
-        "__typename": "ComboDeal"
+        ]
       }
     ]
-  },
-  "extensions": {
-    "trace-id": "e3d897709a2e469ca35f89e76c924b80"
   }
 }

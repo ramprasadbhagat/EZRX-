@@ -41,4 +41,15 @@ class CartLocalDataSource {
         .map((e) => CartProductDto.fromJson(e).toDomain)
         .toList();
   }
+
+    Future<List<PriceAggregate>> upsertCartItemsWithComboOffers() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/upsertCartItemsWithComboOffersResponse.json'),
+    );
+    final products = data['data']['upsertCartItems']['EzRxItems'];
+
+    return List.from(makeResponseCamelCase(jsonEncode(products)))
+        .map((e) => CartProductDto.fromJson(e).toDomain)
+        .toList();
+  }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -484,103 +485,109 @@ void main() {
   //   },
   // );
 
-  //TODO: Update test for combodealK5 here
-  // group('Combo deal material list', () {
-  //   test('get successfully', () async {
-  //     final variables = {
-  //       'salesOrganisation': 'fake-sales-org',
-  //       'customerCode': 'fake-customer-code',
-  //       'shipToCustomer': 'fake-shipto-code',
-  //       'first': 10,
-  //       'after': 0,
-  //       'principalNameList': ['fake-name'],
-  //     };
-  //     final res = json.decode(
-  //       await rootBundle
-  //           .loadString('assets/json/getMaterialsWithMetaResponse.json'),
-  //     );
+  group('Combo deal material list with principal', () {
+    test('get successfully', () async {
+      final variables = {
+        'After': 0,
+        'Customer': 'fake-customer-code',
+        'First': 24,
+        'Language': 'fake-language',
+        'SalesOrg': 'fake-sales-org',
+        'ShipTo': 'fake-shipto-code',
+        'principalCodeList': ['fake-principal-code'],
+      };
+      final res = json.decode(
+        await rootBundle.loadString(
+          'assets/json/getComboDealDetailForPrincipleResponseK5.json',
+        ),
+      );
 
-  //     dioAdapter.onPost(
-  //       '/api/license',
-  //       (server) => server.reply(
-  //         200,
-  //         res,
-  //         delay: const Duration(seconds: 1),
-  //       ),
-  //       headers: {'Content-Type': 'application/json; charset=utf-8'},
-  //       data: jsonEncode({
-  //         'query': remoteDataSource.materialListQuery.comboDealMaterials,
-  //         'variables': variables
-  //       }),
-  //     );
+      dioAdapter.onPost(
+        '/api/price',
+        (server) => server.reply(
+          200,
+          res,
+          delay: const Duration(seconds: 1),
+        ),
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        data: jsonEncode({
+          'query': remoteDataSource.materialListQuery
+              .getComboDealPrincipalMaterialsQuery(),
+          'variables': variables
+        }),
+      );
 
-  //     final result = await remoteDataSource.getComboDealMaterialsPrincipalCode(
-  //       customerCode: 'fake-customer-code',
-  //       offset: 0,
-  //       pageSize: 10,
-  //       principalNameList: ['fake-name'],
-  //       salesOrgCode: 'fake-sales-org',
-  //       shipToCode: 'fake-shipto-code',
-  //       language: 'fake-language',
-  //     );
-  //     final finalData = res['data']['materialsWithMeta']['materials'];
+      final result = await remoteDataSource.getComboDealMaterialsPrincipalCode(
+        customerCode: 'fake-customer-code',
+        offset: 0,
+        pageSize: 24,
+        principalCodeList: ['fake-principal-code'],
+        salesOrgCode: 'fake-sales-org',
+        shipToCode: 'fake-shipto-code',
+        language: 'fake-language',
+      );
+      final finalData =
+          makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
 
-  //     expect(
-  //       result,
-  //       List.from(finalData)
-  //           .map((e) => MaterialDto.fromJson(e).toDomain())
-  //           .toList(),
-  //     );
-  //   });
+      expect(
+        result,
+        MaterialResponseDto.fromJson(finalData).toDomain(),
+      );
+    });
 
-  //   test('get failure', () async {
-  //     final variables = {
-  //       'salesOrganisation': 'fake-sales-org',
-  //       'customerCode': 'fake-customer-code',
-  //       'shipToCustomer': 'fake-shipto-code',
-  //       'first': 10,
-  //       'after': 0,
-  //       'principalNameList': ['fake-name'],
-  //     };
+    test('get failure', () async {
+      final variables = {
+        'After': 0,
+        'Customer': 'fake-customer-code',
+        'First': 24,
+        'Language': 'fake-language',
+        'SalesOrg': 'fake-sales-org',
+        'ShipTo': 'fake-shipto-code',
+        'principalCodeList': ['fake-principal-code'],
+      };
+      final res = json.decode(
+        await rootBundle.loadString(
+          'assets/json/getComboDealDetailForPrincipleResponseK5.json',
+        ),
+      );
 
-  //     dioAdapter.onPost(
-  //       '/api/license',
-  //       (server) => server.reply(
-  //         200,
-  //         {
-  //           'data': null,
-  //           'errors': [
-  //             {'message': 'fake-error'}
-  //           ],
-  //         },
-  //         delay: const Duration(seconds: 1),
-  //       ),
-  //       headers: {'Content-Type': 'application/json; charset=utf-8'},
-  //       data: jsonEncode({
-  //         'query': remoteDataSource.materialListQuery.comboDealMaterials,
-  //         'variables': variables
-  //       }),
-  //     );
-  //     final res = json.decode(
-  //       await rootBundle.loadString('assets/json/getAllProductsResponse.json'),
-  //     );
-  //     final finalData =
-  //         makeResponseCamelCase(jsonEncode(res['data']['GetProductDetails']));
+      dioAdapter.onPost(
+        '/api/price',
+        (server) => server.reply(
+          200,
+          {
+            'data': null,
+            'errors': [
+              {'message': 'fake-error'}
+            ],
+          },
+          delay: const Duration(seconds: 1),
+        ),
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        data: jsonEncode({
+          'query': remoteDataSource.materialListQuery
+              .getComboDealPrincipalMaterialsQuery(),
+          'variables': variables
+        }),
+      );
 
-  //     await remoteDataSource
-  //         .getComboDealMaterialsPrincipalCode(
-  //       customerCode: 'fake-customer-code',
-  //       offset: 0,
-  //       pageSize: 10,
-  //       principalNameList: ['fake-name'],
-  //       salesOrgCode: 'fake-sales-org',
-  //       shipToCode: 'fake-shipto-code',
-  //       language: 'fake-language',
-  //     )
-  //         .onError((error, _) async {
-  //       expect(error, isA<ServerException>());
-  //       return Future.value(MaterialResponseDto.fromJson(finalData).toDomain());
-  //     });
-  //   });
-  // });
+      final finalData =
+          makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
+
+      await remoteDataSource
+          .getComboDealMaterialsPrincipalCode(
+        customerCode: 'fake-customer-code',
+        offset: 0,
+        pageSize: 24,
+        principalCodeList: ['fake-principal-code'],
+        salesOrgCode: 'fake-sales-org',
+        shipToCode: 'fake-shipto-code',
+        language: 'fake-language',
+      )
+          .onError((error, _) async {
+        expect(error, isA<ServerException>());
+        return Future.value(MaterialResponseDto.fromJson(finalData).toDomain());
+      });
+    });
+  });
 }

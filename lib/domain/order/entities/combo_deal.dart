@@ -212,7 +212,6 @@ class ComboDeal with _$ComboDeal {
                 .rateToAbs ??
             0;
       case ComboDealScheme.kWithSuffix:
-        //TODO: Implement later for K4
         return groupDeal.discountInfo.rateToAbs;
     }
   }
@@ -230,7 +229,6 @@ class ComboDeal with _$ComboDeal {
       case ComboDealScheme.k4:
         return descendingSortedQtyTiers.last.minQty;
       case ComboDealScheme.kWithSuffix:
-        //TODO: Implement later for K4
         return groupDeal.minTotalQuantity;
       default:
         return 0;
@@ -362,7 +360,6 @@ class ComboDeal with _$ComboDeal {
       case ComboDealScheme.k5:
         return k5MaximumDiscountRate;
       case ComboDealScheme.kWithSuffix:
-        //TODO: Implement later for K4
         return groupDeal.discountInfo.rateDisplay;
     }
   }
@@ -546,7 +543,6 @@ extension ComboDealSchemeExt on ComboDealScheme {
           },
         );
       case ComboDealScheme.kWithSuffix:
-        //TODO: Implement later for K4
         return '';
     }
   }

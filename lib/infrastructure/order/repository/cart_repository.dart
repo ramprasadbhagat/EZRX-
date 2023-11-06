@@ -611,7 +611,7 @@ class CartRepository implements ICartRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final productList = await cartLocalDataSource.upsertCartItems();
+        final productList = await cartLocalDataSource.upsertCartItemsWithComboOffers();
 
         return Right(productList);
       } catch (e) {

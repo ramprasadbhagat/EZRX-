@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -30,7 +28,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dar
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_product_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -55,6 +55,7 @@ class StockInfoLocalDataSourceMock extends Mock
     implements StockInfoLocalDataSource {}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   late Config mockConfig;
   late StockInfoLocalDataSourceMock stockInfoLocalDataSource;
   late StockInfoRemoteDataSourceMock stockInfoRemoteDataSource;
@@ -74,8 +75,9 @@ void main() {
       ),
     ),
   ];
+  final fakeCartProductsWithCombo = <PriceAggregate>[];
 
-  setUpAll(() {
+  setUpAll(() async {
     mockConfig = MockConfig();
     when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
@@ -114,6 +116,9 @@ void main() {
       currency: Currency('SG'),
       salesOrg: fakeSalesOrg,
     );
+
+    fakeCartProductsWithCombo
+        .addAll(await CartLocalDataSource().upsertCartItemsWithComboOffers());
 
     when(
       () => stockInfoLocalDataSource.getStockInfo(),
@@ -720,9 +725,9 @@ void main() {
     test('upsertCartItemsWithComboOffers test local success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(
-        () => cartLocalDataSourceMock.upsertCartItems(),
+        () => cartLocalDataSourceMock.upsertCartItemsWithComboOffers(),
       ).thenAnswer(
-        (invocation) async => fakeCartProducts,
+        (invocation) async => fakeCartProductsWithCombo,
       );
 
       final result = await cartRepository.upsertCartItemsWithComboOffers(
@@ -730,14 +735,14 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
         language: 'en',
-        products: fakeCartProducts,
+        products: fakeCartProductsWithCombo,
       );
       expect(result.isRight(), true);
     });
 
     test('upsertCartItemsWithComboOffers test local failure', () async {
       when(
-        () => cartLocalDataSourceMock.upsertCartItems(),
+        () => cartLocalDataSourceMock.upsertCartItemsWithComboOffers(),
       ).thenThrow(
         (invocation) async => MockException(),
       );
@@ -753,13 +758,24 @@ void main() {
     });
 
     test('upsertCartItemsWithComboOffers test remote success', () async {
+      final requestParams = fakeCartProductsWithCombo.comboMaterialItemList
+          .map(
+            (productUpsertRequest) => ComboProductRequestDto.fromDomain(
+              comboProductRequest: productUpsertRequest,
+              salesOrg:
+                  mockSalesOrganisationConfigs.salesOrg.getOrDefaultValue(''),
+              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+              shipToId: fakeShipToInfo.shipToCustomerCode,
+            ).toMap(),
+          )
+          .toList();
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
         () => cartRemoteDataSource.upsertCartItemsWithComboOffer(
-          requestParams: [],
+          requestParams: requestParams,
         ),
       ).thenAnswer(
-        (invocation) async => [],
+        (invocation) async => fakeCartProductsWithCombo,
       );
 
       final result = await cartRepository.upsertCartItemsWithComboOffers(
@@ -767,7 +783,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
         language: 'en',
-        products: [],
+        products: fakeCartProductsWithCombo,
       );
       expect(result.isRight(), true);
     });

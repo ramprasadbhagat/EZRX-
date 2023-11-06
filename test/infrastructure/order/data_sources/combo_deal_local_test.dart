@@ -41,7 +41,7 @@ void main() async {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getComboDealForPrincipleGroupResponseK5.json',
+              'assets/json/getComboDealForPrincipleResponseK5.json',
             ),
           );
 

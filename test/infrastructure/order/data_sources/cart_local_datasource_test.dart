@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -46,6 +47,26 @@ void main() async {
           expect(
             result,
             List.from(finalData)
+                .map((e) => CartProductDto.fromJson(e).toDomain)
+                .toList(),
+          );
+        },
+      );
+
+      test(
+        'Cart local data source upsertCartItemsWithComboOffers',
+        () async {
+          final data = json.decode(
+            await rootBundle.loadString(
+              'assets/json/upsertCartItemsWithComboOffersResponse.json',
+            ),
+          );
+          final finalData = data['data']['upsertCartItems']['EzRxItems'];
+          final result = await localDataSource.upsertCartItemsWithComboOffers();
+
+          expect(
+            result,
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
                 .map((e) => CartProductDto.fromJson(e).toDomain)
                 .toList(),
           );

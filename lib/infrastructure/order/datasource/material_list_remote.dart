@@ -109,7 +109,7 @@ class MaterialListRemoteDataSource {
     required int pageSize,
     required int offset,
     required String language,
-    required List<String> principalNameList,
+    required List<String> principalCodeList,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getComboDealPrincipalMaterialsQuery();
@@ -122,7 +122,7 @@ class MaterialListRemoteDataSource {
           'Language': language,
           'SalesOrg': salesOrgCode,
           'ShipTo': shipToCode,
-          'principalCodeList': principalNameList,
+          'principalCodeList': principalCodeList,
         },
       };
 

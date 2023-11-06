@@ -79,4 +79,15 @@ class MaterialListLocalDataSource {
 
     return MaterialDto.fromJson(finalData).toDomain();
   }
+
+  Future<MaterialResponse> getComboDealMaterialsPrincipalCode() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/getComboDealDetailForPrincipleResponseK5.json'),
+    );
+
+    final finalData =
+        makeResponseCamelCase(jsonEncode(data['data']['GetAllProducts']));
+
+    return MaterialResponseDto.fromJson(finalData).toDomain();
+  }
 }
