@@ -27,8 +27,7 @@ class _PaymentAdviceButton extends StatelessWidget {
           previous.isListLoading != current.isListLoading ||
           previous.isDetailFetching != current.isDetailFetching ||
           previous.isSavingAdvice != current.isSavingAdvice ||
-          previous.isFetchingAdvice != current.isFetchingAdvice ||
-          previous.isDeletingPayment != current.isDeletingPayment,
+          previous.isFetchingAdvice != current.isFetchingAdvice,
       builder: (context, state) {
         return state.isLoading ||
                 state.paymentItemList.isEmpty ||
@@ -65,10 +64,19 @@ class _PaymentAdviceButton extends StatelessWidget {
                               color: ZPColors.red,
                             ),
                           ),
+                          onPressed: state.isSavingAdvice
+                              ? null
+                              : () => _showDeleteAdviceBottomSheet(
+                                    context,
+                                    paymentAdviceNumber: state
+                                        .paymentSummaryDetails
+                                        .zzAdvice
+                                        .displayDashIfEmpty,
+                                  ),
                           child: SizedBox(
                             height: 20,
                             child: LoadingShimmer.withChild(
-                              enabled: state.isSavingOrDeleting,
+                              enabled: state.isSavingAdvice,
                               child: Text(
                                 'Delete advice'.tr(),
                                 style: Theme.of(context)
@@ -78,14 +86,6 @@ class _PaymentAdviceButton extends StatelessWidget {
                               ).tr(),
                             ),
                           ),
-                          onPressed: () {
-                            if (state.isDeletingPayment) return;
-                            _showDeleteAdviceBottomSheet(
-                              context,
-                              paymentAdviceNumber: state.paymentSummaryDetails
-                                  .zzAdvice.displayDashIfEmpty,
-                            );
-                          },
                         ),
                       ),
                     if (!state.paymentSummaryDetails.status
@@ -101,10 +101,17 @@ class _PaymentAdviceButton extends StatelessWidget {
                             color: ZPColors.primary,
                           ),
                         ),
+                        onPressed: state.isSavingAdvice
+                            ? null
+                            : () => context
+                                .read<PaymentSummaryDetailsBloc>()
+                                .add(
+                                  const PaymentSummaryDetailsEvent.saveAdvice(),
+                                ),
                         child: SizedBox(
                           height: 20,
                           child: LoadingShimmer.withChild(
-                            enabled: state.isSavingOrDeleting,
+                            enabled: state.isSavingAdvice,
                             child: Text(
                               context.tr('Download advice'),
                               style: Theme.of(context)
@@ -116,11 +123,6 @@ class _PaymentAdviceButton extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          context.read<PaymentSummaryDetailsBloc>().add(
-                                const PaymentSummaryDetailsEvent.saveAdvice(),
-                              );
-                        },
                       ),
                     ),
                   ],
@@ -139,7 +141,7 @@ class _PaymentAdviceButton extends StatelessWidget {
       enableDrag: false,
       isDismissible: false,
       isScrollControlled: true,
-      builder: (_) => _DeleteAdviceBottomSheet(
+      builder: (_) => DeleteAdviceBottomSheet(
         paymentAdviceNumber: paymentAdviceNumber,
       ),
     );

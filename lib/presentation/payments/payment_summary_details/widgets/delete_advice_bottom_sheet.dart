@@ -1,8 +1,8 @@
 part of 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 
-class _DeleteAdviceBottomSheet extends StatelessWidget {
+class DeleteAdviceBottomSheet extends StatelessWidget {
   final String paymentAdviceNumber;
-  const _DeleteAdviceBottomSheet({
+  const DeleteAdviceBottomSheet({
     Key? key,
     required this.paymentAdviceNumber,
   }) : super(key: key);
@@ -10,6 +10,7 @@ class _DeleteAdviceBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.deleteAdviceBottomSheet,
       padding: const EdgeInsets.only(
         top: 20,
         left: 20,
@@ -79,38 +80,79 @@ class _DeleteAdviceButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: OutlinedButton(
-            onPressed: () {
-              context.router.pop();
+    return BlocConsumer<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
+      listenWhen: (previous, current) =>
+          previous.isDeletingPayment != current.isDeletingPayment,
+      listener: (context, state) {
+        if (!state.isDeletingPayment) {
+          state.failureOrSuccessOption.fold(
+            () {
+              context.read<PaymentSummaryBloc>().add(
+                    PaymentSummaryEvent.fetch(
+                      appliedFilter: PaymentSummaryFilter.empty(),
+                      searchKey: SearchKey.searchFilter(''),
+                    ),
+                  );
+              context.router
+                  .popUntilRouteWithName(PaymentSummaryPageRoute.name);
+              CustomSnackBar(
+                messageText:
+                    '${context.read<EligibilityBloc>().state.salesOrg.paymentIdPretext} #${state.paymentSummaryDetails.zzAdvice.displayDashIfEmpty} has been deleted',
+              ).show(context);
             },
-            child: Text(context.tr('Cancel')),
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Expanded(
-          child: ElevatedButton(
-            style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                  backgroundColor: const MaterialStatePropertyAll(
-                    ZPColors.red,
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) {},
+            ),
+          );
+        }
+      },
+      buildWhen: (previous, current) =>
+          previous.isDeletingPayment != current.isDeletingPayment,
+      builder: (context, state) {
+        return Row(
+          children: [
+            Expanded(
+              child: OutlinedButton(
+                onPressed:
+                    state.isDeletingPayment ? null : () => context.router.pop(),
+                child: LoadingShimmer.withChild(
+                  enabled: state.isDeletingPayment,
+                  child: Text(
+                    context.tr('Cancel'),
                   ),
                 ),
-            onPressed: () {
-              context.read<PaymentSummaryDetailsBloc>().add(
-                    const PaymentSummaryDetailsEvent.deleteAdvice(),
-                  );
-              context.router.pop();
-            },
-            child: Text(
-              context.tr('Delete'),
+              ),
             ),
-          ),
-        ),
-      ],
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: ElevatedButton(
+                key: WidgetKeys.deleteAdviceBottomSheetDeleteButton,
+                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                      backgroundColor: const MaterialStatePropertyAll(
+                        ZPColors.red,
+                      ),
+                    ),
+                onPressed: state.isDeletingPayment
+                    ? null
+                    : () => context.read<PaymentSummaryDetailsBloc>().add(
+                          const PaymentSummaryDetailsEvent.deleteAdvice(),
+                        ),
+                child: LoadingShimmer.withChild(
+                  enabled: state.isDeletingPayment,
+                  child: Text(
+                    context.tr('Delete'),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

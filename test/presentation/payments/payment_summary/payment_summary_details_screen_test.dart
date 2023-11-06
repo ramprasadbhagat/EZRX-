@@ -1,18 +1,25 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -39,7 +46,13 @@ class MockCustomerCodeBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class AutoRouterMock extends Mock implements AppRouter {}
+class MockAppRouter extends Mock implements AppRouter {}
+
+class MaterialPageXMock extends Mock implements MaterialPageX {}
+
+class PaymentSummaryBlocMock
+    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
+    implements PaymentSummaryBloc {}
 
 class MockPaymentSummaryDetailsBloc
     extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
@@ -56,10 +69,26 @@ void main() {
   late UserBloc mockUserBloc;
   late CustomerCodeBloc mockCustomerCodeBloc;
   late AnnouncementBloc mockAnnouncementBloc;
+  late PaymentSummaryBloc paymentSummaryBloc;
   late PaymentSummaryDetailsBloc mockPaymentSummaryDetailsBloc;
   late AuthBloc mockAuthBloc;
   late EligibilityBloc eligibilityBlocMock;
   late PaymentSummaryDetails fakePaymentDetails;
+  late PaymentSummaryDetails mockPaymentDetails;
+  late List<PaymentItem> mockPaymentItemList;
+  late PaymentInvoiceInfoPdf mockPaymentInvoiceInfoPdf;
+
+  final routeData = RouteData(
+    route: const RouteMatch(
+      name: 'PaymentSummaryDetailsPageRoute',
+      segments: ['payments', 'payment_summary', 'payment_summary_details'],
+      path: 'payments/payment_summary/payment_summary_details',
+      stringMatch: 'payments/payment_summary/payment_summary_details',
+      key: ValueKey('PaymentSummaryDetailsPageRoute'),
+    ),
+    router: MockAppRouter(),
+    pendingChildren: [],
+  );
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -67,15 +96,21 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
+    mockPaymentDetails =
+        await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+    mockPaymentItemList = await PaymentItemLocalDataSource().getPaymentItems();
+    mockPaymentInvoiceInfoPdf =
+        await NewPaymentLocalDataSource().getPaymentInvoiceInfoPdf();
   });
   setUp(() async {
     mockSalesOrgBloc = MockSalesOrgBloc();
     mockUserBloc = MockUserBloc();
-    autoRouterMock = locator<AppRouter>();
+    autoRouterMock = MockAppRouter();
     mockCustomerCodeBloc = MockCustomerCodeBloc();
     eligibilityBlocMock = EligibilityBlockMock();
     mockAuthBloc = MockAuthBloc();
     mockAnnouncementBloc = MockAnnouncementBloc();
+    paymentSummaryBloc = PaymentSummaryBlocMock();
     mockPaymentSummaryDetailsBloc = MockPaymentSummaryDetailsBloc();
     fakePaymentDetails = PaymentSummaryDetails.empty()
         .copyWith(status: FilterStatus('In Progress'));
@@ -92,11 +127,17 @@ void main() {
           .thenReturn(EligibilityState.initial());
       when(() => mockAnnouncementBloc.state)
           .thenReturn(AnnouncementState.initial());
+      when(() => paymentSummaryBloc.state)
+          .thenReturn(PaymentSummaryState.initial());
       when(() => mockPaymentSummaryDetailsBloc.state)
           .thenReturn(PaymentSummaryDetailsState.initial());
+      when(() => autoRouterMock.currentPath)
+          .thenReturn('payments/payment_summary/payment_summary_details');
+      when(() => autoRouterMock.current).thenReturn(routeData);
+      when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
     });
 
-    RouteDataScope getWUT() {
+    RouteDataScope getWUT({required Widget child}) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
@@ -112,6 +153,9 @@ void main() {
           ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
+          BlocProvider<PaymentSummaryBloc>(
+            create: (context) => paymentSummaryBloc,
+          ),
           BlocProvider<PaymentSummaryDetailsBloc>(
             create: (context) => mockPaymentSummaryDetailsBloc,
           ),
@@ -122,8 +166,8 @@ void main() {
             create: (context) => eligibilityBlocMock,
           ),
         ],
-        child: const Scaffold(
-          body: PaymentSummaryDetailsPage(),
+        child: Scaffold(
+          body: child,
         ),
       );
     }
@@ -145,7 +189,11 @@ void main() {
         Stream.fromIterable(expectedStates),
       );
 
-      await tester.pumpWidget(getWUT());
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
       await tester.pump();
 
       expect(
@@ -154,7 +202,7 @@ void main() {
       );
     });
     testWidgets(
-        'Payment Summary Details Page Body Test - fina two buttons respect to the Payment Summary Details status',
+        'Payment Summary Details Page Body Test - find two buttons respect to the Payment Summary Details status',
         (tester) async {
       when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
         PaymentSummaryDetailsState.initial().copyWith(
@@ -180,7 +228,11 @@ void main() {
         Stream.fromIterable(expectedStates),
       );
 
-      await tester.pumpWidget(getWUT());
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
       await tester.pumpAndSettle();
       final findRow = find.byKey(WidgetKeys.buttonRowKey);
       expect(findRow, findsOneWidget);
@@ -194,6 +246,192 @@ void main() {
         );
         expect(deleteadviceButton, findsOneWidget);
       }
+    });
+
+    testWidgets(
+        'Payment Summary Details Page - delete payment advice snackbar should not be displayed if not deleted',
+        (tester) async {
+      final expectedStates = [
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDetailFetching: true,
+          isFetchingAdvice: true,
+          failureOrSuccessOption:
+              optionOf(Left(FailureHandler.handleFailure('Fake-error'))),
+        ),
+        PaymentSummaryDetailsState.initial().copyWith(
+          paymentSummaryDetails: mockPaymentDetails,
+          paymentItemList: mockPaymentItemList,
+          paymentInvoiceInfoPdf: mockPaymentInvoiceInfoPdf,
+          failureOrSuccessOption: none(),
+        ),
+      ];
+      whenListen(
+        mockPaymentSummaryDetailsBloc,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      verifyNever(
+        () => paymentSummaryBloc.add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: PaymentSummaryFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+      );
+      expect(
+        find.widgetWithText(
+          CustomSnackBar,
+          'PA #09EZ230000544601 has been deleted',
+        ),
+        findsNothing,
+      );
+    });
+
+    testWidgets(
+        'Payment Summary Details Page - Delete payment advice and verify delete event call',
+        (tester) async {
+      final expectedStates = [
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDetailFetching: true,
+          isFetchingAdvice: true,
+        ),
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDetailFetching: false,
+          isFetchingAdvice: false,
+          isDeletingPayment: false,
+          paymentSummaryDetails: mockPaymentDetails,
+          paymentItemList: mockPaymentItemList,
+          paymentInvoiceInfoPdf: mockPaymentInvoiceInfoPdf,
+        ),
+      ];
+
+      whenListen(
+        mockPaymentSummaryDetailsBloc,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final deleteAdviceButton = find.byKey(
+        WidgetKeys.deleteAdviceButtonKey,
+      );
+      final deleteAdviceBottomSheetFinder = find.byKey(
+        WidgetKeys.deleteAdviceBottomSheet,
+      );
+      final deleteButtonFinder = find.byKey(
+        WidgetKeys.deleteAdviceBottomSheetDeleteButton,
+      );
+      expect(deleteAdviceButton, findsOneWidget);
+      await tester.tap(deleteAdviceButton);
+      await tester.pumpAndSettle();
+      expect(deleteAdviceBottomSheetFinder, findsOneWidget);
+      expect(deleteButtonFinder, findsOneWidget);
+      await tester.tap(deleteButtonFinder);
+      await tester.pump();
+      verify(
+        () => mockPaymentSummaryDetailsBloc.add(
+          const PaymentSummaryDetailsEvent.deleteAdvice(),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Payment Summary Details Page - Delete payment advice success',
+        (tester) async {
+      when(
+        () =>
+            autoRouterMock.popUntilRouteWithName(PaymentSummaryPageRoute.name),
+      ).thenAnswer((invocation) => Future(() => null));
+
+      final expectedStates = [
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDeletingPayment: true,
+        ),
+        PaymentSummaryDetailsState.initial().copyWith(
+          paymentSummaryDetails: mockPaymentDetails,
+          isDeletingPayment: false,
+        ),
+      ];
+
+      whenListen(
+        mockPaymentSummaryDetailsBloc,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const DeleteAdviceBottomSheet(
+            paymentAdviceNumber: '09EZ230000544601',
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      verify(
+        () => paymentSummaryBloc.add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: PaymentSummaryFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+      );
+
+      verify(
+        () =>
+            autoRouterMock.popUntilRouteWithName(PaymentSummaryPageRoute.name),
+      ).called(1);
+      expect(
+        find.widgetWithText(
+          CustomSnackBar,
+          'PA #09EZ230000544601 has been deleted',
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Payment Summary Details Page - Delete payment advice fail',
+        (tester) async {
+      final expectedStates = [
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDeletingPayment: true,
+        ),
+        PaymentSummaryDetailsState.initial().copyWith(
+          paymentSummaryDetails: mockPaymentDetails,
+          isDeletingPayment: false,
+          failureOrSuccessOption:
+              optionOf(Left(FailureHandler.handleFailure('Fake-error'))),
+        ),
+      ];
+
+      whenListen(
+        mockPaymentSummaryDetailsBloc,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const DeleteAdviceBottomSheet(
+            paymentAdviceNumber: '09EZ230000544601',
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        find.widgetWithText(
+          CustomSnackBar,
+          'Fake-error',
+        ),
+        findsOneWidget,
+      );
     });
   });
 }

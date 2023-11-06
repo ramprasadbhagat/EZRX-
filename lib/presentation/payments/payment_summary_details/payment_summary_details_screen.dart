@@ -14,6 +14,7 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -35,24 +36,10 @@ class PaymentSummaryDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
       listenWhen: (previous, current) =>
-          previous.failureOrSuccessOption != current.failureOrSuccessOption ||
-          previous.isDeletingPayment != current.isDeletingPayment,
+          previous.isLoading != current.isLoading &&
+          previous.failureOrSuccessOption != current.failureOrSuccessOption,
       listener: (context, state) => state.failureOrSuccessOption.fold(
-        () {
-          if (!state.isDeletingPayment) {
-            context.read<PaymentSummaryBloc>().add(
-                  PaymentSummaryEvent.fetch(
-                    appliedFilter: PaymentSummaryFilter.empty(),
-                    searchKey: SearchKey.searchFilter(''),
-                  ),
-                );
-            context.router.popForced();
-            CustomSnackBar(
-              messageText:
-                  '${context.read<EligibilityBloc>().state.salesOrg.paymentIdPretext} #${state.paymentSummaryDetails.zzAdvice.displayDashIfEmpty} has been deleted',
-            ).show(context);
-          }
-        },
+        () {},
         (either) => either.fold(
           (failure) {
             ErrorUtils.handleApiFailure(context, failure);
