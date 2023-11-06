@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
@@ -201,6 +202,75 @@ void main() {
           ),
         ),
       ).called(1);
+    });
+
+    testWidgets(
+        ' => bonus quantity is low balance hide MaterialBonusDetailsSection',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              bonusItems: [
+                fakeReturnMaterial.copyWith(balanceQuantity: IntegerValue('0'))
+              ],
+            )
+          ],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              salesOrg: fakeSalesOrg,
+              returnItemDetailsList: [
+                fakeReturnItemDetails.copyWith(
+                  balanceQty: IntegerValue('0'),
+                )
+              ],
+            )
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(WidgetKeys.materialBonusDetailsSection),
+        findsNothing,
+      );
+    });
+
+    testWidgets(
+        ' => bonus quantity is low balance show BonusLowBalanceQuantityWarning',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              bonusItems: [
+                fakeReturnMaterial.copyWith(balanceQuantity: IntegerValue('0'))
+              ],
+            )
+          ],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              salesOrg: fakeSalesOrg,
+              returnItemDetailsList: [
+                fakeReturnItemDetails.copyWith(
+                  balanceQty: IntegerValue('0'),
+                )
+              ],
+            )
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          'You cannot return this bonus item as there is no balance quantity.'
+              .tr(),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets(

@@ -12,9 +12,21 @@ class _MaterialBonusInfoSection extends StatelessWidget {
     return ExpandableInfo(
       labelText: context.tr('Bonus details'),
       toggle: _ToggleActiveButton(item: data),
-      child: BonusMaterialInfo(
-        data: data,
-        noteLineVisible: true,
+      child: Column(
+        children: [
+          if (!data.balanceQuantity.isGreaterThanZero)
+            InfoLabel(
+              margin: EdgeInsets.zero,
+              mainColor: ZPColors.priceWarning,
+              textValue:
+                  'You cannot return this bonus item as there is no balance quantity.'
+                      .tr(),
+            ),
+          BonusMaterialInfo(
+            data: data,
+            noteLineVisible: true,
+          ),
+        ],
       ),
     );
   }
@@ -70,7 +82,8 @@ class _ToggleActiveButton extends StatelessWidget {
                     );
                   },
                 ),
-                value: state.isIncludeBonus(item.uuid),
+                value: item.balanceQuantity.isGreaterThanZero &&
+                    state.isIncludeBonus(item.uuid),
                 onChanged: (bool value) {
                   context.read<NewRequestBloc>().add(
                         NewRequestEvent.toggleBonusItem(

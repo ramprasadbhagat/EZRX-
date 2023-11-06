@@ -26,7 +26,8 @@ class _BonusItemSection extends StatelessWidget {
                     return Column(
                       children: [
                         _MaterialBonusInfoSection(data: item),
-                        if (detail.itemNumber.isNotEmpty)
+                        if (detail.itemNumber.isNotEmpty &&
+                            item.balanceQuantity.isGreaterThanZero)
                           _MaterialBonusDetailsSection(
                             item: item,
                             detail: detail,

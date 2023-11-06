@@ -22,6 +22,7 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
                 ? AutovalidateMode.always
                 : AutovalidateMode.disabled,
             child: Column(
+              key: WidgetKeys.materialBonusDetailsSection,
               children: [
                 BalanceQuantityField(data: item),
                 const SizedBox(
