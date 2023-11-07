@@ -8,6 +8,7 @@ class _ProductImageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
+      key: WidgetKeys.productImageSection,
       buildWhen: (previous, current) =>
           previous.additionInfo != current.additionInfo,
       builder: (context, state) {
@@ -16,7 +17,7 @@ class _ProductImageSection extends StatelessWidget {
           showBorder: true,
           child: CustomImage(
             imageUrl: state.additionInfo[bonusItem.materialNumber]
-                    ?.productImages.first.thumbNail ??
+                    ?.productImages.firstOrNull?.thumbNail ??
                 '',
             fit: BoxFit.fitHeight,
           ),

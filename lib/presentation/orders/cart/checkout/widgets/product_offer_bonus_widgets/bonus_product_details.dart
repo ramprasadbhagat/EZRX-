@@ -7,6 +7,7 @@ class _ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      key: WidgetKeys.bonusProductDetail,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

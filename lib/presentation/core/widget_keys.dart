@@ -585,6 +585,9 @@ class WidgetKeys {
   static const Key checkoutStickyGrandTotal = Key('checkoutStickyGrandTotal');
   static const Key checkoutStickyTotalQty = Key('checkoutStickyTotalQty');
   static const Key orderPriceSummarySheet = Key('orderPriceSummarySheet');
+  static const Key quantityAndPrice = Key('quantityAndPrice');
+  static const Key productImageSection = Key('productImageSection');
+  static const Key bonusProductDetail = Key('bonusProductDetail');
 
   //============================================================
   //  Material List
