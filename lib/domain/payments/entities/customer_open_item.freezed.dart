@@ -32,7 +32,7 @@ mixin _$CustomerOpenItem {
   DateTimeStringValue get cashDiscountDueDate =>
       throw _privateConstructorUsedError;
   double get totalAmountInDisplayCrcy => throw _privateConstructorUsedError;
-  String get displayCurrency => throw _privateConstructorUsedError;
+  Currency get displayCurrency => throw _privateConstructorUsedError;
   double get openAmountInDisplayCrcy => throw _privateConstructorUsedError;
   String get fiscalYear => throw _privateConstructorUsedError;
   String get isDisputed => throw _privateConstructorUsedError;
@@ -71,7 +71,7 @@ abstract class $CustomerOpenItemCopyWith<$Res> {
       double cashDiscountAmountInDspCrcy,
       DateTimeStringValue cashDiscountDueDate,
       double totalAmountInDisplayCrcy,
-      String displayCurrency,
+      Currency displayCurrency,
       double openAmountInDisplayCrcy,
       String fiscalYear,
       String isDisputed,
@@ -185,7 +185,7 @@ class _$CustomerOpenItemCopyWithImpl<$Res, $Val extends CustomerOpenItem>
       displayCurrency: null == displayCurrency
           ? _value.displayCurrency
           : displayCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Currency,
       openAmountInDisplayCrcy: null == openAmountInDisplayCrcy
           ? _value.openAmountInDisplayCrcy
           : openAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
@@ -257,7 +257,7 @@ abstract class _$$_CustomerOpenItemCopyWith<$Res>
       double cashDiscountAmountInDspCrcy,
       DateTimeStringValue cashDiscountDueDate,
       double totalAmountInDisplayCrcy,
-      String displayCurrency,
+      Currency displayCurrency,
       double openAmountInDisplayCrcy,
       String fiscalYear,
       String isDisputed,
@@ -369,7 +369,7 @@ class __$$_CustomerOpenItemCopyWithImpl<$Res>
       displayCurrency: null == displayCurrency
           ? _value.displayCurrency
           : displayCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Currency,
       openAmountInDisplayCrcy: null == openAmountInDisplayCrcy
           ? _value.openAmountInDisplayCrcy
           : openAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
@@ -479,7 +479,7 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
   @override
   final double totalAmountInDisplayCrcy;
   @override
-  final String displayCurrency;
+  final Currency displayCurrency;
   @override
   final double openAmountInDisplayCrcy;
   @override
@@ -624,7 +624,7 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
       required final double cashDiscountAmountInDspCrcy,
       required final DateTimeStringValue cashDiscountDueDate,
       required final double totalAmountInDisplayCrcy,
-      required final String displayCurrency,
+      required final Currency displayCurrency,
       required final double openAmountInDisplayCrcy,
       required final String fiscalYear,
       required final String isDisputed,
@@ -667,7 +667,7 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
   @override
   double get totalAmountInDisplayCrcy;
   @override
-  String get displayCurrency;
+  Currency get displayCurrency;
   @override
   double get openAmountInDisplayCrcy;
   @override

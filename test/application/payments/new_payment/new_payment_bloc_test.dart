@@ -58,7 +58,7 @@ void main() {
         cashDiscountAmountInDspCrcy: 0,
         cashDiscountDueDate: DateTimeStringValue('2023-06-30'),
         totalAmountInDisplayCrcy: 999,
-        displayCurrency: 'MYR',
+        displayCurrency: Currency('MYR'),
         openAmountInDisplayCrcy: 999,
         fiscalYear: '2023',
         isDisputed: '',

@@ -23,7 +23,7 @@ class CustomerOpenItem with _$CustomerOpenItem {
     required double cashDiscountAmountInDspCrcy,
     required DateTimeStringValue cashDiscountDueDate,
     required double totalAmountInDisplayCrcy,
-    required String displayCurrency,
+    required Currency displayCurrency,
     required double openAmountInDisplayCrcy,
     required String fiscalYear,
     required String isDisputed,
@@ -52,7 +52,7 @@ class CustomerOpenItem with _$CustomerOpenItem {
         cashDiscountAmountInDspCrcy: 0,
         cashDiscountDueDate: DateTimeStringValue(''),
         totalAmountInDisplayCrcy: 0,
-        displayCurrency: '',
+        displayCurrency: Currency(''),
         openAmountInDisplayCrcy: 0,
         fiscalYear: '',
         isDisputed: '',
@@ -70,7 +70,7 @@ class CustomerOpenItem with _$CustomerOpenItem {
 extension CustomerOpenItemListExtension on List<CustomerOpenItem> {
   double get amountTotal => fold<double>(
         0,
-        (sum, item) => item.transactionCurrency.isPH
+        (sum, item) => item.displayCurrency.isPH
             ? sum + item.openAmountInTransCrcy - item.g2Tax - item.g4Tax
             : sum + item.openAmountInTransCrcy,
       );

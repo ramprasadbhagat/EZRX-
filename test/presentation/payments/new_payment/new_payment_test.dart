@@ -104,7 +104,7 @@ void main() {
       isDisputed: 'fake-ID',
       fiscalYear: '2020',
       openAmountInDisplayCrcy: 50,
-      displayCurrency: 'fake-DC',
+      displayCurrency: Currency('fake-DC'),
       totalAmountInDisplayCrcy: 100,
       cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
       cashDiscountAmountInDspCrcy: 0,
@@ -130,7 +130,7 @@ void main() {
       isDisputed: 'fake-ID',
       fiscalYear: '2020',
       openAmountInDisplayCrcy: 50,
-      displayCurrency: 'fake-DC',
+      displayCurrency: Currency('fake-DC'),
       totalAmountInDisplayCrcy: 100,
       cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
       cashDiscountAmountInDspCrcy: 0,
@@ -156,7 +156,7 @@ void main() {
       isDisputed: 'fake-ID',
       fiscalYear: '2020',
       openAmountInDisplayCrcy: 50,
-      displayCurrency: 'fake-DC',
+      displayCurrency: Currency('fake-DC'),
       totalAmountInDisplayCrcy: 100,
       cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
       cashDiscountAmountInDspCrcy: 0,
@@ -185,7 +185,7 @@ void main() {
       isDisputed: 'fake-ID',
       fiscalYear: '2020',
       openAmountInDisplayCrcy: 50,
-      displayCurrency: 'fake-DC',
+      displayCurrency: Currency('fake-DC'),
       totalAmountInDisplayCrcy: 100,
       cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
       cashDiscountAmountInDspCrcy: 0,
@@ -211,7 +211,7 @@ void main() {
       isDisputed: 'fake-ID',
       fiscalYear: '2020',
       openAmountInDisplayCrcy: 50,
-      displayCurrency: 'fake-DC',
+      displayCurrency: Currency('fake-DC'),
       totalAmountInDisplayCrcy: 100,
       cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
       cashDiscountAmountInDspCrcy: 0,
@@ -237,7 +237,7 @@ void main() {
       isDisputed: 'fake-ID',
       fiscalYear: '2020',
       openAmountInDisplayCrcy: 50,
-      displayCurrency: 'fake-DC',
+      displayCurrency: Currency('fake-DC'),
       totalAmountInDisplayCrcy: 100,
       cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
       cashDiscountAmountInDspCrcy: 0,
@@ -434,6 +434,32 @@ void main() {
         final value =
             (tester.firstWidget(nextButton1) as ElevatedButton).enabled;
         expect(value, true);
+      });
+
+      testWidgets('Invoice Ph tax deducted price', (WidgetTester tester) async {
+        when(() => outstandingInvoicesBlocMock.state).thenReturn(
+          OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
+        );
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedInvoices: [
+              fakeInvoices.first.copyWith(
+                displayCurrency: Currency('php'),
+                g2Tax: 5,
+                g4Tax: 1,
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final nextButton1 = find.byKey(WidgetKeys.nextButton);
+        expect(nextButton1, findsOneWidget);
+        final value =
+            (tester.firstWidget(nextButton1) as ElevatedButton).enabled;
+        expect(value, true);
+        expect(find.text('44.00'), findsWidgets);
       });
     });
 

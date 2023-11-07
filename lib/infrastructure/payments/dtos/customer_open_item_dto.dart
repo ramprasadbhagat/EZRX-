@@ -72,7 +72,7 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
       cashDiscountAmountInDspCrcy: cashDiscountAmountInDspCrcy,
       cashDiscountDueDate: DateTimeStringValue(cashDiscountDueDate),
       totalAmountInDisplayCrcy: totalAmountInDisplayCrcy,
-      displayCurrency: displayCurrency,
+      displayCurrency: Currency(displayCurrency),
       openAmountInDisplayCrcy: openAmountInDisplayCrcy,
       fiscalYear: fiscalYear,
       isDisputed: isDisputed,

@@ -22,8 +22,6 @@ class CustomerInvoiceDto with _$CustomerInvoiceDto {
         required String discountDate,
     @JsonKey(name: 'displayAmount', defaultValue: '')
         required String displayAmount,
-    @JsonKey(name: 'displayCurrency', defaultValue: '')
-        required String displayCurrency,
     @JsonKey(name: 'displayOpenAmount', defaultValue: '')
         required String displayOpenAmount,
     @JsonKey(name: 'dueDate', defaultValue: '') required String dueDate,
@@ -55,7 +53,6 @@ class CustomerInvoiceDto with _$CustomerInvoiceDto {
       discountDate: customerOpenItem.cashDiscountDueDate.getValue(),
       displayAmount:
           customerOpenItem.totalAmountInDisplayCrcy.toStringAsFixed(2),
-      displayCurrency: customerOpenItem.displayCurrency,
       displayOpenAmount:
           customerOpenItem.openAmountInDisplayCrcy.toStringAsFixed(2),
       dueDate: customerOpenItem.netDueDate.getValue(),
@@ -69,7 +66,7 @@ class CustomerInvoiceDto with _$CustomerInvoiceDto {
       salesOrg: customerOpenItem.companyCode,
       zzDeductCode: <PaymentDeductionDto>[],
     );
-    if (customerOpenItem.transactionCurrency.isPH) {
+    if (customerOpenItem.displayCurrency.isPH) {
       return customerInvoiceDto.copyWith(
         paymentAmount: (customerOpenItem.paymentAmountInDisplayCrcy -
                 customerOpenItem.g2Tax -
