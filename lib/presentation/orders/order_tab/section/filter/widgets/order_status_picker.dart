@@ -19,6 +19,7 @@ class _OrderStatusPicker extends StatelessWidget {
           final value = selectedStatus.contains(status);
 
           return CheckboxListTile(
+            key: WidgetKeys.statusFilter(name, value),
             contentPadding: EdgeInsets.zero,
             title: Text(
               name,

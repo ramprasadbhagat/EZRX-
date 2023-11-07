@@ -10,7 +10,7 @@ class _BundleItemDetailsSection extends StatelessWidget {
           previous.isLoadingBundleDetail != current.isLoadingBundleDetail,
       builder: (context, state) {
         return Padding(
-          key: WidgetKeys.viewByOrderDetailItemsSection,
+          key: WidgetKeys.viewByOrderDetailBundleSection,
           padding: const EdgeInsets.symmetric(
             horizontal: 20.0,
           ),

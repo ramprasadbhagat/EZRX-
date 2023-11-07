@@ -681,6 +681,7 @@ class WidgetKeys {
   static const Key toOrderDateField = Key('toOrderDateField');
   static const Key viewByOrderDetailsPageListView =
       Key('viewByOrderDetailsPageListView');
+  static const Key poAttachmentTile = Key('poAttachmentTile');
 
   //============================================================
   //  Material Details
@@ -1099,6 +1100,8 @@ class WidgetKeys {
   //============================================================
   static Key viewByOrderDetailOrderCode =
       const Key('viewByOrderDetailOrderCode');
+  static Key viewByOrderDetailBundleSection =
+      const Key('viewByOrderDetailBundleSection');
   static Key viewByOrderDetailItemsSection =
       const Key('viewByOrderDetailItems');
   static Key viewByOrderDetailOrderDate =

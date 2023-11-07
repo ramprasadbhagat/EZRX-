@@ -88,6 +88,14 @@ final fakeSalesOrgConfigPaymentTermsEnabled =
   enablePaymentTerms: true,
 );
 
+final fakeSalesOrgConfigDisablePaymentTermsDisplay =
+    SalesOrganisationConfigs.empty().copyWith(
+  disablePaymentTermsDisplay: true,
+);
+
+final fakeSalesOrgConfigShowPoAttachment =
+    SalesOrganisationConfigs.empty().copyWith(showPOAttachment: true);
+
 final fakeVNSalesOrgConfigItemTaxBreakdownEnabled =
     SalesOrganisationConfigs.empty().copyWith(
   displayItemTaxBreakdown: true,

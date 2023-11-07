@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -20,6 +21,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
@@ -27,11 +29,15 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_t
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -401,29 +407,134 @@ void main() {
       expect(expectedDelivery, findsNothing);
     });
 
-    testWidgets('test Attachments', (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
-        ViewByOrderDetailsState.initial().copyWith(
-          isLoading: false,
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsPoDocuments: [PoDocuments.empty()],
-          ),
-        ),
-      );
+    group('Attachments -', () {
+      final attachmentList = [
+        PoDocuments.empty().copyWith(name: 'fake-name-1'),
+        PoDocuments.empty().copyWith(name: 'fake-name-2'),
+      ];
 
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            showPOAttachment: true,
+      setUp(() {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigShowPoAttachment,
           ),
-        ),
-      );
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pump();
-      final expectedDelivery = find.text(
-        'Attachments:',
-      );
-      expect(expectedDelivery, findsOneWidget);
+        );
+      });
+
+      testWidgets('Empty state', (tester) async {
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        expect(
+          find.byKey(WidgetKeys.balanceTextRow('Attachments'.tr(), 'NA')),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('Collapsed state', (tester) async {
+        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+          ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+                orderHistoryDetailsPoDocuments: attachmentList,
+              ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        expect(find.text('Attachments:'), findsOneWidget);
+        expect(find.byKey(WidgetKeys.poAttachmentTile), findsOneWidget);
+        final showMoreButton = find.text('Show more'.tr());
+        expect(showMoreButton, findsOneWidget);
+        await tester.tap(showMoreButton);
+        await tester.pump();
+        verify(
+          () => mockViewByOrderDetailsBloc
+              .add(const ViewByOrderDetailsEvent.expandAttachments()),
+        ).called(1);
+      });
+
+      testWidgets('Expanded state', (tester) async {
+        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+          ViewByOrderDetailsState.initial().copyWith(
+            orderHistoryDetails: OrderHistoryDetails.empty()
+                .copyWith(orderHistoryDetailsPoDocuments: attachmentList),
+            isExpanded: true,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        expect(find.text('Attachments:'), findsOneWidget);
+        final poAttachmentTile = find.byKey(WidgetKeys.poAttachmentTile);
+        const index = 1;
+        expect(
+          poAttachmentTile,
+          findsNWidgets(attachmentList.length),
+        );
+        expect(find.text('Show less'.tr()), findsOneWidget);
+        await tester.tap(poAttachmentTile.at(index));
+        await tester.pump();
+        verify(
+          () => mockPoAttachmentBloc.add(
+            PoAttachmentEvent.downloadFile(files: [attachmentList[index]]),
+          ),
+        ).called(1);
+      });
+
+      testWidgets('Download success', (tester) async {
+        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+          ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+                orderHistoryDetailsPoDocuments: attachmentList,
+              ),
+        );
+
+        whenListen(
+          mockPoAttachmentBloc,
+          Stream.fromIterable([
+            PoAttachmentState.initial().copyWith(
+              failureOrSuccessOption: optionOf(const Right(unit)),
+              fileOperationMode: FileOperationMode.download,
+              isFetching: false,
+            )
+          ]),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+        final snackBarMessage = find.byKey(WidgetKeys.customSnackBarMessage);
+        expect(
+          tester.widget<Text>(snackBarMessage).data,
+          equals('Attachments downloaded successfully.'.tr()),
+        );
+      });
+
+      testWidgets('Download failure', (tester) async {
+        const fakeMessage = 'Fake-error-message';
+        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+          ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+                orderHistoryDetailsPoDocuments: attachmentList,
+              ),
+        );
+
+        whenListen(
+          mockPoAttachmentBloc,
+          Stream.fromIterable([
+            PoAttachmentState.initial().copyWith(
+              failureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other(fakeMessage))),
+              fileOperationMode: FileOperationMode.download,
+              isFetching: false,
+            )
+          ]),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+        final snackBarMessage = find.byKey(WidgetKeys.customSnackBarMessage);
+        expect(
+          tester.widget<Text>(snackBarMessage).data,
+          equals(fakeMessage.tr()),
+        );
+      });
     });
 
     testWidgets('test when enableSpecialInstructions is true', (tester) async {
@@ -451,6 +562,73 @@ void main() {
       await tester.pump();
       final expectedDelivery = find.textContaining('Delivery instruction');
       expect(expectedDelivery, findsOneWidget);
+    });
+
+    testWidgets('test when enableMobileNumber is true', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableMobileNumber: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      expect(
+        find.descendant(
+          of: find.byType(BalanceTextRow),
+          matching: find.textContaining('Contact person'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byType(BalanceTextRow),
+          matching: find.textContaining('Contact number'),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('test when enableFutureDeliveryDay is true', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableFutureDeliveryDay: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      expect(
+        find.descendant(
+          of: find.byType(BalanceTextRow),
+          matching: find.textContaining('Requested Delivery Date'),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('test when enableReferenceNote is true', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableReferenceNote: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      expect(
+        find.descendant(
+          of: find.byType(BalanceTextRow),
+          matching: find.textContaining('Reference Note'),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets(
@@ -832,6 +1010,145 @@ void main() {
           'RSD HOSPITALS SDN BHD (SJMC)   t/a SUBANG JAYA MEDICAL CENTRE NO 1 JALAN SS 12/1A 47500 SUBANG JAYA 47500';
       final shipToAddressFinder = find.textContaining(fullShipToAddress);
       expect(shipToAddressFinder, findsOneWidget);
+    });
+
+    testWidgets('Status tracker is not displayed', (tester) async {
+      const fakeStatus = 'test';
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+              processingStatus: StatusType(fakeStatus),
+            ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.statusTracker(fakeStatus)),
+        findsNothing,
+      );
+    });
+
+    testWidgets('Order Bundle item is visible when order contains bundle',
+        (tester) async {
+      final bundleList = [
+        OrderHistoryDetailsOrderItem.empty()
+            .copyWith(productType: MaterialInfoType.bundle())
+      ];
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+              orderHistoryDetailsOrderItem: bundleList,
+            ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      expect(
+        find.byKey(WidgetKeys.viewByOrderDetailBundleSection),
+        findsOneWidget,
+      );
+
+      expect(find.byType(OrderBundleItem), findsNWidgets(bundleList.length));
+    });
+
+    group('in ID market', () {
+      testWidgets('Order item', (tester) async {
+        const fakeQty = 2;
+        const fakePickedQty = 1;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+          ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryDetailsOrderItem.copyWith(
+                productType: MaterialInfoType.material(),
+                qty: fakeQty,
+                pickedQuantity: fakePickedQty,
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.drag(find.byType(ListView), const Offset(0, -10000));
+        await tester.pumpAndSettle();
+        final item = find.byKey(WidgetKeys.genericKey(key: '0'));
+        expect(item, findsOneWidget);
+        expect(
+          find.descendant(of: item, matching: find.byType(StatusLabel)),
+          findsNothing,
+        );
+        expect(
+          find.descendant(
+            of: item,
+            matching: find.text('$fakePickedQty of $fakeQty stocks fulfilled'),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('Order summary section', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.priceText),
+            matching: find.text('Subtotal (excl. tax):'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.priceText),
+            matching: find.text('Small order fee:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.priceText),
+            matching: find.text('Tax at 11%:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.textContaining(
+            'Applies to orders less than ${StringUtils.displayPrice(fakeEmptySalesConfigs, 300000)}',
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.priceText),
+            matching: find.textContaining('Manual fee:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.priceText),
+            matching: find.textContaining('Grand total:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.priceText),
+            matching: find.textContaining('Total savings:'),
+          ),
+          findsOneWidget,
+        );
+      });
     });
   });
 }

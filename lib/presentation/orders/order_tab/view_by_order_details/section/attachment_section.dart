@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,6 +70,7 @@ class _AttachmentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       poDocuments.name,
+      key: WidgetKeys.poAttachmentTile,
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
       style: Theme.of(context).textTheme.titleSmall?.copyWith(
