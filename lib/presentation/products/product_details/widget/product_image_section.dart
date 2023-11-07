@@ -90,7 +90,7 @@ class _ProductImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return !state.isFetching && productImage.image.isEmpty
+    return !productImage.hasMultipleImage
         ? const SizedBox.shrink()
         : Container(
             key: WidgetKeys.materialDetailsCarousel,

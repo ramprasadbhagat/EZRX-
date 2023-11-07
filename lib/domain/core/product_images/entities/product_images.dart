@@ -22,4 +22,6 @@ class ProductImages with _$ProductImages {
         image: <String>[],
         thumbNail: '',
       );
+
+  bool get hasMultipleImage => image.length > 1;
 }
