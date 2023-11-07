@@ -87,10 +87,9 @@ class HomeTab extends StatelessWidget {
                   const CarouselBanner(),
                   BlocBuilder<EligibilityBloc, EligibilityState>(
                     buildWhen: (previous, current) =>
-                        previous.salesOrgConfigs.enableComboDeals !=
-                        current.salesOrgConfigs.enableComboDeals,
+                        previous.comboDealEligible != current.comboDealEligible,
                     builder: (context, state) {
-                      if (state.salesOrgConfigs.enableComboDeals) {
+                      if (state.comboDealEligible) {
                         return const ComboOffersSection();
                       }
 

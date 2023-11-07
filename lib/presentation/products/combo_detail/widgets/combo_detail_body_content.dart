@@ -102,7 +102,7 @@ class _ComboDetailBodyContent extends StatelessWidget {
             isLoading: state.isLoadMore,
             itemBuilder: (context, index, item) => _ComboProductTile(
               comboItem: item,
-              isMandatory: item.selfComboDeal.mandatory,
+              isMandatory: haveFixedMaterials,
             ),
             items: state.searchableList.values.toList(),
           ),

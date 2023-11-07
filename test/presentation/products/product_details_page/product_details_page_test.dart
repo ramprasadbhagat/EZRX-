@@ -1055,6 +1055,8 @@ void main() {
             user: user,
             salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPriceAndCombo,
+            customerCodeInfo: CustomerCodeInfo.empty()
+                .copyWith(salesDeals: [SalesDealNumber('0000000000')]),
           ),
         );
         when(() => materialPriceMockBloc.state).thenReturn(

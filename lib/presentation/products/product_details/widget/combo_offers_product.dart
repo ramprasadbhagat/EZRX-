@@ -64,8 +64,7 @@ class ComboOffersProduct extends StatelessWidget {
           final eligibilityState = context.read<EligibilityBloc>().state;
           final materialPriceState = context.read<MaterialPriceBloc>().state;
 
-          final enableComboDeals =
-              eligibilityState.salesOrgConfigs.enableComboDeals;
+          final enableComboDeals = eligibilityState.comboDealEligible;
 
           final priceComboDeal =
               materialPriceState.materialPrice[materialNumber]?.comboDeal;

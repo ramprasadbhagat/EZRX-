@@ -172,7 +172,7 @@ class EligibilityState with _$EligibilityState {
 
   bool get comboDealEligible {
     if (!salesOrgConfigs.enableComboDeals) return false;
-    if (!customerCodeInfo.comboEligible) return false;
+    if (customerCodeInfo.salesDeals.isEmpty) return false;
 
     final comboDealUserRole = salesOrgConfigs.comboDealsUserRole;
     final userRole = user.role.type;
@@ -181,7 +181,7 @@ class EligibilityState with _$EligibilityState {
       return true;
     }
 
-    if (comboDealUserRole.isCustomerOnly && !userRole.isSalesRepRole) {
+    if (comboDealUserRole.isCustomerOnly && userRole.isCustomer) {
       return true;
     }
 

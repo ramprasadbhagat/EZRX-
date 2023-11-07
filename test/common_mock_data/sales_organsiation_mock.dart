@@ -50,6 +50,7 @@ final salesOrgConfigEnabledMaterialWithoutPriceAndCombo =
     SalesOrganisationConfigs.empty().copyWith(
   materialWithoutPrice: true,
   enableComboDeals: true,
+  comboDealsUserRole: ComboDealUserRole(1),
 );
 
 final salesOrgConfigDisabledMaterialWithoutPrice =

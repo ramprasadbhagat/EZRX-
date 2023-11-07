@@ -48,7 +48,7 @@ void main() {
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
     role: Role.empty().copyWith(
-      type: RoleType('client'),
+      type: RoleType('client_admin'),
     ),
     enableOrderType: true,
   );
@@ -601,8 +601,8 @@ void main() {
               enableComboDeals: true,
               comboDealsUserRole: ComboDealUserRole(1),
             ),
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              comboEligible: true,
+            customerCodeInfo: fakeCustomerInfo.copyWith(
+              salesDeals: [SalesDealNumber('0000000000')],
             ),
             shipToInfo: fakeShipToInfo,
           );
@@ -621,8 +621,8 @@ void main() {
               enableComboDeals: true,
               comboDealsUserRole: ComboDealUserRole(2),
             ),
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              comboEligible: true,
+            customerCodeInfo: fakeCustomerInfo.copyWith(
+              salesDeals: [SalesDealNumber('0000000000')],
             ),
             shipToInfo: fakeShipToInfo,
           );

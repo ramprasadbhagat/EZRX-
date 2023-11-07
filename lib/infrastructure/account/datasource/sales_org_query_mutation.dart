@@ -101,6 +101,7 @@ class SalesOrgQueryMutation {
     displayItemTaxBreakdown
     displaySubtotalTaxBreakdown
     enableComboDeals
+    comboDealsUserRole
   }
 }
 

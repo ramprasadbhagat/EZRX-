@@ -72,11 +72,7 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
               },
               title: 'Bundle offers',
             ),
-            if (context
-                .read<EligibilityBloc>()
-                .state
-                .salesOrgConfigs
-                .enableComboDeals)
+            if (context.read<EligibilityBloc>().state.comboDealEligible)
               _ListTileThemeWidget(
                 value: state.materialFilter.comboOffers,
                 onChanged: (value) {
