@@ -295,6 +295,9 @@ class ComboDealMaterialDetailBloc
         emit(
           state.copyWith(
             isUpdateCart: e.contain,
+            items: e.contain
+                ? state.items
+                : state.resetCurrentDealQuantityMapItems,
           ),
         );
       },

@@ -172,6 +172,16 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
 
   ComboDeal get currentDeal => items.values.toList().firstComboDeal;
 
+  Map<MaterialNumber, PriceAggregate> get resetCurrentDealQuantityMapItems =>
+      Map.fromEntries(
+        items.entries.map(
+          (entry) => MapEntry(
+            entry.key,
+            entry.value.copyWithComboDealMinQty(currentDeal),
+          ),
+        ),
+      );
+
   String get currentPrincipalCode =>
       items.values
           .toList()
