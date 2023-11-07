@@ -124,6 +124,8 @@ class WidgetKeys {
   static const Key browseProductsList = Key('browseProductsList');
   static const Key announcementsList = Key('announcementsList');
   static const Key announcementTitle = Key('announcementTitle');
+  static const Key browseProductLoadingShimmer =
+      Key('browseProductLoadingShimmer');
   static Key sectionTileIcon(String title) => Key('sectionTitleIcon$title');
 
   //============================================================

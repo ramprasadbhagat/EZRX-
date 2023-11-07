@@ -49,7 +49,7 @@ class BrowseProduct extends StatelessWidget {
           builder: (_, state) {
             return state.isFetching || state.materialList.isNotEmpty
                 ? Column(
-                   key: WidgetKeys.browseProduct,
+                    key: WidgetKeys.browseProduct,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 10, top: 5),
@@ -62,7 +62,9 @@ class BrowseProduct extends StatelessWidget {
                         ),
                       ),
                       state.isFetching
-                          ? const _BrowseProductLoadingShimmer()
+                          ? const _BrowseProductLoadingShimmer(
+                              key: WidgetKeys.browseProductLoadingShimmer,
+                            )
                           : SizedBox(
                               height: 300,
                               child: ListView(
