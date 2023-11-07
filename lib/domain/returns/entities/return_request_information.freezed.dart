@@ -39,6 +39,7 @@ mixin _$ReturnRequestInformation {
   String get statusReason => throw _privateConstructorUsedError;
   bool get outsidePolicy => throw _privateConstructorUsedError;
   DateTimeStringValue get invoiceDate => throw _privateConstructorUsedError;
+  Prsfd get prsfd => throw _privateConstructorUsedError;
   List<ReturnRequestInformation> get bonusInformation =>
       throw _privateConstructorUsedError;
 
@@ -77,6 +78,7 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       String statusReason,
       bool outsidePolicy,
       DateTimeStringValue invoiceDate,
+      Prsfd prsfd,
       List<ReturnRequestInformation> bonusInformation});
 }
 
@@ -117,6 +119,7 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
     Object? statusReason = null,
     Object? outsidePolicy = null,
     Object? invoiceDate = null,
+    Object? prsfd = null,
     Object? bonusInformation = null,
   }) {
     return _then(_value.copyWith(
@@ -212,6 +215,10 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      prsfd: null == prsfd
+          ? _value.prsfd
+          : prsfd // ignore: cast_nullable_to_non_nullable
+              as Prsfd,
       bonusInformation: null == bonusInformation
           ? _value.bonusInformation
           : bonusInformation // ignore: cast_nullable_to_non_nullable
@@ -253,6 +260,7 @@ abstract class _$$_ReturnRequestInformationCopyWith<$Res>
       String statusReason,
       bool outsidePolicy,
       DateTimeStringValue invoiceDate,
+      Prsfd prsfd,
       List<ReturnRequestInformation> bonusInformation});
 }
 
@@ -291,6 +299,7 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
     Object? statusReason = null,
     Object? outsidePolicy = null,
     Object? invoiceDate = null,
+    Object? prsfd = null,
     Object? bonusInformation = null,
   }) {
     return _then(_$_ReturnRequestInformation(
@@ -386,6 +395,10 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      prsfd: null == prsfd
+          ? _value.prsfd
+          : prsfd // ignore: cast_nullable_to_non_nullable
+              as Prsfd,
       bonusInformation: null == bonusInformation
           ? _value._bonusInformation
           : bonusInformation // ignore: cast_nullable_to_non_nullable
@@ -421,6 +434,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
       required this.statusReason,
       required this.outsidePolicy,
       required this.invoiceDate,
+      required this.prsfd,
       required final List<ReturnRequestInformation> bonusInformation})
       : _imageUrl = imageUrl,
         _attachments = attachments,
@@ -485,6 +499,8 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
   final bool outsidePolicy;
   @override
   final DateTimeStringValue invoiceDate;
+  @override
+  final Prsfd prsfd;
   final List<ReturnRequestInformation> _bonusInformation;
   @override
   List<ReturnRequestInformation> get bonusInformation {
@@ -496,7 +512,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
 
   @override
   String toString() {
-    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, bonusInformation: $bonusInformation)';
+    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation)';
   }
 
   @override
@@ -546,6 +562,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
                 other.outsidePolicy == outsidePolicy) &&
             (identical(other.invoiceDate, invoiceDate) ||
                 other.invoiceDate == invoiceDate) &&
+            (identical(other.prsfd, prsfd) || other.prsfd == prsfd) &&
             const DeepCollectionEquality()
                 .equals(other._bonusInformation, _bonusInformation));
   }
@@ -576,6 +593,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
         statusReason,
         outsidePolicy,
         invoiceDate,
+        prsfd,
         const DeepCollectionEquality().hash(_bonusInformation)
       ]);
 
@@ -612,6 +630,7 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
           required final String statusReason,
           required final bool outsidePolicy,
           required final DateTimeStringValue invoiceDate,
+          required final Prsfd prsfd,
           required final List<ReturnRequestInformation> bonusInformation}) =
       _$_ReturnRequestInformation;
   _ReturnRequestInformation._() : super._();
@@ -662,6 +681,8 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   bool get outsidePolicy;
   @override
   DateTimeStringValue get invoiceDate;
+  @override
+  Prsfd get prsfd;
   @override
   List<ReturnRequestInformation> get bonusInformation;
   @override

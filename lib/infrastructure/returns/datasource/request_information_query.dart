@@ -34,6 +34,7 @@ class RequestInformationQuery {
       returnOrderDesc
       principal
       principalName
+      prsfd
       bapiSalesDocNumber
       bapiStatus
       status

@@ -128,6 +128,7 @@ enum PriceStyle {
   comboSubTotalItemWithTax,
   comboSubTotalExclTax,
   negativePrice,
+  returnBonusPrice,
 }
 
 Color _priceTextColor(PriceStyle type) {
@@ -190,6 +191,7 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       break;
     case PriceStyle.bonusPrice:
     case PriceStyle.summaryPrice:
+    case PriceStyle.returnBonusPrice:
     case PriceStyle.comboOfferPriceDiscounted:
       priceTextStyle = Theme.of(context).textTheme.titleSmall!;
       break;
@@ -282,6 +284,7 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
       return Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.darkGray,
           );
+    case PriceStyle.returnBonusPrice:
     default:
       return Theme.of(context)
           .textTheme

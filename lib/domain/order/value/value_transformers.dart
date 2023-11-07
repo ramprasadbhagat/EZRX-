@@ -98,3 +98,5 @@ PriceOverrideValue getPriceOverrideValue(double value) =>
 
 Zdp8OverrideValue getZdp8OverrideValue(double value) =>
     Zdp8OverrideValue(value);
+
+bool isBonusReturnType(String prsfd) => prsfd == 'B';

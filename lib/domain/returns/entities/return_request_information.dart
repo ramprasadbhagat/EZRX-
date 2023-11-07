@@ -30,6 +30,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required String statusReason,
     required bool outsidePolicy,
     required DateTimeStringValue invoiceDate,
+    required Prsfd prsfd,
     required List<ReturnRequestInformation> bonusInformation,
   }) = _ReturnRequestInformation;
 
@@ -58,6 +59,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         statusReason: '',
         totalPrice: 0.0,
         unitPrice: 0.0,
+        prsfd: Prsfd(''),
       );
 
   double get calculatedUnitPrice {

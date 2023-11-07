@@ -67,12 +67,13 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
       subtitle: '',
       isQuantityRequired: false,
       headerText:
-          'Batch ${widget.requestInformation.batch} (Expires ${widget.requestInformation.expiryDate.dateString})',
+          'Batch ${widget.requestInformation.batch}\n(Expires ${widget.requestInformation.expiryDate.dateString})',
       quantity: widget.requestInformation.returnQuantity.toString(),
       isQuantityBelowImage: false,
       priceComponent: PriceComponent(
         salesOrgConfig: salesOrgConfig,
         price: widget.requestInformation.calculatedUnitPrice.toString(),
+        type: PriceStyle.bonusPrice,
       ),
       statusWidget: StatusLabel(
         status: StatusType(
@@ -236,8 +237,10 @@ class _ReturnDetailsSection extends StatelessWidget {
   const _ReturnDetailsSection({
     Key? key,
     required this.requestInformation,
+    this.isBonusDetails = false,
   }) : super(key: key);
   final ReturnRequestInformation requestInformation;
+  final bool isBonusDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -250,7 +253,9 @@ class _ReturnDetailsSection extends StatelessWidget {
             bottom: 10,
           ),
           child: Text(
-            'Return details'.tr(),
+            isBonusDetails
+                ? context.tr('Bonus Return details')
+                : context.tr('Return details'),
             style: Theme.of(context).textTheme.labelMedium,
           ),
         ),
@@ -357,10 +362,15 @@ class _CustomListTile extends StatelessWidget {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        fileName,
-                        style: Theme.of(context).textTheme.titleMedium,
+                      Expanded(
+                        child: Text(
+                          fileName,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
                       ),
                       InkWell(
                         onTap: () {},
@@ -400,79 +410,87 @@ class _BonusItemSection extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  'Bonus return details'.tr(),
+                  'Bonus details'.tr(),
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
               ...requestInformation.bonusInformation.map(
-                (e) => Container(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: ZPColors.lightGray2,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+                (e) => Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 5),
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        color: ZPColors.lightGray2,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            e.materialNumber.displayMatNo,
-                            style: Theme.of(context).textTheme.bodySmall,
+                          Row(
+                            children: [
+                              Text(
+                                e.materialNumber.displayMatNo,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 5,
+                                ),
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  color: ZPColors.primary,
+                                ),
+                                child: Text(
+                                  'Bonus'.tr(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                        color: ZPColors.white,
+                                        fontSize: 10,
+                                      ),
+                                ),
+                              ),
+                            ],
                           ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 5,
-                            ),
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              color: ZPColors.primary,
-                            ),
-                            child: Text(
-                              'Bonus'.tr(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    color: ZPColors.white,
-                                    fontSize: 10,
-                                  ),
-                            ),
+                          Text(
+                            e.materialDescription,
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Batch ${e.batch} (Expires ${e.expiryDate.dateString})',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ),
+                              Text(
+                                'Qty: ${e.returnQuantity} ',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                          ),
+                          BalanceTextRow(
+                            keyText: 'Reason for return'.tr(),
+                            valueText: e.returnOrderDesc.tr(),
+                            keyFlex: 3,
                           ),
                         ],
                       ),
-                      Text(
-                        e.materialDescription,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Batch ${e.batch} (Expires ${e.expiryDate.dateString})',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ),
-                          Text(
-                            'Qty: ${e.returnQuantity} ',
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                        ],
-                      ),
-                      BalanceTextRow(
-                        keyText: 'Reason for return'.tr(),
-                        valueText: e.returnOrderDesc.tr(),
-                        keyFlex: 3,
-                      ),
-                    ],
-                  ),
+                    ),
+                    _ReturnDetailsSection(
+                      requestInformation: e,
+                      isBonusDetails: true,
+                    ),
+                  ],
                 ),
               ),
             ],

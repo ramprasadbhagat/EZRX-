@@ -64,6 +64,7 @@ class CommonTileItem extends StatelessWidget {
               topHeaderWidget: topHeaderWidget,
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _ImageBox(
                   isQuantityBelowImage:
@@ -307,7 +308,7 @@ class _ImageBox extends StatelessWidget {
             showBorder: true,
             showShadow: false,
             clipBehavior: Clip.antiAlias,
-            margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+            margin: const EdgeInsets.fromLTRB(0, 7, 8, 0),
             child: Stack(
               children: [
                 ProductImage(

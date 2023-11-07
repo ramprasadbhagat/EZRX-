@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/returns/return_summary_details/return_sum
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_request_summary_item_section.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_bonus_item_section.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_details_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -74,9 +75,14 @@ class _ReturnRequestSummaryByItemDetails
                         endIndent: 0,
                         color: ZPColors.lightGray2,
                       ),
-                      ReturnSummaryItemSection(
-                        requestInformation: state.requestInformation,
-                      ),
+                      state.requestInformation.prsfd.isBonus
+                          ? ReturnSummaryBonusItemSection(
+                              returnRequestInformation:
+                                  state.requestInformation,
+                            )
+                          : ReturnSummaryItemSection(
+                              requestInformation: state.requestInformation,
+                            ),
                     ],
                   ),
           );

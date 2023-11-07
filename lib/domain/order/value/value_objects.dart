@@ -865,3 +865,16 @@ class FavouriteResponse extends ValueObject<int> {
 
   bool get isSuccessful => checkIfSuccessful(value.getOrElse(() => 0));
 }
+
+class Prsfd extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Prsfd(String input) {
+    return Prsfd._(validateStringNotEmpty(input));
+  }
+
+  bool get isBonus => isBonusReturnType(value.getOrElse(() => ''));
+
+  const Prsfd._(this.value);
+}

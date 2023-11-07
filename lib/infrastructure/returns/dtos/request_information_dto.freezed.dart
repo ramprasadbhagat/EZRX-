@@ -44,11 +44,11 @@ abstract class $RequestInformationDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'requestHeader')
-          RequestInformationHeaderDto requestHeader,
+      RequestInformationHeaderDto requestHeader,
       @JsonKey(
-          name: 'requestInformationV2', defaultValue: <
-              ReturnRequestInformationDto>[])
-          List<ReturnRequestInformationDto> requestInformation});
+          name: 'requestInformationV2',
+          defaultValue: <ReturnRequestInformationDto>[])
+      List<ReturnRequestInformationDto> requestInformation});
 
   $RequestInformationHeaderDtoCopyWith<$Res> get requestHeader;
 }
@@ -102,11 +102,11 @@ abstract class _$$_RequestInformationDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'requestHeader')
-          RequestInformationHeaderDto requestHeader,
+      RequestInformationHeaderDto requestHeader,
       @JsonKey(
-          name: 'requestInformationV2', defaultValue: <
-              ReturnRequestInformationDto>[])
-          List<ReturnRequestInformationDto> requestInformation});
+          name: 'requestInformationV2',
+          defaultValue: <ReturnRequestInformationDto>[])
+      List<ReturnRequestInformationDto> requestInformation});
 
   @override
   $RequestInformationHeaderDtoCopyWith<$Res> get requestHeader;
@@ -143,12 +143,11 @@ class __$$_RequestInformationDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RequestInformationDto extends _RequestInformationDto {
   _$_RequestInformationDto(
-      {@JsonKey(name: 'requestHeader')
-          required this.requestHeader,
+      {@JsonKey(name: 'requestHeader') required this.requestHeader,
       @JsonKey(
-          name: 'requestInformationV2', defaultValue: <
-              ReturnRequestInformationDto>[])
-          required final List<ReturnRequestInformationDto> requestInformation})
+          name: 'requestInformationV2',
+          defaultValue: <ReturnRequestInformationDto>[])
+      required final List<ReturnRequestInformationDto> requestInformation})
       : _requestInformation = requestInformation,
         super._();
 
@@ -209,12 +208,12 @@ class _$_RequestInformationDto extends _RequestInformationDto {
 abstract class _RequestInformationDto extends RequestInformationDto {
   factory _RequestInformationDto(
       {@JsonKey(name: 'requestHeader')
-          required final RequestInformationHeaderDto requestHeader,
+      required final RequestInformationHeaderDto requestHeader,
       @JsonKey(
-          name: 'requestInformationV2', defaultValue: <
-              ReturnRequestInformationDto>[])
-          required final List<ReturnRequestInformationDto>
-              requestInformation}) = _$_RequestInformationDto;
+          name: 'requestInformationV2',
+          defaultValue: <ReturnRequestInformationDto>[])
+      required final List<ReturnRequestInformationDto>
+          requestInformation}) = _$_RequestInformationDto;
   _RequestInformationDto._() : super._();
 
   factory _RequestInformationDto.fromJson(Map<String, dynamic> json) =

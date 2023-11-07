@@ -56,6 +56,8 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
         required bool outsidePolicy,
     @JsonKey(name: 'invoiceDate', defaultValue: '')
         required String invoiceDate,
+    @JsonKey(name: 'prsfd', defaultValue: '')
+        required String prsfd,
     @JsonKey(
       name: 'bonusInformation',
       defaultValue: <ReturnRequestInformationDto>[],
@@ -88,6 +90,7 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       statusReason: statusReason,
       outsidePolicy: outsidePolicy,
       invoiceDate: DateTimeStringValue(invoiceDate),
+      prsfd: Prsfd(prsfd),
       bonusInformation: bonusInformation.map((e) => e.toDomain()).toList(),
     );
   }
