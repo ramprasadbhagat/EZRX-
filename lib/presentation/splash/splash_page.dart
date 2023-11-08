@@ -378,20 +378,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context.router.pushNamed('orders/material_details');
                   context.read<MaterialPriceBloc>().add(
                         MaterialPriceEvent.fetch(
-                          salesOrganisation: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .salesOrganisation,
-                          salesConfigs: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .salesOrgConfigs,
-                          customerCodeInfo: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<EligibilityBloc>().state.shipToInfo,
                           comboDealEligible: context
                               .read<EligibilityBloc>()
                               .state
@@ -832,12 +818,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   void _fetchMaterialPrice(BuildContext context, List<MaterialInfo> list) =>
       context.read<MaterialPriceBloc>().add(
             MaterialPriceEvent.fetch(
-              salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              salesConfigs: context.read<SalesOrgBloc>().state.configs,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               comboDealEligible:
                   context.read<EligibilityBloc>().state.comboDealEligible,
               materials: list,
@@ -890,7 +870,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         );
 
     context.read<MaterialPriceBloc>().add(
-          const MaterialPriceEvent.initialized(),
+          MaterialPriceEvent.initialized(
+            salesOrganisation: salesOrgState.salesOrganisation,
+            salesConfigs: salesOrgState.configs,
+            customerCodeInfo: state.customerCodeInfo,
+            shipToInfo: state.shipToInfo,
+          ),
         );
 
     context.read<AllInvoicesBloc>().add(

@@ -16,4 +16,12 @@ abstract class IMaterialPriceRepository {
     required List<MaterialNumber> materialNumberList,
     required bool comboDealEligible,
   });
+  Future<Either<ApiFailure, Price>> getMaterialPriceForZDP5Material({
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesConfigs,
+    required ShipToInfo shipToInfo,
+    required MaterialNumber materialNumber,
+    required bool exceedQty,
+  });
 }

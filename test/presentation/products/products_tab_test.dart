@@ -302,10 +302,6 @@ void main() {
           verify(
             () => materialPriceBlocMock.add(
               MaterialPriceEvent.fetch(
-                salesOrganisation: SalesOrganisation.empty(),
-                salesConfigs: SalesOrganisationConfigs.empty(),
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                shipToInfo: ShipToInfo.empty(),
                 comboDealEligible: false,
                 materials: [materialResponseMock.products.first],
               ),

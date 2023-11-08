@@ -40,6 +40,13 @@ class _SuggestedProductTile extends StatelessWidget {
             type: product.type,
           ),
         );
+    if (context.read<EligibilityBloc>().state.isZDP5eligible) {
+      context.read<MaterialPriceBloc>().add(
+            MaterialPriceEvent.fetchPriceForZDP5Materials(
+              materialInfo: product,
+            ),
+          );
+    }
     product.type.typeMaterial
         ? _toProductDetails(context, product)
         : _toBundleDetails(context);
@@ -49,10 +56,6 @@ class _SuggestedProductTile extends StatelessWidget {
     final eligibilityBlocState = context.read<EligibilityBloc>().state;
     context.read<MaterialPriceBloc>().add(
           MaterialPriceEvent.fetch(
-            salesOrganisation: eligibilityBlocState.salesOrganisation,
-            salesConfigs: eligibilityBlocState.salesOrgConfigs,
-            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
-            shipToInfo: eligibilityBlocState.shipToInfo,
             comboDealEligible: eligibilityBlocState.comboDealEligible,
             materials: [product],
           ),

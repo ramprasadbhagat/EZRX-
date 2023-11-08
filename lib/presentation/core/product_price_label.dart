@@ -27,17 +27,21 @@ class ProductPriceLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
+          previous.isFetching != current.isFetching ||
+          previous.materialPrice != current.materialPrice,
       builder: (context, state) {
         final itemPrice = state.materialPrice[materialInfo.materialNumber];
+        final salesOrgConfig =
+            context.read<EligibilityBloc>().state.salesOrgConfigs;
         if (itemPrice != null) {
           final priceAggregate = PriceAggregate(
             banner: EZReachBanner.empty(),
             price: itemPrice,
             materialInfo: materialInfo,
-            salesOrgConfig:
-                context.read<EligibilityBloc>().state.salesOrgConfigs,
-            quantity: 1,
+            salesOrgConfig: salesOrgConfig,
+            quantity: materialInfo.quantity.intValue == 0
+                ? 1
+                : materialInfo.quantity.intValue,
             // TODO: will revisit and enhance this
             discountedMaterialCount: itemPrice.zmgDiscount
                 ? context.watch<CartBloc>().state.zmgMaterialsQty(
@@ -60,10 +64,20 @@ class ProductPriceLabel extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (priceAggregate.zdp5PriceDisplay)
+                Padding(
+                  padding: const EdgeInsets.only(right: 5),
+                  child: PriceComponent(
+                    price: priceAggregate.displayZdp5Price,
+                    salesOrgConfig: salesOrgConfig,
+                  ),
+                ),
               PriceComponent(
+                type: priceAggregate.zdp5PriceDisplay
+                    ? PriceStyle.counterOfferPrice
+                    : PriceStyle.commonPrice,
                 price: priceAggregate.display(PriceType.unitPrice),
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                salesOrgConfig: salesOrgConfig,
               ),
             ],
           );

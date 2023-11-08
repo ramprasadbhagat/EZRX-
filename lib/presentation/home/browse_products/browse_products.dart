@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -143,6 +144,13 @@ class _BrowseProductCard extends StatelessWidget {
             type: materialInfo.type,
           ),
         );
+    if (context.read<EligibilityBloc>().state.isZDP5eligible) {
+      context.read<MaterialPriceBloc>().add(
+            MaterialPriceEvent.fetchPriceForZDP5Materials(
+              materialInfo: product,
+            ),
+          );
+    }
     context.router.pushNamed('orders/material_details');
   }
 }

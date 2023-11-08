@@ -23,15 +23,20 @@ class AvailableOffer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
+          previous.isFetching != current.isFetching ||
+          previous.materialPrice != current.materialPrice,
       builder: (context, state) {
         final price = state.getPriceForMaterial(materialNumber);
 
         final bonusMaterialList = price.availableBonus.toList();
         final productDetailsState = context.read<ProductDetailBloc>().state;
 
+        final eligibilityState = context.read<EligibilityBloc>().state;
+
         final isMYExternalSalesRepUser =
-            context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
+            eligibilityState.isMYExternalSalesRepUser;
+        final isZdp5enable = eligibilityState.salesOrgConfigs.enableZDP5 &&
+            eligibilityState.salesOrganisation.salesOrg.isVN;
 
         final displayOffers = productDetailsState.displayOffers(
           isMYExternalSalesRepUser: isMYExternalSalesRepUser,
@@ -43,6 +48,7 @@ class AvailableOffer extends StatelessWidget {
         );
 
         if ((!price.isBonusDealEligible && !price.isTireDiscountEligible) ||
+            (!isZdp5enable && !price.isTireDiscountEligible) ||
             !displayOffers) {
           return const SizedBox.shrink();
         }

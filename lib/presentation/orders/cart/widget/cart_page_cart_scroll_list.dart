@@ -18,20 +18,6 @@ class _CartPageCartScrollList extends StatelessWidget {
               if (context.read<CartBloc>().state.cartProducts.isNotEmpty) {
                 context.read<MaterialPriceBloc>().add(
                       MaterialPriceEvent.fetchPriceCartProduct(
-                        salesOrganisation: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .salesOrganisation,
-                        salesConfigs: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .salesOrgConfigs,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        shipToInfo:
-                            context.read<EligibilityBloc>().state.shipToInfo,
                         comboDealEligible: context
                             .read<EligibilityBloc>()
                             .state
@@ -48,6 +34,18 @@ class _CartPageCartScrollList extends StatelessWidget {
                             .toList(),
                       ),
                     );
+                final zdp5MaterialList = context
+                    .read<CartBloc>()
+                    .state
+                    .cartProducts
+                    .where((element) => element.hasZdp5Validation);
+                for (final e in zdp5MaterialList) {
+                  context.read<MaterialPriceBloc>().add(
+                        MaterialPriceEvent.fetchPriceForZDP5Materials(
+                          materialInfo: e.materialInfo,
+                        ),
+                      );
+                }
               }
             }
           },

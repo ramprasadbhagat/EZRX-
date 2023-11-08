@@ -179,7 +179,8 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
+          previous.isFetching != current.isFetching ||
+          previous.productDetailAggregate != current.productDetailAggregate,
       builder: (context, state) {
         final materialInfo = state.productDetailAggregate.materialInfo;
         final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
@@ -418,16 +419,49 @@ class _FooterState extends State<_Footer> {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final isZdp5enable = eligibilityState.salesOrgConfigs.enableZDP5 &&
+        eligibilityState.salesOrganisation.salesOrg.isVN;
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+        child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
+          listenWhen: (previous, current) =>
+              previous.productDetailAggregate != current.productDetailAggregate,
+          listener: (context, state) {
+            final price =
+                context.read<MaterialPriceBloc>().state.getPriceForMaterial(
+                      state.productDetailAggregate.materialInfo.materialNumber,
+                    );
+            if (isZdp5enable &&
+                state.productDetailAggregate.hasRemainingQuotaReached(
+                  price.zdp5RemainingQuota.intValue,
+                )) {
+              context.read<MaterialPriceBloc>().add(
+                    MaterialPriceEvent.fetchPriceForZDP5Materials(
+                      materialInfo: state.productDetailAggregate.materialInfo,
+                    ),
+                  );
+              context.read<ProductDetailBloc>().add(
+                    ProductDetailEvent.setExceedQty(
+                      exceedQty: state.productDetailAggregate.materialInfo
+                          .materialQtyConformZDP5Rule(
+                        price.zdp5MaxQuota.intValue,
+                        price.zdp5RemainingQuota.intValue,
+                      ),
+                    ),
+                  );
+            }
+          },
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching ||
               previous.inputQty != current.inputQty,
           builder: (context, state) {
             final materialInfo = state.productDetailAggregate.materialInfo;
             final productDetailAggregate = state.productDetailAggregate;
+            final isZdp5enable = eligibilityState.salesOrgConfigs.enableZDP5 &&
+                eligibilityState.salesOrganisation.salesOrg.isVN;
 
             return Column(
               mainAxisSize: MainAxisSize.min,
@@ -450,17 +484,50 @@ class _FooterState extends State<_Footer> {
                       flex: 5,
                       child: CartItemQuantityInput(
                         key: WidgetKeys.materialDetailsQuantityInput,
-                        addPressed: (value) {},
+                        addPressed: (value) {
+                          if (isZdp5enable) {
+                            context.read<ProductDetailBloc>().add(
+                                  ProductDetailEvent
+                                      .fetchItemQuantityForZdp5Discount(
+                                    quantity: int.parse(
+                                      _quantityEditingController.text,
+                                    ),
+                                  ),
+                                );
+                          }
+                        },
                         controller: _quantityEditingController,
                         isEnabled: !materialInfo.isSuspended,
                         onFieldChange: (value) {},
-                        onSubmit: (value) {},
+                        onSubmit: (value) {
+                          if (isZdp5enable) {
+                            context.read<ProductDetailBloc>().add(
+                                  ProductDetailEvent
+                                      .fetchItemQuantityForZdp5Discount(
+                                    quantity: int.parse(
+                                      _quantityEditingController.text,
+                                    ),
+                                  ),
+                                );
+                          }
+                        },
                         quantityAddKey: WidgetKeys.productDetailQuantityAddKey,
                         quantityDeleteKey:
                             WidgetKeys.productDetailQuantityDeleteKey,
                         quantityTextKey:
                             WidgetKeys.productDetailQuantityTextKey,
-                        minusPressed: (value) {},
+                        minusPressed: (value) {
+                          if (isZdp5enable) {
+                            context.read<ProductDetailBloc>().add(
+                                  ProductDetailEvent
+                                      .fetchItemQuantityForZdp5Discount(
+                                    quantity: int.parse(
+                                      _quantityEditingController.text,
+                                    ),
+                                  ),
+                                );
+                          }
+                        },
                         height: MediaQuery.of(context).size.height * 0.056,
                       ),
                     ),

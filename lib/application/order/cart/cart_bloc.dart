@@ -622,6 +622,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           return element.copyWith(
             salesOrgConfig: state.config,
             price: updatedPrice,
+            exceedQuantity: element.materialInfo.materialQtyConformZDP5Rule(
+              element.price.zdp5MaxQuota.intValue,
+              element.price.zdp5RemainingQuota.intValue,
+            ),
           );
         }).toList();
 
@@ -634,7 +638,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
         add(
           _VerifyMaterialDealBonus(
-            item: PriceAggregate.empty(),
+            item: cartProductList.firstWhere(
+              (element) => e.priceProducts
+                  .containsKey(element.materialInfo.materialNumber),
+              orElse: () => PriceAggregate.empty(),
+            ),
             items: cartProductList,
           ),
         );
@@ -851,6 +859,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         bundle: cartProduct.bundle.copyWith(materials: bundleMaterial),
         salesOrgConfig: salesOrganisationConfigs,
         stockInfoList: priceAggregate.stockInfoList,
+        exceedQuantity: priceAggregate.exceedQuantity
+            ? priceAggregate.materialInfo.materialQtyConformZDP5Rule(
+                priceAggregate.price.zdp5MaxQuota.intValue,
+                priceAggregate.price.zdp5RemainingQuota.intValue,
+              )
+            : false,
       );
     }).toList();
   }

@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
@@ -57,9 +56,9 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   void initState() {
+    final eligibilityState = context.read<EligibilityBloc>().state;
     final cartProducts = context.read<CartBloc>().state.cartProducts;
     if (cartProducts.isNotEmpty) {
-      final eligibilityState = context.read<EligibilityBloc>().state;
       context.read<CartBloc>().add(
             CartEvent.getDetailsProductsAddedToCart(
               cartProducts: cartProducts,
@@ -67,12 +66,11 @@ class _CartPageState extends State<CartPage> {
           );
       context.read<MaterialPriceBloc>().add(
             MaterialPriceEvent.fetchPriceCartProduct(
-              salesOrganisation: eligibilityState.salesOrganisation,
-              salesConfigs: eligibilityState.salesOrgConfigs,
-              customerCodeInfo: eligibilityState.customerCodeInfo,
-              shipToInfo: eligibilityState.shipToInfo,
               comboDealEligible: eligibilityState.comboDealEligible,
-              products: cartProducts
+              products: context
+                  .read<CartBloc>()
+                  .state
+                  .cartProducts
                   .where((element) => element.materialInfo.type.typeMaterial)
                   .map((e) => e.materialInfo)
                   .toList(),
@@ -104,6 +102,15 @@ class _CartPageState extends State<CartPage> {
           }
         }
       }
+      final zdp5MaterialList =
+          cartProducts.where((element) => element.hasZdp5Validation);
+      for (final e in zdp5MaterialList) {
+        context.read<MaterialPriceBloc>().add(
+              MaterialPriceEvent.fetchPriceForZDP5Materials(
+                materialInfo: e.materialInfo,
+              ),
+            );
+      }
     }
     super.initState();
   }
@@ -127,7 +134,8 @@ class _CartPageState extends State<CartPage> {
         ),
         BlocListener<CartBloc, CartState>(
           listenWhen: (previous, current) =>
-              previous.subTotalHidePriceMaterial != current.subTotalHidePriceMaterial &&
+              previous.subTotalHidePriceMaterial !=
+                      current.subTotalHidePriceMaterial &&
                   !current.isFetchingCartProductDetail ||
               previous.isMappingPrice != current.isMappingPrice &&
                   !current.isMappingPrice ||

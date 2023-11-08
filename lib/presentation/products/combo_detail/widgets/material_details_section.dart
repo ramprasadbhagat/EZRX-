@@ -21,13 +21,16 @@ class _MaterialDetailsSection extends StatelessWidget {
             type: materialInfo.type,
           ),
         );
+    if (eligibilityBlocState.isZDP5eligible) {
+      context.read<MaterialPriceBloc>().add(
+            MaterialPriceEvent.fetchPriceForZDP5Materials(
+              materialInfo: materialInfo,
+            ),
+          );
+    }
     context.router.pushNamed('orders/material_details');
     context.read<MaterialPriceBloc>().add(
           MaterialPriceEvent.fetch(
-            salesOrganisation: eligibilityBlocState.salesOrganisation,
-            salesConfigs: eligibilityBlocState.salesOrgConfigs,
-            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
-            shipToInfo: eligibilityBlocState.shipToInfo,
             comboDealEligible: eligibilityBlocState.comboDealEligible,
             materials: [materialInfo],
           ),

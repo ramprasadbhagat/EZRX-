@@ -37,4 +37,10 @@ class ProductDetailEvent with _$ProductDetailEvent {
     required MaterialNumber materialNumber,
   }) = _DeleteFavourite;
   factory ProductDetailEvent.updateQty({required int qty}) = _UpdateQty;
+  const factory ProductDetailEvent.fetchItemQuantityForZdp5Discount({
+    required int quantity,
+  }) = _FetchItemQuantityForZdp5Discount;
+  const factory ProductDetailEvent.setExceedQty({
+    required bool exceedQty,
+  }) = _SetExceedQty;
 }

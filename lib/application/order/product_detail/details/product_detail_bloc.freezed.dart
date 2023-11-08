@@ -38,6 +38,8 @@ mixin _$ProductDetailEvent {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +61,8 @@ mixin _$ProductDetailEvent {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,6 +84,8 @@ mixin _$ProductDetailEvent {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -95,6 +101,9 @@ mixin _$ProductDetailEvent {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -109,6 +118,9 @@ mixin _$ProductDetailEvent {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -123,6 +135,9 @@ mixin _$ProductDetailEvent {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -284,6 +299,8 @@ class _$_Initialized implements _Initialized {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) {
     return initialized(salesOrganisation, customerCodeInfo, shipToInfo);
   }
@@ -308,6 +325,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return initialized?.call(salesOrganisation, customerCodeInfo, shipToInfo);
   }
@@ -332,6 +351,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -353,6 +374,9 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) {
     return initialized(this);
   }
@@ -370,6 +394,9 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) {
     return initialized?.call(this);
   }
@@ -387,6 +414,9 @@ class _$_Initialized implements _Initialized {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -511,6 +541,8 @@ class _$_Fetch implements _Fetch {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) {
     return fetch(materialNumber, locale, type);
   }
@@ -535,6 +567,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return fetch?.call(materialNumber, locale, type);
   }
@@ -559,6 +593,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -580,6 +616,9 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) {
     return fetch(this);
   }
@@ -597,6 +636,9 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) {
     return fetch?.call(this);
   }
@@ -614,6 +656,9 @@ class _$_Fetch implements _Fetch {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -722,6 +767,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) {
     return fetchSimilarProduct(locale);
   }
@@ -746,6 +793,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return fetchSimilarProduct?.call(locale);
   }
@@ -770,6 +819,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) {
     if (fetchSimilarProduct != null) {
@@ -791,6 +842,9 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) {
     return fetchSimilarProduct(this);
   }
@@ -808,6 +862,9 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) {
     return fetchSimilarProduct?.call(this);
   }
@@ -825,6 +882,9 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) {
     if (fetchSimilarProduct != null) {
@@ -937,6 +997,8 @@ class _$_FetchMetaData implements _FetchMetaData {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) {
     return fetchMetaData(locale, isForBundle);
   }
@@ -961,6 +1023,8 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return fetchMetaData?.call(locale, isForBundle);
   }
@@ -985,6 +1049,8 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) {
     if (fetchMetaData != null) {
@@ -1006,6 +1072,9 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) {
     return fetchMetaData(this);
   }
@@ -1023,6 +1092,9 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) {
     return fetchMetaData?.call(this);
   }
@@ -1040,6 +1112,9 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) {
     if (fetchMetaData != null) {
@@ -1154,6 +1229,8 @@ class _$_FetchStock implements _FetchStock {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) {
     return fetchStock(materialNumber, locale);
   }
@@ -1178,6 +1255,8 @@ class _$_FetchStock implements _FetchStock {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return fetchStock?.call(materialNumber, locale);
   }
@@ -1202,6 +1281,8 @@ class _$_FetchStock implements _FetchStock {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) {
     if (fetchStock != null) {
@@ -1223,6 +1304,9 @@ class _$_FetchStock implements _FetchStock {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) {
     return fetchStock(this);
   }
@@ -1240,6 +1324,9 @@ class _$_FetchStock implements _FetchStock {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) {
     return fetchStock?.call(this);
   }
@@ -1257,6 +1344,9 @@ class _$_FetchStock implements _FetchStock {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) {
     if (fetchStock != null) {
@@ -1381,6 +1471,8 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) {
     return fetchStockForBundle(materials, locale);
   }
@@ -1405,6 +1497,8 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return fetchStockForBundle?.call(materials, locale);
   }
@@ -1429,6 +1523,8 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) {
     if (fetchStockForBundle != null) {
@@ -1450,6 +1546,9 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) {
     return fetchStockForBundle(this);
   }
@@ -1467,6 +1566,9 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) {
     return fetchStockForBundle?.call(this);
   }
@@ -1484,6 +1586,9 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) {
     if (fetchStockForBundle != null) {
@@ -1589,6 +1694,8 @@ class _$_ChangeImage implements _ChangeImage {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) {
     return changeImage(index);
   }
@@ -1613,6 +1720,8 @@ class _$_ChangeImage implements _ChangeImage {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return changeImage?.call(index);
   }
@@ -1637,6 +1746,8 @@ class _$_ChangeImage implements _ChangeImage {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) {
     if (changeImage != null) {
@@ -1658,6 +1769,9 @@ class _$_ChangeImage implements _ChangeImage {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) {
     return changeImage(this);
   }
@@ -1675,6 +1789,9 @@ class _$_ChangeImage implements _ChangeImage {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) {
     return changeImage?.call(this);
   }
@@ -1692,6 +1809,9 @@ class _$_ChangeImage implements _ChangeImage {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) {
     if (changeImage != null) {
@@ -1806,6 +1926,8 @@ class _$_AddFavourite implements _AddFavourite {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) {
     return addFavourite(isForSimilarProduct, materialNumber);
   }
@@ -1830,6 +1952,8 @@ class _$_AddFavourite implements _AddFavourite {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return addFavourite?.call(isForSimilarProduct, materialNumber);
   }
@@ -1854,6 +1978,8 @@ class _$_AddFavourite implements _AddFavourite {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) {
     if (addFavourite != null) {
@@ -1875,6 +2001,9 @@ class _$_AddFavourite implements _AddFavourite {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) {
     return addFavourite(this);
   }
@@ -1892,6 +2021,9 @@ class _$_AddFavourite implements _AddFavourite {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) {
     return addFavourite?.call(this);
   }
@@ -1909,6 +2041,9 @@ class _$_AddFavourite implements _AddFavourite {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) {
     if (addFavourite != null) {
@@ -2026,6 +2161,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) {
     return deleteFavourite(isForSimilarProduct, materialNumber);
   }
@@ -2050,6 +2187,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return deleteFavourite?.call(isForSimilarProduct, materialNumber);
   }
@@ -2074,6 +2213,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) {
     if (deleteFavourite != null) {
@@ -2095,6 +2236,9 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) {
     return deleteFavourite(this);
   }
@@ -2112,6 +2256,9 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) {
     return deleteFavourite?.call(this);
   }
@@ -2129,6 +2276,9 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) {
     if (deleteFavourite != null) {
@@ -2234,6 +2384,8 @@ class _$_UpdateQty implements _UpdateQty {
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
     required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
   }) {
     return updateQty(qty);
   }
@@ -2258,6 +2410,8 @@ class _$_UpdateQty implements _UpdateQty {
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return updateQty?.call(qty);
   }
@@ -2282,6 +2436,8 @@ class _$_UpdateQty implements _UpdateQty {
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
     TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
     required TResult orElse(),
   }) {
     if (updateQty != null) {
@@ -2303,6 +2459,9 @@ class _$_UpdateQty implements _UpdateQty {
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
     required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
   }) {
     return updateQty(this);
   }
@@ -2320,6 +2479,9 @@ class _$_UpdateQty implements _UpdateQty {
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
     TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
   }) {
     return updateQty?.call(this);
   }
@@ -2337,6 +2499,9 @@ class _$_UpdateQty implements _UpdateQty {
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
     TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
     required TResult orElse(),
   }) {
     if (updateQty != null) {
@@ -2352,6 +2517,457 @@ abstract class _UpdateQty implements ProductDetailEvent {
   int get qty;
   @JsonKey(ignore: true)
   _$$_UpdateQtyCopyWith<_$_UpdateQty> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchItemQuantityForZdp5DiscountCopyWith<$Res> {
+  factory _$$_FetchItemQuantityForZdp5DiscountCopyWith(
+          _$_FetchItemQuantityForZdp5Discount value,
+          $Res Function(_$_FetchItemQuantityForZdp5Discount) then) =
+      __$$_FetchItemQuantityForZdp5DiscountCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int quantity});
+}
+
+/// @nodoc
+class __$$_FetchItemQuantityForZdp5DiscountCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res,
+        _$_FetchItemQuantityForZdp5Discount>
+    implements _$$_FetchItemQuantityForZdp5DiscountCopyWith<$Res> {
+  __$$_FetchItemQuantityForZdp5DiscountCopyWithImpl(
+      _$_FetchItemQuantityForZdp5Discount _value,
+      $Res Function(_$_FetchItemQuantityForZdp5Discount) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? quantity = null,
+  }) {
+    return _then(_$_FetchItemQuantityForZdp5Discount(
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_FetchItemQuantityForZdp5Discount
+    implements _FetchItemQuantityForZdp5Discount {
+  const _$_FetchItemQuantityForZdp5Discount({required this.quantity});
+
+  @override
+  final int quantity;
+
+  @override
+  String toString() {
+    return 'ProductDetailEvent.fetchItemQuantityForZdp5Discount(quantity: $quantity)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchItemQuantityForZdp5Discount &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, quantity);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchItemQuantityForZdp5DiscountCopyWith<
+          _$_FetchItemQuantityForZdp5Discount>
+      get copyWith => __$$_FetchItemQuantityForZdp5DiscountCopyWithImpl<
+          _$_FetchItemQuantityForZdp5Discount>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(
+            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
+        fetch,
+    required TResult Function(Locale locale) fetchSimilarProduct,
+    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber, Locale locale)
+        fetchStock,
+    required TResult Function(List<MaterialInfo> materials, Locale locale)
+        fetchStockForBundle,
+    required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
+    required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
+  }) {
+    return fetchItemQuantityForZdp5Discount(quantity);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(MaterialNumber materialNumber, Locale locale,
+            MaterialInfoType type)?
+        fetch,
+    TResult? Function(Locale locale)? fetchSimilarProduct,
+    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials, Locale locale)?
+        fetchStockForBundle,
+    TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+    TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
+  }) {
+    return fetchItemQuantityForZdp5Discount?.call(quantity);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(MaterialNumber materialNumber, Locale locale,
+            MaterialInfoType type)?
+        fetch,
+    TResult Function(Locale locale)? fetchSimilarProduct,
+    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
+    TResult Function(List<MaterialInfo> materials, Locale locale)?
+        fetchStockForBundle,
+    TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+    TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
+    required TResult orElse(),
+  }) {
+    if (fetchItemQuantityForZdp5Discount != null) {
+      return fetchItemQuantityForZdp5Discount(quantity);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
+    required TResult Function(_FetchMetaData value) fetchMetaData,
+    required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
+    required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
+  }) {
+    return fetchItemQuantityForZdp5Discount(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult? Function(_FetchMetaData value)? fetchMetaData,
+    TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
+    TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
+  }) {
+    return fetchItemQuantityForZdp5Discount?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult Function(_FetchMetaData value)? fetchMetaData,
+    TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
+    TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
+    required TResult orElse(),
+  }) {
+    if (fetchItemQuantityForZdp5Discount != null) {
+      return fetchItemQuantityForZdp5Discount(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchItemQuantityForZdp5Discount implements ProductDetailEvent {
+  const factory _FetchItemQuantityForZdp5Discount(
+      {required final int quantity}) = _$_FetchItemQuantityForZdp5Discount;
+
+  int get quantity;
+  @JsonKey(ignore: true)
+  _$$_FetchItemQuantityForZdp5DiscountCopyWith<
+          _$_FetchItemQuantityForZdp5Discount>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SetExceedQtyCopyWith<$Res> {
+  factory _$$_SetExceedQtyCopyWith(
+          _$_SetExceedQty value, $Res Function(_$_SetExceedQty) then) =
+      __$$_SetExceedQtyCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool exceedQty});
+}
+
+/// @nodoc
+class __$$_SetExceedQtyCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$_SetExceedQty>
+    implements _$$_SetExceedQtyCopyWith<$Res> {
+  __$$_SetExceedQtyCopyWithImpl(
+      _$_SetExceedQty _value, $Res Function(_$_SetExceedQty) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? exceedQty = null,
+  }) {
+    return _then(_$_SetExceedQty(
+      exceedQty: null == exceedQty
+          ? _value.exceedQty
+          : exceedQty // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetExceedQty implements _SetExceedQty {
+  const _$_SetExceedQty({required this.exceedQty});
+
+  @override
+  final bool exceedQty;
+
+  @override
+  String toString() {
+    return 'ProductDetailEvent.setExceedQty(exceedQty: $exceedQty)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetExceedQty &&
+            (identical(other.exceedQty, exceedQty) ||
+                other.exceedQty == exceedQty));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, exceedQty);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetExceedQtyCopyWith<_$_SetExceedQty> get copyWith =>
+      __$$_SetExceedQtyCopyWithImpl<_$_SetExceedQty>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(
+            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
+        fetch,
+    required TResult Function(Locale locale) fetchSimilarProduct,
+    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber, Locale locale)
+        fetchStock,
+    required TResult Function(List<MaterialInfo> materials, Locale locale)
+        fetchStockForBundle,
+    required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
+    required TResult Function(int qty) updateQty,
+    required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
+    required TResult Function(bool exceedQty) setExceedQty,
+  }) {
+    return setExceedQty(exceedQty);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(MaterialNumber materialNumber, Locale locale,
+            MaterialInfoType type)?
+        fetch,
+    TResult? Function(Locale locale)? fetchSimilarProduct,
+    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials, Locale locale)?
+        fetchStockForBundle,
+    TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+    TResult? Function(int qty)? updateQty,
+    TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult? Function(bool exceedQty)? setExceedQty,
+  }) {
+    return setExceedQty?.call(exceedQty);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(MaterialNumber materialNumber, Locale locale,
+            MaterialInfoType type)?
+        fetch,
+    TResult Function(Locale locale)? fetchSimilarProduct,
+    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
+    TResult Function(List<MaterialInfo> materials, Locale locale)?
+        fetchStockForBundle,
+    TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+    TResult Function(int qty)? updateQty,
+    TResult Function(int quantity)? fetchItemQuantityForZdp5Discount,
+    TResult Function(bool exceedQty)? setExceedQty,
+    required TResult orElse(),
+  }) {
+    if (setExceedQty != null) {
+      return setExceedQty(exceedQty);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
+    required TResult Function(_FetchMetaData value) fetchMetaData,
+    required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
+    required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_FetchItemQuantityForZdp5Discount value)
+        fetchItemQuantityForZdp5Discount,
+    required TResult Function(_SetExceedQty value) setExceedQty,
+  }) {
+    return setExceedQty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult? Function(_FetchMetaData value)? fetchMetaData,
+    TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
+    TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult? Function(_SetExceedQty value)? setExceedQty,
+  }) {
+    return setExceedQty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult Function(_FetchMetaData value)? fetchMetaData,
+    TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
+    TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_FetchItemQuantityForZdp5Discount value)?
+        fetchItemQuantityForZdp5Discount,
+    TResult Function(_SetExceedQty value)? setExceedQty,
+    required TResult orElse(),
+  }) {
+    if (setExceedQty != null) {
+      return setExceedQty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetExceedQty implements ProductDetailEvent {
+  const factory _SetExceedQty({required final bool exceedQty}) =
+      _$_SetExceedQty;
+
+  bool get exceedQty;
+  @JsonKey(ignore: true)
+  _$$_SetExceedQtyCopyWith<_$_SetExceedQty> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

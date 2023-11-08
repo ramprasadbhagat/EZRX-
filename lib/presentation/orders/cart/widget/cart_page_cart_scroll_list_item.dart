@@ -42,42 +42,62 @@ class _CartProductMaterial extends StatelessWidget {
     required this.item,
     required this.showManufacturerName,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final isMYPnGSalesRep =
-        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser &&
-            item.materialInfo.isPnGPrinciple;
+    final eligiblityState = context.read<EligibilityBloc>().state;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showManufacturerName)
-          _CartPageManufacturerName(
-            key: WidgetKeys.cartPrincipalLabel,
-            cartProduct: item.materialInfo,
+    final isMYPnGSalesRep = eligiblityState.isMYExternalSalesRepUser &&
+        item.materialInfo.isPnGPrinciple;
+
+    return BlocListener<CartBloc, CartState>(
+      listenWhen: (previous, current) =>
+          previous.cartProducts != current.cartProducts,
+      listener: (context, state) {
+        final product = state.cartProducts.firstWhere(
+          (element) =>
+              element.materialInfo.materialNumber ==
+              item.materialInfo.materialNumber,
+        );
+        if (product.isPriceUpdateAvailable) {
+          context.read<MaterialPriceBloc>().add(
+                MaterialPriceEvent.fetchPriceForZDP5Materials(
+                  materialInfo: product.materialInfo,
+                ),
+              );
+        }
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (showManufacturerName)
+            _CartPageManufacturerName(
+              key: WidgetKeys.cartPrincipalLabel,
+              cartProduct: item.materialInfo,
+            ),
+          CartProductTile(
+            cartItem: item,
           ),
-        CartProductTile(
-          cartItem: item,
-        ),
-        if (item.displayOfferBonus || isMYPnGSalesRep)
-          ...item.addedBonusList
-              .map(
-                (e) => CartProductOfferBonus(
-                  bonusItem: e,
-                  cartProduct: item,
-                ),
-              )
-              .toList(),
-        if (item.bonusSampleItems.isNotEmpty)
-          ...item.bonusSampleItems
-              .map(
-                (e) => CartProductTileBonus(
-                  bonusItem: e,
-                  cartProduct: item,
-                ),
-              )
-              .toList(),
-      ],
+          if (item.displayOfferBonus || isMYPnGSalesRep)
+            ...item.addedBonusList
+                .map(
+                  (e) => CartProductOfferBonus(
+                    bonusItem: e,
+                    cartProduct: item,
+                  ),
+                )
+                .toList(),
+          if (item.bonusSampleItems.isNotEmpty)
+            ...item.bonusSampleItems
+                .map(
+                  (e) => CartProductTileBonus(
+                    bonusItem: e,
+                    cartProduct: item,
+                  ),
+                )
+                .toList(),
+        ],
+      ),
     );
   }
 }

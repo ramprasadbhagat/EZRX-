@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as bd;
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -95,7 +97,24 @@ class CartButton extends StatelessWidget {
                               user: context.read<EligibilityBloc>().state.user,
                             ),
                           );
-                      context.router.pushNamed('orders/cart');
+                      final product = context
+                          .read<ProductDetailBloc>()
+                          .state
+                          .productDetailAggregate;
+                      context.router.pushNamed('orders/cart').then((value) {
+                        final salesOrgConfig = context
+                            .read<EligibilityBloc>()
+                            .state
+                            .salesOrgConfigs;
+                        if (salesOrgConfig.salesOrg.isVN &&
+                            salesOrgConfig.enableZDP5) {
+                          context.read<MaterialPriceBloc>().add(
+                                MaterialPriceEvent.fetchPriceForZDP5Materials(
+                                  materialInfo: product.materialInfo,
+                                ),
+                              );
+                        }
+                      });
                     },
                   ),
                 ),

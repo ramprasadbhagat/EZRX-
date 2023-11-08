@@ -17,10 +17,6 @@ class _ComboDetailBodyContent extends StatelessWidget {
         final eligibilityBlocState = context.read<EligibilityBloc>().state;
         context.read<MaterialPriceBloc>().add(
               MaterialPriceEvent.fetchPriceCartProduct(
-                salesOrganisation: eligibilityBlocState.salesOrganisation,
-                salesConfigs: eligibilityBlocState.salesOrgConfigs,
-                customerCodeInfo: eligibilityBlocState.customerCodeInfo,
-                shipToInfo: eligibilityBlocState.shipToInfo,
                 comboDealEligible: eligibilityBlocState.comboDealEligible,
                 products: state.allMaterialsInfo,
               ),

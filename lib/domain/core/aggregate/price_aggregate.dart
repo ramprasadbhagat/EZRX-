@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_item_bonus.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -348,6 +349,16 @@ class PriceAggregate with _$PriceAggregate {
                   ? salesOrgConfig.vatValue
                   : 0)));
 
+  String get displayZdp5Price {
+    return price.priceTireItem
+        .firstWhere(
+          (element) => materialInfo.quantity.intValue >= element.quantity,
+          orElse: () => PriceTierItem.empty(),
+        )
+        .rate
+        .toString();
+  }
+
   String display(PriceType priceType) {
     /**
      * TODO: Need to revisit while implementing special Order case if needed or else will remove it was for displaying FOC tag for FOC materials
@@ -611,10 +622,10 @@ class PriceAggregate with _$PriceAggregate {
   bool get hasZdp5Validation =>
       isZdp5DiscountEligible && quantity > price.zdp5RemainingQuota.intValue;
 
-  bool get isRemainingQuantityNotExceeded =>
+  bool get isRemainingQuantityExceeded =>
       !exceedQuantity && quantity > price.zdp5RemainingQuota.intValue;
 
-  bool get isRemainingQuantityExceeded =>
+  bool get isRemainingQuantityNotExceeded =>
       exceedQuantity && quantity <= price.zdp5RemainingQuota.intValue;
 
   bool get hasRemainingQuotaReached =>
@@ -703,7 +714,10 @@ class PriceAggregate with _$PriceAggregate {
       materialInfo.isFOCMaterial;
 
   bool get displayCutOffListPrice =>
-      price.isCounterOfferRequested && !materialInfo.hidePrice;
+      price.isCounterOfferRequested && !materialInfo.hidePrice ||
+      (price.zdp5MaxQuota.isValidValue &&
+          price.zdp5RemainingQuota.isValidValue &&
+          materialInfo.quantity.intValue >= 2);
 
   int get stockQuantity => stockInfoList
       .firstWhere(
@@ -711,6 +725,11 @@ class PriceAggregate with _$PriceAggregate {
         orElse: () => StockInfo.empty(),
       )
       .stockQuantity;
+
+  bool get zdp5PriceDisplay =>
+      price.priceTireItem.isNotEmpty &&
+      price.zdp5MaxQuota.isValidValue &&
+      materialInfo.quantity.intValue >= 2;
 }
 
 enum PriceType {

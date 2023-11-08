@@ -202,9 +202,6 @@ void main() {
         verify(
           () => materialPriceBloc.add(
             MaterialPriceEvent.fetch(
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
               comboDealEligible: false,
               materials: <MaterialInfo>[
                 MaterialInfo.empty().copyWith(
@@ -212,7 +209,6 @@ void main() {
                   type: MaterialInfoType('material'),
                 ),
               ],
-              salesConfigs: SalesOrganisationConfigs.empty(),
             ),
           ),
         ).called(1);

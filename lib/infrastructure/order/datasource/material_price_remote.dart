@@ -99,6 +99,46 @@ class MaterialPriceRemoteDataSource {
     });
   }
 
+  Future<Price> getMaterialPriceForZDP5({
+    required String salesOrgCode,
+    required String customerCode,
+    required String materialNumber,
+    required String shipToCode,
+    required bool exceedQty,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = queryMutation.getMaterialPrice();
+
+      final variables = {
+        'salesOrganisation': salesOrgCode,
+        'customer': customerCode,
+        'shipToCode': shipToCode,
+        'request': {
+          'MaterialNumber': materialNumber,
+          'exceedQty': exceedQty,
+        },
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}price',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'price',
+      );
+      _materialPriceExceptionChecker(res: res);
+
+      if (res.data['data']['price']?.isEmpty ?? true) {
+        return Price.empty();
+      }
+
+      return PriceDto.fromJson(
+        makeResponseCamelCase(jsonEncode(res.data['data']['price'][0])),
+      ).toDomain();
+    });
+  }
+
   void _materialPriceExceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);

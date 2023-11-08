@@ -20,6 +20,7 @@ mixin _$ProductDetailAggregate {
   ProductItem get productItem => throw _privateConstructorUsedError;
   List<MaterialInfo> get similarProduct => throw _privateConstructorUsedError;
   StockInfo get stockInfo => throw _privateConstructorUsedError;
+  bool get exeedQty => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductDetailAggregateCopyWith<ProductDetailAggregate> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $ProductDetailAggregateCopyWith<$Res> {
       {MaterialInfo materialInfo,
       ProductItem productItem,
       List<MaterialInfo> similarProduct,
-      StockInfo stockInfo});
+      StockInfo stockInfo,
+      bool exeedQty});
 
   $MaterialInfoCopyWith<$Res> get materialInfo;
   $ProductItemCopyWith<$Res> get productItem;
@@ -61,6 +63,7 @@ class _$ProductDetailAggregateCopyWithImpl<$Res,
     Object? productItem = null,
     Object? similarProduct = null,
     Object? stockInfo = null,
+    Object? exeedQty = null,
   }) {
     return _then(_value.copyWith(
       materialInfo: null == materialInfo
@@ -79,6 +82,10 @@ class _$ProductDetailAggregateCopyWithImpl<$Res,
           ? _value.stockInfo
           : stockInfo // ignore: cast_nullable_to_non_nullable
               as StockInfo,
+      exeedQty: null == exeedQty
+          ? _value.exeedQty
+          : exeedQty // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -119,7 +126,8 @@ abstract class _$$_ProductDetailAggregateCopyWith<$Res>
       {MaterialInfo materialInfo,
       ProductItem productItem,
       List<MaterialInfo> similarProduct,
-      StockInfo stockInfo});
+      StockInfo stockInfo,
+      bool exeedQty});
 
   @override
   $MaterialInfoCopyWith<$Res> get materialInfo;
@@ -145,6 +153,7 @@ class __$$_ProductDetailAggregateCopyWithImpl<$Res>
     Object? productItem = null,
     Object? similarProduct = null,
     Object? stockInfo = null,
+    Object? exeedQty = null,
   }) {
     return _then(_$_ProductDetailAggregate(
       materialInfo: null == materialInfo
@@ -163,6 +172,10 @@ class __$$_ProductDetailAggregateCopyWithImpl<$Res>
           ? _value.stockInfo
           : stockInfo // ignore: cast_nullable_to_non_nullable
               as StockInfo,
+      exeedQty: null == exeedQty
+          ? _value.exeedQty
+          : exeedQty // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -174,7 +187,8 @@ class _$_ProductDetailAggregate extends _ProductDetailAggregate {
       {required this.materialInfo,
       required this.productItem,
       required final List<MaterialInfo> similarProduct,
-      required this.stockInfo})
+      required this.stockInfo,
+      required this.exeedQty})
       : _similarProduct = similarProduct,
         super._();
 
@@ -192,10 +206,12 @@ class _$_ProductDetailAggregate extends _ProductDetailAggregate {
 
   @override
   final StockInfo stockInfo;
+  @override
+  final bool exeedQty;
 
   @override
   String toString() {
-    return 'ProductDetailAggregate(materialInfo: $materialInfo, productItem: $productItem, similarProduct: $similarProduct, stockInfo: $stockInfo)';
+    return 'ProductDetailAggregate(materialInfo: $materialInfo, productItem: $productItem, similarProduct: $similarProduct, stockInfo: $stockInfo, exeedQty: $exeedQty)';
   }
 
   @override
@@ -210,12 +226,19 @@ class _$_ProductDetailAggregate extends _ProductDetailAggregate {
             const DeepCollectionEquality()
                 .equals(other._similarProduct, _similarProduct) &&
             (identical(other.stockInfo, stockInfo) ||
-                other.stockInfo == stockInfo));
+                other.stockInfo == stockInfo) &&
+            (identical(other.exeedQty, exeedQty) ||
+                other.exeedQty == exeedQty));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialInfo, productItem,
-      const DeepCollectionEquality().hash(_similarProduct), stockInfo);
+  int get hashCode => Object.hash(
+      runtimeType,
+      materialInfo,
+      productItem,
+      const DeepCollectionEquality().hash(_similarProduct),
+      stockInfo,
+      exeedQty);
 
   @JsonKey(ignore: true)
   @override
@@ -230,7 +253,8 @@ abstract class _ProductDetailAggregate extends ProductDetailAggregate {
       {required final MaterialInfo materialInfo,
       required final ProductItem productItem,
       required final List<MaterialInfo> similarProduct,
-      required final StockInfo stockInfo}) = _$_ProductDetailAggregate;
+      required final StockInfo stockInfo,
+      required final bool exeedQty}) = _$_ProductDetailAggregate;
   _ProductDetailAggregate._() : super._();
 
   @override
@@ -241,6 +265,8 @@ abstract class _ProductDetailAggregate extends ProductDetailAggregate {
   List<MaterialInfo> get similarProduct;
   @override
   StockInfo get stockInfo;
+  @override
+  bool get exeedQty;
   @override
   @JsonKey(ignore: true)
   _$$_ProductDetailAggregateCopyWith<_$_ProductDetailAggregate> get copyWith =>

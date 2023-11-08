@@ -162,6 +162,12 @@ class MaterialInfo with _$MaterialInfo {
       : productImages.image;
 
   bool get isPnGPrinciple => principalData.principalCode.isPnG;
+
+  bool materialQtyConformZDP5Rule(
+    int zdp5MaxQuota,
+    int zdp5RemaningQuota,
+  ) =>
+      quantity.intValue > zdp5MaxQuota || quantity.intValue > zdp5RemaningQuota;
 }
 
 @freezed

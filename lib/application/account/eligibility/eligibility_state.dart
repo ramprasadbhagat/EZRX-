@@ -253,4 +253,7 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get isIDMarket => salesOrg.isID;
+
+  bool get isZDP5eligible =>
+      salesOrgConfigs.salesOrg.isVN && salesOrgConfigs.enableZDP5;
 }

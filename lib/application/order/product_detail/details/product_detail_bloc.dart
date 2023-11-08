@@ -270,6 +270,25 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         state.copyWith(selectedImageIndex: e.index),
       ),
     );
+    on<_FetchItemQuantityForZdp5Discount>(
+      (e, emit) async => emit(
+        state.copyWith(
+          productDetailAggregate: state.productDetailAggregate.copyWith(
+            materialInfo: state.productDetailAggregate.materialInfo
+                .copyWith(quantity: MaterialQty(e.quantity)),
+          ),
+        ),
+      ),
+    );
+    on<_SetExceedQty>(
+      (e, emit) async => emit(
+        state.copyWith(
+          productDetailAggregate: state.productDetailAggregate.copyWith(
+            exeedQty: e.exceedQty,
+          ),
+        ),
+      ),
+    );
     on<_AddFavourite>(
       (e, emit) async {
         emit(

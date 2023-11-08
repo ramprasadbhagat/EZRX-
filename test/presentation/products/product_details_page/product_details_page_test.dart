@@ -403,6 +403,10 @@ void main() {
                 quantity: MaterialQty(2),
                 isFOCMaterial: true,
               ),
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('true'),
+              ),
+              similarProduct: similarProducts,
             ),
           ),
         );
@@ -417,19 +421,6 @@ void main() {
               materialWithoutPrice: true,
               addOosMaterials: OosMaterial(true),
               oosValue: OosValue(1),
-            ),
-          ),
-        );
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo.copyWith(
-                quantity: MaterialQty(2),
-                isFOCMaterial: true,
-              ),
-              stockInfo: StockInfo.empty().copyWith(
-                inStock: MaterialInStock('true'),
-              ),
             ),
           ),
         );

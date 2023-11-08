@@ -25,8 +25,13 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
     Emitter<MaterialPriceState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => emit(
-        MaterialPriceState.initial(),
+      initialized: (e) async => emit(
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: e.customerCodeInfo,
+          salesConfigs: e.salesConfigs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+        ),
       ),
       fetch: (e) async {
         emit(
@@ -56,10 +61,10 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
         }
 
         final failureOrSuccess = await repository.getMaterialPrice(
-          customerCodeInfo: e.customerCodeInfo,
-          shipToInfo: e.shipToInfo,
-          salesOrganisation: e.salesOrganisation,
-          salesConfigs: e.salesConfigs,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          salesOrganisation: state.salesOrganisation,
+          salesConfigs: state.salesConfigs,
           materialNumberList: queryMaterialNumber.toSet().toList(),
           comboDealEligible: e.comboDealEligible,
         );
@@ -110,10 +115,10 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
         }
 
         final failureOrSuccess = await repository.getMaterialPrice(
-          customerCodeInfo: e.customerCodeInfo,
-          shipToInfo: e.shipToInfo,
-          salesOrganisation: e.salesOrganisation,
-          salesConfigs: e.salesConfigs,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          salesOrganisation: state.salesOrganisation,
+          salesConfigs: state.salesConfigs,
           materialNumberList: materialNumbers.toSet().toList(),
           comboDealEligible: e.comboDealEligible,
         );
@@ -128,6 +133,54 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
               state.copyWith(
                 isFetching: false,
                 materialPrice: newPriceMap,
+              ),
+            );
+          },
+        );
+      },
+      fetchPriceForZDP5Materials: (e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+          ),
+        );
+
+        final materialPrice =
+            state.getPriceForMaterial(e.materialInfo.materialNumber);
+        final failureOrSuccess =
+            await repository.getMaterialPriceForZDP5Material(
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          salesOrganisation: state.salesOrganisation,
+          salesConfigs: state.salesConfigs,
+          materialNumber: e.materialInfo.materialNumber,
+          exceedQty: e.materialInfo.materialQtyConformZDP5Rule(
+            materialPrice.zdp5MaxQuota.intValue,
+            materialPrice.zdp5RemainingQuota.intValue,
+          ),
+        );
+
+        failureOrSuccess.fold(
+          (_) {
+            emit(
+              state.copyWith(
+                isFetching: false,
+              ),
+            );
+          },
+          (newPriceFetched) {
+            final finalPrice =
+                Map<MaterialNumber, Price>.from(state.materialPrice);
+            if (finalPrice[e.materialInfo.materialNumber] != null) {
+              finalPrice[e.materialInfo.materialNumber] =
+                  finalPrice[e.materialInfo.materialNumber]!.copyWith(
+                tiers: newPriceFetched.tiers,
+              );
+            }
+            emit(
+              state.copyWith(
+                isFetching: false,
+                materialPrice: finalPrice,
               ),
             );
           },

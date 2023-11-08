@@ -13,6 +13,7 @@ class ProductDetailAggregate with _$ProductDetailAggregate {
     required ProductItem productItem,
     required List<MaterialInfo> similarProduct,
     required StockInfo stockInfo,
+    required bool exeedQty,
   }) = _ProductDetailAggregate;
 
   factory ProductDetailAggregate.empty() => ProductDetailAggregate(
@@ -20,10 +21,20 @@ class ProductDetailAggregate with _$ProductDetailAggregate {
         productItem: ProductItem.empty(),
         similarProduct: <MaterialInfo>[],
         stockInfo: StockInfo.empty(),
+        exeedQty: false,
       );
 
   bool get productDetailsAvailable =>
       productItem != ProductItem.empty() ||
       materialInfo.productImages.description.isValid();
 
+  bool isRemainingQuantityExceeded(int zdp5RemainingQuota) =>
+      !exeedQty && (materialInfo.quantity.intValue > zdp5RemainingQuota);
+
+  bool isRemainingQuantityNotExceeded(int zdp5RemainingQuota) =>
+      exeedQty && (materialInfo.quantity.intValue <= zdp5RemainingQuota);
+
+  bool hasRemainingQuotaReached(int zdp5RemainingQuota) =>
+      isRemainingQuantityNotExceeded(zdp5RemainingQuota) ||
+      isRemainingQuantityExceeded(zdp5RemainingQuota);
 }

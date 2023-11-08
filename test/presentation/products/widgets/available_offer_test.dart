@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
@@ -157,6 +158,68 @@ void main() {
     );
 
     testWidgets(
+      '=> Test AvailableOffer visible for zdp5',
+      (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: User.empty().copyWith(
+              username: Username('fake-user'),
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('3070'),
+            ),
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+              enableZDP5: true,
+            ),
+          ),
+        );
+
+        when(() => materialPriceBlocMock.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {
+              materialInfoMock.materialNumber: materialPrice.copyWith(
+                tiers: [PriceTier.empty().copyWith(tier: 'fake_tier')],
+                bonuses: [
+                  PriceBonus.empty().copyWith(
+                    items: [
+                      PriceBonusItem.empty().copyWith(
+                        bonusMaterials: [
+                          BonusMaterial.empty().copyWith(
+                            materialNumber: MaterialNumber('123456789'),
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              )
+            },
+          ),
+        );
+
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            isFetching: false,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfoMock.copyWith(
+                principalData: PrincipalData(
+                  principalName: materialInfoMock.principalData.principalName,
+                  principalCode: PrincipalCode('105307'),
+                ),
+              ),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(availableOfferFinder, findsOneWidget);
+
+        await tester.pumpAndSettle();
+      },
+    );
+    testWidgets(
       '=> Test AvailableOffer visible when hide price is true',
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
@@ -178,6 +241,7 @@ void main() {
           MaterialPriceState.initial().copyWith(
             materialPrice: {
               materialInfoMock.materialNumber: materialPrice.copyWith(
+                tiers: [PriceTier.empty().copyWith(tier: 'fake_tier')],
                 bonuses: [
                   PriceBonus.empty().copyWith(
                     items: [

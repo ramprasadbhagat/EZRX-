@@ -72,15 +72,31 @@ void main() {
       'Initialize',
       build: () => MaterialPriceBloc(repository: repository),
       act: (MaterialPriceBloc bloc) => bloc.add(
-        const MaterialPriceEvent.initialized(),
+        MaterialPriceEvent.initialized(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+        ),
       ),
-      expect: () => [MaterialPriceState.initial()],
+      expect: () => [
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+        )
+      ],
     );
 
     blocTest<MaterialPriceBloc, MaterialPriceState>(
       'Fetch when all materials query already have their price',
       build: () => MaterialPriceBloc(repository: repository),
       seed: () => MaterialPriceState.initial().copyWith(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
         materialPrice: {
           for (var number in fakeMaterialQuery)
             number.materialNumber: Price.empty().copyWith(
@@ -92,10 +108,6 @@ void main() {
       ),
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetch(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
           materials: fakeMaterialQuery,
           comboDealEligible: false,
         ),
@@ -103,6 +115,10 @@ void main() {
       expect: () {
         return [
           MaterialPriceState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
             isFetching: true,
             materialPrice: {
               for (var number in fakeMaterialQuery)
@@ -114,6 +130,10 @@ void main() {
             },
           ),
           MaterialPriceState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
             materialPrice: {
               for (var number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
@@ -130,25 +150,39 @@ void main() {
     blocTest<MaterialPriceBloc, MaterialPriceState>(
       'Fetch when all materials is FOC',
       build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
+      ),
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetch(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
           materials: fakeFOCMaterialQuery,
           comboDealEligible: false,
         ),
       ),
       expect: () => [
         MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           isFetching: true,
           materialPrice: materialPrice,
         ),
         MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           materialPrice: materialPrice,
         ),
       ],
@@ -157,6 +191,12 @@ void main() {
     blocTest<MaterialPriceBloc, MaterialPriceState>(
       'Fetch price success',
       build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
+      ),
       setUp: () {
         when(
           () => repository.getMaterialPrice(
@@ -173,19 +213,23 @@ void main() {
       },
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetch(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
           materials: fakeMaterialQuery,
           comboDealEligible: false,
         ),
       ),
       expect: () => [
         MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           materialPrice: mockPriceMap,
         ),
       ],
@@ -194,6 +238,12 @@ void main() {
     blocTest<MaterialPriceBloc, MaterialPriceState>(
       'Fetch price failure',
       build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
+      ),
       setUp: () {
         when(
           () => repository.getMaterialPrice(
@@ -210,19 +260,24 @@ void main() {
       },
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetch(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
           materials: fakeMaterialQuery,
           comboDealEligible: false,
         ),
       ),
       expect: () => [
         MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           isFetching: true,
         ),
-        MaterialPriceState.initial(),
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+        ),
       ],
     );
   });
@@ -232,6 +287,10 @@ void main() {
       'Fetch when all materials query already have their price',
       build: () => MaterialPriceBloc(repository: repository),
       seed: () => MaterialPriceState.initial().copyWith(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
         materialPrice: {
           for (var number in fakeMaterialQuery)
             number.materialNumber: Price.empty().copyWith(
@@ -243,10 +302,6 @@ void main() {
       ),
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetchPriceCartProduct(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
           products: fakeMaterialQuery,
           comboDealEligible: false,
         ),
@@ -254,6 +309,10 @@ void main() {
       expect: () {
         return [
           MaterialPriceState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
             isFetching: true,
             materialPrice: {
               for (var number in fakeMaterialQuery)
@@ -265,6 +324,10 @@ void main() {
             },
           ),
           MaterialPriceState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
             materialPrice: {
               for (var number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
@@ -283,10 +346,6 @@ void main() {
       build: () => MaterialPriceBloc(repository: repository),
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetchPriceCartProduct(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
           products: fakeFOCMaterialQuery,
           comboDealEligible: false,
         ),
@@ -308,6 +367,12 @@ void main() {
     blocTest<MaterialPriceBloc, MaterialPriceState>(
       'Fetch price success',
       build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
+      ),
       setUp: () {
         when(
           () => repository.getMaterialPrice(
@@ -324,19 +389,23 @@ void main() {
       },
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetchPriceCartProduct(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
           products: fakeMaterialQuery,
           comboDealEligible: false,
         ),
       ),
       expect: () => [
         MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           materialPrice: mockPriceMap,
         ),
       ],
@@ -345,6 +414,12 @@ void main() {
     blocTest<MaterialPriceBloc, MaterialPriceState>(
       'Fetch price failure',
       build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
+      ),
       setUp: () {
         when(
           () => repository.getMaterialPrice(
@@ -361,16 +436,16 @@ void main() {
       },
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetchPriceCartProduct(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
           products: fakeMaterialQuery,
           comboDealEligible: false,
         ),
       ),
       expect: () => [
         MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           isFetching: true,
         ),
       ],

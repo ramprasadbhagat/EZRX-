@@ -81,6 +81,32 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
     }
   }
 
+  @override
+  Future<Either<ApiFailure, Price>> getMaterialPriceForZDP5Material({
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesConfigs,
+    required ShipToInfo shipToInfo,
+    required MaterialNumber materialNumber,
+    required bool exceedQty,
+  }) async {
+    try {
+      final price = await remoteDataSource.getMaterialPriceForZDP5(
+        salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        shipToCode: shipToInfo.shipToCustomerCode,
+        materialNumber: materialNumber.getOrCrash(),
+        exceedQty: exceedQty,
+      );
+
+      return Right(
+        price,
+      );
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
   Future<Either<ApiFailure, Price>> getPrice({
     required String salesOrgCode,
     required String customerCode,
