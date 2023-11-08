@@ -29,7 +29,7 @@ class _ComboProductTile extends StatelessWidget {
             previous.selectedItems != current.selectedItems,
         builder: (_, state) {
           return EdgeCheckbox(
-            onChanged: isMandatory
+            onChanged: isFixed
                 ? (_) {}
                 : (value) => bloc.add(
                       ComboDealMaterialDetailEvent.updateItemSelection(

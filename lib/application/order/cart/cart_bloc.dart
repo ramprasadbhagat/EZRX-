@@ -727,13 +727,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 );
               } else if (cartProduct.materialInfo.type.typeCombo) {
                 return cartProduct.copyWith(
-                  stockInfoList: newStockFetched[
-                          cartProduct.materialInfo.materialNumber] ??
-                      <StockInfo>[],
                   comboMaterials: cartProduct.comboMaterials
                       .map(
                         (comboMaterial) => comboMaterial.copyWith(
                           salesOrgConfig: state.config,
+                          materialInfo:
+                              comboMaterial.materialInfo.copyWithStock(
+                            stockInfos: newStockFetched[comboMaterial
+                                    .materialInfo.materialNumber] ??
+                                <StockInfo>[],
+                          ),
                         ),
                       )
                       .toList(),

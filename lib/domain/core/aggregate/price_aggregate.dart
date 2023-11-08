@@ -650,16 +650,37 @@ class PriceAggregate with _$PriceAggregate {
   bool get isOOSProduct =>
       !inStock && !salesOrgConfig.addOosMaterials.getOrDefaultValue(true);
 
-  bool get isAnyOOSItemPresentInCart => materialInfo.type.typeBundle
-      ? bundle.materials.any(
-          (material) =>
-              material.stockInfos.isEmpty ||
-              material.stockInfos.any(
-                (stock) => !stock.inStock.isMaterialInStock,
-              ),
-        )
-      : stockInfoList.isEmpty ||
-          stockInfoList.any((stock) => !stock.inStock.isMaterialInStock);
+  // getter to check if there is any item present in cart which is out of stock
+  bool get isAnyOOSItemPresentInCart {
+    if (materialInfo.type.typeBundle) {
+      return anyBundleOos;
+    } else if (materialInfo.type.typeCombo) {
+      return anyComboOos;
+    } else {
+      return anyMaterialOos;
+    }
+  }
+
+  bool get anyBundleOos {
+    return bundle.materials.any(
+      (material) => isMaterialOutOfStock(material.stockInfos),
+    );
+  }
+
+  bool get anyComboOos {
+    return comboMaterials.any(
+      (material) => isMaterialOutOfStock(material.materialInfo.stockInfos),
+    );
+  }
+
+  bool get anyMaterialOos {
+    return isMaterialOutOfStock(stockInfoList);
+  }
+
+  bool isMaterialOutOfStock(List<StockInfo> stockInfos) {
+    return stockInfos.isEmpty ||
+        stockInfos.any((stock) => !stock.inStock.isMaterialInStock);
+  }
 
   List<PriceAggregate> get bundleMaterialsPriceAggregate => bundle.materials
       .map(
