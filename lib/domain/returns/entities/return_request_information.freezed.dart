@@ -42,6 +42,7 @@ mixin _$ReturnRequestInformation {
   Prsfd get prsfd => throw _privateConstructorUsedError;
   List<ReturnRequestInformation> get bonusInformation =>
       throw _privateConstructorUsedError;
+  Remarks get remarks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnRequestInformationCopyWith<ReturnRequestInformation> get copyWith =>
@@ -79,7 +80,8 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       bool outsidePolicy,
       DateTimeStringValue invoiceDate,
       Prsfd prsfd,
-      List<ReturnRequestInformation> bonusInformation});
+      List<ReturnRequestInformation> bonusInformation,
+      Remarks remarks});
 }
 
 /// @nodoc
@@ -121,6 +123,7 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
     Object? invoiceDate = null,
     Object? prsfd = null,
     Object? bonusInformation = null,
+    Object? remarks = null,
   }) {
     return _then(_value.copyWith(
       invoiceNo: null == invoiceNo
@@ -223,6 +226,10 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
           ? _value.bonusInformation
           : bonusInformation // ignore: cast_nullable_to_non_nullable
               as List<ReturnRequestInformation>,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as Remarks,
     ) as $Val);
   }
 }
@@ -261,7 +268,8 @@ abstract class _$$_ReturnRequestInformationCopyWith<$Res>
       bool outsidePolicy,
       DateTimeStringValue invoiceDate,
       Prsfd prsfd,
-      List<ReturnRequestInformation> bonusInformation});
+      List<ReturnRequestInformation> bonusInformation,
+      Remarks remarks});
 }
 
 /// @nodoc
@@ -301,6 +309,7 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
     Object? invoiceDate = null,
     Object? prsfd = null,
     Object? bonusInformation = null,
+    Object? remarks = null,
   }) {
     return _then(_$_ReturnRequestInformation(
       invoiceNo: null == invoiceNo
@@ -403,6 +412,10 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
           ? _value._bonusInformation
           : bonusInformation // ignore: cast_nullable_to_non_nullable
               as List<ReturnRequestInformation>,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as Remarks,
     ));
   }
 }
@@ -435,7 +448,8 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
       required this.outsidePolicy,
       required this.invoiceDate,
       required this.prsfd,
-      required final List<ReturnRequestInformation> bonusInformation})
+      required final List<ReturnRequestInformation> bonusInformation,
+      required this.remarks})
       : _imageUrl = imageUrl,
         _attachments = attachments,
         _bonusInformation = bonusInformation,
@@ -511,8 +525,11 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
   }
 
   @override
+  final Remarks remarks;
+
+  @override
   String toString() {
-    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation)';
+    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks)';
   }
 
   @override
@@ -564,7 +581,8 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
                 other.invoiceDate == invoiceDate) &&
             (identical(other.prsfd, prsfd) || other.prsfd == prsfd) &&
             const DeepCollectionEquality()
-                .equals(other._bonusInformation, _bonusInformation));
+                .equals(other._bonusInformation, _bonusInformation) &&
+            (identical(other.remarks, remarks) || other.remarks == remarks));
   }
 
   @override
@@ -594,7 +612,8 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
         outsidePolicy,
         invoiceDate,
         prsfd,
-        const DeepCollectionEquality().hash(_bonusInformation)
+        const DeepCollectionEquality().hash(_bonusInformation),
+        remarks
       ]);
 
   @JsonKey(ignore: true)
@@ -607,32 +626,32 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
 
 abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   factory _ReturnRequestInformation(
-          {required final String invoiceNo,
-          required final DateTimeStringValue expiryDate,
-          required final StringValue comment,
-          required final String rejectReason,
-          required final String returnQuantity,
-          required final double unitPrice,
-          required final double totalPrice,
-          required final String returnOrderDesc,
-          required final MaterialNumber materialNumber,
-          required final String materialDescription,
-          required final String batch,
-          required final String materialGroup,
-          required final List<String> imageUrl,
-          required final List<String> attachments,
-          required final DateTimeStringValue createdDate,
-          required final String principal,
-          required final PrincipalName principalName,
-          required final String bapiSalesDocNumber,
-          required final StatusType bapiStatus,
-          required final StatusType status,
-          required final String statusReason,
-          required final bool outsidePolicy,
-          required final DateTimeStringValue invoiceDate,
-          required final Prsfd prsfd,
-          required final List<ReturnRequestInformation> bonusInformation}) =
-      _$_ReturnRequestInformation;
+      {required final String invoiceNo,
+      required final DateTimeStringValue expiryDate,
+      required final StringValue comment,
+      required final String rejectReason,
+      required final String returnQuantity,
+      required final double unitPrice,
+      required final double totalPrice,
+      required final String returnOrderDesc,
+      required final MaterialNumber materialNumber,
+      required final String materialDescription,
+      required final String batch,
+      required final String materialGroup,
+      required final List<String> imageUrl,
+      required final List<String> attachments,
+      required final DateTimeStringValue createdDate,
+      required final String principal,
+      required final PrincipalName principalName,
+      required final String bapiSalesDocNumber,
+      required final StatusType bapiStatus,
+      required final StatusType status,
+      required final String statusReason,
+      required final bool outsidePolicy,
+      required final DateTimeStringValue invoiceDate,
+      required final Prsfd prsfd,
+      required final List<ReturnRequestInformation> bonusInformation,
+      required final Remarks remarks}) = _$_ReturnRequestInformation;
   _ReturnRequestInformation._() : super._();
 
   @override
@@ -685,6 +704,8 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   Prsfd get prsfd;
   @override
   List<ReturnRequestInformation> get bonusInformation;
+  @override
+  Remarks get remarks;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnRequestInformationCopyWith<_$_ReturnRequestInformation>

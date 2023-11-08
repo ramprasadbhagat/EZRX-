@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -239,6 +240,47 @@ void main() {
         findsNWidgets(2),
       );
       await tester.pump();
+    });
+
+    testWidgets('Show comment', (tester) async {
+      final fakeComment = Remarks('fake-comment');
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformation: [
+            ReturnRequestInformation.empty().copyWith(
+              remarks: fakeComment,
+              returnQuantity: '1',
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      final showButtonFinder =
+          find.byKey(WidgetKeys.returnDetailShowDetailButton);
+      await tester.dragUntilVisible(
+        showButtonFinder,
+        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        const Offset(0, 1000),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(showButtonFinder);
+      await tester.pumpAndSettle();
+      final commentTextFinder = find.byKey(
+        WidgetKeys.balanceTextRow(
+          'Comments'.tr(),
+          fakeComment.displayText,
+        ),
+      );
+      expect(
+        find.descendant(
+          of: commentTextFinder,
+          matching: find.text(
+            fakeComment.displayText,
+          ),
+        ),
+        findsOneWidget,
+      );
     });
   });
 }

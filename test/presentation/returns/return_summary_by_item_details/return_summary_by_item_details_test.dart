@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/returns/return_summary_details/return_sum
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -243,6 +244,47 @@ void main() {
           expect(
             find.byKey(WidgetKeys.outsideReturnPolicyTag),
             findsNothing,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> display comment',
+        (tester) async {
+          final fakeComment = Remarks('fake-comment');
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                remarks: fakeComment,
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final showButtonFinder =
+              find.byKey(WidgetKeys.returnDetailShowDetailButton);
+          await tester.dragUntilVisible(
+            showButtonFinder,
+            find.byKey(WidgetKeys.returnItemDetailScrollList),
+            const Offset(0, 1000),
+          );
+          await tester.pumpAndSettle();
+          await tester.tap(showButtonFinder);
+          await tester.pumpAndSettle();
+          final commentTextFinder = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Comments'.tr(),
+              fakeComment.displayText,
+            ),
+          );
+          expect(
+            find.descendant(
+              of: commentTextFinder,
+              matching: find.text(
+                fakeComment.displayText,
+              ),
+            ),
+            findsOneWidget,
           );
         },
       );

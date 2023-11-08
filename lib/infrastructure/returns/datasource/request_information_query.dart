@@ -19,6 +19,7 @@ class RequestInformationQuery {
       invoiceNo
       expiryDate
       comment
+      remarks
       rejectReason
       returnQuantity
       unitPrice
@@ -66,6 +67,7 @@ class RequestInformationQuery {
       statusReason
       outsidePolicy
       invoiceDate
+      
       }
     }
   }

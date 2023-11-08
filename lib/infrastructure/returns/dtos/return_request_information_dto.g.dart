@@ -39,6 +39,7 @@ _$_ReturnRequestInformationDto _$$_ReturnRequestInformationDtoFromJson(
       outsidePolicy: json['outsidePolicy'] as bool? ?? false,
       invoiceDate: json['invoiceDate'] as String? ?? '',
       prsfd: json['prsfd'] as String? ?? '',
+      remarks: json['remarks'] as String? ?? '',
       bonusInformation: (json['bonusInformation'] as List<dynamic>?)
               ?.map((e) => ReturnRequestInformationDto.fromJson(
                   e as Map<String, dynamic>))
@@ -73,6 +74,7 @@ Map<String, dynamic> _$$_ReturnRequestInformationDtoToJson(
       'outsidePolicy': instance.outsidePolicy,
       'invoiceDate': instance.invoiceDate,
       'prsfd': instance.prsfd,
+      'remarks': instance.remarks,
       'bonusInformation':
           instance.bonusInformation.map((e) => e.toJson()).toList(),
     };

@@ -32,6 +32,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required DateTimeStringValue invoiceDate,
     required Prsfd prsfd,
     required List<ReturnRequestInformation> bonusInformation,
+    required Remarks remarks,
   }) = _ReturnRequestInformation;
 
   factory ReturnRequestInformation.empty() => ReturnRequestInformation(
@@ -60,6 +61,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         totalPrice: 0.0,
         unitPrice: 0.0,
         prsfd: Prsfd(''),
+        remarks: Remarks(''),
       );
 
   double get calculatedUnitPrice {
