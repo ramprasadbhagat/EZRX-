@@ -42,6 +42,9 @@ class WidgetKeys {
       Key('addressInfoSectionDeliveryToLabel');
   static Key statusTracker(String status) => Key('statusTracker$status');
   static const Key offerTag = Key('offerTag');
+  static const Key priceTextData = Key('priceTextData');
+  static const Key priceTextTitle = Key('priceTextTitle');
+  static const Key radioPaymentGateway = Key('radioPaymentGateway');
   //============================================================
   //  PRE-ORDER-MODAL
   //============================================================

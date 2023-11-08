@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -47,6 +48,9 @@ void main() {
   const creditSearchKeyword = '4040000149';
   const priceWithoutCredit = 29958.00;
   const priceWithCredit = 438.00;
+  final defaultPaymentMethod = 'Payment Gateway'.tr();
+  final step3Title = 'Select payment method'.tr();
+  const salesOrg = 'RSD';
 
   Future<void> loginAndChangeDeliveryAddress() async {
     await loginRobot.loginToHomeScreen(user, password, marketMalaysia);
@@ -221,7 +225,11 @@ void main() {
       priceWithCredit,
     );
     await newPaymentStep2Robot.tapNextButton();
-    newPaymentStep3Robot.verifyStep3InitialField();
+    newPaymentStep3Robot.verifyStep3InitialField(
+      defaultPaymentMethod: defaultPaymentMethod,
+      salesOrg: salesOrg,
+      step3Title: step3Title,
+    );
   });
 
   tearDown(() async {

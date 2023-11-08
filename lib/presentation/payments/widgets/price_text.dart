@@ -34,6 +34,7 @@ class PriceText extends StatelessWidget {
                         : ZPColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
+              key: WidgetKeys.priceTextData,
             ),
             Text(
               '${context.tr(title)} (${salesOrgConfig.currency.code})',
@@ -41,6 +42,7 @@ class PriceText extends StatelessWidget {
                     color: ZPColors.darkGray,
                     fontSize: 11,
                   ),
+              key: WidgetKeys.priceTextTitle,
             ),
           ],
         ),

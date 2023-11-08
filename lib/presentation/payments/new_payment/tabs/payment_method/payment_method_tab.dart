@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -142,6 +143,7 @@ class _PaymentMethodSelector extends StatelessWidget {
                                 ),
                                 horizontalTitleGap: 1,
                                 leading: Radio(
+                                  key: WidgetKeys.radioPaymentGateway,
                                   value: paymentMethod,
                                   groupValue: state.selectedPaymentMethod,
                                   onChanged:null,
