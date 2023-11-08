@@ -22,6 +22,8 @@ class CustomerInvoiceDto with _$CustomerInvoiceDto {
         required String discountDate,
     @JsonKey(name: 'displayAmount', defaultValue: '')
         required String displayAmount,
+    @JsonKey(name: 'displayCurrency', defaultValue: '')
+        required String displayCurrency,
     @JsonKey(name: 'displayOpenAmount', defaultValue: '')
         required String displayOpenAmount,
     @JsonKey(name: 'dueDate', defaultValue: '') required String dueDate,
@@ -55,6 +57,7 @@ class CustomerInvoiceDto with _$CustomerInvoiceDto {
           customerOpenItem.totalAmountInDisplayCrcy.toStringAsFixed(2),
       displayOpenAmount:
           customerOpenItem.openAmountInDisplayCrcy.toStringAsFixed(2),
+      displayCurrency: customerOpenItem.displayCurrency.code,
       dueDate: customerOpenItem.netDueDate.getValue(),
       fiscalYear: customerOpenItem.fiscalYear,
       isDisputed: customerOpenItem.isDisputed,

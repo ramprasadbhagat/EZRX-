@@ -35,6 +35,8 @@ mixin _$CustomerInvoiceDto {
   String get discountDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'displayAmount', defaultValue: '')
   String get displayAmount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'displayCurrency', defaultValue: '')
+  String get displayCurrency => throw _privateConstructorUsedError;
   @JsonKey(name: 'displayOpenAmount', defaultValue: '')
   String get displayOpenAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'dueDate', defaultValue: '')
@@ -80,6 +82,8 @@ abstract class $CustomerInvoiceDtoCopyWith<$Res> {
       @JsonKey(name: 'discountAmount', defaultValue: '') String discountAmount,
       @JsonKey(name: 'discountDate', defaultValue: '') String discountDate,
       @JsonKey(name: 'displayAmount', defaultValue: '') String displayAmount,
+      @JsonKey(name: 'displayCurrency', defaultValue: '')
+      String displayCurrency,
       @JsonKey(name: 'displayOpenAmount', defaultValue: '')
       String displayOpenAmount,
       @JsonKey(name: 'dueDate', defaultValue: '') String dueDate,
@@ -115,6 +119,7 @@ class _$CustomerInvoiceDtoCopyWithImpl<$Res, $Val extends CustomerInvoiceDto>
     Object? discountAmount = null,
     Object? discountDate = null,
     Object? displayAmount = null,
+    Object? displayCurrency = null,
     Object? displayOpenAmount = null,
     Object? dueDate = null,
     Object? fiscalYear = null,
@@ -154,6 +159,10 @@ class _$CustomerInvoiceDtoCopyWithImpl<$Res, $Val extends CustomerInvoiceDto>
       displayAmount: null == displayAmount
           ? _value.displayAmount
           : displayAmount // ignore: cast_nullable_to_non_nullable
+              as String,
+      displayCurrency: null == displayCurrency
+          ? _value.displayCurrency
+          : displayCurrency // ignore: cast_nullable_to_non_nullable
               as String,
       displayOpenAmount: null == displayOpenAmount
           ? _value.displayOpenAmount
@@ -218,6 +227,8 @@ abstract class _$$_CustomerInvoiceDtoCopyWith<$Res>
       @JsonKey(name: 'discountAmount', defaultValue: '') String discountAmount,
       @JsonKey(name: 'discountDate', defaultValue: '') String discountDate,
       @JsonKey(name: 'displayAmount', defaultValue: '') String displayAmount,
+      @JsonKey(name: 'displayCurrency', defaultValue: '')
+      String displayCurrency,
       @JsonKey(name: 'displayOpenAmount', defaultValue: '')
       String displayOpenAmount,
       @JsonKey(name: 'dueDate', defaultValue: '') String dueDate,
@@ -251,6 +262,7 @@ class __$$_CustomerInvoiceDtoCopyWithImpl<$Res>
     Object? discountAmount = null,
     Object? discountDate = null,
     Object? displayAmount = null,
+    Object? displayCurrency = null,
     Object? displayOpenAmount = null,
     Object? dueDate = null,
     Object? fiscalYear = null,
@@ -290,6 +302,10 @@ class __$$_CustomerInvoiceDtoCopyWithImpl<$Res>
       displayAmount: null == displayAmount
           ? _value.displayAmount
           : displayAmount // ignore: cast_nullable_to_non_nullable
+              as String,
+      displayCurrency: null == displayCurrency
+          ? _value.displayCurrency
+          : displayCurrency // ignore: cast_nullable_to_non_nullable
               as String,
       displayOpenAmount: null == displayOpenAmount
           ? _value.displayOpenAmount
@@ -352,6 +368,8 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
       required this.discountDate,
       @JsonKey(name: 'displayAmount', defaultValue: '')
       required this.displayAmount,
+      @JsonKey(name: 'displayCurrency', defaultValue: '')
+      required this.displayCurrency,
       @JsonKey(name: 'displayOpenAmount', defaultValue: '')
       required this.displayOpenAmount,
       @JsonKey(name: 'dueDate', defaultValue: '') required this.dueDate,
@@ -395,6 +413,9 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
   @JsonKey(name: 'displayAmount', defaultValue: '')
   final String displayAmount;
   @override
+  @JsonKey(name: 'displayCurrency', defaultValue: '')
+  final String displayCurrency;
+  @override
   @JsonKey(name: 'displayOpenAmount', defaultValue: '')
   final String displayOpenAmount;
   @override
@@ -432,7 +453,7 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
 
   @override
   String toString() {
-    return 'CustomerInvoiceDto(accountingDocExternalReference: $accountingDocExternalReference, accountingDocument: $accountingDocument, bpCustomerNumber: $bpCustomerNumber, debitCreditFlag: $debitCreditFlag, discountAmount: $discountAmount, discountDate: $discountDate, displayAmount: $displayAmount, displayOpenAmount: $displayOpenAmount, dueDate: $dueDate, fiscalYear: $fiscalYear, isDisputed: $isDisputed, lineItemNumber: $lineItemNumber, lineNumber: $lineNumber, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmount: $paymentAmount, salesOrg: $salesOrg, zzDeductCode: $zzDeductCode)';
+    return 'CustomerInvoiceDto(accountingDocExternalReference: $accountingDocExternalReference, accountingDocument: $accountingDocument, bpCustomerNumber: $bpCustomerNumber, debitCreditFlag: $debitCreditFlag, discountAmount: $discountAmount, discountDate: $discountDate, displayAmount: $displayAmount, displayCurrency: $displayCurrency, displayOpenAmount: $displayOpenAmount, dueDate: $dueDate, fiscalYear: $fiscalYear, isDisputed: $isDisputed, lineItemNumber: $lineItemNumber, lineNumber: $lineNumber, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmount: $paymentAmount, salesOrg: $salesOrg, zzDeductCode: $zzDeductCode)';
   }
 
   @override
@@ -456,6 +477,8 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
                 other.discountDate == discountDate) &&
             (identical(other.displayAmount, displayAmount) ||
                 other.displayAmount == displayAmount) &&
+            (identical(other.displayCurrency, displayCurrency) ||
+                other.displayCurrency == displayCurrency) &&
             (identical(other.displayOpenAmount, displayOpenAmount) ||
                 other.displayOpenAmount == displayOpenAmount) &&
             (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
@@ -489,6 +512,7 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
       discountAmount,
       discountDate,
       displayAmount,
+      displayCurrency,
       displayOpenAmount,
       dueDate,
       fiscalYear,
@@ -530,6 +554,8 @@ abstract class _CustomerInvoiceDto extends CustomerInvoiceDto {
       required final String discountDate,
       @JsonKey(name: 'displayAmount', defaultValue: '')
       required final String displayAmount,
+      @JsonKey(name: 'displayCurrency', defaultValue: '')
+      required final String displayCurrency,
       @JsonKey(name: 'displayOpenAmount', defaultValue: '')
       required final String displayOpenAmount,
       @JsonKey(name: 'dueDate', defaultValue: '') required final String dueDate,
@@ -576,6 +602,9 @@ abstract class _CustomerInvoiceDto extends CustomerInvoiceDto {
   @override
   @JsonKey(name: 'displayAmount', defaultValue: '')
   String get displayAmount;
+  @override
+  @JsonKey(name: 'displayCurrency', defaultValue: '')
+  String get displayCurrency;
   @override
   @JsonKey(name: 'displayOpenAmount', defaultValue: '')
   String get displayOpenAmount;
