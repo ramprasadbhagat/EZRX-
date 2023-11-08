@@ -15,6 +15,8 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
               current.isMWPNotAllowedAndPresentInCart ||
           previous.isOOSAllowedIfPresentInCart !=
               current.isOOSAllowedIfPresentInCart ||
+          previous.isComboNotAllowedIfPresentInCart !=
+              current.isComboNotAllowedIfPresentInCart ||
           previous.displayInvalidItemsBanner !=
               current.displayInvalidItemsBanner,
       builder: (context, state) {
@@ -69,6 +71,14 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
+                if (state.isComboNotAllowedIfPresentInCart)
+                  BulletWidget(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    content: Text(
+                      context.tr('Suspended combo'),
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
                 Text(
                   context.tr(
                     'Please review and remove these items from cart to proceed to check out.',
@@ -78,6 +88,7 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
                 const SizedBox(height: 5),
                 _InvalidItemRemoveButton(
                   invalidItems: state.invalidCartItems,
+                  invalidComboItems: state.invalidComboItems,
                 ),
               ],
             ),
@@ -90,28 +101,42 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
 
 class _InvalidItemRemoveButton extends StatelessWidget {
   final List<MaterialInfo> invalidItems;
+  final List<PriceAggregate> invalidComboItems;
+
   const _InvalidItemRemoveButton({
     Key? key,
     required this.invalidItems,
+    required this.invalidComboItems,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) =>
-          previous.isClearing != current.isClearing,
+          previous.isClearing != current.isClearing ||
+          previous.isUpserting != current.isUpserting,
       builder: (context, state) {
         return OutlinedButton(
           key: WidgetKeys.cartPageInvalidItemsBannerButton,
-          onPressed: () {
-            if (!state.isClearing) {
-              context.read<CartBloc>().add(
-                    CartEvent.removeInvalidProducts(
-                      invalidCartItems: invalidItems,
-                    ),
-                  );
-            }
-          },
+          onPressed: state.isClearing || state.isUpserting
+              ? null
+              : () {
+                  final cartBloc = context.read<CartBloc>();
+                  if (invalidComboItems.isNotEmpty) {
+                    cartBloc.add(
+                      CartEvent.upsertCartItemsWithComboOffers(
+                        priceAggregates: invalidComboItems,
+                      ),
+                    );
+                  }
+                  if (invalidItems.isNotEmpty) {
+                    cartBloc.add(
+                      CartEvent.removeInvalidProducts(
+                        invalidCartItems: invalidItems,
+                      ),
+                    );
+                  }
+                },
           style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                 backgroundColor: const MaterialStatePropertyAll(
                   ZPColors.paleBlueGray,
@@ -123,7 +148,7 @@ class _InvalidItemRemoveButton extends StatelessWidget {
                 ),
               ),
           child: LoadingShimmer.withChild(
-            enabled: state.isClearing,
+            enabled: state.isClearing || state.isUpserting,
             child: Text(
               context.tr('Remove items'),
               style: Theme.of(context)

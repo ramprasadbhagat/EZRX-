@@ -37,6 +37,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
             const _CartPagePriceMessage(),
             const _MovCheckMessage(),
             const _StockInvalidIDMarketMessage(),
+            const _CartPageInvalidItemsMessage(),
             ListTile(
               dense: true,
               visualDensity: VisualDensity.compact,

@@ -50,7 +50,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
       isOOSAllowedIfPresentInCart &&
       isBundleQuantitySatisfies &&
       !cartContainsSuspendedMaterials &&
-      !cartContainsSuspendedPrincipal;
+      !cartContainsSuspendedPrincipal &&
+      !isComboNotAllowedIfPresentInCart;
 
   String get orderEligibleTrackingErrorMessage {
     const invalidItemErrorMessage =
@@ -75,6 +76,28 @@ class OrderEligibilityState with _$OrderEligibilityState {
     }
 
     return '';
+  }
+
+  bool get comboDealEligible {
+    if (!configs.enableComboDeals) return false;
+    if (customerCodeInfo.salesDeals.isEmpty) return false;
+
+    final comboDealUserRole = configs.comboDealsUserRole;
+    final userRole = user.role.type;
+
+    if (comboDealUserRole.isAllUsers) {
+      return true;
+    }
+
+    if (comboDealUserRole.isCustomerOnly && userRole.isCustomer) {
+      return true;
+    }
+
+    if (comboDealUserRole.isSalesRepOnly && userRole.isSalesRepRole) {
+      return true;
+    }
+
+    return false;
   }
 
   bool get isTotalGreaterThanMinOrderAmount {
@@ -118,6 +141,9 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   bool get displayOOSWarning =>
       !isOOSAllowedIfPresentInCart && showErrorMessage;
+
+  bool get displayInvalidItemsWarning =>
+      displayInvalidItemsBanner && showErrorMessage;
 
   /*MWP: Material Without Price*/
   bool get isMWPNotAllowedAndPresentInCart =>
@@ -169,14 +195,20 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   bool get cartContainsSuspendedMaterials =>
       cartItems.any((product) => product.materialInfo.isSuspended);
+
   bool get cartContainsSuspendedPrincipal =>
       cartItems.any((product) => product.materialInfo.isPrincipalSuspended);
+
+  bool get isComboNotAllowedIfPresentInCart =>
+      !comboDealEligible &&
+      cartItems.any((product) => product.materialInfo.type.typeCombo);
 
   bool get displayInvalidItemsBanner =>
       cartContainsSuspendedMaterials ||
       isMWPNotAllowedAndPresentInCart ||
       !isOOSAllowedIfPresentInCart ||
-      cartContainsSuspendedPrincipal;
+      cartContainsSuspendedPrincipal ||
+      isComboNotAllowedIfPresentInCart;
 
   List<MaterialInfo> get invalidMaterialCartItems => cartItems
       .where(
@@ -212,6 +244,21 @@ class OrderEligibilityState with _$OrderEligibilityState {
                 parentID: element.bundle.bundleCode,
               ),
             ),
+      )
+      .toList();
+
+  List<PriceAggregate> get invalidComboItems => cartItems
+      .where((item) => !comboDealEligible && item.materialInfo.type.typeCombo)
+      .expand(
+        (item) => item.convertComboItemToPriceAggregateList.map(
+          (priceAggregate) => priceAggregate.copyWith(
+            quantity: 0,
+            price: priceAggregate.price.copyWith(
+              comboDeal:
+                  priceAggregate.price.comboDeal.copyWith(isEligible: false),
+            ),
+          ),
+        ),
       )
       .toList();
 

@@ -49,7 +49,8 @@ class OrderEligibilityBloc
         state.copyWith(
           showErrorMessage: !state.isMinOrderValuePassed ||
               state.isMWPNotAllowedAndPresentInCart ||
-              !state.isOOSOrderAllowedToSubmit,
+              !state.isOOSOrderAllowedToSubmit ||
+              state.displayInvalidItemsBanner,
         ),
       ),
     );

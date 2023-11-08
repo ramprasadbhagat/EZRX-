@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo_item.dart';
@@ -44,6 +45,8 @@ class CartProductCombo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final salesOrgConfig = context.read<EligibilityBloc>().state;
+
     return CustomSlidable(
       extentRatio: 0.24,
       endActionPaneActions: canEditable
@@ -70,67 +73,69 @@ class CartProductCombo extends StatelessWidget {
                 ProductTag.comboOffer(),
                 const Spacer(),
                 if (canEditable) ...[
-                  TextButton.icon(
-                    onPressed: () {
-                      final comboDeal = context
-                          .read<ComboDealListBloc>()
-                          .state
-                          .getComboDeal(comboDealId: _priceComboDeal.id);
-                      final comboDealDetailBloc =
-                          context.read<ComboDealMaterialDetailBloc>();
+                  if (salesOrgConfig.comboDealEligible)
+                    TextButton.icon(
+                      onPressed: () {
+                        final comboDeal = context
+                            .read<ComboDealListBloc>()
+                            .state
+                            .getComboDeal(comboDealId: _priceComboDeal.id);
+                        final comboDealDetailBloc =
+                            context.read<ComboDealMaterialDetailBloc>();
 
-                      comboDealDetailBloc.add(
-                        ComboDealMaterialDetailEvent.cartContainsCurrentCombo(
-                          contain:
-                              cartItem.comboMaterialsCurrentQuantity.isNotEmpty,
-                        ),
-                      );
-
-                      if (_priceComboDeal.category.type.isMaterialNumber) {
                         comboDealDetailBloc.add(
-                          ComboDealMaterialDetailEvent.fetchComboDealDetail(
-                            comboDeal: comboDeal,
-                            locale: context.locale,
-                            parentMaterialNumber: MaterialNumber(
-                              cartItem.comboMaterials.firstOrNull?.parentId ??
-                                  '',
+                          ComboDealMaterialDetailEvent.cartContainsCurrentCombo(
+                            contain: cartItem
+                                .comboMaterialsCurrentQuantity.isNotEmpty,
+                          ),
+                        );
+
+                        if (_priceComboDeal.category.type.isMaterialNumber) {
+                          comboDealDetailBloc.add(
+                            ComboDealMaterialDetailEvent.fetchComboDealDetail(
+                              comboDeal: comboDeal,
+                              locale: context.locale,
+                              parentMaterialNumber: MaterialNumber(
+                                cartItem.comboMaterials.firstOrNull?.parentId ??
+                                    '',
+                              ),
+                              comboMaterialsCurrentQuantity:
+                                  cartItem.comboMaterialsCurrentQuantity,
                             ),
-                            comboMaterialsCurrentQuantity:
-                                cartItem.comboMaterialsCurrentQuantity,
-                          ),
-                        );
-                      } else {
-                        final principalCode = cartItem.comboMaterials
-                                .firstOrNull?.principalData.principalCode
-                                .getOrDefaultValue('') ??
-                            '';
+                          );
+                        } else {
+                          final principalCode = cartItem.comboMaterials
+                                  .firstOrNull?.principalData.principalCode
+                                  .getOrDefaultValue('') ??
+                              '';
 
-                        comboDealDetailBloc.add(
-                          ComboDealMaterialDetailEvent.fetchComboDealPrincipal(
-                            comboDeal: comboDeal,
-                            principles: [principalCode],
-                            comboMaterialsCurrentQuantity:
-                                cartItem.comboMaterialsCurrentQuantity,
-                            locale: context.locale,
-                          ),
-                        );
-                      }
+                          comboDealDetailBloc.add(
+                            ComboDealMaterialDetailEvent
+                                .fetchComboDealPrincipal(
+                              comboDeal: comboDeal,
+                              principles: [principalCode],
+                              comboMaterialsCurrentQuantity:
+                                  cartItem.comboMaterialsCurrentQuantity,
+                              locale: context.locale,
+                            ),
+                          );
+                        }
 
-                      context.navigateTo(const ComboDetailPageRoute());
-                    },
-                    icon: const Icon(
-                      Icons.edit_outlined,
-                      size: 18,
-                      color: ZPColors.extraDarkGreen,
+                        context.navigateTo(const ComboDetailPageRoute());
+                      },
+                      icon: const Icon(
+                        Icons.edit_outlined,
+                        size: 18,
+                        color: ZPColors.extraDarkGreen,
+                      ),
+                      label: Text(
+                        context.tr('Edit'),
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelSmall
+                            ?.copyWith(color: ZPColors.extraDarkGreen),
+                      ),
                     ),
-                    label: Text(
-                      context.tr('Edit'),
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelSmall
-                          ?.copyWith(color: ZPColors.extraDarkGreen),
-                    ),
-                  ),
                   const SizedBox(width: 10),
                   TextButton.icon(
                     onPressed: () => _showDeleteComboBottomSheet(
@@ -174,6 +179,10 @@ class CartProductCombo extends StatelessWidget {
                           color: ZPColors.darkGray,
                         ),
                   ),
+                  if (!salesOrgConfig.comboDealEligible)
+                    ErrorTextWithIcon(
+                      valueText: context.tr('Combo suspended'),
+                    ),
                   const SizedBox(height: 8),
                   ...cartItem.comboMaterials
                       .map(

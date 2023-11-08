@@ -821,11 +821,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (cartProductList) {
+            final newCartProductList = _mappingPreviousInfo(
+              previousCartProducts: state.cartProducts,
+              currentCartProducts: cartProductList,
+              salesOrganisationConfigs: state.config,
+            );
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
                 isUpserting: false,
-                cartProducts: cartProductList,
+                cartProducts: newCartProductList,
               ),
             );
           },
