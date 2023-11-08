@@ -99,9 +99,13 @@ class _CustomTabBarState extends State<_CustomTabBar>
   }
 
   void _updatePageViewStack(TabsRouter tabsRouter) {
-    if (listEquals(_currentRoutes, widget.routes)) return;
+    if (listEquals(_currentRoutes.routeList, widget.routes.routeList)) return;
+    // Checking whenever we login on dehalf and some tabs are disabled due to user role
+
     _currentRoutes = widget.routes;
-    tabsRouter.notifyAll();
+    tabsRouter.setupRoutes(widget.routes.routeList);
+    // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+    tabsRouter.notifyListeners();
   }
 
   @override
