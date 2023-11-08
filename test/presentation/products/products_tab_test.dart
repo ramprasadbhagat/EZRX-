@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -33,6 +34,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class MaterialListBlocMock
@@ -445,6 +447,16 @@ void main() {
       testWidgets(
         '=> Test Filter combo material found',
         (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrgConfigs:
+                  salesOrgConfigEnabledMaterialWithoutPriceAndCombo,
+              customerCodeInfo: CustomerCodeInfo.empty()
+                  .copyWith(salesDeals: [SalesDealNumber('0000000000')]),
+            ),
+          );
+
           when(() => materialFilterBlocMock.state).thenReturn(
             MaterialFilterState.initial().copyWith.materialFilter(
                   comboOffers: true,
