@@ -561,8 +561,6 @@ String getOosTag() => 'Out of stock';
 
 Color getOosTagLabelColor() => ZPColors.black;
 
-bool getIsInProgress(String status) => status == 'In Progress';
-
 bool isSuccessfulOrProcessed(String status) =>
     status == 'Successful' ||
     status == 'Processed' ||

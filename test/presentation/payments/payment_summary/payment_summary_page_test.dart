@@ -38,6 +38,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -106,6 +107,8 @@ void main() {
   late AvailableCreditsBlocMock availableCreditsBlocMock;
   late NewPaymentBlocMock newPaymentBlocMock;
 
+  final fakeDate = DateTimeStringValue('fake-date');
+  final fakeAdviceExpiry = StringValue('fake-advice-expiry');
   final fakeToDate = DateTime.parse(
     DateFormat('yyyy-MM-dd').format(
       DateTime.now(),
@@ -118,6 +121,15 @@ void main() {
         const Duration(days: 30),
       ),
     ),
+  );
+
+  final filterStatusVariant = ValueVariant<FilterStatus>(
+    {
+      FilterStatus('Successful'),
+      FilterStatus('Processed'),
+      FilterStatus('Payment Received'),
+      FilterStatus('In progress'),
+    },
   );
 
   setUpAll(() async {
@@ -954,5 +966,92 @@ void main() {
       expect(findInvalidText, findsOneWidget);
       await tester.pump();
     });
+
+    testWidgets(
+      'Show date text for ID market',
+      (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        when(() => paymentSummaryBloc.state).thenReturn(
+          PaymentSummaryState.initial().copyWith(
+            details: [
+              PaymentSummaryDetails.empty().copyWith(
+                createdDate: fakeDate,
+                status: filterStatusVariant.currentValue ?? FilterStatus(''),
+                adviceExpiry: fakeAdviceExpiry,
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final dateTextFinder = find
+            .byKey(WidgetKeys.paymentSummaryDateOrExpiry)
+            .evaluate()
+            .single
+            .widget as Text;
+
+        if (filterStatusVariant.currentValue?.getIsSuccessfulOrProcessed ??
+            false) {
+          expect(
+            dateTextFinder.data,
+            '${'Created on'.tr()}: ${fakeDate.dateString}',
+          );
+        } else {
+          expect(
+            dateTextFinder.data,
+            '${'Expires in'.tr()} ${fakeAdviceExpiry.displayDashIfEmpty}',
+          );
+        }
+      },
+      variant: filterStatusVariant,
+    );
+
+    testWidgets(
+      'Show date text (Except ID market)',
+      (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+          ),
+        );
+        when(() => paymentSummaryBloc.state).thenReturn(
+          PaymentSummaryState.initial().copyWith(
+            details: [
+              PaymentSummaryDetails.empty().copyWith(
+                createdDate: fakeDate,
+                status: filterStatusVariant.currentValue ?? FilterStatus(''),
+                adviceExpiry: fakeAdviceExpiry,
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final dateTextFinder = find
+            .byKey(WidgetKeys.paymentSummaryDateOrExpiry)
+            .evaluate()
+            .single
+            .widget as Text;
+        if (filterStatusVariant.currentValue?.getIsSuccessfulOrProcessed ??
+            false) {
+          expect(
+            dateTextFinder.data,
+            '${'Payment date'.tr()}: ${fakeDate.dateString}',
+          );
+        } else {
+          expect(
+            dateTextFinder.data,
+            '${'Expires in'.tr()} ${fakeAdviceExpiry.displayDashIfEmpty}',
+          );
+        }
+      },
+      variant: filterStatusVariant,
+    );
   });
 }

@@ -101,9 +101,9 @@ class _PaymentSummaryItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                paymentSummaryDetails.status.isInProgress
-                    ? '${context.tr('Expires in')} ${paymentSummaryDetails.adviceExpiry.displayDashIfEmpty}'
-                    : '${context.tr(salesOrg.paymentDateLabelText)}: ${paymentSummaryDetails.createdDate.dateString}',
+                paymentSummaryDetails.status.getIsSuccessfulOrProcessed
+                    ? '${context.tr(salesOrg.paymentDateLabelText)}: ${paymentSummaryDetails.createdDate.dateString}'
+                    : '${context.tr('Expires in')} ${paymentSummaryDetails.adviceExpiry.displayDashIfEmpty}',
                 key: WidgetKeys.paymentSummaryDateOrExpiry,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: paymentSummaryDetails
