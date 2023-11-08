@@ -1246,6 +1246,63 @@ void main() {
           expect(selectedImage, matcher);
         },
       );
+
+      blocTest<ProductDetailBloc, ProductDetailState>(
+        'Fetch Item Quantity For Zdp5 Discount',
+        build: () => ProductDetailBloc(
+          productDetailRepository: productDetailMockRepository,
+          favouriteRepository: favouriteMockRepository,
+        ),
+        act: (ProductDetailBloc bloc) {
+          bloc.add(
+            const ProductDetailEvent.fetchItemQuantityForZdp5Discount(
+              quantity: 10,
+            ),
+          );
+        },
+        seed: () => ProductDetailState.initial().copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: mockMaterialInfo.copyWith(),
+          ),
+        ),
+        expect: () => [
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo.copyWith(
+                quantity: MaterialQty(10),
+              ),
+            ),
+          ),
+        ],
+      );
+
+      blocTest<ProductDetailBloc, ProductDetailState>(
+        'Set Exeeded Qty',
+        build: () => ProductDetailBloc(
+          productDetailRepository: productDetailMockRepository,
+          favouriteRepository: favouriteMockRepository,
+        ),
+        act: (ProductDetailBloc bloc) {
+          bloc.add(
+            const ProductDetailEvent.setExceedQty(
+              exceedQty: true,
+            ),
+          );
+        },
+        seed: () => ProductDetailState.initial().copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: mockMaterialInfo.copyWith(),
+          ),
+        ),
+        expect: () => [
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              exeedQty: true,
+              materialInfo: mockMaterialInfo.copyWith(),
+            ),
+          ),
+        ],
+      );
     },
   );
 }

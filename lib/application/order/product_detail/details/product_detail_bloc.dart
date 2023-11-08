@@ -296,6 +296,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             failureOrSuccessOption: none(),
           ),
         );
+
         final failureOrSuccess = await favouriteRepository.addToFavourites(
           materialNumber: e.materialNumber,
           list: e.isForSimilarProduct

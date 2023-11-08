@@ -622,7 +622,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           return element.copyWith(
             salesOrgConfig: state.config,
             price: updatedPrice,
-            exceedQuantity: element.materialInfo.materialQtyConformZDP5Rule(
+            exceedQuantity: element.materialInfo.materialQtyConfirmZDP5Rule(
               element.price.zdp5MaxQuota.intValue,
               element.price.zdp5RemainingQuota.intValue,
             ),
@@ -865,7 +865,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         salesOrgConfig: salesOrganisationConfigs,
         stockInfoList: priceAggregate.stockInfoList,
         exceedQuantity: priceAggregate.exceedQuantity
-            ? priceAggregate.materialInfo.materialQtyConformZDP5Rule(
+            ? priceAggregate.materialInfo.materialQtyConfirmZDP5Rule(
                 priceAggregate.price.zdp5MaxQuota.intValue,
                 priceAggregate.price.zdp5RemainingQuota.intValue,
               )

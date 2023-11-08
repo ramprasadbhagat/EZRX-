@@ -50,6 +50,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -1237,6 +1238,118 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.byKey(WidgetKeys.materialDetailsStock), findsOneWidget);
+      });
+
+      testWidgets('product quantity update', (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+              productItem: productItemWithProductItemXp,
+              similarProduct: similarProducts,
+            ),
+            isFetching: false,
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            isFetching: false,
+            materialPrice: {materialNumber: price},
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: salesOrgConfigEnabledZDP5,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final productDetailQuantityAddKey =
+            find.byKey(WidgetKeys.productDetailQuantityAddKey);
+
+        expect(
+          find.byKey(WidgetKeys.materialDetailsQuantityInput),
+          findsOneWidget,
+        );
+        expect(productDetailQuantityAddKey, findsOneWidget);
+        await tester.tap(productDetailQuantityAddKey);
+        verify(
+          () => productDetailMockBloc.add(
+            const ProductDetailEvent.fetchItemQuantityForZdp5Discount(
+              quantity: 2,
+            ),
+          ),
+        ).called(1);
+      });
+
+      testWidgets('product price call for zdp5 ', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: salesOrgConfigEnabledZDP5,
+          ),
+        );
+
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          ),
+        );
+
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            isFetching: false,
+            materialPrice: {
+              materialNumber: price.copyWith(
+                zdp5MaxQuota: ZDP5Info('2'),
+                zdp5RemainingQuota: ZDP5Info('2'),
+              )
+            },
+          ),
+        );
+
+        whenListen(
+          productDetailMockBloc,
+          Stream.fromIterable([
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(quantity: MaterialQty(3)),
+                stockInfo: stockInfo,
+                productItem: productItemWithProductItemXp,
+                similarProduct: similarProducts,
+              ),
+              isFetching: false,
+            ),
+          ]),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(WidgetKeys.materialDetailsQuantityInput),
+          findsOneWidget,
+        );
+        verify(
+          () => materialPriceMockBloc.add(
+            MaterialPriceEvent.fetchPriceForZDP5Materials(
+              materialInfo: materialInfo.copyWith(quantity: MaterialQty(3)),
+            ),
+          ),
+        ).called(1);
+        verify(
+          () => productDetailMockBloc.add(
+            const ProductDetailEvent.setExceedQty(
+              exceedQty: true,
+            ),
+          ),
+        ).called(1);
       });
     },
   );

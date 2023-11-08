@@ -49,12 +49,13 @@ void main() {
   };
 
   final fakeMaterialQuery = [
-    MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('1')),
+    MaterialInfo.empty()
+        .copyWith(materialNumber: MaterialNumber('000000000021038305')),
     MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('2')),
   ];
 
   final fakeMaterialNumberQuery = [
-    MaterialNumber('1'),
+    MaterialNumber('000000000021038305'),
     MaterialNumber('2'),
   ];
 
@@ -63,7 +64,11 @@ void main() {
     repository = MaterialPriceRepositoryMock();
     final priceData = await MaterialPriceLocalDataSource().getPriceList();
     mockPriceMap = {
-      for (var price in priceData) price.materialNumber: price,
+      for (var price in priceData)
+        price.materialNumber: price.copyWith(
+          zdp5MaxQuota: ZDP5Info('500'),
+          zdp5RemainingQuota: ZDP5Info('50'),
+        ),
     };
   });
 
@@ -447,6 +452,153 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           salesConfigs: fakeEmptySalesConfigs,
           isFetching: true,
+        ),
+      ],
+    );
+
+    blocTest<MaterialPriceBloc, MaterialPriceState>(
+      'Get Material Price For ZDP5 Material success when exceedQty is false',
+      build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        materialPrice: mockPriceMap,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
+      ),
+      setUp: () {
+        when(
+          () => repository.getMaterialPriceForZDP5Material(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
+            materialNumber: fakeMaterialNumberQuery.first,
+            exceedQty: false,
+          ),
+        ).thenAnswer(
+          (_) async => Right(Price.empty()),
+        );
+      },
+      act: (MaterialPriceBloc bloc) => bloc.add(
+        MaterialPriceEvent.fetchPriceForZDP5Materials(
+          materialInfo:
+              fakeMaterialQuery.first.copyWith(quantity: MaterialQty(50)),
+        ),
+      ),
+      expect: () => [
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          isFetching: true,
+          materialPrice: mockPriceMap,
+        ),
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          materialPrice: mockPriceMap,
+        ),
+      ],
+    );
+
+    blocTest<MaterialPriceBloc, MaterialPriceState>(
+      'Get Material Price For ZDP5 Material success when exceedQty is true',
+      build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        materialPrice: mockPriceMap,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
+      ),
+      setUp: () {
+        when(
+          () => repository.getMaterialPriceForZDP5Material(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
+            materialNumber: fakeMaterialNumberQuery.first,
+            exceedQty: true,
+          ),
+        ).thenAnswer(
+          (_) async => Right(Price.empty()),
+        );
+      },
+      act: (MaterialPriceBloc bloc) => bloc.add(
+        MaterialPriceEvent.fetchPriceForZDP5Materials(
+          materialInfo:
+              fakeMaterialQuery.first.copyWith(quantity: MaterialQty(60)),
+        ),
+      ),
+      expect: () => [
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          isFetching: true,
+          materialPrice: mockPriceMap,
+        ),
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          materialPrice: mockPriceMap,
+        ),
+      ],
+    );
+
+    blocTest<MaterialPriceBloc, MaterialPriceState>(
+      'Get Material Price For ZDP5 Material failure',
+      build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        materialPrice: mockPriceMap,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
+      ),
+      setUp: () {
+        when(
+          () => repository.getMaterialPriceForZDP5Material(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
+            materialNumber: fakeMaterialNumberQuery.first,
+            exceedQty: true,
+          ),
+        ).thenAnswer(
+          (_) async => const Left(ApiFailure.other('fake-error')),
+        );
+      },
+      act: (MaterialPriceBloc bloc) => bloc.add(
+        MaterialPriceEvent.fetchPriceForZDP5Materials(
+          materialInfo:
+              fakeMaterialQuery.first.copyWith(quantity: MaterialQty(60)),
+        ),
+      ),
+      expect: () => [
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          isFetching: true,
+          materialPrice: mockPriceMap,
+        ),
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          materialPrice: mockPriceMap,
         ),
       ],
     );

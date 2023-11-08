@@ -154,7 +154,7 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
           salesOrganisation: state.salesOrganisation,
           salesConfigs: state.salesConfigs,
           materialNumber: e.materialInfo.materialNumber,
-          exceedQty: e.materialInfo.materialQtyConformZDP5Rule(
+          exceedQty: e.materialInfo.materialQtyConfirmZDP5Rule(
             materialPrice.zdp5MaxQuota.intValue,
             materialPrice.zdp5RemainingQuota.intValue,
           ),

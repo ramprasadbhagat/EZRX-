@@ -446,7 +446,7 @@ class _FooterState extends State<_Footer> {
               context.read<ProductDetailBloc>().add(
                     ProductDetailEvent.setExceedQty(
                       exceedQty: state.productDetailAggregate.materialInfo
-                          .materialQtyConformZDP5Rule(
+                          .materialQtyConfirmZDP5Rule(
                         price.zdp5MaxQuota.intValue,
                         price.zdp5RemainingQuota.intValue,
                       ),
@@ -767,7 +767,6 @@ void _initComboDealAndNavigate({
   final overrideQuantity = cartState
       .getCurrentComboItemByComboDealId(price.comboDeal.id)
       .comboMaterialsCurrentQuantity;
-
   context.read<ComboDealMaterialDetailBloc>().add(
         ComboDealMaterialDetailEvent.cartContainsCurrentCombo(
           contain: overrideQuantity.isNotEmpty,

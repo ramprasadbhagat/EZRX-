@@ -210,6 +210,139 @@ void main() {
           return Future.value(<MockPrice>[]);
         });
       });
+
+      test('Get Material Price For ZDP5 test ', () async {
+        final variables = {
+          'salesOrganisation': 'fake-sales-org',
+          'customer': 'fake-customer-code',
+          'shipToCode': 'fake-ship-to-code',
+          'request': {
+            'MaterialNumber': 'fake-number',
+            'exceedQty': true,
+          },
+        };
+        final res = json.decode(
+          await rootBundle
+              .loadString('assets/json/getMaterialPriceResponse.json'),
+        );
+
+        dioAdapter.onPost(
+          '/api/price',
+          (server) => server.reply(
+            200,
+            res,
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'variables': variables
+          }),
+        );
+
+        final result = await remoteDataSource.getMaterialPriceForZDP5(
+          customerCode: 'fake-customer-code',
+          materialNumber: 'fake-number',
+          salesOrgCode: 'fake-sales-org',
+          shipToCode: 'fake-ship-to-code',
+          exceedQty: true,
+        );
+        final priceData = res['data']['price'][0];
+
+        expect(
+          result,
+          PriceDto.fromJson(makeResponseCamelCase(jsonEncode(priceData)))
+              .toDomain(),
+        );
+      });
+
+      test(
+          'Get Material Price For ZDP5 response with status code not equal to 200 test',
+          () async {
+        final variables = {
+          'salesOrganisation': 'fake-sales-org',
+          'customer': 'fake-customer-code',
+          'shipToCode': 'fake-ship-to-code',
+          'request': {
+            'MaterialNumber': 'fake-number',
+            'exceedQty': true,
+          },
+        };
+        final res = json.decode(
+          await rootBundle
+              .loadString('assets/json/getMaterialPriceResponse.json'),
+        );
+
+        dioAdapter.onPost(
+          '/api/price',
+          (server) => server.reply(
+            200,
+            res,
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'variables': variables
+          }),
+        );
+
+        await remoteDataSource
+            .getMaterialPriceForZDP5(
+          customerCode: 'fake-customer-code',
+          materialNumber: 'fake-number',
+          salesOrgCode: 'fake-sales-org',
+          shipToCode: 'fake-ship-to-code',
+          exceedQty: true,
+        )
+            .onError((error, _) async {
+          expect(error, isA<ServerException>());
+          return Future.value(MockPrice());
+        });
+      });
+
+      test('Get Material Price For ZDP5 response with errors test', () async {
+        final variables = {
+          'salesOrganisation': 'fake-sales-org',
+          'customer': 'fake-customer-code',
+          'shipToCode': 'fake-ship-to-code',
+          'request': {
+            'MaterialNumber': 'fake-number',
+            'exceedQty': true,
+          },
+        };
+        final res = json.decode(
+          await rootBundle
+              .loadString('assets/json/getMaterialPriceResponse.json'),
+        );
+
+        dioAdapter.onPost(
+          '/api/price',
+          (server) => server.reply(
+            200,
+            res,
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'variables': variables
+          }),
+        );
+
+        await remoteDataSource
+            .getMaterialPriceForZDP5(
+          customerCode: 'fake-customer-code',
+          materialNumber: 'fake-number',
+          salesOrgCode: 'fake-sales-org',
+          shipToCode: 'fake-ship-to-code',
+          exceedQty: true,
+        )
+            .onError((error, _) async {
+          expect(error, isA<ServerException>());
+          return Future.value(MockPrice());
+        });
+      });
     },
   );
 }

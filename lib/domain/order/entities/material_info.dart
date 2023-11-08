@@ -163,7 +163,7 @@ class MaterialInfo with _$MaterialInfo {
 
   bool get isPnGPrinciple => principalData.principalCode.isPnG;
 
-  bool materialQtyConformZDP5Rule(
+  bool materialQtyConfirmZDP5Rule(
     int zdp5MaxQuota,
     int zdp5RemaningQuota,
   ) =>

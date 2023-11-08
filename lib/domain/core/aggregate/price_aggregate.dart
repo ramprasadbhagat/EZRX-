@@ -229,9 +229,9 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   int get totalComboQuantity => comboMaterials.fold(
-      0,
-      (previousValue, element) => previousValue + element.quantity,
-    );
+        0,
+        (previousValue, element) => previousValue + element.quantity,
+      );
 
   double get comboOriginalSubTotal {
     var comboOriginalTotal = 0.0;

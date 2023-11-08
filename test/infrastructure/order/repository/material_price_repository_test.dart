@@ -170,4 +170,65 @@ void main() {
       true,
     );
   });
+
+  test('get getMaterialPriceForZDP5 successfully', () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    when(
+      () => materialPriceRemoteDataSource.getMaterialPriceForZDP5(
+        salesOrgCode: 'fake-name',
+        customerCode: 'fake-customer-code',
+        shipToCode: 'fake-ship-code',
+        materialNumber: 'fake-number',
+        exceedQty: true,
+      ),
+    ).thenAnswer(
+      (invocation) async => Price.empty().copyWith(
+        finalPrice: MaterialPrice(123),
+        exceedQty: true,
+      ),
+    );
+
+    final result =
+        await materialPriceRepository.getMaterialPriceForZDP5Material(
+      customerCodeInfo: mockCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      materialNumber: MaterialNumber('fake-number'),
+      salesConfigs: mockSalesConfigs,
+      shipToInfo: mockShipToInfo,
+      exceedQty: true,
+    );
+    expect(
+      result.isRight(),
+      true,
+    );
+  });
+
+  test('get getMaterialPriceForZDP5 failure', () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    when(
+      () => materialPriceRemoteDataSource.getMaterialPriceForZDP5(
+        salesOrgCode: 'fake-name',
+        customerCode: 'fake-customer-code',
+        shipToCode: 'fake-ship-code',
+        materialNumber: 'fake-number',
+        exceedQty: true,
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result =
+        await materialPriceRepository.getMaterialPriceForZDP5Material(
+      customerCodeInfo: mockCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      materialNumber: MaterialNumber('fake-number'),
+      salesConfigs: mockSalesConfigs,
+      shipToInfo: mockShipToInfo,
+      exceedQty: true,
+    );
+    expect(
+      result.isLeft(),
+      true,
+    );
+  });
 }
