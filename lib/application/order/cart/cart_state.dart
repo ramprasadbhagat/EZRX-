@@ -477,4 +477,6 @@ class CartState with _$CartState {
     ..sort(
       (a, b) => b.materialInfo.type.typeCombo ? 1 : -1,
     );
+
+  String get taxTitlePercent => config.salesOrg.isVN ? '' : '$totalTaxPercent%';
 }

@@ -39,87 +39,10 @@ class _OrderSummarySection extends StatelessWidget {
             ),
           ],
         ),
-        if (salesOrgConfig.displaySubtotalTaxBreakdown) ...[
-          const SizedBox(height: 8.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${context.tr('Tax at ')}${cartState.totalTaxPercent}%',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: ZPColors.neutralsBlack,
-                        ),
-                  ),
-                  PriceComponent(
-                    salesOrgConfig: salesOrgConfig,
-                    price: cartState.totalTax.toString(),
-                    type: PriceStyle.summaryPrice,
-                  ),
-                ],
-              ),
-              Text(
-                context.tr('Applies to materials with full tax'),
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: ZPColors.neutralsBlack,
-                      fontSize: 10,
-                    ),
-              ),
-            ],
-          ),
-        ],
-        const SizedBox(height: 8.0),
-        Row(
-          key: WidgetKeys.checkoutSummaryStampDuty,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              context.tr('Stamp duty:'),
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                  ),
-            ),
-            PriceComponent(
-              salesOrgConfig: salesOrgConfig,
-              price: 0.toString(),
-              type: PriceStyle.summaryPrice,
-            ),
-          ],
-        ),
-        const SizedBox(height: 8.0),
-        Column(
-          key: WidgetKeys.checkoutSummarySmallOrderFee,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  context.tr('Small order fee'),
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
-                ),
-
-                ///ToDo: hard code
-                PriceComponent(
-                  salesOrgConfig: salesOrgConfig,
-                  price: 0.toString(),
-                  type: PriceStyle.summaryPrice,
-                ),
-              ],
-            ),
-            // Text(
-            //   'Applies to orders less than MYR 2,000,000.00'.tr(),
-            //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            //         color: ZPColors.neutralsBlack,
-            //         fontSize: 10,
-            //       ),
-            // ),
-          ],
-        ),
+        if (salesOrgConfig.displaySubtotalTaxBreakdown)
+          _TaxWidget(cartState: cartState),
+        if (cartState.salesOrganisation.salesOrg.showSmallOrderFee)
+          const _SmallOrderFee(),
         const SizedBox(height: 4.0),
         const Divider(
           thickness: 1,
@@ -162,6 +85,91 @@ class _OrderSummarySection extends StatelessWidget {
               type: PriceStyle.summaryPrice,
             ),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class _TaxWidget extends StatelessWidget {
+  const _TaxWidget({required this.cartState, Key? key}) : super(key: key);
+  final CartState cartState;
+  @override
+  Widget build(BuildContext context) {
+    final salesOrgConfig =
+        context.read<EligibilityBloc>().state.salesOrgConfigs;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 8.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              '${context.tr(cartState.salesOrganisation.salesOrg.taxTitle)} ${cartState.taxTitlePercent}:',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.neutralsBlack,
+                  ),
+            ),
+            PriceComponent(
+              salesOrgConfig: salesOrgConfig,
+              price: cartState.totalTax.toString(),
+              type: PriceStyle.summaryPrice,
+            ),
+          ],
+        ),
+        if (cartState.salesOrganisation.salesOrg.showTaxDescription)
+          Text(
+            context.tr('Applies to materials with full tax'),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ZPColors.neutralsBlack,
+                  fontSize: 10,
+                ),
+          ),
+      ],
+    );
+  }
+}
+
+class _SmallOrderFee extends StatelessWidget {
+  const _SmallOrderFee({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
+    return Column(
+      key: WidgetKeys.checkoutSummarySmallOrderFee,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 8.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              context.tr('Small order fee'),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.neutralsBlack,
+                  ),
+            ),
+            PriceComponent(
+              salesOrgConfig: eligibilityState.salesOrgConfigs,
+              price: 0.toString(),
+              type: PriceStyle.summaryPrice,
+            ),
+          ],
+        ),
+        Text(
+          'Applies to orders less than ${StringUtils.displayPrice(
+            eligibilityState.salesOrgConfigs,
+            eligibilityState.salesOrg.smallOrderThreshold,
+          )}'
+              .tr(),
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: ZPColors.neutralsBlack,
+                fontSize: 10,
+              ),
         ),
       ],
     );

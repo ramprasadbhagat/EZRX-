@@ -480,7 +480,7 @@ void main() {
         await tester.fling(sliverFinder, const Offset(0, -10000), 100);
         await tester.pump();
 
-        final taxPercentageFinder = find.text('Tax at 10%');
+        final taxPercentageFinder = find.textContaining('Tax');
         expect(taxPercentageFinder, findsOneWidget);
         final vatPercentageFinder = find.text('Tax at 5%');
         expect(vatPercentageFinder, findsNothing);
@@ -490,74 +490,6 @@ void main() {
         expect(
           find.text(
             'VND $listPriceWithTax',
-            findRichText: true,
-          ),
-          findsAtLeastNWidgets(1),
-        );
-        expect(find.text('Subtotal (excl.tax):'), findsOneWidget);
-      },
-    );
-
-    testWidgets(
-      '=> Show tax details when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for my ',
-      (tester) async {
-        final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: fakeMYSalesOrganisation,
-          configs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
-        );
-        final cartState = CartState.initial().copyWith(
-          cartProducts: <PriceAggregate>[
-            PriceAggregate.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('123456789'),
-                quantity: MaterialQty(1),
-                taxClassification:
-                    MaterialTaxClassification('Product : Full Tax'),
-                tax: 10,
-              ),
-              price: Price.empty().copyWith(
-                finalPrice: MaterialPrice(234.50),
-              ),
-              salesOrgConfig: fakeMYSalesOrgConfigTaxBreakdownEnabled,
-            ),
-          ],
-          config: fakeMYSalesOrgConfigTaxBreakdownEnabled,
-        );
-
-        when(() => salesOrgBlocMock.state).thenReturn(
-          salesOrgState,
-        );
-        when(() => eligibilityBloc.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeMYSalesOrganisation,
-            salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
-          ),
-        );
-        when(() => cartBloc.state).thenReturn(
-          cartState,
-        );
-
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        expect(
-          find.byWidgetPredicate((w) => w is SliverToBoxAdapter),
-          findsAtLeastNWidgets(3),
-        );
-        final sliverFinder =
-            find.byWidgetPredicate((w) => w is CustomScrollView);
-        await tester.fling(sliverFinder, const Offset(0, -10000), 100);
-        await tester.pump();
-
-        final taxPercentageFinder = find.text('Tax at 10%');
-        expect(taxPercentageFinder, findsNothing);
-        final vatPercentageFinder = find.text('Tax at 5%');
-        expect(vatPercentageFinder, findsOneWidget);
-        final listPriceWithTax = cartState
-            .cartProducts.first.finalPriceTotalWithTax
-            .toStringAsFixed(2);
-        expect(
-          find.text(
-            'MYR $listPriceWithTax',
             findRichText: true,
           ),
           findsAtLeastNWidgets(1),

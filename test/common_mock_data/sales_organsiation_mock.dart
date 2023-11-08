@@ -101,6 +101,7 @@ final fakeVNSalesOrgConfigItemTaxBreakdownEnabled =
   displayItemTaxBreakdown: true,
   vatValue: 5,
   currency: Currency('vnd'),
+  salesOrg: fakeVNSalesOrg,
 );
 
 final fakeVNSalesOrgConfigTaxBreakdownEnabled =

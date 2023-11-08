@@ -98,6 +98,14 @@ class SalesOrg extends ValueObject<String> {
     return country == 'ID';
   }
 
+  bool get isMM {
+    return country == 'MM';
+  }
+
+  bool get isKH {
+    return country == 'KH';
+  }
+
   bool get needUpdatePaymentGateway => isMY || isVN;
 
   bool get isPaymentNeedOpenWebView => !isSg;
@@ -139,6 +147,12 @@ class SalesOrg extends ValueObject<String> {
   double get smallOrderThreshold => countrySmallOrderThreshold(country);
 
   const SalesOrg._(this.value);
+
+  bool get showSmallOrderFee => isID;
+
+  bool get showTaxDescription => isTH || isMM || isKH;
+
+  String get taxTitle => isVN ? 'Tax' : 'Tax at';
 }
 
 class OosValue extends ValueObject<int> {
