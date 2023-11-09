@@ -64,9 +64,10 @@ class _ProductTile extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              _PriceLabel(product: materialInfo),
+                              Expanded(
+                                child: _PriceLabel(product: materialInfo),
+                              ),
                               FavouriteIcon(
                                 isFavourite: materialInfo.isFavourite,
                                 visualDensity: const VisualDensity(
