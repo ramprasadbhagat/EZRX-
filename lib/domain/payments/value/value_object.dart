@@ -56,5 +56,7 @@ class PaymentMethodValue extends ValueObject<String> {
 
   bool get isPaymentGateway => checkIsPaymentGateway(value.getOrElse(() => ''));
 
+  bool get isBankIn => checkIsBankIn(value.getOrElse(() => ''));
+
   const PaymentMethodValue._(this.value);
 }

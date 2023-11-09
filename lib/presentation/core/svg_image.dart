@@ -19,4 +19,5 @@ abstract class SvgImage {
   static const String coronavirus = '${_basePath}coronavirus.svg';
   static const String bonusOffer = '${_basePath}bonus_offer_tag.svg';
   static const String emptyFavourite = '${_basePath}empty_favourite.svg';
+  static const String checkCircle = '${_basePath}check_circle.svg';
 }

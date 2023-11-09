@@ -20,25 +20,27 @@ import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/create_payment_invoice_pdf.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/price_text.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
-part 'widgets/payment_invoice_pdf.dart';
-part 'widgets/payment_save_pdf_button.dart';
-part 'widgets/payment_advice_next_step.dart';
-part 'widgets/payments_advice_message.dart';
-part 'widgets/payment_summary_section.dart';
-part 'widgets/payment_advice_please_note.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_invoice_pdf.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_save_pdf_button.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_next_step.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payments_advice_message.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_summary_section.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_please_note.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_buttons.dart';
 
 class PaymentAdviceCreatedPage extends StatelessWidget {
   const PaymentAdviceCreatedPage({Key? key}) : super(key: key);
@@ -62,7 +64,7 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
             );
           },
         ),
-         leading: IconButton(
+        leading: IconButton(
           key: WidgetKeys.backButton,
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -118,18 +120,24 @@ class _BodyContent extends StatelessWidget {
                   Expanded(
                     child: ListView(
                       children: [
-                        const _PaymentAdviceMessage(),
-                        state.salesOrganisation.salesOrg
-                                .isPaymentNeedOpenWebView
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        state.selectedPaymentMethod.isBankIn
+                            ? const _PaymentBankInAdviceMessage()
+                            : const _PaymentGatewayAdviceMessage(),
+                        state.needOpenWebViewAndNotBankIn
                             ? const _PaymentAdviceNextStep()
                             : const _PaymentAdvicePleaseNote(),
                         const _PaymentInvoicePdf(),
-                        const PaymentSavePdfButton(),
+                        if (!state.selectedPaymentMethod.isBankIn)
+                          const PaymentSavePdfButton(),
                       ],
                     ),
                   ),
-                  if (state.salesOrganisation.salesOrg.isPaymentNeedOpenWebView)
-                    const _PaymentSummarySection(),
+                  state.needOpenWebViewAndNotBankIn
+                      ? const _PaymentSummarySection()
+                      : const _PaymentAdviceButtons(),
                 ],
               );
       },

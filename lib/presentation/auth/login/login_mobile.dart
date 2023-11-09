@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/auth/login/common/remember_password.dart
 import 'package:ezrxmobile/presentation/auth/login/common/username_field.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/logo.dart';
+import 'package:ezrxmobile/presentation/core/or_divider.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -52,7 +53,7 @@ class LoginMobile extends StatelessWidget {
                     const LoginButton(),
                     const SizedBox(height: 25),
                     if (!state.currentMarket.isVN) ...[
-                      const _OrDivider(),
+                      const OrDivider(),
                       const SizedBox(height: 25),
                       const _SSOLoginButton(),
                       const SizedBox(height: 15),
@@ -119,36 +120,6 @@ class _SSOLoginButton extends StatelessWidget {
           ],
         );
       },
-    );
-  }
-}
-
-class _OrDivider extends StatelessWidget {
-  const _OrDivider({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        const Expanded(
-          child: Divider(
-            indent: 0,
-            thickness: 0.5,
-          ),
-        ),
-        Text(
-          context.tr('or'),
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: ZPColors.dividerColor,
-              ),
-        ),
-        const Expanded(
-          child: Divider(
-            endIndent: 0,
-            thickness: 0.5,
-          ),
-        ),
-      ],
     );
   }
 }

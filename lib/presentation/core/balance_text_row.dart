@@ -15,6 +15,7 @@ class BalanceTextRow extends StatelessWidget {
   final TextStyle? keyTextStyle;
   final TextStyle? valueTextStyle;
   final Color statusTextColor;
+  final EdgeInsetsGeometry padding;
 
   const BalanceTextRow({
     Key? key,
@@ -26,6 +27,9 @@ class BalanceTextRow extends StatelessWidget {
     this.isStatus = false,
     this.keyTextStyle,
     this.valueTextStyle,
+    this.padding = const EdgeInsets.symmetric(
+      vertical: 2.0,
+    ),
     this.statusTextColor = ZPColors.black,
   }) : super(key: key);
 
@@ -42,9 +46,7 @@ class BalanceTextRow extends StatelessWidget {
 
     return Padding(
       key: WidgetKeys.balanceTextRow(keyText, valueText),
-      padding: const EdgeInsets.symmetric(
-        vertical: 2.0,
-      ),
+      padding: padding,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

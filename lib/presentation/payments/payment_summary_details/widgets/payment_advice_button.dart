@@ -32,7 +32,7 @@ class _PaymentAdviceButton extends StatelessWidget {
         return state.isLoading ||
                 state.paymentItemList.isEmpty ||
                 state.isFetchingAdvice ||
-                state.paymentInvoiceInfoPdf == PaymentInvoiceInfoPdf.empty()
+                state.paymentInvoiceInfoPdf.isEmpty
             ? const SizedBox.shrink()
             : Container(
                 decoration: const BoxDecoration(

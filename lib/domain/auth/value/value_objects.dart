@@ -57,6 +57,8 @@ class EmailAddress extends ValueObject<String> {
   }
 
   const EmailAddress._(this.value);
+
+  String get maskedValue => maskEmail(value.getOrElse(() => ''));
 }
 
 class Password extends ValueObject<String> {

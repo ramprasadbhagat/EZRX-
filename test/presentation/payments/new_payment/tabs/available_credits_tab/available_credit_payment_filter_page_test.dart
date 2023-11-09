@@ -24,7 +24,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../utils/widget_utils.dart';
-import '../../new_payment_test.dart';
+import '../../new_payment_page_test.dart';
 
 void main() {
   late AccountSummaryBloc accountSummaryBlocMock;

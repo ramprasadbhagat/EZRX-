@@ -50,4 +50,5 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
 
   BankBeneficiary get firstBankBeneficiary =>
       bankBeneficiary.firstOrNull ?? BankBeneficiary.empty();
+  bool get isEmpty => this == PaymentInvoiceInfoPdf.empty();
 }

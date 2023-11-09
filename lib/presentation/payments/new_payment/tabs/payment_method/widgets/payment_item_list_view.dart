@@ -1,5 +1,29 @@
 part of 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';
 
+class _PaymentItemListView extends StatelessWidget {
+  const _PaymentItemListView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<NewPaymentBloc, NewPaymentState>(
+      buildWhen: (previous, current) =>
+          previous.selectedInvoices != current.selectedInvoices ||
+          previous.selectedCredits != current.selectedCredits,
+      builder: (context, state) {
+        return Column(
+          children: [
+            ...state.allSelectedItems.map(
+              (e) => _InvoiceCreditItemTile(customerOpenItem: e),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 class _InvoiceCreditItemTile extends StatelessWidget {
   final CustomerOpenItem customerOpenItem;
 

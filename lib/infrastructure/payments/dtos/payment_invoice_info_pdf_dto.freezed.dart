@@ -68,25 +68,38 @@ abstract class $PaymentInvoiceInfoPdfDtoCopyWith<$Res> {
       _$PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res, PaymentInvoiceInfoPdfDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'valueDate', defaultValue: '') String valueDate,
-      @JsonKey(name: 'paymentID', defaultValue: '') String paymentID,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
-      @JsonKey(name: 'paymentDue', defaultValue: '') String paymentDue,
-      @JsonKey(name: 'paymentMethod', defaultValue: '') String paymentMethod,
-      @JsonKey(name: 'customerName', defaultValue: '') String customerName,
-      @JsonKey(name: 'payer', defaultValue: '') String payer,
+      {@JsonKey(name: 'valueDate', defaultValue: '')
+          String valueDate,
+      @JsonKey(name: 'paymentID', defaultValue: '')
+          String paymentID,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          String zzAdvice,
+      @JsonKey(name: 'paymentDue', defaultValue: '')
+          String paymentDue,
+      @JsonKey(name: 'paymentMethod', defaultValue: '')
+          String paymentMethod,
+      @JsonKey(name: 'customerName', defaultValue: '')
+          String customerName,
+      @JsonKey(name: 'payer', defaultValue: '')
+          String payer,
       @JsonKey(name: 'bankBeneficiary', defaultValue: <PaymentItemDto>[])
-      List<BankBeneficiaryInvoiceDto> bankBeneficiary,
-      @JsonKey(name: 'qrCode', defaultValue: '') String qrCode,
+          List<BankBeneficiaryInvoiceDto> bankBeneficiary,
+      @JsonKey(name: 'qrCode', defaultValue: '')
+          String qrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      String paymentBatchAdditionalInfo,
+          String paymentBatchAdditionalInfo,
       @JsonKey(name: 'paymentItems', defaultValue: <PaymentItemDto>[])
-      List<PaymentItemDto> paymentItems,
-      @JsonKey(name: 'salesDistrict', defaultValue: '') String salesDistrict,
-      @JsonKey(name: 'footer', defaultValue: '') String footer,
-      @JsonKey(name: 'headerLogoPath', defaultValue: '') String headerLogoPath,
-      @JsonKey(name: 'pleaseNote', defaultValue: '') String pleaseNote,
-      @JsonKey(name: 'header', defaultValue: '') String header});
+          List<PaymentItemDto> paymentItems,
+      @JsonKey(name: 'salesDistrict', defaultValue: '')
+          String salesDistrict,
+      @JsonKey(name: 'footer', defaultValue: '')
+          String footer,
+      @JsonKey(name: 'headerLogoPath', defaultValue: '')
+          String headerLogoPath,
+      @JsonKey(name: 'pleaseNote', defaultValue: '')
+          String pleaseNote,
+      @JsonKey(name: 'header', defaultValue: '')
+          String header});
 }
 
 /// @nodoc
@@ -199,25 +212,38 @@ abstract class _$$_PaymentInvoiceInfoPdfDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'valueDate', defaultValue: '') String valueDate,
-      @JsonKey(name: 'paymentID', defaultValue: '') String paymentID,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
-      @JsonKey(name: 'paymentDue', defaultValue: '') String paymentDue,
-      @JsonKey(name: 'paymentMethod', defaultValue: '') String paymentMethod,
-      @JsonKey(name: 'customerName', defaultValue: '') String customerName,
-      @JsonKey(name: 'payer', defaultValue: '') String payer,
+      {@JsonKey(name: 'valueDate', defaultValue: '')
+          String valueDate,
+      @JsonKey(name: 'paymentID', defaultValue: '')
+          String paymentID,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          String zzAdvice,
+      @JsonKey(name: 'paymentDue', defaultValue: '')
+          String paymentDue,
+      @JsonKey(name: 'paymentMethod', defaultValue: '')
+          String paymentMethod,
+      @JsonKey(name: 'customerName', defaultValue: '')
+          String customerName,
+      @JsonKey(name: 'payer', defaultValue: '')
+          String payer,
       @JsonKey(name: 'bankBeneficiary', defaultValue: <PaymentItemDto>[])
-      List<BankBeneficiaryInvoiceDto> bankBeneficiary,
-      @JsonKey(name: 'qrCode', defaultValue: '') String qrCode,
+          List<BankBeneficiaryInvoiceDto> bankBeneficiary,
+      @JsonKey(name: 'qrCode', defaultValue: '')
+          String qrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      String paymentBatchAdditionalInfo,
+          String paymentBatchAdditionalInfo,
       @JsonKey(name: 'paymentItems', defaultValue: <PaymentItemDto>[])
-      List<PaymentItemDto> paymentItems,
-      @JsonKey(name: 'salesDistrict', defaultValue: '') String salesDistrict,
-      @JsonKey(name: 'footer', defaultValue: '') String footer,
-      @JsonKey(name: 'headerLogoPath', defaultValue: '') String headerLogoPath,
-      @JsonKey(name: 'pleaseNote', defaultValue: '') String pleaseNote,
-      @JsonKey(name: 'header', defaultValue: '') String header});
+          List<PaymentItemDto> paymentItems,
+      @JsonKey(name: 'salesDistrict', defaultValue: '')
+          String salesDistrict,
+      @JsonKey(name: 'footer', defaultValue: '')
+          String footer,
+      @JsonKey(name: 'headerLogoPath', defaultValue: '')
+          String headerLogoPath,
+      @JsonKey(name: 'pleaseNote', defaultValue: '')
+          String pleaseNote,
+      @JsonKey(name: 'header', defaultValue: '')
+          String header});
 }
 
 /// @nodoc
@@ -322,29 +348,38 @@ class __$$_PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
   const _$_PaymentInvoiceInfoPdfDto(
-      {@JsonKey(name: 'valueDate', defaultValue: '') required this.valueDate,
-      @JsonKey(name: 'paymentID', defaultValue: '') required this.paymentID,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') required this.zzAdvice,
-      @JsonKey(name: 'paymentDue', defaultValue: '') required this.paymentDue,
+      {@JsonKey(name: 'valueDate', defaultValue: '')
+          required this.valueDate,
+      @JsonKey(name: 'paymentID', defaultValue: '')
+          required this.paymentID,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          required this.zzAdvice,
+      @JsonKey(name: 'paymentDue', defaultValue: '')
+          required this.paymentDue,
       @JsonKey(name: 'paymentMethod', defaultValue: '')
-      required this.paymentMethod,
+          required this.paymentMethod,
       @JsonKey(name: 'customerName', defaultValue: '')
-      required this.customerName,
-      @JsonKey(name: 'payer', defaultValue: '') required this.payer,
+          required this.customerName,
+      @JsonKey(name: 'payer', defaultValue: '')
+          required this.payer,
       @JsonKey(name: 'bankBeneficiary', defaultValue: <PaymentItemDto>[])
-      required final List<BankBeneficiaryInvoiceDto> bankBeneficiary,
-      @JsonKey(name: 'qrCode', defaultValue: '') required this.qrCode,
+          required final List<BankBeneficiaryInvoiceDto> bankBeneficiary,
+      @JsonKey(name: 'qrCode', defaultValue: '')
+          required this.qrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      required this.paymentBatchAdditionalInfo,
+          required this.paymentBatchAdditionalInfo,
       @JsonKey(name: 'paymentItems', defaultValue: <PaymentItemDto>[])
-      required final List<PaymentItemDto> paymentItems,
+          required final List<PaymentItemDto> paymentItems,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-      required this.salesDistrict,
-      @JsonKey(name: 'footer', defaultValue: '') required this.footer,
+          required this.salesDistrict,
+      @JsonKey(name: 'footer', defaultValue: '')
+          required this.footer,
       @JsonKey(name: 'headerLogoPath', defaultValue: '')
-      required this.headerLogoPath,
-      @JsonKey(name: 'pleaseNote', defaultValue: '') required this.pleaseNote,
-      @JsonKey(name: 'header', defaultValue: '') required this.header})
+          required this.headerLogoPath,
+      @JsonKey(name: 'pleaseNote', defaultValue: '')
+          required this.pleaseNote,
+      @JsonKey(name: 'header', defaultValue: '')
+          required this.header})
       : _bankBeneficiary = bankBeneficiary,
         _paymentItems = paymentItems,
         super._();
@@ -494,34 +529,37 @@ class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
 abstract class _PaymentInvoiceInfoPdfDto extends PaymentInvoiceInfoPdfDto {
   const factory _PaymentInvoiceInfoPdfDto(
       {@JsonKey(name: 'valueDate', defaultValue: '')
-      required final String valueDate,
+          required final String valueDate,
       @JsonKey(name: 'paymentID', defaultValue: '')
-      required final String paymentID,
+          required final String paymentID,
       @JsonKey(name: 'zzAdvice', defaultValue: '')
-      required final String zzAdvice,
+          required final String zzAdvice,
       @JsonKey(name: 'paymentDue', defaultValue: '')
-      required final String paymentDue,
+          required final String paymentDue,
       @JsonKey(name: 'paymentMethod', defaultValue: '')
-      required final String paymentMethod,
+          required final String paymentMethod,
       @JsonKey(name: 'customerName', defaultValue: '')
-      required final String customerName,
-      @JsonKey(name: 'payer', defaultValue: '') required final String payer,
+          required final String customerName,
+      @JsonKey(name: 'payer', defaultValue: '')
+          required final String payer,
       @JsonKey(name: 'bankBeneficiary', defaultValue: <PaymentItemDto>[])
-      required final List<BankBeneficiaryInvoiceDto> bankBeneficiary,
-      @JsonKey(name: 'qrCode', defaultValue: '') required final String qrCode,
+          required final List<BankBeneficiaryInvoiceDto> bankBeneficiary,
+      @JsonKey(name: 'qrCode', defaultValue: '')
+          required final String qrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      required final String paymentBatchAdditionalInfo,
+          required final String paymentBatchAdditionalInfo,
       @JsonKey(name: 'paymentItems', defaultValue: <PaymentItemDto>[])
-      required final List<PaymentItemDto> paymentItems,
+          required final List<PaymentItemDto> paymentItems,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-      required final String salesDistrict,
-      @JsonKey(name: 'footer', defaultValue: '') required final String footer,
+          required final String salesDistrict,
+      @JsonKey(name: 'footer', defaultValue: '')
+          required final String footer,
       @JsonKey(name: 'headerLogoPath', defaultValue: '')
-      required final String headerLogoPath,
+          required final String headerLogoPath,
       @JsonKey(name: 'pleaseNote', defaultValue: '')
-      required final String pleaseNote,
+          required final String pleaseNote,
       @JsonKey(name: 'header', defaultValue: '')
-      required final String header}) = _$_PaymentInvoiceInfoPdfDto;
+          required final String header}) = _$_PaymentInvoiceInfoPdfDto;
   const _PaymentInvoiceInfoPdfDto._() : super._();
 
   factory _PaymentInvoiceInfoPdfDto.fromJson(Map<String, dynamic> json) =

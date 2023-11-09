@@ -17,3 +17,6 @@ bool checkIsQrCode(String paymentMethodValue) =>
 
 bool checkIsPaymentGateway(String paymentMethodValue) =>
     paymentMethodValue == 'Payment Gateway';
+
+bool checkIsBankIn(String paymentMethodValue) =>
+    paymentMethodValue == 'Bank-In';

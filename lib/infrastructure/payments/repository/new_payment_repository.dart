@@ -272,7 +272,7 @@ class NewPaymentRepository extends INewPaymentRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
       );
 
-      return Right(response);
+      return Right(response.reversed.toList());
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),

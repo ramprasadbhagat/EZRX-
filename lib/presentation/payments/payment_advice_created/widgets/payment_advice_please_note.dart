@@ -6,7 +6,7 @@ class _PaymentAdvicePleaseNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -27,7 +27,8 @@ class _PaymentAdvicePleaseNote extends StatelessWidget {
                   TextSpan(
                     text: context.tr('Payment Summary'),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: ZPColors.extraDarkGreen,
+                          color: ZPColors.extraLightGrey4,
+                          fontWeight: FontWeight.bold,
                         ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () =>
@@ -47,7 +48,13 @@ class _PaymentAdvicePleaseNote extends StatelessWidget {
             content: RichText(
               text: TextSpan(
                 text: context.tr(
-                  'If you encountered an error with the payment, delete the system-generated payment advice in the eZRx payment summary section and regenerate a new payment advice by repeating the payment process.',
+                  context
+                          .read<NewPaymentBloc>()
+                          .state
+                          .selectedPaymentMethod
+                          .isBankIn
+                      ? 'If payment request fails, you may choose to retry payment or delete the failed payment advice then generate a new payment advice.'
+                      : 'If you encountered an error with the payment, delete the system-generated payment advice in the eZRx payment summary section and regenerate a new payment advice by repeating the payment process.',
                 ),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: ZPColors.extraLightGrey4,

@@ -21,6 +21,7 @@ class BulletWidget extends StatelessWidget {
             '•',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: ZPColors.extraLightGrey4,
+                  height: 1.2,
                 ),
           ),
           const SizedBox(width: 8.0),

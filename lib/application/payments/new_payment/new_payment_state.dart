@@ -45,4 +45,8 @@ class NewPaymentState with _$NewPaymentState {
 
   List<CustomerOpenItem> get allSelectedItems =>
       selectedInvoices + selectedCredits;
+
+  bool get needOpenWebViewAndNotBankIn =>
+      salesOrganisation.salesOrg.isPaymentNeedOpenWebView &&
+      !selectedPaymentMethod.isBankIn;
 }

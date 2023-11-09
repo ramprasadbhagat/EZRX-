@@ -1,7 +1,16 @@
 part of 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 
 class PaymentSavePdfButton extends StatelessWidget {
-  const PaymentSavePdfButton({Key? key}) : super(key: key);
+  final String text;
+  final TextStyle? textStyle;
+  final Color? backgroundColor;
+
+  const PaymentSavePdfButton({
+    Key? key,
+    this.text = 'Download payment advice',
+    this.textStyle,
+    this.backgroundColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,13 @@ class PaymentSavePdfButton extends StatelessWidget {
             previous.isFetchingInvoiceInfoPdf !=
                 current.isFetchingInvoiceInfoPdf,
         builder: (context, state) {
-          return ElevatedButton(
+          return OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              side: const BorderSide(
+                color: ZPColors.primary,
+              ),
+              backgroundColor: backgroundColor ?? ZPColors.white,
+            ),
             onPressed: state.isSavingInvoicePdf
                 ? null
                 : () async {
@@ -50,28 +65,14 @@ class PaymentSavePdfButton extends StatelessWidget {
                           ),
                         );
                   },
-            style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                  backgroundColor: const MaterialStatePropertyAll(
-                    ZPColors.white,
-                  ),
-                  shape: const MaterialStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(8),
-                      ),
-                      side: BorderSide(color: ZPColors.primary),
-                    ),
-                  ),
-                ),
-            child: IntrinsicHeight(
-              child: LoadingShimmer.withChild(
-                enabled: state.isSavingInvoicePdf,
-                child: Text(
-                  context.tr('Download payment advice'),
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: ZPColors.primary,
-                      ),
-                ),
+            child: LoadingShimmer.withChild(
+              enabled: state.isSavingInvoicePdf,
+              child: Text(
+                context.tr(text),
+                style: textStyle ??
+                    Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: ZPColors.primary,
+                        ),
               ),
             ),
           );
