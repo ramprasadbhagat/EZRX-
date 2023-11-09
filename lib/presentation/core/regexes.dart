@@ -5,4 +5,5 @@ class ZPRegexes {
   static RegExp get specialCharacters =>
       RegExp(r'[~!@#$%^&*()_+`{}|<>?;:./,=\-[]]');
   static RegExp get hyperlinkRegExp => RegExp(r'https?://[^\s/$.?#].[^\s]*');
+  static RegExp get twoDecimalOnly => RegExp(r'^\d+\.?\d{0,2}');
 }
