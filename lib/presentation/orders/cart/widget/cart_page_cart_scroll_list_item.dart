@@ -54,17 +54,20 @@ class _CartProductMaterial extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.cartProducts != current.cartProducts,
       listener: (context, state) {
-        final product = state.cartProducts.firstWhere(
-          (element) =>
-              element.materialInfo.materialNumber ==
-              item.materialInfo.materialNumber,
-        );
-        if (product.isPriceUpdateAvailable) {
-          context.read<MaterialPriceBloc>().add(
-                MaterialPriceEvent.fetchPriceForZDP5Materials(
-                  materialInfo: product.materialInfo,
-                ),
-              );
+        if (context.read<EligibilityBloc>().state.isZDP5eligible) {
+          final product = state.cartProducts.firstWhere(
+            (element) =>
+                element.materialInfo.materialNumber ==
+                item.materialInfo.materialNumber,
+            orElse: () => PriceAggregate.empty(),
+          );
+          if (product.isPriceUpdateAvailable) {
+            context.read<MaterialPriceBloc>().add(
+                  MaterialPriceEvent.fetchPriceForZDP5Materials(
+                    materialInfo: product.materialInfo,
+                  ),
+                );
+          }
         }
       },
       child: Column(
