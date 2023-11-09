@@ -121,6 +121,8 @@ class WidgetKeys {
   static const Key bundlesDescription = Key('bundlesDescription');
   static const Key bundlesManufactured = Key('bundlesManufactured');
   static const Key bundlesList = Key('bundlesList');
+  static const Key bundlesBody = Key('bundlesBody');
+  static const Key bundlesListItem = Key('bundlesListItem');
   static const Key listRecentlyOrdered = Key('listRecentlyOrdered');
   static const Key materialDescriptionRecentlyOrdered =
       Key('materialDescriptionRecentlyOrdered');

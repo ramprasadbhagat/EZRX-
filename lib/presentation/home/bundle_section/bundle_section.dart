@@ -55,6 +55,7 @@ class BundleSection extends StatelessWidget {
           builder: (_, state) {
             return state.isFetching || state.materialList.isNotEmpty
                 ? Column(
+                    key: WidgetKeys.bundlesBody,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -128,7 +129,7 @@ class _BundleSectionItem extends StatelessWidget {
             ? MediaQuery.of(context).size.width * 0.85
             : MediaQuery.of(context).size.width * 0.4,
         child: Column(
-          key: const Key('bundlesList'),
+          key: WidgetKeys.bundlesListItem,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ColoredBox(
