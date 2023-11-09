@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -228,10 +229,18 @@ class PriceAggregate with _$PriceAggregate {
     return NumUtils.roundToPlaces(vatCalculation(finalPrice));
   }
 
-  int get totalComboQuantity => comboMaterials.fold(
-        0,
-        (previousValue, element) => previousValue + element.quantity,
-      );
+  int get totalComboQuantity {
+    final scheme = comboMaterials.firstOrNull?.getScheme(comboMaterials) ??
+        ComboDealScheme.k1;
+    if (scheme == ComboDealScheme.k3) {
+      return comboMaterials.length;
+    }
+
+    return comboMaterials.fold(
+      0,
+      (previousValue, element) => previousValue + element.quantity,
+    );
+  }
 
   double get comboOriginalSubTotal {
     var comboOriginalTotal = 0.0;

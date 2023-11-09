@@ -173,7 +173,7 @@ class CartProductCombo extends StatelessWidget {
                     _comboScheme.getRequirementMessage(
                       context,
                       minAmountK5: _getMinAmountComboDealK5(context),
-                      minQty: '',
+                      minQty: _getMinQtyComboDeal(context),
                     ),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: ZPColors.darkGray,
@@ -223,6 +223,14 @@ class CartProductCombo extends StatelessWidget {
                 ?.minTotalAmount ??
             0)
         .toString();
+  }
+
+  String _getMinQtyComboDeal(BuildContext context) {
+    return context
+        .read<ComboDealListBloc>()
+        .state
+        .getComboDeal(comboDealId: _priceComboDeal.id)
+        .schemeMinimumQtyRequirement;
   }
 
   void _showDeleteComboBottomSheet(
