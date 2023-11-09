@@ -463,25 +463,26 @@ class _BonusItemSection extends StatelessWidget {
                             e.materialDescription,
                             style: Theme.of(context).textTheme.labelMedium,
                           ),
+                          Text(
+                            'Batch ${e.batch} (Expires ${e.expiryDate.dateString})',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Expanded(
-                                child: Text(
-                                  'Batch ${e.batch} (Expires ${e.expiryDate.dateString})',
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                ),
+                              PriceComponent(
+                                salesOrgConfig: context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .salesOrgConfigs,
+                                price: e.totalPrice.toString(),
+                                type: PriceStyle.returnBonusPrice,
                               ),
                               Text(
                                 'Qty: ${e.returnQuantity} ',
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ],
-                          ),
-                          BalanceTextRow(
-                            keyText: 'Reason for return'.tr(),
-                            valueText: e.returnOrderDesc.tr(),
-                            keyFlex: 3,
                           ),
                         ],
                       ),

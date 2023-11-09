@@ -8,6 +8,8 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
@@ -286,6 +288,47 @@ void main() {
             ),
             findsOneWidget,
           );
+        },
+      );
+
+      testWidgets(
+        '=> Find Bonus Price in Bonus details Section',
+        (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                currency: Currency('MYR'),
+              ),
+            ),
+          );
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                bonusInformation: [
+                  ReturnRequestInformation.empty().copyWith(
+                    totalPrice: 200,
+                  )
+                ],
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          final scrollListFinder =
+              find.byKey(WidgetKeys.returnItemDetailScrollList);
+          expect(
+            scrollListFinder,
+            findsOneWidget,
+          );
+          final showDetailButtonFinder =
+              find.byKey(WidgetKeys.returnDetailShowDetailButton);
+          expect(showDetailButtonFinder, findsOneWidget);
+          await tester.scrollUntilVisible(showDetailButtonFinder, -500);
+          await tester.pump();
+          await tester.tap(showDetailButtonFinder);
+          await tester.pump();
+          final bonusPrice = find.text('MYR 200.00', findRichText: true);
+          expect(bonusPrice, findsOneWidget);
         },
       );
     },
