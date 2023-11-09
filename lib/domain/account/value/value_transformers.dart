@@ -256,6 +256,8 @@ String helpAndSupportLanguageCode(String country) {
       return 'th-TH';
     case 'VN':
       return 'vi-VN';
+    case 'MM':
+      return 'my-MM';
     default:
       return salesOrgLanguageCode(country);
   }
