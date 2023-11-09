@@ -27,8 +27,8 @@ mixin _$PaymentSummaryDetails {
   String get bankIdentification => throw _privateConstructorUsedError;
   String get bankCountryKey => throw _privateConstructorUsedError;
   String get bankKey => throw _privateConstructorUsedError;
-  String get bankAccountNumber => throw _privateConstructorUsedError;
-  String get bankName => throw _privateConstructorUsedError;
+  StringValue get bankAccountNumber => throw _privateConstructorUsedError;
+  StringValue get bankName => throw _privateConstructorUsedError;
   String get paymentCardID => throw _privateConstructorUsedError;
   String get paymentCardNumber => throw _privateConstructorUsedError;
   String get paymentCardHolderName => throw _privateConstructorUsedError;
@@ -42,6 +42,7 @@ mixin _$PaymentSummaryDetails {
       throw _privateConstructorUsedError;
   String get accountingDocExternalReference =>
       throw _privateConstructorUsedError;
+  List<PaymentItem> get paymentItems => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentSummaryDetailsCopyWith<PaymentSummaryDetails> get copyWith =>
@@ -66,8 +67,8 @@ abstract class $PaymentSummaryDetailsCopyWith<$Res> {
       String bankIdentification,
       String bankCountryKey,
       String bankKey,
-      String bankAccountNumber,
-      String bankName,
+      StringValue bankAccountNumber,
+      StringValue bankName,
       String paymentCardID,
       String paymentCardNumber,
       String paymentCardHolderName,
@@ -78,7 +79,8 @@ abstract class $PaymentSummaryDetailsCopyWith<$Res> {
       StringValue zzAdvice,
       StringValue adviceExpiry,
       StringValue paymentBatchAdditionalInfo,
-      String accountingDocExternalReference});
+      String accountingDocExternalReference,
+      List<PaymentItem> paymentItems});
 }
 
 /// @nodoc
@@ -119,6 +121,7 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
     Object? adviceExpiry = null,
     Object? paymentBatchAdditionalInfo = null,
     Object? accountingDocExternalReference = null,
+    Object? paymentItems = null,
   }) {
     return _then(_value.copyWith(
       paymentID: null == paymentID
@@ -168,11 +171,11 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
       bankAccountNumber: null == bankAccountNumber
           ? _value.bankAccountNumber
           : bankAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       bankName: null == bankName
           ? _value.bankName
           : bankName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       paymentCardID: null == paymentCardID
           ? _value.paymentCardID
           : paymentCardID // ignore: cast_nullable_to_non_nullable
@@ -217,6 +220,10 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
           ? _value.accountingDocExternalReference
           : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
               as String,
+      paymentItems: null == paymentItems
+          ? _value.paymentItems
+          : paymentItems // ignore: cast_nullable_to_non_nullable
+              as List<PaymentItem>,
     ) as $Val);
   }
 }
@@ -241,8 +248,8 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
       String bankIdentification,
       String bankCountryKey,
       String bankKey,
-      String bankAccountNumber,
-      String bankName,
+      StringValue bankAccountNumber,
+      StringValue bankName,
       String paymentCardID,
       String paymentCardNumber,
       String paymentCardHolderName,
@@ -253,7 +260,8 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
       StringValue zzAdvice,
       StringValue adviceExpiry,
       StringValue paymentBatchAdditionalInfo,
-      String accountingDocExternalReference});
+      String accountingDocExternalReference,
+      List<PaymentItem> paymentItems});
 }
 
 /// @nodoc
@@ -291,6 +299,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
     Object? adviceExpiry = null,
     Object? paymentBatchAdditionalInfo = null,
     Object? accountingDocExternalReference = null,
+    Object? paymentItems = null,
   }) {
     return _then(_$_PaymentSummaryDetails(
       paymentID: null == paymentID
@@ -340,11 +349,11 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
       bankAccountNumber: null == bankAccountNumber
           ? _value.bankAccountNumber
           : bankAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       bankName: null == bankName
           ? _value.bankName
           : bankName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       paymentCardID: null == paymentCardID
           ? _value.paymentCardID
           : paymentCardID // ignore: cast_nullable_to_non_nullable
@@ -389,6 +398,10 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
           ? _value.accountingDocExternalReference
           : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
               as String,
+      paymentItems: null == paymentItems
+          ? _value._paymentItems
+          : paymentItems // ignore: cast_nullable_to_non_nullable
+              as List<PaymentItem>,
     ));
   }
 }
@@ -420,8 +433,10 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
       required this.zzAdvice,
       required this.adviceExpiry,
       required this.paymentBatchAdditionalInfo,
-      required this.accountingDocExternalReference})
-      : super._();
+      required this.accountingDocExternalReference,
+      required final List<PaymentItem> paymentItems})
+      : _paymentItems = paymentItems,
+        super._();
 
   @override
   final StringValue paymentID;
@@ -446,9 +461,9 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   @override
   final String bankKey;
   @override
-  final String bankAccountNumber;
+  final StringValue bankAccountNumber;
   @override
-  final String bankName;
+  final StringValue bankName;
   @override
   final String paymentCardID;
   @override
@@ -471,10 +486,17 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   final StringValue paymentBatchAdditionalInfo;
   @override
   final String accountingDocExternalReference;
+  final List<PaymentItem> _paymentItems;
+  @override
+  List<PaymentItem> get paymentItems {
+    if (_paymentItems is EqualUnmodifiableListView) return _paymentItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_paymentItems);
+  }
 
   @override
   String toString() {
-    return 'PaymentSummaryDetails(paymentID: $paymentID, valueDate: $valueDate, paymentAmount: $paymentAmount, transactionCurrency: $transactionCurrency, paymentDocument: $paymentDocument, status: $status, paymentMethod: $paymentMethod, iban: $iban, bankIdentification: $bankIdentification, bankCountryKey: $bankCountryKey, bankKey: $bankKey, bankAccountNumber: $bankAccountNumber, bankName: $bankName, paymentCardID: $paymentCardID, paymentCardNumber: $paymentCardNumber, paymentCardHolderName: $paymentCardHolderName, paymentCardMaskedNumber: $paymentCardMaskedNumber, paymentCardTypeName: $paymentCardTypeName, customId: $customId, createdDate: $createdDate, zzAdvice: $zzAdvice, adviceExpiry: $adviceExpiry, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, accountingDocExternalReference: $accountingDocExternalReference)';
+    return 'PaymentSummaryDetails(paymentID: $paymentID, valueDate: $valueDate, paymentAmount: $paymentAmount, transactionCurrency: $transactionCurrency, paymentDocument: $paymentDocument, status: $status, paymentMethod: $paymentMethod, iban: $iban, bankIdentification: $bankIdentification, bankCountryKey: $bankCountryKey, bankKey: $bankKey, bankAccountNumber: $bankAccountNumber, bankName: $bankName, paymentCardID: $paymentCardID, paymentCardNumber: $paymentCardNumber, paymentCardHolderName: $paymentCardHolderName, paymentCardMaskedNumber: $paymentCardMaskedNumber, paymentCardTypeName: $paymentCardTypeName, customId: $customId, createdDate: $createdDate, zzAdvice: $zzAdvice, adviceExpiry: $adviceExpiry, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, accountingDocExternalReference: $accountingDocExternalReference, paymentItems: $paymentItems)';
   }
 
   @override
@@ -531,7 +553,9 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
             (identical(other.accountingDocExternalReference,
                     accountingDocExternalReference) ||
                 other.accountingDocExternalReference ==
-                    accountingDocExternalReference));
+                    accountingDocExternalReference) &&
+            const DeepCollectionEquality()
+                .equals(other._paymentItems, _paymentItems));
   }
 
   @override
@@ -560,7 +584,8 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
         zzAdvice,
         adviceExpiry,
         paymentBatchAdditionalInfo,
-        accountingDocExternalReference
+        accountingDocExternalReference,
+        const DeepCollectionEquality().hash(_paymentItems)
       ]);
 
   @JsonKey(ignore: true)
@@ -584,8 +609,8 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
           required final String bankIdentification,
           required final String bankCountryKey,
           required final String bankKey,
-          required final String bankAccountNumber,
-          required final String bankName,
+          required final StringValue bankAccountNumber,
+          required final StringValue bankName,
           required final String paymentCardID,
           required final String paymentCardNumber,
           required final String paymentCardHolderName,
@@ -596,7 +621,8 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
           required final StringValue zzAdvice,
           required final StringValue adviceExpiry,
           required final StringValue paymentBatchAdditionalInfo,
-          required final String accountingDocExternalReference}) =
+          required final String accountingDocExternalReference,
+          required final List<PaymentItem> paymentItems}) =
       _$_PaymentSummaryDetails;
   const _PaymentSummaryDetails._() : super._();
 
@@ -623,9 +649,9 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   @override
   String get bankKey;
   @override
-  String get bankAccountNumber;
+  StringValue get bankAccountNumber;
   @override
-  String get bankName;
+  StringValue get bankName;
   @override
   String get paymentCardID;
   @override
@@ -648,6 +674,8 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   StringValue get paymentBatchAdditionalInfo;
   @override
   String get accountingDocExternalReference;
+  @override
+  List<PaymentItem> get paymentItems;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentSummaryDetailsCopyWith<_$_PaymentSummaryDetails> get copyWith =>

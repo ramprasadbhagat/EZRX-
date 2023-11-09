@@ -4,8 +4,7 @@ part of 'payment_summary_details_bloc.dart';
 class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
   const PaymentSummaryDetailsState._();
   const factory PaymentSummaryDetailsState({
-    required PaymentSummaryDetails paymentSummaryDetails,
-    required List<PaymentItem> paymentItemList,
+    required PaymentSummaryDetails details,
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required User user,
@@ -17,12 +16,12 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
     required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
     required bool isDeletingPayment,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+    required BankInstruction bankInstruction,
   }) = _PaymentSummaryDetailsState;
   factory PaymentSummaryDetailsState.initial() => PaymentSummaryDetailsState(
-        paymentSummaryDetails: PaymentSummaryDetails.empty(),
+        details: PaymentSummaryDetails.empty(),
         isDetailFetching: false,
         failureOrSuccessOption: none(),
-        paymentItemList: <PaymentItem>[],
         isListLoading: false,
         salesOrganization: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
@@ -32,9 +31,17 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
         shipToInfo: ShipToInfo.empty(),
         paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
         isDeletingPayment: false,
+        bankInstruction: BankInstruction.empty(),
       );
 
   bool get isLoading => isDetailFetching || isListLoading;
 
   bool get isSavingOrDeleting => isSavingAdvice || isDeletingPayment;
+
+  String get adviceExpiryText => salesOrganization.salesOrg.isID
+      ? details.idAdviceExpiryText
+      : details.adviceExpiryText;
+
+  String get adviceDeletedMessage =>
+      '${salesOrganization.salesOrg.paymentIdPretext} #${details.zzAdvice.displayDashIfEmpty} has been deleted';
 }

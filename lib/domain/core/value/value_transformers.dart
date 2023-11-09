@@ -271,7 +271,6 @@ Color getStatusLabelColor(String statusType) {
     'Cancelled by buyer': ZPColors.lightRedStatusColor,
     'Cancelled by Seller': ZPColors.lightRedStatusColor,
     'Overdue': ZPColors.lightRedStatusColor,
-    'Expired': ZPColors.lightRedStatusColor,
     'Rejected': ZPColors.lightRedStatusColor,
   };
 
@@ -319,6 +318,7 @@ Color getStatusLabelColor(String statusType) {
     'PENDING': ZPColors.lightRed,
     'REJECTED': ZPColors.darkGray,
     'Out of stock': ZPColors.lightGray,
+    'Expired': ZPColors.lightGray,
   };
 
   return statusTypeMap[statusType] ?? ZPColors.lightYellow;
@@ -405,6 +405,15 @@ String getReturnSummaryStatusInList(String statusType) {
       return statusType;
   }
 }
+
+String getThreeDaysAfterString(DateTime dateTime) => DateFormat(
+      DateTimeFormatString.defaultDateTimeFormat,
+    ).format(dateTime.add(const Duration(days: 3)));
+
+int paymentAttentionExpiryInDays(
+  DateTime date,
+) =>
+    date.add(const Duration(days: 3)).difference(DateTime.now()).inDays;
 
 bool differenceNGTWeek(DateTime date) {
   final diff = DateTime.now().difference(date).inDays;
@@ -564,7 +573,10 @@ Color getOosTagLabelColor() => ZPColors.black;
 bool isSuccessfulOrProcessed(String status) =>
     status == 'Successful' ||
     status == 'Processed' ||
-    status == 'Payment Received';
+    status == 'Payment Received' ||
+    status == 'success' ||
+    status == 'expired' ||
+    status == 'canceled';
 
 Color getDisplayStatusTextColor(String status) =>
     isSuccessfulOrProcessed(status) ? ZPColors.black : ZPColors.red;

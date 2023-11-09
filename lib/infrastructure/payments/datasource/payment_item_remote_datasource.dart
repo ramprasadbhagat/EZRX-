@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/transaction_detail_dto.dart';
 
 class PaymentItemRemoteDataSource {
   HttpService httpService;
@@ -137,6 +138,36 @@ class PaymentItemRemoteDataSource {
     }
 
     throw ServerException(message: data['statusMessage']);
+  }
+
+  Future<PaymentSummaryDetails> getTransaction({
+    required String customerCode,
+    required String salesOrg,
+    required String paymentId,
+  }) async {
+    final queryData = paymentItemQuery.getTransactionQuery();
+    final request = {
+      'customer': customerCode,
+      'salesOrg': salesOrg,
+      'id': paymentId,
+    };
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query': queryData,
+          'variables': {
+            'input': request,
+          },
+        },
+      ),
+    );
+    _checkPaymentSummaryDetailsExceptionChecker(res: res);
+    final data = res.data['data']['getTransaction'];
+    if (data == null || data.isEmpty) return PaymentSummaryDetails.empty();
+
+    return TransactionDetailDto.fromJson(data).toDomain();
   }
 
   void _checkPaymentSummaryDetailsExceptionChecker({

@@ -3,6 +3,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -30,27 +31,71 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
     required CustomerCodeInfo customerCodeInfo,
     required StringValue paymentId,
   }) async {
-    final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
+    final salesOrg = salesOrganization.salesOrg;
     final customerCode = customerCodeInfo.customerCodeSoldTo;
+
+    return salesOrg.isID
+        ? _getTransaction(
+            salesOrg: salesOrg,
+            customerCode: customerCode,
+            paymentId: paymentId,
+          )
+        : _getPaymentSummaryDetails(
+            salesOrg: salesOrg,
+            customerCode: customerCode,
+            paymentId: paymentId,
+          );
+  }
+
+  Future<Either<ApiFailure, PaymentSummaryDetails>> _getTransaction({
+    required SalesOrg salesOrg,
+    required String customerCode,
+    required StringValue paymentId,
+  }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final paymentSummaryDetails =
-            await localDataSource.getPaymentSummaryDetails();
+        final details = await localDataSource.getTransaction();
 
-        return Right(paymentSummaryDetails);
+        return Right(details);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
-      final paymentSummaryDetails =
-          await remoteDataSource.getPaymentSummaryDetails(
+      final details = await remoteDataSource.getTransaction(
         customerCode: customerCode,
-        salesOrg: salesOrgCode,
+        salesOrg: salesOrg.getOrCrash(),
         paymentId: paymentId.getOrCrash(),
       );
 
-      return Right(paymentSummaryDetails);
+      return Right(details);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  Future<Either<ApiFailure, PaymentSummaryDetails>> _getPaymentSummaryDetails({
+    required SalesOrg salesOrg,
+    required String customerCode,
+    required StringValue paymentId,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final details = await localDataSource.getPaymentSummaryDetails();
+
+        return Right(details);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final details = await remoteDataSource.getPaymentSummaryDetails(
+        customerCode: customerCode,
+        salesOrg: salesOrg.getOrCrash(),
+        paymentId: paymentId.getOrCrash(),
+      );
+
+      return Right(details);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -60,7 +105,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
   Future<Either<ApiFailure, List<PaymentItem>>> fetchPaymentList({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
-    required PaymentSummaryDetails paymentSummaryDetails,
+    required PaymentSummaryDetails details,
   }) async {
     final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
     final customerCode = customerCodeInfo.customerCodeSoldTo;
@@ -77,11 +122,10 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
       final paymentItemList = await remoteDataSource.getPaymentItemList(
         customerCode: customerCode,
         salesOrg: salesOrgCode,
-        paymentID: paymentSummaryDetails.paymentID.getOrCrash(),
+        paymentID: details.paymentID.getOrCrash(),
         paymentBatchAdditionalInfo:
-            paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
-        accountingDocExternalReference:
-            paymentSummaryDetails.accountingDocExternalReference,
+            details.paymentBatchAdditionalInfo.getOrCrash(),
+        accountingDocExternalReference: details.accountingDocExternalReference,
       );
 
       return Right(paymentItemList);

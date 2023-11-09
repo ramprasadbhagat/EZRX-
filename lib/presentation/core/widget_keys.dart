@@ -915,6 +915,7 @@ class WidgetKeys {
   //============================================================
   static const Key paymentSummaryFilter = Key('paymentSummaryFilter');
   static const Key deleteAdviceButtonKey = Key('deleteAdviceButton');
+  static const Key cancelAdviceButtonKey = Key('cancelAdviceButtonKey');
   static const Key downloadAdviceButtonKey = Key('downloadAdviceButton');
   static const Key buttonRowKey = Key('buttonRow');
   static const Key deleteAdviceBottomSheet = Key('deleteAdviceBottomSheet');
@@ -993,6 +994,15 @@ class WidgetKeys {
       Key('accountSummaryDownloadButton');
   static const Key accountSummaryPage = Key('accountSummaryPage');
   static const Key accountSummarySearchBar = Key('accountSummarySearchBar');
+
+  //===========================================================
+  //  Account summary details
+  //============================================================
+  static const Key accountSummaryDetailsAttention =
+      Key('accountSummaryDetailsAttention');
+  static const Key accountSummaryBankAccountSection =
+      Key('accountSummaryBankAccountSection');
+
   //============================================================
   //  ALL INVOICES
   //============================================================

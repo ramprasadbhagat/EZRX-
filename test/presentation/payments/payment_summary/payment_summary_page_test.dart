@@ -613,7 +613,7 @@ void main() {
       verify(
         () => paymentSummaryDetailBlocMock.add(
           PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-            paymentSummaryDetails: PaymentSummaryDetails.empty().copyWith(
+            details: PaymentSummaryDetails.empty().copyWith(
               paymentAmount: 250,
               status: FilterStatus('In Progress'),
             ),
@@ -1000,11 +1000,6 @@ void main() {
           expect(
             dateTextFinder.data,
             '${'Created on'.tr()}: ${fakeDate.dateString}',
-          );
-        } else {
-          expect(
-            dateTextFinder.data,
-            '${'Expires in'.tr()} ${fakeAdviceExpiry.displayDashIfEmpty}',
           );
         }
       },

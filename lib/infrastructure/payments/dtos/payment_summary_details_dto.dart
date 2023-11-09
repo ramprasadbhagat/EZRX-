@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
@@ -57,11 +58,11 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
 
   PaymentSummaryDetails toDomain() {
     return PaymentSummaryDetails(
-      bankAccountNumber: bankAccountNumber,
+      bankAccountNumber: StringValue(bankAccountNumber),
       bankCountryKey: bankCountryKey,
       bankIdentification: bankIdentification,
       bankKey: bankKey,
-      bankName: bankName,
+      bankName: StringValue(bankName),
       customId: customId,
       iban: iban,
       status: FilterStatus(status),
@@ -81,6 +82,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       zzAdvice: StringValue(zzAdvice),
       accountingDocExternalReference: accountingDocExternalReference,
       paymentBatchAdditionalInfo: StringValue(paymentBatchAdditionalInfo),
+      paymentItems: <PaymentItem>[],
     );
   }
 

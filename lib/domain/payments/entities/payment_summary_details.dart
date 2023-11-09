@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -23,8 +24,8 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
     required String bankIdentification,
     required String bankCountryKey,
     required String bankKey,
-    required String bankAccountNumber,
-    required String bankName,
+    required StringValue bankAccountNumber,
+    required StringValue bankName,
     required String paymentCardID,
     required String paymentCardNumber,
     required String paymentCardHolderName,
@@ -36,13 +37,14 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
     required StringValue adviceExpiry,
     required StringValue paymentBatchAdditionalInfo,
     required String accountingDocExternalReference,
+    required List<PaymentItem> paymentItems,
   }) = _PaymentSummaryDetails;
   factory PaymentSummaryDetails.empty() => PaymentSummaryDetails(
-        bankAccountNumber: '',
+        bankAccountNumber: StringValue(''),
         bankCountryKey: '',
         bankIdentification: '',
         bankKey: '',
-        bankName: '',
+        bankName: StringValue(''),
         customId: '',
         iban: '',
         status: FilterStatus(''),
@@ -62,16 +64,29 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         zzAdvice: StringValue(''),
         paymentBatchAdditionalInfo: StringValue(''),
         accountingDocExternalReference: '',
+        paymentItems: <PaymentItem>[],
       );
 
-  String get adviceExpiryText => status.getIsSuccessfulOrProcessed
-      ? 'NA'.tr()
-      : status.getIsFailed
-          ? 'Expires in ${adviceExpiry.displayDashIfEmpty}'.tr()
-          : 'in ${adviceExpiry.displayDashIfEmpty}'.tr();
+  String get adviceExpiryText {
+    if (!status.getIsSuccessfulOrProcessed) {
+      var text = adviceExpiry.displayDashIfEmpty;
+      adviceExpiry.isValid()
+          ? text = status.getIsFailed ? 'Expires in $text' : 'in $text'
+          : text = text;
+
+      return text;
+    }
+
+    return 'NA';
+  }
+
+  String get idAdviceExpiryText =>
+      'in ${createdDate.paymentAttentionExpiry} Day(s)';
 
   String get paymentDate =>
       status.getIsSuccessfulOrProcessed ? valueDate.dateString.tr() : '-'.tr();
+
+  bool get isEmpty => this == PaymentSummaryDetails.empty();
 }
 
 extension PaymentSummaryListExtension on List<PaymentSummaryDetails> {
@@ -82,7 +97,7 @@ extension PaymentSummaryListExtension on List<PaymentSummaryDetails> {
         .map(
           (entry) => PaymentSummaryGroup(
             createdDate: entry.key,
-            paymentSummaryDetails: entry.value,
+            details: entry.value,
           ),
         )
         .toList();

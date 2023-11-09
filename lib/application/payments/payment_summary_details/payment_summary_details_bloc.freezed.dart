@@ -21,9 +21,10 @@ mixin _$PaymentSummaryDetailsEvent {
     required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(PaymentSummaryDetails details)
         fetchPaymentSummaryDetailsInfo,
     required TResult Function() fetchPaymentSummaryList,
+    required TResult Function() fetchBankInstruction,
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
@@ -37,9 +38,10 @@ mixin _$PaymentSummaryDetailsEvent {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult? Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult? Function()? fetchPaymentSummaryList,
+    TResult? Function()? fetchBankInstruction,
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
@@ -53,9 +55,10 @@ mixin _$PaymentSummaryDetailsEvent {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult Function()? fetchPaymentSummaryList,
+    TResult Function()? fetchBankInstruction,
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
@@ -69,6 +72,7 @@ mixin _$PaymentSummaryDetailsEvent {
         fetchPaymentSummaryDetailsInfo,
     required TResult Function(_FetchPaymentSummaryListEvent value)
         fetchPaymentSummaryList,
+    required TResult Function(_FetchBankInstruction value) fetchBankInstruction,
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
@@ -81,6 +85,7 @@ mixin _$PaymentSummaryDetailsEvent {
         fetchPaymentSummaryDetailsInfo,
     TResult? Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult? Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
@@ -93,6 +98,7 @@ mixin _$PaymentSummaryDetailsEvent {
         fetchPaymentSummaryDetailsInfo,
     TResult Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
@@ -261,9 +267,10 @@ class _$_Initialized implements _Initialized {
     required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(PaymentSummaryDetails details)
         fetchPaymentSummaryDetailsInfo,
     required TResult Function() fetchPaymentSummaryList,
+    required TResult Function() fetchBankInstruction,
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
@@ -280,9 +287,10 @@ class _$_Initialized implements _Initialized {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult? Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult? Function()? fetchPaymentSummaryList,
+    TResult? Function()? fetchBankInstruction,
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
@@ -300,9 +308,10 @@ class _$_Initialized implements _Initialized {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult Function()? fetchPaymentSummaryList,
+    TResult Function()? fetchBankInstruction,
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
@@ -322,6 +331,7 @@ class _$_Initialized implements _Initialized {
         fetchPaymentSummaryDetailsInfo,
     required TResult Function(_FetchPaymentSummaryListEvent value)
         fetchPaymentSummaryList,
+    required TResult Function(_FetchBankInstruction value) fetchBankInstruction,
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
@@ -337,6 +347,7 @@ class _$_Initialized implements _Initialized {
         fetchPaymentSummaryDetailsInfo,
     TResult? Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult? Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
@@ -352,6 +363,7 @@ class _$_Initialized implements _Initialized {
         fetchPaymentSummaryDetailsInfo,
     TResult Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
@@ -387,9 +399,9 @@ abstract class _$$_FetchPaymentSummaryDetailsEventCopyWith<$Res> {
           $Res Function(_$_FetchPaymentSummaryDetailsEvent) then) =
       __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({PaymentSummaryDetails paymentSummaryDetails});
+  $Res call({PaymentSummaryDetails details});
 
-  $PaymentSummaryDetailsCopyWith<$Res> get paymentSummaryDetails;
+  $PaymentSummaryDetailsCopyWith<$Res> get details;
 }
 
 /// @nodoc
@@ -405,22 +417,21 @@ class __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentSummaryDetails = null,
+    Object? details = null,
   }) {
     return _then(_$_FetchPaymentSummaryDetailsEvent(
-      paymentSummaryDetails: null == paymentSummaryDetails
-          ? _value.paymentSummaryDetails
-          : paymentSummaryDetails // ignore: cast_nullable_to_non_nullable
+      details: null == details
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryDetails,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $PaymentSummaryDetailsCopyWith<$Res> get paymentSummaryDetails {
-    return $PaymentSummaryDetailsCopyWith<$Res>(_value.paymentSummaryDetails,
-        (value) {
-      return _then(_value.copyWith(paymentSummaryDetails: value));
+  $PaymentSummaryDetailsCopyWith<$Res> get details {
+    return $PaymentSummaryDetailsCopyWith<$Res>(_value.details, (value) {
+      return _then(_value.copyWith(details: value));
     });
   }
 }
@@ -429,15 +440,14 @@ class __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>
 
 class _$_FetchPaymentSummaryDetailsEvent
     implements _FetchPaymentSummaryDetailsEvent {
-  const _$_FetchPaymentSummaryDetailsEvent(
-      {required this.paymentSummaryDetails});
+  const _$_FetchPaymentSummaryDetailsEvent({required this.details});
 
   @override
-  final PaymentSummaryDetails paymentSummaryDetails;
+  final PaymentSummaryDetails details;
 
   @override
   String toString() {
-    return 'PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(paymentSummaryDetails: $paymentSummaryDetails)';
+    return 'PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(details: $details)';
   }
 
   @override
@@ -445,12 +455,11 @@ class _$_FetchPaymentSummaryDetailsEvent
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FetchPaymentSummaryDetailsEvent &&
-            (identical(other.paymentSummaryDetails, paymentSummaryDetails) ||
-                other.paymentSummaryDetails == paymentSummaryDetails));
+            (identical(other.details, details) || other.details == details));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, paymentSummaryDetails);
+  int get hashCode => Object.hash(runtimeType, details);
 
   @JsonKey(ignore: true)
   @override
@@ -466,14 +475,15 @@ class _$_FetchPaymentSummaryDetailsEvent
     required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(PaymentSummaryDetails details)
         fetchPaymentSummaryDetailsInfo,
     required TResult Function() fetchPaymentSummaryList,
+    required TResult Function() fetchBankInstruction,
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
   }) {
-    return fetchPaymentSummaryDetailsInfo(paymentSummaryDetails);
+    return fetchPaymentSummaryDetailsInfo(details);
   }
 
   @override
@@ -485,14 +495,15 @@ class _$_FetchPaymentSummaryDetailsEvent
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult? Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult? Function()? fetchPaymentSummaryList,
+    TResult? Function()? fetchBankInstruction,
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
   }) {
-    return fetchPaymentSummaryDetailsInfo?.call(paymentSummaryDetails);
+    return fetchPaymentSummaryDetailsInfo?.call(details);
   }
 
   @override
@@ -504,16 +515,17 @@ class _$_FetchPaymentSummaryDetailsEvent
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult Function()? fetchPaymentSummaryList,
+    TResult Function()? fetchBankInstruction,
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryDetailsInfo != null) {
-      return fetchPaymentSummaryDetailsInfo(paymentSummaryDetails);
+      return fetchPaymentSummaryDetailsInfo(details);
     }
     return orElse();
   }
@@ -526,6 +538,7 @@ class _$_FetchPaymentSummaryDetailsEvent
         fetchPaymentSummaryDetailsInfo,
     required TResult Function(_FetchPaymentSummaryListEvent value)
         fetchPaymentSummaryList,
+    required TResult Function(_FetchBankInstruction value) fetchBankInstruction,
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
@@ -541,6 +554,7 @@ class _$_FetchPaymentSummaryDetailsEvent
         fetchPaymentSummaryDetailsInfo,
     TResult? Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult? Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
@@ -556,6 +570,7 @@ class _$_FetchPaymentSummaryDetailsEvent
         fetchPaymentSummaryDetailsInfo,
     TResult Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
@@ -571,10 +586,10 @@ class _$_FetchPaymentSummaryDetailsEvent
 abstract class _FetchPaymentSummaryDetailsEvent
     implements PaymentSummaryDetailsEvent {
   const factory _FetchPaymentSummaryDetailsEvent(
-          {required final PaymentSummaryDetails paymentSummaryDetails}) =
+          {required final PaymentSummaryDetails details}) =
       _$_FetchPaymentSummaryDetailsEvent;
 
-  PaymentSummaryDetails get paymentSummaryDetails;
+  PaymentSummaryDetails get details;
   @JsonKey(ignore: true)
   _$$_FetchPaymentSummaryDetailsEventCopyWith<
           _$_FetchPaymentSummaryDetailsEvent>
@@ -626,9 +641,10 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
     required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(PaymentSummaryDetails details)
         fetchPaymentSummaryDetailsInfo,
     required TResult Function() fetchPaymentSummaryList,
+    required TResult Function() fetchBankInstruction,
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
@@ -645,9 +661,10 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult? Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult? Function()? fetchPaymentSummaryList,
+    TResult? Function()? fetchBankInstruction,
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
@@ -664,9 +681,10 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult Function()? fetchPaymentSummaryList,
+    TResult Function()? fetchBankInstruction,
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
@@ -686,6 +704,7 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
         fetchPaymentSummaryDetailsInfo,
     required TResult Function(_FetchPaymentSummaryListEvent value)
         fetchPaymentSummaryList,
+    required TResult Function(_FetchBankInstruction value) fetchBankInstruction,
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
@@ -701,6 +720,7 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
         fetchPaymentSummaryDetailsInfo,
     TResult? Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult? Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
@@ -716,6 +736,7 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
         fetchPaymentSummaryDetailsInfo,
     TResult Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
@@ -732,6 +753,160 @@ abstract class _FetchPaymentSummaryListEvent
     implements PaymentSummaryDetailsEvent {
   const factory _FetchPaymentSummaryListEvent() =
       _$_FetchPaymentSummaryListEvent;
+}
+
+/// @nodoc
+abstract class _$$_FetchBankInstructionCopyWith<$Res> {
+  factory _$$_FetchBankInstructionCopyWith(_$_FetchBankInstruction value,
+          $Res Function(_$_FetchBankInstruction) then) =
+      __$$_FetchBankInstructionCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchBankInstructionCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res,
+        _$_FetchBankInstruction>
+    implements _$$_FetchBankInstructionCopyWith<$Res> {
+  __$$_FetchBankInstructionCopyWithImpl(_$_FetchBankInstruction _value,
+      $Res Function(_$_FetchBankInstruction) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchBankInstruction implements _FetchBankInstruction {
+  const _$_FetchBankInstruction();
+
+  @override
+  String toString() {
+    return 'PaymentSummaryDetailsEvent.fetchBankInstruction()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_FetchBankInstruction);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(PaymentSummaryDetails details)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function() fetchPaymentSummaryList,
+    required TResult Function() fetchBankInstruction,
+    required TResult Function() fetchAdvice,
+    required TResult Function() saveAdvice,
+    required TResult Function() deleteAdvice,
+  }) {
+    return fetchBankInstruction();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(PaymentSummaryDetails details)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function()? fetchPaymentSummaryList,
+    TResult? Function()? fetchBankInstruction,
+    TResult? Function()? fetchAdvice,
+    TResult? Function()? saveAdvice,
+    TResult? Function()? deleteAdvice,
+  }) {
+    return fetchBankInstruction?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(PaymentSummaryDetails details)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function()? fetchPaymentSummaryList,
+    TResult Function()? fetchBankInstruction,
+    TResult Function()? fetchAdvice,
+    TResult Function()? saveAdvice,
+    TResult Function()? deleteAdvice,
+    required TResult orElse(),
+  }) {
+    if (fetchBankInstruction != null) {
+      return fetchBankInstruction();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchPaymentSummaryDetailsEvent value)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function(_FetchPaymentSummaryListEvent value)
+        fetchPaymentSummaryList,
+    required TResult Function(_FetchBankInstruction value) fetchBankInstruction,
+    required TResult Function(_FetchAdvice value) fetchAdvice,
+    required TResult Function(_SaveAdvice value) saveAdvice,
+    required TResult Function(_DeleteAdvice value) deleteAdvice,
+  }) {
+    return fetchBankInstruction(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult? Function(_FetchBankInstruction value)? fetchBankInstruction,
+    TResult? Function(_FetchAdvice value)? fetchAdvice,
+    TResult? Function(_SaveAdvice value)? saveAdvice,
+    TResult? Function(_DeleteAdvice value)? deleteAdvice,
+  }) {
+    return fetchBankInstruction?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult Function(_FetchBankInstruction value)? fetchBankInstruction,
+    TResult Function(_FetchAdvice value)? fetchAdvice,
+    TResult Function(_SaveAdvice value)? saveAdvice,
+    TResult Function(_DeleteAdvice value)? deleteAdvice,
+    required TResult orElse(),
+  }) {
+    if (fetchBankInstruction != null) {
+      return fetchBankInstruction(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchBankInstruction implements PaymentSummaryDetailsEvent {
+  const factory _FetchBankInstruction() = _$_FetchBankInstruction;
 }
 
 /// @nodoc
@@ -775,9 +950,10 @@ class _$_FetchAdvice implements _FetchAdvice {
     required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(PaymentSummaryDetails details)
         fetchPaymentSummaryDetailsInfo,
     required TResult Function() fetchPaymentSummaryList,
+    required TResult Function() fetchBankInstruction,
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
@@ -794,9 +970,10 @@ class _$_FetchAdvice implements _FetchAdvice {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult? Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult? Function()? fetchPaymentSummaryList,
+    TResult? Function()? fetchBankInstruction,
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
@@ -813,9 +990,10 @@ class _$_FetchAdvice implements _FetchAdvice {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult Function()? fetchPaymentSummaryList,
+    TResult Function()? fetchBankInstruction,
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
@@ -835,6 +1013,7 @@ class _$_FetchAdvice implements _FetchAdvice {
         fetchPaymentSummaryDetailsInfo,
     required TResult Function(_FetchPaymentSummaryListEvent value)
         fetchPaymentSummaryList,
+    required TResult Function(_FetchBankInstruction value) fetchBankInstruction,
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
@@ -850,6 +1029,7 @@ class _$_FetchAdvice implements _FetchAdvice {
         fetchPaymentSummaryDetailsInfo,
     TResult? Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult? Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
@@ -865,6 +1045,7 @@ class _$_FetchAdvice implements _FetchAdvice {
         fetchPaymentSummaryDetailsInfo,
     TResult Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
@@ -922,9 +1103,10 @@ class _$_SaveAdvice implements _SaveAdvice {
     required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(PaymentSummaryDetails details)
         fetchPaymentSummaryDetailsInfo,
     required TResult Function() fetchPaymentSummaryList,
+    required TResult Function() fetchBankInstruction,
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
@@ -941,9 +1123,10 @@ class _$_SaveAdvice implements _SaveAdvice {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult? Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult? Function()? fetchPaymentSummaryList,
+    TResult? Function()? fetchBankInstruction,
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
@@ -960,9 +1143,10 @@ class _$_SaveAdvice implements _SaveAdvice {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult Function()? fetchPaymentSummaryList,
+    TResult Function()? fetchBankInstruction,
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
@@ -982,6 +1166,7 @@ class _$_SaveAdvice implements _SaveAdvice {
         fetchPaymentSummaryDetailsInfo,
     required TResult Function(_FetchPaymentSummaryListEvent value)
         fetchPaymentSummaryList,
+    required TResult Function(_FetchBankInstruction value) fetchBankInstruction,
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
@@ -997,6 +1182,7 @@ class _$_SaveAdvice implements _SaveAdvice {
         fetchPaymentSummaryDetailsInfo,
     TResult? Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult? Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
@@ -1012,6 +1198,7 @@ class _$_SaveAdvice implements _SaveAdvice {
         fetchPaymentSummaryDetailsInfo,
     TResult Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
@@ -1069,9 +1256,10 @@ class _$_DeleteAdvice implements _DeleteAdvice {
     required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(PaymentSummaryDetails details)
         fetchPaymentSummaryDetailsInfo,
     required TResult Function() fetchPaymentSummaryList,
+    required TResult Function() fetchBankInstruction,
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
@@ -1088,9 +1276,10 @@ class _$_DeleteAdvice implements _DeleteAdvice {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult? Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult? Function()? fetchPaymentSummaryList,
+    TResult? Function()? fetchBankInstruction,
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
@@ -1107,9 +1296,10 @@ class _$_DeleteAdvice implements _DeleteAdvice {
             User user,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+    TResult Function(PaymentSummaryDetails details)?
         fetchPaymentSummaryDetailsInfo,
     TResult Function()? fetchPaymentSummaryList,
+    TResult Function()? fetchBankInstruction,
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
@@ -1129,6 +1319,7 @@ class _$_DeleteAdvice implements _DeleteAdvice {
         fetchPaymentSummaryDetailsInfo,
     required TResult Function(_FetchPaymentSummaryListEvent value)
         fetchPaymentSummaryList,
+    required TResult Function(_FetchBankInstruction value) fetchBankInstruction,
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
@@ -1144,6 +1335,7 @@ class _$_DeleteAdvice implements _DeleteAdvice {
         fetchPaymentSummaryDetailsInfo,
     TResult? Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult? Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
@@ -1159,6 +1351,7 @@ class _$_DeleteAdvice implements _DeleteAdvice {
         fetchPaymentSummaryDetailsInfo,
     TResult Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult Function(_FetchBankInstruction value)? fetchBankInstruction,
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
@@ -1177,9 +1370,7 @@ abstract class _DeleteAdvice implements PaymentSummaryDetailsEvent {
 
 /// @nodoc
 mixin _$PaymentSummaryDetailsState {
-  PaymentSummaryDetails get paymentSummaryDetails =>
-      throw _privateConstructorUsedError;
-  List<PaymentItem> get paymentItemList => throw _privateConstructorUsedError;
+  PaymentSummaryDetails get details => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganization => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
@@ -1193,6 +1384,7 @@ mixin _$PaymentSummaryDetailsState {
   bool get isDeletingPayment => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  BankInstruction get bankInstruction => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentSummaryDetailsStateCopyWith<PaymentSummaryDetailsState>
@@ -1207,8 +1399,7 @@ abstract class $PaymentSummaryDetailsStateCopyWith<$Res> {
           PaymentSummaryDetailsState>;
   @useResult
   $Res call(
-      {PaymentSummaryDetails paymentSummaryDetails,
-      List<PaymentItem> paymentItemList,
+      {PaymentSummaryDetails details,
       SalesOrganisation salesOrganization,
       CustomerCodeInfo customerCodeInfo,
       User user,
@@ -1219,14 +1410,16 @@ abstract class $PaymentSummaryDetailsStateCopyWith<$Res> {
       ShipToInfo shipToInfo,
       PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       bool isDeletingPayment,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      BankInstruction bankInstruction});
 
-  $PaymentSummaryDetailsCopyWith<$Res> get paymentSummaryDetails;
+  $PaymentSummaryDetailsCopyWith<$Res> get details;
   $SalesOrganisationCopyWith<$Res> get salesOrganization;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $UserCopyWith<$Res> get user;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
+  $BankInstructionCopyWith<$Res> get bankInstruction;
 }
 
 /// @nodoc
@@ -1243,8 +1436,7 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentSummaryDetails = null,
-    Object? paymentItemList = null,
+    Object? details = null,
     Object? salesOrganization = null,
     Object? customerCodeInfo = null,
     Object? user = null,
@@ -1256,16 +1448,13 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
     Object? paymentInvoiceInfoPdf = null,
     Object? isDeletingPayment = null,
     Object? failureOrSuccessOption = null,
+    Object? bankInstruction = null,
   }) {
     return _then(_value.copyWith(
-      paymentSummaryDetails: null == paymentSummaryDetails
-          ? _value.paymentSummaryDetails
-          : paymentSummaryDetails // ignore: cast_nullable_to_non_nullable
+      details: null == details
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryDetails,
-      paymentItemList: null == paymentItemList
-          ? _value.paymentItemList
-          : paymentItemList // ignore: cast_nullable_to_non_nullable
-              as List<PaymentItem>,
       salesOrganization: null == salesOrganization
           ? _value.salesOrganization
           : salesOrganization // ignore: cast_nullable_to_non_nullable
@@ -1310,15 +1499,18 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      bankInstruction: null == bankInstruction
+          ? _value.bankInstruction
+          : bankInstruction // ignore: cast_nullable_to_non_nullable
+              as BankInstruction,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $PaymentSummaryDetailsCopyWith<$Res> get paymentSummaryDetails {
-    return $PaymentSummaryDetailsCopyWith<$Res>(_value.paymentSummaryDetails,
-        (value) {
-      return _then(_value.copyWith(paymentSummaryDetails: value) as $Val);
+  $PaymentSummaryDetailsCopyWith<$Res> get details {
+    return $PaymentSummaryDetailsCopyWith<$Res>(_value.details, (value) {
+      return _then(_value.copyWith(details: value) as $Val);
     });
   }
 
@@ -1362,6 +1554,14 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
       return _then(_value.copyWith(paymentInvoiceInfoPdf: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BankInstructionCopyWith<$Res> get bankInstruction {
+    return $BankInstructionCopyWith<$Res>(_value.bankInstruction, (value) {
+      return _then(_value.copyWith(bankInstruction: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1374,8 +1574,7 @@ abstract class _$$_PaymentSummaryDetailsStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {PaymentSummaryDetails paymentSummaryDetails,
-      List<PaymentItem> paymentItemList,
+      {PaymentSummaryDetails details,
       SalesOrganisation salesOrganization,
       CustomerCodeInfo customerCodeInfo,
       User user,
@@ -1386,10 +1585,11 @@ abstract class _$$_PaymentSummaryDetailsStateCopyWith<$Res>
       ShipToInfo shipToInfo,
       PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       bool isDeletingPayment,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      BankInstruction bankInstruction});
 
   @override
-  $PaymentSummaryDetailsCopyWith<$Res> get paymentSummaryDetails;
+  $PaymentSummaryDetailsCopyWith<$Res> get details;
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganization;
   @override
@@ -1400,6 +1600,8 @@ abstract class _$$_PaymentSummaryDetailsStateCopyWith<$Res>
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   @override
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
+  @override
+  $BankInstructionCopyWith<$Res> get bankInstruction;
 }
 
 /// @nodoc
@@ -1415,8 +1617,7 @@ class __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentSummaryDetails = null,
-    Object? paymentItemList = null,
+    Object? details = null,
     Object? salesOrganization = null,
     Object? customerCodeInfo = null,
     Object? user = null,
@@ -1428,16 +1629,13 @@ class __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>
     Object? paymentInvoiceInfoPdf = null,
     Object? isDeletingPayment = null,
     Object? failureOrSuccessOption = null,
+    Object? bankInstruction = null,
   }) {
     return _then(_$_PaymentSummaryDetailsState(
-      paymentSummaryDetails: null == paymentSummaryDetails
-          ? _value.paymentSummaryDetails
-          : paymentSummaryDetails // ignore: cast_nullable_to_non_nullable
+      details: null == details
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryDetails,
-      paymentItemList: null == paymentItemList
-          ? _value._paymentItemList
-          : paymentItemList // ignore: cast_nullable_to_non_nullable
-              as List<PaymentItem>,
       salesOrganization: null == salesOrganization
           ? _value.salesOrganization
           : salesOrganization // ignore: cast_nullable_to_non_nullable
@@ -1482,6 +1680,10 @@ class __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      bankInstruction: null == bankInstruction
+          ? _value.bankInstruction
+          : bankInstruction // ignore: cast_nullable_to_non_nullable
+              as BankInstruction,
     ));
   }
 }
@@ -1490,8 +1692,7 @@ class __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>
 
 class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
   const _$_PaymentSummaryDetailsState(
-      {required this.paymentSummaryDetails,
-      required final List<PaymentItem> paymentItemList,
+      {required this.details,
       required this.salesOrganization,
       required this.customerCodeInfo,
       required this.user,
@@ -1502,20 +1703,12 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
       required this.shipToInfo,
       required this.paymentInvoiceInfoPdf,
       required this.isDeletingPayment,
-      required this.failureOrSuccessOption})
-      : _paymentItemList = paymentItemList,
-        super._();
+      required this.failureOrSuccessOption,
+      required this.bankInstruction})
+      : super._();
 
   @override
-  final PaymentSummaryDetails paymentSummaryDetails;
-  final List<PaymentItem> _paymentItemList;
-  @override
-  List<PaymentItem> get paymentItemList {
-    if (_paymentItemList is EqualUnmodifiableListView) return _paymentItemList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_paymentItemList);
-  }
-
+  final PaymentSummaryDetails details;
   @override
   final SalesOrganisation salesOrganization;
   @override
@@ -1538,10 +1731,12 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
   final bool isDeletingPayment;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
+  @override
+  final BankInstruction bankInstruction;
 
   @override
   String toString() {
-    return 'PaymentSummaryDetailsState(paymentSummaryDetails: $paymentSummaryDetails, paymentItemList: $paymentItemList, salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, user: $user, isDetailFetching: $isDetailFetching, isListLoading: $isListLoading, isFetchingAdvice: $isFetchingAdvice, isSavingAdvice: $isSavingAdvice, shipToInfo: $shipToInfo, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isDeletingPayment: $isDeletingPayment, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'PaymentSummaryDetailsState(details: $details, salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, user: $user, isDetailFetching: $isDetailFetching, isListLoading: $isListLoading, isFetchingAdvice: $isFetchingAdvice, isSavingAdvice: $isSavingAdvice, shipToInfo: $shipToInfo, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isDeletingPayment: $isDeletingPayment, failureOrSuccessOption: $failureOrSuccessOption, bankInstruction: $bankInstruction)';
   }
 
   @override
@@ -1549,10 +1744,7 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PaymentSummaryDetailsState &&
-            (identical(other.paymentSummaryDetails, paymentSummaryDetails) ||
-                other.paymentSummaryDetails == paymentSummaryDetails) &&
-            const DeepCollectionEquality()
-                .equals(other._paymentItemList, _paymentItemList) &&
+            (identical(other.details, details) || other.details == details) &&
             (identical(other.salesOrganization, salesOrganization) ||
                 other.salesOrganization == salesOrganization) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -1573,14 +1765,15 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
             (identical(other.isDeletingPayment, isDeletingPayment) ||
                 other.isDeletingPayment == isDeletingPayment) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
-                other.failureOrSuccessOption == failureOrSuccessOption));
+                other.failureOrSuccessOption == failureOrSuccessOption) &&
+            (identical(other.bankInstruction, bankInstruction) ||
+                other.bankInstruction == bankInstruction));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      paymentSummaryDetails,
-      const DeepCollectionEquality().hash(_paymentItemList),
+      details,
       salesOrganization,
       customerCodeInfo,
       user,
@@ -1591,7 +1784,8 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
       shipToInfo,
       paymentInvoiceInfoPdf,
       isDeletingPayment,
-      failureOrSuccessOption);
+      failureOrSuccessOption,
+      bankInstruction);
 
   @JsonKey(ignore: true)
   @override
@@ -1603,8 +1797,7 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
 
 abstract class _PaymentSummaryDetailsState extends PaymentSummaryDetailsState {
   const factory _PaymentSummaryDetailsState(
-      {required final PaymentSummaryDetails paymentSummaryDetails,
-      required final List<PaymentItem> paymentItemList,
+      {required final PaymentSummaryDetails details,
       required final SalesOrganisation salesOrganization,
       required final CustomerCodeInfo customerCodeInfo,
       required final User user,
@@ -1615,14 +1808,13 @@ abstract class _PaymentSummaryDetailsState extends PaymentSummaryDetailsState {
       required final ShipToInfo shipToInfo,
       required final PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       required final bool isDeletingPayment,
-      required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_PaymentSummaryDetailsState;
+      required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      required final BankInstruction
+          bankInstruction}) = _$_PaymentSummaryDetailsState;
   const _PaymentSummaryDetailsState._() : super._();
 
   @override
-  PaymentSummaryDetails get paymentSummaryDetails;
-  @override
-  List<PaymentItem> get paymentItemList;
+  PaymentSummaryDetails get details;
   @override
   SalesOrganisation get salesOrganization;
   @override
@@ -1645,6 +1837,8 @@ abstract class _PaymentSummaryDetailsState extends PaymentSummaryDetailsState {
   bool get isDeletingPayment;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
+  @override
+  BankInstruction get bankInstruction;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentSummaryDetailsStateCopyWith<_$_PaymentSummaryDetailsState>

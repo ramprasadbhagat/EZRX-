@@ -8,11 +8,11 @@ part 'payment_summary_group.freezed.dart';
 class PaymentSummaryGroup with _$PaymentSummaryGroup {
   factory PaymentSummaryGroup({
     required DateTimeStringValue createdDate,
-    required List<PaymentSummaryDetails> paymentSummaryDetails,
+    required List<PaymentSummaryDetails> details,
   }) = _PaymentSummaryGroup;
 
   factory PaymentSummaryGroup.empty() => PaymentSummaryGroup(
         createdDate: DateTimeStringValue(''),
-        paymentSummaryDetails: <PaymentSummaryDetails>[],
+        details: <PaymentSummaryDetails>[],
       );
 }

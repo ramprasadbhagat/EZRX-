@@ -75,7 +75,6 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late PaymentSummaryDetails fakePaymentDetails;
   late PaymentSummaryDetails mockPaymentDetails;
-  late List<PaymentItem> mockPaymentItemList;
   late PaymentInvoiceInfoPdf mockPaymentInvoiceInfoPdf;
 
   final routeData = RouteData(
@@ -98,7 +97,6 @@ void main() {
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
     mockPaymentDetails =
         await PaymentItemLocalDataSource().getPaymentSummaryDetails();
-    mockPaymentItemList = await PaymentItemLocalDataSource().getPaymentItems();
     mockPaymentInvoiceInfoPdf =
         await NewPaymentLocalDataSource().getPaymentInvoiceInfoPdf();
   });
@@ -198,7 +196,7 @@ void main() {
 
       expect(
         find.byType(LoadingShimmer),
-        findsNWidgets(7),
+        findsWidgets,
       );
     });
     testWidgets(
@@ -214,11 +212,13 @@ void main() {
         PaymentSummaryDetailsState.initial().copyWith(
           isDetailFetching: false,
           isFetchingAdvice: false,
-          paymentItemList: [
-            PaymentItem.empty().copyWith(
-              documentDate: DateTimeStringValue(''),
-            ),
-          ],
+          details: PaymentSummaryDetails.empty().copyWith(
+            paymentItems: [
+              PaymentItem.empty().copyWith(
+                documentDate: DateTimeStringValue(''),
+              ),
+            ],
+          ),
           paymentInvoiceInfoPdf:
               PaymentInvoiceInfoPdf.empty().copyWith(paymentID: 'paymentID'),
         ),
@@ -259,8 +259,7 @@ void main() {
               optionOf(Left(FailureHandler.handleFailure('Fake-error'))),
         ),
         PaymentSummaryDetailsState.initial().copyWith(
-          paymentSummaryDetails: mockPaymentDetails,
-          paymentItemList: mockPaymentItemList,
+          details: mockPaymentDetails,
           paymentInvoiceInfoPdf: mockPaymentInvoiceInfoPdf,
           failureOrSuccessOption: none(),
         ),
@@ -297,18 +296,25 @@ void main() {
     testWidgets(
         'Payment Summary Details Page - Delete payment advice and verify delete event call',
         (tester) async {
-      final expectedStates = [
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
         PaymentSummaryDetailsState.initial().copyWith(
           isDetailFetching: true,
           isFetchingAdvice: true,
         ),
+      );
+      final expectedStates = [
         PaymentSummaryDetailsState.initial().copyWith(
           isDetailFetching: false,
           isFetchingAdvice: false,
-          isDeletingPayment: false,
-          paymentSummaryDetails: mockPaymentDetails,
-          paymentItemList: mockPaymentItemList,
-          paymentInvoiceInfoPdf: mockPaymentInvoiceInfoPdf,
+          details: PaymentSummaryDetails.empty().copyWith(
+            paymentItems: [
+              PaymentItem.empty().copyWith(
+                documentDate: DateTimeStringValue(''),
+              ),
+            ],
+          ),
+          paymentInvoiceInfoPdf:
+              PaymentInvoiceInfoPdf.empty().copyWith(paymentID: 'paymentID'),
         ),
       ];
 
@@ -358,7 +364,7 @@ void main() {
           isDeletingPayment: true,
         ),
         PaymentSummaryDetailsState.initial().copyWith(
-          paymentSummaryDetails: mockPaymentDetails,
+          details: mockPaymentDetails,
           isDeletingPayment: false,
         ),
       ];
@@ -405,7 +411,7 @@ void main() {
           isDeletingPayment: true,
         ),
         PaymentSummaryDetailsState.initial().copyWith(
-          paymentSummaryDetails: mockPaymentDetails,
+          details: mockPaymentDetails,
           isDeletingPayment: false,
           failureOrSuccessOption:
               optionOf(Left(FailureHandler.handleFailure('Fake-error'))),

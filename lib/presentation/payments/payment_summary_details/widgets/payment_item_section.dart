@@ -14,14 +14,14 @@ class _PaymentItemSection extends StatelessWidget {
         return state.isLoading
             ? LoadingShimmer.tile()
             : Column(
-                children: [
-                  ...state.paymentItemList.map(
-                    (e) => _PaymentItem(
-                      paymentItem: e,
-                      showDivider: state.paymentItemList.indexOf(e) != 0,
-                    ),
-                  ),
-                ],
+                children: state.details.paymentItems
+                    .map(
+                      (e) => _PaymentItem(
+                        paymentItem: e,
+                        showDivider: state.details.paymentItems.indexOf(e) != 0,
+                      ),
+                    )
+                    .toList(),
               );
       },
     );

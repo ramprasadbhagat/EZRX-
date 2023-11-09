@@ -6,7 +6,6 @@ class DateTimeUtils {
   static String getDeliveryDateString(DateTime deliveryDate) =>
       DateFormat(DateTimeFormatString.displayDateFormat).format(deliveryDate);
 
-
   static DateTime getNearestWorkingDate(DateTime time) {
     time = time.add(const Duration(days: 1));
 
@@ -19,4 +18,7 @@ class DateTimeUtils {
 
   static bool isWeekend(DateTime dateTime) =>
       dateTime.weekday >= DateTime.saturday;
+
+  static String getDateTimeString(DateTime dateTime) =>
+      DateFormat(DateTimeFormatString.displayDateTimeFormat).format(dateTime);
 }

@@ -19,7 +19,7 @@ abstract class IPaymentSummaryDetailsRepository {
   Future<Either<ApiFailure, List<PaymentItem>>> fetchPaymentList({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
-    required PaymentSummaryDetails paymentSummaryDetails,
+    required PaymentSummaryDetails details,
   });
 
   Future<Either<ApiFailure, bool>> deletePaymentAdvice({

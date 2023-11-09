@@ -9,11 +9,14 @@ class PaymentSummaryDetailsEvent with _$PaymentSummaryDetailsEvent {
     required ShipToInfo shipToInfo,
   }) = _Initialized;
   const factory PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo({
-    required PaymentSummaryDetails paymentSummaryDetails,
+    required PaymentSummaryDetails details,
   }) = _FetchPaymentSummaryDetailsEvent;
 
   const factory PaymentSummaryDetailsEvent.fetchPaymentSummaryList() =
       _FetchPaymentSummaryListEvent;
+
+  const factory PaymentSummaryDetailsEvent.fetchBankInstruction() =
+      _FetchBankInstruction;
 
   const factory PaymentSummaryDetailsEvent.fetchAdvice() = _FetchAdvice;
 

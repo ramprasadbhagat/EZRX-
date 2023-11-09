@@ -96,8 +96,7 @@ class _DeleteAdviceButtons extends StatelessWidget {
               context.router
                   .popUntilRouteWithName(PaymentSummaryPageRoute.name);
               CustomSnackBar(
-                messageText:
-                    '${context.read<EligibilityBloc>().state.salesOrg.paymentIdPretext} #${state.paymentSummaryDetails.zzAdvice.displayDashIfEmpty} has been deleted',
+                messageText: state.adviceDeletedMessage,
               ).show(context);
             },
             (either) => either.fold(

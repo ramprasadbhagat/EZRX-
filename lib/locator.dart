@@ -351,6 +351,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/account_summary_re
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/bank_instruction_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_remote.dart';
@@ -365,6 +366,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/payment_in_progres
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_in_progress_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/soa_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/soa_remote.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/bank_instruction_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_query.dart';
@@ -1216,6 +1218,10 @@ void setupLocator() {
     () => PaymentCustomerInformationLocalDataSource(),
   );
 
+  locator.registerLazySingleton(
+    () => BankInstructionLocalDataSource(),
+  );
+
   locator
       .registerLazySingleton(() => PaymentCustomerInformationQueryMutation());
 
@@ -1240,6 +1246,12 @@ void setupLocator() {
     () => PaymentCustomerInformationBloc(
       paymentCustomerInformationRepository:
           locator<PaymentCustomerInformationRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => BankInstructionRepository(
+      localDataSource: locator<BankInstructionLocalDataSource>(),
     ),
   );
 
@@ -1996,6 +2008,7 @@ void setupLocator() {
       paymentItemRepository: locator<PaymentSummaryDetailsRepository>(),
       newPaymentRepository: locator<NewPaymentRepository>(),
       deviceRepository: locator<DeviceRepository>(),
+      bankInstructionRepository: locator<BankInstructionRepository>(),
     ),
   );
 

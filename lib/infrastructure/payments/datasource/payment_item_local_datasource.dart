@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/transaction_detail_dto.dart';
 import 'package:flutter/services.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_item_dto.dart';
@@ -46,5 +47,17 @@ class PaymentItemLocalDataSource {
 
     return statusMessage ==
         'Customer Payment Advice has been Deleted Successfully';
+  }
+
+  Future<PaymentSummaryDetails> getTransaction() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/getTransactionResponse.json',
+      ),
+    );
+
+    return TransactionDetailDto.fromJson(
+      data['data']['getTransaction'],
+    ).toDomain();
   }
 }

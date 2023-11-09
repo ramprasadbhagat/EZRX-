@@ -135,6 +135,14 @@ class DateTimeStringValue extends ValueObject<String> {
   String get dateTimeWithTimeZone =>
       '$dateTime12HoursString ${getTimeZoneAbbreviation(dateTime.timeZoneOffset)}';
 
+  String get dateTimeWithWeekDayString => displayDateTimeString(
+        _valueOrEmpty,
+        DateTimeFormatString.displayDateTimeWithWeekDayFormat,
+      );
+
+  String get fullDateTimeWithTimeZone =>
+      '$dateTimeWithWeekDayString ${getTimeZoneAbbreviation(dateTime.timeZoneOffset)}';
+
   String get apiDateTimeString => displayDateTimeString(
         _valueOrEmpty,
         DateTimeFormatString.apiDateFormat,
@@ -158,6 +166,14 @@ class DateTimeStringValue extends ValueObject<String> {
       );
 
   bool get aWeekDifference => differenceNGTWeek(dateTime);
+
+  DateTimeStringValue get threeDaysAfter => DateTimeStringValue(
+        getThreeDaysAfterString(
+          dateTime,
+        ),
+      );
+  int get paymentAttentionExpiry => paymentAttentionExpiryInDays(dateTime);
+
   const DateTimeStringValue._(this.value);
 }
 

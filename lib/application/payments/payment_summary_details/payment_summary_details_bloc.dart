@@ -5,10 +5,11 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/payments/entities/bank_instruction.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/domain/payments/repository/i_bank_instruction_repository.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_payment_summary_details_repository.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/create_payment_invoice_pdf.dart';
@@ -24,10 +25,12 @@ class PaymentSummaryDetailsBloc
   final IPaymentSummaryDetailsRepository paymentItemRepository;
   final INewPaymentRepository newPaymentRepository;
   final IDeviceRepository deviceRepository;
+  final IBankInstructionRepository bankInstructionRepository;
   PaymentSummaryDetailsBloc({
     required this.paymentItemRepository,
     required this.newPaymentRepository,
     required this.deviceRepository,
+    required this.bankInstructionRepository,
   }) : super(PaymentSummaryDetailsState.initial()) {
     on<PaymentSummaryDetailsEvent>(_onEvent);
   }
@@ -45,7 +48,7 @@ class PaymentSummaryDetailsBloc
         ),
       ),
       fetchPaymentSummaryDetailsInfo: (event) async {
-        if (!event.paymentSummaryDetails.paymentBatchAdditionalInfo.isValid()) {
+        if (!event.details.paymentBatchAdditionalInfo.isValid()) {
           emit(
             state.copyWith(
               isDetailFetching: true,
@@ -56,7 +59,7 @@ class PaymentSummaryDetailsBloc
               await paymentItemRepository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: state.customerCodeInfo,
             salesOrganization: state.salesOrganization,
-            paymentId: event.paymentSummaryDetails.paymentID,
+            paymentId: event.details.paymentID,
           );
           failureOrSuccess.fold(
             (failure) {
@@ -67,16 +70,21 @@ class PaymentSummaryDetailsBloc
                 ),
               );
             },
-            (paymentSummaryDetails) {
+            (details) {
               emit(
                 state.copyWith(
-                  paymentSummaryDetails: paymentSummaryDetails,
+                  details: details,
                   isDetailFetching: false,
                 ),
               );
-              if (paymentSummaryDetails.paymentBatchAdditionalInfo.isValid()) {
+              if (details.paymentBatchAdditionalInfo.isValid() &&
+                  !state.salesOrganization.salesOrg.isID) {
                 add(
                   const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
+                );
+              } else {
+                add(
+                  const PaymentSummaryDetailsEvent.fetchBankInstruction(),
                 );
               }
             },
@@ -84,12 +92,18 @@ class PaymentSummaryDetailsBloc
         } else {
           emit(
             state.copyWith(
-              paymentSummaryDetails: event.paymentSummaryDetails,
+              details: event.details,
             ),
           );
-          add(
-            const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
-          );
+          if (!state.salesOrganization.salesOrg.isID) {
+            add(
+              const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
+            );
+          } else {
+            add(
+              const PaymentSummaryDetailsEvent.fetchBankInstruction(),
+            );
+          }
         }
       },
       fetchPaymentSummaryList: (event) async {
@@ -97,7 +111,7 @@ class PaymentSummaryDetailsBloc
         final failureOrSuccess = await paymentItemRepository.fetchPaymentList(
           customerCodeInfo: state.customerCodeInfo,
           salesOrganization: state.salesOrganization,
-          paymentSummaryDetails: state.paymentSummaryDetails,
+          details: state.details,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -112,9 +126,41 @@ class PaymentSummaryDetailsBloc
             add(const PaymentSummaryDetailsEvent.fetchAdvice());
             emit(
               state.copyWith(
-                paymentItemList: paymentItemList,
+                details: state.details.copyWith(
+                  paymentItems: paymentItemList,
+                ),
                 failureOrSuccessOption: none(),
                 isListLoading: false,
+              ),
+            );
+          },
+        );
+      },
+      fetchBankInstruction: (event) async {
+        emit(
+          state.copyWith(
+            isDetailFetching: true,
+          ),
+        );
+        final failureOrSuccess =
+            await bankInstructionRepository.getBankInstruction(
+          bankIdentification: state.details.bankIdentification,
+        );
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isDetailFetching: false,
+              ),
+            );
+          },
+          (bankInstruction) {
+            emit(
+              state.copyWith(
+                bankInstruction: bankInstruction,
+                failureOrSuccessOption: none(),
+                isDetailFetching: false,
               ),
             );
           },
@@ -168,13 +214,12 @@ class PaymentSummaryDetailsBloc
       },
       fetchAdvice: (_) async {
         emit(state.copyWith(isFetchingAdvice: true));
-        final paymentSummaryDetails = state.paymentSummaryDetails;
         final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
           paymentBatchAdditionalInfo:
-              paymentSummaryDetails.paymentBatchAdditionalInfo.getValue(),
-          paymentID: paymentSummaryDetails.paymentID.getValue(),
+              state.details.paymentBatchAdditionalInfo.getOrDefaultValue(''),
+          paymentID: state.details.paymentID.getOrDefaultValue(''),
           accountingDocExternalReference:
-              paymentSummaryDetails.accountingDocExternalReference,
+              state.details.accountingDocExternalReference,
         );
         final failureOrSuccess =
             await newPaymentRepository.getPaymentInvoiceInfoPdf(
@@ -184,20 +229,18 @@ class PaymentSummaryDetailsBloc
           paymentInfo: customerPaymentInfo,
         );
         failureOrSuccess.fold(
-          (failure) => {
+          (failure) => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isFetchingAdvice: false,
             ),
-          },
-          (invoiceInfoPdf) {
-            emit(
-              state.copyWith(
-                paymentInvoiceInfoPdf: invoiceInfoPdf,
-                isFetchingAdvice: false,
-              ),
-            );
-          },
+          ),
+          (invoiceInfoPdf) => emit(
+            state.copyWith(
+              paymentInvoiceInfoPdf: invoiceInfoPdf,
+              isFetchingAdvice: false,
+            ),
+          ),
         );
       },
       deleteAdvice: (_) async {
@@ -212,7 +255,7 @@ class PaymentSummaryDetailsBloc
           salesOrganization: state.salesOrganization,
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
-          paymentSummaryDetails: state.paymentSummaryDetails,
+          paymentSummaryDetails: state.details,
         );
 
         failureOrSuccess.fold(

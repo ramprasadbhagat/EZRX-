@@ -1,0 +1,45 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'transaction_detail_dto.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_TransactionDetailDto _$$_TransactionDetailDtoFromJson(
+        Map<String, dynamic> json) =>
+    _$_TransactionDetailDto(
+      id: json['id'] as String? ?? '',
+      reference: json['reference'] as String? ?? '',
+      invoices: (json['invoices'] as List<dynamic>?)
+              ?.map((e) =>
+                  TransactionInvoiceDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      amountPayable: (json['amountPayable'] as num?)?.toDouble() ?? 0.0,
+      status: json['status'] as String? ?? '',
+      paymentDocument: json['paymentDocument'] as String? ?? '',
+      paymentMethodDisplay: json['paymentMethodDisplay'] as String? ?? '',
+      createdOn: json['createdOn'] as String? ?? '',
+      bankId: json['bankId'] as String? ?? '',
+      paidOn: json['paidOn'] as String? ?? '',
+      vaName: _mappingVaName(json, 'vaName') as String? ?? '',
+      vaNumber: _mappingVaNumber(json, 'vaNumber') as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_TransactionDetailDtoToJson(
+        _$_TransactionDetailDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'reference': instance.reference,
+      'invoices': instance.invoices.map((e) => e.toJson()).toList(),
+      'amountPayable': instance.amountPayable,
+      'status': instance.status,
+      'paymentDocument': instance.paymentDocument,
+      'paymentMethodDisplay': instance.paymentMethodDisplay,
+      'createdOn': instance.createdOn,
+      'bankId': instance.bankId,
+      'paidOn': instance.paidOn,
+      'vaName': instance.vaName,
+      'vaNumber': instance.vaNumber,
+    };

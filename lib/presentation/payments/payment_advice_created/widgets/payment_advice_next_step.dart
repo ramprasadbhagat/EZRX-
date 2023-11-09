@@ -113,7 +113,7 @@ class _PaymentAdviceNextStep extends StatelessWidget {
                             context.read<PaymentSummaryDetailsBloc>().add(
                                   PaymentSummaryDetailsEvent
                                       .fetchPaymentSummaryDetailsInfo(
-                                    paymentSummaryDetails:
+                                    details:
                                         PaymentSummaryDetails.empty().copyWith(
                                       paymentID: StringValue(
                                         context

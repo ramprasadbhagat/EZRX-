@@ -33,10 +33,10 @@ class _PaymentSummaryGroupItem extends StatelessWidget {
                 ?.apply(color: ZPColors.lightGray),
           ),
         ),
-        ...paymentSummaryGroup.paymentSummaryDetails
+        ...paymentSummaryGroup.details
             .map(
               (e) => _PaymentSummaryItem(
-                paymentSummaryDetails: e,
+                details: e,
               ),
             )
             .toList(),
@@ -47,11 +47,11 @@ class _PaymentSummaryGroupItem extends StatelessWidget {
 }
 
 class _PaymentSummaryItem extends StatelessWidget {
-  final PaymentSummaryDetails paymentSummaryDetails;
+  final PaymentSummaryDetails details;
 
   const _PaymentSummaryItem({
     Key? key,
-    required this.paymentSummaryDetails,
+    required this.details,
   }) : super(key: key);
 
   @override
@@ -66,7 +66,7 @@ class _PaymentSummaryItem extends StatelessWidget {
           trackMixpanelEvent(MixpanelEvents.paymentDocumentViewed);
           context.read<PaymentSummaryDetailsBloc>().add(
                 PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-                  paymentSummaryDetails: paymentSummaryDetails,
+                  details: details,
                 ),
               );
           context.router.push(
@@ -83,15 +83,14 @@ class _PaymentSummaryItem extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                '${salesOrg.paymentIdPretext} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
+                '${salesOrg.paymentIdPretext} #${details.zzAdvice.displayDashIfEmpty}',
                 key: WidgetKeys.commonTileItemLabel,
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
             StatusLabel(
               key: WidgetKeys.paymentSummaryTileStatus,
-              status:
-                  StatusType(paymentSummaryDetails.status.displayStatusText),
+              status: StatusType(details.status.displayStatusText),
             ),
           ],
         ),
@@ -101,19 +100,18 @@ class _PaymentSummaryItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                paymentSummaryDetails.status.getIsSuccessfulOrProcessed
-                    ? '${context.tr(salesOrg.paymentDateLabelText)}: ${paymentSummaryDetails.createdDate.dateString}'
-                    : '${context.tr('Expires in')} ${paymentSummaryDetails.adviceExpiry.displayDashIfEmpty}',
+                details.status.getIsSuccessfulOrProcessed || salesOrg.isID
+                    ? '${context.tr(salesOrg.paymentDateLabelText)}: ${details.createdDate.dateString}'
+                    : '${context.tr('Expires in')} ${details.adviceExpiry.displayDashIfEmpty}',
                 key: WidgetKeys.paymentSummaryDateOrExpiry,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: paymentSummaryDetails
-                          .status.getPaymentDisplayStatusTextColor,
+                      color: details.status.getPaymentDisplayStatusTextColor,
                     ),
               ),
               const SizedBox(height: 10),
               PriceComponent(
                 key: WidgetKeys.paymentSummaryAmountAndCurrency,
-                price: paymentSummaryDetails.paymentAmount.toString(),
+                price: details.paymentAmount.toString(),
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 priceLabelStyle: Theme.of(context).textTheme.labelMedium,

@@ -282,7 +282,6 @@ Password cannot be empty.,Password cannot be empty.,กรุณาระบุ�
 Password must meet the following requirements:,Password must meet the following requirements:,รหัสผ่านต้องเป็นไปตามข้อกำหนดต่อไปนี้:,密碼需要符合下列規範:,စကားဝှက်သည် အောက်ပါလိုအပ်ချက်များနှင့် ကိုက်ညီရမည်,Mật khẩu phải đáp ứng các yêu cầu sau:,ពាក្យសម្ងាត់ត្រូវតែបំពេញតាមតម្រូវការខាងក្រោម៖,
 Payment,Payment,การชำระเงิน,Payment,Payment,Thanh toán,Payment,
 Payment Summary,Payment Summary,สรุปการชำระเงิน,Payment Summary,Payment Summary,Tổng Thanh toán,Payment Summary,
-Payment summary,Payment summary,สรุปการชำระเงิน,Payment summary,Payment summary,Tổng Thanh toán,Payment summary,
 Payment Term,Payment Term,เงื่อนไขการชำระเงิน,付款方式代碼,ငွေပေးချေမှု သက်တမ်း,Hình thức thanh toán,លក្ខខណ្ឌនៃការទូទាត់ប្រាក់,
 Payment Term Description,Payment Term Description,Payment Term Description,本次付款方式,Payment Term Description,Hình thức thanh toán,ការពិពណ៌នាអំពីរយៈពេលទូទាត់ប្រាក់,
 Payment:,Payment:,การชำระเงิน:,付款:,ငွေပေးချေမှု:,Thanh toán:,Payment,
@@ -968,7 +967,6 @@ In progress,In progress,กำลังดำเนินการ,In progress,I
 Cleared,Cleared,ชำระแล้ว,Cleared,Cleared,Đã xoá,Cleared,
 of,of,จาก,of,of,của,of,
 Download e-invoice,Download e-invoice,ดึงข้อมูลอีอินวอยซ์,Download e-invoice,Download e-invoice,Download e-invoice,Download e-invoice,
-Payment date,Payment date,วันที่ชำระเงิน ,Payment date,Payment date,Payment date,Payment date,
 Delete Payment Advice,Delete Payment Advice,ลบใบแจ้งยอดชำระเงิน,Delete Payment Advice,Delete Payment Advice,Delete Payment Advice,Delete Payment Advice,
 Invoice total,Invoice total,ยอดรวมอินวอยซ์,Invoice total,Invoice total,Invoice total,Invoice total,
 Credits applied,Credits applied,ยอดใบลดหนี้ที่ใช้,Credits applied,Credits applied,Credits applied,Credits applied,
@@ -1112,7 +1110,6 @@ In progress,In progress,กำลังดำเนินการ,In progress,I
 Cleared,Cleared,ชำระแล้ว,Cleared,Cleared,Đã xoá,Cleared,
 of,of,จาก,of,of,của,of,
 Download e-invoice,Download e-invoice,ดึงข้อมูลอีอินวอยซ์,Download e-invoice,Download e-invoice,Download e-invoice,Download e-invoice,
-Payment date,Payment date,วันที่ชำระเงิน ,Payment date,Payment date,Payment date,Payment date,
 Delete Payment Advice,Delete Payment Advice,ลบใบแจ้งยอดชำระเงิน,Delete Payment Advice,Delete Payment Advice,Delete Payment Advice,Delete Payment Advice,
 Invoice total,Invoice total,ยอดรวมอินวอยซ์,Invoice total,Invoice total,Invoice total,Invoice total,
 Credits applied,Credits applied,ยอดใบลดหนี้ที่ใช้,Credits applied,Credits applied,Credits applied,Credits applied,
@@ -1180,7 +1177,6 @@ Select payment method,Select payment method,Select payment method,Select payment
 Credit applied,Credit applied,Credit applied,Credit applied,Credit applied,Credit applied,Credit applied,
 Pay now,Pay now,Pay now,Pay now,Pay now,Pay now,Pay now,
 PA created date,PA created date,PA created date,PA created date,PA created date,Ngày tạo PA,PA created date,
-Payment date,Payment date,Payment date,Payment date,Payment date,Ngày thanh toán,Payment date,
 Credits applied:,Credits applied:,Credits applied:,Credits applied:,Credits applied:,Credits applied:,Credits applied:,
 Amount payable,Amount payable,Amount payable,Amount payable,Amount payable,Amount payable,Amount payable,
 SC Bank 461-10-012622 Account Holder : Zuellig PharmFa Korea,SC Bank 461-10-012622 Account Holder : Zuellig Pharma Korea,SC Bank 461-10-012622 Account Holder : Zuellig Pharma Korea,SC Bank 461-10-012622 Account Holder : Zuellig Pharma Korea,SC Bank 461-10-012622 Account Holder : Zuellig Pharma Korea,SC Bank 461-10-012622 Account Holder : Zuellig Pharma Korea,SC Bank 461-10-012622 Account Holder : Zuellig Pharma Korea,
@@ -1393,6 +1389,27 @@ Purchase different products with min. of its quantity. Buy more save more.,Purch
 Buy {unit} more items to get {discount}% discount,Buy {unit} more items to get {discount}% discount,Buy {unit} more items to get {discount}% discount,Buy {unit} more items to get {discount}% discount,Buy {unit} more items to get {discount}% discount,Buy {unit} more items to get {discount}% discount,Buy {unit} more items to get {discount}% discount
 Can’t upload.This file is larger than 20 MB,Can’t upload.This file is larger than 20 MB,Can’t upload.This file is larger than 20 MB,Can’t upload.This file is larger than 20 MB,Can’t upload.This file is larger than 20 MB,Can’t upload.This file is larger than 20 MB,Can’t upload.This file is larger than 20 MB,
 Buy {unit} more to get {discount}% discount,Buy {unit} more to get {discount}% discount,Buy {unit} more to get {discount}% discount,Buy {unit} more to get {discount}% discount,Buy {unit} more to get {discount}% discount,Buy {unit} more to get {discount}% discount,Buy {unit} more to get {discount}% discount
+in,in,in,in,in,in,in
+Please complete payment before,Please complete payment before,Please complete payment before,Please complete payment before,Please complete payment before,Please complete payment before,Please complete payment before
+or payment will be cancelled,or payment will be cancelled,or payment will be cancelled,or payment will be cancelled,or payment will be cancelled,or payment will be cancelled,or payment will be cancelled,
+Days,Days,Days,Days,Days,Days,Days
+Hours,Hours,Hours,Hours,Hours,Hours,Hours
+Minutes,Minutes,Minutes,Minutes,Minutes,Minutes,Minutes
+Seconds remaining,Seconds remaining,Seconds remaining,Seconds remaining,Seconds remaining,Seconds remaining,Seconds remaining,Seconds remaining
+Transfer to Virtual Bank Account,Transfer to Virtual Bank Account,Transfer to Virtual Bank Account,Transfer to Virtual Bank Account,Transfer to Virtual Bank Account,Transfer to Virtual Bank Account,Transfer to Virtual Bank Account
+Recipient bank,Recipient bank,Recipient bank,Recipient bank,Recipient bank,Recipient bank,Recipient bank
+Bank,Bank,Bank,Bank,Bank,Bank,Bank
+Recipient name,Recipient name,Recipient name,Recipient name,Recipient name,Recipient name,Recipient name
+Virtual bank account number,Virtual bank account number,Virtual bank account number,Virtual bank account number,Virtual bank account number,Virtual bank account number,Virtual bank account number
+Total amount to transfer,Total amount to transfer,Total amount to transfer,Total amount to transfer,Total amount to transfer,Total amount to transfer,Total amount to transfer
+Invoice total:,Invoice total:,Invoice total:,Invoice total:,Invoice total:,Invoice total:,Invoice total:
+Credits applied:,Credits applied:,Credits applied:,Credits applied:,Credits applied:,Credits applied:,Credits applied:
+Cancel advice,Cancel advice,Cancel advice,Cancel advice,Cancel advice,Cancel advice,Cancel advice
+Total:,Total:,Total:,Total:,Total:,Total:,Total:
+Transfer methods,Transfer methods,Transfer methods,Transfer methods,Transfer methods,Transfer methods,Transfer methods
+MOBILE BANKING,MOBILE BANKING,MOBILE BANKING,MOBILE BANKING,MOBILE BANKING,MOBILE BANKING,MOBILE BANKING
+INTERNET BANKING,INTERNET BANKING,INTERNET BANKING,INTERNET BANKING,INTERNET BANKING,INTERNET BANKING,INTERNET BANKING
+ATM,ATM,ATM,ATM,ATM,ATM,ATM
 No search history available,No search history available,No search history available,No search history available,No search history available,No search history available,No search history available
 No favourites yet,No favourites yet,No favourites yet,No favourites yet,No favourites yet,No favourites yet,No favourites yet
 Tap on,Tap on,Tap on,Tap on,Tap on,Tap on,Tap on

@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/bank_instruction_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_details_repository.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +27,14 @@ class NewPaymentRepositoryMock extends Mock implements NewPaymentRepository {}
 
 class DeviceRepositoryMock extends Mock implements DeviceRepository {}
 
+class BankInstructionRepositoryMock extends Mock
+    implements BankInstructionRepository {}
+
 void main() {
   late PaymentSummaryDetailsRepository paymentSummaryDetailsMockRepository;
   late NewPaymentRepository newPaymentRepository;
   late DeviceRepository deviceRepository;
+  late BankInstructionRepository bankInstructionRepository;
   late PaymentSummaryDetails details;
   late List<PaymentItem> paymentList;
   setUpAll(() async {
@@ -37,6 +42,7 @@ void main() {
     paymentSummaryDetailsMockRepository = PaymentSummaryDetailsRepositoryMock();
     newPaymentRepository = NewPaymentRepositoryMock();
     deviceRepository = DeviceRepositoryMock();
+    bankInstructionRepository = BankInstructionRepositoryMock();
     details = await PaymentItemLocalDataSource().getPaymentSummaryDetails();
     paymentList = await PaymentItemLocalDataSource().getPaymentItems();
   });
@@ -47,6 +53,7 @@ void main() {
         paymentItemRepository: paymentSummaryDetailsMockRepository,
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
+        bankInstructionRepository: bankInstructionRepository,
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.initialized(
@@ -72,6 +79,7 @@ void main() {
         paymentItemRepository: paymentSummaryDetailsMockRepository,
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
+        bankInstructionRepository: bankInstructionRepository,
       ),
       setUp: () {
         final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
@@ -105,7 +113,7 @@ void main() {
           () => paymentSummaryDetailsMockRepository.fetchPaymentList(
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            paymentSummaryDetails: details,
+            details: details,
           ),
         ).thenAnswer(
           (invocation) async => Right(paymentList),
@@ -114,7 +122,16 @@ void main() {
           () => paymentSummaryDetailsMockRepository.fetchPaymentList(
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            paymentSummaryDetails: details,
+            details: details,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(paymentList),
+        );
+        when(
+          () => paymentSummaryDetailsMockRepository.fetchPaymentList(
+            salesOrganization: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            details: details,
           ),
         ).thenAnswer(
           (invocation) async => Right(paymentList),
@@ -127,14 +144,15 @@ void main() {
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-          paymentSummaryDetails: details,
+          details: details,
         ),
       ),
       skip: 4,
       expect: () => [
         PaymentSummaryDetailsState.initial().copyWith(
-          paymentSummaryDetails: details,
-          paymentItemList: paymentList,
+          details: details.copyWith(
+            paymentItems: paymentList,
+          ),
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
@@ -148,6 +166,7 @@ void main() {
         paymentItemRepository: paymentSummaryDetailsMockRepository,
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
+        bankInstructionRepository: bankInstructionRepository,
       ),
       setUp: () {
         final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
@@ -181,7 +200,7 @@ void main() {
           () => paymentSummaryDetailsMockRepository.fetchPaymentList(
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            paymentSummaryDetails: details,
+            details: details,
           ),
         ).thenAnswer(
           (invocation) async => Right(paymentList),
@@ -194,15 +213,16 @@ void main() {
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-          paymentSummaryDetails:
+          details:
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
         ),
       ),
       skip: 5,
       expect: () => [
         PaymentSummaryDetailsState.initial().copyWith(
-          paymentSummaryDetails: details,
-          paymentItemList: paymentList,
+          details: details.copyWith(
+            paymentItems: paymentList,
+          ),
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
@@ -216,13 +236,14 @@ void main() {
         paymentItemRepository: paymentSummaryDetailsMockRepository,
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
+        bankInstructionRepository: bankInstructionRepository,
       ),
       setUp: () {
         when(
           () => paymentSummaryDetailsMockRepository.fetchPaymentList(
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            paymentSummaryDetails: details,
+            details: details,
           ),
         ).thenAnswer(
           (invocation) async => Right(paymentList),
@@ -249,7 +270,7 @@ void main() {
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
-        paymentSummaryDetails: details,
+        details: details,
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
@@ -257,11 +278,10 @@ void main() {
       skip: 3,
       expect: () => [
         PaymentSummaryDetailsState.initial().copyWith(
-          paymentItemList: paymentList,
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
-          paymentSummaryDetails: details,
+          details: details.copyWith(paymentItems: paymentList),
         ),
       ],
     );
@@ -272,6 +292,7 @@ void main() {
         paymentItemRepository: paymentSummaryDetailsMockRepository,
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
+        bankInstructionRepository: bankInstructionRepository,
       ),
       setUp: () {
         when(
@@ -302,7 +323,7 @@ void main() {
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-          paymentSummaryDetails:
+          details:
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
         ),
       ),
@@ -324,13 +345,14 @@ void main() {
         paymentItemRepository: paymentSummaryDetailsMockRepository,
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
+        bankInstructionRepository: bankInstructionRepository,
       ),
       setUp: () {
         when(
           () => paymentSummaryDetailsMockRepository.fetchPaymentList(
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            paymentSummaryDetails: details,
+            details: details,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),
@@ -340,7 +362,7 @@ void main() {
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
-        paymentSummaryDetails: details,
+        details: details,
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
@@ -348,7 +370,7 @@ void main() {
       skip: 1,
       expect: () => [
         PaymentSummaryDetailsState.initial().copyWith(
-          paymentSummaryDetails: details,
+          details: details,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
           salesOrganization: fakeSalesOrganisation,

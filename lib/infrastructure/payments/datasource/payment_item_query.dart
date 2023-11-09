@@ -86,4 +86,33 @@ class PaymentItemQuery {
       }
     ''';
   }
+
+  String getTransactionQuery() {
+    return '''
+      query (\$input: getTxnParams!) {
+        getTransaction(input: \$input) {
+          id
+          reference
+          invoices {
+            documentDate
+            documentType
+            documentNo
+            amount
+          }
+          amountPayable
+          status
+          paymentDetails {
+            vaNumber
+            vaName
+            externalLink
+            expiresAt
+          }
+          paymentMethodDisplay
+          createdOn
+          bankId
+          paidOn
+        }
+      }
+    ''';
+  }
 }

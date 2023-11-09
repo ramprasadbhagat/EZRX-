@@ -29,10 +29,18 @@ class _PaymentAdviceButton extends StatelessWidget {
           previous.isSavingAdvice != current.isSavingAdvice ||
           previous.isFetchingAdvice != current.isFetchingAdvice,
       builder: (context, state) {
-        return state.isLoading ||
-                state.paymentItemList.isEmpty ||
-                state.isFetchingAdvice ||
-                state.paymentInvoiceInfoPdf.isEmpty
+        if (state.isLoading ||
+            state.details.paymentItems.isEmpty ||
+            state.isFetchingAdvice) {
+          return const SizedBox.shrink();
+        }
+        final eligibilityState = context.read<EligibilityBloc>().state;
+        var buttons = _getDefaultButtons(state);
+        if (eligibilityState.salesOrg.isID) {
+          buttons = _getIDButtons(context, state);
+        }
+
+        return buttons.isEmpty
             ? const SizedBox.shrink()
             : Container(
                 decoration: const BoxDecoration(
@@ -53,84 +61,56 @@ class _PaymentAdviceButton extends StatelessWidget {
                 ),
                 child: Row(
                   key: WidgetKeys.buttonRowKey,
-                  children: [
-                    if (!state.paymentSummaryDetails.status
-                        .getIsSuccessfulOrProcessed)
-                      Expanded(
-                        child: OutlinedButton(
-                          key: WidgetKeys.deleteAdviceButtonKey,
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(
-                              color: ZPColors.red,
-                            ),
-                          ),
-                          onPressed: state.isSavingAdvice
-                              ? null
-                              : () => _showDeleteAdviceBottomSheet(
-                                    context,
-                                    paymentAdviceNumber: state
-                                        .paymentSummaryDetails
-                                        .zzAdvice
-                                        .displayDashIfEmpty,
-                                  ),
-                          child: SizedBox(
-                            height: 20,
-                            child: LoadingShimmer.withChild(
-                              enabled: state.isSavingAdvice,
-                              child: Text(
-                                'Delete advice'.tr(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium
-                                    ?.copyWith(color: ZPColors.red),
-                              ).tr(),
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (!state.paymentSummaryDetails.status
-                        .getIsSuccessfulOrProcessed)
-                      const SizedBox(
-                        width: 16,
-                      ),
-                    Expanded(
-                      child: OutlinedButton(
-                        key: WidgetKeys.downloadAdviceButtonKey,
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(
-                            color: ZPColors.primary,
-                          ),
-                        ),
-                        onPressed: state.isSavingAdvice
-                            ? null
-                            : () => context
-                                .read<PaymentSummaryDetailsBloc>()
-                                .add(
-                                  const PaymentSummaryDetailsEvent.saveAdvice(),
-                                ),
-                        child: SizedBox(
-                          height: 20,
-                          child: LoadingShimmer.withChild(
-                            enabled: state.isSavingAdvice,
-                            child: Text(
-                              context.tr('Download advice'),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium
-                                  ?.copyWith(
-                                    color: ZPColors.primary,
-                                  ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  children: buttons,
                 ),
               );
       },
     );
   }
+
+  List<Widget> _getIDButtons(
+    BuildContext context,
+    PaymentSummaryDetailsState state,
+  ) =>
+      [
+        if (!state.details.status.getIsSuccessfulOrProcessed)
+          Expanded(
+            child: OutlinedButton(
+              key: WidgetKeys.cancelAdviceButtonKey,
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(
+                  color: ZPColors.red,
+                ),
+              ),
+              child: Text(
+                context.tr('Cancel advice'),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelMedium
+                    ?.copyWith(color: ZPColors.red),
+              ).tr(),
+              onPressed: () {},
+            ),
+          ),
+      ];
+
+  List<Widget> _getDefaultButtons(
+    PaymentSummaryDetailsState state,
+  ) =>
+      [
+        if (!state.details.status.getIsSuccessfulOrProcessed)
+          _DeleteAdviceButton(state: state),
+        if (!state.details.status.getIsSuccessfulOrProcessed)
+          const SizedBox(
+            width: 16,
+          ),
+        _DownloadAdviceButton(state: state),
+      ];
+}
+
+class _DeleteAdviceButton extends StatelessWidget {
+  const _DeleteAdviceButton({required this.state, Key? key}) : super(key: key);
+  final PaymentSummaryDetailsState state;
 
   void _showDeleteAdviceBottomSheet(
     BuildContext context, {
@@ -143,6 +123,76 @@ class _PaymentAdviceButton extends StatelessWidget {
       isScrollControlled: true,
       builder: (_) => DeleteAdviceBottomSheet(
         paymentAdviceNumber: paymentAdviceNumber,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: OutlinedButton(
+        key: WidgetKeys.deleteAdviceButtonKey,
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(
+            color: ZPColors.red,
+          ),
+        ),
+        child: SizedBox(
+          height: 20,
+          child: LoadingShimmer.withChild(
+            enabled: state.isSavingOrDeleting,
+            child: Text(
+              'Delete advice'.tr(),
+              style: Theme.of(context)
+                  .textTheme
+                  .labelMedium
+                  ?.copyWith(color: ZPColors.red),
+            ).tr(),
+          ),
+        ),
+        onPressed: () {
+          if (state.isDeletingPayment) return;
+          _showDeleteAdviceBottomSheet(
+            context,
+            paymentAdviceNumber: state.details.zzAdvice.displayDashIfEmpty,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _DownloadAdviceButton extends StatelessWidget {
+  const _DownloadAdviceButton({required this.state, Key? key})
+      : super(key: key);
+  final PaymentSummaryDetailsState state;
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: OutlinedButton(
+        key: WidgetKeys.downloadAdviceButtonKey,
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(
+            color: ZPColors.primary,
+          ),
+        ),
+        child: SizedBox(
+          height: 20,
+          child: LoadingShimmer.withChild(
+            enabled: state.isSavingAdvice,
+            child: Text(
+              context.tr('Download advice'),
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: ZPColors.primary,
+                  ),
+            ),
+          ),
+        ),
+        onPressed: () {
+          context.read<PaymentSummaryDetailsBloc>().add(
+                const PaymentSummaryDetailsEvent.saveAdvice(),
+              );
+        },
       ),
     );
   }

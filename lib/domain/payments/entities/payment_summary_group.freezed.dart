@@ -17,8 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PaymentSummaryGroup {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
-  List<PaymentSummaryDetails> get paymentSummaryDetails =>
-      throw _privateConstructorUsedError;
+  List<PaymentSummaryDetails> get details => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentSummaryGroupCopyWith<PaymentSummaryGroup> get copyWith =>
@@ -32,8 +31,7 @@ abstract class $PaymentSummaryGroupCopyWith<$Res> {
       _$PaymentSummaryGroupCopyWithImpl<$Res, PaymentSummaryGroup>;
   @useResult
   $Res call(
-      {DateTimeStringValue createdDate,
-      List<PaymentSummaryDetails> paymentSummaryDetails});
+      {DateTimeStringValue createdDate, List<PaymentSummaryDetails> details});
 }
 
 /// @nodoc
@@ -50,16 +48,16 @@ class _$PaymentSummaryGroupCopyWithImpl<$Res, $Val extends PaymentSummaryGroup>
   @override
   $Res call({
     Object? createdDate = null,
-    Object? paymentSummaryDetails = null,
+    Object? details = null,
   }) {
     return _then(_value.copyWith(
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      paymentSummaryDetails: null == paymentSummaryDetails
-          ? _value.paymentSummaryDetails
-          : paymentSummaryDetails // ignore: cast_nullable_to_non_nullable
+      details: null == details
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
               as List<PaymentSummaryDetails>,
     ) as $Val);
   }
@@ -74,8 +72,7 @@ abstract class _$$_PaymentSummaryGroupCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DateTimeStringValue createdDate,
-      List<PaymentSummaryDetails> paymentSummaryDetails});
+      {DateTimeStringValue createdDate, List<PaymentSummaryDetails> details});
 }
 
 /// @nodoc
@@ -90,16 +87,16 @@ class __$$_PaymentSummaryGroupCopyWithImpl<$Res>
   @override
   $Res call({
     Object? createdDate = null,
-    Object? paymentSummaryDetails = null,
+    Object? details = null,
   }) {
     return _then(_$_PaymentSummaryGroup(
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      paymentSummaryDetails: null == paymentSummaryDetails
-          ? _value._paymentSummaryDetails
-          : paymentSummaryDetails // ignore: cast_nullable_to_non_nullable
+      details: null == details
+          ? _value._details
+          : details // ignore: cast_nullable_to_non_nullable
               as List<PaymentSummaryDetails>,
     ));
   }
@@ -110,23 +107,22 @@ class __$$_PaymentSummaryGroupCopyWithImpl<$Res>
 class _$_PaymentSummaryGroup implements _PaymentSummaryGroup {
   _$_PaymentSummaryGroup(
       {required this.createdDate,
-      required final List<PaymentSummaryDetails> paymentSummaryDetails})
-      : _paymentSummaryDetails = paymentSummaryDetails;
+      required final List<PaymentSummaryDetails> details})
+      : _details = details;
 
   @override
   final DateTimeStringValue createdDate;
-  final List<PaymentSummaryDetails> _paymentSummaryDetails;
+  final List<PaymentSummaryDetails> _details;
   @override
-  List<PaymentSummaryDetails> get paymentSummaryDetails {
-    if (_paymentSummaryDetails is EqualUnmodifiableListView)
-      return _paymentSummaryDetails;
+  List<PaymentSummaryDetails> get details {
+    if (_details is EqualUnmodifiableListView) return _details;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_paymentSummaryDetails);
+    return EqualUnmodifiableListView(_details);
   }
 
   @override
   String toString() {
-    return 'PaymentSummaryGroup(createdDate: $createdDate, paymentSummaryDetails: $paymentSummaryDetails)';
+    return 'PaymentSummaryGroup(createdDate: $createdDate, details: $details)';
   }
 
   @override
@@ -136,13 +132,12 @@ class _$_PaymentSummaryGroup implements _PaymentSummaryGroup {
             other is _$_PaymentSummaryGroup &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
-            const DeepCollectionEquality()
-                .equals(other._paymentSummaryDetails, _paymentSummaryDetails));
+            const DeepCollectionEquality().equals(other._details, _details));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, createdDate,
-      const DeepCollectionEquality().hash(_paymentSummaryDetails));
+  int get hashCode => Object.hash(
+      runtimeType, createdDate, const DeepCollectionEquality().hash(_details));
 
   @JsonKey(ignore: true)
   @override
@@ -155,13 +150,13 @@ class _$_PaymentSummaryGroup implements _PaymentSummaryGroup {
 abstract class _PaymentSummaryGroup implements PaymentSummaryGroup {
   factory _PaymentSummaryGroup(
           {required final DateTimeStringValue createdDate,
-          required final List<PaymentSummaryDetails> paymentSummaryDetails}) =
+          required final List<PaymentSummaryDetails> details}) =
       _$_PaymentSummaryGroup;
 
   @override
   DateTimeStringValue get createdDate;
   @override
-  List<PaymentSummaryDetails> get paymentSummaryDetails;
+  List<PaymentSummaryDetails> get details;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentSummaryGroupCopyWith<_$_PaymentSummaryGroup> get copyWith =>

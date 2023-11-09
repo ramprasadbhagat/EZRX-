@@ -433,7 +433,7 @@ void main() {
         verify(
           () => paymentSummaryDetailsBlockMock.add(
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-              paymentSummaryDetails: PaymentSummaryDetails.empty().copyWith(
+              details: PaymentSummaryDetails.empty().copyWith(
                 paymentID: notificationList.first.saleDocument,
               ),
             ),
