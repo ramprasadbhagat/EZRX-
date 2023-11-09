@@ -33,43 +33,23 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
             _ListTileThemeWidget(
               key: WidgetKeys.showProductCheckbox('Items with offers'),
               value: state.materialFilter.isProductOffer,
-              onChanged: (value) {
-                if (state.materialFilter.bundleOffers) {
-                  context.read<MaterialFilterBloc>().add(
-                        MaterialFilterEvent.updateSelectedMaterialFilter(
-                          MaterialFilterType.bundleOffers,
-                          !state.materialFilter.bundleOffers,
-                        ),
-                      );
-                }
-                context.read<MaterialFilterBloc>().add(
-                      MaterialFilterEvent.updateSelectedMaterialFilter(
-                        MaterialFilterType.productOffers,
-                        !state.materialFilter.isProductOffer,
-                      ),
-                    );
-              },
+              onChanged: (value) => context.read<MaterialFilterBloc>().add(
+                    MaterialFilterEvent.updateSelectedMaterialFilter(
+                      MaterialFilterType.productOffers,
+                      !state.materialFilter.isProductOffer,
+                    ),
+                  ),
               title: 'Items with offers',
             ),
             _ListTileThemeWidget(
               key: WidgetKeys.showProductCheckbox('Bundle offers'),
               value: state.materialFilter.bundleOffers,
-              onChanged: (value) {
-                if (!state.materialFilter.isProductOffer) {
-                  context.read<MaterialFilterBloc>().add(
-                        MaterialFilterEvent.updateSelectedMaterialFilter(
-                          MaterialFilterType.productOffers,
-                          !state.materialFilter.isProductOffer,
-                        ),
-                      );
-                }
-                context.read<MaterialFilterBloc>().add(
-                      MaterialFilterEvent.updateSelectedMaterialFilter(
-                        MaterialFilterType.bundleOffers,
-                        !state.materialFilter.bundleOffers,
-                      ),
-                    );
-              },
+              onChanged: (value) => context.read<MaterialFilterBloc>().add(
+                    MaterialFilterEvent.updateSelectedMaterialFilter(
+                      MaterialFilterType.bundleOffers,
+                      !state.materialFilter.bundleOffers,
+                    ),
+                  ),
               title: 'Bundle offers',
             ),
             if (context.read<EligibilityBloc>().state.comboDealEligible)
