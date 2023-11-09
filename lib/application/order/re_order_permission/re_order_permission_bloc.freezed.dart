@@ -18,42 +18,55 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ReOrderPermissionEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)
+        initialized,
+    required TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             OrderNumber orderNumberWillUpsert)
-        fetch,
+        fetchOrder,
+    required TResult Function(
+            OrderHistory orderHistoryDetail, OrderHistoryItem item)
+        fetchItem,
     required TResult Function(OrderNumber orderNumberWillUpsert)
         resetOrderNumberWillUpsert,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)?
+        initialized,
+    TResult? Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             OrderNumber orderNumberWillUpsert)?
-        fetch,
+        fetchOrder,
+    TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
     TResult? Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)?
+        initialized,
+    TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             OrderNumber orderNumberWillUpsert)?
-        fetch,
+        fetchOrder,
+    TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
     TResult Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -62,7 +75,8 @@ mixin _$ReOrderPermissionEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchOrder value) fetchOrder,
+    required TResult Function(_FetchItem value) fetchItem,
     required TResult Function(_ResetOrderNumberWillUpsert value)
         resetOrderNumberWillUpsert,
   }) =>
@@ -70,7 +84,8 @@ mixin _$ReOrderPermissionEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchOrder value)? fetchOrder,
+    TResult? Function(_FetchItem value)? fetchItem,
     TResult? Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
   }) =>
@@ -78,7 +93,8 @@ mixin _$ReOrderPermissionEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchOrder value)? fetchOrder,
+    TResult Function(_FetchItem value)? fetchItem,
     TResult Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -110,6 +126,17 @@ abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesOrganisationConfigs});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
 }
 
 /// @nodoc
@@ -119,162 +146,16 @@ class __$$_InitializedCopyWithImpl<$Res>
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
-
-  @override
-  String toString() {
-    return 'ReOrderPermissionEvent.initialized()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumberWillUpsert)
-        fetch,
-    required TResult Function(OrderNumber orderNumberWillUpsert)
-        resetOrderNumberWillUpsert,
-  }) {
-    return initialized();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumberWillUpsert)?
-        fetch,
-    TResult? Function(OrderNumber orderNumberWillUpsert)?
-        resetOrderNumberWillUpsert,
-  }) {
-    return initialized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumberWillUpsert)?
-        fetch,
-    TResult Function(OrderNumber orderNumberWillUpsert)?
-        resetOrderNumberWillUpsert,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_ResetOrderNumberWillUpsert value)
-        resetOrderNumberWillUpsert,
-  }) {
-    return initialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_ResetOrderNumberWillUpsert value)?
-        resetOrderNumberWillUpsert,
-  }) {
-    return initialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_ResetOrderNumberWillUpsert value)?
-        resetOrderNumberWillUpsert,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initialized implements ReOrderPermissionEvent {
-  const factory _Initialized() = _$_Initialized;
-}
-
-/// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
-      CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      SalesOrganisation salesOrganisation,
-      OrderNumber orderNumberWillUpsert});
-
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-}
-
-/// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ReOrderPermissionEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryDetailsOrderItems = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? salesOrganisation = null,
-    Object? orderNumberWillUpsert = null,
+    Object? salesOrganisationConfigs = null,
   }) {
-    return _then(_$_Fetch(
-      orderHistoryDetailsOrderItems: null == orderHistoryDetailsOrderItems
-          ? _value._orderHistoryDetailsOrderItems
-          : orderHistoryDetailsOrderItems // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsOrderItem>,
+    return _then(_$_Initialized(
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -287,10 +168,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      orderNumberWillUpsert: null == orderNumberWillUpsert
-          ? _value.orderNumberWillUpsert
-          : orderNumberWillUpsert // ignore: cast_nullable_to_non_nullable
-              as OrderNumber,
+      salesOrganisationConfigs: null == salesOrganisationConfigs
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
     ));
   }
 
@@ -317,17 +198,239 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(salesOrganisation: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(
+        _value.salesOrganisationConfigs, (value) {
+      return _then(_value.copyWith(salesOrganisationConfigs: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
-      {required final List<OrderHistoryDetailsOrderItem>
-          orderHistoryDetailsOrderItems,
-      required this.customerCodeInfo,
+class _$_Initialized implements _Initialized {
+  const _$_Initialized(
+      {required this.customerCodeInfo,
       required this.shipToInfo,
       required this.salesOrganisation,
+      required this.salesOrganisationConfigs});
+
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs salesOrganisationConfigs;
+
+  @override
+  String toString() {
+    return 'ReOrderPermissionEvent.initialized(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(
+                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
+                other.salesOrganisationConfigs == salesOrganisationConfigs));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, customerCodeInfo, shipToInfo,
+      salesOrganisation, salesOrganisationConfigs);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)
+        initialized,
+    required TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+            OrderNumber orderNumberWillUpsert)
+        fetchOrder,
+    required TResult Function(
+            OrderHistory orderHistoryDetail, OrderHistoryItem item)
+        fetchItem,
+    required TResult Function(OrderNumber orderNumberWillUpsert)
+        resetOrderNumberWillUpsert,
+  }) {
+    return initialized(customerCodeInfo, shipToInfo, salesOrganisation,
+        salesOrganisationConfigs);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)?
+        initialized,
+    TResult? Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+            OrderNumber orderNumberWillUpsert)?
+        fetchOrder,
+    TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
+    TResult? Function(OrderNumber orderNumberWillUpsert)?
+        resetOrderNumberWillUpsert,
+  }) {
+    return initialized?.call(customerCodeInfo, shipToInfo, salesOrganisation,
+        salesOrganisationConfigs);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)?
+        initialized,
+    TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+            OrderNumber orderNumberWillUpsert)?
+        fetchOrder,
+    TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
+    TResult Function(OrderNumber orderNumberWillUpsert)?
+        resetOrderNumberWillUpsert,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(customerCodeInfo, shipToInfo, salesOrganisation,
+          salesOrganisationConfigs);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchOrder value) fetchOrder,
+    required TResult Function(_FetchItem value) fetchItem,
+    required TResult Function(_ResetOrderNumberWillUpsert value)
+        resetOrderNumberWillUpsert,
+  }) {
+    return initialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchOrder value)? fetchOrder,
+    TResult? Function(_FetchItem value)? fetchItem,
+    TResult? Function(_ResetOrderNumberWillUpsert value)?
+        resetOrderNumberWillUpsert,
+  }) {
+    return initialized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchOrder value)? fetchOrder,
+    TResult Function(_FetchItem value)? fetchItem,
+    TResult Function(_ResetOrderNumberWillUpsert value)?
+        resetOrderNumberWillUpsert,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initialized implements ReOrderPermissionEvent {
+  const factory _Initialized(
+          {required final CustomerCodeInfo customerCodeInfo,
+          required final ShipToInfo shipToInfo,
+          required final SalesOrganisation salesOrganisation,
+          required final SalesOrganisationConfigs salesOrganisationConfigs}) =
+      _$_Initialized;
+
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get salesOrganisationConfigs;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchOrderCopyWith<$Res> {
+  factory _$$_FetchOrderCopyWith(
+          _$_FetchOrder value, $Res Function(_$_FetchOrder) then) =
+      __$$_FetchOrderCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+      OrderNumber orderNumberWillUpsert});
+}
+
+/// @nodoc
+class __$$_FetchOrderCopyWithImpl<$Res>
+    extends _$ReOrderPermissionEventCopyWithImpl<$Res, _$_FetchOrder>
+    implements _$$_FetchOrderCopyWith<$Res> {
+  __$$_FetchOrderCopyWithImpl(
+      _$_FetchOrder _value, $Res Function(_$_FetchOrder) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? orderHistoryDetailsOrderItems = null,
+    Object? orderNumberWillUpsert = null,
+  }) {
+    return _then(_$_FetchOrder(
+      orderHistoryDetailsOrderItems: null == orderHistoryDetailsOrderItems
+          ? _value._orderHistoryDetailsOrderItems
+          : orderHistoryDetailsOrderItems // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistoryDetailsOrderItem>,
+      orderNumberWillUpsert: null == orderNumberWillUpsert
+          ? _value.orderNumberWillUpsert
+          : orderNumberWillUpsert // ignore: cast_nullable_to_non_nullable
+              as OrderNumber,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_FetchOrder implements _FetchOrder {
+  const _$_FetchOrder(
+      {required final List<OrderHistoryDetailsOrderItem>
+          orderHistoryDetailsOrderItems,
       required this.orderNumberWillUpsert})
       : _orderHistoryDetailsOrderItems = orderHistoryDetailsOrderItems;
 
@@ -341,33 +444,21 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
   final OrderNumber orderNumberWillUpsert;
 
   @override
   String toString() {
-    return 'ReOrderPermissionEvent.fetch(orderHistoryDetailsOrderItems: $orderHistoryDetailsOrderItems, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrganisation: $salesOrganisation, orderNumberWillUpsert: $orderNumberWillUpsert)';
+    return 'ReOrderPermissionEvent.fetchOrder(orderHistoryDetailsOrderItems: $orderHistoryDetailsOrderItems, orderNumberWillUpsert: $orderNumberWillUpsert)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$_FetchOrder &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryDetailsOrderItems,
                 _orderHistoryDetailsOrderItems) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
             (identical(other.orderNumberWillUpsert, orderNumberWillUpsert) ||
                 other.orderNumberWillUpsert == orderNumberWillUpsert));
   }
@@ -376,71 +467,79 @@ class _$_Fetch implements _Fetch {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_orderHistoryDetailsOrderItems),
-      customerCodeInfo,
-      shipToInfo,
-      salesOrganisation,
       orderNumberWillUpsert);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$_FetchOrderCopyWith<_$_FetchOrder> get copyWith =>
+      __$$_FetchOrderCopyWithImpl<_$_FetchOrder>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)
+        initialized,
+    required TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             OrderNumber orderNumberWillUpsert)
-        fetch,
+        fetchOrder,
+    required TResult Function(
+            OrderHistory orderHistoryDetail, OrderHistoryItem item)
+        fetchItem,
     required TResult Function(OrderNumber orderNumberWillUpsert)
         resetOrderNumberWillUpsert,
   }) {
-    return fetch(orderHistoryDetailsOrderItems, customerCodeInfo, shipToInfo,
-        salesOrganisation, orderNumberWillUpsert);
+    return fetchOrder(orderHistoryDetailsOrderItems, orderNumberWillUpsert);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)?
+        initialized,
+    TResult? Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             OrderNumber orderNumberWillUpsert)?
-        fetch,
+        fetchOrder,
+    TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
     TResult? Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
   }) {
-    return fetch?.call(orderHistoryDetailsOrderItems, customerCodeInfo,
-        shipToInfo, salesOrganisation, orderNumberWillUpsert);
+    return fetchOrder?.call(
+        orderHistoryDetailsOrderItems, orderNumberWillUpsert);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)?
+        initialized,
+    TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             OrderNumber orderNumberWillUpsert)?
-        fetch,
+        fetchOrder,
+    TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
     TResult Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(orderHistoryDetailsOrderItems, customerCodeInfo, shipToInfo,
-          salesOrganisation, orderNumberWillUpsert);
+    if (fetchOrder != null) {
+      return fetchOrder(orderHistoryDetailsOrderItems, orderNumberWillUpsert);
     }
     return orElse();
   }
@@ -449,56 +548,263 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchOrder value) fetchOrder,
+    required TResult Function(_FetchItem value) fetchItem,
     required TResult Function(_ResetOrderNumberWillUpsert value)
         resetOrderNumberWillUpsert,
   }) {
-    return fetch(this);
+    return fetchOrder(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchOrder value)? fetchOrder,
+    TResult? Function(_FetchItem value)? fetchItem,
     TResult? Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
   }) {
-    return fetch?.call(this);
+    return fetchOrder?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchOrder value)? fetchOrder,
+    TResult Function(_FetchItem value)? fetchItem,
     TResult Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(this);
+    if (fetchOrder != null) {
+      return fetchOrder(this);
     }
     return orElse();
   }
 }
 
-abstract class _Fetch implements ReOrderPermissionEvent {
-  const factory _Fetch(
+abstract class _FetchOrder implements ReOrderPermissionEvent {
+  const factory _FetchOrder(
       {required final List<OrderHistoryDetailsOrderItem>
           orderHistoryDetailsOrderItems,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final SalesOrganisation salesOrganisation,
-      required final OrderNumber orderNumberWillUpsert}) = _$_Fetch;
+      required final OrderNumber orderNumberWillUpsert}) = _$_FetchOrder;
 
   List<OrderHistoryDetailsOrderItem> get orderHistoryDetailsOrderItems;
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
-  SalesOrganisation get salesOrganisation;
   OrderNumber get orderNumberWillUpsert;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$_FetchOrderCopyWith<_$_FetchOrder> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchItemCopyWith<$Res> {
+  factory _$$_FetchItemCopyWith(
+          _$_FetchItem value, $Res Function(_$_FetchItem) then) =
+      __$$_FetchItemCopyWithImpl<$Res>;
+  @useResult
+  $Res call({OrderHistory orderHistoryDetail, OrderHistoryItem item});
+
+  $OrderHistoryCopyWith<$Res> get orderHistoryDetail;
+  $OrderHistoryItemCopyWith<$Res> get item;
+}
+
+/// @nodoc
+class __$$_FetchItemCopyWithImpl<$Res>
+    extends _$ReOrderPermissionEventCopyWithImpl<$Res, _$_FetchItem>
+    implements _$$_FetchItemCopyWith<$Res> {
+  __$$_FetchItemCopyWithImpl(
+      _$_FetchItem _value, $Res Function(_$_FetchItem) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? orderHistoryDetail = null,
+    Object? item = null,
+  }) {
+    return _then(_$_FetchItem(
+      orderHistoryDetail: null == orderHistoryDetail
+          ? _value.orderHistoryDetail
+          : orderHistoryDetail // ignore: cast_nullable_to_non_nullable
+              as OrderHistory,
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as OrderHistoryItem,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderHistoryCopyWith<$Res> get orderHistoryDetail {
+    return $OrderHistoryCopyWith<$Res>(_value.orderHistoryDetail, (value) {
+      return _then(_value.copyWith(orderHistoryDetail: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderHistoryItemCopyWith<$Res> get item {
+    return $OrderHistoryItemCopyWith<$Res>(_value.item, (value) {
+      return _then(_value.copyWith(item: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_FetchItem implements _FetchItem {
+  const _$_FetchItem({required this.orderHistoryDetail, required this.item});
+
+  @override
+  final OrderHistory orderHistoryDetail;
+  @override
+  final OrderHistoryItem item;
+
+  @override
+  String toString() {
+    return 'ReOrderPermissionEvent.fetchItem(orderHistoryDetail: $orderHistoryDetail, item: $item)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchItem &&
+            (identical(other.orderHistoryDetail, orderHistoryDetail) ||
+                other.orderHistoryDetail == orderHistoryDetail) &&
+            (identical(other.item, item) || other.item == item));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, orderHistoryDetail, item);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchItemCopyWith<_$_FetchItem> get copyWith =>
+      __$$_FetchItemCopyWithImpl<_$_FetchItem>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)
+        initialized,
+    required TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+            OrderNumber orderNumberWillUpsert)
+        fetchOrder,
+    required TResult Function(
+            OrderHistory orderHistoryDetail, OrderHistoryItem item)
+        fetchItem,
+    required TResult Function(OrderNumber orderNumberWillUpsert)
+        resetOrderNumberWillUpsert,
+  }) {
+    return fetchItem(orderHistoryDetail, item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)?
+        initialized,
+    TResult? Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+            OrderNumber orderNumberWillUpsert)?
+        fetchOrder,
+    TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
+    TResult? Function(OrderNumber orderNumberWillUpsert)?
+        resetOrderNumberWillUpsert,
+  }) {
+    return fetchItem?.call(orderHistoryDetail, item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)?
+        initialized,
+    TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+            OrderNumber orderNumberWillUpsert)?
+        fetchOrder,
+    TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
+    TResult Function(OrderNumber orderNumberWillUpsert)?
+        resetOrderNumberWillUpsert,
+    required TResult orElse(),
+  }) {
+    if (fetchItem != null) {
+      return fetchItem(orderHistoryDetail, item);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchOrder value) fetchOrder,
+    required TResult Function(_FetchItem value) fetchItem,
+    required TResult Function(_ResetOrderNumberWillUpsert value)
+        resetOrderNumberWillUpsert,
+  }) {
+    return fetchItem(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchOrder value)? fetchOrder,
+    TResult? Function(_FetchItem value)? fetchItem,
+    TResult? Function(_ResetOrderNumberWillUpsert value)?
+        resetOrderNumberWillUpsert,
+  }) {
+    return fetchItem?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchOrder value)? fetchOrder,
+    TResult Function(_FetchItem value)? fetchItem,
+    TResult Function(_ResetOrderNumberWillUpsert value)?
+        resetOrderNumberWillUpsert,
+    required TResult orElse(),
+  }) {
+    if (fetchItem != null) {
+      return fetchItem(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchItem implements ReOrderPermissionEvent {
+  const factory _FetchItem(
+      {required final OrderHistory orderHistoryDetail,
+      required final OrderHistoryItem item}) = _$_FetchItem;
+
+  OrderHistory get orderHistoryDetail;
+  OrderHistoryItem get item;
+  @JsonKey(ignore: true)
+  _$$_FetchItemCopyWith<_$_FetchItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -571,14 +877,19 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)
+        initialized,
+    required TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             OrderNumber orderNumberWillUpsert)
-        fetch,
+        fetchOrder,
+    required TResult Function(
+            OrderHistory orderHistoryDetail, OrderHistoryItem item)
+        fetchItem,
     required TResult Function(OrderNumber orderNumberWillUpsert)
         resetOrderNumberWillUpsert,
   }) {
@@ -588,14 +899,18 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)?
+        initialized,
+    TResult? Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             OrderNumber orderNumberWillUpsert)?
-        fetch,
+        fetchOrder,
+    TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
     TResult? Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
   }) {
@@ -605,14 +920,18 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
-            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs)?
+        initialized,
+    TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
             OrderNumber orderNumberWillUpsert)?
-        fetch,
+        fetchOrder,
+    TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
     TResult Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -627,7 +946,8 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchOrder value) fetchOrder,
+    required TResult Function(_FetchItem value) fetchItem,
     required TResult Function(_ResetOrderNumberWillUpsert value)
         resetOrderNumberWillUpsert,
   }) {
@@ -638,7 +958,8 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchOrder value)? fetchOrder,
+    TResult? Function(_FetchItem value)? fetchItem,
     TResult? Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
   }) {
@@ -649,7 +970,8 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchOrder value)? fetchOrder,
+    TResult Function(_FetchItem value)? fetchItem,
     TResult Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -674,12 +996,16 @@ abstract class _ResetOrderNumberWillUpsert implements ReOrderPermissionEvent {
 
 /// @nodoc
 mixin _$ReOrderPermissionState {
-  List<OrderHistoryDetailsOrderItem> get validOrderHistoryDetailsOrderItems =>
-      throw _privateConstructorUsedError;
+  List<MaterialInfo> get validOrderItems => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   OrderNumber get orderNumberWillUpsert => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
+  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get salesOrganisationConfigs =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReOrderPermissionStateCopyWith<ReOrderPermissionState> get copyWith =>
@@ -693,10 +1019,19 @@ abstract class $ReOrderPermissionStateCopyWith<$Res> {
       _$ReOrderPermissionStateCopyWithImpl<$Res, ReOrderPermissionState>;
   @useResult
   $Res call(
-      {List<OrderHistoryDetailsOrderItem> validOrderHistoryDetailsOrderItems,
+      {List<MaterialInfo> validOrderItems,
       bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      OrderNumber orderNumberWillUpsert});
+      OrderNumber orderNumberWillUpsert,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesOrganisationConfigs});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
 }
 
 /// @nodoc
@@ -713,17 +1048,20 @@ class _$ReOrderPermissionStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? validOrderHistoryDetailsOrderItems = null,
+    Object? validOrderItems = null,
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
     Object? orderNumberWillUpsert = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? salesOrganisation = null,
+    Object? salesOrganisationConfigs = null,
   }) {
     return _then(_value.copyWith(
-      validOrderHistoryDetailsOrderItems: null ==
-              validOrderHistoryDetailsOrderItems
-          ? _value.validOrderHistoryDetailsOrderItems
-          : validOrderHistoryDetailsOrderItems // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsOrderItem>,
+      validOrderItems: null == validOrderItems
+          ? _value.validOrderItems
+          : validOrderItems // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -736,7 +1074,56 @@ class _$ReOrderPermissionStateCopyWithImpl<$Res,
           ? _value.orderNumberWillUpsert
           : orderNumberWillUpsert // ignore: cast_nullable_to_non_nullable
               as OrderNumber,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      salesOrganisationConfigs: null == salesOrganisationConfigs
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(
+        _value.salesOrganisationConfigs, (value) {
+      return _then(_value.copyWith(salesOrganisationConfigs: value) as $Val);
+    });
   }
 }
 
@@ -749,10 +1136,23 @@ abstract class _$$_ReOrderPermissionStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<OrderHistoryDetailsOrderItem> validOrderHistoryDetailsOrderItems,
+      {List<MaterialInfo> validOrderItems,
       bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      OrderNumber orderNumberWillUpsert});
+      OrderNumber orderNumberWillUpsert,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesOrganisationConfigs});
+
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
 }
 
 /// @nodoc
@@ -767,17 +1167,20 @@ class __$$_ReOrderPermissionStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? validOrderHistoryDetailsOrderItems = null,
+    Object? validOrderItems = null,
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
     Object? orderNumberWillUpsert = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? salesOrganisation = null,
+    Object? salesOrganisationConfigs = null,
   }) {
     return _then(_$_ReOrderPermissionState(
-      validOrderHistoryDetailsOrderItems: null ==
-              validOrderHistoryDetailsOrderItems
-          ? _value._validOrderHistoryDetailsOrderItems
-          : validOrderHistoryDetailsOrderItems // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsOrderItem>,
+      validOrderItems: null == validOrderItems
+          ? _value._validOrderItems
+          : validOrderItems // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -790,6 +1193,22 @@ class __$$_ReOrderPermissionStateCopyWithImpl<$Res>
           ? _value.orderNumberWillUpsert
           : orderNumberWillUpsert // ignore: cast_nullable_to_non_nullable
               as OrderNumber,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      salesOrganisationConfigs: null == salesOrganisationConfigs
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
     ));
   }
 }
@@ -798,21 +1217,22 @@ class __$$_ReOrderPermissionStateCopyWithImpl<$Res>
 
 class _$_ReOrderPermissionState implements _ReOrderPermissionState {
   const _$_ReOrderPermissionState(
-      {required final List<OrderHistoryDetailsOrderItem>
-          validOrderHistoryDetailsOrderItems,
+      {required final List<MaterialInfo> validOrderItems,
       required this.isFetching,
       required this.failureOrSuccessOption,
-      required this.orderNumberWillUpsert})
-      : _validOrderHistoryDetailsOrderItems =
-            validOrderHistoryDetailsOrderItems;
+      required this.orderNumberWillUpsert,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.salesOrganisation,
+      required this.salesOrganisationConfigs})
+      : _validOrderItems = validOrderItems;
 
-  final List<OrderHistoryDetailsOrderItem> _validOrderHistoryDetailsOrderItems;
+  final List<MaterialInfo> _validOrderItems;
   @override
-  List<OrderHistoryDetailsOrderItem> get validOrderHistoryDetailsOrderItems {
-    if (_validOrderHistoryDetailsOrderItems is EqualUnmodifiableListView)
-      return _validOrderHistoryDetailsOrderItems;
+  List<MaterialInfo> get validOrderItems {
+    if (_validOrderItems is EqualUnmodifiableListView) return _validOrderItems;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_validOrderHistoryDetailsOrderItems);
+    return EqualUnmodifiableListView(_validOrderItems);
   }
 
   @override
@@ -821,10 +1241,18 @@ class _$_ReOrderPermissionState implements _ReOrderPermissionState {
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
   final OrderNumber orderNumberWillUpsert;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs salesOrganisationConfigs;
 
   @override
   String toString() {
-    return 'ReOrderPermissionState(validOrderHistoryDetailsOrderItems: $validOrderHistoryDetailsOrderItems, isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, orderNumberWillUpsert: $orderNumberWillUpsert)';
+    return 'ReOrderPermissionState(validOrderItems: $validOrderItems, isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, orderNumberWillUpsert: $orderNumberWillUpsert, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs)';
   }
 
   @override
@@ -832,24 +1260,36 @@ class _$_ReOrderPermissionState implements _ReOrderPermissionState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReOrderPermissionState &&
-            const DeepCollectionEquality().equals(
-                other._validOrderHistoryDetailsOrderItems,
-                _validOrderHistoryDetailsOrderItems) &&
+            const DeepCollectionEquality()
+                .equals(other._validOrderItems, _validOrderItems) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.orderNumberWillUpsert, orderNumberWillUpsert) ||
-                other.orderNumberWillUpsert == orderNumberWillUpsert));
+                other.orderNumberWillUpsert == orderNumberWillUpsert) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(
+                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
+                other.salesOrganisationConfigs == salesOrganisationConfigs));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_validOrderHistoryDetailsOrderItems),
+      const DeepCollectionEquality().hash(_validOrderItems),
       isFetching,
       failureOrSuccessOption,
-      orderNumberWillUpsert);
+      orderNumberWillUpsert,
+      customerCodeInfo,
+      shipToInfo,
+      salesOrganisation,
+      salesOrganisationConfigs);
 
   @JsonKey(ignore: true)
   @override
@@ -861,21 +1301,32 @@ class _$_ReOrderPermissionState implements _ReOrderPermissionState {
 
 abstract class _ReOrderPermissionState implements ReOrderPermissionState {
   const factory _ReOrderPermissionState(
-      {required final List<OrderHistoryDetailsOrderItem>
-          validOrderHistoryDetailsOrderItems,
+      {required final List<MaterialInfo> validOrderItems,
       required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final OrderNumber
-          orderNumberWillUpsert}) = _$_ReOrderPermissionState;
+      required final OrderNumber orderNumberWillUpsert,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs
+          salesOrganisationConfigs}) = _$_ReOrderPermissionState;
 
   @override
-  List<OrderHistoryDetailsOrderItem> get validOrderHistoryDetailsOrderItems;
+  List<MaterialInfo> get validOrderItems;
   @override
   bool get isFetching;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   OrderNumber get orderNumberWillUpsert;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
+  @override
+  ShipToInfo get shipToInfo;
+  @override
+  SalesOrganisation get salesOrganisation;
+  @override
+  SalesOrganisationConfigs get salesOrganisationConfigs;
   @override
   @JsonKey(ignore: true)
   _$$_ReOrderPermissionStateCopyWith<_$_ReOrderPermissionState> get copyWith =>

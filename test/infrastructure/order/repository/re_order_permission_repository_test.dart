@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/re_order_permission.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_remote.dart';
@@ -130,6 +132,31 @@ void main() {
         result.isRight(),
         true,
       );
+    });
+
+    test(
+        '=> get remotely success and throw the exception when all materials are invalid',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(
+        () => reOrderPermissionRemoteDataSource.getPermission(
+          shipToCode: fakeShipToInfo.shipToCustomerCode,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          materialNumbers:
+              fakeMaterialNumbers.map((e) => e.getOrCrash()).toList(),
+        ),
+      ).thenAnswer(
+        (invocation) async => ReOrderPermission.empty(),
+      );
+
+      final result = await reOrderPermissionRepository.getReorderPermission(
+        shipToInfo: fakeShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        materialNumbers: fakeMaterialNumbers,
+      );
+      expect(result, const Left(ApiFailure.allReorderItemInvalid()));
     });
   });
 }

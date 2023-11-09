@@ -878,3 +878,18 @@ class Prsfd extends ValueObject<String> {
 
   const Prsfd._(this.value);
 }
+
+class LineNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory LineNumber(String input) {
+    return LineNumber._(validateStringNotEmpty(input));
+  }
+
+  int get parentIntValue => getParentLineNumberIntValue(intValue);
+
+  int get intValue => getParsedValue(value.getOrElse(() => ''));
+
+  const LineNumber._(this.value);
+}

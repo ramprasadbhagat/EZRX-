@@ -1,28 +1,31 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
-import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
@@ -35,12 +38,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class MockHTTPService extends Mock implements HttpService {}
-
-class MockAppRouter extends Mock implements AppRouter {}
 
 class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
@@ -49,11 +50,6 @@ class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
 
 class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
     implements ViewByOrderBloc {}
-
-class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
@@ -74,13 +70,19 @@ class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class ReOrderPermissionBlocMock
+    extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
+    implements ReOrderPermissionBloc {}
+
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
+class MixpanelServiceMock extends Mock implements MixpanelService {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  final mockViewByItemsBloc = ViewByItemsBlocMock();
-  final mockViewByItemDetailsBloc = ViewByItemDetailsBlockMock();
-  final mockSalesOrgBloc = SalesOrgMockBloc();
-  final userBlocMock = UserMockBloc();
+  late ViewByItemsBloc mockViewByItemsBloc;
+  late ViewByItemDetailsBloc mockViewByItemDetailsBloc;
   late AuthBloc mockAuthBloc;
   late CustomerCodeBloc customerCodeBlocMock;
   late ViewByOrderBloc viewByOrderBlocMock;
@@ -90,14 +92,10 @@ void main() {
   late ProductImageBlocMock productImageBlocMock;
   late List<OrderStatusTracker> fakeOrderStatusTracker;
   late OrderHistoryItem fakeOrderHistoryItem;
+  late ReOrderPermissionBloc reOrderPermissionBlocMock;
+  late CartBloc cartBlocMock;
+  late MixpanelService mixpanelServiceMock;
 
-  final fakeUser = User.empty().copyWith(
-    username: Username('fake-user'),
-    role: Role.empty().copyWith(
-      type: RoleType('client'),
-    ),
-    enableOrderType: true,
-  );
   const fakeCreatedDate = '20230412';
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
@@ -107,6 +105,12 @@ void main() {
     registerFallbackValue(ShipToInfo.empty());
 
     autoRouterMock = locator<AppRouter>();
+    mixpanelServiceMock = MixpanelServiceMock();
+    reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
+    locator.registerFactory<MixpanelService>(() => mixpanelServiceMock);
+    locator.registerFactory<ReOrderPermissionBloc>(
+      () => reOrderPermissionBlocMock,
+    );
     fakeOrderStatusTracker =
         await OrderStatusTrackerLocalDataSource().getOrderStatusTracker();
     fakeOrderHistoryItem = OrderHistoryItem.empty().copyWith(
@@ -119,22 +123,20 @@ void main() {
   });
   group('Order History Details By Item Page', () {
     setUp(() {
+      cartBlocMock = CartBlocMock();
+      mockViewByItemsBloc = ViewByItemsBlocMock();
+      mockViewByItemDetailsBloc = ViewByItemDetailsBlockMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
       viewByOrderBlocMock = ViewByOrderBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       productImageBlocMock = ProductImageBlocMock();
       mockAuthBloc = MockAuthBloc();
+      when(() => reOrderPermissionBlocMock.state)
+          .thenReturn(ReOrderPermissionState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
-
-      when(() => userBlocMock.state).thenReturn(
-        UserState.initial().copyWith(
-          user: fakeUser,
-        ),
-      );
       when(() => mockViewByItemsBloc.state)
           .thenReturn(ViewByItemsState.initial());
-
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => viewByOrderBlocMock.state)
@@ -145,20 +147,11 @@ void main() {
           .thenReturn(ViewByItemDetailsState.initial());
       when(() => productImageBlocMock.state)
           .thenReturn(ProductImageState.initial());
-
-      when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          user: User.empty().copyWith(
-            role: Role(
-              description: '',
-              name: '',
-              id: '',
-              type: RoleType('client'),
-            ),
-          ),
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('SG')),
+          user: fakeClientUser,
+          salesOrganisation: fakeSGSalesOrganisation,
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerAttr7: CustomerAttr7('ZEV'),
             customerGrp4: CustomerGrp4('VR'),
@@ -175,7 +168,6 @@ void main() {
           BlocProvider<AuthBloc>(
             create: (context) => mockAuthBloc,
           ),
-          BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<AnnouncementBloc>(
             create: (context) => announcementBlocMock,
           ),
@@ -191,12 +183,14 @@ void main() {
           BlocProvider<ViewByItemDetailsBloc>(
             create: (context) => mockViewByItemDetailsBloc,
           ),
-          BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<EligibilityBloc>(
             create: ((context) => eligibilityBlocMock),
           ),
           BlocProvider<ProductImageBloc>(
             create: ((context) => productImageBlocMock),
+          ),
+          BlocProvider<CartBloc>(
+            create: ((context) => cartBlocMock),
           ),
         ],
         child: const Material(
@@ -303,12 +297,6 @@ void main() {
       expect(expectedDelivery, findsNothing);
     });
     testWidgets('When enableSpecialInstructions is false', (tester) async {
-      when(() => mockSalesOrgBloc.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          configs: SalesOrganisationConfigs.empty()
-              .copyWith(enableSpecialInstructions: false),
-        ),
-      );
       when(() => mockViewByItemDetailsBloc.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           isLoading: true,
@@ -334,12 +322,6 @@ void main() {
     });
 
     testWidgets('When enableSpecialInstructions is true', (tester) async {
-      when(() => mockSalesOrgBloc.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          configs: SalesOrganisationConfigs.empty()
-              .copyWith(enableSpecialInstructions: true),
-        ),
-      );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: SalesOrganisationConfigs.empty()
@@ -480,6 +462,11 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
+      await tester.drag(
+        find.byKey(WidgetKeys.viewByItemsOrderDetailPage),
+        const Offset(0, -500),
+      );
+      await tester.pump();
       expect(find.byWidget(ProductTag.onOfferIcon()), findsOneWidget);
     });
 
@@ -498,7 +485,160 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
+      await tester.drag(
+        find.byKey(WidgetKeys.viewByItemsOrderDetailPage),
+        const Offset(0, -500),
+      );
+      await tester.pump();
       expect(find.byWidget(ProductTag.bundleOfferIcon()), findsOneWidget);
+    });
+
+    group('Buy again button -', () {
+      setUp(() {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeClientUser,
+            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+          ),
+        );
+
+        when(() => mockViewByItemDetailsBloc.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem: fakeOrderHistoryItem,
+            viewByItemDetails: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
+          ),
+        );
+      });
+
+      testWidgets('is visible when user role is not sales rep', (tester) async {
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final button = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+        await tester.tap(button);
+        await tester.pump();
+
+        verify(
+          () => mixpanelServiceMock.trackEvent(
+            eventName: MixpanelEvents.buyAgainClicked,
+            properties: any(named: 'properties'),
+          ),
+        ).called(1);
+
+        verify(
+          () => reOrderPermissionBlocMock.add(
+            ReOrderPermissionEvent.fetchItem(
+              orderHistoryDetail: OrderHistory.empty().copyWith(
+                orderHistoryItems: [fakeOrderHistoryItem],
+              ),
+              item: fakeOrderHistoryItem,
+            ),
+          ),
+        ).called(1);
+      });
+
+      testWidgets('is not visible when user role is sales rep', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeInternalSalesRepUser,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton),
+          findsNothing,
+        );
+      });
+
+      testWidgets('nothing happens when tap while loading', (tester) async {
+        when(() => reOrderPermissionBlocMock.state).thenReturn(
+          ReOrderPermissionState.initial().copyWith(isFetching: true),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final button = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+        await tester.tap(button);
+        await tester.pump();
+
+        verifyNever(
+          () => mixpanelServiceMock.trackEvent(
+            eventName: MixpanelEvents.buyAgainClicked,
+            properties: any(named: 'properties'),
+          ),
+        );
+
+        verifyNever(
+          () => reOrderPermissionBlocMock.add(
+            ReOrderPermissionEvent.fetchItem(
+              orderHistoryDetail: OrderHistory.empty().copyWith(
+                orderHistoryItems: [fakeOrderHistoryItem],
+              ),
+              item: fakeOrderHistoryItem,
+            ),
+          ),
+        );
+      });
+
+      testWidgets('show snackbar when checking permission failure',
+          (tester) async {
+        const fakeMessage = 'fake-message';
+        whenListen(
+          reOrderPermissionBlocMock,
+          Stream.fromIterable([
+            ReOrderPermissionState.initial().copyWith(isFetching: true),
+            ReOrderPermissionState.initial().copyWith(
+              isFetching: false,
+              failureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other(fakeMessage))),
+            ),
+          ]),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+        expect(
+          tester
+              .widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage))
+              .data,
+          fakeMessage.tr(),
+        );
+      });
+
+      testWidgets('add to cart and redirect to cart page when reorder is valid',
+          (tester) async {
+        final fakeItem = MaterialInfo.empty().copyWith(
+          quantity: MaterialQty(fakeOrderHistoryItem.qty),
+        );
+        whenListen(
+          reOrderPermissionBlocMock,
+          Stream.fromIterable([
+            ReOrderPermissionState.initial().copyWith(isFetching: true),
+            ReOrderPermissionState.initial().copyWith(
+              isFetching: false,
+              validOrderItems: [fakeItem],
+            ),
+          ]),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        verify(
+          () => cartBlocMock.add(
+            CartEvent.addHistoryItemsToCart(
+              items: [fakeItem],
+              counterOfferDetails: RequestCounterOfferDetails.empty(),
+            ),
+          ),
+        ).called(1);
+        expect(autoRouterMock.current.path, 'orders/cart');
+      });
     });
   });
 }

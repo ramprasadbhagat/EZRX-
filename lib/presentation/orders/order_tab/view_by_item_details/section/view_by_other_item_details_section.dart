@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -73,9 +73,9 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                   price: e.totalPrice.totalPrice
                                                       .toStringAsFixed(2),
                                                   salesOrgConfig: context
-                                                      .read<SalesOrgBloc>()
+                                                      .read<EligibilityBloc>()
                                                       .state
-                                                      .configs,
+                                                      .salesOrgConfigs,
                                                 ),
                                                 statusWidget: StatusLabel(
                                                   key: WidgetKeys

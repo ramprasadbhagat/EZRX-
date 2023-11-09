@@ -59,6 +59,8 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.uploadedFileSizeExceed() = _UploadedFileSizeExceed;
   const factory ApiFailure.paymentAdviceDeleteFailed(String adviceNumber) =
       _PaymentAdviceDeleteFailed;
+  //reorder failure
+  const factory ApiFailure.allReorderItemInvalid() = _AllReorderItemInvalid;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -107,5 +109,6 @@ extension ApiFailureExt on ApiFailure {
             'Can’t upload.This file is larger than 20 MB',
         paymentAdviceDeleteFailed: (paymentAdvice) =>
             'PA #${paymentAdvice.adviceNumber} delete failed',
+        allReorderItemInvalid: (_) => 'All reorder materials are invalid',
       );
 }

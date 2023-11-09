@@ -671,9 +671,9 @@ void main() {
             materialNumber: MaterialNumber('fake-material-number'),
             type: MaterialInfoType('material'),
             parentID: 'fake-parent-Id',
-          )
+            quantity: MaterialQty(1),
+          ),
         ],
-        quantity: [1],
         salesOrganisationConfig: fakeSalesOrganisationConfigs,
       );
       expect(result.isRight(), true);
@@ -714,9 +714,10 @@ void main() {
             materialNumber: MaterialNumber('fake-material-number'),
             type: MaterialInfoType('material'),
             parentID: 'fake-parent-Id',
-          )
+            quantity: MaterialQty(1),
+          ),
         ],
-        quantity: [1],
+
         salesOrganisationConfig: fakeSalesOrganisationConfigs,
       );
       expect(result.isLeft(), true);

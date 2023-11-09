@@ -415,8 +415,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisation: state.salesOrganisation,
           salesOrganisationConfig: state.config,
           shipToInfo: state.shipToInfo,
-          materialInfo: e.priceAggregate.map((e) => e.materialInfo).toList(),
-          quantity: e.quantity,
+          materialInfo: e.items.map((e) {
+            final currentQtyInCart = (e.type.typeMaterial
+                ? state.getQuantityOfProduct(
+                    productNumber: e.materialNumber,
+                  )
+                : state.getQuantityOfBundle(
+                    bundleCode: e.parentID,
+                    materialNumber: e.materialNumber,
+                  ));
+
+            return e.copyWith(
+              quantity: MaterialQty(e.quantity.intValue + currentQtyInCart),
+            );
+          }).toList(),
           language: state.user.settings.languagePreference.languageCode,
           counterOfferDetails: e.counterOfferDetails,
           itemId: '',

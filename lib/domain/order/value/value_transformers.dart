@@ -100,3 +100,5 @@ Zdp8OverrideValue getZdp8OverrideValue(double value) =>
     Zdp8OverrideValue(value);
 
 bool isBonusReturnType(String prsfd) => prsfd == 'B';
+
+int getParentLineNumberIntValue(int value) => value - (value % 10);

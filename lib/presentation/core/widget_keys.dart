@@ -1093,6 +1093,8 @@ class WidgetKeys {
       const Key('viewByItemsOrderDetailInvoiceNumber');
   static Key viewByItemsOrderDetailPoReference =
       const Key('viewByItemsOrderDetailPoReference');
+  static Key viewByItemDetailBuyAgainButton =
+      const Key('viewByItemDetailBuyAgainButton');
   //============================================================
   // View By Orders
   //============================================================

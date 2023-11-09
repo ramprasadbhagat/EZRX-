@@ -47,6 +47,7 @@ mixin _$OrderHistoryItem {
   StringValue get ezrxNumber => throw _privateConstructorUsedError;
   bool get isBundle => throw _privateConstructorUsedError;
   bool get promoStatus => throw _privateConstructorUsedError;
+  LineNumber get lineNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryItemCopyWith<OrderHistoryItem> get copyWith =>
@@ -86,7 +87,8 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       List<PoDocuments> orderHistoryItemPoAttachments,
       StringValue ezrxNumber,
       bool isBundle,
-      bool promoStatus});
+      bool promoStatus,
+      LineNumber lineNumber});
 
   $InvoiceDataCopyWith<$Res> get invoiceData;
   $ProductImagesCopyWith<$Res> get productImages;
@@ -132,6 +134,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
     Object? ezrxNumber = null,
     Object? isBundle = null,
     Object? promoStatus = null,
+    Object? lineNumber = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -242,6 +245,10 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.promoStatus
           : promoStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      lineNumber: null == lineNumber
+          ? _value.lineNumber
+          : lineNumber // ignore: cast_nullable_to_non_nullable
+              as LineNumber,
     ) as $Val);
   }
 
@@ -297,7 +304,8 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       List<PoDocuments> orderHistoryItemPoAttachments,
       StringValue ezrxNumber,
       bool isBundle,
-      bool promoStatus});
+      bool promoStatus,
+      LineNumber lineNumber});
 
   @override
   $InvoiceDataCopyWith<$Res> get invoiceData;
@@ -343,6 +351,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
     Object? ezrxNumber = null,
     Object? isBundle = null,
     Object? promoStatus = null,
+    Object? lineNumber = null,
   }) {
     return _then(_$_OrderHistoryItem(
       materialNumber: null == materialNumber
@@ -453,6 +462,10 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
           ? _value.promoStatus
           : promoStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      lineNumber: null == lineNumber
+          ? _value.lineNumber
+          : lineNumber // ignore: cast_nullable_to_non_nullable
+              as LineNumber,
     ));
   }
 }
@@ -487,7 +500,8 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
       required final List<PoDocuments> orderHistoryItemPoAttachments,
       required this.ezrxNumber,
       required this.isBundle,
-      required this.promoStatus})
+      required this.promoStatus,
+      required this.lineNumber})
       : _orderStatusTracker = orderStatusTracker,
         _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
@@ -560,10 +574,12 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   final bool isBundle;
   @override
   final bool promoStatus;
+  @override
+  final LineNumber lineNumber;
 
   @override
   String toString() {
-    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, manufactureName: $manufactureName, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderStatusTracker: $orderStatusTracker, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus)';
+    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, manufactureName: $manufactureName, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderStatusTracker: $orderStatusTracker, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, lineNumber: $lineNumber)';
   }
 
   @override
@@ -620,7 +636,9 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
             (identical(other.isBundle, isBundle) ||
                 other.isBundle == isBundle) &&
             (identical(other.promoStatus, promoStatus) ||
-                other.promoStatus == promoStatus));
+                other.promoStatus == promoStatus) &&
+            (identical(other.lineNumber, lineNumber) ||
+                other.lineNumber == lineNumber));
   }
 
   @override
@@ -652,7 +670,8 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
         const DeepCollectionEquality().hash(_orderHistoryItemPoAttachments),
         ezrxNumber,
         isBundle,
-        promoStatus
+        promoStatus,
+        lineNumber
       ]);
 
   @JsonKey(ignore: true)
@@ -690,7 +709,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final List<PoDocuments> orderHistoryItemPoAttachments,
       required final StringValue ezrxNumber,
       required final bool isBundle,
-      required final bool promoStatus}) = _$_OrderHistoryItem;
+      required final bool promoStatus,
+      required final LineNumber lineNumber}) = _$_OrderHistoryItem;
   _OrderHistoryItem._() : super._();
 
   @override
@@ -747,6 +767,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   bool get isBundle;
   @override
   bool get promoStatus;
+  @override
+  LineNumber get lineNumber;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryItemCopyWith<_$_OrderHistoryItem> get copyWith =>

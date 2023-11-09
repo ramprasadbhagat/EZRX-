@@ -16,5 +16,19 @@ class OrderHistory with _$OrderHistory {
         orderBasicInformation: OrderHistoryBasicInfo.empty(),
         orderHistoryItems: <OrderHistoryItem>[],
       );
+
   bool get isOthersOrderItemsSectionVisible => orderHistoryItems.isNotEmpty;
+
+  OrderHistoryItem getParentMaterial(OrderHistoryItem bonusMaterial) {
+    if (!bonusMaterial.isBonusMaterial || !bonusMaterial.lineNumber.isValid()) {
+      return OrderHistoryItem.empty();
+    }
+
+    return orderHistoryItems.firstWhere(
+      (item) =>
+          !item.isBonusMaterial &&
+          bonusMaterial.lineNumber.parentIntValue == item.lineNumber.intValue,
+      orElse: () => OrderHistoryItem.empty(),
+    );
+  }
 }

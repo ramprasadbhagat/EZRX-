@@ -51,6 +51,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'promoStatus', defaultValue: false)
         required bool promoStatus,
     @JsonKey(name: 'IsBundle', defaultValue: false) required bool isBundle,
+    @JsonKey(name: 'LineNumber', defaultValue: '') required String lineNumber,
   }) = _OrderHistoryItemDto;
   factory OrderHistoryItemDto.fromDomain(OrderHistoryItem orderHistoryItem) {
     return OrderHistoryItemDto(
@@ -84,6 +85,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       eZRXNumber: orderHistoryItem.ezrxNumber.getOrDefaultValue(''),
       isBundle: orderHistoryItem.isBundle,
       promoStatus: orderHistoryItem.promoStatus,
+      lineNumber: orderHistoryItem.lineNumber.getOrDefaultValue(''),
     );
   }
   OrderHistoryItem toDomain() {
@@ -117,6 +119,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       ezrxNumber: StringValue(eZRXNumber),
       isBundle: isBundle,
       promoStatus: promoStatus,
+      lineNumber: LineNumber(lineNumber),
     );
   }
 

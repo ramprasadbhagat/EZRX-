@@ -24,40 +24,9 @@ class BuyAgainButton extends StatelessWidget {
                   viewByOrderHistoryItem.orderNumber &&
               currentPath != context.router.currentPath,
           listener: (context, reOrderState) {
-            final cartState = context.read<CartBloc>().state;
             context.read<CartBloc>().add(
                   CartEvent.addHistoryItemsToCart(
-                    priceAggregate: reOrderState
-                        .validOrderHistoryDetailsOrderItems
-                        .map(
-                          (e) => PriceAggregate.empty().copyWith(
-                            materialInfo: MaterialInfo.empty().copyWith(
-                              type: e.productType,
-                              materialNumber: e.materialNumber,
-                              parentID:
-                                  e.productType.typeBundle ? e.parentId : '',
-                            ),
-                            salesOrgConfig: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .salesOrgConfigs,
-                          ),
-                        )
-                        .toList(),
-                    quantity: reOrderState.validOrderHistoryDetailsOrderItems
-                        .map(
-                          (e) =>
-                              (e.productType.typeMaterial
-                                  ? cartState.getQuantityOfProduct(
-                                      productNumber: e.materialNumber,
-                                    )
-                                  : cartState.getQuantityOfBundle(
-                                      bundleCode: e.parentId,
-                                      materialNumber: e.materialNumber,
-                                    )) +
-                              e.qty,
-                        )
-                        .toList(),
+                    items: reOrderState.validOrderItems,
                     counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
@@ -87,22 +56,10 @@ class BuyAgainButton extends StatelessWidget {
                         viewByOrderHistoryItem.orderHistoryDetailsOrderItem,
                       );
                       context.read<ReOrderPermissionBloc>().add(
-                            ReOrderPermissionEvent.fetch(
+                            ReOrderPermissionEvent.fetchOrder(
                               orderHistoryDetailsOrderItems:
                                   viewByOrderHistoryItem
                                       .orderHistoryDetailsOrderItem,
-                              salesOrganisation: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              shipToInfo: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .shipToInfo,
-                              customerCodeInfo: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .customerCodeInfo,
                               orderNumberWillUpsert:
                                   viewByOrderHistoryItem.orderNumber,
                             ),

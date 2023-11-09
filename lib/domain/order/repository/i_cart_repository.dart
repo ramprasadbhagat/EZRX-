@@ -71,7 +71,6 @@ abstract class ICartRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required String language,
-    required List<int> quantity,
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
   });

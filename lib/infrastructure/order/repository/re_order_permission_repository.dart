@@ -48,6 +48,12 @@ class ReOrderPermissionRepository implements IReOrderPermissionRepository {
         shipToCode: shipToInfo.shipToCustomerCode,
         salesOrg: salesOrganisation.salesOrg.getValue(),
       );
+      final validMaterialNumbers =
+          reOrderPermission.validMaterials.map((e) => e.materialNumber);
+
+      if (materialNumbers.every((e) => !validMaterialNumbers.contains(e))) {
+        return const Left(ApiFailure.allReorderItemInvalid());
+      }
 
       return Right(reOrderPermission);
     } catch (e) {

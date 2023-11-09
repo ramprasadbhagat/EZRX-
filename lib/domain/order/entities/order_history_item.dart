@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -43,6 +44,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required StringValue ezrxNumber,
     required bool isBundle,
     required bool promoStatus,
+    required LineNumber lineNumber,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -73,6 +75,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         ezrxNumber: StringValue(''),
         isBundle: false,
         promoStatus: false,
+        lineNumber: LineNumber(''),
       );
 
   bool get isOfferItem => !isBundle && !isBonusMaterial && promoStatus;
@@ -91,6 +94,12 @@ class OrderHistoryItem with _$OrderHistoryItem {
   StatusType get productTag {
     return StatusType(isBonusMaterial ? 'Bonus' : '');
   }
+
+  MaterialInfo get reOrderMaterialInfo => MaterialInfo.empty().copyWith(
+        type: MaterialInfoType.material(),
+        materialNumber: materialNumber,
+        quantity: MaterialQty(qty),
+      );
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {

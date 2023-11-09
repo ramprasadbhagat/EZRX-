@@ -1419,7 +1419,6 @@ void main() {
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: '',
               materialInfo: [priceAggregates.first.materialInfo],
-              quantity: [2],
               salesOrganisationConfig: fakeSalesOrganisationConfigs,
             ),
           ).thenAnswer(
@@ -1428,9 +1427,8 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.addHistoryItemsToCart(
-            priceAggregate: [priceAggregates.first],
+            items: [priceAggregates.first.materialInfo],
             counterOfferDetails: RequestCounterOfferDetails.empty(),
-            quantity: [2],
           ),
         ),
         expect: () => [
@@ -1481,7 +1479,6 @@ void main() {
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: '',
               materialInfo: [priceAggregates.first.materialInfo],
-              quantity: [2],
               salesOrganisationConfig: fakeSalesOrganisationConfigs,
             ),
           ).thenAnswer(
@@ -1491,9 +1488,8 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.addHistoryItemsToCart(
-            priceAggregate: [priceAggregates.first],
+            items: [priceAggregates.first.materialInfo],
             counterOfferDetails: RequestCounterOfferDetails.empty(),
-            quantity: [2],
           ),
         ),
         expect: () => [

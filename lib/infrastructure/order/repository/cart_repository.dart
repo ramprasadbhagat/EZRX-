@@ -444,7 +444,6 @@ class CartRepository implements ICartRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required String language,
-    required List<int> quantity,
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
   }) async {
@@ -454,7 +453,7 @@ class CartRepository implements ICartRepository {
       for (var i = 0; i < materialInfo.length; i++) {
         final cartDetail = await upsertCart(
           counterOfferDetails: counterOfferDetails,
-          quantity: quantity[i],
+          quantity: materialInfo[i].quantity.intValue,
           language: language,
           shipToInfo: shipToInfo,
           customerCodeInfo: customerCodeInfo,

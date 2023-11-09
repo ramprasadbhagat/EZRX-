@@ -2,14 +2,21 @@ part of 're_order_permission_bloc.dart';
 
 @freezed
 class ReOrderPermissionEvent with _$ReOrderPermissionEvent {
-  const factory ReOrderPermissionEvent.initialized() = _Initialized;
-  const factory ReOrderPermissionEvent.fetch({
-    required List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+  const factory ReOrderPermissionEvent.initialized({
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+  }) = _Initialized;
+  const factory ReOrderPermissionEvent.fetchOrder({
+    required List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
     required OrderNumber orderNumberWillUpsert,
-  }) = _Fetch;
+  }) = _FetchOrder;
+  const factory ReOrderPermissionEvent.fetchItem({
+    required OrderHistory orderHistoryDetail,
+    required OrderHistoryItem item,
+
+  }) = _FetchItem;
   const factory ReOrderPermissionEvent.resetOrderNumberWillUpsert({
     required OrderNumber orderNumberWillUpsert,
   }) = _ResetOrderNumberWillUpsert;

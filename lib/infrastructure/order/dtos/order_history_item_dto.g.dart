@@ -37,6 +37,7 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
           [],
       promoStatus: json['promoStatus'] as bool? ?? false,
       isBundle: json['IsBundle'] as bool? ?? false,
+      lineNumber: json['LineNumber'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
@@ -69,4 +70,5 @@ Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
           .toList(),
       'promoStatus': instance.promoStatus,
       'IsBundle': instance.isBundle,
+      'LineNumber': instance.lineNumber,
     };

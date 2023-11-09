@@ -161,9 +161,16 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
     if (displayPriceNotAvailable) return 'Price Not Available';
     if (type.isMaterialTypeBonus) return isIDMarket ? '0' : 'FREE';
-    
+
     return price;
   }
+
+  MaterialInfo get reOrderMaterialInfo => MaterialInfo.empty().copyWith(
+        type: productType,
+        materialNumber: materialNumber,
+        parentID: productType.typeBundle ? parentId : '',
+        quantity: MaterialQty(qty),
+      );
 }
 
 extension ViewByOrderDetailsListExtension
