@@ -18,14 +18,7 @@ class _SupportHours extends StatelessWidget {
           height: 8,
         ),
         Text(
-          'Monday to Friday: 8am - 8pm'.tr(),
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ZPColors.extraLightGrey4,
-                fontWeight: FontWeight.w400,
-              ),
-        ),
-        Text(
-          'Saturday: 8am - 5pm'.tr(),
+          'Monday to Friday: 8.30am - 5pm'.tr(),
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: ZPColors.extraLightGrey4,
                 fontWeight: FontWeight.w400,

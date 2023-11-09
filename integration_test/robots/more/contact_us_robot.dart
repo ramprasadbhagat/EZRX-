@@ -78,14 +78,7 @@ class ContactUsRobot extends CommonRobot {
     expect(
       find.descendant(
         of: timeSupport,
-        matching: find.text('Monday to Friday: 8am - 8pm'.tr()),
-      ),
-      findsOneWidget,
-    );
-    expect(
-      find.descendant(
-        of: timeSupport,
-        matching: find.text('Saturday: 8am - 5pm'.tr()),
+        matching: find.text('Monday to Friday: 8.30am - 5pm'.tr()),
       ),
       findsOneWidget,
     );

@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -903,6 +904,20 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         find.byKey(WidgetKeys.customSnackBar),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Test Support Hour', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(
+        find.text('Monday to Friday: 8.30am - 5pm'.tr()),
         findsOneWidget,
       );
     });
