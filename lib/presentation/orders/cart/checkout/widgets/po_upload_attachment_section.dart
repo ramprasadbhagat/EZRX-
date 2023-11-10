@@ -75,6 +75,7 @@ class _PoUploadButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
+      key: WidgetKeys.uploadAttachmentKey,
       style: OutlinedButton.styleFrom(
         minimumSize: const Size(double.maxFinite, 45),
       ),
@@ -218,6 +219,7 @@ class _UploadedFileList extends StatelessWidget {
                 previous.fileUrl != current.fileUrl,
             builder: (context, state) {
               return ListTile(
+                key: WidgetKeys.attachmentsTileKey,
                 contentPadding: EdgeInsets.zero,
                 minVerticalPadding: 10,
                 title: Text(

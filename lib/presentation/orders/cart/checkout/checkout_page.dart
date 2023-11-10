@@ -165,6 +165,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             color: ZPColors.extraLightGrey2,
           ),
           ListTile(
+            key: WidgetKeys.showOrderSumaryListTile,
             onTap: () => _showOrderSumary(context, cartState),
             dense: true,
             visualDensity: VisualDensity.compact,

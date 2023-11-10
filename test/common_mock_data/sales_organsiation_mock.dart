@@ -82,6 +82,22 @@ final fakeSalesOrgConfigPoNumberRequired =
     SalesOrganisationConfigs.empty().copyWith(
   poNumberRequired: PoNumberRequired(true),
 );
+final fakeSalesOrgConfigEnableFutureDeliveryDayRequired =
+    SalesOrganisationConfigs.empty().copyWith(
+  enableFutureDeliveryDay: true,
+);
+final fakeSalesOrgConfigEnableReferenceNoteRequired =
+    SalesOrganisationConfigs.empty().copyWith(
+  enableReferenceNote: true,
+);
+final fakeSalesOrgConfigShowPOAttachmentRequired =
+    SalesOrganisationConfigs.empty().copyWith(
+  showPOAttachment: true,
+);
+final fakeSalesOrgConfigEnableMobileNumberRequired =
+    SalesOrganisationConfigs.empty().copyWith(
+  enableMobileNumber: true,
+);
 
 final fakeSalesOrgConfigPaymentTermsEnabled =
     SalesOrganisationConfigs.empty().copyWith(

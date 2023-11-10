@@ -462,6 +462,7 @@ class _MobileNumber extends StatelessWidget {
                 height: 8,
               ),
               InternationalPhoneNumberInput(
+                key: WidgetKeys.internationalPhoneNumberInput,
                 focusNode: focusNode,
                 countries: const ['MY'],
                 onInputValidated: (bool value) {},

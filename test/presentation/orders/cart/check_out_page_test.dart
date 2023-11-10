@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
@@ -7,6 +8,8 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -15,20 +18,43 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_term.dart'
+    as payment_term;
 import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
+import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:permission_handler/permission_handler.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -62,11 +88,21 @@ class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
     implements OrderSummaryBloc {}
 
+class ComboDealListBlocMock
+    extends MockBloc<ComboDealListEvent, ComboDealListState>
+    implements ComboDealListBloc {}
+
 class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class PriceOverrideBlocMock
+    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
+    implements PriceOverrideBloc {}
+
 class MockAppRouter extends Mock implements AppRouter {}
+
+class MockMixpanelService extends Mock implements MixpanelService {}
 
 void main() {
   late CartBloc cartBloc;
@@ -78,11 +114,28 @@ void main() {
   late CustomerCodeBloc customerCodeBloc;
   late OrderSummaryBloc orderSummaryBlocMock;
   late PoAttachmentBloc poAttachmentBloc;
+  late PriceOverrideBloc priceOverrideBloc;
+  late ComboDealListBloc comboDealListBloc;
   final userBlocMock = UserMockBloc();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
+  final fakeCartProduct = <PriceAggregate>[
+    PriceAggregate.empty().copyWith(
+      materialInfo: MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('123456789'),
+        quantity: MaterialQty(1),
+        taxClassification: MaterialTaxClassification('Product : Full Tax'),
+        tax: 10,
+      ),
+      price: Price.empty().copyWith(
+        finalPrice: MaterialPrice(234.50),
+      ),
+      salesOrgConfig: fakeVNSalesOrgConfigTaxBreakdownEnabled,
+    ),
+  ];
 
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
+    locator.registerSingleton<MixpanelService>(MockMixpanelService());
 
     autoRouterMock = locator<AppRouter>();
   });
@@ -104,6 +157,8 @@ void main() {
       orderSummaryBlocMock = OrderSummaryBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       poAttachmentBloc = PoAttachmentBlocMock();
+      priceOverrideBloc = PriceOverrideBlocMock();
+      comboDealListBloc = ComboDealListBlocMock();
 
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial(),
@@ -116,6 +171,12 @@ void main() {
       );
       when(() => poAttachmentBloc.state).thenReturn(
         PoAttachmentState.initial(),
+      );
+      when(() => priceOverrideBloc.state).thenReturn(
+        PriceOverrideState.initial(),
+      );
+      when(() => comboDealListBloc.state).thenReturn(
+        ComboDealListState.initial(),
       );
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(isFetching: false),
@@ -153,6 +214,9 @@ void main() {
             BlocProvider<PoAttachmentBloc>(
               create: (context) => poAttachmentBloc,
             ),
+            BlocProvider<PriceOverrideBloc>(
+              create: (context) => priceOverrideBloc,
+            ),
             BlocProvider<OrderSummaryBloc>(
               create: (context) => orderSummaryBlocMock,
             ),
@@ -161,6 +225,9 @@ void main() {
             ),
             BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBloc,
+            ),
+            BlocProvider<ComboDealListBloc>(
+              create: (context) => comboDealListBloc,
             ),
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
             BlocProvider<CartBloc>(create: (context) => cartBloc),
@@ -171,6 +238,722 @@ void main() {
         ),
       );
     }
+
+    testWidgets(
+      '=> test checkout page AppBar ',
+      (tester) async {
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        final closeButtonFinder = find.byKey(WidgetKeys.closeButton);
+        expect(closeButtonFinder, findsOneWidget);
+        await tester.tap(closeButtonFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name != 'CheckoutPageRoute', true);
+      },
+    );
+
+    testWidgets(
+      '=> test checkout page bottom Navigation Bar test ',
+      (tester) async {
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        final showOrderSumaryListTileFinder =
+            find.byKey(WidgetKeys.showOrderSumaryListTile);
+        expect(showOrderSumaryListTileFinder, findsOneWidget);
+        await tester.tap(showOrderSumaryListTileFinder);
+        await tester.pump();
+        final orderPriceSummarySheetFinder =
+            find.byKey(WidgetKeys.orderPriceSummarySheet);
+        expect(orderPriceSummarySheetFinder, findsOneWidget);
+        final orderPriceSummarySheetCloseButtonFinder = find.descendant(
+          of: find.byKey(WidgetKeys.closeButton),
+          matching: find.textContaining('Close'.tr()),
+        );
+        expect(orderPriceSummarySheetCloseButtonFinder, findsOneWidget);
+        await tester.tap(orderPriceSummarySheetCloseButtonFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name != 'CheckoutPageRoute', true);
+      },
+    );
+    testWidgets(
+      '=> test checkout page bottom Navigation Bar test with Additional Details',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        final expectedState = [
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+            focusTo: DeliveryInfoLabel.paymentTerm,
+            deliveryInfoData: DeliveryInfoData.empty()
+                .copyWith(contactPerson: ContactPerson('fakeInput')),
+          ),
+        ];
+        whenListen(
+          additionalDetailsBlocMock,
+          Stream.fromIterable(expectedState),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        final showOrderSumaryListTileFinder =
+            find.byKey(WidgetKeys.showOrderSumaryListTile);
+        expect(showOrderSumaryListTileFinder, findsOneWidget);
+        final checkoutStickyGrandTotalFinder =
+            find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        expect(checkoutStickyGrandTotalFinder, findsOneWidget);
+        verify(
+          () => orderSummaryBlocMock.add(
+            OrderSummaryEvent.submitOrder(
+              cartProducts: fakeCartProduct,
+              grandTotal: 234.5,
+              orderValue: 234.5,
+              totalTax: 0.0,
+              data: DeliveryInfoData.empty()
+                  .copyWith(contactPerson: ContactPerson('fakeInput')),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+    testWidgets(
+      '=> test AdditionalDetailsBloc Listener when isValidated is false',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        final expectedState = [
+          AdditionalDetailsState.initial().copyWith(
+            focusTo: DeliveryInfoLabel.contactPerson,
+          ),
+        ];
+        whenListen(
+          additionalDetailsBlocMock,
+          Stream.fromIterable(expectedState),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        final showOrderSumaryListTileFinder =
+            find.byKey(WidgetKeys.showOrderSumaryListTile);
+        expect(showOrderSumaryListTileFinder, findsOneWidget);
+        final checkoutStickyGrandTotalFinder =
+            find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        expect(checkoutStickyGrandTotalFinder, findsOneWidget);
+      },
+    );
+    testWidgets(
+      '=> test OrderSummaryBloc Listener when isSubmitting is false',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        final expectedState = [
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+          OrderSummaryState.initial(),
+        ];
+        whenListen(
+          orderSummaryBlocMock,
+          Stream.fromIterable(expectedState),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        verify(
+          () => orderSummaryBlocMock.add(
+            OrderSummaryEvent.orderConfirmationDetail(
+              priceAggregate: fakeCartProduct,
+            ),
+          ),
+        ).called(1);
+        verify(
+          () => priceOverrideBloc.add(
+            const PriceOverrideEvent.initialized(),
+          ),
+        ).called(1);
+        expect(autoRouterMock.current.name == 'OrderSuccessPageRoute', true);
+      },
+    );
+    testWidgets(
+      '=> test OrderSummaryBloc Listener when isSubmitting is true and api have successful response',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        final expectedState = [
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+            apiFailureOrSuccessOption:
+                optionOf(Right(SubmitOrderResponse.empty())),
+          ),
+        ];
+        whenListen(
+          orderSummaryBlocMock,
+          Stream.fromIterable(expectedState),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+      },
+    );
+    testWidgets(
+      '=> test OrderSummaryBloc Listener when isSubmitting is true and api have failure response',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        final expectedState = [
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('Fake-error'))),
+          ),
+        ];
+        whenListen(
+          orderSummaryBlocMock,
+          Stream.fromIterable(expectedState),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        verify(
+          () => trackMixpanelEvent(
+            MixpanelEvents.placeOrderFailure,
+            props: {
+              MixpanelProps.errorMessage:
+                  const ApiFailure.other('Fake-error').failureMessage,
+            },
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      '=> test Checkout Body ',
+      (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
+                .copyWith(futureDeliveryDay: FutureDeliveryDay('7')),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        final expectedState = [
+          AdditionalDetailsState.initial().copyWith(
+            isLoading: true,
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              greenDeliveryEnabled: true,
+              deliveryDate: DateTimeStringValue(''),
+            ),
+          ),
+          AdditionalDetailsState.initial(),
+        ];
+        whenListen(
+          additionalDetailsBlocMock,
+          Stream.fromIterable(expectedState),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        final deliveryInformationTextFinder =
+            find.textContaining('Delivery information'.tr());
+        expect(deliveryInformationTextFinder, findsOneWidget);
+        final checkoutScrollListFinder =
+            find.byKey(WidgetKeys.checkoutScrollList);
+        final checkoutDeliveryArrowButtonFinder =
+            find.byKey(WidgetKeys.checkoutDeliveryArrowButton);
+        expect(checkoutDeliveryArrowButtonFinder, findsOneWidget);
+        await tester.tap(checkoutDeliveryArrowButtonFinder);
+        final pOReferenceKeyFinder =
+            find.byKey(WidgetKeys.genericKey(key: 'pOReferenceKey'));
+        expect(pOReferenceKeyFinder, findsOneWidget);
+        final deliveryDateFinder = find.byKey(WidgetKeys.deliveryDate);
+        expect(deliveryDateFinder, findsOneWidget);
+        expect(
+          (tester.widget(deliveryDateFinder) as TextFormField)
+              .validator
+              ?.call('DeliveryDate field'),
+          null,
+        );
+        await tester.dragUntilVisible(
+          deliveryDateFinder,
+          checkoutScrollListFinder,
+          const Offset(0, -100),
+        );
+        final selectDateFinder = find.byKey(WidgetKeys.selectDate);
+        expect(selectDateFinder, findsOneWidget);
+        if (DateTime.now().hour <
+            fakeSalesOrgConfigEnableFutureDeliveryDayRequired
+                .salesOrg.cutOffTime) {
+          await tester.tap(selectDateFinder);
+          await tester.pumpAndSettle();
+          expect(find.byType(CalendarDatePicker), findsOneWidget);
+        }
+      },
+    );
+
+    testWidgets('=> test DeliveryInfo', (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableReferenceNote: true,
+            enablePaymentTerms: true,
+            enableMobileNumber: true,
+            enableSpecialInstructions: true,
+          ),
+          salesOrganisation: fakeMYSalesOrganisation,
+        ),
+      );
+      final expectedState = [
+        AdditionalDetailsState.initial().copyWith(
+          isLoading: true,
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            greenDeliveryEnabled: true,
+            deliveryDate: DateTimeStringValue(''),
+          ),
+        ),
+        AdditionalDetailsState.initial(),
+      ];
+      whenListen(
+        additionalDetailsBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final referenceNoteKeyFinder =
+          find.byKey(WidgetKeys.genericKey(key: 'referenceNoteKey'));
+      expect(referenceNoteKeyFinder, findsOneWidget);
+      final paymentTermKeyFinder = find.byKey(WidgetKeys.paymentTermKey);
+      expect(paymentTermKeyFinder, findsOneWidget);
+      final contactPersonKeyFinder =
+          find.byKey(WidgetKeys.genericKey(key: 'contactPersonKey'));
+      expect(contactPersonKeyFinder, findsOneWidget);
+      final mobileNumberFinder = find.byKey(WidgetKeys.mobileNumber);
+      expect(mobileNumberFinder, findsOneWidget);
+      final deliveryInstructionKeyFinder =
+          find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey'));
+      expect(deliveryInstructionKeyFinder, findsOneWidget);
+    });
+    testWidgets('=> test TextEditingValue on change for Reference Note',
+        (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableReferenceNote: true,
+          ),
+          salesOrganisation: fakeMYSalesOrganisation,
+        ),
+      );
+      final expectedState = [
+        AdditionalDetailsState.initial().copyWith(
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            referenceNote: ReferenceNote('fake'),
+          ),
+        ),
+        AdditionalDetailsState.initial().copyWith(
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            referenceNote: ReferenceNote(''),
+          ),
+        ),
+      ];
+      whenListen(
+        additionalDetailsBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final referenceNoteKeyFinder =
+          find.byKey(WidgetKeys.genericKey(key: 'referenceNoteKey'));
+      expect(referenceNoteKeyFinder, findsOneWidget);
+      await tester.enterText(referenceNoteKeyFinder, 'f');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      verify(
+        () => additionalDetailsBlocMock.add(
+          const AdditionalDetailsEvent.onTextChange(
+            label: DeliveryInfoLabel.referenceNote,
+            newValue: 'f',
+          ),
+        ),
+      ).called(1);
+    });
+    testWidgets('=> test TextEditingValue on change for Payment Terms',
+        (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enablePaymentTerms: true,
+          ),
+          salesOrganisation: fakeMYSalesOrganisation,
+        ),
+      );
+      when(() => additionalDetailsBlocMock.state).thenReturn(
+        AdditionalDetailsState.initial().copyWith(
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            paymentTerm: PaymentTerm('fake_input'),
+          ),
+        ),
+      );
+      final expectedState = [
+        PaymentTermState.initial().copyWith(
+          isFetching: true,
+        ),
+        PaymentTermState.initial().copyWith(
+          paymentTerms: [
+            payment_term.PaymentTerm.empty().copyWith(
+              paymentTermCode: 'fake_payment_term',
+              paymentTermDescription: 'fake_payment_term_description',
+            )
+          ],
+        ),
+      ];
+      whenListen(
+        paymentTermBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final paymentTermKeyFinder = find.byKey(WidgetKeys.paymentTermKey);
+      expect(paymentTermKeyFinder, findsOneWidget);
+      final paymentTermDropdownKeyFinder =
+          find.byKey(WidgetKeys.paymentTermDropdownKey);
+      expect(paymentTermDropdownKeyFinder, findsOneWidget);
+      await tester.tap(paymentTermDropdownKeyFinder);
+      await tester.pumpAndSettle();
+      await tester
+          .tap(find.text('fake_payment_term-fake_payment_term_description'));
+      await tester.pumpAndSettle();
+    });
+    testWidgets(
+      '=> test Checkout Body Product Scroll List for material type',
+      (tester) async {
+        when(() => customerCodeBloc.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('12345'),
+                  principalData: PrincipalData(
+                    principalCode: PrincipalCode(
+                      'fake_principalCode',
+                    ),
+                    principalName: PrincipalName('fake_principalName-1'),
+                  ),
+                  type: MaterialInfoType.material(),
+                ),
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: fakeCartProduct.first.materialInfo,
+                  )
+                ],
+                bonusSampleItems: [
+                  BonusSampleItem.empty()
+                      .copyWith(materialNumber: MaterialNumber('12345'))
+                ],
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            additionInfo: {
+              MaterialNumber('12345'): ProductMetaData.empty().copyWith(
+                productImages: [
+                  ProductImages.empty()
+                      .copyWith(thumbNail: 'fake_product_thumbNail')
+                ],
+              )
+            },
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
+                .copyWith(futureDeliveryDay: FutureDeliveryDay('1')),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial(),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        final checkoutScrollListFinder =
+            find.byKey(WidgetKeys.checkoutScrollList);
+        final addressInfoSectionFinder = find.byType(AddressInfoSection);
+        expect(checkoutScrollListFinder, findsOneWidget);
+        expect(addressInfoSectionFinder, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      '=> test Checkout Body Product Scroll List for bundle type',
+      (tester) async {
+        when(() => customerCodeBloc.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('12345'),
+                  principalData: PrincipalData(
+                    principalCode: PrincipalCode(
+                      'fake_principalCode',
+                    ),
+                    principalName: PrincipalName('fake_principalName-1'),
+                  ),
+                  type: MaterialInfoType.bundle(),
+                ),
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: fakeCartProduct.first.materialInfo,
+                  )
+                ],
+                bundle: Bundle.empty().copyWith(
+                  bundleCode: 'fake_bundle_code',
+                  materials: [fakeCartProduct.first.materialInfo],
+                ),
+                bonusSampleItems: [
+                  BonusSampleItem.empty()
+                      .copyWith(materialNumber: MaterialNumber('12345'))
+                ],
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            additionInfo: {
+              MaterialNumber('12345'): ProductMetaData.empty().copyWith(
+                productImages: [
+                  ProductImages.empty()
+                      .copyWith(thumbNail: 'fake_product_thumbNail')
+                ],
+              )
+            },
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
+                .copyWith(futureDeliveryDay: FutureDeliveryDay('1')),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial(),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        final checkoutScrollListFinder =
+            find.byKey(WidgetKeys.checkoutScrollList);
+        final addressInfoSectionFinder = find.byType(AddressInfoSection);
+        expect(checkoutScrollListFinder, findsOneWidget);
+        expect(addressInfoSectionFinder, findsOneWidget);
+        final cartItemProductTileFinder = find.byKey(
+          WidgetKeys.cartItemProductTile(
+            fakeCartProduct.first.materialInfo.materialNumber.displayMatNo,
+          ),
+        );
+        await tester.dragUntilVisible(
+          cartItemProductTileFinder,
+          checkoutScrollListFinder,
+          const Offset(0, -100),
+        );
+        expect(cartItemProductTileFinder, findsOneWidget);
+      },
+    );
+    testWidgets(
+      '=> test Checkout Body Product Scroll List',
+      (tester) async {
+        when(() => customerCodeBloc.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  principalData: PrincipalData(
+                    principalCode: PrincipalCode(
+                      'fake_principalCode',
+                    ),
+                    principalName: PrincipalName('fake_principalName-1'),
+                  ),
+                ),
+              ),
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  principalData: PrincipalData(
+                    principalCode: PrincipalCode(
+                      'fake_principalCode',
+                    ),
+                    principalName: PrincipalName('fake_principalName-1'),
+                  ),
+                ),
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            additionInfo: {
+              MaterialNumber('12345'): ProductMetaData.empty().copyWith(
+                productImages: [
+                  ProductImages.empty()
+                      .copyWith(thumbNail: 'fake_product_thumbNail')
+                ],
+              )
+            },
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
+                .copyWith(futureDeliveryDay: FutureDeliveryDay('1')),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial(),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        final checkoutScrollListFinder =
+            find.byKey(WidgetKeys.checkoutScrollList);
+        final addressInfoSectionFinder = find.byType(AddressInfoSection);
+        expect(checkoutScrollListFinder, findsOneWidget);
+        expect(addressInfoSectionFinder, findsOneWidget);
+      },
+    );
+    testWidgets(
+      '=> test Checkout Body Product Scroll List for combo type',
+      (tester) async {
+        when(() => customerCodeBloc.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  principalData: PrincipalData(
+                    principalCode: PrincipalCode(
+                      'fake_principalCode',
+                    ),
+                    principalName: PrincipalName('principal_name_fake'),
+                  ),
+                  type: MaterialInfoType('combo'),
+                  bundle:
+                      Bundle.empty().copyWith(bundleCode: 'fake_bundleCode'),
+                ),
+                comboMaterials: [
+                  ComboMaterialItem.empty().copyWith(
+                    materialInfo: fakeCartProduct.first.materialInfo,
+                  )
+                ],
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
+                .copyWith(futureDeliveryDay: FutureDeliveryDay('1')),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial(),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        final checkoutScrollListFinder =
+            find.byKey(WidgetKeys.checkoutScrollList);
+        final addressInfoSectionFinder = find.byType(AddressInfoSection);
+        expect(addressInfoSectionFinder, findsOneWidget);
+        expect(checkoutScrollListFinder, findsOneWidget);
+      },
+    );
 
     testWidgets(
       '=> test PO Reference in place Order when  poNumberRequired is true ',
@@ -217,6 +1000,508 @@ void main() {
         );
       },
     );
+    testWidgets(
+      '=> test Reference Note in place Order when referenceNote is true ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeSalesOrgConfigEnableReferenceNoteRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigEnableReferenceNoteRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        final customerReferenceNoteKey =
+            find.byKey(const Key('referenceNoteKey'));
+        expect(customerReferenceNoteKey, findsOneWidget);
+
+        expect(
+          (tester.widget(customerReferenceNoteKey) as TextFormField)
+              .validator
+              ?.call('ReferenceNote field'),
+          'Reference note is a required field',
+        );
+      },
+    );
+    testWidgets(
+      '=> test Payment Terms in place Order when enablePaymentTerms is true ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeSalesOrgConfigPaymentTermsEnabled,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigPaymentTermsEnabled,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        final customerPaymentTermDropdownKey =
+            find.byKey(WidgetKeys.paymentTermDropdownKey);
+        expect(customerPaymentTermDropdownKey, findsOneWidget);
+
+        expect(
+          (tester.widget(customerPaymentTermDropdownKey)
+                  as DropdownButtonFormField<String>)
+              .validator
+              ?.call('PaymentTerm field'),
+          'Please Select Payment Term.',
+        );
+      },
+    );
+    testWidgets(
+      '=> test International PhoneNumber Input in place Order when enablePaymentTerms is true ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeSalesOrgConfigEnableMobileNumberRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigEnableMobileNumberRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        final customerMobileNumberKey = find.byKey(WidgetKeys.mobileNumber);
+        expect(customerMobileNumberKey, findsOneWidget);
+        final internationalPhoneNumberInputKey =
+            find.byKey(WidgetKeys.internationalPhoneNumberInput);
+        expect(internationalPhoneNumberInputKey, findsOneWidget);
+
+        expect(
+          (tester.widget(internationalPhoneNumberInputKey)
+                  as InternationalPhoneNumberInput)
+              .validator
+              ?.call('MobileNumber field'),
+          'Mobile number is a required field',
+        );
+      },
+    );
+    testWidgets(
+      '=> test Contact Person in place Order when EnableMobileNumber is true ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeSalesOrgConfigEnableMobileNumberRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigEnableMobileNumberRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        final customerContactPersonKey =
+            find.byKey(const Key('contactPersonKey'));
+        expect(customerContactPersonKey, findsOneWidget);
+
+        expect(
+          (tester.widget(customerContactPersonKey) as TextFormField)
+              .validator
+              ?.call('ContactPerson field'),
+          'Contact person is a required field',
+        );
+      },
+    );
+    testWidgets(
+      '=> test PoAttachment Upload in place Order when showPOAttachment is true ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poDocuments: [
+                PoDocuments.empty().copyWith(
+                  name: 'fake_file',
+                  url: 'fake_url',
+                )
+              ],
+            ),
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeSalesOrgConfigShowPOAttachmentRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigShowPOAttachmentRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        final expectedState = [
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+          ),
+          PoAttachmentState.initial().copyWith(
+            failureOrSuccessOption: optionOf(const Right(PermissionStatus)),
+            fileOperationMode: FileOperationMode.upload,
+            fileUrl: [
+              PoDocuments.empty().copyWith(
+                name: 'fake_file',
+                url: 'fake_url',
+              )
+            ],
+          ),
+        ];
+        whenListen(
+          poAttachmentBloc,
+          Stream.fromIterable(expectedState),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        final poAttachmentUploadKey = find.byType(PoAttachmentUpload);
+        expect(poAttachmentUploadKey, findsOneWidget);
+        verify(
+          () => additionalDetailsBlocMock.add(
+            AdditionalDetailsEvent.addPoDocument(
+              poDocuments: [
+                PoDocuments.empty().copyWith(
+                  name: 'fake_file',
+                  url: 'fake_url',
+                )
+              ],
+            ),
+          ),
+        ).called(1);
+        final uploadAttachmentKeyKey =
+            find.byKey(WidgetKeys.uploadAttachmentKey);
+        expect(uploadAttachmentKeyKey, findsOneWidget);
+        await tester.tap(uploadAttachmentKeyKey);
+        await tester.pump();
+        final poAttachmentUploadDialogKey =
+            find.byKey(WidgetKeys.poAttachmentUploadDialog);
+        expect(poAttachmentUploadDialogKey, findsOneWidget);
+        final poAttachmentPhotoUploadButtonKey =
+            find.byKey(WidgetKeys.poAttachmentPhotoUploadButton);
+        expect(poAttachmentPhotoUploadButtonKey, findsOneWidget);
+        await tester.tap(poAttachmentPhotoUploadButtonKey);
+        await tester.pump();
+        verify(
+          () => poAttachmentBloc.add(
+            PoAttachmentEvent.uploadFile(
+              uploadedPODocument: [
+                PoDocuments.empty().copyWith(
+                  name: 'fake_file',
+                  url: 'fake_url',
+                )
+              ],
+              uploadOptionType: UploadOptionType.gallery,
+            ),
+          ),
+        ).called(1);
+        final poAttachmentFileUploadButtonKey =
+            find.byKey(WidgetKeys.poAttachmentFileUploadButton);
+        expect(poAttachmentFileUploadButtonKey, findsOneWidget);
+        await tester.tap(poAttachmentFileUploadButtonKey);
+        await tester.pump();
+        verify(
+          () => poAttachmentBloc.add(
+            PoAttachmentEvent.uploadFile(
+              uploadedPODocument: [
+                PoDocuments.empty().copyWith(
+                  name: 'fake_file',
+                  url: 'fake_url',
+                )
+              ],
+              uploadOptionType: UploadOptionType.file,
+            ),
+          ),
+        ).called(1);
+      },
+    );
+    testWidgets(
+      '=> test PoAttachment Upload in place Order check uploaded list',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poDocuments: [
+                PoDocuments.empty().copyWith(
+                  name: 'fake_file',
+                  url: 'fake_url',
+                )
+              ],
+            ),
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeSalesOrgConfigShowPOAttachmentRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigShowPOAttachmentRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        final expectedState = [
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+          ),
+          PoAttachmentState.initial().copyWith(
+            failureOrSuccessOption: optionOf(const Right(PermissionStatus)),
+            fileOperationMode: FileOperationMode.upload,
+            fileUrl: [
+              PoDocuments.empty().copyWith(
+                name: 'fake_file',
+                url: 'fake_url',
+              )
+            ],
+          ),
+        ];
+        whenListen(
+          poAttachmentBloc,
+          Stream.fromIterable(expectedState),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        final poAttachmentUploadKey = find.byType(PoAttachmentUpload);
+        expect(poAttachmentUploadKey, findsOneWidget);
+        verify(
+          () => additionalDetailsBlocMock.add(
+            AdditionalDetailsEvent.addPoDocument(
+              poDocuments: [
+                PoDocuments.empty().copyWith(
+                  name: 'fake_file',
+                  url: 'fake_url',
+                )
+              ],
+            ),
+          ),
+        ).called(1);
+        final uploadAttachmentKeyKey =
+            find.byKey(WidgetKeys.uploadAttachmentKey);
+        expect(uploadAttachmentKeyKey, findsOneWidget);
+        final itemDeleteButtonKey = find.byIcon(Icons.delete_outline_outlined);
+        expect(itemDeleteButtonKey, findsOneWidget);
+        await tester.tap(itemDeleteButtonKey);
+        await tester.pump();
+        verify(
+          () => poAttachmentBloc.add(
+            PoAttachmentEvent.deleteFile(
+              file: PoDocuments.empty().copyWith(
+                name: 'fake_file',
+                url: 'fake_url',
+              ),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+    testWidgets(
+      '=> test PoAttachment Upload in place Order when showPOAttachment is true  and the bloc return error  ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeSalesOrgConfigShowPOAttachmentRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigShowPOAttachmentRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        final expectedState = [
+          PoAttachmentState.initial().copyWith(
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake_error'))),
+          ),
+        ];
+        whenListen(
+          poAttachmentBloc,
+          Stream.fromIterable(expectedState),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final poAttachmentUploadKey = find.byType(PoAttachmentUpload);
+        expect(poAttachmentUploadKey, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      '=> test PoAttachment Upload in place Order when showPOAttachment is true  and the bloc return none  ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeSalesOrgConfigShowPOAttachmentRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigShowPOAttachmentRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        final expectedState = [
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+          ),
+          PoAttachmentState.initial().copyWith(
+            fileUrl: [
+              PoDocuments.empty().copyWith(
+                name: 'fake_file',
+                url: 'fake_url',
+              )
+            ],
+          ),
+        ];
+        whenListen(
+          poAttachmentBloc,
+          Stream.fromIterable(expectedState),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final poAttachmentUploadKey = find.byType(PoAttachmentUpload);
+        expect(poAttachmentUploadKey, findsOneWidget);
+      },
+    );
+
     testWidgets(
       '=> test PO Reference in place Order when  poNumberRequired is false ',
       (tester) async {

@@ -570,9 +570,13 @@ class WidgetKeys {
   static const Key deliveryDate = Key('deliveryDate');
   static const Key paymentTermKey = Key('paymentTermKey');
   static const Key paymentTermDropdownKey = Key('paymentTermDropdownKey');
+  static const Key uploadAttachmentKey = Key('uploadAttachment');
+  static const Key attachmentsTileKey = Key('attachmentsTile');
   static const Key selectDate = Key('selectDate');
   static const Key additionalDetailsForm = Key('additionalDetailsForm');
   static const Key mobileNumber = Key('mobileNumberKey');
+  static const Key internationalPhoneNumberInput =
+      Key('internationalPhoneNumberInput');
   static const Key poAttachmentFileUploadButton =
       Key('poAttachmentFileUploadButton');
   static const Key poAttachmentPhotoUploadButton =
@@ -595,6 +599,7 @@ class WidgetKeys {
   static const Key quantityAndPrice = Key('quantityAndPrice');
   static const Key productImageSection = Key('productImageSection');
   static const Key bonusProductDetail = Key('bonusProductDetail');
+  static const Key showOrderSumaryListTile = Key('showOrderSumaryListTile');
 
   //============================================================
   //  Material List
