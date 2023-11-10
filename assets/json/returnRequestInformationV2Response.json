@@ -71,7 +71,14 @@
                       "https://ezrxdev.blob.core.windows.net/ezrxplus-assets/my/uat/ereturns/resources/1100001115/sg-6172.jpg?se=2023-06-30T13%3A09%3A34Z\u0026sig=HyDGQzjJZ8CuK79u1evA3ASMImSMlUeHdzcdsd5kbjA%3D\u0026sp=r\u0026spr=https\u0026sr=c\u0026st=2023-06-30T12%3A54%3A24Z\u0026sv=2020-02-10"
                   ],
                   "attachmentUrl": [
-                      "https://ezrxdev.blob.core.windows.net/ezrxplus-assets/my/uat/ereturns/resources/1100001115/sg-6172.jpg?se=2023-06-30T13%3A09%3A34Z\u0026sig=HyDGQzjJZ8CuK79u1evA3ASMImSMlUeHdzcdsd5kbjA%3D\u0026sp=r\u0026spr=https\u0026sr=c\u0026st=2023-06-30T12%3A54%3A24Z\u0026sv=2020-02-10"
+                      {
+                        "fileName": "test-attachment.doc",
+                        "fileUrl": "https://ezrxdev.blob.core.windows.net/ezrxplus-assets/my/uat/ereturns/resources/1100001115/sg-6172.jpg?se=2023-06-30T13%3A09%3A34Z\u0026sig=HyDGQzjJZ8CuK79u1evA3ASMImSMlUeHdzcdsd5kbjA%3D\u0026sp=r\u0026spr=https\u0026sr=c\u0026st=2023-06-30T12%3A54%3A24Z\u0026sv=2020-02-10"
+                      },
+                      {
+                        "fileName": "image_picker-u5t12y2t3t1.png",
+                        "fileUrl": "https://ezrxdev.blob.core.windows.net/ezrxplus-assets/my/uat/ereturns/resources/1100001115/sg-6172.jpg?se=2023-06-30T13%3A09%3A34Z\u0026sig=HyDGQzjJZ8CuK79u1evA3ASMImSMlUeHdzcdsd5kbjA%3D\u0026sp=r\u0026spr=https\u0026sr=c\u0026st=2023-06-30T12%3A54%3A24Z\u0026sv=2020-02-11"
+                      }
                   ],
                   "attachments": null,
                   "plant": "2010",

@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/return_attachment_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'return_request_information_dto.freezed.dart';
 part 'return_request_information_dto.g.dart';
@@ -38,6 +39,8 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
         required List<String> imageUrl,
     @JsonKey(name: 'attachments', defaultValue: <String>[])
         required List<String> attachments,
+    @JsonKey(name: 'attachmentUrl', defaultValue: <ReturnAttachmentDto>[])
+        required List<ReturnAttachmentDto> attachmentUrl,
     @JsonKey(name: 'createdDate', defaultValue: '')
         required String createdDate,
     @JsonKey(name: 'principal', defaultValue: '')
@@ -80,6 +83,7 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       materialDescription: materialDescription,
       batch: batch,
       materialGroup: materialGroup,
+      attachmentUrl: attachmentUrl.map((e) => e.toDomain()).toList(),
       imageUrl: imageUrl,
       attachments: attachments,
       createdDate: DateTimeStringValue(createdDate),

@@ -1,8 +1,8 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -14,8 +14,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// ignore: depend_on_referenced_packages
-import 'package:path/path.dart' as path;
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ReturnSummaryItemSection extends StatelessWidget {
   const ReturnSummaryItemSection({
@@ -267,9 +266,8 @@ class _ReturnDetailsSection extends StatelessWidget {
           keyText: 'Comments'.tr(),
           valueText: requestInformation.remarks.displayText,
         ),
-        _CustomListTile(
-          imageUrlList: requestInformation.imageUrl,
-          title: 'Attachments:',
+        _AttachmentSection(
+          attachments: requestInformation.attachmentUrl,
         ),
       ],
     );
@@ -307,9 +305,8 @@ class _ApprovalDetailsSection extends StatelessWidget {
                 keyText: 'Approval number'.tr(),
                 valueText: requestInformation.displayBapiStatus,
               ),
-              _CustomListTile(
-                imageUrlList: requestInformation.imageUrl,
-                title: 'Attachments:',
+              _AttachmentSection(
+                attachments: requestInformation.attachmentUrl,
               ),
               const Divider(
                 indent: 0,
@@ -320,71 +317,6 @@ class _ApprovalDetailsSection extends StatelessWidget {
             ],
           )
         : const SizedBox.shrink();
-  }
-}
-
-class _CustomListTile extends StatelessWidget {
-  const _CustomListTile({
-    Key? key,
-    required this.title,
-    required this.imageUrlList,
-  }) : super(key: key);
-  final String title;
-  final List<String> imageUrlList;
-
-  @override
-  Widget build(BuildContext context) {
-    return imageUrlList.isEmpty
-        ? BalanceTextRow(
-            keyText: title.tr(),
-            valueText: '-'.tr(),
-          )
-        : ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(
-              title.tr(),
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            subtitle: ListView.builder(
-              itemCount: imageUrlList.length,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                final file = File(imageUrlList[index]);
-                final fileName = path.basename(file.path).split('?').first;
-
-                return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: ZPColors.lightGray2,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          fileName,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: const Icon(
-                          Icons.download_outlined,
-                          color: ZPColors.primary,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          );
   }
 }
 
@@ -497,5 +429,116 @@ class _BonusItemSection extends StatelessWidget {
             ],
           )
         : const SizedBox.shrink();
+  }
+}
+
+class _AttachmentSection extends StatelessWidget {
+  const _AttachmentSection({
+    Key? key,
+    required this.attachments,
+  }) : super(key: key);
+
+  final List<ReturnRequestAttachment> attachments;
+
+  @override
+  Widget build(BuildContext context) {
+    const title = 'Attachments';
+
+    return attachments.isEmpty
+        ? BalanceTextRow(
+            keyText: title.tr(),
+            valueText: '-'.tr(),
+          )
+        : ListTile(
+            key: WidgetKeys.returnAttachmentSection,
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              '${title.tr()}:',
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.darkGray,
+                  ),
+            ),
+            subtitle: BlocBuilder<ReturnSummaryDetailsBloc,
+                ReturnSummaryDetailsState>(
+              buildWhen: (previous, current) =>
+                  previous.downloadingAttachments !=
+                  current.downloadingAttachments,
+              builder: (context, state) {
+                return ListView.builder(
+                  itemCount: attachments.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final attachment = attachments[index];
+                    final isDownloading =
+                        state.downloadingAttachments.contains(attachment);
+
+                    return _AttachmentTile(
+                      attachment: attachment,
+                      isDownloading: isDownloading,
+                    );
+                  },
+                );
+              },
+            ),
+          );
+  }
+}
+
+class _AttachmentTile extends StatelessWidget {
+  const _AttachmentTile({
+    Key? key,
+    required this.attachment,
+    required this.isDownloading,
+  }) : super(key: key);
+
+  final ReturnRequestAttachment attachment;
+  final bool isDownloading;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      key: WidgetKeys.returnAttachmentTile,
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.fromLTRB(16, 8, 10, 8),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        color: ZPColors.lightGray2,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              attachment.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+          ),
+          isDownloading
+              ? LoadingAnimationWidget.discreteCircle(
+                  key: WidgetKeys.loadMoreLoader,
+                  color: ZPColors.primary,
+                  secondRingColor: ZPColors.secondary,
+                  thirdRingColor: ZPColors.orange,
+                  size: 24,
+                )
+              : InkWell(
+                  key: WidgetKeys.returnAttachmentDownloadButton,
+                  onTap: () {
+                    context.read<ReturnSummaryDetailsBloc>().add(
+                          ReturnSummaryDetailsEvent.downloadFile(
+                            file: attachment,
+                          ),
+                        );
+                  },
+                  child: const Icon(
+                    Icons.download_outlined,
+                    color: ZPColors.primary,
+                  ),
+                ),
+        ],
+      ),
+    );
   }
 }

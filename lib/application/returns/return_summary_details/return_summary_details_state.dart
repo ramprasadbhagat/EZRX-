@@ -5,16 +5,20 @@ class ReturnSummaryDetailsState with _$ReturnSummaryDetailsState {
   const factory ReturnSummaryDetailsState({
     required bool isLoading,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-    required ReturnSummaryRequest returnSummaryRequests,
     required ReturnRequestInformation requestInformation,
     required ReturnRequestInformationHeader requestInformationHeader,
+    required List<ReturnRequestAttachment> downloadingAttachments,
+    required ReturnRequestAttachment downloadedAttachment,
+    required Option<Either<ApiFailure, dynamic>> downloadFailureOrSuccessOption,
   }) = _ReturnSummaryDetailsState;
 
   factory ReturnSummaryDetailsState.initial() => ReturnSummaryDetailsState(
         failureOrSuccessOption: none(),
         isLoading: false,
-        returnSummaryRequests: ReturnSummaryRequest.empty(),
         requestInformation: ReturnRequestInformation.empty(),
         requestInformationHeader: ReturnRequestInformationHeader.empty(),
+        downloadingAttachments: <ReturnRequestAttachment>[],
+        downloadedAttachment: ReturnRequestAttachment.empty(),
+        downloadFailureOrSuccessOption: none(),
       );
 }

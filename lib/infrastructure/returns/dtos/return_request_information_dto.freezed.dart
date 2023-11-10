@@ -49,6 +49,9 @@ mixin _$ReturnRequestInformationDto {
   List<String> get imageUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'attachments', defaultValue: <String>[])
   List<String> get attachments => throw _privateConstructorUsedError;
+  @JsonKey(name: 'attachmentUrl', defaultValue: <ReturnAttachmentDto>[])
+  List<ReturnAttachmentDto> get attachmentUrl =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'createdDate', defaultValue: '')
   String get createdDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'principal', defaultValue: '')
@@ -91,58 +94,42 @@ abstract class $ReturnRequestInformationDtoCopyWith<$Res> {
           ReturnRequestInformationDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'invoiceNo', defaultValue: '')
-          String invoiceNo,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-          String expiryDate,
-      @JsonKey(name: 'comment', defaultValue: '')
-          String comment,
-      @JsonKey(name: 'rejectReason', defaultValue: '')
-          String rejectReason,
-      @JsonKey(name: 'returnQuantity', defaultValue: '')
-          String returnQuantity,
-      @JsonKey(name: 'unitPrice', defaultValue: '')
-          String unitPrice,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          String totalPrice,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
+      {@JsonKey(name: 'invoiceNo', defaultValue: '') String invoiceNo,
+      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
+      @JsonKey(name: 'comment', defaultValue: '') String comment,
+      @JsonKey(name: 'rejectReason', defaultValue: '') String rejectReason,
+      @JsonKey(name: 'returnQuantity', defaultValue: '') String returnQuantity,
+      @JsonKey(name: 'unitPrice', defaultValue: '') String unitPrice,
+      @JsonKey(name: 'totalPrice', defaultValue: '') String totalPrice,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'batch', defaultValue: '')
-          String batch,
+      String materialDescription,
+      @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'returnOrderDesc', defaultValue: '')
-          String returnOrderDesc,
-      @JsonKey(name: 'materialGroup', defaultValue: '')
-          String materialGroup,
+      String returnOrderDesc,
+      @JsonKey(name: 'materialGroup', defaultValue: '') String materialGroup,
       @JsonKey(name: 'imageUrl', defaultValue: <String>[])
-          List<String> imageUrl,
+      List<String> imageUrl,
       @JsonKey(name: 'attachments', defaultValue: <String>[])
-          List<String> attachments,
-      @JsonKey(name: 'createdDate', defaultValue: '')
-          String createdDate,
-      @JsonKey(name: 'principal', defaultValue: '')
-          String principal,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
+      List<String> attachments,
+      @JsonKey(name: 'attachmentUrl', defaultValue: <ReturnAttachmentDto>[])
+      List<ReturnAttachmentDto> attachmentUrl,
+      @JsonKey(name: 'createdDate', defaultValue: '') String createdDate,
+      @JsonKey(name: 'principal', defaultValue: '') String principal,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
       @JsonKey(name: 'bapiSalesDocNumber', defaultValue: '')
-          String bapiSalesDocNumber,
-      @JsonKey(name: 'bapiStatus', defaultValue: '')
-          String bapiStatus,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status,
-      @JsonKey(name: 'statusReason', defaultValue: '')
-          String statusReason,
-      @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          bool outsidePolicy,
-      @JsonKey(name: 'invoiceDate', defaultValue: '')
-          String invoiceDate,
-      @JsonKey(name: 'prsfd', defaultValue: '')
-          String prsfd,
-      @JsonKey(name: 'remarks', defaultValue: '')
-          String remarks,
-      @JsonKey(name: 'bonusInformation', defaultValue: <ReturnRequestInformationDto>[])
-          List<ReturnRequestInformationDto> bonusInformation});
+      String bapiSalesDocNumber,
+      @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'statusReason', defaultValue: '') String statusReason,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
+      @JsonKey(name: 'invoiceDate', defaultValue: '') String invoiceDate,
+      @JsonKey(name: 'prsfd', defaultValue: '') String prsfd,
+      @JsonKey(name: 'remarks', defaultValue: '') String remarks,
+      @JsonKey(
+          name: 'bonusInformation',
+          defaultValue: <ReturnRequestInformationDto>[])
+      List<ReturnRequestInformationDto> bonusInformation});
 }
 
 /// @nodoc
@@ -173,6 +160,7 @@ class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
     Object? materialGroup = null,
     Object? imageUrl = null,
     Object? attachments = null,
+    Object? attachmentUrl = null,
     Object? createdDate = null,
     Object? principal = null,
     Object? principalName = null,
@@ -243,6 +231,10 @@ class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
           ? _value.attachments
           : attachments // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      attachmentUrl: null == attachmentUrl
+          ? _value.attachmentUrl
+          : attachmentUrl // ignore: cast_nullable_to_non_nullable
+              as List<ReturnAttachmentDto>,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -305,58 +297,42 @@ abstract class _$$_ReturnRequestInformationDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'invoiceNo', defaultValue: '')
-          String invoiceNo,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-          String expiryDate,
-      @JsonKey(name: 'comment', defaultValue: '')
-          String comment,
-      @JsonKey(name: 'rejectReason', defaultValue: '')
-          String rejectReason,
-      @JsonKey(name: 'returnQuantity', defaultValue: '')
-          String returnQuantity,
-      @JsonKey(name: 'unitPrice', defaultValue: '')
-          String unitPrice,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          String totalPrice,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
+      {@JsonKey(name: 'invoiceNo', defaultValue: '') String invoiceNo,
+      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
+      @JsonKey(name: 'comment', defaultValue: '') String comment,
+      @JsonKey(name: 'rejectReason', defaultValue: '') String rejectReason,
+      @JsonKey(name: 'returnQuantity', defaultValue: '') String returnQuantity,
+      @JsonKey(name: 'unitPrice', defaultValue: '') String unitPrice,
+      @JsonKey(name: 'totalPrice', defaultValue: '') String totalPrice,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'batch', defaultValue: '')
-          String batch,
+      String materialDescription,
+      @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'returnOrderDesc', defaultValue: '')
-          String returnOrderDesc,
-      @JsonKey(name: 'materialGroup', defaultValue: '')
-          String materialGroup,
+      String returnOrderDesc,
+      @JsonKey(name: 'materialGroup', defaultValue: '') String materialGroup,
       @JsonKey(name: 'imageUrl', defaultValue: <String>[])
-          List<String> imageUrl,
+      List<String> imageUrl,
       @JsonKey(name: 'attachments', defaultValue: <String>[])
-          List<String> attachments,
-      @JsonKey(name: 'createdDate', defaultValue: '')
-          String createdDate,
-      @JsonKey(name: 'principal', defaultValue: '')
-          String principal,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
+      List<String> attachments,
+      @JsonKey(name: 'attachmentUrl', defaultValue: <ReturnAttachmentDto>[])
+      List<ReturnAttachmentDto> attachmentUrl,
+      @JsonKey(name: 'createdDate', defaultValue: '') String createdDate,
+      @JsonKey(name: 'principal', defaultValue: '') String principal,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
       @JsonKey(name: 'bapiSalesDocNumber', defaultValue: '')
-          String bapiSalesDocNumber,
-      @JsonKey(name: 'bapiStatus', defaultValue: '')
-          String bapiStatus,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status,
-      @JsonKey(name: 'statusReason', defaultValue: '')
-          String statusReason,
-      @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          bool outsidePolicy,
-      @JsonKey(name: 'invoiceDate', defaultValue: '')
-          String invoiceDate,
-      @JsonKey(name: 'prsfd', defaultValue: '')
-          String prsfd,
-      @JsonKey(name: 'remarks', defaultValue: '')
-          String remarks,
-      @JsonKey(name: 'bonusInformation', defaultValue: <ReturnRequestInformationDto>[])
-          List<ReturnRequestInformationDto> bonusInformation});
+      String bapiSalesDocNumber,
+      @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'statusReason', defaultValue: '') String statusReason,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
+      @JsonKey(name: 'invoiceDate', defaultValue: '') String invoiceDate,
+      @JsonKey(name: 'prsfd', defaultValue: '') String prsfd,
+      @JsonKey(name: 'remarks', defaultValue: '') String remarks,
+      @JsonKey(
+          name: 'bonusInformation',
+          defaultValue: <ReturnRequestInformationDto>[])
+      List<ReturnRequestInformationDto> bonusInformation});
 }
 
 /// @nodoc
@@ -386,6 +362,7 @@ class __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>
     Object? materialGroup = null,
     Object? imageUrl = null,
     Object? attachments = null,
+    Object? attachmentUrl = null,
     Object? createdDate = null,
     Object? principal = null,
     Object? principalName = null,
@@ -456,6 +433,10 @@ class __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>
           ? _value._attachments
           : attachments // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      attachmentUrl: null == attachmentUrl
+          ? _value._attachmentUrl
+          : attachmentUrl // ignore: cast_nullable_to_non_nullable
+              as List<ReturnAttachmentDto>,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -512,60 +493,52 @@ class __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
   _$_ReturnRequestInformationDto(
-      {@JsonKey(name: 'invoiceNo', defaultValue: '')
-          required this.invoiceNo,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-          required this.expiryDate,
-      @JsonKey(name: 'comment', defaultValue: '')
-          required this.comment,
+      {@JsonKey(name: 'invoiceNo', defaultValue: '') required this.invoiceNo,
+      @JsonKey(name: 'expiryDate', defaultValue: '') required this.expiryDate,
+      @JsonKey(name: 'comment', defaultValue: '') required this.comment,
       @JsonKey(name: 'rejectReason', defaultValue: '')
-          required this.rejectReason,
+      required this.rejectReason,
       @JsonKey(name: 'returnQuantity', defaultValue: '')
-          required this.returnQuantity,
-      @JsonKey(name: 'unitPrice', defaultValue: '')
-          required this.unitPrice,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          required this.totalPrice,
+      required this.returnQuantity,
+      @JsonKey(name: 'unitPrice', defaultValue: '') required this.unitPrice,
+      @JsonKey(name: 'totalPrice', defaultValue: '') required this.totalPrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber,
+      required this.materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          required this.materialDescription,
-      @JsonKey(name: 'batch', defaultValue: '')
-          required this.batch,
+      required this.materialDescription,
+      @JsonKey(name: 'batch', defaultValue: '') required this.batch,
       @JsonKey(name: 'returnOrderDesc', defaultValue: '')
-          required this.returnOrderDesc,
+      required this.returnOrderDesc,
       @JsonKey(name: 'materialGroup', defaultValue: '')
-          required this.materialGroup,
+      required this.materialGroup,
       @JsonKey(name: 'imageUrl', defaultValue: <String>[])
-          required final List<String> imageUrl,
+      required final List<String> imageUrl,
       @JsonKey(name: 'attachments', defaultValue: <String>[])
-          required final List<String> attachments,
-      @JsonKey(name: 'createdDate', defaultValue: '')
-          required this.createdDate,
-      @JsonKey(name: 'principal', defaultValue: '')
-          required this.principal,
+      required final List<String> attachments,
+      @JsonKey(name: 'attachmentUrl', defaultValue: <ReturnAttachmentDto>[])
+      required final List<ReturnAttachmentDto> attachmentUrl,
+      @JsonKey(name: 'createdDate', defaultValue: '') required this.createdDate,
+      @JsonKey(name: 'principal', defaultValue: '') required this.principal,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required this.principalName,
+      required this.principalName,
       @JsonKey(name: 'bapiSalesDocNumber', defaultValue: '')
-          required this.bapiSalesDocNumber,
-      @JsonKey(name: 'bapiStatus', defaultValue: '')
-          required this.bapiStatus,
-      @JsonKey(name: 'status', defaultValue: '')
-          required this.status,
+      required this.bapiSalesDocNumber,
+      @JsonKey(name: 'bapiStatus', defaultValue: '') required this.bapiStatus,
+      @JsonKey(name: 'status', defaultValue: '') required this.status,
       @JsonKey(name: 'statusReason', defaultValue: '')
-          required this.statusReason,
+      required this.statusReason,
       @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          required this.outsidePolicy,
-      @JsonKey(name: 'invoiceDate', defaultValue: '')
-          required this.invoiceDate,
-      @JsonKey(name: 'prsfd', defaultValue: '')
-          required this.prsfd,
-      @JsonKey(name: 'remarks', defaultValue: '')
-          required this.remarks,
-      @JsonKey(name: 'bonusInformation', defaultValue: <ReturnRequestInformationDto>[])
-          required final List<ReturnRequestInformationDto> bonusInformation})
+      required this.outsidePolicy,
+      @JsonKey(name: 'invoiceDate', defaultValue: '') required this.invoiceDate,
+      @JsonKey(name: 'prsfd', defaultValue: '') required this.prsfd,
+      @JsonKey(name: 'remarks', defaultValue: '') required this.remarks,
+      @JsonKey(
+          name: 'bonusInformation',
+          defaultValue: <ReturnRequestInformationDto>[])
+      required final List<ReturnRequestInformationDto> bonusInformation})
       : _imageUrl = imageUrl,
         _attachments = attachments,
+        _attachmentUrl = attachmentUrl,
         _bonusInformation = bonusInformation,
         super._();
 
@@ -626,6 +599,15 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
     return EqualUnmodifiableListView(_attachments);
   }
 
+  final List<ReturnAttachmentDto> _attachmentUrl;
+  @override
+  @JsonKey(name: 'attachmentUrl', defaultValue: <ReturnAttachmentDto>[])
+  List<ReturnAttachmentDto> get attachmentUrl {
+    if (_attachmentUrl is EqualUnmodifiableListView) return _attachmentUrl;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_attachmentUrl);
+  }
+
   @override
   @JsonKey(name: 'createdDate', defaultValue: '')
   final String createdDate;
@@ -672,7 +654,7 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
 
   @override
   String toString() {
-    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, returnOrderDesc: $returnOrderDesc, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, remarks: $remarks, bonusInformation: $bonusInformation)';
+    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, returnOrderDesc: $returnOrderDesc, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, remarks: $remarks, bonusInformation: $bonusInformation)';
   }
 
   @override
@@ -705,6 +687,8 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
             const DeepCollectionEquality().equals(other._imageUrl, _imageUrl) &&
             const DeepCollectionEquality()
                 .equals(other._attachments, _attachments) &&
+            const DeepCollectionEquality()
+                .equals(other._attachmentUrl, _attachmentUrl) &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
             (identical(other.principal, principal) ||
@@ -746,6 +730,7 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
         materialGroup,
         const DeepCollectionEquality().hash(_imageUrl),
         const DeepCollectionEquality().hash(_attachments),
+        const DeepCollectionEquality().hash(_attachmentUrl),
         createdDate,
         principal,
         principalName,
@@ -779,57 +764,57 @@ abstract class _ReturnRequestInformationDto
     extends ReturnRequestInformationDto {
   factory _ReturnRequestInformationDto(
       {@JsonKey(name: 'invoiceNo', defaultValue: '')
-          required final String invoiceNo,
+      required final String invoiceNo,
       @JsonKey(name: 'expiryDate', defaultValue: '')
-          required final String expiryDate,
-      @JsonKey(name: 'comment', defaultValue: '')
-          required final String comment,
+      required final String expiryDate,
+      @JsonKey(name: 'comment', defaultValue: '') required final String comment,
       @JsonKey(name: 'rejectReason', defaultValue: '')
-          required final String rejectReason,
+      required final String rejectReason,
       @JsonKey(name: 'returnQuantity', defaultValue: '')
-          required final String returnQuantity,
+      required final String returnQuantity,
       @JsonKey(name: 'unitPrice', defaultValue: '')
-          required final String unitPrice,
+      required final String unitPrice,
       @JsonKey(name: 'totalPrice', defaultValue: '')
-          required final String totalPrice,
+      required final String totalPrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          required final String materialDescription,
-      @JsonKey(name: 'batch', defaultValue: '')
-          required final String batch,
+      required final String materialDescription,
+      @JsonKey(name: 'batch', defaultValue: '') required final String batch,
       @JsonKey(name: 'returnOrderDesc', defaultValue: '')
-          required final String returnOrderDesc,
+      required final String returnOrderDesc,
       @JsonKey(name: 'materialGroup', defaultValue: '')
-          required final String materialGroup,
+      required final String materialGroup,
       @JsonKey(name: 'imageUrl', defaultValue: <String>[])
-          required final List<String> imageUrl,
+      required final List<String> imageUrl,
       @JsonKey(name: 'attachments', defaultValue: <String>[])
-          required final List<String> attachments,
+      required final List<String> attachments,
+      @JsonKey(name: 'attachmentUrl', defaultValue: <ReturnAttachmentDto>[])
+      required final List<ReturnAttachmentDto> attachmentUrl,
       @JsonKey(name: 'createdDate', defaultValue: '')
-          required final String createdDate,
+      required final String createdDate,
       @JsonKey(name: 'principal', defaultValue: '')
-          required final String principal,
+      required final String principal,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required final String principalName,
+      required final String principalName,
       @JsonKey(name: 'bapiSalesDocNumber', defaultValue: '')
-          required final String bapiSalesDocNumber,
+      required final String bapiSalesDocNumber,
       @JsonKey(name: 'bapiStatus', defaultValue: '')
-          required final String bapiStatus,
-      @JsonKey(name: 'status', defaultValue: '')
-          required final String status,
+      required final String bapiStatus,
+      @JsonKey(name: 'status', defaultValue: '') required final String status,
       @JsonKey(name: 'statusReason', defaultValue: '')
-          required final String statusReason,
+      required final String statusReason,
       @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          required final bool outsidePolicy,
+      required final bool outsidePolicy,
       @JsonKey(name: 'invoiceDate', defaultValue: '')
-          required final String invoiceDate,
-      @JsonKey(name: 'prsfd', defaultValue: '')
-          required final String prsfd,
-      @JsonKey(name: 'remarks', defaultValue: '')
-          required final String remarks,
-      @JsonKey(name: 'bonusInformation', defaultValue: <ReturnRequestInformationDto>[])
-          required final List<ReturnRequestInformationDto> bonusInformation}) = _$_ReturnRequestInformationDto;
+      required final String invoiceDate,
+      @JsonKey(name: 'prsfd', defaultValue: '') required final String prsfd,
+      @JsonKey(name: 'remarks', defaultValue: '') required final String remarks,
+      @JsonKey(
+          name: 'bonusInformation',
+          defaultValue: <ReturnRequestInformationDto>[])
+      required final List<ReturnRequestInformationDto>
+          bonusInformation}) = _$_ReturnRequestInformationDto;
   _ReturnRequestInformationDto._() : super._();
 
   factory _ReturnRequestInformationDto.fromJson(Map<String, dynamic> json) =
@@ -877,6 +862,9 @@ abstract class _ReturnRequestInformationDto
   @override
   @JsonKey(name: 'attachments', defaultValue: <String>[])
   List<String> get attachments;
+  @override
+  @JsonKey(name: 'attachmentUrl', defaultValue: <ReturnAttachmentDto>[])
+  List<ReturnAttachmentDto> get attachmentUrl;
   @override
   @JsonKey(name: 'createdDate', defaultValue: '')
   String get createdDate;

@@ -30,6 +30,8 @@ mixin _$ReturnRequestInformation {
   String get materialGroup => throw _privateConstructorUsedError;
   List<String> get imageUrl => throw _privateConstructorUsedError;
   List<String> get attachments => throw _privateConstructorUsedError;
+  List<ReturnRequestAttachment> get attachmentUrl =>
+      throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get principal => throw _privateConstructorUsedError;
   PrincipalName get principalName => throw _privateConstructorUsedError;
@@ -70,6 +72,7 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       String materialGroup,
       List<String> imageUrl,
       List<String> attachments,
+      List<ReturnRequestAttachment> attachmentUrl,
       DateTimeStringValue createdDate,
       String principal,
       PrincipalName principalName,
@@ -112,6 +115,7 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
     Object? materialGroup = null,
     Object? imageUrl = null,
     Object? attachments = null,
+    Object? attachmentUrl = null,
     Object? createdDate = null,
     Object? principal = null,
     Object? principalName = null,
@@ -182,6 +186,10 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
           ? _value.attachments
           : attachments // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      attachmentUrl: null == attachmentUrl
+          ? _value.attachmentUrl
+          : attachmentUrl // ignore: cast_nullable_to_non_nullable
+              as List<ReturnRequestAttachment>,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -258,6 +266,7 @@ abstract class _$$_ReturnRequestInformationCopyWith<$Res>
       String materialGroup,
       List<String> imageUrl,
       List<String> attachments,
+      List<ReturnRequestAttachment> attachmentUrl,
       DateTimeStringValue createdDate,
       String principal,
       PrincipalName principalName,
@@ -298,6 +307,7 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
     Object? materialGroup = null,
     Object? imageUrl = null,
     Object? attachments = null,
+    Object? attachmentUrl = null,
     Object? createdDate = null,
     Object? principal = null,
     Object? principalName = null,
@@ -368,6 +378,10 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
           ? _value._attachments
           : attachments // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      attachmentUrl: null == attachmentUrl
+          ? _value._attachmentUrl
+          : attachmentUrl // ignore: cast_nullable_to_non_nullable
+              as List<ReturnRequestAttachment>,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -438,6 +452,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
       required this.materialGroup,
       required final List<String> imageUrl,
       required final List<String> attachments,
+      required final List<ReturnRequestAttachment> attachmentUrl,
       required this.createdDate,
       required this.principal,
       required this.principalName,
@@ -452,6 +467,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
       required this.remarks})
       : _imageUrl = imageUrl,
         _attachments = attachments,
+        _attachmentUrl = attachmentUrl,
         _bonusInformation = bonusInformation,
         super._();
 
@@ -495,6 +511,14 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
     return EqualUnmodifiableListView(_attachments);
   }
 
+  final List<ReturnRequestAttachment> _attachmentUrl;
+  @override
+  List<ReturnRequestAttachment> get attachmentUrl {
+    if (_attachmentUrl is EqualUnmodifiableListView) return _attachmentUrl;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_attachmentUrl);
+  }
+
   @override
   final DateTimeStringValue createdDate;
   @override
@@ -529,7 +553,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
 
   @override
   String toString() {
-    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks)';
+    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks)';
   }
 
   @override
@@ -562,6 +586,8 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
             const DeepCollectionEquality().equals(other._imageUrl, _imageUrl) &&
             const DeepCollectionEquality()
                 .equals(other._attachments, _attachments) &&
+            const DeepCollectionEquality()
+                .equals(other._attachmentUrl, _attachmentUrl) &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
             (identical(other.principal, principal) ||
@@ -602,6 +628,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
         materialGroup,
         const DeepCollectionEquality().hash(_imageUrl),
         const DeepCollectionEquality().hash(_attachments),
+        const DeepCollectionEquality().hash(_attachmentUrl),
         createdDate,
         principal,
         principalName,
@@ -640,6 +667,7 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
       required final String materialGroup,
       required final List<String> imageUrl,
       required final List<String> attachments,
+      required final List<ReturnRequestAttachment> attachmentUrl,
       required final DateTimeStringValue createdDate,
       required final String principal,
       required final PrincipalName principalName,
@@ -682,6 +710,8 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   List<String> get imageUrl;
   @override
   List<String> get attachments;
+  @override
+  List<ReturnRequestAttachment> get attachmentUrl;
   @override
   DateTimeStringValue get createdDate;
   @override

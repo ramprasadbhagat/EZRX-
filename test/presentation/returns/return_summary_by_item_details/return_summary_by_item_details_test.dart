@@ -65,6 +65,14 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     autoRouterMock = locator<AppRouter>();
+    requestInformationMock =
+        (await ReturnSummaryDetailsRequestInformationLocal()
+                .getRequestInformation())
+            .returnRequestInformationList
+            .first;
+  });
+
+  setUp(() {
     returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
@@ -82,12 +90,6 @@ void main() {
     when(() => productImageBlocMock.state)
         .thenReturn(ProductImageState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-
-    requestInformationMock =
-        (await ReturnSummaryDetailsRequestInformationLocal()
-                .getRequestInformation())
-            .returnRequestInformationList
-            .first;
   });
 
   Widget getScopedWidget() {
@@ -331,6 +333,176 @@ void main() {
           expect(bonusPrice, findsOneWidget);
         },
       );
+
+       group('=> Attachment section', () {
+        final scrollList = find.byKey(WidgetKeys.returnItemDetailScrollList);
+        const scrollOffset = Offset(0, -300);
+        const attachmentTestIndex = 0;
+
+        testWidgets('=> Tap Download attachment', (tester) async {
+          final attachmentCount = requestInformationMock.attachmentUrl.length;
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                status: StatusType(''),
+                bonusInformation: [],
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final expandButton =
+              find.byKey(WidgetKeys.returnDetailShowDetailButton);
+          await tester.dragUntilVisible(
+            expandButton,
+            scrollList,
+            scrollOffset,
+          );
+          await tester.pump();
+          await tester.tap(expandButton);
+          await tester.pump();
+          expect(find.byKey(WidgetKeys.returnDetailSummary), findsOneWidget);
+          await tester.dragUntilVisible(
+            find.byKey(WidgetKeys.returnAttachmentSection),
+            scrollList,
+            scrollOffset,
+          );
+          await tester.pump();
+          final attachmentTile = find.byKey(WidgetKeys.returnAttachmentTile);
+          final downloadButton =
+              find.byKey(WidgetKeys.returnAttachmentDownloadButton);
+          expect(
+            attachmentTile,
+            findsNWidgets(attachmentCount),
+          );
+          expect(
+            find.descendant(of: attachmentTile, matching: downloadButton),
+            findsNWidgets(attachmentCount),
+          );
+          await tester.tap(downloadButton.at(attachmentTestIndex));
+          await tester.pump();
+          verify(
+            () => returnSummaryDetailsBlocMock.add(
+              ReturnSummaryDetailsEvent.downloadFile(
+                file: requestInformationMock.attachmentUrl[attachmentTestIndex],
+              ),
+            ),
+          ).called(1);
+        });
+
+        testWidgets('=> Attachment is downloading', (tester) async {
+          final attachmentCount = requestInformationMock.attachmentUrl.length;
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              downloadingAttachments: [
+                requestInformationMock.attachmentUrl[attachmentTestIndex]
+              ],
+              requestInformation: requestInformationMock.copyWith(
+                status: StatusType(''),
+                bonusInformation: [],
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final expandButton =
+              find.byKey(WidgetKeys.returnDetailShowDetailButton);
+          await tester.dragUntilVisible(
+            expandButton,
+            scrollList,
+            scrollOffset,
+          );
+          await tester.pump();
+          await tester.tap(expandButton);
+          await tester.pump();
+          expect(find.byKey(WidgetKeys.returnDetailSummary), findsOneWidget);
+          await tester.dragUntilVisible(
+            find.byKey(WidgetKeys.returnAttachmentSection),
+            scrollList,
+            scrollOffset,
+          );
+          await tester.pump();
+          final attachmentTile = find.byKey(WidgetKeys.returnAttachmentTile);
+          final downloadButton =
+              find.byKey(WidgetKeys.returnAttachmentDownloadButton);
+          expect(
+            attachmentTile,
+            findsNWidgets(attachmentCount),
+          );
+          expect(
+            find.descendant(of: attachmentTile, matching: downloadButton),
+            findsNWidgets(attachmentCount - 1),
+          );
+          expect(
+            find.descendant(
+              of: attachmentTile,
+              matching: find.byKey(WidgetKeys.loadMoreLoader),
+            ),
+            findsOneWidget,
+          );
+          await tester.tap(downloadButton.at(attachmentTestIndex));
+          await tester.pump();
+          verifyNever(
+            () => returnSummaryDetailsBlocMock.add(
+              ReturnSummaryDetailsEvent.downloadFile(
+                file: requestInformationMock.attachmentUrl[attachmentTestIndex],
+              ),
+            ),
+          );
+        });
+
+        testWidgets('=> Download attachment successfully', (tester) async {
+          whenListen(
+            returnSummaryDetailsBlocMock,
+            Stream.fromIterable([
+              ReturnSummaryDetailsState.initial().copyWith(
+                downloadFailureOrSuccessOption:
+                    optionOf(const Right('success')),
+                downloadedAttachment:
+                    requestInformationMock.attachmentUrl[attachmentTestIndex],
+              ),
+            ]),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+          final snackBarMessage = tester
+              .widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage))
+              .data;
+          expect(
+            snackBarMessage,
+            equals('Attachments downloaded successfully.'.tr()),
+          );
+        });
+
+        testWidgets('=> Download attachment failure', (tester) async {
+          const errorMessage = 'fake-error';
+
+          whenListen(
+            returnSummaryDetailsBlocMock,
+            Stream.fromIterable([
+              ReturnSummaryDetailsState.initial().copyWith(
+                downloadFailureOrSuccessOption:
+                    optionOf(const Left(ApiFailure.other(errorMessage))),
+                downloadedAttachment:
+                    requestInformationMock.attachmentUrl[attachmentTestIndex],
+              ),
+            ]),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+          final snackBarMessage = tester
+              .widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage))
+              .data;
+          expect(
+            snackBarMessage,
+            equals(errorMessage.tr()),
+          );
+        });
+      });
     },
   );
 }

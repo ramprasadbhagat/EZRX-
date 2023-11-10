@@ -383,6 +383,10 @@ class WidgetKeys {
   static const Key returnItemDetailMaterialInvoiceDate =
       Key('returnItemDetailMaterialInvoiceDate');
   static const Key returnDetailSummary = Key('returnDetailSummary');
+  static const Key returnAttachmentSection = Key('returnAttachmentSection');
+  static const Key returnAttachmentTile = Key('returnAttachmentTile');
+  static const Key returnAttachmentDownloadButton =
+      Key('returnAttachmentDownloadButton');
 
   //============================================================
   //  Returns by request

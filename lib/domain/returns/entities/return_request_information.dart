@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'return_request_information.freezed.dart';
 
@@ -21,6 +22,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required String materialGroup,
     required List<String> imageUrl,
     required List<String> attachments,
+    required List<ReturnRequestAttachment> attachmentUrl,
     required DateTimeStringValue createdDate,
     required String principal,
     required PrincipalName principalName,
@@ -45,6 +47,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         comment: StringValue(''),
         createdDate: DateTimeStringValue(''),
         imageUrl: [],
+        attachmentUrl: <ReturnRequestAttachment>[],
         invoiceDate: DateTimeStringValue(''),
         invoiceNo: '',
         materialDescription: '',

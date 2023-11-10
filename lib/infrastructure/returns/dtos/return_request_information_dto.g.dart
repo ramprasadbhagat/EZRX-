@@ -29,6 +29,11 @@ _$_ReturnRequestInformationDto _$$_ReturnRequestInformationDtoFromJson(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      attachmentUrl: (json['attachmentUrl'] as List<dynamic>?)
+              ?.map((e) =>
+                  ReturnAttachmentDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       createdDate: json['createdDate'] as String? ?? '',
       principal: json['principal'] as String? ?? '',
       principalName: json['principalName'] as String? ?? '',
@@ -64,6 +69,7 @@ Map<String, dynamic> _$$_ReturnRequestInformationDtoToJson(
       'materialGroup': instance.materialGroup,
       'imageUrl': instance.imageUrl,
       'attachments': instance.attachments,
+      'attachmentUrl': instance.attachmentUrl.map((e) => e.toJson()).toList(),
       'createdDate': instance.createdDate,
       'principal': instance.principal,
       'principalName': instance.principalName,

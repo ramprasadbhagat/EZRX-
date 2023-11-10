@@ -2121,6 +2121,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ReturnSummaryDetailsBloc(
       returnSummaryDetailsRepository: locator<ReturnSummaryDetailsRepository>(),
+      returnRequestRepository: locator<ReturnRequestRepository>(),
     ),
   );
 

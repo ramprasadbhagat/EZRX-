@@ -29,6 +29,10 @@ class RequestInformationQuery {
       batch
       materialGroup
       imageUrl
+      attachmentUrl {
+        fileName
+        fileUrl
+      }
       attachments
       priceDate
       createdDate
@@ -55,6 +59,10 @@ class RequestInformationQuery {
       batch
       materialGroup
       imageUrl
+      attachmentUrl {
+        fileName
+        fileUrl
+      }
       attachments
       priceDate
       createdDate

@@ -20,18 +20,21 @@ mixin _$ReturnSummaryDetailsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(ReturnRequestsId returnId) fetch,
+    required TResult Function(ReturnRequestAttachment file) downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(ReturnRequestsId returnId)? fetch,
+    TResult? Function(ReturnRequestAttachment file)? downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(ReturnRequestsId returnId)? fetch,
+    TResult Function(ReturnRequestAttachment file)? downloadFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$ReturnSummaryDetailsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_DownloadFile value) downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_DownloadFile value)? downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_DownloadFile value)? downloadFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -115,6 +121,7 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(ReturnRequestsId returnId) fetch,
+    required TResult Function(ReturnRequestAttachment file) downloadFile,
   }) {
     return initialized();
   }
@@ -124,6 +131,7 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(ReturnRequestsId returnId)? fetch,
+    TResult? Function(ReturnRequestAttachment file)? downloadFile,
   }) {
     return initialized?.call();
   }
@@ -133,6 +141,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(ReturnRequestsId returnId)? fetch,
+    TResult Function(ReturnRequestAttachment file)? downloadFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -146,6 +155,7 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_DownloadFile value) downloadFile,
   }) {
     return initialized(this);
   }
@@ -155,6 +165,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_DownloadFile value)? downloadFile,
   }) {
     return initialized?.call(this);
   }
@@ -164,6 +175,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_DownloadFile value)? downloadFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -252,6 +264,7 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(ReturnRequestsId returnId) fetch,
+    required TResult Function(ReturnRequestAttachment file) downloadFile,
   }) {
     return fetch(returnId);
   }
@@ -261,6 +274,7 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(ReturnRequestsId returnId)? fetch,
+    TResult? Function(ReturnRequestAttachment file)? downloadFile,
   }) {
     return fetch?.call(returnId);
   }
@@ -270,6 +284,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(ReturnRequestsId returnId)? fetch,
+    TResult Function(ReturnRequestAttachment file)? downloadFile,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -283,6 +298,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_DownloadFile value) downloadFile,
   }) {
     return fetch(this);
   }
@@ -292,6 +308,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_DownloadFile value)? downloadFile,
   }) {
     return fetch?.call(this);
   }
@@ -301,6 +318,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_DownloadFile value)? downloadFile,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -320,15 +338,169 @@ abstract class _Fetch implements ReturnSummaryDetailsEvent {
 }
 
 /// @nodoc
+abstract class _$$_DownloadFileCopyWith<$Res> {
+  factory _$$_DownloadFileCopyWith(
+          _$_DownloadFile value, $Res Function(_$_DownloadFile) then) =
+      __$$_DownloadFileCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ReturnRequestAttachment file});
+
+  $ReturnRequestAttachmentCopyWith<$Res> get file;
+}
+
+/// @nodoc
+class __$$_DownloadFileCopyWithImpl<$Res>
+    extends _$ReturnSummaryDetailsEventCopyWithImpl<$Res, _$_DownloadFile>
+    implements _$$_DownloadFileCopyWith<$Res> {
+  __$$_DownloadFileCopyWithImpl(
+      _$_DownloadFile _value, $Res Function(_$_DownloadFile) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? file = null,
+  }) {
+    return _then(_$_DownloadFile(
+      file: null == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as ReturnRequestAttachment,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnRequestAttachmentCopyWith<$Res> get file {
+    return $ReturnRequestAttachmentCopyWith<$Res>(_value.file, (value) {
+      return _then(_value.copyWith(file: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_DownloadFile implements _DownloadFile {
+  const _$_DownloadFile({required this.file});
+
+  @override
+  final ReturnRequestAttachment file;
+
+  @override
+  String toString() {
+    return 'ReturnSummaryDetailsEvent.downloadFile(file: $file)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DownloadFile &&
+            (identical(other.file, file) || other.file == file));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, file);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
+      __$$_DownloadFileCopyWithImpl<_$_DownloadFile>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(ReturnRequestsId returnId) fetch,
+    required TResult Function(ReturnRequestAttachment file) downloadFile,
+  }) {
+    return downloadFile(file);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(ReturnRequestsId returnId)? fetch,
+    TResult? Function(ReturnRequestAttachment file)? downloadFile,
+  }) {
+    return downloadFile?.call(file);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(ReturnRequestsId returnId)? fetch,
+    TResult Function(ReturnRequestAttachment file)? downloadFile,
+    required TResult orElse(),
+  }) {
+    if (downloadFile != null) {
+      return downloadFile(file);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_DownloadFile value) downloadFile,
+  }) {
+    return downloadFile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_DownloadFile value)? downloadFile,
+  }) {
+    return downloadFile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_DownloadFile value)? downloadFile,
+    required TResult orElse(),
+  }) {
+    if (downloadFile != null) {
+      return downloadFile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DownloadFile implements ReturnSummaryDetailsEvent {
+  const factory _DownloadFile({required final ReturnRequestAttachment file}) =
+      _$_DownloadFile;
+
+  ReturnRequestAttachment get file;
+  @JsonKey(ignore: true)
+  _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ReturnSummaryDetailsState {
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  ReturnSummaryRequest get returnSummaryRequests =>
-      throw _privateConstructorUsedError;
   ReturnRequestInformation get requestInformation =>
       throw _privateConstructorUsedError;
   ReturnRequestInformationHeader get requestInformationHeader =>
+      throw _privateConstructorUsedError;
+  List<ReturnRequestAttachment> get downloadingAttachments =>
+      throw _privateConstructorUsedError;
+  ReturnRequestAttachment get downloadedAttachment =>
+      throw _privateConstructorUsedError;
+  Option<Either<ApiFailure, dynamic>> get downloadFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -345,13 +517,15 @@ abstract class $ReturnSummaryDetailsStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      ReturnSummaryRequest returnSummaryRequests,
       ReturnRequestInformation requestInformation,
-      ReturnRequestInformationHeader requestInformationHeader});
+      ReturnRequestInformationHeader requestInformationHeader,
+      List<ReturnRequestAttachment> downloadingAttachments,
+      ReturnRequestAttachment downloadedAttachment,
+      Option<Either<ApiFailure, dynamic>> downloadFailureOrSuccessOption});
 
-  $ReturnSummaryRequestCopyWith<$Res> get returnSummaryRequests;
   $ReturnRequestInformationCopyWith<$Res> get requestInformation;
   $ReturnRequestInformationHeaderCopyWith<$Res> get requestInformationHeader;
+  $ReturnRequestAttachmentCopyWith<$Res> get downloadedAttachment;
 }
 
 /// @nodoc
@@ -370,9 +544,11 @@ class _$ReturnSummaryDetailsStateCopyWithImpl<$Res,
   $Res call({
     Object? isLoading = null,
     Object? failureOrSuccessOption = null,
-    Object? returnSummaryRequests = null,
     Object? requestInformation = null,
     Object? requestInformationHeader = null,
+    Object? downloadingAttachments = null,
+    Object? downloadedAttachment = null,
+    Object? downloadFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -383,10 +559,6 @@ class _$ReturnSummaryDetailsStateCopyWithImpl<$Res,
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      returnSummaryRequests: null == returnSummaryRequests
-          ? _value.returnSummaryRequests
-          : returnSummaryRequests // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryRequest,
       requestInformation: null == requestInformation
           ? _value.requestInformation
           : requestInformation // ignore: cast_nullable_to_non_nullable
@@ -395,16 +567,19 @@ class _$ReturnSummaryDetailsStateCopyWithImpl<$Res,
           ? _value.requestInformationHeader
           : requestInformationHeader // ignore: cast_nullable_to_non_nullable
               as ReturnRequestInformationHeader,
+      downloadingAttachments: null == downloadingAttachments
+          ? _value.downloadingAttachments
+          : downloadingAttachments // ignore: cast_nullable_to_non_nullable
+              as List<ReturnRequestAttachment>,
+      downloadedAttachment: null == downloadedAttachment
+          ? _value.downloadedAttachment
+          : downloadedAttachment // ignore: cast_nullable_to_non_nullable
+              as ReturnRequestAttachment,
+      downloadFailureOrSuccessOption: null == downloadFailureOrSuccessOption
+          ? _value.downloadFailureOrSuccessOption
+          : downloadFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ReturnSummaryRequestCopyWith<$Res> get returnSummaryRequests {
-    return $ReturnSummaryRequestCopyWith<$Res>(_value.returnSummaryRequests,
-        (value) {
-      return _then(_value.copyWith(returnSummaryRequests: value) as $Val);
-    });
   }
 
   @override
@@ -424,6 +599,15 @@ class _$ReturnSummaryDetailsStateCopyWithImpl<$Res,
       return _then(_value.copyWith(requestInformationHeader: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnRequestAttachmentCopyWith<$Res> get downloadedAttachment {
+    return $ReturnRequestAttachmentCopyWith<$Res>(_value.downloadedAttachment,
+        (value) {
+      return _then(_value.copyWith(downloadedAttachment: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -438,16 +622,18 @@ abstract class _$$_ReturnSummaryDetailsStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      ReturnSummaryRequest returnSummaryRequests,
       ReturnRequestInformation requestInformation,
-      ReturnRequestInformationHeader requestInformationHeader});
+      ReturnRequestInformationHeader requestInformationHeader,
+      List<ReturnRequestAttachment> downloadingAttachments,
+      ReturnRequestAttachment downloadedAttachment,
+      Option<Either<ApiFailure, dynamic>> downloadFailureOrSuccessOption});
 
-  @override
-  $ReturnSummaryRequestCopyWith<$Res> get returnSummaryRequests;
   @override
   $ReturnRequestInformationCopyWith<$Res> get requestInformation;
   @override
   $ReturnRequestInformationHeaderCopyWith<$Res> get requestInformationHeader;
+  @override
+  $ReturnRequestAttachmentCopyWith<$Res> get downloadedAttachment;
 }
 
 /// @nodoc
@@ -465,9 +651,11 @@ class __$$_ReturnSummaryDetailsStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? failureOrSuccessOption = null,
-    Object? returnSummaryRequests = null,
     Object? requestInformation = null,
     Object? requestInformationHeader = null,
+    Object? downloadingAttachments = null,
+    Object? downloadedAttachment = null,
+    Object? downloadFailureOrSuccessOption = null,
   }) {
     return _then(_$_ReturnSummaryDetailsState(
       isLoading: null == isLoading
@@ -478,10 +666,6 @@ class __$$_ReturnSummaryDetailsStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      returnSummaryRequests: null == returnSummaryRequests
-          ? _value.returnSummaryRequests
-          : returnSummaryRequests // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryRequest,
       requestInformation: null == requestInformation
           ? _value.requestInformation
           : requestInformation // ignore: cast_nullable_to_non_nullable
@@ -490,6 +674,18 @@ class __$$_ReturnSummaryDetailsStateCopyWithImpl<$Res>
           ? _value.requestInformationHeader
           : requestInformationHeader // ignore: cast_nullable_to_non_nullable
               as ReturnRequestInformationHeader,
+      downloadingAttachments: null == downloadingAttachments
+          ? _value._downloadingAttachments
+          : downloadingAttachments // ignore: cast_nullable_to_non_nullable
+              as List<ReturnRequestAttachment>,
+      downloadedAttachment: null == downloadedAttachment
+          ? _value.downloadedAttachment
+          : downloadedAttachment // ignore: cast_nullable_to_non_nullable
+              as ReturnRequestAttachment,
+      downloadFailureOrSuccessOption: null == downloadFailureOrSuccessOption
+          ? _value.downloadFailureOrSuccessOption
+          : downloadFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -500,24 +696,38 @@ class _$_ReturnSummaryDetailsState implements _ReturnSummaryDetailsState {
   const _$_ReturnSummaryDetailsState(
       {required this.isLoading,
       required this.failureOrSuccessOption,
-      required this.returnSummaryRequests,
       required this.requestInformation,
-      required this.requestInformationHeader});
+      required this.requestInformationHeader,
+      required final List<ReturnRequestAttachment> downloadingAttachments,
+      required this.downloadedAttachment,
+      required this.downloadFailureOrSuccessOption})
+      : _downloadingAttachments = downloadingAttachments;
 
   @override
   final bool isLoading;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
-  final ReturnSummaryRequest returnSummaryRequests;
-  @override
   final ReturnRequestInformation requestInformation;
   @override
   final ReturnRequestInformationHeader requestInformationHeader;
+  final List<ReturnRequestAttachment> _downloadingAttachments;
+  @override
+  List<ReturnRequestAttachment> get downloadingAttachments {
+    if (_downloadingAttachments is EqualUnmodifiableListView)
+      return _downloadingAttachments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_downloadingAttachments);
+  }
+
+  @override
+  final ReturnRequestAttachment downloadedAttachment;
+  @override
+  final Option<Either<ApiFailure, dynamic>> downloadFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'ReturnSummaryDetailsState(isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption, returnSummaryRequests: $returnSummaryRequests, requestInformation: $requestInformation, requestInformationHeader: $requestInformationHeader)';
+    return 'ReturnSummaryDetailsState(isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption, requestInformation: $requestInformation, requestInformationHeader: $requestInformationHeader, downloadingAttachments: $downloadingAttachments, downloadedAttachment: $downloadedAttachment, downloadFailureOrSuccessOption: $downloadFailureOrSuccessOption)';
   }
 
   @override
@@ -529,13 +739,19 @@ class _$_ReturnSummaryDetailsState implements _ReturnSummaryDetailsState {
                 other.isLoading == isLoading) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
-            (identical(other.returnSummaryRequests, returnSummaryRequests) ||
-                other.returnSummaryRequests == returnSummaryRequests) &&
             (identical(other.requestInformation, requestInformation) ||
                 other.requestInformation == requestInformation) &&
             (identical(
                     other.requestInformationHeader, requestInformationHeader) ||
-                other.requestInformationHeader == requestInformationHeader));
+                other.requestInformationHeader == requestInformationHeader) &&
+            const DeepCollectionEquality().equals(
+                other._downloadingAttachments, _downloadingAttachments) &&
+            (identical(other.downloadedAttachment, downloadedAttachment) ||
+                other.downloadedAttachment == downloadedAttachment) &&
+            (identical(other.downloadFailureOrSuccessOption,
+                    downloadFailureOrSuccessOption) ||
+                other.downloadFailureOrSuccessOption ==
+                    downloadFailureOrSuccessOption));
   }
 
   @override
@@ -543,9 +759,11 @@ class _$_ReturnSummaryDetailsState implements _ReturnSummaryDetailsState {
       runtimeType,
       isLoading,
       failureOrSuccessOption,
-      returnSummaryRequests,
       requestInformation,
-      requestInformationHeader);
+      requestInformationHeader,
+      const DeepCollectionEquality().hash(_downloadingAttachments),
+      downloadedAttachment,
+      downloadFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -559,21 +777,27 @@ abstract class _ReturnSummaryDetailsState implements ReturnSummaryDetailsState {
   const factory _ReturnSummaryDetailsState(
       {required final bool isLoading,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final ReturnSummaryRequest returnSummaryRequests,
       required final ReturnRequestInformation requestInformation,
-      required final ReturnRequestInformationHeader
-          requestInformationHeader}) = _$_ReturnSummaryDetailsState;
+      required final ReturnRequestInformationHeader requestInformationHeader,
+      required final List<ReturnRequestAttachment> downloadingAttachments,
+      required final ReturnRequestAttachment downloadedAttachment,
+      required final Option<Either<ApiFailure, dynamic>>
+          downloadFailureOrSuccessOption}) = _$_ReturnSummaryDetailsState;
 
   @override
   bool get isLoading;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
-  ReturnSummaryRequest get returnSummaryRequests;
-  @override
   ReturnRequestInformation get requestInformation;
   @override
   ReturnRequestInformationHeader get requestInformationHeader;
+  @override
+  List<ReturnRequestAttachment> get downloadingAttachments;
+  @override
+  ReturnRequestAttachment get downloadedAttachment;
+  @override
+  Option<Either<ApiFailure, dynamic>> get downloadFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnSummaryDetailsStateCopyWith<_$_ReturnSummaryDetailsState>
