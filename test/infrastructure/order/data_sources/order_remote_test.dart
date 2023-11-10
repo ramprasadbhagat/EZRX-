@@ -76,6 +76,7 @@ void main() {
             orderValue: 0,
             language: '',
             paymentMethod: '',
+            purchaseOrderType: '',
           );
           final encryptedData =
               encryption.encryptionData(data: submitOrder.toJson());

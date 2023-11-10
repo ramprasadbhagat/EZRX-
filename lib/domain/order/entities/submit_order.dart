@@ -29,6 +29,7 @@ class SubmitOrder with _$SubmitOrder {
     required List<PoDocuments> poDocuments,
     required String language,
     required String paymentMethod,
+    required String purchaseOrderType,
   }) = _SubmitOrderCustomer;
 
   factory SubmitOrder.empty() => SubmitOrder(
@@ -51,5 +52,6 @@ class SubmitOrder with _$SubmitOrder {
         paymentMethod: '',
         orderValue: 0,
         totalTax: 0,
+        purchaseOrderType: '',
       );
 }

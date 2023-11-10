@@ -146,6 +146,7 @@ void main() {
     );
 
     submitOrderMock = SubmitOrder.empty().copyWith(
+      purchaseOrderType: fakeClientUser.role.type.purchaseOrderType,
       paymentMethod: 'Bank Transfer',
       orderValue: 100.0,
       totalTax: 100.0,

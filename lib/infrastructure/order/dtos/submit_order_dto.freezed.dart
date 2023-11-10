@@ -57,6 +57,8 @@ mixin _$SubmitOrderDto {
   String get language => throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
   String get paymentMethod => throw _privateConstructorUsedError;
+  @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
+  String get purchaseOrderType => throw _privateConstructorUsedError;
   @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get poDocuments => throw _privateConstructorUsedError;
 
@@ -73,31 +75,46 @@ abstract class $SubmitOrderDtoCopyWith<$Res> {
       _$SubmitOrderDtoCopyWithImpl<$Res, SubmitOrderDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'username', defaultValue: '') String userName,
-      @JsonKey(name: 'companyName', defaultValue: '') String companyName,
-      @JsonKey(name: 'customer') SubmitOrderCustomerDto customer,
-      @JsonKey(name: 'POReference', defaultValue: '') String poReference,
+      {@JsonKey(name: 'username', defaultValue: '')
+          String userName,
+      @JsonKey(name: 'companyName', defaultValue: '')
+          String companyName,
+      @JsonKey(name: 'customer')
+          SubmitOrderCustomerDto customer,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          String poReference,
       @JsonKey(name: 'materials', defaultValue: <SubmitMaterialInfoDto>[])
-      List<SubmitMaterialInfoDto> materials,
-      @JsonKey(name: 'PODate', defaultValue: '') String poDate,
+          List<SubmitMaterialInfoDto> materials,
+      @JsonKey(name: 'PODate', defaultValue: '')
+          String poDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-      String requestedDeliveryDate,
+          String requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-      String specialInstructions,
-      @JsonKey(name: 'orderValue', defaultValue: 0) double orderValue,
-      @JsonKey(name: 'totalTax', defaultValue: 0) double totalTax,
-      @JsonKey(name: 'orderType', defaultValue: '') String orderType,
-      @JsonKey(name: 'Telephone', defaultValue: '') String telephone,
-      @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
-      @JsonKey(name: 'paymentTerms', defaultValue: '') String paymentTerms,
+          String specialInstructions,
+      @JsonKey(name: 'orderValue', defaultValue: 0)
+          double orderValue,
+      @JsonKey(name: 'totalTax', defaultValue: 0)
+          double totalTax,
+      @JsonKey(name: 'orderType', defaultValue: '')
+          String orderType,
+      @JsonKey(name: 'Telephone', defaultValue: '')
+          String telephone,
+      @JsonKey(name: 'referenceNotes', defaultValue: '')
+          String referenceNotes,
+      @JsonKey(name: 'paymentTerms', defaultValue: '')
+          String paymentTerms,
       @JsonKey(name: 'CollectiveNumber', defaultValue: '')
-      String collectiveNumber,
-      @JsonKey(name: 'blockOrder', defaultValue: false) bool blockOrder,
-      @JsonKey(name: 'language', defaultValue: 'EN') String language,
+          String collectiveNumber,
+      @JsonKey(name: 'blockOrder', defaultValue: false)
+          bool blockOrder,
+      @JsonKey(name: 'language', defaultValue: 'EN')
+          String language,
       @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
-      String paymentMethod,
+          String paymentMethod,
+      @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
+          String purchaseOrderType,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-      List<PoDocumentsDto> poDocuments});
+          List<PoDocumentsDto> poDocuments});
 
   $SubmitOrderCustomerDtoCopyWith<$Res> get customer;
 }
@@ -133,6 +150,7 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
     Object? blockOrder = null,
     Object? language = null,
     Object? paymentMethod = null,
+    Object? purchaseOrderType = null,
     Object? poDocuments = null,
   }) {
     return _then(_value.copyWith(
@@ -208,6 +226,10 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
               as String,
+      purchaseOrderType: null == purchaseOrderType
+          ? _value.purchaseOrderType
+          : purchaseOrderType // ignore: cast_nullable_to_non_nullable
+              as String,
       poDocuments: null == poDocuments
           ? _value.poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
@@ -233,31 +255,46 @@ abstract class _$$_SubmitOrderDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'username', defaultValue: '') String userName,
-      @JsonKey(name: 'companyName', defaultValue: '') String companyName,
-      @JsonKey(name: 'customer') SubmitOrderCustomerDto customer,
-      @JsonKey(name: 'POReference', defaultValue: '') String poReference,
+      {@JsonKey(name: 'username', defaultValue: '')
+          String userName,
+      @JsonKey(name: 'companyName', defaultValue: '')
+          String companyName,
+      @JsonKey(name: 'customer')
+          SubmitOrderCustomerDto customer,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          String poReference,
       @JsonKey(name: 'materials', defaultValue: <SubmitMaterialInfoDto>[])
-      List<SubmitMaterialInfoDto> materials,
-      @JsonKey(name: 'PODate', defaultValue: '') String poDate,
+          List<SubmitMaterialInfoDto> materials,
+      @JsonKey(name: 'PODate', defaultValue: '')
+          String poDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-      String requestedDeliveryDate,
+          String requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-      String specialInstructions,
-      @JsonKey(name: 'orderValue', defaultValue: 0) double orderValue,
-      @JsonKey(name: 'totalTax', defaultValue: 0) double totalTax,
-      @JsonKey(name: 'orderType', defaultValue: '') String orderType,
-      @JsonKey(name: 'Telephone', defaultValue: '') String telephone,
-      @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
-      @JsonKey(name: 'paymentTerms', defaultValue: '') String paymentTerms,
+          String specialInstructions,
+      @JsonKey(name: 'orderValue', defaultValue: 0)
+          double orderValue,
+      @JsonKey(name: 'totalTax', defaultValue: 0)
+          double totalTax,
+      @JsonKey(name: 'orderType', defaultValue: '')
+          String orderType,
+      @JsonKey(name: 'Telephone', defaultValue: '')
+          String telephone,
+      @JsonKey(name: 'referenceNotes', defaultValue: '')
+          String referenceNotes,
+      @JsonKey(name: 'paymentTerms', defaultValue: '')
+          String paymentTerms,
       @JsonKey(name: 'CollectiveNumber', defaultValue: '')
-      String collectiveNumber,
-      @JsonKey(name: 'blockOrder', defaultValue: false) bool blockOrder,
-      @JsonKey(name: 'language', defaultValue: 'EN') String language,
+          String collectiveNumber,
+      @JsonKey(name: 'blockOrder', defaultValue: false)
+          bool blockOrder,
+      @JsonKey(name: 'language', defaultValue: 'EN')
+          String language,
       @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
-      String paymentMethod,
+          String paymentMethod,
+      @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
+          String purchaseOrderType,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-      List<PoDocumentsDto> poDocuments});
+          List<PoDocumentsDto> poDocuments});
 
   @override
   $SubmitOrderCustomerDtoCopyWith<$Res> get customer;
@@ -292,6 +329,7 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
     Object? blockOrder = null,
     Object? language = null,
     Object? paymentMethod = null,
+    Object? purchaseOrderType = null,
     Object? poDocuments = null,
   }) {
     return _then(_$_SubmitOrderDto(
@@ -367,6 +405,10 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
               as String,
+      purchaseOrderType: null == purchaseOrderType
+          ? _value.purchaseOrderType
+          : purchaseOrderType // ignore: cast_nullable_to_non_nullable
+              as String,
       poDocuments: null == poDocuments
           ? _value._poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
@@ -379,34 +421,46 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SubmitOrderDto extends _SubmitOrderDto {
   const _$_SubmitOrderDto(
-      {@JsonKey(name: 'username', defaultValue: '') required this.userName,
-      @JsonKey(name: 'companyName', defaultValue: '') required this.companyName,
-      @JsonKey(name: 'customer') required this.customer,
-      @JsonKey(name: 'POReference', defaultValue: '') required this.poReference,
+      {@JsonKey(name: 'username', defaultValue: '')
+          required this.userName,
+      @JsonKey(name: 'companyName', defaultValue: '')
+          required this.companyName,
+      @JsonKey(name: 'customer')
+          required this.customer,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          required this.poReference,
       @JsonKey(name: 'materials', defaultValue: <SubmitMaterialInfoDto>[])
-      required final List<SubmitMaterialInfoDto> materials,
-      @JsonKey(name: 'PODate', defaultValue: '') required this.poDate,
+          required final List<SubmitMaterialInfoDto> materials,
+      @JsonKey(name: 'PODate', defaultValue: '')
+          required this.poDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-      required this.requestedDeliveryDate,
+          required this.requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-      required this.specialInstructions,
-      @JsonKey(name: 'orderValue', defaultValue: 0) required this.orderValue,
-      @JsonKey(name: 'totalTax', defaultValue: 0) required this.totalTax,
-      @JsonKey(name: 'orderType', defaultValue: '') required this.orderType,
-      @JsonKey(name: 'Telephone', defaultValue: '') required this.telephone,
+          required this.specialInstructions,
+      @JsonKey(name: 'orderValue', defaultValue: 0)
+          required this.orderValue,
+      @JsonKey(name: 'totalTax', defaultValue: 0)
+          required this.totalTax,
+      @JsonKey(name: 'orderType', defaultValue: '')
+          required this.orderType,
+      @JsonKey(name: 'Telephone', defaultValue: '')
+          required this.telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
-      required this.referenceNotes,
+          required this.referenceNotes,
       @JsonKey(name: 'paymentTerms', defaultValue: '')
-      required this.paymentTerms,
+          required this.paymentTerms,
       @JsonKey(name: 'CollectiveNumber', defaultValue: '')
-      required this.collectiveNumber,
+          required this.collectiveNumber,
       @JsonKey(name: 'blockOrder', defaultValue: false)
-      required this.blockOrder,
-      @JsonKey(name: 'language', defaultValue: 'EN') required this.language,
+          required this.blockOrder,
+      @JsonKey(name: 'language', defaultValue: 'EN')
+          required this.language,
       @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
-      required this.paymentMethod,
+          required this.paymentMethod,
+      @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
+          required this.purchaseOrderType,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-      required final List<PoDocumentsDto> poDocuments})
+          required final List<PoDocumentsDto> poDocuments})
       : _materials = materials,
         _poDocuments = poDocuments,
         super._();
@@ -474,6 +528,9 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
   @override
   @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
   final String paymentMethod;
+  @override
+  @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
+  final String purchaseOrderType;
   final List<PoDocumentsDto> _poDocuments;
   @override
   @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
@@ -485,7 +542,7 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
 
   @override
   String toString() {
-    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, orderType: $orderType, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, language: $language, paymentMethod: $paymentMethod, poDocuments: $poDocuments)';
+    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, orderType: $orderType, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType, poDocuments: $poDocuments)';
   }
 
   @override
@@ -528,6 +585,8 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
                 other.language == language) &&
             (identical(other.paymentMethod, paymentMethod) ||
                 other.paymentMethod == paymentMethod) &&
+            (identical(other.purchaseOrderType, purchaseOrderType) ||
+                other.purchaseOrderType == purchaseOrderType) &&
             const DeepCollectionEquality()
                 .equals(other._poDocuments, _poDocuments));
   }
@@ -554,6 +613,7 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
         blockOrder,
         language,
         paymentMethod,
+        purchaseOrderType,
         const DeepCollectionEquality().hash(_poDocuments)
       ]);
 
@@ -574,41 +634,45 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
 abstract class _SubmitOrderDto extends SubmitOrderDto {
   const factory _SubmitOrderDto(
       {@JsonKey(name: 'username', defaultValue: '')
-      required final String userName,
+          required final String userName,
       @JsonKey(name: 'companyName', defaultValue: '')
-      required final String companyName,
-      @JsonKey(name: 'customer') required final SubmitOrderCustomerDto customer,
+          required final String companyName,
+      @JsonKey(name: 'customer')
+          required final SubmitOrderCustomerDto customer,
       @JsonKey(name: 'POReference', defaultValue: '')
-      required final String poReference,
+          required final String poReference,
       @JsonKey(name: 'materials', defaultValue: <SubmitMaterialInfoDto>[])
-      required final List<SubmitMaterialInfoDto> materials,
-      @JsonKey(name: 'PODate', defaultValue: '') required final String poDate,
+          required final List<SubmitMaterialInfoDto> materials,
+      @JsonKey(name: 'PODate', defaultValue: '')
+          required final String poDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-      required final String requestedDeliveryDate,
+          required final String requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-      required final String specialInstructions,
+          required final String specialInstructions,
       @JsonKey(name: 'orderValue', defaultValue: 0)
-      required final double orderValue,
+          required final double orderValue,
       @JsonKey(name: 'totalTax', defaultValue: 0)
-      required final double totalTax,
+          required final double totalTax,
       @JsonKey(name: 'orderType', defaultValue: '')
-      required final String orderType,
+          required final String orderType,
       @JsonKey(name: 'Telephone', defaultValue: '')
-      required final String telephone,
+          required final String telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
-      required final String referenceNotes,
+          required final String referenceNotes,
       @JsonKey(name: 'paymentTerms', defaultValue: '')
-      required final String paymentTerms,
+          required final String paymentTerms,
       @JsonKey(name: 'CollectiveNumber', defaultValue: '')
-      required final String collectiveNumber,
+          required final String collectiveNumber,
       @JsonKey(name: 'blockOrder', defaultValue: false)
-      required final bool blockOrder,
+          required final bool blockOrder,
       @JsonKey(name: 'language', defaultValue: 'EN')
-      required final String language,
+          required final String language,
       @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
-      required final String paymentMethod,
+          required final String paymentMethod,
+      @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
+          required final String purchaseOrderType,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-      required final List<PoDocumentsDto> poDocuments}) = _$_SubmitOrderDto;
+          required final List<PoDocumentsDto> poDocuments}) = _$_SubmitOrderDto;
   const _SubmitOrderDto._() : super._();
 
   factory _SubmitOrderDto.fromJson(Map<String, dynamic> json) =
@@ -668,6 +732,9 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
   @override
   @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
   String get paymentMethod;
+  @override
+  @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
+  String get purchaseOrderType;
   @override
   @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get poDocuments;

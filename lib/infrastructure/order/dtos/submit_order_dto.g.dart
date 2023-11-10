@@ -31,6 +31,7 @@ _$_SubmitOrderDto _$$_SubmitOrderDtoFromJson(Map<String, dynamic> json) =>
       blockOrder: json['blockOrder'] as bool? ?? false,
       language: json['language'] as String? ?? 'EN',
       paymentMethod: json['paymentMethod'] as String? ?? 'Bank Transfer',
+      purchaseOrderType: json['PurchaseOrderType'] as String? ?? '',
       poDocuments: (json['poDocuments'] as List<dynamic>?)
               ?.map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -57,5 +58,6 @@ Map<String, dynamic> _$$_SubmitOrderDtoToJson(_$_SubmitOrderDto instance) =>
       'blockOrder': instance.blockOrder,
       'language': instance.language,
       'paymentMethod': instance.paymentMethod,
+      'PurchaseOrderType': instance.purchaseOrderType,
       'poDocuments': instance.poDocuments.map((e) => e.toJson()).toList(),
     };

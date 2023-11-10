@@ -143,7 +143,7 @@ class OrderRepository implements IOrderRepository {
           soldTo: customerCodeInfo.customerCodeSoldTo,
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         );
-        
+
         final orderHistoryDetailsWithMaterialInfo =
             orderHistoryDetails.copyWith(
           orderHistoryDetailsOrderItem:
@@ -256,6 +256,7 @@ class OrderRepository implements IOrderRepository {
         cartItems: cartProducts,
         customerCodeInfo: customerCodeInfo,
       ),
+      purchaseOrderType: user.role.type.purchaseOrderType,
     );
   }
 }

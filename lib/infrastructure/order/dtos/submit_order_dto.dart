@@ -54,6 +54,8 @@ class SubmitOrderDto with _$SubmitOrderDto {
         required String language,
     @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
         required String paymentMethod,
+    @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
+        required String purchaseOrderType,
     @JsonKey(
       name: 'poDocuments',
       defaultValue: <PoDocumentsDto>[],
@@ -82,6 +84,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
       poDocuments: poDocuments.map((e) => e.toDomain()).toList(),
       language: language,
       paymentMethod: paymentMethod,
+      purchaseOrderType: purchaseOrderType,
     );
   }
 
@@ -114,6 +117,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
           .toList(),
       language: submitOrder.language,
       paymentMethod: submitOrder.paymentMethod,
+      purchaseOrderType: submitOrder.purchaseOrderType,
     );
   }
 
