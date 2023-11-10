@@ -376,6 +376,13 @@ class CartRepository implements ICartRepository {
     required int quantity,
     required RequestCounterOfferDetails counterOfferDetails,
   }) async {
+    if (quantity > config.maximumCartQuantity) {
+      return Left(
+        ApiFailure.maximumCartQuantityExceed(
+          config.maximumCartQuantity.toString(),
+        ),
+      );
+    }
     if (config.appFlavor == Flavor.mock) {
       try {
         final productList = await cartLocalDataSource.upsertCart();
@@ -610,7 +617,8 @@ class CartRepository implements ICartRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final productList = await cartLocalDataSource.upsertCartItemsWithComboOffers();
+        final productList =
+            await cartLocalDataSource.upsertCartItemsWithComboOffers();
 
         return Right(productList);
       } catch (e) {

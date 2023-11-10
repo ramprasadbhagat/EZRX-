@@ -35,7 +35,7 @@ class CartItemQuantityInput extends StatelessWidget {
     this.returnZeroOnFieldEmpty = false,
     this.isLoading = false,
     this.minimumQty = 1,
-    this.maximumQty = 100000,
+    this.maximumQty = 99999,
     this.height = 35,
   }) : super(key: key);
 
@@ -68,8 +68,8 @@ class CartItemQuantityInput extends StatelessWidget {
               controller: controller,
               textAlign: TextAlign.center,
               inputFormatters: <TextInputFormatter>[
-                // limit charcter length to 6
-                LengthLimitingTextInputFormatter(6),
+                // limit charcter length to maximum quantity length
+                LengthLimitingTextInputFormatter(maximumQty.toString().length),
               ],
               onChanged: (String text) {
                 if (text.isEmpty) {

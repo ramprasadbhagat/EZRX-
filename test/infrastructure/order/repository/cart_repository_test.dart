@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_pr
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
@@ -157,6 +158,7 @@ void main() {
     ).thenAnswer(
       (invocation) async => [StockInfo.empty()],
     );
+    when(() => mockConfig.maximumCartQuantity).thenReturn(99999);
   });
 
   test('Test Clear Cart - Success', () async {
@@ -1188,6 +1190,34 @@ void main() {
         itemId: 'fake-item-Id',
       );
       expect(result.isLeft(), true);
+    });
+
+    test('upsertCart exceed maximum quantity', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      final result = await cartRepository.upsertCart(
+        counterOfferDetails: RequestCounterOfferDetails.empty(),
+        quantity: 100000,
+        language: 'en',
+        shipToInfo: fakeShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisation: fakeSalesOrganisation,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-material-number'),
+          type: MaterialInfoType('material'),
+          parentID: 'fake-parent-Id',
+        ),
+        itemId: 'fake-item-Id',
+      );
+      expect(result.isLeft(), true);
+      expect(
+        result,
+        Left(
+          ApiFailure.maximumCartQuantityExceed(
+            mockConfig.maximumCartQuantity.toString(),
+          ),
+        ),
+      );
     });
   });
 }

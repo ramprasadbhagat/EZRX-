@@ -51,6 +51,7 @@ mixin _$ApiFailure {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,6 +89,7 @@ mixin _$ApiFailure {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -125,6 +127,7 @@ mixin _$ApiFailure {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -179,6 +182,8 @@ mixin _$ApiFailure {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -222,6 +227,8 @@ mixin _$ApiFailure {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -265,6 +272,8 @@ mixin _$ApiFailure {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -383,6 +392,7 @@ class _$_Other implements _Other {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return other(message);
   }
@@ -423,6 +433,7 @@ class _$_Other implements _Other {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return other?.call(message);
   }
@@ -463,6 +474,7 @@ class _$_Other implements _Other {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -523,6 +535,8 @@ class _$_Other implements _Other {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return other(this);
   }
@@ -569,6 +583,8 @@ class _$_Other implements _Other {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return other?.call(this);
   }
@@ -615,6 +631,8 @@ class _$_Other implements _Other {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -730,6 +748,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return serverError(message);
   }
@@ -770,6 +789,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return serverError?.call(message);
   }
@@ -810,6 +830,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -870,6 +891,8 @@ class _$_ServerError implements _ServerError {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return serverError(this);
   }
@@ -916,6 +939,8 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return serverError?.call(this);
   }
@@ -962,6 +987,8 @@ class _$_ServerError implements _ServerError {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -1051,6 +1078,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return poorConnection();
   }
@@ -1091,6 +1119,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return poorConnection?.call();
   }
@@ -1131,6 +1160,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1191,6 +1221,8 @@ class _$_PoorConnection implements _PoorConnection {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return poorConnection(this);
   }
@@ -1237,6 +1269,8 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return poorConnection?.call(this);
   }
@@ -1283,6 +1317,8 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1367,6 +1403,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return serverTimeout();
   }
@@ -1407,6 +1444,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return serverTimeout?.call();
   }
@@ -1447,6 +1485,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1507,6 +1546,8 @@ class _$_ServerTimeout implements _ServerTimeout {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return serverTimeout(this);
   }
@@ -1553,6 +1594,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return serverTimeout?.call(this);
   }
@@ -1599,6 +1642,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1683,6 +1728,7 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return userNotFound();
   }
@@ -1723,6 +1769,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return userNotFound?.call();
   }
@@ -1763,6 +1810,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1823,6 +1871,8 @@ class _$_UserNotFound implements _UserNotFound {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return userNotFound(this);
   }
@@ -1869,6 +1919,8 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return userNotFound?.call(this);
   }
@@ -1915,6 +1967,8 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -2004,6 +2058,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -2044,6 +2099,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -2084,6 +2140,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -2144,6 +2201,8 @@ class _$_InvalidEmailAndPasswordCombination
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -2190,6 +2249,8 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -2236,6 +2297,8 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -2321,6 +2384,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return accountLocked();
   }
@@ -2361,6 +2425,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return accountLocked?.call();
   }
@@ -2401,6 +2466,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -2461,6 +2527,8 @@ class _$_AccountLocked implements _AccountLocked {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return accountLocked(this);
   }
@@ -2507,6 +2575,8 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return accountLocked?.call(this);
   }
@@ -2553,6 +2623,8 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -2637,6 +2709,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return accountExpired();
   }
@@ -2677,6 +2750,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return accountExpired?.call();
   }
@@ -2717,6 +2791,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -2777,6 +2852,8 @@ class _$_AccountExpired implements _AccountExpired {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return accountExpired(this);
   }
@@ -2823,6 +2900,8 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return accountExpired?.call(this);
   }
@@ -2869,6 +2948,8 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -2953,6 +3034,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return tokenExpired();
   }
@@ -2993,6 +3075,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return tokenExpired?.call();
   }
@@ -3033,6 +3116,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -3093,6 +3177,8 @@ class _$_TokenExpired implements _TokenExpired {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return tokenExpired(this);
   }
@@ -3139,6 +3225,8 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return tokenExpired?.call(this);
   }
@@ -3185,6 +3273,8 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -3269,6 +3359,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return authenticationFailed();
   }
@@ -3309,6 +3400,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return authenticationFailed?.call();
   }
@@ -3349,6 +3441,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -3409,6 +3502,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return authenticationFailed(this);
   }
@@ -3455,6 +3550,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return authenticationFailed?.call(this);
   }
@@ -3501,6 +3598,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -3589,6 +3688,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return proxyLoginRolePermissionNotMatch();
   }
@@ -3629,6 +3729,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return proxyLoginRolePermissionNotMatch?.call();
   }
@@ -3669,6 +3770,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -3729,6 +3831,8 @@ class _$_ProxyLoginRolePermissionNotMatch
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return proxyLoginRolePermissionNotMatch(this);
   }
@@ -3775,6 +3879,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return proxyLoginRolePermissionNotMatch?.call(this);
   }
@@ -3821,6 +3927,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -3910,6 +4018,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return proxyLoginZPTargetRoleNotMatch();
   }
@@ -3950,6 +4059,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call();
   }
@@ -3990,6 +4100,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -4050,6 +4161,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return proxyLoginZPTargetRoleNotMatch(this);
   }
@@ -4096,6 +4209,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call(this);
   }
@@ -4142,6 +4257,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -4230,6 +4347,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return proxyLoginZPSalesOrgNotMatch();
   }
@@ -4270,6 +4388,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call();
   }
@@ -4310,6 +4429,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -4370,6 +4490,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return proxyLoginZPSalesOrgNotMatch(this);
   }
@@ -4416,6 +4538,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call(this);
   }
@@ -4462,6 +4586,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -4547,6 +4673,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return passwordResetFail();
   }
@@ -4587,6 +4714,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return passwordResetFail?.call();
   }
@@ -4627,6 +4755,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -4687,6 +4816,8 @@ class _$_PasswordResetFail implements _PasswordResetFail {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return passwordResetFail(this);
   }
@@ -4733,6 +4864,8 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return passwordResetFail?.call(this);
   }
@@ -4779,6 +4912,8 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -4866,6 +5001,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return deviceNotSupportBiometric();
   }
@@ -4906,6 +5042,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return deviceNotSupportBiometric?.call();
   }
@@ -4946,6 +5083,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -5006,6 +5144,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return deviceNotSupportBiometric(this);
   }
@@ -5052,6 +5192,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return deviceNotSupportBiometric?.call(this);
   }
@@ -5098,6 +5240,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -5182,6 +5326,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return cannotCheckBiometrics();
   }
@@ -5222,6 +5367,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -5262,6 +5408,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -5322,6 +5469,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return cannotCheckBiometrics(this);
   }
@@ -5368,6 +5517,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -5414,6 +5565,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -5498,6 +5651,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return noSupportedBiometrics();
   }
@@ -5538,6 +5692,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -5578,6 +5733,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -5638,6 +5794,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return noSupportedBiometrics(this);
   }
@@ -5684,6 +5842,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -5730,6 +5890,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -5814,6 +5976,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return invalidBiometric();
   }
@@ -5854,6 +6017,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return invalidBiometric?.call();
   }
@@ -5894,6 +6058,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -5954,6 +6119,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return invalidBiometric(this);
   }
@@ -6000,6 +6167,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return invalidBiometric?.call(this);
   }
@@ -6046,6 +6215,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -6130,6 +6301,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return priceOverrideNotFound();
   }
@@ -6170,6 +6342,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return priceOverrideNotFound?.call();
   }
@@ -6210,6 +6383,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -6270,6 +6444,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return priceOverrideNotFound(this);
   }
@@ -6316,6 +6492,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return priceOverrideNotFound?.call(this);
   }
@@ -6362,6 +6540,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -6446,6 +6626,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return productOutOfStock();
   }
@@ -6486,6 +6667,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return productOutOfStock?.call();
   }
@@ -6526,6 +6708,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -6586,6 +6769,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return productOutOfStock(this);
   }
@@ -6632,6 +6817,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return productOutOfStock?.call(this);
   }
@@ -6678,6 +6865,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -6762,6 +6951,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return photoPermissionFailed();
   }
@@ -6802,6 +6992,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return photoPermissionFailed?.call();
   }
@@ -6842,6 +7033,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -6902,6 +7094,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return photoPermissionFailed(this);
   }
@@ -6948,6 +7142,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return photoPermissionFailed?.call(this);
   }
@@ -6994,6 +7190,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -7079,6 +7277,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return storagePermissionFailed();
   }
@@ -7119,6 +7318,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return storagePermissionFailed?.call();
   }
@@ -7159,6 +7359,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -7219,6 +7420,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return storagePermissionFailed(this);
   }
@@ -7265,6 +7468,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return storagePermissionFailed?.call(this);
   }
@@ -7311,6 +7516,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -7395,6 +7602,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return invalidFileFormat();
   }
@@ -7435,6 +7643,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return invalidFileFormat?.call();
   }
@@ -7475,6 +7684,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -7535,6 +7745,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return invalidFileFormat(this);
   }
@@ -7581,6 +7793,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return invalidFileFormat?.call(this);
   }
@@ -7627,6 +7841,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -7712,6 +7928,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return uploadCountExcideLimit();
   }
@@ -7752,6 +7969,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return uploadCountExcideLimit?.call();
   }
@@ -7792,6 +8010,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -7852,6 +8071,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return uploadCountExcideLimit(this);
   }
@@ -7898,6 +8119,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return uploadCountExcideLimit?.call(this);
   }
@@ -7944,6 +8167,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -8028,6 +8253,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return materialDetailRoute();
   }
@@ -8068,6 +8294,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return materialDetailRoute?.call();
   }
@@ -8108,6 +8335,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (materialDetailRoute != null) {
@@ -8168,6 +8396,8 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return materialDetailRoute(this);
   }
@@ -8214,6 +8444,8 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return materialDetailRoute?.call(this);
   }
@@ -8260,6 +8492,8 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (materialDetailRoute != null) {
@@ -8344,6 +8578,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return historyDetailRoute();
   }
@@ -8384,6 +8619,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return historyDetailRoute?.call();
   }
@@ -8424,6 +8660,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (historyDetailRoute != null) {
@@ -8484,6 +8721,8 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return historyDetailRoute(this);
   }
@@ -8530,6 +8769,8 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return historyDetailRoute?.call(this);
   }
@@ -8576,6 +8817,8 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (historyDetailRoute != null) {
@@ -8660,6 +8903,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return languageChangeFail();
   }
@@ -8700,6 +8944,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return languageChangeFail?.call();
   }
@@ -8740,6 +8985,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (languageChangeFail != null) {
@@ -8800,6 +9046,8 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return languageChangeFail(this);
   }
@@ -8846,6 +9094,8 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return languageChangeFail?.call(this);
   }
@@ -8892,6 +9142,8 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (languageChangeFail != null) {
@@ -9004,6 +9256,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return scannedProductNotFound(productNumber);
   }
@@ -9044,6 +9297,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return scannedProductNotFound?.call(productNumber);
   }
@@ -9084,6 +9338,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (scannedProductNotFound != null) {
@@ -9144,6 +9399,8 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return scannedProductNotFound(this);
   }
@@ -9190,6 +9447,8 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return scannedProductNotFound?.call(this);
   }
@@ -9236,6 +9495,8 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (scannedProductNotFound != null) {
@@ -9327,6 +9588,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return cameraPermissionFailed();
   }
@@ -9367,6 +9629,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return cameraPermissionFailed?.call();
   }
@@ -9407,6 +9670,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (cameraPermissionFailed != null) {
@@ -9467,6 +9731,8 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return cameraPermissionFailed(this);
   }
@@ -9513,6 +9779,8 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return cameraPermissionFailed?.call(this);
   }
@@ -9559,6 +9827,8 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (cameraPermissionFailed != null) {
@@ -9643,6 +9913,7 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return userNameNotFound();
   }
@@ -9683,6 +9954,7 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return userNameNotFound?.call();
   }
@@ -9723,6 +9995,7 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (userNameNotFound != null) {
@@ -9783,6 +10056,8 @@ class _$_UserNameNotFound implements _UserNameNotFound {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return userNameNotFound(this);
   }
@@ -9829,6 +10104,8 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return userNameNotFound?.call(this);
   }
@@ -9875,6 +10152,8 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (userNameNotFound != null) {
@@ -9960,6 +10239,7 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return uploadedFileSizeExceed();
   }
@@ -10000,6 +10280,7 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return uploadedFileSizeExceed?.call();
   }
@@ -10040,6 +10321,7 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (uploadedFileSizeExceed != null) {
@@ -10100,6 +10382,8 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return uploadedFileSizeExceed(this);
   }
@@ -10146,6 +10430,8 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return uploadedFileSizeExceed?.call(this);
   }
@@ -10192,6 +10478,8 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (uploadedFileSizeExceed != null) {
@@ -10306,6 +10594,7 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return paymentAdviceDeleteFailed(adviceNumber);
   }
@@ -10346,6 +10635,7 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return paymentAdviceDeleteFailed?.call(adviceNumber);
   }
@@ -10386,6 +10676,7 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (paymentAdviceDeleteFailed != null) {
@@ -10446,6 +10737,8 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return paymentAdviceDeleteFailed(this);
   }
@@ -10492,6 +10785,8 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return paymentAdviceDeleteFailed?.call(this);
   }
@@ -10538,6 +10833,8 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (paymentAdviceDeleteFailed != null) {
@@ -10628,6 +10925,7 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
   }) {
     return allReorderItemInvalid();
   }
@@ -10668,6 +10966,7 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
   }) {
     return allReorderItemInvalid?.call();
   }
@@ -10708,6 +11007,7 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (allReorderItemInvalid != null) {
@@ -10768,6 +11068,8 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
   }) {
     return allReorderItemInvalid(this);
   }
@@ -10814,6 +11116,8 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
   }) {
     return allReorderItemInvalid?.call(this);
   }
@@ -10860,6 +11164,8 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
     required TResult orElse(),
   }) {
     if (allReorderItemInvalid != null) {
@@ -10871,4 +11177,365 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
 
 abstract class _AllReorderItemInvalid implements ApiFailure {
   const factory _AllReorderItemInvalid() = _$_AllReorderItemInvalid;
+}
+
+/// @nodoc
+abstract class _$$_MaximumCartQuantityExceedCopyWith<$Res> {
+  factory _$$_MaximumCartQuantityExceedCopyWith(
+          _$_MaximumCartQuantityExceed value,
+          $Res Function(_$_MaximumCartQuantityExceed) then) =
+      __$$_MaximumCartQuantityExceedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String maximumNumber});
+}
+
+/// @nodoc
+class __$$_MaximumCartQuantityExceedCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_MaximumCartQuantityExceed>
+    implements _$$_MaximumCartQuantityExceedCopyWith<$Res> {
+  __$$_MaximumCartQuantityExceedCopyWithImpl(
+      _$_MaximumCartQuantityExceed _value,
+      $Res Function(_$_MaximumCartQuantityExceed) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? maximumNumber = null,
+  }) {
+    return _then(_$_MaximumCartQuantityExceed(
+      null == maximumNumber
+          ? _value.maximumNumber
+          : maximumNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
+  const _$_MaximumCartQuantityExceed(this.maximumNumber);
+
+  @override
+  final String maximumNumber;
+
+  @override
+  String toString() {
+    return 'ApiFailure.maximumCartQuantityExceed(maximumNumber: $maximumNumber)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MaximumCartQuantityExceed &&
+            (identical(other.maximumNumber, maximumNumber) ||
+                other.maximumNumber == maximumNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, maximumNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MaximumCartQuantityExceedCopyWith<_$_MaximumCartQuantityExceed>
+      get copyWith => __$$_MaximumCartQuantityExceedCopyWithImpl<
+          _$_MaximumCartQuantityExceed>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() passwordResetFail,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
+    required TResult Function(String productNumber) scannedProductNotFound,
+    required TResult Function() cameraPermissionFailed,
+    required TResult Function() userNameNotFound,
+    required TResult Function() uploadedFileSizeExceed,
+    required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
+    required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
+  }) {
+    return maximumCartQuantityExceed(maximumNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
+    TResult? Function(String productNumber)? scannedProductNotFound,
+    TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? userNameNotFound,
+    TResult? Function()? uploadedFileSizeExceed,
+    TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
+  }) {
+    return maximumCartQuantityExceed?.call(maximumNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? passwordResetFail,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
+    TResult Function(String productNumber)? scannedProductNotFound,
+    TResult Function()? cameraPermissionFailed,
+    TResult Function()? userNameNotFound,
+    TResult Function()? uploadedFileSizeExceed,
+    TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
+    required TResult orElse(),
+  }) {
+    if (maximumCartQuantityExceed != null) {
+      return maximumCartQuantityExceed(maximumNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+    required TResult Function(_ScannedProductNotFound value)
+        scannedProductNotFound,
+    required TResult Function(_CameraPermissionFailed value)
+        cameraPermissionFailed,
+    required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_UploadedFileSizeExceed value)
+        uploadedFileSizeExceed,
+    required TResult Function(_PaymentAdviceDeleteFailed value)
+        paymentAdviceDeleteFailed,
+    required TResult Function(_AllReorderItemInvalid value)
+        allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
+  }) {
+    return maximumCartQuantityExceed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult? Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+  }) {
+    return maximumCartQuantityExceed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    required TResult orElse(),
+  }) {
+    if (maximumCartQuantityExceed != null) {
+      return maximumCartQuantityExceed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MaximumCartQuantityExceed implements ApiFailure {
+  const factory _MaximumCartQuantityExceed(final String maximumNumber) =
+      _$_MaximumCartQuantityExceed;
+
+  String get maximumNumber;
+  @JsonKey(ignore: true)
+  _$$_MaximumCartQuantityExceedCopyWith<_$_MaximumCartQuantityExceed>
+      get copyWith => throw _privateConstructorUsedError;
 }

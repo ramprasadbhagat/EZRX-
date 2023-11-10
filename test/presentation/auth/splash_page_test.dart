@@ -60,6 +60,7 @@ import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
@@ -925,6 +926,31 @@ void main() {
       expect(
         EasyLocalization.of(tester.element(find.byType(Scaffold)))?.locale,
         const Locale('en'),
+      );
+    });
+
+    testWidgets('When Upsert Cart But Exceed Maximum Quantity', (tester) async {
+      final cartListStates = [
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.maximumCartQuantityExceed('99999'),
+            ),
+          ),
+        ),
+      ];
+      whenListen(cartBlocMock, Stream.fromIterable(cartListStates));
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.customSnackBar),
+          matching: find.text(
+            'In cart quantity should not be more than 99999.'.tr(),
+          ),
+        ),
+        findsOneWidget,
       );
     });
   });

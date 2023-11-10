@@ -1351,6 +1351,40 @@ void main() {
           ),
         ).called(1);
       });
+
+      testWidgets(
+        'Test enter minimum quantity',
+        (tester) async {
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          final inputFinder =
+              find.byKey(WidgetKeys.productDetailQuantityTextKey);
+          await tester.enterText(inputFinder, '0');
+          await tester.pump();
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          expect(
+            tester.widget<TextFormField>(inputFinder).controller?.text,
+            '1',
+          );
+        },
+      );
+
+      testWidgets(
+        'Test limit enter quantity input up to 5 digits',
+        (tester) async {
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          final inputFinder =
+              find.byKey(WidgetKeys.productDetailQuantityTextKey);
+          await tester.enterText(inputFinder, '999999');
+          await tester.pump();
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          expect(
+            tester.widget<TextFormField>(inputFinder).controller?.text,
+            '99999',
+          );
+        },
+      );
     },
   );
 }

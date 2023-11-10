@@ -61,6 +61,8 @@ class ApiFailure with _$ApiFailure {
       _PaymentAdviceDeleteFailed;
   //reorder failure
   const factory ApiFailure.allReorderItemInvalid() = _AllReorderItemInvalid;
+  const factory ApiFailure.maximumCartQuantityExceed(String maximumNumber) =
+      _MaximumCartQuantityExceed;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -110,5 +112,7 @@ extension ApiFailureExt on ApiFailure {
         paymentAdviceDeleteFailed: (paymentAdvice) =>
             'PA #${paymentAdvice.adviceNumber} delete failed',
         allReorderItemInvalid: (_) => 'All reorder materials are invalid',
+        maximumCartQuantityExceed: (maximumExeption) =>
+            'In cart quantity should not be more than ${maximumExeption.maximumNumber}.',
       );
 }
