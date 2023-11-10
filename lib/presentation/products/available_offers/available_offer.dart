@@ -1,6 +1,3 @@
-//ignore_for_file: unused-code
-//ignore_for_file: unused-class
-//ignore_for_file: unused-files
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -35,8 +32,6 @@ class AvailableOffer extends StatelessWidget {
 
         final isMYExternalSalesRepUser =
             eligibilityState.isMYExternalSalesRepUser;
-        final isZdp5enable = eligibilityState.salesOrgConfigs.enableZDP5 &&
-            eligibilityState.salesOrganisation.salesOrg.isVN;
 
         final displayOffers = productDetailsState.displayOffers(
           isMYExternalSalesRepUser: isMYExternalSalesRepUser,
@@ -48,7 +43,6 @@ class AvailableOffer extends StatelessWidget {
         );
 
         if ((!price.isBonusDealEligible && !price.isTireDiscountEligible) ||
-            (!isZdp5enable && !price.isTireDiscountEligible) ||
             !displayOffers) {
           return const SizedBox.shrink();
         }

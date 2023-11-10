@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
-import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -25,14 +24,9 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
 
 class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
@@ -46,7 +40,6 @@ class ProductDetailsMockBloc
     implements ProductDetailBloc {}
 
 void main() {
-  late ProductImageBlocMock productImageBlocMock;
   late MaterialPriceBlocMock materialPriceBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late AppRouter autoRouterMock;
@@ -54,6 +47,18 @@ void main() {
   late Price materialPrice;
   final productDetailMockBloc = ProductDetailsMockBloc();
   final availableOfferFinder = find.byKey(WidgetKeys.availableOfferColumnKey);
+  final bonus = PriceBonus.empty().copyWith(
+    items: [
+      PriceBonusItem.empty().copyWith(
+        bonusMaterials: [
+          BonusMaterial.empty().copyWith(
+            materialNumber: MaterialNumber('123456789'),
+          )
+        ],
+      )
+    ],
+  );
+
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
@@ -64,15 +69,11 @@ void main() {
     );
   });
 
-  group('Test "Available Offer"', () {
+  group('Available Offer -', () {
     setUp(() async {
       TestWidgetsFlutterBinding.ensureInitialized();
-      locator = GetIt.instance;
-      productImageBlocMock = ProductImageBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
-      when(() => productImageBlocMock.state)
-          .thenReturn(ProductImageState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => eligibilityBlocMock.state)
@@ -86,9 +87,6 @@ void main() {
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
         providers: [
-          BlocProvider<ProductImageBloc>(
-            create: (context) => productImageBlocMock,
-          ),
           BlocProvider<MaterialPriceBloc>(
             create: (context) => materialPriceBlocMock,
           ),
@@ -156,69 +154,6 @@ void main() {
         await tester.pumpAndSettle();
       },
     );
-
-    testWidgets(
-      '=> Test AvailableOffer visible for zdp5',
-      (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            user: User.empty().copyWith(
-              username: Username('fake-user'),
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('3070'),
-            ),
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              materialWithoutPrice: true,
-              enableZDP5: true,
-            ),
-          ),
-        );
-
-        when(() => materialPriceBlocMock.state).thenReturn(
-          MaterialPriceState.initial().copyWith(
-            materialPrice: {
-              materialInfoMock.materialNumber: materialPrice.copyWith(
-                tiers: [PriceTier.empty().copyWith(tier: 'fake_tier')],
-                bonuses: [
-                  PriceBonus.empty().copyWith(
-                    items: [
-                      PriceBonusItem.empty().copyWith(
-                        bonusMaterials: [
-                          BonusMaterial.empty().copyWith(
-                            materialNumber: MaterialNumber('123456789'),
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                ],
-              )
-            },
-          ),
-        );
-
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            isFetching: false,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfoMock.copyWith(
-                principalData: PrincipalData(
-                  principalName: materialInfoMock.principalData.principalName,
-                  principalCode: PrincipalCode('105307'),
-                ),
-              ),
-            ),
-          ),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-
-        expect(availableOfferFinder, findsOneWidget);
-
-        await tester.pumpAndSettle();
-      },
-    );
     testWidgets(
       '=> Test AvailableOffer visible when hide price is true',
       (tester) async {
@@ -242,19 +177,7 @@ void main() {
             materialPrice: {
               materialInfoMock.materialNumber: materialPrice.copyWith(
                 tiers: [PriceTier.empty().copyWith(tier: 'fake_tier')],
-                bonuses: [
-                  PriceBonus.empty().copyWith(
-                    items: [
-                      PriceBonusItem.empty().copyWith(
-                        bonusMaterials: [
-                          BonusMaterial.empty().copyWith(
-                            materialNumber: MaterialNumber('123456789'),
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                ],
+                bonuses: [bonus],
               )
             },
           ),
@@ -282,5 +205,52 @@ void main() {
         await tester.pumpAndSettle();
       },
     );
+
+    testWidgets('Not visible when bonus and tier price are empty',
+        (tester) async {
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            materialInfoMock.materialNumber: materialPrice.copyWith(
+              tiers: [],
+              bonuses: [],
+            )
+          },
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(availableOfferFinder, findsNothing);
+    });
+
+    testWidgets('Visible when bonus is not empty', (tester) async {
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            materialInfoMock.materialNumber: materialPrice.copyWith(
+              bonuses: [bonus],
+            )
+          },
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(availableOfferFinder, findsOneWidget);
+    });
+
+    testWidgets('Visible when tier price is not empty', (tester) async {
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            materialInfoMock.materialNumber: materialPrice.copyWith(
+              tiers: [PriceTier.empty()],
+            ),
+          },
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(availableOfferFinder, findsOneWidget);
+    });
   });
 }
