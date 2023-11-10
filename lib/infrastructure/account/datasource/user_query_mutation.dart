@@ -6,8 +6,8 @@ class UserQueryMutation {
   // For fetching userdata by user ID
   String getUserQuery() {
     return '''
-      query userQuery(\$id: Int!) {
-        user(id: \$id) {
+      query userQuery(\$id: Int!, \$ignoreCustomerCode: Boolean) {
+        user(id: \$id, ignoreCustomerCode: \$ignoreCustomerCode) {
             id
             username
             email

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
+import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
@@ -140,6 +141,40 @@ void main() {
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
+            return Future.value(LoginMock());
+          });
+        },
+      );
+
+      test(
+        'Login with password success with authenticate = false',
+        () async {
+          final res = json.decode(
+            await rootBundle
+                .loadString('assets/json/loginAdResponseFailAuthenticate.json'),
+          );
+
+          dioAdapter.onPost(
+            '/api/license',
+            (server) => server.reply(
+              200,
+              res,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.authQueryMutation.getLoginQuery(),
+            }),
+          );
+
+          await remoteDataSource
+              .loginWithPassword(
+            username: 'username',
+            password: 'password',
+            fcmToken: 'fcmToken',
+          )
+              .onError((error, _) async {
+            expect(error, isA<AuthException>());
             return Future.value(LoginMock());
           });
         },

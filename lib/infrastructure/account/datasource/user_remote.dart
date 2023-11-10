@@ -32,7 +32,7 @@ class UserRemoteDataSource {
         url: '${config.urlConstants}license',
         data: jsonEncode({
           'query': userQueryMutation.getUserQuery(),
-          'variables': {'id': userId},
+          'variables': {'id': userId, 'ignoreCustomerCode': true},
         }),
         apiEndpoint: 'userQuery',
       );

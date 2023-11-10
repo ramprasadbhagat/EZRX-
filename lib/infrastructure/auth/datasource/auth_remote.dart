@@ -110,7 +110,11 @@ class AuthRemoteDataSource {
         apiEndpoint: 'proxyLoginV3',
       );
 
-      _authExceptionChecker(res: res, jsonKey: 'proxyLoginV3');
+      _authExceptionChecker(
+        res: res,
+        jsonKey: 'proxyLoginV3',
+        isProxyLogin: true,
+      );
 
       return LoginDto.fromJson(res.data['data']['proxyLoginV3']).toDomain();
     });
@@ -142,6 +146,7 @@ class AuthRemoteDataSource {
   void _authExceptionChecker({
     required Response<dynamic> res,
     required String jsonKey,
+    bool isProxyLogin = false,
   }) {
     if (res.statusCode != 200) {
       throw ServerException(
@@ -150,7 +155,8 @@ class AuthRemoteDataSource {
       );
     } else if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.data['data'][jsonKey]['authenticated'] == false) {
+    } else if (res.data['data'][jsonKey]['authenticated'] == false &&
+        (!isProxyLogin)) {
       throw const AuthException.invalidEmailAndPasswordCombination();
     } else if (res.data['data'][jsonKey]['isAccountLocked'] == true) {
       throw const AuthException.accountLocked();

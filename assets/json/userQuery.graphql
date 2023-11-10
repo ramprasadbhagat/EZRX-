@@ -1,6 +1,6 @@
 {
-    "query":" query userQuery(\$id: Int!) {
-        user(id: \$id) {
+    "query":" query userQuery(\$id: Int!, $ignoreCustomerCode: Boolean) {
+        user(id: \$id, ignoreCustomerCode: \$ignoreCustomerCode) {
             id
             username
             email

@@ -63,7 +63,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation.getUserQuery(),
-            'variables': {'id': userId},
+            'variables': {'id': userId, 'ignoreCustomerCode': true},
           }),
         );
         final result = await remoteDataSource.getUser(userId: userId);
@@ -89,7 +89,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation.getUserQuery(),
-            'variables': {'id': userId},
+            'variables': {'id': userId,'ignoreCustomerCode': true},
           }),
         );
         await remoteDataSource
@@ -116,7 +116,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation.getUserQuery(),
-            'variables': {'id': userId},
+            'variables': {'id': userId,'ignoreCustomerCode': true},
           }),
         );
         await remoteDataSource
