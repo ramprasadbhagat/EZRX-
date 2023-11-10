@@ -17,6 +17,8 @@ extension LocaleExtension on Locale {
         return 'Tiếng Việt';
       case 'kh':
         return 'ភាសាខ្មែរ';
+      case 'mm':
+        return 'Burmese';
       default:
         return '';
     }
