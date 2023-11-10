@@ -319,7 +319,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 if (!state.isFetching) {
                   _fetchProductImage(
                     context,
-                    state.orderHistoryList.orderHistoryItems,
+                    state.orderHistory.orderHistoryItems,
                   );
                 }
               },
@@ -456,7 +456,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               (_) => _fetchProductImage(
                 context,
-                state.viewByItemDetails.orderHistoryItems,
+                state.orderHistory.orderHistoryItems,
               ),
             ),
           ),

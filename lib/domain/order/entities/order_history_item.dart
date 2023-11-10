@@ -91,15 +91,16 @@ class OrderHistoryItem with _$OrderHistoryItem {
             ? ZpPrice('${unitPrice.zpPrice + tax / qty}')
             : unitPrice,
       );
-  StatusType get productTag {
-    return StatusType(isBonusMaterial ? 'Bonus' : '');
-  }
 
   MaterialInfo get reOrderMaterialInfo => MaterialInfo.empty().copyWith(
         type: MaterialInfoType.material(),
         materialNumber: materialNumber,
         quantity: MaterialQty(qty),
       );
+
+  StatusType get productTag => StatusType(isBonusMaterial ? 'Bonus' : '');
+
+  bool get isEmpty => this == OrderHistoryItem.empty();
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {

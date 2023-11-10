@@ -30,6 +30,18 @@ class _ViewByOrder extends StatelessWidget {
                     orderHistoryDetails: viewByOrderHistoryItem,
                   ),
                 );
+            context.read<ViewByItemDetailsBloc>().add(
+                  ViewByItemDetailsEvent.searchOrderHistory(
+                    disableDeliveryDateForZyllemStatus:
+                        eligibilityState.salesOrgConfigs.disableDeliveryDate,
+                    customerCodeInfo: eligibilityState.customerCodeInfo,
+                    user: eligibilityState.user,
+                    salesOrganisation: eligibilityState.salesOrganisation,
+                    searchKey: SearchKey(
+                      viewByOrderHistoryItem.orderNumber.getValue(),
+                    ),
+                  ),
+                );
             context.router.push(
               const ViewByOrderDetailsPageRoute(),
             );

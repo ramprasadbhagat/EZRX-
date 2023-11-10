@@ -16,9 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'view_by_item_bloc.freezed.dart';
-
 part 'view_by_item_event.dart';
-
 part 'view_by_item_state.dart';
 
 class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
@@ -57,7 +55,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
         emit(
           state.copyWith(
             isFetching: true,
-            orderHistoryList: OrderHistory.empty(),
+            orderHistory: OrderHistory.empty(),
             nextPageIndex: 0,
             failureOrSuccessOption: none(),
             searchKey: e.searchKey,
@@ -86,21 +84,21 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
               ),
             );
           },
-          (orderHistoryList) {
+          (orderHistory) {
             emit(
               state.copyWith(
-                orderHistoryList: orderHistoryList,
+                orderHistory: orderHistory,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
-                canLoadMore: orderHistoryList.orderHistoryItems.length >=
-                    config.pageSize,
+                canLoadMore:
+                    orderHistory.orderHistoryItems.length >= config.pageSize,
                 nextPageIndex: 1,
                 appliedFilter: e.viewByItemFilter,
               ),
             );
             add(
               _FetchOrdersInvoiceData(
-                orderHistoryItems: orderHistoryList.orderHistoryItems,
+                orderHistoryItems: orderHistory.orderHistoryItems,
               ),
             );
           },
@@ -119,7 +117,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
           shipTo: state.shipToInfo,
           user: state.user,
           pageSize: config.pageSize,
-          offset: state.orderHistoryList.orderHistoryItems.length,
+          offset: state.orderHistory.orderHistoryItems.length,
           viewByItemFilter: state.appliedFilter,
           searchKey: state.searchKey,
           salesOrganisation: state.salesOrganisation,
@@ -134,34 +132,33 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
               ),
             );
           },
-          (orderHistoryList) {
+          (orderHistory) {
             final newOrderHistoryList = List<OrderHistoryItem>.from(
-              state.orderHistoryList.orderHistoryItems,
-            )..addAll(orderHistoryList.orderHistoryItems);
+              state.orderHistory.orderHistoryItems,
+            )..addAll(orderHistory.orderHistoryItems);
 
             emit(
               state.copyWith(
-                orderHistoryList: state.orderHistoryList.copyWith(
+                orderHistory: state.orderHistory.copyWith(
                   orderHistoryItems: newOrderHistoryList,
                 ),
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
-                canLoadMore: orderHistoryList.orderHistoryItems.length >=
-                    config.pageSize,
+                canLoadMore:
+                    orderHistory.orderHistoryItems.length >= config.pageSize,
                 nextPageIndex: state.nextPageIndex + 1,
               ),
             );
 
             add(
               _FetchOrdersInvoiceData(
-                orderHistoryItems: orderHistoryList.orderHistoryItems,
+                orderHistoryItems: orderHistory.orderHistoryItems,
               ),
             );
           },
         );
       },
     );
-
     on<_FetchOrdersInvoiceData>(
       (e, emit) async {
         final orderNumbers =
@@ -192,7 +189,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
           },
           (invoiceDataMap) {
             final orderHistoryItemsList = List<OrderHistoryItem>.from(
-              state.orderHistoryList.orderHistoryItems,
+              state.orderHistory.orderHistoryItems,
             )
                 .map(
                   (orderItem) => orderItem.copyWith(
@@ -204,7 +201,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
 
             emit(
               state.copyWith(
-                orderHistoryList: state.orderHistoryList.copyWith(
+                orderHistory: state.orderHistory.copyWith(
                   orderHistoryItems: orderHistoryItemsList,
                 ),
                 failureOrSuccessOption: none(),

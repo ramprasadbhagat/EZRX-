@@ -133,8 +133,8 @@ void _showDetailsPage({
     builder: (_) {
       return BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
         buildWhen: (previous, current) =>
-            previous.viewByItemDetails.orderHistoryItems !=
-            current.viewByItemDetails.orderHistoryItems,
+            previous.orderHistory.orderHistoryItems !=
+            current.orderHistory.orderHistoryItems,
         builder: (context, state) {
           return OrderStatusSection(
             orderHistoryItem: state.orderHistoryItem,

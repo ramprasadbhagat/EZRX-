@@ -69,12 +69,14 @@ class OrderNumberSection extends StatelessWidget {
         builder: (context, state) {
           return Row(
             children: [
-              Text(
-                '${context.tr('Order')} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
-                key: WidgetKeys.viewByItemsOrderDetailOrderCode,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.white,
-                    ),
+              Expanded(
+                child: Text(
+                  '${context.tr('Order')} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                  key: WidgetKeys.viewByItemsOrderDetailOrderCode,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: ZPColors.white,
+                      ),
+                ),
               ),
               state.isFetching
                   ? Align(

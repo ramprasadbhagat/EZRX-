@@ -913,7 +913,7 @@ mixin _$ViewByItemsState {
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
-  OrderHistory get orderHistoryList => throw _privateConstructorUsedError;
+  OrderHistory get orderHistory => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   bool get isFetchingInvoices => throw _privateConstructorUsedError;
@@ -940,7 +940,7 @@ abstract class $ViewByItemsStateCopyWith<$Res> {
       ShipToInfo shipToInfo,
       User user,
       SalesOrganisation salesOrganisation,
-      OrderHistory orderHistoryList,
+      OrderHistory orderHistory,
       bool canLoadMore,
       bool isFetching,
       bool isFetchingInvoices,
@@ -954,7 +954,7 @@ abstract class $ViewByItemsStateCopyWith<$Res> {
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $OrderHistoryCopyWith<$Res> get orderHistoryList;
+  $OrderHistoryCopyWith<$Res> get orderHistory;
   $ViewByItemFilterCopyWith<$Res> get appliedFilter;
 }
 
@@ -976,7 +976,7 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
     Object? shipToInfo = null,
     Object? user = null,
     Object? salesOrganisation = null,
-    Object? orderHistoryList = null,
+    Object? orderHistory = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
     Object? isFetchingInvoices = null,
@@ -1006,9 +1006,9 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      orderHistoryList: null == orderHistoryList
-          ? _value.orderHistoryList
-          : orderHistoryList // ignore: cast_nullable_to_non_nullable
+      orderHistory: null == orderHistory
+          ? _value.orderHistory
+          : orderHistory // ignore: cast_nullable_to_non_nullable
               as OrderHistory,
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
@@ -1084,9 +1084,9 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
 
   @override
   @pragma('vm:prefer-inline')
-  $OrderHistoryCopyWith<$Res> get orderHistoryList {
-    return $OrderHistoryCopyWith<$Res>(_value.orderHistoryList, (value) {
-      return _then(_value.copyWith(orderHistoryList: value) as $Val);
+  $OrderHistoryCopyWith<$Res> get orderHistory {
+    return $OrderHistoryCopyWith<$Res>(_value.orderHistory, (value) {
+      return _then(_value.copyWith(orderHistory: value) as $Val);
     });
   }
 
@@ -1113,7 +1113,7 @@ abstract class _$$_ViewByItemsStateCopyWith<$Res>
       ShipToInfo shipToInfo,
       User user,
       SalesOrganisation salesOrganisation,
-      OrderHistory orderHistoryList,
+      OrderHistory orderHistory,
       bool canLoadMore,
       bool isFetching,
       bool isFetchingInvoices,
@@ -1133,7 +1133,7 @@ abstract class _$$_ViewByItemsStateCopyWith<$Res>
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
-  $OrderHistoryCopyWith<$Res> get orderHistoryList;
+  $OrderHistoryCopyWith<$Res> get orderHistory;
   @override
   $ViewByItemFilterCopyWith<$Res> get appliedFilter;
 }
@@ -1154,7 +1154,7 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? user = null,
     Object? salesOrganisation = null,
-    Object? orderHistoryList = null,
+    Object? orderHistory = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
     Object? isFetchingInvoices = null,
@@ -1184,9 +1184,9 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      orderHistoryList: null == orderHistoryList
-          ? _value.orderHistoryList
-          : orderHistoryList // ignore: cast_nullable_to_non_nullable
+      orderHistory: null == orderHistory
+          ? _value.orderHistory
+          : orderHistory // ignore: cast_nullable_to_non_nullable
               as OrderHistory,
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
@@ -1229,7 +1229,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
       required this.shipToInfo,
       required this.user,
       required this.salesOrganisation,
-      required this.orderHistoryList,
+      required this.orderHistory,
       required this.canLoadMore,
       required this.isFetching,
       required this.isFetchingInvoices,
@@ -1250,7 +1250,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
   @override
   final SalesOrganisation salesOrganisation;
   @override
-  final OrderHistory orderHistoryList;
+  final OrderHistory orderHistory;
   @override
   final bool canLoadMore;
   @override
@@ -1268,7 +1268,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
 
   @override
   String toString() {
-    return 'ViewByItemsState(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrganisation: $salesOrganisation, orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, isFetchingInvoices: $isFetchingInvoices, nextPageIndex: $nextPageIndex, appliedFilter: $appliedFilter, searchKey: $searchKey, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByItemsState(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrganisation: $salesOrganisation, orderHistory: $orderHistory, canLoadMore: $canLoadMore, isFetching: $isFetching, isFetchingInvoices: $isFetchingInvoices, nextPageIndex: $nextPageIndex, appliedFilter: $appliedFilter, searchKey: $searchKey, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -1285,8 +1285,8 @@ class _$_ViewByItemsState extends _ViewByItemsState {
             (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
-            (identical(other.orderHistoryList, orderHistoryList) ||
-                other.orderHistoryList == orderHistoryList) &&
+            (identical(other.orderHistory, orderHistory) ||
+                other.orderHistory == orderHistory) &&
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
             (identical(other.isFetching, isFetching) ||
@@ -1311,7 +1311,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
       shipToInfo,
       user,
       salesOrganisation,
-      orderHistoryList,
+      orderHistory,
       canLoadMore,
       isFetching,
       isFetchingInvoices,
@@ -1334,7 +1334,7 @@ abstract class _ViewByItemsState extends ViewByItemsState {
       required final ShipToInfo shipToInfo,
       required final User user,
       required final SalesOrganisation salesOrganisation,
-      required final OrderHistory orderHistoryList,
+      required final OrderHistory orderHistory,
       required final bool canLoadMore,
       required final bool isFetching,
       required final bool isFetchingInvoices,
@@ -1356,7 +1356,7 @@ abstract class _ViewByItemsState extends ViewByItemsState {
   @override
   SalesOrganisation get salesOrganisation;
   @override
-  OrderHistory get orderHistoryList;
+  OrderHistory get orderHistory;
   @override
   bool get canLoadMore;
   @override

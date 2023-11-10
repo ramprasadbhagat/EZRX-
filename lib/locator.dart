@@ -2791,6 +2791,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ViewByItemDetailsBloc(
       orderStatusTrackerRepository: locator<OrderStatusTrackerRepository>(),
+      viewByItemRepository: locator<ViewByItemRepository>(),
     ),
   );
 

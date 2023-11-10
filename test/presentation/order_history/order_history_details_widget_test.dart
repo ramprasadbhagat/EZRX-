@@ -440,7 +440,7 @@ void main() {
 
       expect(isBillToEnable, false);
       when(() => mockViewByItemsBloc.state).thenReturn(
-        ViewByItemsState.initial().copyWith(orderHistoryList: orderHistory),
+        ViewByItemsState.initial().copyWith(orderHistory: orderHistory),
       );
 
       await tester.pumpWidget(getWUT());

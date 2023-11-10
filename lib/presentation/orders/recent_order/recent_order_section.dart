@@ -55,12 +55,12 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
       buildWhen: (previous, current) =>
-          previous.orderHistoryList.orderHistoryItems !=
-              current.orderHistoryList.orderHistoryItems ||
+          previous.orderHistory.orderHistoryItems !=
+              current.orderHistory.orderHistoryItems ||
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         return state.isFetching ||
-                state.orderHistoryList.orderHistoryItems.isNotEmpty
+                state.orderHistory.orderHistoryItems.isNotEmpty
             ? Column(
                 children: [
                   Padding(
@@ -81,7 +81,7 @@ class _BodyContent extends StatelessWidget {
                           )
                         : ListView(
                             scrollDirection: Axis.horizontal,
-                            children: state.orderHistoryList.orderHistoryItems
+                            children: state.orderHistory.orderHistoryItems
                                 .map((e) => _ProductTile(product: e))
                                 .toList(),
                           ),
@@ -180,7 +180,7 @@ class _ProductTile extends StatelessWidget {
   ) {
     context.read<ViewByItemDetailsBloc>().add(
           ViewByItemDetailsEvent.setItemOrderDetails(
-            viewByItems: context.read<ViewByItemsBloc>().state.orderHistoryList,
+            orderHistory: context.read<ViewByItemsBloc>().state.orderHistory,
             orderHistoryItem: orderHistoryItem,
             disableDeliveryDateForZyllemStatus: context
                 .read<EligibilityBloc>()

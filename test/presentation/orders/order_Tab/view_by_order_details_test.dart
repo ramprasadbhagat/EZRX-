@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -23,10 +24,12 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -55,6 +58,10 @@ class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
     implements ViewByOrderBloc {}
+
+class ViewByItemDetailsBlocMock
+    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
+    implements ViewByItemDetailsBloc {}
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -94,6 +101,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   final mockViewByOrderBloc = ViewByOrderBlocMock();
+  final mockViewByItemDetailsBloc = ViewByItemDetailsBlocMock();
   final mockViewByOrderDetailsBloc = ViewByOrderDetailsBlockMock();
   final mockSalesOrgBloc = SalesOrgMockBloc();
   final userBlocMock = UserMockBloc();
@@ -150,7 +158,6 @@ void main() {
       );
       when(() => mockViewByOrderBloc.state)
           .thenReturn(ViewByOrderState.initial());
-
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => announcementBlocMock.state)
@@ -192,6 +199,20 @@ void main() {
       );
       when(() => mockPoAttachmentBloc.state)
           .thenReturn(PoAttachmentState.initial());
+
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: <OrderHistoryItem>[
+              OrderHistoryItem.empty().copyWith(
+                materialNumber: MaterialNumber('000000000021247719'),
+                unitPrice: ZpPrice('17.2'),
+                totalPrice: TotalPrice('516'),
+              )
+            ],
+          ),
+        ),
+      );
     });
 
     Widget getScopedWidget() {
@@ -208,6 +229,9 @@ void main() {
           ),
           BlocProvider<ViewByOrderBloc>(
             create: (context) => mockViewByOrderBloc,
+          ),
+          BlocProvider<ViewByItemDetailsBloc>(
+            create: (context) => mockViewByItemDetailsBloc,
           ),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,

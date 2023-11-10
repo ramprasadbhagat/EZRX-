@@ -235,7 +235,7 @@ void main() {
           isLoading: false,
           orderHistoryItem:
               fakeOrderHistoryItem.copyWith(orderStatusTracker: []),
-          viewByItemDetails: OrderHistory.empty().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
         ),
@@ -274,7 +274,7 @@ void main() {
           isLoading: false,
           orderHistoryItem:
               fakeOrderHistoryItem.copyWith(orderStatusTracker: []),
-          viewByItemDetails: OrderHistory.empty().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
         ),
@@ -306,7 +306,7 @@ void main() {
         ViewByItemDetailsState.initial().copyWith(
           isLoading: false,
           orderHistoryItem: fakeOrderHistoryItem,
-          viewByItemDetails: OrderHistory.empty().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
         ),
@@ -335,7 +335,7 @@ void main() {
         ViewByItemDetailsState.initial().copyWith(
           isLoading: false,
           orderHistoryItem: fakeOrderHistoryItem,
-          viewByItemDetails: OrderHistory.empty().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
         ),
@@ -357,7 +357,7 @@ void main() {
             status: StatusType('Order Creating'),
             orderStatusTracker: [],
           ),
-          viewByItemDetails: OrderHistory.empty().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
         ),
@@ -393,7 +393,7 @@ void main() {
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem,
-          viewByItemDetails: OrderHistory.empty().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [
               fakeOrderHistoryItem,
             ],
@@ -428,7 +428,7 @@ void main() {
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem,
-          viewByItemDetails: OrderHistory.empty().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [
               fakeOrderHistoryItem,
             ],
@@ -451,7 +451,7 @@ void main() {
       when(() => mockViewByItemDetailsBloc.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem,
-          viewByItemDetails: OrderHistory.empty().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [
               fakeOrderHistoryItem.copyWith(
                 promoStatus: true,
@@ -474,7 +474,7 @@ void main() {
       when(() => mockViewByItemDetailsBloc.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem,
-          viewByItemDetails: OrderHistory.empty().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [
               fakeOrderHistoryItem.copyWith(
                 isBundle: true,
@@ -508,7 +508,7 @@ void main() {
         when(() => mockViewByItemDetailsBloc.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
             orderHistoryItem: fakeOrderHistoryItem,
-            viewByItemDetails: OrderHistory.empty().copyWith(
+            orderHistory: OrderHistory.empty().copyWith(
               orderHistoryItems: [fakeOrderHistoryItem],
             ),
           ),

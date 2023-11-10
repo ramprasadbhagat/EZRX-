@@ -1,12 +1,18 @@
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_status_tracker_repository.dart';
-
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+
 part 'view_by_item_details_event.dart';
 part 'view_by_item_details_state.dart';
 part 'view_by_item_details_bloc.freezed.dart';
@@ -14,9 +20,11 @@ part 'view_by_item_details_bloc.freezed.dart';
 class ViewByItemDetailsBloc
     extends Bloc<ViewByItemDetailsEvent, ViewByItemDetailsState> {
   final IOrderStatusTrackerRepository orderStatusTrackerRepository;
+  final IViewByItemRepository viewByItemRepository;
 
   ViewByItemDetailsBloc({
     required this.orderStatusTrackerRepository,
+    required this.viewByItemRepository,
   }) : super(ViewByItemDetailsState.initial()) {
     on<ViewByItemDetailsEvent>(_onEvent);
   }
@@ -27,8 +35,55 @@ class ViewByItemDetailsBloc
   ) async {
     await event.map(
       initialized: (e) async => emit(ViewByItemDetailsState.initial()),
+      searchOrderHistory: (e) async {
+        if (!e.searchKey.validateNotEmpty || !e.searchKey.isValid()) return;
+
+        emit(
+          state.copyWith(
+            isLoading: true,
+            orderHistory: OrderHistory.empty(),
+            orderHistoryItem: OrderHistoryItem.empty(),
+            failureOrSuccessOption: none(),
+          ),
+        );
+
+        final failureOrSuccess = await viewByItemRepository.searchOrderHistory(
+          soldTo: e.customerCodeInfo,
+          user: e.user,
+          searchKey: e.searchKey,
+          salesOrganisation: e.salesOrganisation,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isLoading: false,
+              ),
+            );
+          },
+          (orderHistory) {
+            emit(
+              state.copyWith(
+                orderHistory: orderHistory,
+                orderHistoryItem: orderHistory.orderHistoryItems.firstOrNull ??
+                    state.orderHistoryItem,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isLoading: false,
+              ),
+            );
+            if (!e.disableDeliveryDateForZyllemStatus &&
+                state.orderHistoryItem.status.getDisplayZyllemStatus) {
+              add(
+                const _FetchZyllemStatus(),
+              );
+            }
+          },
+        );
+      },
       setItemOrderDetails: (e) {
-        final modifiedList = e.viewByItems.orderHistoryItems
+        final modifiedList = e.orderHistory.orderHistoryItems
             .where(
               (element) =>
                   element.hashCode != e.orderHistoryItem.hashCode &&
@@ -37,7 +92,7 @@ class ViewByItemDetailsBloc
             .toList();
         emit(
           state.copyWith(
-            viewByItemDetails: e.viewByItems.copyWith(
+            orderHistory: e.orderHistory.copyWith(
               orderHistoryItems: modifiedList,
             ),
             orderHistoryItem: e.orderHistoryItem,
@@ -63,8 +118,8 @@ class ViewByItemDetailsBloc
           (updatedListWithStatus) {
             emit(
               state.copyWith(
-                viewByItemDetails: state.viewByItemDetails.copyWith(
-                  orderHistoryItems: state.viewByItemDetails.orderHistoryItems
+                orderHistory: state.orderHistory.copyWith(
+                  orderHistoryItems: state.orderHistory.orderHistoryItems
                       .map(
                         (e) => e.copyWith(
                           orderStatusTracker: updatedListWithStatus,

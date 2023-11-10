@@ -22,10 +22,17 @@ mixin _$ViewByItemDetailsEvent {
     required TResult Function() fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
     required TResult Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)
         setItemOrderDetails,
+    required TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)
+        searchOrderHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,10 +41,17 @@ mixin _$ViewByItemDetailsEvent {
     TResult? Function()? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
     TResult? Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)?
         setItemOrderDetails,
+    TResult? Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,10 +60,17 @@ mixin _$ViewByItemDetailsEvent {
     TResult Function()? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
     TResult Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)?
         setItemOrderDetails,
+    TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +80,7 @@ mixin _$ViewByItemDetailsEvent {
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
+    required TResult Function(_SearchOrderHistory value) searchOrderHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +89,7 @@ mixin _$ViewByItemDetailsEvent {
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +98,7 @@ mixin _$ViewByItemDetailsEvent {
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult Function(_SearchOrderHistory value)? searchOrderHistory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -141,10 +165,17 @@ class _$_Initialized implements _Initialized {
     required TResult Function() fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
     required TResult Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)
         setItemOrderDetails,
+    required TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)
+        searchOrderHistory,
   }) {
     return initialized();
   }
@@ -156,10 +187,17 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
     TResult? Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)?
         setItemOrderDetails,
+    TResult? Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
   }) {
     return initialized?.call();
   }
@@ -171,10 +209,17 @@ class _$_Initialized implements _Initialized {
     TResult Function()? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
     TResult Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)?
         setItemOrderDetails,
+    TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -190,6 +235,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
+    required TResult Function(_SearchOrderHistory value) searchOrderHistory,
   }) {
     return initialized(this);
   }
@@ -201,6 +247,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
   }) {
     return initialized?.call(this);
   }
@@ -212,6 +259,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult Function(_SearchOrderHistory value)? searchOrderHistory,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -267,10 +315,17 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     required TResult Function() fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
     required TResult Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)
         setItemOrderDetails,
+    required TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)
+        searchOrderHistory,
   }) {
     return fetchZyllemStatus();
   }
@@ -282,10 +337,17 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     TResult? Function()? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
     TResult? Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)?
         setItemOrderDetails,
+    TResult? Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
   }) {
     return fetchZyllemStatus?.call();
   }
@@ -297,10 +359,17 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     TResult Function()? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
     TResult Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)?
         setItemOrderDetails,
+    TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
     required TResult orElse(),
   }) {
     if (fetchZyllemStatus != null) {
@@ -316,6 +385,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
+    required TResult Function(_SearchOrderHistory value) searchOrderHistory,
   }) {
     return fetchZyllemStatus(this);
   }
@@ -327,6 +397,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
   }) {
     return fetchZyllemStatus?.call(this);
   }
@@ -338,6 +409,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult Function(_SearchOrderHistory value)? searchOrderHistory,
     required TResult orElse(),
   }) {
     if (fetchZyllemStatus != null) {
@@ -420,10 +492,17 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     required TResult Function() fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
     required TResult Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)
         setItemOrderDetails,
+    required TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)
+        searchOrderHistory,
   }) {
     return updateIsExpanded(isExpanded);
   }
@@ -435,10 +514,17 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     TResult? Function()? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
     TResult? Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)?
         setItemOrderDetails,
+    TResult? Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
   }) {
     return updateIsExpanded?.call(isExpanded);
   }
@@ -450,10 +536,17 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     TResult Function()? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
     TResult Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)?
         setItemOrderDetails,
+    TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
     required TResult orElse(),
   }) {
     if (updateIsExpanded != null) {
@@ -469,6 +562,7 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
+    required TResult Function(_SearchOrderHistory value) searchOrderHistory,
   }) {
     return updateIsExpanded(this);
   }
@@ -480,6 +574,7 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
   }) {
     return updateIsExpanded?.call(this);
   }
@@ -491,6 +586,7 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult Function(_SearchOrderHistory value)? searchOrderHistory,
     required TResult orElse(),
   }) {
     if (updateIsExpanded != null) {
@@ -517,11 +613,11 @@ abstract class _$$_SetItemOrderDetailsCopyWith<$Res> {
       __$$_SetItemOrderDetailsCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {OrderHistory viewByItems,
+      {OrderHistory orderHistory,
       OrderHistoryItem orderHistoryItem,
       bool disableDeliveryDateForZyllemStatus});
 
-  $OrderHistoryCopyWith<$Res> get viewByItems;
+  $OrderHistoryCopyWith<$Res> get orderHistory;
   $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
 }
 
@@ -536,14 +632,14 @@ class __$$_SetItemOrderDetailsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viewByItems = null,
+    Object? orderHistory = null,
     Object? orderHistoryItem = null,
     Object? disableDeliveryDateForZyllemStatus = null,
   }) {
     return _then(_$_SetItemOrderDetails(
-      viewByItems: null == viewByItems
-          ? _value.viewByItems
-          : viewByItems // ignore: cast_nullable_to_non_nullable
+      orderHistory: null == orderHistory
+          ? _value.orderHistory
+          : orderHistory // ignore: cast_nullable_to_non_nullable
               as OrderHistory,
       orderHistoryItem: null == orderHistoryItem
           ? _value.orderHistoryItem
@@ -559,9 +655,9 @@ class __$$_SetItemOrderDetailsCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $OrderHistoryCopyWith<$Res> get viewByItems {
-    return $OrderHistoryCopyWith<$Res>(_value.viewByItems, (value) {
-      return _then(_value.copyWith(viewByItems: value));
+  $OrderHistoryCopyWith<$Res> get orderHistory {
+    return $OrderHistoryCopyWith<$Res>(_value.orderHistory, (value) {
+      return _then(_value.copyWith(orderHistory: value));
     });
   }
 
@@ -578,12 +674,12 @@ class __$$_SetItemOrderDetailsCopyWithImpl<$Res>
 
 class _$_SetItemOrderDetails implements _SetItemOrderDetails {
   const _$_SetItemOrderDetails(
-      {required this.viewByItems,
+      {required this.orderHistory,
       required this.orderHistoryItem,
       required this.disableDeliveryDateForZyllemStatus});
 
   @override
-  final OrderHistory viewByItems;
+  final OrderHistory orderHistory;
   @override
   final OrderHistoryItem orderHistoryItem;
   @override
@@ -591,7 +687,7 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
 
   @override
   String toString() {
-    return 'ViewByItemDetailsEvent.setItemOrderDetails(viewByItems: $viewByItems, orderHistoryItem: $orderHistoryItem, disableDeliveryDateForZyllemStatus: $disableDeliveryDateForZyllemStatus)';
+    return 'ViewByItemDetailsEvent.setItemOrderDetails(orderHistory: $orderHistory, orderHistoryItem: $orderHistoryItem, disableDeliveryDateForZyllemStatus: $disableDeliveryDateForZyllemStatus)';
   }
 
   @override
@@ -599,8 +695,8 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetItemOrderDetails &&
-            (identical(other.viewByItems, viewByItems) ||
-                other.viewByItems == viewByItems) &&
+            (identical(other.orderHistory, orderHistory) ||
+                other.orderHistory == orderHistory) &&
             (identical(other.orderHistoryItem, orderHistoryItem) ||
                 other.orderHistoryItem == orderHistoryItem) &&
             (identical(other.disableDeliveryDateForZyllemStatus,
@@ -610,7 +706,7 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, viewByItems, orderHistoryItem,
+  int get hashCode => Object.hash(runtimeType, orderHistory, orderHistoryItem,
       disableDeliveryDateForZyllemStatus);
 
   @JsonKey(ignore: true)
@@ -627,13 +723,20 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     required TResult Function() fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
     required TResult Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)
         setItemOrderDetails,
+    required TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)
+        searchOrderHistory,
   }) {
     return setItemOrderDetails(
-        viewByItems, orderHistoryItem, disableDeliveryDateForZyllemStatus);
+        orderHistory, orderHistoryItem, disableDeliveryDateForZyllemStatus);
   }
 
   @override
@@ -643,13 +746,20 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     TResult? Function()? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
     TResult? Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)?
         setItemOrderDetails,
+    TResult? Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
   }) {
     return setItemOrderDetails?.call(
-        viewByItems, orderHistoryItem, disableDeliveryDateForZyllemStatus);
+        orderHistory, orderHistoryItem, disableDeliveryDateForZyllemStatus);
   }
 
   @override
@@ -659,15 +769,22 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     TResult Function()? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
     TResult Function(
-            OrderHistory viewByItems,
+            OrderHistory orderHistory,
             OrderHistoryItem orderHistoryItem,
             bool disableDeliveryDateForZyllemStatus)?
         setItemOrderDetails,
+    TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
     required TResult orElse(),
   }) {
     if (setItemOrderDetails != null) {
       return setItemOrderDetails(
-          viewByItems, orderHistoryItem, disableDeliveryDateForZyllemStatus);
+          orderHistory, orderHistoryItem, disableDeliveryDateForZyllemStatus);
     }
     return orElse();
   }
@@ -679,6 +796,7 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
+    required TResult Function(_SearchOrderHistory value) searchOrderHistory,
   }) {
     return setItemOrderDetails(this);
   }
@@ -690,6 +808,7 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
   }) {
     return setItemOrderDetails?.call(this);
   }
@@ -701,6 +820,7 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult Function(_SearchOrderHistory value)? searchOrderHistory,
     required TResult orElse(),
   }) {
     if (setItemOrderDetails != null) {
@@ -712,12 +832,12 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
 
 abstract class _SetItemOrderDetails implements ViewByItemDetailsEvent {
   const factory _SetItemOrderDetails(
-          {required final OrderHistory viewByItems,
+          {required final OrderHistory orderHistory,
           required final OrderHistoryItem orderHistoryItem,
           required final bool disableDeliveryDateForZyllemStatus}) =
       _$_SetItemOrderDetails;
 
-  OrderHistory get viewByItems;
+  OrderHistory get orderHistory;
   OrderHistoryItem get orderHistoryItem;
   bool get disableDeliveryDateForZyllemStatus;
   @JsonKey(ignore: true)
@@ -726,8 +846,285 @@ abstract class _SetItemOrderDetails implements ViewByItemDetailsEvent {
 }
 
 /// @nodoc
+abstract class _$$_SearchOrderHistoryCopyWith<$Res> {
+  factory _$$_SearchOrderHistoryCopyWith(_$_SearchOrderHistory value,
+          $Res Function(_$_SearchOrderHistory) then) =
+      __$$_SearchOrderHistoryCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {bool disableDeliveryDateForZyllemStatus,
+      CustomerCodeInfo customerCodeInfo,
+      User user,
+      SalesOrganisation salesOrganisation,
+      SearchKey searchKey});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $UserCopyWith<$Res> get user;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+}
+
+/// @nodoc
+class __$$_SearchOrderHistoryCopyWithImpl<$Res>
+    extends _$ViewByItemDetailsEventCopyWithImpl<$Res, _$_SearchOrderHistory>
+    implements _$$_SearchOrderHistoryCopyWith<$Res> {
+  __$$_SearchOrderHistoryCopyWithImpl(
+      _$_SearchOrderHistory _value, $Res Function(_$_SearchOrderHistory) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? disableDeliveryDateForZyllemStatus = null,
+    Object? customerCodeInfo = null,
+    Object? user = null,
+    Object? salesOrganisation = null,
+    Object? searchKey = null,
+  }) {
+    return _then(_$_SearchOrderHistory(
+      disableDeliveryDateForZyllemStatus: null ==
+              disableDeliveryDateForZyllemStatus
+          ? _value.disableDeliveryDateForZyllemStatus
+          : disableDeliveryDateForZyllemStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_SearchOrderHistory implements _SearchOrderHistory {
+  const _$_SearchOrderHistory(
+      {required this.disableDeliveryDateForZyllemStatus,
+      required this.customerCodeInfo,
+      required this.user,
+      required this.salesOrganisation,
+      required this.searchKey});
+
+  @override
+  final bool disableDeliveryDateForZyllemStatus;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final User user;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SearchKey searchKey;
+
+  @override
+  String toString() {
+    return 'ViewByItemDetailsEvent.searchOrderHistory(disableDeliveryDateForZyllemStatus: $disableDeliveryDateForZyllemStatus, customerCodeInfo: $customerCodeInfo, user: $user, salesOrganisation: $salesOrganisation, searchKey: $searchKey)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SearchOrderHistory &&
+            (identical(other.disableDeliveryDateForZyllemStatus,
+                    disableDeliveryDateForZyllemStatus) ||
+                other.disableDeliveryDateForZyllemStatus ==
+                    disableDeliveryDateForZyllemStatus) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      disableDeliveryDateForZyllemStatus,
+      customerCodeInfo,
+      user,
+      salesOrganisation,
+      searchKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SearchOrderHistoryCopyWith<_$_SearchOrderHistory> get copyWith =>
+      __$$_SearchOrderHistoryCopyWithImpl<_$_SearchOrderHistory>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetchZyllemStatus,
+    required TResult Function(bool isExpanded) updateIsExpanded,
+    required TResult Function(
+            OrderHistory orderHistory,
+            OrderHistoryItem orderHistoryItem,
+            bool disableDeliveryDateForZyllemStatus)
+        setItemOrderDetails,
+    required TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)
+        searchOrderHistory,
+  }) {
+    return searchOrderHistory(disableDeliveryDateForZyllemStatus,
+        customerCodeInfo, user, salesOrganisation, searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? fetchZyllemStatus,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
+    TResult? Function(
+            OrderHistory orderHistory,
+            OrderHistoryItem orderHistoryItem,
+            bool disableDeliveryDateForZyllemStatus)?
+        setItemOrderDetails,
+    TResult? Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
+  }) {
+    return searchOrderHistory?.call(disableDeliveryDateForZyllemStatus,
+        customerCodeInfo, user, salesOrganisation, searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetchZyllemStatus,
+    TResult Function(bool isExpanded)? updateIsExpanded,
+    TResult Function(
+            OrderHistory orderHistory,
+            OrderHistoryItem orderHistoryItem,
+            bool disableDeliveryDateForZyllemStatus)?
+        setItemOrderDetails,
+    TResult Function(
+            bool disableDeliveryDateForZyllemStatus,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SearchKey searchKey)?
+        searchOrderHistory,
+    required TResult orElse(),
+  }) {
+    if (searchOrderHistory != null) {
+      return searchOrderHistory(disableDeliveryDateForZyllemStatus,
+          customerCodeInfo, user, salesOrganisation, searchKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
+    required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
+    required TResult Function(_SearchOrderHistory value) searchOrderHistory,
+  }) {
+    return searchOrderHistory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
+    TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
+  }) {
+    return searchOrderHistory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
+    TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult Function(_SearchOrderHistory value)? searchOrderHistory,
+    required TResult orElse(),
+  }) {
+    if (searchOrderHistory != null) {
+      return searchOrderHistory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchOrderHistory implements ViewByItemDetailsEvent {
+  const factory _SearchOrderHistory(
+      {required final bool disableDeliveryDateForZyllemStatus,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final User user,
+      required final SalesOrganisation salesOrganisation,
+      required final SearchKey searchKey}) = _$_SearchOrderHistory;
+
+  bool get disableDeliveryDateForZyllemStatus;
+  CustomerCodeInfo get customerCodeInfo;
+  User get user;
+  SalesOrganisation get salesOrganisation;
+  SearchKey get searchKey;
+  @JsonKey(ignore: true)
+  _$$_SearchOrderHistoryCopyWith<_$_SearchOrderHistory> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ViewByItemDetailsState {
-  OrderHistory get viewByItemDetails => throw _privateConstructorUsedError;
+  OrderHistory get orderHistory => throw _privateConstructorUsedError;
   OrderHistoryItem get orderHistoryItem => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isExpanded => throw _privateConstructorUsedError;
@@ -746,13 +1143,13 @@ abstract class $ViewByItemDetailsStateCopyWith<$Res> {
       _$ViewByItemDetailsStateCopyWithImpl<$Res, ViewByItemDetailsState>;
   @useResult
   $Res call(
-      {OrderHistory viewByItemDetails,
+      {OrderHistory orderHistory,
       OrderHistoryItem orderHistoryItem,
       bool isLoading,
       bool isExpanded,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
-  $OrderHistoryCopyWith<$Res> get viewByItemDetails;
+  $OrderHistoryCopyWith<$Res> get orderHistory;
   $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
 }
 
@@ -770,16 +1167,16 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viewByItemDetails = null,
+    Object? orderHistory = null,
     Object? orderHistoryItem = null,
     Object? isLoading = null,
     Object? isExpanded = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      viewByItemDetails: null == viewByItemDetails
-          ? _value.viewByItemDetails
-          : viewByItemDetails // ignore: cast_nullable_to_non_nullable
+      orderHistory: null == orderHistory
+          ? _value.orderHistory
+          : orderHistory // ignore: cast_nullable_to_non_nullable
               as OrderHistory,
       orderHistoryItem: null == orderHistoryItem
           ? _value.orderHistoryItem
@@ -802,9 +1199,9 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $OrderHistoryCopyWith<$Res> get viewByItemDetails {
-    return $OrderHistoryCopyWith<$Res>(_value.viewByItemDetails, (value) {
-      return _then(_value.copyWith(viewByItemDetails: value) as $Val);
+  $OrderHistoryCopyWith<$Res> get orderHistory {
+    return $OrderHistoryCopyWith<$Res>(_value.orderHistory, (value) {
+      return _then(_value.copyWith(orderHistory: value) as $Val);
     });
   }
 
@@ -826,14 +1223,14 @@ abstract class _$$_ViewByItemDetailsStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {OrderHistory viewByItemDetails,
+      {OrderHistory orderHistory,
       OrderHistoryItem orderHistoryItem,
       bool isLoading,
       bool isExpanded,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   @override
-  $OrderHistoryCopyWith<$Res> get viewByItemDetails;
+  $OrderHistoryCopyWith<$Res> get orderHistory;
   @override
   $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
 }
@@ -850,16 +1247,16 @@ class __$$_ViewByItemDetailsStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viewByItemDetails = null,
+    Object? orderHistory = null,
     Object? orderHistoryItem = null,
     Object? isLoading = null,
     Object? isExpanded = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_ViewByItemDetailsState(
-      viewByItemDetails: null == viewByItemDetails
-          ? _value.viewByItemDetails
-          : viewByItemDetails // ignore: cast_nullable_to_non_nullable
+      orderHistory: null == orderHistory
+          ? _value.orderHistory
+          : orderHistory // ignore: cast_nullable_to_non_nullable
               as OrderHistory,
       orderHistoryItem: null == orderHistoryItem
           ? _value.orderHistoryItem
@@ -885,7 +1282,7 @@ class __$$_ViewByItemDetailsStateCopyWithImpl<$Res>
 
 class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
   const _$_ViewByItemDetailsState(
-      {required this.viewByItemDetails,
+      {required this.orderHistory,
       required this.orderHistoryItem,
       required this.isLoading,
       required this.isExpanded,
@@ -893,7 +1290,7 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
       : super._();
 
   @override
-  final OrderHistory viewByItemDetails;
+  final OrderHistory orderHistory;
   @override
   final OrderHistoryItem orderHistoryItem;
   @override
@@ -905,7 +1302,7 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
 
   @override
   String toString() {
-    return 'ViewByItemDetailsState(viewByItemDetails: $viewByItemDetails, orderHistoryItem: $orderHistoryItem, isLoading: $isLoading, isExpanded: $isExpanded, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByItemDetailsState(orderHistory: $orderHistory, orderHistoryItem: $orderHistoryItem, isLoading: $isLoading, isExpanded: $isExpanded, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -913,8 +1310,8 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ViewByItemDetailsState &&
-            (identical(other.viewByItemDetails, viewByItemDetails) ||
-                other.viewByItemDetails == viewByItemDetails) &&
+            (identical(other.orderHistory, orderHistory) ||
+                other.orderHistory == orderHistory) &&
             (identical(other.orderHistoryItem, orderHistoryItem) ||
                 other.orderHistoryItem == orderHistoryItem) &&
             (identical(other.isLoading, isLoading) ||
@@ -926,8 +1323,8 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, viewByItemDetails,
-      orderHistoryItem, isLoading, isExpanded, failureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, orderHistory, orderHistoryItem,
+      isLoading, isExpanded, failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -939,7 +1336,7 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
 
 abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
   const factory _ViewByItemDetailsState(
-      {required final OrderHistory viewByItemDetails,
+      {required final OrderHistory orderHistory,
       required final OrderHistoryItem orderHistoryItem,
       required final bool isLoading,
       required final bool isExpanded,
@@ -948,7 +1345,7 @@ abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
   const _ViewByItemDetailsState._() : super._();
 
   @override
-  OrderHistory get viewByItemDetails;
+  OrderHistory get orderHistory;
   @override
   OrderHistoryItem get orderHistoryItem;
   @override

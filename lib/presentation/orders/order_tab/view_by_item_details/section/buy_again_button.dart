@@ -72,7 +72,7 @@ class _BuyAgainButton extends StatelessWidget {
     );
     context.read<ReOrderPermissionBloc>().add(
           ReOrderPermissionEvent.fetchItem(
-            orderHistoryDetail: viewByItemDetailState.viewByItemDetails,
+            orderHistoryDetail: viewByItemDetailState.orderHistory,
             item: item,
           ),
         );

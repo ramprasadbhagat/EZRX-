@@ -13,6 +13,7 @@ class ViewByItemsEvent with _$ViewByItemsEvent {
     required ViewByItemFilter viewByItemFilter,
     required SearchKey searchKey,
   }) = _Fetch;
+
   const factory ViewByItemsEvent.loadMore() = _LoadMore;
   const factory ViewByItemsEvent.fetchOrdersInvoiceData({
     required List<OrderHistoryItem> orderHistoryItems,

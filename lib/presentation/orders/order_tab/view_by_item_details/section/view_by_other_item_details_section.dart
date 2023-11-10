@@ -22,10 +22,10 @@ class OtherItemDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
       buildWhen: (previous, current) =>
-          previous.viewByItemDetails.orderHistoryItems !=
-          current.viewByItemDetails.orderHistoryItems,
+          previous.orderHistory.orderHistoryItems !=
+          current.orderHistory.orderHistoryItems,
       builder: (context, state) {
-        return state.viewByItemDetails.isOthersOrderItemsSectionVisible
+        return state.orderHistory.isOthersOrderItemsSectionVisible
             ? Padding(
                 padding: const EdgeInsets.only(
                   top: 12.0,
@@ -42,7 +42,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                     state.isLoading
                         ? LoadingShimmer.tile()
                         : Column(
-                            children: state.viewByItemDetails.orderHistoryItems
+                            children: state.orderHistory.orderHistoryItems
                                 .getViewByOrderItemDetailsList
                                 .map(
                                   (e) => Column(

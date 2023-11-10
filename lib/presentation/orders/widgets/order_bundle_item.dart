@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -66,14 +67,24 @@ class OrderBundleItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
-              Column(
-                children: viewByOrdersGroup.viewByOrderItem
-                    .map(
-                      (orderHistoryDetailsOrderItem) => BundleItemMaterial(
-                        orderItem: orderHistoryDetailsOrderItem,
-                      ),
-                    )
-                    .toList(),
+              BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+                buildWhen: (previous, current) =>
+                    previous.orderHistory.orderHistoryItems !=
+                    current.orderHistory.orderHistoryItems,
+                builder: (context, state) =>
+                    state.orderHistory.orderHistoryItems.isEmpty
+                        ? const SizedBox.shrink()
+                        : Column(
+                            children: viewByOrdersGroup.viewByOrderItem
+                                .map(
+                                  (orderHistoryDetailsOrderItem) =>
+                                      BundleItemMaterial(
+                                    orderItem: orderHistoryDetailsOrderItem,
+                                    orderHistory: state.orderHistory,
+                                  ),
+                                )
+                                .toList(),
+                          ),
               ),
               Padding(
                 padding:

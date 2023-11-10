@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -17,10 +18,13 @@ import 'package:mocktail/mocktail.dart';
 class OrderStatusTrackerRepositoryMock extends Mock
     implements OrderStatusTrackerRepository {}
 
+class ViewByItemRepositoryMock extends Mock implements ViewByItemRepository {}
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late OrderHistory orderHistory;
   late OrderStatusTrackerRepository orderStatusTrackerRepositoryMock;
+  late ViewByItemRepository viewByItemRepositoryMock;
   late List<OrderStatusTracker> fakeOrderStatusTracker;
   late OrderHistoryItem fakeOrderHistoryItem;
   final fakeStatus = StatusType('Out for delivery');
@@ -39,12 +43,14 @@ void main() {
 
       setUp(() {
         orderStatusTrackerRepositoryMock = OrderStatusTrackerRepositoryMock();
+        viewByItemRepositoryMock = ViewByItemRepositoryMock();
       });
 
       blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
         'For "initialized" Event',
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         ),
         act: (bloc) => bloc.add(const ViewByItemDetailsEvent.initialized()),
         expect: () => [ViewByItemDetailsState.initial()],
@@ -54,6 +60,7 @@ void main() {
         'For "fetchZyllemStatus" Event failure',
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         ),
         setUp: () {
           when(
@@ -82,6 +89,7 @@ void main() {
         'For "updateIsExpanded" Event',
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         ),
         act: (bloc) => bloc.add(
           const ViewByItemDetailsEvent.updateIsExpanded(isExpanded: true),
@@ -97,6 +105,7 @@ void main() {
         'For "setItemOrderDetails" Event',
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         ),
         setUp: () {
           when(
@@ -107,7 +116,7 @@ void main() {
         },
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.setItemOrderDetails(
-            viewByItems: orderHistory,
+            orderHistory: orderHistory,
             orderHistoryItem: fakeOrderHistoryItem,
             disableDeliveryDateForZyllemStatus: false,
           ),
@@ -125,11 +134,11 @@ void main() {
           );
           return [
             ViewByItemDetailsState.initial().copyWith(
-              viewByItemDetails: newViewByItemDetails,
+              orderHistory: newViewByItemDetails,
               orderHistoryItem: fakeOrderHistoryItem,
             ),
             ViewByItemDetailsState.initial().copyWith(
-              viewByItemDetails: newViewByItemDetails.copyWith(
+              orderHistory: newViewByItemDetails.copyWith(
                 orderHistoryItems: newViewByItemDetails.orderHistoryItems
                     .map(
                       (e) => e.copyWith(
@@ -148,10 +157,11 @@ void main() {
       test(
         'Get "poDocumentsList" when isExpanded = true',
         () {
-          final viewByItemDetailsBloc = ViewByItemDetailsBloc(
+          final orderHistoryBloc = ViewByItemDetailsBloc(
             orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+            viewByItemRepository: viewByItemRepositoryMock,
           );
-          viewByItemDetailsBloc.emit(
+          orderHistoryBloc.emit(
             ViewByItemDetailsState.initial().copyWith(
               orderHistoryItem: OrderHistoryItem.empty().copyWith(
                 orderHistoryItemPoAttachments: <PoDocuments>[],
@@ -160,8 +170,8 @@ void main() {
             ),
           );
           expect(
-            viewByItemDetailsBloc.state.poDocumentsList,
-            viewByItemDetailsBloc
+            orderHistoryBloc.state.poDocumentsList,
+            orderHistoryBloc
                 .state.orderHistoryItem.orderHistoryItemPoAttachments,
           );
         },
@@ -170,10 +180,11 @@ void main() {
       test(
         'Get "poDocumentsList" when isExpanded = false',
         () {
-          final viewByItemDetailsBloc = ViewByItemDetailsBloc(
+          final orderHistoryBloc = ViewByItemDetailsBloc(
             orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+            viewByItemRepository: viewByItemRepositoryMock,
           );
-          viewByItemDetailsBloc.emit(
+          orderHistoryBloc.emit(
             ViewByItemDetailsState.initial().copyWith(
               orderHistoryItem: OrderHistoryItem.empty().copyWith(
                 orderHistoryItemPoAttachments: [
@@ -184,9 +195,9 @@ void main() {
             ),
           );
           expect(
-            viewByItemDetailsBloc.state.poDocumentsList,
+            orderHistoryBloc.state.poDocumentsList,
             [
-              viewByItemDetailsBloc
+              orderHistoryBloc
                   .state.orderHistoryItem.orderHistoryItemPoAttachments.first
             ],
           );
@@ -196,10 +207,11 @@ void main() {
       test(
         'Get "displayShowMoreOrLess"',
         () {
-          final viewByItemDetailsBloc = ViewByItemDetailsBloc(
+          final orderHistoryBloc = ViewByItemDetailsBloc(
             orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+            viewByItemRepository: viewByItemRepositoryMock,
           );
-          viewByItemDetailsBloc.emit(
+          orderHistoryBloc.emit(
             ViewByItemDetailsState.initial().copyWith(
               orderHistoryItem: OrderHistoryItem.empty().copyWith(
                 orderHistoryItemPoAttachments: <PoDocuments>[],
@@ -207,7 +219,7 @@ void main() {
             ),
           );
           expect(
-            viewByItemDetailsBloc.state.displayShowMoreOrLess,
+            orderHistoryBloc.state.displayShowMoreOrLess,
             false,
           );
         },

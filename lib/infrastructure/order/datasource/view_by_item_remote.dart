@@ -26,6 +26,7 @@ class OrderHistoryRemoteDataSource {
     required this.config,
     required this.dataSourceExceptionHandler,
   });
+
   Future<OrderHistory> getViewByItems({
     required String soldTo,
     required String shipTo,
@@ -36,20 +37,41 @@ class OrderHistoryRemoteDataSource {
     required String salesOrg,
     required Map<String, dynamic> filterQuery,
   }) async {
+    final variables = {
+      'soldTo': soldTo,
+      'shipTo': [shipTo],
+      'first': pageSize,
+      'after': offset,
+      'language': language,
+      'salesOrg': [salesOrg],
+      'searchKey': searchKey,
+      ...filterQuery,
+    };
+
+    return await _getOrderHistory(variables: variables);
+  }
+
+  Future<OrderHistory> searchOrderHistory({
+    required String soldTo,
+    required String language,
+    required String searchKey,
+    required String salesOrg,
+  }) async {
+    final variables = {
+      'soldTo': soldTo,
+      'language': language,
+      'salesOrg': [salesOrg],
+      'searchKey': searchKey,
+    };
+
+    return await _getOrderHistory(variables: variables);
+  }
+
+  Future<OrderHistory> _getOrderHistory({
+    required Map<String, dynamic> variables,
+  }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = viewByItemQueryMutation.getViewByItem();
-
-      final variables = {
-        'soldTo': soldTo,
-        'shipTo': [shipTo],
-        'first': pageSize,
-        'after': offset,
-        'language': language,
-        'salesOrg': [salesOrg],
-        'searchKey': searchKey,
-        ...filterQuery,
-      };
-
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}order',

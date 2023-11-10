@@ -130,7 +130,7 @@ void main() {
           appliedFilter: viewByItemFilter,
         ),
         ViewByItemsState.initial().copyWith(
-          orderHistoryList: orderHistoryMock,
+          orderHistory: orderHistoryMock,
           failureOrSuccessOption: optionOf(
             Right(orderHistoryMock),
           ),
@@ -146,7 +146,7 @@ void main() {
         ),
         ViewByItemsState.initial().copyWith(
           isFetchingInvoices: true,
-          orderHistoryList: orderHistoryMock,
+          orderHistory: orderHistoryMock,
           canLoadMore:
               orderHistoryMock.orderHistoryItems.length >= config.pageSize,
           nextPageIndex: 1,
@@ -158,7 +158,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
         ),
         ViewByItemsState.initial().copyWith(
-          orderHistoryList: orderHistoryMock.copyWith(
+          orderHistory: orderHistoryMock.copyWith(
             orderHistoryItems: orderHistoryItemsListMock,
           ),
           canLoadMore:
@@ -247,7 +247,7 @@ void main() {
         config: config,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
-        orderHistoryList: orderHistoryMock,
+        orderHistory: orderHistoryMock,
         failureOrSuccessOption: optionOf(
           Right(orderHistoryMock),
         ),
@@ -280,7 +280,7 @@ void main() {
       expect: () => [
         ViewByItemsState.initial().copyWith(
           isFetchingInvoices: true,
-          orderHistoryList: orderHistoryMock,
+          orderHistory: orderHistoryMock,
           canLoadMore:
               orderHistoryMock.orderHistoryItems.length >= config.pageSize,
           nextPageIndex: 1,
@@ -297,7 +297,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-          orderHistoryList: orderHistoryMock,
+          orderHistory: orderHistoryMock,
           canLoadMore:
               orderHistoryMock.orderHistoryItems.length >= config.pageSize,
           nextPageIndex: 1,
@@ -318,7 +318,7 @@ void main() {
         config: config,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
-        orderHistoryList: orderHistoryMock.copyWith(
+        orderHistory: orderHistoryMock.copyWith(
           orderHistoryItems: orderHistoryItemsListMock,
         ),
         canLoadMore: true,
@@ -381,7 +381,7 @@ void main() {
           ViewByItemsState.initial().copyWith(
             isFetching: true,
             failureOrSuccessOption: none(),
-            orderHistoryList: orderHistoryMock.copyWith(
+            orderHistory: orderHistoryMock.copyWith(
               orderHistoryItems: orderHistoryItemsListMock,
             ),
             canLoadMore: true,
@@ -394,7 +394,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
           ),
           ViewByItemsState.initial().copyWith(
-            orderHistoryList: orderHistoryMock.copyWith(
+            orderHistory: orderHistoryMock.copyWith(
               orderHistoryItems: newOrderHistoryList,
             ),
             failureOrSuccessOption: optionOf(
@@ -413,7 +413,7 @@ void main() {
           ),
           ViewByItemsState.initial().copyWith(
             isFetchingInvoices: true,
-            orderHistoryList: orderHistoryMock.copyWith(
+            orderHistory: orderHistoryMock.copyWith(
               orderHistoryItems: newOrderHistoryList,
             ),
             canLoadMore: orderHistoryItemsListMock.length >= config.pageSize,
@@ -426,7 +426,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
           ),
           ViewByItemsState.initial().copyWith(
-            orderHistoryList: orderHistoryMock.copyWith(
+            orderHistory: orderHistoryMock.copyWith(
               orderHistoryItems: newOrderHistoryItemsListMock,
             ),
             canLoadMore: orderHistoryItemsListMock.length >= config.pageSize,
@@ -449,7 +449,7 @@ void main() {
         config: config,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
-        orderHistoryList: orderHistoryMock.copyWith(
+        orderHistory: orderHistoryMock.copyWith(
           orderHistoryItems: orderHistoryItemsListMock,
         ),
         canLoadMore: true,
@@ -489,7 +489,7 @@ void main() {
         ViewByItemsState.initial().copyWith(
           isFetching: true,
           failureOrSuccessOption: none(),
-          orderHistoryList: orderHistoryMock.copyWith(
+          orderHistory: orderHistoryMock.copyWith(
             orderHistoryItems: orderHistoryItemsListMock,
           ),
           canLoadMore: true,
@@ -507,7 +507,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-          orderHistoryList: orderHistoryMock.copyWith(
+          orderHistory: orderHistoryMock.copyWith(
             orderHistoryItems: orderHistoryItemsListMock,
           ),
           canLoadMore: true,

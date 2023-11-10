@@ -24,6 +24,13 @@ abstract class IViewByItemRepository {
     required SalesOrganisation salesOrganisation,
   });
 
+  Future<Either<ApiFailure, OrderHistory>> searchOrderHistory({
+    required CustomerCodeInfo soldTo,
+    required User user,
+    required SearchKey searchKey,
+    required SalesOrganisation salesOrganisation,
+  });
+
   Future<Either<ApiFailure, Map<OrderNumber, InvoiceData>>>
       getOrdersInvoiceData({
     required List<OrderNumber> orderNumbers,

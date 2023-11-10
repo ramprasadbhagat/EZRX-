@@ -56,7 +56,7 @@ class _ViewByOrderItemGroup extends StatelessWidget {
                   orderHistoryBasicInfo: context
                       .read<ViewByItemsBloc>()
                       .state
-                      .orderHistoryList
+                      .orderHistory
                       .orderBasicInformation,
                 );
               }).toList(),

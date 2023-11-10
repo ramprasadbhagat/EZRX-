@@ -166,7 +166,7 @@ void main() {
       when(() => mockViewByItemsBloc.state).thenReturn(
         ViewByItemsState.initial().copyWith(
           isFetching: true,
-          orderHistoryList: OrderHistory.empty(),
+          orderHistory: OrderHistory.empty(),
         ),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -180,7 +180,7 @@ void main() {
       when(() => mockViewByItemsBloc.state).thenReturn(
         ViewByItemsState.initial().copyWith(
           isFetching: false,
-          orderHistoryList: orderHistory.copyWith(
+          orderHistory: orderHistory.copyWith(
             orderHistoryItems: [
               OrderHistoryItem.empty()
                   .copyWith(manufactureName: 'fake_manufactureName')

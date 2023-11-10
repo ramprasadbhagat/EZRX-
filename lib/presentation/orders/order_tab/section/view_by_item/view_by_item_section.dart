@@ -42,8 +42,7 @@ class ViewByItemsPage extends StatelessWidget {
           previous.isFetching != current.isFetching ||
           previous.isFetchingInvoices != current.isFetchingInvoices,
       builder: (context, state) {
-        if (state.isFetching &&
-            state.orderHistoryList.orderHistoryItems.isEmpty) {
+        if (state.isFetching && state.orderHistory.orderHistoryItems.isEmpty) {
           return LoadingShimmer.logo(
             key: WidgetKeys.loaderImage,
           );
@@ -72,8 +71,7 @@ class ViewByItemsPage extends StatelessWidget {
             showDivider: index != 0,
             showBanner: index == 0,
           ),
-          items:
-              state.orderHistoryList.orderHistoryItems.getViewByOrderItemList,
+          items: state.orderHistory.orderHistoryItems.getViewByOrderItemList,
         );
       },
     );

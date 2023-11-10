@@ -25,8 +25,8 @@ class _ViewByOrderItem extends StatelessWidget {
         );
         context.read<ViewByItemDetailsBloc>().add(
               ViewByItemDetailsEvent.setItemOrderDetails(
-                viewByItems:
-                    context.read<ViewByItemsBloc>().state.orderHistoryList,
+                orderHistory:
+                    context.read<ViewByItemsBloc>().state.orderHistory,
                 orderHistoryItem: orderHistoryItem,
                 disableDeliveryDateForZyllemStatus: context
                     .read<EligibilityBloc>()
