@@ -1,15 +1,10 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/faq/entity/faq_info.dart';
 import 'package:ezrxmobile/infrastructure/faq/datasource/faq_local.dart';
 import 'package:ezrxmobile/infrastructure/faq/datasource/faq_remote.dart';
 import 'package:ezrxmobile/infrastructure/faq/repository/faq_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockConfig extends Mock implements Config {}
@@ -30,16 +25,6 @@ void main() {
   late FAQInfoLocalDataSource localDataSource;
   late FAQInfoRepository repository;
   final faqMockList = FAQInfo.empty();
-  final user = User.empty().copyWith(
-    username: Username('fake-name'),
-    role: Role(
-      description: 'fake-desc',
-      id: 'id',
-      name: 'fake-name',
-      type: RoleType('fake-type'),
-    ),
-    preferredLanguage: const Locale(ApiLanguageCode.english),
-  );
 
   const pageSize = 24;
 
@@ -65,7 +50,6 @@ void main() {
 
       final result = await repository.getFAQList(
         salesOrg: mockSalesOrg,
-        user: user,
         pageSize: pageSize,
         after: '',
       );
@@ -85,7 +69,6 @@ void main() {
 
       final result = await repository.getFAQList(
         salesOrg: mockSalesOrg,
-        user: user,
         pageSize: pageSize,
         after: '',
       );
@@ -103,7 +86,8 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.faqVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
-
+      when(() => mockSalesOrg.languageCodeForHelpAndSupport)
+          .thenReturn('my-MM');
       when(
         () => remoteDataSource.getFAQInfo(
           announcementUrlPath: '/api/announcement',
@@ -111,12 +95,11 @@ void main() {
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
           pageSize: 24,
           after: '',
-          lang: user.preferredLanguage.toString(),
+          lang: 'my-MM',
         ),
       ).thenAnswer((invocation) async => faqMockList);
       final result = await repository.getFAQList(
         salesOrg: mockSalesOrg,
-        user: user,
         pageSize: pageSize,
         after: '',
       );
@@ -127,7 +110,7 @@ void main() {
     });
     test(' get FaqInfo fail Remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+      when(() => mockSalesOrg.languageCodeForHelpAndSupport).thenReturn('EN');
       when(
         () => remoteDataSource.getFAQInfo(
           announcementUrlPath: '/api/announcement',
@@ -142,7 +125,6 @@ void main() {
       );
       final result = await repository.getFAQList(
         salesOrg: mockSalesOrg,
-        user: user,
         pageSize: pageSize,
         after: '',
       );

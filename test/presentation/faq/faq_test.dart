@@ -247,16 +247,6 @@ void main() {
         () => faqBlocMock.add(
           FaqEvent.getFaq(
             salesOrg: salesOrg,
-            user: User.empty().copyWith(
-              username: Username('fake-name'),
-              role: Role(
-                description: 'fake-desc',
-                id: 'id',
-                name: 'fake-name',
-                type: RoleType('fake-type'),
-              ),
-              preferredLanguage: const Locale(ApiLanguageCode.english),
-            ),
           ),
         ),
       ).called(2);
@@ -343,16 +333,6 @@ void main() {
           () => faqBlocMock.add(
             FaqEvent.loadMoreAFaq(
               salesOrg: salesOrg,
-              user: User.empty().copyWith(
-                username: Username('fake-name'),
-                role: Role(
-                  description: 'fake-desc',
-                  id: 'id',
-                  name: 'fake-name',
-                  type: RoleType('fake-type'),
-                ),
-                preferredLanguage: const Locale(ApiLanguageCode.english),
-              ),
             ),
           ),
         ).called(1);

@@ -18,24 +18,24 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$FaqEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, User user) getFaq,
-    required TResult Function(SalesOrg salesOrg, User user) loadMoreAFaq,
+    required TResult Function(SalesOrg salesOrg) getFaq,
+    required TResult Function(SalesOrg salesOrg) loadMoreAFaq,
     required TResult Function(FAQCategory selectedCategory) filterByFaqCategory,
     required TResult Function(String searchKey) updatedSearchFaq,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, User user)? getFaq,
-    TResult? Function(SalesOrg salesOrg, User user)? loadMoreAFaq,
+    TResult? Function(SalesOrg salesOrg)? getFaq,
+    TResult? Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult? Function(FAQCategory selectedCategory)? filterByFaqCategory,
     TResult? Function(String searchKey)? updatedSearchFaq,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, User user)? getFaq,
-    TResult Function(SalesOrg salesOrg, User user)? loadMoreAFaq,
+    TResult Function(SalesOrg salesOrg)? getFaq,
+    TResult Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult Function(FAQCategory selectedCategory)? filterByFaqCategory,
     TResult Function(String searchKey)? updatedSearchFaq,
     required TResult orElse(),
@@ -90,9 +90,7 @@ abstract class _$$_GetFaqCopyWith<$Res> {
   factory _$$_GetFaqCopyWith(_$_GetFaq value, $Res Function(_$_GetFaq) then) =
       __$$_GetFaqCopyWithImpl<$Res>;
   @useResult
-  $Res call({SalesOrg salesOrg, User user});
-
-  $UserCopyWith<$Res> get user;
+  $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -106,42 +104,27 @@ class __$$_GetFaqCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrg = null,
-    Object? user = null,
   }) {
     return _then(_$_GetFaq(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_GetFaq implements _GetFaq {
-  const _$_GetFaq({required this.salesOrg, required this.user});
+  const _$_GetFaq({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
-  @override
-  final User user;
 
   @override
   String toString() {
-    return 'FaqEvent.getFaq(salesOrg: $salesOrg, user: $user)';
+    return 'FaqEvent.getFaq(salesOrg: $salesOrg)';
   }
 
   @override
@@ -150,12 +133,11 @@ class _$_GetFaq implements _GetFaq {
         (other.runtimeType == runtimeType &&
             other is _$_GetFaq &&
             (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.user, user) || other.user == user));
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg, user);
+  int get hashCode => Object.hash(runtimeType, salesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -166,36 +148,36 @@ class _$_GetFaq implements _GetFaq {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, User user) getFaq,
-    required TResult Function(SalesOrg salesOrg, User user) loadMoreAFaq,
+    required TResult Function(SalesOrg salesOrg) getFaq,
+    required TResult Function(SalesOrg salesOrg) loadMoreAFaq,
     required TResult Function(FAQCategory selectedCategory) filterByFaqCategory,
     required TResult Function(String searchKey) updatedSearchFaq,
   }) {
-    return getFaq(salesOrg, user);
+    return getFaq(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, User user)? getFaq,
-    TResult? Function(SalesOrg salesOrg, User user)? loadMoreAFaq,
+    TResult? Function(SalesOrg salesOrg)? getFaq,
+    TResult? Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult? Function(FAQCategory selectedCategory)? filterByFaqCategory,
     TResult? Function(String searchKey)? updatedSearchFaq,
   }) {
-    return getFaq?.call(salesOrg, user);
+    return getFaq?.call(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, User user)? getFaq,
-    TResult Function(SalesOrg salesOrg, User user)? loadMoreAFaq,
+    TResult Function(SalesOrg salesOrg)? getFaq,
+    TResult Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult Function(FAQCategory selectedCategory)? filterByFaqCategory,
     TResult Function(String searchKey)? updatedSearchFaq,
     required TResult orElse(),
   }) {
     if (getFaq != null) {
-      return getFaq(salesOrg, user);
+      return getFaq(salesOrg);
     }
     return orElse();
   }
@@ -239,11 +221,9 @@ class _$_GetFaq implements _GetFaq {
 }
 
 abstract class _GetFaq implements FaqEvent {
-  const factory _GetFaq(
-      {required final SalesOrg salesOrg, required final User user}) = _$_GetFaq;
+  const factory _GetFaq({required final SalesOrg salesOrg}) = _$_GetFaq;
 
   SalesOrg get salesOrg;
-  User get user;
   @JsonKey(ignore: true)
   _$$_GetFaqCopyWith<_$_GetFaq> get copyWith =>
       throw _privateConstructorUsedError;
@@ -255,9 +235,7 @@ abstract class _$$_LoadMoreFaqCopyWith<$Res> {
           _$_LoadMoreFaq value, $Res Function(_$_LoadMoreFaq) then) =
       __$$_LoadMoreFaqCopyWithImpl<$Res>;
   @useResult
-  $Res call({SalesOrg salesOrg, User user});
-
-  $UserCopyWith<$Res> get user;
+  $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -272,42 +250,27 @@ class __$$_LoadMoreFaqCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrg = null,
-    Object? user = null,
   }) {
     return _then(_$_LoadMoreFaq(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_LoadMoreFaq implements _LoadMoreFaq {
-  const _$_LoadMoreFaq({required this.salesOrg, required this.user});
+  const _$_LoadMoreFaq({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
-  @override
-  final User user;
 
   @override
   String toString() {
-    return 'FaqEvent.loadMoreAFaq(salesOrg: $salesOrg, user: $user)';
+    return 'FaqEvent.loadMoreAFaq(salesOrg: $salesOrg)';
   }
 
   @override
@@ -316,12 +279,11 @@ class _$_LoadMoreFaq implements _LoadMoreFaq {
         (other.runtimeType == runtimeType &&
             other is _$_LoadMoreFaq &&
             (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.user, user) || other.user == user));
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg, user);
+  int get hashCode => Object.hash(runtimeType, salesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -332,36 +294,36 @@ class _$_LoadMoreFaq implements _LoadMoreFaq {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, User user) getFaq,
-    required TResult Function(SalesOrg salesOrg, User user) loadMoreAFaq,
+    required TResult Function(SalesOrg salesOrg) getFaq,
+    required TResult Function(SalesOrg salesOrg) loadMoreAFaq,
     required TResult Function(FAQCategory selectedCategory) filterByFaqCategory,
     required TResult Function(String searchKey) updatedSearchFaq,
   }) {
-    return loadMoreAFaq(salesOrg, user);
+    return loadMoreAFaq(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, User user)? getFaq,
-    TResult? Function(SalesOrg salesOrg, User user)? loadMoreAFaq,
+    TResult? Function(SalesOrg salesOrg)? getFaq,
+    TResult? Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult? Function(FAQCategory selectedCategory)? filterByFaqCategory,
     TResult? Function(String searchKey)? updatedSearchFaq,
   }) {
-    return loadMoreAFaq?.call(salesOrg, user);
+    return loadMoreAFaq?.call(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, User user)? getFaq,
-    TResult Function(SalesOrg salesOrg, User user)? loadMoreAFaq,
+    TResult Function(SalesOrg salesOrg)? getFaq,
+    TResult Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult Function(FAQCategory selectedCategory)? filterByFaqCategory,
     TResult Function(String searchKey)? updatedSearchFaq,
     required TResult orElse(),
   }) {
     if (loadMoreAFaq != null) {
-      return loadMoreAFaq(salesOrg, user);
+      return loadMoreAFaq(salesOrg);
     }
     return orElse();
   }
@@ -405,12 +367,10 @@ class _$_LoadMoreFaq implements _LoadMoreFaq {
 }
 
 abstract class _LoadMoreFaq implements FaqEvent {
-  const factory _LoadMoreFaq(
-      {required final SalesOrg salesOrg,
-      required final User user}) = _$_LoadMoreFaq;
+  const factory _LoadMoreFaq({required final SalesOrg salesOrg}) =
+      _$_LoadMoreFaq;
 
   SalesOrg get salesOrg;
-  User get user;
   @JsonKey(ignore: true)
   _$$_LoadMoreFaqCopyWith<_$_LoadMoreFaq> get copyWith =>
       throw _privateConstructorUsedError;
@@ -482,8 +442,8 @@ class _$_FilterByFaqCategory implements _FilterByFaqCategory {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, User user) getFaq,
-    required TResult Function(SalesOrg salesOrg, User user) loadMoreAFaq,
+    required TResult Function(SalesOrg salesOrg) getFaq,
+    required TResult Function(SalesOrg salesOrg) loadMoreAFaq,
     required TResult Function(FAQCategory selectedCategory) filterByFaqCategory,
     required TResult Function(String searchKey) updatedSearchFaq,
   }) {
@@ -493,8 +453,8 @@ class _$_FilterByFaqCategory implements _FilterByFaqCategory {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, User user)? getFaq,
-    TResult? Function(SalesOrg salesOrg, User user)? loadMoreAFaq,
+    TResult? Function(SalesOrg salesOrg)? getFaq,
+    TResult? Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult? Function(FAQCategory selectedCategory)? filterByFaqCategory,
     TResult? Function(String searchKey)? updatedSearchFaq,
   }) {
@@ -504,8 +464,8 @@ class _$_FilterByFaqCategory implements _FilterByFaqCategory {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, User user)? getFaq,
-    TResult Function(SalesOrg salesOrg, User user)? loadMoreAFaq,
+    TResult Function(SalesOrg salesOrg)? getFaq,
+    TResult Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult Function(FAQCategory selectedCategory)? filterByFaqCategory,
     TResult Function(String searchKey)? updatedSearchFaq,
     required TResult orElse(),
@@ -629,8 +589,8 @@ class _$_UpdatedSearchFaq implements _UpdatedSearchFaq {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, User user) getFaq,
-    required TResult Function(SalesOrg salesOrg, User user) loadMoreAFaq,
+    required TResult Function(SalesOrg salesOrg) getFaq,
+    required TResult Function(SalesOrg salesOrg) loadMoreAFaq,
     required TResult Function(FAQCategory selectedCategory) filterByFaqCategory,
     required TResult Function(String searchKey) updatedSearchFaq,
   }) {
@@ -640,8 +600,8 @@ class _$_UpdatedSearchFaq implements _UpdatedSearchFaq {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, User user)? getFaq,
-    TResult? Function(SalesOrg salesOrg, User user)? loadMoreAFaq,
+    TResult? Function(SalesOrg salesOrg)? getFaq,
+    TResult? Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult? Function(FAQCategory selectedCategory)? filterByFaqCategory,
     TResult? Function(String searchKey)? updatedSearchFaq,
   }) {
@@ -651,8 +611,8 @@ class _$_UpdatedSearchFaq implements _UpdatedSearchFaq {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, User user)? getFaq,
-    TResult Function(SalesOrg salesOrg, User user)? loadMoreAFaq,
+    TResult Function(SalesOrg salesOrg)? getFaq,
+    TResult Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult Function(FAQCategory selectedCategory)? filterByFaqCategory,
     TResult Function(String searchKey)? updatedSearchFaq,
     required TResult orElse(),

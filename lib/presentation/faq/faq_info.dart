@@ -63,13 +63,11 @@ class FaqInfoPage extends StatelessWidget {
           onRefresh: () => context.read<FaqBloc>().add(
                 FaqEvent.getFaq(
                   salesOrg: context.read<EligibilityBloc>().state.salesOrg,
-                  user: context.read<EligibilityBloc>().state.user,
                 ),
               ),
           onLoadingMore: () => context.read<FaqBloc>().add(
                 FaqEvent.loadMoreAFaq(
                   salesOrg: context.read<EligibilityBloc>().state.salesOrg,
-                  user: context.read<EligibilityBloc>().state.user,
                 ),
               ),
         );

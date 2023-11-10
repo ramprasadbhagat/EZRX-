@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -40,7 +39,6 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
 
         final failureOrSuccessOption = await faqInfoRepository.getFAQList(
           salesOrg: e.salesOrg,
-          user: e.user,
           pageSize: config.pageSize,
           after: state.faqInfo.endCursor,
         );
@@ -75,7 +73,6 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
 
         final failureOrSuccessOption = await faqInfoRepository.getFAQList(
           salesOrg: e.salesOrg,
-          user: e.user,
           pageSize: config.pageSize,
           after: state.faqInfo.endCursor,
         );

@@ -24,7 +24,6 @@ class FAQPage extends StatelessWidget {
         ..add(
           FaqEvent.getFaq(
             salesOrg: context.read<EligibilityBloc>().state.salesOrg,
-            user: context.read<EligibilityBloc>().state.user,
           ),
         ),
       child: Scaffold(

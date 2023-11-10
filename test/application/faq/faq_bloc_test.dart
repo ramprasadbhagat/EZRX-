@@ -2,12 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/faq/faq_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/faq/entity/faq_info.dart';
 import 'package:ezrxmobile/domain/faq/value/value_object.dart';
@@ -24,16 +20,6 @@ void main() {
   late FAQInfo faqInfo;
   late Config config;
   final faqState = FaqState.initial();
-  final user = User.empty().copyWith(
-    username: Username('fake-name'),
-    role: Role(
-      description: 'fake-desc',
-      id: 'id',
-      name: 'fake-name',
-      type: RoleType('fake-type'),
-    ),
-    preferredLanguage: const Locale(ApiLanguageCode.english),
-  );
   final salesOrg = SalesOrg('fake-salesOrg');
   const pageSize = 24;
   setUpAll(() async {
@@ -54,7 +40,6 @@ void main() {
         when(
           () => repository.getFAQList(
             salesOrg: salesOrg,
-            user: user,
             pageSize: pageSize,
             after: '',
           ),
@@ -67,7 +52,6 @@ void main() {
       act: (FaqBloc bloc) => bloc.add(
         FaqEvent.getFaq(
           salesOrg: salesOrg,
-          user: user,
         ),
       ),
       expect: () => [
@@ -98,7 +82,6 @@ void main() {
         when(
           () => repository.getFAQList(
             salesOrg: salesOrg,
-            user: user,
             pageSize: pageSize,
             after: '',
           ),
@@ -111,7 +94,6 @@ void main() {
       act: (FaqBloc bloc) => bloc.add(
         FaqEvent.getFaq(
           salesOrg: salesOrg,
-          user: user,
         ),
       ),
       expect: () => [
@@ -138,7 +120,6 @@ void main() {
         when(
           () => repository.getFAQList(
             salesOrg: salesOrg,
-            user: user,
             pageSize: pageSize,
             after: '',
           ),
@@ -151,7 +132,6 @@ void main() {
       act: (bloc) => bloc.add(
         FaqEvent.loadMoreAFaq(
           salesOrg: salesOrg,
-          user: user,
         ),
       ),
       expect: () => [
@@ -181,7 +161,6 @@ void main() {
         when(
           () => repository.getFAQList(
             salesOrg: salesOrg,
-            user: user,
             pageSize: pageSize,
             after: '',
           ),
@@ -194,7 +173,6 @@ void main() {
       act: (bloc) => bloc.add(
         FaqEvent.loadMoreAFaq(
           salesOrg: salesOrg,
-          user: user,
         ),
       ),
       expect: () => [

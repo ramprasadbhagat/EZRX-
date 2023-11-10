@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -23,12 +22,9 @@ class FAQInfoRepository extends IFAQInfoRepository {
   @override
   Future<Either<ApiFailure, FAQInfo>> getFAQList({
     required SalesOrg salesOrg,
-    required User user,
     required int pageSize,
     required String after,
   }) async {
-    final preferredLanguage = user.preferredLanguage;
-
     if (config.appFlavor == Flavor.mock) {
       try {
         final faqInfo = await localDataSource.getFAQInfo();
@@ -46,7 +42,7 @@ class FAQInfoRepository extends IFAQInfoRepository {
         template: config.faqTemplate,
         pageSize: pageSize,
         variablePath: salesOrg.faqVariablePath,
-        lang: preferredLanguage.languageCode,
+        lang: salesOrg.languageCodeForHelpAndSupport,
         after: after,
       );
 
