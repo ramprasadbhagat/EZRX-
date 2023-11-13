@@ -688,6 +688,9 @@ class WidgetKeys {
   static const Key orderSuccessItemUnitPrice = Key('orderSuccessItemUnitPrice');
   static const Key orderSuccessItemTotalPrice =
       Key('orderSuccessItemTotalPrice');
+  static const Key orderSuccessAttachment = Key('orderSuccessAttachment');
+  static const Key orderSuccessAttachmentShowButton =
+      Key('orderSuccessAttachmentShowButton');
 
   //============================================================
   //  Order History

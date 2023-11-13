@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,6 +56,7 @@ class _AttachmentsWithIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<PoAttachmentBloc, PoAttachmentState>(
+      key: WidgetKeys.orderSuccessAttachment,
       listenWhen: (previous, current) =>
           previous != current && current.fileDownloading && !current.isFetching,
       listener: (context, state) {
@@ -83,6 +85,7 @@ class _AttachmentsWithIcon extends StatelessWidget {
                   .toList(),
               if (state.displayShowMoreOrLess)
                 InkWell(
+                  key: WidgetKeys.orderSuccessAttachmentShowButton,
                   onTap: () => context.read<OrderSummaryBloc>().add(
                         OrderSummaryEvent.updateIsExpanded(
                           isExpanded: !state.isExpanded,
