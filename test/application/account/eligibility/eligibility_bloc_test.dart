@@ -118,6 +118,7 @@ void main() {
     disableOverrideFieldCustomer: false,
     disableOverrideFieldSR: false,
     enablePOAttachmentRequired: false,
+    hideCredit: false,
   );
   final chatBotRepositoryMock = ChatBotRepositoryMock();
   final mixpanelRepositoryMock = MixpanelRepoMock();

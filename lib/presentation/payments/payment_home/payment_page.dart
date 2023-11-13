@@ -64,8 +64,14 @@ class PaymentPage extends StatelessWidget {
             const _PaymentOptionMenu(),
             const SizedBox(height: 20),
             const _Invoice(),
-            const SizedBox(height: 20),
-            const _Credit(),
+            if (!context
+                .read<EligibilityBloc>()
+                .state
+                .salesOrgConfigs
+                .hideCredit) ...[
+              const SizedBox(height: 20),
+              const _Credit(),
+            ],
             const SizedBox(height: 20),
             const _PaymentSummary(),
             const SizedBox(height: 20),

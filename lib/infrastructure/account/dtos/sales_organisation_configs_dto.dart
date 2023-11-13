@@ -128,6 +128,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
         required bool displaySubtotalTaxBreakdown,
     @JsonKey(name: 'disablePayment', defaultValue: false)
         required bool disablePayment,
+    @JsonKey(name: 'hideCredit', defaultValue: false) required bool hideCredit,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -197,6 +198,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       displayItemTaxBreakdown: configs.displayItemTaxBreakdown,
       displaySubtotalTaxBreakdown: configs.displaySubtotalTaxBreakdown,
       disablePayment: configs.disablePayment,
+      hideCredit: configs.hideCredit,
     );
   }
 
@@ -265,6 +267,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       displayItemTaxBreakdown: displayItemTaxBreakdown,
       displaySubtotalTaxBreakdown: displaySubtotalTaxBreakdown,
       disablePayment: disablePayment,
+      hideCredit: hideCredit,
     );
   }
 

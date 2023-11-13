@@ -71,6 +71,7 @@ query salesOrgConfigs($request: SalesOrgConfigRequest) {
     enableGimmickMaterial
     enableUnreferencedReturn
     hideCustomer
+    hideCredit
     enableBillTo
     disablePaymentTermsDisplay
     disableReturnsAccess

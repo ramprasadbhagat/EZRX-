@@ -273,6 +273,21 @@ void main() {
       expect(paymentHomeCreditCard, findsOneWidget);
       expect(creditLimitUtilized, findsOneWidget);
       expect(creditLimitRemaining, findsOneWidget);
+      expect(totalCreditLimit, findsOneWidget);
+    });
+
+    testWidgets('Credit section is not visible when hideCredit is true',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith.salesOrgConfigs(hideCredit: true),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      expect(paymentHomeCreditCard, findsNothing);
+      expect(creditLimitUtilized, findsNothing);
+      expect(creditLimitRemaining, findsNothing);
+      expect(totalCreditLimit, findsNothing);
     });
 
     testWidgets('Check refresh', (WidgetTester tester) async {

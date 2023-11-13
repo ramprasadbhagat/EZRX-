@@ -77,6 +77,7 @@ class SalesOrgQueryMutation {
     enableGimmickMaterial
     enableUnreferencedReturn
     hideCustomer
+    hideCredit
     enableBillTo
     autoBlockOrders
     disablePaymentTermsDisplay

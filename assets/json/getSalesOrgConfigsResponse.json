@@ -62,6 +62,7 @@
             "enableGimmickMaterial": false,
             "enableBillTo": false,
             "hideCustomer": false,
+            "hideCredit": false,
             "hideStockDisplay": false,
             "disablePayment": false,
             "enablePartialPayment": false,

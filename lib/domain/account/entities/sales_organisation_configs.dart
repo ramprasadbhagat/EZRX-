@@ -75,6 +75,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool displaySubtotalTaxBreakdown,
     required bool disableOverrideFieldCustomer,
     required bool disableOverrideFieldSR,
+    required bool hideCredit,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -139,6 +140,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         displaySubtotalTaxBreakdown: false,
         disableOverrideFieldCustomer: false,
         disableOverrideFieldSR: false,
+        hideCredit: false,
       );
 
   String get getConfigLanguage {
