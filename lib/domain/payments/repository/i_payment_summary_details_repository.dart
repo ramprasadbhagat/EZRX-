@@ -28,4 +28,10 @@ abstract class IPaymentSummaryDetailsRepository {
     required ShipToInfo shipToInfo,
     required PaymentSummaryDetails paymentSummaryDetails,
   });
+
+  Future<Either<ApiFailure, String>> cancelPaymentAdvice({
+    required SalesOrganisation salesOrganization,
+    required CustomerCodeInfo customerCodeInfo,
+    required String referenceId,
+  });
 }

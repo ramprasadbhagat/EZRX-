@@ -60,4 +60,14 @@ class PaymentItemLocalDataSource {
       data['data']['getTransaction'],
     ).toDomain();
   }
+
+  Future<String> cancelPaymentAdvice() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/cancelVirtualTxnResponse.json',
+      ),
+    );
+
+    return data['data']['cancelVirtualAccount']['id'] as String;
+  }
 }

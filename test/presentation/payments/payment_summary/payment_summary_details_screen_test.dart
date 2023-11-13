@@ -29,6 +29,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -333,10 +334,10 @@ void main() {
         WidgetKeys.deleteAdviceButtonKey,
       );
       final deleteAdviceBottomSheetFinder = find.byKey(
-        WidgetKeys.deleteAdviceBottomSheet,
+        WidgetKeys.deleteCancelAdviceBottomSheet,
       );
       final deleteButtonFinder = find.byKey(
-        WidgetKeys.deleteAdviceBottomSheetDeleteButton,
+        WidgetKeys.deleteCancelAdviceBottomSheetButton,
       );
       expect(deleteAdviceButton, findsOneWidget);
       await tester.tap(deleteAdviceButton);
@@ -376,7 +377,7 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const DeleteAdviceBottomSheet(
+          child: DeleteCancelAdviceBottomSheet.delete(
             paymentAdviceNumber: '09EZ230000544601',
           ),
         ),
@@ -425,12 +426,189 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const DeleteAdviceBottomSheet(
+          child: DeleteCancelAdviceBottomSheet.delete(
             paymentAdviceNumber: '09EZ230000544601',
           ),
         ),
       );
       await tester.pumpAndSettle();
+      expect(
+        find.widgetWithText(
+          CustomSnackBar,
+          'Fake-error',
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'Payment Summary Details Page - Cancel payment advice and verify cancel event call',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
+      when(
+        () => autoRouterMock.pop(),
+      ).thenAnswer((invocation) async => false);
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDetailFetching: true,
+          isFetchingAdvice: true,
+        ),
+      );
+      final expectedStates = PaymentSummaryDetailsState.initial().copyWith(
+        isDetailFetching: false,
+        isFetchingAdvice: false,
+        details: PaymentSummaryDetails.empty().copyWith(
+          paymentItems: [
+            PaymentItem.empty().copyWith(
+              documentDate: DateTimeStringValue(''),
+            ),
+          ],
+        ),
+        paymentInvoiceInfoPdf:
+            PaymentInvoiceInfoPdf.empty().copyWith(paymentID: 'paymentID'),
+      );
+
+      when(
+        () => mockPaymentSummaryDetailsBloc.state,
+      ).thenReturn(expectedStates);
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final cancelAdviceButton = find.byKey(
+        WidgetKeys.cancelAdviceButtonKey,
+      );
+      final deleteAdviceBottomSheetFinder = find.byKey(
+        WidgetKeys.deleteCancelAdviceBottomSheet,
+      );
+      final deleteCancelAdviceBottomSheetButtonFinder = find.byKey(
+        WidgetKeys.deleteCancelAdviceBottomSheetButton,
+      );
+      expect(cancelAdviceButton, findsOneWidget);
+      await tester.tap(cancelAdviceButton);
+      await tester.pumpAndSettle();
+      expect(deleteAdviceBottomSheetFinder, findsOneWidget);
+      expect(deleteCancelAdviceBottomSheetButtonFinder, findsOneWidget);
+      await tester.tap(deleteCancelAdviceBottomSheetButtonFinder);
+      await tester.pump();
+      verify(
+        () => mockPaymentSummaryDetailsBloc.add(
+          const PaymentSummaryDetailsEvent.cancelAdvice(),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Payment Summary Details Page - Cancel payment advice success',
+        (tester) async {
+      final initialState = PaymentSummaryDetailsState.initial().copyWith(
+        details: PaymentSummaryDetails.empty().copyWith(
+          paymentItems: [
+            PaymentItem.empty().copyWith(
+              documentDate: DateTimeStringValue(''),
+            ),
+          ],
+        ),
+        paymentInvoiceInfoPdf:
+            PaymentInvoiceInfoPdf.empty().copyWith(paymentID: 'paymentID'),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
+
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        initialState.copyWith(
+          details: mockPaymentDetails,
+          failureOrSuccessOption: optionOf(const Right('')),
+        ),
+      );
+      final expectedStates = [
+        initialState.copyWith(
+          isCancelingAdvice: true,
+        ),
+        initialState.copyWith(
+          details: mockPaymentDetails,
+        ),
+      ];
+
+      whenListen(
+        mockPaymentSummaryDetailsBloc,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pump();
+
+      verify(
+        () => mockPaymentSummaryDetailsBloc.add(
+          PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+            details: mockPaymentDetails,
+          ),
+        ),
+      );
+    });
+
+    testWidgets('Payment Summary Details Page - Cancel payment advice fail',
+        (tester) async {
+      final initialState = PaymentSummaryDetailsState.initial().copyWith(
+        details: PaymentSummaryDetails.empty().copyWith(
+          paymentItems: [
+            PaymentItem.empty().copyWith(
+              documentDate: DateTimeStringValue(''),
+            ),
+          ],
+        ),
+        paymentInvoiceInfoPdf:
+            PaymentInvoiceInfoPdf.empty().copyWith(paymentID: 'paymentID'),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
+
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        initialState.copyWith(
+          details: mockPaymentDetails,
+          failureOrSuccessOption:
+              optionOf(Left(FailureHandler.handleFailure('Fake-error'))),
+        ),
+      );
+      final expectedStates = [
+        initialState.copyWith(
+          isCancelingAdvice: true,
+        ),
+        initialState.copyWith(
+          details: mockPaymentDetails,
+          failureOrSuccessOption:
+              optionOf(Left(FailureHandler.handleFailure('Fake-error'))),
+        ),
+      ];
+
+      whenListen(
+        mockPaymentSummaryDetailsBloc,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
       expect(
         find.widgetWithText(
           CustomSnackBar,

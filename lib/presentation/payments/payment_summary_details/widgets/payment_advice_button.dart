@@ -9,25 +9,41 @@ class _PaymentAdviceButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
       listenWhen: (previous, current) =>
-          previous.isSavingAdvice != current.isSavingAdvice,
+          previous.isSavingAdvice != current.isSavingAdvice ||
+          previous.isCancelingAdvice != current.isCancelingAdvice,
       listener: (context, state) {
-        if (!state.isSavingAdvice) {
-          state.failureOrSuccessOption.fold(
-            () => CustomSnackBar(
-              messageText: 'Download Successful',
-            ).show(context),
-            (option) => option.fold(
-              (failure) => ErrorUtils.handleApiFailure(context, failure),
-              (r) {},
-            ),
-          );
-        }
+        state.failureOrSuccessOption.fold(
+          () {
+            final eligibilityState = context.read<EligibilityBloc>().state;
+            if (!state.isSavingAdvice && !eligibilityState.salesOrg.isID) {
+              CustomSnackBar(
+                messageText: 'Download Successful',
+              ).show(context);
+            }
+            if (!state.isCancelingAdvice && eligibilityState.salesOrg.isID) {
+              CustomSnackBar(
+                messageText: 'Payment cancel successfully',
+              ).show(context);
+              context.read<PaymentSummaryDetailsBloc>().add(
+                    PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+                      details: state.details,
+                    ),
+                  );
+            }
+          },
+          (option) => option.fold(
+            (failure) => ErrorUtils.handleApiFailure(context, failure),
+            (r) {},
+          ),
+        );
       },
       buildWhen: (previous, current) =>
           previous.isListLoading != current.isListLoading ||
           previous.isDetailFetching != current.isDetailFetching ||
           previous.isSavingAdvice != current.isSavingAdvice ||
-          previous.isFetchingAdvice != current.isFetchingAdvice,
+          previous.isFetchingAdvice != current.isFetchingAdvice ||
+          previous.isDeletingPayment != current.isDeletingPayment ||
+          previous.isCancelingAdvice != current.isCancelingAdvice,
       builder: (context, state) {
         if (state.isLoading ||
             state.details.paymentItems.isEmpty ||
@@ -37,7 +53,7 @@ class _PaymentAdviceButton extends StatelessWidget {
         final eligibilityState = context.read<EligibilityBloc>().state;
         var buttons = _getDefaultButtons(state);
         if (eligibilityState.salesOrg.isID) {
-          buttons = _getIDButtons(context, state);
+          buttons = _getIDButtons(state);
         }
 
         return buttons.isEmpty
@@ -68,30 +84,9 @@ class _PaymentAdviceButton extends StatelessWidget {
     );
   }
 
-  List<Widget> _getIDButtons(
-    BuildContext context,
-    PaymentSummaryDetailsState state,
-  ) =>
-      [
+  List<Widget> _getIDButtons(PaymentSummaryDetailsState state) => [
         if (!state.details.status.getIsSuccessfulOrProcessed)
-          Expanded(
-            child: OutlinedButton(
-              key: WidgetKeys.cancelAdviceButtonKey,
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(
-                  color: ZPColors.red,
-                ),
-              ),
-              child: Text(
-                context.tr('Cancel advice'),
-                style: Theme.of(context)
-                    .textTheme
-                    .labelMedium
-                    ?.copyWith(color: ZPColors.red),
-              ).tr(),
-              onPressed: () {},
-            ),
-          ),
+          _CancelAdviceButton(state: state),
       ];
 
   List<Widget> _getDefaultButtons(
@@ -121,7 +116,7 @@ class _DeleteAdviceButton extends StatelessWidget {
       enableDrag: false,
       isDismissible: false,
       isScrollControlled: true,
-      builder: (_) => DeleteAdviceBottomSheet(
+      builder: (_) => DeleteCancelAdviceBottomSheet.delete(
         paymentAdviceNumber: paymentAdviceNumber,
       ),
     );
@@ -140,7 +135,7 @@ class _DeleteAdviceButton extends StatelessWidget {
         child: SizedBox(
           height: 20,
           child: LoadingShimmer.withChild(
-            enabled: state.isSavingOrDeleting,
+            enabled: state.isDeletingPayment,
             child: Text(
               'Delete advice'.tr(),
               style: Theme.of(context)
@@ -192,6 +187,55 @@ class _DownloadAdviceButton extends StatelessWidget {
           context.read<PaymentSummaryDetailsBloc>().add(
                 const PaymentSummaryDetailsEvent.saveAdvice(),
               );
+        },
+      ),
+    );
+  }
+}
+
+class _CancelAdviceButton extends StatelessWidget {
+  const _CancelAdviceButton({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+  final PaymentSummaryDetailsState state;
+
+  void _showCancelAdviceBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      isDismissible: false,
+      isScrollControlled: true,
+      builder: (_) => DeleteCancelAdviceBottomSheet.cancel(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: OutlinedButton(
+        key: WidgetKeys.cancelAdviceButtonKey,
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(
+            color: ZPColors.red,
+          ),
+        ),
+        child: SizedBox(
+          height: 20,
+          child: LoadingShimmer.withChild(
+            enabled: state.isCancelingAdvice,
+            child: Text(
+              context.tr('Cancel advice'),
+              style: Theme.of(context)
+                  .textTheme
+                  .labelMedium
+                  ?.copyWith(color: ZPColors.red),
+            ),
+          ),
+        ),
+        onPressed: () {
+          if (state.isCancelingAdvice) return;
+          _showCancelAdviceBottomSheet(context);
         },
       ),
     );

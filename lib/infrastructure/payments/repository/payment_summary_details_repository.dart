@@ -175,4 +175,34 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Future<Either<ApiFailure, String>> cancelPaymentAdvice({
+    required SalesOrganisation salesOrganization,
+    required CustomerCodeInfo customerCodeInfo,
+    required String referenceId,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.cancelPaymentAdvice();
+
+        return Right(response);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
+      final customerCode = customerCodeInfo.customerCodeSoldTo;
+      final response = await remoteDataSource.cancelPaymentAdvice(
+        customerCode: customerCode,
+        salesOrg: salesOrgCode,
+        referenceId: referenceId,
+      );
+
+      return Right(response);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
 }

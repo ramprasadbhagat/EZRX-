@@ -52,7 +52,7 @@ class PaymentItemRemoteDataSource {
         },
       ),
     );
-    _checkPaymentSummaryDetailsExceptionChecker(res: res);
+    _exceptionChecker(response: res);
     final data = res.data['data']['paymentItems'];
 
     return List.from(data)
@@ -85,7 +85,7 @@ class PaymentItemRemoteDataSource {
         },
       ),
     );
-    _checkPaymentSummaryDetailsExceptionChecker(res: res);
+    _exceptionChecker(response: res);
     final data = res.data['data']['customerPayment']['customerPaymentResponse'];
     if (data == null || data.isEmpty) return PaymentSummaryDetails.empty();
 
@@ -127,7 +127,7 @@ class PaymentItemRemoteDataSource {
         },
       ),
     );
-    _checkPaymentSummaryDetailsExceptionChecker(res: res);
+    _exceptionChecker(response: res);
     final data = res.data['data']['deleteCustomerPayment'];
 
     if (data != null) {
@@ -163,23 +163,55 @@ class PaymentItemRemoteDataSource {
         },
       ),
     );
-    _checkPaymentSummaryDetailsExceptionChecker(res: res);
+    _exceptionChecker(response: res);
     final data = res.data['data']['getTransaction'];
     if (data == null || data.isEmpty) return PaymentSummaryDetails.empty();
 
     return TransactionDetailDto.fromJson(data).toDomain();
   }
 
-  void _checkPaymentSummaryDetailsExceptionChecker({
-    required Response<dynamic> res,
+  Future<String> cancelPaymentAdvice({
+    required String customerCode,
+    required String salesOrg,
+    required String referenceId,
+  }) async {
+    final queryData = paymentItemQuery.getCancelVirtualAccountQuery();
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query': queryData,
+          'variables': {
+            'input': {
+              'salesOrg': salesOrg,
+              'customer': customerCode,
+              'id': referenceId,
+            },
+          },
+        },
+      ),
+    );
+    _exceptionChecker(response: res, property: 'cancelVirtualAccount');
+
+    return res.data['data']['cancelVirtualAccount']['id']?.toString() ?? '';
+  }
+
+  void _exceptionChecker({
+    required Response<dynamic> response,
+    String? property,
   }) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
+    final data = response.data;
+    if (data['errors'] != null && data['errors'].isNotEmpty) {
+      throw ServerException(message: data['errors'][0]['message']);
+    } else if (response.statusCode != 200) {
       throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
+        code: response.statusCode ?? 0,
+        message: response.statusMessage ?? '',
       );
+    } else if (data['data'] == null ||
+        (property != null && data['data'][property] == null)) {
+      throw ServerException(message: 'Some thing went wrong');
     }
   }
 }

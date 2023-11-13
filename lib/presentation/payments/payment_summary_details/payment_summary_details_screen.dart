@@ -36,7 +36,7 @@ part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/b
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/transfer_methods_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/detail_info_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/payment_basic_info_section.dart';
-part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/delete_advice_bottom_sheet.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/delete_cancel_advice_bottom_sheet.dart';
 
 class PaymentSummaryDetailsPage extends StatelessWidget {
   const PaymentSummaryDetailsPage({

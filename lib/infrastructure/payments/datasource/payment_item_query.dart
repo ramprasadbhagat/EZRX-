@@ -115,4 +115,29 @@ class PaymentItemQuery {
       }
     ''';
   }
+
+  String getCancelVirtualAccountQuery() {
+    return '''
+       mutation CancelVirtualTxn(\$input: cancelVirtualAccountRequest!) {
+        cancelVirtualAccount(input: \$input) {
+            id
+            invoices {
+                documentDate
+                documentType
+                documentNo
+                amount
+            }
+            amountPayable
+            status
+            paymentDetails {
+                vaNumber
+                vaName
+                expiresAt
+            }
+            createdOn
+            paidOn
+        }
+    }
+    ''';
+  }
 }

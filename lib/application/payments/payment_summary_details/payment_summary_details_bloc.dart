@@ -273,6 +273,35 @@ class PaymentSummaryDetailsBloc
           ),
         );
       },
+      cancelAdvice: (_) async {
+        emit(
+          state.copyWith(
+            isCancelingAdvice: true,
+          ),
+        );
+
+        final failureOrSuccess =
+            await paymentItemRepository.cancelPaymentAdvice(
+          salesOrganization: state.salesOrganization,
+          customerCodeInfo: state.customerCodeInfo,
+          referenceId: state.details.paymentID.getValue(),
+        );
+
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              isCancelingAdvice: false,
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (deleteResponse) => emit(
+            state.copyWith(
+              isCancelingAdvice: false,
+              failureOrSuccessOption: none(),
+            ),
+          ),
+        );
+      },
     );
   }
 }

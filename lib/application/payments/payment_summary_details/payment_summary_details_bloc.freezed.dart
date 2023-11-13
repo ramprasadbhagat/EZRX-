@@ -28,6 +28,7 @@ mixin _$PaymentSummaryDetailsEvent {
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
+    required TResult Function() cancelAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,6 +46,7 @@ mixin _$PaymentSummaryDetailsEvent {
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
+    TResult? Function()? cancelAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +64,7 @@ mixin _$PaymentSummaryDetailsEvent {
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
+    TResult Function()? cancelAdvice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +79,7 @@ mixin _$PaymentSummaryDetailsEvent {
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
+    required TResult Function(_CancelAdvice value) cancelAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,6 +93,7 @@ mixin _$PaymentSummaryDetailsEvent {
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
+    TResult? Function(_CancelAdvice value)? cancelAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -102,6 +107,7 @@ mixin _$PaymentSummaryDetailsEvent {
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
+    TResult Function(_CancelAdvice value)? cancelAdvice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -274,6 +280,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
+    required TResult Function() cancelAdvice,
   }) {
     return initialized(salesOrganization, customerCodeInfo, user, shipToInfo);
   }
@@ -294,6 +301,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
+    TResult? Function()? cancelAdvice,
   }) {
     return initialized?.call(
         salesOrganization, customerCodeInfo, user, shipToInfo);
@@ -315,6 +323,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
+    TResult Function()? cancelAdvice,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -335,6 +344,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
+    required TResult Function(_CancelAdvice value) cancelAdvice,
   }) {
     return initialized(this);
   }
@@ -351,6 +361,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
+    TResult? Function(_CancelAdvice value)? cancelAdvice,
   }) {
     return initialized?.call(this);
   }
@@ -367,6 +378,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
+    TResult Function(_CancelAdvice value)? cancelAdvice,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -482,6 +494,7 @@ class _$_FetchPaymentSummaryDetailsEvent
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
+    required TResult Function() cancelAdvice,
   }) {
     return fetchPaymentSummaryDetailsInfo(details);
   }
@@ -502,6 +515,7 @@ class _$_FetchPaymentSummaryDetailsEvent
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
+    TResult? Function()? cancelAdvice,
   }) {
     return fetchPaymentSummaryDetailsInfo?.call(details);
   }
@@ -522,6 +536,7 @@ class _$_FetchPaymentSummaryDetailsEvent
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
+    TResult Function()? cancelAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryDetailsInfo != null) {
@@ -542,6 +557,7 @@ class _$_FetchPaymentSummaryDetailsEvent
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
+    required TResult Function(_CancelAdvice value) cancelAdvice,
   }) {
     return fetchPaymentSummaryDetailsInfo(this);
   }
@@ -558,6 +574,7 @@ class _$_FetchPaymentSummaryDetailsEvent
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
+    TResult? Function(_CancelAdvice value)? cancelAdvice,
   }) {
     return fetchPaymentSummaryDetailsInfo?.call(this);
   }
@@ -574,6 +591,7 @@ class _$_FetchPaymentSummaryDetailsEvent
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
+    TResult Function(_CancelAdvice value)? cancelAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryDetailsInfo != null) {
@@ -648,6 +666,7 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
+    required TResult Function() cancelAdvice,
   }) {
     return fetchPaymentSummaryList();
   }
@@ -668,6 +687,7 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
+    TResult? Function()? cancelAdvice,
   }) {
     return fetchPaymentSummaryList?.call();
   }
@@ -688,6 +708,7 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
+    TResult Function()? cancelAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryList != null) {
@@ -708,6 +729,7 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
+    required TResult Function(_CancelAdvice value) cancelAdvice,
   }) {
     return fetchPaymentSummaryList(this);
   }
@@ -724,6 +746,7 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
+    TResult? Function(_CancelAdvice value)? cancelAdvice,
   }) {
     return fetchPaymentSummaryList?.call(this);
   }
@@ -740,6 +763,7 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
+    TResult Function(_CancelAdvice value)? cancelAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryList != null) {
@@ -804,6 +828,7 @@ class _$_FetchBankInstruction implements _FetchBankInstruction {
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
+    required TResult Function() cancelAdvice,
   }) {
     return fetchBankInstruction();
   }
@@ -824,6 +849,7 @@ class _$_FetchBankInstruction implements _FetchBankInstruction {
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
+    TResult? Function()? cancelAdvice,
   }) {
     return fetchBankInstruction?.call();
   }
@@ -844,6 +870,7 @@ class _$_FetchBankInstruction implements _FetchBankInstruction {
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
+    TResult Function()? cancelAdvice,
     required TResult orElse(),
   }) {
     if (fetchBankInstruction != null) {
@@ -864,6 +891,7 @@ class _$_FetchBankInstruction implements _FetchBankInstruction {
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
+    required TResult Function(_CancelAdvice value) cancelAdvice,
   }) {
     return fetchBankInstruction(this);
   }
@@ -880,6 +908,7 @@ class _$_FetchBankInstruction implements _FetchBankInstruction {
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
+    TResult? Function(_CancelAdvice value)? cancelAdvice,
   }) {
     return fetchBankInstruction?.call(this);
   }
@@ -896,6 +925,7 @@ class _$_FetchBankInstruction implements _FetchBankInstruction {
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
+    TResult Function(_CancelAdvice value)? cancelAdvice,
     required TResult orElse(),
   }) {
     if (fetchBankInstruction != null) {
@@ -957,6 +987,7 @@ class _$_FetchAdvice implements _FetchAdvice {
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
+    required TResult Function() cancelAdvice,
   }) {
     return fetchAdvice();
   }
@@ -977,6 +1008,7 @@ class _$_FetchAdvice implements _FetchAdvice {
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
+    TResult? Function()? cancelAdvice,
   }) {
     return fetchAdvice?.call();
   }
@@ -997,6 +1029,7 @@ class _$_FetchAdvice implements _FetchAdvice {
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
+    TResult Function()? cancelAdvice,
     required TResult orElse(),
   }) {
     if (fetchAdvice != null) {
@@ -1017,6 +1050,7 @@ class _$_FetchAdvice implements _FetchAdvice {
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
+    required TResult Function(_CancelAdvice value) cancelAdvice,
   }) {
     return fetchAdvice(this);
   }
@@ -1033,6 +1067,7 @@ class _$_FetchAdvice implements _FetchAdvice {
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
+    TResult? Function(_CancelAdvice value)? cancelAdvice,
   }) {
     return fetchAdvice?.call(this);
   }
@@ -1049,6 +1084,7 @@ class _$_FetchAdvice implements _FetchAdvice {
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
+    TResult Function(_CancelAdvice value)? cancelAdvice,
     required TResult orElse(),
   }) {
     if (fetchAdvice != null) {
@@ -1110,6 +1146,7 @@ class _$_SaveAdvice implements _SaveAdvice {
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
+    required TResult Function() cancelAdvice,
   }) {
     return saveAdvice();
   }
@@ -1130,6 +1167,7 @@ class _$_SaveAdvice implements _SaveAdvice {
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
+    TResult? Function()? cancelAdvice,
   }) {
     return saveAdvice?.call();
   }
@@ -1150,6 +1188,7 @@ class _$_SaveAdvice implements _SaveAdvice {
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
+    TResult Function()? cancelAdvice,
     required TResult orElse(),
   }) {
     if (saveAdvice != null) {
@@ -1170,6 +1209,7 @@ class _$_SaveAdvice implements _SaveAdvice {
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
+    required TResult Function(_CancelAdvice value) cancelAdvice,
   }) {
     return saveAdvice(this);
   }
@@ -1186,6 +1226,7 @@ class _$_SaveAdvice implements _SaveAdvice {
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
+    TResult? Function(_CancelAdvice value)? cancelAdvice,
   }) {
     return saveAdvice?.call(this);
   }
@@ -1202,6 +1243,7 @@ class _$_SaveAdvice implements _SaveAdvice {
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
+    TResult Function(_CancelAdvice value)? cancelAdvice,
     required TResult orElse(),
   }) {
     if (saveAdvice != null) {
@@ -1263,6 +1305,7 @@ class _$_DeleteAdvice implements _DeleteAdvice {
     required TResult Function() fetchAdvice,
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
+    required TResult Function() cancelAdvice,
   }) {
     return deleteAdvice();
   }
@@ -1283,6 +1326,7 @@ class _$_DeleteAdvice implements _DeleteAdvice {
     TResult? Function()? fetchAdvice,
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
+    TResult? Function()? cancelAdvice,
   }) {
     return deleteAdvice?.call();
   }
@@ -1303,6 +1347,7 @@ class _$_DeleteAdvice implements _DeleteAdvice {
     TResult Function()? fetchAdvice,
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
+    TResult Function()? cancelAdvice,
     required TResult orElse(),
   }) {
     if (deleteAdvice != null) {
@@ -1323,6 +1368,7 @@ class _$_DeleteAdvice implements _DeleteAdvice {
     required TResult Function(_FetchAdvice value) fetchAdvice,
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
+    required TResult Function(_CancelAdvice value) cancelAdvice,
   }) {
     return deleteAdvice(this);
   }
@@ -1339,6 +1385,7 @@ class _$_DeleteAdvice implements _DeleteAdvice {
     TResult? Function(_FetchAdvice value)? fetchAdvice,
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
+    TResult? Function(_CancelAdvice value)? cancelAdvice,
   }) {
     return deleteAdvice?.call(this);
   }
@@ -1355,6 +1402,7 @@ class _$_DeleteAdvice implements _DeleteAdvice {
     TResult Function(_FetchAdvice value)? fetchAdvice,
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
+    TResult Function(_CancelAdvice value)? cancelAdvice,
     required TResult orElse(),
   }) {
     if (deleteAdvice != null) {
@@ -1366,6 +1414,165 @@ class _$_DeleteAdvice implements _DeleteAdvice {
 
 abstract class _DeleteAdvice implements PaymentSummaryDetailsEvent {
   const factory _DeleteAdvice() = _$_DeleteAdvice;
+}
+
+/// @nodoc
+abstract class _$$_CancelAdviceCopyWith<$Res> {
+  factory _$$_CancelAdviceCopyWith(
+          _$_CancelAdvice value, $Res Function(_$_CancelAdvice) then) =
+      __$$_CancelAdviceCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CancelAdviceCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$_CancelAdvice>
+    implements _$$_CancelAdviceCopyWith<$Res> {
+  __$$_CancelAdviceCopyWithImpl(
+      _$_CancelAdvice _value, $Res Function(_$_CancelAdvice) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_CancelAdvice implements _CancelAdvice {
+  const _$_CancelAdvice();
+
+  @override
+  String toString() {
+    return 'PaymentSummaryDetailsEvent.cancelAdvice()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_CancelAdvice);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(PaymentSummaryDetails details)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function() fetchPaymentSummaryList,
+    required TResult Function() fetchBankInstruction,
+    required TResult Function() fetchAdvice,
+    required TResult Function() saveAdvice,
+    required TResult Function() deleteAdvice,
+    required TResult Function() cancelAdvice,
+  }) {
+    return cancelAdvice();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(PaymentSummaryDetails details)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function()? fetchPaymentSummaryList,
+    TResult? Function()? fetchBankInstruction,
+    TResult? Function()? fetchAdvice,
+    TResult? Function()? saveAdvice,
+    TResult? Function()? deleteAdvice,
+    TResult? Function()? cancelAdvice,
+  }) {
+    return cancelAdvice?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(PaymentSummaryDetails details)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function()? fetchPaymentSummaryList,
+    TResult Function()? fetchBankInstruction,
+    TResult Function()? fetchAdvice,
+    TResult Function()? saveAdvice,
+    TResult Function()? deleteAdvice,
+    TResult Function()? cancelAdvice,
+    required TResult orElse(),
+  }) {
+    if (cancelAdvice != null) {
+      return cancelAdvice();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchPaymentSummaryDetailsEvent value)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function(_FetchPaymentSummaryListEvent value)
+        fetchPaymentSummaryList,
+    required TResult Function(_FetchBankInstruction value) fetchBankInstruction,
+    required TResult Function(_FetchAdvice value) fetchAdvice,
+    required TResult Function(_SaveAdvice value) saveAdvice,
+    required TResult Function(_DeleteAdvice value) deleteAdvice,
+    required TResult Function(_CancelAdvice value) cancelAdvice,
+  }) {
+    return cancelAdvice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult? Function(_FetchBankInstruction value)? fetchBankInstruction,
+    TResult? Function(_FetchAdvice value)? fetchAdvice,
+    TResult? Function(_SaveAdvice value)? saveAdvice,
+    TResult? Function(_DeleteAdvice value)? deleteAdvice,
+    TResult? Function(_CancelAdvice value)? cancelAdvice,
+  }) {
+    return cancelAdvice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult Function(_FetchBankInstruction value)? fetchBankInstruction,
+    TResult Function(_FetchAdvice value)? fetchAdvice,
+    TResult Function(_SaveAdvice value)? saveAdvice,
+    TResult Function(_DeleteAdvice value)? deleteAdvice,
+    TResult Function(_CancelAdvice value)? cancelAdvice,
+    required TResult orElse(),
+  }) {
+    if (cancelAdvice != null) {
+      return cancelAdvice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CancelAdvice implements PaymentSummaryDetailsEvent {
+  const factory _CancelAdvice() = _$_CancelAdvice;
 }
 
 /// @nodoc
@@ -1382,6 +1589,7 @@ mixin _$PaymentSummaryDetailsState {
   PaymentInvoiceInfoPdf get paymentInvoiceInfoPdf =>
       throw _privateConstructorUsedError;
   bool get isDeletingPayment => throw _privateConstructorUsedError;
+  bool get isCancelingAdvice => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   BankInstruction get bankInstruction => throw _privateConstructorUsedError;
@@ -1410,6 +1618,7 @@ abstract class $PaymentSummaryDetailsStateCopyWith<$Res> {
       ShipToInfo shipToInfo,
       PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       bool isDeletingPayment,
+      bool isCancelingAdvice,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       BankInstruction bankInstruction});
 
@@ -1447,6 +1656,7 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
     Object? shipToInfo = null,
     Object? paymentInvoiceInfoPdf = null,
     Object? isDeletingPayment = null,
+    Object? isCancelingAdvice = null,
     Object? failureOrSuccessOption = null,
     Object? bankInstruction = null,
   }) {
@@ -1494,6 +1704,10 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
       isDeletingPayment: null == isDeletingPayment
           ? _value.isDeletingPayment
           : isDeletingPayment // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCancelingAdvice: null == isCancelingAdvice
+          ? _value.isCancelingAdvice
+          : isCancelingAdvice // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
@@ -1585,6 +1799,7 @@ abstract class _$$_PaymentSummaryDetailsStateCopyWith<$Res>
       ShipToInfo shipToInfo,
       PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       bool isDeletingPayment,
+      bool isCancelingAdvice,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       BankInstruction bankInstruction});
 
@@ -1628,6 +1843,7 @@ class __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? paymentInvoiceInfoPdf = null,
     Object? isDeletingPayment = null,
+    Object? isCancelingAdvice = null,
     Object? failureOrSuccessOption = null,
     Object? bankInstruction = null,
   }) {
@@ -1676,6 +1892,10 @@ class __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>
           ? _value.isDeletingPayment
           : isDeletingPayment // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCancelingAdvice: null == isCancelingAdvice
+          ? _value.isCancelingAdvice
+          : isCancelingAdvice // ignore: cast_nullable_to_non_nullable
+              as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1703,6 +1923,7 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
       required this.shipToInfo,
       required this.paymentInvoiceInfoPdf,
       required this.isDeletingPayment,
+      required this.isCancelingAdvice,
       required this.failureOrSuccessOption,
       required this.bankInstruction})
       : super._();
@@ -1730,13 +1951,15 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
   @override
   final bool isDeletingPayment;
   @override
+  final bool isCancelingAdvice;
+  @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
   final BankInstruction bankInstruction;
 
   @override
   String toString() {
-    return 'PaymentSummaryDetailsState(details: $details, salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, user: $user, isDetailFetching: $isDetailFetching, isListLoading: $isListLoading, isFetchingAdvice: $isFetchingAdvice, isSavingAdvice: $isSavingAdvice, shipToInfo: $shipToInfo, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isDeletingPayment: $isDeletingPayment, failureOrSuccessOption: $failureOrSuccessOption, bankInstruction: $bankInstruction)';
+    return 'PaymentSummaryDetailsState(details: $details, salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, user: $user, isDetailFetching: $isDetailFetching, isListLoading: $isListLoading, isFetchingAdvice: $isFetchingAdvice, isSavingAdvice: $isSavingAdvice, shipToInfo: $shipToInfo, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isDeletingPayment: $isDeletingPayment, isCancelingAdvice: $isCancelingAdvice, failureOrSuccessOption: $failureOrSuccessOption, bankInstruction: $bankInstruction)';
   }
 
   @override
@@ -1764,6 +1987,8 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
                 other.paymentInvoiceInfoPdf == paymentInvoiceInfoPdf) &&
             (identical(other.isDeletingPayment, isDeletingPayment) ||
                 other.isDeletingPayment == isDeletingPayment) &&
+            (identical(other.isCancelingAdvice, isCancelingAdvice) ||
+                other.isCancelingAdvice == isCancelingAdvice) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.bankInstruction, bankInstruction) ||
@@ -1784,6 +2009,7 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
       shipToInfo,
       paymentInvoiceInfoPdf,
       isDeletingPayment,
+      isCancelingAdvice,
       failureOrSuccessOption,
       bankInstruction);
 
@@ -1808,6 +2034,7 @@ abstract class _PaymentSummaryDetailsState extends PaymentSummaryDetailsState {
       required final ShipToInfo shipToInfo,
       required final PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       required final bool isDeletingPayment,
+      required final bool isCancelingAdvice,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final BankInstruction
           bankInstruction}) = _$_PaymentSummaryDetailsState;
@@ -1835,6 +2062,8 @@ abstract class _PaymentSummaryDetailsState extends PaymentSummaryDetailsState {
   PaymentInvoiceInfoPdf get paymentInvoiceInfoPdf;
   @override
   bool get isDeletingPayment;
+  @override
+  bool get isCancelingAdvice;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
