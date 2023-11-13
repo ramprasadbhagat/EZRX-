@@ -32,7 +32,7 @@ void main() {
   final filterList = PaymentSummaryFilterDto.fromDomain(fakeFilter).toMapList;
   final searchMap = {
     'field': 'zzAdvice',
-    'value': SearchKey.searchFilter('fake_search_key').searchValueOrEmpty,
+    'value': SearchKey.searchFilter('FAKE_SEARCH_KEY').searchValueOrEmpty,
   };
   filterList.add(searchMap);
 

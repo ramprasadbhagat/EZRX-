@@ -650,3 +650,5 @@ String getStatusText(String apiStatus) {
       return apiStatus;
   }
 }
+
+String getUpperCaseValue(String value) => value.toUpperCase();

@@ -121,7 +121,7 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
       if (searchKey.validateNotEmpty) {
         final searchMap = <String, String>{};
         searchMap.putIfAbsent('field', () => 'zzAdvice');
-        searchMap.putIfAbsent('value', () => searchKey.searchValueOrEmpty);
+        searchMap.putIfAbsent('value', () => searchKey.upperCaseValue);
         filterList.add(searchMap);
       }
       final paymentSummaryList = await remoteDataSource.getPaymentSummary(

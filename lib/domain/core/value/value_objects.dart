@@ -78,6 +78,8 @@ class SearchKey extends ValueObject<String> {
 
   bool get isValueEmpty => value.fold((l) => l.failedValue, (r) => r).isEmpty;
 
+  String get upperCaseValue => getUpperCaseValue(searchValueOrEmpty);
+
   const SearchKey._(this.value);
 }
 
