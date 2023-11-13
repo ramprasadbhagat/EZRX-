@@ -15,6 +15,7 @@ class CartState with _$CartState {
     required bool isMappingPrice,
     required bool isUpdatingStock,
     required bool isBuyAgain,
+    required bool isDeleteCombo,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
@@ -42,6 +43,7 @@ class CartState with _$CartState {
         shipToInfo: ShipToInfo.empty(),
         salesOrganisation: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
+        isDeleteCombo: false,
       );
 
   bool get containCovidMaterial =>

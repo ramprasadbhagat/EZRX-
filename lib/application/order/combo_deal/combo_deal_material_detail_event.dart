@@ -51,4 +51,7 @@ class ComboDealMaterialDetailEvent with _$ComboDealMaterialDetailEvent {
     required ComboDeal comboDeal,
     required List<String> principles,
   }) = _LoadMoreComboDealPrincipal;
+
+  const factory ComboDealMaterialDetailEvent.clearSelectedItem() =
+      _ClearSelectedItem;
 }

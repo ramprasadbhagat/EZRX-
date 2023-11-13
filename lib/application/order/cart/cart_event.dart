@@ -67,6 +67,7 @@ class CartEvent with _$CartEvent {
 
   const factory CartEvent.upsertCartItemsWithComboOffers({
     required List<PriceAggregate> priceAggregates,
+    required bool isDeleteCombo,
   }) = _UpsertCartItemsWithComboOffers;
 
   const factory CartEvent.updateCartProductWithCounterOffer({

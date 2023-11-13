@@ -152,7 +152,8 @@ class _CartPageCheckoutButton extends StatelessWidget {
                   !current.isClearing) &&
           (context.router.current.path == 'combo_detail' ||
               (context.router.current.path == 'orders/cart' &&
-                  previous.cartProducts != current.cartProducts)),
+                  previous.cartProducts != current.cartProducts)) &&
+          !current.isDeleteCombo,
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
           () {
@@ -208,6 +209,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
                                         .read<ComboDealMaterialDetailBloc>()
                                         .state
                                         .allSelectedItems,
+                                    isDeleteCombo: false,
                                   ),
                                 );
                           }

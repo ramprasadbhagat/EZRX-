@@ -523,6 +523,25 @@ class ComboDealMaterialDetailBloc
           },
         );
       },
+      clearSelectedItem: (_) {
+        final selectedItems = <MaterialNumber, bool>{};
+
+        selectedItems.addAll(
+          {
+            for (final item in state.items.values)
+              item.getMaterialNumber: _isMaterialSelected(
+                cartComboMaterialsSelected: {},
+                item: item,
+              ),
+          },
+        );
+
+        emit(
+          state.copyWith(
+            selectedItems: selectedItems,
+          ),
+        );
+      },
     );
   }
 

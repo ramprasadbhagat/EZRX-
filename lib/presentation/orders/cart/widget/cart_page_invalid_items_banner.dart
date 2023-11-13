@@ -126,6 +126,7 @@ class _InvalidItemRemoveButton extends StatelessWidget {
                     cartBloc.add(
                       CartEvent.upsertCartItemsWithComboOffers(
                         priceAggregates: invalidComboItems,
+                        isDeleteCombo: true,
                       ),
                     );
                   }

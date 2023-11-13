@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -28,9 +30,11 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_next_deal_info.dart';
 import 'package:ezrxmobile/presentation/products/combo_detail/widgets/discount_tag_widget.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,107 +49,101 @@ part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_requir
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_searchbar.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_add_to_cart_section.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_body_content.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_delete_from_cart_button.dart';
 
 class ComboDetailPage extends StatelessWidget {
   const ComboDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: WidgetKeys.materialListPage,
-      appBar: AppBar(
-        title: BlocBuilder<ComboDealMaterialDetailBloc,
-            ComboDealMaterialDetailState>(
-          buildWhen: (previous, current) =>
-              previous.isFetchingComboInfo != current.isFetchingComboInfo,
-          builder: (context, state) {
-            if (state.isFetchingComboInfo) {
-              return SizedBox(
-                key: WidgetKeys.comboTitleLoading,
-                width: 100,
-                height: 20,
-                child: LoadingShimmer.tile(),
-              );
-            }
-
-            return Text(
-              context.tr(state.currentDeal.scheme.comboDealTitleAppbar),
-              style: Theme.of(context).textTheme.labelLarge,
-            );
-          },
-        ),
-        centerTitle: false,
-        titleSpacing: 0,
-        leading: IconButton(
-          key: WidgetKeys.backButton,
-          icon: const Icon(
-            Icons.arrow_back_ios,
-          ),
-          iconSize: 14,
-          onPressed: () async {
-            final confirmed = await _showConfirmBottomSheet(context);
-            if (confirmed ?? false) {
-              if (context.mounted) await context.router.pop();
-            }
-          },
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: CartButton(
-              cartColor: ZPColors.black,
+    return BlocBuilder<ComboDealMaterialDetailBloc,
+        ComboDealMaterialDetailState>(
+      buildWhen: (previous, current) =>
+          previous.isFetchingComboInfo != current.isFetchingComboInfo ||
+          previous.isUpdateCart != current.isUpdateCart,
+      builder: (context, state) {
+        return Scaffold(
+          key: WidgetKeys.materialListPage,
+          appBar: AppBar(
+            title: state.isFetchingComboInfo
+                ? SizedBox(
+                    key: WidgetKeys.comboTitleLoading,
+                    width: 100,
+                    height: 20,
+                    child: LoadingShimmer.tile(),
+                  )
+                : Text(
+                    context.tr(state.currentDeal.scheme.comboDealTitleAppbar),
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+            centerTitle: false,
+            titleSpacing: 0,
+            leading: IconButton(
+              key: WidgetKeys.backButton,
+              icon: const Icon(
+                Icons.arrow_back_ios,
+              ),
+              iconSize: 14,
+              onPressed: () async {
+                final confirmed = await _showConfirmBottomSheet(context);
+                if (confirmed ?? false) {
+                  if (context.mounted) await context.router.pop();
+                }
+              },
             ),
+            actions: [
+              state.isUpdateCart
+                  ? const _ComboDetailDeleteFromCartButton()
+                  : const Padding(
+                      padding: EdgeInsets.only(right: 10),
+                      child: CartButton(
+                        cartColor: ZPColors.black,
+                      ),
+                    ),
+            ],
           ),
-        ],
-      ),
-      body: BlocListener<MaterialPriceBloc, MaterialPriceState>(
-        listenWhen: (previous, current) =>
-            previous.isFetching != current.isFetching && !current.isFetching,
-        listener: (context, state) {
-          final materialsPrice = <MaterialNumber, MaterialPriceDetail>{};
-          final comboDealMaterialDetailState =
-              context.read<ComboDealMaterialDetailBloc>().state;
-          materialsPrice.addAll(
-            {
-              for (final materialPrice in state.materialPrice.entries)
-                materialPrice.key: MaterialPriceDetail(
-                  price: materialPrice.value,
-                  info: comboDealMaterialDetailState
-                          .items[materialPrice.key]?.materialInfo ??
-                      MaterialInfo.empty(),
-                  isValidMaterial: materialPrice.value.isValidMaterial,
-                ),
-            },
-          );
-
-          context.read<ComboDealMaterialDetailBloc>().add(
-                ComboDealMaterialDetailEvent.setPriceInfo(
-                  priceMap: materialsPrice,
-                ),
+          body: BlocListener<MaterialPriceBloc, MaterialPriceState>(
+            listenWhen: (previous, current) =>
+                previous.isFetching != current.isFetching &&
+                !current.isFetching,
+            listener: (context, state) {
+              final materialsPrice = <MaterialNumber, MaterialPriceDetail>{};
+              final comboDealMaterialDetailState =
+                  context.read<ComboDealMaterialDetailBloc>().state;
+              materialsPrice.addAll(
+                {
+                  for (final materialPrice in state.materialPrice.entries)
+                    materialPrice.key: MaterialPriceDetail(
+                      price: materialPrice.value,
+                      info: comboDealMaterialDetailState
+                              .items[materialPrice.key]?.materialInfo ??
+                          MaterialInfo.empty(),
+                      isValidMaterial: materialPrice.value.isValidMaterial,
+                    ),
+                },
               );
-        },
-        child: Column(
-          children: [
-            const _ComboRequirementSection(),
-            Expanded(
-              child: BlocBuilder<ComboDealMaterialDetailBloc,
-                  ComboDealMaterialDetailState>(
-                buildWhen: (previous, current) =>
-                    previous.isFetchingComboInfo !=
-                        current.isFetchingComboInfo &&
-                    !current.isFetchingComboInfo,
-                builder: (context, state) {
-                  return _ComboDetailBodyContent(
+
+              context.read<ComboDealMaterialDetailBloc>().add(
+                    ComboDealMaterialDetailEvent.setPriceInfo(
+                      priceMap: materialsPrice,
+                    ),
+                  );
+            },
+            child: Column(
+              children: [
+                const _ComboRequirementSection(),
+                Expanded(
+                  child: _ComboDetailBodyContent(
                     haveFixedMaterials:
                         state.currentDeal.scheme.haveFixedMaterials,
-                  );
-                },
-              ),
+                  ),
+                ),
+                const _ComboDetailAddToCartSection(),
+              ],
             ),
-            const _ComboDetailAddToCartSection(),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

@@ -242,7 +242,7 @@ class CartProductCombo extends StatelessWidget {
       enableDrag: false,
       isDismissible: false,
       isScrollControlled: true,
-      builder: (_) => _DeleteComboDealBottomSheet(
+      builder: (_) => DeleteComboDealBottomSheet(
         cartItem: cartItem,
       ),
     );

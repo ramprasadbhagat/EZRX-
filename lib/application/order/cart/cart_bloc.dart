@@ -814,6 +814,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           state.copyWith(
             apiFailureOrSuccessOption: none(),
             isUpserting: true,
+            isDeleteCombo: false,
           ),
         );
 
@@ -846,6 +847,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 apiFailureOrSuccessOption: none(),
                 isUpserting: false,
                 cartProducts: newCartProductList,
+                isDeleteCombo: e.isDeleteCombo,
               ),
             );
           },

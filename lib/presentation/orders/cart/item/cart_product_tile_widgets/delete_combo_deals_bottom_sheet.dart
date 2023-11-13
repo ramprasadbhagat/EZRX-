@@ -1,8 +1,8 @@
 part of 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
 
-class _DeleteComboDealBottomSheet extends StatelessWidget {
+class DeleteComboDealBottomSheet extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _DeleteComboDealBottomSheet({
+  const DeleteComboDealBottomSheet({
     Key? key,
     required this.cartItem,
   }) : super(key: key);
@@ -92,6 +92,7 @@ class _DeleteComboButtons extends StatelessWidget {
                                 ),
                               )
                               .toList(),
+                      isDeleteCombo: true,
                     ),
                   );
               context.router.pop();

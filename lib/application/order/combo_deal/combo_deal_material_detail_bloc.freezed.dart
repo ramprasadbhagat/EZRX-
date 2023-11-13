@@ -49,6 +49,7 @@ mixin _$ComboDealMaterialDetailEvent {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -84,6 +85,7 @@ mixin _$ComboDealMaterialDetailEvent {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -119,6 +121,7 @@ mixin _$ComboDealMaterialDetailEvent {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,6 +142,7 @@ mixin _$ComboDealMaterialDetailEvent {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -157,6 +161,7 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -174,6 +179,7 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -389,6 +395,7 @@ class _$_Initialize implements _Initialize {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return initialize(
         salesOrganisation, customerCodeInfo, shipToInfo, user, salesConfigs);
@@ -428,6 +435,7 @@ class _$_Initialize implements _Initialize {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return initialize?.call(
         salesOrganisation, customerCodeInfo, shipToInfo, user, salesConfigs);
@@ -467,6 +475,7 @@ class _$_Initialize implements _Initialize {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -494,6 +503,7 @@ class _$_Initialize implements _Initialize {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return initialize(this);
   }
@@ -515,6 +525,7 @@ class _$_Initialize implements _Initialize {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return initialize?.call(this);
   }
@@ -535,6 +546,7 @@ class _$_Initialize implements _Initialize {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -691,6 +703,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return initFromCartComboDealItems(items, salesConfigs);
   }
@@ -729,6 +742,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return initFromCartComboDealItems?.call(items, salesConfigs);
   }
@@ -767,6 +781,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (initFromCartComboDealItems != null) {
@@ -793,6 +808,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return initFromCartComboDealItems(this);
   }
@@ -814,6 +830,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return initFromCartComboDealItems?.call(this);
   }
@@ -834,6 +851,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (initFromCartComboDealItems != null) {
@@ -960,6 +978,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return setPriceInfo(priceMap);
   }
@@ -998,6 +1017,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return setPriceInfo?.call(priceMap);
   }
@@ -1036,6 +1056,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (setPriceInfo != null) {
@@ -1062,6 +1083,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return setPriceInfo(this);
   }
@@ -1083,6 +1105,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return setPriceInfo?.call(this);
   }
@@ -1103,6 +1126,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (setPriceInfo != null) {
@@ -1227,6 +1251,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return updateItemQuantity(item, qty);
   }
@@ -1265,6 +1290,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return updateItemQuantity?.call(item, qty);
   }
@@ -1303,6 +1329,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (updateItemQuantity != null) {
@@ -1329,6 +1356,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return updateItemQuantity(this);
   }
@@ -1350,6 +1378,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return updateItemQuantity?.call(this);
   }
@@ -1370,6 +1399,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (updateItemQuantity != null) {
@@ -1488,6 +1518,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return updateItemSelection(item);
   }
@@ -1526,6 +1557,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return updateItemSelection?.call(item);
   }
@@ -1564,6 +1596,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (updateItemSelection != null) {
@@ -1590,6 +1623,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return updateItemSelection(this);
   }
@@ -1611,6 +1645,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return updateItemSelection?.call(this);
   }
@@ -1631,6 +1666,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (updateItemSelection != null) {
@@ -1805,6 +1841,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return fetchComboDealDetail(
         comboDeal, locale, parentMaterialNumber, comboMaterialsCurrentQuantity);
@@ -1844,6 +1881,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return fetchComboDealDetail?.call(
         comboDeal, locale, parentMaterialNumber, comboMaterialsCurrentQuantity);
@@ -1883,6 +1921,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (fetchComboDealDetail != null) {
@@ -1910,6 +1949,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return fetchComboDealDetail(this);
   }
@@ -1931,6 +1971,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return fetchComboDealDetail?.call(this);
   }
@@ -1951,6 +1992,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (fetchComboDealDetail != null) {
@@ -2071,6 +2113,7 @@ class _$_Search implements _Search {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return search(searchKey);
   }
@@ -2109,6 +2152,7 @@ class _$_Search implements _Search {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return search?.call(searchKey);
   }
@@ -2147,6 +2191,7 @@ class _$_Search implements _Search {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -2173,6 +2218,7 @@ class _$_Search implements _Search {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return search(this);
   }
@@ -2194,6 +2240,7 @@ class _$_Search implements _Search {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return search?.call(this);
   }
@@ -2214,6 +2261,7 @@ class _$_Search implements _Search {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -2330,6 +2378,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return cartContainsCurrentCombo(contain);
   }
@@ -2368,6 +2417,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return cartContainsCurrentCombo?.call(contain);
   }
@@ -2406,6 +2456,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (cartContainsCurrentCombo != null) {
@@ -2432,6 +2483,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return cartContainsCurrentCombo(this);
   }
@@ -2453,6 +2505,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return cartContainsCurrentCombo?.call(this);
   }
@@ -2473,6 +2526,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (cartContainsCurrentCombo != null) {
@@ -2562,6 +2616,7 @@ class _$_ClearSearch implements _ClearSearch {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return clearSearch();
   }
@@ -2600,6 +2655,7 @@ class _$_ClearSearch implements _ClearSearch {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return clearSearch?.call();
   }
@@ -2638,6 +2694,7 @@ class _$_ClearSearch implements _ClearSearch {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (clearSearch != null) {
@@ -2664,6 +2721,7 @@ class _$_ClearSearch implements _ClearSearch {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return clearSearch(this);
   }
@@ -2685,6 +2743,7 @@ class _$_ClearSearch implements _ClearSearch {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return clearSearch?.call(this);
   }
@@ -2705,6 +2764,7 @@ class _$_ClearSearch implements _ClearSearch {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (clearSearch != null) {
@@ -2882,6 +2942,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return fetchComboDealPrincipal(
         comboDeal, comboMaterialsCurrentQuantity, principles, locale);
@@ -2921,6 +2982,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return fetchComboDealPrincipal?.call(
         comboDeal, comboMaterialsCurrentQuantity, principles, locale);
@@ -2960,6 +3022,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (fetchComboDealPrincipal != null) {
@@ -2987,6 +3050,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return fetchComboDealPrincipal(this);
   }
@@ -3008,6 +3072,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return fetchComboDealPrincipal?.call(this);
   }
@@ -3028,6 +3093,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (fetchComboDealPrincipal != null) {
@@ -3181,6 +3247,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
   }) {
     return loadMoreComboDealPrincipal(comboDeal, principles);
   }
@@ -3219,6 +3286,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
   }) {
     return loadMoreComboDealPrincipal?.call(comboDeal, principles);
   }
@@ -3257,6 +3325,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (loadMoreComboDealPrincipal != null) {
@@ -3283,6 +3352,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
         fetchComboDealPrincipal,
     required TResult Function(_LoadMoreComboDealPrincipal value)
         loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
   }) {
     return loadMoreComboDealPrincipal(this);
   }
@@ -3304,6 +3374,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
     TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult? Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
   }) {
     return loadMoreComboDealPrincipal?.call(this);
   }
@@ -3324,6 +3395,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
     TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
     TResult Function(_LoadMoreComboDealPrincipal value)?
         loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
     required TResult orElse(),
   }) {
     if (loadMoreComboDealPrincipal != null) {
@@ -3344,6 +3416,237 @@ abstract class _LoadMoreComboDealPrincipal
   @JsonKey(ignore: true)
   _$$_LoadMoreComboDealPrincipalCopyWith<_$_LoadMoreComboDealPrincipal>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ClearSelectedItemCopyWith<$Res> {
+  factory _$$_ClearSelectedItemCopyWith(_$_ClearSelectedItem value,
+          $Res Function(_$_ClearSelectedItem) then) =
+      __$$_ClearSelectedItemCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ClearSelectedItemCopyWithImpl<$Res>
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
+        _$_ClearSelectedItem> implements _$$_ClearSelectedItemCopyWith<$Res> {
+  __$$_ClearSelectedItemCopyWithImpl(
+      _$_ClearSelectedItem _value, $Res Function(_$_ClearSelectedItem) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ClearSelectedItem implements _ClearSelectedItem {
+  const _$_ClearSelectedItem();
+
+  @override
+  String toString() {
+    return 'ComboDealMaterialDetailEvent.clearSelectedItem()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ClearSelectedItem);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
+        initialize,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
+    required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap)
+        setPriceInfo,
+    required TResult Function(MaterialNumber item, int qty) updateItemQuantity,
+    required TResult Function(MaterialNumber item) updateItemSelection,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Locale locale,
+            MaterialNumber parentMaterialNumber,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
+        fetchComboDealDetail,
+    required TResult Function(SearchKey searchKey) search,
+    required TResult Function(bool contain) cartContainsCurrentCombo,
+    required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
+    required TResult Function() clearSelectedItem,
+  }) {
+    return clearSelectedItem();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
+        initialize,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
+    TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap)?
+        setPriceInfo,
+    TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult? Function(MaterialNumber item)? updateItemSelection,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Locale locale,
+            MaterialNumber parentMaterialNumber,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
+        fetchComboDealDetail,
+    TResult? Function(SearchKey searchKey)? search,
+    TResult? Function(bool contain)? cartContainsCurrentCombo,
+    TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
+    TResult? Function()? clearSelectedItem,
+  }) {
+    return clearSelectedItem?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
+        initialize,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
+    TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap)?
+        setPriceInfo,
+    TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult Function(MaterialNumber item)? updateItemSelection,
+    TResult Function(
+            ComboDeal comboDeal,
+            Locale locale,
+            MaterialNumber parentMaterialNumber,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
+        fetchComboDealDetail,
+    TResult Function(SearchKey searchKey)? search,
+    TResult Function(bool contain)? cartContainsCurrentCombo,
+    TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
+    TResult Function()? clearSelectedItem,
+    required TResult orElse(),
+  }) {
+    if (clearSelectedItem != null) {
+      return clearSelectedItem();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
+    required TResult Function(_SetPriceInfo value) setPriceInfo,
+    required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
+    required TResult Function(_UpdateItemSelection value) updateItemSelection,
+    required TResult Function(_FetchComboDealDetail value) fetchComboDealDetail,
+    required TResult Function(_Search value) search,
+    required TResult Function(_CartContainsCurrentCombo value)
+        cartContainsCurrentCombo,
+    required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
+    required TResult Function(_ClearSelectedItem value) clearSelectedItem,
+  }) {
+    return clearSelectedItem(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
+    TResult? Function(_SetPriceInfo value)? setPriceInfo,
+    TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult? Function(_UpdateItemSelection value)? updateItemSelection,
+    TResult? Function(_FetchComboDealDetail value)? fetchComboDealDetail,
+    TResult? Function(_Search value)? search,
+    TResult? Function(_CartContainsCurrentCombo value)?
+        cartContainsCurrentCombo,
+    TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
+    TResult? Function(_ClearSelectedItem value)? clearSelectedItem,
+  }) {
+    return clearSelectedItem?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
+    TResult Function(_SetPriceInfo value)? setPriceInfo,
+    TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult Function(_UpdateItemSelection value)? updateItemSelection,
+    TResult Function(_FetchComboDealDetail value)? fetchComboDealDetail,
+    TResult Function(_Search value)? search,
+    TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
+    TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
+    TResult Function(_ClearSelectedItem value)? clearSelectedItem,
+    required TResult orElse(),
+  }) {
+    if (clearSelectedItem != null) {
+      return clearSelectedItem(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearSelectedItem implements ComboDealMaterialDetailEvent {
+  const factory _ClearSelectedItem() = _$_ClearSelectedItem;
 }
 
 /// @nodoc
