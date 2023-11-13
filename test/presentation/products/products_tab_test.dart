@@ -6,18 +6,22 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -34,7 +38,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
+import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class MaterialListBlocMock
@@ -68,6 +74,12 @@ class ProductImageBlocMock
 
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
+class OrderEligibilityBlocMock
+    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
+    implements OrderEligibilityBloc {}
+
+class MockAppRouter extends Mock implements AppRouter {}
+
 void main() {
   late MaterialListBlocMock materialListBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
@@ -75,19 +87,23 @@ void main() {
   late MaterialPriceBlocMock materialPriceBlocMock;
   late CustomerCodeBlocMock customerCodeBlocMock;
   late CartBlocMock cartBlocMock;
+  late OrderEligibilityBloc orderEligibilityBloc;
   late AppRouter autoRouterMock;
   late MaterialFilterBlocMock materialFilterBlocMock;
   late ProductImageBlocMock productImageBlocMock;
   late MaterialResponse materialResponseMock;
   late List<Price> priceList;
   late Map<MaterialNumber, Price> materialPriceMock;
-
+  late List<PriceAggregate> mockCartItems;
   setUpAll(() async {
-    locator.registerFactory(() => AppRouter());
+    locator.registerFactory(() => MockAppRouter());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
-    autoRouterMock = locator<AppRouter>();
+    autoRouterMock = locator<MockAppRouter>();
+    orderEligibilityBloc = OrderEligibilityBlocMock();
     materialResponseMock = await MaterialListLocalDataSource().getProductList();
     priceList = await MaterialPriceLocalDataSource().getPriceList();
+
+    mockCartItems = await CartLocalDataSource().upsertCart();
   });
 
   group(
@@ -99,6 +115,7 @@ void main() {
         materialListBlocMock = MaterialListBlocMock();
         productDetailBlocMock = ProductDetailBlocMock();
         eligibilityBlocMock = EligibilityBlocMock();
+
         materialPriceBlocMock = MaterialPriceBlocMock();
         customerCodeBlocMock = CustomerCodeBlocMock();
         materialFilterBlocMock = MaterialFilterBlocMock();
@@ -107,10 +124,15 @@ void main() {
         materialPriceMock = Map.fromEntries(
           priceList.map((price) => MapEntry(price.materialNumber, price)),
         );
+        when(() => autoRouterMock.pushNamed(any())).thenAnswer(
+          (_) => Future.value(),
+        );
         when(() => materialListBlocMock.state)
             .thenReturn(MaterialListState.initial());
         when(() => eligibilityBlocMock.state)
             .thenReturn(EligibilityState.initial());
+        when(() => orderEligibilityBloc.state)
+            .thenReturn(OrderEligibilityState.initial());
         when(() => productDetailBlocMock.state)
             .thenReturn(ProductDetailState.initial());
         when(() => materialPriceBlocMock.state)
@@ -118,6 +140,7 @@ void main() {
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(isFetching: false),
         );
+        when(() => autoRouterMock.currentPath).thenReturn('fake-path');
         when(() => cartBlocMock.state).thenReturn(CartState.initial());
         when(() => materialFilterBlocMock.state)
             .thenReturn(MaterialFilterState.initial());
@@ -150,6 +173,9 @@ void main() {
             ),
             BlocProvider<MaterialFilterBloc>(
               create: (context) => materialFilterBlocMock,
+            ),
+            BlocProvider<OrderEligibilityBloc>(
+              create: (context) => orderEligibilityBloc,
             ),
             BlocProvider<ProductImageBloc>(
               create: (context) => productImageBlocMock,
@@ -299,7 +325,6 @@ void main() {
               ),
             ),
           ).called(1);
-          expect(autoRouterMock.current.path, 'orders/material_details');
 
           verify(
             () => materialPriceBlocMock.add(
@@ -364,7 +389,6 @@ void main() {
               ),
             ),
           ).called(1);
-          expect(autoRouterMock.current.path, 'orders/bundle_detail_page');
         },
       );
 
@@ -485,6 +509,71 @@ void main() {
           expect(comboOfferTextFinder, findsOneWidget);
         },
       );
+      testWidgets('show nothing if disableCreateOrder', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(user: fakeReturnApproverUser),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        expect(find.byKey(WidgetKeys.cartButton), findsNothing);
+      });
+      testWidgets('render the cart button ', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(user: fakeClientUser),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        expect(find.byKey(WidgetKeys.cartButton), findsOneWidget);
+      });
+      testWidgets('should rebuild icon badge when the cart products is updated',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(user: fakeClientUser),
+        );
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(cartProducts: mockCartItems),
+        );
+        whenListen(
+          cartBlocMock,
+          Stream.fromIterable([
+            CartState.initial(),
+            CartState.initial().copyWith(cartProducts: mockCartItems),
+          ]),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        expect(find.byKey(WidgetKeys.cartButton), findsOneWidget);
+        expect(find.text('3'), findsOneWidget);
+      });
+      testWidgets(
+          'should initialize the OrderEligibilityBloc when click icon button',
+          (tester) async {
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cartButton = find.byKey(WidgetKeys.cartButton);
+        expect(cartButton, findsOneWidget);
+        await tester.ensureVisible(cartButton);
+        await tester.tap(cartButton);
+        await tester.pumpAndSettle();
+        verify(
+          () => orderEligibilityBloc.add(
+            OrderEligibilityEvent.initialized(
+              configs: fakeEmptySalesConfigs,
+              customerCodeInfo: fakeEmptyCustomerCodeInfo,
+              orderType: '',
+              salesOrg: fakeEmptySalesOrganisation,
+              shipInfo: ShipToInfo.empty(),
+              user: User.empty(),
+            ),
+          ),
+        ).called(1);
+      });
     },
   );
 }

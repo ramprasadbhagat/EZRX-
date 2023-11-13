@@ -22,6 +22,7 @@ final fakeVNSalesOrg = SalesOrg(_fakeVNSalesOrgId);
 final fakeMYSalesOrg = SalesOrg(_fakeMYSalesOrgId);
 final fakeIDSalesOrg = SalesOrg(_fakeIDSalesOrgId);
 
+final fakeEmptySalesOrganisation = SalesOrganisation.empty();
 final fakeSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg);
 

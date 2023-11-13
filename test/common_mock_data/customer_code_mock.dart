@@ -17,3 +17,5 @@ final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
   billToInfos: [_fakeBillToInfo],
   customerCodeSoldTo: _fakeCustomerCodeSoldTo,
 );
+
+final fakeEmptyCustomerCodeInfo = CustomerCodeInfo.empty();
