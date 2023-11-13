@@ -7,7 +7,9 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -52,6 +54,8 @@ class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
 
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
+class ConfigMock extends Mock implements Config {}
+
 class OrdersTabRouter extends AppRouter {
   @override
   RouteCollection get routeCollection => super.routeCollection.subCollectionOf(
@@ -71,14 +75,18 @@ void main() {
   late ViewByOrderFilterBloc viewByOrderFilterBlocMock;
   late ViewByItemFilterBloc viewByItemFilterBlocMock;
   late MixpanelService mixpanelServiceMock;
+  late Config config;
 
   setUpAll(() {
+    locator.registerLazySingleton(() => config);
     registerFallbackValue(<String, dynamic>{});
     registerFallbackValue(const ViewByOrderEvent.loadMore());
+    registerFallbackValue(const ViewByItemsEvent.loadMore());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     locator.registerFactory<AppRouter>(() => OrdersTabRouter());
     autoRouterMock = locator<AppRouter>();
     mixpanelServiceMock = locator<MixpanelService>();
+    config = ConfigMock();
   });
   setUp(() {
     authBlocMock = AuthBlocMock();
@@ -287,7 +295,6 @@ void main() {
         () => viewByOrderBlocMock.add(any()),
       );
     });
-
     testWidgets('reset filter', (tester) async {
       final fakeSearchKey = SearchKey('test');
       when(() => viewByOrderBlocMock.state).thenReturn(
@@ -325,7 +332,7 @@ void main() {
       );
     });
 
-    testWidgets('apply filter', (tester) async {
+    testWidgets('apply filter view by order filter', (tester) async {
       final fakeFilter = ViewByOrdersFilter.empty()
           .copyWith(orderStatusList: [StatusType('test')]);
       when(() => viewByOrderFilterBlocMock.state).thenReturn(
@@ -346,6 +353,39 @@ void main() {
         () => viewByOrderBlocMock.add(
           ViewByOrderEvent.fetch(
             filter: fakeFilter,
+            searchKey: SearchKey(''),
+          ),
+        ),
+      );
+
+      verify(
+        () => mixpanelServiceMock.trackEvent(
+          eventName: MixpanelEvents.orderDetailFiltered,
+          properties: any(named: 'properties'),
+        ),
+      );
+    });
+    testWidgets('apply filter view by items filter', (tester) async {
+      final fakeFilter = ViewByItemFilter.empty()
+          .copyWith(orderStatusList: [StatusType('test')]);
+      when(() => viewByItemFilterBlocMock.state).thenReturn(
+        ViewByItemFilterState.initial().copyWith(filter: fakeFilter),
+      );
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pump();
+      await tester.tap(find.byKey(WidgetKeys.viewByItemsTabKey));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(WidgetKeys.ordersTabFilterButtonKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(ViewByItemFilterSheet), findsOneWidget);
+      await tester.tap(find.byKey(WidgetKeys.filterApplyButton));
+      await tester.pumpAndSettle();
+      expect(find.byType(ViewByItemFilterSheet), findsNothing);
+
+      verify(
+        () => viewByItemsBlocMock.add(
+          ViewByItemsEvent.fetch(
+            viewByItemFilter: fakeFilter,
             searchKey: SearchKey(''),
           ),
         ),
@@ -408,6 +448,94 @@ void main() {
           ),
         ),
       ).called(2);
+    });
+
+    testWidgets(
+        'rebuild view by order filter when fetch completed or appliedFilterCount changed',
+        (tester) async {
+      final fakeFilter = ViewByOrdersFilter.empty()
+          .copyWith(orderStatusList: [StatusType('test')]);
+      when(() => viewByOrderBlocMock.state).thenReturn(
+        ViewByOrderState.initial().copyWith(appliedFilter: fakeFilter),
+      );
+      whenListen(
+        viewByOrderBlocMock,
+        Stream.fromIterable([
+          ViewByOrderState.initial().copyWith(isFetching: true),
+          ViewByOrderState.initial().copyWith(appliedFilter: fakeFilter),
+        ]),
+      );
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pump();
+      await tester.tap(find.byKey(WidgetKeys.viewByOrdersTabKey));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(ViewByOrdersPage), findsOneWidget);
+    });
+    testWidgets(
+        'rebuild view by item filter when fetch completed or appliedFilterCount changed',
+        (tester) async {
+      final fakeFilter = ViewByItemFilter.empty()
+          .copyWith(orderStatusList: [StatusType('test')]);
+      when(() => viewByItemsBlocMock.state).thenReturn(
+        ViewByItemsState.initial().copyWith(appliedFilter: fakeFilter),
+      );
+      whenListen(
+        viewByItemsBlocMock,
+        Stream.fromIterable([
+          ViewByItemsState.initial().copyWith(isFetching: true),
+          ViewByItemsState.initial().copyWith(appliedFilter: fakeFilter),
+        ]),
+      );
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pump();
+      await tester.tap(find.byKey(WidgetKeys.viewByItemsTabKey));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(ViewByItemsPage), findsOneWidget);
+    });
+  });
+
+  group('Orders tab search bar', () {
+    testWidgets('fetch item view by items tab when search', (tester) async {
+      when(() => config.autoSearchTimeout).thenReturn(1500);
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pump();
+      await tester.tap(find.byKey(WidgetKeys.viewByItemsTabKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(ViewByItemsPage), findsOneWidget);
+      final searchBar = find.byKey(WidgetKeys.genericKey(key: ''));
+      await tester.enterText(searchBar, 'dummy');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      verify(
+        () => viewByItemsBlocMock.add(
+          ViewByItemsEvent.fetch(
+            viewByItemFilter: ViewByItemFilter.empty(),
+            searchKey: SearchKey('dummy'),
+          ),
+        ),
+      );
+    });
+    testWidgets('fetch item view by orders tab when search', (tester) async {
+      when(() => config.autoSearchTimeout).thenReturn(1500);
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pump();
+      await tester.tap(find.byKey(WidgetKeys.viewByOrdersTabKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(ViewByOrdersPage), findsOneWidget);
+      final searchBar = find.byKey(WidgetKeys.genericKey(key: ''));
+      await tester.enterText(searchBar, 'dummy');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      verify(
+        () => viewByOrderBlocMock.add(
+          ViewByOrderEvent.fetch(
+            filter: ViewByOrdersFilter.empty(),
+            searchKey: SearchKey('dummy'),
+          ),
+        ),
+      );
     });
   });
 }
