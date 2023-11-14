@@ -77,6 +77,7 @@ void main() {
   late PaymentSummaryDetails fakePaymentDetails;
   late PaymentSummaryDetails mockPaymentDetails;
   late PaymentInvoiceInfoPdf mockPaymentInvoiceInfoPdf;
+  late MaterialPageX paymentSummaryPageMock;
 
   final routeData = RouteData(
     route: const RouteMatch(
@@ -85,6 +86,18 @@ void main() {
       path: 'payments/payment_summary/payment_summary_details',
       stringMatch: 'payments/payment_summary/payment_summary_details',
       key: ValueKey('PaymentSummaryDetailsPageRoute'),
+    ),
+    router: MockAppRouter(),
+    pendingChildren: [],
+  );
+
+  final paymentSummaryRouteData = RouteData(
+    route: const RouteMatch(
+      name: 'PaymentSummaryPageRoute',
+      segments: ['payments', 'payment_summary'],
+      path: 'payments/payment_summary',
+      stringMatch: 'payments/payment_summary',
+      key: ValueKey('PaymentSummaryPageRoute'),
     ),
     router: MockAppRouter(),
     pendingChildren: [],
@@ -113,6 +126,10 @@ void main() {
     mockPaymentSummaryDetailsBloc = MockPaymentSummaryDetailsBloc();
     fakePaymentDetails = PaymentSummaryDetails.empty()
         .copyWith(status: FilterStatus('In Progress'));
+    paymentSummaryPageMock = MaterialPageX(
+      routeData: paymentSummaryRouteData,
+      child: const SizedBox(),
+    );
   });
 
   group('Payment Summary Details Page', () {
@@ -133,7 +150,8 @@ void main() {
       when(() => autoRouterMock.currentPath)
           .thenReturn('payments/payment_summary/payment_summary_details');
       when(() => autoRouterMock.current).thenReturn(routeData);
-      when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
+      when(() => autoRouterMock.stack)
+          .thenReturn([MaterialPageXMock(), paymentSummaryPageMock]);
     });
 
     RouteDataScope getWUT({required Widget child}) {
@@ -353,7 +371,8 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('Payment Summary Details Page - Delete payment advice success',
+    testWidgets(
+        'Payment Summary Details Page - Delete payment advice success from Payment Summary Page',
         (tester) async {
       when(
         () =>

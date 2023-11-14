@@ -128,11 +128,25 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
                       searchKey: SearchKey.searchFilter(''),
                     ),
                   );
-              context.router
-                  .popUntilRouteWithName(PaymentSummaryPageRoute.name);
+
+              final containPaymentSummaryPage = context.router.stack.any(
+                (element) => element.name == PaymentSummaryPageRoute.name,
+              );
+
+              if (containPaymentSummaryPage) {
+                context.router
+                    .popUntilRouteWithName(PaymentSummaryPageRoute.name);
+              } else {
+                context.router.pushAndPopUntil(
+                  const PaymentSummaryPageRoute(),
+                  predicate: (Route route) =>
+                      route.settings.name == PaymentPageRoute.name,
+                );
+              }
+
               CustomSnackBar(
-                messageText: state.adviceDeletedMessage,
-              ).show(context);
+                    messageText: state.adviceDeletedMessage,
+                  ).show(context);
             },
             (either) => either.fold(
               (failure) {

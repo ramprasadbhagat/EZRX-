@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -65,6 +66,39 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         paymentBatchAdditionalInfo: StringValue(''),
         accountingDocExternalReference: '',
         paymentItems: <PaymentItem>[],
+      );
+
+  factory PaymentSummaryDetails.fromPaymentInvoicePDF(
+    PaymentInvoiceInfoPdf invoice,
+  ) =>
+      PaymentSummaryDetails(
+        bankAccountNumber: StringValue(''),
+        bankCountryKey: '',
+        bankIdentification: '',
+        bankKey: '',
+        bankName: StringValue(''),
+        customId: '',
+        iban: '',
+        status: FilterStatus(''),
+        paymentAmount: invoice.paymentAmount,
+        paymentCardHolderName: '',
+        paymentCardID: '',
+        paymentCardMaskedNumber: '',
+        paymentCardNumber: '',
+        paymentCardTypeName: '',
+        paymentDocument: '',
+        paymentID: StringValue(invoice.paymentID),
+        paymentMethod: StringValue(invoice.paymentMethod),
+        transactionCurrency:
+            invoice.paymentItems.firstOrNull?.transactionCurrency ?? '',
+        valueDate: invoice.valueDate,
+        createdDate: DateTimeStringValue(''),
+        adviceExpiry: StringValue(''),
+        zzAdvice: StringValue(invoice.zzAdvice),
+        paymentBatchAdditionalInfo:
+            StringValue(invoice.paymentBatchAdditionalInfo),
+        accountingDocExternalReference: '',
+        paymentItems: invoice.paymentItems,
       );
 
   String get adviceExpiryText {

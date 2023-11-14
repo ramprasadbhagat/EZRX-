@@ -51,4 +51,10 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
   BankBeneficiary get firstBankBeneficiary =>
       bankBeneficiary.firstOrNull ?? BankBeneficiary.empty();
   bool get isEmpty => this == PaymentInvoiceInfoPdf.empty();
+
+  double get paymentAmount => paymentItems.fold(
+        0,
+        (previousValue, element) =>
+            previousValue + element.paymentAmountInDisplayCrcy,
+      );
 }

@@ -3,14 +3,17 @@ part of 'package:ezrxmobile/presentation/payments/payment_advice_created/payment
 class _PaymentAdviceNextStep extends StatelessWidget {
   const _PaymentAdviceNextStep({Key? key}) : super(key: key);
 
-  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
-    return showModalBottomSheet<bool>(
+  Future<bool?> _showDeleteBottomSheet(
+    BuildContext context, {
+    required String paymentAdviceNumber,
+  }) {
+    return showModalBottomSheet(
       context: context,
       enableDrag: false,
-      builder: (_) => const ConfirmBottomSheet(
-        title: 'Leave page?',
-        content: 'Payment has not been completed.',
-        confirmButtonText: 'Leave',
+      isDismissible: false,
+      isScrollControlled: true,
+      builder: (_) => DeleteCancelAdviceBottomSheet.delete(
+        paymentAdviceNumber: paymentAdviceNumber,
       ),
     );
   }
@@ -91,7 +94,7 @@ class _PaymentAdviceNextStep extends StatelessWidget {
             content: RichText(
               text: TextSpan(
                 text: context.tr(
-                  'If there\'s any error in the selected invoice/credit notes, please go to ',
+                  'If there\'s any error in the selected invoice/credit notes, please ',
                 ),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: ZPColors.extraLightGrey4,
@@ -99,43 +102,37 @@ class _PaymentAdviceNextStep extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: context.tr(
-                      'Payment Advice #${context.read<NewPaymentBloc>().state.paymentInvoiceInfoPdf.zzAdvice}',
+                      'delete',
                     ),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: ZPColors.extraDarkGreen,
                         ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () async {
-                        final confirmed =
-                            await _showConfirmBottomSheet(context);
-                        if (confirmed ?? false) {
-                          if (context.mounted) {
-                            context.read<PaymentSummaryDetailsBloc>().add(
-                                  PaymentSummaryDetailsEvent
-                                      .fetchPaymentSummaryDetailsInfo(
-                                    details:
-                                        PaymentSummaryDetails.empty().copyWith(
-                                      paymentID: StringValue(
-                                        context
-                                            .read<NewPaymentBloc>()
-                                            .state
-                                            .paymentInvoiceInfoPdf
-                                            .paymentID,
-                                      ),
-                                    ),
-                                  ),
-                                );
-
-                            unawaited(
-                              context.router
-                                  .push(const PaymentSummaryDetailsPageRoute()),
+                      ..onTap = () {
+                        final paymentInvoicePDF = context
+                            .read<NewPaymentBloc>()
+                            .state
+                            .paymentInvoiceInfoPdf;
+                        context.read<PaymentSummaryDetailsBloc>().add(
+                              PaymentSummaryDetailsEvent
+                                  .fetchPaymentSummaryDetailsInfo(
+                                details:
+                                    PaymentSummaryDetails.fromPaymentInvoicePDF(
+                                  paymentInvoicePDF,
+                                ),
+                              ),
                             );
-                          }
-                        }
+
+                        _showDeleteBottomSheet(
+                          context,
+                          paymentAdviceNumber: paymentInvoicePDF.zzAdvice,
+                        );
                       },
                   ),
                   TextSpan(
-                    text: context.tr(' to delete this payment advice.'),
+                    text: context.tr(
+                      ' this payment advice and generate a new payment advice.',
+                    ),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: ZPColors.extraLightGrey4,
                         ),
