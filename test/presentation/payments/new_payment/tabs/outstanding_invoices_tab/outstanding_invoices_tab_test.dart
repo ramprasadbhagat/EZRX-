@@ -1,3 +1,4 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
@@ -49,7 +51,7 @@ void main() {
   late List<CustomerOpenItem> fakeInvoices;
 
   final invoiceFilter = OutstandingInvoiceFilter.empty().copyWith(
-    amountValueFrom: RangeValue('100'),
+    amountValueFrom: RangeValue('1'),
     amountValueTo: RangeValue('10'),
     documentDateFrom: DateTimeStringValue('-'),
     documentDateTo: DateTimeStringValue('-'),
@@ -162,7 +164,7 @@ void main() {
       expect(searchBar, findsOneWidget);
     });
 
-    testWidgets('Search test', (tester) async {
+    testWidgets('Search with search icon test', (tester) async {
       await tester.pumpWidget(getWidget());
       await tester.pump();
 
@@ -183,6 +185,82 @@ void main() {
           ),
         ),
       );
+    });
+
+    testWidgets('Auto search test', (tester) async {
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final textFormField = find.byType(TextFormField);
+      expect(textFormField, findsOneWidget);
+
+      await tester.enterText(textFormField, '26');
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      verify(
+        () => outstandingInvoicesBlocMock.add(
+          OutstandingInvoicesEvent.fetch(
+            appliedFilter: outstandingInvoicesBlocMock.state.appliedFilter,
+            searchKey: SearchKey.search('26'),
+          ),
+        ),
+      );
+    });
+    testWidgets('Search with keyboard action test', (tester) async {
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final textFormField = find.byType(TextFormField);
+      expect(textFormField, findsOneWidget);
+
+      await tester.enterText(textFormField, '26');
+      await tester.pump();
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => outstandingInvoicesBlocMock.add(
+          OutstandingInvoicesEvent.fetch(
+            appliedFilter: outstandingInvoicesBlocMock.state.appliedFilter,
+            searchKey: SearchKey.search('26'),
+          ),
+        ),
+      );
+    });
+
+    testWidgets('Should rebuild search bar if isLoading finished',
+        (tester) async {
+      whenListen(
+        outstandingInvoicesBlocMock,
+        Stream.fromIterable([
+          OutstandingInvoicesState.initial().copyWith(isLoading: true),
+          OutstandingInvoicesState.initial()
+        ]),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final textFormField = find.byType(TextFormField);
+      expect(textFormField, findsOneWidget);
+    });
+
+    testWidgets('Should show snackbar error if any failure', (tester) async {
+      whenListen(
+        outstandingInvoicesBlocMock,
+        Stream.fromIterable([
+          OutstandingInvoicesState.initial().copyWith(isLoading: true),
+          OutstandingInvoicesState.initial().copyWith(
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('dummy'))),
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+
+      final textFormField = find.byType(TextFormField);
+      expect(textFormField, findsOneWidget);
+      expect(find.byKey(WidgetKeys.customSnackBar), findsAtLeastNWidgets(1));
     });
 
     testWidgets('Clear search test', (tester) async {

@@ -176,6 +176,8 @@ void main() {
       await tester.pump();
       final closeButton = find.byKey(WidgetKeys.closeButton);
       expect(closeButton, findsOneWidget);
+      await tester.tap(closeButton);
+      expect(find.byKey(WidgetKeys.outstandingInvoiceFilterPage), findsNothing);
     });
 
     testWidgets('Invoice filter', (tester) async {
