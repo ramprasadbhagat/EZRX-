@@ -59,6 +59,7 @@ class ProductPriceLabel extends StatelessWidget {
             comboDeal: ComboDeal.empty(),
             bonusSampleItems: <BonusSampleItem>[],
             comboMaterials: <ComboMaterialItem>[],
+            maximumQty: 0,
           );
 
           return Column(

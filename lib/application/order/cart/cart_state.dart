@@ -479,11 +479,9 @@ class CartState with _$CartState {
       );
 
   bool get isNotAvailableToCheckoutForID =>
-      config.salesOrg.isID &&
       cartProducts.any(
         (element) =>
-            element.stockQuantity != 0 &&
-            element.stockQuantity < element.quantity,
+            element.showErrorMessage,
       );
 
   List<PriceAggregate> get cartProductsComboSorted => List.from(cartProducts)

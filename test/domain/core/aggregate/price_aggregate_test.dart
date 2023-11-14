@@ -78,6 +78,7 @@ void main() {
         comboDeal: emptyComboDeal,
         bonusSampleItems: [],
         comboMaterials: [],
+        maximumQty: 0,
       );
 
       expect(priceAggregate.price, emptyPrice);

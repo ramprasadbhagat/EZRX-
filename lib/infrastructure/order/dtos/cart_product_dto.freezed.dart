@@ -74,6 +74,8 @@ mixin _$CartProductDto {
   @JsonKey(name: 'comboMaterials', defaultValue: [])
   List<ComboMaterialItemDto> get comboMaterials =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'maximumQty', defaultValue: 1)
+  int get maximumQty => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -125,7 +127,8 @@ abstract class $CartProductDtoCopyWith<$Res> {
       bool isPrincipalSuspended,
       @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
-      List<ComboMaterialItemDto> comboMaterials});
+      List<ComboMaterialItemDto> comboMaterials,
+      @JsonKey(name: 'maximumQty', defaultValue: 1) int maximumQty});
 
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
@@ -170,6 +173,7 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? isPrincipalSuspended = null,
     Object? comboDeal = null,
     Object? comboMaterials = null,
+    Object? maximumQty = null,
   }) {
     return _then(_value.copyWith(
       productID: null == productID
@@ -276,6 +280,10 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.comboMaterials
           : comboMaterials // ignore: cast_nullable_to_non_nullable
               as List<ComboMaterialItemDto>,
+      maximumQty: null == maximumQty
+          ? _value.maximumQty
+          : maximumQty // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -342,7 +350,8 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
       bool isPrincipalSuspended,
       @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
-      List<ComboMaterialItemDto> comboMaterials});
+      List<ComboMaterialItemDto> comboMaterials,
+      @JsonKey(name: 'maximumQty', defaultValue: 1) int maximumQty});
 
   @override
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
@@ -387,6 +396,7 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
     Object? isPrincipalSuspended = null,
     Object? comboDeal = null,
     Object? comboMaterials = null,
+    Object? maximumQty = null,
   }) {
     return _then(_$_CartProductDto(
       productID: null == productID
@@ -493,6 +503,10 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value._comboMaterials
           : comboMaterials // ignore: cast_nullable_to_non_nullable
               as List<ComboMaterialItemDto>,
+      maximumQty: null == maximumQty
+          ? _value.maximumQty
+          : maximumQty // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -544,7 +558,8 @@ class _$_CartProductDto extends _CartProductDto {
       required this.isPrincipalSuspended,
       @JsonKey(name: 'comboDeals') this.comboDeal = PriceComboDealDto.empty,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
-      required final List<ComboMaterialItemDto> comboMaterials})
+      required final List<ComboMaterialItemDto> comboMaterials,
+      @JsonKey(name: 'maximumQty', defaultValue: 1) required this.maximumQty})
       : _bundleMaterials = bundleMaterials,
         _bonusMaterials = bonusMaterials,
         _comboMaterials = comboMaterials,
@@ -650,8 +665,12 @@ class _$_CartProductDto extends _CartProductDto {
   }
 
   @override
+  @JsonKey(name: 'maximumQty', defaultValue: 1)
+  final int maximumQty;
+
+  @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty)';
   }
 
   @override
@@ -707,7 +726,9 @@ class _$_CartProductDto extends _CartProductDto {
             (identical(other.comboDeal, comboDeal) ||
                 other.comboDeal == comboDeal) &&
             const DeepCollectionEquality()
-                .equals(other._comboMaterials, _comboMaterials));
+                .equals(other._comboMaterials, _comboMaterials) &&
+            (identical(other.maximumQty, maximumQty) ||
+                other.maximumQty == maximumQty));
   }
 
   @JsonKey(ignore: true)
@@ -739,7 +760,8 @@ class _$_CartProductDto extends _CartProductDto {
         isSuspended,
         isPrincipalSuspended,
         comboDeal,
-        const DeepCollectionEquality().hash(_comboMaterials)
+        const DeepCollectionEquality().hash(_comboMaterials),
+        maximumQty
       ]);
 
   @JsonKey(ignore: true)
@@ -803,8 +825,9 @@ abstract class _CartProductDto extends CartProductDto {
       required final bool isPrincipalSuspended,
       @JsonKey(name: 'comboDeals') final PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
-      required final List<ComboMaterialItemDto>
-          comboMaterials}) = _$_CartProductDto;
+      required final List<ComboMaterialItemDto> comboMaterials,
+      @JsonKey(name: 'maximumQty', defaultValue: 1)
+      required final int maximumQty}) = _$_CartProductDto;
   const _CartProductDto._() : super._();
 
   factory _CartProductDto.fromJson(Map<String, dynamic> json) =
@@ -888,6 +911,9 @@ abstract class _CartProductDto extends CartProductDto {
   @override
   @JsonKey(name: 'comboMaterials', defaultValue: [])
   List<ComboMaterialItemDto> get comboMaterials;
+  @override
+  @JsonKey(name: 'maximumQty', defaultValue: 1)
+  int get maximumQty;
   @override
   @JsonKey(ignore: true)
   _$$_CartProductDtoCopyWith<_$_CartProductDto> get copyWith =>

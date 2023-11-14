@@ -50,6 +50,7 @@ class PriceAggregate with _$PriceAggregate {
     @Default(<StockInfo>[]) List<StockInfo> stockInfoList,
     required List<BonusSampleItem> bonusSampleItems,
     required List<ComboMaterialItem> comboMaterials,
+    required int maximumQty,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -66,6 +67,7 @@ class PriceAggregate with _$PriceAggregate {
         comboDeal: ComboDeal.empty(),
         bonusSampleItems: <BonusSampleItem>[],
         comboMaterials: <ComboMaterialItem>[],
+        maximumQty: 0,
       );
 
   PriceAggregate get toCartProduct {
@@ -96,10 +98,15 @@ class PriceAggregate with _$PriceAggregate {
     return cartProduct;
   }
 
-  bool get isIDMarketAndShowStockError =>
+  bool get _isStockQtyExceedsForId =>
+      stockQuantity < quantity && stockQuantity != 0;
+
+  bool get isMaxQtyExceedsForId =>
+      maximumQty != 0 && maximumQty < quantity && stockQuantity >= quantity;
+
+  bool get showErrorMessage =>
       salesOrgConfig.salesOrg.isID &&
-      stockQuantity < quantity &&
-      stockQuantity != 0;
+      (_isStockQtyExceedsForId || isMaxQtyExceedsForId);
 
   List<MaterialInfo> get toStockListMaterials {
     final materialsInfo = <MaterialInfo>[];

@@ -303,9 +303,11 @@ class _MaterialDetails extends StatelessWidget {
             cartItem: cartItem,
             isInvalidCartItem: isInvalidCartItem,
           ),
-          if (cartItem.isIDMarketAndShowStockError)
+          if (cartItem.showErrorMessage)
             _StockError(
-              stockQuantity: cartItem.stockQuantity,
+              errorText: cartItem.isMaxQtyExceedsForId
+                  ? '${context.tr('Maximum order qty')}: ${cartItem.maximumQty}'
+                  : '${context.tr('Stock available')}: ${cartItem.stockQuantity}',
             ),
         ],
       ),
@@ -314,8 +316,8 @@ class _MaterialDetails extends StatelessWidget {
 }
 
 class _StockError extends StatelessWidget {
-  const _StockError({required this.stockQuantity, Key? key}) : super(key: key);
-  final int stockQuantity;
+  const _StockError({required this.errorText, Key? key}) : super(key: key);
+  final String errorText;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -332,7 +334,7 @@ class _StockError extends StatelessWidget {
             width: 5,
           ),
           Text(
-            '${'Stock available'.tr()}: $stockQuantity',
+            errorText,
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium!

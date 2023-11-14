@@ -52,6 +52,7 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
                   ComboMaterialItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      maximumQty: json['maximumQty'] as int? ?? 1,
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
@@ -83,6 +84,7 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'principalCutoffStatus': instance.isPrincipalSuspended,
       'comboDeals': instance.comboDeal.toJson(),
       'comboMaterials': instance.comboMaterials.map((e) => e.toJson()).toList(),
+      'maximumQty': instance.maximumQty,
     };
 
 _$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>

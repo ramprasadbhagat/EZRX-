@@ -70,6 +70,8 @@ class CartProductDto with _$CartProductDto {
         PriceComboDealDto comboDeal,
     @JsonKey(name: 'comboMaterials', defaultValue: [])
         required List<ComboMaterialItemDto> comboMaterials,
+    //maximumQty auto set to maximum limit if we get null from response
+    @JsonKey(name: 'maximumQty', defaultValue: 99999) required int maximumQty,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -119,6 +121,7 @@ class CartProductDto with _$CartProductDto {
       isPrincipalSuspended: cartItemDetails.materialInfo.isPrincipalSuspended,
       comboMaterials: [],
       comboDeal: PriceComboDealDto.empty,
+      maximumQty: cartItemDetails.maximumQty,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -165,6 +168,7 @@ class CartProductDto with _$CartProductDto {
       quantity: quantity,
       bonusSampleItems: bonusMaterials.map((e) => e.toDomain()).toList(),
       comboMaterials: comboMaterials.map((e) => e.toDomain(comboDeal)).toList(),
+      maximumQty: maximumQty,
     );
   }
 
