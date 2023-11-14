@@ -41,6 +41,8 @@ class ShipToDto with _$ShipToDto {
     @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
         required List<LicenseDto> licenseDtoList,
     @JsonKey(name: 'country', defaultValue: '') required String country,
+    @JsonKey(name: 'targetCustomerType', defaultValue: '')
+        required String targetCustomerType,
   }) = _ShipToDto;
 
   factory ShipToDto.fromDomain(ShipToInfo shipToInfo) {
@@ -69,6 +71,7 @@ class ShipToDto with _$ShipToDto {
       licenseDtoList:
           shipToInfo.licenses.map((e) => LicenseDto.fromDomain(e)).toList(),
       country: shipToInfo.country,
+      targetCustomerType: shipToInfo.targetCustomerType,
     );
   }
 
@@ -105,6 +108,7 @@ class ShipToDto with _$ShipToDto {
           ? licenseDtoList.map((e) => e.toDomain()).toList()
           : <LicenseInfo>[],
       country: country,
+      targetCustomerType: targetCustomerType,
     );
   }
 

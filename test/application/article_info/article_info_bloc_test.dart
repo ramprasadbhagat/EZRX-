@@ -1,13 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
 import 'package:ezrxmobile/infrastructure/article_info/repository/article_info_repository.dart';
@@ -24,15 +21,9 @@ void main() {
   final articlesInfoState = ArticlesInfoState.initial();
   final salesOrg = SalesOrg('');
   late Config config;
-  final user = User.empty().copyWith(
-    username: Username('fake-name'),
-    role: Role(
-      description: 'fake-desc',
-      id: 'id',
-      name: 'fake-name',
-      type: RoleType('fake-type'),
-    ),
-    preferredLanguage: const Locale(ApiLanguageCode.english),
+  final shipToInfo = ShipToInfo.empty().copyWith(
+    plant: '1920',
+    targetCustomerType: 'RT1PH2AP',
   );
 
   setUpAll(() async {
@@ -55,7 +46,6 @@ void main() {
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: '',
-            user: user,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -65,10 +55,7 @@ void main() {
       },
       act: (ArticlesInfoBloc bloc) => bloc
         ..add(
-          ArticlesInfoEvent.getArticles(
-            salesOrg: salesOrg,
-            user: user,
-          ),
+          const ArticlesInfoEvent.getArticles(),
         ),
       expect: () => [
         articlesInfoState.copyWith(isFetching: true),
@@ -85,13 +72,15 @@ void main() {
         articleInfoRepository: repository,
         config: config,
       ),
+      seed: () => ArticlesInfoState.initial().copyWith(
+        shipToInfo: shipToInfo,
+      ),
       setUp: () {
         when(
           () => repository.getArticles(
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: '',
-            user: user,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -101,14 +90,15 @@ void main() {
       },
       act: (ArticlesInfoBloc bloc) => bloc
         ..add(
-          ArticlesInfoEvent.getArticles(
-            salesOrg: salesOrg,
-            user: user,
-          ),
+          const ArticlesInfoEvent.getArticles(),
         ),
       expect: () => [
-        articlesInfoState.copyWith(isFetching: true),
         articlesInfoState.copyWith(
+          isFetching: true,
+          shipToInfo: shipToInfo,
+        ),
+        articlesInfoState.copyWith(
+          shipToInfo: shipToInfo,
           articleInfo: articleInfoMock,
           apiFailureOrSuccessOption: optionOf(Right(articleInfoMock)),
         ),
@@ -124,6 +114,7 @@ void main() {
       seed: () => articlesInfoState.copyWith(
         articleInfo: articleInfoMock,
         canLoadMore: true,
+        shipToInfo: shipToInfo,
       ),
       setUp: () {
         when(
@@ -131,7 +122,6 @@ void main() {
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: articleInfoMock.endCursor,
-            user: user,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -141,16 +131,14 @@ void main() {
       },
       act: (ArticlesInfoBloc bloc) => bloc
         ..add(
-          ArticlesInfoEvent.loadMoreArticles(
-            salesOrg: salesOrg,
-            user: user,
-          ),
+          const ArticlesInfoEvent.loadMoreArticles(),
         ),
       expect: () => [
         articlesInfoState.copyWith(
           isFetching: true,
           articleInfo: articleInfoMock,
           canLoadMore: true,
+          shipToInfo: shipToInfo,
         ),
         articlesInfoState.copyWith(
           articleInfo: articleInfoMock.copyWith(
@@ -161,6 +149,7 @@ void main() {
           ),
           canLoadMore: false,
           apiFailureOrSuccessOption: optionOf(Right(articleInfoMock)),
+          shipToInfo: shipToInfo,
         ),
       ],
     );
@@ -181,7 +170,6 @@ void main() {
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: articleInfoMock.endCursor,
-            user: user,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -191,10 +179,7 @@ void main() {
       },
       act: (ArticlesInfoBloc bloc) => bloc
         ..add(
-          ArticlesInfoEvent.loadMoreArticles(
-            salesOrg: salesOrg,
-            user: user,
-          ),
+          const ArticlesInfoEvent.loadMoreArticles(),
         ),
       expect: () => [
         articlesInfoState.copyWith(

@@ -262,6 +262,7 @@ void main() {
             plant: '',
             licenses: [],
             country: '',
+            targetCustomerType: '',
           ),
         ),
       );
@@ -284,6 +285,7 @@ void main() {
             plant: '',
             licenses: [],
             country: '',
+            targetCustomerType: '',
           ),
         ),
       );
@@ -397,6 +399,7 @@ void main() {
             plant: '',
             licenses: [],
             country: '',
+            targetCustomerType: '',
           ),
         ),
       );

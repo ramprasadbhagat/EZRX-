@@ -41,6 +41,10 @@ class AnnouncementArticleItemDto with _$AnnouncementArticleItemDto {
     @JsonKey(name: 'content', readValue: getContent) required String content,
     @JsonKey(name: 'publishedDate', readValue: getDateValue)
         required String publishedDate,
+    @JsonKey(name: 'branch', readValue: getBranchNames)
+        required List<BranchAndIc4InfoDto> branchInfo,
+    @JsonKey(name: 'iC4', readValue: getIC4Names)
+        required List<BranchAndIc4InfoDto> iC4Info,
   }) = _AnnouncementArticleItemDto;
 
   factory AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =>
@@ -53,6 +57,28 @@ class AnnouncementArticleItemDto with _$AnnouncementArticleItemDto {
         summary: summary,
         thumbnail: thumbnail,
         publishedDate: DateTimeStringValue(publishedDate),
+        branchInfo: branchInfo.map((e) => e.toDomain).toList(),
+        iC4Info: iC4Info.map((e) => e.toDomain).toList(),
+      );
+}
+
+@freezed
+class BranchAndIc4InfoDto with _$BranchAndIc4InfoDto {
+  const BranchAndIc4InfoDto._();
+
+  const factory BranchAndIc4InfoDto({
+    @JsonKey(name: 'id', defaultValue: '') required String id,
+    @JsonKey(name: 'name', defaultValue: '') required String name,
+    @JsonKey(name: 'displayName', defaultValue: '') required String displayName,
+  }) = _BranchAndIc4Dto;
+
+  factory BranchAndIc4InfoDto.fromJson(Map<String, dynamic> json) =>
+      _$BranchAndIc4InfoDtoFromJson(json);
+
+  BranchAndIc4Info get toDomain => BranchAndIc4Info(
+        id: id,
+        displayName: displayName,
+        name: name,
       );
 }
 
@@ -60,7 +86,11 @@ String getValue(Map json, String key) =>
     json[key] != null ? json[key]['value'] ?? '' : '';
 
 String getSrcValue(Map json, String key) =>
-    json[key] != null ? json[key]['src'] ?? '' : '';
+    json[key]?['jsonValue']?['value']?['src'] ?? json[key]?['src'] ?? '';
+
+List<dynamic> getBranchNames(Map json, String key) => json[key]?['value'] ?? [];
+
+List<dynamic> getIC4Names(Map json, String key) => json[key]?['value'] ?? [];
 
 String getContent(Map json, String key) => json[key]?['value'] ?? '';
 

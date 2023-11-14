@@ -54,6 +54,8 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
     required String thumbnail,
     required HtmlContent content,
     required DateTimeStringValue publishedDate,
+    required List<BranchAndIc4Info> branchInfo,
+    required List<BranchAndIc4Info> iC4Info,
   }) = _AnnouncementArticleItem;
 
   factory AnnouncementArticleItem.empty() => AnnouncementArticleItem(
@@ -63,8 +65,26 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
         thumbnail: '',
         content: HtmlContent(''),
         publishedDate: DateTimeStringValue(''),
+        branchInfo: <BranchAndIc4Info>[],
+        iC4Info: <BranchAndIc4Info>[],
       );
 
   bool isSearchKeyMatching(String searchKey) =>
       title.toLowerCase().contains(searchKey);
+}
+
+@freezed
+class BranchAndIc4Info with _$BranchAndIc4Info {
+  const BranchAndIc4Info._();
+  const factory BranchAndIc4Info({
+    required String id,
+    required String name,
+    required String displayName,
+  }) = _BranchAndIc4Info;
+
+  factory BranchAndIc4Info.empty() => const BranchAndIc4Info(
+        id: '',
+        name: '',
+        displayName: '',
+      );
 }

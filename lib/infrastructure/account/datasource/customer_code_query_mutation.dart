@@ -55,6 +55,8 @@ query customerInformationSearch(
         city1
         city2
         status
+        targetCustomerType
+        plant
       }
     }
   }

@@ -25,6 +25,7 @@ class ShipToInfo with _$ShipToInfo {
     required String region,
     required String floor,
     required String plant,
+    required String targetCustomerType,
     required String country,
     required List<LicenseInfo> licenses,
   }) = _ShipToInfo;
@@ -52,6 +53,7 @@ class ShipToInfo with _$ShipToInfo {
         houseNumber1: '',
         region: '',
         plant: '',
+        targetCustomerType: '',
         telephoneNumber: '',
         city1: '',
         city2: '',

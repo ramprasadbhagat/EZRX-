@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
@@ -88,8 +89,6 @@ import 'package:upgrader/upgrader.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
-
-import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
@@ -694,12 +693,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         salesOrg: state.salesOrg,
                       ),
                     );
-                context.read<ArticlesInfoBloc>().add(
-                      ArticlesInfoEvent.getArticles(
-                        salesOrg: state.salesOrg,
-                        user: context.read<UserBloc>().state.user,
-                      ),
-                    );
 
                 context.read<CustomerCodeBloc>().add(
                       const CustomerCodeEvent.loadStoredCustomerCode(),
@@ -1163,6 +1156,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               shipToInfo: state.shipToInfo,
               salesOrganisation: salesOrgState.salesOrganisation,
               salesOrganisationConfigs: salesOrgState.configs,
+            ),
+          );
+
+      context.read<ArticlesInfoBloc>().add(
+            ArticlesInfoEvent.initialize(
+              salesOrg: salesOrgState.salesOrg,
+              shipToInfo: state.shipToInfo,
             ),
           );
     }

@@ -184,12 +184,9 @@ void main() {
       await tester.pumpAndSettle();
       verify(
         () => articlesInfoBloc.add(
-          ArticlesInfoEvent.getArticles(
-            salesOrg: eligibilityBlocMock.state.salesOrg,
-            user: eligibilityBlocMock.state.user,
-          ),
+          const ArticlesInfoEvent.getArticles(),
         ),
-      ).called(2);
+      ).called(1);
     });
     testWidgets('should add loadMoreArticles again when pull down to load more',
         (tester) async {
@@ -219,12 +216,9 @@ void main() {
       await tester.pumpAndSettle(const Duration(microseconds: 500));
       verify(
         () => articlesInfoBloc.add(
-          ArticlesInfoEvent.getArticles(
-            salesOrg: eligibilityBlocMock.state.salesOrg,
-            user: eligibilityBlocMock.state.user,
-          ),
+          const ArticlesInfoEvent.loadMoreArticles(),
         ),
-      ).called(2);
+      ).called(1);
     });
     testWidgets('The first item should be visible when press scrollToTop',
         (tester) async {

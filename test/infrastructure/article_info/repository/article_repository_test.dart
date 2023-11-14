@@ -1,10 +1,6 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/article_info/repository/article_info_repository.dart';
@@ -29,16 +25,6 @@ void main() {
   late ArticleInfoRemoteDataSource remoteDataSource;
   late ArticleInfoLocalDataSource localDataSource;
   late ArticleInfoRepository repository;
-  final user = User.empty().copyWith(
-    username: Username('fake-name'),
-    role: Role(
-      description: 'fake-desc',
-      id: 'id',
-      name: 'fake-name',
-      type: RoleType('fake-type'),
-    ),
-    preferredLanguage: const Locale(ApiLanguageCode.english),
-  );
 
   const pageSize = 24;
 
@@ -64,7 +50,6 @@ void main() {
 
       final result = await repository.getArticles(
         salesOrg: mockSalesOrg,
-        user: user,
         pageSize: pageSize,
         after: '',
       );
@@ -84,7 +69,6 @@ void main() {
 
       final result = await repository.getArticles(
         salesOrg: mockSalesOrg,
-        user: user,
         pageSize: pageSize,
         after: '',
       );
@@ -102,6 +86,8 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.articleVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
+      when(() => mockSalesOrg.locale).thenReturn(const Locale('fake-code'));
+      when(() => mockSalesOrg.isID).thenReturn((false));
 
       when(
         () => remoteDataSource.getArticleInfo(
@@ -110,12 +96,11 @@ void main() {
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
           pageSize: 24,
           after: '',
-          lang: user.preferredLanguage.languageCode,
+          lang: 'fake-code',
         ),
       ).thenAnswer((invocation) async => AnnouncementArticleInfo.empty());
       final result = await repository.getArticles(
         salesOrg: mockSalesOrg,
-        user: user,
         pageSize: pageSize,
         after: '',
       );
@@ -134,14 +119,13 @@ void main() {
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
           pageSize: 24,
           after: '',
-          lang: 'EN',
+          lang: 'fake-code',
         ),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
       );
       final result = await repository.getArticles(
         salesOrg: mockSalesOrg,
-        user: user,
         pageSize: pageSize,
         after: '',
       );

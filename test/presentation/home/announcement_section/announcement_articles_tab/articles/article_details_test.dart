@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
@@ -21,6 +22,7 @@ void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     autoRouterMock = locator<AppRouter>();
     mockArticleItem = (await ArticleInfoLocalDataSource().getArticles())
         .announcementList

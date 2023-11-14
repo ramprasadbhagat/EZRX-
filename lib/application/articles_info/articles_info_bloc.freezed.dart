@@ -18,28 +18,33 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ArticlesInfoEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, User user) getArticles,
-    required TResult Function(SalesOrg salesOrg, User user) loadMoreArticles,
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)
+        initialize,
+    required TResult Function() getArticles,
+    required TResult Function() loadMoreArticles,
     required TResult Function(String searchKey) setSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, User user)? getArticles,
-    TResult? Function(SalesOrg salesOrg, User user)? loadMoreArticles,
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult? Function()? getArticles,
+    TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, User user)? getArticles,
-    TResult Function(SalesOrg salesOrg, User user)? loadMoreArticles,
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult Function()? getArticles,
+    TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_GetArticles value) getArticles,
     required TResult Function(_LoadMoreArticles value) loadMoreArticles,
     required TResult Function(_SetSearchKey value) setSearchKey,
@@ -47,6 +52,7 @@ mixin _$ArticlesInfoEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_GetArticles value)? getArticles,
     TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult? Function(_SetSearchKey value)? setSearchKey,
@@ -54,6 +60,7 @@ mixin _$ArticlesInfoEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_GetArticles value)? getArticles,
     TResult Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult Function(_SetSearchKey value)? setSearchKey,
@@ -81,14 +88,179 @@ class _$ArticlesInfoEventCopyWithImpl<$Res, $Val extends ArticlesInfoEvent>
 }
 
 /// @nodoc
+abstract class _$$_InitializeCopyWith<$Res> {
+  factory _$$_InitializeCopyWith(
+          _$_Initialize value, $Res Function(_$_Initialize) then) =
+      __$$_InitializeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SalesOrg salesOrg, ShipToInfo shipToInfo});
+
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+}
+
+/// @nodoc
+class __$$_InitializeCopyWithImpl<$Res>
+    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$_Initialize>
+    implements _$$_InitializeCopyWith<$Res> {
+  __$$_InitializeCopyWithImpl(
+      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrg = null,
+    Object? shipToInfo = null,
+  }) {
+    return _then(_$_Initialize(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Initialize implements _Initialize {
+  const _$_Initialize({required this.salesOrg, required this.shipToInfo});
+
+  @override
+  final SalesOrg salesOrg;
+  @override
+  final ShipToInfo shipToInfo;
+
+  @override
+  String toString() {
+    return 'ArticlesInfoEvent.initialize(salesOrg: $salesOrg, shipToInfo: $shipToInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialize &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, salesOrg, shipToInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
+      __$$_InitializeCopyWithImpl<_$_Initialize>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)
+        initialize,
+    required TResult Function() getArticles,
+    required TResult Function() loadMoreArticles,
+    required TResult Function(String searchKey) setSearchKey,
+  }) {
+    return initialize(salesOrg, shipToInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult? Function()? getArticles,
+    TResult? Function()? loadMoreArticles,
+    TResult? Function(String searchKey)? setSearchKey,
+  }) {
+    return initialize?.call(salesOrg, shipToInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult Function()? getArticles,
+    TResult Function()? loadMoreArticles,
+    TResult Function(String searchKey)? setSearchKey,
+    required TResult orElse(),
+  }) {
+    if (initialize != null) {
+      return initialize(salesOrg, shipToInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_GetArticles value) getArticles,
+    required TResult Function(_LoadMoreArticles value) loadMoreArticles,
+    required TResult Function(_SetSearchKey value) setSearchKey,
+  }) {
+    return initialize(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_GetArticles value)? getArticles,
+    TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
+    TResult? Function(_SetSearchKey value)? setSearchKey,
+  }) {
+    return initialize?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_GetArticles value)? getArticles,
+    TResult Function(_LoadMoreArticles value)? loadMoreArticles,
+    TResult Function(_SetSearchKey value)? setSearchKey,
+    required TResult orElse(),
+  }) {
+    if (initialize != null) {
+      return initialize(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initialize implements ArticlesInfoEvent {
+  const factory _Initialize(
+      {required final SalesOrg salesOrg,
+      required final ShipToInfo shipToInfo}) = _$_Initialize;
+
+  SalesOrg get salesOrg;
+  ShipToInfo get shipToInfo;
+  @JsonKey(ignore: true)
+  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$_GetArticlesCopyWith<$Res> {
   factory _$$_GetArticlesCopyWith(
           _$_GetArticles value, $Res Function(_$_GetArticles) then) =
       __$$_GetArticlesCopyWithImpl<$Res>;
-  @useResult
-  $Res call({SalesOrg salesOrg, User user});
-
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -98,98 +270,61 @@ class __$$_GetArticlesCopyWithImpl<$Res>
   __$$_GetArticlesCopyWithImpl(
       _$_GetArticles _value, $Res Function(_$_GetArticles) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrg = null,
-    Object? user = null,
-  }) {
-    return _then(_$_GetArticles(
-      salesOrg: null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_GetArticles implements _GetArticles {
-  const _$_GetArticles({required this.salesOrg, required this.user});
-
-  @override
-  final SalesOrg salesOrg;
-  @override
-  final User user;
+  const _$_GetArticles();
 
   @override
   String toString() {
-    return 'ArticlesInfoEvent.getArticles(salesOrg: $salesOrg, user: $user)';
+    return 'ArticlesInfoEvent.getArticles()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_GetArticles &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_GetArticles);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_GetArticlesCopyWith<_$_GetArticles> get copyWith =>
-      __$$_GetArticlesCopyWithImpl<_$_GetArticles>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, User user) getArticles,
-    required TResult Function(SalesOrg salesOrg, User user) loadMoreArticles,
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)
+        initialize,
+    required TResult Function() getArticles,
+    required TResult Function() loadMoreArticles,
     required TResult Function(String searchKey) setSearchKey,
   }) {
-    return getArticles(salesOrg, user);
+    return getArticles();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, User user)? getArticles,
-    TResult? Function(SalesOrg salesOrg, User user)? loadMoreArticles,
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult? Function()? getArticles,
+    TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
   }) {
-    return getArticles?.call(salesOrg, user);
+    return getArticles?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, User user)? getArticles,
-    TResult Function(SalesOrg salesOrg, User user)? loadMoreArticles,
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult Function()? getArticles,
+    TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
     required TResult orElse(),
   }) {
     if (getArticles != null) {
-      return getArticles(salesOrg, user);
+      return getArticles();
     }
     return orElse();
   }
@@ -197,6 +332,7 @@ class _$_GetArticles implements _GetArticles {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_GetArticles value) getArticles,
     required TResult Function(_LoadMoreArticles value) loadMoreArticles,
     required TResult Function(_SetSearchKey value) setSearchKey,
@@ -207,6 +343,7 @@ class _$_GetArticles implements _GetArticles {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_GetArticles value)? getArticles,
     TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult? Function(_SetSearchKey value)? setSearchKey,
@@ -217,6 +354,7 @@ class _$_GetArticles implements _GetArticles {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_GetArticles value)? getArticles,
     TResult Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult Function(_SetSearchKey value)? setSearchKey,
@@ -230,15 +368,7 @@ class _$_GetArticles implements _GetArticles {
 }
 
 abstract class _GetArticles implements ArticlesInfoEvent {
-  const factory _GetArticles(
-      {required final SalesOrg salesOrg,
-      required final User user}) = _$_GetArticles;
-
-  SalesOrg get salesOrg;
-  User get user;
-  @JsonKey(ignore: true)
-  _$$_GetArticlesCopyWith<_$_GetArticles> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _GetArticles() = _$_GetArticles;
 }
 
 /// @nodoc
@@ -246,10 +376,6 @@ abstract class _$$_LoadMoreArticlesCopyWith<$Res> {
   factory _$$_LoadMoreArticlesCopyWith(
           _$_LoadMoreArticles value, $Res Function(_$_LoadMoreArticles) then) =
       __$$_LoadMoreArticlesCopyWithImpl<$Res>;
-  @useResult
-  $Res call({SalesOrg salesOrg, User user});
-
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -259,98 +385,61 @@ class __$$_LoadMoreArticlesCopyWithImpl<$Res>
   __$$_LoadMoreArticlesCopyWithImpl(
       _$_LoadMoreArticles _value, $Res Function(_$_LoadMoreArticles) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrg = null,
-    Object? user = null,
-  }) {
-    return _then(_$_LoadMoreArticles(
-      salesOrg: null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_LoadMoreArticles implements _LoadMoreArticles {
-  const _$_LoadMoreArticles({required this.salesOrg, required this.user});
-
-  @override
-  final SalesOrg salesOrg;
-  @override
-  final User user;
+  const _$_LoadMoreArticles();
 
   @override
   String toString() {
-    return 'ArticlesInfoEvent.loadMoreArticles(salesOrg: $salesOrg, user: $user)';
+    return 'ArticlesInfoEvent.loadMoreArticles()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_LoadMoreArticles &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_LoadMoreArticles);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LoadMoreArticlesCopyWith<_$_LoadMoreArticles> get copyWith =>
-      __$$_LoadMoreArticlesCopyWithImpl<_$_LoadMoreArticles>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, User user) getArticles,
-    required TResult Function(SalesOrg salesOrg, User user) loadMoreArticles,
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)
+        initialize,
+    required TResult Function() getArticles,
+    required TResult Function() loadMoreArticles,
     required TResult Function(String searchKey) setSearchKey,
   }) {
-    return loadMoreArticles(salesOrg, user);
+    return loadMoreArticles();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, User user)? getArticles,
-    TResult? Function(SalesOrg salesOrg, User user)? loadMoreArticles,
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult? Function()? getArticles,
+    TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
   }) {
-    return loadMoreArticles?.call(salesOrg, user);
+    return loadMoreArticles?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, User user)? getArticles,
-    TResult Function(SalesOrg salesOrg, User user)? loadMoreArticles,
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult Function()? getArticles,
+    TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
     required TResult orElse(),
   }) {
     if (loadMoreArticles != null) {
-      return loadMoreArticles(salesOrg, user);
+      return loadMoreArticles();
     }
     return orElse();
   }
@@ -358,6 +447,7 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_GetArticles value) getArticles,
     required TResult Function(_LoadMoreArticles value) loadMoreArticles,
     required TResult Function(_SetSearchKey value) setSearchKey,
@@ -368,6 +458,7 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_GetArticles value)? getArticles,
     TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult? Function(_SetSearchKey value)? setSearchKey,
@@ -378,6 +469,7 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_GetArticles value)? getArticles,
     TResult Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult Function(_SetSearchKey value)? setSearchKey,
@@ -391,15 +483,7 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
 }
 
 abstract class _LoadMoreArticles implements ArticlesInfoEvent {
-  const factory _LoadMoreArticles(
-      {required final SalesOrg salesOrg,
-      required final User user}) = _$_LoadMoreArticles;
-
-  SalesOrg get salesOrg;
-  User get user;
-  @JsonKey(ignore: true)
-  _$$_LoadMoreArticlesCopyWith<_$_LoadMoreArticles> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _LoadMoreArticles() = _$_LoadMoreArticles;
 }
 
 /// @nodoc
@@ -467,8 +551,10 @@ class _$_SetSearchKey implements _SetSearchKey {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, User user) getArticles,
-    required TResult Function(SalesOrg salesOrg, User user) loadMoreArticles,
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)
+        initialize,
+    required TResult Function() getArticles,
+    required TResult Function() loadMoreArticles,
     required TResult Function(String searchKey) setSearchKey,
   }) {
     return setSearchKey(searchKey);
@@ -477,8 +563,9 @@ class _$_SetSearchKey implements _SetSearchKey {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, User user)? getArticles,
-    TResult? Function(SalesOrg salesOrg, User user)? loadMoreArticles,
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult? Function()? getArticles,
+    TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
   }) {
     return setSearchKey?.call(searchKey);
@@ -487,8 +574,9 @@ class _$_SetSearchKey implements _SetSearchKey {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, User user)? getArticles,
-    TResult Function(SalesOrg salesOrg, User user)? loadMoreArticles,
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult Function()? getArticles,
+    TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
     required TResult orElse(),
   }) {
@@ -501,6 +589,7 @@ class _$_SetSearchKey implements _SetSearchKey {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_GetArticles value) getArticles,
     required TResult Function(_LoadMoreArticles value) loadMoreArticles,
     required TResult Function(_SetSearchKey value) setSearchKey,
@@ -511,6 +600,7 @@ class _$_SetSearchKey implements _SetSearchKey {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_GetArticles value)? getArticles,
     TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult? Function(_SetSearchKey value)? setSearchKey,
@@ -521,6 +611,7 @@ class _$_SetSearchKey implements _SetSearchKey {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_GetArticles value)? getArticles,
     TResult Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult Function(_SetSearchKey value)? setSearchKey,
@@ -545,6 +636,8 @@ abstract class _SetSearchKey implements ArticlesInfoEvent {
 
 /// @nodoc
 mixin _$ArticlesInfoState {
+  SalesOrg get salesOrg => throw _privateConstructorUsedError;
+  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   AnnouncementArticleInfo get articleInfo => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
@@ -564,12 +657,15 @@ abstract class $ArticlesInfoStateCopyWith<$Res> {
       _$ArticlesInfoStateCopyWithImpl<$Res, ArticlesInfoState>;
   @useResult
   $Res call(
-      {AnnouncementArticleInfo articleInfo,
+      {SalesOrg salesOrg,
+      ShipToInfo shipToInfo,
+      AnnouncementArticleInfo articleInfo,
       bool isFetching,
       bool canLoadMore,
       SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
   $AnnouncementArticleInfoCopyWith<$Res> get articleInfo;
 }
 
@@ -586,6 +682,8 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrg = null,
+    Object? shipToInfo = null,
     Object? articleInfo = null,
     Object? isFetching = null,
     Object? canLoadMore = null,
@@ -593,6 +691,14 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
       articleInfo: null == articleInfo
           ? _value.articleInfo
           : articleInfo // ignore: cast_nullable_to_non_nullable
@@ -618,6 +724,14 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
 
   @override
   @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $AnnouncementArticleInfoCopyWith<$Res> get articleInfo {
     return $AnnouncementArticleInfoCopyWith<$Res>(_value.articleInfo, (value) {
       return _then(_value.copyWith(articleInfo: value) as $Val);
@@ -634,12 +748,16 @@ abstract class _$$_ArticlesInfoStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {AnnouncementArticleInfo articleInfo,
+      {SalesOrg salesOrg,
+      ShipToInfo shipToInfo,
+      AnnouncementArticleInfo articleInfo,
       bool isFetching,
       bool canLoadMore,
       SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
   @override
   $AnnouncementArticleInfoCopyWith<$Res> get articleInfo;
 }
@@ -655,6 +773,8 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrg = null,
+    Object? shipToInfo = null,
     Object? articleInfo = null,
     Object? isFetching = null,
     Object? canLoadMore = null,
@@ -662,6 +782,14 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_ArticlesInfoState(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
       articleInfo: null == articleInfo
           ? _value.articleInfo
           : articleInfo // ignore: cast_nullable_to_non_nullable
@@ -690,13 +818,19 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
 
 class _$_ArticlesInfoState extends _ArticlesInfoState {
   const _$_ArticlesInfoState(
-      {required this.articleInfo,
+      {required this.salesOrg,
+      required this.shipToInfo,
+      required this.articleInfo,
       required this.isFetching,
       required this.canLoadMore,
       required this.searchKey,
       required this.apiFailureOrSuccessOption})
       : super._();
 
+  @override
+  final SalesOrg salesOrg;
+  @override
+  final ShipToInfo shipToInfo;
   @override
   final AnnouncementArticleInfo articleInfo;
   @override
@@ -710,7 +844,7 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
 
   @override
   String toString() {
-    return 'ArticlesInfoState(articleInfo: $articleInfo, isFetching: $isFetching, canLoadMore: $canLoadMore, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'ArticlesInfoState(salesOrg: $salesOrg, shipToInfo: $shipToInfo, articleInfo: $articleInfo, isFetching: $isFetching, canLoadMore: $canLoadMore, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -718,6 +852,10 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ArticlesInfoState &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
             (identical(other.articleInfo, articleInfo) ||
                 other.articleInfo == articleInfo) &&
             (identical(other.isFetching, isFetching) ||
@@ -732,8 +870,15 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, articleInfo, isFetching,
-      canLoadMore, searchKey, apiFailureOrSuccessOption);
+  int get hashCode => Object.hash(
+      runtimeType,
+      salesOrg,
+      shipToInfo,
+      articleInfo,
+      isFetching,
+      canLoadMore,
+      searchKey,
+      apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -745,7 +890,9 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
 
 abstract class _ArticlesInfoState extends ArticlesInfoState {
   const factory _ArticlesInfoState(
-      {required final AnnouncementArticleInfo articleInfo,
+      {required final SalesOrg salesOrg,
+      required final ShipToInfo shipToInfo,
+      required final AnnouncementArticleInfo articleInfo,
       required final bool isFetching,
       required final bool canLoadMore,
       required final SearchKey searchKey,
@@ -753,6 +900,10 @@ abstract class _ArticlesInfoState extends ArticlesInfoState {
           apiFailureOrSuccessOption}) = _$_ArticlesInfoState;
   const _ArticlesInfoState._() : super._();
 
+  @override
+  SalesOrg get salesOrg;
+  @override
+  ShipToInfo get shipToInfo;
   @override
   AnnouncementArticleInfo get articleInfo;
   @override

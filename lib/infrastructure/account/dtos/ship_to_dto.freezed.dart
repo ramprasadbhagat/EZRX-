@@ -66,6 +66,8 @@ mixin _$ShipToDto {
   List<LicenseDto> get licenseDtoList => throw _privateConstructorUsedError;
   @JsonKey(name: 'country', defaultValue: '')
   String get country => throw _privateConstructorUsedError;
+  @JsonKey(name: 'targetCustomerType', defaultValue: '')
+  String get targetCustomerType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -80,51 +82,34 @@ abstract class $ShipToDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'shipToCustomerCode', defaultValue: '')
-          String shipToCustomerCode,
+      String shipToCustomerCode,
       @JsonKey(name: 'defaultShipToAddress', defaultValue: true)
-          bool defaultShipToAddress,
-      @JsonKey(name: 'name1', defaultValue: '')
-          String name1,
-      @JsonKey(name: 'name2', defaultValue: '')
-          String name2,
-      @JsonKey(name: 'name3', defaultValue: '')
-          String name3,
-      @JsonKey(name: 'name4', defaultValue: '')
-          String name4,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status,
-      @JsonKey(name: 'street', defaultValue: '')
-          String street,
-      @JsonKey(name: 'street2', defaultValue: '')
-          String street2,
-      @JsonKey(name: 'street3', defaultValue: '')
-          String street3,
-      @JsonKey(name: 'street4', defaultValue: '')
-          String street4,
-      @JsonKey(name: 'street5', defaultValue: '')
-          String street5,
-      @JsonKey(name: 'postalCode', defaultValue: '')
-          String postalCode,
-      @JsonKey(name: 'city1', defaultValue: '')
-          String city1,
-      @JsonKey(name: 'city2', defaultValue: '')
-          String city2,
+      bool defaultShipToAddress,
+      @JsonKey(name: 'name1', defaultValue: '') String name1,
+      @JsonKey(name: 'name2', defaultValue: '') String name2,
+      @JsonKey(name: 'name3', defaultValue: '') String name3,
+      @JsonKey(name: 'name4', defaultValue: '') String name4,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'street', defaultValue: '') String street,
+      @JsonKey(name: 'street2', defaultValue: '') String street2,
+      @JsonKey(name: 'street3', defaultValue: '') String street3,
+      @JsonKey(name: 'street4', defaultValue: '') String street4,
+      @JsonKey(name: 'street5', defaultValue: '') String street5,
+      @JsonKey(name: 'postalCode', defaultValue: '') String postalCode,
+      @JsonKey(name: 'city1', defaultValue: '') String city1,
+      @JsonKey(name: 'city2', defaultValue: '') String city2,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
-          String telephoneNumber,
-      @JsonKey(name: 'houseNumber1', defaultValue: '')
-          String houseNumber1,
-      @JsonKey(name: 'building', defaultValue: '')
-          String building,
-      @JsonKey(name: 'region', defaultValue: '')
-          String region,
-      @JsonKey(name: 'floor', defaultValue: '')
-          String floor,
-      @JsonKey(name: 'plant', defaultValue: '')
-          String plant,
+      String telephoneNumber,
+      @JsonKey(name: 'houseNumber1', defaultValue: '') String houseNumber1,
+      @JsonKey(name: 'building', defaultValue: '') String building,
+      @JsonKey(name: 'region', defaultValue: '') String region,
+      @JsonKey(name: 'floor', defaultValue: '') String floor,
+      @JsonKey(name: 'plant', defaultValue: '') String plant,
       @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
-          List<LicenseDto> licenseDtoList,
-      @JsonKey(name: 'country', defaultValue: '')
-          String country});
+      List<LicenseDto> licenseDtoList,
+      @JsonKey(name: 'country', defaultValue: '') String country,
+      @JsonKey(name: 'targetCustomerType', defaultValue: '')
+      String targetCustomerType});
 }
 
 /// @nodoc
@@ -163,6 +148,7 @@ class _$ShipToDtoCopyWithImpl<$Res, $Val extends ShipToDto>
     Object? plant = null,
     Object? licenseDtoList = null,
     Object? country = null,
+    Object? targetCustomerType = null,
   }) {
     return _then(_value.copyWith(
       shipToCustomerCode: null == shipToCustomerCode
@@ -257,6 +243,10 @@ class _$ShipToDtoCopyWithImpl<$Res, $Val extends ShipToDto>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
+      targetCustomerType: null == targetCustomerType
+          ? _value.targetCustomerType
+          : targetCustomerType // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -270,51 +260,34 @@ abstract class _$$_ShipToDtoCopyWith<$Res> implements $ShipToDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'shipToCustomerCode', defaultValue: '')
-          String shipToCustomerCode,
+      String shipToCustomerCode,
       @JsonKey(name: 'defaultShipToAddress', defaultValue: true)
-          bool defaultShipToAddress,
-      @JsonKey(name: 'name1', defaultValue: '')
-          String name1,
-      @JsonKey(name: 'name2', defaultValue: '')
-          String name2,
-      @JsonKey(name: 'name3', defaultValue: '')
-          String name3,
-      @JsonKey(name: 'name4', defaultValue: '')
-          String name4,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status,
-      @JsonKey(name: 'street', defaultValue: '')
-          String street,
-      @JsonKey(name: 'street2', defaultValue: '')
-          String street2,
-      @JsonKey(name: 'street3', defaultValue: '')
-          String street3,
-      @JsonKey(name: 'street4', defaultValue: '')
-          String street4,
-      @JsonKey(name: 'street5', defaultValue: '')
-          String street5,
-      @JsonKey(name: 'postalCode', defaultValue: '')
-          String postalCode,
-      @JsonKey(name: 'city1', defaultValue: '')
-          String city1,
-      @JsonKey(name: 'city2', defaultValue: '')
-          String city2,
+      bool defaultShipToAddress,
+      @JsonKey(name: 'name1', defaultValue: '') String name1,
+      @JsonKey(name: 'name2', defaultValue: '') String name2,
+      @JsonKey(name: 'name3', defaultValue: '') String name3,
+      @JsonKey(name: 'name4', defaultValue: '') String name4,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'street', defaultValue: '') String street,
+      @JsonKey(name: 'street2', defaultValue: '') String street2,
+      @JsonKey(name: 'street3', defaultValue: '') String street3,
+      @JsonKey(name: 'street4', defaultValue: '') String street4,
+      @JsonKey(name: 'street5', defaultValue: '') String street5,
+      @JsonKey(name: 'postalCode', defaultValue: '') String postalCode,
+      @JsonKey(name: 'city1', defaultValue: '') String city1,
+      @JsonKey(name: 'city2', defaultValue: '') String city2,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
-          String telephoneNumber,
-      @JsonKey(name: 'houseNumber1', defaultValue: '')
-          String houseNumber1,
-      @JsonKey(name: 'building', defaultValue: '')
-          String building,
-      @JsonKey(name: 'region', defaultValue: '')
-          String region,
-      @JsonKey(name: 'floor', defaultValue: '')
-          String floor,
-      @JsonKey(name: 'plant', defaultValue: '')
-          String plant,
+      String telephoneNumber,
+      @JsonKey(name: 'houseNumber1', defaultValue: '') String houseNumber1,
+      @JsonKey(name: 'building', defaultValue: '') String building,
+      @JsonKey(name: 'region', defaultValue: '') String region,
+      @JsonKey(name: 'floor', defaultValue: '') String floor,
+      @JsonKey(name: 'plant', defaultValue: '') String plant,
       @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
-          List<LicenseDto> licenseDtoList,
-      @JsonKey(name: 'country', defaultValue: '')
-          String country});
+      List<LicenseDto> licenseDtoList,
+      @JsonKey(name: 'country', defaultValue: '') String country,
+      @JsonKey(name: 'targetCustomerType', defaultValue: '')
+      String targetCustomerType});
 }
 
 /// @nodoc
@@ -351,6 +324,7 @@ class __$$_ShipToDtoCopyWithImpl<$Res>
     Object? plant = null,
     Object? licenseDtoList = null,
     Object? country = null,
+    Object? targetCustomerType = null,
   }) {
     return _then(_$_ShipToDto(
       shipToCustomerCode: null == shipToCustomerCode
@@ -445,6 +419,10 @@ class __$$_ShipToDtoCopyWithImpl<$Res>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
+      targetCustomerType: null == targetCustomerType
+          ? _value.targetCustomerType
+          : targetCustomerType // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -454,51 +432,35 @@ class __$$_ShipToDtoCopyWithImpl<$Res>
 class _$_ShipToDto extends _ShipToDto {
   const _$_ShipToDto(
       {@JsonKey(name: 'shipToCustomerCode', defaultValue: '')
-          required this.shipToCustomerCode,
+      required this.shipToCustomerCode,
       @JsonKey(name: 'defaultShipToAddress', defaultValue: true)
-          required this.defaultShipToAddress,
-      @JsonKey(name: 'name1', defaultValue: '')
-          required this.name1,
-      @JsonKey(name: 'name2', defaultValue: '')
-          required this.name2,
-      @JsonKey(name: 'name3', defaultValue: '')
-          required this.name3,
-      @JsonKey(name: 'name4', defaultValue: '')
-          required this.name4,
-      @JsonKey(name: 'status', defaultValue: '')
-          required this.status,
-      @JsonKey(name: 'street', defaultValue: '')
-          required this.street,
-      @JsonKey(name: 'street2', defaultValue: '')
-          required this.street2,
-      @JsonKey(name: 'street3', defaultValue: '')
-          required this.street3,
-      @JsonKey(name: 'street4', defaultValue: '')
-          required this.street4,
-      @JsonKey(name: 'street5', defaultValue: '')
-          required this.street5,
-      @JsonKey(name: 'postalCode', defaultValue: '')
-          required this.postalCode,
-      @JsonKey(name: 'city1', defaultValue: '')
-          required this.city1,
-      @JsonKey(name: 'city2', defaultValue: '')
-          required this.city2,
+      required this.defaultShipToAddress,
+      @JsonKey(name: 'name1', defaultValue: '') required this.name1,
+      @JsonKey(name: 'name2', defaultValue: '') required this.name2,
+      @JsonKey(name: 'name3', defaultValue: '') required this.name3,
+      @JsonKey(name: 'name4', defaultValue: '') required this.name4,
+      @JsonKey(name: 'status', defaultValue: '') required this.status,
+      @JsonKey(name: 'street', defaultValue: '') required this.street,
+      @JsonKey(name: 'street2', defaultValue: '') required this.street2,
+      @JsonKey(name: 'street3', defaultValue: '') required this.street3,
+      @JsonKey(name: 'street4', defaultValue: '') required this.street4,
+      @JsonKey(name: 'street5', defaultValue: '') required this.street5,
+      @JsonKey(name: 'postalCode', defaultValue: '') required this.postalCode,
+      @JsonKey(name: 'city1', defaultValue: '') required this.city1,
+      @JsonKey(name: 'city2', defaultValue: '') required this.city2,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
-          required this.telephoneNumber,
+      required this.telephoneNumber,
       @JsonKey(name: 'houseNumber1', defaultValue: '')
-          required this.houseNumber1,
-      @JsonKey(name: 'building', defaultValue: '')
-          required this.building,
-      @JsonKey(name: 'region', defaultValue: '')
-          required this.region,
-      @JsonKey(name: 'floor', defaultValue: '')
-          required this.floor,
-      @JsonKey(name: 'plant', defaultValue: '')
-          required this.plant,
+      required this.houseNumber1,
+      @JsonKey(name: 'building', defaultValue: '') required this.building,
+      @JsonKey(name: 'region', defaultValue: '') required this.region,
+      @JsonKey(name: 'floor', defaultValue: '') required this.floor,
+      @JsonKey(name: 'plant', defaultValue: '') required this.plant,
       @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
-          required final List<LicenseDto> licenseDtoList,
-      @JsonKey(name: 'country', defaultValue: '')
-          required this.country})
+      required final List<LicenseDto> licenseDtoList,
+      @JsonKey(name: 'country', defaultValue: '') required this.country,
+      @JsonKey(name: 'targetCustomerType', defaultValue: '')
+      required this.targetCustomerType})
       : _licenseDtoList = licenseDtoList,
         super._();
 
@@ -580,10 +542,13 @@ class _$_ShipToDto extends _ShipToDto {
   @override
   @JsonKey(name: 'country', defaultValue: '')
   final String country;
+  @override
+  @JsonKey(name: 'targetCustomerType', defaultValue: '')
+  final String targetCustomerType;
 
   @override
   String toString() {
-    return 'ShipToDto(shipToCustomerCode: $shipToCustomerCode, defaultShipToAddress: $defaultShipToAddress, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street: $street, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, houseNumber1: $houseNumber1, building: $building, region: $region, floor: $floor, plant: $plant, licenseDtoList: $licenseDtoList, country: $country)';
+    return 'ShipToDto(shipToCustomerCode: $shipToCustomerCode, defaultShipToAddress: $defaultShipToAddress, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street: $street, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, houseNumber1: $houseNumber1, building: $building, region: $region, floor: $floor, plant: $plant, licenseDtoList: $licenseDtoList, country: $country, targetCustomerType: $targetCustomerType)';
   }
 
   @override
@@ -620,7 +585,9 @@ class _$_ShipToDto extends _ShipToDto {
             (identical(other.plant, plant) || other.plant == plant) &&
             const DeepCollectionEquality()
                 .equals(other._licenseDtoList, _licenseDtoList) &&
-            (identical(other.country, country) || other.country == country));
+            (identical(other.country, country) || other.country == country) &&
+            (identical(other.targetCustomerType, targetCustomerType) ||
+                other.targetCustomerType == targetCustomerType));
   }
 
   @JsonKey(ignore: true)
@@ -649,7 +616,8 @@ class _$_ShipToDto extends _ShipToDto {
         floor,
         plant,
         const DeepCollectionEquality().hash(_licenseDtoList),
-        country
+        country,
+        targetCustomerType
       ]);
 
   @JsonKey(ignore: true)
@@ -669,51 +637,37 @@ class _$_ShipToDto extends _ShipToDto {
 abstract class _ShipToDto extends ShipToDto {
   const factory _ShipToDto(
       {@JsonKey(name: 'shipToCustomerCode', defaultValue: '')
-          required final String shipToCustomerCode,
+      required final String shipToCustomerCode,
       @JsonKey(name: 'defaultShipToAddress', defaultValue: true)
-          required final bool defaultShipToAddress,
-      @JsonKey(name: 'name1', defaultValue: '')
-          required final String name1,
-      @JsonKey(name: 'name2', defaultValue: '')
-          required final String name2,
-      @JsonKey(name: 'name3', defaultValue: '')
-          required final String name3,
-      @JsonKey(name: 'name4', defaultValue: '')
-          required final String name4,
-      @JsonKey(name: 'status', defaultValue: '')
-          required final String status,
-      @JsonKey(name: 'street', defaultValue: '')
-          required final String street,
-      @JsonKey(name: 'street2', defaultValue: '')
-          required final String street2,
-      @JsonKey(name: 'street3', defaultValue: '')
-          required final String street3,
-      @JsonKey(name: 'street4', defaultValue: '')
-          required final String street4,
-      @JsonKey(name: 'street5', defaultValue: '')
-          required final String street5,
+      required final bool defaultShipToAddress,
+      @JsonKey(name: 'name1', defaultValue: '') required final String name1,
+      @JsonKey(name: 'name2', defaultValue: '') required final String name2,
+      @JsonKey(name: 'name3', defaultValue: '') required final String name3,
+      @JsonKey(name: 'name4', defaultValue: '') required final String name4,
+      @JsonKey(name: 'status', defaultValue: '') required final String status,
+      @JsonKey(name: 'street', defaultValue: '') required final String street,
+      @JsonKey(name: 'street2', defaultValue: '') required final String street2,
+      @JsonKey(name: 'street3', defaultValue: '') required final String street3,
+      @JsonKey(name: 'street4', defaultValue: '') required final String street4,
+      @JsonKey(name: 'street5', defaultValue: '') required final String street5,
       @JsonKey(name: 'postalCode', defaultValue: '')
-          required final String postalCode,
-      @JsonKey(name: 'city1', defaultValue: '')
-          required final String city1,
-      @JsonKey(name: 'city2', defaultValue: '')
-          required final String city2,
+      required final String postalCode,
+      @JsonKey(name: 'city1', defaultValue: '') required final String city1,
+      @JsonKey(name: 'city2', defaultValue: '') required final String city2,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
-          required final String telephoneNumber,
+      required final String telephoneNumber,
       @JsonKey(name: 'houseNumber1', defaultValue: '')
-          required final String houseNumber1,
+      required final String houseNumber1,
       @JsonKey(name: 'building', defaultValue: '')
-          required final String building,
-      @JsonKey(name: 'region', defaultValue: '')
-          required final String region,
-      @JsonKey(name: 'floor', defaultValue: '')
-          required final String floor,
-      @JsonKey(name: 'plant', defaultValue: '')
-          required final String plant,
+      required final String building,
+      @JsonKey(name: 'region', defaultValue: '') required final String region,
+      @JsonKey(name: 'floor', defaultValue: '') required final String floor,
+      @JsonKey(name: 'plant', defaultValue: '') required final String plant,
       @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
-          required final List<LicenseDto> licenseDtoList,
-      @JsonKey(name: 'country', defaultValue: '')
-          required final String country}) = _$_ShipToDto;
+      required final List<LicenseDto> licenseDtoList,
+      @JsonKey(name: 'country', defaultValue: '') required final String country,
+      @JsonKey(name: 'targetCustomerType', defaultValue: '')
+      required final String targetCustomerType}) = _$_ShipToDto;
   const _ShipToDto._() : super._();
 
   factory _ShipToDto.fromJson(Map<String, dynamic> json) =
@@ -788,6 +742,9 @@ abstract class _ShipToDto extends ShipToDto {
   @override
   @JsonKey(name: 'country', defaultValue: '')
   String get country;
+  @override
+  @JsonKey(name: 'targetCustomerType', defaultValue: '')
+  String get targetCustomerType;
   @override
   @JsonKey(ignore: true)
   _$$_ShipToDtoCopyWith<_$_ShipToDto> get copyWith =>

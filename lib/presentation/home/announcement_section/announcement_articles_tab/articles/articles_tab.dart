@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,22 +76,12 @@ class _ArticlesTabState extends State<ArticlesTab> {
                     ),
                     onRefresh: () {
                       context.read<ArticlesInfoBloc>().add(
-                            ArticlesInfoEvent.getArticles(
-                              salesOrg: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .salesOrg,
-                              user: context.read<EligibilityBloc>().state.user,
-                            ),
+                            const ArticlesInfoEvent.getArticles(),
                           );
                     },
                     isLoading: state.isFetching,
                     onLoadingMore: () => context.read<ArticlesInfoBloc>().add(
-                          ArticlesInfoEvent.loadMoreArticles(
-                            salesOrg:
-                                context.read<EligibilityBloc>().state.salesOrg,
-                            user: context.read<EligibilityBloc>().state.user,
-                          ),
+                          const ArticlesInfoEvent.loadMoreArticles(),
                         ),
                     itemBuilder: (context, index, item) => _ArticlesTile(
                       key: WidgetKeys.genericKey(key: 'articleItem$index'),

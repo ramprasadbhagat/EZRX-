@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -13,8 +14,6 @@ import 'package:ezrxmobile/domain/announcement_info/entities/announcement_articl
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 import 'package:ezrxmobile/domain/article_info/repository/i_article_info_repository.dart';
-
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 
 part 'articles_info_event.dart';
 part 'articles_info_state.dart';
@@ -33,6 +32,15 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
     Emitter<ArticlesInfoState> emit,
   ) async {
     await event.map(
+      initialize: (e) {
+        emit(
+          ArticlesInfoState.initial().copyWith(
+            shipToInfo: e.shipToInfo,
+            salesOrg: e.salesOrg,
+          ),
+        );
+        add(const ArticlesInfoEvent.getArticles());
+      },
       getArticles: (e) async {
         emit(
           state.copyWith(
@@ -44,8 +52,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
         );
 
         final failureOrSuccessOption = await articleInfoRepository.getArticles(
-          salesOrg: e.salesOrg,
-          user: e.user,
+          salesOrg: state.salesOrg,
           pageSize: config.pageSize,
           after: state.articleInfo.endCursor,
         );
@@ -57,13 +64,20 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
               apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
             ),
           ),
-          (articles) => emit(
-            state.copyWith(
-              articleInfo: articles,
-              isFetching: false,
-              apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
-            ),
-          ),
+          (articles) {
+            emit(
+              state.copyWith(
+                articleInfo: state.salesOrg.isID
+                    ? articles.copyWith(
+                        announcementList:
+                            _getFilteredArticleInfo(articles.announcementList),
+                      )
+                    : articles,
+                isFetching: false,
+                apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
+              ),
+            );
+          },
         );
       },
       loadMoreArticles: (e) async {
@@ -76,8 +90,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
         );
 
         final failureOrSuccessOption = await articleInfoRepository.getArticles(
-          salesOrg: e.salesOrg,
-          user: e.user,
+          salesOrg: state.salesOrg,
           pageSize: config.pageSize,
           after: state.articleInfo.endCursor,
         );
@@ -93,10 +106,13 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
             final newArticlesList = List<AnnouncementArticleItem>.from(
               state.articleInfo.announcementList,
             )..addAll(articles.announcementList);
+
             emit(
               state.copyWith(
                 articleInfo: articles.copyWith(
-                  announcementList: newArticlesList,
+                  announcementList: state.salesOrg.isID
+                      ? _getFilteredArticleInfo(newArticlesList)
+                      : newArticlesList,
                 ),
                 canLoadMore:
                     articles.announcementList.length >= config.pageSize,
@@ -119,4 +135,19 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
       },
     );
   }
+
+  List<AnnouncementArticleItem> _getFilteredArticleInfo(
+    List<AnnouncementArticleItem> articleList,
+  ) =>
+      articleList
+          .where(
+            (e) =>
+                e.branchInfo
+                    .any((element) => state.shipToInfo.plant == element.name) &&
+                e.iC4Info.any(
+                  (element) =>
+                      state.shipToInfo.targetCustomerType == element.name,
+                ),
+          )
+          .toList();
 }

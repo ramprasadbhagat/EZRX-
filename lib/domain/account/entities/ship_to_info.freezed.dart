@@ -30,6 +30,7 @@ mixin _$ShipToInfo {
   String get region => throw _privateConstructorUsedError;
   String get floor => throw _privateConstructorUsedError;
   String get plant => throw _privateConstructorUsedError;
+  String get targetCustomerType => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
   List<LicenseInfo> get licenses => throw _privateConstructorUsedError;
 
@@ -59,6 +60,7 @@ abstract class $ShipToInfoCopyWith<$Res> {
       String region,
       String floor,
       String plant,
+      String targetCustomerType,
       String country,
       List<LicenseInfo> licenses});
 
@@ -93,6 +95,7 @@ class _$ShipToInfoCopyWithImpl<$Res, $Val extends ShipToInfo>
     Object? region = null,
     Object? floor = null,
     Object? plant = null,
+    Object? targetCustomerType = null,
     Object? country = null,
     Object? licenses = null,
   }) {
@@ -153,6 +156,10 @@ class _$ShipToInfoCopyWithImpl<$Res, $Val extends ShipToInfo>
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
+      targetCustomerType: null == targetCustomerType
+          ? _value.targetCustomerType
+          : targetCustomerType // ignore: cast_nullable_to_non_nullable
+              as String,
       country: null == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -204,6 +211,7 @@ abstract class _$$_ShipToInfoCopyWith<$Res>
       String region,
       String floor,
       String plant,
+      String targetCustomerType,
       String country,
       List<LicenseInfo> licenses});
 
@@ -238,6 +246,7 @@ class __$$_ShipToInfoCopyWithImpl<$Res>
     Object? region = null,
     Object? floor = null,
     Object? plant = null,
+    Object? targetCustomerType = null,
     Object? country = null,
     Object? licenses = null,
   }) {
@@ -298,6 +307,10 @@ class __$$_ShipToInfoCopyWithImpl<$Res>
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
+      targetCustomerType: null == targetCustomerType
+          ? _value.targetCustomerType
+          : targetCustomerType // ignore: cast_nullable_to_non_nullable
+              as String,
       country: null == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -328,6 +341,7 @@ class _$_ShipToInfo extends _ShipToInfo {
       required this.region,
       required this.floor,
       required this.plant,
+      required this.targetCustomerType,
       required this.country,
       required final List<LicenseInfo> licenses})
       : _licenses = licenses,
@@ -362,6 +376,8 @@ class _$_ShipToInfo extends _ShipToInfo {
   @override
   final String plant;
   @override
+  final String targetCustomerType;
+  @override
   final String country;
   final List<LicenseInfo> _licenses;
   @override
@@ -373,7 +389,7 @@ class _$_ShipToInfo extends _ShipToInfo {
 
   @override
   String toString() {
-    return 'ShipToInfo(defaultShipToAddress: $defaultShipToAddress, shipToCustomerCode: $shipToCustomerCode, shipToName: $shipToName, shipToAddress: $shipToAddress, status: $status, building: $building, city1: $city1, city2: $city2, postalCode: $postalCode, houseNumber1: $houseNumber1, telephoneNumber: $telephoneNumber, region: $region, floor: $floor, plant: $plant, country: $country, licenses: $licenses)';
+    return 'ShipToInfo(defaultShipToAddress: $defaultShipToAddress, shipToCustomerCode: $shipToCustomerCode, shipToName: $shipToName, shipToAddress: $shipToAddress, status: $status, building: $building, city1: $city1, city2: $city2, postalCode: $postalCode, houseNumber1: $houseNumber1, telephoneNumber: $telephoneNumber, region: $region, floor: $floor, plant: $plant, targetCustomerType: $targetCustomerType, country: $country, licenses: $licenses)';
   }
 
   @override
@@ -403,6 +419,8 @@ class _$_ShipToInfo extends _ShipToInfo {
             (identical(other.region, region) || other.region == region) &&
             (identical(other.floor, floor) || other.floor == floor) &&
             (identical(other.plant, plant) || other.plant == plant) &&
+            (identical(other.targetCustomerType, targetCustomerType) ||
+                other.targetCustomerType == targetCustomerType) &&
             (identical(other.country, country) || other.country == country) &&
             const DeepCollectionEquality().equals(other._licenses, _licenses));
   }
@@ -424,6 +442,7 @@ class _$_ShipToInfo extends _ShipToInfo {
       region,
       floor,
       plant,
+      targetCustomerType,
       country,
       const DeepCollectionEquality().hash(_licenses));
 
@@ -450,6 +469,7 @@ abstract class _ShipToInfo extends ShipToInfo {
       required final String region,
       required final String floor,
       required final String plant,
+      required final String targetCustomerType,
       required final String country,
       required final List<LicenseInfo> licenses}) = _$_ShipToInfo;
   const _ShipToInfo._() : super._();
@@ -482,6 +502,8 @@ abstract class _ShipToInfo extends ShipToInfo {
   String get floor;
   @override
   String get plant;
+  @override
+  String get targetCustomerType;
   @override
   String get country;
   @override

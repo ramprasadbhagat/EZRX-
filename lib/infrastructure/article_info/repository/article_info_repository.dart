@@ -12,8 +12,6 @@ import 'package:ezrxmobile/domain/article_info/repository/i_article_info_reposit
 
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-
 class ArticleInfoRepository extends IArticleInfoRepository {
   final ArticleInfoRemoteDataSource remoteDataSource;
   final ArticleInfoLocalDataSource localDataSource;
@@ -28,12 +26,9 @@ class ArticleInfoRepository extends IArticleInfoRepository {
   @override
   Future<Either<ApiFailure, AnnouncementArticleInfo>> getArticles({
     required SalesOrg salesOrg,
-    required User user,
     required int pageSize,
     required String after,
   }) async {
-    final preferredLanguage = user.preferredLanguage.languageCode;
-
     if (config.appFlavor == Flavor.mock) {
       try {
         final announcementInfo = await localDataSource.getArticles();
@@ -46,14 +41,24 @@ class ArticleInfoRepository extends IArticleInfoRepository {
       }
     }
     try {
-      final announcementInfo = await remoteDataSource.getArticleInfo(
-        announcementUrlPath: config.announcementApiUrlPath,
-        template: config.articleTemplate,
-        pageSize: pageSize,
-        variablePath: salesOrg.articleVariablePath,
-        lang: preferredLanguage,
-        after: after,
-      );
+      final announcementInfo = salesOrg.isID
+          ? await remoteDataSource.getArticleInfoIdMarket(
+              announcementUrlPath: config.announcementApiUrlPath,
+              template1: config.idMarketArticleTemplate1,
+              template2: config.idMarketArticleTemplate2,
+              pageSize: pageSize,
+              variablePath: salesOrg.articleVariablePath,
+              lang: salesOrg.languageCodeForHelpAndSupport,
+              after: after,
+            )
+          : await remoteDataSource.getArticleInfo(
+              announcementUrlPath: config.announcementApiUrlPath,
+              template: config.articleTemplate,
+              pageSize: pageSize,
+              variablePath: salesOrg.articleVariablePath,
+              lang: salesOrg.locale.languageCode,
+              after: after,
+            );
 
       return Right(announcementInfo);
     } catch (e) {
