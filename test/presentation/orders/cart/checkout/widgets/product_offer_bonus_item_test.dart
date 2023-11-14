@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
@@ -21,9 +22,13 @@ import '../../../../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   late AppRouter autoRouterMock;
   late CartBloc cartBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   final fakeMaterialItemBonus = MaterialItemBonus.empty().copyWith(
     qty: 1,
     materialInfo: MaterialInfo.empty().copyWith(
@@ -36,8 +41,12 @@ void main() {
     locator.registerFactory(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
     cartBlocMock = CartBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     when(() => cartBlocMock.state).thenReturn(
       CartState.initial(),
+    );
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial(),
     );
   });
 
@@ -48,6 +57,9 @@ void main() {
       providers: [
         BlocProvider<CartBloc>(
           create: (context) => cartBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
         ),
       ],
       child: Material(

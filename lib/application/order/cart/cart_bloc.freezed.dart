@@ -53,6 +53,9 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,6 +91,8 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -123,6 +128,8 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -151,6 +158,10 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -175,6 +186,9 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -198,6 +212,9 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -414,6 +431,9 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return initialized(salesOrganisationConfigs, salesOrganisation,
         customerCodeInfo, shipToInfo, user);
@@ -453,6 +473,8 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return initialized?.call(salesOrganisationConfigs, salesOrganisation,
         customerCodeInfo, shipToInfo, user);
@@ -492,6 +514,8 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -527,6 +551,10 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return initialized(this);
   }
@@ -554,6 +582,9 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return initialized?.call(this);
   }
@@ -580,6 +611,9 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -735,6 +769,9 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return verifyMaterialDealBonus(item, items);
   }
@@ -773,6 +810,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return verifyMaterialDealBonus?.call(item, items);
   }
@@ -811,6 +850,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (verifyMaterialDealBonus != null) {
@@ -845,6 +886,10 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return verifyMaterialDealBonus(this);
   }
@@ -872,6 +917,9 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return verifyMaterialDealBonus?.call(this);
   }
@@ -898,6 +946,9 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (verifyMaterialDealBonus != null) {
@@ -1066,6 +1117,9 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return addBonusToCartItem(bonusMaterial, bonusItemId, counterOfferDetails);
   }
@@ -1104,6 +1158,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return addBonusToCartItem?.call(
         bonusMaterial, bonusItemId, counterOfferDetails);
@@ -1143,6 +1199,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (addBonusToCartItem != null) {
@@ -1178,6 +1236,10 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return addBonusToCartItem(this);
   }
@@ -1205,6 +1267,9 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return addBonusToCartItem?.call(this);
   }
@@ -1231,6 +1296,9 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (addBonusToCartItem != null) {
@@ -1332,6 +1400,9 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return removeSampleBonusFromCartConfig();
   }
@@ -1370,6 +1441,8 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return removeSampleBonusFromCartConfig?.call();
   }
@@ -1408,6 +1481,8 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (removeSampleBonusFromCartConfig != null) {
@@ -1442,6 +1517,10 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return removeSampleBonusFromCartConfig(this);
   }
@@ -1469,6 +1548,9 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return removeSampleBonusFromCartConfig?.call(this);
   }
@@ -1495,6 +1577,9 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (removeSampleBonusFromCartConfig != null) {
@@ -1582,6 +1667,9 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return clearCart();
   }
@@ -1620,6 +1708,8 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return clearCart?.call();
   }
@@ -1658,6 +1748,8 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -1692,6 +1784,10 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return clearCart(this);
   }
@@ -1719,6 +1815,9 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return clearCart?.call(this);
   }
@@ -1745,6 +1844,9 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -1833,6 +1935,9 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return fetchProductsAddedToCart();
   }
@@ -1871,6 +1976,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return fetchProductsAddedToCart?.call();
   }
@@ -1909,6 +2016,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (fetchProductsAddedToCart != null) {
@@ -1943,6 +2052,10 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return fetchProductsAddedToCart(this);
   }
@@ -1970,6 +2083,9 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return fetchProductsAddedToCart?.call(this);
   }
@@ -1996,6 +2112,9 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (fetchProductsAddedToCart != null) {
@@ -2128,6 +2247,9 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCart(priceAggregate, quantity);
   }
@@ -2166,6 +2288,8 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCart?.call(priceAggregate, quantity);
   }
@@ -2204,6 +2328,8 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (upsertCart != null) {
@@ -2238,6 +2364,10 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCart(this);
   }
@@ -2265,6 +2395,9 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCart?.call(this);
   }
@@ -2291,6 +2424,9 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (upsertCart != null) {
@@ -2444,6 +2580,9 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return addHistoryItemsToCart(items, counterOfferDetails);
   }
@@ -2482,6 +2621,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return addHistoryItemsToCart?.call(items, counterOfferDetails);
   }
@@ -2520,6 +2661,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (addHistoryItemsToCart != null) {
@@ -2554,6 +2697,10 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return addHistoryItemsToCart(this);
   }
@@ -2581,6 +2728,9 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return addHistoryItemsToCart?.call(this);
   }
@@ -2607,6 +2757,9 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (addHistoryItemsToCart != null) {
@@ -2739,6 +2892,9 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItems(priceAggregate);
   }
@@ -2777,6 +2933,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItems?.call(priceAggregate);
   }
@@ -2815,6 +2973,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (upsertCartItems != null) {
@@ -2849,6 +3009,10 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItems(this);
   }
@@ -2876,6 +3040,9 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItems?.call(this);
   }
@@ -2902,6 +3069,9 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (upsertCartItems != null) {
@@ -3033,6 +3203,9 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return getDetailsProductsAddedToCart(cartProducts);
   }
@@ -3071,6 +3244,8 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return getDetailsProductsAddedToCart?.call(cartProducts);
   }
@@ -3109,6 +3284,8 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (getDetailsProductsAddedToCart != null) {
@@ -3143,6 +3320,10 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return getDetailsProductsAddedToCart(this);
   }
@@ -3170,6 +3351,9 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return getDetailsProductsAddedToCart?.call(this);
   }
@@ -3196,6 +3380,9 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (getDetailsProductsAddedToCart != null) {
@@ -3325,6 +3512,9 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return updatePriceProduct(priceProducts);
   }
@@ -3363,6 +3553,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return updatePriceProduct?.call(priceProducts);
   }
@@ -3401,6 +3593,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (updatePriceProduct != null) {
@@ -3435,6 +3629,10 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return updatePriceProduct(this);
   }
@@ -3462,6 +3660,9 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return updatePriceProduct?.call(this);
   }
@@ -3488,6 +3689,9 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (updatePriceProduct != null) {
@@ -3581,6 +3785,9 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return updateProductStock();
   }
@@ -3619,6 +3826,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return updateProductStock?.call();
   }
@@ -3657,6 +3866,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (updateProductStock != null) {
@@ -3691,6 +3902,10 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return updateProductStock(this);
   }
@@ -3718,6 +3933,9 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return updateProductStock?.call(this);
   }
@@ -3744,6 +3962,9 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (updateProductStock != null) {
@@ -3867,6 +4088,9 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return removeInvalidProducts(invalidCartItems);
   }
@@ -3905,6 +4129,8 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return removeInvalidProducts?.call(invalidCartItems);
   }
@@ -3943,6 +4169,8 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (removeInvalidProducts != null) {
@@ -3977,6 +4205,10 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return removeInvalidProducts(this);
   }
@@ -4004,6 +4236,9 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return removeInvalidProducts?.call(this);
   }
@@ -4030,6 +4265,9 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (removeInvalidProducts != null) {
@@ -4173,6 +4411,9 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItemsWithComboOffers(priceAggregates, isDeleteCombo);
   }
@@ -4211,6 +4452,8 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItemsWithComboOffers?.call(priceAggregates, isDeleteCombo);
   }
@@ -4249,6 +4492,8 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (upsertCartItemsWithComboOffers != null) {
@@ -4283,6 +4528,10 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItemsWithComboOffers(this);
   }
@@ -4310,6 +4559,9 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItemsWithComboOffers?.call(this);
   }
@@ -4336,6 +4588,9 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (upsertCartItemsWithComboOffers != null) {
@@ -4473,6 +4728,9 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return updateCartProductWithCounterOffer(overriddenProductPrice);
   }
@@ -4511,6 +4769,8 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return updateCartProductWithCounterOffer?.call(overriddenProductPrice);
   }
@@ -4549,6 +4809,8 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (updateCartProductWithCounterOffer != null) {
@@ -4583,6 +4845,10 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     required TResult Function(_UpdateCartProductWithCounterOffer value)
         updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return updateCartProductWithCounterOffer(this);
   }
@@ -4610,6 +4876,9 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
   }) {
     return updateCartProductWithCounterOffer?.call(this);
   }
@@ -4636,6 +4905,9 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (updateCartProductWithCounterOffer != null) {
@@ -4658,6 +4930,583 @@ abstract class _UpdateCartProductWithCounterOffer implements CartEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdatePriceForIdMarketCopyWith<$Res> {
+  factory _$$_UpdatePriceForIdMarketCopyWith(_$_UpdatePriceForIdMarket value,
+          $Res Function(_$_UpdatePriceForIdMarket) then) =
+      __$$_UpdatePriceForIdMarketCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<MaterialInfo> product});
+}
+
+/// @nodoc
+class __$$_UpdatePriceForIdMarketCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_UpdatePriceForIdMarket>
+    implements _$$_UpdatePriceForIdMarketCopyWith<$Res> {
+  __$$_UpdatePriceForIdMarketCopyWithImpl(_$_UpdatePriceForIdMarket _value,
+      $Res Function(_$_UpdatePriceForIdMarket) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? product = null,
+  }) {
+    return _then(_$_UpdatePriceForIdMarket(
+      product: null == product
+          ? _value._product
+          : product // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
+  const _$_UpdatePriceForIdMarket({required final List<MaterialInfo> product})
+      : _product = product;
+
+  final List<MaterialInfo> _product;
+  @override
+  List<MaterialInfo> get product {
+    if (_product is EqualUnmodifiableListView) return _product;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_product);
+  }
+
+  @override
+  String toString() {
+    return 'CartEvent.updatePriceForIdMarket(product: $product)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdatePriceForIdMarket &&
+            const DeepCollectionEquality().equals(other._product, _product));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_product));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdatePriceForIdMarketCopyWith<_$_UpdatePriceForIdMarket> get copyWith =>
+      __$$_UpdatePriceForIdMarketCopyWithImpl<_$_UpdatePriceForIdMarket>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)
+        initialized,
+    required TResult Function(PriceAggregate item, List<PriceAggregate> items)
+        verifyMaterialDealBonus,
+    required TResult Function(
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)
+        addBonusToCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
+    required TResult Function() clearCart,
+    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
+        upsertCart,
+    required TResult Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)
+        addHistoryItemsToCart,
+    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(List<PriceAggregate> cartProducts)
+        getDetailsProductsAddedToCart,
+    required TResult Function(Map<MaterialNumber, Price> priceProducts)
+        updatePriceProduct,
+    required TResult Function() updateProductStock,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
+    required TResult Function(
+            List<PriceAggregate> priceAggregates, bool isDeleteCombo)
+        upsertCartItemsWithComboOffers,
+    required TResult Function(Price overriddenProductPrice)
+        updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
+  }) {
+    return updatePriceForIdMarket(product);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult? Function(PriceAggregate item, List<PriceAggregate> items)?
+        verifyMaterialDealBonus,
+    TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addBonusToCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
+    TResult? Function()? clearCart,
+    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
+    TResult? Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addHistoryItemsToCart,
+    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(List<PriceAggregate> cartProducts)?
+        getDetailsProductsAddedToCart,
+    TResult? Function(Map<MaterialNumber, Price> priceProducts)?
+        updatePriceProduct,
+    TResult? Function()? updateProductStock,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
+    TResult? Function(List<PriceAggregate> priceAggregates, bool isDeleteCombo)?
+        upsertCartItemsWithComboOffers,
+    TResult? Function(Price overriddenProductPrice)?
+        updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
+  }) {
+    return updatePriceForIdMarket?.call(product);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult Function(PriceAggregate item, List<PriceAggregate> items)?
+        verifyMaterialDealBonus,
+    TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addBonusToCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
+    TResult Function()? clearCart,
+    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
+    TResult Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addHistoryItemsToCart,
+    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(List<PriceAggregate> cartProducts)?
+        getDetailsProductsAddedToCart,
+    TResult Function(Map<MaterialNumber, Price> priceProducts)?
+        updatePriceProduct,
+    TResult Function()? updateProductStock,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
+    TResult Function(List<PriceAggregate> priceAggregates, bool isDeleteCombo)?
+        upsertCartItemsWithComboOffers,
+    TResult Function(Price overriddenProductPrice)?
+        updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
+    required TResult orElse(),
+  }) {
+    if (updatePriceForIdMarket != null) {
+      return updatePriceForIdMarket(product);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_VerifyMaterialDealBonus value)
+        verifyMaterialDealBonus,
+    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
+    required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
+    required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
+    required TResult Function(_UpsertCartItems value) upsertCartItems,
+    required TResult Function(_GetDetailsProductsAddedToCart value)
+        getDetailsProductsAddedToCart,
+    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
+    required TResult Function(_UpsertCartItemsWithComboOffers value)
+        upsertCartItemsWithComboOffers,
+    required TResult Function(_UpdateCartProductWithCounterOffer value)
+        updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
+  }) {
+    return updatePriceForIdMarket(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
+    TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
+    TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
+    TResult? Function(_UpsertCartItems value)? upsertCartItems,
+    TResult? Function(_GetDetailsProductsAddedToCart value)?
+        getDetailsProductsAddedToCart,
+    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
+    TResult? Function(_UpsertCartItemsWithComboOffers value)?
+        upsertCartItemsWithComboOffers,
+    TResult? Function(_UpdateCartProductWithCounterOffer value)?
+        updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
+  }) {
+    return updatePriceForIdMarket?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
+    TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
+    TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
+    TResult Function(_UpsertCartItems value)? upsertCartItems,
+    TResult Function(_GetDetailsProductsAddedToCart value)?
+        getDetailsProductsAddedToCart,
+    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
+    TResult Function(_UpsertCartItemsWithComboOffers value)?
+        upsertCartItemsWithComboOffers,
+    TResult Function(_UpdateCartProductWithCounterOffer value)?
+        updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
+    required TResult orElse(),
+  }) {
+    if (updatePriceForIdMarket != null) {
+      return updatePriceForIdMarket(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdatePriceForIdMarket implements CartEvent {
+  const factory _UpdatePriceForIdMarket(
+      {required final List<MaterialInfo> product}) = _$_UpdatePriceForIdMarket;
+
+  List<MaterialInfo> get product;
+  @JsonKey(ignore: true)
+  _$$_UpdatePriceForIdMarketCopyWith<_$_UpdatePriceForIdMarket> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchGrandTotalPriceForIdMarketCopyWith<$Res> {
+  factory _$$_FetchGrandTotalPriceForIdMarketCopyWith(
+          _$_FetchGrandTotalPriceForIdMarket value,
+          $Res Function(_$_FetchGrandTotalPriceForIdMarket) then) =
+      __$$_FetchGrandTotalPriceForIdMarketCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchGrandTotalPriceForIdMarketCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_FetchGrandTotalPriceForIdMarket>
+    implements _$$_FetchGrandTotalPriceForIdMarketCopyWith<$Res> {
+  __$$_FetchGrandTotalPriceForIdMarketCopyWithImpl(
+      _$_FetchGrandTotalPriceForIdMarket _value,
+      $Res Function(_$_FetchGrandTotalPriceForIdMarket) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchGrandTotalPriceForIdMarket
+    implements _FetchGrandTotalPriceForIdMarket {
+  const _$_FetchGrandTotalPriceForIdMarket();
+
+  @override
+  String toString() {
+    return 'CartEvent.fetchGrandTotalPriceForIdMarket()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchGrandTotalPriceForIdMarket);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)
+        initialized,
+    required TResult Function(PriceAggregate item, List<PriceAggregate> items)
+        verifyMaterialDealBonus,
+    required TResult Function(
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)
+        addBonusToCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
+    required TResult Function() clearCart,
+    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
+        upsertCart,
+    required TResult Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)
+        addHistoryItemsToCart,
+    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(List<PriceAggregate> cartProducts)
+        getDetailsProductsAddedToCart,
+    required TResult Function(Map<MaterialNumber, Price> priceProducts)
+        updatePriceProduct,
+    required TResult Function() updateProductStock,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
+    required TResult Function(
+            List<PriceAggregate> priceAggregates, bool isDeleteCombo)
+        upsertCartItemsWithComboOffers,
+    required TResult Function(Price overriddenProductPrice)
+        updateCartProductWithCounterOffer,
+    required TResult Function(List<MaterialInfo> product)
+        updatePriceForIdMarket,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
+  }) {
+    return fetchGrandTotalPriceForIdMarket();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult? Function(PriceAggregate item, List<PriceAggregate> items)?
+        verifyMaterialDealBonus,
+    TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addBonusToCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
+    TResult? Function()? clearCart,
+    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
+    TResult? Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addHistoryItemsToCart,
+    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(List<PriceAggregate> cartProducts)?
+        getDetailsProductsAddedToCart,
+    TResult? Function(Map<MaterialNumber, Price> priceProducts)?
+        updatePriceProduct,
+    TResult? Function()? updateProductStock,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
+    TResult? Function(List<PriceAggregate> priceAggregates, bool isDeleteCombo)?
+        upsertCartItemsWithComboOffers,
+    TResult? Function(Price overriddenProductPrice)?
+        updateCartProductWithCounterOffer,
+    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
+  }) {
+    return fetchGrandTotalPriceForIdMarket?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult Function(PriceAggregate item, List<PriceAggregate> items)?
+        verifyMaterialDealBonus,
+    TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addBonusToCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
+    TResult Function()? clearCart,
+    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
+    TResult Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addHistoryItemsToCart,
+    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(List<PriceAggregate> cartProducts)?
+        getDetailsProductsAddedToCart,
+    TResult Function(Map<MaterialNumber, Price> priceProducts)?
+        updatePriceProduct,
+    TResult Function()? updateProductStock,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
+    TResult Function(List<PriceAggregate> priceAggregates, bool isDeleteCombo)?
+        upsertCartItemsWithComboOffers,
+    TResult Function(Price overriddenProductPrice)?
+        updateCartProductWithCounterOffer,
+    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
+    required TResult orElse(),
+  }) {
+    if (fetchGrandTotalPriceForIdMarket != null) {
+      return fetchGrandTotalPriceForIdMarket();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_VerifyMaterialDealBonus value)
+        verifyMaterialDealBonus,
+    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
+    required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
+    required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
+    required TResult Function(_UpsertCartItems value) upsertCartItems,
+    required TResult Function(_GetDetailsProductsAddedToCart value)
+        getDetailsProductsAddedToCart,
+    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
+    required TResult Function(_UpsertCartItemsWithComboOffers value)
+        upsertCartItemsWithComboOffers,
+    required TResult Function(_UpdateCartProductWithCounterOffer value)
+        updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
+  }) {
+    return fetchGrandTotalPriceForIdMarket(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
+    TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
+    TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
+    TResult? Function(_UpsertCartItems value)? upsertCartItems,
+    TResult? Function(_GetDetailsProductsAddedToCart value)?
+        getDetailsProductsAddedToCart,
+    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
+    TResult? Function(_UpsertCartItemsWithComboOffers value)?
+        upsertCartItemsWithComboOffers,
+    TResult? Function(_UpdateCartProductWithCounterOffer value)?
+        updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
+  }) {
+    return fetchGrandTotalPriceForIdMarket?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
+    TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
+    TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
+    TResult Function(_UpsertCartItems value)? upsertCartItems,
+    TResult Function(_GetDetailsProductsAddedToCart value)?
+        getDetailsProductsAddedToCart,
+    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
+    TResult Function(_UpsertCartItemsWithComboOffers value)?
+        upsertCartItemsWithComboOffers,
+    TResult Function(_UpdateCartProductWithCounterOffer value)?
+        updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
+    required TResult orElse(),
+  }) {
+    if (fetchGrandTotalPriceForIdMarket != null) {
+      return fetchGrandTotalPriceForIdMarket(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchGrandTotalPriceForIdMarket implements CartEvent {
+  const factory _FetchGrandTotalPriceForIdMarket() =
+      _$_FetchGrandTotalPriceForIdMarket;
+}
+
+/// @nodoc
 mixin _$CartState {
   List<PriceAggregate> get cartProducts => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
@@ -4670,6 +5519,7 @@ mixin _$CartState {
   bool get isMappingPrice => throw _privateConstructorUsedError;
   bool get isUpdatingStock => throw _privateConstructorUsedError;
   bool get isBuyAgain => throw _privateConstructorUsedError;
+  bool get isAplProductLoading => throw _privateConstructorUsedError;
   bool get isDeleteCombo => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
@@ -4680,6 +5530,7 @@ mixin _$CartState {
       throw _privateConstructorUsedError;
   List<int> get upsertBonusItemInProgressHashCode =>
       throw _privateConstructorUsedError;
+  AplSimulatorOrder get aplSimulatorOrder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CartStateCopyWith<CartState> get copyWith =>
@@ -4702,6 +5553,7 @@ abstract class $CartStateCopyWith<$Res> {
       bool isMappingPrice,
       bool isUpdatingStock,
       bool isBuyAgain,
+      bool isAplProductLoading,
       bool isDeleteCombo,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
@@ -4709,13 +5561,15 @@ abstract class $CartStateCopyWith<$Res> {
       SalesOrganisationConfigs config,
       User user,
       Map<MaterialNumber, ProductMetaData> additionInfo,
-      List<int> upsertBonusItemInProgressHashCode});
+      List<int> upsertBonusItemInProgressHashCode,
+      AplSimulatorOrder aplSimulatorOrder});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $SalesOrganisationConfigsCopyWith<$Res> get config;
   $UserCopyWith<$Res> get user;
+  $AplSimulatorOrderCopyWith<$Res> get aplSimulatorOrder;
 }
 
 /// @nodoc
@@ -4741,6 +5595,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
     Object? isMappingPrice = null,
     Object? isUpdatingStock = null,
     Object? isBuyAgain = null,
+    Object? isAplProductLoading = null,
     Object? isDeleteCombo = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
@@ -4749,6 +5604,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
     Object? user = null,
     Object? additionInfo = null,
     Object? upsertBonusItemInProgressHashCode = null,
+    Object? aplSimulatorOrder = null,
   }) {
     return _then(_value.copyWith(
       cartProducts: null == cartProducts
@@ -4791,6 +5647,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
           ? _value.isBuyAgain
           : isBuyAgain // ignore: cast_nullable_to_non_nullable
               as bool,
+      isAplProductLoading: null == isAplProductLoading
+          ? _value.isAplProductLoading
+          : isAplProductLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       isDeleteCombo: null == isDeleteCombo
           ? _value.isDeleteCombo
           : isDeleteCombo // ignore: cast_nullable_to_non_nullable
@@ -4824,6 +5684,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
           ? _value.upsertBonusItemInProgressHashCode
           : upsertBonusItemInProgressHashCode // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      aplSimulatorOrder: null == aplSimulatorOrder
+          ? _value.aplSimulatorOrder
+          : aplSimulatorOrder // ignore: cast_nullable_to_non_nullable
+              as AplSimulatorOrder,
     ) as $Val);
   }
 
@@ -4866,6 +5730,14 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AplSimulatorOrderCopyWith<$Res> get aplSimulatorOrder {
+    return $AplSimulatorOrderCopyWith<$Res>(_value.aplSimulatorOrder, (value) {
+      return _then(_value.copyWith(aplSimulatorOrder: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -4886,6 +5758,7 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
       bool isMappingPrice,
       bool isUpdatingStock,
       bool isBuyAgain,
+      bool isAplProductLoading,
       bool isDeleteCombo,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
@@ -4893,7 +5766,8 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
       SalesOrganisationConfigs config,
       User user,
       Map<MaterialNumber, ProductMetaData> additionInfo,
-      List<int> upsertBonusItemInProgressHashCode});
+      List<int> upsertBonusItemInProgressHashCode,
+      AplSimulatorOrder aplSimulatorOrder});
 
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -4905,6 +5779,8 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
   $SalesOrganisationConfigsCopyWith<$Res> get config;
   @override
   $UserCopyWith<$Res> get user;
+  @override
+  $AplSimulatorOrderCopyWith<$Res> get aplSimulatorOrder;
 }
 
 /// @nodoc
@@ -4928,6 +5804,7 @@ class __$$_CartStateCopyWithImpl<$Res>
     Object? isMappingPrice = null,
     Object? isUpdatingStock = null,
     Object? isBuyAgain = null,
+    Object? isAplProductLoading = null,
     Object? isDeleteCombo = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
@@ -4936,6 +5813,7 @@ class __$$_CartStateCopyWithImpl<$Res>
     Object? user = null,
     Object? additionInfo = null,
     Object? upsertBonusItemInProgressHashCode = null,
+    Object? aplSimulatorOrder = null,
   }) {
     return _then(_$_CartState(
       cartProducts: null == cartProducts
@@ -4978,6 +5856,10 @@ class __$$_CartStateCopyWithImpl<$Res>
           ? _value.isBuyAgain
           : isBuyAgain // ignore: cast_nullable_to_non_nullable
               as bool,
+      isAplProductLoading: null == isAplProductLoading
+          ? _value.isAplProductLoading
+          : isAplProductLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       isDeleteCombo: null == isDeleteCombo
           ? _value.isDeleteCombo
           : isDeleteCombo // ignore: cast_nullable_to_non_nullable
@@ -5011,6 +5893,10 @@ class __$$_CartStateCopyWithImpl<$Res>
           ? _value._upsertBonusItemInProgressHashCode
           : upsertBonusItemInProgressHashCode // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      aplSimulatorOrder: null == aplSimulatorOrder
+          ? _value.aplSimulatorOrder
+          : aplSimulatorOrder // ignore: cast_nullable_to_non_nullable
+              as AplSimulatorOrder,
     ));
   }
 }
@@ -5029,6 +5915,7 @@ class _$_CartState extends _CartState {
       required this.isMappingPrice,
       required this.isUpdatingStock,
       required this.isBuyAgain,
+      required this.isAplProductLoading,
       required this.isDeleteCombo,
       required this.salesOrganisation,
       required this.customerCodeInfo,
@@ -5036,7 +5923,8 @@ class _$_CartState extends _CartState {
       required this.config,
       required this.user,
       required final Map<MaterialNumber, ProductMetaData> additionInfo,
-      required final List<int> upsertBonusItemInProgressHashCode})
+      required final List<int> upsertBonusItemInProgressHashCode,
+      required this.aplSimulatorOrder})
       : _cartProducts = cartProducts,
         _additionInfo = additionInfo,
         _upsertBonusItemInProgressHashCode = upsertBonusItemInProgressHashCode,
@@ -5069,6 +5957,8 @@ class _$_CartState extends _CartState {
   @override
   final bool isBuyAgain;
   @override
+  final bool isAplProductLoading;
+  @override
   final bool isDeleteCombo;
   @override
   final SalesOrganisation salesOrganisation;
@@ -5098,8 +5988,11 @@ class _$_CartState extends _CartState {
   }
 
   @override
+  final AplSimulatorOrder aplSimulatorOrder;
+
+  @override
   String toString() {
-    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, isBuyAgain: $isBuyAgain, isDeleteCombo: $isDeleteCombo, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, user: $user, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode)';
+    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, isBuyAgain: $isBuyAgain, isAplProductLoading: $isAplProductLoading, isDeleteCombo: $isDeleteCombo, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, user: $user, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode, aplSimulatorOrder: $aplSimulatorOrder)';
   }
 
   @override
@@ -5130,6 +6023,8 @@ class _$_CartState extends _CartState {
                 other.isUpdatingStock == isUpdatingStock) &&
             (identical(other.isBuyAgain, isBuyAgain) ||
                 other.isBuyAgain == isBuyAgain) &&
+            (identical(other.isAplProductLoading, isAplProductLoading) ||
+                other.isAplProductLoading == isAplProductLoading) &&
             (identical(other.isDeleteCombo, isDeleteCombo) ||
                 other.isDeleteCombo == isDeleteCombo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -5144,30 +6039,35 @@ class _$_CartState extends _CartState {
                 .equals(other._additionInfo, _additionInfo) &&
             const DeepCollectionEquality().equals(
                 other._upsertBonusItemInProgressHashCode,
-                _upsertBonusItemInProgressHashCode));
+                _upsertBonusItemInProgressHashCode) &&
+            (identical(other.aplSimulatorOrder, aplSimulatorOrder) ||
+                other.aplSimulatorOrder == aplSimulatorOrder));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_cartProducts),
-      apiFailureOrSuccessOption,
-      isFetching,
-      isClearing,
-      isFetchingBonus,
-      isFetchingCartProductDetail,
-      isUpserting,
-      isMappingPrice,
-      isUpdatingStock,
-      isBuyAgain,
-      isDeleteCombo,
-      salesOrganisation,
-      customerCodeInfo,
-      shipToInfo,
-      config,
-      user,
-      const DeepCollectionEquality().hash(_additionInfo),
-      const DeepCollectionEquality().hash(_upsertBonusItemInProgressHashCode));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(_cartProducts),
+        apiFailureOrSuccessOption,
+        isFetching,
+        isClearing,
+        isFetchingBonus,
+        isFetchingCartProductDetail,
+        isUpserting,
+        isMappingPrice,
+        isUpdatingStock,
+        isBuyAgain,
+        isAplProductLoading,
+        isDeleteCombo,
+        salesOrganisation,
+        customerCodeInfo,
+        shipToInfo,
+        config,
+        user,
+        const DeepCollectionEquality().hash(_additionInfo),
+        const DeepCollectionEquality().hash(_upsertBonusItemInProgressHashCode),
+        aplSimulatorOrder
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -5178,26 +6078,27 @@ class _$_CartState extends _CartState {
 
 abstract class _CartState extends CartState {
   const factory _CartState(
-          {required final List<PriceAggregate> cartProducts,
-          required final Option<Either<ApiFailure, dynamic>>
-              apiFailureOrSuccessOption,
-          required final bool isFetching,
-          required final bool isClearing,
-          required final bool isFetchingBonus,
-          required final bool isFetchingCartProductDetail,
-          required final bool isUpserting,
-          required final bool isMappingPrice,
-          required final bool isUpdatingStock,
-          required final bool isBuyAgain,
-          required final bool isDeleteCombo,
-          required final SalesOrganisation salesOrganisation,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final ShipToInfo shipToInfo,
-          required final SalesOrganisationConfigs config,
-          required final User user,
-          required final Map<MaterialNumber, ProductMetaData> additionInfo,
-          required final List<int> upsertBonusItemInProgressHashCode}) =
-      _$_CartState;
+      {required final List<PriceAggregate> cartProducts,
+      required final Option<Either<ApiFailure, dynamic>>
+          apiFailureOrSuccessOption,
+      required final bool isFetching,
+      required final bool isClearing,
+      required final bool isFetchingBonus,
+      required final bool isFetchingCartProductDetail,
+      required final bool isUpserting,
+      required final bool isMappingPrice,
+      required final bool isUpdatingStock,
+      required final bool isBuyAgain,
+      required final bool isAplProductLoading,
+      required final bool isDeleteCombo,
+      required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final SalesOrganisationConfigs config,
+      required final User user,
+      required final Map<MaterialNumber, ProductMetaData> additionInfo,
+      required final List<int> upsertBonusItemInProgressHashCode,
+      required final AplSimulatorOrder aplSimulatorOrder}) = _$_CartState;
   const _CartState._() : super._();
 
   @override
@@ -5221,6 +6122,8 @@ abstract class _CartState extends CartState {
   @override
   bool get isBuyAgain;
   @override
+  bool get isAplProductLoading;
+  @override
   bool get isDeleteCombo;
   @override
   SalesOrganisation get salesOrganisation;
@@ -5236,6 +6139,8 @@ abstract class _CartState extends CartState {
   Map<MaterialNumber, ProductMetaData> get additionInfo;
   @override
   List<int> get upsertBonusItemInProgressHashCode;
+  @override
+  AplSimulatorOrder get aplSimulatorOrder;
   @override
   @JsonKey(ignore: true)
   _$$_CartStateCopyWith<_$_CartState> get copyWith =>

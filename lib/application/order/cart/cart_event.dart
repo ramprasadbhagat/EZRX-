@@ -73,4 +73,11 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.updateCartProductWithCounterOffer({
     required Price overriddenProductPrice,
   }) = _UpdateCartProductWithCounterOffer;
+
+  const factory CartEvent.updatePriceForIdMarket({
+    required List<MaterialInfo> product,
+  }) = _UpdatePriceForIdMarket;
+
+  const factory CartEvent.fetchGrandTotalPriceForIdMarket() =
+      _FetchGrandTotalPriceForIdMarket;
 }

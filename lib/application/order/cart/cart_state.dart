@@ -15,6 +15,7 @@ class CartState with _$CartState {
     required bool isMappingPrice,
     required bool isUpdatingStock,
     required bool isBuyAgain,
+    required bool isAplProductLoading,
     required bool isDeleteCombo,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -23,6 +24,7 @@ class CartState with _$CartState {
     required User user,
     required Map<MaterialNumber, ProductMetaData> additionInfo,
     required List<int> upsertBonusItemInProgressHashCode,
+    required AplSimulatorOrder aplSimulatorOrder,
   }) = _CartState;
 
   factory CartState.initial() => CartState(
@@ -44,6 +46,8 @@ class CartState with _$CartState {
         salesOrganisation: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         isDeleteCombo: false,
+        aplSimulatorOrder: AplSimulatorOrder.empty(),
+        isAplProductLoading: false,
       );
 
   bool get containCovidMaterial =>
@@ -204,7 +208,10 @@ class CartState with _$CartState {
           )
       : 0.0;
 
-  double get totalTax => taxMaterial + taxCombo;
+  double get totalTax =>
+      _isID ? aplSimulatorOrder.totalTax : taxMaterial + taxCombo;
+
+  bool get _isID => salesOrganisation.salesOrg.isID;
 
   double itemPrice({required int index}) {
     final cartProductsTemp = cartProducts.elementAt(index);
@@ -319,10 +326,11 @@ class CartState with _$CartState {
       );
 
   //Subtotal and total display with hidePrice for display on
-  double get grandTotalHidePriceMaterial =>
-      totalBundlePriceWithTax +
-      totalComboPriceWithTax +
-      totalMaterialsPriceHidePriceWithTax;
+  double get grandTotalHidePriceMaterial => _isID
+      ? aplSimulatorOrder.grandTotal
+      : totalBundlePriceWithTax +
+          totalComboPriceWithTax +
+          totalMaterialsPriceHidePriceWithTax;
 
   double get subTotalHidePriceMaterial =>
       totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice;
@@ -375,6 +383,9 @@ class CartState with _$CartState {
       .replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '');
 
   double get _totalTaxPercentInDouble {
+    if (_isID) {
+      return salesOrganisation.salesOrg.orderTaxValue.toDouble();
+    }
     if (!config.isMarketEligibleForTaxClassification) {
       return config.vatValue.toDouble();
     }
@@ -481,4 +492,9 @@ class CartState with _$CartState {
     );
 
   String get taxTitlePercent => config.salesOrg.isVN ? '' : '$totalTaxPercent%';
+
+  //Todo : Need to implement for other market, Implemented only for ID market
+  String get getDiscountPrice => salesOrganisation.salesOrg.isID
+      ? aplSimulatorOrder.totalDiscountValue.toString()
+      : 0.toString();
 }

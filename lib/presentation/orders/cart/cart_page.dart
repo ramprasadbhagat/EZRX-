@@ -18,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
@@ -129,6 +130,9 @@ class _CartPageState extends State<CartPage> {
                     CartEvent.updatePriceProduct(
                       priceProducts: state.materialPrice,
                     ),
+                  );
+              context.read<CartBloc>().add(
+                    const CartEvent.fetchGrandTotalPriceForIdMarket(),
                   );
             }
           },

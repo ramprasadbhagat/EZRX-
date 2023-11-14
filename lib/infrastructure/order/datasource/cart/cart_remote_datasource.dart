@@ -5,10 +5,13 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/apl_simulator_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/apl_get_total_price_dto.dart';
 
 class CartRemoteDataSource {
   HttpService httpService;
@@ -55,7 +58,7 @@ class CartRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}cart',
+        url: '${config.urlConstants}order',
         data: jsonEncode(
           {
             'query': cartQueryMutation.deleteCartMutation(),
@@ -177,6 +180,77 @@ class CartRemoteDataSource {
       return List.from(makeResponseCamelCase(jsonEncode(productList)))
           .map((e) => CartProductDto.fromJson(e).toDomain)
           .toList();
+    });
+  }
+
+  Future<AplSimulatorOrder> aplSimulateOrder({
+    required String salesOrgCode,
+    required String customerCode,
+    required List<Map<String, String>> materialQuantityPairList,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final query = cartQueryMutation.aplSimulateOrderQuery();
+      final variables = {
+        'input': {
+          'customer': customerCode,
+          'materials': materialQuantityPairList,
+          'salesOrg': salesOrgCode,
+        },
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}order',
+        data: jsonEncode(
+          {
+            'query': query,
+            'variables': variables,
+          },
+        ),
+        apiEndpoint: 'aplSimulateOrder',
+      );
+
+      _exceptionChecker(res: res);
+
+      return AplSimulatorOrderDto.fromJson(res.data['data']['aplSimulateOrder'])
+          .toDomain;
+    });
+  }
+
+  Future<AplSimulatorOrder> aplGetTotalPrice({
+    required double totalPrice,
+    required String salesOrgCode,
+    required String customerCode,
+    required List<String> materialNumbers,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final query = cartQueryMutation.aplGetTotalPrice();
+      final variables = {
+        'AplGetTotalPrice': {
+          'Customer': customerCode,
+          'Amount': totalPrice,
+          'MaterialNumber': materialNumbers,
+          'SalesOrg': salesOrgCode,
+        },
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}price',
+        data: jsonEncode(
+          {
+            'query': query,
+            'variables': variables,
+          },
+        ),
+        apiEndpoint: 'AplGetTotalPrice',
+      );
+
+      _exceptionChecker(res: res);
+
+      return AplSimulatorOrder.empty().copyWith(
+        grandTotal:
+            AplGetTotalPriceDto.fromJson(res.data['data']['AplGetTotalPrice'])
+                .getGrandTotalValue,
+      );
     });
   }
 

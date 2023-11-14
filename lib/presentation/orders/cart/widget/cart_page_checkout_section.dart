@@ -47,16 +47,33 @@ class _CartPageCheckoutSection extends StatelessWidget {
                 key: WidgetKeys.cartTotalQty,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              trailing: PriceComponent(
-                key: WidgetKeys.grandTotalKey,
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: state.grandTotalHidePriceMaterial.toString(),
-                title: 'Grand total: '.tr(),
-                priceLabelStyle:
-                    Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: ZPColors.extraLightGrey4,
-                        ),
+              trailing: BlocBuilder<CartBloc, CartState>(
+                buildWhen: (previous, current) =>
+                    previous.isUpserting != current.isUpserting ||
+                    previous.isAplProductLoading != current.isAplProductLoading,
+                builder: (context, state) {
+                  if (state.isUpserting || state.isAplProductLoading) {
+                    return SizedBox(
+                      width:
+                          Responsive.isLargerThan(context, Breakpoint.desktop)
+                              ? MediaQuery.of(context).size.width * 0.2
+                              : MediaQuery.of(context).size.width * 0.3,
+                      child: LoadingShimmer.tile(),
+                    );
+                  }
+                  
+                  return PriceComponent(
+                    key: WidgetKeys.grandTotalKey,
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                    price: state.grandTotalHidePriceMaterial.toString(),
+                    title: 'Grand total: '.tr(),
+                    priceLabelStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.extraLightGrey4,
+                            ),
+                  );
+                },
               ),
             ),
             _CartPageCheckoutButton(),
@@ -144,10 +161,10 @@ class _CartPageCheckoutButton extends StatelessWidget {
   }
 
   void _showPreOrderModal({required BuildContext context}) {
+    final cartState = context.read<CartBloc>().state;
     showModalBottomSheet(
       context: context,
-      isScrollControlled:
-          context.read<CartBloc>().state.isHavingMoreThanOnePreOrderInCart,
+      isScrollControlled: cartState.isHavingMoreThanOnePreOrderInCart,
       enableDrag: false,
       isDismissible: false,
       useSafeArea: true,
@@ -163,6 +180,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
     ).then(
       (value) {
         if (value == null) return;
+        _callApiForId(context, cartState);
         context.router.pushNamed('orders/cart/checkout');
       },
     );
@@ -185,6 +203,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
       if (preOrderItemExist) {
         _showPreOrderModal(context: context);
       } else {
+        _callApiForId(context, cartState);
         context.router.pushNamed('orders/cart/checkout');
       }
     } else {
@@ -201,5 +220,15 @@ class _CartPageCheckoutButton extends StatelessWidget {
     context.read<OrderEligibilityBloc>().add(
           const OrderEligibilityEvent.validateOrderEligibility(),
         );
+  }
+
+  void _callApiForId(BuildContext context, CartState cartState) {
+    if (cartState.salesOrganisation.salesOrg.isID) {
+      context.read<CartBloc>().add(
+            CartEvent.updatePriceForIdMarket(
+              product: cartState.cartProducts.materialInfos,
+            ),
+          );
+    }
   }
 }

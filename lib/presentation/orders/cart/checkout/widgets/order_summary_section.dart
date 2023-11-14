@@ -26,23 +26,25 @@ class _OrderSummarySection extends StatelessWidget {
           children: [
             Text(
               context.tr(
-                'Subtotal (${salesOrgConfig.displaySubtotalTaxBreakdown ? "excl" : "incl"}.tax):',
+                'Subtotal (${salesOrgConfig.displayPrefixTax}.tax):',
               ),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
             ),
-            PriceComponent(
-              salesOrgConfig: salesOrgConfig,
-              price: cartState.subTotalHidePriceMaterial.toString(),
-              type: PriceStyle.summaryPrice,
+            _DisplayPrice(
+              priceComponent: PriceComponent(
+                salesOrgConfig: salesOrgConfig,
+                price: cartState.subTotalHidePriceMaterial.toString(),
+                type: PriceStyle.summaryPrice,
+              ),
             ),
           ],
         ),
-        if (salesOrgConfig.displaySubtotalTaxBreakdown)
+        if (salesOrgConfig.showSubtotalTaxBreakdown)
           _TaxWidget(cartState: cartState),
         if (cartState.salesOrganisation.salesOrg.showSmallOrderFee)
-          const _SmallOrderFee(),
+          _SmallOrderFee(cartState: cartState),
         const SizedBox(height: 4.0),
         const Divider(
           thickness: 1,
@@ -61,10 +63,12 @@ class _OrderSummarySection extends StatelessWidget {
                     color: ZPColors.neutralsBlack,
                   ),
             ),
-            PriceComponent(
-              salesOrgConfig: salesOrgConfig,
-              price: cartState.grandTotalHidePriceMaterial.toString(),
-              type: PriceStyle.totalPrice,
+            _DisplayPrice(
+              priceComponent: PriceComponent(
+                salesOrgConfig: salesOrgConfig,
+                price: cartState.grandTotalHidePriceMaterial.toString(),
+                type: PriceStyle.totalPrice,
+              ),
             ),
           ],
         ),
@@ -79,10 +83,12 @@ class _OrderSummarySection extends StatelessWidget {
                     color: ZPColors.neutralsBlack,
                   ),
             ),
-            PriceComponent(
-              salesOrgConfig: salesOrgConfig,
-              price: 0.toString(),
-              type: PriceStyle.summaryPrice,
+            _DisplayPrice(
+              priceComponent: PriceComponent(
+                salesOrgConfig: salesOrgConfig,
+                price: cartState.getDiscountPrice,
+                type: PriceStyle.summaryPrice,
+              ),
             ),
           ],
         ),
@@ -112,10 +118,12 @@ class _TaxWidget extends StatelessWidget {
                     color: ZPColors.neutralsBlack,
                   ),
             ),
-            PriceComponent(
-              salesOrgConfig: salesOrgConfig,
-              price: cartState.totalTax.toString(),
-              type: PriceStyle.summaryPrice,
+            _DisplayPrice(
+              priceComponent: PriceComponent(
+                salesOrgConfig: salesOrgConfig,
+                price: cartState.totalTax.toString(),
+                type: PriceStyle.summaryPrice,
+              ),
             ),
           ],
         ),
@@ -133,7 +141,8 @@ class _TaxWidget extends StatelessWidget {
 }
 
 class _SmallOrderFee extends StatelessWidget {
-  const _SmallOrderFee({Key? key}) : super(key: key);
+  const _SmallOrderFee({Key? key, required this.cartState}) : super(key: key);
+  final CartState cartState;
 
   @override
   Widget build(BuildContext context) {
@@ -153,10 +162,12 @@ class _SmallOrderFee extends StatelessWidget {
                     color: ZPColors.neutralsBlack,
                   ),
             ),
-            PriceComponent(
-              salesOrgConfig: eligibilityState.salesOrgConfigs,
-              price: 0.toString(),
-              type: PriceStyle.summaryPrice,
+            _DisplayPrice(
+              priceComponent: PriceComponent(
+                salesOrgConfig: eligibilityState.salesOrgConfigs,
+                price: cartState.aplSimulatorOrder.smallOrderFee.toString(),
+                type: PriceStyle.summaryPrice,
+              ),
             ),
           ],
         ),
@@ -172,6 +183,35 @@ class _SmallOrderFee extends StatelessWidget {
               ),
         ),
       ],
+    );
+  }
+}
+
+class _DisplayPrice extends StatelessWidget {
+  const _DisplayPrice({
+    Key? key,
+    required this.priceComponent,
+  }) : super(key: key);
+
+  final PriceComponent priceComponent;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) =>
+          previous.aplSimulatorOrder != current.aplSimulatorOrder,
+      builder: (context, state) {
+        if (state.isAplProductLoading) {
+          return SizedBox(
+            width: Responsive.isLargerThan(context, Breakpoint.desktop)
+                ? MediaQuery.of(context).size.width * 0.2
+                : MediaQuery.of(context).size.width * 0.3,
+            child: LoadingShimmer.tile(),
+          );
+        }
+
+        return priceComponent;
+      },
     );
   }
 }

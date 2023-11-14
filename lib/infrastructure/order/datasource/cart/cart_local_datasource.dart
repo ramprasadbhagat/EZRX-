@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/apl_simulator_order_dto.dart';
 import 'package:flutter/services.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 
 class CartLocalDataSource {
   CartLocalDataSource();
@@ -42,14 +44,35 @@ class CartLocalDataSource {
         .toList();
   }
 
-    Future<List<PriceAggregate>> upsertCartItemsWithComboOffers() async {
+  Future<List<PriceAggregate>> upsertCartItemsWithComboOffers() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/upsertCartItemsWithComboOffersResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/upsertCartItemsWithComboOffersResponse.json',
+      ),
     );
     final products = data['data']['upsertCartItems']['EzRxItems'];
 
     return List.from(makeResponseCamelCase(jsonEncode(products)))
         .map((e) => CartProductDto.fromJson(e).toDomain)
         .toList();
+  }
+
+  Future<AplSimulatorOrder> aplSimulateOrder() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/aplSimulateOrderResponse.json'),
+    );
+    final aplSimulatorOrder = data['data']['aplSimulateOrder'];
+
+    return AplSimulatorOrderDto.fromJson(aplSimulatorOrder).toDomain;
+  }
+
+  Future<AplSimulatorOrder> aplGetTotalPrice() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/aplGetTotalPriceResponse.json'),
+    );
+    final totalPrice = data['data']['AplGetTotalPrice']['TotalPrice'];
+
+    return AplSimulatorOrder.empty()
+        .copyWith(grandTotal: double.parse(totalPrice.toString()));
   }
 }

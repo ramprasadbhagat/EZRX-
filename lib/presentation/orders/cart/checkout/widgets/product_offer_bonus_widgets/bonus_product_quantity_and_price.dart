@@ -7,6 +7,8 @@ class _QuantityAndPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return Padding(
       key: WidgetKeys.quantityAndPrice,
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
@@ -17,12 +19,18 @@ class _QuantityAndPrice extends StatelessWidget {
             '${'Qty:'.tr()} ${bonusItem.qty.toString()}',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(),
           ),
-          Text(
-            'FREE'.tr(),
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: ZPColors.primary,
+          eligibilityState.isIDMarket
+              ? PriceComponent(
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
+                  price: '0',
+                )
+              : Text(
+                  'FREE'.tr(),
+                  key: WidgetKeys.cartItemBonusFreeLabel,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: ZPColors.textButtonColor,
+                      ),
                 ),
-          ),
         ],
       ),
     );

@@ -1,0 +1,25 @@
+{
+  "aplSimulateOrder": {
+    "netTotalValue": 7163940,
+    "tax": 709940,
+    "totalDiscValue": 0,
+    "beforeTax": 6454000,
+    "deliveryFee": null,
+    "products": [
+      {
+        "material": "000000003353621001",
+        "productQty": 1,
+        "productPriceNetValue": 5734000,
+        "taxValue": 630740,
+        "netValue": 5734000
+      },
+      {
+        "material": "JSR55",
+        "productQty": 1,
+        "productPriceNetValue": 720000,
+        "taxValue": 79200,
+        "netValue": 720000
+      }
+    ]
+  }
+}

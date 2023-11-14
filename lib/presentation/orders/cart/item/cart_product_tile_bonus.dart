@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -116,6 +118,8 @@ class _ItemSubTotalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return Padding(
       padding: const EdgeInsets.only(
         right: 8,
@@ -123,14 +127,18 @@ class _ItemSubTotalSection extends StatelessWidget {
       ),
       child: Align(
         alignment: Alignment.centerRight,
-        child: Text(
-          'FREE'.tr(),
-          key: WidgetKeys.cartItemBonusSampleFreeLabel,
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: ZPColors.textButtonColor,
-                fontWeight: FontWeight.w700,
+        child: eligibilityState.isIDMarket
+            ? PriceComponent(
+                salesOrgConfig: eligibilityState.salesOrgConfigs,
+                price: '0',
+              )
+            : Text(
+                'FREE'.tr(),
+                key: WidgetKeys.cartItemBonusFreeLabel,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ZPColors.textButtonColor,
+                    ),
               ),
-        ),
       ),
     );
   }
@@ -162,7 +170,8 @@ class _MaterialDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              const BonusTag(),
+              if (!context.read<EligibilityBloc>().state.isIDMarket)
+                const BonusTag(),
             ],
           ),
           Padding(

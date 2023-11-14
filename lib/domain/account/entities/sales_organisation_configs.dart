@@ -244,4 +244,9 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   DateTime get deliveryEndDate => DateUtils.dateOnly(
         DateTime.now().add(Duration(days: futureDeliveryDay.intValue)),
       );
+
+  bool get showSubtotalTaxBreakdown =>
+      displaySubtotalTaxBreakdown || salesOrg.isID;
+
+  String get displayPrefixTax => showSubtotalTaxBreakdown ? 'excl' : 'incl';
 }

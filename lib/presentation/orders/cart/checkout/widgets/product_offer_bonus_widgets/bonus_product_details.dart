@@ -6,6 +6,8 @@ class _ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return Expanded(
       key: WidgetKeys.bonusProductDetail,
       child: Column(
@@ -22,7 +24,7 @@ class _ProductDetails extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              const BonusTag(),
+              if (!eligibilityState.isIDMarket) const BonusTag(),
             ],
           ),
           const SizedBox(
@@ -33,12 +35,18 @@ class _ProductDetails extends StatelessWidget {
             maxLines: 2,
             style: Theme.of(context).textTheme.labelSmall,
           ),
-          Text(
-            'FREE'.tr(),
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.extraLightGrey4,
+          eligibilityState.isIDMarket
+              ? PriceComponent(
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
+                  price: '0',
+                )
+              : Text(
+                  'FREE'.tr(),
+                  key: WidgetKeys.cartItemBonusFreeLabel,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: ZPColors.textButtonColor,
+                      ),
                 ),
-          ),
         ],
       ),
     );

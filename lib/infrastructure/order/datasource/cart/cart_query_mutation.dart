@@ -1386,4 +1386,31 @@ mutation UpsertCartItems(\$itemInput: [ItemInput!]) {
   }
 }
 ''';
+
+  String aplSimulateOrderQuery() => '''
+    query aplSimulateOrder(\$input: AplSimulateOrderRequest!) {
+      aplSimulateOrder(input: \$input) {
+        netTotalValue
+        tax
+        totalDiscValue
+        beforeTax
+        deliveryFee
+        products {
+          material
+          productQty
+          productPriceNetValue
+          taxValue
+          netValue
+        }
+      }
+    }
+    ''';
+
+  String aplGetTotalPrice() => '''
+    query aplGetTotalPrice(\$AplGetTotalPrice: AplGetTotalPriceRequest!) {
+      AplGetTotalPrice(request: \$AplGetTotalPrice) {
+        TotalPrice
+      }
+    }
+    ''';
 }

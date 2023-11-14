@@ -79,6 +79,8 @@ class _ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +96,7 @@ class _ProductDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              const BonusTag(),
+              if (!eligibilityState.isIDMarket) const BonusTag(),
             ],
           ),
           Padding(
@@ -105,12 +107,18 @@ class _ProductDetails extends StatelessWidget {
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-          Text(
-            'FREE'.tr(),
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.extraLightGrey4,
+          eligibilityState.isIDMarket
+              ? PriceComponent(
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
+                  price: '0',
+                )
+              : Text(
+                  'FREE'.tr(),
+                  key: WidgetKeys.cartItemBonusFreeLabel,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: ZPColors.textButtonColor,
+                      ),
                 ),
-          ),
         ],
       ),
     );
@@ -124,6 +132,8 @@ class _QuantityAndPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
       child: Row(
@@ -135,12 +145,18 @@ class _QuantityAndPrice extends StatelessWidget {
                   color: ZPColors.neutralsBlack,
                 ),
           ),
-          Text(
-            'FREE'.tr(),
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: ZPColors.primary,
+          eligibilityState.isIDMarket
+              ? PriceComponent(
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
+                  price: '0',
+                )
+              : Text(
+                  'FREE'.tr(),
+                  key: WidgetKeys.cartItemBonusFreeLabel,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: ZPColors.textButtonColor,
+                      ),
                 ),
-          ),
         ],
       ),
     );

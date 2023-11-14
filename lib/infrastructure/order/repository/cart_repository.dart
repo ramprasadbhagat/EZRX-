@@ -25,6 +25,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.da
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_product_request_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 
 class CartRepository implements ICartRepository {
   final Config config;
@@ -641,6 +642,76 @@ class CartRepository implements ICartRepository {
       );
 
       return Right(productList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, AplSimulatorOrder>> aplSimulateOrder({
+    required List<MaterialInfo> product,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final aplSimulatorOrder = await cartLocalDataSource.aplSimulateOrder();
+
+        return Right(aplSimulatorOrder);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final materialQuantityPairList = product.map((item) {
+        return {
+          'material': item.materialNumber.getOrCrash(),
+          'quantity': item.quantity.intValue.toString(),
+        };
+      }).toList();
+
+      final aplSimulatorOrder = await cartRemoteDataSource.aplSimulateOrder(
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+        materialQuantityPairList: materialQuantityPairList,
+      );
+
+      return Right(aplSimulatorOrder);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, AplSimulatorOrder>>
+      fetchGrandTotalPriceForIdMarket({
+    required List<MaterialNumber> materialNumbers,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required double totalPrice,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final aplSimulatorOrder = await cartLocalDataSource.aplGetTotalPrice();
+
+        return Right(aplSimulatorOrder);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final materialNumberList =
+          materialNumbers.map((item) => item.getOrCrash()).toList();
+
+      final aplSimulatorOrder =
+          await cartRemoteDataSource.aplGetTotalPrice(
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+        materialNumbers: materialNumberList,
+        totalPrice: totalPrice,
+      );
+
+      return Right(aplSimulatorOrder);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

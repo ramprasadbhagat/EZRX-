@@ -25,6 +25,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
@@ -61,11 +62,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
     DeliveryInfoLabel.paymentTerm: FocusNode(),
   };
 
-  late CartState cartState;
-
   @override
   void initState() {
-    cartState = context.read<CartBloc>().state;
     super.initState();
   }
 
@@ -88,224 +86,245 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: WidgetKeys.checkoutPage,
-      appBar: AppBar(
-        title: Text(
-          context.tr('Checkout'),
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        centerTitle: false,
-        titleSpacing: 0,
-        leading: IconButton(
-          key: WidgetKeys.closeButton,
-          icon: const Icon(
-            Icons.close,
-          ),
-          onPressed: () {
-            context.router.pop();
-          },
-        ),
-      ),
-      body: CustomScrollView(
-        key: WidgetKeys.checkoutScrollList,
-        slivers: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-              ),
-              child: AddressInfoSection.noAction(),
-            ),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
-          _DeliveryInfo(focusNodes: _focusNodes),
-          const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
-          const SliverToBoxAdapter(
-            child: Divider(
-              indent: 0,
-              thickness: 1,
-              endIndent: 0,
-              height: 1,
-              color: ZPColors.extraLightGrey2,
-            ),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
-          const SliverToBoxAdapter(child: _TotalItems()),
-          const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
-          _ProductScrollList(cartState: cartState),
-          const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
-          const SliverToBoxAdapter(
-            child: Divider(
-              indent: 0,
-              thickness: 1,
-              endIndent: 0,
-              height: 1,
-              color: ZPColors.extraLightGrey2,
-            ),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: _OrderSummarySection(cartState: cartState),
-            ),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
-        ],
-      ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Divider(
-            indent: 0,
-            thickness: 1,
-            endIndent: 0,
-            height: 1,
-            color: ZPColors.extraLightGrey2,
-          ),
-          ListTile(
-            key: WidgetKeys.showOrderSumaryListTile,
-            onTap: () => _showOrderSumary(context, cartState),
-            dense: true,
-            visualDensity: VisualDensity.compact,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) =>
+          previous.aplSimulatorOrder != current.aplSimulatorOrder,
+      builder: (context, cartState) {
+        return Scaffold(
+          key: WidgetKeys.checkoutPage,
+          appBar: AppBar(
             title: Text(
-              '${cartState.totalItems} ${context.tr('items')}',
-              key: WidgetKeys.checkoutStickyTotalQty,
-              style: Theme.of(context).textTheme.titleSmall,
+              context.tr('Checkout'),
+              style: Theme.of(context).textTheme.labelLarge,
             ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                PriceComponent(
-                  key: WidgetKeys.checkoutStickyGrandTotal,
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: cartState.grandTotalHidePriceMaterial.toString(),
-                  title: context.tr('Grand Total: '),
-                  priceLabelStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.extraLightGrey4,
-                          ),
-                ),
-                const SizedBox(width: 8),
-                const Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  size: 16,
-                  color: ZPColors.neutralsBlack,
-                ),
-              ],
+            centerTitle: false,
+            titleSpacing: 0,
+            leading: IconButton(
+              key: WidgetKeys.closeButton,
+              icon: const Icon(
+                Icons.close,
+              ),
+              onPressed: () {
+                context.router.pop();
+              },
             ),
           ),
-          SafeArea(
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child:
-                  BlocListener<AdditionalDetailsBloc, AdditionalDetailsState>(
-                listenWhen: (previous, current) =>
-                    previous.isValidated != current.isValidated ||
-                    previous.focusTo != current.focusTo,
-                listener: (context, state) {
-                  if (state.isValidated) {
-                    context.read<OrderSummaryBloc>().add(
-                          OrderSummaryEvent.submitOrder(
-                            cartProducts:
-                                context.read<CartBloc>().state.cartProducts,
-                            grandTotal:
-                                context.read<CartBloc>().state.grandTotalSubmit,
-                            orderValue:
-                                context.read<CartBloc>().state.subTotalSubmit,
-                            totalTax: context.read<CartBloc>().state.totalTax,
-                            data: context
-                                .read<AdditionalDetailsBloc>()
-                                .state
-                                .deliveryInfoData,
+          body: CustomScrollView(
+            key: WidgetKeys.checkoutScrollList,
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                  ),
+                  child: AddressInfoSection.noAction(),
+                ),
+              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
+              _DeliveryInfo(focusNodes: _focusNodes),
+              const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
+              const SliverToBoxAdapter(
+                child: Divider(
+                  indent: 0,
+                  thickness: 1,
+                  endIndent: 0,
+                  height: 1,
+                  color: ZPColors.extraLightGrey2,
+                ),
+              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
+              const SliverToBoxAdapter(child: _TotalItems()),
+              const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
+              _ProductScrollList(cartState: cartState),
+              const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
+              const SliverToBoxAdapter(
+                child: Divider(
+                  indent: 0,
+                  thickness: 1,
+                  endIndent: 0,
+                  height: 1,
+                  color: ZPColors.extraLightGrey2,
+                ),
+              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: _OrderSummarySection(cartState: cartState),
+                ),
+              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+            ],
+          ),
+          bottomNavigationBar: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Divider(
+                indent: 0,
+                thickness: 1,
+                endIndent: 0,
+                height: 1,
+                color: ZPColors.extraLightGrey2,
+              ),
+              ListTile(
+                key: WidgetKeys.showOrderSumaryListTile,
+                onTap: () => _showOrderSummary(context, cartState),
+                dense: true,
+                visualDensity: VisualDensity.compact,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                title: Text(
+                  '${cartState.totalItems} ${context.tr('items')}',
+                  key: WidgetKeys.checkoutStickyTotalQty,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _DisplayPrice(
+                      priceComponent: PriceComponent(
+                        key: WidgetKeys.checkoutStickyGrandTotal,
+                        salesOrgConfig: eligibilityState.salesOrgConfigs,
+                        price: cartState.grandTotalHidePriceMaterial.toString(),
+                        title: context.tr('Grand Total: '),
+                        priceLabelStyle:
+                            Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  color: ZPColors.extraLightGrey4,
+                                ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      size: 16,
+                      color: ZPColors.neutralsBlack,
+                    ),
+                  ],
+                ),
+              ),
+              SafeArea(
+                child: Container(
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: BlocListener<AdditionalDetailsBloc,
+                      AdditionalDetailsState>(
+                    listenWhen: (previous, current) =>
+                        previous.isValidated != current.isValidated ||
+                        previous.focusTo != current.focusTo,
+                    listener: (context, state) {
+                      if (state.isValidated) {
+                        context.read<OrderSummaryBloc>().add(
+                              OrderSummaryEvent.submitOrder(
+                                cartProducts:
+                                    context.read<CartBloc>().state.cartProducts,
+                                grandTotal: context
+                                    .read<CartBloc>()
+                                    .state
+                                    .grandTotalSubmit,
+                                orderValue: context
+                                    .read<CartBloc>()
+                                    .state
+                                    .subTotalSubmit,
+                                totalTax:
+                                    context.read<CartBloc>().state.totalTax,
+                                data: context
+                                    .read<AdditionalDetailsBloc>()
+                                    .state
+                                    .deliveryInfoData,
+                              ),
+                            );
+                      } else {
+                        if (state.focusTo == DeliveryInfoLabel.paymentTerm) {
+                          _scrollToFocusedObject();
+                        }
+                        _focusNodes[state.focusTo]?.requestFocus();
+                      }
+                    },
+                    child: BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
+                      listenWhen: (previous, current) =>
+                          previous.isSubmitting != current.isSubmitting,
+                      listener: (context, state) {
+                        state.apiFailureOrSuccessOption.fold(
+                          () {
+                            if (!state.isSubmitting) {
+                              context.read<OrderSummaryBloc>().add(
+                                    OrderSummaryEvent.orderConfirmationDetail(
+                                      priceAggregate: context
+                                          .read<CartBloc>()
+                                          .state
+                                          .cartProducts,
+                                    ),
+                                  );
+                              context.read<PriceOverrideBloc>().add(
+                                    const PriceOverrideEvent.initialized(),
+                                  );
+                              context.router
+                                  .pushNamed('orders/order_confirmation');
+                            }
+                          },
+                          (either) => either.fold(
+                            (failure) {
+                              trackMixpanelEvent(
+                                MixpanelEvents.placeOrderFailure,
+                                props: {
+                                  MixpanelProps.errorMessage:
+                                      failure.failureMessage,
+                                },
+                              );
+                              ErrorUtils.handleApiFailure(context, failure);
+                            },
+                            (_) {},
                           ),
                         );
-                  } else {
-                    if (state.focusTo == DeliveryInfoLabel.paymentTerm) {
-                      _scrollToFocusedObject();
-                    }
-                    _focusNodes[state.focusTo]?.requestFocus();
-                  }
-                },
-                child: BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
-                  listenWhen: (previous, current) =>
-                      previous.isSubmitting != current.isSubmitting,
-                  listener: (context, state) {
-                    state.apiFailureOrSuccessOption.fold(
-                      () {
-                        if (!state.isSubmitting) {
-                          context.read<OrderSummaryBloc>().add(
-                                OrderSummaryEvent.orderConfirmationDetail(
-                                  priceAggregate: context
+                      },
+                      builder: (context, state) {
+                        final isAplProductLoading =
+                            context.read<CartBloc>().state.isAplProductLoading;
+
+                        return ElevatedButton(
+                          key: WidgetKeys.checkoutButton,
+                          onPressed: state.isSubmitting ||
+                                  isAplProductLoading ||
+                                  !context
                                       .read<CartBloc>()
                                       .state
-                                      .cartProducts,
-                                ),
-                              );
-                          context.read<PriceOverrideBloc>().add(
-                                const PriceOverrideEvent.initialized(),
-                              );
-                          context.router.pushNamed('orders/order_confirmation');
-                        }
+                                      .isEligibleForCheckout(
+                                        !eligibilityState
+                                            .doNotAllowOutOfStockMaterials,
+                                      )
+                              ? null
+                              : () {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                  context.read<AdditionalDetailsBloc>().add(
+                                        AdditionalDetailsEvent.validateForm(
+                                          config: context
+                                              .read<SalesOrgBloc>()
+                                              .state
+                                              .configs,
+                                        ),
+                                      );
+                                },
+                          child: LoadingShimmer.withChild(
+                            enabled: state.isSubmitting || isAplProductLoading,
+                            child: Text(context.tr('Place order')),
+                          ),
+                        );
                       },
-                      (either) => either.fold(
-                        (failure) {
-                          trackMixpanelEvent(
-                            MixpanelEvents.placeOrderFailure,
-                            props: {
-                              MixpanelProps.errorMessage:
-                                  failure.failureMessage,
-                            },
-                          );
-                          ErrorUtils.handleApiFailure(context, failure);
-                        },
-                        (_) {},
-                      ),
-                    );
-                  },
-                  builder: (context, state) => ElevatedButton(
-                    key: WidgetKeys.checkoutButton,
-                    onPressed: state.isSubmitting ||
-                            !context
-                                .read<CartBloc>()
-                                .state
-                                .isEligibleForCheckout(
-                                  !context
-                                      .read<EligibilityBloc>()
-                                      .state
-                                      .doNotAllowOutOfStockMaterials,
-                                )
-                        ? null
-                        : () {
-                            FocusScope.of(context).requestFocus(FocusNode());
-                            context.read<AdditionalDetailsBloc>().add(
-                                  AdditionalDetailsEvent.validateForm(
-                                    config: context
-                                        .read<SalesOrgBloc>()
-                                        .state
-                                        .configs,
-                                  ),
-                                );
-                          },
-                    child: LoadingShimmer.withChild(
-                      enabled: state.isSubmitting,
-                      child: Text(context.tr('Place order')),
                     ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  void _showOrderSumary(BuildContext context, CartState cartState) {
+  void _showOrderSummary(BuildContext context, CartState cartState) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

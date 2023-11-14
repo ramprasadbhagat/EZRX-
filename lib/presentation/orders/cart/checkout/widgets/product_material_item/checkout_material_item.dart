@@ -5,7 +5,9 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/order_tag.dart';
@@ -166,10 +168,12 @@ class _ProductDetails extends StatelessWidget {
                   price: cartItem.display(PriceType.listPrice),
                   type: PriceStyle.counterOfferPrice,
                 ),
-              PriceComponent(
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: cartItem.display(PriceType.finalPrice),
+              _DisplayMaterialDetails(
+                child: PriceComponent(
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: cartItem.display(PriceType.finalPrice),
+                ),
               ),
             ],
           ),
@@ -196,35 +200,77 @@ class _QuantityAndPrice extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Qty: ${cartItem.quantity}',
-            key: WidgetKeys.cartItemProductQty,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: ZPColors.neutralsBlack,
-                ),
-          ),
-          Column(
-            key: WidgetKeys.cartItemProductTotalPrice,
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
+      child: BlocBuilder<CartBloc, CartState>(
+        buildWhen: (previous, current) =>
+            previous.aplSimulatorOrder != current.aplSimulatorOrder,
+        builder: (context, state) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              PriceComponent(
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: cartItem.finalPriceTotalForAllMaterial,
-              ),
-              if (cartItem.showTaxBreakDown &&
-                  !cartItem.materialInfo.isFOCMaterial)
-                ItemTax(
-                  cartItem: cartItem,
+              _DisplayMaterialDetails(
+                child: Text(
+                  'Qty: ${cartItem.quantity}',
+                  key: WidgetKeys.cartItemProductQty,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
                 ),
+              ),
+              Column(
+                key: WidgetKeys.cartItemProductTotalPrice,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  _DisplayMaterialDetails(
+                    child: PriceComponent(
+                      salesOrgConfig:
+                          context.read<EligibilityBloc>().state.salesOrgConfigs,
+                      price: cartItem.finalPriceTotalForAllMaterial,
+                    ),
+                  ),
+                  if (cartItem.showTaxBreakDown &&
+                      !cartItem.materialInfo.isFOCMaterial)
+                    ItemTax(
+                      cartItem: cartItem,
+                    ),
+                ],
+              ),
             ],
-          ),
-        ],
+          );
+        },
       ),
+    );
+  }
+}
+
+class _DisplayMaterialDetails extends StatelessWidget {
+  const _DisplayMaterialDetails({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) =>
+          previous.aplSimulatorOrder != current.aplSimulatorOrder,
+      builder: (context, state) {
+        if (state.isAplProductLoading) {
+          return SizedBox(
+            width: Responsive.isLargerThan(
+              context,
+              Breakpoint.desktop,
+            )
+                ? MediaQuery.of(context).size.width * 0.2
+                : MediaQuery.of(context).size.width * 0.3,
+            child: LoadingShimmer.tile(),
+          );
+        }
+
+        return child;
+      },
     );
   }
 }

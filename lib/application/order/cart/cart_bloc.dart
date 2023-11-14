@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -399,6 +400,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 items: newCartProductList,
               ),
             );
+            add(const CartEvent.fetchGrandTotalPriceForIdMarket());
           },
         );
       },
@@ -851,6 +853,74 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
+        );
+      },
+      fetchGrandTotalPriceForIdMarket: (_) async {
+        if (!state._isID) return;
+
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isAplProductLoading: true,
+            aplSimulatorOrder: AplSimulatorOrder.empty(),
+          ),
+        );
+
+        final failureOrSuccess =
+            await repository.fetchGrandTotalPriceForIdMarket(
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          materialNumbers: state.cartProducts.materialNumbers,
+          totalPrice: state.totalMaterialsPrice,
+        );
+
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isAplProductLoading: false,
+            ),
+          ),
+          (aplSimulatorOrder) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: none(),
+              isAplProductLoading: false,
+              aplSimulatorOrder: aplSimulatorOrder,
+            ),
+          ),
+        );
+      },
+      updatePriceForIdMarket: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isAplProductLoading: true,
+            aplSimulatorOrder: AplSimulatorOrder.empty(),
+          ),
+        );
+
+        final failureOrSuccess = await repository.aplSimulateOrder(
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          product: e.product,
+        );
+
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isAplProductLoading: false,
+            ),
+          ),
+          (aplSimulatorOrder) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: none(),
+              isAplProductLoading: false,
+              cartProducts:
+                  aplSimulatorOrder.toCartItemList(state.cartProducts),
+              aplSimulatorOrder: aplSimulatorOrder,
+            ),
+          ),
         );
       },
     );

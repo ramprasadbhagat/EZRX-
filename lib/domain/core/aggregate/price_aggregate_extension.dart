@@ -88,6 +88,10 @@ extension PriceAggregateExtension on List<PriceAggregate> {
         (e) => e.getMaterialNumber,
       ).toList();
 
+  List<MaterialInfo> get materialInfos => map(
+        (e) => e.materialInfo,
+      ).toList();
+
   Map<MaterialNumber, PriceAggregate> get mapByMaterialNumber => {
         for (final material in this) material.getMaterialNumber: material,
       };
