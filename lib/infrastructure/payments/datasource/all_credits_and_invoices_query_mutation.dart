@@ -37,4 +37,15 @@ class AllCreditsAndInvoicesQueryMutation {
       }
     ''';
   }
+
+  String getOrderForInvoice() {
+    return '''
+      query getOrdersForInvoiceId(\$invoiceId: [String!]) {
+        getOrdersForInvoiceId(invoiceId: \$invoiceId) {
+          invoice
+          orderId
+        }
+      }
+    ''';
+  }
 }

@@ -1,32 +1,32 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
-import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 
 import '../../../utils/widget_utils.dart';
 
@@ -158,7 +158,7 @@ void main() {
         AllInvoicesState.initial().copyWith(
           items: [
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('20230919'),
               postingDate: DateTimeStringValue('20230917'),
               amountInTransactionCurrency: 15.72,
@@ -170,7 +170,7 @@ void main() {
 
       await tester.pumpWidget(getWidget());
 
-      await tester.pumpAndSettle();
+      await tester.pump();
       //Make sure due date display on format dd MMM yyyy for TH market
       final dueDateText = find.textContaining('${'Due on'.tr()} 19 Sep 2023');
       expect(dueDateText, findsOneWidget);
@@ -187,7 +187,7 @@ void main() {
         AllInvoicesState.initial().copyWith(
           items: [
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456781',
+              searchKey: StringValue('123456781'),
               netDueDate: DateTimeStringValue('20230920'),
               postingDate: DateTimeStringValue('20230917'),
               amountInTransactionCurrency: 15.72,
@@ -198,7 +198,7 @@ void main() {
       );
 
       await tester.pumpWidget(getWidget());
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       //Make sure due date display on format dd MMM yyyy for TH market
       final dueDateText = find.textContaining('${'Due on'.tr()} 20 Sep 2023');
@@ -294,9 +294,8 @@ void main() {
           failureOrSuccessOption: optionOf(const Right('')),
           items: [
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456789',
+              searchKey: StringValue('123456789'),
               netDueDate: DateTimeStringValue('2023-12-25'),
-              // documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             )
@@ -339,46 +338,40 @@ void main() {
         AllInvoicesState.initial().copyWith(
           isLoading: false,
           canLoadMore: true,
-          items: [
+          items: <CreditAndInvoiceItem>[
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
-              // documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
-              // documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
-              // documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
-              // documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
-              // documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
-              // documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
@@ -422,6 +415,75 @@ void main() {
         const Duration(seconds: 1),
       ); // finish the indicator hide animation
       await tester.pump();
+    });
+
+    testWidgets('=> Invoice order Id', (tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: thSalesOrganisation,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: thSalesOrganisation,
+        ),
+      );
+
+      when(() => allInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(
+          items: <CreditAndInvoiceItem>[
+            CreditAndInvoiceItem.empty().copyWith(
+              searchKey: StringValue('123456780'),
+              netDueDate: DateTimeStringValue('20230919'),
+              postingDate: DateTimeStringValue('20230917'),
+              amountInTransactionCurrency: 15.72,
+              invoiceProcessingStatus: StatusType('Cleared'),
+              orderId: StringValue('123456789'),
+              isLoadingOrder: false,
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.invoiceItemOrderId), findsWidgets);
+    });
+
+    testWidgets('=> Invoice order Id Loading', (tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: thSalesOrganisation,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: thSalesOrganisation,
+        ),
+      );
+
+      when(() => allInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(
+          items: <CreditAndInvoiceItem>[
+            CreditAndInvoiceItem.empty().copyWith(
+              searchKey: StringValue('123456780'),
+              netDueDate: DateTimeStringValue('20230919'),
+              postingDate: DateTimeStringValue('20230917'),
+              amountInTransactionCurrency: 15.72,
+              invoiceProcessingStatus: StatusType('Cleared'),
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.invoiceItemOrderIdLoadingShimmer),
+        findsWidgets,
+      );
     });
   });
 }

@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credit_and_invoice_item.freezed.dart';
 
@@ -11,7 +11,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
   factory CreditAndInvoiceItem({
     required String bpCustomerNumber,
     required String fiscalYear,
-    required String searchKey,
+    required StringValue searchKey,
     required String accountingDocumentItem,
     required String accountingDocumentType,
     required String postingKeyName,
@@ -27,12 +27,13 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
     required StringValue invoiceReference,
     required StatusType invoiceProcessingStatus,
     required StringValue orderId,
+    @Default(true) isLoadingOrder,
   }) = _CreditAndInvoiceItem;
 
   factory CreditAndInvoiceItem.empty() => CreditAndInvoiceItem(
         bpCustomerNumber: '',
         fiscalYear: '',
-        searchKey: '',
+        searchKey: StringValue(''),
         accountingDocumentItem: '',
         accountingDocumentType: '',
         postingKeyName: '',

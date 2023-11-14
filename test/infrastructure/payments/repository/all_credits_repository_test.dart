@@ -1,18 +1,19 @@
+import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class AllCreditsAndInvoicesLocalDataSourceMock extends Mock
     implements AllCreditsAndInvoicesLocalDataSource {}
@@ -23,15 +24,15 @@ class AllCreditsAndInvoicesRemoteDataSourceMock extends Mock
 class ConfigMock extends Mock implements Config {}
 
 void main() {
+  late Config configMock;
+  late AllCreditsFilter allCreditsFilter;
+  late List<CreditAndInvoiceItem> mockList;
   late AllCreditsAndInvoicesLocalDataSource
       allCreditsAndInvoicesLocalDataSourceMock;
   late AllCreditsAndInvoicesRemoteDataSource
       allCreditsAndInvoicesRemoteDataSourceMock;
-  late Config configMock;
   late AllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
-  late List<CreditAndInvoiceItem> mockList;
-  late AllCreditsFilter allCreditsFilter;
-
+  late List<InvoiceOrderItem> invoiceOrderItems;
   final fakeToDate = DateTime.now();
   final fakeFromDate = DateTime.now().subtract(
     const Duration(days: 30),
@@ -44,6 +45,8 @@ void main() {
         AllCreditsAndInvoicesLocalDataSourceMock();
     allCreditsAndInvoicesRemoteDataSourceMock =
         AllCreditsAndInvoicesRemoteDataSourceMock();
+    invoiceOrderItems =
+        await AllCreditsAndInvoicesLocalDataSource().getOrderForInvoice();
     allCreditsAndInvoicesRepository = AllCreditsAndInvoicesRepository(
       config: configMock,
       localDataSource: allCreditsAndInvoicesLocalDataSourceMock,
@@ -160,6 +163,80 @@ void main() {
         pageSize: 1,
         offset: 0,
         filter: allCreditsFilter,
+      );
+      expect(result.isLeft(), true);
+    });
+  });
+  group('get orders for invoice Test', () {
+    test('=> locally success', () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+      when(() => allCreditsAndInvoicesLocalDataSourceMock.getOrderForInvoice())
+          .thenAnswer(
+        (invocation) async => invoiceOrderItems,
+      );
+      final result = await allCreditsAndInvoicesRepository.fetchOrder(
+        invoices: invoiceOrderItems
+            .map(
+              (e) =>
+                  CreditAndInvoiceItem.empty().copyWith(searchKey: e.invoiceId),
+            )
+            .toList(),
+      );
+      expect(result.getOrElse(() => []), invoiceOrderItems);
+    });
+
+    test('=> locally fail', () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+      when(() => allCreditsAndInvoicesLocalDataSourceMock.getOrderForInvoice())
+          .thenThrow(
+        (invocation) async => MockException(),
+      );
+      final result = await allCreditsAndInvoicesRepository.fetchOrder(
+        invoices: invoiceOrderItems
+            .map(
+              (e) =>
+                  CreditAndInvoiceItem.empty().copyWith(searchKey: e.invoiceId),
+            )
+            .toList(),
+      );
+      expect(result.isLeft(), true);
+    });
+
+    test('=> remote success', () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.dev);
+      when(
+        () => allCreditsAndInvoicesRemoteDataSourceMock.getOrderForInvoice(
+          invoiceOrderItems.map((e) => e.invoiceId.getValue()).toList(),
+        ),
+      ).thenAnswer(
+        (invocation) async => invoiceOrderItems,
+      );
+      final result = await allCreditsAndInvoicesRepository.fetchOrder(
+        invoices: invoiceOrderItems
+            .map(
+              (e) =>
+                  CreditAndInvoiceItem.empty().copyWith(searchKey: e.invoiceId),
+            )
+            .toList(),
+      );
+      expect(result.getOrElse(() => []), invoiceOrderItems);
+    });
+    test('=> remote fail', () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+      when(
+        () => allCreditsAndInvoicesRemoteDataSourceMock.getOrderForInvoice(
+          invoiceOrderItems.map((e) => e.invoiceId.getValue()).toList(),
+        ),
+      ).thenThrow(
+        (invocation) async => MockException(),
+      );
+      final result = await allCreditsAndInvoicesRepository.fetchOrder(
+        invoices: invoiceOrderItems
+            .map(
+              (e) =>
+                  CreditAndInvoiceItem.empty().copyWith(searchKey: e.invoiceId),
+            )
+            .toList(),
       );
       expect(result.isLeft(), true);
     });

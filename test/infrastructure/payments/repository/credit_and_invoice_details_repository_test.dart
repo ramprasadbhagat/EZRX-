@@ -1,15 +1,16 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/credit_and_invoice_details_repository.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class CreditAndInvoiceDetailsLocalDataSourceMock extends Mock
     implements CreditAndInvoiceDetailsLocalDataSource {}
@@ -45,7 +46,7 @@ void main() {
     fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
       bpCustomerNumber: '0030032223',
       fiscalYear: '2023',
-      searchKey: '1080005528',
+      searchKey: StringValue('1080005528'),
       accountingDocumentItem: '001',
     );
     fakeCreditAndInvoiceDetails = <CustomerDocumentDetail>[
@@ -97,7 +98,7 @@ void main() {
             salesOrg: 'mock_salesOrg',
             bpCustomerNumber: fakeInvoice.bpCustomerNumber,
             fiscalYear: fakeInvoice.fiscalYear,
-            searchKey: fakeInvoice.searchKey,
+            searchKey: fakeInvoice.searchKey.getOrDefaultValue(''),
             accountingDocumentItem: fakeInvoice.accountingDocumentItem,
           ),
         ).thenAnswer(
@@ -124,7 +125,7 @@ void main() {
             salesOrg: 'mock_salesOrg',
             bpCustomerNumber: fakeInvoice.bpCustomerNumber,
             fiscalYear: fakeInvoice.fiscalYear,
-            searchKey: fakeInvoice.searchKey,
+            searchKey: fakeInvoice.searchKey.getOrDefaultValue(''),
             accountingDocumentItem: fakeInvoice.accountingDocumentItem,
           ),
         ).thenThrow((invocation) async => MockException());

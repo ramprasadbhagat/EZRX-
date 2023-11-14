@@ -1,0 +1,21 @@
+query getOrdersForInvoiceId($invoiceId: [String!]) {
+  getOrdersForInvoiceId(invoiceId: $invoiceId) {
+    invoice
+    orderId
+  }
+}
+
+variables:{
+  "invoiceId": [
+    "1100001318",
+    "1100001317",
+    "1100001315",
+    "1100001307",
+    "1100001308",
+    "1100001309",
+    "1100001310",
+    "1100001311",
+    "1100001312",
+    "1100001301"
+  ]
+}

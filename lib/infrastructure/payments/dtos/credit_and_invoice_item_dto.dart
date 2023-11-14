@@ -1,6 +1,6 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credit_and_invoice_item_dto.freezed.dart';
 part 'credit_and_invoice_item_dto.g.dart';
@@ -105,7 +105,7 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
     return CreditAndInvoiceItem(
       bpCustomerNumber: bpCustomerNumber,
       fiscalYear: fiscalYear,
-      searchKey: accountingDocument,
+      searchKey: StringValue(accountingDocument),
       accountingDocumentItem: accountingDocumentItem,
       accountingDocumentType: accountingDocumentType,
       postingKeyName: postingKeyName,

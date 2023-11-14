@@ -10,4 +10,7 @@ class AllInvoicesEvent with _$AllInvoicesEvent {
     required AllInvoicesFilter appliedFilter,
   }) = _Fetch;
   const factory AllInvoicesEvent.loadMore() = _LoadMore;
+  const factory AllInvoicesEvent.fetchOrder({
+    required List<CreditAndInvoiceItem> invoices,
+  }) = _FetchOrder;
 }

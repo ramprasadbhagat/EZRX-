@@ -1,14 +1,15 @@
-import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'all_invoices_event.dart';
 part 'all_invoices_state.dart';
@@ -69,6 +70,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
                 isLoading: false,
               ),
             );
+            add(AllInvoicesEvent.fetchOrder(invoices: responseData));
           },
         );
       },
@@ -112,6 +114,60 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
                 canLoadMore: responseData.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
+              ),
+            );
+            add(AllInvoicesEvent.fetchOrder(invoices: responseData));
+          },
+        );
+      },
+    );
+    on<_FetchOrder>(
+      (e, emit) async {
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess =
+            await allCreditsAndInvoicesRepository.fetchOrder(
+          invoices: e.invoices,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                items: state.items
+                    .map(
+                      (e) => e.copyWith(
+                        isLoadingOrder: false,
+                      ),
+                    )
+                    .toList(),
+              ),
+            );
+          },
+          (responseData) {
+            emit(
+              state.copyWith(
+                items: state.items
+                    .map(
+                      (e) => e.isLoadingOrder
+                          ? e.copyWith(
+                              isLoadingOrder: false,
+                              orderId: responseData
+                                  .firstWhere(
+                                    (element) =>
+                                        element.invoiceId == e.searchKey,
+                                    orElse: () => InvoiceOrderItem.empty(),
+                                  )
+                                  .orderId,
+                            )
+                          : e,
+                    )
+                    .toList(),
+                failureOrSuccessOption: none(),
               ),
             );
           },

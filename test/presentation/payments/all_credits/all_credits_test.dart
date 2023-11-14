@@ -1,30 +1,30 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
 
 import '../../../utils/widget_utils.dart';
 
@@ -219,7 +219,7 @@ void main() {
           failureOrSuccessOption: optionOf(const Right('')),
           items: [
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456789',
+              searchKey: StringValue('123456789'),
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
@@ -267,42 +267,42 @@ void main() {
           canLoadMore: true,
           items: [
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
@@ -336,7 +336,7 @@ void main() {
           canLoadMore: true,
           items: [
             CreditAndInvoiceItem.empty().copyWith(
-              searchKey: '123456780',
+              searchKey: StringValue('123456780'),
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,

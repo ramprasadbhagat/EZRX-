@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CreditAndInvoiceItem {
   String get bpCustomerNumber => throw _privateConstructorUsedError;
   String get fiscalYear => throw _privateConstructorUsedError;
-  String get searchKey => throw _privateConstructorUsedError;
+  StringValue get searchKey => throw _privateConstructorUsedError;
   String get accountingDocumentItem => throw _privateConstructorUsedError;
   String get accountingDocumentType => throw _privateConstructorUsedError;
   String get postingKeyName => throw _privateConstructorUsedError;
@@ -34,6 +34,7 @@ mixin _$CreditAndInvoiceItem {
   StringValue get invoiceReference => throw _privateConstructorUsedError;
   StatusType get invoiceProcessingStatus => throw _privateConstructorUsedError;
   StringValue get orderId => throw _privateConstructorUsedError;
+  dynamic get isLoadingOrder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreditAndInvoiceItemCopyWith<CreditAndInvoiceItem> get copyWith =>
@@ -49,7 +50,7 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
   $Res call(
       {String bpCustomerNumber,
       String fiscalYear,
-      String searchKey,
+      StringValue searchKey,
       String accountingDocumentItem,
       String accountingDocumentType,
       String postingKeyName,
@@ -64,7 +65,8 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
       double taxAmount,
       StringValue invoiceReference,
       StatusType invoiceProcessingStatus,
-      StringValue orderId});
+      StringValue orderId,
+      dynamic isLoadingOrder});
 }
 
 /// @nodoc
@@ -99,6 +101,7 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
     Object? invoiceReference = null,
     Object? invoiceProcessingStatus = null,
     Object? orderId = null,
+    Object? isLoadingOrder = freezed,
   }) {
     return _then(_value.copyWith(
       bpCustomerNumber: null == bpCustomerNumber
@@ -112,7 +115,7 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       accountingDocumentItem: null == accountingDocumentItem
           ? _value.accountingDocumentItem
           : accountingDocumentItem // ignore: cast_nullable_to_non_nullable
@@ -173,6 +176,10 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      isLoadingOrder: freezed == isLoadingOrder
+          ? _value.isLoadingOrder
+          : isLoadingOrder // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -188,7 +195,7 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
   $Res call(
       {String bpCustomerNumber,
       String fiscalYear,
-      String searchKey,
+      StringValue searchKey,
       String accountingDocumentItem,
       String accountingDocumentType,
       String postingKeyName,
@@ -203,7 +210,8 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
       double taxAmount,
       StringValue invoiceReference,
       StatusType invoiceProcessingStatus,
-      StringValue orderId});
+      StringValue orderId,
+      dynamic isLoadingOrder});
 }
 
 /// @nodoc
@@ -235,6 +243,7 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
     Object? invoiceReference = null,
     Object? invoiceProcessingStatus = null,
     Object? orderId = null,
+    Object? isLoadingOrder = freezed,
   }) {
     return _then(_$_CreditAndInvoiceItem(
       bpCustomerNumber: null == bpCustomerNumber
@@ -248,7 +257,7 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       accountingDocumentItem: null == accountingDocumentItem
           ? _value.accountingDocumentItem
           : accountingDocumentItem // ignore: cast_nullable_to_non_nullable
@@ -309,6 +318,8 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      isLoadingOrder:
+          freezed == isLoadingOrder ? _value.isLoadingOrder! : isLoadingOrder,
     ));
   }
 }
@@ -334,7 +345,8 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
       required this.taxAmount,
       required this.invoiceReference,
       required this.invoiceProcessingStatus,
-      required this.orderId})
+      required this.orderId,
+      this.isLoadingOrder = true})
       : super._();
 
   @override
@@ -342,7 +354,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final String fiscalYear;
   @override
-  final String searchKey;
+  final StringValue searchKey;
   @override
   final String accountingDocumentItem;
   @override
@@ -373,10 +385,13 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   final StatusType invoiceProcessingStatus;
   @override
   final StringValue orderId;
+  @override
+  @JsonKey()
+  final dynamic isLoadingOrder;
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId)';
+    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, isLoadingOrder: $isLoadingOrder)';
   }
 
   @override
@@ -422,30 +437,34 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
             (identical(
                     other.invoiceProcessingStatus, invoiceProcessingStatus) ||
                 other.invoiceProcessingStatus == invoiceProcessingStatus) &&
-            (identical(other.orderId, orderId) || other.orderId == orderId));
+            (identical(other.orderId, orderId) || other.orderId == orderId) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoadingOrder, isLoadingOrder));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      bpCustomerNumber,
-      fiscalYear,
-      searchKey,
-      accountingDocumentItem,
-      accountingDocumentType,
-      postingKeyName,
-      netDueDate,
-      postingDate,
-      referenceDocumentNumber,
-      documentDate,
-      amountInTransactionCurrency,
-      deliveryFee,
-      discount,
-      manualFee,
-      taxAmount,
-      invoiceReference,
-      invoiceProcessingStatus,
-      orderId);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        bpCustomerNumber,
+        fiscalYear,
+        searchKey,
+        accountingDocumentItem,
+        accountingDocumentType,
+        postingKeyName,
+        netDueDate,
+        postingDate,
+        referenceDocumentNumber,
+        documentDate,
+        amountInTransactionCurrency,
+        deliveryFee,
+        discount,
+        manualFee,
+        taxAmount,
+        invoiceReference,
+        invoiceProcessingStatus,
+        orderId,
+        const DeepCollectionEquality().hash(isLoadingOrder)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -459,7 +478,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   factory _CreditAndInvoiceItem(
       {required final String bpCustomerNumber,
       required final String fiscalYear,
-      required final String searchKey,
+      required final StringValue searchKey,
       required final String accountingDocumentItem,
       required final String accountingDocumentType,
       required final String postingKeyName,
@@ -474,7 +493,8 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
       required final double taxAmount,
       required final StringValue invoiceReference,
       required final StatusType invoiceProcessingStatus,
-      required final StringValue orderId}) = _$_CreditAndInvoiceItem;
+      required final StringValue orderId,
+      final dynamic isLoadingOrder}) = _$_CreditAndInvoiceItem;
   _CreditAndInvoiceItem._() : super._();
 
   @override
@@ -482,7 +502,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   @override
   String get fiscalYear;
   @override
-  String get searchKey;
+  StringValue get searchKey;
   @override
   String get accountingDocumentItem;
   @override
@@ -513,6 +533,8 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   StatusType get invoiceProcessingStatus;
   @override
   StringValue get orderId;
+  @override
+  dynamic get isLoadingOrder;
   @override
   @JsonKey(ignore: true)
   _$$_CreditAndInvoiceItemCopyWith<_$_CreditAndInvoiceItem> get copyWith =>

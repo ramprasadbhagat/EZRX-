@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credi
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
@@ -30,7 +31,7 @@ void main() {
     fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
       bpCustomerNumber: '0030032223',
       fiscalYear: '2023',
-      searchKey: '1080005528',
+      searchKey: StringValue('1080005528'),
       accountingDocumentItem: '001',
     );
   });

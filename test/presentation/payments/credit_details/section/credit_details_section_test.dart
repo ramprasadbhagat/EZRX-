@@ -1,25 +1,25 @@
-import 'package:bloc_test/bloc_test.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_details_section.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_details_section.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 
 import '../../../../utils/widget_utils.dart';
 import '../../../account/account_tab_test.dart';
@@ -58,7 +58,7 @@ void main() {
     accountingDocumentItem: '001',
     invoiceProcessingStatus: StatusType('Cleared'),
     postingKeyName: 'fake-PK',
-    searchKey: 'fake-SK',
+    searchKey: StringValue('fake-SK'),
     postingDate: DateTimeStringValue('20230528'),
     amountInTransactionCurrency: 100,
   );

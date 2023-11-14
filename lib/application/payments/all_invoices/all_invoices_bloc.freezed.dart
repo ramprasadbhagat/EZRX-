@@ -23,6 +23,7 @@ mixin _$AllInvoicesEvent {
         initialized,
     required TResult Function(AllInvoicesFilter appliedFilter) fetch,
     required TResult Function() loadMore,
+    required TResult Function(List<CreditAndInvoiceItem> invoices) fetchOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$AllInvoicesEvent {
         initialized,
     TResult? Function(AllInvoicesFilter appliedFilter)? fetch,
     TResult? Function()? loadMore,
+    TResult? Function(List<CreditAndInvoiceItem> invoices)? fetchOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$AllInvoicesEvent {
         initialized,
     TResult Function(AllInvoicesFilter appliedFilter)? fetch,
     TResult Function()? loadMore,
+    TResult Function(List<CreditAndInvoiceItem> invoices)? fetchOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +52,7 @@ mixin _$AllInvoicesEvent {
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchOrder value) fetchOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +60,7 @@ mixin _$AllInvoicesEvent {
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchOrder value)? fetchOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$AllInvoicesEvent {
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchOrder value)? fetchOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -187,6 +193,7 @@ class _$_initialized implements _initialized {
         initialized,
     required TResult Function(AllInvoicesFilter appliedFilter) fetch,
     required TResult Function() loadMore,
+    required TResult Function(List<CreditAndInvoiceItem> invoices) fetchOrder,
   }) {
     return initialized(salesOrganisation, customerCodeInfo);
   }
@@ -199,6 +206,7 @@ class _$_initialized implements _initialized {
         initialized,
     TResult? Function(AllInvoicesFilter appliedFilter)? fetch,
     TResult? Function()? loadMore,
+    TResult? Function(List<CreditAndInvoiceItem> invoices)? fetchOrder,
   }) {
     return initialized?.call(salesOrganisation, customerCodeInfo);
   }
@@ -211,6 +219,7 @@ class _$_initialized implements _initialized {
         initialized,
     TResult Function(AllInvoicesFilter appliedFilter)? fetch,
     TResult Function()? loadMore,
+    TResult Function(List<CreditAndInvoiceItem> invoices)? fetchOrder,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -225,6 +234,7 @@ class _$_initialized implements _initialized {
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchOrder value) fetchOrder,
   }) {
     return initialized(this);
   }
@@ -235,6 +245,7 @@ class _$_initialized implements _initialized {
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchOrder value)? fetchOrder,
   }) {
     return initialized?.call(this);
   }
@@ -245,6 +256,7 @@ class _$_initialized implements _initialized {
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchOrder value)? fetchOrder,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -344,6 +356,7 @@ class _$_Fetch implements _Fetch {
         initialized,
     required TResult Function(AllInvoicesFilter appliedFilter) fetch,
     required TResult Function() loadMore,
+    required TResult Function(List<CreditAndInvoiceItem> invoices) fetchOrder,
   }) {
     return fetch(appliedFilter);
   }
@@ -356,6 +369,7 @@ class _$_Fetch implements _Fetch {
         initialized,
     TResult? Function(AllInvoicesFilter appliedFilter)? fetch,
     TResult? Function()? loadMore,
+    TResult? Function(List<CreditAndInvoiceItem> invoices)? fetchOrder,
   }) {
     return fetch?.call(appliedFilter);
   }
@@ -368,6 +382,7 @@ class _$_Fetch implements _Fetch {
         initialized,
     TResult Function(AllInvoicesFilter appliedFilter)? fetch,
     TResult Function()? loadMore,
+    TResult Function(List<CreditAndInvoiceItem> invoices)? fetchOrder,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -382,6 +397,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchOrder value) fetchOrder,
   }) {
     return fetch(this);
   }
@@ -392,6 +408,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchOrder value)? fetchOrder,
   }) {
     return fetch?.call(this);
   }
@@ -402,6 +419,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchOrder value)? fetchOrder,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -464,6 +482,7 @@ class _$_LoadMore implements _LoadMore {
         initialized,
     required TResult Function(AllInvoicesFilter appliedFilter) fetch,
     required TResult Function() loadMore,
+    required TResult Function(List<CreditAndInvoiceItem> invoices) fetchOrder,
   }) {
     return loadMore();
   }
@@ -476,6 +495,7 @@ class _$_LoadMore implements _LoadMore {
         initialized,
     TResult? Function(AllInvoicesFilter appliedFilter)? fetch,
     TResult? Function()? loadMore,
+    TResult? Function(List<CreditAndInvoiceItem> invoices)? fetchOrder,
   }) {
     return loadMore?.call();
   }
@@ -488,6 +508,7 @@ class _$_LoadMore implements _LoadMore {
         initialized,
     TResult Function(AllInvoicesFilter appliedFilter)? fetch,
     TResult Function()? loadMore,
+    TResult Function(List<CreditAndInvoiceItem> invoices)? fetchOrder,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -502,6 +523,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchOrder value) fetchOrder,
   }) {
     return loadMore(this);
   }
@@ -512,6 +534,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchOrder value)? fetchOrder,
   }) {
     return loadMore?.call(this);
   }
@@ -522,6 +545,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchOrder value)? fetchOrder,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -533,6 +557,165 @@ class _$_LoadMore implements _LoadMore {
 
 abstract class _LoadMore implements AllInvoicesEvent {
   const factory _LoadMore() = _$_LoadMore;
+}
+
+/// @nodoc
+abstract class _$$_FetchOrderCopyWith<$Res> {
+  factory _$$_FetchOrderCopyWith(
+          _$_FetchOrder value, $Res Function(_$_FetchOrder) then) =
+      __$$_FetchOrderCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<CreditAndInvoiceItem> invoices});
+}
+
+/// @nodoc
+class __$$_FetchOrderCopyWithImpl<$Res>
+    extends _$AllInvoicesEventCopyWithImpl<$Res, _$_FetchOrder>
+    implements _$$_FetchOrderCopyWith<$Res> {
+  __$$_FetchOrderCopyWithImpl(
+      _$_FetchOrder _value, $Res Function(_$_FetchOrder) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? invoices = null,
+  }) {
+    return _then(_$_FetchOrder(
+      invoices: null == invoices
+          ? _value._invoices
+          : invoices // ignore: cast_nullable_to_non_nullable
+              as List<CreditAndInvoiceItem>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_FetchOrder implements _FetchOrder {
+  const _$_FetchOrder({required final List<CreditAndInvoiceItem> invoices})
+      : _invoices = invoices;
+
+  final List<CreditAndInvoiceItem> _invoices;
+  @override
+  List<CreditAndInvoiceItem> get invoices {
+    if (_invoices is EqualUnmodifiableListView) return _invoices;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_invoices);
+  }
+
+  @override
+  String toString() {
+    return 'AllInvoicesEvent.fetchOrder(invoices: $invoices)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchOrder &&
+            const DeepCollectionEquality().equals(other._invoices, _invoices));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_invoices));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchOrderCopyWith<_$_FetchOrder> get copyWith =>
+      __$$_FetchOrderCopyWithImpl<_$_FetchOrder>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(AllInvoicesFilter appliedFilter) fetch,
+    required TResult Function() loadMore,
+    required TResult Function(List<CreditAndInvoiceItem> invoices) fetchOrder,
+  }) {
+    return fetchOrder(invoices);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(AllInvoicesFilter appliedFilter)? fetch,
+    TResult? Function()? loadMore,
+    TResult? Function(List<CreditAndInvoiceItem> invoices)? fetchOrder,
+  }) {
+    return fetchOrder?.call(invoices);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(AllInvoicesFilter appliedFilter)? fetch,
+    TResult Function()? loadMore,
+    TResult Function(List<CreditAndInvoiceItem> invoices)? fetchOrder,
+    required TResult orElse(),
+  }) {
+    if (fetchOrder != null) {
+      return fetchOrder(invoices);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchOrder value) fetchOrder,
+  }) {
+    return fetchOrder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchOrder value)? fetchOrder,
+  }) {
+    return fetchOrder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchOrder value)? fetchOrder,
+    required TResult orElse(),
+  }) {
+    if (fetchOrder != null) {
+      return fetchOrder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchOrder implements AllInvoicesEvent {
+  const factory _FetchOrder(
+      {required final List<CreditAndInvoiceItem> invoices}) = _$_FetchOrder;
+
+  List<CreditAndInvoiceItem> get invoices;
+  @JsonKey(ignore: true)
+  _$$_FetchOrderCopyWith<_$_FetchOrder> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

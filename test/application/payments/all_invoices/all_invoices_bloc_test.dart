@@ -7,6 +7,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,21 +18,30 @@ class AllCreditsAndInvoicesRepositoryMock extends Mock
     implements AllCreditsAndInvoicesRepository {}
 
 void main() {
-  late AllCreditsAndInvoicesRepository repository;
-  late List<CreditAndInvoiceItem> fakeResult;
-  late AllInvoicesFilter allInvoicesFilter;
   late Config config;
+  late ApiFailure exception;
+  late AllInvoicesFilter allInvoicesFilter;
+  late List<CreditAndInvoiceItem> fakeResult;
+  late AllCreditsAndInvoicesRepository repository;
+  late List<CreditAndInvoiceItem> creditAndInvoiceItemList;
+  late List<InvoiceOrderItem> invoiceOrderItems;
+
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = AllCreditsAndInvoicesRepositoryMock();
     config = Config()..appFlavor = Flavor.mock;
   });
 
-  setUp(() {
+  setUp(() async {
     fakeResult = [
       CreditAndInvoiceItem.empty(),
     ];
     allInvoicesFilter = AllInvoicesFilter.empty();
+    exception = const ApiFailure.other('fake-error');
+    creditAndInvoiceItemList =
+        await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
+    invoiceOrderItems =
+        await AllCreditsAndInvoicesLocalDataSource().getOrderForInvoice();
   });
 
   group(
@@ -77,9 +88,7 @@ void main() {
               pageSize: config.pageSize,
             ),
           ).thenAnswer(
-            (invocation) async => const Left(
-              ApiFailure.other('fake-error'),
-            ),
+            (invocation) async => Left(exception),
           );
         },
         act: (AllInvoicesBloc bloc) => bloc.add(
@@ -92,17 +101,13 @@ void main() {
             isLoading: true,
           ),
           AllInvoicesState.initial().copyWith(
-            failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('fake-error'),
-              ),
-            ),
+            failureOrSuccessOption: optionOf(Left(exception)),
           ),
         ],
       );
 
       blocTest(
-        'fetch -> invoices fetch success',
+        'fetch -> invoices fetch success fetch order fail',
         build: () => AllInvoicesBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
@@ -117,7 +122,14 @@ void main() {
               pageSize: config.pageSize,
             ),
           ).thenAnswer(
-            (invocation) async => Right(fakeResult),
+            (invocation) async => Right(creditAndInvoiceItemList),
+          );
+          when(
+            () => repository.fetchOrder(
+              invoices: creditAndInvoiceItemList,
+            ),
+          ).thenAnswer(
+            (invocation) async => Left(exception),
           );
         },
         act: (AllInvoicesBloc bloc) => bloc.add(
@@ -130,12 +142,91 @@ void main() {
             isLoading: true,
           ),
           AllInvoicesState.initial().copyWith(
-            items: fakeResult,
+            items: creditAndInvoiceItemList,
             failureOrSuccessOption: optionOf(
               Right(
-                fakeResult,
+                creditAndInvoiceItemList,
               ),
             ),
+            canLoadMore: false,
+          ),
+          AllInvoicesState.initial().copyWith(
+            items: creditAndInvoiceItemList,
+            canLoadMore: false,
+          ),
+          AllInvoicesState.initial().copyWith(
+            items: creditAndInvoiceItemList
+                .map((e) => e.copyWith(isLoadingOrder: false))
+                .toList(),
+            failureOrSuccessOption: optionOf(
+              Left(exception),
+            ),
+            canLoadMore: false,
+          ),
+        ],
+      );
+      blocTest(
+        'fetch -> invoices fetch success fetch order success',
+        build: () => AllInvoicesBloc(
+          allCreditsAndInvoicesRepository: repository,
+          config: config,
+        ),
+        setUp: () {
+          when(
+            () => repository.filterInvoices(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              filter: allInvoicesFilter,
+              offset: 0,
+              pageSize: config.pageSize,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(creditAndInvoiceItemList),
+          );
+          when(
+            () => repository.fetchOrder(
+              invoices: creditAndInvoiceItemList,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(invoiceOrderItems),
+          );
+        },
+        act: (AllInvoicesBloc bloc) => bloc.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.empty(),
+          ),
+        ),
+        expect: () => [
+          AllInvoicesState.initial().copyWith(
+            isLoading: true,
+          ),
+          AllInvoicesState.initial().copyWith(
+            items: creditAndInvoiceItemList,
+            failureOrSuccessOption: optionOf(
+              Right(
+                creditAndInvoiceItemList,
+              ),
+            ),
+            canLoadMore: false,
+          ),
+          AllInvoicesState.initial().copyWith(
+            items: creditAndInvoiceItemList,
+            canLoadMore: false,
+          ),
+          AllInvoicesState.initial().copyWith(
+            items: creditAndInvoiceItemList
+                .map(
+                  (e) => e.copyWith(
+                    isLoadingOrder: false,
+                    orderId: invoiceOrderItems
+                        .firstWhere(
+                          (element) => element.invoiceId == e.searchKey,
+                          orElse: () => InvoiceOrderItem.empty(),
+                        )
+                        .orderId,
+                  ),
+                )
+                .toList(),
             canLoadMore: false,
           ),
         ],
@@ -154,7 +245,7 @@ void main() {
         isLoading: false,
         items: List.filled(
           config.pageSize,
-          fakeResult.first,
+          fakeResult.first.copyWith(isLoadingOrder: false),
         ),
       ),
       setUp: () {
@@ -167,9 +258,7 @@ void main() {
             pageSize: config.pageSize,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
+          (invocation) async => Left(exception),
         );
       },
       act: (AllInvoicesBloc bloc) => bloc.add(
@@ -179,7 +268,7 @@ void main() {
         AllInvoicesState.initial().copyWith(
           items: List.filled(
             config.pageSize,
-            CreditAndInvoiceItem.empty(),
+            CreditAndInvoiceItem.empty().copyWith(isLoadingOrder: false),
           ),
           isLoading: true,
         ),
@@ -187,12 +276,8 @@ void main() {
           items: List.filled(
             config.pageSize,
             CreditAndInvoiceItem.empty(),
-          ),
-          failureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('fake-error'),
-            ),
-          ),
+          ).map((e) => e.copyWith(isLoadingOrder: false)).toList(),
+          failureOrSuccessOption: optionOf(Left(exception)),
         ),
       ],
     );
@@ -227,6 +312,16 @@ void main() {
             ),
           ),
         );
+        when(
+          () => repository.fetchOrder(
+            invoices: List.filled(
+              config.pageSize,
+              fakeResult.first,
+            ),
+          ),
+        ).thenAnswer(
+          (invocation) async => Left(exception),
+        );
       },
       act: (AllInvoicesBloc bloc) => bloc.add(
         const AllInvoicesEvent.loadMore(),
@@ -243,6 +338,15 @@ void main() {
           items: List.filled(
             config.pageSize * 2,
             fakeResult.first,
+          ),
+        ),
+        AllInvoicesState.initial().copyWith(
+          items: List.filled(
+            config.pageSize * 2,
+            fakeResult.first.copyWith(isLoadingOrder: false),
+          ),
+          failureOrSuccessOption: optionOf(
+            Left(exception),
           ),
         ),
       ],

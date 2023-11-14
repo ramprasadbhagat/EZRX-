@@ -1,25 +1,9 @@
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
-import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -28,9 +12,25 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 
 class AllInvoicesPage extends StatefulWidget {
   const AllInvoicesPage({Key? key}) : super(key: key);
@@ -73,8 +73,7 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
                   ),
                 );
               },
-              buildWhen: (previous, current) =>
-                  previous.isLoading != current.isLoading,
+              buildWhen: (previous, current) => previous.items != current.items,
               builder: (context, state) {
                 return Expanded(
                   child: state.isLoading && state.items.groupList.isEmpty
@@ -239,7 +238,7 @@ class _InvoiceItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${context.tr('Invoice')} #${invoiceItem.searchKey}',
+                  '${context.tr('Invoice')} #${invoiceItem.searchKey.displayNAIfEmpty}',
                   key: WidgetKeys.invoiceItemId,
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
@@ -256,10 +255,8 @@ class _InvoiceItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    '${context.tr('Order')} #${invoiceItem.orderId.displayNAIfEmpty}',
-                    key: WidgetKeys.invoiceItemOrderId,
-                    style: Theme.of(context).textTheme.titleSmall,
+                  _OrderNumber(
+                    invoiceItem: invoiceItem,
                   ),
                   Text(
                     '${context.tr('Due on')} ${StringUtils.getDueDateString(
@@ -283,6 +280,32 @@ class _InvoiceItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _OrderNumber extends StatelessWidget {
+  final CreditAndInvoiceItem invoiceItem;
+
+  const _OrderNumber({
+    Key? key,
+    required this.invoiceItem,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (invoiceItem.isLoadingOrder) {
+      return SizedBox(
+        key: WidgetKeys.invoiceItemOrderIdLoadingShimmer,
+        width: 40,
+        child: LoadingShimmer.tile(),
+      );
+    }
+
+    return Text(
+      '${context.tr('Order')} #${invoiceItem.orderId.displayNAIfEmpty}',
+      key: WidgetKeys.invoiceItemOrderId,
+      style: Theme.of(context).textTheme.titleSmall,
     );
   }
 }

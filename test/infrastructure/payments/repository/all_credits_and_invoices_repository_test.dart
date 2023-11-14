@@ -1,16 +1,16 @@
+import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class AllCreditsAndInvoicesLocalDataSourceMock extends Mock
     implements AllCreditsAndInvoicesLocalDataSource {}
@@ -21,13 +21,13 @@ class AllCreditsAndInvoicesRemoteDataSourceMock extends Mock
 class ConfigMock extends Mock implements Config {}
 
 void main() {
+  late Config configMock;
+  late List<CreditAndInvoiceItem> mockList;
   late AllCreditsAndInvoicesLocalDataSource
       allCreditsAndInvoicesLocalDataSourceMock;
   late AllCreditsAndInvoicesRemoteDataSource
       allCreditsAndInvoicesRemoteDataSourceMock;
-  late Config configMock;
   late AllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
-  late List<CreditAndInvoiceItem> mockList;
   const fakeFromDate = '2023-05-01';
   const fakeToDate = '2023-05-28';
   final filterMap = [

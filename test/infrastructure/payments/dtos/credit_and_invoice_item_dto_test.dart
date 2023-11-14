@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'package:ezrxmobile/infrastructure/payments/dtos/credit_and_invoice_item_dto.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/credit_and_invoice_item_dto.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +22,10 @@ void main() {
         data['data']['customerDocumentHeaderV2']['documentHeaderList'][0],
       ).toDomain();
 
-      expect(creditAndInvoiceItemDto.searchKey, '1100001228');
-      
+      expect(
+        creditAndInvoiceItemDto.searchKey,
+        StringValue('1100001228'),
+      );
     });
   });
 }

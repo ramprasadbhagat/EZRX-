@@ -2,7 +2,6 @@ part of 'all_invoices_bloc.dart';
 
 @freezed
 class AllInvoicesState with _$AllInvoicesState {
-  //Constructor created for Getter
   const AllInvoicesState._();
   const factory AllInvoicesState({
     required SalesOrganisation salesOrganisation,

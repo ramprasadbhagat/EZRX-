@@ -30,8 +30,10 @@ class CreditDetailsSection extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '${creditItem.postingKeyName} #${creditItem.searchKey}',
-                  key: WidgetKeys.creditItemId(creditItem.searchKey),
+                  '${creditItem.postingKeyName} #${creditItem.searchKey.displayNAIfEmpty}',
+                  key: WidgetKeys.creditItemId(
+                    creditItem.searchKey.getOrDefaultValue(''),
+                  ),
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                         color: ZPColors.white,
                       ),

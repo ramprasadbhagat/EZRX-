@@ -22,7 +22,9 @@ class _CreditsItem extends StatelessWidget {
           children: [
             Text(
               '${creditItem.postingKeyName} #${creditItem.searchKey}',
-              key: WidgetKeys.creditItemId(creditItem.searchKey),
+              key: WidgetKeys.creditItemId(
+                creditItem.searchKey.getOrDefaultValue(''),
+              ),
               style: Theme.of(context).textTheme.labelSmall,
             ),
             StatusLabel(

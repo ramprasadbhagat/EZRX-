@@ -1,17 +1,18 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/all_invoices_filter_dto.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/all_invoices_filter_dto.dart';
 
 class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   final Config config;
@@ -86,6 +87,36 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
         offset: offset,
         filterMap: AllCreditsFilterDto.fromDomain(filter).toMapList,
       );
+
+      return Right(response);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<InvoiceOrderItem>>> fetchOrder({
+    required List<CreditAndInvoiceItem> invoices,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.getOrderForInvoice();
+
+        return Right(response);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final invoiceIds = invoices
+          .where((e) => e.searchKey.isValid())
+          .map((e) => e.searchKey.getValue())
+          .toList();
+      final response = await remoteDataSource.getOrderForInvoice(invoiceIds);
 
       return Right(response);
     } catch (e) {

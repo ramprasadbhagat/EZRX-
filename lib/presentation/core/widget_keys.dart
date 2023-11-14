@@ -1035,6 +1035,8 @@ class WidgetKeys {
   static const Key invoiceItemStatus = Key('invoiceItemStatus');
   static const Key invoiceItemId = Key('invoiceItemId');
   static const Key invoiceItemOrderId = Key('invoiceItemOrderId');
+  static const Key invoiceItemOrderIdLoadingShimmer =
+      Key('invoiceItemOrderIdLoadingShimmer');
 
   //============================================================
   //  Invoice Details
