@@ -206,9 +206,10 @@ class _LoginFormWeb extends StatelessWidget {
                 ],
               ),
             ),
-            const _SSOLogin(
-              key: WidgetKeys.ssoLoginButton,
-            ),
+            if (!state.currentMarket.isVN)
+              const _SSOLogin(
+                key: WidgetKeys.ssoLoginButton,
+              ),
           ],
         ),
       ),
