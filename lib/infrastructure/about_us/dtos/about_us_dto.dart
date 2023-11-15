@@ -268,12 +268,12 @@ Map<String, dynamic> whoWeAreReadValue(Map json, String _) {
   );
 }
 
-Map<dynamic, dynamic> certificationReadValue(Map json, String _) {
+Map<String, dynamic> certificationReadValue(Map json, String _) {
   final values = json['value'] as List;
 
   return values.firstWhere(
     (element) => element.containsKey('certificates'),
-    orElse: () => {},
+    orElse: () => <String, dynamic>{},
   );
 }
 
