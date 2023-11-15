@@ -1,8 +1,9 @@
-part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
+part of 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
 
-class _OrderSummarySection extends StatelessWidget {
+class PriceSummarySection extends StatelessWidget {
   final CartState cartState;
-  const _OrderSummarySection({Key? key, required this.cartState})
+
+  const PriceSummarySection({Key? key, required this.cartState})
       : super(key: key);
 
   @override
@@ -58,7 +59,7 @@ class _OrderSummarySection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              context.tr('Grand Total: '),
+              context.tr('Grand total: '),
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),

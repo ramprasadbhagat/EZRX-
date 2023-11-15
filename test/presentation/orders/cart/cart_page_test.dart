@@ -1288,10 +1288,6 @@ void main() {
           ),
         ];
 
-        final cartState = CartState.initial().copyWith(
-          cartProducts: mockCartProductList,
-        );
-
         when(() => salesOrgBloc.state).thenReturn(
           salesOrgState,
         );
@@ -1303,12 +1299,15 @@ void main() {
         );
 
         when(() => cartBloc.state).thenReturn(
-          cartState,
+          CartState.initial().copyWith(
+            cartProducts: mockCartProductList,
+            isAplProductLoading: false,
+          ),
         );
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
-        final grandTotal = find.byKey(WidgetKeys.grandTotalKey);
+        final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
         expect(grandTotal, findsOneWidget);
         expect(
           find.text(
@@ -2140,6 +2139,26 @@ void main() {
             ),
           ),
         ).called(1);
+      });
+
+      testWidgets(
+          'Should show price summary bottom sheet when tap on grand total',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isAplProductLoading: false,
+            cartProducts: mockCartItems,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        expect(grandTotal, findsOneWidget);
+        await tester.tap(grandTotal);
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
       });
     },
   );

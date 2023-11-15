@@ -9,7 +9,8 @@ class _CartPageCheckoutSection extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.cartProducts != current.cartProducts ||
           previous.isUpdatingStock != current.isUpdatingStock ||
-          previous.isUpserting != current.isUpserting,
+          previous.isUpserting != current.isUpserting ||
+          previous.isAplProductLoading != current.isAplProductLoading,
       builder: (context, state) {
         return Column(
           children: [
@@ -38,44 +39,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
             const _MovCheckMessage(),
             const _StockInvalidIDMarketMessage(),
             const _CartPageInvalidItemsMessage(),
-            ListTile(
-              dense: true,
-              visualDensity: VisualDensity.compact,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-              title: Text(
-                '${state.cartProducts.length} ${'items'.tr()}',
-                key: WidgetKeys.cartTotalQty,
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              trailing: BlocBuilder<CartBloc, CartState>(
-                buildWhen: (previous, current) =>
-                    previous.isUpserting != current.isUpserting ||
-                    previous.isAplProductLoading != current.isAplProductLoading,
-                builder: (context, state) {
-                  if (state.isUpserting || state.isAplProductLoading) {
-                    return SizedBox(
-                      width:
-                          Responsive.isLargerThan(context, Breakpoint.desktop)
-                              ? MediaQuery.of(context).size.width * 0.2
-                              : MediaQuery.of(context).size.width * 0.3,
-                      child: LoadingShimmer.tile(),
-                    );
-                  }
-                  
-                  return PriceComponent(
-                    key: WidgetKeys.grandTotalKey,
-                    salesOrgConfig:
-                        context.read<EligibilityBloc>().state.salesOrgConfigs,
-                    price: state.grandTotalHidePriceMaterial.toString(),
-                    title: 'Grand total: '.tr(),
-                    priceLabelStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.extraLightGrey4,
-                            ),
-                  );
-                },
-              ),
-            ),
+            PriceSummaryTile(cartState: state),
             _CartPageCheckoutButton(),
           ],
         );

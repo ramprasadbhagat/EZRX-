@@ -15,7 +15,6 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -25,7 +24,6 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
@@ -33,12 +31,12 @@ import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bun
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_material_item/checkout_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_offer_bonus_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
+import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
-part 'widgets/order_summary_section.dart';
 part 'widgets/delivery_info.dart';
 part 'widgets/request_delivery_date.dart';
 part 'widgets/product_bonus_item.dart';
@@ -152,7 +150,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.all(20),
-                  child: _OrderSummarySection(cartState: cartState),
+                  child: PriceSummarySection(cartState: cartState),
                 ),
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
@@ -168,41 +166,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 height: 1,
                 color: ZPColors.extraLightGrey2,
               ),
-              ListTile(
-                key: WidgetKeys.showOrderSumaryListTile,
-                onTap: () => _showOrderSummary(context, cartState),
-                dense: true,
-                visualDensity: VisualDensity.compact,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                title: Text(
-                  '${cartState.totalItems} ${context.tr('items')}',
-                  key: WidgetKeys.checkoutStickyTotalQty,
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _DisplayPrice(
-                      priceComponent: PriceComponent(
-                        key: WidgetKeys.checkoutStickyGrandTotal,
-                        salesOrgConfig: eligibilityState.salesOrgConfigs,
-                        price: cartState.grandTotalHidePriceMaterial.toString(),
-                        title: context.tr('Grand Total: '),
-                        priceLabelStyle:
-                            Theme.of(context).textTheme.titleSmall?.copyWith(
-                                  color: ZPColors.extraLightGrey4,
-                                ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    const Icon(
-                      Icons.arrow_forward_ios_outlined,
-                      size: 16,
-                      color: ZPColors.neutralsBlack,
-                    ),
-                  ],
-                ),
-              ),
+              PriceSummaryTile(cartState: cartState),
               SafeArea(
                 child: Container(
                   width: double.infinity,
@@ -319,45 +283,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
             ],
           ),
-        );
-      },
-    );
-  }
-
-  void _showOrderSummary(BuildContext context, CartState cartState) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      useSafeArea: true,
-      builder: (_) {
-        return Wrap(
-          key: WidgetKeys.orderPriceSummarySheet,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  _OrderSummarySection(cartState: cartState),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      key: WidgetKeys.closeButton,
-                      onPressed: () => context.router.pop(),
-                      child: Text(
-                        context.tr('Close'),
-                        style:
-                            Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: ZPColors.white,
-                                ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
         );
       },
     );
