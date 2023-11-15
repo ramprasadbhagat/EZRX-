@@ -183,7 +183,7 @@ class ComboDeal with _$ComboDeal {
       case ComboDealScheme.k3:
         return descendingSortedSKUTier
             .firstWhere(
-              (tier) => tier.minQty == totalQuantityUnit,
+              (tier) => tier.minQty <= totalQuantityUnit,
               orElse: () => ComboDealSKUTier.empty(),
             )
             .discountInfo
