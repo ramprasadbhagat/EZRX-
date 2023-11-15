@@ -25,8 +25,7 @@ class AnnouncementInfoDetailsDto with _$AnnouncementInfoDetailsDto {
         required String manufacturer,
     @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
         required String source,
-    @JsonKey(name: 'tag', readValue: readValue, defaultValue: '')
-        required String tag,
+    @JsonKey(name: 'tag', readValue: readTag) required String tag,
   }) = _AnnouncementInfoDetailsDto;
 
   AnnouncementInfoDetails get toDomain => AnnouncementInfoDetails(
@@ -46,5 +45,6 @@ class AnnouncementInfoDetailsDto with _$AnnouncementInfoDetailsDto {
 }
 
 String readValue(Map json, String key) => json[key]['value'] ?? '';
+String readTag(Map json, String key) => json[key]['value']?['name'] ?? '';
 String readSrc(Map json, String key) => json[key]['src'] ?? '';
 String readIso(Map json, String key) => json[key]['isoValue'] ?? '';

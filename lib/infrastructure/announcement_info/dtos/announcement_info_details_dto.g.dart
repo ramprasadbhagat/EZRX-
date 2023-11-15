@@ -17,7 +17,7 @@ _$_AnnouncementInfoDetailsDto _$$_AnnouncementInfoDetailsDtoFromJson(
       publishedDate: readIso(json, 'publishedDate') as String? ?? '',
       manufacturer: readValue(json, 'manufacturer') as String? ?? '',
       source: readValue(json, 'source') as String? ?? '',
-      tag: readValue(json, 'tag') as String? ?? '',
+      tag: readTag(json, 'tag') as String,
     );
 
 Map<String, dynamic> _$$_AnnouncementInfoDetailsDtoToJson(
