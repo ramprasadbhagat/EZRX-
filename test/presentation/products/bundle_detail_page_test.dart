@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/bundle_detail_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -113,8 +114,19 @@ void main() {
         ],
         bundleInformation: [
           BundleInfo.empty().copyWith(
-            quantity: 1,
-            rate: 20,
+            quantity: 5,
+            rate: 200,
+            sequence: 1,
+          ),
+          BundleInfo.empty().copyWith(
+            quantity: 15,
+            rate: 120,
+            sequence: 7,
+          ),
+          BundleInfo.empty().copyWith(
+            quantity: 10,
+            rate: 180,
+            sequence: 4,
           ),
         ],
       ),
@@ -155,6 +167,7 @@ void main() {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           usingLocalization: true,
+          useMediaQuery: false,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<CustomerCodeBloc>(
@@ -266,8 +279,42 @@ void main() {
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final price = find.text('SGD 20.00 per item', findRichText: true);
+        final price = find.text('SGD 200.00 per item', findRichText: true);
         expect(price, findsOneWidget);
+      });
+
+      testWidgets(
+          'Test Bundle maximum discount value displayed in last sequence',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              currency: Currency('SGD'),
+            ),
+          ),
+        );
+
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            isFetching: false,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: bundle,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final balanceTextRowFinder = find.byType(BalanceTextRow);
+        expect(balanceTextRowFinder, findsNWidgets(3));
+        expect(
+          find.descendant(
+            of: find.byType(BalanceTextRow).last,
+            matching:
+                find.textContaining('SGD 120.00 per item', findRichText: true),
+          ),
+          findsOneWidget,
+        );
       });
     },
   );

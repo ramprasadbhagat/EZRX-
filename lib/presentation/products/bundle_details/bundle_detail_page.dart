@@ -267,7 +267,7 @@ class _BundleOfferDetails extends StatelessWidget {
                       borderColor: ZPColors.lightBlueBorderColor,
                       child: Column(
                         children: state.productDetailAggregate.materialInfo
-                            .bundle.bundleInformation
+                            .bundle.sortedBundleInformation
                             .map(
                               (e) => BalanceTextRow(
                                 keyFlex: 3,
