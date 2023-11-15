@@ -15,7 +15,7 @@
         "invoiceProcessingStatus": "In Progress",
         "paymentMethod": "Payment Gateway",
         "iban": "",
-        "bankIdentification": "",
+        "bankIdentification": "BCA",
         "bankCountryKey": "",
         "bankKey": "",
         "bankAccountNumber": "",
