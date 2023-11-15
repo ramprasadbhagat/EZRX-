@@ -187,7 +187,7 @@ void main() {
     });
   });
 
-  group('View by Order filter', () {
+  group('View Filter', () {
     testWidgets('displayed when tap filter icon', (tester) async {
       final fakeFilter = ViewByOrdersFilter.empty()
           .copyWith(orderStatusList: [StatusType('test')]);
@@ -273,7 +273,7 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('close button', (tester) async {
+    testWidgets('close button view by orders filter', (tester) async {
       await tester.pumpWidget(testWidget(const OrdersTab()));
       await tester.pump();
       await tester.tap(find.byKey(WidgetKeys.viewByOrdersTabKey));
@@ -295,7 +295,26 @@ void main() {
         () => viewByOrderBlocMock.add(any()),
       );
     });
-    testWidgets('reset filter', (tester) async {
+
+    testWidgets('close button view by items filter', (tester) async {
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pump();
+      await tester.tap(find.byKey(WidgetKeys.viewByItemsTabKey));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(WidgetKeys.ordersTabFilterButtonKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(ViewByItemFilterSheet), findsOneWidget);
+      await tester.tap(find.byKey(WidgetKeys.closeButton));
+      await tester.pumpAndSettle();
+      verify(
+        () => viewByItemFilterBlocMock.add(
+          ViewByItemFilterEvent.resetFiltersToLastApplied(
+            lastAppliedFilter: ViewByItemFilter.empty(),
+          ),
+        ),
+      );
+    });
+    testWidgets('reset filter by order', (tester) async {
       final fakeSearchKey = SearchKey('test');
       when(() => viewByOrderBlocMock.state).thenReturn(
         ViewByOrderState.initial().copyWith(
@@ -319,6 +338,43 @@ void main() {
         () => viewByOrderBlocMock.add(
           ViewByOrderEvent.fetch(
             filter: ViewByOrdersFilter.empty(),
+            searchKey: fakeSearchKey,
+          ),
+        ),
+      );
+
+      verify(
+        () => mixpanelServiceMock.trackEvent(
+          eventName: MixpanelEvents.orderDetailFiltered,
+          properties: any(named: 'properties'),
+        ),
+      );
+    });
+
+    testWidgets('reset filter by items', (tester) async {
+      final fakeSearchKey = SearchKey('test');
+      when(() => viewByItemsBlocMock.state).thenReturn(
+        ViewByItemsState.initial().copyWith(
+          appliedFilter: ViewByItemFilter.empty()
+              .copyWith(orderStatusList: [StatusType('test')]),
+          searchKey: fakeSearchKey,
+        ),
+      );
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pump();
+      await tester.tap(find.byKey(WidgetKeys.viewByItemsTabKey));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(WidgetKeys.ordersTabFilterButtonKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(ViewByItemFilterSheet), findsOneWidget);
+      await tester.tap(find.byKey(WidgetKeys.filterResetButton));
+      await tester.pumpAndSettle();
+      expect(find.byType(ViewByItemFilterSheet), findsNothing);
+
+      verify(
+        () => viewByItemsBlocMock.add(
+          ViewByItemsEvent.fetch(
+            viewByItemFilter: ViewByItemFilter.empty(),
             searchKey: fakeSearchKey,
           ),
         ),
@@ -399,7 +455,7 @@ void main() {
       );
     });
 
-    testWidgets('apply from/to date', (tester) async {
+    testWidgets('apply from/to date view by orders filter', (tester) async {
       final fakeStartDate = DateTime.now().subtract(const Duration(days: 2));
       final fakeEndDate = DateTime.now().subtract(const Duration(days: 1));
       final fromDateString =
@@ -448,6 +504,110 @@ void main() {
           ),
         ),
       ).called(2);
+    });
+
+    testWidgets('apply from/to date view by items filter', (tester) async {
+      final fakeStartDate = DateTime.now().subtract(const Duration(days: 2));
+      final fakeEndDate = DateTime.now().subtract(const Duration(days: 1));
+      final fromDateString =
+          '${fakeStartDate.month}/${fakeStartDate.day}/${fakeStartDate.year}';
+      final toDateString =
+          '${fakeEndDate.month}/${fakeEndDate.day}/${fakeEndDate.year}';
+
+      await tester.pumpWidget(testWidget(const ViewByItemFilterSheet()));
+      await tester.pump();
+
+      await tester.tap(find.byKey(WidgetKeys.viewByItemsFilterFromDateKey));
+      await tester.pumpAndSettle();
+      final dialog = find.byType(DateRangePickerDialog);
+      final editIcon = find.descendant(
+        of: dialog,
+        matching: find.widgetWithIcon(IconButton, Icons.edit),
+      );
+
+      await tester.tap(editIcon);
+      await tester.pump();
+      final submitButton =
+          find.descendant(of: dialog, matching: find.byType(TextButton));
+      final dateRangeFields =
+          find.descendant(of: dialog, matching: find.byType(TextField));
+      await tester.enterText(dateRangeFields.first, fromDateString);
+      await tester.enterText(dateRangeFields.last, toDateString);
+      await tester.tap(submitButton.last);
+      await tester.pump();
+
+      await tester.tap(find.byKey(WidgetKeys.viewByItemsFilterToDateKey));
+      await tester.pumpAndSettle();
+      await tester.tap(editIcon);
+      await tester.pump();
+      await tester.enterText(dateRangeFields.first, fromDateString);
+      await tester.enterText(dateRangeFields.last, toDateString);
+      await tester.pump();
+      await tester.tap(submitButton.last);
+      await tester.pump();
+
+      verify(
+        () => viewByItemFilterBlocMock.add(
+          ViewByItemFilterEvent.setOrderDate(
+            dateRange: DateUtils.datesOnly(
+              DateTimeRange(start: fakeStartDate, end: fakeEndDate),
+            ),
+          ),
+        ),
+      ).called(2);
+    });
+
+    testWidgets('apply status view by items filter', (tester) async {
+      await tester.pumpWidget(testWidget(const ViewByItemFilterSheet()));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.text(
+          'Order created',
+        ),
+      );
+      await tester.pump();
+
+      verify(
+        () => viewByItemFilterBlocMock.add(
+          ViewByItemFilterEvent.setOrderStatus(
+            status: StatusType('Order created'),
+            value: true,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('should rebuild the filter date range when order date changed',
+        (tester) async {
+      final fakeStartDate = DateTime.now().subtract(const Duration(days: 2));
+      final fakeEndDate = DateTime.now().subtract(const Duration(days: 1));
+      whenListen(
+        viewByItemFilterBlocMock,
+        Stream.fromIterable([
+          ViewByItemFilterState.initial(),
+          ViewByItemFilterState.initial().copyWith(
+            filter: ViewByItemFilter.empty().copyWith(
+              orderDateFrom: DateTimeStringValue(
+                fakeStartDate.toIso8601String(),
+              ),
+              orderDateTo: DateTimeStringValue(
+                fakeEndDate.toIso8601String(),
+              ),
+            ),
+          )
+        ]),
+      );
+      await tester.pumpWidget(testWidget(const ViewByItemFilterSheet()));
+      await tester.pump();
+
+      expect(
+        find.byKey(WidgetKeys.viewByItemsFilterFromDateKey),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.viewByItemsFilterToDateKey),
+        findsOneWidget,
+      );
     });
 
     testWidgets(
