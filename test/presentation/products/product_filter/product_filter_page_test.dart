@@ -17,6 +17,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockMaterialFilterBloc
@@ -27,7 +28,7 @@ class MockMaterialListBloc
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
 class MockMixpanelService extends Mock implements MixpanelService {}
@@ -38,25 +39,23 @@ void main() {
   late AppRouter autoRouterMock;
   late MaterialFilterBloc mockMaterialFilterBloc;
   late MaterialListBloc mockMaterialListBloc;
-  late EligibilityBlocMock eligibilityBlocMock;
+  late EligibilityBloc mockEligibilityBloc;
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerSingleton<MixpanelService>(MockMixpanelService());
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => mockMaterialFilterBloc);
-    locator.registerLazySingleton(() => mockMaterialListBloc);
   });
   setUp(() async {
     mockMaterialFilterBloc = MockMaterialFilterBloc();
     mockMaterialListBloc = MockMaterialListBloc();
-    eligibilityBlocMock = EligibilityBlocMock();
+    mockEligibilityBloc = MockEligibilityBloc();
     autoRouterMock = locator<AppRouter>();
     when(() => mockMaterialFilterBloc.state)
         .thenReturn(MaterialFilterState.initial());
     when(() => mockMaterialListBloc.state)
         .thenReturn(MaterialListState.initial());
-    when(() => eligibilityBlocMock.state)
+    when(() => mockEligibilityBloc.state)
         .thenReturn(EligibilityState.initial());
   });
   Widget getScopedWidget() {
@@ -65,13 +64,16 @@ void main() {
       usingLocalization: true,
       providers: [
         BlocProvider<EligibilityBloc>(
-          create: (context) => eligibilityBlocMock,
+          create: (context) => mockEligibilityBloc,
         ),
         BlocProvider<MaterialFilterBloc>(
           create: (context) => mockMaterialFilterBloc,
         ),
         BlocProvider<MaterialListBloc>(
           create: (context) => mockMaterialListBloc,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => mockEligibilityBloc,
         ),
       ],
       child: const Scaffold(
@@ -177,45 +179,71 @@ void main() {
       );
 
       testWidgets(
-        'Test Product Filter By Category Options',
+        'Product Filter By Category Options is not visible when options list is empty',
         (tester) async {
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
-          expect(find.text('Filter by'.tr()), findsOneWidget);
+          expect(find.text('Filter by'.tr()), findsNothing);
 
-          final showCountryButton =
-              find.widgetWithText(InkWell, 'Country of origin'.tr());
-          expect(showCountryButton, findsOneWidget);
-          final showManufaturerButton =
-              find.widgetWithText(InkWell, 'Manufacturer'.tr());
-          expect(showManufaturerButton, findsOneWidget);
-          await tester.tap(showManufaturerButton);
-          await tester.pumpAndSettle();
-          expect(find.byType(FilterByPage), findsOneWidget);
-          final manufacturerSelectedFinder =
-              find.byKey(WidgetKeys.manufactureListSelectedLength);
-          expect(manufacturerSelectedFinder, findsNothing);
+          expect(
+            find.widgetWithText(InkWell, 'Country of origin'.tr()),
+            findsNothing,
+          );
+
+          expect(
+            find.widgetWithText(InkWell, 'Manufacturer'.tr()),
+            findsNothing,
+          );
         },
       );
 
       testWidgets(
-        'Test Product Filter By Manufacturer Button',
+        'Filter by country of origin option is visible if country list is not empty',
+        (tester) async {
+          when(() => mockMaterialFilterBloc.state).thenReturn(
+            MaterialFilterState.initial().copyWith.materialFilter(
+              countryMapOptions: {
+                MaterialFilterCountry.empty().copyWith(name: 'fake-name'): true
+              },
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(find.text('Filter by'.tr()), findsOneWidget);
+          final countryOfOriginFilter =
+              find.widgetWithText(InkWell, 'Country of origin'.tr());
+          await tester.dragUntilVisible(
+            countryOfOriginFilter,
+            find.byType(ListView),
+            const Offset(0, -300),
+          );
+          expect(countryOfOriginFilter, findsOneWidget);
+          await tester.pump();
+          await tester.tap(countryOfOriginFilter);
+          await tester.pumpAndSettle();
+          expect(find.byType(FilterByPage), findsOneWidget);
+          await tester.tap(find.byKey(WidgetKeys.backButton));
+          await tester.pumpAndSettle();
+          verify(
+            () => mockMaterialFilterBloc.add(
+              const MaterialFilterEvent.updateSearchKey(''),
+            ),
+          ).called(1);
+        },
+      );
+
+      testWidgets(
+        'Filter by manufacturer option is visible if manufacturer list is not empty',
         (tester) async {
           final manufactureList = ['BAXTER HEALTHCARE -M', 'AMO IRELAND'];
           when(() => mockMaterialFilterBloc.state).thenReturn(
-            MaterialFilterState.initial().copyWith(
-              materialFilter: MaterialFilter.empty().copyWith(
-                manufactureMapOptions: {
-                  for (var e in manufactureList) e: false
-                },
-              ),
+            MaterialFilterState.initial().copyWith.materialFilter(
+              manufactureMapOptions: {for (var e in manufactureList) e: false},
             ),
           );
           final expectedState = [
-            MaterialFilterState.initial().copyWith(
-              materialFilter: MaterialFilter.empty().copyWith(
-                manufactureMapOptions: {for (var e in manufactureList) e: true},
-              ),
+            MaterialFilterState.initial().copyWith.materialFilter(
+              manufactureMapOptions: {for (var e in manufactureList) e: true},
             ),
           ];
           whenListen(
@@ -225,10 +253,6 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           expect(find.text('Filter by'.tr()), findsOneWidget);
-
-          final showCountryButton =
-              find.widgetWithText(InkWell, 'Country of origin'.tr());
-          expect(showCountryButton, findsOneWidget);
           final manufacturerLabel = find.text('Manufacturer'.tr());
           await tester.tap(manufacturerLabel);
           await tester.pumpAndSettle();
@@ -241,8 +265,7 @@ void main() {
               ),
             ),
           ).called(1);
-          await tester.pump(const Duration(seconds: 2));
-
+          await tester.pumpAndSettle();
           await tester.tap(find.byKey(WidgetKeys.suggestedManufacturer).last);
           verify(
             () => mockMaterialFilterBloc.add(
@@ -256,34 +279,59 @@ void main() {
             find.byKey(WidgetKeys.suggestedManufacturer),
             findsNWidgets(2),
           );
-          await tester.pump(const Duration(seconds: 2));
+          await tester.pumpAndSettle();
           expect(find.byType(ChoiceChip), findsNWidgets(2));
         },
       );
 
       testWidgets(
-        'Test Product Filter By Category Options When Filter Selected',
+        'Manufacturer filter is selected',
         (tester) async {
-          final expectedMaterialFilterStates = Stream.fromIterable(
-            [
-              MaterialFilterState.initial().copyWith(),
-              MaterialFilterState.initial().copyWith(
-                materialFilter: MaterialFilter.empty().copyWith(
-                  manufactureListSelected: ['fake-manufacturer'],
-                  countryListSelected: [MaterialFilterCountry.empty()],
-                ),
-              ),
-            ],
+          const fakeManufacturer = 'fake-manufacturer';
+          final fakeState =
+              MaterialFilterState.initial().copyWith.materialFilter(
+            manufactureMapOptions: {fakeManufacturer: true},
+            manufactureListSelected: [fakeManufacturer],
           );
-          whenListen(mockMaterialFilterBloc, expectedMaterialFilterStates);
+          whenListen(
+            mockMaterialFilterBloc,
+            Stream.fromIterable([MaterialFilterState.initial(), fakeState]),
+          );
+          when(() => mockMaterialFilterBloc.state).thenReturn(fakeState);
+
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
-          final manufacturerSelectedFinder =
-              find.byKey(WidgetKeys.manufactureListSelectedLength);
-          expect(manufacturerSelectedFinder, findsOneWidget);
-          final countryListSelectedFinder =
-              find.byKey(WidgetKeys.countryListSelectedLength);
-          expect(countryListSelectedFinder, findsOneWidget);
+
+          expect(
+            find.byKey(WidgetKeys.manufactureListSelectedLength),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        'Country of origin filter is selected',
+        (tester) async {
+          final fakeCountry =
+              MaterialFilterCountry.empty().copyWith(name: 'fake-name');
+          final fakeState =
+              MaterialFilterState.initial().copyWith.materialFilter(
+            countryMapOptions: {fakeCountry: true},
+            countryListSelected: [fakeCountry],
+          );
+          whenListen(
+            mockMaterialFilterBloc,
+            Stream.fromIterable([MaterialFilterState.initial(), fakeState]),
+          );
+          when(() => mockMaterialFilterBloc.state).thenReturn(fakeState);
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          expect(
+            find.byKey(WidgetKeys.countryListSelectedLength),
+            findsOneWidget,
+          );
         },
       );
 
@@ -313,6 +361,35 @@ void main() {
           await tester.tap(applyButtonFinder);
         },
       );
+
+      testWidgets(
+          'Sub options in Item with offer options is not visible in ID market',
+          (tester) async {
+        when(() => mockEligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(find.text('Show product'.tr()), findsOneWidget);
+        expect(
+          find.byKey(WidgetKeys.showProductCheckbox('Favourites')),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(WidgetKeys.showProductCheckbox('Items with offers')),
+          findsNothing,
+        );
+        expect(
+          find.byKey(WidgetKeys.showProductCheckbox('Bundle offers')),
+          findsNothing,
+        );
+        expect(
+          find.byKey(WidgetKeys.showProductCheckbox('Combo offers')),
+          findsNothing,
+        );
+      });
     },
   );
 }

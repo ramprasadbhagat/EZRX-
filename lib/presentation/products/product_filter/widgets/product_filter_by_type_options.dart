@@ -30,41 +30,44 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                   ),
               title: 'Favourites',
             ),
-            _ListTileThemeWidget(
-              key: WidgetKeys.showProductCheckbox('Items with offers'),
-              value: state.materialFilter.isProductOffer,
-              onChanged: (value) => context.read<MaterialFilterBloc>().add(
-                    MaterialFilterEvent.updateSelectedMaterialFilter(
-                      MaterialFilterType.productOffers,
-                      !state.materialFilter.isProductOffer,
-                    ),
-                  ),
-              title: 'Items with offers',
-            ),
-            _ListTileThemeWidget(
-              key: WidgetKeys.showProductCheckbox('Bundle offers'),
-              value: state.materialFilter.bundleOffers,
-              onChanged: (value) => context.read<MaterialFilterBloc>().add(
-                    MaterialFilterEvent.updateSelectedMaterialFilter(
-                      MaterialFilterType.bundleOffers,
-                      !state.materialFilter.bundleOffers,
-                    ),
-                  ),
-              title: 'Bundle offers',
-            ),
-            if (context.read<EligibilityBloc>().state.comboDealEligible)
+            if (!context.read<EligibilityBloc>().state.salesOrg.isID) ...[
               _ListTileThemeWidget(
-                value: state.materialFilter.comboOffers,
-                onChanged: (value) {
-                  context.read<MaterialFilterBloc>().add(
-                        MaterialFilterEvent.updateSelectedMaterialFilter(
-                          MaterialFilterType.comboOffers,
-                          !state.materialFilter.comboOffers,
-                        ),
-                      );
-                },
-                title: 'Combo offers',
+                key: WidgetKeys.showProductCheckbox('Items with offers'),
+                value: state.materialFilter.isProductOffer,
+                onChanged: (value) => context.read<MaterialFilterBloc>().add(
+                      MaterialFilterEvent.updateSelectedMaterialFilter(
+                        MaterialFilterType.productOffers,
+                        !state.materialFilter.isProductOffer,
+                      ),
+                    ),
+                title: 'Items with offers',
               ),
+              _ListTileThemeWidget(
+                key: WidgetKeys.showProductCheckbox('Bundle offers'),
+                value: state.materialFilter.bundleOffers,
+                onChanged: (value) => context.read<MaterialFilterBloc>().add(
+                      MaterialFilterEvent.updateSelectedMaterialFilter(
+                        MaterialFilterType.bundleOffers,
+                        !state.materialFilter.bundleOffers,
+                      ),
+                    ),
+                title: 'Bundle offers',
+              ),
+              if (context.read<EligibilityBloc>().state.comboDealEligible)
+                _ListTileThemeWidget(
+                  key: WidgetKeys.showProductCheckbox('Combo offers'),
+                  value: state.materialFilter.comboOffers,
+                  onChanged: (value) {
+                    context.read<MaterialFilterBloc>().add(
+                          MaterialFilterEvent.updateSelectedMaterialFilter(
+                            MaterialFilterType.comboOffers,
+                            !state.materialFilter.comboOffers,
+                          ),
+                        );
+                  },
+                  title: 'Combo offers',
+                ),
+            ],
           ],
         );
       },

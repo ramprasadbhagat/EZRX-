@@ -32,6 +32,13 @@ class MaterialFilter with _$MaterialFilter {
         countryListSelected: <MaterialFilterCountry>[],
       );
 
+  bool get displayManufactureOption => manufactureMapOptions.isNotEmpty;
+
+  bool get displayCountryOfOriginOption => countryMapOptions.isNotEmpty;
+
+  bool get displayCategorySection =>
+      displayManufactureOption || displayCountryOfOriginOption;
+
   Map<String, dynamic> get trackingInfo {
     final showProductFilter = <String>[];
     if (isFavourite) showProductFilter.add('Favourites');
