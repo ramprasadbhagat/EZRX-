@@ -51,7 +51,7 @@ class _ViewByOrderItem extends StatelessWidget {
         statusWidget: StatusLabel(
           key: WidgetKeys.orderItemStatusKey,
           status: StatusType(
-            context.tr(orderHistoryItem.status.displayOrderStatus),
+            context.tr(orderHistoryItem.status.getOrDefaultValue('')),
           ),
         ),
         quantity: orderHistoryItem.qty.toString(),

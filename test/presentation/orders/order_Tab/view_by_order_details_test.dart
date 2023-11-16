@@ -897,7 +897,7 @@ void main() {
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: [
               fakeOrderHistoryDetailsOrderItem.copyWith(
-                sAPStatus: StatusType('Order Creating'),
+                sAPStatus: OrderStepValue('Order Creating'),
                 productType: MaterialInfoType('material'),
               )
             ],
@@ -1036,19 +1036,24 @@ void main() {
       expect(shipToAddressFinder, findsOneWidget);
     });
 
-    testWidgets('Status tracker is not displayed', (tester) async {
-      const fakeStatus = 'test';
+    testWidgets('Status tracker is  displayed with ID market', (tester) async {
+      const fakeStatus = 'Order created';
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
       when(() => mockViewByOrderDetailsBloc.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
-              processingStatus: StatusType(fakeStatus),
+              processingStatus: OrderStepValue(fakeStatus),
             ),
       );
 
       await tester.pumpWidget(getScopedWidget());
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(
         find.byKey(WidgetKeys.statusTracker(fakeStatus)),
-        findsNothing,
+        findsOneWidget,
       );
     });
 

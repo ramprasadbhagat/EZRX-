@@ -22,12 +22,13 @@ class OrderStatusTrackerRemoteDataSource {
     required this.config,
   });
 
-  Future<List<OrderStatusTracker>> getOrderStatusTracker() async {
+  Future<List<OrderStatusTracker>> getOrderStatusTracker({
+    required String invoiceNumber,
+  }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getOrderStatusTracker();
       final variables = {
-        ///TODO: currently for zyllem we are using zyllem test data to display under OutForDelievry section.Because zyllem service is not activated
-        'inv': '12345',
+        'inv': invoiceNumber,
         'sortByUpdateTimeStamp': 'DESC',
       };
 

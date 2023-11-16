@@ -2,11 +2,11 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_repository.dart';
@@ -27,7 +27,7 @@ void main() {
   late ViewByItemRepository viewByItemRepositoryMock;
   late List<OrderStatusTracker> fakeOrderStatusTracker;
   late OrderHistoryItem fakeOrderHistoryItem;
-  final fakeStatus = StatusType('Out for delivery');
+  final fakeStatus = OrderStepValue('Out for delivery');
 
   group(
     'ViewByItemDetailsBloc Test => ',
@@ -64,7 +64,9 @@ void main() {
         ),
         setUp: () {
           when(
-            () => orderStatusTrackerRepositoryMock.getOrderStatusTracker(),
+            () => orderStatusTrackerRepositoryMock.getOrderStatusTracker(
+              invoiceNumber: fakeOrderHistoryItem.invoiceData.invoiceNumber,
+            ),
           ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('Fake-Error'),
@@ -72,9 +74,14 @@ void main() {
           );
         },
         act: (bloc) => bloc.add(
-          const ViewByItemDetailsEvent.fetchZyllemStatus(),
+          ViewByItemDetailsEvent.fetchZyllemStatus(
+            invoiceNumber: fakeOrderHistoryItem.invoiceData.invoiceNumber,
+          ),
         ),
         expect: () => [
+          ViewByItemDetailsState.initial().copyWith(
+            isLoading: true,
+          ),
           ViewByItemDetailsState.initial().copyWith(
             failureOrSuccessOption: optionOf(
               const Left(
@@ -109,7 +116,9 @@ void main() {
         ),
         setUp: () {
           when(
-            () => orderStatusTrackerRepositoryMock.getOrderStatusTracker(),
+            () => orderStatusTrackerRepositoryMock.getOrderStatusTracker(
+              invoiceNumber: fakeOrderHistoryItem.invoiceData.invoiceNumber,
+            ),
           ).thenAnswer(
             (invocation) async => Right(fakeOrderStatusTracker),
           );
@@ -138,17 +147,14 @@ void main() {
               orderHistoryItem: fakeOrderHistoryItem,
             ),
             ViewByItemDetailsState.initial().copyWith(
-              orderHistory: newViewByItemDetails.copyWith(
-                orderHistoryItems: newViewByItemDetails.orderHistoryItems
-                    .map(
-                      (e) => e.copyWith(
-                        orderStatusTracker: fakeOrderStatusTracker,
-                      ),
-                    )
-                    .toList(),
-              ),
+              orderHistory: newViewByItemDetails,
               orderHistoryItem: fakeOrderHistoryItem,
-              failureOrSuccessOption: none(),
+              isLoading: true,
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              orderHistoryStatuses: fakeOrderStatusTracker,
+              orderHistory: newViewByItemDetails,
+              orderHistoryItem: fakeOrderHistoryItem,
             ),
           ];
         },

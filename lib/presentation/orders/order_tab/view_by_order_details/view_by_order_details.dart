@@ -1,3 +1,6 @@
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/presentation/core/status_tracker.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_status_section.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +20,7 @@ import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/s
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_item_details_section.dart';
 
 part 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_bundle_item_details_section.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_status_tracker.dart';
 
 class ViewByOrderDetailsPage extends StatelessWidget {
   const ViewByOrderDetailsPage({
@@ -44,6 +48,10 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                     key: WidgetKeys.viewByOrderDetailsPageListView,
                     children: <Widget>[
                       const OrderHeaderSection(),
+                      if (context.read<EligibilityBloc>().state.salesOrg.isID)
+                        _ViewByOrderStatusTracker(
+                          orderHistoryDetails: state.orderHistoryDetails,
+                        ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20.0,

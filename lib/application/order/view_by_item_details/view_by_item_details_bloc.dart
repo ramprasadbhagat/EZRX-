@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -73,12 +74,6 @@ class ViewByItemDetailsBloc
                 isLoading: false,
               ),
             );
-            if (!e.disableDeliveryDateForZyllemStatus &&
-                state.orderHistoryItem.status.getDisplayZyllemStatus) {
-              add(
-                const _FetchZyllemStatus(),
-              );
-            }
           },
         );
       },
@@ -99,35 +94,36 @@ class ViewByItemDetailsBloc
           ),
         );
         if (!e.disableDeliveryDateForZyllemStatus &&
-            e.orderHistoryItem.status.getDisplayZyllemStatus) {
+            e.orderHistoryItem.status.fetchZyllemStatusesNeeded) {
           add(
-            const _FetchZyllemStatus(),
+            _FetchZyllemStatus(
+              invoiceNumber: e.orderHistoryItem.invoiceData.invoiceNumber,
+            ),
           );
         }
       },
       fetchZyllemStatus: (e) async {
-        final failureOrSuccess =
-            await orderStatusTrackerRepository.getOrderStatusTracker();
+        emit(
+          state.copyWith(
+            isLoading: true,
+          ),
+        );
+        final failureOrSuccess = await orderStatusTrackerRepository
+            .getOrderStatusTracker(invoiceNumber: e.invoiceNumber);
 
         await failureOrSuccess.fold(
           (failure) async => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
+              isLoading: false,
             ),
           ),
-          (updatedListWithStatus) {
+          (orderHistoryStatuses) {
             emit(
               state.copyWith(
-                orderHistory: state.orderHistory.copyWith(
-                  orderHistoryItems: state.orderHistory.orderHistoryItems
-                      .map(
-                        (e) => e.copyWith(
-                          orderStatusTracker: updatedListWithStatus,
-                        ),
-                      )
-                      .toList(),
-                ),
+                orderHistoryStatuses: orderHistoryStatuses,
                 failureOrSuccessOption: none(),
+                isLoading: false,
               ),
             );
           },

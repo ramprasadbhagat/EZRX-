@@ -4,7 +4,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -22,7 +21,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required int qty,
     required ZpPrice unitPrice,
     required TotalPrice totalPrice,
-    required StatusType status,
+    required OrderStepValue status,
     required DateTimeStringValue deliveryDate,
     required OrderNumber orderNumber,
     required DateTimeStringValue createdDate,
@@ -38,7 +37,6 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required ProductImages productImages,
     required DateTimeStringValue requestedDeliveryDate,
     required SpecialInstructions specialInstructions,
-    required List<OrderStatusTracker> orderStatusTracker,
     required double tax,
     required List<PoDocuments> orderHistoryItemPoAttachments,
     required StringValue ezrxNumber,
@@ -53,7 +51,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         qty: 0,
         unitPrice: ZpPrice('0.0'),
         totalPrice: TotalPrice('0.0'),
-        status: StatusType(''),
+        status: OrderStepValue(''),
         deliveryDate: DateTimeStringValue(''),
         orderNumber: OrderNumber(''),
         createdDate: DateTimeStringValue(''),
@@ -70,7 +68,6 @@ class OrderHistoryItem with _$OrderHistoryItem {
         tax: 0.0,
         orderBy: '',
         orderType: DocumentType(''),
-        orderStatusTracker: <OrderStatusTracker>[],
         orderHistoryItemPoAttachments: <PoDocuments>[],
         ezrxNumber: StringValue(''),
         isBundle: false,

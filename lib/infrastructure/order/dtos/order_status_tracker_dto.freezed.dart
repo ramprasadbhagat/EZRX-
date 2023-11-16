@@ -47,18 +47,13 @@ abstract class $OrderStatusTrackerDtoCopyWith<$Res> {
       _$OrderStatusTrackerDtoCopyWithImpl<$Res, OrderStatusTrackerDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Actiom', defaultValue: '')
-          String action,
-      @JsonKey(name: 'StepName', defaultValue: '')
-          String stepName,
-      @JsonKey(name: 'StepStape')
-          String stepStage,
-      @JsonKey(name: 'State', defaultValue: '')
-          String state,
-      @JsonKey(name: 'Status', defaultValue: '')
-          String status,
+      {@JsonKey(name: 'Actiom', defaultValue: '') String action,
+      @JsonKey(name: 'StepName', defaultValue: '') String stepName,
+      @JsonKey(name: 'StepStape') String stepStage,
+      @JsonKey(name: 'State', defaultValue: '') String state,
+      @JsonKey(name: 'Status', defaultValue: '') String status,
       @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
-          String updateTimeStamp});
+      String updateTimeStamp});
 }
 
 /// @nodoc
@@ -120,18 +115,13 @@ abstract class _$$_OrderStatusTrackerDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Actiom', defaultValue: '')
-          String action,
-      @JsonKey(name: 'StepName', defaultValue: '')
-          String stepName,
-      @JsonKey(name: 'StepStape')
-          String stepStage,
-      @JsonKey(name: 'State', defaultValue: '')
-          String state,
-      @JsonKey(name: 'Status', defaultValue: '')
-          String status,
+      {@JsonKey(name: 'Actiom', defaultValue: '') String action,
+      @JsonKey(name: 'StepName', defaultValue: '') String stepName,
+      @JsonKey(name: 'StepStape') String stepStage,
+      @JsonKey(name: 'State', defaultValue: '') String state,
+      @JsonKey(name: 'Status', defaultValue: '') String status,
       @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
-          String updateTimeStamp});
+      String updateTimeStamp});
 }
 
 /// @nodoc
@@ -185,18 +175,13 @@ class __$$_OrderStatusTrackerDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_OrderStatusTrackerDto extends _OrderStatusTrackerDto {
   const _$_OrderStatusTrackerDto(
-      {@JsonKey(name: 'Actiom', defaultValue: '')
-          required this.action,
-      @JsonKey(name: 'StepName', defaultValue: '')
-          required this.stepName,
-      @JsonKey(name: 'StepStape')
-          required this.stepStage,
-      @JsonKey(name: 'State', defaultValue: '')
-          required this.state,
-      @JsonKey(name: 'Status', defaultValue: '')
-          required this.status,
+      {@JsonKey(name: 'Actiom', defaultValue: '') required this.action,
+      @JsonKey(name: 'StepName', defaultValue: '') required this.stepName,
+      @JsonKey(name: 'StepStape') required this.stepStage,
+      @JsonKey(name: 'State', defaultValue: '') required this.state,
+      @JsonKey(name: 'Status', defaultValue: '') required this.status,
       @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
-          required this.updateTimeStamp})
+      required this.updateTimeStamp})
       : super._();
 
   factory _$_OrderStatusTrackerDto.fromJson(Map<String, dynamic> json) =>
@@ -264,18 +249,14 @@ class _$_OrderStatusTrackerDto extends _OrderStatusTrackerDto {
 
 abstract class _OrderStatusTrackerDto extends OrderStatusTrackerDto {
   const factory _OrderStatusTrackerDto(
-      {@JsonKey(name: 'Actiom', defaultValue: '')
-          required final String action,
+      {@JsonKey(name: 'Actiom', defaultValue: '') required final String action,
       @JsonKey(name: 'StepName', defaultValue: '')
-          required final String stepName,
-      @JsonKey(name: 'StepStape')
-          required final String stepStage,
-      @JsonKey(name: 'State', defaultValue: '')
-          required final String state,
-      @JsonKey(name: 'Status', defaultValue: '')
-          required final String status,
+      required final String stepName,
+      @JsonKey(name: 'StepStape') required final String stepStage,
+      @JsonKey(name: 'State', defaultValue: '') required final String state,
+      @JsonKey(name: 'Status', defaultValue: '') required final String status,
       @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
-          required final String updateTimeStamp}) = _$_OrderStatusTrackerDto;
+      required final String updateTimeStamp}) = _$_OrderStatusTrackerDto;
   const _OrderStatusTrackerDto._() : super._();
 
   factory _OrderStatusTrackerDto.fromJson(Map<String, dynamic> json) =

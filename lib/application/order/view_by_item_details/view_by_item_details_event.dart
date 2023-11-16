@@ -4,7 +4,9 @@ part of 'view_by_item_details_bloc.dart';
 class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
   const factory ViewByItemDetailsEvent.initialized() = _Initialized;
 
-  const factory ViewByItemDetailsEvent.fetchZyllemStatus() = _FetchZyllemStatus;
+  const factory ViewByItemDetailsEvent.fetchZyllemStatus({
+    required StringValue invoiceNumber,
+  }) = _FetchZyllemStatus;
 
   const factory ViewByItemDetailsEvent.updateIsExpanded({
     required bool isExpanded,
@@ -17,7 +19,6 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
   }) = _SetItemOrderDetails;
 
   const factory ViewByItemDetailsEvent.searchOrderHistory({
-    required bool disableDeliveryDateForZyllemStatus,
     required CustomerCodeInfo customerCodeInfo,
     required User user,
     required SalesOrganisation salesOrganisation,

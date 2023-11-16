@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_step.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -14,19 +14,20 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
-import 'package:ezrxmobile/presentation/core/custom_status_stepper.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_details_header_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/item_details_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_status_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_other_item_details_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/presentation/core/status_tracker.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_status_section.dart';
 
+part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_status_tracker.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/buy_again_button.dart';
 
 class ViewByItemDetailsPage extends StatelessWidget {
@@ -69,6 +70,10 @@ class ViewByItemDetailsPage extends StatelessWidget {
               ),
             );
           },
+          buildWhen: (previous, current) =>
+              previous.isLoading != current.isLoading ||
+              previous.orderHistoryItem != current.orderHistoryItem ||
+              previous.orderHistoryStatuses != current.orderHistoryStatuses,
           builder: (context, state) {
             return state.isLoading
                 ? LoadingShimmer.logo(
@@ -82,16 +87,9 @@ class ViewByItemDetailsPage extends StatelessWidget {
                         ViewByItemDetailsHeaderSection(
                           orderHistoryItem: state.orderHistoryItem,
                         ),
-                        StatusTrackerSection(
-                          createDateTime: state.orderHistoryItem.createdDate,
-                          title: context.tr('Order status'),
-                          status:
-                              state.orderHistoryItem.status.displayOrderStatus,
-                          onTap: () {
-                            _showDetailsPage(
-                              context: context,
-                            );
-                          },
+                        _ViewByItemStatusTracker(
+                          orderHistoryItem: state.orderHistoryItem,
+                          subSteps: state.orderHistoryStatuses,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -119,42 +117,4 @@ class ViewByItemDetailsPage extends StatelessWidget {
       ),
     );
   }
-}
-
-void _showDetailsPage({
-  required BuildContext context,
-}) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    enableDrag: false,
-    isDismissible: false,
-    clipBehavior: Clip.antiAliasWithSaveLayer,
-    builder: (_) {
-      return BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
-        buildWhen: (previous, current) =>
-            previous.orderHistory.orderHistoryItems !=
-            current.orderHistory.orderHistoryItems,
-        builder: (context, state) {
-          return OrderStatusSection(
-            orderHistoryItem: state.orderHistoryItem,
-            customStep: state.orderHistoryItem.status.displayOrderStatusDetails
-                .mapIndexed((index, e) {
-              return CustomStep(
-                status: e.getOrDefaultValue('').tr(),
-                subtitle: '10.00am MYR',
-                title: '16 Mar',
-                icon: e.displayOrderStatusIcon,
-                state: index == 0
-                    ? CustomStepState.active
-                    : CustomStepState.disabled,
-                subSection: state
-                    .orderHistoryItem.orderStatusTracker.orderStatusDisplay,
-              );
-            }).toList(),
-          );
-        },
-      );
-    },
-  );
 }

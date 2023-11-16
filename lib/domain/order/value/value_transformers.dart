@@ -1,6 +1,6 @@
+import 'package:ezrxmobile/domain/order/entities/order_history_step.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 double totalPriceStringAsFixed(String value) {
@@ -102,3 +102,91 @@ Zdp8OverrideValue getZdp8OverrideValue(double value) =>
 bool isBonusReturnType(String prsfd) => prsfd == 'B';
 
 int getParentLineNumberIntValue(int value) => value - (value % 10);
+
+String getOrderStatus(String status) {
+  switch (status) {
+    case 'Pending release':
+    case 'Pending release on backorder':
+    case 'Pending release - on backorder':
+    case 'Pending release - seller approval required':
+      return 'Pending release';
+    case 'Order Creating':
+      return 'Order Created';
+    case '':
+      return '-';
+    default:
+      return status;
+  }
+}
+
+bool isEqual(String value1, String value2) =>
+    value1.trim().toLowerCase() == value2.trim().toLowerCase();
+
+bool checkIsEligibleForFetchZyllemStatues(String orderStatus) =>
+    isEqual(orderStatus, 'Out for delivery') ||
+    isEqual(orderStatus, 'Delivered');
+
+List<OrderHistoryStep> getOrderHistorySteps({
+  required bool isViewByOrder,
+  required String stepTitle,
+}) {
+  final baseSteps = <OrderHistoryStep>[
+    if (isViewByOrder || isEqual(stepTitle, 'Order received'))
+      OrderHistoryStep.empty().copyWith(
+        title: 'Order received',
+        icon: Icons.pending_actions,
+      ),
+    OrderHistoryStep.empty().copyWith(
+      title: 'Order created',
+      icon: Icons.inventory_outlined,
+    ),
+  ];
+
+  var result = <OrderHistoryStep>[];
+  if (isEqual(stepTitle, 'Cancelled') ||
+      isEqual(stepTitle, 'Order Cancelled')) {
+    result = <OrderHistoryStep>[
+      ...baseSteps,
+      OrderHistoryStep.empty().copyWith(
+        title: stepTitle,
+        icon: Icons.cancel,
+      ),
+    ];
+  } else {
+    final fullSteps = <OrderHistoryStep>[
+      ...baseSteps,
+      if (!isViewByOrder || isEqual(stepTitle, 'Pending release'))
+        OrderHistoryStep.empty().copyWith(
+          title: 'Pending release',
+          icon: Icons.query_builder,
+        ),
+      OrderHistoryStep.empty().copyWith(
+        title: 'Picking in progress',
+        icon: Icons.inventory_2_outlined,
+      ),
+      OrderHistoryStep.empty().copyWith(
+        title: 'Out for delivery',
+        icon: Icons.local_shipping_outlined,
+      ),
+      OrderHistoryStep.empty().copyWith(
+        title: 'Delivered',
+        icon: Icons.check,
+      ),
+    ];
+
+    final stepIndex = fullSteps.indexWhere(
+      (step) => isEqual(step.title, stepTitle),
+    );
+    if (stepIndex > -1) {
+      result = fullSteps.sublist(0, stepIndex + 1);
+    }
+  }
+  if (result.isNotEmpty) {
+    result = [
+      if (result.length - 1 > -1) ...result.sublist(0, result.length - 1),
+      result.last.copyWith(state: OrderHistoryStepStates.active),
+    ];
+  }
+
+  return result.reversed.toList();
+}

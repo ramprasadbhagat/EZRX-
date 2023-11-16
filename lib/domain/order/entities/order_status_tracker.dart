@@ -24,11 +24,3 @@ class OrderStatusTracker with _$OrderStatusTracker {
         updateTimeStamp: DateTimeStringValue(''),
       );
 }
-
-extension OrderStatusTrackerExtension on List<OrderStatusTracker> {
-  List<String> get orderStatusDisplay =>
-      where((element) => element.action.isNotEmpty)
-          .map((e) => e.action)
-          .toSet()
-          .toList();
-}

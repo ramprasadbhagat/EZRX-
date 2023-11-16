@@ -21,12 +21,10 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
@@ -90,7 +88,6 @@ void main() {
   late AppRouter autoRouterMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late ProductImageBlocMock productImageBlocMock;
-  late List<OrderStatusTracker> fakeOrderStatusTracker;
   late OrderHistoryItem fakeOrderHistoryItem;
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late CartBloc cartBlocMock;
@@ -111,12 +108,9 @@ void main() {
     locator.registerFactory<ReOrderPermissionBloc>(
       () => reOrderPermissionBlocMock,
     );
-    fakeOrderStatusTracker =
-        await OrderStatusTrackerLocalDataSource().getOrderStatusTracker();
     fakeOrderHistoryItem = OrderHistoryItem.empty().copyWith(
-      status: StatusType('Picking in progress'),
+      status: OrderStepValue('Picking in progress'),
       createdDate: DateTimeStringValue(fakeCreatedDate),
-      orderStatusTracker: fakeOrderStatusTracker,
       expiryDate: DateTimeStringValue('2023-10-04'),
       batch: StringValue('fake-batch-number'),
     );
@@ -164,6 +158,7 @@ void main() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
+        useMediaQuery: true,
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => mockAuthBloc,
@@ -191,6 +186,9 @@ void main() {
           ),
           BlocProvider<CartBloc>(
             create: ((context) => cartBlocMock),
+          ),
+          BlocProvider<ReOrderPermissionBloc>(
+            create: ((context) => reOrderPermissionBlocMock),
           ),
         ],
         child: const Material(
@@ -233,8 +231,7 @@ void main() {
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
           isLoading: false,
-          orderHistoryItem:
-              fakeOrderHistoryItem.copyWith(orderStatusTracker: []),
+          orderHistoryStatuses: [],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -272,8 +269,7 @@ void main() {
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
           isLoading: false,
-          orderHistoryItem:
-              fakeOrderHistoryItem.copyWith(orderStatusTracker: []),
+          orderHistoryStatuses: [],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -353,9 +349,9 @@ void main() {
       when(() => mockViewByItemDetailsBloc.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           isLoading: false,
+          orderHistoryStatuses: [],
           orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            status: StatusType('Order Creating'),
-            orderStatusTracker: [],
+            status: OrderStepValue('Order Created'),
           ),
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],

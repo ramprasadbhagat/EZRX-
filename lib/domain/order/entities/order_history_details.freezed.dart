@@ -22,7 +22,7 @@ mixin _$OrderHistoryDetails {
   double get manualFee => throw _privateConstructorUsedError;
   double get totalValue => throw _privateConstructorUsedError;
   double get totalDiscount => throw _privateConstructorUsedError;
-  StatusType get processingStatus => throw _privateConstructorUsedError;
+  OrderStepValue get processingStatus => throw _privateConstructorUsedError;
   DateTimeStringValue get requestedDeliveryDate =>
       throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
@@ -69,7 +69,7 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       double manualFee,
       double totalValue,
       double totalDiscount,
-      StatusType processingStatus,
+      OrderStepValue processingStatus,
       DateTimeStringValue requestedDeliveryDate,
       String type,
       PhoneNumber telephoneNumber,
@@ -166,7 +166,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
       processingStatus: null == processingStatus
           ? _value.processingStatus
           : processingStatus // ignore: cast_nullable_to_non_nullable
-              as StatusType,
+              as OrderStepValue,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -282,7 +282,7 @@ abstract class _$$_OrderHistoryDetailsCopyWith<$Res>
       double manualFee,
       double totalValue,
       double totalDiscount,
-      StatusType processingStatus,
+      OrderStepValue processingStatus,
       DateTimeStringValue requestedDeliveryDate,
       String type,
       PhoneNumber telephoneNumber,
@@ -378,7 +378,7 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
       processingStatus: null == processingStatus
           ? _value.processingStatus
           : processingStatus // ignore: cast_nullable_to_non_nullable
-              as StatusType,
+              as OrderStepValue,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -518,7 +518,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   @override
   final double totalDiscount;
   @override
-  final StatusType processingStatus;
+  final OrderStepValue processingStatus;
   @override
   final DateTimeStringValue requestedDeliveryDate;
   @override
@@ -695,7 +695,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
       required final double manualFee,
       required final double totalValue,
       required final double totalDiscount,
-      required final StatusType processingStatus,
+      required final OrderStepValue processingStatus,
       required final DateTimeStringValue requestedDeliveryDate,
       required final String type,
       required final PhoneNumber telephoneNumber,
@@ -735,7 +735,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   @override
   double get totalDiscount;
   @override
-  StatusType get processingStatus;
+  OrderStepValue get processingStatus;
   @override
   DateTimeStringValue get requestedDeliveryDate;
   @override

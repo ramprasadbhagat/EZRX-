@@ -131,7 +131,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       totalDiscount: totalDiscount,
       totalValue: totalValue,
       totalTax: totalTax,
-      processingStatus: StatusType(processingStatus),
+      processingStatus: OrderStepValue(processingStatus),
       requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),
       type: type,
       telephoneNumber: PhoneNumber(telephoneNumber),

@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -443,76 +442,6 @@ String bapiStatusType(String bapiStatus) {
 
 bool isBapiStatusFailed(String status) {
   return status == 'FAILED';
-}
-
-String getOrderStatus(String status) {
-  switch (status) {
-    case 'Pending release':
-    case 'Pending release on backorder':
-    case 'Pending release - on backorder':
-    case 'Pending release - seller approval required':
-      return 'Pending release';
-    case 'Order Creating':
-      return 'Order Created';
-    case '':
-      return '-';
-    default:
-      return status;
-  }
-}
-
-IconData getOrderStatusIcon(String status) {
-  switch (status) {
-    case 'Order Created':
-      return Icons.inventory_outlined;
-    case 'Pending release':
-      return Icons.query_builder;
-    case 'Picking in progress':
-      return Icons.inventory_2_outlined;
-    case 'Out for delivery':
-      return Icons.local_shipping_outlined;
-    case 'Delivered':
-      return Icons.check;
-    case 'Cancelled':
-      return Icons.cancel;
-    default:
-      return Icons.inventory_outlined;
-  }
-}
-
-List<StatusType> getOrderStatusDetails(String status) {
-  switch (status) {
-    case 'Order being prepared':
-    case 'Cancelled':
-      return [
-        StatusType(status),
-        StatusType('Order Created'),
-      ];
-
-    default:
-      final orderStatusList = <StatusType>[
-        StatusType('Delivered'),
-        StatusType('Out for delivery'),
-        StatusType('Picking in progress'),
-        StatusType('Pending release'),
-        StatusType('Order Created'),
-      ];
-      return orderStatusList
-          .skip(
-            orderStatusList.indexWhere(
-              (item) =>
-                  item.getOrDefaultValue('').toLowerCase() ==
-                  getOrderStatus(status).toLowerCase(),
-            ),
-          )
-          .toList();
-  }
-}
-
-bool isEligibleStatusForZyllem(String status) {
-  return getOrderStatus(status).toLowerCase() ==
-          'Out for delivery'.toLowerCase() ||
-      getOrderStatus(status).toLowerCase() == 'Delivered'.toLowerCase();
 }
 
 String getMarketName(String country) {

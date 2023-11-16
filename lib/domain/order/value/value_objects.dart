@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_step.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_transformers.dart';
 
@@ -892,4 +893,30 @@ class LineNumber extends ValueObject<String> {
   int get intValue => getParsedValue(value.getOrElse(() => ''));
 
   const LineNumber._(this.value);
+}
+
+class OrderStepValue extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory OrderStepValue(String input) {
+    return OrderStepValue._(validateStringNotEmpty(input));
+  }
+
+  const OrderStepValue._(this.value);
+
+  String get displayOrderStatus => getOrderStatus(value.getOrElse(() => ''));
+
+  bool get fetchZyllemStatusesNeeded =>
+      checkIsEligibleForFetchZyllemStatues(value.getOrElse(() => ''));
+
+  List<OrderHistoryStep> get viewByOrderHistorySteps => getOrderHistorySteps(
+        isViewByOrder: true,
+        stepTitle: value.getOrElse(() => ''),
+      );
+
+  List<OrderHistoryStep> get viewByItemHistorySteps => getOrderHistorySteps(
+        isViewByOrder: false,
+        stepTitle: value.getOrElse(() => ''),
+      );
 }

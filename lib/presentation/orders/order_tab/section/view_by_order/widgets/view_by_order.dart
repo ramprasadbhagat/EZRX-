@@ -32,8 +32,6 @@ class _ViewByOrder extends StatelessWidget {
                 );
             context.read<ViewByItemDetailsBloc>().add(
                   ViewByItemDetailsEvent.searchOrderHistory(
-                    disableDeliveryDateForZyllemStatus:
-                        eligibilityState.salesOrgConfigs.disableDeliveryDate,
                     customerCodeInfo: eligibilityState.customerCodeInfo,
                     user: eligibilityState.user,
                     salesOrganisation: eligibilityState.salesOrganisation,

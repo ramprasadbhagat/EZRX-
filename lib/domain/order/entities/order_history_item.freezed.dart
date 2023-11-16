@@ -21,7 +21,7 @@ mixin _$OrderHistoryItem {
   int get qty => throw _privateConstructorUsedError;
   ZpPrice get unitPrice => throw _privateConstructorUsedError;
   TotalPrice get totalPrice => throw _privateConstructorUsedError;
-  StatusType get status => throw _privateConstructorUsedError;
+  OrderStepValue get status => throw _privateConstructorUsedError;
   DateTimeStringValue get deliveryDate => throw _privateConstructorUsedError;
   OrderNumber get orderNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
@@ -38,8 +38,6 @@ mixin _$OrderHistoryItem {
   DateTimeStringValue get requestedDeliveryDate =>
       throw _privateConstructorUsedError;
   SpecialInstructions get specialInstructions =>
-      throw _privateConstructorUsedError;
-  List<OrderStatusTracker> get orderStatusTracker =>
       throw _privateConstructorUsedError;
   double get tax => throw _privateConstructorUsedError;
   List<PoDocuments> get orderHistoryItemPoAttachments =>
@@ -66,7 +64,7 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       int qty,
       ZpPrice unitPrice,
       TotalPrice totalPrice,
-      StatusType status,
+      OrderStepValue status,
       DateTimeStringValue deliveryDate,
       OrderNumber orderNumber,
       DateTimeStringValue createdDate,
@@ -82,7 +80,6 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       ProductImages productImages,
       DateTimeStringValue requestedDeliveryDate,
       SpecialInstructions specialInstructions,
-      List<OrderStatusTracker> orderStatusTracker,
       double tax,
       List<PoDocuments> orderHistoryItemPoAttachments,
       StringValue ezrxNumber,
@@ -128,7 +125,6 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
     Object? productImages = null,
     Object? requestedDeliveryDate = null,
     Object? specialInstructions = null,
-    Object? orderStatusTracker = null,
     Object? tax = null,
     Object? orderHistoryItemPoAttachments = null,
     Object? ezrxNumber = null,
@@ -160,7 +156,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as StatusType,
+              as OrderStepValue,
       deliveryDate: null == deliveryDate
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
@@ -221,10 +217,6 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
               as SpecialInstructions,
-      orderStatusTracker: null == orderStatusTracker
-          ? _value.orderStatusTracker
-          : orderStatusTracker // ignore: cast_nullable_to_non_nullable
-              as List<OrderStatusTracker>,
       tax: null == tax
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
@@ -283,7 +275,7 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       int qty,
       ZpPrice unitPrice,
       TotalPrice totalPrice,
-      StatusType status,
+      OrderStepValue status,
       DateTimeStringValue deliveryDate,
       OrderNumber orderNumber,
       DateTimeStringValue createdDate,
@@ -299,7 +291,6 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       ProductImages productImages,
       DateTimeStringValue requestedDeliveryDate,
       SpecialInstructions specialInstructions,
-      List<OrderStatusTracker> orderStatusTracker,
       double tax,
       List<PoDocuments> orderHistoryItemPoAttachments,
       StringValue ezrxNumber,
@@ -345,7 +336,6 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
     Object? productImages = null,
     Object? requestedDeliveryDate = null,
     Object? specialInstructions = null,
-    Object? orderStatusTracker = null,
     Object? tax = null,
     Object? orderHistoryItemPoAttachments = null,
     Object? ezrxNumber = null,
@@ -377,7 +367,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as StatusType,
+              as OrderStepValue,
       deliveryDate: null == deliveryDate
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
@@ -438,10 +428,6 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
               as SpecialInstructions,
-      orderStatusTracker: null == orderStatusTracker
-          ? _value._orderStatusTracker
-          : orderStatusTracker // ignore: cast_nullable_to_non_nullable
-              as List<OrderStatusTracker>,
       tax: null == tax
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
@@ -495,15 +481,13 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
       required this.productImages,
       required this.requestedDeliveryDate,
       required this.specialInstructions,
-      required final List<OrderStatusTracker> orderStatusTracker,
       required this.tax,
       required final List<PoDocuments> orderHistoryItemPoAttachments,
       required this.ezrxNumber,
       required this.isBundle,
       required this.promoStatus,
       required this.lineNumber})
-      : _orderStatusTracker = orderStatusTracker,
-        _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
+      : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
 
   @override
@@ -517,7 +501,7 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @override
   final TotalPrice totalPrice;
   @override
-  final StatusType status;
+  final OrderStepValue status;
   @override
   final DateTimeStringValue deliveryDate;
   @override
@@ -548,15 +532,6 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   final DateTimeStringValue requestedDeliveryDate;
   @override
   final SpecialInstructions specialInstructions;
-  final List<OrderStatusTracker> _orderStatusTracker;
-  @override
-  List<OrderStatusTracker> get orderStatusTracker {
-    if (_orderStatusTracker is EqualUnmodifiableListView)
-      return _orderStatusTracker;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_orderStatusTracker);
-  }
-
   @override
   final double tax;
   final List<PoDocuments> _orderHistoryItemPoAttachments;
@@ -579,7 +554,7 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
 
   @override
   String toString() {
-    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, manufactureName: $manufactureName, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderStatusTracker: $orderStatusTracker, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, lineNumber: $lineNumber)';
+    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, manufactureName: $manufactureName, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, lineNumber: $lineNumber)';
   }
 
   @override
@@ -625,8 +600,6 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
             (identical(other.specialInstructions, specialInstructions) ||
                 other.specialInstructions == specialInstructions) &&
-            const DeepCollectionEquality()
-                .equals(other._orderStatusTracker, _orderStatusTracker) &&
             (identical(other.tax, tax) || other.tax == tax) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryItemPoAttachments,
@@ -665,7 +638,6 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
         productImages,
         requestedDeliveryDate,
         specialInstructions,
-        const DeepCollectionEquality().hash(_orderStatusTracker),
         tax,
         const DeepCollectionEquality().hash(_orderHistoryItemPoAttachments),
         ezrxNumber,
@@ -688,7 +660,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final int qty,
       required final ZpPrice unitPrice,
       required final TotalPrice totalPrice,
-      required final StatusType status,
+      required final OrderStepValue status,
       required final DateTimeStringValue deliveryDate,
       required final OrderNumber orderNumber,
       required final DateTimeStringValue createdDate,
@@ -704,7 +676,6 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final ProductImages productImages,
       required final DateTimeStringValue requestedDeliveryDate,
       required final SpecialInstructions specialInstructions,
-      required final List<OrderStatusTracker> orderStatusTracker,
       required final double tax,
       required final List<PoDocuments> orderHistoryItemPoAttachments,
       required final StringValue ezrxNumber,
@@ -724,7 +695,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   TotalPrice get totalPrice;
   @override
-  StatusType get status;
+  OrderStepValue get status;
   @override
   DateTimeStringValue get deliveryDate;
   @override
@@ -755,8 +726,6 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   DateTimeStringValue get requestedDeliveryDate;
   @override
   SpecialInstructions get specialInstructions;
-  @override
-  List<OrderStatusTracker> get orderStatusTracker;
   @override
   double get tax;
   @override

@@ -10,14 +10,12 @@ query ZyllemV2($inv: String!, $sortByUpdateTimeStamp: SORT_ORDER!) {
       State
       Status
       UpdateTimeStamp
-      
+      PreformedAt
     }
-    
   }
 }
 
-variable :
-{
-  "inv": "12345",
-  "sortByUpdateTimeStamp": "DESC"
+variables: {
+    "inv": "1200021556",
+    "sortByUpdateTimeStamp": "DESC"
 }

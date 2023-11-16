@@ -137,6 +137,14 @@ class DateTimeStringValue extends ValueObject<String> {
   String get dateTimeWithTimeZone =>
       '$dateTime12HoursString ${getTimeZoneAbbreviation(dateTime.timeZoneOffset)}';
 
+  String get time12HoursString => displayDateTimeString(
+        _valueOrEmpty,
+        DateTimeFormatString.displayTime12HoursFormat,
+      );
+
+  String get timeWithTimeZone =>
+      '$time12HoursString ${getTimeZoneAbbreviation(dateTime.timeZoneOffset)}';
+
   String get dateTimeWithWeekDayString => displayDateTimeString(
         _valueOrEmpty,
         DateTimeFormatString.displayDateTimeWithWeekDayFormat,
@@ -274,17 +282,6 @@ class StatusType extends ValueObject<String> {
         value.getOrElse(() => ''),
       );
   bool get isSuccess => getIntermediateStatus == 'Success';
-
-  String get displayOrderStatus => getOrderStatus(value.getOrElse(() => ''));
-
-  IconData get displayOrderStatusIcon =>
-      getOrderStatusIcon(value.getOrElse(() => ''));
-
-  bool get getDisplayZyllemStatus =>
-      isEligibleStatusForZyllem(value.getOrElse(() => ''));
-
-  List<StatusType> get displayOrderStatusDetails =>
-      getOrderStatusDetails(value.getOrElse(() => ''));
 
   Color get displayStatusTextColor =>
       getStatusTextColor(value.getOrElse(() => ''));

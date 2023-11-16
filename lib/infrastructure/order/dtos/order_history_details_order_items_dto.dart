@@ -118,7 +118,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       unitPrice: ZpPrice(unitPrice.toString()),
       totalPrice: TotalPrice(totalPrice.toString()),
       tax: tax,
-      sAPStatus: StatusType(sAPStatus),
+      sAPStatus: OrderStepValue(sAPStatus),
       plannedDeliveryDate: DateTimeStringValue(plannedDeliveryDate),
       pickedQuantity: pickedQuantity,
       batch: StringValue(batch),

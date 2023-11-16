@@ -1,0 +1,40 @@
+part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
+
+class _ViewByItemStatusTracker extends StatelessWidget {
+  final OrderHistoryItem orderHistoryItem;
+  final List<OrderStatusTracker> subSteps;
+  const _ViewByItemStatusTracker({
+    Key? key,
+    required this.orderHistoryItem,
+    required this.subSteps,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StatusTrackerSection(
+      createDateTime: orderHistoryItem.createdDate,
+      title: context.tr('Order status'),
+      status: orderHistoryItem.status.getOrDefaultValue(''),
+      onTap: () => _showDetailsPage(
+        context: context,
+      ),
+    );
+  }
+
+  void _showDetailsPage({
+    required BuildContext context,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      isDismissible: false,
+      isScrollControlled: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (_) => OrderStatusSection(
+        deliveryDate: orderHistoryItem.deliveryDate,
+        steps: orderHistoryItem.status.viewByItemHistorySteps
+            .updatedOutOfDeliverySubSteps(subSteps),
+      ),
+    );
+  }
+}

@@ -6,6 +6,7 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
   const factory ViewByItemDetailsState({
     required OrderHistory orderHistory,
     required OrderHistoryItem orderHistoryItem,
+    required List<OrderStatusTracker> orderHistoryStatuses,
     required bool isLoading,
     required bool isExpanded,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -14,6 +15,7 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
   factory ViewByItemDetailsState.initial() => ViewByItemDetailsState(
         orderHistory: OrderHistory.empty(),
         orderHistoryItem: OrderHistoryItem.empty(),
+        orderHistoryStatuses: <OrderStatusTracker>[],
         failureOrSuccessOption: none(),
         isLoading: false,
         isExpanded: false,
