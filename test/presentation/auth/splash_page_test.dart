@@ -922,7 +922,7 @@ void main() {
         () => aupTcBlocMock
             .add(AupTcEvent.show(fakeUser, salesOrgBlocMock.state.salesOrg)),
       ).called(2);
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
       expect(
         EasyLocalization.of(tester.element(find.byType(Scaffold)))?.locale,
         const Locale('en'),

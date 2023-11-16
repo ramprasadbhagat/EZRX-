@@ -193,6 +193,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       const LoginFormEvent.loadLastSavedCred(),
                     );
 
+                if (context.supportedLocales.contains(context.deviceLocale)) {
+                  context.resetLocale();
+                } else {
+                  context.setLocale(
+                    context.fallbackLocale ?? const Locale('en'),
+                  );
+                }
+
                 context.router.replaceAll(
                   [
                     const SplashPageRoute(),
@@ -210,7 +218,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<UserBloc, UserState>(
           listenWhen: (previous, current) =>
               previous.user.id != current.user.id,
-          listener: (context, state) => _welcomeUserMessage(state),
+          listener: (context, state) {
+            context
+                .setLocale(state.user.preferredLanguage.fromApiLanguageCode)
+                .then((value) async {
+              /* We need delay for a short time here before display message because when change locale
+                       the system need time to re-load the new translation files, so if we create string 
+                       translate variables before reloaded, we won't use the lastest locale changed 
+                    */
+              await Future.delayed(const Duration(milliseconds: 500));
+              _welcomeUserMessage(state);
+            });
+          },
         ),
         BlocListener<UserBloc, UserState>(
           listenWhen: (previous, current) => previous.user != current.user,
@@ -241,8 +260,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       context.read<SalesOrgBloc>().state.salesOrg,
                     ),
                   );
-              context
-                  .setLocale(state.user.preferredLanguage.fromApiLanguageCode);
             }
 
             _initializePaymentConfiguration(state);

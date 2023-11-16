@@ -21,7 +21,14 @@ class _LanguageDropDown extends StatelessWidget {
         const Text(':  '),
         Expanded(
           flex: 8,
-          child: BlocBuilder<UserBloc, UserState>(
+          child: BlocConsumer<UserBloc, UserState>(
+            listenWhen: (previous, current) =>
+                previous.user.preferredLanguage !=
+                current.user.preferredLanguage,
+            listener: (context, state) {
+              context
+                  .setLocale(state.user.preferredLanguage.fromApiLanguageCode);
+            },
             buildWhen: (previous, current) =>
                 current.activeLanguage != previous.activeLanguage,
             builder: (context, state) {
