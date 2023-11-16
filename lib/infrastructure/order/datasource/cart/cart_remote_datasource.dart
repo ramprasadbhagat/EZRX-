@@ -58,7 +58,7 @@ class CartRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}order',
+        url: '${config.urlConstants}cart',
         data: jsonEncode(
           {
             'query': cartQueryMutation.deleteCartMutation(),
