@@ -96,7 +96,7 @@ class CustomNumericTextField extends StatefulWidget {
 
   factory CustomNumericTextField.decimalNumber({
     required Key fieldKey,
-    required String initValue,
+    String? initValue,
     required Function(String) onChanged,
     required InputDecoration decoration,
     String? labelText,
@@ -137,6 +137,11 @@ class CustomNumericTextField extends StatefulWidget {
         inputFormatters: [
           if (inputFormatters != null && inputFormatters.isNotEmpty)
             ...inputFormatters,
+
+          // on iOS, in some regions like VN, the system keyboard will appear ',' instead of '.' key
+          // So to allow user enter decimal number, we convert ',' to '.'
+
+          CommaToDotFormatter(),
           FilteringTextInputFormatter.allow(ZPRegexes.onlyDecimal),
           FilteringTextInputFormatter.deny(ZPRegexes.leadingZero),
         ],
@@ -252,6 +257,18 @@ class _CustomNumericTextFieldState extends State<CustomNumericTextField> {
               ],
             )
           : formField,
+    );
+  }
+}
+
+class CommaToDotFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    return newValue.copyWith(
+      text: newValue.text.replaceAll(',', '.'),
     );
   }
 }
