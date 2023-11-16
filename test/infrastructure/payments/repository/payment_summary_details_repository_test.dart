@@ -1,0 +1,506 @@
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_details_repository.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
+class ConfigMock extends Mock implements Config {}
+
+class PaymentItemLocalDataSourceMock extends Mock
+    implements PaymentItemLocalDataSource {}
+
+class PaymentItemRemoteDataSourceMock extends Mock
+    implements PaymentItemRemoteDataSource {}
+
+final locator = GetIt.instance;
+
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late PaymentSummaryDetailsRepository repository;
+  late Config configMock;
+  late PaymentItemLocalDataSource localDataSourceMock;
+  late PaymentItemRemoteDataSource remoteDataSourceMock;
+
+  setUpAll(
+    () {
+      configMock = ConfigMock();
+      localDataSourceMock = PaymentItemLocalDataSourceMock();
+      remoteDataSourceMock = PaymentItemRemoteDataSourceMock();
+      locator.registerLazySingleton(() => configMock);
+      repository = PaymentSummaryDetailsRepository(
+        config: configMock,
+        localDataSource: localDataSourceMock,
+        remoteDataSource: remoteDataSourceMock,
+      );
+    },
+  );
+
+  group(
+    'Payment summary details repository',
+    () {
+      test(
+        'fetchPaymentSummaryDetailsInfo success Locally with SalesOrg is ID',
+        () async {
+          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(() => localDataSourceMock.getTransaction()).thenAnswer(
+            (_) async => PaymentItemLocalDataSource().getTransaction(),
+          );
+          final result = await repository.fetchPaymentSummaryDetailsInfo(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentId: StringValue(''),
+            salesOrganization: fakeIDSalesOrganisation,
+          );
+          expect(result.isRight(), true);
+        },
+      );
+      test(
+        'fetchPaymentSummaryDetailsInfo failed Locally with SalesOrg is ID',
+        () async {
+          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(() => localDataSourceMock.getTransaction())
+              .thenThrow(MockException());
+          final result = await repository.fetchPaymentSummaryDetailsInfo(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentId: StringValue(''),
+            salesOrganization: fakeIDSalesOrganisation,
+          );
+          expect(result.isLeft(), true);
+        },
+      );
+      test(
+        'fetchPaymentSummaryDetailsInfo failed remotely with SalesOrg is ID',
+        () async {
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.getTransaction(
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              paymentId: '',
+              salesOrg: fakeIDSalesOrganisation.salesOrg.getOrCrash(),
+            ),
+          ).thenThrow(MockException());
+          final result = await repository.fetchPaymentSummaryDetailsInfo(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentId: StringValue(''),
+            salesOrganization: fakeIDSalesOrganisation,
+          );
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'fetchPaymentSummaryDetailsInfo success remotely with SalesOrg is ID',
+        () async {
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.getTransaction(
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              paymentId: StringValue('11').getOrCrash(),
+              salesOrg: fakeIDSalesOrganisation.salesOrg.getOrCrash(),
+            ),
+          ).thenAnswer(
+            (_) async => PaymentItemLocalDataSource().getTransaction(),
+          );
+          final result = await repository.fetchPaymentSummaryDetailsInfo(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentId: StringValue('11'),
+            salesOrganization: fakeIDSalesOrganisation,
+          );
+          expect(result.isRight(), true);
+        },
+      );
+      test(
+        'fetchPaymentSummaryDetailsInfo success Locally with SalesOrg is not ID',
+        () async {
+          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(() => localDataSourceMock.getPaymentSummaryDetails()).thenAnswer(
+            (_) async =>
+                PaymentItemLocalDataSource().getPaymentSummaryDetails(),
+          );
+          final result = await repository.fetchPaymentSummaryDetailsInfo(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentId: StringValue(''),
+            salesOrganization: fakeEmptySalesOrganisation,
+          );
+
+          expect(result.isRight(), true);
+        },
+      );
+      test(
+        'fetchPaymentSummaryDetailsInfo failed Locally with SalesOrg is not ID',
+        () async {
+          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(() => localDataSourceMock.getPaymentSummaryDetails())
+              .thenThrow(MockException());
+          final result = await repository.fetchPaymentSummaryDetailsInfo(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentId: StringValue(''),
+            salesOrganization: fakeEmptySalesOrganisation,
+          );
+
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'fetchPaymentSummaryDetailsInfo success remotely with SalesOrg is not ID',
+        () async {
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.getPaymentSummaryDetails(
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              paymentId: StringValue('1').getOrCrash(),
+              salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+            ),
+          ).thenAnswer(
+            (_) async =>
+                PaymentItemLocalDataSource().getPaymentSummaryDetails(),
+          );
+          final result = await repository.fetchPaymentSummaryDetailsInfo(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentId: StringValue('1'),
+            salesOrganization: fakeVNSalesOrganisation,
+          );
+
+          expect(result.isRight(), true);
+        },
+      );
+      test(
+        'fetchPaymentSummaryDetailsInfo failed remotely with SalesOrg is not ID',
+        () async {
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.getPaymentSummaryDetails(
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              paymentId: StringValue('1').getOrCrash(),
+              salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+            ),
+          ).thenThrow(MockException());
+          final result = await repository.fetchPaymentSummaryDetailsInfo(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentId: StringValue('1'),
+            salesOrganization: fakeVNSalesOrganisation,
+          );
+
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'fetchPaymentList success locally ',
+        () async {
+          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(
+            () => localDataSourceMock.getPaymentItems(),
+          ).thenAnswer(
+            (_) async => PaymentItemLocalDataSource().getPaymentItems(),
+          );
+          final result = await repository.fetchPaymentList(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: fakeVNSalesOrganisation,
+            details: PaymentSummaryDetails.empty(),
+          );
+
+          expect(result.isRight(), true);
+        },
+      );
+      test(
+        'fetchPaymentList failed locally ',
+        () async {
+          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(
+            () => localDataSourceMock.getPaymentItems(),
+          ).thenThrow(MockException());
+          final result = await repository.fetchPaymentList(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: fakeVNSalesOrganisation,
+            details: PaymentSummaryDetails.empty(),
+          );
+
+          expect(result.isLeft(), true);
+        },
+      );
+      test(
+        'fetchPaymentList success remotely ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.getPaymentItemList(
+              accountingDocExternalReference:
+                  paymentSummaryDetails.accountingDocExternalReference,
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              paymentBatchAdditionalInfo:
+                  paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
+              paymentID: paymentSummaryDetails.paymentID.getOrCrash(),
+              salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+            ),
+          ).thenAnswer(
+            (_) async => PaymentItemLocalDataSource().getPaymentItems(),
+          );
+          final result = await repository.fetchPaymentList(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: fakeVNSalesOrganisation,
+            details: paymentSummaryDetails,
+          );
+
+          expect(result.isRight(), true);
+        },
+      );
+      test(
+        'fetchPaymentList failed remotely ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.getPaymentItemList(
+              accountingDocExternalReference:
+                  paymentSummaryDetails.accountingDocExternalReference,
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              paymentBatchAdditionalInfo:
+                  paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
+              paymentID: paymentSummaryDetails.paymentID.getOrCrash(),
+              salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+            ),
+          ).thenThrow(MockException());
+          final result = await repository.fetchPaymentList(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: fakeVNSalesOrganisation,
+            details: paymentSummaryDetails,
+          );
+
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'delete payment advice success locally ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(
+            () => localDataSourceMock.deleteCustomerPayment(),
+          ).thenAnswer(
+            (_) async => true,
+          );
+          final result = await repository.deletePaymentAdvice(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentSummaryDetails: paymentSummaryDetails,
+            salesOrganization: fakeVNSalesOrganisation,
+            shipToInfo: ShipToInfo.empty(),
+          );
+
+          expect(result.isRight(), true);
+        },
+      );
+      test(
+        'delete payment failed success locally ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(
+            () => localDataSourceMock.deleteCustomerPayment(),
+          ).thenThrow(MockException());
+          final result = await repository.deletePaymentAdvice(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentSummaryDetails: paymentSummaryDetails,
+            salesOrganization: fakeVNSalesOrganisation,
+            shipToInfo: ShipToInfo.empty(),
+          );
+
+          expect(result.isLeft(), true);
+        },
+      );
+      test(
+        'delete payment failed remotely ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.deleteCustomerPayment(
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+              paymentAmount: paymentSummaryDetails.paymentAmount.toString(),
+              paymentBatchAdditionalInfo:
+                  paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
+              paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
+              transactionCurrency: paymentSummaryDetails.transactionCurrency,
+              valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
+              zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
+              shipToCode: ShipToInfo.empty().shipToCustomerCode,
+            ),
+          ).thenThrow(MockException());
+          final result = await repository.deletePaymentAdvice(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentSummaryDetails: paymentSummaryDetails,
+            salesOrganization: fakeVNSalesOrganisation,
+            shipToInfo: ShipToInfo.empty(),
+          );
+
+          expect(result.isLeft(), true);
+        },
+      );
+      test(
+        'delete payment failed api remotely ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.deleteCustomerPayment(
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+              paymentAmount: paymentSummaryDetails.paymentAmount.toString(),
+              paymentBatchAdditionalInfo:
+                  paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
+              paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
+              transactionCurrency: paymentSummaryDetails.transactionCurrency,
+              valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
+              zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
+              shipToCode: ShipToInfo.empty().shipToCustomerCode,
+            ),
+          ).thenAnswer(
+            (_) async => false,
+          );
+          final result = await repository.deletePaymentAdvice(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentSummaryDetails: paymentSummaryDetails,
+            salesOrganization: fakeVNSalesOrganisation,
+            shipToInfo: ShipToInfo.empty(),
+          );
+
+          expect(result.isLeft(), true);
+        },
+      );
+      test(
+        'delete payment success remotely ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.deleteCustomerPayment(
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+              paymentAmount: paymentSummaryDetails.paymentAmount.toString(),
+              paymentBatchAdditionalInfo:
+                  paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
+              paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
+              transactionCurrency: paymentSummaryDetails.transactionCurrency,
+              valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
+              zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
+              shipToCode: ShipToInfo.empty().shipToCustomerCode,
+            ),
+          ).thenAnswer(
+            (_) async => true,
+          );
+          final result = await repository.deletePaymentAdvice(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            paymentSummaryDetails: paymentSummaryDetails,
+            salesOrganization: fakeVNSalesOrganisation,
+            shipToInfo: ShipToInfo.empty(),
+          );
+
+          expect(result.isRight(), true);
+        },
+      );
+      test(
+        'cancel payment success locally ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(
+            () => localDataSourceMock.cancelPaymentAdvice(),
+          ).thenAnswer(
+            (_) async => PaymentItemLocalDataSource().cancelPaymentAdvice(),
+          );
+          final result = await repository.cancelPaymentAdvice(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: fakeVNSalesOrganisation,
+            referenceId: paymentSummaryDetails.paymentID.getValue(),
+          );
+
+          expect(result.isRight(), true);
+        },
+      );
+      test(
+        'cancel payment failed locally ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(
+            () => localDataSourceMock.cancelPaymentAdvice(),
+          ).thenThrow(MockException());
+          final result = await repository.cancelPaymentAdvice(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: fakeVNSalesOrganisation,
+            referenceId: paymentSummaryDetails.paymentID.getValue(),
+          );
+
+          expect(result.isLeft(), true);
+        },
+      );
+      test(
+        'cancel payment success remotely ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.cancelPaymentAdvice(
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              referenceId: paymentSummaryDetails.paymentID.getValue(),
+              salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+            ),
+          ).thenAnswer(
+            (_) async => PaymentItemLocalDataSource().cancelPaymentAdvice(),
+          );
+          final result = await repository.cancelPaymentAdvice(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: fakeVNSalesOrganisation,
+            referenceId: paymentSummaryDetails.paymentID.getValue(),
+          );
+
+          expect(result.isRight(), true);
+        },
+      );
+      test(
+        'cancel payment failed remotely ',
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => remoteDataSourceMock.cancelPaymentAdvice(
+              customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
+              referenceId: paymentSummaryDetails.paymentID.getValue(),
+              salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+            ),
+          ).thenThrow(MockException());
+          final result = await repository.cancelPaymentAdvice(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: fakeVNSalesOrganisation,
+            referenceId: paymentSummaryDetails.paymentID.getValue(),
+          );
+
+          expect(result.isLeft(), true);
+        },
+      );
+    },
+  );
+}
