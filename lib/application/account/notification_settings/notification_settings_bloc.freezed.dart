@@ -24,6 +24,7 @@ mixin _$NotificationSettingsEvent {
     required TResult Function() clear,
     required TResult Function(bool value) updateOrderConfirmation,
     required TResult Function(bool value) updatePaymentConfirmation,
+    required TResult Function(bool value) updateReturnConfirmation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$NotificationSettingsEvent {
     TResult? Function()? clear,
     TResult? Function(bool value)? updateOrderConfirmation,
     TResult? Function(bool value)? updatePaymentConfirmation,
+    TResult? Function(bool value)? updateReturnConfirmation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,7 @@ mixin _$NotificationSettingsEvent {
     TResult Function()? clear,
     TResult Function(bool value)? updateOrderConfirmation,
     TResult Function(bool value)? updatePaymentConfirmation,
+    TResult Function(bool value)? updateReturnConfirmation,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -57,6 +60,8 @@ mixin _$NotificationSettingsEvent {
         updateOrderConfirmation,
     required TResult Function(_UpdatePaymentConfirmation value)
         updatePaymentConfirmation,
+    required TResult Function(_UpdateReturnConfirmation value)
+        updateReturnConfirmation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +73,8 @@ mixin _$NotificationSettingsEvent {
     TResult? Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult? Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult? Function(_UpdateReturnConfirmation value)?
+        updateReturnConfirmation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +86,7 @@ mixin _$NotificationSettingsEvent {
     TResult Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult Function(_UpdateReturnConfirmation value)? updateReturnConfirmation,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,6 +162,7 @@ class _$_Initialized with DiagnosticableTreeMixin implements _Initialized {
     required TResult Function() clear,
     required TResult Function(bool value) updateOrderConfirmation,
     required TResult Function(bool value) updatePaymentConfirmation,
+    required TResult Function(bool value) updateReturnConfirmation,
   }) {
     return initialized();
   }
@@ -167,6 +176,7 @@ class _$_Initialized with DiagnosticableTreeMixin implements _Initialized {
     TResult? Function()? clear,
     TResult? Function(bool value)? updateOrderConfirmation,
     TResult? Function(bool value)? updatePaymentConfirmation,
+    TResult? Function(bool value)? updateReturnConfirmation,
   }) {
     return initialized?.call();
   }
@@ -180,6 +190,7 @@ class _$_Initialized with DiagnosticableTreeMixin implements _Initialized {
     TResult Function()? clear,
     TResult Function(bool value)? updateOrderConfirmation,
     TResult Function(bool value)? updatePaymentConfirmation,
+    TResult Function(bool value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -199,6 +210,8 @@ class _$_Initialized with DiagnosticableTreeMixin implements _Initialized {
         updateOrderConfirmation,
     required TResult Function(_UpdatePaymentConfirmation value)
         updatePaymentConfirmation,
+    required TResult Function(_UpdateReturnConfirmation value)
+        updateReturnConfirmation,
   }) {
     return initialized(this);
   }
@@ -213,6 +226,8 @@ class _$_Initialized with DiagnosticableTreeMixin implements _Initialized {
     TResult? Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult? Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult? Function(_UpdateReturnConfirmation value)?
+        updateReturnConfirmation,
   }) {
     return initialized?.call(this);
   }
@@ -227,6 +242,7 @@ class _$_Initialized with DiagnosticableTreeMixin implements _Initialized {
     TResult Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult Function(_UpdateReturnConfirmation value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -289,6 +305,7 @@ class _$_Fetch with DiagnosticableTreeMixin implements _Fetch {
     required TResult Function() clear,
     required TResult Function(bool value) updateOrderConfirmation,
     required TResult Function(bool value) updatePaymentConfirmation,
+    required TResult Function(bool value) updateReturnConfirmation,
   }) {
     return fetch();
   }
@@ -302,6 +319,7 @@ class _$_Fetch with DiagnosticableTreeMixin implements _Fetch {
     TResult? Function()? clear,
     TResult? Function(bool value)? updateOrderConfirmation,
     TResult? Function(bool value)? updatePaymentConfirmation,
+    TResult? Function(bool value)? updateReturnConfirmation,
   }) {
     return fetch?.call();
   }
@@ -315,6 +333,7 @@ class _$_Fetch with DiagnosticableTreeMixin implements _Fetch {
     TResult Function()? clear,
     TResult Function(bool value)? updateOrderConfirmation,
     TResult Function(bool value)? updatePaymentConfirmation,
+    TResult Function(bool value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -334,6 +353,8 @@ class _$_Fetch with DiagnosticableTreeMixin implements _Fetch {
         updateOrderConfirmation,
     required TResult Function(_UpdatePaymentConfirmation value)
         updatePaymentConfirmation,
+    required TResult Function(_UpdateReturnConfirmation value)
+        updateReturnConfirmation,
   }) {
     return fetch(this);
   }
@@ -348,6 +369,8 @@ class _$_Fetch with DiagnosticableTreeMixin implements _Fetch {
     TResult? Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult? Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult? Function(_UpdateReturnConfirmation value)?
+        updateReturnConfirmation,
   }) {
     return fetch?.call(this);
   }
@@ -362,6 +385,7 @@ class _$_Fetch with DiagnosticableTreeMixin implements _Fetch {
     TResult Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult Function(_UpdateReturnConfirmation value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -424,6 +448,7 @@ class _$_Submit with DiagnosticableTreeMixin implements _Submit {
     required TResult Function() clear,
     required TResult Function(bool value) updateOrderConfirmation,
     required TResult Function(bool value) updatePaymentConfirmation,
+    required TResult Function(bool value) updateReturnConfirmation,
   }) {
     return submit();
   }
@@ -437,6 +462,7 @@ class _$_Submit with DiagnosticableTreeMixin implements _Submit {
     TResult? Function()? clear,
     TResult? Function(bool value)? updateOrderConfirmation,
     TResult? Function(bool value)? updatePaymentConfirmation,
+    TResult? Function(bool value)? updateReturnConfirmation,
   }) {
     return submit?.call();
   }
@@ -450,6 +476,7 @@ class _$_Submit with DiagnosticableTreeMixin implements _Submit {
     TResult Function()? clear,
     TResult Function(bool value)? updateOrderConfirmation,
     TResult Function(bool value)? updatePaymentConfirmation,
+    TResult Function(bool value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -469,6 +496,8 @@ class _$_Submit with DiagnosticableTreeMixin implements _Submit {
         updateOrderConfirmation,
     required TResult Function(_UpdatePaymentConfirmation value)
         updatePaymentConfirmation,
+    required TResult Function(_UpdateReturnConfirmation value)
+        updateReturnConfirmation,
   }) {
     return submit(this);
   }
@@ -483,6 +512,8 @@ class _$_Submit with DiagnosticableTreeMixin implements _Submit {
     TResult? Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult? Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult? Function(_UpdateReturnConfirmation value)?
+        updateReturnConfirmation,
   }) {
     return submit?.call(this);
   }
@@ -497,6 +528,7 @@ class _$_Submit with DiagnosticableTreeMixin implements _Submit {
     TResult Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult Function(_UpdateReturnConfirmation value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -559,6 +591,7 @@ class _$_Clear with DiagnosticableTreeMixin implements _Clear {
     required TResult Function() clear,
     required TResult Function(bool value) updateOrderConfirmation,
     required TResult Function(bool value) updatePaymentConfirmation,
+    required TResult Function(bool value) updateReturnConfirmation,
   }) {
     return clear();
   }
@@ -572,6 +605,7 @@ class _$_Clear with DiagnosticableTreeMixin implements _Clear {
     TResult? Function()? clear,
     TResult? Function(bool value)? updateOrderConfirmation,
     TResult? Function(bool value)? updatePaymentConfirmation,
+    TResult? Function(bool value)? updateReturnConfirmation,
   }) {
     return clear?.call();
   }
@@ -585,6 +619,7 @@ class _$_Clear with DiagnosticableTreeMixin implements _Clear {
     TResult Function()? clear,
     TResult Function(bool value)? updateOrderConfirmation,
     TResult Function(bool value)? updatePaymentConfirmation,
+    TResult Function(bool value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (clear != null) {
@@ -604,6 +639,8 @@ class _$_Clear with DiagnosticableTreeMixin implements _Clear {
         updateOrderConfirmation,
     required TResult Function(_UpdatePaymentConfirmation value)
         updatePaymentConfirmation,
+    required TResult Function(_UpdateReturnConfirmation value)
+        updateReturnConfirmation,
   }) {
     return clear(this);
   }
@@ -618,6 +655,8 @@ class _$_Clear with DiagnosticableTreeMixin implements _Clear {
     TResult? Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult? Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult? Function(_UpdateReturnConfirmation value)?
+        updateReturnConfirmation,
   }) {
     return clear?.call(this);
   }
@@ -632,6 +671,7 @@ class _$_Clear with DiagnosticableTreeMixin implements _Clear {
     TResult Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult Function(_UpdateReturnConfirmation value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (clear != null) {
@@ -729,6 +769,7 @@ class _$_UpdateOrderConfirmation
     required TResult Function() clear,
     required TResult Function(bool value) updateOrderConfirmation,
     required TResult Function(bool value) updatePaymentConfirmation,
+    required TResult Function(bool value) updateReturnConfirmation,
   }) {
     return updateOrderConfirmation(value);
   }
@@ -742,6 +783,7 @@ class _$_UpdateOrderConfirmation
     TResult? Function()? clear,
     TResult? Function(bool value)? updateOrderConfirmation,
     TResult? Function(bool value)? updatePaymentConfirmation,
+    TResult? Function(bool value)? updateReturnConfirmation,
   }) {
     return updateOrderConfirmation?.call(value);
   }
@@ -755,6 +797,7 @@ class _$_UpdateOrderConfirmation
     TResult Function()? clear,
     TResult Function(bool value)? updateOrderConfirmation,
     TResult Function(bool value)? updatePaymentConfirmation,
+    TResult Function(bool value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (updateOrderConfirmation != null) {
@@ -774,6 +817,8 @@ class _$_UpdateOrderConfirmation
         updateOrderConfirmation,
     required TResult Function(_UpdatePaymentConfirmation value)
         updatePaymentConfirmation,
+    required TResult Function(_UpdateReturnConfirmation value)
+        updateReturnConfirmation,
   }) {
     return updateOrderConfirmation(this);
   }
@@ -788,6 +833,8 @@ class _$_UpdateOrderConfirmation
     TResult? Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult? Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult? Function(_UpdateReturnConfirmation value)?
+        updateReturnConfirmation,
   }) {
     return updateOrderConfirmation?.call(this);
   }
@@ -802,6 +849,7 @@ class _$_UpdateOrderConfirmation
     TResult Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult Function(_UpdateReturnConfirmation value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (updateOrderConfirmation != null) {
@@ -906,6 +954,7 @@ class _$_UpdatePaymentConfirmation
     required TResult Function() clear,
     required TResult Function(bool value) updateOrderConfirmation,
     required TResult Function(bool value) updatePaymentConfirmation,
+    required TResult Function(bool value) updateReturnConfirmation,
   }) {
     return updatePaymentConfirmation(value);
   }
@@ -919,6 +968,7 @@ class _$_UpdatePaymentConfirmation
     TResult? Function()? clear,
     TResult? Function(bool value)? updateOrderConfirmation,
     TResult? Function(bool value)? updatePaymentConfirmation,
+    TResult? Function(bool value)? updateReturnConfirmation,
   }) {
     return updatePaymentConfirmation?.call(value);
   }
@@ -932,6 +982,7 @@ class _$_UpdatePaymentConfirmation
     TResult Function()? clear,
     TResult Function(bool value)? updateOrderConfirmation,
     TResult Function(bool value)? updatePaymentConfirmation,
+    TResult Function(bool value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (updatePaymentConfirmation != null) {
@@ -951,6 +1002,8 @@ class _$_UpdatePaymentConfirmation
         updateOrderConfirmation,
     required TResult Function(_UpdatePaymentConfirmation value)
         updatePaymentConfirmation,
+    required TResult Function(_UpdateReturnConfirmation value)
+        updateReturnConfirmation,
   }) {
     return updatePaymentConfirmation(this);
   }
@@ -965,6 +1018,8 @@ class _$_UpdatePaymentConfirmation
     TResult? Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult? Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult? Function(_UpdateReturnConfirmation value)?
+        updateReturnConfirmation,
   }) {
     return updatePaymentConfirmation?.call(this);
   }
@@ -979,6 +1034,7 @@ class _$_UpdatePaymentConfirmation
     TResult Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
     TResult Function(_UpdatePaymentConfirmation value)?
         updatePaymentConfirmation,
+    TResult Function(_UpdateReturnConfirmation value)? updateReturnConfirmation,
     required TResult orElse(),
   }) {
     if (updatePaymentConfirmation != null) {
@@ -995,6 +1051,190 @@ abstract class _UpdatePaymentConfirmation implements NotificationSettingsEvent {
   bool get value;
   @JsonKey(ignore: true)
   _$$_UpdatePaymentConfirmationCopyWith<_$_UpdatePaymentConfirmation>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateReturnConfirmationCopyWith<$Res> {
+  factory _$$_UpdateReturnConfirmationCopyWith(
+          _$_UpdateReturnConfirmation value,
+          $Res Function(_$_UpdateReturnConfirmation) then) =
+      __$$_UpdateReturnConfirmationCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool value});
+}
+
+/// @nodoc
+class __$$_UpdateReturnConfirmationCopyWithImpl<$Res>
+    extends _$NotificationSettingsEventCopyWithImpl<$Res,
+        _$_UpdateReturnConfirmation>
+    implements _$$_UpdateReturnConfirmationCopyWith<$Res> {
+  __$$_UpdateReturnConfirmationCopyWithImpl(_$_UpdateReturnConfirmation _value,
+      $Res Function(_$_UpdateReturnConfirmation) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$_UpdateReturnConfirmation(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateReturnConfirmation
+    with DiagnosticableTreeMixin
+    implements _UpdateReturnConfirmation {
+  const _$_UpdateReturnConfirmation({required this.value});
+
+  @override
+  final bool value;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'NotificationSettingsEvent.updateReturnConfirmation(value: $value)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'NotificationSettingsEvent.updateReturnConfirmation'))
+      ..add(DiagnosticsProperty('value', value));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateReturnConfirmation &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateReturnConfirmationCopyWith<_$_UpdateReturnConfirmation>
+      get copyWith => __$$_UpdateReturnConfirmationCopyWithImpl<
+          _$_UpdateReturnConfirmation>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetch,
+    required TResult Function() submit,
+    required TResult Function() clear,
+    required TResult Function(bool value) updateOrderConfirmation,
+    required TResult Function(bool value) updatePaymentConfirmation,
+    required TResult Function(bool value) updateReturnConfirmation,
+  }) {
+    return updateReturnConfirmation(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? submit,
+    TResult? Function()? clear,
+    TResult? Function(bool value)? updateOrderConfirmation,
+    TResult? Function(bool value)? updatePaymentConfirmation,
+    TResult? Function(bool value)? updateReturnConfirmation,
+  }) {
+    return updateReturnConfirmation?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function()? submit,
+    TResult Function()? clear,
+    TResult Function(bool value)? updateOrderConfirmation,
+    TResult Function(bool value)? updatePaymentConfirmation,
+    TResult Function(bool value)? updateReturnConfirmation,
+    required TResult orElse(),
+  }) {
+    if (updateReturnConfirmation != null) {
+      return updateReturnConfirmation(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_Clear value) clear,
+    required TResult Function(_UpdateOrderConfirmation value)
+        updateOrderConfirmation,
+    required TResult Function(_UpdatePaymentConfirmation value)
+        updatePaymentConfirmation,
+    required TResult Function(_UpdateReturnConfirmation value)
+        updateReturnConfirmation,
+  }) {
+    return updateReturnConfirmation(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_Clear value)? clear,
+    TResult? Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
+    TResult? Function(_UpdatePaymentConfirmation value)?
+        updatePaymentConfirmation,
+    TResult? Function(_UpdateReturnConfirmation value)?
+        updateReturnConfirmation,
+  }) {
+    return updateReturnConfirmation?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_Clear value)? clear,
+    TResult Function(_UpdateOrderConfirmation value)? updateOrderConfirmation,
+    TResult Function(_UpdatePaymentConfirmation value)?
+        updatePaymentConfirmation,
+    TResult Function(_UpdateReturnConfirmation value)? updateReturnConfirmation,
+    required TResult orElse(),
+  }) {
+    if (updateReturnConfirmation != null) {
+      return updateReturnConfirmation(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateReturnConfirmation implements NotificationSettingsEvent {
+  const factory _UpdateReturnConfirmation({required final bool value}) =
+      _$_UpdateReturnConfirmation;
+
+  bool get value;
+  @JsonKey(ignore: true)
+  _$$_UpdateReturnConfirmationCopyWith<_$_UpdateReturnConfirmation>
       get copyWith => throw _privateConstructorUsedError;
 }
 

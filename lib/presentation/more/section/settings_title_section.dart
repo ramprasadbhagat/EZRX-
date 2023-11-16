@@ -41,7 +41,7 @@ class SettingsTile extends StatelessWidget {
   List<MoreDetailsTile> _moreSettingTiles(BuildContext context) => [
         MoreDetailsTile.profile(context),
         MoreDetailsTile.security(context),
-        if (context.read<EligibilityBloc>().state.isIDMarket)
+        if (context.read<EligibilityBloc>().state.isNotificationSettingsEnable)
           MoreDetailsTile.notifications(context),
 
         // MoreDetailsTile.privacy(), //  implement yet

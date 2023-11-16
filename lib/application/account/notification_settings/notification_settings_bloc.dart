@@ -74,6 +74,15 @@ class NotificationSettingsBloc
           ),
         );
       },
+      updateReturnConfirmation: (e) {
+        final newNotificationSettings = state.currentNotificationSettings
+            .copyWith(ereturnConfirmation: NotificationSetting(e.value));
+        emit(
+          state.copyWith(
+            currentNotificationSettings: newNotificationSettings,
+          ),
+        );
+      },
       clear: (e) {
         emit(
           state.copyWith(

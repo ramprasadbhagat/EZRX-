@@ -6,15 +6,17 @@ import 'package:ezrxmobile/domain/account/entities/notification_settings.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class AutoRouterMock extends Mock implements AppRouter {}
@@ -23,11 +25,13 @@ class NotificationSettingsBlocMock
     extends MockBloc<NotificationSettingsEvent, NotificationSettingsState>
     implements NotificationSettingsBloc {}
 
-final locator = GetIt.instance;
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
 
 void main() {
   late AppRouter autoRouterMock;
   late NotificationSettingsBloc notificationSettingsBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late NotificationSettings settingsMock;
   late NotificationSettings newSettingsMock;
   const fakeError = ApiFailure.other('fake-error');
@@ -44,9 +48,13 @@ void main() {
       orderConfirmation: NotificationSetting(true),
     );
     notificationSettingsBlocMock = NotificationSettingsBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     autoRouterMock = locator<AppRouter>();
     when(() => notificationSettingsBlocMock.state).thenReturn(
       NotificationSettingsState.initial(),
+    );
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial(),
     );
   });
 
@@ -57,6 +65,9 @@ void main() {
       providers: [
         BlocProvider<NotificationSettingsBloc>(
           create: (context) => notificationSettingsBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
         ),
       ],
       child: const Scaffold(
@@ -155,6 +166,11 @@ void main() {
       testWidgets(
         'Test On Tap Order Confirmation Tile',
         (tester) async {
+          when(() => eligibilityBlocMock.state).thenAnswer(
+            (invocation) => EligibilityState.initial().copyWith(
+              user: fakeRootAdminUser,
+            ),
+          );
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
           final tileFinder = find.byKey(WidgetKeys.orderConfirmationTile);

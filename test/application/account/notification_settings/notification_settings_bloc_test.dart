@@ -148,6 +148,29 @@ void main() {
       );
 
       blocTest(
+        'Update Return Confirmation Settings',
+        build: () => NotificationSettingsBloc(
+          notificationSettingsRepository: repository,
+        ),
+        seed: () => NotificationSettingsState.initial(),
+        act: (NotificationSettingsBloc bloc) => bloc.add(
+          const NotificationSettingsEvent.updateReturnConfirmation(
+            value: true,
+          ),
+        ),
+        expect: () {
+          final newNotificationSettings = NotificationSettings.empty().copyWith(
+            ereturnConfirmation: NotificationSetting(true),
+          );
+          return [
+            NotificationSettingsState.initial().copyWith(
+              currentNotificationSettings: newNotificationSettings,
+            ),
+          ];
+        },
+      );
+
+      blocTest(
         'Clear Changes Notification Settings',
         build: () => NotificationSettingsBloc(
           notificationSettingsRepository: repository,

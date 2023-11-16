@@ -1201,6 +1201,7 @@ class WidgetKeys {
       const Key('notificationSettingsSuccessSnackBar');
   static Key orderConfirmationTile = const Key('orderConfirmationTile');
   static Key paymentConfirmationTile = const Key('paymentConfirmationTile');
+  static Key returnConfirmationTile = const Key('returnConfirmationTile');
   //============================================================
   // About Us Page
   //============================================================

@@ -256,4 +256,7 @@ class EligibilityState with _$EligibilityState {
 
   bool get isZDP5eligible =>
       salesOrgConfigs.salesOrg.isVN && salesOrgConfigs.enableZDP5;
+
+  bool get isNotificationSettingsEnable =>
+      user.userCanAccessOrderHistory || isPaymentEnabled || isReturnsEnable;
 }

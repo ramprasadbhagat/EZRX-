@@ -12,4 +12,7 @@ class NotificationSettingsEvent with _$NotificationSettingsEvent {
   const factory NotificationSettingsEvent.updatePaymentConfirmation({
     required bool value,
   }) = _UpdatePaymentConfirmation;
+  const factory NotificationSettingsEvent.updateReturnConfirmation({
+    required bool value,
+  }) = _UpdateReturnConfirmation;
 }

@@ -457,11 +457,11 @@ void main() {
     );
 
     testWidgets(
-      ' -> Show Notification Settings Page for ID Market',
+      ' -> Show Notification Settings Page for All Market',
       (WidgetTester tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrganisation: fakeSalesOrganisation,
           ),
         );
         await getWidget(tester);
