@@ -46,6 +46,7 @@ class CartProductTileBonus extends StatelessWidget {
       extentRatio: 0.24,
       endActionPaneActions: [
         CustomSlidableAction(
+          key: WidgetKeys.cartItemSwipeDeleteButtonForBonus,
           label: '',
           icon: Icons.delete_outline,
           onPressed: (v) => context.read<CartBloc>().add(

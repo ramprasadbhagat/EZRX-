@@ -1,9 +1,14 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -38,6 +43,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
@@ -79,6 +85,10 @@ class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
     implements OrderSummaryBloc {}
 
+class BonusMaterialBlocMock
+    extends MockBloc<BonusMaterialEvent, BonusMaterialState>
+    implements BonusMaterialBloc {}
+
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
@@ -98,6 +108,7 @@ void main() {
   late AppRouter autoRouter;
   late OrderSummaryBloc orderSummaryBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
+  late BonusMaterialBloc bonusMaterialBlocMock;
 
   setUpAll(() async {
     locator.registerLazySingleton(
@@ -123,6 +134,7 @@ void main() {
       orderSummaryBlocMock = OrderSummaryBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
+      bonusMaterialBlocMock = BonusMaterialBlocMock();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -147,7 +159,6 @@ void main() {
 
       when(() => materialPriceBloc.state).thenReturn(
         MaterialPriceState.initial().copyWith(
-          isFetching: false,
           materialPrice: mockPriceList,
         ),
       );
@@ -203,6 +214,8 @@ void main() {
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => bonusMaterialBlocMock.state)
+          .thenReturn(BonusMaterialState.initial());
     },
   );
   group(
@@ -244,6 +257,9 @@ void main() {
             BlocProvider<AnnouncementBloc>(
               create: (context) => announcementBlocMock,
             ),
+            BlocProvider<BonusMaterialBloc>(
+              create: (context) => bonusMaterialBlocMock,
+            ),
           ],
           child: const CartPage(),
         );
@@ -254,8 +270,6 @@ void main() {
           (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            isFetching: false,
-            apiFailureOrSuccessOption: none(),
             cartProducts: [cartItem],
           ),
         );
@@ -280,8 +294,6 @@ void main() {
           (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            isFetching: false,
-            apiFailureOrSuccessOption: none(),
             cartProducts: [cartItem],
           ),
         );
@@ -307,8 +319,6 @@ void main() {
         const materialNumber = '23168451';
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            isFetching: false,
-            apiFailureOrSuccessOption: none(),
             cartProducts: [
               cartItem.copyWith(
                 addedBonusList: [
@@ -366,8 +376,6 @@ void main() {
           (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            isFetching: false,
-            apiFailureOrSuccessOption: none(),
             cartProducts: [cartItem],
           ),
         );
@@ -396,8 +404,6 @@ void main() {
           (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            isFetching: false,
-            apiFailureOrSuccessOption: none(),
             cartProducts: [cartItem],
           ),
         );
@@ -425,8 +431,6 @@ void main() {
           (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            isFetching: false,
-            apiFailureOrSuccessOption: none(),
             cartProducts: [cartItem],
           ),
         );
@@ -460,8 +464,6 @@ void main() {
           (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            isFetching: false,
-            apiFailureOrSuccessOption: none(),
             cartProducts: [cartItem],
           ),
         );
@@ -519,8 +521,6 @@ void main() {
         );
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            isFetching: false,
-            apiFailureOrSuccessOption: none(),
             cartProducts: [pnGCartItem],
           ),
         );
@@ -553,6 +553,229 @@ void main() {
           () => priceOverrideBloc.add(
             PriceOverrideEvent.setProduct(
               item: pnGCartItem,
+            ),
+          ),
+        ).called(1);
+      });
+
+      testWidgets(
+          'Bonus Price Counter Section for MY External sales rep having PnG material(Hide Price ----> false)',
+          (tester) async {
+        final pnGCartItem = cartItem.copyWith(
+          quantity: 2,
+          price: Price.empty().copyWith(
+            finalPrice: MaterialPrice(364.80),
+            lastPrice: MaterialPrice(364.80),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
+            principalData: PrincipalData.empty().copyWith(
+              principalName: PrincipalName('Procter And Gamble'),
+              principalCode: PrincipalCode('000000105307'),
+            ),
+            hidePrice: true,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [pnGCartItem],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              enableZDP8Override: true,
+            ),
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('external_sales_rep'),
+              ),
+              hasBonusOverride: true,
+              hasPriceOverride: true,
+            ),
+            selectedOrderType: OrderDocumentType.empty()
+                .copyWith(documentType: DocumentType('ZPOR')),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final bonusSampleItemButtonKey =
+            find.byKey(WidgetKeys.bonusSampleItemButtonKey);
+        expect(bonusSampleItemButtonKey, findsOneWidget);
+        await tester.tap(bonusSampleItemButtonKey);
+        await tester.pump();
+        expect(find.byType(BonusItemsSheet), findsOneWidget);
+        verify(
+          () => bonusMaterialBlocMock.add(
+            BonusMaterialEvent.fetch(
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('2001'),
+              ),
+              configs: SalesOrganisationConfigs.empty().copyWith(
+                enableZDP8Override: true,
+              ),
+              customerCodeInfo: fakeCustomerCodeInfo,
+              shipToInfo: fakeShipToInfo,
+              principalData: pnGCartItem.materialInfo.principalData,
+              user: User.empty().copyWith(
+                role: Role.empty().copyWith(
+                  type: RoleType('external_sales_rep'),
+                ),
+                hasBonusOverride: true,
+                hasPriceOverride: true,
+              ),
+              isGimmickMaterialEnabled: false,
+              searchKey: SearchKey.searchFilter(''),
+            ),
+          ),
+        ).called(1);
+      });
+
+      testWidgets('Display CutOff List Price', (tester) async {
+        final pnGCartItem = cartItem.copyWith(
+          quantity: 2,
+          price: Price.empty().copyWith(
+            isPriceOverride: true,
+            finalPrice: MaterialPrice(364.80),
+            lastPrice: MaterialPrice(364.80),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [pnGCartItem],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final materialKey =
+            find.byKey(WidgetKeys.cartItemProductMaterialNumber);
+        expect(materialKey, findsOneWidget);
+        final cartItemCutOffListPriceKey =
+            find.byKey(WidgetKeys.cartItemCutOffListPrice);
+        expect(cartItemCutOffListPriceKey, findsOneWidget);
+      });
+
+      testWidgets('Counter offer Requested', (tester) async {
+        final pnGCartItem = cartItem.copyWith(
+          quantity: 2,
+          price: Price.empty().copyWith(
+            isPriceOverride: true,
+            finalPrice: MaterialPrice(364.80),
+            lastPrice: MaterialPrice(364.80),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [pnGCartItem],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final materialKey =
+            find.byKey(WidgetKeys.cartItemProductMaterialNumber);
+        expect(materialKey, findsOneWidget);
+        final requestedCounterOfferKey =
+            find.text('Requested counter offer'.tr());
+        expect(requestedCounterOfferKey, findsOneWidget);
+      });
+
+      testWidgets('Show Stock Error', (tester) async {
+        final cartItemtWithStock = cartItem.copyWith(
+          salesOrgConfig: SalesOrganisationConfigs.empty()
+              .copyWith(salesOrg: SalesOrg('1900')),
+          quantity: 2,
+          stockInfoList: [
+            StockInfo.empty().copyWith(
+              materialNumber: cartItem.materialInfo.materialNumber,
+              stockQuantity: 1,
+            )
+          ],
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItemtWithStock],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final materialKey =
+            find.byKey(WidgetKeys.cartItemProductMaterialNumber);
+        expect(materialKey, findsOneWidget);
+        final stockAvailableKey = find.textContaining('Stock available'.tr());
+        expect(stockAvailableKey, findsOneWidget);
+      });
+
+      testWidgets('cart Item Quantity Input test', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItem],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final materialKey =
+            find.byKey(WidgetKeys.cartItemProductMaterialNumber);
+        expect(materialKey, findsOneWidget);
+        final cartItemQuantityInputKey = find.byType(CartItemQuantityInput);
+        expect(cartItemQuantityInputKey, findsOneWidget);
+        final cartItemAddKey = find.byKey(WidgetKeys.cartItemAddKey);
+        expect(cartItemAddKey, findsOneWidget);
+        final cartItemDeleteKey = find.byKey(WidgetKeys.cartItemDeleteKey);
+        expect(cartItemDeleteKey, findsOneWidget);
+        final quantityInputTextKey =
+            find.byKey(WidgetKeys.quantityInputTextKey);
+        expect(quantityInputTextKey, findsOneWidget);
+        await tester.tap(cartItemAddKey);
+        await tester.pump();
+        verify(
+          () => cartBloc.add(
+            CartEvent.upsertCart(
+              priceAggregate: cartItem,
+              quantity: 3,
+            ),
+          ),
+        ).called(1);
+        await tester.tap(cartItemDeleteKey);
+        await tester.pump();
+        verify(
+          () => cartBloc.add(
+            CartEvent.upsertCart(
+              priceAggregate: cartItem,
+              quantity: 2,
+            ),
+          ),
+        ).called(1);
+        await tester.enterText(quantityInputTextKey, '2');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+        verify(
+          () => cartBloc.add(
+            CartEvent.upsertCart(
+              priceAggregate: cartItem,
+              quantity: 2,
             ),
           ),
         ).called(1);

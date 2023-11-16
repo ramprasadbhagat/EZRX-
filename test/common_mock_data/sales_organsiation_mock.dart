@@ -184,3 +184,17 @@ final fakeSGSalesOrgConfigGimmickMaterialEnabled =
   currency: Currency('sgd'),
   salesOrg: fakeSGSalesOrg,
 );
+final fakeSGSalesOrgConfigForBundle = SalesOrganisationConfigs.empty().copyWith(
+  enableReferenceNote: true,
+  enableVat: true,
+  enableFutureDeliveryDay: true,
+  enableMobileNumber: true,
+  enableSpecialInstructions: true,
+  disableOrderType: false,
+  enableCollectiveNumber: true,
+  enablePaymentTerms: true,
+  enableRemarks: true,
+  priceOverride: true,
+);
+final fakeSGSalesOrgConfigPriceOverride =
+    SalesOrganisationConfigs.empty().copyWith(priceOverride: true);

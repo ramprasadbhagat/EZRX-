@@ -522,6 +522,7 @@ class WidgetKeys {
   static const Key cartPrincipalLabel = Key('cartItemPrincipalLabel');
   static const Key cartItemProductQty = Key('cartItemProductQty');
   static const Key cartItemProductUnitPrice = Key('cartItemProductUnitPrice');
+  static const Key cartItemCutOffListPrice = Key('cartItemCutOffListPrice');
   static const Key cartItemProductTotalPrice = Key('cartItemProductTotalPrice');
   static const Key cartItemProductCounterOfferLabel =
       Key('cartItemProductCounterOfferLabel');
@@ -535,6 +536,8 @@ class WidgetKeys {
   static const Key cartItemProductDeleteButton =
       Key('cartItemProductDeleteButton');
   static const Key cartItemSwipeDeleteButton = Key('cartItemSwipeDeleteButton');
+  static const Key cartItemSwipeDeleteButtonForBonus =
+      Key('cartItemSwipeDeleteButtonForBonus');
   static Key cartItemBonus(String materialNumber, String bonusMaterialNumber) =>
       Key('cartItemBonus$materialNumber$bonusMaterialNumber');
   static const Key cartItemBonusMaterialDescription =

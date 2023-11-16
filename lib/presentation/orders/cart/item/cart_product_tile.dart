@@ -274,6 +274,7 @@ class _MaterialDetails extends StatelessWidget {
             children: [
               if (cartItem.displayCutOffListPrice)
                 PriceComponent(
+                  key: WidgetKeys.cartItemCutOffListPrice,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartItem.display(PriceType.listPrice),

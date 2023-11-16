@@ -100,3 +100,5 @@ final fakeZPAdminUser = User.empty().copyWith(
     type: RoleType(_roleTypeZPAdmin),
   ),
 );
+final fakeUserWithBonusOverride =
+    User.empty().copyWith(hasBonusOverride: false);
