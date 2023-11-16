@@ -203,6 +203,8 @@ mixin _$AnnouncementArticleItem {
   DateTimeStringValue get publishedDate => throw _privateConstructorUsedError;
   List<BranchAndIc4Info> get branchInfo => throw _privateConstructorUsedError;
   List<BranchAndIc4Info> get iC4Info => throw _privateConstructorUsedError;
+  String get tag => throw _privateConstructorUsedError;
+  String get manufacturer => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnnouncementArticleItemCopyWith<AnnouncementArticleItem> get copyWith =>
@@ -223,7 +225,9 @@ abstract class $AnnouncementArticleItemCopyWith<$Res> {
       HtmlContent content,
       DateTimeStringValue publishedDate,
       List<BranchAndIc4Info> branchInfo,
-      List<BranchAndIc4Info> iC4Info});
+      List<BranchAndIc4Info> iC4Info,
+      String tag,
+      String manufacturer});
 }
 
 /// @nodoc
@@ -248,6 +252,8 @@ class _$AnnouncementArticleItemCopyWithImpl<$Res,
     Object? publishedDate = null,
     Object? branchInfo = null,
     Object? iC4Info = null,
+    Object? tag = null,
+    Object? manufacturer = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -282,6 +288,14 @@ class _$AnnouncementArticleItemCopyWithImpl<$Res,
           ? _value.iC4Info
           : iC4Info // ignore: cast_nullable_to_non_nullable
               as List<BranchAndIc4Info>,
+      tag: null == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufacturer: null == manufacturer
+          ? _value.manufacturer
+          : manufacturer // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -302,7 +316,9 @@ abstract class _$$_AnnouncementArticleItemCopyWith<$Res>
       HtmlContent content,
       DateTimeStringValue publishedDate,
       List<BranchAndIc4Info> branchInfo,
-      List<BranchAndIc4Info> iC4Info});
+      List<BranchAndIc4Info> iC4Info,
+      String tag,
+      String manufacturer});
 }
 
 /// @nodoc
@@ -325,6 +341,8 @@ class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
     Object? publishedDate = null,
     Object? branchInfo = null,
     Object? iC4Info = null,
+    Object? tag = null,
+    Object? manufacturer = null,
   }) {
     return _then(_$_AnnouncementArticleItem(
       id: null == id
@@ -359,6 +377,14 @@ class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
           ? _value._iC4Info
           : iC4Info // ignore: cast_nullable_to_non_nullable
               as List<BranchAndIc4Info>,
+      tag: null == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufacturer: null == manufacturer
+          ? _value.manufacturer
+          : manufacturer // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -374,7 +400,9 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
       required this.content,
       required this.publishedDate,
       required final List<BranchAndIc4Info> branchInfo,
-      required final List<BranchAndIc4Info> iC4Info})
+      required final List<BranchAndIc4Info> iC4Info,
+      required this.tag,
+      required this.manufacturer})
       : _branchInfo = branchInfo,
         _iC4Info = iC4Info,
         super._();
@@ -408,8 +436,13 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
   }
 
   @override
+  final String tag;
+  @override
+  final String manufacturer;
+
+  @override
   String toString() {
-    return 'AnnouncementArticleItem(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate, branchInfo: $branchInfo, iC4Info: $iC4Info)';
+    return 'AnnouncementArticleItem(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate, branchInfo: $branchInfo, iC4Info: $iC4Info, tag: $tag, manufacturer: $manufacturer)';
   }
 
   @override
@@ -427,7 +460,10 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
                 other.publishedDate == publishedDate) &&
             const DeepCollectionEquality()
                 .equals(other._branchInfo, _branchInfo) &&
-            const DeepCollectionEquality().equals(other._iC4Info, _iC4Info));
+            const DeepCollectionEquality().equals(other._iC4Info, _iC4Info) &&
+            (identical(other.tag, tag) || other.tag == tag) &&
+            (identical(other.manufacturer, manufacturer) ||
+                other.manufacturer == manufacturer));
   }
 
   @override
@@ -440,7 +476,9 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
       content,
       publishedDate,
       const DeepCollectionEquality().hash(_branchInfo),
-      const DeepCollectionEquality().hash(_iC4Info));
+      const DeepCollectionEquality().hash(_iC4Info),
+      tag,
+      manufacturer);
 
   @JsonKey(ignore: true)
   @override
@@ -453,15 +491,16 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
 
 abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
   const factory _AnnouncementArticleItem(
-          {required final String id,
-          required final String title,
-          required final String summary,
-          required final String thumbnail,
-          required final HtmlContent content,
-          required final DateTimeStringValue publishedDate,
-          required final List<BranchAndIc4Info> branchInfo,
-          required final List<BranchAndIc4Info> iC4Info}) =
-      _$_AnnouncementArticleItem;
+      {required final String id,
+      required final String title,
+      required final String summary,
+      required final String thumbnail,
+      required final HtmlContent content,
+      required final DateTimeStringValue publishedDate,
+      required final List<BranchAndIc4Info> branchInfo,
+      required final List<BranchAndIc4Info> iC4Info,
+      required final String tag,
+      required final String manufacturer}) = _$_AnnouncementArticleItem;
   const _AnnouncementArticleItem._() : super._();
 
   @override
@@ -480,6 +519,10 @@ abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
   List<BranchAndIc4Info> get branchInfo;
   @override
   List<BranchAndIc4Info> get iC4Info;
+  @override
+  String get tag;
+  @override
+  String get manufacturer;
   @override
   @JsonKey(ignore: true)
   _$$_AnnouncementArticleItemCopyWith<_$_AnnouncementArticleItem>

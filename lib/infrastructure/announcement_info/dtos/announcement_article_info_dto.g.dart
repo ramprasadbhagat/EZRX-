@@ -41,6 +41,8 @@ _$_AnnouncementArticleItemDto _$$_AnnouncementArticleItemDtoFromJson(
       iC4Info: (getIC4Names(json, 'iC4') as List<dynamic>)
           .map((e) => BranchAndIc4InfoDto.fromJson(e as Map<String, dynamic>))
           .toList(),
+      tag: readTag(json, 'tag') as String,
+      manufacturer: getValue(json, 'manufacturer') as String,
     );
 
 Map<String, dynamic> _$$_AnnouncementArticleItemDtoToJson(
@@ -54,6 +56,8 @@ Map<String, dynamic> _$$_AnnouncementArticleItemDtoToJson(
       'publishedDate': instance.publishedDate,
       'branch': instance.branchInfo.map((e) => e.toJson()).toList(),
       'iC4': instance.iC4Info.map((e) => e.toJson()).toList(),
+      'tag': instance.tag,
+      'manufacturer': instance.manufacturer,
     };
 
 _$_BranchAndIc4Dto _$$_BranchAndIc4DtoFromJson(Map<String, dynamic> json) =>

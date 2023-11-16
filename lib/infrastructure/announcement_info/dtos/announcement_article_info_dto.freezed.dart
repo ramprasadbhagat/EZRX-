@@ -261,6 +261,10 @@ mixin _$AnnouncementArticleItemDto {
       throw _privateConstructorUsedError;
   @JsonKey(name: 'iC4', readValue: getIC4Names)
   List<BranchAndIc4InfoDto> get iC4Info => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tag', readValue: readTag)
+  String get tag => throw _privateConstructorUsedError;
+  @JsonKey(name: 'manufacturer', readValue: getValue)
+  String get manufacturer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -286,7 +290,9 @@ abstract class $AnnouncementArticleItemDtoCopyWith<$Res> {
       @JsonKey(name: 'branch', readValue: getBranchNames)
       List<BranchAndIc4InfoDto> branchInfo,
       @JsonKey(name: 'iC4', readValue: getIC4Names)
-      List<BranchAndIc4InfoDto> iC4Info});
+      List<BranchAndIc4InfoDto> iC4Info,
+      @JsonKey(name: 'tag', readValue: readTag) String tag,
+      @JsonKey(name: 'manufacturer', readValue: getValue) String manufacturer});
 }
 
 /// @nodoc
@@ -311,6 +317,8 @@ class _$AnnouncementArticleItemDtoCopyWithImpl<$Res,
     Object? publishedDate = null,
     Object? branchInfo = null,
     Object? iC4Info = null,
+    Object? tag = null,
+    Object? manufacturer = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -345,6 +353,14 @@ class _$AnnouncementArticleItemDtoCopyWithImpl<$Res,
           ? _value.iC4Info
           : iC4Info // ignore: cast_nullable_to_non_nullable
               as List<BranchAndIc4InfoDto>,
+      tag: null == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufacturer: null == manufacturer
+          ? _value.manufacturer
+          : manufacturer // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -369,7 +385,9 @@ abstract class _$$_AnnouncementArticleItemDtoCopyWith<$Res>
       @JsonKey(name: 'branch', readValue: getBranchNames)
       List<BranchAndIc4InfoDto> branchInfo,
       @JsonKey(name: 'iC4', readValue: getIC4Names)
-      List<BranchAndIc4InfoDto> iC4Info});
+      List<BranchAndIc4InfoDto> iC4Info,
+      @JsonKey(name: 'tag', readValue: readTag) String tag,
+      @JsonKey(name: 'manufacturer', readValue: getValue) String manufacturer});
 }
 
 /// @nodoc
@@ -393,6 +411,8 @@ class __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>
     Object? publishedDate = null,
     Object? branchInfo = null,
     Object? iC4Info = null,
+    Object? tag = null,
+    Object? manufacturer = null,
   }) {
     return _then(_$_AnnouncementArticleItemDto(
       id: null == id
@@ -427,6 +447,14 @@ class __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>
           ? _value._iC4Info
           : iC4Info // ignore: cast_nullable_to_non_nullable
               as List<BranchAndIc4InfoDto>,
+      tag: null == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufacturer: null == manufacturer
+          ? _value.manufacturer
+          : manufacturer // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -446,7 +474,10 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
       @JsonKey(name: 'branch', readValue: getBranchNames)
       required final List<BranchAndIc4InfoDto> branchInfo,
       @JsonKey(name: 'iC4', readValue: getIC4Names)
-      required final List<BranchAndIc4InfoDto> iC4Info})
+      required final List<BranchAndIc4InfoDto> iC4Info,
+      @JsonKey(name: 'tag', readValue: readTag) required this.tag,
+      @JsonKey(name: 'manufacturer', readValue: getValue)
+      required this.manufacturer})
       : _branchInfo = branchInfo,
         _iC4Info = iC4Info,
         super._();
@@ -491,8 +522,15 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
   }
 
   @override
+  @JsonKey(name: 'tag', readValue: readTag)
+  final String tag;
+  @override
+  @JsonKey(name: 'manufacturer', readValue: getValue)
+  final String manufacturer;
+
+  @override
   String toString() {
-    return 'AnnouncementArticleItemDto(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate, branchInfo: $branchInfo, iC4Info: $iC4Info)';
+    return 'AnnouncementArticleItemDto(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate, branchInfo: $branchInfo, iC4Info: $iC4Info, tag: $tag, manufacturer: $manufacturer)';
   }
 
   @override
@@ -510,7 +548,10 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
                 other.publishedDate == publishedDate) &&
             const DeepCollectionEquality()
                 .equals(other._branchInfo, _branchInfo) &&
-            const DeepCollectionEquality().equals(other._iC4Info, _iC4Info));
+            const DeepCollectionEquality().equals(other._iC4Info, _iC4Info) &&
+            (identical(other.tag, tag) || other.tag == tag) &&
+            (identical(other.manufacturer, manufacturer) ||
+                other.manufacturer == manufacturer));
   }
 
   @JsonKey(ignore: true)
@@ -524,7 +565,9 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
       content,
       publishedDate,
       const DeepCollectionEquality().hash(_branchInfo),
-      const DeepCollectionEquality().hash(_iC4Info));
+      const DeepCollectionEquality().hash(_iC4Info),
+      tag,
+      manufacturer);
 
   @JsonKey(ignore: true)
   @override
@@ -556,8 +599,10 @@ abstract class _AnnouncementArticleItemDto extends AnnouncementArticleItemDto {
       @JsonKey(name: 'branch', readValue: getBranchNames)
       required final List<BranchAndIc4InfoDto> branchInfo,
       @JsonKey(name: 'iC4', readValue: getIC4Names)
-      required final List<BranchAndIc4InfoDto>
-          iC4Info}) = _$_AnnouncementArticleItemDto;
+      required final List<BranchAndIc4InfoDto> iC4Info,
+      @JsonKey(name: 'tag', readValue: readTag) required final String tag,
+      @JsonKey(name: 'manufacturer', readValue: getValue)
+      required final String manufacturer}) = _$_AnnouncementArticleItemDto;
   const _AnnouncementArticleItemDto._() : super._();
 
   factory _AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =
@@ -587,6 +632,12 @@ abstract class _AnnouncementArticleItemDto extends AnnouncementArticleItemDto {
   @override
   @JsonKey(name: 'iC4', readValue: getIC4Names)
   List<BranchAndIc4InfoDto> get iC4Info;
+  @override
+  @JsonKey(name: 'tag', readValue: readTag)
+  String get tag;
+  @override
+  @JsonKey(name: 'manufacturer', readValue: getValue)
+  String get manufacturer;
   @override
   @JsonKey(ignore: true)
   _$$_AnnouncementArticleItemDtoCopyWith<_$_AnnouncementArticleItemDto>

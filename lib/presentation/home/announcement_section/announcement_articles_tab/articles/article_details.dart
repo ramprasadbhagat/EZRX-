@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
@@ -108,6 +109,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                 child: AppBar(
                   key: WidgetKeys.articleDetailsBottomAppBarKey,
                   automaticallyImplyLeading: false,
+                  elevation: 0,
                   leading: _isBackButtonEnableForAppbar
                       ? IconButton(
                           key: WidgetKeys.articleDetailsBottomBackButtonKey,
@@ -137,6 +139,26 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        if (widget.article.manufacturer.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              '${context.tr('By')} ${widget.article.manufacturer}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ),
+                        if (widget.article.tag.isNotEmpty)
+                          Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              color: ZPColors.paleBlueGray,
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: Text(
+                              widget.article.tag,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ),
                         Html(
                           key: WidgetKeys.articleDetailsBodyKey,
                           style: {
@@ -215,9 +237,6 @@ class _TitleSection extends StatelessWidget {
               textAlign: TextAlign.left,
               key: WidgetKeys.articleDetailsTitleKey,
             ),
-          ),
-          const SizedBox(
-            height: 10,
           ),
         ],
       ),

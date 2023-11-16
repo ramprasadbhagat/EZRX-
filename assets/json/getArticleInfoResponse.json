@@ -60,16 +60,16 @@
                         "value": []
                     },
                     "manufacturer": {
-                        "value": "test Manufacturer "
+                        "value": "zuellig"
                     },
                     "source": {
                         "value": "test Source "
                     },
                     "tag": {
                         "value": {
-                            "id": "5AE091462B6742A4860AE6204D064B54",
-                            "name": "General notice",
-                            "displayName": "General notice"
+                            "id": "E72B381ADBA448DCA6860D262FB18D27",
+                            "name": "new Tag 1311",
+                            "displayName": "new Tag 1311"
                         }
                     },
                     "pinToTop": {

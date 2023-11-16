@@ -56,6 +56,8 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
     required DateTimeStringValue publishedDate,
     required List<BranchAndIc4Info> branchInfo,
     required List<BranchAndIc4Info> iC4Info,
+    required String tag,
+    required String manufacturer,
   }) = _AnnouncementArticleItem;
 
   factory AnnouncementArticleItem.empty() => AnnouncementArticleItem(
@@ -67,6 +69,8 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
         publishedDate: DateTimeStringValue(''),
         branchInfo: <BranchAndIc4Info>[],
         iC4Info: <BranchAndIc4Info>[],
+        tag: '',
+        manufacturer: '',
       );
 
   bool isSearchKeyMatching(String searchKey) =>
