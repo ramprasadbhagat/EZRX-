@@ -2015,5 +2015,47 @@ void main() {
         findsOneWidget,
       );
     });
+
+    testWidgets('Find Total Tax', (WidgetTester tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeTHSalesOrgConfigTaxBreakdownEnabled,
+        ),
+      );
+
+      final cartState = CartState.initial().copyWith(
+        cartProducts: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('123456789'),
+              quantity: MaterialQty(1),
+              tax: 10,
+            ),
+            price: Price.empty().copyWith(
+              finalPrice: MaterialPrice(234.50),
+            ),
+            salesOrgConfig: fakeTHSalesOrgConfigTaxBreakdownEnabled,
+          ),
+        ],
+        config: fakeTHSalesOrgConfigTaxBreakdownEnabled,
+      );
+
+      when(() => cartBloc.state).thenReturn(cartState);
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+      expect(scrollListFinder, findsOneWidget);
+
+      final taxValue = find.textContaining('Tax at 6%:');
+
+      await tester.dragUntilVisible(
+        taxValue,
+        scrollListFinder,
+        const Offset(0.0, -200.0),
+      );
+    });
   });
 }

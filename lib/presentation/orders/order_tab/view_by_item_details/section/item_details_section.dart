@@ -44,7 +44,9 @@ class ItemDetailsSection extends StatelessWidget {
             label: orderHistoryItem.materialNumber.displayMatNo,
             title: orderHistoryItem.materialDescription,
             priceComponent: PriceComponent(
-              price: orderHistoryItem.totalPrice.totalPrice.toStringAsFixed(2),
+              price: orderHistoryItem.itemTotalPrice(
+                context.read<EligibilityBloc>().state.salesOrg.isID,
+              ),
               salesOrgConfig: salesOrgConfigs,
             ),
             statusWidget: StatusLabel(

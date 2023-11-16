@@ -134,6 +134,13 @@ final fakeMYSalesOrgConfigTaxBreakdownEnabled =
   currency: Currency('myr'),
 );
 
+final fakeTHSalesOrgConfigTaxBreakdownEnabled =
+    SalesOrganisationConfigs.empty().copyWith(
+  displaySubtotalTaxBreakdown: true,
+  vatValue: 6,
+  currency: Currency('thb'),
+);
+
 final fakeMYSalesOrgConfigFutureDeliveryDayEnabled =
     SalesOrganisationConfigs.empty().copyWith(
   enableFutureDeliveryDay: true,

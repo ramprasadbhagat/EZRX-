@@ -98,6 +98,12 @@ class OrderHistoryItem with _$OrderHistoryItem {
   StatusType get productTag => StatusType(isBonusMaterial ? 'Bonus' : '');
 
   bool get isEmpty => this == OrderHistoryItem.empty();
+
+  String itemTotalPrice(bool isIdMarket) {
+    if (isIdMarket && isBonusMaterial) return '0';
+
+    return isBonusMaterial ? 'FREE' : totalPrice.totalPrice.toStringAsFixed(2);
+  }
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {

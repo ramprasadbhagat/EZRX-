@@ -2927,11 +2927,12 @@ void main() {
             ],
             config: fakeSalesOrganisationConfigs.copyWith(
               currency: Currency('thb'),
+              vatValue: 6,
             ),
           );
           expect(
             cartBlocState.totalTaxPercent,
-            '1',
+            '6',
           );
         },
       );

@@ -386,7 +386,7 @@ class CartState with _$CartState {
     if (_isID) {
       return salesOrganisation.salesOrg.orderTaxValue.toDouble();
     }
-    if (!config.isMarketEligibleForTaxClassification) {
+    if (!config.currency.isVN) {
       return config.vatValue.toDouble();
     }
 
@@ -478,10 +478,8 @@ class CartState with _$CartState {
         orElse: () => PriceAggregate.empty(),
       );
 
-  bool get isNotAvailableToCheckoutForID =>
-      cartProducts.any(
-        (element) =>
-            element.showErrorMessage,
+  bool get isNotAvailableToCheckoutForID => cartProducts.any(
+        (element) => element.showErrorMessage,
       );
 
   List<PriceAggregate> get cartProductsComboSorted => List.from(cartProducts)

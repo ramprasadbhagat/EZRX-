@@ -70,8 +70,13 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                     .displayMatNo,
                                                 title: e.materialDescription,
                                                 priceComponent: PriceComponent(
-                                                  price: e.totalPrice.totalPrice
-                                                      .toStringAsFixed(2),
+                                                  price: e.itemTotalPrice(
+                                                    context
+                                                        .read<EligibilityBloc>()
+                                                        .state
+                                                        .salesOrg
+                                                        .isID,
+                                                  ),
                                                   salesOrgConfig: context
                                                       .read<EligibilityBloc>()
                                                       .state

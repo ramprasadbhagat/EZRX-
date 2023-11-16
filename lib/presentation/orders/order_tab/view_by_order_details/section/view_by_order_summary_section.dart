@@ -88,7 +88,7 @@ class OrderSummarySection extends StatelessWidget {
               key: WidgetKeys.viewByOrderSubtotalKey,
               orderNumber: orderDetails.orderNumber,
               title: context.tr('Subtotal (excl. tax)'),
-              value: orderDetails.orderedItemsValue(isMYExternalSalesRep),
+              value: orderDetails.subTotalExcludeTax(isMYExternalSalesRep),
             ),
             /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web
             keyText: 'Tax at x%',
