@@ -304,42 +304,12 @@ class _MaterialDetails extends StatelessWidget {
             isInvalidCartItem: isInvalidCartItem,
           ),
           if (cartItem.showErrorMessage)
-            _StockError(
-              errorText: cartItem.isMaxQtyExceedsForId
+            ErrorTextWithIcon(
+              textPadding: const EdgeInsets.symmetric(vertical: 2),
+              valueText: cartItem.isMaxQtyExceedsForId
                   ? '${context.tr('Maximum order qty')}: ${cartItem.maximumQty}'
                   : '${context.tr('Stock available')}: ${cartItem.stockQuantity}',
             ),
-        ],
-      ),
-    );
-  }
-}
-
-class _StockError extends StatelessWidget {
-  const _StockError({required this.errorText, Key? key}) : super(key: key);
-  final String errorText;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 5),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Icon(
-            Icons.error,
-            size: 20,
-            color: ZPColors.red,
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          Text(
-            errorText,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: ZPColors.red),
-          ),
         ],
       ),
     );

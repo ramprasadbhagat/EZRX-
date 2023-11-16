@@ -11,4 +11,7 @@ class BundleAddToCartEvent with _$BundleAddToCartEvent {
     required MaterialNumber materialNumber,
     required int quantity,
   }) = _UpdateQuantity;
+  const factory BundleAddToCartEvent.validateQuantity({
+    required bool isError,
+  }) = _ValidateQuantity;
 }

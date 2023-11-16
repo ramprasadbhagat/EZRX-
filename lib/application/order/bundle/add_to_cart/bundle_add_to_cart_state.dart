@@ -6,11 +6,13 @@ class BundleAddToCartState with _$BundleAddToCartState {
   const factory BundleAddToCartState({
     required MaterialInfo bundle,
     required List<MaterialInfo> bundleMaterials,
+    required bool showErrorMessage,
   }) = _BundleAddToCartState;
 
   factory BundleAddToCartState.initial() => BundleAddToCartState(
         bundle: MaterialInfo.empty(),
         bundleMaterials: <MaterialInfo>[],
+        showErrorMessage: false,
       );
 
   int get totalCount => bundleMaterials.fold<int>(
@@ -52,4 +54,6 @@ class BundleAddToCartState with _$BundleAddToCartState {
             ),
           )
           .toList();
+
+  bool get displayErrorMessage => showErrorMessage && !isBundleCountSatisfied;
 }

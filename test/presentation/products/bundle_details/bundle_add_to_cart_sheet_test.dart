@@ -349,6 +349,63 @@ void main() {
 
         expect(price, findsOneWidget);
       });
+
+      testWidgets('Error message - Minimum quantity does not satisfy',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              currency: Currency('SGD'),
+            ),
+          ),
+        );
+        when(() => bundleAddToCartBloc.state).thenReturn(
+          BundleAddToCartState.initial().copyWith(
+            bundle: MaterialInfo.empty().copyWith(
+              bundle: Bundle.empty().copyWith(
+                bundleInformation: <BundleInfo>[
+                  BundleInfo.empty()
+                      .copyWith(quantity: 10, sequence: 1, rate: 20),
+                ],
+              ),
+            ),
+            bundleMaterials: <MaterialInfo>[
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+              ),
+            ],
+          ),
+        );
+
+        whenListen(
+            bundleAddToCartBloc,
+            Stream.fromIterable([
+              bundleAddToCartBloc.state.copyWith(
+                showErrorMessage: true,
+              )
+            ]),);
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final textField = find.descendant(
+          of: find.byKey(WidgetKeys.bundleMaterialItem('fake-material-1')),
+          matching: find.byKey(WidgetKeys.bundleQuantityTextKey),
+        );
+        await tester.tap(textField);
+        await tester.enterText(textField, '5');
+        expect(textField, findsWidgets);
+        final sheetAddToCartButton =
+            find.byKey(WidgetKeys.bundleAddToCartSheetSubmitButton);
+        await tester.tap(sheetAddToCartButton);
+        await tester.pumpAndSettle();
+        expect(
+          find.textContaining('Minimum total purchase qty'),
+          findsOneWidget,
+        );
+      });
     },
   );
 }

@@ -14,6 +14,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
@@ -34,38 +35,35 @@ class BundlesAddToCartSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BundleAddToCartBloc, BundleAddToCartState>(
-      buildWhen: (previous, current) =>
-          previous.bundleMaterials != current.bundleMaterials,
-      builder: (context, state) {
-        return Padding(
-          key: WidgetKeys.bundleAddToCartSheet,
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                context.tr('Add bundle to cart'),
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-              InfoLabel(
-                textValue:
-                    '${context.tr('Please note that the minimum total purchase quantity for this bundle offer is')} ${state.bundle.bundle.minimumQuantityBundleMaterial.quantity}.',
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: state.bundleMaterials.length,
-                  itemBuilder: (context, index) => _BundleMaterialListTile(
-                    materialInfo: state.bundleMaterials.elementAt(index),
-                  ),
-                ),
-              ),
-              const _BundleSheetFooter(),
-            ],
+    final bundleAddToCartState = context.read<BundleAddToCartBloc>().state;
+
+    return Padding(
+      key: WidgetKeys.bundleAddToCartSheet,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            context.tr('Add bundle to cart'),
+            style: Theme.of(context).textTheme.labelLarge,
           ),
-        );
-      },
+          InfoLabel(
+            textValue:
+                '${context.tr('Please note that the minimum total purchase quantity for this bundle offer is')} ${bundleAddToCartState.bundle.bundle.minimumQuantityBundleMaterial.quantity}.',
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: bundleAddToCartState.bundleMaterials.length,
+              itemBuilder: (context, index) => _BundleMaterialListTile(
+                materialInfo:
+                    bundleAddToCartState.bundleMaterials.elementAt(index),
+              ),
+            ),
+          ),
+          const _BundleSheetFooter(),
+        ],
+      ),
     );
   }
 }
@@ -84,6 +82,16 @@ class _BundleMaterialListTile extends StatefulWidget {
 
 class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
   final TextEditingController _controller = TextEditingController(text: '0');
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<BundleAddToCartBloc>().add(
+          const BundleAddToCartEvent.validateQuantity(
+            isError: false,
+          ),
+        );
+  }
 
   @override
   void dispose() {
@@ -196,26 +204,33 @@ class _BundleSheetFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BundleAddToCartBloc, BundleAddToCartState>(
-      buildWhen: (previous, current) =>
-          previous.totalCount != current.totalCount,
-      builder: (context, state) {
-        return Container(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          decoration: const BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                color: ZPColors.lightGray,
-              ),
-            ),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      decoration: const BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: ZPColors.lightGray,
           ),
-          child: Column(
+        ),
+      ),
+      child: BlocBuilder<BundleAddToCartBloc, BundleAddToCartState>(
+        buildWhen: (previous, current) =>
+            previous.totalCount != current.totalCount ||
+            previous.showErrorMessage != current.showErrorMessage,
+        builder: (context, state) {
+          return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Total quantity: ${state.totalCount}',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
+              if (state.displayErrorMessage)
+                ErrorTextWithIcon(
+                  textPadding: EdgeInsets.zero,
+                  valueText:
+                      '${context.tr('Minimum total purchase qty')}: ${state.bundle.bundle.minimumQuantityBundleMaterial.quantity}',
+                ),
               PriceComponent(
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
@@ -283,6 +298,11 @@ class _BundleSheetFooter extends StatelessWidget {
                         return ElevatedButton(
                           key: WidgetKeys.bundleAddToCartSheetSubmitButton,
                           onPressed: () {
+                            context.read<BundleAddToCartBloc>().add(
+                                  BundleAddToCartEvent.validateQuantity(
+                                    isError: !state.isBundleCountSatisfied,
+                                  ),
+                                );
                             if (state.isBundleCountSatisfied &&
                                 !stateCart.isUpserting) {
                               context.read<CartBloc>().add(
@@ -318,9 +338,9 @@ class _BundleSheetFooter extends StatelessWidget {
                 ],
               ),
             ],
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 

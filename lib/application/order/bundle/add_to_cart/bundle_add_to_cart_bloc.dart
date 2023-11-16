@@ -41,6 +41,8 @@ class BundleAddToCartBloc
               .toList(),
         ),
       ),
+      validateQuantity: (_ValidateQuantity e) =>
+          emit(state.copyWith(showErrorMessage: e.isError)),
     );
   }
 }
