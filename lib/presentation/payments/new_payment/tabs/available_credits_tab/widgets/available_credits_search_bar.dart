@@ -5,21 +5,8 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AvailableCreditsBloc, AvailableCreditsState>(
+    return BlocBuilder<AvailableCreditsBloc, AvailableCreditsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
-      listener: (context, state) {
-        state.failureOrSuccessOption.fold(
-          () {
-            FocusScope.of(context).requestFocus(FocusNode());
-          },
-          (either) => either.fold(
-            (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
-            },
-            (_) {},
-          ),
-        );
-      },
       builder: (context, state) {
         return CustomSearchBar(
           key: WidgetKeys.genericKey(

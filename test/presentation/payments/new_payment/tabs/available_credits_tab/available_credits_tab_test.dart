@@ -1,56 +1,63 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credit_payment_filter_page.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credits_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../utils/widget_utils.dart';
-import '../../new_payment_page_test.dart';
+
+class AvailableCreditsBlocMock
+    extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
+    implements AvailableCreditsBloc {}
+
+class AvailableCreditFilterBlocMock
+    extends MockBloc<AvailableCreditFilterEvent, AvailableCreditFilterState>
+    implements AvailableCreditFilterBloc {}
+
+class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
+    implements NewPaymentBloc {}
+
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
+class MixpanelServiceMock extends Mock implements MixpanelService {}
+
+class AutoRouteMock extends Mock implements AppRouter {}
 
 void main() {
-  late AccountSummaryBloc accountSummaryBlocMock;
-  late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
-  late OutstandingInvoiceFilterBloc outstandingInvoiceFilterBlocMock;
   late AvailableCreditsBloc availableCreditsBlocMock;
   late AvailableCreditFilterBloc availableCreditFilterBlocMock;
   late NewPaymentBloc newPaymentBlocMock;
-  late CustomerCodeBloc customerCodeBlocMock;
-  late UserBloc userBlocMock;
-  late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
-  late AuthBloc authBlocMock;
-  late AnnouncementBloc announcementBlocMock;
   late EligibilityBloc eligibilityBlocMock;
+  late MixpanelService mixpanelServiceMock;
   late List<CustomerOpenItem> fakeCredits;
-
+  late Config configMock;
+  const fakeSearchKey = '26';
   final creditFilter = AvailableCreditFilter.empty().copyWith(
-    amountValueFrom: RangeValue('100'),
-    amountValueTo: RangeValue('10'),
+    amountValueFrom: RangeValue('10'),
+    amountValueTo: RangeValue('100'),
     documentDateFrom: DateTimeStringValue('-'),
     documentDateTo: DateTimeStringValue('-'),
   );
@@ -58,52 +65,27 @@ void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton<AppRouter>(() => AutoRouteMock());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
-  });
+    mixpanelServiceMock = locator<MixpanelService>();
+    configMock = locator<Config>();
 
-  setUp(() async {
-    accountSummaryBlocMock = AccountSummaryBlocMock();
-    outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
-    outstandingInvoiceFilterBlocMock = OutstandingInvoiceFilterBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();
     availableCreditFilterBlocMock = AvailableCreditFilterBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
-    customerCodeBlocMock = CustomerCodeBlocMock();
-    userBlocMock = UserBlocMock();
-    salesOrgBlocMock = SalesOrgBlocMock();
-    authBlocMock = AuthBlocMock();
-    announcementBlocMock = AnnouncementBlocMock();
     eligibilityBlocMock = EligibilityBlockMock();
+    fakeCredits = await NewPaymentLocalDataSource().getCustomerOpenItems();
+  });
 
-    when(() => accountSummaryBlocMock.state)
-        .thenReturn(AccountSummaryState.initial());
-    when(() => outstandingInvoicesBlocMock.state)
-        .thenReturn(OutstandingInvoicesState.initial());
-    when(() => outstandingInvoiceFilterBlocMock.state)
-        .thenReturn(OutstandingInvoiceFilterState.initial());
+  setUp(() async {
     when(() => availableCreditsBlocMock.state)
         .thenReturn(AvailableCreditsState.initial());
     when(() => availableCreditFilterBlocMock.state)
         .thenReturn(AvailableCreditFilterState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
-    when(() => customerCodeBlocMock.state)
-        .thenReturn(CustomerCodeState.initial());
-    when(() => userBlocMock.state).thenReturn(UserState.initial());
-    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-    when(() => announcementBlocMock.state)
-        .thenReturn(AnnouncementState.initial());
-    when(() => outstandingInvoicesBlocMock.state)
-        .thenReturn(OutstandingInvoicesState.initial());
-    when(() => availableCreditsBlocMock.state)
-        .thenReturn(AvailableCreditsState.initial());
-    when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
-
-    fakeCredits = await NewPaymentLocalDataSource().getCustomerOpenItems();
   });
 
   Widget getWidget() {
@@ -112,15 +94,6 @@ void main() {
       usingLocalization: true,
       routeName: NewPaymentPageRoute.name,
       providers: [
-        BlocProvider<AccountSummaryBloc>(
-          create: (context) => accountSummaryBlocMock,
-        ),
-        BlocProvider<OutstandingInvoicesBloc>(
-          create: (context) => outstandingInvoicesBlocMock,
-        ),
-        BlocProvider<OutstandingInvoiceFilterBloc>(
-          create: (context) => outstandingInvoiceFilterBlocMock,
-        ),
         BlocProvider<AvailableCreditsBloc>(
           create: (context) => availableCreditsBlocMock,
         ),
@@ -129,19 +102,6 @@ void main() {
         ),
         BlocProvider<NewPaymentBloc>(
           create: (context) => newPaymentBlocMock,
-        ),
-        BlocProvider<CustomerCodeBloc>(
-          create: (context) => customerCodeBlocMock,
-        ),
-        BlocProvider<UserBloc>(
-          create: (context) => userBlocMock,
-        ),
-        BlocProvider<SalesOrgBloc>(
-          create: (context) => salesOrgBlocMock,
-        ),
-        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-        BlocProvider<AnnouncementBloc>(
-          create: (context) => announcementBlocMock,
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
@@ -153,7 +113,44 @@ void main() {
     );
   }
 
+  Widget getBottomSheetWidget() {
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      usingLocalization: true,
+      providers: [
+        BlocProvider<AvailableCreditsBloc>(
+          create: (context) => availableCreditsBlocMock,
+        ),
+        BlocProvider<AvailableCreditFilterBloc>(
+          create: (context) => availableCreditFilterBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
+        ),
+      ],
+      child: const Scaffold(
+        body: AvailableCreditPaymentFilterPage(),
+      ),
+    );
+  }
+
   group('Available credit tab test', () {
+    Future openFilterBottomSheet(WidgetTester tester) async {
+      final filterBadge = find.byType(CustomBadge);
+      expect(filterBadge, findsOneWidget);
+
+      await tester.tap(filterBadge);
+      await tester.pumpAndSettle();
+      verify(
+        () => availableCreditsBlocMock.add(
+          AvailableCreditsEvent.fetch(
+            appliedFilter: creditFilter,
+            searchKey: availableCreditsBlocMock.state.searchKey,
+          ),
+        ),
+      );
+    }
+
     testWidgets('Search bar show', (tester) async {
       await tester.pumpWidget(getWidget());
       await tester.pump();
@@ -161,33 +158,59 @@ void main() {
       expect(searchBar, findsOneWidget);
     });
 
-    testWidgets('Search test', (tester) async {
+    testWidgets('Search Change And Submit Test', (tester) async {
       await tester.pumpWidget(getWidget());
       await tester.pump();
 
       final textFormField = find.byType(TextFormField);
       expect(textFormField, findsOneWidget);
 
-      await tester.enterText(textFormField, '26');
-      await tester.pumpAndSettle();
+      await tester.enterText(textFormField, fakeSearchKey);
+      await tester.pump(
+        Duration(
+          milliseconds: configMock.autoSearchTimeout,
+        ),
+      );
 
-      final searchIcon = find.byKey(WidgetKeys.searchIconKey);
-      expect(searchIcon, findsOneWidget);
-
+      verify(
+        () => mixpanelServiceMock.trackEvent(
+          eventName: MixpanelEvents.documentNumberSearched,
+          properties: null,
+        ),
+      ).called(1);
       verify(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
-            appliedFilter: availableCreditsBlocMock.state.appliedFilter,
-            searchKey: SearchKey.search('26'),
+            appliedFilter: AvailableCreditFilter.empty(),
+            searchKey: SearchKey.searchFilter(fakeSearchKey),
           ),
         ),
-      );
+      ).called(1);
+
+      final searchIcon = find.byKey(WidgetKeys.searchIconKey);
+      expect(searchIcon, findsOneWidget);
+      await tester.tap(searchIcon);
+
+      verify(
+        () => mixpanelServiceMock.trackEvent(
+          eventName: MixpanelEvents.documentNumberSearched,
+          properties: null,
+        ),
+      ).called(1);
+      verify(
+        () => availableCreditsBlocMock.add(
+          AvailableCreditsEvent.fetch(
+            appliedFilter: AvailableCreditFilter.empty(),
+            searchKey: SearchKey.searchFilter(fakeSearchKey),
+          ),
+        ),
+      ).called(1);
     });
 
     testWidgets('Clear search test', (tester) async {
       when(() => availableCreditsBlocMock.state).thenReturn(
         AvailableCreditsState.initial().copyWith(
-          searchKey: SearchKey.search('26'),
+          searchKey: SearchKey.search(fakeSearchKey),
         ),
       );
 
@@ -198,21 +221,26 @@ void main() {
       expect(clearIcon, findsOneWidget);
 
       await tester.tap(clearIcon);
-      await tester.pumpAndSettle();
 
+      verify(
+        () => mixpanelServiceMock.trackEvent(
+          eventName: MixpanelEvents.documentNumberSearched,
+          properties: null,
+        ),
+      ).called(1);
       verify(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
-            appliedFilter: availableCreditsBlocMock.state.appliedFilter,
-            searchKey: SearchKey.search(''),
+            appliedFilter: AvailableCreditFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
           ),
         ),
-      );
+      ).called(1);
     });
 
     testWidgets('Loading view', (tester) async {
       when(() => availableCreditsBlocMock.state).thenReturn(
-        AvailableCreditsState.initial().copyWith(isLoading: true, items: []),
+        AvailableCreditsState.initial().copyWith(isLoading: true),
       );
 
       await tester.pumpWidget(getWidget());
@@ -222,10 +250,6 @@ void main() {
     });
 
     testWidgets('No record', (tester) async {
-      when(() => availableCreditsBlocMock.state).thenReturn(
-        AvailableCreditsState.initial().copyWith(isLoading: false, items: []),
-      );
-
       await tester.pumpWidget(getWidget());
       await tester.pump();
       final noRecordTitleText = find.text('No available credits');
@@ -237,8 +261,7 @@ void main() {
 
     testWidgets('First item credit show', (tester) async {
       when(() => availableCreditsBlocMock.state).thenReturn(
-        AvailableCreditsState.initial()
-            .copyWith(isLoading: false, items: fakeCredits),
+        AvailableCreditsState.initial().copyWith(items: fakeCredits),
       );
 
       await tester.pumpWidget(getWidget());
@@ -259,8 +282,7 @@ void main() {
 
     testWidgets('Select credit test', (tester) async {
       when(() => availableCreditsBlocMock.state).thenReturn(
-        AvailableCreditsState.initial()
-            .copyWith(isLoading: false, items: fakeCredits),
+        AvailableCreditsState.initial().copyWith(items: fakeCredits),
       );
 
       await tester.pumpWidget(getWidget());
@@ -270,41 +292,10 @@ void main() {
       expect(creditBox, findsAtLeastNWidgets(1));
 
       await tester.tap(creditBox.first);
-      await tester.pumpAndSettle();
 
       verify(
         () => newPaymentBlocMock.add(
           NewPaymentEvent.toggleCredit(selected: true, item: fakeCredits.first),
-        ),
-      );
-    });
-
-    testWidgets('Refresh test', (tester) async {
-      when(() => availableCreditsBlocMock.state).thenReturn(
-        AvailableCreditsState.initial()
-            .copyWith(isLoading: false, items: fakeCredits),
-      );
-
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-
-      await tester.drag(
-        find.byType(
-          RefreshIndicator,
-        ),
-        const Offset(0.0, 100.0),
-      );
-      await tester.pump(const Duration(seconds: 2));
-      await tester.pump(const Duration(seconds: 1));
-      await tester.pump(const Duration(seconds: 1));
-      await tester.pump();
-
-      verify(
-        () => availableCreditsBlocMock.add(
-          AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
-            searchKey: availableCreditsBlocMock.state.searchKey,
-          ),
         ),
       );
     });
@@ -332,7 +323,7 @@ void main() {
         const Offset(0.0, -2000),
       );
 
-      await tester.pumpAndSettle(const Duration(microseconds: 500));
+      await tester.pumpAndSettle();
 
       verify(
         () => availableCreditsBlocMock.add(
@@ -341,54 +332,48 @@ void main() {
       );
     });
 
-    testWidgets('Filter show', (tester) async {
+    testWidgets(
+        'Apply filter test - Available Credit Amount Value Range Invalid',
+        (tester) async {
+      final invalidCreditFilter = AvailableCreditFilter.empty().copyWith(
+        amountValueFrom: RangeValue('100'),
+        amountValueTo: RangeValue('10'),
+        documentDateFrom: DateTimeStringValue('-'),
+        documentDateTo: DateTimeStringValue('-'),
+      );
       when(() => availableCreditsBlocMock.state).thenReturn(
         AvailableCreditsState.initial().copyWith(
-          isLoading: false,
           items: fakeCredits,
-          appliedFilter: creditFilter,
+        ),
+      );
+      when(() => availableCreditFilterBlocMock.state).thenReturn(
+        AvailableCreditFilterState.initial().copyWith(
+          filter: invalidCreditFilter,
         ),
       );
 
       await tester.pumpWidget(getWidget());
       await tester.pump();
-      final availableText = find.text('Invoice #1100001163');
-      expect(availableText, findsAtLeastNWidgets(1));
 
-      final filterBadge = find.byType(CustomBadge);
-      expect(filterBadge, findsOneWidget);
+      await openFilterBottomSheet(tester);
+      final filterApplyButton = find.byKey(WidgetKeys.filterApplyButton);
+      expect(filterApplyButton, findsOneWidget);
 
-      final badgeText = find.text('1');
-      expect(badgeText, findsOneWidget);
-
-      await tester.tap(filterBadge);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-
+      await tester.tap(filterApplyButton);
+      await tester.pumpAndSettle();
       verify(
         () => availableCreditFilterBlocMock.add(
-          AvailableCreditFilterEvent.updateFilterToLastApplied(
-            lastAppliedFilter: availableCreditsBlocMock.state.appliedFilter,
-          ),
+          const AvailableCreditFilterEvent.setValidationFailure(),
         ),
       );
-
-      final filterPage = find.byKey(WidgetKeys.creditPaymentFilterPage);
-      expect(filterPage, findsOneWidget);
-
-      final filterTitle = find.text('Filter');
-      expect(filterTitle, findsOneWidget);
-
-      final closeButton = find.byKey(WidgetKeys.closeButton);
-      expect(closeButton, findsOneWidget);
-
-      await tester.tap(closeButton);
-      await tester.pumpAndSettle(const Duration(seconds: 3));
     });
 
-    testWidgets('Apply filter test', (tester) async {
+    testWidgets('Apply filter test - Available Credit Amount Value Range Valid',
+        (tester) async {
       when(() => availableCreditsBlocMock.state).thenReturn(
-        AvailableCreditsState.initial()
-            .copyWith(isLoading: false, items: fakeCredits),
+        AvailableCreditsState.initial().copyWith(
+          items: fakeCredits,
+        ),
       );
       when(() => availableCreditFilterBlocMock.state).thenReturn(
         AvailableCreditFilterState.initial().copyWith(
@@ -399,26 +384,218 @@ void main() {
       await tester.pumpWidget(getWidget());
       await tester.pump();
 
-      final filterBadge = find.byType(CustomBadge);
-      expect(filterBadge, findsOneWidget);
-
-      await tester.tap(filterBadge);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-
+      await openFilterBottomSheet(tester);
       final filterApplyButton = find.byKey(WidgetKeys.filterApplyButton);
       expect(filterApplyButton, findsOneWidget);
 
       await tester.tap(filterApplyButton);
-      await tester.pumpAndSettle(const Duration(seconds: 3));
-
+      await tester.pumpAndSettle();
+      verify(
+        () => mixpanelServiceMock.trackEvent(
+          eventName: MixpanelEvents.newPaymentFilterUsed,
+          properties: {MixpanelProps.filterUsed: creditFilter.trackingInfo},
+        ),
+      ).called(1);
       verify(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: creditFilter,
-            searchKey: availableCreditsBlocMock.state.searchKey,
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Show toast when Api failure', (tester) async {
+      const fakeError = 'fake-error';
+      whenListen(
+        availableCreditsBlocMock,
+        Stream.fromIterable(
+          [
+            AvailableCreditsState.initial().copyWith(
+              failureOrSuccessOption: optionOf(
+                const Left(
+                  ApiFailure.other(fakeError),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.customSnackBar),
+          matching: find.text(fakeError),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Pull to refresh list view', (tester) async {
+      when(() => availableCreditsBlocMock.state).thenAnswer(
+        (_) => AvailableCreditsState.initial().copyWith(
+          items: fakeCredits,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final scrollList = find.byKey(WidgetKeys.scrollList);
+      await tester.drag(scrollList, const Offset(0, 1000));
+      await tester.pumpAndSettle();
+      verify(
+        () => availableCreditsBlocMock.add(
+          AvailableCreditsEvent.fetch(
+            appliedFilter: AvailableCreditFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('On Tap Close Filter', (tester) async {
+      when(() => availableCreditsBlocMock.state).thenReturn(
+        AvailableCreditsState.initial().copyWith(
+          items: fakeCredits,
+        ),
+      );
+      when(() => availableCreditFilterBlocMock.state).thenReturn(
+        AvailableCreditFilterState.initial().copyWith(
+          filter: creditFilter,
+        ),
+      );
+      when(() => autoRouterMock.pop()).thenAnswer(
+        (invocation) => Future.value(true),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      await openFilterBottomSheet(tester);
+      expect(find.byKey(WidgetKeys.closeButton), findsOneWidget);
+      await tester.tap(find.byKey(WidgetKeys.closeButton));
+      verify(() => autoRouterMock.pop()).called(1);
+    });
+
+    testWidgets('tap reset filter button', (tester) async {
+      await tester.pumpWidget(getBottomSheetWidget());
+      await tester.pump();
+      final resetButton = find.byKey(WidgetKeys.filterResetButton);
+      expect(resetButton, findsOneWidget);
+      await tester.tap(resetButton);
+      verify(
+        () => availableCreditFilterBlocMock.add(
+          const AvailableCreditFilterEvent.resetFilters(),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('tap from date filter', (tester) async {
+      final fromDate = DateTimeStringValue('2023-09-11');
+      final toDate = DateTimeStringValue('2023-09-20');
+      when(() => availableCreditFilterBlocMock.state).thenReturn(
+        AvailableCreditFilterState.initial().copyWith(
+          filter: AvailableCreditFilter.empty().copyWith(
+            documentDateFrom: fromDate,
+            documentDateTo: toDate,
           ),
         ),
       );
+      await tester.pumpWidget(getBottomSheetWidget());
+      await tester.pump();
+      final fromDateField = find.byKey(WidgetKeys.fromDocumentDateField);
+      expect(fromDateField, findsOneWidget);
+      await tester.tap(fromDateField);
+      await tester.pumpAndSettle();
+      // Verify that the date picker is displayed
+      await tester.tap(find.widgetWithIcon(IconButton, Icons.edit));
+      await tester.pump();
+      final okButton = find.text('OK');
+      await tester.tap(okButton);
+      await tester.pumpAndSettle();
+      final range = DateTimeRange(
+        start: fromDate.dateTime,
+        end: toDate.dateTime,
+      );
+      verify(
+        () => availableCreditFilterBlocMock.add(
+          AvailableCreditFilterEvent.setDocumentDate(
+            documentDateRange: range,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('tap to date filter', (tester) async {
+      final fromDate = DateTimeStringValue('2023-09-11');
+      final toDate = DateTimeStringValue('2023-09-20');
+      when(() => availableCreditFilterBlocMock.state).thenReturn(
+        AvailableCreditFilterState.initial().copyWith(
+          filter: AvailableCreditFilter.empty().copyWith(
+            documentDateFrom: fromDate,
+            documentDateTo: toDate,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getBottomSheetWidget());
+      await tester.pump();
+      final toDateField = find.byKey(WidgetKeys.toDocumentDateField);
+      expect(toDateField, findsOneWidget);
+      await tester.tap(toDateField);
+      await tester.pumpAndSettle();
+      // Verify that the date picker is displayed
+      await tester.tap(find.widgetWithIcon(IconButton, Icons.edit));
+      await tester.pump();
+      final okButton = find.text('OK');
+      await tester.tap(okButton);
+      await tester.pumpAndSettle();
+      final range = DateTimeRange(
+        start: fromDate.dateTime,
+        end: toDate.dateTime,
+      );
+      verify(
+        () => availableCreditFilterBlocMock.add(
+          AvailableCreditFilterEvent.setDocumentDate(
+            documentDateRange: range,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('amount value from filter', (tester) async {
+      const value = '2';
+      await tester.pumpWidget(getBottomSheetWidget());
+      await tester.pump();
+      final amountValueFromField = find.byKey(WidgetKeys.amountValueFrom);
+      expect(amountValueFromField, findsOneWidget);
+      await tester.enterText(amountValueFromField, value);
+      await tester.pump();
+      verify(
+        () => availableCreditFilterBlocMock.add(
+          const AvailableCreditFilterEvent.setAmountFrom(
+            amountFrom: value,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('amount value to filter', (tester) async {
+      const value = '10';
+      await tester.pumpWidget(getBottomSheetWidget());
+      await tester.pump();
+      final amountValueToField = find.byKey(WidgetKeys.amountValueTo);
+      expect(amountValueToField, findsOneWidget);
+      await tester.enterText(amountValueToField, value);
+      await tester.pump();
+      verify(
+        () => availableCreditFilterBlocMock.add(
+          const AvailableCreditFilterEvent.setAmountTo(
+            amountTo: value,
+          ),
+        ),
+      ).called(1);
     });
   });
 }

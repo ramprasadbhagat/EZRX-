@@ -47,10 +47,14 @@ class AvailableCreditsTab extends StatelessWidget {
         ),
         BlocConsumer<AvailableCreditsBloc, AvailableCreditsState>(
           listenWhen: (previous, current) =>
-              previous.failureOrSuccessOption != current.failureOrSuccessOption,
+              previous.failureOrSuccessOption !=
+                  current.failureOrSuccessOption ||
+              previous.isLoading != current.isLoading,
           listener: (context, state) {
             state.failureOrSuccessOption.fold(
-              () {},
+              () {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
               (either) => either.fold(
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
