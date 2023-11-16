@@ -50,4 +50,14 @@ class BankBeneficiaryLocalDataSource {
       data['data']['deleteBankBeneficiary'],
     ).toDomain();
   }
+
+  Future<List<BankBeneficiary>> getBankBeneficiariesBySaleOrg() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/getPaymentBankInAccountsResponse.json'),
+    );
+
+    return List.from(data['data']['bankBeneficiary'])
+        .map((e) => BankBeneficiaryDto.fromJson(e).toDomain())
+        .toList();
+  }
 }

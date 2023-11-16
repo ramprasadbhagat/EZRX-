@@ -58,5 +58,17 @@ void main() {
         );
       },
     );
+
+     test(
+      '=> getBankBeneficiariesBySaleOrg',
+      () async {
+        final result = await localDataSource.getBankBeneficiariesBySaleOrg();
+
+        expect(
+          result.length,
+          2,
+        );
+      },
+    );
   });
 }

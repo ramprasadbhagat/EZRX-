@@ -58,5 +58,7 @@ class PaymentMethodValue extends ValueObject<String> {
 
   bool get isBankIn => checkIsBankIn(value.getOrElse(() => ''));
 
+  bool get displayWarningAnnoucement => isBankIn || isQrCode;
+
   const PaymentMethodValue._(this.value);
 }

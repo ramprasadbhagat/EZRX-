@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'payment_invoice_info_pdf.freezed.dart';
@@ -15,7 +16,7 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
     required String paymentID,
     required String zzAdvice,
     required String paymentDue,
-    required String paymentMethod,
+    required PaymentMethodValue paymentMethod,
     required String customerName,
     required String payer,
     required List<BankBeneficiary> bankBeneficiary,
@@ -34,7 +35,7 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
         paymentID: '',
         zzAdvice: '',
         paymentDue: '',
-        paymentMethod: '',
+        paymentMethod: PaymentMethodValue(''),
         customerName: '',
         payer: '',
         bankBeneficiary: <BankBeneficiary>[],
@@ -50,6 +51,13 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
 
   BankBeneficiary get firstBankBeneficiary =>
       bankBeneficiary.firstOrNull ?? BankBeneficiary.empty();
+
+  BankBeneficiary get secondBankBeneficiary =>
+      (bankBeneficiary.length > 1
+          ? bankBeneficiary.elementAtOrNull(1)
+          : null) ??
+      BankBeneficiary.empty();
+
   bool get isEmpty => this == PaymentInvoiceInfoPdf.empty();
 
   double get paymentAmount => paymentItems.fold(

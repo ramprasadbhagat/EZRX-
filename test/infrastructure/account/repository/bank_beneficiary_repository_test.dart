@@ -34,10 +34,17 @@ void main() {
 
   final bankBeneficiaryResponseMock = BankBeneficiaryResponse.empty();
 
+  final saleOrgMock = SalesOrg('3050');
+
   final beneficiaryDataMock = BankBeneficiary.empty().copyWith(
-    salesOrg: SalesOrg('3050'),
+    salesOrg: saleOrgMock,
     salesDistrict: 'HCM',
   );
+
+  final bankInAccountsMockList = [
+    BankBeneficiary.empty(),
+    BankBeneficiary.empty(),
+  ];
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -240,6 +247,58 @@ void main() {
       final result = await bankBeneficiaryRepo.deleteBeneficiary(
         salesOrg: beneficiaryDataMock.salesOrg,
         salesDistrict: beneficiaryDataMock.salesDistrict,
+      );
+      expect(result.isLeft(), true);
+    });
+  });
+
+  group('BankBeneficiaryRepository => getBankBeneficiariesBySaleOrg', () {
+    test('successfully locally', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => localDataSource.getBankBeneficiariesBySaleOrg())
+          .thenAnswer((invocation) async => bankInAccountsMockList);
+
+      final result = await bankBeneficiaryRepo.getBankBeneficiariesBySaleOrg(
+        salesOrg: saleOrgMock,
+      );
+      expect(result.isRight(), true);
+    });
+
+    test('fails locally', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => localDataSource.getBankBeneficiariesBySaleOrg())
+          .thenThrow(MockException());
+
+      final result = await bankBeneficiaryRepo.getBankBeneficiariesBySaleOrg(
+        salesOrg: saleOrgMock,
+      );
+      expect(result.isLeft(), true);
+    });
+
+    test('successfully remotely', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(
+        () => remoteDataSource.getBankBeneficiariesBySaleOrg(
+          salesOrg: saleOrgMock.getOrDefaultValue(''),
+        ),
+      ).thenAnswer((invocation) async => bankInAccountsMockList);
+
+      final result = await bankBeneficiaryRepo.getBankBeneficiariesBySaleOrg(
+        salesOrg: saleOrgMock,
+      );
+      expect(result.isRight(), true);
+    });
+
+    test('fails remotely', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(
+        () => remoteDataSource.getBankBeneficiariesBySaleOrg(
+          salesOrg: saleOrgMock.getOrDefaultValue(''),
+        ),
+      ).thenThrow(Error());
+
+      final result = await bankBeneficiaryRepo.getBankBeneficiariesBySaleOrg(
+        salesOrg: saleOrgMock,
       );
       expect(result.isLeft(), true);
     });

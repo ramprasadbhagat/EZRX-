@@ -131,6 +131,33 @@ class BankBeneficiaryRemoteDataSource {
     );
   }
 
+  Future<List<BankBeneficiary>> getBankBeneficiariesBySaleOrg({
+    required String salesOrg,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ezpay',
+        data: jsonEncode(
+          {
+            'query': bankBeneficiaryQueryMutation.getBankBeneficiaryQuery(),
+            'variables': {
+              'request': {
+                'salesOrg': salesOrg,
+              },
+            },
+          },
+        ),
+        apiEndpoint: 'bankBeneficiary',
+      );
+      _bankBeneficiaryExceptionChecker(res: res);
+
+      return List.from(res.data['data']['bankBeneficiary'])
+          .map((e) => BankBeneficiaryDto.fromJson(e).toDomain())
+          .toList();
+    });
+  }
+
   void _bankBeneficiaryExceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);

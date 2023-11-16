@@ -118,4 +118,31 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Future<Either<ApiFailure, List<BankBeneficiary>>>
+      getBankBeneficiariesBySaleOrg({
+    required SalesOrg salesOrg,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final manageBeneficiary =
+            await localDataSource.getBankBeneficiariesBySaleOrg();
+
+        return Right(manageBeneficiary);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final manageBeneficiary =
+          await remoteDataSource.getBankBeneficiariesBySaleOrg(
+        salesOrg: salesOrg.getOrDefaultValue(''),
+      );
+
+      return Right(manageBeneficiary);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
 }

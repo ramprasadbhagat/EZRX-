@@ -20,7 +20,7 @@ mixin _$PaymentInvoiceInfoPdf {
   String get paymentID => throw _privateConstructorUsedError;
   String get zzAdvice => throw _privateConstructorUsedError;
   String get paymentDue => throw _privateConstructorUsedError;
-  String get paymentMethod => throw _privateConstructorUsedError;
+  PaymentMethodValue get paymentMethod => throw _privateConstructorUsedError;
   String get customerName => throw _privateConstructorUsedError;
   String get payer => throw _privateConstructorUsedError;
   List<BankBeneficiary> get bankBeneficiary =>
@@ -50,7 +50,7 @@ abstract class $PaymentInvoiceInfoPdfCopyWith<$Res> {
       String paymentID,
       String zzAdvice,
       String paymentDue,
-      String paymentMethod,
+      PaymentMethodValue paymentMethod,
       String customerName,
       String payer,
       List<BankBeneficiary> bankBeneficiary,
@@ -115,7 +115,7 @@ class _$PaymentInvoiceInfoPdfCopyWithImpl<$Res,
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentMethodValue,
       customerName: null == customerName
           ? _value.customerName
           : customerName // ignore: cast_nullable_to_non_nullable
@@ -177,7 +177,7 @@ abstract class _$$_PaymentInvoiceInfoPdfCopyWith<$Res>
       String paymentID,
       String zzAdvice,
       String paymentDue,
-      String paymentMethod,
+      PaymentMethodValue paymentMethod,
       String customerName,
       String payer,
       List<BankBeneficiary> bankBeneficiary,
@@ -239,7 +239,7 @@ class __$$_PaymentInvoiceInfoPdfCopyWithImpl<$Res>
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentMethodValue,
       customerName: null == customerName
           ? _value.customerName
           : customerName // ignore: cast_nullable_to_non_nullable
@@ -321,7 +321,7 @@ class _$_PaymentInvoiceInfoPdf extends _PaymentInvoiceInfoPdf {
   @override
   final String paymentDue;
   @override
-  final String paymentMethod;
+  final PaymentMethodValue paymentMethod;
   @override
   final String customerName;
   @override
@@ -433,7 +433,7 @@ abstract class _PaymentInvoiceInfoPdf extends PaymentInvoiceInfoPdf {
       required final String paymentID,
       required final String zzAdvice,
       required final String paymentDue,
-      required final String paymentMethod,
+      required final PaymentMethodValue paymentMethod,
       required final String customerName,
       required final String payer,
       required final List<BankBeneficiary> bankBeneficiary,
@@ -456,7 +456,7 @@ abstract class _PaymentInvoiceInfoPdf extends PaymentInvoiceInfoPdf {
   @override
   String get paymentDue;
   @override
-  String get paymentMethod;
+  PaymentMethodValue get paymentMethod;
   @override
   String get customerName;
   @override

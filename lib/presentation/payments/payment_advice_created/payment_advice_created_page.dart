@@ -64,12 +64,16 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
           },
         ),
         leading: IconButton(
-          key: WidgetKeys.backButton,
-          icon: const Icon(
-            Icons.arrow_back_ios,
+          key: WidgetKeys.closeButton,
+          onPressed: () => Navigator.pop(context),
+          icon: const CircleAvatar(
+            maxRadius: 16,
+            backgroundColor: ZPColors.transparent,
+            child: Icon(
+              Icons.close,
+              color: ZPColors.neutralsBlack,
+            ),
           ),
-          iconSize: 14,
-          onPressed: () => context.router.pop(),
         ),
       ),
       body: const _BodyContent(),
@@ -130,7 +134,10 @@ class _BodyContent extends StatelessWidget {
                             : const _PaymentAdvicePleaseNote(),
                         const _PaymentInvoicePdf(),
                         if (!state.selectedPaymentMethod.isBankIn)
-                          const PaymentSavePdfButton(),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: PaymentSavePdfButton(),
+                          ),
                       ],
                     ),
                   ),

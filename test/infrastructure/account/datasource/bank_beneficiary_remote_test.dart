@@ -39,6 +39,7 @@ void main() {
   late Map<String, dynamic> getSalesDistricts;
   late Map<String, dynamic> getAddOrUpdateBeneficiaryVariable;
   late Map<String, dynamic> getDeleteBeneficiaryVariable;
+  late Map<String, dynamic> getBankBeneficiaryBySaleOrgVariables;
 
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
@@ -89,6 +90,9 @@ void main() {
           'salesOrg': salesOrg,
           'salesDistrict': 'HCM',
         },
+      };
+      getBankBeneficiaryBySaleOrgVariables = {
+        'request': {'salesOrg': salesOrg}
       };
     },
   );
@@ -343,6 +347,69 @@ void main() {
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(BankBeneficiaryResponseMock());
+        });
+      },
+    );
+  });
+
+  group('Bank Beneficiary Remote for getBankBeneficiariesBySaleOrg', () {
+    test(
+      '=> Success',
+      () async {
+        final res = json.decode(
+          await rootBundle
+              .loadString('assets/json/getPaymentBankInAccountsResponse.json'),
+        );
+
+        dioAdapter.onPost(
+          '/api/ezpay',
+          (server) => server.reply(
+            200,
+            res,
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.bankBeneficiaryQueryMutation
+                .getBankBeneficiaryQuery(),
+            'variables': getBankBeneficiaryBySaleOrgVariables,
+          }),
+        );
+
+        final result = await remoteDataSource.getBankBeneficiariesBySaleOrg(
+          salesOrg: salesOrg,
+        );
+        expect(
+          result.length,
+          List.from(res['data']['bankBeneficiary'])
+              .map((e) => BankBeneficiaryDto.fromJson(e).toDomain())
+              .toList()
+              .length,
+        );
+      },
+    );
+
+    test(
+      '=> Failure',
+      () async {
+        dioAdapter.onPost(
+          '/api/ezpay',
+          (server) => server.reply(
+            204,
+            {'data': []},
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.bankBeneficiaryQueryMutation
+                .getBankBeneficiaryQuery(),
+            'variables': getBankBeneficiaryBySaleOrgVariables,
+          }),
+        );
+
+        await remoteDataSource.getBankBeneficiaries().onError((error, _) async {
+          expect(error, isA<ServerException>());
+          return Future.value(<BankBeneficiaryMock>[]);
         });
       },
     );

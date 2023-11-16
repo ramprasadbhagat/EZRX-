@@ -28,18 +28,14 @@ class _PaymentAdviceButtons extends StatelessWidget {
                 side: const BorderSide(
                   color: ZPColors.primary,
                 ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
               ),
-              child: SizedBox(
-                height: 20,
-                child: LoadingShimmer.withChild(
-                  enabled: false,
-                  child: Text(
-                    context.tr('Payment summary'),
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: ZPColors.primary,
-                        ),
-                  ),
-                ),
+              child: Text(
+                context.tr('Payment summary'),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: ZPColors.primary,
+                    ),
               ),
               onPressed: () =>
                   context.router.popAndPush(const PaymentSummaryPageRoute()),

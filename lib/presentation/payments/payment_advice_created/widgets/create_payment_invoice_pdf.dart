@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,14 @@ class CreatePaymentInvoicePdf {
     final imageData = await ScreenshotController().captureFromWidget(
       MediaQuery(
         data: MediaQueryData.fromWindow(WidgetsBinding.instance.window),
-        child: Html(data: pleaseNote),
+        child: Html(
+          data: pleaseNote,
+          style: {
+            '*': Style(
+              fontSize: const FontSize(10),
+            ),
+          },
+        ),
       ),
     );
 
@@ -126,7 +134,7 @@ class CreatePaymentInvoicePdf {
         alignment: pw.Alignment.center,
         children: [
           pw.SizedBox(
-            height: 150,
+            height: 120,
             width: double.infinity,
             child: pw.Column(
               children: [
@@ -288,7 +296,8 @@ class CreatePaymentInvoicePdf {
     required DateTimeStringValue valueDate,
   }) =>
       pw.Padding(
-        padding: const pw.EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        padding: const pw.EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0)
+            .copyWith(left: 15),
         child: pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
@@ -380,28 +389,31 @@ class CreatePaymentInvoicePdf {
         ),
       );
 
-  pw.Widget _item({required List<PaymentItem> paymentItems}) => pw.Table(
-        children: [
-          _invoiceItem(
-            [
-              'Document Date'.tr(),
-              'Document Type'.tr(),
-              'Document No.'.tr(),
-              '${'Amount'.tr()} (${paymentItems.first.transactionCurrency}).',
-            ],
-            isHeader: true,
-          ),
-          ...paymentItems
-              .map(
-                (e) => _invoiceItem([
-                  e.documentDate.dateString,
-                  e.postingKeyName,
-                  e.searchKey,
-                  e.paymentAmountInDisplayCrcy.toStringAsFixed(2),
-                ]),
-              )
-              .toList(),
-        ],
+  pw.Widget _item({required List<PaymentItem> paymentItems}) => pw.Padding(
+        padding: const pw.EdgeInsets.symmetric(horizontal: 15.0),
+        child: pw.Table(
+          children: [
+            _invoiceItem(
+              [
+                'Document Date'.tr(),
+                'Document Type'.tr(),
+                'Document No.'.tr(),
+                '${'Amount'.tr()} (${paymentItems.first.transactionCurrency}).',
+              ],
+              isHeader: true,
+            ),
+            ...paymentItems
+                .map(
+                  (e) => _invoiceItem([
+                    e.documentDate.dateString,
+                    e.postingKeyName,
+                    e.searchKey,
+                    e.paymentAmountInDisplayCrcy.toStringAsFixed(2),
+                  ]),
+                )
+                .toList(),
+          ],
+        ),
       );
 
   Future<pw.Widget> _description({required String pleaseNote}) async {
@@ -410,14 +422,14 @@ class CreatePaymentInvoicePdf {
     return pw.Container(
       width: double.infinity,
       color: PdfColor.fromInt(ZPColors.extraLightGrey2.value),
-      padding: const pw.EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+      padding: const pw.EdgeInsets.symmetric(vertical: 5.0),
       child: pw.Image(image),
     );
   }
 
   pw.Widget _footerInvoice({required String footer}) => pw.Container(
         padding:
-            const pw.EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+            const pw.EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
         decoration: pw.BoxDecoration(
           borderRadius:
               const pw.BorderRadius.vertical(bottom: pw.Radius.circular(16.0)),
@@ -427,7 +439,7 @@ class CreatePaymentInvoicePdf {
           child: pw.Text(
             footer,
             style: pw.TextStyle(
-              fontSize: 14,
+              fontSize: 10,
               color: PdfColor.fromInt(ZPColors.primary.value),
               letterSpacing: 0.25,
             ),
@@ -497,6 +509,38 @@ class CreatePaymentInvoicePdf {
         ],
       );
 
+  pw.Widget get _paymentStepsBankIn => pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Text(
+            'For Bank-In Payment'.tr(),
+            style: pw.TextStyle(
+              fontSize: 16,
+              color: PdfColor.fromInt(ZPColors.primary.value),
+              fontWeight: pw.FontWeight.bold,
+              letterSpacing: 0.25,
+            ),
+          ),
+          pw.SizedBox(height: 5),
+          pw.Text(
+            '1. Log in to Banking App'.tr(),
+            style: pw.TextStyle(
+              fontSize: 14,
+              color: PdfColor.fromInt(ZPColors.primary.value),
+              letterSpacing: 0.25,
+            ),
+          ),
+          pw.Text(
+            '2. Scan below & Pay'.tr(),
+            style: pw.TextStyle(
+              fontSize: 14,
+              color: PdfColor.fromInt(ZPColors.primary.value),
+              letterSpacing: 0.25,
+            ),
+          ),
+        ],
+      );
+
   pw.Widget get _paymentSteps => pw.Row(
         children: [
           pw.Flexible(child: _paymentStepsQrCode, flex: 1),
@@ -536,14 +580,7 @@ class CreatePaymentInvoicePdf {
 
   pw.Widget _qrCodeAndBankInfo({
     required String qrCode,
-    required String beneficiaryName,
-    required String bankName,
-    required String branch,
-    required String bankCode,
-    required String bankAccount,
-    required String hdbcSwiftCode,
-    required String bankAddress,
-    required String payNowUen,
+    required BankBeneficiary bankBeneficiary,
   }) =>
       pw.Row(
         children: [
@@ -559,24 +596,232 @@ class CreatePaymentInvoicePdf {
               children: [
                 _balanceRowText(
                   key: 'Beneficiary\'s Name'.tr(),
-                  value: beneficiaryName,
+                  value: bankBeneficiary.beneficiaryName.displayNAIfEmpty,
                 ),
-                _balanceRowText(key: 'Bank name'.tr(), value: bankName),
-                _balanceRowText(key: 'Branch #'.tr(), value: branch),
-                _balanceRowText(key: 'Bank Code'.tr(), value: bankCode),
-                _balanceRowText(key: 'Bank Account'.tr(), value: bankAccount),
+                _balanceRowText(
+                  key: 'Bank name'.tr(),
+                  value: bankBeneficiary.bankName.displayNAIfEmpty,
+                ),
+                _balanceRowText(
+                  key: 'Branch #'.tr(),
+                  value: bankBeneficiary.branch,
+                ),
+                _balanceRowText(
+                  key: 'Bank Code'.tr(),
+                  value: bankBeneficiary.bankCode,
+                ),
+                _balanceRowText(
+                  key: 'Bank Account'.tr(),
+                  value: bankBeneficiary.bankAccount.displayDashIfEmpty,
+                ),
                 _balanceRowText(
                   key: 'HSBC Swift Code'.tr(),
-                  value: hdbcSwiftCode,
+                  value: bankBeneficiary.hdbcSwiftCode,
                 ),
-                _balanceRowText(key: 'Bank Address'.tr(), value: bankAddress),
-                _balanceRowText(key: 'PayNow UEN'.tr(), value: payNowUen),
+                _balanceRowText(
+                  key: 'Bank Address'.tr(),
+                  value: bankBeneficiary.bankAddress,
+                ),
+                _balanceRowText(
+                  key: 'PayNow UEN'.tr(),
+                  value: bankBeneficiary.payNowUen,
+                ),
               ],
             ),
             flex: 2,
           ),
         ],
       );
+
+  pw.Widget _bankInPaymentInfo({
+    required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
+  }) =>
+      pw.Container(
+        width: double.infinity,
+        child: pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            _paymentStepsBankIn,
+            pw.SizedBox(height: 10),
+            _bankAccountsInformation(
+              paymentInvoiceInfoPdf: paymentInvoiceInfoPdf,
+            ),
+            pw.SizedBox(height: 5),
+            _bankInNotes,
+          ],
+        ),
+      );
+
+  pw.Widget _bankAccountsInformation({
+    required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
+  }) =>
+      pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Text(
+            'Account Information'.tr(),
+            style: pw.TextStyle(
+              fontSize: 14,
+              color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
+              fontWeight: pw.FontWeight.bold,
+              letterSpacing: 0.25,
+            ),
+          ),
+          pw.SizedBox(height: 8),
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceEvenly,
+            children: [
+              pw.Expanded(
+                child: _bankAccountDetail(
+                  bankBeneficiary: paymentInvoiceInfoPdf.firstBankBeneficiary,
+                ),
+              ),
+              _verticalDivider,
+              pw.Expanded(
+                child: _bankAccountDetail(
+                  bankBeneficiary: paymentInvoiceInfoPdf.secondBankBeneficiary,
+                ),
+              ),
+            ],
+          ),
+        ],
+      );
+
+  pw.Widget _bankAccountDetail({
+    required BankBeneficiary bankBeneficiary,
+  }) =>
+      pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          _informationRowText(
+            title: 'Bank Name'.tr(),
+            value: bankBeneficiary.bankName.displayNAIfEmpty,
+          ),
+          _informationRowText(
+            title: 'Account Number'.tr(),
+            value: bankBeneficiary.bankAccount.displayNAIfEmpty,
+          ),
+          _informationRowText(
+            title: 'Account Holder'.tr(),
+            value: bankBeneficiary.beneficiaryName.displayNAIfEmpty,
+          ),
+        ],
+      );
+
+  pw.Widget _informationRowText({
+    required String title,
+    required String value,
+  }) =>
+      pw.Padding(
+        padding: const pw.EdgeInsets.only(bottom: 8),
+        child: pw.Row(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            pw.SizedBox(
+              width: 120,
+              child: pw.Text(
+                title,
+                style: pw.TextStyle(
+                  fontSize: 14,
+                  color: PdfColor.fromInt(ZPColors.neutralsGrey1.value),
+                  letterSpacing: 0.25,
+                ),
+              ),
+            ),
+            pw.Expanded(
+              child: pw.Text(
+                value,
+                style: pw.TextStyle(
+                  fontSize: 14,
+                  color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
+                  letterSpacing: 0.25,
+                ),
+                maxLines: 2,
+              ),
+            ),
+          ],
+        ),
+      );
+
+  pw.Widget get _verticalDivider => pw.Padding(
+        padding: const pw.EdgeInsets.symmetric(horizontal: 15),
+        child: pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.center,
+          children: [
+            pw.Container(
+              width: 1,
+              height: 35,
+              color: PdfColor.fromInt(ZPColors.darkGray.value),
+            ),
+            pw.Padding(
+              padding: const pw.EdgeInsets.symmetric(vertical: 3),
+              child: pw.Text(
+                'or'.tr().toUpperCase(),
+                style: pw.TextStyle(
+                  fontSize: 16,
+                  color: PdfColor.fromInt(ZPColors.darkGray.value),
+                ),
+              ),
+            ),
+            pw.Container(
+              width: 1,
+              height: 35,
+              color: PdfColor.fromInt(ZPColors.darkGray.value),
+            ),
+          ],
+        ),
+      );
+
+  pw.Widget get _bankInNotes {
+    final normalNotesStyle = pw.TextStyle(
+      fontSize: 14,
+      color: PdfColor.fromInt(ZPColors.neutralsGrey1.value),
+      letterSpacing: 0.25,
+    );
+    
+    return pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Text(
+          'Notes'.tr(),
+          style: normalNotesStyle.copyWith(fontWeight: pw.FontWeight.bold),
+        ),
+        pw.SizedBox(height: 5),
+        pw.Text(
+          'For OTC payments, write the 16-digit Payment Advice No. (ex. 09EP230001568101) on the bank deposit slip.'
+              .tr(),
+          style: normalNotesStyle,
+        ),
+        pw.SizedBox(height: 5),
+        pw.RichText(
+          text: pw.TextSpan(
+            children: [
+              pw.TextSpan(
+                text: 'For online banking, select '.tr(),
+                style: normalNotesStyle,
+              ),
+              pw.TextSpan(
+                text: 'Bills Payment'.tr(),
+                style:
+                    normalNotesStyle.copyWith(fontWeight: pw.FontWeight.bold),
+              ),
+              pw.TextSpan(
+                text:
+                    ' and input the 16-digit Payment Advice No. (ex. 09EP230001568101) for your reference number.'
+                        .tr(),
+                style: normalNotesStyle,
+              ),
+            ],
+          ),
+        ),
+        pw.SizedBox(height: 5),
+        pw.Text(
+          'Please DO NOT use the Funds Transfer facility.'.tr(),
+          style: normalNotesStyle.copyWith(fontWeight: pw.FontWeight.bold),
+        ),
+      ],
+    );
+  }
 
   Future<Uint8List> createInvoicePdf({
     required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
@@ -594,7 +839,7 @@ class CreatePaymentInvoicePdf {
 
     pdf.addPage(
       pw.Page(
-        pageFormat: PdfPageFormat.a4,
+        pageFormat: PdfPageFormat.a4.copyWith(height: 922),
         margin: const pw.EdgeInsets.all(16.0),
         build: (context) {
           return pw.Column(
@@ -607,37 +852,26 @@ class CreatePaymentInvoicePdf {
                 customerName: paymentInvoiceInfoPdf.customerName,
               ),
               _expireInvoice(
-                paymentMethod: paymentInvoiceInfoPdf.paymentMethod,
+                paymentMethod:
+                    paymentInvoiceInfoPdf.paymentMethod.getOrDefaultValue(''),
                 expiryDate: expiryDate(
                   valueDate: paymentInvoiceInfoPdf.valueDate,
                 ),
                 valueDate: paymentInvoiceInfoPdf.valueDate,
               ),
-              salesOrganisation.salesOrg.isSg
-                  ? _paymentSteps
-                  : pw.SizedBox.shrink(),
-              salesOrganisation.salesOrg.isSg
-                  ? _qrCodeAndBankInfo(
-                      qrCode: paymentInvoiceInfoPdf.qrCode,
-                      beneficiaryName: paymentInvoiceInfoPdf
-                          .firstBankBeneficiary
-                          .beneficiaryName
-                          .displayNAIfEmpty,
-                      bankName: paymentInvoiceInfoPdf
-                          .firstBankBeneficiary.bankName.displayNAIfEmpty,
-                      branch: paymentInvoiceInfoPdf.firstBankBeneficiary.branch,
-                      bankCode:
-                          paymentInvoiceInfoPdf.firstBankBeneficiary.bankCode,
-                      bankAccount: paymentInvoiceInfoPdf
-                          .firstBankBeneficiary.bankAccount.displayNAIfEmpty,
-                      hdbcSwiftCode: paymentInvoiceInfoPdf
-                          .firstBankBeneficiary.hdbcSwiftCode,
-                      bankAddress: paymentInvoiceInfoPdf
-                          .firstBankBeneficiary.bankAddress,
-                      payNowUen:
-                          paymentInvoiceInfoPdf.firstBankBeneficiary.payNowUen,
-                    )
-                  : pw.SizedBox.shrink(),
+              if (salesOrganisation.salesOrg.isSg) ...[
+                _paymentSteps,
+                _qrCodeAndBankInfo(
+                  qrCode: paymentInvoiceInfoPdf.qrCode,
+                  bankBeneficiary: paymentInvoiceInfoPdf.firstBankBeneficiary,
+                ),
+              ],
+              if (paymentInvoiceInfoPdf.paymentMethod.isBankIn) ...[
+                _bankInPaymentInfo(
+                  paymentInvoiceInfoPdf: paymentInvoiceInfoPdf,
+                ),
+              ],
+              pw.SizedBox(height: 20),
               _item(paymentItems: paymentInvoiceInfoPdf.paymentItems),
               pw.Spacer(),
               description,

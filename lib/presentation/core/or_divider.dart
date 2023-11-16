@@ -13,18 +13,20 @@ class OrDivider extends StatelessWidget {
           child: Divider(
             indent: 0,
             thickness: 0.5,
+            color: ZPColors.darkGray,
           ),
         ),
         Text(
           context.tr('or'),
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: ZPColors.dividerColor,
+                color: ZPColors.darkGray,
               ),
         ),
         const Expanded(
           child: Divider(
             endIndent: 0,
             thickness: 0.5,
+            color: ZPColors.darkGray,
           ),
         ),
       ],

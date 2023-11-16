@@ -18,4 +18,9 @@ abstract class IBankBeneficiaryRepository {
     required SalesOrg salesOrg,
     required String salesDistrict,
   });
+
+  Future<Either<ApiFailure, List<BankBeneficiary>>>
+      getBankBeneficiariesBySaleOrg({
+    required SalesOrg salesOrg,
+  });
 }

@@ -7,12 +7,16 @@ class _BankInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewPaymentBloc, NewPaymentState>(
+    return BlocBuilder<BankInAccountsBloc, BankInAccountsState>(
       buildWhen: (previous, current) =>
-          previous.selectedPaymentMethod != current.selectedPaymentMethod,
+          previous.isFetching != current.isFetching ||
+          previous.bankInAccounts != current.bankInAccounts,
       builder: (context, state) {
-        return state.selectedPaymentMethod.isBankIn
-            ? Column(
+        return state.isFetching
+            ? LoadingShimmer.logo(
+                key: const Key('loaderImage'),
+              )
+            : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
@@ -22,79 +26,18 @@ class _BankInfo extends StatelessWidget {
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                   ),
-                  //TODO: will get data for Bank name, Account number, Account holder from new API
-                  //and cover this in another ticket
-                  BalanceTextRow(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                    ),
-                    keyText: context.tr('Bank name'),
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.black,
-                            ),
-                    valueText: 'lorem ipsum',
-                  ),
-                  BalanceTextRow(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                    ),
-                    keyText: context.tr('Account number'),
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.black,
-                            ),
-                    valueText: 'lorem ipsum',
-                  ),
-                  BalanceTextRow(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                    ),
-                    keyText: context.tr('Account holder'),
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.black,
-                            ),
-                    valueText: 'lorem ipsum',
-                  ),
-                  const OrDivider(),
-                  BalanceTextRow(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                    ),
-                    keyText: context.tr('Bank name'),
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.black,
-                            ),
-                    valueText: 'lorem ipsum',
-                  ),
-                  BalanceTextRow(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                    ),
-                    keyText: context.tr('Account number'),
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.black,
-                            ),
-                    valueText: 'lorem ipsum',
-                  ),
-                  BalanceTextRow(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                    ),
-                    keyText: context.tr('Account holder'),
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.black,
-                            ),
-                    valueText: 'lorem ipsum',
-                  ),
+                  ...state.bankInAccounts
+                      .mapIndexed(
+                        (index, bankInAccount) => _BankInfoDetail(
+                          bankBeneficiary: bankInAccount,
+                          displayDivider:
+                              index != state.bankInAccounts.length - 1,
+                        ),
+                      )
+                      .toList(),
                   const _InstructionNote(),
                 ],
-              )
-            : const SizedBox.shrink();
+              );
       },
     );
   }

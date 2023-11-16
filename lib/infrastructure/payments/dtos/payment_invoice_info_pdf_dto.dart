@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/bank_beneficiary_invoice_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_item_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -43,7 +44,7 @@ class PaymentInvoiceInfoPdfDto with _$PaymentInvoiceInfoPdfDto {
       paymentID: paymentID,
       zzAdvice: zzAdvice,
       paymentDue: paymentDue,
-      paymentMethod: paymentMethod,
+      paymentMethod: PaymentMethodValue(paymentMethod),
       customerName: customerName,
       payer: payer,
       bankBeneficiary: bankBeneficiary.map((e) => e.toDomain()).toList(),

@@ -88,7 +88,9 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         paymentCardTypeName: '',
         paymentDocument: '',
         paymentID: StringValue(invoice.paymentID),
-        paymentMethod: StringValue(invoice.paymentMethod),
+        paymentMethod: StringValue(
+          invoice.paymentMethod.getOrDefaultValue(''),
+        ),
         transactionCurrency:
             invoice.paymentItems.firstOrNull?.transactionCurrency ?? '',
         valueDate: invoice.valueDate,
