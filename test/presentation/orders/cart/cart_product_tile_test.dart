@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -113,6 +112,9 @@ void main() {
   setUpAll(() async {
     locator.registerLazySingleton(
       () => MixpanelService(config: locator<Config>()),
+    );
+    locator.registerFactory(
+      () => bonusMaterialBlocMock,
     );
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerFactory(() => AppRouter());
@@ -256,9 +258,6 @@ void main() {
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(
               create: (context) => announcementBlocMock,
-            ),
-            BlocProvider<BonusMaterialBloc>(
-              create: (context) => bonusMaterialBlocMock,
             ),
           ],
           child: const CartPage(),
@@ -613,30 +612,6 @@ void main() {
         await tester.tap(bonusSampleItemButtonKey);
         await tester.pump();
         expect(find.byType(BonusItemsSheet), findsOneWidget);
-        verify(
-          () => bonusMaterialBlocMock.add(
-            BonusMaterialEvent.fetch(
-              salesOrganisation: SalesOrganisation.empty().copyWith(
-                salesOrg: SalesOrg('2001'),
-              ),
-              configs: SalesOrganisationConfigs.empty().copyWith(
-                enableZDP8Override: true,
-              ),
-              customerCodeInfo: fakeCustomerCodeInfo,
-              shipToInfo: fakeShipToInfo,
-              principalData: pnGCartItem.materialInfo.principalData,
-              user: User.empty().copyWith(
-                role: Role.empty().copyWith(
-                  type: RoleType('external_sales_rep'),
-                ),
-                hasBonusOverride: true,
-                hasPriceOverride: true,
-              ),
-              isGimmickMaterialEnabled: false,
-              searchKey: SearchKey.searchFilter(''),
-            ),
-          ),
-        ).called(1);
       });
 
       testWidgets('Display CutOff List Price', (tester) async {

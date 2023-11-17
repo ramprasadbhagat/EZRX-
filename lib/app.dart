@@ -90,7 +90,6 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
-import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -281,9 +280,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<MaterialPriceBloc>(
           create: (context) => locator<MaterialPriceBloc>(),
-        ),
-        BlocProvider<BonusMaterialBloc>(
-          create: (context) => locator<BonusMaterialBloc>(),
         ),
         BlocProvider<PaymentCustomerInformationBloc>(
           create: (context) => locator<PaymentCustomerInformationBloc>(),

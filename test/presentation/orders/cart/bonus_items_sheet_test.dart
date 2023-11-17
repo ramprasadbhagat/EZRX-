@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -65,10 +66,12 @@ void main() {
     locator.registerLazySingleton(() => config);
     config = ConfigMock();
     locator.registerLazySingleton(() => AppRouter());
+
     eligibilityBloc = EligibilityBlockMock();
     cartBloc = CartBlocMock();
     productImageBloc = ProductImageBlocMock();
     bonusMaterialBloc = BonusMaterialBlocMock();
+    locator.registerFactory(() => bonusMaterialBloc);
     appRouter = locator<AppRouter>();
     cartState = CartState.initial();
     bonusMaterialState = BonusMaterialState.initial();
@@ -98,9 +101,6 @@ void main() {
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBloc,
         ),
-        BlocProvider<BonusMaterialBloc>(
-          create: (context) => bonusMaterialBloc,
-        ),
         BlocProvider<CartBloc>(
           create: (context) => cartBloc,
         ),
@@ -122,6 +122,19 @@ void main() {
       await tester.pump();
 
       expect(find.byKey(WidgetKeys.bonusSampleSheet), findsOneWidget);
+      expect(
+        find.text(
+          'Looks like you don’t have any bonus/sample items'.tr(),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.text(
+          'Try adjusting the search or another product from cart.'.tr(),
+        ),
+        findsOneWidget,
+      );
+      await tester.pumpAndSettle();
     });
     testWidgets('Should show snackbar after add bonus to cart', (tester) async {
       whenListen(

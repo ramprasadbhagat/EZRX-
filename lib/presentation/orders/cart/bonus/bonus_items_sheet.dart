@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/widgets/bonus_items_sheet_footer.dart';
 import 'package:flutter/material.dart';
 
@@ -44,61 +46,65 @@ class BonusItemsSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CartBloc, CartState>(
-      listenWhen: (previous, current) =>
-          previous.isUpserting != current.isUpserting,
-      listener: (context, state) {
-        state.apiFailureOrSuccessOption.fold(
-          () {
-            if (!state.isUpserting) {
-              CustomSnackBar(
-                messageText: 'Bonus/sample added to cart'.tr(),
-              ).show(context);
-              context.read<CartBloc>().add(
-                    CartEvent.getDetailsProductsAddedToCart(
-                      cartProducts: context.read<CartBloc>().state.cartProducts,
-                    ),
-                  );
-            }
-          },
-          (either) => either.fold(
-            (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
+    return BlocProvider<BonusMaterialBloc>(
+      create: (context) => locator<BonusMaterialBloc>(),
+      child: BlocListener<CartBloc, CartState>(
+        listenWhen: (previous, current) =>
+            previous.isUpserting != current.isUpserting,
+        listener: (context, state) {
+          state.apiFailureOrSuccessOption.fold(
+            () {
+              if (!state.isUpserting) {
+                CustomSnackBar(
+                  messageText: 'Bonus/sample added to cart'.tr(),
+                ).show(context);
+                context.read<CartBloc>().add(
+                      CartEvent.getDetailsProductsAddedToCart(
+                        cartProducts:
+                            context.read<CartBloc>().state.cartProducts,
+                      ),
+                    );
+              }
             },
-            (_) {},
-          ),
-        );
-      },
-      child: Padding(
-        key: WidgetKeys.bonusSampleSheet,
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 25),
-              child: Text(
-                'Add bonus/sample item'.tr(),
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: ZPColors.primary,
-                    ),
-              ),
-            ),
-            _BonusItemSearchBar(cartItem: cartProduct),
-            const _BonusQuantityEmptyWarning(),
-            BlocBuilder<CartBloc, CartState>(
-              buildWhen: (previous, current) =>
-                  previous.cartProducts != current.cartProducts,
-              builder: (context, state) {
-                return _BodyContent(
-                  cartProduct:
-                      state.updatedCartProduct(cartProduct.getMaterialNumber),
-                  oldBonusList: cartProduct.bonusSampleItems,
-                );
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
               },
+              (_) {},
             ),
-            const BonusItemsSheetFooter(),
-          ],
+          );
+        },
+        child: Padding(
+          key: WidgetKeys.bonusSampleSheet,
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 25),
+                child: Text(
+                  'Add bonus/sample item'.tr(),
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: ZPColors.primary,
+                      ),
+                ),
+              ),
+              _BonusItemSearchBar(cartItem: cartProduct),
+              const _BonusQuantityEmptyWarning(),
+              BlocBuilder<CartBloc, CartState>(
+                buildWhen: (previous, current) =>
+                    previous.cartProducts != current.cartProducts,
+                builder: (context, state) {
+                  return _BodyContent(
+                    cartProduct:
+                        state.updatedCartProduct(cartProduct.getMaterialNumber),
+                    oldBonusList: cartProduct.bonusSampleItems,
+                  );
+                },
+              ),
+              const BonusItemsSheetFooter(),
+            ],
+          ),
         ),
       ),
     );
@@ -146,8 +152,12 @@ class _BodyContent extends StatelessWidget {
                   key: WidgetKeys.loaderImage,
                 )
               : ScrollList<MaterialInfo>(
-                  noRecordFoundWidget:
-                      const NoRecordFound(title: 'No Bonus Items Found'),
+                  noRecordFoundWidget: const NoRecordFound(
+                    title: 'Looks like you don’t have any bonus/sample items',
+                    subTitle:
+                        'Try adjusting the search or another product from cart',
+                    svgImage: SvgImage.emptyBox,
+                  ),
                   controller: ScrollController(),
                   onRefresh: () => context.read<BonusMaterialBloc>().add(
                         BonusMaterialEvent.fetch(

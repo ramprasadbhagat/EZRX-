@@ -748,7 +748,7 @@ void setupLocator() {
       localDataSource: locator<BonusMaterialLocalDataSource>(),
     ),
   );
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => BonusMaterialBloc(
       materialListRepository: locator<MaterialListRepository>(),
       config: locator<Config>(),

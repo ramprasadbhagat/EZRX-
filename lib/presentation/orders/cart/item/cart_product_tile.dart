@@ -24,10 +24,7 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_i
 
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 
-import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dart';
-
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 part 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/invalid_material_message.dart';
 
@@ -453,31 +450,6 @@ class _BonusPriceCounterSection extends StatelessWidget {
                     return BonusItemsSheet(cartProduct: cartItem);
                   },
                 );
-                context.read<BonusMaterialBloc>().add(
-                      BonusMaterialEvent.fetch(
-                        salesOrganisation: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .salesOrganisation,
-                        configs: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .salesOrgConfigs,
-                        customerCodeInfo: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .customerCodeInfo,
-                        shipToInfo:
-                            context.read<EligibilityBloc>().state.shipToInfo,
-                        principalData: cartItem.materialInfo.principalData,
-                        user: context.read<EligibilityBloc>().state.user,
-                        isGimmickMaterialEnabled: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .isGimmickMaterialEnabled,
-                        searchKey: SearchKey.searchFilter(''),
-                      ),
-                    );
               },
               icon: const Icon(
                 Icons.add_circle_outline,
