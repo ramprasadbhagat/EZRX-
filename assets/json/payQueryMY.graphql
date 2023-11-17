@@ -7,31 +7,50 @@ mutation addCustomerPayment($input: addCustomerPaymentInput!) {
 
 variables: {
    "input":{
-   "customerCode":"0000101215",
-   "customerInvoice":[
-      {
-         "accountingDocExternalReference":"200120210180000049001",
-         "accountingDocument":"0180000049",
-         "bpCustomerNumber":"101215",
-         "debitCreditFlag":"S",
-         "discountAmount":"0",
-         "discountDate":"2021-08-31",
-         "displayAmount":"2950",
-         "displayCurrency":"MYR",
-         "displayOpenAmount":"2950",
-         "dueDate":"2021-09-30",
-         "fiscalYear":"2021",
-         "isDisputed":"",
-         "lineItemNumber":"001",
-         "lineNumber":"000040",
-         "partialPaymentHistoryDesc":"200120210180000049001:",
-         "paymentAmount":"2950",
-         "salesOrg":"2001"
-      }
-   ],
-   "paymentMethod":"Payment Gateway",
-   "salesOrg":"2001",
-   "transactionCurrency":"MYR",
-   "userName":"rootadmin"
+      "customerCode": "0000101214",
+      "salesOrg": "2001",
+      "transactionCurrency": "MYR",
+      "paymentMethod": "Payment Gateway",
+      "userName": "rootadmin",
+      "customerInvoice": [
+         {
+            "salesOrg": "2001",
+            "fiscalYear": "2015",
+            "accountingDocument": "0340000055",
+            "lineItemNumber": "001",
+            "lineNumber": "000016",
+            "bpCustomerNumber": "101214",
+            "paymentAmount": "5000",
+            "displayCurrency": "MYR",
+            "displayAmount": "5000",
+            "displayOpenAmount": "5000",
+            "discountAmount": "0",
+            "discountDate": "2015-04-30",
+            "dueDate": "2015-05-31",
+            "debitCreditFlag": "S",
+            "accountingDocExternalReference": "200120150340000055001",
+            "partialPaymentHistoryDesc": "200120150340000055001:",
+            "isDisputed": ""
+         },
+         {
+            "salesOrg": "2001",
+            "fiscalYear": "2015",
+            "accountingDocument": "0360000025",
+            "lineItemNumber": "001",
+            "lineNumber": "000023",
+            "bpCustomerNumber": "101214",
+            "paymentAmount": "-800",
+            "displayCurrency": "MYR",
+            "displayAmount": "-800",
+            "displayOpenAmount": "-800",
+            "discountAmount": "0",
+            "discountDate": "2015-04-24",
+            "dueDate": "2015-04-24",
+            "debitCreditFlag": "H",
+            "accountingDocExternalReference": "200120150360000025001",
+            "partialPaymentHistoryDesc": "200120150360000025001:",
+            "isDisputed": ""
+         }
+      ]
    }
 }

@@ -31,6 +31,7 @@ void main() {
   late CustomerOpenItem customerOpenItem;
   late CustomerPaymentInfo fakePaymentInfo;
   late List<CustomerOpenItem> fakeCustomerOpenItemSelected;
+  late List<CustomerOpenItem> fakeCreditSelected;
   late List<PaymentMethodValue> fakePaymentMethodValues;
 
   setUpAll(() {
@@ -69,6 +70,10 @@ void main() {
         companyCode: '2001',
         openAmountInTransCrcy: 999,
       ),
+    ];
+    fakeCreditSelected = [
+      fakeCustomerOpenItemSelected.first
+          .copyWith(postingKeyName: 'Credit memo'),
     ];
 
     fakePaymentMethodValues = <PaymentMethodValue>[
@@ -395,6 +400,67 @@ void main() {
             customerPaymentInfo: fakePaymentInfo,
             selectedInvoices: fakeCustomerOpenItemSelected,
             paymentMethods: fakePaymentMethodValues,
+            selectedPaymentMethod: fakePaymentMethodValues.first,
+          ),
+        ],
+      );
+
+      blocTest(
+        'Pay success with credit',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        seed: () => NewPaymentState.initial().copyWith(
+          isLoading: false,
+          selectedInvoices: fakeCustomerOpenItemSelected,
+          selectedCredits: fakeCreditSelected,
+          paymentMethods: fakePaymentMethodValues,
+          selectedPaymentMethod: fakePaymentMethodValues.first,
+        ),
+        setUp: () {
+          when(
+            () => newPaymentRepository.pay(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              user: User.empty(),
+              paymentMethod: 'Payment Gateway',
+              customerOpenItems: [
+                ...fakeCustomerOpenItemSelected,
+                ...fakeCreditSelected
+              ],
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              PaymentInfo.empty(),
+            ),
+          );
+          when(
+            () => newPaymentRepository.getCustomerPayment(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              filter: CustomerPaymentFilter.empty(),
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              fakePaymentInfo,
+            ),
+          );
+        },
+        act: (NewPaymentBloc bloc) => bloc.add(const NewPaymentEvent.pay()),
+        expect: () => [
+          NewPaymentState.initial().copyWith(
+            isLoading: true,
+            selectedInvoices: fakeCustomerOpenItemSelected,
+            selectedCredits: fakeCreditSelected,
+            paymentMethods: fakePaymentMethodValues,
+            selectedPaymentMethod: fakePaymentMethodValues.first,
+          ),
+          NewPaymentState.initial().copyWith(
+            customerPaymentInfo: fakePaymentInfo,
+            selectedInvoices: fakeCustomerOpenItemSelected,
+            paymentMethods: fakePaymentMethodValues,
+            selectedCredits: fakeCreditSelected,
             selectedPaymentMethod: fakePaymentMethodValues.first,
           ),
         ],

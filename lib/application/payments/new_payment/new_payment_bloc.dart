@@ -136,7 +136,10 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
           salesOrganisation: state.salesOrganisation,
           customerCodeInfo: state.customerCodeInfo,
           paymentMethod: state.selectedPaymentMethod.getValue(),
-          customerOpenItems: state.selectedInvoices,
+          customerOpenItems: [
+            ...state.selectedInvoices,
+            ...state.selectedCredits,
+          ],
           user: state.user,
         );
 
