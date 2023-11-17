@@ -21,7 +21,7 @@ class _CreditsItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '${creditItem.postingKeyName} #${creditItem.searchKey}',
+              '${creditItem.postingKeyName} #${creditItem.searchKey.getOrDefaultValue('')}',
               key: WidgetKeys.creditItemId(
                 creditItem.searchKey.getOrDefaultValue(''),
               ),

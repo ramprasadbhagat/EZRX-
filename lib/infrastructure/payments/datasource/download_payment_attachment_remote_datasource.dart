@@ -38,6 +38,12 @@ class DownloadPaymentAttachmentRemoteDataSource {
       'customerCode': customerCode,
       'filterBy': queryObject,
       'excelFor': excelFor,
+      'orderBy': [
+        {
+          'order': 'desc',
+          'field': 'documentDate',
+        },
+      ],
     };
     final res = await httpService.request(
       method: 'POST',
