@@ -45,6 +45,7 @@ class WidgetKeys {
   static const Key priceTextData = Key('priceTextData');
   static const Key priceTextTitle = Key('priceTextTitle');
   static const Key radioPaymentGateway = Key('radioPaymentGateway');
+  static Key detailInfoSection(String label) => Key('detailInfoSection$label');
   //============================================================
   //  PRE-ORDER-MODAL
   //============================================================
@@ -1000,6 +1001,24 @@ class WidgetKeys {
   static const Key itemStatementAccounts = Key('itemStatementAccounts');
   static const Key downloadStatementAccountIcon =
       Key('downloadStatementAccountIcon');
+
+  //===========================================================
+  //  New Payment - select payment method
+  //============================================================
+  static const Key createPaymentAdviseNote = Key('createPaymentAdviseNote');
+  static const Key createPaymentAdviseWarning =
+      Key('createPaymentAdviseWarning');
+  static const Key paymentMethodTile = Key('paymentMethodTile');
+  static const Key paymentMethodRadio = Key('paymentMethodRadio');
+  static const Key paymentMethodSelector = Key('paymentMethodSelector');
+  static const Key bankInAccountInfo = Key('bankInAccountInfo');
+  static const Key invoiceCreditListView = Key('invoiceCreditListView');
+  static const Key invoiceCreditItemTile = Key('invoiceCreditItemTile');
+  static const Key invoiceCreditItemId = Key('invoiceCreditItemId');
+  static const Key invoiceCreditItemDate = Key('invoiceCreditItemDate');
+  static const Key invoiceCreditItemAmount = Key('invoiceCreditItemAmount');
+  static const Key bankInInstructionNote = Key('bankInInstructionNote');
+  static const Key bankInfoTile = Key('bankInInfoTile');
 
   //===========================================================
   //  Account summary

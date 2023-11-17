@@ -12,6 +12,7 @@ class _BankInfoDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.bankInfoTile,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         BalanceTextRow(

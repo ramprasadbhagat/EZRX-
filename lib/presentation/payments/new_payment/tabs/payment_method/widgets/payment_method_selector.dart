@@ -6,6 +6,7 @@ class _PaymentMethodSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NewPaymentBloc, NewPaymentState>(
+      key: WidgetKeys.paymentMethodSelector,
       listenWhen: (previous, current) =>
           previous.isFetchingPaymentMethod != current.isFetchingPaymentMethod &&
           !current.isFetchingPaymentMethod,
@@ -33,6 +34,7 @@ class _PaymentMethodSelector extends StatelessWidget {
                             (paymentMethod) => Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: InkWell(
+                                key: WidgetKeys.paymentMethodTile,
                                 onTap: () {
                                   context.read<NewPaymentBloc>().add(
                                         NewPaymentEvent
@@ -44,6 +46,7 @@ class _PaymentMethodSelector extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Radio(
+                                      key: WidgetKeys.paymentMethodRadio,
                                       value: paymentMethod,
                                       groupValue: state.selectedPaymentMethod,
                                       onChanged: null,

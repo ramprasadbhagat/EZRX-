@@ -7,6 +7,7 @@ import 'package:ezrxmobile/presentation/core/color_container.dart';
 import 'package:ezrxmobile/presentation/core/details_info_section.dart';
 import 'package:ezrxmobile/presentation/core/or_divider.dart';
 import 'package:ezrxmobile/presentation/core/rich_text_span.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -62,7 +63,9 @@ class PaymentMethodTab extends StatelessWidget {
                     current.selectedPaymentMethod,
                 builder: (context, state) {
                   return state.selectedPaymentMethod.isBankIn
-                      ? const _BankInfo()
+                      ? const _BankInfo(
+                          key: WidgetKeys.bankInAccountInfo,
+                        )
                       : const SizedBox.shrink();
                 },
               ),

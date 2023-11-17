@@ -13,6 +13,7 @@ class _PaymentItemListView extends StatelessWidget {
           previous.selectedCredits != current.selectedCredits,
       builder: (context, state) {
         return Column(
+          key: WidgetKeys.invoiceCreditListView,
           children: [
             ...state.allSelectedItems.map(
               (e) => _InvoiceCreditItemTile(customerOpenItem: e),
@@ -35,12 +36,14 @@ class _InvoiceCreditItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.invoiceCreditItemTile,
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '${customerOpenItem.postingKeyName} #${customerOpenItem.accountingDocument}',
+            key: WidgetKeys.invoiceCreditItemId,
             style: Theme.of(context).textTheme.labelMedium,
           ),
           Padding(
@@ -50,11 +53,13 @@ class _InvoiceCreditItemTile extends StatelessWidget {
               children: [
                 Text(
                   customerOpenItem.netDueDate.dateString,
+                  key: WidgetKeys.invoiceCreditItemDate,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ZPColors.darkGray,
                       ),
                 ),
                 PriceComponent(
+                  key: WidgetKeys.invoiceCreditItemAmount,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price:

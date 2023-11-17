@@ -8,6 +8,7 @@ class _InstructionNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.bankInInstructionNote,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(

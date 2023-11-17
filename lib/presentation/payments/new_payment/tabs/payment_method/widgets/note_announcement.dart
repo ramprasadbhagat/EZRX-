@@ -8,6 +8,7 @@ class _NoteAnnouncement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColorContainer(
+      key: WidgetKeys.createPaymentAdviseNote,
       color: ZPColors.lightBlueColor,
       margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
       children: [

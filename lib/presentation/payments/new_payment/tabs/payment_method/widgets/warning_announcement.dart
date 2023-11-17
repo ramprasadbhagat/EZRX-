@@ -8,6 +8,7 @@ class _WarningAnnouncement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ColorContainer(
+      key: WidgetKeys.createPaymentAdviseWarning,
       color: ZPColors.priceWarning,
       margin: EdgeInsets.symmetric(
         vertical: 20,
