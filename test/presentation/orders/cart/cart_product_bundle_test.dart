@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:flutter/material.dart';
@@ -373,7 +374,7 @@ void main() {
         ).called(1);
       });
 
-      testWidgets('cart Bundle Item delete buttont test', (tester) async {
+      testWidgets('cart Bundle Item delete button test', (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [cartItem],
@@ -417,6 +418,36 @@ void main() {
         );
         await tester.tap(removeButton);
         await tester.pump();
+      });
+
+      testWidgets('cart bundle item did not satisfy minimum order quantity',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartItem.copyWith(
+                bundle: cartItem.bundle.copyWith(
+                  bundleInformation: [
+                    BundleInfo(
+                      sequence: 1,
+                      quantity: 2,
+                      type: DiscountType('%'),
+                      rate: 20,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        expect(
+          find.textContaining('Minimum total purchase qty'),
+          findsOneWidget,
+        );
       });
     },
   );

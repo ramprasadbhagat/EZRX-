@@ -168,9 +168,7 @@ class PriceAggregate with _$PriceAggregate {
           ? bundle.bundleCode
           : materialInfo.parentID,
       mrp: price.finalPrice.getValue() + individualItemTax,
-      tax: salesOrgConfig.salesOrg.isID
-          ? materialInfo.tax
-          : individualItemTax,
+      tax: salesOrgConfig.salesOrg.isID ? materialInfo.tax : individualItemTax,
       promoStatus: promoStatus,
       promoType: materialInfo.promoType,
       principalData: materialInfo.principalData,
@@ -769,6 +767,15 @@ class PriceAggregate with _$PriceAggregate {
       price.priceTireItem.isNotEmpty &&
       price.zdp5MaxQuota.isValidValue &&
       materialInfo.quantity.intValue >= 2;
+
+  int get getTotalQuantityOfBundleProduct => bundle.materials.fold(
+        0,
+        (previousValue, element) => (previousValue) + element.quantity.intValue,
+      );
+
+  bool get isBundleMinimumQuantitySatisfies =>
+      getTotalQuantityOfBundleProduct >=
+      bundle.minimumQuantityBundleMaterial.quantity;
 }
 
 enum PriceType {

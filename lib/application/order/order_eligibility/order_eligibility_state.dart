@@ -169,18 +169,11 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   int getTotalQuantityOfProductBundle({required String bundleCode}) {
     return cartItems
-            .firstWhere(
-              (element) => element.bundle.bundleCode == bundleCode,
-              orElse: () => PriceAggregate.empty(),
-            )
-            .bundle
-            .materials
-            .fold(
-              0,
-              (previousValue, element) =>
-                  (previousValue ?? 0) + element.quantity.intValue,
-            ) ??
-        0;
+        .firstWhere(
+          (element) => element.bundle.bundleCode == bundleCode,
+          orElse: () => PriceAggregate.empty(),
+        )
+        .getTotalQuantityOfBundleProduct;
   }
 
   bool get isOOSOrderAllowedToSubmit => (configs.addOosMaterials

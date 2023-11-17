@@ -1749,6 +1749,49 @@ void main() {
         ).called(1);
       });
 
+      testWidgets(
+          'Cart Bundle disable when any bundle not Satisfying Minimum value ',
+          (tester) async {
+        final cartState = CartState.initial().copyWith(
+          cartProducts: mockCartBundleItems,
+          isClearing: false,
+        );
+
+        final invalidBundleList = mockCartBundleItems.first.bundle.materials
+            .map(
+              (e) => e.copyWith(
+                quantity: MaterialQty(0),
+                parentID: mockCartBundleItems.first.bundle.bundleCode,
+              ),
+            )
+            .toList();
+
+        final expectedStates = [
+          OrderEligibilityState.initial(),
+          OrderEligibilityState.initial().copyWith(
+            cartItems: mockCartBundleItems,
+          ),
+        ];
+
+        whenListen(
+          orderEligibilityBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        await tester.pumpWidget(getWidget());
+
+        await tester.pumpAndSettle();
+
+        final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+        expect(checkoutButton, findsOneWidget);
+        await tester.tap(checkoutButton);
+        await tester.pump();
+      });
+
       testWidgets('Test MOV warning visibility when account is suspended',
           (tester) async {
         when(() => cartBloc.state).thenReturn(

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
@@ -1455,6 +1456,94 @@ void main() {
         ),
       );
     });
+
+    test(
+      'PriceAggregate getTotalQuantityOfBundleProduct',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          bundle: emptyBundle.copyWith(
+            bundleCode: '123',
+            materials: [
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+                quantity: MaterialQty(1),
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+                quantity: MaterialQty(1),
+              ),
+            ],
+          ),
+        );
+        expect(
+          customPriceAggregate.getTotalQuantityOfBundleProduct,
+          2,
+        );
+      },
+    );
+
+    test(
+      'PriceAggregate isBundleMinimumQuantitySatisfies = true',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          bundle: emptyBundle.copyWith(
+            bundleCode: '123',
+            materials: [
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+                quantity: MaterialQty(1),
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+                quantity: MaterialQty(1),
+              ),
+            ],
+            bundleInformation: [
+              BundleInfo(
+                sequence: 1,
+                quantity: 2,
+                type: DiscountType('%'),
+                rate: 20,
+              )
+            ],
+          ),
+        );
+        expect(
+          customPriceAggregate.isBundleMinimumQuantitySatisfies,
+          true,
+        );
+      },
+    );
+
+    test(
+      'PriceAggregate isBundleMinimumQuantitySatisfies = false',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          bundle: emptyBundle.copyWith(
+            bundleCode: '123',
+            materials: [
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+                quantity: MaterialQty(1),
+              ),
+            ],
+            bundleInformation: [
+              BundleInfo(
+                sequence: 1,
+                quantity: 2,
+                type: DiscountType('%'),
+                rate: 20,
+              )
+            ],
+          ),
+        );
+        expect(
+          customPriceAggregate.isBundleMinimumQuantitySatisfies,
+          false,
+        );
+      },
+    );
+
     // test('toSubmitMaterialInfo from with bonus', () {
     //   final submitMaterialInfo = emptyPriceAggregate.copyWith(
     //     addedBonusList: [

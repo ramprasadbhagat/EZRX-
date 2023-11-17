@@ -1471,3 +1471,4 @@ Once cancelled, payment advice cannot be recovered. You will be required to crea
 Cancel payment advice,Cancel payment advice,Cancel payment advice,Cancel payment advice,Cancel payment advice,Cancel payment advice,Cancel payment advice
 Payment cancel successfully,Payment cancel successfully,Payment cancel successfully,Payment cancel successfully,Payment cancel successfully,Payment cancel successfully,Payment cancel successfully
 Maximum order qty,Maximum order qty,Maximum order qty,Maximum order qty,Maximum order qty,Maximum order qty,Maximum order qty
+Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity}
