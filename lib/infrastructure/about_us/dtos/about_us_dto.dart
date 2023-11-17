@@ -281,7 +281,7 @@ Map<String, dynamic> bannerReadValue(Map json, String _) {
   final values = json['value'] as List;
 
   return values.firstWhere(
-    (element) => (element['name'] as String).toLowerCase().contains('banner 1'),
+    (element) => (element['template']?['name'] ?? '').contains('Banner'),
     orElse: () => <String, dynamic>{},
   );
 }
