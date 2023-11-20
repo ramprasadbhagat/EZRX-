@@ -734,5 +734,20 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('ezrxtest05'), findsOneWidget);
     });
+
+    testWidgets('Chat bot reset payload event call', (tester) async {
+      final expectedStates = [
+        LoginFormState.initial().copyWith(
+          currentMarket: AppMarket('SG'),
+        ),
+      ];
+      whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+
+      await tester.pumpWidget(loginTestPage());
+      await tester.pump();
+      verify(
+        () => chatBotBloc.add(const ChatBotEvent.resetChatbot()),
+      ).called(1);
+    });
   });
 }

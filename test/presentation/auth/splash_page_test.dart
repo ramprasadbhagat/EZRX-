@@ -52,6 +52,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -950,6 +951,27 @@ void main() {
           matching: find.text(
             'In cart quantity should not be more than 99999.'.tr(),
           ),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Chat bot error message', (tester) async {
+      final expectedStates = [
+        ChatBotState.initial().copyWith(
+          chatbotFailureOrSuccessOption:
+              optionOf(Left(FailureHandler.handleFailure('Fake-error'))),
+        ),
+      ];
+      whenListen(chatBotBloc, Stream.fromIterable(expectedStates));
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.customSnackBar),
+          matching: find.textContaining('Fake-error'),
         ),
         findsOneWidget,
       );

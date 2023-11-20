@@ -1262,4 +1262,8 @@ class WidgetKeys {
   static Key aboutUsReachUsSection = const Key('aboutUsReachUsSection');
   static Key aboutUsListContent = const Key('aboutUsListContent');
   //============================================================
+  // Chat Bot Widget
+  //============================================================
+  static Key chatBotFloatingActionButton =
+      const Key('chatBotFloatingActionButton');
 }
