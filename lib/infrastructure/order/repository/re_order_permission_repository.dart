@@ -42,6 +42,17 @@ class ReOrderPermissionRepository implements IReOrderPermissionRepository {
     }
 
     try {
+      // TODO: Revisit to remove this check once validCustomerMaterial API is ready for ID
+      if (salesOrganisation.salesOrg.isID) {
+        return Right(
+          ReOrderPermission(
+            validMaterials: materialNumbers
+                .map((e) => ValidMaterial.empty().copyWith(materialNumber: e))
+                .toList(),
+          ),
+        );
+      }
+
       final reOrderPermission = await remoteDataSource.getPermission(
         materialNumbers: materialNumbers.map((e) => e.getValue()).toList(),
         customerCode: customerCodeInfo.customerCodeSoldTo,

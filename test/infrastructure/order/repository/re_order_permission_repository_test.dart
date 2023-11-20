@@ -32,7 +32,14 @@ void main() {
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    getReorderPermissionResponseMock =
+        await ReOrderPermissionLocalDataSource().getPermission();
+    fakeMaterialNumbers = getReorderPermissionResponseMock.validMaterials
+        .map((e) => e.materialNumber)
+        .toList();
+  });
 
+  setUp(() {
     mockConfig = MockConfig();
     reOrderPermissionLocalDataSource = ReOrderPermissionLocalDataSourceMock();
     reOrderPermissionRemoteDataSource = ReOrderPermissionRemoteDataSourceMock();
@@ -41,11 +48,6 @@ void main() {
       localDataSource: reOrderPermissionLocalDataSource,
       remoteDataSource: reOrderPermissionRemoteDataSource,
     );
-    getReorderPermissionResponseMock =
-        await ReOrderPermissionLocalDataSource().getPermission();
-    fakeMaterialNumbers = getReorderPermissionResponseMock.validMaterials
-        .map((e) => e.materialNumber)
-        .toList();
   });
 
   group('=> get Reorder Permission Test', () {
@@ -106,6 +108,26 @@ void main() {
         result.isLeft(),
         true,
       );
+    });
+
+    test('=> not call remote API in ID market ', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+
+      final result = await reOrderPermissionRepository.getReorderPermission(
+        shipToInfo: fakeShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeIDSalesOrganisation,
+        materialNumbers: fakeMaterialNumbers,
+      );
+
+      final expectedResult = ReOrderPermission(
+        validMaterials: fakeMaterialNumbers
+            .map((e) => ValidMaterial.empty().copyWith(materialNumber: e))
+            .toList(),
+      );
+
+      verifyZeroInteractions(reOrderPermissionRemoteDataSource);
+      expect(result, Right(expectedResult));
     });
 
     test('=> get remotely success', () async {
