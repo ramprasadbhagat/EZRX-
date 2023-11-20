@@ -230,7 +230,7 @@ void main() {
     );
 
     blocTest(
-      'Loadmore success',
+      'Load more success',
       build: () => MaterialListBloc(
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
@@ -285,7 +285,7 @@ void main() {
     );
 
     blocTest(
-      'Loadmore fail',
+      'Load more fail',
       build: () => MaterialListBloc(
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
@@ -330,6 +330,79 @@ void main() {
           isFetching: false,
         ),
       ],
+    );
+
+    blocTest(
+      'can not Load more',
+      seed: () => materialState.copyWith(
+        materialList: List.generate(
+          24,
+          (index) => materialResponseMock.products.first,
+        ),
+        materialCount: 24,
+        nextPageIndex: 1,
+      ),
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteMockRepository,
+        config: config,
+      ),
+      setUp: () {
+        when(
+          () => materialListMockRepository.getMaterialList(
+            salesOrganisation: mockSalesOrganisation,
+            salesOrgConfig: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            pageSize: config.pageSize,
+            offset: 24,
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+            locale: const Locale('EN'),
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            MaterialResponse(
+              count: 44,
+              products: materialResponseMock.products.skip(20).toList(),
+            ),
+          ),
+        );
+      },
+      act: (MaterialListBloc bloc) {
+        bloc.add(
+          MaterialListEvent.loadMore(
+            salesOrganisation: mockSalesOrganisation,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+          ),
+        );
+      },
+      expect: () {
+        return [
+          materialState.copyWith(
+            isFetching: true,
+            materialCount: 24,
+            materialList: List.generate(
+              24,
+              (index) => materialResponseMock.products.first,
+            ),
+            nextPageIndex: 1,
+          ),
+          materialState.copyWith(
+            materialCount: 44,
+            materialList: [
+              ...List.generate(
+                24,
+                (index) => materialResponseMock.products.first,
+              ),
+              ...materialResponseMock.products.skip(20)
+            ],
+            canLoadMore: false,
+            nextPageIndex: 2,
+          ),
+        ];
+      },
     );
 
     blocTest(

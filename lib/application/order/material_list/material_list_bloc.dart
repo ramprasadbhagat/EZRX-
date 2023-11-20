@@ -130,7 +130,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
               materialList: productList,
               apiFailureOrSuccessOption: none(),
               isFetching: false,
-              canLoadMore: productList.length >= config.pageSize,
+              canLoadMore: moreProduct.products.length >= config.pageSize,
               nextPageIndex: state.nextPageIndex + 1,
             ),
           );
