@@ -1096,15 +1096,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               shipToInfo: state.shipToInfo,
             ),
           );
-
-      context.read<ReturnListByItemBloc>().add(
-            ReturnListByItemEvent.initialized(
-              salesOrg: salesOrgState.salesOrganisation.salesOrg,
-              shipInfo: state.shipToInfo,
-              user: user,
-              customerCodeInfo: state.customerCodeInfo,
-            ),
-          );
+      if (context.read<EligibilityBloc>().state.isReturnsEnable) {
+        context.read<ReturnListByItemBloc>().add(
+              ReturnListByItemEvent.initialized(
+                salesOrg: salesOrgState.salesOrganisation.salesOrg,
+                shipInfo: state.shipToInfo,
+                user: user,
+                customerCodeInfo: state.customerCodeInfo,
+              ),
+            );
+      }
       context.read<AvailableCreditsBloc>().add(
             AvailableCreditsEvent.initialized(
               salesOrganization: salesOrgState.salesOrganisation,
