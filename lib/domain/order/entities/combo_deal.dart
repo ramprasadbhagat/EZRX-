@@ -70,12 +70,6 @@ class ComboDeal with _$ComboDeal {
           (first, second) => second.minQty.compareTo(first.minQty),
         );
 
-  List<ComboDealSKUTier> get sortedSKUTier =>
-      List<ComboDealSKUTier>.from(flexiSKUTier)
-        ..sort(
-          (first, second) => first.minQty.compareTo(second.minQty),
-        );
-
   List<ComboDealMaterial> get allMaterials => materialComboDeals
       .map(
         (e) => e.materials,

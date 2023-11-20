@@ -30,6 +30,7 @@ class _ComboRequirementSection extends StatelessWidget {
             builder: (context, state) {
               if (state.isFetchingComboInfo) {
                 return SizedBox(
+                  key: WidgetKeys.comboRequirementTitleLoading,
                   width: 100,
                   height: 20,
                   child: LoadingShimmer.tile(),
@@ -67,6 +68,7 @@ class _ComboRequirementSection extends StatelessWidget {
             builder: (context, state) {
               if (state.isFetchingComboInfo) {
                 return SizedBox(
+                  key: WidgetKeys.comboRequirementSubTitleLoading,
                   width: 100,
                   height: 20,
                   child: LoadingShimmer.tile(),

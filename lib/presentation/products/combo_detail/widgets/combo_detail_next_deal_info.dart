@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,7 @@ class ComboDetailNextDealInfo extends StatelessWidget {
     if (!comboDeal.isNextComboDealVisible) return const SizedBox.shrink();
 
     return Container(
+      key: WidgetKeys.comboNextDealInfo,
       padding: const EdgeInsets.symmetric(
         vertical: 5,
         horizontal: 10,

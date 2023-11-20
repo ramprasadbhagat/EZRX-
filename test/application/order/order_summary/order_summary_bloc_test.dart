@@ -6,12 +6,16 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -178,6 +182,104 @@ void main() {
         seedState.copyWith(
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Some Error'))),
+        ),
+      ],
+    );
+
+    blocTest(
+      ' => Submit order success with combo type',
+      setUp: () {
+        when(
+          () => orderRepositoryMock.submitOrder(
+            shipToInfo: seedState.shipToInfo,
+            user: seedState.user,
+            customerCodeInfo: seedState.customerCodeInfo,
+            salesOrganisation:
+                seedState.salesOrganisation.copyWith(salesOrg: fakeSalesOrg),
+            data: DeliveryInfoData.empty(),
+            orderDocumentType: seedState.orderDocumentType,
+            configs: seedState.salesOrgConfig,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                quantity: 2,
+                comboMaterials: [
+                  ComboMaterialItem.empty().copyWith(
+                    comboDealType: 'K1',
+                    quantity: 2,
+                    listPrice: 15,
+                    mandatory: true,
+                    minQty: 2,
+                    rate: 40,
+                    finalIndividualPrice: 9,
+                    isComboEligible: true,
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('fake-material-combo'),
+                      parentID: 'fake-material',
+                      principalData: PrincipalData(
+                        principalName: PrincipalName('fake-principal-name'),
+                        principalCode: PrincipalCode('fake-principal-code'),
+                      ),
+                      type: MaterialInfoType.combo(),
+                      remarks: 'fake-remark',
+                      promoType: 'fake-promo-type',
+                    ),
+                  ),
+                ],
+              )
+            ],
+            grandTotal: 18.0,
+            orderValue: 30.0,
+            totalTax: 0.0,
+          ),
+        ).thenAnswer((value) async => Right(submitOrderResponse));
+      },
+      seed: () => seedState,
+      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      act: (OrderSummaryBloc bloc) {
+        bloc.add(
+          OrderSummaryEvent.submitOrder(
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                quantity: 2,
+                comboMaterials: [
+                  ComboMaterialItem.empty().copyWith(
+                    comboDealType: 'K1',
+                    quantity: 2,
+                    listPrice: 15,
+                    mandatory: true,
+                    minQty: 2,
+                    rate: 40,
+                    finalIndividualPrice: 9,
+                    isComboEligible: true,
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('fake-material-combo'),
+                      parentID: 'fake-material',
+                      principalData: PrincipalData(
+                        principalName: PrincipalName('fake-principal-name'),
+                        principalCode: PrincipalCode('fake-principal-code'),
+                      ),
+                      remarks: 'fake-remark',
+                      type: MaterialInfoType.combo(),
+                      promoType: 'fake-promo-type',
+                    ),
+                  ),
+                ],
+              )
+            ],
+            data: DeliveryInfoData.empty(),
+            grandTotal: 18.0,
+            orderValue: 30.0,
+            totalTax: 0.0,
+          ),
+        );
+      },
+      expect: () => [
+        seedState.copyWith(
+          isSubmitting: true,
+        ),
+        seedState.copyWith(
+          submitOrderResponse: submitOrderResponse,
+          isConfirming: true,
         ),
       ],
     );

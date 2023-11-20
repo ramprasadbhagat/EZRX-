@@ -30,6 +30,7 @@ class _ComboDetailBodyContent extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5.0),
           child: ScrollList<PriceAggregate>(
+            key: WidgetKeys.comboMaterialList,
             noRecordFoundWidget: const NoRecordFound(
               svgImage: SvgImage.faqSearch,
             ),
@@ -46,6 +47,7 @@ class _ComboDetailBodyContent extends StatelessWidget {
                       return state.mandatoryMaterials.isEmpty
                           ? const SizedBox.shrink()
                           : Column(
+                              key: WidgetKeys.comboFixedList,
                               children: state.mandatoryMaterials.values
                                   .map(
                                     (item) => LoadingShimmer.withChild(

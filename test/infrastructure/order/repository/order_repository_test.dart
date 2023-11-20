@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:mocktail/mocktail.dart';
@@ -891,6 +892,123 @@ void main() {
       expect(
         result.isLeft(),
         true,
+      );
+    });
+
+    test('get submit order successfully Remote success with combo', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+      final materialListResponse =
+          await MaterialListLocalDataSource().getProductList();
+
+      final cartMaterialsCombo = materialListResponse.products
+          .map(
+            (e) => PriceAggregate.empty().copyWith(
+              materialInfo: e.copyWith(
+                type: MaterialInfoType.combo(),
+              ),
+              salesOrgConfig: fakeSalesOrganisationConfigs,
+              quantity: 1,
+              comboMaterials: [
+                ComboMaterialItem.empty().copyWith(
+                  comboDealType: 'K1',
+                  quantity: 1,
+                  listPrice: 15,
+                  mandatory: true,
+                  minQty: 1,
+                  rate: 40,
+                  finalIndividualPrice: 9,
+                  isComboEligible: true,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('fake-material-combo'),
+                    parentID: 'fake-material',
+                    principalData: PrincipalData(
+                      principalName: PrincipalName('fake-principal-name'),
+                      principalCode: PrincipalCode('fake-principal-code'),
+                    ),
+                    type: MaterialInfoType.combo(),
+                    remarks: 'fake-remark',
+                    promoType: 'fake-promo-type',
+                  ),
+                ),
+              ],
+            ),
+          )
+          .toList();
+
+      final submitOrderComboMock = SubmitOrder.empty().copyWith(
+        purchaseOrderType: fakeClientUser.role.type.purchaseOrderType,
+        paymentMethod: 'Bank Transfer',
+        orderValue: 210.0,
+        totalTax: 0.0,
+        orderType: 'ZPOR',
+        userName: deliveryInfoData.contactPerson.getValue().isNotEmpty
+            ? deliveryInfoData.contactPerson.getValue()
+            : fakeClientUser.fullName.toString(),
+        poReference: deliveryInfoData.poReference.getValue(),
+        referenceNotes: deliveryInfoData.referenceNote.getValue(),
+        specialInstructions: deliveryInfoData.deliveryInstruction.getValue(),
+        companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+        requestedDeliveryDate: deliveryInfoData.deliveryDate.getValue(),
+        poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+        telephone: deliveryInfoData.mobileNumber.getTelephone,
+        collectiveNumber: '',
+        paymentTerms: cartMaterialsCombo
+            .first.tenderContract.contractPaymentTerm
+            .getValue(),
+        customer: SubmitOrderCustomer.empty().copyWith(
+          customerNumber: fakeCustomerCodeInfo.customerCodeSoldTo,
+          customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
+          division: fakeCustomerCodeInfo.division,
+          salesOrganisation: fakeSalesOrganisation.salesOrg.getOrCrash(),
+        ),
+        language: 'EN',
+        blockOrder: salesOrganisationPHConfigsWithEnablePrincipalList
+            .enablePrincipalList,
+        products: cartMaterialsCombo
+            .expand(
+              (element) => element.comboMaterials.map(
+                (comboMaterial) => comboMaterial.toSubmitMaterialInfo(),
+              ),
+            )
+            .toList(),
+      );
+      when(
+        () => encryption.encryptionData(
+          data: SubmitOrderDto.fromDomain(
+            submitOrderComboMock,
+          ).toJson(),
+        ),
+      ).thenReturn(orderEncryptionMock);
+      when(
+        () => orderRemoteDataSource.submitOrder(
+          orderEncryption: orderEncryptionMock,
+        ),
+      ).thenAnswer(
+        (invocation) async => submitOrderResponseMock,
+      );
+
+      final result = await orderRepository.submitOrder(
+        shipToInfo: mockShipToInfo,
+        user: fakeClientUser,
+        cartProducts: cartMaterialsCombo,
+        grandTotal: 210.0,
+        orderValue: 210.0,
+        totalTax: 0.0,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        data: deliveryInfoData,
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      expect(
+        result.getOrElse(() => SubmitOrderResponse.empty()),
+        submitOrderResponseMock,
       );
     });
   });

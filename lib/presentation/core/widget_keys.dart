@@ -262,6 +262,13 @@ class WidgetKeys {
   static const Key comboTitleLoading = Key('comboTitleLoading');
   static const Key combodealsBody = Key('combodealsBody');
   static const Key exploreComboDealsButtton = Key('exploreComboDealsButtton');
+  static const Key comboRequirementTitleLoading = Key('comboRequirementTitleLoading');
+  static const Key comboRequirementSubTitleLoading = Key('comboRequirementSubTitleLoading');
+  static const Key comboFixedList = Key('comboFixedList');
+  static const Key comboMaterialList = Key('comboMaterialList');
+  static const Key comboNotEligibleMessage = Key('comboNotEligibleMessage');
+  static const Key comboNextDealInfo = Key('comboNextDealInfo');
+  static const Key comboRateDiscounted = Key('comboRateDiscounted');
 
   //============================================================
   //  PolicyConfiguration page Keys

@@ -819,5 +819,76 @@ void main() {
         ),
       ],
     );
+    blocTest(
+      'combo deal material bloc loadMoreComboDealPrincipal',
+      setUp: () {
+        when(() => config.pageSize).thenAnswer((invocation) => 1);
+        items = comboDeal.allMaterialNumbers.fold(
+          <MaterialNumber, PriceAggregate>{},
+          (
+            Map<MaterialNumber, PriceAggregate> map,
+            MaterialNumber materialNumber,
+          ) {
+            map[materialNumber] = PriceAggregate.empty()
+                .copyWith(salesOrgConfig: SalesOrganisationConfigs.empty());
+
+            return map;
+          },
+        );
+        when(
+          () => materialListRepository.getComboDealMaterials(
+            user: fakeClientUser,
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            pageSize: 1,
+            offset: 0,
+            principles: [
+              productList.first.materialInfo.principalData.principalCode
+                  .getOrDefaultValue('')
+            ],
+            salesOrgConfig: fakeSalesOrganisationConfigs,
+          ),
+        ).thenAnswer(
+          (_) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      build: () => ComboDealMaterialDetailBloc(
+        productDetailRepository: productDetailRepository,
+        materialListRepository: materialListRepository,
+        config: config,
+      ),
+      seed: () => initialState.copyWith(
+        items: items,
+        canLoadMore: true,
+        user: fakeClientUser,
+        salesConfigs: fakeSalesOrganisationConfigs,
+      ),
+      act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
+        ComboDealMaterialDetailEvent.loadMoreComboDealPrincipal(
+          comboDeal: comboDeal,
+          principles: [
+            productList.first.materialInfo.principalData.principalCode
+                .getOrDefaultValue('')
+          ],
+        ),
+      ),
+      skip: 1,
+      expect: () => [
+        initialState.copyWith(
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+          isLoadMore: false,
+          items: items,
+          user: fakeClientUser,
+          salesConfigs: fakeSalesOrganisationConfigs,
+        ),
+      ],
+    );
   });
 }

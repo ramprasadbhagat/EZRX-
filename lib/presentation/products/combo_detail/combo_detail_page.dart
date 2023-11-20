@@ -63,7 +63,7 @@ class ComboDetailPage extends StatelessWidget {
           previous.isUpdateCart != current.isUpdateCart,
       builder: (context, state) {
         return Scaffold(
-          key: WidgetKeys.materialListPage,
+          key: WidgetKeys.comboDealDetailPage,
           appBar: AppBar(
             title: state.isFetchingComboInfo
                 ? SizedBox(

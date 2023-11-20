@@ -49,7 +49,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
             ),
             if (state.displayMinPurchaseQtyMessage)
               InfoLabel(
-                key: WidgetKeys.cartPagePriceMessageWidget,
+                key: WidgetKeys.comboNotEligibleMessage,
                 margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                 mainColor: ZPColors.lightRedStatusColor,
                 textValue:
@@ -85,6 +85,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
               subtitle: (state.currentDeal.scheme.displayOriginalPrice &&
                       state.isEnableAddToCart)
                   ? Row(
+                    key: WidgetKeys.comboRateDiscounted,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
