@@ -419,6 +419,7 @@ void main() {
           .thenReturn(NotificationState.initial());
       when(() => mockPriceOverrideBloc.state)
           .thenReturn(PriceOverrideState.initial());
+      when(() => chatBotBloc.state).thenReturn(ChatBotState.initial());
     });
 
     Future getWidget(tester) async {

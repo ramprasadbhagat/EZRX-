@@ -14,14 +14,14 @@ void main() {
   group('Chatbot Bloc', () {
     blocTest(
       'Initialize',
-      build: () => ChatBotBloc(repository: chatBotRepositoryMock),
+      build: () => ChatBotBloc(chatBotRepository: chatBotRepositoryMock),
       act: (ChatBotBloc bloc) => bloc.add(const ChatBotEvent.initialize()),
-      expect: () => [const ChatBotState.initialized()],
+      expect: () => [ChatBotState.initial()],
     );
 
     blocTest(
       'Start chat bot success',
-      build: () => ChatBotBloc(repository: chatBotRepositoryMock),
+      build: () => ChatBotBloc(chatBotRepository: chatBotRepositoryMock),
       act: (ChatBotBloc bloc) => bloc.add(const ChatBotEvent.startChatbot()),
       setUp: () {
         when(() => chatBotRepositoryMock.startChatbot()).thenAnswer(
@@ -29,14 +29,14 @@ void main() {
         );
       },
       expect: () => [
-        const ChatBotState.loading(),
-        const ChatBotState.start(),
+        ChatBotState.initial().copyWith(isLoading: true),
+        ChatBotState.initial(),
       ],
     );
 
     blocTest(
       'Start chat bot failure',
-      build: () => ChatBotBloc(repository: chatBotRepositoryMock),
+      build: () => ChatBotBloc(chatBotRepository: chatBotRepositoryMock),
       act: (ChatBotBloc bloc) => bloc.add(const ChatBotEvent.startChatbot()),
       setUp: () {
         when(() => chatBotRepositoryMock.startChatbot()).thenAnswer(
@@ -44,14 +44,18 @@ void main() {
         );
       },
       expect: () => [
-        const ChatBotState.loading(),
-        const ChatBotState.error(ApiFailure.other('Repo error')),
+        ChatBotState.initial().copyWith(isLoading: true),
+        ChatBotState.initial().copyWith(
+          isLoading: false,
+          chatbotFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('Repo error'))),
+        ),
       ],
     );
 
     blocTest(
       'Reset chat bot success',
-      build: () => ChatBotBloc(repository: chatBotRepositoryMock),
+      build: () => ChatBotBloc(chatBotRepository: chatBotRepositoryMock),
       act: (ChatBotBloc bloc) => bloc.add(const ChatBotEvent.resetChatbot()),
       setUp: () {
         when(() => chatBotRepositoryMock.resetChatbot()).thenAnswer(
@@ -59,14 +63,14 @@ void main() {
         );
       },
       expect: () => [
-        const ChatBotState.loading(),
-        const ChatBotState.reset(),
+        ChatBotState.initial().copyWith(isLoading: true),
+        ChatBotState.initial(),
       ],
     );
 
     blocTest(
       'Reset chat bot failure',
-      build: () => ChatBotBloc(repository: chatBotRepositoryMock),
+      build: () => ChatBotBloc(chatBotRepository: chatBotRepositoryMock),
       act: (ChatBotBloc bloc) => bloc.add(const ChatBotEvent.resetChatbot()),
       setUp: () {
         when(() => chatBotRepositoryMock.resetChatbot()).thenAnswer(
@@ -74,8 +78,12 @@ void main() {
         );
       },
       expect: () => [
-        const ChatBotState.loading(),
-        const ChatBotState.error(ApiFailure.other('Repo error')),
+        ChatBotState.initial().copyWith(isLoading: true),
+        ChatBotState.initial().copyWith(
+          isLoading: false,
+          chatbotFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('Repo error'))),
+        ),
       ],
     );
   });

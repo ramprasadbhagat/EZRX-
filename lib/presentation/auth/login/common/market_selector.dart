@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,12 @@ class _MarketSelectorState extends State<MarketSelector> {
           ),
         ),
         const SizedBox(height: 8),
-        BlocBuilder<LoginFormBloc, LoginFormState>(
+        BlocConsumer<LoginFormBloc, LoginFormState>(
+          listenWhen: (previous, current) =>
+              previous.currentMarket != current.currentMarket,
+          listener: (context, state) => context.read<ChatBotBloc>().add(
+                const ChatBotEvent.resetChatbot(),
+              ),
           builder: (context, state) {
             return DropdownButtonFormField2<AppMarket>(
               key: WidgetKeys.appMarketSelector,

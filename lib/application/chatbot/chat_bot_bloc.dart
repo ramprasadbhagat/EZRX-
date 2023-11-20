@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/chatbot/repository/i_chatbot_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,11 +11,11 @@ part 'chat_bot_state.dart';
 part 'chat_bot_bloc.freezed.dart';
 
 class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
-  final IChatBotRepository repository;
+  final IChatBotRepository chatBotRepository;
 
   ChatBotBloc({
-    required this.repository,
-  }) : super(const ChatBotState.initialized()) {
+    required this.chatBotRepository,
+  }) : super(ChatBotState.initial()) {
     on<ChatBotEvent>(_onEvent);
   }
 
@@ -23,28 +24,48 @@ class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
     Emitter<ChatBotState> emit,
   ) async {
     await event.map(
-      initialize: (_) async => emit(const ChatBotState.initialized()),
+      initialize: (_) async => emit(ChatBotState.initial()),
       startChatbot: (_) async {
-        emit(const ChatBotState.loading());
-        final failureOrSuccess = await repository.startChatbot();
+        emit(
+          state.copyWith(
+            isLoading: true,
+            chatbotFailureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess = await chatBotRepository.startChatbot();
         failureOrSuccess.fold(
           (error) => emit(
-            ChatBotState.error(error),
+            state.copyWith(
+              isLoading: false,
+              chatbotFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
           ),
           (_) => emit(
-            const ChatBotState.start(),
+            state.copyWith(
+              isLoading: false,
+            ),
           ),
         );
       },
       resetChatbot: (_) async {
-        emit(const ChatBotState.loading());
-        final failureOrSuccess = await repository.resetChatbot();
+        emit(
+          state.copyWith(
+            isLoading: true,
+            chatbotFailureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess = await chatBotRepository.resetChatbot();
         failureOrSuccess.fold(
-          (error) => emit(
-            ChatBotState.error(error),
+          (failure) => emit(
+            state.copyWith(
+              isLoading: false,
+              chatbotFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
           ),
           (_) => emit(
-            const ChatBotState.reset(),
+            state.copyWith(
+              isLoading: false,
+            ),
           ),
         );
       },

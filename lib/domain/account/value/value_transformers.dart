@@ -237,6 +237,7 @@ String salesOrgLanguageCode(String country) {
     'VN': 'vi',
     'KR': 'en',
     'KH': 'km',
+    'ID': 'id',
   };
 
   return salesOrgCountryMap[country] ?? 'en';

@@ -480,6 +480,44 @@ String getMarketDomain(String country) {
   return marketDomainMap[country] ?? 'my';
 }
 
+String getCurrency(String country) {
+  final marketCurrencyMap = {
+    'sg': 'SGD',
+    'my': 'MYR',
+    'hk': 'HKD',
+    'th': 'THB',
+    'vn': 'VND',
+    'ph': 'PHP',
+    'mm': 'MMK',
+    'kh': 'USD',
+    'kr': 'KRW',
+    'tw': 'TWD',
+    'id': 'IDR',
+    'bn': 'BTN',
+  };
+
+  return marketCurrencyMap[country] ?? 'MYR';
+}
+
+String getLocale(String country) {
+  final marketLocaleMap = {
+    'sg': 'en-US',
+    'my': 'en-US',
+    'hk': 'en-US',
+    'th': 'th-TH',
+    'vn': 'vi-VN',
+    'ph': 'en-US',
+    'mm': 'my-MM',
+    'kh': 'km-KH',
+    'kr': 'ko-KR',
+    'tw': 'zh-TW',
+    'id': 'id-ID',
+    'bn': 'ms-BN',
+  };
+
+  return marketLocaleMap[country] ?? 'en-US';
+}
+
 String getCountryFlag(String country) {
   return 'assets/svg/flags/${country.toLowerCase()}.svg';
 }

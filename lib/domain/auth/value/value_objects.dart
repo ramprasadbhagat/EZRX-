@@ -24,6 +24,10 @@ class AppMarket extends ValueObject<String> {
   const AppMarket._(this.value);
 
   bool get isVN => value.getOrElse(() => 'my') == 'vn';
+
+  String get currency => getCurrency(value.getOrElse(() => ''));
+
+  String get locale => getLocale(value.getOrElse(() => ''));
 }
 
 class Username extends ValueObject<String> {

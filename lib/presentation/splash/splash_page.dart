@@ -342,6 +342,19 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           ),
         ),
+        BlocListener<ChatBotBloc, ChatBotState>(
+          listenWhen: (previous, current) =>
+              previous.chatbotFailureOrSuccessOption !=
+              current.chatbotFailureOrSuccessOption,
+          listener: (context, state) =>
+              state.chatbotFailureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) => ErrorUtils.handleApiFailure(context, failure),
+              (_) {},
+            ),
+          ),
+        ),
         BlocListener<MaterialListBloc, MaterialListState>(
           listenWhen: (previous, current) =>
               previous.materialList != current.materialList,

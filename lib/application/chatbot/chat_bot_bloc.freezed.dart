@@ -406,61 +406,12 @@ abstract class _ResetChatbot implements ChatBotEvent {
 
 /// @nodoc
 mixin _$ChatBotState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() start,
-    required TResult Function() loading,
-    required TResult Function() reset,
-    required TResult Function(ApiFailure failure) error,
-  }) =>
+  bool get isLoading => throw _privateConstructorUsedError;
+  Option<Either<ApiFailure, dynamic>> get chatbotFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? start,
-    TResult? Function()? loading,
-    TResult? Function()? reset,
-    TResult? Function(ApiFailure failure)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? start,
-    TResult Function()? loading,
-    TResult Function()? reset,
-    TResult Function(ApiFailure failure)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Start value) start,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Reset value) reset,
-    required TResult Function(_Error value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Start value)? start,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Reset value)? reset,
-    TResult? Function(_Error value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Start value)? start,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Reset value)? reset,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) =>
+
+  @JsonKey(ignore: true)
+  $ChatBotStateCopyWith<ChatBotState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -469,6 +420,10 @@ abstract class $ChatBotStateCopyWith<$Res> {
   factory $ChatBotStateCopyWith(
           ChatBotState value, $Res Function(ChatBotState) then) =
       _$ChatBotStateCopyWithImpl<$Res, ChatBotState>;
+  @useResult
+  $Res call(
+      {bool isLoading,
+      Option<Either<ApiFailure, dynamic>> chatbotFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -480,638 +435,120 @@ class _$ChatBotStateCopyWithImpl<$Res, $Val extends ChatBotState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = null,
+    Object? chatbotFailureOrSuccessOption = null,
+  }) {
+    return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      chatbotFailureOrSuccessOption: null == chatbotFailureOrSuccessOption
+          ? _value.chatbotFailureOrSuccessOption
+          : chatbotFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ChatBotStateCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
-
+abstract class _$$_ChatBotStateCopyWith<$Res>
+    implements $ChatBotStateCopyWith<$Res> {
+  factory _$$_ChatBotStateCopyWith(
+          _$_ChatBotState value, $Res Function(_$_ChatBotState) then) =
+      __$$_ChatBotStateCopyWithImpl<$Res>;
   @override
-  String toString() {
-    return 'ChatBotState.initialized()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() start,
-    required TResult Function() loading,
-    required TResult Function() reset,
-    required TResult Function(ApiFailure failure) error,
-  }) {
-    return initialized();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? start,
-    TResult? Function()? loading,
-    TResult? Function()? reset,
-    TResult? Function(ApiFailure failure)? error,
-  }) {
-    return initialized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? start,
-    TResult Function()? loading,
-    TResult Function()? reset,
-    TResult Function(ApiFailure failure)? error,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Start value) start,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Reset value) reset,
-    required TResult Function(_Error value) error,
-  }) {
-    return initialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Start value)? start,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Reset value)? reset,
-    TResult? Function(_Error value)? error,
-  }) {
-    return initialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Start value)? start,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Reset value)? reset,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initialized implements ChatBotState {
-  const factory _Initialized() = _$_Initialized;
-}
-
-/// @nodoc
-abstract class _$$_StartCopyWith<$Res> {
-  factory _$$_StartCopyWith(_$_Start value, $Res Function(_$_Start) then) =
-      __$$_StartCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_StartCopyWithImpl<$Res>
-    extends _$ChatBotStateCopyWithImpl<$Res, _$_Start>
-    implements _$$_StartCopyWith<$Res> {
-  __$$_StartCopyWithImpl(_$_Start _value, $Res Function(_$_Start) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Start implements _Start {
-  const _$_Start();
-
-  @override
-  String toString() {
-    return 'ChatBotState.start()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Start);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() start,
-    required TResult Function() loading,
-    required TResult Function() reset,
-    required TResult Function(ApiFailure failure) error,
-  }) {
-    return start();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? start,
-    TResult? Function()? loading,
-    TResult? Function()? reset,
-    TResult? Function(ApiFailure failure)? error,
-  }) {
-    return start?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? start,
-    TResult Function()? loading,
-    TResult Function()? reset,
-    TResult Function(ApiFailure failure)? error,
-    required TResult orElse(),
-  }) {
-    if (start != null) {
-      return start();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Start value) start,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Reset value) reset,
-    required TResult Function(_Error value) error,
-  }) {
-    return start(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Start value)? start,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Reset value)? reset,
-    TResult? Function(_Error value)? error,
-  }) {
-    return start?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Start value)? start,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Reset value)? reset,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (start != null) {
-      return start(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Start implements ChatBotState {
-  const factory _Start() = _$_Start;
-}
-
-/// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$ChatBotStateCopyWithImpl<$Res, _$_Loading>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Loading implements _Loading {
-  const _$_Loading();
-
-  @override
-  String toString() {
-    return 'ChatBotState.loading()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() start,
-    required TResult Function() loading,
-    required TResult Function() reset,
-    required TResult Function(ApiFailure failure) error,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? start,
-    TResult? Function()? loading,
-    TResult? Function()? reset,
-    TResult? Function(ApiFailure failure)? error,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? start,
-    TResult Function()? loading,
-    TResult Function()? reset,
-    TResult Function(ApiFailure failure)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Start value) start,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Reset value) reset,
-    required TResult Function(_Error value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Start value)? start,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Reset value)? reset,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Start value)? start,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Reset value)? reset,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements ChatBotState {
-  const factory _Loading() = _$_Loading;
-}
-
-/// @nodoc
-abstract class _$$_ResetCopyWith<$Res> {
-  factory _$$_ResetCopyWith(_$_Reset value, $Res Function(_$_Reset) then) =
-      __$$_ResetCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_ResetCopyWithImpl<$Res>
-    extends _$ChatBotStateCopyWithImpl<$Res, _$_Reset>
-    implements _$$_ResetCopyWith<$Res> {
-  __$$_ResetCopyWithImpl(_$_Reset _value, $Res Function(_$_Reset) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Reset implements _Reset {
-  const _$_Reset();
-
-  @override
-  String toString() {
-    return 'ChatBotState.reset()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Reset);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() start,
-    required TResult Function() loading,
-    required TResult Function() reset,
-    required TResult Function(ApiFailure failure) error,
-  }) {
-    return reset();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? start,
-    TResult? Function()? loading,
-    TResult? Function()? reset,
-    TResult? Function(ApiFailure failure)? error,
-  }) {
-    return reset?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? start,
-    TResult Function()? loading,
-    TResult Function()? reset,
-    TResult Function(ApiFailure failure)? error,
-    required TResult orElse(),
-  }) {
-    if (reset != null) {
-      return reset();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Start value) start,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Reset value) reset,
-    required TResult Function(_Error value) error,
-  }) {
-    return reset(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Start value)? start,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Reset value)? reset,
-    TResult? Function(_Error value)? error,
-  }) {
-    return reset?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Start value)? start,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Reset value)? reset,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (reset != null) {
-      return reset(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Reset implements ChatBotState {
-  const factory _Reset() = _$_Reset;
-}
-
-/// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
   @useResult
-  $Res call({ApiFailure failure});
-
-  $ApiFailureCopyWith<$Res> get failure;
+  $Res call(
+      {bool isLoading,
+      Option<Either<ApiFailure, dynamic>> chatbotFailureOrSuccessOption});
 }
 
 /// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
-    extends _$ChatBotStateCopyWithImpl<$Res, _$_Error>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
+class __$$_ChatBotStateCopyWithImpl<$Res>
+    extends _$ChatBotStateCopyWithImpl<$Res, _$_ChatBotState>
+    implements _$$_ChatBotStateCopyWith<$Res> {
+  __$$_ChatBotStateCopyWithImpl(
+      _$_ChatBotState _value, $Res Function(_$_ChatBotState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? failure = null,
+    Object? isLoading = null,
+    Object? chatbotFailureOrSuccessOption = null,
   }) {
-    return _then(_$_Error(
-      null == failure
-          ? _value.failure
-          : failure // ignore: cast_nullable_to_non_nullable
-              as ApiFailure,
+    return _then(_$_ChatBotState(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      chatbotFailureOrSuccessOption: null == chatbotFailureOrSuccessOption
+          ? _value.chatbotFailureOrSuccessOption
+          : chatbotFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ApiFailureCopyWith<$Res> get failure {
-    return $ApiFailureCopyWith<$Res>(_value.failure, (value) {
-      return _then(_value.copyWith(failure: value));
-    });
   }
 }
 
 /// @nodoc
 
-class _$_Error implements _Error {
-  const _$_Error(this.failure);
+class _$_ChatBotState extends _ChatBotState {
+  const _$_ChatBotState(
+      {required this.isLoading, required this.chatbotFailureOrSuccessOption})
+      : super._();
 
   @override
-  final ApiFailure failure;
+  final bool isLoading;
+  @override
+  final Option<Either<ApiFailure, dynamic>> chatbotFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'ChatBotState.error(failure: $failure)';
+    return 'ChatBotState(isLoading: $isLoading, chatbotFailureOrSuccessOption: $chatbotFailureOrSuccessOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Error &&
-            (identical(other.failure, failure) || other.failure == failure));
+            other is _$_ChatBotState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.chatbotFailureOrSuccessOption,
+                    chatbotFailureOrSuccessOption) ||
+                other.chatbotFailureOrSuccessOption ==
+                    chatbotFailureOrSuccessOption));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, failure);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, chatbotFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() start,
-    required TResult Function() loading,
-    required TResult Function() reset,
-    required TResult Function(ApiFailure failure) error,
-  }) {
-    return error(failure);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? start,
-    TResult? Function()? loading,
-    TResult? Function()? reset,
-    TResult? Function(ApiFailure failure)? error,
-  }) {
-    return error?.call(failure);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? start,
-    TResult Function()? loading,
-    TResult Function()? reset,
-    TResult Function(ApiFailure failure)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(failure);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Start value) start,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Reset value) reset,
-    required TResult Function(_Error value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Start value)? start,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Reset value)? reset,
-    TResult? Function(_Error value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Start value)? start,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Reset value)? reset,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
+  _$$_ChatBotStateCopyWith<_$_ChatBotState> get copyWith =>
+      __$$_ChatBotStateCopyWithImpl<_$_ChatBotState>(this, _$identity);
 }
 
-abstract class _Error implements ChatBotState {
-  const factory _Error(final ApiFailure failure) = _$_Error;
+abstract class _ChatBotState extends ChatBotState {
+  const factory _ChatBotState(
+      {required final bool isLoading,
+      required final Option<Either<ApiFailure, dynamic>>
+          chatbotFailureOrSuccessOption}) = _$_ChatBotState;
+  const _ChatBotState._() : super._();
 
-  ApiFailure get failure;
+  @override
+  bool get isLoading;
+  @override
+  Option<Either<ApiFailure, dynamic>> get chatbotFailureOrSuccessOption;
+  @override
   @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+  _$$_ChatBotStateCopyWith<_$_ChatBotState> get copyWith =>
       throw _privateConstructorUsedError;
 }

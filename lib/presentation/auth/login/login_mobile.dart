@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/auth/login/common/market_selector.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/password_field.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/remember_password.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/username_field.dart';
+import 'package:ezrxmobile/presentation/core/chatbot/chatbot_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/logo.dart';
 import 'package:ezrxmobile/presentation/core/or_divider.dart';
@@ -66,6 +67,7 @@ class LoginMobile extends StatelessWidget {
           ),
         ),
         const Announcement(),
+        const ChatBotWidget(),
       ],
     );
   }

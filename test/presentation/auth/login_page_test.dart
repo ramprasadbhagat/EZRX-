@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -120,6 +121,9 @@ class CreditAndInvoiceDetailsMockBloc
     extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
     implements CreditAndInvoiceDetailsBloc {}
 
+class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
+    implements ChatBotBloc {}
+
 void main() {
   late GetIt locator;
   late LoginFormBloc loginBlocMock;
@@ -144,6 +148,7 @@ void main() {
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   late ProductDetailBloc productDetailBloc;
+  late ChatBotBloc chatBotBloc;
 
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
 
@@ -175,6 +180,7 @@ void main() {
       viewByOrderDetailsBlocMock = ViewByOrderDetailsMockBloc();
       productDetailBloc = ProductDetailMockBloc();
       creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
+      chatBotBloc = ChatBotMockBloc();
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -211,6 +217,7 @@ void main() {
           .thenReturn(ProductDetailState.initial());
       when(() => creditAndInvoiceDetailsBloc.state)
           .thenReturn(CreditAndInvoiceDetailsState.initial());
+      when(() => chatBotBloc.state).thenReturn(ChatBotState.initial());
     });
 
     Widget loginTestPage({bool? useMediaQuery}) => WidgetUtils.getScopedWidget(
@@ -269,6 +276,9 @@ void main() {
               ),
               BlocProvider<CreditAndInvoiceDetailsBloc>(
                 create: (context) => creditAndInvoiceDetailsBloc,
+              ),
+              BlocProvider<ChatBotBloc>(
+                create: (context) => chatBotBloc,
               ),
             ],
             child: const LoginPage(),
@@ -406,6 +416,9 @@ void main() {
               ),
               BlocProvider<CreditAndInvoiceDetailsBloc>(
                 create: (context) => creditAndInvoiceDetailsBloc,
+              ),
+              BlocProvider<ChatBotBloc>(
+                create: (context) => chatBotBloc,
               ),
             ],
             child: const SplashPage(),

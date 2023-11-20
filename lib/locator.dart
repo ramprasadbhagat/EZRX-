@@ -2715,7 +2715,7 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => ChatBotBloc(
-      repository: locator<ChatBotRepository>(),
+      chatBotRepository: locator<ChatBotRepository>(),
     ),
   );
 

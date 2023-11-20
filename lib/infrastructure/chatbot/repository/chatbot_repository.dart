@@ -96,9 +96,20 @@ class ChatBotRepository implements IChatBotRepository {
   @override
   Future<Either<ApiFailure, bool>> resetChatbot() async {
     try {
-      final payload = {
+      final market = AppMarket(
+        deviceStorage.currentMarket(),
+      );
+      final marketDomain = market.marketDomain.toUpperCase();
+      final payload = <String, Object>{
         'token': '',
         'username': '',
+        'baseUrl': config.baseUrl(
+          currentMarket: market,
+        ),
+        'market': marketDomain,
+        'locale': market.locale,
+        'currency': market.currency,
+        'language': marketDomain,
       };
 
       return Right(await chatBotService.passPayloadToBot(payload: payload));
