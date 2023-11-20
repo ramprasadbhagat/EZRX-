@@ -246,11 +246,8 @@ class CartRemoteDataSource {
 
       _exceptionChecker(res: res);
 
-      return AplSimulatorOrder.empty().copyWith(
-        grandTotal:
-            AplGetTotalPriceDto.fromJson(res.data['data']['AplGetTotalPrice'])
-                .getGrandTotalValue,
-      );
+      return AplGetTotalPriceDto.fromJson(res.data['data']['AplGetTotalPrice'])
+          .toDomain;
     });
   }
 

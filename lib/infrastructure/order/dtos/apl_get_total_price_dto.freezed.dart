@@ -22,6 +22,10 @@ AplGetTotalPriceDto _$AplGetTotalPriceDtoFromJson(Map<String, dynamic> json) {
 mixin _$AplGetTotalPriceDto {
   @JsonKey(name: 'TotalPrice', defaultValue: 0)
   int get grandTotal => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Tax', defaultValue: 0)
+  int get tax => throw _privateConstructorUsedError;
+  @JsonKey(name: 'DeliveryFee', defaultValue: 0)
+  int get deliveryFee => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +39,10 @@ abstract class $AplGetTotalPriceDtoCopyWith<$Res> {
           AplGetTotalPriceDto value, $Res Function(AplGetTotalPriceDto) then) =
       _$AplGetTotalPriceDtoCopyWithImpl<$Res, AplGetTotalPriceDto>;
   @useResult
-  $Res call({@JsonKey(name: 'TotalPrice', defaultValue: 0) int grandTotal});
+  $Res call(
+      {@JsonKey(name: 'TotalPrice', defaultValue: 0) int grandTotal,
+      @JsonKey(name: 'Tax', defaultValue: 0) int tax,
+      @JsonKey(name: 'DeliveryFee', defaultValue: 0) int deliveryFee});
 }
 
 /// @nodoc
@@ -52,11 +59,21 @@ class _$AplGetTotalPriceDtoCopyWithImpl<$Res, $Val extends AplGetTotalPriceDto>
   @override
   $Res call({
     Object? grandTotal = null,
+    Object? tax = null,
+    Object? deliveryFee = null,
   }) {
     return _then(_value.copyWith(
       grandTotal: null == grandTotal
           ? _value.grandTotal
           : grandTotal // ignore: cast_nullable_to_non_nullable
+              as int,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as int,
+      deliveryFee: null == deliveryFee
+          ? _value.deliveryFee
+          : deliveryFee // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -70,7 +87,10 @@ abstract class _$$_AplGetTotalPriceDtoCopyWith<$Res>
       __$$_AplGetTotalPriceDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'TotalPrice', defaultValue: 0) int grandTotal});
+  $Res call(
+      {@JsonKey(name: 'TotalPrice', defaultValue: 0) int grandTotal,
+      @JsonKey(name: 'Tax', defaultValue: 0) int tax,
+      @JsonKey(name: 'DeliveryFee', defaultValue: 0) int deliveryFee});
 }
 
 /// @nodoc
@@ -85,11 +105,21 @@ class __$$_AplGetTotalPriceDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? grandTotal = null,
+    Object? tax = null,
+    Object? deliveryFee = null,
   }) {
     return _then(_$_AplGetTotalPriceDto(
       grandTotal: null == grandTotal
           ? _value.grandTotal
           : grandTotal // ignore: cast_nullable_to_non_nullable
+              as int,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as int,
+      deliveryFee: null == deliveryFee
+          ? _value.deliveryFee
+          : deliveryFee // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -99,7 +129,9 @@ class __$$_AplGetTotalPriceDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AplGetTotalPriceDto extends _AplGetTotalPriceDto {
   const _$_AplGetTotalPriceDto(
-      {@JsonKey(name: 'TotalPrice', defaultValue: 0) required this.grandTotal})
+      {@JsonKey(name: 'TotalPrice', defaultValue: 0) required this.grandTotal,
+      @JsonKey(name: 'Tax', defaultValue: 0) required this.tax,
+      @JsonKey(name: 'DeliveryFee', defaultValue: 0) required this.deliveryFee})
       : super._();
 
   factory _$_AplGetTotalPriceDto.fromJson(Map<String, dynamic> json) =>
@@ -108,10 +140,16 @@ class _$_AplGetTotalPriceDto extends _AplGetTotalPriceDto {
   @override
   @JsonKey(name: 'TotalPrice', defaultValue: 0)
   final int grandTotal;
+  @override
+  @JsonKey(name: 'Tax', defaultValue: 0)
+  final int tax;
+  @override
+  @JsonKey(name: 'DeliveryFee', defaultValue: 0)
+  final int deliveryFee;
 
   @override
   String toString() {
-    return 'AplGetTotalPriceDto(grandTotal: $grandTotal)';
+    return 'AplGetTotalPriceDto(grandTotal: $grandTotal, tax: $tax, deliveryFee: $deliveryFee)';
   }
 
   @override
@@ -120,12 +158,15 @@ class _$_AplGetTotalPriceDto extends _AplGetTotalPriceDto {
         (other.runtimeType == runtimeType &&
             other is _$_AplGetTotalPriceDto &&
             (identical(other.grandTotal, grandTotal) ||
-                other.grandTotal == grandTotal));
+                other.grandTotal == grandTotal) &&
+            (identical(other.tax, tax) || other.tax == tax) &&
+            (identical(other.deliveryFee, deliveryFee) ||
+                other.deliveryFee == deliveryFee));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, grandTotal);
+  int get hashCode => Object.hash(runtimeType, grandTotal, tax, deliveryFee);
 
   @JsonKey(ignore: true)
   @override
@@ -145,7 +186,10 @@ class _$_AplGetTotalPriceDto extends _AplGetTotalPriceDto {
 abstract class _AplGetTotalPriceDto extends AplGetTotalPriceDto {
   const factory _AplGetTotalPriceDto(
       {@JsonKey(name: 'TotalPrice', defaultValue: 0)
-      required final int grandTotal}) = _$_AplGetTotalPriceDto;
+      required final int grandTotal,
+      @JsonKey(name: 'Tax', defaultValue: 0) required final int tax,
+      @JsonKey(name: 'DeliveryFee', defaultValue: 0)
+      required final int deliveryFee}) = _$_AplGetTotalPriceDto;
   const _AplGetTotalPriceDto._() : super._();
 
   factory _AplGetTotalPriceDto.fromJson(Map<String, dynamic> json) =
@@ -154,6 +198,12 @@ abstract class _AplGetTotalPriceDto extends AplGetTotalPriceDto {
   @override
   @JsonKey(name: 'TotalPrice', defaultValue: 0)
   int get grandTotal;
+  @override
+  @JsonKey(name: 'Tax', defaultValue: 0)
+  int get tax;
+  @override
+  @JsonKey(name: 'DeliveryFee', defaultValue: 0)
+  int get deliveryFee;
   @override
   @JsonKey(ignore: true)
   _$$_AplGetTotalPriceDtoCopyWith<_$_AplGetTotalPriceDto> get copyWith =>

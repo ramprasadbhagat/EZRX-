@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/apl_get_total_price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/apl_simulator_order_dto.dart';
 import 'package:flutter/services.dart';
 
@@ -70,9 +71,8 @@ class CartLocalDataSource {
     final data = json.decode(
       await rootBundle.loadString('assets/json/aplGetTotalPriceResponse.json'),
     );
-    final totalPrice = data['data']['AplGetTotalPrice']['TotalPrice'];
 
-    return AplSimulatorOrder.empty()
-        .copyWith(grandTotal: double.parse(totalPrice.toString()));
+    return AplGetTotalPriceDto.fromJson(data['data']['AplGetTotalPrice'])
+        .toDomain;
   }
 }

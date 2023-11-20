@@ -1410,6 +1410,8 @@ mutation UpsertCartItems(\$itemInput: [ItemInput!]) {
     query aplGetTotalPrice(\$AplGetTotalPrice: AplGetTotalPriceRequest!) {
       AplGetTotalPrice(request: \$AplGetTotalPrice) {
         TotalPrice
+        DeliveryFee
+        Tax
       }
     }
     ''';
