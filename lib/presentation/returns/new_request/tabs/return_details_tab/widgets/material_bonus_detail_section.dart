@@ -5,9 +5,11 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
     Key? key,
     required this.item,
     required this.detail,
+    required this.counterOfferEnabled,
   }) : super(key: key);
   final ReturnMaterial item;
   final ReturnItemDetails detail;
+  final bool counterOfferEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
                 ),
                 ReturnCounterOfferField(
                   uuid: detail.uuid,
-                  enabled: false,
+                  enabled: counterOfferEnabled,
                 ),
                 const SizedBox(
                   height: 8,

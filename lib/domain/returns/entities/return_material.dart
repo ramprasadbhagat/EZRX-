@@ -49,6 +49,8 @@ class ReturnMaterial with _$ReturnMaterial {
 
   String get uuid => '$assignmentNumber$itemNumber';
 
+  bool get editDetailsAllowed => balanceQuantity.isGreaterThanZero;
+
   ReturnItemDetails get validatedItemDetails =>
       ReturnItemDetails.empty().copyWith(
         materialNumber: materialNumber,

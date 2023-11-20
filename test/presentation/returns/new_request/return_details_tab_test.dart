@@ -14,6 +14,7 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_loca
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/return_details_tab.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_counter_offer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -313,6 +314,44 @@ void main() {
             matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
           ),
           findsNothing,
+        );
+      },
+    );
+
+    testWidgets(
+      '=> The counter offer field of bonus item is enabled when return material detail is not allowed to edit',
+      (tester) async {
+        when(() => newRequestBlocMock.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: [
+              //make return material detail is not allowed to edit
+              fakeReturnMaterialList.items[1].copyWith(
+                balanceQuantity: IntegerValue('0'),
+              )
+            ],
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                returnItemDetailsList: [
+                  fakeReturnMaterialList.items[1].validatedItemDetails,
+                ],
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final returnCounterOfferField = find.byType(ReturnCounterOfferField);
+        expect(
+          returnCounterOfferField,
+          findsOneWidget,
+        );
+
+        expect(
+          tester
+              .widget<ReturnCounterOfferField>(returnCounterOfferField)
+              .enabled,
+          true,
         );
       },
     );

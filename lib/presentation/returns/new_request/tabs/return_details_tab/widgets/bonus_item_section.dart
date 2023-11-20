@@ -4,8 +4,10 @@ class _BonusItemSection extends StatelessWidget {
   const _BonusItemSection({
     Key? key,
     required this.items,
+    required this.counterOfferEnabled,
   }) : super(key: key);
   final List<ReturnMaterial> items;
+  final bool counterOfferEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +29,11 @@ class _BonusItemSection extends StatelessWidget {
                       children: [
                         _MaterialBonusInfoSection(data: item),
                         if (detail.itemNumber.isNotEmpty &&
-                            item.balanceQuantity.isGreaterThanZero)
+                            item.editDetailsAllowed)
                           _MaterialBonusDetailsSection(
                             item: item,
                             detail: detail,
+                            counterOfferEnabled: counterOfferEnabled,
                           ),
                       ],
                     );

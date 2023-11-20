@@ -62,7 +62,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
                 data: item,
                 expandable: true,
               ),
-              if (item.balanceQuantity.isGreaterThanZero)
+              if (item.editDetailsAllowed)
                 _MaterialReturnDetailsSection(
                   key: WidgetKeys.materialReturnDetailsSection,
                   item: item,
@@ -71,6 +71,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
               _BonusItemSection(
                 key: WidgetKeys.bonusItemSection,
                 items: item.bonusItems,
+                counterOfferEnabled: !item.editDetailsAllowed,
               ),
             ],
           ),
