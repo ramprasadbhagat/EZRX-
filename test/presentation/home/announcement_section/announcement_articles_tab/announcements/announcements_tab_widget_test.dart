@@ -365,7 +365,7 @@ void main() {
             itemKey2,
             const Offset(0, -2000),
           );
-          await tester.pumpAndSettle();
+          await tester.pump();
 
           expect(itemKey, findsNothing);
           expect(scrollToTopArrowIcon, findsOneWidget);

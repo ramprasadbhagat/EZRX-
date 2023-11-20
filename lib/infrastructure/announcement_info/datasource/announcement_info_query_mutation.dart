@@ -69,7 +69,25 @@ class AnnouncementInfoQueryMutation {
               {
                 ...dateFields
               }
+              documents: field(name: "Documents") {
+                ...multilistFieldsAnnouncements
+              }
+              tag: field(name: "Tag") {
+                ...lookupFields
+              }
             }
+    }
+    fragment multilistFieldsAnnouncements on MultilistField {
+      value: targetItems {
+        url {
+          value: url
+        }
+      }
+    }
+    fragment lookupFields on LookupField {
+      value: targetItem {
+        name
+      }
     }
     fragment textFields on TextField 
     {

@@ -212,6 +212,36 @@ class _AnnouncementItem extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
             ),
+            Row(
+              children: [
+                if (item.tag.isNotEmpty)
+                  Container(
+                    padding: const EdgeInsets.all(6),
+                    margin: const EdgeInsets.only(top: 5, bottom: 5, right: 5),
+                    decoration: BoxDecoration(
+                      color: ZPColors.paleBlueGray,
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Text(
+                      item.tag,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                if (item.documents.isNotEmpty) ...[
+                  const Icon(
+                    Icons.attach_file_outlined,
+                    color: ZPColors.lightGray,
+                    size: 18,
+                  ),
+                  Text(
+                    context.tr('Attachment included'),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: ZPColors.lightGray,
+                        ),
+                  ),
+                ],
+              ],
+            ),
           ],
         ),
       ),

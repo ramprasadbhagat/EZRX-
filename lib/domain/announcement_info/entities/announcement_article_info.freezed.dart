@@ -205,6 +205,7 @@ mixin _$AnnouncementArticleItem {
   List<BranchAndIc4Info> get iC4Info => throw _privateConstructorUsedError;
   String get tag => throw _privateConstructorUsedError;
   String get manufacturer => throw _privateConstructorUsedError;
+  List<String> get documents => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnnouncementArticleItemCopyWith<AnnouncementArticleItem> get copyWith =>
@@ -227,7 +228,8 @@ abstract class $AnnouncementArticleItemCopyWith<$Res> {
       List<BranchAndIc4Info> branchInfo,
       List<BranchAndIc4Info> iC4Info,
       String tag,
-      String manufacturer});
+      String manufacturer,
+      List<String> documents});
 }
 
 /// @nodoc
@@ -254,6 +256,7 @@ class _$AnnouncementArticleItemCopyWithImpl<$Res,
     Object? iC4Info = null,
     Object? tag = null,
     Object? manufacturer = null,
+    Object? documents = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -296,6 +299,10 @@ class _$AnnouncementArticleItemCopyWithImpl<$Res,
           ? _value.manufacturer
           : manufacturer // ignore: cast_nullable_to_non_nullable
               as String,
+      documents: null == documents
+          ? _value.documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -318,7 +325,8 @@ abstract class _$$_AnnouncementArticleItemCopyWith<$Res>
       List<BranchAndIc4Info> branchInfo,
       List<BranchAndIc4Info> iC4Info,
       String tag,
-      String manufacturer});
+      String manufacturer,
+      List<String> documents});
 }
 
 /// @nodoc
@@ -343,6 +351,7 @@ class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
     Object? iC4Info = null,
     Object? tag = null,
     Object? manufacturer = null,
+    Object? documents = null,
   }) {
     return _then(_$_AnnouncementArticleItem(
       id: null == id
@@ -385,6 +394,10 @@ class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
           ? _value.manufacturer
           : manufacturer // ignore: cast_nullable_to_non_nullable
               as String,
+      documents: null == documents
+          ? _value._documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -402,9 +415,11 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
       required final List<BranchAndIc4Info> branchInfo,
       required final List<BranchAndIc4Info> iC4Info,
       required this.tag,
-      required this.manufacturer})
+      required this.manufacturer,
+      required final List<String> documents})
       : _branchInfo = branchInfo,
         _iC4Info = iC4Info,
+        _documents = documents,
         super._();
 
   @override
@@ -439,10 +454,17 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
   final String tag;
   @override
   final String manufacturer;
+  final List<String> _documents;
+  @override
+  List<String> get documents {
+    if (_documents is EqualUnmodifiableListView) return _documents;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_documents);
+  }
 
   @override
   String toString() {
-    return 'AnnouncementArticleItem(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate, branchInfo: $branchInfo, iC4Info: $iC4Info, tag: $tag, manufacturer: $manufacturer)';
+    return 'AnnouncementArticleItem(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate, branchInfo: $branchInfo, iC4Info: $iC4Info, tag: $tag, manufacturer: $manufacturer, documents: $documents)';
   }
 
   @override
@@ -463,7 +485,9 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
             const DeepCollectionEquality().equals(other._iC4Info, _iC4Info) &&
             (identical(other.tag, tag) || other.tag == tag) &&
             (identical(other.manufacturer, manufacturer) ||
-                other.manufacturer == manufacturer));
+                other.manufacturer == manufacturer) &&
+            const DeepCollectionEquality()
+                .equals(other._documents, _documents));
   }
 
   @override
@@ -478,7 +502,8 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
       const DeepCollectionEquality().hash(_branchInfo),
       const DeepCollectionEquality().hash(_iC4Info),
       tag,
-      manufacturer);
+      manufacturer,
+      const DeepCollectionEquality().hash(_documents));
 
   @JsonKey(ignore: true)
   @override
@@ -500,7 +525,8 @@ abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
       required final List<BranchAndIc4Info> branchInfo,
       required final List<BranchAndIc4Info> iC4Info,
       required final String tag,
-      required final String manufacturer}) = _$_AnnouncementArticleItem;
+      required final String manufacturer,
+      required final List<String> documents}) = _$_AnnouncementArticleItem;
   const _AnnouncementArticleItem._() : super._();
 
   @override
@@ -523,6 +549,8 @@ abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
   String get tag;
   @override
   String get manufacturer;
+  @override
+  List<String> get documents;
   @override
   @JsonKey(ignore: true)
   _$$_AnnouncementArticleItemCopyWith<_$_AnnouncementArticleItem>

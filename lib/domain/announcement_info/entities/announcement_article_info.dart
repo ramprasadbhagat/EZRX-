@@ -58,6 +58,7 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
     required List<BranchAndIc4Info> iC4Info,
     required String tag,
     required String manufacturer,
+    required List<String> documents,
   }) = _AnnouncementArticleItem;
 
   factory AnnouncementArticleItem.empty() => AnnouncementArticleItem(
@@ -71,6 +72,7 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
         iC4Info: <BranchAndIc4Info>[],
         tag: '',
         manufacturer: '',
+        documents: [],
       );
 
   bool isSearchKeyMatching(String searchKey) =>

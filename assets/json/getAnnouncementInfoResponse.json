@@ -26,6 +26,21 @@
                     },
                     "publishedDate": {
                         "isoValue": "20230719T030019"
+                    },
+                    "documents": {
+                        "value": [
+                            {
+                                "url": {
+                                    "value": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx-sg/Articles/Documents/document2.pdf"
+                                }
+                               
+                            }
+                        ]
+                    },
+                    "tag": {
+                        "value": {
+                            "name": "Lifestyle"
+                        }
                     }
                 },
                 {

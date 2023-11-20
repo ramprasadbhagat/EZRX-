@@ -48,6 +48,8 @@ class AnnouncementArticleItemDto with _$AnnouncementArticleItemDto {
     @JsonKey(name: 'tag', readValue: readTag) required String tag,
     @JsonKey(name: 'manufacturer', readValue: getValue)
         required String manufacturer,
+    @JsonKey(name: 'documents', readValue: getDocumentsList)
+        required List<String> documentsList,
   }) = _AnnouncementArticleItemDto;
 
   factory AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =>
@@ -64,6 +66,7 @@ class AnnouncementArticleItemDto with _$AnnouncementArticleItemDto {
         iC4Info: iC4Info.map((e) => e.toDomain).toList(),
         tag: tag,
         manufacturer: manufacturer,
+        documents: documentsList,
       );
 }
 
@@ -105,3 +108,9 @@ String getDateValue(Map json, String key) =>
 String getEndCursorValue(Map json, String key) => json[key]?['endCursor'] ?? '';
 
 String readTag(Map json, String key) => json[key]?['value']?['name'] ?? '';
+
+List<dynamic> getDocumentsList(Map json, String _) {
+  final urlList = json['documents']?['value'] ?? [];
+
+  return urlList.map((e) => e['url']?['value'] ?? '').toList();
+}
