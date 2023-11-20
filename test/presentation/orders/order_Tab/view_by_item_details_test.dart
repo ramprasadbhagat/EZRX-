@@ -6,35 +6,50 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/invoice_number_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_number_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -74,6 +89,21 @@ class ReOrderPermissionBlocMock
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
+    implements AllInvoicesBloc {}
+
+class CreditAndInvoiceDetailsBlocMock
+    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
+    implements CreditAndInvoiceDetailsBloc {}
+
+class ViewByOrderDetailsBlocMock
+    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
+    implements ViewByOrderDetailsBloc {}
+
+class PoAttachmentBlocMock
+    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
+    implements PoAttachmentBloc {}
+
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
 void main() {
@@ -91,7 +121,13 @@ void main() {
   late OrderHistoryItem fakeOrderHistoryItem;
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late CartBloc cartBlocMock;
+  late AllInvoicesBloc allInvoicesBlocMock;
+  late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
+  late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
+  late PoAttachmentBloc poAttachmentBlocMock;
   late MixpanelService mixpanelServiceMock;
+  late List<CreditAndInvoiceItem> fakeItemList;
+  late ViewByOrder fakeOrder;
 
   const fakeCreatedDate = '20230412';
   setUpAll(() async {
@@ -108,12 +144,21 @@ void main() {
     locator.registerFactory<ReOrderPermissionBloc>(
       () => reOrderPermissionBlocMock,
     );
+    locator.registerFactory<AllInvoicesBloc>(
+      () => allInvoicesBlocMock,
+    );
     fakeOrderHistoryItem = OrderHistoryItem.empty().copyWith(
       status: OrderStepValue('Picking in progress'),
       createdDate: DateTimeStringValue(fakeCreatedDate),
       expiryDate: DateTimeStringValue('2023-10-04'),
       batch: StringValue('fake-batch-number'),
+      orderNumber: OrderNumber('1234567'),
+      invoiceData:
+          InvoiceData.empty().copyWith(invoiceNumber: StringValue('123456')),
     );
+    fakeItemList =
+        await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
+    fakeOrder = await ViewByOrderLocalDataSource().getViewByOrders();
   });
   group('Order History Details By Item Page', () {
     setUp(() {
@@ -125,6 +170,10 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       productImageBlocMock = ProductImageBlocMock();
+      allInvoicesBlocMock = AllInvoicesBlocMock();
+      creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
+      viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
+      poAttachmentBlocMock = PoAttachmentBlocMock();
       mockAuthBloc = MockAuthBloc();
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
@@ -142,14 +191,19 @@ void main() {
       when(() => productImageBlocMock.state)
           .thenReturn(ProductImageState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => allInvoicesBlocMock.state)
+          .thenReturn(AllInvoicesState.initial());
+      when(() => creditAndInvoiceDetailsBlocMock.state)
+          .thenReturn(CreditAndInvoiceDetailsState.initial());
+      when(() => viewByOrderDetailsBlocMock.state)
+          .thenReturn(ViewByOrderDetailsState.initial());
+      when(() => poAttachmentBlocMock.state)
+          .thenReturn(PoAttachmentState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           user: fakeClientUser,
           salesOrganisation: fakeSGSalesOrganisation,
-          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-            customerAttr7: CustomerAttr7('ZEV'),
-            customerGrp4: CustomerGrp4('VR'),
-          ),
+          customerCodeInfo: fakeCustomerCodeInfoWithCustomerGrp4,
         ),
       );
     });
@@ -189,6 +243,18 @@ void main() {
           ),
           BlocProvider<ReOrderPermissionBloc>(
             create: ((context) => reOrderPermissionBlocMock),
+          ),
+          BlocProvider<CreditAndInvoiceDetailsBloc>(
+            create: ((context) => creditAndInvoiceDetailsBlocMock),
+          ),
+          BlocProvider<ViewByOrderDetailsBloc>(
+            create: ((context) => viewByOrderDetailsBlocMock),
+          ),
+          BlocProvider<AllInvoicesBloc>(
+            create: ((context) => allInvoicesBlocMock),
+          ),
+          BlocProvider<PoAttachmentBloc>(
+            create: ((context) => poAttachmentBlocMock),
           ),
         ],
         child: const Material(
@@ -300,7 +366,6 @@ void main() {
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: false,
           orderHistoryItem: fakeOrderHistoryItem,
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
@@ -329,7 +394,6 @@ void main() {
           isLoading: true,
         ),
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: false,
           orderHistoryItem: fakeOrderHistoryItem,
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
@@ -635,6 +699,491 @@ void main() {
         ).called(1);
         expect(autoRouterMock.current.path, 'orders/cart');
       });
+    });
+
+    testWidgets('Header section test ', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+            enableFutureDeliveryDay: true,
+            enableMobileNumber: true,
+            showPOAttachment: true,
+          ),
+          user: fakeRootAdminUser,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final orderNumberSectionFinder = find.byType(OrderNumberSection);
+      expect(orderNumberSectionFinder, findsOneWidget);
+      final viewByItemsOrderDetailOrderDate =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailOrderDate);
+      expect(viewByItemsOrderDetailOrderDate, findsOneWidget);
+      final invoiceSectionFinder = find.byType(InvoiceNumberSection);
+      expect(invoiceSectionFinder, findsOneWidget);
+      final viewByItemsOrderDetailPoReference =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailPoReference);
+      expect(viewByItemsOrderDetailPoReference, findsOneWidget);
+      final viewByItemsOrderDetailsRequestedDeliveryDate =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailsRequestedDeliveryDate);
+      expect(viewByItemsOrderDetailsRequestedDeliveryDate, findsOneWidget);
+      final viewByItemsOrderDetailsContactPerson =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailsContactPerson);
+      expect(viewByItemsOrderDetailsContactPerson, findsOneWidget);
+      final viewByItemsOrderDetailsContactNumber =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailsContactNumber);
+      expect(viewByItemsOrderDetailsContactNumber, findsOneWidget);
+      final viewByItemAttachmentSection =
+          find.byType(ViewByItemAttachmentSection);
+      expect(viewByItemAttachmentSection, findsOneWidget);
+    });
+
+    testWidgets('Invoice Number section loading test ', (tester) async {
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      when(() => allInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final loadingWidgetFinder =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailsInvoiceNumberLoading);
+      expect(loadingWidgetFinder, findsOneWidget);
+    });
+    testWidgets('Invoice Number section failure test ', (tester) async {
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      final expectedStates = [
+        AllInvoicesState.initial().copyWith(
+          isLoading: true,
+        ),
+        AllInvoicesState.initial().copyWith(
+          failureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake_error'))),
+          items: fakeItemList,
+        ),
+      ];
+      whenListen(
+        allInvoicesBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      verifyNever(
+        () => creditAndInvoiceDetailsBlocMock.add(
+          CreditAndInvoiceDetailsEvent.fetch(
+            creditAndInvoiceItem: fakeItemList.first,
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ),
+      );
+    });
+    testWidgets('Invoice Number section test ', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+      );
+
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+
+      final expectedStates = [
+        AllInvoicesState.initial().copyWith(
+          failureOrSuccessOption: optionOf(Right(fakeItemList)),
+          items: fakeItemList,
+        ),
+      ];
+      whenListen(
+        allInvoicesBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      verify(
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.initialized(
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => creditAndInvoiceDetailsBlocMock.add(
+          CreditAndInvoiceDetailsEvent.fetch(
+            creditAndInvoiceItem: fakeItemList.first,
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ),
+      ).called(1);
+      final invoiceNoTextFinder = find.text(
+        fakeOrderHistoryItem.invoiceData.invoiceNumber.getOrDefaultValue(''),
+      );
+      expect(invoiceNoTextFinder, findsWidgets);
+      final iconFinder =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailsInvoiceNumberButton);
+      expect(iconFinder, findsOneWidget);
+      await tester.tap(iconFinder);
+      await tester.pump();
+      verify(
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.empty().copyWith(
+              searchKey: SearchKey.searchFilter(
+                fakeOrderHistoryItem.invoiceData.invoiceNumber
+                    .getOrDefaultValue(''),
+              ),
+            ),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Order Number section loading test ', (tester) async {
+      when(() => viewByOrderBlocMock.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          isFetching: true,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final loadingWidgetFinder =
+          find.byKey(WidgetKeys.viewByOrderOrderNumberLoading);
+      expect(loadingWidgetFinder, findsOneWidget);
+    });
+    testWidgets('Order Number section failure test ', (tester) async {
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      verifyNever(
+        () => viewByOrderDetailsBlocMock.add(
+          ViewByOrderDetailsEvent.setOrderDetails(
+            orderHistoryDetails: fakeOrder.orderHeaders.first,
+          ),
+        ),
+      );
+    });
+    testWidgets('Order Number section test ', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          user: fakeRootAdminUser,
+        ),
+      );
+
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+
+      final expectedStates = [
+        ViewByOrderState.initial().copyWith(
+          isFetching: true,
+        ),
+        ViewByOrderState.initial().copyWith(
+          failureOrSuccessOption: optionOf(Right(fakeOrder)),
+          viewByOrderList: fakeOrder,
+          searchKey: SearchKey('fake_searchKey'),
+        ),
+      ];
+      whenListen(
+        viewByOrderBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      verify(
+        () => viewByOrderBlocMock.add(
+          ViewByOrderEvent.initialized(
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            user: fakeRootAdminUser,
+            sortDirection: 'desc',
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => viewByOrderDetailsBlocMock.add(
+          ViewByOrderDetailsEvent.setOrderDetails(
+            orderHistoryDetails: fakeOrder.orderHeaders.first,
+          ),
+        ),
+      ).called(1);
+      final orderNoTextFinder = find.textContaining(
+        fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
+      );
+      expect(orderNoTextFinder, findsWidgets);
+      final iconFinder = find.byKey(WidgetKeys.viewByOrderOrderNumberButton);
+      expect(iconFinder, findsOneWidget);
+      await tester.tap(iconFinder);
+      await tester.pump();
+      verify(
+        () => viewByOrderBlocMock.add(
+          ViewByOrderEvent.fetch(
+            filter: ViewByOrdersFilter.empty(),
+            searchKey: SearchKey.searchFilter(
+              fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
+            ),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Attachment Section test with no data', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+            showPOAttachment: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final viewByItemAttachmentSection =
+          find.byType(ViewByItemAttachmentSection);
+      expect(viewByItemAttachmentSection, findsOneWidget);
+      final attachmentSection = find.textContaining('Attachments');
+      expect(attachmentSection, findsOneWidget);
+      final noAttachmentSection =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailsNoAttachments);
+      expect(noAttachmentSection, findsOneWidget);
+    });
+
+    testWidgets('Attachment Section test with data', (tester) async {
+      final fakeOrderHistoryItemWithAttachments = fakeOrderHistoryItem.copyWith(
+        orderHistoryItemPoAttachments: [
+          PoDocuments.empty().copyWith(name: 'fake_name1', url: 'fake_url1'),
+        ],
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+            showPOAttachment: true,
+          ),
+        ),
+      );
+
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItemWithAttachments,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItemWithAttachments],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final viewByItemAttachmentSection =
+          find.byType(ViewByItemAttachmentSection);
+      expect(viewByItemAttachmentSection, findsOneWidget);
+      final attachmentSection = find.textContaining('Attachments');
+      expect(attachmentSection, findsOneWidget);
+      final attachmentDownloadButton =
+          find.byKey(WidgetKeys.genericKey(key: 'fake_name1DownloadButton'));
+      expect(attachmentDownloadButton, findsOneWidget);
+      await tester.tap(attachmentDownloadButton);
+      await tester.pump();
+      verify(
+        () => poAttachmentBlocMock.add(
+          PoAttachmentEvent.downloadFile(
+            files: [
+              fakeOrderHistoryItemWithAttachments
+                  .orderHistoryItemPoAttachments.first
+            ],
+          ),
+        ),
+      ).called(1);
+    });
+    testWidgets('Attachment Section view more test with data', (tester) async {
+      final fakeOrderHistoryItemWithAttachments = fakeOrderHistoryItem.copyWith(
+        orderHistoryItemPoAttachments: [
+          PoDocuments.empty().copyWith(name: 'fake_name1', url: 'fake_url1'),
+          PoDocuments.empty().copyWith(name: 'fake_name2', url: 'fake_url2'),
+        ],
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+            showPOAttachment: true,
+          ),
+        ),
+      );
+
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isExpanded: true,
+          orderHistoryItem: fakeOrderHistoryItemWithAttachments,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItemWithAttachments],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final viewByItemAttachmentSection =
+          find.byType(ViewByItemAttachmentSection);
+      expect(viewByItemAttachmentSection, findsOneWidget);
+      final attachmentSection = find.textContaining('Attachments');
+      expect(attachmentSection, findsOneWidget);
+      final attachmentDownloadButton =
+          find.byKey(WidgetKeys.genericKey(key: 'fake_name1DownloadButton'));
+      expect(attachmentDownloadButton, findsOneWidget);
+      final viewByItemsOrderDetailsShowMoreAttachments =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailsShowMoreAttachments);
+      expect(viewByItemsOrderDetailsShowMoreAttachments, findsOneWidget);
+      await tester.tap(viewByItemsOrderDetailsShowMoreAttachments);
+      await tester.pump();
+      verify(
+        () => mockViewByItemDetailsBloc.add(
+          const ViewByItemDetailsEvent.updateIsExpanded(
+            isExpanded: false,
+          ),
+        ),
+      ).called(1);
+    });
+    testWidgets('Attachment Section Download Success test', (tester) async {
+      final fakeOrderHistoryItemWithAttachments = fakeOrderHistoryItem.copyWith(
+        orderHistoryItemPoAttachments: [
+          PoDocuments.empty().copyWith(name: 'fake_name1', url: 'fake_url1'),
+        ],
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+            showPOAttachment: true,
+          ),
+        ),
+      );
+
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isExpanded: true,
+          orderHistoryItem: fakeOrderHistoryItemWithAttachments,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItemWithAttachments],
+          ),
+        ),
+      );
+      final expectedStates = [
+        PoAttachmentState.initial().copyWith(
+          isFetching: true,
+        ),
+        PoAttachmentState.initial().copyWith(
+          failureOrSuccessOption: optionOf(const Right(PermissionStatus)),
+          fileOperationMode: FileOperationMode.download,
+        ),
+      ];
+      whenListen(
+        poAttachmentBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final viewByItemAttachmentSection =
+          find.byType(ViewByItemAttachmentSection);
+      expect(viewByItemAttachmentSection, findsOneWidget);
+      final attachmentSection = find.textContaining('Attachments');
+      expect(attachmentSection, findsOneWidget);
+    });
+
+    testWidgets('Attachment Section Download failure test', (tester) async {
+      final fakeOrderHistoryItemWithAttachments = fakeOrderHistoryItem.copyWith(
+        orderHistoryItemPoAttachments: [
+          PoDocuments.empty().copyWith(name: 'fake_name1', url: 'fake_url1'),
+        ],
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+            showPOAttachment: true,
+          ),
+        ),
+      );
+
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isExpanded: true,
+          orderHistoryItem: fakeOrderHistoryItemWithAttachments,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItemWithAttachments],
+          ),
+        ),
+      );
+      final expectedStates = [
+        PoAttachmentState.initial().copyWith(
+          isFetching: true,
+        ),
+        PoAttachmentState.initial().copyWith(
+          failureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fakeMessage'))),
+          fileOperationMode: FileOperationMode.download,
+        ),
+      ];
+      whenListen(
+        poAttachmentBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final viewByItemAttachmentSection =
+          find.byType(ViewByItemAttachmentSection);
+      expect(viewByItemAttachmentSection, findsOneWidget);
+      final attachmentSection = find.textContaining('Attachments');
+      expect(attachmentSection, findsOneWidget);
+      final successMsg =
+          find.textContaining('Attachments downloaded successfully.');
+      expect(successMsg, findsNothing);
     });
   });
 }

@@ -82,11 +82,13 @@ class OrderNumberSection extends StatelessWidget {
                   ? Align(
                       alignment: Alignment.center,
                       child: LoadingAnimationWidget.horizontalRotatingDots(
+                        key: WidgetKeys.viewByOrderOrderNumberLoading,
                         color: ZPColors.attachmentColor,
                         size: 20,
                       ),
                     )
                   : IconButton(
+                      key: WidgetKeys.viewByOrderOrderNumberButton,
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
                       onPressed: () => context.read<ViewByOrderBloc>().add(

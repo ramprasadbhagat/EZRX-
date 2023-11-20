@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 
 // Customer code info
 const _fakeBuilding = 'fakeBuilding';
@@ -19,3 +20,7 @@ final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
 );
 
 final fakeEmptyCustomerCodeInfo = CustomerCodeInfo.empty();
+final fakeCustomerCodeInfoWithCustomerGrp4 = CustomerCodeInfo.empty().copyWith(
+  customerAttr7: CustomerAttr7('ZEV'),
+  customerGrp4: CustomerGrp4('VR'),
+);

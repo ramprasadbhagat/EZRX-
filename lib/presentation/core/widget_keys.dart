@@ -1126,10 +1126,24 @@ class WidgetKeys {
       const Key('viewByItemsOrderDetailOrderCode');
   static Key viewByItemsOrderDetailOrderDate =
       const Key('viewByItemsOrderDetailOrderDate');
+  static Key viewByItemsOrderDetailsInvoiceNumberLoading =
+      const Key('viewByItemsOrderDetailsInvoiceNumberLoading');
+  static Key viewByItemsOrderDetailsInvoiceNumberButton =
+      const Key('viewByItemsOrderDetailsInvoiceNumberButton');
   static Key viewByItemsOrderDetailInvoiceNumber =
       const Key('viewByItemsOrderDetailInvoiceNumber');
   static Key viewByItemsOrderDetailPoReference =
       const Key('viewByItemsOrderDetailPoReference');
+  static Key viewByItemsOrderDetailsContactPerson =
+      const Key('viewByItemsOrderDetailsContactPerson');
+  static Key viewByItemsOrderDetailsRequestedDeliveryDate =
+      const Key('viewByItemsOrderDetailsRequestedDeliveryDate');
+  static Key viewByItemsOrderDetailsContactNumber =
+      const Key('viewByItemsOrderDetailsContactNumber');
+  static Key viewByItemsOrderDetailsNoAttachments =
+      const Key('viewByItemsOrderDetailsNoAttachments');
+  static Key viewByItemsOrderDetailsShowMoreAttachments =
+      const Key('viewByItemsOrderDetailsShowMoreAttachments');
   static Key viewByItemDetailBuyAgainButton =
       const Key('viewByItemDetailBuyAgainButton');
   //============================================================
@@ -1144,6 +1158,10 @@ class WidgetKeys {
       const Key('viewByOrderBuyAgainButtonKey');
   static Key viewByOrderSubtotalKey = const Key('viewByOrderSubtotalKey');
   static Key viewByOrderGrandTotalKey = const Key('viewByOrderGrandTotalKey');
+  static Key viewByOrderOrderNumberLoading =
+      const Key('viewByOrderOrderNumberLoading');
+  static Key viewByOrderOrderNumberButton =
+      const Key('viewByOrderOrderNumberButton');
   //============================================================
   // View By Orders filter bottom sheet
   //============================================================

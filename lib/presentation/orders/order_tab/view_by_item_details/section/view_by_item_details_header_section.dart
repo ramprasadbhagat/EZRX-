@@ -71,6 +71,8 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
               ),
               config.enableFutureDeliveryDay
                   ? BalanceTextRow(
+                      key: WidgetKeys
+                          .viewByItemsOrderDetailsRequestedDeliveryDate,
                       keyText: context.tr('Requested Delivery Date'),
                       valueText:
                           orderHistoryItem.requestedDeliveryDate.dateString,
@@ -97,6 +99,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
               // ): const SizedBox.shrink(),
               config.enableMobileNumber
                   ? BalanceTextRow(
+                      key: WidgetKeys.viewByItemsOrderDetailsContactPerson,
                       keyText: context.tr('Contact person'),
                       valueText: orderHistoryItem.orderBy,
                       keyTextStyle:
@@ -111,6 +114,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                   : const SizedBox.shrink(),
               config.enableMobileNumber
                   ? BalanceTextRow(
+                      key: WidgetKeys.viewByItemsOrderDetailsContactNumber,
                       keyText: context.tr('Contact number'),
                       valueText: orderHistoryItem
                           .telephoneNumber.displayTelephoneNumber,

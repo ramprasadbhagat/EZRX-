@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -98,11 +99,15 @@ class InvoiceNumberSection extends StatelessWidget {
                               alignment: Alignment.center,
                               child:
                                   LoadingAnimationWidget.horizontalRotatingDots(
+                                key: WidgetKeys
+                                    .viewByItemsOrderDetailsInvoiceNumberLoading,
                                 color: ZPColors.attachmentColor,
                                 size: 20,
                               ),
                             )
                           : IconButton(
+                              key: WidgetKeys
+                                  .viewByItemsOrderDetailsInvoiceNumberButton,
                               padding: EdgeInsets.zero,
                               constraints: const BoxConstraints(),
                               onPressed: () => context
