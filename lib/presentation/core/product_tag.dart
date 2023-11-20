@@ -62,6 +62,7 @@ class ProductTag extends StatelessWidget {
         labelStyle: labelStyle,
       );
   factory ProductTag.covidTag({TextStyle? labelStyle}) => ProductTag._(
+        key: WidgetKeys.covidLabel,
         labelTag: 'Covid-19',
         backgroundColor: ZPColors.invoiceStatusBlue,
         textColor: ZPColors.skyBlueColor,

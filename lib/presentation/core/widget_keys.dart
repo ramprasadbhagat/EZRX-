@@ -632,6 +632,7 @@ class WidgetKeys {
       Key('bundleMaterialCard$materialNumber');
   static const Key materialNumberText = Key('materialNumberText');
   static const Key favouriteIcon = Key('favouriteIcon');
+  static const Key covidLabel = Key('covidLabel');
   //============================================================
   //  ProductSearch Keys
   //============================================================

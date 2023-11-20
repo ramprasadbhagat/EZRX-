@@ -602,5 +602,106 @@ void main() {
         ),
       ],
     );
+
+    blocTest<MaterialPriceBloc, MaterialPriceState>(
+      'Fetch price success for foc materials',
+      build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
+      ),
+      act: (MaterialPriceBloc bloc) => bloc.add(
+        MaterialPriceEvent.fetch(
+          materials: [fakeMaterialQuery.first.copyWith(isFOCMaterial: true)],
+          comboDealEligible: false,
+        ),
+      ),
+      expect: () => [
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          isFetching: true,
+        ),
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          isFetching: true,
+          materialPrice: {
+            fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
+              materialNumber: fakeMaterialQuery.first.materialNumber,
+              isValid: false,
+            )
+          },
+        ),
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          materialPrice: {
+            fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
+              materialNumber: fakeMaterialQuery.first.materialNumber,
+              isValid: false,
+            )
+          },
+        ),
+      ],
+    );
+    blocTest<MaterialPriceBloc, MaterialPriceState>(
+      'Fetch price success for foc materials in cart',
+      build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        salesConfigs: fakeEmptySalesConfigs,
+      ),
+      act: (MaterialPriceBloc bloc) => bloc.add(
+        MaterialPriceEvent.fetchPriceCartProduct(
+          products: [fakeMaterialQuery.first.copyWith(isFOCMaterial: true)],
+          comboDealEligible: false,
+        ),
+      ),
+      expect: () => [
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          isFetching: true,
+        ),
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          isFetching: true,
+          materialPrice: {
+            fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
+              materialNumber: fakeMaterialQuery.first.materialNumber,
+              isValid: false,
+            )
+          },
+        ),
+        MaterialPriceState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          materialPrice: {
+            fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
+              materialNumber: fakeMaterialQuery.first.materialNumber,
+              isValid: false,
+            )
+          },
+        ),
+      ],
+    );
   });
 }

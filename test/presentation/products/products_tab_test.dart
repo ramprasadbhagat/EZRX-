@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -78,6 +79,9 @@ class OrderEligibilityBlocMock
     extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
     implements OrderEligibilityBloc {}
 
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
 class MockAppRouter extends Mock implements AppRouter {}
 
 void main() {
@@ -91,6 +95,7 @@ void main() {
   late AppRouter autoRouterMock;
   late MaterialFilterBlocMock materialFilterBlocMock;
   late ProductImageBlocMock productImageBlocMock;
+  late SalesOrgBlocMock salesOrgBlocMock;
   late MaterialResponse materialResponseMock;
   late List<Price> priceList;
   late Map<MaterialNumber, Price> materialPriceMock;
@@ -121,6 +126,7 @@ void main() {
         materialFilterBlocMock = MaterialFilterBlocMock();
         productImageBlocMock = ProductImageBlocMock();
         cartBlocMock = CartBlocMock();
+        salesOrgBlocMock = SalesOrgBlocMock();
         materialPriceMock = Map.fromEntries(
           priceList.map((price) => MapEntry(price.materialNumber, price)),
         );
@@ -142,6 +148,7 @@ void main() {
         );
         when(() => autoRouterMock.currentPath).thenReturn('fake-path');
         when(() => cartBlocMock.state).thenReturn(CartState.initial());
+        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
         when(() => materialFilterBlocMock.state)
             .thenReturn(MaterialFilterState.initial());
         when(() => productImageBlocMock.state)
@@ -164,6 +171,9 @@ void main() {
             ),
             BlocProvider<CartBloc>(
               create: (context) => cartBlocMock,
+            ),
+            BlocProvider<SalesOrgBloc>(
+              create: (context) => salesOrgBlocMock,
             ),
             BlocProvider<ProductDetailBloc>(
               create: (context) => productDetailBlocMock,
@@ -573,6 +583,95 @@ void main() {
             ),
           ),
         ).called(1);
+      });
+      testWidgets('Test the Covid filter button', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            customerCodeInfo: fakeCustomerCodeInfoForCovid,
+            user: fakeRootAdminUser,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+            configs: fakeSalesOrganisationConfigs,
+          ),
+        );
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfoForCovid,
+            shipToInfo: fakeShipToInfo,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final covidFilterButton = find.text(
+          'Covid-19'.tr(),
+        );
+        expect(covidFilterButton, findsOneWidget);
+        await tester.tap(covidFilterButton);
+        await tester.pump();
+        verify(
+          () => materialListBlocMock.add(
+            MaterialListEvent.fetch(
+              salesOrganisation: fakePHSalesOrganisation,
+              configs: fakeSalesOrganisationConfigs,
+              customerCodeInfo: fakeCustomerCodeInfoForCovid,
+              shipToInfo: fakeShipToInfo,
+              selectedMaterialFilter: MaterialFilter.empty().copyWith(
+                isFOCMaterial: true,
+              ),
+            ),
+          ),
+        ).called(1);
+        verify(
+          () => materialFilterBlocMock.add(
+            const MaterialFilterEvent.updateSelectedMaterialFilter(
+              MaterialFilterType.isFOCMaterial,
+              true,
+            ),
+          ),
+        ).called(1);
+      });
+      testWidgets(
+          'Test the Covid tag on product item and the price of the product',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            customerCodeInfo: fakeCustomerCodeInfoForCovid,
+            user: fakeRootAdminUser,
+          ),
+        );
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList: [
+              materialResponseMock.products.first.copyWith(
+                type: MaterialInfoType('material'),
+                isFOCMaterial: true,
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final materialListMaterialCard = find.byKey(
+          WidgetKeys.materialListMaterialCard,
+        );
+        expect(materialListMaterialCard, findsOneWidget);
+        final covidLabel = find.byKey(
+          WidgetKeys.covidLabel,
+        );
+        expect(covidLabel, findsOneWidget);
+        final priceText = find.text(
+          'Price Not Available',
+        );
+        expect(priceText, findsOneWidget);
       });
     },
   );

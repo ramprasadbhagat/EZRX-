@@ -18,6 +18,12 @@ final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
   billToInfos: [_fakeBillToInfo],
   customerCodeSoldTo: _fakeCustomerCodeSoldTo,
 );
+final fakeCustomerCodeInfoForCovid = CustomerCodeInfo.empty().copyWith(
+  shipToInfos: [fakeShipToInfo],
+  billToInfos: [_fakeBillToInfo],
+  customerCodeSoldTo: _fakeCustomerCodeSoldTo,
+  customerGrp4: CustomerGrp4('VR'),
+);
 
 final fakeEmptyCustomerCodeInfo = CustomerCodeInfo.empty();
 final fakeCustomerCodeInfoWithCustomerGrp4 = CustomerCodeInfo.empty().copyWith(

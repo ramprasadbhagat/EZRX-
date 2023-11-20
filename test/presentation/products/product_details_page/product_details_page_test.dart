@@ -1385,6 +1385,44 @@ void main() {
           );
         },
       );
+
+      testWidgets(
+          'Test the Covid tag on product item and the price of the product',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            customerCodeInfo: fakeCustomerCodeInfoForCovid,
+            user: fakeRootAdminUser,
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(isFOCMaterial: true),
+              stockInfo: stockInfo,
+              productItem: productItemWithProductItemXp,
+              similarProduct: similarProducts,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final productDetailList = find.byKey(
+          WidgetKeys.productDetailList,
+        );
+        expect(productDetailList, findsOneWidget);
+        final covidLabel = find.byKey(
+          WidgetKeys.covidLabel,
+        );
+        expect(covidLabel, findsOneWidget);
+        final priceText = find.text(
+          'Price Not Available',
+        );
+        expect(priceText, findsOneWidget);
+      });
     },
   );
 }

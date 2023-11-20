@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -2202,6 +2203,44 @@ void main() {
         await tester.tap(grandTotal);
         await tester.pumpAndSettle();
         expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
+      });
+      testWidgets('Covid material test', (tester) async {
+        final cartProduct = [
+          mockCartItems.first.copyWith(
+            materialInfo: mockCartItems.first.materialInfo.copyWith(
+              isFOCMaterial: true,
+              type: MaterialInfoType.material(),
+            ),
+            price: Price.empty(),
+          )
+        ];
+        final orderEligibilityState = OrderEligibilityState.initial().copyWith(
+          configs: fakePHSalesOrganisationConfigsMaterialWithoutPrice,
+          cartItems: cartProduct,
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: cartProduct,
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          orderEligibilityState,
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final covidTag = find.byType(CovidTag);
+        expect(covidTag, findsOneWidget);
+        final priceText = find.byKey(WidgetKeys.cartItemProductTotalPrice);
+        expect(priceText, findsOneWidget);
+        final cartPagePriceMessageWidget =
+            find.byKey(WidgetKeys.cartPagePriceMessageWidget);
+        expect(cartPagePriceMessageWidget, findsOneWidget);
+        final cartPagePriceMessage = find.text(
+          'Price is not available for at least one item. Grand total reflected may not be accurate.',
+        );
+        expect(cartPagePriceMessage, findsOneWidget);
       });
     },
   );
