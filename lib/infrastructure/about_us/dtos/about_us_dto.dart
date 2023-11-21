@@ -9,31 +9,24 @@ class AboutUsDto with _$AboutUsDto {
   const AboutUsDto._();
 
   const factory AboutUsDto({
-    @JsonKey(name: 'banner', readValue: bannerReadValue)
-        required BannerTemplateDto banner,
-    @JsonKey(
-      name: 'certifications',
-      readValue: certificationReadValue,
-    )
+    @JsonKey(readValue: bannerReadValue) required BannerTemplateDto banner,
+    @JsonKey(readValue: certificationReadValue)
         required SliderTemplateDto certifications,
-    @JsonKey(name: 'whoWeAre', readValue: whoWeAreReadValue)
+    @JsonKey(readValue: whoWeAreReadValue)
         required HorizontalListTemplateDto whoWeAre,
-    @JsonKey(name: 'whyUs', readValue: whyUsReadValue)
-        required ContentSplitTemplateDto whyUs,
-    @JsonKey(name: 'ourPartners', readValue: ourPartnerReadValue)
+    @JsonKey(readValue: ourPartnerReadValue)
         required MediaListTemplateDto ourPartners,
-    @JsonKey(name: 'reachUs', readValue: reachUsReadValue)
-        required ContentSplitTemplateDto reachUs,
+    @JsonKey(readValue: contentSplitReadValue)
+        required List<ContentSplitTemplateDto> contentSplit,
   }) = _AboutUsDto;
 
   AboutUs toDomain() {
     return AboutUs(
-      whyUs: whyUs.toDomain,
       banner: banner.toDomain,
-      reachUs: reachUs.toDomain,
       whoWeAre: whoWeAre.toDomain,
       ourPartners: ourPartners.toDomain,
       certifications: certifications.toDomain,
+      contentSplit: contentSplit.map((e) => e.toDomain).toList(),
     );
   }
 
@@ -49,6 +42,9 @@ class BannerTemplateDto with _$BannerTemplateDto {
         required MediaValueDto media,
     @JsonKey(name: 'content', readValue: readDynamicValueKey)
         required TemplateValueItemDto content,
+    @JsonKey(name: 'title', readValue: readValue) required String title,
+    @JsonKey(name: 'buttonName', readValue: readValue)
+        required String buttonName,
   }) = _BannerTemplateDto;
 
   factory BannerTemplateDto.fromJson(Map<String, dynamic> json) =>
@@ -57,6 +53,8 @@ class BannerTemplateDto with _$BannerTemplateDto {
   BannerTemplate get toDomain => BannerTemplate(
         media: media.toDomain,
         content: content.value,
+        buttonName: buttonName,
+        title: title,
       );
 }
 
@@ -249,6 +247,8 @@ class TemplateValueItemDto with _$TemplateValueItemDto {
       _$TemplateValueItemDtoFromJson(json);
 }
 
+String readValue(Map json, String key) => json[key]?['value'] ?? '';
+
 Map<String, dynamic> readDynamicValueKey(Map json, String key) =>
     json[key] ?? <String, dynamic>{};
 
@@ -263,7 +263,7 @@ Map<String, dynamic> whoWeAreReadValue(Map json, String _) {
 
   return values.firstWhere(
     (element) =>
-        (element['name'] as String).toLowerCase().contains('who we are'),
+        (element['template']?['name'] ?? '').contains('Horizontal List'),
     orElse: () => <String, dynamic>{},
   );
 }
@@ -272,7 +272,7 @@ Map<String, dynamic> certificationReadValue(Map json, String _) {
   final values = json['value'] as List;
 
   return values.firstWhere(
-    (element) => element.containsKey('certificates'),
+    (element) => (element['template']?['name'] ?? '').contains('Slider'),
     orElse: () => <String, dynamic>{},
   );
 }
@@ -286,35 +286,22 @@ Map<String, dynamic> bannerReadValue(Map json, String _) {
   );
 }
 
-Map<String, dynamic> whyUsReadValue(Map json, String _) {
-  final values = json['value'] as List;
-
-  return values.firstWhere(
-    (element) => ((element['title']?['value'] ?? '') as String)
-        .toLowerCase()
-        .contains('why us'),
-    orElse: () => <String, dynamic>{},
-  );
-}
-
 Map<String, dynamic> ourPartnerReadValue(Map json, String _) {
   final values = json['value'] as List;
 
   return values.firstWhere(
-    (element) => ((element['title']?['value'] ?? '') as String)
-        .toLowerCase()
-        .contains('our partners'),
+    (element) => (element['template']?['name'] ?? '').contains('Media List'),
     orElse: () => <String, dynamic>{},
   );
 }
 
-Map<String, dynamic> reachUsReadValue(Map json, String _) {
+List<dynamic> contentSplitReadValue(Map json, String _) {
   final values = json['value'] as List;
 
-  return values.firstWhere(
-    (element) => ((element['title']?['value'] ?? '') as String)
-        .toLowerCase()
-        .contains('reaching us'),
-    orElse: () => <String, dynamic>{},
-  );
+  return values
+      .where(
+        (element) =>
+            (element['template']?['name'] ?? '').contains('Content Split'),
+      )
+      .toList();
 }

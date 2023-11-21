@@ -42,6 +42,9 @@ class AboutUsQueryMutation {
             content: field(name: "Content") {
               ...textFields
             }
+            buttonName {
+              value
+            }
           }
         }
 

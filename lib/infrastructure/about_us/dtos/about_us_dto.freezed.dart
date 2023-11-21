@@ -20,18 +20,17 @@ AboutUsDto _$AboutUsDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AboutUsDto {
-  @JsonKey(name: 'banner', readValue: bannerReadValue)
+  @JsonKey(readValue: bannerReadValue)
   BannerTemplateDto get banner => throw _privateConstructorUsedError;
-  @JsonKey(name: 'certifications', readValue: certificationReadValue)
+  @JsonKey(readValue: certificationReadValue)
   SliderTemplateDto get certifications => throw _privateConstructorUsedError;
-  @JsonKey(name: 'whoWeAre', readValue: whoWeAreReadValue)
+  @JsonKey(readValue: whoWeAreReadValue)
   HorizontalListTemplateDto get whoWeAre => throw _privateConstructorUsedError;
-  @JsonKey(name: 'whyUs', readValue: whyUsReadValue)
-  ContentSplitTemplateDto get whyUs => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ourPartners', readValue: ourPartnerReadValue)
+  @JsonKey(readValue: ourPartnerReadValue)
   MediaListTemplateDto get ourPartners => throw _privateConstructorUsedError;
-  @JsonKey(name: 'reachUs', readValue: reachUsReadValue)
-  ContentSplitTemplateDto get reachUs => throw _privateConstructorUsedError;
+  @JsonKey(readValue: contentSplitReadValue)
+  List<ContentSplitTemplateDto> get contentSplit =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,25 +45,18 @@ abstract class $AboutUsDtoCopyWith<$Res> {
       _$AboutUsDtoCopyWithImpl<$Res, AboutUsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'banner', readValue: bannerReadValue)
-      BannerTemplateDto banner,
-      @JsonKey(name: 'certifications', readValue: certificationReadValue)
+      {@JsonKey(readValue: bannerReadValue) BannerTemplateDto banner,
+      @JsonKey(readValue: certificationReadValue)
       SliderTemplateDto certifications,
-      @JsonKey(name: 'whoWeAre', readValue: whoWeAreReadValue)
-      HorizontalListTemplateDto whoWeAre,
-      @JsonKey(name: 'whyUs', readValue: whyUsReadValue)
-      ContentSplitTemplateDto whyUs,
-      @JsonKey(name: 'ourPartners', readValue: ourPartnerReadValue)
-      MediaListTemplateDto ourPartners,
-      @JsonKey(name: 'reachUs', readValue: reachUsReadValue)
-      ContentSplitTemplateDto reachUs});
+      @JsonKey(readValue: whoWeAreReadValue) HorizontalListTemplateDto whoWeAre,
+      @JsonKey(readValue: ourPartnerReadValue) MediaListTemplateDto ourPartners,
+      @JsonKey(readValue: contentSplitReadValue)
+      List<ContentSplitTemplateDto> contentSplit});
 
   $BannerTemplateDtoCopyWith<$Res> get banner;
   $SliderTemplateDtoCopyWith<$Res> get certifications;
   $HorizontalListTemplateDtoCopyWith<$Res> get whoWeAre;
-  $ContentSplitTemplateDtoCopyWith<$Res> get whyUs;
   $MediaListTemplateDtoCopyWith<$Res> get ourPartners;
-  $ContentSplitTemplateDtoCopyWith<$Res> get reachUs;
 }
 
 /// @nodoc
@@ -83,9 +75,8 @@ class _$AboutUsDtoCopyWithImpl<$Res, $Val extends AboutUsDto>
     Object? banner = null,
     Object? certifications = null,
     Object? whoWeAre = null,
-    Object? whyUs = null,
     Object? ourPartners = null,
-    Object? reachUs = null,
+    Object? contentSplit = null,
   }) {
     return _then(_value.copyWith(
       banner: null == banner
@@ -100,18 +91,14 @@ class _$AboutUsDtoCopyWithImpl<$Res, $Val extends AboutUsDto>
           ? _value.whoWeAre
           : whoWeAre // ignore: cast_nullable_to_non_nullable
               as HorizontalListTemplateDto,
-      whyUs: null == whyUs
-          ? _value.whyUs
-          : whyUs // ignore: cast_nullable_to_non_nullable
-              as ContentSplitTemplateDto,
       ourPartners: null == ourPartners
           ? _value.ourPartners
           : ourPartners // ignore: cast_nullable_to_non_nullable
               as MediaListTemplateDto,
-      reachUs: null == reachUs
-          ? _value.reachUs
-          : reachUs // ignore: cast_nullable_to_non_nullable
-              as ContentSplitTemplateDto,
+      contentSplit: null == contentSplit
+          ? _value.contentSplit
+          : contentSplit // ignore: cast_nullable_to_non_nullable
+              as List<ContentSplitTemplateDto>,
     ) as $Val);
   }
 
@@ -141,25 +128,9 @@ class _$AboutUsDtoCopyWithImpl<$Res, $Val extends AboutUsDto>
 
   @override
   @pragma('vm:prefer-inline')
-  $ContentSplitTemplateDtoCopyWith<$Res> get whyUs {
-    return $ContentSplitTemplateDtoCopyWith<$Res>(_value.whyUs, (value) {
-      return _then(_value.copyWith(whyUs: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $MediaListTemplateDtoCopyWith<$Res> get ourPartners {
     return $MediaListTemplateDtoCopyWith<$Res>(_value.ourPartners, (value) {
       return _then(_value.copyWith(ourPartners: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ContentSplitTemplateDtoCopyWith<$Res> get reachUs {
-    return $ContentSplitTemplateDtoCopyWith<$Res>(_value.reachUs, (value) {
-      return _then(_value.copyWith(reachUs: value) as $Val);
     });
   }
 }
@@ -173,18 +144,13 @@ abstract class _$$_AboutUsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'banner', readValue: bannerReadValue)
-      BannerTemplateDto banner,
-      @JsonKey(name: 'certifications', readValue: certificationReadValue)
+      {@JsonKey(readValue: bannerReadValue) BannerTemplateDto banner,
+      @JsonKey(readValue: certificationReadValue)
       SliderTemplateDto certifications,
-      @JsonKey(name: 'whoWeAre', readValue: whoWeAreReadValue)
-      HorizontalListTemplateDto whoWeAre,
-      @JsonKey(name: 'whyUs', readValue: whyUsReadValue)
-      ContentSplitTemplateDto whyUs,
-      @JsonKey(name: 'ourPartners', readValue: ourPartnerReadValue)
-      MediaListTemplateDto ourPartners,
-      @JsonKey(name: 'reachUs', readValue: reachUsReadValue)
-      ContentSplitTemplateDto reachUs});
+      @JsonKey(readValue: whoWeAreReadValue) HorizontalListTemplateDto whoWeAre,
+      @JsonKey(readValue: ourPartnerReadValue) MediaListTemplateDto ourPartners,
+      @JsonKey(readValue: contentSplitReadValue)
+      List<ContentSplitTemplateDto> contentSplit});
 
   @override
   $BannerTemplateDtoCopyWith<$Res> get banner;
@@ -193,11 +159,7 @@ abstract class _$$_AboutUsDtoCopyWith<$Res>
   @override
   $HorizontalListTemplateDtoCopyWith<$Res> get whoWeAre;
   @override
-  $ContentSplitTemplateDtoCopyWith<$Res> get whyUs;
-  @override
   $MediaListTemplateDtoCopyWith<$Res> get ourPartners;
-  @override
-  $ContentSplitTemplateDtoCopyWith<$Res> get reachUs;
 }
 
 /// @nodoc
@@ -214,9 +176,8 @@ class __$$_AboutUsDtoCopyWithImpl<$Res>
     Object? banner = null,
     Object? certifications = null,
     Object? whoWeAre = null,
-    Object? whyUs = null,
     Object? ourPartners = null,
-    Object? reachUs = null,
+    Object? contentSplit = null,
   }) {
     return _then(_$_AboutUsDto(
       banner: null == banner
@@ -231,18 +192,14 @@ class __$$_AboutUsDtoCopyWithImpl<$Res>
           ? _value.whoWeAre
           : whoWeAre // ignore: cast_nullable_to_non_nullable
               as HorizontalListTemplateDto,
-      whyUs: null == whyUs
-          ? _value.whyUs
-          : whyUs // ignore: cast_nullable_to_non_nullable
-              as ContentSplitTemplateDto,
       ourPartners: null == ourPartners
           ? _value.ourPartners
           : ourPartners // ignore: cast_nullable_to_non_nullable
               as MediaListTemplateDto,
-      reachUs: null == reachUs
-          ? _value.reachUs
-          : reachUs // ignore: cast_nullable_to_non_nullable
-              as ContentSplitTemplateDto,
+      contentSplit: null == contentSplit
+          ? _value._contentSplit
+          : contentSplit // ignore: cast_nullable_to_non_nullable
+              as List<ContentSplitTemplateDto>,
     ));
   }
 }
@@ -251,44 +208,42 @@ class __$$_AboutUsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AboutUsDto extends _AboutUsDto {
   const _$_AboutUsDto(
-      {@JsonKey(name: 'banner', readValue: bannerReadValue)
-      required this.banner,
-      @JsonKey(name: 'certifications', readValue: certificationReadValue)
-      required this.certifications,
-      @JsonKey(name: 'whoWeAre', readValue: whoWeAreReadValue)
-      required this.whoWeAre,
-      @JsonKey(name: 'whyUs', readValue: whyUsReadValue) required this.whyUs,
-      @JsonKey(name: 'ourPartners', readValue: ourPartnerReadValue)
-      required this.ourPartners,
-      @JsonKey(name: 'reachUs', readValue: reachUsReadValue)
-      required this.reachUs})
-      : super._();
+      {@JsonKey(readValue: bannerReadValue) required this.banner,
+      @JsonKey(readValue: certificationReadValue) required this.certifications,
+      @JsonKey(readValue: whoWeAreReadValue) required this.whoWeAre,
+      @JsonKey(readValue: ourPartnerReadValue) required this.ourPartners,
+      @JsonKey(readValue: contentSplitReadValue)
+      required final List<ContentSplitTemplateDto> contentSplit})
+      : _contentSplit = contentSplit,
+        super._();
 
   factory _$_AboutUsDto.fromJson(Map<String, dynamic> json) =>
       _$$_AboutUsDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'banner', readValue: bannerReadValue)
+  @JsonKey(readValue: bannerReadValue)
   final BannerTemplateDto banner;
   @override
-  @JsonKey(name: 'certifications', readValue: certificationReadValue)
+  @JsonKey(readValue: certificationReadValue)
   final SliderTemplateDto certifications;
   @override
-  @JsonKey(name: 'whoWeAre', readValue: whoWeAreReadValue)
+  @JsonKey(readValue: whoWeAreReadValue)
   final HorizontalListTemplateDto whoWeAre;
   @override
-  @JsonKey(name: 'whyUs', readValue: whyUsReadValue)
-  final ContentSplitTemplateDto whyUs;
-  @override
-  @JsonKey(name: 'ourPartners', readValue: ourPartnerReadValue)
+  @JsonKey(readValue: ourPartnerReadValue)
   final MediaListTemplateDto ourPartners;
+  final List<ContentSplitTemplateDto> _contentSplit;
   @override
-  @JsonKey(name: 'reachUs', readValue: reachUsReadValue)
-  final ContentSplitTemplateDto reachUs;
+  @JsonKey(readValue: contentSplitReadValue)
+  List<ContentSplitTemplateDto> get contentSplit {
+    if (_contentSplit is EqualUnmodifiableListView) return _contentSplit;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_contentSplit);
+  }
 
   @override
   String toString() {
-    return 'AboutUsDto(banner: $banner, certifications: $certifications, whoWeAre: $whoWeAre, whyUs: $whyUs, ourPartners: $ourPartners, reachUs: $reachUs)';
+    return 'AboutUsDto(banner: $banner, certifications: $certifications, whoWeAre: $whoWeAre, ourPartners: $ourPartners, contentSplit: $contentSplit)';
   }
 
   @override
@@ -301,16 +256,16 @@ class _$_AboutUsDto extends _AboutUsDto {
                 other.certifications == certifications) &&
             (identical(other.whoWeAre, whoWeAre) ||
                 other.whoWeAre == whoWeAre) &&
-            (identical(other.whyUs, whyUs) || other.whyUs == whyUs) &&
             (identical(other.ourPartners, ourPartners) ||
                 other.ourPartners == ourPartners) &&
-            (identical(other.reachUs, reachUs) || other.reachUs == reachUs));
+            const DeepCollectionEquality()
+                .equals(other._contentSplit, _contentSplit));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, banner, certifications, whoWeAre,
-      whyUs, ourPartners, reachUs);
+      ourPartners, const DeepCollectionEquality().hash(_contentSplit));
 
   @JsonKey(ignore: true)
   @override
@@ -328,41 +283,37 @@ class _$_AboutUsDto extends _AboutUsDto {
 
 abstract class _AboutUsDto extends AboutUsDto {
   const factory _AboutUsDto(
-      {@JsonKey(name: 'banner', readValue: bannerReadValue)
-      required final BannerTemplateDto banner,
-      @JsonKey(name: 'certifications', readValue: certificationReadValue)
-      required final SliderTemplateDto certifications,
-      @JsonKey(name: 'whoWeAre', readValue: whoWeAreReadValue)
-      required final HorizontalListTemplateDto whoWeAre,
-      @JsonKey(name: 'whyUs', readValue: whyUsReadValue)
-      required final ContentSplitTemplateDto whyUs,
-      @JsonKey(name: 'ourPartners', readValue: ourPartnerReadValue)
-      required final MediaListTemplateDto ourPartners,
-      @JsonKey(name: 'reachUs', readValue: reachUsReadValue)
-      required final ContentSplitTemplateDto reachUs}) = _$_AboutUsDto;
+          {@JsonKey(readValue: bannerReadValue)
+          required final BannerTemplateDto banner,
+          @JsonKey(readValue: certificationReadValue)
+          required final SliderTemplateDto certifications,
+          @JsonKey(readValue: whoWeAreReadValue)
+          required final HorizontalListTemplateDto whoWeAre,
+          @JsonKey(readValue: ourPartnerReadValue)
+          required final MediaListTemplateDto ourPartners,
+          @JsonKey(readValue: contentSplitReadValue)
+          required final List<ContentSplitTemplateDto> contentSplit}) =
+      _$_AboutUsDto;
   const _AboutUsDto._() : super._();
 
   factory _AboutUsDto.fromJson(Map<String, dynamic> json) =
       _$_AboutUsDto.fromJson;
 
   @override
-  @JsonKey(name: 'banner', readValue: bannerReadValue)
+  @JsonKey(readValue: bannerReadValue)
   BannerTemplateDto get banner;
   @override
-  @JsonKey(name: 'certifications', readValue: certificationReadValue)
+  @JsonKey(readValue: certificationReadValue)
   SliderTemplateDto get certifications;
   @override
-  @JsonKey(name: 'whoWeAre', readValue: whoWeAreReadValue)
+  @JsonKey(readValue: whoWeAreReadValue)
   HorizontalListTemplateDto get whoWeAre;
   @override
-  @JsonKey(name: 'whyUs', readValue: whyUsReadValue)
-  ContentSplitTemplateDto get whyUs;
-  @override
-  @JsonKey(name: 'ourPartners', readValue: ourPartnerReadValue)
+  @JsonKey(readValue: ourPartnerReadValue)
   MediaListTemplateDto get ourPartners;
   @override
-  @JsonKey(name: 'reachUs', readValue: reachUsReadValue)
-  ContentSplitTemplateDto get reachUs;
+  @JsonKey(readValue: contentSplitReadValue)
+  List<ContentSplitTemplateDto> get contentSplit;
   @override
   @JsonKey(ignore: true)
   _$$_AboutUsDtoCopyWith<_$_AboutUsDto> get copyWith =>
@@ -379,6 +330,10 @@ mixin _$BannerTemplateDto {
   MediaValueDto get media => throw _privateConstructorUsedError;
   @JsonKey(name: 'content', readValue: readDynamicValueKey)
   TemplateValueItemDto get content => throw _privateConstructorUsedError;
+  @JsonKey(name: 'title', readValue: readValue)
+  String get title => throw _privateConstructorUsedError;
+  @JsonKey(name: 'buttonName', readValue: readValue)
+  String get buttonName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -395,7 +350,9 @@ abstract class $BannerTemplateDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'media', readValue: mediaReadValue) MediaValueDto media,
       @JsonKey(name: 'content', readValue: readDynamicValueKey)
-      TemplateValueItemDto content});
+      TemplateValueItemDto content,
+      @JsonKey(name: 'title', readValue: readValue) String title,
+      @JsonKey(name: 'buttonName', readValue: readValue) String buttonName});
 
   $MediaValueDtoCopyWith<$Res> get media;
   $TemplateValueItemDtoCopyWith<$Res> get content;
@@ -416,6 +373,8 @@ class _$BannerTemplateDtoCopyWithImpl<$Res, $Val extends BannerTemplateDto>
   $Res call({
     Object? media = null,
     Object? content = null,
+    Object? title = null,
+    Object? buttonName = null,
   }) {
     return _then(_value.copyWith(
       media: null == media
@@ -426,6 +385,14 @@ class _$BannerTemplateDtoCopyWithImpl<$Res, $Val extends BannerTemplateDto>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as TemplateValueItemDto,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      buttonName: null == buttonName
+          ? _value.buttonName
+          : buttonName // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -457,7 +424,9 @@ abstract class _$$_BannerTemplateDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'media', readValue: mediaReadValue) MediaValueDto media,
       @JsonKey(name: 'content', readValue: readDynamicValueKey)
-      TemplateValueItemDto content});
+      TemplateValueItemDto content,
+      @JsonKey(name: 'title', readValue: readValue) String title,
+      @JsonKey(name: 'buttonName', readValue: readValue) String buttonName});
 
   @override
   $MediaValueDtoCopyWith<$Res> get media;
@@ -478,6 +447,8 @@ class __$$_BannerTemplateDtoCopyWithImpl<$Res>
   $Res call({
     Object? media = null,
     Object? content = null,
+    Object? title = null,
+    Object? buttonName = null,
   }) {
     return _then(_$_BannerTemplateDto(
       media: null == media
@@ -488,6 +459,14 @@ class __$$_BannerTemplateDtoCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as TemplateValueItemDto,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      buttonName: null == buttonName
+          ? _value.buttonName
+          : buttonName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -498,7 +477,10 @@ class _$_BannerTemplateDto extends _BannerTemplateDto {
   _$_BannerTemplateDto(
       {@JsonKey(name: 'media', readValue: mediaReadValue) required this.media,
       @JsonKey(name: 'content', readValue: readDynamicValueKey)
-      required this.content})
+      required this.content,
+      @JsonKey(name: 'title', readValue: readValue) required this.title,
+      @JsonKey(name: 'buttonName', readValue: readValue)
+      required this.buttonName})
       : super._();
 
   factory _$_BannerTemplateDto.fromJson(Map<String, dynamic> json) =>
@@ -510,10 +492,16 @@ class _$_BannerTemplateDto extends _BannerTemplateDto {
   @override
   @JsonKey(name: 'content', readValue: readDynamicValueKey)
   final TemplateValueItemDto content;
+  @override
+  @JsonKey(name: 'title', readValue: readValue)
+  final String title;
+  @override
+  @JsonKey(name: 'buttonName', readValue: readValue)
+  final String buttonName;
 
   @override
   String toString() {
-    return 'BannerTemplateDto(media: $media, content: $content)';
+    return 'BannerTemplateDto(media: $media, content: $content, title: $title, buttonName: $buttonName)';
   }
 
   @override
@@ -522,12 +510,16 @@ class _$_BannerTemplateDto extends _BannerTemplateDto {
         (other.runtimeType == runtimeType &&
             other is _$_BannerTemplateDto &&
             (identical(other.media, media) || other.media == media) &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.buttonName, buttonName) ||
+                other.buttonName == buttonName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, media, content);
+  int get hashCode =>
+      Object.hash(runtimeType, media, content, title, buttonName);
 
   @JsonKey(ignore: true)
   @override
@@ -549,7 +541,10 @@ abstract class _BannerTemplateDto extends BannerTemplateDto {
       {@JsonKey(name: 'media', readValue: mediaReadValue)
       required final MediaValueDto media,
       @JsonKey(name: 'content', readValue: readDynamicValueKey)
-      required final TemplateValueItemDto content}) = _$_BannerTemplateDto;
+      required final TemplateValueItemDto content,
+      @JsonKey(name: 'title', readValue: readValue) required final String title,
+      @JsonKey(name: 'buttonName', readValue: readValue)
+      required final String buttonName}) = _$_BannerTemplateDto;
   _BannerTemplateDto._() : super._();
 
   factory _BannerTemplateDto.fromJson(Map<String, dynamic> json) =
@@ -561,6 +556,12 @@ abstract class _BannerTemplateDto extends BannerTemplateDto {
   @override
   @JsonKey(name: 'content', readValue: readDynamicValueKey)
   TemplateValueItemDto get content;
+  @override
+  @JsonKey(name: 'title', readValue: readValue)
+  String get title;
+  @override
+  @JsonKey(name: 'buttonName', readValue: readValue)
+  String get buttonName;
   @override
   @JsonKey(ignore: true)
   _$$_BannerTemplateDtoCopyWith<_$_BannerTemplateDto> get copyWith =>

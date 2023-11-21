@@ -17,8 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AboutUs {
   BannerTemplate get banner => throw _privateConstructorUsedError;
-  ContentSplitTemplate get whyUs => throw _privateConstructorUsedError;
-  ContentSplitTemplate get reachUs => throw _privateConstructorUsedError;
+  List<ContentSplitTemplate> get contentSplit =>
+      throw _privateConstructorUsedError;
   SliderTemplate get certifications => throw _privateConstructorUsedError;
   MediaListTemplate get ourPartners => throw _privateConstructorUsedError;
   HorizontalListTemplate get whoWeAre => throw _privateConstructorUsedError;
@@ -34,15 +34,12 @@ abstract class $AboutUsCopyWith<$Res> {
   @useResult
   $Res call(
       {BannerTemplate banner,
-      ContentSplitTemplate whyUs,
-      ContentSplitTemplate reachUs,
+      List<ContentSplitTemplate> contentSplit,
       SliderTemplate certifications,
       MediaListTemplate ourPartners,
       HorizontalListTemplate whoWeAre});
 
   $BannerTemplateCopyWith<$Res> get banner;
-  $ContentSplitTemplateCopyWith<$Res> get whyUs;
-  $ContentSplitTemplateCopyWith<$Res> get reachUs;
   $SliderTemplateCopyWith<$Res> get certifications;
   $MediaListTemplateCopyWith<$Res> get ourPartners;
   $HorizontalListTemplateCopyWith<$Res> get whoWeAre;
@@ -62,8 +59,7 @@ class _$AboutUsCopyWithImpl<$Res, $Val extends AboutUs>
   @override
   $Res call({
     Object? banner = null,
-    Object? whyUs = null,
-    Object? reachUs = null,
+    Object? contentSplit = null,
     Object? certifications = null,
     Object? ourPartners = null,
     Object? whoWeAre = null,
@@ -73,14 +69,10 @@ class _$AboutUsCopyWithImpl<$Res, $Val extends AboutUs>
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
               as BannerTemplate,
-      whyUs: null == whyUs
-          ? _value.whyUs
-          : whyUs // ignore: cast_nullable_to_non_nullable
-              as ContentSplitTemplate,
-      reachUs: null == reachUs
-          ? _value.reachUs
-          : reachUs // ignore: cast_nullable_to_non_nullable
-              as ContentSplitTemplate,
+      contentSplit: null == contentSplit
+          ? _value.contentSplit
+          : contentSplit // ignore: cast_nullable_to_non_nullable
+              as List<ContentSplitTemplate>,
       certifications: null == certifications
           ? _value.certifications
           : certifications // ignore: cast_nullable_to_non_nullable
@@ -101,22 +93,6 @@ class _$AboutUsCopyWithImpl<$Res, $Val extends AboutUs>
   $BannerTemplateCopyWith<$Res> get banner {
     return $BannerTemplateCopyWith<$Res>(_value.banner, (value) {
       return _then(_value.copyWith(banner: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ContentSplitTemplateCopyWith<$Res> get whyUs {
-    return $ContentSplitTemplateCopyWith<$Res>(_value.whyUs, (value) {
-      return _then(_value.copyWith(whyUs: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ContentSplitTemplateCopyWith<$Res> get reachUs {
-    return $ContentSplitTemplateCopyWith<$Res>(_value.reachUs, (value) {
-      return _then(_value.copyWith(reachUs: value) as $Val);
     });
   }
 
@@ -154,18 +130,13 @@ abstract class _$$_AboutUsCopyWith<$Res> implements $AboutUsCopyWith<$Res> {
   @useResult
   $Res call(
       {BannerTemplate banner,
-      ContentSplitTemplate whyUs,
-      ContentSplitTemplate reachUs,
+      List<ContentSplitTemplate> contentSplit,
       SliderTemplate certifications,
       MediaListTemplate ourPartners,
       HorizontalListTemplate whoWeAre});
 
   @override
   $BannerTemplateCopyWith<$Res> get banner;
-  @override
-  $ContentSplitTemplateCopyWith<$Res> get whyUs;
-  @override
-  $ContentSplitTemplateCopyWith<$Res> get reachUs;
   @override
   $SliderTemplateCopyWith<$Res> get certifications;
   @override
@@ -185,8 +156,7 @@ class __$$_AboutUsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? banner = null,
-    Object? whyUs = null,
-    Object? reachUs = null,
+    Object? contentSplit = null,
     Object? certifications = null,
     Object? ourPartners = null,
     Object? whoWeAre = null,
@@ -196,14 +166,10 @@ class __$$_AboutUsCopyWithImpl<$Res>
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
               as BannerTemplate,
-      whyUs: null == whyUs
-          ? _value.whyUs
-          : whyUs // ignore: cast_nullable_to_non_nullable
-              as ContentSplitTemplate,
-      reachUs: null == reachUs
-          ? _value.reachUs
-          : reachUs // ignore: cast_nullable_to_non_nullable
-              as ContentSplitTemplate,
+      contentSplit: null == contentSplit
+          ? _value._contentSplit
+          : contentSplit // ignore: cast_nullable_to_non_nullable
+              as List<ContentSplitTemplate>,
       certifications: null == certifications
           ? _value.certifications
           : certifications // ignore: cast_nullable_to_non_nullable
@@ -225,19 +191,23 @@ class __$$_AboutUsCopyWithImpl<$Res>
 class _$_AboutUs extends _AboutUs {
   const _$_AboutUs(
       {required this.banner,
-      required this.whyUs,
-      required this.reachUs,
+      required final List<ContentSplitTemplate> contentSplit,
       required this.certifications,
       required this.ourPartners,
       required this.whoWeAre})
-      : super._();
+      : _contentSplit = contentSplit,
+        super._();
 
   @override
   final BannerTemplate banner;
+  final List<ContentSplitTemplate> _contentSplit;
   @override
-  final ContentSplitTemplate whyUs;
-  @override
-  final ContentSplitTemplate reachUs;
+  List<ContentSplitTemplate> get contentSplit {
+    if (_contentSplit is EqualUnmodifiableListView) return _contentSplit;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_contentSplit);
+  }
+
   @override
   final SliderTemplate certifications;
   @override
@@ -247,7 +217,7 @@ class _$_AboutUs extends _AboutUs {
 
   @override
   String toString() {
-    return 'AboutUs(banner: $banner, whyUs: $whyUs, reachUs: $reachUs, certifications: $certifications, ourPartners: $ourPartners, whoWeAre: $whoWeAre)';
+    return 'AboutUs(banner: $banner, contentSplit: $contentSplit, certifications: $certifications, ourPartners: $ourPartners, whoWeAre: $whoWeAre)';
   }
 
   @override
@@ -256,8 +226,8 @@ class _$_AboutUs extends _AboutUs {
         (other.runtimeType == runtimeType &&
             other is _$_AboutUs &&
             (identical(other.banner, banner) || other.banner == banner) &&
-            (identical(other.whyUs, whyUs) || other.whyUs == whyUs) &&
-            (identical(other.reachUs, reachUs) || other.reachUs == reachUs) &&
+            const DeepCollectionEquality()
+                .equals(other._contentSplit, _contentSplit) &&
             (identical(other.certifications, certifications) ||
                 other.certifications == certifications) &&
             (identical(other.ourPartners, ourPartners) ||
@@ -267,8 +237,13 @@ class _$_AboutUs extends _AboutUs {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, banner, whyUs, reachUs,
-      certifications, ourPartners, whoWeAre);
+  int get hashCode => Object.hash(
+      runtimeType,
+      banner,
+      const DeepCollectionEquality().hash(_contentSplit),
+      certifications,
+      ourPartners,
+      whoWeAre);
 
   @JsonKey(ignore: true)
   @override
@@ -280,8 +255,7 @@ class _$_AboutUs extends _AboutUs {
 abstract class _AboutUs extends AboutUs {
   const factory _AboutUs(
       {required final BannerTemplate banner,
-      required final ContentSplitTemplate whyUs,
-      required final ContentSplitTemplate reachUs,
+      required final List<ContentSplitTemplate> contentSplit,
       required final SliderTemplate certifications,
       required final MediaListTemplate ourPartners,
       required final HorizontalListTemplate whoWeAre}) = _$_AboutUs;
@@ -290,9 +264,7 @@ abstract class _AboutUs extends AboutUs {
   @override
   BannerTemplate get banner;
   @override
-  ContentSplitTemplate get whyUs;
-  @override
-  ContentSplitTemplate get reachUs;
+  List<ContentSplitTemplate> get contentSplit;
   @override
   SliderTemplate get certifications;
   @override
@@ -1458,6 +1430,8 @@ abstract class _MediaItem extends MediaItem {
 mixin _$BannerTemplate {
   String get content => throw _privateConstructorUsedError;
   MediaValue get media => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get buttonName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BannerTemplateCopyWith<BannerTemplate> get copyWith =>
@@ -1470,7 +1444,8 @@ abstract class $BannerTemplateCopyWith<$Res> {
           BannerTemplate value, $Res Function(BannerTemplate) then) =
       _$BannerTemplateCopyWithImpl<$Res, BannerTemplate>;
   @useResult
-  $Res call({String content, MediaValue media});
+  $Res call(
+      {String content, MediaValue media, String title, String buttonName});
 
   $MediaValueCopyWith<$Res> get media;
 }
@@ -1490,6 +1465,8 @@ class _$BannerTemplateCopyWithImpl<$Res, $Val extends BannerTemplate>
   $Res call({
     Object? content = null,
     Object? media = null,
+    Object? title = null,
+    Object? buttonName = null,
   }) {
     return _then(_value.copyWith(
       content: null == content
@@ -1500,6 +1477,14 @@ class _$BannerTemplateCopyWithImpl<$Res, $Val extends BannerTemplate>
           ? _value.media
           : media // ignore: cast_nullable_to_non_nullable
               as MediaValue,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      buttonName: null == buttonName
+          ? _value.buttonName
+          : buttonName // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -1520,7 +1505,8 @@ abstract class _$$_BannerTemplateCopyWith<$Res>
       __$$_BannerTemplateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String content, MediaValue media});
+  $Res call(
+      {String content, MediaValue media, String title, String buttonName});
 
   @override
   $MediaValueCopyWith<$Res> get media;
@@ -1539,6 +1525,8 @@ class __$$_BannerTemplateCopyWithImpl<$Res>
   $Res call({
     Object? content = null,
     Object? media = null,
+    Object? title = null,
+    Object? buttonName = null,
   }) {
     return _then(_$_BannerTemplate(
       content: null == content
@@ -1549,6 +1537,14 @@ class __$$_BannerTemplateCopyWithImpl<$Res>
           ? _value.media
           : media // ignore: cast_nullable_to_non_nullable
               as MediaValue,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      buttonName: null == buttonName
+          ? _value.buttonName
+          : buttonName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -1556,16 +1552,24 @@ class __$$_BannerTemplateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BannerTemplate implements _BannerTemplate {
-  _$_BannerTemplate({required this.content, required this.media});
+  _$_BannerTemplate(
+      {required this.content,
+      required this.media,
+      required this.title,
+      required this.buttonName});
 
   @override
   final String content;
   @override
   final MediaValue media;
+  @override
+  final String title;
+  @override
+  final String buttonName;
 
   @override
   String toString() {
-    return 'BannerTemplate(content: $content, media: $media)';
+    return 'BannerTemplate(content: $content, media: $media, title: $title, buttonName: $buttonName)';
   }
 
   @override
@@ -1574,11 +1578,15 @@ class _$_BannerTemplate implements _BannerTemplate {
         (other.runtimeType == runtimeType &&
             other is _$_BannerTemplate &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.media, media) || other.media == media));
+            (identical(other.media, media) || other.media == media) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.buttonName, buttonName) ||
+                other.buttonName == buttonName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, content, media);
+  int get hashCode =>
+      Object.hash(runtimeType, content, media, title, buttonName);
 
   @JsonKey(ignore: true)
   @override
@@ -1590,12 +1598,18 @@ class _$_BannerTemplate implements _BannerTemplate {
 abstract class _BannerTemplate implements BannerTemplate {
   factory _BannerTemplate(
       {required final String content,
-      required final MediaValue media}) = _$_BannerTemplate;
+      required final MediaValue media,
+      required final String title,
+      required final String buttonName}) = _$_BannerTemplate;
 
   @override
   String get content;
   @override
   MediaValue get media;
+  @override
+  String get title;
+  @override
+  String get buttonName;
   @override
   @JsonKey(ignore: true)
   _$$_BannerTemplateCopyWith<_$_BannerTemplate> get copyWith =>

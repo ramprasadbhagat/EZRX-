@@ -15,12 +15,13 @@ _$_AboutUsDto _$$_AboutUsDtoFromJson(Map<String, dynamic> json) =>
               as Map<String, dynamic>),
       whoWeAre: HorizontalListTemplateDto.fromJson(
           whoWeAreReadValue(json, 'whoWeAre') as Map<String, dynamic>),
-      whyUs: ContentSplitTemplateDto.fromJson(
-          whyUsReadValue(json, 'whyUs') as Map<String, dynamic>),
       ourPartners: MediaListTemplateDto.fromJson(
           ourPartnerReadValue(json, 'ourPartners') as Map<String, dynamic>),
-      reachUs: ContentSplitTemplateDto.fromJson(
-          reachUsReadValue(json, 'reachUs') as Map<String, dynamic>),
+      contentSplit:
+          (contentSplitReadValue(json, 'contentSplit') as List<dynamic>)
+              .map((e) =>
+                  ContentSplitTemplateDto.fromJson(e as Map<String, dynamic>))
+              .toList(),
     );
 
 Map<String, dynamic> _$$_AboutUsDtoToJson(_$_AboutUsDto instance) =>
@@ -28,9 +29,8 @@ Map<String, dynamic> _$$_AboutUsDtoToJson(_$_AboutUsDto instance) =>
       'banner': instance.banner.toJson(),
       'certifications': instance.certifications.toJson(),
       'whoWeAre': instance.whoWeAre.toJson(),
-      'whyUs': instance.whyUs.toJson(),
       'ourPartners': instance.ourPartners.toJson(),
-      'reachUs': instance.reachUs.toJson(),
+      'contentSplit': instance.contentSplit.map((e) => e.toJson()).toList(),
     };
 
 _$_BannerTemplateDto _$$_BannerTemplateDtoFromJson(Map<String, dynamic> json) =>
@@ -39,6 +39,8 @@ _$_BannerTemplateDto _$$_BannerTemplateDtoFromJson(Map<String, dynamic> json) =>
           mediaReadValue(json, 'media') as Map<String, dynamic>),
       content: TemplateValueItemDto.fromJson(
           readDynamicValueKey(json, 'content') as Map<String, dynamic>),
+      title: readValue(json, 'title') as String,
+      buttonName: readValue(json, 'buttonName') as String,
     );
 
 Map<String, dynamic> _$$_BannerTemplateDtoToJson(
@@ -46,6 +48,8 @@ Map<String, dynamic> _$$_BannerTemplateDtoToJson(
     <String, dynamic>{
       'media': instance.media.toJson(),
       'content': instance.content.toJson(),
+      'title': instance.title,
+      'buttonName': instance.buttonName,
     };
 
 _$_SliderTemplateDto _$$_SliderTemplateDtoFromJson(Map<String, dynamic> json) =>

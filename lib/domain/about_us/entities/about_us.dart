@@ -8,8 +8,7 @@ class AboutUs with _$AboutUs {
 
   const factory AboutUs({
     required BannerTemplate banner,
-    required ContentSplitTemplate whyUs,
-    required ContentSplitTemplate reachUs,
+    required List<ContentSplitTemplate> contentSplit,
     required SliderTemplate certifications,
     required MediaListTemplate ourPartners,
     required HorizontalListTemplate whoWeAre,
@@ -17,8 +16,7 @@ class AboutUs with _$AboutUs {
 
   factory AboutUs.empty() => AboutUs(
         banner: BannerTemplate.empty(),
-        whyUs: ContentSplitTemplate.empty(),
-        reachUs: ContentSplitTemplate.empty(),
+        contentSplit: <ContentSplitTemplate>[],
         ourPartners: MediaListTemplate.empty(),
         certifications: SliderTemplate.empty(),
         whoWeAre: HorizontalListTemplate.empty(),
@@ -56,7 +54,6 @@ class Certifications with _$Certifications {
         certificationYear: '',
       );
 }
-
 
 @freezed
 class HorizontalListTemplate with _$HorizontalListTemplate {
@@ -99,7 +96,6 @@ class ContentSplitTemplate with _$ContentSplitTemplate {
     required String subTitle,
     required MediaValue media,
     required String description,
-
   }) = _WhyUs;
 
   factory ContentSplitTemplate.empty() => ContentSplitTemplate(
@@ -139,14 +135,17 @@ class BannerTemplate with _$BannerTemplate {
   factory BannerTemplate({
     required String content,
     required MediaValue media,
+    required String title,
+    required String buttonName,
   }) = _BannerTemplate;
 
   factory BannerTemplate.empty() => BannerTemplate(
         content: '',
+        buttonName: '',
+        title: '',
         media: MediaValue.empty(),
       );
 }
-
 
 @freezed
 class MediaValue with _$MediaValue {

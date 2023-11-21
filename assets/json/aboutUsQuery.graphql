@@ -39,6 +39,9 @@ fragment bannerDetail on Item {
     content: field(name: "Content") {
       ...textFields
     }
+    buttonName {
+      value
+    }
   }
 }
 

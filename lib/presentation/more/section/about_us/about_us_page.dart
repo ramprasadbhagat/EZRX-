@@ -13,8 +13,7 @@ import 'package:ezrxmobile/domain/about_us/entities/about_us.dart';
 import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-part 'package:ezrxmobile/presentation/more/section/about_us/widgets/why_us_section.dart';
-part 'package:ezrxmobile/presentation/more/section/about_us/widgets/reach_us_section.dart';
+part 'package:ezrxmobile/presentation/more/section/about_us/widgets/content_split_section.dart';
 part 'package:ezrxmobile/presentation/more/section/about_us/widgets/who_we_are_section.dart';
 part 'package:ezrxmobile/presentation/more/section/about_us/widgets/our_partners_section.dart';
 part 'package:ezrxmobile/presentation/more/section/about_us/widgets/certifications_section.dart';
@@ -121,7 +120,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           height: 200,
                         ),
                         _HeaderSection(
-                          description: aboutUsInfo.banner.content,
+                          bannerTemplate: aboutUsInfo.banner,
                         ),
                         _OurCertificationsSection(
                           certifications: aboutUsInfo.certifications,
@@ -129,14 +128,11 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         _WhoWeAreSection(
                           whoWeAre: state.aboutUsInfo.whoWeAre,
                         ),
-                        _WhyUsSection(
-                          whyUs: aboutUsInfo.whyUs,
-                        ),
                         _OurPartnersSection(
                           ourPartners: aboutUsInfo.ourPartners,
                         ),
-                        _ReachUsSection(
-                          reachUs: aboutUsInfo.reachUs,
+                        ...aboutUsInfo.contentSplit.map(
+                          (e) => _ContentSplitSection(contentSplit: e),
                         ),
                       ],
                     )
@@ -166,10 +162,10 @@ class _AboutUsPageState extends State<AboutUsPage> {
 }
 
 class _HeaderSection extends StatelessWidget {
-  final String description;
+  final BannerTemplate bannerTemplate;
   const _HeaderSection({
     Key? key,
-    required this.description,
+    required this.bannerTemplate,
   }) : super(key: key);
 
   @override
@@ -181,14 +177,14 @@ class _HeaderSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.tr('About us'),
+            bannerTemplate.title,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: ZPColors.extraDarkGreen,
                 ),
           ),
           const SizedBox(height: 10),
           Text(
-            description,
+            bannerTemplate.content,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),
@@ -197,7 +193,7 @@ class _HeaderSection extends StatelessWidget {
           Center(
             child: ElevatedButton(
               onPressed: () => context.router.pushNamed('contact_us'),
-              child: Text('Get in touch'.tr()),
+              child: Text(bannerTemplate.buttonName),
             ),
           ),
         ],
