@@ -63,17 +63,26 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
             );
           },
         ),
-        leading: IconButton(
-          key: WidgetKeys.closeButton,
-          onPressed: () => Navigator.pop(context),
-          icon: const CircleAvatar(
-            maxRadius: 16,
-            backgroundColor: ZPColors.transparent,
-            child: Icon(
-              Icons.close,
-              color: ZPColors.neutralsBlack,
-            ),
-          ),
+        leading: BlocBuilder<NewPaymentBloc, NewPaymentState>(
+          buildWhen: (previous, current) =>
+              previous.isFetchingInvoiceInfoPdf !=
+              current.isFetchingInvoiceInfoPdf,
+          builder: (context, state) {
+            if (state.isFetchingInvoiceInfoPdf) return const SizedBox.shrink();
+            
+            return IconButton(
+              key: WidgetKeys.closeButton,
+              onPressed: () => Navigator.pop(context),
+              icon: const CircleAvatar(
+                maxRadius: 16,
+                backgroundColor: ZPColors.transparent,
+                child: Icon(
+                  Icons.close,
+                  color: ZPColors.neutralsBlack,
+                ),
+              ),
+            );
+          },
         ),
       ),
       body: const _BodyContent(),
