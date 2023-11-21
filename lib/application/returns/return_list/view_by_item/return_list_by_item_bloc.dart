@@ -44,7 +44,9 @@ class ReturnListByItemBloc
     });
     on<_Fetch>(
       (e, emit) async {
-        if (e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) {
+        if (e.searchKey == state.searchKey &&
+            e.appliedFilter == state.appliedFilter &&
+            e.searchKey.validateNotEmpty) {
           return;
         }
         if (!e.searchKey.isValid()) return;
