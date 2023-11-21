@@ -334,7 +334,7 @@ void main() {
           findsOneWidget,
         );
       });
-      
+
       testWidgets('Show bank info detail list', (tester) async {
         final bankInfoList = [BankBeneficiary.empty(), BankBeneficiary.empty()];
         final bankInSelectedState = NewPaymentState.initial()
@@ -366,7 +366,7 @@ void main() {
       final fakeNetDueDate = DateTimeStringValue('fake');
       final fakeItem = CustomerOpenItem.empty().copyWith(
         accountingDocument: fakeAccountingDocument,
-        amountInTransactionCurrency: fakeAmount,
+        openAmountInTransCrcy: fakeAmount,
         netDueDate: fakeNetDueDate,
       );
       final items = [fakeItem, fakeItem];

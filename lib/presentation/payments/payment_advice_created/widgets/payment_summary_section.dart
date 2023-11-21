@@ -42,7 +42,7 @@ class _PaymentSummarySection extends StatelessWidget {
                     ),
                     PriceText(
                       data: '(${StringUtils.displayNumber(
-                        state.selectedCredits.amountTotal,
+                        state.selectedCredits.amountTotal.abs(),
                       )})',
                       title: 'Credit applied',
                       salesOrgConfig: configs,
@@ -60,7 +60,7 @@ class _PaymentSummarySection extends StatelessWidget {
                     PriceComponent(
                       salesOrgConfig:
                           context.read<SalesOrgBloc>().state.configs,
-                      price: state.amountTotal.toString(),
+                      price: state.amountTotal.abs().toString(),
                     ),
                     const Spacer(),
                     ElevatedButton(

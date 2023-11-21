@@ -49,7 +49,7 @@ class CreditItemCard extends StatelessWidget {
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price:
-                      customerOpenItem.amountInTransactionCurrency.toString(),
+                      customerOpenItem.openAmountInTransCrcy.abs().toString(),
                 ),
               ],
             ),
