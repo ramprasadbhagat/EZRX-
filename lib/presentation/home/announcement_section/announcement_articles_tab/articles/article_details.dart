@@ -150,6 +150,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                         if (widget.article.tag.isNotEmpty)
                           Container(
                             padding: const EdgeInsets.all(6),
+                            margin: const EdgeInsets.only(bottom: 8),
                             decoration: BoxDecoration(
                               color: ZPColors.paleBlueGray,
                               borderRadius: BorderRadius.circular(15.0),
@@ -159,8 +160,37 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ),
+                        const Divider(
+                          indent: 0,
+                          thickness: 1,
+                          height: 5,
+                          endIndent: 0,
+                          color: ZPColors.extraLightGrey3,
+                        ),
                         Html(
                           key: WidgetKeys.articleDetailsBodyKey,
+                          style: {
+                            'body': Style(
+                              padding: const EdgeInsets.all(0),
+                              margin: const EdgeInsets.all(0),
+                            ),
+                          },
+                          data:
+                              widget.article.content.appendedImgSrcWithBaseUrl,
+                          shrinkWrap: true,
+                        ),
+                        Html(
+                          style: {
+                            'body': Style(
+                              padding: const EdgeInsets.all(0),
+                              margin: const EdgeInsets.all(0),
+                            ),
+                          },
+                          data:
+                              widget.article.content.appendedImgSrcWithBaseUrl,
+                          shrinkWrap: true,
+                        ),
+                        Html(
                           style: {
                             'body': Style(
                               padding: const EdgeInsets.all(0),
@@ -209,37 +239,27 @@ class _TitleSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          FittedBox(
-            child: Text(
-              article.publishedDate.dateOrDashString,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ZPColors.neutralsGrey1,
-                    fontSize: 10,
-                  ),
-              key: WidgetKeys.articleDetailsTimeKey,
-            ),
-          ),
-          FittedBox(
-            child: Text(
-              article.title,
-              style: Theme.of(context).textTheme.labelSmall,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.left,
-              key: WidgetKeys.articleDetailsTitleKey,
-            ),
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          article.publishedDate.dateOrDashString,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: ZPColors.neutralsGrey1,
+                fontSize: 10,
+              ),
+          key: WidgetKeys.articleDetailsTimeKey,
+        ),
+        Text(
+          article.title,
+          style: Theme.of(context).textTheme.labelSmall,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.left,
+          key: WidgetKeys.articleDetailsTitleKey,
+        ),
+      ],
     );
   }
 }

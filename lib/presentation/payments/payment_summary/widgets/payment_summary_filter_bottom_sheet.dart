@@ -55,7 +55,7 @@ class _PaymentSummaryFilterBottomSheet extends StatelessWidget {
                 ),
               ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const _PaymentSummaryAmountValueFromFilter(),
                   Padding(

@@ -106,7 +106,7 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                       children: [
                         const _AmountValueFromFilter(),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: const EdgeInsets.all(8),
                           child: Text(
                             '-',
                             style: Theme.of(context).textTheme.titleSmall,
