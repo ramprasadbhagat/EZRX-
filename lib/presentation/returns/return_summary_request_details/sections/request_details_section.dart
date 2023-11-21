@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
@@ -6,6 +7,7 @@ import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_request_details/sections/return_status_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +29,10 @@ class RequestDetailsSection extends StatelessWidget {
         ),
         StatusTrackerSection(
           createDateTime: requestInformationHeader.createdDateTime,
-          onTap: () {},
+          onTap: () => _showDetailsPage(
+            context: context,
+            requestInformationHeader: requestInformationHeader,
+          ),
           status:
               requestInformationHeader.bapiStatus.displayStatusForViewByRequest,
           title: 'Return request status'.tr(),
@@ -224,4 +229,34 @@ class _ROSection extends StatelessWidget {
           )
         : const SizedBox.shrink();
   }
+}
+
+void _showDetailsPage({
+  required BuildContext context,
+  required ReturnRequestInformationHeader requestInformationHeader,
+}) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    enableDrag: false,
+    isDismissible: false,
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    builder: (_) {
+      return ReturnStatusSection(
+        customStep:
+            requestInformationHeader.bapiStatus.displayReturnStatusDetails
+                .mapIndexed(
+                  (index, element) => CustomStep(
+                    status: element.getOrDefaultValue('').tr(),
+                    subtitle:
+                        '-', // TODO: The Date time is not implemented yet as we can not get the value for the date and time.
+                    title:
+                        '-', // TODO: The Date time is not implemented yet as we can not get the value for the date and time.
+                    icon: element.displayReturnStatusIcon,
+                  ),
+                )
+                .toList(),
+      );
+    },
+  );
 }

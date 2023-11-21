@@ -283,6 +283,12 @@ class StatusType extends ValueObject<String> {
       );
   bool get isSuccess => getIntermediateStatus == 'Success';
 
+  IconData get displayReturnStatusIcon =>
+      getReturnStatusIcon(value.getOrElse(() => ''));
+
+  List<StatusType> get displayReturnStatusDetails =>
+      getReturnStatusDetails(value.getOrElse(() => ''));
+
   Color get displayStatusTextColor =>
       getStatusTextColor(value.getOrElse(() => ''));
 

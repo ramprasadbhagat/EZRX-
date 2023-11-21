@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -442,6 +443,52 @@ String bapiStatusType(String bapiStatus) {
 
 bool isBapiStatusFailed(String status) {
   return status == 'FAILED';
+}
+
+IconData getReturnStatusIcon(String status) {
+  switch (status) {
+    case 'Return request submitted':
+      return Icons.inventory_outlined;
+    case 'Pending review':
+      return Icons.query_builder;
+    case 'Reviewed':
+      return Icons.check;
+    case 'Failed':
+      return Icons.cancel;
+    default:
+      return Icons.inventory_outlined;
+  }
+}
+
+List<StatusType> getReturnStatusDetails(String status) {
+  final returnStatusList = <StatusType>[
+    StatusType('Pending review'),
+    StatusType('Return request submitted'),
+  ];
+  switch (status) {
+    case 'FAILED':
+      return [
+        StatusType('Failed'),
+        ...returnStatusList,
+      ];
+
+    case 'PENDING':
+      return returnStatusList;
+    case 'REVIEWED':
+      return [
+        StatusType('Reviewed'),
+        ...returnStatusList,
+      ];
+
+    default:
+      final normalizedStatus = bapiStatusType(status).toLowerCase();
+      return returnStatusList
+          .skipWhile(
+            (item) =>
+                item.getOrDefaultValue('').toLowerCase() != normalizedStatus,
+          )
+          .toList();
+  }
 }
 
 String getMarketName(String country) {
