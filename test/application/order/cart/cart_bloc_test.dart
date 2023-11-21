@@ -1098,6 +1098,129 @@ void main() {
           ),
         ],
       );
+
+      blocTest<CartBloc, CartState>(
+        'Should add fetch total price event for ID market after upsert success',
+        build: () => CartBloc(cartRepositoryMock),
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+          config: fakeSalesOrganisationConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        setUp: () {
+          when(
+            () => cartRepositoryMock.upsertCart(
+              salesOrganisation: fakeIDSalesOrganisation,
+              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              itemId: '',
+              language:
+                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
+              materialInfo: priceAggregates.first.materialInfo,
+              quantity: 2,
+            ),
+          ).thenAnswer((_) async => Right([priceAggregates.first]));
+          when(
+            () => cartRepositoryMock.fetchGrandTotalPriceForIdMarket(
+              totalPrice: priceAggregates.first.finalPriceTotal,
+              materialNumbers: [priceAggregates.first.getMaterialNumber],
+              salesOrganisation: fakeIDSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer((_) async => const Left(ApiFailure.other('fake')));
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.upsertCart(
+            priceAggregate: priceAggregates.first,
+            quantity: 2,
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isUpserting: true,
+            salesOrganisation: fakeIDSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [priceAggregates.first],
+            salesOrganisation: fakeIDSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            isAplProductLoading: true,
+            cartProducts: [priceAggregates.first],
+            salesOrganisation: fakeIDSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake'))),
+            cartProducts: [priceAggregates.first],
+            salesOrganisation: fakeIDSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ],
+      );
+
+      blocTest<CartBloc, CartState>(
+        'Should not add verify bonus and fetch total price after upsert success and cart is empty',
+        build: () => CartBloc(cartRepositoryMock),
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+          config: fakeSalesOrganisationConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        setUp: () {
+          when(
+            () => cartRepositoryMock.upsertCart(
+              salesOrganisation: fakeIDSalesOrganisation,
+              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              itemId: '',
+              language:
+                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
+              materialInfo: priceAggregates.first.materialInfo,
+              quantity: 2,
+            ),
+          ).thenAnswer((_) async => const Right([]));
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.upsertCart(
+            priceAggregate: priceAggregates.first,
+            quantity: 2,
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isUpserting: true,
+            salesOrganisation: fakeIDSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [],
+            salesOrganisation: fakeIDSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ],
+      );
     },
   );
 

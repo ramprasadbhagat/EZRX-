@@ -389,18 +389,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 isUpserting: false,
               ),
             );
-            add(
-              _VerifyMaterialDealBonus(
-                item: newCartProductList.firstWhere(
-                  (element) =>
-                      element.materialInfo.materialNumber ==
-                      e.priceAggregate.materialInfo.materialNumber,
-                  orElse: () => PriceAggregate.empty(),
+            if (newCartProductList.isNotEmpty) {
+              add(
+                _VerifyMaterialDealBonus(
+                  item: newCartProductList.firstWhere(
+                    (element) =>
+                        element.materialInfo.materialNumber ==
+                        e.priceAggregate.materialInfo.materialNumber,
+                    orElse: () => PriceAggregate.empty(),
+                  ),
+                  items: newCartProductList,
                 ),
-                items: newCartProductList,
-              ),
-            );
-            add(const CartEvent.fetchGrandTotalPriceForIdMarket());
+              );
+              add(const CartEvent.fetchGrandTotalPriceForIdMarket());
+            }
           },
         );
       },
