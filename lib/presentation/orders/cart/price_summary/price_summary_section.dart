@@ -66,6 +66,7 @@ class PriceSummarySection extends StatelessWidget {
             ),
             _DisplayPrice(
               priceComponent: PriceComponent(
+                key: WidgetKeys.checkoutSummaryGrandTotalPrice,
                 salesOrgConfig: salesOrgConfig,
                 price: cartState.grandTotalHidePriceMaterial.toString(),
                 type: PriceStyle.totalPrice,
@@ -107,6 +108,7 @@ class _TaxWidget extends StatelessWidget {
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return Column(
+      key: WidgetKeys.checkoutSummaryTax,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 8.0),
@@ -121,6 +123,7 @@ class _TaxWidget extends StatelessWidget {
             ),
             _DisplayPrice(
               priceComponent: PriceComponent(
+                key: WidgetKeys.checkoutSummaryTaxPrice,
                 salesOrgConfig: salesOrgConfig,
                 price: cartState.totalTax.toString(),
                 type: PriceStyle.summaryPrice,
@@ -165,6 +168,7 @@ class _SmallOrderFee extends StatelessWidget {
             ),
             _DisplayPrice(
               priceComponent: PriceComponent(
+                key: WidgetKeys.checkoutSummarySmallOrderFeePrice,
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
                 price: cartState.aplSimulatorOrder.smallOrderFee.toString(),
                 type: PriceStyle.summaryPrice,

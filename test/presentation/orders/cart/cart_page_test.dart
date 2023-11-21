@@ -6,10 +6,12 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -174,6 +176,7 @@ void main() {
   late List<PriceAggregate> mockCartItems;
   late List<PriceAggregate> mockCartBundleItems;
   late List<ComboMaterialItem> fakeComboMaterialItems;
+  late AplSimulatorOrder aplSimulatorOrder;
   final routeData = RouteData(
     route: const RouteMatch(
       name: 'CartsPageRoute',
@@ -201,6 +204,7 @@ void main() {
     fakeComboMaterialItems =
         (await CartLocalDataSource().upsertCartItemsWithComboOffers())
             .comboMaterialItemList;
+    aplSimulatorOrder = await CartLocalDataSource().aplGetTotalPrice();
   });
   setUp(
     () {
@@ -2204,6 +2208,7 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
       });
+
       testWidgets('Covid material test', (tester) async {
         final cartProduct = [
           mockCartItems.first.copyWith(
@@ -2241,6 +2246,63 @@ void main() {
           'Price is not available for at least one item. Grand total reflected may not be accurate.',
         );
         expect(cartPagePriceMessage, findsOneWidget);
+      });
+
+      testWidgets(
+          'Should show price summary bottom sheet when tap on grand total test small order fee',
+          (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeSalesOrganisationConfigsTaxBreakdown,
+          ),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            cartProducts: mockCartItems,
+            aplSimulatorOrder: aplSimulatorOrder,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        expect(grandTotal, findsOneWidget);
+        await tester.tap(grandTotal);
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
+        expect(find.byKey(WidgetKeys.checkoutSummarySubTotal), findsOneWidget);
+        expect(
+          find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(WidgetKeys.checkoutSummaryTax),
+          findsOneWidget,
+        );
+        final checkoutSummaryTaxPrice =
+            find.byKey(WidgetKeys.checkoutSummaryTaxPrice);
+        final checkoutSummaryGrandTotalPrice =
+            find.byKey(WidgetKeys.checkoutSummaryGrandTotalPrice);
+        final checkoutSummarySmallOrderFeePrice =
+            find.byKey(WidgetKeys.checkoutSummarySmallOrderFeePrice);
+        expect(
+          (tester.widget(checkoutSummarySmallOrderFeePrice) as PriceComponent)
+              .price,
+          aplSimulatorOrder.smallOrderFee.toString(),
+        );
+        expect(
+          (tester.widget(checkoutSummaryTaxPrice) as PriceComponent).price,
+          aplSimulatorOrder.totalTax.toString(),
+        );
+        expect(
+          (tester.widget(checkoutSummaryGrandTotalPrice) as PriceComponent)
+              .price,
+          aplSimulatorOrder.grandTotal.toString(),
+        );
       });
     },
   );

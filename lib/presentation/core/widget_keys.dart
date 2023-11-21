@@ -604,7 +604,13 @@ class WidgetKeys {
   static const Key checkoutSummaryStampDuty = Key('checkoutSummaryStampDuty');
   static const Key checkoutSummarySmallOrderFee =
       Key('checkoutSummarySmallOrderFee');
+  static const Key checkoutSummaryTax = Key('checkoutSummaryTax');
+  static const Key checkoutSummaryTaxPrice = Key('checkoutSummaryTaxPrice');
+  static const Key checkoutSummarySmallOrderFeePrice =
+      Key('checkoutSummarySmallOrderFeePrice');
   static const Key checkoutSummaryGrandTotal = Key('checkoutSummaryGrandTotal');
+  static const Key checkoutSummaryGrandTotalPrice =
+      Key('checkoutSummaryGrandTotalPrice');
   static const Key checkoutSummaryTotalSaving =
       Key('checkoutSummaryTotalSaving');
   static const Key checkoutItemsTotalQty = Key('checkoutItemsTotalQty');

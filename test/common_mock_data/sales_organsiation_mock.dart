@@ -49,6 +49,9 @@ final fakePHSalesOrganisationConfigsMaterialWithoutPrice =
   salesOrg: fakePHSalesOrg,
   materialWithoutPrice: true,
 );
+final fakeSalesOrganisationConfigsTaxBreakdown =
+    SalesOrganisationConfigs.empty()
+        .copyWith(salesOrg: fakeIDSalesOrg, displaySubtotalTaxBreakdown: true);
 
 final salesOrgConfigEnabledMaterialWithoutPrice =
     SalesOrganisationConfigs.empty().copyWith(
