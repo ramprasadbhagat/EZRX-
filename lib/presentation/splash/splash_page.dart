@@ -1140,17 +1140,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           );
 
       if (user.userCanAccessOrderHistory) {
-        if (!salesOrgState.salesOrg.isID) {
-          context.read<ViewByItemsBloc>().add(
-                ViewByItemsEvent.initialized(
-                  customerCodeInfo: state.customerCodeInfo,
-                  salesOrgConfigs: salesOrgState.configs,
-                  shipToInfo: state.shipToInfo,
-                  user: user,
-                  salesOrganisation: salesOrgState.salesOrganisation,
-                ),
-              );
-        }
+        context.read<ViewByItemsBloc>().add(
+              ViewByItemsEvent.initialized(
+                customerCodeInfo: state.customerCodeInfo,
+                salesOrgConfigs: salesOrgState.configs,
+                shipToInfo: state.shipToInfo,
+                user: user,
+                salesOrganisation: salesOrgState.salesOrganisation,
+              ),
+            );
 
         context.read<ViewByOrderBloc>().add(
               ViewByOrderEvent.initialized(

@@ -157,25 +157,6 @@ void main() {
       expect(find.byKey(WidgetKeys.ordersTabFilterButtonKey), findsOneWidget);
       expect(find.byType(ViewByItemsPage), findsOneWidget);
     });
-
-    testWidgets('in ID market', (tester) async {
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: fakeIDSalesOrganisation,
-        ),
-      );
-      await tester.pumpWidget(testWidget(const OrdersTab()));
-      await tester.pump();
-
-      expect(find.byKey(WidgetKeys.ordersTab), findsOneWidget);
-      expect(find.byKey(WidgetKeys.viewByItemsTabKey), findsNothing);
-      expect(find.byKey(WidgetKeys.viewByOrdersTabKey), findsNothing);
-      expect(find.byKey(WidgetKeys.ordersTabSearchBarKey), findsOneWidget);
-      expect(find.byKey(WidgetKeys.ordersTabFilterButtonKey), findsOneWidget);
-      expect(find.byType(ViewByItemsPage), findsNothing);
-      expect(find.byType(ViewByOrdersPage), findsOneWidget);
-    });
-
     testWidgets('Show view by item filter when tap filter icon',
         (tester) async {
       await tester.pumpWidget(testWidget(const OrdersTab()));

@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
@@ -52,60 +51,46 @@ class OrdersTab extends StatelessWidget {
           AnnouncementWidget(
             currentPath: context.router.currentPath,
           ),
-          BlocBuilder<EligibilityBloc, EligibilityState>(
-            buildWhen: (previous, current) =>
-                previous.salesOrg != current.salesOrg,
-            builder: (context, state) {
-              final routes = [
-                if (!state.salesOrg.isID) const ViewByItemsPageRoute(),
-                const ViewByOrdersPageRoute(),
-              ];
-              final tabs = [
-                if (!state.salesOrg.isID) 'View by items',
-                'View by orders',
-              ];
-
-              return Expanded(
-                child: AutoTabsRouter.tabBar(
-                  routes: routes,
-                  builder: (context, child, tabController) => Column(
-                    children: [
-                      if (routes.length > 1)
-                        TabBar(
-                          controller: tabController,
-                          tabs: tabs
-                              .map(
-                                (e) => Tab(
-                                  key: Key(e.toLowerCase()),
-                                  text: context.tr(e),
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-                        child: Row(
-                          children: [
-                            _OrdersTabSearchBar(
-                              key: WidgetKeys.ordersTabSearchBarKey,
-                              isFromViewByOrder:
-                                  context.tabsRouter.current.name ==
-                                      ViewByOrdersPageRoute.name,
-                            ),
-                            _OrdersTabFilter(
-                              key: WidgetKeys.ordersTabFilterButtonKey,
-                              viewByItem: context.tabsRouter.current.name ==
-                                  ViewByItemsPageRoute.name,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(child: child),
-                    ],
+          Expanded(
+            child: AutoTabsRouter.tabBar(
+              routes: const [
+                ViewByItemsPageRoute(),
+                ViewByOrdersPageRoute(),
+              ],
+              builder: (context, child, tabController) => Column(
+                children: [
+                  TabBar(
+                    controller: tabController,
+                    tabs: ['View by items', 'View by orders']
+                        .map(
+                          (e) => Tab(
+                            key: Key(e.toLowerCase()),
+                            text: context.tr(e),
+                          ),
+                        )
+                        .toList(),
                   ),
-                ),
-              );
-            },
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+                    child: Row(
+                      children: [
+                        _OrdersTabSearchBar(
+                          key: WidgetKeys.ordersTabSearchBarKey,
+                          isFromViewByOrder: context.tabsRouter.current.name ==
+                              ViewByOrdersPageRoute.name,
+                        ),
+                        _OrdersTabFilter(
+                          key: WidgetKeys.ordersTabFilterButtonKey,
+                          viewByItem: context.tabsRouter.current.name ==
+                              ViewByItemsPageRoute.name,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(child: child),
+                ],
+              ),
+            ),
           ),
         ],
       ),
