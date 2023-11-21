@@ -66,13 +66,13 @@ class CreatePaymentInvoicePdf {
                   cell,
                   style: isHeader
                       ? pw.TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
                           fontWeight: pw.FontWeight.bold,
                           letterSpacing: 0.25,
                         )
                       : pw.TextStyle(
-                          fontSize: 14,
+                          fontSize: 12,
                           color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
                           letterSpacing: 0.25,
                         ),
@@ -389,13 +389,18 @@ class CreatePaymentInvoicePdf {
         ),
       );
 
-  pw.Widget _item({required List<PaymentItem> paymentItems}) => pw.Padding(
+  pw.Widget _item({
+    required List<PaymentItem> paymentItems,
+    required SalesOrganisation salesOrganisation,
+  }) =>
+      pw.Padding(
         padding: const pw.EdgeInsets.symmetric(horizontal: 15.0),
         child: pw.Table(
           children: [
             _invoiceItem(
               [
                 'Document Date'.tr(),
+                if (salesOrganisation.salesOrg.isVN) 'Gov. Number'.tr(),
                 'Document Type'.tr(),
                 'Document No.'.tr(),
                 '${'Amount'.tr()} (${paymentItems.first.transactionCurrency}).',
@@ -406,6 +411,7 @@ class CreatePaymentInvoicePdf {
                 .map(
                   (e) => _invoiceItem([
                     e.documentDate.dateString,
+                    if (salesOrganisation.salesOrg.isVN) e.documentReferenceID,
                     e.postingKeyName,
                     e.searchKey,
                     e.paymentAmountInDisplayCrcy.toStringAsFixed(2),
@@ -778,7 +784,7 @@ class CreatePaymentInvoicePdf {
       color: PdfColor.fromInt(ZPColors.neutralsGrey1.value),
       letterSpacing: 0.25,
     );
-    
+
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
@@ -872,7 +878,10 @@ class CreatePaymentInvoicePdf {
                 ),
               ],
               pw.SizedBox(height: 20),
-              _item(paymentItems: paymentInvoiceInfoPdf.paymentItems),
+              _item(
+                paymentItems: paymentInvoiceInfoPdf.paymentItems,
+                salesOrganisation: salesOrganisation,
+              ),
               pw.Spacer(),
               description,
               _footerInvoice(footer: paymentInvoiceInfoPdf.footer),
