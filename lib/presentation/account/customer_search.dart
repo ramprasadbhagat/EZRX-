@@ -243,7 +243,7 @@ class _ShipToAddressSection extends StatelessWidget {
           subtitle: Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Text(
-              shipToInfo.deliveryAddress.toLowerCase(),
+              shipToInfo.deliveryAddress,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: ZPColors.extraLightGrey4,
                   ),
