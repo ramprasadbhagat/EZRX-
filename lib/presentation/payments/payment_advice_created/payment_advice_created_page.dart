@@ -47,44 +47,7 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: false,
-        backgroundColor: ZPColors.white,
-        title: BlocBuilder<NewPaymentBloc, NewPaymentState>(
-          buildWhen: (previous, current) =>
-              previous.isFetchingInvoiceInfoPdf !=
-              current.isFetchingInvoiceInfoPdf,
-          builder: (context, state) {
-            return Text(
-              state.isFetchingInvoiceInfoPdf
-                  ? context.tr('Generating payment advice...')
-                  : context.tr('Payment advice generated'),
-            );
-          },
-        ),
-        leading: BlocBuilder<NewPaymentBloc, NewPaymentState>(
-          buildWhen: (previous, current) =>
-              previous.isFetchingInvoiceInfoPdf !=
-              current.isFetchingInvoiceInfoPdf,
-          builder: (context, state) {
-            if (state.isFetchingInvoiceInfoPdf) return const SizedBox.shrink();
-            
-            return IconButton(
-              key: WidgetKeys.closeButton,
-              onPressed: () => Navigator.pop(context),
-              icon: const CircleAvatar(
-                maxRadius: 16,
-                backgroundColor: ZPColors.transparent,
-                child: Icon(
-                  Icons.close,
-                  color: ZPColors.neutralsBlack,
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+      appBar: _PaymentAdviceAppBar(),
       body: const _BodyContent(),
     );
   }
@@ -158,4 +121,44 @@ class _BodyContent extends StatelessWidget {
       },
     );
   }
+}
+
+class _PaymentAdviceAppBar extends StatelessWidget with PreferredSizeWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<NewPaymentBloc, NewPaymentState>(
+      buildWhen: (previous, current) =>
+          previous.isFetchingInvoiceInfoPdf != current.isFetchingInvoiceInfoPdf,
+      builder: (context, state) {
+        return AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: false,
+          leadingWidth: state.canDisplayCrossButton ? null : 5,
+          backgroundColor: ZPColors.white,
+          title: Text(
+            state.isFetchingInvoiceInfoPdf
+                ? context.tr('Generating payment advice...')
+                : context.tr('Payment advice generated'),
+          ),
+          leading: state.canDisplayCrossButton
+              ? IconButton(
+                  key: WidgetKeys.closeButton,
+                  onPressed: () => Navigator.pop(context),
+                  icon: const CircleAvatar(
+                    maxRadius: 16,
+                    backgroundColor: ZPColors.transparent,
+                    child: Icon(
+                      Icons.close,
+                      color: ZPColors.neutralsBlack,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
+        );
+      },
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

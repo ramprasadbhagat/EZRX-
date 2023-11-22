@@ -49,4 +49,7 @@ class NewPaymentState with _$NewPaymentState {
   bool get needOpenWebViewAndNotBankIn =>
       salesOrganisation.salesOrg.isPaymentNeedOpenWebView &&
       !selectedPaymentMethod.isBankIn;
+
+  bool get canDisplayCrossButton =>
+      (salesOrganisation.salesOrg.isSg || selectedPaymentMethod.isBankIn) && !isFetchingInvoiceInfoPdf ;
 }
