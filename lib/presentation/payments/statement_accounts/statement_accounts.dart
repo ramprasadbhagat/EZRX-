@@ -77,6 +77,8 @@ class StatementAccountsPage extends StatelessWidget {
             previous.isFetching != current.isFetching ||
             previous.filterList != current.filterList,
         builder: (context, state) {
+          final eligibilityState = context.read<EligibilityBloc>().state;
+
           return AnnouncementBanner(
             currentPath: context.router.currentPath,
             child: ScrollList<Soa>(
@@ -100,10 +102,8 @@ class StatementAccountsPage extends StatelessWidget {
               controller: _scrollController,
               onRefresh: () => context.read<SoaBloc>().add(
                     SoaEvent.fetch(
-                      customerCodeInfo: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .customerCodeInfo,
+                      customerCodeInfo: eligibilityState.customerCodeInfo,
+                      salesOrg: eligibilityState.salesOrg,
                     ),
                   ),
               onLoadingMore:

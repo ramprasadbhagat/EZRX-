@@ -390,6 +390,7 @@ void main() {
         () => mockSoaBloc.add(
           SoaEvent.fetch(
             customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrg(''),
           ),
         ),
       ).called(1);

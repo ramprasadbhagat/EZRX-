@@ -19,21 +19,25 @@ mixin _$SoaEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)
+        fetch,
     required TResult Function(SoaFilter soaFilter) updateFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)?
+        fetch,
     TResult? Function(SoaFilter soaFilter)? updateFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)?
+        fetch,
     TResult Function(SoaFilter soaFilter)? updateFilter,
     required TResult orElse(),
   }) =>
@@ -118,7 +122,9 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)
+        fetch,
     required TResult Function(SoaFilter soaFilter) updateFilter,
   }) {
     return initialized();
@@ -128,7 +134,8 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)?
+        fetch,
     TResult? Function(SoaFilter soaFilter)? updateFilter,
   }) {
     return initialized?.call();
@@ -138,7 +145,8 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)?
+        fetch,
     TResult Function(SoaFilter soaFilter)? updateFilter,
     required TResult orElse(),
   }) {
@@ -192,7 +200,7 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call({CustomerCodeInfo customerCodeInfo});
+  $Res call({CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
@@ -208,12 +216,17 @@ class __$$_FetchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? customerCodeInfo = null,
+    Object? salesOrg = null,
   }) {
     return _then(_$_Fetch(
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
     ));
   }
 
@@ -229,14 +242,16 @@ class __$$_FetchCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.customerCodeInfo});
+  const _$_Fetch({required this.customerCodeInfo, required this.salesOrg});
 
   @override
   final CustomerCodeInfo customerCodeInfo;
+  @override
+  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'SoaEvent.fetch(customerCodeInfo: $customerCodeInfo)';
+    return 'SoaEvent.fetch(customerCodeInfo: $customerCodeInfo, salesOrg: $salesOrg)';
   }
 
   @override
@@ -245,11 +260,13 @@ class _$_Fetch implements _Fetch {
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, customerCodeInfo);
+  int get hashCode => Object.hash(runtimeType, customerCodeInfo, salesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -261,32 +278,36 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)
+        fetch,
     required TResult Function(SoaFilter soaFilter) updateFilter,
   }) {
-    return fetch(customerCodeInfo);
+    return fetch(customerCodeInfo, salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)?
+        fetch,
     TResult? Function(SoaFilter soaFilter)? updateFilter,
   }) {
-    return fetch?.call(customerCodeInfo);
+    return fetch?.call(customerCodeInfo, salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)?
+        fetch,
     TResult Function(SoaFilter soaFilter)? updateFilter,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(customerCodeInfo);
+      return fetch(customerCodeInfo, salesOrg);
     }
     return orElse();
   }
@@ -327,10 +348,12 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements SoaEvent {
-  const factory _Fetch({required final CustomerCodeInfo customerCodeInfo}) =
-      _$_Fetch;
+  const factory _Fetch(
+      {required final CustomerCodeInfo customerCodeInfo,
+      required final SalesOrg salesOrg}) = _$_Fetch;
 
   CustomerCodeInfo get customerCodeInfo;
+  SalesOrg get salesOrg;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -412,7 +435,9 @@ class _$_UpdateFilter implements _UpdateFilter {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)
+        fetch,
     required TResult Function(SoaFilter soaFilter) updateFilter,
   }) {
     return updateFilter(soaFilter);
@@ -422,7 +447,8 @@ class _$_UpdateFilter implements _UpdateFilter {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)?
+        fetch,
     TResult? Function(SoaFilter soaFilter)? updateFilter,
   }) {
     return updateFilter?.call(soaFilter);
@@ -432,7 +458,8 @@ class _$_UpdateFilter implements _UpdateFilter {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg)?
+        fetch,
     TResult Function(SoaFilter soaFilter)? updateFilter,
     required TResult orElse(),
   }) {

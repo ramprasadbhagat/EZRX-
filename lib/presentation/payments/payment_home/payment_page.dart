@@ -125,6 +125,7 @@ class PaymentPage extends StatelessWidget {
           SoaEvent.fetch(
             customerCodeInfo:
                 context.read<EligibilityBloc>().state.customerCodeInfo,
+            salesOrg: context.read<EligibilityBloc>().state.salesOrg,
           ),
         );
   }

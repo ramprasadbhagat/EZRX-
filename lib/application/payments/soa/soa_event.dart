@@ -6,6 +6,7 @@ class SoaEvent with _$SoaEvent {
 
   const factory SoaEvent.fetch({
     required CustomerCodeInfo customerCodeInfo,
+    required SalesOrg salesOrg,
   }) = _Fetch;
 
   const factory SoaEvent.updateFilter({

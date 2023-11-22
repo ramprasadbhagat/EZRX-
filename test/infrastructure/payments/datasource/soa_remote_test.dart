@@ -32,7 +32,7 @@ void main() {
   final service = HttpService.mockDio(dio);
   final data = jsonEncode(
     {
-      'customer_code': '0030082707',
+      'customer_code': '26010030082707',
     },
   );
   setUpAll(() {
@@ -61,6 +61,7 @@ void main() {
 
       final result = await remoteDataSource.getSoa(
         '0030082707',
+        '2601',
       );
 
       expect(
@@ -85,6 +86,7 @@ void main() {
       await remoteDataSource
           .getSoa(
         '0030082707',
+        '2601',
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -112,6 +114,7 @@ void main() {
       await remoteDataSource
           .getSoa(
         '0030082707',
+        '2601',
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -133,6 +136,7 @@ void main() {
       await remoteDataSource
           .getSoa(
         '0030082707',
+        '2601',
       )
           .onError((error, _) async {
         expect(error, isA<OtherException>());

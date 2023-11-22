@@ -13,6 +13,8 @@ import 'package:ezrxmobile/infrastructure/payments/repository/soa_repository.dar
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class SoaRepositoryMock extends Mock implements SoaRepository {}
 
 void main() {
@@ -67,6 +69,7 @@ void main() {
         when(
           () => soaRepositoryMock.fetchSoa(
             customerCodeInfo: mockCustomerCodeInfo,
+            salesOrg: fakeSalesOrg,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -77,6 +80,7 @@ void main() {
       act: (SoaBloc bloc) => bloc.add(
         SoaEvent.fetch(
           customerCodeInfo: mockCustomerCodeInfo,
+          salesOrg: fakeSalesOrg,
         ),
       ),
       expect: () => [
@@ -104,6 +108,7 @@ void main() {
         when(
           () => soaRepositoryMock.fetchSoa(
             customerCodeInfo: mockCustomerCodeInfo,
+            salesOrg: fakeSalesOrg,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -114,6 +119,7 @@ void main() {
       act: (SoaBloc bloc) => bloc.add(
         SoaEvent.fetch(
           customerCodeInfo: mockCustomerCodeInfo,
+          salesOrg: fakeSalesOrg,
         ),
       ),
       expect: () => [

@@ -11,6 +11,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class MockConfig extends Mock implements Config {}
 
 class MockCustomerCodeInfo extends Mock implements CustomerCodeInfo {}
@@ -62,6 +64,7 @@ void main() {
 
       final result = await repository.fetchSoa(
         customerCodeInfo: mockCustomerCodeInfo,
+        salesOrg: fakeMYSalesOrg,
       );
       expect(
         result.isRight(),
@@ -81,6 +84,7 @@ void main() {
 
       final result = await repository.fetchSoa(
         customerCodeInfo: mockCustomerCodeInfo,
+        salesOrg: fakeMYSalesOrg,
       );
       expect(
         result.isLeft(),
@@ -91,13 +95,14 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
       when(
-        () => remoteDataSource.getSoa('0030082707'),
+        () => remoteDataSource.getSoa('0030082707', '2001'),
       ).thenAnswer(
         (invocation) async => fakeSoaMockList,
       );
       final result = await repository.fetchSoa(
         customerCodeInfo:
             CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0030082707'),
+        salesOrg: fakeMYSalesOrg,
       );
       expect(
         result.isRight(),
@@ -108,13 +113,14 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
       when(
-        () => remoteDataSource.getSoa('0030082707'),
+        () => remoteDataSource.getSoa('0030082707', '2001'),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
       );
       final result = await repository.fetchSoa(
         customerCodeInfo:
             CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0030082707'),
+        salesOrg: fakeMYSalesOrg,
       );
       expect(
         result.isLeft(),
