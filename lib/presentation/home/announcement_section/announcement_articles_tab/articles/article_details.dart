@@ -179,28 +179,6 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                               widget.article.content.appendedImgSrcWithBaseUrl,
                           shrinkWrap: true,
                         ),
-                        Html(
-                          style: {
-                            'body': Style(
-                              padding: const EdgeInsets.all(0),
-                              margin: const EdgeInsets.all(0),
-                            ),
-                          },
-                          data:
-                              widget.article.content.appendedImgSrcWithBaseUrl,
-                          shrinkWrap: true,
-                        ),
-                        Html(
-                          style: {
-                            'body': Style(
-                              padding: const EdgeInsets.all(0),
-                              margin: const EdgeInsets.all(0),
-                            ),
-                          },
-                          data:
-                              widget.article.content.appendedImgSrcWithBaseUrl,
-                          shrinkWrap: true,
-                        ),
                         const SizedBox(
                           height: 20,
                         ),
