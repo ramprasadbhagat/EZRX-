@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
@@ -17,33 +16,28 @@ class OfferLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final materialPriceState = context.read<MaterialPriceBloc>().state;
-    final isHidePrice = materialInfo.hidePrice;
-    final isMYPnGSalesRep =
-        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser &&
+    return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+      buildWhen: (previous, current) =>
+          previous.getPriceForMaterial(materialInfo.materialNumber) !=
+          current.getPriceForMaterial(materialInfo.materialNumber),
+      builder: (context, state) {
+        final eligibilityState = context.read<EligibilityBloc>().state;
+        final price = state.getPriceForMaterial(materialInfo.materialNumber);
+        final isHidePrice = materialInfo.hidePrice;
+        final isMYPnGSalesRep = eligibilityState.isMYExternalSalesRepUser &&
             materialInfo.isPnGPrinciple;
+        final displayOffers = !isHidePrice || isMYPnGSalesRep;
+        final inStockEligible = materialInfo.inStock ||
+            (!materialInfo.inStock &&
+                eligibilityState.salesOrgConfigs.addOosMaterials
+                    .getOrDefaultValue(false));
 
-    final displayOffers = !isHidePrice || isMYPnGSalesRep;
-
-    return displayOffers &&
-                (materialPriceState
-                        .getPriceForMaterial(materialInfo.materialNumber)
-                        .tiers
-                        .isNotEmpty &&
-                    !isMYPnGSalesRep) ||
-            (materialPriceState
-                    .getPriceForMaterial(materialInfo.materialNumber)
-                    .bonuses
-                    .isNotEmpty &&
-                (materialInfo.inStock ||
-                    (!materialInfo.inStock &&
-                        context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .configs
-                            .addOosMaterials
-                            .getOrDefaultValue(false))))
-        ? ProductTag.onOfferTag()
-        : const SizedBox.shrink();
+        return (price.lastPrice != price.finalPrice) ||
+                displayOffers && (price.tiers.isNotEmpty && !isMYPnGSalesRep) ||
+                (price.bonuses.isNotEmpty && inStockEligible)
+            ? ProductTag.onOfferTag()
+            : const SizedBox.shrink();
+      },
+    );
   }
 }
