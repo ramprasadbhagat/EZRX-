@@ -30,6 +30,7 @@ class CommonTileItem extends StatelessWidget {
     this.showOfferTag = false,
     this.showBundleTag = false,
     this.topHeaderWidget,
+    this.labelTrailing,
   }) : super(key: key);
 
   final String label;
@@ -49,6 +50,7 @@ class CommonTileItem extends StatelessWidget {
   final bool showBundleTag;
   final VoidCallback? onTap;
   final Widget? topHeaderWidget;
+  final Widget? labelTrailing;
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +103,7 @@ class CommonTileItem extends StatelessWidget {
                                 valueColor: statusTag!.displayStatusTextColor,
                               ),
                             ],
+                            if (labelTrailing != null) labelTrailing!,
                             if (headerText == null && statusWidget != null) ...[
                               const Spacer(),
                               statusWidget!,

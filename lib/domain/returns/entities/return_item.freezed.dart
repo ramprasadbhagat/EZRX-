@@ -31,6 +31,7 @@ mixin _$ReturnItem {
   bool get outsidePolicy => throw _privateConstructorUsedError;
   DateTimeStringValue get expiry => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
+  Prsfd get prsfd => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnItemCopyWith<ReturnItem> get copyWith =>
@@ -58,7 +59,8 @@ abstract class $ReturnItemCopyWith<$Res> {
       String batch,
       bool outsidePolicy,
       DateTimeStringValue expiry,
-      ProductImages productImages});
+      ProductImages productImages,
+      Prsfd prsfd});
 
   $ProductImagesCopyWith<$Res> get productImages;
 }
@@ -91,6 +93,7 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
     Object? outsidePolicy = null,
     Object? expiry = null,
     Object? productImages = null,
+    Object? prsfd = null,
   }) {
     return _then(_value.copyWith(
       requestId: null == requestId
@@ -153,6 +156,10 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
           ? _value.productImages
           : productImages // ignore: cast_nullable_to_non_nullable
               as ProductImages,
+      prsfd: null == prsfd
+          ? _value.prsfd
+          : prsfd // ignore: cast_nullable_to_non_nullable
+              as Prsfd,
     ) as $Val);
   }
 
@@ -188,7 +195,8 @@ abstract class _$$_ReturnItemCopyWith<$Res>
       String batch,
       bool outsidePolicy,
       DateTimeStringValue expiry,
-      ProductImages productImages});
+      ProductImages productImages,
+      Prsfd prsfd});
 
   @override
   $ProductImagesCopyWith<$Res> get productImages;
@@ -220,6 +228,7 @@ class __$$_ReturnItemCopyWithImpl<$Res>
     Object? outsidePolicy = null,
     Object? expiry = null,
     Object? productImages = null,
+    Object? prsfd = null,
   }) {
     return _then(_$_ReturnItem(
       requestId: null == requestId
@@ -282,6 +291,10 @@ class __$$_ReturnItemCopyWithImpl<$Res>
           ? _value.productImages
           : productImages // ignore: cast_nullable_to_non_nullable
               as ProductImages,
+      prsfd: null == prsfd
+          ? _value.prsfd
+          : prsfd // ignore: cast_nullable_to_non_nullable
+              as Prsfd,
     ));
   }
 }
@@ -304,7 +317,8 @@ class _$_ReturnItem extends _ReturnItem {
       required this.batch,
       required this.outsidePolicy,
       required this.expiry,
-      required this.productImages})
+      required this.productImages,
+      required this.prsfd})
       : super._();
 
   @override
@@ -337,10 +351,12 @@ class _$_ReturnItem extends _ReturnItem {
   final DateTimeStringValue expiry;
   @override
   final ProductImages productImages;
+  @override
+  final Prsfd prsfd;
 
   @override
   String toString() {
-    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, productImages: $productImages)';
+    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, productImages: $productImages, prsfd: $prsfd)';
   }
 
   @override
@@ -375,7 +391,8 @@ class _$_ReturnItem extends _ReturnItem {
                 other.outsidePolicy == outsidePolicy) &&
             (identical(other.expiry, expiry) || other.expiry == expiry) &&
             (identical(other.productImages, productImages) ||
-                other.productImages == productImages));
+                other.productImages == productImages) &&
+            (identical(other.prsfd, prsfd) || other.prsfd == prsfd));
   }
 
   @override
@@ -395,7 +412,8 @@ class _$_ReturnItem extends _ReturnItem {
       batch,
       outsidePolicy,
       expiry,
-      productImages);
+      productImages,
+      prsfd);
 
   @JsonKey(ignore: true)
   @override
@@ -420,7 +438,8 @@ abstract class _ReturnItem extends ReturnItem {
       required final String batch,
       required final bool outsidePolicy,
       required final DateTimeStringValue expiry,
-      required final ProductImages productImages}) = _$_ReturnItem;
+      required final ProductImages productImages,
+      required final Prsfd prsfd}) = _$_ReturnItem;
   const _ReturnItem._() : super._();
 
   @override
@@ -453,6 +472,8 @@ abstract class _ReturnItem extends ReturnItem {
   DateTimeStringValue get expiry;
   @override
   ProductImages get productImages;
+  @override
+  Prsfd get prsfd;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnItemCopyWith<_$_ReturnItem> get copyWith =>

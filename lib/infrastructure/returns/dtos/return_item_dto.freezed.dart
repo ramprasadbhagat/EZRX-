@@ -48,6 +48,8 @@ mixin _$ReturnItemDto {
   bool get outsidePolicy => throw _privateConstructorUsedError;
   @JsonKey(name: 'expiry', defaultValue: '')
   String get expiry => throw _privateConstructorUsedError;
+  @JsonKey(name: 'prsfd', defaultValue: '')
+  String get prsfd => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,34 +64,22 @@ abstract class $ReturnItemDtoCopyWith<$Res> {
       _$ReturnItemDtoCopyWithImpl<$Res, ReturnItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'requestId', defaultValue: '')
-          String requestId,
-      @JsonKey(name: 'requestDate', defaultValue: '')
-          String requestDate,
-      @JsonKey(name: 'itemQty', defaultValue: '0')
-          String itemQty,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          String totalPrice,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
-      @JsonKey(name: 'materialName', defaultValue: '')
-          String materialName,
+      {@JsonKey(name: 'requestId', defaultValue: '') String requestId,
+      @JsonKey(name: 'requestDate', defaultValue: '') String requestDate,
+      @JsonKey(name: 'itemQty', defaultValue: '0') String itemQty,
+      @JsonKey(name: 'totalPrice', defaultValue: '') String totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'materialName', defaultValue: '') String materialName,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription,
-      @JsonKey(name: 'orderNumber', defaultValue: '')
-          String orderNumber,
-      @JsonKey(name: 'invoiceID', defaultValue: '')
-          String invoiceID,
-      @JsonKey(name: 'customerName', defaultValue: '')
-          String customerName,
-      @JsonKey(name: 'batch', defaultValue: '')
-          String batch,
-      @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          bool outsidePolicy,
-      @JsonKey(name: 'expiry', defaultValue: '')
-          String expiry});
+      String defaultMaterialDescription,
+      @JsonKey(name: 'orderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'invoiceID', defaultValue: '') String invoiceID,
+      @JsonKey(name: 'customerName', defaultValue: '') String customerName,
+      @JsonKey(name: 'batch', defaultValue: '') String batch,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
+      @JsonKey(name: 'expiry', defaultValue: '') String expiry,
+      @JsonKey(name: 'prsfd', defaultValue: '') String prsfd});
 }
 
 /// @nodoc
@@ -119,6 +109,7 @@ class _$ReturnItemDtoCopyWithImpl<$Res, $Val extends ReturnItemDto>
     Object? batch = null,
     Object? outsidePolicy = null,
     Object? expiry = null,
+    Object? prsfd = null,
   }) {
     return _then(_value.copyWith(
       requestId: null == requestId
@@ -177,6 +168,10 @@ class _$ReturnItemDtoCopyWithImpl<$Res, $Val extends ReturnItemDto>
           ? _value.expiry
           : expiry // ignore: cast_nullable_to_non_nullable
               as String,
+      prsfd: null == prsfd
+          ? _value.prsfd
+          : prsfd // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -190,34 +185,22 @@ abstract class _$$_ReturnItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'requestId', defaultValue: '')
-          String requestId,
-      @JsonKey(name: 'requestDate', defaultValue: '')
-          String requestDate,
-      @JsonKey(name: 'itemQty', defaultValue: '0')
-          String itemQty,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          String totalPrice,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
-      @JsonKey(name: 'materialName', defaultValue: '')
-          String materialName,
+      {@JsonKey(name: 'requestId', defaultValue: '') String requestId,
+      @JsonKey(name: 'requestDate', defaultValue: '') String requestDate,
+      @JsonKey(name: 'itemQty', defaultValue: '0') String itemQty,
+      @JsonKey(name: 'totalPrice', defaultValue: '') String totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'materialName', defaultValue: '') String materialName,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription,
-      @JsonKey(name: 'orderNumber', defaultValue: '')
-          String orderNumber,
-      @JsonKey(name: 'invoiceID', defaultValue: '')
-          String invoiceID,
-      @JsonKey(name: 'customerName', defaultValue: '')
-          String customerName,
-      @JsonKey(name: 'batch', defaultValue: '')
-          String batch,
-      @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          bool outsidePolicy,
-      @JsonKey(name: 'expiry', defaultValue: '')
-          String expiry});
+      String defaultMaterialDescription,
+      @JsonKey(name: 'orderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'invoiceID', defaultValue: '') String invoiceID,
+      @JsonKey(name: 'customerName', defaultValue: '') String customerName,
+      @JsonKey(name: 'batch', defaultValue: '') String batch,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
+      @JsonKey(name: 'expiry', defaultValue: '') String expiry,
+      @JsonKey(name: 'prsfd', defaultValue: '') String prsfd});
 }
 
 /// @nodoc
@@ -245,6 +228,7 @@ class __$$_ReturnItemDtoCopyWithImpl<$Res>
     Object? batch = null,
     Object? outsidePolicy = null,
     Object? expiry = null,
+    Object? prsfd = null,
   }) {
     return _then(_$_ReturnItemDto(
       requestId: null == requestId
@@ -303,6 +287,10 @@ class __$$_ReturnItemDtoCopyWithImpl<$Res>
           ? _value.expiry
           : expiry // ignore: cast_nullable_to_non_nullable
               as String,
+      prsfd: null == prsfd
+          ? _value.prsfd
+          : prsfd // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -311,34 +299,26 @@ class __$$_ReturnItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ReturnItemDto extends _ReturnItemDto {
   const _$_ReturnItemDto(
-      {@JsonKey(name: 'requestId', defaultValue: '')
-          required this.requestId,
-      @JsonKey(name: 'requestDate', defaultValue: '')
-          required this.requestDate,
-      @JsonKey(name: 'itemQty', defaultValue: '0')
-          required this.itemQty,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          required this.totalPrice,
-      @JsonKey(name: 'status', defaultValue: '')
-          required this.status,
+      {@JsonKey(name: 'requestId', defaultValue: '') required this.requestId,
+      @JsonKey(name: 'requestDate', defaultValue: '') required this.requestDate,
+      @JsonKey(name: 'itemQty', defaultValue: '0') required this.itemQty,
+      @JsonKey(name: 'totalPrice', defaultValue: '') required this.totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') required this.status,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber,
+      required this.materialNumber,
       @JsonKey(name: 'materialName', defaultValue: '')
-          required this.materialName,
+      required this.materialName,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          required this.defaultMaterialDescription,
-      @JsonKey(name: 'orderNumber', defaultValue: '')
-          required this.orderNumber,
-      @JsonKey(name: 'invoiceID', defaultValue: '')
-          required this.invoiceID,
+      required this.defaultMaterialDescription,
+      @JsonKey(name: 'orderNumber', defaultValue: '') required this.orderNumber,
+      @JsonKey(name: 'invoiceID', defaultValue: '') required this.invoiceID,
       @JsonKey(name: 'customerName', defaultValue: '')
-          required this.customerName,
-      @JsonKey(name: 'batch', defaultValue: '')
-          required this.batch,
+      required this.customerName,
+      @JsonKey(name: 'batch', defaultValue: '') required this.batch,
       @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          required this.outsidePolicy,
-      @JsonKey(name: 'expiry', defaultValue: '')
-          required this.expiry})
+      required this.outsidePolicy,
+      @JsonKey(name: 'expiry', defaultValue: '') required this.expiry,
+      @JsonKey(name: 'prsfd', defaultValue: '') required this.prsfd})
       : super._();
 
   factory _$_ReturnItemDto.fromJson(Map<String, dynamic> json) =>
@@ -386,10 +366,13 @@ class _$_ReturnItemDto extends _ReturnItemDto {
   @override
   @JsonKey(name: 'expiry', defaultValue: '')
   final String expiry;
+  @override
+  @JsonKey(name: 'prsfd', defaultValue: '')
+  final String prsfd;
 
   @override
   String toString() {
-    return 'ReturnItemDto(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry)';
+    return 'ReturnItemDto(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, prsfd: $prsfd)';
   }
 
   @override
@@ -422,7 +405,8 @@ class _$_ReturnItemDto extends _ReturnItemDto {
             (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.outsidePolicy, outsidePolicy) ||
                 other.outsidePolicy == outsidePolicy) &&
-            (identical(other.expiry, expiry) || other.expiry == expiry));
+            (identical(other.expiry, expiry) || other.expiry == expiry) &&
+            (identical(other.prsfd, prsfd) || other.prsfd == prsfd));
   }
 
   @JsonKey(ignore: true)
@@ -442,7 +426,8 @@ class _$_ReturnItemDto extends _ReturnItemDto {
       customerName,
       batch,
       outsidePolicy,
-      expiry);
+      expiry,
+      prsfd);
 
   @JsonKey(ignore: true)
   @override
@@ -461,33 +446,32 @@ class _$_ReturnItemDto extends _ReturnItemDto {
 abstract class _ReturnItemDto extends ReturnItemDto {
   const factory _ReturnItemDto(
       {@JsonKey(name: 'requestId', defaultValue: '')
-          required final String requestId,
+      required final String requestId,
       @JsonKey(name: 'requestDate', defaultValue: '')
-          required final String requestDate,
+      required final String requestDate,
       @JsonKey(name: 'itemQty', defaultValue: '0')
-          required final String itemQty,
+      required final String itemQty,
       @JsonKey(name: 'totalPrice', defaultValue: '')
-          required final String totalPrice,
-      @JsonKey(name: 'status', defaultValue: '')
-          required final String status,
+      required final String totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') required final String status,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'materialName', defaultValue: '')
-          required final String materialName,
+      required final String materialName,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          required final String defaultMaterialDescription,
+      required final String defaultMaterialDescription,
       @JsonKey(name: 'orderNumber', defaultValue: '')
-          required final String orderNumber,
+      required final String orderNumber,
       @JsonKey(name: 'invoiceID', defaultValue: '')
-          required final String invoiceID,
+      required final String invoiceID,
       @JsonKey(name: 'customerName', defaultValue: '')
-          required final String customerName,
-      @JsonKey(name: 'batch', defaultValue: '')
-          required final String batch,
+      required final String customerName,
+      @JsonKey(name: 'batch', defaultValue: '') required final String batch,
       @JsonKey(name: 'outsidePolicy', defaultValue: false)
-          required final bool outsidePolicy,
-      @JsonKey(name: 'expiry', defaultValue: '')
-          required final String expiry}) = _$_ReturnItemDto;
+      required final bool outsidePolicy,
+      @JsonKey(name: 'expiry', defaultValue: '') required final String expiry,
+      @JsonKey(name: 'prsfd', defaultValue: '')
+      required final String prsfd}) = _$_ReturnItemDto;
   const _ReturnItemDto._() : super._();
 
   factory _ReturnItemDto.fromJson(Map<String, dynamic> json) =
@@ -535,6 +519,9 @@ abstract class _ReturnItemDto extends ReturnItemDto {
   @override
   @JsonKey(name: 'expiry', defaultValue: '')
   String get expiry;
+  @override
+  @JsonKey(name: 'prsfd', defaultValue: '')
+  String get prsfd;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnItemDtoCopyWith<_$_ReturnItemDto> get copyWith =>

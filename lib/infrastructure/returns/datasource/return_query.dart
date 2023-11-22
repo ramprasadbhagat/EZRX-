@@ -6,6 +6,7 @@ class ReturnQuery {
           returnRequestsByItems {
             requestDate
             requestByItems {
+              prsfd
               requestId
               requestDate
               itemQty

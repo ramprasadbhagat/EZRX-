@@ -11,8 +11,10 @@ import 'package:ezrxmobile/application/returns/return_summary_details/return_sum
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -69,7 +71,7 @@ void main() {
   late ProductImageBloc mockProductImageBloc;
   late ReturnSummaryDetailsBloc mockReturnSummaryDetailsBloc;
   late AuthBloc mockAuthBloc;
-  late List<ReturnItem> fakeReturhItemList;
+  late List<ReturnItem> fakeReturnItemList;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -90,7 +92,7 @@ void main() {
     mockProductImageBloc = MockProductImageBloc();
     mockReturnListByItemBloc = ReturnListByItemBlocMock();
 
-    fakeReturhItemList = [
+    fakeReturnItemList = [
       ReturnItem.empty().copyWith(
         requestId: '1234567',
         invoiceID: '1234567',
@@ -196,7 +198,7 @@ void main() {
         );
         final expectedStates = [
           ReturnListByItemState.initial()
-              .copyWith(isFetching: false, returnItemList: fakeReturhItemList),
+              .copyWith(isFetching: false, returnItemList: fakeReturnItemList),
         ];
         whenListen(
           mockReturnListByItemBloc,
@@ -236,7 +238,7 @@ void main() {
             ),
             ReturnListByItemState.initial().copyWith(
               isFetching: false,
-              returnItemList: fakeReturhItemList,
+              returnItemList: fakeReturnItemList,
             )
           ];
           whenListen(
@@ -308,6 +310,32 @@ void main() {
           );
         },
       );
+
+      testWidgets('Return Item bonus', (tester) async {
+        when(() => mockReturnListByItemBloc.state).thenReturn(
+          ReturnListByItemState.initial().copyWith(
+            returnItemList: [
+              fakeReturnItemList.first,
+              fakeReturnItemList.first.copyWith(
+                prsfd: Prsfd('B'),
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        await tester.pump(const Duration(seconds: 2));
+        expect(
+          find.byKey(WidgetKeys.returnItem('0')),
+          findsOneWidget,
+        );
+        expect(
+          find.byType(BonusTag),
+          findsOneWidget,
+        );
+      });
     },
   );
 }

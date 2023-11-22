@@ -6,6 +6,7 @@
                     "requestDate": "20230615",
                     "requestByItems": [
                         {
+                            "prsfd": "B",
                             "requestId": "EZRE-200123000750",
                             "requestDate": "20230615",
                             "itemQty": "1",
@@ -22,6 +23,7 @@
                             "expiry": "20170531"
                         },
                         {
+                            "prsfd": "X",
                             "requestId": "EZRE-200123000750",
                             "requestDate": "20230615",
                             "itemQty": "1",
@@ -38,6 +40,7 @@
                             "expiry": "20170531"
                         },
                         {
+                            "prsfd": "X",
                             "requestId": "EZRE-200123000749",
                             "requestDate": "20230615",
                             "itemQty": "1",
@@ -54,6 +57,7 @@
                             "expiry": "20251101"
                         },
                         {
+                            "prsfd": "X",
                             "requestId": "EZRE-200123000748",
                             "requestDate": "20230615",
                             "itemQty": "2",
@@ -70,6 +74,7 @@
                             "expiry": "20170531"
                         },
                         {
+                            "prsfd": "X",
                             "requestId": "EZRE-200123000748",
                             "requestDate": "20230615",
                             "itemQty": "4",
@@ -91,6 +96,7 @@
                     "requestDate": "20230613",
                     "requestByItems": [
                         {
+                            "prsfd": "X",
                             "requestId": "EZRE-200123000735",
                             "requestDate": "20230613",
                             "itemQty": "1",
@@ -107,6 +113,7 @@
                             "expiry": "20170531"
                         },
                         {
+                            "prsfd": "X",
                             "requestId": "EZRE-200123000735",
                             "requestDate": "20230613",
                             "itemQty": "2",
@@ -128,6 +135,7 @@
                     "requestDate": "20230612",
                     "requestByItems": [
                         {
+                            "prsfd": "X",
                             "requestId": "EZRE-200123000734",
                             "requestDate": "20230612",
                             "itemQty": "1",
@@ -144,6 +152,7 @@
                             "expiry": "20170531"
                         },
                         {
+                            "prsfd": "X",
                             "requestId": "EZRE-200123000734",
                             "requestDate": "20230612",
                             "itemQty": "1",
@@ -165,6 +174,7 @@
                     "requestDate": "20230529",
                     "requestByItems": [
                         {
+                            "prsfd": "X",
                             "requestId": "EZRE-200123000608",
                             "requestDate": "20230529",
                             "itemQty": "10",

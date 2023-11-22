@@ -33,6 +33,7 @@ class ReturnItemDto with _$ReturnItemDto {
     @JsonKey(name: 'outsidePolicy', defaultValue: false)
         required bool outsidePolicy,
     @JsonKey(name: 'expiry', defaultValue: '') required String expiry,
+    @JsonKey(name: 'prsfd', defaultValue: '') required String prsfd,
   }) = _ReturnItemDto;
 
   factory ReturnItemDto.fromDomain(
@@ -53,6 +54,7 @@ class ReturnItemDto with _$ReturnItemDto {
       batch: returnItem.batch,
       outsidePolicy: returnItem.outsidePolicy,
       expiry: returnItem.expiry.getOrCrash(),
+      prsfd: returnItem.prsfd.getOrDefaultValue(''),
     );
   }
 
@@ -73,6 +75,8 @@ class ReturnItemDto with _$ReturnItemDto {
       outsidePolicy: outsidePolicy,
       expiry: DateTimeStringValue(expiry),
       productImages: ProductImages.empty(),
+      prsfd: Prsfd(prsfd),
+      
     );
   }
 

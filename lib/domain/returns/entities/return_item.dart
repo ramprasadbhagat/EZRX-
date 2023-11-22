@@ -27,6 +27,7 @@ class ReturnItem with _$ReturnItem {
     required bool outsidePolicy,
     required DateTimeStringValue expiry,
     required ProductImages productImages,
+    required Prsfd prsfd,
   }) = _ReturnItem;
 
   factory ReturnItem.empty() => ReturnItem(
@@ -45,5 +46,6 @@ class ReturnItem with _$ReturnItem {
         expiry: DateTimeStringValue(''),
         outsidePolicy: false,
         productImages: ProductImages.empty(),
+        prsfd: Prsfd(''),
       );
 }

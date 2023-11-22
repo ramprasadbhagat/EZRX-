@@ -3,6 +3,7 @@ query requestsByItems($request: requestsByItems!) {
     returnRequestsByItems {
       requestDate
       requestByItems {
+        prsfd
         requestId
         requestDate
         itemQty

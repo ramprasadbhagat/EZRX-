@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
@@ -169,6 +170,11 @@ class _ReturnItem extends StatelessWidget {
                   );
                 },
                 label: data.materialNumber.displayMatNo,
+                labelTrailing: data.prsfd.isBonus
+                    ? const BonusTag(
+                  margin: EdgeInsets.symmetric(horizontal: 4),
+                      )
+                    : null,
                 title: data.materialName,
                 subtitle:
                     'Batch ${data.batch} (Expires ${data.expiry.dateString})',

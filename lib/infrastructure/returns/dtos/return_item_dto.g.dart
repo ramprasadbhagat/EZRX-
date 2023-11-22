@@ -23,6 +23,7 @@ _$_ReturnItemDto _$$_ReturnItemDtoFromJson(Map<String, dynamic> json) =>
       batch: json['batch'] as String? ?? '',
       outsidePolicy: json['outsidePolicy'] as bool? ?? false,
       expiry: json['expiry'] as String? ?? '',
+      prsfd: json['prsfd'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ReturnItemDtoToJson(_$_ReturnItemDto instance) =>
@@ -41,4 +42,5 @@ Map<String, dynamic> _$$_ReturnItemDtoToJson(_$_ReturnItemDto instance) =>
       'batch': instance.batch,
       'outsidePolicy': instance.outsidePolicy,
       'expiry': instance.expiry,
+      'prsfd': instance.prsfd,
     };
