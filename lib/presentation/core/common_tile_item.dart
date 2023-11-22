@@ -19,10 +19,10 @@ class CommonTileItem extends StatelessWidget {
     required this.subtitle,
     required this.quantity,
     required this.isQuantityBelowImage,
+    required this.footerWidget,
     this.headerText,
     this.statusWidget,
     this.statusTag,
-    this.footerWidget,
     this.priceComponent,
     this.isQuantityRequired = true,
     this.onTap,
@@ -42,7 +42,7 @@ class CommonTileItem extends StatelessWidget {
   final String quantity;
   final bool isQuantityBelowImage;
   final StatusType? statusTag;
-  final Widget? footerWidget;
+  final Widget footerWidget;
   final bool isQuantityRequired;
   final bool isCovidItem;
   final bool showOfferTag;
@@ -131,8 +131,8 @@ class CommonTileItem extends StatelessWidget {
                 ),
               ],
             ),
-            if (footerWidget != null) const SizedBox(height: 5),
-            if (footerWidget != null) footerWidget!,
+            const SizedBox(height: 5),
+            footerWidget,
           ],
         ),
       ),
@@ -191,13 +191,14 @@ class _Subtitle extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(
-                '${context.tr('Qty')}: $quantity',
-                key: WidgetKeys.commonTileItemQty,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.black,
-                    ),
-              ),
+              if (quantity.isNotEmpty)
+                Text(
+                  '${context.tr('Qty')}: $quantity',
+                  key: WidgetKeys.commonTileItemQty,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.black,
+                      ),
+                ),
             ],
           );
   }

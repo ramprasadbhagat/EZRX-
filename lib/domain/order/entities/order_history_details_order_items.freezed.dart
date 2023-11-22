@@ -21,6 +21,7 @@ mixin _$OrderHistoryDetailsOrderItem {
   String get materialDescription => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
   ZpPrice get unitPrice => throw _privateConstructorUsedError;
+  ZpPrice get originPrice => throw _privateConstructorUsedError;
   TotalPrice get totalPrice => throw _privateConstructorUsedError;
   double get tax => throw _privateConstructorUsedError;
   OrderStepValue get sAPStatus => throw _privateConstructorUsedError;
@@ -44,6 +45,7 @@ mixin _$OrderHistoryDetailsOrderItem {
   String get parentId => throw _privateConstructorUsedError;
   MaterialInfo get material => throw _privateConstructorUsedError;
   bool get promoStatus => throw _privateConstructorUsedError;
+  bool get isCounterOffer => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsOrderItemCopyWith<OrderHistoryDetailsOrderItem>
@@ -64,6 +66,7 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       String materialDescription,
       int qty,
       ZpPrice unitPrice,
+      ZpPrice originPrice,
       TotalPrice totalPrice,
       double tax,
       OrderStepValue sAPStatus,
@@ -83,7 +86,8 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       MaterialInfoType productType,
       String parentId,
       MaterialInfo material,
-      bool promoStatus});
+      bool promoStatus,
+      bool isCounterOffer});
 
   $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
       get tenderContractDetails;
@@ -113,6 +117,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? materialDescription = null,
     Object? qty = null,
     Object? unitPrice = null,
+    Object? originPrice = null,
     Object? totalPrice = null,
     Object? tax = null,
     Object? sAPStatus = null,
@@ -133,6 +138,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? parentId = null,
     Object? material = null,
     Object? promoStatus = null,
+    Object? isCounterOffer = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -154,6 +160,10 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
+              as ZpPrice,
+      originPrice: null == originPrice
+          ? _value.originPrice
+          : originPrice // ignore: cast_nullable_to_non_nullable
               as ZpPrice,
       totalPrice: null == totalPrice
           ? _value.totalPrice
@@ -235,6 +245,10 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
           ? _value.promoStatus
           : promoStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCounterOffer: null == isCounterOffer
+          ? _value.isCounterOffer
+          : isCounterOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -304,6 +318,7 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
       String materialDescription,
       int qty,
       ZpPrice unitPrice,
+      ZpPrice originPrice,
       TotalPrice totalPrice,
       double tax,
       OrderStepValue sAPStatus,
@@ -323,7 +338,8 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
       MaterialInfoType productType,
       String parentId,
       MaterialInfo material,
-      bool promoStatus});
+      bool promoStatus,
+      bool isCounterOffer});
 
   @override
   $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
@@ -358,6 +374,7 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
     Object? materialDescription = null,
     Object? qty = null,
     Object? unitPrice = null,
+    Object? originPrice = null,
     Object? totalPrice = null,
     Object? tax = null,
     Object? sAPStatus = null,
@@ -378,6 +395,7 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
     Object? parentId = null,
     Object? material = null,
     Object? promoStatus = null,
+    Object? isCounterOffer = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItem(
       type: null == type
@@ -399,6 +417,10 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
+              as ZpPrice,
+      originPrice: null == originPrice
+          ? _value.originPrice
+          : originPrice // ignore: cast_nullable_to_non_nullable
               as ZpPrice,
       totalPrice: null == totalPrice
           ? _value.totalPrice
@@ -480,6 +502,10 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
           ? _value.promoStatus
           : promoStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCounterOffer: null == isCounterOffer
+          ? _value.isCounterOffer
+          : isCounterOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -493,6 +519,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
       required this.materialDescription,
       required this.qty,
       required this.unitPrice,
+      required this.originPrice,
       required this.totalPrice,
       required this.tax,
       required this.sAPStatus,
@@ -512,7 +539,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
       required this.productType,
       required this.parentId,
       required this.material,
-      required this.promoStatus})
+      required this.promoStatus,
+      required this.isCounterOffer})
       : _details = details,
         super._();
 
@@ -526,6 +554,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   final int qty;
   @override
   final ZpPrice unitPrice;
+  @override
+  final ZpPrice originPrice;
   @override
   final TotalPrice totalPrice;
   @override
@@ -572,10 +602,12 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   final MaterialInfo material;
   @override
   final bool promoStatus;
+  @override
+  final bool isCounterOffer;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus)';
+    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer)';
   }
 
   @override
@@ -591,6 +623,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.unitPrice, unitPrice) ||
                 other.unitPrice == unitPrice) &&
+            (identical(other.originPrice, originPrice) ||
+                other.originPrice == originPrice) &&
             (identical(other.totalPrice, totalPrice) ||
                 other.totalPrice == totalPrice) &&
             (identical(other.tax, tax) || other.tax == tax) &&
@@ -628,7 +662,9 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
             (identical(other.material, material) ||
                 other.material == material) &&
             (identical(other.promoStatus, promoStatus) ||
-                other.promoStatus == promoStatus));
+                other.promoStatus == promoStatus) &&
+            (identical(other.isCounterOffer, isCounterOffer) ||
+                other.isCounterOffer == isCounterOffer));
   }
 
   @override
@@ -639,6 +675,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
         materialDescription,
         qty,
         unitPrice,
+        originPrice,
         totalPrice,
         tax,
         sAPStatus,
@@ -658,7 +695,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
         productType,
         parentId,
         material,
-        promoStatus
+        promoStatus,
+        isCounterOffer
       ]);
 
   @JsonKey(ignore: true)
@@ -677,6 +715,7 @@ abstract class _OrderHistoryDetailsOrderItem
       required final String materialDescription,
       required final int qty,
       required final ZpPrice unitPrice,
+      required final ZpPrice originPrice,
       required final TotalPrice totalPrice,
       required final double tax,
       required final OrderStepValue sAPStatus,
@@ -697,7 +736,8 @@ abstract class _OrderHistoryDetailsOrderItem
       required final MaterialInfoType productType,
       required final String parentId,
       required final MaterialInfo material,
-      required final bool promoStatus}) = _$_OrderHistoryDetailsOrderItem;
+      required final bool promoStatus,
+      required final bool isCounterOffer}) = _$_OrderHistoryDetailsOrderItem;
   _OrderHistoryDetailsOrderItem._() : super._();
 
   @override
@@ -710,6 +750,8 @@ abstract class _OrderHistoryDetailsOrderItem
   int get qty;
   @override
   ZpPrice get unitPrice;
+  @override
+  ZpPrice get originPrice;
   @override
   TotalPrice get totalPrice;
   @override
@@ -750,6 +792,8 @@ abstract class _OrderHistoryDetailsOrderItem
   MaterialInfo get material;
   @override
   bool get promoStatus;
+  @override
+  bool get isCounterOffer;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderItemCopyWith<_$_OrderHistoryDetailsOrderItem>

@@ -29,6 +29,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required int qty,
     @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
         required double unitPrice,
+    @JsonKey(name: 'mrp', defaultValue: 0.0)
+        required double originPrice,
     @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
         required double totalPrice,
     @JsonKey(name: 'Tax', defaultValue: 0.0)
@@ -66,6 +68,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required String productType,
     @JsonKey(name: 'promoStatus', defaultValue: false)
         required bool promosStatus,
+    @JsonKey(name: 'isCounterOffer', defaultValue: false)
+        required bool isCounterOffer,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
     OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
@@ -76,6 +80,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       materialDescription: orderHistoryDetailsOrderItem.materialDescription,
       qty: orderHistoryDetailsOrderItem.qty,
       unitPrice: orderHistoryDetailsOrderItem.unitPrice.zpPrice,
+      originPrice: orderHistoryDetailsOrderItem.originPrice.zpPrice,
       totalPrice: orderHistoryDetailsOrderItem.totalPrice.totalPrice,
       tax: orderHistoryDetailsOrderItem.tax,
       sAPStatus: orderHistoryDetailsOrderItem.sAPStatus.displayOrderStatus,
@@ -106,6 +111,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
           orderHistoryDetailsOrderItem.governmentMaterialCode,
       productType: orderHistoryDetailsOrderItem.productType.getValue(),
       promosStatus: orderHistoryDetailsOrderItem.promoStatus,
+      isCounterOffer: orderHistoryDetailsOrderItem.isCounterOffer,
     );
   }
 
@@ -116,6 +122,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       materialDescription: materialDescription,
       qty: qty,
       unitPrice: ZpPrice(unitPrice.toString()),
+      originPrice: ZpPrice(originPrice.toString()),
       totalPrice: TotalPrice(totalPrice.toString()),
       tax: tax,
       sAPStatus: OrderStepValue(sAPStatus),
@@ -142,6 +149,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       productType: MaterialInfoType(productType),
       material: MaterialInfo.empty(),
       promoStatus: promosStatus,
+      isCounterOffer: isCounterOffer,
     );
   }
 

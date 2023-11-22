@@ -39,6 +39,7 @@
           },
           "OrderItems": [
             {
+              "isCounterOffer": true,
               "Type": "Comm",
               "MaterialCode": "000000000021038302",
               "MaterialDescription": "0.9% SODIUM CHLORIDEBP 96X50ML",
@@ -72,6 +73,7 @@
               "TenderContractDetails": null
             },
             {
+              "isCounterOffer": true,
               "Type": "Comm",
               "MaterialCode": "000000000021038305",
               "MaterialDescription": "0.9% SODIUM CHLORIDEBP100ML1x72'S",
@@ -105,6 +107,7 @@
               "TenderContractDetails": null
             },
             {
+              "isCounterOffer": true,
               "Type": "Comm",
               "MaterialCode": "000000000021041773",
               "MaterialDescription": "190 BIOTENE D/MOUTHT/PASTE FM ORI 4.5OZ",
@@ -138,6 +141,7 @@
               "TenderContractDetails": null
             },
             {
+              "isCounterOffer": true,
               "Type": "Bonus",
               "MaterialCode": "000000000021038305",
               "MaterialDescription": "0.9% SODIUM CHLORIDEBP100ML1x72'S",

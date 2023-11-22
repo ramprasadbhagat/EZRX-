@@ -20,6 +20,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
         required String materialDescription,
     @JsonKey(name: 'Qty', defaultValue: 0) required int qty,
     @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required double unitPrice,
+    @JsonKey(name: 'mrp', defaultValue: 0.0) required double originPrice,
     @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required double totalPrice,
     @JsonKey(name: 'Status', defaultValue: '') required String status,
     @JsonKey(name: 'DeliveryDate', defaultValue: '')
@@ -49,6 +50,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
         required List<PoDocumentsDto> orderHistoryItemPoAttachments,
     @JsonKey(name: 'promoStatus', defaultValue: false)
         required bool promoStatus,
+    @JsonKey(name: 'isCounterOffer', defaultValue: false)
+        required bool isCounterOffer,
     @JsonKey(name: 'IsBundle', defaultValue: false) required bool isBundle,
     @JsonKey(name: 'LineNumber', defaultValue: '') required String lineNumber,
   }) = _OrderHistoryItemDto;
@@ -58,6 +61,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       materialDescription: orderHistoryItem.materialDescription,
       qty: orderHistoryItem.qty,
       unitPrice: orderHistoryItem.unitPrice.zpPrice,
+      originPrice: orderHistoryItem.originPrice.zpPrice,
       totalPrice: orderHistoryItem.totalPrice.totalPrice,
       status: orderHistoryItem.status.getOrCrash(),
       deliveryDate: orderHistoryItem.deliveryDate.dateString,
@@ -84,6 +88,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       eZRXNumber: orderHistoryItem.ezrxNumber.getOrDefaultValue(''),
       isBundle: orderHistoryItem.isBundle,
       promoStatus: orderHistoryItem.promoStatus,
+      isCounterOffer: orderHistoryItem.isCounterOffer,
       lineNumber: orderHistoryItem.lineNumber.getOrDefaultValue(''),
     );
   }
@@ -93,6 +98,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       materialDescription: materialDescription,
       qty: qty,
       unitPrice: ZpPrice(unitPrice.toString()),
+      originPrice: ZpPrice(originPrice.toString()),
       totalPrice: TotalPrice(totalPrice.toString()),
       status: OrderStepValue(status),
       deliveryDate: DateTimeStringValue(deliveryDate),
@@ -117,6 +123,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       ezrxNumber: StringValue(eZRXNumber),
       isBundle: isBundle,
       promoStatus: promoStatus,
+      isCounterOffer: isCounterOffer,
       lineNumber: LineNumber(lineNumber),
     );
   }

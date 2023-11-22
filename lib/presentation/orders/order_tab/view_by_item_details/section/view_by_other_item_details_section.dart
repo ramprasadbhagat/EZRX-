@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
@@ -65,23 +65,25 @@ class OtherItemDetailsSection extends StatelessWidget {
                                         children: e.orderHistoryItem
                                             .map(
                                               (e) => CommonTileItem(
-                                                isQuantityRequired: true,
                                                 label: e.materialNumber
                                                     .displayMatNo,
                                                 title: e.materialDescription,
-                                                priceComponent: PriceComponent(
-                                                  price: e.itemTotalPrice(
-                                                    context
-                                                        .read<EligibilityBloc>()
-                                                        .state
-                                                        .salesOrg
-                                                        .isID,
-                                                  ),
-                                                  salesOrgConfig: context
-                                                      .read<EligibilityBloc>()
-                                                      .state
-                                                      .salesOrgConfigs,
-                                                ),
+                                                priceComponent: e
+                                                        .isBonusMaterial
+                                                    ? null
+                                                    : OrderItemPrice(
+                                                        unitPrice: e
+                                                            .unitPrice.zpPrice
+                                                            .toString(),
+                                                        originPrice: e
+                                                            .originPrice
+                                                            .getOrDefaultValue(
+                                                          '',
+                                                        ),
+                                                        showPreviousPrice:
+                                                            e.isCounterOffer,
+                                                        hasDescription: true,
+                                                      ),
                                                 statusWidget: StatusLabel(
                                                   key: WidgetKeys
                                                       .orderItemStatusKey,
@@ -90,16 +92,25 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                         .getOrDefaultValue(''),
                                                   ),
                                                 ),
-                                                quantity: e.qty.toString(),
+                                                quantity: '',
+                                                isQuantityBelowImage: true,
+                                                isQuantityRequired: false,
                                                 materialNumber:
                                                     e.materialNumber,
-                                                isQuantityBelowImage: false,
                                                 statusTag: e.productTag,
                                                 headerText:
                                                     '${context.tr('Order')} #${e.orderNumber.getOrDefaultValue('')}',
                                                 subtitle: '',
                                                 showOfferTag: e.isOfferItem,
                                                 showBundleTag: e.isBundle,
+                                                footerWidget:
+                                                    QuantityAndPriceWithTax(
+                                                  quantity: e.qty,
+                                                  totalPriceString: e
+                                                      .totalPrice.totalPrice
+                                                      .toString(),
+                                                  taxPercentage: e.tax,
+                                                ),
                                               ),
                                             )
                                             .toList(),

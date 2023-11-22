@@ -32,6 +32,7 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
           Url
           Name
         }
+        isCounterOffer
         MaterialCode
         MaterialDescription
         DefaultMaterialDescription

@@ -13,6 +13,7 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
       materialDescription: json['MaterialDescription'] as String? ?? '',
       qty: json['Qty'] as int? ?? 0,
       unitPrice: (json['UnitPrice'] as num?)?.toDouble() ?? 0.0,
+      originPrice: (json['mrp'] as num?)?.toDouble() ?? 0.0,
       totalPrice: (json['TotalPrice'] as num?)?.toDouble() ?? 0.0,
       status: json['Status'] as String? ?? '',
       deliveryDate: json['DeliveryDate'] as String? ?? '',
@@ -36,6 +37,7 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
               .toList() ??
           [],
       promoStatus: json['promoStatus'] as bool? ?? false,
+      isCounterOffer: json['isCounterOffer'] as bool? ?? false,
       isBundle: json['IsBundle'] as bool? ?? false,
       lineNumber: json['LineNumber'] as String? ?? '',
     );
@@ -47,6 +49,7 @@ Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
       'MaterialDescription': instance.materialDescription,
       'Qty': instance.qty,
       'UnitPrice': instance.unitPrice,
+      'mrp': instance.originPrice,
       'TotalPrice': instance.totalPrice,
       'Status': instance.status,
       'DeliveryDate': instance.deliveryDate,
@@ -69,6 +72,7 @@ Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
           .map((e) => e.toJson())
           .toList(),
       'promoStatus': instance.promoStatus,
+      'isCounterOffer': instance.isCounterOffer,
       'IsBundle': instance.isBundle,
       'LineNumber': instance.lineNumber,
     };

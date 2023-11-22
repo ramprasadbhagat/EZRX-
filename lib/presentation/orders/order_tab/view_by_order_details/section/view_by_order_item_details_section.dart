@@ -4,17 +4,17 @@ import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -85,14 +85,19 @@ class OrderItemDetailsSection extends StatelessWidget {
                                     label:
                                         '${e.materialNumber.displayMatNo}${displayGovernmentMaterialCOde ? '|${e.governmentMaterialCode}' : ''}',
                                     title: e.materialDescription,
-                                    priceComponent: PriceComponent(
-                                      price: e.itemUnitPrice(
-                                        invoiceNumber,
-                                        isMYExternalSalesRep,
-                                        isIDMarket,
-                                      ),
-                                      salesOrgConfig: salesOrgConfig,
-                                    ),
+                                    priceComponent: e.isBonus
+                                        ? null
+                                        : OrderItemPrice(
+                                            unitPrice: e.itemUnitPrice(
+                                              invoiceNumber,
+                                              isMYExternalSalesRep,
+                                              isIDMarket,
+                                            ),
+                                            originPrice: e.originPrice.zpPrice
+                                                .toString(),
+                                            showPreviousPrice: e.isCounterOffer,
+                                            hasDescription: true,
+                                          ),
                                     statusWidget: isIDMarket
                                         ? null
                                         : StatusLabel(
@@ -110,46 +115,17 @@ class OrderItemDetailsSection extends StatelessWidget {
                                         ? '${'Batch'.tr()}: ${e.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${e.expiryDate.dateOrDashString})'
                                         : '',
                                     subtitle: '',
-                                    footerWidget: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${context.tr('Qty')}: ${e.qty}',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(
-                                                    color: ZPColors.black,
-                                                  ),
-                                            ),
-                                            if (isIDMarket)
-                                              Text(
-                                                '${e.pickedQuantity} ${context.tr('of')} ${e.qty} ${context.tr('stocks fulfilled')}',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodySmall
-                                                    ?.copyWith(
-                                                      color: ZPColors.black,
-                                                    ),
-                                              ),
-                                          ],
-                                        ),
-                                        PriceComponent(
-                                          salesOrgConfig: salesOrgConfig,
-                                          price: e.itemTotalPrice(
-                                            invoiceNumber,
-                                            isMYExternalSalesRep,
-                                            isIDMarket,
-                                          ),
-                                        ),
-                                      ],
+                                    footerWidget: QuantityAndPriceWithTax(
+                                      quantity: e.qty,
+                                      quantityDescription: isIDMarket
+                                          ? '${e.pickedQuantity} ${context.tr('of')} ${e.qty} ${context.tr('stocks fulfilled')}'
+                                          : '',
+                                      totalPriceString: e.itemTotalPrice(
+                                        invoiceNumber,
+                                        isMYExternalSalesRep,
+                                        isIDMarket,
+                                      ),
+                                      taxPercentage: e.tax,
                                     ),
                                   ),
                                 )

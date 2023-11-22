@@ -50,6 +50,7 @@ void main() {
           isQuantityBelowImage: false,
           statusWidget: const SizedBox.shrink(),
           topHeaderWidget: const SizedBox(key: fakeTopHeaderWidget),
+          footerWidget: const SizedBox.shrink(),
         ),
       ),
     );

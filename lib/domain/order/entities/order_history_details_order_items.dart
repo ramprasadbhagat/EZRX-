@@ -25,6 +25,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required String materialDescription,
     required int qty,
     required ZpPrice unitPrice,
+    required ZpPrice originPrice,
     required TotalPrice totalPrice,
     required double tax,
     required OrderStepValue sAPStatus,
@@ -46,6 +47,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required String parentId,
     required MaterialInfo material,
     required bool promoStatus,
+    required bool isCounterOffer,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -54,6 +56,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         materialDescription: '',
         qty: 0,
         unitPrice: ZpPrice('0.0'),
+        originPrice: ZpPrice('0.0'),
         totalPrice: TotalPrice('0.0'),
         tax: 0.0,
         sAPStatus: OrderStepValue(''),
@@ -75,6 +78,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         parentId: '',
         material: MaterialInfo.empty(),
         promoStatus: false,
+        isCounterOffer: false,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(

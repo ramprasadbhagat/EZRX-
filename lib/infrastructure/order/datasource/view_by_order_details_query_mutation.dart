@@ -80,6 +80,7 @@ class ViewByOrderDetailsQueryMutation {
         Sunday
       }
       OrderItems {
+        isCounterOffer
         Type
         MaterialCode
         MaterialDescription

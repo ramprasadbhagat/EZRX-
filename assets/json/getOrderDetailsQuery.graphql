@@ -47,6 +47,7 @@ query orderHistoryQuery($soldTo: String!, $language: String, $searchKey: String,
         Sunday
       }
       OrderItems {
+        isCounterOffer
         Type
         MaterialCode
         MaterialDescription

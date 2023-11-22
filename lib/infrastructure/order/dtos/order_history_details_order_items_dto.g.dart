@@ -14,6 +14,7 @@ _$_OrderHistoryDetailsOrderItemDto _$$_OrderHistoryDetailsOrderItemDtoFromJson(
       materialDescription: json['MaterialDescription'] as String? ?? '',
       qty: json['Qty'] as int? ?? 0,
       unitPrice: (json['UnitPrice'] as num?)?.toDouble() ?? 0.0,
+      originPrice: (json['mrp'] as num?)?.toDouble() ?? 0.0,
       totalPrice: (json['TotalPrice'] as num?)?.toDouble() ?? 0.0,
       tax: (json['Tax'] as num?)?.toDouble() ?? 0.0,
       sAPStatus: json['SAPStatus'] as String? ?? '',
@@ -40,6 +41,7 @@ _$_OrderHistoryDetailsOrderItemDto _$$_OrderHistoryDetailsOrderItemDtoFromJson(
       governmentMaterialCode: json['GovernmentMaterialCode'] as String? ?? '',
       productType: _getProductType(json, 'ProductType') as String,
       promosStatus: json['promoStatus'] as bool? ?? false,
+      isCounterOffer: json['isCounterOffer'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
@@ -50,6 +52,7 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
       'MaterialDescription': instance.materialDescription,
       'Qty': instance.qty,
       'UnitPrice': instance.unitPrice,
+      'mrp': instance.originPrice,
       'TotalPrice': instance.totalPrice,
       'Tax': instance.tax,
       'SAPStatus': instance.sAPStatus,
@@ -67,4 +70,5 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
       'GovernmentMaterialCode': instance.governmentMaterialCode,
       'ProductType': instance.productType,
       'promoStatus': instance.promosStatus,
+      'isCounterOffer': instance.isCounterOffer,
     };

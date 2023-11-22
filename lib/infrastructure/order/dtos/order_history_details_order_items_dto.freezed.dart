@@ -31,6 +31,8 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   int get qty => throw _privateConstructorUsedError;
   @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
   double get unitPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mrp', defaultValue: 0.0)
+  double get originPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
   double get totalPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'Tax', defaultValue: 0.0)
@@ -73,6 +75,8 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   String get productType => throw _privateConstructorUsedError;
   @JsonKey(name: 'promoStatus', defaultValue: false)
   bool get promosStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isCounterOffer', defaultValue: false)
+  bool get isCounterOffer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -95,6 +99,7 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       String materialDescription,
       @JsonKey(name: 'Qty', defaultValue: 0) int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
+      @JsonKey(name: 'mrp', defaultValue: 0.0) double originPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
       @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
       @JsonKey(name: 'SAPStatus', defaultValue: '') String sAPStatus,
@@ -126,7 +131,9 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       String governmentMaterialCode,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
       String productType,
-      @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus});
+      @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus,
+      @JsonKey(name: 'isCounterOffer', defaultValue: false)
+      bool isCounterOffer});
 
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
       get tenderContractDetails;
@@ -151,6 +158,7 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? materialDescription = null,
     Object? qty = null,
     Object? unitPrice = null,
+    Object? originPrice = null,
     Object? totalPrice = null,
     Object? tax = null,
     Object? sAPStatus = null,
@@ -168,6 +176,7 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? governmentMaterialCode = null,
     Object? productType = null,
     Object? promosStatus = null,
+    Object? isCounterOffer = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -189,6 +198,10 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      originPrice: null == originPrice
+          ? _value.originPrice
+          : originPrice // ignore: cast_nullable_to_non_nullable
               as double,
       totalPrice: null == totalPrice
           ? _value.totalPrice
@@ -258,6 +271,10 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
           ? _value.promosStatus
           : promosStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCounterOffer: null == isCounterOffer
+          ? _value.isCounterOffer
+          : isCounterOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -288,6 +305,7 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
       String materialDescription,
       @JsonKey(name: 'Qty', defaultValue: 0) int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
+      @JsonKey(name: 'mrp', defaultValue: 0.0) double originPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
       @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
       @JsonKey(name: 'SAPStatus', defaultValue: '') String sAPStatus,
@@ -319,7 +337,9 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
       String governmentMaterialCode,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
       String productType,
-      @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus});
+      @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus,
+      @JsonKey(name: 'isCounterOffer', defaultValue: false)
+      bool isCounterOffer});
 
   @override
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
@@ -344,6 +364,7 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
     Object? materialDescription = null,
     Object? qty = null,
     Object? unitPrice = null,
+    Object? originPrice = null,
     Object? totalPrice = null,
     Object? tax = null,
     Object? sAPStatus = null,
@@ -361,6 +382,7 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
     Object? governmentMaterialCode = null,
     Object? productType = null,
     Object? promosStatus = null,
+    Object? isCounterOffer = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItemDto(
       type: null == type
@@ -382,6 +404,10 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      originPrice: null == originPrice
+          ? _value.originPrice
+          : originPrice // ignore: cast_nullable_to_non_nullable
               as double,
       totalPrice: null == totalPrice
           ? _value.totalPrice
@@ -451,6 +477,10 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
           ? _value.promosStatus
           : promosStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCounterOffer: null == isCounterOffer
+          ? _value.isCounterOffer
+          : isCounterOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -466,6 +496,7 @@ class _$_OrderHistoryDetailsOrderItemDto
       required this.materialDescription,
       @JsonKey(name: 'Qty', defaultValue: 0) required this.qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required this.unitPrice,
+      @JsonKey(name: 'mrp', defaultValue: 0.0) required this.originPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required this.totalPrice,
       @JsonKey(name: 'Tax', defaultValue: 0.0) required this.tax,
       @JsonKey(name: 'SAPStatus', defaultValue: '') required this.sAPStatus,
@@ -501,7 +532,9 @@ class _$_OrderHistoryDetailsOrderItemDto
       @JsonKey(name: 'ProductType', readValue: _getProductType)
       required this.productType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
-      required this.promosStatus})
+      required this.promosStatus,
+      @JsonKey(name: 'isCounterOffer', defaultValue: false)
+      required this.isCounterOffer})
       : _details = details,
         super._();
 
@@ -524,6 +557,9 @@ class _$_OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
   final double unitPrice;
+  @override
+  @JsonKey(name: 'mrp', defaultValue: 0.0)
+  final double originPrice;
   @override
   @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
   final double totalPrice;
@@ -588,10 +624,13 @@ class _$_OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'promoStatus', defaultValue: false)
   final bool promosStatus;
+  @override
+  @JsonKey(name: 'isCounterOffer', defaultValue: false)
+  final bool isCounterOffer;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, productType: $productType, promosStatus: $promosStatus)';
+    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer)';
   }
 
   @override
@@ -607,6 +646,8 @@ class _$_OrderHistoryDetailsOrderItemDto
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.unitPrice, unitPrice) ||
                 other.unitPrice == unitPrice) &&
+            (identical(other.originPrice, originPrice) ||
+                other.originPrice == originPrice) &&
             (identical(other.totalPrice, totalPrice) ||
                 other.totalPrice == totalPrice) &&
             (identical(other.tax, tax) || other.tax == tax) &&
@@ -638,7 +679,9 @@ class _$_OrderHistoryDetailsOrderItemDto
             (identical(other.productType, productType) ||
                 other.productType == productType) &&
             (identical(other.promosStatus, promosStatus) ||
-                other.promosStatus == promosStatus));
+                other.promosStatus == promosStatus) &&
+            (identical(other.isCounterOffer, isCounterOffer) ||
+                other.isCounterOffer == isCounterOffer));
   }
 
   @JsonKey(ignore: true)
@@ -650,6 +693,7 @@ class _$_OrderHistoryDetailsOrderItemDto
         materialDescription,
         qty,
         unitPrice,
+        originPrice,
         totalPrice,
         tax,
         sAPStatus,
@@ -666,7 +710,8 @@ class _$_OrderHistoryDetailsOrderItemDto
         principalCode,
         governmentMaterialCode,
         productType,
-        promosStatus
+        promosStatus,
+        isCounterOffer
       ]);
 
   @JsonKey(ignore: true)
@@ -695,6 +740,8 @@ abstract class _OrderHistoryDetailsOrderItemDto
       @JsonKey(name: 'Qty', defaultValue: 0) required final int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
       required final double unitPrice,
+      @JsonKey(name: 'mrp', defaultValue: 0.0)
+      required final double originPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
       required final double totalPrice,
       @JsonKey(name: 'Tax', defaultValue: 0.0) required final double tax,
@@ -734,7 +781,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
       @JsonKey(name: 'ProductType', readValue: _getProductType)
       required final String productType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
-      required final bool promosStatus}) = _$_OrderHistoryDetailsOrderItemDto;
+      required final bool promosStatus,
+      @JsonKey(name: 'isCounterOffer', defaultValue: false)
+      required final bool isCounterOffer}) = _$_OrderHistoryDetailsOrderItemDto;
   const _OrderHistoryDetailsOrderItemDto._() : super._();
 
   factory _OrderHistoryDetailsOrderItemDto.fromJson(Map<String, dynamic> json) =
@@ -755,6 +804,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
   double get unitPrice;
+  @override
+  @JsonKey(name: 'mrp', defaultValue: 0.0)
+  double get originPrice;
   @override
   @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
   double get totalPrice;
@@ -813,6 +865,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'promoStatus', defaultValue: false)
   bool get promosStatus;
+  @override
+  @JsonKey(name: 'isCounterOffer', defaultValue: false)
+  bool get isCounterOffer;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderItemDtoCopyWith<

@@ -20,6 +20,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required String materialDescription,
     required int qty,
     required ZpPrice unitPrice,
+    required ZpPrice originPrice,
     required TotalPrice totalPrice,
     required OrderStepValue status,
     required DateTimeStringValue deliveryDate,
@@ -42,6 +43,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required StringValue ezrxNumber,
     required bool isBundle,
     required bool promoStatus,
+    required bool isCounterOffer,
     required LineNumber lineNumber,
   }) = _OrderHistoryItem;
 
@@ -50,6 +52,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         materialDescription: '',
         qty: 0,
         unitPrice: ZpPrice('0.0'),
+        originPrice: ZpPrice('0.0'),
         totalPrice: TotalPrice('0.0'),
         status: OrderStepValue(''),
         deliveryDate: DateTimeStringValue(''),
@@ -72,6 +75,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         ezrxNumber: StringValue(''),
         isBundle: false,
         promoStatus: false,
+        isCounterOffer: false,
         lineNumber: LineNumber(''),
       );
 

@@ -34,6 +34,7 @@ class ViewByItemQueryMutation {
           Url
           Name
         }
+        isCounterOffer
         MaterialCode
         MaterialDescription
         DefaultMaterialDescription
