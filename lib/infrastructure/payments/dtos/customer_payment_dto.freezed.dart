@@ -45,14 +45,16 @@ abstract class $CustomerPaymentDtoCopyWith<$Res> {
       _$CustomerPaymentDtoCopyWithImpl<$Res, CustomerPaymentDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'total', defaultValue: 0) int total,
-      @JsonKey(name: 'showing', defaultValue: 0) int showing,
+      {@JsonKey(name: 'total', defaultValue: 0)
+          int total,
+      @JsonKey(name: 'showing', defaultValue: 0)
+          int showing,
       @JsonKey(name: 'totalPaymentInProgress', defaultValue: 0)
-      int totalPaymentInProgress,
+          int totalPaymentInProgress,
       @JsonKey(name: 'resultPaymentInProgress', defaultValue: 0)
-      int resultPaymentInProgress,
+          int resultPaymentInProgress,
       @JsonKey(name: 'customerPaymentResponse', defaultValue: [])
-      List<CustomerPaymentItemDto> customerPaymentResponse});
+          List<CustomerPaymentItemDto> customerPaymentResponse});
 }
 
 /// @nodoc
@@ -108,14 +110,16 @@ abstract class _$$_CustomerPaymentDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'total', defaultValue: 0) int total,
-      @JsonKey(name: 'showing', defaultValue: 0) int showing,
+      {@JsonKey(name: 'total', defaultValue: 0)
+          int total,
+      @JsonKey(name: 'showing', defaultValue: 0)
+          int showing,
       @JsonKey(name: 'totalPaymentInProgress', defaultValue: 0)
-      int totalPaymentInProgress,
+          int totalPaymentInProgress,
       @JsonKey(name: 'resultPaymentInProgress', defaultValue: 0)
-      int resultPaymentInProgress,
+          int resultPaymentInProgress,
       @JsonKey(name: 'customerPaymentResponse', defaultValue: [])
-      List<CustomerPaymentItemDto> customerPaymentResponse});
+          List<CustomerPaymentItemDto> customerPaymentResponse});
 }
 
 /// @nodoc
@@ -164,14 +168,16 @@ class __$$_CustomerPaymentDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CustomerPaymentDto extends _CustomerPaymentDto {
   const _$_CustomerPaymentDto(
-      {@JsonKey(name: 'total', defaultValue: 0) required this.total,
-      @JsonKey(name: 'showing', defaultValue: 0) required this.showing,
+      {@JsonKey(name: 'total', defaultValue: 0)
+          required this.total,
+      @JsonKey(name: 'showing', defaultValue: 0)
+          required this.showing,
       @JsonKey(name: 'totalPaymentInProgress', defaultValue: 0)
-      required this.totalPaymentInProgress,
+          required this.totalPaymentInProgress,
       @JsonKey(name: 'resultPaymentInProgress', defaultValue: 0)
-      required this.resultPaymentInProgress,
+          required this.resultPaymentInProgress,
       @JsonKey(name: 'customerPaymentResponse', defaultValue: [])
-      required final List<CustomerPaymentItemDto> customerPaymentResponse})
+          required final List<CustomerPaymentItemDto> customerPaymentResponse})
       : _customerPaymentResponse = customerPaymentResponse,
         super._();
 
@@ -248,15 +254,17 @@ class _$_CustomerPaymentDto extends _CustomerPaymentDto {
 
 abstract class _CustomerPaymentDto extends CustomerPaymentDto {
   const factory _CustomerPaymentDto(
-      {@JsonKey(name: 'total', defaultValue: 0) required final int total,
-      @JsonKey(name: 'showing', defaultValue: 0) required final int showing,
+      {@JsonKey(name: 'total', defaultValue: 0)
+          required final int total,
+      @JsonKey(name: 'showing', defaultValue: 0)
+          required final int showing,
       @JsonKey(name: 'totalPaymentInProgress', defaultValue: 0)
-      required final int totalPaymentInProgress,
+          required final int totalPaymentInProgress,
       @JsonKey(name: 'resultPaymentInProgress', defaultValue: 0)
-      required final int resultPaymentInProgress,
+          required final int resultPaymentInProgress,
       @JsonKey(name: 'customerPaymentResponse', defaultValue: [])
-      required final List<CustomerPaymentItemDto>
-          customerPaymentResponse}) = _$_CustomerPaymentDto;
+          required final List<CustomerPaymentItemDto>
+              customerPaymentResponse}) = _$_CustomerPaymentDto;
   const _CustomerPaymentDto._() : super._();
 
   factory _CustomerPaymentDto.fromJson(Map<String, dynamic> json) =

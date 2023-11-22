@@ -51,6 +51,9 @@ class _PaymentInvoicePdf extends StatelessWidget {
                   shipToInfo: eligibilityState.shipToInfo,
                   paymentInvoiceInfoPdf: newPaymentState.paymentInvoiceInfoPdf,
                   salesOrganisation: eligibilityState.salesOrganisation,
+                  createdDate: newPaymentState.customerPaymentInfo.createdDate,
+                  adviceExpiry:
+                      newPaymentState.customerPaymentInfo.adviceExpiry,
                 );
 
                 if (eligibilityState.salesOrganisation.salesOrg.isSg) {

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
@@ -78,7 +79,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       transactionCurrency: transactionCurrency,
       valueDate: DateTimeStringValue(valueDate),
       createdDate: DateTimeStringValue(createdDate),
-      adviceExpiry: StringValue(adviceExpiry),
+      adviceExpiry: AdviceExpiryValue(adviceExpiry),
       zzAdvice: StringValue(zzAdvice),
       accountingDocExternalReference: accountingDocExternalReference,
       paymentBatchAdditionalInfo: StringValue(paymentBatchAdditionalInfo),

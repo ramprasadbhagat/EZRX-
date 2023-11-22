@@ -37,7 +37,7 @@ mixin _$PaymentSummaryDetails {
   String get customId => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   StringValue get zzAdvice => throw _privateConstructorUsedError;
-  StringValue get adviceExpiry => throw _privateConstructorUsedError;
+  AdviceExpiryValue get adviceExpiry => throw _privateConstructorUsedError;
   StringValue get paymentBatchAdditionalInfo =>
       throw _privateConstructorUsedError;
   String get accountingDocExternalReference =>
@@ -77,7 +77,7 @@ abstract class $PaymentSummaryDetailsCopyWith<$Res> {
       String customId,
       DateTimeStringValue createdDate,
       StringValue zzAdvice,
-      StringValue adviceExpiry,
+      AdviceExpiryValue adviceExpiry,
       StringValue paymentBatchAdditionalInfo,
       String accountingDocExternalReference,
       List<PaymentItem> paymentItems});
@@ -211,7 +211,7 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
       adviceExpiry: null == adviceExpiry
           ? _value.adviceExpiry
           : adviceExpiry // ignore: cast_nullable_to_non_nullable
-              as StringValue,
+              as AdviceExpiryValue,
       paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
@@ -258,7 +258,7 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
       String customId,
       DateTimeStringValue createdDate,
       StringValue zzAdvice,
-      StringValue adviceExpiry,
+      AdviceExpiryValue adviceExpiry,
       StringValue paymentBatchAdditionalInfo,
       String accountingDocExternalReference,
       List<PaymentItem> paymentItems});
@@ -389,7 +389,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
       adviceExpiry: null == adviceExpiry
           ? _value.adviceExpiry
           : adviceExpiry // ignore: cast_nullable_to_non_nullable
-              as StringValue,
+              as AdviceExpiryValue,
       paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
@@ -481,7 +481,7 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   @override
   final StringValue zzAdvice;
   @override
-  final StringValue adviceExpiry;
+  final AdviceExpiryValue adviceExpiry;
   @override
   final StringValue paymentBatchAdditionalInfo;
   @override
@@ -619,7 +619,7 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
           required final String customId,
           required final DateTimeStringValue createdDate,
           required final StringValue zzAdvice,
-          required final StringValue adviceExpiry,
+          required final AdviceExpiryValue adviceExpiry,
           required final StringValue paymentBatchAdditionalInfo,
           required final String accountingDocExternalReference,
           required final List<PaymentItem> paymentItems}) =
@@ -669,7 +669,7 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   @override
   StringValue get zzAdvice;
   @override
-  StringValue get adviceExpiry;
+  AdviceExpiryValue get adviceExpiry;
   @override
   StringValue get paymentBatchAdditionalInfo;
   @override

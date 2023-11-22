@@ -19,7 +19,7 @@ mixin _$PaymentInvoiceInfoPdf {
   DateTimeStringValue get valueDate => throw _privateConstructorUsedError;
   String get paymentID => throw _privateConstructorUsedError;
   String get zzAdvice => throw _privateConstructorUsedError;
-  String get paymentDue => throw _privateConstructorUsedError;
+  PaymentDue get paymentDue => throw _privateConstructorUsedError;
   PaymentMethodValue get paymentMethod => throw _privateConstructorUsedError;
   String get customerName => throw _privateConstructorUsedError;
   String get payer => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $PaymentInvoiceInfoPdfCopyWith<$Res> {
       {DateTimeStringValue valueDate,
       String paymentID,
       String zzAdvice,
-      String paymentDue,
+      PaymentDue paymentDue,
       PaymentMethodValue paymentMethod,
       String customerName,
       String payer,
@@ -111,7 +111,7 @@ class _$PaymentInvoiceInfoPdfCopyWithImpl<$Res,
       paymentDue: null == paymentDue
           ? _value.paymentDue
           : paymentDue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentDue,
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
@@ -176,7 +176,7 @@ abstract class _$$_PaymentInvoiceInfoPdfCopyWith<$Res>
       {DateTimeStringValue valueDate,
       String paymentID,
       String zzAdvice,
-      String paymentDue,
+      PaymentDue paymentDue,
       PaymentMethodValue paymentMethod,
       String customerName,
       String payer,
@@ -235,7 +235,7 @@ class __$$_PaymentInvoiceInfoPdfCopyWithImpl<$Res>
       paymentDue: null == paymentDue
           ? _value.paymentDue
           : paymentDue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentDue,
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
@@ -319,7 +319,7 @@ class _$_PaymentInvoiceInfoPdf extends _PaymentInvoiceInfoPdf {
   @override
   final String zzAdvice;
   @override
-  final String paymentDue;
+  final PaymentDue paymentDue;
   @override
   final PaymentMethodValue paymentMethod;
   @override
@@ -432,7 +432,7 @@ abstract class _PaymentInvoiceInfoPdf extends PaymentInvoiceInfoPdf {
       {required final DateTimeStringValue valueDate,
       required final String paymentID,
       required final String zzAdvice,
-      required final String paymentDue,
+      required final PaymentDue paymentDue,
       required final PaymentMethodValue paymentMethod,
       required final String customerName,
       required final String payer,
@@ -454,7 +454,7 @@ abstract class _PaymentInvoiceInfoPdf extends PaymentInvoiceInfoPdf {
   @override
   String get zzAdvice;
   @override
-  String get paymentDue;
+  PaymentDue get paymentDue;
   @override
   PaymentMethodValue get paymentMethod;
   @override

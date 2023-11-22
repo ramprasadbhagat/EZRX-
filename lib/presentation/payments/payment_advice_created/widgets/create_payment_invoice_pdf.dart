@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
@@ -18,10 +19,13 @@ import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 
 class CreatePaymentInvoicePdf {
-  DateTimeStringValue expiryDate({required DateTimeStringValue valueDate}) =>
+  DateTimeStringValue expiryDate({
+    required DateTimeStringValue valueDate,
+    required int expiryDays,
+  }) =>
       DateTimeStringValue(
         DateFormat(DateTimeFormatString.apiDateWithDashFormat).format(
-          DateTime.parse(valueDate.getValue()).add(const Duration(days: 30)),
+          DateTime.parse(valueDate.getValue()).add(Duration(days: expiryDays)),
         ),
       );
 
@@ -129,6 +133,7 @@ class CreatePaymentInvoicePdf {
     required String customerName,
     required String payer,
     required List<PaymentItem> paymentItems,
+    required PaymentDue paymentDue,
   }) =>
       pw.Stack(
         alignment: pw.Alignment.center,
@@ -180,7 +185,10 @@ class CreatePaymentInvoicePdf {
                   width: 10,
                   color: PdfColor.fromInt(ZPColors.extraLightGrey3.value),
                 ),
-                _amountInvoice(paymentItems: paymentItems),
+                _amountInvoice(
+                  paymentItems: paymentItems,
+                  paymentDue: paymentDue,
+                ),
               ],
             ),
           ),
@@ -231,7 +239,10 @@ class CreatePaymentInvoicePdf {
         ),
       );
 
-  pw.Widget _amountInvoice({required List<PaymentItem> paymentItems}) =>
+  pw.Widget _amountInvoice({
+    required List<PaymentItem> paymentItems,
+    required PaymentDue paymentDue,
+  }) =>
       pw.Flexible(
         flex: 3,
         child: pw.Column(
@@ -248,7 +259,7 @@ class CreatePaymentInvoicePdf {
               overflow: pw.TextOverflow.clip,
             ),
             pw.Text(
-              paymentItems.totalInInvoice.toStringAsFixed(2),
+              paymentDue.totalAmount,
               style: pw.TextStyle(
                 fontSize: 16,
                 color: PdfColor.fromInt(ZPColors.primary.value),
@@ -263,7 +274,7 @@ class CreatePaymentInvoicePdf {
       );
 
   pw.Widget _expireInvoice({
-    required DateTimeStringValue valueDate,
+    required DateTimeStringValue createdDate,
     required DateTimeStringValue expiryDate,
     required String paymentMethod,
   }) =>
@@ -284,7 +295,7 @@ class CreatePaymentInvoicePdf {
               ),
             ),
             children: [
-              _dateCreated(valueDate: valueDate),
+              _dateCreated(createdDate: createdDate),
               _dateExpiry(expiryDate: expiryDate),
               _paymentMethod(paymentMethod: paymentMethod),
             ],
@@ -293,7 +304,7 @@ class CreatePaymentInvoicePdf {
       );
 
   pw.Widget _dateCreated({
-    required DateTimeStringValue valueDate,
+    required DateTimeStringValue createdDate,
   }) =>
       pw.Padding(
         padding: const pw.EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0)
@@ -312,7 +323,7 @@ class CreatePaymentInvoicePdf {
               overflow: pw.TextOverflow.clip,
             ),
             pw.Text(
-              valueDate.dateString,
+              createdDate.dateString,
               style: pw.TextStyle(
                 fontSize: 16,
                 color: PdfColor.fromInt(ZPColors.primary.value),
@@ -833,6 +844,8 @@ class CreatePaymentInvoicePdf {
     required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
     required ShipToInfo shipToInfo,
     required SalesOrganisation salesOrganisation,
+    required DateTimeStringValue createdDate,
+    required AdviceExpiryValue adviceExpiry,
   }) async {
     final pdf = pw.Document();
     final headerInvoice = await _headerInvoice(
@@ -855,15 +868,17 @@ class CreatePaymentInvoicePdf {
                 shipToInfo: shipToInfo,
                 payer: paymentInvoiceInfoPdf.payer,
                 paymentItems: paymentInvoiceInfoPdf.paymentItems,
+                paymentDue: paymentInvoiceInfoPdf.paymentDue,
                 customerName: paymentInvoiceInfoPdf.customerName,
               ),
               _expireInvoice(
                 paymentMethod:
                     paymentInvoiceInfoPdf.paymentMethod.getOrDefaultValue(''),
                 expiryDate: expiryDate(
-                  valueDate: paymentInvoiceInfoPdf.valueDate,
+                  valueDate: createdDate,
+                  expiryDays: adviceExpiry.expiryDays,
                 ),
-                valueDate: paymentInvoiceInfoPdf.valueDate,
+                createdDate: createdDate,
               ),
               if (salesOrganisation.salesOrg.isSg) ...[
                 _paymentSteps,

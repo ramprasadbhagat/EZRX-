@@ -1,5 +1,7 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -42,7 +44,8 @@ class CustomerPaymentItemDto with _$CustomerPaymentItemDto {
         paymentID: paymentID,
         accountingDocExternalReference: accountingDocExternalReference,
         zzAdvice: zzAdvice,
-        valueDate: valueDate,
+        createdDate: DateTimeStringValue(createdDate),
+        adviceExpiry: AdviceExpiryValue(adviceExpiry),
       );
     }
 
@@ -60,7 +63,8 @@ class CustomerPaymentItemDto with _$CustomerPaymentItemDto {
         paymentID: paymentID,
         accountingDocExternalReference: accountingDocExternalReference,
         zzAdvice: zzAdvice,
-        valueDate: valueDate,
+        createdDate: DateTimeStringValue(createdDate),
+        adviceExpiry: AdviceExpiryValue(adviceExpiry),
       );
     }
 
@@ -85,7 +89,8 @@ class CustomerPaymentItemDto with _$CustomerPaymentItemDto {
       paymentID: paymentID,
       accountingDocExternalReference: accountingDocExternalReference,
       zzAdvice: zzAdvice,
-      valueDate: valueDate,
+      createdDate: DateTimeStringValue(createdDate),
+      adviceExpiry: AdviceExpiryValue(adviceExpiry),
     );
   }
 

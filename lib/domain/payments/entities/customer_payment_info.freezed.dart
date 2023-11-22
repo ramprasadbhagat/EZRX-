@@ -22,7 +22,8 @@ mixin _$CustomerPaymentInfo {
   String get accountingDocExternalReference =>
       throw _privateConstructorUsedError;
   String get zzAdvice => throw _privateConstructorUsedError;
-  String get valueDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
+  AdviceExpiryValue get adviceExpiry => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerPaymentInfoCopyWith<CustomerPaymentInfo> get copyWith =>
@@ -41,7 +42,8 @@ abstract class $CustomerPaymentInfoCopyWith<$Res> {
       String paymentBatchAdditionalInfo,
       String accountingDocExternalReference,
       String zzAdvice,
-      String valueDate});
+      DateTimeStringValue createdDate,
+      AdviceExpiryValue adviceExpiry});
 }
 
 /// @nodoc
@@ -62,7 +64,8 @@ class _$CustomerPaymentInfoCopyWithImpl<$Res, $Val extends CustomerPaymentInfo>
     Object? paymentBatchAdditionalInfo = null,
     Object? accountingDocExternalReference = null,
     Object? zzAdvice = null,
-    Object? valueDate = null,
+    Object? createdDate = null,
+    Object? adviceExpiry = null,
   }) {
     return _then(_value.copyWith(
       zzHtmcs: null == zzHtmcs
@@ -85,10 +88,14 @@ class _$CustomerPaymentInfoCopyWithImpl<$Res, $Val extends CustomerPaymentInfo>
           ? _value.zzAdvice
           : zzAdvice // ignore: cast_nullable_to_non_nullable
               as String,
-      valueDate: null == valueDate
-          ? _value.valueDate
-          : valueDate // ignore: cast_nullable_to_non_nullable
-              as String,
+      createdDate: null == createdDate
+          ? _value.createdDate
+          : createdDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      adviceExpiry: null == adviceExpiry
+          ? _value.adviceExpiry
+          : adviceExpiry // ignore: cast_nullable_to_non_nullable
+              as AdviceExpiryValue,
     ) as $Val);
   }
 }
@@ -107,7 +114,8 @@ abstract class _$$_CustomerPaymentInfoCopyWith<$Res>
       String paymentBatchAdditionalInfo,
       String accountingDocExternalReference,
       String zzAdvice,
-      String valueDate});
+      DateTimeStringValue createdDate,
+      AdviceExpiryValue adviceExpiry});
 }
 
 /// @nodoc
@@ -126,7 +134,8 @@ class __$$_CustomerPaymentInfoCopyWithImpl<$Res>
     Object? paymentBatchAdditionalInfo = null,
     Object? accountingDocExternalReference = null,
     Object? zzAdvice = null,
-    Object? valueDate = null,
+    Object? createdDate = null,
+    Object? adviceExpiry = null,
   }) {
     return _then(_$_CustomerPaymentInfo(
       zzHtmcs: null == zzHtmcs
@@ -149,10 +158,14 @@ class __$$_CustomerPaymentInfoCopyWithImpl<$Res>
           ? _value.zzAdvice
           : zzAdvice // ignore: cast_nullable_to_non_nullable
               as String,
-      valueDate: null == valueDate
-          ? _value.valueDate
-          : valueDate // ignore: cast_nullable_to_non_nullable
-              as String,
+      createdDate: null == createdDate
+          ? _value.createdDate
+          : createdDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      adviceExpiry: null == adviceExpiry
+          ? _value.adviceExpiry
+          : adviceExpiry // ignore: cast_nullable_to_non_nullable
+              as AdviceExpiryValue,
     ));
   }
 }
@@ -166,7 +179,8 @@ class _$_CustomerPaymentInfo extends _CustomerPaymentInfo {
       required this.paymentBatchAdditionalInfo,
       required this.accountingDocExternalReference,
       required this.zzAdvice,
-      required this.valueDate})
+      required this.createdDate,
+      required this.adviceExpiry})
       : super._();
 
   @override
@@ -180,11 +194,13 @@ class _$_CustomerPaymentInfo extends _CustomerPaymentInfo {
   @override
   final String zzAdvice;
   @override
-  final String valueDate;
+  final DateTimeStringValue createdDate;
+  @override
+  final AdviceExpiryValue adviceExpiry;
 
   @override
   String toString() {
-    return 'CustomerPaymentInfo(zzHtmcs: $zzHtmcs, paymentID: $paymentID, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, accountingDocExternalReference: $accountingDocExternalReference, zzAdvice: $zzAdvice, valueDate: $valueDate)';
+    return 'CustomerPaymentInfo(zzHtmcs: $zzHtmcs, paymentID: $paymentID, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, accountingDocExternalReference: $accountingDocExternalReference, zzAdvice: $zzAdvice, createdDate: $createdDate, adviceExpiry: $adviceExpiry)';
   }
 
   @override
@@ -205,8 +221,10 @@ class _$_CustomerPaymentInfo extends _CustomerPaymentInfo {
                     accountingDocExternalReference) &&
             (identical(other.zzAdvice, zzAdvice) ||
                 other.zzAdvice == zzAdvice) &&
-            (identical(other.valueDate, valueDate) ||
-                other.valueDate == valueDate));
+            (identical(other.createdDate, createdDate) ||
+                other.createdDate == createdDate) &&
+            (identical(other.adviceExpiry, adviceExpiry) ||
+                other.adviceExpiry == adviceExpiry));
   }
 
   @override
@@ -217,7 +235,8 @@ class _$_CustomerPaymentInfo extends _CustomerPaymentInfo {
       paymentBatchAdditionalInfo,
       accountingDocExternalReference,
       zzAdvice,
-      valueDate);
+      createdDate,
+      adviceExpiry);
 
   @JsonKey(ignore: true)
   @override
@@ -234,7 +253,8 @@ abstract class _CustomerPaymentInfo extends CustomerPaymentInfo {
       required final String paymentBatchAdditionalInfo,
       required final String accountingDocExternalReference,
       required final String zzAdvice,
-      required final String valueDate}) = _$_CustomerPaymentInfo;
+      required final DateTimeStringValue createdDate,
+      required final AdviceExpiryValue adviceExpiry}) = _$_CustomerPaymentInfo;
   const _CustomerPaymentInfo._() : super._();
 
   @override
@@ -248,7 +268,9 @@ abstract class _CustomerPaymentInfo extends CustomerPaymentInfo {
   @override
   String get zzAdvice;
   @override
-  String get valueDate;
+  DateTimeStringValue get createdDate;
+  @override
+  AdviceExpiryValue get adviceExpiry;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerPaymentInfoCopyWith<_$_CustomerPaymentInfo> get copyWith =>

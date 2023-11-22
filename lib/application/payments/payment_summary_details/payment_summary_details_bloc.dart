@@ -188,6 +188,8 @@ class PaymentSummaryDetailsBloc
                 paymentInvoiceInfoPdf: state.paymentInvoiceInfoPdf,
                 shipToInfo: state.shipToInfo,
                 salesOrganisation: state.salesOrganization,
+                createdDate: state.details.createdDate,
+                adviceExpiry: state.details.adviceExpiry,
               ),
             );
 

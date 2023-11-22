@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/bank_instruction_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
@@ -651,6 +652,8 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
             shipToInfo: fakeShipToInfo,
+            createdDate: DateTimeStringValue(''),
+            adviceExpiry: AdviceExpiryValue(''),
           ),
         ).thenAnswer(
           (_) => Future.value(fakeRawFile),
@@ -746,6 +749,8 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
             shipToInfo: fakeShipToInfo,
+            createdDate: DateTimeStringValue(''),
+            adviceExpiry: AdviceExpiryValue(''),
           ),
         ).thenAnswer(
           (_) => Future.value(fakeRawFile),

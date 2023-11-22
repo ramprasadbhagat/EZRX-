@@ -43,7 +43,7 @@ class PaymentInvoiceInfoPdfDto with _$PaymentInvoiceInfoPdfDto {
       valueDate: DateTimeStringValue(valueDate),
       paymentID: paymentID,
       zzAdvice: zzAdvice,
-      paymentDue: paymentDue,
+      paymentDue: PaymentDue(paymentDue),
       paymentMethod: PaymentMethodValue(paymentMethod),
       customerName: customerName,
       payer: payer,

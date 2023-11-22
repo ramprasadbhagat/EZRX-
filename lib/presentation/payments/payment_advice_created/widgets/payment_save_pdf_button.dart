@@ -50,6 +50,9 @@ class PaymentSavePdfButton extends StatelessWidget {
                           dataInvoicePdf:
                               await CreatePaymentInvoicePdf().createInvoicePdf(
                             paymentInvoiceInfoPdf: state.paymentInvoiceInfoPdf,
+                            createdDate: state.customerPaymentInfo.createdDate,
+                            adviceExpiry:
+                                state.customerPaymentInfo.adviceExpiry,
                             shipToInfo: context
                                 .read<CustomerCodeBloc>()
                                 .state

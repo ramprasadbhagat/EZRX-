@@ -15,7 +15,7 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
     required DateTimeStringValue valueDate,
     required String paymentID,
     required String zzAdvice,
-    required String paymentDue,
+    required PaymentDue paymentDue,
     required PaymentMethodValue paymentMethod,
     required String customerName,
     required String payer,
@@ -34,7 +34,7 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
         valueDate: DateTimeStringValue(''),
         paymentID: '',
         zzAdvice: '',
-        paymentDue: '',
+        paymentDue: PaymentDue(''),
         paymentMethod: PaymentMethodValue(''),
         customerName: '',
         payer: '',
@@ -59,10 +59,4 @@ class PaymentInvoiceInfoPdf with _$PaymentInvoiceInfoPdf {
       BankBeneficiary.empty();
 
   bool get isEmpty => this == PaymentInvoiceInfoPdf.empty();
-
-  double get paymentAmount => paymentItems.fold(
-        0,
-        (previousValue, element) =>
-            previousValue + element.paymentAmountInDisplayCrcy,
-      );
 }

@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'customer_payment_info.freezed.dart';
@@ -12,16 +14,17 @@ class CustomerPaymentInfo with _$CustomerPaymentInfo {
     required String paymentBatchAdditionalInfo,
     required String accountingDocExternalReference,
     required String zzAdvice,
-        required String valueDate,
-
+    required DateTimeStringValue createdDate,
+    required AdviceExpiryValue adviceExpiry,
   }) = _CustomerPaymentInfo;
 
-  factory CustomerPaymentInfo.empty() => const CustomerPaymentInfo(
+  factory CustomerPaymentInfo.empty() => CustomerPaymentInfo(
         zzHtmcs: '',
         accountingDocExternalReference: '',
         paymentID: '',
         paymentBatchAdditionalInfo: '',
         zzAdvice: '',
-        valueDate: '',
+        createdDate: DateTimeStringValue(''),
+        adviceExpiry: AdviceExpiryValue(''),
       );
 }

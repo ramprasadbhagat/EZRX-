@@ -62,3 +62,29 @@ class PaymentMethodValue extends ValueObject<String> {
 
   const PaymentMethodValue._(this.value);
 }
+
+class PaymentDue extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PaymentDue(String input) {
+    return PaymentDue._(validateStringNotEmpty(input));
+  }
+
+  String get totalAmount => getTotalAmount(value.getOrElse(() => ''));
+  const PaymentDue._(this.value);
+}
+
+class AdviceExpiryValue extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory AdviceExpiryValue(String input) {
+    return AdviceExpiryValue._(validateStringNotEmpty(input));
+  }
+
+  int get expiryDays => getExpiryDays(value.getOrElse(() => ''));
+
+  String get displayDashIfEmpty => dashIfEmpty((value.getOrElse(() => '')));
+  const AdviceExpiryValue._(this.value);
+}

@@ -25,6 +25,7 @@ import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
@@ -108,7 +109,7 @@ void main() {
   late NewPaymentBlocMock newPaymentBlocMock;
 
   final fakeDate = DateTimeStringValue('fake-date');
-  final fakeAdviceExpiry = StringValue('fake-advice-expiry');
+  final fakeAdviceExpiry = AdviceExpiryValue('fake-advice-expiry');
   final fakeToDate = DateTime.parse(
     DateFormat('yyyy-MM-dd').format(
       DateTime.now(),

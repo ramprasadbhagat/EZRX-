@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -35,7 +36,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
     required String customId,
     required DateTimeStringValue createdDate,
     required StringValue zzAdvice,
-    required StringValue adviceExpiry,
+    required AdviceExpiryValue adviceExpiry,
     required StringValue paymentBatchAdditionalInfo,
     required String accountingDocExternalReference,
     required List<PaymentItem> paymentItems,
@@ -61,7 +62,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         transactionCurrency: '',
         valueDate: DateTimeStringValue(''),
         createdDate: DateTimeStringValue(''),
-        adviceExpiry: StringValue(''),
+        adviceExpiry: AdviceExpiryValue(''),
         zzAdvice: StringValue(''),
         paymentBatchAdditionalInfo: StringValue(''),
         accountingDocExternalReference: '',
@@ -80,7 +81,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         customId: '',
         iban: '',
         status: FilterStatus(''),
-        paymentAmount: invoice.paymentAmount,
+        paymentAmount: 0,
         paymentCardHolderName: '',
         paymentCardID: '',
         paymentCardMaskedNumber: '',
@@ -95,7 +96,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
             invoice.paymentItems.firstOrNull?.transactionCurrency ?? '',
         valueDate: invoice.valueDate,
         createdDate: DateTimeStringValue(''),
-        adviceExpiry: StringValue(''),
+        adviceExpiry: AdviceExpiryValue(''),
         zzAdvice: StringValue(invoice.zzAdvice),
         paymentBatchAdditionalInfo:
             StringValue(invoice.paymentBatchAdditionalInfo),

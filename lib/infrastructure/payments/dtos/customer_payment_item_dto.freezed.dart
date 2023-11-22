@@ -64,25 +64,34 @@ abstract class $CustomerPaymentItemDtoCopyWith<$Res> {
       _$CustomerPaymentItemDtoCopyWithImpl<$Res, CustomerPaymentItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'paymentID', defaultValue: '') String paymentID,
-      @JsonKey(name: 'valueDate', defaultValue: '') String valueDate,
-      @JsonKey(name: 'paymentAmount', defaultValue: 0) num paymentAmount,
+      {@JsonKey(name: 'paymentID', defaultValue: '')
+          String paymentID,
+      @JsonKey(name: 'valueDate', defaultValue: '')
+          String valueDate,
+      @JsonKey(name: 'paymentAmount', defaultValue: 0)
+          num paymentAmount,
       @JsonKey(name: 'transactionCurrency', defaultValue: '')
-      String transactionCurrency,
+          String transactionCurrency,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
-      String invoiceProcessingStatus,
+          String invoiceProcessingStatus,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      String accountingDocExternalReference,
-      @JsonKey(name: 'paymentMethod', defaultValue: '') String paymentMethod,
+          String accountingDocExternalReference,
+      @JsonKey(name: 'paymentMethod', defaultValue: '')
+          String paymentMethod,
       @JsonKey(name: 'zCcpPaymentQrCode', defaultValue: '')
-      String zCcpPaymentQrCode,
+          String zCcpPaymentQrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      String paymentBatchAdditionalInfo,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
-      @JsonKey(name: 'zzHtmcs', defaultValue: '') String zzHtmcs,
-      @JsonKey(name: 'adviceExpiry', defaultValue: '') String adviceExpiry,
-      @JsonKey(name: 'createdDate', defaultValue: '') String createdDate,
-      @JsonKey(name: 'status', defaultValue: '') String status});
+          String paymentBatchAdditionalInfo,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          String zzAdvice,
+      @JsonKey(name: 'zzHtmcs', defaultValue: '')
+          String zzHtmcs,
+      @JsonKey(name: 'adviceExpiry', defaultValue: '')
+          String adviceExpiry,
+      @JsonKey(name: 'createdDate', defaultValue: '')
+          String createdDate,
+      @JsonKey(name: 'status', defaultValue: '')
+          String status});
 }
 
 /// @nodoc
@@ -184,25 +193,34 @@ abstract class _$$_CustomerPaymentItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'paymentID', defaultValue: '') String paymentID,
-      @JsonKey(name: 'valueDate', defaultValue: '') String valueDate,
-      @JsonKey(name: 'paymentAmount', defaultValue: 0) num paymentAmount,
+      {@JsonKey(name: 'paymentID', defaultValue: '')
+          String paymentID,
+      @JsonKey(name: 'valueDate', defaultValue: '')
+          String valueDate,
+      @JsonKey(name: 'paymentAmount', defaultValue: 0)
+          num paymentAmount,
       @JsonKey(name: 'transactionCurrency', defaultValue: '')
-      String transactionCurrency,
+          String transactionCurrency,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
-      String invoiceProcessingStatus,
+          String invoiceProcessingStatus,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      String accountingDocExternalReference,
-      @JsonKey(name: 'paymentMethod', defaultValue: '') String paymentMethod,
+          String accountingDocExternalReference,
+      @JsonKey(name: 'paymentMethod', defaultValue: '')
+          String paymentMethod,
       @JsonKey(name: 'zCcpPaymentQrCode', defaultValue: '')
-      String zCcpPaymentQrCode,
+          String zCcpPaymentQrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      String paymentBatchAdditionalInfo,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
-      @JsonKey(name: 'zzHtmcs', defaultValue: '') String zzHtmcs,
-      @JsonKey(name: 'adviceExpiry', defaultValue: '') String adviceExpiry,
-      @JsonKey(name: 'createdDate', defaultValue: '') String createdDate,
-      @JsonKey(name: 'status', defaultValue: '') String status});
+          String paymentBatchAdditionalInfo,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          String zzAdvice,
+      @JsonKey(name: 'zzHtmcs', defaultValue: '')
+          String zzHtmcs,
+      @JsonKey(name: 'adviceExpiry', defaultValue: '')
+          String adviceExpiry,
+      @JsonKey(name: 'createdDate', defaultValue: '')
+          String createdDate,
+      @JsonKey(name: 'status', defaultValue: '')
+          String status});
 }
 
 /// @nodoc
@@ -297,28 +315,34 @@ class __$$_CustomerPaymentItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CustomerPaymentItemDto extends _CustomerPaymentItemDto {
   const _$_CustomerPaymentItemDto(
-      {@JsonKey(name: 'paymentID', defaultValue: '') required this.paymentID,
-      @JsonKey(name: 'valueDate', defaultValue: '') required this.valueDate,
+      {@JsonKey(name: 'paymentID', defaultValue: '')
+          required this.paymentID,
+      @JsonKey(name: 'valueDate', defaultValue: '')
+          required this.valueDate,
       @JsonKey(name: 'paymentAmount', defaultValue: 0)
-      required this.paymentAmount,
+          required this.paymentAmount,
       @JsonKey(name: 'transactionCurrency', defaultValue: '')
-      required this.transactionCurrency,
+          required this.transactionCurrency,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
-      required this.invoiceProcessingStatus,
+          required this.invoiceProcessingStatus,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      required this.accountingDocExternalReference,
+          required this.accountingDocExternalReference,
       @JsonKey(name: 'paymentMethod', defaultValue: '')
-      required this.paymentMethod,
+          required this.paymentMethod,
       @JsonKey(name: 'zCcpPaymentQrCode', defaultValue: '')
-      required this.zCcpPaymentQrCode,
+          required this.zCcpPaymentQrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      required this.paymentBatchAdditionalInfo,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') required this.zzAdvice,
-      @JsonKey(name: 'zzHtmcs', defaultValue: '') required this.zzHtmcs,
+          required this.paymentBatchAdditionalInfo,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          required this.zzAdvice,
+      @JsonKey(name: 'zzHtmcs', defaultValue: '')
+          required this.zzHtmcs,
       @JsonKey(name: 'adviceExpiry', defaultValue: '')
-      required this.adviceExpiry,
-      @JsonKey(name: 'createdDate', defaultValue: '') required this.createdDate,
-      @JsonKey(name: 'status', defaultValue: '') required this.status})
+          required this.adviceExpiry,
+      @JsonKey(name: 'createdDate', defaultValue: '')
+          required this.createdDate,
+      @JsonKey(name: 'status', defaultValue: '')
+          required this.status})
       : super._();
 
   factory _$_CustomerPaymentItemDto.fromJson(Map<String, dynamic> json) =>
@@ -447,32 +471,33 @@ class _$_CustomerPaymentItemDto extends _CustomerPaymentItemDto {
 abstract class _CustomerPaymentItemDto extends CustomerPaymentItemDto {
   const factory _CustomerPaymentItemDto(
       {@JsonKey(name: 'paymentID', defaultValue: '')
-      required final String paymentID,
+          required final String paymentID,
       @JsonKey(name: 'valueDate', defaultValue: '')
-      required final String valueDate,
+          required final String valueDate,
       @JsonKey(name: 'paymentAmount', defaultValue: 0)
-      required final num paymentAmount,
+          required final num paymentAmount,
       @JsonKey(name: 'transactionCurrency', defaultValue: '')
-      required final String transactionCurrency,
+          required final String transactionCurrency,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
-      required final String invoiceProcessingStatus,
+          required final String invoiceProcessingStatus,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      required final String accountingDocExternalReference,
+          required final String accountingDocExternalReference,
       @JsonKey(name: 'paymentMethod', defaultValue: '')
-      required final String paymentMethod,
+          required final String paymentMethod,
       @JsonKey(name: 'zCcpPaymentQrCode', defaultValue: '')
-      required final String zCcpPaymentQrCode,
+          required final String zCcpPaymentQrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      required final String paymentBatchAdditionalInfo,
+          required final String paymentBatchAdditionalInfo,
       @JsonKey(name: 'zzAdvice', defaultValue: '')
-      required final String zzAdvice,
-      @JsonKey(name: 'zzHtmcs', defaultValue: '') required final String zzHtmcs,
+          required final String zzAdvice,
+      @JsonKey(name: 'zzHtmcs', defaultValue: '')
+          required final String zzHtmcs,
       @JsonKey(name: 'adviceExpiry', defaultValue: '')
-      required final String adviceExpiry,
+          required final String adviceExpiry,
       @JsonKey(name: 'createdDate', defaultValue: '')
-      required final String createdDate,
+          required final String createdDate,
       @JsonKey(name: 'status', defaultValue: '')
-      required final String status}) = _$_CustomerPaymentItemDto;
+          required final String status}) = _$_CustomerPaymentItemDto;
   const _CustomerPaymentItemDto._() : super._();
 
   factory _CustomerPaymentItemDto.fromJson(Map<String, dynamic> json) =
