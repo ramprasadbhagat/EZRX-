@@ -4,9 +4,11 @@ import 'package:ezrxmobile/domain/announcement_info/entities/announcement_articl
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/article_info/repository/article_info_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -25,14 +27,18 @@ void main() {
   late ArticleInfoRemoteDataSource remoteDataSource;
   late ArticleInfoLocalDataSource localDataSource;
   late ArticleInfoRepository repository;
+  late AnnouncementArticleInfo fakeAnnouncementArticleInfo;
 
   const pageSize = 24;
 
-  setUpAll(() {
+  setUpAll(() async {
+    WidgetsFlutterBinding.ensureInitialized();
     mockConfig = MockConfig();
     mockSalesOrg = MockSalesOrg();
     localDataSource = ArticleInfoLocalDataSourceMock();
     remoteDataSource = ArticleInfoRemoteDataSourceMock();
+    fakeAnnouncementArticleInfo =
+        await ArticleInfoLocalDataSource().getArticles();
 
     repository = ArticleInfoRepository(
       config: mockConfig,
@@ -107,6 +113,40 @@ void main() {
       expect(
         result.isRight(),
         true,
+      );
+    });
+    test(' get article Info successfully Remote for ID market', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => mockConfig.announcementApiUrlPath)
+          .thenReturn('/api/announcement');
+      when(() => mockConfig.idMarketArticleTemplate1)
+          .thenReturn('4A583EF3-A105-4A00-BC98-EC96A9967955');
+      when(() => mockConfig.idMarketArticleTemplate2)
+          .thenReturn('4A583EF3-A105-4A00-BC98-EC96A9967954');
+
+      when(
+        () => remoteDataSource.getArticleInfoIdMarket(
+          announcementUrlPath: '/api/announcement',
+          variablePath: fakeIDSalesOrg.articleVariablePath,
+          template1: '4A583EF3-A105-4A00-BC98-EC96A9967955',
+          template2: '4A583EF3-A105-4A00-BC98-EC96A9967954',
+          pageSize: 24,
+          after: '',
+          lang: fakeIDSalesOrg.languageCodeForHelpAndSupport,
+        ),
+      ).thenAnswer((invocation) async => fakeAnnouncementArticleInfo);
+      final result = await repository.getArticles(
+        salesOrg: fakeIDSalesOrg,
+        pageSize: pageSize,
+        after: '',
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      expect(
+        result.getOrElse(() => AnnouncementArticleInfo.empty()),
+        fakeAnnouncementArticleInfo,
       );
     });
     test(' get article Info fail Remote ', () async {
