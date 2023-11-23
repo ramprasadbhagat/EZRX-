@@ -95,4 +95,41 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
             'value': searchKey,
           },
       ];
+
+  List<Map<String, String>> get toIDCreditFilterMapList =>
+      <Map<String, String>>[
+        {
+          'field': 'debitCreditCode',
+          'value': 'H',
+        },
+        if (documentDateFrom.isNotEmpty && documentDateFrom != '-')
+          {
+            'field': 'documentDate',
+            'value': documentDateFrom,
+            'type': 'ge',
+          },
+        if (documentDateTo.isNotEmpty && documentDateTo != '-')
+          {
+            'field': 'documentDate',
+            'value': documentDateTo,
+            'type': 'le',
+          },
+        if (amountValueTo.isNotEmpty)
+          {
+            'field': 'openAmountInTransCrcy',
+            'value': '-$amountValueTo',
+            'type': 'ge',
+          },
+        if (amountValueFrom.isNotEmpty)
+          {
+            'field': 'openAmountInTransCrcy',
+            'value': '-$amountValueFrom',
+            'type': 'le',
+          },
+        if (searchKey.isNotEmpty)
+          {
+            'field': 'accountingDocument',
+            'value': searchKey,
+          },
+      ];
 }

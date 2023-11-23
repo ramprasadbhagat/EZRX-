@@ -10,43 +10,61 @@ class _CreditsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isIDMarket = context.read<EligibilityBloc>().state.isIDMarket;
+
     return CustomCard(
       padding: const EdgeInsets.symmetric(
         vertical: 10,
       ),
       child: ListTile(
         key: WidgetKeys.creditsItemTile,
-        onTap: () => _onItemClick(context),
+        onTap: !isIDMarket ? () => _onItemClick(context) : null,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '${creditItem.postingKeyName} #${creditItem.searchKey.getOrDefaultValue('')}',
+              '${context.tr('Account credit')} #${creditItem.searchKey.getOrDefaultValue('')}',
               key: WidgetKeys.creditItemId(
                 creditItem.searchKey.getOrDefaultValue(''),
               ),
               style: Theme.of(context).textTheme.labelSmall,
             ),
-            StatusLabel(
-              status: StatusType(
-                creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
+            if (!isIDMarket)
+              StatusLabel(
+                key: WidgetKeys.creditStatusTag,
+                status: StatusType(
+                  creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
+                ),
               ),
-            ),
           ],
         ),
         subtitle: Padding(
           padding: const EdgeInsets.only(
             top: 8,
           ),
-          child: PriceComponent(
-            salesOrgConfig:
-                context.read<EligibilityBloc>().state.salesOrgConfigs,
-            price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
-                .toString(),
-            priceLabelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ZPColors.primary,
-                  fontWeight: FontWeight.bold,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (isIDMarket)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text(
+                    creditItem.accountingDocumentType,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
+              PriceComponent(
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
+                    .toString(),
+                priceLabelStyle:
+                    Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: ZPColors.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+              ),
+            ],
           ),
         ),
       ),

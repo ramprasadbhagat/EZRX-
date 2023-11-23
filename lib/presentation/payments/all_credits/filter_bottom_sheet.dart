@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -102,14 +103,21 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
                             isValid: state.filter.isAmountValueRangeValid,
                           )
                         : const SizedBox.shrink(),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0, top: 20.0),
-                      child: Text(
-                        context.tr('Status'),
-                        style: Theme.of(context).textTheme.labelSmall,
+                    if (!context.read<EligibilityBloc>().state.isIDMarket)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(bottom: 12.0, top: 20.0),
+                            child: Text(
+                              context.tr('Status'),
+                              style: Theme.of(context).textTheme.labelSmall,
+                            ),
+                          ),
+                          const _StatusesSelector(),
+                        ],
                       ),
-                    ),
-                    const _StatusesSelector(),
                     const SizedBox(
                       height: 20,
                     ),

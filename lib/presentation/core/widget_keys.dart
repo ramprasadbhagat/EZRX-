@@ -1105,6 +1105,7 @@ class WidgetKeys {
   static const Key creditDetailsPage = Key('creditDetailsPage');
   static const Key creditDetailsTile = Key('creditDetailsTile');
   static const Key creditSummaryTile = Key('creditSummaryTile');
+  static const Key creditStatusTag = Key('creditStatusTag');
 
   //===========================================================
   //  Intro Page

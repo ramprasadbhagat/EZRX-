@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
@@ -33,6 +34,9 @@ class AllCreditsFilterBlocMock
     extends MockBloc<AllCreditsFilterEvent, AllCreditsFilterState>
     implements AllCreditsFilterBloc {}
 
+class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late AllCreditsBloc allCreditsBlocMock;
@@ -40,6 +44,7 @@ void main() {
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
+  late EligibilityBloc eligibilityBlocMock;
   final fakeToDate = DateTime.parse(
     DateFormat('yyyy-MM-dd').format(
       DateTime.now(),
@@ -72,6 +77,9 @@ void main() {
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
     when(() => allCreditsFilterBlocMock.state)
         .thenReturn(AllCreditsFilterState.initial());
+    eligibilityBlocMock = MockEligibilityBloc();
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
   Future getWidget(tester) async {
@@ -94,6 +102,9 @@ void main() {
           ),
           BlocProvider<AllCreditsFilterBloc>(
             create: (context) => allCreditsFilterBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
         ],
         child: const Scaffold(

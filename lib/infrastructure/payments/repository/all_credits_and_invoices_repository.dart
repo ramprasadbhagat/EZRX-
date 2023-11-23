@@ -80,12 +80,15 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
       }
     }
     try {
+      final salesOrg = salesOrganisation.salesOrg;
       final response = await remoteDataSource.filterCredits(
-        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        salesOrg: salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
         pageSize: pageSize,
         offset: offset,
-        filterMap: AllCreditsFilterDto.fromDomain(filter).toMapList,
+        filterMap: salesOrg.isID
+            ? AllCreditsFilterDto.fromDomain(filter).toIDCreditFilterMapList
+            : AllCreditsFilterDto.fromDomain(filter).toMapList,
       );
 
       return Right(response);

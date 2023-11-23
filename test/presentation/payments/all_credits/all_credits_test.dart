@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:get_it/get_it.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -25,7 +25,10 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
@@ -53,6 +56,12 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class MockMixpanelService extends Mock implements MixpanelService {}
+
+class CreditAndInvoiceDetailsBlocMock
+    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
+    implements CreditAndInvoiceDetailsBloc {}
+
 void main() {
   late AllCreditsBloc allCreditsBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
@@ -61,16 +70,16 @@ void main() {
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
 
   setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
+
     autoRouterMock = locator<AppRouter>();
   });
 
@@ -84,6 +93,7 @@ void main() {
     salesOrgBlocMock = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
+    creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
 
     when(() => allCreditsBlocMock.state).thenReturn(AllCreditsState.initial());
     when(() => allCreditsFilterBlocMock.state)
@@ -95,9 +105,10 @@ void main() {
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
-
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    when(() => creditAndInvoiceDetailsBlocMock.state)
+        .thenReturn(CreditAndInvoiceDetailsState.initial());
   });
 
   Widget getWidget() {
@@ -127,11 +138,18 @@ void main() {
         BlocProvider<AnnouncementBloc>(
           create: (context) => announcementBlocMock,
         ),
+        BlocProvider<CreditAndInvoiceDetailsBloc>(
+          create: (context) => creditAndInvoiceDetailsBlocMock,
+        ),
       ],
       child: const AllCreditsPage(),
     );
   }
 
+  ////////////////////////Finder/////////////////////////////////////////////
+  final creditStatusTag = find.byKey(WidgetKeys.creditStatusTag);
+  final creditsItemTile = find.byKey(WidgetKeys.creditsItemTile);
+  ///////////////////////////////////////////////////////////////////////////
   group('All Credits Screen', () {
     // testWidgets('=> AppBar Test', (tester) async {
     //   when(() => allCreditsBlocMock.state)
@@ -352,6 +370,125 @@ void main() {
       await tester.pump();
       final createdOnText = find.textContaining('Created on');
       expect(createdOnText, findsOneWidget);
+    });
+
+    testWidgets('=> Credit Status tag available for all market',
+        (tester) async {
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          items: [
+            CreditAndInvoiceItem.empty().copyWith(
+              searchKey: StringValue('123456780'),
+              netDueDate: DateTimeStringValue('2023-12-25'),
+              documentDate: DateTimeStringValue('2023-12-25'),
+              amountInTransactionCurrency: 15.72,
+              invoiceProcessingStatus: StatusType('Cleared'),
+            )
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(creditStatusTag, findsWidgets);
+    });
+
+    testWidgets('=> Credit Status tag not available of ID market',
+        (tester) async {
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          items: [
+            CreditAndInvoiceItem.empty().copyWith(
+              searchKey: StringValue('123456780'),
+              netDueDate: DateTimeStringValue('2023-12-25'),
+              documentDate: DateTimeStringValue('2023-12-25'),
+              amountInTransactionCurrency: 15.72,
+              invoiceProcessingStatus: StatusType('Cleared'),
+            )
+          ],
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(creditStatusTag, findsNothing);
+    });
+
+    testWidgets('=> Credit details page for all market', (tester) async {
+      final creditAndInvoiceItem = CreditAndInvoiceItem.empty().copyWith(
+        searchKey: StringValue('123456780'),
+        netDueDate: DateTimeStringValue('2023-12-25'),
+        documentDate: DateTimeStringValue('2023-12-25'),
+        amountInTransactionCurrency: 15.72,
+        invoiceProcessingStatus: StatusType('Cleared'),
+      );
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          items: [creditAndInvoiceItem],
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(creditsItemTile, findsOneWidget);
+      await tester.tap(creditsItemTile);
+      await tester.pumpAndSettle();
+      verify(
+        () => creditAndInvoiceDetailsBlocMock.add(
+          CreditAndInvoiceDetailsEvent.fetch(
+            creditAndInvoiceItem: creditAndInvoiceItem,
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('=> Credit no details page for ID market', (tester) async {
+      final creditAndInvoiceItem = CreditAndInvoiceItem.empty().copyWith(
+        searchKey: StringValue('123456780'),
+        netDueDate: DateTimeStringValue('2023-12-25'),
+        documentDate: DateTimeStringValue('2023-12-25'),
+        amountInTransactionCurrency: 15.72,
+        invoiceProcessingStatus: StatusType('Cleared'),
+      );
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          items: [creditAndInvoiceItem],
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(creditsItemTile, findsOneWidget);
+      await tester.tap(creditsItemTile);
+      await tester.pumpAndSettle();
+      verifyNever(
+        () => creditAndInvoiceDetailsBlocMock.add(
+          CreditAndInvoiceDetailsEvent.fetch(
+            creditAndInvoiceItem: creditAndInvoiceItem,
+            salesOrganisation: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ),
+      );
     });
   });
 }

@@ -15,6 +15,9 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_in
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class AllCreditsAndInvoicesLocalDataSourceMock extends Mock
     implements AllCreditsAndInvoicesLocalDataSource {}
 
@@ -128,6 +131,39 @@ void main() {
             .copyWith(customerCodeSoldTo: 'mock_soldTo'),
         salesOrganisation: SalesOrganisation.empty()
             .copyWith(salesOrg: SalesOrg('mock_salesOrg')),
+        pageSize: 1,
+        offset: 0,
+        filter: allCreditsFilter,
+      );
+      expect(result.isRight(), true);
+    });
+
+    test('=> filterCredits remote success for ID market', () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+      when(
+        () => allCreditsAndInvoicesRemoteDataSourceMock.filterCredits(
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          salesOrg: fakeIDSalesOrganisation.salesOrg.getValue(),
+          pageSize: 1,
+          offset: 0,
+          filterMap: AllCreditsFilterDto.fromDomain(
+            AllCreditsFilter.empty().copyWith(
+              documentDateFrom:
+                  DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
+              documentDateTo:
+                  DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
+              amountValueTo: RangeValue('100'),
+              amountValueFrom: RangeValue('1000'),
+            ),
+          ).toIDCreditFilterMapList,
+        ),
+      ).thenAnswer(
+        (invocation) async => mockList,
+      );
+
+      final result = await allCreditsAndInvoicesRepository.filterCredits(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeIDSalesOrganisation,
         pageSize: 1,
         offset: 0,
         filter: allCreditsFilter,
