@@ -73,8 +73,8 @@ mixin _$CartProductDto {
   PriceComboDealDto get comboDeal => throw _privateConstructorUsedError;
   @JsonKey(name: 'comboMaterials', defaultValue: [])
   List<ComboMaterialItemDto> get comboMaterials =>
-      throw _privateConstructorUsedError;
-  @JsonKey(name: 'maximumQty', defaultValue: 1)
+      throw _privateConstructorUsedError; //maximumQty auto set to maximum limit if we get null from response
+  @JsonKey(name: 'maximumQty', defaultValue: 99999)
   int get maximumQty => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -128,7 +128,7 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
       List<ComboMaterialItemDto> comboMaterials,
-      @JsonKey(name: 'maximumQty', defaultValue: 1) int maximumQty});
+      @JsonKey(name: 'maximumQty', defaultValue: 99999) int maximumQty});
 
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
@@ -351,7 +351,7 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
       @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
       List<ComboMaterialItemDto> comboMaterials,
-      @JsonKey(name: 'maximumQty', defaultValue: 1) int maximumQty});
+      @JsonKey(name: 'maximumQty', defaultValue: 99999) int maximumQty});
 
   @override
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
@@ -559,7 +559,8 @@ class _$_CartProductDto extends _CartProductDto {
       @JsonKey(name: 'comboDeals') this.comboDeal = PriceComboDealDto.empty,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
       required final List<ComboMaterialItemDto> comboMaterials,
-      @JsonKey(name: 'maximumQty', defaultValue: 1) required this.maximumQty})
+      @JsonKey(name: 'maximumQty', defaultValue: 99999)
+      required this.maximumQty})
       : _bundleMaterials = bundleMaterials,
         _bonusMaterials = bonusMaterials,
         _comboMaterials = comboMaterials,
@@ -664,8 +665,9 @@ class _$_CartProductDto extends _CartProductDto {
     return EqualUnmodifiableListView(_comboMaterials);
   }
 
+//maximumQty auto set to maximum limit if we get null from response
   @override
-  @JsonKey(name: 'maximumQty', defaultValue: 1)
+  @JsonKey(name: 'maximumQty', defaultValue: 99999)
   final int maximumQty;
 
   @override
@@ -826,7 +828,7 @@ abstract class _CartProductDto extends CartProductDto {
       @JsonKey(name: 'comboDeals') final PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
       required final List<ComboMaterialItemDto> comboMaterials,
-      @JsonKey(name: 'maximumQty', defaultValue: 1)
+      @JsonKey(name: 'maximumQty', defaultValue: 99999)
       required final int maximumQty}) = _$_CartProductDto;
   const _CartProductDto._() : super._();
 
@@ -911,8 +913,8 @@ abstract class _CartProductDto extends CartProductDto {
   @override
   @JsonKey(name: 'comboMaterials', defaultValue: [])
   List<ComboMaterialItemDto> get comboMaterials;
-  @override
-  @JsonKey(name: 'maximumQty', defaultValue: 1)
+  @override //maximumQty auto set to maximum limit if we get null from response
+  @JsonKey(name: 'maximumQty', defaultValue: 99999)
   int get maximumQty;
   @override
   @JsonKey(ignore: true)

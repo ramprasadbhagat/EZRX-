@@ -52,7 +52,7 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
                   ComboMaterialItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      maximumQty: json['maximumQty'] as int? ?? 1,
+      maximumQty: json['maximumQty'] as int? ?? 99999,
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
