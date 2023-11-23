@@ -1,11 +1,15 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/transaction_params.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/transaction_params_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_repository.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -28,6 +32,7 @@ void main() {
   late PaymentSummaryLocalDataSource localDataSource;
   late PaymentSummaryRemoteDataSource remoteDataSource;
   late List<PaymentSummaryDetails> fakePaymentList;
+  late List<PaymentSummaryDetails> fakeTransactionList;
   final fakeFilter = PaymentSummaryFilter.empty();
   final filterList = PaymentSummaryFilterDto.fromDomain(fakeFilter).toMapList;
   final searchMap = {
@@ -50,6 +55,8 @@ void main() {
 
       fakePaymentList =
           await PaymentSummaryLocalDataSource().getPaymentSummary();
+      fakeTransactionList =
+          await PaymentSummaryLocalDataSource().getTransactions();
     },
   );
 
@@ -177,5 +184,122 @@ void main() {
         );
       },
     );
+
+    test('fetch Payment Summary List successfully local for ID market',
+        () async {
+      mockConfig.appFlavor = Flavor.mock;
+      when(() => localDataSource.getTransactions())
+          .thenAnswer((invocation) async => fakeTransactionList);
+
+      final result = await paymentSummaryRepository.fetchPaymentSummaryList(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        filter: fakeFilter,
+        offset: 0,
+        pageSize: mockConfig.pageSize,
+        salesOrganization: fakeIDSalesOrganisation,
+        searchKey: SearchKey(''),
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      expect(
+        result.getOrElse(() => <PaymentSummaryDetails>[]),
+        fakeTransactionList,
+      );
+    });
+    test('fetch Payment Summary List fail local for ID market', () async {
+      mockConfig.appFlavor = Flavor.mock;
+      when(() => localDataSource.getTransactions()).thenThrow(MockException());
+
+      final result = await paymentSummaryRepository.fetchPaymentSummaryList(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        filter: fakeFilter,
+        offset: 0,
+        pageSize: mockConfig.pageSize,
+        salesOrganization: fakeIDSalesOrganisation,
+        searchKey: SearchKey(''),
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+      expect(
+        result,
+        Left(
+          FailureHandler.handleFailure(MockException()),
+        ),
+      );
+    });
+
+    test('fetch Payment Summary List successfully remote for ID market',
+        () async {
+      mockConfig.appFlavor = Flavor.uat;
+      when(
+        () => remoteDataSource.getTransactions(
+          requestParams: TransactionParamsDto.fromDomain(
+            TransactionParams(
+              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+              filter: fakeFilter,
+              searchKey: SearchKey(''),
+              first: mockConfig.pageSize,
+              after: 0,
+            ),
+          ).toMap(),
+        ),
+      ).thenAnswer((invocation) async => fakeTransactionList);
+
+      final result = await paymentSummaryRepository.fetchPaymentSummaryList(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        filter: fakeFilter,
+        offset: 0,
+        pageSize: mockConfig.pageSize,
+        salesOrganization: fakeIDSalesOrganisation,
+        searchKey: SearchKey(''),
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      expect(
+        result.getOrElse(() => <PaymentSummaryDetails>[]),
+        fakeTransactionList,
+      );
+    });
+    test('fetch Payment Summary List fail local for ID market', () async {
+      mockConfig.appFlavor = Flavor.uat;
+      when(
+        () => remoteDataSource.getTransactions(
+          requestParams: TransactionParamsDto.fromDomain(
+            TransactionParams(
+              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+              filter: fakeFilter,
+              searchKey: SearchKey(''),
+              first: mockConfig.pageSize,
+              after: 0,
+            ),
+          ).toMap(),
+        ),
+      ).thenThrow(MockException());
+
+      final result = await paymentSummaryRepository.fetchPaymentSummaryList(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        filter: fakeFilter,
+        offset: 0,
+        pageSize: mockConfig.pageSize,
+        salesOrganization: fakeIDSalesOrganisation,
+        searchKey: SearchKey(''),
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+      expect(
+        result,
+        Left(
+          FailureHandler.handleFailure(MockException()),
+        ),
+      );
+    });
   });
 }
