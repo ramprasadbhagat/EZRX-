@@ -123,6 +123,8 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
     );
     on<_FetchOrder>(
       (e, emit) async {
+        if (e.invoices.isEmpty) return;
+        
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),

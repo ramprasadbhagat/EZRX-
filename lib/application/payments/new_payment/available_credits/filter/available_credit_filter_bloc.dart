@@ -63,7 +63,7 @@ class AvailableCreditFilterBloc
       ),
       resetFilters: (e) async => emit(
         AvailableCreditFilterState.initial().copyWith(
-          filter: AvailableCreditFilter.dateRangeEmpty(),
+          filter: AvailableCreditFilter.empty(),
         ),
       ),
     );

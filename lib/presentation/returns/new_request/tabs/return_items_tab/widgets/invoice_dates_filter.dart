@@ -34,6 +34,10 @@ class _FromInvoiceDateFilter extends StatelessWidget {
             text: state.filter.invoiceDateFrom.dateString,
           ),
           decoration: InputDecoration(
+            hintText: context.tr('Date from'),
+            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
             suffixIcon: const Padding(
               padding: EdgeInsets.only(right: 8.0),
               child: Icon(
@@ -85,6 +89,10 @@ class _ToInvoiceDateFilter extends StatelessWidget {
             text: state.filter.invoiceDateTo.dateString,
           ),
           decoration: InputDecoration(
+            hintText: context.tr('Date to'),
+            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
             suffixIcon: const Padding(
               padding: EdgeInsets.only(right: 8.0),
               child: Icon(

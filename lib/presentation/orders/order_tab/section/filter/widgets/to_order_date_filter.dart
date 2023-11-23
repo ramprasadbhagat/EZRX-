@@ -29,6 +29,10 @@ class _ToOrderDateFilter extends StatelessWidget {
             text: state.filter.orderDateTo.dateString,
           ),
           decoration: InputDecoration(
+             hintText: context.tr('Date to'),
+            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
             suffixIcon: const Padding(
               padding: EdgeInsets.only(right: 8.0),
               child: Icon(

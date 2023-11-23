@@ -41,6 +41,10 @@ class _PaymentSummaryFromCreatedDateFilter extends StatelessWidget {
                 size: 20,
               ),
             ),
+            hintText: context.tr('Date from'),
+            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
             suffixIconConstraints: const BoxConstraints(maxWidth: 25),
             focusedBorder:
                 Theme.of(context).inputDecorationTheme.disabledBorder,
@@ -85,6 +89,10 @@ class _PaymentSummaryToCreatedDateFilter extends StatelessWidget {
             text: state.filter.createdDateTo.dateString,
           ),
           decoration: InputDecoration(
+            hintText: context.tr('Date to'),
+            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
             suffixIcon: const Padding(
               padding: EdgeInsets.only(right: 8.0),
               child: Icon(

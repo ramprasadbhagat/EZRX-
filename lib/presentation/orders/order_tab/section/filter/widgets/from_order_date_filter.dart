@@ -33,6 +33,10 @@ class _FromOrderDateFilter extends StatelessWidget {
             text: state.filter.orderDateFrom.dateString,
           ),
           decoration: InputDecoration(
+            hintText: context.tr('Date from'),
+            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
             suffixIcon: const Padding(
               padding: EdgeInsets.only(right: 8.0),
               child: Icon(

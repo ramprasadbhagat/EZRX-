@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -478,10 +479,7 @@ class _ResetButton extends StatelessWidget {
                 const OutstandingInvoiceFilterEvent.resetFilters(),
               );
           Navigator.of(context).pop(
-            context
-                .read<OutstandingInvoiceFilterBloc>()
-                .state
-                .emptyOutstandingInvoiceFilter,
+            OutstandingInvoiceFilter.empty(),
           );
         },
         child: Text(

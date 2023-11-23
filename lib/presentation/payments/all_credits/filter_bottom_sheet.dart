@@ -317,6 +317,10 @@ class _FromDocumentDateFilter extends StatelessWidget {
             text: state.filter.documentDateFrom.dateString,
           ),
           decoration: InputDecoration(
+            hintText: context.tr('Date from'),
+            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
             suffixIcon: const Padding(
               padding: EdgeInsets.only(right: 8.0),
               child: Icon(
@@ -368,6 +372,10 @@ class _ToDocumentDateFilter extends StatelessWidget {
             text: state.filter.documentDateTo.dateString,
           ),
           decoration: InputDecoration(
+            hintText: context.tr('Date to'),
+            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
             suffixIcon: const Padding(
               padding: EdgeInsets.only(right: 8.0),
               child: Icon(

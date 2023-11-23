@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,24 +16,6 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
   }) = _PaymentSummaryFilter;
 
   factory PaymentSummaryFilter.empty() => PaymentSummaryFilter(
-        createdDateFrom: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime.now().subtract(
-              const Duration(days: 30),
-            ),
-          ),
-        ),
-        createdDateTo: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime.now(),
-          ),
-        ),
-        amountValueFrom: RangeValue(''),
-        amountValueTo: RangeValue(''),
-        filterStatuses: <FilterStatus>[],
-      );
-
-  factory PaymentSummaryFilter.dateRangeEmpty() => PaymentSummaryFilter(
         createdDateFrom: DateTimeStringValue(''),
         createdDateTo: DateTimeStringValue(''),
         amountValueFrom: RangeValue(''),

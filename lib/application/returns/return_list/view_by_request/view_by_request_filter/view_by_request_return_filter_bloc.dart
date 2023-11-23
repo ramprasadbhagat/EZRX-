@@ -76,7 +76,7 @@ class ViewByRequestReturnFilterBloc extends Bloc<ViewByRequestReturnFilterEvent,
       ),
       resetFilters: (e) async => emit(
         ViewByRequestReturnFilterState.initial().copyWith(
-          filter: ReturnFilter.dateRangeEmpty(),
+          filter: ReturnFilter.empty(),
         ),
       ),
     );

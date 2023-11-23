@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -18,24 +17,6 @@ class ReturnFilter with _$ReturnFilter {
   }) = _ReturnFilter;
 
   factory ReturnFilter.empty() => ReturnFilter(
-        returnDateFrom: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime.now().subtract(
-              const Duration(days: 30),
-            ),
-          ),
-        ),
-        returnDateTo: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime.now(),
-          ),
-        ),
-        amountValueFrom: RangeValue(''),
-        amountValueTo: RangeValue(''),
-        returnStatusList: <StatusType>[],
-      );
-
-  factory ReturnFilter.dateRangeEmpty() => ReturnFilter(
         returnDateFrom: DateTimeStringValue(''),
         returnDateTo: DateTimeStringValue(''),
         amountValueFrom: RangeValue(''),

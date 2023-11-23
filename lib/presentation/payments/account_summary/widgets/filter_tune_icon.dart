@@ -48,35 +48,16 @@ class _FilterElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        IconButton(
-          onPressed: () => isActive ? _showFilterPage(context) : null,
-          icon: const Icon(
-            Icons.tune_outlined,
-          ),
-        ),
-        Positioned(
-          right: 4,
-          top: 4,
-          child: Container(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: ZPColors.orange,
-            ),
-            padding: const EdgeInsets.all(3),
-            alignment: Alignment.center,
-            child: Text(
-              appliedFilterCount.toString(),
-              key: WidgetKeys.creditFilterApplied(appliedFilterCount),
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontSize: 10,
-                    color: ZPColors.white,
-                  ),
-            ),
-          ),
-        ),
-      ],
+    return CustomBadge(
+      Icons.tune_outlined,
+      key: WidgetKeys.paymentSummaryFilterIcon,
+      badgeColor: ZPColors.orange,
+      count: appliedFilterCount,
+      onPressed: isActive
+          ? () {
+              _showFilterPage(context);
+            }
+          : () {},
     );
   }
 

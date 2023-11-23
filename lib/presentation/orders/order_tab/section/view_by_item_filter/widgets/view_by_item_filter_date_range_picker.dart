@@ -14,6 +14,7 @@ class _ViewByItemFilterDateRangePicker extends StatelessWidget {
             child: _DateField(
               key: WidgetKeys.viewByItemsFilterFromDateKey,
               displayDate: state.filter.orderDateFrom.dateString,
+              hintText: context.tr('Date from'),
             ),
           ),
         ),
@@ -31,6 +32,7 @@ class _ViewByItemFilterDateRangePicker extends StatelessWidget {
             child: _DateField(
               key: WidgetKeys.viewByItemsFilterToDateKey,
               displayDate: state.filter.orderDateTo.dateString,
+              hintText: context.tr('Date to'),
             ),
           ),
         ),
@@ -41,10 +43,12 @@ class _ViewByItemFilterDateRangePicker extends StatelessWidget {
 
 class _DateField extends StatelessWidget {
   final String displayDate;
+  final String hintText;
 
   const _DateField({
     Key? key,
     required this.displayDate,
+    required this.hintText,
   }) : super(key: key);
 
   @override
@@ -74,6 +78,10 @@ class _DateField extends StatelessWidget {
       readOnly: true,
       controller: TextEditingController(text: displayDate),
       decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+              color: ZPColors.darkGray,
+            ),
         suffixIcon: const Padding(
           padding: EdgeInsets.only(right: 8.0),
           child: Icon(

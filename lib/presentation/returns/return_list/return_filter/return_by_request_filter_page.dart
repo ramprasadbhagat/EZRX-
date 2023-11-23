@@ -402,7 +402,7 @@ class _ResetButton extends StatelessWidget {
                 const ViewByRequestReturnFilterEvent.resetFilters(),
               );
           Navigator.of(context).pop(
-            ReturnFilter.dateRangeEmpty(),
+            ReturnFilter.empty(),
           );
         },
         child: Text(

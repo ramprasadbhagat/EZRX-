@@ -13,7 +13,4 @@ class AvailableCreditFilterState with _$AvailableCreditFilterState {
         filter: AvailableCreditFilter.empty(),
         showErrorMessage: false,
       );
-
-  AvailableCreditFilter get emptyAvailableCreditFilter =>
-      AvailableCreditFilter.dateRangeEmpty();
 }

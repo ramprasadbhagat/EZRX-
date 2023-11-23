@@ -118,9 +118,7 @@ void main() {
 
   final fakeFromDate = DateTime.parse(
     DateFormat('yyyy-MM-dd').format(
-      DateTime.now().subtract(
-        const Duration(days: 30),
-      ),
+      DateTime.now(),
     ),
   );
 
@@ -577,7 +575,7 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-      expect(find.widgetWithText(CustomBadge, '3'), findsOneWidget);
+      expect(find.widgetWithText(CustomBadge, '2'), findsOneWidget);
       expect(find.byType(ListTile), findsOneWidget);
     });
 

@@ -19,7 +19,4 @@ class OutstandingInvoiceFilterState with _$OutstandingInvoiceFilterState {
         ],
         showErrorMessage: false,
       );
-
-  OutstandingInvoiceFilter get emptyOutstandingInvoiceFilter =>
-      OutstandingInvoiceFilter.dateRangeEmpty();
 }

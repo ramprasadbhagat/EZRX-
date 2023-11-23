@@ -32,11 +32,10 @@ class ViewByItemFilter with _$ViewByItemFilter {
           newFilter.orderDateFrom.apiDateTimeString;
 
   int get appliedFilterCount {
-    var count = 1;
-    if (orderStatusList.isNotEmpty) {
-      count += 1;
-    }
+    var filterCount = 0;
+    if (orderDateFrom.isValid() && orderDateTo.isValid()) filterCount++;
+    if (orderStatusList.isNotEmpty) filterCount++;
 
-    return count;
+    return filterCount;
   }
 }

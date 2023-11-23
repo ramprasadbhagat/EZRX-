@@ -34,9 +34,7 @@ void main() {
         ),
         expect: () => [
           AvailableCreditFilterState.initial().copyWith(
-            filter: AvailableCreditFilterState.initial()
-                .emptyAvailableCreditFilter
-                .copyWith(
+            filter: AvailableCreditFilterState.initial().filter.copyWith(
                   documentDateFrom: DateTimeStringValue(
                     getDateStringByDateTime(
                       DateTime.now().subtract(
