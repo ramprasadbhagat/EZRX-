@@ -2,10 +2,10 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_details_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -29,9 +29,10 @@ void main() {
   late Config configMock;
   late PaymentItemLocalDataSource localDataSourceMock;
   late PaymentItemRemoteDataSource remoteDataSourceMock;
+  late PaymentSummaryDetails details;
 
   setUpAll(
-    () {
+    () async {
       configMock = ConfigMock();
       localDataSourceMock = PaymentItemLocalDataSourceMock();
       remoteDataSourceMock = PaymentItemRemoteDataSourceMock();
@@ -41,6 +42,7 @@ void main() {
         localDataSource: localDataSourceMock,
         remoteDataSource: remoteDataSourceMock,
       );
+      details = await PaymentItemLocalDataSource().getPaymentSummaryDetails();
     },
   );
 
@@ -56,7 +58,7 @@ void main() {
           );
           final result = await repository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: CustomerCodeInfo.empty(),
-            paymentId: StringValue(''),
+            details: details,
             salesOrganization: fakeIDSalesOrganisation,
           );
           expect(result.isRight(), true);
@@ -70,7 +72,7 @@ void main() {
               .thenThrow(MockException());
           final result = await repository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: CustomerCodeInfo.empty(),
-            paymentId: StringValue(''),
+            details: details,
             salesOrganization: fakeIDSalesOrganisation,
           );
           expect(result.isLeft(), true);
@@ -89,7 +91,7 @@ void main() {
           ).thenThrow(MockException());
           final result = await repository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: CustomerCodeInfo.empty(),
-            paymentId: StringValue(''),
+            details: details,
             salesOrganization: fakeIDSalesOrganisation,
           );
           expect(result.isLeft(), true);
@@ -103,7 +105,7 @@ void main() {
           when(
             () => remoteDataSourceMock.getTransaction(
               customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
-              paymentId: StringValue('11').getOrCrash(),
+              paymentId: details.paymentID.getOrCrash(),
               salesOrg: fakeIDSalesOrganisation.salesOrg.getOrCrash(),
             ),
           ).thenAnswer(
@@ -111,7 +113,7 @@ void main() {
           );
           final result = await repository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: CustomerCodeInfo.empty(),
-            paymentId: StringValue('11'),
+            details: details,
             salesOrganization: fakeIDSalesOrganisation,
           );
           expect(result.isRight(), true);
@@ -127,7 +129,7 @@ void main() {
           );
           final result = await repository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: CustomerCodeInfo.empty(),
-            paymentId: StringValue(''),
+            details: details,
             salesOrganization: fakeEmptySalesOrganisation,
           );
 
@@ -142,7 +144,7 @@ void main() {
               .thenThrow(MockException());
           final result = await repository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: CustomerCodeInfo.empty(),
-            paymentId: StringValue(''),
+            details: details,
             salesOrganization: fakeEmptySalesOrganisation,
           );
 
@@ -157,7 +159,7 @@ void main() {
           when(
             () => remoteDataSourceMock.getPaymentSummaryDetails(
               customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
-              paymentId: StringValue('1').getOrCrash(),
+              filterBy: PaymentSummaryDetailsDto.fromDomain(details).filterBy,
               salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
             ),
           ).thenAnswer(
@@ -166,7 +168,7 @@ void main() {
           );
           final result = await repository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: CustomerCodeInfo.empty(),
-            paymentId: StringValue('1'),
+            details: details,
             salesOrganization: fakeVNSalesOrganisation,
           );
 
@@ -180,13 +182,13 @@ void main() {
           when(
             () => remoteDataSourceMock.getPaymentSummaryDetails(
               customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
-              paymentId: StringValue('1').getOrCrash(),
+              filterBy: PaymentSummaryDetailsDto.fromDomain(details).filterBy,
               salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
             ),
           ).thenThrow(MockException());
           final result = await repository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: CustomerCodeInfo.empty(),
-            paymentId: StringValue('1'),
+            details: details,
             salesOrganization: fakeVNSalesOrganisation,
           );
 

@@ -29,6 +29,8 @@ class NotificationDataDto with _$NotificationDataDto {
         required String returnRequestId,
     @JsonKey(name: 'orderNumber', defaultValue: '')
         required String orderNumber,
+    @JsonKey(name: 'paymentNumber', defaultValue: '')
+        required String paymentNumber,
     @JsonKey(name: 'saleDocument', defaultValue: '')
         required String saleDocument,
   }) = _NotificationDataDto;
@@ -43,6 +45,7 @@ class NotificationDataDto with _$NotificationDataDto {
       isRead: isRead,
       returnRequestId: ReturnRequestsId(requestId: returnRequestId),
       orderNumber: OrderNumber(orderNumber),
+      paymentNumber: StringValue(paymentNumber),
       saleDocument: StringValue(saleDocument),
     );
   }

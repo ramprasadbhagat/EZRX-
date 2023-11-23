@@ -120,7 +120,7 @@ void main() {
               .fetchPaymentSummaryDetailsInfo(
             salesOrganization: fakeIDSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            paymentId: details.paymentID,
+            details: details,
           ),
         ).thenAnswer(
           (invocation) async => Right(details),
@@ -198,7 +198,7 @@ void main() {
               .fetchPaymentSummaryDetailsInfo(
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            paymentId: details.paymentID,
+            details: details,
           ),
         ).thenAnswer(
           (invocation) async => Right(details),
@@ -267,7 +267,9 @@ void main() {
               .fetchPaymentSummaryDetailsInfo(
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            paymentId: details.paymentID,
+            details: details.copyWith(
+              paymentBatchAdditionalInfo: StringValue(''),
+            ),
           ),
         ).thenAnswer(
           (invocation) async => Right(details),
@@ -289,8 +291,9 @@ void main() {
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-          details:
-              details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
+          details: details.copyWith(
+            paymentBatchAdditionalInfo: StringValue(''),
+          ),
         ),
       ),
       skip: 5,
@@ -337,7 +340,9 @@ void main() {
               .fetchPaymentSummaryDetailsInfo(
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            paymentId: details.paymentID,
+            details: details.copyWith(
+              paymentBatchAdditionalInfo: StringValue(''),
+            ),
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -410,7 +415,9 @@ void main() {
               .fetchPaymentSummaryDetailsInfo(
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            paymentId: details.paymentID,
+            details: details.copyWith(
+              paymentBatchAdditionalInfo: StringValue(''),
+            ),
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),

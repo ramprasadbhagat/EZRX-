@@ -53,6 +53,10 @@ String naIfEmpty(String text) {
   return text.isEmpty ? 'NA' : text;
 }
 
+String zerosIfEmpty(String text) {
+  return text.isEmpty ? '00000000' : text;
+}
+
 bool getInStock(String text) {
   return text == 'Yes';
 }

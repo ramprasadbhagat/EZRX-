@@ -63,16 +63,16 @@ class PaymentItemRemoteDataSource {
   Future<PaymentSummaryDetails> getPaymentSummaryDetails({
     required String customerCode,
     required String salesOrg,
-    required String paymentId,
+    required Map<String, dynamic> filterBy,
   }) async {
     final queryData = paymentItemQuery.getPaymentSummaryQuery();
+
     final request = {
       'customerCode': customerCode,
       'salesOrg': salesOrg,
-      'filterBy': [
-        {'field': 'paymentID', 'value': paymentId},
-      ],
+      'filterBy': [filterBy],
     };
+
     final res = await httpService.request(
       method: 'POST',
       url: '${config.urlConstants}ezpay',

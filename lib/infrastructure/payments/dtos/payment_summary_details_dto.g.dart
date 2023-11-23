@@ -35,6 +35,8 @@ _$_PaymentSummaryDetailsDto _$$_PaymentSummaryDetailsDtoFromJson(
           json['accountingDocExternalReference'] as String? ?? '',
       paymentBatchAdditionalInfo:
           json['paymentBatchAdditionalInfo'] as String? ?? '',
+      filterBy: json['filterBy'] as Map<String, dynamic>? ??
+          const <String, dynamic>{},
     );
 
 Map<String, dynamic> _$$_PaymentSummaryDetailsDtoToJson(
@@ -64,4 +66,5 @@ Map<String, dynamic> _$$_PaymentSummaryDetailsDtoToJson(
       'adviceExpiry': instance.adviceExpiry,
       'accountingDocExternalReference': instance.accountingDocExternalReference,
       'paymentBatchAdditionalInfo': instance.paymentBatchAdditionalInfo,
+      'filterBy': instance.filterBy,
     };

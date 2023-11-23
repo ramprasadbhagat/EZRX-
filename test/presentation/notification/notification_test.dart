@@ -434,7 +434,8 @@ void main() {
           () => paymentSummaryDetailsBlockMock.add(
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
               details: PaymentSummaryDetails.empty().copyWith(
-                paymentID: notificationList.first.saleDocument,
+                paymentID: notificationList.last.saleDocument,
+                zzAdvice: notificationList.last.paymentNumber,
               ),
             ),
           ),

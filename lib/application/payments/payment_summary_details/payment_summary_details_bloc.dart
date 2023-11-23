@@ -59,7 +59,7 @@ class PaymentSummaryDetailsBloc
               await paymentItemRepository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: state.customerCodeInfo,
             salesOrganization: state.salesOrganization,
-            paymentId: event.details.paymentID,
+            details: event.details,
           );
           failureOrSuccess.fold(
             (failure) {

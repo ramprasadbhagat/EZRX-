@@ -24,6 +24,17 @@ void main() {
         );
       },
     );
+
+    test(
+      'StringValue display Zeros If Empty',
+      () {
+        final valObj = StringValue('');
+        expect(
+          valObj.displayZerosIfEmpty,
+          '00000000',
+        );
+      },
+    );
   });
 
   group('IntegerValue Value Object', () {

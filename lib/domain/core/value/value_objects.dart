@@ -198,6 +198,8 @@ class StringValue extends ValueObject<String> {
 
   String get displayNAIfEmpty => naIfEmpty(value.getOrElse(() => ''));
 
+  String get displayZerosIfEmpty => zerosIfEmpty(value.getOrElse(() => ''));
+
   const StringValue._(this.value);
 }
 

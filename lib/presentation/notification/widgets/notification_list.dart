@@ -105,6 +105,7 @@ class _NotificationList extends StatelessWidget {
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
               details: PaymentSummaryDetails.empty().copyWith(
                 paymentID: notificationData.saleDocument,
+                zzAdvice: notificationData.paymentNumber,
               ),
             ),
           );

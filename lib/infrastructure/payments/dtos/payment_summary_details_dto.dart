@@ -55,6 +55,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
         required String accountingDocExternalReference,
     @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
         required String paymentBatchAdditionalInfo,
+    @Default(<String, dynamic>{}) Map<String, dynamic> filterBy,
   }) = _PaymentSummaryDetailsDto;
 
   PaymentSummaryDetails toDomain() {
@@ -87,6 +88,42 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
     );
   }
 
+  factory PaymentSummaryDetailsDto.fromDomain(
+    PaymentSummaryDetails details,
+  ) {
+    return PaymentSummaryDetailsDto(
+      paymentID: details.paymentID.getOrDefaultValue(''),
+      valueDate: details.valueDate.getOrDefaultValue(''),
+      paymentAmount: details.paymentAmount,
+      transactionCurrency: details.transactionCurrency,
+      paymentDocument: details.paymentDocument,
+      status: details.status.getOrDefaultValue(''),
+      paymentMethod: details.paymentMethod.getOrDefaultValue(''),
+      iban: details.iban,
+      bankKey: details.bankKey,
+      bankCountryKey: details.bankCountryKey,
+      bankAccountNumber: details.bankAccountNumber.getOrDefaultValue(''),
+      bankName: details.bankName.getOrDefaultValue(''),
+      paymentCardID: details.paymentCardID,
+      paymentCardNumber: details.paymentCardNumber,
+      paymentCardHolderName: details.paymentCardHolderName,
+      paymentCardMaskedNumber: details.paymentCardMaskedNumber,
+      paymentCardTypeName: details.paymentCardTypeName,
+      customId: details.customId,
+      bankIdentification: details.bankIdentification,
+      createdDate: details.createdDate.getOrDefaultValue(''),
+      zzAdvice: details.zzAdvice.getOrDefaultValue(''),
+      adviceExpiry: details.adviceExpiry.getOrDefaultValue(''),
+      accountingDocExternalReference: details.accountingDocExternalReference,
+      paymentBatchAdditionalInfo:
+          details.paymentBatchAdditionalInfo.getOrDefaultValue(''),
+      filterBy: _filterByToJson(
+        details.zzAdvice.getOrDefaultValue(''),
+        details.paymentBatchAdditionalInfo.getOrDefaultValue(''),
+      ),
+    );
+  }
+
   factory PaymentSummaryDetailsDto.fromJson(Map<String, dynamic> json) =>
       _$PaymentSummaryDetailsDtoFromJson(json);
 }
@@ -96,3 +133,16 @@ String createdAtDate(Map json, String key) =>
 
 String paymentDate(Map json, String key) =>
     json[key]?.replaceAll('-', '') ?? '';
+
+Map<String, dynamic> _filterByToJson(
+  String zzAdvice,
+  String paymentBatchAdditionalInfo,
+) {
+  final field = zzAdvice.isNotEmpty ? 'zzAdvice' : 'paymentBatchAdditionalInfo';
+  final value = zzAdvice.isNotEmpty ? zzAdvice : paymentBatchAdditionalInfo;
+
+  return {
+    'field': field,
+    'value': value,
+  };
+}

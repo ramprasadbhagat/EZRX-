@@ -22,7 +22,7 @@ class _PaymentBasicInfoSection extends StatelessWidget {
                   state.isDetailFetching
                       ? SizedBox(width: 150, child: LoadingShimmer.tile())
                       : Text(
-                          '${context.read<EligibilityBloc>().state.salesOrg.paymentIdPretext} #${state.details.zzAdvice.displayDashIfEmpty}',
+                          '${context.read<EligibilityBloc>().state.salesOrg.paymentIdPretext} #${state.details.zzAdvice.displayZerosIfEmpty}',
                           style: Theme.of(context)
                               .textTheme
                               .labelMedium

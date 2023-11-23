@@ -36,6 +36,8 @@ mixin _$NotificationDataDto {
   String get returnRequestId => throw _privateConstructorUsedError;
   @JsonKey(name: 'orderNumber', defaultValue: '')
   String get orderNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'paymentNumber', defaultValue: '')
+  String get paymentNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'saleDocument', defaultValue: '')
   String get saleDocument => throw _privateConstructorUsedError;
 
@@ -68,6 +70,8 @@ abstract class $NotificationDataDtoCopyWith<$Res> {
           String returnRequestId,
       @JsonKey(name: 'orderNumber', defaultValue: '')
           String orderNumber,
+      @JsonKey(name: 'paymentNumber', defaultValue: '')
+          String paymentNumber,
       @JsonKey(name: 'saleDocument', defaultValue: '')
           String saleDocument});
 }
@@ -93,6 +97,7 @@ class _$NotificationDataDtoCopyWithImpl<$Res, $Val extends NotificationDataDto>
     Object? isRead = null,
     Object? returnRequestId = null,
     Object? orderNumber = null,
+    Object? paymentNumber = null,
     Object? saleDocument = null,
   }) {
     return _then(_value.copyWith(
@@ -128,6 +133,10 @@ class _$NotificationDataDtoCopyWithImpl<$Res, $Val extends NotificationDataDto>
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      paymentNumber: null == paymentNumber
+          ? _value.paymentNumber
+          : paymentNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       saleDocument: null == saleDocument
           ? _value.saleDocument
           : saleDocument // ignore: cast_nullable_to_non_nullable
@@ -161,6 +170,8 @@ abstract class _$$_NotificationDataDtoCopyWith<$Res>
           String returnRequestId,
       @JsonKey(name: 'orderNumber', defaultValue: '')
           String orderNumber,
+      @JsonKey(name: 'paymentNumber', defaultValue: '')
+          String paymentNumber,
       @JsonKey(name: 'saleDocument', defaultValue: '')
           String saleDocument});
 }
@@ -184,6 +195,7 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
     Object? isRead = null,
     Object? returnRequestId = null,
     Object? orderNumber = null,
+    Object? paymentNumber = null,
     Object? saleDocument = null,
   }) {
     return _then(_$_NotificationDataDto(
@@ -219,6 +231,10 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      paymentNumber: null == paymentNumber
+          ? _value.paymentNumber
+          : paymentNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       saleDocument: null == saleDocument
           ? _value.saleDocument
           : saleDocument // ignore: cast_nullable_to_non_nullable
@@ -247,6 +263,8 @@ class _$_NotificationDataDto extends _NotificationDataDto {
           required this.returnRequestId,
       @JsonKey(name: 'orderNumber', defaultValue: '')
           required this.orderNumber,
+      @JsonKey(name: 'paymentNumber', defaultValue: '')
+          required this.paymentNumber,
       @JsonKey(name: 'saleDocument', defaultValue: '')
           required this.saleDocument})
       : super._();
@@ -279,12 +297,15 @@ class _$_NotificationDataDto extends _NotificationDataDto {
   @JsonKey(name: 'orderNumber', defaultValue: '')
   final String orderNumber;
   @override
+  @JsonKey(name: 'paymentNumber', defaultValue: '')
+  final String paymentNumber;
+  @override
   @JsonKey(name: 'saleDocument', defaultValue: '')
   final String saleDocument;
 
   @override
   String toString() {
-    return 'NotificationDataDto(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, saleDocument: $saleDocument)';
+    return 'NotificationDataDto(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, paymentNumber: $paymentNumber, saleDocument: $saleDocument)';
   }
 
   @override
@@ -304,14 +325,26 @@ class _$_NotificationDataDto extends _NotificationDataDto {
                 other.returnRequestId == returnRequestId) &&
             (identical(other.orderNumber, orderNumber) ||
                 other.orderNumber == orderNumber) &&
+            (identical(other.paymentNumber, paymentNumber) ||
+                other.paymentNumber == paymentNumber) &&
             (identical(other.saleDocument, saleDocument) ||
                 other.saleDocument == saleDocument));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, type, title, description,
-      createdAt, isRead, returnRequestId, orderNumber, saleDocument);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      type,
+      title,
+      description,
+      createdAt,
+      isRead,
+      returnRequestId,
+      orderNumber,
+      paymentNumber,
+      saleDocument);
 
   @JsonKey(ignore: true)
   @override
@@ -346,6 +379,8 @@ abstract class _NotificationDataDto extends NotificationDataDto {
           required final String returnRequestId,
       @JsonKey(name: 'orderNumber', defaultValue: '')
           required final String orderNumber,
+      @JsonKey(name: 'paymentNumber', defaultValue: '')
+          required final String paymentNumber,
       @JsonKey(name: 'saleDocument', defaultValue: '')
           required final String saleDocument}) = _$_NotificationDataDto;
   const _NotificationDataDto._() : super._();
@@ -377,6 +412,9 @@ abstract class _NotificationDataDto extends NotificationDataDto {
   @override
   @JsonKey(name: 'orderNumber', defaultValue: '')
   String get orderNumber;
+  @override
+  @JsonKey(name: 'paymentNumber', defaultValue: '')
+  String get paymentNumber;
   @override
   @JsonKey(name: 'saleDocument', defaultValue: '')
   String get saleDocument;

@@ -70,6 +70,7 @@ mixin _$PaymentSummaryDetailsDto {
       throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   String get paymentBatchAdditionalInfo => throw _privateConstructorUsedError;
+  Map<String, dynamic> get filterBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -131,7 +132,8 @@ abstract class $PaymentSummaryDetailsDtoCopyWith<$Res> {
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
           String accountingDocExternalReference,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-          String paymentBatchAdditionalInfo});
+          String paymentBatchAdditionalInfo,
+      Map<String, dynamic> filterBy});
 }
 
 /// @nodoc
@@ -172,6 +174,7 @@ class _$PaymentSummaryDetailsDtoCopyWithImpl<$Res,
     Object? adviceExpiry = null,
     Object? accountingDocExternalReference = null,
     Object? paymentBatchAdditionalInfo = null,
+    Object? filterBy = null,
   }) {
     return _then(_value.copyWith(
       paymentID: null == paymentID
@@ -270,6 +273,10 @@ class _$PaymentSummaryDetailsDtoCopyWithImpl<$Res,
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
               as String,
+      filterBy: null == filterBy
+          ? _value.filterBy
+          : filterBy // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ) as $Val);
   }
 }
@@ -331,7 +338,8 @@ abstract class _$$_PaymentSummaryDetailsDtoCopyWith<$Res>
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
           String accountingDocExternalReference,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-          String paymentBatchAdditionalInfo});
+          String paymentBatchAdditionalInfo,
+      Map<String, dynamic> filterBy});
 }
 
 /// @nodoc
@@ -370,6 +378,7 @@ class __$$_PaymentSummaryDetailsDtoCopyWithImpl<$Res>
     Object? adviceExpiry = null,
     Object? accountingDocExternalReference = null,
     Object? paymentBatchAdditionalInfo = null,
+    Object? filterBy = null,
   }) {
     return _then(_$_PaymentSummaryDetailsDto(
       paymentID: null == paymentID
@@ -468,6 +477,10 @@ class __$$_PaymentSummaryDetailsDtoCopyWithImpl<$Res>
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
               as String,
+      filterBy: null == filterBy
+          ? _value._filterBy
+          : filterBy // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -523,8 +536,10 @@ class _$_PaymentSummaryDetailsDto extends _PaymentSummaryDetailsDto {
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
           required this.accountingDocExternalReference,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-          required this.paymentBatchAdditionalInfo})
-      : super._();
+          required this.paymentBatchAdditionalInfo,
+      final Map<String, dynamic> filterBy = const <String, dynamic>{}})
+      : _filterBy = filterBy,
+        super._();
 
   factory _$_PaymentSummaryDetailsDto.fromJson(Map<String, dynamic> json) =>
       _$$_PaymentSummaryDetailsDtoFromJson(json);
@@ -601,10 +616,18 @@ class _$_PaymentSummaryDetailsDto extends _PaymentSummaryDetailsDto {
   @override
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   final String paymentBatchAdditionalInfo;
+  final Map<String, dynamic> _filterBy;
+  @override
+  @JsonKey()
+  Map<String, dynamic> get filterBy {
+    if (_filterBy is EqualUnmodifiableMapView) return _filterBy;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_filterBy);
+  }
 
   @override
   String toString() {
-    return 'PaymentSummaryDetailsDto(paymentID: $paymentID, valueDate: $valueDate, paymentAmount: $paymentAmount, transactionCurrency: $transactionCurrency, paymentDocument: $paymentDocument, status: $status, paymentMethod: $paymentMethod, iban: $iban, bankKey: $bankKey, bankCountryKey: $bankCountryKey, bankAccountNumber: $bankAccountNumber, bankName: $bankName, paymentCardID: $paymentCardID, paymentCardNumber: $paymentCardNumber, paymentCardHolderName: $paymentCardHolderName, paymentCardMaskedNumber: $paymentCardMaskedNumber, paymentCardTypeName: $paymentCardTypeName, customId: $customId, bankIdentification: $bankIdentification, createdDate: $createdDate, zzAdvice: $zzAdvice, adviceExpiry: $adviceExpiry, accountingDocExternalReference: $accountingDocExternalReference, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo)';
+    return 'PaymentSummaryDetailsDto(paymentID: $paymentID, valueDate: $valueDate, paymentAmount: $paymentAmount, transactionCurrency: $transactionCurrency, paymentDocument: $paymentDocument, status: $status, paymentMethod: $paymentMethod, iban: $iban, bankKey: $bankKey, bankCountryKey: $bankCountryKey, bankAccountNumber: $bankAccountNumber, bankName: $bankName, paymentCardID: $paymentCardID, paymentCardNumber: $paymentCardNumber, paymentCardHolderName: $paymentCardHolderName, paymentCardMaskedNumber: $paymentCardMaskedNumber, paymentCardTypeName: $paymentCardTypeName, customId: $customId, bankIdentification: $bankIdentification, createdDate: $createdDate, zzAdvice: $zzAdvice, adviceExpiry: $adviceExpiry, accountingDocExternalReference: $accountingDocExternalReference, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, filterBy: $filterBy)';
   }
 
   @override
@@ -661,7 +684,8 @@ class _$_PaymentSummaryDetailsDto extends _PaymentSummaryDetailsDto {
             (identical(other.paymentBatchAdditionalInfo,
                     paymentBatchAdditionalInfo) ||
                 other.paymentBatchAdditionalInfo ==
-                    paymentBatchAdditionalInfo));
+                    paymentBatchAdditionalInfo) &&
+            const DeepCollectionEquality().equals(other._filterBy, _filterBy));
   }
 
   @JsonKey(ignore: true)
@@ -691,7 +715,8 @@ class _$_PaymentSummaryDetailsDto extends _PaymentSummaryDetailsDto {
         zzAdvice,
         adviceExpiry,
         accountingDocExternalReference,
-        paymentBatchAdditionalInfo
+        paymentBatchAdditionalInfo,
+        const DeepCollectionEquality().hash(_filterBy)
       ]);
 
   @JsonKey(ignore: true)
@@ -758,8 +783,8 @@ abstract class _PaymentSummaryDetailsDto extends PaymentSummaryDetailsDto {
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
           required final String accountingDocExternalReference,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-          required final String
-              paymentBatchAdditionalInfo}) = _$_PaymentSummaryDetailsDto;
+          required final String paymentBatchAdditionalInfo,
+      final Map<String, dynamic> filterBy}) = _$_PaymentSummaryDetailsDto;
   const _PaymentSummaryDetailsDto._() : super._();
 
   factory _PaymentSummaryDetailsDto.fromJson(Map<String, dynamic> json) =
@@ -837,6 +862,8 @@ abstract class _PaymentSummaryDetailsDto extends PaymentSummaryDetailsDto {
   @override
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   String get paymentBatchAdditionalInfo;
+  @override
+  Map<String, dynamic> get filterBy;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentSummaryDetailsDtoCopyWith<_$_PaymentSummaryDetailsDto>

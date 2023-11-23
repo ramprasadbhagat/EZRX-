@@ -83,7 +83,7 @@ class _PaymentSummaryItem extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                '${salesOrg.paymentIdPretext} #${details.zzAdvice.displayDashIfEmpty}',
+                '${salesOrg.paymentIdPretext} #${details.zzAdvice.displayZerosIfEmpty}',
                 key: WidgetKeys.commonTileItemLabel,
                 style: Theme.of(context).textTheme.labelMedium,
               ),

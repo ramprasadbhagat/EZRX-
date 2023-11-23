@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart
 import 'package:ezrxmobile/domain/payments/repository/i_payment_summary_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_dto.dart';
 
 class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
   final Config config;
@@ -29,7 +30,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
       fetchPaymentSummaryDetailsInfo({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
-    required StringValue paymentId,
+    required PaymentSummaryDetails details,
   }) async {
     final salesOrg = salesOrganization.salesOrg;
     final customerCode = customerCodeInfo.customerCodeSoldTo;
@@ -38,12 +39,12 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
         ? _getTransaction(
             salesOrg: salesOrg,
             customerCode: customerCode,
-            paymentId: paymentId,
+            paymentId: details.paymentID,
           )
         : _getPaymentSummaryDetails(
             salesOrg: salesOrg,
             customerCode: customerCode,
-            paymentId: paymentId,
+            filterBy: PaymentSummaryDetailsDto.fromDomain(details).filterBy,
           );
   }
 
@@ -77,7 +78,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
   Future<Either<ApiFailure, PaymentSummaryDetails>> _getPaymentSummaryDetails({
     required SalesOrg salesOrg,
     required String customerCode,
-    required StringValue paymentId,
+    required Map<String, dynamic> filterBy,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -92,7 +93,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
       final details = await remoteDataSource.getPaymentSummaryDetails(
         customerCode: customerCode,
         salesOrg: salesOrg.getOrCrash(),
-        paymentId: paymentId.getOrCrash(),
+        filterBy: filterBy,
       );
 
       return Right(details);
