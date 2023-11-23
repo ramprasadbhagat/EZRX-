@@ -14,7 +14,8 @@ class _ComboDetailDeleteFromCartButton extends StatelessWidget {
         state.apiFailureOrSuccessOption.fold(
           () {
             const previousScreenIndex = 2;
-            final isDeleteFromCart = context.router.stack.isNotEmpty &&
+            final isDeleteFromCart 
+            = context.router.stack.isNotEmpty &&
                     context.router.stack.length > previousScreenIndex
                 ? (context
                         .router

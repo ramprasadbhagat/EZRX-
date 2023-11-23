@@ -2304,6 +2304,91 @@ void main() {
           aplSimulatorOrder.grandTotal.toString(),
         );
       });
+
+
+      testWidgets(
+          'Test invalid banner when cart consist combo suspended and disable combo deal on saleorg',
+          (tester) async {
+        final priceComboDeal = PriceComboDeal.empty().copyWith(
+          category: PriceComboDealCategory.empty()
+              .copyWith(type: ComboDealCategoryType('MATNR')),
+        );
+        final cartComboItem = mockCartItems.last.copyWith(
+          materialInfo: mockCartItems.last.materialInfo.copyWith(
+            type: MaterialInfoType('combo'),
+          ),
+          comboMaterials: [
+            fakeComboMaterialItems.first.copyWith(
+              comboDeals: priceComboDeal,
+            ),
+          ],
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[cartComboItem],
+        );
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        final expectedStates = [
+          OrderEligibilityState.initial(),
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [cartComboItem],
+            configs: salesOrgConfigDisableMaterialWithoutPriceAndCombo,
+          ),
+        ];
+
+        whenListen(
+          orderEligibilityBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        await tester.pumpWidget(getWidget());
+
+        await tester.pumpAndSettle();
+
+        final invalidItemBannerFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBanner);
+        final invalidComboMessageFinder = find.text('Suspended combo');
+
+        final invalidItemBannerButtonFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBannerButton);
+        expect(invalidItemBannerFinder, findsOneWidget);
+        expect(invalidComboMessageFinder, findsOneWidget);
+        expect(invalidItemBannerButtonFinder, findsOneWidget);
+        final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+        expect(checkoutButton, findsOneWidget);
+        await tester.tap(checkoutButton);
+        await tester.pump();
+        verifyNever(
+          () => orderEligibilityBlocMock
+              .add(const OrderEligibilityEvent.validateOrderEligibility()),
+        );
+
+        await tester.tap(invalidItemBannerButtonFinder);
+        verify(
+          () => cartBloc.add(
+            CartEvent.upsertCartItemsWithComboOffers(
+              priceAggregates: cartComboItem.convertComboItemToPriceAggregateList
+                  .map(
+                    (priceAggregate) => priceAggregate.copyWith(
+                      quantity: 0,
+                      price: priceAggregate.price.copyWith(
+                        comboDeal: priceAggregate.price.comboDeal
+                            .copyWith(isEligible: false),
+                      ),
+                    ),
+                  )
+                  .toList(),
+              isDeleteCombo: true,
+            ),
+          ),
+        ).called(1);
+      });
     },
   );
 }

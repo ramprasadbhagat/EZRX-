@@ -106,14 +106,23 @@ class _CartPageCheckoutButton extends StatelessWidget {
                   width: double.infinity,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  child: ElevatedButton(
-                    key: WidgetKeys.checkoutButton,
-                    onPressed: state.isCartDetailsFetching ||
-                            materialPriceState.isFetching ||
-                            state.isNotAvailableToCheckoutForID
-                        ? null
-                        : () => _onCheckOutPressed(context),
-                    child: const Text('Check out').tr(),
+                  child:
+                      BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
+                    buildWhen: (previous, current) =>
+                        previous.isComboNotAllowedIfPresentInCart !=
+                        current.isComboNotAllowedIfPresentInCart,
+                    builder: (context, orderState) {
+                      return ElevatedButton(
+                        key: WidgetKeys.checkoutButton,
+                        onPressed: state.isCartDetailsFetching ||
+                                materialPriceState.isFetching ||
+                                state.isNotAvailableToCheckoutForID ||
+                                orderState.isComboNotAllowedIfPresentInCart
+                            ? null
+                            : () => _onCheckOutPressed(context),
+                        child: const Text('Check out').tr(),
+                      );
+                    },
                   ),
                 ),
               ),

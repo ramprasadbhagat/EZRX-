@@ -160,6 +160,10 @@ class _CartPageState extends State<CartPage> {
                     subTotal: state.subTotalSubmit,
                   ),
                 );
+
+            context.read<OrderEligibilityBloc>().add(
+                  const OrderEligibilityEvent.validateOrderEligibility(),
+                );
           },
         ),
         BlocListener<CartBloc, CartState>(
