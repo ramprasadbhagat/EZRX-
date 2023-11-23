@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
@@ -1010,6 +1011,50 @@ void main() {
         result.getOrElse(() => SubmitOrderResponse.empty()),
         submitOrderResponseMock,
       );
+    });
+
+    test('submit order should contain deliveryFee as null string in ID market',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      final submitOrderMockIDMarket = submitOrderMock.copyWith(
+        customer: submitOrderMock.customer.copyWith(
+          salesOrganisation:
+              fakeIDSalesOrganisation.salesOrg.getOrDefaultValue(''),
+        ),
+      );
+
+      when(
+        () => encryption.encryptionData(
+          data: SubmitOrderDto.fromDomain(
+            submitOrderMockIDMarket,
+          ).toJson()
+            ..addAll({'deliveryFee': 'null'}),
+        ),
+      ).thenReturn(orderEncryptionMock);
+      when(
+        () => orderRemoteDataSource.submitOrder(
+          orderEncryption: orderEncryptionMock,
+        ),
+      ).thenAnswer(
+        (invocation) async => submitOrderResponseMock,
+      );
+
+      final result = await orderRepository.submitOrder(
+        shipToInfo: mockShipToInfo,
+        user: fakeClientUser,
+        cartProducts: cartMaterials,
+        grandTotal: 100.0,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeIDSalesOrganisation,
+        data: deliveryInfoData,
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        orderValue: 100.0,
+        totalTax: 100,
+      );
+
+      expect(result, Right(submitOrderResponseMock));
     });
   });
 

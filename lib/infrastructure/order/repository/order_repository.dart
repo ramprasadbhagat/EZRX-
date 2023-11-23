@@ -95,10 +95,18 @@ class OrderRepository implements IOrderRepository {
       }
     }
     try {
+      final submitOrderData = SubmitOrderDto.fromDomain(
+        submitOrder,
+      ).toJson();
+
+      // If request without this field in ID market, API return error with message "Internal server error"
+      // This field must be a null string, it can't be a null value. If not the API will return error
+      if (salesOrganisation.salesOrg.isID) {
+        submitOrderData.addAll({'deliveryFee': 'null'});
+      }
+
       final encryptedData = encryption.encryptionData(
-        data: SubmitOrderDto.fromDomain(
-          submitOrder,
-        ).toJson(),
+        data: submitOrderData,
       );
 
       final submitOrderResponse =
