@@ -50,9 +50,9 @@ void main() async {
     for (final invoice in fakeInvoice) invoice.orderNumber: invoice,
   };
 
-  group('View by item repository test -', () {
-    group('Get view by item', () {
-      test('Failure in local', () async {
+  group('View by item repository test', () {
+    group('=> Get view by item test', () {
+      test('=> Failure in local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
         when(() => viewByItemLocalDataSource.getViewByItems())
             .thenThrow(fakeException);
@@ -72,7 +72,7 @@ void main() async {
         expect(result, const Left(ApiFailure.other(fakeException)));
       });
 
-      test('Success in local', () async {
+      test('=> Success in local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
         when(() => viewByItemLocalDataSource.getViewByItems())
             .thenAnswer((_) async => fakeOrderHistory);
@@ -92,7 +92,7 @@ void main() async {
         expect(result, Right(fakeOrderHistory));
       });
 
-      test('Failure in remote', () async {
+      test('=> Failure in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => orderHistoryRemoteDataSource.getViewByItems(
@@ -122,7 +122,7 @@ void main() async {
         expect(result, const Left(ApiFailure.other(fakeException)));
       });
 
-      test('Success in remote', () async {
+      test('=> Success in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => orderHistoryRemoteDataSource.getViewByItems(
@@ -152,7 +152,7 @@ void main() async {
         expect(result, Right(fakeOrderHistory));
       });
 
-      test('test data', () async {
+      test('=> test data', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => orderHistoryRemoteDataSource
@@ -170,8 +170,8 @@ void main() async {
       });
     });
 
-    group('Get invoice data', () {
-      test('Failure in local', () async {
+    group('=> Get invoice data test', () {
+      test('=> Failure in local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
         when(() => viewByItemLocalDataSource.getInvoiceDataForOrders())
             .thenThrow(fakeException);
@@ -183,7 +183,7 @@ void main() async {
         expect(result, const Left(ApiFailure.other(fakeException)));
       });
 
-      test('Success in local', () async {
+      test('=> Success in local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
         when(() => viewByItemLocalDataSource.getInvoiceDataForOrders())
             .thenAnswer((_) async => fakeInvoice);
@@ -195,7 +195,7 @@ void main() async {
         expect(result.fold((l) => {}, (r) => r), fakeInvoiceMap);
       });
 
-      test('Failure in remote', () async {
+      test('=> Failure in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => orderHistoryRemoteDataSource.getInvoiceDataForOrders(
@@ -210,7 +210,7 @@ void main() async {
         expect(result, const Left(ApiFailure.other(fakeException)));
       });
 
-      test('Success in remote', () async {
+      test('=> Success in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => orderHistoryRemoteDataSource.getInvoiceDataForOrders(
@@ -223,6 +223,80 @@ void main() async {
         );
 
         expect(result.fold((l) => {}, (r) => r), fakeInvoiceMap);
+      });
+    });
+
+    group('=> Search Order History test', () {
+      test('=> Failure in local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => viewByItemLocalDataSource.getViewByItems())
+            .thenThrow(fakeException);
+
+        final result = await repository.searchOrderHistory(
+          salesOrganisation: fakeSalesOrganisation,
+          soldTo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          searchKey: fakeSearchKey,
+        );
+
+        expect(result, const Left(ApiFailure.other(fakeException)));
+      });
+
+      test('=> Success in local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => viewByItemLocalDataSource.getViewByItems())
+            .thenAnswer((_) async => fakeOrderHistory);
+
+        final result = await repository.searchOrderHistory(
+          salesOrganisation: fakeSalesOrganisation,
+          soldTo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          searchKey: fakeSearchKey,
+        );
+
+        expect(result, Right(fakeOrderHistory));
+      });
+
+      test('=> Failure in remote', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => orderHistoryRemoteDataSource.searchOrderHistory(
+            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+            language: fakeClientUser.preferredLanguage.languageCode,
+            searchKey: fakeSearchKey.getOrDefaultValue(''),
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
+          ),
+        ).thenThrow(fakeException);
+
+        final result = await repository.searchOrderHistory(
+          salesOrganisation: fakeSalesOrganisation,
+          soldTo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          searchKey: fakeSearchKey,
+        );
+
+        expect(result, const Left(ApiFailure.other(fakeException)));
+      });
+
+      test('=> Success in remote', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => orderHistoryRemoteDataSource.searchOrderHistory(
+            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+            language: fakeClientUser.preferredLanguage.languageCode,
+            searchKey: fakeSearchKey.getOrDefaultValue(''),
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
+          ),
+        ).thenAnswer((_) async => fakeOrderHistory);
+
+        final result = await repository.searchOrderHistory(
+          salesOrganisation: fakeSalesOrganisation,
+          soldTo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          searchKey: fakeSearchKey,
+        );
+
+        expect(result, Right(fakeOrderHistory));
       });
     });
   });
