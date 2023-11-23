@@ -2,11 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -124,13 +119,7 @@ void main() {
         expect(autoRouterMock.current.path, 'orders/scan_material_info');
         verify(
           () => scanMaterialInfoBlocMock.add(
-            ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-              user: User.empty(),
-              salesOrgConfigs: SalesOrganisationConfigs.empty(),
-            ),
+            const ScanMaterialInfoEvent.scanMaterialNumberFromCamera(),
           ),
         ).called(1);
       },

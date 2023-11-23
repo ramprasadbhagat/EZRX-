@@ -74,21 +74,7 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
               trackMixpanelEvent(MixpanelEvents.scanClicked),
               context.router.pushNamed('orders/scan_material_info'),
               context.read<ScanMaterialInfoBloc>().add(
-                    ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
-                      customerCodeInfo: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrganisation: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrganisation,
-                      shipToInfo:
-                          context.read<EligibilityBloc>().state.shipToInfo,
-                      user: context.read<EligibilityBloc>().state.user,
-                      salesOrgConfigs:
-                          context.read<EligibilityBloc>().state.salesOrgConfigs,
-                    ),
+                    const ScanMaterialInfoEvent.scanMaterialNumberFromCamera(),
                   ),
             },
           ),

@@ -1195,6 +1195,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               shipToInfo: state.shipToInfo,
             ),
           );
+
+      context.read<ScanMaterialInfoBloc>().add(
+            ScanMaterialInfoEvent.initialized(
+              salesOrganisation: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              user: user,
+              shipToInfo: state.shipToInfo,
+              salesOrgConfigs: salesOrgState.configs,
+            ),
+          );
     }
   }
 

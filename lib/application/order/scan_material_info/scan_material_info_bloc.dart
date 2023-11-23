@@ -48,19 +48,24 @@ class ScanMaterialInfoBloc
     await event.map(
       initialized: (e) {
         scanInfoRepository.fetchBarcodeCapture().addListener(this);
-        emit(ScanMaterialInfoState.initial());
-      },
-      scanMaterialNumberFromCamera: (e) async {
         emit(
           ScanMaterialInfoState.initial().copyWith(
             salesOrganisation: e.salesOrganisation,
             customerCodeInfo: e.customerCodeInfo,
             shipToInfo: e.shipToInfo,
             user: e.user,
-            isScanInProgress: true,
             salesOrgConfigs: e.salesOrgConfigs,
           ),
         );
+      },
+      scanMaterialNumberFromCamera: (e) async {
+        emit(
+          state.copyWith(
+            isScanInProgress: true,
+            material: MaterialInfo.empty(),
+          ),
+        );
+
         final permissionsResult = await scanInfoRepository.getPermission(
           type: PermissionType.camera,
         );
@@ -89,15 +94,12 @@ class ScanMaterialInfoBloc
       },
       scanImageFromDeviceStorage: (e) async {
         emit(
-          ScanMaterialInfoState.initial().copyWith(
-            salesOrganisation: e.salesOrganisation,
-            customerCodeInfo: e.customerCodeInfo,
-            shipToInfo: e.shipToInfo,
-            user: e.user,
+          state.copyWith(
             isScanInProgress: true,
-            salesOrgConfigs: e.salesOrgConfigs,
+            material: MaterialInfo.empty(),
           ),
         );
+
         final permissionsResult = await scanInfoRepository.getPermission(
           type: PermissionType.files,
         );
@@ -219,6 +221,7 @@ class ScanMaterialInfoBloc
 
   @override
   Future<void> close() {
+    scanInfoRepository.fetchBarcodeCapture().removeListener(this);
     scanResultController.close();
 
     return super.close();

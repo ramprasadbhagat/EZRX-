@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -136,16 +135,7 @@ class _PhotoGalleryButton extends StatelessWidget {
       left: 10,
       child: IconButton(
         onPressed: () => context.read<ScanMaterialInfoBloc>().add(
-              ScanMaterialInfoEvent.scanImageFromDeviceStorage(
-                customerCodeInfo:
-                    context.read<EligibilityBloc>().state.customerCodeInfo,
-                salesOrganisation:
-                    context.read<EligibilityBloc>().state.salesOrganisation,
-                shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
-                user: context.read<EligibilityBloc>().state.user,
-                salesOrgConfigs:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-              ),
+              const ScanMaterialInfoEvent.scanImageFromDeviceStorage(),
             ),
         icon: const Icon(
           Icons.photo_library_outlined,

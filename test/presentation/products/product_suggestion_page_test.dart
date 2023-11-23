@@ -6,11 +6,6 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
@@ -279,13 +274,7 @@ void main() {
           await tester.tap(scanIconFinder);
           verify(
             () => scanMaterialInfoBlocMock.add(
-              ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                salesOrganisation: SalesOrganisation.empty(),
-                shipToInfo: ShipToInfo.empty(),
-                user: User.empty(),
-                salesOrgConfigs: SalesOrganisationConfigs.empty(),
-              ),
+              const ScanMaterialInfoEvent.scanMaterialNumberFromCamera(),
             ),
           ).called(1);
           expect(autoRouterMock.current.path, 'orders/scan_material_info');
