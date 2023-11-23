@@ -43,18 +43,24 @@ class AdditionalDetailsBloc
           deliveryInfoData: state.deliveryInfoData.copyWith(
             poDocuments: value.poDocuments,
           ),
+          isPoAttachmentValidated: true,
         ),
       ),
-      removePoDocument: (value) async => emit(
-        state.copyWith(
-          deliveryInfoData: state.deliveryInfoData.copyWith(
-            poDocuments: List.from(state.deliveryInfoData.poDocuments)
+      removePoDocument: (value) {
+        final updatedPoDocuments =
+            List<PoDocuments>.from(state.deliveryInfoData.poDocuments)
               ..removeWhere(
                 (PoDocuments element) => element == value.poDocument,
-              ),
+              );
+        emit(
+          state.copyWith(
+            deliveryInfoData: state.deliveryInfoData.copyWith(
+              poDocuments: updatedPoDocuments,
+            ),
+            isPoAttachmentValidated: updatedPoDocuments.isNotEmpty,
           ),
-        ),
-      ),
+        );
+      },
       removeAllPoDocument: (value) async => emit(
         state.copyWith(
           deliveryInfoData:

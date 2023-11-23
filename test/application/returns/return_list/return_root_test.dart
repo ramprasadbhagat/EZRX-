@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_l
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_root/return_root.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -53,6 +54,10 @@ class MockReturnSummaryDetailsBloc
     extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
     implements ReturnSummaryDetailsBloc {}
 
+class MockReturnListByRequestBloc
+    extends MockBloc<ReturnListByRequestEvent, ReturnListByRequestState>
+    implements ReturnListByRequestBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -66,7 +71,6 @@ void main() {
   late ReturnSummaryDetailsBloc mockReturnSummaryDetailsBloc;
   late AuthBloc mockAuthBloc;
   late ReturnListByRequestBloc mockReturnListByRequestBloc;
-
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -104,6 +108,8 @@ void main() {
             .thenReturn(ProductImageState.initial());
         when(() => mockReturnSummaryDetailsBloc.state)
             .thenReturn(ReturnSummaryDetailsState.initial());
+        when(() => mockReturnListByRequestBloc.state)
+            .thenReturn(ReturnListByRequestState.initial());
       });
 
       Widget getWUT() {
@@ -138,11 +144,28 @@ void main() {
         );
       }
 
-      testWidgets('Return Root Page Headset Icon Visible', (tester) async {
+      testWidgets('Return Root Page ', (tester) async {
         await tester.pumpWidget(getWUT());
         await tester.pump();
-        final headSetMicIcon = find.byKey(WidgetKeys.headsetMicOutlined);
-        expect(headSetMicIcon, findsOneWidget);
+        final viewByItemTab = find.byKey(
+          Key(
+            StringUtils.changeToCamelCase(sentence: 'View by items'),
+          ),
+        );
+        expect(viewByItemTab, findsOneWidget);
+        final viewByRequest = find.byKey(
+          Key(
+            StringUtils.changeToCamelCase(sentence: 'View by return requests'),
+          ),
+        );
+        expect(viewByRequest, findsOneWidget);
+        final returnByItemPage = find.byKey(WidgetKeys.returnByItemPage);
+        expect(returnByItemPage, findsOneWidget);
+        await tester.tap(viewByRequest);
+        await tester.pumpAndSettle();
+        final returnByRequestRootPage =
+            find.byKey(WidgetKeys.returnByRequestRootPage);
+        expect(returnByRequestRootPage, findsOneWidget);
       });
     },
   );

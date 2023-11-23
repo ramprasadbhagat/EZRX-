@@ -262,6 +262,14 @@ class _UploadedFileList extends StatelessWidget {
                                                   file: file,
                                                 ),
                                               );
+                                          context
+                                              .read<AdditionalDetailsBloc>()
+                                              .add(
+                                                AdditionalDetailsEvent
+                                                    .removePoDocument(
+                                                  poDocument: file,
+                                                ),
+                                              );
                                         },
                                       ),
                                     ],

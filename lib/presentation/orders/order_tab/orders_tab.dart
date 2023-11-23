@@ -37,14 +37,6 @@ class OrdersTab extends StatelessWidget {
         ),
         automaticallyImplyLeading: false,
         centerTitle: false,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.headset_mic_outlined,
-            ),
-          ),
-        ],
       ),
       body: Column(
         children: [

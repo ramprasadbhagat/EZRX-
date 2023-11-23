@@ -405,7 +405,6 @@ class WidgetKeys {
   static const Key returnByRequestNewRequestButton =
       Key('returnByRequestNewRequestButton');
   static Key returnRequest(String index) => Key('returnRequest$index');
-  static const Key headsetMicOutlined = Key('headsetMicOutlined');
   static const Key returnRequestTile = Key('returnRequestTile');
   static const Key returnRequestGroupDate = Key('returnRequestGroupDate');
   static const Key returnRequestTileStatus = Key('returnRequestTileStatus');

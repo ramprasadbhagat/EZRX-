@@ -378,7 +378,8 @@ void main() {
           );
         },
         expect: () => [
-          AdditionalDetailsState.initial(),
+          AdditionalDetailsState.initial()
+              .copyWith(isPoAttachmentValidated: false),
         ],
       );
 

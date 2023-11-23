@@ -64,16 +64,6 @@ class _ReturnRootState extends State<ReturnRoot> {
           context.tr('Returns'),
         ),
         centerTitle: false,
-        actions: [
-          IconButton(
-            key: WidgetKeys.headsetMicOutlined,
-            onPressed: () {},
-            icon: const Icon(
-              Icons.headset_mic_outlined,
-              color: ZPColors.primary,
-            ),
-          ),
-        ],
       ),
       body: Column(
         mainAxisSize: MainAxisSize.min,
