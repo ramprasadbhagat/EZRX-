@@ -146,6 +146,11 @@ DateTime? tryParseDateTime(String input) {
         }
       }
 
+      //Case Date and Time(YYYY-MM-DD HH:mm:ss)example: '2023-11-20 07:36:33'
+      if (RegExp(r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$').hasMatch(input)) {
+        return DateFormat('yyyy-MM-dd HH:mm:ss').parse(input, true).toLocal();
+      }
+
       //input with format yyyyddmmhh
       final intVal = getDateTimeIntValue(input);
       if (intVal > 0) {

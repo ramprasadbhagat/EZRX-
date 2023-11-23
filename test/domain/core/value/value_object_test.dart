@@ -136,7 +136,10 @@ void main() {
       const dateTimeString = '2023-07-20 12:00:00';
       final dateTimeStringValue = DateTimeStringValue(dateTimeString);
 
-      expect(dateTimeStringValue.dateTime, DateTime(2023, 7, 20, 12, 0, 0));
+      expect(
+        dateTimeStringValue.dateTime,
+        DateTime.utc(2023, 7, 20, 12, 00).toLocal(),
+      );
     });
 
     test('should return a DateTime object from an announcement date string',
