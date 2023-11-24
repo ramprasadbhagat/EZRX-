@@ -68,7 +68,7 @@ class MoreDetailsTile {
         onTap: () => context.navigateTo(
           StaticHtmlViewerRoute(
             title: 'Terms of Use',
-            htmlPath: locator<Config>().staticTermsOfUseFile,
+            htmlPath: context.read<EligibilityBloc>().state.user.tncStaticFile,
             styleCss: locator<Config>().staticStyleCss,
           ),
         ),
@@ -84,7 +84,11 @@ class MoreDetailsTile {
         onTap: () => context.navigateTo(
           StaticHtmlViewerRoute(
             title: 'Privacy policy',
-            htmlPath: locator<Config>().staticPrivacyPolicyFile,
+            htmlPath: context
+                .read<EligibilityBloc>()
+                .state
+                .user
+                .privacyPolicyStaticFile,
             styleCss: locator<Config>().staticStyleCss,
           ),
         ),

@@ -25,8 +25,8 @@ class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {
         emit(
           state.copyWith(
             showTermsAndCondition: !e.user.acceptPrivacyPolicy,
-            tncFile: config.getTnCFile,
-            privacyFile: config.getPrivacyPolicyFile,
+            tncFile: e.user.tncFile,
+            privacyFile: e.user.privacyPolicyFile,
             tncConsent: false,
             privacyConsent: false,
           ),

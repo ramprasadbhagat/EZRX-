@@ -20,6 +20,7 @@ class ApiLanguageCode {
   static const String burmese = 'MM';
   static const String vietnamese = 'VN';
   static const String khmer = 'KH';
+  static const String indonesian = 'ID';
 }
 
 class LanguageCode {
@@ -30,4 +31,5 @@ class LanguageCode {
   static const String burmese = 'mm';
   static const String vietnamese = 'vi';
   static const String khmer = 'km';
+  static const String indonesian = 'id';
 }

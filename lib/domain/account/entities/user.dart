@@ -117,4 +117,57 @@ class User with _$User {
   }
 
   bool get supportMultipleLanguage => supportedLanguages.length > 1;
+
+  String get userPreferredLanguageCode => preferredLanguage.languageCode;
+
+  String get userCountry => userSalesOrganisations.first.salesOrg.country;
+
+  List<String> get _supportedMarketsForStaticFiles => <String>[
+        'ID',
+        //TODO: Cover in another ticket
+        // 'TW',
+        // 'KH',
+        // 'KR',
+        // 'TH',
+        // 'VN',
+        // 'MM',
+      ];
+
+  String get tncFile {
+    if (_supportedMarketsForStaticFiles.contains(userCountry)) {
+      return userPreferredLanguageCode == userCountry
+          ? 'assets/html/eZRxTermsOfUse${userCountry}MarketTranslated.html'
+          : 'assets/html/eZRxTermsOfUse${userCountry}Market.html';
+    }
+
+    return 'assets/html/eZRxTermsOfUse.html';
+  }
+
+  String get tncStaticFile {
+    if (_supportedMarketsForStaticFiles.contains(userCountry)) {
+      return userPreferredLanguageCode == userCountry
+          ? 'assets/html/eZRxTermsOfUse${userCountry}MarketTranslatedStatic.html'
+          : 'assets/html/eZRxTermsOfUse${userCountry}MarketStatic.html';
+    }
+
+    return 'assets/html/eZRxTermsOfUseStatic.html';
+  }
+
+  String get privacyPolicyFile {
+    if (_supportedMarketsForStaticFiles.contains(userCountry) &&
+        userPreferredLanguageCode == userCountry) {
+      return 'assets/html/eZRxPrivacyPolicy${userCountry}MarketTranslated.html';
+    }
+
+    return 'assets/html/eZRxPrivacyPolicy.html';
+  }
+
+  String get privacyPolicyStaticFile {
+    if (_supportedMarketsForStaticFiles.contains(userCountry) &&
+        userPreferredLanguageCode == userCountry) {
+      return 'assets/html/eZRxPrivacyPolicy${userCountry}MarketTranslatedStatic.html';
+    }
+
+    return 'assets/html/eZRxPrivacyPolicyStatic.html';
+  }
 }

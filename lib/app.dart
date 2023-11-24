@@ -192,6 +192,7 @@ Future<void> runAppWithCrashlyticsAndLocalization() async {
             Locale('my'),
             Locale('vi'),
             Locale('km'),
+            Locale('id'),
           ],
           path: 'assets/langs/langs.csv',
           fallbackLocale: const Locale('en'),

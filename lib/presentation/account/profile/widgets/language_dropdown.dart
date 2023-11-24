@@ -10,7 +10,7 @@ class _LanguageDropDown extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Expanded(
-          flex: 5,
+          flex: 4,
           child: Text(
             'Language'.tr(),
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -20,7 +20,7 @@ class _LanguageDropDown extends StatelessWidget {
         ),
         const Text(':  '),
         Expanded(
-          flex: 8,
+          flex: 7,
           child: BlocConsumer<UserBloc, UserState>(
             listenWhen: (previous, current) =>
                 previous.user.preferredLanguage !=

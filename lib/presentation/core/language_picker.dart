@@ -19,6 +19,8 @@ extension LocaleExtension on Locale {
         return 'ភាសាខ្មែរ';
       case 'mm':
         return 'Burmese';
+      case 'id':
+        return 'Bahasa Indonesia';
       default:
         return '';
     }
@@ -36,6 +38,8 @@ extension LocaleExtension on Locale {
         return ApiLanguageCode.vietnamese;
       case 'km':
         return ApiLanguageCode.khmer;
+      case 'id':
+        return ApiLanguageCode.indonesian;
       case 'en':
       default:
         return ApiLanguageCode.english;
@@ -56,6 +60,8 @@ extension LocaleExtension on Locale {
         return const Locale(LanguageCode.vietnamese);
       case ApiLanguageCode.khmer:
         return const Locale(LanguageCode.khmer);
+      case ApiLanguageCode.indonesian:
+        return const Locale(LanguageCode.indonesian);
       case ApiLanguageCode.english:
       default:
         return const Locale(LanguageCode.english);
