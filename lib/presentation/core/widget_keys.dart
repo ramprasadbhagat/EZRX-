@@ -134,6 +134,8 @@ class WidgetKeys {
   static const Key browseProductLoadingShimmer =
       Key('browseProductLoadingShimmer');
   static Key sectionTileIcon(String title) => Key('sectionTitleIcon$title');
+  static Key searchSectionTab(String title) =>
+      Key('searchSectionTab$title');
 
   //============================================================
   //  MORE TAB BAR

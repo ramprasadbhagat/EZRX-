@@ -8,6 +8,7 @@ class _SearchAnnouncement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AnnouncementInfoBloc, AnnouncementInfoState>(
+      key: WidgetKeys.searchSectionTab('Announcements'),
       buildWhen: (previous, current) =>
           previous.searchedAnnouncementList !=
                   current.searchedAnnouncementList &&

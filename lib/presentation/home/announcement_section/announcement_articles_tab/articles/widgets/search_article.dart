@@ -6,6 +6,7 @@ class _SearchArticle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ArticlesInfoBloc, ArticlesInfoState>(
+      key: WidgetKeys.searchSectionTab('Articles'),
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching ||
           previous.searchKey != current.searchKey,
