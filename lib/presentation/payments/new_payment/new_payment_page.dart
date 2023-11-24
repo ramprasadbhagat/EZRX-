@@ -28,11 +28,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class NewPaymentPage extends StatelessWidget {
   const NewPaymentPage({Key? key}) : super(key: key);
-  final _tabs = const [
-    OutstandingInvoicesTabRoute(),
-    AvailableCreditsTabRoute(),
-    PaymentMethodTabRoute(),
-  ];
 
   static const paymentErrorMessage =
       'Unable to generate payment advice as at least one of the selected invoices/credit notes have already been selected for another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.';
@@ -53,14 +48,26 @@ class NewPaymentPage extends StatelessWidget {
     );
   }
 
+  List<PageRouteInfo<void>> _getTabs(BuildContext context) {
+    final salesOrg = context.read<EligibilityBloc>().state.salesOrg;
+
+    return [
+      const OutstandingInvoicesTabRoute(),
+      if (!salesOrg.isID) const AvailableCreditsTabRoute(),
+      const PaymentMethodTabRoute(),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
+    final tabs = _getTabs(context);
+
     return AutoTabsRouter.tabBar(
-      routes: _tabs,
+      routes: tabs,
       physics: const NeverScrollableScrollPhysics(),
       builder: (context, child, tabController) {
         final step = tabController.index + 1;
-        final title = context.tr(_stepTitle(step));
+        final title = _stepTitle(context, step);
 
         return Scaffold(
           key: WidgetKeys.newPaymentPage,
@@ -148,7 +155,7 @@ class NewPaymentPage extends StatelessWidget {
                                     vertical: 8.0,
                                   ),
                                   child: Text(
-                                    'Step $step of ${_tabs.length}: $title',
+                                    '${context.tr('Step')} $step ${context.tr('of')} ${tabs.length}: $title',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall!
@@ -159,7 +166,7 @@ class NewPaymentPage extends StatelessWidget {
                                   ),
                                 ),
                                 LinearProgressIndicator(
-                                  value: step / _tabs.length,
+                                  value: step / tabs.length,
                                   backgroundColor: ZPColors.accentColor,
                                 ),
                               ],
@@ -270,7 +277,10 @@ class NewPaymentPage extends StatelessWidget {
                                   onPressed: state.isLoading
                                       ? null
                                       : () {
-                                          _trackProceedToNextStep(step);
+                                          _trackProceedToNextStep(
+                                            context,
+                                            step,
+                                          );
                                           context.read<NewPaymentBloc>().add(
                                                 const NewPaymentEvent.pay(),
                                               );
@@ -353,7 +363,7 @@ class _NextButton extends StatelessWidget {
       onPressed: enabled
           ? () {
               final step = tabController.index + 1;
-              _trackProceedToNextStep(step);
+              _trackProceedToNextStep(context, step);
               tabController.animateTo(step);
             }
           : null,
@@ -458,21 +468,22 @@ class _CheckAllWidget extends StatelessWidget {
   }
 }
 
-void _trackProceedToNextStep(int step) => trackMixpanelEvent(
+void _trackProceedToNextStep(BuildContext context, int step) =>
+    trackMixpanelEvent(
       MixpanelEvents.paymentStep,
       props: {
         MixpanelProps.step: step,
-        MixpanelProps.stepName: _stepTitle(step),
+        MixpanelProps.stepName: _stepTitle(context, step),
       },
     );
 
-String _stepTitle(int step) {
-  switch (step) {
-    case 1:
-      return 'Select invoice(s) for payment';
-    case 2:
-      return 'Select credit (Optional)';
-    default:
-      return 'Select payment method';
-  }
+String _stepTitle(BuildContext context, int step) {
+  final salesOrg = context.read<EligibilityBloc>().state.salesOrg;
+  final stepTitles = <String>[
+    'Select invoice(s) for payment',
+    if (!salesOrg.isID) 'Select credit (Optional)',
+    'Select payment method',
+  ];
+
+  return context.tr(stepTitles[step - 1]);
 }

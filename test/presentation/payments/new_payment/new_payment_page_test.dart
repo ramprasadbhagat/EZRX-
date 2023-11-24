@@ -25,6 +25,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class AccountSummaryBlocMock
@@ -342,9 +343,50 @@ void main() {
     );
   }
 
-  group('NewPaymentPage', () {
-    group(' -> Step 1: Select invoices', () {
-      testWidgets('AllCheckbox is unchecked as default',
+  group('New payment page test', () {
+    group('=> Display correct steps', () {
+      testWidgets('=> For ID market', (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        when(() => outstandingInvoicesBlocMock.state).thenReturn(
+          OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
+        );
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial(),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final correctStepsTxt = find.textContaining('Step 1 of 2:');
+        expect(correctStepsTxt, findsOneWidget);
+      });
+      testWidgets('=> For other markets', (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+          ),
+        );
+        when(() => outstandingInvoicesBlocMock.state).thenReturn(
+          OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
+        );
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial(),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final correctStepsTxt = find.textContaining('Step 1 of 3:');
+        expect(correctStepsTxt, findsOneWidget);
+      });
+    });
+
+    group('=> Step 1: Select invoices', () {
+      testWidgets('=> AllCheckbox is unchecked as default',
           (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
@@ -365,7 +407,7 @@ void main() {
             (tester.firstWidget(checkAllInvoices) as CheckboxListTile).value;
         expect(value, false);
       });
-      testWidgets('AllCheckbox is checked as all invoices are selected',
+      testWidgets('=> AllCheckbox is checked as all invoices are selected',
           (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
@@ -388,7 +430,7 @@ void main() {
             (tester.firstWidget(checkAllInvoices) as CheckboxListTile).value;
         expect(value, true);
       });
-      testWidgets('Next button is disabled as default',
+      testWidgets('=> Next button is disabled as default',
           (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
@@ -408,7 +450,7 @@ void main() {
             (tester.firstWidget(nextButton1) as ElevatedButton).enabled;
         expect(value, false);
       });
-      testWidgets('Next button is enabled as at least 1 invoice is selected',
+      testWidgets('=> Next button is enabled as at least 1 invoice is selected',
           (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
@@ -436,7 +478,8 @@ void main() {
         expect(value, true);
       });
 
-      testWidgets('Invoice Ph tax deducted price', (WidgetTester tester) async {
+      testWidgets('=> Invoice Ph tax deducted price',
+          (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
         );
@@ -463,8 +506,8 @@ void main() {
       });
     });
 
-    group(' -> Step 2: Select credits', () {
-      testWidgets('AllCheckbox is unchecked as default',
+    group('=> Step 2: Select credits', () {
+      testWidgets('=> AllCheckbox is unchecked as default',
           (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
@@ -493,7 +536,7 @@ void main() {
             (tester.firstWidget(checkAllInvoices) as CheckboxListTile).value;
         expect(value, false);
       });
-      testWidgets('AllCheckbox is checked as all credits are selected',
+      testWidgets('=> AllCheckbox is checked as all credits are selected',
           (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
@@ -530,7 +573,7 @@ void main() {
             (tester.firstWidget(checkAllInvoices) as CheckboxListTile).value;
         expect(value, true);
       });
-      testWidgets('Next button is disabled as default',
+      testWidgets('=> Next button is disabled as default',
           (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
@@ -558,7 +601,7 @@ void main() {
             (tester.firstWidget(nextButton2) as ElevatedButton).enabled;
         expect(value, false);
       });
-      testWidgets('Next button is enabled as at least 1 credit is selected',
+      testWidgets('=> Next button is enabled as at least 1 credit is selected',
           (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
@@ -597,8 +640,8 @@ void main() {
       });
     });
 
-    group(' -> Step 3: Pay now', () {
-      testWidgets('Tap Pay now button', (WidgetTester tester) async {
+    group('=> Step 3: Pay now', () {
+      testWidgets('=> Tap Pay now button', (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
         );
@@ -631,7 +674,8 @@ void main() {
           () => newPaymentBlocMock.add(const NewPaymentEvent.pay()),
         ).called(1);
       });
-      testWidgets('Tap Pay now button successful', (WidgetTester tester) async {
+      testWidgets('=> Tap Pay now button successful',
+          (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
           OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
         );
@@ -660,7 +704,7 @@ void main() {
       });
 
       //TODO: Update widget test later
-      // testWidgets('Tap Pay now button fails', (WidgetTester tester) async {
+      // testWidgets('=> Tap Pay now button fails', (WidgetTester tester) async {
       //   when(() => outstandingInvoicesBlocMock.state).thenReturn(
       //     OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
       //   );
