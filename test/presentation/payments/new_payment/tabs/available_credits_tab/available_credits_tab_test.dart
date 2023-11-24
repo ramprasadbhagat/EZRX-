@@ -15,6 +15,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credit_payment_filter_page.dart';
@@ -154,8 +155,13 @@ void main() {
     testWidgets('Search bar show', (tester) async {
       await tester.pumpWidget(getWidget());
       await tester.pump();
-      final searchBar = find.byKey(WidgetKeys.availableCreditTabSearchBarKey);
-      expect(searchBar, findsOneWidget);
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is CustomSearchBar && (widget.hintText == 'Search'),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets('Search Change And Submit Test', (tester) async {

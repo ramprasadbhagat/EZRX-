@@ -22,7 +22,7 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
             context: context,
             searchKey: value,
           ),
-          hintText: 'Search by document number'.tr(),
+          hintText: context.tr('Search'),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
             // Only digits

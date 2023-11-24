@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.d
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoices_tab.dart';
@@ -159,8 +160,7 @@ void main() {
     testWidgets('Search bar show', (tester) async {
       await tester.pumpWidget(getWidget());
       await tester.pump();
-      final searchBar =
-          find.byKey(WidgetKeys.outstandingInvoiceTabSearchBarKey);
+      final searchBar = find.byType(CustomSearchBar);
       expect(searchBar, findsOneWidget);
     });
 
@@ -517,6 +517,19 @@ void main() {
             searchKey: outstandingInvoicesBlocMock.state.searchKey,
           ),
         ),
+      );
+    });
+
+    testWidgets('Search invoice initial state', (tester) async {
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is CustomSearchBar && (widget.hintText == 'Search'),
+        ),
+        findsOneWidget,
       );
     });
   });

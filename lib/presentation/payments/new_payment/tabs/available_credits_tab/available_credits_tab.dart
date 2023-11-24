@@ -38,7 +38,6 @@ class AvailableCreditsTab extends StatelessWidget {
           child: Row(
             children: [
               const Expanded(
-                key: WidgetKeys.availableCreditTabSearchBarKey,
                 child: _AvailableCreditsSearchBar(),
               ),
               _FilterTune(),
