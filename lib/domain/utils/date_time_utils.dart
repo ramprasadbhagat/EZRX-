@@ -6,6 +6,9 @@ class DateTimeUtils {
   static String getDeliveryDateString(DateTime deliveryDate) =>
       DateFormat(DateTimeFormatString.displayDateFormat).format(deliveryDate);
 
+  static String getApiDateWithDashString(DateTime date) =>
+      DateFormat(DateTimeFormatString.apiDateWithDashFormat).format(date);
+
   static DateTime getNearestWorkingDate(DateTime time) {
     time = time.add(const Duration(days: 1));
 

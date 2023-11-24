@@ -84,7 +84,10 @@ class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
                         context.read<AdditionalDetailsBloc>().add(
                               AdditionalDetailsEvent.onTextChange(
                                 label: DeliveryInfoLabel.deliveryDate,
-                                newValue: _deliveryDateText.text,
+                                newValue:
+                                    DateTimeUtils.getApiDateWithDashString(
+                                  dateTime,
+                                ),
                               ),
                             );
                       },
