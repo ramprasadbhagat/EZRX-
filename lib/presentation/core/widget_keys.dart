@@ -1086,6 +1086,10 @@ class WidgetKeys {
       Key('invoiceDetailMaterialUnitPrice');
   static const Key invoiceDetailMaterialTotalPrice =
       Key('invoiceDetailMaterialTotalPrice');
+  static const Key invoiceDetailsOrderNumberLoading =
+      Key('invoiceDetailsOrderNumberLoading');
+  static const Key invoiceDetailsOrderNumberButton =
+      Key('invoiceDetailsOrderNumberButton');
   //============================================================
   //  All Credits
   //============================================================

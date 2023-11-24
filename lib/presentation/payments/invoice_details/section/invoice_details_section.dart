@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/presentation/payments/invoice_details/section/order_number_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -64,17 +65,8 @@ class InvoiceDetailsSection extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 8),
-          BalanceTextRow(
-            keyFlex: 2,
-            valueFlex: 3,
-            keyText: context.tr('Order number'),
-            valueText: invoiceItem.orderId.displayNAIfEmpty,
-            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.white,
-                ),
-            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.white,
-                ),
+          OrderNumberSection(
+            orderNumber: invoiceItem.orderId.getOrCrash(),
           ),
         ],
       ),
