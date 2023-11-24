@@ -14,7 +14,10 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
@@ -22,11 +25,17 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_sku_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -118,9 +127,33 @@ void main() {
   );
   final optionalMaterial2 = ComboDealMaterial.empty().copyWith(
     minQty: 0,
-    materialNumber: MaterialNumber('fake-optional-material2'),
+    materialNumber: MaterialNumber('fake-second-optional-material'),
     rate: -8,
     mandatory: false,
+  );
+
+  final comboDetailRouteData = RouteData(
+    route: const RouteMatch(
+      name: 'ComboDetailPageRoute',
+      segments: [],
+      path: 'combo_detail',
+      stringMatch: 'combo_detail',
+      key: ValueKey('ComboDetailPageRoute'),
+    ),
+    router: MockAppRouter(),
+    pendingChildren: [],
+  );
+
+  final cartRouteData = RouteData(
+    route: const RouteMatch(
+      name: 'CartPageRoute',
+      segments: [],
+      path: 'orders/cart',
+      stringMatch: 'orders/cart',
+      key: ValueKey('CartPageRoute'),
+    ),
+    router: MockAppRouter(),
+    pendingChildren: [],
   );
 
   setUpAll(() async {
@@ -187,8 +220,49 @@ void main() {
         BlocProvider<ComboDealMaterialDetailBloc>(
           create: ((context) => comboDetailMockBloc),
         ),
+        BlocProvider<ProductDetailBloc>(
+          create: (context) => productDetailMockBloc,
+        ),
       ],
       child: const ComboDetailPage(),
+    );
+  }
+
+  Widget getBottomSheetScopeWidget(PriceAggregate cartItem) {
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      usingLocalization: true,
+      useMediaQuery: false,
+      providers: [
+        BlocProvider<UserBloc>(create: (context) => userBlocMock),
+        BlocProvider<CustomerCodeBloc>(
+          create: (context) => customerCodeBlocMock,
+        ),
+        BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
+        BlocProvider<EligibilityBloc>(
+          create: ((context) => eligibilityBlocMock),
+        ),
+        BlocProvider<MaterialListBloc>(
+          create: ((context) => materialListMockBloc),
+        ),
+        BlocProvider<ProductImageBloc>(
+          create: (context) => mockProductImageBloc,
+        ),
+        BlocProvider<MaterialPriceBloc>(
+          create: ((context) => materialPriceMockBloc),
+        ),
+        BlocProvider<CartBloc>(
+          create: ((context) => cartMockBloc),
+        ),
+        BlocProvider<ComboDealMaterialDetailBloc>(
+          create: ((context) => comboDetailMockBloc),
+        ),
+      ],
+      child: Material(
+        child: DeleteComboDealBottomSheet(
+          cartItem: cartItem,
+        ),
+      ),
     );
   }
 
@@ -201,7 +275,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
 
           await tester.pump();
-          final comboDetailPage = find.byKey(const Key('comboDealDetailPage'));
+          final comboDetailPage = find.byKey(WidgetKeys.comboDealDetailPage);
           expect(comboDetailPage, findsOneWidget);
         },
       );
@@ -231,7 +305,562 @@ void main() {
         },
       );
 
-      //TODO: Edit case
+      testWidgets(
+        'Fetched combo detail info',
+        (tester) async {
+          final expectedComboDetailStates = Stream.fromIterable(
+            [
+              comboDetailMockBloc.state.copyWith(isFetchingComboInfo: true),
+              comboDetailMockBloc.state.copyWith(isFetchingComboInfo: false),
+            ],
+          );
+
+          final priceMap = {
+            MaterialNumber('fake-material'): Price.empty(),
+            MaterialNumber('fake-material2'): Price.empty(),
+          };
+
+          whenListen(comboDetailMockBloc, expectedComboDetailStates);
+
+          final expectedMaterialPriceStates = Stream.fromIterable(
+            [
+              materialPriceMockBloc.state.copyWith(isFetching: true),
+              materialPriceMockBloc.state
+                  .copyWith(isFetching: false, materialPrice: priceMap),
+            ],
+          );
+
+          whenListen(materialPriceMockBloc, expectedMaterialPriceStates);
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+          final appbarTitle = find.text('Combo K1');
+
+          final appbarLoading = find.byKey(WidgetKeys.comboTitleLoading);
+
+          final comboRequirementLoading =
+              find.byKey(WidgetKeys.comboRequirementTitleLoading);
+
+          final comboRequirementSubTitleLoading =
+              find.byKey(WidgetKeys.comboRequirementSubTitleLoading);
+
+          final backButton = find.byKey(WidgetKeys.backButton);
+
+          final confirmBottomSheet = find.byType(ConfirmBottomSheet);
+
+          final confirmButton =
+              find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          expect(appbarTitle, findsOneWidget);
+
+          expect(appbarLoading, findsNothing);
+
+          expect(comboRequirementLoading, findsNothing);
+
+          expect(comboRequirementSubTitleLoading, findsNothing);
+
+          verify(
+            () => comboDetailMockBloc.add(
+              ComboDealMaterialDetailEvent.setPriceInfo(
+                priceMap: {
+                  MaterialNumber('fake-material'): MaterialPriceDetail.empty()
+                      .copyWith(isValidMaterial: true),
+                  MaterialNumber('fake-material2'): MaterialPriceDetail.empty()
+                      .copyWith(isValidMaterial: true),
+                },
+              ),
+            ),
+          ).called(1);
+
+          await tester.tap(backButton);
+          await tester.pumpAndSettle();
+          expect(confirmBottomSheet, findsOneWidget);
+
+          expect(confirmButton, findsOneWidget);
+
+          when(() => autoRouterMock.pop())
+              .thenAnswer((invocation) async => true);
+
+          when(() => autoRouterMock.currentPath).thenReturn('fake-path');
+
+          await tester.tap(confirmButton);
+          await tester.pump();
+
+          expect(autoRouterMock.currentPath != 'combo_detail', true);
+        },
+      );
+
+      testWidgets(
+        'Load Edit Combo Detail Page',
+        (tester) async {
+          final comboDeal = ComboDeal.empty().copyWith(
+            materialComboDeals: [
+              ComboDealMaterialSet(
+                materials: [requiredMaterial, requiredMaterial2],
+                setNo: 'fake-set',
+              ),
+            ],
+          );
+          final fakeCartCombo = PriceAggregate.empty().copyWith(
+            quantity: 3,
+            comboDeal: comboDeal,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: requiredMaterial.materialNumber,
+            ),
+          );
+
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              isUpdateCart: true,
+              isFetchingComboInfo: false,
+              items: {requiredMaterial.materialNumber: fakeCartCombo},
+              selectedItems: {
+                requiredMaterial.materialNumber: true,
+              },
+            ),
+          );
+
+          when(() => cartMockBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [fakeCartCombo],
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+          final comboDetailPage = find.byKey(WidgetKeys.comboDealDetailPage);
+          expect(comboDetailPage, findsOneWidget);
+
+          final deleteButton = find.byKey(WidgetKeys.comboDeteleButton);
+          expect(deleteButton, findsOneWidget);
+
+          await tester.tap(deleteButton);
+          await tester.pump();
+
+          final deleteBottomSheet = find.byType(DeleteComboDealBottomSheet);
+          expect(deleteBottomSheet, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Load Edit Combo Detail Page - Search bar',
+        (tester) async {
+          final comboDeal = ComboDeal.empty().copyWith(
+            materialComboDeals: [
+              ComboDealMaterialSet(
+                materials: [requiredMaterial, requiredMaterial2],
+                setNo: 'fake-set',
+              ),
+            ],
+          );
+          final fakeCartCombo = PriceAggregate.empty().copyWith(
+            quantity: 3,
+            comboDeal: comboDeal,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: requiredMaterial.materialNumber,
+            ),
+          );
+
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              isUpdateCart: true,
+              isFetchingComboInfo: false,
+              items: {requiredMaterial.materialNumber: fakeCartCombo},
+              selectedItems: {
+                requiredMaterial.materialNumber: true,
+              },
+              searchKey: SearchKey.search('fake'),
+            ),
+          );
+
+          when(() => cartMockBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [fakeCartCombo],
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+          final comboDetailPage = find.byKey(WidgetKeys.comboDealDetailPage);
+          expect(comboDetailPage, findsOneWidget);
+
+          final searchBar = find.byType(CustomSearchBar);
+          expect(searchBar, findsOneWidget);
+
+          await tester.enterText(searchBar, 'fake-material');
+          await tester.pumpAndSettle(const Duration(microseconds: 200));
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+
+          verify(
+            () => comboDetailMockBloc.add(
+              ComboDealMaterialDetailEvent.search(
+                searchKey: SearchKey.search('fake-material'),
+              ),
+            ),
+          ).called(1);
+
+          final clearIcon = find.byKey(WidgetKeys.clearIconKey);
+          expect(clearIcon, findsOneWidget);
+          await tester.tap(clearIcon);
+          await tester.pump();
+          verify(
+            () => comboDetailMockBloc.add(
+              const ComboDealMaterialDetailEvent.clearSearch(),
+            ),
+          ).called(1);
+        },
+      );
+
+      testWidgets(
+        'Load Edit Combo Detail Page - Material detail section',
+        (tester) async {
+          final comboDeal = ComboDeal.empty().copyWith(
+            materialComboDeals: [
+              ComboDealMaterialSet(
+                materials: [requiredMaterial, requiredMaterial2],
+                setNo: 'fake-set',
+              ),
+            ],
+          );
+          final fakeCartCombo = PriceAggregate.empty().copyWith(
+            quantity: 3,
+            comboDeal: comboDeal,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: requiredMaterial.materialNumber,
+            ),
+          );
+
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              isUpdateCart: true,
+              isFetchingComboInfo: false,
+              items: {requiredMaterial.materialNumber: fakeCartCombo},
+              selectedItems: {
+                requiredMaterial.materialNumber: true,
+              },
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                enableComboDeals: true,
+                enableZDP5: true,
+                salesOrg: SalesOrg('3070'),
+                comboDealsUserRole: ComboDealUserRole(1),
+              ),
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                salesDeals: [SalesDealNumber('fake-sale-deal')],
+                customerName:
+                    CustomerName.empty().copyWith(name1: fakeCustomerName),
+              ),
+            ),
+          );
+
+          when(() => autoRouterMock.pushNamed('orders/material_details'))
+              .thenAnswer((invocation) async => true);
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final searchBar = find.byType(CustomSearchBar);
+          expect(searchBar, findsOneWidget);
+
+          final totalMaterials = find.byKey(WidgetKeys.totalMaterialItemCount);
+          expect(totalMaterials, findsOneWidget);
+
+          final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
+          expect(comboMaterialList, findsOneWidget);
+
+          final materialImage = find.byKey(
+            WidgetKeys.comboItemImageDetail(
+              fakeCartCombo.getMaterialNumber.displayMatNo,
+            ),
+          );
+          expect(materialImage, findsOneWidget);
+
+          await tester.tap(materialImage);
+          await tester.pump();
+
+          verify(
+            () => productDetailMockBloc.add(
+              ProductDetailEvent.fetch(
+                materialNumber: fakeCartCombo.getMaterialNumber,
+                type: fakeCartCombo.materialInfo.type,
+                locale: const Locale('en'),
+              ),
+            ),
+          ).called(1);
+
+          verify(
+            () => materialPriceMockBloc.add(
+              MaterialPriceEvent.fetchPriceForZDP5Materials(
+                materialInfo: fakeCartCombo.materialInfo,
+              ),
+            ),
+          ).called(1);
+
+          verify(
+            () => materialPriceMockBloc.add(
+              MaterialPriceEvent.fetch(
+                materials: [fakeCartCombo.materialInfo],
+                comboDealEligible: true,
+              ),
+            ),
+          ).called(1);
+        },
+      );
+
+      testWidgets(
+        'Delete bottomsheet combo detail',
+        (tester) async {
+          final comboDeal = ComboDeal.empty().copyWith(
+            materialComboDeals: [
+              ComboDealMaterialSet(
+                materials: [requiredMaterial, requiredMaterial2],
+                setNo: 'fake-set',
+              ),
+            ],
+          );
+          final fakeCartCombo = PriceAggregate.empty().copyWith(
+            quantity: 3,
+            comboDeal: comboDeal,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: requiredMaterial.materialNumber,
+            ),
+          );
+
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              isUpdateCart: true,
+              isFetchingComboInfo: false,
+              items: {requiredMaterial.materialNumber: fakeCartCombo},
+              selectedItems: {
+                requiredMaterial.materialNumber: true,
+              },
+            ),
+          );
+
+          when(() => cartMockBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [fakeCartCombo],
+            ),
+          );
+
+          when(() => autoRouterMock.pop())
+              .thenAnswer((invocation) async => true);
+
+          final expectedCartStates = Stream.fromIterable(
+            [
+              cartMockBloc.state.copyWith(isDeleteCombo: false),
+              cartMockBloc.state.copyWith(isDeleteCombo: true),
+            ],
+          );
+
+          whenListen(cartMockBloc, expectedCartStates);
+
+          when(() => autoRouterMock.current).thenReturn(comboDetailRouteData);
+
+          await tester.pumpWidget(getBottomSheetScopeWidget(fakeCartCombo));
+          await tester.pump();
+
+          final deleteConfirmButton =
+              find.byKey(WidgetKeys.comboDeteleConfirmButton);
+          expect(deleteConfirmButton, findsOneWidget);
+
+          await tester.tap(deleteConfirmButton);
+          await tester.pump();
+
+          verify(
+            () => cartMockBloc.add(
+              CartEvent.upsertCartItemsWithComboOffers(
+                priceAggregates:
+                    fakeCartCombo.convertComboItemToPriceAggregateList
+                        .map(
+                          (e) => e.copyWith(
+                            quantity: 0,
+                            price: e.price.copyWith(
+                              comboDeal: e.price.comboDeal.copyWith(
+                                isEligible: false,
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                isDeleteCombo: true,
+              ),
+            ),
+          ).called(1);
+        },
+      );
+
+      testWidgets(
+        'Delete cart button listener trigger from combo detail',
+        (tester) async {
+          final comboDeal = ComboDeal.empty().copyWith(
+            materialComboDeals: [
+              ComboDealMaterialSet(
+                materials: [requiredMaterial, requiredMaterial2],
+                setNo: 'fake-set',
+              ),
+            ],
+          );
+          final fakeCartCombo = PriceAggregate.empty().copyWith(
+            quantity: 3,
+            comboDeal: comboDeal,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: requiredMaterial.materialNumber,
+            ),
+          );
+
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              isUpdateCart: true,
+              isFetchingComboInfo: false,
+              items: {requiredMaterial.materialNumber: fakeCartCombo},
+              selectedItems: {
+                requiredMaterial.materialNumber: true,
+              },
+            ),
+          );
+
+          when(() => cartMockBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [fakeCartCombo],
+            ),
+          );
+
+          when(() => autoRouterMock.current).thenReturn(comboDetailRouteData);
+
+          final expectedCartStates = Stream.fromIterable(
+            [
+              cartMockBloc.state.copyWith(isDeleteCombo: false),
+              cartMockBloc.state.copyWith(isDeleteCombo: true),
+            ],
+          );
+
+          whenListen(cartMockBloc, expectedCartStates);
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final deleteButton = find.byKey(WidgetKeys.comboDeteleButton);
+          expect(deleteButton, findsOneWidget);
+
+          verify(
+            () => comboDetailMockBloc.add(
+              const ComboDealMaterialDetailEvent.clearSelectedItem(),
+            ),
+          ).called(1);
+
+          verify(
+            () => comboDetailMockBloc.add(
+              const ComboDealMaterialDetailEvent.cartContainsCurrentCombo(
+                contain: false,
+              ),
+            ),
+          ).called(1);
+
+          await tester.pump(const Duration(milliseconds: 500));
+
+          final snackbar = find.byType(CustomSnackBar);
+          expect(snackbar, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Delete cart button listener trigger from cart',
+        (tester) async {
+          final comboDeal = ComboDeal.empty().copyWith(
+            materialComboDeals: [
+              ComboDealMaterialSet(
+                materials: [requiredMaterial, requiredMaterial2],
+                setNo: 'fake-set',
+              ),
+            ],
+          );
+          final fakeCartCombo = PriceAggregate.empty().copyWith(
+            quantity: 3,
+            comboDeal: comboDeal,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: requiredMaterial.materialNumber,
+            ),
+          );
+
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              isUpdateCart: true,
+              isFetchingComboInfo: false,
+              items: {requiredMaterial.materialNumber: fakeCartCombo},
+              selectedItems: {
+                requiredMaterial.materialNumber: true,
+              },
+            ),
+          );
+
+          when(() => cartMockBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [fakeCartCombo],
+            ),
+          );
+
+          when(() => autoRouterMock.stack).thenReturn([
+            MaterialPageX(
+              routeData: cartRouteData,
+              child: const CartPage(),
+            ),
+            MaterialPageX(
+              routeData: cartRouteData,
+              child: const CartPage(),
+            ),
+            MaterialPageX(
+              routeData: comboDetailRouteData,
+              child: const ComboDetailPage(),
+            ),
+          ]);
+
+          when(() => autoRouterMock.current).thenReturn(comboDetailRouteData);
+
+          when(() => autoRouterMock.pop())
+              .thenAnswer((invocation) async => true);
+
+          final expectedCartStates = Stream.fromIterable(
+            [
+              cartMockBloc.state.copyWith(isDeleteCombo: false),
+              cartMockBloc.state.copyWith(isDeleteCombo: true),
+            ],
+          );
+
+          whenListen(cartMockBloc, expectedCartStates);
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final deleteButton = find.byKey(WidgetKeys.comboDeteleButton);
+          expect(deleteButton, findsOneWidget);
+
+          verify(
+            () => comboDetailMockBloc.add(
+              const ComboDealMaterialDetailEvent.clearSelectedItem(),
+            ),
+          ).called(1);
+
+          verify(
+            () => comboDetailMockBloc.add(
+              const ComboDealMaterialDetailEvent.cartContainsCurrentCombo(
+                contain: false,
+              ),
+            ),
+          ).called(1);
+        },
+      );
     },
   );
 
@@ -326,6 +955,57 @@ void main() {
 
           final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
           expect(comboMaterialList, findsOneWidget);
+
+          final cartItemQuantityInputKey = find.byType(CartItemQuantityInput);
+          expect(cartItemQuantityInputKey, findsOneWidget);
+          final cartItemAddKey = find.byKey(WidgetKeys.cartItemAddKey);
+          expect(cartItemAddKey, findsOneWidget);
+          final cartItemDeleteKey = find.byKey(WidgetKeys.cartItemDeleteKey);
+          expect(cartItemDeleteKey, findsOneWidget);
+          final quantityInputTextKey =
+              find.byKey(WidgetKeys.quantityInputTextKey);
+          expect(quantityInputTextKey, findsOneWidget);
+          await tester.tap(cartItemAddKey);
+          await tester.pump();
+          verify(
+            () => comboDetailMockBloc.add(
+              ComboDealMaterialDetailEvent.updateItemQuantity(
+                item: MaterialNumber('fake-material'),
+                qty: 5,
+              ),
+            ),
+          ).called(1);
+          await tester.tap(cartItemDeleteKey);
+          await tester.pump();
+          verify(
+            () => comboDetailMockBloc.add(
+              ComboDealMaterialDetailEvent.updateItemQuantity(
+                item: MaterialNumber('fake-material'),
+                qty: 4,
+              ),
+            ),
+          ).called(1);
+          await tester.enterText(quantityInputTextKey, '6');
+          await tester.pump();
+          verify(
+            () => comboDetailMockBloc.add(
+              ComboDealMaterialDetailEvent.updateItemQuantity(
+                item: MaterialNumber('fake-material'),
+                qty: 6,
+              ),
+            ),
+          ).called(1);
+
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          verify(
+            () => comboDetailMockBloc.add(
+              ComboDealMaterialDetailEvent.updateItemQuantity(
+                item: MaterialNumber('fake-material'),
+                qty: 6,
+              ),
+            ),
+          ).called(1);
         },
       );
 
@@ -353,6 +1033,18 @@ void main() {
 
           final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
           expect(checkoutButton, findsOneWidget);
+
+          await tester.tap(checkoutButton);
+          await tester.pump();
+
+          verify(
+            () => cartMockBloc.add(
+              CartEvent.upsertCartItemsWithComboOffers(
+                priceAggregates: comboMaterialsMock.values.toList(),
+                isDeleteCombo: false,
+              ),
+            ),
+          ).called(1);
         },
       );
     },
@@ -460,6 +1152,21 @@ void main() {
 
           final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
           expect(comboMaterialList, findsOneWidget);
+
+          final fixedItem =
+              find.byKey(WidgetKeys.comboItemProductTile('fake-material'));
+          expect(fixedItem, findsOneWidget);
+
+          await tester.tap(fixedItem);
+          await tester.pump();
+
+          verifyNever(
+            () => comboDetailMockBloc.add(
+              ComboDealMaterialDetailEvent.updateItemSelection(
+                item: MaterialNumber('fake-material'),
+              ),
+            ),
+          );
         },
       );
 
@@ -513,26 +1220,27 @@ void main() {
         );
 
         comboMaterialsMock = {
-          MaterialNumber('fake-material'): PriceAggregate.empty().copyWith(
+          MaterialNumber('fake-optional-material'):
+              PriceAggregate.empty().copyWith(
             quantity: 4,
             materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('fake-material'),
+              materialNumber: MaterialNumber('fake-optional-material'),
             ),
             comboDeal: comboDeal,
           ),
-          MaterialNumber('fake-optional-material'):
+          MaterialNumber('fake-second-optional-material'):
               PriceAggregate.empty().copyWith(
             quantity: 2,
             materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('fake-optional-material'),
+              materialNumber: MaterialNumber('fake-second-optional-material'),
             ),
             comboDeal: comboDeal,
           ),
         };
 
         comboMaterialsSeletedMock = {
-          MaterialNumber('fake-material'): false,
           MaterialNumber('fake-optional-material'): false,
+          MaterialNumber('fake-second-optional-material'): false,
         };
         when(() => comboDetailMockBloc.state).thenReturn(
           ComboDealMaterialDetailState.initial().copyWith(
@@ -635,9 +1343,9 @@ void main() {
     () {
       setUp(() {
         final firstSKUTier =
-            ComboDealSKUTier.empty().copyWith(minQty: 3, rate: -12);
+            ComboDealSKUTier.empty().copyWith(minQty: 2, rate: -12);
         final secondSKUTier =
-            ComboDealSKUTier.empty().copyWith(minQty: 7, rate: -20);
+            ComboDealSKUTier.empty().copyWith(minQty: 3, rate: -20);
         final comboDeal = ComboDeal.empty().copyWith(
           flexiSKUTier: [
             firstSKUTier,
@@ -667,11 +1375,11 @@ void main() {
             ),
             comboDeal: comboDeal,
           ),
-          MaterialNumber('fake-optional-material2'):
+          MaterialNumber('fake-second-optional-material'):
               PriceAggregate.empty().copyWith(
-            quantity: 2,
+            quantity: 3,
             materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('fake-optional-material2'),
+              materialNumber: MaterialNumber('fake-second-optional-material'),
             ),
             comboDeal: comboDeal,
           ),
@@ -680,7 +1388,7 @@ void main() {
         comboMaterialsSeletedMock = {
           MaterialNumber('fake-material'): false,
           MaterialNumber('fake-optional-material'): false,
-          MaterialNumber('fake-optional-material2'): false,
+          MaterialNumber('fake-second-optional-material'): false,
         };
         when(() => comboDetailMockBloc.state).thenReturn(
           ComboDealMaterialDetailState.initial().copyWith(
@@ -768,11 +1476,92 @@ void main() {
               find.byKey(WidgetKeys.comboRateDiscounted);
           expect(comboRateDiscounted, findsNothing);
 
-          final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
-          expect(nextDealInfo, findsNothing);
-
           final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
           expect(checkoutButton, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Next deal info - Next deal display',
+        (tester) async {
+          comboMaterialsSeletedMock = {
+            MaterialNumber('fake-material'): true,
+            MaterialNumber('fake-optional-material'): true,
+            MaterialNumber('fake-second-optional-material'): false,
+          };
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: comboMaterialsMock,
+              materialCount: comboMaterialsMock.length,
+              selectedItems: comboMaterialsSeletedMock,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final notEligibleMessage =
+              find.byKey(WidgetKeys.comboNotEligibleMessage);
+          expect(notEligibleMessage, findsNothing);
+
+          final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
+          expect(nextDealInfo, findsOneWidget);
+
+          final nextDealIcon = find.byKey(WidgetKeys.comboNextDealIcon);
+          expect(nextDealIcon, findsOneWidget);
+
+          final bestDealIcon = find.byKey(WidgetKeys.comboBestDealIcon);
+          expect(bestDealIcon, findsNothing);
+
+          final nextDealText =
+              find.text('Buy 1 more items to get 20% discount');
+          expect(nextDealText, findsOneWidget);
+
+          final bestDealText = find.text('Yay! You’ve got the best deal.');
+          expect(bestDealText, findsNothing);
+        },
+      );
+
+      testWidgets(
+        'Next deal info - Best deal display',
+        (tester) async {
+          comboMaterialsSeletedMock = {
+            MaterialNumber('fake-material'): true,
+            MaterialNumber('fake-optional-material'): true,
+            MaterialNumber('fake-second-optional-material'): true,
+          };
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: comboMaterialsMock,
+              materialCount: comboMaterialsMock.length,
+              selectedItems: comboMaterialsSeletedMock,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final notEligibleMessage =
+              find.byKey(WidgetKeys.comboNotEligibleMessage);
+          expect(notEligibleMessage, findsNothing);
+
+          final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
+          expect(nextDealInfo, findsOneWidget);
+
+          final nextDealIcon = find.byKey(WidgetKeys.comboNextDealIcon);
+          expect(nextDealIcon, findsNothing);
+
+          final bestDealIcon = find.byKey(WidgetKeys.comboBestDealIcon);
+          expect(bestDealIcon, findsOneWidget);
+
+          final nextDealText =
+              find.text('Buy 1 more items to get 20% discount');
+          expect(nextDealText, findsNothing);
+
+          final bestDealText = find.text('Yay! You’ve got the best deal.');
+          expect(bestDealText, findsOneWidget);
         },
       );
     },
@@ -808,11 +1597,11 @@ void main() {
             ),
             comboDeal: comboDeal,
           ),
-          MaterialNumber('fake-optional-material2'):
+          MaterialNumber('fake-second-optional-material'):
               PriceAggregate.empty().copyWith(
-            quantity: 2,
+            quantity: 4,
             materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('fake-optional-material2'),
+              materialNumber: MaterialNumber('fake-second-optional-material'),
             ),
             comboDeal: comboDeal,
           ),
@@ -820,7 +1609,7 @@ void main() {
 
         comboMaterialsSeletedMock = {
           MaterialNumber('fake-optional-material'): false,
-          MaterialNumber('fake-optional-material2'): false,
+          MaterialNumber('fake-second-optional-material'): false,
         };
         when(() => comboDetailMockBloc.state).thenReturn(
           ComboDealMaterialDetailState.initial().copyWith(
@@ -915,6 +1704,86 @@ void main() {
           expect(checkoutButton, findsOneWidget);
         },
       );
+
+      testWidgets(
+        'Next deal info - Next deal display',
+        (tester) async {
+          comboMaterialsSeletedMock = {
+            MaterialNumber('fake-optional-material'): true,
+            MaterialNumber('fake-second-optional-material'): false,
+          };
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: comboMaterialsMock,
+              materialCount: comboMaterialsMock.length,
+              selectedItems: comboMaterialsSeletedMock,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final notEligibleMessage =
+              find.byKey(WidgetKeys.comboNotEligibleMessage);
+          expect(notEligibleMessage, findsNothing);
+
+          final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
+          expect(nextDealInfo, findsOneWidget);
+
+          final nextDealIcon = find.byKey(WidgetKeys.comboNextDealIcon);
+          expect(nextDealIcon, findsOneWidget);
+
+          final bestDealIcon = find.byKey(WidgetKeys.comboBestDealIcon);
+          expect(bestDealIcon, findsNothing);
+
+          final nextDealText = find.text('Buy 3 more to get 20% discount');
+          expect(nextDealText, findsOneWidget);
+
+          final bestDealText = find.text('Yay! You’ve got the best deal.');
+          expect(bestDealText, findsNothing);
+        },
+      );
+
+      testWidgets(
+        'Next deal info - Best deal display',
+        (tester) async {
+          comboMaterialsSeletedMock = {
+            MaterialNumber('fake-optional-material'): true,
+            MaterialNumber('fake-second-optional-material'): true,
+          };
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: comboMaterialsMock,
+              materialCount: comboMaterialsMock.length,
+              selectedItems: comboMaterialsSeletedMock,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final notEligibleMessage =
+              find.byKey(WidgetKeys.comboNotEligibleMessage);
+          expect(notEligibleMessage, findsNothing);
+
+          final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
+          expect(nextDealInfo, findsOneWidget);
+
+          final nextDealIcon = find.byKey(WidgetKeys.comboNextDealIcon);
+          expect(nextDealIcon, findsNothing);
+
+          final bestDealIcon = find.byKey(WidgetKeys.comboBestDealIcon);
+          expect(bestDealIcon, findsOneWidget);
+
+          final nextDealText = find.text('Buy 3 more to get 20% discount');
+          expect(nextDealText, findsNothing);
+
+          final bestDealText = find.text('Yay! You’ve got the best deal.');
+          expect(bestDealText, findsOneWidget);
+        },
+      );
     },
   );
 
@@ -943,20 +1812,20 @@ void main() {
             price: Price.empty().copyWith(lastPrice: MaterialPrice(18)),
             comboDeal: comboDeal,
           ),
-          MaterialNumber('fake-optional-material2'):
+          MaterialNumber('fake-second-optional-material'):
               PriceAggregate.empty().copyWith(
             quantity: 2,
             materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('fake-optional-material2'),
+              materialNumber: MaterialNumber('fake-second-optional-material'),
             ),
-            price: Price.empty().copyWith(lastPrice: MaterialPrice(10)),
+            price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
             comboDeal: comboDeal,
           ),
         };
 
         comboMaterialsSeletedMock = {
           MaterialNumber('fake-optional-material'): false,
-          MaterialNumber('fake-optional-material2'): false,
+          MaterialNumber('fake-second-optional-material'): false,
         };
         when(() => comboDetailMockBloc.state).thenReturn(
           ComboDealMaterialDetailState.initial().copyWith(
@@ -1018,6 +1887,30 @@ void main() {
 
           final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
           expect(comboMaterialList, findsOneWidget);
+
+          await tester.fling(
+            find.byKey(WidgetKeys.comboMaterialList),
+            const Offset(0.0, -5000.0),
+            800.0,
+          );
+          verify(
+            () => comboDetailMockBloc.add(
+              ComboDealMaterialDetailEvent.loadMoreComboDealPrincipal(
+                comboDeal: comboMaterialsMock.values.first.comboDeal,
+                principles: [
+                  comboMaterialsMock.values
+                          .toList()
+                          .comboMaterialItemList
+                          .firstOrNull
+                          ?.materialInfo
+                          .principalData
+                          .principalCode
+                          .getOrDefaultValue('') ??
+                      ''
+                ],
+              ),
+            ),
+          ).called(1);
         },
       );
 
@@ -1049,6 +1942,86 @@ void main() {
 
           final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
           expect(checkoutButton, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Next deal info - Next deal display',
+        (tester) async {
+          comboMaterialsSeletedMock = {
+            MaterialNumber('fake-optional-material'): true,
+            MaterialNumber('fake-second-optional-material'): false,
+          };
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: comboMaterialsMock,
+              materialCount: comboMaterialsMock.length,
+              selectedItems: comboMaterialsSeletedMock,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final notEligibleMessage =
+              find.byKey(WidgetKeys.comboNotEligibleMessage);
+          expect(notEligibleMessage, findsNothing);
+
+          final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
+          expect(nextDealInfo, findsOneWidget);
+
+          final nextDealIcon = find.byKey(WidgetKeys.comboNextDealIcon);
+          expect(nextDealIcon, findsOneWidget);
+
+          final bestDealIcon = find.byKey(WidgetKeys.comboBestDealIcon);
+          expect(bestDealIcon, findsNothing);
+
+          final nextDealText = find.text('Buy \$88.0 more to get 20% discount');
+          expect(nextDealText, findsOneWidget);
+
+          final bestDealText = find.text('Yay! You’ve got the best deal.');
+          expect(bestDealText, findsNothing);
+        },
+      );
+
+      testWidgets(
+        'Next deal info - Best deal display',
+        (tester) async {
+          comboMaterialsSeletedMock = {
+            MaterialNumber('fake-optional-material'): true,
+            MaterialNumber('fake-second-optional-material'): true,
+          };
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: comboMaterialsMock,
+              materialCount: comboMaterialsMock.length,
+              selectedItems: comboMaterialsSeletedMock,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final notEligibleMessage =
+              find.byKey(WidgetKeys.comboNotEligibleMessage);
+          expect(notEligibleMessage, findsNothing);
+
+          final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
+          expect(nextDealInfo, findsOneWidget);
+
+          final nextDealIcon = find.byKey(WidgetKeys.comboNextDealIcon);
+          expect(nextDealIcon, findsNothing);
+
+          final bestDealIcon = find.byKey(WidgetKeys.comboBestDealIcon);
+          expect(bestDealIcon, findsOneWidget);
+
+          final nextDealText = find.text('Buy \$88.0 more to get 20% discount');
+          expect(nextDealText, findsNothing);
+
+          final bestDealText = find.text('Yay! You’ve got the best deal.');
+          expect(bestDealText, findsOneWidget);
         },
       );
     },

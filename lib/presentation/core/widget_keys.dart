@@ -271,6 +271,16 @@ class WidgetKeys {
   static const Key comboNotEligibleMessage = Key('comboNotEligibleMessage');
   static const Key comboNextDealInfo = Key('comboNextDealInfo');
   static const Key comboRateDiscounted = Key('comboRateDiscounted');
+  static Key comboItemProductTile(String materialNumber) =>
+      Key('comboItemProductTile$materialNumber');
+  static Key comboItemMaterialDetail(String materialNumber) =>
+      Key('comboItemMaterialDetail$materialNumber');
+        static Key comboItemImageDetail(String materialNumber) =>
+      Key('comboItemImageDetail$materialNumber');
+  static Key comboDeteleButton = const Key('comboDeteleButton');
+  static Key comboDeteleConfirmButton = const Key('comboDeteleConfirmButton');
+  static Key comboBestDealIcon = const Key('comboBestDealIcon');
+  static Key comboNextDealIcon = const Key('comboNextDealIcon');
 
   //============================================================
   //  PolicyConfiguration page Keys

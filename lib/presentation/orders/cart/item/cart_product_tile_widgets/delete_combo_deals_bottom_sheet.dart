@@ -71,6 +71,7 @@ class _DeleteComboButtons extends StatelessWidget {
         ),
         Expanded(
           child: ElevatedButton(
+            key: WidgetKeys.comboDeteleConfirmButton,
             style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                   backgroundColor: const MaterialStatePropertyAll(
                     ZPColors.red,

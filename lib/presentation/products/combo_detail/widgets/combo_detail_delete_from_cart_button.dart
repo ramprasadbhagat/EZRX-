@@ -49,6 +49,7 @@ class _ComboDetailDeleteFromCartButton extends StatelessWidget {
         );
       },
       child: IconButton(
+        key: WidgetKeys.comboDeteleButton,
         icon: const Icon(
           Icons.delete_outlined,
           color: ZPColors.red,

@@ -49,13 +49,15 @@ class ComboDetailNextDealInfo extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           _isBestDealAvailable
-              ? const Icon(
+              ? Icon(
                   Icons.thumb_up_alt_outlined,
+                  key: WidgetKeys.comboBestDealIcon,
                   color: ZPColors.bestDiscountTextBg,
                   size: 18,
                 )
-              : const Icon(
+              : Icon(
                   Icons.bolt,
+                  key: WidgetKeys.comboNextDealIcon,
                   color: ZPColors.nextTextBg,
                   size: 18,
                 ),

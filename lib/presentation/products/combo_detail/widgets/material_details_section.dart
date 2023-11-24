@@ -45,6 +45,9 @@ class _MaterialDetailsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
+            key: WidgetKeys.comboItemImageDetail(
+              comboItem.getMaterialNumber.displayMatNo,
+            ),
             onTap: () => _navigateToDetails(context, comboItem.materialInfo),
             child: _MaterialImageSection(
               comboItem: comboItem,
@@ -59,8 +62,8 @@ class _MaterialDetailsSection extends StatelessWidget {
             comboDealMaterial: comboDealMaterial,
             onTapName: () =>
                 _navigateToDetails(context, comboItem.materialInfo),
-            key: WidgetKeys.cartItemProductTile(
-              comboItem.materialInfo.materialNumber.displayMatNo,
+            key: WidgetKeys.comboItemMaterialDetail(
+              comboItem.getMaterialNumber.displayMatNo,
             ),
           ),
         ],

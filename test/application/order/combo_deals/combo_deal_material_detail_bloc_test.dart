@@ -891,4 +891,46 @@ void main() {
       ],
     );
   });
+
+  blocTest(
+    'combo deal material bloc clear selected items',
+    setUp: () {
+      items = {
+        for (final item in productList)
+          item.getMaterialNumber: item.copyWith(
+            salesOrgConfig: fakeSalesOrganisationConfigs,
+            comboDeal: comboDeal,
+          ),
+      };
+      selectionStatus = {
+        for (final item in productList)
+          item.getMaterialNumber: comboDeal
+              .singleDeal(materialNumber: item.getMaterialNumber)
+              .mandatory,
+      };
+    },
+    build: () => ComboDealMaterialDetailBloc(
+      productDetailRepository: productDetailRepository,
+      materialListRepository: materialListRepository,
+      config: config,
+    ),
+    seed: () => initialState.copyWith(
+      items: items,
+    ),
+    act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
+      const ComboDealMaterialDetailEvent.clearSelectedItem(),
+    ),
+    expect: () => [
+      initialState.copyWith(
+        items: {
+          for (final item in productList)
+            item.getMaterialNumber: item.copyWith(
+              salesOrgConfig: fakeSalesOrganisationConfigs,
+              comboDeal: comboDeal,
+            ),
+        },
+        selectedItems: selectionStatus,
+      ),
+    ],
+  );
 }

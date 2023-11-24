@@ -19,8 +19,8 @@ class _ComboProductTile extends StatelessWidget {
     final bloc = context.read<ComboDealMaterialDetailBloc>();
 
     return Padding(
-      key: WidgetKeys.cartItemProductTile(
-        comboItem.materialInfo.materialNumber.getValue(),
+      key: WidgetKeys.comboItemProductTile(
+        comboItem.getMaterialNumber.getValue(),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12).copyWith(bottom: 24),
       child: BlocBuilder<ComboDealMaterialDetailBloc,
