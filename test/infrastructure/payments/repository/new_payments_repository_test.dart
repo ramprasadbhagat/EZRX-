@@ -23,6 +23,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class MockConfig extends Mock implements Config {}
 
 class NewPaymentLocalDataSourceMock extends Mock
@@ -404,7 +407,49 @@ void main() {
       });
 
       //***************************** UAT ***********************
-      test('Fetch outstanding invoices success - Uat ', () async {
+      test(
+          'Fetch outstanding invoices success for ID market when filter by Document date - Uat ',
+          () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => newPaymentRemoteDataSource.getOutstandingInvoices(
+            salesOrg: fakeIDSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            pageSize: pageSize,
+            offset: offset,
+            filterList: [
+              {
+                'field': 'documentDate',
+                'value': '2023-12-01',
+                'type': 'ge',
+              },
+              {
+                'field': 'documentDate',
+                'value': '2023-12-28',
+                'type': 'le',
+              },
+            ],
+          ),
+        ).thenAnswer((invocation) async => customerOpenItemsList);
+
+        final result = await nawPaymentsRepository.getOutstandingInvoices(
+          appliedFilter: OutstandingInvoiceFilter.empty().copyWith(
+            documentDateFrom: DateTimeStringValue('2023-12-01'),
+            documentDateTo: DateTimeStringValue('2023-12-28'),
+          ),
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: offset,
+          pageSize: pageSize,
+          salesOrganisation: fakeIDSalesOrganisation,
+          searchKey: SearchKey(''),
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+      test('Fetch outstanding invoices success for other markets - Uat ',
+          () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => newPaymentRemoteDataSource.getOutstandingInvoices(

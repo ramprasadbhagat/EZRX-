@@ -61,7 +61,7 @@ class NewPaymentRepository extends INewPaymentRepository {
       }
     }
     try {
-      final filterList =
+      var filterList =
           OutstandingInvoiceFilterDto.fromDomain(appliedFilter).toMapList;
 
       if (searchKey.validateNotEmpty) {
@@ -69,6 +69,15 @@ class NewPaymentRepository extends INewPaymentRepository {
         searchMap.putIfAbsent('field', () => 'accountingDocument');
         searchMap.putIfAbsent('value', () => searchKey.searchValueOrEmpty);
         filterList.add(searchMap);
+      }
+      if (salesOrganisation.salesOrg.isID) {
+        filterList = filterList
+            .map(
+              (map) => map['field'] == 'postingDate'
+                  ? {...map, 'field': 'documentDate'}
+                  : map,
+            )
+            .toList();
       }
       final response = await remoteDataSource.getOutstandingInvoices(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
