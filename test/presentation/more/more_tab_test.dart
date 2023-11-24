@@ -31,6 +31,7 @@ import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.
 
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
+import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
@@ -475,6 +476,50 @@ void main() {
           ),
         ).called(1);
         expect(autoRouterMock.current.path, 'notification_settings');
+      },
+    );
+    testWidgets(
+      ' -> Test Service tile buildWhen',
+      (WidgetTester tester) async {
+        final expectedState = [
+          EligibilityState.initial().copyWith(
+            user: fakeClientUser,
+          ),
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeZPAdminUser,
+          ),
+        ];
+        whenListen(eligibilityBlocMock, Stream.fromIterable(expectedState));
+        await getWidget(tester);
+        await tester.pump();
+        final returnsTileFinder = find.byKey(WidgetKeys.returnsTile);
+        expect(returnsTileFinder, findsOneWidget);
+        final paymentsTileFinder = find.byKey(WidgetKeys.paymentsTile);
+        expect(paymentsTileFinder, findsOneWidget);
+      },
+    );
+    testWidgets(
+      ' -> Test Service tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeZPAdminUser,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final eZPointTileFinder = find.byKey(WidgetKeys.eZPointTile);
+        expect(eZPointTileFinder, findsOneWidget);
+        final returnsTileFinder = find.byKey(WidgetKeys.returnsTile);
+        expect(returnsTileFinder, findsOneWidget);
+        final orderTileFinder = find.byKey(WidgetKeys.orderTile);
+        expect(orderTileFinder, findsOneWidget);
+        final paymentsTileFinder = find.byKey(WidgetKeys.paymentsTile);
+        expect(paymentsTileFinder, findsOneWidget);
       },
     );
   });

@@ -145,6 +145,36 @@ void main() {
         findsOneWidget,
       );
     });
+    testWidgets('Proxy Login User Name Field test', (tester) async {
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: User.empty().copyWith(
+            role: Role.empty().copyWith(type: RoleType('zp_admin')),
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final textButtonFinder = find.byKey(WidgetKeys.loginOnBehalfButtonKey);
+      await tester.tap(textButtonFinder);
+      verify(
+        () =>
+            proxyLoginFormBlocMock.add(const ProxyLoginFormEvent.initialized()),
+      ).called(1);
+      await tester.pumpAndSettle();
+      expect(find.byType(LoginOnBehalfSheet), findsOneWidget);
+      final proxyLoginUserNameField =
+          find.byKey(WidgetKeys.proxyLoginUserNameField);
+      expect(find.byKey(WidgetKeys.proxyLoginUserNameField), findsOneWidget);
+      await tester.enterText(proxyLoginUserNameField, 'fake_name');
+      await tester.pump();
+      verify(
+        () => proxyLoginFormBlocMock.add(
+          const ProxyLoginFormEvent.usernameChanged('fake_name'),
+        ),
+      ).called(1);
+    });
 
     testWidgets(
       'Login Validation - Username is empty',

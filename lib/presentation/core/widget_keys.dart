@@ -33,6 +33,7 @@ class WidgetKeys {
   static const Key productDetailList = Key('productDetailList');
   static const Key moreTapListContent = Key('moreTapListContent');
   static const Key settingTile = Key('settingTile');
+  static const Key versionDisplay = Key('versionDisplay');
   static const Key customBadge = Key('customBadge');
   static const Key addressInfoSectionActionLabel =
       Key('addressInfoSectionActionLabel');
@@ -140,10 +141,13 @@ class WidgetKeys {
   static const Key moreScreen = Key('moreScreen');
   static const Key logOutTile = Key('logOutTile');
   static const Key profileTileSection = Key('profileTileSection');
+  static const Key profileTileSectionCustomerInformation =
+      Key('profileTileSectionCustomerInformation');
   static const Key profileTile = Key('profileTile');
   static const Key paymentsTile = Key('paymentsTile');
   static const Key eZPointTile = Key('eZPointTile');
   static const Key returnsTile = Key('returnsTile');
+  static const Key orderTile = Key('orderTile');
   static const Key securityTile = Key('securityTile');
   static const Key notificationTile = Key('notificationTile');
   static const Key contactUsTile = Key('contactUsTile');

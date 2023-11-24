@@ -61,6 +61,7 @@ class ProfileTile extends StatelessWidget {
               }
 
               return RichText(
+                key: WidgetKeys.profileTileSectionCustomerInformation,
                 text: TextSpan(
                   text: customerCodeInfo.customerCodeSoldTo,
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(

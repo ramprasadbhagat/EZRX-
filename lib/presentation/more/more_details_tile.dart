@@ -109,6 +109,7 @@ class MoreDetailsTile {
       );
 
   factory MoreDetailsTile.orderTab(BuildContext context) => MoreDetailsTile(
+        key: WidgetKeys.orderTile,
         icon: const Icon(
           Icons.receipt_long_outlined,
           color: ZPColors.greenIconColor,

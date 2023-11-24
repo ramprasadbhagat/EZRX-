@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -102,3 +103,7 @@ final fakeZPAdminUser = User.empty().copyWith(
 );
 final fakeUserWithBonusOverride =
     User.empty().copyWith(hasBonusOverride: false);
+final fakeUserWithName = User.empty().copyWith(
+  id: 'testId',
+  fullName: const FullName(firstName: 'test', lastName: 'test'),
+);
