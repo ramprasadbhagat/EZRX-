@@ -858,7 +858,7 @@ class CreatePaymentInvoicePdf {
 
     pdf.addPage(
       pw.Page(
-        pageFormat: PdfPageFormat.a4.copyWith(height: 922),
+        pageFormat: PdfPageFormat.a4.copyWith(height: double.infinity),
         margin: const pw.EdgeInsets.all(16.0),
         build: (context) {
           return pw.Column(
@@ -897,7 +897,7 @@ class CreatePaymentInvoicePdf {
                 paymentItems: paymentInvoiceInfoPdf.paymentItems,
                 salesOrganisation: salesOrganisation,
               ),
-              pw.Spacer(),
+              pw.SizedBox(height: 60),
               description,
               _footerInvoice(footer: paymentInvoiceInfoPdf.footer),
             ],
