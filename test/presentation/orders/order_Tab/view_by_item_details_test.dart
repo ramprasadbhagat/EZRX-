@@ -1185,5 +1185,22 @@ void main() {
           find.textContaining('Attachments downloaded successfully.');
       expect(successMsg, findsNothing);
     });
+
+    testWidgets('When contact person is empty - NA should display',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableMobileNumber: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.balanceTextRow('Contact person', 'NA')),
+        findsOneWidget,
+      );
+    });
   });
 }

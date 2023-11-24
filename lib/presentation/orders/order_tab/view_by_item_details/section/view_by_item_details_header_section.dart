@@ -101,7 +101,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                   ? BalanceTextRow(
                       key: WidgetKeys.viewByItemsOrderDetailsContactPerson,
                       keyText: context.tr('Contact person'),
-                      valueText: orderHistoryItem.orderBy,
+                      valueText: orderHistoryItem.orderBy.displayNAIfEmpty,
                       keyTextStyle:
                           Theme.of(context).textTheme.titleSmall?.copyWith(
                                 color: ZPColors.white,

@@ -69,7 +69,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       createdDate: orderHistoryItem.createdDate.dateString,
       tax: orderHistoryItem.tax,
       batch: orderHistoryItem.batch.getOrCrash(),
-      orderBy: orderHistoryItem.orderBy,
+      orderBy: orderHistoryItem.orderBy.getOrDefaultValue(''),
       orderType: orderHistoryItem.orderType.getOrCrash(),
       isBonusMaterial: orderHistoryItem.isBonusMaterial,
       telephoneNumber: orderHistoryItem.telephoneNumber.displayTelephoneNumber,
@@ -106,7 +106,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       createdDate: DateTimeStringValue(createdDate),
       tax: tax,
       batch: StringValue(batch),
-      orderBy: orderBy,
+      orderBy: StringValue(orderBy),
       orderType: DocumentType(orderType),
       expiryDate: DateTimeStringValue(expiryDate),
       invoiceData: InvoiceData.empty()

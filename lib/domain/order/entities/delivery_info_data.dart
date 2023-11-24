@@ -30,7 +30,7 @@ class DeliveryInfoData with _$DeliveryInfoData {
         orderHistoryDetails.pOReference.displayPOReference,
       ),
       contactPerson: ContactPerson(
-        orderHistoryDetails.orderBy,
+        orderHistoryDetails.orderBy.getOrDefaultValue(''),
       ),
       mobileNumber: MobileNumber(
         orderHistoryDetails.telephoneNumber.getOrDefaultValue(''),

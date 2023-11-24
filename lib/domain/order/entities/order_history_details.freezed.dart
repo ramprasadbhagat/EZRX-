@@ -29,7 +29,7 @@ mixin _$OrderHistoryDetails {
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get eZRXNumber => throw _privateConstructorUsedError;
-  String get orderBy => throw _privateConstructorUsedError;
+  StringValue get orderBy => throw _privateConstructorUsedError;
   String get referenceNotes => throw _privateConstructorUsedError;
   OrderNumber get orderNumber =>
       throw _privateConstructorUsedError; //used for orderHistory api in view vy order section
@@ -75,7 +75,7 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       PhoneNumber telephoneNumber,
       DateTimeStringValue createdDate,
       String eZRXNumber,
-      String orderBy,
+      StringValue orderBy,
       String referenceNotes,
       OrderNumber orderNumber,
       String soldTo,
@@ -190,7 +190,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
       orderBy: null == orderBy
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       referenceNotes: null == referenceNotes
           ? _value.referenceNotes
           : referenceNotes // ignore: cast_nullable_to_non_nullable
@@ -288,7 +288,7 @@ abstract class _$$_OrderHistoryDetailsCopyWith<$Res>
       PhoneNumber telephoneNumber,
       DateTimeStringValue createdDate,
       String eZRXNumber,
-      String orderBy,
+      StringValue orderBy,
       String referenceNotes,
       OrderNumber orderNumber,
       String soldTo,
@@ -402,7 +402,7 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
       orderBy: null == orderBy
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       referenceNotes: null == referenceNotes
           ? _value.referenceNotes
           : referenceNotes // ignore: cast_nullable_to_non_nullable
@@ -530,7 +530,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   @override
   final String eZRXNumber;
   @override
-  final String orderBy;
+  final StringValue orderBy;
   @override
   final String referenceNotes;
   @override
@@ -701,7 +701,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
       required final PhoneNumber telephoneNumber,
       required final DateTimeStringValue createdDate,
       required final String eZRXNumber,
-      required final String orderBy,
+      required final StringValue orderBy,
       required final String referenceNotes,
       required final OrderNumber orderNumber,
       required final String soldTo,
@@ -747,7 +747,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   @override
   String get eZRXNumber;
   @override
-  String get orderBy;
+  StringValue get orderBy;
   @override
   String get referenceNotes;
   @override

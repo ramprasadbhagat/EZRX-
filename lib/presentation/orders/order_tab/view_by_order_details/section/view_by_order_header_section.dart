@@ -117,7 +117,7 @@ class OrderHeaderSection extends StatelessWidget {
               if (eligibilityState.salesOrgConfigs.enableMobileNumber) ...[
                 BalanceTextRow(
                   keyText: context.tr('Contact person'),
-                  valueText: orderDetails.orderBy,
+                  valueText: orderDetails.orderBy.displayNAIfEmpty,
                   keyTextStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.white,

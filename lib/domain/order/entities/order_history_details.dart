@@ -29,7 +29,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     required PhoneNumber telephoneNumber,
     required DateTimeStringValue createdDate,
     required String eZRXNumber,
-    required String orderBy,
+    required StringValue orderBy,
     required String referenceNotes,
     required OrderNumber
         orderNumber, //used for orderHistory api in view vy order section
@@ -60,7 +60,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         orderValue: 0.0,
         createdDate: DateTimeStringValue(''),
         eZRXNumber: '',
-        orderBy: '',
+        orderBy: StringValue(''),
         referenceNotes: '',
         companyName: CompanyName(''),
         orderNumber: OrderNumber(''),

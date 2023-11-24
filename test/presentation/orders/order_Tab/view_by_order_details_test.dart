@@ -602,7 +602,8 @@ void main() {
       expect(
         find.descendant(
           of: find.byType(BalanceTextRow),
-          matching: find.textContaining('Contact person'),
+          matching:
+              find.byKey(WidgetKeys.balanceTextRow('Contact person', 'NA')),
         ),
         findsOneWidget,
       );
