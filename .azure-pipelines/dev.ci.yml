@@ -64,6 +64,11 @@ jobs:
     displayName: Test infrastructure -> returns
     steps:
       - bash: flutter375 test test/infrastructure/returns
+  - job: TestInfrastructureChatbot
+    pool: devops-flutter
+    displayName: Test infrastructure -> chatbot
+    steps:
+      - bash: flutter375 test test/infrastructure/chatbot
   - job: TestPresentationAccount
     pool: devops-flutter
     displayName: Test presentation -> account
