@@ -904,6 +904,8 @@ void main() {
                   materialInfo: MaterialInfo.empty().copyWith(
                     materialNumber: MaterialNumber('123456789'),
                     quantity: MaterialQty(1),
+                    taxClassification:
+                        MaterialTaxClassification('Product : Full Tax'),
                   ),
                   price: Price.empty().copyWith(
                     finalPrice: MaterialPrice(234.50),
@@ -934,6 +936,7 @@ void main() {
             displayItemTaxBreakdown: true,
             vatValue: 5,
             currency: Currency('vnd'),
+            salesOrg: fakeVNSalesOrg,
           );
           final salesOrgState = SalesOrgState.initial().copyWith(
             salesOrganisation: SalesOrganisation.empty().copyWith(

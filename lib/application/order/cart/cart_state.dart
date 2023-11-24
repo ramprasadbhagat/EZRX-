@@ -159,7 +159,8 @@ class CartState with _$CartState {
             (item) =>
                 !item.materialInfo.hidePrice &&
                 !item.materialInfo.type.typeBundle &&
-                !item.materialInfo.type.typeCombo,
+                !item.materialInfo.type.typeCombo &&
+                item.materialInfo.taxClassification.isFullTax,
           )
           .fold<double>(
             0,
@@ -386,7 +387,7 @@ class CartState with _$CartState {
     if (_isID) {
       return salesOrganisation.salesOrg.orderTaxValue.toDouble();
     }
-    if (!config.currency.isVN) {
+    if (!config.salesOrg.isVN) {
       return config.vatValue.toDouble();
     }
 

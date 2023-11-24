@@ -28,6 +28,8 @@ import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 void main() {
   final emptyPrice = Price.empty();
   final emptyMaterialInfo = MaterialInfo.empty();
@@ -1540,6 +1542,122 @@ void main() {
         expect(
           customPriceAggregate.isBundleMinimumQuantitySatisfies,
           false,
+        );
+      },
+    );
+
+    test(
+      'PriceAggregate itemTaxPercent displayItemTaxBreakdown is not active',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            principalData: PrincipalData.empty().copyWith(
+              principalCode: PrincipalCode('100822'),
+            ),
+            tax: 5.0,
+          ),
+          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+            displayItemTaxBreakdown: false,
+            vatValue: 10,
+          ),
+        );
+        expect(
+          customPriceAggregate.itemTaxPercent,
+          0.0,
+        );
+      },
+    );
+
+    test(
+      'PriceAggregate itemTaxPercent material tax Classification full tax not applied',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            principalData: PrincipalData.empty().copyWith(
+              principalCode: PrincipalCode('100822'),
+            ),
+            tax: 5.0,
+          ),
+          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+            displayItemTaxBreakdown: true,
+            vatValue: 10,
+          ),
+        );
+        expect(
+          customPriceAggregate.itemTaxPercent,
+          0.0,
+        );
+      },
+    );
+
+    test(
+      'PriceAggregate itemTaxPercent material tax Classification full material level tax applied of vn',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            principalData: PrincipalData.empty().copyWith(
+              principalCode: PrincipalCode('100822'),
+            ),
+            tax: 5.0,
+            taxClassification: MaterialTaxClassification('Product : Full Tax'),
+          ),
+          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+            displayItemTaxBreakdown: true,
+            vatValue: 10,
+            salesOrg: fakeVNSalesOrg,
+          ),
+        );
+        expect(
+          customPriceAggregate.itemTaxPercent,
+          5.0,
+        );
+      },
+    );
+
+    test(
+      'PriceAggregate itemTaxPercent material tax Classification full material level tax applied of ID',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            principalData: PrincipalData.empty().copyWith(
+              principalCode: PrincipalCode('100822'),
+            ),
+            tax: 5.0,
+            taxClassification: MaterialTaxClassification('Product : Full Tax'),
+          ),
+          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+            displayItemTaxBreakdown: true,
+            vatValue: 10,
+            salesOrg: fakeIDSalesOrg,
+          ),
+        );
+        expect(
+          customPriceAggregate.itemTaxPercent,
+          11.0,
+        );
+      },
+    );
+
+    test(
+      'PriceAggregate itemTaxPercent material tax Classification full sales org level config tax applied for other then vn market',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            principalData: PrincipalData.empty().copyWith(
+              principalCode: PrincipalCode('100822'),
+            ),
+            tax: 5.0,
+            taxClassification: MaterialTaxClassification('Product : Full Tax'),
+          ),
+          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+            displayItemTaxBreakdown: true,
+            vatValue: 10,
+            currency: Currency('php'),
+          ),
+        );
+        expect(
+          customPriceAggregate.itemTaxPercent,
+          10.0,
         );
       },
     );

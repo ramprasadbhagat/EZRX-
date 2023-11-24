@@ -64,13 +64,22 @@ class ComboMaterialItem with _$ComboMaterialItem {
   bool get showTaxBreakDown =>
       salesOrgConfig.displayItemTaxBreakdown && !materialInfo.hidePrice;
 
-  double get itemTaxPercent => salesOrgConfig.displayItemTaxBreakdown
-      ? materialInfo.taxClassification.isFullTax
-          ? salesOrgConfig.isMarketEligibleForTaxClassification
-              ? materialInfo.tax
-              : salesOrgConfig.vatValue.toDouble()
-          : 0.0
-      : 0.0;
+  double get itemTaxPercent {
+    if (!salesOrgConfig.displayItemTaxBreakdown ||
+        !materialInfo.taxClassification.isFullTax) {
+      return 0.0;
+    }
+    final salesOrg = salesOrgConfig.salesOrg;
+
+    if (salesOrg.isID) {
+      return salesOrg.orderTaxValue.toDouble();
+    }
+    if (salesOrg.isVN) {
+      return materialInfo.tax;
+    }
+
+    return salesOrgConfig.vatValue.toDouble();
+  }
 
   String get itemTaxPercentPadded =>
       itemTaxPercent.toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '');

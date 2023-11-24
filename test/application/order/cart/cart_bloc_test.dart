@@ -3109,6 +3109,108 @@ void main() {
       );
 
       test(
+        'Testing CartBloc state taxMaterial full tax applied of non vn market',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: prices.first,
+                materialInfo: priceAggregates.first.materialInfo.copyWith(
+                  taxClassification:
+                      MaterialTaxClassification('Product : Full Tax'),
+                  tax: 1,
+                ),
+              )
+            ],
+            config: fakeSalesOrganisationConfigs.copyWith(
+              displaySubtotalTaxBreakdown: true,
+              vatValue: 10,
+            ),
+          );
+          expect(
+            cartBlocState.taxMaterial,
+            27.36,
+          );
+        },
+      );
+
+      test(
+        'Testing CartBloc state taxMaterial full tax applied of vn market',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: prices.first,
+                materialInfo: priceAggregates.first.materialInfo.copyWith(
+                  taxClassification:
+                      MaterialTaxClassification('Product : Full Tax'),
+                  tax: 1,
+                ),
+              )
+            ],
+            config: fakeSalesOrganisationConfigs.copyWith(
+              displaySubtotalTaxBreakdown: true,
+              vatValue: 10,
+              salesOrg: fakeVNSalesOrg,
+            ),
+          );
+          expect(
+            cartBlocState.taxMaterial,
+            2.736,
+          );
+        },
+      );
+
+      test(
+        'Testing CartBloc state taxMaterial full tax Exempt',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: prices.first,
+                materialInfo: priceAggregates.first.materialInfo.copyWith(
+                  tax: 1,
+                ),
+              )
+            ],
+            config: fakeSalesOrganisationConfigs.copyWith(
+              displaySubtotalTaxBreakdown: true,
+              vatValue: 10,
+            ),
+          );
+          expect(
+            cartBlocState.taxMaterial,
+            0.0,
+          );
+        },
+      );
+
+      test(
+        'Testing CartBloc state taxMaterial full tax Exempt for vn market',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: prices.first,
+                materialInfo: priceAggregates.first.materialInfo.copyWith(
+                  tax: 1,
+                ),
+              )
+            ],
+            config: fakeSalesOrganisationConfigs.copyWith(
+              displaySubtotalTaxBreakdown: true,
+              vatValue: 10,
+              currency: Currency('vnd'),
+            ),
+          );
+          expect(
+            cartBlocState.taxMaterial,
+            0.0,
+          );
+        },
+      );
+
+      test(
         'Testing CartBloc state taxBundle',
         () {
           final cartBlocState = CartState.initial().copyWith(

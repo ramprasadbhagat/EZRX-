@@ -228,9 +228,6 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         orElse: () => SalesOrganisationConfigsPrincipal.empty(),
       );
 
-  bool get isMarketEligibleForTaxClassification =>
-      currency.isVN || currency.isMM || currency.isKH || currency.isTH;
-
   DateTime get deliveryStartDate {
     final currentTime = DateTime.now();
 
