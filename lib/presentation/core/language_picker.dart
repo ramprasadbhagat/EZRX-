@@ -11,14 +11,12 @@ extension LocaleExtension on Locale {
         return 'ภาษาไทย';
       case 'zh':
         return '繁體中文';
-      case 'my':
+      case 'mm':
         return 'ဗမာဘာသာစကား';
       case 'vn':
         return 'Tiếng Việt';
       case 'kh':
         return 'ភាសាខ្មែរ';
-      case 'mm':
-        return 'Burmese';
       case 'id':
         return 'Bahasa Indonesia';
       default:

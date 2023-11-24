@@ -28,7 +28,7 @@ class LanguageCode {
   static const String english = 'en';
   static const String thai = 'th';
   static const String mandarin = 'zh';
-  static const String burmese = 'mm';
+  static const String burmese = 'my';
   static const String vietnamese = 'vi';
   static const String khmer = 'km';
   static const String indonesian = 'id';
