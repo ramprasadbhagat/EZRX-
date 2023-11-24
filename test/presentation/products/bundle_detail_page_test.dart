@@ -316,6 +316,44 @@ void main() {
           findsOneWidget,
         );
       });
+
+      testWidgets('display material Name with respect to Material Number',
+          (tester) async {
+        when(() => mockProductImageBloc.state).thenReturn(
+          ProductImageState.initial().copyWith(
+            productImageMap: <MaterialNumber, ProductImages>{
+              for (var material in bundle.bundle.materials)
+                material.materialNumber: ProductImages.empty()
+                    .copyWith(materialNumber: material.materialNumber)
+            },
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: bundle,
+            ),
+            selectedImageIndex: 0,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(bundleImage, findsOneWidget);
+        expect(bundleDetailsCarousel, findsOneWidget);
+        expect(materialDetailsImageCounterFinder, findsOneWidget);
+        final carouselImageKeyFinder1 =
+            find.byKey(const ValueKey('selectedbundle-material-1true'));
+        expect(carouselImageKeyFinder1, findsOneWidget);
+        expect(
+          find.byKey(
+            WidgetKeys.bundleMaterialItemDescription(
+              bundle.bundle.materials.first.displayDescription,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+    
     },
   );
 }

@@ -50,15 +50,20 @@ class _BundleImageSection extends StatelessWidget {
                           children: [
                             _OutlineText(
                               selectedMaterial.materialNumber.displayMatNo,
+                              key: WidgetKeys.bundleMaterialItem(
+                                selectedMaterial.materialNumber.displayMatNo,
+                              ),
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall
                                   ?.copyWith(color: ZPColors.darkGray),
                             ),
                             _OutlineText(
-                              state.productDetailAggregate.materialInfo
-                                  .manufactured,
+                              selectedMaterial.displayDescription,
                               style: Theme.of(context).textTheme.labelSmall,
+                              key: WidgetKeys.bundleMaterialItemDescription(
+                                selectedMaterial.displayDescription,
+                              ),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),

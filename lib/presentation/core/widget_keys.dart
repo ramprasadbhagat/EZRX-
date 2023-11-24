@@ -685,6 +685,8 @@ class WidgetKeys {
   static const Key bundleInformation = Key('bundleInformation');
   static const Key bundleOfferSummary = Key('bundleOfferSummary');
   static const Key bundleOfferPrice = Key('bundleOfferPrice');
+  static Key bundleMaterialItemDescription(String materialDescription) =>
+      Key('bundleMaterialItemDescription$materialDescription');
 
   //============================================================
   //  Orders
