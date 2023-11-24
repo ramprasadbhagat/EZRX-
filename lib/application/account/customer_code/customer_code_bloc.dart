@@ -126,9 +126,15 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         return;
       }
 
+      // Using the last saved shippingAddress to fetch current customerInformation
+      // as we do not receive all the shipToCodes associated with a customerCode
+      // at once. Necessary because when using the last saved customerCode,
+      // If the required shipToCode is on a paginated page beyond the first,
+      // the default behavior sets the first shipToCode as the shippingAddress.
+
       final failureOrSuccess = await customerCodeRepository.getCustomerCode(
         salesOrganisation: state.selectedSalesOrg,
-        customerCodes: [lastSavedCustomerInfo.customerCode],
+        customerCodes: [lastSavedCustomerInfo.shippingAddress],
         hideCustomer: state.hideCustomer,
         user: state.userInfo,
         pageSize: config.pageSize,
@@ -165,8 +171,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           isFetching: false,
           isSearchActive: true,
           canLoadMore: customerCodeInfoList.length >= config.pageSize,
-          searchKey:
-              SearchKey.search(customerCodeInfoList.first.customerCodeSoldTo),
+          searchKey: SearchKey.search(lastSavedCustomerInfo.shippingAddress),
           customerCodeInfo: customerCodeInfoList.first,
           shipToInfo: shipToInfo == ShipToInfo.empty()
               ? customerCodeInfoList.first.shipToInfos.first

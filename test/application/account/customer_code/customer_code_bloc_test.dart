@@ -792,7 +792,7 @@ void main() {
         when(
           () => customerCodeMockRepo.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: ['mockCustomerCode'],
+            customerCodes: ['mockShippingAddress'],
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -834,9 +834,7 @@ void main() {
           isFetching: false,
           canLoadMore: false,
           customerCodeList: [customerMockData.first],
-          searchKey: SearchKey(
-            customerMockData.first.customerCodeSoldTo,
-          ),
+          searchKey: SearchKey('mockShippingAddress'),
           shipToInfo: customerMockData.first.shipToInfos.first,
         ),
       ],
@@ -984,7 +982,7 @@ void main() {
         when(
           () => customerCodeMockRepo.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: ['mockCustomerCode'],
+            customerCodes: ['mockShippingAddress'],
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -1015,9 +1013,7 @@ void main() {
           isFetching: false,
           canLoadMore: false,
           customerCodeList: [customerMockData.first],
-          searchKey: SearchKey(
-            customerMockData.first.customerCodeSoldTo,
-          ),
+          searchKey: SearchKey('mockShippingAddress'),
           shipToInfo: customerMockData.first.shipToInfos.first,
         ),
       ],
