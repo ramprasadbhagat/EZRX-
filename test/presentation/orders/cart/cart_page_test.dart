@@ -2308,7 +2308,6 @@ void main() {
         );
       });
 
-
       testWidgets(
           'Test invalid banner when cart consist combo suspended and disable combo deal on saleorg',
           (tester) async {
@@ -2376,22 +2375,116 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.upsertCartItemsWithComboOffers(
-              priceAggregates: cartComboItem.convertComboItemToPriceAggregateList
-                  .map(
-                    (priceAggregate) => priceAggregate.copyWith(
-                      quantity: 0,
-                      price: priceAggregate.price.copyWith(
-                        comboDeal: priceAggregate.price.comboDeal
-                            .copyWith(isEligible: false),
-                      ),
-                    ),
-                  )
-                  .toList(),
+              priceAggregates:
+                  cartComboItem.convertComboItemToPriceAggregateList
+                      .map(
+                        (priceAggregate) => priceAggregate.copyWith(
+                          quantity: 0,
+                          price: priceAggregate.price.copyWith(
+                            comboDeal: priceAggregate.price.comboDeal
+                                .copyWith(isEligible: false),
+                          ),
+                        ),
+                      )
+                      .toList(),
               isDeleteCombo: true,
             ),
           ),
         ).called(1);
       });
+
+      testWidgets(
+        '=> test Pre Order Modal Bottom section Cancel Button',
+        (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                    quantity: MaterialQty(1),
+                    tax: 10,
+                    type: MaterialInfoType.material(),
+                  ),
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(234.50),
+                  ),
+                  salesOrgConfig: fakeMYSalesOrgConfigWithOOSPreOrder,
+                ),
+              ],
+            ),
+          );
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeSalesOrgConfigWithOOSPreOrderValue,
+            ),
+          );
+          when(() => salesOrgBloc.state).thenReturn(
+            SalesOrgState.initial().copyWith(
+              configs: fakeSalesOrgConfigWithOOSPreOrderValue,
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+
+          await tester.pump();
+          expect(find.byType(StatusLabel), findsOneWidget);
+          expect(find.byKey(WidgetKeys.checkoutButton), findsOneWidget);
+          await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+          await tester.pump();
+          expect(find.byKey(WidgetKeys.preOrderModel), findsOneWidget);
+          final preOrderModalCancelButton =
+              find.byKey(WidgetKeys.preOrderModalCancelButton);
+          expect(preOrderModalCancelButton, findsOneWidget);
+          await tester.tap(preOrderModalCancelButton);
+          await tester.pumpAndSettle();
+        },
+      );
+      testWidgets(
+        '=> test Pre Order Modal Bottom section Continue Button',
+        (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                    quantity: MaterialQty(1),
+                    tax: 10,
+                    type: MaterialInfoType.material(),
+                  ),
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(234.50),
+                  ),
+                  salesOrgConfig: fakeMYSalesOrgConfigWithOOSPreOrder,
+                ),
+              ],
+            ),
+          );
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeSalesOrgConfigWithOOSPreOrderValue,
+            ),
+          );
+          when(() => salesOrgBloc.state).thenReturn(
+            SalesOrgState.initial().copyWith(
+              configs: fakeSalesOrgConfigWithOOSPreOrderValue,
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+
+          await tester.pump();
+          expect(find.byType(StatusLabel), findsOneWidget);
+          expect(find.byKey(WidgetKeys.checkoutButton), findsOneWidget);
+          await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+          await tester.pump();
+          expect(find.byKey(WidgetKeys.preOrderModel), findsOneWidget);
+          final preOrderModalContinueButton =
+              find.byKey(WidgetKeys.preOrderModalContinueButton);
+          expect(preOrderModalContinueButton, findsOneWidget);
+          await tester.tap(preOrderModalContinueButton);
+          await tester.pumpAndSettle();
+        },
+      );
     },
   );
 }

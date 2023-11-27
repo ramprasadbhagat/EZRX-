@@ -216,3 +216,15 @@ final fakeSGSalesOrgConfigForBundle = SalesOrganisationConfigs.empty().copyWith(
 );
 final fakeSGSalesOrgConfigPriceOverride =
     SalesOrganisationConfigs.empty().copyWith(priceOverride: true);
+
+final fakeMYSalesOrgConfigWithOOSPreOrder =
+    SalesOrganisationConfigs.empty().copyWith(
+  addOosMaterials: OosMaterial(true),
+  displayItemTaxBreakdown: true,
+  salesOrg: fakeMYSalesOrg,
+);
+final fakeSalesOrgConfigWithOOSPreOrderValue =
+    SalesOrganisationConfigs.empty().copyWith(
+  addOosMaterials: OosMaterial(true),
+  oosValue: OosValue(1),
+);

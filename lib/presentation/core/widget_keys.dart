@@ -503,6 +503,11 @@ class WidgetKeys {
   static const Key counterOfferPriceButtonKey =
       Key('counterOfferPriceButtonKey');
   static const Key preOrderModel = Key('preOrderModel');
+  static const Key preOrderModalItemList = Key('preOrderModalItemList');
+  static const Key preOrderModalItemFinalPrice =
+      Key('preOrderModalItemFinalPrice');
+  static const Key preOrderModalItemTotalPrice =
+      Key('preOrderModalItemTotalPrice');
   static Key preOrderMaterial(String materialNumber) =>
       Key('preOrderMaterial$materialNumber');
   static const Key preOrderMaterialQty = Key('preOrderMaterialQty');

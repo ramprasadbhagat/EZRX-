@@ -10,6 +10,7 @@ class _PriceSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         PriceComponent(
+          key: WidgetKeys.preOrderModalItemTotalPrice,
           salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
           price: cartProduct.finalPriceTotalForAllMaterial,
         ),
