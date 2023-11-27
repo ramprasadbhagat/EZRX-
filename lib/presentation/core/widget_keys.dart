@@ -1193,6 +1193,7 @@ class WidgetKeys {
   //============================================================
   static Key viewByOrdersTabKey = const Key('view by orders');
   static Key viewByOrdersGroupKey = const Key('viewByOrdersGroupKey');
+  static Key viewByOrdersGroupList = const Key('viewByOrdersGroupList');
   static Key viewByOrdersItemKey = const Key('viewByOrdersItemKey');
   static Key viewByOrdersCodeLabelKey = const Key('viewByOrdersCodeLabelKey');
   static Key viewByOrdersQtyLabelKey = const Key('viewByOrdersItemQtyLabelKey');
