@@ -21,7 +21,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -33,17 +32,22 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_t
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/material_tax.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_material.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -52,7 +56,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
@@ -107,9 +113,9 @@ class MockMixpanelService extends Mock implements MixpanelService {}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  final mockViewByOrderBloc = ViewByOrderBlocMock();
+  final viewByOrderBlocMock = ViewByOrderBlocMock();
   final mockViewByItemDetailsBloc = ViewByItemDetailsBlocMock();
-  final mockViewByOrderDetailsBloc = ViewByOrderDetailsBlockMock();
+  final viewByOrderDetailsBlocMock = ViewByOrderDetailsBlockMock();
   final mockSalesOrgBloc = SalesOrgMockBloc();
   final userBlocMock = UserMockBloc();
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
@@ -122,19 +128,10 @@ void main() {
   late ProductImageBloc mockProductImageBloc;
   late PoAttachmentBloc mockPoAttachmentBloc;
   late List<CustomerCodeInfo> customerCodeInfoList;
-  final fakeOrderHistoryDetailsOrderItem =
-      OrderHistoryDetailsOrderItem.empty().copyWith(
-    expiryDate: DateTimeStringValue('2023-10-04'),
-    batch: StringValue('fake-batch-number'),
-  );
-
-  final fakeUser = User.empty().copyWith(
-    username: Username('fake-user'),
-    role: Role.empty().copyWith(
-      type: RoleType('client'),
-    ),
-    enableOrderType: true,
-  );
+  late ViewByOrder viewByOrder;
+  late ViewByOrder viewByOrderWithCounterOffer;
+  late ViewByOrder viewByOrderWithTax;
+  late OrderHistoryDetailsOrderItem fakeOrderHistoryItem;
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
@@ -148,6 +145,34 @@ void main() {
     customerCodeInfoList =
         await CustomerCodeLocalDataSource().getCustomerCodeList();
     locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
+    viewByOrder = await ViewByOrderLocalDataSource().getViewByOrders();
+    fakeOrderHistoryItem =
+        viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first;
+    viewByOrderWithCounterOffer = viewByOrder.copyWith(
+      orderHeaders: [
+        viewByOrder.orderHeaders.first.copyWith(
+          orderHistoryDetailsOrderItem: [
+            fakeOrderHistoryItem.copyWith(
+              isCounterOffer: true,
+              originPrice: ZpPrice('100.1'),
+              unitPrice: ZpPrice('98'),
+            )
+          ],
+        ),
+      ],
+    );
+    viewByOrderWithTax = viewByOrderWithCounterOffer.copyWith(
+      orderHeaders: [
+        viewByOrder.orderHeaders.first.copyWith(
+          orderHistoryDetailsOrderItem: [
+            fakeOrderHistoryItem.copyWith(
+              tax: 9,
+              totalPrice: TotalPrice('345.6'),
+            )
+          ],
+        ),
+      ],
+    );
   });
   group('Order History Details Page', () {
     setUp(() {
@@ -161,16 +186,16 @@ void main() {
 
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
-          user: fakeUser,
+          user: fakeClientUser,
         ),
       );
-      when(() => mockViewByOrderBloc.state)
+      when(() => viewByOrderBlocMock.state)
           .thenReturn(ViewByOrderState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
-      when(() => mockViewByOrderDetailsBloc.state)
+      when(() => viewByOrderDetailsBlocMock.state)
           .thenReturn(ViewByOrderDetailsState.initial());
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
@@ -237,7 +262,7 @@ void main() {
             create: (context) => announcementBlocMock,
           ),
           BlocProvider<ViewByOrderBloc>(
-            create: (context) => mockViewByOrderBloc,
+            create: (context) => viewByOrderBlocMock,
           ),
           BlocProvider<ViewByItemDetailsBloc>(
             create: (context) => mockViewByItemDetailsBloc,
@@ -246,7 +271,7 @@ void main() {
             create: (context) => customerCodeBlocMock,
           ),
           BlocProvider<ViewByOrderDetailsBloc>(
-            create: (context) => mockViewByOrderDetailsBloc,
+            create: (context) => viewByOrderDetailsBlocMock,
           ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<EligibilityBloc>(
@@ -272,7 +297,7 @@ void main() {
     }
 
     testWidgets('Payment Term if empty', (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -294,7 +319,7 @@ void main() {
     });
 
     testWidgets('loaderImage  test ', (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: true,
         ),
@@ -313,7 +338,7 @@ void main() {
     });
 
     testWidgets('test when disablePaymentTermsDisplay enabled', (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
         ),
@@ -347,7 +372,7 @@ void main() {
     });
 
     testWidgets('test PaymentTermsDisplay for rootadminUser', (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
         ),
@@ -392,7 +417,7 @@ void main() {
 
     testWidgets('test when disablePaymentTermsDisplay disabled',
         (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
         ),
@@ -420,7 +445,7 @@ void main() {
     });
 
     testWidgets('test when enableSpecialInstructions is false', (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
         ),
@@ -465,7 +490,7 @@ void main() {
       });
 
       testWidgets('Collapsed state', (tester) async {
-        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        when(() => viewByOrderDetailsBlocMock.state).thenReturn(
           ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
                 orderHistoryDetailsPoDocuments: attachmentList,
               ),
@@ -480,13 +505,13 @@ void main() {
         await tester.tap(showMoreButton);
         await tester.pump();
         verify(
-          () => mockViewByOrderDetailsBloc
+          () => viewByOrderDetailsBlocMock
               .add(const ViewByOrderDetailsEvent.expandAttachments()),
         ).called(1);
       });
 
       testWidgets('Expanded state', (tester) async {
-        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        when(() => viewByOrderDetailsBlocMock.state).thenReturn(
           ViewByOrderDetailsState.initial().copyWith(
             orderHistoryDetails: OrderHistoryDetails.empty()
                 .copyWith(orderHistoryDetailsPoDocuments: attachmentList),
@@ -514,7 +539,7 @@ void main() {
       });
 
       testWidgets('Download success', (tester) async {
-        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        when(() => viewByOrderDetailsBlocMock.state).thenReturn(
           ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
                 orderHistoryDetailsPoDocuments: attachmentList,
               ),
@@ -542,7 +567,7 @@ void main() {
 
       testWidgets('Download failure', (tester) async {
         const fakeMessage = 'Fake-error-message';
-        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        when(() => viewByOrderDetailsBlocMock.state).thenReturn(
           ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
                 orderHistoryDetailsPoDocuments: attachmentList,
               ),
@@ -571,7 +596,7 @@ void main() {
     });
 
     testWidgets('test when enableSpecialInstructions is true', (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
         ),
@@ -684,7 +709,7 @@ void main() {
         ),
       );
 
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -720,7 +745,7 @@ void main() {
     testWidgets(
         'test view by order detail item has price not available for PnG',
         (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -780,7 +805,7 @@ void main() {
           salesOrgConfigs: salesOrgConfigDisabledBatchNumDisplay,
         ),
       );
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: true,
         ),
@@ -789,13 +814,13 @@ void main() {
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: [
-              fakeOrderHistoryDetailsOrderItem,
+              fakeOrderHistoryItem,
             ],
           ),
         ),
       ];
       whenListen(
-        mockViewByOrderDetailsBloc,
+        viewByOrderDetailsBlocMock,
         Stream.fromIterable(expectedStates),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -803,7 +828,7 @@ void main() {
       await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryDetailsOrderItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryDetailsOrderItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
       );
       expect(expectedDelivery, findsNothing);
     });
@@ -816,7 +841,7 @@ void main() {
           salesOrgConfigs: salesOrgConfigEnabledBatchNumDisplay,
         ),
       );
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: true,
         ),
@@ -825,7 +850,7 @@ void main() {
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: [
-              fakeOrderHistoryDetailsOrderItem.copyWith(
+              fakeOrderHistoryItem.copyWith(
                 productType: MaterialInfoType.material(),
               ),
             ],
@@ -833,7 +858,7 @@ void main() {
         ),
       ];
       whenListen(
-        mockViewByOrderDetailsBloc,
+        viewByOrderDetailsBlocMock,
         Stream.fromIterable(expectedStates),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -841,7 +866,7 @@ void main() {
       await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryDetailsOrderItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryDetailsOrderItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
       );
       expect(expectedDelivery, findsOneWidget);
     });
@@ -849,7 +874,7 @@ void main() {
     testWidgets(
         'Buy again button not visible when disable create order flag is true',
         (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
         ),
@@ -876,7 +901,7 @@ void main() {
     testWidgets(
         'Buy again button visible when disable create order flag is false',
         (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
         ),
@@ -902,11 +927,11 @@ void main() {
     });
 
     testWidgets('Find Order Created Status Label', (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: [
-              fakeOrderHistoryDetailsOrderItem.copyWith(
+              fakeOrderHistoryItem.copyWith(
                 sAPStatus: OrderStepValue('Order Creating'),
                 productType: MaterialInfoType('material'),
               )
@@ -936,11 +961,11 @@ void main() {
 
     testWidgets('Find ordered items list when product type is empty',
         (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: [
-              fakeOrderHistoryDetailsOrderItem.copyWith(
+              fakeOrderHistoryItem.copyWith(
                 productType: MaterialInfoType('material'),
               )
             ],
@@ -965,10 +990,10 @@ void main() {
 
     group('Offer tag -', () {
       testWidgets('Visible when material have offer', (tester) async {
-        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        when(() => viewByOrderDetailsBlocMock.state).thenReturn(
           ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
             orderHistoryDetailsOrderItem: [
-              fakeOrderHistoryDetailsOrderItem.copyWith(
+              fakeOrderHistoryItem.copyWith(
                 productType: MaterialInfoType.material(),
                 promoStatus: true,
               )
@@ -988,10 +1013,10 @@ void main() {
       });
 
       testWidgets('Invisible when material is bonus', (tester) async {
-        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        when(() => viewByOrderDetailsBlocMock.state).thenReturn(
           ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
             orderHistoryDetailsOrderItem: [
-              fakeOrderHistoryDetailsOrderItem.copyWith(
+              fakeOrderHistoryItem.copyWith(
                 productType: MaterialInfoType.material(),
                 type: OrderItemType('Bonus'),
                 promoStatus: true,
@@ -1053,7 +1078,7 @@ void main() {
           salesOrganisation: fakeIDSalesOrganisation,
         ),
       );
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
               processingStatus: OrderStepValue(fakeStatus),
             ),
@@ -1073,7 +1098,7 @@ void main() {
         OrderHistoryDetailsOrderItem.empty()
             .copyWith(productType: MaterialInfoType.bundle())
       ];
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
               orderHistoryDetailsOrderItem: bundleList,
             ),
@@ -1096,7 +1121,7 @@ void main() {
         OrderHistoryDetailsOrderItem.empty()
             .copyWith(productType: MaterialInfoType.bundle())
       ];
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoadingBundleDetail: true,
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -1130,7 +1155,7 @@ void main() {
           ),
         )
       ];
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: bundleList,
@@ -1167,7 +1192,7 @@ void main() {
           productType: MaterialInfoType.bundle(),
         )
       ];
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
               orderHistoryDetailsOrderItem: bundleList,
             ),
@@ -1224,10 +1249,10 @@ void main() {
             salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
-        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        when(() => viewByOrderDetailsBlocMock.state).thenReturn(
           ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
             orderHistoryDetailsOrderItem: [
-              fakeOrderHistoryDetailsOrderItem.copyWith(
+              fakeOrderHistoryItem.copyWith(
                 productType: MaterialInfoType.material(),
                 qty: fakeQty,
                 pickedQuantity: fakePickedQty,
@@ -1313,6 +1338,134 @@ void main() {
           findsOneWidget,
         );
       });
+    });
+
+    testWidgets(
+        '=> Display counter offer when order history item is conter offer one',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+        ),
+      );
+      when(() => viewByOrderBlocMock.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          viewByOrderList: viewByOrderWithCounterOffer,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: viewByOrderWithCounterOffer.orderHeaders.first,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final orderItemPrice = find.byType(OrderItemPrice);
+      expect(orderItemPrice, findsOneWidget);
+      final offerAppliedTxt = find.text('Offer applied'.tr());
+      expect(offerAppliedTxt, findsOneWidget);
+    });
+
+    testWidgets(
+        '=> NOT display counter offer when order history item is NOT conter offer one',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+        ),
+      );
+      when(() => viewByOrderBlocMock.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          viewByOrderList: viewByOrder,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: viewByOrder.orderHeaders.first,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final orderItemPrice = find.byType(OrderItemPrice);
+      expect(orderItemPrice, findsOneWidget);
+      final offerAppliedTxt = find.text('Offer applied'.tr());
+      expect(offerAppliedTxt, findsNothing);
+    });
+
+    testWidgets(
+        '=> Display material tax when order history item is applied tax',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+        ),
+      );
+      when(() => viewByOrderBlocMock.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          viewByOrderList: viewByOrderWithTax,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: viewByOrderWithTax.orderHeaders.first,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
+      expect(quantityAndPriceWithTax, findsOneWidget);
+      final materialTax = find.byType(MaterialTax);
+      expect(materialTax, findsOneWidget);
+    });
+
+    testWidgets(
+        '=> NOT display material tax when order history item is NOT applied tax',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+        ),
+      );
+      when(() => viewByOrderBlocMock.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          viewByOrderList: viewByOrder,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: viewByOrder.orderHeaders.first,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
+      expect(quantityAndPriceWithTax, findsOneWidget);
+      final materialTax = find.byType(MaterialTax);
+      expect(materialTax, findsNothing);
     });
   });
 }
