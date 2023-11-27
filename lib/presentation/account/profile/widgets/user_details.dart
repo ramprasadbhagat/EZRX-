@@ -76,7 +76,7 @@ class _UserDetails extends StatelessWidget {
               BalanceTextRow(
                 keyFlex: 3,
                 valueFlex: 5,
-                keyText: 'Mobile number'.tr(),
+                keyText: 'Contact number'.tr(),
                 valueText: state.user.mobileNumber.displayLabel,
                 keyTextStyle: Theme.of(context)
                     .textTheme
