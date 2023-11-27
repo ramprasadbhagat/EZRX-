@@ -672,7 +672,7 @@ The payment advice copy will be sent to the email associated with this account,T
 Disclaimer,Disclaimer,Disclaimer,Disclaimer,ข้อสงวนสิทธิ์:,Disclaimer,Disclaimer,Disclaimer
 ezrx does not store your card information,ezrx does not store your card information,eZRx จะไม่จัดเก็บข้อมูลบัตรของคุณ,ezrx does not store your card information,ezrx does not store your card information,ezrx does not store your card information,ezrx does not store your card information,ezrx does not store your card information
 Search by payment advice / voucher no.,Search by payment advice / voucher no.,ค้นหาตามใบแจ้งยอดชำระเงิน/ใบสำคัญจ่าย.,Search by payment advice / voucher no.,Search by payment advice / voucher no.,Tìm kiếm bằng mã chứng từ.,Search by payment advice / voucher no.,Search by payment advice / voucher no.
-Logged in on behalf of,Logged in on behalf of,Logged in on behalf of,Logged in on behalf of,Logged in on behalf of,Logged in on behalf of,Logged in on behalf of,Logged in on behalf of
+Logged in on behalf of,Logged in on behalf of,Logged in on behalf of,Logged in on behalf of,Logged in on behalf of,Logged in on behalf of,ចូល​ក្នុង​នាម​របស់,Logged in on behalf of
 Request counter offer,Request counter offer,Rขอดีลพิเศษ,Request counter offer,တန်ပြန်ကမ်းလှမ်းမှု တောင်းဆိုသည်,Yêu cầu ưu đãi đặc biệt,Request counter offer,Request counter offer
 Offer price,Offer price,ดีลราคา,客戶要求發票價,ကမ်းလှမ်းသောစျေးနှုန်း,Giá khuyến mãi,Offer price,Offer price
 Counter offer price (MYR),Counter offer price (MYR),Counter offer price (MYR),Counter offer price (MYR),Counter offer price (MYR),Counter offer price (MYR),Counter offer price (MYR),Counter offer price (MYR)
@@ -1045,8 +1045,6 @@ Enter your E-mail,Enter your E-mail,Enter your E-mail,Enter your E-mail,Enter yo
 Message is required.,Message is required.,Message is required.,Message is required.,Message is required.,Message is required.,Message is required.,Message is required.
 How can we help?,How can we help?,บอกสิ่งที่ต้องการให้เราช่วย,請留下您的訊息,How can we help?,Chúng tôi có thể hỗ trợ?,How can we help?,How can we help?
 Send Message,Send Message,ส่งข้อความ,送出,Send Message,Gửi phản hồi,Send Message,Send Message
-Terms of Use,Terms of Use,ข้อกำหนดการใช้งาน,使用者條款,Terms of Use,Terms of Use,Terms of Use,Terms of Use
-Terms of use,Terms of use,ข้อกำหนดการใช้งาน,使用者條款,Terms of use,Terms of use,Terms of use,Terms of use
 Grand total,Grand total,ยอดรวมคำสั่งซื้อ,總計,Grand total,Grand total,Grand total,Grand total
 Qty,Qty,จำนวน,數量,အရေအတွက်,Số lượng,ចំនួន,Qty
 "Qty: ","Qty: ","จำนวน: ","數量: ","အရေအတွက်: ","Số lượng: ","ចំនួន: ","Qty: "
@@ -1221,7 +1219,6 @@ Message is required.,Message is required.,Message is required.,Message is requir
 How can we help?,How can we help?,บอกสิ่งที่ต้องการให้เราช่วย,請留下您的訊息,How can we help?,Chúng tôi có thể hỗ trợ?,How can we help?,How can we help?
 Send Message,Send Message,ส่งข้อความ,送出,Send Message,Gửi phản hồi,Send Message,Send Message
 Support hours:,Support hours:,Support hours:,Support hours:,Support hours:,Support hours:,Support hours:,Support hours:
-Terms of Use,Terms of Use,ข้อกำหนดการใช้งาน,使用條款,Terms of Use,Thoả thuận và Quy định,ល័ក្ខខ័ណ្ឌនៃការប្រើប្រាស់,Terms of Use
 Grand total,Grand total,ยอดรวมคำสั่งซื้อ,總計,Grand total,Tổng cộng,Grand total,Grand total
 Qty,Qty,จำนวน,數量,အရေအတွက်,Số lượng,ចំនួន,Qty
 Total with tax:,Total with tax:,Total with tax:,Total with tax:,Total with tax:,Tổng giá trị sau thuế:,Total with tax:,Total with tax:
@@ -1477,3 +1474,4 @@ Gov. Number,Gov. Number,Gov. Number,Gov. Number,Gov. Number,Gov. Number,Gov. Num
 tax,tax,tax,tax,tax,tax,tax,tax,
 Account credit,Account credit,Account credit,Account credit,Account credit,Account credit,Account credit,Account credit,
 Step,Step,Step,Step,Step,Step,Step,Step,
+Username not found,Username not found,Username not found,Username not found,Username not found,Username not found,រកមិនឃើញឈ្មោះអ្នកប្រើប្រាស់ទេ,Username not found,
