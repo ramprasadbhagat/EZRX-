@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +12,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -25,6 +21,7 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
@@ -73,13 +70,15 @@ void main() {
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
+  late List<CreditAndInvoiceItem> creditItemList;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-
+    creditItemList =
+        await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
     autoRouterMock = locator<AppRouter>();
   });
 
@@ -171,31 +170,12 @@ void main() {
     // });
 
     testWidgets('=> Body Test when loading', (tester) async {
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-            customerCodeSoldTo: 'mock-customerCodeSoldTo',
-          ),
-        ),
-      );
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          shipToInfo: ShipToInfo.empty().copyWith(
-            shipToCustomerCode: 'mock-shipToCustomerCode',
-          ),
-        ),
-      );
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
           isLoading: true,
         ),
       );
 
-      final expectedState = [
-        AllCreditsFilterState.initial(),
-        AllCreditsFilterState.initial(),
-      ];
-      whenListen(allCreditsFilterBlocMock, Stream.fromIterable(expectedState));
 
       await tester.pumpWidget(getWidget());
       await tester.pump(const Duration(milliseconds: 100));
@@ -208,41 +188,13 @@ void main() {
     testWidgets('=> Body Test onRefresh', (tester) async {
       when(() => allCreditsBlocMock.state)
           .thenReturn(AllCreditsState.initial());
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          shipToInfo: ShipToInfo(
-            defaultShipToAddress: true,
-            shipToCustomerCode: '',
-            shipToName: ShipToName.empty(),
-            shipToAddress: ShipToAddress.empty(),
-            status: Status(''),
-            building: '',
-            city1: '',
-            city2: '',
-            postalCode: '',
-            houseNumber1: '',
-            telephoneNumber: '',
-            region: '',
-            floor: '',
-            plant: '',
-            licenses: [],
-            country: '',
-            targetCustomerType: '',
-          ),
-        ),
-      );
 
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
-          isLoading: false,
           failureOrSuccessOption: optionOf(const Right('')),
           items: [
-            CreditAndInvoiceItem.empty().copyWith(
+            creditItemList.first.copyWith(
               searchKey: StringValue('123456789'),
-              netDueDate: DateTimeStringValue('2023-12-25'),
-              documentDate: DateTimeStringValue('2023-12-25'),
-              amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: StatusType('Cleared'),
             )
           ],
         ),
@@ -282,52 +234,7 @@ void main() {
           .thenReturn(AllCreditsFilterState.initial());
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
-          isLoading: false,
-          canLoadMore: true,
-          items: [
-            CreditAndInvoiceItem.empty().copyWith(
-              searchKey: StringValue('123456780'),
-              netDueDate: DateTimeStringValue('2023-12-25'),
-              documentDate: DateTimeStringValue('2023-12-25'),
-              amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: StatusType('Cleared'),
-            ),
-            CreditAndInvoiceItem.empty().copyWith(
-              searchKey: StringValue('123456780'),
-              netDueDate: DateTimeStringValue('2023-12-25'),
-              documentDate: DateTimeStringValue('2023-12-25'),
-              amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: StatusType('Cleared'),
-            ),
-            CreditAndInvoiceItem.empty().copyWith(
-              searchKey: StringValue('123456780'),
-              netDueDate: DateTimeStringValue('2023-12-25'),
-              documentDate: DateTimeStringValue('2023-12-25'),
-              amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: StatusType('Cleared'),
-            ),
-            CreditAndInvoiceItem.empty().copyWith(
-              searchKey: StringValue('123456780'),
-              netDueDate: DateTimeStringValue('2023-12-25'),
-              documentDate: DateTimeStringValue('2023-12-25'),
-              amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: StatusType('Cleared'),
-            ),
-            CreditAndInvoiceItem.empty().copyWith(
-              searchKey: StringValue('123456780'),
-              netDueDate: DateTimeStringValue('2023-12-25'),
-              documentDate: DateTimeStringValue('2023-12-25'),
-              amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: StatusType('Cleared'),
-            ),
-            CreditAndInvoiceItem.empty().copyWith(
-              searchKey: StringValue('123456780'),
-              netDueDate: DateTimeStringValue('2023-12-25'),
-              documentDate: DateTimeStringValue('2023-12-25'),
-              amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: StatusType('Cleared'),
-            ),
-          ],
+          items: creditItemList,
         ),
       );
 
@@ -351,14 +258,8 @@ void main() {
     testWidgets('Find Created on text', (tester) async {
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
-          isLoading: false,
-          canLoadMore: true,
           items: [
-            CreditAndInvoiceItem.empty().copyWith(
-              searchKey: StringValue('123456780'),
-              netDueDate: DateTimeStringValue('2023-12-25'),
-              documentDate: DateTimeStringValue('2023-12-25'),
-              amountInTransactionCurrency: 15.72,
+            creditItemList.first.copyWith(
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
           ],
@@ -376,15 +277,7 @@ void main() {
         (tester) async {
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
-          items: [
-            CreditAndInvoiceItem.empty().copyWith(
-              searchKey: StringValue('123456780'),
-              netDueDate: DateTimeStringValue('2023-12-25'),
-              documentDate: DateTimeStringValue('2023-12-25'),
-              amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: StatusType('Cleared'),
-            )
-          ],
+          items: creditItemList,
         ),
       );
 
@@ -397,15 +290,7 @@ void main() {
         (tester) async {
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
-          items: [
-            CreditAndInvoiceItem.empty().copyWith(
-              searchKey: StringValue('123456780'),
-              netDueDate: DateTimeStringValue('2023-12-25'),
-              documentDate: DateTimeStringValue('2023-12-25'),
-              amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: StatusType('Cleared'),
-            )
-          ],
+          items: creditItemList,
         ),
       );
 
@@ -420,16 +305,9 @@ void main() {
     });
 
     testWidgets('=> Credit details page for all market', (tester) async {
-      final creditAndInvoiceItem = CreditAndInvoiceItem.empty().copyWith(
-        searchKey: StringValue('123456780'),
-        netDueDate: DateTimeStringValue('2023-12-25'),
-        documentDate: DateTimeStringValue('2023-12-25'),
-        amountInTransactionCurrency: 15.72,
-        invoiceProcessingStatus: StatusType('Cleared'),
-      );
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
-          items: [creditAndInvoiceItem],
+          items: creditItemList,
         ),
       );
 
@@ -441,13 +319,13 @@ void main() {
       );
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
-      expect(creditsItemTile, findsOneWidget);
-      await tester.tap(creditsItemTile);
+      expect(creditsItemTile, findsWidgets);
+      await tester.tap(creditsItemTile.first);
       await tester.pumpAndSettle();
       verify(
         () => creditAndInvoiceDetailsBlocMock.add(
           CreditAndInvoiceDetailsEvent.fetch(
-            creditAndInvoiceItem: creditAndInvoiceItem,
+            creditAndInvoiceItem: creditItemList.first,
             salesOrganisation: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -455,17 +333,26 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('=> Credit no details page for ID market', (tester) async {
-      final creditAndInvoiceItem = CreditAndInvoiceItem.empty().copyWith(
-        searchKey: StringValue('123456780'),
-        netDueDate: DateTimeStringValue('2023-12-25'),
-        documentDate: DateTimeStringValue('2023-12-25'),
-        amountInTransactionCurrency: 15.72,
-        invoiceProcessingStatus: StatusType('Cleared'),
-      );
+    testWidgets('=> Credit details page accountingDocumentType all market',
+        (tester) async {
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
-          items: [creditAndInvoiceItem],
+          items: creditItemList
+              .map((e) => e.copyWith(accountingDocumentType: 'Credit-Memo'))
+              .toList(),
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      final accountingDocumentType = find.text('Credit-Memo');
+      expect(accountingDocumentType, findsWidgets);
+    });
+
+    testWidgets('=> Credit no details page for ID market', (tester) async {
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          items: creditItemList,
         ),
       );
 
@@ -477,13 +364,13 @@ void main() {
       );
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
-      expect(creditsItemTile, findsOneWidget);
-      await tester.tap(creditsItemTile);
+      expect(creditsItemTile, findsWidgets);
+      await tester.tap(creditsItemTile.first);
       await tester.pumpAndSettle();
       verifyNever(
         () => creditAndInvoiceDetailsBlocMock.add(
           CreditAndInvoiceDetailsEvent.fetch(
-            creditAndInvoiceItem: creditAndInvoiceItem,
+            creditAndInvoiceItem: creditItemList.first,
             salesOrganisation: fakeIDSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),

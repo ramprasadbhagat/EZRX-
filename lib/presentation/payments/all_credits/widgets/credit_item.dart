@@ -45,7 +45,6 @@ class _CreditsItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (isIDMarket)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text(
