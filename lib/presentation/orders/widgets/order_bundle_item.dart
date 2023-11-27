@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -56,6 +57,7 @@ class OrderBundleItem extends StatelessWidget {
                                 style: Theme.of(context).textTheme.labelMedium,
                               ),
                               _BundleInformation(
+                                key: WidgetKeys.orderHistoryBundleInformation,
                                 viewByOrdersGroup: viewByOrdersGroup,
                               ),
                             ],
@@ -71,20 +73,24 @@ class OrderBundleItem extends StatelessWidget {
                 buildWhen: (previous, current) =>
                     previous.orderHistory.orderHistoryItems !=
                     current.orderHistory.orderHistoryItems,
-                builder: (context, state) =>
-                    state.orderHistory.orderHistoryItems.isEmpty
-                        ? const SizedBox.shrink()
-                        : Column(
-                            children: viewByOrdersGroup.viewByOrderItem
-                                .map(
-                                  (orderHistoryDetailsOrderItem) =>
-                                      BundleItemMaterial(
-                                    orderItem: orderHistoryDetailsOrderItem,
-                                    orderHistory: state.orderHistory,
-                                  ),
-                                )
-                                .toList(),
-                          ),
+                builder: (context, state) => state
+                        .orderHistory.orderHistoryItems.isEmpty
+                    ? const SizedBox.shrink()
+                    : Column(
+                        children: viewByOrdersGroup.viewByOrderItem
+                            .map(
+                              (orderHistoryDetailsOrderItem) =>
+                                  BundleItemMaterial(
+                                key: WidgetKeys.orderHistoryBundleItemMaterial(
+                                  orderHistoryDetailsOrderItem
+                                      .materialNumber.displayMatNo,
+                                ),
+                                orderItem: orderHistoryDetailsOrderItem,
+                                orderHistory: state.orderHistory,
+                              ),
+                            )
+                            .toList(),
+                      ),
               ),
               Padding(
                 padding:

@@ -134,8 +134,7 @@ class WidgetKeys {
   static const Key browseProductLoadingShimmer =
       Key('browseProductLoadingShimmer');
   static Key sectionTileIcon(String title) => Key('sectionTitleIcon$title');
-  static Key searchSectionTab(String title) =>
-      Key('searchSectionTab$title');
+  static Key searchSectionTab(String title) => Key('searchSectionTab$title');
 
   //============================================================
   //  MORE TAB BAR
@@ -281,7 +280,7 @@ class WidgetKeys {
       Key('comboItemProductTile$materialNumber');
   static Key comboItemMaterialDetail(String materialNumber) =>
       Key('comboItemMaterialDetail$materialNumber');
-        static Key comboItemImageDetail(String materialNumber) =>
+  static Key comboItemImageDetail(String materialNumber) =>
       Key('comboItemImageDetail$materialNumber');
   static Key comboDeteleButton = const Key('comboDeteleButton');
   static Key comboDeteleConfirmButton = const Key('comboDeteleConfirmButton');
@@ -734,6 +733,10 @@ class WidgetKeys {
   static const Key viewByOrderDetailsPageListView =
       Key('viewByOrderDetailsPageListView');
   static const Key poAttachmentTile = Key('poAttachmentTile');
+  static const Key orderHistoryBundleInformation =
+      Key('orderHistoryBundleInformation');
+  static Key orderHistoryBundleItemMaterial(String materialNumber) =>
+      Key('orderHistoryBundleItemMaterial$materialNumber');
 
   //============================================================
   //  Material Details

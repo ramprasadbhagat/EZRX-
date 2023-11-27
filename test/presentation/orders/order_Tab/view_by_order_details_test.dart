@@ -24,6 +24,8 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
@@ -35,12 +37,15 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_material.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -97,6 +102,8 @@ class MockPoAttachmentBloc
     extends MockBloc<PoAttachmentEvent, PoAttachmentState>
     implements PoAttachmentBloc {}
 
+class MockMixpanelService extends Mock implements MixpanelService {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -140,6 +147,7 @@ void main() {
     autoRouterMock = locator<AppRouter>();
     customerCodeInfoList =
         await CustomerCodeLocalDataSource().getCustomerCodeList();
+    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
   });
   group('Order History Details Page', () {
     setUp(() {
@@ -219,6 +227,7 @@ void main() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
+        useMediaQuery: true,
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => mockAuthBloc,
@@ -1079,6 +1088,131 @@ void main() {
       );
 
       expect(find.byType(OrderBundleItem), findsNWidgets(bundleList.length));
+    });
+
+    testWidgets('Order Bundle item is invisible when bundle detail is loading',
+        (tester) async {
+      final bundleList = [
+        OrderHistoryDetailsOrderItem.empty()
+            .copyWith(productType: MaterialInfoType.bundle())
+      ];
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoadingBundleDetail: true,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: bundleList,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      expect(
+        find.byKey(WidgetKeys.viewByOrderDetailBundleSection),
+        findsOneWidget,
+      );
+
+      expect(find.byType(LoadingShimmer), findsWidgets);
+    });
+
+    testWidgets('Bundle information is visible', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfigEnabledBatchNumDisplay,
+        ),
+      );
+      final bundleList = [
+        OrderHistoryDetailsOrderItem.empty().copyWith(
+          productType: MaterialInfoType.bundle(),
+          material: MaterialInfo.empty().copyWith(
+            bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
+          ),
+        )
+      ];
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: bundleList,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      expect(
+        find.byKey(WidgetKeys.viewByOrderDetailBundleSection),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.orderHistoryBundleInformation),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('BundleItemMaterial is visible', (tester) async {
+      final fakeOrderHistory = OrderHistory.empty().copyWith(
+        orderHistoryItems: <OrderHistoryItem>[
+          OrderHistoryItem.empty().copyWith(
+            materialNumber: MaterialNumber('1234567890'),
+            unitPrice: ZpPrice('17.2'),
+            totalPrice: TotalPrice('516'),
+          )
+        ],
+      );
+      final bundleList = [
+        OrderHistoryDetailsOrderItem.empty().copyWith(
+          materialNumber: MaterialNumber('1234567890'),
+          productType: MaterialInfoType.bundle(),
+        )
+      ];
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+              orderHistoryDetailsOrderItem: bundleList,
+            ),
+      );
+
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistory: fakeOrderHistory,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      expect(
+        find.byKey(WidgetKeys.viewByOrderDetailBundleSection),
+        findsOneWidget,
+      );
+
+      expect(find.byType(BundleItemMaterial), findsWidgets);
+
+      final orderHistoryBundleItemMaterial =
+          find.byKey(WidgetKeys.orderHistoryBundleItemMaterial('1234567890'));
+
+      expect(orderHistoryBundleItemMaterial, findsOneWidget);
+
+      await tester.dragUntilVisible(
+        orderHistoryBundleItemMaterial,
+        find.byKey(WidgetKeys.viewByOrderDetailsPageListView),
+        const Offset(0, -200),
+      );
+      expect(orderHistoryBundleItemMaterial, findsOneWidget);
+      await tester.pump();
+
+      await tester.tap(orderHistoryBundleItemMaterial);
+      await tester.pumpAndSettle();
+      verify(
+        () => mockViewByItemDetailsBloc.add(
+          ViewByItemDetailsEvent.setItemOrderDetails(
+            orderHistory: fakeOrderHistory,
+            orderHistoryItem: fakeOrderHistory.orderHistoryItems.first,
+            disableDeliveryDateForZyllemStatus: false,
+          ),
+        ),
+      ).called(1);
     });
 
     group('in ID market', () {
