@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,23 +11,6 @@ class ReturnItemsFilter with _$ReturnItemsFilter {
     required DateTimeStringValue invoiceDateFrom,
     required DateTimeStringValue invoiceDateTo,
   }) = _ReturnItemsFilter;
-
-  factory ReturnItemsFilter.defaultDateRange() => ReturnItemsFilter(
-        invoiceDateFrom: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime(
-              DateTime.now().year,
-              DateTime.now().month - 6,
-              DateTime.now().day,
-            ),
-          ),
-        ),
-        invoiceDateTo: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime.now(),
-          ),
-        ),
-      );
 
   factory ReturnItemsFilter.empty() => ReturnItemsFilter(
         invoiceDateFrom: DateTimeStringValue(''),

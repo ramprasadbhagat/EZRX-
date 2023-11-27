@@ -15,6 +15,7 @@ import 'package:ezrxmobile/config.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class ReturnRequestRepositoryMock extends Mock
     implements ReturnRequestRepository {}
@@ -31,6 +32,7 @@ void main() {
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeSalesOrganisation,
       shipToInfo: fakeShipToInfo,
+      user: fakeUserWithLanguageCode,
     );
     fakeReturnItemsFilter = ReturnItemsFilter.empty();
 
@@ -54,6 +56,7 @@ void main() {
           customerCodeInfo: initState.customerCodeInfo,
           salesOrganisation: initState.salesOrganisation,
           shipToInfo: initState.shipToInfo,
+          user: initState.user,
         ),
       ),
       expect: () => [initState],
@@ -77,6 +80,7 @@ void main() {
               offset: 0,
               filter: fakeReturnItemsFilter,
               searchKey: SearchKey(''),
+              language: initState.user.preferredLanguage.languageCode,
             ),
           ),
         ).thenAnswer(
@@ -122,6 +126,7 @@ void main() {
               offset: 0,
               filter: fakeReturnItemsFilter,
               searchKey: SearchKey(''),
+              language: initState.user.preferredLanguage.languageCode,
             ),
           ),
         ).thenAnswer(
@@ -171,6 +176,7 @@ void main() {
               offset: fakeReturnMaterialList.items.length,
               filter: fakeReturnItemsFilter,
               searchKey: SearchKey(''),
+              language: initState.user.preferredLanguage.languageCode,
             ),
           ),
         ).thenAnswer(
@@ -220,6 +226,7 @@ void main() {
               offset: fakeReturnMaterialList.items.length,
               filter: fakeReturnItemsFilter,
               searchKey: SearchKey(''),
+              language: initState.user.preferredLanguage.languageCode,
             ),
           ),
         ).thenAnswer(

@@ -15,7 +15,7 @@ class _ResetButton extends StatelessWidget {
                   ReturnItemsFilter.empty()) {
                 context.read<ReturnItemsBloc>().add(
                       ReturnItemsEvent.fetch(
-                        appliedFilter: ReturnItemsFilter.defaultDateRange(),
+                        appliedFilter: ReturnItemsFilter.empty(),
                         searchKey:
                             context.read<ReturnItemsBloc>().state.searchKey,
                       ),

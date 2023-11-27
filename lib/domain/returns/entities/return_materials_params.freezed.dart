@@ -23,6 +23,7 @@ mixin _$ReturnMaterialsParams {
   int get offset => throw _privateConstructorUsedError;
   ReturnItemsFilter get filter => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
+  String get language => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnMaterialsParamsCopyWith<ReturnMaterialsParams> get copyWith =>
@@ -42,7 +43,8 @@ abstract class $ReturnMaterialsParamsCopyWith<$Res> {
       int pageSize,
       int offset,
       ReturnItemsFilter filter,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      String language});
 
   $ReturnItemsFilterCopyWith<$Res> get filter;
 }
@@ -68,6 +70,7 @@ class _$ReturnMaterialsParamsCopyWithImpl<$Res,
     Object? offset = null,
     Object? filter = null,
     Object? searchKey = null,
+    Object? language = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -98,6 +101,10 @@ class _$ReturnMaterialsParamsCopyWithImpl<$Res,
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -125,7 +132,8 @@ abstract class _$$_ReturnMaterialsParamsCopyWith<$Res>
       int pageSize,
       int offset,
       ReturnItemsFilter filter,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      String language});
 
   @override
   $ReturnItemsFilterCopyWith<$Res> get filter;
@@ -149,6 +157,7 @@ class __$$_ReturnMaterialsParamsCopyWithImpl<$Res>
     Object? offset = null,
     Object? filter = null,
     Object? searchKey = null,
+    Object? language = null,
   }) {
     return _then(_$_ReturnMaterialsParams(
       salesOrg: null == salesOrg
@@ -179,6 +188,10 @@ class __$$_ReturnMaterialsParamsCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -193,7 +206,8 @@ class _$_ReturnMaterialsParams extends _ReturnMaterialsParams {
       required this.pageSize,
       required this.offset,
       required this.filter,
-      required this.searchKey})
+      required this.searchKey,
+      required this.language})
       : super._();
 
   @override
@@ -210,10 +224,12 @@ class _$_ReturnMaterialsParams extends _ReturnMaterialsParams {
   final ReturnItemsFilter filter;
   @override
   final SearchKey searchKey;
+  @override
+  final String language;
 
   @override
   String toString() {
-    return 'ReturnMaterialsParams(salesOrg: $salesOrg, shipToInfo: $shipToInfo, soldToInfo: $soldToInfo, pageSize: $pageSize, offset: $offset, filter: $filter, searchKey: $searchKey)';
+    return 'ReturnMaterialsParams(salesOrg: $salesOrg, shipToInfo: $shipToInfo, soldToInfo: $soldToInfo, pageSize: $pageSize, offset: $offset, filter: $filter, searchKey: $searchKey, language: $language)';
   }
 
   @override
@@ -232,12 +248,14 @@ class _$_ReturnMaterialsParams extends _ReturnMaterialsParams {
             (identical(other.offset, offset) || other.offset == offset) &&
             (identical(other.filter, filter) || other.filter == filter) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.language, language) ||
+                other.language == language));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, salesOrg, shipToInfo, soldToInfo,
-      pageSize, offset, filter, searchKey);
+      pageSize, offset, filter, searchKey, language);
 
   @JsonKey(ignore: true)
   @override
@@ -255,7 +273,8 @@ abstract class _ReturnMaterialsParams extends ReturnMaterialsParams {
       required final int pageSize,
       required final int offset,
       required final ReturnItemsFilter filter,
-      required final SearchKey searchKey}) = _$_ReturnMaterialsParams;
+      required final SearchKey searchKey,
+      required final String language}) = _$_ReturnMaterialsParams;
   const _ReturnMaterialsParams._() : super._();
 
   @override
@@ -272,6 +291,8 @@ abstract class _ReturnMaterialsParams extends ReturnMaterialsParams {
   ReturnItemsFilter get filter;
   @override
   SearchKey get searchKey;
+  @override
+  String get language;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnMaterialsParamsCopyWith<_$_ReturnMaterialsParams> get copyWith =>

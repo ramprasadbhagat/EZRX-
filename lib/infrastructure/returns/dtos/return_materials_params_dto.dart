@@ -30,6 +30,8 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
       includeToJson: false,
     )
         required ReturnItemsFilterDto filter,
+    @JsonKey(name: 'language', defaultValue: '')
+        required String language,
   }) = _ReturnMaterialsParamsDto;
 
   factory ReturnMaterialsParamsDto.fromDomain(
@@ -43,10 +45,11 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
       after: domain.offset,
       filter: ReturnItemsFilterDto.fromDomain(
         domain.filter == ReturnItemsFilter.empty()
-            ? ReturnItemsFilter.defaultDateRange()
+            ? ReturnItemsFilter.empty()
             : domain.filter,
       ),
       searchFilter: domain.searchKey.searchValueOrEmpty,
+      language: domain.language,
     );
   }
 
@@ -59,6 +62,7 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
       offset: after,
       filter: filter.toDomain,
       searchKey: SearchKey.search(searchFilter),
+      language: language,
     );
   }
 

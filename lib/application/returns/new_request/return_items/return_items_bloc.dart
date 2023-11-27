@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
@@ -25,6 +26,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
     on<_Initialized>((event, emit) {
       emit(
         ReturnItemsState.initial().copyWith(
+          user: event.user,
           salesOrganisation: event.salesOrganisation,
           shipToInfo: event.shipToInfo,
           customerCodeInfo: event.customerCodeInfo,
@@ -60,6 +62,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
             offset: 0,
             filter: event.appliedFilter,
             searchKey: event.searchKey,
+            language: state.user.preferredLanguage.languageCode,
           ),
         );
 
@@ -106,6 +109,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
           offset: state.items.length,
           filter: state.appliedFilter,
           searchKey: state.searchKey,
+          language: state.user.preferredLanguage.languageCode,
         ),
       );
 

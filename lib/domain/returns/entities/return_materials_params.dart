@@ -17,6 +17,7 @@ class ReturnMaterialsParams with _$ReturnMaterialsParams {
     required int offset,
     required ReturnItemsFilter filter,
     required SearchKey searchKey,
+    required String language,
   }) = _ReturnMaterialsParams;
 
   factory ReturnMaterialsParams.empty() => ReturnMaterialsParams(
@@ -25,7 +26,8 @@ class ReturnMaterialsParams with _$ReturnMaterialsParams {
         soldToInfo: '',
         pageSize: 0,
         offset: 0,
-        filter: ReturnItemsFilter.defaultDateRange(),
+        filter: ReturnItemsFilter.empty(),
         searchKey: SearchKey(''),
+        language: '',
       );
 }

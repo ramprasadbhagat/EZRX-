@@ -3,6 +3,8 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:flutter/material.dart';
 
 //user
 const _roleTypeInternalSalesRep = 'internal_sales_rep';
@@ -106,4 +108,15 @@ final fakeUserWithBonusOverride =
 final fakeUserWithName = User.empty().copyWith(
   id: 'testId',
   fullName: const FullName(firstName: 'test', lastName: 'test'),
+);
+
+final fakeUserWithLanguageCode = User.empty().copyWith(
+  username: Username(_fakeUserName),
+  id: _fakeId,
+  preferredLanguage: const Locale(ApiLanguageCode.english),
+  role: Role.empty().copyWith(
+    description: _fakeRoleDesc,
+    id: _fakeRoleId,
+    type: RoleType(_roleTypeRootAdmin),
+  ),
 );

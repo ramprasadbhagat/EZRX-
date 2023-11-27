@@ -30,6 +30,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class ConfigMock extends Mock implements Config {}
 
@@ -68,6 +69,7 @@ void main() {
     offset: offsetMock,
     filter: ReturnItemsFilter.empty(),
     searchKey: SearchKey(''),
+    language: fakeUserWithLanguageCode.preferredLanguage.languageCode,
   );
   final errorMock = Exception('fake-error');
   const fakePath = 'fake-path';
