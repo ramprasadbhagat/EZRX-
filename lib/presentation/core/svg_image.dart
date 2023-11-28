@@ -4,6 +4,7 @@ abstract class SvgImage {
   static const String introScreen2 = '${_basePath}percentage.svg';
   static const String introScreen3 = '${_basePath}settings_icon.svg';
   static const String ezrxPlusLogo = '${_basePath}ezrx+logo.svg';
+  static const String ezrxPlusLogoWhite = '${_basePath}ezrx+logo+white.svg';
   static const String deliveryAddress = '${_basePath}delivery_address.svg';
   static const String emptyBox = '${_basePath}empty_box.svg';
   static const String searchLogo = '${_basePath}search.svg';

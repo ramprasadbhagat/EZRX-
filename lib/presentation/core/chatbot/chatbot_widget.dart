@@ -32,7 +32,7 @@ class ChatBotWidget extends StatelessWidget {
                 radius: 30,
                 backgroundColor: ZPColors.primary,
                 child: SvgPicture.asset(
-                  SvgImage.ezrxPlusLogo,
+                  SvgImage.ezrxPlusLogoWhite,
                 ),
               ),
             ),
