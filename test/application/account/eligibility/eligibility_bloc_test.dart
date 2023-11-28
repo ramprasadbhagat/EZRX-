@@ -149,7 +149,12 @@ void main() {
             salesOrganisation: fakeSaleOrg,
             salesOrganisationConfigs: fakeSaleOrgConfig,
             shipToInfo: fakeShipToInfo,
-            user: fakeUser,
+            user: fakeUser.copyWith(
+              preferredLanguage: Locale(
+                fakeUser.userPreferredLanguageCode,
+                fakeSaleOrg.salesOrg.country,
+              ),
+            ),
           ),
         ).thenAnswer(
           (invocation) async => const Right(true),
@@ -201,7 +206,12 @@ void main() {
             salesOrganisation: fakeSaleOrg,
             salesOrganisationConfigs: fakeSaleOrgConfig,
             shipToInfo: fakeShipToInfo,
-            user: fakeUser,
+            user: fakeUser.copyWith(
+              preferredLanguage: Locale(
+                fakeUser.userPreferredLanguageCode,
+                fakeSaleOrg.salesOrg.country,
+              ),
+            ),
           ),
         ).thenAnswer(
           (invocation) async => const Left(

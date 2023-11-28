@@ -74,7 +74,7 @@ class ChatBotRepository implements IChatBotRepository {
         'market': salesOrganisation.salesOrg.country,
         'userRole': user.role.name,
         'salesorg': salesOrganisation.salesOrg.getOrCrash(),
-        'locale': salesOrganisation.salesOrg.locale.toLanguageTag(),
+        'locale': user.preferredLanguage.toLanguageTag(),
         'fromDate': fromDateStringValue,
         'toDate': toDateStringValue,
         'currency': salesOrganisationConfigs.currency.code,

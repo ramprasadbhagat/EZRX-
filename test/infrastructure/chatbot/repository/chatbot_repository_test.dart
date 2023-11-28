@@ -38,7 +38,6 @@ void main() {
   late ChatBotRepository chatBotRepository;
   late Exception errorMock;
 
-
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
@@ -104,7 +103,7 @@ void main() {
         'market': fakeMYSalesOrganisation.salesOrg.country,
         'userRole': fakeClientUser.role.name,
         'salesorg': fakeMYSalesOrganisation.salesOrg.getOrCrash(),
-        'locale': fakeMYSalesOrganisation.salesOrg.locale.toLanguageTag(),
+        'locale': fakeClientUser.preferredLanguage.toLanguageTag(),
         'fromDate': fromDateStringValue,
         'toDate': toDateStringValue,
         'currency': fakeSalesOrganisationConfigs
@@ -112,10 +111,7 @@ void main() {
             .currency
             .code,
         'name': fakeClientUser.fullName.displayFullName,
-        'email': fakeClientUser
-            .copyWith(email: fakeEmail)
-            .email
-            .getOrCrash(),
+        'email': fakeClientUser.copyWith(email: fakeEmail).email.getOrCrash(),
         'baseUrl': configMock.baseUrl(
           currentMarket: AppMarket(
             deviceStorageMock.currentMarket(),
@@ -158,7 +154,7 @@ void main() {
         'market': fakeMYSalesOrganisation.salesOrg.country,
         'userRole': fakeClientUser.role.name,
         'salesorg': fakeMYSalesOrganisation.salesOrg.getOrCrash(),
-        'locale': fakeMYSalesOrganisation.salesOrg.locale.toLanguageTag(),
+        'locale': fakeClientUser.preferredLanguage.toLanguageTag(),
         'fromDate': fromDateStringValue,
         'toDate': toDateStringValue,
         'currency': fakeSalesOrganisationConfigs
