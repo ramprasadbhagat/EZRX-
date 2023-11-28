@@ -294,14 +294,7 @@ class Config {
   List<String> get allowedExtensions => [
         'jpg',
         'pdf',
-        'doc',
         'png',
-        'jpeg',
-        'csv',
-        'pdf',
-        'xlsx',
-        'xls',
-        'heic',
       ];
 
   //============================================================
