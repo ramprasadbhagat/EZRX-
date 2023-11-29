@@ -37,6 +37,10 @@ class ProductDetailState with _$ProductDetailState {
       (!isFetching && productDetailAggregate.similarProduct.isNotEmpty);
 
   bool get _isHidePrice => productDetailAggregate.materialInfo.hidePrice;
+  bool get eligibleForStockError =>
+      !isFetching &&
+      productDetailAggregate.stockInfo.stockQuantity != 0 &&
+      inputQty > productDetailAggregate.stockInfo.stockQuantity;
   bool _isPnGPrinciple({required bool isMYExternalSalesRepUser}) =>
       productDetailAggregate.materialInfo.isPnGPrinciple &&
       isMYExternalSalesRepUser;

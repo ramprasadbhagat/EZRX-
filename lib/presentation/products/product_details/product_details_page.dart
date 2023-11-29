@@ -20,6 +20,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -616,8 +617,17 @@ class _FooterState extends State<_Footer> {
                     ),
                   ],
                 ),
-                if (context.read<EligibilityBloc>().state.salesOrg.isID)
-                  _StockQuantity(state: state),
+                if (context.read<EligibilityBloc>().state.salesOrg.isID) ...[
+                  if (state.eligibleForStockError)
+                    ErrorTextWithIcon(
+                      valueText: context.tr(
+                        'You have exceed the available qty for this item',
+                      ),
+                    ),
+                  _StockQuantity(
+                    state: state,
+                  ),
+                ],
                 SizedBox(
                   height: MediaQuery.of(context).viewInsets.bottom * 1.2,
                 ),
