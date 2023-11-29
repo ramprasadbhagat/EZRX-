@@ -7,13 +7,15 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
-import 'package:ezrxmobile/domain/payments/value/value_object.dart';
+import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
 
 abstract class INewPaymentRepository {
   Future<Either<ApiFailure, List<CustomerOpenItem>>> getOutstandingInvoices({
@@ -62,7 +64,14 @@ abstract class INewPaymentRepository {
 
   Future<Either<ApiFailure, Unit>> saveFile({required Uint8List pdfData});
 
-  Future<Either<ApiFailure, List<PaymentMethodValue>>> fetchPaymentMethods({
+  Future<Either<ApiFailure, List<NewPaymentMethod>>> fetchPaymentMethods({
     required SalesOrganisation salesOrganisation,
+  });
+
+  Future<Either<ApiFailure, CreateVirtualAccount>> createVirtualAccount({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required List<CustomerOpenItem> invoices,
+    required PaymentMethodOption paymentMethodOption,
   });
 }

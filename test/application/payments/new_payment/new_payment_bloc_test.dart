@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -32,7 +33,7 @@ void main() {
   late CustomerPaymentInfo fakePaymentInfo;
   late List<CustomerOpenItem> fakeCustomerOpenItemSelected;
   late List<CustomerOpenItem> fakeCreditSelected;
-  late List<PaymentMethodValue> fakePaymentMethodValues;
+  late List<NewPaymentMethod> fakePaymentMethodValues;
 
   setUpAll(() {
     newPaymentRepository = NewPaymentRepositoryMock();
@@ -76,9 +77,15 @@ void main() {
           .copyWith(postingKeyName: 'Credit memo'),
     ];
 
-    fakePaymentMethodValues = <PaymentMethodValue>[
-      PaymentMethodValue('Payment Gateway'),
-      PaymentMethodValue('Qr Code'),
+    fakePaymentMethodValues = <NewPaymentMethod>[
+      NewPaymentMethod(
+        paymentMethod: PaymentMethodValue('Payment Gateway'),
+        options: [],
+      ),
+      NewPaymentMethod(
+        paymentMethod: PaymentMethodValue('Qr Code'),
+        options: [],
+      ),
     ];
   });
 
@@ -98,7 +105,7 @@ void main() {
             ),
           ).thenAnswer(
             (invocation) async => Right(
-              [PaymentMethodValue('')],
+              [NewPaymentMethod.empty()],
             ),
           );
         },
@@ -115,8 +122,8 @@ void main() {
           ),
           NewPaymentState.initial().copyWith(
             isFetchingPaymentMethod: false,
-            paymentMethods: [PaymentMethodValue('')],
-            selectedPaymentMethod: PaymentMethodValue(''),
+            paymentMethods: [NewPaymentMethod.empty()],
+            selectedPaymentMethod: NewPaymentMethod.empty(),
           ),
         ],
       );
@@ -157,7 +164,7 @@ void main() {
               ),
             ),
             paymentMethods: [],
-            selectedPaymentMethod: PaymentMethodValue(''),
+            selectedPaymentMethod: NewPaymentMethod.empty(),
           ),
         ],
       );

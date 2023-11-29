@@ -7,13 +7,15 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
+import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
-import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -66,7 +68,8 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
                 paymentMethods: paymentMethods,
                 isFetchingPaymentMethod: false,
                 selectedPaymentMethod:
-                    paymentMethods.firstOrNull ?? PaymentMethodValue(''),
+                    (paymentMethods.firstOrNull ?? NewPaymentMethod.empty())
+                        .copyWith(options: []),
               ),
             );
           },
@@ -135,7 +138,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
         final failureOrSuccess = await newPaymentRepository.pay(
           salesOrganisation: state.salesOrganisation,
           customerCodeInfo: state.customerCodeInfo,
-          paymentMethod: state.selectedPaymentMethod.getValue(),
+          paymentMethod: state.selectedPaymentMethod.paymentMethod.getValue(),
           customerOpenItems: [
             ...state.selectedInvoices,
             ...state.selectedCredits,
@@ -244,7 +247,9 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
       updatePaymentMethodSelected: (_UpdatePaymentMethodSelected e) {
         emit(
           state.copyWith(
-            selectedPaymentMethod: e.paymentMethodSelected,
+            selectedPaymentMethod: e.paymentMethodSelected.copyWith(
+              options: <PaymentMethodOption>[],
+            ),
           ),
         );
       },
@@ -273,6 +278,53 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
                 customerPaymentInfo: customerPaymentInfo,
                 failureOrSuccessOption: none(),
                 isLoading: false,
+              ),
+            );
+          },
+        );
+      },
+      updatePaymentMethodOptionSelected:
+          (_UpdatePaymentMethodOptionSelected e) {
+        emit(
+          state.copyWith(
+            selectedPaymentMethod: state.selectedPaymentMethod.copyWith(
+              options: [e.paymentMethodOptionSelected],
+            ),
+          ),
+        );
+      },
+      createVirtualAccount: (_CreateVirtualAccount e) async {
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+            isCreatingVirtualAccount: true,
+          ),
+        );
+
+        final failureOrSuccess =
+            await newPaymentRepository.createVirtualAccount(
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+          paymentMethodOption:
+              state.selectedPaymentMethod.firstSelectedOption,
+          invoices: state.selectedInvoices,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isCreatingVirtualAccount: false,
+              ),
+            );
+          },
+          (createVirtualAccount) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: none(),
+                isCreatingVirtualAccount: false,
+                createVirtualAccount: createVirtualAccount,
               ),
             );
           },

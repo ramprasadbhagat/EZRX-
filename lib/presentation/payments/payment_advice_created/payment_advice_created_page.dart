@@ -72,8 +72,9 @@ class _BodyContent extends StatelessWidget {
                   props: {
                     MixpanelProps.errorMessage:
                         'Generating payment advise failure with error message: ${failure.failureMessage}',
-                    MixpanelProps.paymentMethod:
-                        state.selectedPaymentMethod.getOrDefaultValue(''),
+                    MixpanelProps.paymentMethod: state
+                        .selectedPaymentMethod.paymentMethod
+                        .getOrDefaultValue(''),
                     MixpanelProps.paymentDocumentCount:
                         state.allSelectedItems.length,
                   },
@@ -98,14 +99,14 @@ class _BodyContent extends StatelessWidget {
                         const SizedBox(
                           height: 8,
                         ),
-                        state.selectedPaymentMethod.isBankIn
+                        state.selectedPaymentMethod.paymentMethod.isBankIn
                             ? const _PaymentBankInAdviceMessage()
                             : const _PaymentGatewayAdviceMessage(),
                         state.needOpenWebViewAndNotBankIn
                             ? const _PaymentAdviceNextStep()
                             : const _PaymentAdvicePleaseNote(),
                         const _PaymentInvoicePdf(),
-                        if (!state.selectedPaymentMethod.isBankIn)
+                        if (!state.selectedPaymentMethod.paymentMethod.isBankIn)
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16),
                             child: PaymentSavePdfButton(),

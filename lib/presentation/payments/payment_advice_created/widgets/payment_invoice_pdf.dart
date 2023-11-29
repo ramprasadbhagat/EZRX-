@@ -31,7 +31,7 @@ class _PaymentInvoicePdf extends StatelessWidget {
                     props: {
                       MixpanelProps.errorMessage: 'Generating QR failed',
                       MixpanelProps.paymentMethod: newPaymentState
-                          .selectedPaymentMethod
+                          .selectedPaymentMethod.paymentMethod
                           .getOrDefaultValue(''),
                       MixpanelProps.paymentDocumentCount:
                           newPaymentState.allSelectedItems.length,
@@ -62,7 +62,7 @@ class _PaymentInvoicePdf extends StatelessWidget {
                     props: {
                       MixpanelProps.paymentAmount: newPaymentState.amountTotal,
                       MixpanelProps.paymentMethod: newPaymentState
-                          .selectedPaymentMethod
+                          .selectedPaymentMethod.paymentMethod
                           .getOrDefaultValue(''),
                       MixpanelProps.paymentDocumentCount:
                           newPaymentState.allSelectedItems.length,

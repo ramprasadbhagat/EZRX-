@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
-import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
@@ -24,7 +24,7 @@ class PaymentInfoMock extends Mock implements PaymentInfo {}
 
 class PaymentInvoiceInfoPdfMock extends Mock implements PaymentInvoiceInfoPdf {}
 
-class PaymentMethodMock extends Mock implements PaymentMethodValue {}
+class NewPaymentMethodMock extends Mock implements NewPaymentMethod {}
 
 void main() {
   late NewPaymentRemoteDataSource newPaymentRemoteDataSource;
@@ -497,7 +497,7 @@ void main() {
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
-          return Future.value([PaymentMethodMock()]);
+          return Future.value([NewPaymentMethodMock()]);
         });
       });
 
@@ -534,7 +534,7 @@ void main() {
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
-          return Future.value([PaymentMethodMock()]);
+          return Future.value([NewPaymentMethodMock()]);
         });
       });
     },

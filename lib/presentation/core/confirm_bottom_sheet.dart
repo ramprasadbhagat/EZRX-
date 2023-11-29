@@ -9,6 +9,7 @@ class ConfirmBottomSheet extends StatelessWidget {
   final String cancelButtonText;
   final String confirmButtonText;
   final Widget? iconWidget;
+  final bool displayCancelButton;
   const ConfirmBottomSheet({
     Key? key,
     required this.title,
@@ -16,6 +17,7 @@ class ConfirmBottomSheet extends StatelessWidget {
     this.iconWidget,
     this.cancelButtonText = 'Cancel',
     this.confirmButtonText = 'Confirm',
+    this.displayCancelButton = true,
   }) : super(key: key);
 
   @override
@@ -55,36 +57,39 @@ class ConfirmBottomSheet extends StatelessWidget {
             ),
             Row(
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(false);
-                    },
-                    style:
-                        Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                              backgroundColor: const MaterialStatePropertyAll(
-                                ZPColors.white,
-                              ),
-                              shape: const MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(8),
+                if (displayCancelButton) ...[
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      },
+                      style:
+                          Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                                backgroundColor: const MaterialStatePropertyAll(
+                                  ZPColors.white,
+                                ),
+                                shape: const MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8),
+                                    ),
+                                    side: BorderSide(color: ZPColors.primary),
                                   ),
-                                  side: BorderSide(color: ZPColors.primary),
                                 ),
                               ),
-                            ),
-                    child: Text(
-                      cancelButtonText.tr(),
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: ZPColors.primary,
-                          ),
+                      child: Text(
+                        cancelButtonText.tr(),
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  color: ZPColors.primary,
+                                ),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 16.0,
-                ),
+                  const SizedBox(
+                    width: 16.0,
+                  ),
+                ],
                 Expanded(
                   child: ElevatedButton(
                     key: WidgetKeys.confirmBottomSheetConfirmButton,

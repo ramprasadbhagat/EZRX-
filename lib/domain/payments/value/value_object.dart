@@ -58,9 +58,28 @@ class PaymentMethodValue extends ValueObject<String> {
 
   bool get isBankIn => checkIsBankIn(value.getOrElse(() => ''));
 
+  bool get isAPL => checkIsAPL(value.getOrElse(() => ''));
+
   bool get displayWarningAnnoucement => isBankIn || isQrCode;
 
   const PaymentMethodValue._(this.value);
+}
+
+class BankOptionId extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory BankOptionId(String input) {
+    return BankOptionId._(validateStringNotEmpty(input));
+  }
+
+  bool get isBNI => checkIsBNI(value.getOrElse(() => ''));
+
+  bool get isBCA => checkIsBCA(value.getOrElse(() => ''));
+
+  bool get banksOnlyAllowTransferSameBank => !isBNI && !isBCA;
+
+  const BankOptionId._(this.value);
 }
 
 class PaymentDue extends ValueObject<String> {

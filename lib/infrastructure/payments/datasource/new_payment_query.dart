@@ -139,6 +139,38 @@ class NewPaymentQuery {
     query availablePaymentMethods(\$request: availablePaymentMethodsRequest!) {
       availablePaymentMethods(request: \$request) {
         paymentMethods
+        options {
+            id
+            type
+            provider
+            displayName
+          }
+      }
+    }
+    ''';
+  }
+
+  String createVirtualAccountQuery() {
+    return '''
+    mutation CreateVirtualAccount(\$input: createVirtualAccountRequest!) {
+      createVirtualAccount(input: \$input) {
+        id
+        invoices {
+          documentDate
+          documentType
+          documentNo
+          amount
+        }
+        amountPayable
+        status
+        paymentDetails {
+          vaNumber
+          vaName
+          expiresAt
+        }
+        paymentMethodDisplay
+        createdOn
+        paidOn
       }
     }
     ''';

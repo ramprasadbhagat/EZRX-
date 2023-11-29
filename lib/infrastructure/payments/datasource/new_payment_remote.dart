@@ -4,13 +4,15 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
-import 'package:ezrxmobile/domain/payments/value/value_object.dart';
+import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/create_virtual_account_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_filter_dto.dart';
@@ -252,7 +254,7 @@ class NewPaymentRemoteDataSource {
     return PaymentInvoiceInfoPdfDto.fromJson(data).toDomain();
   }
 
-  Future<List<PaymentMethodValue>> fetchPaymentMethods({
+  Future<List<NewPaymentMethod>> fetchPaymentMethods({
     required String salesOrg,
   }) async {
     final res = await httpService.request(
@@ -277,6 +279,39 @@ class NewPaymentRemoteDataSource {
     return List.from(paymentMethodList)
         .map((e) => PaymentMethodDto.fromJson(e).toDomain())
         .toList();
+  }
+
+  Future<CreateVirtualAccount> createVirtualAccount({
+    required String customerCode,
+    required String salesOrg,
+    required List<String> invoices,
+    required String bankID,
+    required String provider,
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      cacheControl: 'no-cache',
+      data: jsonEncode(
+        {
+          'query': newPaymentQuery.createVirtualAccountQuery(),
+          'variables': {
+            'input': {
+              'customer': customerCode,
+              'salesOrg': salesOrg,
+              'provider': provider,
+              'bankID': bankID,
+              'invoices': invoices,
+            },
+          },
+        },
+      ),
+    );
+    _exceptionChecker(property: 'createVirtualAccount', res: res);
+
+    return CreateVirtualAccountDto.fromJson(
+      res.data['data']['createVirtualAccount'],
+    ).toDomain();
   }
 
   void _exceptionChecker({

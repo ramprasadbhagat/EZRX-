@@ -52,6 +52,7 @@ class _PaymentAdvicePleaseNote extends StatelessWidget {
                           .read<NewPaymentBloc>()
                           .state
                           .selectedPaymentMethod
+                          .paymentMethod
                           .isBankIn
                       ? 'If payment request fails, you may choose to retry payment or delete the failed payment advice then generate a new payment advice.'
                       : 'If you encountered an error with the payment, delete the system-generated payment advice in the eZRx payment summary section and regenerate a new payment advice by repeating the payment process.',

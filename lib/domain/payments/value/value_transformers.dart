@@ -23,6 +23,9 @@ bool checkIsPaymentGateway(String paymentMethodValue) =>
 bool checkIsBankIn(String paymentMethodValue) =>
     paymentMethodValue == 'Bank-In';
 
+bool checkIsAPL(String paymentMethodValue) =>
+    paymentMethodValue == 'Virtual Accounts Transfer';
+
 //Get the amount string from paymentDue string (Ex: MYR 18940.000000)
 String getTotalAmount(String paymentDue) {
   return StringUtils.displayNumber(
@@ -33,3 +36,7 @@ String getTotalAmount(String paymentDue) {
 //Get the expiry days number from adviceExpiry string (Ex: 15 days)
 int getExpiryDays(String adviceExpiry) =>
     int.tryParse(adviceExpiry.split(' ').first) ?? 0;
+
+bool checkIsBNI(String bankOptionId) => bankOptionId == 'BNI';
+
+bool checkIsBCA(String bankOptionId) => bankOptionId == 'BCA';

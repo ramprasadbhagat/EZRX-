@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -135,9 +136,18 @@ void main() {
     group('Payment selector -', () {
       const selectedIndex = 0;
       final paymentMethodList = [
-        PaymentMethodValue('fake-1'),
-        PaymentMethodValue('fake-2'),
-        PaymentMethodValue('fake-3'),
+        NewPaymentMethod(
+          paymentMethod: PaymentMethodValue('fake-1'),
+          options: [],
+        ),
+        NewPaymentMethod(
+          paymentMethod: PaymentMethodValue('fake-2'),
+          options: [],
+        ),
+        NewPaymentMethod(
+          paymentMethod: PaymentMethodValue('fake-3'),
+          options: [],
+        ),
       ];
       testWidgets('Show shimmer when loading', (tester) async {
         when(() => newPaymentBlocMock.state).thenReturn(
@@ -198,8 +208,8 @@ void main() {
         );
         for (var i = 0; i < paymentMethodList.length; i++) {
           final widget = tester.widget<Radio>(radio.at(i));
-          expect(widget.value, paymentMethodList[i]);
-          expect(widget.groupValue, paymentMethodList[selectedIndex]);
+          expect(widget.value, paymentMethodList[i].paymentMethod);
+          expect(widget.groupValue, paymentMethodList[selectedIndex].paymentMethod);
         }
       });
 
@@ -263,10 +273,16 @@ void main() {
           (tester) async {
         whenListen(
           newPaymentBlocMock,
-          Stream.fromIterable([
-            NewPaymentState.initial()
-                .copyWith(selectedPaymentMethod: PaymentMethodValue('fake'))
-          ]),
+          Stream.fromIterable(
+            [
+              NewPaymentState.initial().copyWith(
+                selectedPaymentMethod: NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('fake'),
+                  options: [],
+                ),
+              )
+            ],
+          ),
         );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
@@ -283,8 +299,12 @@ void main() {
       testWidgets(
           'Visible and start fetch when selected payment method is bank-in',
           (tester) async {
-        final bankInSelectedState = NewPaymentState.initial()
-            .copyWith(selectedPaymentMethod: PaymentMethodValue('Bank-In'));
+        final bankInSelectedState = NewPaymentState.initial().copyWith(
+          selectedPaymentMethod: NewPaymentMethod(
+            paymentMethod: PaymentMethodValue('Bank-In'),
+            options: [],
+          ),
+        );
         when(() => newPaymentBlocMock.state).thenReturn(bankInSelectedState);
         whenListen(
           newPaymentBlocMock,
@@ -315,8 +335,12 @@ void main() {
       });
 
       testWidgets('Show loading shimmer when fetching', (tester) async {
-        final bankInSelectedState = NewPaymentState.initial()
-            .copyWith(selectedPaymentMethod: PaymentMethodValue('Bank-In'));
+        final bankInSelectedState = NewPaymentState.initial().copyWith(
+          selectedPaymentMethod: NewPaymentMethod(
+            paymentMethod: PaymentMethodValue('Bank-In'),
+            options: [],
+          ),
+        );
         when(() => newPaymentBlocMock.state).thenReturn(bankInSelectedState);
         when(() => bankInAccountsBlocMock.state).thenReturn(
           BankInAccountsState.initial().copyWith(isFetching: true),
@@ -337,8 +361,12 @@ void main() {
 
       testWidgets('Show bank info detail list', (tester) async {
         final bankInfoList = [BankBeneficiary.empty(), BankBeneficiary.empty()];
-        final bankInSelectedState = NewPaymentState.initial()
-            .copyWith(selectedPaymentMethod: PaymentMethodValue('Bank-In'));
+        final bankInSelectedState = NewPaymentState.initial().copyWith(
+          selectedPaymentMethod: NewPaymentMethod(
+            paymentMethod: PaymentMethodValue('Bank-In'),
+            options: [],
+          ),
+        );
         when(() => newPaymentBlocMock.state).thenReturn(bankInSelectedState);
         when(() => bankInAccountsBlocMock.state).thenReturn(
           BankInAccountsState.initial().copyWith(bankInAccounts: bankInfoList),

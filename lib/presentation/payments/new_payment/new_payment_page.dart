@@ -26,6 +26,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+part 'package:ezrxmobile/presentation/payments/new_payment/widgets/warning_label_virtual_bank.dart';
+part 'package:ezrxmobile/presentation/payments/new_payment/widgets/total_section.dart';
+part 'package:ezrxmobile/presentation/payments/new_payment/widgets/new_payment_body.dart';
+part 'package:ezrxmobile/presentation/payments/new_payment/widgets/new_payment_footer.dart';
+part 'package:ezrxmobile/presentation/payments/new_payment/widgets/select_all_section.dart';
+
 class NewPaymentPage extends StatelessWidget {
   const NewPaymentPage({Key? key}) : super(key: key);
 
@@ -48,26 +54,27 @@ class NewPaymentPage extends StatelessWidget {
     );
   }
 
-  List<PageRouteInfo<void>> _getTabs(BuildContext context) {
-    final salesOrg = context.read<EligibilityBloc>().state.salesOrg;
-
+  List<PageRouteInfo<void>> _getTabs({
+    bool isID = false,
+  }) {
     return [
       const OutstandingInvoicesTabRoute(),
-      if (!salesOrg.isID) const AvailableCreditsTabRoute(),
+      if (!isID) const AvailableCreditsTabRoute(),
       const PaymentMethodTabRoute(),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    final tabs = _getTabs(context);
+    final isID = context.read<EligibilityBloc>().state.salesOrg.isID;
+
+    final tabs = _getTabs(isID: isID);
 
     return AutoTabsRouter.tabBar(
       routes: tabs,
       physics: const NeverScrollableScrollPhysics(),
       builder: (context, child, tabController) {
         final step = tabController.index + 1;
-        final title = _stepTitle(context, step);
 
         return Scaffold(
           key: WidgetKeys.newPaymentPage,
@@ -81,7 +88,7 @@ class NewPaymentPage extends StatelessWidget {
           ),
           body: AnnouncementBanner(
             currentPath: context.router.currentPath,
-            child: BlocConsumer<NewPaymentBloc, NewPaymentState>(
+            child: BlocListener<NewPaymentBloc, NewPaymentState>(
               listenWhen: (previous, current) =>
                   previous.isLoading != current.isLoading,
               listener: (context, state) {
@@ -104,7 +111,7 @@ class NewPaymentPage extends StatelessWidget {
                           props: {
                             MixpanelProps.errorMessage: paymentErrorMessage,
                             MixpanelProps.paymentMethod: state
-                                .selectedPaymentMethod
+                                .selectedPaymentMethod.paymentMethod
                                 .getOrDefaultValue(''),
                             MixpanelProps.paymentDocumentCount:
                                 state.allSelectedItems.length,
@@ -127,185 +134,19 @@ class NewPaymentPage extends StatelessWidget {
                   );
                 }
               },
-              buildWhen: (previous, current) =>
-                  previous.selectedInvoices != current.selectedInvoices ||
-                  previous.selectedCredits != current.selectedCredits ||
-                  previous.isLoading != current.isLoading,
-              builder: (context, state) {
-                final configs =
-                    context.read<EligibilityBloc>().state.salesOrgConfigs;
-
-                return Column(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              12.0,
-                              12.0,
-                              12.0,
-                              0.0,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0,
-                                  ),
-                                  child: Text(
-                                    '${context.tr('Step')} $step ${context.tr('of')} ${tabs.length}: $title',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleSmall!
-                                        .copyWith(
-                                          color: ZPColors.primary,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                ),
-                                LinearProgressIndicator(
-                                  value: step / tabs.length,
-                                  backgroundColor: ZPColors.accentColor,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: child,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SafeArea(
-                      top: false,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                              color: ZPColors.lightGray2,
-                            ),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            if (step == 1)
-                              _CheckAllInvoicesWidget(
-                                selectedInvoices: state.selectedInvoices,
-                              ),
-                            if (step == 2)
-                              _CheckAllCreditsWidget(
-                                selectedCredits: state.selectedCredits,
-                              ),
-                            Row(
-                              children: [
-                                PriceText(
-                                  data: StringUtils.displayNumber(
-                                    state.selectedInvoices.amountTotal,
-                                  ),
-                                  title: 'Amount payable',
-                                  salesOrgConfig: configs,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                  ),
-                                  child: Text(
-                                    '-',
-                                    style:
-                                        Theme.of(context).textTheme.titleSmall,
-                                  ),
-                                ),
-                                PriceText(
-                                  data: '(${StringUtils.displayNumber(
-                                    state.selectedCredits.amountTotal.abs(),
-                                  )})',
-                                  title: 'Credit applied',
-                                  salesOrgConfig: configs,
-                                  isNegativeColorDisplay:
-                                      state.negativeAmountPayable,
-                                ),
-                              ],
-                            ),
-                            if (state.negativeAmountPayable)
-                              const InfoLabel(
-                                textValue:
-                                    'Total credit amount cannot exceed invoice amount.',
-                              ),
-                            Row(
-                              children: [
-                                Text(
-                                  context.tr('Total: '),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                        color: ZPColors.darkGray,
-                                      ),
-                                ),
-                                PriceComponent(
-                                  salesOrgConfig: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .configs,
-                                  price: state.amountTotal.abs().toString(),
-                                  type: state.negativeAmountPayable
-                                      ? PriceStyle.negativePrice
-                                      : PriceStyle.commonPrice,
-                                ),
-                                const Spacer(),
-                                if (step == 1)
-                                  _NextButton(
-                                    tabController: tabController,
-                                    enabled: state.selectedInvoices.isNotEmpty,
-                                  ),
-                                if (step == 2)
-                                  _NextButton(
-                                    tabController: tabController,
-                                    enabled: !state.negativeAmountPayable,
-                                  ),
-                              ],
-                            ),
-                            if (step == 3)
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8),
-                                child: ElevatedButton(
-                                  key: WidgetKeys.generatePaymentAdvice,
-                                  onPressed: state.isLoading
-                                      ? null
-                                      : () {
-                                          _trackProceedToNextStep(
-                                            context,
-                                            step,
-                                          );
-                                          context.read<NewPaymentBloc>().add(
-                                                const NewPaymentEvent.pay(),
-                                              );
-                                        },
-                                  child: LoadingShimmer.withChild(
-                                    enabled: state.isLoading,
-                                    child: Text(
-                                      context.tr('Generate payment advice'),
-                                      style: const TextStyle(
-                                        color: ZPColors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
+              child: Column(
+                children: [
+                  _NewPaymentBody(
+                    currentStep: step,
+                    totalTabs: tabs.length,
+                    child: child,
+                  ),
+                  _NewPaymentFooter(
+                    currentStep: step,
+                    tabController: tabController,
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -373,97 +214,6 @@ class _NextButton extends StatelessWidget {
           color: ZPColors.white,
         ),
       ),
-    );
-  }
-}
-
-class _CheckAllCreditsWidget extends StatelessWidget {
-  final List<CustomerOpenItem> selectedCredits;
-
-  const _CheckAllCreditsWidget({
-    Key? key,
-    required this.selectedCredits,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AvailableCreditsBloc, AvailableCreditsState>(
-      buildWhen: (previous, current) => previous.items != current.items,
-      builder: (context, state) {
-        return _CheckAllWidget(
-          value: selectedCredits.isNotEmpty &&
-              state.items.isEqual(selectedCredits),
-          onChanged: (value) => context.read<NewPaymentBloc>().add(
-                NewPaymentEvent.updateAllCredits(
-                  items: (value ?? false) ? state.items : <CustomerOpenItem>[],
-                ),
-              ),
-        );
-      },
-    );
-  }
-}
-
-class _CheckAllInvoicesWidget extends StatelessWidget {
-  final List<CustomerOpenItem> selectedInvoices;
-
-  const _CheckAllInvoicesWidget({
-    Key? key,
-    required this.selectedInvoices,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<OutstandingInvoicesBloc, OutstandingInvoicesState>(
-      buildWhen: (previous, current) => previous.items != current.items,
-      builder: (context, state) {
-        return _CheckAllWidget(
-          value: selectedInvoices.isNotEmpty &&
-              state.items.isEqual(selectedInvoices),
-          onChanged: (value) => context.read<NewPaymentBloc>().add(
-                NewPaymentEvent.updateAllInvoices(
-                  items: (value ?? false) ? state.items : <CustomerOpenItem>[],
-                ),
-              ),
-        );
-      },
-    );
-  }
-}
-
-class _CheckAllWidget extends StatelessWidget {
-  final bool value;
-  final ValueChanged<bool?> onChanged;
-
-  const _CheckAllWidget({
-    Key? key,
-    required this.value,
-    required this.onChanged,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CheckboxListTile(
-          key: WidgetKeys.checkAllWidget,
-          contentPadding: EdgeInsets.zero,
-          title: Text(
-            context.tr('All'),
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-          controlAffinity: ListTileControlAffinity.leading,
-          dense: true,
-          visualDensity: VisualDensity.compact,
-          onChanged: onChanged,
-          value: value,
-        ),
-        const Divider(
-          indent: 0,
-          endIndent: 0,
-          color: ZPColors.lightGray2,
-        ),
-      ],
     );
   }
 }

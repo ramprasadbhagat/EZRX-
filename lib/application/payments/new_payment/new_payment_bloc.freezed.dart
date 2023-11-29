@@ -32,8 +32,11 @@ mixin _$NewPaymentEvent {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,8 +53,11 @@ mixin _$NewPaymentEvent {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,8 +74,11 @@ mixin _$NewPaymentEvent {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -87,6 +96,9 @@ mixin _$NewPaymentEvent {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -103,6 +115,9 @@ mixin _$NewPaymentEvent {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -119,6 +134,9 @@ mixin _$NewPaymentEvent {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -273,8 +291,11 @@ class _$_initialized implements _initialized {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return initialized(salesOrganisation, customerCodeInfo, user);
   }
@@ -294,8 +315,11 @@ class _$_initialized implements _initialized {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return initialized?.call(salesOrganisation, customerCodeInfo, user);
   }
@@ -315,8 +339,11 @@ class _$_initialized implements _initialized {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -340,6 +367,9 @@ class _$_initialized implements _initialized {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return initialized(this);
   }
@@ -359,6 +389,9 @@ class _$_initialized implements _initialized {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return initialized?.call(this);
   }
@@ -378,6 +411,9 @@ class _$_initialized implements _initialized {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -487,8 +523,11 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return updateAllInvoices(items);
   }
@@ -508,8 +547,11 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return updateAllInvoices?.call(items);
   }
@@ -529,8 +571,11 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (updateAllInvoices != null) {
@@ -554,6 +599,9 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return updateAllInvoices(this);
   }
@@ -573,6 +621,9 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return updateAllInvoices?.call(this);
   }
@@ -592,6 +643,9 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (updateAllInvoices != null) {
@@ -708,8 +762,11 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return toggleInvoice(item, selected);
   }
@@ -729,8 +786,11 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return toggleInvoice?.call(item, selected);
   }
@@ -750,8 +810,11 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (toggleInvoice != null) {
@@ -775,6 +838,9 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return toggleInvoice(this);
   }
@@ -794,6 +860,9 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return toggleInvoice?.call(this);
   }
@@ -813,6 +882,9 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (toggleInvoice != null) {
@@ -919,8 +991,11 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return updateAllCredits(items);
   }
@@ -940,8 +1015,11 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return updateAllCredits?.call(items);
   }
@@ -961,8 +1039,11 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (updateAllCredits != null) {
@@ -986,6 +1067,9 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return updateAllCredits(this);
   }
@@ -1005,6 +1089,9 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return updateAllCredits?.call(this);
   }
@@ -1024,6 +1111,9 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (updateAllCredits != null) {
@@ -1140,8 +1230,11 @@ class _$_ToggleCredit implements _ToggleCredit {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return toggleCredit(item, selected);
   }
@@ -1161,8 +1254,11 @@ class _$_ToggleCredit implements _ToggleCredit {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return toggleCredit?.call(item, selected);
   }
@@ -1182,8 +1278,11 @@ class _$_ToggleCredit implements _ToggleCredit {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (toggleCredit != null) {
@@ -1207,6 +1306,9 @@ class _$_ToggleCredit implements _ToggleCredit {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return toggleCredit(this);
   }
@@ -1226,6 +1328,9 @@ class _$_ToggleCredit implements _ToggleCredit {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return toggleCredit?.call(this);
   }
@@ -1245,6 +1350,9 @@ class _$_ToggleCredit implements _ToggleCredit {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (toggleCredit != null) {
@@ -1316,8 +1424,11 @@ class _$_Pay implements _Pay {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return pay();
   }
@@ -1337,8 +1448,11 @@ class _$_Pay implements _Pay {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return pay?.call();
   }
@@ -1358,8 +1472,11 @@ class _$_Pay implements _Pay {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (pay != null) {
@@ -1383,6 +1500,9 @@ class _$_Pay implements _Pay {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return pay(this);
   }
@@ -1402,6 +1522,9 @@ class _$_Pay implements _Pay {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return pay?.call(this);
   }
@@ -1421,6 +1544,9 @@ class _$_Pay implements _Pay {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (pay != null) {
@@ -1524,8 +1650,11 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return getCustomerPayment(paymentInfo);
   }
@@ -1545,8 +1674,11 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return getCustomerPayment?.call(paymentInfo);
   }
@@ -1566,8 +1698,11 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (getCustomerPayment != null) {
@@ -1591,6 +1726,9 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return getCustomerPayment(this);
   }
@@ -1610,6 +1748,9 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return getCustomerPayment?.call(this);
   }
@@ -1629,6 +1770,9 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (getCustomerPayment != null) {
@@ -1728,8 +1872,11 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return updatePaymentGateway(paymentUrl);
   }
@@ -1749,8 +1896,11 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return updatePaymentGateway?.call(paymentUrl);
   }
@@ -1770,8 +1920,11 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (updatePaymentGateway != null) {
@@ -1795,6 +1948,9 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return updatePaymentGateway(this);
   }
@@ -1814,6 +1970,9 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return updatePaymentGateway?.call(this);
   }
@@ -1833,6 +1992,9 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (updatePaymentGateway != null) {
@@ -1904,8 +2066,11 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return fetchInvoiceInfoPdf();
   }
@@ -1925,8 +2090,11 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return fetchInvoiceInfoPdf?.call();
   }
@@ -1946,8 +2114,11 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (fetchInvoiceInfoPdf != null) {
@@ -1971,6 +2142,9 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return fetchInvoiceInfoPdf(this);
   }
@@ -1990,6 +2164,9 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return fetchInvoiceInfoPdf?.call(this);
   }
@@ -2009,6 +2186,9 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (fetchInvoiceInfoPdf != null) {
@@ -2102,8 +2282,11 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return saveInvoicePdf(dataInvoicePdf);
   }
@@ -2123,8 +2306,11 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return saveInvoicePdf?.call(dataInvoicePdf);
   }
@@ -2144,8 +2330,11 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (saveInvoicePdf != null) {
@@ -2169,6 +2358,9 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return saveInvoicePdf(this);
   }
@@ -2188,6 +2380,9 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return saveInvoicePdf?.call(this);
   }
@@ -2207,6 +2402,9 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (saveInvoicePdf != null) {
@@ -2233,7 +2431,9 @@ abstract class _$$_UpdatePaymentMethodSelectedCopyWith<$Res> {
           $Res Function(_$_UpdatePaymentMethodSelected) then) =
       __$$_UpdatePaymentMethodSelectedCopyWithImpl<$Res>;
   @useResult
-  $Res call({PaymentMethodValue paymentMethodSelected});
+  $Res call({NewPaymentMethod paymentMethodSelected});
+
+  $NewPaymentMethodCopyWith<$Res> get paymentMethodSelected;
 }
 
 /// @nodoc
@@ -2254,8 +2454,17 @@ class __$$_UpdatePaymentMethodSelectedCopyWithImpl<$Res>
       paymentMethodSelected: null == paymentMethodSelected
           ? _value.paymentMethodSelected
           : paymentMethodSelected // ignore: cast_nullable_to_non_nullable
-              as PaymentMethodValue,
+              as NewPaymentMethod,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NewPaymentMethodCopyWith<$Res> get paymentMethodSelected {
+    return $NewPaymentMethodCopyWith<$Res>(_value.paymentMethodSelected,
+        (value) {
+      return _then(_value.copyWith(paymentMethodSelected: value));
+    });
   }
 }
 
@@ -2265,7 +2474,7 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
   const _$_UpdatePaymentMethodSelected({required this.paymentMethodSelected});
 
   @override
-  final PaymentMethodValue paymentMethodSelected;
+  final NewPaymentMethod paymentMethodSelected;
 
   @override
   String toString() {
@@ -2308,8 +2517,11 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     required TResult Function(Uri paymentUrl) updatePaymentGateway,
     required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
-    required TResult Function(PaymentMethodValue paymentMethodSelected)
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
         updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
   }) {
     return updatePaymentMethodSelected(paymentMethodSelected);
   }
@@ -2329,8 +2541,11 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     TResult? Function(Uri paymentUrl)? updatePaymentGateway,
     TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
   }) {
     return updatePaymentMethodSelected?.call(paymentMethodSelected);
   }
@@ -2350,8 +2565,11 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     TResult Function(Uri paymentUrl)? updatePaymentGateway,
     TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
-    TResult Function(PaymentMethodValue paymentMethodSelected)?
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
         updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (updatePaymentMethodSelected != null) {
@@ -2375,6 +2593,9 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
     required TResult Function(_UpdatePaymentMethodSelected value)
         updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
   }) {
     return updatePaymentMethodSelected(this);
   }
@@ -2394,6 +2615,9 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult? Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
   }) {
     return updatePaymentMethodSelected?.call(this);
   }
@@ -2413,6 +2637,9 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
     TResult Function(_UpdatePaymentMethodSelected value)?
         updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
     required TResult orElse(),
   }) {
     if (updatePaymentMethodSelected != null) {
@@ -2424,13 +2651,444 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
 
 abstract class _UpdatePaymentMethodSelected implements NewPaymentEvent {
   const factory _UpdatePaymentMethodSelected(
-          {required final PaymentMethodValue paymentMethodSelected}) =
+          {required final NewPaymentMethod paymentMethodSelected}) =
       _$_UpdatePaymentMethodSelected;
 
-  PaymentMethodValue get paymentMethodSelected;
+  NewPaymentMethod get paymentMethodSelected;
   @JsonKey(ignore: true)
   _$$_UpdatePaymentMethodSelectedCopyWith<_$_UpdatePaymentMethodSelected>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdatePaymentMethodOptionSelectedCopyWith<$Res> {
+  factory _$$_UpdatePaymentMethodOptionSelectedCopyWith(
+          _$_UpdatePaymentMethodOptionSelected value,
+          $Res Function(_$_UpdatePaymentMethodOptionSelected) then) =
+      __$$_UpdatePaymentMethodOptionSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PaymentMethodOption paymentMethodOptionSelected});
+
+  $PaymentMethodOptionCopyWith<$Res> get paymentMethodOptionSelected;
+}
+
+/// @nodoc
+class __$$_UpdatePaymentMethodOptionSelectedCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res,
+        _$_UpdatePaymentMethodOptionSelected>
+    implements _$$_UpdatePaymentMethodOptionSelectedCopyWith<$Res> {
+  __$$_UpdatePaymentMethodOptionSelectedCopyWithImpl(
+      _$_UpdatePaymentMethodOptionSelected _value,
+      $Res Function(_$_UpdatePaymentMethodOptionSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? paymentMethodOptionSelected = null,
+  }) {
+    return _then(_$_UpdatePaymentMethodOptionSelected(
+      paymentMethodOptionSelected: null == paymentMethodOptionSelected
+          ? _value.paymentMethodOptionSelected
+          : paymentMethodOptionSelected // ignore: cast_nullable_to_non_nullable
+              as PaymentMethodOption,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentMethodOptionCopyWith<$Res> get paymentMethodOptionSelected {
+    return $PaymentMethodOptionCopyWith<$Res>(
+        _value.paymentMethodOptionSelected, (value) {
+      return _then(_value.copyWith(paymentMethodOptionSelected: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdatePaymentMethodOptionSelected
+    implements _UpdatePaymentMethodOptionSelected {
+  const _$_UpdatePaymentMethodOptionSelected(
+      {required this.paymentMethodOptionSelected});
+
+  @override
+  final PaymentMethodOption paymentMethodOptionSelected;
+
+  @override
+  String toString() {
+    return 'NewPaymentEvent.updatePaymentMethodOptionSelected(paymentMethodOptionSelected: $paymentMethodOptionSelected)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdatePaymentMethodOptionSelected &&
+            (identical(other.paymentMethodOptionSelected,
+                    paymentMethodOptionSelected) ||
+                other.paymentMethodOptionSelected ==
+                    paymentMethodOptionSelected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, paymentMethodOptionSelected);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdatePaymentMethodOptionSelectedCopyWith<
+          _$_UpdatePaymentMethodOptionSelected>
+      get copyWith => __$$_UpdatePaymentMethodOptionSelectedCopyWithImpl<
+          _$_UpdatePaymentMethodOptionSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
+    required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
+    required TResult Function(CustomerOpenItem item, bool selected)
+        toggleInvoice,
+    required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
+    required TResult Function(CustomerOpenItem item, bool selected)
+        toggleCredit,
+    required TResult Function() pay,
+    required TResult Function(PaymentInfo paymentInfo) getCustomerPayment,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
+    required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
+        updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
+  }) {
+    return updatePaymentMethodOptionSelected(paymentMethodOptionSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
+    TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
+    TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
+    TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
+    TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
+    TResult? Function()? pay,
+    TResult? Function(PaymentInfo paymentInfo)? getCustomerPayment,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
+    TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
+        updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
+  }) {
+    return updatePaymentMethodOptionSelected?.call(paymentMethodOptionSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
+    TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
+    TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
+    TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
+    TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
+    TResult Function()? pay,
+    TResult Function(PaymentInfo paymentInfo)? getCustomerPayment,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
+    TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
+        updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
+    required TResult orElse(),
+  }) {
+    if (updatePaymentMethodOptionSelected != null) {
+      return updatePaymentMethodOptionSelected(paymentMethodOptionSelected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_SelectAllInvoices value) updateAllInvoices,
+    required TResult Function(_ToggleInvoice value) toggleInvoice,
+    required TResult Function(_SelectAllCredits value) updateAllCredits,
+    required TResult Function(_ToggleCredit value) toggleCredit,
+    required TResult Function(_Pay value) pay,
+    required TResult Function(_GetCustomerPayment value) getCustomerPayment,
+    required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
+    required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
+    required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+  }) {
+    return updatePaymentMethodOptionSelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
+    TResult? Function(_ToggleInvoice value)? toggleInvoice,
+    TResult? Function(_SelectAllCredits value)? updateAllCredits,
+    TResult? Function(_ToggleCredit value)? toggleCredit,
+    TResult? Function(_Pay value)? pay,
+    TResult? Function(_GetCustomerPayment value)? getCustomerPayment,
+    TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
+    TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
+    TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+  }) {
+    return updatePaymentMethodOptionSelected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_SelectAllInvoices value)? updateAllInvoices,
+    TResult Function(_ToggleInvoice value)? toggleInvoice,
+    TResult Function(_SelectAllCredits value)? updateAllCredits,
+    TResult Function(_ToggleCredit value)? toggleCredit,
+    TResult Function(_Pay value)? pay,
+    TResult Function(_GetCustomerPayment value)? getCustomerPayment,
+    TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
+    TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
+    TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    required TResult orElse(),
+  }) {
+    if (updatePaymentMethodOptionSelected != null) {
+      return updatePaymentMethodOptionSelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdatePaymentMethodOptionSelected implements NewPaymentEvent {
+  const factory _UpdatePaymentMethodOptionSelected(
+          {required final PaymentMethodOption paymentMethodOptionSelected}) =
+      _$_UpdatePaymentMethodOptionSelected;
+
+  PaymentMethodOption get paymentMethodOptionSelected;
+  @JsonKey(ignore: true)
+  _$$_UpdatePaymentMethodOptionSelectedCopyWith<
+          _$_UpdatePaymentMethodOptionSelected>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_CreateVirtualAccountCopyWith<$Res> {
+  factory _$$_CreateVirtualAccountCopyWith(_$_CreateVirtualAccount value,
+          $Res Function(_$_CreateVirtualAccount) then) =
+      __$$_CreateVirtualAccountCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CreateVirtualAccountCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$_CreateVirtualAccount>
+    implements _$$_CreateVirtualAccountCopyWith<$Res> {
+  __$$_CreateVirtualAccountCopyWithImpl(_$_CreateVirtualAccount _value,
+      $Res Function(_$_CreateVirtualAccount) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_CreateVirtualAccount implements _CreateVirtualAccount {
+  const _$_CreateVirtualAccount();
+
+  @override
+  String toString() {
+    return 'NewPaymentEvent.createVirtualAccount()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_CreateVirtualAccount);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
+    required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
+    required TResult Function(CustomerOpenItem item, bool selected)
+        toggleInvoice,
+    required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
+    required TResult Function(CustomerOpenItem item, bool selected)
+        toggleCredit,
+    required TResult Function() pay,
+    required TResult Function(PaymentInfo paymentInfo) getCustomerPayment,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
+    required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
+        updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
+  }) {
+    return createVirtualAccount();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
+    TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
+    TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
+    TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
+    TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
+    TResult? Function()? pay,
+    TResult? Function(PaymentInfo paymentInfo)? getCustomerPayment,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
+    TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
+        updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
+  }) {
+    return createVirtualAccount?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
+    TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
+    TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
+    TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
+    TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
+    TResult Function()? pay,
+    TResult Function(PaymentInfo paymentInfo)? getCustomerPayment,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
+    TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
+        updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
+    required TResult orElse(),
+  }) {
+    if (createVirtualAccount != null) {
+      return createVirtualAccount();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_SelectAllInvoices value) updateAllInvoices,
+    required TResult Function(_ToggleInvoice value) toggleInvoice,
+    required TResult Function(_SelectAllCredits value) updateAllCredits,
+    required TResult Function(_ToggleCredit value) toggleCredit,
+    required TResult Function(_Pay value) pay,
+    required TResult Function(_GetCustomerPayment value) getCustomerPayment,
+    required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
+    required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
+    required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+  }) {
+    return createVirtualAccount(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
+    TResult? Function(_ToggleInvoice value)? toggleInvoice,
+    TResult? Function(_SelectAllCredits value)? updateAllCredits,
+    TResult? Function(_ToggleCredit value)? toggleCredit,
+    TResult? Function(_Pay value)? pay,
+    TResult? Function(_GetCustomerPayment value)? getCustomerPayment,
+    TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
+    TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
+    TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+  }) {
+    return createVirtualAccount?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_SelectAllInvoices value)? updateAllInvoices,
+    TResult Function(_ToggleInvoice value)? toggleInvoice,
+    TResult Function(_SelectAllCredits value)? updateAllCredits,
+    TResult Function(_ToggleCredit value)? toggleCredit,
+    TResult Function(_Pay value)? pay,
+    TResult Function(_GetCustomerPayment value)? getCustomerPayment,
+    TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
+    TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
+    TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    required TResult orElse(),
+  }) {
+    if (createVirtualAccount != null) {
+      return createVirtualAccount(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CreateVirtualAccount implements NewPaymentEvent {
+  const factory _CreateVirtualAccount() = _$_CreateVirtualAccount;
 }
 
 /// @nodoc
@@ -2449,13 +3107,16 @@ mixin _$NewPaymentState {
       throw _privateConstructorUsedError;
   bool get isSavingInvoicePdf => throw _privateConstructorUsedError;
   bool get isFetchingPaymentMethod => throw _privateConstructorUsedError;
-  List<PaymentMethodValue> get paymentMethods =>
+  List<NewPaymentMethod> get paymentMethods =>
       throw _privateConstructorUsedError;
-  PaymentMethodValue get selectedPaymentMethod =>
+  NewPaymentMethod get selectedPaymentMethod =>
       throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
+  bool get isCreatingVirtualAccount => throw _privateConstructorUsedError;
+  CreateVirtualAccount get createVirtualAccount =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewPaymentStateCopyWith<NewPaymentState> get copyWith =>
@@ -2478,17 +3139,21 @@ abstract class $NewPaymentStateCopyWith<$Res> {
       PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       bool isSavingInvoicePdf,
       bool isFetchingPaymentMethod,
-      List<PaymentMethodValue> paymentMethods,
-      PaymentMethodValue selectedPaymentMethod,
+      List<NewPaymentMethod> paymentMethods,
+      NewPaymentMethod selectedPaymentMethod,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
-      User user});
+      User user,
+      bool isCreatingVirtualAccount,
+      CreateVirtualAccount createVirtualAccount});
 
   $CustomerPaymentInfoCopyWith<$Res> get customerPaymentInfo;
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
+  $NewPaymentMethodCopyWith<$Res> get selectedPaymentMethod;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $UserCopyWith<$Res> get user;
+  $CreateVirtualAccountCopyWith<$Res> get createVirtualAccount;
 }
 
 /// @nodoc
@@ -2518,6 +3183,8 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? user = null,
+    Object? isCreatingVirtualAccount = null,
+    Object? createVirtualAccount = null,
   }) {
     return _then(_value.copyWith(
       customerPaymentInfo: null == customerPaymentInfo
@@ -2559,11 +3226,11 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
       paymentMethods: null == paymentMethods
           ? _value.paymentMethods
           : paymentMethods // ignore: cast_nullable_to_non_nullable
-              as List<PaymentMethodValue>,
+              as List<NewPaymentMethod>,
       selectedPaymentMethod: null == selectedPaymentMethod
           ? _value.selectedPaymentMethod
           : selectedPaymentMethod // ignore: cast_nullable_to_non_nullable
-              as PaymentMethodValue,
+              as NewPaymentMethod,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -2576,6 +3243,14 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      isCreatingVirtualAccount: null == isCreatingVirtualAccount
+          ? _value.isCreatingVirtualAccount
+          : isCreatingVirtualAccount // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createVirtualAccount: null == createVirtualAccount
+          ? _value.createVirtualAccount
+          : createVirtualAccount // ignore: cast_nullable_to_non_nullable
+              as CreateVirtualAccount,
     ) as $Val);
   }
 
@@ -2594,6 +3269,15 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
     return $PaymentInvoiceInfoPdfCopyWith<$Res>(_value.paymentInvoiceInfoPdf,
         (value) {
       return _then(_value.copyWith(paymentInvoiceInfoPdf: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NewPaymentMethodCopyWith<$Res> get selectedPaymentMethod {
+    return $NewPaymentMethodCopyWith<$Res>(_value.selectedPaymentMethod,
+        (value) {
+      return _then(_value.copyWith(selectedPaymentMethod: value) as $Val);
     });
   }
 
@@ -2620,6 +3304,15 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CreateVirtualAccountCopyWith<$Res> get createVirtualAccount {
+    return $CreateVirtualAccountCopyWith<$Res>(_value.createVirtualAccount,
+        (value) {
+      return _then(_value.copyWith(createVirtualAccount: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -2640,22 +3333,28 @@ abstract class _$$_NewPaymentStateCopyWith<$Res>
       PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       bool isSavingInvoicePdf,
       bool isFetchingPaymentMethod,
-      List<PaymentMethodValue> paymentMethods,
-      PaymentMethodValue selectedPaymentMethod,
+      List<NewPaymentMethod> paymentMethods,
+      NewPaymentMethod selectedPaymentMethod,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
-      User user});
+      User user,
+      bool isCreatingVirtualAccount,
+      CreateVirtualAccount createVirtualAccount});
 
   @override
   $CustomerPaymentInfoCopyWith<$Res> get customerPaymentInfo;
   @override
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
   @override
+  $NewPaymentMethodCopyWith<$Res> get selectedPaymentMethod;
+  @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   @override
   $UserCopyWith<$Res> get user;
+  @override
+  $CreateVirtualAccountCopyWith<$Res> get createVirtualAccount;
 }
 
 /// @nodoc
@@ -2683,6 +3382,8 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? user = null,
+    Object? isCreatingVirtualAccount = null,
+    Object? createVirtualAccount = null,
   }) {
     return _then(_$_NewPaymentState(
       customerPaymentInfo: null == customerPaymentInfo
@@ -2724,11 +3425,11 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
       paymentMethods: null == paymentMethods
           ? _value._paymentMethods
           : paymentMethods // ignore: cast_nullable_to_non_nullable
-              as List<PaymentMethodValue>,
+              as List<NewPaymentMethod>,
       selectedPaymentMethod: null == selectedPaymentMethod
           ? _value.selectedPaymentMethod
           : selectedPaymentMethod // ignore: cast_nullable_to_non_nullable
-              as PaymentMethodValue,
+              as NewPaymentMethod,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -2741,6 +3442,14 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      isCreatingVirtualAccount: null == isCreatingVirtualAccount
+          ? _value.isCreatingVirtualAccount
+          : isCreatingVirtualAccount // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createVirtualAccount: null == createVirtualAccount
+          ? _value.createVirtualAccount
+          : createVirtualAccount // ignore: cast_nullable_to_non_nullable
+              as CreateVirtualAccount,
     ));
   }
 }
@@ -2758,11 +3467,13 @@ class _$_NewPaymentState extends _NewPaymentState {
       required this.paymentInvoiceInfoPdf,
       required this.isSavingInvoicePdf,
       required this.isFetchingPaymentMethod,
-      required final List<PaymentMethodValue> paymentMethods,
+      required final List<NewPaymentMethod> paymentMethods,
       required this.selectedPaymentMethod,
       required this.salesOrganisation,
       required this.customerCodeInfo,
-      required this.user})
+      required this.user,
+      required this.isCreatingVirtualAccount,
+      required this.createVirtualAccount})
       : _selectedInvoices = selectedInvoices,
         _selectedCredits = selectedCredits,
         _paymentMethods = paymentMethods,
@@ -2799,26 +3510,30 @@ class _$_NewPaymentState extends _NewPaymentState {
   final bool isSavingInvoicePdf;
   @override
   final bool isFetchingPaymentMethod;
-  final List<PaymentMethodValue> _paymentMethods;
+  final List<NewPaymentMethod> _paymentMethods;
   @override
-  List<PaymentMethodValue> get paymentMethods {
+  List<NewPaymentMethod> get paymentMethods {
     if (_paymentMethods is EqualUnmodifiableListView) return _paymentMethods;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_paymentMethods);
   }
 
   @override
-  final PaymentMethodValue selectedPaymentMethod;
+  final NewPaymentMethod selectedPaymentMethod;
   @override
   final SalesOrganisation salesOrganisation;
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
   final User user;
+  @override
+  final bool isCreatingVirtualAccount;
+  @override
+  final CreateVirtualAccount createVirtualAccount;
 
   @override
   String toString() {
-    return 'NewPaymentState(customerPaymentInfo: $customerPaymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, user: $user)';
+    return 'NewPaymentState(customerPaymentInfo: $customerPaymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, user: $user, isCreatingVirtualAccount: $isCreatingVirtualAccount, createVirtualAccount: $createVirtualAccount)';
   }
 
   @override
@@ -2854,7 +3569,12 @@ class _$_NewPaymentState extends _NewPaymentState {
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(
+                    other.isCreatingVirtualAccount, isCreatingVirtualAccount) ||
+                other.isCreatingVirtualAccount == isCreatingVirtualAccount) &&
+            (identical(other.createVirtualAccount, createVirtualAccount) ||
+                other.createVirtualAccount == createVirtualAccount));
   }
 
   @override
@@ -2873,7 +3593,9 @@ class _$_NewPaymentState extends _NewPaymentState {
       selectedPaymentMethod,
       salesOrganisation,
       customerCodeInfo,
-      user);
+      user,
+      isCreatingVirtualAccount,
+      createVirtualAccount);
 
   @JsonKey(ignore: true)
   @override
@@ -2893,11 +3615,14 @@ abstract class _NewPaymentState extends NewPaymentState {
       required final PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       required final bool isSavingInvoicePdf,
       required final bool isFetchingPaymentMethod,
-      required final List<PaymentMethodValue> paymentMethods,
-      required final PaymentMethodValue selectedPaymentMethod,
+      required final List<NewPaymentMethod> paymentMethods,
+      required final NewPaymentMethod selectedPaymentMethod,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final User user}) = _$_NewPaymentState;
+      required final User user,
+      required final bool isCreatingVirtualAccount,
+      required final CreateVirtualAccount
+          createVirtualAccount}) = _$_NewPaymentState;
   const _NewPaymentState._() : super._();
 
   @override
@@ -2919,15 +3644,19 @@ abstract class _NewPaymentState extends NewPaymentState {
   @override
   bool get isFetchingPaymentMethod;
   @override
-  List<PaymentMethodValue> get paymentMethods;
+  List<NewPaymentMethod> get paymentMethods;
   @override
-  PaymentMethodValue get selectedPaymentMethod;
+  NewPaymentMethod get selectedPaymentMethod;
   @override
   SalesOrganisation get salesOrganisation;
   @override
   CustomerCodeInfo get customerCodeInfo;
   @override
   User get user;
+  @override
+  bool get isCreatingVirtualAccount;
+  @override
+  CreateVirtualAccount get createVirtualAccount;
   @override
   @JsonKey(ignore: true)
   _$$_NewPaymentStateCopyWith<_$_NewPaymentState> get copyWith =>

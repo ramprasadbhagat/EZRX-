@@ -43,6 +43,13 @@ class NewPaymentEvent with _$NewPaymentEvent {
   }) = _SaveInvoicePdf;
 
   const factory NewPaymentEvent.updatePaymentMethodSelected({
-    required PaymentMethodValue paymentMethodSelected,
+    required NewPaymentMethod paymentMethodSelected,
   }) = _UpdatePaymentMethodSelected;
+
+    const factory NewPaymentEvent.updatePaymentMethodOptionSelected({
+    required PaymentMethodOption paymentMethodOptionSelected,
+  }) = _UpdatePaymentMethodOptionSelected;
+
+    const factory NewPaymentEvent.createVirtualAccount() = _CreateVirtualAccount;
+
 }

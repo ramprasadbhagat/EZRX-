@@ -14,11 +14,13 @@ class NewPaymentState with _$NewPaymentState {
     required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
     required bool isSavingInvoicePdf,
     required bool isFetchingPaymentMethod,
-    required List<PaymentMethodValue> paymentMethods,
-    required PaymentMethodValue selectedPaymentMethod,
+    required List<NewPaymentMethod> paymentMethods,
+    required NewPaymentMethod selectedPaymentMethod,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required User user,
+    required bool isCreatingVirtualAccount,
+    required CreateVirtualAccount createVirtualAccount,
   }) = _NewPaymentState;
 
   factory NewPaymentState.initial() => NewPaymentState(
@@ -31,25 +33,43 @@ class NewPaymentState with _$NewPaymentState {
         paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
         isSavingInvoicePdf: false,
         isFetchingPaymentMethod: false,
-        paymentMethods: <PaymentMethodValue>[],
-        selectedPaymentMethod: PaymentMethodValue(''),
+        paymentMethods: <NewPaymentMethod>[],
+        selectedPaymentMethod: NewPaymentMethod.empty(),
         salesOrganisation: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         user: User.empty(),
+        isCreatingVirtualAccount: false,
+        createVirtualAccount: CreateVirtualAccount.empty(),
       );
 
   double get amountTotal =>
       selectedInvoices.amountTotal + selectedCredits.amountTotal;
 
-  bool get negativeAmountPayable => amountTotal.isNegative;
+  bool get negativeAmount => amountTotal.isNegative;
+
+  bool get virtualBankPayable =>
+      selectedPaymentMethod.firstSelectedOption != PaymentMethodOption.empty();
 
   List<CustomerOpenItem> get allSelectedItems =>
       selectedInvoices + selectedCredits;
 
   bool get needOpenWebViewAndNotBankIn =>
       salesOrganisation.salesOrg.isPaymentNeedOpenWebView &&
-      !selectedPaymentMethod.isBankIn;
+      !selectedPaymentMethod.paymentMethod.isBankIn;
 
   bool get canDisplayCrossButton =>
-      (salesOrganisation.salesOrg.isSg || selectedPaymentMethod.isBankIn) && !isFetchingInvoiceInfoPdf ;
+      (salesOrganisation.salesOrg.isSg ||
+          selectedPaymentMethod.paymentMethod.isBankIn) &&
+      !isFetchingInvoiceInfoPdf;
+
+  bool get onlyAllowMakePaymentSameBank => paymentMethods
+      .firstWhere(
+        (paymentMethod) =>
+            paymentMethod.paymentMethod == selectedPaymentMethod.paymentMethod,
+      )
+      .banksOnlyAllowTransferSameBank
+      .contains(selectedPaymentMethod.firstSelectedOption);
+
+  bool get enableCreateVirtualAccount =>
+      !negativeAmount && !isCreatingVirtualAccount && !virtualBankPayable;
 }

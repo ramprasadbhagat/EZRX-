@@ -8,15 +8,17 @@ import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
+import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
-import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
@@ -262,7 +264,7 @@ class NewPaymentRepository extends INewPaymentRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<PaymentMethodValue>>> fetchPaymentMethods({
+  Future<Either<ApiFailure, List<NewPaymentMethod>>> fetchPaymentMethods({
     required SalesOrganisation salesOrganisation,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -331,6 +333,49 @@ class NewPaymentRepository extends INewPaymentRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
         filter: CustomerPaymentFilterDto.fromDomain(filter),
+      );
+
+      return Right(response);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, CreateVirtualAccount>> createVirtualAccount({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required List<CustomerOpenItem> invoices,
+    required PaymentMethodOption paymentMethodOption,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.createVirtualAccount();
+
+        return Right(response);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final customerInvoices = invoices
+          .map(
+            (customerOpenItem) => CustomerInvoiceDto.fromDomain(
+              customerOpenItem,
+            ).accountingDocument,
+          )
+          .toList();
+
+      final response = await remoteDataSource.createVirtualAccount(
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        bankID: paymentMethodOption.bankOptionId.getOrDefaultValue(''),
+        provider: paymentMethodOption.prodiver.getOrDefaultValue(''),
+        invoices: customerInvoices,
       );
 
       return Right(response);

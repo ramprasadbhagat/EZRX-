@@ -88,6 +88,7 @@ class _PaymentSummarySection extends StatelessWidget {
                                                 state.amountTotal,
                                             MixpanelProps.paymentMethod: state
                                                 .selectedPaymentMethod
+                                                .paymentMethod
                                                 .getOrDefaultValue(''),
                                             MixpanelProps.paymentDocumentCount:
                                                 state.allSelectedItems.length,
@@ -120,6 +121,7 @@ class _PaymentSummarySection extends StatelessWidget {
                                                 'Payment failed in webview',
                                             MixpanelProps.paymentMethod: state
                                                 .selectedPaymentMethod
+                                                .paymentMethod
                                                 .getOrDefaultValue(''),
                                             MixpanelProps.paymentDocumentCount:
                                                 state.allSelectedItems.length,

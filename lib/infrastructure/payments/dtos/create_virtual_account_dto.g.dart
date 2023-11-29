@@ -1,0 +1,38 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'create_virtual_account_dto.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_CreateVirtualAccountDto _$$_CreateVirtualAccountDtoFromJson(
+        Map<String, dynamic> json) =>
+    _$_CreateVirtualAccountDto(
+      id: json['id'] as String? ?? '',
+      invoices: (json['invoices'] as List<dynamic>?)
+              ?.map((e) =>
+                  TransactionInvoiceDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      amountPayable: (json['amountPayable'] as num?)?.toDouble() ?? 0.0,
+      status: json['status'] as String? ?? '',
+      paymentDetails: PaymentDetailsDto.fromJson(
+          json['paymentDetails'] as Map<String, dynamic>),
+      paymentMethodDisplay: json['paymentMethodDisplay'] as String? ?? '',
+      createdOn: createdOnDate(json, 'createdOn') as String? ?? '',
+      paidOn: createdOnDate(json, 'paidOn') as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_CreateVirtualAccountDtoToJson(
+        _$_CreateVirtualAccountDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'invoices': instance.invoices.map((e) => e.toJson()).toList(),
+      'amountPayable': instance.amountPayable,
+      'status': instance.status,
+      'paymentDetails': instance.paymentDetails.toJson(),
+      'paymentMethodDisplay': instance.paymentMethodDisplay,
+      'createdOn': instance.createdOn,
+      'paidOn': instance.paidOn,
+    };

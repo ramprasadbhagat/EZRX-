@@ -6,7 +6,7 @@ class PaymentMethodsQueryMutation {
           salesOrg
           paymentMethods
         }
-      }
+}
     ''';
   }
 

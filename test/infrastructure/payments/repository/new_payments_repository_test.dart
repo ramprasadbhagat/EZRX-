@@ -10,10 +10,10 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
-import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
@@ -378,7 +378,7 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
         when(
           () => newPaymentLocalDataSource.fetchPaymentMethods(),
-        ).thenAnswer((invocation) async => [PaymentMethodValue('')]);
+        ).thenAnswer((invocation) async => [NewPaymentMethod.empty()]);
 
         final result = await nawPaymentsRepository.fetchPaymentMethods(
           salesOrganisation:
@@ -742,7 +742,7 @@ void main() {
           () => newPaymentRemoteDataSource.fetchPaymentMethods(
             salesOrg: fakeSalesOrg.getValue(),
           ),
-        ).thenAnswer((invocation) async => [PaymentMethodValue('')]);
+        ).thenAnswer((invocation) async => [NewPaymentMethod.empty()]);
 
         final result = await nawPaymentsRepository.fetchPaymentMethods(
           salesOrganisation:
