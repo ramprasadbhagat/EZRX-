@@ -53,7 +53,7 @@ class OrderSuccessPage extends StatelessWidget {
           },
           icon: const Icon(Icons.close),
         ),
-        title: Text('Order submitted!'.tr()),
+        title: Text('${'Order submitted'.tr()}!'),
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

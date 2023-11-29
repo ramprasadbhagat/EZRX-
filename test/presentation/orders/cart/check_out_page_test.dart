@@ -1779,7 +1779,10 @@ void main() {
           ),
           findsAtLeastNWidgets(1),
         );
-        expect(find.text('Subtotal (excl.tax):'), findsOneWidget);
+        expect(
+          find.text('${'Subtotal (excl.tax)'.tr()}:'),
+          findsOneWidget,
+        );
       },
     );
 

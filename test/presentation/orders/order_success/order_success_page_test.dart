@@ -348,7 +348,7 @@ void main() {
         expect(
           find.descendant(
             of: orderSummarySection,
-            matching: find.text('Subtotal (excl. tax):'),
+            matching: find.text('Subtotal (excl.tax):'),
           ),
           findsOneWidget,
         );

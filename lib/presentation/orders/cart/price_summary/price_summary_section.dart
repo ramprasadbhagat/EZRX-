@@ -26,9 +26,9 @@ class PriceSummarySection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              context.tr(
-                'Subtotal (${salesOrgConfig.displayPrefixTax}.tax):',
-              ),
+              '${context.tr(
+                'Subtotal (${salesOrgConfig.displayPrefixTax}.tax)',
+              )}:',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),

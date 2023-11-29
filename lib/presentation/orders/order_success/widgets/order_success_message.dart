@@ -48,11 +48,12 @@ class _OrderSuccessMessage extends StatelessWidget {
             ),
             subtitle: RichText(
               text: TextSpan(
-                text: 'Track your ordered items under '.tr(),
+                text: 'Track your ordered items under'.tr(),
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: ZPColors.darkGray,
                     ),
                 children: <TextSpan>[
+                  const TextSpan(text: ' '),
                   TextSpan(
                     text: 'Orders'.tr(),
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(

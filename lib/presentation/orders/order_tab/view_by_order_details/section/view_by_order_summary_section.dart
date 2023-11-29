@@ -42,7 +42,7 @@ class OrderSummarySection extends StatelessWidget {
           if (eligibilityState.salesOrg.isID) ...[
             _PriceTile(
               orderNumber: orderDetails.orderNumber,
-              title: context.tr('Subtotal (excl. tax)'),
+              title: context.tr('Subtotal (excl.tax)'),
               value: orderDetails.orderValue,
             ),
             const SizedBox(height: 10),
@@ -87,7 +87,7 @@ class OrderSummarySection extends StatelessWidget {
             _PriceTile(
               key: WidgetKeys.viewByOrderSubtotalKey,
               orderNumber: orderDetails.orderNumber,
-              title: context.tr('Subtotal (excl. tax)'),
+              title: context.tr('Subtotal (excl.tax)'),
               value: orderDetails.subTotalExcludeTax(isMYExternalSalesRep),
             ),
             /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web

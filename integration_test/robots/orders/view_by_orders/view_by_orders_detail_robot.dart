@@ -96,7 +96,7 @@ class ViewByOrdersDetailRobot {
 
   void verifySubTotalVisible(String value) {
     expect(
-      find.byKey(WidgetKeys.balanceTextRow('Subtotal (excl. tax)'.tr(), value)),
+      find.byKey(WidgetKeys.balanceTextRow('Subtotal (excl.tax)'.tr(), value)),
       findsOneWidget,
     );
   }

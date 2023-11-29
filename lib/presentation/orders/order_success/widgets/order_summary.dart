@@ -28,7 +28,7 @@ class _OrderSummary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                context.tr('Subtotal (excl. tax):'),
+                '${context.tr('Subtotal (excl.tax)')}:',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(

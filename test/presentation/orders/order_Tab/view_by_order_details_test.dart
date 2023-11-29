@@ -1292,7 +1292,7 @@ void main() {
         expect(
           find.descendant(
             of: find.byKey(WidgetKeys.priceText),
-            matching: find.text('Subtotal (excl. tax):'),
+            matching: find.text('Subtotal (excl.tax):'),
           ),
           findsOneWidget,
         );
