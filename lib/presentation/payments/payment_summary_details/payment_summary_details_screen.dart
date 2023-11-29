@@ -1,23 +1,22 @@
-import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/bank_instruction.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/attention_section.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/bank_account_section.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/detail_info_section.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/transfer_methods_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -29,12 +28,8 @@ part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/p
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/payment_summary_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/payment_details_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/payment_item_section.dart';
-part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/attention_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/invoices_and_credits_total_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/price_widget.dart';
-part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/bank_account_section.dart';
-part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/transfer_methods_section.dart';
-part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/detail_info_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/payment_basic_info_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/delete_cancel_advice_bottom_sheet.dart';
 

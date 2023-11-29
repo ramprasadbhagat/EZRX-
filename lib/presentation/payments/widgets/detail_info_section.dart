@@ -1,7 +1,9 @@
-part of 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 
-class _DetailsInfoSection extends StatelessWidget {
-  const _DetailsInfoSection({
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+
+class DetailsInfoSection extends StatelessWidget {
+  const DetailsInfoSection({
     Key? key,
     required this.label,
     this.labelStyle,

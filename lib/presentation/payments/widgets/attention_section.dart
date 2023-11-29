@@ -1,7 +1,14 @@
-part of 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 
-class _AttentionSection extends StatefulWidget {
-  const _AttentionSection({
+import 'dart:async';
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+
+class AttentionSection extends StatefulWidget {
+  const AttentionSection({
     Key? key,
     required this.widgetKey,
     required this.visible,
@@ -15,10 +22,10 @@ class _AttentionSection extends StatefulWidget {
   final VoidCallback onCountdownComplete;
 
   @override
-  _AttentionSectionState createState() => _AttentionSectionState();
+  AttentionSectionState createState() => AttentionSectionState();
 }
 
-class _AttentionSectionState extends State<_AttentionSection> {
+class AttentionSectionState extends State<AttentionSection> {
   Timer? _timer;
   late DateTimeStringValue threeDaysAfter;
   int currentRemainingDays = 0;

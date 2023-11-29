@@ -22,8 +22,11 @@ import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/create_payment_invoice_pdf.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/attention_section.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/bank_account_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/price_text.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/transfer_methods_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/gestures.dart';
@@ -40,6 +43,10 @@ part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/pa
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_summary_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_please_note.dart';
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_buttons.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_footer_section.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_body_section.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_body_apl_section.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_cancel_advice_button.dart';
 
 class PaymentAdviceCreatedPage extends StatelessWidget {
   const PaymentAdviceCreatedPage({Key? key}) : super(key: key);
@@ -92,31 +99,11 @@ class _BodyContent extends StatelessWidget {
         return state.isFetchingInvoiceInfoPdf
             ? Center(child: LoadingShimmer.logo())
             : Column(
-                children: [
+                children: const [
                   Expanded(
-                    child: ListView(
-                      children: [
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        state.selectedPaymentMethod.paymentMethod.isBankIn
-                            ? const _PaymentBankInAdviceMessage()
-                            : const _PaymentGatewayAdviceMessage(),
-                        state.needOpenWebViewAndNotBankIn
-                            ? const _PaymentAdviceNextStep()
-                            : const _PaymentAdvicePleaseNote(),
-                        const _PaymentInvoicePdf(),
-                        if (!state.selectedPaymentMethod.paymentMethod.isBankIn)
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: PaymentSavePdfButton(),
-                          ),
-                      ],
-                    ),
+                    child: _PaymentAdviceBodySection(),
                   ),
-                  state.needOpenWebViewAndNotBankIn
-                      ? const _PaymentSummarySection()
-                      : const _PaymentAdviceButtons(),
+                  _PaymentAdviceFooterSection(),
                 ],
               );
       },

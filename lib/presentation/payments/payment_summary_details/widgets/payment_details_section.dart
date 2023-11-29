@@ -20,7 +20,7 @@ class _PaymentDetailsSection extends StatelessWidget {
             const _PaymentBasicInfoSection(),
             LoadingShimmer.withChild(
               enabled: state.details.isEmpty,
-              child: _AttentionSection(
+              child: AttentionSection(
                 widgetKey: WidgetKeys.accountSummaryDetailsAttention,
                 visible: eligibilityState.salesOrg.isID &&
                     !state.details.status.getIsSuccessfulOrProcessed,
@@ -35,13 +35,13 @@ class _PaymentDetailsSection extends StatelessWidget {
                 },
               ),
             ),
-            _BankAccountSection(
+            BankAccountSection(
               widgetKey: WidgetKeys.accountSummaryBankAccountSection,
               visible: eligibilityState.salesOrg.isID,
               details: state.details,
               isLoading: state.isDetailFetching,
             ),
-            _TransferMethodsSection(
+            TransferMethodsSection(
               visible: eligibilityState.salesOrg.isID &&
                   !state.details.status.getIsSuccessfulOrProcessed,
               bankInstruction: state.bankInstruction,
@@ -55,7 +55,7 @@ class _PaymentDetailsSection extends StatelessWidget {
               endIndent: 0,
               color: ZPColors.lightGray2,
             ),
-            _DetailsInfoSection(
+            DetailsInfoSection(
               label: 'Payment details',
               child: AddressInfoSection.noAction(),
             ),

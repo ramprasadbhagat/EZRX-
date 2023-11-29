@@ -1,7 +1,17 @@
-part of 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/detail_info_section.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class _BankAccountSection extends StatelessWidget {
-  const _BankAccountSection({
+class BankAccountSection extends StatelessWidget {
+  const BankAccountSection({
     Key? key,
     required this.widgetKey,
     required this.details,
@@ -15,7 +25,7 @@ class _BankAccountSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return visible
-        ? _DetailsInfoSection(
+        ? DetailsInfoSection(
             label: 'Transfer to Virtual Bank Account',
             child: CustomCard(
               margin: EdgeInsets.zero,
@@ -39,6 +49,7 @@ class _BankAccountSection extends StatelessWidget {
                     title: 'Virtual bank account number',
                     text: details.bankAccountNumber.displayNAIfEmpty,
                     isLoading: isLoading,
+                    canCopy: true,
                   ),
                   _BankAccountInfoRow(
                     title: 'Total amount to transfer',
@@ -60,11 +71,13 @@ class _BankAccountInfoRow extends StatelessWidget {
     required this.text,
     this.isLoading = false,
     this.isPrice = false,
+    this.canCopy = false,
   }) : super(key: key);
   final String title;
   final String text;
   final bool isLoading;
   final bool isPrice;
+  final bool canCopy;
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +116,19 @@ class _BankAccountInfoRow extends StatelessWidget {
                                       color: ZPColors.primary,
                                     ),
                           ),
+                    if (canCopy)
+                      GestureDetector(
+                        onTap: () =>
+                            Clipboard.setData(ClipboardData(text: text)),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.copy,
+                            color: ZPColors.extraDarkGreen,
+                            size: 16,
+                          ),
+                        ),
+                      ),
                   ],
                 ),
         ],

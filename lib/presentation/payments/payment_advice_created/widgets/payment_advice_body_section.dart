@@ -1,0 +1,33 @@
+part of 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
+
+class _PaymentAdviceBodySection extends StatelessWidget {
+  const _PaymentAdviceBodySection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final newPaymentState = context.read<NewPaymentBloc>().state;
+    final isID = newPaymentState.salesOrganisation.salesOrg.isID;
+    if (isID) return const _PaymentAdviceBodyAPLSection();
+
+    return ListView(
+      children: [
+        const SizedBox(
+          height: 8,
+        ),
+        newPaymentState.selectedPaymentMethod.paymentMethod.isBankIn
+            ? const _PaymentBankInAdviceMessage()
+            : const _PaymentGatewayAdviceMessage(),
+        newPaymentState.needOpenWebViewAndNotBankIn
+            ? const _PaymentAdviceNextStep()
+            : const _PaymentAdvicePleaseNote(),
+        const _PaymentInvoicePdf(),
+        if (!newPaymentState.selectedPaymentMethod.paymentMethod.isBankIn)
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: PaymentSavePdfButton(),
+          ),
+        const SizedBox(height: 24),
+      ],
+    );
+  }
+}

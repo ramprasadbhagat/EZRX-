@@ -59,6 +59,7 @@ class NewPaymentState with _$NewPaymentState {
 
   bool get canDisplayCrossButton =>
       (salesOrganisation.salesOrg.isSg ||
+          salesOrganisation.salesOrg.isID ||
           selectedPaymentMethod.paymentMethod.isBankIn) &&
       !isFetchingInvoiceInfoPdf;
 

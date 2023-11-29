@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
@@ -102,6 +103,37 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
             StringValue(invoice.paymentBatchAdditionalInfo),
         accountingDocExternalReference: '',
         paymentItems: invoice.paymentItems,
+      );
+
+  factory PaymentSummaryDetails.fromCreateVirtualAccount(
+    CreateVirtualAccount createVirtualAccount,
+  ) =>
+      PaymentSummaryDetails(
+        bankAccountNumber: StringValue(''),
+        bankCountryKey: '',
+        bankIdentification: '',
+        bankKey: '',
+        bankName: StringValue(''),
+        customId: '',
+        iban: '',
+        status: FilterStatus(''),
+        paymentAmount: 0,
+        paymentCardHolderName: '',
+        paymentCardID: '',
+        paymentCardMaskedNumber: '',
+        paymentCardNumber: '',
+        paymentCardTypeName: '',
+        paymentDocument: '',
+        paymentID: StringValue(createVirtualAccount.id),
+        paymentMethod: StringValue(''),
+        transactionCurrency: '',
+        valueDate: createVirtualAccount.createdOn,
+        createdDate: createVirtualAccount.createdOn,
+        adviceExpiry: AdviceExpiryValue(''),
+        zzAdvice: StringValue(createVirtualAccount.id),
+        paymentBatchAdditionalInfo: StringValue(''),
+        accountingDocExternalReference: '',
+        paymentItems: <PaymentItem>[],
       );
 
   String get adviceExpiryText {

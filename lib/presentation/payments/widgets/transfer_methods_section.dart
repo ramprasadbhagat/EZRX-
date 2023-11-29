@@ -1,7 +1,13 @@
-part of 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 
-class _TransferMethodsSection extends StatelessWidget {
-  const _TransferMethodsSection({
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/payments/entities/bank_instruction.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/detail_info_section.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+
+class TransferMethodsSection extends StatelessWidget {
+  const TransferMethodsSection({
     Key? key,
     required this.visible,
     required this.bankInstruction,
@@ -11,7 +17,7 @@ class _TransferMethodsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return visible
-        ? _DetailsInfoSection(
+        ? DetailsInfoSection(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
             label: 'Transfer methods',
             labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(

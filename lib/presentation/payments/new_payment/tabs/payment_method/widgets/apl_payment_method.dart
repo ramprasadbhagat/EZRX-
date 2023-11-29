@@ -38,6 +38,13 @@ class _APLPaymentSelectorWidget extends StatelessWidget {
       listener: (context, state) {
         state.failureOrSuccessOption.fold(
           () {
+            context.read<PaymentSummaryDetailsBloc>().add(
+                  PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+                    details: PaymentSummaryDetails.fromCreateVirtualAccount(
+                      state.createVirtualAccount,
+                    ),
+                  ),
+                );
             context.router.pushAndPopUntil(
               const PaymentAdviceCreatedPageRoute(),
               predicate: (Route route) =>

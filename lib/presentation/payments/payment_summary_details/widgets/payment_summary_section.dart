@@ -14,7 +14,7 @@ class _PaymentSummarySection extends StatelessWidget {
       builder: (context, state) {
         return state.isLoading || state.details.paymentItems.isEmpty
             ? const SizedBox.shrink()
-            : _DetailsInfoSection(
+            : DetailsInfoSection(
                 label: 'Payment summary',
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
