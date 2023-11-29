@@ -4,8 +4,10 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
@@ -220,6 +222,45 @@ void main() {
           const ViewByItemDetailsPageRoute(),
         ),
       ).called(1);
+    });
+
+    testWidgets('Find Free tag for bonus items', (tester) async {
+      final fakeOrderHistory = OrderHistory.empty().copyWith(
+        orderHistoryItems: [
+          OrderHistoryItem.empty().copyWith(
+            totalPrice: TotalPrice('40.0'),
+          ),
+          OrderHistoryItem.empty().copyWith(
+            isBonusMaterial: true,
+            totalPrice: TotalPrice('20.0'),
+          )
+        ],
+      );
+      when(
+        () => eligibilityBlocMock.state,
+      ).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeEmptySalesConfigs.copyWith(
+            currency: Currency('MYR'),
+          ),
+        ),
+      );
+      when(
+        () => viewByItemsBlocMock.state,
+      ).thenAnswer(
+        (invocation) => ViewByItemsState.initial().copyWith(
+          orderHistory: fakeOrderHistory,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final bonusMaterialFreeTag = find.text('FREE', findRichText: true);
+      final commercialMaterialTotalPrice =
+          find.text('MYR 40.00', findRichText: true);
+      expect(bonusMaterialFreeTag, findsOneWidget);
+      expect(commercialMaterialTotalPrice, findsOneWidget);
     });
   });
 }

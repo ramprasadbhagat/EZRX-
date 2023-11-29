@@ -157,7 +157,9 @@ class _ProductTile extends StatelessWidget {
                         height: 5,
                       ),
                       PriceComponent(
-                        price: product.totalPrice.getOrDefaultValue(''),
+                        price: product.itemTotalPrice(
+                          context.read<EligibilityBloc>().state.salesOrg.isID,
+                        ),
                         salesOrgConfig: context
                             .read<EligibilityBloc>()
                             .state
