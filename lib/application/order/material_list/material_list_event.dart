@@ -3,6 +3,11 @@ part of 'material_list_bloc.dart';
 @freezed
 class MaterialListEvent with _$MaterialListEvent {
   const factory MaterialListEvent.initialized() = _Initialized;
+  const factory MaterialListEvent.watchFavoriteStatus() =
+      _WatchFavoriteStatus;
+  const factory MaterialListEvent.updateFavoriteStatus({
+    required MaterialInfo updatedMaterial,
+  }) = _UpdateFavoriteStatus;
   factory MaterialListEvent.fetch({
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs configs,

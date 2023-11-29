@@ -64,6 +64,12 @@ void main() {
         'Add to favourite success locally',
         () async {
           when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(
+            () => localDataSourceMock.notifyFavoriteStatusUpdated(
+              nonFavouriteMaterialMock,
+              true,
+            ),
+          ).thenAnswer((_) {});
           when(() => localDataSourceMock.addFavouriteMaterial()).thenAnswer(
             (_) async => AddFavourite(
               addFavouriteMaterial: FavouriteResponse(1),
@@ -129,6 +135,12 @@ void main() {
               addFavouriteMaterial: FavouriteResponse(1),
             ),
           );
+          when(
+            () => localDataSourceMock.notifyFavoriteStatusUpdated(
+              nonFavouriteMaterialMock,
+              true,
+            ),
+          ).thenAnswer((_) {});
           final result = await repository.addToFavourites(
             materialNumber: nonFavouriteMaterialMock,
             list: materialListMock,
@@ -193,6 +205,12 @@ void main() {
               removeFavouriteMaterial: FavouriteResponse(1),
             ),
           );
+          when(
+            () => localDataSourceMock.notifyFavoriteStatusUpdated(
+              favouriteMaterialMock,
+              false,
+            ),
+          ).thenAnswer((_) {});
           final result = await repository.removeFromFavourites(
             materialNumber: favouriteMaterialMock,
             list: materialListMock,
@@ -253,6 +271,12 @@ void main() {
               removeFavouriteMaterial: FavouriteResponse(1),
             ),
           );
+          when(
+            () => localDataSourceMock.notifyFavoriteStatusUpdated(
+              favouriteMaterialMock,
+              false,
+            ),
+          ).thenAnswer((_) {});
           final result = await repository.removeFromFavourites(
             materialNumber: favouriteMaterialMock,
             list: materialListMock,

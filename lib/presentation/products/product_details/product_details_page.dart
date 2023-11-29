@@ -310,7 +310,7 @@ class _Description extends StatelessWidget {
           },
           builder: (context, state) {
             return FavouriteIcon(
-              enable: state.isFetching,
+              enable: !state.isFetching,
               key: WidgetKeys.materialDetailsFavoriteIcon,
               isFavourite:
                   state.productDetailAggregate.materialInfo.isFavourite,

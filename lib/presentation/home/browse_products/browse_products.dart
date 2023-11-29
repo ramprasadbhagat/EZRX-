@@ -119,7 +119,17 @@ class _BrowseProductCard extends StatelessWidget {
         key: WidgetKeys.browseProductsList,
         materialInfo: product,
         onTap: () => _productOnTap(context, product),
-        onFavouriteTap: () {},
+        onFavouriteTap: () {
+          context.read<MaterialListBloc>().add(
+                product.isFavourite
+                    ? MaterialListEvent.deleteFavourite(
+                        item: product,
+                      )
+                    : MaterialListEvent.addFavourite(
+                        item: product,
+                      ),
+              );
+        },
       ),
     );
   }

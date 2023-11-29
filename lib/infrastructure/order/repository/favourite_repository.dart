@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/favourite_status.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_favourites_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_local.dart';
@@ -39,6 +42,11 @@ class FavouriteRepository implements IFavouriteRepository {
             )
             .toList();
 
+        favouriteLocalDataSource.notifyFavoriteStatusUpdated(
+          materialNumber,
+          true,
+        );
+
         return Right(updatedList);
       } catch (e) {
         return Left(
@@ -60,6 +68,11 @@ class FavouriteRepository implements IFavouriteRepository {
                   : element,
             )
             .toList();
+
+        favouriteLocalDataSource.notifyFavoriteStatusUpdated(
+          materialNumber,
+          true,
+        );
 
         return Right(updatedList);
       } catch (e) {
@@ -90,6 +103,11 @@ class FavouriteRepository implements IFavouriteRepository {
             )
             .toList();
 
+        favouriteLocalDataSource.notifyFavoriteStatusUpdated(
+          materialNumber,
+          false,
+        );
+
         return Right(updatedList);
       } catch (e) {
         return Left(
@@ -112,6 +130,11 @@ class FavouriteRepository implements IFavouriteRepository {
                   : element,
             )
             .toList();
+
+        favouriteLocalDataSource.notifyFavoriteStatusUpdated(
+          materialNumber,
+          false,
+        );
 
         return Right(updatedList);
       } catch (e) {
@@ -187,4 +210,8 @@ class FavouriteRepository implements IFavouriteRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Stream<MaterialInfo> watchFavoriteStatus() =>
+      favouriteLocalDataSource.favoriteStatusData;
 }

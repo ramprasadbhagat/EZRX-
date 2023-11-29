@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -23,6 +25,8 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
   final IMaterialListRepository materialListRepository;
   final IFavouriteRepository favouriteRepository;
   final Config config;
+  StreamSubscription<MaterialInfo>? _favoriteStatusStreamSubscription;
+
   MaterialListBloc({
     required this.materialListRepository,
     required this.favouriteRepository,
@@ -137,6 +141,27 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         },
       );
     });
+    on<_WatchFavoriteStatus>((e, emit) async {
+      await _favoriteStatusStreamSubscription?.cancel();
+      _favoriteStatusStreamSubscription =
+          favouriteRepository.watchFavoriteStatus().listen(
+                (event) => add(_UpdateFavoriteStatus(updatedMaterial: event)),
+              );
+    });
+    on<_UpdateFavoriteStatus>((e, emit) {
+      emit(
+        state.copyWith(
+          materialList: state.materialList
+              .map(
+                (item) => item.materialNumber ==
+                        e.updatedMaterial.materialNumber
+                    ? item.copyWith(isFavourite: e.updatedMaterial.isFavourite)
+                    : item,
+              )
+              .toList(),
+        ),
+      );
+    });
     on<_AddFavourite>(
       (e, emit) async {
         final failureOrSuccess = await favouriteRepository.addToFavourites(
@@ -189,10 +214,13 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         );
       }),
     );
+    add(const _WatchFavoriteStatus());
   }
 
   @override
-  void onChange(Change<MaterialListState> change) {
-    super.onChange(change);
+  Future<void> close() async {
+    await _favoriteStatusStreamSubscription?.cancel();
+
+    return super.close();
   }
 }

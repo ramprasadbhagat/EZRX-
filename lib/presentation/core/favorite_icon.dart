@@ -20,8 +20,9 @@ class FavouriteIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      splashColor: enable ? ZPColors.transparent : ZPColors.lightGray,
-      onPressed: enable ? null : onTap,
+      highlightColor: ZPColors.transparent,
+      splashColor: ZPColors.transparent,
+      onPressed: enable ? onTap : null,
       visualDensity: visualDensity,
       padding: EdgeInsets.zero,
       constraints: constraints,

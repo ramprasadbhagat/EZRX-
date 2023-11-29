@@ -19,6 +19,9 @@ mixin _$MaterialListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
+    required TResult Function() watchFavoriteStatus,
+    required TResult Function(MaterialInfo updatedMaterial)
+        updateFavoriteStatus,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -40,6 +43,8 @@ mixin _$MaterialListEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function()? watchFavoriteStatus,
+    TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -61,6 +66,8 @@ mixin _$MaterialListEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function()? watchFavoriteStatus,
+    TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -83,6 +90,8 @@ mixin _$MaterialListEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
+    required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
@@ -93,6 +102,8 @@ mixin _$MaterialListEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
@@ -103,6 +114,8 @@ mixin _$MaterialListEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
@@ -170,6 +183,9 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
+    required TResult Function() watchFavoriteStatus,
+    required TResult Function(MaterialInfo updatedMaterial)
+        updateFavoriteStatus,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -194,6 +210,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function()? watchFavoriteStatus,
+    TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -218,6 +236,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function()? watchFavoriteStatus,
+    TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -246,6 +266,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
+    required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
@@ -259,6 +281,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
@@ -272,6 +296,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
@@ -288,6 +314,394 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements MaterialListEvent {
   const factory _Initialized() = _$_Initialized;
+}
+
+/// @nodoc
+abstract class _$$_WatchFavoriteStatusCopyWith<$Res> {
+  factory _$$_WatchFavoriteStatusCopyWith(_$_WatchFavoriteStatus value,
+          $Res Function(_$_WatchFavoriteStatus) then) =
+      __$$_WatchFavoriteStatusCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_WatchFavoriteStatusCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$_WatchFavoriteStatus>
+    implements _$$_WatchFavoriteStatusCopyWith<$Res> {
+  __$$_WatchFavoriteStatusCopyWithImpl(_$_WatchFavoriteStatus _value,
+      $Res Function(_$_WatchFavoriteStatus) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
+  const _$_WatchFavoriteStatus();
+
+  @override
+  String toString() {
+    return 'MaterialListEvent.watchFavoriteStatus()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_WatchFavoriteStatus);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() watchFavoriteStatus,
+    required TResult Function(MaterialInfo updatedMaterial)
+        updateFavoriteStatus,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        fetch,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
+        loadMore,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
+  }) {
+    return watchFavoriteStatus();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? watchFavoriteStatus,
+    TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        loadMore,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
+  }) {
+    return watchFavoriteStatus?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? watchFavoriteStatus,
+    TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        fetch,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        loadMore,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (watchFavoriteStatus != null) {
+      return watchFavoriteStatus();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
+    required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+  }) {
+    return watchFavoriteStatus(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+  }) {
+    return watchFavoriteStatus?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (watchFavoriteStatus != null) {
+      return watchFavoriteStatus(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WatchFavoriteStatus implements MaterialListEvent {
+  const factory _WatchFavoriteStatus() = _$_WatchFavoriteStatus;
+}
+
+/// @nodoc
+abstract class _$$_UpdateFavoriteStatusCopyWith<$Res> {
+  factory _$$_UpdateFavoriteStatusCopyWith(_$_UpdateFavoriteStatus value,
+          $Res Function(_$_UpdateFavoriteStatus) then) =
+      __$$_UpdateFavoriteStatusCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialInfo updatedMaterial});
+
+  $MaterialInfoCopyWith<$Res> get updatedMaterial;
+}
+
+/// @nodoc
+class __$$_UpdateFavoriteStatusCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$_UpdateFavoriteStatus>
+    implements _$$_UpdateFavoriteStatusCopyWith<$Res> {
+  __$$_UpdateFavoriteStatusCopyWithImpl(_$_UpdateFavoriteStatus _value,
+      $Res Function(_$_UpdateFavoriteStatus) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? updatedMaterial = null,
+  }) {
+    return _then(_$_UpdateFavoriteStatus(
+      updatedMaterial: null == updatedMaterial
+          ? _value.updatedMaterial
+          : updatedMaterial // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialInfoCopyWith<$Res> get updatedMaterial {
+    return $MaterialInfoCopyWith<$Res>(_value.updatedMaterial, (value) {
+      return _then(_value.copyWith(updatedMaterial: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
+  const _$_UpdateFavoriteStatus({required this.updatedMaterial});
+
+  @override
+  final MaterialInfo updatedMaterial;
+
+  @override
+  String toString() {
+    return 'MaterialListEvent.updateFavoriteStatus(updatedMaterial: $updatedMaterial)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateFavoriteStatus &&
+            (identical(other.updatedMaterial, updatedMaterial) ||
+                other.updatedMaterial == updatedMaterial));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, updatedMaterial);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateFavoriteStatusCopyWith<_$_UpdateFavoriteStatus> get copyWith =>
+      __$$_UpdateFavoriteStatusCopyWithImpl<_$_UpdateFavoriteStatus>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() watchFavoriteStatus,
+    required TResult Function(MaterialInfo updatedMaterial)
+        updateFavoriteStatus,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        fetch,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
+        loadMore,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
+  }) {
+    return updateFavoriteStatus(updatedMaterial);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? watchFavoriteStatus,
+    TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        loadMore,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
+  }) {
+    return updateFavoriteStatus?.call(updatedMaterial);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? watchFavoriteStatus,
+    TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        fetch,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        loadMore,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (updateFavoriteStatus != null) {
+      return updateFavoriteStatus(updatedMaterial);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
+    required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+  }) {
+    return updateFavoriteStatus(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+  }) {
+    return updateFavoriteStatus?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (updateFavoriteStatus != null) {
+      return updateFavoriteStatus(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateFavoriteStatus implements MaterialListEvent {
+  const factory _UpdateFavoriteStatus(
+      {required final MaterialInfo updatedMaterial}) = _$_UpdateFavoriteStatus;
+
+  MaterialInfo get updatedMaterial;
+  @JsonKey(ignore: true)
+  _$$_UpdateFavoriteStatusCopyWith<_$_UpdateFavoriteStatus> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -447,6 +861,9 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
+    required TResult Function() watchFavoriteStatus,
+    required TResult Function(MaterialInfo updatedMaterial)
+        updateFavoriteStatus,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -472,6 +889,8 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function()? watchFavoriteStatus,
+    TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -497,6 +916,8 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function()? watchFavoriteStatus,
+    TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -526,6 +947,8 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
+    required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
@@ -539,6 +962,8 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
@@ -552,6 +977,8 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
@@ -650,6 +1077,9 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
+    required TResult Function() watchFavoriteStatus,
+    required TResult Function(MaterialInfo updatedMaterial)
+        updateFavoriteStatus,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -674,6 +1104,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function()? watchFavoriteStatus,
+    TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -698,6 +1130,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function()? watchFavoriteStatus,
+    TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -726,6 +1160,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
+    required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
@@ -739,6 +1175,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
@@ -752,6 +1190,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
@@ -914,6 +1354,9 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
+    required TResult Function() watchFavoriteStatus,
+    required TResult Function(MaterialInfo updatedMaterial)
+        updateFavoriteStatus,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -938,6 +1381,8 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function()? watchFavoriteStatus,
+    TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -963,6 +1408,8 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function()? watchFavoriteStatus,
+    TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -991,6 +1438,8 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
+    required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
@@ -1004,6 +1453,8 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
@@ -1017,6 +1468,8 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
@@ -1122,6 +1575,9 @@ class _$_AddFavourite implements _AddFavourite {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
+    required TResult Function() watchFavoriteStatus,
+    required TResult Function(MaterialInfo updatedMaterial)
+        updateFavoriteStatus,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -1146,6 +1602,8 @@ class _$_AddFavourite implements _AddFavourite {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function()? watchFavoriteStatus,
+    TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -1170,6 +1628,8 @@ class _$_AddFavourite implements _AddFavourite {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function()? watchFavoriteStatus,
+    TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -1198,6 +1658,8 @@ class _$_AddFavourite implements _AddFavourite {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
+    required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
@@ -1211,6 +1673,8 @@ class _$_AddFavourite implements _AddFavourite {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
@@ -1224,6 +1688,8 @@ class _$_AddFavourite implements _AddFavourite {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
@@ -1322,6 +1788,9 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
+    required TResult Function() watchFavoriteStatus,
+    required TResult Function(MaterialInfo updatedMaterial)
+        updateFavoriteStatus,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -1346,6 +1815,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function()? watchFavoriteStatus,
+    TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -1370,6 +1841,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function()? watchFavoriteStatus,
+    TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
@@ -1398,6 +1871,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
+    required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
@@ -1411,6 +1886,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
@@ -1424,6 +1901,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,

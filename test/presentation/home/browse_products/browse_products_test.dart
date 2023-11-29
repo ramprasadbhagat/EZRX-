@@ -6,8 +6,8 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
 import 'package:get_it/get_it.dart';
@@ -17,21 +17,13 @@ import 'package:ezrxmobile/config.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/application/banner/banner_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 class MockAppRouter extends Mock implements AppRouter {}
 
@@ -39,20 +31,8 @@ class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
-
-class BannerBlocMock extends MockBloc<BannerEvent, BannerState>
-    implements BannerBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
 
 class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
@@ -62,25 +42,15 @@ class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
 
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
 class ProductDetailBlocMock
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
 
 class MockMixpanelService extends Mock implements MixpanelService {}
 
-class MaterialPageXMock extends Mock implements MaterialPageX {}
-
 void main() {
-  late CustomerCodeBloc customerCodeBlocMock;
-  late CartBloc cartBlocMock;
-  late AuthBloc authBlocMock;
   late MaterialListBlocMock materialListBlocMock;
-  late UserBloc userBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
-  late BannerBloc bannerBlocMock;
-  late SalesOrgBloc salesOrgBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late ProductDetailBloc productDetailBlocMock;
   late ProductImageBlocMock productImageBlocMock;
@@ -104,41 +74,25 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     registerFallbackValue(const PageRouteInfo('HomeTabRoute', path: 'home'));
     locator.registerSingleton<MixpanelService>(MockMixpanelService());
-    locator.registerFactory<BannerBloc>(() => bannerBlocMock);
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
-    locator.registerLazySingleton(() => PackageInfoService());
     materialList = await MaterialListLocalDataSource().getMaterialList();
   });
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    salesOrgBlocMock = SalesOrgBlocMock();
     autoRouterMock = MockAppRouter();
     materialPriceBlocMock = MaterialPriceBlocMock();
     productDetailBlocMock = ProductDetailBlocMock();
+    materialListBlocMock = MaterialListBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
+    productImageBlocMock = ProductImageBlocMock();
     when(() => autoRouterMock.currentPath).thenReturn('home');
     when(() => autoRouterMock.current).thenReturn(routeData);
     when(() => autoRouterMock.current).thenReturn(routeData);
-
-    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-    customerCodeBlocMock = CustomerCodeBlocMock();
-    when(() => customerCodeBlocMock.state)
-        .thenReturn(CustomerCodeState.initial());
-    cartBlocMock = CartBlocMock();
-    when(() => cartBlocMock.state).thenReturn(CartState.initial());
-    authBlocMock = AuthBlocMock();
-    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-    materialListBlocMock = MaterialListBlocMock();
     when(() => materialListBlocMock.state)
         .thenReturn(MaterialListState.initial());
-    userBlocMock = UserBlocMock();
-    when(() => userBlocMock.state).thenReturn(UserState.initial());
-    eligibilityBlocMock = EligibilityBlocMock();
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
-    bannerBlocMock = BannerBlocMock();
-    when(() => bannerBlocMock.state).thenReturn(BannerState.initial());
-    productImageBlocMock = ProductImageBlocMock();
     when(() => productImageBlocMock.state)
         .thenReturn(ProductImageState.initial());
     when(() => materialPriceBlocMock.state)
@@ -153,28 +107,12 @@ void main() {
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
         providers: [
-          BlocProvider<UserBloc>(
-            create: (context) => userBlocMock,
-          ),
-          BlocProvider<AuthBloc>(
-            create: (context) => authBlocMock,
-          ),
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
-          ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<BannerBloc>(
-            create: (context) => bannerBlocMock,
-          ),
-          BlocProvider<SalesOrgBloc>(
-            create: (context) => salesOrgBlocMock,
           ),
           BlocProvider<MaterialListBloc>(
             create: (context) => materialListBlocMock,
           ),
-          BlocProvider<CartBloc>(create: (context) => cartBlocMock),
           BlocProvider<ProductImageBloc>(
             create: (context) => productImageBlocMock,
           ),
@@ -325,6 +263,63 @@ void main() {
               materialNumber: materialList.first.materialNumber,
               locale: const Locale('en'),
               type: materialList.first.type,
+            ),
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      '-> Tap to favorite product',
+      (WidgetTester tester) async {
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList: materialList
+                .map((e) => e.copyWith(isFavourite: false))
+                .toList(),
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        final favoriteIcon = find.descendant(
+          of: find.byKey(WidgetKeys.browseProductsList),
+          matching: find.byType(FavouriteIcon),
+        );
+        await tester.tap(favoriteIcon.first);
+        await tester.pumpAndSettle();
+        verify(
+          () => materialListBlocMock.add(
+            MaterialListEvent.addFavourite(
+              item: materialList.first.copyWith(isFavourite: false),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      '-> Tap to unfavorite product',
+      (WidgetTester tester) async {
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList:
+                materialList.map((e) => e.copyWith(isFavourite: true)).toList(),
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        final favoriteIcon = find.descendant(
+          of: find.byKey(WidgetKeys.browseProductsList),
+          matching: find.byType(FavouriteIcon),
+        );
+        await tester.tap(favoriteIcon.first);
+        await tester.pumpAndSettle();
+        verify(
+          () => materialListBlocMock.add(
+            MaterialListEvent.deleteFavourite(
+              item: materialList.first.copyWith(isFavourite: true),
             ),
           ),
         ).called(1);

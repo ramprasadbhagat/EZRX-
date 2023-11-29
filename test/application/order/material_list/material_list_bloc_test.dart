@@ -58,6 +58,11 @@ void main() {
         await FavouriteLocalDataSource().removeFavouriteMaterial();
   });
 
+  setUp(() {
+    when(() => favouriteMockRepository.watchFavoriteStatus())
+        .thenAnswer((_) => Stream.fromIterable([]));
+  });
+
   group('Material List Bloc', () {
     blocTest<MaterialListBloc, MaterialListState>(
       'Material List Initialize',
@@ -572,6 +577,92 @@ void main() {
         ),
       ],
     );
+
+    blocTest(
+      'Add UpdateFavoriteEvent when listen from stream',
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteMockRepository,
+        config: config,
+      ),
+      seed: () => MaterialListState.initial().copyWith(
+        materialList: [
+          materialResponseMock.products.first.copyWith(isFavourite: true)
+        ],
+      ),
+      act: (MaterialListBloc bloc) =>
+          bloc.add(const MaterialListEvent.watchFavoriteStatus()),
+      setUp: () {
+        when(() => favouriteMockRepository.watchFavoriteStatus()).thenAnswer(
+          (_) => Stream.fromIterable(
+            [
+              materialResponseMock.products.first.copyWith(isFavourite: false),
+              materialResponseMock.products.first.copyWith(isFavourite: true)
+            ],
+          ),
+        );
+      },
+      expect: () => [
+        MaterialListState.initial().copyWith(
+          materialList: [
+            materialResponseMock.products.first.copyWith(isFavourite: false)
+          ],
+        ),
+        MaterialListState.initial().copyWith(
+          materialList: [
+            materialResponseMock.products.first.copyWith(isFavourite: true)
+          ],
+        )
+      ],
+    );
+
+    blocTest(
+      'Update favorite status of material when updated material is in the list',
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteMockRepository,
+        config: config,
+      ),
+      seed: () => MaterialListState.initial().copyWith(
+        materialList: [
+          materialResponseMock.products.first.copyWith(isFavourite: true)
+        ],
+      ),
+      act: (MaterialListBloc bloc) => bloc.add(
+        MaterialListEvent.updateFavoriteStatus(
+          updatedMaterial:
+              materialResponseMock.products.first.copyWith(isFavourite: false),
+        ),
+      ),
+      expect: () => [
+        MaterialListState.initial().copyWith(
+          materialList: [
+            materialResponseMock.products.first.copyWith(isFavourite: false)
+          ],
+        ),
+      ],
+    );
+
+    blocTest(
+      'Nothing happens when updated favorite material is not in the list',
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteMockRepository,
+        config: config,
+      ),
+      seed: () => MaterialListState.initial().copyWith(
+        materialList: [
+          materialResponseMock.products.first.copyWith(isFavourite: true)
+        ],
+      ),
+      act: (MaterialListBloc bloc) => bloc.add(
+        MaterialListEvent.updateFavoriteStatus(
+          updatedMaterial: materialResponseMock.products[1],
+        ),
+      ),
+      expect: () => [],
+    );
+
     test('Test Is Filter Selected', () {
       final materialBloc = MaterialListBloc(
         materialListRepository: materialListMockRepository,

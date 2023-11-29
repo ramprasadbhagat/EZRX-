@@ -348,11 +348,13 @@ void main() {
       );
 
       testWidgets(
-        '=> Test tap on favorite button',
+        '=> Test tap on favorite button when is favorite',
         (tester) async {
           when(() => materialListBlocMock.state).thenReturn(
             MaterialListState.initial().copyWith(
-              materialList: materialResponseMock.products,
+              materialList: materialResponseMock.products
+                  .map((e) => e.copyWith(isFavourite: true))
+                  .toList(),
             ),
           );
           await tester.pumpWidget(getScopedWidget());
@@ -366,10 +368,56 @@ void main() {
             find.byKey(WidgetKeys.scrollList),
             const Offset(0.0, -200.0),
           );
-          await tester.pumpAndSettle();
+          await tester.pump();
           await tester.tap(favoriteButtonFinder);
+          await tester.pumpAndSettle();
 
-          // TODO: Comeback later and add a verify function when we re-enable the add to favorite function
+          verify(
+            () => materialListBlocMock.add(
+              MaterialListEvent.deleteFavourite(
+                item: materialResponseMock.products.first.copyWith(
+                  isFavourite: true,
+                ),
+              ),
+            ),
+          ).called(1);
+        },
+      );
+
+      testWidgets(
+        '=> Test tap on favorite button when is not favorite',
+        (tester) async {
+          when(() => materialListBlocMock.state).thenReturn(
+            MaterialListState.initial().copyWith(
+              materialList: materialResponseMock.products
+                  .map((e) => e.copyWith(isFavourite: false))
+                  .toList(),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          final favoriteButtonFinder = find.descendant(
+            of: find.byType(MaterialGridItem).first,
+            matching: find.byType(FavouriteIcon),
+          );
+          await tester.dragUntilVisible(
+            favoriteButtonFinder,
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0.0, -200.0),
+          );
+          await tester.pump();
+          await tester.tap(favoriteButtonFinder);
+          await tester.pumpAndSettle();
+
+          verify(
+            () => materialListBlocMock.add(
+              MaterialListEvent.addFavourite(
+                item: materialResponseMock.products.first.copyWith(
+                  isFavourite: false,
+                ),
+              ),
+            ),
+          ).called(1);
         },
       );
 
