@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -26,6 +27,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../utils/widget_utils.dart';
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -47,6 +49,9 @@ class MockCustomerCodeBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 class MockProductImageBloc
@@ -66,6 +71,7 @@ void main() {
   late AppRouter autoRouterMock;
   late UserBloc mockUserBloc;
   late CustomerCodeBloc mockCustomerCodeBloc;
+  late EligibilityBloc mockEligibilityBloc;
   late ReturnListByItemBloc mockReturnListByItemBloc;
   late AnnouncementBloc mockAnnouncementBloc;
   late ProductImageBloc mockProductImageBloc;
@@ -86,6 +92,7 @@ void main() {
     mockUserBloc = MockUserBloc();
     autoRouterMock = locator<AppRouter>();
     mockCustomerCodeBloc = MockCustomerCodeBloc();
+    mockEligibilityBloc = MockEligibilityBloc();
     mockAuthBloc = MockAuthBloc();
     mockAnnouncementBloc = MockAnnouncementBloc();
     mockReturnSummaryDetailsBloc = MockReturnSummaryDetailsBloc();
@@ -110,6 +117,8 @@ void main() {
         when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
         when(() => mockCustomerCodeBloc.state)
             .thenReturn(CustomerCodeState.initial());
+        when(() => mockEligibilityBloc.state)
+            .thenReturn(EligibilityState.initial());
         when(() => mockReturnListByItemBloc.state)
             .thenReturn(ReturnListByItemState.initial());
         when(() => mockAnnouncementBloc.state)
@@ -136,6 +145,9 @@ void main() {
             ),
             BlocProvider<CustomerCodeBloc>(
               create: (context) => mockCustomerCodeBloc,
+            ),
+            BlocProvider<EligibilityBloc>(
+              create: (context) => mockEligibilityBloc,
             ),
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<UserBloc>(create: (context) => mockUserBloc),
@@ -282,6 +294,11 @@ void main() {
       testWidgets(
         '=> display outside return policy tag',
         (tester) async {
+          when(() => mockEligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeSalesOrgConfigAllowReturnsOutsidePolicy,
+            ),
+          );
           when(() => mockReturnListByItemBloc.state).thenReturn(
             ReturnListByItemState.initial().copyWith(
               returnItemList: [
@@ -300,6 +317,37 @@ void main() {
               matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
             ),
             findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: cardFinder.last,
+              matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            ),
+            findsNothing,
+          );
+        },
+      );
+      testWidgets(
+        '=> display outside return policy tag when toggle is off',
+        (tester) async {
+          when(() => mockReturnListByItemBloc.state).thenReturn(
+            ReturnListByItemState.initial().copyWith(
+              returnItemList: [
+                ReturnItem.empty().copyWith(outsidePolicy: true),
+                ReturnItem.empty().copyWith(outsidePolicy: false),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWUT());
+          await tester.pump();
+          final cardFinder = find.byType(CommonTileItem);
+          expect(cardFinder, findsNWidgets(2));
+          expect(
+            find.descendant(
+              of: cardFinder.first,
+              matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            ),
+            findsNothing,
           );
           expect(
             find.descendant(

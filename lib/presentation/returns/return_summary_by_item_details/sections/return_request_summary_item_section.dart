@@ -139,7 +139,9 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
           ),
         ],
       ),
-      topHeaderWidget: widget.requestInformation.outsidePolicy
+      topHeaderWidget: widget.requestInformation.displayOutSidePolicy(
+        salesOrgConfig.allowReturnsOutsidePolicy,
+      )
           ? const OutsideReturnPolicyTag()
           : null,
     );

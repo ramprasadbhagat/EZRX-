@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -172,7 +173,7 @@ class _ReturnItem extends StatelessWidget {
                 label: data.materialNumber.displayMatNo,
                 labelTrailing: data.prsfd.isBonus
                     ? const BonusTag(
-                  margin: EdgeInsets.symmetric(horizontal: 4),
+                        margin: EdgeInsets.symmetric(horizontal: 4),
                       )
                     : null,
                 title: data.materialName,
@@ -206,8 +207,15 @@ class _ReturnItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                topHeaderWidget:
-                    data.outsidePolicy ? const OutsideReturnPolicyTag() : null,
+                topHeaderWidget: data.displayOutSidePolicy(
+                  context
+                      .read<EligibilityBloc>()
+                      .state
+                      .salesOrgConfigs
+                      .allowReturnsOutsidePolicy,
+                )
+                    ? const OutsideReturnPolicyTag()
+                    : null,
               ),
             ],
           ),

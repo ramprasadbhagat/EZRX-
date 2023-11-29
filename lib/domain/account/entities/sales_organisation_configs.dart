@@ -76,6 +76,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool disableOverrideFieldCustomer,
     required bool disableOverrideFieldSR,
     required bool hideCredit,
+    required bool allowReturnsOutsidePolicy,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -141,6 +142,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         disableOverrideFieldCustomer: false,
         disableOverrideFieldSR: false,
         hideCredit: false,
+        allowReturnsOutsidePolicy: false,
       );
 
   String get getConfigLanguage {

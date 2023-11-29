@@ -81,6 +81,8 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
           json['displaySubtotalTaxBreakdown'] as bool? ?? false,
       disablePayment: json['disablePayment'] as bool? ?? false,
       hideCredit: json['hideCredit'] as bool? ?? false,
+      allowReturnsOutsidePolicy:
+          json['allowReturnsOutsidePolicy'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -149,4 +151,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'displaySubtotalTaxBreakdown': instance.displaySubtotalTaxBreakdown,
       'disablePayment': instance.disablePayment,
       'hideCredit': instance.hideCredit,
+      'allowReturnsOutsidePolicy': instance.allowReturnsOutsidePolicy,
     };

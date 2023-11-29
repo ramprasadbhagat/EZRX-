@@ -48,4 +48,7 @@ class ReturnItem with _$ReturnItem {
         productImages: ProductImages.empty(),
         prsfd: Prsfd(''),
       );
+
+  bool displayOutSidePolicy(bool allowReturnsOutsidePolicy) =>
+      outsidePolicy && allowReturnsOutsidePolicy;
 }

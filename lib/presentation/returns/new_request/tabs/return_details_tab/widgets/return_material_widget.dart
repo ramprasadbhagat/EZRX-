@@ -25,7 +25,14 @@ class _ReturnMaterialWidget extends StatelessWidget {
             children: [
               if (!item.balanceQuantity.isGreaterThanZero)
                 const _ReturnRequestWarning(),
-              if (item.outsidePolicy) const OutsideReturnPolicyTag(),
+              if (item.displayOutSidePolicy(
+                context
+                    .read<EligibilityBloc>()
+                    .state
+                    .salesOrgConfigs
+                    .allowReturnsOutsidePolicy,
+              ))
+                const OutsideReturnPolicyTag(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -228,3 +228,7 @@ final fakeSalesOrgConfigWithOOSPreOrderValue =
   addOosMaterials: OosMaterial(true),
   oosValue: OosValue(1),
 );
+final fakeSalesOrgConfigAllowReturnsOutsidePolicy =
+    SalesOrganisationConfigs.empty().copyWith(
+  allowReturnsOutsidePolicy: true,
+);

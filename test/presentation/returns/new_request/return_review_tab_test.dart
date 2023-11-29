@@ -28,6 +28,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -447,6 +448,11 @@ void main() {
       testWidgets(
         '=> display outside return policy tag',
         (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeSalesOrgConfigAllowReturnsOutsidePolicy,
+            ),
+          );
           when(() => newRequestBlocMock.state).thenReturn(
             NewRequestState.initial().copyWith(
               selectedItems: fakeReturnMaterialList.items,
@@ -462,6 +468,34 @@ void main() {
               matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
             ),
             findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: cardFinder.last,
+              matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            ),
+            findsNothing,
+          );
+        },
+      );
+      testWidgets(
+        '=> display outside return policy tag when toggle is off in sales org config',
+        (tester) async {
+          when(() => newRequestBlocMock.state).thenReturn(
+            NewRequestState.initial().copyWith(
+              selectedItems: fakeReturnMaterialList.items,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final cardFinder = find.byType(CustomCard);
+          expect(cardFinder, findsNWidgets(2));
+          expect(
+            find.descendant(
+              of: cardFinder.first,
+              matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            ),
+            findsNothing,
           );
           expect(
             find.descendant(

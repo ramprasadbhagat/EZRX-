@@ -50,6 +50,8 @@ class ReturnMaterial with _$ReturnMaterial {
   String get uuid => '$assignmentNumber$itemNumber';
 
   bool get editDetailsAllowed => balanceQuantity.isGreaterThanZero;
+  bool displayOutSidePolicy(bool allowReturnsOutsidePolicy) =>
+      outsidePolicy && allowReturnsOutsidePolicy;
 
   ReturnItemDetails get validatedItemDetails =>
       ReturnItemDetails.empty().copyWith(

@@ -103,6 +103,7 @@ void main() {
     disableOverrideFieldSR: false,
     enablePOAttachmentRequired: false,
     hideCredit: false,
+    allowReturnsOutsidePolicy: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

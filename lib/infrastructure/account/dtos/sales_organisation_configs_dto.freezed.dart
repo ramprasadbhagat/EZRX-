@@ -147,6 +147,8 @@ mixin _$SalesOrganisationConfigsDto {
   bool get disablePayment => throw _privateConstructorUsedError;
   @JsonKey(name: 'hideCredit', defaultValue: false)
   bool get hideCredit => throw _privateConstructorUsedError;
+  @JsonKey(name: 'allowReturnsOutsidePolicy', defaultValue: false)
+  bool get allowReturnsOutsidePolicy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -266,7 +268,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
       bool displaySubtotalTaxBreakdown,
       @JsonKey(name: 'disablePayment', defaultValue: false) bool disablePayment,
-      @JsonKey(name: 'hideCredit', defaultValue: false) bool hideCredit});
+      @JsonKey(name: 'hideCredit', defaultValue: false) bool hideCredit,
+      @JsonKey(name: 'allowReturnsOutsidePolicy', defaultValue: false)
+      bool allowReturnsOutsidePolicy});
 }
 
 /// @nodoc
@@ -345,6 +349,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? displaySubtotalTaxBreakdown = null,
     Object? disablePayment = null,
     Object? hideCredit = null,
+    Object? allowReturnsOutsidePolicy = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -595,6 +600,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.hideCredit
           : hideCredit // ignore: cast_nullable_to_non_nullable
               as bool,
+      allowReturnsOutsidePolicy: null == allowReturnsOutsidePolicy
+          ? _value.allowReturnsOutsidePolicy
+          : allowReturnsOutsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -712,7 +721,9 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
       bool displaySubtotalTaxBreakdown,
       @JsonKey(name: 'disablePayment', defaultValue: false) bool disablePayment,
-      @JsonKey(name: 'hideCredit', defaultValue: false) bool hideCredit});
+      @JsonKey(name: 'hideCredit', defaultValue: false) bool hideCredit,
+      @JsonKey(name: 'allowReturnsOutsidePolicy', defaultValue: false)
+      bool allowReturnsOutsidePolicy});
 }
 
 /// @nodoc
@@ -790,6 +801,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? displaySubtotalTaxBreakdown = null,
     Object? disablePayment = null,
     Object? hideCredit = null,
+    Object? allowReturnsOutsidePolicy = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -1040,6 +1052,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.hideCredit
           : hideCredit // ignore: cast_nullable_to_non_nullable
               as bool,
+      allowReturnsOutsidePolicy: null == allowReturnsOutsidePolicy
+          ? _value.allowReturnsOutsidePolicy
+          : allowReturnsOutsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1164,7 +1180,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'disablePayment', defaultValue: false)
       required this.disablePayment,
       @JsonKey(name: 'hideCredit', defaultValue: false)
-      required this.hideCredit})
+      required this.hideCredit,
+      @JsonKey(name: 'allowReturnsOutsidePolicy', defaultValue: false)
+      required this.allowReturnsOutsidePolicy})
       : _principalList = principalList,
         super._();
 
@@ -1364,10 +1382,13 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @override
   @JsonKey(name: 'hideCredit', defaultValue: false)
   final bool hideCredit;
+  @override
+  @JsonKey(name: 'allowReturnsOutsidePolicy', defaultValue: false)
+  final bool allowReturnsOutsidePolicy;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy)';
   }
 
   @override
@@ -1465,7 +1486,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.displayItemTaxBreakdown, displayItemTaxBreakdown) || other.displayItemTaxBreakdown == displayItemTaxBreakdown) &&
             (identical(other.displaySubtotalTaxBreakdown, displaySubtotalTaxBreakdown) || other.displaySubtotalTaxBreakdown == displaySubtotalTaxBreakdown) &&
             (identical(other.disablePayment, disablePayment) || other.disablePayment == disablePayment) &&
-            (identical(other.hideCredit, hideCredit) || other.hideCredit == hideCredit));
+            (identical(other.hideCredit, hideCredit) || other.hideCredit == hideCredit) &&
+            (identical(other.allowReturnsOutsidePolicy, allowReturnsOutsidePolicy) || other.allowReturnsOutsidePolicy == allowReturnsOutsidePolicy));
   }
 
   @JsonKey(ignore: true)
@@ -1533,7 +1555,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         displayItemTaxBreakdown,
         displaySubtotalTaxBreakdown,
         disablePayment,
-        hideCredit
+        hideCredit,
+        allowReturnsOutsidePolicy
       ]);
 
   @JsonKey(ignore: true)
@@ -1675,7 +1698,10 @@ abstract class _SalesOrganisationConfigsDto
       @JsonKey(name: 'disablePayment', defaultValue: false)
       required final bool disablePayment,
       @JsonKey(name: 'hideCredit', defaultValue: false)
-      required final bool hideCredit}) = _$_SalesOrganisationConfigsDto;
+      required final bool hideCredit,
+      @JsonKey(name: 'allowReturnsOutsidePolicy', defaultValue: false)
+      required final bool
+          allowReturnsOutsidePolicy}) = _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -1868,6 +1894,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'hideCredit', defaultValue: false)
   bool get hideCredit;
+  @override
+  @JsonKey(name: 'allowReturnsOutsidePolicy', defaultValue: false)
+  bool get allowReturnsOutsidePolicy;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

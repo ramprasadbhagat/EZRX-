@@ -19,7 +19,14 @@ class _ReturnItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 12.0),
       child: Column(
         children: [
-          if (returnMaterial.outsidePolicy) const OutsideReturnPolicyTag(),
+          if (returnMaterial.displayOutSidePolicy(
+            context
+                .read<EligibilityBloc>()
+                .state
+                .salesOrgConfigs
+                .allowReturnsOutsidePolicy,
+          ))
+            const OutsideReturnPolicyTag(),
           _ReturnMaterialExpAndStatus(returnMaterial: returnMaterial),
           const SizedBox(height: 8.0),
           Row(

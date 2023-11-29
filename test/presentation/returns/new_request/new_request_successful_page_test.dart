@@ -28,6 +28,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class AnnouncementBlocMock
@@ -374,6 +375,11 @@ void main() {
     testWidgets(
       '=> display outside return policy tag',
       (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigAllowReturnsOutsidePolicy,
+          ),
+        );
         when(() => newRequestBlocMock.state).thenReturn(
           NewRequestState.initial().copyWith(
             selectedItems: fakeListMaterial.items,
@@ -393,6 +399,27 @@ void main() {
         expect(
           find.descendant(
             of: cardFinder.last,
+            matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+          ),
+          findsNothing,
+        );
+      },
+    );
+    testWidgets(
+      '=> Do not display outside return policy tag when toggle is off but value is true in the item',
+      (tester) async {
+        when(() => newRequestBlocMock.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: fakeListMaterial.items,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cardFinder = find.byType(CustomCard);
+        expect(cardFinder, findsNWidgets(2));
+        expect(
+          find.descendant(
+            of: cardFinder.first,
             matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
           ),
           findsNothing,

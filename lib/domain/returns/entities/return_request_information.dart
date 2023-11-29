@@ -74,4 +74,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
   String get displayBapiStatus => !bapiStatus.isSuccess
       ? bapiStatus.getIntermediateStatus
       : bapiSalesDocNumber;
+
+  bool displayOutSidePolicy(bool allowReturnsOutsidePolicy) =>
+      outsidePolicy && allowReturnsOutsidePolicy;
 }

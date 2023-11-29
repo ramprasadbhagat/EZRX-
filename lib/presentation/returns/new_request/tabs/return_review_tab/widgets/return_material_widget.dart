@@ -24,7 +24,14 @@ class _ReturnMaterialWidget extends StatelessWidget {
           margin: const EdgeInsets.only(top: 12),
           child: Column(
             children: [
-              if (item.outsidePolicy) const OutsideReturnPolicyTag(),
+              if (item.displayOutSidePolicy(
+                context
+                    .read<EligibilityBloc>()
+                    .state
+                    .salesOrgConfigs
+                    .allowReturnsOutsidePolicy,
+              ))
+                const OutsideReturnPolicyTag(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

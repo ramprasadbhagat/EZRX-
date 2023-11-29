@@ -26,6 +26,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class ReturnSummaryDetailsBlocMock
@@ -217,6 +218,11 @@ void main() {
       testWidgets(
         '=> display outside return policy tag',
         (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeSalesOrgConfigAllowReturnsOutsidePolicy,
+            ),
+          );
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(
             ReturnSummaryDetailsState.initial().copyWith(
               requestInformation: requestInformationMock.copyWith(
@@ -240,6 +246,25 @@ void main() {
             ReturnSummaryDetailsState.initial().copyWith(
               requestInformation: requestInformationMock.copyWith(
                 outsidePolicy: false,
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(
+            find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            findsNothing,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> hide outside return policy tag when toggle is off',
+        (tester) async {
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                outsidePolicy: true,
               ),
             ),
           );
@@ -334,7 +359,7 @@ void main() {
         },
       );
 
-       group('=> Attachment section', () {
+      group('=> Attachment section', () {
         final scrollList = find.byKey(WidgetKeys.returnItemDetailScrollList);
         const scrollOffset = Offset(0, -300);
         const attachmentTestIndex = 0;

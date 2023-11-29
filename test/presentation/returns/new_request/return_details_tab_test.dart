@@ -277,6 +277,11 @@ void main() {
     testWidgets(
       '=> display outside return policy tag',
       (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigAllowReturnsOutsidePolicy,
+          ),
+        );
         when(() => newRequestBlocMock.state).thenReturn(
           NewRequestState.initial().copyWith(
             selectedItems: [fakeReturnMaterialList.items.first],
@@ -292,6 +297,27 @@ void main() {
             matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
           ),
           findsOneWidget,
+        );
+      },
+    );
+    testWidgets(
+      '=> display outside return policy tag when toggle is off in salesorg config',
+      (tester) async {
+        when(() => newRequestBlocMock.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: [fakeReturnMaterialList.items.first],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cardFinder = find.byType(CustomCard);
+
+        expect(
+          find.descendant(
+            of: cardFinder.first,
+            matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+          ),
+          findsNothing,
         );
       },
     );

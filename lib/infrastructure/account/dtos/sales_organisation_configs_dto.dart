@@ -129,6 +129,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'disablePayment', defaultValue: false)
         required bool disablePayment,
     @JsonKey(name: 'hideCredit', defaultValue: false) required bool hideCredit,
+    @JsonKey(name: 'allowReturnsOutsidePolicy', defaultValue: false)
+        required bool allowReturnsOutsidePolicy,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -199,6 +201,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       displaySubtotalTaxBreakdown: configs.displaySubtotalTaxBreakdown,
       disablePayment: configs.disablePayment,
       hideCredit: configs.hideCredit,
+      allowReturnsOutsidePolicy: configs.allowReturnsOutsidePolicy,
     );
   }
 
@@ -268,6 +271,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       displaySubtotalTaxBreakdown: displaySubtotalTaxBreakdown,
       disablePayment: disablePayment,
       hideCredit: hideCredit,
+      allowReturnsOutsidePolicy: allowReturnsOutsidePolicy,
     );
   }
 
