@@ -1,3 +1,10 @@
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
+import 'package:file/file.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -35,8 +42,15 @@ class MockDownloadPaymentAttachmentsBloc extends MockBloc<
 class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
     implements AllCreditsBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
     implements AllInvoicesBloc {}
+
+class AllInvoicesFilterBlocMock
+    extends MockBloc<AllInvoicesFilterEvent, AllInvoicesFilterState>
+    implements AllInvoicesFilterBloc {}
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
@@ -48,7 +62,27 @@ void main() {
   late AllInvoicesBloc allInvoicesBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
+  late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
   late DownloadPaymentAttachmentsBloc mockDownloadPaymentAttachmentsBloc;
+  final allCreditsFilter = AllCreditsFilter(
+    amountValueFrom: RangeValue('0'),
+    amountValueTo: RangeValue('100'),
+    documentDateFrom: DateTimeStringValue('20221011'),
+    documentDateTo: DateTimeStringValue('20231011'),
+    filterStatuses: ['Pending'],
+    searchKey: SearchKey('fake-search-key'),
+  );
+  final allInvoicesFilter = AllInvoicesFilter(
+    amountValueFrom: RangeValue('0'),
+    amountValueTo: RangeValue('100'),
+    documentDateFrom: DateTimeStringValue('20221011'),
+    documentDateTo: DateTimeStringValue('20231011'),
+    dueDateFrom: DateTimeStringValue('20221011'),
+    dueDateTo: DateTimeStringValue('20231011'),
+    filterStatuses: ['Pending'],
+    searchKey: SearchKey('fake-search-key'),
+  );
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +94,8 @@ void main() {
     allInvoicesBlocMock = AllInvoicesBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
+    allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     mockDownloadPaymentAttachmentsBloc = MockDownloadPaymentAttachmentsBloc();
   });
 
@@ -76,11 +112,21 @@ void main() {
         .thenReturn(DownloadPaymentAttachmentsState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => allCreditsBlocMock.state).thenReturn(AllCreditsState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
+    when(() => allInvoicesFilterBlocMock.state)
+        .thenReturn(AllInvoicesFilterState.initial());
   });
 
   ///////////////////////////Finder//////////////////////////////////////////////
   final accountSummaryDownloadButton =
       find.byKey(WidgetKeys.accountSummaryDownloadButton);
+  final accountSummaryFilterButton =
+      find.byKey(WidgetKeys.accountSummaryFilterButton);
+  final accountSummarySearchBar =
+      find.byKey(WidgetKeys.accountSummarySearchBar);
+  final paymentSummaryFilterIcon =
+      find.byKey(WidgetKeys.paymentSummaryFilterIcon);
   final creditsTab = find.byKey(WidgetKeys.creditsTab);
   //////////////////////////////////////////////////////////////////////////////
 
@@ -90,6 +136,9 @@ void main() {
       usingLocalization: true,
       routeName: AccountSummaryRoute.name,
       providers: [
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
+        ),
         BlocProvider<AllCreditsBloc>(
           create: (context) => allCreditsBlocMock,
         ),
@@ -106,6 +155,9 @@ void main() {
         BlocProvider<DownloadPaymentAttachmentsBloc>(
           create: (context) => mockDownloadPaymentAttachmentsBloc,
         ),
+        BlocProvider<AllInvoicesFilterBloc>(
+          create: (context) => allInvoicesFilterBlocMock,
+        ),
       ],
       child: const AccountSummary(),
     );
@@ -113,16 +165,6 @@ void main() {
 
   group('Account Summary Screen', () {
     testWidgets('=> Test download Account summary invoice', (tester) async {
-      final allInvoicesFilter = AllInvoicesFilter(
-        amountValueFrom: RangeValue('0'),
-        amountValueTo: RangeValue('100'),
-        documentDateFrom: DateTimeStringValue('20221011'),
-        documentDateTo: DateTimeStringValue('20231011'),
-        dueDateFrom: DateTimeStringValue('20221011'),
-        dueDateTo: DateTimeStringValue('20231011'),
-        filterStatuses: ['Pending'],
-        searchKey: SearchKey('fake-search-key'),
-      );
       when(() => allInvoicesBlocMock.state).thenReturn(
         AllInvoicesState.initial().copyWith(
           appliedFilter: allInvoicesFilter,
@@ -144,14 +186,6 @@ void main() {
     });
 
     testWidgets('=> Test download Account summary credit', (tester) async {
-      final allCreditsFilter = AllCreditsFilter(
-        amountValueFrom: RangeValue('0'),
-        amountValueTo: RangeValue('100'),
-        documentDateFrom: DateTimeStringValue('20221011'),
-        documentDateTo: DateTimeStringValue('20231011'),
-        filterStatuses: ['Pending'],
-        searchKey: SearchKey('fake-search-key'),
-      );
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
           appliedFilter: allCreditsFilter,
@@ -173,6 +207,299 @@ void main() {
           ),
         ),
       ).called(1);
+    });
+
+    testWidgets('=> Test filter Account summary invoice', (tester) async {
+      when(() => allInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(
+          appliedFilter: allInvoicesFilter,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(accountSummaryFilterButton, findsOneWidget);
+      expect(paymentSummaryFilterIcon, findsOneWidget);
+      await tester.tap(paymentSummaryFilterIcon);
+      await tester.pump();
+      expect(find.byType(AllInvoicesFilterBottomSheet), findsOneWidget);
+      verify(
+        () => allInvoicesFilterBlocMock.add(
+          AllInvoicesFilterEvent.openFilterBottomSheet(
+            appliedFilter: allInvoicesFilter,
+          ),
+        ),
+      ).called(1);
+    });
+    testWidgets('=> Test filter build when Account summary invoice',
+        (tester) async {
+      final expectedState = [
+        AllInvoicesState.initial().copyWith(
+          isLoading: true,
+        ),
+        AllInvoicesState.initial().copyWith(
+          appliedFilter: allInvoicesFilter,
+        ),
+      ];
+      whenListen(
+        allInvoicesBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(accountSummaryFilterButton, findsOneWidget);
+      expect(paymentSummaryFilterIcon, findsOneWidget);
+      await tester.tap(paymentSummaryFilterIcon);
+      await tester.pump();
+      expect(find.byType(AllInvoicesFilterBottomSheet), findsOneWidget);
+    });
+
+    testWidgets('=> Test filter Account summary credit', (tester) async {
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          appliedFilter: allCreditsFilter,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(creditsTab, findsOneWidget);
+      await tester.tap(creditsTab);
+      await tester.pumpAndSettle();
+      expect(accountSummaryFilterButton, findsOneWidget);
+      expect(paymentSummaryFilterIcon, findsOneWidget);
+      await tester.tap(paymentSummaryFilterIcon);
+      await tester.pump();
+      expect(find.byType(AllCreditsFilterBottomSheet), findsOneWidget);
+      verify(
+        () => allCreditsFilterBlocMock.add(
+          AllCreditsFilterEvent.openFilterBottomSheet(
+            appliedFilter: allCreditsFilter,
+          ),
+        ),
+      ).called(1);
+    });
+    testWidgets('=> Test filter build when Account summary credit',
+        (tester) async {
+      final expectedState = [
+        AllCreditsState.initial().copyWith(
+          isLoading: true,
+        ),
+        AllCreditsState.initial().copyWith(
+          appliedFilter: allCreditsFilter,
+        ),
+      ];
+      whenListen(
+        allCreditsBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(creditsTab, findsOneWidget);
+      await tester.tap(creditsTab);
+      await tester.pumpAndSettle();
+      expect(accountSummaryFilterButton, findsOneWidget);
+      expect(paymentSummaryFilterIcon, findsOneWidget);
+      await tester.tap(paymentSummaryFilterIcon);
+      await tester.pump();
+      expect(find.byType(AllCreditsFilterBottomSheet), findsOneWidget);
+    });
+
+    testWidgets('=> Test download Account summary Listner success',
+        (tester) async {
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          appliedFilter: allCreditsFilter,
+        ),
+      );
+      final expectedState = [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: true,
+          failureOrSuccessOption: optionOf(
+            const Right(File),
+          ),
+        ),
+      ];
+      whenListen(
+        mockDownloadPaymentAttachmentsBloc,
+        Stream.fromIterable(expectedState),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(creditsTab, findsOneWidget);
+      expect(accountSummaryDownloadButton, findsOneWidget);
+      final successText = find.text('File downloaded successfully');
+      expect(successText, findsWidgets);
+    });
+    testWidgets('=> Test download Account summary Listner failure',
+        (tester) async {
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          appliedFilter: allCreditsFilter,
+        ),
+      );
+      final expectedState = [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: true,
+          failureOrSuccessOption: optionOf(
+            const Left(ApiFailure.other('fake_error')),
+          ),
+        ),
+      ];
+      whenListen(
+        mockDownloadPaymentAttachmentsBloc,
+        Stream.fromIterable(expectedState),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(creditsTab, findsOneWidget);
+      expect(accountSummaryDownloadButton, findsOneWidget);
+      final successText = find.text('File downloaded successfully');
+      expect(successText, findsNothing);
+    });
+
+    testWidgets('=> Test search Account summary invoice', (tester) async {
+      final allInvoicesFilter = AllInvoicesFilter.empty().copyWith(
+        searchKey: SearchKey('12345'),
+      );
+      when(() => allInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(
+          appliedFilter: allInvoicesFilter,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(accountSummarySearchBar, findsOneWidget);
+      await tester.enterText(find.byType(TextFormField), '1');
+      await tester.pumpAndSettle(
+        Duration(milliseconds: locator<Config>().autoSearchTimeout),
+      );
+      verify(
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: allInvoicesFilter.copyWith(
+              searchKey: SearchKey.searchFilter('1'),
+            ),
+          ),
+        ),
+      ).called(1);
+      await tester.enterText(find.byType(TextFormField), '123');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      verify(
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: allInvoicesFilter.copyWith(
+              searchKey: SearchKey.searchFilter('123'),
+            ),
+          ),
+        ),
+      ).called(1);
+      await tester.tap(find.byKey(WidgetKeys.clearIconKey));
+      await tester.pumpAndSettle();
+      verify(
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: allInvoicesFilter.copyWith(
+              searchKey: SearchKey.searchFilter(''),
+            ),
+          ),
+        ),
+      ).called(1);
+    });
+    testWidgets('=> Test search build when Account summary invoice',
+        (tester) async {
+      final allInvoicesFilter = AllInvoicesFilter.empty().copyWith(
+        searchKey: SearchKey('12345'),
+      );
+      final expectedState = [
+        AllInvoicesState.initial().copyWith(
+          isLoading: true,
+        ),
+        AllInvoicesState.initial().copyWith(
+          appliedFilter: allInvoicesFilter,
+        ),
+      ];
+      whenListen(
+        allInvoicesBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(accountSummarySearchBar, findsOneWidget);
+    });
+    testWidgets('=> Test search Account summary credit', (tester) async {
+      final allCreditsFilter = AllCreditsFilter.empty().copyWith(
+        searchKey: SearchKey('12345'),
+      );
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          appliedFilter: allCreditsFilter,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(creditsTab, findsOneWidget);
+      await tester.tap(creditsTab);
+      await tester.pumpAndSettle();
+      expect(accountSummarySearchBar, findsOneWidget);
+      await tester.enterText(find.byType(TextFormField), '1');
+      await tester.pumpAndSettle(
+        Duration(milliseconds: locator<Config>().autoSearchTimeout),
+      );
+      verify(
+        () => allCreditsBlocMock.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: allCreditsFilter.copyWith(
+              searchKey: SearchKey.searchFilter('1'),
+            ),
+          ),
+        ),
+      ).called(1);
+      await tester.enterText(find.byType(TextFormField), '123');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      verify(
+        () => allCreditsBlocMock.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: allCreditsFilter.copyWith(
+              searchKey: SearchKey.searchFilter('123'),
+            ),
+          ),
+        ),
+      ).called(1);
+      await tester.tap(find.byKey(WidgetKeys.clearIconKey));
+      await tester.pumpAndSettle();
+      verify(
+        () => allCreditsBlocMock.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: allCreditsFilter.copyWith(
+              searchKey: SearchKey.searchFilter(''),
+            ),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('=> Test search build when Account summary credit',
+        (tester) async {
+      final allCreditsFilter = AllCreditsFilter.empty().copyWith(
+        searchKey: SearchKey('12345'),
+      );
+      final expectedState = [
+        AllCreditsState.initial().copyWith(
+          isLoading: true,
+        ),
+        AllCreditsState.initial().copyWith(
+          appliedFilter: allCreditsFilter,
+        ),
+      ];
+      whenListen(
+        allCreditsBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(creditsTab, findsOneWidget);
+      await tester.tap(creditsTab);
+      await tester.pumpAndSettle();
+      expect(accountSummarySearchBar, findsOneWidget);
     });
   });
 }
