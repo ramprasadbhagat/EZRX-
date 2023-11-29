@@ -71,6 +71,7 @@ class _OrderItems extends StatelessWidget {
                               isQuantityBelowImage: false,
                               isQuantityRequired: false,
                               statusTag: e.productTag,
+                              showOfferTag: e.showOfferTag,
                               footerWidget: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

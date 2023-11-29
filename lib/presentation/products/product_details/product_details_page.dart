@@ -198,7 +198,6 @@ class _BodyContent extends StatelessWidget {
           children: [
             OfferLabel(
               materialInfo: state.productDetailAggregate.materialInfo,
-              iconSize: 20,
             ),
             ComboOfferLabel(
               materialInfo: state.productDetailAggregate.materialInfo,

@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/order_tag.dart';
+import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,40 +87,16 @@ class _ProductImageSection extends StatelessWidget {
             fit: BoxFit.fitHeight,
           ),
         ),
-        cartProduct.price.isBonusDealEligible
-            ? const _OfferTag()
-            : const SizedBox.shrink(),
+        OfferLabel(
+          materialInfo: cartProduct.materialInfo,
+          iconOnly: true,
+        ),
         if (cartProduct.materialInfo.isFOCMaterial)
           const Positioned(
             bottom: 20,
             child: CovidTag(),
           ),
       ],
-    );
-  }
-}
-
-class _OfferTag extends StatelessWidget {
-  const _OfferTag({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 4,
-      ),
-      decoration: const BoxDecoration(
-        color: ZPColors.darkYellow,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10.0),
-          topRight: Radius.circular(20.0),
-          bottomRight: Radius.circular(20.0),
-        ),
-      ),
-      child: const Icon(
-        Icons.local_offer_outlined,
-        color: ZPColors.white,
-      ),
     );
   }
 }
@@ -138,6 +115,7 @@ class _ProductDetails extends StatelessWidget {
             children: [
               Text(
                 cartItem.materialInfo.materialNumber.displayMatNo,
+                key: WidgetKeys.cartItemProductMaterialNumber,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(

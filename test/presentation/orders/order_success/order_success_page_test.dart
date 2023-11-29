@@ -866,6 +866,21 @@ void main() {
         findsOneWidget,
       );
     });
+
+    testWidgets('Show offer tag when material have offer', (tester) async {
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeMaterialItem.copyWith(promoStatus: true),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.offerTag), findsOneWidget);
+    });
   });
 }
 

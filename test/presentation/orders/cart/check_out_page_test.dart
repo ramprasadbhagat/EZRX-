@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -100,6 +101,10 @@ class PriceOverrideBlocMock
     extends MockBloc<PriceOverrideEvent, PriceOverrideState>
     implements PriceOverrideBloc {}
 
+class MaterialPriceBlocMock
+    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+    implements MaterialPriceBloc {}
+
 class MockAppRouter extends Mock implements AppRouter {}
 
 class MockMixpanelService extends Mock implements MixpanelService {}
@@ -118,6 +123,7 @@ void main() {
   late ComboDealListBloc comboDealListBloc;
   final userBlocMock = UserMockBloc();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
+  late MaterialPriceBloc materialPriceBlocMock;
   final fakeCartProduct = <PriceAggregate>[
     PriceAggregate.empty().copyWith(
       materialInfo: MaterialInfo.empty().copyWith(
@@ -159,6 +165,7 @@ void main() {
       poAttachmentBloc = PoAttachmentBlocMock();
       priceOverrideBloc = PriceOverrideBlocMock();
       comboDealListBloc = ComboDealListBlocMock();
+      materialPriceBlocMock = MaterialPriceBlocMock();
 
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial(),
@@ -187,6 +194,8 @@ void main() {
       when(() => additionalDetailsBlocMock.state)
           .thenReturn(AdditionalDetailsState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
+      when(() => materialPriceBlocMock.state)
+          .thenReturn(MaterialPriceState.initial());
     });
     Widget getScopedWidget() {
       return EasyLocalization(
@@ -231,6 +240,9 @@ void main() {
             ),
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
             BlocProvider<CartBloc>(create: (context) => cartBloc),
+            BlocProvider<MaterialPriceBloc>(
+              create: (context) => materialPriceBlocMock,
+            ),
           ],
           child: const Material(
             child: CheckoutPage(),

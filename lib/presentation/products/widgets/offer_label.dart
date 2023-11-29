@@ -7,10 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OfferLabel extends StatelessWidget {
   final MaterialInfo materialInfo;
-  final double iconSize;
+  final bool iconOnly;
   const OfferLabel({
     required this.materialInfo,
-    this.iconSize = 15,
+    this.iconOnly = false,
     Key? key,
   }) : super(key: key);
 
@@ -35,7 +35,9 @@ class OfferLabel extends StatelessWidget {
         return (price.lastPrice != price.finalPrice) ||
                 displayOffers && (price.tiers.isNotEmpty && !isMYPnGSalesRep) ||
                 (price.bonuses.isNotEmpty && inStockEligible)
-            ? ProductTag.onOfferTag()
+            ? iconOnly
+                ? ProductTag.onOfferIcon()
+                : ProductTag.onOfferTag()
             : const SizedBox.shrink();
       },
     );
