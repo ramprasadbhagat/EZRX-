@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
@@ -7,13 +8,16 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -23,6 +27,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_details_section.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/order_number_section.dart';
+import 'package:ezrxmobile/presentation/payments/invoice_details/section/summary.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +35,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
@@ -51,6 +57,10 @@ class ViewByOrderDetailsBlocMock
     extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
     implements ViewByOrderDetailsBloc {}
 
+class ViewByItemDetailsBlocMock
+    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
+    implements ViewByItemDetailsBloc {}
+
 void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
@@ -65,6 +75,7 @@ void main() {
   late ProductImageBlocMock productImageBlocMock;
   late ViewByOrderBlocMock viewByOrderBlocMock;
   late ViewByOrderDetailsBlocMock viewByOrderDetailsBlocMock;
+  late ViewByItemDetailsBlocMock viewByItemDetailsBlocMock;
   late CreditAndInvoiceItem fakeInvoice;
   late CustomerDocumentDetail fakeInvoiceDetail;
   setUpAll(() async {
@@ -91,6 +102,7 @@ void main() {
     productImageBlocMock = ProductImageBlocMock();
     viewByOrderBlocMock = ViewByOrderBlocMock();
     viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
+    viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
 
     fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
       bpCustomerNumber: '0030032223',
@@ -138,6 +150,8 @@ void main() {
         .thenReturn(ViewByOrderState.initial());
     when(() => viewByOrderDetailsBlocMock.state)
         .thenReturn(ViewByOrderDetailsState.initial());
+    when(() => viewByItemDetailsBlocMock.state)
+        .thenReturn(ViewByItemDetailsState.initial());
   });
 
   Future getWidget(tester) async {
@@ -183,6 +197,9 @@ void main() {
             ),
             BlocProvider<ViewByOrderDetailsBloc>(
               create: (context) => viewByOrderDetailsBlocMock,
+            ),
+            BlocProvider<ViewByItemDetailsBloc>(
+              create: (context) => viewByItemDetailsBlocMock,
             ),
           ],
           child: InvoiceDetailsPage(
@@ -271,6 +288,35 @@ void main() {
           find.byKey(WidgetKeys.invoiceDetailsPageListView);
       expect(viewByOrderDetailsPageListView, findsOneWidget);
     });
+
+    testWidgets(' => Show loading widget when order number section is loading',
+        (tester) async {
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          details: [
+            fakeInvoiceDetail,
+          ],
+        ),
+      );
+      when(() => viewByOrderBlocMock.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          isFetching: true,
+        ),
+      );
+
+      await getWidget(tester);
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.invoiceDetailsPageListView), findsOneWidget);
+      expect(find.byType(InvoiceDetailsSection), findsOneWidget);
+      expect(find.byType(OrderNumberSection), findsOneWidget);
+      expect(find.textContaining('Order number'), findsOneWidget);
+      expect(
+        find.byKey(
+          WidgetKeys.invoiceDetailsOrderNumberLoading,
+        ),
+        findsOneWidget,
+      );
+    });
     testWidgets(' => Detail page order number onTap Test', (tester) async {
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
         CreditAndInvoiceDetailsState.initial().copyWith(
@@ -304,6 +350,58 @@ void main() {
           ),
         ),
       ).called(1);
+    });
+    testWidgets(' => Order number section listen when onTap Test',
+        (tester) async {
+      final fakeViewByOrder = ViewByOrder.empty().copyWith(
+        orderHeaders: [
+          OrderHistoryDetails.empty(),
+        ],
+      );
+
+      whenListen(
+        viewByOrderBlocMock,
+        Stream.fromIterable([
+          ViewByOrderState.initial(),
+          ViewByOrderState.initial().copyWith(
+            failureOrSuccessOption: optionOf(const Right(unit)),
+            viewByOrderList: fakeViewByOrder,
+            searchKey: SearchKey('test'),
+          )
+        ]),
+      );
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => viewByOrderDetailsBlocMock.add(
+          ViewByOrderDetailsEvent.setOrderDetails(
+            orderHistoryDetails: fakeViewByOrder.orderHeaders.first,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(' => Display invoice summary with ID market', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+        ),
+      );
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          details: [
+            fakeInvoiceDetail,
+          ],
+        ),
+      );
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.invoiceDetailsPageListView), findsOneWidget);
+      expect(find.byType(InvoiceSummary), findsOneWidget);
+      expect(find.textContaining('Total savings'), findsOneWidget);
     });
   });
 }

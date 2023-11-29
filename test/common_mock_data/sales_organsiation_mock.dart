@@ -44,6 +44,12 @@ final fakeEmptySalesConfigs = SalesOrganisationConfigs.empty();
 
 final fakeSalesOrganisationConfigs =
     SalesOrganisationConfigs.empty().copyWith(salesOrg: fakeSalesOrg);
+
+final fakeIDSalesOrganisationConfigs =
+    SalesOrganisationConfigs.empty().copyWith(
+  salesOrg: fakeIDSalesOrg,
+);
+
 final fakePHSalesOrganisationConfigsMaterialWithoutPrice =
     SalesOrganisationConfigs.empty().copyWith(
   salesOrg: fakePHSalesOrg,
