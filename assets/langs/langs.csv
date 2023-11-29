@@ -856,7 +856,7 @@ Please input discount percentage of less than 100%,Please input discount percent
 Discounted price,Discounted price,ราคาหลังหักส่วนลด,Discounted price,Discounted price,Discounted price,Discounted price,Harga setelah diskon
 Final counter offer price:,Final counter offer price:,Final counter offer price:,Final counter offer price:,Final counter offer price:,Final counter offer price:,Final counter offer price:,Harga Penawaran Penghitung Terakhir:
 Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,กรุณาใส่ราคาที่ต่อรอง (MYR) หรือส่วนลด (%) เพื่อดำเนินการต่อ.,請輸入議價金額或折扣%.,Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Harap masukkan nilai untuk harga penawaran penghitung (MYR) atau penawaran penghitung diskon (%) untuk dilanjutkan.
-New,New,ใหม่,最新,New,New,New,Baru
+New,New,ใหม่,最新,New,New,ថ្មី,Baru
 Search by product name or code,Search by product name or code,ค้นหาตามชื่อหรือรหัสสินค้า,依使用產品名稱或產品代碼查詢,ထုတ်ကုန်အမည် သို့မဟုတ် ကုဒ်ဖြင့် ရှာဖွေပါ,Tìm kiếm sản phẩm bằng tên hoặc mã,ស្វែងរកតាមឈ្មោះផលិតផល ឬលេខកូដ,Cari dengan nama atau kode produk
 Material description,Material description,รายละเอียดสินค้า,產品描述,Material description,Material description,Material description,Deskripsi produk
 Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.,Harap masukkan nilai untuk harga penawaran penghitung (MYR) atau penawaran penghitung diskon (%) untuk dilanjutkan.
@@ -1022,7 +1022,7 @@ Mobile number,Mobile number,เบอร์มือถือ,手機號碼,Mobil
 Privacy policy,Privacy policy,นโยบายความเป็นส่วนตัว,集團私隱政策,Privacy policy,Privacy policy,Privacy policy,Kebijakan pribadi
 Contact number,Contact number,เบอร์โทรศัพท์ติดต่อ,聯繫電話,Contact number,Số liên hệ,លេខទំនាក់ទំនង,Nomor kontak
 Contact person,Contact person,ผู้ติดต่อ,訂購聯絡人,ဖောက်သည်၏ နာမည်,Người liên hệ,បុគ្គលដែលត្រូវទាក់ទង,Kontak person
-Articles,Articles,บทความ,其他相關資訊,ဆောင်းပါးမျာ,Tin tức,Articles,Artikel
+Articles,Articles,บทความ,其他相關資訊,ဆောင်းပါးမျာ,Tin tức,អត្ថបទ,Artikel
 Contact us,Contact us,ติดต่อเรา,聯絡我們,ကျွန်တော်တို့ကို ဆက်သွယ်ရန်,Liên hệ,ទាក់ទងមកយើងខ្ញុំ,Hubungi kami
 Have any questions? we\'d love to hear from you.,Have any questions? we\'d love to hear from you.,หากมีคำถาม? เรายินดีที่จะได้รับฟังจากคุณ.,有任何問題嗎？我們很樂意聽取您的意見.,有任何問題嗎？我們很樂意聽取您的意見,Have any questions? we\'d love to hear from you.,Have any questions? we\'d love to hear from you.,Ada pertanyaan? Kami ingin mendengar dari Anda.
 Enter your phone number,Enter your phone number,Enter your phone number,Enter your phone number,Enter your phone number,Enter your phone number,Enter your phone number,Masukkan Nomor Telepon Anda
@@ -1458,7 +1458,7 @@ Cancel payment advice,Cancel payment advice,Cancel payment advice,Cancel payment
 Payment cancel successfully,Payment cancel successfully,Payment cancel successfully,Payment cancel successfully,Payment cancel successfully,Payment cancel successfully,Payment cancel successfully,Pembayaran membatalkan dengan sukses
 Maximum order qty,Maximum order qty,Maximum order qty,Maximum order qty,Maximum order qty,Maximum order qty,Maximum order qty,Pesanan maksimum qty
 Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Minimum total purchase qty: {quantity},Total Pembelian Total Qty: {Kuantitas}
-Attachment included,Attachment included,Attachment included,Attachment included,Attachment included,Attachment included,Attachment included,Termasuk Lampiran
+Attachment included,Attachment included,Attachment included,Attachment included,Attachment included,Attachment included,ឯកសារភ្ជាប់រួមបញ្ចូល,Termasuk Lampiran
 Gov. Number,Gov. Number,Gov. Number,Gov. Number,Gov. Number,Gov. Number,Gov. Number,Nomor Pemerintah
 tax,tax,tax,tax,tax,tax,tax,Pajak
 Account credit,Account credit,Account credit,Account credit,Account credit,Account credit,Account credit,Kredit Akun
