@@ -38,7 +38,7 @@ mixin _$OrderHistoryItemDto {
   String get deliveryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'OrderNumber', defaultValue: '')
   String get orderNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'CreatedDate', defaultValue: '')
+  @JsonKey(readValue: _createdDateTimeReadValue)
   String get createdDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'OrderBy', defaultValue: '')
   String get orderBy => throw _privateConstructorUsedError;
@@ -101,7 +101,7 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'Status', defaultValue: '') String status,
       @JsonKey(name: 'DeliveryDate', defaultValue: '') String deliveryDate,
       @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
+      @JsonKey(readValue: _createdDateTimeReadValue) String createdDate,
       @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
       @JsonKey(name: 'OrderType', defaultValue: '') String orderType,
       @JsonKey(name: 'Batch', defaultValue: '') String batch,
@@ -306,7 +306,7 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
       @JsonKey(name: 'Status', defaultValue: '') String status,
       @JsonKey(name: 'DeliveryDate', defaultValue: '') String deliveryDate,
       @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
+      @JsonKey(readValue: _createdDateTimeReadValue) String createdDate,
       @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
       @JsonKey(name: 'OrderType', defaultValue: '') String orderType,
       @JsonKey(name: 'Batch', defaultValue: '') String batch,
@@ -506,7 +506,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       @JsonKey(name: 'DeliveryDate', defaultValue: '')
       required this.deliveryDate,
       @JsonKey(name: 'OrderNumber', defaultValue: '') required this.orderNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '') required this.createdDate,
+      @JsonKey(readValue: _createdDateTimeReadValue) required this.createdDate,
       @JsonKey(name: 'OrderBy', defaultValue: '') required this.orderBy,
       @JsonKey(name: 'OrderType', defaultValue: '') required this.orderType,
       @JsonKey(name: 'Batch', defaultValue: '') required this.batch,
@@ -568,7 +568,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @JsonKey(name: 'OrderNumber', defaultValue: '')
   final String orderNumber;
   @override
-  @JsonKey(name: 'CreatedDate', defaultValue: '')
+  @JsonKey(readValue: _createdDateTimeReadValue)
   final String createdDate;
   @override
   @JsonKey(name: 'OrderBy', defaultValue: '')
@@ -763,7 +763,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       required final String deliveryDate,
       @JsonKey(name: 'OrderNumber', defaultValue: '')
       required final String orderNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '')
+      @JsonKey(readValue: _createdDateTimeReadValue)
       required final String createdDate,
       @JsonKey(name: 'OrderBy', defaultValue: '') required final String orderBy,
       @JsonKey(name: 'OrderType', defaultValue: '')
@@ -831,7 +831,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(name: 'OrderNumber', defaultValue: '')
   String get orderNumber;
   @override
-  @JsonKey(name: 'CreatedDate', defaultValue: '')
+  @JsonKey(readValue: _createdDateTimeReadValue)
   String get createdDate;
   @override
   @JsonKey(name: 'OrderBy', defaultValue: '')

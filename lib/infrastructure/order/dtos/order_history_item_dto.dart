@@ -26,7 +26,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'DeliveryDate', defaultValue: '')
         required String deliveryDate,
     @JsonKey(name: 'OrderNumber', defaultValue: '') required String orderNumber,
-    @JsonKey(name: 'CreatedDate', defaultValue: '') required String createdDate,
+    @JsonKey(readValue: _createdDateTimeReadValue) required String createdDate,
     @JsonKey(name: 'OrderBy', defaultValue: '') required String orderBy,
     @JsonKey(name: 'OrderType', defaultValue: '') required String orderType,
     @JsonKey(name: 'Batch', defaultValue: '') required String batch,
@@ -130,4 +130,13 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
 
   factory OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
       _$OrderHistoryItemDtoFromJson(json);
+}
+
+String _createdDateTimeReadValue(Map json, String _) {
+  final createdDate = json['CreatedDate'] ?? '';
+  final createdTime = json['CreatedTime'] ?? '';
+
+  // Concatenation is necessary to convert 'createdDate' and 'createdTime' into
+  // the 'yyyyMMddHHmmss' format.
+  return '$createdDate$createdTime';
 }
