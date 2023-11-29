@@ -189,6 +189,18 @@ void main() {
     pendingChildren: [],
   );
 
+  final checkoutPageRouteData = RouteData(
+    route: const RouteMatch(
+      name: 'CheckoutPageRoute',
+      segments: ['orders', 'cart', 'checkout'],
+      path: 'orders/cart/checkout',
+      stringMatch: 'orders/cart/checkout',
+      key: ValueKey('CheckoutPageRoute'),
+    ),
+    router: MockAppRouter(),
+    pendingChildren: [],
+  );
+
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
@@ -2485,6 +2497,95 @@ void main() {
           await tester.pumpAndSettle();
         },
       );
+      testWidgets(
+        'Test Pre Order Modal Bottom not displayed when hideStockDisplay is enabled',
+        (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                    quantity: MaterialQty(1),
+                    tax: 10,
+                    type: MaterialInfoType.material(),
+                  ),
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(234.50),
+                  ),
+                  salesOrgConfig:
+                      fakeSalesOrgConfigWithOOSPreOrderValueAndHideStockDisplay,
+                ),
+              ],
+            ),
+          );
+
+          when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+              .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
+
+          await tester.pumpWidget(getWidget());
+
+          await tester.pump();
+          expect(find.byKey(WidgetKeys.checkoutButton), findsOneWidget);
+          await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+          await tester.pumpAndSettle();
+          expect(find.byKey(WidgetKeys.preOrderModel), findsNothing);
+
+          verify(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+              .called(1);
+        },
+      );
+
+      testWidgets(
+          ' Test Material Out Stock not displayed on item when hideStockDisplay is enabled for invalid cart',
+          (tester) async {
+        final oosMaterial = mockCartItems.first.copyWith(
+          materialInfo: mockCartItems.first.materialInfo.copyWith(
+            type: MaterialInfoType('material'),
+          ),
+        );
+
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[oosMaterial],
+          isClearing: false,
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: <PriceAggregate>[oosMaterial],
+            configs: fakeSalesOrgConfigWithHideStockDisplay,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+
+        await tester.pumpAndSettle();
+
+        final invalidItemBannerFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBanner);
+        final invalidMessageFinder = find.text('Out of stock material');
+        final invalidItemMessageFinder = find.text('Material out of stock');
+        final invalidItemBannerButtonFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBannerButton);
+
+        expect(invalidItemBannerFinder, findsOneWidget);
+        expect(invalidMessageFinder, findsOneWidget);
+
+        expect(invalidItemMessageFinder, findsNothing);
+
+        await tester.tap(invalidItemBannerButtonFinder);
+        verify(
+          () => cartBloc.add(
+            CartEvent.removeInvalidProducts(
+              invalidCartItems: <MaterialInfo>[oosMaterial.materialInfo],
+            ),
+          ),
+        ).called(1);
+      });
     },
   );
 }

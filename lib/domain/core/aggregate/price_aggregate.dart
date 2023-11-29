@@ -660,7 +660,9 @@ class PriceAggregate with _$PriceAggregate {
       isZdp5DiscountEligible && hasRemainingQuotaReached;
 
   bool get isPreOrder =>
-      !inStock && salesOrgConfig.addOosMaterials.getOrDefaultValue(false);
+      !inStock &&
+      salesOrgConfig.addOosMaterials.getOrDefaultValue(false) &&
+      !salesOrgConfig.hideStockDisplay;
 
   StatusType productTag(bool isUserValidToProcess) =>
       !stockInfoList.any((e) => e.inStock.isMaterialInStock)

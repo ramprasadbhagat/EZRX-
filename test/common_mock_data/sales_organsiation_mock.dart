@@ -238,3 +238,15 @@ final fakeSalesOrgConfigAllowReturnsOutsidePolicy =
     SalesOrganisationConfigs.empty().copyWith(
   allowReturnsOutsidePolicy: true,
 );
+
+final fakeSalesOrgConfigWithOOSPreOrderValueAndHideStockDisplay =
+    SalesOrganisationConfigs.empty().copyWith(
+  addOosMaterials: OosMaterial(true),
+  oosValue: OosValue(1),
+  hideStockDisplay: true,
+);
+
+final fakeSalesOrgConfigWithHideStockDisplay =
+    SalesOrganisationConfigs.empty().copyWith(
+  hideStockDisplay: true,
+);

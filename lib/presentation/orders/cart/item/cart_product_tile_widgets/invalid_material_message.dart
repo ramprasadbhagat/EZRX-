@@ -16,10 +16,10 @@ class _InvalidMaterialMessage extends StatelessWidget {
             valueText: context.tr('Material Suspended'),
           ),
         if (!cartItem.inStock &&
-            !context
+            context
                 .read<OrderEligibilityBloc>()
                 .state
-                .isOOSOrderAllowedToSubmit)
+                .displayInvalidOOSOnCartItem)
           ErrorTextWithIcon(
             valueText: context.tr('Material out of stock'),
           ),

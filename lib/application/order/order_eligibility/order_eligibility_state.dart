@@ -257,4 +257,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   List<MaterialInfo> get invalidCartItems =>
       [...invalidMaterialCartItems, ...invalidBundleCartItems];
+
+  bool get displayInvalidOOSOnCartItem =>
+      !isOOSOrderAllowedToSubmit && !configs.hideStockDisplay;
 }
