@@ -5,13 +5,15 @@ import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/v
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/extension.dart';
+
 class ViewByOrdersDetailRobot {
   final WidgetTester tester;
 
   ViewByOrdersDetailRobot(this.tester);
 
   final scrollView = find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
-  final buyAgainButton = find.byKey(WidgetKeys.viewByOrderDetailBuyAgain);
+  final buyAgainButton = find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
 
   void verifyPage() {
     expect(find.byType(ViewByOrderDetailsPage), findsOneWidget);
@@ -95,15 +97,25 @@ class ViewByOrdersDetailRobot {
   }
 
   void verifySubTotalVisible(String value) {
+    final subTotalWidget = find.byKey(WidgetKeys.viewByOrderSubtotalKey);
+    expect(subTotalWidget, findsOneWidget);
     expect(
-      find.byKey(WidgetKeys.balanceTextRow('Subtotal (excl.tax)'.tr(), value)),
+      find.descendant(
+        of: subTotalWidget,
+        matching: find.text(value, findRichText: true),
+      ),
       findsOneWidget,
     );
   }
 
   void verifyGrandTotalVisible(String value) {
+    final subTotalWidget = find.byKey(WidgetKeys.viewByOrderGrandTotalKey);
+    expect(subTotalWidget, findsOneWidget);
     expect(
-      find.byKey(WidgetKeys.balanceTextRow('Grand total'.tr(), value)),
+      find.descendant(
+        of: subTotalWidget,
+        matching: find.text(value, findRichText: true),
+      ),
       findsOneWidget,
     );
   }
@@ -116,15 +128,35 @@ class ViewByOrdersDetailRobot {
     );
   }
 
-  void verifyMaterialVisible(String materialNumber, int qty, String price) {
+  Future<void> verifyMaterialVisible(
+    String materialNumber,
+    int qty,
+    String price,
+  ) async {
+    final productWidget =
+        find.byKey(WidgetKeys.viewByOrderDetailItem(materialNumber, false));
+    await tester.pumpUntilVisible(productWidget);
+    expect(productWidget, findsOneWidget);
     expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget.key == WidgetKeys.commonTileItemTitle &&
-            widget is Text &&
-            widget.data!.contains(materialNumber),
+      tester
+          .widget<Text>(
+            find.descendant(
+              of: productWidget,
+              matching: find.byKey(WidgetKeys.cartItemProductQty),
+            ),
+          )
+          .data,
+      contains(qty.toString()),
+    );
+    expect(
+      find.descendant(
+        of: find.descendant(
+          of: productWidget,
+          matching: find.byKey(WidgetKeys.cartItemProductTotalPrice),
+        ),
+        matching: find.text(price, findRichText: true),
       ),
-      findsAtLeastNWidgets(1),
+      findsOneWidget,
     );
   }
 
@@ -134,6 +166,6 @@ class ViewByOrdersDetailRobot {
 
   Future<void> tapBuyAgainButton() async {
     await tester.tap(buyAgainButton);
-    await tester.pumpAndSettle();
+    await tester.pumpUntilVisible(find.byKey(WidgetKeys.cartPage));
   }
 }

@@ -180,6 +180,7 @@ class _BodyContent extends StatelessWidget {
                           ),
                           child: Text(
                             '${context.tr('Your items')}(${context.read<OrderSummaryBloc>().state.orderHistoryDetails.orderHistoryDetailsOrderItem.length})',
+                            key: WidgetKeys.orderSuccessItemTotalQty,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium

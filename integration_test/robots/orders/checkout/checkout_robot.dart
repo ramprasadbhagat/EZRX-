@@ -168,12 +168,6 @@ class CheckoutRobot {
         price,
       );
 
-  Future<void> verifyStampDutyLabel(String price) =>
-      _verifyOrderSummaryComponent(
-        find.byKey(WidgetKeys.checkoutSummaryStampDuty),
-        price,
-      );
-
   Future<void> verifySmallOrderFeeLabel(String price) =>
       _verifyOrderSummaryComponent(
         find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),

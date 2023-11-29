@@ -51,6 +51,7 @@ class QuantityAndPriceWithTax extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             PriceComponent(
+              key: WidgetKeys.cartItemProductTotalPrice,
               salesOrgConfig:
                   context.read<EligibilityBloc>().state.salesOrgConfigs,
               price: totalPriceString,

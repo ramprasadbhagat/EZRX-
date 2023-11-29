@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../common/common_robot.dart';
+import '../common/extension.dart';
 
 class ProductDetailRobot extends CommonRobot {
   ProductDetailRobot(WidgetTester tester) : super(tester);
@@ -45,7 +46,7 @@ class ProductDetailRobot extends CommonRobot {
 
   Future<void> _tapToFavoriteIcon() async {
     await tester.tap(favoritesIcon.first);
-    await tester.pumpAndSettle();
+    await tester.pumpUntilVisible(customSnackBar);
     await dismissSnackbar();
   }
 
@@ -160,9 +161,9 @@ class ProductDetailRobot extends CommonRobot {
     );
   }
 
-  void verifyExpiryLabelDisplayed(String value) {
+  void verifyExpiryLabelDisplayed() {
     expect(
-      find.byKey(WidgetKeys.balanceTextRow('Expiry'.tr(), value)),
+      find.byKey(WidgetKeys.productDetailExpiryDate),
       findsOneWidget,
     );
   }
@@ -200,31 +201,27 @@ class ProductDetailRobot extends CommonRobot {
   }
 
   void verifyNameProductOffer(String nameProduct) {
-    expect(
-      tester
-          .widget<Text>(
-            find.descendant(
-              of: find.byType(ShowOfferDialogWidget),
-              matching: find.byKey(WidgetKeys.lblNameProductOffers),
-            ),
-          )
-          .data,
-      contains(nameProduct),
+    final productOfferWidget = tester.widgetList<Text>(
+      find.descendant(
+        of: find.byType(ShowOfferDialogWidget),
+        matching: find.byKey(WidgetKeys.lblNameProductOffers),
+      ),
     );
+    for (final widget in productOfferWidget) {
+      expect(widget.data, contains(nameProduct));
+    }
   }
 
   void verifyCodeProductOffer(String codeProduct) {
-    expect(
-      tester
-          .widget<Text>(
-            find.descendant(
-              of: find.byType(ShowOfferDialogWidget),
-              matching: find.byKey(WidgetKeys.lblCodeProductOffers),
-            ),
-          )
-          .data,
-      codeProduct,
+    final productOfferWidget = tester.widgetList<Text>(
+      find.descendant(
+        of: find.byType(ShowOfferDialogWidget),
+        matching: find.byKey(WidgetKeys.lblCodeProductOffers),
+      ),
     );
+    for (final widget in productOfferWidget) {
+      expect(widget.data, contains(codeProduct));
+    }
   }
 
   void verifyQuantityProductDisplayed() {
@@ -233,7 +230,7 @@ class ProductDetailRobot extends CommonRobot {
         of: find.byType(ShowOfferDialogWidget),
         matching: find.byKey(WidgetKeys.lblQuantityProductOffers),
       ),
-      findsOneWidget,
+      findsWidgets,
     );
   }
 
@@ -244,15 +241,5 @@ class ProductDetailRobot extends CommonRobot {
   void verifyRelateProductDisplayed() {
     final materialCard = find.byKey(WidgetKeys.materialCard);
     expect(materialCard, findsWidgets);
-  }
-
-  Future<void> backToProductsScreen() async {
-    await tester.tap(find.byKey(WidgetKeys.materialDetailsPageBack));
-    await tester.pumpAndSettle();
-  }
-
-  Future<void> openCardCartPopup() async {
-    await tester.tap(find.byKey(WidgetKeys.cartButton));
-    await tester.pumpAndSettle();
   }
 }

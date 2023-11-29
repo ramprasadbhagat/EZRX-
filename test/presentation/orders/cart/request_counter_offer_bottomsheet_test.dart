@@ -704,7 +704,7 @@ void main() {
             ),
           ),
         ),
-      ).called(2);
+      ).called(1);
 
       verify(
         () => cartBloc.add(
@@ -851,7 +851,7 @@ void main() {
             ),
           ),
         ),
-      ).called(2);
+      ).called(1);
 
       verify(
         () => cartBloc.add(
@@ -1188,7 +1188,7 @@ void main() {
             ),
           ),
         ),
-      ).called(2);
+      ).called(1);
 
       final errorSnackBarFinder = find.byType(CustomSnackBar);
       expect(errorSnackBarFinder, findsOneWidget);

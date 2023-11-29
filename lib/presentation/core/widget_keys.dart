@@ -531,7 +531,6 @@ class WidgetKeys {
   static const Key cartPagePriceMessageWidget =
       Key('cartPagePriceMessageWidget');
   static const Key cartClearButton = Key('cartClearButton');
-  static const Key cartTotalQty = Key('cartTotalQty');
   static const Key cartShipToAddress = Key('cartShipToAddress');
   static const Key cartShipToAddressSheet = Key('cartShipToAddressSheet');
   static const Key cartShipToAddressSheetCloseButton =
@@ -780,6 +779,7 @@ class WidgetKeys {
   static const Key materialDetailsCarouselImage =
       Key('materialDetailsCarouselImage');
   static const Key customSnackBarCloseIcon = Key('customSnackBarCloseIcon');
+  static const Key productDetailExpiryDate = Key('productDetailExpiryDate');
   static const Key productDetailQuantityAddKey =
       Key('productDetailQuantityAddKey');
   static const Key productDetailQuantityDeleteKey =
@@ -1223,7 +1223,8 @@ class WidgetKeys {
       const Key('viewByOrderDetailItems');
   static Key viewByOrderDetailOrderDate =
       const Key('viewByOrderDetailOrderDate');
-  static Key viewByOrderDetailBuyAgain = const Key('viewByOrderDetailBuyAgain');
+  static Key viewByOrderDetailItem(String materialNumber, bool isBonus) =>
+      Key('viewByOrderDetailItem$materialNumber$isBonus');
   //===========================================================
   //  Intro Page
   //============================================================

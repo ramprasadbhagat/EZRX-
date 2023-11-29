@@ -3,7 +3,6 @@ import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/item_details_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_details_header_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_other_item_details_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,7 +13,6 @@ class ViewByItemsDetailRobot {
   ViewByItemsDetailRobot(this.tester);
 
   final scrollView = find.byKey(WidgetKeys.viewByItemsOrderDetailPage);
-  final headerSection = find.byType(ViewByItemDetailsHeaderSection);
   final statusTrackerSection = find.byType(StatusTrackerSection);
   final addressSection = find.byType(AddressInfoSection);
   final itemDetailSection = find.byType(ItemDetailsSection);
@@ -24,12 +22,7 @@ class ViewByItemsDetailRobot {
     expect(find.byType(ViewByItemDetailsPage), findsOneWidget);
   }
 
-  Future<void> dragToEnsureHeaderVisible() async {
-    await tester.dragUntilVisible(
-      headerSection,
-      scrollView,
-      const Offset(0.0, -200),
-    );
+  void verifyHeader() {
     expect(
       find.byKey(WidgetKeys.viewByItemsOrderDetailOrderCode),
       findsOneWidget,
@@ -48,21 +41,11 @@ class ViewByItemsDetailRobot {
     );
   }
 
-  Future<void> dragToEnsureStatusTrackerVisible() async {
-    await tester.dragUntilVisible(
-      statusTrackerSection,
-      scrollView,
-      const Offset(0.0, -200),
-    );
+  void verifyStatusTracker() {
     expect(statusTrackerSection, findsOneWidget);
   }
 
-  Future<void> dragToEnsureAddressVisible() async {
-    await tester.dragUntilVisible(
-      addressSection,
-      scrollView,
-      const Offset(0.0, -200),
-    );
+  void verifyAddress() {
     expect(
       find.byKey(WidgetKeys.addressInfoSectionActionLabel),
       findsOneWidget,
@@ -109,7 +92,7 @@ class ViewByItemsDetailRobot {
     );
 
     expect(
-      find.byKey(WidgetKeys.commonTileItemQty),
+      find.byKey(WidgetKeys.cartItemProductQty),
       findsAtLeastNWidgets(1),
     );
   }

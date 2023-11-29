@@ -41,7 +41,7 @@ class HomeRobot {
   final bundlesNumberID = find.byKey(WidgetKeys.bundlesNumber);
   final bundlesDescription = find.byKey(WidgetKeys.bundlesDescription);
   final bundlesManufactured = find.byKey(WidgetKeys.bundlesManufactured);
-  final bundlesList = find.byKey(WidgetKeys.bundlesList);
+  final bundlesItem = find.byKey(WidgetKeys.bundlesListItem);
   final recentlyOrderedList = find.byKey(WidgetKeys.listRecentlyOrdered);
   final browseProductsList = find.byKey(WidgetKeys.browseProductsList);
   final announcementsList = find.byKey(WidgetKeys.announcementsList);
@@ -234,7 +234,7 @@ class HomeRobot {
   }
 
   Future<void> tapOnFirstBundle() async {
-    final firstBundle = bundlesList.first;
+    final firstBundle = bundlesItem.first;
     await _scrollEnsureVisible(firstBundle);
     await tester.tap(firstBundle);
     await tester.pumpAndSettle();
@@ -257,9 +257,8 @@ class HomeRobot {
     expect(bundlesManufactured, findsWidgets);
   }
 
-  Future<void> slideToNextBundle() async {
-    final bundle = bundlesList.first;
-    await tester.drag(bundle, const Offset(-500, 150));
+  Future<void> slideBundle({bool reversed = true}) async {
+    await tester.drag(bundlesItem.first, Offset(reversed ? 500 : -500, 150));
     await tester.pump();
   }
 
@@ -275,18 +274,6 @@ class HomeRobot {
     await tester.pump();
   }
 
-  Future<void> slideToNextAnnouncements() async {
-    final announcement = announcementsList.first;
-    await tester.drag(announcement, const Offset(-500, 150));
-    await tester.pump();
-  }
-
-  Future<void> slideToPreviousBundle() async {
-    final bundle = bundlesList.at(1);
-    await tester.drag(bundle, const Offset(500, 150));
-    await tester.pump();
-  }
-
   Future<void> slideToPreviousRecentlyOrdered() async {
     final ordered = recentlyOrderedList.at(1);
     await tester.drag(ordered, const Offset(1000, 150));
@@ -296,12 +283,6 @@ class HomeRobot {
   Future<void> slideToPreviousBrowseProducts() async {
     final browse = browseProductsList.at(1);
     await tester.drag(browse, const Offset(500, 150));
-    await tester.pump();
-  }
-
-  Future<void> slideToPreviousAnnouncements() async {
-    final announcement = announcementsList.at(1);
-    await tester.drag(announcement, const Offset(500, 150));
     await tester.pump();
   }
 
@@ -352,10 +333,6 @@ class HomeRobot {
     expect(productImage, findsWidgets);
   }
 
-  void findProductStockLabel() {
-    expect(productStockLabel, findsWidgets);
-  }
-
   void findProductDescription() {
     expect(productDescription, findsWidgets);
   }
@@ -399,15 +376,5 @@ class HomeRobot {
       listView,
       const Offset(0, -250),
     );
-  }
-
-  Future<void> openDetailFirstViaHomeScreen(String productName) async {
-    final product = find.descendant(
-      of: find.byKey(WidgetKeys.browseProduct),
-      matching: find.text(productName).first,
-    );
-    await _scrollEnsureVisible(product);
-    await tester.tap(product);
-    await tester.pumpAndSettle();
   }
 }

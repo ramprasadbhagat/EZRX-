@@ -20,7 +20,7 @@ class OrdersRootRobot {
     expect(find.byType(OrdersTab), findsOneWidget);
   }
 
-  void verifyTabBarVisible() {
+  void verifyTabBar() {
     expect(viewByItemsTab, findsOneWidget);
     expect(viewByOrdersTab, findsOneWidget);
   }
@@ -35,19 +35,19 @@ class OrdersRootRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyViewByItemsPageVisible() {
+  void verifyViewByItemsPage() {
     expect(viewByItemsPage, findsOneWidget);
   }
 
-  void verifyViewByOrdersPageVisible() {
+  void verifyViewByOrdersPage() {
     expect(viewByOrdersPage, findsOneWidget);
   }
 
-  void verifySearchBarVisible() {
+  void verifySearchBar() {
     expect(searchBar, findsOneWidget);
   }
 
-  void verifyFilterButtonVisible() {
+  void verifyFilterButton() {
     expect(filterButton, findsOneWidget);
   }
 

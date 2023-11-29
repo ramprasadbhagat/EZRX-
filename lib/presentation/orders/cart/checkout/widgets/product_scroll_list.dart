@@ -66,9 +66,6 @@ class _CheckoutProductMaterialWithBonus extends StatelessWidget {
     return Column(
       children: [
         CheckoutMaterialItem(
-          key: WidgetKeys.cartItemProductTile(
-            cartItem.materialInfo.materialNumber.displayMatNo,
-          ),
           cartItem: cartItem,
         ),
         if (cartItem.addedBonusList.isNotEmpty)

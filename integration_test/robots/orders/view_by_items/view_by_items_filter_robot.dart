@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,12 +23,8 @@ class ViewByItemsFilterRobot {
   ];
 
   void verifyDefaultFilterApplied() {
-    final currentTime = DateTime.now();
     verifyNoStatusFilterApplied();
-    verifyDateRangeFilterApplied(
-      fromDate: currentTime.subtract(const Duration(days: 7)),
-      toDate: currentTime,
-    );
+    verifyDateRangeFilterApplied('', '');
   }
 
   void verifyNoStatusFilterApplied() {
@@ -41,35 +36,22 @@ class ViewByItemsFilterRobot {
     }
   }
 
-  void verifyDateRangeFilterApplied({
-    required DateTime fromDate,
-    required DateTime toDate,
-  }) {
+  void verifyDateRangeFilterApplied(String fromDate, String toDate) {
     expect(
-      find.descendant(
-        of: fromDateFilter,
-        matching: find.text(
-          DateTimeStringValue(fromDate.toIso8601String()).dateString,
-        ),
-      ),
+      find.descendant(of: fromDateFilter, matching: find.text(fromDate)),
       findsOneWidget,
     );
     expect(
-      find.descendant(
-        of: toDateFilter,
-        matching: find.text(
-          DateTimeStringValue(toDate.toIso8601String()).dateString,
-        ),
-      ),
+      find.descendant(of: toDateFilter, matching: find.text(toDate)),
       findsOneWidget,
     );
   }
 
-  void verifyApplyButtonVisible() {
+  void verifyApplyButton() {
     expect(applyButton, findsOneWidget);
   }
 
-  void verifyResetButtonVisible() {
+  void verifyResetButton() {
     expect(resetButton, findsOneWidget);
   }
 

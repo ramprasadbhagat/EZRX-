@@ -14,13 +14,19 @@ class ViewByItemsRobot {
 
   final orderGroups = find.byKey(WidgetKeys.viewByItemsOrderGroupKey);
   final orderItems = find.byKey(WidgetKeys.viewByItemsOrderItemKey);
+  final orderId = find.byKey(WidgetKeys.commonTileItemHeader);
+  final productName = find.byKey(WidgetKeys.commonTileItemTitle);
+  final productId = find.byKey(WidgetKeys.commonTileItemLabel);
+  final productQty = find.byKey(WidgetKeys.commonTileItemQty);
+  final orderStatus = find.byKey(WidgetKeys.orderItemStatusKey);
+  final bonusLabel = find.byKey(WidgetKeys.commonTileItemStatusLabel);
 
-  void verifyOrdersVisible() {
-    verifyOrderGroupsVisible();
-    verifyOrderItemsVisible();
+  void verifyOrders() {
+    verifyOrderGroups();
+    verifyOrderItems();
   }
 
-  void verifyOrderGroupsVisible() {
+  void verifyOrderGroups() {
     expect(orderGroups, findsAtLeastNWidgets(1));
     final groupCount = orderGroups.evaluate().length;
     expect(
@@ -32,23 +38,17 @@ class ViewByItemsRobot {
     );
   }
 
-  void verifyOrderItemsVisible() {
+  void verifyOrderItems() {
     expect(orderItems, findsAtLeastNWidgets(1));
     final itemCount = orderItems.evaluate().length;
     // Verify product name
     expect(
-      find.descendant(
-        of: orderItems,
-        matching: find.byKey(WidgetKeys.commonTileItemTitle),
-      ),
+      find.descendant(of: orderItems, matching: productName),
       findsNWidgets(itemCount),
     );
     // Verify product code
     expect(
-      find.descendant(
-        of: orderItems,
-        matching: find.byKey(WidgetKeys.commonTileItemLabel),
-      ),
+      find.descendant(of: orderItems, matching: productId),
       findsNWidgets(itemCount),
     );
     // Verify product image
@@ -58,39 +58,31 @@ class ViewByItemsRobot {
     );
     // Verify order status
     expect(
-      find.descendant(
-        of: orderItems,
-        matching: find.byKey(WidgetKeys.orderItemStatusKey),
-      ),
+      find.descendant(of: orderItems, matching: orderStatus),
       findsNWidgets(itemCount),
     );
     // Verify qty
     expect(
-      find.descendant(
-        of: orderItems,
-        matching: find.byKey(WidgetKeys.commonTileItemQty),
-      ),
+      find.descendant(of: orderItems, matching: productQty),
       findsNWidgets(itemCount),
     );
     // Verify orderID
     expect(
-      find.descendant(
-        of: orderItems,
-        matching: find.byKey(WidgetKeys.commonTileItemHeader),
-      ),
+      find.descendant(of: orderItems, matching: orderId),
       findsNWidgets(itemCount),
     );
   }
 
-  void verifyBonusLabelVisible() {
-    expect(orderItems, findsAtLeastNWidgets(1));
-    expect(
-      find.byKey(WidgetKeys.commonTileItemStatusLabel),
-      findsAtLeastNWidgets(1),
-    );
+  void verifyBonusLabel() {
+    expect(bonusLabel, findsAtLeastNWidgets(1));
   }
 
-  void verifyOrdersWithProductNameVisible(String searchKey) {
+  Future<void> tapFirstBonusLabel() async {
+    await tester.tap(bonusLabel.first);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyOrdersWithProductName(String searchKey) {
     expect(orderItems, findsAtLeastNWidgets(1));
     expect(
       find.byWidgetPredicate(
@@ -103,7 +95,7 @@ class ViewByItemsRobot {
     );
   }
 
-  void verifyOrdersWithProductCodeVisible(String searchKey) {
+  void verifyOrdersWithProductCode(String searchKey) {
     expect(orderItems, findsAtLeastNWidgets(1));
     expect(
       find.byWidgetPredicate(
@@ -116,7 +108,7 @@ class ViewByItemsRobot {
     );
   }
 
-  void verifyOrdersWithOrderCodeVisible(String searchKey) {
+  void verifyOrdersWithOrderCode(String searchKey) {
     expect(orderItems, findsAtLeastNWidgets(1));
     expect(
       find.byWidgetPredicate(
@@ -129,23 +121,23 @@ class ViewByItemsRobot {
     );
   }
 
-  void verifyNoRecordFoundVisible() {
+  void verifyNoRecordFound() {
     expect(orderGroups, findsNothing);
     expect(orderItems, findsNothing);
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
     expect(find.text('No past orders to show'.tr()), findsOneWidget);
     expect(
-      find.text('Items ordered on eZRx+ will be shown here'.tr()),
+      find.text('${'Items ordered on eZRx+ will be shown here'.tr()}.'),
       findsOneWidget,
     );
     expect(find.byKey(WidgetKeys.startBrowsingViewByItem), findsOneWidget);
   }
 
-  void verifyOrderGroupInDateRangeVisible({
+  void verifyOrderGroupInDateRange({
     required DateTime fromDate,
     required DateTime toDate,
   }) {
-    verifyOrderGroupsVisible();
+    verifyOrderGroups();
     final dateText = tester
         .widgetList<Text>(
           find.descendant(
@@ -162,8 +154,8 @@ class ViewByItemsRobot {
     }
   }
 
-  void verifyOrderWithStatusVisible(List<String> statuses) {
-    verifyOrderItemsVisible();
+  void verifyOrderWithStatus(List<String> statuses) {
+    verifyOrderItems();
     final statusText = tester
         .widgetList<Text>(
           find.descendant(
@@ -178,7 +170,16 @@ class ViewByItemsRobot {
     }
   }
 
-  Future<void> tapFirstVisibleOrder() async {
+  String getFirstOrderId() =>
+      _getText(orderId.first).split('${'Order'.tr()} #')[1];
+
+  String getFirstProductName() => _getText(productName.first);
+
+  String getFirstProductId() => _getText(productId.first);
+
+  String _getText(Finder finder) => tester.widget<Text>(finder).data ?? '';
+
+  Future<void> tapFirstOrder() async {
     await tester.tap(orderItems.first);
     await tester.pumpAndSettle();
   }

@@ -79,8 +79,9 @@ class OrderItemDetailsSection extends StatelessWidget {
                                       context,
                                       state.orderHistory,
                                     ),
-                                    key: WidgetKeys.genericKey(
-                                      key: '$index',
+                                    key: WidgetKeys.viewByOrderDetailItem(
+                                      e.materialNumber.displayMatNo,
+                                      e.isBonus,
                                     ),
                                     label:
                                         '${e.materialNumber.displayMatNo}${displayGovernmentMaterialCOde ? '|${e.governmentMaterialCode}' : ''}',

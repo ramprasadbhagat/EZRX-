@@ -34,7 +34,7 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<CartBloc, CartState>(
       listenWhen: (previous, current) =>
-          previous.isUpserting != current.isUpserting,
+          previous.isUpserting != current.isUpserting && !current.isUpserting,
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
           () {

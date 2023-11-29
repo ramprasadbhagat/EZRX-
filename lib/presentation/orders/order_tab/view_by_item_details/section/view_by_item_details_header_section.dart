@@ -53,6 +53,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                         ),
               ),
               InvoiceNumberSection(
+                key: WidgetKeys.viewByItemsOrderDetailInvoiceNumber,
                 invoiceNumber: orderHistoryItem.invoiceData.invoiceNumber
                     .getOrDefaultValue(''),
               ),

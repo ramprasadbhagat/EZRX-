@@ -140,12 +140,18 @@ class CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> dismissSnackbar() async {
+  Future<void> dismissSnackbar({bool dismissAll = false}) async {
     final dismissButton = find.byKey(WidgetKeys.snackBarDismissButton);
-    final isSnackbarVisible = dismissButton.evaluate().isNotEmpty;
-    if (isSnackbarVisible) {
-      await tester.tap(dismissButton.first);
-      await tester.pumpAndSettle();
+    if (dismissAll) {
+      while (dismissButton.evaluate().isNotEmpty) {
+        await tester.tap(dismissButton.first);
+        await tester.pumpAndSettle();
+      }
+    } else {
+      if (dismissButton.evaluate().isNotEmpty) {
+        await tester.tap(dismissButton.first);
+        await tester.pumpAndSettle();
+      }
     }
   }
 
@@ -208,14 +214,6 @@ class CommonRobot {
 
   void verifyCustomerCodeSelectorVisible() {
     expect(customerCodeSelector, findsOneWidget);
-  }
-
-  void verifyTextVisible(String value) {
-    expect(find.text(value), findsOneWidget);
-  }
-
-  void verifyTextNotVisible(String value) {
-    expect(find.text(value), findsNothing);
   }
 
   Future<void> verifySnackbarVisible() async {

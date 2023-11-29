@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -13,33 +12,22 @@ class ViewByOrdersFilterRobot {
   final applyButton = find.byKey(WidgetKeys.filterApplyButton);
 
   void verifyDefaultFilterApplied() {
-    final currentTime = DateTime.now();
     verifyDateRangeFilterApplied(
-      fromDate: currentTime.subtract(const Duration(days: 7)),
-      toDate: currentTime,
+      fromDate: '',
+      toDate: '',
     );
   }
 
   void verifyDateRangeFilterApplied({
-    required DateTime fromDate,
-    required DateTime toDate,
+    required String fromDate,
+    required String toDate,
   }) {
     expect(
-      find.descendant(
-        of: fromDateFilter,
-        matching: find.text(
-          DateTimeStringValue(fromDate.toIso8601String()).dateString,
-        ),
-      ),
+      find.descendant(of: fromDateFilter, matching: find.text(fromDate)),
       findsOneWidget,
     );
     expect(
-      find.descendant(
-        of: toDateFilter,
-        matching: find.text(
-          DateTimeStringValue(toDate.toIso8601String()).dateString,
-        ),
-      ),
+      find.descendant(of: fromDateFilter, matching: find.text(toDate)),
       findsOneWidget,
     );
   }
@@ -72,7 +60,7 @@ class ViewByOrdersFilterRobot {
     await tester.pumpAndSettle();
   }
 
-    Future<void> tapResetButton() async {
+  Future<void> tapResetButton() async {
     await tester.tap(resetButton);
     await tester.pumpAndSettle();
   }

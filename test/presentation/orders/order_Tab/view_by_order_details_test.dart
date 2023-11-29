@@ -745,6 +745,7 @@ void main() {
     testWidgets(
         'test view by order detail item has price not available for PnG',
         (tester) async {
+      final materialNumber = MaterialNumber('000000000021247719');
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
@@ -756,7 +757,7 @@ void main() {
                   principalCode: PrincipalCode('0000101308'),
                   principalName: PrincipalName('PROCTER AND GAMBLE'),
                 ),
-                materialNumber: MaterialNumber('000000000021247719'),
+                materialNumber: materialNumber,
                 unitPrice: ZpPrice('17.2'),
                 totalPrice: TotalPrice('516'),
                 type: OrderItemType('Comm'),
@@ -785,9 +786,7 @@ void main() {
       await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
       await tester.pumpAndSettle();
       final viewByOrderDetailsItemFinder = find.byKey(
-        WidgetKeys.genericKey(
-          key: '0',
-        ),
+        WidgetKeys.viewByOrderDetailItem(materialNumber.displayMatNo, false),
       );
       final priceNotAvailableFinder = find.text(
         'Price Not Available',
@@ -1265,7 +1264,12 @@ void main() {
         await tester.pumpAndSettle();
         await tester.drag(find.byType(ListView), const Offset(0, -10000));
         await tester.pumpAndSettle();
-        final item = find.byKey(WidgetKeys.genericKey(key: '0'));
+        final item = find.byKey(
+          WidgetKeys.viewByOrderDetailItem(
+            fakeOrderHistoryItem.materialNumber.displayMatNo,
+            false,
+          ),
+        );
         expect(item, findsOneWidget);
         expect(
           find.descendant(of: item, matching: find.byType(StatusLabel)),

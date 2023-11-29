@@ -8,16 +8,14 @@ import '../common/common_robot.dart';
 class FilterSortProductRobot extends CommonRobot {
   final manufacturerLabel = find.text('Manufacturer'.tr());
   final countryLabel = find.text('Country of origin'.tr());
+  final suggestedCountry = find.byKey(WidgetKeys.suggestedCountryText);
 
   FilterSortProductRobot(WidgetTester tester) : super(tester);
-  void verifyCheckboxCheckedShowProduct(
-    String checkbox,
-    bool isChecked,
-  ) {
-    final checkboxFavorites =
-        find.byKey(WidgetKeys.showProductCheckbox(checkbox));
+
+  void verifyCheckboxCheckedShowProduct(String checkbox, bool isChecked) {
+    final checkboxWidget = find.byKey(WidgetKeys.showProductCheckbox(checkbox));
     expect(
-      tester.firstWidget<CheckboxListTile>(checkboxFavorites).value,
+      tester.widget<CheckboxListTile>(checkboxWidget).value,
       isChecked,
     );
   }
@@ -97,9 +95,11 @@ class FilterSortProductRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  String getFirstSuggestedCountry() =>
+      tester.widget<Text>(suggestedCountry.first).data ?? '';
+
   Future<void> tapFirstSuggestedCountry() async {
-    final suggestedCountry = find.byKey(WidgetKeys.suggestedCountry).first;
-    await tester.tap(suggestedCountry);
+    await tester.tap(suggestedCountry.first);
     await tester.pumpAndSettle();
   }
 
@@ -111,9 +111,8 @@ class FilterSortProductRobot extends CommonRobot {
   }
 
   void verifyListCountryOfOriginMatched(String keyword) {
-    final suggestedCountryText = find.byKey(WidgetKeys.suggestedCountryText);
     final listSuggest =
-        tester.widgetList<Text>(suggestedCountryText).map((e) => e.data);
+        tester.widgetList<Text>(suggestedCountry).map((e) => e.data);
 
     for (final e in listSuggest) {
       expect(e, contains(keyword));
@@ -132,28 +131,11 @@ class FilterSortProductRobot extends CommonRobot {
   }
 
   void verifyDefaultFilterProduct() {
-    verifyCheckboxCheckedShowProduct(
-      'Favourites',
-      false,
-    );
-
-    verifyCheckboxCheckedShowProduct(
-      'Items with offers',
-      false,
-    );
-    verifyCheckboxCheckedShowProduct(
-      'Bundle offers',
-      false,
-    );
-    verifyRadioSort(
-      'A-Z',
-      true,
-    );
-    verifyRadioSort(
-      'Z-A',
-      false,
-    );
-
+    verifyCheckboxCheckedShowProduct('Favourites', false);
+    verifyCheckboxCheckedShowProduct('Items with offers', false);
+    verifyCheckboxCheckedShowProduct('Bundle offers', false);
+    verifyRadioSort('A-Z', true);
+    verifyRadioSort('Z-A', false);
     verifyFilterManufacturerVisible();
     verifyFilterCountryOfOriginVisible();
   }

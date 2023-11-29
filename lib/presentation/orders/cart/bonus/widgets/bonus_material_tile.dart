@@ -217,7 +217,6 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                     ),
                   ),
                 ),
-            maximumQty: 999,
           ),
         );
       },

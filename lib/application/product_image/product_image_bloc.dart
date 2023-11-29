@@ -21,8 +21,8 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
     ProductImageEvent event,
     Emitter<ProductImageState> emit,
   ) async {
-    event.map(
-      initialized: (e) => emit(ProductImageState.initial()),
+    await event.map(
+      initialized: (e) async => emit(ProductImageState.initial()),
       set: (e) {
         final updatedMap = {...state.productImageMap};
         for (final entry in e.productImageMap.entries) {

@@ -17,12 +17,12 @@ class ViewByOrdersRobot {
   final orderCodeLabel = find.byKey(WidgetKeys.viewByOrdersCodeLabelKey);
   final orderQtyLabel = find.byKey(WidgetKeys.viewByOrdersQtyLabelKey);
 
-  void verifyOrdersVisible() {
-    verifyOrderGroupsVisible();
-    verifyOrderItemsVisible();
+  void verifyOrders() {
+    verifyOrderGroups();
+    verifyOrderItems();
   }
 
-  void verifyOrderGroupsVisible() {
+  void verifyOrderGroups() {
     expect(orderGroups, findsAtLeastNWidgets(1));
     final groupCount = orderGroups.evaluate().length;
     expect(
@@ -34,7 +34,7 @@ class ViewByOrdersRobot {
     );
   }
 
-  void verifyOrderItemsVisible() {
+  void verifyOrderItems() {
     expect(orderItems, findsAtLeastNWidgets(1));
     final itemCount = orderItems.evaluate().length;
     expect(
@@ -51,21 +51,18 @@ class ViewByOrdersRobot {
     );
   }
 
-  void verifyNoRecordFoundVisible() {
+  void verifyNoRecordFound() {
     expect(orderGroups, findsNothing);
     expect(orderItems, findsNothing);
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
-    expect(find.text('No orders found'.tr()), findsOneWidget);
+    expect(find.text('No past orders to show'.tr()), findsOneWidget);
     expect(
-      find.text(
-        'Try adjusting your search or filter selection to find what you’re looking for.'
-            .tr(),
-      ),
+      find.text('${'Items ordered on eZRx+ will be shown here'.tr()}.'),
       findsOneWidget,
     );
   }
 
-  void verifyOrdersWithOrderCodeVisible(String searchKey) {
+  void verifyOrdersWithOrderCode(String searchKey) {
     expect(orderItems, findsAtLeastNWidgets(1));
     expect(
       find.byWidgetPredicate(
@@ -78,11 +75,11 @@ class ViewByOrdersRobot {
     );
   }
 
-  void verifyOrderGroupInDateRangeVisible({
+  void verifyOrderGroupInDateRange({
     required DateTime fromDate,
     required DateTime toDate,
   }) {
-    verifyOrderGroupsVisible();
+    verifyOrderGroups();
     final dateText = tester
         .widgetList<Text>(
           find.descendant(
@@ -99,19 +96,28 @@ class ViewByOrdersRobot {
     }
   }
 
-  String getOrderIdText({required int index}) =>
-      tester.widget<Text>(orderCodeLabel.at(index)).data ?? '';
-
-  void verifyOrderIdTextVisible(String text, {required int index}) {
-    expect(tester.widget<Text>(orderCodeLabel.at(index)).data, text);
+  void verifyOrderIdText(
+    String text, {
+    required int index,
+    bool isVisible = true,
+  }) {
+    if (isVisible) {
+      expect(getOrderIdText(index: index), text);
+    } else {
+      expect(
+        orderCodeLabel.evaluate().length - 1 < index ||
+            getOrderIdText(index: index) != text,
+        true,
+      );
+    }
   }
 
-  void verifyOrderIdTextNotVisible(String text, {required int index}) {
-    expect(
-      orderCodeLabel.evaluate().length - 1 < index ||
-          tester.widget<Text>(orderCodeLabel.at(index)).data != text,
-      true,
-    );
+  String getOrderIdText({required int index}) {
+    final suffixText = '${'Order'.tr()} #';
+    final labelText =
+        tester.widget<Text>(orderCodeLabel.at(index)).data ?? suffixText;
+
+    return labelText.split(suffixText)[1];
   }
 
   Future<void> tapFirstOrder() async {
@@ -121,6 +127,6 @@ class ViewByOrdersRobot {
 
   Future<void> tapFirstBuyAgainButton() async {
     await tester.tap(buyAgainButton.first);
-    await tester.pumpAndSettle();
+    await tester.pumpUntilVisible(find.byKey(WidgetKeys.cartPage));
   }
 }

@@ -1,8 +1,6 @@
-import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../core/test_locator.dart';
 import '../common/common_robot.dart';
 
 class ProductRobot extends CommonRobot {
@@ -12,7 +10,6 @@ class ProductRobot extends CommonRobot {
   final nameCart = find.byKey(WidgetKeys.nameCart);
   final priceComponent = find.byKey(WidgetKeys.priceComponent);
   final labelFilterFavorites = find.byKey(WidgetKeys.favoritesChoiceChip);
-  final suggestedProductsTile = find.byKey(WidgetKeys.suggestedProductsTile);
 
   // Search bar
   final searchProductField = find.byKey(WidgetKeys.searchProductField);
@@ -111,24 +108,6 @@ class ProductRobot extends CommonRobot {
   Future<void> filterFavoritesInProductsScreen() async {
     await tester.tap(labelFilterFavorites);
     await tester.pumpAndSettle();
-  }
-
-  Future<void> pumDurationAutoSearch() async {
-    await tester
-        .pump(Duration(milliseconds: locator<Config>().autoSearchTimeout));
-  }
-
-  void verifyNoSuggestProductsSearch() {
-    expect(suggestedProductsTile, findsNothing);
-  }
-
-  void verifySuggestProductsSearch(String keyword) {
-    final listSuggestTile =
-        tester.widgetList<Text>(suggestedProductsTile).map((e) => e.data);
-
-    for (final e in listSuggestTile) {
-      expect(e, contains(keyword));
-    }
   }
 
   Future<void> tapToProductByIndex(int index) async {

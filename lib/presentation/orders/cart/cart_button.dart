@@ -101,18 +101,21 @@ class CartButton extends StatelessWidget {
                           .read<ProductDetailBloc>()
                           .state
                           .productDetailAggregate;
+
+                      final salesOrgConfig =
+                          context.read<EligibilityBloc>().state.salesOrgConfigs;
+
+                      final materialPriceBloc =
+                          context.read<MaterialPriceBloc>();
+
                       context.router.pushNamed('orders/cart').then((value) {
-                        final salesOrgConfig = context
-                            .read<EligibilityBloc>()
-                            .state
-                            .salesOrgConfigs;
                         if (salesOrgConfig.salesOrg.isVN &&
                             salesOrgConfig.enableZDP5) {
-                          context.read<MaterialPriceBloc>().add(
-                                MaterialPriceEvent.fetchPriceForZDP5Materials(
-                                  materialInfo: product.materialInfo,
-                                ),
-                              );
+                          materialPriceBloc.add(
+                            MaterialPriceEvent.fetchPriceForZDP5Materials(
+                              materialInfo: product.materialInfo,
+                            ),
+                          );
                         }
                       });
                     },

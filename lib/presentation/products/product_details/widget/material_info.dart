@@ -146,6 +146,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
+            key: WidgetKeys.productDetailExpiryDate,
             keyText: context.tr('Expiry'),
             valueText:
                 productDetailAggregate.stockInfo.expiryDate.dateOrNaString,

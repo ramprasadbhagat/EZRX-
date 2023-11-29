@@ -30,11 +30,6 @@ class OrderPriceSummaryRobot {
         price,
       );
 
-  void verifyStampDutyLabel(String price) => _verifyPriceLabel(
-        find.byKey(WidgetKeys.checkoutSummaryStampDuty),
-        price,
-      );
-
   void verifySmallOrderFeeLabel(String price) => _verifyPriceLabel(
         find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
         price,

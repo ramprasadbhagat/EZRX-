@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 final _priceFormatter = StringUtils.priceFormatter;
 
@@ -15,6 +16,8 @@ extension DateTimeExt on DateTime {
 
 extension NumExt on num {
   String get priceFormatted => _priceFormatter.format(this);
+
+  String priceDisplay(String currency) => '$currency $priceFormatted';
 }
 
 extension StringExt on String {
@@ -23,6 +26,20 @@ extension StringExt on String {
       return _priceFormatter.parse(this).toDouble();
     } catch (_) {
       return 0;
+    }
+  }
+}
+
+extension TesterExt on WidgetTester {
+  Future<void> pumpUntilVisible(Finder finder, {int maxIteration = 15}) async {
+    const maxIteration = 15;
+    for (var i = 0; i <= maxIteration; i++) {
+      if (finder.evaluate().isNotEmpty) {
+        expect(finder, findsOneWidget);
+
+        break;
+      }
+      await pumpAndSettle(const Duration(seconds: 1));
     }
   }
 }

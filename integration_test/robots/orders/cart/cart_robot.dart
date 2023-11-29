@@ -6,6 +6,8 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/extension.dart';
+
 class CartRobot {
   final WidgetTester tester;
 
@@ -48,16 +50,7 @@ class CartRobot {
       of: find.byKey(WidgetKeys.customSnackBar),
       matching: find.text('Cart has been emptied.'.tr()),
     );
-
-    const maxIteration = 15;
-    for (var i = 0; i <= maxIteration; i++) {
-      if (clearCartSuccessMessage.evaluate().isNotEmpty) {
-        expect(clearCartSuccessMessage, findsOneWidget);
-
-        break;
-      }
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-    }
+    await tester.pumpUntilVisible(clearCartSuccessMessage);
   }
 
   void verifyClearCartButton() {
@@ -132,7 +125,7 @@ class CartRobot {
     expect(
       find.byWidgetPredicate(
         (widget) =>
-            widget.key == WidgetKeys.cartTotalQty &&
+            widget.key == WidgetKeys.checkoutStickyTotalQty &&
             widget is Text &&
             (widget.data ?? '').contains(qty.toString()),
       ),
@@ -160,7 +153,7 @@ class CartRobot {
   void verifyCartTotalPrice(String price) {
     expect(
       find.descendant(
-        of: find.byKey(WidgetKeys.grandTotalKey),
+        of: find.byKey(WidgetKeys.checkoutStickyGrandTotal),
         matching: find.textContaining(price, findRichText: true),
       ),
       findsOneWidget,
@@ -430,7 +423,8 @@ class CartRobot {
           (widget) =>
               widget.key == WidgetKeys.cartItemBundleRate &&
               widget is Text &&
-              widget.data == 'Purchase $qty or more for $price per item',
+              widget.data ==
+                  '${'Purchase'.tr()} $qty ${'or more for'} $price ${'per item'.tr()}',
         ),
       ),
       findsOneWidget,
@@ -654,21 +648,20 @@ class CartRobot {
     );
   }
 
-  void verifyBonusMaterialQty(
+  Future<void> verifyBonusMaterialQty(
     String materialNumber,
     String bonusMaterialNumber,
     int qty,
-  ) {
-    expect(
-      find.descendant(
-        of: find.descendant(
-          of: _bonusItem(materialNumber, bonusMaterialNumber),
-          matching: find.byKey(WidgetKeys.bonusOfferItemInputKey),
-        ),
-        matching: find.text(qty.toString()),
+  ) async {
+    final qtyLabel = find.descendant(
+      of: find.descendant(
+        of: _bonusItem(materialNumber, bonusMaterialNumber),
+        matching: find.byKey(WidgetKeys.bonusOfferItemInputKey),
       ),
-      findsOneWidget,
+      matching: find.text(qty.toString()),
     );
+    await tester.pumpUntilVisible(qtyLabel);
+    expect(qtyLabel, findsOneWidget);
   }
 
   void verifyBonusMaterialFreeLabel(
