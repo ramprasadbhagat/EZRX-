@@ -46,14 +46,10 @@ class AllInvoicesFilterBloc
         );
       },
       statusChanged: (_StatusChanged e) {
-        final statuses = List<String>.from(state.filter.filterStatuses);
-        e.selected
-            ? statuses.add(e.filterStatus)
-            : statuses.remove(e.filterStatus);
         emit(
           state.copyWith(
             filter: state.filter.copyWith(
-              filterStatuses: statuses,
+              filterStatuses: e.selected ? [e.filterStatus] : [],
             ),
           ),
         );
