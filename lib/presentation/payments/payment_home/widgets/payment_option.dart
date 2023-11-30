@@ -32,12 +32,14 @@ class _PaymentOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final width = MediaQuery.of(context).size.width;
+
     return SizedBox(
-      width: Responsive.isMobile(context)
-          ? context.read<EligibilityBloc>().state.salesOrg.isPaymentClaimEnabled
-              ? MediaQuery.of(context).size.width * 0.45
-              : MediaQuery.of(context).size.width * 0.28
-          : MediaQuery.of(context).size.width * 0.22,
+      width: eligibilityState.salesOrg.isPaymentClaimEnabled ||
+              !eligibilityState.isSOAApplicable
+          ? width * 0.46
+          : width * 0.3,
       child: GestureDetector(
         key: paymentOptionData.key,
         onTap: () {
@@ -131,12 +133,12 @@ List<_PaymentOptionData> _getPaymentOptionItems(BuildContext context) {
     label: 'Claims',
     onTap: () => {},
   );
+  final eligibilityState = context.read<EligibilityBloc>().state;
 
   return [
     accountSummary,
     paymentSummary,
-    accountStateMent,
-    if (context.read<EligibilityBloc>().state.salesOrg.isPaymentClaimEnabled)
-      claim,
+    if (eligibilityState.isSOAApplicable) accountStateMent,
+    if (eligibilityState.salesOrg.isPaymentClaimEnabled) claim,
   ];
 }

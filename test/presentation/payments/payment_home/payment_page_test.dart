@@ -469,5 +469,23 @@ void main() {
         ),
       ).called(1);
     });
+
+    testWidgets('No Statement of Accounts payment option for ID',
+        (WidgetTester tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('1900')),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(paymentHome, findsOneWidget);
+      expect(paymentHomeOptionMenu, findsOneWidget);
+      expect(accountSummaryMenu, findsOneWidget);
+      expect(paymentSummaryMenu, findsOneWidget);
+      expect(statementOfAccountsMenu, findsNothing);
+      expect(claimsMenu, findsNothing);
+    });
   });
 }
