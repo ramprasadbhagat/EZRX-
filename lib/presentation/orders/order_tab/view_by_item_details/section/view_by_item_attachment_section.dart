@@ -136,7 +136,7 @@ class _AttachmentFile extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 5.0),
         child: Row(
           children: [
-            Expanded(
+            Flexible(
               flex: 2,
               child: Text(
                 document.name,
@@ -147,13 +147,13 @@ class _AttachmentFile extends StatelessWidget {
                     ),
               ),
             ),
-            const Expanded(
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Icon(
-                  Icons.cloud_download_outlined,
-                  color: ZPColors.attachmentColor,
-                ),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 5.0,
+              ),
+              child: Icon(
+                Icons.cloud_download_outlined,
+                color: ZPColors.attachmentColor,
               ),
             ),
           ],

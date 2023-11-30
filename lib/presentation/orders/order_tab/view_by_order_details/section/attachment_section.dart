@@ -126,17 +126,20 @@ class _AttachmentsWithIcon extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 5.0),
                               child: Row(
                                 children: [
-                                  Expanded(
+                                  Flexible(
                                     child: _AttachmentWidget(
                                       poDocuments: state.orderHistoryDetails
                                               .orderHistoryDetailsPoDocuments[
                                           index],
                                     ),
                                   ),
-                                  Align(
-                                    alignment: Alignment.topLeft,
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0,
+                                    ),
                                     child: SvgPicture.asset(
                                       SvgImage.downloadIcon,
+                                      
                                       height: 20,
                                       width: 20,
                                     ),
