@@ -6,9 +6,11 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
+import 'package:ezrxmobile/presentation/core/regexes.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/value_range_error.dart';
@@ -184,6 +186,9 @@ class _AmountValueToFilter extends StatelessWidget {
                     color: ZPColors.darkGray,
                   ),
             ),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(ZPRegexes.twoDecimalOnly),
+            ],
           ),
         );
       },
@@ -219,6 +224,9 @@ class _AmountValueFromFilter extends StatelessWidget {
                     color: ZPColors.darkGray,
                   ),
             ),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(ZPRegexes.twoDecimalOnly),
+            ],
           ),
         );
       },
