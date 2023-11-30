@@ -1,5 +1,6 @@
 import 'package:auto_route/src/matcher/route_matcher.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -14,6 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/orders_tab.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
@@ -26,6 +28,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -52,6 +55,10 @@ class AnnouncementBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
 class ConfigMock extends Mock implements Config {}
@@ -70,6 +77,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
   late EligibilityBlocMock eligibilityBlocMock;
+  late CustomerCodeBloc customerCodeBlocMock;
   late ViewByItemsBloc viewByItemsBlocMock;
   late ViewByOrderBloc viewByOrderBlocMock;
   late ViewByOrderFilterBloc viewByOrderFilterBlocMock;
@@ -92,6 +100,7 @@ void main() {
     authBlocMock = AuthBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
+    customerCodeBlocMock = CustomerCodeBlocMock();
     viewByItemsBlocMock = ViewByItemsBlocMock();
     viewByOrderBlocMock = ViewByOrderBlocMock();
     viewByOrderFilterBlocMock = ViewByOrderFilterBlocMock();
@@ -100,6 +109,8 @@ void main() {
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
+    when(() => customerCodeBlocMock.state)
+        .thenReturn(CustomerCodeState.initial().copyWith(isFetching: false));
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
     when(() => viewByItemsBlocMock.state)
@@ -124,6 +135,9 @@ void main() {
         ),
         BlocProvider<AnnouncementBloc>(
           create: (context) => announcementBlocMock,
+        ),
+        BlocProvider<CustomerCodeBloc>(
+          create: (context) => customerCodeBlocMock,
         ),
         BlocProvider<ViewByItemsBloc>(
           create: (context) => viewByItemsBlocMock,
@@ -153,9 +167,55 @@ void main() {
       expect(find.byKey(WidgetKeys.ordersTab), findsOneWidget);
       expect(find.byKey(WidgetKeys.viewByItemsTabKey), findsOneWidget);
       expect(find.byKey(WidgetKeys.viewByOrdersTabKey), findsOneWidget);
+      expect(find.byKey(WidgetKeys.customerCodeSelector), findsOneWidget);
       expect(find.byKey(WidgetKeys.ordersTabSearchBarKey), findsOneWidget);
       expect(find.byKey(WidgetKeys.ordersTabFilterButtonKey), findsOneWidget);
       expect(find.byType(ViewByItemsPage), findsOneWidget);
+    });
+    testWidgets('customer Code Selector', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+        ),
+      );
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pump();
+
+      expect(find.byKey(WidgetKeys.ordersTab), findsOneWidget);
+      expect(find.byKey(WidgetKeys.customerCodeSelector), findsOneWidget);
+      expect(find.byKey(WidgetKeys.customerCodeSelect), findsOneWidget);
+      expect(find.byIcon(Icons.location_on_outlined), findsOneWidget);
+      expect(find.text(fakeShipToInfo.shipToCustomerCode), findsOneWidget);
+      expect(
+        find.text(fakeShipToInfo.fullDeliveryAddress),
+        findsOneWidget,
+      );
+    });
+    testWidgets('customer Code Selector loading', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+        ),
+      );
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pump();
+
+      expect(find.byKey(WidgetKeys.ordersTab), findsOneWidget);
+      expect(find.byKey(WidgetKeys.customerCodeSelector), findsOneWidget);
+      expect(find.byKey(WidgetKeys.customerCodeSelect), findsOneWidget);
+      expect(find.byIcon(Icons.location_on_outlined), findsOneWidget);
+      expect(find.text(fakeShipToInfo.shipToCustomerCode), findsNothing);
+      expect(
+        find.text(fakeShipToInfo.fullDeliveryAddress),
+        findsNothing,
+      );
+      expect(
+        find.byType(LoadingShimmer),
+        findsWidgets,
+      );
     });
     testWidgets('Show view by item filter when tap filter icon',
         (tester) async {
@@ -163,7 +223,7 @@ void main() {
       await tester.pump();
       expect(find.byType(ViewByItemsPage), findsOneWidget);
       await tester.tap(find.byKey(WidgetKeys.ordersTabFilterButtonKey));
-      await tester.pumpAndSettle();
+      await tester.pump();
       expect(find.byType(ViewByItemFilterSheet), findsOneWidget);
     });
   });
@@ -172,16 +232,23 @@ void main() {
     testWidgets('displayed when tap filter icon', (tester) async {
       final fakeFilter = ViewByOrdersFilter.empty()
           .copyWith(orderStatusList: [StatusType('test')]);
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          shipToInfo: fakeShipToInfo,
+        ),
+      );
       when(() => viewByOrderBlocMock.state).thenReturn(
         ViewByOrderState.initial().copyWith(appliedFilter: fakeFilter),
       );
+
       await tester.pumpWidget(testWidget(const OrdersTab()));
       await tester.pump();
       await tester.tap(find.byKey(WidgetKeys.viewByOrdersTabKey));
       await tester.pumpAndSettle();
       expect(find.byType(ViewByOrdersPage), findsOneWidget);
       await tester.tap(find.byKey(WidgetKeys.ordersTabFilterButtonKey));
-      await tester.pumpAndSettle();
+      await tester.pump();
       expect(find.byType(ViewByOrderFilterBottomSheet), findsOneWidget);
       verify(
         () => viewByOrderFilterBlocMock.add(

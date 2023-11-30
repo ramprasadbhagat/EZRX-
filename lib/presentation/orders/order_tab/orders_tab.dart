@@ -12,6 +12,7 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -31,12 +32,22 @@ class OrdersTab extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         key: WidgetKeys.ordersTab,
+        backgroundColor: ZPColors.primary,
         title: Text(
           context.tr('Orders'),
-          style: Theme.of(context).textTheme.labelLarge,
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge
+              ?.copyWith(color: ZPColors.white),
         ),
         automaticallyImplyLeading: false,
         centerTitle: false,
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: CustomerCodeSelector(
+            key: WidgetKeys.customerCodeSelector,
+          ),
+        ),
       ),
       body: Column(
         children: [
