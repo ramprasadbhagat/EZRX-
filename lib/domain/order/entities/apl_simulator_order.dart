@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_product.dart';
@@ -26,20 +27,44 @@ class AplSimulatorOrder with _$AplSimulatorOrder {
         aplProducts: <AplProduct>[],
       );
 
-  List<PriceAggregate> toCartItemList(List<PriceAggregate> cartItemDetails) {
-    final list = <PriceAggregate>[];
+  List<PriceAggregate> toCartItemList(List<PriceAggregate> currentCartItems) {
+    final newCartItems = <String, PriceAggregate>{};
 
-    for (final product in aplProducts) {
-      final index = aplProducts.indexOf(product);
-      final cartItemDetail = cartItemDetails[index];
-      if (product.materialNumber ==
-          cartItemDetail.materialInfo.materialNumber) {
-        list.add(product.toPriceAggregate(cartItemDetail));
+    // Sort the list for looping through all material first to add material into the map first
+    // and then when looping through bonus, we can add bonus into "addedBonusList" inside current material
+    final sortedAplProducts = [...aplProducts]
+      ..sort((a, b) => a.type.typeMaterial ? -1 : 1);
+
+    for (final item in sortedAplProducts) {
+      if (item.type.typeMaterial) {
+        final cartItem = currentCartItems.firstWhereOrNull(
+          (e) => e.getMaterialNumber == item.materialNumber,
+        );
+        if (cartItem != null) {
+          newCartItems.addAll({
+            item.itemNumber: item.toPriceAggregate(cartItem),
+          });
+        }
+      } else if (item.type.typeBonus) {
+        final cartParentItem =
+            newCartItems[item.parentItemNumber] ?? PriceAggregate.empty();
+
+        final updatedCartItem = cartParentItem.copyWith(
+          addedBonusList: cartParentItem.addedBonusList
+              .map(
+                (e) => e.materialNumber == item.materialNumber
+                    ? item.toMaterialItemBonus(e)
+                    : e,
+              )
+              .toList(),
+        );
+
+        newCartItems.addAll({
+          item.parentItemNumber: updatedCartItem,
+        });
       }
     }
 
-    return list;
+    return newCartItems.values.toList();
   }
-
-  bool get isEmpty => this == AplSimulatorOrder.empty();
 }

@@ -163,6 +163,9 @@ class MaterialInfoType extends ValueObject<String> {
   factory MaterialInfoType.material() {
     return const MaterialInfoType._(Right('material'));
   }
+  factory MaterialInfoType.bonus() {
+    return const MaterialInfoType._(Right('bonus'));
+  }
   factory MaterialInfoType.bundle() {
     return MaterialInfoType._(validateStringNotEmpty('bundle'));
   }
@@ -175,6 +178,8 @@ class MaterialInfoType extends ValueObject<String> {
   bool get typeMaterial => isMaterial(value.getOrElse(() => ''));
 
   bool get typeCombo => isCombo(value.getOrElse(() => ''));
+
+  bool get typeBonus => isBonus(value.getOrElse(() => ''));
 
   const MaterialInfoType._(this.value);
 }
@@ -720,18 +725,6 @@ class CounterOfferDiscountValue extends ValueObject<String> {
       getZdp8OverrideValue(doubleValue);
 
   const CounterOfferDiscountValue._(this.value);
-}
-
-class MaterialItemType extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory MaterialItemType(String input) =>
-      MaterialItemType._(validateStringNotEmpty(input));
-
-  bool get isBundle => value.getOrElse(() => '') == 'Bundle';
-
-  const MaterialItemType._(this.value);
 }
 
 class DocumentType extends ValueObject<String> {

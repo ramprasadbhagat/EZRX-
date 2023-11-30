@@ -252,7 +252,9 @@ String getNoun(String qty) => int.tryParse(qty) == 1 ? 'item' : 'items';
 
 bool isBundle(String type) => type == 'bundle';
 
-bool isMaterial(String type) => type == 'material';
+bool isMaterial(String type) => type.toLowerCase() == 'material';
+
+bool isBonus(String type) => type.toLowerCase() == 'bonus';
 
 bool isCombo(String type) => type == 'combo';
 

@@ -237,46 +237,6 @@ void main() {
     );
   });
 
-  group('MaterialItemType Value Object', () {
-    test(
-      'should return default value when empty',
-      () {
-        const input = '';
-        final valObj = MaterialItemType(input);
-        expect(
-          valObj.getOrDefaultValue('empty'),
-          'empty',
-        );
-        expect(valObj.isBundle, false);
-      },
-    );
-
-    test(
-      'should return value when not empty and type is Comm',
-      () {
-        const input = 'Comm';
-        final valObj = MaterialItemType(input);
-        expect(
-          valObj.getOrDefaultValue('empty'),
-          'Comm',
-        );
-        expect(valObj.isBundle, false);
-      },
-    );
-    test(
-      'should return value when not empty and type is Bundle',
-      () {
-        const input = 'Bundle';
-        final valObj = MaterialItemType(input);
-        expect(
-          valObj.getOrDefaultValue('empty'),
-          'Bundle',
-        );
-        expect(valObj.isBundle, true);
-      },
-    );
-  });
-
   group('ShippingCondition Value Object', () {
     test(
       'isGreenDelivery is true when value is GD ',

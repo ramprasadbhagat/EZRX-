@@ -8,6 +8,10 @@ part 'apl_product_dto.g.dart';
 class AplProductDto with _$AplProductDto {
   const AplProductDto._();
   const factory AplProductDto({
+    @JsonKey(name: 'type', defaultValue: '') required String type,
+    @JsonKey(name: 'itemNumber', defaultValue: '') required String itemNumber,
+    @JsonKey(name: 'parentItemNumber', defaultValue: '')
+        required String parentItemNumber,
     @JsonKey(name: 'material', defaultValue: '') required String materialNumber,
     @JsonKey(name: 'netValue', defaultValue: 0)
         required double
@@ -19,6 +23,9 @@ class AplProductDto with _$AplProductDto {
   }) = _AplProductDto;
 
   AplProduct get toDomain => AplProduct(
+        type: MaterialInfoType(type),
+        itemNumber: itemNumber,
+        parentItemNumber: parentItemNumber,
         materialNumber: MaterialNumber(materialNumber),
         finalPrice: MaterialPrice(finalPrice),
         finalPriceTotal: MaterialPrice(finalPriceTotal),

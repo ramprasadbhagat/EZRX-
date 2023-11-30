@@ -6,6 +6,9 @@ query aplSimulateOrder($input: AplSimulateOrderRequest!) {
     beforeTax
     deliveryFee
     products {
+      type
+      itemNumber
+      parentItemNumber
       material
       productQty
       productPriceNetValue

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'apl_product.freezed.dart';
@@ -8,6 +9,9 @@ class AplProduct with _$AplProduct {
   const AplProduct._();
 
   const factory AplProduct({
+    required MaterialInfoType type,
+    required String itemNumber,
+    required String parentItemNumber,
     required MaterialNumber materialNumber,
     required MaterialPrice finalPriceTotal,
     required MaterialPrice finalPrice,
@@ -16,6 +20,9 @@ class AplProduct with _$AplProduct {
   }) = _AplProduct;
 
   factory AplProduct.empty() => AplProduct(
+        type: MaterialInfoType(''),
+        itemNumber: '',
+        parentItemNumber: '',
         materialNumber: MaterialNumber(''),
         finalPrice: MaterialPrice(0),
         finalPriceTotal: MaterialPrice(0),
@@ -31,5 +38,10 @@ class AplProduct with _$AplProduct {
             .copyWith(finalPrice: finalPrice, finalTotalPrice: finalPriceTotal),
         quantity: productQty.intValue,
         materialInfo: cartItemDetails.materialInfo.copyWith(tax: tax),
+      );
+
+  MaterialItemBonus toMaterialItemBonus(MaterialItemBonus cartItemBonus) =>
+      cartItemBonus.copyWith(
+        qty: productQty.intValue,
       );
 }

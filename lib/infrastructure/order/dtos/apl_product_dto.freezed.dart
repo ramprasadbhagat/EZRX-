@@ -20,6 +20,12 @@ AplProductDto _$AplProductDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AplProductDto {
+  @JsonKey(name: 'type', defaultValue: '')
+  String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'itemNumber', defaultValue: '')
+  String get itemNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'parentItemNumber', defaultValue: '')
+  String get parentItemNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'material', defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'netValue', defaultValue: 0)
@@ -45,7 +51,11 @@ abstract class $AplProductDtoCopyWith<$Res> {
       _$AplProductDtoCopyWithImpl<$Res, AplProductDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'material', defaultValue: '') String materialNumber,
+      {@JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'itemNumber', defaultValue: '') String itemNumber,
+      @JsonKey(name: 'parentItemNumber', defaultValue: '')
+      String parentItemNumber,
+      @JsonKey(name: 'material', defaultValue: '') String materialNumber,
       @JsonKey(name: 'netValue', defaultValue: 0) double finalPriceTotal,
       @JsonKey(name: 'productPriceNetValue', defaultValue: 0) double finalPrice,
       @JsonKey(name: 'productQty', defaultValue: 0) int productQty,
@@ -65,6 +75,9 @@ class _$AplProductDtoCopyWithImpl<$Res, $Val extends AplProductDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? type = null,
+    Object? itemNumber = null,
+    Object? parentItemNumber = null,
     Object? materialNumber = null,
     Object? finalPriceTotal = null,
     Object? finalPrice = null,
@@ -72,6 +85,18 @@ class _$AplProductDtoCopyWithImpl<$Res, $Val extends AplProductDto>
     Object? taxValue = null,
   }) {
     return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      itemNumber: null == itemNumber
+          ? _value.itemNumber
+          : itemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      parentItemNumber: null == parentItemNumber
+          ? _value.parentItemNumber
+          : parentItemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -105,7 +130,11 @@ abstract class _$$_AplProductDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'material', defaultValue: '') String materialNumber,
+      {@JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'itemNumber', defaultValue: '') String itemNumber,
+      @JsonKey(name: 'parentItemNumber', defaultValue: '')
+      String parentItemNumber,
+      @JsonKey(name: 'material', defaultValue: '') String materialNumber,
       @JsonKey(name: 'netValue', defaultValue: 0) double finalPriceTotal,
       @JsonKey(name: 'productPriceNetValue', defaultValue: 0) double finalPrice,
       @JsonKey(name: 'productQty', defaultValue: 0) int productQty,
@@ -123,6 +152,9 @@ class __$$_AplProductDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? type = null,
+    Object? itemNumber = null,
+    Object? parentItemNumber = null,
     Object? materialNumber = null,
     Object? finalPriceTotal = null,
     Object? finalPrice = null,
@@ -130,6 +162,18 @@ class __$$_AplProductDtoCopyWithImpl<$Res>
     Object? taxValue = null,
   }) {
     return _then(_$_AplProductDto(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      itemNumber: null == itemNumber
+          ? _value.itemNumber
+          : itemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      parentItemNumber: null == parentItemNumber
+          ? _value.parentItemNumber
+          : parentItemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -158,8 +202,11 @@ class __$$_AplProductDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AplProductDto extends _AplProductDto {
   const _$_AplProductDto(
-      {@JsonKey(name: 'material', defaultValue: '')
-      required this.materialNumber,
+      {@JsonKey(name: 'type', defaultValue: '') required this.type,
+      @JsonKey(name: 'itemNumber', defaultValue: '') required this.itemNumber,
+      @JsonKey(name: 'parentItemNumber', defaultValue: '')
+      required this.parentItemNumber,
+      @JsonKey(name: 'material', defaultValue: '') required this.materialNumber,
       @JsonKey(name: 'netValue', defaultValue: 0) required this.finalPriceTotal,
       @JsonKey(name: 'productPriceNetValue', defaultValue: 0)
       required this.finalPrice,
@@ -170,6 +217,15 @@ class _$_AplProductDto extends _AplProductDto {
   factory _$_AplProductDto.fromJson(Map<String, dynamic> json) =>
       _$$_AplProductDtoFromJson(json);
 
+  @override
+  @JsonKey(name: 'type', defaultValue: '')
+  final String type;
+  @override
+  @JsonKey(name: 'itemNumber', defaultValue: '')
+  final String itemNumber;
+  @override
+  @JsonKey(name: 'parentItemNumber', defaultValue: '')
+  final String parentItemNumber;
   @override
   @JsonKey(name: 'material', defaultValue: '')
   final String materialNumber;
@@ -190,7 +246,7 @@ class _$_AplProductDto extends _AplProductDto {
 
   @override
   String toString() {
-    return 'AplProductDto(materialNumber: $materialNumber, finalPriceTotal: $finalPriceTotal, finalPrice: $finalPrice, productQty: $productQty, taxValue: $taxValue)';
+    return 'AplProductDto(type: $type, itemNumber: $itemNumber, parentItemNumber: $parentItemNumber, materialNumber: $materialNumber, finalPriceTotal: $finalPriceTotal, finalPrice: $finalPrice, productQty: $productQty, taxValue: $taxValue)';
   }
 
   @override
@@ -198,6 +254,11 @@ class _$_AplProductDto extends _AplProductDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AplProductDto &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.itemNumber, itemNumber) ||
+                other.itemNumber == itemNumber) &&
+            (identical(other.parentItemNumber, parentItemNumber) ||
+                other.parentItemNumber == parentItemNumber) &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.finalPriceTotal, finalPriceTotal) ||
@@ -212,8 +273,16 @@ class _$_AplProductDto extends _AplProductDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber, finalPriceTotal,
-      finalPrice, productQty, taxValue);
+  int get hashCode => Object.hash(
+      runtimeType,
+      type,
+      itemNumber,
+      parentItemNumber,
+      materialNumber,
+      finalPriceTotal,
+      finalPrice,
+      productQty,
+      taxValue);
 
   @JsonKey(ignore: true)
   @override
@@ -231,7 +300,12 @@ class _$_AplProductDto extends _AplProductDto {
 
 abstract class _AplProductDto extends AplProductDto {
   const factory _AplProductDto(
-      {@JsonKey(name: 'material', defaultValue: '')
+      {@JsonKey(name: 'type', defaultValue: '') required final String type,
+      @JsonKey(name: 'itemNumber', defaultValue: '')
+      required final String itemNumber,
+      @JsonKey(name: 'parentItemNumber', defaultValue: '')
+      required final String parentItemNumber,
+      @JsonKey(name: 'material', defaultValue: '')
       required final String materialNumber,
       @JsonKey(name: 'netValue', defaultValue: 0)
       required final double finalPriceTotal,
@@ -246,6 +320,15 @@ abstract class _AplProductDto extends AplProductDto {
   factory _AplProductDto.fromJson(Map<String, dynamic> json) =
       _$_AplProductDto.fromJson;
 
+  @override
+  @JsonKey(name: 'type', defaultValue: '')
+  String get type;
+  @override
+  @JsonKey(name: 'itemNumber', defaultValue: '')
+  String get itemNumber;
+  @override
+  @JsonKey(name: 'parentItemNumber', defaultValue: '')
+  String get parentItemNumber;
   @override
   @JsonKey(name: 'material', defaultValue: '')
   String get materialNumber;

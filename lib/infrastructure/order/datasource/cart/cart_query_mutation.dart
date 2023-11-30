@@ -1396,6 +1396,9 @@ mutation UpsertCartItems(\$itemInput: [ItemInput!]) {
         beforeTax
         deliveryFee
         products {
+          type
+          itemNumber
+          parentItemNumber
           material
           productQty
           productPriceNetValue

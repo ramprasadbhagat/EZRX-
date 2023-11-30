@@ -16,6 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AplProduct {
+  MaterialInfoType get type => throw _privateConstructorUsedError;
+  String get itemNumber => throw _privateConstructorUsedError;
+  String get parentItemNumber => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   MaterialPrice get finalPriceTotal => throw _privateConstructorUsedError;
   MaterialPrice get finalPrice => throw _privateConstructorUsedError;
@@ -34,7 +37,10 @@ abstract class $AplProductCopyWith<$Res> {
       _$AplProductCopyWithImpl<$Res, AplProduct>;
   @useResult
   $Res call(
-      {MaterialNumber materialNumber,
+      {MaterialInfoType type,
+      String itemNumber,
+      String parentItemNumber,
+      MaterialNumber materialNumber,
       MaterialPrice finalPriceTotal,
       MaterialPrice finalPrice,
       MaterialQty productQty,
@@ -54,6 +60,9 @@ class _$AplProductCopyWithImpl<$Res, $Val extends AplProduct>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? type = null,
+    Object? itemNumber = null,
+    Object? parentItemNumber = null,
     Object? materialNumber = null,
     Object? finalPriceTotal = null,
     Object? finalPrice = null,
@@ -61,6 +70,18 @@ class _$AplProductCopyWithImpl<$Res, $Val extends AplProduct>
     Object? tax = null,
   }) {
     return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MaterialInfoType,
+      itemNumber: null == itemNumber
+          ? _value.itemNumber
+          : itemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      parentItemNumber: null == parentItemNumber
+          ? _value.parentItemNumber
+          : parentItemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -94,7 +115,10 @@ abstract class _$$_AplProductCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {MaterialNumber materialNumber,
+      {MaterialInfoType type,
+      String itemNumber,
+      String parentItemNumber,
+      MaterialNumber materialNumber,
       MaterialPrice finalPriceTotal,
       MaterialPrice finalPrice,
       MaterialQty productQty,
@@ -112,6 +136,9 @@ class __$$_AplProductCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? type = null,
+    Object? itemNumber = null,
+    Object? parentItemNumber = null,
     Object? materialNumber = null,
     Object? finalPriceTotal = null,
     Object? finalPrice = null,
@@ -119,6 +146,18 @@ class __$$_AplProductCopyWithImpl<$Res>
     Object? tax = null,
   }) {
     return _then(_$_AplProduct(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MaterialInfoType,
+      itemNumber: null == itemNumber
+          ? _value.itemNumber
+          : itemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      parentItemNumber: null == parentItemNumber
+          ? _value.parentItemNumber
+          : parentItemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -147,13 +186,22 @@ class __$$_AplProductCopyWithImpl<$Res>
 
 class _$_AplProduct extends _AplProduct {
   const _$_AplProduct(
-      {required this.materialNumber,
+      {required this.type,
+      required this.itemNumber,
+      required this.parentItemNumber,
+      required this.materialNumber,
       required this.finalPriceTotal,
       required this.finalPrice,
       required this.productQty,
       required this.tax})
       : super._();
 
+  @override
+  final MaterialInfoType type;
+  @override
+  final String itemNumber;
+  @override
+  final String parentItemNumber;
   @override
   final MaterialNumber materialNumber;
   @override
@@ -167,7 +215,7 @@ class _$_AplProduct extends _AplProduct {
 
   @override
   String toString() {
-    return 'AplProduct(materialNumber: $materialNumber, finalPriceTotal: $finalPriceTotal, finalPrice: $finalPrice, productQty: $productQty, tax: $tax)';
+    return 'AplProduct(type: $type, itemNumber: $itemNumber, parentItemNumber: $parentItemNumber, materialNumber: $materialNumber, finalPriceTotal: $finalPriceTotal, finalPrice: $finalPrice, productQty: $productQty, tax: $tax)';
   }
 
   @override
@@ -175,6 +223,11 @@ class _$_AplProduct extends _AplProduct {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AplProduct &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.itemNumber, itemNumber) ||
+                other.itemNumber == itemNumber) &&
+            (identical(other.parentItemNumber, parentItemNumber) ||
+                other.parentItemNumber == parentItemNumber) &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.finalPriceTotal, finalPriceTotal) ||
@@ -187,8 +240,16 @@ class _$_AplProduct extends _AplProduct {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber, finalPriceTotal,
-      finalPrice, productQty, tax);
+  int get hashCode => Object.hash(
+      runtimeType,
+      type,
+      itemNumber,
+      parentItemNumber,
+      materialNumber,
+      finalPriceTotal,
+      finalPrice,
+      productQty,
+      tax);
 
   @JsonKey(ignore: true)
   @override
@@ -199,13 +260,22 @@ class _$_AplProduct extends _AplProduct {
 
 abstract class _AplProduct extends AplProduct {
   const factory _AplProduct(
-      {required final MaterialNumber materialNumber,
+      {required final MaterialInfoType type,
+      required final String itemNumber,
+      required final String parentItemNumber,
+      required final MaterialNumber materialNumber,
       required final MaterialPrice finalPriceTotal,
       required final MaterialPrice finalPrice,
       required final MaterialQty productQty,
       required final double tax}) = _$_AplProduct;
   const _AplProduct._() : super._();
 
+  @override
+  MaterialInfoType get type;
+  @override
+  String get itemNumber;
+  @override
+  String get parentItemNumber;
   @override
   MaterialNumber get materialNumber;
   @override

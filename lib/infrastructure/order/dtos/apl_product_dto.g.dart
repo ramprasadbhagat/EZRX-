@@ -8,6 +8,9 @@ part of 'apl_product_dto.dart';
 
 _$_AplProductDto _$$_AplProductDtoFromJson(Map<String, dynamic> json) =>
     _$_AplProductDto(
+      type: json['type'] as String? ?? '',
+      itemNumber: json['itemNumber'] as String? ?? '',
+      parentItemNumber: json['parentItemNumber'] as String? ?? '',
       materialNumber: json['material'] as String? ?? '',
       finalPriceTotal: (json['netValue'] as num?)?.toDouble() ?? 0,
       finalPrice: (json['productPriceNetValue'] as num?)?.toDouble() ?? 0,
@@ -17,6 +20,9 @@ _$_AplProductDto _$$_AplProductDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_AplProductDtoToJson(_$_AplProductDto instance) =>
     <String, dynamic>{
+      'type': instance.type,
+      'itemNumber': instance.itemNumber,
+      'parentItemNumber': instance.parentItemNumber,
       'material': instance.materialNumber,
       'netValue': instance.finalPriceTotal,
       'productPriceNetValue': instance.finalPrice,
