@@ -1218,6 +1218,149 @@ void main() {
         );
       },
     );
+
+    group('calculateMaterialItemBonus (new bonus list) getter -', () {
+      const qty = 3;
+      final bonusMaterial1 = BonusMaterial.empty().copyWith(
+        materialNumber: MaterialNumber('fake-number-1'),
+        qualifyingQuantity: qty,
+        bonusQuantity: 1,
+        bonusRatio: 2,
+      );
+      final bonusMaterial2 = BonusMaterial.empty().copyWith(
+        materialNumber: MaterialNumber('fake-number-2'),
+        qualifyingQuantity: qty + 1,
+        bonusQuantity: 2,
+        bonusRatio: 1,
+      );
+      final priceBonusItem = PriceBonusItem(
+        calculation: BonusMaterialCalculation(''),
+        bonusMaterials: [bonusMaterial1, bonusMaterial2],
+        qualifyingQuantity: qty - 1,
+      );
+
+      Price priceWithBonus(String calculation) => Price.empty().copyWith(
+            bonuses: [
+              PriceBonus(
+                items: [
+                  priceBonusItem.copyWith(
+                    calculation: BonusMaterialCalculation(calculation),
+                  ),
+                ],
+              ),
+            ],
+          );
+
+      test('915 calculation', () {
+        expect(
+          emptyPriceAggregate
+              .copyWith(
+                price: priceWithBonus('915'),
+                quantity: qty,
+              )
+              .calculateMaterialItemBonus,
+          [bonusMaterial1, bonusMaterial2]
+              .map(
+                (e) => e.copyWith(
+                  bonusQuantity:
+                      (qty / priceBonusItem.qualifyingQuantity).truncate() *
+                          e.bonusQuantity,
+                ),
+              )
+              .toList(),
+        );
+      });
+
+      test('914 calculation', () {
+        expect(
+          emptyPriceAggregate
+              .copyWith(
+                price: priceWithBonus('914'),
+                quantity: qty,
+              )
+              .calculateMaterialItemBonus,
+          [bonusMaterial1, bonusMaterial2]
+              .map(
+                (e) => e.copyWith(
+                  bonusQuantity: (qty /
+                          priceBonusItem.qualifyingQuantity *
+                          e.bonusQuantity)
+                      .truncate(),
+                ),
+              )
+              .toList(),
+        );
+      });
+
+      test('912 calculation', () {
+        expect(
+          emptyPriceAggregate
+              .copyWith(
+                price: priceWithBonus('912'),
+                quantity: qty,
+              )
+              .calculateMaterialItemBonus,
+          [bonusMaterial1, bonusMaterial2],
+        );
+      });
+
+      test('911 calculation', () {
+        expect(
+          emptyPriceAggregate
+              .copyWith(
+                price: priceWithBonus('911'),
+                quantity: qty,
+              )
+              .calculateMaterialItemBonus,
+          [bonusMaterial1, bonusMaterial2]
+              .map(
+                (e) => e.copyWith(
+                  bonusQuantity:
+                      (qty / e.bonusRatio).truncate() * e.bonusQuantity,
+                ),
+              )
+              .toList(),
+        );
+      });
+
+      test('001 calculation', () {
+        expect(
+          emptyPriceAggregate
+              .copyWith(
+                price: priceWithBonus('001'),
+                quantity: qty,
+              )
+              .calculateMaterialItemBonus,
+          [bonusMaterial1, bonusMaterial2]
+              .map(
+                (e) => e.copyWith(
+                  bonusQuantity:
+                      (qty / e.bonusRatio).truncate() * e.bonusQuantity,
+                ),
+              )
+              .toList(),
+        );
+      });
+
+      test('002 calculation', () {
+        expect(
+          emptyPriceAggregate
+              .copyWith(
+                price: priceWithBonus('002'),
+                quantity: qty,
+              )
+              .calculateMaterialItemBonus,
+          [bonusMaterial1, bonusMaterial2]
+              .map(
+                (e) => e.copyWith(
+                  bonusQuantity:
+                      (qty / e.bonusRatio).truncate() * e.bonusQuantity,
+                ),
+              )
+              .toList(),
+        );
+      });
+    });
   });
 
   group('Combo Deal K1', () {

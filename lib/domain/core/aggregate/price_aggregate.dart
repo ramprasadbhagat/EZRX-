@@ -523,8 +523,9 @@ class PriceAggregate with _$PriceAggregate {
           }
         });
         return bonusMaterial.values.toList();
-
       case BonusMaterialCalculationEnum.calculation911:
+      case BonusMaterialCalculationEnum.apl001:
+      case BonusMaterialCalculationEnum.apl002:
         return _bonusItem.bonusMaterials
             .map(
               (BonusMaterial element) => element.copyWith(
@@ -535,7 +536,6 @@ class PriceAggregate with _$PriceAggregate {
             .toList();
 
       case BonusMaterialCalculationEnum.calculation912:
-      default:
         return _bonusItem.bonusMaterials;
     }
   }

@@ -17,6 +17,10 @@ bool materialIsFOC(String materialGroup) {
 
 BonusMaterialCalculationEnum getBonusCalculationEnum(String calculation) {
   switch (calculation) {
+    case '001':
+      return BonusMaterialCalculationEnum.apl001;
+    case '002':
+      return BonusMaterialCalculationEnum.apl002;
     case '915':
       return BonusMaterialCalculationEnum.calculation915;
     case '914':

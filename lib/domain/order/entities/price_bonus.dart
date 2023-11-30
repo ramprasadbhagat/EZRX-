@@ -80,5 +80,7 @@ enum BonusMaterialCalculationEnum {
   calculation914,
   calculation913,
   calculation912,
-  calculation911
+  calculation911,
+  apl001,
+  apl002,
 }

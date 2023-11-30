@@ -215,6 +215,26 @@ void main() {
         );
       },
     );
+
+    test(
+      'should return BonusMaterialCalculationEnum.apl001',
+      () {
+        expect(
+          BonusMaterialCalculation('001').getCalculationEnum,
+          BonusMaterialCalculationEnum.apl001,
+        );
+      },
+    );
+
+    test(
+      'should return BonusMaterialCalculationEnum.apl002',
+      () {
+        expect(
+          BonusMaterialCalculation('002').getCalculationEnum,
+          BonusMaterialCalculationEnum.apl002,
+        );
+      },
+    );
   });
 
   group('MaterialItemType Value Object', () {
