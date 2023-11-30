@@ -342,7 +342,7 @@ void main() {
       final documentReferenceID = find.text('Order #0800072883');
       expect(documentReferenceID, findsAtLeastNWidgets(1));
 
-      final dueOnText = find.text('Due on Jul 2023');
+      final dueOnText = find.text('Due on 31 Jul 2023');
       expect(dueOnText, findsAtLeastNWidgets(1));
 
       final priceText = find.byKey(WidgetKeys.priceComponent);

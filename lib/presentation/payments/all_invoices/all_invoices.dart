@@ -255,19 +255,29 @@ class _InvoiceItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _OrderNumber(
-                    invoiceItem: invoiceItem,
+                  Expanded(
+                    flex: 3,
+                    child: _OrderNumber(
+                      invoiceItem: invoiceItem,
+                    ),
                   ),
-                  Text(
-                    '${context.tr('Due on')} ${StringUtils.getDueDateString(
-                      invoiceItem.netDueDate.dateTimeOrNull,
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                    )}',
-                    key: WidgetKeys.invoiceItemDueDate,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: invoiceItem
-                              .invoiceProcessingStatus.displayDueDateColor,
-                        ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      '${context.tr('Due on')} ${StringUtils.getDueDateString(
+                        invoiceItem.netDueDate.dateTimeOrNull,
+                        context.read<EligibilityBloc>().state.salesOrganisation,
+                      )}',
+                      key: WidgetKeys.invoiceItemDueDate,
+                      textAlign: TextAlign.end,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: invoiceItem
+                                .invoiceProcessingStatus.displayDueDateColor,
+                          ),
+                    ),
                   ),
                 ],
               ),

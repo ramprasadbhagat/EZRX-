@@ -72,5 +72,5 @@ class NewPaymentState with _$NewPaymentState {
       .contains(selectedPaymentMethod.firstSelectedOption);
 
   bool get enableCreateVirtualAccount =>
-      !negativeAmount && !isCreatingVirtualAccount && !virtualBankPayable;
+      !negativeAmount && !isCreatingVirtualAccount && virtualBankPayable;
 }

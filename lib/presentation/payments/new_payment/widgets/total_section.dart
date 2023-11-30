@@ -71,7 +71,7 @@ class _TotalAmountSection extends StatelessWidget {
                         previous.isCreatingVirtualAccount !=
                             current.isCreatingVirtualAccount ||
                         previous.selectedPaymentMethod.options !=
-                            previous.selectedPaymentMethod.options,
+                            current.selectedPaymentMethod.options,
                     builder: (context, state) {
                       return LoadingShimmer.withChild(
                         enabled: state.isCreatingVirtualAccount,

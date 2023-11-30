@@ -43,19 +43,28 @@ class InvoiceItemCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  '${context.tr('Order')} #${customerOpenItem.documentReferenceID}',
-                  style: Theme.of(context).textTheme.titleSmall,
-                  key: WidgetKeys.orderId,
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    '${context.tr('Order')} #${customerOpenItem.documentReferenceID}',
+                    style: Theme.of(context).textTheme.titleSmall,
+                    key: WidgetKeys.orderId,
+                  ),
                 ),
-                Text(
-                  '${context.tr('Due on')} ${StringUtils.getDueDateString(
-                    customerOpenItem.netDueDate.dateTimeOrNull,
-                    context.read<EligibilityBloc>().state.salesOrganisation,
-                  )}',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: customerOpenItem.status.displayDueDateColor,
-                      ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    '${context.tr('Due on')} ${StringUtils.getDueDateString(
+                      customerOpenItem.netDueDate.dateTimeOrNull,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
+                    )}',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.end,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: customerOpenItem.status.displayDueDateColor,
+                        ),
+                  ),
                 ),
               ],
             ),
