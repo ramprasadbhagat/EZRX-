@@ -698,6 +698,51 @@ void main() {
         ).called(1);
       });
 
+      testWidgets('cart Item Quantity change and update after 1.5 second',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItem],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final materialKey =
+            find.byKey(WidgetKeys.cartItemProductMaterialNumber);
+        expect(materialKey, findsOneWidget);
+        final cartItemQuantityInputKey = find.byType(CartItemQuantityInput);
+        expect(cartItemQuantityInputKey, findsOneWidget);
+        final cartItemAddKey = find.byKey(WidgetKeys.cartItemAddKey);
+        expect(cartItemAddKey, findsOneWidget);
+        final cartItemDeleteKey = find.byKey(WidgetKeys.cartItemDeleteKey);
+        expect(cartItemDeleteKey, findsOneWidget);
+        final quantityInputTextKey =
+            find.byKey(WidgetKeys.quantityInputTextKey);
+        expect(quantityInputTextKey, findsOneWidget);
+        await tester.tap(cartItemAddKey);
+        await tester.pump();
+        verify(
+          () => cartBloc.add(
+            CartEvent.upsertCart(
+              priceAggregate: cartItem,
+              quantity: 3,
+            ),
+          ),
+        ).called(1);
+        await tester.enterText(quantityInputTextKey, '2');
+        await tester.pump(const Duration(seconds: 2, microseconds: 700));
+        verify(
+          () => cartBloc.add(
+            CartEvent.upsertCart(
+              priceAggregate: cartItem,
+              quantity: 2,
+            ),
+          ),
+        ).called(1);
+      });
+
       testWidgets('Should have offer label widget', (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(

@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
@@ -332,6 +336,9 @@ class _MaterialQuantitySection extends StatefulWidget {
 class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   final _controller = TextEditingController();
   String get _qty => widget.cartItem.quantity.toString();
+  Timer? _timer;
+  final FocusNode _focusNode = FocusNode();
+
   @override
   void initState() {
     _controller.value = TextEditingValue(
@@ -340,7 +347,19 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
         offset: _controller.selection.base.offset,
       ),
     );
+    _focusNode.addListener(_onFocusChange);
     super.initState();
+  }
+
+  void _onFocusChange() {
+    if (_focusNode.hasFocus) return;
+    _timer?.cancel();
+    context.read<CartBloc>().add(
+          CartEvent.upsertCart(
+            priceAggregate: widget.cartItem,
+            quantity: int.tryParse(_controller.text) ?? 1,
+          ),
+        );
   }
 
   @override
@@ -357,7 +376,24 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
+    _timer?.cancel();
     super.dispose();
+  }
+
+  void _onTextChanged(int quantity) {
+    _timer?.cancel();
+    _timer = Timer(
+      Duration(
+        milliseconds: locator<Config>().autoSearchTimeout,
+      ),
+      () => context.read<CartBloc>().add(
+            CartEvent.upsertCart(
+              priceAggregate: widget.cartItem,
+              quantity: quantity,
+            ),
+          ),
+    );
   }
 
   @override
@@ -367,6 +403,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
       child: Column(
         children: [
           Focus(
+            focusNode: _focusNode,
             child: CartItemQuantityInput(
               height: 48,
               isEnabled: !widget.isInvalidCartItem,
@@ -374,7 +411,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
               quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
               quantityTextKey: WidgetKeys.quantityInputTextKey,
               controller: _controller,
-              onFieldChange: (value) {},
+              onFieldChange: (value) => _onTextChanged(value),
               minusPressed: (k) {
                 context.read<CartBloc>().add(
                       CartEvent.upsertCart(
@@ -391,14 +428,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                       ),
                     );
               },
-              onSubmit: (value) {
-                context.read<CartBloc>().add(
-                      CartEvent.upsertCart(
-                        priceAggregate: widget.cartItem,
-                        quantity: value,
-                      ),
-                    );
-              },
+              onSubmit: (value) {},
               isLoading: context.read<CartBloc>().state.isUpserting &&
                   !widget.isInvalidCartItem,
             ),
