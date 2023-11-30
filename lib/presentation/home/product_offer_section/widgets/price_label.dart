@@ -11,7 +11,11 @@ class _PriceLabel extends StatelessWidget {
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         final itemPrice = state.materialPrice[product.materialNumber];
-        if (itemPrice != null) {
+        final eligibilityState = context.read<EligibilityBloc>().state;
+        final isMYPnGSalesRep =
+            eligibilityState.isMYExternalSalesRepUser && product.isPnGPrinciple;
+
+        if (itemPrice != null && !isMYPnGSalesRep) {
           return PriceComponent(
             price: itemPrice.lastPrice.getOrDefaultValue(0).toString(),
             salesOrgConfig:

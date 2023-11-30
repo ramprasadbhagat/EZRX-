@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ViewByItemGroup {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
-  String get manufactureName => throw _privateConstructorUsedError;
+  PrincipalName get manufactureName => throw _privateConstructorUsedError;
   List<OrderHistoryItem> get orderHistoryItem =>
       throw _privateConstructorUsedError;
 
@@ -34,7 +34,7 @@ abstract class $ViewByItemGroupCopyWith<$Res> {
   @useResult
   $Res call(
       {DateTimeStringValue createdDate,
-      String manufactureName,
+      PrincipalName manufactureName,
       List<OrderHistoryItem> orderHistoryItem});
 }
 
@@ -63,7 +63,7 @@ class _$ViewByItemGroupCopyWithImpl<$Res, $Val extends ViewByItemGroup>
       manufactureName: null == manufactureName
           ? _value.manufactureName
           : manufactureName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PrincipalName,
       orderHistoryItem: null == orderHistoryItem
           ? _value.orderHistoryItem
           : orderHistoryItem // ignore: cast_nullable_to_non_nullable
@@ -82,7 +82,7 @@ abstract class _$$_ViewByItemGroupCopyWith<$Res>
   @useResult
   $Res call(
       {DateTimeStringValue createdDate,
-      String manufactureName,
+      PrincipalName manufactureName,
       List<OrderHistoryItem> orderHistoryItem});
 }
 
@@ -109,7 +109,7 @@ class __$$_ViewByItemGroupCopyWithImpl<$Res>
       manufactureName: null == manufactureName
           ? _value.manufactureName
           : manufactureName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PrincipalName,
       orderHistoryItem: null == orderHistoryItem
           ? _value._orderHistoryItem
           : orderHistoryItem // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ class _$_ViewByItemGroup implements _ViewByItemGroup {
   @override
   final DateTimeStringValue createdDate;
   @override
-  final String manufactureName;
+  final PrincipalName manufactureName;
   final List<OrderHistoryItem> _orderHistoryItem;
   @override
   List<OrderHistoryItem> get orderHistoryItem {
@@ -172,14 +172,14 @@ class _$_ViewByItemGroup implements _ViewByItemGroup {
 abstract class _ViewByItemGroup implements ViewByItemGroup {
   factory _ViewByItemGroup(
           {required final DateTimeStringValue createdDate,
-          required final String manufactureName,
+          required final PrincipalName manufactureName,
           required final List<OrderHistoryItem> orderHistoryItem}) =
       _$_ViewByItemGroup;
 
   @override
   DateTimeStringValue get createdDate;
   @override
-  String get manufactureName;
+  PrincipalName get manufactureName;
   @override
   List<OrderHistoryItem> get orderHistoryItem;
   @override

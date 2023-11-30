@@ -12,7 +12,9 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
@@ -79,11 +81,17 @@ void main() {
 
   final fakeOrderHistoryItems = [
     OrderHistoryItem.empty().copyWith(
-      manufactureName: 'fake_manufactureName_1',
+      principalData: PrincipalData.empty().copyWith(
+        principalName: PrincipalName('fake_manufactureName_1'),
+        principalCode: PrincipalCode('00000001231'),
+      ),
       createdDate: DateTimeStringValue('2023041107'),
     ),
     OrderHistoryItem.empty().copyWith(
-      manufactureName: 'fake_manufactureName_2',
+      principalData: PrincipalData.empty().copyWith(
+        principalName: PrincipalName('fake_manufactureName_2'),
+        principalCode: PrincipalCode('00000001232'),
+      ),
       createdDate: DateTimeStringValue('2023041307'),
     ),
   ];
@@ -265,7 +273,10 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       await tester.tap(
-        find.text(orderHistoryList.orderHistoryItems.first.manufactureName),
+        find.text(
+          orderHistoryList.orderHistoryItems.first.principalData.principalName
+              .getOrDefaultValue(''),
+        ),
       );
       verify(
         () => mockViewByItemDetailsBloc.add(

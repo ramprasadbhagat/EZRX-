@@ -20,8 +20,7 @@ class ItemDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final salesOrgConfigs =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -33,7 +32,7 @@ class ItemDetailsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            orderHistoryItem.manufactureName,
+            orderHistoryItem.principalData.principalName.getOrDefaultValue(''),
             style: Theme.of(context).textTheme.labelMedium,
           ),
           const SizedBox(
@@ -46,7 +45,10 @@ class ItemDetailsSection extends StatelessWidget {
             priceComponent: orderHistoryItem.isBonusMaterial
                 ? null
                 : OrderItemPrice(
-                    unitPrice: orderHistoryItem.unitPrice.zpPrice.toString(),
+                    unitPrice: orderHistoryItem.itemUnitPrice(
+                      eligibilityState.isMYExternalSalesRepUser,
+                      eligibilityState.salesOrg.isID,
+                    ),
                     originPrice:
                         orderHistoryItem.originPrice.getOrDefaultValue(''),
                     showPreviousPrice: orderHistoryItem.isCounterOffer,
@@ -63,7 +65,7 @@ class ItemDetailsSection extends StatelessWidget {
             isQuantityRequired: false,
             materialNumber: orderHistoryItem.materialNumber,
             statusTag: orderHistoryItem.productTag,
-            headerText: salesOrgConfigs.batchNumDisplay
+            headerText: eligibilityState.salesOrgConfigs.batchNumDisplay
                 ? '${'Batch'.tr()}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderHistoryItem.expiryDate.dateOrDashString})'
                 : '',
             isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
@@ -71,8 +73,10 @@ class ItemDetailsSection extends StatelessWidget {
             showBundleTag: orderHistoryItem.isBundle,
             footerWidget: QuantityAndPriceWithTax(
               quantity: orderHistoryItem.qty,
-              totalPriceString:
-                  orderHistoryItem.totalPrice.totalPrice.toString(),
+              totalPriceString: orderHistoryItem.itemTotalPrice(
+                eligibilityState.isMYExternalSalesRepUser,
+                eligibilityState.salesOrg.isID,
+              ),
               taxPercentage: orderHistoryItem.tax,
             ),
           ),

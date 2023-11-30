@@ -65,7 +65,8 @@ class _BuyAgainButton extends StatelessWidget {
       props: {
         MixpanelProps.productName: item.materialDescription,
         MixpanelProps.productCode: item.materialNumber.displayMatNo,
-        MixpanelProps.productManufacturer: item.manufactureName,
+        MixpanelProps.productManufacturer:
+            item.principalData.principalName.getOrDefaultValue(''),
         MixpanelProps.clickAt:
             RouterUtils.buildRouteTrackingName(context.routeData.path),
       },

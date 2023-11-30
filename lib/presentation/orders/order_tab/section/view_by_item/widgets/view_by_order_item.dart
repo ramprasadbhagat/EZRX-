@@ -44,7 +44,8 @@ class _ViewByOrderItem extends StatelessWidget {
         key: WidgetKeys.viewByItemsOrderItemKey,
         label: orderHistoryItem.materialNumber.displayMatNo,
         title: orderHistoryItem.materialDescription,
-        subtitle: orderHistoryItem.manufactureName,
+        subtitle:
+            orderHistoryItem.principalData.principalName.getOrDefaultValue(''),
         isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
         headerText:
             '${context.tr('Order')} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',

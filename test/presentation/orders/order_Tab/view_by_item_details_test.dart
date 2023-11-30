@@ -16,9 +16,12 @@ import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.d
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
@@ -34,6 +37,7 @@ import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -133,6 +137,7 @@ void main() {
   late MixpanelService mixpanelServiceMock;
   late List<CreditAndInvoiceItem> fakeItemList;
   late ViewByOrder fakeOrder;
+  late OrderHistory mockViewByItemsOrderHistory;
 
   const fakeCreatedDate = '20230412';
   setUpAll(() async {
@@ -173,6 +178,8 @@ void main() {
     fakeItemList =
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
     fakeOrder = await ViewByOrderLocalDataSource().getViewByOrders();
+    mockViewByItemsOrderHistory =
+        await ViewByItemLocalDataSource().getViewByItems();
   });
   group('Order History Details By Item Page', () {
     setUp(() {
@@ -1362,6 +1369,43 @@ void main() {
       expect(quantityAndPriceWithTax, findsOneWidget);
       final materialTax = find.byType(MaterialTax);
       expect(materialTax, findsNothing);
+    });
+
+    testWidgets(
+        'test view by item details item has price not available for PnG',
+        (tester) async {
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryItem: mockViewByItemsOrderHistory.orderHistoryItems.last,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [
+              mockViewByItemsOrderHistory.orderHistoryItems.last
+            ],
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2001'),
+          ),
+          user: User.empty().copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('external_sales_rep'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final priceNotAvailableFinder = find.text(
+        'Price Not Available',
+        findRichText: true,
+      );
+      expect(priceNotAvailableFinder, findsNWidgets(2));
     });
   });
 }

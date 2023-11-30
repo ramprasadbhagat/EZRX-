@@ -77,6 +77,8 @@ mixin _$OrderHistoryItemDto {
   bool get isBundle => throw _privateConstructorUsedError;
   @JsonKey(name: 'LineNumber', defaultValue: '')
   String get lineNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  String get principalCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -125,7 +127,8 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
       @JsonKey(name: 'IsBundle', defaultValue: false) bool isBundle,
-      @JsonKey(name: 'LineNumber', defaultValue: '') String lineNumber});
+      @JsonKey(name: 'LineNumber', defaultValue: '') String lineNumber,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode});
 }
 
 /// @nodoc
@@ -169,6 +172,7 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? isCounterOffer = null,
     Object? isBundle = null,
     Object? lineNumber = null,
+    Object? principalCode = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -283,6 +287,10 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
           ? _value.lineNumber
           : lineNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      principalCode: null == principalCode
+          ? _value.principalCode
+          : principalCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -330,7 +338,8 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
       @JsonKey(name: 'IsBundle', defaultValue: false) bool isBundle,
-      @JsonKey(name: 'LineNumber', defaultValue: '') String lineNumber});
+      @JsonKey(name: 'LineNumber', defaultValue: '') String lineNumber,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode});
 }
 
 /// @nodoc
@@ -372,6 +381,7 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
     Object? isCounterOffer = null,
     Object? isBundle = null,
     Object? lineNumber = null,
+    Object? principalCode = null,
   }) {
     return _then(_$_OrderHistoryItemDto(
       materialNumber: null == materialNumber
@@ -486,6 +496,10 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
           ? _value.lineNumber
           : lineNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      principalCode: null == principalCode
+          ? _value.principalCode
+          : principalCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -533,7 +547,9 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       @JsonKey(name: 'isCounterOffer', defaultValue: false)
       required this.isCounterOffer,
       @JsonKey(name: 'IsBundle', defaultValue: false) required this.isBundle,
-      @JsonKey(name: 'LineNumber', defaultValue: '') required this.lineNumber})
+      @JsonKey(name: 'LineNumber', defaultValue: '') required this.lineNumber,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      required this.principalCode})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
 
@@ -631,10 +647,13 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @override
   @JsonKey(name: 'LineNumber', defaultValue: '')
   final String lineNumber;
+  @override
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  final String principalCode;
 
   @override
   String toString() {
-    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber)';
+    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode)';
   }
 
   @override
@@ -693,7 +712,9 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
             (identical(other.isBundle, isBundle) ||
                 other.isBundle == isBundle) &&
             (identical(other.lineNumber, lineNumber) ||
-                other.lineNumber == lineNumber));
+                other.lineNumber == lineNumber) &&
+            (identical(other.principalCode, principalCode) ||
+                other.principalCode == principalCode));
   }
 
   @JsonKey(ignore: true)
@@ -727,7 +748,8 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
         promoStatus,
         isCounterOffer,
         isBundle,
-        lineNumber
+        lineNumber,
+        principalCode
       ]);
 
   @JsonKey(ignore: true)
@@ -797,7 +819,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       @JsonKey(name: 'IsBundle', defaultValue: false)
       required final bool isBundle,
       @JsonKey(name: 'LineNumber', defaultValue: '')
-      required final String lineNumber}) = _$_OrderHistoryItemDto;
+      required final String lineNumber,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      required final String principalCode}) = _$_OrderHistoryItemDto;
   const _OrderHistoryItemDto._() : super._();
 
   factory _OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =
@@ -887,6 +911,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @override
   @JsonKey(name: 'LineNumber', defaultValue: '')
   String get lineNumber;
+  @override
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  String get principalCode;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>

@@ -156,7 +156,7 @@ void main() {
         Stream.fromIterable(materialExpectState),
       );
       await tester.pumpWidget(getWUT());
-      await tester.pumpAndSettle();
+      await tester.pump();
       verify(
         () => materialListBloc.add(
           MaterialListEvent.fetch(

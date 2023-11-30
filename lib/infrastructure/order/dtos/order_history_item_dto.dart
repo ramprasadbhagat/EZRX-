@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -54,7 +55,10 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
         required bool isCounterOffer,
     @JsonKey(name: 'IsBundle', defaultValue: false) required bool isBundle,
     @JsonKey(name: 'LineNumber', defaultValue: '') required String lineNumber,
+    @JsonKey(name: 'PrincipalCode', defaultValue: '')
+        required String principalCode,
   }) = _OrderHistoryItemDto;
+
   factory OrderHistoryItemDto.fromDomain(OrderHistoryItem orderHistoryItem) {
     return OrderHistoryItemDto(
       materialNumber: orderHistoryItem.materialNumber.displayMatNo,
@@ -76,7 +80,6 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       invoiceNumber:
           orderHistoryItem.invoiceData.invoiceNumber.getOrDefaultValue(''),
       pOReference: orderHistoryItem.pOReference.displayPOReference,
-      manufactureName: orderHistoryItem.manufactureName,
       expiryDate: orderHistoryItem.expiryDate.dateString,
       requestedDeliveryDate: orderHistoryItem.requestedDeliveryDate.dateString,
       specialInstruction:
@@ -90,6 +93,10 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       promoStatus: orderHistoryItem.promoStatus,
       isCounterOffer: orderHistoryItem.isCounterOffer,
       lineNumber: orderHistoryItem.lineNumber.getOrDefaultValue(''),
+      principalCode:
+          orderHistoryItem.principalData.principalCode.getOrDefaultValue(''),
+      manufactureName:
+          orderHistoryItem.principalData.principalName.getOrDefaultValue(''),
     );
   }
   OrderHistoryItem toDomain() {
@@ -112,7 +119,6 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       invoiceData: InvoiceData.empty()
           .copyWith(invoiceNumber: StringValue(invoiceNumber)),
       isBonusMaterial: isBonusMaterial,
-      manufactureName: manufactureName,
       pOReference: POReference(pOReference),
       telephoneNumber: PhoneNumber(telephoneNumber),
       productImages: ProductImages.empty(),
@@ -125,6 +131,10 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       promoStatus: promoStatus,
       isCounterOffer: isCounterOffer,
       lineNumber: LineNumber(lineNumber),
+      principalData: PrincipalData.empty().copyWith(
+        principalName: PrincipalName(manufactureName),
+        principalCode: PrincipalCode(principalCode),
+      ),
     );
   }
 

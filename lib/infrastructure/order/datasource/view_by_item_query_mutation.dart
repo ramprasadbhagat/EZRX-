@@ -78,6 +78,7 @@ class ViewByItemQueryMutation {
         isGreen
         IsBundle
         InvoiceNumber
+        PrincipalCode
         mrp
         promotype
         promoStatus

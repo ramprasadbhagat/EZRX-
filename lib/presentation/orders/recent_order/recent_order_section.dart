@@ -100,6 +100,8 @@ class _ProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return InkWell(
       onTap: () => _navigateToOrderDetails(context, product),
       child: SizedBox(
@@ -146,7 +148,8 @@ class _ProductTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        product.manufactureName,
+                        product.principalData.principalName
+                            .getOrDefaultValue(''),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: ZPColors.extraLightGrey4,
                               fontSize: 10,
@@ -158,12 +161,10 @@ class _ProductTile extends StatelessWidget {
                       ),
                       PriceComponent(
                         price: product.itemTotalPrice(
-                          context.read<EligibilityBloc>().state.salesOrg.isID,
+                          eligibilityState.isMYExternalSalesRepUser,
+                          eligibilityState.salesOrg.isID,
                         ),
-                        salesOrgConfig: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .salesOrgConfigs,
+                        salesOrgConfig: eligibilityState.salesOrgConfigs,
                       ),
                     ],
                   ),

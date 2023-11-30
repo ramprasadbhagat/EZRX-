@@ -58,6 +58,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 273.6,
                             "promotype": "",
                             "promoStatus": false
@@ -106,6 +107,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 364.8,
                             "promotype": "",
                             "promoStatus": false
@@ -154,6 +156,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 12.07,
                             "promotype": "",
                             "promoStatus": true
@@ -202,6 +205,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 12.07,
                             "promotype": "",
                             "promoStatus": true
@@ -250,6 +254,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 364.8,
                             "promotype": "",
                             "promoStatus": false
@@ -298,6 +303,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 12.07,
                             "promotype": "",
                             "promoStatus": true
@@ -346,6 +352,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 364.8,
                             "promotype": "",
                             "promoStatus": false
@@ -394,6 +401,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 0,
                             "promotype": "",
                             "promoStatus": false
@@ -442,6 +450,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 0,
                             "promotype": "",
                             "promoStatus": false
@@ -490,6 +499,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 0,
                             "promotype": "",
                             "promoStatus": false
@@ -538,6 +548,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 0,
                             "promotype": "",
                             "promoStatus": false
@@ -586,6 +597,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 86.67,
                             "promotype": "",
                             "promoStatus": true
@@ -634,6 +646,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 250,
                             "promotype": "",
                             "promoStatus": false
@@ -682,6 +695,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 86.67,
                             "promotype": "",
                             "promoStatus": true
@@ -730,6 +744,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 364.8,
                             "promotype": "",
                             "promoStatus": false
@@ -778,6 +793,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 10,
                             "promotype": "",
                             "promoStatus": true
@@ -826,6 +842,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 0,
                             "promotype": "",
                             "promoStatus": false
@@ -874,6 +891,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 0,
                             "promotype": "",
                             "promoStatus": false
@@ -922,6 +940,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 273.6,
                             "promotype": "",
                             "promoStatus": false
@@ -970,6 +989,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 9,
                             "promotype": "",
                             "promoStatus": true
@@ -1018,6 +1038,7 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 11.18,
                             "promotype": "",
                             "promoStatus": false
@@ -1066,7 +1087,57 @@
                             "TenderContractReference": "",
                             "isGreen": false,
                             "IsBundle": false,
+                            "PrincipalCode": "0000101889",
                             "mrp": 9,
+                            "promotype": "",
+                            "promoStatus": true
+                        },
+                        {
+                            "poAttachment": null,
+                            "isCounterOffer": false,
+                            "MaterialCode": "000000000021247723",
+                            "MaterialDescription": "SANGOBION COMPLETE 100S",
+                            "DefaultMaterialDescription": "",
+                            "CreatedTime": "154653",
+                            "CreatedDate": "20231129",
+                            "Qty": 6,
+                            "UnitPrice": 86.67,
+                            "TotalPrice": 520.02,
+                            "Status": "Cancelled",
+                            "LineNumber": "000010",
+                            "Tax": 0,
+                            "DeliveryDate": "-",
+                            "DeliveryTime": "",
+                            "OrderType": "ZPOR",
+                            "EZRXNumber": "EZRX-038d431",
+                            "OrderNumber": "0200299718",
+                            "OrderBy": "Stella, Phan",
+                            "PurchaseOrderType": "MRXP",
+                            "WarehouseStorageCondition": "AC",
+                            "Available": true,
+                            "Batch": "1K24C1",
+                            "ExpiryDate": "",
+                            "IsMarketplace": false,
+                            "Seller": "",
+                            "POReference": "",
+                            "ManufactureName": "PROCTER AND GAMBLE",
+                            "SpecialInstructions": "",
+                            "RequestedDeliveryDate": "2023-11-30",
+                            "InvoiceNumber": "",
+                            "IsBonusMaterial": false,
+                            "GovernmentMaterialCode": "",
+                            "ItemRegistrationNumber": "MAL19911002X",
+                            "TelephoneNumber": "",
+                            "HidePrice": true,
+                            "TenderContractNumber": "",
+                            "TenderOrderReason": "",
+                            "TenderPrice": "",
+                            "TenderPriceUnit": 0,
+                            "TenderContractReference": "",
+                            "isGreen": false,
+                            "IsBundle": false,
+                            "PrincipalCode": "0000101308",
+                            "mrp": 86.67,
                             "promotype": "",
                             "promoStatus": true
                         }

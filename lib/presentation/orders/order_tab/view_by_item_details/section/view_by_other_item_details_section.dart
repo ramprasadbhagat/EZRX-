@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -25,6 +26,8 @@ class OtherItemDetailsSection extends StatelessWidget {
           previous.orderHistory.orderHistoryItems !=
           current.orderHistory.orderHistoryItems,
       builder: (context, state) {
+        final eligibilityState = context.read<EligibilityBloc>().state;
+
         return state.orderHistory.isOthersOrderItemsSectionVisible
             ? Padding(
                 padding: const EdgeInsets.only(
@@ -53,7 +56,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                                         height: 16,
                                       ),
                                       Text(
-                                        e.manufactureName,
+                                        e.manufactureName.getOrDefaultValue(''),
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelMedium,
@@ -72,9 +75,13 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                         .isBonusMaterial
                                                     ? null
                                                     : OrderItemPrice(
-                                                        unitPrice: e
-                                                            .unitPrice.zpPrice
-                                                            .toString(),
+                                                        unitPrice:
+                                                            e.itemUnitPrice(
+                                                          eligibilityState
+                                                              .isMYExternalSalesRepUser,
+                                                          eligibilityState
+                                                              .salesOrg.isID,
+                                                        ),
                                                         originPrice: e
                                                             .originPrice
                                                             .getOrDefaultValue(
@@ -106,9 +113,13 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                 footerWidget:
                                                     QuantityAndPriceWithTax(
                                                   quantity: e.qty,
-                                                  totalPriceString: e
-                                                      .totalPrice.totalPrice
-                                                      .toString(),
+                                                  totalPriceString:
+                                                      e.itemTotalPrice(
+                                                    eligibilityState
+                                                        .isMYExternalSalesRepUser,
+                                                    eligibilityState
+                                                        .salesOrg.isID,
+                                                  ),
                                                   taxPercentage: e.tax,
                                                 ),
                                               ),

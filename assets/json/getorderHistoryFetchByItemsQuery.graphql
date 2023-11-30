@@ -75,6 +75,7 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
         TenderContractReference
         isGreen
         IsBundle
+        PrincipalCode
         InvoiceNumber
         mrp
         promotype

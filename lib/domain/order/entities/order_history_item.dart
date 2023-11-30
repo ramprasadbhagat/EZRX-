@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -31,7 +32,6 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required DocumentType orderType,
     required DateTimeStringValue expiryDate,
     required POReference pOReference,
-    required String manufactureName,
     required InvoiceData invoiceData,
     required bool isBonusMaterial,
     required PhoneNumber telephoneNumber,
@@ -45,6 +45,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required bool promoStatus,
     required bool isCounterOffer,
     required LineNumber lineNumber,
+    required PrincipalData principalData,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -62,7 +63,6 @@ class OrderHistoryItem with _$OrderHistoryItem {
         expiryDate: DateTimeStringValue(''),
         invoiceData: InvoiceData.empty(),
         isBonusMaterial: false,
-        manufactureName: '',
         pOReference: POReference(''),
         telephoneNumber: PhoneNumber(''),
         productImages: ProductImages.empty(),
@@ -77,9 +77,12 @@ class OrderHistoryItem with _$OrderHistoryItem {
         promoStatus: false,
         isCounterOffer: false,
         lineNumber: LineNumber(''),
+        principalData: PrincipalData.empty(),
       );
 
   bool get isOfferItem => !isBundle && !isBonusMaterial && promoStatus;
+
+  bool get isTypeMaterial => !isBundle && !isBonusMaterial;
 
   OrderHistoryItem copyWithTaxCal({
     required SalesOrganisationConfigs salesOrganisationConfigs,
@@ -103,10 +106,41 @@ class OrderHistoryItem with _$OrderHistoryItem {
 
   bool get isEmpty => this == OrderHistoryItem.empty();
 
-  String itemTotalPrice(bool isIdMarket) {
-    if (isIdMarket && isBonusMaterial) return '0';
+  bool get isPnGMaterial => isTypeMaterial && principalData.principalCode.isPnG;
 
-    return isBonusMaterial ? 'FREE' : totalPrice.totalPrice.toStringAsFixed(2);
+  String itemUnitPrice(
+    bool isMYExternalSalesRep,
+    bool isIDMarket,
+  ) =>
+      _itemPrice(
+        unitPrice.getOrDefaultValue('0'),
+        isMYExternalSalesRep,
+        isIDMarket,
+      );
+
+  String itemTotalPrice(
+    bool isMYExternalSalesRep,
+    bool isIDMarket,
+  ) =>
+      _itemPrice(
+        totalPrice.getOrDefaultValue('0'),
+        isMYExternalSalesRep,
+        isIDMarket,
+      );
+
+  String _itemPrice(
+    String price,
+    bool isMYExternalSalesRep,
+    bool isIDMarket,
+  ) {
+    final displayPriceNotAvailable = isMYExternalSalesRep &&
+        isPnGMaterial &&
+        !invoiceData.invoiceNumber.isValid();
+
+    if (displayPriceNotAvailable) return 'Price Not Available';
+    if (isBonusMaterial) return isIDMarket ? '0' : 'FREE';
+
+    return price;
   }
 }
 
@@ -119,17 +153,15 @@ extension ViewByItemListExtension on List<OrderHistoryItem> {
           (entry) => ViewByItemGroup(
             createdDate: entry.key,
             orderHistoryItem: entry.value,
-            manufactureName: '',
+            manufactureName: PrincipalName(''),
           ),
         )
         .toList();
   }
-}
 
-extension ViewByItemDetailsListExtension on List<OrderHistoryItem> {
   List<ViewByItemGroup> get getViewByOrderItemDetailsList {
     return List<OrderHistoryItem>.from(this)
-        .groupListsBy((item) => item.manufactureName)
+        .groupListsBy((item) => item.principalData.principalName)
         .entries
         .map(
           (entry) => ViewByItemGroup(
