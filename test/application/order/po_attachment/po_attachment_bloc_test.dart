@@ -12,6 +12,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:open_file_safe/open_file_safe.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class PoAttachmentRepositoryMock extends Mock
     implements PoAttachmentRepository {}
 
@@ -291,9 +293,10 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
-          const PoAttachmentEvent.uploadFile(
+          PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
             uploadOptionType: UploadOptionType.file,
+            salesOrg: fakeSalesOrg,
           ),
         ),
         expect: () => [
@@ -337,9 +340,10 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
-          const PoAttachmentEvent.uploadFile(
+          PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
             uploadOptionType: UploadOptionType.file,
+            salesOrg: fakeSalesOrg,
           ),
         ),
         expect: () => [
@@ -381,9 +385,10 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
-          const PoAttachmentEvent.uploadFile(
+          PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
             uploadOptionType: UploadOptionType.file,
+            salesOrg: fakeSalesOrg,
           ),
         ),
         expect: () => [
@@ -408,6 +413,7 @@ void main() {
                   size: 0,
                 ),
               ],
+              salesOrg: fakeSalesOrg,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -441,9 +447,10 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
-          const PoAttachmentEvent.uploadFile(
+          PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
             uploadOptionType: UploadOptionType.file,
+            salesOrg: fakeSalesOrg,
           ),
         ),
         expect: () => [
@@ -473,6 +480,7 @@ void main() {
                   size: 0,
                 ),
               ],
+              salesOrg: fakeSalesOrg,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -506,9 +514,10 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
-          const PoAttachmentEvent.uploadFile(
+          PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
             uploadOptionType: UploadOptionType.file,
+            salesOrg: fakeSalesOrg,
           ),
         ),
         expect: () => [

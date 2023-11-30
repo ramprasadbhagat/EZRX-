@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -196,6 +197,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
                 .deliveryInfoData
                 .poDocuments,
             uploadOptionType: uploadOptionType,
+            salesOrg: context.read<EligibilityBloc>().state.salesOrg,
           ),
         );
     context.router.pop();

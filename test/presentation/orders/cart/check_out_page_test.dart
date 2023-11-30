@@ -1299,6 +1299,7 @@ void main() {
                 )
               ],
               uploadOptionType: UploadOptionType.gallery,
+              salesOrg: fakeMYSalesOrg,
             ),
           ),
         ).called(1);
@@ -1317,6 +1318,7 @@ void main() {
                 )
               ],
               uploadOptionType: UploadOptionType.file,
+              salesOrg: fakeMYSalesOrg,
             ),
           ),
         ).called(1);

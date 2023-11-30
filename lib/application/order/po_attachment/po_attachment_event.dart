@@ -14,8 +14,9 @@ class PoAttachmentEvent with _$PoAttachmentEvent {
   const factory PoAttachmentEvent.uploadFile({
     required List<PoDocuments> uploadedPODocument,
     required UploadOptionType uploadOptionType,
+    required SalesOrg salesOrg,
   }) = _UpLoadFile;
-   const factory PoAttachmentEvent.deleteFile({
+  const factory PoAttachmentEvent.deleteFile({
     required PoDocuments file,
   }) = _DeleteFile;
 }

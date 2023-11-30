@@ -24,6 +24,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:open_file_safe/open_file_safe.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class FileMock extends Mock implements File {}
 
 class FileSystemHelperMock extends Mock implements FileSystemHelper {}
@@ -609,6 +611,7 @@ void main() {
         files: [
           fakePlatformFile,
         ],
+        salesOrg: fakeSalesOrg,
       );
       expect(
         result.isRight(),
@@ -631,6 +634,7 @@ void main() {
         files: [
           PlatformFile(name: fakeFileName, size: 0),
         ],
+        salesOrg: fakeSalesOrg,
       );
       expect(
         result.isLeft(),
@@ -645,12 +649,14 @@ void main() {
         () => poDocumentRemoteDataSourceMock.fileUpload(
           folder: '',
           file: fakePlatformFile,
+          salesOrg: fakeSalesOrg.getOrCrash(),
         ),
       ).thenAnswer(
         (invocation) async => fakePODocuments,
       );
       final result = await poAttachmentRepository.uploadFiles(
         files: [fakePlatformFile],
+        salesOrg: fakeSalesOrg,
       );
       expect(
         result.isRight(),
@@ -670,12 +676,14 @@ void main() {
         () => poDocumentRemoteDataSourceMock.fileUpload(
           folder: '',
           file: fakePlatformFile,
+          salesOrg: fakeSalesOrg.getOrCrash(),
         ),
       ).thenThrow(fakeException);
       final result = await poAttachmentRepository.uploadFiles(
         files: [
           fakePlatformFile,
         ],
+        salesOrg: fakeSalesOrg,
       );
       expect(
         result.isLeft(),
@@ -693,6 +701,7 @@ void main() {
             size: (20 * pow(1024, 2) + 1).toInt(),
           ),
         ],
+        salesOrg: fakeSalesOrg,
       );
       expect(
         result.isLeft(),

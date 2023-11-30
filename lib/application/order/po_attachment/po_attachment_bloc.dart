@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/repository/i_po_attachment_repository.dart';
@@ -139,6 +140,7 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
                 final uploadFilesFailureOrSuccess =
                     await poAttachmentRepository.uploadFiles(
                   files: files,
+                  salesOrg: e.salesOrg,
                 );
                 uploadFilesFailureOrSuccess.fold(
                   (l) => emit(

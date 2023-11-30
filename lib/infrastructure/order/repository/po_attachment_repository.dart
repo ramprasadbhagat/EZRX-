@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
@@ -129,6 +130,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   @override
   Future<Either<ApiFailure, List<PoDocuments>>> uploadFiles({
     required List<PlatformFile> files,
+    required SalesOrg salesOrg,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -159,6 +161,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
               (file) async => await remoteDataSource.fileUpload(
                 folder: '',
                 file: file,
+                salesOrg: salesOrg.getOrCrash(),
               ),
             )
             .toList(),
