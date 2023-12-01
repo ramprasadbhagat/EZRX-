@@ -23,7 +23,9 @@ class AppMarket extends ValueObject<String> {
 
   const AppMarket._(this.value);
 
-  bool get isVN => value.getOrElse(() => 'my') == 'vn';
+  bool get isVN => value.getOrElse(() => '') == 'vn';
+
+  bool get isID => value.getOrElse(() => '') == 'id';
 
   String get currency => getCurrency(value.getOrElse(() => ''));
 

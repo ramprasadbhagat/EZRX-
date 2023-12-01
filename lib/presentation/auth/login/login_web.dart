@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/announcement.dart';
+import 'package:ezrxmobile/presentation/auth/login/common/exrx_apl_logo.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/login_button.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/market_selector.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/password_field.dart';
@@ -202,6 +203,8 @@ class _LoginFormWeb extends StatelessWidget {
                   const SizedBox(height: 15),
                   const LoginButton(),
                   const SizedBox(height: 25),
+                  if (state.currentMarket.isID)
+                    const EzrxAplLogo(),
                   const _TermsOfUse(),
                   const SizedBox(height: 6),
                   const _CreateAccount(),
