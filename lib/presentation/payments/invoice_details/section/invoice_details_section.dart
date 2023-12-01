@@ -66,7 +66,7 @@ class InvoiceDetailsSection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           OrderNumberSection(
-            orderNumber: invoiceItem.orderId.getOrCrash(),
+            orderNumber: invoiceItem.orderId.getOrDefaultValue(''),
           ),
         ],
       ),
