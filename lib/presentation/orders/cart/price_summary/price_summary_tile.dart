@@ -43,7 +43,7 @@ class PriceSummaryTile extends StatelessWidget {
               salesOrgConfig:
                   context.read<EligibilityBloc>().state.salesOrgConfigs,
               price: cartState.grandTotalHidePriceMaterial.toString(),
-              title: context.tr('Grand total: '),
+              title: '${context.tr('Grand total')}: ',
               priceLabelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.extraLightGrey4,
                   ),

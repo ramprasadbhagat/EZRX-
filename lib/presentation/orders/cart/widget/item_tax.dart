@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -38,7 +39,7 @@ class ItemTax extends StatelessWidget {
               type: PriceStyle.taxPrice,
             ),
             Text(
-              '(${cartItem.itemTaxPercentPadded}% tax)',
+              '(${cartItem.itemTaxPercentPadded}% ${context.tr('tax')})',
               style: txtStyle,
             ),
           ],

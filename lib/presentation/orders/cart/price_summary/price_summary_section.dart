@@ -59,7 +59,7 @@ class PriceSummarySection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              context.tr('Grand total: '),
+              '${context.tr('Grand total')}: ',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
@@ -80,7 +80,7 @@ class PriceSummarySection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              context.tr('Total savings:'),
+              '${context.tr('Total savings')}:',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),

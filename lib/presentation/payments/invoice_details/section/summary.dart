@@ -116,7 +116,7 @@ class _SummaryBreakDownForID extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${context.tr('Tax at ${salesOrgConfigs.vatValue}%')}:',
+                '${context.tr('Tax at')} ${salesOrgConfigs.vatValue}%:',
               ),
               PriceComponent(
                 type: PriceStyle.summaryPrice,
