@@ -27,7 +27,6 @@ class InvoiceNumberSection extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 1,
           child: Text(
             '${context.tr('Invoice number')}: ',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -35,105 +34,122 @@ class InvoiceNumberSection extends StatelessWidget {
                 ),
           ),
         ),
-        if (invoiceNumber.isNotEmpty)
-          BlocProvider(
-            create: (context) => locator<AllInvoicesBloc>()
-              ..add(
-                AllInvoicesEvent.initialized(
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
-                ),
-              ),
-            child: BlocConsumer<AllInvoicesBloc, AllInvoicesState>(
-              buildWhen: (previous, current) =>
-                  previous.isLoading != current.isLoading,
-              listenWhen: (previous, current) =>
-                  previous.failureOrSuccessOption !=
-                  current.failureOrSuccessOption,
-              listener: (context, state) {
-                state.failureOrSuccessOption.fold(
-                  () => {},
-                  (option) => option.fold(
-                    (failure) => ErrorUtils.handleApiFailure(context, failure),
-                    (_) => {
-                      if (state.items.isNotEmpty)
-                        {
-                          context.read<CreditAndInvoiceDetailsBloc>().add(
-                                CreditAndInvoiceDetailsEvent.fetch(
-                                  creditAndInvoiceItem: state.items.first,
-                                  salesOrganisation: context
-                                      .read<EligibilityBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  customerCodeInfo: context
-                                      .read<EligibilityBloc>()
-                                      .state
-                                      .customerCodeInfo,
-                                ),
-                              ),
-                          context.router.push(
-                            InvoiceDetailsPageRoute(
-                              invoiceItem: state.items.first,
-                            ),
-                          ),
-                        },
-                    },
+        invoiceNumber.isNotEmpty
+            ? BlocProvider(
+                create: (context) => locator<AllInvoicesBloc>()
+                  ..add(
+                    AllInvoicesEvent.initialized(
+                      salesOrganisation: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .salesOrganisation,
+                      customerCodeInfo: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .customerCodeInfo,
+                    ),
                   ),
-                );
-              },
-              builder: (context, state) {
-                return Expanded(
-                  flex: 2,
-                  child: Row(
-                    children: [
-                      Text(
-                        invoiceNumber,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                      ),
-                      state.isLoading
-                          ? Align(
-                              alignment: Alignment.center,
-                              child:
-                                  LoadingAnimationWidget.horizontalRotatingDots(
-                                key: WidgetKeys
-                                    .viewByItemsOrderDetailsInvoiceNumberLoading,
-                                color: ZPColors.attachmentColor,
-                                size: 20,
-                              ),
-                            )
-                          : IconButton(
-                              key: WidgetKeys
-                                  .viewByItemsOrderDetailsInvoiceNumberButton,
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(),
-                              onPressed: () => context
-                                  .read<AllInvoicesBloc>()
-                                  .add(
-                                    AllInvoicesEvent.fetch(
-                                      appliedFilter:
-                                          AllInvoicesFilter.empty().copyWith(
-                                        searchKey: SearchKey.searchFilter(
-                                          invoiceNumber,
-                                        ),
-                                      ),
+                child: BlocConsumer<AllInvoicesBloc, AllInvoicesState>(
+                  buildWhen: (previous, current) =>
+                      previous.isLoading != current.isLoading,
+                  listenWhen: (previous, current) =>
+                      previous.failureOrSuccessOption !=
+                      current.failureOrSuccessOption,
+                  listener: (context, state) {
+                    state.failureOrSuccessOption.fold(
+                      () => {},
+                      (option) => option.fold(
+                        (failure) =>
+                            ErrorUtils.handleApiFailure(context, failure),
+                        (_) => {
+                          if (state.items.isNotEmpty)
+                            {
+                              context.read<CreditAndInvoiceDetailsBloc>().add(
+                                    CreditAndInvoiceDetailsEvent.fetch(
+                                      creditAndInvoiceItem: state.items.first,
+                                      salesOrganisation: context
+                                          .read<EligibilityBloc>()
+                                          .state
+                                          .salesOrganisation,
+                                      customerCodeInfo: context
+                                          .read<EligibilityBloc>()
+                                          .state
+                                          .customerCodeInfo,
                                     ),
                                   ),
-                              icon: const Icon(
-                                Icons.open_in_new,
-                                color: ZPColors.attachmentColor,
-                                size: 20,
+                              context.router.push(
+                                InvoiceDetailsPageRoute(
+                                  invoiceItem: state.items.first,
+                                ),
                               ),
-                            ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
+                            },
+                        },
+                      ),
+                    );
+                  },
+                  builder: (context, state) {
+                    return Expanded(
+                      flex: 1,
+                      child: Row(
+                        children: [
+                          Text(
+                            invoiceNumber,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  color: ZPColors.white,
+                                ),
+                          ),
+                          state.isLoading
+                              ? Align(
+                                  alignment: Alignment.center,
+                                  child: LoadingAnimationWidget
+                                      .horizontalRotatingDots(
+                                    key: WidgetKeys
+                                        .viewByItemsOrderDetailsInvoiceNumberLoading,
+                                    color: ZPColors.attachmentColor,
+                                    size: 20,
+                                  ),
+                                )
+                              : IconButton(
+                                  key: WidgetKeys
+                                      .viewByItemsOrderDetailsInvoiceNumberButton,
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(),
+                                  onPressed: () => context
+                                      .read<AllInvoicesBloc>()
+                                      .add(
+                                        AllInvoicesEvent.fetch(
+                                          appliedFilter:
+                                              AllInvoicesFilter.empty()
+                                                  .copyWith(
+                                            searchKey: SearchKey.searchFilter(
+                                              invoiceNumber,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                  icon: const Icon(
+                                    Icons.open_in_new,
+                                    color: ZPColors.attachmentColor,
+                                    size: 20,
+                                  ),
+                                ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              )
+            : Expanded(
+                child: Text(
+                  'NA',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: ZPColors.white,
+                      ),
+                ),
+              ),
       ],
     );
   }

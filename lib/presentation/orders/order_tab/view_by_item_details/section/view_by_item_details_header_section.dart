@@ -41,6 +41,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                 height: 10,
               ),
               BalanceTextRow(
+                valueFlex: 1,
                 key: WidgetKeys.viewByItemsOrderDetailOrderDate,
                 keyText: context.tr('Order date'),
                 valueText: orderHistoryItem.createdDate.dateString,
@@ -53,12 +54,12 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                         ),
               ),
               InvoiceNumberSection(
-                key: WidgetKeys.viewByItemsOrderDetailInvoiceNumber,
                 invoiceNumber: orderHistoryItem.invoiceData.invoiceNumber
                     .getOrDefaultValue(''),
               ),
 
               BalanceTextRow(
+                valueFlex: 1,
                 key: WidgetKeys.viewByItemsOrderDetailPoReference,
                 keyText: context.tr('PO reference'),
                 valueText: orderHistoryItem.pOReference.displayPOReference,
@@ -72,6 +73,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
               ),
               config.enableFutureDeliveryDay
                   ? BalanceTextRow(
+                      valueFlex: 1,
                       key: WidgetKeys
                           .viewByItemsOrderDetailsRequestedDeliveryDate,
                       keyText: context.tr('Requested Delivery Date'),
@@ -100,6 +102,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
               // ): const SizedBox.shrink(),
               config.enableMobileNumber
                   ? BalanceTextRow(
+                      valueFlex: 1,
                       key: WidgetKeys.viewByItemsOrderDetailsContactPerson,
                       keyText: context.tr('Contact person'),
                       valueText: orderHistoryItem.orderBy.displayNAIfEmpty,
@@ -115,6 +118,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                   : const SizedBox.shrink(),
               config.enableMobileNumber
                   ? BalanceTextRow(
+                      valueFlex: 1,
                       key: WidgetKeys.viewByItemsOrderDetailsContactNumber,
                       keyText: context.tr('Contact number'),
                       valueText: orderHistoryItem
@@ -131,6 +135,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                   : const SizedBox.shrink(),
               if (config.enableSpecialInstructions)
                 BalanceTextRow(
+                  valueFlex: 1,
                   keyText: context.tr('Delivery instructions'),
                   valueText: orderHistoryItem
                       .specialInstructions.displaySpecialInstructions,

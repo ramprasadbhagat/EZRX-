@@ -22,7 +22,6 @@ class ViewByItemAttachmentSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          flex: 1,
           child: Text(
             context.tr('Attachments: '),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -31,7 +30,6 @@ class ViewByItemAttachmentSection extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 2,
           child: context
                   .read<ViewByItemDetailsBloc>()
                   .state
