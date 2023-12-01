@@ -141,7 +141,7 @@ Customer sold to ID,Customer sold to ID,รหัสร้านค้า,客戶
 Date Filter,Date Filter,ตัวกรองวันที่,日期篩選,ရက်စွဲဖြင့်စစ်ထုတ်ရန်,Lọc theo ngày,តម្រងតាមកាលបរិច្ឆេទ,Filter tanggal
 days. Please update your password before it expires,days. Please update your password before it expires,วัน กรุณาเปลี่ยนรหัสผ่านของคุณก่อนวันหมดอายุ,過期，請更新您的密碼,ရက်အတွင်းကုန်ဆုံးပါမည်။ သင်၏စကားဝှက်ကို သက်တမ်း မကုန်မှီ ကျေးဇူးပြု၍ မွမ်းမံပါ,ngày. vui lòng cập nhật mật khẩu trước khi hết hạn.,រាល់ថ្ងៃ សូមធ្វើបច្ចុប្បន្នភាព (ផ្លាស់ប្តូរ)​លេខសម្ងាត់របស់អ្នកមុនពេលវាផុតកំណត់,hari -hari Harap perbarui kata sandi Anda sebelum kedaluwarsa
 Deals :,Deals :,Deals :,搭贈/價格條件 :,Deals :,Chính sách bán hàng :,"ការផ្តល់ជូនពិសេស : ",Penawaran:
-Delivered,Delivered,การจัดส่งสำเร็จ,已配達,ပေးပို့ပြီးသည်,Đã giao hàng,បានដឹកជញ្ចូន,Terkirim
+Delivered,Delivered,การจัดส่งสำเร็จ,已配達,ပေးပို့ပြီးသည်,Đã giao hàng,បានចែកចាយ,Terkirim
 Delivered - partial rejection,Delivered - partial rejection,จัดส่งแล้ว - ปฏิเสธบางส่วน,取消-部分拒絕,ပေးပို့သည် - တစ်စိတ်တစ်ပိုင်း ငြင်းပယ်ခြင်း,Đã giao - một phần,បានដឹកជញ្ចូន-ការច្រានចោលជាផ្នែក,Disampaikan - penolakan sebagian
 Delivered - rejected upon delivery,Delivered - rejected upon delivery,จัดส่งแล้ว - ปฏิเสธการจัดส่ง,取消-拒收,ပေးပို့သည် - ပေးပို့ချိန်တွင် ငြင်းပယ်ခြင်း,Đã giao - trả hàng tại chỗ,បានដឹកជញ្ចូន-បានច្រានចោលនៅពេលដឹកជញ្ជូន,Dikirim - ditolak saat pengiriman
 Discount,Discount,ส่วนลด,折扣,လျှော့စျေး,Chiết khấu,បញ្ចុះតម្,Diskon
@@ -270,7 +270,7 @@ Order Type,Order Type,ประเภทคำสั่งซื้อ,訂單類
 Order Value:,Order Value:,ยอดสั่งซื้อ,訂單金額:,ကုန်ပစ္စည်း အမှာစာ တန်ဖိုး,Giá trị đơn hàng:,តម្លៃនៃការបញ្ជាទិញ:,Nilai pesanan:
 Ordered By,Ordered By,Ordered By,訂購人,Ordered By,Phụ trách đặt hàng: đặt hàng bởi,បញ្ជាទិញដោយ,Dipesan oleh
 Orders,Orders,สั่งซื้อสินค้า,訂單,အမှာစာများ,Đơn đặt hàng,ការកុំម្ម៉ង់,Pesanan
-Out for delivery,Out for delivery,สินค้าถูกส่งออกจากคลังสินค้า,配送中,ပေးပို့ရန်ထွက်လာသည်,Đơn hàng đang đi giao,ដឹកចេញហើយ,Keluar untuk pengiriman
+Out for delivery,Out for delivery,สินค้าถูกส่งออกจากคลังสินค้า,配送中,ပေးပို့ရန်ထွက်လာသည်,Đơn hàng đang đi giao,ចេញ​សំរាប់ចែកចាយ,Keluar untuk pengiriman
 Out for redelivery,Out for redelivery,อยู่ระหว่างขนส่งอีกครั้ง,配送中,ပြန်လည်ပေးပို့ခြင်းအတွက် ထွက်လာပါပြီ။,Giao lại,ដឹកចេញសារឡើងវិញហើយ,Keluar untuk pengiriman kembali
 out of,out of,out of,第,ထဲက,Hết,អស់ពី,dari
 Outstanding,Outstanding,ค้างชำระ,Outstanding,Outstanding,Chưa thanh toán,Outstanding,Luar biasa
@@ -614,7 +614,7 @@ Z-A,Z-A,Z-A,Z-A,Z-A,Z-A,Z-A,Z-A
 Filter by,Filter by,กรองโดย,篩選條件,စစ်ထုတ်ပါ,Lọc theo,ត្រងដោយ​(Filter),Filter oleh
 Manufacturer,Manufacturer,ผู้ผลิต,原廠名稱,ထုတ်လုပ်သူ,Hãng sản xuất,ក្រុមហ៊ុនផលិត,Pabrikan
 Country of origin,Country of origin,ประเทศผู้ผลิต,生產國家,မူရင်းထုတ်လုပ်သည့်နိုင်ငံ,Nước sản xuất,ប្រទេសដើម,Negara Asal
-Reset,Reset,รีเซ็ต,重設,ပြန်လည်သတ်မှတ်ပါ,Cài lại,ចំនួនទឹកប្រាក់ទៅ,Mengatur ulang
+Reset,Reset,รีเซ็ต,重設,ပြန်လည်သတ်မှတ်ပါ,Cài lại,កំណត់ឡើងវិញ,Mengatur ulang
 selected,selected,เลือก,已選擇,ရွေးချယ်ပါ,Đã chọn,បានជ្រើសរើស,terpilih
 Available offers,Available offers,ข้อเสนอที่ใช้ได้,優惠方案,ရရှီနိုင်သော ကမ်းလှမ်းချက်များ,Ưu đãi sẵn có,ការផ្តល់ជូនដែលមាន,Penawaran yang tersedia
 Offers are auto-applied based on quantity purchased,Offers are auto-applied based on quantity purchased,ข้อเสนอจะระบุให้โดยอัตโนมัติตามปริมาณที่ซื้อ,價格將自動隨購買數量而變動,Offers are auto-applied based on quantity purchased,Offers are auto-applied based on quantity purchased,ការផ្តល់ជូនត្រូវបានអនុវត្តដោយស្វ័យប្រវត្តិដោយផ្អែកលើបរិមាណដែលបានទិញ។,Penawaran diterapkan secara otomatis berdasarkan jumlah yang dibeli
@@ -630,7 +630,7 @@ Recently ordered,Recently ordered,คำสั่งซื้อครั้ง�
 Loyalty,Loyalty,Loyalty,Loyalty,သစ္စာရှိမှု,Khách hàng thân thiết,ស្គីំមLoyalty,Loyalitas
 Chat Support,Chat Support,พูดคุยทางแชท,線上客服,Chat Support,Trò chuyện với ZP,ជំនួយការជជែក,Chat support
 Chat support,Chat support,พูดคุยทางแชท,線上客服,Chat support,Trò chuyện với ZP,ជំនួយការជជែក,Chat support
-Date to,Date to,ถึงวันที่,到,Date to,Đến ngày,កាលបរិច្ឆេទ​ពី,Tanggal untuk
+Date to,Date to,ถึงวันที่,到,Date to,Đến ngày,កាលបរិច្ឆេទទៅ,Tanggal untuk
 Date form,Date form,Date form,Date form,Date form,Date form,Date form,Formulir Tanggal
 Related products,Related products,สินค้าที่เกี่ยวข้อง,相關產品,Related products,Sản phẩm liên quan,ផលិតផលដែលពាក់ព័ន្ធ,Produk-produk terkait
 Expiry,Expiry,Expiry,到期,Expiry,Expiry,Expiry,Kedaluwarsa
@@ -758,7 +758,7 @@ License information:,License information:,ข้อมูลใบอนุญ�
 Language changed successfully,Language changed successfully,เปลี่ยนภาษาเรียบร้อย,已成功變更語言,ဘာသာစကားကို အောင်မြင်စွာ ပြောင်းလဲခဲ့သည်,Thay đổi ngôn ngữ thành công,ភាសាបានផ្លាស់ប្តូរដោយជោគជ័យ,Bahasa berhasil berubah
 No orders found,No orders found,ไม่พบคำสั่งซื้อ,未找到訂單,အရောင်းအမှာစာမတွေ့ပါ,Không tìm thấy đơn hàng nào,No orders found,Tidak ada pesanan yang ditemukan
 Ordered on,Ordered on,สั่งซื้อเมื่อ,下訂日期,Oအရောင်း တင်လိုက်ပါသည်,Ordered on,បានបញ្ជាទិញ,Dipesan di
-"Order total : ","Order total : ","ยอดรวมคำสั่งซื้อ : ","所有訂單 : ","Order စုစုပေါင်း : ","Tổng giá trị đơn hàng : ","កំណត់ឡើងវិញ : ",Total Pesanan:
+"Order total : ","Order total : ","ยอดรวมคำสั่งซื้อ : ","所有訂單 : ","Order စုစုပေါင်း : ","Tổng giá trị đơn hàng : ",ការបញ្ជាទិញសរុប : ,Total Pesanan:
 Order #,Order #,Order #,命令 #,Order #,Order #,Order #,Memesan #
 Buy again,Buy again,ซื้ออีกครั้ง,再次訂購,ပြန်ဝယ်မည်,Đặt lại,ទិញម្តងទៀត,Beli lagi
 items,items,รายการ,項,ကို ပြသထားသည်,dòng dữ liệu,ផលិតផល,item
@@ -938,7 +938,7 @@ Expires,Expires,วันหมดอายุ,Expires,သက်တမ်းက�
 Request amount,Request amount,Request amount,Request amount,Request amount,Request amount,Request amount,Jumlah permintaan
 Amount to,Amount to,ถึงมูลค่า,金額小於,Amount to,Giá trị đến,ចំនួនទឹកប្រាក់ពី,Jumlah ke
 Amount from,Amount from,จากมูลค่า,金額大於,Amount from,Giá trị từ,កាលបរិច្ឆេទទៅ,Jumlah dari
-Date from,Date from,จากวันที่,從,Date from,Từ ngày,រកមិនឃើញការបញ្ជាទិញទេ។,Tanggal dari
+Date from,Date from,จากวันที่,從,Date from,Từ ngày,កាលបរិច្ឆេទ​ពី,Tanggal dari
 Special instructions,Special instructions,คำสั่งพิเศษ,Special instructions,အထူးညွှန်ကြားချက်များ,Special instructions,Special instructions,Instruksi khusus
 Return ID,Return ID,เลขคำขอคืนสินค้า,Return ID,ပြန်လည် သိမ်းယူမှု ID,Return ID,លេខសម្គាល់ការបញ្ចូនផលិតផលត្រឡប់ទៅវិញ,Kembali ID
 Approval number,Approval number,หมายเลขอนุมัติ,Approval number,အတည်ပြုနံပါတ်,Approval number,លេខអនុម័ត,Nomor persetujuan
