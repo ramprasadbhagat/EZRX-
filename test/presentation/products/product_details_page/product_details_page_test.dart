@@ -1,10 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
@@ -33,36 +30,24 @@ import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
-import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
-import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
@@ -99,31 +84,24 @@ class MockMixPanelService extends Mock implements MixpanelService {}
 
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
-class MockTokenStorage extends Mock implements TokenStorage {}
-
-final locator = GetIt.instance;
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  final mockSalesOrgBloc = SalesOrgMockBloc();
-  final userBlocMock = UserMockBloc();
-  final materialListMockBloc = MaterialListMockBloc();
-  final productDetailMockBloc = ProductDetailsMockBloc();
-  final mockProductImageBloc = ProductImageMockBloc();
-  final materialPriceMockBloc = MaterialPriceMockBloc();
-  final comboDealListMockBloc = ComboDealListMockBloc();
-  final comboDealMaterialDetailBlocMock = ComboDealMaterialDetailBlocMock();
+  late MaterialListBloc materialListMockBloc;
+  late ProductDetailBloc productDetailMockBloc;
+  late ProductImageBloc mockProductImageBloc;
+  late MaterialPriceBloc materialPriceMockBloc;
+  late ComboDealListBloc comboDealListMockBloc;
+  late ComboDealMaterialDetailBloc comboDealMaterialDetailBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
-  late CustomerCodeBloc customerCodeBlocMock;
   late CartBloc cartMockBloc;
   late AppRouter autoRouterMock;
   late MaterialInfo materialInfo;
   late StockInfo stockInfo;
   late StockInfo emptyStockInfo;
   late Price materialPrice;
-  late TokenStorage tokenStorage;
-  late User user;
+  final user = fakeClientUser;
   final materialNumber = MaterialNumber('00000111111');
   late ProductImages productImage;
   late List<MaterialInfo> similarProducts;
@@ -184,7 +162,7 @@ void main() {
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());
     registerFallbackValue(ShipToInfo.empty());
-    tokenStorage = MockTokenStorage();
+
     locator.registerLazySingleton<MixpanelService>(() => MockMixPanelService());
     materialInfo = await ProductDetailLocalDataSource().getProductDetails();
     similarProducts = await ProductDetailLocalDataSource().getSimilarProduct();
@@ -192,9 +170,6 @@ void main() {
         (await MaterialPriceLocalDataSource().getPriceList()).firstWhere(
       (element) => element.materialNumber == materialInfo.materialNumber,
     );
-    when(() => tokenStorage.get())
-        .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));
-    user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
     stockInfo = (await StockInfoLocalDataSource().getStockInfo()).copyWith(
       inStock: MaterialInStock('Yes'),
     );
@@ -210,19 +185,15 @@ void main() {
     'Product Details Page',
     () {
       setUp(() {
-        customerCodeBlocMock = CustomerCodeBlocMock();
+        materialListMockBloc = MaterialListMockBloc();
+        productDetailMockBloc = ProductDetailsMockBloc();
+        mockProductImageBloc = ProductImageMockBloc();
+        materialPriceMockBloc = MaterialPriceMockBloc();
+        comboDealListMockBloc = ComboDealListMockBloc();
+        comboDealMaterialDetailBlocMock = ComboDealMaterialDetailBlocMock();
         cartMockBloc = CartMockBloc();
         eligibilityBlocMock = EligibilityBlocMock();
         autoRouterMock = MockAppRouter();
-
-        when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeRootAdminUser,
-          ),
-        );
-        when(() => customerCodeBlocMock.state)
-            .thenReturn(CustomerCodeState.initial());
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: fakeRootAdminUser,
@@ -255,11 +226,6 @@ void main() {
           autoRouterMock: autoRouterMock,
           usingLocalization: true,
           providers: [
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<EligibilityBloc>(
               create: ((context) => eligibilityBlocMock),
             ),
@@ -325,11 +291,6 @@ void main() {
       testWidgets(
           'Find Add To Cart Error Section When Add To Cart Button Pressed',
           (tester) async {
-        when(() => mockSalesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: salesOrgConfigEnabledMaterialWithoutPrice,
-          ),
-        );
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
@@ -392,11 +353,6 @@ void main() {
       });
 
       testWidgets('Should scroll to top when press FAB', (tester) async {
-        when(() => mockSalesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: salesOrgConfigEnabledMaterialWithoutPrice,
-          ),
-        );
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
@@ -465,11 +421,6 @@ void main() {
       testWidgets(
           'Find Add To Cart Error Section When Add To Cart Button Pressed case 2',
           (tester) async {
-        when(() => mockSalesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: salesOrgConfigEnabledMaterialWithoutPrice,
-          ),
-        );
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
@@ -532,11 +483,6 @@ void main() {
       });
       testWidgets('Add to cart success when every condition is valid',
           (tester) async {
-        when(() => mockSalesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: salesOrgConfigEnabledMaterialWithoutPrice,
-          ),
-        );
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
@@ -629,11 +575,6 @@ void main() {
 
       testWidgets('Add to Cart is enabled when materialWithoutPrice is true',
           (tester) async {
-        when(() => mockSalesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: salesOrgConfigEnabledMaterialWithoutPrice,
-          ),
-        );
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
@@ -1296,13 +1237,6 @@ void main() {
           ),
         );
 
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-          ),
-        );
-
         when(() => materialPriceMockBloc.state).thenReturn(
           MaterialPriceState.initial().copyWith(
             isFetching: false,
@@ -1422,6 +1356,16 @@ void main() {
           'Price Not Available',
         );
         expect(priceText, findsOneWidget);
+      });
+
+      testWidgets('Should reset input qty in state to 1 at initial',
+          (tester) async {
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        verify(
+          () => productDetailMockBloc.add(ProductDetailEvent.updateQty(qty: 1)),
+        ).called(1);
       });
     },
   );

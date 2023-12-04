@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
@@ -9,7 +8,6 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -363,7 +361,12 @@ class _FooterState extends State<_Footer> {
   late TextEditingController _quantityEditingController;
   @override
   void initState() {
-    _quantityEditingController = TextEditingController(text: '1');
+    const defaultQty = 1;
+    _quantityEditingController =
+        TextEditingController(text: defaultQty.toString());
+    context
+        .read<ProductDetailBloc>()
+        .add(ProductDetailEvent.updateQty(qty: defaultQty));
     _quantityEditingController.addListener(() {
       context
           .read<ProductDetailBloc>()
@@ -382,10 +385,10 @@ class _FooterState extends State<_Footer> {
 
   bool isEligibleForAddToCart({
     required BuildContext context,
-    required int inputQty,
-    required ProductDetailAggregate productDetailAggregate,
+    required ProductDetailState productDetailState,
   }) {
-    final materialInfo = productDetailAggregate.materialInfo;
+    final stockInfo = productDetailState.productDetailAggregate.stockInfo;
+    final materialInfo = productDetailState.productDetailAggregate.materialInfo;
     final price = context
             .read<MaterialPriceBloc>()
             .state
@@ -396,18 +399,11 @@ class _FooterState extends State<_Footer> {
     if (disableCreateOrder) return false;
     final materialWithoutPrice =
         eligibilityState.salesOrgConfigs.materialWithoutPrice;
-    final materialInStock = (!context
-            .read<ProductDetailBloc>()
-            .state
-            .productDetailAggregate
-            .stockInfo
-            .inStock
-            .isMaterialInStock
+    final materialInStock = (!stockInfo.inStock.isMaterialInStock
         ? !eligibilityState.doNotAllowOutOfStockMaterials
         : true);
     final validQty = !eligibilityState.salesOrg.isID ||
-        (eligibilityState.salesOrg.isID &&
-            inputQty <= productDetailAggregate.stockInfo.stockQuantity);
+        !productDetailState.eligibleForStockError;
 
     return !materialInfo.isSuspended &&
         (materialInfo.isFOCMaterial
@@ -459,7 +455,6 @@ class _FooterState extends State<_Footer> {
               previous.inputQty != current.inputQty,
           builder: (context, state) {
             final materialInfo = state.productDetailAggregate.materialInfo;
-            final productDetailAggregate = state.productDetailAggregate;
             final isZdp5enable = eligibilityState.salesOrgConfigs.enableZDP5 &&
                 eligibilityState.salesOrganisation.salesOrg.isVN;
 
@@ -588,9 +583,7 @@ class _FooterState extends State<_Footer> {
                                         state.isFetching ||
                                         !isEligibleForAddToCart(
                                           context: context,
-                                          inputQty: qty,
-                                          productDetailAggregate:
-                                              productDetailAggregate,
+                                          productDetailState: state,
                                         )
                                     ? null
                                     : () {
@@ -750,7 +743,8 @@ void upsertCart({
           priceAggregate: PriceAggregate.empty().copyWith(
             materialInfo: state.productDetailAggregate.materialInfo,
             price: price,
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            salesOrgConfig:
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
           ),
           quantity: stateCart.getQuantityOfProduct(
                 productNumber:
