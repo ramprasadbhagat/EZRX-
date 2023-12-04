@@ -146,13 +146,40 @@ class _ArticlesTile extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      article.publishedDate.dateTimeOrDashString,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.copyWith(color: ZPColors.extraLightGrey4),
-                      key: WidgetKeys.articleTimeKey,
+                    Row(
+                      children: [
+                        Text(
+                          article.publishedDate.dateTimeOrDashString,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(color: ZPColors.extraLightGrey4),
+                          key: WidgetKeys.articleTimeKey,
+                        ),
+                        if (article.tag.isNotEmpty)
+                          Flexible(
+                            child: Container(
+                              key: WidgetKeys.articlesListTag,
+                              padding: const EdgeInsets.all(6),
+                              margin: const EdgeInsets.only(left: 8),
+                              decoration: BoxDecoration(
+                                color: ZPColors.paleBlueGray,
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Text(
+                                article.tag,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color: ZPColors.articleCategoryColor,
+                                    ),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                   ],
                 ),

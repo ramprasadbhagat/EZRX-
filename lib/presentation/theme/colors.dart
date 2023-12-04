@@ -111,6 +111,7 @@ abstract class ZPColors {
   static const Color bestDiscountBG = Color.fromRGBO(240, 245, 235, 1);
   static const Color nextTextBg = Color.fromRGBO(62, 119, 199, 1);
   static const Color nextDiscountBG = Color.fromRGBO(236, 243, 251, 1);
+  static const Color articleCategoryColor = Color.fromRGBO(87, 87, 87, 1);
 
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,

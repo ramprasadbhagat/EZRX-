@@ -107,6 +107,7 @@ class WidgetKeys {
       Key('homeQuickAccessChatSupportMenu');
   static const Key announcementsTab = Key('announcementsTab');
   static const Key articlesTab = Key('articlesTab');
+  static const Key articlesListTag = Key('articlesListTag');
   static const Key announcementTabBar = Key('Announcements');
   static const Key articleTabBar = Key('Articles');
   static const Key browseProductIcon = Key('browseProductIcon');

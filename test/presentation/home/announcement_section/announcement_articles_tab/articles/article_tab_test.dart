@@ -44,6 +44,7 @@ void main() {
         thumbnail: '',
         content: HtmlContent(''),
         publishedDate: DateTimeStringValue(''),
+        tag: 'fake-tag',
       ),
       AnnouncementArticleItem.empty().copyWith(
         id: 'fakeID2',
@@ -249,6 +250,19 @@ void main() {
       await tester.tap(find.byType(FloatingActionButton));
       await tester.pumpAndSettle();
       expect(find.text('fakeTitle1'), findsOneWidget);
+    });
+
+    testWidgets('Find category tag', (tester) async {
+      when(() => articlesInfoBlocMock.state).thenReturn(
+        ArticlesInfoState.initial().copyWith(
+          articleInfo: AnnouncementArticleInfo.empty().copyWith(
+            announcementList: announcementListMock,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.articlesListTag), findsOneWidget);
     });
   });
 }
