@@ -265,7 +265,7 @@ class _ReturnDetailsSection extends StatelessWidget {
         ),
         _CustomListTile(
           imageUrlList: requestInformation.imageUrl,
-          title: 'Attachments:',
+          title: 'Attachments',
         ),
       ],
     );
@@ -305,7 +305,7 @@ class _ApprovalDetailsSection extends StatelessWidget {
               ),
               _CustomListTile(
                 imageUrlList: requestInformation.imageUrl,
-                title: 'Attachments:',
+                title: 'Attachments',
               ),
               const Divider(
                 indent: 0,
@@ -338,7 +338,7 @@ class _CustomListTile extends StatelessWidget {
         : ListTile(
             contentPadding: EdgeInsets.zero,
             title: Text(
-              title.tr(),
+              '${title.tr()}:',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             subtitle: ListView.builder(

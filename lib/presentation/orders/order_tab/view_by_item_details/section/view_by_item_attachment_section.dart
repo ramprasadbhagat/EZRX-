@@ -23,7 +23,7 @@ class ViewByItemAttachmentSection extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            context.tr('Attachments: '),
+            '${context.tr('Attachments')}:',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
                 ),

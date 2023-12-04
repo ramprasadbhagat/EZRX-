@@ -196,7 +196,7 @@ class _UploadedFileList extends StatelessWidget {
                 height: 8,
               ),
               Text(
-                'Attachments:'.tr(),
+                '${'Attachments'.tr()}:',
               ),
               ...data.uploadedFiles
                   .map(

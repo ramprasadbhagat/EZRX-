@@ -8,7 +8,7 @@ class _TotalItems extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Text(
-        '${context.tr('Your items ')}(${context.read<CartBloc>().state.totalItems})',
+        '${context.tr('Your items')} (${context.read<CartBloc>().state.totalItems})',
         key: WidgetKeys.checkoutItemsTotalQty,
         style: Theme.of(context)
             .textTheme

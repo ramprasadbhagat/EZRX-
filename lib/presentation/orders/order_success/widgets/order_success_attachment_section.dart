@@ -24,7 +24,7 @@ class OrderSuccessAttachmentSection extends StatelessWidget {
         Expanded(
           flex: 2,
           child: Text(
-            context.tr('Attachments: '),
+            '${context.tr('Attachments')}:',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
                 ),

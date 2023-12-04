@@ -81,7 +81,7 @@ class _DeliveryInfoState extends State<_DeliveryInfo> {
                                 labelText: 'PO reference',
                                 keyText: 'pOReferenceKey',
                                 hintText:
-                                    'Enter your PO reference ${config.poNumberRequired.optionalText}',
+                                    '${context.tr('Enter your PO reference')} ${config.poNumberRequired.optionalText}',
                                 label: DeliveryInfoLabel.poReference,
                                 deliveryInfoData: state.deliveryInfoData,
                                 focusNode: widget.focusNodes[

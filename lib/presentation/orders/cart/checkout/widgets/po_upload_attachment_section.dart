@@ -225,7 +225,7 @@ class _UploadedFileList extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 minVerticalPadding: 10,
                 title: Text(
-                  'Attachments:'.tr(),
+                  '${'Attachments'.tr()}:',
                 ),
                 subtitle: state.isAttachmentUploaded
                     ? LoadingShimmer.tile()
