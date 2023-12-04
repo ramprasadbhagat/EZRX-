@@ -211,7 +211,13 @@ void main() {
           (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            cartProducts: [cartItem],
+            cartProducts: [
+              cartItem.copyWith(
+                price: Price.empty().copyWith(
+                  additionalBonusEligible: true,
+                ),
+              ),
+            ],
           ),
         );
 
@@ -317,7 +323,13 @@ void main() {
           (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            cartProducts: [cartItem],
+            cartProducts: [
+              cartItem.copyWith(
+                price: Price.empty().copyWith(
+                  additionalBonusEligible: true,
+                ),
+              ),
+            ],
           ),
         );
 
@@ -507,6 +519,7 @@ void main() {
           price: Price.empty().copyWith(
             finalPrice: MaterialPrice(364.80),
             lastPrice: MaterialPrice(364.80),
+            additionalBonusEligible: true,
           ),
           materialInfo: MaterialInfo.empty().copyWith(
             type: MaterialInfoType('material'),
@@ -514,7 +527,7 @@ void main() {
               principalName: PrincipalName('Procter And Gamble'),
               principalCode: PrincipalCode('000000105307'),
             ),
-            hidePrice: true,
+            hidePrice: false,
           ),
         );
         when(() => cartBloc.state).thenReturn(
@@ -763,6 +776,71 @@ void main() {
           find.descendant(of: material, matching: find.byType(OfferLabel)),
           findsOneWidget,
         );
+      });
+
+      testWidgets(
+          'Bonus sample item button not visible when AdditionalBonusEligible is false',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartItem.copyWith(
+                price: Price.empty().copyWith(
+                  additionalBonusEligible: false,
+                ),
+              ),
+            ],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              priceOverride: true,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final bonusSampleItemButton =
+            find.byKey(WidgetKeys.bonusSampleItemButtonKey);
+        expect(bonusSampleItemButton, findsNothing);
+      });
+
+      testWidgets(
+          'Bonus sample item button not visible when user is a sales rep user and AdditionalBonusEligible is false',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartItem.copyWith(
+                price: Price.empty().copyWith(
+                  additionalBonusEligible: false,
+                ),
+              ),
+            ],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('internal_sales_rep'),
+              ),
+              hasBonusOverride: true,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final bonusSampleItemButton =
+            find.byKey(WidgetKeys.bonusSampleItemButtonKey);
+        expect(bonusSampleItemButton, findsNothing);
       });
     },
   );
