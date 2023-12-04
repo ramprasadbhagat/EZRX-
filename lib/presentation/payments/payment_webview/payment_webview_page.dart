@@ -15,7 +15,6 @@ class PaymentWebviewPage extends StatefulWidget {
 class _PaymentWebviewPageState extends State<PaymentWebviewPage> {
   @override
   Widget build(BuildContext context) {
-        
     return Scaffold(
       body: SafeArea(
         child: InAppWebView(
@@ -47,15 +46,15 @@ class _PaymentWebviewPageState extends State<PaymentWebviewPage> {
               source: ''' 
                 const payNowButton = document.querySelector('button[_kpayment].pay-button');
                 if (payNowButton) {
-                  payNowButton.style.padding ='25px 30px';
-                  payNowButton.style.fontSize='40px';
+                  payNowButton.style.padding ='30px 30px';
+                  payNowButton.style.fontSize='35px';
                   payNowButton.style.fontWeight = 'bold';
                   payNowButton.style.position = 'absolute';
                   payNowButton.style.display = 'flex';
                   payNowButton.style.top = '50%';
                   payNowButton.style.left = '50%';
                   payNowButton.style.transform = 'translate(-50%, -50%)';
-                  payNowButton.style.width = 220
+                  payNowButton.style.width = 210
                 }
               ''',
             );
@@ -63,7 +62,6 @@ class _PaymentWebviewPageState extends State<PaymentWebviewPage> {
           shouldOverrideUrlLoading: (controller, navigationAction) async {
             return NavigationActionPolicy.ALLOW;
           },
-          
         ),
       ),
     );
