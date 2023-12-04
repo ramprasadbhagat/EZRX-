@@ -165,6 +165,12 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         );
       }
 
+      final customerCodeInfo = customerCodeInfoList.firstWhere(
+        (element) =>
+            element.customerCodeSoldTo == lastSavedCustomerInfo.customerCode,
+        orElse: () => customerCodeInfoList.first,
+      );
+
       emit(
         state.copyWith(
           customerCodeList: customerCodeInfoList,
@@ -172,7 +178,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           isSearchActive: true,
           canLoadMore: customerCodeInfoList.length >= config.pageSize,
           searchKey: SearchKey.search(lastSavedCustomerInfo.shippingAddress),
-          customerCodeInfo: customerCodeInfoList.first,
+          customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo == ShipToInfo.empty()
               ? customerCodeInfoList.first.shipToInfos.first
               : shipToInfo,

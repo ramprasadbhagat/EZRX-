@@ -1018,5 +1018,61 @@ void main() {
         ),
       ],
     );
+
+    blocTest(
+      'loadStoredCustomerCode - last saved customer code is not at the first index of customerCodeInfoList',
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCodeStorage()).thenAnswer(
+          (_) async => const Right(
+            AccountSelector(
+              salesOrg: 'mockSalesOrg',
+              customerCode: '0000002011',
+              shippingAddress: 'mockShippingAddress',
+            ),
+          ),
+        );
+
+        when(
+          () => customerCodeMockRepo.getCustomerCode(
+            salesOrganisation: fakeSaleOrg,
+            customerCodes: ['mockShippingAddress'],
+            hideCustomer: false,
+            offset: 0,
+            user: fakeUser,
+            pageSize: fakePageSize,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(customerMockData),
+        );
+      },
+      seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
+        customerCodeList: [CustomerCodeInfo.empty()],
+      ),
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(
+          const CustomerCodeEvent.loadStoredCustomerCode(),
+        );
+      },
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
+          isSearchActive: true,
+          customerCodeInfo: customerMockData[1],
+          isFetching: false,
+          customerCodeList: customerMockData,
+          searchKey: SearchKey('mockShippingAddress'),
+          shipToInfo: customerMockData.first.shipToInfos.first,
+        ),
+      ],
+    );
   });
 }
