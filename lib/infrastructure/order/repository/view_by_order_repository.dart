@@ -3,6 +3,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -40,6 +41,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
     required ViewByOrdersFilter viewByOrdersFilter,
     required ViewByOrder viewByOrder,
     required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -63,6 +65,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
         filterQuery:
             ViewByOrdersFilterDto.fromDomain(viewByOrdersFilter).toJson(),
         sort: sort,
+        shipTo: shipToInfo.shipToCustomerCode,
       );
 
       final newViewByOrderList = List<OrderHistoryDetails>.from(

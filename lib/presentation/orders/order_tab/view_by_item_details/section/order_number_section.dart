@@ -36,6 +36,7 @@ class OrderNumberSection extends StatelessWidget {
                 context.read<EligibilityBloc>().state.salesOrgConfigs,
             user: context.read<EligibilityBloc>().state.user,
             sortDirection: 'desc',
+            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
           ),
         ),
       child: BlocConsumer<ViewByOrderBloc, ViewByOrderState>(

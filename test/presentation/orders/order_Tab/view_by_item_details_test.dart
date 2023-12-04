@@ -919,6 +919,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfigs: fakeSalesOrganisationConfigs,
           user: fakeRootAdminUser,
+          shipToInfo: fakeShipToInfo,
         ),
       );
 
@@ -956,6 +957,7 @@ void main() {
             salesOrgConfigs: fakeSalesOrganisationConfigs,
             user: fakeRootAdminUser,
             sortDirection: 'desc',
+            shipToInfo: fakeShipToInfo,
           ),
         ),
       ).called(1);

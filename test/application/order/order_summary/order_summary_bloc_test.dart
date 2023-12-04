@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -44,7 +43,7 @@ void main() {
   final seedState = OrderSummaryState.initial().copyWith(
     user: fakeRootAdminUser.copyWith(email: EmailAddress('awsib@gmail.com')),
     customerCodeInfo: fakeCustomerCodeInfo.copyWith(division: 'div'),
-    shipToInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
+    shipToInfo: fakeShipToInfo,
     salesOrgConfig: fakeSalesOrganisationConfigs.copyWith(
       currency: Currency('PHP'),
       salesOrg: fakeSalesOrg,
@@ -298,6 +297,7 @@ void main() {
                 quantity: 2,
               )
             ],
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer(
           (value) async => Right(orderHistoryDetails),
@@ -359,6 +359,7 @@ void main() {
                 quantity: 2,
               )
             ],
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer(
           (value) async => const Left(ApiFailure.other('Some Error')),

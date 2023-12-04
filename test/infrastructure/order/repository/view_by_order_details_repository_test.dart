@@ -17,6 +17,8 @@ import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+
 class MockConfig extends Mock implements Config {}
 
 class OrderHistoryDetailsLocalDataSourceMock extends Mock
@@ -75,6 +77,7 @@ void main() {
         ),
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isRight(),
@@ -95,6 +98,7 @@ void main() {
         ),
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isLeft(),
@@ -112,6 +116,7 @@ void main() {
         user: mockUser,
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isRight(),
@@ -129,6 +134,7 @@ void main() {
         user: mockUser,
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
 
       expect(
@@ -145,6 +151,7 @@ void main() {
           language: 'EN',
           salesOrg: '2001',
           soldTo: '0030082707',
+          shipTo: fakeShipToInfo.shipToCustomerCode,
         ),
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
@@ -158,6 +165,7 @@ void main() {
         ),
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isRight(),
@@ -172,6 +180,7 @@ void main() {
           language: '',
           salesOrg: '',
           soldTo: '',
+          shipTo: fakeShipToInfo.shipToCustomerCode,
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -183,6 +192,7 @@ void main() {
         ),
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isLeft(),
@@ -197,6 +207,7 @@ void main() {
           language: 'EN',
           salesOrg: '2001',
           soldTo: '0030082707',
+          shipTo: fakeShipToInfo.shipToCustomerCode,
         ),
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
@@ -205,6 +216,7 @@ void main() {
         user: mockUser,
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isRight(),
@@ -219,6 +231,7 @@ void main() {
           language: '',
           salesOrg: '',
           soldTo: '',
+          shipTo: fakeShipToInfo.shipToCustomerCode,
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -227,6 +240,7 @@ void main() {
         user: mockUser,
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isLeft(),

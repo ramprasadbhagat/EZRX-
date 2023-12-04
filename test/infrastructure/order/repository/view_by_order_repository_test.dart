@@ -69,6 +69,7 @@ void main() {
         sort: fakeSort,
         searchKey: fakeSearchKey,
         viewByOrder: fakeViewByOrder,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isLeft(),
@@ -94,6 +95,7 @@ void main() {
         sort: fakeSort,
         searchKey: fakeSearchKey,
         viewByOrder: fakeViewByOrder,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isRight(),
@@ -114,6 +116,7 @@ void main() {
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           filterQuery: ViewByOrdersFilterDto.fromDomain(fakeFilter).toJson(),
           sort: fakeSort,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -129,6 +132,7 @@ void main() {
         sort: fakeSort,
         searchKey: fakeSearchKey,
         viewByOrder: fakeViewByOrder,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isLeft(),
@@ -149,6 +153,7 @@ void main() {
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           filterQuery: ViewByOrdersFilterDto.fromDomain(fakeFilter).toJson(),
           sort: fakeSort,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
         ),
       ).thenAnswer(
         (invocation) async => fakeViewByOrder,
@@ -166,6 +171,7 @@ void main() {
         sort: fakeSort,
         searchKey: fakeSearchKey,
         viewByOrder: fakeViewByOrder,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isRight(),

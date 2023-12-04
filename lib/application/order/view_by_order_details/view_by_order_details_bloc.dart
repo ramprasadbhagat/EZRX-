@@ -61,6 +61,7 @@ class ViewByOrderDetailsBloc
           orderNumber: e.orderNumber,
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
         );
 
         failureOrSuccess.fold(

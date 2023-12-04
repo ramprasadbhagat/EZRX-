@@ -4,6 +4,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
@@ -32,6 +33,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           customerCodeInfo: event.customerCodeInfo,
           user: event.user,
           sortDirection: event.sortDirection,
+          shipToInfo: event.shipToInfo,
         ),
       );
 
@@ -69,6 +71,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           sort: state.sortDirection,
           searchKey: e.searchKey,
           viewByOrder: state.viewByOrderList,
+          shipToInfo: state.shipToInfo,
         );
 
         failureOrSuccess.fold(
@@ -108,6 +111,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           searchKey: state.searchKey,
           viewByOrder: state.viewByOrderList,
           salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
         );
 
         failureOrSuccess.fold(

@@ -8,6 +8,7 @@ class ViewByOrderEvent with _$ViewByOrderEvent {
     required CustomerCodeInfo customerCodeInfo,
     required User user,
     required String sortDirection,
+    required ShipToInfo shipToInfo,
   }) = _Initialized;
   const factory ViewByOrderEvent.fetch({
     required ViewByOrdersFilter filter,

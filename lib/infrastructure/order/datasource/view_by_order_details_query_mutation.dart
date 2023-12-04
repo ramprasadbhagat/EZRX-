@@ -2,7 +2,7 @@ class ViewByOrderDetailsQueryMutation {
   String getOrderHistoryDetails() {
     return '''
       query orderHistoryQuery(
- \$soldTo: String!, 
+  \$soldTo: String!, 
   \$fromDate: String, 
   \$toDate: String, 
   \$shipTo: [String], 

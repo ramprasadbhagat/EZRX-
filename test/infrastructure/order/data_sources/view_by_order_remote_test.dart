@@ -49,6 +49,7 @@ void main() {
           'orderBy': 'datetime',
           'sort': 'desc',
           'salesOrg': ['fake-salesOrg'],
+          'shipTo': ['fake-shipTo'],
           'searchKey': 'fake-searchKey',
         };
         final res = json.decode(
@@ -74,6 +75,7 @@ void main() {
           salesOrg: 'fake-salesOrg',
           searchKey: 'fake-searchKey',
           soldTo: 'fake-soldTo',
+          shipTo: 'fake-shipTo',
           language: 'fake-language',
           filterQuery: {},
           offset: 0,

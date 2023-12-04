@@ -26,6 +26,7 @@ class ViewByOrderDetailsRemoteDataSource {
     required String soldTo,
     required String searchKey,
     required String salesOrg,
+    required String shipTo,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData =
@@ -36,6 +37,7 @@ class ViewByOrderDetailsRemoteDataSource {
         'language': language,
         'soldTo': soldTo,
         'salesOrg': [salesOrg],
+        'shipTo': [shipTo],
       };
 
       final res = await httpService.request(

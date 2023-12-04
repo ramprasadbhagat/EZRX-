@@ -43,6 +43,7 @@ class OrderNumberSection extends StatelessWidget {
                       salesOrganisation: eligibilityState.salesOrganisation,
                       customerCodeInfo: eligibilityState.customerCodeInfo,
                       salesOrgConfigs: eligibilityState.salesOrgConfigs,
+                      shipToInfo: eligibilityState.shipToInfo,
                       user: eligibilityState.user,
                       sortDirection: 'desc',
                     ),

@@ -31,6 +31,7 @@ class ViewByOrderRemoteDataSource {
     required String orderBy,
     required String sort,
     required String salesOrg,
+    required String shipTo,
     required String searchKey,
     required Map<String, dynamic> filterQuery,
   }) async {
@@ -45,6 +46,7 @@ class ViewByOrderRemoteDataSource {
         'orderBy': orderBy,
         'sort': sort,
         'salesOrg': [salesOrg],
+        'shipTo': [shipTo],
         'searchKey': searchKey,
         ...filterQuery,
       };

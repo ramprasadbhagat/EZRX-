@@ -1073,6 +1073,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isRight(),
@@ -1098,6 +1099,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isLeft(),
@@ -1114,6 +1116,7 @@ void main() {
           salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
           searchKey: submitOrderResponseMock.salesDocument,
           soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
         ),
       ).thenAnswer(
         (invocation) async => orderHistoryDetailsMock,
@@ -1125,6 +1128,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isRight(),
@@ -1147,6 +1151,7 @@ void main() {
             salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
             searchKey: submitOrderResponseMock.salesDocument,
             soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipTo: fakeShipToInfo.shipToCustomerCode,
           ),
         ).thenThrow(
           (invocation) async => MockException(),
@@ -1158,6 +1163,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
           orderResponse: submitOrderResponseMock,
+          shipToInfo: fakeShipToInfo,
         );
         expect(
           result.isLeft(),

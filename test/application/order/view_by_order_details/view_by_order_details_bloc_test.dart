@@ -103,6 +103,7 @@ void main() {
           user: fakeClient,
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
         ),
         setUp: () {
           when(
@@ -111,6 +112,7 @@ void main() {
               orderNumber: fakeOrderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer((invocation) async => Right(orderHistoryDetailsMock));
         },
@@ -124,12 +126,14 @@ void main() {
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
             isLoading: true,
           ),
           ViewByOrderDetailsState.initial().copyWith(
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
             orderHistoryDetails: orderHistoryDetailsMock,
             failureOrSuccessOption: optionOf(Right(orderHistoryDetailsMock)),
             materials: fakeMaterials,
@@ -148,6 +152,7 @@ void main() {
           user: fakeClient,
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
         ),
         setUp: () {
           when(
@@ -156,6 +161,7 @@ void main() {
               orderNumber: fakeOrderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -172,12 +178,14 @@ void main() {
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderDetailsState.initial().copyWith(
             isLoading: false,
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
             failureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('Fake-Error'),

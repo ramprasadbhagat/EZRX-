@@ -127,6 +127,7 @@ class OrderRepository implements IOrderRepository {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required List<PriceAggregate> cartProducts,
+    required ShipToInfo shipToInfo,
   }) async {
     const apiRetryCounter = 15;
 
@@ -150,6 +151,7 @@ class OrderRepository implements IOrderRepository {
           language: user.preferredLanguage.languageCode,
           soldTo: customerCodeInfo.customerCodeSoldTo,
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+          shipTo: shipToInfo.shipToCustomerCode,
         );
 
         final orderHistoryDetailsWithMaterialInfo =

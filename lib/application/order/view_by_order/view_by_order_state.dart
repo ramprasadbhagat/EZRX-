@@ -16,6 +16,7 @@ class ViewByOrderState with _$ViewByOrderState {
     required int nextPageIndex,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required ViewByOrdersFilter appliedFilter,
+    required ShipToInfo shipToInfo,
   }) = _ViewByOrderState;
   factory ViewByOrderState.initial() => ViewByOrderState(
         salesOrgConfigs: SalesOrganisationConfigs.empty(),
@@ -30,5 +31,6 @@ class ViewByOrderState with _$ViewByOrderState {
         searchKey: SearchKey.searchFilter(''),
         failureOrSuccessOption: none(),
         appliedFilter: ViewByOrdersFilter.empty(),
+        shipToInfo: ShipToInfo.empty(),
       );
 }

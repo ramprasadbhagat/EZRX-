@@ -1159,6 +1159,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 salesOrgConfigs: salesOrgState.configs,
                 user: user,
                 sortDirection: 'desc',
+                shipToInfo: state.shipToInfo,
               ),
             );
 

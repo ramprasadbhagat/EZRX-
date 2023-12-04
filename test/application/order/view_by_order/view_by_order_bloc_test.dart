@@ -60,6 +60,7 @@ void main() {
               sort: fakeSort,
               searchKey: searchKey,
               viewByOrder: ViewByOrder.empty(),
+              shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -74,6 +75,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
             sortDirection: fakeSort,
+            shipToInfo: fakeShipToInfo,
           ),
         ),
         expect: () => [
@@ -83,6 +85,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
             sortDirection: fakeSort,
+            shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
@@ -93,6 +96,7 @@ void main() {
             isFetching: true,
             appliedFilter: viewByOrdersFilter,
             searchKey: searchKey,
+            shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
@@ -103,6 +107,7 @@ void main() {
             appliedFilter: viewByOrdersFilter,
             searchKey: searchKey,
             viewByOrderList: viewByOrderMockData,
+            shipToInfo: fakeShipToInfo,
             failureOrSuccessOption: optionOf(
               Right(
                 viewByOrderMockData,
@@ -124,6 +129,7 @@ void main() {
           user: fakeClient,
           sortDirection: fakeSort,
           salesOrganisation: fakeSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
         ),
         setUp: () {
           when(
@@ -139,6 +145,7 @@ void main() {
               viewByOrder: ViewByOrder.empty(),
               viewByOrdersFilter: viewByOrdersFilter,
               salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -162,6 +169,7 @@ void main() {
             searchKey: searchKey,
             appliedFilter: viewByOrdersFilter,
             salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderState.initial().copyWith(
             salesOrgConfigs: fakeEmptySalesConfigs,
@@ -177,6 +185,7 @@ void main() {
             isFetching: false,
             searchKey: searchKey,
             salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
           )
         ],
       );
@@ -196,6 +205,7 @@ void main() {
           appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
           viewByOrderList: viewByOrderMockData,
+          shipToInfo: fakeShipToInfo,
         ),
         setUp: () {
           when(
@@ -211,6 +221,7 @@ void main() {
               searchKey: searchKey,
               viewByOrder: viewByOrderMockData,
               salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -232,11 +243,13 @@ void main() {
             searchKey: searchKey,
             viewByOrderList: viewByOrderMockData,
             isFetching: true,
+            shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
             user: fakeClient,
             sortDirection: fakeSort,
             appliedFilter: viewByOrdersFilter,
@@ -266,6 +279,7 @@ void main() {
           appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
           viewByOrderList: viewByOrderMockData,
+          shipToInfo: fakeShipToInfo,
         ),
         setUp: () {
           when(
@@ -281,6 +295,7 @@ void main() {
               searchKey: searchKey,
               viewByOrder: viewByOrderMockData,
               salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -294,6 +309,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
             user: fakeClient,
             sortDirection: fakeSort,
             appliedFilter: viewByOrdersFilter,
@@ -305,6 +321,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeEmptySalesConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
             user: fakeClient,
             sortDirection: fakeSort,
             appliedFilter: viewByOrdersFilter,

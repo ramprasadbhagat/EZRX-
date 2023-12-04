@@ -51,6 +51,7 @@ void main() {
           'language': 'fake-language',
           'soldTo': 'fake-soldTo',
           'salesOrg': ['fake-salesOrg'],
+          'shipTo': ['fake-shipTo'],
         };
         final res = json.decode(
           await rootBundle
@@ -77,6 +78,7 @@ void main() {
           searchKey: 'fake-searchKey',
           soldTo: 'fake-soldTo',
           language: 'fake-language',
+          shipTo: 'fake-shipTo',
         );
 
         expect(
@@ -93,6 +95,7 @@ void main() {
           'language': 'fake-language',
           'soldTo': 'fake-soldTo',
           'salesOrg': ['fake-salesOrg'],
+          'shipTo': ['fake-shipTo'],
         };
 
         dioAdapter.onPost(
@@ -116,6 +119,7 @@ void main() {
           searchKey: 'fake-searchKey',
           soldTo: 'fake-soldTo',
           language: 'fake-language',
+          shipTo: 'fake-shipTo',
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -129,6 +133,7 @@ void main() {
           'language': 'fake-language',
           'soldTo': 'fake-soldTo',
           'salesOrg': ['fake-salesOrg'],
+          'shipTo': ['fake-shipTo'],
         };
 
         dioAdapter.onPost(
@@ -157,6 +162,7 @@ void main() {
           searchKey: 'fake-searchKey',
           soldTo: 'fake-soldTo',
           language: 'fake-language',
+          shipTo: 'fake-shipTo',
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
