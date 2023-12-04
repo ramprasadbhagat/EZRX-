@@ -124,9 +124,9 @@ class User with _$User {
 
   List<String> get _supportedMarketsForStaticFiles => <String>[
         'ID',
+        'KH',
         //TODO: Cover in another ticket
         // 'TW',
-        // 'KH',
         // 'KR',
         // 'TH',
         // 'VN',
@@ -136,8 +136,8 @@ class User with _$User {
   String get tncFile {
     if (_supportedMarketsForStaticFiles.contains(userCountry)) {
       return userPreferredLanguageCode == userCountry
-          ? 'assets/html/eZRxTermsOfUse${userCountry}MarketTranslated.html'
-          : 'assets/html/eZRxTermsOfUse${userCountry}Market.html';
+          ? 'assets/html/${userCountry.toLowerCase()}/eZRxTermsOfUse${userCountry}MarketTranslated.html'
+          : 'assets/html/${userCountry.toLowerCase()}/eZRxTermsOfUse${userCountry}Market.html';
     }
 
     return 'assets/html/eZRxTermsOfUse.html';
@@ -146,8 +146,8 @@ class User with _$User {
   String get tncStaticFile {
     if (_supportedMarketsForStaticFiles.contains(userCountry)) {
       return userPreferredLanguageCode == userCountry
-          ? 'assets/html/eZRxTermsOfUse${userCountry}MarketTranslatedStatic.html'
-          : 'assets/html/eZRxTermsOfUse${userCountry}MarketStatic.html';
+          ? 'assets/html/${userCountry.toLowerCase()}/eZRxTermsOfUse${userCountry}MarketTranslatedStatic.html'
+          : 'assets/html/${userCountry.toLowerCase()}/eZRxTermsOfUse${userCountry}MarketStatic.html';
     }
 
     return 'assets/html/eZRxTermsOfUseStatic.html';
@@ -156,7 +156,7 @@ class User with _$User {
   String get privacyPolicyFile {
     if (_supportedMarketsForStaticFiles.contains(userCountry) &&
         userPreferredLanguageCode == userCountry) {
-      return 'assets/html/eZRxPrivacyPolicy${userCountry}MarketTranslated.html';
+      return 'assets/html/${userCountry.toLowerCase()}/eZRxPrivacyPolicy${userCountry}MarketTranslated.html';
     }
 
     return 'assets/html/eZRxPrivacyPolicy.html';
@@ -165,7 +165,7 @@ class User with _$User {
   String get privacyPolicyStaticFile {
     if (_supportedMarketsForStaticFiles.contains(userCountry) &&
         userPreferredLanguageCode == userCountry) {
-      return 'assets/html/eZRxPrivacyPolicy${userCountry}MarketTranslatedStatic.html';
+      return 'assets/html/${userCountry.toLowerCase()}/eZRxPrivacyPolicy${userCountry}MarketTranslatedStatic.html';
     }
 
     return 'assets/html/eZRxPrivacyPolicyStatic.html';

@@ -153,6 +153,8 @@ flutter:
     - assets/json/
     - assets/langs/
     - assets/html/
+    - assets/html/id/
+    - assets/html/kh/
     - assets/svg/
     - assets/svg/flags/
 
