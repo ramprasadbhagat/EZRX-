@@ -384,6 +384,25 @@ void main() {
           findsOneWidget,
         );
       });
+
+      testWidgets(
+        '=> Find Customer name',
+        (tester) async {
+          when(() => mockReturnListByItemBloc.state).thenReturn(
+            ReturnListByItemState.initial().copyWith(
+              returnItemList: [
+                ReturnItem.empty().copyWith(customerName: 'fake-customerName'),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWUT());
+          await tester.pump();
+          final cardFinder = find.byType(CommonTileItem);
+          final customerName = find.text('fake-customerName');
+          expect(cardFinder, findsOneWidget);
+          expect(customerName, findsOneWidget);
+        },
+      );
     },
   );
 }

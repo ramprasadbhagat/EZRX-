@@ -244,5 +244,24 @@ void main() {
 
       expect(find.text('1 item'), findsOneWidget);
     });
+
+    testWidgets(
+      '=> Find Customer name',
+      (tester) async {
+        when(() => mockReturnListByRequestBloc.state).thenReturn(
+          ReturnListByRequestState.initial().copyWith(
+            returnItemList: [
+              ReturnItem.empty().copyWith(customerName: 'fake-customerName'),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final customerName = find.text('fake-customerName');
+
+        expect(customerName, findsOneWidget);
+      },
+    );
   });
 }

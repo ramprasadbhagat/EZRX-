@@ -189,7 +189,19 @@ class _ReturnItem extends StatelessWidget {
                     );
                   },
                   title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      if (data.customerName.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5.0),
+                          child: Text(
+                            data.customerName,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(color: ZPColors.neutralsGrey1),
+                          ),
+                        ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -207,15 +207,30 @@ class _ReturnItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                topHeaderWidget: data.displayOutSidePolicy(
-                  context
-                      .read<EligibilityBloc>()
-                      .state
-                      .salesOrgConfigs
-                      .allowReturnsOutsidePolicy,
-                )
-                    ? const OutsideReturnPolicyTag()
-                    : null,
+                topHeaderWidget: Column(
+                  children: [
+                    if (data.displayOutSidePolicy(
+                      context
+                          .read<EligibilityBloc>()
+                          .state
+                          .salesOrgConfigs
+                          .allowReturnsOutsidePolicy,
+                    ))
+                      const OutsideReturnPolicyTag(),
+                    if (data.customerName.isNotEmpty)
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Text(
+                          data.customerName,
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelSmall
+                              ?.copyWith(color: ZPColors.neutralsGrey1),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ],
           ),

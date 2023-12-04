@@ -7,70 +7,80 @@
                     "requestDate": "20230619",
                     "itemQty": "1",
                     "totalPrice": "3.00",
-                    "status": "PENDING"
+                    "status": "PENDING",
+                    "customerName":"RSD HOSPITALS SDN BHD (SJMC)"
                 },
                 {
                     "requestId": "EZRE-200123000760",
                     "requestDate": "20230616",
                     "itemQty": "1",
                     "totalPrice": "30.00",
-                    "status": "PENDING"
+                    "status": "PENDING",
+                    "customerName":"RSD HOSPITALS SDN BHD (SJMC)"
                 },
                 {
                     "requestId": "EZRE-200123000750",
                     "requestDate": "20230615",
                     "itemQty": "1",
                     "totalPrice": "23.00",
-                    "status": "PENDING"
+                    "status": "PENDING",
+                    "customerName":"RSD HOSPITALS SDN BHD (SJMC)"
                 },
                 {
                     "requestId": "EZRE-200123000749",
                     "requestDate": "20230615",
                     "itemQty": "1",
                     "totalPrice": "78.00",
-                    "status": "PENDING"
+                    "status": "PENDING",
+                    "customerName":"RSD HOSPITALS SDN BHD (SJMC)"
                 },
                 {
                     "requestId": "EZRE-200123000748",
                     "requestDate": "20230615",
                     "itemQty": "1",
                     "totalPrice": "45.00",
-                    "status": "PENDING"
+                    "status": "PENDING",
+                    "customerName":"RSD HOSPITALS SDN BHD (SJMC)"
                 },
                 {
                     "requestId": "EZRE-200123000735",
                     "requestDate": "20230613",
                     "itemQty": "1",
                     "totalPrice": "22.50",
-                    "status": "PENDING"
+                    "status": "PENDING",
+                    "customerName":"RSD HOSPITALS SDN BHD (SJMC)"
                 },
                 {
                     "requestId": "EZRE-200123000734",
                     "requestDate": "20230612",
                     "itemQty": "1",
                     "totalPrice": "15.00",
-                    "status": "PENDING"
+                    "status": "PENDING",
+                    "customerName":"RSD HOSPITALS SDN BHD (SJMC)"
                 },
                 {
                     "requestId": "EZRE-200123000608",
                     "requestDate": "20230529",
                     "itemQty": "1",
                     "totalPrice": "4028.00",
-                    "status": "PENDING"
+                    "status": "PENDING",
+                    "customerName":"RSD HOSPITALS SDN BHD (SJMC)"
                 },
                 {
                     "requestId": "EZRE-200123000513",
                     "requestDate": "20230524",
                     "itemQty": "1",
                     "totalPrice": "926.10",
-                    "status": "PENDING"
+                    "status": "PENDING",
+                    "customerName":"RSD HOSPITALS SDN BHD (SJMC)"
                 },
                 {
                     "requestId": "EZRE-200123000498",
                     "requestDate": "20230524",
                     "itemQty": "1",
                     "totalPrice": "37.80",
-                    "status": "PENDING"
+                    "status": "PENDING",
+                    "customerName":"RSD HOSPITALS SDN BHD (SJMC)"
                 }
             ],
             "totalCount": 40

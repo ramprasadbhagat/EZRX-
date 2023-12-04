@@ -39,6 +39,7 @@ class ReturnQuery {
             itemQty
             totalPrice
             status
+            customerName
           }
           totalCount
         }

@@ -6,6 +6,7 @@ query requestsByUserV3($requestsByUserRequest: requestsByUserRequestV3!) {
       itemQty
       totalPrice
       status
+      customerName
     }
     totalCount
   }
