@@ -749,5 +749,72 @@ void main() {
         () => chatBotBloc.add(const ChatBotEvent.resetChatbot()),
       ).called(1);
     });
+
+    testWidgets('Exrx apl logo not visible for other market', (tester) async {
+      when(() => loginBlocMock.state).thenReturn(
+        LoginFormState.initial().copyWith(
+          currentMarket: AppMarket('sg'),
+        ),
+      );
+      await tester.pumpWidget(loginTestPage());
+      await tester.pump();
+      final ezrxAplLogo = find.byKey(WidgetKeys.ezrxAplLogo);
+      expect(ezrxAplLogo, findsNothing);
+    });
+
+    testWidgets('Exrx apl logo visible for ID market', (tester) async {
+      when(() => loginBlocMock.state).thenReturn(
+        LoginFormState.initial().copyWith(
+          currentMarket: AppMarket('id'),
+        ),
+      );
+      await tester.pumpWidget(loginTestPage());
+      await tester.pump();
+      final ezrxAplLogo = find.byKey(WidgetKeys.ezrxAplLogo);
+      expect(ezrxAplLogo, findsOneWidget);
+    });
+
+    testWidgets('Exrx apl logo on market change from ID to other hide the logo',
+        (tester) async {
+      when(() => loginBlocMock.state).thenReturn(
+        LoginFormState.initial().copyWith(
+          currentMarket: AppMarket('id'),
+        ),
+      );
+      final expectedStates = [
+        LoginFormState.initial().copyWith(
+          currentMarket: AppMarket('sg'),
+        ),
+      ];
+      whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+      await tester.pumpWidget(loginTestPage());
+      await tester.pump();
+      final ezrxAplLogo = find.byKey(WidgetKeys.ezrxAplLogo);
+      expect(ezrxAplLogo, findsOneWidget);
+      await tester.pump();
+      expect(ezrxAplLogo, findsNothing);
+    });
+
+    testWidgets('Exrx apl logo on market change from other to ID',
+        (tester) async {
+      when(() => loginBlocMock.state).thenReturn(
+        LoginFormState.initial().copyWith(
+          currentMarket: AppMarket('sg'),
+        ),
+      );
+      final expectedStates = [
+        LoginFormState.initial().copyWith(
+          currentMarket: AppMarket('id'),
+        ),
+      ];
+      whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+      await tester.pumpWidget(loginTestPage());
+      await tester.pump();
+      final ezrxAplLogo = find.byKey(WidgetKeys.ezrxAplLogo);
+      expect(ezrxAplLogo, findsNothing);
+      await tester.pump();
+      expect(ezrxAplLogo, findsOneWidget);
+    });
+    
   });
 }

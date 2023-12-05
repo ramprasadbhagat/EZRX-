@@ -71,6 +71,7 @@ class WidgetKeys {
   static const Key appMarketSelector = Key('appMarketSelector');
   static const Key createAccountButton = Key('createAccountButton');
   static const Key forgotPasswordButton = Key('forgotPasswordButton');
+  static const Key ezrxAplLogo = Key('ezrxAplLogo');
 
   //============================================================
   //  AupTCDialog
