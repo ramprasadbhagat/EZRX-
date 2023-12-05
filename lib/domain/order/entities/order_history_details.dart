@@ -192,6 +192,8 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
             ? orderValue - (element.qty * element.unitPrice.zpPrice)
             : previousValue,
       );
+  double get totalTaxPercentage =>
+      double.parse((totalTax / orderValue * 100).toStringAsExponential(2));
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetails> {

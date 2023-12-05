@@ -719,6 +719,7 @@ class WidgetKeys {
   static const Key orderSuccessItemTotalQty = Key('orderSuccessItemTotalQty');
   static const Key orderSuccessItemsSection = Key('orderSuccessItemsSection');
   static const Key orderSuccessSubTotal = Key('orderSuccessSubTotal');
+  static const Key orderSummaryTax = Key('orderSummaryTax');
   static const Key orderSuccessGrandTotal = Key('orderSuccessGrandTotal');
   static Key orderSuccessItem(int index) => Key('orderSuccessItem$index');
   static const Key orderSuccessItemQty = Key('orderSuccessItemQty');
@@ -1201,6 +1202,7 @@ class WidgetKeys {
   static Key viewByOrderBuyAgainButtonKey =
       const Key('viewByOrderBuyAgainButtonKey');
   static Key viewByOrderSubtotalKey = const Key('viewByOrderSubtotalKey');
+  static Key viewByOrderTaxKey = const Key('viewByOrderTaxKey');
   static Key viewByOrderGrandTotalKey = const Key('viewByOrderGrandTotalKey');
   static Key viewByOrderOrderNumberLoading =
       const Key('viewByOrderOrderNumberLoading');

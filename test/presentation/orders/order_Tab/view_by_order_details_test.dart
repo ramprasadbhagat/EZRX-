@@ -116,7 +116,7 @@ void main() {
   final viewByOrderBlocMock = ViewByOrderBlocMock();
   final mockViewByItemDetailsBloc = ViewByItemDetailsBlocMock();
   final viewByOrderDetailsBlocMock = ViewByOrderDetailsBlockMock();
-  final mockSalesOrgBloc = SalesOrgMockBloc();
+  late SalesOrgMockBloc mockSalesOrgBloc;
   final userBlocMock = UserMockBloc();
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late AuthBloc mockAuthBloc;
@@ -182,6 +182,7 @@ void main() {
       mockProductImageBloc = MockProductImageBloc();
       mockAuthBloc = MockAuthBloc();
       mockPoAttachmentBloc = MockPoAttachmentBloc();
+      mockSalesOrgBloc = SalesOrgMockBloc();
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
       when(() => userBlocMock.state).thenReturn(
@@ -247,6 +248,12 @@ void main() {
         ),
       );
     });
+
+    ///////////////////Finder//////////////////////////////////////////////////
+    final viewByOrderTaxKey = find.byKey(
+      WidgetKeys.viewByOrderTaxKey,
+    );
+    //////////////////////////////////////////////////////////////////////////
 
     Widget getScopedWidget() {
       return WidgetUtils.getScopedWidget(
@@ -1105,6 +1112,11 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
 
       expect(
         find.byKey(WidgetKeys.viewByOrderDetailBundleSection),
@@ -1131,7 +1143,11 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
       expect(
         find.byKey(WidgetKeys.viewByOrderDetailBundleSection),
         findsOneWidget,
@@ -1164,7 +1180,11 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
       expect(
         find.byKey(WidgetKeys.viewByOrderDetailBundleSection),
         findsOneWidget,
@@ -1205,7 +1225,11 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
       expect(
         find.byKey(WidgetKeys.viewByOrderDetailBundleSection),
         findsOneWidget,
@@ -1370,6 +1394,11 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
       final orderItemPrice = find.byType(OrderItemPrice);
       expect(orderItemPrice, findsOneWidget);
       final offerAppliedTxt = find.text('Offer applied'.tr());
@@ -1402,6 +1431,11 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
       final orderItemPrice = find.byType(OrderItemPrice);
       expect(orderItemPrice, findsOneWidget);
       final offerAppliedTxt = find.text('Offer applied'.tr());
@@ -1434,6 +1468,11 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
       final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
       expect(quantityAndPriceWithTax, findsOneWidget);
       final materialTax = find.byType(MaterialTax);
@@ -1466,10 +1505,50 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
       final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
       expect(quantityAndPriceWithTax, findsOneWidget);
       final materialTax = find.byType(MaterialTax);
       expect(materialTax, findsNothing);
+    });
+
+    testWidgets('=>  display summary tax when tax break down on from sales org',
+        (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            displayItemTaxBreakdown: true,
+          ),
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+        ),
+      );
+      when(() => viewByOrderBlocMock.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          viewByOrderList: viewByOrder,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: viewByOrder.orderHeaders.first,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(viewByOrderTaxKey, findsOneWidget);
     });
   });
 }

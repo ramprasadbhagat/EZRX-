@@ -126,7 +126,6 @@ void main() {
           .registerLazySingleton<MixpanelService>(() => MockMixpanelService());
 
       autoRouterMock = locator<AutoRouterMock>();
-      mockSalesOrgBloc = MockSalesOrgBloc();
       customerCodeBlocMock = CustomerCodeBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
@@ -144,6 +143,7 @@ void main() {
   );
   setUp(
     () {
+      mockSalesOrgBloc = MockSalesOrgBloc();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
@@ -308,7 +308,7 @@ void main() {
     );
 
     testWidgets(
-      'Order summary price check - subTotal & grandTotal price',
+      'Order summary price check - subTotal include tax & grandTotal price ',
       (tester) async {
         const finalPrice = 88.0;
         const vatValue = 9;
@@ -323,6 +323,85 @@ void main() {
               vatValue: vatValue,
               displayItemTaxBreakdown: true,
               salesOrg: SalesOrg('2601'),
+            ),
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isConfirming: false,
+            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [
+                OrderHistoryDetailsOrderItem.empty().copyWith(
+                  qty: quantity,
+                )
+              ],
+              orderValue: subTotalValueWithoutTax,
+              totalTax: totalTax,
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final orderSummarySection =
+            find.byKey(WidgetKeys.orderSuccessOrderSummarySection);
+        //sub total (excl. tax)
+        expect(
+          find.descendant(
+            of: orderSummarySection,
+            matching: find.text('Subtotal (incl.tax):'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.byWidgetPredicate(
+            (widget) =>
+                widget is RichText &&
+                widget.key == WidgetKeys.priceComponent &&
+                widget.text
+                    .toPlainText()
+                    .contains(subTotalValueWithoutTax.toStringAsFixed(2)),
+          ),
+          findsOneWidget,
+        );
+        //grand total
+        expect(
+          find.descendant(
+            of: orderSummarySection,
+            matching: find.text('Grand Total:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.byWidgetPredicate(
+            (widget) =>
+                widget is RichText &&
+                widget.key == WidgetKeys.priceComponent &&
+                widget.text
+                    .toPlainText()
+                    .contains(grandTotalValue.toStringAsFixed(2)),
+          ),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      'Order summary price check - subTotal include exclude tax & grandTotal price & tax',
+      (tester) async {
+        const finalPrice = 88.0;
+        const vatValue = 9;
+        const quantity = 2;
+        const subTotalValueWithoutTax = finalPrice * quantity;
+        const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
+        const grandTotalValue = subTotalValueWithoutTax + totalTax;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              enablePaymentTerms: true,
+              vatValue: vatValue,
+              displayItemTaxBreakdown: true,
+              salesOrg: SalesOrg('2601'),
+              displaySubtotalTaxBreakdown: true,
             ),
           ),
         );
@@ -369,6 +448,10 @@ void main() {
             of: orderSummarySection,
             matching: find.text('Grand Total:'),
           ),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(WidgetKeys.orderSummaryTax),
           findsOneWidget,
         );
         expect(
@@ -649,7 +732,7 @@ void main() {
       );
     });
 
-    testWidgets('Show Payer Infomation', (tester) async {
+    testWidgets('Show Payer Information', (tester) async {
       final customerCodeInfo = fakeCustomerCodeInfo.copyWith(
         billToInfos: [
           BillToInfo.empty().copyWith(

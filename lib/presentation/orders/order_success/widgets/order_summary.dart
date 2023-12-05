@@ -9,6 +9,8 @@ class _OrderSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMYExternalSalesRep =
         context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
+    final salesOrgConfig =
+        context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return ListTile(
       key: WidgetKeys.orderSuccessOrderSummarySection,
@@ -28,7 +30,9 @@ class _OrderSummary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${context.tr('Subtotal (excl.tax)')}:',
+                '${context.tr(
+                  'Subtotal (${salesOrgConfig.displayPrefixTax}.tax)',
+                )}:',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
@@ -40,10 +44,27 @@ class _OrderSummary extends StatelessWidget {
               ),
             ],
           ),
+          if (salesOrgConfig.showSubtotalTaxBreakdown)
+            Row(
+              key: WidgetKeys.orderSummaryTax,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Tax at ${orderHistoryDetails.totalTaxPercentage}%',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                PriceComponent(
+                  key: WidgetKeys.orderSuccessSubTotal,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: orderHistoryDetails.totalTax.toString(),
+                ),
+              ],
+            ),
           const Divider(
             indent: 0,
             endIndent: 0,
-            thickness: 0.2,
+            thickness: 0.5,
             height: 15,
           ),
           Row(

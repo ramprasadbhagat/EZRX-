@@ -90,11 +90,19 @@ class OrderSummarySection extends StatelessWidget {
               title: context.tr('Subtotal (excl.tax)'),
               value: orderDetails.subTotalExcludeTax(isMYExternalSalesRep),
             ),
-            /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web
-            keyText: 'Tax at x%',
-            valueText: viewByOrderHistoryItem.totalTax.toString(),
+            const SizedBox(
+              height: 5,
             ),
-            const BalanceTextRow(
+            _PriceTile(
+              key: WidgetKeys.viewByOrderTaxKey,
+              orderNumber: orderDetails.orderNumber,
+              title: 'Tax at ${orderDetails.totalTaxPercentage}%',
+              value: orderDetails.totalTax,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            /*const BalanceTextRow(
               keyText: 'Stamp duty',
               valueText: '',
             ),
