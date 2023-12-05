@@ -147,11 +147,11 @@ class OrderHistoryItem with _$OrderHistoryItem {
 extension ViewByItemListExtension on List<OrderHistoryItem> {
   List<ViewByItemGroup> get getViewByOrderItemList {
     return List<OrderHistoryItem>.from(this)
-        .groupListsBy((item) => item.createdDate)
+        .groupListsBy((item) => item.createdDate.apiDateTimeString)
         .entries
         .map(
           (entry) => ViewByItemGroup(
-            createdDate: entry.key,
+            createdDate: DateTimeStringValue(entry.key),
             orderHistoryItem: entry.value,
             manufactureName: PrincipalName(''),
           ),
