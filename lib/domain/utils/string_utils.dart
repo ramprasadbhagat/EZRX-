@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 
 class StringUtils {
   static final priceFormatter = NumberFormat('###,###,###,###,##0.00');
+  static final priceFormatterWithDecimal =
+      NumberFormat('###,###,###,###,##0.##');
 
   static String displayPrice(
     SalesOrganisationConfigs salesOrgConfig,
@@ -28,10 +30,10 @@ class StringUtils {
     // Format the price, format the price base on signed parameter,
     // only use for PriceComponent.
     if (signedPositive && price.isNegative) {
-      return '${salesOrgConfig.currency.code} ${priceFormatter.format(price * -1)}';
+      return '${salesOrgConfig.currency.code} ${formatPrice(salesOrgConfig, price * -1)}';
     }
 
-    return '${salesOrgConfig.currency.code} ${priceFormatter.format(price)}';
+    return '${salesOrgConfig.currency.code} ${formatPrice(salesOrgConfig, price)}';
   }
 
   static String displayNaIfPriceIsZero(
@@ -81,4 +83,15 @@ class StringUtils {
           ? ''
           : DateFormat(_getDueDateFormat(salesOrganisation.salesOrg.country))
               .format(dueDate);
+
+  static String formatPrice(
+    SalesOrganisationConfigs salesOrgConfig,
+    double price,
+  ) {
+    final formatter = salesOrgConfig.salesOrg.isID
+        ? priceFormatterWithDecimal
+        : priceFormatter;
+
+    return formatter.format(price);
+  }
 }
