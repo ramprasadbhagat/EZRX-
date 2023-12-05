@@ -1,3 +1,4 @@
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
@@ -238,16 +239,18 @@ class Config {
   //
   //============================================================
 
+  DatadogSite get datadogSite => DatadogSite.eu1;
+
   String get datadogClientToken {
     switch (appFlavor) {
       case Flavor.dev:
       case Flavor.mock:
-        return 'pubcedb98f41ad09c615e595924fc2af61a';
+        return 'puba4e364a64aa781d35dbf6ddf6cbfa1b5';
       case Flavor.uat:
-        return 'pubc6632bc82ea01596b62d37cf9013f9f3';
+        return 'pub38abef4a2d6566119146870309832030';
       case Flavor.prod:
       default:
-        return 'pub2cdc211b6b697f0c8d6e05b936f102bd';
+        return 'pub269a36622765ad671c91467128e95b09';
     }
   }
 
@@ -255,12 +258,12 @@ class Config {
     switch (appFlavor) {
       case Flavor.dev:
       case Flavor.mock:
-        return 'd44796b4-e2d3-49b5-8d23-74c3c184165e';
+        return 'efd0c397-46af-49b9-a26e-cb66705653a1';
       case Flavor.uat:
-        return '4948c424-c0a4-4931-8c38-0999214b47e1';
+        return '61fde84c-a586-4348-a74d-5081128ee0d7';
       case Flavor.prod:
       default:
-        return '2c8c15aa-704c-46eb-ad5e-1aca818e61a3';
+        return 'aa26321c-b2b9-4eac-91c8-5a8dfd52222c';
     }
   }
 

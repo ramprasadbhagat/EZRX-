@@ -37,7 +37,7 @@ class DatadogService {
     configuration = DdSdkConfiguration(
       clientToken: config.datadogClientToken,
       env: config.appFlavor.name,
-      site: DatadogSite.us3,
+      site: config.datadogSite,
       trackingConsent: TrackingConsent.granted,
       nativeCrashReportEnabled: true,
       loggingConfiguration: LoggingConfiguration(
