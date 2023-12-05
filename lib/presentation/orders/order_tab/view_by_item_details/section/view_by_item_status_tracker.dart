@@ -12,7 +12,6 @@ class _ViewByItemStatusTracker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StatusTrackerSection(
-      createDateTime: orderHistoryItem.createdDate,
       title: context.tr('Order status'),
       status: orderHistoryItem.status.getOrDefaultValue(''),
       onTap: () => _showDetailsPage(

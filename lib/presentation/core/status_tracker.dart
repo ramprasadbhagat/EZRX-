@@ -9,12 +9,12 @@ class StatusTrackerSection extends StatelessWidget {
     Key? key,
     required this.title,
     required this.status,
-    required this.createDateTime,
+    this.createDateTime,
     required this.onTap,
   }) : super(key: key);
   final String title;
   final String status;
-  final DateTimeStringValue createDateTime;
+  final DateTimeStringValue? createDateTime;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
@@ -71,14 +71,15 @@ class StatusTrackerSection extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    createDateTime.dateTimeWithTimeZone,
-                    textAlign: TextAlign.end,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(color: ZPColors.darkGray),
-                  ),
+                  if (createDateTime != null)
+                    Text(
+                      createDateTime!.dateTimeWithTimeZone,
+                      textAlign: TextAlign.end,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: ZPColors.darkGray),
+                    ),
                 ],
               ),
             ],
