@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';

@@ -53,7 +53,7 @@ class PaymentSummaryFilterBloc
           state.copyWith(
             filter: state.filter.copyWith(
               filterStatuses: <FilterStatus>[
-                if (e.selected) e.filterStatus,
+                e.filterStatus,
               ],
             ),
           ),

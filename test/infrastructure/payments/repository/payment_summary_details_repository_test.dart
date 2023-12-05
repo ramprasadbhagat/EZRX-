@@ -339,7 +339,8 @@ void main() {
               paymentBatchAdditionalInfo:
                   paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
               paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
-              transactionCurrency: paymentSummaryDetails.transactionCurrency,
+              transactionCurrency: paymentSummaryDetails.transactionCurrency
+                  .getOrDefaultValue(''),
               valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
               zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
               shipToCode: ShipToInfo.empty().shipToCustomerCode,
@@ -369,7 +370,8 @@ void main() {
               paymentBatchAdditionalInfo:
                   paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
               paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
-              transactionCurrency: paymentSummaryDetails.transactionCurrency,
+              transactionCurrency: paymentSummaryDetails.transactionCurrency
+                  .getOrDefaultValue(''),
               valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
               zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
               shipToCode: ShipToInfo.empty().shipToCustomerCode,
@@ -401,7 +403,8 @@ void main() {
               paymentBatchAdditionalInfo:
                   paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
               paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
-              transactionCurrency: paymentSummaryDetails.transactionCurrency,
+              transactionCurrency: paymentSummaryDetails.transactionCurrency
+                  .getOrDefaultValue(''),
               valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
               zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
               shipToCode: ShipToInfo.empty().shipToCustomerCode,

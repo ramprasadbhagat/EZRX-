@@ -22,7 +22,6 @@ class PaymentSummaryFilterEvent with _$PaymentSummaryFilterEvent {
 
   const factory PaymentSummaryFilterEvent.statusChanged(
     FilterStatus filterStatus,
-    bool selected,
   ) = _StatusChanged;
 
   const factory PaymentSummaryFilterEvent.setCreatedDate(

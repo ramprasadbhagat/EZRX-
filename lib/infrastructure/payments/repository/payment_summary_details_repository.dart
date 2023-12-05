@@ -160,7 +160,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
         paymentBatchAdditionalInfo:
             paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
         paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
-        transactionCurrency: paymentSummaryDetails.transactionCurrency,
+        transactionCurrency: paymentSummaryDetails.transactionCurrency.getOrDefaultValue(''),
         valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
         zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
       );

@@ -24,8 +24,7 @@ mixin _$PaymentSummaryFilterEvent {
     required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(FilterStatus filterStatus, bool selected)
-        statusChanged,
+    required TResult Function(FilterStatus filterStatus) statusChanged,
     required TResult Function(DateTimeRange dateRange) setCreatedDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,7 +36,7 @@ mixin _$PaymentSummaryFilterEvent {
     TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult? Function(FilterStatus filterStatus)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setCreatedDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -48,7 +47,7 @@ mixin _$PaymentSummaryFilterEvent {
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult Function(FilterStatus filterStatus)? statusChanged,
     TResult Function(DateTimeRange dateRange)? setCreatedDate,
     required TResult orElse(),
   }) =>
@@ -181,8 +180,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(FilterStatus filterStatus, bool selected)
-        statusChanged,
+    required TResult Function(FilterStatus filterStatus) statusChanged,
     required TResult Function(DateTimeRange dateRange) setCreatedDate,
   }) {
     return initialized(salesOrg);
@@ -197,7 +195,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult? Function(FilterStatus filterStatus)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setCreatedDate,
   }) {
     return initialized?.call(salesOrg);
@@ -211,7 +209,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult Function(FilterStatus filterStatus)? statusChanged,
     TResult Function(DateTimeRange dateRange)? setCreatedDate,
     required TResult orElse(),
   }) {
@@ -363,8 +361,7 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(FilterStatus filterStatus, bool selected)
-        statusChanged,
+    required TResult Function(FilterStatus filterStatus) statusChanged,
     required TResult Function(DateTimeRange dateRange) setCreatedDate,
   }) {
     return openFilterBottomSheet(appliedFilter);
@@ -379,7 +376,7 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult? Function(FilterStatus filterStatus)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setCreatedDate,
   }) {
     return openFilterBottomSheet?.call(appliedFilter);
@@ -393,7 +390,7 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult Function(FilterStatus filterStatus)? statusChanged,
     TResult Function(DateTimeRange dateRange)? setCreatedDate,
     required TResult orElse(),
   }) {
@@ -507,8 +504,7 @@ class _$_ValidateFilters implements _ValidateFilters {
     required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(FilterStatus filterStatus, bool selected)
-        statusChanged,
+    required TResult Function(FilterStatus filterStatus) statusChanged,
     required TResult Function(DateTimeRange dateRange) setCreatedDate,
   }) {
     return validateFilters();
@@ -523,7 +519,7 @@ class _$_ValidateFilters implements _ValidateFilters {
     TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult? Function(FilterStatus filterStatus)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setCreatedDate,
   }) {
     return validateFilters?.call();
@@ -537,7 +533,7 @@ class _$_ValidateFilters implements _ValidateFilters {
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult Function(FilterStatus filterStatus)? statusChanged,
     TResult Function(DateTimeRange dateRange)? setCreatedDate,
     required TResult orElse(),
   }) {
@@ -673,8 +669,7 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
     required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(FilterStatus filterStatus, bool selected)
-        statusChanged,
+    required TResult Function(FilterStatus filterStatus) statusChanged,
     required TResult Function(DateTimeRange dateRange) setCreatedDate,
   }) {
     return amountValueFromChanged(amountValueFrom);
@@ -689,7 +684,7 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
     TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult? Function(FilterStatus filterStatus)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setCreatedDate,
   }) {
     return amountValueFromChanged?.call(amountValueFrom);
@@ -703,7 +698,7 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult Function(FilterStatus filterStatus)? statusChanged,
     TResult Function(DateTimeRange dateRange)? setCreatedDate,
     required TResult orElse(),
   }) {
@@ -845,8 +840,7 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
     required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(FilterStatus filterStatus, bool selected)
-        statusChanged,
+    required TResult Function(FilterStatus filterStatus) statusChanged,
     required TResult Function(DateTimeRange dateRange) setCreatedDate,
   }) {
     return amountValueToChanged(amountValueTo);
@@ -861,7 +855,7 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
     TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult? Function(FilterStatus filterStatus)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setCreatedDate,
   }) {
     return amountValueToChanged?.call(amountValueTo);
@@ -875,7 +869,7 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult Function(FilterStatus filterStatus)? statusChanged,
     TResult Function(DateTimeRange dateRange)? setCreatedDate,
     required TResult orElse(),
   }) {
@@ -950,7 +944,7 @@ abstract class _$$_StatusChangedCopyWith<$Res> {
           _$_StatusChanged value, $Res Function(_$_StatusChanged) then) =
       __$$_StatusChangedCopyWithImpl<$Res>;
   @useResult
-  $Res call({FilterStatus filterStatus, bool selected});
+  $Res call({FilterStatus filterStatus});
 }
 
 /// @nodoc
@@ -965,17 +959,12 @@ class __$$_StatusChangedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? filterStatus = null,
-    Object? selected = null,
   }) {
     return _then(_$_StatusChanged(
       null == filterStatus
           ? _value.filterStatus
           : filterStatus // ignore: cast_nullable_to_non_nullable
               as FilterStatus,
-      null == selected
-          ? _value.selected
-          : selected // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -983,16 +972,14 @@ class __$$_StatusChangedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_StatusChanged implements _StatusChanged {
-  const _$_StatusChanged(this.filterStatus, this.selected);
+  const _$_StatusChanged(this.filterStatus);
 
   @override
   final FilterStatus filterStatus;
-  @override
-  final bool selected;
 
   @override
   String toString() {
-    return 'PaymentSummaryFilterEvent.statusChanged(filterStatus: $filterStatus, selected: $selected)';
+    return 'PaymentSummaryFilterEvent.statusChanged(filterStatus: $filterStatus)';
   }
 
   @override
@@ -1001,13 +988,11 @@ class _$_StatusChanged implements _StatusChanged {
         (other.runtimeType == runtimeType &&
             other is _$_StatusChanged &&
             (identical(other.filterStatus, filterStatus) ||
-                other.filterStatus == filterStatus) &&
-            (identical(other.selected, selected) ||
-                other.selected == selected));
+                other.filterStatus == filterStatus));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filterStatus, selected);
+  int get hashCode => Object.hash(runtimeType, filterStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -1024,11 +1009,10 @@ class _$_StatusChanged implements _StatusChanged {
     required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(FilterStatus filterStatus, bool selected)
-        statusChanged,
+    required TResult Function(FilterStatus filterStatus) statusChanged,
     required TResult Function(DateTimeRange dateRange) setCreatedDate,
   }) {
-    return statusChanged(filterStatus, selected);
+    return statusChanged(filterStatus);
   }
 
   @override
@@ -1040,10 +1024,10 @@ class _$_StatusChanged implements _StatusChanged {
     TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult? Function(FilterStatus filterStatus)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setCreatedDate,
   }) {
-    return statusChanged?.call(filterStatus, selected);
+    return statusChanged?.call(filterStatus);
   }
 
   @override
@@ -1054,12 +1038,12 @@ class _$_StatusChanged implements _StatusChanged {
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult Function(FilterStatus filterStatus)? statusChanged,
     TResult Function(DateTimeRange dateRange)? setCreatedDate,
     required TResult orElse(),
   }) {
     if (statusChanged != null) {
-      return statusChanged(filterStatus, selected);
+      return statusChanged(filterStatus);
     }
     return orElse();
   }
@@ -1114,11 +1098,10 @@ class _$_StatusChanged implements _StatusChanged {
 }
 
 abstract class _StatusChanged implements PaymentSummaryFilterEvent {
-  const factory _StatusChanged(
-      final FilterStatus filterStatus, final bool selected) = _$_StatusChanged;
+  const factory _StatusChanged(final FilterStatus filterStatus) =
+      _$_StatusChanged;
 
   FilterStatus get filterStatus;
-  bool get selected;
   @JsonKey(ignore: true)
   _$$_StatusChangedCopyWith<_$_StatusChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1195,8 +1178,7 @@ class _$_SetCreatedDate implements _SetCreatedDate {
     required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(FilterStatus filterStatus, bool selected)
-        statusChanged,
+    required TResult Function(FilterStatus filterStatus) statusChanged,
     required TResult Function(DateTimeRange dateRange) setCreatedDate,
   }) {
     return setCreatedDate(dateRange);
@@ -1211,7 +1193,7 @@ class _$_SetCreatedDate implements _SetCreatedDate {
     TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult? Function(FilterStatus filterStatus)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setCreatedDate,
   }) {
     return setCreatedDate?.call(dateRange);
@@ -1225,7 +1207,7 @@ class _$_SetCreatedDate implements _SetCreatedDate {
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(FilterStatus filterStatus, bool selected)? statusChanged,
+    TResult Function(FilterStatus filterStatus)? statusChanged,
     TResult Function(DateTimeRange dateRange)? setCreatedDate,
     required TResult orElse(),
   }) {

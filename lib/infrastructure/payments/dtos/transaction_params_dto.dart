@@ -1,6 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/transaction_params.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -40,22 +38,6 @@ class TransactionParamsDto with _$TransactionParamsDto {
           entity.filter.filterStatuses.firstOrNull?.apiStatuses ?? <String>[],
       first: entity.first,
       after: entity.after,
-    );
-  }
-
-  TransactionParams toDomain() {
-    return TransactionParams(
-      customerCode: customer,
-      first: first,
-      after: after,
-      filter: PaymentSummaryFilter(
-        amountValueFrom: RangeValue(amountMin.toString()),
-        amountValueTo: RangeValue(amountMax.toString()),
-        createdDateFrom: DateTimeStringValue(createdStartDate),
-        createdDateTo: DateTimeStringValue(createdEndDate),
-        filterStatuses: status.map((x) => FilterStatus(x)).toList(),
-      ),
-      searchKey: SearchKey(search),
     );
   }
 

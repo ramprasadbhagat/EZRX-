@@ -257,23 +257,23 @@ void main() {
       await tester.pump();
       expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending')),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed')),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
         findsNothing,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed')),
         findsNothing,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
         findsNothing,
       );
     });
@@ -296,23 +296,23 @@ void main() {
       await tester.pump();
       expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed')),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed')),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending')),
         findsNothing,
       );
     });
@@ -334,23 +334,23 @@ void main() {
       await tester.pump();
       expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed')),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed')),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending', false)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending')),
         findsNothing,
       );
     });
@@ -742,7 +742,7 @@ void main() {
         Stream.fromIterable([
           PaymentSummaryFilterState.initial().copyWith(
             filter: PaymentSummaryFilter.empty()
-                .copyWith(filterStatuses: [FilterStatus('In Progress')]),
+                .copyWith(filterStatuses: []),
           )
         ]),
       );
@@ -759,15 +759,17 @@ void main() {
 
       expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
 
-      expect(find.byType(CheckboxListTile).first, findsOneWidget);
 
-      await tester.tap(find.text('In Progress'));
+      final inProgressRadio = find.text('In Progress');
+
+      expect(inProgressRadio, findsOneWidget);
+
+      await tester.tap(inProgressRadio);
 
       verify(
         () => paymentSummaryFilterBloc.add(
           PaymentSummaryFilterEvent.statusChanged(
             FilterStatus('In Progress'),
-            false,
           ),
         ),
       ).called(1);

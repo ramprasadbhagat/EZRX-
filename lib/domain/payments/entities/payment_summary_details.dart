@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
@@ -19,10 +20,10 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
     required StringValue paymentID,
     required DateTimeStringValue valueDate,
     required double paymentAmount,
-    required String transactionCurrency,
+    required Currency transactionCurrency,
     required String paymentDocument,
     required FilterStatus status,
-    required StringValue paymentMethod,
+    required PaymentMethodValue paymentMethod,
     required String iban,
     required String bankIdentification,
     required String bankCountryKey,
@@ -59,8 +60,8 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         paymentCardTypeName: '',
         paymentDocument: '',
         paymentID: StringValue(''),
-        paymentMethod: StringValue(''),
-        transactionCurrency: '',
+        paymentMethod: PaymentMethodValue(''),
+        transactionCurrency: Currency(''),
         valueDate: DateTimeStringValue(''),
         createdDate: DateTimeStringValue(''),
         adviceExpiry: AdviceExpiryValue(''),
@@ -90,11 +91,10 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         paymentCardTypeName: '',
         paymentDocument: '',
         paymentID: StringValue(invoice.paymentID),
-        paymentMethod: StringValue(
-          invoice.paymentMethod.getOrDefaultValue(''),
+        paymentMethod: invoice.paymentMethod,
+        transactionCurrency: Currency(
+          invoice.paymentItems.firstOrNull?.transactionCurrency ?? '',
         ),
-        transactionCurrency:
-            invoice.paymentItems.firstOrNull?.transactionCurrency ?? '',
         valueDate: invoice.valueDate,
         createdDate: DateTimeStringValue(''),
         adviceExpiry: AdviceExpiryValue(''),
@@ -125,8 +125,8 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         paymentCardTypeName: '',
         paymentDocument: '',
         paymentID: StringValue(createVirtualAccount.id),
-        paymentMethod: StringValue(''),
-        transactionCurrency: '',
+        paymentMethod: PaymentMethodValue(''),
+        transactionCurrency: Currency(''),
         valueDate: createVirtualAccount.createdOn,
         createdDate: createVirtualAccount.createdOn,
         adviceExpiry: AdviceExpiryValue(''),

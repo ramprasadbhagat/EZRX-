@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -59,6 +60,16 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
   }) = _PaymentSummaryDetailsDto;
 
   PaymentSummaryDetails toDomain() {
+    final paymentMethodValue = PaymentMethodValue(paymentMethod);
+    var filterStatus = FilterStatus(status);
+    final currency = Currency(transactionCurrency);
+
+    if (filterStatus.getIsPending) {
+      filterStatus = (paymentMethodValue.isBankIn || currency.isSG)
+          ? filterStatus
+          : FilterStatus('In Progress');
+    }
+
     return PaymentSummaryDetails(
       bankAccountNumber: StringValue(bankAccountNumber),
       bankCountryKey: bankCountryKey,
@@ -67,7 +78,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       bankName: StringValue(bankName),
       customId: customId,
       iban: iban,
-      status: FilterStatus(status),
+      status: filterStatus,
       paymentAmount: paymentAmount,
       paymentCardHolderName: paymentCardHolderName,
       paymentCardID: paymentCardID,
@@ -76,8 +87,8 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       paymentCardTypeName: paymentCardTypeName,
       paymentDocument: paymentDocument,
       paymentID: StringValue(paymentID),
-      paymentMethod: StringValue(paymentMethod),
-      transactionCurrency: transactionCurrency,
+      paymentMethod: paymentMethodValue,
+      transactionCurrency: currency,
       valueDate: DateTimeStringValue(valueDate),
       createdDate: DateTimeStringValue(createdDate),
       adviceExpiry: AdviceExpiryValue(adviceExpiry),
@@ -95,7 +106,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       paymentID: details.paymentID.getOrDefaultValue(''),
       valueDate: details.valueDate.getOrDefaultValue(''),
       paymentAmount: details.paymentAmount,
-      transactionCurrency: details.transactionCurrency,
+      transactionCurrency: details.transactionCurrency.getOrDefaultValue(''),
       paymentDocument: details.paymentDocument,
       status: details.status.getOrDefaultValue(''),
       paymentMethod: details.paymentMethod.getOrDefaultValue(''),

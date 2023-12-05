@@ -17,10 +17,9 @@ class _PaymentSummaryStatusesSelector extends StatelessWidget {
         return Column(
           children: state.statuses.map((FilterStatus status) {
             final name = status.getValue();
-            final value = state.filter.filterStatuses.contains(status);
 
-            return CheckboxListTile(
-              key: WidgetKeys.paymentSummaryFilterStatus(name, value),
+            return RadioListTile(
+              key: WidgetKeys.paymentSummaryFilterStatus(name),
               contentPadding: EdgeInsets.zero,
               title: Text(
                 name,
@@ -32,15 +31,14 @@ class _PaymentSummaryStatusesSelector extends StatelessWidget {
               controlAffinity: ListTileControlAffinity.leading,
               dense: true,
               visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-              onChanged: (bool? value) {
+              onChanged: (FilterStatus? value) {
                 context.read<PaymentSummaryFilterBloc>().add(
-                      PaymentSummaryFilterEvent.statusChanged(
-                        status,
-                        value ?? false,
-                      ),
+                      PaymentSummaryFilterEvent.statusChanged(status),
                     );
               },
-              value: value,
+              groupValue: state.filter.filterStatuses
+                  .firstWhereOrNull((filterStatus) => filterStatus == status),
+              value: status,
             );
           }).toList(),
         );

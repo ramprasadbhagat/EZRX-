@@ -322,6 +322,10 @@ class Currency extends ValueObject<String> {
     return value.getOrElse(() => '').toLowerCase() == 'thb';
   }
 
+  bool get isSG {
+    return value.getOrElse(() => '').toLowerCase() == 'sgd';
+  }
+
   bool get isMM {
     return value.getOrElse(() => '').toLowerCase() == 'mmk' ||
         value.getOrElse(() => '').toLowerCase() == 'usd';

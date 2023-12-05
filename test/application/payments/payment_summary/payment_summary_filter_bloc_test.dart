@@ -137,7 +137,6 @@ void main() {
         bloc.add(
           PaymentSummaryFilterEvent.statusChanged(
             FilterStatus('In Progress'),
-            true,
           ),
         );
       },
@@ -151,32 +150,6 @@ void main() {
               getDateStringByDateTime(fakeFromDate),
             ),
             filterStatuses: [FilterStatus('In Progress')],
-          ),
-        ),
-      ],
-    );
-
-    blocTest(
-      'Status Changed - removed',
-      build: () =>
-          PaymentSummaryFilterBloc(paymentSummaryRepository: repository),
-      seed: () => PaymentSummaryFilterState.initial().copyWith(
-        filter: paymentSummaryFilter.copyWith(
-          filterStatuses: [FilterStatus('In Progress')],
-        ),
-      ),
-      act: (PaymentSummaryFilterBloc bloc) {
-        bloc.add(
-          PaymentSummaryFilterEvent.statusChanged(
-            FilterStatus('In Progress'),
-            false,
-          ),
-        );
-      },
-      expect: () => [
-        PaymentSummaryFilterState.initial().copyWith(
-          filter: paymentSummaryFilter.copyWith(
-            filterStatuses: <FilterStatus>[],
           ),
         ),
       ],

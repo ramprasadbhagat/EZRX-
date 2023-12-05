@@ -19,10 +19,10 @@ mixin _$PaymentSummaryDetails {
   StringValue get paymentID => throw _privateConstructorUsedError;
   DateTimeStringValue get valueDate => throw _privateConstructorUsedError;
   double get paymentAmount => throw _privateConstructorUsedError;
-  String get transactionCurrency => throw _privateConstructorUsedError;
+  Currency get transactionCurrency => throw _privateConstructorUsedError;
   String get paymentDocument => throw _privateConstructorUsedError;
   FilterStatus get status => throw _privateConstructorUsedError;
-  StringValue get paymentMethod => throw _privateConstructorUsedError;
+  PaymentMethodValue get paymentMethod => throw _privateConstructorUsedError;
   String get iban => throw _privateConstructorUsedError;
   String get bankIdentification => throw _privateConstructorUsedError;
   String get bankCountryKey => throw _privateConstructorUsedError;
@@ -59,10 +59,10 @@ abstract class $PaymentSummaryDetailsCopyWith<$Res> {
       {StringValue paymentID,
       DateTimeStringValue valueDate,
       double paymentAmount,
-      String transactionCurrency,
+      Currency transactionCurrency,
       String paymentDocument,
       FilterStatus status,
-      StringValue paymentMethod,
+      PaymentMethodValue paymentMethod,
       String iban,
       String bankIdentification,
       String bankCountryKey,
@@ -139,7 +139,7 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
       transactionCurrency: null == transactionCurrency
           ? _value.transactionCurrency
           : transactionCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Currency,
       paymentDocument: null == paymentDocument
           ? _value.paymentDocument
           : paymentDocument // ignore: cast_nullable_to_non_nullable
@@ -151,7 +151,7 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as StringValue,
+              as PaymentMethodValue,
       iban: null == iban
           ? _value.iban
           : iban // ignore: cast_nullable_to_non_nullable
@@ -240,10 +240,10 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
       {StringValue paymentID,
       DateTimeStringValue valueDate,
       double paymentAmount,
-      String transactionCurrency,
+      Currency transactionCurrency,
       String paymentDocument,
       FilterStatus status,
-      StringValue paymentMethod,
+      PaymentMethodValue paymentMethod,
       String iban,
       String bankIdentification,
       String bankCountryKey,
@@ -317,7 +317,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
       transactionCurrency: null == transactionCurrency
           ? _value.transactionCurrency
           : transactionCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Currency,
       paymentDocument: null == paymentDocument
           ? _value.paymentDocument
           : paymentDocument // ignore: cast_nullable_to_non_nullable
@@ -329,7 +329,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as StringValue,
+              as PaymentMethodValue,
       iban: null == iban
           ? _value.iban
           : iban // ignore: cast_nullable_to_non_nullable
@@ -445,13 +445,13 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   @override
   final double paymentAmount;
   @override
-  final String transactionCurrency;
+  final Currency transactionCurrency;
   @override
   final String paymentDocument;
   @override
   final FilterStatus status;
   @override
-  final StringValue paymentMethod;
+  final PaymentMethodValue paymentMethod;
   @override
   final String iban;
   @override
@@ -601,10 +601,10 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
           {required final StringValue paymentID,
           required final DateTimeStringValue valueDate,
           required final double paymentAmount,
-          required final String transactionCurrency,
+          required final Currency transactionCurrency,
           required final String paymentDocument,
           required final FilterStatus status,
-          required final StringValue paymentMethod,
+          required final PaymentMethodValue paymentMethod,
           required final String iban,
           required final String bankIdentification,
           required final String bankCountryKey,
@@ -633,13 +633,13 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   @override
   double get paymentAmount;
   @override
-  String get transactionCurrency;
+  Currency get transactionCurrency;
   @override
   String get paymentDocument;
   @override
   FilterStatus get status;
   @override
-  StringValue get paymentMethod;
+  PaymentMethodValue get paymentMethod;
   @override
   String get iban;
   @override

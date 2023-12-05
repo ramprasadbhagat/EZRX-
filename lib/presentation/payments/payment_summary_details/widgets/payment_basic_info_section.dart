@@ -43,7 +43,7 @@ class _PaymentBasicInfoSection extends StatelessWidget {
                 valueFlex: 3,
                 keyText: context.tr('Payment method'),
                 valueTextLoading: state.isDetailFetching,
-                valueText: state.details.paymentMethod.displayDashIfEmpty,
+                valueText: state.details.paymentMethod.getOrDefaultValue(''),
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),

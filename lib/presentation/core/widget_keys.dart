@@ -809,8 +809,8 @@ class WidgetKeys {
   static const Key paymentSummaryPage = Key('paymentSummaryPage');
   static const Key paymentSummaryAppBar = Key('paymentSummaryAppBar');
   static const Key paymentListLoading = Key('paymentListLoading');
-  static Key paymentSummaryFilterStatus(String name, bool value) =>
-      Key('paymentSummaryFilterStatus$name$value');
+  static Key paymentSummaryFilterStatus(String name) =>
+      Key('paymentSummaryFilterStatus$name');
   static const Key paymentSummaryFilterIcon = Key('paymentSummaryFilterIcon');
   static const Key paymentSummaryGroup = Key('paymentSummaryGroup');
   static const Key paymentSummaryItem = Key('paymentSummaryItem');

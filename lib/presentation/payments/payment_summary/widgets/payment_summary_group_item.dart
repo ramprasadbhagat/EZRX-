@@ -90,7 +90,8 @@ class _PaymentSummaryItem extends StatelessWidget {
             ),
             StatusLabel(
               key: WidgetKeys.paymentSummaryTileStatus,
-              status: StatusType(details.status.displayStatusText),
+              status:
+                  StatusType(details.status.displayStatusText),
             ),
           ],
         ),

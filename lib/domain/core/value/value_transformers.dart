@@ -611,6 +611,9 @@ Color getAdviceExpiryColor(String status) =>
 
 bool isFailed(String status) => status == 'Failed';
 
+bool isPending(String status) => status == 'Pending';
+
+
 Color getAdviceExpiryColorFailed(String status) {
   return isFailed(status) ? ZPColors.red : ZPColors.white;
 }

@@ -38,7 +38,7 @@ class PaymentSummaryFilterRobot {
   void verifyNoStatusFilterApplied() {
     for (final option in statusFilterOptions) {
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus(option, true)),
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus(option)),
         findsNothing,
       );
     }
@@ -149,7 +149,7 @@ class PaymentSummaryFilterRobot {
 
   void verifyStatusFilterValue(String name, bool value) {
     expect(
-      find.byKey(WidgetKeys.paymentSummaryFilterStatus(name, value)),
+      find.byKey(WidgetKeys.paymentSummaryFilterStatus(name)),
       findsOneWidget,
     );
   }

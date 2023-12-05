@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/transaction_invoice_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -49,7 +50,7 @@ class TransactionDetailDto with _$TransactionDetailDto {
       paymentID: StringValue(id),
       status: FilterStatus(status),
       zzAdvice: StringValue(reference.isNotEmpty ? reference : id),
-      paymentMethod: StringValue('Virtual Bank Account'),
+      paymentMethod: PaymentMethodValue('Virtual Bank Account'),
       createdDate: DateTimeStringValue(createdOn),
       paymentItems: invoices.map((e) => e.toDomain()).toList(),
       paymentAmount: amountPayable,

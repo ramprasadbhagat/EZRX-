@@ -412,5 +412,7 @@ class FilterStatus extends ValueObject<String> {
   Color get getAdviceExpiryTextColorForFailed =>
       getAdviceExpiryColorFailed(value.getOrElse(() => ''));
 
+  bool get getIsPending => isPending(value.getOrElse(() => ''));
+
   const FilterStatus._(this.value);
 }
