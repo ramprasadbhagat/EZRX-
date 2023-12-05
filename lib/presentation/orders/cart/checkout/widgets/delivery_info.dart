@@ -179,44 +179,7 @@ class _TextFormField extends StatefulWidget {
 }
 
 class _TextFormFieldState extends State<_TextFormField> {
-  TextEditingController _controller = TextEditingController();
-
-  TextEditingController _getController({required String text}) {
-    return TextEditingController.fromValue(
-      TextEditingValue(
-        text: text,
-        selection: TextSelection.collapsed(
-          offset: _controller.selection.base.offset,
-        ),
-      ),
-    );
-  }
-
-  void _initialValue() {
-    switch (widget.label) {
-      case DeliveryInfoLabel.poReference:
-        _controller = _getController(
-          text: widget.deliveryInfoData.poReference.getValue(),
-        );
-        break;
-      case DeliveryInfoLabel.deliveryInstruction:
-        _controller = _getController(
-          text: widget.deliveryInfoData.deliveryInstruction.getValue(),
-        );
-        break;
-      case DeliveryInfoLabel.contactPerson:
-        _controller = _getController(
-          text: widget.deliveryInfoData.contactPerson.getValue(),
-        );
-        break;
-      case DeliveryInfoLabel.referenceNote:
-        _controller = _getController(
-          text: widget.deliveryInfoData.referenceNote.getValue(),
-        );
-        break;
-      default:
-    }
-  }
+  final _controller = TextEditingController();
 
   @override
   void dispose() {
@@ -227,13 +190,42 @@ class _TextFormFieldState extends State<_TextFormField> {
   @override
   void initState() {
     super.initState();
-    _initialValue();
+    _updateValue();
   }
 
   @override
   void didUpdateWidget(covariant _TextFormField oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _initialValue();
+    //This check is required for keyboard with Chinese character to work
+    //This prevent _updateValue() called every time the data is updated, only update
+    //the controller whenever new text is different from the current text stored inside controller
+    if (_data != _controller.text) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _updateValue();
+      });
+    }
+  }
+
+  void _updateValue() {
+    _controller.value = TextEditingValue(
+      text: _data,
+      selection: TextSelection.collapsed(offset: _data.length),
+    );
+  }
+
+  String get _data {
+    switch (widget.label) {
+      case DeliveryInfoLabel.poReference:
+        return widget.deliveryInfoData.poReference.getValue();
+      case DeliveryInfoLabel.deliveryInstruction:
+        return widget.deliveryInfoData.deliveryInstruction.getValue();
+      case DeliveryInfoLabel.contactPerson:
+        return widget.deliveryInfoData.contactPerson.getValue();
+      case DeliveryInfoLabel.referenceNote:
+        return widget.deliveryInfoData.referenceNote.getValue();
+      default:
+        return '';
+    }
   }
 
   @override
