@@ -16,7 +16,7 @@ class _ContactNumberTextField extends StatelessWidget {
           children: [
             RichText(
               text: TextSpan(
-                text: context.tr('Contact Number'),
+                text: context.tr('Contact number'),
                 style: Theme.of(context).textTheme.labelSmall,
                 children: <TextSpan>[
                   TextSpan(
