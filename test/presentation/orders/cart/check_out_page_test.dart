@@ -1101,7 +1101,7 @@ void main() {
                   as DropdownButtonFormField<String>)
               .validator
               ?.call('PaymentTerm field'),
-          'Please Select Payment Term.',
+          'Please Select Payment Term',
         );
       },
     );

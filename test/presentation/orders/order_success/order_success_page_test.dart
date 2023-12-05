@@ -446,7 +446,7 @@ void main() {
         expect(
           find.descendant(
             of: orderSummarySection,
-            matching: find.text('Grand Total:'),
+            matching: find.text('${'Grand total'.tr()}:'),
           ),
           findsOneWidget,
         );

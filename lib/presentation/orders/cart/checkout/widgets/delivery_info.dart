@@ -418,7 +418,7 @@ class _PaymentTerm extends StatelessWidget {
                           .fold(
                             (f) => f.maybeMap(
                               empty: (_) =>
-                                  context.tr('Please Select Payment Term.'),
+                                  context.tr('Please Select Payment Term'),
                               orElse: () => null,
                             ),
                             (_) => null,
@@ -455,7 +455,7 @@ class _MobileNumber extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                context.tr('Mobile number'),
+                context.tr('Contact number'),
                 style: Theme.of(context).textTheme.labelSmall,
               ),
               const SizedBox(

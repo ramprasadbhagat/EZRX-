@@ -187,7 +187,7 @@ class _QuantityAndPrice extends StatelessWidget {
             children: [
               _DisplayMaterialDetails(
                 child: Text(
-                  'Qty: ${cartItem.quantity}',
+                  '${context.tr('Qty')}: ${cartItem.quantity}',
                   key: WidgetKeys.cartItemProductQty,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: ZPColors.neutralsBlack,

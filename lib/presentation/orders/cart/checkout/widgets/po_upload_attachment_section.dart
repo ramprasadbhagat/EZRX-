@@ -138,7 +138,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
     return PlatformAlertDialog(
       key: WidgetKeys.poAttachmentUploadDialog,
       title: Text(
-        'Upload Attachment'.tr(),
+        'Upload attachment'.tr(),
       ),
       content: Text(
         'Choose a photo or a file'.tr(),

@@ -71,7 +71,7 @@ class _OrderSummary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${context.tr('Grand Total')}:',
+                '${context.tr('Grand total')}:',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
