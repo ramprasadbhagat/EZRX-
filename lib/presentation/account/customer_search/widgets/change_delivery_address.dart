@@ -1,33 +1,9 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/presentation/core/svg_image.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:flutter/material.dart';
+part of 'package:ezrxmobile/presentation/account/customer_search/customer_search.dart';
 
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-class ChangeDeliveryAddress extends StatelessWidget {
+class _ChangeDeliveryAddress extends StatelessWidget {
   final ShipToInfo shipToInfo;
   final CustomerCodeInfo customerCodeInfo;
-  const ChangeDeliveryAddress({
+  const _ChangeDeliveryAddress({
     required this.shipToInfo,
     required this.customerCodeInfo,
     Key? key,

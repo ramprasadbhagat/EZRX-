@@ -16,7 +16,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/presentation/account/customer_search.dart';
+import 'package:ezrxmobile/presentation/account/customer_search/customer_search.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -310,7 +310,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      final noCustomerFound = find.text('That didn’t match anything');
+      final noCustomerFound = find.text("That didn't match anything");
       final loadIndicator = find.byKey(const Key('loadIndicator'));
 
       final gesture = await tester

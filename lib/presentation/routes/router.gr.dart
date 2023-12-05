@@ -22,7 +22,7 @@ import '../../domain/payments/entities/credit_and_invoice_item.dart' as _i92;
 import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i48;
 import '../account/change_password/change_password_page.dart' as _i21;
 import '../account/contact_us/contact_us_page.dart' as _i22;
-import '../account/customer_search.dart' as _i24;
+import '../account/customer_search/customer_search.dart' as _i24;
 import '../account/ez_point/ez_point_webview_page.dart' as _i32;
 import '../account/notification_settings/notification_settings_page.dart'
     as _i23;

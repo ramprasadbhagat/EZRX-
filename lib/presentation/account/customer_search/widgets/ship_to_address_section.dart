@@ -1,0 +1,88 @@
+part of 'package:ezrxmobile/presentation/account/customer_search/customer_search.dart';
+
+class _ShipToAddressSection extends StatelessWidget {
+  final ShipToInfo shipToInfo;
+  final CustomerCodeInfo customerCodeInfo;
+  const _ShipToAddressSection({
+    Key? key,
+    required this.shipToInfo,
+    required this.customerCodeInfo,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          key: WidgetKeys.shipToAddressOption(shipToInfo.shipToCustomerCode),
+          minLeadingWidth: 0,
+          horizontalTitleGap: 9,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+          minVerticalPadding: 16,
+          leading: const Icon(
+            Icons.location_on_sharp,
+            color: ZPColors.darkYellow,
+          ),
+          title: _ShipToAddressTitle(shipToInfo: shipToInfo),
+          subtitle: _ShipToAddressInfo(shipToInfo: shipToInfo),
+          onTap: () => _onShipToCodeChange(context),
+        ),
+        _isDividerVisible
+            ? const Divider(
+                indent: 20,
+                endIndent: 20,
+                color: ZPColors.extraLightGrey3,
+              )
+            : const SizedBox.shrink(),
+      ],
+    );
+  }
+
+  void _onShipToCodeChange(BuildContext context) {
+    final cartBloc = context.read<CartBloc>();
+    final customerBloc = context.read<CustomerCodeBloc>();
+    if (shipToInfo != customerBloc.state.shipToInfo &&
+        cartBloc.state.cartProducts.isNotEmpty) {
+      showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          ),
+        ),
+        builder: (_) {
+          return _ChangeDeliveryAddress(
+            shipToInfo: shipToInfo,
+            customerCodeInfo: customerCodeInfo,
+          );
+        },
+      );
+    } else {
+      context.router.popUntilRouteWithName(HomeNavigationTabbarRoute.name);
+      customerBloc.add(
+        CustomerCodeEvent.selected(
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+        ),
+      );
+      trackMixpanelEvent(
+        MixpanelEvents.shipToAddressSave,
+        props: {
+          MixpanelProps.shipToAddress: shipToInfo.shipToCustomerCode,
+        },
+      );
+      trackMixpanelEvent(
+        MixpanelEvents.customerCodeSave,
+        props: {
+          MixpanelProps.customerCode: customerCodeInfo.customerCodeSoldTo,
+        },
+      );
+    }
+  }
+
+  bool get _isDividerVisible =>
+      customerCodeInfo.shipToInfos.indexOf(shipToInfo) !=
+      customerCodeInfo.shipToInfos.length - 1;
+}

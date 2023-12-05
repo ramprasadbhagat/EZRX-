@@ -28,7 +28,7 @@ import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart'
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
-import 'package:ezrxmobile/presentation/account/customer_search.dart';
+import 'package:ezrxmobile/presentation/account/customer_search/customer_search.dart';
 import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/auth/login/login_page.dart';

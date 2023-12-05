@@ -8,7 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart'
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/filter/filter_sales_org_selector.dart';
-import 'package:ezrxmobile/presentation/account/customer_search.dart';
+import 'package:ezrxmobile/presentation/account/customer_search/customer_search.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
