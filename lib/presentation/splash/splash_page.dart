@@ -193,7 +193,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       const LoginFormEvent.loadLastSavedCred(),
                     );
 
-                if (context.supportedLocales.contains(context.deviceLocale)) {
+                // Check if the device's language code is supported
+                if (context.supportedLocales
+                    .map((locale) => locale.languageCode)
+                    .contains(context.deviceLocale.languageCode)) {
                   context.resetLocale();
                 } else {
                   context.setLocale(
@@ -217,7 +220,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<UserBloc, UserState>(
           listenWhen: (previous, current) =>
-              previous.user.id != current.user.id,
+              previous.user.id != current.user.id && current.user.id.isNotEmpty,
           listener: (context, state) {
             context
                 .setLocale(state.user.preferredLanguage.fromApiLanguageCode)
