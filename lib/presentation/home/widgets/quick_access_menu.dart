@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -139,6 +140,23 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     onTap: () => context.navigateTo(const PaymentPageRoute()),
   );
 
+  final homeQuickAccessEZPointMenu = _QuickAccessMenuData(
+    key: WidgetKeys.homeQuickAccessEZPointMenu,
+    icon: 'eZPoint.svg',
+    label: 'eZPoint',
+    onTap: () {
+      context.read<EZPointBloc>().add(
+            EZPointEvent.fetch(
+              customerCodeInfo:
+                  context.read<EligibilityBloc>().state.customerCodeInfo,
+            ),
+          );
+      context.router.push(
+        const EZPointWebviewPageRoute(),
+      );
+    },
+  );
+
   final homeQuickAccessChatSupportMenu = _QuickAccessMenuData(
     key: WidgetKeys.homeQuickAccessChatSupportMenu,
     icon: 'chat_support_menu.svg',
@@ -155,6 +173,7 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
       homeQuickAccessOrdersMenu,
     if (eligibilityState.isReturnsEnable) homeQuickAccessReturnsMenu,
     if (eligibilityState.isPaymentEnabled) homeQuickAccessPaymentsMenu,
+    if (eligibilityState.isIDMarket) homeQuickAccessEZPointMenu,
     // homeQuickAccessLoyaltyMenu,
     homeQuickAccessChatSupportMenu,
   ];

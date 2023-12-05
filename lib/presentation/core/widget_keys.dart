@@ -102,6 +102,8 @@ class WidgetKeys {
       Key('homeQuickAccessReturnsMenu');
   static const Key homeQuickAccessPaymentsMenu =
       Key('homeQuickAccessPaymentsMenu');
+  static const Key homeQuickAccessEZPointMenu =
+      Key('homeQuickAccessEZPointMenu');
   static const Key homeQuickAccessLoyaltyMenu =
       Key('homeQuickAccessLoyaltyMenu');
   static const Key homeQuickAccessChatSupportMenu =

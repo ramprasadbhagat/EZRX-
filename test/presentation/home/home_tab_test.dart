@@ -498,6 +498,49 @@ void main() {
           expect(homeQuickAccessPaymentsMenu, findsOneWidget);
         },
       );
+
+      testWidgets(
+        ' -> show homeQuickAccessEZPointMenu for ID',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                //For ID market
+                salesOrg: SalesOrg('1900'),
+              ),
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+
+          expect(find.text('eZPoint'), findsOneWidget);
+          final homeQuickAccessEZPointMenu =
+              find.byKey(WidgetKeys.homeQuickAccessEZPointMenu);
+          expect(homeQuickAccessEZPointMenu, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        ' -> hide homeQuickAccessEZPointMenu for other market',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                //For SG market
+                salesOrg: SalesOrg('2601'),
+              ),
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          expect(find.text('eZPoint'), findsNothing);
+          final homeQuickAccessEZPointMenu =
+              find.byKey(WidgetKeys.homeQuickAccessEZPointMenu);
+          expect(homeQuickAccessEZPointMenu, findsNothing);
+        },
+      );
     });
 
     group('Product accessright false', () {
