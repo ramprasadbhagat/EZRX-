@@ -46,7 +46,7 @@ class _TotalAmountSection extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            context.tr('Total: '),
+            '${context.tr('Total')}: ',
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: ZPColors.darkGray,
                 ),

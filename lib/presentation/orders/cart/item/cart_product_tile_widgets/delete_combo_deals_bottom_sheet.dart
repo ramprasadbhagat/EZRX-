@@ -30,7 +30,7 @@ class DeleteComboDealBottomSheet extends StatelessWidget {
             height: 5,
           ),
           Text(
-            context.tr('This action cannot be undone.'),
+            context.tr('This action cannot be undone'),
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.extraLightGrey4,
                 ),

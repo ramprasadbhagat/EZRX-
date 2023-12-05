@@ -15,14 +15,9 @@ class _TotalQtySection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Total qty: '.tr() +
-                context
-                    .read<CartBloc>()
-                    .state
-                    .getTotalQuantityOfProductBundle(
-                      bundleCode: cartProduct.bundle.bundleCode,
-                    )
-                    .toString(),
+            '${context.tr('Total qty')}: ${context.read<CartBloc>().state.getTotalQuantityOfProductBundle(
+                  bundleCode: cartProduct.bundle.bundleCode,
+                ).toString()}',
             key: WidgetKeys.cartItemBundleQty,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.neutralsBlack,

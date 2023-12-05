@@ -99,7 +99,7 @@ class OrderBundleItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${context.tr('Total qty: ')} ${viewByOrdersGroup.totalMaterialCount}',
+                      '${context.tr('Total qty')}: ${viewByOrdersGroup.totalMaterialCount}',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.neutralsBlack,
                           ),

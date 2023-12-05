@@ -476,7 +476,7 @@ extension ComboDealSchemeExt on ComboDealScheme {
         return '$totalUnit ${context.tr('items')}';
       case ComboDealScheme.k22:
       case ComboDealScheme.k4:
-        return '${context.tr('Total qty:')} $totalUnit';
+        return '${context.tr('Total qty')}: $totalUnit';
       case ComboDealScheme.kWithSuffix:
         return '';
     }

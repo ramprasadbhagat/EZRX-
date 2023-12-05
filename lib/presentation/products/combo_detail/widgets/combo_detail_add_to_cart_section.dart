@@ -74,7 +74,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                     salesOrgConfig:
                         context.read<EligibilityBloc>().state.salesOrgConfigs,
                     price: state.totalPriceDisplay.toString(),
-                    title: 'Total: '.tr(),
+                    title: '${context.tr('Total')}: ',
                     priceLabelStyle:
                         Theme.of(context).textTheme.titleSmall?.copyWith(
                               color: ZPColors.extraLightGrey4,
@@ -85,7 +85,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
               subtitle: (state.currentDeal.scheme.displayOriginalPrice &&
                       state.isEnableAddToCart)
                   ? Row(
-                    key: WidgetKeys.comboRateDiscounted,
+                      key: WidgetKeys.comboRateDiscounted,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -164,8 +164,12 @@ class _CartPageCheckoutButton extends StatelessWidget {
               CustomSnackBar(
                 messageText: context.tr(
                   isUpdateCart
-                      ? '${comboDealMaterialDetailBloc.state.currentDeal.scheme.comboDealTitleAppbar} has been updated to cart'
-                      : '${comboDealMaterialDetailBloc.state.currentDeal.scheme.comboDealTitleAppbar} has been added to cart',
+                      ? '{comboName} has been updated to cart'
+                      : '{comboName} has been added to cart',
+                  namedArgs: {
+                    'comboName': comboDealMaterialDetailBloc
+                        .state.currentDeal.scheme.comboDealTitleAppbar,
+                  },
                 ),
               ).show(context);
             }

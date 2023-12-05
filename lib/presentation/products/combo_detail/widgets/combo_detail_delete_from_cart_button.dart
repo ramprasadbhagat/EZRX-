@@ -14,8 +14,7 @@ class _ComboDetailDeleteFromCartButton extends StatelessWidget {
         state.apiFailureOrSuccessOption.fold(
           () {
             const previousScreenIndex = 2;
-            final isDeleteFromCart 
-            = context.router.stack.isNotEmpty &&
+            final isDeleteFromCart = context.router.stack.isNotEmpty &&
                     context.router.stack.length > previousScreenIndex
                 ? (context
                         .router
@@ -40,7 +39,11 @@ class _ComboDetailDeleteFromCartButton extends StatelessWidget {
             } else {
               CustomSnackBar(
                 messageText: context.tr(
-                  '${bloc.state.currentDeal.scheme.comboDealTitleAppbar} has been deleted from cart',
+                  '{comboName} has been deleted from cart',
+                  namedArgs: {
+                    'comboName':
+                        bloc.state.currentDeal.scheme.comboDealTitleAppbar,
+                  },
                 ),
               ).show(context);
             }

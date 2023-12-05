@@ -28,7 +28,7 @@ class _PaymentSummarySection extends StatelessWidget {
                       paymentItems: state.details.paymentItems,
                     ),
                     _PriceWidget(
-                      title: 'Total:',
+                      title: '${context.tr('Total')}:',
                       price: state.details.paymentAmount.toString(),
                       type: PriceStyle.grandTotalPrice,
                     ),
