@@ -166,9 +166,7 @@ class _LoginFormWeb extends StatelessWidget {
         autovalidateMode: state.showErrorMessages
             ? AutovalidateMode.always
             : AutovalidateMode.disabled,
-        child: Column(
-          children: [
-            FractionallySizedBox(
+        child: FractionallySizedBox(
               widthFactor: 0.83,
               child: Column(
                 mainAxisAlignment:
@@ -205,17 +203,16 @@ class _LoginFormWeb extends StatelessWidget {
                   const SizedBox(height: 25),
                   if (state.currentMarket.isID)
                     const EzrxAplLogo(),
-                  const _TermsOfUse(),
+              if (!state.currentMarket.isVN) ...[
+                const _TermsOfUse(),
                   const SizedBox(height: 6),
-                  const _CreateAccount(),
-                ],
-              ),
-            ),
-            if (!state.currentMarket.isVN)
-              const _SSOLogin(
-                key: WidgetKeys.ssoLoginButton,
-              ),
-          ],
+                const _CreateAccount(),
+                const _SSOLogin(
+                  key: WidgetKeys.ssoLoginButton,
+                ),
+              ],
+            ],
+          ),
         ),
       ),
     );
