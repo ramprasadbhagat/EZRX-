@@ -55,7 +55,9 @@ class _ReturnItem extends StatelessWidget {
                 bonusItems: context
                     .read<NewRequestBloc>()
                     .state
-                    .getReturnBonusItemsOfMainItem(returnMaterial),
+                    .getBonusItemsWithBalanceQuantity(
+                      returnMaterial,
+                    ),
               ),
             ],
           ),

@@ -67,6 +67,17 @@ class NewRequestState with _$NewRequestState {
           )
           .toList();
 
+  List<ReturnMaterial> getBonusItemsWithBalanceQuantity(
+    ReturnMaterial mainItem,
+  ) =>
+      mainItem.bonusItems
+          .where(
+            (bonusItem) =>
+                bonusItem.balanceQuantity.isGreaterThanZero &&
+                allItemDetails.any((detail) => detail.uuid == bonusItem.uuid),
+          )
+          .toList();
+
   bool isIncludeBonus(String uuid) =>
       getReturnItemDetails(uuid) != ReturnItemDetails.empty();
 

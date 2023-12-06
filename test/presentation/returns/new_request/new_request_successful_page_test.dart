@@ -426,5 +426,40 @@ void main() {
         );
       },
     );
+
+    testWidgets(
+        ' => display only commercial item if bonus item do not have balance quantity',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              bonusItems: fakeReturnMaterial.bonusItems
+                  .map((e) => e.copyWith(balanceQuantity: IntegerValue('0')))
+                  .toList(),
+            ),
+          ],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails,
+                fakeReturnBonusItemDetails,
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final expandableSectionFinder =
+          find.byKey(WidgetKeys.returnExpandableSection);
+      expect(expandableSectionFinder, findsOneWidget);
+      await tester.scrollUntilVisible(expandableSectionFinder, -500);
+      await tester.pump();
+      await tester.tap(expandableSectionFinder);
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.returnBonusItemSection), findsNothing);
+    });
   });
 }
