@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
@@ -17,27 +18,45 @@ import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
+import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
@@ -215,6 +234,77 @@ class NotificationMockBloc
     extends MockBloc<NotificationEvent, NotificationState>
     implements NotificationBloc {}
 
+class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
+    implements AllInvoicesBloc {}
+
+class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
+    implements AllCreditsBloc {}
+
+class ViewByOrderFilterBlocMock
+    extends MockBloc<ViewByOrderFilterEvent, ViewByOrderFilterState>
+    implements ViewByOrderFilterBloc {}
+
+class PaymentSummaryDetailsBlocMock
+    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
+    implements PaymentSummaryDetailsBloc {}
+
+class ProductSearchBlocMock
+    extends MockBloc<ProductSearchEvent, ProductSearchState>
+    implements ProductSearchBloc {}
+
+class DownloadPaymentAttachmentsBlocMock extends MockBloc<
+        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
+    implements DownloadPaymentAttachmentsBloc {}
+
+class ReturnListByRequestBlocMock
+    extends MockBloc<ReturnListByRequestEvent, ReturnListByRequestState>
+    implements ReturnListByRequestBloc {}
+
+class PaymentSummaryBlocMock
+    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
+    implements PaymentSummaryBloc {}
+
+class SoaBlocMock extends MockBloc<SoaEvent, SoaState> implements SoaBloc {}
+
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
+
+class PaymentInProgressBlocMock
+    extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
+    implements PaymentInProgressBloc {}
+
+class ComboDealMaterialDetailBlocMock
+    extends MockBloc<ComboDealMaterialDetailEvent, ComboDealMaterialDetailState>
+    implements ComboDealMaterialDetailBloc {}
+
+class OrderSummaryBlocMock
+    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
+    implements OrderSummaryBloc {}
+
+class AvailableCreditsBlocMock
+    extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
+    implements AvailableCreditsBloc {}
+
+class OutstandingInvoicesBlocMock
+    extends MockBloc<OutstandingInvoicesEvent, OutstandingInvoicesState>
+    implements OutstandingInvoicesBloc {}
+
+class ReturnItemsBlocMock extends MockBloc<ReturnItemsEvent, ReturnItemsState>
+    implements ReturnItemsBloc {}
+
+class PaymentSummaryFilterBlocMock
+    extends MockBloc<PaymentSummaryFilterEvent, PaymentSummaryFilterState>
+    implements PaymentSummaryFilterBloc {}
+
+class ReOrderPermissionBlocMock
+    extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
+    implements ReOrderPermissionBloc {}
+
+class ArticlesInfoBlocMock
+    extends MockBloc<ArticlesInfoEvent, ArticlesInfoState>
+    implements ArticlesInfoBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -261,7 +351,25 @@ void main() {
   final chatBotBloc = ChatBotMockBloc();
   late MaterialPriceBloc mockMaterialPriceBloc;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
-
+  late AllInvoicesBloc allInvoicesBlocMock;
+  late AllCreditsBloc allCreditsBlocMock;
+  late ViewByOrderFilterBloc viewByOrderFilterBlocMock;
+  late PaymentSummaryDetailsBloc paymentSummaryDetailsBlocMock;
+  late ProductSearchBloc productSearchBlocMock;
+  late ReturnListByRequestBloc returnListByRequestBlocMock;
+  late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBlocMock;
+  late PaymentSummaryBloc paymentSummaryBlocMock;
+  late SoaBloc soaBlocMock;
+  late AdditionalDetailsBloc additionalDetailsBlocMock;
+  late PaymentInProgressBloc paymentInProgressBlocMock;
+  late ComboDealMaterialDetailBloc comboDealMaterialDetailBlocMock;
+  late OrderSummaryBloc orderSummaryBlocMock;
+  late AvailableCreditsBloc availableCreditsBlocMock;
+  late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
+  late ReturnItemsBloc returnItemsBlocMock;
+  late PaymentSummaryFilterBloc paymentSummaryFilterBlocMock;
+  late ReOrderPermissionBloc reOrderPermissionBlocMock;
+  late ArticlesInfoBloc articlesInfoBlocMock;
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
@@ -351,6 +459,25 @@ void main() {
       loginFormBloc = LoginFormMockBloc();
       mockNotificationBloc = NotificationMockBloc();
       mockPriceOverrideBloc = PriceOverrideBlocMock();
+      allInvoicesBlocMock = AllInvoicesBlocMock();
+      allCreditsBlocMock = AllCreditsBlocMock();
+      viewByOrderFilterBlocMock = ViewByOrderFilterBlocMock();
+      paymentSummaryDetailsBlocMock = PaymentSummaryDetailsBlocMock();
+      productSearchBlocMock = ProductSearchBlocMock();
+      returnListByRequestBlocMock = ReturnListByRequestBlocMock();
+      downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
+      paymentSummaryBlocMock = PaymentSummaryBlocMock();
+      soaBlocMock = SoaBlocMock();
+      additionalDetailsBlocMock = AdditionalDetailsBlocMock();
+      paymentInProgressBlocMock = PaymentInProgressBlocMock();
+      comboDealMaterialDetailBlocMock = ComboDealMaterialDetailBlocMock();
+      orderSummaryBlocMock = OrderSummaryBlocMock();
+      availableCreditsBlocMock = AvailableCreditsBlocMock();
+      outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
+      returnItemsBlocMock = ReturnItemsBlocMock();
+      paymentSummaryFilterBlocMock = PaymentSummaryFilterBlocMock();
+      reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
+      articlesInfoBlocMock = ArticlesInfoBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
@@ -421,6 +548,43 @@ void main() {
       when(() => mockPriceOverrideBloc.state)
           .thenReturn(PriceOverrideState.initial());
       when(() => chatBotBloc.state).thenReturn(ChatBotState.initial());
+      when(() => allInvoicesBlocMock.state)
+          .thenReturn(AllInvoicesState.initial());
+      when(() => allCreditsBlocMock.state)
+          .thenReturn(AllCreditsState.initial());
+      when(() => viewByOrderFilterBlocMock.state)
+          .thenReturn(ViewByOrderFilterState.initial());
+      when(() => paymentSummaryDetailsBlocMock.state)
+          .thenReturn(PaymentSummaryDetailsState.initial());
+      when(() => productSearchBlocMock.state)
+          .thenReturn(ProductSearchState.initial());
+      when(() => returnListByRequestBlocMock.state)
+          .thenReturn(ReturnListByRequestState.initial());
+      when(() => downloadPaymentAttachmentsBlocMock.state)
+          .thenReturn(DownloadPaymentAttachmentsState.initial());
+      when(() => paymentSummaryBlocMock.state)
+          .thenReturn(PaymentSummaryState.initial());
+      when(() => soaBlocMock.state).thenReturn(SoaState.initial());
+      when(() => additionalDetailsBlocMock.state)
+          .thenReturn(AdditionalDetailsState.initial());
+      when(() => paymentInProgressBlocMock.state)
+          .thenReturn(PaymentInProgressState.initial());
+      when(() => comboDealMaterialDetailBlocMock.state)
+          .thenReturn(ComboDealMaterialDetailState.initial());
+      when(() => orderSummaryBlocMock.state)
+          .thenReturn(OrderSummaryState.initial());
+      when(() => availableCreditsBlocMock.state)
+          .thenReturn(AvailableCreditsState.initial());
+      when(() => outstandingInvoicesBlocMock.state)
+          .thenReturn(OutstandingInvoicesState.initial());
+      when(() => returnItemsBlocMock.state)
+          .thenReturn(ReturnItemsState.initial());
+      when(() => paymentSummaryFilterBlocMock.state)
+          .thenReturn(PaymentSummaryFilterState.initial());
+      when(() => reOrderPermissionBlocMock.state)
+          .thenReturn(ReOrderPermissionState.initial());
+      when(() => articlesInfoBlocMock.state)
+          .thenReturn(ArticlesInfoState.initial());
     });
 
     Future getWidget(tester) async {
@@ -538,6 +702,63 @@ void main() {
               ),
               BlocProvider<PriceOverrideBloc>(
                 create: (context) => mockPriceOverrideBloc,
+              ),
+              BlocProvider<AllInvoicesBloc>(
+                create: (context) => allInvoicesBlocMock,
+              ),
+              BlocProvider<AllCreditsBloc>(
+                create: (context) => allCreditsBlocMock,
+              ),
+              BlocProvider<ViewByOrderFilterBloc>(
+                create: (context) => viewByOrderFilterBlocMock,
+              ),
+              BlocProvider<PaymentSummaryDetailsBloc>(
+                create: (context) => paymentSummaryDetailsBlocMock,
+              ),
+              BlocProvider<ProductSearchBloc>(
+                create: (context) => productSearchBlocMock,
+              ),
+              BlocProvider<ReturnListByRequestBloc>(
+                create: (context) => returnListByRequestBlocMock,
+              ),
+              BlocProvider<DownloadPaymentAttachmentsBloc>(
+                create: (context) => downloadPaymentAttachmentsBlocMock,
+              ),
+              BlocProvider<PaymentSummaryBloc>(
+                create: (context) => paymentSummaryBlocMock,
+              ),
+              BlocProvider<SoaBloc>(
+                create: (context) => soaBlocMock,
+              ),
+              BlocProvider<AdditionalDetailsBloc>(
+                create: (context) => additionalDetailsBlocMock,
+              ),
+              BlocProvider<PaymentInProgressBloc>(
+                create: (context) => paymentInProgressBlocMock,
+              ),
+              BlocProvider<ComboDealMaterialDetailBloc>(
+                create: (context) => comboDealMaterialDetailBlocMock,
+              ),
+              BlocProvider<OrderSummaryBloc>(
+                create: (context) => orderSummaryBlocMock,
+              ),
+              BlocProvider<AvailableCreditsBloc>(
+                create: (context) => availableCreditsBlocMock,
+              ),
+              BlocProvider<OutstandingInvoicesBloc>(
+                create: (context) => outstandingInvoicesBlocMock,
+              ),
+              BlocProvider<ReturnItemsBloc>(
+                create: (context) => returnItemsBlocMock,
+              ),
+              BlocProvider<PaymentSummaryFilterBloc>(
+                create: (context) => paymentSummaryFilterBlocMock,
+              ),
+              BlocProvider<ReOrderPermissionBloc>(
+                create: (context) => reOrderPermissionBlocMock,
+              ),
+              BlocProvider<ArticlesInfoBloc>(
+                create: (context) => articlesInfoBlocMock,
               ),
             ],
             child: const SplashPage(),
@@ -854,10 +1075,10 @@ void main() {
     testWidgets('DeepLinkingBloc initializes correctly',
         (WidgetTester tester) async {
       whenListen(
-        eligibilityBlocMock,
+        customerCodeBlocMock,
         Stream.fromIterable([
-          EligibilityState.initial(),
-          EligibilityState.initial().copyWith(
+          CustomerCodeState.initial(),
+          CustomerCodeState.initial().copyWith(
             shipToInfo:
                 ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-code'),
           ),
@@ -876,7 +1097,7 @@ void main() {
         DeepLinkingState.linkPending(
           Uri(path: '/history_details'),
         ),
-        const DeepLinkingState.redirectHistoryDetail('fake-order-history'),
+        DeepLinkingState.redirectOrderDetail(OrderNumber('fake-order-history')),
       ];
       whenListen(
         deepLinkingBlocMock,
@@ -888,7 +1109,6 @@ void main() {
         () => deepLinkingBlocMock.add(
           DeepLinkingEvent.consumePendingLink(
             selectedCustomerCode: CustomerCodeInfo.empty(),
-            selectedSalesOrganisation: SalesOrganisation.empty(),
             selectedShipTo: ShipToInfo.empty(),
           ),
         ),
@@ -896,9 +1116,7 @@ void main() {
     });
     testWidgets('When Redirecting History page -failure ', (tester) async {
       final expectedDeeplinkStates = [
-        const DeepLinkingState.error(
-          ApiFailure.historyDetailRoute(),
-        )
+        const DeepLinkingState.error(ApiFailure.orderDetailRoute()),
       ];
       whenListen(
         deepLinkingBlocMock,
@@ -907,7 +1125,7 @@ void main() {
       await getWidget(tester);
       await tester.pump();
       expect(
-        find.text('This order history is not available on your account'),
+        find.text('This order is not available on your account'),
         findsOneWidget,
       );
     });

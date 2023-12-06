@@ -213,7 +213,6 @@ import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
-import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/performance_monitor.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
@@ -240,6 +239,7 @@ import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product
 import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_query.dart';
 import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_remote.dart';
 import 'package:ezrxmobile/infrastructure/core/product_images/repository/product_images_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_repository.dart';
 import 'package:ezrxmobile/infrastructure/faq/datasource/faq_local.dart';
 import 'package:ezrxmobile/infrastructure/faq/datasource/faq_query_mutaion.dart';
@@ -2174,22 +2174,19 @@ void setupLocator() {
   // Deep Linking
   //
   //============================================================
+  locator.registerLazySingleton(() => DeepLinkingService());
+
   locator.registerLazySingleton(
-    () => DynamicLinksService(
+    () => DeepLinkingRepository(
       config: locator<Config>(),
-      appRouter: locator<AppRouter>(),
       deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
   locator.registerLazySingleton(
-    () => DeepLinkingRepository(),
-  );
-
-  locator.registerLazySingleton(
     () => DeepLinkingBloc(
       repository: locator<DeepLinkingRepository>(),
-      service: locator<DynamicLinksService>(),
+      service: locator<DeepLinkingService>(),
     ),
   );
 

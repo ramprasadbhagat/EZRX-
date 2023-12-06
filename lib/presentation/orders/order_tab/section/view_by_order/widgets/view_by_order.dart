@@ -103,7 +103,7 @@ class _ViewByOrder extends StatelessWidget {
               BuyAgainButton(
                 viewByOrderHistoryItem: viewByOrderHistoryItem,
                 key: WidgetKeys.viewByOrderBuyAgainButtonKey,
-                currentPath: 'orders/view_by_orders',
+
               ),
           ],
         ),

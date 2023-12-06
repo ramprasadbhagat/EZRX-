@@ -179,9 +179,7 @@ void main() {
       when(() => aboutUsBloc.state).thenReturn(
         aboutUsState.copyWith(
           isFetching: false,
-          apiFailureOrSuccessOption: optionOf(
-            const Left(ApiFailure.materialDetailRoute()),
-          ),
+          apiFailureOrSuccessOption: optionOf(const Left(ApiFailure.other(''))),
         ),
       );
 

@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,10 +15,8 @@ part 'deep_linking_event.dart';
 part 'deep_linking_state.dart';
 part 'deep_linking_bloc.freezed.dart';
 
-//TODO: widget_test
-
 class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
-  final DynamicLinksService service;
+  final DeepLinkingService service;
   final IDeepLinkingRepository repository;
   StreamSubscription? dynamicLinkStream;
 
@@ -32,8 +32,13 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
     Emitter<DeepLinkingState> emit,
   ) async {
     await event.map(
-      initialize: (event) async {
-        dynamicLinkStream ??= await service.initDynamicLinks();
+      initialize: (_) async {
+        dynamicLinkStream ??= await service.init();
+      },
+      stopConsumeLink: (_) {
+        service.setInitialLinkHandled();
+        dynamicLinkStream?.cancel();
+        dynamicLinkStream = null;
       },
       addPendingLink: (event) {
         emit(
@@ -45,9 +50,8 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
           initial: () {},
           linkPending: (link) {
             switch (link.path) {
-              case '/material_detail':
-                final failureOrSuccess = repository.extractMaterialNumber(
-                  selectedSalesOrganisation: event.selectedSalesOrganisation,
+              case '/my-account/orders/order-detail':
+                final failureOrSuccess = repository.extractOrderNumber(
                   selectedCustomerCode: event.selectedCustomerCode,
                   selectedShipTo: event.selectedShipTo,
                   link: link,
@@ -57,14 +61,13 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   (error) => emit(
                     DeepLinkingState.error(error),
                   ),
-                  (materialNumber) => emit(
-                    DeepLinkingState.redirectMaterialDetail(materialNumber),
+                  (orderNumber) => emit(
+                    DeepLinkingState.redirectOrderDetail(orderNumber),
                   ),
                 );
                 break;
-              case '/history_details':
-                final failureOrSuccess = repository.extractOrderHistory(
-                  selectedSalesOrganisation: event.selectedSalesOrganisation,
+              case '/my-account/return-summary-details':
+                final failureOrSuccess = repository.extractReturnId(
                   selectedCustomerCode: event.selectedCustomerCode,
                   selectedShipTo: event.selectedShipTo,
                   link: link,
@@ -74,16 +77,32 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   (error) => emit(
                     DeepLinkingState.error(error),
                   ),
-                  (history) => emit(
-                    DeepLinkingState.redirectHistoryDetail(history),
+                  (returnId) => emit(
+                    DeepLinkingState.redirectReturnDetail(returnId),
+                  ),
+                );
+                break;
+              case '/payments/payment-summary/invoice-details':
+                final failureOrSuccess =
+                    repository.extractPaymentBatchAdditionalInfo(link: link);
+
+                failureOrSuccess.fold(
+                  (error) => emit(
+                    DeepLinkingState.error(error),
+                  ),
+                  (paymentBatchAdditionalInfo) => emit(
+                    DeepLinkingState.redirectPaymentDetail(
+                      paymentBatchAdditionalInfo,
+                    ),
                   ),
                 );
                 break;
               default:
             }
           },
-          redirectMaterialDetail: (_) {},
-          redirectHistoryDetail: (_) {},
+          redirectOrderDetail: (_) {},
+          redirectReturnDetail: (_) {},
+          redirectPaymentDetail: (_) {},
           error: (_) {},
         );
       },

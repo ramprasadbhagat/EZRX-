@@ -48,7 +48,7 @@ class PaymentSummaryDetailsBloc
         ),
       ),
       fetchPaymentSummaryDetailsInfo: (event) async {
-        if (!event.details.paymentBatchAdditionalInfo.isValid()) {
+        if (!event.details.allIdentifierInfoValid) {
           emit(
             state.copyWith(
               isDetailFetching: true,

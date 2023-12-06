@@ -48,8 +48,9 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.uploadCountExcideLimit() = _UploadCountExcideLimit;
 
   //deep link route failure
-  const factory ApiFailure.materialDetailRoute() = _MaterialDetailRoute;
-  const factory ApiFailure.historyDetailRoute() = _HistoryDetailRoute;
+  const factory ApiFailure.orderDetailRoute() = _OrderDetailRoute;
+  const factory ApiFailure.returnDetailRoute() = _ReturnDetailRoute;
+  const factory ApiFailure.paymentDetailRoute() = _PaymentDetailRoute;
 
   const factory ApiFailure.languageChangeFail() = _LanguageChangeFail;
   const factory ApiFailure.scannedProductNotFound(String productNumber) =
@@ -97,10 +98,11 @@ extension ApiFailureExt on ApiFailure {
         invalidFileFormat: (_) =>
             'Unable to upload file as either file format not supported or something wrong with the file',
         uploadCountExcideLimit: (_) => 'Number of files exceeds the criteria',
-        materialDetailRoute: (_) =>
-            'This material is not available on your account',
-        historyDetailRoute: (_) =>
-            'This order history is not available on your account',
+        orderDetailRoute: (_) => 'This order is not available on your account',
+        returnDetailRoute: (_) =>
+            'This return request is not available on your account',
+        paymentDetailRoute: (_) =>
+            'This payment advice is not available on your account',
         passwordResetFail: (_) => 'Unable to reset password',
         languageChangeFail: (_) => 'Unable to change language',
         scannedProductNotFound: (scannedProduct) =>

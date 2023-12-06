@@ -2,11 +2,10 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/
 
 class BuyAgainButton extends StatelessWidget {
   final OrderHistoryDetails viewByOrderHistoryItem;
-  final String currentPath;
+
   const BuyAgainButton({
     Key? key,
     required this.viewByOrderHistoryItem,
-    required this.currentPath,
   }) : super(key: key);
 
   @override
@@ -21,8 +20,7 @@ class BuyAgainButton extends StatelessWidget {
               previous.isFetching != current.isFetching &&
               !current.isFetching &&
               current.orderNumberWillUpsert ==
-                  viewByOrderHistoryItem.orderNumber &&
-              currentPath != context.router.currentPath,
+                  viewByOrderHistoryItem.orderNumber,
           listener: (context, reOrderState) {
             context.read<CartBloc>().add(
                   CartEvent.addHistoryItemsToCart(

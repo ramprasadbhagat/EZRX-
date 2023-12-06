@@ -4,9 +4,14 @@ part of 'deep_linking_bloc.dart';
 class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.initial() = _Initial;
   const factory DeepLinkingState.linkPending(Uri link) = _LinkPending;
-  const factory DeepLinkingState.redirectMaterialDetail(String materialNumber) =
-      _RedirectMaterialDetail;
-  const factory DeepLinkingState.redirectHistoryDetail(String history) =
-      _RedirectHistoryDetail;
+  const factory DeepLinkingState.redirectOrderDetail(
+    OrderNumber orderNumber,
+  ) = _RedirectOrderDetail;
+  const factory DeepLinkingState.redirectReturnDetail(
+    ReturnRequestsId returnId,
+  ) = _RedirectReturnDetail;
+  const factory DeepLinkingState.redirectPaymentDetail(
+    StringValue paymentBatchAdditionalInfo,
+  ) = _RedirectPaymentDetail;
   const factory DeepLinkingState.error(ApiFailure failure) = _Error;
 }

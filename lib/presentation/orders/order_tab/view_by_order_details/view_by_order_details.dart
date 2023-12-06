@@ -1,4 +1,6 @@
+import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_status_section.dart';
 import 'package:flutter/material.dart';
@@ -29,18 +31,19 @@ class ViewByOrderDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(context.tr('Order Details')),
-        centerTitle: false,
-      ),
-      body: AnnouncementBanner(
-        currentPath: context.router.currentPath,
-        child: BlocBuilder<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
-          buildWhen: (previous, current) =>
-              previous.isLoading != current.isLoading,
-          builder: (context, state) {
-            return state.isLoading
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
+    return BlocBuilder<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(context.tr('Order Details')),
+            centerTitle: false,
+          ),
+          body: AnnouncementBanner(
+            currentPath: context.router.currentPath,
+            child: state.isLoading
                 ? LoadingShimmer.logo(
                     key: WidgetKeys.loaderImage,
                   )
@@ -48,7 +51,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                     key: WidgetKeys.viewByOrderDetailsPageListView,
                     children: <Widget>[
                       const OrderHeaderSection(),
-                      if (context.read<EligibilityBloc>().state.salesOrg.isID)
+                      if (eligibilityState.salesOrg.isID)
                         _ViewByOrderStatusTracker(
                           orderHistoryDetails: state.orderHistoryDetails,
                         ),
@@ -99,24 +102,32 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                               .materialItemDetailsList,
                         ),
                     ],
-                  );
-          },
-        ),
-      ),
-      bottomNavigationBar:
-          context.read<EligibilityBloc>().state.user.disableCreateOrder
+                  ),
+          ),
+          bottomNavigationBar: eligibilityState.user.disableCreateOrder ||
+                  state.isLoading
               ? null
-              : Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: BuyAgainButton(
-                    viewByOrderHistoryItem: context
-                        .read<ViewByOrderDetailsBloc>()
-                        .state
-                        .orderHistoryDetails,
-                    key: WidgetKeys.viewByOrderBuyAgainButtonKey,
-                    currentPath: 'orders/view_by_order_details_page',
+              : BlocProvider(
+                  create: (context) => locator<ReOrderPermissionBloc>()
+                    ..add(
+                      ReOrderPermissionEvent.initialized(
+                        customerCodeInfo: eligibilityState.customerCodeInfo,
+                        shipToInfo: eligibilityState.shipToInfo,
+                        salesOrganisation: eligibilityState.salesOrganisation,
+                        salesOrganisationConfigs:
+                            eligibilityState.salesOrgConfigs,
+                      ),
+                    ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: BuyAgainButton(
+                      viewByOrderHistoryItem: state.orderHistoryDetails,
+                      key: WidgetKeys.viewByOrderBuyAgainButtonKey,
+                    ),
                   ),
                 ),
+        );
+      },
     );
   }
 }

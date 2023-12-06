@@ -42,6 +42,7 @@ import 'package:ezrxmobile/application/returns/approver_actions/return_approver_
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -50,6 +51,7 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
@@ -181,6 +183,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 // context.read<AnnouncementBloc>().add(
                 //       const AnnouncementEvent.getAnnouncement(),
                 //     );
+                context
+                    .read<DeepLinkingBloc>()
+                    .add(const DeepLinkingEvent.stopConsumeLink());
                 context.read<UserBloc>().add(const UserEvent.initialized());
                 context
                     .read<ChatBotBloc>()
@@ -630,9 +635,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     const PriceOverrideEvent.initialized(),
                   );
             }
-            context.read<DeepLinkingBloc>().add(
-                  const DeepLinkingEvent.initialize(),
-                );
             context.read<MaterialListBloc>().add(
                   MaterialListEvent.fetch(
                     salesOrganisation:
@@ -650,28 +652,68 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<DeepLinkingBloc, DeepLinkingState>(
           listener: (context, state) {
             final eligibilityState = context.read<EligibilityBloc>().state;
+            final noAccessSnackbar = CustomSnackBar(
+              icon: const Icon(Icons.info, color: ZPColors.error),
+              backgroundColor: ZPColors.errorSnackBarColor,
+              messageText: "You don't have access",
+            );
 
             state.when(
               initial: () {},
               linkPending: (_) {
                 context.read<DeepLinkingBloc>().add(
                       DeepLinkingEvent.consumePendingLink(
-                        selectedSalesOrganisation:
-                            eligibilityState.salesOrganisation,
                         selectedCustomerCode: eligibilityState.customerCodeInfo,
                         selectedShipTo: eligibilityState.shipToInfo,
                       ),
                     );
               },
-              redirectMaterialDetail: (materialNumber) {
-                //Need to visit when deep linking is revised
+              redirectOrderDetail: (orderNumber) {
+                if (eligibilityState.user.userCanAccessOrderHistory) {
+                  context.read<ViewByOrderDetailsBloc>().add(
+                        ViewByOrderDetailsEvent.fetch(orderNumber: orderNumber),
+                      );
+                  context.read<ViewByItemDetailsBloc>().add(
+                        ViewByItemDetailsEvent.searchOrderHistory(
+                          customerCodeInfo: eligibilityState.customerCodeInfo,
+                          user: eligibilityState.user,
+                          salesOrganisation: eligibilityState.salesOrganisation,
+                          searchKey: SearchKey(orderNumber.getValue()),
+                        ),
+                      );
 
-                // CartBottomSheet.showQuickAddToCartBottomSheet(
-                //   context: context,
-                //   materialNumber: materialNumber,
-                // );
+                  context.router.push(const ViewByOrderDetailsPageRoute());
+                } else {
+                  noAccessSnackbar.show(context);
+                }
               },
-              redirectHistoryDetail: (history) {},
+              redirectReturnDetail: (returnId) {
+                if (eligibilityState.isReturnsEnable) {
+                  context.read<ReturnSummaryDetailsBloc>().add(
+                        ReturnSummaryDetailsEvent.fetch(returnId: returnId),
+                      );
+                  context.router
+                      .push(const ReturnRequestSummaryByItemDetailsRoute());
+                } else {
+                  noAccessSnackbar.show(context);
+                }
+              },
+              redirectPaymentDetail: (paymentBatchAdditionalInfo) {
+                if (eligibilityState.isPaymentEnabled) {
+                  context.read<PaymentSummaryDetailsBloc>().add(
+                        PaymentSummaryDetailsEvent
+                            .fetchPaymentSummaryDetailsInfo(
+                          details: PaymentSummaryDetails.empty().copyWith(
+                            paymentBatchAdditionalInfo:
+                                paymentBatchAdditionalInfo,
+                          ),
+                        ),
+                      );
+                  context.router.push(const PaymentSummaryDetailsPageRoute());
+                } else {
+                  noAccessSnackbar.show(context);
+                }
+              },
               error: (error) {
                 ErrorUtils.handleApiFailure(context, error);
               },
@@ -1209,6 +1251,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               shipToInfo: state.shipToInfo,
               salesOrgConfigs: salesOrgState.configs,
             ),
+          );
+
+      context.read<DeepLinkingBloc>().add(
+            const DeepLinkingEvent.initialize(),
           );
     }
   }

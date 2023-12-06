@@ -19,8 +19,9 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function() stopConsumeLink,
     required TResult Function(Uri link) addPendingLink,
-    required TResult Function(SalesOrganisation selectedSalesOrganisation,
+    required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
   }) =>
@@ -28,8 +29,9 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function()? stopConsumeLink,
     TResult? Function(Uri link)? addPendingLink,
-    TResult? Function(SalesOrganisation selectedSalesOrganisation,
+    TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
   }) =>
@@ -37,8 +39,9 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function()? stopConsumeLink,
     TResult Function(Uri link)? addPendingLink,
-    TResult Function(SalesOrganisation selectedSalesOrganisation,
+    TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
     required TResult orElse(),
@@ -47,6 +50,7 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_StopConsumeLink value) stopConsumeLink,
     required TResult Function(_AddPendingLink value) addPendingLink,
     required TResult Function(_ConsumePendingLink value) consumePendingLink,
   }) =>
@@ -54,6 +58,7 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_StopConsumeLink value)? stopConsumeLink,
     TResult? Function(_AddPendingLink value)? addPendingLink,
     TResult? Function(_ConsumePendingLink value)? consumePendingLink,
   }) =>
@@ -61,6 +66,7 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_StopConsumeLink value)? stopConsumeLink,
     TResult Function(_AddPendingLink value)? addPendingLink,
     TResult Function(_ConsumePendingLink value)? consumePendingLink,
     required TResult orElse(),
@@ -125,8 +131,9 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function() stopConsumeLink,
     required TResult Function(Uri link) addPendingLink,
-    required TResult Function(SalesOrganisation selectedSalesOrganisation,
+    required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
   }) {
@@ -137,8 +144,9 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function()? stopConsumeLink,
     TResult? Function(Uri link)? addPendingLink,
-    TResult? Function(SalesOrganisation selectedSalesOrganisation,
+    TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
   }) {
@@ -149,8 +157,9 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function()? stopConsumeLink,
     TResult Function(Uri link)? addPendingLink,
-    TResult Function(SalesOrganisation selectedSalesOrganisation,
+    TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
     required TResult orElse(),
@@ -165,6 +174,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_StopConsumeLink value) stopConsumeLink,
     required TResult Function(_AddPendingLink value) addPendingLink,
     required TResult Function(_ConsumePendingLink value) consumePendingLink,
   }) {
@@ -175,6 +185,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_StopConsumeLink value)? stopConsumeLink,
     TResult? Function(_AddPendingLink value)? addPendingLink,
     TResult? Function(_ConsumePendingLink value)? consumePendingLink,
   }) {
@@ -185,6 +196,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_StopConsumeLink value)? stopConsumeLink,
     TResult Function(_AddPendingLink value)? addPendingLink,
     TResult Function(_ConsumePendingLink value)? consumePendingLink,
     required TResult orElse(),
@@ -198,6 +210,126 @@ class _$_Initialize implements _Initialize {
 
 abstract class _Initialize implements DeepLinkingEvent {
   const factory _Initialize() = _$_Initialize;
+}
+
+/// @nodoc
+abstract class _$$_StopConsumeLinkCopyWith<$Res> {
+  factory _$$_StopConsumeLinkCopyWith(
+          _$_StopConsumeLink value, $Res Function(_$_StopConsumeLink) then) =
+      __$$_StopConsumeLinkCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_StopConsumeLinkCopyWithImpl<$Res>
+    extends _$DeepLinkingEventCopyWithImpl<$Res, _$_StopConsumeLink>
+    implements _$$_StopConsumeLinkCopyWith<$Res> {
+  __$$_StopConsumeLinkCopyWithImpl(
+      _$_StopConsumeLink _value, $Res Function(_$_StopConsumeLink) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_StopConsumeLink implements _StopConsumeLink {
+  const _$_StopConsumeLink();
+
+  @override
+  String toString() {
+    return 'DeepLinkingEvent.stopConsumeLink()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_StopConsumeLink);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function() stopConsumeLink,
+    required TResult Function(Uri link) addPendingLink,
+    required TResult Function(
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
+        consumePendingLink,
+  }) {
+    return stopConsumeLink();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function()? stopConsumeLink,
+    TResult? Function(Uri link)? addPendingLink,
+    TResult? Function(
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        consumePendingLink,
+  }) {
+    return stopConsumeLink?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function()? stopConsumeLink,
+    TResult Function(Uri link)? addPendingLink,
+    TResult Function(
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        consumePendingLink,
+    required TResult orElse(),
+  }) {
+    if (stopConsumeLink != null) {
+      return stopConsumeLink();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_StopConsumeLink value) stopConsumeLink,
+    required TResult Function(_AddPendingLink value) addPendingLink,
+    required TResult Function(_ConsumePendingLink value) consumePendingLink,
+  }) {
+    return stopConsumeLink(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_StopConsumeLink value)? stopConsumeLink,
+    TResult? Function(_AddPendingLink value)? addPendingLink,
+    TResult? Function(_ConsumePendingLink value)? consumePendingLink,
+  }) {
+    return stopConsumeLink?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_StopConsumeLink value)? stopConsumeLink,
+    TResult Function(_AddPendingLink value)? addPendingLink,
+    TResult Function(_ConsumePendingLink value)? consumePendingLink,
+    required TResult orElse(),
+  }) {
+    if (stopConsumeLink != null) {
+      return stopConsumeLink(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StopConsumeLink implements DeepLinkingEvent {
+  const factory _StopConsumeLink() = _$_StopConsumeLink;
 }
 
 /// @nodoc
@@ -265,8 +397,9 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function() stopConsumeLink,
     required TResult Function(Uri link) addPendingLink,
-    required TResult Function(SalesOrganisation selectedSalesOrganisation,
+    required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
   }) {
@@ -277,8 +410,9 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function()? stopConsumeLink,
     TResult? Function(Uri link)? addPendingLink,
-    TResult? Function(SalesOrganisation selectedSalesOrganisation,
+    TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
   }) {
@@ -289,8 +423,9 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function()? stopConsumeLink,
     TResult Function(Uri link)? addPendingLink,
-    TResult Function(SalesOrganisation selectedSalesOrganisation,
+    TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
     required TResult orElse(),
@@ -305,6 +440,7 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_StopConsumeLink value) stopConsumeLink,
     required TResult Function(_AddPendingLink value) addPendingLink,
     required TResult Function(_ConsumePendingLink value) consumePendingLink,
   }) {
@@ -315,6 +451,7 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_StopConsumeLink value)? stopConsumeLink,
     TResult? Function(_AddPendingLink value)? addPendingLink,
     TResult? Function(_ConsumePendingLink value)? consumePendingLink,
   }) {
@@ -325,6 +462,7 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_StopConsumeLink value)? stopConsumeLink,
     TResult Function(_AddPendingLink value)? addPendingLink,
     TResult Function(_ConsumePendingLink value)? consumePendingLink,
     required TResult orElse(),
@@ -351,12 +489,8 @@ abstract class _$$_ConsumePendingLinkCopyWith<$Res> {
           $Res Function(_$_ConsumePendingLink) then) =
       __$$_ConsumePendingLinkCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {SalesOrganisation selectedSalesOrganisation,
-      CustomerCodeInfo selectedCustomerCode,
-      ShipToInfo selectedShipTo});
+  $Res call({CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo});
 
-  $SalesOrganisationCopyWith<$Res> get selectedSalesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get selectedCustomerCode;
   $ShipToInfoCopyWith<$Res> get selectedShipTo;
 }
@@ -372,15 +506,10 @@ class __$$_ConsumePendingLinkCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? selectedSalesOrganisation = null,
     Object? selectedCustomerCode = null,
     Object? selectedShipTo = null,
   }) {
     return _then(_$_ConsumePendingLink(
-      selectedSalesOrganisation: null == selectedSalesOrganisation
-          ? _value.selectedSalesOrganisation
-          : selectedSalesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
       selectedCustomerCode: null == selectedCustomerCode
           ? _value.selectedCustomerCode
           : selectedCustomerCode // ignore: cast_nullable_to_non_nullable
@@ -390,15 +519,6 @@ class __$$_ConsumePendingLinkCopyWithImpl<$Res>
           : selectedShipTo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get selectedSalesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.selectedSalesOrganisation,
-        (value) {
-      return _then(_value.copyWith(selectedSalesOrganisation: value));
-    });
   }
 
   @override
@@ -423,12 +543,8 @@ class __$$_ConsumePendingLinkCopyWithImpl<$Res>
 
 class _$_ConsumePendingLink implements _ConsumePendingLink {
   const _$_ConsumePendingLink(
-      {required this.selectedSalesOrganisation,
-      required this.selectedCustomerCode,
-      required this.selectedShipTo});
+      {required this.selectedCustomerCode, required this.selectedShipTo});
 
-  @override
-  final SalesOrganisation selectedSalesOrganisation;
   @override
   final CustomerCodeInfo selectedCustomerCode;
   @override
@@ -436,7 +552,7 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
 
   @override
   String toString() {
-    return 'DeepLinkingEvent.consumePendingLink(selectedSalesOrganisation: $selectedSalesOrganisation, selectedCustomerCode: $selectedCustomerCode, selectedShipTo: $selectedShipTo)';
+    return 'DeepLinkingEvent.consumePendingLink(selectedCustomerCode: $selectedCustomerCode, selectedShipTo: $selectedShipTo)';
   }
 
   @override
@@ -444,9 +560,6 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ConsumePendingLink &&
-            (identical(other.selectedSalesOrganisation,
-                    selectedSalesOrganisation) ||
-                other.selectedSalesOrganisation == selectedSalesOrganisation) &&
             (identical(other.selectedCustomerCode, selectedCustomerCode) ||
                 other.selectedCustomerCode == selectedCustomerCode) &&
             (identical(other.selectedShipTo, selectedShipTo) ||
@@ -454,8 +567,8 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedSalesOrganisation,
-      selectedCustomerCode, selectedShipTo);
+  int get hashCode =>
+      Object.hash(runtimeType, selectedCustomerCode, selectedShipTo);
 
   @JsonKey(ignore: true)
   @override
@@ -468,41 +581,41 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function() stopConsumeLink,
     required TResult Function(Uri link) addPendingLink,
-    required TResult Function(SalesOrganisation selectedSalesOrganisation,
+    required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
   }) {
-    return consumePendingLink(
-        selectedSalesOrganisation, selectedCustomerCode, selectedShipTo);
+    return consumePendingLink(selectedCustomerCode, selectedShipTo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function()? stopConsumeLink,
     TResult? Function(Uri link)? addPendingLink,
-    TResult? Function(SalesOrganisation selectedSalesOrganisation,
+    TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
   }) {
-    return consumePendingLink?.call(
-        selectedSalesOrganisation, selectedCustomerCode, selectedShipTo);
+    return consumePendingLink?.call(selectedCustomerCode, selectedShipTo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function()? stopConsumeLink,
     TResult Function(Uri link)? addPendingLink,
-    TResult Function(SalesOrganisation selectedSalesOrganisation,
+    TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
     required TResult orElse(),
   }) {
     if (consumePendingLink != null) {
-      return consumePendingLink(
-          selectedSalesOrganisation, selectedCustomerCode, selectedShipTo);
+      return consumePendingLink(selectedCustomerCode, selectedShipTo);
     }
     return orElse();
   }
@@ -511,6 +624,7 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_StopConsumeLink value) stopConsumeLink,
     required TResult Function(_AddPendingLink value) addPendingLink,
     required TResult Function(_ConsumePendingLink value) consumePendingLink,
   }) {
@@ -521,6 +635,7 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_StopConsumeLink value)? stopConsumeLink,
     TResult? Function(_AddPendingLink value)? addPendingLink,
     TResult? Function(_ConsumePendingLink value)? consumePendingLink,
   }) {
@@ -531,6 +646,7 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_StopConsumeLink value)? stopConsumeLink,
     TResult Function(_AddPendingLink value)? addPendingLink,
     TResult Function(_ConsumePendingLink value)? consumePendingLink,
     required TResult orElse(),
@@ -544,11 +660,9 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
 
 abstract class _ConsumePendingLink implements DeepLinkingEvent {
   const factory _ConsumePendingLink(
-      {required final SalesOrganisation selectedSalesOrganisation,
-      required final CustomerCodeInfo selectedCustomerCode,
+      {required final CustomerCodeInfo selectedCustomerCode,
       required final ShipToInfo selectedShipTo}) = _$_ConsumePendingLink;
 
-  SalesOrganisation get selectedSalesOrganisation;
   CustomerCodeInfo get selectedCustomerCode;
   ShipToInfo get selectedShipTo;
   @JsonKey(ignore: true)
@@ -562,8 +676,10 @@ mixin _$DeepLinkingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
-    required TResult Function(String materialNumber) redirectMaterialDetail,
-    required TResult Function(String history) redirectHistoryDetail,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(StringValue paymentBatchAdditionalInfo)
+        redirectPaymentDetail,
     required TResult Function(ApiFailure failure) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -571,8 +687,10 @@ mixin _$DeepLinkingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
-    TResult? Function(String materialNumber)? redirectMaterialDetail,
-    TResult? Function(String history)? redirectHistoryDetail,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult? Function(ApiFailure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -580,8 +698,10 @@ mixin _$DeepLinkingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
-    TResult Function(String materialNumber)? redirectMaterialDetail,
-    TResult Function(String history)? redirectHistoryDetail,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) =>
@@ -590,10 +710,10 @@ mixin _$DeepLinkingState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
-    required TResult Function(_RedirectMaterialDetail value)
-        redirectMaterialDetail,
-    required TResult Function(_RedirectHistoryDetail value)
-        redirectHistoryDetail,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -601,8 +721,9 @@ mixin _$DeepLinkingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
-    TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -610,8 +731,9 @@ mixin _$DeepLinkingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
-    TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -675,8 +797,10 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
-    required TResult Function(String materialNumber) redirectMaterialDetail,
-    required TResult Function(String history) redirectHistoryDetail,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(StringValue paymentBatchAdditionalInfo)
+        redirectPaymentDetail,
     required TResult Function(ApiFailure failure) error,
   }) {
     return initial();
@@ -687,8 +811,10 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
-    TResult? Function(String materialNumber)? redirectMaterialDetail,
-    TResult? Function(String history)? redirectHistoryDetail,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return initial?.call();
@@ -699,8 +825,10 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
-    TResult Function(String materialNumber)? redirectMaterialDetail,
-    TResult Function(String history)? redirectHistoryDetail,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -715,10 +843,10 @@ class _$_Initial implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
-    required TResult Function(_RedirectMaterialDetail value)
-        redirectMaterialDetail,
-    required TResult Function(_RedirectHistoryDetail value)
-        redirectHistoryDetail,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -729,8 +857,9 @@ class _$_Initial implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
-    TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -741,8 +870,9 @@ class _$_Initial implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
-    TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -823,8 +953,10 @@ class _$_LinkPending implements _LinkPending {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
-    required TResult Function(String materialNumber) redirectMaterialDetail,
-    required TResult Function(String history) redirectHistoryDetail,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(StringValue paymentBatchAdditionalInfo)
+        redirectPaymentDetail,
     required TResult Function(ApiFailure failure) error,
   }) {
     return linkPending(link);
@@ -835,8 +967,10 @@ class _$_LinkPending implements _LinkPending {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
-    TResult? Function(String materialNumber)? redirectMaterialDetail,
-    TResult? Function(String history)? redirectHistoryDetail,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return linkPending?.call(link);
@@ -847,8 +981,10 @@ class _$_LinkPending implements _LinkPending {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
-    TResult Function(String materialNumber)? redirectMaterialDetail,
-    TResult Function(String history)? redirectHistoryDetail,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -863,10 +999,10 @@ class _$_LinkPending implements _LinkPending {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
-    required TResult Function(_RedirectMaterialDetail value)
-        redirectMaterialDetail,
-    required TResult Function(_RedirectHistoryDetail value)
-        redirectHistoryDetail,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
     required TResult Function(_Error value) error,
   }) {
     return linkPending(this);
@@ -877,8 +1013,9 @@ class _$_LinkPending implements _LinkPending {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
-    TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_Error value)? error,
   }) {
     return linkPending?.call(this);
@@ -889,8 +1026,9 @@ class _$_LinkPending implements _LinkPending {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
-    TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -911,66 +1049,66 @@ abstract class _LinkPending implements DeepLinkingState {
 }
 
 /// @nodoc
-abstract class _$$_RedirectMaterialDetailCopyWith<$Res> {
-  factory _$$_RedirectMaterialDetailCopyWith(_$_RedirectMaterialDetail value,
-          $Res Function(_$_RedirectMaterialDetail) then) =
-      __$$_RedirectMaterialDetailCopyWithImpl<$Res>;
+abstract class _$$_RedirectOrderDetailCopyWith<$Res> {
+  factory _$$_RedirectOrderDetailCopyWith(_$_RedirectOrderDetail value,
+          $Res Function(_$_RedirectOrderDetail) then) =
+      __$$_RedirectOrderDetailCopyWithImpl<$Res>;
   @useResult
-  $Res call({String materialNumber});
+  $Res call({OrderNumber orderNumber});
 }
 
 /// @nodoc
-class __$$_RedirectMaterialDetailCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectMaterialDetail>
-    implements _$$_RedirectMaterialDetailCopyWith<$Res> {
-  __$$_RedirectMaterialDetailCopyWithImpl(_$_RedirectMaterialDetail _value,
-      $Res Function(_$_RedirectMaterialDetail) _then)
+class __$$_RedirectOrderDetailCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectOrderDetail>
+    implements _$$_RedirectOrderDetailCopyWith<$Res> {
+  __$$_RedirectOrderDetailCopyWithImpl(_$_RedirectOrderDetail _value,
+      $Res Function(_$_RedirectOrderDetail) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = null,
+    Object? orderNumber = null,
   }) {
-    return _then(_$_RedirectMaterialDetail(
-      null == materialNumber
-          ? _value.materialNumber
-          : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$_RedirectOrderDetail(
+      null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as OrderNumber,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
-  const _$_RedirectMaterialDetail(this.materialNumber);
+class _$_RedirectOrderDetail implements _RedirectOrderDetail {
+  const _$_RedirectOrderDetail(this.orderNumber);
 
   @override
-  final String materialNumber;
+  final OrderNumber orderNumber;
 
   @override
   String toString() {
-    return 'DeepLinkingState.redirectMaterialDetail(materialNumber: $materialNumber)';
+    return 'DeepLinkingState.redirectOrderDetail(orderNumber: $orderNumber)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectMaterialDetail &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber));
+            other is _$_RedirectOrderDetail &&
+            (identical(other.orderNumber, orderNumber) ||
+                other.orderNumber == orderNumber));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber);
+  int get hashCode => Object.hash(runtimeType, orderNumber);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectMaterialDetailCopyWith<_$_RedirectMaterialDetail> get copyWith =>
-      __$$_RedirectMaterialDetailCopyWithImpl<_$_RedirectMaterialDetail>(
+  _$$_RedirectOrderDetailCopyWith<_$_RedirectOrderDetail> get copyWith =>
+      __$$_RedirectOrderDetailCopyWithImpl<_$_RedirectOrderDetail>(
           this, _$identity);
 
   @override
@@ -978,11 +1116,13 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
-    required TResult Function(String materialNumber) redirectMaterialDetail,
-    required TResult Function(String history) redirectHistoryDetail,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(StringValue paymentBatchAdditionalInfo)
+        redirectPaymentDetail,
     required TResult Function(ApiFailure failure) error,
   }) {
-    return redirectMaterialDetail(materialNumber);
+    return redirectOrderDetail(orderNumber);
   }
 
   @override
@@ -990,11 +1130,13 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
-    TResult? Function(String materialNumber)? redirectMaterialDetail,
-    TResult? Function(String history)? redirectHistoryDetail,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult? Function(ApiFailure failure)? error,
   }) {
-    return redirectMaterialDetail?.call(materialNumber);
+    return redirectOrderDetail?.call(orderNumber);
   }
 
   @override
@@ -1002,13 +1144,15 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
-    TResult Function(String materialNumber)? redirectMaterialDetail,
-    TResult Function(String history)? redirectHistoryDetail,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
-    if (redirectMaterialDetail != null) {
-      return redirectMaterialDetail(materialNumber);
+    if (redirectOrderDetail != null) {
+      return redirectOrderDetail(orderNumber);
     }
     return orElse();
   }
@@ -1018,13 +1162,13 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
-    required TResult Function(_RedirectMaterialDetail value)
-        redirectMaterialDetail,
-    required TResult Function(_RedirectHistoryDetail value)
-        redirectHistoryDetail,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
     required TResult Function(_Error value) error,
   }) {
-    return redirectMaterialDetail(this);
+    return redirectOrderDetail(this);
   }
 
   @override
@@ -1032,11 +1176,12 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
-    TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_Error value)? error,
   }) {
-    return redirectMaterialDetail?.call(this);
+    return redirectOrderDetail?.call(this);
   }
 
   @override
@@ -1044,88 +1189,100 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
-    TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
-    if (redirectMaterialDetail != null) {
-      return redirectMaterialDetail(this);
+    if (redirectOrderDetail != null) {
+      return redirectOrderDetail(this);
     }
     return orElse();
   }
 }
 
-abstract class _RedirectMaterialDetail implements DeepLinkingState {
-  const factory _RedirectMaterialDetail(final String materialNumber) =
-      _$_RedirectMaterialDetail;
+abstract class _RedirectOrderDetail implements DeepLinkingState {
+  const factory _RedirectOrderDetail(final OrderNumber orderNumber) =
+      _$_RedirectOrderDetail;
 
-  String get materialNumber;
+  OrderNumber get orderNumber;
   @JsonKey(ignore: true)
-  _$$_RedirectMaterialDetailCopyWith<_$_RedirectMaterialDetail> get copyWith =>
+  _$$_RedirectOrderDetailCopyWith<_$_RedirectOrderDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RedirectHistoryDetailCopyWith<$Res> {
-  factory _$$_RedirectHistoryDetailCopyWith(_$_RedirectHistoryDetail value,
-          $Res Function(_$_RedirectHistoryDetail) then) =
-      __$$_RedirectHistoryDetailCopyWithImpl<$Res>;
+abstract class _$$_RedirectReturnDetailCopyWith<$Res> {
+  factory _$$_RedirectReturnDetailCopyWith(_$_RedirectReturnDetail value,
+          $Res Function(_$_RedirectReturnDetail) then) =
+      __$$_RedirectReturnDetailCopyWithImpl<$Res>;
   @useResult
-  $Res call({String history});
+  $Res call({ReturnRequestsId returnId});
+
+  $ReturnRequestsIdCopyWith<$Res> get returnId;
 }
 
 /// @nodoc
-class __$$_RedirectHistoryDetailCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectHistoryDetail>
-    implements _$$_RedirectHistoryDetailCopyWith<$Res> {
-  __$$_RedirectHistoryDetailCopyWithImpl(_$_RedirectHistoryDetail _value,
-      $Res Function(_$_RedirectHistoryDetail) _then)
+class __$$_RedirectReturnDetailCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectReturnDetail>
+    implements _$$_RedirectReturnDetailCopyWith<$Res> {
+  __$$_RedirectReturnDetailCopyWithImpl(_$_RedirectReturnDetail _value,
+      $Res Function(_$_RedirectReturnDetail) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? history = null,
+    Object? returnId = null,
   }) {
-    return _then(_$_RedirectHistoryDetail(
-      null == history
-          ? _value.history
-          : history // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$_RedirectReturnDetail(
+      null == returnId
+          ? _value.returnId
+          : returnId // ignore: cast_nullable_to_non_nullable
+              as ReturnRequestsId,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnRequestsIdCopyWith<$Res> get returnId {
+    return $ReturnRequestsIdCopyWith<$Res>(_value.returnId, (value) {
+      return _then(_value.copyWith(returnId: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$_RedirectHistoryDetail implements _RedirectHistoryDetail {
-  const _$_RedirectHistoryDetail(this.history);
+class _$_RedirectReturnDetail implements _RedirectReturnDetail {
+  const _$_RedirectReturnDetail(this.returnId);
 
   @override
-  final String history;
+  final ReturnRequestsId returnId;
 
   @override
   String toString() {
-    return 'DeepLinkingState.redirectHistoryDetail(history: $history)';
+    return 'DeepLinkingState.redirectReturnDetail(returnId: $returnId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectHistoryDetail &&
-            (identical(other.history, history) || other.history == history));
+            other is _$_RedirectReturnDetail &&
+            (identical(other.returnId, returnId) ||
+                other.returnId == returnId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, history);
+  int get hashCode => Object.hash(runtimeType, returnId);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectHistoryDetailCopyWith<_$_RedirectHistoryDetail> get copyWith =>
-      __$$_RedirectHistoryDetailCopyWithImpl<_$_RedirectHistoryDetail>(
+  _$$_RedirectReturnDetailCopyWith<_$_RedirectReturnDetail> get copyWith =>
+      __$$_RedirectReturnDetailCopyWithImpl<_$_RedirectReturnDetail>(
           this, _$identity);
 
   @override
@@ -1133,11 +1290,13 @@ class _$_RedirectHistoryDetail implements _RedirectHistoryDetail {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
-    required TResult Function(String materialNumber) redirectMaterialDetail,
-    required TResult Function(String history) redirectHistoryDetail,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(StringValue paymentBatchAdditionalInfo)
+        redirectPaymentDetail,
     required TResult Function(ApiFailure failure) error,
   }) {
-    return redirectHistoryDetail(history);
+    return redirectReturnDetail(returnId);
   }
 
   @override
@@ -1145,11 +1304,13 @@ class _$_RedirectHistoryDetail implements _RedirectHistoryDetail {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
-    TResult? Function(String materialNumber)? redirectMaterialDetail,
-    TResult? Function(String history)? redirectHistoryDetail,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult? Function(ApiFailure failure)? error,
   }) {
-    return redirectHistoryDetail?.call(history);
+    return redirectReturnDetail?.call(returnId);
   }
 
   @override
@@ -1157,13 +1318,15 @@ class _$_RedirectHistoryDetail implements _RedirectHistoryDetail {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
-    TResult Function(String materialNumber)? redirectMaterialDetail,
-    TResult Function(String history)? redirectHistoryDetail,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
-    if (redirectHistoryDetail != null) {
-      return redirectHistoryDetail(history);
+    if (redirectReturnDetail != null) {
+      return redirectReturnDetail(returnId);
     }
     return orElse();
   }
@@ -1173,13 +1336,13 @@ class _$_RedirectHistoryDetail implements _RedirectHistoryDetail {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
-    required TResult Function(_RedirectMaterialDetail value)
-        redirectMaterialDetail,
-    required TResult Function(_RedirectHistoryDetail value)
-        redirectHistoryDetail,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
     required TResult Function(_Error value) error,
   }) {
-    return redirectHistoryDetail(this);
+    return redirectReturnDetail(this);
   }
 
   @override
@@ -1187,11 +1350,12 @@ class _$_RedirectHistoryDetail implements _RedirectHistoryDetail {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
-    TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_Error value)? error,
   }) {
-    return redirectHistoryDetail?.call(this);
+    return redirectReturnDetail?.call(this);
   }
 
   @override
@@ -1199,25 +1363,192 @@ class _$_RedirectHistoryDetail implements _RedirectHistoryDetail {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
-    TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
-    if (redirectHistoryDetail != null) {
-      return redirectHistoryDetail(this);
+    if (redirectReturnDetail != null) {
+      return redirectReturnDetail(this);
     }
     return orElse();
   }
 }
 
-abstract class _RedirectHistoryDetail implements DeepLinkingState {
-  const factory _RedirectHistoryDetail(final String history) =
-      _$_RedirectHistoryDetail;
+abstract class _RedirectReturnDetail implements DeepLinkingState {
+  const factory _RedirectReturnDetail(final ReturnRequestsId returnId) =
+      _$_RedirectReturnDetail;
 
-  String get history;
+  ReturnRequestsId get returnId;
   @JsonKey(ignore: true)
-  _$$_RedirectHistoryDetailCopyWith<_$_RedirectHistoryDetail> get copyWith =>
+  _$$_RedirectReturnDetailCopyWith<_$_RedirectReturnDetail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RedirectPaymentDetailCopyWith<$Res> {
+  factory _$$_RedirectPaymentDetailCopyWith(_$_RedirectPaymentDetail value,
+          $Res Function(_$_RedirectPaymentDetail) then) =
+      __$$_RedirectPaymentDetailCopyWithImpl<$Res>;
+  @useResult
+  $Res call({StringValue paymentBatchAdditionalInfo});
+}
+
+/// @nodoc
+class __$$_RedirectPaymentDetailCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectPaymentDetail>
+    implements _$$_RedirectPaymentDetailCopyWith<$Res> {
+  __$$_RedirectPaymentDetailCopyWithImpl(_$_RedirectPaymentDetail _value,
+      $Res Function(_$_RedirectPaymentDetail) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? paymentBatchAdditionalInfo = null,
+  }) {
+    return _then(_$_RedirectPaymentDetail(
+      null == paymentBatchAdditionalInfo
+          ? _value.paymentBatchAdditionalInfo
+          : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
+  const _$_RedirectPaymentDetail(this.paymentBatchAdditionalInfo);
+
+  @override
+  final StringValue paymentBatchAdditionalInfo;
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectPaymentDetail(paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RedirectPaymentDetail &&
+            (identical(other.paymentBatchAdditionalInfo,
+                    paymentBatchAdditionalInfo) ||
+                other.paymentBatchAdditionalInfo ==
+                    paymentBatchAdditionalInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, paymentBatchAdditionalInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RedirectPaymentDetailCopyWith<_$_RedirectPaymentDetail> get copyWith =>
+      __$$_RedirectPaymentDetailCopyWithImpl<_$_RedirectPaymentDetail>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(Uri link) linkPending,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(StringValue paymentBatchAdditionalInfo)
+        redirectPaymentDetail,
+    required TResult Function(ApiFailure failure) error,
+  }) {
+    return redirectPaymentDetail(paymentBatchAdditionalInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(Uri link)? linkPending,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
+    TResult? Function(ApiFailure failure)? error,
+  }) {
+    return redirectPaymentDetail?.call(paymentBatchAdditionalInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Uri link)? linkPending,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
+    TResult Function(ApiFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectPaymentDetail != null) {
+      return redirectPaymentDetail(paymentBatchAdditionalInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_Error value) error,
+  }) {
+    return redirectPaymentDetail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_Error value)? error,
+  }) {
+    return redirectPaymentDetail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectPaymentDetail != null) {
+      return redirectPaymentDetail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectPaymentDetail implements DeepLinkingState {
+  const factory _RedirectPaymentDetail(
+      final StringValue paymentBatchAdditionalInfo) = _$_RedirectPaymentDetail;
+
+  StringValue get paymentBatchAdditionalInfo;
+  @JsonKey(ignore: true)
+  _$$_RedirectPaymentDetailCopyWith<_$_RedirectPaymentDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1295,8 +1626,10 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
-    required TResult Function(String materialNumber) redirectMaterialDetail,
-    required TResult Function(String history) redirectHistoryDetail,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(StringValue paymentBatchAdditionalInfo)
+        redirectPaymentDetail,
     required TResult Function(ApiFailure failure) error,
   }) {
     return error(failure);
@@ -1307,8 +1640,10 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
-    TResult? Function(String materialNumber)? redirectMaterialDetail,
-    TResult? Function(String history)? redirectHistoryDetail,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return error?.call(failure);
@@ -1319,8 +1654,10 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
-    TResult Function(String materialNumber)? redirectMaterialDetail,
-    TResult Function(String history)? redirectHistoryDetail,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -1335,10 +1672,10 @@ class _$_Error implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
-    required TResult Function(_RedirectMaterialDetail value)
-        redirectMaterialDetail,
-    required TResult Function(_RedirectHistoryDetail value)
-        redirectHistoryDetail,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -1349,8 +1686,9 @@ class _$_Error implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
-    TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -1361,8 +1699,9 @@ class _$_Error implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
-    TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
-    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
