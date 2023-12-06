@@ -23,9 +23,11 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_details_section.dart';
+import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_items_section.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/order_number_section.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/summary.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -402,6 +404,44 @@ void main() {
       expect(find.byKey(WidgetKeys.invoiceDetailsPageListView), findsOneWidget);
       expect(find.byType(InvoiceSummary), findsOneWidget);
       expect(find.textContaining('Total savings'), findsOneWidget);
+    });
+
+    testWidgets(' => Display invoice item section', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+        ),
+      );
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          details: [
+            fakeInvoiceDetail,
+          ],
+        ),
+      );
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      expect(find.byType(InvoiceSummary), findsOneWidget);
+      await tester.drag(find.byType(InvoiceSummary), const Offset(0, -1000));
+      await tester.pumpAndSettle();
+      expect(
+        find.byType(InvoiceItemsSection),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(
+          WidgetKeys.invoiceDetailMaterialUnitPrice,
+        ),
+        findsOneWidget,
+      );
+      expect(
+        (tester.widget(
+          find.byKey(WidgetKeys.invoiceDetailMaterialUnitPrice),
+        ) as PriceComponent)
+            .price,
+        fakeInvoiceDetail.unitPrice.toString(),
+      );
     });
   });
 }

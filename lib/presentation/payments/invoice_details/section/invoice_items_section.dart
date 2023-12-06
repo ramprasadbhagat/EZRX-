@@ -84,6 +84,7 @@ class _InvoiceItemDetail extends StatelessWidget {
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return CommonTileItem(
+      key: Key(customerDocumentDetail.batchNumber.getOrDefaultValue('')),
       headerText:
           '${context.tr('Batch')} ${customerDocumentDetail.batchNumber.getOrDefaultValue('')} (EXP:${customerDocumentDetail.expiryDate.dateString})',
       materialNumber: customerDocumentDetail.materialNumber,
@@ -115,9 +116,7 @@ class _InvoiceItemDetail extends StatelessWidget {
       priceComponent: PriceComponent(
         key: WidgetKeys.invoiceDetailMaterialUnitPrice,
         salesOrgConfig: salesOrgConfigs,
-        price: salesOrgConfigs.salesOrg.isID
-            ? customerDocumentDetail.unitPrice.toString()
-            : customerDocumentDetail.grossAmount.toString(),
+        price: customerDocumentDetail.unitPrice.toString(),
       ),
     );
   }
