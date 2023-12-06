@@ -537,12 +537,53 @@ void main() {
           checkoutScrollListFinder,
           const Offset(0, -100),
         );
-        final selectDateFinder = find.byKey(WidgetKeys.selectDate);
-        expect(selectDateFinder, findsOneWidget);
         if (DateTime.now().hour <
             fakeSalesOrgConfigEnableFutureDeliveryDayRequired
                 .salesOrg.cutOffTime) {
-          await tester.tap(selectDateFinder);
+          await tester.tap(deliveryDateFinder);
+          await tester.pumpAndSettle();
+          expect(find.byType(CalendarDatePicker), findsOneWidget);
+        }
+      },
+    );
+    testWidgets(
+      '=> test Delivery Date ',
+      (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
+                .copyWith(futureDeliveryDay: FutureDeliveryDay('7')),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        final deliveryInformationTextFinder =
+            find.textContaining('Delivery information'.tr());
+        expect(deliveryInformationTextFinder, findsOneWidget);
+        final checkoutScrollListFinder =
+            find.byKey(WidgetKeys.checkoutScrollList);
+        final deliveryDateFinder = find.byKey(WidgetKeys.deliveryDate);
+        expect(deliveryDateFinder, findsOneWidget);
+        expect(
+          (tester.widget(deliveryDateFinder) as TextFormField)
+              .validator
+              ?.call('DeliveryDate field'),
+          null,
+        );
+        await tester.dragUntilVisible(
+          deliveryDateFinder,
+          checkoutScrollListFinder,
+          const Offset(0, -100),
+        );
+        if (DateTime.now().hour <
+            fakeSalesOrgConfigEnableFutureDeliveryDayRequired
+                .salesOrg.cutOffTime) {
+          await tester.tap(deliveryDateFinder);
           await tester.pumpAndSettle();
           expect(find.byType(CalendarDatePicker), findsOneWidget);
         }
@@ -2000,7 +2041,7 @@ void main() {
       );
 
       // Simulate tapping the select date button
-      await tester.tap(find.byKey(WidgetKeys.selectDate));
+      await tester.tap(find.byKey(WidgetKeys.deliveryDate));
       await tester.pumpAndSettle();
 
       // Verify that the date picker is displayed

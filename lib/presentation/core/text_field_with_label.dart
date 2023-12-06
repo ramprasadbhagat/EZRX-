@@ -17,6 +17,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.initValue,
     this.obscureText = false,
     this.onDone,
+    this.onTap,
     this.maxLines = 1,
     this.mandatory = false,
     this.readOnly = false,
@@ -39,6 +40,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final String? initValue;
   final bool obscureText;
   final Function(String)? onDone;
+  final Function()? onTap;
   final int maxLines;
   final bool mandatory;
   final bool readOnly;
@@ -89,6 +91,7 @@ class TextFieldWithLabel extends StatelessWidget {
           maxLines: maxLines,
           maxLength: maxLength,
           readOnly: readOnly,
+          onTap: onTap,
         ),
       ],
     );

@@ -60,37 +60,34 @@ class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
                     (_) => null,
                   );
             },
+            onTap: state.deliveryInfoData.greenDeliveryEnabled ||
+                    state.isLoading
+                ? null
+                : ([bool mounted = true]) async {
+                    final dateTime = await pickDate(context);
+                    if (!mounted) return;
+                    _deliveryDateText.text =
+                        DateTimeUtils.getDeliveryDateString(dateTime);
+                    context.read<AdditionalDetailsBloc>().add(
+                          AdditionalDetailsEvent.onTextChange(
+                            label: DeliveryInfoLabel.deliveryDate,
+                            newValue: DateTimeUtils.getApiDateWithDashString(
+                              dateTime,
+                            ),
+                          ),
+                        );
+                  },
             onChanged: (value) {},
             decoration: InputDecoration(
               hintText: context.tr('Select date'),
               suffixIconConstraints:
                   const BoxConstraints(maxHeight: 22, minHeight: 22),
-              suffixIcon: IconButton(
-                splashRadius: 22,
-                padding: EdgeInsets.zero,
-                key: WidgetKeys.selectDate,
-                icon: const Icon(
+              suffixIcon: const Padding(
+                padding: EdgeInsets.only(right: 8),
+                child: Icon(
                   Icons.date_range_outlined,
                   size: 22,
                 ),
-                onPressed: state.deliveryInfoData.greenDeliveryEnabled ||
-                        state.isLoading
-                    ? null
-                    : ([bool mounted = true]) async {
-                        final dateTime = await pickDate(context);
-                        if (!mounted) return;
-                        _deliveryDateText.text =
-                            DateTimeUtils.getDeliveryDateString(dateTime);
-                        context.read<AdditionalDetailsBloc>().add(
-                              AdditionalDetailsEvent.onTextChange(
-                                label: DeliveryInfoLabel.deliveryDate,
-                                newValue:
-                                    DateTimeUtils.getApiDateWithDashString(
-                                  dateTime,
-                                ),
-                              ),
-                            );
-                      },
               ),
             ),
           ),
