@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
@@ -44,15 +45,29 @@ class ItemDetailsSection extends StatelessWidget {
             title: orderHistoryItem.materialDescription,
             priceComponent: orderHistoryItem.isBonusMaterial
                 ? null
-                : OrderItemPrice(
-                    unitPrice: orderHistoryItem.itemUnitPrice(
-                      eligibilityState.isMYExternalSalesRepUser,
-                      eligibilityState.salesOrg.isID,
-                    ),
-                    originPrice:
-                        orderHistoryItem.originPrice.getOrDefaultValue(''),
-                    showPreviousPrice: orderHistoryItem.isCounterOffer,
-                    hasDescription: true,
+                : Row(
+                    children: [
+                      if (orderHistoryItem.showMaterialListPrice)
+                        PriceComponent(
+                          salesOrgConfig: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrgConfigs,
+                          price: orderHistoryItem.originPrice
+                              .getOrDefaultValue(''),
+                          type: PriceStyle.materialListPriceStrikeThrough,
+                        ),
+                      OrderItemPrice(
+                        unitPrice: orderHistoryItem.itemUnitPrice(
+                          eligibilityState.isMYExternalSalesRepUser,
+                          eligibilityState.salesOrg.isID,
+                        ),
+                        originPrice:
+                            orderHistoryItem.originPrice.getOrDefaultValue(''),
+                        showPreviousPrice: orderHistoryItem.isCounterOffer,
+                        hasDescription: true,
+                      ),
+                    ],
                   ),
             statusWidget: StatusLabel(
               key: WidgetKeys.orderItemStatusKey,

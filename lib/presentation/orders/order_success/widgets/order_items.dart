@@ -54,17 +54,24 @@ class _OrderItems extends StatelessWidget {
                                 e.materialNumber.getOrDefaultValue(''),
                               ),
                               subtitle: '',
-                              priceComponent: PriceComponent(
-                                key: WidgetKeys.orderSuccessItemUnitPrice,
-                                price: e.itemUnitPrice(
-                                  invoiceNumber,
-                                  isMYExternalSalesRep,
-                                  isIDMarket,
-                                ),
-                                salesOrgConfig: context
-                                    .read<EligibilityBloc>()
-                                    .state
-                                    .salesOrgConfigs,
+                              priceComponent: Row(
+                                children: [
+                                  ListPriceStrikeThroughComponent(
+                                    priceAggregate: e.priceAggregate,
+                                  ),
+                                  PriceComponent(
+                                    key: WidgetKeys.orderSuccessItemUnitPrice,
+                                    price: e.itemUnitPrice(
+                                      invoiceNumber,
+                                      isMYExternalSalesRep,
+                                      isIDMarket,
+                                    ),
+                                    salesOrgConfig: context
+                                        .read<EligibilityBloc>()
+                                        .state
+                                        .salesOrgConfigs,
+                                  ),
+                                ],
                               ),
                               title: e.materialDescription,
                               quantity: '${e.qty}',

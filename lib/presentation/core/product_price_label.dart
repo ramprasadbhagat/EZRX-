@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -65,14 +66,17 @@ class ProductPriceLabel extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (priceAggregate.zdp5PriceDisplay)
-                Padding(
-                  padding: const EdgeInsets.only(right: 5),
-                  child: PriceComponent(
-                    price: priceAggregate.displayZdp5Price,
-                    salesOrgConfig: salesOrgConfig,
-                  ),
-                ),
+              priceAggregate.zdp5PriceDisplay
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: PriceComponent(
+                        price: priceAggregate.displayZdp5Price,
+                        salesOrgConfig: salesOrgConfig,
+                      ),
+                    )
+                  : ListPriceStrikeThroughComponent(
+                      priceAggregate: priceAggregate,
+                    ),
               PriceComponent(
                 type: priceAggregate.zdp5PriceDisplay
                     ? PriceStyle.counterOfferPrice

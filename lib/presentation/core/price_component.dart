@@ -89,6 +89,7 @@ class PriceComponent extends StatelessWidget {
     if (type == PriceStyle.bundlePrice ||
         type == PriceStyle.bundleListPriceStrikeThrough ||
         type == PriceStyle.bundleActiveOfferPrice ||
+        type == PriceStyle.materialListPriceStrikeThrough ||
         type == PriceStyle.bundleFinalPrice) {
       textSpans
           .add(TextSpan(text: ' $trailingText', style: currencyCodeTextStyle));
@@ -129,6 +130,7 @@ enum PriceStyle {
   comboSubTotalExclTax,
   negativePrice,
   returnBonusPrice,
+  materialListPriceStrikeThrough,
 }
 
 Color _priceTextColor(PriceStyle type) {
@@ -156,6 +158,7 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.taxPrice:
     case PriceStyle.comboSubTotalItemWithTax:
     case PriceStyle.bundleFinalPrice:
+    case PriceStyle.materialListPriceStrikeThrough:
       return ZPColors.darkGray;
 
     case PriceStyle.negativePrice:
@@ -170,6 +173,7 @@ TextDecoration? _priceTextDecoration(PriceStyle type) {
     case PriceStyle.bundleListPriceStrikeThrough:
     case PriceStyle.counterOfferPrice:
     case PriceStyle.comboOfferPrice:
+    case PriceStyle.materialListPriceStrikeThrough:
       return TextDecoration.lineThrough;
     default:
       return null;
@@ -187,6 +191,7 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.bundleFinalPrice:
     case PriceStyle.bundleListPriceStrikeThrough:
     case PriceStyle.counterOfferPrice:
+    case PriceStyle.materialListPriceStrikeThrough:
       priceTextStyle = Theme.of(context).textTheme.bodySmall!;
       break;
     case PriceStyle.bonusPrice:
@@ -234,6 +239,7 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
             color: ZPColors.primary,
           );
     case PriceStyle.bundleListPriceStrikeThrough:
+    case PriceStyle.materialListPriceStrikeThrough:
     case PriceStyle.counterOfferPrice:
       return Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.darkGray,

@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -88,16 +89,33 @@ class OrderItemDetailsSection extends StatelessWidget {
                                     title: e.materialDescription,
                                     priceComponent: e.isBonus
                                         ? null
-                                        : OrderItemPrice(
-                                            unitPrice: e.itemUnitPrice(
-                                              invoiceNumber,
-                                              isMYExternalSalesRep,
-                                              isIDMarket,
-                                            ),
-                                            originPrice: e.originPrice.zpPrice
-                                                .toString(),
-                                            showPreviousPrice: e.isCounterOffer,
-                                            hasDescription: true,
+                                        : Row(
+                                            children: [
+                                              if (e.showMaterialListPrice)
+                                                PriceComponent(
+                                                  salesOrgConfig: context
+                                                      .read<EligibilityBloc>()
+                                                      .state
+                                                      .salesOrgConfigs,
+                                                  price: e.originPrice
+                                                      .getOrDefaultValue(''),
+                                                  type: PriceStyle
+                                                      .materialListPriceStrikeThrough,
+                                                ),
+                                              OrderItemPrice(
+                                                unitPrice: e.itemUnitPrice(
+                                                  invoiceNumber,
+                                                  isMYExternalSalesRep,
+                                                  isIDMarket,
+                                                ),
+                                                originPrice: e
+                                                    .originPrice.zpPrice
+                                                    .toString(),
+                                                showPreviousPrice:
+                                                    e.isCounterOffer,
+                                                hasDescription: true,
+                                              ),
+                                            ],
                                           ),
                                     statusWidget: isIDMarket
                                         ? null

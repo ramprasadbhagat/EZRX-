@@ -175,6 +175,8 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         parentID: productType.typeBundle ? parentId : '',
         quantity: MaterialQty(qty),
       );
+
+  bool get showMaterialListPrice => originPrice.zpPrice > unitPrice.zpPrice;
 }
 
 extension ViewByOrderDetailsListExtension

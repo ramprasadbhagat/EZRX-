@@ -762,10 +762,11 @@ class PriceAggregate with _$PriceAggregate {
       materialInfo.isFOCMaterial;
 
   bool get displayCutOffListPrice =>
-      price.isCounterOfferRequested && !materialInfo.hidePrice ||
+      (price.isCounterOfferRequested && !materialInfo.hidePrice) ||
       (price.zdp5MaxQuota.isValidValue &&
           price.zdp5RemainingQuota.isValidValue &&
-          materialInfo.quantity.intValue >= 2);
+          materialInfo.quantity.intValue >= 2) ||
+      showMaterialListPrice;
 
   int get stockQuantity => stockInfoList
       .firstWhere(
@@ -787,6 +788,15 @@ class PriceAggregate with _$PriceAggregate {
   bool get isBundleMinimumQuantitySatisfies =>
       getTotalQuantityOfBundleProduct >=
       bundle.minimumQuantityBundleMaterial.quantity;
+
+  bool get showMaterialListPrice {
+    final regex = RegExp(r'[a-zA-Z]');
+    final listPrice = display(PriceType.listPrice);
+    final finalPrice = display(PriceType.finalPrice);
+    
+    return !(regex.hasMatch(listPrice) || regex.hasMatch(finalPrice)) &&
+        double.parse(listPrice) > double.parse(finalPrice);
+  }
 }
 
 enum PriceType {

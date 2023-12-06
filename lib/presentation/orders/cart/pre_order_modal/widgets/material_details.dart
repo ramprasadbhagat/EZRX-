@@ -41,11 +41,16 @@ class _MaterialDetails extends StatelessWidget {
             ),
           ),
           if (cartItem.materialInfo.type.typeMaterial)
-            PriceComponent(
-              key: WidgetKeys.preOrderModalItemFinalPrice,
-              salesOrgConfig:
-                  context.read<EligibilityBloc>().state.salesOrgConfigs,
-              price: cartItem.finalPriceTotalForAllMaterial,
+            Row(
+              children: [
+                ListPriceStrikeThroughComponent(priceAggregate: cartItem),
+                PriceComponent(
+                  key: WidgetKeys.preOrderModalItemFinalPrice,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: cartItem.finalPriceTotalForAllMaterial,
+                ),
+              ],
             ),
         ],
       ),

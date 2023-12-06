@@ -142,6 +142,8 @@ class OrderHistoryItem with _$OrderHistoryItem {
 
     return price;
   }
+
+  bool get showMaterialListPrice => originPrice.zpPrice > unitPrice.zpPrice;
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {
