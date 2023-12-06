@@ -53,7 +53,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
 
 //to convert if amountInTransactionCurrency value is negative
   double get convertIfAmountInTransactionCurrencyIsNegative =>
-      amountInTransactionCurrency * -1;
+      amountInTransactionCurrency.abs();
   double get totalExcludeTax => amountInTransactionCurrency - taxAmount;
 }
 

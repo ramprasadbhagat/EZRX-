@@ -116,15 +116,15 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
           },
         if (amountValueTo.isNotEmpty)
           {
-            'field': 'openAmountInTransCrcy',
-            'value': '-$amountValueTo',
-            'type': 'ge',
+            'field': 'amountInTransactionCurrency',
+            'value': amountValueTo,
+            'type': 'le',
           },
         if (amountValueFrom.isNotEmpty)
           {
-            'field': 'openAmountInTransCrcy',
-            'value': '-$amountValueFrom',
-            'type': 'le',
+            'field': 'amountInTransactionCurrency',
+            'value': amountValueFrom,
+            'type': 'ge',
           },
         if (searchKey.isNotEmpty)
           {
