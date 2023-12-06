@@ -110,7 +110,7 @@ class _DeliveryInfoState extends State<_DeliveryInfo> {
                                 ),
                               if (config.enableMobileNumber)
                                 _TextFormField(
-                                  labelText: 'Contact Person',
+                                  labelText: 'Contact person',
                                   keyText: 'contactPersonKey',
                                   hintText: 'Enter contact person name',
                                   label: DeliveryInfoLabel.contactPerson,
@@ -456,7 +456,9 @@ class _MobileNumber extends StatelessWidget {
               InternationalPhoneNumberInput(
                 key: WidgetKeys.internationalPhoneNumberInput,
                 focusNode: focusNode,
-                countries: const ['MY'],
+                countries: [
+                  context.read<EligibilityBloc>().state.salesOrg.country,
+                ],
                 onInputValidated: (bool value) {},
                 autoValidateMode: additionalDetailsState.showErrorMessages
                     ? AutovalidateMode.always
