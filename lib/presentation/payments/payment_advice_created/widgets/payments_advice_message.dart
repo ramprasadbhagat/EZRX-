@@ -6,13 +6,15 @@ class _PaymentBankInAdviceMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.read<NewPaymentBloc>().state;
-
+    
     return Padding(
+      key: WidgetKeys.paymentBankInAdviceMessage,
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Align(
+            key: WidgetKeys.paymentNeedOpenWebViewIcon,
             alignment: Alignment.center,
             child: SvgPicture.asset(
               SvgImage.checkCircle,
@@ -72,11 +74,13 @@ class _PaymentGatewayAdviceMessage extends StatelessWidget {
         : 'has been generated. Scan the QR code and complete payment.';
 
     return Padding(
+      key: WidgetKeys.paymentGatewayAdviceMessage,
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
       child: Column(
         children: [
           if (!state.salesOrganisation.salesOrg.isPaymentNeedOpenWebView)
             Align(
+              key: WidgetKeys.paymentNeedOpenWebViewIcon,
               alignment: Alignment.center,
               child: SvgPicture.asset(
                 SvgImage.checkCircle,

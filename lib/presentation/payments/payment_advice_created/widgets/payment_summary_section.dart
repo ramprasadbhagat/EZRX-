@@ -10,6 +10,7 @@ class _PaymentSummarySection extends StatelessWidget {
     return BlocBuilder<NewPaymentBloc, NewPaymentState>(
       builder: (context, state) {
         return SafeArea(
+          key: WidgetKeys.createAdviceSummary,
           top: false,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),

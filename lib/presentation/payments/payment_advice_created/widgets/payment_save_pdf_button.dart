@@ -35,6 +35,7 @@ class PaymentSavePdfButton extends StatelessWidget {
           previous.isFetchingInvoiceInfoPdf != current.isFetchingInvoiceInfoPdf,
       builder: (context, state) {
         return OutlinedButton(
+          key: WidgetKeys.paymentSavePdfButton,
           style: OutlinedButton.styleFrom(
             side: const BorderSide(
               color: ZPColors.primary,

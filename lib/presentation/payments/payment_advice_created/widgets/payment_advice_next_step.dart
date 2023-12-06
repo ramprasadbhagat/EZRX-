@@ -21,6 +21,7 @@ class _PaymentAdviceNextStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.paymentAdviceNextStep,
       padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

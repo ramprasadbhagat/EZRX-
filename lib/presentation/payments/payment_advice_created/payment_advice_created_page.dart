@@ -97,7 +97,11 @@ class _BodyContent extends StatelessWidget {
           previous.isFetchingInvoiceInfoPdf != current.isFetchingInvoiceInfoPdf,
       builder: (context, state) {
         return state.isFetchingInvoiceInfoPdf
-            ? Center(child: LoadingShimmer.logo())
+            ? Center(
+                child: LoadingShimmer.logo(
+                  key: WidgetKeys.paymentAdviceScreenLoader,
+                ),
+              )
             : Column(
                 children: const [
                   Expanded(

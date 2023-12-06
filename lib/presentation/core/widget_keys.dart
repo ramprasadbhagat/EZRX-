@@ -1308,4 +1308,22 @@ class WidgetKeys {
   //============================================================
   static Key chatBotFloatingActionButton =
       const Key('chatBotFloatingActionButton');
+
+  //============================================================
+  // Payment advice Page
+  //============================================================
+  static Key paymentAdviceScreenLoader = const Key('paymentAdviceScreenLoader');
+  static Key paymentBankInAdviceMessage =
+      const Key('paymentBankInAdviceMessage');
+  static Key paymentGatewayAdviceMessage =
+      const Key('paymentGatewayAdviceMessage');
+  static Key paymentNeedOpenWebViewIcon =
+      const Key('paymentNeedOpenWebViewIcon');
+  static Key paymentAdvicePleaseNote = const Key('paymentAdvicePleaseNote');
+  static Key paymentAdviceButton = const Key('paymentAdviceButton');
+  static Key paymentSummaryButton = const Key('paymentSummaryButton');
+  static Key paymentSavePdfButton = const Key('paymentSavePdfButton');
+  static Key createAdviceSummary = const Key('createAdviceSummary');
+  static Key paymentAdviceNextStep = const Key('paymentAdviceNextStep');
+
 }

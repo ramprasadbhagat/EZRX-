@@ -8,6 +8,7 @@ class _PaymentAdviceButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: WidgetKeys.paymentAdviceButton,
       decoration: const BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -23,6 +24,7 @@ class _PaymentAdviceButtons extends StatelessWidget {
         key: WidgetKeys.buttonRowKey,
         children: [
           Expanded(
+            key: WidgetKeys.paymentSummaryButton,
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(
