@@ -48,11 +48,11 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           ),
         );
         mixpanelRepository.registerSuperProps(
-          username: e.user.username.getOrDefaultValue(''),
-          salesOrg: e.salesOrganisation.salesOrg.getOrDefaultValue(''),
-          customerCode: e.customerCodeInfo.customerCodeSoldTo,
-          shipToAddress: e.shipToInfo.shipToCustomerCode,
-          userRole: e.user.role.type.getOrDefaultValue(''),
+          user: e.user,
+          salesOrg: e.salesOrganisation.salesOrg,
+          salesOrgConfigs: e.salesOrgConfigs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
         );
         final failureOrSuccess = await chatBotRepository.passPayloadToChatbot(
           salesOrganisation: state.salesOrganisation,

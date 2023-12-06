@@ -36,6 +36,9 @@ class MixpanelService {
     required String customerCode,
     required String shipToAddress,
     required String userRole,
+    required String platform,
+    required String market,
+    required String currency,
   }) {
     mixpanel.registerSuperProperties({
       MixpanelProps.username: username,
@@ -43,6 +46,9 @@ class MixpanelService {
       MixpanelProps.customerCode: customerCode,
       MixpanelProps.shipToAddress: shipToAddress,
       MixpanelProps.userRole: userRole,
+      MixpanelProps.platform: platform,
+      MixpanelProps.market: market,
+      MixpanelProps.currency: currency,
     });
   }
 

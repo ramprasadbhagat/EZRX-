@@ -1,4 +1,7 @@
 class MixpanelProps {
+  static String platform = 'platform';
+  static String market = 'market';
+  static String currency = 'currency';
   static String loginMethod = 'login_method';
   static String errorMessage = 'error_msg';
   static String bannerClicked = 'banner_clicked';
@@ -8,7 +11,7 @@ class MixpanelProps {
   static String bannerRedirected = 'redirected';
   static String bannerType = 'banner_type';
   static String shipToAddress = 'ship_to_address';
-  static String salesOrg = 'sales_org';
+  static String salesOrg = 'salesorg';
   static String customerCode = 'customer_code';
   static String searchKeyword = 'search_keyword';
   static String searchFrom = 'search_from';
