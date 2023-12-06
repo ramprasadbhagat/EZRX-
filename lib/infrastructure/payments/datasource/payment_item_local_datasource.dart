@@ -35,6 +35,61 @@ class PaymentItemLocalDataSource {
     ).toDomain();
   }
 
+  Future<PaymentSummaryDetails> getPaymentSummaryDetailsSG() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/paymentSummaryListResponse.json',
+      ),
+    );
+    final list = data['data']['customerPayment']['customerPaymentResponse'];
+
+    final payment = list.firstWhere(
+      (element) => element['paymentID'] == '213',
+      orElse: () => PaymentSummaryDetails.empty(),
+    );
+
+    return PaymentSummaryDetailsDto.fromJson(
+      payment,
+    ).toDomain();
+  }
+
+  Future<PaymentSummaryDetails> getPaymentSummaryDetailsPHPayment() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/paymentSummaryListResponse.json',
+      ),
+    );
+    final list = data['data']['customerPayment']['customerPaymentResponse'];
+
+    final payment = list.firstWhere(
+      (element) => element['paymentID'] == '214',
+      orElse: () => PaymentSummaryDetails.empty(),
+    );
+
+    return PaymentSummaryDetailsDto.fromJson(
+      payment,
+    ).toDomain();
+  }
+
+  Future<PaymentSummaryDetails> getPaymentSummaryDetailsPHBankIn() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/paymentSummaryListResponse.json',
+      ),
+    );
+
+    final list = data['data']['customerPayment']['customerPaymentResponse'];
+
+    final payment = (list as List).firstWhere(
+      (element) => element['paymentID'] == '215',
+      orElse: () => PaymentSummaryDetails.empty(),
+    );
+
+    return PaymentSummaryDetailsDto.fromJson(
+      payment,
+    ).toDomain();
+  }
+
   Future<bool> deleteCustomerPayment() async {
     final data = json.decode(
       await rootBundle.loadString(

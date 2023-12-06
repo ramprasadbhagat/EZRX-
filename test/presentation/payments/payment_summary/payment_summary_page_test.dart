@@ -27,6 +27,7 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -107,6 +108,7 @@ void main() {
   late PaymentSummaryDetailBlocMock paymentSummaryDetailBlocMock;
   late AvailableCreditsBlocMock availableCreditsBlocMock;
   late NewPaymentBlocMock newPaymentBlocMock;
+  late PaymentSummaryDetails paymentSummaryDetails;
 
   final fakeDate = DateTimeStringValue('fake-date');
   final fakeAdviceExpiry = AdviceExpiryValue('fake-advice-expiry');
@@ -136,6 +138,8 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
+    paymentSummaryDetails =
+        await PaymentItemLocalDataSource().getPaymentSummaryDetailsPHPayment();
     paymentSummaryList = [
       PaymentSummaryDetails.empty().copyWith(
         paymentAmount: 200,
@@ -544,6 +548,23 @@ void main() {
       expect(find.byType(ListTile), findsOneWidget);
     });
 
+    testWidgets('Payment Summary list show status In Progress', (tester) async {
+      when(() => paymentSummaryBloc.state).thenReturn(
+        PaymentSummaryState.initial().copyWith(
+          salesOrganization: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          details: [
+            paymentSummaryDetails,
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      expect(find.text('In Progress'), findsOneWidget);
+    });
+
     testWidgets('Payment Summary user filter success Test', (tester) async {
       when(() => paymentSummaryBloc.state).thenReturn(
         PaymentSummaryState.initial().copyWith(
@@ -741,8 +762,7 @@ void main() {
         paymentSummaryFilterBloc,
         Stream.fromIterable([
           PaymentSummaryFilterState.initial().copyWith(
-            filter: PaymentSummaryFilter.empty()
-                .copyWith(filterStatuses: []),
+            filter: PaymentSummaryFilter.empty().copyWith(filterStatuses: []),
           )
         ]),
       );
@@ -758,7 +778,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
-
 
       final inProgressRadio = find.text('In Progress');
 

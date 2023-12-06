@@ -76,6 +76,9 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late PaymentSummaryDetails fakePaymentDetails;
   late PaymentSummaryDetails mockPaymentDetails;
+  late PaymentSummaryDetails paymentDetailsPHPayment;
+  late PaymentSummaryDetails paymentDetailsSGPayment;
+  late PaymentSummaryDetails paymentDetailsBankInPayment;
   late PaymentInvoiceInfoPdf mockPaymentInvoiceInfoPdf;
   late MaterialPageX paymentSummaryPageMock;
 
@@ -111,6 +114,12 @@ void main() {
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
     mockPaymentDetails =
         await PaymentItemLocalDataSource().getPaymentSummaryDetails();
+    paymentDetailsPHPayment =
+        await PaymentItemLocalDataSource().getPaymentSummaryDetailsPHPayment();
+    paymentDetailsSGPayment =
+        await PaymentItemLocalDataSource().getPaymentSummaryDetailsSG();
+    paymentDetailsBankInPayment =
+        await PaymentItemLocalDataSource().getPaymentSummaryDetailsPHBankIn();
     mockPaymentInvoiceInfoPdf =
         await NewPaymentLocalDataSource().getPaymentInvoiceInfoPdf();
   });
@@ -635,6 +644,176 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets(
+        'Payment Summary Details Page - Cancel payment advice and verify cancel event call',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
+      when(
+        () => autoRouterMock.pop(),
+      ).thenAnswer((invocation) async => false);
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDetailFetching: true,
+          isFetchingAdvice: true,
+        ),
+      );
+      final expectedStates = PaymentSummaryDetailsState.initial().copyWith(
+        isDetailFetching: false,
+        isFetchingAdvice: false,
+        details: PaymentSummaryDetails.empty().copyWith(
+          paymentItems: [
+            PaymentItem.empty().copyWith(
+              documentDate: DateTimeStringValue(''),
+            ),
+          ],
+        ),
+        paymentInvoiceInfoPdf:
+            PaymentInvoiceInfoPdf.empty().copyWith(paymentID: 'paymentID'),
+      );
+
+      when(
+        () => mockPaymentSummaryDetailsBloc.state,
+      ).thenReturn(expectedStates);
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final cancelAdviceButton = find.byKey(
+        WidgetKeys.cancelAdviceButtonKey,
+      );
+      final deleteAdviceBottomSheetFinder = find.byKey(
+        WidgetKeys.deleteCancelAdviceBottomSheet,
+      );
+      final deleteCancelAdviceBottomSheetButtonFinder = find.byKey(
+        WidgetKeys.deleteCancelAdviceBottomSheetButton,
+      );
+      expect(cancelAdviceButton, findsOneWidget);
+      await tester.tap(cancelAdviceButton);
+      await tester.pumpAndSettle();
+      expect(deleteAdviceBottomSheetFinder, findsOneWidget);
+      expect(deleteCancelAdviceBottomSheetButtonFinder, findsOneWidget);
+      await tester.tap(deleteCancelAdviceBottomSheetButtonFinder);
+      await tester.pump();
+      verify(
+        () => mockPaymentSummaryDetailsBloc.add(
+          const PaymentSummaryDetailsEvent.cancelAdvice(),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(
+        'Payment Summary Details Page - PHPayment => In Progress Status',
+        (tester) async {
+      final initialState = PaymentSummaryDetailsState.initial().copyWith(
+        details: PaymentSummaryDetails.empty().copyWith(
+          paymentItems: [
+            PaymentItem.empty().copyWith(
+              documentDate: DateTimeStringValue(''),
+            ),
+          ],
+        ),
+        paymentInvoiceInfoPdf:
+            PaymentInvoiceInfoPdf.empty().copyWith(paymentID: 'paymentID'),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
+
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        initialState.copyWith(
+          details: paymentDetailsPHPayment,
+          failureOrSuccessOption: optionOf(const Right('')),
+        ),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pump();
+      expect(find.text('In Progress'), findsOneWidget);
+    });
+
+    testWidgets('Payment Summary Details Page - SGDPayment => Pending Status',
+        (tester) async {
+      final initialState = PaymentSummaryDetailsState.initial().copyWith(
+        details: PaymentSummaryDetails.empty().copyWith(
+          paymentItems: [
+            PaymentItem.empty().copyWith(
+              documentDate: DateTimeStringValue(''),
+            ),
+          ],
+        ),
+        paymentInvoiceInfoPdf:
+            PaymentInvoiceInfoPdf.empty().copyWith(paymentID: 'paymentID'),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
+
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        initialState.copyWith(
+          details: paymentDetailsSGPayment,
+          failureOrSuccessOption: optionOf(const Right('')),
+        ),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pump();
+      expect(find.text('Pending'), findsOneWidget);
+    });
+
+    testWidgets('Payment Summary Details Page - Bank In => Pending Status',
+        (tester) async {
+      final initialState = PaymentSummaryDetailsState.initial().copyWith(
+        details: PaymentSummaryDetails.empty().copyWith(
+          paymentItems: [
+            PaymentItem.empty().copyWith(
+              documentDate: DateTimeStringValue(''),
+            ),
+          ],
+        ),
+        paymentInvoiceInfoPdf:
+            PaymentInvoiceInfoPdf.empty().copyWith(paymentID: 'paymentID'),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
+
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        initialState.copyWith(
+          details: paymentDetailsBankInPayment,
+          failureOrSuccessOption: optionOf(const Right('')),
+        ),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pump();
+      expect(find.text('Pending'), findsOneWidget);
     });
   });
 }

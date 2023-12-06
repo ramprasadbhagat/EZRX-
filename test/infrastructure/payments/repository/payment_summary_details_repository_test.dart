@@ -2,6 +2,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_remote_datasource.dart';
@@ -504,6 +505,42 @@ void main() {
           );
 
           expect(result.isLeft(), true);
+        },
+      );
+      test(
+        'Currency PH Bank-in: Pending ',
+        () async {
+          final paymentSummaryDetails = await PaymentItemLocalDataSource()
+              .getPaymentSummaryDetailsPHBankIn();
+
+          expect(
+            paymentSummaryDetails.status,
+            FilterStatus('Pending'),
+          );
+        },
+      );
+      test(
+        'Currency SG: Pending ',
+            () async {
+          final paymentSummaryDetails = await PaymentItemLocalDataSource()
+              .getPaymentSummaryDetailsSG();
+
+          expect(
+            paymentSummaryDetails.status,
+            FilterStatus('Pending'),
+          );
+        },
+      );
+      test(
+        'Currency Other Payment Gateway: In Progress ',
+            () async {
+          final paymentSummaryDetails = await PaymentItemLocalDataSource()
+              .getPaymentSummaryDetailsPHPayment();
+
+          expect(
+            paymentSummaryDetails.status,
+            FilterStatus('In Progress'),
+          );
         },
       );
     },
