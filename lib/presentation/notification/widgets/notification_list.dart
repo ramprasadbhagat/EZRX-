@@ -95,6 +95,15 @@ class _NotificationList extends StatelessWidget {
               orderNumber: notificationData.orderNumber,
             ),
           );
+
+      context.read<ViewByItemDetailsBloc>().add(
+            ViewByItemDetailsEvent.searchOrderHistory(
+              customerCodeInfo: eligibilityState.customerCodeInfo,
+              user: eligibilityState.user,
+              salesOrganisation: eligibilityState.salesOrganisation,
+              searchKey: SearchKey(notificationData.orderNumber.getValue()),
+            ),
+          );
       //Navigate to Order Detail Page
       context.router.push(const ViewByOrderDetailsPageRoute());
     }

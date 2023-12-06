@@ -4,6 +4,8 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -11,6 +13,7 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -26,6 +29,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -44,6 +49,14 @@ class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
 class PaymentSummaryDetailsBlocMock
     extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
     implements PaymentSummaryDetailsBloc {}
+
+class ViewByOrderDetailBlocMock
+    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
+    implements ViewByOrderDetailsBloc {}
+
+class ViewByItemDetailBlocMock
+    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
+    implements ViewByItemDetailsBloc {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
@@ -64,6 +77,8 @@ void main() {
   late List<CustomerCodeInfo> customerCodeListMock;
   late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
   late PaymentSummaryDetailsBloc paymentSummaryDetailsBlockMock;
+  late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
+  late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
@@ -81,6 +96,8 @@ void main() {
       notificationBlocMock = MockNotificationBloc();
       returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      viewByItemDetailsBlocMock = ViewByItemDetailBlocMock();
+      viewByOrderDetailsBlocMock = ViewByOrderDetailBlocMock();
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
       when(() => paymentSummaryDetailsBlockMock.state)
@@ -90,6 +107,10 @@ void main() {
           .thenReturn(CustomerCodeState.initial());
       when(() => notificationBlocMock.state)
           .thenReturn(NotificationState.initial());
+      when(() => viewByItemDetailsBlocMock.state)
+          .thenReturn(ViewByItemDetailsState.initial());
+      when(() => viewByOrderDetailsBlocMock.state)
+          .thenReturn(ViewByOrderDetailsState.initial());
     });
     Widget getScopedWidget() {
       return WidgetUtils.getScopedWidget(
@@ -111,6 +132,12 @@ void main() {
           ),
           BlocProvider<PaymentSummaryDetailsBloc>(
             create: (context) => paymentSummaryDetailsBlockMock,
+          ),
+          BlocProvider<ViewByItemDetailsBloc>(
+            create: (context) => viewByItemDetailsBlocMock,
+          ),
+          BlocProvider<ViewByOrderDetailsBloc>(
+            create: (context) => viewByOrderDetailsBlocMock,
           ),
         ],
         child: const Material(child: NotificationTab()),
@@ -309,6 +336,58 @@ void main() {
         );
       },
     );
+
+    testWidgets('Should navigate to view by order detail when eligible',
+        (tester) async {
+      final fakeUser = User.empty().copyWith.role(type: RoleType('root_admin'));
+      final notificationList = notifications.notificationData
+          .where((e) => e.isOrderEligible)
+          .toList();
+      when(() => notificationBlocMock.state).thenReturn(
+        NotificationState.initial().copyWith(
+          notificationList:
+              notifications.copyWith(notificationData: notificationList),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeUser,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrganisation: fakeSalesOrganisation,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final itemKey = find.byKey(
+        WidgetKeys.genericKey(key: notificationList.first.description),
+      );
+
+      expect(itemKey, findsOneWidget);
+      await tester.tap(itemKey);
+      await tester.pumpAndSettle();
+      verify(
+        () => viewByOrderDetailsBlocMock.add(
+          ViewByOrderDetailsEvent.fetch(
+            orderNumber: notificationList.first.orderNumber,
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => viewByItemDetailsBlocMock.add(
+          ViewByItemDetailsEvent.searchOrderHistory(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeUser,
+            salesOrganisation: fakeSalesOrganisation,
+            searchKey: SearchKey(notificationList.first.orderNumber.getValue()),
+          ),
+        ),
+      );
+    });
 
     testWidgets(
       'Stop Navigate to ViewbyOrderDetails page when userCanAccessOrderHistory false',
