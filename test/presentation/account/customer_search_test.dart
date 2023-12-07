@@ -672,7 +672,7 @@ void main() {
                     shipToCustomerCode: '12345678',
                   ),
                 ],
-                paymentTermDescription: '30 days',
+                paymentTermDescription: PaymentTermDescription('30 days'),
               ),
             ],
           ),

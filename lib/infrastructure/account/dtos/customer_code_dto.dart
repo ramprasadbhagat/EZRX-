@@ -37,6 +37,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
         required String customerClassification,
     @JsonKey(name: 'customerLocalGroup', defaultValue: '')
         required String customerLocalGroup,
+    @JsonKey(name: 'paymentTerm', defaultValue: '') required String paymentTerm,
     @JsonKey(name: 'paymentTermDescription', defaultValue: '')
         required String paymentTermDescription,
     @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
@@ -83,7 +84,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
       postalCode: postalCode,
       customerClassification: CustomerClassification(customerClassification),
       customerLocalGroup: customerLocalGroup,
-      paymentTermDescription: paymentTermDescription,
+      paymentTerm: PaymentTermCode(paymentTerm),
+      paymentTermDescription: PaymentTermDescription(paymentTermDescription),
       shipToInfos: shipToInfos.map((e) => e.toDomain()).toList(),
       billToInfos: billToInfos.map((e) => e.toDomain()).toList(),
       customerAttr7: CustomerAttr7(customerAttr7),

@@ -26,6 +26,7 @@ _$_CustomerCodeDto _$$_CustomerCodeDtoFromJson(Map<String, dynamic> json) =>
       division: json['division'] as String? ?? '',
       customerClassification: json['customerClassification'] as String? ?? '',
       customerLocalGroup: json['customerLocalGroup'] as String? ?? '',
+      paymentTerm: json['paymentTerm'] as String? ?? '',
       paymentTermDescription: json['paymentTermDescription'] as String? ?? '',
       shipToInfos: (json['shipTo'] as List<dynamic>?)
               ?.map((e) => ShipToDto.fromJson(e as Map<String, dynamic>))
@@ -72,6 +73,7 @@ Map<String, dynamic> _$$_CustomerCodeDtoToJson(_$_CustomerCodeDto instance) =>
       'division': instance.division,
       'customerClassification': instance.customerClassification,
       'customerLocalGroup': instance.customerLocalGroup,
+      'paymentTerm': instance.paymentTerm,
       'paymentTermDescription': instance.paymentTermDescription,
       'shipTo': instance.shipToInfos.map((e) => e.toJson()).toList(),
       'billTo': instance.billToInfos.map((e) => e.toJson()).toList(),

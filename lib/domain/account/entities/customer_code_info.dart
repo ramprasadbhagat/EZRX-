@@ -22,7 +22,8 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required String postalCode,
     required CustomerClassification customerClassification,
     required String customerLocalGroup,
-    required String paymentTermDescription,
+    required PaymentTermCode paymentTerm,
+    required PaymentTermDescription paymentTermDescription,
     required List<ShipToInfo> shipToInfos,
     required List<BillToInfo> billToInfos,
     required List<EmailAddress> emailAddresses,
@@ -59,7 +60,8 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         postalCode: '',
         customerClassification: CustomerClassification(''),
         customerLocalGroup: '',
-        paymentTermDescription: '',
+        paymentTerm: PaymentTermCode(''),
+        paymentTermDescription: PaymentTermDescription(''),
         shipToInfos: <ShipToInfo>[],
         billToInfos: <BillToInfo>[],
         customerAttr7: CustomerAttr7(''),
@@ -95,4 +97,14 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
 
   String get shortAddress =>
       '${customerName.name1} ${customerAddress.addressStreet} $postalCode';
+
+  String get displayPaymentTerm {
+    final displayWords = [
+      if (paymentTerm.isValid()) paymentTerm.displayPaymentTermCode,
+      if (paymentTermDescription.isValid())
+        paymentTermDescription.displayPaymentTermDescription,
+    ];
+
+    return displayWords.isEmpty ? 'NA' : displayWords.join(' - ');
+  }
 }

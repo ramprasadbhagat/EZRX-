@@ -1,54 +1,56 @@
 {
-    "data": {
-      "customerInformationSalesRep": [
-        {
-          "customerCodeSoldTo": "0030331233",
-          "name1": "Seng Hout Pharmacy",
-          "name2": "",
-          "name3": "",
-          "name4": "",
-          "street1": "#160,St. 2,Prek Mohatep",
-          "street2": "Battambang Province",
-          "street3": "Battambang Province",
-          "street4": "",
-          "building": "",
-          "floor": "",
-          "houseNumber1": "",
-          "postalCode": "",
-          "city1": "BATTAMBANG",
-          "city2": "BATTAMBANG",
-          "status": "",
-          "salesDeals": [
-            "0040000129",
-            "0040000063",
-            "0040000130",
-            "0040000131",
-            "0040000133",
-            "0040000132"
-          ],
-          "comboEligible": true,
-          "shipTo": [
-            {
-              "defaultShipToAddress": false,
-              "shipToCustomerCode": "0071262518",
-              "name1": "Seng Hout Pharmacy",
-              "name2": "",
-              "name3": "",
-              "name4": "",
-              "street": "#160,St. 2,Prek Mohatep",
-              "street2": "Battambang Province",
-              "street3": "Battambang Province",
-              "street4": "",
-              "building": "",
-              "floor": "",
-              "houseNumber1": "",
-              "postalCode": "",
-              "city1": "BATTAMBANG",
-              "city2": "BATTAMBANG",
-              "status": ""
-            }
-          ]
-        }
-      ]
-    }
+  "data": {
+    "customerInformationSalesRep": [
+      {
+        "customerCodeSoldTo": "0030331233",
+        "name1": "Seng Hout Pharmacy",
+        "name2": "",
+        "name3": "",
+        "name4": "",
+        "street1": "#160,St. 2,Prek Mohatep",
+        "street2": "Battambang Province",
+        "street3": "Battambang Province",
+        "street4": "",
+        "building": "",
+        "floor": "",
+        "houseNumber1": "",
+        "postalCode": "",
+        "city1": "BATTAMBANG",
+        "city2": "BATTAMBANG",
+        "status": "",
+        "salesDeals": [
+          "0040000129",
+          "0040000063",
+          "0040000130",
+          "0040000131",
+          "0040000133",
+          "0040000132"
+        ],
+        "comboEligible": true,
+        "paymentTerm": "0001",
+        "paymentTermDescription": "Pay immediately (Standard SAP)",
+        "shipTo": [
+          {
+            "defaultShipToAddress": false,
+            "shipToCustomerCode": "0071262518",
+            "name1": "Seng Hout Pharmacy",
+            "name2": "",
+            "name3": "",
+            "name4": "",
+            "street": "#160,St. 2,Prek Mohatep",
+            "street2": "Battambang Province",
+            "street3": "Battambang Province",
+            "street4": "",
+            "building": "",
+            "floor": "",
+            "houseNumber1": "",
+            "postalCode": "",
+            "city1": "BATTAMBANG",
+            "city2": "BATTAMBANG",
+            "status": ""
+          }
+        ]
+      }
+    ]
   }
+}

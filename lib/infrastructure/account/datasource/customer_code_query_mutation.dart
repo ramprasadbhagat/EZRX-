@@ -21,6 +21,8 @@ query customerInformationSearch(
     SoldToInformation {
       customerCodeSoldTo
       salesDeals
+      paymentTerm
+      paymentTermDescription
       customerGrp4
       name1
       name2
@@ -92,6 +94,8 @@ query customerInformationSearch(
           city2
           status
           salesDeals
+          paymentTerm
+          paymentTermDescription
           shipTo {
             defaultShipToAddress
             shipToCustomerCode

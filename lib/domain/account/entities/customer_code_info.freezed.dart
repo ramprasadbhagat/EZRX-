@@ -25,7 +25,9 @@ mixin _$CustomerCodeInfo {
   CustomerClassification get customerClassification =>
       throw _privateConstructorUsedError;
   String get customerLocalGroup => throw _privateConstructorUsedError;
-  String get paymentTermDescription => throw _privateConstructorUsedError;
+  PaymentTermCode get paymentTerm => throw _privateConstructorUsedError;
+  PaymentTermDescription get paymentTermDescription =>
+      throw _privateConstructorUsedError;
   List<ShipToInfo> get shipToInfos => throw _privateConstructorUsedError;
   List<BillToInfo> get billToInfos => throw _privateConstructorUsedError;
   List<EmailAddress> get emailAddresses => throw _privateConstructorUsedError;
@@ -59,7 +61,8 @@ abstract class $CustomerCodeInfoCopyWith<$Res> {
       String postalCode,
       CustomerClassification customerClassification,
       String customerLocalGroup,
-      String paymentTermDescription,
+      PaymentTermCode paymentTerm,
+      PaymentTermDescription paymentTermDescription,
       List<ShipToInfo> shipToInfos,
       List<BillToInfo> billToInfos,
       List<EmailAddress> emailAddresses,
@@ -98,6 +101,7 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
     Object? postalCode = null,
     Object? customerClassification = null,
     Object? customerLocalGroup = null,
+    Object? paymentTerm = null,
     Object? paymentTermDescription = null,
     Object? shipToInfos = null,
     Object? billToInfos = null,
@@ -145,10 +149,14 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
           ? _value.customerLocalGroup
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
               as String,
+      paymentTerm: null == paymentTerm
+          ? _value.paymentTerm
+          : paymentTerm // ignore: cast_nullable_to_non_nullable
+              as PaymentTermCode,
       paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentTermDescription,
       shipToInfos: null == shipToInfos
           ? _value.shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
@@ -234,7 +242,8 @@ abstract class _$$_CustomerCodeInfoCopyWith<$Res>
       String postalCode,
       CustomerClassification customerClassification,
       String customerLocalGroup,
-      String paymentTermDescription,
+      PaymentTermCode paymentTerm,
+      PaymentTermDescription paymentTermDescription,
       List<ShipToInfo> shipToInfos,
       List<BillToInfo> billToInfos,
       List<EmailAddress> emailAddresses,
@@ -273,6 +282,7 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
     Object? postalCode = null,
     Object? customerClassification = null,
     Object? customerLocalGroup = null,
+    Object? paymentTerm = null,
     Object? paymentTermDescription = null,
     Object? shipToInfos = null,
     Object? billToInfos = null,
@@ -320,10 +330,14 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
           ? _value.customerLocalGroup
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
               as String,
+      paymentTerm: null == paymentTerm
+          ? _value.paymentTerm
+          : paymentTerm // ignore: cast_nullable_to_non_nullable
+              as PaymentTermCode,
       paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentTermDescription,
       shipToInfos: null == shipToInfos
           ? _value._shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
@@ -388,6 +402,7 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
       required this.postalCode,
       required this.customerClassification,
       required this.customerLocalGroup,
+      required this.paymentTerm,
       required this.paymentTermDescription,
       required final List<ShipToInfo> shipToInfos,
       required final List<BillToInfo> billToInfos,
@@ -424,7 +439,9 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
   @override
   final String customerLocalGroup;
   @override
-  final String paymentTermDescription;
+  final PaymentTermCode paymentTerm;
+  @override
+  final PaymentTermDescription paymentTermDescription;
   final List<ShipToInfo> _shipToInfos;
   @override
   List<ShipToInfo> get shipToInfos {
@@ -476,7 +493,7 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
 
   @override
   String toString() {
-    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, division: $division, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, emailAddresses: $emailAddresses, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, comboEligible: $comboEligible, salesDeals: $salesDeals, telephoneNumber: $telephoneNumber, country: $country, floor: $floor, houseNumber1: $houseNumber1)';
+    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, division: $division, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTerm: $paymentTerm, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, emailAddresses: $emailAddresses, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, comboEligible: $comboEligible, salesDeals: $salesDeals, telephoneNumber: $telephoneNumber, country: $country, floor: $floor, houseNumber1: $houseNumber1)';
   }
 
   @override
@@ -499,6 +516,8 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
                 other.customerClassification == customerClassification) &&
             (identical(other.customerLocalGroup, customerLocalGroup) ||
                 other.customerLocalGroup == customerLocalGroup) &&
+            (identical(other.paymentTerm, paymentTerm) ||
+                other.paymentTerm == paymentTerm) &&
             (identical(other.paymentTermDescription, paymentTermDescription) ||
                 other.paymentTermDescription == paymentTermDescription) &&
             const DeepCollectionEquality()
@@ -535,6 +554,7 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
         postalCode,
         customerClassification,
         customerLocalGroup,
+        paymentTerm,
         paymentTermDescription,
         const DeepCollectionEquality().hash(_shipToInfos),
         const DeepCollectionEquality().hash(_billToInfos),
@@ -567,7 +587,8 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
       required final String postalCode,
       required final CustomerClassification customerClassification,
       required final String customerLocalGroup,
-      required final String paymentTermDescription,
+      required final PaymentTermCode paymentTerm,
+      required final PaymentTermDescription paymentTermDescription,
       required final List<ShipToInfo> shipToInfos,
       required final List<BillToInfo> billToInfos,
       required final List<EmailAddress> emailAddresses,
@@ -599,7 +620,9 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
   @override
   String get customerLocalGroup;
   @override
-  String get paymentTermDescription;
+  PaymentTermCode get paymentTerm;
+  @override
+  PaymentTermDescription get paymentTermDescription;
   @override
   List<ShipToInfo> get shipToInfos;
   @override

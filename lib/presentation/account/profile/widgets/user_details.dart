@@ -16,7 +16,7 @@ class _UserDetails extends StatelessWidget {
               BalanceTextRow(
                 keyFlex: 3,
                 valueFlex: 5,
-                keyText: 'First name'.tr(),
+                keyText: context.tr('First name'),
                 valueText: state.user.fullName.firstName,
                 keyTextStyle: Theme.of(context)
                     .textTheme
@@ -31,7 +31,7 @@ class _UserDetails extends StatelessWidget {
               BalanceTextRow(
                 keyFlex: 3,
                 valueFlex: 5,
-                keyText: 'Last name'.tr(),
+                keyText: context.tr('Last name'),
                 valueText: state.user.fullName.lastName,
                 keyTextStyle: Theme.of(context)
                     .textTheme
@@ -46,7 +46,7 @@ class _UserDetails extends StatelessWidget {
               BalanceTextRow(
                 keyFlex: 3,
                 valueFlex: 5,
-                keyText: 'Email'.tr(),
+                keyText: context.tr('Email'),
                 valueText: state.user.email.getOrDefaultValue(''),
                 keyTextStyle: Theme.of(context)
                     .textTheme
@@ -61,7 +61,7 @@ class _UserDetails extends StatelessWidget {
               BalanceTextRow(
                 keyFlex: 3,
                 valueFlex: 5,
-                keyText: 'Username'.tr(),
+                keyText: context.tr('Username'),
                 valueText: state.user.username.getOrDefaultValue(''),
                 keyTextStyle: Theme.of(context)
                     .textTheme
@@ -76,8 +76,27 @@ class _UserDetails extends StatelessWidget {
               BalanceTextRow(
                 keyFlex: 3,
                 valueFlex: 5,
-                keyText: 'Contact number'.tr(),
+                keyText: context.tr('Contact number'),
                 valueText: state.user.mobileNumber.displayLabel,
+                keyTextStyle: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(color: ZPColors.neutralsBlack),
+                valueTextStyle: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: ZPColors.neutralsBlack),
+              ),
+              const SizedBox(height: 20),
+              BalanceTextRow(
+                keyFlex: 3,
+                valueFlex: 5,
+                keyText: context.tr('Payment terms'),
+                valueText: context
+                    .read<EligibilityBloc>()
+                    .state
+                    .customerCodeInfo
+                    .displayPaymentTerm,
                 keyTextStyle: Theme.of(context)
                     .textTheme
                     .labelSmall

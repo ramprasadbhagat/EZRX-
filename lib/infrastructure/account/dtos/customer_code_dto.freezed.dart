@@ -56,6 +56,8 @@ mixin _$CustomerCodeDto {
   String get customerClassification => throw _privateConstructorUsedError;
   @JsonKey(name: 'customerLocalGroup', defaultValue: '')
   String get customerLocalGroup => throw _privateConstructorUsedError;
+  @JsonKey(name: 'paymentTerm', defaultValue: '')
+  String get paymentTerm => throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentTermDescription', defaultValue: '')
   String get paymentTermDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
@@ -116,6 +118,7 @@ abstract class $CustomerCodeDtoCopyWith<$Res> {
       String customerClassification,
       @JsonKey(name: 'customerLocalGroup', defaultValue: '')
       String customerLocalGroup,
+      @JsonKey(name: 'paymentTerm', defaultValue: '') String paymentTerm,
       @JsonKey(name: 'paymentTermDescription', defaultValue: '')
       String paymentTermDescription,
       @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
@@ -165,6 +168,7 @@ class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
     Object? division = null,
     Object? customerClassification = null,
     Object? customerLocalGroup = null,
+    Object? paymentTerm = null,
     Object? paymentTermDescription = null,
     Object? shipToInfos = null,
     Object? billToInfos = null,
@@ -251,6 +255,10 @@ class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
           ? _value.customerLocalGroup
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
               as String,
+      paymentTerm: null == paymentTerm
+          ? _value.paymentTerm
+          : paymentTerm // ignore: cast_nullable_to_non_nullable
+              as String,
       paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
@@ -334,6 +342,7 @@ abstract class _$$_CustomerCodeDtoCopyWith<$Res>
       String customerClassification,
       @JsonKey(name: 'customerLocalGroup', defaultValue: '')
       String customerLocalGroup,
+      @JsonKey(name: 'paymentTerm', defaultValue: '') String paymentTerm,
       @JsonKey(name: 'paymentTermDescription', defaultValue: '')
       String paymentTermDescription,
       @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
@@ -381,6 +390,7 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
     Object? division = null,
     Object? customerClassification = null,
     Object? customerLocalGroup = null,
+    Object? paymentTerm = null,
     Object? paymentTermDescription = null,
     Object? shipToInfos = null,
     Object? billToInfos = null,
@@ -467,6 +477,10 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
           ? _value.customerLocalGroup
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
               as String,
+      paymentTerm: null == paymentTerm
+          ? _value.paymentTerm
+          : paymentTerm // ignore: cast_nullable_to_non_nullable
+              as String,
       paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
@@ -545,6 +559,7 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
       required this.customerClassification,
       @JsonKey(name: 'customerLocalGroup', defaultValue: '')
       required this.customerLocalGroup,
+      @JsonKey(name: 'paymentTerm', defaultValue: '') required this.paymentTerm,
       @JsonKey(name: 'paymentTermDescription', defaultValue: '')
       required this.paymentTermDescription,
       @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
@@ -630,6 +645,9 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   @JsonKey(name: 'customerLocalGroup', defaultValue: '')
   final String customerLocalGroup;
   @override
+  @JsonKey(name: 'paymentTerm', defaultValue: '')
+  final String paymentTerm;
+  @override
   @JsonKey(name: 'paymentTermDescription', defaultValue: '')
   final String paymentTermDescription;
   final List<ShipToDto> _shipToInfos;
@@ -692,7 +710,7 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
 
   @override
   String toString() {
-    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, postalCode: $postalCode, division: $division, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses, comboEligible: $comboEligible, salesDeals: $salesDeals, country: $country, floor: $floor, houseNumber1: $houseNumber1)';
+    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, postalCode: $postalCode, division: $division, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTerm: $paymentTerm, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses, comboEligible: $comboEligible, salesDeals: $salesDeals, country: $country, floor: $floor, houseNumber1: $houseNumber1)';
   }
 
   @override
@@ -724,6 +742,8 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
                 other.customerClassification == customerClassification) &&
             (identical(other.customerLocalGroup, customerLocalGroup) ||
                 other.customerLocalGroup == customerLocalGroup) &&
+            (identical(other.paymentTerm, paymentTerm) ||
+                other.paymentTerm == paymentTerm) &&
             (identical(other.paymentTermDescription, paymentTermDescription) ||
                 other.paymentTermDescription == paymentTermDescription) &&
             const DeepCollectionEquality()
@@ -769,6 +789,7 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
         division,
         customerClassification,
         customerLocalGroup,
+        paymentTerm,
         paymentTermDescription,
         const DeepCollectionEquality().hash(_shipToInfos),
         const DeepCollectionEquality().hash(_billToInfos),
@@ -823,6 +844,8 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
       required final String customerClassification,
       @JsonKey(name: 'customerLocalGroup', defaultValue: '')
       required final String customerLocalGroup,
+      @JsonKey(name: 'paymentTerm', defaultValue: '')
+      required final String paymentTerm,
       @JsonKey(name: 'paymentTermDescription', defaultValue: '')
       required final String paymentTermDescription,
       @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
@@ -903,6 +926,9 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
   @override
   @JsonKey(name: 'customerLocalGroup', defaultValue: '')
   String get customerLocalGroup;
+  @override
+  @JsonKey(name: 'paymentTerm', defaultValue: '')
+  String get paymentTerm;
   @override
   @JsonKey(name: 'paymentTermDescription', defaultValue: '')
   String get paymentTermDescription;
