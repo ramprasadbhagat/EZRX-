@@ -42,7 +42,7 @@ class NewRequestButton extends StatelessWidget {
             );
         context.read<ReturnItemsBloc>().add(
               ReturnItemsEvent.fetch(
-                appliedFilter: ReturnItemsFilter.empty(),
+                appliedFilter: ReturnItemsFilter.init(),
                 searchKey: SearchKey.searchFilter(''),
               ),
             );

@@ -18,7 +18,11 @@ class _FromInvoiceDateFilter extends StatelessWidget {
                 context.read<ReturnItemsFilterBloc>();
             final invoiceDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime(1900),
+              firstDate: DateTime(
+                DateTime.now().year - 2,
+                DateTime.now().month,
+                DateTime.now().day,
+              ),
               lastDate: DateTime.now(),
               initialDateRange: state.filter.getInvoiceDateFilterDateRange,
             );
@@ -73,7 +77,11 @@ class _ToInvoiceDateFilter extends StatelessWidget {
                 context.read<ReturnItemsFilterBloc>();
             final invoiceDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime(1900),
+              firstDate: DateTime(
+                DateTime.now().year - 2,
+                DateTime.now().month,
+                DateTime.now().day,
+              ),
               lastDate: DateTime.now(),
               initialDateRange: state.filter.getInvoiceDateFilterDateRange,
             );

@@ -30,6 +30,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
           salesOrganisation: event.salesOrganisation,
           shipToInfo: event.shipToInfo,
           customerCodeInfo: event.customerCodeInfo,
+          appliedFilter: ReturnItemsFilter.init(),
         ),
       );
     });

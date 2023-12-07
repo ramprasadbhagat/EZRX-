@@ -33,6 +33,7 @@ void main() {
       salesOrganisation: fakeSalesOrganisation,
       shipToInfo: fakeShipToInfo,
       user: fakeUserWithLanguageCode,
+      appliedFilter: ReturnItemsFilter.init(),
     );
     fakeReturnItemsFilter = ReturnItemsFilter.empty();
 
