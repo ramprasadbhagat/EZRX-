@@ -8,6 +8,7 @@ class _PaymentInvoicePdf extends StatelessWidget {
     return context.read<NewPaymentBloc>().state.paymentInvoiceInfoPdf.isEmpty
         ? const SizedBox.shrink()
         : Container(
+            key: WidgetKeys.pdfView,
             width: double.infinity,
             height: 650,
             padding: const EdgeInsets.symmetric(horizontal: 8.0),

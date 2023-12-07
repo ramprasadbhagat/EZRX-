@@ -6,6 +6,7 @@ class _PaymentAdviceBodyAPLSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
+      key: WidgetKeys.paymentAdviceBodyAPLSection,
       buildWhen: (previous, current) =>
           previous.isDetailFetching != current.isDetailFetching,
       builder: (context, state) {

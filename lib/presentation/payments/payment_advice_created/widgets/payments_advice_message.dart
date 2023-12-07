@@ -6,7 +6,7 @@ class _PaymentBankInAdviceMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.read<NewPaymentBloc>().state;
-    
+
     return Padding(
       key: WidgetKeys.paymentBankInAdviceMessage,
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),

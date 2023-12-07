@@ -23,6 +23,7 @@ class _PaymentAdviceBodySection extends StatelessWidget {
         const _PaymentInvoicePdf(),
         if (!newPaymentState.selectedPaymentMethod.paymentMethod.isBankIn)
           const Padding(
+            key: WidgetKeys.paymentSavePdfButtonSection,
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: PaymentSavePdfButton(),
           ),

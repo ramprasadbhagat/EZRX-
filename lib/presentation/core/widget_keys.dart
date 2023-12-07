@@ -851,6 +851,12 @@ class WidgetKeys {
   static const Key outstandingInvoiceFilterPage =
       Key('outstandingInvoiceFilterPage');
   static const Key generatePaymentAdvice = Key('generatePaymentAdvice');
+  static const Key paymentSavePdfButtonSection =
+      Key('paymentSavePdfButtonSection');
+  static const Key paymentCancelAdviceButton = Key('paymentCancelAdviceButton');
+  static const Key paymentSummarySection = Key('paymentSummarySection');
+  static const Key paymentAdviceBodyAPLSection =
+      Key('paymentAdviceBodyAPLSection');
 
   //============================================================
   //  Announcement
@@ -972,8 +978,11 @@ class WidgetKeys {
   //  Payment summary details page
   //============================================================
   static const Key paymentSummaryFilter = Key('paymentSummaryFilter');
+  static const Key downloadAdviceButton = Key('downloadAdviceButton');
+
   static const Key deleteAdviceButtonKey = Key('deleteAdviceButton');
   static const Key cancelAdviceButtonKey = Key('cancelAdviceButtonKey');
+  static const Key pdfView = Key('pdfView');
   static const Key downloadAdviceButtonKey = Key('downloadAdviceButton');
   static const Key buttonRowKey = Key('buttonRow');
   static const Key deleteCancelAdviceBottomSheet =
@@ -1325,5 +1334,4 @@ class WidgetKeys {
   static Key paymentSavePdfButton = const Key('paymentSavePdfButton');
   static Key createAdviceSummary = const Key('createAdviceSummary');
   static Key paymentAdviceNextStep = const Key('paymentAdviceNextStep');
-
 }

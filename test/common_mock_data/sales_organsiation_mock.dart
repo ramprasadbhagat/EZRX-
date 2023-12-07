@@ -16,7 +16,6 @@ const _fakePHSalesOrgId = '2500';
 const _fakeIDSalesOrgId = '1900';
 const _fakeTHSalesOrgId = '2902';
 
-
 final fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
 final fakePHSalesOrg = SalesOrg(_fakePHSalesOrgId);
 final fakeSGSalesOrg = SalesOrg(_fakeSGSalesOrgId);
@@ -24,7 +23,6 @@ final fakeVNSalesOrg = SalesOrg(_fakeVNSalesOrgId);
 final fakeMYSalesOrg = SalesOrg(_fakeMYSalesOrgId);
 final fakeIDSalesOrg = SalesOrg(_fakeIDSalesOrgId);
 final fakeTHSalesOrg = SalesOrg(_fakeTHSalesOrgId);
-
 
 final fakeEmptySalesOrganisation = SalesOrganisation.empty();
 final fakeSalesOrganisation =

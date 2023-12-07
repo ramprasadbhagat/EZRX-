@@ -18,6 +18,7 @@ class _PaymentCancelAdviceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
+      key: WidgetKeys.paymentCancelAdviceButton,
       listenWhen: (previous, current) =>
           previous.isCancelingAdvice != current.isCancelingAdvice,
       listener: (context, state) {

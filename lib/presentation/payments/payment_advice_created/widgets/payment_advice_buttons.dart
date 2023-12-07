@@ -49,6 +49,7 @@ class _PaymentAdviceButtons extends StatelessWidget {
           Expanded(
             child: PaymentSavePdfButton(
               text: 'Download advice',
+              key: WidgetKeys.downloadAdviceButton,
               backgroundColor: ZPColors.primary,
               textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: ZPColors.white,

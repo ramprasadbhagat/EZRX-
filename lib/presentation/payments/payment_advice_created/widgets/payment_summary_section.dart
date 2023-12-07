@@ -8,6 +8,7 @@ class _PaymentSummarySection extends StatelessWidget {
     final configs = context.read<SalesOrgBloc>().state.configs;
 
     return BlocBuilder<NewPaymentBloc, NewPaymentState>(
+      key: WidgetKeys.paymentSummarySection,
       builder: (context, state) {
         return SafeArea(
           key: WidgetKeys.createAdviceSummary,
