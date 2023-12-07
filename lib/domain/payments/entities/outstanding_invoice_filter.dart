@@ -3,11 +3,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+
 part 'outstanding_invoice_filter.freezed.dart';
 
 @freezed
 class OutstandingInvoiceFilter with _$OutstandingInvoiceFilter {
   const OutstandingInvoiceFilter._();
+
   factory OutstandingInvoiceFilter({
     required DateTimeStringValue documentDateFrom,
     required DateTimeStringValue documentDateTo,
@@ -21,6 +24,24 @@ class OutstandingInvoiceFilter with _$OutstandingInvoiceFilter {
   factory OutstandingInvoiceFilter.empty() => OutstandingInvoiceFilter(
         documentDateFrom: DateTimeStringValue(''),
         documentDateTo: DateTimeStringValue(''),
+        dueDateFrom: DateTimeStringValue(''),
+        dueDateTo: DateTimeStringValue(''),
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
+        outstandingInvoiceStatus: StatusType(''),
+      );
+
+  factory OutstandingInvoiceFilter.init() => OutstandingInvoiceFilter(
+        documentDateFrom: DateTimeStringValue(
+          getDateStringByDateTime(
+            DateTime.now().subtract(
+              const Duration(days: 30),
+            ),
+          ),
+        ),
+        documentDateTo: DateTimeStringValue(
+          getDateStringByDateTime(DateTime.now()),
+        ),
         dueDateFrom: DateTimeStringValue(''),
         dueDateTo: DateTimeStringValue(''),
         amountValueFrom: RangeValue(''),

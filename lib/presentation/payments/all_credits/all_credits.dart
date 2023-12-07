@@ -131,7 +131,7 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
     );
     context.read<OutstandingInvoicesBloc>().add(
           OutstandingInvoicesEvent.fetch(
-            appliedFilter: OutstandingInvoiceFilter.empty(),
+            appliedFilter: OutstandingInvoiceFilter.init(),
             searchKey: SearchKey.searchFilter(''),
           ),
         );

@@ -132,7 +132,7 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
     );
     context.read<OutstandingInvoicesBloc>().add(
           OutstandingInvoicesEvent.fetch(
-            appliedFilter: OutstandingInvoiceFilter.empty(),
+            appliedFilter: OutstandingInvoiceFilter.init(),
             searchKey: SearchKey.search(''),
           ),
         );

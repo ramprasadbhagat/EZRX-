@@ -69,6 +69,7 @@ void main() {
           OutstandingInvoicesState.initial().copyWith(
             salesOrganisation: mockSalesOrganisation,
             customerCodeInfo: mockCustomerCodeInfo,
+            appliedFilter: OutstandingInvoiceFilter.init(),
           )
         ],
       );

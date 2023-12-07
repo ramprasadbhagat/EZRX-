@@ -478,7 +478,7 @@ void main() {
       verify(
         () => outstandingInvoicesBlocMock.add(
           OutstandingInvoicesEvent.fetch(
-            appliedFilter: OutstandingInvoiceFilter.empty(),
+            appliedFilter: OutstandingInvoiceFilter.init(),
             searchKey: SearchKey.search(''),
           ),
         ),

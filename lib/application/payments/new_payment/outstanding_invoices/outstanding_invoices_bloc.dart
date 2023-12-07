@@ -12,13 +12,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'outstanding_invoices_event.dart';
+
 part 'outstanding_invoices_state.dart';
+
 part 'outstanding_invoices_bloc.freezed.dart';
 
 class OutstandingInvoicesBloc
     extends Bloc<OutstandingInvoicesEvent, OutstandingInvoicesState> {
   final INewPaymentRepository newPaymentRepository;
   final Config config;
+
   OutstandingInvoicesBloc({
     required this.newPaymentRepository,
     required this.config,
@@ -28,6 +31,7 @@ class OutstandingInvoicesBloc
         OutstandingInvoicesState.initial().copyWith(
           salesOrganisation: event.salesOrganisation,
           customerCodeInfo: event.customerCodeInfo,
+          appliedFilter: OutstandingInvoiceFilter.init(),
         ),
       );
     });
