@@ -42,7 +42,10 @@ class _ViewByOrderItem extends StatelessWidget {
       },
       child: CommonTileItem(
         key: WidgetKeys.viewByItemsOrderItemKey,
-        label: orderHistoryItem.materialNumber.displayMatNo,
+        label: orderHistoryItem.combinationCode(
+          showGMCPart:
+              context.read<EligibilityBloc>().state.salesOrgConfigs.enableGMC,
+        ),
         title: orderHistoryItem.materialDescription,
         subtitle:
             orderHistoryItem.principalData.principalName.getOrDefaultValue(''),

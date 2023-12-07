@@ -68,8 +68,11 @@ class OtherItemDetailsSection extends StatelessWidget {
                                         children: e.orderHistoryItem
                                             .map(
                                               (e) => CommonTileItem(
-                                                label: e.materialNumber
-                                                    .displayMatNo,
+                                                label: e.combinationCode(
+                                                  showGMCPart: eligibilityState
+                                                      .salesOrgConfigs
+                                                      .enableGMC,
+                                                ),
                                                 title: e.materialDescription,
                                                 priceComponent: e
                                                         .isBonusMaterial

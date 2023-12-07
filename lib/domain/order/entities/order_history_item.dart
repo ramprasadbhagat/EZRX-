@@ -46,6 +46,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required bool isCounterOffer,
     required LineNumber lineNumber,
     required PrincipalData principalData,
+    required String governmentMaterialCode,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -63,6 +64,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         expiryDate: DateTimeStringValue(''),
         invoiceData: InvoiceData.empty(),
         isBonusMaterial: false,
+        governmentMaterialCode: '',
         pOReference: POReference(''),
         telephoneNumber: PhoneNumber(''),
         productImages: ProductImages.empty(),
@@ -144,6 +146,11 @@ class OrderHistoryItem with _$OrderHistoryItem {
   }
 
   bool get showMaterialListPrice => originPrice.zpPrice > unitPrice.zpPrice;
+  String combinationCode({required bool showGMCPart}) => <String>[
+        materialNumber.displayMatNo,
+        if (showGMCPart && governmentMaterialCode.isNotEmpty)
+          governmentMaterialCode,
+      ].join(' | ');
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {

@@ -15,11 +15,15 @@ class _ProductDetails extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                bonusItem.materialNumber.displayMatNo,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.darkGray,
-                    ),
+              Expanded(
+                child: Text(
+                  bonusItem.materialInfo.combinationCode(
+                    showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.darkGray,
+                      ),
+                ),
               ),
               const SizedBox(
                 width: 5,

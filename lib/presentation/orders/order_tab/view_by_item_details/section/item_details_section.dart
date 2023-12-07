@@ -41,7 +41,9 @@ class ItemDetailsSection extends StatelessWidget {
           ),
           CommonTileItem(
             subtitle: '',
-            label: orderHistoryItem.materialNumber.displayMatNo,
+            label: orderHistoryItem.combinationCode(
+              showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+            ),
             title: orderHistoryItem.materialDescription,
             priceComponent: orderHistoryItem.isBonusMaterial
                 ? null

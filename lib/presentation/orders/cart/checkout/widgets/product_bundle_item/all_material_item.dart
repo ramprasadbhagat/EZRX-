@@ -90,7 +90,13 @@ class _MaterialDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            cartItem.materialNumber.displayMatNo,
+            cartItem.combinationCode(
+              showGMCPart: context
+                  .read<EligibilityBloc>()
+                  .state
+                  .salesOrgConfigs
+                  .enableGMC,
+            ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(

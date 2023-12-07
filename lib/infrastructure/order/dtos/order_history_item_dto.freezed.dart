@@ -56,6 +56,8 @@ mixin _$OrderHistoryItemDto {
   String get pOReference => throw _privateConstructorUsedError;
   @JsonKey(name: 'ManufactureName', defaultValue: '')
   String get manufactureName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+  String get governmentMaterialCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'ExpiryDate', defaultValue: '')
   String get expiryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
@@ -115,6 +117,8 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
       String manufactureName,
+      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      String governmentMaterialCode,
       @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       String requestedDeliveryDate,
@@ -162,6 +166,7 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? invoiceNumber = null,
     Object? pOReference = null,
     Object? manufactureName = null,
+    Object? governmentMaterialCode = null,
     Object? expiryDate = null,
     Object? requestedDeliveryDate = null,
     Object? specialInstruction = null,
@@ -247,6 +252,10 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
           ? _value.manufactureName
           : manufactureName // ignore: cast_nullable_to_non_nullable
               as String,
+      governmentMaterialCode: null == governmentMaterialCode
+          ? _value.governmentMaterialCode
+          : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
+              as String,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
@@ -326,6 +335,8 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
       @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
       String manufactureName,
+      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      String governmentMaterialCode,
       @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       String requestedDeliveryDate,
@@ -371,6 +382,7 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
     Object? invoiceNumber = null,
     Object? pOReference = null,
     Object? manufactureName = null,
+    Object? governmentMaterialCode = null,
     Object? expiryDate = null,
     Object? requestedDeliveryDate = null,
     Object? specialInstruction = null,
@@ -456,6 +468,10 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
           ? _value.manufactureName
           : manufactureName // ignore: cast_nullable_to_non_nullable
               as String,
+      governmentMaterialCode: null == governmentMaterialCode
+          ? _value.governmentMaterialCode
+          : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
+              as String,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
@@ -533,6 +549,8 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       @JsonKey(name: 'POReference', defaultValue: '') required this.pOReference,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
       required this.manufactureName,
+      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      required this.governmentMaterialCode,
       @JsonKey(name: 'ExpiryDate', defaultValue: '') required this.expiryDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       required this.requestedDeliveryDate,
@@ -611,6 +629,9 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @JsonKey(name: 'ManufactureName', defaultValue: '')
   final String manufactureName;
   @override
+  @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+  final String governmentMaterialCode;
+  @override
   @JsonKey(name: 'ExpiryDate', defaultValue: '')
   final String expiryDate;
   @override
@@ -653,7 +674,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
 
   @override
   String toString() {
-    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode)';
+    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, governmentMaterialCode: $governmentMaterialCode, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode)';
   }
 
   @override
@@ -693,6 +714,8 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
                 other.pOReference == pOReference) &&
             (identical(other.manufactureName, manufactureName) ||
                 other.manufactureName == manufactureName) &&
+            (identical(other.governmentMaterialCode, governmentMaterialCode) ||
+                other.governmentMaterialCode == governmentMaterialCode) &&
             (identical(other.expiryDate, expiryDate) ||
                 other.expiryDate == expiryDate) &&
             (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
@@ -739,6 +762,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
         invoiceNumber,
         pOReference,
         manufactureName,
+        governmentMaterialCode,
         expiryDate,
         requestedDeliveryDate,
         specialInstruction,
@@ -801,6 +825,8 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       required final String pOReference,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
       required final String manufactureName,
+      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      required final String governmentMaterialCode,
       @JsonKey(name: 'ExpiryDate', defaultValue: '')
       required final String expiryDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
@@ -881,6 +907,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @override
   @JsonKey(name: 'ManufactureName', defaultValue: '')
   String get manufactureName;
+  @override
+  @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+  String get governmentMaterialCode;
   @override
   @JsonKey(name: 'ExpiryDate', defaultValue: '')
   String get expiryDate;

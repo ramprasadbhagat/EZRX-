@@ -54,6 +54,8 @@ mixin _$CartProductDto {
   String get counterOfferCurrency => throw _privateConstructorUsedError;
   @JsonKey(name: 'comment', defaultValue: '')
   String get remarks => throw _privateConstructorUsedError;
+  @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+  String get governmentMaterialCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'bundleDetails')
   BundleDetailsDto get bundleDetails => throw _privateConstructorUsedError;
   @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
@@ -115,6 +117,8 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
       String counterOfferCurrency,
       @JsonKey(name: 'comment', defaultValue: '') String remarks,
+      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+      String governmentMaterialCode,
       @JsonKey(name: 'bundleDetails') BundleDetailsDto bundleDetails,
       @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
       List<MaterialDto> bundleMaterials,
@@ -164,6 +168,7 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? counterOfferDiscount = null,
     Object? counterOfferCurrency = null,
     Object? remarks = null,
+    Object? governmentMaterialCode = null,
     Object? bundleDetails = null,
     Object? bundleMaterials = null,
     Object? bonusMaterials = null,
@@ -243,6 +248,10 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
       remarks: null == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
+              as String,
+      governmentMaterialCode: null == governmentMaterialCode
+          ? _value.governmentMaterialCode
+          : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as String,
       bundleDetails: null == bundleDetails
           ? _value.bundleDetails
@@ -338,6 +347,8 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
       @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
       String counterOfferCurrency,
       @JsonKey(name: 'comment', defaultValue: '') String remarks,
+      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+      String governmentMaterialCode,
       @JsonKey(name: 'bundleDetails') BundleDetailsDto bundleDetails,
       @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
       List<MaterialDto> bundleMaterials,
@@ -387,6 +398,7 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
     Object? counterOfferDiscount = null,
     Object? counterOfferCurrency = null,
     Object? remarks = null,
+    Object? governmentMaterialCode = null,
     Object? bundleDetails = null,
     Object? bundleMaterials = null,
     Object? bonusMaterials = null,
@@ -467,6 +479,10 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String,
+      governmentMaterialCode: null == governmentMaterialCode
+          ? _value.governmentMaterialCode
+          : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
+              as String,
       bundleDetails: null == bundleDetails
           ? _value.bundleDetails
           : bundleDetails // ignore: cast_nullable_to_non_nullable
@@ -544,6 +560,8 @@ class _$_CartProductDto extends _CartProductDto {
       @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
       required this.counterOfferCurrency,
       @JsonKey(name: 'comment', defaultValue: '') required this.remarks,
+      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+      required this.governmentMaterialCode,
       @JsonKey(name: 'bundleDetails')
       this.bundleDetails = BundleDetailsDto.empty,
       @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
@@ -621,6 +639,9 @@ class _$_CartProductDto extends _CartProductDto {
   @JsonKey(name: 'comment', defaultValue: '')
   final String remarks;
   @override
+  @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+  final String governmentMaterialCode;
+  @override
   @JsonKey(name: 'bundleDetails')
   final BundleDetailsDto bundleDetails;
   final List<MaterialDto> _bundleMaterials;
@@ -672,7 +693,7 @@ class _$_CartProductDto extends _CartProductDto {
 
   @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty)';
   }
 
   @override
@@ -712,6 +733,8 @@ class _$_CartProductDto extends _CartProductDto {
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
                 other.counterOfferCurrency == counterOfferCurrency) &&
             (identical(other.remarks, remarks) || other.remarks == remarks) &&
+            (identical(other.governmentMaterialCode, governmentMaterialCode) ||
+                other.governmentMaterialCode == governmentMaterialCode) &&
             (identical(other.bundleDetails, bundleDetails) ||
                 other.bundleDetails == bundleDetails) &&
             const DeepCollectionEquality()
@@ -754,6 +777,7 @@ class _$_CartProductDto extends _CartProductDto {
         counterOfferDiscount,
         counterOfferCurrency,
         remarks,
+        governmentMaterialCode,
         bundleDetails,
         const DeepCollectionEquality().hash(_bundleMaterials),
         const DeepCollectionEquality().hash(_bonusMaterials),
@@ -813,6 +837,8 @@ abstract class _CartProductDto extends CartProductDto {
       @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
       required final String counterOfferCurrency,
       @JsonKey(name: 'comment', defaultValue: '') required final String remarks,
+      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+      required final String governmentMaterialCode,
       @JsonKey(name: 'bundleDetails') final BundleDetailsDto bundleDetails,
       @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
       required final List<MaterialDto> bundleMaterials,
@@ -886,6 +912,9 @@ abstract class _CartProductDto extends CartProductDto {
   @override
   @JsonKey(name: 'comment', defaultValue: '')
   String get remarks;
+  @override
+  @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+  String get governmentMaterialCode;
   @override
   @JsonKey(name: 'bundleDetails')
   BundleDetailsDto get bundleDetails;

@@ -146,7 +146,13 @@ class _BundleDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                material.materialNumber.displayMatNo,
+                material.combinationCode(
+                  showGMCPart: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .salesOrgConfigs
+                      .enableGMC,
+                ),
                 style: Theme.of(context).textTheme.bodySmall,
                 key: WidgetKeys.bundleOfferCode,
               ),

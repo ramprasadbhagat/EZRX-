@@ -33,8 +33,6 @@ class OrderItemDetailsSection extends StatelessWidget {
     if (viewByOrderHistoryGroupList.isEmpty) return const SizedBox.shrink();
 
     final eligibilityState = context.read<EligibilityBloc>().state;
-    final displayGovernmentMaterialCOde =
-        eligibilityState.salesOrganisation.salesOrg.isTW;
     final salesOrgConfig = eligibilityState.salesOrgConfigs;
     final invoiceNumber = context
         .read<ViewByOrderDetailsBloc>()
@@ -84,8 +82,9 @@ class OrderItemDetailsSection extends StatelessWidget {
                                       e.materialNumber.displayMatNo,
                                       e.isBonus,
                                     ),
-                                    label:
-                                        '${e.materialNumber.displayMatNo}${displayGovernmentMaterialCOde ? '|${e.governmentMaterialCode}' : ''}',
+                                    label: e.combinationCode(
+                                      showGMCPart: salesOrgConfig.enableGMC,
+                                    ),
                                     title: e.materialDescription,
                                     priceComponent: e.isBonus
                                         ? null

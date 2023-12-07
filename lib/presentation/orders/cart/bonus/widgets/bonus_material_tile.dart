@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -57,7 +58,13 @@ class BonusMaterialTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  bonusMaterial.materialNumber.displayMatNo,
+                  bonusMaterial.combinationCode(
+                    showGMCPart: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .salesOrgConfigs
+                        .enableGMC,
+                  ),
                   key: WidgetKeys.bonusSampleSheetItemMaterialNumber,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),

@@ -16,9 +16,8 @@ class _MaterialDetailsSection extends StatelessWidget {
     final eligibilityBlocState = context.read<EligibilityBloc>().state;
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
-            materialNumber: materialInfo.materialNumber,
+            materialInfo: materialInfo,
             locale: context.locale,
-            type: materialInfo.type,
           ),
         );
     if (eligibilityBlocState.isZDP5eligible) {

@@ -328,10 +328,8 @@ void main() {
           verify(
             () => productDetailBlocMock.add(
               ProductDetailEvent.fetch(
-                materialNumber:
-                    materialResponseMock.products.first.materialNumber,
                 locale: const Locale('en'),
-                type: materialResponseMock.products.first.type,
+                materialInfo: materialResponseMock.products.first,
               ),
             ),
           ).called(1);
@@ -440,10 +438,8 @@ void main() {
           verify(
             () => productDetailBlocMock.add(
               ProductDetailEvent.fetch(
-                materialNumber:
-                    materialResponseMock.products[12].materialNumber,
+                materialInfo: materialResponseMock.products[12],
                 locale: const Locale('en'),
-                type: materialResponseMock.products[12].type,
               ),
             ),
           ).called(1);

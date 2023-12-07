@@ -39,7 +39,13 @@ class _ProductTile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            materialInfo.materialNumber.displayMatNo,
+                            materialInfo.combinationCode(
+                              showGMCPart: context
+                                  .read<EligibilityBloc>()
+                                  .state
+                                  .salesOrgConfigs
+                                  .enableGMC,
+                            ),
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall
@@ -144,9 +150,8 @@ class _ProductTile extends StatelessWidget {
     final eligibilityBlocState = context.read<EligibilityBloc>().state;
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
-            materialNumber: materialInfo.materialNumber,
+            materialInfo: materialInfo,
             locale: context.locale,
-            type: materialInfo.type,
           ),
         );
     if (eligibilityBlocState.isZDP5eligible) {

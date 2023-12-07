@@ -113,14 +113,22 @@ class _ProductDetails extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                cartItem.materialInfo.materialNumber.displayMatNo,
-                key: WidgetKeys.cartItemProductMaterialNumber,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.darkGray,
-                    ),
+              Expanded(
+                child: Text(
+                  cartItem.materialInfo.combinationCode(
+                    showGMCPart: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .salesOrgConfigs
+                        .enableGMC,
+                  ),
+                  key: WidgetKeys.cartItemProductMaterialNumber,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.darkGray,
+                      ),
+                ),
               ),
               const SizedBox(
                 width: 4,

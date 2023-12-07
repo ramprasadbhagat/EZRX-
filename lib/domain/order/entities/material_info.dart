@@ -168,6 +168,17 @@ class MaterialInfo with _$MaterialInfo {
     int zdp5RemaningQuota,
   ) =>
       quantity.intValue > zdp5MaxQuota || quantity.intValue > zdp5RemaningQuota;
+
+  String get _governmentMaterialCode =>
+      data.isNotEmpty && data.first.governmentMaterialCode.isNotEmpty
+          ? data.first.governmentMaterialCode
+          : governmentMaterialCode;
+
+  String combinationCode({required bool showGMCPart}) => <String>[
+        materialNumber.displayMatNo,
+        if (showGMCPart && _governmentMaterialCode.isNotEmpty)
+          _governmentMaterialCode,
+      ].join(' | ');
 }
 
 @freezed
@@ -181,6 +192,15 @@ class MaterialData with _$MaterialData {
     required String genericMaterialName,
     required String governmentMaterialCode,
   }) = _MaterialData;
+
+  factory MaterialData.empty() => MaterialData(
+        materialNumber: MaterialNumber(''),
+        manufactured: '',
+        materialDescription: '',
+        defaultMaterialDescription: '',
+        genericMaterialName: '',
+        governmentMaterialCode: '',
+      );
 
   String get displayDescription => materialDescription.isNotEmpty
       ? materialDescription

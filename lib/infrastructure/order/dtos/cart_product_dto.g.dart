@@ -26,6 +26,7 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
           (json['discountOverridePercentage'] as num?)?.toDouble() ?? 0,
       counterOfferCurrency: json['counterOfferCurrency'] as String? ?? '',
       remarks: json['comment'] as String? ?? '',
+      governmentMaterialCode: json['governmentMaterialCode'] as String? ?? '',
       bundleDetails: json['bundleDetails'] == null
           ? BundleDetailsDto.empty
           : BundleDetailsDto.fromJson(
@@ -74,6 +75,7 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'discountOverridePercentage': instance.counterOfferDiscount,
       'counterOfferCurrency': instance.counterOfferCurrency,
       'comment': instance.remarks,
+      'governmentMaterialCode': instance.governmentMaterialCode,
       'bundleDetails': instance.bundleDetails.toJson(),
       'bundleMaterials':
           instance.bundleMaterials.map((e) => e.toJson()).toList(),

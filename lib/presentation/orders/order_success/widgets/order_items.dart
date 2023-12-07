@@ -50,8 +50,9 @@ class _OrderItems extends StatelessWidget {
                             return CommonTileItem(
                               key: WidgetKeys.orderSuccessItem(index),
                               materialNumber: e.materialNumber,
-                              label: removeLeadingZero(
-                                e.materialNumber.getOrDefaultValue(''),
+                              label: e.combinationCode(
+                                showGMCPart:
+                                    eligibilityState.salesOrgConfigs.enableGMC,
                               ),
                               subtitle: '',
                               priceComponent: Row(

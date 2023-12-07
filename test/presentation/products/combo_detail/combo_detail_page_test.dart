@@ -593,8 +593,7 @@ void main() {
           verify(
             () => productDetailMockBloc.add(
               ProductDetailEvent.fetch(
-                materialNumber: fakeCartCombo.getMaterialNumber,
-                type: fakeCartCombo.materialInfo.type,
+                materialInfo: fakeCartCombo.materialInfo,
                 locale: const Locale('en'),
               ),
             ),

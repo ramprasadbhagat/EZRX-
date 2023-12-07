@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -15,6 +16,7 @@ import 'package:ezrxmobile/presentation/products/widgets/stock_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialGridItem extends StatelessWidget {
   final MaterialInfo materialInfo;
@@ -112,7 +114,13 @@ class MaterialGridItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      materialInfo.materialNumber.displayMatNo,
+                      materialInfo.combinationCode(
+                        showGMCPart: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .salesOrgConfigs
+                            .enableGMC,
+                      ),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: ZPColors.darkGray,
                           ),

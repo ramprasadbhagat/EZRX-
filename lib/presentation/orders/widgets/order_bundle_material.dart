@@ -55,6 +55,8 @@ class BundleItemMaterial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final configs = context.read<EligibilityBloc>().state.salesOrgConfigs;
+
     return InkWell(
       onTap: () => _goToViewByItemDetail(context, orderHistory),
       child: Padding(
@@ -83,7 +85,9 @@ class BundleItemMaterial extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    orderItem.materialNumber.displayMatNo,
+                    orderItem.combinationCode(
+                      showGMCPart: configs.enableGMC,
+                    ),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Text(
@@ -91,11 +95,7 @@ class BundleItemMaterial extends StatelessWidget {
                     maxLines: 2,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
-                  if (context
-                      .read<EligibilityBloc>()
-                      .state
-                      .salesOrgConfigs
-                      .batchNumDisplay)
+                  if (configs.batchNumDisplay)
                     Text(
                       '${'Batch'.tr()}: ${orderItem.batch.displayDashIfEmpty} (${context.tr('EXP')}: ${orderItem.expiryDate.dateOrDashString})',
                       maxLines: 1,

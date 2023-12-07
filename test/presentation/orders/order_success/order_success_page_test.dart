@@ -342,8 +342,15 @@ void main() {
         );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
+
         final orderSummarySection =
             find.byKey(WidgetKeys.orderSuccessOrderSummarySection);
+        final scrollList = find.byKey(WidgetKeys.scrollList);
+        await tester.dragUntilVisible(
+          orderSummarySection,
+          scrollList,
+          const Offset(0, -300),
+        );
         //sub total (excl. tax)
         expect(
           find.descendant(

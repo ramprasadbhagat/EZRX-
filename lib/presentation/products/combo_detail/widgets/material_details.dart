@@ -34,13 +34,21 @@ class _MaterialDetails extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text(
-                    comboItem.materialInfo.materialNumber.displayMatNo,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: ZPColors.darkGray,
-                        ),
+                  Expanded(
+                    child: Text(
+                      comboItem.materialInfo.combinationCode(
+                        showGMCPart: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .salesOrgConfigs
+                            .enableGMC,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.darkGray,
+                          ),
+                    ),
                   ),
                   const SizedBox(
                     width: 4,

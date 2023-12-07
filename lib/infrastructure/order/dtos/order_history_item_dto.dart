@@ -40,6 +40,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
     @JsonKey(name: 'ManufactureName', defaultValue: '')
         required String manufactureName,
+    @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+        required String governmentMaterialCode,
     @JsonKey(name: 'ExpiryDate', defaultValue: '') required String expiryDate,
     @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
         required String requestedDeliveryDate,
@@ -97,6 +99,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
           orderHistoryItem.principalData.principalCode.getOrDefaultValue(''),
       manufactureName:
           orderHistoryItem.principalData.principalName.getOrDefaultValue(''),
+      governmentMaterialCode: orderHistoryItem.governmentMaterialCode,
     );
   }
   OrderHistoryItem toDomain() {
@@ -135,6 +138,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
         principalName: PrincipalName(manufactureName),
         principalCode: PrincipalCode(principalCode),
       ),
+      governmentMaterialCode: governmentMaterialCode,
     );
   }
 

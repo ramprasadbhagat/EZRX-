@@ -147,7 +147,13 @@ class _BundleSectionItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          materialInfo.materialNumber.displayMatNo,
+                          materialInfo.combinationCode(
+                            showGMCPart: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .salesOrgConfigs
+                                .enableGMC,
+                          ),
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.darkerGrey,
@@ -227,9 +233,8 @@ class _BundleSectionItem extends StatelessWidget {
     );
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
-            materialNumber: materialInfo.materialNumber,
+            materialInfo: materialInfo,
             locale: context.locale,
-            type: materialInfo.type,
           ),
         );
     context.router.pushNamed('orders/bundle_detail_page');

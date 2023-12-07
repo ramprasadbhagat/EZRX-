@@ -52,6 +52,8 @@ class CartProductDto with _$CartProductDto {
     @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
         required String counterOfferCurrency,
     @JsonKey(name: 'comment', defaultValue: '') required String remarks,
+    @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+        required String governmentMaterialCode,
     @Default(BundleDetailsDto.empty)
     @JsonKey(name: 'bundleDetails')
         BundleDetailsDto bundleDetails,
@@ -122,6 +124,9 @@ class CartProductDto with _$CartProductDto {
       comboMaterials: [],
       comboDeal: PriceComboDealDto.empty,
       maximumQty: cartItemDetails.maximumQty,
+      governmentMaterialCode: cartItemDetails.materialInfo.data.isNotEmpty
+          ? cartItemDetails.materialInfo.data.first.governmentMaterialCode
+          : cartItemDetails.materialInfo.governmentMaterialCode,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -141,6 +146,12 @@ class CartProductDto with _$CartProductDto {
         principalName: PrincipalName(principalName),
         principalCode: PrincipalCode(principalCode),
       ),
+      data: <MaterialData>[
+        MaterialData.empty().copyWith(
+          materialNumber: MaterialNumber(productID),
+          governmentMaterialCode: governmentMaterialCode,
+        ),
+      ],
       counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
         comment: StringValue(remarks),
         counterOfferCurrency: Currency(counterOfferCurrency),

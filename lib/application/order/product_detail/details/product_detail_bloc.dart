@@ -50,10 +50,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         final failureOrSuccess = await productDetailRepository.getProductDetail(
           customerCodeInfo: state.customerCodeInfo,
           locale: e.locale,
-          materialNumber: e.materialNumber,
+          materialNumber: e.materialInfo.materialNumber,
           salesOrganisation: state.salesOrganisation,
           shipToInfo: state.shipToInfo,
-          type: e.type,
+          type: e.materialInfo.type,
         );
         await failureOrSuccess.fold(
           (failure) async => emit(
@@ -70,7 +70,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 ),
               ),
             );
-            e.type.typeBundle
+            e.materialInfo.type.typeBundle
                 ? add(
                     _FetchStockForBundle(
                       materials: materialInfo.bundle.materials,

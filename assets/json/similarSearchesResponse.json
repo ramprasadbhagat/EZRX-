@@ -12,6 +12,7 @@
                     "isFavourite": false,
                     "warehouseStorageCondition": "AC",
                     "suspensionStatus": false,
+                    "governmentMaterialCode": "KC00582214",
                     "promoType": "",
                     "promoStatus": false,
                     "hidePrice": true
@@ -26,6 +27,7 @@
                     "isFavourite": false,
                     "warehouseStorageCondition": "AC",
                     "suspensionStatus": false,
+                    "governmentMaterialCode": "KC00582215",
                     "promoType": "",
                     "promoStatus": false,
                     "hidePrice": false
@@ -40,6 +42,7 @@
                     "isFavourite": false,
                     "warehouseStorageCondition": "AC",
                     "suspensionStatus": false,
+                    "governmentMaterialCode": "KC00582213",
                     "promoType": "",
                     "promoStatus": false,
                     "hidePrice": false
@@ -54,14 +57,12 @@
                     "isFavourite": false,
                     "warehouseStorageCondition": "AC",
                     "suspensionStatus": false,
+                    "governmentMaterialCode": "KC00582212",
                     "promoType": "",
                     "promoStatus": false,
                     "hidePrice": false
                 }
             ]
         }
-    },
-    "extensions": {
-        "trace-id": "b06ff8fdb3585acb2b9456604d4750cc"
     }
 }

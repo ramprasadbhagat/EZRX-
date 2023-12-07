@@ -242,6 +242,7 @@ class _MaterialDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartState = context.read<CartBloc>().state;
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
     return Expanded(
       child: Column(
@@ -249,14 +250,18 @@ class _MaterialDetails extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                cartItem.materialInfo.materialNumber.displayMatNo,
-                key: WidgetKeys.cartItemProductMaterialNumber,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.darkGray,
-                    ),
+              Expanded(
+                child: Text(
+                  cartItem.materialInfo.combinationCode(
+                    showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+                  ),
+                  key: WidgetKeys.cartItemProductMaterialNumber,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.darkGray,
+                      ),
+                ),
               ),
               const SizedBox(
                 width: 4,
@@ -277,8 +282,7 @@ class _MaterialDetails extends StatelessWidget {
               if (cartItem.displayCutOffListPrice)
                 PriceComponent(
                   key: WidgetKeys.cartItemCutOffListPrice,
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
                   price: cartItem.display(PriceType.listPrice),
                   type: PriceStyle.counterOfferPrice,
                 ),
@@ -287,8 +291,7 @@ class _MaterialDetails extends StatelessWidget {
                     context.read<MaterialPriceBloc>().state.isFetching,
                 child: PriceComponent(
                   key: WidgetKeys.cartItemProductUnitPrice,
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
                   price: cartItem.display(PriceType.finalPrice),
                 ),
               ),

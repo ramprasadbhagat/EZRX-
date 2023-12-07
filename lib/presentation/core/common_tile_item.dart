@@ -85,10 +85,12 @@ class CommonTileItem extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              label,
-                              key: WidgetKeys.commonTileItemLabel,
-                              style: Theme.of(context).textTheme.bodySmall,
+                            Expanded(
+                              child: Text(
+                                label,
+                                key: WidgetKeys.commonTileItemLabel,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
                             ),
                             if (statusTag != null &&
                                 statusTag!

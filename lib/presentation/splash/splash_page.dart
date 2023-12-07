@@ -408,9 +408,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 (_) {
                   context.read<ProductDetailBloc>().add(
                         ProductDetailEvent.fetch(
-                          materialNumber: state.material.materialNumber,
+                          materialInfo: state.material,
                           locale: context.locale,
-                          type: state.material.type,
                         ),
                       );
                   context.router.pushNamed('orders/material_details');

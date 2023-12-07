@@ -177,6 +177,11 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
       );
 
   bool get showMaterialListPrice => originPrice.zpPrice > unitPrice.zpPrice;
+  String combinationCode({required bool showGMCPart}) => <String>[
+        materialNumber.displayMatNo,
+        if (showGMCPart && governmentMaterialCode.isNotEmpty)
+          governmentMaterialCode,
+      ].join(' | ');
 }
 
 extension ViewByOrderDetailsListExtension

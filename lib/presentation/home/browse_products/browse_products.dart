@@ -149,9 +149,8 @@ class _BrowseProductCard extends StatelessWidget {
     );
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
-            materialNumber: materialInfo.materialNumber,
+            materialInfo: materialInfo,
             locale: context.locale,
-            type: materialInfo.type,
           ),
         );
     if (context.read<EligibilityBloc>().state.isZDP5eligible) {

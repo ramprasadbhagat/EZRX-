@@ -8,9 +8,8 @@ class ProductDetailEvent with _$ProductDetailEvent {
     required ShipToInfo shipToInfo,
   }) = _Initialized;
   factory ProductDetailEvent.fetch({
-    required MaterialNumber materialNumber,
+    required MaterialInfo materialInfo,
     required Locale locale,
-    required MaterialInfoType type,
   }) = _Fetch;
   factory ProductDetailEvent.fetchSimilarProduct({
     required Locale locale,

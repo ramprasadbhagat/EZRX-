@@ -6,28 +6,30 @@ class _MaterialDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text(
-                cartItem.materialInfo.materialNumber.displayMatNo,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.darkGray,
-                    ),
+              Expanded(
+                child: Text(
+                  cartItem.materialInfo.combinationCode(
+                    showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.darkGray,
+                      ),
+                ),
               ),
               const SizedBox(
                 width: 4,
               ),
-              if (!context
-                  .read<EligibilityBloc>()
-                  .state
-                  .salesOrgConfigs
-                  .hideStockDisplay)
+              if (!eligibilityState.salesOrgConfigs.hideStockDisplay)
                 StatusLabel(
                   status: StatusType('OOS-Preorder'),
                 ),
@@ -46,8 +48,7 @@ class _MaterialDetails extends StatelessWidget {
                 ListPriceStrikeThroughComponent(priceAggregate: cartItem),
                 PriceComponent(
                   key: WidgetKeys.preOrderModalItemFinalPrice,
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
                   price: cartItem.finalPriceTotalForAllMaterial,
                 ),
               ],

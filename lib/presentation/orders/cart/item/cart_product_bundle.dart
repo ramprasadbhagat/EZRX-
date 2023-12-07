@@ -262,14 +262,22 @@ class _MaterialDetails extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                cartItem.materialNumber.displayMatNo,
-                key: WidgetKeys.cartItemProductMaterialNumber,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.neutralsBlack,
-                    ),
+              Expanded(
+                child: Text(
+                  cartItem.combinationCode(
+                    showGMCPart: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .salesOrgConfigs
+                        .enableGMC,
+                  ),
+                  key: WidgetKeys.cartItemProductMaterialNumber,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
+                ),
               ),
               const SizedBox(
                 width: 4,

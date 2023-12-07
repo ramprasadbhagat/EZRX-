@@ -72,6 +72,7 @@ class ProductDetailQuery {
           itemBrand
           isFavourite
           hidePrice
+          governmentMaterialCode
         }
       }
     }

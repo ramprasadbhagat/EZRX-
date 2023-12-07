@@ -101,10 +101,9 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
 
   @override
   Widget build(BuildContext context) {
-    final addOosMaterials =
-        context.read<EligibilityBloc>().state.salesOrgConfigs.addOosMaterials;
-    final validateOutOfStockValue =
-        context.read<EligibilityBloc>().state.validateOutOfStockValue;
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final addOosMaterials = eligibilityState.salesOrgConfigs.addOosMaterials;
+    final validateOutOfStockValue = eligibilityState.validateOutOfStockValue;
 
     return Row(
       key: WidgetKeys.bundleMaterialItem(
@@ -131,9 +130,13 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
             children: [
               Row(
                 children: [
-                  Text(
-                    widget.materialInfo.materialNumber.displayMatNo,
-                    style: Theme.of(context).textTheme.bodySmall,
+                  Expanded(
+                    child: Text(
+                      widget.materialInfo.combinationCode(
+                        showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+                      ),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                   if (!widget.materialInfo.inStock) ...[
                     const SizedBox(

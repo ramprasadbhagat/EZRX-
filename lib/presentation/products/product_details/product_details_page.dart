@@ -215,13 +215,17 @@ class _BodyContent extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        materialInfo.materialNumber.displayMatNo,
-                        key: WidgetKeys.materialDetailsMaterialNumber,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleSmall
-                            ?.copyWith(color: ZPColors.darkGray),
+                      Expanded(
+                        child: Text(
+                          materialInfo.combinationCode(
+                            showGMCPart: config.enableGMC,
+                          ),
+                          key: WidgetKeys.materialDetailsMaterialNumber,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall
+                              ?.copyWith(color: ZPColors.darkGray),
+                        ),
                       ),
                       if (level.isNotEmpty)
                         StatusLabel(

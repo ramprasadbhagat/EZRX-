@@ -19,6 +19,7 @@ query similarSearches($principalCode: String, $first: Int, $after: Int, $languag
       isFavourite
       warehouseStorageCondition
       suspensionStatus
+      governmentMaterialCode
       promoType
       promoStatus
       hidePrice

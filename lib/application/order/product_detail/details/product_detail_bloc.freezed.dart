@@ -21,9 +21,7 @@ mixin _$ProductDetailEvent {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -47,9 +45,7 @@ mixin _$ProductDetailEvent {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -70,9 +66,7 @@ mixin _$ProductDetailEvent {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -282,9 +276,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -311,9 +303,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -337,9 +327,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -445,8 +433,9 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {MaterialNumber materialNumber, Locale locale, MaterialInfoType type});
+  $Res call({MaterialInfo materialInfo, Locale locale});
+
+  $MaterialInfoCopyWith<$Res> get materialInfo;
 }
 
 /// @nodoc
@@ -459,43 +448,43 @@ class __$$_FetchCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = null,
+    Object? materialInfo = null,
     Object? locale = null,
-    Object? type = null,
   }) {
     return _then(_$_Fetch(
-      materialNumber: null == materialNumber
-          ? _value.materialNumber
-          : materialNumber // ignore: cast_nullable_to_non_nullable
-              as MaterialNumber,
+      materialInfo: null == materialInfo
+          ? _value.materialInfo
+          : materialInfo // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as Locale,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as MaterialInfoType,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialInfoCopyWith<$Res> get materialInfo {
+    return $MaterialInfoCopyWith<$Res>(_value.materialInfo, (value) {
+      return _then(_value.copyWith(materialInfo: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  _$_Fetch(
-      {required this.materialNumber, required this.locale, required this.type});
+  _$_Fetch({required this.materialInfo, required this.locale});
 
   @override
-  final MaterialNumber materialNumber;
+  final MaterialInfo materialInfo;
   @override
   final Locale locale;
-  @override
-  final MaterialInfoType type;
 
   @override
   String toString() {
-    return 'ProductDetailEvent.fetch(materialNumber: $materialNumber, locale: $locale, type: $type)';
+    return 'ProductDetailEvent.fetch(materialInfo: $materialInfo, locale: $locale)';
   }
 
   @override
@@ -503,14 +492,13 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
-            (identical(other.locale, locale) || other.locale == locale) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.materialInfo, materialInfo) ||
+                other.materialInfo == materialInfo) &&
+            (identical(other.locale, locale) || other.locale == locale));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber, locale, type);
+  int get hashCode => Object.hash(runtimeType, materialInfo, locale);
 
   @JsonKey(ignore: true)
   @override
@@ -524,9 +512,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -544,7 +530,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
     required TResult Function(bool exceedQty) setExceedQty,
   }) {
-    return fetch(materialNumber, locale, type);
+    return fetch(materialInfo, locale);
   }
 
   @override
@@ -553,9 +539,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -570,7 +554,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
     TResult? Function(bool exceedQty)? setExceedQty,
   }) {
-    return fetch?.call(materialNumber, locale, type);
+    return fetch?.call(materialInfo, locale);
   }
 
   @override
@@ -579,9 +563,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -598,7 +580,7 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(materialNumber, locale, type);
+      return fetch(materialInfo, locale);
     }
     return orElse();
   }
@@ -670,13 +652,11 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements ProductDetailEvent {
   factory _Fetch(
-      {required final MaterialNumber materialNumber,
-      required final Locale locale,
-      required final MaterialInfoType type}) = _$_Fetch;
+      {required final MaterialInfo materialInfo,
+      required final Locale locale}) = _$_Fetch;
 
-  MaterialNumber get materialNumber;
+  MaterialInfo get materialInfo;
   Locale get locale;
-  MaterialInfoType get type;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -750,9 +730,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -779,9 +757,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -805,9 +781,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -980,9 +954,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -1009,9 +981,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -1035,9 +1005,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -1212,9 +1180,7 @@ class _$_FetchStock implements _FetchStock {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -1241,9 +1207,7 @@ class _$_FetchStock implements _FetchStock {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -1267,9 +1231,7 @@ class _$_FetchStock implements _FetchStock {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -1454,9 +1416,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -1483,9 +1443,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -1509,9 +1467,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -1677,9 +1633,7 @@ class _$_ChangeImage implements _ChangeImage {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -1706,9 +1660,7 @@ class _$_ChangeImage implements _ChangeImage {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -1732,9 +1684,7 @@ class _$_ChangeImage implements _ChangeImage {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -1909,9 +1859,7 @@ class _$_AddFavourite implements _AddFavourite {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -1938,9 +1886,7 @@ class _$_AddFavourite implements _AddFavourite {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -1964,9 +1910,7 @@ class _$_AddFavourite implements _AddFavourite {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -2144,9 +2088,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -2173,9 +2115,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -2199,9 +2139,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -2367,9 +2305,7 @@ class _$_UpdateQty implements _UpdateQty {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -2396,9 +2332,7 @@ class _$_UpdateQty implements _UpdateQty {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -2422,9 +2356,7 @@ class _$_UpdateQty implements _UpdateQty {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -2594,9 +2526,7 @@ class _$_FetchItemQuantityForZdp5Discount
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -2623,9 +2553,7 @@ class _$_FetchItemQuantityForZdp5Discount
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -2649,9 +2577,7 @@ class _$_FetchItemQuantityForZdp5Discount
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -2817,9 +2743,7 @@ class _$_SetExceedQty implements _SetExceedQty {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(
-            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
-        fetch,
+    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
     required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
@@ -2846,9 +2770,7 @@ class _$_SetExceedQty implements _SetExceedQty {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
     TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
@@ -2872,9 +2794,7 @@ class _$_SetExceedQty implements _SetExceedQty {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(MaterialNumber materialNumber, Locale locale,
-            MaterialInfoType type)?
-        fetch,
+    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
     TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,

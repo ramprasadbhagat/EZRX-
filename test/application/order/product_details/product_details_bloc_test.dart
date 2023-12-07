@@ -184,8 +184,9 @@ void main() {
           bloc.add(
             ProductDetailEvent.fetch(
               locale: locale,
-              materialNumber: mockMaterialInfo.materialNumber,
-              type: materialInfoType,
+              materialInfo: mockMaterialInfo.copyWith(
+                type: materialInfoType,
+              ),
             ),
           );
         },
@@ -297,8 +298,9 @@ void main() {
           bloc.add(
             ProductDetailEvent.fetch(
               locale: locale,
-              materialNumber: mockMaterialInfo.materialNumber,
-              type: bundleInfoType,
+              materialInfo: mockMaterialInfo.copyWith(
+                type: bundleInfoType,
+              ),
             ),
           );
         },
@@ -371,8 +373,9 @@ void main() {
           bloc.add(
             ProductDetailEvent.fetch(
               locale: locale,
-              materialNumber: mockMaterialInfo.materialNumber,
-              type: materialInfoType,
+              materialInfo: mockMaterialInfo.copyWith(
+                type: materialInfoType,
+              ),
             ),
           );
         },
