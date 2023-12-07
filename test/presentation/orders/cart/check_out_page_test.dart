@@ -411,6 +411,11 @@ void main() {
             const PriceOverrideEvent.initialized(),
           ),
         ).called(1);
+        verify(
+          () => poAttachmentBloc.add(
+            const PoAttachmentEvent.initialized(),
+          ),
+        ).called(1);
         expect(autoRouterMock.current.name == 'OrderSuccessPageRoute', true);
       },
     );

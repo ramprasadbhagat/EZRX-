@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
@@ -223,6 +224,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   );
                               context.read<PriceOverrideBloc>().add(
                                     const PriceOverrideEvent.initialized(),
+                                  );
+                              context.read<PoAttachmentBloc>().add(
+                                    const PoAttachmentEvent.initialized(),
                                   );
                               context.router
                                   .pushNamed('orders/order_confirmation');
