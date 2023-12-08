@@ -430,6 +430,28 @@ void main() {
       },
     );
 
+    testWidgets(
+      ' -> Find customer blocked banner',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            shipToInfo: ShipToInfo.empty()
+                .copyWith(customerBlock: CustomerBlock('blocked')),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final homeScreen = find.byKey(
+          WidgetKeys.homeScreen,
+        );
+        final customerBlockedBanner =
+            find.byKey(WidgetKeys.customerBlockedBanner);
+        expect(homeScreen, findsOneWidget);
+        expect(customerBlockedBanner, findsOneWidget);
+      },
+    );
+
     group('HomeQuickAccessPaymentsMenu Test', () {
       testWidgets(
         ' -> Hide homeQuickAccessPaymentsMenu when Enable Payment Configuration is off',

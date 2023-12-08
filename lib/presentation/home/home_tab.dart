@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
 import 'package:ezrxmobile/presentation/home/combo_offers_section/combo_offers_section.dart';
@@ -84,6 +85,7 @@ class HomeTab extends StatelessWidget {
                   const EdiUserBanner(),
                   const AccountSuspendedBanner(),
                   const QuickAccessMenuPanel(),
+                  const CustomerBlockedBanner(),
                   const CarouselBanner(),
                   BlocBuilder<EligibilityBloc, EligibilityState>(
                     buildWhen: (previous, current) =>

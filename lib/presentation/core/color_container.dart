@@ -5,12 +5,16 @@ class ColorContainer extends StatelessWidget {
     Key? key,
     this.widgetKey,
     this.margin = const EdgeInsets.all(16),
+    this.padding = const EdgeInsets.all(12),
+    this.circularRadius = 8,
     required this.color,
     required this.children,
   }) : super(key: key);
 
   final Key? widgetKey;
   final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry padding;
+  final double circularRadius;
   final Color color;
   final List<Widget> children;
 
@@ -20,11 +24,11 @@ class ColorContainer extends StatelessWidget {
       key: widgetKey,
       width: double.infinity,
       margin: margin,
-      padding: const EdgeInsets.all(12),
+      padding: padding,
       decoration: BoxDecoration(
         color: color,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(8),
+        borderRadius: BorderRadius.all(
+          Radius.circular(circularRadius),
         ),
       ),
       child: Column(

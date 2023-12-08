@@ -507,3 +507,17 @@ class NotificationSetting extends ValueObject<bool> {
 
   const NotificationSetting._(this.value);
 }
+
+class CustomerBlock extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CustomerBlock(String input) {
+    return CustomerBlock._(Right(input));
+  }
+
+  bool get isCustomerBlocked =>
+      checkIfCustomerIsBlocked(value.getOrElse(() => ''));
+
+  const CustomerBlock._(this.value);
+}

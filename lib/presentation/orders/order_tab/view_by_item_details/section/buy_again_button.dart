@@ -5,6 +5,8 @@ class _BuyAgainButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shipToInfo = context.read<EligibilityBloc>().state.shipToInfo;
+
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -40,7 +42,10 @@ class _BuyAgainButton extends StatelessWidget {
               backgroundColor: Colors.white,
               side: const BorderSide(color: ZPColors.primary),
             ),
-            onPressed: reOrderState.isFetching ? null : () => _reOrder(context),
+            onPressed: reOrderState.isFetching ||
+                    shipToInfo.customerBlock.isCustomerBlocked
+                ? null
+                : () => _reOrder(context),
             child: LoadingShimmer.withChild(
               enabled: reOrderState.isFetching,
               child: Text(

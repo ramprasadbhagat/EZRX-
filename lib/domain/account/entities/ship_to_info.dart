@@ -28,6 +28,7 @@ class ShipToInfo with _$ShipToInfo {
     required String targetCustomerType,
     required String country,
     required List<LicenseInfo> licenses,
+    required CustomerBlock customerBlock,
   }) = _ShipToInfo;
 
   factory ShipToInfo.empty() => ShipToInfo(
@@ -61,6 +62,7 @@ class ShipToInfo with _$ShipToInfo {
         building: '',
         licenses: <LicenseInfo>[],
         country: '',
+        customerBlock: CustomerBlock(''),
       );
 
   String get deliveryAddress => '${shipToAddress.toAddress()} $postalCode';

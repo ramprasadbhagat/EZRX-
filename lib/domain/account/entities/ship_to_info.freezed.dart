@@ -33,6 +33,7 @@ mixin _$ShipToInfo {
   String get targetCustomerType => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
   List<LicenseInfo> get licenses => throw _privateConstructorUsedError;
+  CustomerBlock get customerBlock => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ShipToInfoCopyWith<ShipToInfo> get copyWith =>
@@ -62,7 +63,8 @@ abstract class $ShipToInfoCopyWith<$Res> {
       String plant,
       String targetCustomerType,
       String country,
-      List<LicenseInfo> licenses});
+      List<LicenseInfo> licenses,
+      CustomerBlock customerBlock});
 
   $ShipToNameCopyWith<$Res> get shipToName;
   $ShipToAddressCopyWith<$Res> get shipToAddress;
@@ -98,6 +100,7 @@ class _$ShipToInfoCopyWithImpl<$Res, $Val extends ShipToInfo>
     Object? targetCustomerType = null,
     Object? country = null,
     Object? licenses = null,
+    Object? customerBlock = null,
   }) {
     return _then(_value.copyWith(
       defaultShipToAddress: null == defaultShipToAddress
@@ -168,6 +171,10 @@ class _$ShipToInfoCopyWithImpl<$Res, $Val extends ShipToInfo>
           ? _value.licenses
           : licenses // ignore: cast_nullable_to_non_nullable
               as List<LicenseInfo>,
+      customerBlock: null == customerBlock
+          ? _value.customerBlock
+          : customerBlock // ignore: cast_nullable_to_non_nullable
+              as CustomerBlock,
     ) as $Val);
   }
 
@@ -213,7 +220,8 @@ abstract class _$$_ShipToInfoCopyWith<$Res>
       String plant,
       String targetCustomerType,
       String country,
-      List<LicenseInfo> licenses});
+      List<LicenseInfo> licenses,
+      CustomerBlock customerBlock});
 
   @override
   $ShipToNameCopyWith<$Res> get shipToName;
@@ -249,6 +257,7 @@ class __$$_ShipToInfoCopyWithImpl<$Res>
     Object? targetCustomerType = null,
     Object? country = null,
     Object? licenses = null,
+    Object? customerBlock = null,
   }) {
     return _then(_$_ShipToInfo(
       defaultShipToAddress: null == defaultShipToAddress
@@ -319,6 +328,10 @@ class __$$_ShipToInfoCopyWithImpl<$Res>
           ? _value._licenses
           : licenses // ignore: cast_nullable_to_non_nullable
               as List<LicenseInfo>,
+      customerBlock: null == customerBlock
+          ? _value.customerBlock
+          : customerBlock // ignore: cast_nullable_to_non_nullable
+              as CustomerBlock,
     ));
   }
 }
@@ -343,7 +356,8 @@ class _$_ShipToInfo extends _ShipToInfo {
       required this.plant,
       required this.targetCustomerType,
       required this.country,
-      required final List<LicenseInfo> licenses})
+      required final List<LicenseInfo> licenses,
+      required this.customerBlock})
       : _licenses = licenses,
         super._();
 
@@ -388,8 +402,11 @@ class _$_ShipToInfo extends _ShipToInfo {
   }
 
   @override
+  final CustomerBlock customerBlock;
+
+  @override
   String toString() {
-    return 'ShipToInfo(defaultShipToAddress: $defaultShipToAddress, shipToCustomerCode: $shipToCustomerCode, shipToName: $shipToName, shipToAddress: $shipToAddress, status: $status, building: $building, city1: $city1, city2: $city2, postalCode: $postalCode, houseNumber1: $houseNumber1, telephoneNumber: $telephoneNumber, region: $region, floor: $floor, plant: $plant, targetCustomerType: $targetCustomerType, country: $country, licenses: $licenses)';
+    return 'ShipToInfo(defaultShipToAddress: $defaultShipToAddress, shipToCustomerCode: $shipToCustomerCode, shipToName: $shipToName, shipToAddress: $shipToAddress, status: $status, building: $building, city1: $city1, city2: $city2, postalCode: $postalCode, houseNumber1: $houseNumber1, telephoneNumber: $telephoneNumber, region: $region, floor: $floor, plant: $plant, targetCustomerType: $targetCustomerType, country: $country, licenses: $licenses, customerBlock: $customerBlock)';
   }
 
   @override
@@ -422,7 +439,9 @@ class _$_ShipToInfo extends _ShipToInfo {
             (identical(other.targetCustomerType, targetCustomerType) ||
                 other.targetCustomerType == targetCustomerType) &&
             (identical(other.country, country) || other.country == country) &&
-            const DeepCollectionEquality().equals(other._licenses, _licenses));
+            const DeepCollectionEquality().equals(other._licenses, _licenses) &&
+            (identical(other.customerBlock, customerBlock) ||
+                other.customerBlock == customerBlock));
   }
 
   @override
@@ -444,7 +463,8 @@ class _$_ShipToInfo extends _ShipToInfo {
       plant,
       targetCustomerType,
       country,
-      const DeepCollectionEquality().hash(_licenses));
+      const DeepCollectionEquality().hash(_licenses),
+      customerBlock);
 
   @JsonKey(ignore: true)
   @override
@@ -471,7 +491,8 @@ abstract class _ShipToInfo extends ShipToInfo {
       required final String plant,
       required final String targetCustomerType,
       required final String country,
-      required final List<LicenseInfo> licenses}) = _$_ShipToInfo;
+      required final List<LicenseInfo> licenses,
+      required final CustomerBlock customerBlock}) = _$_ShipToInfo;
   const _ShipToInfo._() : super._();
 
   @override
@@ -508,6 +529,8 @@ abstract class _ShipToInfo extends ShipToInfo {
   String get country;
   @override
   List<LicenseInfo> get licenses;
+  @override
+  CustomerBlock get customerBlock;
   @override
   @JsonKey(ignore: true)
   _$$_ShipToInfoCopyWith<_$_ShipToInfo> get copyWith =>

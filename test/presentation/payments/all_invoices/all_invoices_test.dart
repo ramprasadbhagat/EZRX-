@@ -263,6 +263,7 @@ void main() {
             licenses: [],
             country: '',
             targetCustomerType: '',
+            customerBlock: CustomerBlock(''),
           ),
         ),
       );
@@ -286,6 +287,7 @@ void main() {
             licenses: [],
             country: '',
             targetCustomerType: '',
+            customerBlock: CustomerBlock(''),
           ),
         ),
       );
@@ -400,6 +402,7 @@ void main() {
             licenses: [],
             country: '',
             targetCustomerType: '',
+            customerBlock: CustomerBlock(''),
           ),
         ),
       );

@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
@@ -265,6 +266,7 @@ class _CartPageState extends State<CartPage> {
                     currentPath: context.router.currentPath,
                   ),
                   const AccountSuspendedBanner(),
+                  const CustomerBlockedBanner(),
                   if (!state.priceUnderLoadingShimmer)
                     const _CartPageInvalidItemsBanner(),
                   const _CartPageCartScrollList(),

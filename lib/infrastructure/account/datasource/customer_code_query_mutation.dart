@@ -59,6 +59,7 @@ query customerInformationSearch(
         status
         targetCustomerType
         plant
+        customerBlock
       }
     }
   }

@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
+import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -54,6 +55,7 @@ class OrdersTab extends StatelessWidget {
           AnnouncementWidget(
             currentPath: context.router.currentPath,
           ),
+          const CustomerBlockedBanner(),
           Expanded(
             child: AutoTabsRouter.tabBar(
               routes: const [

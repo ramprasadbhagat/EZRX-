@@ -45,8 +45,8 @@ class BuyAgainButton extends StatelessWidget {
               ),
               onPressed: state.orderNumberWillUpsert != OrderNumber('') ||
                       (state.orderNumberWillUpsert ==
-                              viewByOrderHistoryItem.orderNumber &&
-                          (stateCart.isUpserting || stateCart.isFetching))
+                              viewByOrderHistoryItem.orderNumber ||
+                          stateCart.isBuyAgainNotAllowed)
                   ? null
                   : () {
                       _trackBuyAgainEvent(

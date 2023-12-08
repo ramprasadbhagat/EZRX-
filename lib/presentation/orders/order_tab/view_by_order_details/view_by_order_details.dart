@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/order/re_order_permission/re_order_permis
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
+import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_status_section.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -50,6 +51,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                 : ListView(
                     key: WidgetKeys.viewByOrderDetailsPageListView,
                     children: <Widget>[
+                      const CustomerBlockedBanner(),
                       const OrderHeaderSection(),
                       if (eligibilityState.salesOrg.isID)
                         _ViewByOrderStatusTracker(

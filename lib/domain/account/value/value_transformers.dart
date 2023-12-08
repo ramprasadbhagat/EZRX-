@@ -539,3 +539,5 @@ num countryOrderTaxValue(String country) {
 
   return salesOrgCountryMap[country] ?? 0;
 }
+
+bool checkIfCustomerIsBlocked(String value) => value == 'blocked';

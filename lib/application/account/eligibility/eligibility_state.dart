@@ -265,4 +265,7 @@ class EligibilityState with _$EligibilityState {
       Locale(user.userPreferredLanguageCode, salesOrg.country);
 
   bool get isSOAApplicable => !isIDMarket;
+
+  bool get disableCreateOrder =>
+      !user.userCanCreateOrder || shipToInfo.customerBlock.isCustomerBlocked;
 }

@@ -17,6 +17,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
@@ -145,6 +146,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         key: WidgetKeys.productDetailList,
         controller: _scrollController,
         children: [
+          const CustomerBlockedBanner(),
           const _ProductImageSection(),
           const _BodyContent(),
           _SimilarProducts(),
@@ -399,8 +401,7 @@ class _FooterState extends State<_Footer> {
             .materialPrice[materialInfo.materialNumber] ??
         Price.empty();
     final eligibilityState = context.read<EligibilityBloc>().state;
-    final disableCreateOrder = !eligibilityState.user.userCanCreateOrder;
-    if (disableCreateOrder) return false;
+    if (eligibilityState.disableCreateOrder) return false;
     final materialWithoutPrice =
         eligibilityState.salesOrgConfigs.materialWithoutPrice;
     final materialInStock = (!stockInfo.inStock.isMaterialInStock

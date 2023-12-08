@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -175,7 +174,6 @@ void main() {
           isLoading: true,
         ),
       );
-
 
       await tester.pumpWidget(getWidget());
       await tester.pump(const Duration(milliseconds: 100));

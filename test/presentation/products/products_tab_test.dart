@@ -717,6 +717,25 @@ void main() {
         );
         expect(priceText, findsOneWidget);
       });
+
+      testWidgets(
+        ' -> Find customer blocked banner',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              shipToInfo: ShipToInfo.empty()
+                  .copyWith(customerBlock: CustomerBlock('blocked')),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final customerBlockedBanner =
+              find.byKey(WidgetKeys.customerBlockedBanner);
+
+          expect(customerBlockedBanner, findsOneWidget);
+        },
+      );
     },
   );
 }

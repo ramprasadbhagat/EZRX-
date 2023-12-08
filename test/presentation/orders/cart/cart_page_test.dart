@@ -6,6 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
@@ -2586,6 +2587,24 @@ void main() {
           ),
         ).called(1);
       });
+      testWidgets(
+        ' -> Find customer blocked banner',
+        (WidgetTester tester) async {
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              shipToInfo: ShipToInfo.empty()
+                  .copyWith(customerBlock: CustomerBlock('blocked')),
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+
+          final customerBlockedBanner =
+              find.byKey(WidgetKeys.customerBlockedBanner);
+
+          expect(customerBlockedBanner, findsOneWidget);
+        },
+      );
     },
   );
 }

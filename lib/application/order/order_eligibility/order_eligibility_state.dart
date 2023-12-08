@@ -196,6 +196,10 @@ class OrderEligibilityState with _$OrderEligibilityState {
       !comboDealEligible &&
       cartItems.any((product) => product.materialInfo.type.typeCombo);
 
+  bool get isCheckoutNotAllowed =>
+      isComboNotAllowedIfPresentInCart ||
+      shipInfo.customerBlock.isCustomerBlocked;
+
   bool get displayInvalidItemsBanner =>
       cartContainsSuspendedMaterials ||
       isMWPNotAllowedAndPresentInCart ||

@@ -494,4 +494,7 @@ class CartState with _$CartState {
   String get getDiscountPrice => salesOrganisation.salesOrg.isID
       ? aplSimulatorOrder.totalDiscountValue.toString()
       : 0.toString();
+
+  bool get isBuyAgainNotAllowed =>
+      isUpserting || isFetching || shipToInfo.customerBlock.isCustomerBlocked;
 }

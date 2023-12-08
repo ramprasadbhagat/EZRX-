@@ -1334,4 +1334,5 @@ class WidgetKeys {
   static Key paymentSavePdfButton = const Key('paymentSavePdfButton');
   static Key createAdviceSummary = const Key('createAdviceSummary');
   static Key paymentAdviceNextStep = const Key('paymentAdviceNextStep');
+  static Key customerBlockedBanner = const Key('customerBlockedBanner');
 }
