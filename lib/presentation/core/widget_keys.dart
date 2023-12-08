@@ -441,7 +441,7 @@ class WidgetKeys {
       Key('returnRequestDetailRequestDate');
   static Key returnRequestDetailMaterial(int index) =>
       Key('returnRequestDetailMaterial$index');
-
+  static const Key bonusPriceComponent = Key('bonusPriceComponent');
   //============================================================
   //============================================================
   //  Reset Password

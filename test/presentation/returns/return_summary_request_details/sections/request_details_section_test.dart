@@ -13,8 +13,10 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/detai
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/return_request_details.dart';
@@ -78,6 +80,7 @@ void main() {
   late PoAttachmentBloc mockPoAttachmentBloc;
   late AuthBloc mockAuthBloc;
   late EligibilityBloc eligibilityBlocMock;
+  late RequestInformation requestInformation;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -85,6 +88,8 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
+    requestInformation = await ReturnSummaryDetailsByRequestLocal()
+        .getReturnSummaryDetailsByRequest();
   });
   setUp(() async {
     mockSalesOrgBloc = MockSalesOrgBloc();
@@ -99,6 +104,10 @@ void main() {
     mockPoAttachmentBloc = MockPoAttachmentBloc();
     eligibilityBlocMock = MockEligibilityBloc();
   });
+
+  /////////////////////Finder///////////////////////////////////////////////////
+  final bonusPriceComponent = find.byKey(WidgetKeys.bonusPriceComponent);
+  /////////////////////////////////////////////////////////////////////////////
 
   group('Return By Item Page', () {
     setUp(() {
@@ -281,6 +290,61 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets('Return request fail => Bonus return reason', (tester) async {
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformation: requestInformation.returnRequestInformationList
+              .map(
+                (e) => e.copyWith(
+                  bapiStatus: StatusType('FAILED'),
+                ),
+              )
+              .toList(),
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      final showButtonFinder =
+          find.byKey(WidgetKeys.returnDetailShowDetailButton);
+      await tester.dragUntilVisible(
+        showButtonFinder,
+        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        const Offset(0, 1000),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(showButtonFinder);
+      await tester.pumpAndSettle();
+      final bonusReturnReason = find.byKey(
+        WidgetKeys.balanceTextRow(
+          'Reason for return',
+          requestInformation.returnRequestInformationList.first.returnOrderDesc,
+        ),
+      );
+      expect(bonusReturnReason, findsOneWidget);
+      expect(bonusPriceComponent, findsNothing);
+    });
+
+    testWidgets('Return request not fail => Bonus Price', (tester) async {
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformation: requestInformation.returnRequestInformationList,
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      final showButtonFinder =
+          find.byKey(WidgetKeys.returnDetailShowDetailButton);
+      await tester.dragUntilVisible(
+        showButtonFinder,
+        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        const Offset(0, 1000),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(showButtonFinder);
+      await tester.pumpAndSettle();
+      expect(bonusPriceComponent, findsOneWidget);
     });
   });
 }

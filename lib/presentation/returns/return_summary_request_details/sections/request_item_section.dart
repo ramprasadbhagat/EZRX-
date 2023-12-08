@@ -465,17 +465,43 @@ class _BonusItemSection extends StatelessWidget {
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ),
-                          Text(
-                            'Qty: ${e.returnQuantity} ',
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
+                          if (requestInformation
+                              .bapiStatus.getIsBapiStatusFailed)
+                            Text(
+                              '${context.tr('Qty')}: ${e.returnQuantity} ',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
                         ],
                       ),
-                      BalanceTextRow(
-                        keyText: 'Reason for return'.tr(),
-                        valueText: e.returnOrderDesc,
-                        keyFlex: 3,
-                      ),
+                      requestInformation.bapiStatus.getIsBapiStatusFailed
+                          ? BalanceTextRow(
+                              keyText: 'Reason for return'.tr(),
+                              valueText: e.returnOrderDesc,
+                              keyFlex: 3,
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: Row(
+                                key: WidgetKeys.bonusPriceComponent,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  PriceComponent(
+                                    salesOrgConfig: context
+                                        .read<EligibilityBloc>()
+                                        .state
+                                        .salesOrgConfigs,
+                                    price: e.totalPrice.toString(),
+                                    type: PriceStyle.returnBonusPrice,
+                                  ),
+                                  Text(
+                                    '${context.tr('Qty')}: ${e.returnQuantity} ',
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ],
+                              ),
+                            ),
                     ],
                   ),
                 ),
