@@ -151,6 +151,7 @@ stages:
 
     - task: AppCenterDistribute@3
       displayName: Upload to Microsoft Appcenter eZRx Uat
+      continueOnError: true
       inputs:
         serverEndpoint: 'eZRx+ Uat Appcenter'
         appSlug: '$(APPCENTER_APP_SLUG_UAT)'
