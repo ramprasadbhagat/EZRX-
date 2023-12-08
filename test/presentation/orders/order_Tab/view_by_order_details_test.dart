@@ -167,7 +167,9 @@ void main() {
           orderHistoryDetailsOrderItem: [
             fakeOrderHistoryItem.copyWith(
               tax: 9,
-              totalPrice: TotalPrice('345.6'),
+              totalPrice: TotalPrice('336.6'),
+              unitPrice: ZpPrice('336.6'),
+              qty: 1,
             )
           ],
         ),

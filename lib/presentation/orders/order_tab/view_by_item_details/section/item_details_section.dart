@@ -90,11 +90,11 @@ class ItemDetailsSection extends StatelessWidget {
             showBundleTag: orderHistoryItem.isBundle,
             footerWidget: QuantityAndPriceWithTax(
               quantity: orderHistoryItem.qty,
-              totalPriceString: orderHistoryItem.itemTotalPrice(
+              taxPercentage: orderHistoryItem.taxPercentage,
+              netPrice: orderHistoryItem.itemTotalNetPrice(
                 eligibilityState.isMYExternalSalesRepUser,
                 eligibilityState.salesOrg.isID,
               ),
-              taxPercentage: orderHistoryItem.tax,
             ),
           ),
         ],

@@ -138,12 +138,12 @@ class OrderItemDetailsSection extends StatelessWidget {
                                       quantityDescription: isIDMarket
                                           ? '${e.pickedQuantity} ${context.tr('of')} ${e.qty} ${context.tr('stocks fulfilled')}'
                                           : '',
-                                      totalPriceString: e.itemTotalPrice(
+                                      netPrice: e.itemNetPrice(
                                         invoiceNumber,
                                         isMYExternalSalesRep,
                                         isIDMarket,
                                       ),
-                                      taxPercentage: e.tax,
+                                      taxPercentage: e.taxPercentage,
                                     ),
                                   ),
                                 )

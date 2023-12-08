@@ -120,6 +120,16 @@ class OrderHistoryItem with _$OrderHistoryItem {
         isIDMarket,
       );
 
+  String itemTotalNetPrice(
+    bool isMYExternalSalesRep,
+    bool isIDMarket,
+  ) =>
+      _itemPrice(
+        (unitPrice.zpPrice * qty).toString(),
+        isMYExternalSalesRep,
+        isIDMarket,
+      );
+
   String itemTotalPrice(
     bool isMYExternalSalesRep,
     bool isIDMarket,
@@ -151,6 +161,12 @@ class OrderHistoryItem with _$OrderHistoryItem {
         if (showGMCPart && governmentMaterialCode.isNotEmpty)
           governmentMaterialCode,
       ].join(' | ');
+
+  double get taxPercentage =>
+      double.tryParse(
+        (tax / unitPrice.zpPrice * 100).toStringAsExponential(2),
+      ) ??
+      0;
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {

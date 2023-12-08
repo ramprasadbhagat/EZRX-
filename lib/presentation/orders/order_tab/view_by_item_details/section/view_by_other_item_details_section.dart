@@ -116,14 +116,14 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                 footerWidget:
                                                     QuantityAndPriceWithTax(
                                                   quantity: e.qty,
-                                                  totalPriceString:
-                                                      e.itemTotalPrice(
+                                                  taxPercentage:
+                                                      e.taxPercentage,
+                                                  netPrice: e.itemTotalNetPrice(
                                                     eligibilityState
                                                         .isMYExternalSalesRepUser,
                                                     eligibilityState
                                                         .salesOrg.isID,
                                                   ),
-                                                  taxPercentage: e.tax,
                                                 ),
                                               ),
                                             )

@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
+
   final parentItem = OrderHistoryItem.empty().copyWith(
     lineNumber: LineNumber('10'),
     isBonusMaterial: false,
@@ -26,7 +27,6 @@ void main() async {
       );
       expect(entity.isOthersOrderItemsSectionVisible, true);
     });
-
     group('get parent material of bonus -', () {
       test('return empty when input is not bonus', () {
         expect(
@@ -59,6 +59,29 @@ void main() async {
           entity.getParentMaterial(bonusItem),
           parentItem,
         );
+      });
+      test('netPrice calculation test', () {
+        final orderHistoryItem = OrderHistoryItem.empty().copyWith(
+          unitPrice: ZpPrice('10'),
+          qty: 10,
+        );
+
+        expect(
+          orderHistoryItem.itemTotalNetPrice(
+            false,
+            false,
+          ),
+          '100.0',
+        );
+      });
+      test('taxPercentage calculation test', () {
+        final orderHistoryItem = OrderHistoryItem.empty().copyWith(
+          unitPrice: ZpPrice('100'),
+          qty: 10,
+          tax: 5.0,
+        );
+
+        expect(orderHistoryItem.taxPercentage, 5.0);
       });
     });
   });

@@ -142,6 +142,18 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         isIDMarket,
       );
 
+  String itemNetPrice(
+    StringValue invoiceNumber,
+    bool isMYExternalSalesRep,
+    bool isIDMarket,
+  ) =>
+      _itemPrice(
+        (unitPrice.zpPrice * qty).toString(),
+        invoiceNumber,
+        isMYExternalSalesRep,
+        isIDMarket,
+      );
+
   String itemTotalPrice(
     StringValue invoiceNumber,
     bool isMYExternalSalesRep,
@@ -153,6 +165,12 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         isMYExternalSalesRep,
         isIDMarket,
       );
+
+  double get taxPercentage =>
+      double.tryParse(
+        (tax / unitPrice.zpPrice * 100).toStringAsExponential(2),
+      ) ??
+      0;
 
   String _itemPrice(
     String price,

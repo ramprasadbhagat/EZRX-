@@ -1,62 +1,59 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
-import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
-import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/product_tag.dart';
-import 'package:ezrxmobile/presentation/core/status_tracker.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/invoice_number_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_number_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_attachment_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/material_tax.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/locator.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/status_tracker.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_number_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/invoice_number_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_attachment_section.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -113,6 +110,10 @@ class PoAttachmentBlocMock
 
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
+class MockProductImageBloc
+    extends MockBloc<ProductImageEvent, ProductImageState>
+    implements ProductImageBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -126,8 +127,6 @@ void main() {
   late EligibilityBlocMock eligibilityBlocMock;
   late ProductImageBlocMock productImageBlocMock;
   late OrderHistoryItem fakeOrderHistoryItem;
-  late OrderHistoryItem fakeOrderHistoryItemWithCounterOffer;
-  late OrderHistoryItem fakeOrderHistoryItemWithTax;
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late CartBloc cartBlocMock;
   late AllInvoicesBloc allInvoicesBlocMock;
@@ -138,6 +137,7 @@ void main() {
   late List<CreditAndInvoiceItem> fakeItemList;
   late ViewByOrder fakeOrder;
   late OrderHistory mockViewByItemsOrderHistory;
+  late ProductImageBloc mockProductImageBloc;
 
   const fakeCreatedDate = '20230412';
   setUpAll(() async {
@@ -166,15 +166,6 @@ void main() {
       invoiceData:
           InvoiceData.empty().copyWith(invoiceNumber: StringValue('123456')),
     );
-    fakeOrderHistoryItemWithCounterOffer = fakeOrderHistoryItem.copyWith(
-      originPrice: ZpPrice('100.1'),
-      unitPrice: ZpPrice('98'),
-      isCounterOffer: true,
-    );
-    fakeOrderHistoryItemWithTax = fakeOrderHistoryItemWithCounterOffer.copyWith(
-      tax: 9,
-      totalPrice: TotalPrice('345.8'),
-    );
     fakeItemList =
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
     fakeOrder = await ViewByOrderLocalDataSource().getViewByOrders();
@@ -196,6 +187,7 @@ void main() {
       viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
       poAttachmentBlocMock = PoAttachmentBlocMock();
       mockAuthBloc = MockAuthBloc();
+      mockProductImageBloc = MockProductImageBloc();
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
@@ -227,6 +219,8 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfoWithCustomerGrp4,
         ),
       );
+      when(() => mockProductImageBloc.state)
+          .thenReturn(ProductImageState.initial());
     });
 
     Widget getScopedWidget() {
@@ -276,6 +270,9 @@ void main() {
           ),
           BlocProvider<PoAttachmentBloc>(
             create: ((context) => poAttachmentBlocMock),
+          ),
+          BlocProvider<ProductImageBloc>(
+            create: (context) => mockProductImageBloc,
           ),
         ],
         child: const Material(
@@ -1209,7 +1206,7 @@ void main() {
       expect(successMsg, findsNothing);
     });
 
-    testWidgets('=> When contact person is empty - NA should display',
+    testWidgets('When contact person is empty - NA should display',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -1225,152 +1222,147 @@ void main() {
         findsOneWidget,
       );
     });
-    testWidgets(
-        '=> Display counter offer when order history item is conter offer one',
+    testWidgets(' => QuantityAndPriceWithTax test for TH market',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
-        ),
-      );
-      when(() => viewByItemsBlocMock.state).thenReturn(
-        ViewByItemsState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [fakeOrderHistoryItemWithCounterOffer],
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            currency: Currency('thb'),
           ),
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItemWithCounterOffer,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [fakeOrderHistoryItemWithCounterOffer],
+          isLoading: true,
+        ),
+      );
+      final expectedStates = [
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            unitPrice: ZpPrice('60.00'),
+            qty: 30,
+            tax: 4.2,
+          ),
+        ),
+      ];
+      whenListen(
+        viewByItemDetailsBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final expectedNetPrice = find.text(
+        'THB 1,800.00',
+        findRichText: true,
+      );
+      expect(expectedNetPrice, findsOneWidget);
+      await tester.pump();
+      final taxPercentage = find.text(
+        '(7.0% ${'tax'.tr()})',
+      );
+      expect(taxPercentage, findsOneWidget);
+      await tester.pump();
+      final expectedPrice = find.text(
+        'THB 1,926.00',
+        findRichText: true,
+      );
+      expect(expectedPrice, findsOneWidget);
+    });
+    testWidgets(' => QuantityAndPriceWithTax test for ID market',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('1900'),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            currency: Currency('idr'),
           ),
         ),
       );
-
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
+      final expectedStates = [
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            unitPrice: ZpPrice('116640.0'),
+            qty: 5,
+            tax: 12830.4,
+          ),
+        ),
+      ];
+      whenListen(
+        viewByItemDetailsBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-      final orderItemPrice = find.byType(OrderItemPrice);
-      expect(orderItemPrice, findsOneWidget);
-      final offerAppliedTxt = find.text('Offer applied'.tr());
-      expect(offerAppliedTxt, findsOneWidget);
+      final expectedNetPrice = find.text(
+        'IDR 583,200.00',
+        findRichText: true,
+      );
+      expect(expectedNetPrice, findsOneWidget);
+      await tester.pump();
+      final taxPercentage = find.text(
+        '(11.0% ${'tax'.tr()})',
+      );
+      expect(taxPercentage, findsOneWidget);
+      await tester.pump();
+      final expectedPrice = find.text(
+        'IDR 647,352.00',
+        findRichText: true,
+      );
+      expect(expectedPrice, findsOneWidget);
     });
 
-    testWidgets(
-        '=> NOT display counter offer when order history item is NOT conter offer one',
+    testWidgets(' => QuantityAndPriceWithTax test for MY market',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
-        ),
-      );
-      when(() => viewByItemsBlocMock.state).thenReturn(
-        ViewByItemsState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [fakeOrderHistoryItem],
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            currency: Currency('myr'),
           ),
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [fakeOrderHistoryItem],
-          ),
+          isLoading: true,
         ),
       );
-
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pumpAndSettle();
-      final orderItemPrice = find.byType(OrderItemPrice);
-      expect(orderItemPrice, findsOneWidget);
-      final offerAppliedTxt = find.text('Offer applied'.tr());
-      expect(offerAppliedTxt, findsNothing);
-    });
-
-    testWidgets(
-        '=> Display material tax when order history item is applied tax',
-        (tester) async {
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
-        ),
-      );
-      when(() => viewByItemsBlocMock.state).thenReturn(
-        ViewByItemsState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [fakeOrderHistoryItemWithTax],
-          ),
-        ),
-      );
-      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+      final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItemWithTax,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [fakeOrderHistoryItemWithTax],
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            unitPrice: ZpPrice('60.00'),
+            qty: 30,
+            tax: 4.2,
           ),
         ),
+      ];
+      whenListen(
+        viewByItemDetailsBlocMock,
+        Stream.fromIterable(expectedStates),
       );
-
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-      final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
-      expect(quantityAndPriceWithTax, findsOneWidget);
-      final materialTax = find.byType(MaterialTax);
-      expect(materialTax, findsOneWidget);
-    });
-
-    testWidgets(
-        '=> NOT display material tax when order history item is NOT applied tax',
-        (tester) async {
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
-        ),
+      final expectedNetPrice = find.text(
+        'MYR 1,800.00',
+        findRichText: true,
       );
-      when(() => viewByItemsBlocMock.state).thenReturn(
-        ViewByItemsState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [fakeOrderHistoryItem],
-          ),
-        ),
+      expect(expectedNetPrice, findsOneWidget);
+      await tester.pump();
+      final taxPercentage = find.text(
+        '(7.0% ${'tax'.tr()})',
       );
-      when(() => viewByItemDetailsBlocMock.state).thenReturn(
-        ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [fakeOrderHistoryItem],
-          ),
-        ),
+      expect(taxPercentage, findsOneWidget);
+      await tester.pump();
+      final expectedPrice = find.text(
+        'MYR 1,926.00',
+        findRichText: true,
       );
-
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pumpAndSettle();
-      final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
-      expect(quantityAndPriceWithTax, findsOneWidget);
-      final materialTax = find.byType(MaterialTax);
-      expect(materialTax, findsNothing);
+      expect(expectedPrice, findsOneWidget);
     });
 
     testWidgets(

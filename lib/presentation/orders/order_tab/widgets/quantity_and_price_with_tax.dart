@@ -10,20 +10,21 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 class QuantityAndPriceWithTax extends StatelessWidget {
   final int quantity;
   final String quantityDescription;
-  final String totalPriceString;
+  final String netPrice;
   final double taxPercentage;
+
   const QuantityAndPriceWithTax({
     Key? key,
     required this.quantity,
     this.quantityDescription = '',
-    required this.totalPriceString,
     required this.taxPercentage,
+    required this.netPrice,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     //TODO: Will cover this parse in another refactoring task later
-    final totalPrice = double.tryParse(totalPriceString) ?? 0;
+    final netPriceValue = double.tryParse(netPrice) ?? 0;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,11 +55,11 @@ class QuantityAndPriceWithTax extends StatelessWidget {
               key: WidgetKeys.cartItemProductTotalPrice,
               salesOrgConfig:
                   context.read<EligibilityBloc>().state.salesOrgConfigs,
-              price: totalPriceString,
+              price: netPrice,
             ),
-            if (taxPercentage > 0 && totalPrice > 0)
+            if (taxPercentage > 0 && netPriceValue > 0)
               MaterialTax(
-                totalPrice: totalPrice,
+                totalPrice: netPriceValue,
                 percentage: taxPercentage,
               ),
           ],
