@@ -7,6 +7,10 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 
 abstract class IDeepLinkingRepository {
+  Either<ApiFailure, MaterialNumber> extractMaterialNumber({
+    required Uri link,
+  });
+
   Either<ApiFailure, OrderNumber> extractOrderNumber({
     required CustomerCodeInfo selectedCustomerCode,
     required ShipToInfo selectedShipTo,

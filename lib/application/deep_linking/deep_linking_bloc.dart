@@ -49,57 +49,81 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
         state.when(
           initial: () {},
           linkPending: (link) {
-            switch (link.path) {
-              case '/my-account/orders/order-detail':
-                final failureOrSuccess = repository.extractOrderNumber(
-                  selectedCustomerCode: event.selectedCustomerCode,
-                  selectedShipTo: event.selectedShipTo,
-                  link: link,
-                );
+            if (link.path.startsWith('/product-details')) {
+              final failureOrSuccess = repository.extractMaterialNumber(
+                link: link,
+              );
 
-                failureOrSuccess.fold(
-                  (error) => emit(
-                    DeepLinkingState.error(error),
-                  ),
-                  (orderNumber) => emit(
-                    DeepLinkingState.redirectOrderDetail(orderNumber),
-                  ),
-                );
-                break;
-              case '/my-account/return-summary-details':
-                final failureOrSuccess = repository.extractReturnId(
-                  selectedCustomerCode: event.selectedCustomerCode,
-                  selectedShipTo: event.selectedShipTo,
-                  link: link,
-                );
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (materialNumber) => emit(
+                  DeepLinkingState.redirectProductDetail(materialNumber),
+                ),
+              );
+            } else if (link.path.startsWith('/bundle-details')) {
+              final failureOrSuccess = repository.extractMaterialNumber(
+                link: link,
+              );
 
-                failureOrSuccess.fold(
-                  (error) => emit(
-                    DeepLinkingState.error(error),
-                  ),
-                  (returnId) => emit(
-                    DeepLinkingState.redirectReturnDetail(returnId),
-                  ),
-                );
-                break;
-              case '/payments/payment-summary/invoice-details':
-                final failureOrSuccess =
-                    repository.extractPaymentBatchAdditionalInfo(link: link);
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (materialNumber) => emit(
+                  DeepLinkingState.redirectBundleDetail(materialNumber),
+                ),
+              );
+            } else if (link.path == '/my-account/orders/order-detail') {
+              final failureOrSuccess = repository.extractOrderNumber(
+                selectedCustomerCode: event.selectedCustomerCode,
+                selectedShipTo: event.selectedShipTo,
+                link: link,
+              );
 
-                failureOrSuccess.fold(
-                  (error) => emit(
-                    DeepLinkingState.error(error),
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (orderNumber) => emit(
+                  DeepLinkingState.redirectOrderDetail(orderNumber),
+                ),
+              );
+            } else if (link.path == '/my-account/return-summary-details') {
+              final failureOrSuccess = repository.extractReturnId(
+                selectedCustomerCode: event.selectedCustomerCode,
+                selectedShipTo: event.selectedShipTo,
+                link: link,
+              );
+
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (returnId) => emit(
+                  DeepLinkingState.redirectReturnDetail(returnId),
+                ),
+              );
+            } else if (link.path ==
+                '/payments/payment-summary/invoice-details') {
+              final failureOrSuccess =
+                  repository.extractPaymentBatchAdditionalInfo(link: link);
+
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (paymentBatchAdditionalInfo) => emit(
+                  DeepLinkingState.redirectPaymentDetail(
+                    paymentBatchAdditionalInfo,
                   ),
-                  (paymentBatchAdditionalInfo) => emit(
-                    DeepLinkingState.redirectPaymentDetail(
-                      paymentBatchAdditionalInfo,
-                    ),
-                  ),
-                );
-                break;
-              default:
+                ),
+              );
             }
           },
+          redirectProductDetail: (_) {},
+          redirectBundleDetail: (_) {},
           redirectOrderDetail: (_) {},
           redirectReturnDetail: (_) {},
           redirectPaymentDetail: (_) {},

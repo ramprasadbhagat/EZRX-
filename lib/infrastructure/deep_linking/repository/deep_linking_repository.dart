@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -18,6 +19,18 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
     required this.config,
     required this.deviceStorage,
   });
+
+  @override
+  Either<ApiFailure, MaterialNumber> extractMaterialNumber({
+    required Uri link,
+  }) {
+    final materialNumber = MaterialNumber(link.pathSegments.lastOrNull ?? '');
+    final isValidLink = _validDomain(link) && materialNumber.isValid();
+
+    return isValidLink
+        ? Right(materialNumber)
+        : const Left(ApiFailure.productDetailRoute());
+  }
 
   @override
   Either<ApiFailure, OrderNumber> extractOrderNumber({

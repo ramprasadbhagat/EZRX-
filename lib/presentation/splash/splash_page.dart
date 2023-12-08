@@ -49,6 +49,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
@@ -666,6 +667,54 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         selectedShipTo: eligibilityState.shipToInfo,
                       ),
                     );
+              },
+              redirectProductDetail: (materialNumber) {
+                if (eligibilityState.user.userCanAccessProducts) {
+                  final materialInfo = MaterialInfo.empty().copyWith(
+                    materialNumber: materialNumber,
+                    type: MaterialInfoType.material(),
+                  );
+                  if (eligibilityState.isZDP5eligible) {
+                    context.read<MaterialPriceBloc>().add(
+                          MaterialPriceEvent.fetchPriceForZDP5Materials(
+                            materialInfo: materialInfo,
+                          ),
+                        );
+                  }
+                  context.read<MaterialPriceBloc>().add(
+                        MaterialPriceEvent.fetch(
+                          comboDealEligible: eligibilityState.comboDealEligible,
+                          materials: [materialInfo],
+                        ),
+                      );
+                  context.read<ProductDetailBloc>().add(
+                        ProductDetailEvent.fetch(
+                          materialInfo: materialInfo,
+                          locale: context.locale,
+                        ),
+                      );
+
+                  context.router.push(const ProductDetailsPageRoute());
+                } else {
+                  noAccessSnackbar.show(context);
+                }
+              },
+              redirectBundleDetail: (materialNumber) {
+                if (eligibilityState.user.userCanAccessProducts &&
+                    !eligibilityState.salesOrgConfigs.disableBundles) {
+                  context.read<ProductDetailBloc>().add(
+                        ProductDetailEvent.fetch(
+                          materialInfo: MaterialInfo.empty().copyWith(
+                            materialNumber: materialNumber,
+                            type: MaterialInfoType.bundle(),
+                          ),
+                          locale: context.locale,
+                        ),
+                      );
+                  context.router.push(const BundleDetailPageRoute());
+                } else {
+                  noAccessSnackbar.show(context);
+                }
               },
               redirectOrderDetail: (orderNumber) {
                 if (eligibilityState.user.userCanAccessOrderHistory) {

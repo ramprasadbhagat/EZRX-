@@ -4,6 +4,12 @@ part of 'deep_linking_bloc.dart';
 class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.initial() = _Initial;
   const factory DeepLinkingState.linkPending(Uri link) = _LinkPending;
+  const factory DeepLinkingState.redirectBundleDetail(
+    MaterialNumber materialNumber,
+  ) = _RedirectBundleDetail;
+  const factory DeepLinkingState.redirectProductDetail(
+    MaterialNumber materialNumber,
+  ) = _RedirectProductDetail;
   const factory DeepLinkingState.redirectOrderDetail(
     OrderNumber orderNumber,
   ) = _RedirectOrderDetail;

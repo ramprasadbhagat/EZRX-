@@ -48,6 +48,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.uploadCountExcideLimit() = _UploadCountExcideLimit;
 
   //deep link route failure
+  const factory ApiFailure.productDetailRoute() = _ProductDetailRoute;
   const factory ApiFailure.orderDetailRoute() = _OrderDetailRoute;
   const factory ApiFailure.returnDetailRoute() = _ReturnDetailRoute;
   const factory ApiFailure.paymentDetailRoute() = _PaymentDetailRoute;
@@ -98,6 +99,8 @@ extension ApiFailureExt on ApiFailure {
         invalidFileFormat: (_) =>
             'Unable to upload file as either file format not supported or something wrong with the file',
         uploadCountExcideLimit: (_) => 'Number of files exceeds the criteria',
+        productDetailRoute: (_) =>
+            'This product is not available on your account',
         orderDetailRoute: (_) => 'This order is not available on your account',
         returnDetailRoute: (_) =>
             'This return request is not available on your account',

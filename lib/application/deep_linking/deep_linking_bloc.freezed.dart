@@ -676,6 +676,10 @@ mixin _$DeepLinkingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(StringValue paymentBatchAdditionalInfo)
@@ -687,6 +691,8 @@ mixin _$DeepLinkingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(StringValue paymentBatchAdditionalInfo)?
@@ -698,6 +704,8 @@ mixin _$DeepLinkingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(StringValue paymentBatchAdditionalInfo)?
@@ -710,6 +718,9 @@ mixin _$DeepLinkingState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -721,6 +732,8 @@ mixin _$DeepLinkingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -731,6 +744,8 @@ mixin _$DeepLinkingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -797,6 +812,10 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(StringValue paymentBatchAdditionalInfo)
@@ -811,6 +830,8 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(StringValue paymentBatchAdditionalInfo)?
@@ -825,6 +846,8 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(StringValue paymentBatchAdditionalInfo)?
@@ -843,6 +866,9 @@ class _$_Initial implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -857,6 +883,8 @@ class _$_Initial implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -870,6 +898,8 @@ class _$_Initial implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -953,6 +983,10 @@ class _$_LinkPending implements _LinkPending {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(StringValue paymentBatchAdditionalInfo)
@@ -967,6 +1001,8 @@ class _$_LinkPending implements _LinkPending {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(StringValue paymentBatchAdditionalInfo)?
@@ -981,6 +1017,8 @@ class _$_LinkPending implements _LinkPending {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(StringValue paymentBatchAdditionalInfo)?
@@ -999,6 +1037,9 @@ class _$_LinkPending implements _LinkPending {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -1013,6 +1054,8 @@ class _$_LinkPending implements _LinkPending {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1026,6 +1069,8 @@ class _$_LinkPending implements _LinkPending {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1045,6 +1090,364 @@ abstract class _LinkPending implements DeepLinkingState {
   Uri get link;
   @JsonKey(ignore: true)
   _$$_LinkPendingCopyWith<_$_LinkPending> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RedirectBundleDetailCopyWith<$Res> {
+  factory _$$_RedirectBundleDetailCopyWith(_$_RedirectBundleDetail value,
+          $Res Function(_$_RedirectBundleDetail) then) =
+      __$$_RedirectBundleDetailCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialNumber materialNumber});
+}
+
+/// @nodoc
+class __$$_RedirectBundleDetailCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectBundleDetail>
+    implements _$$_RedirectBundleDetailCopyWith<$Res> {
+  __$$_RedirectBundleDetailCopyWithImpl(_$_RedirectBundleDetail _value,
+      $Res Function(_$_RedirectBundleDetail) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? materialNumber = null,
+  }) {
+    return _then(_$_RedirectBundleDetail(
+      null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RedirectBundleDetail implements _RedirectBundleDetail {
+  const _$_RedirectBundleDetail(this.materialNumber);
+
+  @override
+  final MaterialNumber materialNumber;
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectBundleDetail(materialNumber: $materialNumber)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RedirectBundleDetail &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, materialNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RedirectBundleDetailCopyWith<_$_RedirectBundleDetail> get copyWith =>
+      __$$_RedirectBundleDetailCopyWithImpl<_$_RedirectBundleDetail>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(StringValue paymentBatchAdditionalInfo)
+        redirectPaymentDetail,
+    required TResult Function(ApiFailure failure) error,
+  }) {
+    return redirectBundleDetail(materialNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
+    TResult? Function(ApiFailure failure)? error,
+  }) {
+    return redirectBundleDetail?.call(materialNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
+    TResult Function(ApiFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectBundleDetail != null) {
+      return redirectBundleDetail(materialNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_Error value) error,
+  }) {
+    return redirectBundleDetail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_Error value)? error,
+  }) {
+    return redirectBundleDetail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectBundleDetail != null) {
+      return redirectBundleDetail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectBundleDetail implements DeepLinkingState {
+  const factory _RedirectBundleDetail(final MaterialNumber materialNumber) =
+      _$_RedirectBundleDetail;
+
+  MaterialNumber get materialNumber;
+  @JsonKey(ignore: true)
+  _$$_RedirectBundleDetailCopyWith<_$_RedirectBundleDetail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RedirectProductDetailCopyWith<$Res> {
+  factory _$$_RedirectProductDetailCopyWith(_$_RedirectProductDetail value,
+          $Res Function(_$_RedirectProductDetail) then) =
+      __$$_RedirectProductDetailCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialNumber materialNumber});
+}
+
+/// @nodoc
+class __$$_RedirectProductDetailCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectProductDetail>
+    implements _$$_RedirectProductDetailCopyWith<$Res> {
+  __$$_RedirectProductDetailCopyWithImpl(_$_RedirectProductDetail _value,
+      $Res Function(_$_RedirectProductDetail) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? materialNumber = null,
+  }) {
+    return _then(_$_RedirectProductDetail(
+      null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RedirectProductDetail implements _RedirectProductDetail {
+  const _$_RedirectProductDetail(this.materialNumber);
+
+  @override
+  final MaterialNumber materialNumber;
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectProductDetail(materialNumber: $materialNumber)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RedirectProductDetail &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, materialNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RedirectProductDetailCopyWith<_$_RedirectProductDetail> get copyWith =>
+      __$$_RedirectProductDetailCopyWithImpl<_$_RedirectProductDetail>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(StringValue paymentBatchAdditionalInfo)
+        redirectPaymentDetail,
+    required TResult Function(ApiFailure failure) error,
+  }) {
+    return redirectProductDetail(materialNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
+    TResult? Function(ApiFailure failure)? error,
+  }) {
+    return redirectProductDetail?.call(materialNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(StringValue paymentBatchAdditionalInfo)?
+        redirectPaymentDetail,
+    TResult Function(ApiFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectProductDetail != null) {
+      return redirectProductDetail(materialNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_Error value) error,
+  }) {
+    return redirectProductDetail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_Error value)? error,
+  }) {
+    return redirectProductDetail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectProductDetail != null) {
+      return redirectProductDetail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectProductDetail implements DeepLinkingState {
+  const factory _RedirectProductDetail(final MaterialNumber materialNumber) =
+      _$_RedirectProductDetail;
+
+  MaterialNumber get materialNumber;
+  @JsonKey(ignore: true)
+  _$$_RedirectProductDetailCopyWith<_$_RedirectProductDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1116,6 +1519,10 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(StringValue paymentBatchAdditionalInfo)
@@ -1130,6 +1537,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(StringValue paymentBatchAdditionalInfo)?
@@ -1144,6 +1553,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(StringValue paymentBatchAdditionalInfo)?
@@ -1162,6 +1573,9 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -1176,6 +1590,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1189,6 +1605,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1290,6 +1708,10 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(StringValue paymentBatchAdditionalInfo)
@@ -1304,6 +1726,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(StringValue paymentBatchAdditionalInfo)?
@@ -1318,6 +1742,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(StringValue paymentBatchAdditionalInfo)?
@@ -1336,6 +1762,9 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -1350,6 +1779,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1363,6 +1794,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1456,6 +1889,10 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(StringValue paymentBatchAdditionalInfo)
@@ -1470,6 +1907,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(StringValue paymentBatchAdditionalInfo)?
@@ -1484,6 +1923,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(StringValue paymentBatchAdditionalInfo)?
@@ -1502,6 +1943,9 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -1516,6 +1960,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1529,6 +1975,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1626,6 +2074,10 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(StringValue paymentBatchAdditionalInfo)
@@ -1640,6 +2092,8 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(StringValue paymentBatchAdditionalInfo)?
@@ -1654,6 +2108,8 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(StringValue paymentBatchAdditionalInfo)?
@@ -1672,6 +2128,9 @@ class _$_Error implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -1686,6 +2145,8 @@ class _$_Error implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1699,6 +2160,8 @@ class _$_Error implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
