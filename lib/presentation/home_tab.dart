@@ -68,23 +68,18 @@ class _CustomTabBar extends StatefulWidget {
 
 class _CustomTabBarState extends State<_CustomTabBar>
     with TickerProviderStateMixin {
-  TabController? tabController;
-  List<RouteItem> _currentRoutes = [];
-
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(
-      length: widget.routes.length,
-      vsync: this,
-    );
-  }
+  late TabController tabController = TabController(
+    length: widget.routes.length,
+    vsync: this,
+  );
+  late List<PageRouteInfo> _currentRoutes = widget.routes.routeList;
+  late PageRouteInfo _currentPage = _currentRoutes.first;
 
   @override
   void didUpdateWidget(covariant _CustomTabBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (!listEquals(oldWidget.routes.routeList, widget.routes.routeList)) {
-      tabController?.dispose();
+      tabController.dispose();
       tabController = TabController(
         length: widget.routes.length,
         vsync: this,
@@ -94,18 +89,23 @@ class _CustomTabBarState extends State<_CustomTabBar>
 
   @override
   void dispose() {
-    tabController?.dispose();
+    tabController.dispose();
     super.dispose();
   }
 
   void _updatePageViewStack(TabsRouter tabsRouter) {
-    if (listEquals(_currentRoutes.routeList, widget.routes.routeList)) return;
-    // Checking whenever we login on dehalf and some tabs are disabled due to user role
+    if (listEquals(_currentRoutes, widget.routes.routeList)) return;
+    _currentRoutes = widget.routes.routeList;
+    var newIndex = _currentRoutes.indexWhere((e) => e == _currentPage);
+    if (newIndex == -1) {
+      newIndex = 0;
+    }
+    _currentPage = _currentRoutes[newIndex];
 
-    _currentRoutes = widget.routes;
-    tabsRouter.setupRoutes(widget.routes.routeList);
-    // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
-    tabsRouter.notifyListeners();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      tabsRouter.navigate(_currentPage);
+      tabController.animateTo(newIndex);
+    });
   }
 
   @override
@@ -113,10 +113,11 @@ class _CustomTabBarState extends State<_CustomTabBar>
     return Material(
       color: ZPColors.white,
       child: AutoTabsRouter.pageView(
+        key: ValueKey(widget.routes.length),
         routes: widget.routes.routeList,
         builder: (context, child, _) {
           final tabsRouter = AutoTabsRouter.of(context);
-          tabController?.animateTo(tabsRouter.activeIndex);
+          tabController.animateTo(tabsRouter.activeIndex);
           _updatePageViewStack(tabsRouter);
 
           return Column(
@@ -130,6 +131,7 @@ class _CustomTabBarState extends State<_CustomTabBar>
                   key: WidgetKeys.homeTabBar,
                   indicator: _TopIndicator(),
                   onTap: (index) {
+                    _currentPage = widget.routes.routeList[index];
                     tabsRouter.setActiveIndex(index);
                     trackMixpanelEvent(
                       MixpanelEvents.bottomNavBarClicked,
