@@ -305,6 +305,7 @@ void main() {
       configs: salesOrganisationConfigs,
       orderValue: 100.0,
       totalTax: 100,
+      smallOrderFee: 12500.0,
     );
     expect(
       result.isRight(),
@@ -419,6 +420,7 @@ void main() {
       configs: salesOrganisationConfigs,
       orderValue: 100.0,
       totalTax: 100,
+      smallOrderFee: 12500.0,
     );
     expect(
       result.isRight(),
@@ -490,6 +492,7 @@ void main() {
       configs: salesOrganisationConfigs,
       orderValue: 100.0,
       totalTax: 100,
+      smallOrderFee: 12500.0,
     );
     expect(
       result.isLeft(),
@@ -519,6 +522,7 @@ void main() {
         configs: salesOrganisationPHConfigsWithEnablePrincipalList,
         orderValue: 100.0,
         totalTax: 100,
+        smallOrderFee: 12500.0,
       );
       expect(
         result.isLeft(),
@@ -561,6 +565,7 @@ void main() {
         configs: salesOrganisationPHConfigsWithEnablePrincipalList,
         orderValue: 100.0,
         totalTax: 100,
+        smallOrderFee: 12500.0,
       );
       expect(
         result.isLeft(),
@@ -599,6 +604,7 @@ void main() {
         configs: salesOrganisationPHConfigsWithEnablePrincipalList,
         orderValue: 100.0,
         totalTax: 100,
+        smallOrderFee: 12500.0,
       );
       expect(
         result.isLeft(),
@@ -637,6 +643,7 @@ void main() {
         configs: salesOrganisationPHConfigsWithEnablePrincipalList,
         orderValue: 100.0,
         totalTax: 100,
+        smallOrderFee: 12500.0,
       );
       expect(
         result.isRight(),
@@ -711,6 +718,7 @@ void main() {
         configs: salesOrganisationPHConfigsWithEnablePrincipalList,
         orderValue: 100.0,
         totalTax: 100,
+        smallOrderFee: 12500.0,
       );
       expect(
         result.isLeft(),
@@ -776,6 +784,7 @@ void main() {
         configs: salesOrganisationPHConfigsWithEnablePrincipalList,
         orderValue: 100.0,
         totalTax: 100,
+        smallOrderFee: 12500.0,
       );
       expect(
         result.isLeft(),
@@ -847,6 +856,7 @@ void main() {
         configs: salesOrganisationPHConfigsWithEnablePrincipalList,
         orderValue: 100.0,
         totalTax: 100,
+        smallOrderFee: 12500.0,
       );
       expect(
         result.isRight(),
@@ -889,6 +899,7 @@ void main() {
         configs: salesOrganisationPHConfigsWithEnablePrincipalList,
         orderValue: 100.0,
         totalTax: 100,
+        smallOrderFee: 12500.0,
       );
       expect(
         result.isLeft(),
@@ -995,6 +1006,7 @@ void main() {
         cartProducts: cartMaterialsCombo,
         grandTotal: 210.0,
         orderValue: 210.0,
+        smallOrderFee: 12500.0,
         totalTax: 0.0,
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
@@ -1013,7 +1025,8 @@ void main() {
       );
     });
 
-    test('submit order should contain deliveryFee as null string in ID market',
+    test(
+        'submit order should contain deliveryFee as small order value string in ID market when order value <300000.00',
         () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       final submitOrderMockIDMarket = submitOrderMock.copyWith(
@@ -1028,7 +1041,7 @@ void main() {
           data: SubmitOrderDto.fromDomain(
             submitOrderMockIDMarket,
           ).toJson()
-            ..addAll({'deliveryFee': 'null'}),
+            ..addAll({'deliveryFee': '12500.0'}),
         ),
       ).thenReturn(orderEncryptionMock);
       when(
@@ -1052,10 +1065,57 @@ void main() {
         configs: salesOrganisationPHConfigsWithEnablePrincipalList,
         orderValue: 100.0,
         totalTax: 100,
+        smallOrderFee: 12500.0,
       );
 
       expect(result, Right(submitOrderResponseMock));
     });
+  });
+  test(
+      'submit order should contain deliveryFee as null string in ID market when order valye is >=300000.00',
+      () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    final submitOrderMockIDMarket = submitOrderMock.copyWith(
+      orderValue: 310000.00,
+      customer: submitOrderMock.customer.copyWith(
+        salesOrganisation:
+            fakeIDSalesOrganisation.salesOrg.getOrDefaultValue(''),
+      ),
+    );
+
+    when(
+      () => encryption.encryptionData(
+        data: SubmitOrderDto.fromDomain(
+          submitOrderMockIDMarket,
+        ).toJson()
+          ..addAll({'deliveryFee': 'null'}),
+      ),
+    ).thenReturn(orderEncryptionMock);
+    when(
+      () => orderRemoteDataSource.submitOrder(
+        orderEncryption: orderEncryptionMock,
+      ),
+    ).thenAnswer(
+      (invocation) async => submitOrderResponseMock,
+    );
+
+    final result = await orderRepository.submitOrder(
+      shipToInfo: mockShipToInfo,
+      user: fakeClientUser,
+      cartProducts: cartMaterials,
+      grandTotal: 100.0,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: fakeIDSalesOrganisation,
+      data: deliveryInfoData,
+      orderDocumentType: OrderDocumentType.empty()
+          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+      configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+      orderValue: 310000.00,
+      totalTax: 100,
+      smallOrderFee: 12500.0,
+    );
+
+    expect(result, Right(submitOrderResponseMock));
   });
 
   group('OrderRepository => getOrderHistoryDetails', () {

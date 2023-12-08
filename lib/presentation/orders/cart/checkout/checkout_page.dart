@@ -192,6 +192,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     .read<CartBloc>()
                                     .state
                                     .subTotalSubmit,
+                                smallOrderFee: context
+                                    .read<CartBloc>()
+                                    .state
+                                    .aplSimulatorOrder
+                                    .smallOrderFee,
                                 totalTax:
                                     context.read<CartBloc>().state.totalTax,
                                 data: context

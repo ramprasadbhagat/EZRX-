@@ -20,6 +20,7 @@ abstract class IOrderRepository {
     required List<PriceAggregate> cartProducts,
     required double grandTotal,
     required double orderValue,
+    required double smallOrderFee,
     required double totalTax,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,

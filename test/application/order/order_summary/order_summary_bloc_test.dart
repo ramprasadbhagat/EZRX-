@@ -100,6 +100,7 @@ void main() {
             grandTotal: 100.0,
             orderValue: 100.0,
             totalTax: 100.0,
+            smallOrderFee: 12500.0,
           ),
         ).thenAnswer((value) async => Right(submitOrderResponse));
       },
@@ -117,6 +118,7 @@ void main() {
             data: DeliveryInfoData.empty(),
             orderValue: 100.0,
             totalTax: 100.0,
+            smallOrderFee: 12500.0,
           ),
         );
       },
@@ -152,6 +154,7 @@ void main() {
             configs: seedState.salesOrgConfig,
             orderValue: 100.0,
             totalTax: 100,
+            smallOrderFee: 12500.0,
           ),
         ).thenAnswer(
           (value) async => const Left(ApiFailure.other('Some Error')),
@@ -171,6 +174,7 @@ void main() {
             data: DeliveryInfoData.empty(),
             orderValue: 100.0,
             totalTax: 100,
+            smallOrderFee: 12500.0,
           ),
         );
       },
@@ -229,6 +233,7 @@ void main() {
             grandTotal: 18.0,
             orderValue: 30.0,
             totalTax: 0.0,
+            smallOrderFee: 12500.0,
           ),
         ).thenAnswer((value) async => Right(submitOrderResponse));
       },
@@ -269,6 +274,7 @@ void main() {
             grandTotal: 18.0,
             orderValue: 30.0,
             totalTax: 0.0,
+            smallOrderFee: 12500.0,
           ),
         );
       },

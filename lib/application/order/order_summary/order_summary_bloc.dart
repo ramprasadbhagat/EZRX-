@@ -63,6 +63,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           cartProducts: value.cartProducts,
           grandTotal: value.grandTotal,
           orderValue: value.orderValue,
+          smallOrderFee: value.smallOrderFee,
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
           data: value.data,

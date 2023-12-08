@@ -64,6 +64,7 @@ class OrderRepository implements IOrderRepository {
     required List<PriceAggregate> cartProducts,
     required double grandTotal,
     required double orderValue,
+    required double smallOrderFee,
     required double totalTax,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
@@ -100,9 +101,13 @@ class OrderRepository implements IOrderRepository {
       ).toJson();
 
       // If request without this field in ID market, API return error with message "Internal server error"
-      // This field must be a null string, it can't be a null value. If not the API will return error
+      // This field must be a null string when the order value is >= salesOrganisation.salesOrg.smallOrderThreshold, other wise the small order fee should go on this field
       if (salesOrganisation.salesOrg.isID) {
-        submitOrderData.addAll({'deliveryFee': 'null'});
+        if (orderValue >= salesOrganisation.salesOrg.smallOrderThreshold) {
+          submitOrderData.addAll({'deliveryFee': 'null'});
+        } else {
+          submitOrderData.addAll({'deliveryFee': smallOrderFee.toString()});
+        }
       }
 
       final encryptedData = encryption.encryptionData(

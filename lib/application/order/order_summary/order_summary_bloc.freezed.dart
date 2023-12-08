@@ -31,6 +31,7 @@ mixin _$OrderSummaryEvent {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
+            double smallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -53,8 +54,13 @@ mixin _$OrderSummaryEvent {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -75,8 +81,13 @@ mixin _$OrderSummaryEvent {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -346,6 +357,7 @@ class _$_Initialized implements _Initialized {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
+            double smallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -372,8 +384,13 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -398,8 +415,13 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -491,6 +513,7 @@ abstract class _$$_SubmitOrderCopyWith<$Res> {
       {List<PriceAggregate> cartProducts,
       double grandTotal,
       double orderValue,
+      double smallOrderFee,
       double totalTax,
       DeliveryInfoData data});
 
@@ -511,6 +534,7 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
     Object? cartProducts = null,
     Object? grandTotal = null,
     Object? orderValue = null,
+    Object? smallOrderFee = null,
     Object? totalTax = null,
     Object? data = null,
   }) {
@@ -526,6 +550,10 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
       orderValue: null == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      smallOrderFee: null == smallOrderFee
+          ? _value.smallOrderFee
+          : smallOrderFee // ignore: cast_nullable_to_non_nullable
               as double,
       totalTax: null == totalTax
           ? _value.totalTax
@@ -554,6 +582,7 @@ class _$_SubmitOrder implements _SubmitOrder {
       {required final List<PriceAggregate> cartProducts,
       required this.grandTotal,
       required this.orderValue,
+      required this.smallOrderFee,
       required this.totalTax,
       required this.data})
       : _cartProducts = cartProducts;
@@ -571,13 +600,15 @@ class _$_SubmitOrder implements _SubmitOrder {
   @override
   final double orderValue;
   @override
+  final double smallOrderFee;
+  @override
   final double totalTax;
   @override
   final DeliveryInfoData data;
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.submitOrder(cartProducts: $cartProducts, grandTotal: $grandTotal, orderValue: $orderValue, totalTax: $totalTax, data: $data)';
+    return 'OrderSummaryEvent.submitOrder(cartProducts: $cartProducts, grandTotal: $grandTotal, orderValue: $orderValue, smallOrderFee: $smallOrderFee, totalTax: $totalTax, data: $data)';
   }
 
   @override
@@ -591,6 +622,8 @@ class _$_SubmitOrder implements _SubmitOrder {
                 other.grandTotal == grandTotal) &&
             (identical(other.orderValue, orderValue) ||
                 other.orderValue == orderValue) &&
+            (identical(other.smallOrderFee, smallOrderFee) ||
+                other.smallOrderFee == smallOrderFee) &&
             (identical(other.totalTax, totalTax) ||
                 other.totalTax == totalTax) &&
             (identical(other.data, data) || other.data == data));
@@ -602,6 +635,7 @@ class _$_SubmitOrder implements _SubmitOrder {
       const DeepCollectionEquality().hash(_cartProducts),
       grandTotal,
       orderValue,
+      smallOrderFee,
       totalTax,
       data);
 
@@ -627,6 +661,7 @@ class _$_SubmitOrder implements _SubmitOrder {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
+            double smallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -637,7 +672,8 @@ class _$_SubmitOrder implements _SubmitOrder {
         confirmedOrderStockInfo,
     required TResult Function(bool isExpanded) updateIsExpanded,
   }) {
-    return submitOrder(cartProducts, grandTotal, orderValue, totalTax, data);
+    return submitOrder(
+        cartProducts, grandTotal, orderValue, smallOrderFee, totalTax, data);
   }
 
   @override
@@ -652,8 +688,13 @@ class _$_SubmitOrder implements _SubmitOrder {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -663,7 +704,7 @@ class _$_SubmitOrder implements _SubmitOrder {
     TResult? Function(bool isExpanded)? updateIsExpanded,
   }) {
     return submitOrder?.call(
-        cartProducts, grandTotal, orderValue, totalTax, data);
+        cartProducts, grandTotal, orderValue, smallOrderFee, totalTax, data);
   }
 
   @override
@@ -678,8 +719,13 @@ class _$_SubmitOrder implements _SubmitOrder {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -690,7 +736,8 @@ class _$_SubmitOrder implements _SubmitOrder {
     required TResult orElse(),
   }) {
     if (submitOrder != null) {
-      return submitOrder(cartProducts, grandTotal, orderValue, totalTax, data);
+      return submitOrder(
+          cartProducts, grandTotal, orderValue, smallOrderFee, totalTax, data);
     }
     return orElse();
   }
@@ -743,12 +790,14 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
       {required final List<PriceAggregate> cartProducts,
       required final double grandTotal,
       required final double orderValue,
+      required final double smallOrderFee,
       required final double totalTax,
       required final DeliveryInfoData data}) = _$_SubmitOrder;
 
   List<PriceAggregate> get cartProducts;
   double get grandTotal;
   double get orderValue;
+  double get smallOrderFee;
   double get totalTax;
   DeliveryInfoData get data;
   @JsonKey(ignore: true)
@@ -844,6 +893,7 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
+            double smallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -869,8 +919,13 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -894,8 +949,13 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -1076,6 +1136,7 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
+            double smallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -1101,8 +1162,13 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -1126,8 +1192,13 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -1277,6 +1348,7 @@ class _$_updateIsExpanded implements _updateIsExpanded {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
+            double smallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -1302,8 +1374,13 @@ class _$_updateIsExpanded implements _updateIsExpanded {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
@@ -1327,8 +1404,13 @@ class _$_updateIsExpanded implements _updateIsExpanded {
             SalesOrganisation salesOrganisation,
             SalesOrg salesOrg)?
         initialized,
-    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
-            double orderValue, double totalTax, DeliveryInfoData data)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double smallOrderFee,
+            double totalTax,
+            DeliveryInfoData data)?
         submitOrder,
     TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,

@@ -22,6 +22,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
@@ -300,6 +301,8 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: fakeCartProduct,
             salesOrganisation: fakeMYSalesOrganisation,
+            aplSimulatorOrder:
+                AplSimulatorOrder.empty().copyWith(smallOrderFee: 12500.0),
           ),
         );
         final expectedState = [
@@ -333,6 +336,7 @@ void main() {
               grandTotal: 234.5,
               orderValue: 234.5,
               totalTax: 0.0,
+              smallOrderFee: 12500.0,
               data: DeliveryInfoData.empty()
                   .copyWith(contactPerson: ContactPerson('fakeInput')),
             ),
