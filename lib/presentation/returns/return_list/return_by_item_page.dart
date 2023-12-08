@@ -124,6 +124,8 @@ class _ReturnItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<EligibilityBloc>().state.user;
+
     return Column(
       children: [
         if (showDivider)
@@ -217,7 +219,8 @@ class _ReturnItem extends StatelessWidget {
                           .allowReturnsOutsidePolicy,
                     ))
                       const OutsideReturnPolicyTag(),
-                    if (data.customerName.isNotEmpty)
+                    if (data.customerName.isNotEmpty &&
+                        user.role.type.isSalesRepRole)
                       Container(
                         alignment: Alignment.centerLeft,
                         padding: const EdgeInsets.symmetric(vertical: 8),

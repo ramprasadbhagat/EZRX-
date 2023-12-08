@@ -139,6 +139,7 @@ class _ReturnItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final user = context.read<EligibilityBloc>().state.user;
 
     return Column(
       children: [
@@ -191,7 +192,8 @@ class _ReturnItem extends StatelessWidget {
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (data.customerName.isNotEmpty)
+                      if (data.customerName.isNotEmpty &&
+                          user.role.type.isSalesRepRole)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 5.0),
                           child: Text(

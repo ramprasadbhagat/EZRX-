@@ -9,6 +9,9 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
@@ -253,6 +256,16 @@ void main() {
             returnItemList: [
               ReturnItem.empty().copyWith(customerName: 'fake-customerName'),
             ],
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('internal_sales_rep'),
+              ),
+              hasBonusOverride: true,
+            ),
           ),
         );
         await tester.pumpWidget(getWUT());
