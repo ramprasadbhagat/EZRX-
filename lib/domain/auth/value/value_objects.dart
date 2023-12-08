@@ -30,6 +30,8 @@ class AppMarket extends ValueObject<String> {
   String get currency => getCurrency(value.getOrElse(() => ''));
 
   String get locale => getLocale(value.getOrElse(() => ''));
+
+  bool get isRegistrationRestricted => isVN || isID;
 }
 
 class Username extends ValueObject<String> {

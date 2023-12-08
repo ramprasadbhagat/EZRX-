@@ -203,7 +203,7 @@ class _LoginFormWeb extends StatelessWidget {
                   const SizedBox(height: 25),
                   if (state.currentMarket.isID)
                     const EzrxAplLogo(),
-              if (!state.currentMarket.isVN) ...[
+              if (!state.currentMarket.isRegistrationRestricted) ...[
                 const _TermsOfUse(),
                   const SizedBox(height: 6),
                 const _CreateAccount(),
