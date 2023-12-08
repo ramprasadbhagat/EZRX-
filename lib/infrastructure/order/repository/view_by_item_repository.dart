@@ -17,6 +17,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.da
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_filter_dto.dart';
 
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+
 class ViewByItemRepository implements IViewByItemRepository {
   final Config config;
   final ViewByItemLocalDataSource localDataSource;
@@ -59,7 +61,18 @@ class ViewByItemRepository implements IViewByItemRepository {
         offset: offset,
         language: user.preferredLanguage.languageCode,
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        filterQuery: ViewByItemFilterDto.fromDomain(viewByItemFilter).toJson(),
+        filterQuery: ViewByItemFilterDto.fromDomain(
+          searchKey.isValueEmpty
+              ? viewByItemFilter
+              : viewByItemFilter.copyWith(
+                  orderDateFrom: DateTimeStringValue(
+                    getDateStringByDateTime(DateTime(1900)),
+                  ),
+                  orderDateTo: DateTimeStringValue(
+                    getDateStringByDateTime(DateTime.now()),
+                  ),
+                ),
+        ).toJson(),
         searchKey: searchKey.getOrCrash(),
       );
 

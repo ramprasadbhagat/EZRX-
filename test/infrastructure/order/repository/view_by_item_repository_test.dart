@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
@@ -40,8 +41,14 @@ void main() async {
   final fakeSearchKey = SearchKey('fake');
   const fakePageSize = 10;
   const fakeOffset = 10;
-  final fakeFilter = ViewByItemFilter.empty()
-      .copyWith(orderDateFrom: DateTimeStringValue('fake'));
+  final fakeFilter = ViewByItemFilter.empty().copyWith(
+    orderDateFrom: DateTimeStringValue(
+      getDateStringByDateTime(DateTime(1900)),
+    ),
+    orderDateTo: DateTimeStringValue(
+      getDateStringByDateTime(DateTime.now()),
+    ),
+  );
   final fakeOrderNumber = OrderNumber('fake-order-number');
   final fakeOrderHistory = await ViewByItemLocalDataSource().getViewByItems();
   final fakeInvoice =

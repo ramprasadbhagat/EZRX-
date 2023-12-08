@@ -17,6 +17,8 @@ import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_filter_dto.da
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+
 class ViewByOrderRepository implements IViewByOrderRepository {
   final Config config;
   final ViewByOrderLocalDataSource localDataSource;
@@ -62,8 +64,18 @@ class ViewByOrderRepository implements IViewByOrderRepository {
         searchKey: searchKey.getOrCrash(),
         orderBy: orderBy,
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        filterQuery:
-            ViewByOrdersFilterDto.fromDomain(viewByOrdersFilter).toJson(),
+        filterQuery: ViewByOrdersFilterDto.fromDomain(
+          searchKey.isValueEmpty
+              ? viewByOrdersFilter
+              : viewByOrdersFilter.copyWith(
+                  orderDateFrom: DateTimeStringValue(
+                    getDateStringByDateTime(DateTime(1900)),
+                  ),
+                  orderDateTo: DateTimeStringValue(
+                    getDateStringByDateTime(DateTime.now()),
+                  ),
+                ),
+        ).toJson(),
         sort: sort,
         shipTo: shipToInfo.shipToCustomerCode,
       );
