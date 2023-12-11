@@ -56,7 +56,10 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
             (e) async {
               final downloadedFile = await localDataSource.fileDownload(e.name);
 
-              return await fileSystemHelper.getDownloadedFile(downloadedFile);
+              return await fileSystemHelper.getDownloadedFile(
+                downloadedFile,
+                await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
+              );
             },
           ).toList(),
         );
@@ -75,7 +78,10 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
               e.url,
             );
 
-            return await fileSystemHelper.getDownloadedFile(downloadedFile);
+            return await fileSystemHelper.getDownloadedFile(
+              downloadedFile,
+              await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
+            );
           },
         ).toList(),
       );
@@ -275,16 +281,9 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   @override
   Future<Either<ApiFailure, PermissionStatus>> downloadPermission() async {
     try {
-      if (defaultTargetPlatform == TargetPlatform.iOS) {
+      if (defaultTargetPlatform == TargetPlatform.iOS ||
+          await deviceInfo.checkIfDeviceIsAndroidWithSDK33()) {
         return const Right(PermissionStatus.granted);
-      }
-      if (await deviceInfo.checkIfDeviceIsAndroidWithSDK30()) {
-        final permissionStatus =
-            await permissionService.requestExternalStoragePermission();
-
-        return permissionStatus == PermissionStatus.granted
-            ? Right(permissionStatus)
-            : const Left(ApiFailure.storagePermissionFailed());
       }
 
       final permissionStatus =

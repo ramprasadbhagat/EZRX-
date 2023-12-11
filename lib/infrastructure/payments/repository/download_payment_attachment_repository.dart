@@ -176,8 +176,10 @@ class DownloadPaymentAttachmentRepository
     if (config.appFlavor == Flavor.mock) {
       try {
         final localFile = await localDataSource.fileDownload();
-        final downloadedFile =
-            await fileSystemHelper.getDownloadedFile(localFile);
+        final downloadedFile = await fileSystemHelper.getDownloadedFile(
+          localFile,
+          await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
+        );
 
         return Right(downloadedFile);
       } catch (e) {
@@ -186,8 +188,10 @@ class DownloadPaymentAttachmentRepository
     }
     try {
       final localFile = await remoteDataSource.fileDownload(files.url);
-      final downloadedFile =
-          await fileSystemHelper.getDownloadedFile(localFile);
+      final downloadedFile = await fileSystemHelper.getDownloadedFile(
+        localFile,
+        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
+      );
 
       return Right(downloadedFile);
     } catch (e) {
@@ -202,8 +206,10 @@ class DownloadPaymentAttachmentRepository
     if (config.appFlavor == Flavor.mock) {
       try {
         final localFile = await localDataSource.soaDownload();
-        final downloadedFile =
-            await fileSystemHelper.getDownloadedFile(localFile);
+        final downloadedFile = await fileSystemHelper.getDownloadedFile(
+          localFile,
+          await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
+        );
 
         return Right(downloadedFile);
       } catch (e) {
@@ -214,8 +220,10 @@ class DownloadPaymentAttachmentRepository
       final localFile = await remoteDataSource.soaDownload(
         soaData.getOrCrash(),
       );
-      final downloadedFile =
-          await fileSystemHelper.getDownloadedFile(localFile);
+      final downloadedFile = await fileSystemHelper.getDownloadedFile(
+        localFile,
+        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
+      );
 
       return Right(downloadedFile);
     } catch (e) {

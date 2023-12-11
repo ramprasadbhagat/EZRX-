@@ -398,7 +398,7 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer),
+          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer, false),
         ).thenAnswer(
           (_) async => FileMock(),
         );
@@ -417,7 +417,7 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer),
+          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer, false),
         ).thenThrow(
           (_) async => MockException(),
         );
@@ -438,7 +438,7 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer),
+          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer, false),
         ).thenAnswer(
           (_) async => FileMock(),
         );
@@ -458,7 +458,7 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer),
+          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer, false),
         ).thenThrow(
           (_) async => MockException(),
         );
@@ -480,7 +480,7 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer),
+          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer, false),
         ).thenAnswer(
           (_) async => FileMock(),
         );
@@ -499,7 +499,7 @@ void main() {
           (_) async => MockException(),
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer),
+          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer, false),
         ).thenThrow(
           (_) async => MockException(),
         );
@@ -519,7 +519,7 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer),
+          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer, false),
         ).thenAnswer(
           (_) async => FileMock(),
         );
@@ -538,7 +538,7 @@ void main() {
           (_) async => MockException(),
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer),
+          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer, false),
         ).thenThrow(
           (_) async => MockException(),
         );

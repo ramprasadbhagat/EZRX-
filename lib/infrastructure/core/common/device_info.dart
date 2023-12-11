@@ -12,15 +12,4 @@ class DeviceInfo {
 
     return false;
   }
-
-  Future<bool> checkIfDeviceIsAndroidWithSDK30() async {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      final plugin = DeviceInfoPlugin();
-      final androidDeviceInfo = await plugin.androidInfo;
-
-      return androidDeviceInfo.version.sdkInt >= 30;
-    }
-
-    return false;
-  }
 }

@@ -250,8 +250,10 @@ class ReturnRequestRepository extends IReturnRequestRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final localFile = await localDataSource.downloadFile();
-        final downloadedFile =
-            await fileSystemHelper.getDownloadedFile(localFile);
+        final downloadedFile = await fileSystemHelper.getDownloadedFile(
+          localFile,
+          await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
+        );
 
         return Right(downloadedFile);
       } catch (e) {
@@ -260,8 +262,10 @@ class ReturnRequestRepository extends IReturnRequestRepository {
     }
     try {
       final localFile = await remoteDataSource.downloadFile(file);
-      final downloadedFile =
-          await fileSystemHelper.getDownloadedFile(localFile);
+      final downloadedFile = await fileSystemHelper.getDownloadedFile(
+        localFile,
+        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
+      );
 
       return Right(downloadedFile);
     } catch (e) {

@@ -6,20 +6,27 @@ import 'package:open_file_safe/open_file_safe.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FileSystemHelper {
-  Future<File> getDownloadedFile(AttachmentFileBuffer file) async {
+  Future<File> getDownloadedFile(
+    AttachmentFileBuffer file,
+    bool isAndroidSdk33,
+  ) async {
     final downloadFile = File(
-      '${await _getDownloadedFilePath()}/${file.name}',
+      '${await _getDownloadedFilePath(isAndroidSdk33)}/${file.name}',
     );
     await downloadFile.writeAsBytes(file.buffer);
 
     return downloadFile;
   }
 
-  Future<String> _getDownloadedFilePath() async {
+  Future<String> _getDownloadedFilePath(bool isAndroidSdk33) async {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      final directory = await getExternalStorageDirectory();
+      final directory = isAndroidSdk33
+          ? await getDownloadsDirectory()
+          : await getExternalStorageDirectory();
 
-      return '${directory?.path.split('Android').first}Download';
+      return isAndroidSdk33
+          ? '${directory?.path}'
+          : '${directory?.path.split('Android').first}Download';
     } else {
       final directory = await getApplicationDocumentsDirectory();
 

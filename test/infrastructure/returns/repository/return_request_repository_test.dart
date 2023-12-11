@@ -540,11 +540,16 @@ void main() {
         'Download File Success Locally',
         () async {
           when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
+              .thenAnswer((_) async => true);
           when(
             () => localDataSourceMock.downloadFile(),
           ).thenAnswer((_) async => fakeAttachmentFile);
           when(
-            () => fileSystemHelperMock.getDownloadedFile(fakeAttachmentFile),
+            () => fileSystemHelperMock.getDownloadedFile(
+              fakeAttachmentFile,
+              true,
+            ),
           ).thenAnswer((_) async => File(fakePath));
           final result = await repository.downloadFile(
             file: fakeReturnRequestAttachment,
@@ -573,6 +578,8 @@ void main() {
         'Download File Success Remote',
         () async {
           when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
+              .thenAnswer((_) async => false);
           when(
             () => remoteDataSourceMock.downloadFile(
               fakeReturnRequestAttachment,
@@ -581,7 +588,10 @@ void main() {
             (_) async => fakeAttachmentFile,
           );
           when(
-            () => fileSystemHelperMock.getDownloadedFile(fakeAttachmentFile),
+            () => fileSystemHelperMock.getDownloadedFile(
+              fakeAttachmentFile,
+              false,
+            ),
           ).thenAnswer((_) async => File(fakePath));
           final result = await repository.downloadFile(
             file: fakeReturnRequestAttachment,

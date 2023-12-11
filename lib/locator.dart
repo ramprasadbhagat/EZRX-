@@ -2449,6 +2449,7 @@ void setupLocator() {
       localDataSource: locator<NewPaymentLocalDataSource>(),
       remoteDataSource: locator<NewPaymentRemoteDataSource>(),
       fileSystemHelper: locator<FileSystemHelper>(),
+      deviceInfo: locator<DeviceInfo>(),
     ),
   );
   locator.registerLazySingleton(

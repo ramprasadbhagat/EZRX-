@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
@@ -34,12 +35,14 @@ class NewPaymentRepository extends INewPaymentRepository {
   final NewPaymentLocalDataSource localDataSource;
   final NewPaymentRemoteDataSource remoteDataSource;
   final FileSystemHelper fileSystemHelper;
+  final DeviceInfo deviceInfo;
 
   NewPaymentRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
     required this.fileSystemHelper,
+    required this.deviceInfo,
   });
 
   @override
@@ -301,6 +304,7 @@ class NewPaymentRepository extends INewPaymentRepository {
           buffer: pdfData,
           name: 'invoice_${DateTime.now().millisecondsSinceEpoch}.pdf',
         ),
+        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
       );
 
       return const Right(unit);

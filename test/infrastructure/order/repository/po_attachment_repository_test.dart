@@ -93,6 +93,8 @@ void main() {
   group('PoAttachmentRepository fileDownload test  ', () {
     test('download file successfully locally', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
+          .thenAnswer((_) async => false);
       when(
         () => poDocumentLocalDataSourceMock.fileDownload(
           fakeFileName,
@@ -104,6 +106,7 @@ void main() {
       when(
         () => fileSystemHelperMock.getDownloadedFile(
           AttachmentFileBuffer.empty().copyWith(name: fakeFileName),
+          false,
         ),
       ).thenAnswer(
         (invocation) async => file,
@@ -145,6 +148,8 @@ void main() {
 
     test('download file successfully remote', () async {
       debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
+          .thenAnswer((_) async => false);
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => poDocumentRemoteDataSourceMock.fileDownload(
@@ -159,6 +164,7 @@ void main() {
       when(
         () => fileSystemHelperMock.getDownloadedFile(
           AttachmentFileBuffer.empty().copyWith(name: fakeFileName),
+          false,
         ),
       ).thenAnswer(
         (invocation) async => file,
@@ -785,13 +791,10 @@ void main() {
 
     test('downloadPermission android sdk 30', () async {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
-      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK30()).thenAnswer(
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33()).thenAnswer(
         (_) async => true,
       );
-      when(() => permissionServiceMock.requestExternalStoragePermission())
-          .thenAnswer(
-        (_) async => PermissionStatus.granted,
-      );
+
       final result = await poAttachmentRepository.downloadPermission();
       expect(result.isRight(), true);
       expect(
@@ -804,7 +807,7 @@ void main() {
 
     test('download permission granted android', () async {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
-      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK30()).thenAnswer(
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33()).thenAnswer(
         (_) async => false,
       );
       when(() => permissionServiceMock.requestStoragePermission()).thenAnswer(
@@ -822,7 +825,7 @@ void main() {
 
     test('download permission limited android', () async {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
-      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK30()).thenAnswer(
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33()).thenAnswer(
         (_) async => false,
       );
       when(() => permissionServiceMock.requestStoragePermission()).thenAnswer(
@@ -840,7 +843,7 @@ void main() {
 
     test('downloadPermission failure', () async {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
-      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK30()).thenAnswer(
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33()).thenAnswer(
         (_) async => false,
       );
       when(() => permissionServiceMock.requestStoragePermission()).thenThrow(
