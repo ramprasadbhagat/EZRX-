@@ -1722,6 +1722,34 @@ void main() {
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
+          CartState.initial().copyWith(
+            isFetching: true,
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: prices.first,
+              )
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: prices.first,
+              )
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            apiFailureOrSuccessOption: optionOf(
+              Left(
+                fakeError,
+              ),
+            ),
+          ),
         ],
       );
 
@@ -1789,6 +1817,34 @@ void main() {
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
+          CartState.initial().copyWith(
+            isFetching: true,
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: prices.first,
+              )
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: prices.first,
+              )
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            apiFailureOrSuccessOption: optionOf(
+              Left(
+                fakeError,
+              ),
+            ),
+          ),
         ],
       );
       blocTest<CartBloc, CartState>(
@@ -1844,6 +1900,26 @@ void main() {
             config: fakeSalesOrganisationConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            isFetching: true,
+            cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            apiFailureOrSuccessOption: optionOf(
+              Left(
+                fakeError,
+              ),
+            ),
           ),
         ],
       );

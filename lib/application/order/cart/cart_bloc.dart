@@ -654,11 +654,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
         add(
           _VerifyMaterialDealBonus(
-            item: cartProductList.firstWhere(
-              (element) => e.priceProducts
-                  .containsKey(element.materialInfo.materialNumber),
-              orElse: () => PriceAggregate.empty(),
-            ),
+            item: PriceAggregate.empty(),
             items: cartProductList,
           ),
         );
