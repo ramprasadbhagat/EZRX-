@@ -30,6 +30,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/auth/login/login_page.dart';
+import 'package:ezrxmobile/presentation/core/or_divider.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
@@ -149,10 +150,25 @@ void main() {
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   late ProductDetailBloc productDetailBloc;
   late ChatBotBloc chatBotBloc;
-
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
+  final appMarketVariant = ValueVariant<AppMarket>(
+    {
+      AppMarket('hk'),
+      AppMarket('kh'),
+      AppMarket('kr'),
+      AppMarket('mm'),
+      AppMarket('ph'),
+      AppMarket('sg'),
+      AppMarket('th'),
+      AppMarket('tw'),
+      AppMarket('vn'),
+      AppMarket('my'),
+      AppMarket('id'),
+    },
+  );
+  final mediaQueryVariant = ValueVariant<bool>({true, false});
 
-  setUpAll(() async {
+  setUpAll(() {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(
@@ -160,6 +176,17 @@ void main() {
     );
     locator.registerLazySingleton(() => AppRouter());
   });
+
+  ///////////////////////////Finder/////////////////////////////////////////////
+  final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
+  final ezrxAplLogo = find.byKey(WidgetKeys.ezrxAplLogo);
+  final createAccount = find.byKey(WidgetKeys.createAccountButton);
+  final username = find.byKey(WidgetKeys.loginUsernameField);
+  final loginPasswordField = find.byKey(WidgetKeys.loginPasswordField);
+  final loginSubmitButton = find.byKey(WidgetKeys.loginSubmitButton);
+  final loginMobileScreen = find.byKey(WidgetKeys.loginMobileScreen);
+  final loginWebScreen = find.byKey(WidgetKeys.loginWebScreen);
+  /////////////////////////////////////////////////////////////////////////////
 
   group('Login Screen', () {
     setUp(() {
@@ -290,14 +317,11 @@ void main() {
       await tester.pump();
       // Create the Finders.
       final userNameTextField = find.byKey(const Key('loginUsernameField'));
-      final passwordTextField = find.byKey(const Key('loginPasswordField'));
-      final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
-      final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
       final rememberPasswordCheckBox =
           find.byKey(const Key('loginRememberPasswordCheckbox'));
 
       expect(userNameTextField, findsOneWidget);
-      expect(passwordTextField, findsOneWidget);
+      expect(loginPasswordField, findsOneWidget);
       expect(loginSubmitButton, findsOneWidget);
       expect(ssoLoginButton, findsOneWidget);
       expect(rememberPasswordCheckBox, findsOneWidget);
@@ -428,14 +452,12 @@ void main() {
 
       // Create the Finders.
       final userNameTextField = find.byKey(const Key('loginUsernameField'));
-      final passwordTextField = find.byKey(const Key('loginPasswordField'));
-      final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
       // final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
       final rememberPasswordCheckBox =
           find.byKey(const Key('loginRememberPasswordCheckbox'));
 
       expect(userNameTextField, findsNothing);
-      expect(passwordTextField, findsNothing);
+      expect(loginPasswordField, findsNothing);
       expect(loginSubmitButton, findsNothing);
       // expect(ssoLoginButton, findsNothing);
       expect(rememberPasswordCheckBox, findsNothing);
@@ -484,9 +506,8 @@ void main() {
         expect(userName, findsOneWidget);
         await tester.enterText(userName, 'ezrxtest06');
         await tester.pump();
-        final loginButton = find.byKey(const Key('loginSubmitButton'));
-        expect(loginButton, findsOneWidget);
-        await tester.tap(loginButton);
+        expect(loginSubmitButton, findsOneWidget);
+        await tester.tap(loginSubmitButton);
         await tester.pumpAndSettle();
       },
     );
@@ -548,7 +569,7 @@ void main() {
           seconds: 2,
         ),
       );
-      expect(find.byKey(const Key('loginPasswordField')), findsOneWidget);
+      expect(loginPasswordField, findsOneWidget);
     });
 
     testWidgets('Password is Valid', (tester) async {
@@ -571,7 +592,7 @@ void main() {
       await tester.pumpWidget(loginTestPage());
       await tester.pump();
       await tester.enterText(
-        find.byKey(const Key('loginPasswordField')),
+        loginPasswordField,
         'St@ysafe01',
       );
       await tester.pump(
@@ -579,7 +600,7 @@ void main() {
           seconds: 2,
         ),
       );
-      expect(find.byKey(const Key('loginPasswordField')), findsOneWidget);
+      expect(loginPasswordField, findsOneWidget);
     });
 
     testWidgets(
@@ -595,9 +616,8 @@ void main() {
         whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(loginTestPage());
         await tester.pump();
-        final password = find.byKey(const Key('loginPasswordField'));
-        expect(password, findsOneWidget);
-        await tester.enterText(password, 'password1');
+        expect(loginPasswordField, findsOneWidget);
+        await tester.enterText(loginPasswordField, 'password1');
         await tester.pump();
 
         await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -628,13 +648,11 @@ void main() {
         whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(loginTestPage());
         await tester.pump();
-        final password = find.byKey(const Key('loginPasswordField'));
-        expect(password, findsOneWidget);
+        expect(loginPasswordField, findsOneWidget);
 
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pump();
 
-        final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
         expect(loginSubmitButton, findsOneWidget);
         await tester.tap(loginSubmitButton);
         await tester.pump();
@@ -661,13 +679,11 @@ void main() {
         whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(loginTestPage());
         await tester.pump();
-        final password = find.byKey(const Key('loginPasswordField'));
-        expect(password, findsOneWidget);
+        expect(loginPasswordField, findsOneWidget);
 
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pump();
 
-        final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
         expect(loginSubmitButton, findsOneWidget);
         await tester.tap(loginSubmitButton);
         await tester.pump();
@@ -682,8 +698,6 @@ void main() {
         (tester) async {
       await tester.pumpWidget(loginTestPage());
 
-      final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
-      final createAccount = find.byKey(WidgetKeys.createAccountButton);
       await tester.pump();
       expect(loginSubmitButton, findsOneWidget);
       await tester.drag(
@@ -728,9 +742,8 @@ void main() {
       whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
       await tester.pumpWidget(loginTestPage());
       await tester.pumpAndSettle();
-      final usernameFinder = find.byKey(WidgetKeys.loginUsernameField);
-      expect(usernameFinder, findsOneWidget);
-      await tester.enterText(usernameFinder, 'EZRXtest05');
+      expect(username, findsOneWidget);
+      await tester.enterText(username, 'EZRXtest05');
       await tester.pumpAndSettle();
       expect(find.text('ezrxtest05'), findsOneWidget);
     });
@@ -750,71 +763,380 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('Exrx apl logo not visible for other market', (tester) async {
-      when(() => loginBlocMock.state).thenReturn(
-        LoginFormState.initial().copyWith(
-          currentMarket: AppMarket('sg'),
-        ),
-      );
-      await tester.pumpWidget(loginTestPage());
-      await tester.pump();
-      final ezrxAplLogo = find.byKey(WidgetKeys.ezrxAplLogo);
-      expect(ezrxAplLogo, findsNothing);
-    });
 
-    testWidgets('Exrx apl logo visible for ID market', (tester) async {
+    testWidgets(
+      'Exrx apl logo visible for ID market mobile',
+      (tester) async {
+        final currentAppMarketVariant =
+            appMarketVariant.currentValue ?? AppMarket('id');
+        when(() => loginBlocMock.state).thenReturn(
+          LoginFormState.initial().copyWith(
+            currentMarket: currentAppMarketVariant,
+          ),
+        );
+        await tester.pumpWidget(loginTestPage());
+        await tester.pump();
+        expect(loginMobileScreen, findsOneWidget);
+        expect(
+          ezrxAplLogo,
+          currentAppMarketVariant.isID ? findsOneWidget : findsNothing,
+        );
+      },
+      variant: appMarketVariant,
+    );
+
+    testWidgets(
+      'Exrx apl logo visible for ID market tab',
+      (tester) async {
+        final currentAppMarketVariant =
+            appMarketVariant.currentValue ?? AppMarket('id');
+        when(() => loginBlocMock.state).thenReturn(
+          LoginFormState.initial().copyWith(
+            currentMarket: currentAppMarketVariant,
+          ),
+        );
+        await tester.pumpWidget(loginTestPage(useMediaQuery: false));
+        await tester.pump();
+        expect(loginWebScreen, findsOneWidget);
+        expect(
+          ezrxAplLogo,
+          currentAppMarketVariant.isID ? findsOneWidget : findsNothing,
+        );
+      },
+      variant: appMarketVariant,
+    );
+
+    testWidgets(
+      'Exrx apl logo on market change from ID to other hide the logo',
+      (tester) async {
+        final currentMediaQueryVariant =
+            mediaQueryVariant.currentValue ?? false;
       when(() => loginBlocMock.state).thenReturn(
         LoginFormState.initial().copyWith(
           currentMarket: AppMarket('id'),
         ),
       );
-      await tester.pumpWidget(loginTestPage());
+        final expectedStates = [
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('sg'),
+          ),
+        ];
+        whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(
+          loginTestPage(
+            useMediaQuery: currentMediaQueryVariant,
+          ),
+        );
       await tester.pump();
-      final ezrxAplLogo = find.byKey(WidgetKeys.ezrxAplLogo);
+        expect(
+          currentMediaQueryVariant ? loginMobileScreen : loginWebScreen,
+          findsOneWidget,
+        );
       expect(ezrxAplLogo, findsOneWidget);
-    });
+        await tester.pump();
+        expect(ezrxAplLogo, findsNothing);
+      },
+      variant: mediaQueryVariant,
+    );
 
-    testWidgets('Exrx apl logo on market change from ID to other hide the logo',
-        (tester) async {
+    testWidgets(
+      'Exrx apl logo on market change from other to ID',
+      (tester) async {
+        final currentMediaQueryVariant =
+            mediaQueryVariant.currentValue ?? false;
+        when(() => loginBlocMock.state).thenReturn(
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('sg'),
+          ),
+        );
+        final expectedStates = [
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('id'),
+          ),
+        ];
+        whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(
+          loginTestPage(
+            useMediaQuery: currentMediaQueryVariant,
+          ),
+        );
+      await tester.pump();
+        expect(
+          currentMediaQueryVariant ? loginMobileScreen : loginWebScreen,
+          findsOneWidget,
+        );
+      expect(ezrxAplLogo, findsNothing);
+        await tester.pump();
+        expect(ezrxAplLogo, findsOneWidget);
+      },
+      variant: mediaQueryVariant,
+    );
+
+
+    testWidgets(
+      'Register option available for VN and ID market mobile',
+      (tester) async {
+        final currentAppMarketVariant =
+            appMarketVariant.currentValue ?? AppMarket('id');
       when(() => loginBlocMock.state).thenReturn(
         LoginFormState.initial().copyWith(
-          currentMarket: AppMarket('id'),
+            currentMarket: currentAppMarketVariant,
         ),
       );
-      final expectedStates = [
-        LoginFormState.initial().copyWith(
-          currentMarket: AppMarket('sg'),
-        ),
-      ];
-      whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
       await tester.pumpWidget(loginTestPage());
       await tester.pump();
-      final ezrxAplLogo = find.byKey(WidgetKeys.ezrxAplLogo);
-      expect(ezrxAplLogo, findsOneWidget);
-      await tester.pump();
-      expect(ezrxAplLogo, findsNothing);
-    });
+        expect(loginMobileScreen, findsOneWidget);
+      expect(username, findsOneWidget);
+      expect(loginSubmitButton, findsOneWidget);
+      expect(loginPasswordField, findsOneWidget);
+        await tester.fling(
+          find.byType(ListView),
+          const Offset(0.0, -1000.0),
+          1000.0,
+        );
+        expect(
+          ssoLoginButton,
+          currentAppMarketVariant.isRegistrationRestricted
+              ? findsNothing
+              : findsOneWidget,
+        );
+        expect(
+          createAccount,
+          currentAppMarketVariant.isRegistrationRestricted
+              ? findsNothing
+              : findsOneWidget,
+        );
+        expect(
+          find.byType(OrDivider),
+          currentAppMarketVariant.isRegistrationRestricted
+              ? findsNothing
+              : findsOneWidget,
+        );
+      },
+      variant: appMarketVariant,
+    );
 
-    testWidgets('Exrx apl logo on market change from other to ID',
-        (tester) async {
+    testWidgets(
+      'Register option available for VN and ID market Tab',
+      (tester) async {
+        final currentAppMarketVariant =
+            appMarketVariant.currentValue ?? AppMarket('id');
       when(() => loginBlocMock.state).thenReturn(
         LoginFormState.initial().copyWith(
-          currentMarket: AppMarket('sg'),
+            currentMarket: currentAppMarketVariant,
         ),
       );
-      final expectedStates = [
-        LoginFormState.initial().copyWith(
-          currentMarket: AppMarket('id'),
-        ),
-      ];
-      whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
-      await tester.pumpWidget(loginTestPage());
+        await tester.pumpWidget(
+          loginTestPage(
+            useMediaQuery: false,
+          ),
+        );
       await tester.pump();
-      final ezrxAplLogo = find.byKey(WidgetKeys.ezrxAplLogo);
-      expect(ezrxAplLogo, findsNothing);
-      await tester.pump();
-      expect(ezrxAplLogo, findsOneWidget);
-    });
-    
+        expect(loginWebScreen, findsOneWidget);
+      expect(username, findsOneWidget);
+      expect(loginSubmitButton, findsOneWidget);
+        expect(
+          ssoLoginButton,
+          currentAppMarketVariant.isRegistrationRestricted
+              ? findsNothing
+              : findsOneWidget,
+        );
+        expect(
+          createAccount,
+          currentAppMarketVariant.isRegistrationRestricted
+              ? findsNothing
+              : findsOneWidget,
+        );
+      },
+      variant: appMarketVariant,
+    );
+
+    testWidgets(
+      'Exrx apl logo on market change from ID to other hide register',
+      (tester) async {
+        final currentMediaQueryVariant =
+            mediaQueryVariant.currentValue ?? false;
+        when(() => loginBlocMock.state).thenReturn(
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('id'),
+          ),
+        );
+        final expectedStates = [
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('sg'),
+          ),
+        ];
+        whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(
+          loginTestPage(
+            useMediaQuery: currentMediaQueryVariant,
+          ),
+        );
+        await tester.pump();
+        expect(
+          currentMediaQueryVariant ? loginMobileScreen : loginWebScreen,
+          findsOneWidget,
+        );
+        expect(username, findsOneWidget);
+        expect(loginSubmitButton, findsOneWidget);
+        expect(loginPasswordField, findsOneWidget);
+        expect(
+          currentMediaQueryVariant ? loginMobileScreen : loginWebScreen,
+          findsOneWidget,
+        );
+        expect(ssoLoginButton, findsNothing);
+        expect(createAccount, findsNothing);
+        expect(find.byType(OrDivider), findsNothing);
+        await tester.pump();
+        if (currentMediaQueryVariant) {
+          await tester.fling(
+            find.byType(ListView),
+            const Offset(0.0, -1000.0),
+            1000.0,
+          );
+        }
+        expect(ssoLoginButton, findsOneWidget);
+        expect(createAccount, findsOneWidget);
+        expect(
+          find.byType(OrDivider),
+          currentMediaQueryVariant ? findsOneWidget : findsNothing,
+        );
+      },
+      variant: mediaQueryVariant,
+    );
+
+    testWidgets(
+      'Exrx apl logo on market change from other to ID show register',
+      (tester) async {
+        when(() => loginBlocMock.state).thenReturn(
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('sg'),
+          ),
+        );
+        final expectedStates = [
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('id'),
+          ),
+        ];
+        whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(
+          loginTestPage(
+            useMediaQuery: false,
+          ),
+        );
+        await tester.pump();
+
+        expect(
+          loginWebScreen,
+          findsOneWidget,
+        );
+        expect(username, findsOneWidget);
+        expect(loginSubmitButton, findsOneWidget);
+        expect(loginPasswordField, findsOneWidget);
+        expect(
+          loginWebScreen,
+          findsOneWidget,
+        );
+        expect(ssoLoginButton, findsOneWidget);
+        expect(createAccount, findsOneWidget);
+        await tester.pump();
+        expect(ssoLoginButton, findsNothing);
+        expect(createAccount, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Exrx apl logo on market change from VN to other hide register',
+      (tester) async {
+        final currentMediaQueryVariant =
+            mediaQueryVariant.currentValue ?? false;
+        when(() => loginBlocMock.state).thenReturn(
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('vn'),
+          ),
+        );
+        final expectedStates = [
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('sg'),
+          ),
+        ];
+        whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(
+          loginTestPage(
+            useMediaQuery: currentMediaQueryVariant,
+          ),
+        );
+        await tester.pump();
+        expect(
+          currentMediaQueryVariant ? loginMobileScreen : loginWebScreen,
+          findsOneWidget,
+        );
+        expect(username, findsOneWidget);
+        expect(loginSubmitButton, findsOneWidget);
+        expect(loginPasswordField, findsOneWidget);
+        expect(
+          currentMediaQueryVariant ? loginMobileScreen : loginWebScreen,
+          findsOneWidget,
+        );
+        expect(ssoLoginButton, findsNothing);
+        expect(createAccount, findsNothing);
+        expect(find.byType(OrDivider), findsNothing);
+        await tester.pump();
+        if (currentMediaQueryVariant) {
+          await tester.fling(
+            find.byType(ListView),
+            const Offset(0.0, -1000.0),
+            1000.0,
+          );
+        }
+        expect(ssoLoginButton, findsOneWidget);
+        expect(createAccount, findsOneWidget);
+        expect(
+          find.byType(OrDivider),
+          currentMediaQueryVariant ? findsOneWidget : findsNothing,
+        );
+      },
+      variant: mediaQueryVariant,
+    );
+
+    testWidgets(
+      'Exrx apl logo on market change from other to VN show register',
+      (tester) async {
+        when(() => loginBlocMock.state).thenReturn(
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('sg'),
+          ),
+        );
+        final expectedStates = [
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('vn'),
+          ),
+        ];
+        whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(
+          loginTestPage(
+            useMediaQuery: false,
+          ),
+        );
+        await tester.pump();
+
+        expect(
+          loginWebScreen,
+          findsOneWidget,
+        );
+        expect(username, findsOneWidget);
+        expect(loginSubmitButton, findsOneWidget);
+        expect(loginPasswordField, findsOneWidget);
+        expect(
+          loginWebScreen,
+          findsOneWidget,
+        );
+        expect(ssoLoginButton, findsOneWidget);
+        expect(createAccount, findsOneWidget);
+        await tester.pump();
+        expect(ssoLoginButton, findsNothing);
+        expect(createAccount, findsNothing);
+      },
+    );
   });
 }

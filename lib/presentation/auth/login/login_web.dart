@@ -167,45 +167,44 @@ class _LoginFormWeb extends StatelessWidget {
             ? AutovalidateMode.always
             : AutovalidateMode.disabled,
         child: FractionallySizedBox(
-              widthFactor: 0.83,
-              child: Column(
-                mainAxisAlignment:
-                    Responsive.isLargerThan(context, Breakpoint.desktop)
-                        ? MainAxisAlignment.center
-                        : MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: Responsive.isLargerThan(
-                      context,
-                      Breakpoint.desktop,
-                    )
-                        ? 0
-                        : 16,
-                  ),
-                  const _Logo(),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  const _Welcome(),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  const MarketSelector(),
-                  const SizedBox(height: 25),
-                  const UsernameField(),
-                  const SizedBox(height: 25),
-                  const PasswordField(),
-                  const SizedBox(height: 25),
-                  const RememberPassword(),
-                  const SizedBox(height: 15),
-                  const LoginButton(),
-                  const SizedBox(height: 25),
-                  if (state.currentMarket.isID)
-                    const EzrxAplLogo(),
+          widthFactor: 0.83,
+          child: Column(
+            mainAxisAlignment:
+                Responsive.isLargerThan(context, Breakpoint.desktop)
+                    ? MainAxisAlignment.center
+                    : MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: Responsive.isLargerThan(
+                  context,
+                  Breakpoint.desktop,
+                )
+                    ? 0
+                    : 16,
+              ),
+              const _Logo(),
+              const SizedBox(
+                height: 25,
+              ),
+              const _Welcome(),
+              const SizedBox(
+                height: 25,
+              ),
+              const MarketSelector(),
+              const SizedBox(height: 25),
+              const UsernameField(),
+              const SizedBox(height: 25),
+              const PasswordField(),
+              const SizedBox(height: 25),
+              const RememberPassword(),
+              const SizedBox(height: 15),
+              const LoginButton(),
+              const SizedBox(height: 25),
+              if (state.currentMarket.isID) const EzrxAplLogo(),
               if (!state.currentMarket.isRegistrationRestricted) ...[
                 const _TermsOfUse(),
-                  const SizedBox(height: 6),
+                const SizedBox(height: 6),
                 const _CreateAccount(),
                 const _SSOLogin(
                   key: WidgetKeys.ssoLoginButton,
