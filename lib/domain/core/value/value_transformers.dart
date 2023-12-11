@@ -619,8 +619,13 @@ bool isFailed(String status) => status == 'Failed';
 
 bool isPending(String status) => status == 'Pending';
 
+bool getIsInProgress(String status) =>
+    status == 'creating' || status == 'In Progress';
+
 Color getAdviceExpiryColorFailed(String status) {
-  return isFailed(status) ? ZPColors.red : ZPColors.white;
+  return getIsInProgress(status) || isFailed(status)
+      ? ZPColors.red
+      : ZPColors.white;
 }
 
 String getSortLabel(String sort) {

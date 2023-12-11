@@ -414,6 +414,10 @@ class FilterStatus extends ValueObject<String> {
 
   bool get getIsFailed => isFailed(value.getOrElse(() => ''));
 
+  bool get isInProgress => getIsInProgress(value.getOrElse(() => ''));
+
+  bool get failedOrInProgress => getIsFailed || isInProgress;
+
   Color get getAdviceExpiryTextColorForFailed =>
       getAdviceExpiryColorFailed(value.getOrElse(() => ''));
 

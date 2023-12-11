@@ -40,11 +40,11 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
 
   bool get isSavingOrDeleting => isSavingAdvice || isDeletingPayment;
 
-  String get adviceExpiryText => salesOrganization.salesOrg.isID 
-      ? !details.status.isSuccessful
-          ? '-'
-          : details.idAdviceExpiryText
-      : details.adviceExpiryText;
+  String get adviceExpiryText => details.status.failedOrInProgress
+      ? salesOrganization.salesOrg.isID
+      ? details.idAdviceExpiryText
+          : details.adviceExpiryText
+      : '-';
 
   String get adviceDeletedMessage =>
       '${salesOrganization.salesOrg.paymentIdPretext} #${details.zzAdvice.displayDashIfEmpty} has been deleted';
