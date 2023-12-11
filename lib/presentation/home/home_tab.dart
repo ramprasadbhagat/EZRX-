@@ -35,7 +35,9 @@ class HomeTab extends StatelessWidget {
           //check user role and products as getter depends on both
           previous.user.accessRight.products !=
               current.user.accessRight.products ||
-          previous.user.role.type != current.user.role.type,
+          previous.user.role.type != current.user.role.type ||
+          previous.salesOrgConfigs.disableBundles !=
+              current.salesOrgConfigs.disableBundles,
       builder: (context, state) {
         return Scaffold(
           key: WidgetKeys.homeScreen,
@@ -100,7 +102,8 @@ class HomeTab extends StatelessWidget {
                   ),
                   if (state.user.userCanAccessProducts) ...[
                     const ProductsOnOffer(),
-                    const BundleSection(),
+                    if (!state.salesOrgConfigs.disableBundles)
+                      const BundleSection(),
                   ],
                   const RecentOrdersSection(),
                   if (state.user.userCanAccessProducts) const BrowseProduct(),

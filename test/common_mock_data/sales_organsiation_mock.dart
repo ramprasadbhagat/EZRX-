@@ -255,3 +255,7 @@ final fakeSalesOrgConfigWithHideStockDisplay =
     SalesOrganisationConfigs.empty().copyWith(
   hideStockDisplay: true,
 );
+final fakeSalesOrgConfigWithdisableBundles =
+    SalesOrganisationConfigs.empty().copyWith(
+  disableBundles: true,
+);

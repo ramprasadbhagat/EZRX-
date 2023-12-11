@@ -50,6 +50,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../common_mock_data/sales_organsiation_mock.dart';
+import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class MaterialListBlocMock
@@ -449,6 +451,24 @@ void main() {
             find.byKey(WidgetKeys.customerBlockedBanner);
         expect(homeScreen, findsOneWidget);
         expect(customerBlockedBanner, findsOneWidget);
+      },
+    );
+    testWidgets(
+      ' -> Find Bundle Section for id market',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeRootAdminUser,
+            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeSalesOrgConfigWithdisableBundles,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final bundlesFinder = find.byType(BundleSection);
+        expect(bundlesFinder, findsNothing);
       },
     );
 

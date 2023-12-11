@@ -174,6 +174,32 @@ void main() {
         expect(bundlesListItemFinder, findsWidgets);
       },
     );
+    testWidgets(
+      ' -> Find Bundle Section body test for id market',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeSalesOrgConfigWithdisableBundles,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        final bundlesFinder = find.byKey(WidgetKeys.bundlesBody);
+        expect(bundlesFinder, findsNothing);
+        final bundlesIconFinder = find.byKey(WidgetKeys.bundles);
+        expect(bundlesIconFinder, findsNothing);
+        final bundlesListFinder = find.byKey(
+          WidgetKeys.bundlesList,
+        );
+        expect(bundlesListFinder, findsNothing);
+        final bundlesListItemFinder = find.byKey(
+          WidgetKeys.bundlesListItem,
+        );
+        expect(bundlesListItemFinder, findsNothing);
+      },
+    );
 
     testWidgets(
       ' -> Tap Bundle Section Icon test',
