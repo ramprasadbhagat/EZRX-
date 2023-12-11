@@ -7,51 +7,7 @@ class _CartPageCartScrollList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CartBloc, CartState>(
-      listenWhen: (previous, current) =>
-          previous.cartProducts.length != current.cartProducts.length ||
-          previous.isBuyAgain != current.isBuyAgain,
-      listener: (context, state) {
-        state.apiFailureOrSuccessOption.fold(
-          () {
-            if (!state.isFetching) {
-              if (context.read<CartBloc>().state.cartProducts.isNotEmpty) {
-                context.read<MaterialPriceBloc>().add(
-                      MaterialPriceEvent.fetchPriceCartProduct(
-                        comboDealEligible: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .comboDealEligible,
-                        products: context
-                            .read<CartBloc>()
-                            .state
-                            .cartProducts
-                            .where(
-                              (element) =>
-                                  element.materialInfo.type.typeMaterial,
-                            )
-                            .map((e) => e.materialInfo)
-                            .toList(),
-                      ),
-                    );
-                final zdp5MaterialList = context
-                    .read<CartBloc>()
-                    .state
-                    .cartProducts
-                    .where((element) => element.hasZdp5Validation);
-                for (final e in zdp5MaterialList) {
-                  context.read<MaterialPriceBloc>().add(
-                        MaterialPriceEvent.fetchPriceForZDP5Materials(
-                          materialInfo: e.materialInfo,
-                        ),
-                      );
-                }
-              }
-            }
-          },
-          (_) => {},
-        );
-      },
+    return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) =>
           previous.cartProducts != current.cartProducts ||
           previous.isFetching != current.isFetching ||

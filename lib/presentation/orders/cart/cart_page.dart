@@ -66,18 +66,6 @@ class _CartPageState extends State<CartPage> {
               cartProducts: cartProducts,
             ),
           );
-      context.read<MaterialPriceBloc>().add(
-            MaterialPriceEvent.fetchPriceCartProduct(
-              comboDealEligible: eligibilityState.comboDealEligible,
-              products: context
-                  .read<CartBloc>()
-                  .state
-                  .cartProducts
-                  .where((element) => element.materialInfo.type.typeMaterial)
-                  .map((e) => e.materialInfo)
-                  .toList(),
-            ),
-          );
 
       for (final cartProduct in cartProducts) {
         if (cartProduct.materialInfo.type.typeCombo) {
@@ -104,15 +92,6 @@ class _CartPageState extends State<CartPage> {
           }
         }
       }
-      final zdp5MaterialList =
-          cartProducts.where((element) => element.hasZdp5Validation);
-      for (final e in zdp5MaterialList) {
-        context.read<MaterialPriceBloc>().add(
-              MaterialPriceEvent.fetchPriceForZDP5Materials(
-                materialInfo: e.materialInfo,
-              ),
-            );
-      }
     }
     super.initState();
   }
@@ -121,6 +100,35 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        BlocListener<CartBloc, CartState>(
+          listenWhen: (previous, current) =>
+              previous.isUpdatingStock != current.isUpdatingStock &&
+              !current.isUpdatingStock,
+          listener: (context, state) {
+            context.read<MaterialPriceBloc>().add(
+                  MaterialPriceEvent.fetchPriceCartProduct(
+                    comboDealEligible:
+                        context.read<EligibilityBloc>().state.comboDealEligible,
+                    products: state.cartProducts
+                        .where(
+                          (element) => element.materialInfo.type.typeMaterial,
+                        )
+                        .map((e) => e.materialInfo)
+                        .toList(),
+                  ),
+                );
+
+            final zdp5MaterialList = state.cartProducts
+                .where((element) => element.hasZdp5Validation);
+            for (final e in zdp5MaterialList) {
+              context.read<MaterialPriceBloc>().add(
+                    MaterialPriceEvent.fetchPriceForZDP5Materials(
+                      materialInfo: e.materialInfo,
+                    ),
+                  );
+            }
+          },
+        ),
         BlocListener<MaterialPriceBloc, MaterialPriceState>(
           listenWhen: (previous, current) =>
               previous.isFetching != current.isFetching,

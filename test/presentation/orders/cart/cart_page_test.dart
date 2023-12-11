@@ -2071,6 +2071,70 @@ void main() {
           ),
         ).called(1);
       });
+
+      testWidgets(
+        'Fetch detail when cart has items in initState',
+        (tester) async {
+          final cartItem = mockCartItems.last.copyWith
+              .materialInfo(type: MaterialInfoType.material());
+
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[cartItem],
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          verify(
+            () => cartBloc.add(
+              CartEvent.getDetailsProductsAddedToCart(
+                cartProducts: [cartItem],
+              ),
+            ),
+          ).called(1);
+
+          verifyNever(
+            () => materialPriceBloc.add(
+              MaterialPriceEvent.fetchPriceCartProduct(
+                products: [cartItem.materialInfo],
+                comboDealEligible: false,
+              ),
+            ),
+          );
+        },
+      );
+
+      testWidgets('Should fetch Price', (tester) async {
+        final cartItem = mockCartItems.last.copyWith
+            .materialInfo(type: MaterialInfoType.material());
+
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[cartItem],
+        );
+        whenListen(
+          cartBloc,
+          Stream.fromIterable([
+            cartState.copyWith(isUpdatingStock: true),
+            cartState,
+          ]),
+        );
+        when(() => cartBloc.state).thenReturn(cartState);
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        verify(
+          () => materialPriceBloc.add(
+            MaterialPriceEvent.fetchPriceCartProduct(
+              products: [cartItem.materialInfo],
+              comboDealEligible: false,
+            ),
+          ),
+        ).called(1);
+      });
+
       testWidgets(
           'Should fetch Price For ZDP5Materials if at least 1 product has Zdp5Validation',
           (tester) async {
@@ -2088,12 +2152,17 @@ void main() {
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[cartItem],
         );
-        when(() => cartBloc.state).thenReturn(
-          cartState,
+        whenListen(
+          cartBloc,
+          Stream.fromIterable([
+            cartState.copyWith(isUpdatingStock: true),
+            cartState,
+          ]),
         );
+        when(() => cartBloc.state).thenReturn(cartState);
 
         await tester.pumpWidget(getWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         verify(
           () => materialPriceBloc.add(
