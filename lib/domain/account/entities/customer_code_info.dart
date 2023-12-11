@@ -93,10 +93,9 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
       billToInfos.isNotEmpty ? billToInfos.first : BillToInfo.empty();
 
   String get fullCustomerAddress =>
-      '${customerName.toString()}${customerAddress.toString()} $postalCode';
+      '${customerName.toString()}${customerAddress.toAddress()} $postalCode';
 
-  String get shortAddress =>
-      '${customerName.name1} ${customerAddress.addressStreet} $postalCode';
+  String get shortAddress => '${customerAddress.toAddress()} $postalCode';
 
   String get displayPaymentTerm {
     final displayWords = [

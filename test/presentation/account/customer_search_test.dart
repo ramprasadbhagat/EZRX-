@@ -323,6 +323,33 @@ void main() {
       expect(noCustomerFound, findsOneWidget);
     });
 
+    testWidgets('Test Customer Code Address should in proper format',
+        (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeList: [customerCodeListMock.last],
+          customerCodeInfo: customerCodeListMock.last,
+          shipToInfo: customerCodeListMock.last.shipToInfos.first,
+        ),
+      );
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001')),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final customerSearchPage = find.byKey(WidgetKeys.customerSearchPage);
+      const fullShipToAddress =
+          't/a SUBANG JAYA MEDICAL CENTRE, NO 1 JALAN SS 12/1A, 47500 SUBANG, JAYA, PETALING, PETALING JAYA 47500';
+      final shipToAddressFinder = find.textContaining(fullShipToAddress);
+
+      expect(customerSearchPage, findsOneWidget);
+      expect(shipToAddressFinder, findsOneWidget);
+    });
+
     // testWidgets('Clear Customer code Search', (tester) async {
     //   when(() => customerCodeBlocMock.state).thenReturn(
     //     CustomerCodeState.initial().copyWith(

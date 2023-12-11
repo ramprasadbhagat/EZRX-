@@ -28,19 +28,25 @@ class CustomerAddress with _$CustomerAddress {
 
   @override
   String toString() {
-    final street2Str = street2.isEmpty ? '' : ' $street2';
-    final street3Str = street3.isEmpty ? '' : ' $street3';
-    final street4Str = street4.isEmpty ? '' : ' $street4';
-    final street5Str = street5.isEmpty ? '' : ' $street5';
+    final streetList = [
+      if (street1.isNotEmpty) street1,
+      if (street2.isNotEmpty) street2,
+      if (street3.isNotEmpty) street3,
+      if (street4.isNotEmpty) street4,
+      if (street5.isNotEmpty) street5,
+    ];
 
-    return '$street1$street2Str$street3Str$street4Str$street5Str';
+    return streetList.join(', ');
   }
 
   String toAddress() {
-    final city1Str = city1.isEmpty ? '' : ', $city1';
-    final city2Str = city2.isEmpty ? '' : ', $city2';
+    final cityList = [
+      toString(),
+      if (city1.isNotEmpty) city1,
+      if (city2.isNotEmpty) city2,
+    ];
 
-    return '${toString()}$city2Str$city1Str';
+    return cityList.join(', ');
   }
 
   String get addressStreet => ' $street1 $street2';
