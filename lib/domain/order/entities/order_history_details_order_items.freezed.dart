@@ -20,9 +20,9 @@ mixin _$OrderHistoryDetailsOrderItem {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
-  ZpPrice get unitPrice => throw _privateConstructorUsedError;
-  ZpPrice get originPrice => throw _privateConstructorUsedError;
-  TotalPrice get totalPrice => throw _privateConstructorUsedError;
+  double get unitPrice => throw _privateConstructorUsedError;
+  double get originPrice => throw _privateConstructorUsedError;
+  double get totalPrice => throw _privateConstructorUsedError;
   double get tax => throw _privateConstructorUsedError;
   OrderStepValue get sAPStatus => throw _privateConstructorUsedError;
   DateTimeStringValue get plannedDeliveryDate =>
@@ -65,9 +65,9 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       MaterialNumber materialNumber,
       String materialDescription,
       int qty,
-      ZpPrice unitPrice,
-      ZpPrice originPrice,
-      TotalPrice totalPrice,
+      double unitPrice,
+      double originPrice,
+      double totalPrice,
       double tax,
       OrderStepValue sAPStatus,
       DateTimeStringValue plannedDeliveryDate,
@@ -160,15 +160,15 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
-              as ZpPrice,
+              as double,
       originPrice: null == originPrice
           ? _value.originPrice
           : originPrice // ignore: cast_nullable_to_non_nullable
-              as ZpPrice,
+              as double,
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
-              as TotalPrice,
+              as double,
       tax: null == tax
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
@@ -317,9 +317,9 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
       MaterialNumber materialNumber,
       String materialDescription,
       int qty,
-      ZpPrice unitPrice,
-      ZpPrice originPrice,
-      TotalPrice totalPrice,
+      double unitPrice,
+      double originPrice,
+      double totalPrice,
       double tax,
       OrderStepValue sAPStatus,
       DateTimeStringValue plannedDeliveryDate,
@@ -417,15 +417,15 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
-              as ZpPrice,
+              as double,
       originPrice: null == originPrice
           ? _value.originPrice
           : originPrice // ignore: cast_nullable_to_non_nullable
-              as ZpPrice,
+              as double,
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
-              as TotalPrice,
+              as double,
       tax: null == tax
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
@@ -553,11 +553,11 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   @override
   final int qty;
   @override
-  final ZpPrice unitPrice;
+  final double unitPrice;
   @override
-  final ZpPrice originPrice;
+  final double originPrice;
   @override
-  final TotalPrice totalPrice;
+  final double totalPrice;
   @override
   final double tax;
   @override
@@ -714,9 +714,9 @@ abstract class _OrderHistoryDetailsOrderItem
       required final MaterialNumber materialNumber,
       required final String materialDescription,
       required final int qty,
-      required final ZpPrice unitPrice,
-      required final ZpPrice originPrice,
-      required final TotalPrice totalPrice,
+      required final double unitPrice,
+      required final double originPrice,
+      required final double totalPrice,
       required final double tax,
       required final OrderStepValue sAPStatus,
       required final DateTimeStringValue plannedDeliveryDate,
@@ -749,11 +749,11 @@ abstract class _OrderHistoryDetailsOrderItem
   @override
   int get qty;
   @override
-  ZpPrice get unitPrice;
+  double get unitPrice;
   @override
-  ZpPrice get originPrice;
+  double get originPrice;
   @override
-  TotalPrice get totalPrice;
+  double get totalPrice;
   @override
   double get tax;
   @override

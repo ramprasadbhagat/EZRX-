@@ -98,8 +98,8 @@ class OrderItemDetailsSection extends StatelessWidget {
                                                       .read<EligibilityBloc>()
                                                       .state
                                                       .salesOrgConfigs,
-                                                  price: e.originPrice
-                                                      .getOrDefaultValue(''),
+                                                  price:
+                                                      e.originPrice.toString(),
                                                   type: PriceStyle
                                                       .materialListPriceStrikeThrough,
                                                 ),
@@ -109,9 +109,8 @@ class OrderItemDetailsSection extends StatelessWidget {
                                                   isMYExternalSalesRep,
                                                   isIDMarket,
                                                 ),
-                                                originPrice: e
-                                                    .originPrice.zpPrice
-                                                    .toString(),
+                                                originPrice:
+                                                    e.originPrice.toString(),
                                                 showPreviousPrice:
                                                     e.isCounterOffer,
                                                 hasDescription: true,

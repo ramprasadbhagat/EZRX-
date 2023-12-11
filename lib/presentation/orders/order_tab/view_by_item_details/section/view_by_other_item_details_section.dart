@@ -87,9 +87,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                         ),
                                                         originPrice: e
                                                             .originPrice
-                                                            .getOrDefaultValue(
-                                                          '',
-                                                        ),
+                                                            .toString(),
                                                         showPreviousPrice:
                                                             e.isCounterOffer,
                                                         hasDescription: true,

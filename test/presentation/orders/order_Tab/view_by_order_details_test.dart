@@ -154,8 +154,8 @@ void main() {
           orderHistoryDetailsOrderItem: [
             fakeOrderHistoryItem.copyWith(
               isCounterOffer: true,
-              originPrice: ZpPrice('100.1'),
-              unitPrice: ZpPrice('98'),
+              originPrice: 100.1,
+              unitPrice: 98,
             )
           ],
         ),
@@ -167,8 +167,8 @@ void main() {
           orderHistoryDetailsOrderItem: [
             fakeOrderHistoryItem.copyWith(
               tax: 9,
-              totalPrice: TotalPrice('336.6'),
-              unitPrice: ZpPrice('336.6'),
+              totalPrice: 336.6,
+              unitPrice: 336.6,
               qty: 1,
             )
           ],
@@ -242,8 +242,8 @@ void main() {
             orderHistoryItems: <OrderHistoryItem>[
               OrderHistoryItem.empty().copyWith(
                 materialNumber: MaterialNumber('000000000021247719'),
-                unitPrice: ZpPrice('17.2'),
-                totalPrice: TotalPrice('516'),
+                unitPrice: 17.2,
+                totalPrice: 516,
               )
             ],
           ),
@@ -734,8 +734,8 @@ void main() {
                 ),
                 qty: 30,
                 materialNumber: MaterialNumber('000000000021247719'),
-                unitPrice: ZpPrice('17.2'),
-                totalPrice: TotalPrice('516'),
+                unitPrice: 17.2,
+                totalPrice: 516,
                 type: OrderItemType('Comm'),
               )
             ],
@@ -767,8 +767,8 @@ void main() {
                   principalName: PrincipalName('PROCTER AND GAMBLE'),
                 ),
                 materialNumber: materialNumber,
-                unitPrice: ZpPrice('17.2'),
-                totalPrice: TotalPrice('516'),
+                unitPrice: 17.2,
+                totalPrice: 516,
                 type: OrderItemType('Comm'),
                 productType: MaterialInfoType('material'),
               )
@@ -1202,8 +1202,8 @@ void main() {
         orderHistoryItems: <OrderHistoryItem>[
           OrderHistoryItem.empty().copyWith(
             materialNumber: MaterialNumber('1234567890'),
-            unitPrice: ZpPrice('17.2'),
-            totalPrice: TotalPrice('516'),
+            unitPrice: 17.2,
+            totalPrice: 516,
           )
         ],
       );

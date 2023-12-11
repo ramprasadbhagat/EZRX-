@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -17,7 +18,6 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -29,7 +29,6 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 
 part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/product_offer_body_content.dart';
 part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/product_title.dart';
-part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/price_label.dart';
 
 class ProductsOnOffer extends StatelessWidget {
   const ProductsOnOffer({Key? key}) : super(key: key);

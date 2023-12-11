@@ -20,9 +20,9 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required MaterialNumber materialNumber,
     required String materialDescription,
     required int qty,
-    required ZpPrice unitPrice,
-    required ZpPrice originPrice,
-    required TotalPrice totalPrice,
+    required double unitPrice,
+    required double originPrice,
+    required double totalPrice,
     required OrderStepValue status,
     required DateTimeStringValue deliveryDate,
     required OrderNumber orderNumber,
@@ -53,9 +53,9 @@ class OrderHistoryItem with _$OrderHistoryItem {
         materialNumber: MaterialNumber(''),
         materialDescription: '',
         qty: 0,
-        unitPrice: ZpPrice('0.0'),
-        originPrice: ZpPrice('0.0'),
-        totalPrice: TotalPrice('0.0'),
+        unitPrice: 0.0,
+        originPrice: 0.0,
+        totalPrice: 0.0,
         status: OrderStepValue(''),
         deliveryDate: DateTimeStringValue(''),
         orderNumber: OrderNumber(''),
@@ -91,10 +91,10 @@ class OrderHistoryItem with _$OrderHistoryItem {
   }) =>
       copyWith(
         totalPrice: salesOrganisationConfigs.taxDisplayForOrderHistoryMaterial
-            ? TotalPrice('${totalPrice.totalPrice + tax}')
+            ? totalPrice + tax
             : totalPrice,
         unitPrice: salesOrganisationConfigs.taxDisplayForOrderHistoryMaterial
-            ? ZpPrice('${unitPrice.zpPrice + tax / qty}')
+            ? unitPrice + tax / qty
             : unitPrice,
       );
 
@@ -115,7 +115,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     bool isIDMarket,
   ) =>
       _itemPrice(
-        unitPrice.getOrDefaultValue('0'),
+        unitPrice,
         isMYExternalSalesRep,
         isIDMarket,
       );
@@ -125,7 +125,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     bool isIDMarket,
   ) =>
       _itemPrice(
-        (unitPrice.zpPrice * qty).toString(),
+        unitPrice * qty,
         isMYExternalSalesRep,
         isIDMarket,
       );
@@ -135,27 +135,30 @@ class OrderHistoryItem with _$OrderHistoryItem {
     bool isIDMarket,
   ) =>
       _itemPrice(
-        totalPrice.getOrDefaultValue('0'),
+        totalPrice,
         isMYExternalSalesRep,
         isIDMarket,
       );
 
   String _itemPrice(
-    String price,
+    double price,
     bool isMYExternalSalesRep,
     bool isIDMarket,
   ) {
-    final displayPriceNotAvailable = isMYExternalSalesRep &&
-        isPnGMaterial &&
-        !invoiceData.invoiceNumber.isValid();
+    const displayPriceNotAvailable = 'Price Not Available';
+    final invoiceNumberValid = invoiceData.invoiceNumber.isValid();
 
-    if (displayPriceNotAvailable) return 'Price Not Available';
+    if (isMYExternalSalesRep && isPnGMaterial && !invoiceNumberValid) {
+      return displayPriceNotAvailable;
+    }
     if (isBonusMaterial) return isIDMarket ? '0' : 'FREE';
+    if (price == 0) return displayPriceNotAvailable;
 
-    return price;
+    return price.toString();
   }
 
-  bool get showMaterialListPrice => originPrice.zpPrice > unitPrice.zpPrice;
+  bool get showMaterialListPrice => originPrice > unitPrice;
+
   String combinationCode({required bool showGMCPart}) => <String>[
         materialNumber.displayMatNo,
         if (showGMCPart && governmentMaterialCode.isNotEmpty)
@@ -164,7 +167,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
 
   double get taxPercentage =>
       double.tryParse(
-        (tax / unitPrice.zpPrice * 100).toStringAsExponential(2),
+        (tax / unitPrice * 100).toStringAsExponential(2),
       ) ??
       0;
 }

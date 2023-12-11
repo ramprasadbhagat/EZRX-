@@ -62,7 +62,7 @@ void main() async {
       });
       test('netPrice calculation test', () {
         final orderHistoryItem = OrderHistoryItem.empty().copyWith(
-          unitPrice: ZpPrice('10'),
+          unitPrice: 10,
           qty: 10,
         );
 
@@ -76,7 +76,7 @@ void main() async {
       });
       test('taxPercentage calculation test', () {
         final orderHistoryItem = OrderHistoryItem.empty().copyWith(
-          unitPrice: ZpPrice('100'),
+          unitPrice: 100,
           qty: 10,
           tax: 5.0,
         );

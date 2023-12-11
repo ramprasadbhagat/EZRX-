@@ -1239,7 +1239,7 @@ void main() {
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            unitPrice: ZpPrice('60.00'),
+            unitPrice: 60,
             qty: 30,
             tax: 4.2,
           ),
@@ -1288,7 +1288,7 @@ void main() {
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            unitPrice: ZpPrice('116640.0'),
+            unitPrice: 116640,
             qty: 5,
             tax: 12830.4,
           ),
@@ -1335,7 +1335,7 @@ void main() {
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            unitPrice: ZpPrice('60.00'),
+            unitPrice: 60,
             qty: 30,
             tax: 4.2,
           ),

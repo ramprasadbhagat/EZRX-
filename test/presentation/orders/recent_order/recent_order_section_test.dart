@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
@@ -228,11 +227,11 @@ void main() {
       final fakeOrderHistory = OrderHistory.empty().copyWith(
         orderHistoryItems: [
           OrderHistoryItem.empty().copyWith(
-            totalPrice: TotalPrice('40.0'),
+            totalPrice: 40.0,
           ),
           OrderHistoryItem.empty().copyWith(
             isBonusMaterial: true,
-            totalPrice: TotalPrice('20.0'),
+            totalPrice: 20.0,
           )
         ],
       );

@@ -19,9 +19,9 @@ mixin _$OrderHistoryItem {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
-  ZpPrice get unitPrice => throw _privateConstructorUsedError;
-  ZpPrice get originPrice => throw _privateConstructorUsedError;
-  TotalPrice get totalPrice => throw _privateConstructorUsedError;
+  double get unitPrice => throw _privateConstructorUsedError;
+  double get originPrice => throw _privateConstructorUsedError;
+  double get totalPrice => throw _privateConstructorUsedError;
   OrderStepValue get status => throw _privateConstructorUsedError;
   DateTimeStringValue get deliveryDate => throw _privateConstructorUsedError;
   OrderNumber get orderNumber => throw _privateConstructorUsedError;
@@ -65,9 +65,9 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       {MaterialNumber materialNumber,
       String materialDescription,
       int qty,
-      ZpPrice unitPrice,
-      ZpPrice originPrice,
-      TotalPrice totalPrice,
+      double unitPrice,
+      double originPrice,
+      double totalPrice,
       OrderStepValue status,
       DateTimeStringValue deliveryDate,
       OrderNumber orderNumber,
@@ -158,15 +158,15 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
-              as ZpPrice,
+              as double,
       originPrice: null == originPrice
           ? _value.originPrice
           : originPrice // ignore: cast_nullable_to_non_nullable
-              as ZpPrice,
+              as double,
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
-              as TotalPrice,
+              as double,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -303,9 +303,9 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       {MaterialNumber materialNumber,
       String materialDescription,
       int qty,
-      ZpPrice unitPrice,
-      ZpPrice originPrice,
-      TotalPrice totalPrice,
+      double unitPrice,
+      double originPrice,
+      double totalPrice,
       OrderStepValue status,
       DateTimeStringValue deliveryDate,
       OrderNumber orderNumber,
@@ -397,15 +397,15 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
-              as ZpPrice,
+              as double,
       originPrice: null == originPrice
           ? _value.originPrice
           : originPrice // ignore: cast_nullable_to_non_nullable
-              as ZpPrice,
+              as double,
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
-              as TotalPrice,
+              as double,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -550,11 +550,11 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @override
   final int qty;
   @override
-  final ZpPrice unitPrice;
+  final double unitPrice;
   @override
-  final ZpPrice originPrice;
+  final double originPrice;
   @override
-  final TotalPrice totalPrice;
+  final double totalPrice;
   @override
   final OrderStepValue status;
   @override
@@ -726,9 +726,9 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       {required final MaterialNumber materialNumber,
       required final String materialDescription,
       required final int qty,
-      required final ZpPrice unitPrice,
-      required final ZpPrice originPrice,
-      required final TotalPrice totalPrice,
+      required final double unitPrice,
+      required final double originPrice,
+      required final double totalPrice,
       required final OrderStepValue status,
       required final DateTimeStringValue deliveryDate,
       required final OrderNumber orderNumber,
@@ -762,11 +762,11 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   int get qty;
   @override
-  ZpPrice get unitPrice;
+  double get unitPrice;
   @override
-  ZpPrice get originPrice;
+  double get originPrice;
   @override
-  TotalPrice get totalPrice;
+  double get totalPrice;
   @override
   OrderStepValue get status;
   @override

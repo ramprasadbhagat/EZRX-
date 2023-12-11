@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -20,7 +21,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -61,6 +62,8 @@ class MockAppRouter extends Mock implements AppRouter {}
 
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
 void main() {
   late GetIt locator;
   late EligibilityBloc eligibilityBlocMock;
@@ -69,6 +72,7 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late ProductImageBloc productImageBlocMock;
   late ProductDetailBloc productDetailBlocMock;
+  late CartBloc cartBloc;
   late List<MaterialInfo> fakeMaterialList;
   late AppRouter autoRouterMock;
 
@@ -85,6 +89,7 @@ void main() {
     customerCodeBlocMock = CustomerCodeBlocMock();
     productImageBlocMock = ProductImageBlocMock();
     productDetailBlocMock = ProductDetailBlocMock();
+    cartBloc = CartBlocMock();
 
     fakeMaterialList =
         (await MaterialListLocalDataSource().getProductList()).products;
@@ -104,6 +109,7 @@ void main() {
           .thenReturn(ProductImageState.initial());
       when(() => productDetailBlocMock.state)
           .thenReturn(ProductDetailState.initial());
+      when(() => cartBloc.state).thenReturn(CartState.initial());
     });
     RouteDataScope getWUT() {
       return WidgetUtils.getScopedWidget(
@@ -128,6 +134,9 @@ void main() {
           ),
           BlocProvider<ProductDetailBloc>(
             create: (context) => productDetailBlocMock,
+          ),
+          BlocProvider<CartBloc>(
+            create: (context) => cartBloc,
           ),
         ],
         child: const Scaffold(body: ProductsOnOffer()),
@@ -475,7 +484,7 @@ void main() {
         final tileFinder = find.byKey(WidgetKeys.productOnOffer);
         final priceComponentFinder = find.descendant(
           of: tileFinder.first,
-          matching: find.byType(PriceComponent),
+          matching: find.byType(ProductPriceLabel),
         );
         expect(priceComponentFinder, findsOneWidget);
       },

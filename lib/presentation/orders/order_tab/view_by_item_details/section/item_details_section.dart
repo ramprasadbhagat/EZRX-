@@ -56,8 +56,7 @@ class ItemDetailsSection extends StatelessWidget {
                               .read<EligibilityBloc>()
                               .state
                               .salesOrgConfigs,
-                          price: orderHistoryItem.originPrice
-                              .getOrDefaultValue(''),
+                          price: orderHistoryItem.originPrice.toString(),
                           type: PriceStyle.materialListPriceStrikeThrough,
                         ),
                       OrderItemPrice(
@@ -65,8 +64,7 @@ class ItemDetailsSection extends StatelessWidget {
                           eligibilityState.isMYExternalSalesRepUser,
                           eligibilityState.salesOrg.isID,
                         ),
-                        originPrice:
-                            orderHistoryItem.originPrice.getOrDefaultValue(''),
+                        originPrice: orderHistoryItem.originPrice.toString(),
                         showPreviousPrice: orderHistoryItem.isCounterOffer,
                         hasDescription: true,
                       ),

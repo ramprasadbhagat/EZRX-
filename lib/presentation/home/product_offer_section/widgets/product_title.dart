@@ -72,7 +72,9 @@ class _ProductTile extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                child: _PriceLabel(product: materialInfo),
+                                child: ProductPriceLabel(
+                                  materialInfo: materialInfo,
+                                ),
                               ),
                               FavouriteIcon(
                                 isFavourite: materialInfo.isFavourite,

@@ -7,10 +7,6 @@ double totalPriceStringAsFixed(String value) {
   return double.parse(value);
 }
 
-bool isZero(String value) {
-  return double.parse(value) == 0.0;
-}
-
 bool materialIsFOC(String materialGroup) {
   return materialGroup == '6A1';
 }

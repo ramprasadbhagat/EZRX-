@@ -42,8 +42,7 @@ class ViewByOrdersGroup with _$ViewByOrdersGroup {
 
   double get totalPrice => viewByOrderItem.fold(
         0,
-        (previousValue, element) =>
-            previousValue + element.totalPrice.totalPrice,
+        (previousValue, element) => previousValue + element.totalPrice,
       );
 
   BundleInfo get bundleOffer =>

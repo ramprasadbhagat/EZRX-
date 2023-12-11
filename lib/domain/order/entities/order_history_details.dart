@@ -165,7 +165,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
                 element.principalData.principalCode.isPnG &&
                 !invoiceNumber.isValid() &&
                 orderValue > 0
-            ? grandTotalWithTax - element.totalPrice.totalPrice
+            ? grandTotalWithTax - element.totalPrice
             : previousValue,
       );
 
@@ -177,7 +177,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
                 element.principalData.principalCode.isPnG &&
                 !invoiceNumber.isValid() &&
                 orderValue > 0
-            ? orderValue - (element.qty * element.unitPrice.zpPrice)
+            ? orderValue - (element.qty * element.unitPrice)
             : previousValue,
       );
 
@@ -189,7 +189,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
                 element.principalData.principalCode.isPnG &&
                 !invoiceNumber.isValid() &&
                 orderValue > 0
-            ? orderValue - (element.qty * element.unitPrice.zpPrice)
+            ? orderValue - (element.qty * element.unitPrice)
             : previousValue,
       );
   double get totalTaxPercentage =>

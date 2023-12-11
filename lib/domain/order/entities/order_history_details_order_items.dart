@@ -24,9 +24,9 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required MaterialNumber materialNumber,
     required String materialDescription,
     required int qty,
-    required ZpPrice unitPrice,
-    required ZpPrice originPrice,
-    required TotalPrice totalPrice,
+    required double unitPrice,
+    required double originPrice,
+    required double totalPrice,
     required double tax,
     required OrderStepValue sAPStatus,
     required DateTimeStringValue plannedDeliveryDate,
@@ -55,9 +55,9 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         materialNumber: MaterialNumber(''),
         materialDescription: '',
         qty: 0,
-        unitPrice: ZpPrice('0.0'),
-        originPrice: ZpPrice('0.0'),
-        totalPrice: TotalPrice('0.0'),
+        unitPrice: 0.0,
+        originPrice: 0.0,
+        totalPrice: 0.0,
         tax: 0.0,
         sAPStatus: OrderStepValue(''),
         plannedDeliveryDate: DateTimeStringValue(''),
@@ -93,10 +93,10 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   }) =>
       copyWith(
         totalPrice: salesOrganisationConfigs.taxDisplayForOrderHistoryMaterial
-            ? TotalPrice('${totalPrice.totalPrice + tax}')
+            ? totalPrice + tax
             : totalPrice,
         unitPrice: salesOrganisationConfigs.taxDisplayForOrderHistoryMaterial
-            ? ZpPrice('${unitPrice.zpPrice + tax / qty}')
+            ? unitPrice + tax / qty
             : unitPrice,
       );
 
@@ -125,7 +125,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
   bool get showOfferTag => !isBonus && promoStatus;
 
-  bool get isBonus => type.isMaterialTypeBonus && unitPrice.isZPPriceZero;
+  bool get isBonus => type.isMaterialTypeBonus && unitPrice == 0;
 
   bool get isPnGMaterial =>
       type.isMaterialTypeComm && principalData.principalCode.isPnG;
@@ -136,7 +136,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     bool isIDMarket,
   ) =>
       _itemPrice(
-        unitPrice.getOrDefaultValue(''),
+        unitPrice,
         invoiceNumber,
         isMYExternalSalesRep,
         isIDMarket,
@@ -148,7 +148,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     bool isIDMarket,
   ) =>
       _itemPrice(
-        (unitPrice.zpPrice * qty).toString(),
+        unitPrice * qty,
         invoiceNumber,
         isMYExternalSalesRep,
         isIDMarket,
@@ -160,7 +160,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     bool isIDMarket,
   ) =>
       _itemPrice(
-        totalPrice.getOrDefaultValue(''),
+        totalPrice,
         invoiceNumber,
         isMYExternalSalesRep,
         isIDMarket,
@@ -168,23 +168,25 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
   double get taxPercentage =>
       double.tryParse(
-        (tax / unitPrice.zpPrice * 100).toStringAsExponential(2),
+        (tax / unitPrice * 100).toStringAsExponential(2),
       ) ??
       0;
 
   String _itemPrice(
-    String price,
+    double price,
     StringValue invoiceNumber,
     bool isMYExternalSalesRep,
     bool isIDMarket,
   ) {
-    final displayPriceNotAvailable =
-        isMYExternalSalesRep && isPnGMaterial && !invoiceNumber.isValid();
+    const displayPriceNotAvailable = 'Price Not Available';
 
-    if (displayPriceNotAvailable) return 'Price Not Available';
+    if (isMYExternalSalesRep && isPnGMaterial && !invoiceNumber.isValid()) {
+      return displayPriceNotAvailable;
+    }
     if (type.isMaterialTypeBonus) return isIDMarket ? '0' : 'FREE';
+    if (price == 0) return displayPriceNotAvailable;
 
-    return price;
+    return price.toString();
   }
 
   MaterialInfo get reOrderMaterialInfo => MaterialInfo.empty().copyWith(
@@ -194,7 +196,8 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         quantity: MaterialQty(qty),
       );
 
-  bool get showMaterialListPrice => originPrice.zpPrice > unitPrice.zpPrice;
+  bool get showMaterialListPrice => originPrice > unitPrice;
+
   String combinationCode({required bool showGMCPart}) => <String>[
         materialNumber.displayMatNo,
         if (showGMCPart && governmentMaterialCode.isNotEmpty)

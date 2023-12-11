@@ -68,38 +68,6 @@ class ShipToParty extends ValueObject<String> {
   const ShipToParty._(this.value);
 }
 
-class ZpPrice extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory ZpPrice(String input) {
-    return ZpPrice._(validateStringNotEmpty(input));
-  }
-
-  double get zpPrice {
-    return totalPriceStringAsFixed(value.getOrElse(() => '0'));
-  }
-
-  bool get isZPPriceZero => isZero(value.getOrElse(() => '0'));
-
-  const ZpPrice._(this.value);
-}
-
-class TotalPrice extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory TotalPrice(String input) {
-    return TotalPrice._(validateStringNotEmpty(input));
-  }
-
-  double get totalPrice {
-    return totalPriceStringAsFixed(value.getOrElse(() => '0'));
-  }
-
-  const TotalPrice._(this.value);
-}
-
 class PrincipalName extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
