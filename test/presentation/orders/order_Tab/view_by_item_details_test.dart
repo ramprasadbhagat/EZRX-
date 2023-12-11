@@ -1405,9 +1405,10 @@ void main() {
     testWidgets(
         'List price strike through price visible, if final price is less than list price',
         (tester) async {
-      final fakeOrderHistoryItemWithCounterOffer = fakeOrderHistoryItem.copyWith(
-        originPrice: ZpPrice('100.1'),
-        unitPrice: ZpPrice('98'),
+      final fakeOrderHistoryItemWithCounterOffer =
+          fakeOrderHistoryItem.copyWith(
+        originPrice: 100.1,
+        unitPrice: 98.0,
         isCounterOffer: true,
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -1440,8 +1441,8 @@ void main() {
     testWidgets(
         'List price strike through price not visible, if final price is greater than list price',
         (tester) async {
-      final originPrice = ZpPrice('80');
-      final unitPrice = ZpPrice('100');
+      const originPrice = 80.0;
+      const unitPrice = 100.0;
       final fakeOrderHistoryItemWithCounterOffer =
           fakeOrderHistoryItem.copyWith(
         originPrice: originPrice,
@@ -1467,7 +1468,7 @@ void main() {
         (widget) =>
             widget is RichText &&
             widget.key == WidgetKeys.priceComponent &&
-            widget.text.toPlainText().contains(originPrice.getOrCrash()),
+            widget.text.toPlainText().contains('$originPrice'),
       );
       expect(
         find.descendant(

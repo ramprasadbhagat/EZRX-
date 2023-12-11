@@ -1556,8 +1556,8 @@ void main() {
     testWidgets(
         '=> List price strike through price visible, if final price is less than list price',
         (tester) async {
-      final originPrice = ZpPrice('100');
-      final unitPrice = ZpPrice('80');
+      const originPrice = 100.0;
+      const unitPrice = 80.0;
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
@@ -1585,7 +1585,7 @@ void main() {
         (widget) =>
             widget is RichText &&
             widget.key == WidgetKeys.priceComponent &&
-            widget.text.toPlainText().contains(originPrice.getOrCrash()),
+            widget.text.toPlainText().contains('$originPrice'),
       );
       expect(
         find.descendant(
@@ -1599,8 +1599,8 @@ void main() {
     testWidgets(
         '=> List price strike through price not visible, if final price is greater than and equal to list price',
         (tester) async {
-      final originPrice = ZpPrice('100');
-      final unitPrice = ZpPrice('200');
+      const originPrice = 100.0;
+      const unitPrice = 200.0;
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
@@ -1628,7 +1628,7 @@ void main() {
         (widget) =>
             widget is RichText &&
             widget.key == WidgetKeys.priceComponent &&
-            widget.text.toPlainText().contains(originPrice.getOrCrash()),
+            widget.text.toPlainText().contains('$originPrice'),
       );
       expect(
         find.descendant(
