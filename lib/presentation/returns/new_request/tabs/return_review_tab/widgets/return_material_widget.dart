@@ -17,6 +17,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
         final returnBonusItems = state.getReturnBonusItemsOfMainItem(item);
 
         return CustomCard(
+          key: WidgetKeys.returnReviewItemKey,
           showBorder: true,
           showShadow: false,
           clipBehavior: Clip.antiAlias,
@@ -35,7 +36,16 @@ class _ReturnMaterialWidget extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProductImageWithLabel(materialNumber: item.materialNumber),
+                  CustomCard(
+                    showShadow: false,
+                    showBorder: true,
+                    child: ProductImage(
+                      width: MediaQuery.of(context).size.height * 0.1,
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      fit: BoxFit.fitHeight,
+                      materialNumber: item.materialNumber,
+                    ),
+                  ),
                   Expanded(
                     child: MaterialInfoWidget(
                       data: item,

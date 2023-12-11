@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -104,7 +103,7 @@ void main() {
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final cardFinder = find.byType(CustomCard);
+        final cardFinder = find.byKey(WidgetKeys.newReturnItem);
         expect(cardFinder, findsNWidgets(2));
         expect(
           find.descendant(
@@ -137,7 +136,7 @@ void main() {
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final cardFinder = find.byType(CustomCard);
+        final cardFinder = find.byKey(WidgetKeys.newReturnItem);
         expect(cardFinder, findsNWidgets(2));
         expect(
           find.descendant(

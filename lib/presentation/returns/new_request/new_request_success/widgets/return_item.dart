@@ -12,6 +12,7 @@ class _ReturnItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.returnSuccessfulItemKey,
       showBorder: true,
       showShadow: false,
       clipBehavior: Clip.antiAlias,
@@ -32,8 +33,15 @@ class _ReturnItem extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProductImageWithLabel(
-                materialNumber: returnMaterial.materialNumber,
+              CustomCard(
+                showShadow: false,
+                showBorder: true,
+                child: ProductImage(
+                  width: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  fit: BoxFit.fitHeight,
+                  materialNumber: returnMaterial.materialNumber,
+                ),
               ),
               Expanded(
                 child: MaterialInfoWidget(

@@ -30,8 +30,15 @@ class _ReturnMaterialInfo extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProductImageWithLabel(
-                materialNumber: data.materialNumber,
+              CustomCard(
+                showShadow: false,
+                showBorder: true,
+                child: ProductImage(
+                  width: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  fit: BoxFit.fitHeight,
+                  materialNumber: data.materialNumber,
+                ),
               ),
               Expanded(
                 child: MaterialInfoWidget(data: data),

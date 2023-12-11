@@ -14,7 +14,6 @@ import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_local.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/return_review_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -460,7 +459,7 @@ void main() {
           );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
-          final cardFinder = find.byType(CustomCard);
+          final cardFinder = find.byKey(WidgetKeys.returnReviewItemKey);
           expect(cardFinder, findsNWidgets(2));
           expect(
             find.descendant(
@@ -488,7 +487,7 @@ void main() {
           );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
-          final cardFinder = find.byType(CustomCard);
+          final cardFinder = find.byKey(WidgetKeys.returnReviewItemKey);
           expect(cardFinder, findsNWidgets(2));
           expect(
             find.descendant(

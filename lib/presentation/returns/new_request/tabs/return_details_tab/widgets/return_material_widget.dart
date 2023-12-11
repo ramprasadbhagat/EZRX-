@@ -36,9 +36,15 @@ class _ReturnMaterialWidget extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProductImageWithLabel(
-                    materialNumber: item.materialNumber,
-                    key: WidgetKeys.newRequestStep2ItemImage,
+                  CustomCard(
+                    showShadow: false,
+                    showBorder: true,
+                    child: ProductImage(
+                      width: MediaQuery.of(context).size.height * 0.1,
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      fit: BoxFit.fitHeight,
+                      materialNumber: item.materialNumber,
+                    ),
                   ),
                   Expanded(
                     child: MaterialInfoWidget(

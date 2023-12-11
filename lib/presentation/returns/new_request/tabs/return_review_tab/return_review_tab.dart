@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
+import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/regexes.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/widgets/bonus_material_return_widget.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_return_info.dart';
@@ -20,7 +21,6 @@ import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_i
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_section.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_info_widget.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_quantity_and_price.dart';
-import 'package:ezrxmobile/presentation/returns/new_request/widgets/product_image_with_label.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_details_section.dart';
 
 part 'widgets/return_material_widget.dart';
