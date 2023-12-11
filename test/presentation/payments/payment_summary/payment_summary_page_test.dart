@@ -1019,7 +1019,7 @@ void main() {
             false) {
           expect(
             dateTextFinder.data,
-            '${'Created on'.tr()}: ${fakeDate.dateString}',
+            '${'Payment date'.tr()}: ${fakeDate.dateString}',
           );
         }
       },

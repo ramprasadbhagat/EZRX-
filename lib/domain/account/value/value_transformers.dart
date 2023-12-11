@@ -508,14 +508,6 @@ String getPaymentIdPretext(String country) {
   return salesOrgCountryMap[country] ?? 'PA';
 }
 
-String getPaymentDateLabelText(String country) {
-  final salesOrgCountryMap = {
-    'ID': 'Created on',
-  };
-
-  return salesOrgCountryMap[country] ?? 'Payment date';
-}
-
 int countryCutOffTime(String country) {
   final salesOrgCountryMap = {
     'SG': 15,

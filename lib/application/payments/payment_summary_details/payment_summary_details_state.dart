@@ -40,8 +40,10 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
 
   bool get isSavingOrDeleting => isSavingAdvice || isDeletingPayment;
 
-  String get adviceExpiryText => salesOrganization.salesOrg.isID
-      ? details.idAdviceExpiryText
+  String get adviceExpiryText => salesOrganization.salesOrg.isID 
+      ? !details.status.isSuccessful
+          ? '-'
+          : details.idAdviceExpiryText
       : details.adviceExpiryText;
 
   String get adviceDeletedMessage =>

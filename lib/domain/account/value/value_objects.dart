@@ -138,8 +138,6 @@ class SalesOrg extends ValueObject<String> {
 
   String get paymentIdPretext => getPaymentIdPretext(country);
 
-  String get paymentDateLabelText => getPaymentDateLabelText(country);
-
   int get cutOffTime => countryCutOffTime(country);
 
   num get orderTaxValue => countryOrderTaxValue(country);

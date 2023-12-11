@@ -603,6 +603,12 @@ bool isSuccessfulOrProcessed(String status) =>
     status == 'expired' ||
     status == 'canceled';
 
+bool getExpiredOrCanceled(String status) =>
+    status == 'expired' || status == 'canceled';
+
+bool getSuccessful(String status) =>
+    status == 'Successful' || status == 'success' || status == 'Processed';
+
 Color getDisplayStatusTextColor(String status) =>
     isSuccessfulOrProcessed(status) ? ZPColors.black : ZPColors.red;
 
@@ -612,7 +618,6 @@ Color getAdviceExpiryColor(String status) =>
 bool isFailed(String status) => status == 'Failed';
 
 bool isPending(String status) => status == 'Pending';
-
 
 Color getAdviceExpiryColorFailed(String status) {
   return isFailed(status) ? ZPColors.red : ZPColors.white;

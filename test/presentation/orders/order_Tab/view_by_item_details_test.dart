@@ -1445,7 +1445,7 @@ void main() {
       const unitPrice = 100.0;
       final fakeOrderHistoryItemWithCounterOffer =
           fakeOrderHistoryItem.copyWith(
-        originPrice: originPrice,
+        originPrice: 80,
         unitPrice: unitPrice,
         isCounterOffer: true,
       );

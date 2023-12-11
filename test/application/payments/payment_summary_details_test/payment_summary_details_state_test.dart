@@ -55,7 +55,7 @@ void main() {
 
       expect(
         modifiedState.adviceExpiryText.contains('in') &&
-            modifiedState.adviceExpiryText.contains('Day(s)'),
+            modifiedState.adviceExpiryText.contains('day(s)'),
         true,
       );
     });

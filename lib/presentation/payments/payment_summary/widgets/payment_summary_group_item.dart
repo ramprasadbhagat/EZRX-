@@ -90,8 +90,7 @@ class _PaymentSummaryItem extends StatelessWidget {
             ),
             StatusLabel(
               key: WidgetKeys.paymentSummaryTileStatus,
-              status:
-                  StatusType(details.status.displayStatusText),
+              status: StatusType(details.status.displayStatusText),
             ),
           ],
         ),
@@ -100,16 +99,7 @@ class _PaymentSummaryItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                details.status.getIsSuccessfulOrProcessed || salesOrg.isID
-                    ? '${context.tr(salesOrg.paymentDateLabelText)}: ${details.createdDate.dateString}'
-                    : '${context.tr('Expires in')} ${details.adviceExpiry.displayDashIfEmpty}',
-                key: WidgetKeys.paymentSummaryDateOrExpiry,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: details.status.getPaymentDisplayStatusTextColor,
-                    ),
-              ),
-              const SizedBox(height: 10),
+              _PaymentDateInfo(details: details),
               PriceComponent(
                 key: WidgetKeys.paymentSummaryAmountAndCurrency,
                 price: details.paymentAmount.toString(),
@@ -121,6 +111,38 @@ class _PaymentSummaryItem extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _PaymentDateInfo extends StatelessWidget {
+  final PaymentSummaryDetails details;
+  const _PaymentDateInfo({
+    Key? key,
+    required this.details,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final salesOrg = context.read<EligibilityBloc>().state.salesOrg;
+
+    if (salesOrg.isID && details.status.isExpiredOrCanceled) {
+      return const SizedBox.shrink();
+    }
+
+    return Column(
+      children: [
+        Text(
+          details.status.getIsSuccessfulOrProcessed
+              ? '${context.tr('Payment date')}: ${details.createdDate.dateString}'
+              : '${context.tr('Expires')} ${salesOrg.isID ? details.idAdviceExpiryText : details.adviceExpiryText}',
+          key: WidgetKeys.paymentSummaryDateOrExpiry,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: details.status.getPaymentDisplayStatusTextColor,
+              ),
+        ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 }
