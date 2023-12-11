@@ -834,6 +834,8 @@ class WidgetKeys {
       Key('paymentSummaryDownloadSuccess');
   static const Key paymentSummaryScrollToTopButton =
       Key('paymentSummaryScrollToTopButton');
+  static const Key transferViaSection = Key('transferViaSection');
+  static const Key qrCodeTransferSection = Key('qrCodeTransferSection');
 
   //============================================================
   //  Statement of account

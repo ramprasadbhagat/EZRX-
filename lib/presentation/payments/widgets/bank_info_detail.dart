@@ -1,4 +1,4 @@
-part of 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';
+part of 'package:ezrxmobile/presentation/payments/widgets/bank_info.dart';
 
 class _BankInfoDetail extends StatelessWidget {
   final BankBeneficiary bankBeneficiary;

@@ -15,6 +15,7 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/attention_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/bank_account_section.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/bank_info.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/detail_info_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/transfer_methods_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -32,6 +33,8 @@ part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/i
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/price_widget.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/payment_basic_info_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/delete_cancel_advice_bottom_sheet.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/payment_transfer_via_section.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/qr_code_transfer_section.dart';
 
 class PaymentSummaryDetailsPage extends StatelessWidget {
   const PaymentSummaryDetailsPage({

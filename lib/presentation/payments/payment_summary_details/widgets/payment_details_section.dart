@@ -18,6 +18,9 @@ class _PaymentDetailsSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const _PaymentBasicInfoSection(),
+            const _PaymentTransferViaSection(
+              key: WidgetKeys.transferViaSection,
+            ),
             LoadingShimmer.withChild(
               enabled: state.details.isEmpty,
               child: AttentionSection(

@@ -334,7 +334,7 @@ void main() {
         ).called(1);
       });
 
-      testWidgets('Show loading shimmer when fetching', (tester) async {
+      testWidgets('Show loading logo when fetching', (tester) async {
         final bankInSelectedState = NewPaymentState.initial().copyWith(
           selectedPaymentMethod: NewPaymentMethod(
             paymentMethod: PaymentMethodValue('Bank-In'),
@@ -349,12 +349,9 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
-        expect(bankInWidget, findsOneWidget);
+        expect(bankInWidget, findsNothing);
         expect(
-          find.descendant(
-            of: bankInWidget,
-            matching: find.byType(LoadingShimmer),
-          ),
+          find.byKey(WidgetKeys.loaderImage),
           findsOneWidget,
         );
       });
