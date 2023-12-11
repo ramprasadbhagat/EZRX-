@@ -22,6 +22,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
+import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
@@ -394,6 +395,90 @@ void main() {
         final preOrderModalContinueButton =
             find.byKey(WidgetKeys.preOrderModalContinueButton);
         expect(preOrderModalContinueButton, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      '=> List price strike through price visible, if final price is less than list price',
+      (tester) async {
+        final finalPrice = MaterialPrice(80);
+        final listPrice = MaterialPrice(100);
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              fakeCartProduct.first.copyWith(
+                price: Price.empty().copyWith(
+                  lastPrice: listPrice,
+                  finalPrice: finalPrice,
+                  materialNumber:
+                      fakeCartProduct.first.materialInfo.materialNumber,
+                ),
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final listPriceStrikeThroughComponent =
+            find.byType(ListPriceStrikeThroughComponent);
+        final listPriceFinder = find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text
+                  .toPlainText()
+                  .contains(listPrice.getOrCrash().toString()),
+        );
+        expect(
+          find.descendant(
+            of: listPriceStrikeThroughComponent,
+            matching: listPriceFinder,
+          ),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      '=> List price strike through price not visible, if final price is greater than and equal to list price',
+      (tester) async {
+        final finalPrice = MaterialPrice(200);
+        final listPrice = MaterialPrice(100);
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              fakeCartProduct.first.copyWith(
+                price: Price.empty().copyWith(
+                  lastPrice: listPrice,
+                  finalPrice: finalPrice,
+                  materialNumber:
+                      fakeCartProduct.first.materialInfo.materialNumber,
+                ),
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final listPriceStrikeThroughComponent =
+            find.byType(ListPriceStrikeThroughComponent);
+        final listPriceFinder = find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text
+                  .toPlainText()
+                  .contains(listPrice.getOrCrash().toString()),
+        );
+        expect(
+          find.descendant(
+            of: listPriceStrikeThroughComponent,
+            matching: listPriceFinder,
+          ),
+          findsNothing,
+        );
       },
     );
   });

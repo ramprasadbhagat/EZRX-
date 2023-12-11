@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
@@ -103,5 +104,76 @@ void main() {
         findsOneWidget,
       );
     });
+
+    testWidgets(
+        '=> List price strike through price visible, if final price is less than list price',
+        (tester) async {
+      final finalPrice = MaterialPrice(80);
+      final listPrice = MaterialPrice(100);
+      final cartItem = PriceAggregate.empty().copyWith(
+        price: Price.empty().copyWith(
+          lastPrice: listPrice,
+          finalPrice: finalPrice,
+        ),
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-material'),
+          type: MaterialInfoType('material'),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(cartItem));
+      await tester.pump();
+      final materialListPriceStrikeThroughFinder =
+          find.byKey(WidgetKeys.materialListPriceStrikeThrough);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text.toPlainText().contains(listPrice.getOrCrash().toString()),
+      );
+      expect(
+        find.descendant(
+          of: materialListPriceStrikeThroughFinder,
+          matching: listPriceFinder,
+        ),
+        findsOneWidget,
+      );
+    });
+    
+    testWidgets(
+        '=> List price strike through price not visible, if final price is greater than and equal to list price',
+        (tester) async {
+      final finalPrice = MaterialPrice(200);
+      final listPrice = MaterialPrice(100);
+      final cartItem = PriceAggregate.empty().copyWith(
+        price: Price.empty().copyWith(
+          lastPrice: listPrice,
+          finalPrice: finalPrice,
+        ),
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-material'),
+          type: MaterialInfoType('material'),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(cartItem));
+      await tester.pump();
+      final materialListPriceStrikeThroughFinder =
+          find.byKey(WidgetKeys.materialListPriceStrikeThrough);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text
+                .toPlainText()
+                .contains(listPrice.getOrCrash().toString()),
+      );
+      expect(
+        find.descendant(
+          of: materialListPriceStrikeThroughFinder,
+          matching: listPriceFinder,
+        ),
+        findsNothing,
+      );
+    });
+  
   });
 }

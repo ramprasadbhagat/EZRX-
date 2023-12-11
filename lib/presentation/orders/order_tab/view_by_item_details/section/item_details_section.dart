@@ -51,6 +51,7 @@ class ItemDetailsSection extends StatelessWidget {
                     children: [
                       if (orderHistoryItem.showMaterialListPrice)
                         PriceComponent(
+                          key: WidgetKeys.materialListPriceStrikeThrough,
                           salesOrgConfig: context
                               .read<EligibilityBloc>()
                               .state

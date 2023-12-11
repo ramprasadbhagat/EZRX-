@@ -1401,5 +1401,81 @@ void main() {
       );
       expect(priceNotAvailableFinder, findsNWidgets(2));
     });
+
+    testWidgets(
+        'List price strike through price visible, if final price is less than list price',
+        (tester) async {
+      final fakeOrderHistoryItemWithCounterOffer = fakeOrderHistoryItem.copyWith(
+        originPrice: ZpPrice('100.1'),
+        unitPrice: ZpPrice('98'),
+        isCounterOffer: true,
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItemWithCounterOffer,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItemWithCounterOffer],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final materialListPriceStrikeThroughFinder =
+          find.byKey(WidgetKeys.materialListPriceStrikeThrough);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text.toPlainText().contains('100.1'),
+      );
+      expect(
+        find.descendant(
+          of: materialListPriceStrikeThroughFinder,
+          matching: listPriceFinder,
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'List price strike through price not visible, if final price is greater than list price',
+        (tester) async {
+      final originPrice = ZpPrice('80');
+      final unitPrice = ZpPrice('100');
+      final fakeOrderHistoryItemWithCounterOffer =
+          fakeOrderHistoryItem.copyWith(
+        originPrice: originPrice,
+        unitPrice: unitPrice,
+        isCounterOffer: true,
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItemWithCounterOffer.copyWith(
+            originPrice: originPrice,
+            unitPrice: unitPrice,
+          ),
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItemWithCounterOffer],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final materialListPriceStrikeThroughFinder =
+          find.byKey(WidgetKeys.materialListPriceStrikeThrough);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text.toPlainText().contains(originPrice.getOrCrash()),
+      );
+      expect(
+        find.descendant(
+          of: materialListPriceStrikeThroughFinder,
+          matching: listPriceFinder,
+        ),
+        findsNothing,
+      );
+    });
   });
 }

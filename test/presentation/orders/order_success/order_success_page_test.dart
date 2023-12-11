@@ -18,18 +18,22 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
@@ -639,6 +643,106 @@ void main() {
       expect(
         find.byKey(WidgetKeys.orderSuccessItemsSection),
         findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'List price strike through price visible, if final price is less than list price',
+        (tester) async {
+      final finalPrice = MaterialPrice(80);
+      final listPrice = MaterialPrice(100);
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeMaterialItem.copyWith(
+                material: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-material-1'),
+                ),
+                priceAggregate: PriceAggregate.empty().copyWith(
+                  price: Price.empty().copyWith(
+                    lastPrice: listPrice,
+                    finalPrice: finalPrice,
+                    materialNumber: MaterialNumber('fake-material-1'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.orderSuccessItemsSection),
+        findsOneWidget,
+      );
+      final listPriceStrikeThroughComponent =
+          find.byType(ListPriceStrikeThroughComponent);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text
+                .toPlainText()
+                .contains(listPrice.getOrCrash().toString()),
+      );
+      expect(
+        find.descendant(
+          of: listPriceStrikeThroughComponent,
+          matching: listPriceFinder,
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'List price strike through price not visible, if final price is greater than and equal to list price',
+        (tester) async {
+      final finalPrice = MaterialPrice(200);
+      final listPrice = MaterialPrice(100);
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeMaterialItem.copyWith(
+                material: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-material-1'),
+                ),
+                priceAggregate: PriceAggregate.empty().copyWith(
+                  price: Price.empty().copyWith(
+                    lastPrice: listPrice,
+                    finalPrice: finalPrice,
+                    materialNumber: MaterialNumber('fake-material-1'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.orderSuccessItemsSection),
+        findsOneWidget,
+      );
+      final listPriceStrikeThroughComponent =
+          find.byType(ListPriceStrikeThroughComponent);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text
+                .toPlainText()
+                .contains(listPrice.getOrCrash().toString()),
+      );
+      expect(
+        find.descendant(
+          of: listPriceStrikeThroughComponent,
+          matching: listPriceFinder,
+        ),
+        findsNothing,
       );
     });
 

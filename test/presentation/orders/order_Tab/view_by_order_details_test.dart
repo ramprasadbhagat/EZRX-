@@ -1552,5 +1552,91 @@ void main() {
       await tester.pumpAndSettle();
       expect(viewByOrderTaxKey, findsOneWidget);
     });
+
+    testWidgets(
+        '=> List price strike through price visible, if final price is less than list price',
+        (tester) async {
+      final originPrice = ZpPrice('100');
+      final unitPrice = ZpPrice('80');
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
+            orderHistoryDetailsOrderItem: [
+              viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first
+                  .copyWith(
+                originPrice: originPrice,
+                unitPrice: unitPrice,
+              )
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      final materialListPriceStrikeThroughFinder =
+          find.byKey(WidgetKeys.materialListPriceStrikeThrough);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text.toPlainText().contains(originPrice.getOrCrash()),
+      );
+      expect(
+        find.descendant(
+          of: materialListPriceStrikeThroughFinder,
+          matching: listPriceFinder,
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        '=> List price strike through price not visible, if final price is greater than and equal to list price',
+        (tester) async {
+      final originPrice = ZpPrice('100');
+      final unitPrice = ZpPrice('200');
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
+            orderHistoryDetailsOrderItem: [
+              viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first
+                  .copyWith(
+                originPrice: originPrice,
+                unitPrice: unitPrice,
+              )
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      final materialListPriceStrikeThroughFinder =
+          find.byKey(WidgetKeys.materialListPriceStrikeThrough);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text.toPlainText().contains(originPrice.getOrCrash()),
+      );
+      expect(
+        find.descendant(
+          of: materialListPriceStrikeThroughFinder,
+          matching: listPriceFinder,
+        ),
+        findsNothing,
+      );
+    });
   });
 }

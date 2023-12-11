@@ -1,13 +1,18 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
+import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
@@ -32,10 +37,13 @@ class MaterialPriceBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
 void main() {
   late ProductImageBlocMock productImageBlocMock;
   late MaterialPriceBlocMock materialPriceBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
+  late CartBlocMock cartBlocMock;
   late AppRouter autoRouterMock;
   late MaterialInfo materialInfoMock;
   setUpAll(() async {
@@ -52,12 +60,14 @@ void main() {
       productImageBlocMock = ProductImageBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      cartBlocMock = CartBlocMock();
       when(() => productImageBlocMock.state)
           .thenReturn(ProductImageState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
     });
 
     Widget getScopedWidget() {
@@ -67,6 +77,9 @@ void main() {
         providers: [
           BlocProvider<ProductImageBloc>(
             create: (context) => productImageBlocMock,
+          ),
+          BlocProvider<CartBloc>(
+            create: (context) => cartBlocMock,
           ),
           BlocProvider<MaterialPriceBloc>(
             create: (context) => materialPriceBlocMock,
@@ -106,6 +119,86 @@ void main() {
           );
           expect(find.text(materialInfoMock.getManufactured), findsOneWidget);
           expect(find.byType(ProductPriceLabel), findsOneWidget);
+        });
+      },
+    );
+
+    testWidgets(
+      'List price strike through price visible, if final price is less than list price',
+      (tester) async {
+        await tester.runAsync(() async {
+          final finalPrice = MaterialPrice(80);
+          final listPrice = MaterialPrice(100);
+          when(() => materialPriceBlocMock.state).thenReturn(
+            MaterialPriceState.initial().copyWith(
+              materialPrice: {
+                materialInfoMock.materialNumber: Price.empty().copyWith(
+                  lastPrice: listPrice,
+                  finalPrice: finalPrice,
+                  materialNumber: materialInfoMock.materialNumber,
+                ),
+              },
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final listPriceStrikeThroughComponent =
+              find.byType(ListPriceStrikeThroughComponent);
+          final listPriceFinder = find.byWidgetPredicate(
+            (widget) =>
+                widget is RichText &&
+                widget.key == WidgetKeys.priceComponent &&
+                widget.text
+                    .toPlainText()
+                    .contains(listPrice.getOrCrash().toString()),
+          );
+          expect(
+            find.descendant(
+              of: listPriceStrikeThroughComponent,
+              matching: listPriceFinder,
+            ),
+            findsOneWidget,
+          );
+        });
+      },
+    );
+
+    testWidgets(
+      'List price strike through price not visible, if final price is greater than and equal to list price',
+      (tester) async {
+        await tester.runAsync(() async {
+          final finalPrice = MaterialPrice(200);
+          final listPrice = MaterialPrice(100);
+          when(() => materialPriceBlocMock.state).thenReturn(
+            MaterialPriceState.initial().copyWith(
+              materialPrice: {
+                materialInfoMock.materialNumber: Price.empty().copyWith(
+                  lastPrice: listPrice,
+                  finalPrice: finalPrice,
+                  materialNumber: materialInfoMock.materialNumber,
+                ),
+              },
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final listPriceStrikeThroughComponent =
+              find.byType(ListPriceStrikeThroughComponent);
+          final listPriceFinder = find.byWidgetPredicate(
+            (widget) =>
+                widget is RichText &&
+                widget.key == WidgetKeys.priceComponent &&
+                widget.text
+                    .toPlainText()
+                    .contains(listPrice.getOrCrash().toString()),
+          );
+          expect(
+            find.descendant(
+              of: listPriceStrikeThroughComponent,
+              matching: listPriceFinder,
+            ),
+            findsNothing,
+          );
         });
       },
     );

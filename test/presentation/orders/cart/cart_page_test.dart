@@ -2605,6 +2605,97 @@ void main() {
           expect(customerBlockedBanner, findsOneWidget);
         },
       );
+            testWidgets(
+          'List price strike through price visible, if final price is less than list price',
+          (tester) async {
+        final finalPrice = MaterialPrice(80);
+        final listPrice = MaterialPrice(100);
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
+                  lastPrice: listPrice,
+                  finalPrice: finalPrice,
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-material'),
+                  type: MaterialInfoType('material'),
+                ),
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final cartItem = find.byType(CartProductTile);
+        expect(cartItem, findsOneWidget);
+        final cartItemCutOffListPriceFinder = find.byKey(
+          WidgetKeys.cartItemCutOffListPrice,
+        );
+        final listPriceFinder = find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text
+                  .toPlainText()
+                  .contains(listPrice.getOrCrash().toString()),
+        );
+        expect(
+          find.descendant(
+            of: cartItemCutOffListPriceFinder,
+            matching: listPriceFinder,
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'List price strike through price not visible, if final price is greater than and equal to list price',
+          (tester) async {
+        final finalPrice = MaterialPrice(200);
+        final listPrice = MaterialPrice(100);
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
+                  lastPrice: listPrice,
+                  finalPrice: finalPrice,
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-material'),
+                  type: MaterialInfoType('material'),
+                ),
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final cartItem = find.byType(CartProductTile);
+        expect(cartItem, findsOneWidget);
+        final cartItemCutOffListPriceFinder = find.byKey(
+          WidgetKeys.cartItemCutOffListPrice,
+        );
+        final listPriceFinder = find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text
+                  .toPlainText()
+                  .contains(listPrice.getOrCrash().toString()),
+        );
+        expect(
+          find.descendant(
+            of: cartItemCutOffListPriceFinder,
+            matching: listPriceFinder,
+          ),
+          findsNothing,
+        );
+      });
     },
   );
 }
