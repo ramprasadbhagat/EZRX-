@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
@@ -72,6 +73,7 @@ class ReturnRequestAttachmentBloc
                     await returnRequestRepository.uploadFiles(
                   assignmentNumber: e.assignmentNumber,
                   files: files,
+                  salesOrg: e.salesOrg,
                 );
                 uploadFilesFailureOrSuccess.fold(
                   (failure) => emit(

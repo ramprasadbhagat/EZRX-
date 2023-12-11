@@ -386,6 +386,7 @@ void main() {
           final result = await repository.uploadFiles(
             assignmentNumber: 'fake-assignment_number',
             files: [],
+            salesOrg: fakeMYSalesOrg,
           );
           expect(result.isRight(), true);
         },
@@ -401,6 +402,7 @@ void main() {
           final result = await repository.uploadFiles(
             assignmentNumber: 'fake-assignment_number',
             files: [],
+            salesOrg: fakeMYSalesOrg,
           );
           expect(result.isLeft(), true);
         },
@@ -413,6 +415,7 @@ void main() {
           final result = await repository.uploadFiles(
             assignmentNumber: 'fake-assignment_number',
             files: List.generate(11, (index) => fakeFile),
+            salesOrg: fakeMYSalesOrg,
           );
           expect(result.isLeft(), true);
         },
@@ -425,6 +428,7 @@ void main() {
           final result = await repository.uploadFiles(
             assignmentNumber: 'fake-assignment_number',
             files: [fakeBigFile],
+            salesOrg: fakeMYSalesOrg,
           );
           expect(result.isLeft(), true);
         },
@@ -438,6 +442,7 @@ void main() {
             () => remoteDataSourceMock.uploadFile(
               folder: 'fake-folder',
               file: fakeFile,
+              salesOrg: fakeMYSalesOrg.getOrCrash(),
             ),
           ).thenAnswer(
             (_) async => ReturnRequestAttachment.empty(),
@@ -445,6 +450,7 @@ void main() {
           final result = await repository.uploadFiles(
             assignmentNumber: 'fake-folder',
             files: [fakeFile],
+            salesOrg: fakeMYSalesOrg,
           );
           expect(result.isRight(), true);
         },
@@ -458,6 +464,7 @@ void main() {
             () => remoteDataSourceMock.uploadFile(
               folder: 'fake-folder',
               file: fakeFile,
+              salesOrg: fakeMYSalesOrg.getOrCrash(),
             ),
           ).thenThrow(
             (_) => errorMock,
@@ -465,6 +472,7 @@ void main() {
           final result = await repository.uploadFiles(
             assignmentNumber: 'fake-folder',
             files: [fakeFile],
+            salesOrg: fakeMYSalesOrg,
           );
           expect(result.isLeft(), true);
         },

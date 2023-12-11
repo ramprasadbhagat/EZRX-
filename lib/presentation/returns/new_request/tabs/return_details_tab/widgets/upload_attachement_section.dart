@@ -172,6 +172,7 @@ class _AttachmentUploadOptionPickerState
             returnUuid: uuid,
             assignmentNumber: assignmentNumber,
             uploadOptionType: uploadOptionType,
+            salesOrg: context.read<EligibilityBloc>().state.salesOrg,
           ),
         );
     context.router.pop();

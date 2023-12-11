@@ -20,7 +20,7 @@ mixin _$ReturnRequestAttachmentEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)
         uploadFile,
     required TResult Function(ReturnRequestAttachment file) deleteFile,
     required TResult Function(ReturnRequestAttachment file) downloadFile,
@@ -30,7 +30,7 @@ mixin _$ReturnRequestAttachmentEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)?
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)?
         uploadFile,
     TResult? Function(ReturnRequestAttachment file)? deleteFile,
     TResult? Function(ReturnRequestAttachment file)? downloadFile,
@@ -40,7 +40,7 @@ mixin _$ReturnRequestAttachmentEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)?
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)?
         uploadFile,
     TResult Function(ReturnRequestAttachment file)? deleteFile,
     TResult Function(ReturnRequestAttachment file)? downloadFile,
@@ -135,7 +135,7 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)
         uploadFile,
     required TResult Function(ReturnRequestAttachment file) deleteFile,
     required TResult Function(ReturnRequestAttachment file) downloadFile,
@@ -148,7 +148,7 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)?
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)?
         uploadFile,
     TResult? Function(ReturnRequestAttachment file)? deleteFile,
     TResult? Function(ReturnRequestAttachment file)? downloadFile,
@@ -161,7 +161,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)?
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)?
         uploadFile,
     TResult Function(ReturnRequestAttachment file)? deleteFile,
     TResult Function(ReturnRequestAttachment file)? downloadFile,
@@ -224,7 +224,8 @@ abstract class _$$_UpLoadFileCopyWith<$Res> {
   $Res call(
       {String assignmentNumber,
       String returnUuid,
-      UploadOptionType uploadOptionType});
+      UploadOptionType uploadOptionType,
+      SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -241,6 +242,7 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
     Object? assignmentNumber = null,
     Object? returnUuid = null,
     Object? uploadOptionType = null,
+    Object? salesOrg = null,
   }) {
     return _then(_$_UpLoadFile(
       assignmentNumber: null == assignmentNumber
@@ -255,6 +257,10 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
           ? _value.uploadOptionType
           : uploadOptionType // ignore: cast_nullable_to_non_nullable
               as UploadOptionType,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
     ));
   }
 }
@@ -265,7 +271,8 @@ class _$_UpLoadFile implements _UpLoadFile {
   const _$_UpLoadFile(
       {required this.assignmentNumber,
       required this.returnUuid,
-      required this.uploadOptionType});
+      required this.uploadOptionType,
+      required this.salesOrg});
 
   @override
   final String assignmentNumber;
@@ -273,10 +280,12 @@ class _$_UpLoadFile implements _UpLoadFile {
   final String returnUuid;
   @override
   final UploadOptionType uploadOptionType;
+  @override
+  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'ReturnRequestAttachmentEvent.uploadFile(assignmentNumber: $assignmentNumber, returnUuid: $returnUuid, uploadOptionType: $uploadOptionType)';
+    return 'ReturnRequestAttachmentEvent.uploadFile(assignmentNumber: $assignmentNumber, returnUuid: $returnUuid, uploadOptionType: $uploadOptionType, salesOrg: $salesOrg)';
   }
 
   @override
@@ -289,12 +298,14 @@ class _$_UpLoadFile implements _UpLoadFile {
             (identical(other.returnUuid, returnUuid) ||
                 other.returnUuid == returnUuid) &&
             (identical(other.uploadOptionType, uploadOptionType) ||
-                other.uploadOptionType == uploadOptionType));
+                other.uploadOptionType == uploadOptionType) &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, assignmentNumber, returnUuid, uploadOptionType);
+  int get hashCode => Object.hash(
+      runtimeType, assignmentNumber, returnUuid, uploadOptionType, salesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -307,12 +318,12 @@ class _$_UpLoadFile implements _UpLoadFile {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)
         uploadFile,
     required TResult Function(ReturnRequestAttachment file) deleteFile,
     required TResult Function(ReturnRequestAttachment file) downloadFile,
   }) {
-    return uploadFile(assignmentNumber, returnUuid, uploadOptionType);
+    return uploadFile(assignmentNumber, returnUuid, uploadOptionType, salesOrg);
   }
 
   @override
@@ -320,12 +331,13 @@ class _$_UpLoadFile implements _UpLoadFile {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)?
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)?
         uploadFile,
     TResult? Function(ReturnRequestAttachment file)? deleteFile,
     TResult? Function(ReturnRequestAttachment file)? downloadFile,
   }) {
-    return uploadFile?.call(assignmentNumber, returnUuid, uploadOptionType);
+    return uploadFile?.call(
+        assignmentNumber, returnUuid, uploadOptionType, salesOrg);
   }
 
   @override
@@ -333,14 +345,15 @@ class _$_UpLoadFile implements _UpLoadFile {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)?
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)?
         uploadFile,
     TResult Function(ReturnRequestAttachment file)? deleteFile,
     TResult Function(ReturnRequestAttachment file)? downloadFile,
     required TResult orElse(),
   }) {
     if (uploadFile != null) {
-      return uploadFile(assignmentNumber, returnUuid, uploadOptionType);
+      return uploadFile(
+          assignmentNumber, returnUuid, uploadOptionType, salesOrg);
     }
     return orElse();
   }
@@ -387,11 +400,13 @@ abstract class _UpLoadFile implements ReturnRequestAttachmentEvent {
   const factory _UpLoadFile(
       {required final String assignmentNumber,
       required final String returnUuid,
-      required final UploadOptionType uploadOptionType}) = _$_UpLoadFile;
+      required final UploadOptionType uploadOptionType,
+      required final SalesOrg salesOrg}) = _$_UpLoadFile;
 
   String get assignmentNumber;
   String get returnUuid;
   UploadOptionType get uploadOptionType;
+  SalesOrg get salesOrg;
   @JsonKey(ignore: true)
   _$$_UpLoadFileCopyWith<_$_UpLoadFile> get copyWith =>
       throw _privateConstructorUsedError;
@@ -473,7 +488,7 @@ class _$_DeleteFile implements _DeleteFile {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)
         uploadFile,
     required TResult Function(ReturnRequestAttachment file) deleteFile,
     required TResult Function(ReturnRequestAttachment file) downloadFile,
@@ -486,7 +501,7 @@ class _$_DeleteFile implements _DeleteFile {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)?
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)?
         uploadFile,
     TResult? Function(ReturnRequestAttachment file)? deleteFile,
     TResult? Function(ReturnRequestAttachment file)? downloadFile,
@@ -499,7 +514,7 @@ class _$_DeleteFile implements _DeleteFile {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)?
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)?
         uploadFile,
     TResult Function(ReturnRequestAttachment file)? deleteFile,
     TResult Function(ReturnRequestAttachment file)? downloadFile,
@@ -635,7 +650,7 @@ class _$_DownloadFile implements _DownloadFile {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)
         uploadFile,
     required TResult Function(ReturnRequestAttachment file) deleteFile,
     required TResult Function(ReturnRequestAttachment file) downloadFile,
@@ -648,7 +663,7 @@ class _$_DownloadFile implements _DownloadFile {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)?
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)?
         uploadFile,
     TResult? Function(ReturnRequestAttachment file)? deleteFile,
     TResult? Function(ReturnRequestAttachment file)? downloadFile,
@@ -661,7 +676,7 @@ class _$_DownloadFile implements _DownloadFile {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String assignmentNumber, String returnUuid,
-            UploadOptionType uploadOptionType)?
+            UploadOptionType uploadOptionType, SalesOrg salesOrg)?
         uploadFile,
     TResult Function(ReturnRequestAttachment file)? deleteFile,
     TResult Function(ReturnRequestAttachment file)? downloadFile,

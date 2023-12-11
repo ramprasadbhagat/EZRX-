@@ -14,6 +14,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../../common_mock_data/sales_organsiation_mock.dart';
+
 class ReturnRequestRepositoryMock extends Mock
     implements ReturnRequestRepository {}
 
@@ -65,10 +67,11 @@ void main() {
           returnRequestRepository: returnRequestRepository,
         ),
         act: (bloc) => bloc.add(
-          const ReturnRequestAttachmentEvent.uploadFile(
+          ReturnRequestAttachmentEvent.uploadFile(
             assignmentNumber: fakeAssignmentNumber,
             returnUuid: fakeReturnUUID,
             uploadOptionType: fakeUploadOptionType,
+            salesOrg: fakeMYSalesOrg,
           ),
         ),
         setUp: () {
@@ -90,6 +93,7 @@ void main() {
             () => returnRequestRepository.uploadFiles(
               assignmentNumber: fakeAssignmentNumber,
               files: [fakePlatformFile],
+              salesOrg: fakeMYSalesOrg,
             ),
           ).thenAnswer(
             (invocation) async => Right(fakeListFile),
@@ -114,10 +118,11 @@ void main() {
           returnRequestRepository: returnRequestRepository,
         ),
         act: (bloc) => bloc.add(
-          const ReturnRequestAttachmentEvent.uploadFile(
+          ReturnRequestAttachmentEvent.uploadFile(
             assignmentNumber: fakeAssignmentNumber,
             returnUuid: fakeReturnUUID,
             uploadOptionType: fakeUploadOptionType,
+            salesOrg: fakeMYSalesOrg,
           ),
         ),
         setUp: () {
@@ -148,10 +153,11 @@ void main() {
           returnRequestRepository: returnRequestRepository,
         ),
         act: (bloc) => bloc.add(
-          const ReturnRequestAttachmentEvent.uploadFile(
+          ReturnRequestAttachmentEvent.uploadFile(
             assignmentNumber: fakeAssignmentNumber,
             returnUuid: fakeReturnUUID,
             uploadOptionType: fakeUploadOptionType,
+            salesOrg: fakeMYSalesOrg,
           ),
         ),
         setUp: () {
@@ -173,6 +179,7 @@ void main() {
             () => returnRequestRepository.uploadFiles(
               assignmentNumber: fakeAssignmentNumber,
               files: [fakePlatformFile],
+              salesOrg: fakeMYSalesOrg,
             ),
           ).thenAnswer(
             (invocation) async => const Left(fakeApiFailure),
@@ -197,10 +204,11 @@ void main() {
           returnRequestRepository: returnRequestRepository,
         ),
         act: (bloc) => bloc.add(
-          const ReturnRequestAttachmentEvent.uploadFile(
+          ReturnRequestAttachmentEvent.uploadFile(
             assignmentNumber: fakeAssignmentNumber,
             returnUuid: fakeReturnUUID,
             uploadOptionType: fakeUploadOptionType,
+            salesOrg: fakeMYSalesOrg,
           ),
         ),
         setUp: () {
@@ -239,10 +247,11 @@ void main() {
           returnRequestRepository: returnRequestRepository,
         ),
         act: (bloc) => bloc.add(
-          const ReturnRequestAttachmentEvent.uploadFile(
+          ReturnRequestAttachmentEvent.uploadFile(
             assignmentNumber: fakeAssignmentNumber,
             returnUuid: fakeReturnUUID,
             uploadOptionType: fakeUploadOptionType,
+            salesOrg: fakeMYSalesOrg,
           ),
         ),
         setUp: () {

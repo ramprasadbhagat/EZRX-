@@ -56,6 +56,7 @@ class ReturnRequestRemoteDataSource {
   Future<ReturnRequestAttachment> uploadFile({
     required String folder,
     required PlatformFile file,
+    required String salesOrg,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = query.addFileRequest();
@@ -91,8 +92,9 @@ class ReturnRequestRemoteDataSource {
       };
       final response = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}ereturn',
+        url: '${config.urlConstants}upload-ereturn',
         data: FormData.fromMap(data),
+        salesOrg: salesOrg,
       );
 
       _exceptionChecker(response: response, property: 'addRequestFileUpload');

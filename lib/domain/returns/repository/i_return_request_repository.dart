@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
@@ -26,6 +27,7 @@ abstract class IReturnRequestRepository {
   Future<Either<ApiFailure, List<ReturnRequestAttachment>>> uploadFiles({
     required String assignmentNumber,
     required List<PlatformFile> files,
+    required SalesOrg salesOrg,
   });
 
   Future<Either<ApiFailure, bool>> deleteFile({
