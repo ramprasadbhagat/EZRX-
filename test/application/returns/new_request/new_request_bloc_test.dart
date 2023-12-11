@@ -99,13 +99,8 @@ void main() {
                 fakeReturnItemDetail.returnQuantity.getIntValue,
           );
           expect(
-            bloc.state.returnSubtotalWithTax(fakeSalesOrganisationConfigs),
-            bloc.state.returnItemTotal(fakeReturnItemDetail.assignmentNumber) +
-                bloc.state.returnItemTotal(
-                      fakeReturnItemDetail.assignmentNumber,
-                    ) *
-                    fakeSalesOrganisationConfigs.vatValue /
-                    100,
+            bloc.state.returnTotal,
+            bloc.state.returnItemTotal(fakeReturnItemDetail.assignmentNumber),
           );
         },
       );

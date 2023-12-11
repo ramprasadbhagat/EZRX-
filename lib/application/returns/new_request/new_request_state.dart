@@ -115,12 +115,6 @@ class NewRequestState with _$NewRequestState {
         (sum, item) => sum + item.returnValue,
       );
 
-  double _returnTax(SalesOrganisationConfigs config) =>
-      returnTotal * config.vatValue / 100;
-
-  double returnSubtotalWithTax(SalesOrganisationConfigs config) =>
-      returnTotal + _returnTax(config);
-
   Map<String, dynamic> mixpanelTrackingInfo({
     required List<Usage> reasonList,
   }) =>

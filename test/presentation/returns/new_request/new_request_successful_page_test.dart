@@ -460,5 +460,42 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byKey(WidgetKeys.returnBonusItemSection), findsNothing);
     });
+
+    testWidgets(' => check subtotal with tax and grand total',
+        (WidgetTester tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTHSalesOrgConfigTaxBreakdownEnabled,
+        ),
+      );
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [
+            fakeReturnMaterial,
+          ],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails,
+                fakeReturnBonusItemDetails
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final subtotal = find.text(
+        'THB ${(fakeReturnItemDetails.returnValue + fakeReturnBonusItemDetails.returnValue).toStringAsFixed(2)}',
+        findRichText: true,
+      );
+      expect(subtotal, findsWidgets);
+      final grandTotal = find.text(
+        'THB ${(fakeReturnItemDetails.returnValue + fakeReturnBonusItemDetails.returnValue).toStringAsFixed(2)}',
+        findRichText: true,
+      );
+      expect(grandTotal, findsWidgets);
+    });
   });
 }
