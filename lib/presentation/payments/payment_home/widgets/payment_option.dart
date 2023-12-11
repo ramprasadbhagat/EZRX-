@@ -38,7 +38,7 @@ class _PaymentOption extends StatelessWidget {
     return SizedBox(
       width: eligibilityState.salesOrg.isPaymentClaimEnabled ||
               !eligibilityState.isSOAApplicable
-          ? width * 0.46
+          ? width * 0.45
           : width * 0.3,
       child: GestureDetector(
         key: paymentOptionData.key,
