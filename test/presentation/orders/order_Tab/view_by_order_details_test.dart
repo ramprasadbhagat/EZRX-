@@ -1638,5 +1638,39 @@ void main() {
         findsNothing,
       );
     });
+
+    testWidgets('Find Pending Release - On BackOrder Status Label',
+        (tester) async {
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryItem.copyWith(
+                sAPStatus: OrderStepValue('Pending release - on backorder'),
+                productType: MaterialInfoType('material'),
+              )
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final viewByOrderDetailsList =
+          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final orderItemsList = find.byKey(
+        WidgetKeys.viewByOrderDetailItemsSection,
+      );
+
+      await tester.dragUntilVisible(
+        orderItemsList,
+        viewByOrderDetailsList,
+        const Offset(0.0, -200.0),
+      );
+
+      await tester.pumpAndSettle();
+      final orderCreatedText = find.text('Pending release - on backorder');
+      expect(orderCreatedText, findsOneWidget);
+    });
   });
 }

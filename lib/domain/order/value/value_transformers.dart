@@ -190,3 +190,14 @@ List<OrderHistoryStep> getOrderHistorySteps({
 
   return result.reversed.toList();
 }
+
+String getOrderSAPStatus(String status) {
+  switch (status) {
+    case 'Order Creating':
+      return 'Order Created';
+    case '':
+      return '-';
+    default:
+      return status;
+  }
+}

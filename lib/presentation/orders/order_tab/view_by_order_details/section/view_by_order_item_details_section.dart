@@ -121,7 +121,7 @@ class OrderItemDetailsSection extends StatelessWidget {
                                         ? null
                                         : StatusLabel(
                                             status: StatusType(
-                                              e.sAPStatus.displayOrderStatus,
+                                              e.sAPStatus.displaySAPOrderStatus,
                                             ),
                                           ),
                                     quantity: '',

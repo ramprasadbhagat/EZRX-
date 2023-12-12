@@ -873,6 +873,9 @@ class OrderStepValue extends ValueObject<String> {
 
   String get displayOrderStatus => getOrderStatus(value.getOrElse(() => ''));
 
+  String get displaySAPOrderStatus =>
+      getOrderSAPStatus(value.getOrElse(() => ''));
+
   bool get fetchZyllemStatusesNeeded =>
       checkIsEligibleForFetchZyllemStatues(value.getOrElse(() => ''));
 
