@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
@@ -37,10 +38,6 @@ void main() {
   final emptySalesOrganisationConfigs = SalesOrganisationConfigs.empty();
   const fakeQuantity = 7;
   const fakeDiscountedMaterialCount = 10;
-  final fakeAddedBonusList = [
-    MaterialItemBonus.empty(),
-    MaterialItemBonus.empty(),
-  ];
   final emptyStockInfo = StockInfo.empty();
   final emptyTenderContract = TenderContract.empty();
   final emptyPriceAggregate = PriceAggregate.empty();
@@ -75,7 +72,6 @@ void main() {
         salesOrgConfig: emptySalesOrganisationConfigs,
         quantity: fakeQuantity,
         discountedMaterialCount: fakeDiscountedMaterialCount,
-        addedBonusList: fakeAddedBonusList,
         stockInfo: emptyStockInfo,
         tenderContract: emptyTenderContract,
         comboDeal: emptyComboDeal,
@@ -93,7 +89,6 @@ void main() {
         priceAggregate.discountedMaterialCount,
         fakeDiscountedMaterialCount,
       );
-      expect(priceAggregate.addedBonusList, fakeAddedBonusList);
       expect(priceAggregate.stockInfo, emptyStockInfo);
       expect(priceAggregate.tenderContract, emptyTenderContract);
     });
@@ -106,7 +101,6 @@ void main() {
       expect(priceAggregate.salesOrgConfig, emptySalesOrganisationConfigs);
       expect(priceAggregate.quantity, 1);
       expect(priceAggregate.discountedMaterialCount, 0);
-      expect(priceAggregate.addedBonusList, []);
       expect(priceAggregate.stockInfo, emptyStockInfo);
       expect(priceAggregate.tenderContract, emptyTenderContract);
     });
@@ -826,12 +820,6 @@ void main() {
       'refreshAddedBonus from PriceAggregate for unEqual length',
       () {
         var customPriceAggregate = emptyPriceAggregate.copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              additionalBonusFlag: false,
-              bonusOverrideFlag: true,
-            ),
-          ],
           quantity: 10,
           price: emptyPrice.copyWith(
             bonuses: [
@@ -869,12 +857,6 @@ void main() {
 
         //for 914
         customPriceAggregate = emptyPriceAggregate.copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              additionalBonusFlag: false,
-              bonusOverrideFlag: true,
-            ),
-          ],
           quantity: 10,
           price: emptyPrice.copyWith(
             bonuses: [
@@ -912,12 +894,6 @@ void main() {
 
         //for 913
         customPriceAggregate = emptyPriceAggregate.copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              additionalBonusFlag: false,
-              bonusOverrideFlag: true,
-            ),
-          ],
           quantity: 10,
           price: emptyPrice.copyWith(
             bonuses: [
@@ -961,12 +937,6 @@ void main() {
 
         //for 911
         customPriceAggregate = emptyPriceAggregate.copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              additionalBonusFlag: false,
-              bonusOverrideFlag: true,
-            ),
-          ],
           quantity: 10,
           price: emptyPrice.copyWith(
             bonuses: [
@@ -1006,12 +976,6 @@ void main() {
 
         //for else
         final customPriceAggregate2 = emptyPriceAggregate.copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              additionalBonusFlag: false,
-              bonusOverrideFlag: true,
-            ),
-          ],
           quantity: 10,
           price: emptyPrice.copyWith(
             bonuses: [
@@ -1188,23 +1152,6 @@ void main() {
           customPriceAggregate.hasClientPrincipal,
           true,
         );
-      },
-    );
-
-    test(
-      'getAddedBonusList from PriceAggregate',
-      () {
-        final customPriceAggregate = emptyPriceAggregate.copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(additionalBonusFlag: true),
-            MaterialItemBonus.empty().copyWith(additionalBonusFlag: false),
-            MaterialItemBonus.empty().copyWith(additionalBonusFlag: true),
-          ],
-        );
-        final expectedList = customPriceAggregate.getAddedBonusList;
-        expect(expectedList[0].additionalBonusFlag, false);
-        expect(expectedList[1].additionalBonusFlag, true);
-        expect(expectedList[2].additionalBonusFlag, true);
       },
     );
 
@@ -2029,13 +1976,11 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           quantity: 3,
-          price: bonusPrice,
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              qty: 2,
-              materialInfo: MaterialInfo.empty()
-                  .copyWith(materialNumber: MaterialNumber('fake-number')),
-              bonusOverrideFlag: true,
+          price: bonusPrice.copyWith(isPriceOverride: true),
+          bonusSampleItems: [
+            BonusSampleItem.empty().copyWith(
+              qty: MaterialQty(2),
+              materialNumber: MaterialNumber('fake-number'),
             )
           ],
           salesOrgConfig: SalesOrganisationConfigs.empty()
@@ -2067,14 +2012,12 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           quantity: 3,
-          price: Price.empty().copyWith(finalPrice: MaterialPrice(10)),
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              qty: 2,
-              materialInfo: MaterialInfo.empty()
-                  .copyWith(materialNumber: MaterialNumber('fake-number')),
-              bonusOverrideFlag: true,
-              additionalBonusFlag: true,
+          price: Price.empty()
+              .copyWith(finalPrice: MaterialPrice(10), isPriceOverride: true),
+          bonusSampleItems: [
+            BonusSampleItem.empty().copyWith(
+              qty: MaterialQty(2),
+              materialNumber: MaterialNumber('fake-number'),
             )
           ],
           salesOrgConfig: SalesOrganisationConfigs.empty()

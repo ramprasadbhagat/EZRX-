@@ -256,6 +256,8 @@ bool isMaterial(String type) => type.toLowerCase() == 'material';
 
 bool isBonus(String type) => type.toLowerCase() == 'bonus';
 
+bool isDealsBonus(String type) => type == 'Deals';
+
 bool isCombo(String type) => type == 'combo';
 
 bool notZero(int number) => number != 0;

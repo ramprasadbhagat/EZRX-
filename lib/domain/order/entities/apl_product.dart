@@ -1,5 +1,5 @@
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'apl_product.freezed.dart';
@@ -40,8 +40,8 @@ class AplProduct with _$AplProduct {
         materialInfo: cartItemDetails.materialInfo.copyWith(tax: tax),
       );
 
-  MaterialItemBonus toMaterialItemBonus(MaterialItemBonus cartItemBonus) =>
+  BonusSampleItem toMaterialItemBonus(BonusSampleItem cartItemBonus) =>
       cartItemBonus.copyWith(
-        qty: productQty.intValue,
+        qty: productQty,
       );
 }

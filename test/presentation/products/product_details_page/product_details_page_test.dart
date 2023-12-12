@@ -933,8 +933,8 @@ void main() {
                   isSuspended: false,
                   isFOCMaterial: true,
                 ),
+                quantity: 1,
               ),
-              quantity: 1,
             ),
           ),
         );

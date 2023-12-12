@@ -43,8 +43,8 @@ class _CounterOfferButtons extends StatelessWidget {
                           cartItem.materialInfo.counterOfferDetails) {
                     context.read<CartBloc>().add(
                           CartEvent.upsertCart(
-                            priceAggregate: state.item,
-                            quantity: state.item.quantity,
+                            priceAggregate: state.item
+                                .copyWith(quantity: state.item.quantity),
                           ),
                         );
                   }

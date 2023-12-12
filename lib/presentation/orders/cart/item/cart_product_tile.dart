@@ -66,8 +66,7 @@ class CartProductTile extends StatelessWidget {
             onPressed: (v) {
               context.read<CartBloc>().add(
                     CartEvent.upsertCart(
-                      priceAggregate: cartItem,
-                      quantity: 0,
+                      priceAggregate: cartItem.copyWith(quantity: 0),
                     ),
                   );
               context.read<PriceOverrideBloc>().add(
@@ -359,8 +358,9 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
     _timer?.cancel();
     context.read<CartBloc>().add(
           CartEvent.upsertCart(
-            priceAggregate: widget.cartItem,
-            quantity: int.tryParse(_controller.text) ?? 1,
+            priceAggregate: widget.cartItem.copyWith(
+              quantity: int.tryParse(_controller.text) ?? 1,
+            ),
           ),
         );
   }
@@ -392,8 +392,9 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
       ),
       () => context.read<CartBloc>().add(
             CartEvent.upsertCart(
-              priceAggregate: widget.cartItem,
-              quantity: quantity,
+              priceAggregate: widget.cartItem.copyWith(
+                quantity: quantity,
+              ),
             ),
           ),
     );
@@ -418,16 +419,18 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
               minusPressed: (k) {
                 context.read<CartBloc>().add(
                       CartEvent.upsertCart(
-                        priceAggregate: widget.cartItem,
-                        quantity: k,
+                        priceAggregate: widget.cartItem.copyWith(
+                          quantity: k,
+                        ),
                       ),
                     );
               },
               addPressed: (k) {
                 context.read<CartBloc>().add(
                       CartEvent.upsertCart(
-                        priceAggregate: widget.cartItem,
-                        quantity: k,
+                        priceAggregate: widget.cartItem.copyWith(
+                          quantity: k,
+                        ),
                       ),
                     );
               },

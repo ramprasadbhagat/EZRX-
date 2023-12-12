@@ -24,8 +24,6 @@ import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.d
 
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-
 class CartProductTileBonus extends StatelessWidget {
   final PriceAggregate cartProduct;
   final BonusSampleItem bonusItem;
@@ -56,6 +54,7 @@ class CartProductTileBonus extends StatelessWidget {
                     parentID: cartProduct.materialInfo.materialNumber
                         .getOrDefaultValue(''),
                     quantity: MaterialQty(0),
+                    type: bonusItem.type,
                   ),
                   counterOfferDetails: RequestCounterOfferDetails.empty(),
                   bonusItemId: bonusItem.itemId,
@@ -239,40 +238,28 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
     }
   }
 
-  void _upsertCart(BuildContext context, int qty) {
-    if (MaterialQty(qty).isBonusMaxQuantityExceed) {
-      CustomSnackBar(
-        icon: const Icon(
-          Icons.info,
-          color: ZPColors.error,
-        ),
-        backgroundColor: ZPColors.errorSnackBarColor,
-        messageText:
-            context.tr('In cart quantity should not be greater than 999'),
-      ).show(context);
-
-      return;
-    }
-    context.read<CartBloc>().add(
-          CartEvent.addBonusToCartItem(
-            bonusMaterial: MaterialInfo.empty().copyWith(
-              materialNumber: widget.bonusItem.materialNumber,
-              parentID: widget.cartProduct.materialInfo.materialNumber
-                  .getOrDefaultValue(''),
-              quantity: MaterialQty(qty),
+  void _upsertCart(BuildContext context, int qty) =>
+      context.read<CartBloc>().add(
+            CartEvent.addBonusToCartItem(
+              bonusMaterial: MaterialInfo.empty().copyWith(
+                materialNumber: widget.bonusItem.materialNumber,
+                parentID: widget.cartProduct.materialInfo.materialNumber
+                    .getOrDefaultValue(''),
+                quantity: MaterialQty(qty),
+                type: widget.bonusItem.type,
+              ),
+              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              bonusItemId: widget.bonusItem.itemId,
             ),
-            counterOfferDetails: RequestCounterOfferDetails.empty(),
-            bonusItemId: widget.bonusItem.itemId,
-          ),
-        );
-  }
+          );
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: CartItemQuantityInput(
-        isEnabled: true,
+        isEnabled:
+            context.read<EligibilityBloc>().state.isBonusSampleItemVisible,
         quantityAddKey: WidgetKeys.cartItemAddKey,
         quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
         quantityTextKey: WidgetKeys.quantityInputTextKey,
@@ -282,7 +269,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
         minusPressed: (k) => _upsertCart(context, k),
         addPressed: (k) => _upsertCart(context, k),
         onSubmit: (value) => _upsertCart(context, value),
-        maximumQty: 999,
+        maximumQty: 99999,
       ),
     );
   }

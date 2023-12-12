@@ -45,11 +45,6 @@ class _CartProductMaterial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eligiblityState = context.read<EligibilityBloc>().state;
-
-    final isMYPnGSalesRep = eligiblityState.isMYExternalSalesRepUser &&
-        item.materialInfo.isPnGPrinciple;
-
     return BlocListener<CartBloc, CartState>(
       listenWhen: (previous, current) =>
           previous.cartProducts != current.cartProducts,
@@ -81,15 +76,6 @@ class _CartProductMaterial extends StatelessWidget {
           CartProductTile(
             cartItem: item,
           ),
-          if (item.displayOfferBonus || isMYPnGSalesRep)
-            ...item.addedBonusList
-                .map(
-                  (e) => CartProductOfferBonus(
-                    bonusItem: e,
-                    cartProduct: item,
-                  ),
-                )
-                .toList(),
           if (item.bonusSampleItems.isNotEmpty)
             ...item.bonusSampleItems
                 .map(

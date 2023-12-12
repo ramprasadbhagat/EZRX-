@@ -750,14 +750,14 @@ void upsertCart({
             price: price,
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,
+            quantity: stateCart.getQuantityOfProduct(
+                  productNumber:
+                      state.productDetailAggregate.materialInfo.materialNumber,
+                ) +
+                int.parse(
+                  quantityText,
+                ),
           ),
-          quantity: stateCart.getQuantityOfProduct(
-                productNumber:
-                    state.productDetailAggregate.materialInfo.materialNumber,
-              ) +
-              int.parse(
-                quantityText,
-              ),
         ),
       );
 }

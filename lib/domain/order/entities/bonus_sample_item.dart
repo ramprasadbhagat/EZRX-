@@ -16,6 +16,8 @@ class BonusSampleItem with _$BonusSampleItem {
     required StringValue itemId,
     required String materialDescription,
     required PrincipalData principalData,
+    required MaterialInfoType type,
+    required MaterialInStock inStock,
   }) = _BonusSampleItem;
 
   factory BonusSampleItem.empty() => BonusSampleItem(
@@ -24,5 +26,7 @@ class BonusSampleItem with _$BonusSampleItem {
         materialDescription: '',
         itemId: StringValue(''),
         principalData: PrincipalData.empty(),
+        type: MaterialInfoType(''),
+        inStock: MaterialInStock(''),
       );
 }

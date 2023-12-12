@@ -28,7 +28,6 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -760,11 +759,6 @@ void main() {
                   ),
                   type: MaterialInfoType.material(),
                 ),
-                addedBonusList: [
-                  MaterialItemBonus.empty().copyWith(
-                    materialInfo: fakeCartProduct.first.materialInfo,
-                  )
-                ],
                 bonusSampleItems: [
                   BonusSampleItem.empty()
                       .copyWith(materialNumber: MaterialNumber('12345'))
@@ -829,11 +823,6 @@ void main() {
                   ),
                   type: MaterialInfoType.bundle(),
                 ),
-                addedBonusList: [
-                  MaterialItemBonus.empty().copyWith(
-                    materialInfo: fakeCartProduct.first.materialInfo,
-                  )
-                ],
                 bundle: Bundle.empty().copyWith(
                   bundleCode: 'fake_bundle_code',
                   materials: [fakeCartProduct.first.materialInfo],

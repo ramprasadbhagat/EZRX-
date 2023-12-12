@@ -15,6 +15,7 @@ _$_BonusSampleItemDto _$$_BonusSampleItemDtoFromJson(
       materialDescription: json['materialDescription'] as String? ?? '',
       principalCode: json['principalCode'] as String? ?? '',
       itemId: json['itemId'] as String? ?? '',
+      type: json['type'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_BonusSampleItemDtoToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$_BonusSampleItemDtoToJson(
       'materialDescription': instance.materialDescription,
       'principalCode': instance.principalCode,
       'itemId': instance.itemId,
+      'type': instance.type,
     };

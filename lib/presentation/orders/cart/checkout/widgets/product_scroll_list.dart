@@ -68,14 +68,6 @@ class _CheckoutProductMaterialWithBonus extends StatelessWidget {
         CheckoutMaterialItem(
           cartItem: cartItem,
         ),
-        if (cartItem.addedBonusList.isNotEmpty)
-          ...cartItem.addedBonusList
-              .map(
-                (e) => CheckoutOfferBonusItem(
-                  bonusItem: e,
-                ),
-              )
-              .toList(),
         if (cartItem.bonusSampleItems.isNotEmpty)
           ...cartItem.bonusSampleItems
               .map(

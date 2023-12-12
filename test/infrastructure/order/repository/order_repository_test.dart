@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
@@ -24,7 +25,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/order_encryption.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
@@ -543,13 +543,11 @@ void main() {
         cartProducts: cartMaterials
             .map(
               (e) => e.copyWith(
-                addedBonusList: [
-                  MaterialItemBonus.empty().copyWith(
-                    materialInfo: e.materialInfo.copyWith(
-                      principalData: PrincipalData(
-                        principalName: PrincipalName('fake-principle-name'),
-                        principalCode: PrincipalCode('fake-principle-code'),
-                      ),
+                bonusSampleItems: [
+                  BonusSampleItem.empty().copyWith(
+                    principalData: PrincipalData(
+                      principalName: PrincipalName('fake-principle-name'),
+                      principalCode: PrincipalCode('fake-principle-code'),
                     ),
                   )
                 ],
@@ -798,13 +796,11 @@ void main() {
       final bonusCartMaterial = cartMaterials
           .map(
             (e) => e.copyWith(
-              addedBonusList: [
-                MaterialItemBonus.empty().copyWith(
-                  materialInfo: e.materialInfo.copyWith(
-                    principalData: PrincipalData(
-                      principalName: PrincipalName('fake-principle-name'),
-                      principalCode: PrincipalCode('fake-principle-code'),
-                    ),
+              bonusSampleItems: [
+                BonusSampleItem.empty().copyWith(
+                  principalData: PrincipalData(
+                    principalName: PrincipalName('fake-principle-name'),
+                    principalCode: PrincipalCode('fake-principle-code'),
                   ),
                 )
               ],

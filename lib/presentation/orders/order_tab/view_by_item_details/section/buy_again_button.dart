@@ -18,7 +18,9 @@ class _BuyAgainButton extends StatelessWidget {
             () {
               context.read<CartBloc>().add(
                     CartEvent.addHistoryItemsToCart(
-                      items: state.validOrderItems,
+                      items: state.availableProducts(
+                        context.read<MaterialPriceBloc>().state.materialPrice,
+                      ),
                       counterOfferDetails: RequestCounterOfferDetails.empty(),
                     ),
                   );

@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
@@ -41,6 +42,10 @@ class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class MaterialPriceBlocMock
+    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+    implements MaterialPriceBloc {}
+
 class ViewByOrderDetailsBlockMock
     extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
     implements ViewByOrderDetailsBloc {}
@@ -70,6 +75,7 @@ void main() {
   late ViewByOrder viewByOrder;
   late EligibilityBlocMock eligibilityBlocMock;
   late ViewByItemDetailsBloc mockViewByItemDetailsBloc;
+  late MaterialPriceBloc materialPriceBlocMock;
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
@@ -79,6 +85,7 @@ void main() {
     locator.registerLazySingleton(() => AutoRouterMock());
     autoRouterMock = locator<AutoRouterMock>();
     cartBlocMock = CartBlocMock();
+    materialPriceBlocMock = MaterialPriceBlocMock();
   });
 
   setUp(() {
@@ -106,6 +113,9 @@ void main() {
           customerGrp4: CustomerGrp4('VR'),
         ),
       ),
+    );
+    when(() => materialPriceBlocMock.state).thenReturn(
+      MaterialPriceState.initial(),
     );
   });
 
@@ -137,6 +147,9 @@ void main() {
         ),
         BlocProvider<ViewByItemDetailsBloc>(
           create: ((context) => mockViewByItemDetailsBloc),
+        ),
+        BlocProvider<MaterialPriceBloc>(
+          create: ((context) => materialPriceBlocMock),
         ),
       ],
       child: const Material(

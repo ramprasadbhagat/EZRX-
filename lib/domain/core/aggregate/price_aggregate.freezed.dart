@@ -24,9 +24,8 @@ mixin _$PriceAggregate {
       throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   int get discountedMaterialCount => throw _privateConstructorUsedError;
-  bool get exceedQuantity => throw _privateConstructorUsedError;
-  List<MaterialItemBonus> get addedBonusList =>
-      throw _privateConstructorUsedError;
+  bool get exceedQuantity =>
+      throw _privateConstructorUsedError; //required List<MaterialItemBonus> addedBonusList,
   StockInfo get stockInfo => throw _privateConstructorUsedError;
   TenderContract get tenderContract => throw _privateConstructorUsedError;
   ComboDeal get comboDeal => throw _privateConstructorUsedError;
@@ -58,7 +57,6 @@ abstract class $PriceAggregateCopyWith<$Res> {
       int quantity,
       int discountedMaterialCount,
       bool exceedQuantity,
-      List<MaterialItemBonus> addedBonusList,
       StockInfo stockInfo,
       TenderContract tenderContract,
       ComboDeal comboDeal,
@@ -99,7 +97,6 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
     Object? quantity = null,
     Object? discountedMaterialCount = null,
     Object? exceedQuantity = null,
-    Object? addedBonusList = null,
     Object? stockInfo = null,
     Object? tenderContract = null,
     Object? comboDeal = null,
@@ -142,10 +139,6 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
           ? _value.exceedQuantity
           : exceedQuantity // ignore: cast_nullable_to_non_nullable
               as bool,
-      addedBonusList: null == addedBonusList
-          ? _value.addedBonusList
-          : addedBonusList // ignore: cast_nullable_to_non_nullable
-              as List<MaterialItemBonus>,
       stockInfo: null == stockInfo
           ? _value.stockInfo
           : stockInfo // ignore: cast_nullable_to_non_nullable
@@ -264,7 +257,6 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
       int quantity,
       int discountedMaterialCount,
       bool exceedQuantity,
-      List<MaterialItemBonus> addedBonusList,
       StockInfo stockInfo,
       TenderContract tenderContract,
       ComboDeal comboDeal,
@@ -311,7 +303,6 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
     Object? quantity = null,
     Object? discountedMaterialCount = null,
     Object? exceedQuantity = null,
-    Object? addedBonusList = null,
     Object? stockInfo = null,
     Object? tenderContract = null,
     Object? comboDeal = null,
@@ -354,10 +345,6 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
           ? _value.exceedQuantity
           : exceedQuantity // ignore: cast_nullable_to_non_nullable
               as bool,
-      addedBonusList: null == addedBonusList
-          ? _value._addedBonusList
-          : addedBonusList // ignore: cast_nullable_to_non_nullable
-              as List<MaterialItemBonus>,
       stockInfo: null == stockInfo
           ? _value.stockInfo
           : stockInfo // ignore: cast_nullable_to_non_nullable
@@ -406,7 +393,6 @@ class _$_PriceAggregate extends _PriceAggregate {
       required this.quantity,
       this.discountedMaterialCount = 0,
       this.exceedQuantity = false,
-      required final List<MaterialItemBonus> addedBonusList,
       required this.stockInfo,
       required this.tenderContract,
       required this.comboDeal,
@@ -415,8 +401,7 @@ class _$_PriceAggregate extends _PriceAggregate {
       required final List<BonusSampleItem> bonusSampleItems,
       required final List<ComboMaterialItem> comboMaterials,
       required this.maximumQty})
-      : _addedBonusList = addedBonusList,
-        _stockInfoList = stockInfoList,
+      : _stockInfoList = stockInfoList,
         _bonusSampleItems = bonusSampleItems,
         _comboMaterials = comboMaterials,
         super._();
@@ -439,14 +424,7 @@ class _$_PriceAggregate extends _PriceAggregate {
   @override
   @JsonKey()
   final bool exceedQuantity;
-  final List<MaterialItemBonus> _addedBonusList;
-  @override
-  List<MaterialItemBonus> get addedBonusList {
-    if (_addedBonusList is EqualUnmodifiableListView) return _addedBonusList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_addedBonusList);
-  }
-
+//required List<MaterialItemBonus> addedBonusList,
   @override
   final StockInfo stockInfo;
   @override
@@ -487,7 +465,7 @@ class _$_PriceAggregate extends _PriceAggregate {
 
   @override
   String toString() {
-    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, banner: $banner, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, addedBonusList: $addedBonusList, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList, bonusSampleItems: $bonusSampleItems, comboMaterials: $comboMaterials, maximumQty: $maximumQty)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, banner: $banner, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList, bonusSampleItems: $bonusSampleItems, comboMaterials: $comboMaterials, maximumQty: $maximumQty)';
   }
 
   @override
@@ -509,8 +487,6 @@ class _$_PriceAggregate extends _PriceAggregate {
                 other.discountedMaterialCount == discountedMaterialCount) &&
             (identical(other.exceedQuantity, exceedQuantity) ||
                 other.exceedQuantity == exceedQuantity) &&
-            const DeepCollectionEquality()
-                .equals(other._addedBonusList, _addedBonusList) &&
             (identical(other.stockInfo, stockInfo) ||
                 other.stockInfo == stockInfo) &&
             (identical(other.tenderContract, tenderContract) ||
@@ -540,7 +516,6 @@ class _$_PriceAggregate extends _PriceAggregate {
       quantity,
       discountedMaterialCount,
       exceedQuantity,
-      const DeepCollectionEquality().hash(_addedBonusList),
       stockInfo,
       tenderContract,
       comboDeal,
@@ -567,7 +542,6 @@ abstract class _PriceAggregate extends PriceAggregate {
       required final int quantity,
       final int discountedMaterialCount,
       final bool exceedQuantity,
-      required final List<MaterialItemBonus> addedBonusList,
       required final StockInfo stockInfo,
       required final TenderContract tenderContract,
       required final ComboDeal comboDeal,
@@ -594,9 +568,7 @@ abstract class _PriceAggregate extends PriceAggregate {
   int get discountedMaterialCount;
   @override
   bool get exceedQuantity;
-  @override
-  List<MaterialItemBonus> get addedBonusList;
-  @override
+  @override //required List<MaterialItemBonus> addedBonusList,
   StockInfo get stockInfo;
   @override
   TenderContract get tenderContract;

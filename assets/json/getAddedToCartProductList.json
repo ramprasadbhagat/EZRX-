@@ -49,7 +49,17 @@
                     "principalCutoffStatus": false,
                     "warehouseStorageCondition": "AC",
                     "IsGimmick": false,
-                    "BonusMaterials": null
+                    "BonusMaterials": [
+                        {
+                            "principalCode": "0000101334",
+                            "principalName": "GLAXOSMITHKLINE CONSUMER",
+                            "materialNumber": "000000000021041790",
+                            "materialDescription": "190 BREATH RIGHT KIDS 1 2'S-6",
+                            "productCount": 2,
+                            "ItemId": "141638",
+                            "Type": "Deals"
+                        }
+                    ]
                 },
                 {
                     "ProductID": "000000000021041786",

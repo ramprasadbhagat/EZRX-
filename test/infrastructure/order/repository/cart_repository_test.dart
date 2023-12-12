@@ -11,9 +11,9 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
@@ -233,10 +233,10 @@ void main() {
           ),
         ],
       ),
-      addedBonusList: [
-        MaterialItemBonus.empty().copyWith(
-          additionalBonusFlag: true,
-        ),
+      bonusSampleItems: [
+        BonusSampleItem.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number'),
+        )
       ],
     );
     materials.replaceRange(0, 1, [material]);
@@ -253,8 +253,8 @@ void main() {
     if (result.isRight()) {
       result.fold((l) => {}, (r) {
         expect(
-          r.first.addedBonusList.length !=
-              fakeCartProducts.first.addedBonusList.length,
+          r.first.bonusSampleItems.length !=
+              fakeCartProducts.first.bonusSampleItems.length,
           true,
         );
       });
@@ -297,10 +297,10 @@ void main() {
           ),
         ],
       ),
-      addedBonusList: [
-        MaterialItemBonus.empty().copyWith(
-          additionalBonusFlag: true,
-        ),
+      bonusSampleItems: [
+        BonusSampleItem.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number'),
+        )
       ],
     );
     materials.replaceRange(0, 1, [material]);
@@ -317,8 +317,8 @@ void main() {
     if (result.isRight()) {
       result.fold((l) => {}, (r) {
         expect(
-          r.first.addedBonusList.length !=
-              fakeCartProducts.first.addedBonusList.length,
+          r.first.bonusSampleItems.length !=
+              fakeCartProducts.first.bonusSampleItems.length,
           true,
         );
       });
@@ -362,10 +362,10 @@ void main() {
           ),
         ],
       ),
-      addedBonusList: [
-        MaterialItemBonus.empty().copyWith(
-          additionalBonusFlag: true,
-        ),
+      bonusSampleItems: [
+        BonusSampleItem.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number'),
+        )
       ],
     );
     materials.replaceRange(0, 1, [material]);
@@ -379,7 +379,14 @@ void main() {
         enableBatchNumber: false,
       ),
     );
-    expect(result.isLeft(), true);
+    if (result.isRight()) {
+      result.fold((l) => {}, (r) {
+        expect(
+          r.first.bonusSampleItems.first.inStock == MaterialInStock(''),
+          true,
+        );
+      });
+    }
   });
 
   test('Test Update Material Deal Bonus - Failure', () async {
@@ -402,8 +409,8 @@ void main() {
     if (result.isRight()) {
       result.fold((l) => {}, (r) {
         expect(
-          r.first.addedBonusList.length !=
-              fakeCartProducts.first.addedBonusList.length,
+          r.first.bonusSampleItems.length !=
+              fakeCartProducts.first.bonusSampleItems.length,
           false,
         );
       });

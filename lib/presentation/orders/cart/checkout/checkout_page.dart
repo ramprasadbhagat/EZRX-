@@ -30,7 +30,6 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bundle_item/checkout_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_material_item/checkout_material_item.dart';
-import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_offer_bonus_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
 import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';

@@ -110,10 +110,7 @@ class CartRepository implements ICartRepository {
       final materialTemp = [...materials];
       for (var i = 0; i < materialTemp.length; i++) {
         final failureOrSuccess = await getStockInfoList(
-          items: materialTemp[i]
-              .getMaterialItemBonus
-              .map((bonus) => bonus.materialInfo)
-              .toList(),
+          items: materialTemp[i].bonusListToMaterialInfo,
           customerCodeInfo: customerCodeInfo,
           salesOrganisationConfigs: salesOrganisationConfigs,
           salesOrganisation: salesOrganisation,
@@ -121,29 +118,24 @@ class CartRepository implements ICartRepository {
         );
         final bonusStockInfoMap = failureOrSuccess.getOrElse(() => {});
         final dealBonusWithStockInfo =
-            materialTemp[i].getMaterialItemBonus.map((bonus) {
+            materialTemp[i].bonusSampleItems.map((bonus) {
           final stockInfoList = bonusStockInfoMap[bonus.materialNumber] ?? [];
           if (stockInfoList.isNotEmpty) {
             final stockInfo = stockInfoList.firstWhere(
-              (element) =>
-                  element.materialNumber == bonus.materialInfo.materialNumber,
+              (element) => element.materialNumber == bonus.materialNumber,
               orElse: () => StockInfo.empty(),
             );
 
             return bonus.copyWith(
-              inStock: stockInfo.inStock.getOrCrash(),
+              inStock: stockInfo.inStock,
             );
           }
 
           return bonus;
         }).toList();
-        final newMaterialBonus = [...materialTemp[i].addedBonusList]
-          ..removeWhere(
-            (bonus) => !bonus.additionalBonusFlag,
-          )
-          ..addAll(dealBonusWithStockInfo);
+
         materialTemp[i] =
-            materialTemp[i].copyWith(addedBonusList: newMaterialBonus);
+            materialTemp[i].copyWith(bonusSampleItems: dealBonusWithStockInfo);
       }
 
       return Right(materialTemp);
@@ -435,6 +427,55 @@ class CartRepository implements ICartRepository {
       return Right(updatedProductList);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>> upsertCartWithBonus({
+    required PriceAggregate product,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+    required RequestCounterOfferDetails counterOfferDetails,
+  }) async {
+    try {
+      final productList = <PriceAggregate>[];
+
+      final products = [
+        product.materialInfo.copyWith(
+          quantity: MaterialQty(product.quantity),
+        ),
+        ...product.dealBonusList,
+      ];
+
+      await Future.wait(
+        products.map((productData) async {
+          final cartProducts = await upsertCart(
+            materialInfo: productData,
+            salesOrganisation: salesOrganisation,
+            salesOrganisationConfig: salesOrganisationConfig,
+            customerCodeInfo: customerCodeInfo,
+            shipToInfo: shipToInfo,
+            language: language,
+            itemId: productData.sampleBonusItemId,
+            quantity: productData.quantity.intValue,
+            counterOfferDetails: productData.counterOfferDetails,
+          );
+
+          cartProducts.fold((l) => {}, (r) {
+            productList.clear();
+            productList.addAll(r);
+          });
+        }),
+      );
+
+      return Right(productList);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
     }
   }
 

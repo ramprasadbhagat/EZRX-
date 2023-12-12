@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dart';
@@ -268,12 +268,10 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [
               cartItem.copyWith(
-                addedBonusList: [
-                  MaterialItemBonus.empty().copyWith(
-                    materialInfo: MaterialInfo.empty().copyWith(
-                      materialNumber: MaterialNumber(materialNumber),
-                    ),
-                    qty: 1,
+                bonusSampleItems: [
+                  BonusSampleItem.empty().copyWith(
+                    materialNumber: MaterialNumber(materialNumber),
+                    qty: MaterialQty(1),
                   )
                 ],
               )
@@ -295,7 +293,7 @@ void main() {
         await tester.pump();
 
         final bonusSampleItem = find.byKey(
-          WidgetKeys.cartItemBonus(materialNumber, materialNumber),
+          WidgetKeys.cartItemBonusSample(materialNumber, materialNumber),
         );
         expect(bonusSampleItem, findsOneWidget);
         expect(
@@ -683,8 +681,9 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.upsertCart(
-              priceAggregate: cartItem,
-              quantity: 3,
+              priceAggregate: cartItem.copyWith(
+                quantity: 3,
+              ),
             ),
           ),
         ).called(1);
@@ -693,8 +692,9 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.upsertCart(
-              priceAggregate: cartItem,
-              quantity: 2,
+              priceAggregate: cartItem.copyWith(
+                quantity: 2,
+              ),
             ),
           ),
         ).called(1);
@@ -704,8 +704,9 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.upsertCart(
-              priceAggregate: cartItem,
-              quantity: 2,
+              priceAggregate: cartItem.copyWith(
+                quantity: 2,
+              ),
             ),
           ),
         ).called(1);
@@ -739,8 +740,9 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.upsertCart(
-              priceAggregate: cartItem,
-              quantity: 3,
+              priceAggregate: cartItem.copyWith(
+                quantity: 3,
+              ),
             ),
           ),
         ).called(1);
@@ -749,8 +751,9 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.upsertCart(
-              priceAggregate: cartItem,
-              quantity: 2,
+              priceAggregate: cartItem.copyWith(
+                quantity: 2,
+              ),
             ),
           ),
         ).called(1);

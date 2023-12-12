@@ -145,7 +145,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               );
               cartProductListTemp[i] = cartProductListTemp[i].copyWith(
                 price: priceAggregate.price,
-                addedBonusList: priceAggregate.addedBonusList,
                 bundle: priceAggregate.bundle,
                 salesOrgConfig: state.config,
               );
@@ -339,7 +338,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 RequestCounterOfferDetails.empty();
         if (index != -1) {
           final previousQuantity = state.cartProducts.elementAtOrNull(index);
-          if (previousQuantity?.quantity == e.quantity &&
+          if (previousQuantity?.quantity == e.priceAggregate.quantity &&
               !isCounterOfferRequested) {
             return;
           }
@@ -351,19 +350,17 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final failureOrSuccess = await repository.upsertCart(
+        final failureOrSuccess = await repository.upsertCartWithBonus(
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
           salesOrganisationConfig: state.config,
           shipToInfo: state.shipToInfo,
-          materialInfo: e.priceAggregate.materialInfo,
-          quantity: e.quantity,
+          product: e.priceAggregate,
           language: state.config.getConfigLanguageDefaultEnglish,
           counterOfferDetails:
               e.priceAggregate.materialInfo.counterOfferDetails.copyWith(
             counterOfferCurrency: state.config.currency,
           ),
-          itemId: '',
         );
 
         failureOrSuccess.fold(
@@ -517,7 +514,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
               return cartProduct.copyWith(
                 price: priceAggregate.price,
-                addedBonusList: priceAggregate.addedBonusList,
                 salesOrgConfig: state.config,
               );
             }).toList();
@@ -945,7 +941,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
       return cartProduct.copyWith(
         price: priceAggregate.price,
-        addedBonusList: priceAggregate.addedBonusList,
         bundle: cartProduct.bundle.copyWith(materials: bundleMaterial),
         salesOrgConfig: salesOrganisationConfigs,
         stockInfoList: priceAggregate.stockInfoList,

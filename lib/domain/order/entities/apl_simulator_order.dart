@@ -50,7 +50,7 @@ class AplSimulatorOrder with _$AplSimulatorOrder {
             newCartItems[item.parentItemNumber] ?? PriceAggregate.empty();
 
         final updatedCartItem = cartParentItem.copyWith(
-          addedBonusList: cartParentItem.addedBonusList
+          bonusSampleItems: cartParentItem.bonusSampleItems
               .map(
                 (e) => e.materialNumber == item.materialNumber
                     ? item.toMaterialItemBonus(e)

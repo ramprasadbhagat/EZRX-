@@ -39,7 +39,6 @@ class CartEvent with _$CartEvent {
 
   const factory CartEvent.upsertCart({
     required PriceAggregate priceAggregate,
-    required int quantity,
   }) = _UpsertCart;
 
   const factory CartEvent.addHistoryItemsToCart({

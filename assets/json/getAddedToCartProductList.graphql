@@ -53,6 +53,7 @@ query Cart($language: String) {
         materialNumber
         materialDescription
         productCount
+        Type
       }
     }
     MarketplaceItems {

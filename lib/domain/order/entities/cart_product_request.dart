@@ -55,7 +55,7 @@ class CartProductRequest with _$CartProductRequest {
         salesOrg: salesOrg,
         customerCode: customerCode,
         shipToId: shipToCustomerCode,
-        productNumber: materialInfo.materialNumber.getOrCrash(),
+        productNumber: materialInfo.materialNumber.getOrDefaultValue(''),
         quantity: quantity,
         language: language,
         parentID: materialInfo.parentID,
@@ -64,7 +64,7 @@ class CartProductRequest with _$CartProductRequest {
             counterOfferDetails.discountOverridePercentage.doubleValue,
         counterOfferCurrency: counterOfferDetails.counterOfferCurrency.code,
         comment: counterOfferDetails.comment.getOrDefaultValue(''),
-        type: materialInfo.type.getOrCrash(),
+        type: materialInfo.type.getOrDefaultValue(''),
         itemId: itemId,
       );
 

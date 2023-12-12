@@ -149,6 +149,8 @@ class MaterialInfoType extends ValueObject<String> {
 
   bool get typeBonus => isBonus(value.getOrElse(() => ''));
 
+  bool get typeDealBonus => isDealsBonus(value.getOrElse(() => ''));
+
   const MaterialInfoType._(this.value);
 }
 

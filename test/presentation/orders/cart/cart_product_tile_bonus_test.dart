@@ -1,6 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -310,6 +312,16 @@ void main() {
       });
 
       testWidgets('cart Bonus Item Quantity Input test', (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('internal_sales_rep'),
+              ),
+              hasBonusOverride: true,
+            ),
+          ),
+        );
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [cartItem],

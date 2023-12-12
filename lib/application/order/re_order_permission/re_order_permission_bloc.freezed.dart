@@ -1215,7 +1215,7 @@ class __$$_ReOrderPermissionStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReOrderPermissionState implements _ReOrderPermissionState {
+class _$_ReOrderPermissionState extends _ReOrderPermissionState {
   const _$_ReOrderPermissionState(
       {required final List<MaterialInfo> validOrderItems,
       required this.isFetching,
@@ -1225,7 +1225,8 @@ class _$_ReOrderPermissionState implements _ReOrderPermissionState {
       required this.shipToInfo,
       required this.salesOrganisation,
       required this.salesOrganisationConfigs})
-      : _validOrderItems = validOrderItems;
+      : _validOrderItems = validOrderItems,
+        super._();
 
   final List<MaterialInfo> _validOrderItems;
   @override
@@ -1299,7 +1300,7 @@ class _$_ReOrderPermissionState implements _ReOrderPermissionState {
           this, _$identity);
 }
 
-abstract class _ReOrderPermissionState implements ReOrderPermissionState {
+abstract class _ReOrderPermissionState extends ReOrderPermissionState {
   const factory _ReOrderPermissionState(
       {required final List<MaterialInfo> validOrderItems,
       required final bool isFetching,
@@ -1310,6 +1311,7 @@ abstract class _ReOrderPermissionState implements ReOrderPermissionState {
       required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs
           salesOrganisationConfigs}) = _$_ReOrderPermissionState;
+  const _ReOrderPermissionState._() : super._();
 
   @override
   List<MaterialInfo> get validOrderItems;

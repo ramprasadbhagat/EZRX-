@@ -37,8 +37,9 @@ class CartProductBundle extends StatelessWidget {
           onPressed: (v) {
             context.read<CartBloc>().add(
                   CartEvent.upsertCart(
-                    priceAggregate: cartItem,
-                    quantity: 0,
+                    priceAggregate: cartItem.copyWith(
+                      quantity: 0,
+                    ),
                   ),
                 );
           },

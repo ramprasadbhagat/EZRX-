@@ -275,8 +275,9 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.upsertCart(
-              priceAggregate: cartItem,
-              quantity: 0,
+              priceAggregate: cartItem.copyWith(
+                quantity: 0,
+              ),
             ),
           ),
         ).called(1);

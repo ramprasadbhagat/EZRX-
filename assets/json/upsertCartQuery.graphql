@@ -57,6 +57,7 @@
         materialNumber
         materialDescription
         productCount
+        Type
       }
     }
     MarketplaceItems {

@@ -913,6 +913,28 @@ void main() {
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
+          CartState.initial().copyWith(
+            upsertBonusItemInProgressHashCode: [],
+            cartProducts: [
+              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            upsertBonusItemInProgressHashCode: [],
+            cartProducts: [
+              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            apiFailureOrSuccessOption: optionOf(Left(fakeError)),
+          ),
         ],
       );
     },
@@ -932,17 +954,17 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.upsertCart(
+            () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeSalesOrganisation,
               salesOrganisationConfig: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
-              itemId: '',
               language:
                   fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
-              materialInfo: priceAggregates.first.materialInfo,
-              quantity: 2,
+              product: priceAggregates.first.copyWith(
+                quantity: 2,
+              ),
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -950,8 +972,9 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.upsertCart(
-            priceAggregate: priceAggregates.first,
-            quantity: 2,
+            priceAggregate: priceAggregates.first.copyWith(
+              quantity: 2,
+            ),
           ),
         ),
         expect: () => [
@@ -984,8 +1007,9 @@ void main() {
         ),
         act: (bloc) => bloc.add(
           CartEvent.upsertCart(
-            priceAggregate: priceAggregates.first,
-            quantity: 1,
+            priceAggregate: priceAggregates.first.copyWith(
+              quantity: 1,
+            ),
           ),
         ),
         expect: () => [],
@@ -1003,17 +1027,17 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.upsertCart(
+            () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeSalesOrganisation,
               salesOrganisationConfig: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
-              itemId: '',
               language:
                   fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
-              materialInfo: priceAggregates.first.materialInfo,
-              quantity: 2,
+              product: priceAggregates.first.copyWith(
+                quantity: 2,
+              ),
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -1023,8 +1047,9 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.upsertCart(
-            priceAggregate: priceAggregates.first,
-            quantity: 2,
+            priceAggregate: priceAggregates.first.copyWith(
+              quantity: 2,
+            ),
           ),
         ),
         expect: () => [
@@ -1057,17 +1082,17 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.upsertCart(
+            () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeSalesOrganisation,
               salesOrganisationConfig: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
-              itemId: '',
               language:
                   fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
-              materialInfo: priceAggregates.first.materialInfo,
-              quantity: 2,
+              product: priceAggregates.first.copyWith(
+                quantity: 2,
+              ),
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -1077,8 +1102,9 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.upsertCart(
-            priceAggregate: priceAggregates.first,
-            quantity: 2,
+            priceAggregate: priceAggregates.first.copyWith(
+              quantity: 2,
+            ),
           ),
         ),
         expect: () => [
@@ -1110,17 +1136,17 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.upsertCart(
+            () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeIDSalesOrganisation,
               salesOrganisationConfig: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
-              itemId: '',
               language:
                   fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
-              materialInfo: priceAggregates.first.materialInfo,
-              quantity: 2,
+              product: priceAggregates.first.copyWith(
+                quantity: 2,
+              ),
             ),
           ).thenAnswer((_) async => Right([priceAggregates.first]));
           when(
@@ -1134,8 +1160,9 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.upsertCart(
-            priceAggregate: priceAggregates.first,
-            quantity: 2,
+            priceAggregate: priceAggregates.first.copyWith(
+              quantity: 2,
+            ),
           ),
         ),
         expect: () => [
@@ -1184,24 +1211,25 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.upsertCart(
+            () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeIDSalesOrganisation,
               salesOrganisationConfig: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
-              itemId: '',
               language:
                   fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
-              materialInfo: priceAggregates.first.materialInfo,
-              quantity: 2,
+              product: priceAggregates.first.copyWith(
+                quantity: 2,
+              ),
             ),
           ).thenAnswer((_) async => const Right([]));
         },
         act: (bloc) => bloc.add(
           CartEvent.upsertCart(
-            priceAggregate: priceAggregates.first,
-            quantity: 2,
+            priceAggregate: priceAggregates.first.copyWith(
+              quantity: 2,
+            ),
           ),
         ),
         expect: () => [

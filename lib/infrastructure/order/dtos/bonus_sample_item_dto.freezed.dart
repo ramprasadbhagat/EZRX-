@@ -32,6 +32,8 @@ mixin _$BonusSampleItemDto {
   String get principalCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'itemId', defaultValue: '')
   String get itemId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'type', defaultValue: '')
+  String get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,18 +48,14 @@ abstract class $BonusSampleItemDtoCopyWith<$Res> {
       _$BonusSampleItemDtoCopyWithImpl<$Res, BonusSampleItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
-      @JsonKey(name: 'productCount', defaultValue: 0)
-          int qty,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
+      {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'productCount', defaultValue: 0) int qty,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-          String principalCode,
-      @JsonKey(name: 'itemId', defaultValue: '')
-          String itemId});
+      String materialDescription,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
+      @JsonKey(name: 'itemId', defaultValue: '') String itemId,
+      @JsonKey(name: 'type', defaultValue: '') String type});
 }
 
 /// @nodoc
@@ -79,6 +77,7 @@ class _$BonusSampleItemDtoCopyWithImpl<$Res, $Val extends BonusSampleItemDto>
     Object? materialDescription = null,
     Object? principalCode = null,
     Object? itemId = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -105,6 +104,10 @@ class _$BonusSampleItemDtoCopyWithImpl<$Res, $Val extends BonusSampleItemDto>
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -118,18 +121,14 @@ abstract class _$$_BonusSampleItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
-      @JsonKey(name: 'productCount', defaultValue: 0)
-          int qty,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
+      {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'productCount', defaultValue: 0) int qty,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-          String principalCode,
-      @JsonKey(name: 'itemId', defaultValue: '')
-          String itemId});
+      String materialDescription,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
+      @JsonKey(name: 'itemId', defaultValue: '') String itemId,
+      @JsonKey(name: 'type', defaultValue: '') String type});
 }
 
 /// @nodoc
@@ -149,6 +148,7 @@ class __$$_BonusSampleItemDtoCopyWithImpl<$Res>
     Object? materialDescription = null,
     Object? principalCode = null,
     Object? itemId = null,
+    Object? type = null,
   }) {
     return _then(_$_BonusSampleItemDto(
       materialNumber: null == materialNumber
@@ -175,6 +175,10 @@ class __$$_BonusSampleItemDtoCopyWithImpl<$Res>
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -184,17 +188,16 @@ class __$$_BonusSampleItemDtoCopyWithImpl<$Res>
 class _$_BonusSampleItemDto extends _BonusSampleItemDto {
   const _$_BonusSampleItemDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber,
-      @JsonKey(name: 'productCount', defaultValue: 0)
-          required this.qty,
+      required this.materialNumber,
+      @JsonKey(name: 'productCount', defaultValue: 0) required this.qty,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required this.principalName,
+      required this.principalName,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          required this.materialDescription,
+      required this.materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
-          required this.principalCode,
-      @JsonKey(name: 'itemId', defaultValue: '')
-          required this.itemId})
+      required this.principalCode,
+      @JsonKey(name: 'itemId', defaultValue: '') required this.itemId,
+      @JsonKey(name: 'type', defaultValue: '') required this.type})
       : super._();
 
   factory _$_BonusSampleItemDto.fromJson(Map<String, dynamic> json) =>
@@ -218,10 +221,13 @@ class _$_BonusSampleItemDto extends _BonusSampleItemDto {
   @override
   @JsonKey(name: 'itemId', defaultValue: '')
   final String itemId;
+  @override
+  @JsonKey(name: 'type', defaultValue: '')
+  final String type;
 
   @override
   String toString() {
-    return 'BonusSampleItemDto(materialNumber: $materialNumber, qty: $qty, principalName: $principalName, materialDescription: $materialDescription, principalCode: $principalCode, itemId: $itemId)';
+    return 'BonusSampleItemDto(materialNumber: $materialNumber, qty: $qty, principalName: $principalName, materialDescription: $materialDescription, principalCode: $principalCode, itemId: $itemId, type: $type)';
   }
 
   @override
@@ -238,13 +244,14 @@ class _$_BonusSampleItemDto extends _BonusSampleItemDto {
                 other.materialDescription == materialDescription) &&
             (identical(other.principalCode, principalCode) ||
                 other.principalCode == principalCode) &&
-            (identical(other.itemId, itemId) || other.itemId == itemId));
+            (identical(other.itemId, itemId) || other.itemId == itemId) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, materialNumber, qty,
-      principalName, materialDescription, principalCode, itemId);
+      principalName, materialDescription, principalCode, itemId, type);
 
   @JsonKey(ignore: true)
   @override
@@ -264,17 +271,17 @@ class _$_BonusSampleItemDto extends _BonusSampleItemDto {
 abstract class _BonusSampleItemDto extends BonusSampleItemDto {
   const factory _BonusSampleItemDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber,
-      @JsonKey(name: 'productCount', defaultValue: 0)
-          required final int qty,
+      required final String materialNumber,
+      @JsonKey(name: 'productCount', defaultValue: 0) required final int qty,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required final String principalName,
+      required final String principalName,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          required final String materialDescription,
+      required final String materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
-          required final String principalCode,
-      @JsonKey(name: 'itemId', defaultValue: '')
-          required final String itemId}) = _$_BonusSampleItemDto;
+      required final String principalCode,
+      @JsonKey(name: 'itemId', defaultValue: '') required final String itemId,
+      @JsonKey(name: 'type', defaultValue: '')
+      required final String type}) = _$_BonusSampleItemDto;
   const _BonusSampleItemDto._() : super._();
 
   factory _BonusSampleItemDto.fromJson(Map<String, dynamic> json) =
@@ -298,6 +305,9 @@ abstract class _BonusSampleItemDto extends BonusSampleItemDto {
   @override
   @JsonKey(name: 'itemId', defaultValue: '')
   String get itemId;
+  @override
+  @JsonKey(name: 'type', defaultValue: '')
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$_BonusSampleItemDtoCopyWith<_$_BonusSampleItemDto> get copyWith =>

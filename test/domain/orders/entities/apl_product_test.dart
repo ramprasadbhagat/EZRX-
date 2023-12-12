@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_product.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -49,16 +49,15 @@ void main() async {
     });
 
     test('toMaterialItemBonus', () {
-      const newQty = 5;
+      final newQty = MaterialQty(5);
       final fakeBonusMaterialNumber = MaterialNumber('fake-bonus');
-      final bonus = MaterialItemBonus.empty()
-          .copyWith
-          .materialInfo(materialNumber: fakeBonusMaterialNumber);
+      final bonus = BonusSampleItem.empty()
+          .copyWith(materialNumber: fakeBonusMaterialNumber);
 
       final testedValue = AplProduct.empty()
           .copyWith(
             materialNumber: fakeBonusMaterialNumber,
-            productQty: MaterialQty(newQty),
+            productQty: newQty,
           )
           .toMaterialItemBonus(bonus);
 

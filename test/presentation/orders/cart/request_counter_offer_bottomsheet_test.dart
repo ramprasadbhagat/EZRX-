@@ -687,8 +687,9 @@ void main() {
       verify(
         () => cartBloc.add(
           CartEvent.upsertCart(
-            priceAggregate: confirmedPriceOverrideState.item,
-            quantity: confirmedPriceOverrideState.item.quantity,
+            priceAggregate: confirmedPriceOverrideState.item.copyWith(
+              quantity: confirmedPriceOverrideState.item.quantity,
+            ),
           ),
         ),
       ).called(1);
@@ -834,8 +835,9 @@ void main() {
       verify(
         () => cartBloc.add(
           CartEvent.upsertCart(
-            priceAggregate: confirmedPriceOverrideState.item,
-            quantity: confirmedPriceOverrideState.item.quantity,
+            priceAggregate: confirmedPriceOverrideState.item.copyWith(
+              quantity: confirmedPriceOverrideState.item.quantity,
+            ),
           ),
         ),
       ).called(1);
@@ -1051,8 +1053,9 @@ void main() {
       verify(
         () => cartBloc.add(
           CartEvent.upsertCart(
-            priceAggregate: confirmedPriceOverrideState.item,
-            quantity: confirmedPriceOverrideState.item.quantity,
+            priceAggregate: confirmedPriceOverrideState.item.copyWith(
+              quantity: confirmedPriceOverrideState.item.quantity,
+            ),
           ),
         ),
       ).called(1);
@@ -1171,8 +1174,9 @@ void main() {
       verify(
         () => cartBloc.add(
           CartEvent.upsertCart(
-            priceAggregate: confirmedPriceOverrideState.item,
-            quantity: confirmedPriceOverrideState.item.quantity,
+            priceAggregate: confirmedPriceOverrideState.item.copyWith(
+              quantity: confirmedPriceOverrideState.item.quantity,
+            ),
           ),
         ),
       ).called(1);

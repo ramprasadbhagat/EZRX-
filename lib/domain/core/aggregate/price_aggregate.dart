@@ -42,7 +42,6 @@ class PriceAggregate with _$PriceAggregate {
     required int quantity,
     @Default(0) int discountedMaterialCount,
     @Default(false) bool exceedQuantity,
-    required List<MaterialItemBonus> addedBonusList,
     required StockInfo stockInfo,
     required TenderContract tenderContract,
     required ComboDeal comboDeal,
@@ -61,7 +60,6 @@ class PriceAggregate with _$PriceAggregate {
         salesOrgConfig: SalesOrganisationConfigs.empty(),
         quantity: 1,
         discountedMaterialCount: 0,
-        addedBonusList: [],
         stockInfo: StockInfo.empty(),
         tenderContract: TenderContract.empty(),
         comboDeal: ComboDeal.empty(),
@@ -127,24 +125,6 @@ class PriceAggregate with _$PriceAggregate {
     return materialsInfo;
   }
 
-  bool get additionalBonusOverride => addedBonusList.any(
-        (element) => element.bonusOverrideFlag && element.additionalBonusFlag,
-      );
-
-  bool get anyDealBonusOverride => !getMaterialItemBonus.every(
-        (element) => addedDealBonusMaterial.any(
-          (dealBonusMaterial) =>
-              element.materialNumber == dealBonusMaterial.materialNumber &&
-              element.qty == dealBonusMaterial.qty,
-        ),
-      );
-
-  bool get didPriceOrBonusOverride =>
-      price.priceOverride.isValid() ||
-      anyDealBonusOverride ||
-      additionalBonusOverride ||
-      materialInfo.type.typeBundle;
-
   SubmitMaterialInfo toSubmitMaterialInfo() {
     return SubmitMaterialInfo(
       batch:
@@ -153,13 +133,8 @@ class PriceAggregate with _$PriceAggregate {
       comment: materialInfo.remarks,
       materialNumber: materialInfo.materialNumber,
       quantity: quantity,
-      materialItemOverride: MaterialItemOverrideDto.fromPriceAggregate(
-        copyWith(
-          price: price.copyWith(
-            isPriceOverride: didPriceOrBonusOverride,
-          ),
-        ),
-      ).toDomain(),
+      materialItemOverride:
+          MaterialItemOverrideDto.fromPriceAggregate(this).toDomain(),
       price: materialInfo.type.typeBundle
           ? bundle.currentBundleInfo.rate
           : price.finalPrice.getValue(),
@@ -452,29 +427,24 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   bool get refreshAddedBonus =>
-      calculateMaterialItemBonus.length != addedDealBonusMaterial.length ||
+      calculateMaterialItemBonus.length != bonusSampleItems.length ||
       calculateMaterialItemBonus.any(
         (BonusMaterial calculatedBonus) =>
             calculatedBonus.bonusQuantity !=
-            addedDealBonusMaterial
+            bonusSampleItems
                 .firstWhere(
-                  (MaterialItemBonus availableBonus) =>
+                  (availableBonus) =>
                       availableBonus.materialNumber ==
                       calculatedBonus.materialNumber,
-                  orElse: () => MaterialItemBonus.empty(),
+                  orElse: () => BonusSampleItem.empty(),
                 )
-                .qty,
+                .qty
+                .intValue,
       );
 
   PriceBonusItem get _bonusItem => price.priceBonusItem.firstWhere(
         (PriceBonusItem element) => quantity >= element.qualifyingQuantity,
         orElse: () => PriceBonusItem.empty(),
-      );
-
-  Iterable<MaterialItemBonus> get addedDealBonusMaterial =>
-      addedBonusList.where(
-        (MaterialItemBonus element) =>
-            !element.additionalBonusFlag && element.bonusOverrideFlag,
       );
 
   List<BonusMaterial> get calculateMaterialItemBonus {
@@ -553,6 +523,62 @@ class PriceAggregate with _$PriceAggregate {
     }).toList();
   }
 
+  List<MaterialInfo> get _existingProductDealBonus => bonusSampleItems
+      .where(
+        (element) => element.type.typeDealBonus,
+      )
+      .map(
+        (e) => MaterialInfo.empty().copyWith(
+          materialNumber: e.materialNumber,
+          quantity: e.qty,
+          type: e.type,
+          parentID: materialInfo.materialNumber.getValue(),
+          sampleBonusItemId: e.itemId.getValue(),
+        ),
+      )
+      .toList();
+
+  List<MaterialInfo> get dealBonusList {
+    final inValidDeal =
+        _existingProductDealBonus.isNotEmpty && getMaterialItemBonus.isEmpty;
+
+    final existingBonus = _existingProductDealBonus.firstWhere(
+      (element) => element.quantity.isValid(),
+      orElse: () => MaterialInfo.empty(),
+    );
+
+    final applicableBonus = _applicableProductDealBonus.firstWhere(
+      (element) => element.quantity.isValid(),
+      orElse: () => MaterialInfo.empty(),
+    );
+
+    if (existingBonus.quantity == applicableBonus.quantity) {
+      return <MaterialInfo>[];
+    }
+
+    return inValidDeal
+        ? _existingProductDealBonus
+            .map((e) => e.copyWith(quantity: MaterialQty(0)))
+            .toList()
+        : _applicableProductDealBonus;
+  }
+
+  List<MaterialInfo> get _applicableProductDealBonus => getMaterialItemBonus
+      .map(
+        (e) => e.materialInfo.copyWith(
+          quantity: MaterialQty(e.qty),
+          type: MaterialInfoType('Deals'),
+          parentID: materialInfo.materialNumber.getValue(),
+          sampleBonusItemId: _existingProductDealBonus
+              .firstWhere(
+                (element) => element.materialNumber == e.materialNumber,
+                orElse: () => MaterialInfo.empty(),
+              )
+              .sampleBonusItemId,
+        ),
+      )
+      .toList();
+
   PriceAggregate copyWithPrice({
     required Price newPrice,
     required bool exceedQty,
@@ -581,18 +607,6 @@ class PriceAggregate with _$PriceAggregate {
       tenderContract == TenderContract.noContract();
 
   bool get isPnGPrinciple => materialInfo.principalData.principalCode.isPnG;
-
-  List<MaterialItemBonus> get getAddedBonusList =>
-      List<MaterialItemBonus>.from(addedBonusList)
-        ..sort(
-          (
-            MaterialItemBonus a,
-            MaterialItemBonus b,
-          ) =>
-              a.additionalBonusFlag
-                  ? 1
-                  : 0.compareTo(b.additionalBonusFlag ? 0 : 1),
-        );
 
   PriceAggregate copyWithIncreasedQty({required int qty}) => copyWith(
         quantity: quantity + qty,
@@ -719,8 +733,6 @@ class PriceAggregate with _$PriceAggregate {
         ),
       )
       .toList();
-  bool get displayOfferBonus =>
-      addedBonusList.isNotEmpty && !materialInfo.hidePrice;
 
   List<BonusSampleItem> getNewlyAddedItems(
     List<BonusSampleItem> oldBonusList,
@@ -732,6 +744,7 @@ class PriceAggregate with _$PriceAggregate {
 
   List<MaterialInfo> get convertedSampleBonusList {
     return bonusSampleItems
+        .where((element) => !element.type.typeDealBonus)
         .map(
           (e) => MaterialInfo.empty().copyWith(
             materialNumber: e.materialNumber,
@@ -743,18 +756,11 @@ class PriceAggregate with _$PriceAggregate {
         .toList();
   }
 
-  List<SubmitMaterialItemBonus> get bonuses {
-    return <SubmitMaterialItemBonus>[
-      ...bonusSampleItems
-          .map(
-            (e) => SubmitMaterialItemBonusDto.fromBonusOvveride(e).toDomain(),
-          )
-          .toList(),
-      ...addedBonusList
-          .map((e) => SubmitMaterialItemBonusDto.fromOfferBonus(e).toDomain())
-          .toList(),
-    ];
-  }
+  List<SubmitMaterialItemBonus> get bonuses => bonusSampleItems
+      .map(
+        (e) => SubmitMaterialItemBonusDto.fromBonusOvveride(e).toDomain(),
+      )
+      .toList();
 
   bool get invalidPrice =>
       price.finalPrice.isEmpty ||
@@ -793,10 +799,19 @@ class PriceAggregate with _$PriceAggregate {
     final regex = RegExp(r'[a-zA-Z]');
     final listPrice = display(PriceType.listPrice);
     final finalPrice = display(PriceType.finalPrice);
-    
+
     return !(regex.hasMatch(listPrice) || regex.hasMatch(finalPrice)) &&
         double.parse(listPrice) > double.parse(finalPrice);
   }
+
+  List<MaterialInfo> get bonusListToMaterialInfo => bonusSampleItems
+      .map(
+        (e) => MaterialInfo.empty().copyWith(
+          materialNumber: e.materialNumber,
+          quantity: e.qty,
+        ),
+      )
+      .toList();
 }
 
 enum PriceType {

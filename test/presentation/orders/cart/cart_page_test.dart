@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dar
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
@@ -50,7 +51,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -323,15 +323,12 @@ void main() {
 
       mockCartItemDiscountBundles = [
         PriceAggregate.empty().copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('0000000000111111'),
-                materialDescription: ' Mosys D',
-                principalData: PrincipalData.empty().copyWith(
-                  principalName:
-                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
-                ),
+          bonusSampleItems: [
+            BonusSampleItem.empty().copyWith(
+              materialNumber: MaterialNumber('0000000000111111'),
+              materialDescription: ' Mosys D',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
               ),
             ),
           ],
@@ -360,15 +357,12 @@ void main() {
           ),
         ),
         PriceAggregate.empty().copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('0000000000111111'),
-                materialDescription: ' Mosys D',
-                principalData: PrincipalData.empty().copyWith(
-                  principalName:
-                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
-                ),
+          bonusSampleItems: [
+            BonusSampleItem.empty().copyWith(
+              materialNumber: MaterialNumber('0000000000111111'),
+              materialDescription: ' Mosys D',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
               ),
             )
           ],
@@ -396,11 +390,9 @@ void main() {
 
       mockCartItemWithDataList = [
         PriceAggregate.empty().copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('0000000000111111'),
-              ),
+          bonusSampleItems: [
+            BonusSampleItem.empty().copyWith(
+              materialNumber: MaterialNumber('0000000000111111'),
               materialDescription: ' Mosys D',
             ),
           ],
@@ -686,8 +678,9 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.upsertCart(
-              priceAggregate: mockCartItemWithDataList2.first,
-              quantity: 0,
+              priceAggregate: mockCartItemWithDataList2.first.copyWith(
+                quantity: 0,
+              ),
             ),
           ),
         ).called(1);

@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
@@ -43,15 +43,11 @@ class OrderHistoryDetailsBonusAggregate
           defaultMaterialDescription: orderItem.materialDescription,
         ),
         quantity: orderItem.qty,
-        addedBonusList: bonusList
+        bonusSampleItems: bonusList
             .map(
-              (bonus) => MaterialItemBonus.empty().copyWith(
-                materialInfo: MaterialInfo.empty().copyWith(
-                  materialNumber: bonus.materialNumber,
-                  materialDescription: bonus.materialDescription,
-                  defaultMaterialDescription: bonus.materialDescription,
-                ),
-                qty: bonus.qty,
+              (bonus) => BonusSampleItem.empty().copyWith(
+                materialNumber: bonus.materialNumber,
+                qty: MaterialQty(bonus.qty),
                 materialDescription: bonus.materialDescription,
               ),
             )

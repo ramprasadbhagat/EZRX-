@@ -118,4 +118,14 @@ abstract class ICartRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   });
+
+  Future<Either<ApiFailure, List<PriceAggregate>>> upsertCartWithBonus({
+    required PriceAggregate product,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+    required RequestCounterOfferDetails counterOfferDetails,
+  });
 }

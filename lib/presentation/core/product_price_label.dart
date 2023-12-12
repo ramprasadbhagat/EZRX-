@@ -52,7 +52,6 @@ class ProductPriceLabel extends StatelessWidget {
                       materialInfo.materialGroup2,
                     ),
             bundle: Bundle.empty(),
-            addedBonusList: [],
             stockInfo: StockInfo.empty().copyWith(
               materialNumber: materialInfo.materialNumber,
             ),

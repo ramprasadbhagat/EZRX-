@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -114,6 +115,10 @@ class MockProductImageBloc
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class MaterialPriceBlocMock
+    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+    implements MaterialPriceBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -138,6 +143,7 @@ void main() {
   late ViewByOrder fakeOrder;
   late OrderHistory mockViewByItemsOrderHistory;
   late ProductImageBloc mockProductImageBloc;
+  late MaterialPriceBloc materialPriceBlocMock;
 
   const fakeCreatedDate = '20230412';
   setUpAll(() async {
@@ -188,6 +194,7 @@ void main() {
       poAttachmentBlocMock = PoAttachmentBlocMock();
       mockAuthBloc = MockAuthBloc();
       mockProductImageBloc = MockProductImageBloc();
+      materialPriceBlocMock = MaterialPriceBlocMock();
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
@@ -221,6 +228,9 @@ void main() {
       );
       when(() => mockProductImageBloc.state)
           .thenReturn(ProductImageState.initial());
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial(),
+      );
     });
 
     Widget getScopedWidget() {
@@ -273,6 +283,9 @@ void main() {
           ),
           BlocProvider<ProductImageBloc>(
             create: (context) => mockProductImageBloc,
+          ),
+          BlocProvider<MaterialPriceBloc>(
+            create: ((context) => materialPriceBlocMock),
           ),
         ],
         child: const Material(
