@@ -66,12 +66,11 @@ class ViewByOrdersPage extends StatelessWidget {
           key: WidgetKeys.viewByOrdersGroupList,
           controller: ScrollController(),
           noRecordFoundWidget: NoRecordFound.ordersHistory(context),
-          onRefresh: () =>
-            context.read<ViewByOrderBloc>().add(
-                  ViewByOrderEvent.fetch(
-                    filter: ViewByOrdersFilter.empty(),
-                    searchKey: SearchKey.searchFilter(''),
-                  ),
+          onRefresh: () => context.read<ViewByOrderBloc>().add(
+                ViewByOrderEvent.fetch(
+                  filter: ViewByOrdersFilter.empty(),
+                  searchKey: SearchKey.searchFilter(''),
+                ),
               ),
           isLoading: state.isFetching,
           onLoadingMore: () => context.read<ViewByOrderBloc>().add(

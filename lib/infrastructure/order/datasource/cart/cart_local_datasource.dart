@@ -58,6 +58,19 @@ class CartLocalDataSource {
         .toList();
   }
 
+  Future<List<PriceAggregate>> upsertCartItemsWithReorderMaterials() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/upsertCartItemsWithReorderMaterialsResponse.json',
+      ),
+    );
+    final products = data['data']['upsertCartItems']['EzRxItems'];
+
+    return List.from(makeResponseCamelCase(jsonEncode(products)))
+        .map((e) => CartProductDto.fromJson(e).toDomain)
+        .toList();
+  }
+
   Future<AplSimulatorOrder> aplSimulateOrder() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/aplSimulateOrderResponse.json'),

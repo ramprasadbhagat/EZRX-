@@ -2,7 +2,6 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/
 
 class BuyAgainButton extends StatelessWidget {
   final OrderHistoryDetails viewByOrderHistoryItem;
-
   const BuyAgainButton({
     Key? key,
     required this.viewByOrderHistoryItem,
@@ -10,8 +9,37 @@ class BuyAgainButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
+    return BlocConsumer<CartBloc, CartState>(
+      listenWhen: (previous, current) =>
+          previous.isBuyAgain != current.isBuyAgain && !current.isBuyAgain,
+      listener: (context, state) {
+        final reOrderPermissionOrderNumber =
+            context.read<ReOrderPermissionBloc>().state.orderNumberWillUpsert;
+        final currentRoutePath = context.router.currentPath;
+        if (viewByOrderHistoryItem.orderNumber ==
+                reOrderPermissionOrderNumber &&
+            (currentRoutePath == 'main/orders_tab/orders/view_by_orders' ||
+                currentRoutePath == 'orders/view_by_order_details_page')) {
+          state.apiFailureOrSuccessOption.fold(
+            () {
+              context.read<ReOrderPermissionBloc>().add(
+                    ReOrderPermissionEvent.resetOrderNumberWillUpsert(
+                      orderNumberWillUpsert: OrderNumber(''),
+                    ),
+                  );
+              context.router.pushNamed('orders/cart');
+            },
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleReorderFailure(context, failure);
+              },
+              (_) {},
+            ),
+          );
+        }
+      },
       buildWhen: (previous, current) =>
+          previous.isBuyAgain != current.isBuyAgain ||
           previous.isFetching != current.isFetching ||
           previous.isUpserting != current.isUpserting,
       builder: (context, stateCart) {
@@ -28,12 +56,6 @@ class BuyAgainButton extends StatelessWidget {
                     counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
-            context.read<ReOrderPermissionBloc>().add(
-                  ReOrderPermissionEvent.resetOrderNumberWillUpsert(
-                    orderNumberWillUpsert: OrderNumber(''),
-                  ),
-                );
-            context.router.pushNamed('orders/cart');
           },
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching ||
@@ -43,10 +65,9 @@ class BuyAgainButton extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                 maximumSize: const Size(double.maxFinite, 45),
               ),
-              onPressed: state.orderNumberWillUpsert != OrderNumber('') ||
-                      (state.orderNumberWillUpsert ==
-                              viewByOrderHistoryItem.orderNumber ||
-                          stateCart.isBuyAgainNotAllowed)
+              onPressed: (state.orderNumberWillUpsert ==
+                          viewByOrderHistoryItem.orderNumber ||
+                      stateCart.isBuyAgainNotAllowed)
                   ? null
                   : () {
                       _trackBuyAgainEvent(
@@ -66,7 +87,9 @@ class BuyAgainButton extends StatelessWidget {
               child: LoadingShimmer.withChild(
                 enabled: state.orderNumberWillUpsert ==
                         viewByOrderHistoryItem.orderNumber &&
-                    (stateCart.isUpserting || stateCart.isFetching),
+                    (stateCart.isBuyAgain ||
+                        stateCart.isUpserting ||
+                        stateCart.isFetching),
                 child: Text(
                   'Buy again'.tr(),
                 ),

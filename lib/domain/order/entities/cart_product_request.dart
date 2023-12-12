@@ -1,4 +1,6 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'cart_product_request.freezed.dart';
@@ -37,5 +39,51 @@ class CartProductRequest with _$CartProductRequest {
         counterOfferCurrency: '',
         type: '',
         itemId: '',
+      );
+
+  factory CartProductRequest.toMaterialRequest({
+    required SalesOrg salesOrg,
+    required String customerCode,
+    required String shipToCustomerCode,
+    required String language,
+    required MaterialInfo materialInfo,
+    required int quantity,
+    required String itemId,
+    required RequestCounterOfferDetails counterOfferDetails,
+  }) =>
+      CartProductRequest(
+        salesOrg: salesOrg,
+        customerCode: customerCode,
+        shipToId: shipToCustomerCode,
+        productNumber: materialInfo.materialNumber.getOrCrash(),
+        quantity: quantity,
+        language: language,
+        parentID: materialInfo.parentID,
+        counterOfferPrice: counterOfferDetails.counterOfferPrice.doubleValue,
+        discountOverridePercentage:
+            counterOfferDetails.discountOverridePercentage.doubleValue,
+        counterOfferCurrency: counterOfferDetails.counterOfferCurrency.code,
+        comment: counterOfferDetails.comment.getOrDefaultValue(''),
+        type: materialInfo.type.getOrCrash(),
+        itemId: itemId,
+      );
+
+  factory CartProductRequest.toBundlesRequest({
+    required SalesOrg salesOrg,
+    required String customerCode,
+    required String shipToCustomerCode,
+    required String language,
+    required MaterialInfo materialInfo,
+    required String bundleCode,
+  }) =>
+      CartProductRequest.empty().copyWith(
+        salesOrg: salesOrg,
+        customerCode: customerCode,
+        shipToId: shipToCustomerCode,
+        productNumber: materialInfo.materialNumber.getOrCrash(),
+        quantity: materialInfo.quantity.getOrCrash(),
+        language: language,
+        parentID: bundleCode,
+        type: 'bundle',
       );
 }

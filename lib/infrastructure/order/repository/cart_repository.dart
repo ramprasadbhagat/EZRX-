@@ -395,21 +395,15 @@ class CartRepository implements ICartRepository {
     }
 
     try {
-      final upsertCartRequest = CartProductRequest(
+      final upsertCartRequest = CartProductRequest.toMaterialRequest(
         salesOrg: salesOrganisation.salesOrg,
         customerCode: customerCodeInfo.customerCodeSoldTo,
-        shipToId: shipToInfo.shipToCustomerCode,
-        productNumber: materialInfo.materialNumber.getOrDefaultValue(''),
-        quantity: quantity,
+        shipToCustomerCode: shipToInfo.shipToCustomerCode,
         language: language,
-        parentID: materialInfo.parentID,
-        counterOfferPrice: counterOfferDetails.counterOfferPrice.doubleValue,
-        discountOverridePercentage:
-            counterOfferDetails.discountOverridePercentage.doubleValue,
-        counterOfferCurrency: counterOfferDetails.counterOfferCurrency.code,
-        comment: counterOfferDetails.comment.getOrDefaultValue(''),
-        type: materialInfo.type.getValue(),
+        materialInfo: materialInfo,
         itemId: itemId,
+        quantity: quantity,
+        counterOfferDetails: counterOfferDetails,
       );
 
       final productList = await cartRemoteDataSource.upsertCart(
@@ -455,29 +449,38 @@ class CartRepository implements ICartRepository {
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
   }) async {
-    try {
-      final productList = <PriceAggregate>[];
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final productList =
+            await cartLocalDataSource.upsertCartItemsWithReorderMaterials();
 
-      for (var i = 0; i < materialInfo.length; i++) {
-        final cartDetail = await upsertCart(
-          counterOfferDetails: counterOfferDetails,
-          quantity: materialInfo[i].quantity.intValue,
-          language: language,
-          shipToInfo: shipToInfo,
-          customerCodeInfo: customerCodeInfo,
-          salesOrganisationConfig: salesOrganisationConfig,
-          salesOrganisation: salesOrganisation,
-          materialInfo: materialInfo[i],
-          itemId: itemId,
-        );
-        if (cartDetail.isLeft()) {
-          return cartDetail;
-        }
-        cartDetail.fold((l) => {}, (r) {
-          productList.clear();
-          productList.addAll(r);
-        });
+        return Right(productList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
       }
+    }
+
+    try {
+      final productList = await cartRemoteDataSource.upsertCartItems(
+        requestParams: materialInfo.map((materialInfo) {
+          // For Reordering we are using [convertToMaterialRequest] it has all
+          // the cases covered for materials, bundles, bonuses and combo's,
+          // for bundles we are using this one because the [ParentID] and the
+          // [Material Type] we are already receiving inside Material Info
+          final upsertCartRequest = CartProductRequest.toMaterialRequest(
+            salesOrg: salesOrganisation.salesOrg,
+            customerCode: customerCodeInfo.customerCodeSoldTo,
+            shipToCustomerCode: shipToInfo.shipToCustomerCode,
+            language: language,
+            materialInfo: materialInfo,
+            itemId: itemId,
+            quantity: materialInfo.quantity.intValue,
+            counterOfferDetails: counterOfferDetails,
+          );
+
+          return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
+        }).toList(),
+      );
 
       return Right(productList);
     } catch (e) {
@@ -504,16 +507,19 @@ class CartRepository implements ICartRepository {
     }
 
     try {
-      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
-      final customerCode = customerCodeInfo.customerCodeSoldTo;
-      final shipToCode = shipToInfo.shipToCustomerCode;
-
       final productList = await cartRemoteDataSource.upsertCartItems(
-        product: product,
-        customerCode: customerCode,
-        salesOrg: salesOrgCode,
-        shipToCode: shipToCode,
-        language: language,
+        requestParams: product.bundle.materials.map((materialInfo) {
+          final upsertCartRequest = CartProductRequest.toBundlesRequest(
+            salesOrg: salesOrganisation.salesOrg,
+            customerCode: customerCodeInfo.customerCodeSoldTo,
+            shipToCustomerCode: shipToInfo.shipToCustomerCode,
+            language: language,
+            materialInfo: materialInfo,
+            bundleCode: product.bundle.bundleCode,
+          );
+
+          return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
+        }).toList(),
       );
 
       return Right(productList);
@@ -627,8 +633,7 @@ class CartRepository implements ICartRepository {
       }
     }
     try {
-      final productList =
-          await cartRemoteDataSource.upsertCartItemsWithComboOffer(
+      final productList = await cartRemoteDataSource.upsertCartItems(
         requestParams: products.comboMaterialItemList
             .map(
               (productUpsertRequest) => ComboProductRequestDto.fromDomain(
@@ -703,8 +708,7 @@ class CartRepository implements ICartRepository {
       final materialNumberList =
           materialNumbers.map((item) => item.getOrCrash()).toList();
 
-      final aplSimulatorOrder =
-          await cartRemoteDataSource.aplGetTotalPrice(
+      final aplSimulatorOrder = await cartRemoteDataSource.aplGetTotalPrice(
         customerCode: customerCodeInfo.customerCodeSoldTo,
         salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
         materialNumbers: materialNumberList,

@@ -632,31 +632,35 @@ void main() {
     test('addHistoryItemsToCart test right', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
-      final upsertCartRequest = CartProductRequest.empty().copyWith(
-        salesOrg: fakeSalesOrg,
-        customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        shipToId: fakeShipToInfo.shipToCustomerCode,
-        quantity: 1,
-        type: 'material',
-        itemId: 'fake-item-Id',
-        language: 'en',
-        productNumber: 'fake-material-number',
-        parentID: 'fake-parent-Id',
-      );
+      final productList = <MaterialInfo>[
+        MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-material-number'),
+          quantity: MaterialQty(1),
+          type: MaterialInfoType('material'),
+          parentID: 'fake-parent-Id',
+        )
+      ];
       when(
-        () => cartRemoteDataSource.upsertCart(
-          requestParams:
-              CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+        () => cartRemoteDataSource.upsertCartItems(
+          requestParams: productList.map((materialInfo) {
+            final upsertCartRequest = CartProductRequest.toMaterialRequest(
+              salesOrg: fakeSalesOrganisation.salesOrg,
+              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+              shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+              language: 'en',
+              materialInfo: materialInfo,
+              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              itemId: 'fake-item-Id',
+              quantity: materialInfo.quantity.intValue,
+            );
+
+            return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
+          }).toList(),
         ),
       ).thenAnswer(
-        (invocation) async => [
+        (invocation) async => <PriceAggregate>[
           PriceAggregate.empty().copyWith(
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('fake-material-number'),
-              type: MaterialInfoType('material'),
-              parentID: 'fake-parent-Id',
-              quantity: MaterialQty(1),
-            ),
+            materialInfo: productList.first,
           )
         ],
       );
@@ -668,14 +672,7 @@ void main() {
         itemId: 'fake-item-Id',
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         language: 'en',
-        materialInfo: <MaterialInfo>[
-          MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('fake-material-number'),
-            type: MaterialInfoType('material'),
-            parentID: 'fake-parent-Id',
-            quantity: MaterialQty(1),
-          ),
-        ],
+        materialInfo: productList,
         salesOrganisationConfig: fakeSalesOrganisationConfigs,
       );
       expect(result.isRight(), true);
@@ -684,21 +681,30 @@ void main() {
     test('addHistoryItemsToCart test left', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
-      final upsertCartRequest = CartProductRequest.empty().copyWith(
-        salesOrg: fakeSalesOrg,
-        customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        shipToId: fakeShipToInfo.shipToCustomerCode,
-        quantity: 1,
-        type: 'material',
-        itemId: 'fake-item-Id',
-        language: 'en',
-        productNumber: 'fake-material-number',
-        parentID: 'fake-parent-Id',
-      );
+      final productList = <MaterialInfo>[
+        MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-material-number'),
+          quantity: MaterialQty(1),
+          type: MaterialInfoType('material'),
+          parentID: 'fake-parent-Id',
+        )
+      ];
       when(
-        () => cartRemoteDataSource.upsertCart(
-          requestParams:
-              CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+        () => cartRemoteDataSource.upsertCartItems(
+          requestParams: productList.map((materialInfo) {
+            final upsertCartRequest = CartProductRequest.toMaterialRequest(
+              salesOrg: fakeSalesOrganisation.salesOrg,
+              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+              shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+              language: 'en',
+              materialInfo: materialInfo,
+              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              itemId: 'fake-item-Id',
+              quantity: materialInfo.quantity.intValue,
+            );
+
+            return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
+          }).toList(),
         ),
       ).thenThrow(
         (invocation) async => MockException(),
@@ -711,15 +717,7 @@ void main() {
         itemId: 'fake-item-Id',
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         language: 'en',
-        materialInfo: <MaterialInfo>[
-          MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('fake-material-number'),
-            type: MaterialInfoType('material'),
-            parentID: 'fake-parent-Id',
-            quantity: MaterialQty(1),
-          ),
-        ],
-
+        materialInfo: productList,
         salesOrganisationConfig: fakeSalesOrganisationConfigs,
       );
       expect(result.isLeft(), true);
@@ -774,7 +772,7 @@ void main() {
           .toList();
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
-        () => cartRemoteDataSource.upsertCartItemsWithComboOffer(
+        () => cartRemoteDataSource.upsertCartItems(
           requestParams: requestParams,
         ),
       ).thenAnswer(
@@ -794,7 +792,7 @@ void main() {
     test('upsertCartItemsWithComboOffers remote test left', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
-        () => cartRemoteDataSource.upsertCartItemsWithComboOffer(
+        () => cartRemoteDataSource.upsertCartItems(
           requestParams: [],
         ),
       ).thenThrow(
@@ -972,11 +970,19 @@ void main() {
 
       when(
         () => cartRemoteDataSource.upsertCartItems(
-          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          language: 'en',
-          product: fakeCartProducts.first,
-          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-          shipToCode: fakeShipToInfo.shipToCustomerCode,
+          requestParams:
+              fakeCartProducts.first.bundle.materials.map((materialInfo) {
+            final upsertCartRequest = CartProductRequest.toBundlesRequest(
+              salesOrg: fakeSalesOrganisation.salesOrg,
+              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+              shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+              language: 'en',
+              materialInfo: materialInfo,
+              bundleCode: fakeCartProducts.first.bundle.bundleCode,
+            );
+
+            return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
+          }).toList(),
         ),
       ).thenAnswer(
         (invocation) async => fakeCartProducts,
@@ -997,11 +1003,19 @@ void main() {
 
       when(
         () => cartRemoteDataSource.upsertCartItems(
-          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          language: 'en',
-          product: fakeCartProducts.first,
-          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-          shipToCode: fakeShipToInfo.shipToCustomerCode,
+          requestParams:
+              fakeCartProducts.first.bundle.materials.map((materialInfo) {
+            final upsertCartRequest = CartProductRequest.toBundlesRequest(
+              salesOrg: fakeSalesOrganisation.salesOrg,
+              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+              shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+              language: 'en',
+              materialInfo: materialInfo,
+              bundleCode: fakeCartProducts.first.bundle.bundleCode,
+            );
+
+            return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
+          }).toList(),
         ),
       ).thenThrow(
         (invocation) async => MockException(),

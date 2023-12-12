@@ -1,4 +1,3 @@
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -270,24 +269,19 @@ void main() {
     });
 
     testWidgets('Buy again button go to cart page', (tester) async {
-      whenListen(
-        cartBlocMock,
-        Stream.fromIterable(
-          [
-            CartState.initial().copyWith(
-              isFetching: true,
-            ),
-            CartState.initial()
-          ],
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          viewByOrderList: viewByOrder
+              .copyWith(orderHeaders: [viewByOrder.orderHeaders.first]),
         ),
       );
-
       whenListen(
         reOrderPermissionBlocMock,
         Stream.fromIterable(
           [
             ReOrderPermissionState.initial().copyWith(
               isFetching: true,
+              orderNumberWillUpsert: viewByOrder.orderHeaders.first.orderNumber,
             ),
             ReOrderPermissionState.initial().copyWith(
               orderNumberWillUpsert: viewByOrder.orderHeaders.first.orderNumber,
@@ -295,15 +289,24 @@ void main() {
           ],
         ),
       );
-      when(() => mockViewByOrderBloc.state).thenReturn(
-        ViewByOrderState.initial().copyWith(
-          viewByOrderList: viewByOrder
-              .copyWith(orderHeaders: [viewByOrder.orderHeaders.first]),
+
+      whenListen(
+        cartBlocMock,
+        Stream.fromIterable(
+          [
+            CartState.initial().copyWith(
+              isFetching: true,
+              isBuyAgain: true,
+            ),
+            CartState.initial().copyWith(
+              isBuyAgain: false,
+            )
+          ],
         ),
       );
       when(
         () => autoRouterMock.currentPath,
-      ).thenAnswer((invocation) => ViewByOrderDetailsPageRoute.name);
+      ).thenAnswer((invocation) => 'orders/view_by_order_details_page');
       when(
         () => autoRouterMock.pushNamed('orders/cart'),
       ).thenAnswer((invocation) => Future(() => null));
@@ -335,24 +338,19 @@ void main() {
     });
 
     testWidgets('Buy again button go to cart page Upserting', (tester) async {
-      whenListen(
-        cartBlocMock,
-        Stream.fromIterable(
-          [
-            CartState.initial().copyWith(
-              isUpserting: true,
-            ),
-            CartState.initial()
-          ],
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          viewByOrderList: viewByOrder
+              .copyWith(orderHeaders: [viewByOrder.orderHeaders.first]),
         ),
       );
-
       whenListen(
         reOrderPermissionBlocMock,
         Stream.fromIterable(
           [
             ReOrderPermissionState.initial().copyWith(
               isFetching: true,
+              orderNumberWillUpsert: viewByOrder.orderHeaders.first.orderNumber,
             ),
             ReOrderPermissionState.initial().copyWith(
               orderNumberWillUpsert: viewByOrder.orderHeaders.first.orderNumber,
@@ -360,15 +358,24 @@ void main() {
           ],
         ),
       );
-      when(() => mockViewByOrderBloc.state).thenReturn(
-        ViewByOrderState.initial().copyWith(
-          viewByOrderList: viewByOrder
-              .copyWith(orderHeaders: [viewByOrder.orderHeaders.first]),
+
+      whenListen(
+        cartBlocMock,
+        Stream.fromIterable(
+          [
+            CartState.initial().copyWith(
+              isFetching: true,
+              isBuyAgain: true,
+            ),
+            CartState.initial().copyWith(
+              isBuyAgain: false,
+            )
+          ],
         ),
       );
       when(
         () => autoRouterMock.currentPath,
-      ).thenAnswer((invocation) => ViewByOrderDetailsPageRoute.name);
+      ).thenAnswer((invocation) => 'orders/view_by_order_details_page');
       when(
         () => autoRouterMock.pushNamed('orders/cart'),
       ).thenAnswer((invocation) => Future(() => null));

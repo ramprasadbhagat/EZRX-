@@ -65,6 +65,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.allReorderItemInvalid() = _AllReorderItemInvalid;
   const factory ApiFailure.maximumCartQuantityExceed(String maximumNumber) =
       _MaximumCartQuantityExceed;
+  const factory ApiFailure.cartHasDifferentAddress() = _CartHasDifferentAddress;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -119,5 +120,7 @@ extension ApiFailureExt on ApiFailure {
         allReorderItemInvalid: (_) => 'All reorder materials are invalid',
         maximumCartQuantityExceed: (maximumExeption) =>
             'In cart quantity should not be more than ${maximumExeption.maximumNumber}.',
+        cartHasDifferentAddress: (_) =>
+            'shipToAddress changed from existing cart. Delete the cart and then add new item',
       );
 }

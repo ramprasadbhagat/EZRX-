@@ -205,8 +205,8 @@ void main() async {
             }),
           );
 
-          final result = await remoteDataSource
-              .upsertCartItemsWithComboOffer(requestParams: [{}]);
+          final result =
+              await remoteDataSource.upsertCartItems(requestParams: [{}]);
 
           expect(
             result,
@@ -241,7 +241,7 @@ void main() async {
               },
             }),
           );
-          await remoteDataSource.upsertCartItemsWithComboOffer(
+          await remoteDataSource.upsertCartItems(
             requestParams: [{}],
           ).onError((error, _) {
             expect(

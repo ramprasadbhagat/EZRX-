@@ -34,7 +34,9 @@ class OrderTag extends StatelessWidget {
           context.read<EligibilityBloc>().state.validateOutOfStockValue,
         );
 
-        return salesOrgConfig.hideStockDisplay || finalCartItem.inStock
+        return salesOrgConfig.hideStockDisplay ||
+                finalCartItem.inStock ||
+                state.isUpdatingStock
             ? const SizedBox.shrink()
             : StatusLabel(
                 status: statusType,
