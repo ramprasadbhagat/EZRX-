@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -58,6 +59,9 @@ class CreditAndInvoiceDetailsBlocMock
     extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
     implements CreditAndInvoiceDetailsBloc {}
 
+class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
+    implements NewPaymentBloc {}
+
 void main() {
   late AllCreditsBloc allCreditsBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
@@ -70,6 +74,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
   late List<CreditAndInvoiceItem> creditItemList;
+  late NewPaymentBlocMock newPaymentBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -92,6 +97,7 @@ void main() {
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
+    newPaymentBlocMock = NewPaymentBlocMock();
 
     when(() => allCreditsBlocMock.state).thenReturn(AllCreditsState.initial());
     when(() => allCreditsFilterBlocMock.state)
@@ -107,6 +113,7 @@ void main() {
         .thenReturn(EligibilityState.initial());
     when(() => creditAndInvoiceDetailsBlocMock.state)
         .thenReturn(CreditAndInvoiceDetailsState.initial());
+    when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
   });
 
   Widget getWidget() {
@@ -138,6 +145,9 @@ void main() {
         ),
         BlocProvider<CreditAndInvoiceDetailsBloc>(
           create: (context) => creditAndInvoiceDetailsBlocMock,
+        ),
+        BlocProvider<NewPaymentBloc>(
+          create: (context) => newPaymentBlocMock,
         ),
       ],
       child: const AllCreditsPage(),

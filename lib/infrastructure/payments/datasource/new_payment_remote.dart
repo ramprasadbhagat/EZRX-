@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
@@ -16,6 +17,7 @@ import 'package:ezrxmobile/infrastructure/payments/dtos/create_virtual_account_d
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/principal_cutoffs_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_invoice_info_pdf_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_method_dto.dart';
@@ -311,6 +313,32 @@ class NewPaymentRemoteDataSource {
 
     return CreateVirtualAccountDto.fromJson(
       res.data['data']['createVirtualAccount'],
+    ).toDomain();
+  }
+
+  Future<PrincipalCutoffs> getPrincipalCutoffs({
+    required List<String> branches,
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}license',
+      data: jsonEncode(
+        {
+          'query': newPaymentQuery.getPrincipalCutOffs(),
+          'variables': {
+            'request': {
+              'branch': branches,
+              'configurationName': 'Payment',
+              'status': ['Active'],
+            },
+          },
+        },
+      ),
+    );
+    _exceptionChecker(property: 'getPrincipalCutoffs', res: res);
+
+    return PrincipalCutoffsDto.fromJson(
+      res.data['data']['getPrincipalCutoffs'],
     ).toDomain();
   }
 

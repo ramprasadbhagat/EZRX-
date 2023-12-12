@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
@@ -54,6 +55,9 @@ class AllInvoicesFilterBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
+    implements NewPaymentBloc {}
+
 void main() {
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
@@ -83,6 +87,7 @@ void main() {
     filterStatuses: ['Pending'],
     searchKey: SearchKey('fake-search-key'),
   );
+  late NewPaymentBlocMock newPaymentBlocMock;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -97,6 +102,7 @@ void main() {
     eligibilityBlocMock = EligibilityBlocMock();
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     mockDownloadPaymentAttachmentsBloc = MockDownloadPaymentAttachmentsBloc();
+    newPaymentBlocMock = NewPaymentBlocMock();
   });
 
   setUp(() async {
@@ -116,6 +122,7 @@ void main() {
         .thenReturn(EligibilityState.initial());
     when(() => allInvoicesFilterBlocMock.state)
         .thenReturn(AllInvoicesFilterState.initial());
+    when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
   });
 
   ///////////////////////////Finder//////////////////////////////////////////////
@@ -157,6 +164,9 @@ void main() {
         ),
         BlocProvider<AllInvoicesFilterBloc>(
           create: (context) => allInvoicesFilterBlocMock,
+        ),
+        BlocProvider<NewPaymentBloc>(
+          create: (context) => newPaymentBlocMock,
         ),
       ],
       child: const AccountSummary(),

@@ -18,9 +18,12 @@ class NewPaymentState with _$NewPaymentState {
     required NewPaymentMethod selectedPaymentMethod,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
     required User user,
     required bool isCreatingVirtualAccount,
     required CreateVirtualAccount createVirtualAccount,
+    required bool isFetchingPrincipalCutoffs,
+    required PrincipalCutoffs principalCutoffs,
   }) = _NewPaymentState;
 
   factory NewPaymentState.initial() => NewPaymentState(
@@ -37,9 +40,12 @@ class NewPaymentState with _$NewPaymentState {
         selectedPaymentMethod: NewPaymentMethod.empty(),
         salesOrganisation: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
+        shipToInfo: ShipToInfo.empty(),
         user: User.empty(),
         isCreatingVirtualAccount: false,
         createVirtualAccount: CreateVirtualAccount.empty(),
+        isFetchingPrincipalCutoffs: false,
+        principalCutoffs: PrincipalCutoffs.empty(),
       );
 
   double get amountTotal =>

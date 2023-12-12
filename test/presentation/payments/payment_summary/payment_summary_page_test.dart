@@ -18,6 +18,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -461,6 +462,7 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
+          shipToInfo: ShipToInfo.empty(),
           user: fakeClientUser,
         ),
       );
@@ -475,29 +477,36 @@ void main() {
 
       await tester.tap(find.byType(ScaleButton));
 
-      verify(
+      verifyNever(
         () => outstandingInvoicesBlocMock.add(
           OutstandingInvoicesEvent.fetch(
             appliedFilter: OutstandingInvoiceFilter.init(),
             searchKey: SearchKey.search(''),
           ),
         ),
-      ).called(1);
-      verify(
+      );
+      verifyNever(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.empty(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),
-      ).called(1);
+      );
+
       verify(
         () => newPaymentBlocMock.add(
           NewPaymentEvent.initialized(
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
+            shipToInfo: ShipToInfo.empty(),
             user: fakeClientUser,
           ),
+        ),
+      ).called(1);
+      verify(
+        () => newPaymentBlocMock.add(
+          const NewPaymentEvent.getPrincipalCutoffs(),
         ),
       ).called(1);
     });

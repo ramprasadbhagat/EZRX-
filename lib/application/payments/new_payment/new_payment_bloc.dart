@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -11,6 +12,7 @@ import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart'
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
@@ -46,6 +48,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             customerCodeInfo: e.customerCodeInfo,
             salesOrganisation: e.salesOrganisation,
             isFetchingPaymentMethod: true,
+            shipToInfo: e.shipToInfo,
           ),
         );
 
@@ -305,8 +308,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             await newPaymentRepository.createVirtualAccount(
           salesOrganisation: state.salesOrganisation,
           customerCodeInfo: state.customerCodeInfo,
-          paymentMethodOption:
-              state.selectedPaymentMethod.firstSelectedOption,
+          paymentMethodOption: state.selectedPaymentMethod.firstSelectedOption,
           invoices: state.selectedInvoices,
         );
 
@@ -329,6 +331,48 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             );
           },
         );
+      },
+      getPrincipalCutoffs: (_GetPrincipalCutoffs e) async {
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+            isFetchingPrincipalCutoffs: true,
+          ),
+        );
+
+        if (state.salesOrganisation.salesOrg.isID) {
+          final failureOrSuccess =
+              await newPaymentRepository.getPrincipalCutoffs(
+            shipToInfo: state.shipToInfo,
+          );
+
+          failureOrSuccess.fold(
+            (failure) {
+              emit(
+                state.copyWith(
+                  failureOrSuccessOption: optionOf(failureOrSuccess),
+                  isFetchingPrincipalCutoffs: false,
+                ),
+              );
+            },
+            (principalCutoffs) {
+              emit(
+                state.copyWith(
+                  failureOrSuccessOption: none(),
+                  isFetchingPrincipalCutoffs: false,
+                  principalCutoffs: principalCutoffs,
+                ),
+              );
+            },
+          );
+        } else {
+          emit(
+            state.copyWith(
+              failureOrSuccessOption: none(),
+              isFetchingPrincipalCutoffs: false,
+            ),
+          );
+        }
       },
     );
   }

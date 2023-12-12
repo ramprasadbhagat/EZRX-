@@ -5,6 +5,7 @@ class NewPaymentEvent with _$NewPaymentEvent {
   const factory NewPaymentEvent.initialized({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
     required User user,
   }) = _initialized;
 
@@ -51,5 +52,7 @@ class NewPaymentEvent with _$NewPaymentEvent {
   }) = _UpdatePaymentMethodOptionSelected;
 
     const factory NewPaymentEvent.createVirtualAccount() = _CreateVirtualAccount;
+
+    const factory NewPaymentEvent.getPrincipalCutoffs() = _GetPrincipalCutoffs;
 
 }

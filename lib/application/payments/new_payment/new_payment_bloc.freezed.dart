@@ -19,7 +19,7 @@ mixin _$NewPaymentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -37,12 +37,16 @@ mixin _$NewPaymentEvent {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -58,12 +62,16 @@ mixin _$NewPaymentEvent {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -79,6 +87,7 @@ mixin _$NewPaymentEvent {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -99,6 +108,7 @@ mixin _$NewPaymentEvent {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -118,6 +128,7 @@ mixin _$NewPaymentEvent {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -137,6 +148,7 @@ mixin _$NewPaymentEvent {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -169,10 +181,12 @@ abstract class _$$_initializedCopyWith<$Res> {
   $Res call(
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
       User user});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
 }
 
@@ -189,6 +203,7 @@ class __$$_initializedCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
     Object? user = null,
   }) {
     return _then(_$_initialized(
@@ -200,6 +215,10 @@ class __$$_initializedCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -225,6 +244,14 @@ class __$$_initializedCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -238,6 +265,7 @@ class _$_initialized implements _initialized {
   const _$_initialized(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
+      required this.shipToInfo,
       required this.user});
 
   @override
@@ -245,11 +273,13 @@ class _$_initialized implements _initialized {
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
+  final ShipToInfo shipToInfo;
+  @override
   final User user;
 
   @override
   String toString() {
-    return 'NewPaymentEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, user: $user)';
+    return 'NewPaymentEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user)';
   }
 
   @override
@@ -261,12 +291,14 @@ class _$_initialized implements _initialized {
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrganisation, customerCodeInfo, user);
+  int get hashCode => Object.hash(
+      runtimeType, salesOrganisation, customerCodeInfo, shipToInfo, user);
 
   @JsonKey(ignore: true)
   @override
@@ -278,7 +310,7 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -296,15 +328,19 @@ class _$_initialized implements _initialized {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
-    return initialized(salesOrganisation, customerCodeInfo, user);
+    return initialized(salesOrganisation, customerCodeInfo, shipToInfo, user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -320,15 +356,20 @@ class _$_initialized implements _initialized {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
-    return initialized?.call(salesOrganisation, customerCodeInfo, user);
+    return initialized?.call(
+        salesOrganisation, customerCodeInfo, shipToInfo, user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -344,10 +385,11 @@ class _$_initialized implements _initialized {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(salesOrganisation, customerCodeInfo, user);
+      return initialized(salesOrganisation, customerCodeInfo, shipToInfo, user);
     }
     return orElse();
   }
@@ -370,6 +412,7 @@ class _$_initialized implements _initialized {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return initialized(this);
   }
@@ -392,6 +435,7 @@ class _$_initialized implements _initialized {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return initialized?.call(this);
   }
@@ -414,6 +458,7 @@ class _$_initialized implements _initialized {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -427,10 +472,12 @@ abstract class _initialized implements NewPaymentEvent {
   const factory _initialized(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
       required final User user}) = _$_initialized;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
   User get user;
   @JsonKey(ignore: true)
   _$$_initializedCopyWith<_$_initialized> get copyWith =>
@@ -510,7 +557,7 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -528,6 +575,7 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return updateAllInvoices(items);
   }
@@ -535,8 +583,11 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -552,6 +603,7 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return updateAllInvoices?.call(items);
   }
@@ -559,8 +611,11 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -576,6 +631,7 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (updateAllInvoices != null) {
@@ -602,6 +658,7 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return updateAllInvoices(this);
   }
@@ -624,6 +681,7 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return updateAllInvoices?.call(this);
   }
@@ -646,6 +704,7 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (updateAllInvoices != null) {
@@ -749,7 +808,7 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -767,6 +826,7 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return toggleInvoice(item, selected);
   }
@@ -774,8 +834,11 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -791,6 +854,7 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return toggleInvoice?.call(item, selected);
   }
@@ -798,8 +862,11 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -815,6 +882,7 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (toggleInvoice != null) {
@@ -841,6 +909,7 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return toggleInvoice(this);
   }
@@ -863,6 +932,7 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return toggleInvoice?.call(this);
   }
@@ -885,6 +955,7 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (toggleInvoice != null) {
@@ -978,7 +1049,7 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -996,6 +1067,7 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return updateAllCredits(items);
   }
@@ -1003,8 +1075,11 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -1020,6 +1095,7 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return updateAllCredits?.call(items);
   }
@@ -1027,8 +1103,11 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -1044,6 +1123,7 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (updateAllCredits != null) {
@@ -1070,6 +1150,7 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return updateAllCredits(this);
   }
@@ -1092,6 +1173,7 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return updateAllCredits?.call(this);
   }
@@ -1114,6 +1196,7 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (updateAllCredits != null) {
@@ -1217,7 +1300,7 @@ class _$_ToggleCredit implements _ToggleCredit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -1235,6 +1318,7 @@ class _$_ToggleCredit implements _ToggleCredit {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return toggleCredit(item, selected);
   }
@@ -1242,8 +1326,11 @@ class _$_ToggleCredit implements _ToggleCredit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -1259,6 +1346,7 @@ class _$_ToggleCredit implements _ToggleCredit {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return toggleCredit?.call(item, selected);
   }
@@ -1266,8 +1354,11 @@ class _$_ToggleCredit implements _ToggleCredit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -1283,6 +1374,7 @@ class _$_ToggleCredit implements _ToggleCredit {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (toggleCredit != null) {
@@ -1309,6 +1401,7 @@ class _$_ToggleCredit implements _ToggleCredit {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return toggleCredit(this);
   }
@@ -1331,6 +1424,7 @@ class _$_ToggleCredit implements _ToggleCredit {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return toggleCredit?.call(this);
   }
@@ -1353,6 +1447,7 @@ class _$_ToggleCredit implements _ToggleCredit {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (toggleCredit != null) {
@@ -1411,7 +1506,7 @@ class _$_Pay implements _Pay {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -1429,6 +1524,7 @@ class _$_Pay implements _Pay {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return pay();
   }
@@ -1436,8 +1532,11 @@ class _$_Pay implements _Pay {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -1453,6 +1552,7 @@ class _$_Pay implements _Pay {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return pay?.call();
   }
@@ -1460,8 +1560,11 @@ class _$_Pay implements _Pay {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -1477,6 +1580,7 @@ class _$_Pay implements _Pay {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (pay != null) {
@@ -1503,6 +1607,7 @@ class _$_Pay implements _Pay {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return pay(this);
   }
@@ -1525,6 +1630,7 @@ class _$_Pay implements _Pay {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return pay?.call(this);
   }
@@ -1547,6 +1653,7 @@ class _$_Pay implements _Pay {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (pay != null) {
@@ -1637,7 +1744,7 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -1655,6 +1762,7 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return getCustomerPayment(paymentInfo);
   }
@@ -1662,8 +1770,11 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -1679,6 +1790,7 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return getCustomerPayment?.call(paymentInfo);
   }
@@ -1686,8 +1798,11 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -1703,6 +1818,7 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (getCustomerPayment != null) {
@@ -1729,6 +1845,7 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return getCustomerPayment(this);
   }
@@ -1751,6 +1868,7 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return getCustomerPayment?.call(this);
   }
@@ -1773,6 +1891,7 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (getCustomerPayment != null) {
@@ -1859,7 +1978,7 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -1877,6 +1996,7 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return updatePaymentGateway(paymentUrl);
   }
@@ -1884,8 +2004,11 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -1901,6 +2024,7 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return updatePaymentGateway?.call(paymentUrl);
   }
@@ -1908,8 +2032,11 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -1925,6 +2052,7 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (updatePaymentGateway != null) {
@@ -1951,6 +2079,7 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return updatePaymentGateway(this);
   }
@@ -1973,6 +2102,7 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return updatePaymentGateway?.call(this);
   }
@@ -1995,6 +2125,7 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (updatePaymentGateway != null) {
@@ -2053,7 +2184,7 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -2071,6 +2202,7 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return fetchInvoiceInfoPdf();
   }
@@ -2078,8 +2210,11 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -2095,6 +2230,7 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return fetchInvoiceInfoPdf?.call();
   }
@@ -2102,8 +2238,11 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -2119,6 +2258,7 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (fetchInvoiceInfoPdf != null) {
@@ -2145,6 +2285,7 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return fetchInvoiceInfoPdf(this);
   }
@@ -2167,6 +2308,7 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return fetchInvoiceInfoPdf?.call(this);
   }
@@ -2189,6 +2331,7 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (fetchInvoiceInfoPdf != null) {
@@ -2269,7 +2412,7 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -2287,6 +2430,7 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return saveInvoicePdf(dataInvoicePdf);
   }
@@ -2294,8 +2438,11 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -2311,6 +2458,7 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return saveInvoicePdf?.call(dataInvoicePdf);
   }
@@ -2318,8 +2466,11 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -2335,6 +2486,7 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (saveInvoicePdf != null) {
@@ -2361,6 +2513,7 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return saveInvoicePdf(this);
   }
@@ -2383,6 +2536,7 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return saveInvoicePdf?.call(this);
   }
@@ -2405,6 +2559,7 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (saveInvoicePdf != null) {
@@ -2504,7 +2659,7 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -2522,6 +2677,7 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return updatePaymentMethodSelected(paymentMethodSelected);
   }
@@ -2529,8 +2685,11 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -2546,6 +2705,7 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return updatePaymentMethodSelected?.call(paymentMethodSelected);
   }
@@ -2553,8 +2713,11 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -2570,6 +2733,7 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (updatePaymentMethodSelected != null) {
@@ -2596,6 +2760,7 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return updatePaymentMethodSelected(this);
   }
@@ -2618,6 +2783,7 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return updatePaymentMethodSelected?.call(this);
   }
@@ -2640,6 +2806,7 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (updatePaymentMethodSelected != null) {
@@ -2746,7 +2913,7 @@ class _$_UpdatePaymentMethodOptionSelected
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -2764,6 +2931,7 @@ class _$_UpdatePaymentMethodOptionSelected
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return updatePaymentMethodOptionSelected(paymentMethodOptionSelected);
   }
@@ -2771,8 +2939,11 @@ class _$_UpdatePaymentMethodOptionSelected
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -2788,6 +2959,7 @@ class _$_UpdatePaymentMethodOptionSelected
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return updatePaymentMethodOptionSelected?.call(paymentMethodOptionSelected);
   }
@@ -2795,8 +2967,11 @@ class _$_UpdatePaymentMethodOptionSelected
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -2812,6 +2987,7 @@ class _$_UpdatePaymentMethodOptionSelected
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (updatePaymentMethodOptionSelected != null) {
@@ -2838,6 +3014,7 @@ class _$_UpdatePaymentMethodOptionSelected
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return updatePaymentMethodOptionSelected(this);
   }
@@ -2860,6 +3037,7 @@ class _$_UpdatePaymentMethodOptionSelected
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return updatePaymentMethodOptionSelected?.call(this);
   }
@@ -2882,6 +3060,7 @@ class _$_UpdatePaymentMethodOptionSelected
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (updatePaymentMethodOptionSelected != null) {
@@ -2942,7 +3121,7 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
@@ -2960,6 +3139,7 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
     required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
         updatePaymentMethodOptionSelected,
     required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
   }) {
     return createVirtualAccount();
   }
@@ -2967,8 +3147,11 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -2984,6 +3167,7 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
     TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
   }) {
     return createVirtualAccount?.call();
   }
@@ -2991,8 +3175,11 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
@@ -3008,6 +3195,7 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
     TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
         updatePaymentMethodOptionSelected,
     TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (createVirtualAccount != null) {
@@ -3034,6 +3222,7 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
     required TResult Function(_UpdatePaymentMethodOptionSelected value)
         updatePaymentMethodOptionSelected,
     required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
   }) {
     return createVirtualAccount(this);
   }
@@ -3056,6 +3245,7 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
     TResult? Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
   }) {
     return createVirtualAccount?.call(this);
   }
@@ -3078,6 +3268,7 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
     TResult Function(_UpdatePaymentMethodOptionSelected value)?
         updatePaymentMethodOptionSelected,
     TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
     required TResult orElse(),
   }) {
     if (createVirtualAccount != null) {
@@ -3089,6 +3280,206 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
 
 abstract class _CreateVirtualAccount implements NewPaymentEvent {
   const factory _CreateVirtualAccount() = _$_CreateVirtualAccount;
+}
+
+/// @nodoc
+abstract class _$$_GetPrincipalCutoffsCopyWith<$Res> {
+  factory _$$_GetPrincipalCutoffsCopyWith(_$_GetPrincipalCutoffs value,
+          $Res Function(_$_GetPrincipalCutoffs) then) =
+      __$$_GetPrincipalCutoffsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_GetPrincipalCutoffsCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$_GetPrincipalCutoffs>
+    implements _$$_GetPrincipalCutoffsCopyWith<$Res> {
+  __$$_GetPrincipalCutoffsCopyWithImpl(_$_GetPrincipalCutoffs _value,
+      $Res Function(_$_GetPrincipalCutoffs) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_GetPrincipalCutoffs implements _GetPrincipalCutoffs {
+  const _$_GetPrincipalCutoffs();
+
+  @override
+  String toString() {
+    return 'NewPaymentEvent.getPrincipalCutoffs()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_GetPrincipalCutoffs);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+        initialized,
+    required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
+    required TResult Function(CustomerOpenItem item, bool selected)
+        toggleInvoice,
+    required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
+    required TResult Function(CustomerOpenItem item, bool selected)
+        toggleCredit,
+    required TResult Function() pay,
+    required TResult Function(PaymentInfo paymentInfo) getCustomerPayment,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
+    required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
+        updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
+  }) {
+    return getPrincipalCutoffs();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
+    TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
+    TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
+    TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
+    TResult? Function()? pay,
+    TResult? Function(PaymentInfo paymentInfo)? getCustomerPayment,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
+    TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
+        updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
+  }) {
+    return getPrincipalCutoffs?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
+    TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
+    TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
+    TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
+    TResult Function()? pay,
+    TResult Function(PaymentInfo paymentInfo)? getCustomerPayment,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
+    TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
+        updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
+    required TResult orElse(),
+  }) {
+    if (getPrincipalCutoffs != null) {
+      return getPrincipalCutoffs();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_SelectAllInvoices value) updateAllInvoices,
+    required TResult Function(_ToggleInvoice value) toggleInvoice,
+    required TResult Function(_SelectAllCredits value) updateAllCredits,
+    required TResult Function(_ToggleCredit value) toggleCredit,
+    required TResult Function(_Pay value) pay,
+    required TResult Function(_GetCustomerPayment value) getCustomerPayment,
+    required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
+    required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
+    required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
+  }) {
+    return getPrincipalCutoffs(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
+    TResult? Function(_ToggleInvoice value)? toggleInvoice,
+    TResult? Function(_SelectAllCredits value)? updateAllCredits,
+    TResult? Function(_ToggleCredit value)? toggleCredit,
+    TResult? Function(_Pay value)? pay,
+    TResult? Function(_GetCustomerPayment value)? getCustomerPayment,
+    TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
+    TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
+    TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
+  }) {
+    return getPrincipalCutoffs?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_SelectAllInvoices value)? updateAllInvoices,
+    TResult Function(_ToggleInvoice value)? toggleInvoice,
+    TResult Function(_SelectAllCredits value)? updateAllCredits,
+    TResult Function(_ToggleCredit value)? toggleCredit,
+    TResult Function(_Pay value)? pay,
+    TResult Function(_GetCustomerPayment value)? getCustomerPayment,
+    TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
+    TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
+    TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
+    required TResult orElse(),
+  }) {
+    if (getPrincipalCutoffs != null) {
+      return getPrincipalCutoffs(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetPrincipalCutoffs implements NewPaymentEvent {
+  const factory _GetPrincipalCutoffs() = _$_GetPrincipalCutoffs;
 }
 
 /// @nodoc
@@ -3113,10 +3504,13 @@ mixin _$NewPaymentState {
       throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
+  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
   bool get isCreatingVirtualAccount => throw _privateConstructorUsedError;
   CreateVirtualAccount get createVirtualAccount =>
       throw _privateConstructorUsedError;
+  bool get isFetchingPrincipalCutoffs => throw _privateConstructorUsedError;
+  PrincipalCutoffs get principalCutoffs => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewPaymentStateCopyWith<NewPaymentState> get copyWith =>
@@ -3143,17 +3537,22 @@ abstract class $NewPaymentStateCopyWith<$Res> {
       NewPaymentMethod selectedPaymentMethod,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
       User user,
       bool isCreatingVirtualAccount,
-      CreateVirtualAccount createVirtualAccount});
+      CreateVirtualAccount createVirtualAccount,
+      bool isFetchingPrincipalCutoffs,
+      PrincipalCutoffs principalCutoffs});
 
   $CustomerPaymentInfoCopyWith<$Res> get customerPaymentInfo;
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
   $NewPaymentMethodCopyWith<$Res> get selectedPaymentMethod;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
   $CreateVirtualAccountCopyWith<$Res> get createVirtualAccount;
+  $PrincipalCutoffsCopyWith<$Res> get principalCutoffs;
 }
 
 /// @nodoc
@@ -3182,9 +3581,12 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
     Object? selectedPaymentMethod = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
     Object? user = null,
     Object? isCreatingVirtualAccount = null,
     Object? createVirtualAccount = null,
+    Object? isFetchingPrincipalCutoffs = null,
+    Object? principalCutoffs = null,
   }) {
     return _then(_value.copyWith(
       customerPaymentInfo: null == customerPaymentInfo
@@ -3239,6 +3641,10 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -3251,6 +3657,14 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
           ? _value.createVirtualAccount
           : createVirtualAccount // ignore: cast_nullable_to_non_nullable
               as CreateVirtualAccount,
+      isFetchingPrincipalCutoffs: null == isFetchingPrincipalCutoffs
+          ? _value.isFetchingPrincipalCutoffs
+          : isFetchingPrincipalCutoffs // ignore: cast_nullable_to_non_nullable
+              as bool,
+      principalCutoffs: null == principalCutoffs
+          ? _value.principalCutoffs
+          : principalCutoffs // ignore: cast_nullable_to_non_nullable
+              as PrincipalCutoffs,
     ) as $Val);
   }
 
@@ -3299,6 +3713,14 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
 
   @override
   @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value) as $Val);
@@ -3311,6 +3733,14 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
     return $CreateVirtualAccountCopyWith<$Res>(_value.createVirtualAccount,
         (value) {
       return _then(_value.copyWith(createVirtualAccount: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PrincipalCutoffsCopyWith<$Res> get principalCutoffs {
+    return $PrincipalCutoffsCopyWith<$Res>(_value.principalCutoffs, (value) {
+      return _then(_value.copyWith(principalCutoffs: value) as $Val);
     });
   }
 }
@@ -3337,9 +3767,12 @@ abstract class _$$_NewPaymentStateCopyWith<$Res>
       NewPaymentMethod selectedPaymentMethod,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
       User user,
       bool isCreatingVirtualAccount,
-      CreateVirtualAccount createVirtualAccount});
+      CreateVirtualAccount createVirtualAccount,
+      bool isFetchingPrincipalCutoffs,
+      PrincipalCutoffs principalCutoffs});
 
   @override
   $CustomerPaymentInfoCopyWith<$Res> get customerPaymentInfo;
@@ -3352,9 +3785,13 @@ abstract class _$$_NewPaymentStateCopyWith<$Res>
   @override
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
   $UserCopyWith<$Res> get user;
   @override
   $CreateVirtualAccountCopyWith<$Res> get createVirtualAccount;
+  @override
+  $PrincipalCutoffsCopyWith<$Res> get principalCutoffs;
 }
 
 /// @nodoc
@@ -3381,9 +3818,12 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
     Object? selectedPaymentMethod = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
     Object? user = null,
     Object? isCreatingVirtualAccount = null,
     Object? createVirtualAccount = null,
+    Object? isFetchingPrincipalCutoffs = null,
+    Object? principalCutoffs = null,
   }) {
     return _then(_$_NewPaymentState(
       customerPaymentInfo: null == customerPaymentInfo
@@ -3438,6 +3878,10 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -3450,6 +3894,14 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
           ? _value.createVirtualAccount
           : createVirtualAccount // ignore: cast_nullable_to_non_nullable
               as CreateVirtualAccount,
+      isFetchingPrincipalCutoffs: null == isFetchingPrincipalCutoffs
+          ? _value.isFetchingPrincipalCutoffs
+          : isFetchingPrincipalCutoffs // ignore: cast_nullable_to_non_nullable
+              as bool,
+      principalCutoffs: null == principalCutoffs
+          ? _value.principalCutoffs
+          : principalCutoffs // ignore: cast_nullable_to_non_nullable
+              as PrincipalCutoffs,
     ));
   }
 }
@@ -3471,9 +3923,12 @@ class _$_NewPaymentState extends _NewPaymentState {
       required this.selectedPaymentMethod,
       required this.salesOrganisation,
       required this.customerCodeInfo,
+      required this.shipToInfo,
       required this.user,
       required this.isCreatingVirtualAccount,
-      required this.createVirtualAccount})
+      required this.createVirtualAccount,
+      required this.isFetchingPrincipalCutoffs,
+      required this.principalCutoffs})
       : _selectedInvoices = selectedInvoices,
         _selectedCredits = selectedCredits,
         _paymentMethods = paymentMethods,
@@ -3525,15 +3980,21 @@ class _$_NewPaymentState extends _NewPaymentState {
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
+  final ShipToInfo shipToInfo;
+  @override
   final User user;
   @override
   final bool isCreatingVirtualAccount;
   @override
   final CreateVirtualAccount createVirtualAccount;
+  @override
+  final bool isFetchingPrincipalCutoffs;
+  @override
+  final PrincipalCutoffs principalCutoffs;
 
   @override
   String toString() {
-    return 'NewPaymentState(customerPaymentInfo: $customerPaymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, user: $user, isCreatingVirtualAccount: $isCreatingVirtualAccount, createVirtualAccount: $createVirtualAccount)';
+    return 'NewPaymentState(customerPaymentInfo: $customerPaymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, isCreatingVirtualAccount: $isCreatingVirtualAccount, createVirtualAccount: $createVirtualAccount, isFetchingPrincipalCutoffs: $isFetchingPrincipalCutoffs, principalCutoffs: $principalCutoffs)';
   }
 
   @override
@@ -3569,33 +4030,45 @@ class _$_NewPaymentState extends _NewPaymentState {
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(
                     other.isCreatingVirtualAccount, isCreatingVirtualAccount) ||
                 other.isCreatingVirtualAccount == isCreatingVirtualAccount) &&
             (identical(other.createVirtualAccount, createVirtualAccount) ||
-                other.createVirtualAccount == createVirtualAccount));
+                other.createVirtualAccount == createVirtualAccount) &&
+            (identical(other.isFetchingPrincipalCutoffs,
+                    isFetchingPrincipalCutoffs) ||
+                other.isFetchingPrincipalCutoffs ==
+                    isFetchingPrincipalCutoffs) &&
+            (identical(other.principalCutoffs, principalCutoffs) ||
+                other.principalCutoffs == principalCutoffs));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      customerPaymentInfo,
-      failureOrSuccessOption,
-      isLoading,
-      const DeepCollectionEquality().hash(_selectedInvoices),
-      const DeepCollectionEquality().hash(_selectedCredits),
-      isFetchingInvoiceInfoPdf,
-      paymentInvoiceInfoPdf,
-      isSavingInvoicePdf,
-      isFetchingPaymentMethod,
-      const DeepCollectionEquality().hash(_paymentMethods),
-      selectedPaymentMethod,
-      salesOrganisation,
-      customerCodeInfo,
-      user,
-      isCreatingVirtualAccount,
-      createVirtualAccount);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        customerPaymentInfo,
+        failureOrSuccessOption,
+        isLoading,
+        const DeepCollectionEquality().hash(_selectedInvoices),
+        const DeepCollectionEquality().hash(_selectedCredits),
+        isFetchingInvoiceInfoPdf,
+        paymentInvoiceInfoPdf,
+        isSavingInvoicePdf,
+        isFetchingPaymentMethod,
+        const DeepCollectionEquality().hash(_paymentMethods),
+        selectedPaymentMethod,
+        salesOrganisation,
+        customerCodeInfo,
+        shipToInfo,
+        user,
+        isCreatingVirtualAccount,
+        createVirtualAccount,
+        isFetchingPrincipalCutoffs,
+        principalCutoffs
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -3619,10 +4092,12 @@ abstract class _NewPaymentState extends NewPaymentState {
       required final NewPaymentMethod selectedPaymentMethod,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
       required final User user,
       required final bool isCreatingVirtualAccount,
-      required final CreateVirtualAccount
-          createVirtualAccount}) = _$_NewPaymentState;
+      required final CreateVirtualAccount createVirtualAccount,
+      required final bool isFetchingPrincipalCutoffs,
+      required final PrincipalCutoffs principalCutoffs}) = _$_NewPaymentState;
   const _NewPaymentState._() : super._();
 
   @override
@@ -3652,11 +4127,17 @@ abstract class _NewPaymentState extends NewPaymentState {
   @override
   CustomerCodeInfo get customerCodeInfo;
   @override
+  ShipToInfo get shipToInfo;
+  @override
   User get user;
   @override
   bool get isCreatingVirtualAccount;
   @override
   CreateVirtualAccount get createVirtualAccount;
+  @override
+  bool get isFetchingPrincipalCutoffs;
+  @override
+  PrincipalCutoffs get principalCutoffs;
   @override
   @JsonKey(ignore: true)
   _$$_NewPaymentStateCopyWith<_$_NewPaymentState> get copyWith =>

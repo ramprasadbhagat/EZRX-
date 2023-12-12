@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -55,6 +56,9 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
+    implements NewPaymentBloc {}
+
 void main() {
   late AllInvoicesBloc allInvoicesBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
@@ -72,6 +76,7 @@ void main() {
   final sgSalesOrganisation = SalesOrganisation.empty().copyWith(
     salesOrg: SalesOrg('2601'),
   );
+  late NewPaymentBlocMock newPaymentBlocMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -92,6 +97,7 @@ void main() {
     salesOrgBlocMock = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
+    newPaymentBlocMock = NewPaymentBlocMock();
 
     when(() => allInvoicesBlocMock.state)
         .thenReturn(AllInvoicesState.initial());
@@ -106,6 +112,7 @@ void main() {
         .thenReturn(EligibilityState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
+    when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
   });
 
   Widget getWidget() {
@@ -135,6 +142,12 @@ void main() {
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<AnnouncementBloc>(
           create: (context) => announcementBlocMock,
+        ),
+        BlocProvider<AnnouncementBloc>(
+          create: (context) => announcementBlocMock,
+        ),
+        BlocProvider<NewPaymentBloc>(
+          create: (context) => newPaymentBlocMock,
         ),
       ],
       child: const AllInvoicesPage(),

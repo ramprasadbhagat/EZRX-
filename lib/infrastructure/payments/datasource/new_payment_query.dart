@@ -175,4 +175,14 @@ class NewPaymentQuery {
     }
     ''';
   }
+
+  String getPrincipalCutOffs() {
+    return '''
+    query GetPrincipalCutoffs(\$request: PrincipalCutoffRequest!) {
+      getPrincipalCutoffs(request: \$request) {
+        total
+      }
+    }
+    ''';
+  }
 }

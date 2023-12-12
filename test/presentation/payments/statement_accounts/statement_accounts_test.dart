@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.d
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -197,7 +198,7 @@ void main() {
             create: (context) => mockNewPaymentBloc,
           ),
         ],
-        child: Scaffold(
+        child: const Scaffold(
           body: StatementAccountsPage(),
         ),
       );
@@ -434,7 +435,7 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-      final paymentButton = find.byKey(WidgetKeys.soaNewpaymentButtonKey);
+      final paymentButton = find.byKey(WidgetKeys.newPaymentButton);
       expect(
         paymentButton,
         findsOneWidget,
@@ -450,6 +451,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'mock-customerCodeSoldTo',
             ),
+            shipToInfo: ShipToInfo.empty(),
             user: User.empty(),
           ),
         ),

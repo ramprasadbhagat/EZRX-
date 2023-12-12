@@ -4,19 +4,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
-import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
-import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
-import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
-import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/presentation/core/value_range_error.dart';
-import 'package:ezrxmobile/presentation/utils/router_utils.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/new_payment_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -84,12 +77,8 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
         centerTitle: false,
         actions: const [_PaymentSummaryDownloadButton()],
       ),
-      floatingActionButton: ScaleButton(
-        key: WidgetKeys.newPaymentButton,
-        icon: Icons.add,
-        label: 'New payment',
-        onPress: () => _toNewPayment(context),
-        scrollController: _scrollController,
+      floatingActionButton: NewPaymentButton.scale(
+        controller: _scrollController,
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
@@ -120,37 +109,5 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
         ),
       ),
     );
-  }
-
-  void _toNewPayment(BuildContext context) {
-    trackMixpanelEvent(
-      MixpanelEvents.newPaymentClicked,
-      props: {
-        MixpanelProps.clickAt:
-            RouterUtils.buildRouteTrackingName(context.routeData.path),
-      },
-    );
-    context.read<OutstandingInvoicesBloc>().add(
-          OutstandingInvoicesEvent.fetch(
-            appliedFilter: OutstandingInvoiceFilter.init(),
-            searchKey: SearchKey.search(''),
-          ),
-        );
-    context.read<AvailableCreditsBloc>().add(
-          AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
-            searchKey: SearchKey.searchFilter(''),
-          ),
-        );
-    context.read<NewPaymentBloc>().add(
-          NewPaymentEvent.initialized(
-            user: context.read<EligibilityBloc>().state.user,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-          ),
-        );
-    context.router.pushNamed('payments/new_payment');
   }
 }

@@ -456,11 +456,9 @@ class AppRouter extends _i89.RootStackRouter {
       );
     },
     StatementAccountsPageRoute.name: (routeData) {
-      final args = routeData.argsAs<StatementAccountsPageRouteArgs>(
-          orElse: () => const StatementAccountsPageRouteArgs());
       return _i89.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i45.StatementAccountsPage(key: args.key),
+        child: const _i45.StatementAccountsPage(),
       );
     },
     PaymentAdviceCreatedPageRoute.name: (routeData) {
@@ -1868,27 +1866,14 @@ class NewPaymentPageRoute extends _i89.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i45.StatementAccountsPage]
-class StatementAccountsPageRoute
-    extends _i89.PageRouteInfo<StatementAccountsPageRouteArgs> {
-  StatementAccountsPageRoute({_i90.Key? key})
+class StatementAccountsPageRoute extends _i89.PageRouteInfo<void> {
+  const StatementAccountsPageRoute()
       : super(
           StatementAccountsPageRoute.name,
           path: 'payments/statement_accounts',
-          args: StatementAccountsPageRouteArgs(key: key),
         );
 
   static const String name = 'StatementAccountsPageRoute';
-}
-
-class StatementAccountsPageRouteArgs {
-  const StatementAccountsPageRouteArgs({this.key});
-
-  final _i90.Key? key;
-
-  @override
-  String toString() {
-    return 'StatementAccountsPageRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

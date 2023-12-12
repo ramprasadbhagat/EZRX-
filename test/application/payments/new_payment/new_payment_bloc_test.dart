@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -113,6 +114,7 @@ void main() {
           NewPaymentEvent.initialized(
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
+            shipToInfo: ShipToInfo.empty(),
             user: User.empty(),
           ),
         ),
@@ -149,6 +151,8 @@ void main() {
           NewPaymentEvent.initialized(
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
+                        shipToInfo: ShipToInfo.empty(),
+
             user: User.empty(),
           ),
         ),

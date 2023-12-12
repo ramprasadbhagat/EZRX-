@@ -1255,7 +1255,6 @@ class WidgetKeys {
   // SOA page
   //============================================================
   static const Key soaNotFoundRecordKey = Key('soaNotFoundRecordKey');
-  static const Key soaNewpaymentButtonKey = Key('soaNewpaymentButton');
   static const Key soaToDateFieldKey = Key('toDateField');
   static const Key soaFromDateFieldKey = Key('fromDateField');
   static const Key soaLoadingAnimationWidgetKey = Key('loadingAnimationWidget');

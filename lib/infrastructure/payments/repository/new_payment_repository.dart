@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
@@ -11,6 +12,7 @@ import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
@@ -380,6 +382,34 @@ class NewPaymentRepository extends INewPaymentRepository {
         bankID: paymentMethodOption.bankOptionId.getOrDefaultValue(''),
         provider: paymentMethodOption.prodiver.getOrDefaultValue(''),
         invoices: customerInvoices,
+      );
+
+      return Right(response);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, PrincipalCutoffs>> getPrincipalCutoffs({
+    required ShipToInfo shipToInfo,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.getPrincipalCutoffs();
+
+        return Right(response);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final response = await remoteDataSource.getPrincipalCutoffs(
+        branches: [shipToInfo.plant],
       );
 
       return Right(response);

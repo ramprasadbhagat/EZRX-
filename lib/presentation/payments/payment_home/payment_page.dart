@@ -23,6 +23,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -30,8 +31,9 @@ import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/new_payment_button.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,6 +46,21 @@ part 'widgets/payment_summary.dart';
 class PaymentPage extends StatelessWidget {
   const PaymentPage({Key? key}) : super(key: key);
 
+  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
+    return showModalBottomSheet<bool>(
+      context: context,
+      enableDrag: false,
+      builder: (_) => ConfirmBottomSheet(
+        key: WidgetKeys.confirmBottomSheet,
+        title: 'We are closed for payment',
+        content:
+            "We are unable to proceed with the payment during the month's end. Please try again the following month. Thank you",
+        confirmButtonText: 'Close',
+        displayCancelButton: false,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +70,43 @@ class PaymentPage extends StatelessWidget {
         title: Text(context.tr('Payments')),
         centerTitle: false,
       ),
-      bottomNavigationBar: const _NewPaymentButton(),
+      bottomNavigationBar: BlocListener<NewPaymentBloc, NewPaymentState>(
+        listenWhen: (previous, current) =>
+            previous.isFetchingPrincipalCutoffs !=
+                current.isFetchingPrincipalCutoffs &&
+            !current.isFetchingPrincipalCutoffs,
+        listener: (context, state) {
+          state.failureOrSuccessOption.fold(
+            () {},
+            (option) => option.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) {},
+            ),
+          );
+
+          if (!state.salesOrganisation.salesOrg.isID ||
+              state.principalCutoffs.canMakePayment) {
+            context.read<OutstandingInvoicesBloc>().add(
+                  OutstandingInvoicesEvent.fetch(
+                    appliedFilter: OutstandingInvoiceFilter.init(),
+                    searchKey: SearchKey.search(''),
+                  ),
+                );
+            context.read<AvailableCreditsBloc>().add(
+                  AvailableCreditsEvent.fetch(
+                    appliedFilter: AvailableCreditFilter.empty(),
+                    searchKey: SearchKey.searchFilter(''),
+                  ),
+                );
+            context.router.push(const NewPaymentPageRoute());
+          } else {
+            _showConfirmBottomSheet(context);
+          }
+        },
+        child: const _NewPaymentButton(),
+      ),
       body: RefreshIndicator(
         onRefresh: () async => _refreshPayment(context),
         child: ListView(
@@ -154,47 +207,9 @@ class _NewPaymentButton extends StatelessWidget {
           top: 16,
           bottom: 30,
         ),
-        child: ElevatedButton(
-          key: WidgetKeys.newPaymentButton,
-          onPressed: () => _toNewPayment(context),
-          child: Text(
-            context.tr('New Payment'),
-          ),
-        ),
+        child: NewPaymentButton.elevated(),
       ),
     );
-  }
-
-  void _toNewPayment(BuildContext context) {
-    trackMixpanelEvent(
-      MixpanelEvents.newPaymentClicked,
-      props: {
-        MixpanelProps.clickAt:
-            RouterUtils.buildRouteTrackingName(context.routeData.path),
-      },
-    );
-    context.read<OutstandingInvoicesBloc>().add(
-          OutstandingInvoicesEvent.fetch(
-            appliedFilter: OutstandingInvoiceFilter.init(),
-            searchKey: SearchKey.search(''),
-          ),
-        );
-    context.read<AvailableCreditsBloc>().add(
-          AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
-            searchKey: SearchKey.searchFilter(''),
-          ),
-        );
-    context.read<NewPaymentBloc>().add(
-          NewPaymentEvent.initialized(
-            user: context.read<EligibilityBloc>().state.user,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-          ),
-        );
-    context.router.pushNamed('payments/new_payment');
   }
 }
 

@@ -17,7 +17,7 @@ class StatementOfAccountRobot {
   final soaFromDateFilter = find.byKey(WidgetKeys.soaFromDateFieldKey);
   final soaToDateFilter = find.byKey(WidgetKeys.soaToDateFieldKey);
   final soaSearchResultsKey = find.byKey(WidgetKeys.soaSearchResultsKey);
-  final soaNewpaymentButtonKey = find.byKey(WidgetKeys.soaNewpaymentButtonKey);
+  final soaNewpaymentButtonKey = find.byKey(WidgetKeys.newPaymentButton);
   final soaFilterApplyButtonKey =
       find.byKey(WidgetKeys.soaFilterApplyButtonKey);
   final firstSoaItemKey = find.byKey(WidgetKeys.genericKey(key: 'SoaItem#0'));

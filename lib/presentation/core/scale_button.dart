@@ -4,7 +4,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class ScaleButton extends StatefulWidget {
-  final GestureTapCallback onPress;
+  final GestureTapCallback? onPress;
   final IconData icon;
   final String label;
   final ScrollController scrollController;
@@ -34,7 +34,6 @@ class _ScaleButtonState extends State<ScaleButton> {
   void dispose() {
     if (widget.scrollController.hasClients) {
       widget.scrollController.removeListener(_scrollListener);
-      widget.scrollController.dispose();
     }
     super.dispose();
   }

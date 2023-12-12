@@ -1,8 +1,7 @@
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/presentation/utils/router_utils.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/new_payment_button.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,23 +13,17 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
-import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
-import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 
 part 'package:ezrxmobile/presentation/payments/all_credits/widgets/credit_group.dart';
 part 'package:ezrxmobile/presentation/payments/all_credits/widgets/credit_item.dart';
@@ -111,45 +104,9 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
           ],
         ),
       ),
-      floatingActionButton: ScaleButton(
-        key: WidgetKeys.newPaymentButton,
-        icon: Icons.add,
-        label: context.tr('New payment'),
-        onPress: () => _toNewPayment(context),
-        scrollController: _controller,
+      floatingActionButton: NewPaymentButton.scale(
+        controller: _controller,
       ),
     );
-  }
-
-  void _toNewPayment(BuildContext context) {
-    trackMixpanelEvent(
-      MixpanelEvents.newPaymentClicked,
-      props: {
-        MixpanelProps.clickAt:
-            RouterUtils.buildRouteTrackingName(context.routeData.path),
-      },
-    );
-    context.read<OutstandingInvoicesBloc>().add(
-          OutstandingInvoicesEvent.fetch(
-            appliedFilter: OutstandingInvoiceFilter.init(),
-            searchKey: SearchKey.searchFilter(''),
-          ),
-        );
-    context.read<AvailableCreditsBloc>().add(
-          AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
-            searchKey: SearchKey.searchFilter(''),
-          ),
-        );
-    context.read<NewPaymentBloc>().add(
-          NewPaymentEvent.initialized(
-            user: context.read<EligibilityBloc>().state.user,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-          ),
-        );
-    context.router.pushNamed('payments/new_payment');
   }
 }
