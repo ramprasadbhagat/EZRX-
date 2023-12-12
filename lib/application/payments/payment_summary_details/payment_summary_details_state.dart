@@ -3,6 +3,7 @@ part of 'payment_summary_details_bloc.dart';
 @freezed
 class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
   const PaymentSummaryDetailsState._();
+
   const factory PaymentSummaryDetailsState({
     required PaymentSummaryDetails details,
     required SalesOrganisation salesOrganization,
@@ -19,6 +20,7 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required BankInstruction bankInstruction,
   }) = _PaymentSummaryDetailsState;
+
   factory PaymentSummaryDetailsState.initial() => PaymentSummaryDetailsState(
         details: PaymentSummaryDetails.empty(),
         isDetailFetching: false,
@@ -40,11 +42,17 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
 
   bool get isSavingOrDeleting => isSavingAdvice || isDeletingPayment;
 
-  String get adviceExpiryText => details.status.failedOrInProgress
-      ? salesOrganization.salesOrg.isID
-      ? details.idAdviceExpiryText
-          : details.adviceExpiryText
-      : '-';
+  String get adviceExpiryText {
+    if (details.status.isSuccessful ||
+        details.status.isPaymentReceived ||
+        details.status.isExpiredOrCanceled) {
+      return '-';
+    }
+
+    return salesOrganization.salesOrg.isID
+        ? details.idAdviceExpiryText
+        : details.adviceExpiryText;
+  }
 
   String get adviceDeletedMessage =>
       '${salesOrganization.salesOrg.paymentIdPretext} #${details.zzAdvice.displayDashIfEmpty} has been deleted';

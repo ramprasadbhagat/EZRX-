@@ -406,6 +406,8 @@ class FilterStatus extends ValueObject<String> {
 
   bool get isSuccessful => getSuccessful(value.getOrElse(() => ''));
 
+  bool get isPaymentReceived => getPaymentReceived(value.getOrElse(() => ''));
+
   Color get getPaymentDisplayStatusTextColor =>
       getDisplayStatusTextColor(value.getOrElse(() => ''));
 
@@ -413,10 +415,6 @@ class FilterStatus extends ValueObject<String> {
       getAdviceExpiryColor(value.getOrElse(() => ''));
 
   bool get getIsFailed => isFailed(value.getOrElse(() => ''));
-
-  bool get isInProgress => getIsInProgress(value.getOrElse(() => ''));
-
-  bool get failedOrInProgress => getIsFailed || isInProgress;
 
   Color get getAdviceExpiryTextColorForFailed =>
       getAdviceExpiryColorFailed(value.getOrElse(() => ''));
