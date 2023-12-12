@@ -42,6 +42,7 @@ import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
 import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
+import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
 
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -469,6 +470,50 @@ void main() {
 
         final bundlesFinder = find.byType(BundleSection);
         expect(bundlesFinder, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Recently ordered section not visible when user does not have access to order history tab',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeExternalSalesRepUser.copyWith(
+              accessRight: AccessRight.empty().copyWith(
+                orders: false,
+              ),
+            ),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final recentOrderFinder = find.byType(RecentOrdersSection);
+        expect(recentOrderFinder, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Recently ordered section visible when user have access to order history tab',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeExternalSalesRepUser.copyWith(
+              accessRight: AccessRight.empty().copyWith(
+                orders: true,
+              ),
+            ),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final recentOrderFinder = find.byType(RecentOrdersSection);
+        expect(recentOrderFinder, findsOneWidget);
       },
     );
 

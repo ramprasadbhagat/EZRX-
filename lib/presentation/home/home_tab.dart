@@ -32,9 +32,8 @@ class HomeTab extends StatelessWidget {
     //due to delay UI is not updating according to accessright value
     return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
-          //check user role and products as getter depends on both
-          previous.user.accessRight.products !=
-              current.user.accessRight.products ||
+          //check user role and accessRight as getter depends on both
+          previous.user.accessRight != current.user.accessRight ||
           previous.user.role.type != current.user.role.type ||
           previous.salesOrgConfigs.disableBundles !=
               current.salesOrgConfigs.disableBundles,
@@ -105,7 +104,8 @@ class HomeTab extends StatelessWidget {
                     if (!state.salesOrgConfigs.disableBundles)
                       const BundleSection(),
                   ],
-                  const RecentOrdersSection(),
+                  if (state.user.userCanAccessOrderHistory)
+                    const RecentOrdersSection(),
                   if (state.user.userCanAccessProducts) const BrowseProduct(),
                   const TopAdvertBoxBanner(),
                   const AnnouncementSection(),
