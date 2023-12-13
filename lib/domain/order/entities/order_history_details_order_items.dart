@@ -48,6 +48,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required MaterialInfo material,
     required bool promoStatus,
     required bool isCounterOffer,
+    required bool hidePrice,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -79,6 +80,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         material: MaterialInfo.empty(),
         promoStatus: false,
         isCounterOffer: false,
+        hidePrice: false,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(
@@ -179,6 +181,9 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     bool isIDMarket,
   ) {
     const displayPriceNotAvailable = 'Price Not Available';
+    if (hidePrice) {
+      return displayPriceNotAvailable;
+    }
 
     if (isMYExternalSalesRep && isPnGMaterial && !invoiceNumber.isValid()) {
       return displayPriceNotAvailable;

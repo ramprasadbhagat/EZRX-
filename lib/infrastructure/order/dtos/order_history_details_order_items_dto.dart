@@ -70,6 +70,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required bool promosStatus,
     @JsonKey(name: 'isCounterOffer', defaultValue: false)
         required bool isCounterOffer,
+    @JsonKey(name: 'HidePrice', defaultValue: false)
+        required bool hidePrice,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
     OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
@@ -112,6 +114,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       productType: orderHistoryDetailsOrderItem.productType.getValue(),
       promosStatus: orderHistoryDetailsOrderItem.promoStatus,
       isCounterOffer: orderHistoryDetailsOrderItem.isCounterOffer,
+      hidePrice: orderHistoryDetailsOrderItem.hidePrice,
     );
   }
 
@@ -150,6 +153,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       material: MaterialInfo.empty(),
       promoStatus: promosStatus,
       isCounterOffer: isCounterOffer,
+      hidePrice: hidePrice,
     );
   }
 

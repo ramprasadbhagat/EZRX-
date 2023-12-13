@@ -77,6 +77,8 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   bool get promosStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'isCounterOffer', defaultValue: false)
   bool get isCounterOffer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'HidePrice', defaultValue: false)
+  bool get hidePrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -93,47 +95,56 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
           OrderHistoryDetailsOrderItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Type', defaultValue: '') String type,
-      @JsonKey(name: 'MaterialCode') String materialNumber,
+      {@JsonKey(name: 'Type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'MaterialCode')
+          String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0) int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
-      @JsonKey(name: 'mrp', defaultValue: 0.0) double originPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
-      @JsonKey(name: 'SAPStatus', defaultValue: '') String sAPStatus,
+          String materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0)
+          int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          double unitPrice,
+      @JsonKey(name: 'mrp', defaultValue: 0.0)
+          double originPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          double totalPrice,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          double tax,
+      @JsonKey(name: 'SAPStatus', defaultValue: '')
+          String sAPStatus,
       @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
-      String plannedDeliveryDate,
-      @JsonKey(name: 'PickedQuantity', defaultValue: 0) int pickedQuantity,
-      @JsonKey(name: 'Batch', defaultValue: '') String batch,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
+          String plannedDeliveryDate,
+      @JsonKey(name: 'PickedQuantity', defaultValue: 0)
+          int pickedQuantity,
+      @JsonKey(name: 'Batch', defaultValue: '')
+          String batch,
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
+          String expiryDate,
       @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
-      String lineReferenceNotes,
-      @JsonKey(
-          name: 'IsTenderContractMaterial',
-          defaultValue: false,
-          readValue: boolStringFormatCheck)
-      bool isTenderContractMaterial,
-      @JsonKey(name: 'ParentID', defaultValue: '') String parentId,
-      @JsonKey(
-          name: 'Details',
-          defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
-      List<OrderHistoryDetailsOrderItemDetailsDto> details,
-      @JsonKey(
-          name: 'TenderContractDetails',
-          readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
-      OrderHistoryDetailsOrderItemTenderContractDetailsDto
-          tenderContractDetails,
-      @JsonKey(name: 'PrincipalName', defaultValue: '') String principalName,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
+          String lineReferenceNotes,
+      @JsonKey(name: 'IsTenderContractMaterial', defaultValue: false, readValue: boolStringFormatCheck)
+          bool isTenderContractMaterial,
+      @JsonKey(name: 'ParentID', defaultValue: '')
+          String parentId,
+      @JsonKey(name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
+          List<OrderHistoryDetailsOrderItemDetailsDto> details,
+      @JsonKey(name: 'TenderContractDetails', readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          OrderHistoryDetailsOrderItemTenderContractDetailsDto tenderContractDetails,
+      @JsonKey(name: 'PrincipalName', defaultValue: '')
+          String principalName,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+          String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
-      String governmentMaterialCode,
+          String governmentMaterialCode,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
-      String productType,
-      @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus,
+          String productType,
+      @JsonKey(name: 'promoStatus', defaultValue: false)
+          bool promosStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false)
-      bool isCounterOffer});
+          bool isCounterOffer,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+          bool hidePrice});
 
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
       get tenderContractDetails;
@@ -177,6 +188,7 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? productType = null,
     Object? promosStatus = null,
     Object? isCounterOffer = null,
+    Object? hidePrice = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -275,6 +287,10 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
           ? _value.isCounterOffer
           : isCounterOffer // ignore: cast_nullable_to_non_nullable
               as bool,
+      hidePrice: null == hidePrice
+          ? _value.hidePrice
+          : hidePrice // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -299,47 +315,56 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Type', defaultValue: '') String type,
-      @JsonKey(name: 'MaterialCode') String materialNumber,
+      {@JsonKey(name: 'Type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'MaterialCode')
+          String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0) int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
-      @JsonKey(name: 'mrp', defaultValue: 0.0) double originPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
-      @JsonKey(name: 'SAPStatus', defaultValue: '') String sAPStatus,
+          String materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0)
+          int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          double unitPrice,
+      @JsonKey(name: 'mrp', defaultValue: 0.0)
+          double originPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          double totalPrice,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          double tax,
+      @JsonKey(name: 'SAPStatus', defaultValue: '')
+          String sAPStatus,
       @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
-      String plannedDeliveryDate,
-      @JsonKey(name: 'PickedQuantity', defaultValue: 0) int pickedQuantity,
-      @JsonKey(name: 'Batch', defaultValue: '') String batch,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
+          String plannedDeliveryDate,
+      @JsonKey(name: 'PickedQuantity', defaultValue: 0)
+          int pickedQuantity,
+      @JsonKey(name: 'Batch', defaultValue: '')
+          String batch,
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
+          String expiryDate,
       @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
-      String lineReferenceNotes,
-      @JsonKey(
-          name: 'IsTenderContractMaterial',
-          defaultValue: false,
-          readValue: boolStringFormatCheck)
-      bool isTenderContractMaterial,
-      @JsonKey(name: 'ParentID', defaultValue: '') String parentId,
-      @JsonKey(
-          name: 'Details',
-          defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
-      List<OrderHistoryDetailsOrderItemDetailsDto> details,
-      @JsonKey(
-          name: 'TenderContractDetails',
-          readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
-      OrderHistoryDetailsOrderItemTenderContractDetailsDto
-          tenderContractDetails,
-      @JsonKey(name: 'PrincipalName', defaultValue: '') String principalName,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
+          String lineReferenceNotes,
+      @JsonKey(name: 'IsTenderContractMaterial', defaultValue: false, readValue: boolStringFormatCheck)
+          bool isTenderContractMaterial,
+      @JsonKey(name: 'ParentID', defaultValue: '')
+          String parentId,
+      @JsonKey(name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
+          List<OrderHistoryDetailsOrderItemDetailsDto> details,
+      @JsonKey(name: 'TenderContractDetails', readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          OrderHistoryDetailsOrderItemTenderContractDetailsDto tenderContractDetails,
+      @JsonKey(name: 'PrincipalName', defaultValue: '')
+          String principalName,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+          String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
-      String governmentMaterialCode,
+          String governmentMaterialCode,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
-      String productType,
-      @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus,
+          String productType,
+      @JsonKey(name: 'promoStatus', defaultValue: false)
+          bool promosStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false)
-      bool isCounterOffer});
+          bool isCounterOffer,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+          bool hidePrice});
 
   @override
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
@@ -383,6 +408,7 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
     Object? productType = null,
     Object? promosStatus = null,
     Object? isCounterOffer = null,
+    Object? hidePrice = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItemDto(
       type: null == type
@@ -481,6 +507,10 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
           ? _value.isCounterOffer
           : isCounterOffer // ignore: cast_nullable_to_non_nullable
               as bool,
+      hidePrice: null == hidePrice
+          ? _value.hidePrice
+          : hidePrice // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -490,51 +520,56 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
 class _$_OrderHistoryDetailsOrderItemDto
     extends _OrderHistoryDetailsOrderItemDto {
   const _$_OrderHistoryDetailsOrderItemDto(
-      {@JsonKey(name: 'Type', defaultValue: '') required this.type,
-      @JsonKey(name: 'MaterialCode') required this.materialNumber,
+      {@JsonKey(name: 'Type', defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'MaterialCode')
+          required this.materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      required this.materialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0) required this.qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required this.unitPrice,
-      @JsonKey(name: 'mrp', defaultValue: 0.0) required this.originPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required this.totalPrice,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) required this.tax,
-      @JsonKey(name: 'SAPStatus', defaultValue: '') required this.sAPStatus,
+          required this.materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0)
+          required this.qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          required this.unitPrice,
+      @JsonKey(name: 'mrp', defaultValue: 0.0)
+          required this.originPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          required this.totalPrice,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          required this.tax,
+      @JsonKey(name: 'SAPStatus', defaultValue: '')
+          required this.sAPStatus,
       @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
-      required this.plannedDeliveryDate,
+          required this.plannedDeliveryDate,
       @JsonKey(name: 'PickedQuantity', defaultValue: 0)
-      required this.pickedQuantity,
-      @JsonKey(name: 'Batch', defaultValue: '') required this.batch,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '') required this.expiryDate,
+          required this.pickedQuantity,
+      @JsonKey(name: 'Batch', defaultValue: '')
+          required this.batch,
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
+          required this.expiryDate,
       @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
-      required this.lineReferenceNotes,
-      @JsonKey(
-          name: 'IsTenderContractMaterial',
-          defaultValue: false,
-          readValue: boolStringFormatCheck)
-      required this.isTenderContractMaterial,
-      @JsonKey(name: 'ParentID', defaultValue: '') required this.parentId,
-      @JsonKey(
-          name: 'Details',
-          defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
-      required final List<OrderHistoryDetailsOrderItemDetailsDto> details,
-      @JsonKey(
-          name: 'TenderContractDetails',
-          readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
-      required this.tenderContractDetails,
+          required this.lineReferenceNotes,
+      @JsonKey(name: 'IsTenderContractMaterial', defaultValue: false, readValue: boolStringFormatCheck)
+          required this.isTenderContractMaterial,
+      @JsonKey(name: 'ParentID', defaultValue: '')
+          required this.parentId,
+      @JsonKey(name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
+          required final List<OrderHistoryDetailsOrderItemDetailsDto> details,
+      @JsonKey(name: 'TenderContractDetails', readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          required this.tenderContractDetails,
       @JsonKey(name: 'PrincipalName', defaultValue: '')
-      required this.principalName,
-      @JsonKey(
-          name: 'PrincipalCode', defaultValue: '')
-      required this.principalCode,
+          required this.principalName,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+          required this.principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
-      required this.governmentMaterialCode,
+          required this.governmentMaterialCode,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
-      required this.productType,
+          required this.productType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
-      required this.promosStatus,
+          required this.promosStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false)
-      required this.isCounterOffer})
+          required this.isCounterOffer,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+          required this.hidePrice})
       : _details = details,
         super._();
 
@@ -627,10 +662,13 @@ class _$_OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'isCounterOffer', defaultValue: false)
   final bool isCounterOffer;
+  @override
+  @JsonKey(name: 'HidePrice', defaultValue: false)
+  final bool hidePrice;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer)';
+    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice)';
   }
 
   @override
@@ -681,7 +719,9 @@ class _$_OrderHistoryDetailsOrderItemDto
             (identical(other.promosStatus, promosStatus) ||
                 other.promosStatus == promosStatus) &&
             (identical(other.isCounterOffer, isCounterOffer) ||
-                other.isCounterOffer == isCounterOffer));
+                other.isCounterOffer == isCounterOffer) &&
+            (identical(other.hidePrice, hidePrice) ||
+                other.hidePrice == hidePrice));
   }
 
   @JsonKey(ignore: true)
@@ -711,7 +751,8 @@ class _$_OrderHistoryDetailsOrderItemDto
         governmentMaterialCode,
         productType,
         promosStatus,
-        isCounterOffer
+        isCounterOffer,
+        hidePrice
       ]);
 
   @JsonKey(ignore: true)
@@ -733,57 +774,56 @@ class _$_OrderHistoryDetailsOrderItemDto
 abstract class _OrderHistoryDetailsOrderItemDto
     extends OrderHistoryDetailsOrderItemDto {
   const factory _OrderHistoryDetailsOrderItemDto(
-      {@JsonKey(name: 'Type', defaultValue: '') required final String type,
-      @JsonKey(name: 'MaterialCode') required final String materialNumber,
+      {@JsonKey(name: 'Type', defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'MaterialCode')
+          required final String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      required final String materialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0) required final int qty,
+          required final String materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0)
+          required final int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-      required final double unitPrice,
+          required final double unitPrice,
       @JsonKey(name: 'mrp', defaultValue: 0.0)
-      required final double originPrice,
+          required final double originPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-      required final double totalPrice,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) required final double tax,
+          required final double totalPrice,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          required final double tax,
       @JsonKey(name: 'SAPStatus', defaultValue: '')
-      required final String sAPStatus,
+          required final String sAPStatus,
       @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
-      required final String plannedDeliveryDate,
+          required final String plannedDeliveryDate,
       @JsonKey(name: 'PickedQuantity', defaultValue: 0)
-      required final int pickedQuantity,
-      @JsonKey(name: 'Batch', defaultValue: '') required final String batch,
+          required final int pickedQuantity,
+      @JsonKey(name: 'Batch', defaultValue: '')
+          required final String batch,
       @JsonKey(name: 'ExpiryDate', defaultValue: '')
-      required final String expiryDate,
+          required final String expiryDate,
       @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
-      required final String lineReferenceNotes,
-      @JsonKey(
-          name: 'IsTenderContractMaterial',
-          defaultValue: false,
-          readValue: boolStringFormatCheck)
-      required final bool isTenderContractMaterial,
+          required final String lineReferenceNotes,
+      @JsonKey(name: 'IsTenderContractMaterial', defaultValue: false, readValue: boolStringFormatCheck)
+          required final bool isTenderContractMaterial,
       @JsonKey(name: 'ParentID', defaultValue: '')
-      required final String parentId,
-      @JsonKey(
-          name: 'Details',
-          defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
-      required final List<OrderHistoryDetailsOrderItemDetailsDto> details,
-      @JsonKey(
-          name: 'TenderContractDetails',
-          readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
-      required final OrderHistoryDetailsOrderItemTenderContractDetailsDto
-          tenderContractDetails,
+          required final String parentId,
+      @JsonKey(name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
+          required final List<OrderHistoryDetailsOrderItemDetailsDto> details,
+      @JsonKey(name: 'TenderContractDetails', readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          required final OrderHistoryDetailsOrderItemTenderContractDetailsDto tenderContractDetails,
       @JsonKey(name: 'PrincipalName', defaultValue: '')
-      required final String principalName,
+          required final String principalName,
       @JsonKey(name: 'PrincipalCode', defaultValue: '')
-      required final String principalCode,
+          required final String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
-      required final String governmentMaterialCode,
+          required final String governmentMaterialCode,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
-      required final String productType,
+          required final String productType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
-      required final bool promosStatus,
+          required final bool promosStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false)
-      required final bool isCounterOffer}) = _$_OrderHistoryDetailsOrderItemDto;
+          required final bool isCounterOffer,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+          required final bool hidePrice}) = _$_OrderHistoryDetailsOrderItemDto;
   const _OrderHistoryDetailsOrderItemDto._() : super._();
 
   factory _OrderHistoryDetailsOrderItemDto.fromJson(Map<String, dynamic> json) =
@@ -868,6 +908,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'isCounterOffer', defaultValue: false)
   bool get isCounterOffer;
+  @override
+  @JsonKey(name: 'HidePrice', defaultValue: false)
+  bool get hidePrice;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderItemDtoCopyWith<

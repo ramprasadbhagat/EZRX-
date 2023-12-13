@@ -260,7 +260,8 @@ class CartState with _$CartState {
       .where(
         (item) =>
             !item.materialInfo.type.typeBundle &&
-            !item.materialInfo.type.typeCombo,
+            !item.materialInfo.type.typeCombo &&
+            !item.materialInfo.hidePrice,
       )
       .fold<double>(
         0,

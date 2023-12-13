@@ -42,6 +42,7 @@ _$_OrderHistoryDetailsOrderItemDto _$$_OrderHistoryDetailsOrderItemDtoFromJson(
       productType: _getProductType(json, 'ProductType') as String,
       promosStatus: json['promoStatus'] as bool? ?? false,
       isCounterOffer: json['isCounterOffer'] as bool? ?? false,
+      hidePrice: json['HidePrice'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
@@ -71,4 +72,5 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
       'ProductType': instance.productType,
       'promoStatus': instance.promosStatus,
       'isCounterOffer': instance.isCounterOffer,
+      'HidePrice': instance.hidePrice,
     };

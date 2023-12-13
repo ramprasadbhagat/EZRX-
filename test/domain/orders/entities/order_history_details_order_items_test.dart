@@ -114,6 +114,15 @@ void main() async {
         );
       });
 
+      test('Display Price not available when hidePrice is true', () {
+        expect(
+          OrderHistoryDetailsOrderItem.empty()
+              .copyWith(hidePrice: true)
+              .itemTotalPrice(fakeValidInvoice, true, false),
+          priceNotAvailableText,
+        );
+      });
+
       test('Display normal price', () {
         expect(
           OrderHistoryDetailsOrderItem.empty()

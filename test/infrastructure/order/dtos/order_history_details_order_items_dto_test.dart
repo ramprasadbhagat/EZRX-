@@ -14,6 +14,7 @@ void main() {
         'Qty': 10,
         'UnitPrice': 10.0,
         'TotalPrice': 20.0,
+        'HidePrice': true,
         'Tax': 0,
         'SAPStatus': 'fake-status',
         'PlannedDeliveryDate': 'fake-date',
@@ -34,6 +35,7 @@ void main() {
       );
 
       expect(configs.batch, 'fake-batch');
+      expect(configs.hidePrice, true);
     });
 
     test('Test tojson', () {
@@ -44,6 +46,7 @@ void main() {
       ).toJson();
 
       expect(configs['Batch'], 'fake-batch');
+      expect(configs['HidePrice'], true);
     });
   });
 }
