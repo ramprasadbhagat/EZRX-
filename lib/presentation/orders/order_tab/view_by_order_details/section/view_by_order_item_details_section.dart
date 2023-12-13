@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -32,16 +33,6 @@ class OrderItemDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     if (viewByOrderHistoryGroupList.isEmpty) return const SizedBox.shrink();
 
-    final eligibilityState = context.read<EligibilityBloc>().state;
-    final salesOrgConfig = eligibilityState.salesOrgConfigs;
-    final invoiceNumber = context
-        .read<ViewByOrderDetailsBloc>()
-        .state
-        .orderHistoryDetails
-        .invoiceNumber;
-    final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
-    final isIDMarket = eligibilityState.salesOrganisation.salesOrg.isID;
-
     return Padding(
       key: WidgetKeys.viewByOrderDetailItemsSection,
       padding: const EdgeInsets.symmetric(
@@ -67,94 +58,116 @@ class OrderItemDetailsSection extends StatelessWidget {
                     buildWhen: (previous, current) =>
                         previous.orderHistory.orderHistoryItems !=
                         current.orderHistory.orderHistoryItems,
-                    builder: (context, state) => state
-                            .orderHistory.orderHistoryItems.isEmpty
-                        ? const SizedBox.shrink()
-                        : Column(
-                            children: e.viewByOrderItem
-                                .mapIndexed(
-                                  (index, e) => CommonTileItem(
-                                    onTap: () => _goToViewByItemDetail(
-                                      context,
-                                      state.orderHistory,
-                                    ),
-                                    key: WidgetKeys.viewByOrderDetailItem(
-                                      e.materialNumber.displayMatNo,
-                                      e.isBonus,
-                                    ),
-                                    label: e.combinationCode(
-                                      showGMCPart: salesOrgConfig.enableGMC,
-                                    ),
-                                    title: e.materialDescription,
-                                    priceComponent: e.isBonus
-                                        ? null
-                                        : Row(
-                                            children: [
-                                              if (e.showMaterialListPrice)
-                                                PriceComponent(
-                                                  key: WidgetKeys
-                                                      .materialListPriceStrikeThrough,
-                                                  salesOrgConfig: context
-                                                      .read<EligibilityBloc>()
-                                                      .state
-                                                      .salesOrgConfigs,
-                                                  price:
-                                                      e.originPrice.toString(),
-                                                  type: PriceStyle
-                                                      .materialListPriceStrikeThrough,
-                                                ),
-                                              OrderItemPrice(
-                                                unitPrice: e.itemUnitPrice(
-                                                  invoiceNumber,
-                                                  isMYExternalSalesRep,
-                                                  isIDMarket,
-                                                ),
-                                                originPrice:
-                                                    e.originPrice.toString(),
-                                                showPreviousPrice:
-                                                    e.isCounterOffer,
-                                                hasDescription: true,
-                                              ),
-                                            ],
-                                          ),
-                                    statusWidget: isIDMarket
-                                        ? null
-                                        : StatusLabel(
-                                            status: StatusType(
-                                              e.sAPStatus.displaySAPOrderStatus,
-                                            ),
-                                          ),
-                                    quantity: '',
-                                    materialNumber: e.materialNumber,
-                                    isQuantityBelowImage: true,
-                                    isQuantityRequired: false,
-                                    showOfferTag: e.showOfferTag,
-                                    statusTag: e.orderDetailBonusTag,
-                                    headerText: salesOrgConfig.batchNumDisplay
-                                        ? '${'Batch'.tr()}: ${e.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${e.expiryDate.dateOrDashString})'
-                                        : '',
-                                    subtitle: '',
-                                    footerWidget: QuantityAndPriceWithTax(
-                                      quantity: e.qty,
-                                      quantityDescription: isIDMarket
-                                          ? '${e.pickedQuantity} ${context.tr('of')} ${e.qty} ${context.tr('stocks fulfilled')}'
-                                          : '',
-                                      netPrice: e.itemNetPrice(
-                                        invoiceNumber,
-                                        isMYExternalSalesRep,
-                                        isIDMarket,
+                    builder: (context, state) =>
+                        state.orderHistory.orderHistoryItems.isEmpty
+                            ? const SizedBox.shrink()
+                            : Column(
+                                children: e.viewByOrderItem
+                                    .mapIndexed(
+                                      (index, e) => _OrderItemTile(
+                                        orderHistory: state.orderHistory,
+                                        orderItem: e,
                                       ),
-                                      taxPercentage: e.taxPercentage,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
+                                    )
+                                    .toList(),
+                              ),
                   ),
                 ],
               ),
             )
             .toList(),
+      ),
+    );
+  }
+}
+
+class _OrderItemTile extends StatelessWidget {
+  final OrderHistoryDetailsOrderItem orderItem;
+  final OrderHistory orderHistory;
+
+  const _OrderItemTile({
+    Key? key,
+    required this.orderItem,
+    required this.orderHistory,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final salesOrgConfig = eligibilityState.salesOrgConfigs;
+    final invoiceNumber = context
+        .read<ViewByOrderDetailsBloc>()
+        .state
+        .orderHistoryDetails
+        .invoiceNumber;
+    final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
+    final isIDMarket = eligibilityState.salesOrganisation.salesOrg.isID;
+
+    return CommonTileItem(
+      onTap: () => _goToViewByItemDetail(
+        context,
+        orderHistory,
+      ),
+      key: WidgetKeys.viewByOrderDetailItem(
+        orderItem.materialNumber.displayMatNo,
+        orderItem.isBonus,
+      ),
+      label: orderItem.combinationCode(
+        showGMCPart: salesOrgConfig.enableGMC,
+      ),
+      title: orderItem.materialDescription,
+      priceComponent: orderItem.isBonus
+          ? null
+          : Row(
+              children: [
+                if (orderItem.showMaterialListPrice)
+                  PriceComponent(
+                    key: WidgetKeys.materialListPriceStrikeThrough,
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                    price: orderItem.originPrice.toString(),
+                    type: PriceStyle.materialListPriceStrikeThrough,
+                  ),
+                OrderItemPrice(
+                  unitPrice: orderItem.itemUnitPrice(
+                    invoiceNumber,
+                    isMYExternalSalesRep,
+                    isIDMarket,
+                  ),
+                  originPrice: orderItem.originPrice.toString(),
+                  showPreviousPrice: orderItem.isCounterOffer,
+                  hasDescription: true,
+                ),
+              ],
+            ),
+      statusWidget: isIDMarket
+          ? null
+          : StatusLabel(
+              status: StatusType(
+                orderItem.sAPStatus.displaySAPOrderStatus,
+              ),
+            ),
+      quantity: '',
+      materialNumber: orderItem.materialNumber,
+      isQuantityBelowImage: true,
+      isQuantityRequired: false,
+      showOfferTag: orderItem.showOfferTag,
+      statusTag: orderItem.orderDetailBonusTag,
+      headerText: salesOrgConfig.batchNumDisplay
+          ? '${'Batch'.tr()}: ${orderItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderItem.expiryDate.dateOrDashString})'
+          : '',
+      subtitle: '',
+      footerWidget: QuantityAndPriceWithTax(
+        quantity: orderItem.qty,
+        quantityDescription: isIDMarket
+            ? '${orderItem.pickedQuantity} ${context.tr('of')} ${orderItem.qty} ${context.tr('stocks fulfilled')}'
+            : '',
+        netPrice: orderItem.itemNetPrice(
+          invoiceNumber,
+          isMYExternalSalesRep,
+          isIDMarket,
+        ),
+        taxPercentage: orderItem.taxPercentage,
       ),
     );
   }
