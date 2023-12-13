@@ -626,14 +626,14 @@ void main() {
       testWidgets('Product Details Related Products Visible', (tester) async {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
-            isFetching: true,
+            isRelatedProductsFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
           ),
         );
         final expectedStates = Stream.fromIterable(
           [
             ProductDetailState.initial().copyWith(
-              isFetching: false,
+              isRelatedProductsFetching: false,
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
                 materialInfo: materialInfo,
                 similarProduct: similarProducts,
@@ -661,11 +661,11 @@ void main() {
         final expectedStates = Stream.fromIterable(
           [
             ProductDetailState.initial().copyWith(
-              isFetching: true,
+              isRelatedProductsFetching: true,
               productDetailAggregate: ProductDetailAggregate.empty(),
             ),
             ProductDetailState.initial().copyWith(
-              isFetching: false,
+              isRelatedProductsFetching: false,
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
                 materialInfo: materialInfo,
                 similarProduct: <MaterialInfo>[],
@@ -686,11 +686,11 @@ void main() {
         final expectedStates = Stream.fromIterable(
           [
             ProductDetailState.initial().copyWith(
-              isFetching: true,
+              isDetailFetching: true,
               productDetailAggregate: ProductDetailAggregate.empty(),
             ),
             ProductDetailState.initial().copyWith(
-              isFetching: false,
+              isDetailFetching: false,
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
                 materialInfo:
                     materialInfo.copyWith(type: MaterialInfoType('bundle')),
@@ -712,7 +712,7 @@ void main() {
       testWidgets('Product Image available', (tester) async {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
-            isFetching: false,
+            isDetailFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: materialInfo,
               similarProduct: <MaterialInfo>[],
@@ -900,7 +900,7 @@ void main() {
                 inStock: MaterialInStock('Yes'),
               ),
             ),
-            isFetching: true,
+            isDetailFetching: true,
           ),
         );
 
@@ -947,7 +947,7 @@ void main() {
               stockInfo: stockInfo,
               productItem: productItemWithProductItemXp,
             ),
-            isFetching: true,
+            isDetailFetching: true,
           ),
         );
 
@@ -980,7 +980,7 @@ void main() {
               stockInfo: emptyStockInfo,
               productItem: productItemWithProductItemXp,
             ),
-            isFetching: false,
+            isDetailFetching: false,
           ),
         );
 
@@ -1055,7 +1055,6 @@ void main() {
               stockInfo: stockInfo,
               productItem: productItemWithProductItemXp,
             ),
-            isFetching: false,
           ),
         );
 
@@ -1098,13 +1097,13 @@ void main() {
               productItem: productItemWithProductItemXp,
               similarProduct: similarProducts,
             ),
-            isFetching: false,
           ),
         );
         whenListen(
           productDetailMockBloc,
           Stream.fromIterable([
-            ProductDetailState.initial().copyWith(isFetching: true),
+            ProductDetailState.initial()
+                .copyWith(isRelatedProductsFetching: true),
             ProductDetailState.initial().copyWith(
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
                 materialInfo: materialInfo.copyWith(
@@ -1117,7 +1116,7 @@ void main() {
                 productItem: productItemWithProductItemXp,
                 similarProduct: similarProducts,
               ),
-              isFetching: false,
+              isRelatedProductsFetching: false,
             ),
           ]),
         );
@@ -1151,13 +1150,12 @@ void main() {
               productItem: productItemWithProductItemXp,
               similarProduct: similarProducts,
             ),
-            isFetching: false,
           ),
         );
         whenListen(
           productDetailMockBloc,
           Stream.fromIterable([
-            ProductDetailState.initial().copyWith(isFetching: true),
+            ProductDetailState.initial().copyWith(isStockFetching: true),
             ProductDetailState.initial().copyWith(
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
                 materialInfo: materialInfo,
@@ -1165,7 +1163,7 @@ void main() {
                 productItem: productItemWithProductItemXp,
                 similarProduct: similarProducts,
               ),
-              isFetching: false,
+              isStockFetching: false,
             ),
           ]),
         );
@@ -1191,7 +1189,6 @@ void main() {
               productItem: productItemWithProductItemXp,
               similarProduct: similarProducts,
             ),
-            isFetching: false,
           ),
         );
         when(() => materialPriceMockBloc.state).thenReturn(
@@ -1260,7 +1257,6 @@ void main() {
                 productItem: productItemWithProductItemXp,
                 similarProduct: similarProducts,
               ),
-              isFetching: false,
             ),
           ]),
         );

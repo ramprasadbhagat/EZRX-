@@ -165,7 +165,7 @@ class _SimilarProducts extends StatelessWidget {
           previous.productDetailAggregate.similarProduct !=
           current.productDetailAggregate.similarProduct,
       builder: (context, state) {
-        return state.showRelatedItems
+        return state.showRelatedItemsSection
             ? const SimilarProduct()
             : const SizedBox.shrink();
       },
@@ -180,14 +180,16 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching ||
+          previous.isDetailAndStockFetching !=
+              current.isDetailAndStockFetching ||
           previous.productDetailAggregate != current.productDetailAggregate,
       builder: (context, state) {
         final materialInfo = state.productDetailAggregate.materialInfo;
         final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
         final validateOutOfStockValue =
             context.read<EligibilityBloc>().state.validateOutOfStockValue;
-        final level = !config.hideStockDisplay && !state.isFetching
+        final level = !config.hideStockDisplay &&
+                !state.isDetailAndStockFetching
             ? !state.productDetailAggregate.stockInfo.inStock.isMaterialInStock
                 ? config.addOosMaterials.productTag(validateOutOfStockValue)
                 : ''
@@ -198,10 +200,10 @@ class _BodyContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             OfferLabel(
-              materialInfo: state.productDetailAggregate.materialInfo,
+              materialInfo: materialInfo,
             ),
             ComboOfferLabel(
-              materialInfo: state.productDetailAggregate.materialInfo,
+              materialInfo: materialInfo,
               iconSize: 20,
             ),
             Padding(
@@ -238,13 +240,13 @@ class _BodyContent extends StatelessWidget {
                     ],
                   ),
                   _Description(
-                    materialInfo: state.productDetailAggregate.materialInfo,
+                    materialInfo: materialInfo,
                   ),
                   ProductStockInfo(
                     materialNumber: materialInfo.materialNumber,
                   ),
                   ProductPriceLabel(
-                    materialInfo: state.productDetailAggregate.materialInfo,
+                    materialInfo: materialInfo,
                   ),
                 ],
               ),
@@ -297,11 +299,12 @@ class _Description extends StatelessWidget {
           listenWhen: (previous, current) =>
               previous.productDetailAggregate.materialInfo.isFavourite !=
                   current.productDetailAggregate.materialInfo.isFavourite &&
-              !current.isFetching,
+              !current.isDetailAndStockFetching,
           buildWhen: (previous, current) =>
               previous.productDetailAggregate.materialInfo.isFavourite !=
                   current.productDetailAggregate.materialInfo.isFavourite ||
-              previous.isFetching != current.isFetching,
+              previous.isDetailAndStockFetching !=
+                  current.isDetailAndStockFetching,
           listener: (context, state) {
             final toastMessage =
                 state.productDetailAggregate.materialInfo.isFavourite
@@ -314,7 +317,7 @@ class _Description extends StatelessWidget {
           },
           builder: (context, state) {
             return FavouriteIcon(
-              enable: !state.isFetching,
+              enable: !state.isDetailAndStockFetching,
               key: WidgetKeys.materialDetailsFavoriteIcon,
               isFavourite:
                   state.productDetailAggregate.materialInfo.isFavourite,
@@ -456,7 +459,8 @@ class _FooterState extends State<_Footer> {
             }
           },
           buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching ||
+              previous.isDetailAndStockFetching !=
+                  current.isDetailAndStockFetching ||
               previous.inputQty != current.inputQty,
           builder: (context, state) {
             final materialInfo = state.productDetailAggregate.materialInfo;
@@ -578,14 +582,15 @@ class _FooterState extends State<_Footer> {
                               Price.empty();
 
                           return LoadingShimmer.withChild(
-                            enabled: stateCart.isUpserting || state.isFetching,
+                            enabled: stateCart.isUpserting ||
+                                state.isDetailAndStockFetching,
                             child: SizedBox(
                               width: double.infinity,
                               height:
                                   MediaQuery.of(context).size.height * 0.056,
                               child: ElevatedButton(
                                 onPressed: stateCart.isUpserting ||
-                                        state.isFetching ||
+                                        state.isDetailAndStockFetching ||
                                         !isEligibleForAddToCart(
                                           context: context,
                                           productDetailState: state,

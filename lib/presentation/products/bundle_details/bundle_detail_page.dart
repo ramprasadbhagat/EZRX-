@@ -159,7 +159,7 @@ class _BundleDetails extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  state.isFetching
+                  state.isDetailAndStockFetching
                       ? SizedBox(width: 100, child: LoadingShimmer.tile())
                       : Expanded(
                           child: Text(
@@ -202,7 +202,7 @@ class _BundleDetails extends StatelessWidget {
                   ),
                 ],
               ),
-              state.isFetching
+              state.isDetailAndStockFetching
                   ? SizedBox(width: 100, child: LoadingShimmer.tile())
                   : PriceComponent(
                       salesOrgConfig:
@@ -361,19 +361,19 @@ class _AddToCartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
+          previous.isDetailAndStockFetching != current.isDetailAndStockFetching,
       builder: (context, state) {
         return SafeArea(
           minimum: const EdgeInsets.all(20),
           child: Wrap(
             children: [
               LoadingShimmer.withChild(
-                enabled: state.isFetching,
+                enabled: state.isDetailAndStockFetching,
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     key: WidgetKeys.materialDetailsAddToCartButton,
-                    onPressed: state.isFetching
+                    onPressed: state.isDetailAndStockFetching
                         ? null
                         : () {
                             final bundle = context

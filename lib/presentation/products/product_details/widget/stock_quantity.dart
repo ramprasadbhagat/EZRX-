@@ -10,7 +10,7 @@ class _StockQuantity extends StatelessWidget {
       children: [
         const SizedBox(height: 8),
         LoadingShimmer.withChild(
-          enabled: state.isFetching &&
+          enabled: state.isDetailAndStockFetching &&
               state.productDetailAggregate.stockInfo.stockQuantity == 0,
           child: SizedBox(
             width: double.infinity,

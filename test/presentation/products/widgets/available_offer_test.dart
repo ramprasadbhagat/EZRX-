@@ -135,7 +135,6 @@ void main() {
 
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: materialInfoMock.copyWith(
                 principalData: PrincipalData(
@@ -185,7 +184,6 @@ void main() {
 
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: materialInfoMock.copyWith(
                 hidePrice: true,

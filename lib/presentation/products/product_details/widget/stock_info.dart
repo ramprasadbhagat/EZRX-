@@ -20,10 +20,10 @@ class ProductStockInfo extends StatelessWidget {
       buildWhen: (previous, current) =>
           current.productDetailAggregate.stockInfo !=
               previous.productDetailAggregate.stockInfo ||
-          current.isFetching != previous.isFetching,
+          current.isDetailAndStockFetching != previous.isDetailAndStockFetching,
       builder: (context, state) {
         final stockInfo = state.productDetailAggregate.stockInfo;
-        if (state.isFetching) {
+        if (state.isDetailAndStockFetching) {
           return SizedBox(
             width: 100,
             child: LoadingShimmer.tile(),

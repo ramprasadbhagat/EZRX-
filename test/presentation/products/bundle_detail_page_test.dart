@@ -201,11 +201,11 @@ void main() {
         final expectedStates = Stream.fromIterable(
           [
             ProductDetailState.initial().copyWith(
-              isFetching: true,
+              isDetailFetching: true,
               productDetailAggregate: ProductDetailAggregate.empty(),
             ),
             ProductDetailState.initial().copyWith(
-              isFetching: false,
+              isDetailFetching: false,
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
                   type: MaterialInfoType('bundle'),
@@ -227,11 +227,10 @@ void main() {
         final expectedStates = Stream.fromIterable(
           [
             ProductDetailState.initial().copyWith(
-              isFetching: true,
+              isDetailFetching: true,
               productDetailAggregate: ProductDetailAggregate.empty(),
             ),
             ProductDetailState.initial().copyWith(
-              isFetching: false,
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
                 materialInfo: bundle,
               ),
@@ -270,7 +269,6 @@ void main() {
 
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: bundle,
             ),
@@ -296,7 +294,6 @@ void main() {
 
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: bundle,
             ),
@@ -353,7 +350,6 @@ void main() {
           findsOneWidget,
         );
       });
-    
     },
   );
 }

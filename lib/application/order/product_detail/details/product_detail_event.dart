@@ -16,7 +16,6 @@ class ProductDetailEvent with _$ProductDetailEvent {
   }) = _FetchSimilarProduct;
   factory ProductDetailEvent.fetchMetaData({
     required Locale locale,
-    required bool isForBundle,
   }) = _FetchMetaData;
   factory ProductDetailEvent.fetchStock({
     required MaterialNumber materialNumber,

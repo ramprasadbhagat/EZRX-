@@ -23,7 +23,7 @@ mixin _$ProductDetailEvent {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -47,7 +47,7 @@ mixin _$ProductDetailEvent {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -68,7 +68,7 @@ mixin _$ProductDetailEvent {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -278,7 +278,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -305,7 +305,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -329,7 +329,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -514,7 +514,7 @@ class _$_Fetch implements _Fetch {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -541,7 +541,7 @@ class _$_Fetch implements _Fetch {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -565,7 +565,7 @@ class _$_Fetch implements _Fetch {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -732,7 +732,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -759,7 +759,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -783,7 +783,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -884,7 +884,7 @@ abstract class _$$_FetchMetaDataCopyWith<$Res> {
           _$_FetchMetaData value, $Res Function(_$_FetchMetaData) then) =
       __$$_FetchMetaDataCopyWithImpl<$Res>;
   @useResult
-  $Res call({Locale locale, bool isForBundle});
+  $Res call({Locale locale});
 }
 
 /// @nodoc
@@ -899,17 +899,12 @@ class __$$_FetchMetaDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? locale = null,
-    Object? isForBundle = null,
   }) {
     return _then(_$_FetchMetaData(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as Locale,
-      isForBundle: null == isForBundle
-          ? _value.isForBundle
-          : isForBundle // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -917,16 +912,14 @@ class __$$_FetchMetaDataCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FetchMetaData implements _FetchMetaData {
-  _$_FetchMetaData({required this.locale, required this.isForBundle});
+  _$_FetchMetaData({required this.locale});
 
   @override
   final Locale locale;
-  @override
-  final bool isForBundle;
 
   @override
   String toString() {
-    return 'ProductDetailEvent.fetchMetaData(locale: $locale, isForBundle: $isForBundle)';
+    return 'ProductDetailEvent.fetchMetaData(locale: $locale)';
   }
 
   @override
@@ -934,13 +927,11 @@ class _$_FetchMetaData implements _FetchMetaData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FetchMetaData &&
-            (identical(other.locale, locale) || other.locale == locale) &&
-            (identical(other.isForBundle, isForBundle) ||
-                other.isForBundle == isForBundle));
+            (identical(other.locale, locale) || other.locale == locale));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, locale, isForBundle);
+  int get hashCode => Object.hash(runtimeType, locale);
 
   @JsonKey(ignore: true)
   @override
@@ -956,7 +947,7 @@ class _$_FetchMetaData implements _FetchMetaData {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -972,7 +963,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
     required TResult Function(bool exceedQty) setExceedQty,
   }) {
-    return fetchMetaData(locale, isForBundle);
+    return fetchMetaData(locale);
   }
 
   @override
@@ -983,7 +974,7 @@ class _$_FetchMetaData implements _FetchMetaData {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -996,7 +987,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
     TResult? Function(bool exceedQty)? setExceedQty,
   }) {
-    return fetchMetaData?.call(locale, isForBundle);
+    return fetchMetaData?.call(locale);
   }
 
   @override
@@ -1007,7 +998,7 @@ class _$_FetchMetaData implements _FetchMetaData {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -1022,7 +1013,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult orElse(),
   }) {
     if (fetchMetaData != null) {
-      return fetchMetaData(locale, isForBundle);
+      return fetchMetaData(locale);
     }
     return orElse();
   }
@@ -1093,12 +1084,9 @@ class _$_FetchMetaData implements _FetchMetaData {
 }
 
 abstract class _FetchMetaData implements ProductDetailEvent {
-  factory _FetchMetaData(
-      {required final Locale locale,
-      required final bool isForBundle}) = _$_FetchMetaData;
+  factory _FetchMetaData({required final Locale locale}) = _$_FetchMetaData;
 
   Locale get locale;
-  bool get isForBundle;
   @JsonKey(ignore: true)
   _$$_FetchMetaDataCopyWith<_$_FetchMetaData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1182,7 +1170,7 @@ class _$_FetchStock implements _FetchStock {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -1209,7 +1197,7 @@ class _$_FetchStock implements _FetchStock {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -1233,7 +1221,7 @@ class _$_FetchStock implements _FetchStock {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -1418,7 +1406,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -1445,7 +1433,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -1469,7 +1457,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -1635,7 +1623,7 @@ class _$_ChangeImage implements _ChangeImage {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -1662,7 +1650,7 @@ class _$_ChangeImage implements _ChangeImage {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -1686,7 +1674,7 @@ class _$_ChangeImage implements _ChangeImage {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -1861,7 +1849,7 @@ class _$_AddFavourite implements _AddFavourite {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -1888,7 +1876,7 @@ class _$_AddFavourite implements _AddFavourite {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -1912,7 +1900,7 @@ class _$_AddFavourite implements _AddFavourite {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -2090,7 +2078,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -2117,7 +2105,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -2141,7 +2129,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -2307,7 +2295,7 @@ class _$_UpdateQty implements _UpdateQty {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -2334,7 +2322,7 @@ class _$_UpdateQty implements _UpdateQty {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -2358,7 +2346,7 @@ class _$_UpdateQty implements _UpdateQty {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -2528,7 +2516,7 @@ class _$_FetchItemQuantityForZdp5Discount
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -2555,7 +2543,7 @@ class _$_FetchItemQuantityForZdp5Discount
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -2579,7 +2567,7 @@ class _$_FetchItemQuantityForZdp5Discount
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -2745,7 +2733,7 @@ class _$_SetExceedQty implements _SetExceedQty {
         initialized,
     required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
     required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(Locale locale) fetchMetaData,
     required TResult Function(MaterialNumber materialNumber, Locale locale)
         fetchStock,
     required TResult Function(List<MaterialInfo> materials, Locale locale)
@@ -2772,7 +2760,7 @@ class _$_SetExceedQty implements _SetExceedQty {
         initialized,
     TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(Locale locale)? fetchMetaData,
     TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult? Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -2796,7 +2784,7 @@ class _$_SetExceedQty implements _SetExceedQty {
         initialized,
     TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
     TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(Locale locale)? fetchMetaData,
     TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
     TResult Function(List<MaterialInfo> materials, Locale locale)?
         fetchStockForBundle,
@@ -2900,7 +2888,10 @@ mixin _$ProductDetailState {
       throw _privateConstructorUsedError;
   ProductDetailAggregate get productDetailAggregate =>
       throw _privateConstructorUsedError;
-  bool get isFetching => throw _privateConstructorUsedError;
+  bool get isDetailFetching => throw _privateConstructorUsedError;
+  bool get isStockFetching => throw _privateConstructorUsedError;
+  bool get isRelatedProductsFetching => throw _privateConstructorUsedError;
+  bool get isMetadataFetching => throw _privateConstructorUsedError;
   int get inputQty => throw _privateConstructorUsedError;
   int get selectedImageIndex => throw _privateConstructorUsedError;
 
@@ -2921,7 +2912,10 @@ abstract class $ProductDetailStateCopyWith<$Res> {
       ShipToInfo shipToInfo,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       ProductDetailAggregate productDetailAggregate,
-      bool isFetching,
+      bool isDetailFetching,
+      bool isStockFetching,
+      bool isRelatedProductsFetching,
+      bool isMetadataFetching,
       int inputQty,
       int selectedImageIndex});
 
@@ -2949,7 +2943,10 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
     Object? shipToInfo = null,
     Object? failureOrSuccessOption = null,
     Object? productDetailAggregate = null,
-    Object? isFetching = null,
+    Object? isDetailFetching = null,
+    Object? isStockFetching = null,
+    Object? isRelatedProductsFetching = null,
+    Object? isMetadataFetching = null,
     Object? inputQty = null,
     Object? selectedImageIndex = null,
   }) {
@@ -2974,9 +2971,21 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
           ? _value.productDetailAggregate
           : productDetailAggregate // ignore: cast_nullable_to_non_nullable
               as ProductDetailAggregate,
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
+      isDetailFetching: null == isDetailFetching
+          ? _value.isDetailFetching
+          : isDetailFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isStockFetching: null == isStockFetching
+          ? _value.isStockFetching
+          : isStockFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRelatedProductsFetching: null == isRelatedProductsFetching
+          ? _value.isRelatedProductsFetching
+          : isRelatedProductsFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMetadataFetching: null == isMetadataFetching
+          ? _value.isMetadataFetching
+          : isMetadataFetching // ignore: cast_nullable_to_non_nullable
               as bool,
       inputQty: null == inputQty
           ? _value.inputQty
@@ -3037,7 +3046,10 @@ abstract class _$$_ProductDetailStateCopyWith<$Res>
       ShipToInfo shipToInfo,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       ProductDetailAggregate productDetailAggregate,
-      bool isFetching,
+      bool isDetailFetching,
+      bool isStockFetching,
+      bool isRelatedProductsFetching,
+      bool isMetadataFetching,
       int inputQty,
       int selectedImageIndex});
 
@@ -3067,7 +3079,10 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? failureOrSuccessOption = null,
     Object? productDetailAggregate = null,
-    Object? isFetching = null,
+    Object? isDetailFetching = null,
+    Object? isStockFetching = null,
+    Object? isRelatedProductsFetching = null,
+    Object? isMetadataFetching = null,
     Object? inputQty = null,
     Object? selectedImageIndex = null,
   }) {
@@ -3092,9 +3107,21 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
           ? _value.productDetailAggregate
           : productDetailAggregate // ignore: cast_nullable_to_non_nullable
               as ProductDetailAggregate,
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
+      isDetailFetching: null == isDetailFetching
+          ? _value.isDetailFetching
+          : isDetailFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isStockFetching: null == isStockFetching
+          ? _value.isStockFetching
+          : isStockFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRelatedProductsFetching: null == isRelatedProductsFetching
+          ? _value.isRelatedProductsFetching
+          : isRelatedProductsFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMetadataFetching: null == isMetadataFetching
+          ? _value.isMetadataFetching
+          : isMetadataFetching // ignore: cast_nullable_to_non_nullable
               as bool,
       inputQty: null == inputQty
           ? _value.inputQty
@@ -3117,7 +3144,10 @@ class _$_ProductDetailState extends _ProductDetailState {
       required this.shipToInfo,
       required this.failureOrSuccessOption,
       required this.productDetailAggregate,
-      required this.isFetching,
+      required this.isDetailFetching,
+      required this.isStockFetching,
+      required this.isRelatedProductsFetching,
+      required this.isMetadataFetching,
       required this.inputQty,
       this.selectedImageIndex = 0})
       : super._();
@@ -3133,7 +3163,13 @@ class _$_ProductDetailState extends _ProductDetailState {
   @override
   final ProductDetailAggregate productDetailAggregate;
   @override
-  final bool isFetching;
+  final bool isDetailFetching;
+  @override
+  final bool isStockFetching;
+  @override
+  final bool isRelatedProductsFetching;
+  @override
+  final bool isMetadataFetching;
   @override
   final int inputQty;
   @override
@@ -3142,7 +3178,7 @@ class _$_ProductDetailState extends _ProductDetailState {
 
   @override
   String toString() {
-    return 'ProductDetailState(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, failureOrSuccessOption: $failureOrSuccessOption, productDetailAggregate: $productDetailAggregate, isFetching: $isFetching, inputQty: $inputQty, selectedImageIndex: $selectedImageIndex)';
+    return 'ProductDetailState(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, failureOrSuccessOption: $failureOrSuccessOption, productDetailAggregate: $productDetailAggregate, isDetailFetching: $isDetailFetching, isStockFetching: $isStockFetching, isRelatedProductsFetching: $isRelatedProductsFetching, isMetadataFetching: $isMetadataFetching, inputQty: $inputQty, selectedImageIndex: $selectedImageIndex)';
   }
 
   @override
@@ -3160,8 +3196,15 @@ class _$_ProductDetailState extends _ProductDetailState {
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.productDetailAggregate, productDetailAggregate) ||
                 other.productDetailAggregate == productDetailAggregate) &&
-            (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching) &&
+            (identical(other.isDetailFetching, isDetailFetching) ||
+                other.isDetailFetching == isDetailFetching) &&
+            (identical(other.isStockFetching, isStockFetching) ||
+                other.isStockFetching == isStockFetching) &&
+            (identical(other.isRelatedProductsFetching,
+                    isRelatedProductsFetching) ||
+                other.isRelatedProductsFetching == isRelatedProductsFetching) &&
+            (identical(other.isMetadataFetching, isMetadataFetching) ||
+                other.isMetadataFetching == isMetadataFetching) &&
             (identical(other.inputQty, inputQty) ||
                 other.inputQty == inputQty) &&
             (identical(other.selectedImageIndex, selectedImageIndex) ||
@@ -3176,7 +3219,10 @@ class _$_ProductDetailState extends _ProductDetailState {
       shipToInfo,
       failureOrSuccessOption,
       productDetailAggregate,
-      isFetching,
+      isDetailFetching,
+      isStockFetching,
+      isRelatedProductsFetching,
+      isMetadataFetching,
       inputQty,
       selectedImageIndex);
 
@@ -3195,7 +3241,10 @@ abstract class _ProductDetailState extends ProductDetailState {
       required final ShipToInfo shipToInfo,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final ProductDetailAggregate productDetailAggregate,
-      required final bool isFetching,
+      required final bool isDetailFetching,
+      required final bool isStockFetching,
+      required final bool isRelatedProductsFetching,
+      required final bool isMetadataFetching,
       required final int inputQty,
       final int selectedImageIndex}) = _$_ProductDetailState;
   const _ProductDetailState._() : super._();
@@ -3211,7 +3260,13 @@ abstract class _ProductDetailState extends ProductDetailState {
   @override
   ProductDetailAggregate get productDetailAggregate;
   @override
-  bool get isFetching;
+  bool get isDetailFetching;
+  @override
+  bool get isStockFetching;
+  @override
+  bool get isRelatedProductsFetching;
+  @override
+  bool get isMetadataFetching;
   @override
   int get inputQty;
   @override

@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -324,7 +323,7 @@ class ProductDetailRepository implements IProductDetailRepository {
   }
 
   @override
-  Future<Either<ApiFailure, ProductDetailAggregate>> getItemProductMetaData({
+  Future<Either<ApiFailure, ProductMetaData>> getItemProductMetaData({
     required ProductDetailAggregate productDetailAggregate,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -332,18 +331,7 @@ class ProductDetailRepository implements IProductDetailRepository {
         final response =
             await productDetailLocalDataSource.getItemProductMetaData();
 
-        final updatedProductDetailAggregate = productDetailAggregate.copyWith(
-          materialInfo: productDetailAggregate.materialInfo.copyWith(
-            productImages: response.productImages.isNotEmpty
-                ? response.productImages.first
-                : ProductImages.empty(),
-          ),
-          productItem: response.items.isNotEmpty
-              ? response.items.first
-              : ProductItem.empty(),
-        );
-
-        return Right(updatedProductDetailAggregate);
+        return Right(response);
       } catch (e) {
         return Left(
           FailureHandler.handleFailure(e),
@@ -358,18 +346,7 @@ class ProductDetailRepository implements IProductDetailRepository {
         ],
       );
 
-      final updatedProductDetailAggregate = productDetailAggregate.copyWith(
-        materialInfo: productDetailAggregate.materialInfo.copyWith(
-          productImages: response.productImages.isNotEmpty
-              ? response.productImages.first
-              : ProductImages.empty(),
-        ),
-        productItem: response.items.isNotEmpty
-            ? response.items.first
-            : ProductItem.empty(),
-      );
-
-      return Right(updatedProductDetailAggregate);
+      return Right(response);
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),

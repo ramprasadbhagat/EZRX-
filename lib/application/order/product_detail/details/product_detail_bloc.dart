@@ -5,9 +5,11 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_favourites_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
@@ -41,7 +43,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
       (e, emit) async {
         emit(
           state.copyWith(
-            isFetching: true,
+            isDetailFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
             selectedImageIndex: 0,
             failureOrSuccessOption: none(),
@@ -58,32 +60,45 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         await failureOrSuccess.fold(
           (failure) async => emit(
             state.copyWith(
-              isFetching: false,
+              isDetailFetching: false,
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
           (materialInfo) {
             emit(
               state.copyWith(
+                isDetailFetching: false,
                 productDetailAggregate: state.productDetailAggregate.copyWith(
                   materialInfo: materialInfo,
                 ),
               ),
             );
-            e.materialInfo.type.typeBundle
-                ? add(
-                    _FetchStockForBundle(
-                      materials: materialInfo.bundle.materials,
-                      locale: e.locale,
-                    ),
-                  )
-                : add(
-                    _FetchStock(
-                      materialNumber: state
-                          .productDetailAggregate.materialInfo.materialNumber,
-                      locale: e.locale,
-                    ),
-                  );
+            if (e.materialInfo.type.typeBundle) {
+              add(
+                _FetchStockForBundle(
+                  materials: materialInfo.bundle.materials,
+                  locale: e.locale,
+                ),
+              );
+            } else {
+              add(
+                _FetchStock(
+                  materialNumber:
+                      state.productDetailAggregate.materialInfo.materialNumber,
+                  locale: e.locale,
+                ),
+              );
+              add(
+                _FetchSimilarProduct(
+                  locale: e.locale,
+                ),
+              );
+            }
+            add(
+              _FetchMetaData(
+                locale: e.locale,
+              ),
+            );
           },
         );
       },
@@ -93,7 +108,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
       ((e, emit) async {
         emit(
           state.copyWith(
-            isFetching: true,
+            isStockFetching: true,
             failureOrSuccessOption: none(),
           ),
         );
@@ -106,7 +121,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
-              isFetching: false,
+              isStockFetching: false,
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
@@ -122,7 +137,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             }).toList();
             emit(
               state.copyWith(
-                isFetching: false,
+                isStockFetching: false,
                 productDetailAggregate: state.productDetailAggregate.copyWith(
                   materialInfo:
                       state.productDetailAggregate.materialInfo.copyWith(
@@ -136,13 +151,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             );
           },
         );
-
-        add(
-          _FetchMetaData(
-            locale: e.locale,
-            isForBundle: true,
-          ),
-        );
       }),
       transformer: restartable(),
     );
@@ -151,7 +159,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
       (e, emit) async {
         emit(
           state.copyWith(
-            isFetching: true,
+            isStockFetching: true,
             failureOrSuccessOption: none(),
           ),
         );
@@ -165,24 +173,17 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
-              isFetching: false,
+              isStockFetching: false,
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
           (stock) => emit(
             state.copyWith(
-              isFetching: false,
+              isStockFetching: false,
               productDetailAggregate: state.productDetailAggregate.copyWith(
                 stockInfo: stock,
               ),
             ),
-          ),
-        );
-
-        add(
-          _FetchMetaData(
-            locale: e.locale,
-            isForBundle: false,
           ),
         );
       },
@@ -192,8 +193,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
       (e, emit) async {
         emit(
           state.copyWith(
-            isFetching: true,
             failureOrSuccessOption: none(),
+            isMetadataFetching: true,
           ),
         );
         final metaDataFailureOrSuccess =
@@ -203,24 +204,30 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         metaDataFailureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
-              isFetching: false,
               failureOrSuccessOption: optionOf(metaDataFailureOrSuccess),
+              isMetadataFetching: false,
             ),
           ),
-          (productDetailAggregate) => emit(
-            state.copyWith(
-              isFetching: false,
-              productDetailAggregate: productDetailAggregate,
-            ),
-          ),
+          (metadata) {
+            final updatedProductDetailAggregate =
+                state.productDetailAggregate.copyWith(
+              materialInfo: state.productDetailAggregate.materialInfo.copyWith(
+                productImages: metadata.productImages.isNotEmpty
+                    ? metadata.productImages.first
+                    : ProductImages.empty(),
+              ),
+              productItem: metadata.items.isNotEmpty
+                  ? metadata.items.first
+                  : ProductItem.empty(),
+            );
+            emit(
+              state.copyWith(
+                productDetailAggregate: updatedProductDetailAggregate,
+                isMetadataFetching: false,
+              ),
+            );
+          },
         );
-        if (!e.isForBundle) {
-          add(
-            _FetchSimilarProduct(
-              locale: e.locale,
-            ),
-          );
-        }
       },
       transformer: restartable(),
     );
@@ -228,7 +235,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
       (e, emit) async {
         emit(
           state.copyWith(
-            isFetching: true,
+            isRelatedProductsFetching: true,
             failureOrSuccessOption: none(),
           ),
         );
@@ -246,14 +253,14 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
-              isFetching: false,
+              isRelatedProductsFetching: false,
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
           (products) {
             emit(
               state.copyWith(
-                isFetching: false,
+                isRelatedProductsFetching: false,
                 productDetailAggregate: state.productDetailAggregate.copyWith(
                   similarProduct: products,
                 ),

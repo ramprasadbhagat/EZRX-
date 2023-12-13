@@ -160,13 +160,7 @@ void main() {
             ),
           ).thenAnswer(
             (invocation) async => Right(
-              ProductDetailAggregate.empty().copyWith(
-                stockInfo: mockStockInfo,
-                materialInfo: mockMaterialInfo.copyWith(
-                  productImages: mockProductMetaData.productImages.first,
-                ),
-                productItem: mockProductMetaData.items.first,
-              ),
+              mockProductMetaData,
             ),
           );
           when(
@@ -193,11 +187,16 @@ void main() {
         seed: () => mockInitialState,
         expect: () => [
           mockInitialState.copyWith(
-            isFetching: true,
+            isDetailFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
           ),
           mockInitialState.copyWith(
-            isFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+            ),
+          ),
+          mockInitialState.copyWith(
+            isStockFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
             ),
@@ -209,38 +208,36 @@ void main() {
             ),
           ),
           mockInitialState.copyWith(
-            isFetching: true,
+            isRelatedProductsFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
               stockInfo: mockStockInfo,
             ),
           ),
           mockInitialState.copyWith(
+            isRelatedProductsFetching: true,
+            isMetadataFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
               stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
             ),
           ),
           mockInitialState.copyWith(
-            isFetching: true,
+            isMetadataFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
               stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
+              similarProduct: mockSimilarProducts,
             ),
+            failureOrSuccessOption: optionOf(Right(mockSimilarProducts)),
           ),
           mockInitialState.copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(
                 productImages: mockProductMetaData.productImages.first,
               ),
               productItem: mockProductMetaData.items.first,
+              stockInfo: mockStockInfo,
               similarProduct: mockSimilarProducts,
             ),
             failureOrSuccessOption: optionOf(Right(mockSimilarProducts)),
@@ -282,15 +279,7 @@ void main() {
             ),
           ).thenAnswer(
             (invocation) async => Right(
-              ProductDetailAggregate.empty().copyWith(
-                materialInfo: mockMaterialInfo.copyWith(
-                  bundle: mockMaterialInfo.bundle.copyWith(
-                    materials: mockMaterialInfoWithBundleStockInfo,
-                  ),
-                  productImages: mockProductMetaData.productImages.first,
-                ),
-                productItem: mockProductMetaData.items.first,
-              ),
+              mockProductMetaData,
             ),
           );
         },
@@ -307,11 +296,16 @@ void main() {
         seed: () => mockInitialState,
         expect: () => [
           mockInitialState.copyWith(
-            isFetching: true,
+            isDetailFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
           ),
           mockInitialState.copyWith(
-            isFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+            ),
+          ),
+          mockInitialState.copyWith(
+            isStockFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
             ),
@@ -326,7 +320,7 @@ void main() {
             ),
           ),
           mockInitialState.copyWith(
-            isFetching: true,
+            isMetadataFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo.copyWith(
                 bundle: mockMaterialInfo.bundle.copyWith(
@@ -382,7 +376,7 @@ void main() {
         seed: () => mockInitialState,
         expect: () => [
           mockInitialState.copyWith(
-            isFetching: true,
+            isDetailFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
           ),
           mockInitialState.copyWith(
@@ -408,43 +402,6 @@ void main() {
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
           );
-          when(
-            () => productDetailMockRepository.getStockInfoList(
-              customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
-              materials: [mockMaterialInfo],
-            ),
-          ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
-          );
-          when(
-            () => productDetailMockRepository.getItemProductMetaData(
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                stockInfo: StockInfo.empty(),
-                materialInfo: mockMaterialInfo,
-              ),
-            ),
-          ).thenAnswer(
-            (invocation) async => Right(
-              ProductDetailAggregate.empty().copyWith(
-                stockInfo: StockInfo.empty(),
-                materialInfo: mockMaterialInfo.copyWith(
-                  productImages: mockProductMetaData.productImages.first,
-                ),
-                productItem: mockProductMetaData.items.first,
-              ),
-            ),
-          );
-          when(
-            () => productDetailMockRepository.getSimilarProduct(
-              customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
-              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-              materialNumber: mockMaterialInfo.materialNumber,
-              principalCode: mockMaterialInfo.principalData.principalCode,
-              locale: locale,
-            ),
-          ).thenAnswer((invocation) async => Right(mockSimilarProducts));
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -461,7 +418,7 @@ void main() {
         ),
         expect: () => [
           mockInitialState.copyWith(
-            isFetching: true,
+            isStockFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
             ),
@@ -472,39 +429,6 @@ void main() {
             ),
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
-          ),
-          mockInitialState.copyWith(
-            isFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: mockMaterialInfo,
-            ),
-          ),
-          mockInitialState.copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
-            ),
-          ),
-          mockInitialState.copyWith(
-            isFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
-            ),
-          ),
-          mockInitialState.copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
-              similarProduct: mockSimilarProducts,
-            ),
-            failureOrSuccessOption: optionOf(Right(mockSimilarProducts)),
           ),
         ],
       );
@@ -525,22 +449,6 @@ void main() {
           ).thenAnswer(
             (invocation) async => Right(mockMaterialStockInfo),
           );
-          when(
-            () => productDetailMockRepository.getItemProductMetaData(
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                materialInfo: fakeMaterialInfoWithBundleMaterial,
-              ),
-            ),
-          ).thenAnswer(
-            (invocation) async => Right(
-              ProductDetailAggregate.empty().copyWith(
-                materialInfo: fakeMaterialInfoWithBundleMaterial.copyWith(
-                  productImages: mockProductMetaData.productImages.first,
-                ),
-                productItem: mockProductMetaData.items.first,
-              ),
-            ),
-          );
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -557,7 +465,7 @@ void main() {
         ),
         expect: () => [
           mockInitialState.copyWith(
-            isFetching: true,
+            isStockFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: fakeMaterialInfoWithBundleMaterial,
             ),
@@ -569,27 +477,6 @@ void main() {
                   materials: fakeMaterialInfoWithBundleStockInfo,
                 ),
               ),
-            ),
-          ),
-          mockInitialState.copyWith(
-            isFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: fakeMaterialInfoWithBundleMaterial.copyWith(
-                bundle: fakeMaterialInfoWithBundleMaterial.bundle.copyWith(
-                  materials: fakeMaterialInfoWithBundleStockInfo,
-                ),
-              ),
-            ),
-          ),
-          mockInitialState.copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: fakeMaterialInfoWithBundleMaterial.copyWith(
-                bundle: fakeMaterialInfoWithBundleMaterial.bundle.copyWith(
-                  materials: fakeMaterialInfoWithBundleStockInfo,
-                ),
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
             ),
           ),
         ],
@@ -611,22 +498,6 @@ void main() {
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
           );
-          when(
-            () => productDetailMockRepository.getItemProductMetaData(
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                materialInfo: mockMaterialInfo,
-              ),
-            ),
-          ).thenAnswer(
-            (invocation) async => Right(
-              ProductDetailAggregate.empty().copyWith(
-                materialInfo: mockMaterialInfo.copyWith(
-                  productImages: mockProductMetaData.productImages.first,
-                ),
-                productItem: mockProductMetaData.items.first,
-              ),
-            ),
-          );
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -643,7 +514,7 @@ void main() {
         ),
         expect: () => [
           mockInitialState.copyWith(
-            isFetching: true,
+            isStockFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
             ),
@@ -654,20 +525,6 @@ void main() {
             ),
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
-          ),
-          mockInitialState.copyWith(
-            isFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: mockMaterialInfo,
-            ),
-          ),
-          mockInitialState.copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
-            ),
           ),
         ],
       );
@@ -689,22 +546,11 @@ void main() {
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
           );
-          when(
-            () => productDetailMockRepository.getSimilarProduct(
-              customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
-              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-              materialNumber: mockMaterialInfo.materialNumber,
-              principalCode: mockMaterialInfo.principalData.principalCode,
-              locale: locale,
-            ),
-          ).thenAnswer((invocation) async => Right(mockSimilarProducts));
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetchMetaData(
               locale: locale,
-              isForBundle: false,
             ),
           );
         },
@@ -716,7 +562,7 @@ void main() {
         ),
         expect: () => [
           mockInitialState.copyWith(
-            isFetching: true,
+            isMetadataFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
               stockInfo: mockStockInfo,
@@ -729,21 +575,6 @@ void main() {
             ),
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
-          ),
-          mockInitialState.copyWith(
-            isFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo,
-            ),
-          ),
-          mockInitialState.copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo,
-              similarProduct: mockSimilarProducts,
-            ),
-            failureOrSuccessOption: optionOf(Right(mockSimilarProducts)),
           ),
         ],
       );
@@ -786,7 +617,7 @@ void main() {
         ),
         expect: () => [
           mockInitialState.copyWith(
-            isFetching: true,
+            isRelatedProductsFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(

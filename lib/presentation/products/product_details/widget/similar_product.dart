@@ -26,10 +26,10 @@ class SimilarProduct extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.productDetailAggregate.similarProduct !=
               current.productDetailAggregate.similarProduct ||
-          previous.isFetching != current.isFetching,
+          previous.isRelatedProductsFetching !=
+              current.isRelatedProductsFetching,
       builder: (context, state) {
-        if (!state.isFetching &&
-            state.productDetailAggregate.similarProduct.isEmpty) {
+        if (!state.showRelatedItemsSection) {
           return const SizedBox.shrink();
         }
 
@@ -49,7 +49,7 @@ class SimilarProduct extends StatelessWidget {
             ),
             SizedBox(
               height: 300,
-              child: state.isFetching
+              child: state.showRelatedItemsLoading
                   ? const _LoadingShimmerSimilarProduct()
                   : ListView(
                       scrollDirection: Axis.horizontal,

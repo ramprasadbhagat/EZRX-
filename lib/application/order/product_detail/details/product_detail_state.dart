@@ -9,7 +9,10 @@ class ProductDetailState with _$ProductDetailState {
     required ShipToInfo shipToInfo,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required ProductDetailAggregate productDetailAggregate,
-    required bool isFetching,
+    required bool isDetailFetching,
+    required bool isStockFetching,
+    required bool isRelatedProductsFetching,
+    required bool isMetadataFetching,
     required int inputQty,
     @Default(0) int selectedImageIndex,
   }) = _ProductDetailState;
@@ -18,7 +21,10 @@ class ProductDetailState with _$ProductDetailState {
         salesOrganisation: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         shipToInfo: ShipToInfo.empty(),
-        isFetching: false,
+        isDetailFetching: false,
+        isStockFetching: false,
+        isRelatedProductsFetching: false,
+        isMetadataFetching: false,
         failureOrSuccessOption: none(),
         productDetailAggregate: ProductDetailAggregate.empty(),
         inputQty: 1,
@@ -32,13 +38,20 @@ class ProductDetailState with _$ProductDetailState {
         : StringValue('');
   }
 
-  bool get showRelatedItems =>
-      isFetching ||
-      (!isFetching && productDetailAggregate.similarProduct.isNotEmpty);
+  bool get showRelatedItemsSection =>
+      isRelatedProductsFetching ||
+      isDetailFetching ||
+      (!isRelatedProductsFetching &&
+          productDetailAggregate.similarProduct.isNotEmpty);
+
+  bool get showRelatedItemsLoading =>
+      isDetailFetching || isRelatedProductsFetching;
 
   bool get _isHidePrice => productDetailAggregate.materialInfo.hidePrice;
+
+  bool get isDetailAndStockFetching => isDetailFetching || isStockFetching;
   bool get eligibleForStockError =>
-      !isFetching &&
+      !isDetailAndStockFetching &&
       productDetailAggregate.stockInfo.stockQuantity != 0 &&
       inputQty > productDetailAggregate.stockInfo.stockQuantity;
   bool _isPnGPrinciple({required bool isMYExternalSalesRepUser}) =>
