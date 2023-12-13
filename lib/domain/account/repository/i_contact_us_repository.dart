@@ -5,8 +5,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 abstract class IContactUsRepository {
   Future<Either<ApiFailure, bool>> submit({
     required ContactUs contactUs,
-    required String customerCode,
-    required String clinicName,
-    required String language,
+    required String sendToEmail,
+    required String country,
   });
 }

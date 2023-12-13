@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/contact_us.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/repository/i_contact_us_repository.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -78,9 +78,8 @@ class ContactUsBloc extends Bloc<ContactUsEvent, ContactUsState> {
           );
           final failureOrSuccess = await contactUsRepository.submit(
             contactUs: state.contactUs,
-            clinicName: e.clinicName,
-            customerCode: e.custCode.customerCodeSoldTo,
-            language: e.language.toUpperCase(),
+            sendToEmail: e.salesOrg.contactUsEmail,
+            country: e.salesOrg.country,
           );
 
           failureOrSuccess.fold(

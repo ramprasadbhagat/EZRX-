@@ -10,6 +10,6 @@ class ContactUsLocalDataSource {
       await rootBundle.loadString('assets/json/submitContactUsResponse.json'),
     );
 
-    return data['data']['contactUs']['success'];
+    return data == 'Message sent successfully.';
   }
 }

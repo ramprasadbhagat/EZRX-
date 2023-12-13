@@ -11,6 +11,8 @@ import 'package:ezrxmobile/infrastructure/account/repository/contact_us_reposito
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class ConfigMock extends Mock implements Config {}
 
 class ContactUsRemoteDataSourceMock extends Mock
@@ -25,10 +27,6 @@ void main() {
   late ContactUsRemoteDataSource remoteDataSourceMock;
   late ContactUsRepository repository;
   late ContactUs contactUsMock;
-  late String customerCodeMock;
-  late String clinicNameMock;
-  late String languageMock;
-  
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -49,9 +47,6 @@ void main() {
       email: EmailAddress('mock-email@a.com'),
       message: StringValue('mock-message'),
     );
-    customerCodeMock = 'mock-customer-code';
-    clinicNameMock = 'mock-clinic-name';
-    languageMock = 'en';
   });
 
   group('Contact us repository', () {
@@ -63,9 +58,8 @@ void main() {
 
       final result = await repository.submit(
         contactUs: contactUsMock,
-        clinicName: clinicNameMock,
-        customerCode: customerCodeMock,
-        language: languageMock,
+        country: fakeSalesOrg.country,
+        sendToEmail: fakeSalesOrg.contactUsEmail,
       );
       expect(result.isLeft(), true);
     });
@@ -78,9 +72,8 @@ void main() {
 
       final result = await repository.submit(
         contactUs: contactUsMock,
-        clinicName: clinicNameMock,
-        customerCode: customerCodeMock,
-        language: languageMock,
+        country: fakeSalesOrg.country,
+        sendToEmail: fakeSalesOrg.contactUsEmail,
       );
       expect(result.isRight(), true);
     });
@@ -90,17 +83,15 @@ void main() {
       when(
         () => remoteDataSourceMock.submit(
           contactUsMap: ContactUsDto.fromDomain(contactUsMock).toJson(),
-          clinicName: clinicNameMock,
-          customerCode: customerCodeMock,
-          language: languageMock,
+          country: fakeSalesOrg.country,
+          sendToEmail: fakeSalesOrg.contactUsEmail,
         ),
       ).thenThrow((invocation) async => MockException());
 
       final result = await repository.submit(
         contactUs: contactUsMock,
-        clinicName: clinicNameMock,
-        customerCode: customerCodeMock,
-        language: languageMock,
+        country: fakeSalesOrg.country,
+        sendToEmail: fakeSalesOrg.contactUsEmail,
       );
       expect(result.isLeft(), true);
     });
@@ -110,17 +101,15 @@ void main() {
       when(
         () => remoteDataSourceMock.submit(
           contactUsMap: ContactUsDto.fromDomain(contactUsMock).toJson(),
-          clinicName: clinicNameMock,
-          customerCode: customerCodeMock,
-          language: languageMock,
+          country: fakeSalesOrg.country,
+          sendToEmail: fakeSalesOrg.contactUsEmail,
         ),
       ).thenAnswer((invocation) async => true);
 
       final result = await repository.submit(
         contactUs: contactUsMock,
-        clinicName: clinicNameMock,
-        customerCode: customerCodeMock,
-        language: languageMock,
+        country: fakeSalesOrg.country,
+        sendToEmail: fakeSalesOrg.contactUsEmail,
       );
       expect(result.isRight(), true);
     });

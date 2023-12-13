@@ -22,36 +22,29 @@ class ContactUsRemoteDataSource {
 
   Future<bool> submit({
     required Map<String, dynamic> contactUsMap,
-    required String customerCode,
-    required String clinicName,
-    required String language,
+    required String sendToEmail,
+    required String country,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}license',
+        url: '${config.urlConstants}sendEmail',
         data: jsonEncode({
-          'query': mutation.submitQuery(),
-          'variables': {
-            'input': {
-              ...contactUsMap,
-              'customerCode': customerCode,
-              'clinicName': clinicName,
-              'language': language,
-            },
-          },
+          ...contactUsMap,
+          'sendToEmail': sendToEmail,
+          'country': country,
+          'type': 'general',
         }),
-        apiEndpoint: 'contactUs',
       );
       _contactUsExceptionChecker(res: res);
 
-      return res.data['data']['contactUs']['success'];
+      return res.data == 'Message sent successfully.';
     });
   }
 
   void _contactUsExceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
-      throw ServerException(message: res.data['errors'][0]['message']);
+    if (res.data == null && res.data.isEmpty) {
+      throw ServerException(message: 'Message not been sent successfully');
     } else if (res.statusCode != 200) {
       throw ServerException(
         code: res.statusCode ?? 0,

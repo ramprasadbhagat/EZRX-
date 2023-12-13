@@ -4,9 +4,7 @@ part of 'contact_us_bloc.dart';
 class ContactUsEvent with _$ContactUsEvent {
   const factory ContactUsEvent.initialized() = _Initialized;
   const factory ContactUsEvent.submit({
-    required String language,
-    required CustomerCodeInfo custCode,
-    required String clinicName,
+    required SalesOrg salesOrg,
   }) = _Submit;
   const factory ContactUsEvent.onUsernameChange({
     required String newValue,

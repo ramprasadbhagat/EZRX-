@@ -22,9 +22,8 @@ class ContactUsRepository implements IContactUsRepository {
   @override
   Future<Either<ApiFailure, bool>> submit({
     required ContactUs contactUs,
-    required String customerCode,
-    required String clinicName,
-    required String language,
+    required String sendToEmail,
+    required String country,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -38,9 +37,8 @@ class ContactUsRepository implements IContactUsRepository {
     try {
       final isSuccess = await remoteDataSource.submit(
         contactUsMap: ContactUsDto.fromDomain(contactUs).toJson(),
-        clinicName: clinicName,
-        customerCode: customerCode,
-        language: language,
+        country: country,
+        sendToEmail: sendToEmail,
       );
 
       return Right(isSuccess);

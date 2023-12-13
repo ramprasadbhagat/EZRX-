@@ -17,22 +17,8 @@ class _SendMessageButton extends StatelessWidget {
                   FocusScope.of(context).unfocus();
                   context.read<ContactUsBloc>().add(
                         ContactUsEvent.submit(
-                          clinicName: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .shipToInfo
-                              .shipToName
-                              .name1,
-                          custCode: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          language: context
-                              .read<UserBloc>()
-                              .state
-                              .user
-                              .preferredLanguage
-                              .languageCode,
+                          salesOrg:
+                              context.read<EligibilityBloc>().state.salesOrg,
                         ),
                       );
                 },

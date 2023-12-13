@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/contact_us.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -11,6 +10,8 @@ import 'package:ezrxmobile/infrastructure/account/repository/contact_us_reposito
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class ContactUsRepositoryMock extends Mock implements ContactUsRepository {}
 
@@ -30,12 +31,6 @@ void main() {
     email: EmailAddress(fakeEmail),
     contactNumber: PhoneNumber(fakeContactNumber),
     message: StringValue(fakeMessage),
-  );
-
-  const language = 'EN';
-  const clinicName = 'fake-clinic';
-  final customerCodeInfo = CustomerCodeInfo.empty().copyWith(
-    customerCodeSoldTo: 'fake-code',
   );
 
   setUpAll(() async {
@@ -145,9 +140,8 @@ void main() {
         when(
           () => repositoryMock.submit(
             contactUs: contactUs,
-            language: language,
-            customerCode: customerCodeInfo.customerCodeSoldTo,
-            clinicName: clinicName,
+            country: fakeSalesOrg.country,
+            sendToEmail: fakeSalesOrg.contactUsEmail,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -157,9 +151,7 @@ void main() {
       },
       act: (ContactUsBloc bloc) => bloc.add(
         ContactUsEvent.submit(
-          language: language,
-          custCode: customerCodeInfo,
-          clinicName: clinicName,
+          salesOrg: fakeSalesOrg,
         ),
       ),
       expect: () => [
@@ -181,9 +173,8 @@ void main() {
         when(
           () => repositoryMock.submit(
             contactUs: fullDataContactUs,
-            language: language,
-            customerCode: customerCodeInfo.customerCodeSoldTo,
-            clinicName: clinicName,
+            country: fakeSalesOrg.country,
+            sendToEmail: fakeSalesOrg.contactUsEmail,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -193,9 +184,7 @@ void main() {
       },
       act: (ContactUsBloc bloc) => bloc.add(
         ContactUsEvent.submit(
-          language: language,
-          custCode: customerCodeInfo,
-          clinicName: clinicName,
+          salesOrg: fakeSalesOrg,
         ),
       ),
       expect: () => [
@@ -223,9 +212,8 @@ void main() {
         when(
           () => repositoryMock.submit(
             contactUs: fullDataContactUs,
-            language: language,
-            customerCode: customerCodeInfo.customerCodeSoldTo,
-            clinicName: clinicName,
+            country: fakeSalesOrg.country,
+            sendToEmail: fakeSalesOrg.contactUsEmail,
           ),
         ).thenAnswer(
           (invocation) async => const Right(
@@ -235,9 +223,7 @@ void main() {
       },
       act: (ContactUsBloc bloc) => bloc.add(
         ContactUsEvent.submit(
-          language: language,
-          custCode: customerCodeInfo,
-          clinicName: clinicName,
+          salesOrg: fakeSalesOrg,
         ),
       ),
       expect: () => [

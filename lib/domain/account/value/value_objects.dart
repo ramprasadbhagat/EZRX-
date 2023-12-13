@@ -125,6 +125,7 @@ class SalesOrg extends ValueObject<String> {
   String get announcementVariablePath => countryAnnouncementPath(country);
 
   String get articleVariablePath => countryArticlePath(country);
+  String get contactUsEmail => countryContactUsEmail(country);
 
   String get aboutUsVariablePath => countryAboutUsPath(country);
 

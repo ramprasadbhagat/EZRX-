@@ -858,9 +858,7 @@ void main() {
       verify(
         () => mockContactUsBloc.add(
           ContactUsEvent.submit(
-            clinicName: 'fake_name',
-            custCode: fakeCustomerCode,
-            language: 'EN',
+            salesOrg: salesOrg.salesOrg,
           ),
         ),
       ).called(1);

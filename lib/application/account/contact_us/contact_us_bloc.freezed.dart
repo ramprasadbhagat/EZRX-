@@ -19,9 +19,7 @@ mixin _$ContactUsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)
-        submit,
+    required TResult Function(SalesOrg salesOrg) submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -31,9 +29,7 @@ mixin _$ContactUsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult? Function(SalesOrg salesOrg)? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -43,9 +39,7 @@ mixin _$ContactUsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult Function(SalesOrg salesOrg)? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -143,9 +137,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)
-        submit,
+    required TResult Function(SalesOrg salesOrg) submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -158,9 +150,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult? Function(SalesOrg salesOrg)? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -173,9 +163,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult Function(SalesOrg salesOrg)? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -241,9 +229,7 @@ abstract class _$$_SubmitCopyWith<$Res> {
   factory _$$_SubmitCopyWith(_$_Submit value, $Res Function(_$_Submit) then) =
       __$$_SubmitCopyWithImpl<$Res>;
   @useResult
-  $Res call({String language, CustomerCodeInfo custCode, String clinicName});
-
-  $CustomerCodeInfoCopyWith<$Res> get custCode;
+  $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -256,53 +242,28 @@ class __$$_SubmitCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? language = null,
-    Object? custCode = null,
-    Object? clinicName = null,
+    Object? salesOrg = null,
   }) {
     return _then(_$_Submit(
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String,
-      custCode: null == custCode
-          ? _value.custCode
-          : custCode // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      clinicName: null == clinicName
-          ? _value.clinicName
-          : clinicName // ignore: cast_nullable_to_non_nullable
-              as String,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get custCode {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.custCode, (value) {
-      return _then(_value.copyWith(custCode: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_Submit implements _Submit {
-  const _$_Submit(
-      {required this.language,
-      required this.custCode,
-      required this.clinicName});
+  const _$_Submit({required this.salesOrg});
 
   @override
-  final String language;
-  @override
-  final CustomerCodeInfo custCode;
-  @override
-  final String clinicName;
+  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'ContactUsEvent.submit(language: $language, custCode: $custCode, clinicName: $clinicName)';
+    return 'ContactUsEvent.submit(salesOrg: $salesOrg)';
   }
 
   @override
@@ -310,16 +271,12 @@ class _$_Submit implements _Submit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Submit &&
-            (identical(other.language, language) ||
-                other.language == language) &&
-            (identical(other.custCode, custCode) ||
-                other.custCode == custCode) &&
-            (identical(other.clinicName, clinicName) ||
-                other.clinicName == clinicName));
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, language, custCode, clinicName);
+  int get hashCode => Object.hash(runtimeType, salesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -331,39 +288,33 @@ class _$_Submit implements _Submit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)
-        submit,
+    required TResult Function(SalesOrg salesOrg) submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
     required TResult Function(String newValue) onMessageChange,
   }) {
-    return submit(language, custCode, clinicName);
+    return submit(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult? Function(SalesOrg salesOrg)? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
     TResult? Function(String newValue)? onMessageChange,
   }) {
-    return submit?.call(language, custCode, clinicName);
+    return submit?.call(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult Function(SalesOrg salesOrg)? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -371,7 +322,7 @@ class _$_Submit implements _Submit {
     required TResult orElse(),
   }) {
     if (submit != null) {
-      return submit(language, custCode, clinicName);
+      return submit(salesOrg);
     }
     return orElse();
   }
@@ -421,14 +372,9 @@ class _$_Submit implements _Submit {
 }
 
 abstract class _Submit implements ContactUsEvent {
-  const factory _Submit(
-      {required final String language,
-      required final CustomerCodeInfo custCode,
-      required final String clinicName}) = _$_Submit;
+  const factory _Submit({required final SalesOrg salesOrg}) = _$_Submit;
 
-  String get language;
-  CustomerCodeInfo get custCode;
-  String get clinicName;
+  SalesOrg get salesOrg;
   @JsonKey(ignore: true)
   _$$_SubmitCopyWith<_$_Submit> get copyWith =>
       throw _privateConstructorUsedError;
@@ -500,9 +446,7 @@ class _$_UsernameChange implements _UsernameChange {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)
-        submit,
+    required TResult Function(SalesOrg salesOrg) submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -515,9 +459,7 @@ class _$_UsernameChange implements _UsernameChange {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult? Function(SalesOrg salesOrg)? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -530,9 +472,7 @@ class _$_UsernameChange implements _UsernameChange {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult Function(SalesOrg salesOrg)? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -665,9 +605,7 @@ class _$_EmailChange implements _EmailChange {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)
-        submit,
+    required TResult Function(SalesOrg salesOrg) submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -680,9 +618,7 @@ class _$_EmailChange implements _EmailChange {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult? Function(SalesOrg salesOrg)? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -695,9 +631,7 @@ class _$_EmailChange implements _EmailChange {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult Function(SalesOrg salesOrg)? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -830,9 +764,7 @@ class _$_ContactNumberChange implements _ContactNumberChange {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)
-        submit,
+    required TResult Function(SalesOrg salesOrg) submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -845,9 +777,7 @@ class _$_ContactNumberChange implements _ContactNumberChange {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult? Function(SalesOrg salesOrg)? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -860,9 +790,7 @@ class _$_ContactNumberChange implements _ContactNumberChange {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult Function(SalesOrg salesOrg)? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -995,9 +923,7 @@ class _$_MessageChange implements _MessageChange {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)
-        submit,
+    required TResult Function(SalesOrg salesOrg) submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -1010,9 +936,7 @@ class _$_MessageChange implements _MessageChange {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult? Function(SalesOrg salesOrg)? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -1025,9 +949,7 @@ class _$_MessageChange implements _MessageChange {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            String language, CustomerCodeInfo custCode, String clinicName)?
-        submit,
+    TResult Function(SalesOrg salesOrg)? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
