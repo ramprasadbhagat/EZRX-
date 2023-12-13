@@ -1380,7 +1380,7 @@ void main() {
           final priceMessageWidgetFinder =
               find.byKey(WidgetKeys.cartPagePriceMessageWidget);
           final priceMessageFinder = find.text(
-            'Price is not available for at least one item. Grand total reflected may not be accurate.'
+            'Can’t order material without price. Please remove to continue to check out.'
                 .tr(),
           );
           expect(priceMessageWidgetFinder, findsOneWidget);
@@ -1437,7 +1437,7 @@ void main() {
           final priceMessageWidgetFinder =
               find.byKey(WidgetKeys.cartPagePriceMessageWidget);
           final priceMessageFinder = find.text(
-            'Price is not available for at least one item. Grand total reflected may not be accurate.'
+            'Can’t order material without price. Please remove to continue to check out.'
                 .tr(),
           );
           expect(priceMessageWidgetFinder, findsOneWidget);
@@ -1490,7 +1490,7 @@ void main() {
           final priceMessageWidgetFinder =
               find.byKey(WidgetKeys.cartPagePriceMessageWidget);
           final priceMessageFinder = find.text(
-            'Price is not available for at least one item. Grand total reflected may not be accurate.'
+            'Can’t order material without price. Please remove to continue to check out.'
                 .tr(),
           );
           expect(priceMessageWidgetFinder, findsOneWidget);
@@ -2321,7 +2321,7 @@ void main() {
             find.byKey(WidgetKeys.cartPagePriceMessageWidget);
         expect(cartPagePriceMessageWidget, findsOneWidget);
         final cartPagePriceMessage = find.text(
-          'Price is not available for at least one item. Grand total reflected may not be accurate.',
+          'Can’t order material without price. Please remove to continue to check out.',
         );
         expect(cartPagePriceMessage, findsOneWidget);
       });

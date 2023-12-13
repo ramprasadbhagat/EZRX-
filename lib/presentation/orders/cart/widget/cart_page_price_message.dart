@@ -17,9 +17,9 @@ class _CartPagePriceMessage extends StatelessWidget {
         return InfoLabel(
           key: WidgetKeys.cartPagePriceMessageWidget,
           margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-          mainColor: ZPColors.priceWarning,
+          mainColor: ZPColors.lightRedStatusColor,
           textValue: context.tr(
-            'Price is not available for at least one item. Grand total reflected may not be accurate.',
+            'Can’t order material without price. Please remove to continue to check out.',
           ),
         );
       },
