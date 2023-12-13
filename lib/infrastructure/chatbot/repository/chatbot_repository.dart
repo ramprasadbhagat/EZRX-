@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
@@ -116,5 +117,19 @@ class ChatBotRepository implements IChatBotRepository {
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  @override
+  StreamSubscription closeChatbotOnIncomingDeepLink() {
+    return chatBotService.chatBotEventData().listen((event) async {
+      //This try/catch is required to handle data from chatbot because event data type can be both String and Map
+      try {
+        final eventCode = event['code'];
+        final url = json.decode(event['data'])['url'];
+        if (eventCode != 'ym_event_card_action') return;
+        if (!url.startsWith(config.customScheme)) return;
+        await chatBotService.closeChatBot();
+      } catch (_) {}
+    });
   }
 }

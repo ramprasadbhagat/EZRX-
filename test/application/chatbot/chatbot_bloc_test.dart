@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
@@ -27,6 +29,8 @@ void main() {
         when(() => chatBotRepositoryMock.startChatbot()).thenAnswer(
           (invocation) async => const Right(true),
         );
+        when(() => chatBotRepositoryMock.closeChatbotOnIncomingDeepLink())
+            .thenReturn(const Stream.empty().listen((event) {}));
       },
       expect: () => [
         ChatBotState.initial().copyWith(isLoading: true),

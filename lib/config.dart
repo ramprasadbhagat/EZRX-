@@ -14,6 +14,7 @@ class Config {
   int pageSize = 24;
   int autoSearchTimeout = 1500;
   int maximumCartQuantity = 99999;
+  String customScheme = 'ezrx://';
 
   String baseUrl({AppMarket? currentMarket}) {
     final marketDomain = currentMarket?.marketDomain;

@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
+import 'package:flutter/services.dart';
 import 'package:ymchat_flutter/ymchat_flutter.dart';
 
 class ChatBotService {
@@ -18,6 +21,11 @@ class ChatBotService {
   }
 
   Future<bool> startChatbot() async => await YmChat.startChatbot();
+
+  Future<bool> closeChatBot() async => await YmChat.closeBot();
+
+  Stream chatBotEventData() =>
+      const EventChannel('YMChatEvent').receiveBroadcastStream();
 
   Future<bool> passPayloadToBot({
     required Map<String, Object> payload,

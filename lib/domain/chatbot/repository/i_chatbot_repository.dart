@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -8,6 +10,9 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 abstract class IChatBotRepository {
   Future<Either<ApiFailure, bool>> startChatbot();
+
+  StreamSubscription closeChatbotOnIncomingDeepLink();
+
   Future<Either<ApiFailure, bool>> passPayloadToChatbot({
     required SalesOrganisation salesOrganisation,
     required User user,
@@ -15,5 +20,6 @@ abstract class IChatBotRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
   });
+
   Future<Either<ApiFailure, bool>> resetChatbot();
 }

@@ -38,12 +38,18 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
     required ShipToInfo selectedShipTo,
     required Uri link,
   }) {
+    final orderNumber = OrderNumber(link.queryParameters['orderNumber'] ?? '');
     final customerCode = link.queryParameters['SoldTo'];
     final shipToCode = link.queryParameters['ShipTo'];
-    final orderNumber = OrderNumber(link.queryParameters['orderNumber'] ?? '');
+
+    final isValidCustomerCode = customerCode == null ||
+        customerCode == selectedCustomerCode.customerCodeSoldTo;
+    final isValidShipToCode =
+        shipToCode == null || shipToCode == selectedShipTo.shipToCustomerCode;
+
     final isValidLink = _validDomain(link) &&
-        customerCode == selectedCustomerCode.customerCodeSoldTo &&
-        shipToCode == selectedShipTo.shipToCustomerCode &&
+        isValidCustomerCode &&
+        isValidShipToCode &&
         orderNumber.isValid();
 
     return isValidLink

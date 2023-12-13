@@ -12,6 +12,7 @@ part 'chat_bot_bloc.freezed.dart';
 
 class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
   final IChatBotRepository chatBotRepository;
+  StreamSubscription? _deepLinkHandlerStreamSubscription;
 
   ChatBotBloc({
     required this.chatBotRepository,
@@ -40,11 +41,17 @@ class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
               chatbotFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (_) => emit(
-            state.copyWith(
-              isLoading: false,
-            ),
-          ),
+          (_) {
+            _deepLinkHandlerStreamSubscription?.cancel;
+            _deepLinkHandlerStreamSubscription =
+                chatBotRepository.closeChatbotOnIncomingDeepLink();
+
+            emit(
+              state.copyWith(
+                isLoading: false,
+              ),
+            );
+          },
         );
       },
       resetChatbot: (_) async {
@@ -70,5 +77,12 @@ class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
         );
       },
     );
+  }
+
+  @override
+  Future<void> close() async {
+    await _deepLinkHandlerStreamSubscription?.cancel();
+
+    return super.close();
   }
 }
