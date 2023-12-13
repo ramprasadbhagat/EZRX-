@@ -24,6 +24,10 @@ class ChatBotService {
 
   Future<bool> closeChatBot() async => await YmChat.closeBot();
 
+  // used to associate an identity of the user with the chatbot
+  Future<bool> setAuthToken(String token) async =>
+      await YmChat.setAuthenticationToken(token);
+
   Stream chatBotEventData() =>
       const EventChannel('YMChatEvent').receiveBroadcastStream();
 

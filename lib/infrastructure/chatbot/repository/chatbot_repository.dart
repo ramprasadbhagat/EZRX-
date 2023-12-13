@@ -88,6 +88,7 @@ class ChatBotRepository implements IChatBotRepository {
         ),
       };
 
+      await chatBotService.setAuthToken(jwt.refresh);
       return Right(await chatBotService.passPayloadToBot(payload: payload));
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
