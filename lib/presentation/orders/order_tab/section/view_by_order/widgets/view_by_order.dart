@@ -84,10 +84,9 @@ class _ViewByOrder extends StatelessWidget {
                     salesOrgConfig: eligibilityState.salesOrgConfigs,
                     price: viewByOrderHistoryItem
                         .orderedItemsValue(
-                          context
-                              .read<EligibilityBloc>()
-                              .state
+                          eligibilityState
                               .isMYExternalSalesRepUser,
+                          isIDMarket: eligibilityState.isIDMarket,
                         )
                         .toString(),
                     title: context.tr('Order total : '),

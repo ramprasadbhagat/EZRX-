@@ -181,17 +181,26 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
             : previousValue,
       );
 
-  double orderedItemsValue(bool isMYExternalSalesRep) =>
-      orderHistoryDetailsOrderItem.fold(
-        grandTotalWithTax,
-        (previousValue, element) => isMYExternalSalesRep &&
-                element.type.isMaterialTypeComm &&
-                element.principalData.principalCode.isPnG &&
-                !invoiceNumber.isValid() &&
-                orderValue > 0
-            ? orderValue - (element.qty * element.unitPrice)
-            : previousValue,
-      );
+  double orderedItemsValue(
+    bool isMYExternalSalesRep, {
+    bool isIDMarket = false,
+  }) {
+    if (isIDMarket) {
+      return totalValue;
+    }
+
+    return orderHistoryDetailsOrderItem.fold(
+      grandTotalWithTax,
+      (previousValue, element) => isMYExternalSalesRep &&
+              element.type.isMaterialTypeComm &&
+              element.principalData.principalCode.isPnG &&
+              !invoiceNumber.isValid() &&
+              orderValue > 0
+          ? orderValue - (element.qty * element.unitPrice)
+          : previousValue,
+    );
+  }
+
   double get totalTaxPercentage =>
       double.parse((totalTax / orderValue * 100).toStringAsExponential(2));
 }

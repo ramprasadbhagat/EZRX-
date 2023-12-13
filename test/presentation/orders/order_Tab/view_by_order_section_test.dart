@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -192,6 +191,37 @@ void main() {
         '2 items',
       );
       expect(materials, findsOneWidget);
+    });
+
+    testWidgets('Displaying order total value', (tester) async {
+      const totalValue = 500.0;
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          viewByOrderList: viewByOrder.copyWith(
+            orderHeaders: [
+              viewByOrder.orderHeaders.first.copyWith(
+                totalValue: totalValue,
+              ),
+            ],
+          ),
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final totalOrderPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text.toPlainText().contains(totalValue.toString()),
+      );
+      expect(totalOrderPriceFinder, findsOneWidget);
     });
 
     testWidgets(
@@ -432,7 +462,7 @@ void main() {
 
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+          salesOrgConfigs: fakeEmptySalesConfigs.copyWith(
             currency: Currency('SGD'),
           ),
         ),
