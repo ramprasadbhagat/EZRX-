@@ -11,7 +11,6 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -69,14 +68,9 @@ class _ReturnByRequestPageState extends State<ReturnByRequestPage> {
             );
           },
           buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching ||
-              previous.returnItemList != current.returnItemList,
+              previous.isFetching != current.isFetching,
           builder: (context, state) {
-            return state.isFetching
-                ? LoadingShimmer.logo(
-                    key: WidgetKeys.loaderImage,
-                  )
-                : ScrollList<ReturnItem>(
+            return ScrollList<ReturnItem>(
                     noRecordFoundWidget: NoRecordFound.returnItems(
                       isSearchKeyEmpty: state.searchKey.isValueEmpty,
                     ),

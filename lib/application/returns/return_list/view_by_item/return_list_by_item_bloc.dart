@@ -1,4 +1,3 @@
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -95,7 +94,6 @@ class ReturnListByItemBloc
           },
         );
       },
-      transformer: restartable(),
     );
     on<_LoadMore>(
       (e, emit) async {
@@ -144,7 +142,6 @@ class ReturnListByItemBloc
           },
         );
       },
-      transformer: restartable(),
     );
   }
 }

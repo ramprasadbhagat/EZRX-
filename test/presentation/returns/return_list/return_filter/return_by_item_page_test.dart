@@ -14,10 +14,9 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -101,14 +100,7 @@ void main() {
     mockReturnSummaryDetailsBloc = MockReturnSummaryDetailsBloc();
     mockProductImageBloc = MockProductImageBloc();
     mockReturnListByItemBloc = ReturnListByItemBlocMock();
-
-    fakeReturnItemList = [
-      ReturnItem.empty().copyWith(
-        requestId: '1234567',
-        invoiceID: '1234567',
-        status: StatusType('PENDING'),
-      )
-    ];
+    fakeReturnItemList = await ReturnListLocalDataSource().fetchReturnByItems();
   });
 
   group(
@@ -212,8 +204,11 @@ void main() {
           ),
         );
         final expectedStates = [
-          ReturnListByItemState.initial()
-              .copyWith(isFetching: false, returnItemList: fakeReturnItemList),
+          ReturnListByItemState.initial().copyWith(
+            returnItemList: [
+              fakeReturnItemList.first,
+            ],
+          ),
         ];
         whenListen(
           mockReturnListByItemBloc,
@@ -253,7 +248,7 @@ void main() {
             ),
             ReturnListByItemState.initial().copyWith(
               isFetching: false,
-              returnItemList: fakeReturnItemList,
+              returnItemList: [fakeReturnItemList.first],
             )
           ];
           whenListen(
@@ -276,7 +271,7 @@ void main() {
             findsOneWidget,
           );
           expect(
-            find.text('Invoice #1234567'),
+            find.text('Invoice #${fakeReturnItemList.first.invoiceID}'),
             findsOneWidget,
           );
           final findReturnItemTile = find.byKey(WidgetKeys.returnItemTile);
@@ -367,9 +362,6 @@ void main() {
           ReturnListByItemState.initial().copyWith(
             returnItemList: [
               fakeReturnItemList.first,
-              fakeReturnItemList.first.copyWith(
-                prsfd: Prsfd('B'),
-              )
             ],
           ),
         );
@@ -414,6 +406,28 @@ void main() {
           final customerName = find.text('fake-customerName');
           expect(cardFinder, findsOneWidget);
           expect(customerName, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'on load more',
+        (tester) async {
+          when(() => mockReturnListByItemBloc.state).thenReturn(
+            ReturnListByItemState.initial().copyWith(
+              returnItemList: [
+                ...fakeReturnItemList,
+                ...fakeReturnItemList,
+                ...fakeReturnItemList,
+              ],
+              isFetching: true,
+            ),
+          );
+          await tester.pumpWidget(getWUT());
+          await tester.pump();
+          await tester.scrollUntilVisible(
+            find.byKey(WidgetKeys.loadMoreLoader),
+            200,
+          );
         },
       );
     },

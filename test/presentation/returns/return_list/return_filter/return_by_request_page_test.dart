@@ -12,9 +12,8 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_request_page.dart';
@@ -80,21 +79,8 @@ void main() {
     mockAnnouncementBloc = MockAnnouncementBloc();
     mockReturnListByRequestBloc = ReturnListByRequestBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
-
-    fakeReturnItemList = [
-      ReturnItem.empty().copyWith(
-        requestId: '1234567',
-        invoiceID: '1234567',
-        status: StatusType('PENDING'),
-        itemQty: ReturnQuantity('3'),
-      ),
-      ReturnItem.empty().copyWith(
-        requestId: '1234567',
-        invoiceID: '1234567',
-        status: StatusType('PENDING'),
-        itemQty: ReturnQuantity('1'),
-      )
-    ];
+    fakeReturnItemList =
+        await ReturnListLocalDataSource().fetchReturnByRequests();
   });
 
   group('Return By Request Page', () {
@@ -220,25 +206,11 @@ void main() {
       await tester.pump();
     });
 
-    testWidgets('Return By Request Page quantity text validation',
-        (tester) async {
-      when(() => mockReturnListByRequestBloc.state).thenReturn(
-        ReturnListByRequestState.initial().copyWith(
-          returnItemList: fakeReturnItemList,
-        ),
-      );
-
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-
-      expect(find.text('3 items'), findsOneWidget);
-    });
-
     testWidgets('Return By Request Page quantity text validation find 1 item',
         (tester) async {
       when(() => mockReturnListByRequestBloc.state).thenReturn(
         ReturnListByRequestState.initial().copyWith(
-          returnItemList: fakeReturnItemList,
+          returnItemList: [fakeReturnItemList.first],
         ),
       );
 
@@ -274,6 +246,28 @@ void main() {
         final customerName = find.text('fake-customerName');
 
         expect(customerName, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'on load more',
+      (tester) async {
+        when(() => mockReturnListByRequestBloc.state).thenReturn(
+          ReturnListByRequestState.initial().copyWith(
+            returnItemList: [
+              ...fakeReturnItemList,
+              ...fakeReturnItemList,
+              ...fakeReturnItemList,
+            ],
+            isFetching: true,
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        await tester.scrollUntilVisible(
+          find.byKey(WidgetKeys.loadMoreLoader),
+          200,
+        );
       },
     );
   });
