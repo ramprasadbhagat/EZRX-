@@ -32,8 +32,6 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
     );
     on<_Fetch>(
       (e, emit) async {
-        if (e.appliedFilter.searchKey == state.appliedFilter.searchKey &&
-            e.appliedFilter.searchKey.validateNotEmpty) return;
         if (!e.appliedFilter.searchKey.isValid()) return;
         emit(
           state.copyWith(

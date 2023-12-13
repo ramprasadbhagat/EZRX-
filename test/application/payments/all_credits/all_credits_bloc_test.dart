@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dar
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
@@ -132,6 +133,57 @@ void main() {
             items: fakeResult,
             failureOrSuccessOption: none(),
             canLoadMore: false,
+          ),
+        ],
+      );
+
+      blocTest(
+        'fetch -> search and filter combine',
+        build: () => AllCreditsBloc(
+          allCreditsAndInvoicesRepository: repository,
+          config: config,
+        ),
+        seed: () => AllCreditsState.initial().copyWith(
+          appliedFilter: AllCreditsFilter.empty().copyWith(
+            searchKey: SearchKey('fake-search-key'),
+          ),
+        ),
+        setUp: () {
+          when(
+            () => repository.filterCredits(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              filter: allCreditsFilter.copyWith(
+                searchKey: SearchKey('fake-search-key'),
+              ),
+              offset: 0,
+              pageSize: config.pageSize,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(fakeResult),
+          );
+        },
+        act: (AllCreditsBloc bloc) => bloc.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.empty().copyWith(
+              searchKey: SearchKey('fake-search-key'),
+            ),
+          ),
+        ),
+        expect: () => [
+          AllCreditsState.initial().copyWith(
+            isLoading: true,
+            appliedFilter: allCreditsFilter.copyWith(
+              searchKey: SearchKey('fake-search-key'),
+            ),
+          ),
+          AllCreditsState.initial().copyWith(
+            items: fakeResult,
+            failureOrSuccessOption: none(),
+            canLoadMore: false,
+            appliedFilter: allCreditsFilter.copyWith(
+              searchKey: SearchKey('fake-search-key'),
+            ),
           ),
         ],
       );
