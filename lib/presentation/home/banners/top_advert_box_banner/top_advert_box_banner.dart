@@ -17,21 +17,16 @@ class TopAdvertBoxBanner extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.customerCodeInfo != current.customerCodeInfo,
         listener: (context, state) {
+          final eligibilityState = context.read<EligibilityBloc>().state;
           context.read<BannerBloc>().add(
                 BannerEvent.fetch(
                   isPreSalesOrg: false,
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  country:
-                      context.read<EligibilityBloc>().state.salesOrg.country,
-                  role: context
-                      .read<EligibilityBloc>()
-                      .state
-                      .user
-                      .role
-                      .type
-                      .getEZReachRoleType,
+                  country: eligibilityState.salesOrg.country,
+                  salesOrganisation: eligibilityState.salesOrganisation,
+                  role: eligibilityState.user.role.type.getEZReachRoleType,
                   bannerType: 'top_advert_box',
+                  branchCode: '',
+                  targetCustomerType: '',
                 ),
               );
         },

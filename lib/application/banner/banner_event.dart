@@ -9,5 +9,7 @@ class BannerEvent with _$BannerEvent {
     required String country,
     required String role,
     required String bannerType,
+    required String branchCode,
+    required String targetCustomerType,
   }) = _Fetch;
 }

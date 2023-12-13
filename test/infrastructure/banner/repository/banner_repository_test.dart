@@ -35,6 +35,8 @@ void main() {
           .copyWith(shipToInfos: [SalesOrgShipToInfo.empty()])
     ],
   );
+  const fakeBranchCode = 'fake-branch-code';
+  const fakeTargetCustomerType = 'fake-target-customer-type';
 
   setUpAll(
     () async {
@@ -78,6 +80,8 @@ void main() {
           bannerType: 'banner_carousel',
           role: 'client',
           salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
+          branchCode: fakeBranchCode,
+          targetCustomerType: fakeTargetCustomerType,
         ),
       ).thenAnswer(
         (invocation) async => eZReachBannerListMock,
@@ -88,6 +92,8 @@ void main() {
         bannerType: 'banner_carousel',
         role: 'client',
         salesOrganisation: mockSalesOrganisation,
+        branchCode: fakeBranchCode,
+        targetCustomerType: fakeTargetCustomerType,
       );
       expect(result.isRight(), true);
 
@@ -97,6 +103,8 @@ void main() {
           bannerType: 'banner_carousel',
           role: 'client',
           salesOrganisation: mockSalesOrganisation,
+          branchCode: fakeBranchCode,
+          targetCustomerType: fakeTargetCustomerType,
         ),
       ).called(1);
     });
@@ -112,6 +120,8 @@ void main() {
           bannerType: 'banner_carousel',
           role: 'client',
           salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
+          branchCode: fakeBranchCode,
+          targetCustomerType: fakeTargetCustomerType,
         ),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
@@ -122,6 +132,8 @@ void main() {
         bannerType: 'banner_carousel',
         role: 'client',
         salesOrganisation: mockSalesOrganisation,
+        branchCode: fakeBranchCode,
+        targetCustomerType: fakeTargetCustomerType,
       );
       expect(result.isLeft(), true);
 
@@ -131,6 +143,8 @@ void main() {
           bannerType: 'banner_carousel',
           role: 'client',
           salesOrganisation: mockSalesOrganisation,
+          branchCode: fakeBranchCode,
+          targetCustomerType: fakeTargetCustomerType,
         ),
       ).called(1);
     });
@@ -147,6 +161,8 @@ void main() {
         bannerType: 'banner_carousel',
         role: 'client',
         salesOrganisation: mockSalesOrganisation,
+        branchCode: fakeBranchCode,
+        targetCustomerType: fakeTargetCustomerType,
       );
       expect(result.isRight(), true);
     });
@@ -170,6 +186,8 @@ void main() {
         bannerType: 'banner_carousel',
         role: 'client',
         salesOrganisation: mockSalesOrganisation,
+        branchCode: fakeBranchCode,
+        targetCustomerType: fakeTargetCustomerType,
       );
       expect(result.isLeft(), true);
     });

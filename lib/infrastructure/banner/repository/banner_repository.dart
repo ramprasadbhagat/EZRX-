@@ -27,6 +27,8 @@ class BannerRepository implements IBannerRepository {
     required String country,
     required String role,
     required String bannerType,
+    required String branchCode,
+    required String targetCustomerType,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -44,6 +46,8 @@ class BannerRepository implements IBannerRepository {
         country: country,
         role: role,
         bannerType: bannerType,
+        branchCode: branchCode,
+        targetCustomerType: targetCustomerType,
       );
 
       return Right(ezReachBanners);

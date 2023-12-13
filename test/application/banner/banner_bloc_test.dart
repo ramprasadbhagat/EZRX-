@@ -36,6 +36,9 @@ void main() {
     customerInfos: <SalesOrgCustomerInfo>[],
   );
 
+  const fakeBranchCode = 'fake-branch-code';
+  const fakeTargetCustomerType = 'fake-target-customer-type';
+
   setUpAll(() {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -82,6 +85,8 @@ void main() {
             country: country,
             role: role,
             bannerType: 'banner_carousel',
+            branchCode: fakeBranchCode,
+            targetCustomerType: fakeTargetCustomerType,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),
@@ -95,6 +100,8 @@ void main() {
             role: role,
             country: country,
             bannerType: 'banner_carousel',
+            branchCode: fakeBranchCode,
+            targetCustomerType: fakeTargetCustomerType,
           ),
         );
       },
@@ -122,6 +129,8 @@ void main() {
             country: country,
             role: role,
             bannerType: 'banner_carousel',
+            branchCode: fakeBranchCode,
+            targetCustomerType: fakeTargetCustomerType,
           ),
         ).thenAnswer(
           (invocation) async => Right([EZReachBanner.empty()]),
@@ -135,6 +144,8 @@ void main() {
             role: role,
             country: country,
             bannerType: 'banner_carousel',
+            branchCode: fakeBranchCode,
+            targetCustomerType: fakeTargetCustomerType,
           ),
         );
       },
@@ -164,6 +175,8 @@ void main() {
             country: country,
             role: role,
             bannerType: 'banner_carousel',
+            branchCode: fakeBranchCode,
+            targetCustomerType: fakeTargetCustomerType,
           ),
         ).thenAnswer(
           (invocation) async => Right([EZReachBanner.empty()]),
@@ -177,6 +190,8 @@ void main() {
             role: role,
             country: country,
             bannerType: 'banner_carousel',
+            branchCode: fakeBranchCode,
+            targetCustomerType: fakeTargetCustomerType,
           ),
         );
       },

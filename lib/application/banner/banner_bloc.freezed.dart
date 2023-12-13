@@ -24,23 +24,37 @@ mixin _$BannerEvent {
             SalesOrganisation salesOrganisation,
             String country,
             String role,
-            String bannerType)
+            String bannerType,
+            String branchCode,
+            String targetCustomerType)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation,
-            String country, String role, String bannerType)?
+    TResult? Function(
+            bool isPreSalesOrg,
+            SalesOrganisation salesOrganisation,
+            String country,
+            String role,
+            String bannerType,
+            String branchCode,
+            String targetCustomerType)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation,
-            String country, String role, String bannerType)?
+    TResult Function(
+            bool isPreSalesOrg,
+            SalesOrganisation salesOrganisation,
+            String country,
+            String role,
+            String bannerType,
+            String branchCode,
+            String targetCustomerType)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -128,7 +142,9 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             String country,
             String role,
-            String bannerType)
+            String bannerType,
+            String branchCode,
+            String targetCustomerType)
         fetch,
   }) {
     return initialized();
@@ -138,8 +154,14 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation,
-            String country, String role, String bannerType)?
+    TResult? Function(
+            bool isPreSalesOrg,
+            SalesOrganisation salesOrganisation,
+            String country,
+            String role,
+            String bannerType,
+            String branchCode,
+            String targetCustomerType)?
         fetch,
   }) {
     return initialized?.call();
@@ -149,8 +171,14 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation,
-            String country, String role, String bannerType)?
+    TResult Function(
+            bool isPreSalesOrg,
+            SalesOrganisation salesOrganisation,
+            String country,
+            String role,
+            String bannerType,
+            String branchCode,
+            String targetCustomerType)?
         fetch,
     required TResult orElse(),
   }) {
@@ -206,7 +234,9 @@ abstract class _$$_FetchCopyWith<$Res> {
       SalesOrganisation salesOrganisation,
       String country,
       String role,
-      String bannerType});
+      String bannerType,
+      String branchCode,
+      String targetCustomerType});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
@@ -226,6 +256,8 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? country = null,
     Object? role = null,
     Object? bannerType = null,
+    Object? branchCode = null,
+    Object? targetCustomerType = null,
   }) {
     return _then(_$_Fetch(
       isPreSalesOrg: null == isPreSalesOrg
@@ -248,6 +280,14 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.bannerType
           : bannerType // ignore: cast_nullable_to_non_nullable
               as String,
+      branchCode: null == branchCode
+          ? _value.branchCode
+          : branchCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      targetCustomerType: null == targetCustomerType
+          ? _value.targetCustomerType
+          : targetCustomerType // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -268,7 +308,9 @@ class _$_Fetch implements _Fetch {
       required this.salesOrganisation,
       required this.country,
       required this.role,
-      required this.bannerType});
+      required this.bannerType,
+      required this.branchCode,
+      required this.targetCustomerType});
 
   @override
   final bool isPreSalesOrg;
@@ -280,10 +322,14 @@ class _$_Fetch implements _Fetch {
   final String role;
   @override
   final String bannerType;
+  @override
+  final String branchCode;
+  @override
+  final String targetCustomerType;
 
   @override
   String toString() {
-    return 'BannerEvent.fetch(isPreSalesOrg: $isPreSalesOrg, salesOrganisation: $salesOrganisation, country: $country, role: $role, bannerType: $bannerType)';
+    return 'BannerEvent.fetch(isPreSalesOrg: $isPreSalesOrg, salesOrganisation: $salesOrganisation, country: $country, role: $role, bannerType: $bannerType, branchCode: $branchCode, targetCustomerType: $targetCustomerType)';
   }
 
   @override
@@ -298,12 +344,16 @@ class _$_Fetch implements _Fetch {
             (identical(other.country, country) || other.country == country) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.bannerType, bannerType) ||
-                other.bannerType == bannerType));
+                other.bannerType == bannerType) &&
+            (identical(other.branchCode, branchCode) ||
+                other.branchCode == branchCode) &&
+            (identical(other.targetCustomerType, targetCustomerType) ||
+                other.targetCustomerType == targetCustomerType));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isPreSalesOrg, salesOrganisation, country, role, bannerType);
+  int get hashCode => Object.hash(runtimeType, isPreSalesOrg, salesOrganisation,
+      country, role, bannerType, branchCode, targetCustomerType);
 
   @JsonKey(ignore: true)
   @override
@@ -320,35 +370,51 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             String country,
             String role,
-            String bannerType)
+            String bannerType,
+            String branchCode,
+            String targetCustomerType)
         fetch,
   }) {
-    return fetch(isPreSalesOrg, salesOrganisation, country, role, bannerType);
+    return fetch(isPreSalesOrg, salesOrganisation, country, role, bannerType,
+        branchCode, targetCustomerType);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation,
-            String country, String role, String bannerType)?
+    TResult? Function(
+            bool isPreSalesOrg,
+            SalesOrganisation salesOrganisation,
+            String country,
+            String role,
+            String bannerType,
+            String branchCode,
+            String targetCustomerType)?
         fetch,
   }) {
-    return fetch?.call(
-        isPreSalesOrg, salesOrganisation, country, role, bannerType);
+    return fetch?.call(isPreSalesOrg, salesOrganisation, country, role,
+        bannerType, branchCode, targetCustomerType);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation,
-            String country, String role, String bannerType)?
+    TResult Function(
+            bool isPreSalesOrg,
+            SalesOrganisation salesOrganisation,
+            String country,
+            String role,
+            String bannerType,
+            String branchCode,
+            String targetCustomerType)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(isPreSalesOrg, salesOrganisation, country, role, bannerType);
+      return fetch(isPreSalesOrg, salesOrganisation, country, role, bannerType,
+          branchCode, targetCustomerType);
     }
     return orElse();
   }
@@ -391,13 +457,17 @@ abstract class _Fetch implements BannerEvent {
       required final SalesOrganisation salesOrganisation,
       required final String country,
       required final String role,
-      required final String bannerType}) = _$_Fetch;
+      required final String bannerType,
+      required final String branchCode,
+      required final String targetCustomerType}) = _$_Fetch;
 
   bool get isPreSalesOrg;
   SalesOrganisation get salesOrganisation;
   String get country;
   String get role;
   String get bannerType;
+  String get branchCode;
+  String get targetCustomerType;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;

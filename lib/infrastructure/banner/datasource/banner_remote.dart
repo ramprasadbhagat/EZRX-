@@ -26,23 +26,29 @@ class BannerRemoteDataSource {
     required String country,
     required String role,
     required String bannerType,
+    required String branchCode,
+    required String targetCustomerType,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
+      final liveCampaignInput = {
+        'country': country,
+        'Salesorg': salesOrg,
+        'role': role,
+        'targetProduct': config.targetProduct,
+        'bannerPlacement': bannerType,
+        'sortField': 'banner_slot',
+        'sort': 'asc',
+        if (branchCode.isNotEmpty) 'branchCode': branchCode,
+        if (targetCustomerType.isNotEmpty)
+          'targetCustomerType': targetCustomerType,
+      };
       final res = await httpService.request(
         method: 'POST',
         url: config.getEZReachUrlConstant,
         data: jsonEncode({
           'query': bannerQueryMutation.getEZReachBannerQuery(),
           'variables': {
-            'getLiveCampaignInput': {
-              'country': country,
-              'Salesorg': salesOrg,
-              'role': role,
-              'targetProduct': config.targetProduct,
-              'bannerPlacement': bannerType,
-              'sortField': 'banner_slot',
-              'sort': 'asc',
-            },
+            'getLiveCampaignInput': liveCampaignInput,
           },
         }),
       );

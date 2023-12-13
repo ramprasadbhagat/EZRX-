@@ -29,6 +29,8 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
           country: e.country,
           role: e.role,
           bannerType: e.bannerType,
+          branchCode: e.branchCode,
+          targetCustomerType: e.targetCustomerType,
         );
 
         eZReachFailureOrSuccess.fold(

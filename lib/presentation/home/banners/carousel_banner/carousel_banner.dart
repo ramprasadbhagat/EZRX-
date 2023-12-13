@@ -35,21 +35,22 @@ class _CarouselBannerState extends State<CarouselBanner> {
         listenWhen: (previous, current) =>
             previous.isFetching != current.isFetching && !current.isFetching,
         listener: (context, state) {
+          final eligibilityState = context.read<EligibilityBloc>().state;
+
+          // ID uses targeted banner carousels for users so we need to include targetCustomerType and branchCode in the eZReach banner call.
+          // This feature is not applicable for other markets.
           context.read<BannerBloc>().add(
                 BannerEvent.fetch(
                   isPreSalesOrg: false,
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  country:
-                      context.read<EligibilityBloc>().state.salesOrg.country,
-                  role: context
-                      .read<EligibilityBloc>()
-                      .state
-                      .user
-                      .role
-                      .type
-                      .getEZReachRoleType,
+                  salesOrganisation: eligibilityState.salesOrganisation,
+                  country: eligibilityState.salesOrg.country,
+                  role: eligibilityState.user.role.type.getEZReachRoleType,
                   bannerType: 'banner_carousel',
+                  branchCode:
+                      eligibilityState.isIDMarket ? state.shipToInfo.plant : '',
+                  targetCustomerType: eligibilityState.isIDMarket
+                      ? state.shipToInfo.targetCustomerType
+                      : '',
                 ),
               );
         },

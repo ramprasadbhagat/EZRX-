@@ -132,9 +132,11 @@ void main() {
             country: mockEligibilityBloc.state.salesOrg.country,
             isPreSalesOrg: false,
             role: mockEligibilityBloc.state.user.role.type.getEZReachRoleType,
+            targetCustomerType: '',
+            branchCode: '',
           ),
         ),
-      ).called(3);
+      ).called(1);
     });
   });
 }

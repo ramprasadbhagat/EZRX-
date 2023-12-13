@@ -30,6 +30,8 @@ void main() {
       'bannerPlacement': 'banner_carousel',
       'sortField': 'banner_slot',
       'sort': 'asc',
+      'branchCode': 'branchCode',
+      'targetCustomerType': 'targetCustomerType',
     },
   };
 
@@ -75,6 +77,8 @@ void main() {
         country: 'mockCountry',
         role: 'client',
         bannerType: 'banner_carousel',
+        branchCode: 'branchCode',
+        targetCustomerType: 'targetCustomerType',
       );
 
       expect(
@@ -110,6 +114,8 @@ void main() {
         country: 'mockCountry',
         role: 'client',
         bannerType: 'banner_carousel',
+        branchCode: 'branchCode',
+        targetCustomerType: 'targetCustomerType',
       )
           .onError((error, stackTrace) {
         expect(

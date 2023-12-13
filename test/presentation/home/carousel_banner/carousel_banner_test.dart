@@ -166,7 +166,7 @@ void main() {
       );
 
       await tester.pumpWidget(getWUT());
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pumpAndSettle();
       verify(
         () => mockBannerBloc.add(
           BannerEvent.fetch(
@@ -175,9 +175,12 @@ void main() {
             country: mockEligibilityBloc.state.salesOrg.country,
             isPreSalesOrg: false,
             role: mockEligibilityBloc.state.user.role.type.getEZReachRoleType,
+            branchCode: fakeCustomerCodeInfo.shipToInfos.first.plant,
+            targetCustomerType:
+                fakeCustomerCodeInfo.shipToInfos.first.targetCustomerType,
           ),
         ),
-      ).called(3);
+      ).called(1);
     });
 
     //commented test case reason:
