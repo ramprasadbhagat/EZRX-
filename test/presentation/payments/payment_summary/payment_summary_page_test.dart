@@ -1077,5 +1077,50 @@ void main() {
       },
       variant: filterStatusVariant,
     );
+
+    testWidgets(
+        'Test payment summary from date and to date not passed while search ',
+        (tester) async {
+      when(() => paymentSummaryBloc.state).thenReturn(
+        PaymentSummaryState.initial().copyWith(
+          appliedFilter: PaymentSummaryFilter.empty().copyWith(
+            createdDateFrom: DateTimeStringValue('20231206'),
+            createdDateTo: DateTimeStringValue('20231207'),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      expect(
+        find.byKey(
+          WidgetKeys.genericKey(
+            key: paymentSummaryBloc.state.searchKey.searchValueOrEmpty,
+          ),
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byType(TextFormField),
+        findsOneWidget,
+      );
+
+      await tester.enterText(find.byType(TextFormField), 'fake-keyword');
+      await tester.pump(const Duration(seconds: 2));
+
+      verify(
+        () => paymentSummaryBloc.add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: PaymentSummaryFilter.empty().copyWith(
+              createdDateFrom: DateTimeStringValue(''),
+              createdDateTo: DateTimeStringValue(''),
+            ),
+            searchKey: SearchKey.searchFilter('fake-keyword'),
+          ),
+        ),
+      ).called(1);
+    });
   });
 }

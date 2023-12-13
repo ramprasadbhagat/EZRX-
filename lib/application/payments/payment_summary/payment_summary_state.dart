@@ -24,4 +24,9 @@ class PaymentSummaryState with _$PaymentSummaryState {
         canLoadMore: true,
         details: <PaymentSummaryDetails>[],
       );
+
+  PaymentSummaryFilter get appliedFilterForSearch => appliedFilter.copyWith(
+        createdDateFrom: DateTimeStringValue(''),
+        createdDateTo: DateTimeStringValue(''),
+      );
 }

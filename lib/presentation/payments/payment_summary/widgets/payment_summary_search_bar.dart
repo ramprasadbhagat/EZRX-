@@ -21,20 +21,20 @@ class _PaymentSummarySearchBar extends StatelessWidget {
           initialValue: state.searchKey.searchValueOrEmpty,
           onSearchChanged: (value) => context.read<PaymentSummaryBloc>().add(
                 PaymentSummaryEvent.fetch(
-                  appliedFilter: state.appliedFilter,
+                  appliedFilter: state.appliedFilterForSearch,
                   searchKey: SearchKey.searchFilter(value),
                 ),
               ),
           onSearchSubmitted: (value) => context.read<PaymentSummaryBloc>().add(
                 PaymentSummaryEvent.fetch(
-                  appliedFilter: state.appliedFilter,
+                  appliedFilter: state.appliedFilterForSearch,
                   searchKey: SearchKey.searchFilter(value),
                 ),
               ),
           customValidator: (value) => SearchKey.searchFilter(value).isValid(),
           onClear: () => context.read<PaymentSummaryBloc>().add(
                 PaymentSummaryEvent.fetch(
-                  appliedFilter: state.appliedFilter,
+                  appliedFilter: state.appliedFilterForSearch,
                   searchKey: SearchKey.searchFilter(''),
                 ),
               ),
