@@ -133,6 +133,7 @@ dependency_overrides:
   ffi: 2.0.1
   flutter_svg: ^1.1.6
   http: 0.13.5
+  path_provider_android: ^2.2.0
 
 
 # For information on the generic Dart part of this file, see the

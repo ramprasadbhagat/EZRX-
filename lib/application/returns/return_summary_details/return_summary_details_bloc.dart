@@ -37,6 +37,7 @@ class ReturnSummaryDetailsBloc
           state.copyWith(
             isLoading: true,
             failureOrSuccessOption: none(),
+            downloadFailureOrSuccessOption: none(),
           ),
         );
 
