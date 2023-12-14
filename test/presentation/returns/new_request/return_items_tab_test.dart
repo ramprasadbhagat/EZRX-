@@ -1,8 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -39,6 +42,9 @@ void main() {
   late ProductImageBloc productImageBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late ReturnMaterialList fakeReturnMaterialList;
+  late ReturnMaterial fakeReturnMaterial;
+  const fakeUnitPrice = 8.77;
+  const fakeBalanceQuantity = 5;
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
@@ -49,6 +55,11 @@ void main() {
     eligibilityBlocMock = EligibilityBlocMock();
     fakeReturnMaterialList =
         await ReturnRequestLocalDataSource().searchReturnMaterials();
+    fakeReturnMaterial = fakeReturnMaterialList.items.first.copyWith(
+      unitPrice: RangeValue(fakeUnitPrice.toString()),
+      balanceQuantity: IntegerValue(fakeBalanceQuantity.toString()),
+      bonusItems: [fakeReturnMaterialList.items.first],
+    );
     when(() => returnItemsBlocMock.state).thenReturn(
       ReturnItemsState.initial(),
     );
@@ -152,6 +163,39 @@ void main() {
           ),
           findsNothing,
         );
+      },
+    );
+
+    testWidgets(
+      '=> Check bonus price and quantity',
+      (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeTHSalesOrgConfigTaxBreakdownEnabled,
+          ),
+        );
+        when(() => returnItemsBlocMock.state).thenReturn(
+          ReturnItemsState.initial().copyWith(
+            items: [fakeReturnMaterial],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        final showBonusDetail = find.text('Show details'.tr());
+        expect(showBonusDetail, findsOneWidget);
+        await tester.tap(showBonusDetail);
+        await tester.pumpAndSettle();
+        final hideBonusDetail = find.text('Hide details'.tr());
+        expect(hideBonusDetail, findsOneWidget);
+        final bonusPrice = find.text(
+          'THB 402.80',
+          findRichText: true,
+        );
+        expect(bonusPrice, findsOneWidget);
+        final bonusQty = find.text(
+          'Qty: 50 ',
+        );
+        expect(bonusQty, findsOneWidget);
       },
     );
   });
