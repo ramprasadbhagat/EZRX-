@@ -325,12 +325,16 @@ bool roleCanLoginOnBehalfByZPAdmin(String userRoleType) {
   }
 }
 
+//This logic is implemented with the respect of https://zuelligpharma.atlassian.net/wiki/spaces/EZRX/pages/79954244/Launching+new+markets+in+eZRx#For-Materials-%26-Orders
 String roleOrderType(String roleType) {
   switch (roleType) {
     case 'internal_sales_rep':
       return 'MRXR';
     case 'external_sales_rep':
       return 'MRXP';
+    case 'root_admin':
+    case 'zp_admin':
+      return 'MRXS';
     default:
       return 'MRXC';
   }
