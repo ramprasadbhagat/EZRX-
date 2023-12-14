@@ -242,9 +242,9 @@ class _DisplayMaterialDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) =>
-          previous.aplSimulatorOrder != current.aplSimulatorOrder,
+          previous.isCartDetailsFetching != current.isCartDetailsFetching,
       builder: (context, state) {
-        if (state.isAplProductLoading) {
+        if (state.isCartDetailsFetching) {
           return SizedBox(
             width: Responsive.isLargerThan(
               context,

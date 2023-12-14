@@ -124,6 +124,9 @@ void main() {
         (invocation) async => true,
       );
 
+      when(() => chatBotService.setAuthToken(jwtDto.refresh))
+          .thenAnswer((_) async => true);
+
       final result = await chatBotRepository.passPayloadToChatbot(
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeMYSalesOrganisation,
@@ -175,6 +178,9 @@ void main() {
         errorMock,
       );
 
+      when(() => chatBotService.setAuthToken(jwtDto.refresh))
+          .thenAnswer((_) async => true);
+
       final result = await chatBotRepository.passPayloadToChatbot(
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeMYSalesOrganisation,
@@ -210,6 +216,10 @@ void main() {
       ).thenAnswer(
         (invocation) async => true,
       );
+
+      when(() => chatBotService.setAuthToken(jwtDto.refresh))
+          .thenAnswer((_) async => true);
+
       final result = await chatBotRepository.resetChatbot();
       expect(result, const Right(true));
     });
@@ -235,6 +245,10 @@ void main() {
       ).thenThrow(
         errorMock,
       );
+
+      when(() => chatBotService.setAuthToken(jwtDto.refresh))
+          .thenAnswer((_) async => true);
+
       final result = await chatBotRepository.resetChatbot();
       expect(result, Left(ApiFailure.other(errorMock.toString())));
     });

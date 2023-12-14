@@ -128,4 +128,15 @@ abstract class ICartRepository {
     required String language,
     required RequestCounterOfferDetails counterOfferDetails,
   });
+
+  Future<Either<ApiFailure, List<PriceAggregate>>>
+      updateCartWithProductDetermination({
+    required List<MaterialInfo> productDeterminationList,
+    required List<PriceAggregate> updatedCartItems,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+  });
 }

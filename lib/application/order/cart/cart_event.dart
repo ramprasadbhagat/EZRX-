@@ -74,8 +74,14 @@ class CartEvent with _$CartEvent {
   }) = _UpdateCartProductWithCounterOffer;
 
   const factory CartEvent.updatePriceForIdMarket({
-    required List<MaterialInfo> product,
+    required Locale locale,
   }) = _UpdatePriceForIdMarket;
+
+  const factory CartEvent.updateProductDetermination({
+    required Locale locale,
+    required List<AplProduct> productDeterminationList,
+    required List<PriceAggregate> updatedCartItems,
+  }) = _UpdateProductDetermination;
 
   const factory CartEvent.fetchGrandTotalPriceForIdMarket() =
       _FetchGrandTotalPriceForIdMarket;

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -757,6 +758,66 @@ class CartRepository implements ICartRepository {
       );
 
       return Right(aplSimulatorOrder);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>>
+      updateCartWithProductDetermination({
+    required List<MaterialInfo> productDeterminationList,
+    required List<PriceAggregate> updatedCartItems,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final productList =
+            await cartLocalDataSource.upsertCartItemsWithReorderMaterials();
+
+        return Right(productList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+
+    try {
+      await cartRemoteDataSource.deleteCart();
+      final materialInfo = [
+        ...productDeterminationList,
+        ...updatedCartItems
+            .map(
+              (e) => [
+                e.materialInfo.copyWith(quantity: MaterialQty(e.quantity)),
+                ...e.existingProductDealBonus,
+              ],
+            )
+            .flattened
+            .toList(),
+      ];
+
+      final productList = await cartRemoteDataSource.upsertCartItems(
+        requestParams: materialInfo.map((materialInfo) {
+          final upsertCartRequest = CartProductRequest.toMaterialRequest(
+            salesOrg: salesOrganisation.salesOrg,
+            customerCode: customerCodeInfo.customerCodeSoldTo,
+            shipToCustomerCode: shipToInfo.shipToCustomerCode,
+            language: language,
+            materialInfo: materialInfo,
+            itemId: materialInfo.sampleBonusItemId,
+            quantity: materialInfo.quantity.intValue,
+            counterOfferDetails: materialInfo.counterOfferDetails,
+          );
+
+          return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
+        }).toList(),
+      );
+
+      return Right(productList);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

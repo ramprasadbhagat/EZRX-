@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -28,6 +29,7 @@ import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart'
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -99,6 +101,23 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        BlocListener<CartBloc, CartState>(
+          listenWhen: (previous, current) =>
+              previous.isUpdateProductDetermination !=
+                  current.isUpdateProductDetermination &&
+              !current.isUpdateProductDetermination,
+          listener: (context, state) {
+            state.updateFailureOrSuccessOption.fold(() {}, (either) {
+              either.fold(
+                (failure) {
+                  context.router.popUntilRouteWithName(CartPageRoute.name);
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {},
+              );
+            });
+          },
+        ),
         BlocListener<CartBloc, CartState>(
           listenWhen: (previous, current) =>
               previous.isUpdatingStock != current.isUpdatingStock &&

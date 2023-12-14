@@ -7,6 +7,7 @@ class CartState with _$CartState {
   const factory CartState({
     required List<PriceAggregate> cartProducts,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
+    required Option<Either<ApiFailure, dynamic>> updateFailureOrSuccessOption,
     required bool isFetching,
     required bool isClearing,
     required bool isFetchingBonus,
@@ -17,6 +18,7 @@ class CartState with _$CartState {
     required bool isBuyAgain,
     required bool isAplProductLoading,
     required bool isDeleteCombo,
+    required bool isUpdateProductDetermination,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
@@ -30,6 +32,7 @@ class CartState with _$CartState {
   factory CartState.initial() => CartState(
         cartProducts: <PriceAggregate>[],
         apiFailureOrSuccessOption: none(),
+        updateFailureOrSuccessOption: none(),
         isFetching: false,
         isClearing: false,
         isFetchingBonus: false,
@@ -38,6 +41,7 @@ class CartState with _$CartState {
         isMappingPrice: false,
         isUpdatingStock: false,
         isBuyAgain: false,
+        isUpdateProductDetermination: false,
         config: SalesOrganisationConfigs.empty(),
         user: User.empty(),
         additionInfo: <MaterialNumber, ProductMetaData>{},
@@ -432,6 +436,9 @@ class CartState with _$CartState {
       isUpdatingStock ||
       isUpserting ||
       isFetchingCartProductDetail ||
+      isFetchingBonus ||
+      isAplProductLoading ||
+      isUpdateProductDetermination ||
       isMappingPrice;
 
   List<MaterialInfo> get productsWithCounterOfferPrice => cartProducts

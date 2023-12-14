@@ -27,6 +27,20 @@ class AplSimulatorOrder with _$AplSimulatorOrder {
         aplProducts: <AplProduct>[],
       );
 
+  List<AplProduct> productDeterminationList(
+    List<PriceAggregate> currentCartItems,
+  ) {
+    final currentMaterialNumbers = currentCartItems.materialNumbers;
+
+    return aplProducts
+        .where(
+          (e) =>
+              e.type.typeMaterial &&
+              !currentMaterialNumbers.contains(e.materialNumber),
+        )
+        .toList();
+  }
+
   List<PriceAggregate> toCartItemList(List<PriceAggregate> currentCartItems) {
     final newCartItems = <String, PriceAggregate>{};
 

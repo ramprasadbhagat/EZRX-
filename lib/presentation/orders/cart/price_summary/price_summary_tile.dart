@@ -37,17 +37,23 @@ class PriceSummaryTile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _DisplayPrice(
-            priceComponent: PriceComponent(
-              key: WidgetKeys.checkoutStickyGrandTotal,
-              salesOrgConfig:
-                  context.read<EligibilityBloc>().state.salesOrgConfigs,
-              price: cartState.grandTotalHidePriceMaterial.toString(),
-              title: '${context.tr('Grand total')}: ',
-              priceLabelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.extraLightGrey4,
-                  ),
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _DisplayPrice(
+                priceComponent: PriceComponent(
+                  key: WidgetKeys.checkoutStickyGrandTotal,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: cartState.grandTotalHidePriceMaterial.toString(),
+                  title: '${context.tr('Grand total')}: ',
+                  priceLabelStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.extraLightGrey4,
+                          ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(width: 8),
           const Icon(

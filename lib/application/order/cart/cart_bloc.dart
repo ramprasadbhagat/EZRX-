@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_product.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
@@ -18,7 +19,9 @@ import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -30,8 +33,12 @@ part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   final ICartRepository repository;
+  final IProductDetailRepository productDetailRepository;
 
-  CartBloc(this.repository) : super(CartState.initial()) {
+  CartBloc(
+    this.repository,
+    this.productDetailRepository,
+  ) : super(CartState.initial()) {
     on<CartEvent>(_onEvent);
   }
 
@@ -66,7 +73,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
-            isFetching: true,
+            isFetchingBonus: true,
           ),
         );
         final failureOrSuccess = await repository.updateMaterialDealBonus(
@@ -82,7 +89,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
+                isFetchingBonus: false,
               ),
             );
           },
@@ -91,7 +98,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               state.copyWith(
                 cartProducts: cartItemList,
                 apiFailureOrSuccessOption: none(),
-                isFetching: false,
+                isFetchingBonus: false,
               ),
             );
           },
@@ -896,7 +903,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         final failureOrSuccess = await repository.aplSimulateOrder(
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
-          product: e.product,
+          product: state.cartProducts.materialInfos,
         );
 
         failureOrSuccess.fold(
@@ -906,15 +913,115 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               isAplProductLoading: false,
             ),
           ),
-          (aplSimulatorOrder) => emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: none(),
-              isAplProductLoading: false,
-              cartProducts:
-                  aplSimulatorOrder.toCartItemList(state.cartProducts),
-              aplSimulatorOrder: aplSimulatorOrder,
-            ),
+          (aplSimulatorOrder) {
+            final productDeterminationList =
+                aplSimulatorOrder.productDeterminationList(state.cartProducts);
+            final productDeterminationEligible =
+                productDeterminationList.isNotEmpty;
+            final updatedCartItems =
+                aplSimulatorOrder.toCartItemList(state.cartProducts);
+
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: none(),
+                isAplProductLoading: false,
+                cartProducts: productDeterminationEligible
+                    ? state.cartProducts
+                    : updatedCartItems,
+                aplSimulatorOrder: aplSimulatorOrder,
+              ),
+            );
+
+            if (productDeterminationEligible) {
+              add(
+                CartEvent.updateProductDetermination(
+                  locale: e.locale,
+                  productDeterminationList: productDeterminationList,
+                  updatedCartItems: updatedCartItems,
+                ),
+              );
+            }
+          },
+        );
+      },
+      updateProductDetermination: (e) async {
+        emit(
+          state.copyWith(
+            isUpdateProductDetermination: true,
+            updateFailureOrSuccessOption: none(),
           ),
+        );
+
+        final materialDetailFailureOrSuccess =
+            await productDetailRepository.getProductListDetail(
+          materialNumber:
+              e.productDeterminationList.map((e) => e.materialNumber).toList(),
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          locale: e.locale,
+          types: e.productDeterminationList
+              .map((e) => MaterialInfoType.material())
+              .toList(),
+        );
+
+        await materialDetailFailureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                isUpdateProductDetermination: false,
+                updateFailureOrSuccessOption:
+                    optionOf(materialDetailFailureOrSuccess),
+              ),
+            );
+          },
+          (details) async {
+            final detailsMap = {
+              for (final item in details) item.materialNumber: item,
+            };
+            final productDeterminationMaterialInfo =
+                e.productDeterminationList.map((e) {
+              final materialInfo =
+                  detailsMap[e.materialNumber] ?? MaterialInfo.empty();
+
+              return materialInfo.copyWith(
+                materialNumber: e.materialNumber,
+                quantity: e.productQty,
+              );
+            }).toList();
+
+            final reorderFailureOrSuccess =
+                await repository.updateCartWithProductDetermination(
+              productDeterminationList: productDeterminationMaterialInfo,
+              updatedCartItems: e.updatedCartItems,
+              salesOrganisation: state.salesOrganisation,
+              salesOrganisationConfig: state.config,
+              customerCodeInfo: state.customerCodeInfo,
+              shipToInfo: state.shipToInfo,
+              language: state.user.settings.languagePreference.languageCode,
+            );
+
+            reorderFailureOrSuccess.fold(
+              (failure) {
+                emit(
+                  state.copyWith(
+                    isUpdateProductDetermination: false,
+                    updateFailureOrSuccessOption:
+                        optionOf(reorderFailureOrSuccess),
+                  ),
+                );
+              },
+              (newCartItems) {
+                emit(
+                  state.copyWith(
+                    isUpdateProductDetermination: false,
+                    cartProducts: newCartItems,
+                  ),
+                );
+                add(const CartEvent.updateProductStock());
+              },
+            );
+          },
         );
       },
     );

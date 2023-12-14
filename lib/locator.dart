@@ -1724,7 +1724,10 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => CartBloc(locator<CartRepository>()),
+    () => CartBloc(
+      locator<CartRepository>(),
+      locator<ProductDetailRepository>(),
+    ),
   );
 
   //============================================================

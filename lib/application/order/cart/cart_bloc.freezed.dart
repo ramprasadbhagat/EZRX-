@@ -52,8 +52,12 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) =>
       throw _privateConstructorUsedError;
@@ -90,7 +94,10 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +134,10 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) =>
@@ -159,6 +169,8 @@ mixin _$CartEvent {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) =>
@@ -186,6 +198,8 @@ mixin _$CartEvent {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) =>
@@ -212,6 +226,8 @@ mixin _$CartEvent {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -429,8 +445,12 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return initialized(salesOrganisationConfigs, salesOrganisation,
@@ -471,7 +491,10 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return initialized?.call(salesOrganisationConfigs, salesOrganisation,
@@ -512,7 +535,10 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -551,6 +577,8 @@ class _$_Initialized implements _Initialized {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -581,6 +609,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -610,6 +640,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -766,8 +798,12 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return verifyMaterialDealBonus(item, items);
@@ -807,7 +843,10 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return verifyMaterialDealBonus?.call(item, items);
@@ -847,7 +886,10 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -885,6 +927,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -915,6 +959,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -944,6 +990,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -1113,8 +1161,12 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return addBonusToCartItem(bonusMaterial, bonusItemId, counterOfferDetails);
@@ -1154,7 +1206,10 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return addBonusToCartItem?.call(
@@ -1195,7 +1250,10 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -1234,6 +1292,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -1264,6 +1324,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -1293,6 +1355,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -1395,8 +1459,12 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return removeSampleBonusFromCartConfig();
@@ -1436,7 +1504,10 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return removeSampleBonusFromCartConfig?.call();
@@ -1476,7 +1547,10 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -1514,6 +1588,8 @@ class _$_RemoveSampleBonusFromCartConfig
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -1544,6 +1620,8 @@ class _$_RemoveSampleBonusFromCartConfig
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -1573,6 +1651,8 @@ class _$_RemoveSampleBonusFromCartConfig
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -1661,8 +1741,12 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return clearCart();
@@ -1702,7 +1786,10 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return clearCart?.call();
@@ -1742,7 +1829,10 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -1780,6 +1870,8 @@ class _$_ClearCart implements _ClearCart {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -1810,6 +1902,8 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -1839,6 +1933,8 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -1928,8 +2024,12 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return fetchProductsAddedToCart();
@@ -1969,7 +2069,10 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return fetchProductsAddedToCart?.call();
@@ -2009,7 +2112,10 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -2047,6 +2153,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -2077,6 +2185,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -2106,6 +2216,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -2230,8 +2342,12 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCart(priceAggregate);
@@ -2271,7 +2387,10 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCart?.call(priceAggregate);
@@ -2311,7 +2430,10 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -2349,6 +2471,8 @@ class _$_UpsertCart implements _UpsertCart {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -2379,6 +2503,8 @@ class _$_UpsertCart implements _UpsertCart {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -2408,6 +2534,8 @@ class _$_UpsertCart implements _UpsertCart {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -2560,8 +2688,12 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return addHistoryItemsToCart(items, counterOfferDetails);
@@ -2601,7 +2733,10 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return addHistoryItemsToCart?.call(items, counterOfferDetails);
@@ -2641,7 +2776,10 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -2679,6 +2817,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -2709,6 +2849,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -2738,6 +2880,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -2871,8 +3015,12 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItems(priceAggregate);
@@ -2912,7 +3060,10 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItems?.call(priceAggregate);
@@ -2952,7 +3103,10 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -2990,6 +3144,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -3020,6 +3176,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -3049,6 +3207,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -3181,8 +3341,12 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return getDetailsProductsAddedToCart(cartProducts);
@@ -3222,7 +3386,10 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return getDetailsProductsAddedToCart?.call(cartProducts);
@@ -3262,7 +3429,10 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -3300,6 +3470,8 @@ class _$_GetDetailsProductsAddedToCart
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -3330,6 +3502,8 @@ class _$_GetDetailsProductsAddedToCart
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -3359,6 +3533,8 @@ class _$_GetDetailsProductsAddedToCart
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -3489,8 +3665,12 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return updatePriceProduct(priceProducts);
@@ -3530,7 +3710,10 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return updatePriceProduct?.call(priceProducts);
@@ -3570,7 +3753,10 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -3608,6 +3794,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -3638,6 +3826,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -3667,6 +3857,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -3761,8 +3953,12 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return updateProductStock();
@@ -3802,7 +3998,10 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return updateProductStock?.call();
@@ -3842,7 +4041,10 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -3880,6 +4082,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -3910,6 +4114,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -3939,6 +4145,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -4063,8 +4271,12 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return removeInvalidProducts(invalidCartItems);
@@ -4104,7 +4316,10 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return removeInvalidProducts?.call(invalidCartItems);
@@ -4144,7 +4359,10 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -4182,6 +4400,8 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -4212,6 +4432,8 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -4241,6 +4463,8 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -4385,8 +4609,12 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItemsWithComboOffers(priceAggregates, isDeleteCombo);
@@ -4426,7 +4654,10 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return upsertCartItemsWithComboOffers?.call(priceAggregates, isDeleteCombo);
@@ -4466,7 +4697,10 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -4504,6 +4738,8 @@ class _$_UpsertCartItemsWithComboOffers
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -4534,6 +4770,8 @@ class _$_UpsertCartItemsWithComboOffers
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -4563,6 +4801,8 @@ class _$_UpsertCartItemsWithComboOffers
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -4701,8 +4941,12 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return updateCartProductWithCounterOffer(overriddenProductPrice);
@@ -4742,7 +4986,10 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return updateCartProductWithCounterOffer?.call(overriddenProductPrice);
@@ -4782,7 +5029,10 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -4820,6 +5070,8 @@ class _$_UpdateCartProductWithCounterOffer
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -4850,6 +5102,8 @@ class _$_UpdateCartProductWithCounterOffer
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -4879,6 +5133,8 @@ class _$_UpdateCartProductWithCounterOffer
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -4908,7 +5164,7 @@ abstract class _$$_UpdatePriceForIdMarketCopyWith<$Res> {
           $Res Function(_$_UpdatePriceForIdMarket) then) =
       __$$_UpdatePriceForIdMarketCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<MaterialInfo> product});
+  $Res call({Locale locale});
 }
 
 /// @nodoc
@@ -4922,13 +5178,13 @@ class __$$_UpdatePriceForIdMarketCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
+    Object? locale = null,
   }) {
     return _then(_$_UpdatePriceForIdMarket(
-      product: null == product
-          ? _value._product
-          : product // ignore: cast_nullable_to_non_nullable
-              as List<MaterialInfo>,
+      locale: null == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as Locale,
     ));
   }
 }
@@ -4936,20 +5192,14 @@ class __$$_UpdatePriceForIdMarketCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
-  const _$_UpdatePriceForIdMarket({required final List<MaterialInfo> product})
-      : _product = product;
+  const _$_UpdatePriceForIdMarket({required this.locale});
 
-  final List<MaterialInfo> _product;
   @override
-  List<MaterialInfo> get product {
-    if (_product is EqualUnmodifiableListView) return _product;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_product);
-  }
+  final Locale locale;
 
   @override
   String toString() {
-    return 'CartEvent.updatePriceForIdMarket(product: $product)';
+    return 'CartEvent.updatePriceForIdMarket(locale: $locale)';
   }
 
   @override
@@ -4957,12 +5207,11 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdatePriceForIdMarket &&
-            const DeepCollectionEquality().equals(other._product, _product));
+            (identical(other.locale, locale) || other.locale == locale));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_product));
+  int get hashCode => Object.hash(runtimeType, locale);
 
   @JsonKey(ignore: true)
   @override
@@ -5008,11 +5257,15 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
-    return updatePriceForIdMarket(product);
+    return updatePriceForIdMarket(locale);
   }
 
   @override
@@ -5049,10 +5302,13 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
-    return updatePriceForIdMarket?.call(product);
+    return updatePriceForIdMarket?.call(locale);
   }
 
   @override
@@ -5089,12 +5345,15 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (updatePriceForIdMarket != null) {
-      return updatePriceForIdMarket(product);
+      return updatePriceForIdMarket(locale);
     }
     return orElse();
   }
@@ -5127,6 +5386,8 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -5157,6 +5418,8 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -5186,6 +5449,8 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -5198,13 +5463,380 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
 }
 
 abstract class _UpdatePriceForIdMarket implements CartEvent {
-  const factory _UpdatePriceForIdMarket(
-      {required final List<MaterialInfo> product}) = _$_UpdatePriceForIdMarket;
+  const factory _UpdatePriceForIdMarket({required final Locale locale}) =
+      _$_UpdatePriceForIdMarket;
 
-  List<MaterialInfo> get product;
+  Locale get locale;
   @JsonKey(ignore: true)
   _$$_UpdatePriceForIdMarketCopyWith<_$_UpdatePriceForIdMarket> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateProductDeterminationCopyWith<$Res> {
+  factory _$$_UpdateProductDeterminationCopyWith(
+          _$_UpdateProductDetermination value,
+          $Res Function(_$_UpdateProductDetermination) then) =
+      __$$_UpdateProductDeterminationCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {Locale locale,
+      List<AplProduct> productDeterminationList,
+      List<PriceAggregate> updatedCartItems});
+}
+
+/// @nodoc
+class __$$_UpdateProductDeterminationCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_UpdateProductDetermination>
+    implements _$$_UpdateProductDeterminationCopyWith<$Res> {
+  __$$_UpdateProductDeterminationCopyWithImpl(
+      _$_UpdateProductDetermination _value,
+      $Res Function(_$_UpdateProductDetermination) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? locale = null,
+    Object? productDeterminationList = null,
+    Object? updatedCartItems = null,
+  }) {
+    return _then(_$_UpdateProductDetermination(
+      locale: null == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as Locale,
+      productDeterminationList: null == productDeterminationList
+          ? _value._productDeterminationList
+          : productDeterminationList // ignore: cast_nullable_to_non_nullable
+              as List<AplProduct>,
+      updatedCartItems: null == updatedCartItems
+          ? _value._updatedCartItems
+          : updatedCartItems // ignore: cast_nullable_to_non_nullable
+              as List<PriceAggregate>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateProductDetermination implements _UpdateProductDetermination {
+  const _$_UpdateProductDetermination(
+      {required this.locale,
+      required final List<AplProduct> productDeterminationList,
+      required final List<PriceAggregate> updatedCartItems})
+      : _productDeterminationList = productDeterminationList,
+        _updatedCartItems = updatedCartItems;
+
+  @override
+  final Locale locale;
+  final List<AplProduct> _productDeterminationList;
+  @override
+  List<AplProduct> get productDeterminationList {
+    if (_productDeterminationList is EqualUnmodifiableListView)
+      return _productDeterminationList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_productDeterminationList);
+  }
+
+  final List<PriceAggregate> _updatedCartItems;
+  @override
+  List<PriceAggregate> get updatedCartItems {
+    if (_updatedCartItems is EqualUnmodifiableListView)
+      return _updatedCartItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_updatedCartItems);
+  }
+
+  @override
+  String toString() {
+    return 'CartEvent.updateProductDetermination(locale: $locale, productDeterminationList: $productDeterminationList, updatedCartItems: $updatedCartItems)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateProductDetermination &&
+            (identical(other.locale, locale) || other.locale == locale) &&
+            const DeepCollectionEquality().equals(
+                other._productDeterminationList, _productDeterminationList) &&
+            const DeepCollectionEquality()
+                .equals(other._updatedCartItems, _updatedCartItems));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      locale,
+      const DeepCollectionEquality().hash(_productDeterminationList),
+      const DeepCollectionEquality().hash(_updatedCartItems));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateProductDeterminationCopyWith<_$_UpdateProductDetermination>
+      get copyWith => __$$_UpdateProductDeterminationCopyWithImpl<
+          _$_UpdateProductDetermination>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)
+        initialized,
+    required TResult Function(PriceAggregate item, List<PriceAggregate> items)
+        verifyMaterialDealBonus,
+    required TResult Function(
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)
+        addBonusToCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
+    required TResult Function() clearCart,
+    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)
+        addHistoryItemsToCart,
+    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(List<PriceAggregate> cartProducts)
+        getDetailsProductsAddedToCart,
+    required TResult Function(Map<MaterialNumber, Price> priceProducts)
+        updatePriceProduct,
+    required TResult Function() updateProductStock,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
+    required TResult Function(
+            List<PriceAggregate> priceAggregates, bool isDeleteCombo)
+        upsertCartItemsWithComboOffers,
+    required TResult Function(Price overriddenProductPrice)
+        updateCartProductWithCounterOffer,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
+  }) {
+    return updateProductDetermination(
+        locale, productDeterminationList, updatedCartItems);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult? Function(PriceAggregate item, List<PriceAggregate> items)?
+        verifyMaterialDealBonus,
+    TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addBonusToCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
+    TResult? Function()? clearCart,
+    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addHistoryItemsToCart,
+    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(List<PriceAggregate> cartProducts)?
+        getDetailsProductsAddedToCart,
+    TResult? Function(Map<MaterialNumber, Price> priceProducts)?
+        updatePriceProduct,
+    TResult? Function()? updateProductStock,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
+    TResult? Function(List<PriceAggregate> priceAggregates, bool isDeleteCombo)?
+        upsertCartItemsWithComboOffers,
+    TResult? Function(Price overriddenProductPrice)?
+        updateCartProductWithCounterOffer,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
+  }) {
+    return updateProductDetermination?.call(
+        locale, productDeterminationList, updatedCartItems);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult Function(PriceAggregate item, List<PriceAggregate> items)?
+        verifyMaterialDealBonus,
+    TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addBonusToCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
+    TResult Function()? clearCart,
+    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addHistoryItemsToCart,
+    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(List<PriceAggregate> cartProducts)?
+        getDetailsProductsAddedToCart,
+    TResult Function(Map<MaterialNumber, Price> priceProducts)?
+        updatePriceProduct,
+    TResult Function()? updateProductStock,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
+    TResult Function(List<PriceAggregate> priceAggregates, bool isDeleteCombo)?
+        upsertCartItemsWithComboOffers,
+    TResult Function(Price overriddenProductPrice)?
+        updateCartProductWithCounterOffer,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
+    required TResult orElse(),
+  }) {
+    if (updateProductDetermination != null) {
+      return updateProductDetermination(
+          locale, productDeterminationList, updatedCartItems);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_VerifyMaterialDealBonus value)
+        verifyMaterialDealBonus,
+    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
+    required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
+    required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
+    required TResult Function(_UpsertCartItems value) upsertCartItems,
+    required TResult Function(_GetDetailsProductsAddedToCart value)
+        getDetailsProductsAddedToCart,
+    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
+    required TResult Function(_UpsertCartItemsWithComboOffers value)
+        upsertCartItemsWithComboOffers,
+    required TResult Function(_UpdateCartProductWithCounterOffer value)
+        updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
+  }) {
+    return updateProductDetermination(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
+    TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
+    TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
+    TResult? Function(_UpsertCartItems value)? upsertCartItems,
+    TResult? Function(_GetDetailsProductsAddedToCart value)?
+        getDetailsProductsAddedToCart,
+    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
+    TResult? Function(_UpsertCartItemsWithComboOffers value)?
+        upsertCartItemsWithComboOffers,
+    TResult? Function(_UpdateCartProductWithCounterOffer value)?
+        updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
+  }) {
+    return updateProductDetermination?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
+    TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
+    TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
+    TResult Function(_UpsertCartItems value)? upsertCartItems,
+    TResult Function(_GetDetailsProductsAddedToCart value)?
+        getDetailsProductsAddedToCart,
+    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
+    TResult Function(_UpsertCartItemsWithComboOffers value)?
+        upsertCartItemsWithComboOffers,
+    TResult Function(_UpdateCartProductWithCounterOffer value)?
+        updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
+    required TResult orElse(),
+  }) {
+    if (updateProductDetermination != null) {
+      return updateProductDetermination(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateProductDetermination implements CartEvent {
+  const factory _UpdateProductDetermination(
+          {required final Locale locale,
+          required final List<AplProduct> productDeterminationList,
+          required final List<PriceAggregate> updatedCartItems}) =
+      _$_UpdateProductDetermination;
+
+  Locale get locale;
+  List<AplProduct> get productDeterminationList;
+  List<PriceAggregate> get updatedCartItems;
+  @JsonKey(ignore: true)
+  _$$_UpdateProductDeterminationCopyWith<_$_UpdateProductDetermination>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -5283,8 +5915,12 @@ class _$_FetchGrandTotalPriceForIdMarket
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(List<MaterialInfo> product)
-        updatePriceForIdMarket,
+    required TResult Function(Locale locale) updatePriceForIdMarket,
+    required TResult Function(
+            Locale locale,
+            List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return fetchGrandTotalPriceForIdMarket();
@@ -5324,7 +5960,10 @@ class _$_FetchGrandTotalPriceForIdMarket
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult? Function(Locale locale)? updatePriceForIdMarket,
+    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return fetchGrandTotalPriceForIdMarket?.call();
@@ -5364,7 +6003,10 @@ class _$_FetchGrandTotalPriceForIdMarket
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(List<MaterialInfo> product)? updatePriceForIdMarket,
+    TResult Function(Locale locale)? updatePriceForIdMarket,
+    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
@@ -5402,6 +6044,8 @@ class _$_FetchGrandTotalPriceForIdMarket
         updateCartProductWithCounterOffer,
     required TResult Function(_UpdatePriceForIdMarket value)
         updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -5432,6 +6076,8 @@ class _$_FetchGrandTotalPriceForIdMarket
     TResult? Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
   }) {
@@ -5461,6 +6107,8 @@ class _$_FetchGrandTotalPriceForIdMarket
     TResult Function(_UpdateCartProductWithCounterOffer value)?
         updateCartProductWithCounterOffer,
     TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
@@ -5482,6 +6130,8 @@ mixin _$CartState {
   List<PriceAggregate> get cartProducts => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  Option<Either<ApiFailure, dynamic>> get updateFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   bool get isClearing => throw _privateConstructorUsedError;
   bool get isFetchingBonus => throw _privateConstructorUsedError;
@@ -5492,6 +6142,7 @@ mixin _$CartState {
   bool get isBuyAgain => throw _privateConstructorUsedError;
   bool get isAplProductLoading => throw _privateConstructorUsedError;
   bool get isDeleteCombo => throw _privateConstructorUsedError;
+  bool get isUpdateProductDetermination => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
@@ -5516,6 +6167,7 @@ abstract class $CartStateCopyWith<$Res> {
   $Res call(
       {List<PriceAggregate> cartProducts,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
+      Option<Either<ApiFailure, dynamic>> updateFailureOrSuccessOption,
       bool isFetching,
       bool isClearing,
       bool isFetchingBonus,
@@ -5526,6 +6178,7 @@ abstract class $CartStateCopyWith<$Res> {
       bool isBuyAgain,
       bool isAplProductLoading,
       bool isDeleteCombo,
+      bool isUpdateProductDetermination,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
@@ -5558,6 +6211,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
   $Res call({
     Object? cartProducts = null,
     Object? apiFailureOrSuccessOption = null,
+    Object? updateFailureOrSuccessOption = null,
     Object? isFetching = null,
     Object? isClearing = null,
     Object? isFetchingBonus = null,
@@ -5568,6 +6222,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
     Object? isBuyAgain = null,
     Object? isAplProductLoading = null,
     Object? isDeleteCombo = null,
+    Object? isUpdateProductDetermination = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
@@ -5585,6 +6240,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
+      updateFailureOrSuccessOption: null == updateFailureOrSuccessOption
+          ? _value.updateFailureOrSuccessOption
+          : updateFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
       isFetching: null == isFetching
           ? _value.isFetching
@@ -5625,6 +6284,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
       isDeleteCombo: null == isDeleteCombo
           ? _value.isDeleteCombo
           : isDeleteCombo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isUpdateProductDetermination: null == isUpdateProductDetermination
+          ? _value.isUpdateProductDetermination
+          : isUpdateProductDetermination // ignore: cast_nullable_to_non_nullable
               as bool,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
@@ -5721,6 +6384,7 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
   $Res call(
       {List<PriceAggregate> cartProducts,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
+      Option<Either<ApiFailure, dynamic>> updateFailureOrSuccessOption,
       bool isFetching,
       bool isClearing,
       bool isFetchingBonus,
@@ -5731,6 +6395,7 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
       bool isBuyAgain,
       bool isAplProductLoading,
       bool isDeleteCombo,
+      bool isUpdateProductDetermination,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
@@ -5767,6 +6432,7 @@ class __$$_CartStateCopyWithImpl<$Res>
   $Res call({
     Object? cartProducts = null,
     Object? apiFailureOrSuccessOption = null,
+    Object? updateFailureOrSuccessOption = null,
     Object? isFetching = null,
     Object? isClearing = null,
     Object? isFetchingBonus = null,
@@ -5777,6 +6443,7 @@ class __$$_CartStateCopyWithImpl<$Res>
     Object? isBuyAgain = null,
     Object? isAplProductLoading = null,
     Object? isDeleteCombo = null,
+    Object? isUpdateProductDetermination = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
@@ -5794,6 +6461,10 @@ class __$$_CartStateCopyWithImpl<$Res>
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
+      updateFailureOrSuccessOption: null == updateFailureOrSuccessOption
+          ? _value.updateFailureOrSuccessOption
+          : updateFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
       isFetching: null == isFetching
           ? _value.isFetching
@@ -5834,6 +6505,10 @@ class __$$_CartStateCopyWithImpl<$Res>
       isDeleteCombo: null == isDeleteCombo
           ? _value.isDeleteCombo
           : isDeleteCombo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isUpdateProductDetermination: null == isUpdateProductDetermination
+          ? _value.isUpdateProductDetermination
+          : isUpdateProductDetermination // ignore: cast_nullable_to_non_nullable
               as bool,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
@@ -5878,6 +6553,7 @@ class _$_CartState extends _CartState {
   const _$_CartState(
       {required final List<PriceAggregate> cartProducts,
       required this.apiFailureOrSuccessOption,
+      required this.updateFailureOrSuccessOption,
       required this.isFetching,
       required this.isClearing,
       required this.isFetchingBonus,
@@ -5888,6 +6564,7 @@ class _$_CartState extends _CartState {
       required this.isBuyAgain,
       required this.isAplProductLoading,
       required this.isDeleteCombo,
+      required this.isUpdateProductDetermination,
       required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
@@ -5912,6 +6589,8 @@ class _$_CartState extends _CartState {
   @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
+  final Option<Either<ApiFailure, dynamic>> updateFailureOrSuccessOption;
+  @override
   final bool isFetching;
   @override
   final bool isClearing;
@@ -5931,6 +6610,8 @@ class _$_CartState extends _CartState {
   final bool isAplProductLoading;
   @override
   final bool isDeleteCombo;
+  @override
+  final bool isUpdateProductDetermination;
   @override
   final SalesOrganisation salesOrganisation;
   @override
@@ -5963,7 +6644,7 @@ class _$_CartState extends _CartState {
 
   @override
   String toString() {
-    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, isBuyAgain: $isBuyAgain, isAplProductLoading: $isAplProductLoading, isDeleteCombo: $isDeleteCombo, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, user: $user, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode, aplSimulatorOrder: $aplSimulatorOrder)';
+    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, updateFailureOrSuccessOption: $updateFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, isBuyAgain: $isBuyAgain, isAplProductLoading: $isAplProductLoading, isDeleteCombo: $isDeleteCombo, isUpdateProductDetermination: $isUpdateProductDetermination, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, user: $user, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode, aplSimulatorOrder: $aplSimulatorOrder)';
   }
 
   @override
@@ -5973,17 +6654,18 @@ class _$_CartState extends _CartState {
             other is _$_CartState &&
             const DeepCollectionEquality()
                 .equals(other._cartProducts, _cartProducts) &&
-            (identical(other.apiFailureOrSuccessOption,
-                    apiFailureOrSuccessOption) ||
+            (identical(other.apiFailureOrSuccessOption, apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
+            (identical(other.updateFailureOrSuccessOption, updateFailureOrSuccessOption) ||
+                other.updateFailureOrSuccessOption ==
+                    updateFailureOrSuccessOption) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.isClearing, isClearing) ||
                 other.isClearing == isClearing) &&
             (identical(other.isFetchingBonus, isFetchingBonus) ||
                 other.isFetchingBonus == isFetchingBonus) &&
-            (identical(other.isFetchingCartProductDetail,
-                    isFetchingCartProductDetail) ||
+            (identical(other.isFetchingCartProductDetail, isFetchingCartProductDetail) ||
                 other.isFetchingCartProductDetail ==
                     isFetchingCartProductDetail) &&
             (identical(other.isUpserting, isUpserting) ||
@@ -5998,6 +6680,9 @@ class _$_CartState extends _CartState {
                 other.isAplProductLoading == isAplProductLoading) &&
             (identical(other.isDeleteCombo, isDeleteCombo) ||
                 other.isDeleteCombo == isDeleteCombo) &&
+            (identical(other.isUpdateProductDetermination, isUpdateProductDetermination) ||
+                other.isUpdateProductDetermination ==
+                    isUpdateProductDetermination) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -6020,6 +6705,7 @@ class _$_CartState extends _CartState {
         runtimeType,
         const DeepCollectionEquality().hash(_cartProducts),
         apiFailureOrSuccessOption,
+        updateFailureOrSuccessOption,
         isFetching,
         isClearing,
         isFetchingBonus,
@@ -6030,6 +6716,7 @@ class _$_CartState extends _CartState {
         isBuyAgain,
         isAplProductLoading,
         isDeleteCombo,
+        isUpdateProductDetermination,
         salesOrganisation,
         customerCodeInfo,
         shipToInfo,
@@ -6052,6 +6739,8 @@ abstract class _CartState extends CartState {
       {required final List<PriceAggregate> cartProducts,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
+      required final Option<Either<ApiFailure, dynamic>>
+          updateFailureOrSuccessOption,
       required final bool isFetching,
       required final bool isClearing,
       required final bool isFetchingBonus,
@@ -6062,6 +6751,7 @@ abstract class _CartState extends CartState {
       required final bool isBuyAgain,
       required final bool isAplProductLoading,
       required final bool isDeleteCombo,
+      required final bool isUpdateProductDetermination,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
@@ -6076,6 +6766,8 @@ abstract class _CartState extends CartState {
   List<PriceAggregate> get cartProducts;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
+  @override
+  Option<Either<ApiFailure, dynamic>> get updateFailureOrSuccessOption;
   @override
   bool get isFetching;
   @override
@@ -6096,6 +6788,8 @@ abstract class _CartState extends CartState {
   bool get isAplProductLoading;
   @override
   bool get isDeleteCombo;
+  @override
+  bool get isUpdateProductDetermination;
   @override
   SalesOrganisation get salesOrganisation;
   @override

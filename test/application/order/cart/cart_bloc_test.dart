@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -31,6 +32,9 @@ import '../../../common_mock_data/user_mock.dart';
 
 class CartRepositoryMock extends Mock implements CartRepository {}
 
+class ProductDetailRepositoryMock extends Mock
+    implements ProductDetailRepository {}
+
 void main() {
   late List<Price> prices;
 
@@ -41,6 +45,7 @@ void main() {
   late List<BonusMaterial> bonusMaterial;
   late List<CartState> expectedCartState;
   late CartRepository cartRepositoryMock;
+  late ProductDetailRepository productDetailRepository;
   late List<PriceAggregate> priceAggregates;
   late List<BonusSampleItem> bonusSampleItem;
 
@@ -102,6 +107,7 @@ void main() {
   });
   setUp(() {
     cartRepositoryMock = CartRepositoryMock();
+    productDetailRepository = ProductDetailRepositoryMock();
   });
 
   List<MaterialInfo> allMaterial(List<PriceAggregate> priceAggregates) =>
@@ -119,7 +125,7 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart initialized-emit fetchProductsAddedToCart-error emit',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           when(
             () => cartRepositoryMock.getAddedToCartProductList(),
@@ -166,7 +172,7 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart initialized fetchProductsAddedToCart-emit => fetch product empty',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           when(
             () => cartRepositoryMock.getAddedToCartProductList(),
@@ -213,7 +219,7 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart initialized fetchProductsAddedToCart-emit => getDetailsProductsAddedToCart-emit error',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           final updatedPriceAggregates = priceAggregates
               .map(
@@ -310,7 +316,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart initialized fetchProductsAddedToCart-emit => getDetailsProductsAddedToCart-emit => updateProductStock-emit error',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           final priceAggregateAllMaterial = allMaterial(priceAggregates);
           final allAdditionInfo = {
@@ -441,7 +447,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart initialized fetchProductsAddedToCart-emit => getDetailsProductsAddedToCart-emit => updateProductStock-emit',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           final priceAggregateAllMaterial = allMaterial(priceAggregates);
           final allAdditionInfo = {
@@ -604,7 +610,7 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart verifyMaterialDealBonus with no bonus item in cart',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         act: (bloc) => bloc.add(
           CartEvent.verifyMaterialDealBonus(
             item: priceAggregates.first,
@@ -620,7 +626,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart verifyMaterialDealBonus refresh bonus fail',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -667,7 +673,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
-            isFetching: true,
+            isFetchingBonus: true,
             cartProducts: priceAggregates,
             salesOrganisation: fakeSalesOrganisation,
             config: fakeSalesOrganisationConfigs,
@@ -687,7 +693,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart verifyMaterialDealBonus refresh bonus',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -734,7 +740,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
-            isFetching: true,
+            isFetchingBonus: true,
             cartProducts: priceAggregates,
             salesOrganisation: fakeSalesOrganisation,
             config: fakeSalesOrganisationConfigs,
@@ -758,7 +764,7 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart addBonusToCartItem fail',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -817,7 +823,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart addBonusToCartItem',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.first],
           salesOrganisation: fakeSalesOrganisation,
@@ -922,7 +928,7 @@ void main() {
             config: fakeSalesOrganisationConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
-            isFetching: true,
+            isFetchingBonus: true,
           ),
           CartState.initial().copyWith(
             upsertBonusItemInProgressHashCode: [],
@@ -945,7 +951,7 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart upsertCart new Item fail',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -997,7 +1003,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCart update old Item',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.first.copyWith(quantity: 1)],
           salesOrganisation: fakeSalesOrganisation,
@@ -1017,7 +1023,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCart old Item',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.elementAt(1)],
           salesOrganisation: fakeSalesOrganisation,
@@ -1073,7 +1079,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCart new Item',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -1127,7 +1133,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Should add fetch total price event for ID market after upsert success',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeIDSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -1202,7 +1208,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Should not add verify bonus and fetch total price after upsert success and cart is empty',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeIDSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -1257,7 +1263,7 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart upsertCartItems new Item fail',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -1303,7 +1309,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCartItems new Item fail same bundle',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.elementAt(1),
@@ -1336,7 +1342,7 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart upsertCartItems update existing bundle',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             bundleItem.copyWith(
@@ -1473,7 +1479,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCartItems new Item',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -1553,7 +1559,7 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart addHistoryItemsToCart fail',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -1602,7 +1608,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart addHistoryItemsToCart',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           config: fakeSalesOrganisationConfigs,
@@ -1684,7 +1690,7 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart updatePriceProduct',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -1751,7 +1757,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
-            isFetching: true,
+            isFetchingBonus: true,
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
@@ -1783,7 +1789,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart updatePriceProduct fail',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -1846,7 +1852,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
-            isFetching: true,
+            isFetchingBonus: true,
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
@@ -1877,7 +1883,7 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart updatePriceProduct without override available',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -1930,7 +1936,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
-            isFetching: true,
+            isFetchingBonus: true,
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
             salesOrganisation: fakeSalesOrganisation,
             config: fakeSalesOrganisationConfigs,
@@ -1959,7 +1965,7 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart removeInvalidProducts bundle in cart',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.first, bundleItem],
           salesOrganisation: fakeSalesOrganisation,
@@ -2008,7 +2014,7 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart removeInvalidProducts',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: priceAggregates,
           salesOrganisation: fakeSalesOrganisation,
@@ -2058,7 +2064,7 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart removeInvalidProducts fail',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: priceAggregates,
           salesOrganisation: fakeSalesOrganisation,
@@ -2112,7 +2118,7 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart removeSampleBonusFromCartConfig',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -2174,7 +2180,7 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart removeSampleBonusFromCartConfig fail',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -2247,7 +2253,7 @@ void main() {
   //   () {
   //     blocTest<CartBloc, CartState>(
   //       'Cart updateBatchInCartItem',
-  //       build: () => CartBloc(cartRepositoryMock),
+  //       build: () => CartBloc(cartRepositoryMock, productDetailRepository),
   //       seed: () => CartState.initial().copyWith(
   //         cartProducts: priceAggregates,
   //         salesOrganisation: fakeSalesOrganisation,
@@ -2280,7 +2286,7 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'clearCart failure',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           when(
             () => cartRepositoryMock.clearCart(),
@@ -2319,7 +2325,7 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'clearCart Success',
-        build: () => CartBloc(cartRepositoryMock),
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           when(
             () => cartRepositoryMock.clearCart(),

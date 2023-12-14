@@ -86,9 +86,21 @@ class _CheckoutPageState extends State<CheckoutPage> {
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
 
-    return BlocBuilder<CartBloc, CartState>(
+    return BlocConsumer<CartBloc, CartState>(
+      listenWhen: (previous, current) =>
+          previous.isFetchingBonus != current.isFetchingBonus &&
+          !current.isFetchingBonus,
+      listener: (context, state) {
+        if (state.cartProducts.any((e) => !e.inStock)) {
+          context.router.pop();
+        } else {
+          context.read<CartBloc>().add(
+                CartEvent.updatePriceForIdMarket(locale: context.locale),
+              );
+        }
+      },
       buildWhen: (previous, current) =>
-          previous.aplSimulatorOrder != current.aplSimulatorOrder,
+          previous.isCartDetailsFetching != current.isCartDetailsFetching,
       builder: (context, cartState) {
         return Scaffold(
           key: WidgetKeys.checkoutPage,
@@ -170,8 +182,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
               SafeArea(
                 child: Container(
                   width: double.infinity,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 10,
+                  ),
                   child: BlocListener<AdditionalDetailsBloc,
                       AdditionalDetailsState>(
                     listenWhen: (previous, current) =>
@@ -252,13 +266,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         );
                       },
                       builder: (context, state) {
-                        final isAplProductLoading =
-                            context.read<CartBloc>().state.isAplProductLoading;
-
                         return ElevatedButton(
                           key: WidgetKeys.checkoutButton,
                           onPressed: state.isSubmitting ||
-                                  isAplProductLoading ||
+                                  cartState.isCartDetailsFetching ||
                                   !context
                                       .read<CartBloc>()
                                       .state
@@ -280,7 +291,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       );
                                 },
                           child: LoadingShimmer.withChild(
-                            enabled: state.isSubmitting || isAplProductLoading,
+                            enabled: state.isSubmitting ||
+                                cartState.isCartDetailsFetching,
                             child: Text(context.tr('Place order')),
                           ),
                         );
