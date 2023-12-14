@@ -57,7 +57,9 @@ class QuantityAndPriceWithTax extends StatelessWidget {
                   context.read<EligibilityBloc>().state.salesOrgConfigs,
               price: netPrice,
             ),
-            if (taxPercentage > 0 && netPriceValue > 0)
+            if (taxPercentage > 0 &&
+                netPriceValue > 0 &&
+                !context.read<EligibilityBloc>().state.salesOrg.isID)
               MaterialTax(
                 totalPrice: netPriceValue,
                 percentage: taxPercentage,
