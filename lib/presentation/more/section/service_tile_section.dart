@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/more/more_details_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ServiceTile extends StatelessWidget {
@@ -11,27 +11,26 @@ class ServiceTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       dense: true,
-      subtitle: BlocBuilder<EligibilityBloc, EligibilityState>(
+      title: BlocBuilder<EligibilityBloc, EligibilityState>(
         buildWhen: (previous, current) =>
             previous.isReturnsEnable != current.isReturnsEnable ||
             previous.isPaymentEnabled != current.isPaymentEnabled,
         builder: (context, state) {
           return GridView.count(
             physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 4,
-            childAspectRatio: 1.45,
-            padding: const EdgeInsets.only(
-              top: 18.0,
-            ),
+            crossAxisCount: (MediaQuery.of(context).size.width / 80).round(),
+            childAspectRatio: 1,
             shrinkWrap: true,
             children: _getServiceTabs(context).map((item) {
               return InkWell(
                 key: item.key,
                 onTap: item.onTap,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     item.icon,
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 4),
                     Text(
                       context.tr(item.label),
                       style: Theme.of(context).textTheme.bodySmall,
