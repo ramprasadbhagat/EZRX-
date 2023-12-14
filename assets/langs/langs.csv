@@ -255,7 +255,7 @@ Order Details,Order Details,รายละเอียดคำสั่งซ�
 Order Failed,Order Failed,Order Failed,訂單接收異常,Order Failed,Order Failed,ការបញ្ជាទិញបានបរាជ័យ,Pesanan gagal
 Order History,Order History,ประวัติคำสั่งซื้อ,訂單記錄,ကုန်ပစ္စည်း အမှာစာ မှတ်တမ်း,Lịch sử đơn hàng,ប្រវត្តិនៃការបញ្ជាទិញ,Riwayat pesanan
 Order No:,Order No:,หมายเลขคำสั่งซื้อ:,訂單號碼:,ကုန်ပစ္စည်း အမှာစာ နံပါတ်,Số đơn hàng:,លេខបញ្ជាទិញ,Nomor pesanan:
-Order packed and ready for delivery,Order packed and ready for delivery,แพ๊คสินค้าเรียบร้อยและเตรียมจัดส่ง,撿貨作業,အမှာစာ ကို ထုပ်ပိုးပြီး ပို့ဆောင်ရန် အသင့်ဖြစ်နေပါပြီ။,Đã đóng gói,កុំម្ម៉ង់បានវេចខ្ចប់រួច និងរួចរាល់សំរាប់ដឹកចេញ,Pesan yang dikemas dan siap untuk pengiriman
+Order packed and ready for delivery,Order packed and ready for delivery,แพ๊คสินค้าเรียบร้อยและเตรียมจัดส่ง,撿貨作業,အမှာစာ ကို ထုပ်ပိုးပြီး ပို့ဆောင်ရန် အသင့်ဖြစ်နေပါပြီ။,Đã đóng gói,កុំម្ម៉ង់បានវេចខ្ចប់រួច និងរួចរាល់សំរាប់ដឹកចេញ,Diterima
 Order Placed Failed,Order Placed Failed,ส่งคำสั่งซื้อไม่สำเร็จ,未成功送出訂單,ကုန်ပစ္စည်း အမှာစာ တင်ခြင်း မအောင်မြင်ပါ,Đặt hàng không thành côngĐặt hàng không thành công,ការបញ្ជាទិញបានបរាជ័យ,Pesanan ditempatkan gagal
 Order Placed Successfully,Order Placed Successfully,ส่งคำสั่งซื้อเรียบร้อยแล้ว,已成功下單,ကုန်ပစ္စည်း အမှာစာ တင်ခြင်း အောင်မြင်ပါပြီ,Đặt hàng thành công,ការបញ្ជាទិញត្រូវបានធ្វើឡើងដោយជោគជ័យ,Pesanan berhasil ditempatkan
 Order Status,Order Status,สถานะคำสั่งซื้อ,訂單狀態,အော်ဒါအခြေအနေ,Tình trạng đặt đặt hàng,ស្ថានភាពកុំម្ម៉ង់,Status pemesanan
@@ -492,7 +492,7 @@ Status,Status,สถานะ,訂單狀態,အခြေအနေ,Tình trạng,�
 Select Status,Select Status,Select Status,選擇訂單狀態,Select Status,Select Status,Select Status,Pilih Status
 Total Price,Total Price,ราคารวม,實售價合計,စုစုပေါင်းစျေးနှုန်း,Tổng Giá trị đơn hàng,តម្លៃសរុប,Total harga
 Total Tax,Total Tax,Total Tax,稅(已加計至產品),Total Tax,Thuế,Total Tax,Total pajak
-Picking in-progress,Picking in-progress,กำลังจัดเตรียมสินค้า,出貨準備中,ကောက်ယူနေဆဲဖြစ်သည်။,Đang chọn xử lý,ការរៀបចំកំពុងដំនើរការ,Memilih dalam proses
+Picking in-progress,Picking in-progress,กำลังจัดเตรียมสินค้า,出貨準備中,ကောက်ယူနေဆဲဖြစ်သည်။,Đang chọn xử lý,ការរៀបចំកំពុងដំនើរការ,Diproses
 Failed,Failed,มีข้อผิดพลาด,未成功送出訂單,ส่งไม่สำเร็จ,Thất bại,បរាជ័យ,Gagal
 Order Created,Order Created,รับคำสั่งซื้อแล้ว,訂單成立,အမှာစာ ဖန်တီးသည်,Đã được tạo,ការបញ្ជារទិញត្រូវបានបង្កើត,Dibuat
 Favourites,Favourites,รายการโปรด,我的最愛,အကြိုက်ဆုံးများ,Yêu thích,ចំណូលចិត្ត,Favorit
