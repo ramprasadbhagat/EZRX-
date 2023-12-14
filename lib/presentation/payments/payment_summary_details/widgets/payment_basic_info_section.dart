@@ -56,7 +56,10 @@ class _PaymentBasicInfoSection extends StatelessWidget {
                 valueFlex: 3,
                 keyText: context.tr('PA created date'),
                 valueTextLoading: state.isDetailFetching,
-                valueText: state.details.createdDate.dateString,
+                valueText: DateFormat(
+                  DateTimeFormatString.displayDateFormat,
+                  context.locale.languageCode,
+                ).format(state.details.createdDate.dateTime),
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),

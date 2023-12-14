@@ -17,11 +17,11 @@ class _WarningLabelVirtualBank extends StatelessWidget {
         builder: (context, state) {
           return state.virtualBankPayable
               ? const SizedBox.shrink()
-              : const InfoLabel(
-                  textValue:
-                      'Please select your virtual bank account to proceed',
+              : InfoLabel(
+                  textValue: context
+                      .tr('Please select your virtual bank account to proceed'),
                   mainColor: ZPColors.errorSnackBarColor,
-                  margin: EdgeInsets.only(top: 16),
+                  margin: const EdgeInsets.only(top: 16),
                 );
         },
       );

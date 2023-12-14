@@ -76,7 +76,7 @@ class _APLPaymentSelectorWidget extends StatelessWidget {
                             onChanged: null,
                           ),
                           Text(
-                            paymentMethod.paymentMethod.getValue(),
+                            context.tr(paymentMethod.paymentMethod.getValue()),
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ],

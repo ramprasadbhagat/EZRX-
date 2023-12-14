@@ -100,7 +100,7 @@ class _PaymentFilter extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                context.tr('Due date'),
+                context.tr('Due Date'),
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.neutralsBlack,
                     ),

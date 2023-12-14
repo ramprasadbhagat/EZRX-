@@ -77,7 +77,7 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12.0),
                       child: Text(
-                        context.tr('Due date'),
+                        context.tr('Due Date'),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
@@ -175,7 +175,7 @@ class _StatusesSelector extends StatelessWidget {
               key: WidgetKeys.statusFilter(status, value),
               contentPadding: EdgeInsets.zero,
               title: Text(
-                status,
+                context.tr(status),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               controlAffinity: ListTileControlAffinity.leading,

@@ -22,7 +22,7 @@ class _PaymentSummaryStatusesSelector extends StatelessWidget {
               key: WidgetKeys.paymentSummaryFilterStatus(name),
               contentPadding: EdgeInsets.zero,
               title: Text(
-                name,
+                context.tr(name),
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall!

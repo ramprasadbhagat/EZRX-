@@ -149,8 +149,11 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
     return 'NA';
   }
 
-  String get idAdviceExpiryText =>
-      'in ${createdDate.paymentAttentionExpiry} day(s)';
+  String get idAdviceExpiryText => 'in {day} day(s)'.tr(
+        namedArgs: {
+          'day': createdDate.paymentAttentionExpiry.toString(),
+        },
+      );
 
   String get paymentDate =>
       status.getIsSuccessfulOrProcessed ? valueDate.dateString.tr() : '-'.tr();
