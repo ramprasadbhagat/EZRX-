@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
@@ -100,7 +99,6 @@ class MoreDetailsTile {
           key: WidgetKeys.contactUsTile,
         ),
         onTap: () {
-          context.read<ContactUsBloc>().add(const ContactUsEvent.initialized());
           context.navigateTo(
             const ContactUsPageRoute(),
           );

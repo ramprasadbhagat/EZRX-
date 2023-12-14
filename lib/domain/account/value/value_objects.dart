@@ -123,6 +123,7 @@ class SalesOrg extends ValueObject<String> {
       Locale(languageCodeForHelpAndSupport, country);
 
   String get announcementVariablePath => countryAnnouncementPath(country);
+  String get contactUsItemId => countryContactUsItemId(country);
 
   String get articleVariablePath => countryArticlePath(country);
   String get contactUsEmail => countryContactUsEmail(country);

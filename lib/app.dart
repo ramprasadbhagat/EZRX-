@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
-import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
@@ -503,9 +502,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReturnRequestAttachmentBloc>(
           create: (context) => locator<ReturnRequestAttachmentBloc>(),
-        ),
-        BlocProvider<ContactUsBloc>(
-          create: (context) => locator<ContactUsBloc>(),
         ),
         BlocProvider<NotificationBloc>(
           create: (context) => locator<NotificationBloc>(),

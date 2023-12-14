@@ -30,6 +30,7 @@ import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.da
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
+import 'package:ezrxmobile/application/contact_us/contact_us_details_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/faq/faq_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
@@ -202,6 +203,10 @@ import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutatio
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
 import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
+import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_local.dart';
+import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_remote.dart';
+import 'package:ezrxmobile/infrastructure/contact_us/repository/contact_us_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
@@ -2947,7 +2952,31 @@ void setupLocator() {
   //============================================================
   //  Contact Us
   //============================================================
+  locator.registerLazySingleton(() => ContactUsQuery());
 
+  locator.registerLazySingleton(() => ContactUsDetailsLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => ContactUsDetailsRemoteDataSource(
+      httpService: locator<HttpService>(),
+      queryMutation: locator<ContactUsQuery>(),
+      exceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ContactUsDetailsRepository(
+      config: locator<Config>(),
+      localDataSource: locator<ContactUsDetailsLocalDataSource>(),
+      remoteDataSource: locator<ContactUsDetailsRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => ContactUsDetailsBloc(
+      contactUsRepository: locator<ContactUsDetailsRepository>(),
+    ),
+  );
   locator.registerLazySingleton(() => ContactUsLocalDataSource());
 
   locator.registerLazySingleton(() => ContactUsQueryMutation());
@@ -2969,7 +2998,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => ContactUsBloc(
       contactUsRepository: locator<ContactUsRepository>(),
     ),

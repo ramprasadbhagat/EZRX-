@@ -16,30 +16,40 @@ class _ContactDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          context.tr(contactText),
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ZPColors.extraLightGrey4,
-                fontWeight: FontWeight.w400,
-              ),
+        BlocBuilder<ContactUsDetailsBloc, ContactUsDetailsState>(
+          buildWhen: (previous, current) =>
+              previous.isLoading != current.isLoading,
+          builder: (context, state) {
+            return state.isLoading
+                ? LoadingShimmer.logo(
+                    key: WidgetKeys.loaderImage,
+                  )
+                : Column(
+                    children: [
+                      Html(
+                        style: {
+                          'body': Style(
+                            padding: const EdgeInsets.all(0),
+                            margin: const EdgeInsets.all(0),
+                          ),
+                        },
+                        data: state
+                            .contactUsDetails.content.appendedImgSrcWithBaseUrl,
+                        shrinkWrap: true,
+                      ),
+                      _ContactItem(
+                        key: WidgetKeys.genericKey(key: salesOrg.contactEmail),
+                        label: state.contactUsDetails.postloginSendToEmail,
+                        icon: Icons.mail_outline,
+                        onTap: () => _sendEmail(
+                          state.contactUsDetails.postloginSendToEmail,
+                          salesOrg.contactPersonName,
+                        ),
+                      ),
+                    ],
+                  );
+          },
         ),
-        _ContactItem(
-          key: WidgetKeys.genericKey(key: salesOrg.contactEmail),
-          label: salesOrg.contactEmail,
-          icon: Icons.mail_outline,
-          onTap: () =>
-              _sendEmail(salesOrg.contactEmail, salesOrg.contactPersonName),
-        ),
-        ...salesOrg.contact.phoneNumbers
-            .map(
-              (e) => _ContactItem(
-                key: WidgetKeys.genericKey(key: e.displayTelephoneNumber),
-                label: e.displayTelephoneNumber,
-                icon: Icons.call_outlined,
-                onTap: () => _makeCall('tel://${e.displayTelephoneNumber}'),
-              ),
-            )
-            .toList(),
       ],
     );
   }
@@ -54,9 +64,5 @@ class _ContactDetails extends StatelessWidget {
       },
     );
     await launchUrl(emailLaunchUri);
-  }
-
-  Future<void> _makeCall(String reqUrl) async {
-    await launchUrl(Uri.parse(reqUrl), mode: LaunchMode.externalApplication);
   }
 }

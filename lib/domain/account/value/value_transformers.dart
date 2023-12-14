@@ -450,6 +450,23 @@ String countryContactUsEmail(String country) {
   }
 }
 
+String countryContactUsItemId(String country) {
+  final salesOrgCountryMap = {
+    'MY': 'FD4EBB5A-7740-4354-91C7-98642E735337',
+    'PH': '9E80D24F-4304-4E78-8AA6-866AC437A267',
+    'SG': '4AA656CA-C963-4AF7-95BB-B130C094F29C',
+    'ID': '595B0ACC-035C-4BA9-8EBF-FA4268B36144',
+    'KH': 'C32A81B9-2F3E-4410-B168-C8CE85EB1F6C',
+    'KR': '78E01010-FB26-4339-AC32-4F0F70721DC1',
+    'MM': 'BA0DD346-5891-4567-A2CB-A7C5475908CF',
+    'TH': '48E53337-E5D0-4B47-8E93-DD4A991C5B69',
+    'TW': '1E49AADE-4056-4A4E-919F-E33579A3DD5A',
+    'VN': '396F8F95-3B98-462D-9CE6-6487383FB821',
+  };
+
+  return salesOrgCountryMap[country] ?? '';
+}
+
 String countryFaqPath(String country) {
   final salesOrgCountryMap = {
     'MY': '51B88D33-B26E-475D-90FC-BEFD9FF0A348',

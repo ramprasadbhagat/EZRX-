@@ -1,0 +1,29 @@
+{
+    "data": {
+      "item": {
+        "id": "FD4EBB5A7740435491C798642E735337",
+        "title": {
+          "value": "General Contact us 1111 test222"
+        },
+        "backgroundImage": {
+          "jsonValue": {
+            "value": {
+              "src": "https://edge.sitecorecloud.io/zuelligphar9b34-zpcms-test-fcf9/media/Project/ezrx/ezrx/Contact-Us/Media/hinh-nen-4k-laptop-va-pc/Group-237581.png?h=541&iar=0&w=471",
+              "alt": "",
+              "width": "471",
+              "height": "541"
+            }
+          }
+        },
+        "content": {
+          "value": "<p><strong><span style=\"color: #234455;\">Customer Center11111</span></strong></p>\n<p><strong>&nbsp;<span style=\"color: #234455;\"></span></strong></p>\n<p>Weekdays AM 09:00 - PM 18:00<br />\nLunchtime PM 12:00 - PM 13:00<br />\nClosed on weekends and public holidays</p>\n<p>&nbsp;</p>\n<hr />\n<table style=\"height: 228px; width: 537px;\">\n    <tbody>\n        <tr>\n            <td style=\"text-align: left;\">\n            <p>Saxenda, Novo, Dupixent Order Inquiry</p>\n            <p><span style=\"color: #234455;\">1899-4156</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>Larochopose/skinceuticals order inquiry</p>\n            <p><span style=\"color: #234455;\">02-2006-0816</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;Physiogel order inquiry</p>\n            <p><span style=\"color: #234455;\">080-2005-080</span></p>\n            </td>\n        </tr>\n        <tr>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;Saxenda Product Inquiry</p>\n            <p><span style=\"color: #234455;\">1833-8561</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;larocheposay product inquiry</p>\n            <p><span style=\"color: #234455;\">080-344-0088</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;Physiogel product inquiry</p>\n            <p><span style=\"color: #234455;\">080-023-7007</span></p>\n            </td>\n        </tr>\n        <tr>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;Novo Product Inquiry</p>\n            <p><span style=\"color: #234455;\">02-2188-8900</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;Skinceuticals product inquiry</p>\n            <p><span style=\"color: #234455;\">080-348-0086</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;<span>Dupixent product inquiry</span></p>\n            <p><span style=\"color: #234455;\">02-2136-9000</span></p>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<p><hr />\n</p>\n<br />"
+        },
+        "preloginSendToEmail": {
+          "value": "support@ezrxplus.com"
+        },
+        "postloginSendToEmail": {
+          "value": "support@ezrxplus.com"
+        }
+      }
+    }
+  }
