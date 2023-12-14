@@ -21,9 +21,9 @@ class MarketSelector extends StatefulWidget {
 class _MarketSelectorState extends State<MarketSelector> {
   List<AppMarket> markets = [
     AppMarket('kh'),
-    AppMarket('hk'),
+    // AppMarket('hk'),
     AppMarket('id'),
-    AppMarket('kr'),
+    // AppMarket('kr'),
     AppMarket('my'),
     AppMarket('mm'),
     AppMarket('ph'),

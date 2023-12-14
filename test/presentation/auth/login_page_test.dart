@@ -153,9 +153,9 @@ void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
   final appMarketVariant = ValueVariant<AppMarket>(
     {
-      AppMarket('hk'),
+      // AppMarket('hk'),
       AppMarket('kh'),
-      AppMarket('kr'),
+      // AppMarket('kr'),
       AppMarket('mm'),
       AppMarket('ph'),
       AppMarket('sg'),
@@ -763,7 +763,6 @@ void main() {
       ).called(1);
     });
 
-
     testWidgets(
       'Exrx apl logo visible for ID market mobile',
       (tester) async {
@@ -811,11 +810,11 @@ void main() {
       (tester) async {
         final currentMediaQueryVariant =
             mediaQueryVariant.currentValue ?? false;
-      when(() => loginBlocMock.state).thenReturn(
-        LoginFormState.initial().copyWith(
-          currentMarket: AppMarket('id'),
-        ),
-      );
+        when(() => loginBlocMock.state).thenReturn(
+          LoginFormState.initial().copyWith(
+            currentMarket: AppMarket('id'),
+          ),
+        );
         final expectedStates = [
           LoginFormState.initial().copyWith(
             currentMarket: AppMarket('sg'),
@@ -827,12 +826,12 @@ void main() {
             useMediaQuery: currentMediaQueryVariant,
           ),
         );
-      await tester.pump();
+        await tester.pump();
         expect(
           currentMediaQueryVariant ? loginMobileScreen : loginWebScreen,
           findsOneWidget,
         );
-      expect(ezrxAplLogo, findsOneWidget);
+        expect(ezrxAplLogo, findsOneWidget);
         await tester.pump();
         expect(ezrxAplLogo, findsNothing);
       },
@@ -860,35 +859,34 @@ void main() {
             useMediaQuery: currentMediaQueryVariant,
           ),
         );
-      await tester.pump();
+        await tester.pump();
         expect(
           currentMediaQueryVariant ? loginMobileScreen : loginWebScreen,
           findsOneWidget,
         );
-      expect(ezrxAplLogo, findsNothing);
+        expect(ezrxAplLogo, findsNothing);
         await tester.pump();
         expect(ezrxAplLogo, findsOneWidget);
       },
       variant: mediaQueryVariant,
     );
 
-
     testWidgets(
       'Register option available for VN and ID market mobile',
       (tester) async {
         final currentAppMarketVariant =
             appMarketVariant.currentValue ?? AppMarket('id');
-      when(() => loginBlocMock.state).thenReturn(
-        LoginFormState.initial().copyWith(
+        when(() => loginBlocMock.state).thenReturn(
+          LoginFormState.initial().copyWith(
             currentMarket: currentAppMarketVariant,
-        ),
-      );
-      await tester.pumpWidget(loginTestPage());
-      await tester.pump();
+          ),
+        );
+        await tester.pumpWidget(loginTestPage());
+        await tester.pump();
         expect(loginMobileScreen, findsOneWidget);
-      expect(username, findsOneWidget);
-      expect(loginSubmitButton, findsOneWidget);
-      expect(loginPasswordField, findsOneWidget);
+        expect(username, findsOneWidget);
+        expect(loginSubmitButton, findsOneWidget);
+        expect(loginPasswordField, findsOneWidget);
         await tester.fling(
           find.byType(ListView),
           const Offset(0.0, -1000.0),
@@ -921,20 +919,20 @@ void main() {
       (tester) async {
         final currentAppMarketVariant =
             appMarketVariant.currentValue ?? AppMarket('id');
-      when(() => loginBlocMock.state).thenReturn(
-        LoginFormState.initial().copyWith(
+        when(() => loginBlocMock.state).thenReturn(
+          LoginFormState.initial().copyWith(
             currentMarket: currentAppMarketVariant,
-        ),
-      );
+          ),
+        );
         await tester.pumpWidget(
           loginTestPage(
             useMediaQuery: false,
           ),
         );
-      await tester.pump();
+        await tester.pump();
         expect(loginWebScreen, findsOneWidget);
-      expect(username, findsOneWidget);
-      expect(loginSubmitButton, findsOneWidget);
+        expect(username, findsOneWidget);
+        expect(loginSubmitButton, findsOneWidget);
         expect(
           ssoLoginButton,
           currentAppMarketVariant.isRegistrationRestricted
