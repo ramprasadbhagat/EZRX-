@@ -65,6 +65,9 @@ query price(
                 Type
                 Rate
                 ApplyBonus
+                Percentage
+                MinAmount
+                ScaleBasis
               }
             }
             Bundles {

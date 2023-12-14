@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/curved_rectangle_widget.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -93,8 +94,51 @@ class _TierItem extends StatelessWidget {
   }) : super(key: key);
 
   final PriceTierItem priceTier;
-  @override
-  Widget build(BuildContext context) {
+
+  Widget _tierItemsIDMarket(BuildContext context) {
+    final saleConfigs = context.read<EligibilityBloc>().state.salesOrgConfigs;
+    var purchaseQuantity = '${context.tr('Purchase quantity')}: 1';
+    if (priceTier.scaleBasis.isValueScale) {
+      purchaseQuantity =
+          '${context.tr('Minimum Amount')}: ${StringUtils.priceComponentDisplayPrice(
+        saleConfigs,
+        priceTier.minAmount.toDouble(),
+        false,
+      )}';
+    } else if (priceTier.scaleBasis.isQuantityScale ||
+        priceTier.minAmount > 0) {
+      purchaseQuantity =
+          '${context.tr('Purchase quantity')}: ${priceTier.minAmount}';
+    }
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '${priceTier.percentage}% ${context.tr('off total price')}',
+          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                color: ZPColors.primary,
+              ),
+        ),
+        PriceComponent(
+          price: priceTier.rate.toStringAsFixed(0),
+          salesOrgConfig: saleConfigs,
+          type: PriceStyle.discountPrice,
+        ),
+        Text(
+          purchaseQuantity,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: ZPColors.black,
+              ),
+        ),
+      ],
+    );
+  }
+
+  Widget _tierItems(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,6 +155,15 @@ class _TierItem extends StatelessWidget {
               ),
         ),
       ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final saleConfigs = context.read<EligibilityBloc>().state.salesOrgConfigs;
+
+    return Builder(
+      builder: saleConfigs.salesOrg.isID ? _tierItemsIDMarket : _tierItems,
     );
   }
 }

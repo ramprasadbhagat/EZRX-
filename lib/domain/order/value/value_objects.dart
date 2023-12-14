@@ -889,3 +889,18 @@ class OrderStepValue extends ValueObject<String> {
         stepTitle: value.getOrElse(() => ''),
       );
 }
+
+class ScaleBasis extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ScaleBasis(String input) {
+    return ScaleBasis._(validateStringNotEmpty(input));
+  }
+
+  bool get isValueScale => value.getOrElse(() => '').toUpperCase() == 'B';
+
+  bool get isQuantityScale => value.getOrElse(() => '').toUpperCase() == 'C';
+
+  const ScaleBasis._(this.value);
+}

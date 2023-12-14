@@ -64,6 +64,9 @@ class MaterialPriceDetailQueryMutation {
                     Quantity
                     Type
                     Rate
+                    Percentage
+                    MinAmount
+                    ScaleBasis
                   }
                 }
               }
@@ -158,6 +161,9 @@ class MaterialPriceDetailQueryMutation {
                Quantity
                Type
                Rate
+               Percentage
+               MinAmount
+               ScaleBasis
              }
            }
            Bundles {

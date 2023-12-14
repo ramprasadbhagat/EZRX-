@@ -8,11 +8,13 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/available_offer_item.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/show_offer_dialog_widget.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AvailableOffer extends StatelessWidget {
   final MaterialNumber materialNumber;
+
   const AvailableOffer({Key? key, required this.materialNumber})
       : super(key: key);
 
@@ -42,6 +44,9 @@ class AvailableOffer extends StatelessWidget {
           isMYExternalSalesRepUser: isMYExternalSalesRepUser,
         );
 
+        final isId =
+            context.read<EligibilityBloc>().state.salesOrgConfigs.salesOrg.isID;
+
         if ((!price.isBonusDealEligible && !price.isTireDiscountEligible) ||
             !displayOffers) {
           return const SizedBox.shrink();
@@ -52,11 +57,22 @@ class AvailableOffer extends StatelessWidget {
           children: [
             _AvailableOfferLabel(
               bonusMaterialList: bonusMaterialList,
-              priceTiersList: price.priceTireItem.reversed.toList(),
+              priceTiersList: price.allPriceTireItem.reversed.toList(),
             ),
+            if (isId)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16)
+                    .copyWith(top: 6, bottom: 8),
+                child: Text(
+                  context.tr("The offers you get will based on eligibility. You'll know which promo you received after you do check out."),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: ZPColors.extraLightGrey4,
+                      ),
+                ),
+              ),
             _AvailableOfferScrollList(
               bonusMaterialList: bonusMaterialList,
-              priceTiersList: price.priceTireItem.reversed.toList(),
+              priceTiersList: price.allPriceTireItem.reversed.toList(),
               showTierPrice: showTierPrice,
             ),
           ],
@@ -108,6 +124,7 @@ class _BonusLevelItem extends StatelessWidget {
   final BonusMaterial bonusMaterial;
   final double left;
   final double right;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

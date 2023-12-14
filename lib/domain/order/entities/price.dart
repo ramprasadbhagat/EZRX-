@@ -13,6 +13,7 @@ part 'price.freezed.dart';
 @freezed
 class Price with _$Price {
   const Price._();
+
   const factory Price({
     required MaterialNumber materialNumber,
     required MaterialCode materialCode,
@@ -64,6 +65,10 @@ class Price with _$Price {
         priceOverride: PriceOverrideValue(0),
         comboDeal: PriceComboDeal.empty(),
       );
+
+  List<PriceTierItem> get allPriceTireItem {
+    return tiers.expand((element) => element.getItems).toList();
+  }
 
   List<PriceTierItem> get priceTireItem =>
       tiers.isNotEmpty ? tiers.first.getItems : <PriceTierItem>[];

@@ -118,6 +118,7 @@ enum PriceStyle {
   bundleListPriceStrikeThrough,
   counterOfferPrice,
   bonusPrice,
+  discountPrice,
   taxPrice,
   totalPrice,
   summaryPrice,
@@ -221,6 +222,11 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.bundlePrice:
       priceTextStyle = Theme.of(context).textTheme.labelLarge;
       break;
+    case PriceStyle.discountPrice:
+      priceTextStyle = Theme.of(context).textTheme.bodySmall!.copyWith(
+            color: ZPColors.extraLightGrey4,
+          );
+      break;
     default:
       break;
   }
@@ -231,12 +237,17 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
   );
 }
 
+//ignore:long-method
 TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
   switch (type) {
     case PriceStyle.commonPrice:
     case PriceStyle.bundleActiveOfferPrice:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             color: ZPColors.primary,
+          );
+    case PriceStyle.discountPrice:
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
+            color: ZPColors.extraLightGrey4,
           );
     case PriceStyle.bundleListPriceStrikeThrough:
     case PriceStyle.materialListPriceStrikeThrough:

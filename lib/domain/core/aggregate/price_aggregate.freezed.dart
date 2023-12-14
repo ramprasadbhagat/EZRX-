@@ -24,8 +24,7 @@ mixin _$PriceAggregate {
       throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   int get discountedMaterialCount => throw _privateConstructorUsedError;
-  bool get exceedQuantity =>
-      throw _privateConstructorUsedError; //required List<MaterialItemBonus> addedBonusList,
+  bool get exceedQuantity => throw _privateConstructorUsedError;
   StockInfo get stockInfo => throw _privateConstructorUsedError;
   TenderContract get tenderContract => throw _privateConstructorUsedError;
   ComboDeal get comboDeal => throw _privateConstructorUsedError;
@@ -424,7 +423,6 @@ class _$_PriceAggregate extends _PriceAggregate {
   @override
   @JsonKey()
   final bool exceedQuantity;
-//required List<MaterialItemBonus> addedBonusList,
   @override
   final StockInfo stockInfo;
   @override
@@ -568,7 +566,7 @@ abstract class _PriceAggregate extends PriceAggregate {
   int get discountedMaterialCount;
   @override
   bool get exceedQuantity;
-  @override //required List<MaterialItemBonus> addedBonusList,
+  @override
   StockInfo get stockInfo;
   @override
   TenderContract get tenderContract;

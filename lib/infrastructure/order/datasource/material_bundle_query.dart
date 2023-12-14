@@ -48,6 +48,9 @@ class MaterialBundleQuery {
               Quantity
               Type
               Rate
+              Percentage
+              MinAmount
+              ScaleBasis
             }
           }
           Bundles {
@@ -117,6 +120,9 @@ class MaterialBundleQuery {
             Quantity
             Type
             Rate
+            Percentage
+            MinAmount
+            ScaleBasis
           }
         }
         Bundles {

@@ -1,7 +1,9 @@
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_tier_dto.freezed.dart';
+
 part 'price_tier_dto.g.dart';
 
 @freezed
@@ -46,6 +48,9 @@ class PriceTierItemDto with _$PriceTierItemDto {
     @JsonKey(name: 'sequence', defaultValue: 0) required int sequence,
     @JsonKey(name: 'quantity', defaultValue: 0) required int quantity,
     @JsonKey(name: 'rate', defaultValue: 0) required double rate,
+    @JsonKey(name: 'percentage', defaultValue: 0) required int percentage,
+    @JsonKey(name: 'minAmount', defaultValue: 0) required int minAmount,
+    @JsonKey(name: 'scaleBasis', defaultValue: '') required String scaleBasis,
   }) = _PriceTierItemDto;
 
   factory PriceTierItemDto.fromDomain(PriceTierItem priceTierItem) {
@@ -55,6 +60,9 @@ class PriceTierItemDto with _$PriceTierItemDto {
       sequence: priceTierItem.sequence,
       quantity: priceTierItem.quantity,
       rate: priceTierItem.rate,
+      percentage: priceTierItem.percentage,
+      minAmount: priceTierItem.minAmount,
+      scaleBasis: priceTierItem.scaleBasis.value.getOrElse(() => ''),
     );
   }
 
@@ -64,6 +72,9 @@ class PriceTierItemDto with _$PriceTierItemDto {
         sequence: sequence,
         quantity: quantity,
         rate: rate,
+        percentage: percentage,
+        minAmount: minAmount,
+        scaleBasis: ScaleBasis(scaleBasis),
       );
 
   factory PriceTierItemDto.fromJson(Map<String, dynamic> json) =>

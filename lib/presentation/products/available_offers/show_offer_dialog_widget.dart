@@ -100,6 +100,7 @@ class _BonusMaterialItem extends StatelessWidget {
   });
 
   final BonusMaterial item;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -123,7 +124,9 @@ class _PriceTierItem extends StatelessWidget {
   const _PriceTierItem({
     required this.item,
   });
+
   final PriceTierItem item;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -150,8 +153,12 @@ class _AvailableOfferHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isId =
+        context.read<EligibilityBloc>().state.salesOrgConfigs.salesOrg.isID;
+
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 24),
       title: Text(
         context.tr('Available offers'),
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
@@ -159,7 +166,11 @@ class _AvailableOfferHeader extends StatelessWidget {
             ),
       ),
       subtitle: Text(
-        '${context.tr('Offers are auto-applied based on quantity purchased')}.',
+        context.tr(
+          isId
+              ? "The offers you get will based on eligibility. You'll know which promo you received after you do check out."
+              : 'Offers are auto-applied based on quantity purchased',
+        ),
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: ZPColors.extraLightGrey4,
             ),

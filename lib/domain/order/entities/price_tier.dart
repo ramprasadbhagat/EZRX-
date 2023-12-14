@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_tier.freezed.dart';
@@ -5,6 +6,7 @@ part 'price_tier.freezed.dart';
 @freezed
 class PriceTier with _$PriceTier {
   const PriceTier._();
+
   const factory PriceTier({
     required String tier,
     required List<PriceTierItem> items,
@@ -28,19 +30,26 @@ class PriceTier with _$PriceTier {
 @freezed
 class PriceTierItem with _$PriceTierItem {
   const PriceTierItem._();
+
   const factory PriceTierItem({
     required String type,
     required bool applyBonus,
     required int sequence,
     required int quantity,
     required double rate,
+    required int percentage,
+    required int minAmount,
+    required ScaleBasis scaleBasis,
   }) = _PriceTierItem;
 
-  factory PriceTierItem.empty() => const PriceTierItem(
+  factory PriceTierItem.empty() => PriceTierItem(
         type: '',
         applyBonus: false,
         sequence: 0,
         quantity: 0,
         rate: 0,
+        percentage: 0,
+        minAmount: 0,
+        scaleBasis: ScaleBasis(''),
       );
 }

@@ -47,6 +47,9 @@ query GetMaterialBundlesForSalesRep(
         Quantity
         Type
         Rate
+        Percentage
+        MinAmount
+        ScaleBasis
       }
     }
     Bundles {

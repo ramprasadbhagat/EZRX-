@@ -62,6 +62,9 @@ class MaterialPriceQueryMutation {
                 Type
                 Rate
                 ApplyBonus
+                Percentage
+                MinAmount
+                ScaleBasis
               }
             }
             Bundles {

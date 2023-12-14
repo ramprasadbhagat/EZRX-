@@ -28,6 +28,9 @@ _$_PriceTierItemDto _$$_PriceTierItemDtoFromJson(Map<String, dynamic> json) =>
       sequence: json['sequence'] as int? ?? 0,
       quantity: json['quantity'] as int? ?? 0,
       rate: (json['rate'] as num?)?.toDouble() ?? 0,
+      percentage: json['percentage'] as int? ?? 0,
+      minAmount: json['minAmount'] as int? ?? 0,
+      scaleBasis: json['scaleBasis'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_PriceTierItemDtoToJson(_$_PriceTierItemDto instance) =>
@@ -37,4 +40,7 @@ Map<String, dynamic> _$$_PriceTierItemDtoToJson(_$_PriceTierItemDto instance) =>
       'sequence': instance.sequence,
       'quantity': instance.quantity,
       'rate': instance.rate,
+      'percentage': instance.percentage,
+      'minAmount': instance.minAmount,
+      'scaleBasis': instance.scaleBasis,
     };

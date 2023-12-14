@@ -854,35 +854,50 @@
                                 "Sequence": 0,
                                 "Quantity": 1,
                                 "Type": "",
-                                "Rate": 46.2
+                                "Rate": 46.2,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 200,
                                 "Type": "",
-                                "Rate": 16
+                                "Rate": 16,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 60,
                                 "Type": "",
-                                "Rate": 21
+                                "Rate": 21,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 20,
                                 "Type": "",
-                                "Rate": 24.75
+                                "Rate": 24.75,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 120,
                                 "Type": "",
-                                "Rate": 18.45
+                                "Rate": 18.45,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             }
                         ]
                     }
@@ -1215,7 +1230,10 @@
                                 "Sequence": 0,
                                 "Quantity": 1,
                                 "Type": "",
-                                "Rate": 73.5
+                                "Rate": 73.5,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             }
                         ]
                     }
@@ -1325,35 +1343,50 @@
                                 "Sequence": 0,
                                 "Quantity": 1,
                                 "Type": "",
-                                "Rate": 46.2
+                                "Rate": 46.2,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 200,
                                 "Type": "",
-                                "Rate": 16
+                                "Rate": 16,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 60,
                                 "Type": "",
-                                "Rate": 21
+                                "Rate": 21,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 20,
                                 "Type": "",
-                                "Rate": 24.75
+                                "Rate": 24.75,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 120,
                                 "Type": "",
-                                "Rate": 18.45
+                                "Rate": 18.45,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             }
                         ]
                     }
@@ -1508,14 +1541,20 @@
                                 "Sequence": 0,
                                 "Quantity": 6,
                                 "Type": "",
-                                "Rate": 15
+                                "Rate": 15,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 1,
                                 "Type": "",
-                                "Rate": 46.2
+                                "Rate": 46.2,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             }
                         ]
                     }
@@ -1809,35 +1848,50 @@
                                 "Sequence": 0,
                                 "Quantity": 1,
                                 "Type": "",
-                                "Rate": 46.2
+                                "Rate": 46.2,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 200,
                                 "Type": "",
-                                "Rate": 16
+                                "Rate": 16,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 60,
                                 "Type": "",
-                                "Rate": 21
+                                "Rate": 21,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 20,
                                 "Type": "",
-                                "Rate": 24.75
+                                "Rate": 24.75,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             },
                             {
                                 "ApplyBonus": true,
                                 "Sequence": 0,
                                 "Quantity": 120,
                                 "Type": "",
-                                "Rate": 18.45
+                                "Rate": 18.45,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             }
                         ]
                     }
@@ -1912,7 +1966,10 @@
                                 "Sequence": 0,
                                 "Quantity": 1,
                                 "Type": "",
-                                "Rate": 7.29
+                                "Rate": 7.29,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             }
                         ]
                     }
@@ -2090,7 +2147,10 @@
                                 "Sequence": 0,
                                 "Quantity": 1,
                                 "Type": "",
-                                "Rate": 73.5
+                                "Rate": 73.5,
+                                "Percentage": 6,
+                                "MinAmount": 12,
+                                "ScaleBasis": "C"
                             }
                         ]
                     }
