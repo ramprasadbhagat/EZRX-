@@ -137,7 +137,7 @@ List<OrderHistoryStep> getOrderHistorySteps({
         icon: Icons.pending_actions,
       ),
     OrderHistoryStep.empty().copyWith(
-      title: 'Order created',
+      title: 'Order Created',
       icon: Icons.inventory_outlined,
     ),
   ];

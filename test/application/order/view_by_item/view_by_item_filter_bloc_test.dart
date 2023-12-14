@@ -22,7 +22,7 @@ void main() {
   );
 
   final statusList = <StatusType>[
-    StatusType('Order created'),
+    StatusType('Order Created'),
     StatusType('Pending'),
     StatusType('Order packed and ready for delivery'),
     StatusType('Picking in-progress'),
@@ -76,7 +76,7 @@ void main() {
         act: (bloc) {
           bloc.add(
             ViewByItemFilterEvent.setOrderStatus(
-              status: StatusType('Order created'),
+              status: StatusType('Order Created'),
               value: true,
             ),
           );
@@ -91,7 +91,7 @@ void main() {
           ViewByItemFilterState.initial().copyWith(
             filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
-                StatusType('Order created'),
+                StatusType('Order Created'),
               ],
             ),
             statusList: statusList,
@@ -99,7 +99,7 @@ void main() {
           ViewByItemFilterState.initial().copyWith(
             filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
-                StatusType('Order created'),
+                StatusType('Order Created'),
                 StatusType('Picking in-progress'),
               ],
             ),

@@ -12,7 +12,7 @@ class ViewByItemFilterState with _$ViewByItemFilterState {
   factory ViewByItemFilterState.initial() => ViewByItemFilterState(
         filter: ViewByItemFilter.empty(),
         statusList: <StatusType>[
-          StatusType('Order created'),
+          StatusType('Order Created'),
           StatusType('Pending'),
           StatusType('Order packed and ready for delivery'),
           StatusType('Picking in-progress'),

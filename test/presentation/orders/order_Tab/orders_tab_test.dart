@@ -287,7 +287,7 @@ void main() {
     testWidgets('show status picker in ID market', (tester) async {
       final statusList = [
         'Order received',
-        'Order created',
+        'Order Created',
         'Picking in progress',
         'Out for delivery',
         'Delivered',
@@ -608,17 +608,13 @@ void main() {
     testWidgets('apply status view by items filter', (tester) async {
       await tester.pumpWidget(testWidget(const ViewByItemFilterSheet()));
       await tester.pumpAndSettle();
-      await tester.tap(
-        find.text(
-          'Order created',
-        ),
-      );
+      await tester.tap(find.text('Order Created'));
       await tester.pump();
 
       verify(
         () => viewByItemFilterBlocMock.add(
           ViewByItemFilterEvent.setOrderStatus(
-            status: StatusType('Order created'),
+            status: StatusType('Order Created'),
             value: true,
           ),
         ),

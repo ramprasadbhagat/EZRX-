@@ -139,7 +139,7 @@ Customer sold to ID,Customer sold to ID,รหัสร้านค้า,客戶
 Date Filter,Date Filter,ตัวกรองวันที่,日期篩選,ရက်စွဲဖြင့်စစ်ထုတ်ရန်,Lọc theo ngày,តម្រងតាមកាលបរិច្ឆេទ,Filter tanggal
 days. Please update your password before it expires,days. Please update your password before it expires,วัน กรุณาเปลี่ยนรหัสผ่านของคุณก่อนวันหมดอายุ,過期，請更新您的密碼,ရက်အတွင်းကုန်ဆုံးပါမည်။ သင်၏စကားဝှက်ကို သက်တမ်း မကုန်မှီ ကျေးဇူးပြု၍ မွမ်းမံပါ,ngày. vui lòng cập nhật mật khẩu trước khi hết hạn.,រាល់ថ្ងៃ សូមធ្វើបច្ចុប្បន្នភាព (ផ្លាស់ប្តូរ)​លេខសម្ងាត់របស់អ្នកមុនពេលវាផុតកំណត់,hari -hari Harap perbarui kata sandi Anda sebelum kedaluwarsa
 Deals :,Deals :,Deals :,搭贈/價格條件 :,Deals :,Chính sách bán hàng :,"ការផ្តល់ជូនពិសេស : ",Penawaran:
-Delivered,Delivered,การจัดส่งสำเร็จ,已配達,ပေးပို့ပြီးသည်,Đã giao hàng,បានចែកចាយ,Terkirim
+Delivered,Delivered,การจัดส่งสำเร็จ,已配達,ပေးပို့ပြီးသည်,Đã giao hàng,បានចែកចាយ,Selesai
 Delivered - partial rejection,Delivered - partial rejection,จัดส่งแล้ว - ปฏิเสธบางส่วน,取消-部分拒絕,ပေးပို့သည် - တစ်စိတ်တစ်ပိုင်း ငြင်းပယ်ခြင်း,Đã giao - một phần,បានដឹកជញ្ចូន-ការច្រានចោលជាផ្នែក,Disampaikan - penolakan sebagian
 Delivered - rejected upon delivery,Delivered - rejected upon delivery,จัดส่งแล้ว - ปฏิเสธการจัดส่ง,取消-拒收,ပေးပို့သည် - ပေးပို့ချိန်တွင် ငြင်းပယ်ခြင်း,Đã giao - trả hàng tại chỗ,បានដឹកជញ្ចូន-បានច្រានចោលនៅពេលដឹកជញ្ជូន,Dikirim - ditolak saat pengiriman
 Discount,Discount,ส่วนลด,折扣,လျှော့စျေး,Chiết khấu,បញ្ចុះតម្,Diskon
@@ -249,7 +249,6 @@ or more,or more,หรือมากกว่า,或更多,သို့မဟ�
 Order,Order,เลขใบสั่งซื้อ,訂單,ကုန်ပစ္စည်း အမှာစာ,Đơn hàng,ការបញ្ជាទិញ,Pesanan
 Order cannot be re-ordered! Please try later.,Order cannot be re-ordered! Please try later.,Order cannot be re-ordered! Please try later.,不可使用 '重新訂購' ， 請稍後再試。,Order cannot be re-ordered! Please try later.,Order cannot be re-ordered! Please try later.,ការបញ្ជាទិញមិនអាចបញ្ជាទិញឡើងវិញបានទេ! សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ។,Pesanan tidak dapat dipesan ulang! Silakan coba lagi nanti.
 Order Confirmation,Order Confirmation,Order Confirmation,訂單確認,Order Confirmation,Xác nhận đơn hàng,ការបញ្ជាក់ពីការបញ្ជាទិញ,Konfirmasi pesanan
-Order created,Order created,รับคำสั่งซื้อ,新增訂單,အမှာစာဖန်တီးခဲ့သည်,Đơn đặt hàng đã được tạo,ការបញ្ជារទិញត្រូវបានបង្កើត,Pesanan dibuat
 Order Creating,Order Creating,Order Creating,訂單建立中，請稍候查詢,Order Creating,Order Creating,ការបង្កើតការបញ្ជាទិញ,Pesanan pembuatan
 Order Date,Order Date,วันที่สั่งซื้อ,訂單日期,ကုန်ပစ္စည်း အမှာစာ တင်သည့် ရက်စွဲ,Ngày đơn hàng,កាលបរិច្ឆេទបញ្ជាទិញ,Tanggal pemesanan
 Order Details,Order Details,รายละเอียดคำสั่งซื้อ,訂單詳細內容,အမှာစာအသေးစိတ်,Chi tiết đơn hàng,ព័ត៌មានលម្អិតនៃការបញ្ជាទិញ,Detail pesanan
@@ -266,7 +265,7 @@ Order Type,Order Type,ประเภทคำสั่งซื้อ,訂單類
 Order Value:,Order Value:,ยอดสั่งซื้อ,訂單金額:,ကုန်ပစ္စည်း အမှာစာ တန်ဖိုး,Giá trị đơn hàng:,តម្លៃនៃការបញ្ជាទិញ:,Nilai pesanan:
 Ordered By,Ordered By,Ordered By,訂購人,Ordered By,Phụ trách đặt hàng: đặt hàng bởi,បញ្ជាទិញដោយ,Dipesan oleh
 Orders,Orders,สั่งซื้อสินค้า,訂單,အမှာစာများ,Đơn đặt hàng,ការកុំម្ម៉ង់,Pesanan
-Out for delivery,Out for delivery,สินค้าถูกส่งออกจากคลังสินค้า,配送中,ပေးပို့ရန်ထွက်လာသည်,Đơn hàng đang đi giao,ចេញ​សំរាប់ចែកចាយ,Pesanan sedang dalam pengiriman
+Out for delivery,Out for delivery,สินค้าถูกส่งออกจากคลังสินค้า,配送中,ပေးပို့ရန်ထွက်လာသည်,Đơn hàng đang đi giao,ចេញ​សំរាប់ចែកចាយ,Dikirim
 Out for redelivery,Out for redelivery,อยู่ระหว่างขนส่งอีกครั้ง,配送中,ပြန်လည်ပေးပို့ခြင်းအတွက် ထွက်လာပါပြီ။,Giao lại,ដឹកចេញសារឡើងវិញហើយ,Keluar untuk pengiriman kembali
 out of,out of,out of,第,ထဲက,Hết,អស់ពី,dari
 Outstanding,Outstanding,ค้างชำระ,Outstanding,Outstanding,Chưa thanh toán,Outstanding,Luar biasa
@@ -286,7 +285,7 @@ Payments in Progress,Payments in Progress,การชําระเงิน�
 Payments Overview,Payments Overview,ภาพรวมการชําระเงิน,Payments Overview,Payments Overview,Tổng quan về Thanh toán,ស្ថានភាពកុំម្ម៉ង់,Ikhtisar Pembayaran
 Pending,Pending,รอดำเนินการ,條件確認中,รอดำเนินการ,Đang chờ,កំពុងរង់ចាំ,Tertunda
 Pending Actions,Pending Actions,Pending Actions,Pending Actions,Pending Actions,Pending Actions,សកម្មភាពកំពុងរង់ចាំ,Tindakan yang tertunda
-Pending release,Pending release,รอดำเนินการจัดเตรียมสินค้า,條件確認中,ပေးပို့မှုကို ဆိုင်းငံ့ထားသည်,Đơn hàng đang chờ xử lý,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ,Pesanan sedang dalam proses rilis
+Pending release,Pending release,รอดำเนินการจัดเตรียมสินค้า,條件確認中,ပေးပို့မှုကို ဆိုင်းငံ့ထားသည်,Đơn hàng đang chờ xử lý,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ,Diproses
 Pending release - credit check,Pending release - credit check,รอการดำเนินการ - การตรวจสอบเครดิต,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု - အကြွေးစစ်ဆေးခြင်း,Đang chờ - kiểm tra công nợ,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ-,Rilis Tertunda - Pemeriksaan Kredit
 Pending release - license issue,Pending release - license issue,รอการดำเนินการ - ปัญหาใบอนุญาต,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု - လိုင်စင်ပြဿနာ,Đang chờ - giấy phép,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ-,Rilis Tertunda - Masalah Lisensi
 Pending release - month end closing,Pending release - month end closing,รอการดำเนินการ - ปิดบัญชีสิ้นเดือน,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု - လကုန်ပိတ်ခြင်း,Đang chờ - đóng sổ cuối tháng,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ-,Rilis yang tertunda - Penutupan akhir bulan
@@ -294,7 +293,7 @@ Pending release - seller approval required,Pending release - seller approval req
 Pending release - on backorder,Pending release - on backorder,รอการดำเนินการ - ติด backorder,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု - ပြန်အမှာစာ,Đang chờ - chưa có hàng,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ- ការបញ្ជាទិញត្រលប់មកវិញ,Rilis yang tertunda - di backorder
 Phone,Phone,เบอร์โทร,聯繫電話,ဖုန်း,Điện thoại,ទូរស័ព្ទ,Telepon
 Picked Quantity:,Picked Quantity:,Picked Quantity:,出貨數量:,Picked Quantity:,Số lượng áp dụng:,ចំនួនដែលបានរៀបហើយ៖,Kuantitas yang dipetik:
-Picking in progress,Picking in progress,สินค้าได้รับการบรรจุ,撿貨作業,ကောက်ယူမှုကို ဆောင်ရွက်နေဆဲဖြစ်သည်,Đang nhặt hàng,ការរៀបចំកំពុងដំនើរការ,Pesanan sedang dalam proses dikemas
+Picking in progress,Picking in progress,สินค้าได้รับการบรรจุ,撿貨作業,ကောက်ယူမှုကို ဆောင်ရွက်နေဆဲဖြစ်သည်,Đang nhặt hàng,ការរៀបចំកំពុងដំនើរការ,Diterima
 Please add some item in your cart first,Please add some item in your cart first,กรุณาเพิ่มสินค้าลงตะกร้าก่อน,請增加產品至購物車,ကျေးဇူးပြု၍ သင်၏စျေးဝယ်လှည်းတွင် ပထမဆုံး ပစ္စည်းအချို့ထည့်ပါ,Vui lòng thêm một số sản phẩm vào giỏ hàng trước,សូមបន្ថែមផលិតផលខ្លះទៅក្នុងរទេះផលិតផលរបស់អ្នកជាមុនសិន,Harap tambahkan beberapa item di keranjang Anda terlebih dahulu
 Please do not reply.,Please do not reply.,กรุณาอย่าตอบกลับ,請勿直接回信,ကျေးဇူးပြု၍ အီးမေးလ် မပြန်ပါနှင့်,Vui lòng không phản hồi,សូមកុំឆ្លើយតប។,Tolong jangan membalas.
 Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Số lượng đặt hàng không vượt quá số lượng còn lại chưa mua trong hợp đồng thầu,Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Harap pastikan bahwa kuantitas pesanan kurang dari atau sama dengan sisa kontrak.
@@ -495,7 +494,7 @@ Total Price,Total Price,ราคารวม,實售價合計,စုစုပေ
 Total Tax,Total Tax,Total Tax,稅(已加計至產品),Total Tax,Thuế,Total Tax,Total pajak
 Picking in-progress,Picking in-progress,กำลังจัดเตรียมสินค้า,出貨準備中,ကောက်ယူနေဆဲဖြစ်သည်။,Đang chọn xử lý,ការរៀបចំកំពុងដំនើរការ,Memilih dalam proses
 Failed,Failed,มีข้อผิดพลาด,未成功送出訂單,ส่งไม่สำเร็จ,Thất bại,បរាជ័យ,Gagal
-Order Created,Order Created,รับคำสั่งซื้อแล้ว,訂單成立,အမှာစာ ဖန်တီးသည်,Đã được tạo,ការបញ្ជារទិញត្រូវបានបង្កើត,Pesanan dibuat
+Order Created,Order Created,รับคำสั่งซื้อแล้ว,訂單成立,အမှာစာ ဖန်တီးသည်,Đã được tạo,ការបញ្ជារទិញត្រូវបានបង្កើត,Dibuat
 Favourites,Favourites,รายการโปรด,我的最愛,အကြိုက်ဆုံးများ,Yêu thích,ចំណូលចិត្ត,Favorit
 Invoices,Invoices,ใบแจ้งหนี้,發票資訊,Invoices,Thông tin hóa đơn,Invoices,Faktur
 Subtotal,Subtotal,มูลค่ารวม (ไม่รวมภาษีมูลค่าเพิ่ม),小計 (含稅),စာရင်းငယ်,Tổng tiền trước thuế,តំលៃសរុប៖,Subtotal
