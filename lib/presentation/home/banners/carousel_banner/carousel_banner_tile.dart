@@ -69,8 +69,6 @@ class CarouselBannerTile extends StatelessWidget {
         errorWidget: banner.url.isEmpty
             ? LoadingShimmer.logo()
             : const Icon(Icons.error),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.width * 0.5,
       ),
     );
   }

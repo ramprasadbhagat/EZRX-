@@ -78,7 +78,9 @@ class _CarouselBannerState extends State<CarouselBanner> {
             if (state.banner.isEmpty) {
               return const SizedBox.shrink();
             }
-            final bannerHeight = MediaQuery.of(context).size.width * 0.5;
+            // eZReach banner for mobile
+            // W 1062 * H 710
+            final bannerHeight = MediaQuery.of(context).size.width * 710 / 1062;
 
             return Stack(
               children: [
