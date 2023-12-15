@@ -183,14 +183,17 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     bool isIDMarket,
   ) {
     const displayPriceNotAvailable = 'Price Not Available';
-    if (hidePrice) {
-      return displayPriceNotAvailable;
-    }
+
+    if (type.isMaterialTypeBonus) return isIDMarket ? '0' : 'FREE';
 
     if (isMYExternalSalesRep && isPnGMaterial && !invoiceNumber.isValid()) {
       return displayPriceNotAvailable;
     }
-    if (type.isMaterialTypeBonus) return isIDMarket ? '0' : 'FREE';
+
+    if (hidePrice) {
+      return displayPriceNotAvailable;
+    }
+
     if (price == 0) return displayPriceNotAvailable;
 
     return price.toString();

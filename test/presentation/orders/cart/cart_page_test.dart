@@ -1437,7 +1437,7 @@ void main() {
           final priceMessageWidgetFinder =
               find.byKey(WidgetKeys.cartPagePriceMessageWidget);
           final priceMessageFinder = find.text(
-            'Can’t order material without price. Please remove to continue to check out.'
+            'Price is not available for at least one item. Grand total reflected may not be accurate.'
                 .tr(),
           );
           expect(priceMessageWidgetFinder, findsOneWidget);
@@ -1494,7 +1494,7 @@ void main() {
           final priceMessageWidgetFinder =
               find.byKey(WidgetKeys.cartPagePriceMessageWidget);
           final priceMessageFinder = find.text(
-            'Can’t order material without price. Please remove to continue to check out.'
+            'Price is not available for at least one item. Grand total reflected may not be accurate.'
                 .tr(),
           );
           expect(priceMessageWidgetFinder, findsOneWidget);
@@ -1547,7 +1547,7 @@ void main() {
           final priceMessageWidgetFinder =
               find.byKey(WidgetKeys.cartPagePriceMessageWidget);
           final priceMessageFinder = find.text(
-            'Can’t order material without price. Please remove to continue to check out.'
+            'Price is not available for at least one item. Grand total reflected may not be accurate.'
                 .tr(),
           );
           expect(priceMessageWidgetFinder, findsOneWidget);
@@ -2378,7 +2378,7 @@ void main() {
             find.byKey(WidgetKeys.cartPagePriceMessageWidget);
         expect(cartPagePriceMessageWidget, findsOneWidget);
         final cartPagePriceMessage = find.text(
-          'Can’t order material without price. Please remove to continue to check out.',
+          'Price is not available for at least one item. Grand total reflected may not be accurate.',
         );
         expect(cartPagePriceMessage, findsOneWidget);
       });
@@ -2724,7 +2724,7 @@ void main() {
           expect(customerBlockedBanner, findsOneWidget);
         },
       );
-            testWidgets(
+      testWidgets(
           'List price strike through price visible, if final price is less than list price',
           (tester) async {
         final finalPrice = MaterialPrice(80);
@@ -2814,6 +2814,85 @@ void main() {
           ),
           findsNothing,
         );
+      });
+
+      testWidgets(
+          'Test MOV message not displayed when cart has PNG materials with eligible quantity',
+          (tester) async {
+        final pnGCartItem = PriceAggregate.empty().copyWith(
+          quantity: 2,
+          price: Price.empty().copyWith(
+            finalPrice: MaterialPrice(364.80),
+            lastPrice: MaterialPrice(364.80),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
+            principalData: PrincipalData.empty().copyWith(
+              principalName: PrincipalName('Procter And Gamble'),
+              principalCode: PrincipalCode('000000105307'),
+            ),
+            hidePrice: true,
+          ),
+        );
+        final cartStateInitial = CartState.initial().copyWith(
+          cartProducts: [pnGCartItem],
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              currency: Currency('MYR'),
+              minOrderAmount: '100',
+            ),
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('external_sales_rep'),
+              ),
+            ),
+          ),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartStateInitial,
+        );
+
+        final expectedStates = [
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [pnGCartItem],
+            grandTotal: cartStateInitial.grandTotal,
+            subTotal: cartStateInitial.subTotal,
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              currency: Currency('MYR'),
+              minOrderAmount: '100',
+            ),
+          ),
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [pnGCartItem],
+            grandTotal: cartStateInitial.grandTotal,
+            subTotal: cartStateInitial.subTotal,
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              currency: Currency('MYR'),
+              minOrderAmount: '100',
+            ),
+            showErrorMessage: true,
+          ),
+        ];
+
+        whenListen(
+          orderEligibilityBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final movWarning = find.text(
+          'Please ensure that the order value satisfies the minimum order value of MYR 100.00',
+        );
+
+        expect(movWarning, findsNothing);
       });
     },
   );

@@ -177,14 +177,14 @@ class _CartPageState extends State<CartPage> {
             context.read<OrderEligibilityBloc>().add(
                   OrderEligibilityEvent.update(
                     cartItems: state.cartProducts,
-                    grandTotal: state.grandTotalSubmit,
+                    grandTotal: state.grandTotal,
                     orderType: context
                         .read<EligibilityBloc>()
                         .state
                         .selectedOrderType
                         .documentType
                         .getOrDefaultValue(''),
-                    subTotal: state.subTotalSubmit,
+                    subTotal: state.subTotal,
                   ),
                 );
 

@@ -264,8 +264,7 @@ class CartState with _$CartState {
       .where(
         (item) =>
             !item.materialInfo.type.typeBundle &&
-            !item.materialInfo.type.typeCombo &&
-            !item.materialInfo.hidePrice,
+            !item.materialInfo.type.typeCombo,
       )
       .fold<double>(
         0,
@@ -299,8 +298,8 @@ class CartState with _$CartState {
         0,
         (sum, item) => sum + item.finalPriceTotal,
       );
-
-  double get subTotalSubmit =>
+// This getter is used for MOV check
+  double get subTotal =>
       totalBundlesPrice + totalMaterialsPrice + totalComboPrice;
 
   PriceAggregate updatedCartProduct(MaterialNumber matNumber) =>
@@ -319,7 +318,8 @@ class CartState with _$CartState {
 
   double get totalComboPriceWithTax => totalComboPrice + taxCombo;
 
-  double get grandTotalSubmit =>
+//This getter is used for MOV check
+  double get grandTotal =>
       totalBundlePriceWithTax +
       totalMaterialsPriceWithTax +
       totalComboPriceWithTax;
@@ -331,13 +331,16 @@ class CartState with _$CartState {
             : previousValue + element.bundle.materials.length,
       );
 
-  //Subtotal and total display with hidePrice for display on
+  //This getter is used for displaying grandTotal value in
+  //cart, checkout page and for Order Submission
   double get grandTotalHidePriceMaterial => _isID
       ? aplSimulatorOrder.grandTotal
       : totalBundlePriceWithTax +
           totalComboPriceWithTax +
           totalMaterialsPriceHidePriceWithTax;
 
+  //This getter is used for displaying subtotal value in
+  // cart, checkout page and for Order Submission
   double get subTotalHidePriceMaterial =>
       totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice;
 
