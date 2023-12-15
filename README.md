@@ -17,11 +17,12 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 - [GraphQl](https://marketplace.visualstudio.com/items?itemName=mquandalle.graphql)
 
 ### Setup
-1. Install [FVM](https://fvm.app/docs/getting_started/installation)
-2. Git clone project
-3. Open project with Vscode, check ".fvm/fvm_config.json" file, check the "flutterSdkVersion" inside and use ```fvm use <flutterSdkVersion_you_saw>```
-4. use command `git config --global pull.rebase true` to make all the git pull with rebase action
-5. Restart vscode
+1. Install [lefthook](https://github.com/evilmartians/lefthook)  `brew install lefthook` 
+2. Install [FVM](https://fvm.app/docs/getting_started/installation)
+3. Git clone project
+4. Open project with Vscode, check ".fvm/fvm_config.json" file, check the "flutterSdkVersion" inside and use ```fvm use <flutterSdkVersion_you_saw>```
+5. use command `git config --global pull.rebase true` to make all the git pull with rebase action
+6. Restart vscode
 
 ### Auto build json_serializable, freezed, auto_route_generator, hive_generator 
 ```fvm flutter pub run build_runner watch --delete-conflicting-outputs```

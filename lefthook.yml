@@ -1,0 +1,78 @@
+#   Refer for explanation to following link:
+#   https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+pre-commit:
+  parallel: true
+  skip:
+    - ref: main
+    - ref: v3
+  commands:
+    pretty:
+      glob: "*.dart"
+      exclude: '(^|/)(freezed|g|gr)\.dart$'
+      run: fvm flutter format {staged_files} && git add {staged_files}
+    validate:
+      run: fvm flutter pub run ./git_hooks/branch_name_check.dart 
+
+pre-push:
+  parallel: true
+  commands:
+    flutter-analyze:
+      run: fvm flutter analyze --fatal-infos --fatal-warnings
+    dcm-analyze:
+      run: fvm flutter pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings --disable-sunset-warning
+    check-unnecessary-nullable:
+      run: fvm flutter pub run dart_code_metrics:metrics check-unnecessary-nullable lib --fatal-found --disable-sunset-warning
+    check-unused-code:
+      run: fvm flutter pub run dart_code_metrics:metrics check-unused-code lib --fatal-unused --disable-sunset-warning
+    check-unused-files:
+      run: fvm flutter pub run dart_code_metrics:metrics check-unused-files lib --fatal-unused --disable-sunset-warning
+    # test-application:
+    #   run: fvm flutter test test/application
+    # test-domain:
+    #   run: fvm flutter test test/domain
+    # test-infrastructure-account:
+    #   run: fvm flutter test test/infrastructure/account
+    # test-infrastructure-announcement:
+    #   run: fvm flutter test test/infrastructure/announcement
+    # test-infrastructure-auptc:
+    #   run: fvm flutter test test/infrastructure/aup_tc
+    # test-infrastructure-auth:
+    #   run: fvm flutter test test/infrastructure/auth
+    # test-infrastructure-banner:
+    #   run: fvm flutter test test/infrastructure/banner
+    # test-infrastructure-payments:
+    #   run: fvm flutter test test/infrastructure/payments
+    # test-infrastructure-order:
+    #   run: fvm flutter test test/infrastructure/order
+    # test-infrastructure-returns:
+    #   run: fvm flutter test test/infrastructure/returns
+    # test-infrastructure-chatbot:
+    #   run: fvm flutter test test/infrastructure/chatbot
+    # test-presentation-account:
+    #   run: fvm flutter test test/presentation/account
+    # test-presentation-announcement:
+    #   run: fvm flutter test test/presentation/announcement
+    # test-presentation-auptctest:
+    #   run: fvm flutter test test/presentation/aup_tc_test
+    # test-presentation-auth:
+    #   run: fvm flutter test test/presentation/auth
+    # test-presentation-home:
+    #   run: fvm flutter test test/presentation/home
+    # test-presentation-more:
+    #   run: fvm flutter test test/presentation/more
+    # test-presentation-orderhistory:
+    #   run: fvm flutter test test/presentation/order_history
+    # test-presentation-orders:
+    #   run: fvm flutter test test/presentation/orders
+    # test-presentation-returns:
+    #   run: fvm flutter test test/presentation/returns
+    # test-presentation-payments:
+    #   run: fvm flutter test test/presentation/payments
+    # test-presentation-products:
+    #   run: fvm flutter test test/presentation/products
+    # test-presentation-notification:
+    #   run: fvm flutter test test/presentation/notification
+    # test-presentation-faq:
+    #   run: fvm flutter test test/presentation/faq
+    # test-presentation-core:
+    #   run: fvm flutter test test/presentation/core

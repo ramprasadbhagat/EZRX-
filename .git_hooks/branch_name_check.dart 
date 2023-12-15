@@ -1,0 +1,21 @@
+import 'dart:io';
+
+dynamic main() {
+  final rootDir = Directory.current;
+  final commitFile = File(rootDir.path + "/.git/HEAD");
+  final commitBranchName = commitFile.readAsStringSync();
+
+  final regExp = RegExp(
+    r'(ref|feat|fix|tdd|hotfix|chore)\/(EZRX|RXUAT)-[0-9a-zA-Z._-]+$',
+  );
+
+  final valid = regExp.hasMatch(commitBranchName);
+  if (!valid) {
+    print('''👎 Auron is not happy with your branch name. 
+    Branch names in this project must adhere to this contract: $valid_branch_regex. 
+    Your commit will be rejected. 
+    You should rename your branch to a valid name and try again. 
+    Please check https://zuelligpharma.atlassian.net/wiki/spaces/EZRX/pages/133890113/Branch+Naming+Conventions for more details''');
+    exitCode = 1;
+  } 
+}
