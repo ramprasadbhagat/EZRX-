@@ -14,7 +14,7 @@ query getClevertapNotifications($page: Int!, $perPage: Int!) {
       orderNumber
       returnRequestNumber
       paymentNumber
-      saleDocument
+      paymentBatchAdditionalInfo
      
     }
     pagination {

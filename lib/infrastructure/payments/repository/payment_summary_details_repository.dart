@@ -125,7 +125,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
         salesOrg: salesOrgCode,
         paymentID: details.paymentID.getOrCrash(),
         paymentBatchAdditionalInfo:
-            details.paymentBatchAdditionalInfo.getOrCrash(),
+            details.paymentBatchAdditionalInfo.getOrDefaultValue(''),
         accountingDocExternalReference: details.accountingDocExternalReference,
       );
 
@@ -160,7 +160,8 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
         paymentBatchAdditionalInfo:
             paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
         paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
-        transactionCurrency: paymentSummaryDetails.transactionCurrency.getOrDefaultValue(''),
+        transactionCurrency:
+            paymentSummaryDetails.transactionCurrency.getOrDefaultValue(''),
         valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
         zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
       );

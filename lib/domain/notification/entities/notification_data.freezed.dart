@@ -24,8 +24,9 @@ mixin _$NotificationData {
   bool get isRead => throw _privateConstructorUsedError;
   ReturnRequestsId get returnRequestId => throw _privateConstructorUsedError;
   OrderNumber get orderNumber => throw _privateConstructorUsedError;
-  StringValue get saleDocument => throw _privateConstructorUsedError;
   StringValue get paymentNumber => throw _privateConstructorUsedError;
+  StringValue get paymentBatchAdditionalInfo =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NotificationDataCopyWith<NotificationData> get copyWith =>
@@ -47,8 +48,8 @@ abstract class $NotificationDataCopyWith<$Res> {
       bool isRead,
       ReturnRequestsId returnRequestId,
       OrderNumber orderNumber,
-      StringValue saleDocument,
-      StringValue paymentNumber});
+      StringValue paymentNumber,
+      StringValue paymentBatchAdditionalInfo});
 
   $ReturnRequestsIdCopyWith<$Res> get returnRequestId;
 }
@@ -74,8 +75,8 @@ class _$NotificationDataCopyWithImpl<$Res, $Val extends NotificationData>
     Object? isRead = null,
     Object? returnRequestId = null,
     Object? orderNumber = null,
-    Object? saleDocument = null,
     Object? paymentNumber = null,
+    Object? paymentBatchAdditionalInfo = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -110,13 +111,13 @@ class _$NotificationDataCopyWithImpl<$Res, $Val extends NotificationData>
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
               as OrderNumber,
-      saleDocument: null == saleDocument
-          ? _value.saleDocument
-          : saleDocument // ignore: cast_nullable_to_non_nullable
-              as StringValue,
       paymentNumber: null == paymentNumber
           ? _value.paymentNumber
           : paymentNumber // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+      paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
+          ? _value.paymentBatchAdditionalInfo
+          : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
               as StringValue,
     ) as $Val);
   }
@@ -147,8 +148,8 @@ abstract class _$$_NotificationDataCopyWith<$Res>
       bool isRead,
       ReturnRequestsId returnRequestId,
       OrderNumber orderNumber,
-      StringValue saleDocument,
-      StringValue paymentNumber});
+      StringValue paymentNumber,
+      StringValue paymentBatchAdditionalInfo});
 
   @override
   $ReturnRequestsIdCopyWith<$Res> get returnRequestId;
@@ -173,8 +174,8 @@ class __$$_NotificationDataCopyWithImpl<$Res>
     Object? isRead = null,
     Object? returnRequestId = null,
     Object? orderNumber = null,
-    Object? saleDocument = null,
     Object? paymentNumber = null,
+    Object? paymentBatchAdditionalInfo = null,
   }) {
     return _then(_$_NotificationData(
       id: null == id
@@ -209,13 +210,13 @@ class __$$_NotificationDataCopyWithImpl<$Res>
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
               as OrderNumber,
-      saleDocument: null == saleDocument
-          ? _value.saleDocument
-          : saleDocument // ignore: cast_nullable_to_non_nullable
-              as StringValue,
       paymentNumber: null == paymentNumber
           ? _value.paymentNumber
           : paymentNumber // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+      paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
+          ? _value.paymentBatchAdditionalInfo
+          : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
               as StringValue,
     ));
   }
@@ -233,8 +234,8 @@ class _$_NotificationData extends _NotificationData {
       required this.isRead,
       required this.returnRequestId,
       required this.orderNumber,
-      required this.saleDocument,
-      required this.paymentNumber})
+      required this.paymentNumber,
+      required this.paymentBatchAdditionalInfo})
       : super._();
 
   @override
@@ -254,13 +255,13 @@ class _$_NotificationData extends _NotificationData {
   @override
   final OrderNumber orderNumber;
   @override
-  final StringValue saleDocument;
-  @override
   final StringValue paymentNumber;
+  @override
+  final StringValue paymentBatchAdditionalInfo;
 
   @override
   String toString() {
-    return 'NotificationData(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, saleDocument: $saleDocument, paymentNumber: $paymentNumber)';
+    return 'NotificationData(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, paymentNumber: $paymentNumber, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo)';
   }
 
   @override
@@ -280,10 +281,12 @@ class _$_NotificationData extends _NotificationData {
                 other.returnRequestId == returnRequestId) &&
             (identical(other.orderNumber, orderNumber) ||
                 other.orderNumber == orderNumber) &&
-            (identical(other.saleDocument, saleDocument) ||
-                other.saleDocument == saleDocument) &&
             (identical(other.paymentNumber, paymentNumber) ||
-                other.paymentNumber == paymentNumber));
+                other.paymentNumber == paymentNumber) &&
+            (identical(other.paymentBatchAdditionalInfo,
+                    paymentBatchAdditionalInfo) ||
+                other.paymentBatchAdditionalInfo ==
+                    paymentBatchAdditionalInfo));
   }
 
   @override
@@ -297,8 +300,8 @@ class _$_NotificationData extends _NotificationData {
       isRead,
       returnRequestId,
       orderNumber,
-      saleDocument,
-      paymentNumber);
+      paymentNumber,
+      paymentBatchAdditionalInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -309,16 +312,17 @@ class _$_NotificationData extends _NotificationData {
 
 abstract class _NotificationData extends NotificationData {
   factory _NotificationData(
-      {required final int id,
-      required final NotificationType type,
-      required final NotificationTitle title,
-      required final String description,
-      required final DateTimeStringValue createdAt,
-      required final bool isRead,
-      required final ReturnRequestsId returnRequestId,
-      required final OrderNumber orderNumber,
-      required final StringValue saleDocument,
-      required final StringValue paymentNumber}) = _$_NotificationData;
+          {required final int id,
+          required final NotificationType type,
+          required final NotificationTitle title,
+          required final String description,
+          required final DateTimeStringValue createdAt,
+          required final bool isRead,
+          required final ReturnRequestsId returnRequestId,
+          required final OrderNumber orderNumber,
+          required final StringValue paymentNumber,
+          required final StringValue paymentBatchAdditionalInfo}) =
+      _$_NotificationData;
   _NotificationData._() : super._();
 
   @override
@@ -338,9 +342,9 @@ abstract class _NotificationData extends NotificationData {
   @override
   OrderNumber get orderNumber;
   @override
-  StringValue get saleDocument;
-  @override
   StringValue get paymentNumber;
+  @override
+  StringValue get paymentBatchAdditionalInfo;
   @override
   @JsonKey(ignore: true)
   _$$_NotificationDataCopyWith<_$_NotificationData> get copyWith =>

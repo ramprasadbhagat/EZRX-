@@ -16,7 +16,7 @@
                     "orderNumber": "79812EZRX123",
                     "returnRequestNumber": "EZRE-200123001136",
                     "paymentNumber": "",
-                    "saleDocument": ""
+                    "paymentBatchAdditionalInfo": ""
                 },
                 {
                     "id": 13075,
@@ -31,7 +31,7 @@
                     "orderNumber": "",
                     "returnRequestNumber": "EZRE-200123001121",
                     "paymentNumber": "",
-                    "saleDocument": ""
+                    "paymentBatchAdditionalInfo": ""
                 },
                 {
                     "id": 12990,
@@ -46,7 +46,7 @@
                     "orderNumber": "",
                     "returnRequestNumber": "EZRE-200123001120",
                     "paymentNumber": "",
-                    "saleDocument": ""
+                    "paymentBatchAdditionalInfo": ""
                 },
                 {
                     "id": 12905,
@@ -61,7 +61,7 @@
                     "orderNumber": "",
                     "returnRequestNumber": "EZRE-200123001119",
                     "paymentNumber": "",
-                    "saleDocument": ""
+                    "paymentBatchAdditionalInfo": ""
                 },
                 {
                     "id": 12820,
@@ -76,7 +76,7 @@
                     "orderNumber": "",
                     "returnRequestNumber": "EZRE-200123001118",
                     "paymentNumber": "",
-                    "saleDocument": ""
+                    "paymentBatchAdditionalInfo": ""
                 },
                 {
                     "id": 183106,
@@ -84,14 +84,14 @@
                     "type": "PaymentAdviceCreated",
                     "title": "Payment Advice created",
                     "imageUrl": "",
-                    "description": "Payment advice #09EZ230001277501 was created.",
+                    "description": "Payment advice #09EZ230001606901 was created.",
                     "isRead": false,
                     "createdAt": "2023-10-30 07:39:26",
                     "updatedAt": "2023-10-30 07:39:26",
                     "orderNumber": "",
                     "returnRequestNumber": "",
-                    "paymentNumber": "09EZ230001277501",
-                    "saleDocument": "asdbv"
+                    "paymentNumber": "09EZ230001606901",
+                    "paymentBatchAdditionalInfo": "23C7BB7B1C1F496"
                 }
             ],
             "pagination": {

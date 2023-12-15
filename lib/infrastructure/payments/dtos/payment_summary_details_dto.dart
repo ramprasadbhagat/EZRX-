@@ -149,8 +149,12 @@ Map<String, dynamic> _filterByToJson(
   String zzAdvice,
   String paymentBatchAdditionalInfo,
 ) {
-  final field = zzAdvice.isNotEmpty ? 'zzAdvice' : 'paymentBatchAdditionalInfo';
-  final value = zzAdvice.isNotEmpty ? zzAdvice : paymentBatchAdditionalInfo;
+  final field = paymentBatchAdditionalInfo.isNotEmpty
+      ? 'paymentBatchAdditionalInfo'
+      : 'zzAdvice';
+  final value = paymentBatchAdditionalInfo.isNotEmpty
+      ? paymentBatchAdditionalInfo
+      : zzAdvice;
 
   return {
     'field': field,

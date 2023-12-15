@@ -17,8 +17,7 @@ class NotificationQuery {
       orderNumber
       returnRequestNumber
       paymentNumber
-      saleDocument
-      
+      paymentBatchAdditionalInfo
     }
     pagination {
       totalPage

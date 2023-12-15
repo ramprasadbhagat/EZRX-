@@ -77,8 +77,7 @@ class PaymentSummaryDetailsBloc
                   isDetailFetching: false,
                 ),
               );
-              if (details.paymentBatchAdditionalInfo.isValid() &&
-                  !state.salesOrganization.salesOrg.isID) {
+              if (!state.salesOrganization.salesOrg.isID) {
                 add(
                   const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
                 );

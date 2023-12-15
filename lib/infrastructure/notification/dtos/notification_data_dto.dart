@@ -31,8 +31,8 @@ class NotificationDataDto with _$NotificationDataDto {
         required String orderNumber,
     @JsonKey(name: 'paymentNumber', defaultValue: '')
         required String paymentNumber,
-    @JsonKey(name: 'saleDocument', defaultValue: '')
-        required String saleDocument,
+    @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
+        required String paymentBatchAdditionalInfo,
   }) = _NotificationDataDto;
 
   NotificationData toDomain() {
@@ -46,7 +46,7 @@ class NotificationDataDto with _$NotificationDataDto {
       returnRequestId: ReturnRequestsId(requestId: returnRequestId),
       orderNumber: OrderNumber(orderNumber),
       paymentNumber: StringValue(paymentNumber),
-      saleDocument: StringValue(saleDocument),
+      paymentBatchAdditionalInfo: StringValue(paymentBatchAdditionalInfo),
     );
   }
 

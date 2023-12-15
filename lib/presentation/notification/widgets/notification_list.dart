@@ -113,8 +113,9 @@ class _NotificationList extends StatelessWidget {
       context.read<PaymentSummaryDetailsBloc>().add(
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
               details: PaymentSummaryDetails.empty().copyWith(
-                paymentID: notificationData.saleDocument,
                 zzAdvice: notificationData.paymentNumber,
+                paymentBatchAdditionalInfo:
+                    notificationData.paymentBatchAdditionalInfo,
               ),
             ),
           );

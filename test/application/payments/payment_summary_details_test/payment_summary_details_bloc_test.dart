@@ -319,26 +319,16 @@ void main() {
       ),
       setUp: () {
         final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
-          paymentBatchAdditionalInfo:
-              details.paymentBatchAdditionalInfo.getValue(),
+          paymentBatchAdditionalInfo: '',
           paymentID: details.paymentID.getValue(),
           accountingDocExternalReference:
               details.accountingDocExternalReference,
         );
-        when(
-          () => newPaymentRepository.getPaymentInvoiceInfoPdf(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
-            user: fakeClientUser,
-            paymentInfo: customerPaymentInfo,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
-        );
+
         when(
           () => paymentSummaryDetailsMockRepository
               .fetchPaymentSummaryDetailsInfo(
-            salesOrganization: fakeSalesOrganisation,
+            salesOrganization: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             details: details.copyWith(
               paymentBatchAdditionalInfo: StringValue(''),
@@ -350,17 +340,32 @@ void main() {
           ),
         );
         when(
-          () => bankInstructionRepository.getBankInstruction(
-            bankIdentification: details.bankIdentification,
+          () => paymentSummaryDetailsMockRepository.fetchPaymentList(
+            salesOrganization: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            details: details.copyWith(
+              paymentBatchAdditionalInfo: StringValue(''),
+            ),
           ),
         ).thenAnswer(
-          (invocation) async => Right(bankInstruction),
+          (invocation) async => Right(paymentList),
+        );
+        when(
+          () => newPaymentRepository.getPaymentInvoiceInfoPdf(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+            user: fakeClientUser,
+            paymentInfo: customerPaymentInfo,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
         );
       },
       seed: () => PaymentSummaryDetailsState.initial().copyWith(
-        salesOrganization: fakeSalesOrganisation,
+        salesOrganization: fakeMYSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
+        details: details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
@@ -370,33 +375,56 @@ void main() {
       ),
       expect: () => [
         PaymentSummaryDetailsState.initial().copyWith(
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           isDetailFetching: true,
+          details:
+              details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
         ),
         PaymentSummaryDetailsState.initial().copyWith(
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           details:
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
         ),
         PaymentSummaryDetailsState.initial().copyWith(
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           details:
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
-          isDetailFetching: true,
+          isListLoading: true,
         ),
         PaymentSummaryDetailsState.initial().copyWith(
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
-          details:
-              details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
-          bankInstruction: bankInstruction,
+          details: details.copyWith(
+            paymentBatchAdditionalInfo: StringValue(''),
+            paymentItems: paymentList,
+          ),
+        ),
+        PaymentSummaryDetailsState.initial().copyWith(
+          salesOrganization: fakeMYSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          details: details.copyWith(
+            paymentBatchAdditionalInfo: StringValue(''),
+            paymentItems: paymentList,
+          ),
+          isFetchingAdvice: true,
+        ),
+        PaymentSummaryDetailsState.initial().copyWith(
+          salesOrganization: fakeMYSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          details: details.copyWith(
+            paymentBatchAdditionalInfo: StringValue(''),
+            paymentItems: paymentList,
+          ),
+          paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
         ),
       ],
     );
