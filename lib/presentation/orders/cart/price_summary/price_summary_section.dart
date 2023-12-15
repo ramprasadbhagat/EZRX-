@@ -88,7 +88,9 @@ class PriceSummarySection extends StatelessWidget {
             _DisplayPrice(
               priceComponent: PriceComponent(
                 salesOrgConfig: salesOrgConfig,
-                price: cartState.getDiscountPrice,
+                price: context.router.current.name == CheckoutPageRoute.name
+                    ? cartState.checkoutTotalSaving.toString()
+                    : cartState.cartTotalSaving.toString(),
                 type: PriceStyle.summaryPrice,
               ),
             ),

@@ -288,6 +288,11 @@ class PriceAggregate with _$PriceAggregate {
     return finalPrice * quantity;
   }
 
+  double get savingAmount =>
+      (price.lastPrice.getOrDefaultValue(0) -
+          price.finalPrice.getOrDefaultValue(0)) *
+      quantity;
+
   double getComboOfferPriceSubTotal(double comboDealRate) {
     return getComboOfferPriceWithDiscount(comboDealRate: comboDealRate) *
         quantity;

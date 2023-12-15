@@ -499,9 +499,16 @@ class CartState with _$CartState {
   String get taxTitlePercent => config.salesOrg.isVN ? '' : '$totalTaxPercent%';
 
   //Todo : Need to implement for other market, Implemented only for ID market
-  String get getDiscountPrice => salesOrganisation.salesOrg.isID
-      ? aplSimulatorOrder.totalDiscountValue.toString()
-      : 0.toString();
+  double get checkoutTotalSaving => salesOrganisation.salesOrg.isID
+      ? aplSimulatorOrder.totalDiscountValue
+      : 0;
+
+  double get cartTotalSaving => salesOrganisation.salesOrg.isID
+      ? NumUtils.roundToPlaces(
+          cartProducts.fold(0, (sum, e) => sum + e.savingAmount),
+          0,
+        )
+      : 0;
 
   bool get isBuyAgainNotAllowed =>
       isUpserting || isFetching || shipToInfo.customerBlock.isCustomerBlocked;
