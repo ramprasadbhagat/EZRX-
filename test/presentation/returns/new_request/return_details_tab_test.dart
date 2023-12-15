@@ -381,5 +381,48 @@ void main() {
         );
       },
     );
+    testWidgets(
+        ' => commercial item with balance quantity 0 with bonus material balance quantity not zero bonus toggle should active and disable ',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              itemNumber: '1',
+              balanceQuantity: IntegerValue('0'),
+              bonusItems: [
+                fakeReturnMaterialList.items.first.copyWith(itemNumber: '2')
+              ],
+            ),
+          ],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnMaterialList.items.first.validatedItemDetails
+                    .copyWith(itemNumber: '2'),
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle(const Duration(seconds: 10));
+      final toggleIncludeBonusButton =
+          find.byKey(WidgetKeys.toggleIncludeBonusButton);
+      final bonusToggleIncludeBonusButton =
+          tester.widget<Switch>(toggleIncludeBonusButton);
+      expect(bonusToggleIncludeBonusButton.value, true);
+      await tester.tap(toggleIncludeBonusButton);
+      await tester.pumpAndSettle();
+      verifyNever(
+        () => newRequestBlocMock.add(
+          NewRequestEvent.toggleBonusItem(
+            item: fakeReturnMaterialList.items.first.copyWith(itemNumber: '2'),
+            included: false,
+          ),
+        ),
+      );
+    });
   });
 }

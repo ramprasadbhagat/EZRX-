@@ -3,35 +3,37 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details
 class _BonusItemSection extends StatelessWidget {
   const _BonusItemSection({
     Key? key,
-    required this.items,
+    required this.returnItem,
     required this.counterOfferEnabled,
   }) : super(key: key);
-  final List<ReturnMaterial> items;
+  final ReturnMaterial returnItem;
   final bool counterOfferEnabled;
 
   @override
   Widget build(BuildContext context) {
-    return items.isEmpty
+    final bonusItems = returnItem.bonusItems;
+
+    return bonusItems.isEmpty
         ? const SizedBox.shrink()
         : BlocBuilder<NewRequestBloc, NewRequestState>(
             buildWhen: (previous, current) =>
                 previous.invoiceDetails != current.invoiceDetails,
             builder: (context, state) {
               return Column(
-                children: items.map(
-                  (item) {
-                    final detail = context
-                        .read<NewRequestBloc>()
-                        .state
-                        .getReturnItemDetails(item.uuid);
+                children: bonusItems.map(
+                  (bonusItem) {
+                    final detail = state.getReturnItemDetails(bonusItem.uuid);
 
                     return Column(
                       children: [
-                        _MaterialBonusInfoSection(data: item),
+                        _MaterialBonusInfoSection(
+                          returnItem: returnItem,
+                          bonusItem: bonusItem,
+                        ),
                         if (detail.itemNumber.isNotEmpty &&
-                            item.editDetailsAllowed)
+                            bonusItem.editDetailsAllowed)
                           _MaterialBonusDetailsSection(
-                            item: item,
+                            item: bonusItem,
                             detail: detail,
                             counterOfferEnabled: counterOfferEnabled,
                           ),

@@ -83,7 +83,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
                 ),
               _BonusItemSection(
                 key: WidgetKeys.bonusItemSection,
-                items: item.bonusItems,
+                returnItem: item,
                 counterOfferEnabled: !item.editDetailsAllowed,
               ),
             ],

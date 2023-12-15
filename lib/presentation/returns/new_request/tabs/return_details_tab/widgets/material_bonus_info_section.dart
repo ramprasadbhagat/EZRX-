@@ -3,18 +3,23 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details
 class _MaterialBonusInfoSection extends StatelessWidget {
   const _MaterialBonusInfoSection({
     Key? key,
-    required this.data,
+    required this.returnItem,
+    required this.bonusItem,
   }) : super(key: key);
-  final ReturnMaterial data;
+  final ReturnMaterial returnItem;
+  final ReturnMaterial bonusItem;
 
   @override
   Widget build(BuildContext context) {
     return ExpandableInfo(
       labelText: context.tr('Bonus details'),
-      toggle: _ToggleActiveButton(item: data),
+      toggle: _ToggleActiveButton(
+        returnItem: returnItem,
+        bonusItem: bonusItem,
+      ),
       child: Column(
         children: [
-          if (!data.balanceQuantity.isGreaterThanZero)
+          if (!bonusItem.balanceQuantity.isGreaterThanZero)
             InfoLabel(
               margin: EdgeInsets.zero,
               mainColor: ZPColors.priceWarning,
@@ -23,7 +28,7 @@ class _MaterialBonusInfoSection extends StatelessWidget {
                       .tr(),
             ),
           BonusMaterialInfo(
-            data: data,
+            data: bonusItem,
             noteLineVisible: true,
           ),
         ],
@@ -33,16 +38,21 @@ class _MaterialBonusInfoSection extends StatelessWidget {
 }
 
 class _ToggleActiveButton extends StatelessWidget {
-  final ReturnMaterial item;
+  final ReturnMaterial bonusItem;
+  final ReturnMaterial returnItem;
 
-  const _ToggleActiveButton({Key? key, required this.item}) : super(key: key);
+  const _ToggleActiveButton({
+    Key? key,
+    required this.bonusItem,
+    required this.returnItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewRequestBloc, NewRequestState>(
       buildWhen: (previous, current) =>
-          previous.isIncludeBonus(item.uuid) !=
-          current.isIncludeBonus(item.uuid),
+          previous.isIncludeBonus(bonusItem.uuid) !=
+          current.isIncludeBonus(bonusItem.uuid),
       builder: (context, state) {
         return Row(
           children: [
@@ -82,16 +92,18 @@ class _ToggleActiveButton extends StatelessWidget {
                     );
                   },
                 ),
-                value: item.balanceQuantity.isGreaterThanZero &&
-                    state.isIncludeBonus(item.uuid),
-                onChanged: (bool value) {
-                  context.read<NewRequestBloc>().add(
-                        NewRequestEvent.toggleBonusItem(
-                          item: item,
-                          included: value,
-                        ),
-                      );
-                },
+                value: bonusItem.balanceQuantity.isGreaterThanZero &&
+                    state.isIncludeBonus(bonusItem.uuid),
+                onChanged: returnItem.balanceQuantity.isGreaterThanZero
+                    ? (bool value) {
+                        context.read<NewRequestBloc>().add(
+                              NewRequestEvent.toggleBonusItem(
+                                item: bonusItem,
+                                included: value,
+                              ),
+                            );
+                      }
+                    : null,
               ),
             ),
           ],
