@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListPriceStrikeThroughComponent extends StatelessWidget {
   final PriceAggregate priceAggregate;
+
   const ListPriceStrikeThroughComponent({
     Key? key,
     required this.priceAggregate,
@@ -13,7 +14,8 @@ class ListPriceStrikeThroughComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return priceAggregate.showMaterialListPrice
+    return priceAggregate.showMaterialListPrice &&
+            priceAggregate.showStrikeThrough
         ? PriceComponent(
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,

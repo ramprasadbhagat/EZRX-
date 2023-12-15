@@ -173,6 +173,8 @@ class PriceAggregate with _$PriceAggregate {
       price.tiers.isNotEmpty ||
       price.bonuses.isNotEmpty;
 
+  bool get showStrikeThrough => !salesOrgConfig.salesOrg.isID;
+
   double get listPrice {
     return NumUtils.roundToPlaces(vatCalculation(price.lastPrice.getOrCrash()));
   }
