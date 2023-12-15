@@ -346,6 +346,55 @@ void main() {
       );
 
       testWidgets(
+          'Show material combination code with GMC part when Government material code is enabled',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeTWSalesOrgConfigGMCEnabled,
+          ),
+        );
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList: materialResponseMock.products,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final materialInfo = materialResponseMock.products.first;
+        final combinationCode = find.text(
+          '${materialInfo.materialNumber.displayMatNo} | ${materialInfo.data.first.governmentMaterialCode}',
+        );
+        expect(combinationCode, findsOneWidget);
+      });
+
+      testWidgets(
+          'Show material combination code without GMC part when Government material code is disabled',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeEmptySalesConfigs,
+          ),
+        );
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList: materialResponseMock.products,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final materialInfo = materialResponseMock.products.first;
+        final materialNumber =
+            find.text(materialInfo.materialNumber.displayMatNo);
+        expect(materialNumber, findsOneWidget);
+        final combinationCode = find.text(
+          '${materialInfo.materialNumber.displayMatNo} | ${materialInfo.data.first.governmentMaterialCode}',
+        );
+        expect(combinationCode, findsNothing);
+      });
+
+      testWidgets(
         '=> Test tap on favorite button when is favorite',
         (tester) async {
           when(() => materialListBlocMock.state).thenReturn(

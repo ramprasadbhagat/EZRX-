@@ -27,7 +27,8 @@
             {
               "MaterialCode": "000000000023063780",
               "MaterialDescription": "0.9% SODIUM CHLORIDEBP 96X50ML",
-              "DefaultMaterialDescription": ""
+              "DefaultMaterialDescription": "",
+              "GovernmentMaterialCode": "SN72591701"
             }
           ]
         },

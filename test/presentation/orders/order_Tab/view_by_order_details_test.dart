@@ -44,6 +44,7 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_header_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/material_tax.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
@@ -344,6 +345,64 @@ void main() {
       final viewByOrderDetailsPageListView =
           find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
       expect(viewByOrderDetailsPageListView, findsNothing);
+    });
+
+    testWidgets(
+        'Show material combination code with GMC part when Government material code is enabled',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTWSalesOrgConfigGMCEnabled,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final orderHeaderSection = find.byType(OrderHeaderSection);
+      expect(orderHeaderSection, findsOneWidget);
+      await tester.drag(orderHeaderSection, const Offset(0, -500));
+      await tester.pumpAndSettle();
+
+      final combinationCode = find.text(
+        '${fakeOrderHistoryItem.materialNumber.displayMatNo} | ${fakeOrderHistoryItem.governmentMaterialCode}',
+      );
+      expect(combinationCode, findsOneWidget);
+    });
+
+    testWidgets(
+        'Show material combination code without GMC part when Government material code is disabled',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeEmptySalesConfigs,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final orderHeaderSection = find.byType(OrderHeaderSection);
+      expect(orderHeaderSection, findsOneWidget);
+      await tester.drag(orderHeaderSection, const Offset(0, -500));
+      await tester.pumpAndSettle();
+      final materialNumber =
+          find.text(fakeOrderHistoryItem.materialNumber.displayMatNo);
+      expect(materialNumber, findsWidgets);
+      final combinationCode = find.text(
+        '${fakeOrderHistoryItem.materialNumber.displayMatNo} | ${fakeOrderHistoryItem.governmentMaterialCode}',
+      );
+      expect(combinationCode, findsNothing);
     });
 
     testWidgets('test when disablePaymentTermsDisplay enabled', (tester) async {

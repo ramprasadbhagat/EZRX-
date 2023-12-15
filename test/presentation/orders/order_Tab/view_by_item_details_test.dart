@@ -171,6 +171,8 @@ void main() {
       orderNumber: OrderNumber('1234567'),
       invoiceData:
           InvoiceData.empty().copyWith(invoiceNumber: StringValue('123456')),
+      materialNumber: MaterialNumber('fakeMaterialNumber'),
+      governmentMaterialCode: 'fakegovernmentMaterialCode',
     );
     fakeItemList =
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
@@ -311,6 +313,59 @@ void main() {
       final viewByOrderDetailsPageListView =
           find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
       expect(viewByOrderDetailsPageListView, findsNothing);
+    });
+
+    testWidgets(
+        'Show material combination code with GMC part when Government material code is enabled',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTWSalesOrgConfigGMCEnabled,
+        ),
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final combinationCode = find.text(
+        '${fakeOrderHistoryItem.materialNumber.displayMatNo} | ${fakeOrderHistoryItem.governmentMaterialCode}',
+      );
+      expect(combinationCode, findsOneWidget);
+    });
+
+    testWidgets(
+        'Show material combination code without GMC part when Government material code is disabled',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeEmptySalesConfigs,
+        ),
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final materialNumber =
+          find.text(fakeOrderHistoryItem.materialNumber.displayMatNo);
+      expect(materialNumber, findsWidgets);
+      final combinationCode = find.text(
+        '${fakeOrderHistoryItem.materialNumber.displayMatNo} | ${fakeOrderHistoryItem.governmentMaterialCode}',
+      );
+      expect(combinationCode, findsNothing);
     });
 
     testWidgets('When disableDeliveryDate is false', (tester) async {

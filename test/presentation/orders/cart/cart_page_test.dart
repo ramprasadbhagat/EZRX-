@@ -404,6 +404,12 @@ void main() {
               principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
             ),
             remarks: '',
+            data: <MaterialData>[
+              MaterialData.empty().copyWith(
+                materialNumber: MaterialNumber('000000000023168451'),
+                governmentMaterialCode: 'fake-code',
+              )
+            ],
           ),
           stockInfo: StockInfo.empty().copyWith(
             inStock: MaterialInStock('Yes'),
@@ -647,6 +653,57 @@ void main() {
         await tester.pumpWidget(getWidget());
 
         // verify(() => authBlocMock.add(const AuthEvent.authCheck()));
+      });
+
+      testWidgets(
+          'Show material combination code with GMC part when Government material code is enabled',
+          (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeTWSalesOrgConfigGMCEnabled,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: mockCartItemWithDataList,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final materialInfo = mockCartItemWithDataList.first.materialInfo;
+        final combinationCode = find.text(
+          '${materialInfo.materialNumber.displayMatNo} | ${materialInfo.data.first.governmentMaterialCode}',
+        );
+        expect(combinationCode, findsOneWidget);
+      });
+
+      testWidgets(
+          'Show material combination code without GMC part when Government material code is disabled',
+          (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeEmptySalesConfigs,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: mockCartItemWithDataList,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final materialInfo = mockCartItemWithDataList.first.materialInfo;
+        final materialNumber =
+            find.text(materialInfo.materialNumber.displayMatNo);
+        expect(materialNumber, findsOneWidget);
+        final combinationCode = find.text(
+          '${materialInfo.materialNumber.displayMatNo} | ${materialInfo.data.first.governmentMaterialCode}',
+        );
+        expect(combinationCode, findsNothing);
       });
 
       testWidgets('Delete item from cart by swapping', (tester) async {

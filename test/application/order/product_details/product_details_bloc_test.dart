@@ -335,9 +335,13 @@ void main() {
                 bundle: mockMaterialInfo.bundle.copyWith(
                   materials: mockMaterialInfoWithBundleStockInfo,
                 ),
-                productImages: mockProductMetaData.productImages.first,
+                productImages: mockProductMetaData.productImages.isNotEmpty
+                    ? mockProductMetaData.productImages.first
+                    : ProductImages.empty(),
               ),
-              productItem: mockProductMetaData.items.first,
+              productItem: mockProductMetaData.items.isNotEmpty
+                  ? mockProductMetaData.items.first
+                  : ProductItem.empty(),
             ),
           ),
         ],

@@ -27,6 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
@@ -81,6 +82,8 @@ void main() {
 
   final fakeOrderHistoryItems = [
     OrderHistoryItem.empty().copyWith(
+      materialNumber: MaterialNumber('fakeMaterialNumber'),
+      governmentMaterialCode: 'fakeGovernmentMaterialCode',
       principalData: PrincipalData.empty().copyWith(
         principalName: PrincipalName('fake_manufactureName_1'),
         principalCode: PrincipalCode('00000001231'),
@@ -184,6 +187,61 @@ void main() {
         WidgetKeys.loaderImage,
       );
       expect(loaderImage, findsOneWidget);
+    });
+
+    testWidgets(
+        'Show material combination code with GMC part when Government material code is enabled',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTWSalesOrgConfigGMCEnabled,
+        ),
+      );
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(
+          isFetching: false,
+          orderHistory: orderHistory.copyWith(
+            orderHistoryItems: fakeOrderHistoryItems,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final materialInfo = fakeOrderHistoryItems.first;
+      final combinationCode = find.text(
+        '${materialInfo.materialNumber.displayMatNo} | ${materialInfo.governmentMaterialCode}',
+      );
+      expect(combinationCode, findsOneWidget);
+    });
+
+    testWidgets(
+        'Show material combination code without GMC part when Government material code is disabled',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeEmptySalesConfigs,
+        ),
+      );
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(
+          isFetching: false,
+          orderHistory: orderHistory.copyWith(
+            orderHistoryItems: fakeOrderHistoryItems,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final materialInfo = fakeOrderHistoryItems.first;
+      final materialNumber =
+          find.text(materialInfo.materialNumber.displayMatNo);
+      expect(materialNumber, findsOneWidget);
+      final combinationCode = find.text(
+        '${materialInfo.materialNumber.displayMatNo} | ${materialInfo.governmentMaterialCode}',
+      );
+      expect(combinationCode, findsNothing);
     });
 
     testWidgets('Displaying manufactureName  test ', (tester) async {

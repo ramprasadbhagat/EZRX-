@@ -12,6 +12,7 @@ const _fakeSaleOrgId = 'fake-sale-org-id-1234';
 const _fakeVNSalesOrgId = '3072';
 const _fakeMYSalesOrgId = '2001';
 const _fakeSGSalesOrgId = '2601';
+const _fakeTWSalesOrgId = '2800';
 const _fakePHSalesOrgId = '2500';
 const _fakeIDSalesOrgId = '1900';
 const _fakeTHSalesOrgId = '2902';
@@ -19,6 +20,7 @@ const _fakeTHSalesOrgId = '2902';
 final fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
 final fakePHSalesOrg = SalesOrg(_fakePHSalesOrgId);
 final fakeSGSalesOrg = SalesOrg(_fakeSGSalesOrgId);
+final fakeTWSalesOrg = SalesOrg(_fakeTWSalesOrgId);
 final fakeVNSalesOrg = SalesOrg(_fakeVNSalesOrgId);
 final fakeMYSalesOrg = SalesOrg(_fakeMYSalesOrgId);
 final fakeIDSalesOrg = SalesOrg(_fakeIDSalesOrgId);
@@ -192,6 +194,12 @@ final salesOrganisationPHConfigsWithEnablePrincipalList =
       principalCode: PrincipalCode('0000000000'),
     )
   ],
+);
+
+final fakeTWSalesOrgConfigGMCEnabled =
+    SalesOrganisationConfigs.empty().copyWith(
+  enableGMC: true,
+  salesOrg: fakeTWSalesOrg,
 );
 
 final fakeSGSalesOrgConfigGimmickMaterialEnabled =
