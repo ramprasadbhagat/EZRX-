@@ -152,7 +152,8 @@ class _OrderItemTile extends StatelessWidget {
       isQuantityBelowImage: true,
       isQuantityRequired: false,
       showOfferTag: orderItem.showOfferTag,
-      statusTag: orderItem.orderDetailBonusTag,
+      statusTag:
+          salesOrgConfig.salesOrg.isID ? null : orderItem.orderDetailBonusTag,
       headerText: salesOrgConfig.batchNumDisplay
           ? '${'Batch'.tr()}: ${orderItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderItem.expiryDate.dateOrDashString})'
           : '',

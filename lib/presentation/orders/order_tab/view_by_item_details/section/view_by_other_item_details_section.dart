@@ -105,7 +105,10 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                 isQuantityRequired: false,
                                                 materialNumber:
                                                     e.materialNumber,
-                                                statusTag: e.productTag,
+                                                statusTag: eligibilityState
+                                                        .salesOrg.isID
+                                                    ? null
+                                                    : e.productTag,
                                                 headerText:
                                                     '${context.tr('Order')} #${e.orderNumber.getOrDefaultValue('')}',
                                                 subtitle: '',

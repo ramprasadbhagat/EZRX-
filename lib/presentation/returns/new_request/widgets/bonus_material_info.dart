@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -48,10 +49,11 @@ class BonusMaterialInfo extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              StatusLabel(
-                status: StatusType('Bonus'),
-                valueColor: ZPColors.white,
-              ),
+              if (!context.read<EligibilityBloc>().state.salesOrg.isID)
+                StatusLabel(
+                  status: StatusType('Bonus'),
+                  valueColor: ZPColors.white,
+                ),
             ],
           ),
           Text(

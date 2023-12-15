@@ -14,6 +14,9 @@ class _ViewByOrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final salesOrgConfigs =
+        context.read<EligibilityBloc>().state.salesOrgConfigs;
+
     return GestureDetector(
       onTap: () {
         trackMixpanelEvent(
@@ -28,11 +31,8 @@ class _ViewByOrderItem extends StatelessWidget {
                 orderHistory:
                     context.read<ViewByItemsBloc>().state.orderHistory,
                 orderHistoryItem: orderHistoryItem,
-                disableDeliveryDateForZyllemStatus: context
-                    .read<EligibilityBloc>()
-                    .state
-                    .salesOrgConfigs
-                    .disableDeliveryDate,
+                disableDeliveryDateForZyllemStatus:
+                    salesOrgConfigs.disableDeliveryDate,
               ),
             );
 
@@ -43,8 +43,7 @@ class _ViewByOrderItem extends StatelessWidget {
       child: CommonTileItem(
         key: WidgetKeys.viewByItemsOrderItemKey,
         label: orderHistoryItem.combinationCode(
-          showGMCPart:
-              context.read<EligibilityBloc>().state.salesOrgConfigs.enableGMC,
+          showGMCPart: salesOrgConfigs.enableGMC,
         ),
         title: orderHistoryItem.materialDescription,
         subtitle:
@@ -65,7 +64,8 @@ class _ViewByOrderItem extends StatelessWidget {
         materialNumber: orderHistoryItem.materialNumber,
         isQuantityBelowImage: false,
         isQuantityRequired: true,
-        statusTag: orderHistoryItem.productTag,
+        statusTag:
+            salesOrgConfigs.salesOrg.isID ? null : orderHistoryItem.productTag,
         showOfferTag: orderHistoryItem.isOfferItem,
         showBundleTag: orderHistoryItem.isBundle,
       ),

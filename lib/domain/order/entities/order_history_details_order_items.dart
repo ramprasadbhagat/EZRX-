@@ -104,7 +104,9 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
   /*ProductTag is used for displaying tag in OrderSuccess detail page */
   StatusType get productTag {
-    if (isBonus) return StatusType('Bonus');
+    if (isBonus && !priceAggregate.salesOrgConfig.salesOrg.isID) {
+      return StatusType('Bonus');
+    }
     if (!priceAggregate.salesOrgConfig.hideStockDisplay &&
         (materialStockInfo.stockInfos.isEmpty ||
             !materialStockInfo.stockInfos

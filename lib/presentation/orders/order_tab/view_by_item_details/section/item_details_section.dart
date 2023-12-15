@@ -80,7 +80,9 @@ class ItemDetailsSection extends StatelessWidget {
             isQuantityBelowImage: true,
             isQuantityRequired: false,
             materialNumber: orderHistoryItem.materialNumber,
-            statusTag: orderHistoryItem.productTag,
+            statusTag: eligibilityState.salesOrg.isID
+                ? null
+                : orderHistoryItem.productTag,
             headerText: eligibilityState.salesOrgConfigs.batchNumDisplay
                 ? '${'Batch'.tr()}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderHistoryItem.expiryDate.dateOrDashString})'
                 : '',

@@ -154,26 +154,32 @@ class _BonusItemDetails extends StatelessWidget {
                 returnRequestInformation.materialNumber.displayMatNo,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 5,
+              if (!context
+                  .read<EligibilityBloc>()
+                  .state
+                  .salesOrgConfigs
+                  .salesOrg
+                  .isID)
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 5,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    color: ZPColors.primary,
+                  ),
+                  child: Text(
+                    context.tr('Bonus'),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: ZPColors.white,
+                          fontSize: 10,
+                        ),
+                  ),
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
-                ),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  color: ZPColors.primary,
-                ),
-                child: Text(
-                  context.tr('Bonus'),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.white,
-                        fontSize: 10,
-                      ),
-                ),
-              ),
             ],
           ),
           Text(

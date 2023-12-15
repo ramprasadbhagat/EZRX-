@@ -120,6 +120,7 @@ class _ReturnItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<EligibilityBloc>().state.user;
+    final salesOrg = context.read<EligibilityBloc>().state.salesOrg;
 
     return Column(
       children: [
@@ -168,7 +169,7 @@ class _ReturnItem extends StatelessWidget {
                   );
                 },
                 label: data.materialNumber.displayMatNo,
-                labelTrailing: data.prsfd.isBonus
+                labelTrailing: data.prsfd.isBonus && !salesOrg.isID
                     ? const BonusTag(
                         margin: EdgeInsets.symmetric(horizontal: 4),
                       )
