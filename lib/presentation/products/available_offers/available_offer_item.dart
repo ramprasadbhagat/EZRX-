@@ -110,6 +110,9 @@ class _TierItem extends StatelessWidget {
       purchaseQuantity =
           '${context.tr('Purchase quantity')}: ${priceTier.minAmount}';
     }
+    final offerTitleText = saleConfigs.salesOrg.isID
+        ? '${context.tr('off total price')} ${priceTier.percentage}%'
+        : '${priceTier.percentage}% ${context.tr('off total price')}';
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -117,7 +120,7 @@ class _TierItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          '${priceTier.percentage}% ${context.tr('off total price')}',
+          offerTitleText,
           style: Theme.of(context).textTheme.labelSmall!.copyWith(
                 color: ZPColors.primary,
               ),
