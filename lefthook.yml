@@ -15,6 +15,9 @@ pre-commit:
 
 pre-push:
   parallel: true
+  skip:
+    - ref: main
+    - ref: v3
   commands:
     flutter-analyze:
       run: fvm flutter analyze --fatal-infos --fatal-warnings
