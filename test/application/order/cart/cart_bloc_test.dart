@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -48,6 +49,7 @@ void main() {
   late ProductDetailRepository productDetailRepository;
   late List<PriceAggregate> priceAggregates;
   late List<BonusSampleItem> bonusSampleItem;
+  late List<PriceTier> priceTiers;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -61,6 +63,21 @@ void main() {
         itemId: StringValue('fake-item-id'),
         qty: MaterialQty(1),
       ),
+    ];
+    priceTiers = [
+      PriceTier.empty().copyWith(
+        tier: 'C',
+        items: [
+          PriceTierItem.empty().copyWith(
+            rate: 41,
+            quantity: 5,
+          ),
+          PriceTierItem.empty().copyWith(
+            rate: 20,
+            quantity: 10,
+          )
+        ],
+      )
     ];
     priceAggregates = materialListResponse.products
         .map(
@@ -1945,6 +1962,115 @@ void main() {
           ),
           CartState.initial().copyWith(
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            apiFailureOrSuccessOption: optionOf(
+              Left(
+                fakeError,
+              ),
+            ),
+          ),
+        ],
+      );
+
+      blocTest<CartBloc, CartState>(
+        'Cart updatePriceProduct with tiered pricing',
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        seed: () => CartState.initial().copyWith(
+          cartProducts: [
+            priceAggregates.first.copyWith(
+              price: prices.first,
+            )
+          ],
+          salesOrganisation: fakeSalesOrganisation,
+          config: fakeSalesOrganisationConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        setUp: () {
+          when(
+            () => cartRepositoryMock.updateMaterialDealBonus(
+              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              materials: [
+                priceAggregates.first.copyWith(
+                  discountedMaterialCount: 1,
+                  price: prices.first.copyWith(
+                    tiers: priceTiers,
+                  ),
+                )
+              ],
+            ),
+          ).thenAnswer(
+            (invocation) async => Left(
+              fakeError,
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.updatePriceProduct(
+            priceProducts: {
+              priceAggregates.first.getMaterialNumber: prices.first.copyWith(
+                tiers: priceTiers,
+              )
+            },
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isMappingPrice: true,
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: prices.first,
+              )
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                discountedMaterialCount: 1,
+                price: prices.first.copyWith(
+                  tiers: priceTiers,
+                ),
+              )
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            isFetchingBonus: true,
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                discountedMaterialCount: 1,
+                price: prices.first.copyWith(
+                  tiers: priceTiers,
+                ),
+              )
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                discountedMaterialCount: 1,
+                price: prices.first.copyWith(
+                  tiers: priceTiers,
+                ),
+              )
+            ],
             salesOrganisation: fakeSalesOrganisation,
             config: fakeSalesOrganisationConfigs,
             shipToInfo: shipToInfo,

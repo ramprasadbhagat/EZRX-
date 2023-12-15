@@ -630,24 +630,28 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           );
         }
 
-        final cartProductList = newCartProducts.map((element) {
-          final originalPrice =
-              e.priceProducts[element.materialInfo.materialNumber] ??
-                  Price.empty();
-          final counterOfferDetails = element.materialInfo.counterOfferDetails;
-          final updatedPrice = counterOfferDetails.hasCounterOffer
-              ? originalPrice.offerPriceWithDiscount(counterOfferDetails)
-              : originalPrice;
+        final cartProductList = newCartProducts
+            .map((element) {
+              final originalPrice =
+                  e.priceProducts[element.materialInfo.materialNumber] ??
+                      Price.empty();
+              final counterOfferDetails =
+                  element.materialInfo.counterOfferDetails;
+              final updatedPrice = counterOfferDetails.hasCounterOffer
+                  ? originalPrice.offerPriceWithDiscount(counterOfferDetails)
+                  : originalPrice;
 
-          return element.copyWith(
-            salesOrgConfig: state.config,
-            price: updatedPrice,
-            exceedQuantity: element.materialInfo.materialQtyConfirmZDP5Rule(
-              element.price.zdp5MaxQuota.intValue,
-              element.price.zdp5RemainingQuota.intValue,
-            ),
-          );
-        }).toList();
+              return element.copyWith(
+                salesOrgConfig: state.config,
+                price: updatedPrice,
+                exceedQuantity: element.materialInfo.materialQtyConfirmZDP5Rule(
+                  element.price.zdp5MaxQuota.intValue,
+                  element.price.zdp5RemainingQuota.intValue,
+                ),
+              );
+            })
+            .toList()
+            .priceAggregateWithDiscountedCount;
 
         emit(
           state.copyWith(
