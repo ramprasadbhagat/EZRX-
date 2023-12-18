@@ -118,7 +118,7 @@ class _TaxWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '${context.tr(cartState.salesOrganisation.salesOrg.taxTitle)} ${cartState.taxTitlePercent}:',
+              '${context.tr(cartState.salesOrganisation.salesOrg.taxTitle)}${cartState.taxTitlePercent}:',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),

@@ -499,7 +499,8 @@ class CartState with _$CartState {
       (a, b) => b.materialInfo.type.typeCombo ? 1 : -1,
     );
 
-  String get taxTitlePercent => config.salesOrg.isVN ? '' : '$totalTaxPercent%';
+  String get taxTitlePercent =>
+      config.salesOrg.isVN ? '' : ' $totalTaxPercent%';
 
   //Todo : Need to implement for other market, Implemented only for ID market
   double get checkoutTotalSaving => salesOrganisation.salesOrg.isID

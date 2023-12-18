@@ -7,10 +7,7 @@ class _OrderSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMYExternalSalesRep =
-        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
-    final salesOrgConfig =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
     return ListTile(
       key: WidgetKeys.orderSuccessOrderSummarySection,
@@ -31,7 +28,7 @@ class _OrderSummary extends StatelessWidget {
             children: [
               Text(
                 '${context.tr(
-                  'Subtotal (${salesOrgConfig.displayPrefixTax}.tax)',
+                  'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
                 )}:',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
@@ -40,17 +37,19 @@ class _OrderSummary extends StatelessWidget {
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price:
-                    '${orderHistoryDetails.subTotalExcludeTax(isMYExternalSalesRep)}',
+                    '${orderHistoryDetails.subTotalExcludeTax(eligibilityState.isMYExternalSalesRepUser)}',
               ),
             ],
           ),
-          if (salesOrgConfig.showSubtotalTaxBreakdown)
+          if (eligibilityState.salesOrgConfigs.showSubtotalTaxBreakdown)
             Row(
               key: WidgetKeys.orderSummaryTax,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Tax at ${orderHistoryDetails.totalTaxPercentage}%',
+                  eligibilityState.salesOrg.isVN
+                      ? context.tr('Tax')
+                      : '${context.tr('Tax at')} ${orderHistoryDetails.totalTaxPercentage}%',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 PriceComponent(
@@ -79,7 +78,7 @@ class _OrderSummary extends StatelessWidget {
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price:
-                    '${orderHistoryDetails.grandTotal(isMYExternalSalesRep)}',
+                    '${orderHistoryDetails.grandTotal(eligibilityState.isMYExternalSalesRepUser)}',
               ),
             ],
           ),

@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details.freezed.dart';
 
@@ -201,8 +202,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     );
   }
 
-  double get totalTaxPercentage =>
-      double.parse((totalTax / orderValue * 100).toStringAsExponential(2));
+  String get totalTaxPercentage => StringUtils.displayNumberWithDecimal(totalTax / orderValue * 100);
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetails> {

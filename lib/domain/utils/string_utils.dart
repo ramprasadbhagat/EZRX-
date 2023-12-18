@@ -87,11 +87,14 @@ class StringUtils {
   static String formatPrice(
     SalesOrganisationConfigs salesOrgConfig,
     double price,
-  ) {
-    final formatter = salesOrgConfig.salesOrg.isID
-        ? priceFormatterWithDecimal
-        : priceFormatter;
+  ) =>
+      salesOrgConfig.salesOrg.isID
+          ? displayNumberWithDecimal(price)
+          : displayNumber(price);
 
-    return formatter.format(price);
+  static String displayNumberWithDecimal(
+    double price,
+  ) {
+    return priceFormatterWithDecimal.format(price);
   }
 }
