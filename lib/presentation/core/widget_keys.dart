@@ -977,6 +977,7 @@ class WidgetKeys {
   static const Key internationalPhoneNumberInputKey =
       Key('internationalPhoneNumberInput');
   static const Key contactDetailsKey = Key('contactDetails');
+  static const Key contactDetailsSectionKey = Key('contactDetailsSection');
 
   //============================================================
   //  Payment summary details page

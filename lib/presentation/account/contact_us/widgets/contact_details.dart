@@ -27,6 +27,7 @@ class _ContactDetails extends StatelessWidget {
                 : Column(
                     children: [
                       Html(
+                        key: WidgetKeys.contactDetailsSectionKey,
                         style: {
                           'body': Style(
                             padding: const EdgeInsets.all(0),
@@ -38,7 +39,9 @@ class _ContactDetails extends StatelessWidget {
                         shrinkWrap: true,
                       ),
                       _ContactItem(
-                        key: WidgetKeys.genericKey(key: salesOrg.contactEmail),
+                        key: WidgetKeys.genericKey(
+                          key: state.contactUsDetails.postloginSendToEmail,
+                        ),
                         label: state.contactUsDetails.postloginSendToEmail,
                         icon: Icons.mail_outline,
                         onTap: () => _sendEmail(
