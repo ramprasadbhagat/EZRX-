@@ -2894,6 +2894,47 @@ void main() {
 
         expect(movWarning, findsNothing);
       });
+
+      testWidgets('Test Navigate back while snackbar appear for delete cart',
+          (tester) async {
+        when(
+          () => autoRouterMock.currentPath,
+        ).thenReturn('orders/cart');
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isClearing: true,
+          ),
+        );
+        final expectedStates = [
+          CartState.initial().copyWith(
+            cartProducts: [
+              ...mockCartItemWithDataList2,
+            ],
+          ),
+        ];
+        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(getWidget());
+
+        await tester.pumpAndSettle();
+        final deleteIcon = find.byIcon(
+          Icons.delete_outlined,
+        );
+        expect(deleteIcon, findsOneWidget);
+
+        await tester.tap(
+          deleteIcon,
+          warnIfMissed: true,
+        );
+        final msg = find.textContaining(
+          'Cart has been emptied.'.tr(),
+        );
+        expect(msg, findsOneWidget);
+
+        final cartCloseButtonFinder = find.byKey(WidgetKeys.closeButton);
+        expect(cartCloseButtonFinder, findsOneWidget);
+        await tester.tap(cartCloseButtonFinder);
+        verify(() => autoRouterMock.navigateBack()).called(1);
+      });
     },
   );
 }
