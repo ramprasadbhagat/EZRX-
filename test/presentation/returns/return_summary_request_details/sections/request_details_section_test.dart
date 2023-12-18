@@ -346,5 +346,72 @@ void main() {
       await tester.pumpAndSettle();
       expect(bonusPriceComponent, findsOneWidget);
     });
+
+    testWidgets('Bonus return request fail => Bonus return reason',
+        (tester) async {
+      const bonusRejectReason = 'Bonus reject reason';
+      const bonusRejectComment = 'Bonus reject comment';
+      const approvalNumber = 'fake-approval-number';
+
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformation: [
+            requestInformation.returnRequestInformationList.first.copyWith(
+              bonusInformation: [
+                requestInformation.returnRequestInformationList.first.copyWith(
+                  remarks: Remarks(bonusRejectComment),
+                  returnOrderDesc: bonusRejectReason,
+                  status: StatusType('APPROVED'),
+                  bapiSalesDocNumber: approvalNumber,
+                ),
+              ],
+            )
+          ],
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+      await tester.fling(
+        find.byKey(
+          WidgetKeys.returnRequestDetailScrollList,
+        ),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      final showBonusDetail = find.text('Show details');
+      expect(showBonusDetail, findsOneWidget);
+      await tester.tap(showBonusDetail);
+      await tester.pumpAndSettle();
+
+      final hideBonusDetail = find.text('Hide details');
+      expect(hideBonusDetail, findsOneWidget);
+      await tester.fling(
+        find.byKey(
+          WidgetKeys.returnRequestDetailScrollList,
+        ),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      expect(find.text('Bonus Approval details'), findsOneWidget);
+      WidgetKeys.balanceTextRow(
+        'Approval number',
+        approvalNumber,
+      );
+      expect(find.text('Bonus Return details'), findsOneWidget);
+      final bonusReturnReason = find.byKey(
+        WidgetKeys.balanceTextRow(
+          'Reason',
+          bonusRejectReason,
+        ),
+      );
+      expect(bonusReturnReason, findsNWidgets(2));
+      final bonusComment = find.byKey(
+        WidgetKeys.balanceTextRow(
+          'Comments',
+          bonusRejectComment,
+        ),
+      );
+      expect(bonusComment, findsOneWidget);
+    });
   });
 }

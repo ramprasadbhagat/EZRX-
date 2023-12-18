@@ -237,9 +237,10 @@ class _ReturnDetailsSection extends StatelessWidget {
   const _ReturnDetailsSection({
     Key? key,
     required this.requestInformation,
+    this.isBonusDetails = false,
   }) : super(key: key);
   final ReturnRequestInformation requestInformation;
-
+  final bool isBonusDetails;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -251,7 +252,9 @@ class _ReturnDetailsSection extends StatelessWidget {
             bottom: 10,
           ),
           child: Text(
-            'Return details'.tr(),
+            isBonusDetails
+                ? context.tr('Bonus Return details')
+                : context.tr('Return details'),
             style: Theme.of(context).textTheme.labelMedium,
           ),
         ),
@@ -276,8 +279,10 @@ class _ApprovalDetailsSection extends StatelessWidget {
   const _ApprovalDetailsSection({
     Key? key,
     required this.requestInformation,
+    this.isBonusDetails = false,
   }) : super(key: key);
   final ReturnRequestInformation requestInformation;
+  final bool isBonusDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -291,7 +296,9 @@ class _ApprovalDetailsSection extends StatelessWidget {
                   bottom: 10,
                 ),
                 child: Text(
-                  'Approval details'.tr(),
+                  isBonusDetails
+                      ? context.tr('Bonus Approval details')
+                      : context.tr('Approval details'),
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
@@ -405,105 +412,119 @@ class _BonusItemSection extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  'Bonus return details'.tr(),
+                  context.tr('Bonus return details'),
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
               ...requestInformation.bonusInformation.map(
-                (e) => Container(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: ZPColors.extraLightGrey5,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+                (bonus) => Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 5),
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        color: ZPColors.extraLightGrey5,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            e.materialNumber.displayMatNo,
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 2,
-                            ),
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              color: ZPColors.primary,
-                            ),
-                            child: Text(
-                              'Bonus'.tr(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    color: ZPColors.white,
-                                    fontSize: 10,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        e.materialDescription,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              '${'Batch'.tr()} ${e.batch} (${'Expires'.tr()} ${e.expiryDate.dateString})',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ),
-                          if (requestInformation
-                              .bapiStatus.getIsBapiStatusFailed)
-                            Text(
-                              '${context.tr('Qty')}: ${e.returnQuantity} ',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                        ],
-                      ),
-                      requestInformation.bapiStatus.getIsBapiStatusFailed
-                          ? BalanceTextRow(
-                              keyText: 'Reason for return'.tr(),
-                              valueText: e.returnOrderDesc,
-                              keyFlex: 3,
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: Row(
-                                key: WidgetKeys.bonusPriceComponent,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  PriceComponent(
-                                    salesOrgConfig: context
-                                        .read<EligibilityBloc>()
-                                        .state
-                                        .salesOrgConfigs,
-                                    price: e.totalPrice.toString(),
-                                    type: PriceStyle.returnBonusPrice,
-                                  ),
-                                  Text(
-                                    '${context.tr('Qty')}: ${e.returnQuantity} ',
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
-                                  ),
-                                ],
+                          Row(
+                            children: [
+                              Text(
+                                bonus.materialNumber.displayMatNo,
+                                style: Theme.of(context).textTheme.bodySmall,
                               ),
-                            ),
-                    ],
-                  ),
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 2,
+                                ),
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  color: ZPColors.primary,
+                                ),
+                                child: Text(
+                                  context.tr('Bonus'),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                        color: ZPColors.white,
+                                        fontSize: 10,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            bonus.materialDescription,
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  '${context.tr('Batch')} ${bonus.batch} (${context.tr('Expires')} ${bonus.expiryDate.dateString})',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ),
+                              if (requestInformation
+                                  .bapiStatus.getIsBapiStatusFailed)
+                                Text(
+                                  '${context.tr('Qty')}: ${bonus.returnQuantity} ',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                            ],
+                          ),
+                          requestInformation.bapiStatus.getIsBapiStatusFailed
+                              ? BalanceTextRow(
+                                  keyText: context.tr('Reason for return').tr(),
+                                  valueText: bonus.returnOrderDesc,
+                                  keyFlex: 3,
+                                )
+                              : Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 4),
+                                  child: Row(
+                                    key: WidgetKeys.bonusPriceComponent,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      PriceComponent(
+                                        salesOrgConfig: context
+                                            .read<EligibilityBloc>()
+                                            .state
+                                            .salesOrgConfigs,
+                                        price: bonus.totalPrice.toString(),
+                                        type: PriceStyle.returnBonusPrice,
+                                      ),
+                                      Text(
+                                        '${context.tr('Qty')}: ${bonus.returnQuantity} ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ),
+                    _ApprovalDetailsSection(
+                      requestInformation: bonus,
+                      isBonusDetails: true,
+                    ),
+                    _ReturnDetailsSection(
+                      requestInformation: bonus,
+                      isBonusDetails: true,
+                    ),
+                  ],
                 ),
               ),
             ],
