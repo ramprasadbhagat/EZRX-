@@ -22,6 +22,7 @@ mixin _$OrderStatusTracker {
   String get state => throw _privateConstructorUsedError;
   StatusType get status => throw _privateConstructorUsedError;
   DateTimeStringValue get updateTimeStamp => throw _privateConstructorUsedError;
+  DateTimeStringValue get preformedAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderStatusTrackerCopyWith<OrderStatusTracker> get copyWith =>
@@ -40,7 +41,8 @@ abstract class $OrderStatusTrackerCopyWith<$Res> {
       String stepStage,
       String state,
       StatusType status,
-      DateTimeStringValue updateTimeStamp});
+      DateTimeStringValue updateTimeStamp,
+      DateTimeStringValue preformedAt});
 }
 
 /// @nodoc
@@ -62,6 +64,7 @@ class _$OrderStatusTrackerCopyWithImpl<$Res, $Val extends OrderStatusTracker>
     Object? state = null,
     Object? status = null,
     Object? updateTimeStamp = null,
+    Object? preformedAt = null,
   }) {
     return _then(_value.copyWith(
       action: null == action
@@ -88,6 +91,10 @@ class _$OrderStatusTrackerCopyWithImpl<$Res, $Val extends OrderStatusTracker>
           ? _value.updateTimeStamp
           : updateTimeStamp // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      preformedAt: null == preformedAt
+          ? _value.preformedAt
+          : preformedAt // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
     ) as $Val);
   }
 }
@@ -106,7 +113,8 @@ abstract class _$$_OrderStatusTrackerCopyWith<$Res>
       String stepStage,
       String state,
       StatusType status,
-      DateTimeStringValue updateTimeStamp});
+      DateTimeStringValue updateTimeStamp,
+      DateTimeStringValue preformedAt});
 }
 
 /// @nodoc
@@ -126,6 +134,7 @@ class __$$_OrderStatusTrackerCopyWithImpl<$Res>
     Object? state = null,
     Object? status = null,
     Object? updateTimeStamp = null,
+    Object? preformedAt = null,
   }) {
     return _then(_$_OrderStatusTracker(
       action: null == action
@@ -152,6 +161,10 @@ class __$$_OrderStatusTrackerCopyWithImpl<$Res>
           ? _value.updateTimeStamp
           : updateTimeStamp // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      preformedAt: null == preformedAt
+          ? _value.preformedAt
+          : preformedAt // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
     ));
   }
 }
@@ -165,7 +178,8 @@ class _$_OrderStatusTracker extends _OrderStatusTracker {
       required this.stepStage,
       required this.state,
       required this.status,
-      required this.updateTimeStamp})
+      required this.updateTimeStamp,
+      required this.preformedAt})
       : super._();
 
   @override
@@ -180,10 +194,12 @@ class _$_OrderStatusTracker extends _OrderStatusTracker {
   final StatusType status;
   @override
   final DateTimeStringValue updateTimeStamp;
+  @override
+  final DateTimeStringValue preformedAt;
 
   @override
   String toString() {
-    return 'OrderStatusTracker(action: $action, stepName: $stepName, stepStage: $stepStage, state: $state, status: $status, updateTimeStamp: $updateTimeStamp)';
+    return 'OrderStatusTracker(action: $action, stepName: $stepName, stepStage: $stepStage, state: $state, status: $status, updateTimeStamp: $updateTimeStamp, preformedAt: $preformedAt)';
   }
 
   @override
@@ -199,12 +215,14 @@ class _$_OrderStatusTracker extends _OrderStatusTracker {
             (identical(other.state, state) || other.state == state) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.updateTimeStamp, updateTimeStamp) ||
-                other.updateTimeStamp == updateTimeStamp));
+                other.updateTimeStamp == updateTimeStamp) &&
+            (identical(other.preformedAt, preformedAt) ||
+                other.preformedAt == preformedAt));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, action, stepName, stepStage, state, status, updateTimeStamp);
+  int get hashCode => Object.hash(runtimeType, action, stepName, stepStage,
+      state, status, updateTimeStamp, preformedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -216,13 +234,13 @@ class _$_OrderStatusTracker extends _OrderStatusTracker {
 
 abstract class _OrderStatusTracker extends OrderStatusTracker {
   factory _OrderStatusTracker(
-          {required final String action,
-          required final String stepName,
-          required final String stepStage,
-          required final String state,
-          required final StatusType status,
-          required final DateTimeStringValue updateTimeStamp}) =
-      _$_OrderStatusTracker;
+      {required final String action,
+      required final String stepName,
+      required final String stepStage,
+      required final String state,
+      required final StatusType status,
+      required final DateTimeStringValue updateTimeStamp,
+      required final DateTimeStringValue preformedAt}) = _$_OrderStatusTracker;
   _OrderStatusTracker._() : super._();
 
   @override
@@ -237,6 +255,8 @@ abstract class _OrderStatusTracker extends OrderStatusTracker {
   StatusType get status;
   @override
   DateTimeStringValue get updateTimeStamp;
+  @override
+  DateTimeStringValue get preformedAt;
   @override
   @JsonKey(ignore: true)
   _$$_OrderStatusTrackerCopyWith<_$_OrderStatusTracker> get copyWith =>

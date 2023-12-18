@@ -15,6 +15,7 @@ _$_OrderStatusTrackerDto _$$_OrderStatusTrackerDtoFromJson(
       state: json['State'] as String? ?? '',
       status: json['Status'] as String? ?? '',
       updateTimeStamp: json['UpdateTimeStamp'] as String? ?? '',
+      preformedAt: json['PreformedAt'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_OrderStatusTrackerDtoToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$_OrderStatusTrackerDtoToJson(
       'State': instance.state,
       'Status': instance.status,
       'UpdateTimeStamp': instance.updateTimeStamp,
+      'PreformedAt': instance.preformedAt,
     };

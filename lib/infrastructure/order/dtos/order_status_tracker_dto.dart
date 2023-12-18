@@ -3,11 +3,13 @@ import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_status_tracker_dto.freezed.dart';
+
 part 'order_status_tracker_dto.g.dart';
 
 @freezed
 class OrderStatusTrackerDto with _$OrderStatusTrackerDto {
   const OrderStatusTrackerDto._();
+
   const factory OrderStatusTrackerDto({
     @JsonKey(name: 'Actiom', defaultValue: '') required String action,
     @JsonKey(name: 'StepName', defaultValue: '') required String stepName,
@@ -16,6 +18,7 @@ class OrderStatusTrackerDto with _$OrderStatusTrackerDto {
     @JsonKey(name: 'Status', defaultValue: '') required String status,
     @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
         required String updateTimeStamp,
+    @JsonKey(name: 'PreformedAt', defaultValue: '') required String preformedAt,
   }) = _OrderStatusTrackerDto;
 
   factory OrderStatusTrackerDto.fromDomain(
@@ -28,6 +31,7 @@ class OrderStatusTrackerDto with _$OrderStatusTrackerDto {
       state: orderStatusTracker.state,
       status: orderStatusTracker.status.getOrDefaultValue(''),
       updateTimeStamp: orderStatusTracker.updateTimeStamp.dateString,
+      preformedAt: orderStatusTracker.preformedAt.dateString,
     );
   }
 
@@ -42,6 +46,9 @@ class OrderStatusTrackerDto with _$OrderStatusTrackerDto {
       ),
       updateTimeStamp: DateTimeStringValue(
         updateTimeStamp,
+      ),
+      preformedAt: DateTimeStringValue(
+        preformedAt,
       ),
     );
   }

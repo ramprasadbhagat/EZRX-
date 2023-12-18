@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -43,21 +42,17 @@ extension OrderHistoryStepExtension on List<OrderHistoryStep> {
       (status) => ['out for delivery', 'delivered']
           .contains(status.title.trim().toLowerCase()),
     );
+
     if (needToUpdated) {
       return map(
         (step) => step.title != 'Out for delivery'
             ? step
             : step.copyWith(
-                subSteps: subSteps.length > 1
-                    ? subSteps.sublist(1, subSteps.length - 1)
-                    : <OrderStatusTracker>[],
-                subTitle: subSteps.firstOrNull?.action ?? '',
-                dateString:
-                    subSteps.firstOrNull?.updateTimeStamp.simpleDateString ??
-                        '',
-                timeString:
-                    subSteps.firstOrNull?.updateTimeStamp.timeWithTimeZone ??
-                        '',
+                subSteps: subSteps
+                    .where(
+                      (element) => element != OrderStatusTracker.empty(),
+                    )
+                    .toList(),
               ),
       ).toList();
     }

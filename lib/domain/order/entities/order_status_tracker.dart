@@ -6,6 +6,7 @@ part 'order_status_tracker.freezed.dart';
 @freezed
 class OrderStatusTracker with _$OrderStatusTracker {
   const OrderStatusTracker._();
+
   factory OrderStatusTracker({
     required String action,
     required String stepName,
@@ -13,6 +14,7 @@ class OrderStatusTracker with _$OrderStatusTracker {
     required String state,
     required StatusType status,
     required DateTimeStringValue updateTimeStamp,
+    required DateTimeStringValue preformedAt,
   }) = _OrderStatusTracker;
 
   factory OrderStatusTracker.empty() => OrderStatusTracker(
@@ -22,5 +24,6 @@ class OrderStatusTracker with _$OrderStatusTracker {
         state: '',
         status: StatusType(''),
         updateTimeStamp: DateTimeStringValue(''),
+        preformedAt: DateTimeStringValue(''),
       );
 }

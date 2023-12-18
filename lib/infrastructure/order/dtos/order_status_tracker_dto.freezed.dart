@@ -33,6 +33,8 @@ mixin _$OrderStatusTrackerDto {
   String get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
   String get updateTimeStamp => throw _privateConstructorUsedError;
+  @JsonKey(name: 'PreformedAt', defaultValue: '')
+  String get preformedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +55,8 @@ abstract class $OrderStatusTrackerDtoCopyWith<$Res> {
       @JsonKey(name: 'State', defaultValue: '') String state,
       @JsonKey(name: 'Status', defaultValue: '') String status,
       @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
-      String updateTimeStamp});
+      String updateTimeStamp,
+      @JsonKey(name: 'PreformedAt', defaultValue: '') String preformedAt});
 }
 
 /// @nodoc
@@ -76,6 +79,7 @@ class _$OrderStatusTrackerDtoCopyWithImpl<$Res,
     Object? state = null,
     Object? status = null,
     Object? updateTimeStamp = null,
+    Object? preformedAt = null,
   }) {
     return _then(_value.copyWith(
       action: null == action
@@ -102,6 +106,10 @@ class _$OrderStatusTrackerDtoCopyWithImpl<$Res,
           ? _value.updateTimeStamp
           : updateTimeStamp // ignore: cast_nullable_to_non_nullable
               as String,
+      preformedAt: null == preformedAt
+          ? _value.preformedAt
+          : preformedAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -121,7 +129,8 @@ abstract class _$$_OrderStatusTrackerDtoCopyWith<$Res>
       @JsonKey(name: 'State', defaultValue: '') String state,
       @JsonKey(name: 'Status', defaultValue: '') String status,
       @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
-      String updateTimeStamp});
+      String updateTimeStamp,
+      @JsonKey(name: 'PreformedAt', defaultValue: '') String preformedAt});
 }
 
 /// @nodoc
@@ -141,6 +150,7 @@ class __$$_OrderStatusTrackerDtoCopyWithImpl<$Res>
     Object? state = null,
     Object? status = null,
     Object? updateTimeStamp = null,
+    Object? preformedAt = null,
   }) {
     return _then(_$_OrderStatusTrackerDto(
       action: null == action
@@ -167,6 +177,10 @@ class __$$_OrderStatusTrackerDtoCopyWithImpl<$Res>
           ? _value.updateTimeStamp
           : updateTimeStamp // ignore: cast_nullable_to_non_nullable
               as String,
+      preformedAt: null == preformedAt
+          ? _value.preformedAt
+          : preformedAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -181,7 +195,9 @@ class _$_OrderStatusTrackerDto extends _OrderStatusTrackerDto {
       @JsonKey(name: 'State', defaultValue: '') required this.state,
       @JsonKey(name: 'Status', defaultValue: '') required this.status,
       @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
-      required this.updateTimeStamp})
+      required this.updateTimeStamp,
+      @JsonKey(name: 'PreformedAt', defaultValue: '')
+      required this.preformedAt})
       : super._();
 
   factory _$_OrderStatusTrackerDto.fromJson(Map<String, dynamic> json) =>
@@ -205,10 +221,13 @@ class _$_OrderStatusTrackerDto extends _OrderStatusTrackerDto {
   @override
   @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
   final String updateTimeStamp;
+  @override
+  @JsonKey(name: 'PreformedAt', defaultValue: '')
+  final String preformedAt;
 
   @override
   String toString() {
-    return 'OrderStatusTrackerDto(action: $action, stepName: $stepName, stepStage: $stepStage, state: $state, status: $status, updateTimeStamp: $updateTimeStamp)';
+    return 'OrderStatusTrackerDto(action: $action, stepName: $stepName, stepStage: $stepStage, state: $state, status: $status, updateTimeStamp: $updateTimeStamp, preformedAt: $preformedAt)';
   }
 
   @override
@@ -224,13 +243,15 @@ class _$_OrderStatusTrackerDto extends _OrderStatusTrackerDto {
             (identical(other.state, state) || other.state == state) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.updateTimeStamp, updateTimeStamp) ||
-                other.updateTimeStamp == updateTimeStamp));
+                other.updateTimeStamp == updateTimeStamp) &&
+            (identical(other.preformedAt, preformedAt) ||
+                other.preformedAt == preformedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, action, stepName, stepStage, state, status, updateTimeStamp);
+  int get hashCode => Object.hash(runtimeType, action, stepName, stepStage,
+      state, status, updateTimeStamp, preformedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -256,7 +277,9 @@ abstract class _OrderStatusTrackerDto extends OrderStatusTrackerDto {
       @JsonKey(name: 'State', defaultValue: '') required final String state,
       @JsonKey(name: 'Status', defaultValue: '') required final String status,
       @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
-      required final String updateTimeStamp}) = _$_OrderStatusTrackerDto;
+      required final String updateTimeStamp,
+      @JsonKey(name: 'PreformedAt', defaultValue: '')
+      required final String preformedAt}) = _$_OrderStatusTrackerDto;
   const _OrderStatusTrackerDto._() : super._();
 
   factory _OrderStatusTrackerDto.fromJson(Map<String, dynamic> json) =
@@ -280,6 +303,9 @@ abstract class _OrderStatusTrackerDto extends OrderStatusTrackerDto {
   @override
   @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
   String get updateTimeStamp;
+  @override
+  @JsonKey(name: 'PreformedAt', defaultValue: '')
+  String get preformedAt;
   @override
   @JsonKey(ignore: true)
   _$$_OrderStatusTrackerDtoCopyWith<_$_OrderStatusTrackerDto> get copyWith =>
