@@ -23,7 +23,7 @@ class _PaymentInProgressLabel extends StatelessWidget {
             price: state.amount.getOrDefaultValue('0'),
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,
-            title: context.tr('In-progress: '),
+            title: '${context.tr('In-progress:')} ',
             priceLabelStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: ZPColors.primary,
                 ),

@@ -41,8 +41,12 @@ class PoAttachmentUpload extends StatelessWidget {
                   );
               if (state.fileOperationMode == FileOperationMode.upload) {
                 CustomSnackBar(
-                  messageText:
-                      '${state.fileUrl.length} files uploaded successfully',
+                  messageText: context.tr(
+                    '{fileCount} file upload successfully',
+                    namedArgs: {
+                      'fileCount': state.fileUrl.length.toString(),
+                    },
+                  ),
                 ).show(context);
               }
             },

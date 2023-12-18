@@ -179,11 +179,10 @@ class _SmallOrderFee extends StatelessWidget {
           ],
         ),
         Text(
-          'Applies to orders less than ${StringUtils.displayPrice(
+          '${context.tr('Applies to orders less than')} ${StringUtils.formatPrice(
             eligibilityState.salesOrgConfigs,
             eligibilityState.salesOrg.smallOrderThreshold,
-          )}'
-              .tr(),
+          )}',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: ZPColors.neutralsBlack,
                 fontSize: 10,

@@ -54,7 +54,7 @@ class _PaymentItem extends StatelessWidget {
               vertical: 10,
             ),
             title: Text(
-              '${paymentItem.postingKeyName} #${paymentItem.searchKey}',
+              '${context.tr(paymentItem.postingKeyName)} #${paymentItem.searchKey}',
               style: Theme.of(context).textTheme.labelMedium,
             ),
             subtitle: Padding(

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -138,7 +139,10 @@ class _SummaryBreakDownForID extends StatelessWidget {
                       '${context.tr('Small order fee')}:',
                     ),
                     Text(
-                      context.tr('Applies to orders less than IDR 300,000 '),
+                      '${context.tr('Applies to orders less than')} ${StringUtils.formatPrice(
+                        salesOrgConfigs,
+                        salesOrgConfigs.salesOrg.smallOrderThreshold,
+                      )}',
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!
