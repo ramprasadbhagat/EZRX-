@@ -50,7 +50,10 @@ class ViewByItemsPage extends StatelessWidget {
 
         return ScrollList<ViewByItemGroup>(
           controller: ScrollController(),
-          noRecordFoundWidget: NoRecordFound.ordersHistory(context),
+          noRecordFoundWidget: NoRecordFound.ordersHistory(
+            context,
+            state.searchKey.searchValueOrEmpty,
+          ),
           onRefresh: () {
             context
                 .read<ViewByItemFilterBloc>()

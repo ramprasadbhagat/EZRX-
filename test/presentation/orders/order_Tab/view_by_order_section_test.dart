@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -174,6 +175,40 @@ void main() {
         WidgetKeys.loaderImage,
       );
       expect(loaderImage, findsOneWidget);
+    });
+
+    testWidgets('no record section test when viewByOrderList is empty',
+        (tester) async {
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final noRecordFound = find.byType(
+        NoRecordFound,
+      );
+      expect(noRecordFound, findsOneWidget);
+      expect(
+        (tester.widget(noRecordFound) as NoRecordFound).subTitle,
+        'Items ordered on eZRx+ will be shown here',
+      );
+    });
+
+    testWidgets(
+        'no record section test when viewByOrderList is empty after search',
+        (tester) async {
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          searchKey: SearchKey('fake_key'),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final noRecordFound = find.byType(
+        NoRecordFound,
+      );
+      expect(noRecordFound, findsOneWidget);
+      expect(
+        (tester.widget(noRecordFound) as NoRecordFound).subTitle,
+        'Try adjusting your search or filter selection to find what you’re looking for',
+      );
     });
     testWidgets("Displaying 'items' text test ", (tester) async {
       when(() => mockViewByOrderBloc.state).thenReturn(

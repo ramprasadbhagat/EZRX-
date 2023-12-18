@@ -66,7 +66,10 @@ class ViewByOrdersPage extends StatelessWidget {
         return ScrollList<ViewByOrdersGroup>(
           key: WidgetKeys.viewByOrdersGroupList,
           controller: ScrollController(),
-          noRecordFoundWidget: NoRecordFound.ordersHistory(context),
+          noRecordFoundWidget: NoRecordFound.ordersHistory(
+            context,
+            state.searchKey.searchValueOrEmpty,
+          ),
           onRefresh: () => context.read<ViewByOrderBloc>().add(
                 ViewByOrderEvent.fetch(
                   filter: ViewByOrdersFilter.empty(),
