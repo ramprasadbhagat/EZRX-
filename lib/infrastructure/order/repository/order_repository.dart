@@ -112,6 +112,7 @@ class OrderRepository implements IOrderRepository {
 
       final encryptedData = encryption.encryptionData(
         data: submitOrderData,
+        secretKey: config.orderEncryptionSecret,
       );
 
       final submitOrderResponse =

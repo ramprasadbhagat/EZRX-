@@ -78,8 +78,10 @@ void main() {
             paymentMethod: '',
             purchaseOrderType: '',
           );
-          final encryptedData =
-              encryption.encryptionData(data: submitOrder.toJson());
+          final encryptedData = encryption.encryptionData(
+            data: submitOrder.toJson(),
+            secretKey: locator<Config>().orderEncryptionSecret,
+          );
           final variables = {
             'NewOrderInput': {
               'data': encryptedData.data,

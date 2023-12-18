@@ -95,6 +95,7 @@ void main() {
   final mockShipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
   late ViewByOrderDetailsLocalDataSource viewByOrderDetailsLocalDataSource;
   late ViewByOrderDetailsRemoteDataSource viewByOrderDetailsRemoteDataSource;
+  const fakeSecretKey = 'fake-key';
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -612,12 +613,14 @@ void main() {
 
     test('get submit order successfully Remote success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
 
       when(
         () => encryption.encryptionData(
           data: SubmitOrderDto.fromDomain(
             submitOrderMock,
           ).toJson(),
+          secretKey: fakeSecretKey,
         ),
       ).thenReturn(orderEncryptionMock);
       when(
@@ -662,30 +665,15 @@ void main() {
             ),
           )
           .toList();
-      final focMaterialProduct = focMaterial
-          .expand(
-            (element) => !element.materialInfo.type.typeBundle
-                ? [element.toSubmitMaterialInfo()]
-                : element.bundle.materials.map(
-                    (el) => PriceAggregate.empty()
-                        .copyWith(
-                          materialInfo: el,
-                          quantity: el.quantity.intValue,
-                          salesOrgConfig: element.salesOrgConfig,
-                          bundle: element.bundle,
-                        )
-                        .toSubmitMaterialInfo(),
-                  ),
-          )
-          .toList();
+
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
 
       when(
         () => encryption.encryptionData(
           data: SubmitOrderDto.fromDomain(
-            submitOrderMock.copyWith(
-              products: focMaterialProduct,
-            ),
+            submitOrderMock,
           ).toJson(),
+          secretKey: fakeSecretKey,
         ),
       ).thenReturn(orderEncryptionMock);
       when(
@@ -733,30 +721,15 @@ void main() {
             ),
           )
           .toList();
-      final focMaterialProduct = focMaterial
-          .expand(
-            (element) => !element.materialInfo.type.typeBundle
-                ? [element.toSubmitMaterialInfo()]
-                : element.bundle.materials.map(
-                    (el) => PriceAggregate.empty()
-                        .copyWith(
-                          materialInfo: el,
-                          quantity: el.quantity.intValue,
-                          salesOrgConfig: element.salesOrgConfig,
-                          bundle: element.bundle,
-                        )
-                        .toSubmitMaterialInfo(),
-                  ),
-          )
-          .toList();
+
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
 
       when(
         () => encryption.encryptionData(
           data: SubmitOrderDto.fromDomain(
-            submitOrderMock.copyWith(
-              products: focMaterialProduct,
-            ),
+            submitOrderMock,
           ).toJson(),
+          secretKey: fakeSecretKey,
         ),
       ).thenReturn(orderEncryptionMock);
       when(
@@ -807,6 +780,8 @@ void main() {
             ),
           )
           .toList();
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+
       when(
         () => encryption.encryptionData(
           data: SubmitOrderDto.fromDomain(
@@ -829,6 +804,7 @@ void main() {
                   .toList(),
             ),
           ).toJson(),
+          secretKey: fakeSecretKey,
         ),
       ).thenReturn(orderEncryptionMock);
       when(
@@ -866,12 +842,14 @@ void main() {
 
     test('get submit order successfully Remote fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
 
       when(
         () => encryption.encryptionData(
           data: SubmitOrderDto.fromDomain(
             submitOrderMock,
           ).toJson(),
+          secretKey: fakeSecretKey,
         ),
       ).thenReturn(orderEncryptionMock);
       when(
@@ -981,11 +959,13 @@ void main() {
             )
             .toList(),
       );
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
       when(
         () => encryption.encryptionData(
           data: SubmitOrderDto.fromDomain(
             submitOrderComboMock,
           ).toJson(),
+          secretKey: fakeSecretKey,
         ),
       ).thenReturn(orderEncryptionMock);
       when(
@@ -1031,6 +1011,7 @@ void main() {
               fakeIDSalesOrganisation.salesOrg.getOrDefaultValue(''),
         ),
       );
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
 
       when(
         () => encryption.encryptionData(
@@ -1038,6 +1019,7 @@ void main() {
             submitOrderMockIDMarket,
           ).toJson()
             ..addAll({'deliveryFee': '12500.0'}),
+          secretKey: fakeSecretKey,
         ),
       ).thenReturn(orderEncryptionMock);
       when(
@@ -1079,12 +1061,14 @@ void main() {
       ),
     );
 
+    when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
     when(
       () => encryption.encryptionData(
         data: SubmitOrderDto.fromDomain(
           submitOrderMockIDMarket,
         ).toJson()
           ..addAll({'deliveryFee': 'null'}),
+        secretKey: fakeSecretKey,
       ),
     ).thenReturn(orderEncryptionMock);
     when(

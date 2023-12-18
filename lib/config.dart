@@ -100,6 +100,17 @@ class Config {
     }
   }
 
+  String get orderEncryptionSecret {
+    switch (appFlavor) {
+      case Flavor.mock:
+      case Flavor.dev:
+      case Flavor.uat:
+        return 'abcdefghijklmnopqrstuvwxyz012345';
+      case Flavor.prod:
+        return 'HRppzSHG1WAlyvcKx8lFC0TEeT5OcBBr';
+    }
+  }
+
   //============================================================
   //  Okta SSO login
   //
