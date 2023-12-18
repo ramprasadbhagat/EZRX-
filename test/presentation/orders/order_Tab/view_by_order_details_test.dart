@@ -1256,6 +1256,95 @@ void main() {
       );
     });
 
+    testWidgets('Order summary section - Hide Tax Rate for VN', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeVNSalesOrganisation,
+          salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled.copyWith(
+            vatValue: 9,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.priceText),
+          matching: find.text('Subtotal (excl.tax):'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.priceText),
+          matching: find.text('Tax:'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.priceText),
+          matching: find.textContaining('Grand total:'),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'Order summary section - Display Tax Rate for other market except VN',
+        (tester) async {
+      const finalPrice = 88.0;
+      const vatValue = 9;
+      const quantity = 2;
+      const subTotalValueWithoutTax = finalPrice * quantity;
+      const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
+      const grandTotalValue = subTotalValueWithoutTax + totalTax;
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled.copyWith(
+            vatValue: vatValue,
+          ),
+        ),
+      );
+
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+          orderHistoryDetailsOrderItem: [
+            fakeOrderHistoryItem.copyWith(
+              totalPrice: grandTotalValue,
+            )
+          ],
+          totalTax: totalTax,
+          orderValue: subTotalValueWithoutTax,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.priceText),
+          matching: find.text('Subtotal (excl.tax):'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.priceText),
+          matching: find.text('Tax at $vatValue%:'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.priceText),
+          matching: find.textContaining('Grand total:'),
+        ),
+        findsOneWidget,
+      );
+    });
+
     testWidgets('BundleItemMaterial is visible', (tester) async {
       final fakeOrderHistory = OrderHistory.empty().copyWith(
         orderHistoryItems: <OrderHistoryItem>[

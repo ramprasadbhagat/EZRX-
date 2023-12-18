@@ -397,6 +397,114 @@ void main() {
     );
 
     testWidgets(
+      'Order summary check - Tax rate display for other market except VN',
+      (tester) async {
+        const finalPrice = 88.0;
+        const vatValue = 9;
+        const quantity = 2;
+        const subTotalValueWithoutTax = finalPrice * quantity;
+        const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled.copyWith(
+              vatValue: vatValue,
+            ),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [
+                OrderHistoryDetailsOrderItem.empty().copyWith(
+                  qty: quantity,
+                )
+              ],
+              orderValue: subTotalValueWithoutTax,
+              totalTax: totalTax,
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final orderSummarySection =
+            find.byKey(WidgetKeys.orderSuccessOrderSummarySection);
+        final scrollList = find.byKey(WidgetKeys.scrollList);
+        await tester.dragUntilVisible(
+          orderSummarySection,
+          scrollList,
+          const Offset(0, -300),
+        );
+        //Fetching the vat value for other market - 9
+        final taxRateFinder = find.text('Tax at $vatValue%:');
+        expect(
+          find.descendant(
+            of: find.byKey(
+              WidgetKeys.orderSummaryTax,
+            ),
+            matching: taxRateFinder,
+          ),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      'Order summary check - Hide Tax rate display for VN',
+      (tester) async {
+        const finalPrice = 88.0;
+        const vatValue = 9;
+        const quantity = 2;
+        const subTotalValueWithoutTax = finalPrice * quantity;
+        const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              vatValue: vatValue,
+              displaySubtotalTaxBreakdown: true,
+            ),
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [
+                OrderHistoryDetailsOrderItem.empty().copyWith(
+                  qty: quantity,
+                )
+              ],
+              orderValue: subTotalValueWithoutTax,
+              totalTax: totalTax,
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final orderSummarySection =
+            find.byKey(WidgetKeys.orderSuccessOrderSummarySection);
+        final scrollList = find.byKey(WidgetKeys.scrollList);
+        await tester.dragUntilVisible(
+          orderSummarySection,
+          scrollList,
+          const Offset(0, -300),
+        );
+        //Hide the vat value
+        final taxRateFinder = find.text('Tax:');
+        expect(
+          find.descendant(
+            of: find.byKey(
+              WidgetKeys.orderSummaryTax,
+            ),
+            matching: taxRateFinder,
+          ),
+          findsOneWidget,
+        );
+      },
+    );
+    testWidgets(
       'Order summary price check - subTotal include exclude tax & grandTotal price & tax',
       (tester) async {
         const finalPrice = 88.0;

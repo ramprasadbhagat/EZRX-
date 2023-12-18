@@ -1909,6 +1909,84 @@ void main() {
     );
 
     testWidgets(
+      '=> Hide tax rate on material level when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for VN',
+      (tester) async {
+        final cartState = CartState.initial().copyWith(
+          salesOrganisation: fakeVNSalesOrganisation,
+          cartProducts: <PriceAggregate>[PriceAggregate.empty()],
+          config: fakeVNSalesOrgConfigTaxBreakdownEnabled,
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeVNSalesOrgConfigTaxBreakdownEnabled,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        await tester.fling(
+            find.byType(CustomScrollView), const Offset(0, -10000), 100,);
+        await tester.pump();
+
+        //Hide the vat value
+        final taxRateFinder = find.text('Tax:');
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryTax),
+            matching: taxRateFinder,
+          ),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      '=> Show tax rate on material level when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for VN',
+      (tester) async {
+        const vatValue = 2;
+        final cartState = CartState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty(),
+          ],
+          config: fakeMYSalesOrgConfigTaxBreakdownEnabled.copyWith(
+            vatValue: vatValue,
+          ),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        await tester.fling(find.byType(CustomScrollView), const Offset(0, -10000), 100);
+        await tester.pump();
+
+        //Fetching the vat value for other market - 2%
+        final taxRateFinder = find.text('Tax at $vatValue%:');
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryTax),
+            matching: taxRateFinder,
+          ),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
       '=> Do not Show delivery Instruction textfield  when displaySubtotalTaxBreakdown is false',
       (tester) async {
         final salesOrgState = SalesOrgState.initial().copyWith(
