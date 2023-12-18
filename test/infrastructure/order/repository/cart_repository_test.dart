@@ -1244,5 +1244,46 @@ void main() {
         ),
       );
     });
+
+    test('upsertCartWithBonus test left', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      final materialInfo = MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('fake-material-number'),
+        type: MaterialInfoType('material'),
+        parentID: 'fake-parent-Id',
+        quantity: MaterialQty(1),
+      );
+      final upsertCartRequest = CartProductRequest.toMaterialRequest(
+        salesOrg: fakeSalesOrg,
+        customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+        quantity: 1,
+        itemId: 'fake-item-Id',
+        language: 'en',
+        materialInfo: materialInfo,
+        counterOfferDetails: RequestCounterOfferDetails.empty(),
+      );
+      when(
+        () => cartRemoteDataSource.upsertCart(
+          requestParams:
+              CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+        ),
+      ).thenThrow(
+        (invocation) async => MockException(),
+      );
+
+      final result = await cartRepository.upsertCartWithBonus(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        shipToInfo: fakeShipToInfo,
+        counterOfferDetails: RequestCounterOfferDetails.empty(),
+        language: 'en',
+        product: PriceAggregate.empty().copyWith(
+          materialInfo: materialInfo,
+        ),
+        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+      );
+      expect(result.isLeft(), true);
+    });
   });
 }

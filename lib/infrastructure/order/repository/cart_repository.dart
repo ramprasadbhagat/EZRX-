@@ -442,35 +442,32 @@ class CartRepository implements ICartRepository {
     required RequestCounterOfferDetails counterOfferDetails,
   }) async {
     try {
-      final productList = <PriceAggregate>[];
-
       final products = [
         product.materialInfo.copyWith(
           quantity: MaterialQty(product.quantity),
         ),
         ...product.dealBonusList,
       ];
+      var productList = <PriceAggregate>[];
 
-      await Future.wait(
-        products.map((productData) async {
-          final cartProducts = await upsertCart(
-            materialInfo: productData,
-            salesOrganisation: salesOrganisation,
-            salesOrganisationConfig: salesOrganisationConfig,
-            customerCodeInfo: customerCodeInfo,
-            shipToInfo: shipToInfo,
-            language: language,
-            itemId: productData.sampleBonusItemId,
-            quantity: productData.quantity.intValue,
-            counterOfferDetails: productData.counterOfferDetails,
-          );
+      for (final productData in products) {
+        final cartProducts = await upsertCart(
+          materialInfo: productData,
+          salesOrganisation: salesOrganisation,
+          salesOrganisationConfig: salesOrganisationConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          language: language,
+          itemId: productData.sampleBonusItemId,
+          quantity: productData.quantity.intValue,
+          counterOfferDetails: productData.counterOfferDetails,
+        );
 
-          cartProducts.fold((l) => {}, (r) {
-            productList.clear();
-            productList.addAll(r);
-          });
-        }),
-      );
+        productList = cartProducts.fold(
+          (left) => throw left.failureMessage,
+          (right) => right,
+        );
+      }
 
       return Right(productList);
     } catch (e) {
