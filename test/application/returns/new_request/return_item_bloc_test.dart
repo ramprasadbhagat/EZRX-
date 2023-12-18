@@ -82,6 +82,7 @@ void main() {
               filter: fakeReturnItemsFilter,
               searchKey: SearchKey(''),
               language: initState.user.preferredLanguage.languageCode,
+              user: fakeUserWithLanguageCode,
             ),
           ),
         ).thenAnswer(
@@ -128,6 +129,7 @@ void main() {
               filter: fakeReturnItemsFilter,
               searchKey: SearchKey(''),
               language: initState.user.preferredLanguage.languageCode,
+              user: fakeUserWithLanguageCode,
             ),
           ),
         ).thenAnswer(
@@ -178,6 +180,7 @@ void main() {
               filter: fakeReturnItemsFilter,
               searchKey: SearchKey(''),
               language: initState.user.preferredLanguage.languageCode,
+              user: fakeUserWithLanguageCode,
             ),
           ),
         ).thenAnswer(
@@ -228,6 +231,7 @@ void main() {
               filter: fakeReturnItemsFilter,
               searchKey: SearchKey(''),
               language: initState.user.preferredLanguage.languageCode,
+              user: fakeUserWithLanguageCode,
             ),
           ),
         ).thenAnswer(

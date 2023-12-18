@@ -53,7 +53,9 @@ class ReturnRequestRepository extends IReturnRequestRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final response = await localDataSource.searchReturnMaterials();
+        final response = requestParams.user.role.type.isSalesRepRole
+            ? await localDataSource.searchReturnMaterialsForSalesRep()
+            : await localDataSource.searchReturnMaterials();
 
         return Right(response);
       } catch (e) {
@@ -63,10 +65,20 @@ class ReturnRequestRepository extends IReturnRequestRepository {
       }
     }
     try {
-      final returnRequest = await remoteDataSource.searchReturnMaterials(
-        requestParams:
-            ReturnMaterialsParamsDto.fromDomain(requestParams).toMap(),
-      );
+      final returnParameters =
+          ReturnMaterialsParamsDto.fromDomain(requestParams).toMap();
+
+      if (!requestParams.user.role.type.isSalesRepRole) {
+        returnParameters.remove('username');
+      }
+
+      final returnRequest = requestParams.user.role.type.isSalesRepRole
+          ? await remoteDataSource.searchReturnMaterialsForSalesRep(
+              requestParams: returnParameters,
+            )
+          : await remoteDataSource.searchReturnMaterials(
+              requestParams: returnParameters,
+            );
 
       return Right(returnRequest);
     } catch (e) {

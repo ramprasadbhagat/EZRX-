@@ -37,6 +37,8 @@ mixin _$ReturnMaterialsParamsDto {
   ReturnItemsFilterDto get filter => throw _privateConstructorUsedError;
   @JsonKey(name: 'language', defaultValue: '')
   String get language => throw _privateConstructorUsedError;
+  @JsonKey(name: 'username', defaultValue: '')
+  String get username => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -59,7 +61,8 @@ abstract class $ReturnMaterialsParamsDtoCopyWith<$Res> {
       @JsonKey(name: 'searchFilter', defaultValue: '') String searchFilter,
       @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
       ReturnItemsFilterDto filter,
-      @JsonKey(name: 'language', defaultValue: '') String language});
+      @JsonKey(name: 'language', defaultValue: '') String language,
+      @JsonKey(name: 'username', defaultValue: '') String username});
 
   $ReturnItemsFilterDtoCopyWith<$Res> get filter;
 }
@@ -86,6 +89,7 @@ class _$ReturnMaterialsParamsDtoCopyWithImpl<$Res,
     Object? searchFilter = null,
     Object? filter = null,
     Object? language = null,
+    Object? username = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -120,6 +124,10 @@ class _$ReturnMaterialsParamsDtoCopyWithImpl<$Res,
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -150,7 +158,8 @@ abstract class _$$_ReturnMaterialsParamsDtoCopyWith<$Res>
       @JsonKey(name: 'searchFilter', defaultValue: '') String searchFilter,
       @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
       ReturnItemsFilterDto filter,
-      @JsonKey(name: 'language', defaultValue: '') String language});
+      @JsonKey(name: 'language', defaultValue: '') String language,
+      @JsonKey(name: 'username', defaultValue: '') String username});
 
   @override
   $ReturnItemsFilterDtoCopyWith<$Res> get filter;
@@ -176,6 +185,7 @@ class __$$_ReturnMaterialsParamsDtoCopyWithImpl<$Res>
     Object? searchFilter = null,
     Object? filter = null,
     Object? language = null,
+    Object? username = null,
   }) {
     return _then(_$_ReturnMaterialsParamsDto(
       salesOrg: null == salesOrg
@@ -210,6 +220,10 @@ class __$$_ReturnMaterialsParamsDtoCopyWithImpl<$Res>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -227,7 +241,8 @@ class _$_ReturnMaterialsParamsDto extends _ReturnMaterialsParamsDto {
       required this.searchFilter,
       @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
       required this.filter,
-      @JsonKey(name: 'language', defaultValue: '') required this.language})
+      @JsonKey(name: 'language', defaultValue: '') required this.language,
+      @JsonKey(name: 'username', defaultValue: '') required this.username})
       : super._();
 
   factory _$_ReturnMaterialsParamsDto.fromJson(Map<String, dynamic> json) =>
@@ -257,10 +272,13 @@ class _$_ReturnMaterialsParamsDto extends _ReturnMaterialsParamsDto {
   @override
   @JsonKey(name: 'language', defaultValue: '')
   final String language;
+  @override
+  @JsonKey(name: 'username', defaultValue: '')
+  final String username;
 
   @override
   String toString() {
-    return 'ReturnMaterialsParamsDto(salesOrg: $salesOrg, soldTo: $soldTo, shipTo: $shipTo, first: $first, after: $after, searchFilter: $searchFilter, filter: $filter, language: $language)';
+    return 'ReturnMaterialsParamsDto(salesOrg: $salesOrg, soldTo: $soldTo, shipTo: $shipTo, first: $first, after: $after, searchFilter: $searchFilter, filter: $filter, language: $language, username: $username)';
   }
 
   @override
@@ -278,13 +296,15 @@ class _$_ReturnMaterialsParamsDto extends _ReturnMaterialsParamsDto {
                 other.searchFilter == searchFilter) &&
             (identical(other.filter, filter) || other.filter == filter) &&
             (identical(other.language, language) ||
-                other.language == language));
+                other.language == language) &&
+            (identical(other.username, username) ||
+                other.username == username));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, salesOrg, soldTo, shipTo, first,
-      after, searchFilter, filter, language);
+      after, searchFilter, filter, language, username);
 
   @JsonKey(ignore: true)
   @override
@@ -314,7 +334,9 @@ abstract class _ReturnMaterialsParamsDto extends ReturnMaterialsParamsDto {
       @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
       required final ReturnItemsFilterDto filter,
       @JsonKey(name: 'language', defaultValue: '')
-      required final String language}) = _$_ReturnMaterialsParamsDto;
+      required final String language,
+      @JsonKey(name: 'username', defaultValue: '')
+      required final String username}) = _$_ReturnMaterialsParamsDto;
   const _ReturnMaterialsParamsDto._() : super._();
 
   factory _ReturnMaterialsParamsDto.fromJson(Map<String, dynamic> json) =
@@ -344,6 +366,9 @@ abstract class _ReturnMaterialsParamsDto extends ReturnMaterialsParamsDto {
   @override
   @JsonKey(name: 'language', defaultValue: '')
   String get language;
+  @override
+  @JsonKey(name: 'username', defaultValue: '')
+  String get username;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnMaterialsParamsDtoCopyWith<_$_ReturnMaterialsParamsDto>

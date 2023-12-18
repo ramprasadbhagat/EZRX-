@@ -1,64 +1,4 @@
-class ReturnRequestQuery {
-  String searchReturnMaterials() {
-    return '''
-      fragment MaterialsFields on returnMaterialInformation {
-        item {
-          assignmentNumber
-          material
-          materialDescription
-          balanceQuantity
-          targetQuantity
-          batch
-          eligibleForReturn
-          priceDate
-          unitPrice
-          totalPrice
-          principalCode
-          principalName
-          expiryDate
-          itemNumber
-          outsidePolicy
-          bonusItem {
-            assignmentNumber
-            material
-            materialDescription
-            balanceQuantity
-            eligibleForReturn
-            batch
-            priceDate
-            unitPrice
-            totalPrice
-            principalCode
-            principalName
-            expiryDate
-            itemNumber
-            outsidePolicy
-          }
-        }
-      }
-
-      fragment materialBasicInformation on materialBasicInfo {
-        salesOrg
-        partnerRole
-        partnerNumber
-      }
-
-      query searchReturnMaterials(\$searchReturnMaterialsRequestV2: searchReturnMaterialsRequestV2!) {
-        searchReturnMaterialsV2(request: \$searchReturnMaterialsRequestV2) {
-          materialBasicInformation {
-            ...materialBasicInformation
-          }
-          materials {
-            ...MaterialsFields
-          }
-        }
-      } 
-    ''';
-  }
-
-  String searchReturnMaterialsForSalesRep() {
-    return '''
-      fragment MaterialsFields on returnMaterialInformation {
+fragment MaterialsFields on returnMaterialInformation {
         item {
           assignmentNumber
           referenceDocument
@@ -163,46 +103,19 @@ class ReturnRequestQuery {
           }
           totalCount
         }
-      } 
-    ''';
-  }
-
-  String addFileRequest() {
-    return '''
-    mutation AddFileRequest(\$folder: String!, \$req: [UploadFile!]!) {
-      addRequestFileUpload(folder: \$folder, req: \$req) {
-        id
-        path
       }
-    }
-  ''';
-  }
 
-  String deleteFile() {
-    return '''
-   mutation DeleteFile(\$filePath: String!) {
-      deleteFile(file: \$filePath) {
-        isDeleted
-      }
-    }
-  ''';
-  }
 
-  String addRequest() {
-    return '''
-    mutation addRequestV2(\$returnInput: returnInput!) {
-      addRequestV2(input: \$returnInput) {
-        requestID
-        messages {
-          childRequestID
-          message {
-            type
-            number
-            message
-          }
-        }
-      }
-    }
-  ''';
+variables : {
+  "searchReturnMaterialsForSalesRepRequest": {
+    "soldTo": "0030082707",
+    "shipTo": "0070149863",
+    "salesOrg": "2001",
+    "first": 10,
+    "after": 0,
+    "language": "EN",
+    "dateFrom": "20230615",
+    "dateTo": "20231215",
+    "username": "testintsalesrep"
   }
 }

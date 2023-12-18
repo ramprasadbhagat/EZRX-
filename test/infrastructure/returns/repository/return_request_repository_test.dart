@@ -70,6 +70,7 @@ void main() {
     filter: ReturnItemsFilter.empty(),
     searchKey: SearchKey(''),
     language: fakeUserWithLanguageCode.preferredLanguage.languageCode,
+    user: fakeUserWithLanguageCode,
   );
   final errorMock = Exception('fake-error');
   const fakePath = 'fake-path';
@@ -161,6 +162,7 @@ void main() {
             () => remoteDataSourceMock.searchReturnMaterials(
               requestParams:
                   ReturnMaterialsParamsDto.fromDomain(requestParamsMock)
+                      .copyWith(username: '')
                       .toMap(),
             ),
           ).thenAnswer(
@@ -181,6 +183,7 @@ void main() {
             () => remoteDataSourceMock.searchReturnMaterials(
               requestParams:
                   ReturnMaterialsParamsDto.fromDomain(requestParamsMock)
+                      .copyWith(username: '')
                       .toMap(),
             ),
           ).thenThrow(errorMock);

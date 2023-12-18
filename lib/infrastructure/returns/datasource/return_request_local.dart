@@ -21,6 +21,18 @@ class ReturnRequestLocalDataSource {
     ).toDomain();
   }
 
+  Future<ReturnMaterialList> searchReturnMaterialsForSalesRep() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/searchReturnMaterialSalesRepV2Response.json',
+      ),
+    );
+
+    return ReturnMaterialListDto.fromJson(
+      data['data']['searchReturnMaterialsForSalesRepV2'],
+    ).toDomain();
+  }
+
   Future<ReturnRequestAttachment> uploadFile() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/addFileRequestResponse.json'),

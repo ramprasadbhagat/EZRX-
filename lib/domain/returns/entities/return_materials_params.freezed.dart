@@ -24,6 +24,7 @@ mixin _$ReturnMaterialsParams {
   ReturnItemsFilter get filter => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnMaterialsParamsCopyWith<ReturnMaterialsParams> get copyWith =>
@@ -44,9 +45,11 @@ abstract class $ReturnMaterialsParamsCopyWith<$Res> {
       int offset,
       ReturnItemsFilter filter,
       SearchKey searchKey,
-      String language});
+      String language,
+      User user});
 
   $ReturnItemsFilterCopyWith<$Res> get filter;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -71,6 +74,7 @@ class _$ReturnMaterialsParamsCopyWithImpl<$Res,
     Object? filter = null,
     Object? searchKey = null,
     Object? language = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -105,6 +109,10 @@ class _$ReturnMaterialsParamsCopyWithImpl<$Res,
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ) as $Val);
   }
 
@@ -113,6 +121,14 @@ class _$ReturnMaterialsParamsCopyWithImpl<$Res,
   $ReturnItemsFilterCopyWith<$Res> get filter {
     return $ReturnItemsFilterCopyWith<$Res>(_value.filter, (value) {
       return _then(_value.copyWith(filter: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
@@ -133,10 +149,13 @@ abstract class _$$_ReturnMaterialsParamsCopyWith<$Res>
       int offset,
       ReturnItemsFilter filter,
       SearchKey searchKey,
-      String language});
+      String language,
+      User user});
 
   @override
   $ReturnItemsFilterCopyWith<$Res> get filter;
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -158,6 +177,7 @@ class __$$_ReturnMaterialsParamsCopyWithImpl<$Res>
     Object? filter = null,
     Object? searchKey = null,
     Object? language = null,
+    Object? user = null,
   }) {
     return _then(_$_ReturnMaterialsParams(
       salesOrg: null == salesOrg
@@ -192,6 +212,10 @@ class __$$_ReturnMaterialsParamsCopyWithImpl<$Res>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 }
@@ -207,7 +231,8 @@ class _$_ReturnMaterialsParams extends _ReturnMaterialsParams {
       required this.offset,
       required this.filter,
       required this.searchKey,
-      required this.language})
+      required this.language,
+      required this.user})
       : super._();
 
   @override
@@ -226,10 +251,12 @@ class _$_ReturnMaterialsParams extends _ReturnMaterialsParams {
   final SearchKey searchKey;
   @override
   final String language;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'ReturnMaterialsParams(salesOrg: $salesOrg, shipToInfo: $shipToInfo, soldToInfo: $soldToInfo, pageSize: $pageSize, offset: $offset, filter: $filter, searchKey: $searchKey, language: $language)';
+    return 'ReturnMaterialsParams(salesOrg: $salesOrg, shipToInfo: $shipToInfo, soldToInfo: $soldToInfo, pageSize: $pageSize, offset: $offset, filter: $filter, searchKey: $searchKey, language: $language, user: $user)';
   }
 
   @override
@@ -250,12 +277,13 @@ class _$_ReturnMaterialsParams extends _ReturnMaterialsParams {
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey) &&
             (identical(other.language, language) ||
-                other.language == language));
+                other.language == language) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, salesOrg, shipToInfo, soldToInfo,
-      pageSize, offset, filter, searchKey, language);
+      pageSize, offset, filter, searchKey, language, user);
 
   @JsonKey(ignore: true)
   @override
@@ -274,7 +302,8 @@ abstract class _ReturnMaterialsParams extends ReturnMaterialsParams {
       required final int offset,
       required final ReturnItemsFilter filter,
       required final SearchKey searchKey,
-      required final String language}) = _$_ReturnMaterialsParams;
+      required final String language,
+      required final User user}) = _$_ReturnMaterialsParams;
   const _ReturnMaterialsParams._() : super._();
 
   @override
@@ -293,6 +322,8 @@ abstract class _ReturnMaterialsParams extends ReturnMaterialsParams {
   SearchKey get searchKey;
   @override
   String get language;
+  @override
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnMaterialsParamsCopyWith<_$_ReturnMaterialsParams> get copyWith =>

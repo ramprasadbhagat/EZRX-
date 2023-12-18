@@ -64,6 +64,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
             filter: event.appliedFilter,
             searchKey: event.searchKey,
             language: state.user.preferredLanguage.languageCode,
+            user: state.user,
           ),
         );
 
@@ -111,6 +112,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
           filter: state.appliedFilter,
           searchKey: state.searchKey,
           language: state.user.preferredLanguage.languageCode,
+          user: state.user,
         ),
       );
 

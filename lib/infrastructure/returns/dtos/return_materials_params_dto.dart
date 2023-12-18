@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
@@ -32,6 +33,8 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
         required ReturnItemsFilterDto filter,
     @JsonKey(name: 'language', defaultValue: '')
         required String language,
+    @JsonKey(name: 'username', defaultValue: '')
+        required String username,
   }) = _ReturnMaterialsParamsDto;
 
   factory ReturnMaterialsParamsDto.fromDomain(
@@ -50,6 +53,7 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
       ),
       searchFilter: domain.searchKey.searchValueOrEmpty,
       language: domain.language,
+      username: domain.user.username.getOrCrash(),
     );
   }
 
@@ -63,6 +67,7 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
       filter: filter.toDomain,
       searchKey: SearchKey.search(searchFilter),
       language: language,
+      user: User.empty(),
     );
   }
 

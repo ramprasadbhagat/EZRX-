@@ -53,6 +53,34 @@ class ReturnRequestRemoteDataSource {
     });
   }
 
+  Future<ReturnMaterialList> searchReturnMaterialsForSalesRep({
+    required Map<String, dynamic> requestParams,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = query.searchReturnMaterialsForSalesRep();
+      final variables = {
+        'searchReturnMaterialsForSalesRepRequest': requestParams,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ereturn',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+      );
+      _exceptionChecker(
+        response: res,
+        property: 'searchReturnMaterialsForSalesRepV2',
+      );
+
+      return ReturnMaterialListDto.fromJson(
+        res.data['data']['searchReturnMaterialsForSalesRepV2'],
+      ).toDomain();
+    });
+  }
+
   Future<ReturnRequestAttachment> uploadFile({
     required String folder,
     required PlatformFile file,

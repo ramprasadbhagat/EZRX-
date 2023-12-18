@@ -18,6 +18,7 @@ _$_ReturnMaterialsParamsDto _$$_ReturnMaterialsParamsDtoFromJson(
       filter:
           ReturnItemsFilterDto.fromJson(json['filter'] as Map<String, dynamic>),
       language: json['language'] as String? ?? '',
+      username: json['username'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ReturnMaterialsParamsDtoToJson(
@@ -30,4 +31,5 @@ Map<String, dynamic> _$$_ReturnMaterialsParamsDtoToJson(
       'after': instance.after,
       'searchFilter': instance.searchFilter,
       'language': instance.language,
+      'username': instance.username,
     };
