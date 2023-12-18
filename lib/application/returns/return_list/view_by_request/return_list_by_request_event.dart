@@ -14,4 +14,5 @@ class ReturnListByRequestEvent with _$ReturnListByRequestEvent {
     required SearchKey searchKey,
   }) = _Fetch;
   const factory ReturnListByRequestEvent.loadMore() = _LoadMore;
+  const factory ReturnListByRequestEvent.downloadFile() = _DownloadFile;
 }

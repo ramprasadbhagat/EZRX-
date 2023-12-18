@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/retur
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -13,6 +14,8 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_filter/return_by_item_filter_page.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_filter/return_by_request_filter_page.dart';
@@ -25,6 +28,8 @@ part 'widgets/filter_return_by_request.dart';
 part 'widgets/filter_return_by_item.dart';
 part 'widgets/list_by_item_search_bar.dart';
 part 'widgets/list_by_request_search_bar.dart';
+part 'widgets/export_return_by_item.dart';
+part 'widgets/export_return_by_request.dart';
 
 class ReturnRoot extends StatefulWidget {
   const ReturnRoot({Key? key}) : super(key: key);
@@ -112,6 +117,10 @@ class _ReturnRootState extends State<ReturnRoot> {
                                   key: WidgetKeys.returnByRequestSearchBar,
                                 ),
                         ),
+                        context.tabsRouter.current.name ==
+                                ReturnByItemPageRoute.name
+                            ? const _ExportReturnByItem()
+                            : const _ExportReturnByRequest(),
                         context.tabsRouter.current.name ==
                                 ReturnByItemPageRoute.name
                             ? const _FilterReturnByItem(

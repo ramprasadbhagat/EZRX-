@@ -23,18 +23,19 @@ class MockConfig extends Mock implements Config {}
 class ViewByItemLocalDataSourceMock extends Mock
     implements ViewByItemLocalDataSource {}
 
-class OrderHistoryRemoteDataSourceMock extends Mock
-    implements OrderHistoryRemoteDataSource {}
+class ViewByItemRemoteDataSourceMock extends Mock
+    implements ViewByItemRemoteDataSource {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final mockConfig = MockConfig();
   final viewByItemLocalDataSource = ViewByItemLocalDataSourceMock();
-  final orderHistoryRemoteDataSource = OrderHistoryRemoteDataSourceMock();
+  final orderHistoryRemoteDataSource = ViewByItemRemoteDataSourceMock();
+
   final repository = ViewByItemRepository(
     config: mockConfig,
-    localDataSource: viewByItemLocalDataSource,
-    orderHistoryRemoteDataSource: orderHistoryRemoteDataSource,
+    viewByItemLocalDataSource: viewByItemLocalDataSource,
+    viewByItemRemoteDataSource: orderHistoryRemoteDataSource,
   );
 
   const fakeException = 'fake-exception';

@@ -42,4 +42,14 @@ class ReturnListLocalDataSource {
       data['data']['requestsByUserV3']['returnRequests'],
     ).map((e) => ReturnItemDto.fromJson(e).toDomain()).toList();
   }
+
+  Future<String> getFileUrl() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/requestsByItemsExcelResponse.json',
+      ),
+    );
+
+    return data['data']['requestsByItemsExcel']['url'];
+  }
 }

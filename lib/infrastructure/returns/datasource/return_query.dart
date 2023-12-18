@@ -46,4 +46,14 @@ class ReturnQuery {
       }
     ''';
   }
+
+  String getRequestsByItemsExcel() {
+    return '''
+     query requestsByItemsExcel(\$input: requestsByItems!) {
+        requestsByItemsExcel(request: \$input) {
+          url
+        }
+      }
+    ''';
+  }
 }

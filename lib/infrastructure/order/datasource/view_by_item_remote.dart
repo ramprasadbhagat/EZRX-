@@ -14,13 +14,13 @@ import 'package:ezrxmobile/infrastructure/order/dtos/invoice_data_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/product_meta_data_dto.dart';
 
-class OrderHistoryRemoteDataSource {
+class ViewByItemRemoteDataSource {
   HttpService httpService;
   ViewByItemQueryMutation viewByItemQueryMutation;
   Config config;
   DataSourceExceptionHandler dataSourceExceptionHandler;
 
-  OrderHistoryRemoteDataSource({
+  ViewByItemRemoteDataSource({
     required this.httpService,
     required this.viewByItemQueryMutation,
     required this.config,

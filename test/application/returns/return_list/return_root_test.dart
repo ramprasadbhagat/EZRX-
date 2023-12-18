@@ -71,14 +71,12 @@ void main() {
   late ReturnSummaryDetailsBloc mockReturnSummaryDetailsBloc;
   late AuthBloc mockAuthBloc;
   late ReturnListByRequestBloc mockReturnListByRequestBloc;
-  setUpAll(() async {
+  setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
-  });
-  setUp(() async {
     mockSalesOrgBloc = MockSalesOrgBloc();
     mockUserBloc = MockUserBloc();
     autoRouterMock = locator<AppRouter>();

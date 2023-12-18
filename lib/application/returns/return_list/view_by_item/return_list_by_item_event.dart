@@ -15,4 +15,5 @@ class ReturnListByItemEvent with _$ReturnListByItemEvent {
   }) = _Fetch;
 
   const factory ReturnListByItemEvent.loadMore() = _LoadMore;
+  const factory ReturnListByItemEvent.downloadFile() = _DownloadFile;
 }

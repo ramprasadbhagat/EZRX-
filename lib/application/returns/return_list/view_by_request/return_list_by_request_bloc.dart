@@ -130,5 +130,56 @@ class ReturnListByRequestBloc
         );
       },
     );
+    on<_DownloadFile>((event, emit) async {
+      emit(
+        state.copyWith(
+          isDownloadInProgress: true,
+          failureOrSuccessOption: none(),
+        ),
+      );
+      //need permission
+      final failureOrSuccessPermission =
+          await returnListRepository.getDownloadPermission();
+      await failureOrSuccessPermission.fold(
+        (failure) async => emit(
+          state.copyWith(
+            failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+            isDownloadInProgress: false,
+          ),
+        ),
+        (_) async {
+          //fetch File Url
+          final fileUrlFailureOrSuccess = await returnListRepository.getFileUrl(
+            customerCodeInfo: state.customerCodeInfo,
+            shipToInfo: state.shipInfo,
+            username: state.user.username,
+            salesOrg: state.salesOrg,
+          );
+          await fileUrlFailureOrSuccess.fold(
+            (failure) async => emit(
+              state.copyWith(
+                isDownloadInProgress: false,
+                failureOrSuccessOption: optionOf(fileUrlFailureOrSuccess),
+              ),
+            ),
+            (url) async {
+              //download File
+              final downloadFileFailureOrSuccess =
+                  await returnListRepository.downloadFile(
+                url: url,
+              );
+              emit(
+                state.copyWith(
+                  isDownloadInProgress: false,
+                  failureOrSuccessOption:
+                      optionOf(downloadFileFailureOrSuccess),
+                ),
+              );
+            },
+          );
+        },
+      );
+    });
+  
   }
 }

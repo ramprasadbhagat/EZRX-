@@ -24,6 +24,7 @@ mixin _$ReturnListByItemEvent {
     required TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
+    required TResult Function() downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +34,7 @@ mixin _$ReturnListByItemEvent {
         initialized,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult? Function()? loadMore,
+    TResult? Function()? downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +44,7 @@ mixin _$ReturnListByItemEvent {
         initialized,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult Function()? loadMore,
+    TResult Function()? downloadFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +53,7 @@ mixin _$ReturnListByItemEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DownloadFile value) downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +61,7 @@ mixin _$ReturnListByItemEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DownloadFile value)? downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +69,7 @@ mixin _$ReturnListByItemEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DownloadFile value)? downloadFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -222,6 +228,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
+    required TResult Function() downloadFile,
   }) {
     return initialized(salesOrg, shipInfo, customerCodeInfo, user);
   }
@@ -234,6 +241,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult? Function()? loadMore,
+    TResult? Function()? downloadFile,
   }) {
     return initialized?.call(salesOrg, shipInfo, customerCodeInfo, user);
   }
@@ -246,6 +254,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult Function()? loadMore,
+    TResult Function()? downloadFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -260,6 +269,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DownloadFile value) downloadFile,
   }) {
     return initialized(this);
   }
@@ -270,6 +280,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DownloadFile value)? downloadFile,
   }) {
     return initialized?.call(this);
   }
@@ -280,6 +291,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DownloadFile value)? downloadFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -393,6 +405,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
+    required TResult Function() downloadFile,
   }) {
     return fetch(appliedFilter, searchKey);
   }
@@ -405,6 +418,7 @@ class _$_Fetch implements _Fetch {
         initialized,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult? Function()? loadMore,
+    TResult? Function()? downloadFile,
   }) {
     return fetch?.call(appliedFilter, searchKey);
   }
@@ -417,6 +431,7 @@ class _$_Fetch implements _Fetch {
         initialized,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult Function()? loadMore,
+    TResult Function()? downloadFile,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -431,6 +446,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DownloadFile value) downloadFile,
   }) {
     return fetch(this);
   }
@@ -441,6 +457,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DownloadFile value)? downloadFile,
   }) {
     return fetch?.call(this);
   }
@@ -451,6 +468,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DownloadFile value)? downloadFile,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -516,6 +534,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
+    required TResult Function() downloadFile,
   }) {
     return loadMore();
   }
@@ -528,6 +547,7 @@ class _$_LoadMore implements _LoadMore {
         initialized,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult? Function()? loadMore,
+    TResult? Function()? downloadFile,
   }) {
     return loadMore?.call();
   }
@@ -540,6 +560,7 @@ class _$_LoadMore implements _LoadMore {
         initialized,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult Function()? loadMore,
+    TResult Function()? downloadFile,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -554,6 +575,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DownloadFile value) downloadFile,
   }) {
     return loadMore(this);
   }
@@ -564,6 +586,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DownloadFile value)? downloadFile,
   }) {
     return loadMore?.call(this);
   }
@@ -574,6 +597,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DownloadFile value)? downloadFile,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -585,6 +609,127 @@ class _$_LoadMore implements _LoadMore {
 
 abstract class _LoadMore implements ReturnListByItemEvent {
   const factory _LoadMore() = _$_LoadMore;
+}
+
+/// @nodoc
+abstract class _$$_DownloadFileCopyWith<$Res> {
+  factory _$$_DownloadFileCopyWith(
+          _$_DownloadFile value, $Res Function(_$_DownloadFile) then) =
+      __$$_DownloadFileCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_DownloadFileCopyWithImpl<$Res>
+    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$_DownloadFile>
+    implements _$$_DownloadFileCopyWith<$Res> {
+  __$$_DownloadFileCopyWithImpl(
+      _$_DownloadFile _value, $Res Function(_$_DownloadFile) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_DownloadFile implements _DownloadFile {
+  const _$_DownloadFile();
+
+  @override
+  String toString() {
+    return 'ReturnListByItemEvent.downloadFile()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_DownloadFile);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
+    required TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)
+        fetch,
+    required TResult Function() loadMore,
+    required TResult Function() downloadFile,
+  }) {
+    return downloadFile();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
+    TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
+    TResult? Function()? loadMore,
+    TResult? Function()? downloadFile,
+  }) {
+    return downloadFile?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
+    TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
+    TResult Function()? loadMore,
+    TResult Function()? downloadFile,
+    required TResult orElse(),
+  }) {
+    if (downloadFile != null) {
+      return downloadFile();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DownloadFile value) downloadFile,
+  }) {
+    return downloadFile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DownloadFile value)? downloadFile,
+  }) {
+    return downloadFile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DownloadFile value)? downloadFile,
+    required TResult orElse(),
+  }) {
+    if (downloadFile != null) {
+      return downloadFile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DownloadFile implements ReturnListByItemEvent {
+  const factory _DownloadFile() = _$_DownloadFile;
 }
 
 /// @nodoc
@@ -600,6 +745,7 @@ mixin _$ReturnListByItemState {
   bool get canLoadMore => throw _privateConstructorUsedError;
   ReturnFilter get appliedFilter => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
+  bool get isDownloadInProgress => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnListByItemStateCopyWith<ReturnListByItemState> get copyWith =>
@@ -622,7 +768,8 @@ abstract class $ReturnListByItemStateCopyWith<$Res> {
       bool isFetching,
       bool canLoadMore,
       ReturnFilter appliedFilter,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      bool isDownloadInProgress});
 
   $ShipToInfoCopyWith<$Res> get shipInfo;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -654,6 +801,7 @@ class _$ReturnListByItemStateCopyWithImpl<$Res,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
     Object? searchKey = null,
+    Object? isDownloadInProgress = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -696,6 +844,10 @@ class _$ReturnListByItemStateCopyWithImpl<$Res,
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      isDownloadInProgress: null == isDownloadInProgress
+          ? _value.isDownloadInProgress
+          : isDownloadInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -750,7 +902,8 @@ abstract class _$$_ReturnListByItemStateCopyWith<$Res>
       bool isFetching,
       bool canLoadMore,
       ReturnFilter appliedFilter,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      bool isDownloadInProgress});
 
   @override
   $ShipToInfoCopyWith<$Res> get shipInfo;
@@ -783,6 +936,7 @@ class __$$_ReturnListByItemStateCopyWithImpl<$Res>
     Object? canLoadMore = null,
     Object? appliedFilter = null,
     Object? searchKey = null,
+    Object? isDownloadInProgress = null,
   }) {
     return _then(_$_ReturnListByItemState(
       salesOrg: null == salesOrg
@@ -825,6 +979,10 @@ class __$$_ReturnListByItemStateCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      isDownloadInProgress: null == isDownloadInProgress
+          ? _value.isDownloadInProgress
+          : isDownloadInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -842,7 +1000,8 @@ class _$_ReturnListByItemState extends _ReturnListByItemState {
       required this.isFetching,
       required this.canLoadMore,
       required this.appliedFilter,
-      required this.searchKey})
+      required this.searchKey,
+      required this.isDownloadInProgress})
       : _returnItemList = returnItemList,
         super._();
 
@@ -872,10 +1031,12 @@ class _$_ReturnListByItemState extends _ReturnListByItemState {
   final ReturnFilter appliedFilter;
   @override
   final SearchKey searchKey;
+  @override
+  final bool isDownloadInProgress;
 
   @override
   String toString() {
-    return 'ReturnListByItemState(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo, user: $user, returnItemList: $returnItemList, failureOrSuccessOption: $failureOrSuccessOption, isFetching: $isFetching, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, searchKey: $searchKey)';
+    return 'ReturnListByItemState(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo, user: $user, returnItemList: $returnItemList, failureOrSuccessOption: $failureOrSuccessOption, isFetching: $isFetching, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, searchKey: $searchKey, isDownloadInProgress: $isDownloadInProgress)';
   }
 
   @override
@@ -901,7 +1062,9 @@ class _$_ReturnListByItemState extends _ReturnListByItemState {
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.isDownloadInProgress, isDownloadInProgress) ||
+                other.isDownloadInProgress == isDownloadInProgress));
   }
 
   @override
@@ -916,7 +1079,8 @@ class _$_ReturnListByItemState extends _ReturnListByItemState {
       isFetching,
       canLoadMore,
       appliedFilter,
-      searchKey);
+      searchKey,
+      isDownloadInProgress);
 
   @JsonKey(ignore: true)
   @override
@@ -937,7 +1101,8 @@ abstract class _ReturnListByItemState extends ReturnListByItemState {
       required final bool isFetching,
       required final bool canLoadMore,
       required final ReturnFilter appliedFilter,
-      required final SearchKey searchKey}) = _$_ReturnListByItemState;
+      required final SearchKey searchKey,
+      required final bool isDownloadInProgress}) = _$_ReturnListByItemState;
   const _ReturnListByItemState._() : super._();
 
   @override
@@ -960,6 +1125,8 @@ abstract class _ReturnListByItemState extends ReturnListByItemState {
   ReturnFilter get appliedFilter;
   @override
   SearchKey get searchKey;
+  @override
+  bool get isDownloadInProgress;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnListByItemStateCopyWith<_$_ReturnListByItemState> get copyWith =>

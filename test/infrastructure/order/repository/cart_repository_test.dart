@@ -37,7 +37,6 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
-import 'order_history_repository_test.dart';
 import 'order_repository_test.dart';
 
 class MockConfig extends Mock implements Config {}
@@ -54,6 +53,11 @@ class DiscountOverrideRemoteDataSourceMock extends Mock
 
 class StockInfoLocalDataSourceMock extends Mock
     implements StockInfoLocalDataSource {}
+class ViewByItemRemoteDataSourceMock extends Mock
+    implements ViewByItemRemoteDataSource {}
+
+class ViewByItemLocalDataSourceMock extends Mock
+    implements ViewByItemLocalDataSource {}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,7 +71,7 @@ void main() {
   late MixpanelService mixpanelService;
   late CartRemoteDataSource cartRemoteDataSource;
   late ViewByItemLocalDataSource orderHistoryLocalDataSource;
-  late OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
+  late ViewByItemRemoteDataSource viewByItemRemoteDataSource;
   final fakeCartProducts = [
     PriceAggregate.empty().copyWith(
       salesOrgConfig: fakeSalesOrganisationConfigs,
@@ -88,8 +92,8 @@ void main() {
         DiscountOverrideRemoteDataSourceMock();
     mixpanelService = MixpanelServiceMock();
     cartRemoteDataSource = CartRemoteDataSourceMock();
-    orderHistoryLocalDataSource = OrderHistoryLocalDataSourceMock();
-    orderHistoryRemoteDataSource = OrderHistoryRemoteDataSourceMock();
+    orderHistoryLocalDataSource = ViewByItemLocalDataSourceMock();
+    viewByItemRemoteDataSource = ViewByItemRemoteDataSourceMock();
     cartRepository = CartRepository(
       mixpanelService: mixpanelService,
       cartLocalDataSource: cartLocalDataSourceMock,
@@ -99,7 +103,7 @@ void main() {
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
       cartRemoteDataSource: cartRemoteDataSource,
       viewByItemLocalDataSource: orderHistoryLocalDataSource,
-      orderHistoryRemoteDataSource: orderHistoryRemoteDataSource,
+      viewByItemRemoteDataSource: viewByItemRemoteDataSource,
     );
     mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
       languageFilter: true,
@@ -887,7 +891,7 @@ void main() {
     test('getProduct remote test success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
-        () => orderHistoryRemoteDataSource.getItemProductDetails(
+        () => viewByItemRemoteDataSource.getItemProductDetails(
           materialIDs: ['1234'],
         ),
       ).thenAnswer(

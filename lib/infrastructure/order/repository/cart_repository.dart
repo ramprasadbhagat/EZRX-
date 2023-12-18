@@ -36,7 +36,7 @@ class CartRepository implements ICartRepository {
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
   final DiscountOverrideRemoteDataSource discountOverrideRemoteDataSource;
   final ViewByItemLocalDataSource viewByItemLocalDataSource;
-  final OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
+  final ViewByItemRemoteDataSource viewByItemRemoteDataSource;
   final MixpanelService mixpanelService;
 
   CartRepository({
@@ -47,7 +47,7 @@ class CartRepository implements ICartRepository {
     required this.mixpanelService,
     required this.cartLocalDataSource,
     required this.cartRemoteDataSource,
-    required this.orderHistoryRemoteDataSource,
+    required this.viewByItemRemoteDataSource,
     required this.viewByItemLocalDataSource,
   });
 
@@ -596,7 +596,7 @@ class CartRepository implements ICartRepository {
       await Future.wait(
         queryMaterialNumbers.map((e) async {
           final products =
-              await orderHistoryRemoteDataSource.getItemProductDetails(
+              await viewByItemRemoteDataSource.getItemProductDetails(
             materialIDs: [e],
           );
 

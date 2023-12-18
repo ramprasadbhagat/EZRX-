@@ -3,6 +3,9 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_list_request.dart';
+import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_list_request_dto.dart';
@@ -21,6 +24,12 @@ class ReturnListLocalDataSourceMock extends Mock
 
 class ReturnListRemoteDataSourceMock extends Mock
     implements ReturnListRemoteDataSource {}
+
+class PermissionServiceMock extends Mock implements PermissionService {}
+
+class DeviceInfoMock extends Mock implements DeviceInfo {}
+
+class FileSystemHelperMock extends Mock implements FileSystemHelper {}
 
 void main() {
   late ReturnListRepository returnListRepository;
@@ -48,11 +57,17 @@ void main() {
     mockConfig = MockConfig();
     returnListLocalDataSource = ReturnListLocalDataSourceMock();
     returnListRemoteDataSource = ReturnListRemoteDataSourceMock();
+    final permissionService = PermissionServiceMock();
+    final deviceInfo = DeviceInfoMock();
+    final fileSystemHelper = FileSystemHelperMock();
 
     returnListRepository = ReturnListRepository(
       config: mockConfig,
       localDataSource: returnListLocalDataSource,
       remoteDataSource: returnListRemoteDataSource,
+      deviceInfo: deviceInfo,
+      fileSystemHelper: fileSystemHelper,
+      permissionService: permissionService,
     );
     inputParams = ReturnListRequestDto.fromDomain(returnListRequest).toMap();
   });

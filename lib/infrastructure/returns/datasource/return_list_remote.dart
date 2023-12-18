@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_item_dto.dart';
+import 'package:flutter/foundation.dart';
 
 class ReturnListRemoteDataSource {
   HttpService httpService;
@@ -87,6 +89,57 @@ class ReturnListRemoteDataSource {
         res.data['data']['requestsByUserV3']['returnRequests'],
       ).map((e) => ReturnItemDto.fromJson(e).toDomain()).toList();
     });
+  }
+
+  Future<String> getFileUrl({
+    required String soldTo,
+    required String shipTo,
+    required String username,
+    required String salesOrg,
+  }) async {
+    return await dataSourceExceptionHandler.handle(
+      () async {
+        final res = await httpService.request(
+          method: 'POST',
+          url: '${config.urlConstants}ereturn',
+          data: jsonEncode(
+            {
+              'query': queryMutation.getRequestsByItemsExcel(),
+              'variables': {
+                'input': {
+                  'soldTo': soldTo,
+                  'shipTo': shipTo,
+                  'username': username,
+                },
+              },
+            },
+          ),
+          salesOrg: salesOrg,
+        );
+        _returnRequestTypeCodeExceptionChecker(res: res);
+
+        return res.data['data']['requestsByItemsExcel']['url'];
+      },
+    );
+  }
+
+  Future<AttachmentFileBuffer> downloadFile({required String url}) async {
+    return await dataSourceExceptionHandler.handle(
+      () async {
+        final fileResponse = await Dio().get(
+          url,
+          options: Options(
+            responseType: ResponseType.bytes,
+            followRedirects: false,
+          ),
+        );
+
+        return AttachmentFileBuffer(
+          name: Uri.parse(url).pathSegments.last,
+          buffer: Uint8List.fromList(fileResponse.data),
+        );
+      },
+    );
   }
 
   void _returnRequestTypeCodeExceptionChecker({

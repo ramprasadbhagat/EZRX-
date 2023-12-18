@@ -1150,7 +1150,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => ViewByItemLocalDataSource());
   locator.registerLazySingleton(() => ViewByItemQueryMutation());
   locator.registerLazySingleton(
-    () => OrderHistoryRemoteDataSource(
+    () => ViewByItemRemoteDataSource(
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
@@ -1161,8 +1161,8 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ViewByItemRepository(
       config: locator<Config>(),
-      localDataSource: locator<ViewByItemLocalDataSource>(),
-      orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
+      viewByItemLocalDataSource: locator<ViewByItemLocalDataSource>(),
+      viewByItemRemoteDataSource: locator<ViewByItemRemoteDataSource>(),
     ),
   );
   locator.registerFactory(
@@ -1660,6 +1660,9 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<ReturnListLocalDataSource>(),
       remoteDataSource: locator<ReturnListRemoteDataSource>(),
+      deviceInfo: locator<DeviceInfo>(),
+      fileSystemHelper: locator<FileSystemHelper>(),
+      permissionService: locator<PermissionService>(),
     ),
   );
 
@@ -1724,7 +1727,7 @@ void setupLocator() {
       cartLocalDataSource: locator<CartLocalDataSource>(),
       cartRemoteDataSource: locator<CartRemoteDataSource>(),
       viewByItemLocalDataSource: locator<ViewByItemLocalDataSource>(),
-      orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
+      viewByItemRemoteDataSource: locator<ViewByItemRemoteDataSource>(),
     ),
   );
 

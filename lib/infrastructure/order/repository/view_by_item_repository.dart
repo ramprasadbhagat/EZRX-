@@ -21,13 +21,13 @@ import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 
 class ViewByItemRepository implements IViewByItemRepository {
   final Config config;
-  final ViewByItemLocalDataSource localDataSource;
-  final OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
+  final ViewByItemLocalDataSource viewByItemLocalDataSource;
+  final ViewByItemRemoteDataSource viewByItemRemoteDataSource;
 
   ViewByItemRepository({
     required this.config,
-    required this.localDataSource,
-    required this.orderHistoryRemoteDataSource,
+    required this.viewByItemLocalDataSource,
+    required this.viewByItemRemoteDataSource,
   });
 
   @override
@@ -44,7 +44,8 @@ class ViewByItemRepository implements IViewByItemRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final orderHistoryItemsList = await localDataSource.getViewByItems();
+        final orderHistoryItemsList =
+            await viewByItemLocalDataSource.getViewByItems();
 
         return Right(orderHistoryItemsList);
       } catch (e) {
@@ -54,7 +55,7 @@ class ViewByItemRepository implements IViewByItemRepository {
 
     try {
       final orderHistoryItemList =
-          await orderHistoryRemoteDataSource.getViewByItems(
+          await viewByItemRemoteDataSource.getViewByItems(
         shipTo: shipTo.shipToCustomerCode,
         soldTo: soldTo.customerCodeSoldTo,
         pageSize: pageSize,
@@ -91,7 +92,8 @@ class ViewByItemRepository implements IViewByItemRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final orderHistoryItemsList = await localDataSource.getViewByItems();
+        final orderHistoryItemsList =
+            await viewByItemLocalDataSource.getViewByItems();
 
         return Right(orderHistoryItemsList);
       } catch (e) {
@@ -101,7 +103,7 @@ class ViewByItemRepository implements IViewByItemRepository {
 
     try {
       final orderHistoryItemList =
-          await orderHistoryRemoteDataSource.searchOrderHistory(
+          await viewByItemRemoteDataSource.searchOrderHistory(
         soldTo: soldTo.customerCodeSoldTo,
         language: user.preferredLanguage.languageCode,
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
@@ -122,7 +124,7 @@ class ViewByItemRepository implements IViewByItemRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final ordersInvoiceData =
-            await localDataSource.getInvoiceDataForOrders();
+            await viewByItemLocalDataSource.getInvoiceDataForOrders();
 
         final invoiceDataMap =
             _getInvoiceMapData(ordersInvoiceData: ordersInvoiceData);
@@ -139,7 +141,7 @@ class ViewByItemRepository implements IViewByItemRepository {
           .map((e) => e.getOrCrash())
           .toList();
 
-      final ordersInvoiceData = await orderHistoryRemoteDataSource
+      final ordersInvoiceData = await viewByItemRemoteDataSource
           .getInvoiceDataForOrders(orderNumbers: queryOrderNumbers);
 
       final invoiceDataMap =

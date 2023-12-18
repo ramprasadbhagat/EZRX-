@@ -14,6 +14,7 @@ class ReturnListByItemState with _$ReturnListByItemState {
     required bool canLoadMore,
     required ReturnFilter appliedFilter,
     required SearchKey searchKey,
+    required bool isDownloadInProgress,
   }) = _ReturnListByItemState;
 
   factory ReturnListByItemState.initial() => ReturnListByItemState(
@@ -27,5 +28,6 @@ class ReturnListByItemState with _$ReturnListByItemState {
         returnItemList: <ReturnItem>[],
         appliedFilter: ReturnFilter.empty(),
         searchKey: SearchKey.searchFilter(''),
+        isDownloadInProgress: false,
       );
 }

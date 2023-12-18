@@ -7,11 +7,11 @@ import 'package:mocktail/mocktail.dart';
 
 class MockConfig extends Mock implements Config {}
 
-class OrderHistoryLocalDataSourceMock extends Mock
+class ViewByItemLocalDataSourceMock extends Mock
     implements ViewByItemLocalDataSource {}
 
-class OrderHistoryRemoteDataSourceMock extends Mock
-    implements OrderHistoryRemoteDataSource {}
+class ViewByItemRemoteDataSourceMock extends Mock
+    implements ViewByItemRemoteDataSource {}
 
 void main() {
   // late OrderHistoryRepository orderHistoryRepository;

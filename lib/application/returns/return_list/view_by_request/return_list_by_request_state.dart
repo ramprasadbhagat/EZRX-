@@ -14,6 +14,7 @@ class ReturnListByRequestState with _$ReturnListByRequestState {
     required ShipToInfo shipInfo,
     required SalesOrg salesOrg,
     required User user,
+    required bool isDownloadInProgress,
   }) = _ReturnListByRequestState;
 
   factory ReturnListByRequestState.initial() => ReturnListByRequestState(
@@ -27,5 +28,6 @@ class ReturnListByRequestState with _$ReturnListByRequestState {
         salesOrg: SalesOrg(''),
         shipInfo: ShipToInfo.empty(),
         user: User.empty(),
+        isDownloadInProgress: false,
       );
 }
