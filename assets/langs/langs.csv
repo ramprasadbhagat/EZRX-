@@ -788,7 +788,7 @@ Return request submitted,Return request submitted,ส่งคำขอคืน
 Reason for return,Reason for return,เหตุผลในการคืน,Reason for return,ပြန်လာရန်အကြောင်းပြချက်,Reason for return,Rហេតុផលសម្រាប់ការការបញ្ចូនផលិតផលត្រឡប់ទៅវិញ,alasan untuk kembali
 Special instructions (optional),Special instructions (optional),Special instructions (optional),Special instructions (optional),Special instructions (optional),Special instructions (optional),Special instructions (optional),Instruksi Khusus (Opsional)
 Max. 200 characters,Max. 200 characters,Max. 200 characters,Max. 200 characters,Max. 200 characters,Max. 200 characters,Max. 200 characters,Max. 200 karakter
-Max. 150 characters,Max. 150 characters,Max. 150 characters,Max. 150 characters,Max. 150 characters,Max. 150 characters,Max. 150 characters,Max. 150 karakter
+Max. 128 characters,Max. 128 characters,Max. 128 characters,Max. 128 characters,Max. 128 characters,Max. 128 characters,Max. 128 characters,Max. 128 karakter
 Return request status,Return request status,สถานะคำขอคืนสินค้า,Return request status,ပြန်လည် သိမ်းယူရန်တောင်းဆိုမှု အခြေအနေ,Return request status,ត្រឡប់ស្ថានភាពសំណើ,Status permintaan retur
 Return for,Return for,การคืนสินค้าสำหรับ,Return for,အတွက် ပြန်လည် သိမ်းယူမှု,Return for,Rការបញ្ចូនផលិតផលត្រឡប់ទៅវិញសម្រាប់,Kembali
 Total summary,Total summary,สรุปยอดรวม,Total summary,Total summary,Total summary,Total summary,Ringkasan total

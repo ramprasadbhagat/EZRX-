@@ -14,16 +14,17 @@ class SpecialInstructionsField extends StatelessWidget {
         return TextFieldWithLabel(
           initValue: state.specialInstructions,
           fieldKey: WidgetKeys.specialInstructionsField,
-          labelText: 'Special instructions (optional)'.tr(),
+          labelText: context.tr('Special instructions (optional)'),
           onChanged: (value) => context.read<NewRequestBloc>().add(
                 NewRequestEvent.specialInstructionsChanged(value),
               ),
-          decoration: InputDecoration(hintText: 'Max. 150 characters'.tr()),
+          decoration:
+              InputDecoration(hintText: context.tr('Max. 128 characters')),
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(ZPRegexes.hyperlinkRegExp),
           ],
           isEnabled: true,
-          maxLength: 150,
+          maxLength: 128,
         );
       },
     );

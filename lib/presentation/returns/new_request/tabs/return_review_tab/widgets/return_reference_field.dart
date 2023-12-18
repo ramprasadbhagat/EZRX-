@@ -14,16 +14,17 @@ class _ReturnReferenceField extends StatelessWidget {
         return TextFieldWithLabel(
           initValue: state.returnReference,
           fieldKey: WidgetKeys.returnReferenceField,
-          labelText: 'Return reference (optional)'.tr(),
+          labelText: context.tr('Return reference (optional)'),
           onChanged: (value) => context.read<NewRequestBloc>().add(
                 NewRequestEvent.returnReferenceChanged(value),
               ),
-          decoration: InputDecoration(hintText: 'Enter return reference'.tr()),
+          decoration:
+              InputDecoration(hintText: context.tr('Enter return reference')),
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(ZPRegexes.hyperlinkRegExp),
           ],
           isEnabled: true,
-          maxLength: 150,
+          maxLength: 128,
         );
       },
     );
