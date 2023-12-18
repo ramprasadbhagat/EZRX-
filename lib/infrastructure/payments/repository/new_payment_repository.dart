@@ -155,6 +155,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required List<CustomerOpenItem> customerOpenItems,
     required String paymentMethod,
     required User user,
+    required ShipToInfo shipToInfo,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -186,6 +187,7 @@ class NewPaymentRepository extends INewPaymentRepository {
         transactionCurrency:
             customerOpenItems.first.transactionCurrency.getValue(),
         userName: user.username.getValue(),
+        shipToCode: shipToInfo.shipToCustomerCode,
       );
 
       return Right(response);

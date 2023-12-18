@@ -333,6 +333,7 @@ void main() {
               user: User.empty(),
               paymentMethod: 'Payment Gateway',
               customerOpenItems: fakeCustomerOpenItemSelected,
+              shipToInfo: ShipToInfo.empty(),
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -381,6 +382,7 @@ void main() {
               user: User.empty(),
               paymentMethod: 'Payment Gateway',
               customerOpenItems: fakeCustomerOpenItemSelected,
+              shipToInfo: ShipToInfo.empty(),
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -436,6 +438,7 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty(),
               user: User.empty(),
               paymentMethod: 'Payment Gateway',
+              shipToInfo: ShipToInfo.empty(),
               customerOpenItems: [
                 ...fakeCustomerOpenItemSelected,
                 ...fakeCreditSelected

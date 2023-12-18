@@ -65,13 +65,18 @@ class CustomerOpenItem with _$CustomerOpenItem {
         g4Tax: 0,
         openAmountInTransCrcy: 0,
       );
+
+  double get displayItemAmount =>
+      displayCurrency.isPH ? openAmountInForPH : openAmountInTransCrcy;
+
+  double get openAmountInForPH => openAmountInTransCrcy - g2Tax - g4Tax;
 }
 
 extension CustomerOpenItemListExtension on List<CustomerOpenItem> {
   double get amountTotal => fold<double>(
         0,
         (sum, item) => item.displayCurrency.isPH
-            ? sum + item.openAmountInTransCrcy - item.g2Tax - item.g4Tax
+            ? sum + item.openAmountInForPH
             : sum + item.openAmountInTransCrcy,
       );
 

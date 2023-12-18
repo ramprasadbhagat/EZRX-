@@ -44,6 +44,7 @@ abstract class INewPaymentRepository {
     required List<CustomerOpenItem> customerOpenItems,
     required String paymentMethod,
     required User user,
+    required ShipToInfo shipToInfo,
   });
 
   Future<Either<ApiFailure, CustomerPaymentInfo>> getCustomerPayment({

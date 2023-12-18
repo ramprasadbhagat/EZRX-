@@ -37,6 +37,9 @@ void main() {
   );
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
+  const fakeCustomerCode = 'fake-customer-code';
+  const fakeSalesOrg = 'fake-salesOrg';
+  const fakeShipToCode = 'fake-shipToCode';
 
   setUpAll(
     () {
@@ -84,12 +87,13 @@ void main() {
         );
 
         final result = await newPaymentRemoteDataSource.pay(
-          customerCode: 'fake-customer-code',
-          salesOrg: 'fake-salesOrg',
+          customerCode: fakeCustomerCode,
+          salesOrg: fakeSalesOrg,
           paymentMethod: 'Payment Gateway',
           transactionCurrency: 'VND',
           customerInvoices: [],
           userName: 'rootadmin',
+          shipToCode: fakeShipToCode,
         );
 
         expect(
@@ -126,12 +130,13 @@ void main() {
 
         await newPaymentRemoteDataSource
             .pay(
-          customerCode: 'fake-customer-code',
-          salesOrg: 'fake-salesOrg',
+          customerCode: fakeCustomerCode,
+          salesOrg: fakeSalesOrg,
           paymentMethod: 'Payment Gateway',
           transactionCurrency: 'VND',
           customerInvoices: [],
           userName: 'rootadmin',
+          shipToCode: fakeShipToCode,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -172,12 +177,13 @@ void main() {
 
         await newPaymentRemoteDataSource
             .pay(
-          customerCode: 'fake-customer-code',
-          salesOrg: 'fake-salesOrg',
+          customerCode: fakeCustomerCode,
+          salesOrg: fakeSalesOrg,
           paymentMethod: 'Payment Gateway',
           transactionCurrency: 'VND',
           customerInvoices: [],
           userName: 'rootadmin',
+          shipToCode: fakeShipToCode,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());

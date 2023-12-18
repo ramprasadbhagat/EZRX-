@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -59,8 +58,9 @@ void main() {
     )
   ];
   const fakeUserName = 'fakeUser';
-  final fakeSalesOrg = SalesOrg('fake-salesOrg');
-  const fakeCustomerCode = 'fake-customer-code';
+  // final fakeSalesOrg = SalesOrg('fake-salesOrg');
+  // const fakeCustomerCode = 'fake-customer-code';
+  // const fakeShipToCustomerCode = 'fake-ship-to-customer-code';
   const fakeDebitCreditCode = 'S';
   const fakeDebitCreditType = 'debit';
   const fakeOrderBy = 'netDueDate';
@@ -72,6 +72,12 @@ void main() {
       'value': 'fake',
     }
   ];
+  // final fakeCustomerCodeInfo =
+  //     CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: fakeCustomerCode);
+  final fakeUser = User.empty().copyWith(username: Username(fakeUserName));
+  // final fakeSalesOrganisation =
+  //     SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg);
+  // final fakeShipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -106,8 +112,7 @@ void main() {
             dueDateFrom: DateTimeStringValue('-'),
             dueDateTo: DateTimeStringValue('-'),
           ),
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: offset,
           pageSize: pageSize,
           salesOrganisation:
@@ -133,8 +138,7 @@ void main() {
             dueDateFrom: DateTimeStringValue('-'),
             dueDateTo: DateTimeStringValue('-'),
           ),
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: offset,
           pageSize: pageSize,
           salesOrganisation:
@@ -155,7 +159,7 @@ void main() {
 
         when(
           () => newPaymentRemoteDataSource.getCustomerOpenItems(
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             filterList: <Map<String, String>>[],
             offset: offset,
             pageSize: pageSize,
@@ -171,8 +175,7 @@ void main() {
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
           ),
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: offset,
           pageSize: pageSize,
           salesOrganisation:
@@ -196,8 +199,7 @@ void main() {
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
           ),
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: offset,
           pageSize: pageSize,
           salesOrganisation:
@@ -220,7 +222,7 @@ void main() {
 
         when(
           () => newPaymentRemoteDataSource.getCustomerOpenItems(
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             filterList: <Map<String, String>>[],
             offset: offset,
             pageSize: pageSize,
@@ -232,13 +234,12 @@ void main() {
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
         final result = await nawPaymentsRepository.pay(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
-          user: User.empty().copyWith(username: Username(fakeUserName)),
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeUser,
           customerOpenItems: customerOpenItems,
           paymentMethod: '',
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          salesOrganisation: fakeSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
         );
         expect(
           result.isRight(),
@@ -256,7 +257,7 @@ void main() {
 
         when(
           () => newPaymentRemoteDataSource.getCustomerOpenItems(
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             filterList: <Map<String, String>>[],
             offset: offset,
             pageSize: pageSize,
@@ -268,13 +269,12 @@ void main() {
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
         final result = await nawPaymentsRepository.pay(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
-          user: User.empty().copyWith(username: Username(fakeUserName)),
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeUser,
           customerOpenItems: customerOpenItems,
           paymentMethod: '',
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          salesOrganisation: fakeSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
         );
         expect(
           result.isLeft(),
@@ -339,8 +339,7 @@ void main() {
         ).thenAnswer((invocation) async => PaymentInvoiceInfoPdf.empty());
 
         final result = await nawPaymentsRepository.getPaymentInvoiceInfoPdf(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           user: User.empty().copyWith(username: Username(fakeUserName)),
           paymentInfo: CustomerPaymentInfo.empty().copyWith(
             paymentID: '123',
@@ -363,8 +362,7 @@ void main() {
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.getPaymentInvoiceInfoPdf(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           user: User.empty().copyWith(username: Username(fakeUserName)),
           paymentInfo: CustomerPaymentInfo.empty().copyWith(
             paymentID: '123',
@@ -460,7 +458,7 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.getOutstandingInvoices(
             salesOrg: fakeSalesOrg.getOrCrash(),
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             pageSize: pageSize,
             offset: offset,
             filterList: fakeFilterList,
@@ -474,8 +472,7 @@ void main() {
             dueDateFrom: DateTimeStringValue('-'),
             dueDateTo: DateTimeStringValue('-'),
           ),
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: offset,
           pageSize: pageSize,
           salesOrganisation:
@@ -493,7 +490,7 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.getOutstandingInvoices(
             salesOrg: fakeSalesOrg.getOrCrash(),
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             pageSize: pageSize,
             offset: offset,
             filterList: fakeFilterList,
@@ -507,8 +504,7 @@ void main() {
             dueDateFrom: DateTimeStringValue('-'),
             dueDateTo: DateTimeStringValue('-'),
           ),
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: offset,
           pageSize: pageSize,
           salesOrganisation:
@@ -526,7 +522,7 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.getAvailableCreditNotes(
             salesOrg: fakeSalesOrg.getOrCrash(),
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             pageSize: pageSize,
             offset: offset,
             filterList: fakeFilterList,
@@ -538,8 +534,7 @@ void main() {
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
           ),
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: offset,
           pageSize: pageSize,
           salesOrganisation:
@@ -557,7 +552,7 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.getAvailableCreditNotes(
             salesOrg: fakeSalesOrg.getOrCrash(),
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             pageSize: pageSize,
             offset: offset,
             filterList: fakeFilterList,
@@ -569,8 +564,7 @@ void main() {
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
           ),
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: offset,
           pageSize: pageSize,
           salesOrganisation:
@@ -588,7 +582,7 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.pay(
             salesOrg: fakeSalesOrg.getOrCrash(),
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             customerInvoices: customerOpenItems
                 .map(
                   (customerOpenItem) => CustomerInvoiceDto.fromDomain(
@@ -599,17 +593,17 @@ void main() {
             paymentMethod: '',
             transactionCurrency: '',
             userName: fakeUserName,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
           ),
         ).thenAnswer((invocation) async => paymentInfo);
 
         final result = await nawPaymentsRepository.pay(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
-          user: User.empty().copyWith(username: Username(fakeUserName)),
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeUser,
           customerOpenItems: customerOpenItems,
           paymentMethod: '',
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          salesOrganisation: fakeSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
         );
         expect(
           result.isRight(),
@@ -622,7 +616,7 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.pay(
             salesOrg: fakeSalesOrg.getOrCrash(),
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             customerInvoices: customerOpenItems
                 .map(
                   (customerOpenItem) => CustomerInvoiceDto.fromDomain(
@@ -633,17 +627,18 @@ void main() {
             paymentMethod: '',
             transactionCurrency: '',
             userName: fakeUserName,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
           ),
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.pay(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           user: User.empty().copyWith(username: Username(fakeUserName)),
           customerOpenItems: customerOpenItems,
           paymentMethod: '',
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          shipToInfo: fakeShipToInfo,
         );
         expect(
           result.isLeft(),
@@ -685,7 +680,7 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.getPaymentInvoiceInfoPdf(
             salesOrg: fakeSalesOrg.getValue(),
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             customerName: fakeUserName,
             paymentId: '123',
             accountingDocExternalReference: '123',
@@ -694,8 +689,7 @@ void main() {
         ).thenAnswer((invocation) async => PaymentInvoiceInfoPdf.empty());
 
         final result = await nawPaymentsRepository.getPaymentInvoiceInfoPdf(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           user: User.empty().copyWith(username: Username(fakeUserName)),
           paymentInfo: CustomerPaymentInfo.empty().copyWith(
             paymentID: '123',
@@ -716,7 +710,7 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.getPaymentInvoiceInfoPdf(
             salesOrg: fakeSalesOrg.getValue(),
-            customerCode: fakeCustomerCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             customerName: fakeUserName,
             paymentId: '123',
             accountingDocExternalReference: '123',
@@ -725,8 +719,7 @@ void main() {
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.getPaymentInvoiceInfoPdf(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: fakeCustomerCode),
+          customerCodeInfo: fakeCustomerCodeInfo,
           user: User.empty().copyWith(username: Username(fakeUserName)),
           paymentInfo: CustomerPaymentInfo.empty().copyWith(
             paymentID: '123',

@@ -80,6 +80,7 @@ class NewPaymentRemoteDataSource {
     required String paymentMethod,
     required String transactionCurrency,
     required String userName,
+    required String shipToCode,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -94,6 +95,7 @@ class NewPaymentRemoteDataSource {
               'customerInvoice': customerInvoices,
               'paymentMethod': paymentMethod,
               'salesOrg': salesOrg,
+              'shipToCode': shipToCode,
               'transactionCurrency': transactionCurrency,
               'userName': userName,
               'isV2':

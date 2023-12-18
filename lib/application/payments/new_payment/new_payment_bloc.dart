@@ -147,6 +147,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             ...state.selectedCredits,
           ],
           user: state.user,
+          shipToInfo: state.shipToInfo,
         );
 
         failureOrSuccess.fold(
