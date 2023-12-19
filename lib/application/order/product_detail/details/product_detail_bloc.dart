@@ -68,6 +68,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             emit(
               state.copyWith(
                 isDetailFetching: false,
+                isStockFetching: true,
                 productDetailAggregate: state.productDetailAggregate.copyWith(
                   materialInfo: materialInfo,
                 ),

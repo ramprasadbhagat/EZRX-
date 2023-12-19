@@ -191,11 +191,6 @@ void main() {
             productDetailAggregate: ProductDetailAggregate.empty(),
           ),
           mockInitialState.copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: mockMaterialInfo,
-            ),
-          ),
-          mockInitialState.copyWith(
             isStockFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
@@ -298,11 +293,6 @@ void main() {
           mockInitialState.copyWith(
             isDetailFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
-          ),
-          mockInitialState.copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: mockMaterialInfo,
-            ),
           ),
           mockInitialState.copyWith(
             isStockFetching: true,
