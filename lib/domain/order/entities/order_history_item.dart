@@ -159,6 +159,8 @@ class OrderHistoryItem with _$OrderHistoryItem {
 
   bool get showMaterialListPrice => originPrice > unitPrice;
 
+  bool get batchNumHasData => batch.isValid() || expiryDate.isNotEmpty;
+
   String combinationCode({required bool showGMCPart}) => <String>[
         materialNumber.displayMatNo,
         if (showGMCPart && governmentMaterialCode.isNotEmpty)

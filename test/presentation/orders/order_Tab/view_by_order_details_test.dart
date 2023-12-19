@@ -913,12 +913,14 @@ void main() {
           isLoading: true,
         ),
       );
+      final fakeBatch = StringValue('fake-batch');
       final expectedStates = [
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: [
               fakeOrderHistoryItem.copyWith(
                 productType: MaterialInfoType.material(),
+                batch: fakeBatch,
               ),
             ],
           ),
@@ -933,7 +935,7 @@ void main() {
       await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeBatch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
       );
       expect(expectedDelivery, findsOneWidget);
     });

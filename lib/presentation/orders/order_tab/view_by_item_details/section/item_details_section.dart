@@ -83,7 +83,8 @@ class ItemDetailsSection extends StatelessWidget {
             statusTag: eligibilityState.salesOrg.isID
                 ? null
                 : orderHistoryItem.productTag,
-            headerText: eligibilityState.salesOrgConfigs.batchNumDisplay
+            headerText: eligibilityState.salesOrgConfigs.batchNumDisplay &&
+                    orderHistoryItem.batchNumHasData
                 ? '${'Batch'.tr()}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderHistoryItem.expiryDate.dateOrDashString})'
                 : '',
             isCovidItem: orderHistoryItem.orderType.isCovidOrderType,

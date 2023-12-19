@@ -134,6 +134,8 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   bool get isPnGMaterial =>
       type.isMaterialTypeComm && principalData.principalCode.isPnG;
 
+  bool get batchNumHasData => batch.isValid() || expiryDate.isNotEmpty;
+
   String itemUnitPrice(
     StringValue invoiceNumber,
     bool isMYExternalSalesRep,
