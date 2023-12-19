@@ -117,7 +117,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 Icons.close,
               ),
               onPressed: () {
-                context.router.pop();
+                context.router.navigateBack();
               },
             ),
           ),
