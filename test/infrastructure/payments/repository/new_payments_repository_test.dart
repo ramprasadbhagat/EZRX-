@@ -58,9 +58,6 @@ void main() {
     )
   ];
   const fakeUserName = 'fakeUser';
-  // final fakeSalesOrg = SalesOrg('fake-salesOrg');
-  // const fakeCustomerCode = 'fake-customer-code';
-  // const fakeShipToCustomerCode = 'fake-ship-to-customer-code';
   const fakeDebitCreditCode = 'S';
   const fakeDebitCreditType = 'debit';
   const fakeOrderBy = 'netDueDate';
@@ -72,12 +69,8 @@ void main() {
       'value': 'fake',
     }
   ];
-  // final fakeCustomerCodeInfo =
-  //     CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: fakeCustomerCode);
+
   final fakeUser = User.empty().copyWith(username: Username(fakeUserName));
-  // final fakeSalesOrganisation =
-  //     SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg);
-  // final fakeShipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
 
   setUpAll(() {
     mockConfig = MockConfig();

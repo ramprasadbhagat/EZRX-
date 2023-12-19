@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
@@ -324,31 +325,74 @@ void main() {
       expect(noRecordSubTitleText, findsOneWidget);
     });
 
-    testWidgets('First item show', (tester) async {
+    testWidgets('First item show for other market except PH', (tester) async {
+      final invoiceItem = fakeInvoices.first;
+      final invoiceAmount = invoiceItem.openAmountInTransCrcy.toString();
       when(() => outstandingInvoicesBlocMock.state).thenReturn(
         OutstandingInvoicesState.initial()
-            .copyWith(isLoading: false, items: fakeInvoices),
+            .copyWith(items: [invoiceItem]),
       );
 
       await tester.pumpWidget(getWidget());
       await tester.pump();
 
       final accountingDocText = find.text('Invoice #1100001163');
-      expect(accountingDocText, findsAtLeastNWidgets(1));
+      expect(accountingDocText, findsOneWidget);
 
       final statusText = find.text('Overdue');
-      expect(statusText, findsAtLeastNWidgets(1));
+      expect(statusText, findsOneWidget);
 
       final documentReferenceID = find.text('Order #0800072883');
-      expect(documentReferenceID, findsAtLeastNWidgets(1));
+      expect(documentReferenceID, findsOneWidget);
 
       final dueOnText = find.text('Due on 31 Jul 2023');
-      expect(dueOnText, findsAtLeastNWidgets(1));
+      expect(dueOnText, findsOneWidget);
 
-      final priceText = find.byKey(WidgetKeys.priceComponent);
-      expect(priceText, findsAtLeastNWidgets(1));
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text.toPlainText().contains(invoiceAmount),
+        ),
+        findsOneWidget,
+      );
     });
 
+    testWidgets('First item show for PH - G2 & G4 tax excluded', (tester) async {
+      final invoiceItem =
+          fakeInvoices.first.copyWith(displayCurrency: Currency('PHP'));
+      final invoiceAmountForPH = invoiceItem.displayItemAmount.toString();
+      when(() => outstandingInvoicesBlocMock.state).thenReturn(
+        OutstandingInvoicesState.initial().copyWith(items: [invoiceItem]),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final accountingDocText = find.text('Invoice #1100001163');
+      expect(accountingDocText, findsOneWidget);
+
+      final statusText = find.text('Overdue');
+      expect(statusText, findsOneWidget);
+
+      final documentReferenceID = find.text('Order #0800072883');
+      expect(documentReferenceID, findsOneWidget);
+
+      final dueOnText = find.text('Due on 31 Jul 2023');
+      expect(dueOnText, findsOneWidget);
+
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text.toPlainText().contains(invoiceAmountForPH),
+        ),
+        findsOneWidget,
+      );
+    });
+   
     testWidgets('Select invoice test', (tester) async {
       when(() => outstandingInvoicesBlocMock.state).thenReturn(
         OutstandingInvoicesState.initial()

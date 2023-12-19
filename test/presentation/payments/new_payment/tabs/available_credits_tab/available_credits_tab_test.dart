@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/payments/new_payment/available_credits/av
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
@@ -265,25 +266,71 @@ void main() {
       expect(noRecordSubTitleText, findsOneWidget);
     });
 
-    testWidgets('First item credit show', (tester) async {
+    testWidgets('First item credit show for other market except PH', (tester) async {
+      final creditItem = fakeCredits.first;
+      final creditAmount = creditItem.openAmountInTransCrcy.abs().toString();
+
       when(() => availableCreditsBlocMock.state).thenReturn(
-        AvailableCreditsState.initial().copyWith(items: fakeCredits),
+        AvailableCreditsState.initial().copyWith(
+          items: [creditItem],
+        ),
       );
 
       await tester.pumpWidget(getWidget());
       await tester.pump();
 
       final availableText = find.text('Invoice #1100001163');
-      expect(availableText, findsAtLeastNWidgets(1));
+      expect(availableText, findsOneWidget);
 
       final dateText = find.text('31 Jul 2023');
-      expect(dateText, findsAtLeastNWidgets(1));
+      expect(dateText, findsOneWidget);
 
       final documentReferenceID = find.text('0800072883');
-      expect(documentReferenceID, findsAtLeastNWidgets(1));
+      expect(documentReferenceID, findsOneWidget);
 
-      final priceText = find.byKey(WidgetKeys.priceComponent);
-      expect(priceText, findsAtLeastNWidgets(1));
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text.toPlainText().contains(creditAmount),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('First item credit show for PH - G2 & G4 tax excluded', (tester) async {
+      final creditItem =
+          fakeCredits.first.copyWith(displayCurrency: Currency('PHP'));
+      final creditAmountForPH = creditItem.displayItemAmount.abs().toString();
+
+      when(() => availableCreditsBlocMock.state).thenReturn(
+        AvailableCreditsState.initial().copyWith(
+          items: [creditItem],
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final availableText = find.text('Invoice #1100001163');
+      expect(availableText, findsOneWidget);
+
+      final dateText = find.text('31 Jul 2023');
+      expect(dateText, findsOneWidget);
+
+      final documentReferenceID = find.text('0800072883');
+      expect(documentReferenceID, findsOneWidget);
+
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text.toPlainText().contains(creditAmountForPH),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets('Select credit test', (tester) async {
