@@ -31,8 +31,6 @@ import 'package:ezrxmobile/presentation/orders/cart/bonus/widgets/bonus_material
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
-import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
-
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 part 'package:ezrxmobile/presentation/orders/cart/bonus/widgets/bonus_item_search_bar.dart';
@@ -48,13 +46,20 @@ class BonusItemsSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<BonusMaterialBloc>(
       create: (context) => locator<BonusMaterialBloc>(),
-      child: BlocListener<CartBloc, CartState>(
+      child: BlocConsumer<CartBloc, CartState>(
         listenWhen: (previous, current) =>
             previous.isUpserting != current.isUpserting,
         listener: (context, state) {
           state.apiFailureOrSuccessOption.fold(
             () {
               if (!state.isUpserting) {
+                context.read<BonusMaterialBloc>().add(
+                      BonusMaterialEvent.updateAddedBonusItems(
+                        addedBonusItemList:
+                            state.getNewlyAddedBonusItems(cartProduct),
+                      ),
+                    );
+
                 CustomSnackBar(
                   messageText: 'Bonus/sample added to cart'.tr(),
                 ).show(context);
@@ -74,7 +79,9 @@ class BonusItemsSheet extends StatelessWidget {
             ),
           );
         },
-        child: Padding(
+        buildWhen: (previous, current) =>
+            previous.isUpserting != current.isUpserting && !current.isUpserting,
+        builder: (context, state) => Padding(
           key: WidgetKeys.bonusSampleSheet,
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
@@ -91,16 +98,9 @@ class BonusItemsSheet extends StatelessWidget {
               ),
               _BonusItemSearchBar(cartItem: cartProduct),
               const _BonusQuantityEmptyWarning(),
-              BlocBuilder<CartBloc, CartState>(
-                buildWhen: (previous, current) =>
-                    previous.cartProducts != current.cartProducts,
-                builder: (context, state) {
-                  return _BodyContent(
-                    cartProduct:
-                        state.updatedCartProduct(cartProduct.getMaterialNumber),
-                    oldBonusList: cartProduct.bonusSampleItems,
-                  );
-                },
+              _BodyContent(
+                cartProduct:
+                    state.updatedCartProduct(cartProduct.getMaterialNumber),
               ),
               const BonusItemsSheetFooter(),
             ],
@@ -113,11 +113,10 @@ class BonusItemsSheet extends StatelessWidget {
 
 class _BodyContent extends StatelessWidget {
   final PriceAggregate cartProduct;
-  final List<BonusSampleItem> oldBonusList;
+
   const _BodyContent({
     Key? key,
     required this.cartProduct,
-    required this.oldBonusList,
   }) : super(key: key);
 
   @override
@@ -212,7 +211,6 @@ class _BodyContent extends StatelessWidget {
                   itemBuilder: (context, index, item) => BonusMaterialTile(
                     bonusMaterial: item,
                     cartProduct: cartProduct,
-                    oldBonusList: oldBonusList,
                   ),
                   items: state.bonusItemList,
                 ),

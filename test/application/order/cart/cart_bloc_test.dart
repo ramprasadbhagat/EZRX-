@@ -919,16 +919,6 @@ void main() {
           ),
           CartState.initial().copyWith(
             cartProducts: [
-              priceAggregates.first,
-            ],
-            salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
-          ),
-          CartState.initial().copyWith(
-            upsertBonusItemInProgressHashCode: [],
-            cartProducts: [
               priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
             ],
             salesOrganisation: fakeSalesOrganisation,
@@ -938,14 +928,14 @@ void main() {
           ),
           CartState.initial().copyWith(
             upsertBonusItemInProgressHashCode: [],
-            cartProducts: [
-              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
-            ],
-            salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
             isFetchingBonus: true,
+            cartProducts: [
+              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeSalesOrganisationConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             upsertBonusItemInProgressHashCode: [],
@@ -956,6 +946,7 @@ void main() {
             config: fakeSalesOrganisationConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            isFetchingBonus: false,
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
           ),
         ],

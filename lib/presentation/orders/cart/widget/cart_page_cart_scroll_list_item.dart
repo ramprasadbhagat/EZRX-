@@ -76,8 +76,8 @@ class _CartProductMaterial extends StatelessWidget {
           CartProductTile(
             cartItem: item,
           ),
-          if (item.bonusSampleItems.isNotEmpty)
-            ...item.bonusSampleItems
+          if (item.sortedBonusList.isNotEmpty)
+            ...item.sortedBonusList
                 .map(
                   (e) => CartProductTileBonus(
                     bonusItem: e,

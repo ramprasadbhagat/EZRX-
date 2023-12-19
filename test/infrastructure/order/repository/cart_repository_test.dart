@@ -53,6 +53,7 @@ class DiscountOverrideRemoteDataSourceMock extends Mock
 
 class StockInfoLocalDataSourceMock extends Mock
     implements StockInfoLocalDataSource {}
+
 class ViewByItemRemoteDataSourceMock extends Mock
     implements ViewByItemRemoteDataSource {}
 

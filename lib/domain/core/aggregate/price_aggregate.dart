@@ -741,10 +741,17 @@ class PriceAggregate with _$PriceAggregate {
       )
       .toList();
 
-  List<BonusSampleItem> getNewlyAddedItems(
-    List<BonusSampleItem> oldBonusList,
-  ) =>
-      bonusSampleItems.toSet().difference(oldBonusList.toSet()).toList();
+  List<BonusSampleItem> getNewlyAddedItems(List<BonusSampleItem> oldBonusList) {
+    final oldOverrideBonusIds = oldBonusList
+        .where((element) => !element.type.typeDealBonus)
+        .map((e) => e.itemId)
+        .toSet();
+
+    return bonusSampleItems
+        .where((element) => !element.type.typeDealBonus)
+        .where((e) => !oldOverrideBonusIds.contains(e.itemId))
+        .toList();
+  }
 
   bool get showTaxBreakDown =>
       salesOrgConfig.displayItemTaxBreakdown && !materialInfo.hidePrice;
@@ -819,6 +826,14 @@ class PriceAggregate with _$PriceAggregate {
         ),
       )
       .toList();
+
+  List<BonusSampleItem> get sortedBonusList =>
+      List<BonusSampleItem>.from(bonusSampleItems)
+        ..sort(
+          (a, b) => a.itemId
+              .getOrDefaultValue('')
+              .compareTo(b.itemId.getOrDefaultValue('')),
+        );
 }
 
 enum PriceType {

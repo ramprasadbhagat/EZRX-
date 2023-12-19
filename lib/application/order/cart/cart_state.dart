@@ -490,6 +490,16 @@ class CartState with _$CartState {
         orElse: () => PriceAggregate.empty(),
       );
 
+  List<BonusSampleItem> getNewlyAddedBonusItems(PriceAggregate product) {
+    return cartProducts
+        .firstWhere(
+          (element) =>
+              element.getMaterialNumber == product.materialInfo.materialNumber,
+          orElse: () => PriceAggregate.empty(),
+        )
+        .getNewlyAddedItems(product.bonusSampleItems);
+  }
+
   bool get isNotAvailableToCheckoutForID => cartProducts.any(
         (element) => element.showErrorMessage,
       );
@@ -516,4 +526,12 @@ class CartState with _$CartState {
 
   bool get isBuyAgainNotAllowed =>
       isUpserting || isFetching || shipToInfo.customerBlock.isCustomerBlocked;
+
+  List<BonusSampleItem> productBonusList(MaterialNumber material) =>
+      cartProducts
+          .firstWhere(
+            (element) => element.materialInfo.materialNumber == material,
+            orElse: () => PriceAggregate.empty(),
+          )
+          .bonusSampleItems;
 }

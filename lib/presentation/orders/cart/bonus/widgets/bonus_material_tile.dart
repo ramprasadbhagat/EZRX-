@@ -27,17 +27,14 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 
-import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
-
 class BonusMaterialTile extends StatelessWidget {
   final MaterialInfo bonusMaterial;
   final PriceAggregate cartProduct;
-  final List<BonusSampleItem> oldBonusList;
+
   const BonusMaterialTile({
     Key? key,
     required this.bonusMaterial,
     required this.cartProduct,
-    required this.oldBonusList,
   }) : super(key: key);
 
   @override
@@ -89,7 +86,6 @@ class BonusMaterialTile extends StatelessWidget {
                     _CartIcon(
                       bonusItem: bonusMaterial,
                       cartProduct: cartProduct,
-                      oldBonusList: oldBonusList,
                     ),
                   ],
                 ),
@@ -234,12 +230,11 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
 class _CartIcon extends StatelessWidget {
   final MaterialInfo bonusItem;
   final PriceAggregate cartProduct;
-  final List<BonusSampleItem> oldBonusList;
+
   const _CartIcon({
     Key? key,
     required this.bonusItem,
     required this.cartProduct,
-    required this.oldBonusList,
   }) : super(key: key);
 
   void _addBonusMaterial(BuildContext context) {
@@ -271,7 +266,7 @@ class _CartIcon extends StatelessWidget {
                 bonusItemId,
                 bonusItem.quantity,
               ),
-              type: MaterialInfoType(''),
+              type: MaterialInfoType('Bonus'),
             ),
             counterOfferDetails: RequestCounterOfferDetails.empty(),
             bonusItemId: bonusItemId,
@@ -281,14 +276,7 @@ class _CartIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CartBloc, CartState>(
-      listenWhen: (previous, current) =>
-          previous.cartProducts != current.cartProducts,
-      listener: (context, state) => context.read<BonusMaterialBloc>().add(
-            BonusMaterialEvent.updateAddedBonusItems(
-              addedBonusItemList: cartProduct.getNewlyAddedItems(oldBonusList),
-            ),
-          ),
+    return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) =>
           previous.upsertBonusItemInProgressHashCode !=
           current.upsertBonusItemInProgressHashCode,
@@ -306,7 +294,7 @@ class _CartIcon extends StatelessWidget {
                       .bonusItemID(bonusItem.materialNumber),
                   bonusItem.quantity,
                 ),
-                type: MaterialInfoType(''),
+                type: MaterialInfoType('Bonus'),
               )
               .hashCode,
         );

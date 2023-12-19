@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_product.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -157,6 +158,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 salesOrgConfig: state.config,
               );
             }
+
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: none(),
+                cartProducts: cartProductListTemp,
+                isUpserting: false,
+                upsertBonusItemInProgressHashCode:
+                    List.from(state.upsertBonusItemInProgressHashCode)
+                      ..remove(e.bonusMaterial.hashCode),
+              ),
+            );
+
             add(
               _VerifyMaterialDealBonus(
                 item: cartProductListTemp
@@ -168,16 +181,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                         .firstOrNull ??
                     PriceAggregate.empty(),
                 items: cartProductListTemp,
-              ),
-            );
-
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: none(),
-                isUpserting: false,
-                upsertBonusItemInProgressHashCode:
-                    List.from(state.upsertBonusItemInProgressHashCode)
-                      ..remove(e.bonusMaterial.hashCode),
               ),
             );
           },

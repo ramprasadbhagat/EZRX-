@@ -762,6 +762,9 @@ void upsertCart({
                 int.parse(
                   quantityText,
                 ),
+            bonusSampleItems: context.read<CartBloc>().state.productBonusList(
+                  state.productDetailAggregate.materialInfo.materialNumber,
+                ),
           ),
         ),
       );
