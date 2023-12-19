@@ -188,7 +188,8 @@ void main() {
         'SalesOrg': 'fake-sales-org',
         'ShipTo': 'fake-shipto-code',
         'isGimmick': false,
-        'SearchKey': ''
+        'SearchKey': '',
+        'fromAddBonus': true,
       },
     };
     final res = json.decode(
@@ -229,6 +230,7 @@ void main() {
       searchKey: '',
       salesDeal: [],
       isComboOffers: false,
+      showSampleItem: true,
     );
 
     final finalData =
@@ -238,6 +240,70 @@ void main() {
       MaterialResponseDto.fromJson(finalData).toDomain(),
     );
   });
+
+  test('Get Product List exclude frommAddBonus when it is false', () async {
+    final variables = {
+      'request': {
+        'After': 0,
+        'Customer': 'fake-customer-code',
+        'First': 24,
+        'Language': 'fake-language',
+        'OrderByName': '',
+        'SalesOrg': 'fake-sales-org',
+        'ShipTo': 'fake-shipto-code',
+        'isGimmick': false,
+        'SearchKey': '',
+      },
+    };
+    final res = json.decode(
+      await rootBundle.loadString('assets/json/getAllProductsResponse.json'),
+    );
+
+    dioAdapter.onPost(
+      '/api/price',
+      (server) => server.reply(
+        200,
+        res,
+        delay: const Duration(seconds: 1),
+      ),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      data: jsonEncode({
+        'query': remoteDataSource.materialListQuery.getProductQuery(),
+        'variables': variables
+      }),
+    );
+
+    final result = await remoteDataSource.getProductList(
+      gimmickMaterial: false,
+      isFavourite: false,
+      bundleOffers: false,
+      isProductOffer: false,
+      isFOCMaterial: false,
+      orderByName: '',
+      orderByPrice: '',
+      manufactureList: <String>[],
+      countryListCode: <String>[],
+      principalCode: '',
+      language: 'fake-language',
+      customerCode: 'fake-customer-code',
+      offset: 0,
+      pageSize: 24,
+      salesOrgCode: 'fake-sales-org',
+      shipToCode: 'fake-shipto-code',
+      searchKey: '',
+      salesDeal: [],
+      isComboOffers: false,
+      showSampleItem: false,
+    );
+
+    final finalData =
+        makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
+    expect(
+      result,
+      MaterialResponseDto.fromJson(finalData).toDomain(),
+    );
+  });
+
   test('Get Product Details', () async {
     final variables = {
       'request': {

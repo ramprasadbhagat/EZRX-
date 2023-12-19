@@ -85,6 +85,7 @@ class MaterialListRepository implements IMaterialListRepository {
             .map((e) => e.getOrDefaultValue(''))
             .toList(),
         isComboOffers: selectedMaterialFilter.comboOffers,
+        showSampleItem: false,
       );
 
       final stockInfoList = await getStockInfoList(
@@ -337,6 +338,7 @@ class MaterialListRepository implements IMaterialListRepository {
         searchKey: searchKey.getOrCrash(),
         salesDeal: [],
         isComboOffers: false,
+        showSampleItem: true,
       );
 
       return Right(materialListData);

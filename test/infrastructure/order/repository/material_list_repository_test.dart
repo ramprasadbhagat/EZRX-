@@ -203,6 +203,7 @@ void main() {
             searchKey: '',
             salesDeal: [],
             isComboOffers: fakeMaterialFilter.comboOffers,
+            showSampleItem: false,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -255,6 +256,7 @@ void main() {
             searchKey: '',
             salesDeal: [],
             isComboOffers: fakeMaterialFilterWithComboOffers.comboOffers,
+            showSampleItem: false,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,
@@ -695,6 +697,7 @@ void main() {
             offset: 0,
             pageSize: 10,
             isComboOffers: fakeMaterialFilter.comboOffers,
+            showSampleItem: true,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -740,6 +743,7 @@ void main() {
             offset: 0,
             pageSize: 10,
             isComboOffers: fakeMaterialFilter.comboOffers,
+            showSampleItem: true,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,

@@ -43,6 +43,7 @@ class MaterialListRemoteDataSource {
     required String searchKey,
     required List<String> salesDeal,
     required bool isComboOffers,
+    required bool showSampleItem,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery();
@@ -57,6 +58,7 @@ class MaterialListRemoteDataSource {
           'ShipTo': shipToCode,
           'isGimmick': gimmickMaterial,
           'SearchKey': searchKey,
+          if (showSampleItem) 'fromAddBonus': showSampleItem,
         },
       };
       if (orderByName.isNotEmpty) {
