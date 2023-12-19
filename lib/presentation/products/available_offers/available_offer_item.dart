@@ -55,11 +55,55 @@ class _BonusItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (context.read<EligibilityBloc>().state.salesOrgConfigs.salesOrg.isID) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '${bonusMaterial.bonusQuantity} ${bonusMaterial.materialDescription}',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: ZPColors.textButtonColor,
+                ),
+            overflow: TextOverflow.ellipsis,
+            key: WidgetKeys.lblNameProductOffers,
+          ),
+          Text(
+            bonusMaterial.materialNumber.displayMatNo,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: ZPColors.extraLightGrey4,
+                ),
+            key: WidgetKeys.lblCodeProductOffers,
+          ),
+          Text(
+            '${context.tr('Purchase quantity')}: ${bonusMaterial.qualifyingQuantity}',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: ZPColors.black,
+                ),
+            key: WidgetKeys.lblQuantityProductOffers,
+          ),
+        ],
+      );
+    }
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Text(
+          context.tr(
+            'For every {quantity} quantity, receive',
+            namedArgs: {
+              'quantity': bonusMaterial.qualifyingQuantity.toString(),
+            },
+          ),
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: ZPColors.black,
+              ),
+          key: WidgetKeys.lblQuantityProductOffers,
+        ),
         Text(
           '${bonusMaterial.bonusQuantity} ${bonusMaterial.materialDescription}',
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -74,13 +118,6 @@ class _BonusItem extends StatelessWidget {
                 color: ZPColors.extraLightGrey4,
               ),
           key: WidgetKeys.lblCodeProductOffers,
-        ),
-        Text(
-          '${context.tr('Purchase quantity')}: ${bonusMaterial.qualifyingQuantity}',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: ZPColors.black,
-              ),
-          key: WidgetKeys.lblQuantityProductOffers,
         ),
       ],
     );
