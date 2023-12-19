@@ -34,6 +34,8 @@ mixin _$CreditAndInvoiceItem {
   StringValue get invoiceReference => throw _privateConstructorUsedError;
   StatusType get invoiceProcessingStatus => throw _privateConstructorUsedError;
   StringValue get orderId => throw _privateConstructorUsedError;
+  DebitCreditCode get debitCreditCode => throw _privateConstructorUsedError;
+  ReferenceId get referenceId => throw _privateConstructorUsedError;
   dynamic get isLoadingOrder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -66,6 +68,8 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
       StringValue invoiceReference,
       StatusType invoiceProcessingStatus,
       StringValue orderId,
+      DebitCreditCode debitCreditCode,
+      ReferenceId referenceId,
       dynamic isLoadingOrder});
 }
 
@@ -101,6 +105,8 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
     Object? invoiceReference = null,
     Object? invoiceProcessingStatus = null,
     Object? orderId = null,
+    Object? debitCreditCode = null,
+    Object? referenceId = null,
     Object? isLoadingOrder = freezed,
   }) {
     return _then(_value.copyWith(
@@ -176,6 +182,14 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      debitCreditCode: null == debitCreditCode
+          ? _value.debitCreditCode
+          : debitCreditCode // ignore: cast_nullable_to_non_nullable
+              as DebitCreditCode,
+      referenceId: null == referenceId
+          ? _value.referenceId
+          : referenceId // ignore: cast_nullable_to_non_nullable
+              as ReferenceId,
       isLoadingOrder: freezed == isLoadingOrder
           ? _value.isLoadingOrder
           : isLoadingOrder // ignore: cast_nullable_to_non_nullable
@@ -211,6 +225,8 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
       StringValue invoiceReference,
       StatusType invoiceProcessingStatus,
       StringValue orderId,
+      DebitCreditCode debitCreditCode,
+      ReferenceId referenceId,
       dynamic isLoadingOrder});
 }
 
@@ -243,6 +259,8 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
     Object? invoiceReference = null,
     Object? invoiceProcessingStatus = null,
     Object? orderId = null,
+    Object? debitCreditCode = null,
+    Object? referenceId = null,
     Object? isLoadingOrder = freezed,
   }) {
     return _then(_$_CreditAndInvoiceItem(
@@ -318,6 +336,14 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      debitCreditCode: null == debitCreditCode
+          ? _value.debitCreditCode
+          : debitCreditCode // ignore: cast_nullable_to_non_nullable
+              as DebitCreditCode,
+      referenceId: null == referenceId
+          ? _value.referenceId
+          : referenceId // ignore: cast_nullable_to_non_nullable
+              as ReferenceId,
       isLoadingOrder:
           freezed == isLoadingOrder ? _value.isLoadingOrder! : isLoadingOrder,
     ));
@@ -346,6 +372,8 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
       required this.invoiceReference,
       required this.invoiceProcessingStatus,
       required this.orderId,
+      required this.debitCreditCode,
+      required this.referenceId,
       this.isLoadingOrder = true})
       : super._();
 
@@ -386,12 +414,16 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final StringValue orderId;
   @override
+  final DebitCreditCode debitCreditCode;
+  @override
+  final ReferenceId referenceId;
+  @override
   @JsonKey()
   final dynamic isLoadingOrder;
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, isLoadingOrder: $isLoadingOrder)';
+    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, isLoadingOrder: $isLoadingOrder)';
   }
 
   @override
@@ -438,6 +470,10 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
                     other.invoiceProcessingStatus, invoiceProcessingStatus) ||
                 other.invoiceProcessingStatus == invoiceProcessingStatus) &&
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
+            (identical(other.debitCreditCode, debitCreditCode) ||
+                other.debitCreditCode == debitCreditCode) &&
+            (identical(other.referenceId, referenceId) ||
+                other.referenceId == referenceId) &&
             const DeepCollectionEquality()
                 .equals(other.isLoadingOrder, isLoadingOrder));
   }
@@ -463,6 +499,8 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
         invoiceReference,
         invoiceProcessingStatus,
         orderId,
+        debitCreditCode,
+        referenceId,
         const DeepCollectionEquality().hash(isLoadingOrder)
       ]);
 
@@ -494,6 +532,8 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
       required final StringValue invoiceReference,
       required final StatusType invoiceProcessingStatus,
       required final StringValue orderId,
+      required final DebitCreditCode debitCreditCode,
+      required final ReferenceId referenceId,
       final dynamic isLoadingOrder}) = _$_CreditAndInvoiceItem;
   _CreditAndInvoiceItem._() : super._();
 
@@ -533,6 +573,10 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   StatusType get invoiceProcessingStatus;
   @override
   StringValue get orderId;
+  @override
+  DebitCreditCode get debitCreditCode;
+  @override
+  ReferenceId get referenceId;
   @override
   dynamic get isLoadingOrder;
   @override

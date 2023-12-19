@@ -107,3 +107,32 @@ class AdviceExpiryValue extends ValueObject<String> {
   String get displayDashIfEmpty => dashIfEmpty((value.getOrElse(() => '')));
   const AdviceExpiryValue._(this.value);
 }
+
+class DebitCreditCode extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory DebitCreditCode(String input) {
+    return DebitCreditCode._(validateStringNotEmpty(input));
+  }
+
+  bool get isCredit => checkIsCreditByCode(value.getOrElse(() => ''));
+
+  bool get isDedit => checkIsDebitByCode(value.getOrElse(() => ''));
+
+  const DebitCreditCode._(this.value);
+}
+
+class ReferenceId extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ReferenceId(String input) {
+    return ReferenceId._(validateStringNotEmpty(input));
+  }
+
+  String get referenceListString =>
+      getReferenceListString(value.getOrElse(() => ''));
+
+  const ReferenceId._(this.value);
+}

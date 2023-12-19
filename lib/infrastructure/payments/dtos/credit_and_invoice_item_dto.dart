@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -99,6 +100,16 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       defaultValue: '',
     )
         required String orderId,
+    @JsonKey(
+      name: 'debitCreditCode',
+      defaultValue: '',
+    )
+        required String debitCreditCode,
+    @JsonKey(
+      name: 'referenceId',
+      defaultValue: '',
+    )
+        required String referenceId,
   }) = _CreditAndInvoiceItemDto;
 
   CreditAndInvoiceItem toDomain() {
@@ -121,6 +132,8 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       invoiceReference: StringValue(invoiceReference),
       invoiceProcessingStatus: StatusType(invoiceProcessingStatus),
       orderId: StringValue(orderId),
+      debitCreditCode: DebitCreditCode(debitCreditCode),
+      referenceId: ReferenceId(referenceId),
     );
   }
 

@@ -31,6 +31,9 @@ class AllCreditsAndInvoicesQueryMutation {
           discount
           manualFee
           taxAmount
+          documentDate
+          debitCreditCode
+          referenceId
         }
         totalCount
       }

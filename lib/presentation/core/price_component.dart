@@ -27,6 +27,7 @@ class PriceComponent extends StatelessWidget {
 
   bool get _isNegativePrice => type == PriceStyle.negativePrice;
 
+  //ignore:long-method
   List<TextSpan> _getTextSpan(BuildContext context) {
     final textSpans = <TextSpan>[];
     final notPrice = price.contains(RegExp(r'[A-Za-z]'));
@@ -76,16 +77,25 @@ class PriceComponent extends StatelessWidget {
 
     //amount
     final obscuredValue = amount.replaceAll(RegExp(r'[0-9]'), '*');
-    textSpans.add(
-      TextSpan(
-        text: obscured ? obscuredValue : amount,
-        style: priceTextStyle,
-      ),
-    );
+    final amountString = obscured ? obscuredValue : amount;
+    if (type == PriceStyle.creditSummaryPrice) {
+      textSpans.add(
+        TextSpan(
+          text: '($amountString)',
+          style: priceTextStyle,
+        ),
+      );
+    } else {
+      textSpans.add(
+        TextSpan(
+          text: amountString,
+          style: priceTextStyle,
+        ),
+      );
+    }
     if (type == PriceStyle.credits) {
       textSpans.add(TextSpan(text: ')', style: singleCommaTextStyle));
     }
-
     if (type == PriceStyle.bundlePrice ||
         type == PriceStyle.bundleListPriceStrikeThrough ||
         type == PriceStyle.bundleActiveOfferPrice ||
@@ -124,6 +134,7 @@ enum PriceStyle {
   summaryPrice,
   grandTotalPrice,
   credits,
+  creditSummaryPrice,
   paymentInProgressPrice,
   comboOfferPrice,
   comboOfferPriceDiscounted,
@@ -140,6 +151,7 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.commonPrice:
     case PriceStyle.bundleActiveOfferPrice:
     case PriceStyle.comboSubTotalExclTax:
+    case PriceStyle.creditSummaryPrice:
       return ZPColors.primary;
 
     case PriceStyle.summaryPrice:
@@ -241,6 +253,7 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
 TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
   switch (type) {
     case PriceStyle.commonPrice:
+    case PriceStyle.creditSummaryPrice:
     case PriceStyle.bundleActiveOfferPrice:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             color: ZPColors.primary,

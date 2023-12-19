@@ -59,9 +59,9 @@
                     "returnId": null,
                     "orderId": "",
                     "referenceId": "",
-                    "deliveryFee":1250.0,
-                    "discount":23420.0,
-                    "manualFee":2000.0
+                    "deliveryFee": 1250.0,
+                    "discount": 23420.0,
+                    "manualFee": 2000.0
                 },
                 {
                     "companyCode": "2001",
@@ -120,9 +120,9 @@
                     "returnId": null,
                     "orderId": "",
                     "referenceId": "",
-                    "deliveryFee":0.0,
-                    "discount":0.0,
-                    "manualFee":0.0
+                    "deliveryFee": 0.0,
+                    "discount": 0.0,
+                    "manualFee": 0.0
                 },
                 {
                     "companyCode": "2001",
@@ -181,9 +181,9 @@
                     "returnId": null,
                     "orderId": "",
                     "referenceId": "",
-                    "deliveryFee":0.0,
-                    "discount":0.0,
-                    "manualFee":0.0
+                    "deliveryFee": 0.0,
+                    "discount": 0.0,
+                    "manualFee": 0.0
                 },
                 {
                     "companyCode": "2001",
@@ -242,9 +242,9 @@
                     "returnId": null,
                     "orderId": "",
                     "referenceId": "",
-                    "deliveryFee":0.0,
-                    "discount":0.0,
-                    "manualFee":0.0
+                    "deliveryFee": 0.0,
+                    "discount": 0.0,
+                    "manualFee": 0.0
                 },
                 {
                     "companyCode": "2001",
@@ -303,9 +303,9 @@
                     "returnId": null,
                     "orderId": "",
                     "referenceId": "",
-                    "deliveryFee":0.0,
-                    "discount":0.0,
-                    "manualFee":0.0
+                    "deliveryFee": 0.0,
+                    "discount": 0.0,
+                    "manualFee": 0.0
                 },
                 {
                     "companyCode": "2001",
@@ -364,9 +364,9 @@
                     "returnId": null,
                     "orderId": "",
                     "referenceId": "",
-                    "deliveryFee":0.0,
-                    "discount":0.0,
-                    "manualFee":0.0
+                    "deliveryFee": 0.0,
+                    "discount": 0.0,
+                    "manualFee": 0.0
                 },
                 {
                     "companyCode": "2001",
@@ -425,9 +425,9 @@
                     "returnId": null,
                     "orderId": "",
                     "referenceId": "",
-                    "deliveryFee":0.0,
-                    "discount":0.0,
-                    "manualFee":0.0
+                    "deliveryFee": 0.0,
+                    "discount": 0.0,
+                    "manualFee": 0.0
                 },
                 {
                     "companyCode": "2001",
@@ -486,9 +486,9 @@
                     "returnId": null,
                     "orderId": "",
                     "referenceId": "",
-                    "deliveryFee":0.0,
-                    "discount":0.0,
-                    "manualFee":0.0
+                    "deliveryFee": 0.0,
+                    "discount": 0.0,
+                    "manualFee": 0.0
                 },
                 {
                     "companyCode": "2001",
@@ -547,9 +547,9 @@
                     "returnId": null,
                     "orderId": "",
                     "referenceId": "",
-                    "deliveryFee":0.0,
-                    "discount":0.0,
-                    "manualFee":0.0
+                    "deliveryFee": 0.0,
+                    "discount": 0.0,
+                    "manualFee": 0.0
                 },
                 {
                     "companyCode": "2001",
@@ -608,9 +608,9 @@
                     "returnId": null,
                     "orderId": "",
                     "referenceId": "",
-                    "deliveryFee":0.0,
-                    "discount":0.0,
-                    "manualFee":0.0
+                    "deliveryFee": 0.0,
+                    "discount": 0.0,
+                    "manualFee": 0.0
                 }
             ],
             "totalCount": 1556

@@ -808,6 +808,7 @@ class WidgetKeys {
   //============================================================
   static const Key invoiceTab = Key('invoiceTab');
   static const Key creditsTab = Key('creditsTab');
+  static const Key summaryTab = Key('summaryTab');
   static const Key paymentSummaryPage = Key('paymentSummaryPage');
   static const Key paymentSummaryAppBar = Key('paymentSummaryAppBar');
   static const Key paymentListLoading = Key('paymentListLoading');
@@ -1093,6 +1094,7 @@ class WidgetKeys {
       Key('accountSummaryDetailsAttention');
   static const Key accountSummaryBankAccountSection =
       Key('accountSummaryBankAccountSection');
+  static const Key invoiceCreditDocumentDate = Key('invoiceCreditDocumentDate');
 
   //============================================================
   //  ALL INVOICES
@@ -1152,6 +1154,13 @@ class WidgetKeys {
   static const Key creditDetailsTile = Key('creditDetailsTile');
   static const Key creditSummaryTile = Key('creditSummaryTile');
   static const Key creditStatusTag = Key('creditStatusTag');
+
+  //===========================================================
+  //  Account Summary Page - Full summary
+  //============================================================
+
+  static const Key summaryExpandableSection = Key('summaryExpandableSection');
+  static const Key invoiceCreditItem = Key('invoiceCreditItem');
 
   //===========================================================
   //  Intro Page

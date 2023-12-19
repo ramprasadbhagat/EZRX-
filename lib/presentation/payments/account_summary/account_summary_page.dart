@@ -48,6 +48,7 @@ class AccountSummary extends StatelessWidget {
               routes: const [
                 AllInvoicesPageRoute(),
                 AllCreditsPageRoute(),
+                FullSummaryPageRoute(),
               ],
               builder: (context, child, tabController) => Column(
                 children: [
@@ -61,6 +62,10 @@ class AccountSummary extends StatelessWidget {
                       Tab(
                         key: WidgetKeys.creditsTab,
                         text: context.tr('Credits'),
+                      ),
+                      Tab(
+                        key: WidgetKeys.summaryTab,
+                        text: context.tr('Summary'),
                       ),
                     ],
                   ),

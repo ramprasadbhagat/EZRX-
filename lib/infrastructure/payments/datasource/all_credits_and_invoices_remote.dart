@@ -115,6 +115,52 @@ class AllCreditsAndInvoicesRemoteDataSource {
     return result;
   }
 
+  Future<List<CreditAndInvoiceItem>> filterFullSummary({
+    required String customerCode,
+    required String salesOrg,
+    required int offset,
+    required int pageSize,
+    required List<Map<String, dynamic>> filterMap,
+    String sortDirection = 'desc',
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query':
+              allCreditsAndInvoicesQueryMutation.getDocumentHeaderListQuery(),
+          'variables': {
+            'input': {
+              'customerCode': customerCode,
+              'salesOrg': salesOrg,
+              'first': pageSize,
+              'after': offset,
+              'excelFor': 'AccountSummary',
+              'orderBy': [
+                {
+                  'order': sortDirection,
+                  'field': 'documentDate',
+                },
+              ],
+              'filterBy': filterMap,
+            },
+          },
+        },
+      ),
+    );
+    _exceptionChecker(property: 'customerDocumentHeaderV2', res: res);
+    final data =
+        res.data['data']['customerDocumentHeaderV2']['documentHeaderList'];
+
+    final result = <CreditAndInvoiceItem>[];
+    for (final dynamic item in data) {
+      result.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+    }
+
+    return result;
+  }
+
   Future<List<InvoiceOrderItem>> getOrderForInvoice(
     List<String> invoiceId,
   ) async {

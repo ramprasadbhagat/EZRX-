@@ -40,3 +40,11 @@ int getExpiryDays(String adviceExpiry) =>
 bool checkIsBNI(String bankOptionId) => bankOptionId == 'BNI';
 
 bool checkIsBCA(String bankOptionId) => bankOptionId == 'BCA';
+
+bool checkIsDebitByCode(String debitCreditCode) => debitCreditCode == 'S';
+
+bool checkIsCreditByCode(String debitCreditCode) => debitCreditCode == 'H';
+
+String getReferenceListString(String referenceId) => referenceId.isNotEmpty
+    ? referenceId.split(',').map((e) => '#${e.trim()}').join(', ')
+    : '';

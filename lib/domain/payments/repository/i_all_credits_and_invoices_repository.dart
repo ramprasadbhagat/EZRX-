@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
 
 abstract class IAllCreditsAndInvoicesRepository {
@@ -21,6 +22,13 @@ abstract class IAllCreditsAndInvoicesRepository {
     required int pageSize,
     required int offset,
     required AllCreditsFilter filter,
+  });
+  Future<Either<ApiFailure, List<CreditAndInvoiceItem>>> filterFullSummary({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required int pageSize,
+    required int offset,
+    required FullSummaryFilter filter,
   });
   Future<Either<ApiFailure, List<InvoiceOrderItem>>> fetchOrder({
     required List<CreditAndInvoiceItem> invoices,

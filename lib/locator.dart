@@ -72,6 +72,7 @@ import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices
 import 'package:ezrxmobile/application/payments/bank_in_accounts/bank_in_accounts_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
@@ -2395,6 +2396,13 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => AllCreditsBloc(
+      allCreditsAndInvoicesRepository:
+          locator<AllCreditsAndInvoicesRepository>(),
+      config: locator<Config>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => FullSummaryBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
       config: locator<Config>(),

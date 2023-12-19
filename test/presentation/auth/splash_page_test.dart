@@ -44,6 +44,7 @@ import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dar
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
@@ -305,6 +306,9 @@ class ArticlesInfoBlocMock
     extends MockBloc<ArticlesInfoEvent, ArticlesInfoState>
     implements ArticlesInfoBloc {}
 
+class FullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
+    implements FullSummaryBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -370,6 +374,7 @@ void main() {
   late PaymentSummaryFilterBloc paymentSummaryFilterBlocMock;
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late ArticlesInfoBloc articlesInfoBlocMock;
+  late FullSummaryBloc fullSummaryBlocMock;
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
@@ -424,6 +429,7 @@ void main() {
     setUp(() {
       locator = GetIt.instance;
       customerCodeBlocMock = CustomerCodeBlocMock();
+      fullSummaryBlocMock = FullSummaryBlocMock();
       authBlocMock = AuthBlocMock();
       userBlocMock = UserBlocMock();
       accountSummaryMock = AccountSummaryBlocMock();
@@ -479,6 +485,8 @@ void main() {
       reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
       articlesInfoBlocMock = ArticlesInfoBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => fullSummaryBlocMock.state)
+          .thenReturn(FullSummaryState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
@@ -610,6 +618,9 @@ void main() {
               BlocProvider<UserBloc>(create: (context) => userBlocMock),
               BlocProvider<UserRestrictionListBloc>(
                 create: (context) => userRestrictionListBlocMock,
+              ),
+              BlocProvider<FullSummaryBloc>(
+                create: (context) => fullSummaryBlocMock,
               ),
               BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),
               BlocProvider<AupTcBloc>(create: (context) => aupTcBlocMock),

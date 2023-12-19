@@ -29,6 +29,7 @@ import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dar
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
@@ -52,6 +53,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -1008,6 +1010,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             customerCodeInfo: state.customerCodeInfo,
           ),
         );
+    context.read<FullSummaryBloc>().add(
+          FullSummaryEvent.initialized(
+            salesOrganisation: salesOrgState.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        );
 
     context
         .read<ViewByItemFilterBloc>()
@@ -1137,6 +1145,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<AllCreditsBloc>().add(
             AllCreditsEvent.fetch(
               appliedFilter: AllCreditsFilter.empty(),
+            ),
+          );
+
+      context.read<FullSummaryBloc>().add(
+            FullSummaryEvent.fetch(
+              appliedFilter: FullSummaryFilter.empty(),
             ),
           );
 

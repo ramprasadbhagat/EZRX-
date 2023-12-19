@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
@@ -27,6 +28,8 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
     required StringValue invoiceReference,
     required StatusType invoiceProcessingStatus,
     required StringValue orderId,
+    required DebitCreditCode debitCreditCode,
+    required ReferenceId referenceId,
     @Default(true) isLoadingOrder,
   }) = _CreditAndInvoiceItem;
 
@@ -49,6 +52,8 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
         discount: 0.0,
         manualFee: 0.0,
         taxAmount: 0.0,
+        debitCreditCode: DebitCreditCode(''),
+        referenceId: ReferenceId(''),
       );
 
 //to convert if amountInTransactionCurrency value is negative
