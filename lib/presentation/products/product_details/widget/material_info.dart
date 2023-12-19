@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -144,36 +145,15 @@ class _MaterialInfoDialog extends StatelessWidget {
                   color: ZPColors.darkGray,
                 ),
           ),
-          const SizedBox(height: 7),
-          BalanceTextRow(
-            key: WidgetKeys.productDetailExpiryDate,
-            keyText: context.tr('Expiry'),
-            valueText:
-                productDetailAggregate.stockInfo.expiryDate.dateOrNaString,
-            valueFlex: 1,
-            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.black,
-                ),
-            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.darkGray,
-                ),
-          ),
-          Row(
-            children: [
-              const Spacer(),
-              Expanded(
-                child: Text(
-                  context.tr(
-                    'Expiry date displayed is for reference, actual product may vary',
-                  ),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontSize: 10,
-                        color: ZPColors.darkGray,
-                      ),
-                ),
-              ),
-            ],
-          ),
+          if (context
+              .read<EligibilityBloc>()
+              .state
+              .salesOrgConfigs
+              .expiryDateDisplay)
+            _ExpiryDateWidget(
+              expiryDateText:
+                  productDetailAggregate.stockInfo.expiryDate.dateOrNaString,
+            ),
           const SizedBox(height: 20),
           Row(
             children: [
@@ -188,6 +168,52 @@ class _MaterialInfoDialog extends StatelessWidget {
           const SizedBox(height: 20),
         ],
       ),
+    );
+  }
+}
+
+class _ExpiryDateWidget extends StatelessWidget {
+  const _ExpiryDateWidget({
+    Key? key,
+    required this.expiryDateText,
+  }) : super(key: key);
+
+  final String expiryDateText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 7),
+        BalanceTextRow(
+          key: WidgetKeys.productDetailExpiryDate,
+          keyText: context.tr('Expiry'),
+          valueText: expiryDateText,
+          valueFlex: 1,
+          keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.black,
+              ),
+          valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.darkGray,
+              ),
+        ),
+        Row(
+          children: [
+            const Spacer(),
+            Expanded(
+              child: Text(
+                context.tr(
+                  'Expiry date displayed is for reference, actual product may vary',
+                ),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontSize: 10,
+                      color: ZPColors.darkGray,
+                    ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

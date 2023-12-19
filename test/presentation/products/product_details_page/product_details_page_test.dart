@@ -1046,7 +1046,8 @@ void main() {
         );
       });
 
-      testWidgets('_MaterialInfoDialog should be shown when tap icon',
+      testWidgets(
+          '_MaterialInfoDialog should be shown when tap icon - display expiry date',
           (tester) async {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
@@ -1062,7 +1063,7 @@ void main() {
           EligibilityState.initial().copyWith(
             user: user,
             salesOrganisation: fakeMYSalesOrganisation,
-            salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
+            salesOrgConfigs: salesOrgConfigEnabledExpiryDisplay,
           ),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -1082,7 +1083,59 @@ void main() {
           find.byKey(WidgetKeys.materialInfoDialog),
           findsOneWidget,
         );
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow('Expiry'.tr(), '30 Nov 2025'),
+          ),
+          findsOneWidget,
+        );
       });
+
+      testWidgets(
+          '_MaterialInfoDialog should be shown when tap icon - hide expiry date',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+              productItem: productItemWithProductItemXp,
+            ),
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: salesOrgConfigDisabledExpiryDisplay,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+          find.byKey(WidgetKeys.productDetailList),
+          const Offset(0, -200),
+        );
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.materialDetailsInfoTile), findsOneWidget);
+        await tester.tap(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.materialInfoDialog),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow('Expiry'.tr(), '30 Nov 2025'),
+          ),
+          findsNothing,
+        );
+      });
+
       testWidgets('Similar product should be display', (tester) async {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
@@ -1384,7 +1437,7 @@ void main() {
         },
       );
 
-                  testWidgets(
+      testWidgets(
           'List price strike through price visible, if final price is less than list price',
           (tester) async {
         final finalPrice = MaterialPrice(80);

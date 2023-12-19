@@ -100,6 +100,14 @@ final salesOrgConfigDisabledBatchNumDisplay =
   batchNumDisplay: false,
 );
 
+final salesOrgConfigEnabledExpiryDisplay = fakeEmptySalesConfigs.copyWith(
+  expiryDateDisplay: true,
+);
+
+final salesOrgConfigDisabledExpiryDisplay = fakeEmptySalesConfigs.copyWith(
+  expiryDateDisplay: false,
+);
+
 final salesOrgConfigEnabledZDP5 = SalesOrganisationConfigs.empty().copyWith(
   enableZDP5: true,
   salesOrg: fakeVNSalesOrg,
