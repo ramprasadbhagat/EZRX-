@@ -563,3 +563,5 @@ num countryOrderTaxValue(String country) {
 }
 
 bool checkIfCustomerIsBlocked(String value) => value == 'blocked';
+
+double getAppBarHeight(bool value) => value ? 195.0 : 121.0;

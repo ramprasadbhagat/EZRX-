@@ -31,7 +31,7 @@ class UserRestrictionListPage extends StatelessWidget {
       key: WidgetKeys.userRestrictionListPage,
       appBar: const PreferredSize(
         preferredSize: Size(double.infinity, 50),
-        child: CustomAppBar(child: UserRestrictionListSearch()),
+        child: CustomAppBar(title: UserRestrictionListSearch()),
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

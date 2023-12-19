@@ -4,7 +4,9 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class HomeProductSearchBar extends StatelessWidget {
-  const HomeProductSearchBar({Key? key}) : super(key: key);
+  final bool isCustomerBlocked;
+  const HomeProductSearchBar({Key? key, required this.isCustomerBlocked})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,16 @@ class HomeProductSearchBar extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  color: ZPColors.white,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: isCustomerBlocked
+                            ? ZPColors.priceWarning
+                            : ZPColors.white,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

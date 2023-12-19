@@ -41,6 +41,7 @@ import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart'
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
 import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
+import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
 
@@ -408,11 +409,14 @@ void main() {
           WidgetKeys.homeScreen,
         );
         expect(homeScreen, findsOneWidget);
-        await tester.drag(
+        await tester.dragUntilVisible(
           find.byType(
-            RefreshIndicator,
+            RefreshProgressIndicator,
           ),
-          const Offset(0.0, 100.0),
+          find.byType(
+            QuickAccessMenuPanel,
+          ),
+          const Offset(0.0, 1000.0),
         );
         await tester.pump(const Duration(seconds: 1));
         expect(

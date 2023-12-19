@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
 import 'package:ezrxmobile/presentation/home/combo_offers_section/combo_offers_section.dart';
@@ -10,13 +10,11 @@ import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_ba
 import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
-import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
 
@@ -36,31 +34,29 @@ class HomeTab extends StatelessWidget {
           previous.user.accessRight != current.user.accessRight ||
           previous.user.role.type != current.user.role.type ||
           previous.salesOrgConfigs.disableBundles !=
-              current.salesOrgConfigs.disableBundles,
+              current.salesOrgConfigs.disableBundles ||
+          previous.shipToInfo.customerBlock != current.shipToInfo.customerBlock,
       builder: (context, state) {
         return Scaffold(
           key: WidgetKeys.homeScreen,
-          appBar: AppBar(
-            elevation: 0,
-            centerTitle: true,
-            title: const CustomerCodeSelector(
-              key: WidgetKeys.customerCodeSelector,
-            ),
-            backgroundColor: ZPColors.primary,
-            automaticallyImplyLeading: false,
-            actions: const [
-              Padding(
-                padding: EdgeInsets.only(right: 16.0),
-                child: CartButton(),
+          appBar: PreferredSize(
+            preferredSize:
+                Size.fromHeight(state.shipToInfo.customerBlock.appBarHeight),
+            child: CustomAppBar(
+              title: const CustomerCodeSelector(
+                key: WidgetKeys.customerCodeSelector,
               ),
-            ],
-            toolbarHeight: kToolbarHeight + 8.0,
-            bottom: state.user.userCanAccessProducts
-                ? const PreferredSize(
-                    preferredSize: Size.fromHeight(kToolbarHeight),
-                    child: HomeProductSearchBar(),
-                  )
-                : null,
+              automaticallyImplyLeading: false,
+              actionWidget: const [
+                Padding(
+                  padding: EdgeInsets.only(right: 16.0),
+                  child: CartButton(),
+                ),
+              ],
+              isCustomerBlocked:
+                  state.shipToInfo.customerBlock.isCustomerBlocked,
+              isSearchBarVisible: state.user.userCanAccessProducts,
+            ),
           ),
           //SingleChildScrollView and Column is needed
           //as the ListView is rebuilding the BrowseProduct & BundleSection
@@ -86,7 +82,6 @@ class HomeTab extends StatelessWidget {
                   const EdiUserBanner(),
                   const AccountSuspendedBanner(),
                   const QuickAccessMenuPanel(),
-                  const CustomerBlockedBanner(),
                   const CarouselBanner(),
                   BlocBuilder<EligibilityBloc, EligibilityState>(
                     buildWhen: (previous, current) =>

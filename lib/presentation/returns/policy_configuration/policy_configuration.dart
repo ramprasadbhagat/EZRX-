@@ -29,7 +29,7 @@ class PolicyConfigurationPage extends StatelessWidget {
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size(double.infinity, 60),
-        child: CustomAppBar(child: _PolicyConfigurationSearch()),
+        child: CustomAppBar(title: _PolicyConfigurationSearch()),
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
