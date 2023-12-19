@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/detail_info_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +120,12 @@ class _BankAccountInfoRow extends StatelessWidget {
                     if (canCopy)
                       GestureDetector(
                         onTap: () =>
-                            Clipboard.setData(ClipboardData(text: text)),
+                            Clipboard.setData(ClipboardData(text: text))
+                                .whenComplete(
+                          () => CustomSnackBar(
+                            messageText: 'Copied',
+                          ).show(context),
+                        ),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Icon(

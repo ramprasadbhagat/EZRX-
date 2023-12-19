@@ -22,7 +22,7 @@ class _PaymentDetailsSection extends StatelessWidget {
               key: WidgetKeys.transferViaSection,
             ),
             LoadingShimmer.withChild(
-              enabled: state.details.isEmpty,
+              enabled: state.details.isEmpty || state.isLoading,
               child: AttentionSection(
                 widgetKey: WidgetKeys.accountSummaryDetailsAttention,
                 visible: eligibilityState.salesOrg.isID &&
