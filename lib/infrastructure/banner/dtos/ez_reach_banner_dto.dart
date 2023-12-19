@@ -13,9 +13,10 @@ class EZReachBannerDto with _$EZReachBannerDto {
     @JsonKey(name: 'bannerCampaignName', defaultValue: '')
         required String bannerCampaignName,
     @JsonKey(name: 'startDate', defaultValue: '') required String startDate,
-    @JsonKey(name: 'bannerUrl', defaultValue: '') required String bannerUrl,
+    @JsonKey(name: 'bannerUrl', defaultValue: '') required String tabBannerUrl,
     @JsonKey(name: 'endDate', defaultValue: '') required String endDate,
-    @JsonKey(name: 'websiteUrl', defaultValue: '') required String websiteUrl,
+    @JsonKey(name: 'websiteUrl', defaultValue: '')
+        required String navigationalURL,
     @JsonKey(name: 'bannerCountId', defaultValue: 0) required int bannerCountId,
     @JsonKey(name: 'salesRep', defaultValue: false) required bool salesRep,
     @JsonKey(name: 'status', defaultValue: '') required String status,
@@ -31,7 +32,7 @@ class EZReachBannerDto with _$EZReachBannerDto {
     @JsonKey(name: 'countryCode', defaultValue: <String>[])
         required List<String> countryCode,
     @JsonKey(name: 'mobileBannerImg', defaultValue: '')
-        required String mobileBannerImg,
+        required String mobileBannerUrl,
   }) = _EZReachBannerDto;
 
   factory EZReachBannerDto.fromJson(Map<String, dynamic> json) =>
@@ -40,30 +41,31 @@ class EZReachBannerDto with _$EZReachBannerDto {
   EZReachBanner toDomain() {
     return EZReachBanner.empty().copyWith(
       id: bannerId,
-      url: mobileBannerImg.isEmpty ? bannerUrl : mobileBannerImg,
+      mobileBannerUrl: mobileBannerUrl.isEmpty ? tabBannerUrl : mobileBannerUrl,
       title: bannerCampaignName,
       description: targetProduct,
-      urlLink: websiteUrl,
+      navigationalURL: navigationalURL,
       serial: bannerCountId,
       isCustomer: customers,
       keyword: keyWord,
+      tabBannerUrl: tabBannerUrl,
       isEZRXBanner: false,
-      isKeyword: websiteUrl.isEmpty && keyWord.isNotEmpty,
+      isKeyword: navigationalURL.isEmpty && keyWord.isNotEmpty,
     );
   }
 
   factory EZReachBannerDto.fromDomain(EZReachBanner banner) {
     return EZReachBannerDto(
       bannerId: banner.id,
-      bannerUrl: banner.url,
+      tabBannerUrl: banner.tabBannerUrl,
       bannerCampaignName: banner.title,
       targetProduct: banner.description,
-      websiteUrl: banner.urlLink,
+      navigationalURL: banner.navigationalURL,
       bannerCountId: banner.serial,
       customers: banner.isCustomer,
       keyWord: banner.keyword,
       salesOrg: [banner.salesOrg],
-      mobileBannerImg: banner.url,
+      mobileBannerUrl: banner.mobileBannerUrl,
       startDate: '',
       endDate: '',
       salesRep: banner.isPreSalesOrg,

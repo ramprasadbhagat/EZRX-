@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +28,10 @@ class CarouselBannerTile extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final bannerUrl = Responsive.isMobile(context)
+        ? banner.mobileBannerUrl
+        : banner.tabBannerUrl;
+
     return GestureDetector(
       onTap: () async {
         trackMixpanelEvent(
@@ -36,7 +41,7 @@ class CarouselBannerTile extends StatelessWidget {
             MixpanelProps.bannerTitle: banner.title,
             MixpanelProps.bannerOrder: bannerPosition,
             MixpanelProps.bannerRedirected:
-                banner.url.startsWith('https') ? 'external_web' : 'internal',
+                bannerUrl.startsWith('https') ? 'external_web' : 'internal',
           },
         );
         if (banner.isKeyword) {
@@ -53,22 +58,22 @@ class CarouselBannerTile extends StatelessWidget {
               ProductSuggestionPageRoute(parentRoute: context.routeData.path),
             );
           }
-        } else if (banner.urlLink.isNotEmpty) {
+        } else if (banner.navigationalURL.isNotEmpty) {
           if (context.mounted) {
             await context.router.push(
               WebViewPageRoute(
-                url: banner.urlLink,
+                url: banner.navigationalURL,
               ),
             );
           }
         }
       },
       child: CustomImage(
-        imageUrl: banner.url,
+        fit: BoxFit.fill,
+        imageUrl: bannerUrl,
         placeholder: LoadingShimmer.logo(),
-        errorWidget: banner.url.isEmpty
-            ? LoadingShimmer.logo()
-            : const Icon(Icons.error),
+        errorWidget:
+            bannerUrl.isEmpty ? LoadingShimmer.logo() : const Icon(Icons.error),
       ),
     );
   }

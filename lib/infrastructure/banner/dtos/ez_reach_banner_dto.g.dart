@@ -11,9 +11,9 @@ _$_EZReachBannerDto _$$_EZReachBannerDtoFromJson(Map<String, dynamic> json) =>
       bannerId: json['bannerId'] as String? ?? '',
       bannerCampaignName: json['bannerCampaignName'] as String? ?? '',
       startDate: json['startDate'] as String? ?? '',
-      bannerUrl: json['bannerUrl'] as String? ?? '',
+      tabBannerUrl: json['bannerUrl'] as String? ?? '',
       endDate: json['endDate'] as String? ?? '',
-      websiteUrl: json['websiteUrl'] as String? ?? '',
+      navigationalURL: json['websiteUrl'] as String? ?? '',
       bannerCountId: json['bannerCountId'] as int? ?? 0,
       salesRep: json['salesRep'] as bool? ?? false,
       status: json['status'] as String? ?? '',
@@ -34,7 +34,7 @@ _$_EZReachBannerDto _$$_EZReachBannerDtoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
-      mobileBannerImg: json['mobileBannerImg'] as String? ?? '',
+      mobileBannerUrl: json['mobileBannerImg'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_EZReachBannerDtoToJson(_$_EZReachBannerDto instance) =>
@@ -42,9 +42,9 @@ Map<String, dynamic> _$$_EZReachBannerDtoToJson(_$_EZReachBannerDto instance) =>
       'bannerId': instance.bannerId,
       'bannerCampaignName': instance.bannerCampaignName,
       'startDate': instance.startDate,
-      'bannerUrl': instance.bannerUrl,
+      'bannerUrl': instance.tabBannerUrl,
       'endDate': instance.endDate,
-      'websiteUrl': instance.websiteUrl,
+      'websiteUrl': instance.navigationalURL,
       'bannerCountId': instance.bannerCountId,
       'salesRep': instance.salesRep,
       'status': instance.status,
@@ -55,5 +55,5 @@ Map<String, dynamic> _$$_EZReachBannerDtoToJson(_$_EZReachBannerDto instance) =>
       'bannerCampaignLocations': instance.bannerCampaignLocations,
       'salesOrg': instance.salesOrg,
       'countryCode': instance.countryCode,
-      'mobileBannerImg': instance.mobileBannerImg,
+      'mobileBannerImg': instance.mobileBannerUrl,
     };

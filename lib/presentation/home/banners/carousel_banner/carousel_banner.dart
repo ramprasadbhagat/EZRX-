@@ -9,6 +9,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -79,39 +80,45 @@ class _CarouselBannerState extends State<CarouselBanner> {
               return const SizedBox.shrink();
             }
             // eZReach banner for mobile
-            // W 1062 * H 710
-            final bannerHeight = MediaQuery.of(context).size.width * 710 / 1062;
+            // W 856 * H 550
+            // eZReach banner for Desktop
+            // W 1440 * H 420
+            // US url - https://zuelligpharma.atlassian.net/browse/EZRX-15644 (for reference)
+            final ratio =
+                Responsive.isMobile(context) ? (550 / 856) : (420 / 1440);
+            final bannerHeight = MediaQuery.of(context).size.width * ratio;
 
             return Stack(
               children: [
                 SizedBox(
                   height: bannerHeight,
-                  child: state.isLoading
-                      ? const _CarouselBannerLoadingShimmer()
-                      : PageView.builder(
-                          key: WidgetKeys.homeBanner,
-                          onPageChanged: (index) {
-                            final bannerPosition = index % state.banner.length;
+                  child: LoadingShimmer.withChild(
+                    enabled: state.isLoading,
+                    child: PageView.builder(
+                      key: WidgetKeys.homeBanner,
+                      onPageChanged: (index) {
+                        final bannerPosition = index % state.banner.length;
 
-                            _trackBannerChangeEvent(
-                              context: context,
-                              index: bannerPosition,
-                            );
-                          },
-                          controller: _controller,
-                          allowImplicitScrolling: true,
-                          itemBuilder: (_, index) {
-                            final bannerPosition = index % state.banner.length;
+                        _trackBannerChangeEvent(
+                          context: context,
+                          index: bannerPosition,
+                        );
+                      },
+                      controller: _controller,
+                      allowImplicitScrolling: true,
+                      itemBuilder: (_, index) {
+                        final bannerPosition = index % state.banner.length;
 
-                            return CarouselBannerTile(
-                              key: Key(
-                                state.banner[bannerPosition].id.toString(),
-                              ),
-                              bannerPosition: bannerPosition,
-                              banner: state.banner[bannerPosition],
-                            );
-                          },
-                        ),
+                        return CarouselBannerTile(
+                          key: Key(
+                            state.banner[bannerPosition].id.toString(),
+                          ),
+                          bannerPosition: bannerPosition,
+                          banner: state.banner[bannerPosition],
+                        );
+                      },
+                    ),
+                  ),
                 ),
                 state.banner.isNotEmpty
                     ? Positioned(
@@ -243,24 +250,6 @@ class _CircleButton extends StatelessWidget {
         child: Icon(
           iconData,
           color: ZPColors.white,
-        ),
-      ),
-    );
-  }
-}
-
-class _CarouselBannerLoadingShimmer extends StatelessWidget {
-  const _CarouselBannerLoadingShimmer({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: LoadingShimmer.withChild(
-        child: Container(
-          color: ZPColors.white,
-          height: 200,
-          width: double.infinity,
         ),
       ),
     );

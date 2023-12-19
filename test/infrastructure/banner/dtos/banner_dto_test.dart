@@ -20,15 +20,16 @@ void main() {
       final eZReachFirstBannerData = EZReachBannerDto.fromJson(
         eZReachData['data']['getLiveCampaigns']['data'][0],
       ).toDomain();
-      expect(eZReachFirstBannerData.url.isEmpty, false);
-      expect(eZReachFirstBannerData.urlLink.isNotEmpty, true);
+      expect(eZReachFirstBannerData.mobileBannerUrl.isNotEmpty, true);
+      expect(eZReachFirstBannerData.tabBannerUrl.isNotEmpty, true);
+      expect(eZReachFirstBannerData.navigationalURL.isNotEmpty, true);
       expect(eZReachFirstBannerData.keyword.isNotEmpty, true);
       expect(eZReachFirstBannerData.isKeyword, false);
 
       final eZReachSecondBannerData = EZReachBannerDto.fromJson(
         eZReachData['data']['getLiveCampaigns']['data'][1],
       ).toDomain();
-      expect(eZReachSecondBannerData.urlLink.isEmpty, true);
+      expect(eZReachSecondBannerData.navigationalURL.isEmpty, true);
       expect(eZReachSecondBannerData.keyword.isNotEmpty, true);
       expect(eZReachSecondBannerData.isKeyword, true);
     });

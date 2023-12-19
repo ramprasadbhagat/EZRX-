@@ -423,7 +423,7 @@ void main() {
           find.byType(RefreshProgressIndicator),
           findsOneWidget,
         );
-        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 300));
         verify(
           () => salesOrgBlocMock.add(
             SalesOrgEvent.loadSavedOrganisation(

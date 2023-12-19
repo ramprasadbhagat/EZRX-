@@ -116,8 +116,8 @@ void main() {
       final banner = EZReachBanner.empty().copyWith(
         id: '1',
         title: 'Test Banner',
-        url: 'https://test.com/banner.jpg',
-        urlLink: 'https://test.com',
+        tabBannerUrl: 'https://test.com/banner.jpg',
+        navigationalURL: 'https://test.com',
         isKeyword: true,
         keyword: fakeKeyword,
       );
@@ -151,8 +151,8 @@ void main() {
       final banner = EZReachBanner.empty().copyWith(
         id: '1',
         title: 'Test Banner',
-        url: 'https://example.com/banner.jpg',
-        urlLink: 'https://example.com',
+        tabBannerUrl: 'https://example.com/banner.jpg',
+        navigationalURL: 'https://example.com',
         isKeyword: true,
         keyword: 'test',
       );

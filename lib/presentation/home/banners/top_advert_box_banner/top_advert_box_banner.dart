@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,8 +42,12 @@ class TopAdvertBoxBanner extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: state.banner.length,
               itemBuilder: (context, index) {
+                final bannerUrl = Responsive.isMobile(context)
+                    ? state.banner[index].mobileBannerUrl
+                    : state.banner[index].tabBannerUrl;
+
                 return TopAdvertBoxBannerTile(
-                  imageUrl: state.banner[index].url,
+                  imageUrl: bannerUrl,
                 );
               },
             );
