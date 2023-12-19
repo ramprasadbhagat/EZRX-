@@ -98,7 +98,7 @@ class NewPaymentLocalDataSource {
   Future<CreateVirtualAccount> createVirtualAccount() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'createVirtualAccountResponse.json',
+        'assets/json/createVirtualAccountResponse.json',
       ),
     );
 
@@ -110,12 +110,12 @@ class NewPaymentLocalDataSource {
   Future<PrincipalCutoffs> getPrincipalCutoffs() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'getPrincipalCutoffsResponse.json',
+        'assets/json/getPrincipalCutoffsResponse.json',
       ),
     );
 
     return PrincipalCutoffsDto.fromJson(
-      data.data['data']['getPrincipalCutoffs'],
+      data['data']['getPrincipalCutoffs'],
     ).toDomain();
   }
 }

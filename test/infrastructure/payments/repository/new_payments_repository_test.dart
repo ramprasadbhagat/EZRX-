@@ -7,17 +7,25 @@ import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
+import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_invoice_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -45,6 +53,9 @@ void main() {
   late NewPaymentRemoteDataSource newPaymentRemoteDataSource;
   late FileSystemHelper fileSystemHelper;
   late DeviceInfo deviceInfo;
+  late CustomerPaymentInfo customerPaymentInfo;
+  late CreateVirtualAccount createVirtualAccount;
+  late PrincipalCutoffs principalCutoffs;
 
   final customerOpenItemsList = [
     CustomerOpenItem.empty().copyWith(
@@ -72,7 +83,8 @@ void main() {
 
   final fakeUser = User.empty().copyWith(username: Username(fakeUserName));
 
-  setUpAll(() {
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
     mockConfig = MockConfig();
     newPaymentLocalDataSource = NewPaymentLocalDataSourceMock();
     newPaymentRemoteDataSource = NewPaymentRemoteDataSourceMock();
@@ -86,6 +98,11 @@ void main() {
       fileSystemHelper: fileSystemHelper,
       deviceInfo: deviceInfo,
     );
+    customerPaymentInfo = await NewPaymentLocalDataSource()
+        .getCustomerPayment(salesOrg: fakeSalesOrg);
+    createVirtualAccount =
+        await NewPaymentLocalDataSource().createVirtualAccount();
+    principalCutoffs = await NewPaymentLocalDataSource().getPrincipalCutoffs();
   });
 
   group(
@@ -318,6 +335,61 @@ void main() {
               'transactionRef': '1A2B3C4D',
             },
           ),
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('Update Payment Gateway Method success- UAT', () async {
+        final uri = Uri.parse(
+          'https://uat-vn.ezrx.com/my-account/thankyou?TxnStatus=53616c7465645f5fc43ab15f2f89a2de95b0584241d3a13c8f362f7a3f381aed&paymentId=53616c7465645f5f695668d5bbbf4cb0fd82d2235709e16923dae9aa4825a450508f24ad167ba1a5fb145fec903d2848&transactionReference=53616c7465645f5f155ff94a92e04b49941c1f31d393b934a6a36ca650b56d33&redirectFrom=VN',
+        );
+        final paymentStatusDto =
+            PaymentStatusDto.fromDomain(PaymentStatus(uri: uri));
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => newPaymentRemoteDataSource.updatePaymentGateway(
+            salesOrg: fakeSalesOrg.getOrCrash(),
+            txnStatus: paymentStatusDto.txnStatus,
+            paymentID: paymentStatusDto.paymentID,
+            transactionRef: paymentStatusDto.transactionRef,
+          ),
+        ).thenAnswer((invocation) async {
+          return;
+        });
+
+        final result = await nawPaymentsRepository.updatePaymentGateway(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          uri: uri,
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+      test('Update Payment Gateway Method failure- UAT', () async {
+        final uri = Uri.parse(
+          'https://uat-vn.ezrx.com/my-account/thankyou?TxnStatus=53616c7465645f5fc43ab15f2f89a2de95b0584241d3a13c8f362f7a3f381aed&paymentId=53616c7465645f5f695668d5bbbf4cb0fd82d2235709e16923dae9aa4825a450508f24ad167ba1a5fb145fec903d2848&transactionReference=53616c7465645f5f155ff94a92e04b49941c1f31d393b934a6a36ca650b56d33&redirectFrom=VN',
+        );
+        final paymentStatusDto =
+            PaymentStatusDto.fromDomain(PaymentStatus(uri: uri));
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => newPaymentRemoteDataSource.updatePaymentGateway(
+            salesOrg: fakeSalesOrg.getOrCrash(),
+            txnStatus: paymentStatusDto.txnStatus,
+            paymentID: paymentStatusDto.paymentID,
+            transactionRef: paymentStatusDto.transactionRef,
+          ),
+        ).thenThrow((invocation) => MockException());
+
+        final result = await nawPaymentsRepository.updatePaymentGateway(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          uri: uri,
         );
         expect(
           result.isLeft(),
@@ -779,6 +851,259 @@ void main() {
 
         final result = await nawPaymentsRepository.saveFile(
           pdfData: buffer,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('Fetch Customer Payment success- local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () => newPaymentLocalDataSource.getCustomerPayment(
+            salesOrg: fakeSalesOrg,
+          ),
+        ).thenAnswer((invocation) async => customerPaymentInfo);
+
+        final result = await nawPaymentsRepository.getCustomerPayment(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          filter: CustomerPaymentFilter.empty(),
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+      test('Fetch Customer Payment failure- local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () => newPaymentLocalDataSource.getCustomerPayment(
+            salesOrg: fakeSalesOrg,
+          ),
+        ).thenThrow((invocation) => MockException());
+
+        final result = await nawPaymentsRepository.getCustomerPayment(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          filter: CustomerPaymentFilter.empty(),
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('Fetch Customer Payment success- UaT', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => newPaymentRemoteDataSource.getCustomerPayment(
+            salesOrg: fakeSalesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            filter: CustomerPaymentFilterDto.fromDomain(
+              CustomerPaymentFilter.empty(),
+            ),
+          ),
+        ).thenAnswer((invocation) async => customerPaymentInfo);
+
+        final result = await nawPaymentsRepository.getCustomerPayment(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          filter: CustomerPaymentFilter.empty(),
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+
+      test('Fetch Customer Payment failure- UaT', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => newPaymentRemoteDataSource.getCustomerPayment(
+            salesOrg: fakeSalesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            filter: CustomerPaymentFilterDto.fromDomain(
+              CustomerPaymentFilter.empty(),
+            ),
+          ),
+        ).thenThrow((invocation) => MockException());
+
+        final result = await nawPaymentsRepository.getCustomerPayment(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          filter: CustomerPaymentFilter.empty(),
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('Fetch Create Virtual Account success- Local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () => newPaymentLocalDataSource.createVirtualAccount(),
+        ).thenAnswer((invocation) async => createVirtualAccount);
+
+        final result = await nawPaymentsRepository.createVirtualAccount(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          invoices: [
+            CustomerOpenItem.empty()
+                .copyWith(accountingDocument: 'fake_document')
+          ],
+          paymentMethodOption: PaymentMethodOption.empty().copyWith(
+            bankOptionId: BankOptionId('fake_id'),
+            prodiver: StringValue('fake_provider'),
+          ),
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+      test('Fetch Create Virtual Account failure- Local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () => newPaymentLocalDataSource.createVirtualAccount(),
+        ).thenThrow((invocation) => MockException());
+
+        final result = await nawPaymentsRepository.createVirtualAccount(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          invoices: [
+            CustomerOpenItem.empty()
+                .copyWith(accountingDocument: 'fake_document')
+          ],
+          paymentMethodOption: PaymentMethodOption.empty().copyWith(
+            bankOptionId: BankOptionId('fake_id'),
+            prodiver: StringValue('fake_provider'),
+          ),
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+      test('Fetch Create Virtual Account success- UaT', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => newPaymentRemoteDataSource.createVirtualAccount(
+            salesOrg: fakeSalesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            invoices: ['fake_document'],
+            bankID: 'fake_id',
+            provider: 'fake_provider',
+          ),
+        ).thenAnswer((invocation) async => createVirtualAccount);
+
+        final result = await nawPaymentsRepository.createVirtualAccount(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          invoices: [
+            CustomerOpenItem.empty()
+                .copyWith(accountingDocument: 'fake_document')
+          ],
+          paymentMethodOption: PaymentMethodOption.empty().copyWith(
+            bankOptionId: BankOptionId('fake_id'),
+            prodiver: StringValue('fake_provider'),
+          ),
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+
+      test('Fetch Create Virtual Account failure- UaT', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => newPaymentRemoteDataSource.createVirtualAccount(
+            salesOrg: fakeSalesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            invoices: ['fake_document'],
+            bankID: 'fake_id',
+            provider: 'fake_provider',
+          ),
+        ).thenThrow((invocation) => MockException());
+
+        final result = await nawPaymentsRepository.createVirtualAccount(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          invoices: [
+            CustomerOpenItem.empty()
+                .copyWith(accountingDocument: 'fake_document')
+          ],
+          paymentMethodOption: PaymentMethodOption.empty().copyWith(
+            bankOptionId: BankOptionId('fake_id'),
+            prodiver: StringValue('fake_provider'),
+          ),
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('Fetch Principal Cutoffs success- Local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () => newPaymentLocalDataSource.getPrincipalCutoffs(),
+        ).thenAnswer((invocation) async => principalCutoffs);
+
+        final result = await nawPaymentsRepository.getPrincipalCutoffs(
+          shipToInfo: fakeShipToInfo,
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+
+      test('Fetch Principal Cutoffs failure- Local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () => newPaymentLocalDataSource.getPrincipalCutoffs(),
+        ).thenThrow((invocation) => MockException());
+
+        final result = await nawPaymentsRepository.getPrincipalCutoffs(
+          shipToInfo: fakeShipToInfo,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('Fetch Principal Cutoffs success- UaT', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => newPaymentRemoteDataSource.getPrincipalCutoffs(
+            branches: [fakeShipToInfo.plant],
+          ),
+        ).thenAnswer((invocation) async => principalCutoffs);
+
+        final result = await nawPaymentsRepository.getPrincipalCutoffs(
+          shipToInfo: fakeShipToInfo,
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+
+      test('Fetch Principal Cutoffs failure- UaT', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => newPaymentRemoteDataSource.getPrincipalCutoffs(
+            branches: [fakeShipToInfo.plant],
+          ),
+        ).thenThrow((invocation) => MockException());
+
+        final result = await nawPaymentsRepository.getPrincipalCutoffs(
+          shipToInfo: fakeShipToInfo,
         );
         expect(
           result.isLeft(),
