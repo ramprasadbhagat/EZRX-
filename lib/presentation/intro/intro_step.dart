@@ -1,83 +1,104 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class IntroStep extends StatelessWidget {
   final IntroObject introObject;
-  final Function() buttonOnTap;
+  final bool canSkip;
+  final Function() getStarted;
+  final Function() nextPage;
 
   const IntroStep({
     Key? key,
     required this.introObject,
-    required this.buttonOnTap,
+    required this.getStarted,
+    required this.nextPage,
+    required this.canSkip,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: introObject.backgroundColor,
-      padding: const EdgeInsets.symmetric(
-        vertical: 76,
-        horizontal: 20,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            flex: 6,
-            child: Image.asset(
-              introObject.assetsPath,
-              fit: BoxFit.cover,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          flex: 3,
+          child: Image.asset(
+            introObject.assetsPath,
+            fit: BoxFit.contain,
           ),
-          Expanded(
-            flex: 4,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  introObject.heading,
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: introObject.headingColor,
-                        fontSize: 24,
-                      ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  introObject.description,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(color: introObject.descriptionColor),
-                ),
-                const Spacer(),
-                OutlinedButton(
-                  key: WidgetKeys.introGetStartedButton,
-                  style: Theme.of(context).outlinedButtonTheme.style!.copyWith(
-                        backgroundColor: MaterialStateProperty.all(
-                          introObject.buttonBGColor,
+        ),
+        Expanded(
+          flex: 4,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                context.tr(introObject.heading),
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: introObject.headingColor,
+                      fontSize: 24,
+                    ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                context.tr(introObject.description),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: introObject.descriptionColor),
+              ),
+              const Spacer(),
+              SizedBox(
+                height: 100,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      child: OutlinedButton(
+                        style: Theme.of(context)
+                            .outlinedButtonTheme
+                            .style!
+                            .copyWith(
+                              backgroundColor: MaterialStateProperty.all(
+                                introObject.buttonBGColor,
+                              ),
+                            ),
+                        onPressed: canSkip ? nextPage : getStarted,
+                        child: Text(
+                          context.tr(introObject.buttonText),
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelMedium
+                              ?.copyWith(color: introObject.buttonTextColor),
                         ),
-                        side: MaterialStateProperty.all(
-                          BorderSide(color: introObject.buttonBorderColor),
+                      ),
+                    ),
+                    if (canSkip)
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: TextButton(
+                          onPressed: getStarted,
+                          child: Text(
+                            context.tr('Skip'),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(color: ZPColors.paleLime),
+                          ),
                         ),
                       ),
-                  onPressed: buttonOnTap,
-                  child: Text(
-                    context.tr(introObject.buttonText),
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelMedium
-                        ?.copyWith(color: introObject.buttonTextColor),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
