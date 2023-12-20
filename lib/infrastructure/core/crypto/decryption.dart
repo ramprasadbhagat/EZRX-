@@ -2,8 +2,12 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:flutter/material.dart' hide Key;
 import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
+import 'package:convert/convert.dart';
+
+import 'package:encrypt/encrypt.dart';
 
 class Decryption {
   String decrypt(String encrypted) {
@@ -28,6 +32,24 @@ class Decryption {
     } catch (error) {
       rethrow;
     }
+  }
+
+  String orderDecrypt({required String encryptedText, required String secretKey}) {
+    // Extract the IV from the first 32 characters
+    final ivHex = encryptedText.characters.getRange(0, 32).string;
+    final iv = IV.fromBase16(ivHex);
+
+    // Convert the rest of the data from hex to bytes
+    final encryptedBytes = Uint8List.fromList(
+      hex.decode(encryptedText.characters.getRange(32).string),
+    );
+
+    // Create the key and the encrypter
+    final key = Key.fromUtf8(secretKey);
+    final encrypter = Encrypter(AES(key, mode: AESMode.cbc));
+
+    // Decrypt the data
+    return encrypter.decrypt(Encrypted(encryptedBytes), iv: iv);
   }
 
   Tuple2<Uint8List, Uint8List> _deriveKeyAndIV(
