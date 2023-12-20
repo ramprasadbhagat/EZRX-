@@ -49,7 +49,7 @@ class _MaterialDetails extends StatelessWidget {
                 PriceComponent(
                   key: WidgetKeys.preOrderModalItemFinalPrice,
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
-                  price: cartItem.finalPriceTotalForAllMaterial,
+                  price: cartItem.display(PriceType.finalPrice),
                 ),
               ],
             ),
