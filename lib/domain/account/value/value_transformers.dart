@@ -148,6 +148,7 @@ String salesOrgBuName(String salesOrg) {
     '1703': 'ZPMO',
     '1700': 'ZPHK',
     '1750': 'ZPHK',
+    '1900': 'ZPID',
     '2001': 'ZPMY',
     '2200': 'ZPMM',
     '2201': 'ZPMM',
@@ -181,7 +182,7 @@ String salesOrgBuName(String salesOrg) {
     'PH02': 'MXPS MDI PH',
   };
 
-  return salesOrgBuMap[salesOrg] ?? 'Unknown';
+  return salesOrgBuMap[salesOrg] ?? '';
 }
 
 String salesOrgCountry(String salesOrg) {
@@ -223,7 +224,7 @@ String salesOrgCountry(String salesOrg) {
     '1900': 'ID',
   };
 
-  return salesOrgCountryMap[salesOrg] ?? 'Unknown';
+  return salesOrgCountryMap[salesOrg] ?? '';
 }
 
 String salesOrgLanguageCode(String country) {
