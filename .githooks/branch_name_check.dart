@@ -6,7 +6,7 @@ dynamic main() {
   final commitBranchName = commitFile.readAsStringSync();
 
   final regExp = RegExp(
-    r'ref: refs\/heads\/(ref|feat|fix|tdd|hotfix|chore)\/(EZRX|RXUAT)-[0-9]+-([0-9a-zA-Z._-]{10,})+$',
+    r'^(ref: refs\/heads\/(ref|feat|fix|tdd|hotfix|chore)\/(EZRX|RXUAT)-[0-9]+-([0-9a-zA-Z._-]{10,})+$)',
   );
 
   final valid = regExp.hasMatch(commitBranchName);
