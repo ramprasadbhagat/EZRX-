@@ -5,14 +5,30 @@ resources:
 pool:
   vmImage: macos-latest
 jobs:
-  - job: Analyse
+  - job: Analyze flutter
     pool: devops-flutter
-    displayName: 'Analyze flutter. Reject error, warning, info code'
+    displayName: 'Analyze flutter'
     steps:
       - bash: flutter375 analyze --fatal-infos --fatal-warnings
+  - job: DCM Analyse
+    pool: devops-flutter
+    displayName: 'DCM Analyse'
+    steps:
       - bash: flutter375 pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings --disable-sunset-warning
+  - job: DCM Check Unnecessary Nullable
+    pool: devops-flutter
+    displayName: 'DCM Check Unnecessary Nullable'
+    steps:
       - bash: flutter375 pub run dart_code_metrics:metrics check-unnecessary-nullable lib --fatal-found --disable-sunset-warning
+  - job: DCM Check Unused Code
+    pool: devops-flutter
+    displayName: 'DCM Check Unused Code'
+    steps:
       - bash: flutter375 pub run dart_code_metrics:metrics check-unused-code lib --fatal-unused --disable-sunset-warning
+  - job: DCM Check Unused Files
+    pool: devops-flutter
+    displayName: 'DCM Check Unused Files'
+    steps:
       - bash: flutter375 pub run dart_code_metrics:metrics check-unused-files lib --fatal-unused --disable-sunset-warning
   - job: TestApplication
     pool: devops-flutter
