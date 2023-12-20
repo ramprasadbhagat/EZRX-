@@ -137,38 +137,26 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   bool get batchNumHasData => batch.isValid() || expiryDate.isNotEmpty;
 
   String itemUnitPrice(
-    StringValue invoiceNumber,
-    bool isMYExternalSalesRep,
     bool isIDMarket,
   ) =>
       _itemPrice(
         unitPrice,
-        invoiceNumber,
-        isMYExternalSalesRep,
         isIDMarket,
       );
 
   String itemNetPrice(
-    StringValue invoiceNumber,
-    bool isMYExternalSalesRep,
     bool isIDMarket,
   ) =>
       _itemPrice(
         unitPrice * qty,
-        invoiceNumber,
-        isMYExternalSalesRep,
         isIDMarket,
       );
 
   String itemTotalPrice(
-    StringValue invoiceNumber,
-    bool isMYExternalSalesRep,
     bool isIDMarket,
   ) =>
       _itemPrice(
         totalPrice,
-        invoiceNumber,
-        isMYExternalSalesRep,
         isIDMarket,
       );
 
@@ -180,23 +168,12 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
   String _itemPrice(
     double price,
-    StringValue invoiceNumber,
-    bool isMYExternalSalesRep,
     bool isIDMarket,
   ) {
+    if (type.isMaterialTypeBonus) return isIDMarket ? '0' : 'FREE';
     const displayPriceNotAvailable = 'Price Not Available';
 
-    if (type.isMaterialTypeBonus) return isIDMarket ? '0' : 'FREE';
-
-    if (isMYExternalSalesRep && isPnGMaterial && !invoiceNumber.isValid()) {
-      return displayPriceNotAvailable;
-    }
-
-    if (hidePrice) {
-      return displayPriceNotAvailable;
-    }
-
-    if (price == 0) return displayPriceNotAvailable;
+    if (price == 0 || hidePrice) return displayPriceNotAvailable;
 
     return price.toString();
   }
@@ -208,7 +185,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         quantity: MaterialQty(qty),
       );
 
-  bool get showMaterialListPrice => originPrice > unitPrice;
+  bool get showMaterialListPrice => originPrice > unitPrice && !hidePrice;
 
   String combinationCode({required bool showGMCPart}) => <String>[
         materialNumber.displayMatNo,

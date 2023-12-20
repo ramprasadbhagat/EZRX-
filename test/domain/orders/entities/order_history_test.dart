@@ -69,7 +69,6 @@ void main() async {
         expect(
           orderHistoryItem.itemTotalNetPrice(
             false,
-            false,
           ),
           '100.0',
         );

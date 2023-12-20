@@ -61,7 +61,6 @@ class ItemDetailsSection extends StatelessWidget {
                         ),
                       OrderItemPrice(
                         unitPrice: orderHistoryItem.itemUnitPrice(
-                          eligibilityState.isMYExternalSalesRepUser,
                           eligibilityState.salesOrg.isID,
                         ),
                         originPrice: orderHistoryItem.originPrice.toString(),
@@ -94,7 +93,6 @@ class ItemDetailsSection extends StatelessWidget {
               quantity: orderHistoryItem.qty,
               taxPercentage: orderHistoryItem.taxPercentage,
               netPrice: orderHistoryItem.itemTotalNetPrice(
-                eligibilityState.isMYExternalSalesRepUser,
                 eligibilityState.salesOrg.isID,
               ),
             ),

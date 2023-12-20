@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -7,8 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   const fakePrice = 12.23;
-  final fakeValidInvoice = StringValue('fake-test');
-  final fakeInvalidInvoice = StringValue('');
   final pngPrincipleCode = PrincipalCode('105307');
   final comOrderItemType = OrderItemType('Comm');
   final bonusOrderItemType = OrderItemType('Bonus');
@@ -28,7 +25,7 @@ void main() async {
                   principalCode: pngPrincipleCode,
                 ),
               )
-              .itemUnitPrice(fakeInvalidInvoice, true, true),
+              .itemUnitPrice(true),
           priceNotAvailableText,
         );
       });
@@ -37,7 +34,7 @@ void main() async {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(type: bonusOrderItemType)
-              .itemUnitPrice(fakeValidInvoice, true, true),
+              .itemUnitPrice(true),
           0.toString(),
         );
       });
@@ -46,7 +43,7 @@ void main() async {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(type: bonusOrderItemType)
-              .itemUnitPrice(fakeValidInvoice, true, false),
+              .itemUnitPrice(false),
           freeText,
         );
       });
@@ -55,7 +52,7 @@ void main() async {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(unitPrice: 0)
-              .itemUnitPrice(fakeValidInvoice, true, false),
+              .itemUnitPrice(false),
           priceNotAvailableText,
         );
       });
@@ -64,7 +61,7 @@ void main() async {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(unitPrice: fakePrice)
-              .itemUnitPrice(fakeValidInvoice, true, false),
+              .itemUnitPrice(false),
           fakePrice.toString(),
         );
       });
@@ -82,7 +79,7 @@ void main() async {
                   principalCode: pngPrincipleCode,
                 ),
               )
-              .itemTotalPrice(fakeInvalidInvoice, true, true),
+              .itemTotalPrice(true),
           priceNotAvailableText,
         );
       });
@@ -91,7 +88,7 @@ void main() async {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(type: bonusOrderItemType)
-              .itemTotalPrice(fakeValidInvoice, true, true),
+              .itemTotalPrice(true),
           0.toString(),
         );
       });
@@ -100,7 +97,7 @@ void main() async {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(type: bonusOrderItemType)
-              .itemTotalPrice(fakeValidInvoice, true, false),
+              .itemTotalPrice(false),
           freeText,
         );
       });
@@ -109,7 +106,7 @@ void main() async {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(totalPrice: 0)
-              .itemTotalPrice(fakeValidInvoice, true, false),
+              .itemTotalPrice(false),
           priceNotAvailableText,
         );
       });
@@ -118,7 +115,7 @@ void main() async {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(hidePrice: true)
-              .itemTotalPrice(fakeValidInvoice, true, false),
+              .itemTotalPrice(false),
           priceNotAvailableText,
         );
       });
@@ -127,7 +124,7 @@ void main() async {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(totalPrice: fakePrice)
-              .itemTotalPrice(fakeValidInvoice, true, false),
+              .itemTotalPrice(false),
           fakePrice.toString(),
         );
       });

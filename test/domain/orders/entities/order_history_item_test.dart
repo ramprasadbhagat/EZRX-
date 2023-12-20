@@ -18,7 +18,7 @@ void main() async {
           OrderHistoryItem.empty()
               .copyWith
               .principalData(principalCode: pngPrincipleCode)
-              .itemUnitPrice(true, true),
+              .itemUnitPrice(true),
           priceNotAvailableText,
         );
       });
@@ -27,7 +27,7 @@ void main() async {
         expect(
           OrderHistoryItem.empty()
               .copyWith(isBonusMaterial: true)
-              .itemUnitPrice(true, true),
+              .itemUnitPrice(true),
           0.toString(),
         );
       });
@@ -36,16 +36,14 @@ void main() async {
         expect(
           OrderHistoryItem.empty()
               .copyWith(isBonusMaterial: true)
-              .itemUnitPrice(true, false),
+              .itemUnitPrice(false),
           freeText,
         );
       });
 
       test('Display Price not available when price is 0', () {
         expect(
-          OrderHistoryItem.empty()
-              .copyWith(unitPrice: 0)
-              .itemUnitPrice(true, false),
+          OrderHistoryItem.empty().copyWith(unitPrice: 0).itemUnitPrice(false),
           priceNotAvailableText,
         );
       });
@@ -54,7 +52,7 @@ void main() async {
         expect(
           OrderHistoryItem.empty()
               .copyWith(unitPrice: fakePrice)
-              .itemUnitPrice(true, false),
+              .itemUnitPrice(false),
           fakePrice.toString(),
         );
       });
@@ -68,7 +66,7 @@ void main() async {
           OrderHistoryItem.empty()
               .copyWith
               .principalData(principalCode: pngPrincipleCode)
-              .itemTotalPrice(true, true),
+              .itemTotalPrice(true),
           priceNotAvailableText,
         );
       });
@@ -77,7 +75,7 @@ void main() async {
         expect(
           OrderHistoryItem.empty()
               .copyWith(isBonusMaterial: true)
-              .itemTotalPrice(true, true),
+              .itemTotalPrice(true),
           0.toString(),
         );
       });
@@ -86,7 +84,7 @@ void main() async {
         expect(
           OrderHistoryItem.empty()
               .copyWith(isBonusMaterial: true)
-              .itemTotalPrice(true, false),
+              .itemTotalPrice(false),
           freeText,
         );
       });
@@ -95,7 +93,7 @@ void main() async {
         expect(
           OrderHistoryItem.empty()
               .copyWith(totalPrice: 0)
-              .itemTotalPrice(true, false),
+              .itemTotalPrice(false),
           priceNotAvailableText,
         );
       });
@@ -104,7 +102,7 @@ void main() async {
         expect(
           OrderHistoryItem.empty()
               .copyWith(totalPrice: fakePrice)
-              .itemTotalPrice(true, false),
+              .itemTotalPrice(false),
           fakePrice.toString(),
         );
       });

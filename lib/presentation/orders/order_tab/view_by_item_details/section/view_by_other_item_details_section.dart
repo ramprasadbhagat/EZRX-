@@ -81,8 +81,6 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                         unitPrice:
                                                             e.itemUnitPrice(
                                                           eligibilityState
-                                                              .isMYExternalSalesRepUser,
-                                                          eligibilityState
                                                               .salesOrg.isID,
                                                         ),
                                                         originPrice: e
@@ -120,8 +118,6 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                   taxPercentage:
                                                       e.taxPercentage,
                                                   netPrice: e.itemTotalNetPrice(
-                                                    eligibilityState
-                                                        .isMYExternalSalesRepUser,
                                                     eligibilityState
                                                         .salesOrg.isID,
                                                   ),

@@ -678,13 +678,9 @@ void main() {
                 fakeBundleItem.materialNumber.displayMatNo,
             MixpanelProps.productQty: fakeBundleItem.qty,
             MixpanelProps.grandTotal: fakeBundleItem.itemTotalPrice(
-              fakeOrderDetail.invoiceNumber,
-              false,
               false,
             ),
             MixpanelProps.unitPrice: fakeBundleItem.itemUnitPrice(
-              fakeOrderDetail.invoiceNumber,
-              false,
               false,
             ),
           },

@@ -59,6 +59,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'LineNumber', defaultValue: '') required String lineNumber,
     @JsonKey(name: 'PrincipalCode', defaultValue: '')
         required String principalCode,
+    @JsonKey(name: 'HidePrice', defaultValue: false) required bool hidePrice,
   }) = _OrderHistoryItemDto;
 
   factory OrderHistoryItemDto.fromDomain(OrderHistoryItem orderHistoryItem) {
@@ -100,6 +101,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       manufactureName:
           orderHistoryItem.principalData.principalName.getOrDefaultValue(''),
       governmentMaterialCode: orderHistoryItem.governmentMaterialCode,
+      hidePrice: orderHistoryItem.hidePrice,
     );
   }
   OrderHistoryItem toDomain() {
@@ -139,6 +141,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
         principalCode: PrincipalCode(principalCode),
       ),
       governmentMaterialCode: governmentMaterialCode,
+      hidePrice: hidePrice,
     );
   }
 

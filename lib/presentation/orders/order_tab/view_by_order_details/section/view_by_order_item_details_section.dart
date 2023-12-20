@@ -20,7 +20,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 
 class OrderItemDetailsSection extends StatelessWidget {
   const OrderItemDetailsSection({
@@ -95,12 +94,6 @@ class _OrderItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final salesOrgConfig = eligibilityState.salesOrgConfigs;
-    final invoiceNumber = context
-        .read<ViewByOrderDetailsBloc>()
-        .state
-        .orderHistoryDetails
-        .invoiceNumber;
-    final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
     final isIDMarket = eligibilityState.salesOrganisation.salesOrg.isID;
 
     return CommonTileItem(
@@ -130,8 +123,6 @@ class _OrderItemTile extends StatelessWidget {
                   ),
                 OrderItemPrice(
                   unitPrice: orderItem.itemUnitPrice(
-                    invoiceNumber,
-                    isMYExternalSalesRep,
                     isIDMarket,
                   ),
                   originPrice: orderItem.originPrice.toString(),
@@ -164,8 +155,6 @@ class _OrderItemTile extends StatelessWidget {
             ? '${orderItem.pickedQuantity} ${context.tr('of')} ${orderItem.qty} ${context.tr('stocks fulfilled')}'
             : '',
         netPrice: orderItem.itemNetPrice(
-          invoiceNumber,
-          isMYExternalSalesRep,
           isIDMarket,
         ),
         taxPercentage: orderItem.taxPercentage,

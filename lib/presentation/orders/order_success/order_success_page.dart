@@ -81,7 +81,7 @@ class OrderSuccessPage extends StatelessWidget {
     final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
     final orderDetail = state.orderHistoryDetails;
     final orderNumber = orderDetail.orderNumber.getOrDefaultValue('');
-    final invoiceNumber = orderDetail.invoiceNumber;
+
     trackMixpanelEvent(
       MixpanelEvents.placeOrderSuccess,
       props: {
@@ -102,13 +102,9 @@ class OrderSuccessPage extends StatelessWidget {
           MixpanelProps.productCode: item.materialNumber.displayMatNo,
           MixpanelProps.productQty: item.qty,
           MixpanelProps.grandTotal: item.itemTotalPrice(
-            invoiceNumber,
-            isMYExternalSalesRep,
             isIDMarket,
           ),
           MixpanelProps.unitPrice: item.itemUnitPrice(
-            invoiceNumber,
-            isMYExternalSalesRep,
             isIDMarket,
           ),
         },

@@ -830,6 +830,7 @@ void main() {
                 totalPrice: 516,
                 type: OrderItemType('Comm'),
                 productType: MaterialInfoType('material'),
+                hidePrice: true,
               )
             ],
           ),

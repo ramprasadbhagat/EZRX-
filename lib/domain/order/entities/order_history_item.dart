@@ -47,6 +47,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required LineNumber lineNumber,
     required PrincipalData principalData,
     required String governmentMaterialCode,
+    required bool hidePrice,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -78,6 +79,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         isBundle: false,
         promoStatus: false,
         isCounterOffer: false,
+        hidePrice: false,
         lineNumber: LineNumber(''),
         principalData: PrincipalData.empty(),
       );
@@ -111,53 +113,42 @@ class OrderHistoryItem with _$OrderHistoryItem {
   bool get isPnGMaterial => isTypeMaterial && principalData.principalCode.isPnG;
 
   String itemUnitPrice(
-    bool isMYExternalSalesRep,
     bool isIDMarket,
   ) =>
       _itemPrice(
         unitPrice,
-        isMYExternalSalesRep,
         isIDMarket,
       );
 
   String itemTotalNetPrice(
-    bool isMYExternalSalesRep,
     bool isIDMarket,
   ) =>
       _itemPrice(
         unitPrice * qty,
-        isMYExternalSalesRep,
         isIDMarket,
       );
 
   String itemTotalPrice(
-    bool isMYExternalSalesRep,
     bool isIDMarket,
   ) =>
       _itemPrice(
         totalPrice,
-        isMYExternalSalesRep,
         isIDMarket,
       );
 
   String _itemPrice(
     double price,
-    bool isMYExternalSalesRep,
     bool isIDMarket,
   ) {
-    const displayPriceNotAvailable = 'Price Not Available';
-    final invoiceNumberValid = invoiceData.invoiceNumber.isValid();
-
-    if (isMYExternalSalesRep && isPnGMaterial && !invoiceNumberValid) {
-      return displayPriceNotAvailable;
-    }
     if (isBonusMaterial) return isIDMarket ? '0' : 'FREE';
-    if (price == 0) return displayPriceNotAvailable;
+
+    const displayPriceNotAvailable = 'Price Not Available';
+    if (price == 0 || hidePrice) return displayPriceNotAvailable;
 
     return price.toString();
   }
 
-  bool get showMaterialListPrice => originPrice > unitPrice;
+  bool get showMaterialListPrice => originPrice > unitPrice && !hidePrice;
 
   bool get batchNumHasData => batch.isValid() || expiryDate.isNotEmpty;
 
