@@ -137,7 +137,7 @@ class PriceAggregate with _$PriceAggregate {
           MaterialItemOverrideDto.fromPriceAggregate(this).toDomain(),
       price: materialInfo.type.typeBundle
           ? bundle.currentBundleInfo.rate
-          : price.finalPrice.getValue(),
+          : finalPrice,
       productType: materialInfo.type.getValue().toUpperCase(),
       parentID: materialInfo.type.typeBundle
           ? bundle.bundleCode

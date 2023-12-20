@@ -2043,5 +2043,36 @@ void main() {
         );
       },
     );
+
+    test(
+      'Find final price with tiering bonus from toSubmitMaterialInfo',
+      () {
+        final priceTiers = [
+          PriceTier.empty().copyWith(
+            tier: 'C',
+            items: [
+              PriceTierItem.empty().copyWith(
+                rate: 41,
+                quantity: 5,
+              ),
+              PriceTierItem.empty().copyWith(
+                rate: 20,
+                quantity: 10,
+              )
+            ],
+          )
+        ];
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          quantity: 10,
+          price: Price.empty()
+              .copyWith(finalPrice: MaterialPrice(100), tiers: priceTiers),
+          discountedMaterialCount: 10,
+        );
+        expect(
+          customPriceAggregate.toSubmitMaterialInfo().price,
+          20,
+        );
+      },
+    );
   });
 }
