@@ -182,7 +182,7 @@ String salesOrgBuName(String salesOrg) {
     'PH02': 'MXPS MDI PH',
   };
 
-  return salesOrgBuMap[salesOrg] ?? '';
+  return salesOrgBuMap[salesOrg] ?? 'Unknown';
 }
 
 String salesOrgCountry(String salesOrg) {
@@ -224,7 +224,7 @@ String salesOrgCountry(String salesOrg) {
     '1900': 'ID',
   };
 
-  return salesOrgCountryMap[salesOrg] ?? '';
+  return salesOrgCountryMap[salesOrg] ?? 'Unknown';
 }
 
 String salesOrgLanguageCode(String country) {
