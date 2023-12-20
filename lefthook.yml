@@ -9,7 +9,7 @@ pre-commit:
     pretty:
       glob: "*.dart"
       exclude: '(^|/)(freezed|g|gr)\.dart$'
-      run: fvm flutter format {staged_files} && git add {staged_files}
+      run: fvm dart format {staged_files} && git add {staged_files}
     validate:
       run: fvm flutter pub run .githooks/branch_name_check.dart
 
