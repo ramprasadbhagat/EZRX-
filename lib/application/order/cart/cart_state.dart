@@ -170,7 +170,7 @@ class CartState with _$CartState {
             0,
             (sum, item) =>
                 sum +
-                (item.price.finalPrice.getValue() *
+                (item.finalPrice *
                     item.quantity *
                     _totalTaxPercentInDouble /
                     100),

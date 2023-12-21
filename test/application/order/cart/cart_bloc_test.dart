@@ -3438,6 +3438,43 @@ void main() {
       );
 
       test(
+        'Testing CartBloc state taxMaterial tax for offer material on KH market',
+        () {
+          final priceOnOfferMaterial = prices.firstWhere(
+            (element) =>
+                element.materialNumber.getOrDefaultValue('') ==
+                '000000000021221523',
+          );
+
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: priceOnOfferMaterial,
+                materialInfo: priceAggregates.first.materialInfo.copyWith(
+                  tax: 10,
+                  hidePrice: false,
+                  type: MaterialInfoType.material(),
+                  taxClassification:
+                      MaterialTaxClassification('Product : Full Tax'),
+                ),
+                discountedMaterialCount: 50,
+                quantity: 50,
+              )
+            ],
+            config: fakeSalesOrganisationConfigs.copyWith(
+              displaySubtotalTaxBreakdown: true,
+              vatValue: 10,
+              currency: Currency('khr'),
+            ),
+          );
+          expect(
+            cartBlocState.taxMaterial,
+            16.5,
+          );
+        },
+      );
+
+      test(
         'Testing CartBloc state taxBundle',
         () {
           final cartBlocState = CartState.initial().copyWith(

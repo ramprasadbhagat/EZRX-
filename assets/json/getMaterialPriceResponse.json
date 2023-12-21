@@ -448,7 +448,99 @@
               ]
           }
         }
-      }
+      },
+      {
+        "MaterialNumber": "000000000021221523",
+        "OldMaterialCode": "882039",
+        "ListPrice": 3.55,
+        "FinalIndividualPrice": 3.55,
+        "FinalTotalPrice": 0,
+        "PriceRules": [
+            {
+                "Type": "USD",
+                "Rate": 3.55,
+                "Conditions": "ZLP0 - A901 - 0079000848",
+                "TieredRules": null,
+                "BonusEligible": true,
+                "ConditionNumber": "0079000848",
+                "OverriddenBy": null,
+                "MaxQuota": "0",
+                "RemainingQuota": null,
+                "__typename": "PriceRule"
+            },
+            {
+                "Type": "%",
+                "Rate": 0,
+                "Conditions": "ZDP1 - A902 - 0086683743",
+                "TieredRules": {
+                    "Tier": "C",
+                    "RuleTier": [
+                        {
+                            "Rate": -7,
+                            "Quantity": 18,
+                            "__typename": "RuleTier"
+                        },
+                        {
+                            "Rate": 0,
+                            "Quantity": 1,
+                            "__typename": "RuleTier"
+                        }
+                    ],
+                    "__typename": "TieredRules"
+                },
+                "BonusEligible": true,
+                "ConditionNumber": "0086683743",
+                "OverriddenBy": null,
+                "MaxQuota": "0",
+                "RemainingQuota": null,
+                "__typename": "PriceRule"
+            }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [
+            {
+                "Tier": "C",
+                "PriceTier": [
+                    {
+                        "Sequence": 0,
+                        "Quantity": 18,
+                        "Type": "",
+                        "Rate": 3.3015,
+                        "ApplyBonus": true,
+                        "Percentage": null,
+                        "MinAmount": null,
+                        "ScaleBasis": "",
+                        "__typename": "PriceTier"
+                    },
+                    {
+                        "Sequence": 0,
+                        "Quantity": 1,
+                        "Type": "",
+                        "Rate": 3.55,
+                        "ApplyBonus": true,
+                        "Percentage": null,
+                        "MinAmount": null,
+                        "ScaleBasis": "",
+                        "__typename": "PriceTier"
+                    }
+                ],
+                "__typename": "TieredPricing"
+            }
+        ],
+        "Bundles": [],
+        "Valid": true,
+        "AdditionalBonusEligible": true,
+        "ZMGDiscount": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ExceedQty": false,
+        "OverridenRulePresent": false,
+        "OverridenRules": [],
+        "OverridenRuleTier": [],
+        "IsMOVExclusion": false,
+        "ComboDeals": null,
+        "__typename": "Price"
+    }
     ]
   }
 }
