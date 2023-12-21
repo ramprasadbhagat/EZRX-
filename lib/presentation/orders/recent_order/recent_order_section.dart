@@ -160,7 +160,7 @@ class _ProductTile extends StatelessWidget {
                         height: 5,
                       ),
                       PriceComponent(
-                        price: product.itemTotalPrice(
+                        price: product.itemUnitPrice(
                           eligibilityState.salesOrg.isID,
                         ),
                         salesOrgConfig: eligibilityState.salesOrgConfigs,

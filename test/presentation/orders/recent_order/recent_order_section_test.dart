@@ -228,6 +228,7 @@ void main() {
         orderHistoryItems: [
           OrderHistoryItem.empty().copyWith(
             totalPrice: 40.0,
+            unitPrice: 10.0,
           ),
           OrderHistoryItem.empty().copyWith(
             isBonusMaterial: true,
@@ -257,7 +258,7 @@ void main() {
 
       final bonusMaterialFreeTag = find.text('FREE', findRichText: true);
       final commercialMaterialTotalPrice =
-          find.text('MYR 40.00', findRichText: true);
+          find.text('MYR 10.00', findRichText: true);
       expect(bonusMaterialFreeTag, findsOneWidget);
       expect(commercialMaterialTotalPrice, findsOneWidget);
     });
