@@ -32,7 +32,7 @@ class NotificationTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notifications'.tr()),
+        title: Text(context.tr('Notifications')),
         automaticallyImplyLeading: false,
         centerTitle: false,
         elevation: 8,
@@ -85,7 +85,7 @@ class NotificationTab extends StatelessWidget {
             noRecordFoundWidget: const NoRecordFound(
               key: WidgetKeys.notificationNotFoundRecordKey,
               title: 'No notifications to show',
-              subTitle: 'We\'ll notify you when there is something',
+              subTitle: "We'll notify you when there is something",
               svgImage: SvgImage.notification,
             ),
             itemBuilder: (context, index, item) => _NotificationList(
