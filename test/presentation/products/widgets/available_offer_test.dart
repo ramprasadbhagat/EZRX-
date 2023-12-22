@@ -20,12 +20,16 @@ import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/available_offer.dart';
+import 'package:ezrxmobile/presentation/products/available_offers/available_offer_item.dart';
+import 'package:ezrxmobile/presentation/products/available_offers/show_offer_dialog_widget.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MaterialPriceBlocMock
@@ -249,6 +253,203 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       expect(availableOfferFinder, findsOneWidget);
+    });
+
+    testWidgets('Visible when bonus is not empty and the market is ID',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeExternalSalesRepUser,
+          salesOrganisation: fakeIDSalesOrganisation,
+          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+        ),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            materialInfoMock.materialNumber: materialPrice.copyWith(
+              bonuses: [bonus],
+            )
+          },
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          "The offers you get will based on eligibility. You'll know which promo you received after you do check out.",
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.byType(
+          AvailableOfferItem,
+        ),
+        findsWidgets,
+      );
+    });
+    testWidgets('Available offers button test', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeExternalSalesRepUser,
+          salesOrganisation: fakeIDSalesOrganisation,
+          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+        ),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            materialInfoMock.materialNumber: materialPrice.copyWith(
+              bonuses: [bonus],
+            )
+          },
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final availableOffers = find.text('Available offers');
+      final availableOffersKey = find.byKey(WidgetKeys.availableOffersTile);
+
+      expect(
+        availableOffersKey,
+        findsOneWidget,
+      );
+      expect(
+        availableOffers,
+        findsOneWidget,
+      );
+      await tester.tap(availableOffers);
+      await tester.pumpAndSettle();
+      expect(
+        find.byType(ShowOfferDialogWidget),
+        findsOneWidget,
+      );
+      expect(
+        find.byType(
+          AvailableOfferItem,
+        ),
+        findsWidgets,
+      );
+      final closeButton = find.byKey(WidgetKeys.closeButton);
+      expect(
+        closeButton,
+        findsWidgets,
+      );
+      await tester.tap(closeButton);
+      await tester.pumpAndSettle();
+      expect(
+        find.byType(ShowOfferDialogWidget),
+        findsNothing,
+      );
+    });
+    testWidgets('Available Offer Item test', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeExternalSalesRepUser,
+          salesOrganisation: fakeIDSalesOrganisation,
+          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+        ),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            materialInfoMock.materialNumber: materialPrice.copyWith(
+              bonuses: [bonus],
+            )
+          },
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final availableOffers = find.text('Available offers');
+      final availableOffersKey = find.byKey(WidgetKeys.availableOffersTile);
+
+      expect(
+        availableOffersKey,
+        findsOneWidget,
+      );
+      expect(
+        availableOffers,
+        findsOneWidget,
+      );
+      await tester.tap(availableOffers);
+      await tester.pumpAndSettle();
+      expect(
+        find.byType(ShowOfferDialogWidget),
+        findsOneWidget,
+      );
+      expect(
+        find.byType(
+          AvailableOfferItem,
+        ),
+        findsWidgets,
+      );
+      expect(
+        find.textContaining(
+          'Minimum Amount',
+        ),
+        findsNWidgets(2),
+      );
+      expect(
+        find.textContaining(
+          'Purchase quantity: 100',
+        ),
+        findsNWidgets(2),
+      );
+    });
+
+    testWidgets('Available Offer Item test when the bonus is empty',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeExternalSalesRepUser,
+          salesOrganisation: fakeIDSalesOrganisation,
+          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+        ),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            materialInfoMock.materialNumber: materialPrice.copyWith(bonuses: [])
+          },
+        ),
+      );
+      when(() => productDetailMockBloc.state).thenReturn(
+        ProductDetailState.initial().copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: materialInfoMock.copyWith(hidePrice: false),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final availableOffers = find.text('Available offers');
+      final availableOffersKey = find.byKey(WidgetKeys.availableOffersTile);
+
+      expect(
+        availableOffersKey,
+        findsOneWidget,
+      );
+      expect(
+        availableOffers,
+        findsOneWidget,
+      );
+      await tester.tap(availableOffers);
+      await tester.pumpAndSettle();
+      expect(
+        find.byType(ShowOfferDialogWidget),
+        findsOneWidget,
+      );
+      expect(
+        find.byType(
+          AvailableOfferItem,
+        ),
+        findsWidgets,
+      );
     });
   });
 }
