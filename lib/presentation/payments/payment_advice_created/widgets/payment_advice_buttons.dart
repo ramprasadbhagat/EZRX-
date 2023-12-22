@@ -39,8 +39,15 @@ class _PaymentAdviceButtons extends StatelessWidget {
                       color: ZPColors.primary,
                     ),
               ),
-              onPressed: () =>
-                  context.router.popAndPush(const PaymentSummaryPageRoute()),
+              onPressed: () {
+                context.read<PaymentSummaryBloc>().add(
+                      PaymentSummaryEvent.fetch(
+                        appliedFilter: PaymentSummaryFilter.empty(),
+                        searchKey: SearchKey.searchFilter(''),
+                      ),
+                    );
+                context.router.popAndPush(const PaymentSummaryPageRoute());
+              },
             ),
           ),
           const SizedBox(

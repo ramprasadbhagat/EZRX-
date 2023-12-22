@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
@@ -96,6 +97,10 @@ class MockPaymentSummaryDetailsBloc
     extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
     implements PaymentSummaryDetailsBloc {}
 
+class PaymentSummaryBlocMock
+    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
+    implements PaymentSummaryBloc {}
+
 void main() {
   late SoaBloc soaBloc;
   late AuthBloc authBlocMock;
@@ -115,6 +120,8 @@ void main() {
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
   late PaymentSummaryDetailsBloc mockPaymentSummaryDetailsBloc;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBloc;
+  late PaymentSummaryBloc mockPaymentSummaryBloc;
+
   //////////////////////Finder/////////////////////////////
 
   final paymentAdviceScreenLoader =
@@ -164,6 +171,7 @@ void main() {
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
     mockPaymentSummaryDetailsBloc = MockPaymentSummaryDetailsBloc();
     downloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
+    mockPaymentSummaryBloc = PaymentSummaryBlocMock();
 
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
@@ -192,6 +200,8 @@ void main() {
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
+    when(() => mockPaymentSummaryBloc.state)
+        .thenReturn(PaymentSummaryState.initial());
   });
 
   Widget getWidget() {
@@ -237,6 +247,9 @@ void main() {
           create: (context) => downloadPaymentAttachmentsBloc,
         ),
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+        BlocProvider<PaymentSummaryBloc>(
+          create: (context) => mockPaymentSummaryBloc,
+        ),
       ],
       child: const PaymentAdviceCreatedPage(),
     );

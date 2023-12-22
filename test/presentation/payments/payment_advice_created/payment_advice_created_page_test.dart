@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -58,6 +59,10 @@ class MockMixpanelService extends Mock implements MixpanelService {}
 
 class AppRouterMock extends Mock implements AppRouter {}
 
+class PaymentSummaryBlocMock
+    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
+    implements PaymentSummaryBloc {}
+
 void main() {
   late AppRouter autoRouterMock;
   late NewPaymentBloc newPaymentBlocMock;
@@ -67,6 +72,7 @@ void main() {
   late PaymentSummaryDetailsBloc paymentSummaryDetailsBlocMock;
   late PaymentInvoiceInfoPdf fakePaymentInvoiceInfoPdf;
   late PaymentSummaryDetails fakePaymentSummaryDetails;
+  late PaymentSummaryBloc mockPaymentSummaryBloc;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -83,6 +89,7 @@ void main() {
     customerCodeBlocMock = CustomerCodeBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     paymentSummaryDetailsBlocMock = PaymentSummaryDetailsBlocMock();
+    mockPaymentSummaryBloc = PaymentSummaryBlocMock();
 
     fakePaymentInvoiceInfoPdf =
         await NewPaymentLocalDataSource().getPaymentInvoiceInfoPdf();
@@ -101,6 +108,8 @@ void main() {
     when(() => paymentSummaryDetailsBlocMock.state).thenReturn(
       PaymentSummaryDetailsState.initial(),
     );
+    when(() => mockPaymentSummaryBloc.state)
+        .thenReturn(PaymentSummaryState.initial());
   });
 
   void findAndTapRichText({required Element parent, required String text}) {
@@ -135,6 +144,9 @@ void main() {
         ),
         BlocProvider<PaymentSummaryDetailsBloc>(
           create: (context) => paymentSummaryDetailsBlocMock,
+        ),
+        BlocProvider<PaymentSummaryBloc>(
+          create: (context) => mockPaymentSummaryBloc,
         ),
       ],
       child: const PaymentAdviceCreatedPage(),
