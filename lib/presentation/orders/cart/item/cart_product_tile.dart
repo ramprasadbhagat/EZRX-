@@ -35,6 +35,7 @@ part 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets
 
 class CartProductTile extends StatelessWidget {
   final PriceAggregate cartItem;
+
   const CartProductTile({
     Key? key,
     required this.cartItem,
@@ -112,6 +113,7 @@ class CartProductTile extends StatelessWidget {
 class _MaterialDetailsSection extends StatelessWidget {
   final PriceAggregate cartItem;
   final bool isInvalidCartItem;
+
   const _MaterialDetailsSection({
     Key? key,
     required this.cartItem,
@@ -141,6 +143,7 @@ class _MaterialDetailsSection extends StatelessWidget {
 
 class _ItemSubTotalSection extends StatelessWidget {
   final PriceAggregate cartProduct;
+
   const _ItemSubTotalSection({
     required this.cartProduct,
     Key? key,
@@ -216,7 +219,9 @@ class _ItemSubTotalSection extends StatelessWidget {
 
 class _LoadingShimmerWithChild extends StatelessWidget {
   const _LoadingShimmerWithChild({required this.child});
+
   final Widget child;
+
   @override
   Widget build(BuildContext context) {
     return LoadingShimmer.withChild(
@@ -232,6 +237,7 @@ class _LoadingShimmerWithChild extends StatelessWidget {
 class _MaterialDetails extends StatelessWidget {
   final PriceAggregate cartItem;
   final bool isInvalidCartItem;
+
   const _MaterialDetails({
     Key? key,
     required this.cartItem,
@@ -278,7 +284,8 @@ class _MaterialDetails extends StatelessWidget {
           ),
           Row(
             children: [
-              if (cartItem.displayCutOffListPrice)
+              if (cartItem.displayCutOffListPrice &&
+                  cartItem.showStrikeThrough)
                 PriceComponent(
                   key: WidgetKeys.cartItemCutOffListPrice,
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
@@ -324,6 +331,7 @@ class _MaterialDetails extends StatelessWidget {
 class _MaterialQuantitySection extends StatefulWidget {
   final PriceAggregate cartItem;
   final bool isInvalidCartItem;
+
   const _MaterialQuantitySection({
     Key? key,
     required this.cartItem,
@@ -337,6 +345,7 @@ class _MaterialQuantitySection extends StatefulWidget {
 
 class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   final _controller = TextEditingController();
+
   String get _qty => widget.cartItem.quantity.toString();
   Timer? _timer;
   final FocusNode _focusNode = FocusNode();
@@ -451,6 +460,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
 
 class _BonusPriceCounterSection extends StatelessWidget {
   final PriceAggregate cartItem;
+
   const _BonusPriceCounterSection({Key? key, required this.cartItem})
       : super(key: key);
 
@@ -483,7 +493,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
                       MediaQuery.of(context).size.width,
                       MediaQuery.of(context).size.height * 0.80,
                     ),
-                  ), //
+                  ),
                   builder: (_) {
                     return BonusItemsSheet(cartProduct: cartItem);
                   },
@@ -539,6 +549,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
 
 class _MaterialImageSection extends StatelessWidget {
   final PriceAggregate cartProduct;
+
   const _MaterialImageSection({required this.cartProduct, Key? key})
       : super(key: key);
 
