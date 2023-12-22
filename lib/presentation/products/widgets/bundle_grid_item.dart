@@ -47,7 +47,7 @@ class _BundleGridItem extends StatelessWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          materialInfo.displayDescription,
+                          materialInfo.bundle.bundleName.getOrDefaultValue(''),
                           style: Theme.of(context).textTheme.labelSmall,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,

@@ -161,7 +161,7 @@ class _BundleSectionItem extends StatelessWidget {
                           key: WidgetKeys.bundlesNumber,
                         ),
                         Text(
-                          materialInfo.displayDescription,
+                          materialInfo.bundle.bundleName.getOrDefaultValue(''),
                           style: Theme.of(context).textTheme.labelSmall,
                           key: WidgetKeys.bundlesDescription,
                         ),

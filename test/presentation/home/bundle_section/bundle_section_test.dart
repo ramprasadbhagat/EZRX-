@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -336,6 +337,31 @@ void main() {
           WidgetKeys.bundlesListItem,
         );
         expect(bundlesListItemFinder, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Find Bundle Name Inside Bundle Section',
+      (WidgetTester tester) async {
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList: [
+              materialList.first.copyWith(
+                bundle: Bundle.empty().copyWith(
+                  bundleName: BundleName('fake-name'),
+                ),
+              )
+            ],
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+
+        final bundleBody = find.byKey(WidgetKeys.bundlesBody);
+        expect(bundleBody, findsOneWidget);
+        final bundleName = find.text('fake-name');
+        expect(bundleName, findsOneWidget);
       },
     );
   });
