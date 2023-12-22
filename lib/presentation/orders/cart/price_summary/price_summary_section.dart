@@ -75,27 +75,28 @@ class PriceSummarySection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8.0),
-        Row(
-          key: WidgetKeys.checkoutSummaryTotalSaving,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              '${context.tr('Total savings')}:',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                  ),
-            ),
-            _DisplayPrice(
-              priceComponent: PriceComponent(
-                salesOrgConfig: salesOrgConfig,
-                price: context.router.current.name == CheckoutPageRoute.name
-                    ? cartState.checkoutTotalSaving.toString()
-                    : cartState.cartTotalSaving.toString(),
-                type: PriceStyle.summaryPrice,
+        if (cartState.salesOrganisation.salesOrg.showTotalSaving)
+          Row(
+            key: WidgetKeys.checkoutSummaryTotalSaving,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '${context.tr('Total savings')}:',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
               ),
-            ),
-          ],
-        ),
+              _DisplayPrice(
+                priceComponent: PriceComponent(
+                  salesOrgConfig: salesOrgConfig,
+                  price: context.router.current.name == CheckoutPageRoute.name
+                      ? cartState.checkoutTotalSaving.toString()
+                      : cartState.cartTotalSaving.toString(),
+                  type: PriceStyle.summaryPrice,
+                ),
+              ),
+            ],
+          ),
       ],
     );
   }

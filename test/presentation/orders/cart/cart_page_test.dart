@@ -171,8 +171,6 @@ void main() {
   late OrderSummaryBloc orderSummaryBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late ComboDealListBloc comboDealListBlocMock;
-  // late CartItem mockCartItemWithOutBatch;
-  // late CartItem mockCartItemWithBatch;
   late List<StockInfo> batchStockInfoMock;
   late List<PriceAggregate> mockCartItems;
   late List<PriceAggregate> mockCartBundleItems;
@@ -564,6 +562,12 @@ void main() {
       when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
     },
   );
+
+  ///////////////////////////////Finder///////////////////////////////////////
+  final checkoutSummaryTotalSaving =
+      find.byKey(WidgetKeys.checkoutSummaryTotalSaving);
+  final checkoutSummaryTax = find.byKey(WidgetKeys.checkoutSummaryTax);
+  /////////////////////////////////////////////////////////////////////////
   group(
     'Test Cart_Page',
     () {
@@ -2415,7 +2419,7 @@ void main() {
           findsOneWidget,
         );
         expect(
-          find.byKey(WidgetKeys.checkoutSummaryTax),
+          checkoutSummaryTax,
           findsOneWidget,
         );
         final checkoutSummaryTaxPrice =
@@ -2935,6 +2939,35 @@ void main() {
         await tester.tap(cartCloseButtonFinder);
         verify(() => autoRouterMock.navigateBack()).called(1);
       });
+      testWidgets(
+        'Should not show total saving on SG',
+        (tester) async {
+          final currentSalesOrgVariant =
+              salesOrgVariant.currentValue ?? fakeSalesOrg;
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              salesOrganisation: fakeSalesOrganisation.copyWith(
+                salesOrg: currentSalesOrgVariant,
+              ),
+              cartProducts: mockCartItems,
+              aplSimulatorOrder: aplSimulatorOrder,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+          expect(grandTotal, findsOneWidget);
+          await tester.tap(grandTotal);
+          await tester.pumpAndSettle();
+          expect(
+            checkoutSummaryTotalSaving,
+            currentSalesOrgVariant.isSg ? findsNothing : findsOneWidget,
+          );
+        },
+        variant: salesOrgVariant,
+      );
     },
   );
 }

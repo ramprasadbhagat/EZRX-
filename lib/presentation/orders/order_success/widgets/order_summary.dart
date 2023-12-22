@@ -82,6 +82,27 @@ class _OrderSummary extends StatelessWidget {
               ),
             ],
           ),
+          if (eligibilityState.salesOrg.showTotalSaving)
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Row(
+                key: WidgetKeys.orderSummaryTotalSaving,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${context.tr('Total savings')}:',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: ZPColors.neutralsBlack,
+                        ),
+                  ),
+                  PriceComponent(
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
+                    price: orderHistoryDetails.totalDiscount.toString(),
+                    type: PriceStyle.summaryPrice,
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
     );

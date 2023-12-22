@@ -202,7 +202,20 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     );
   }
 
-  String get totalTaxPercentage => StringUtils.displayNumberWithDecimal(totalTax / orderValue * 100);
+  String get totalTaxPercentage {
+    /// Retrieves the total tax percentage for the entire order by extracting it from the first order item
+    /// that includes tax. This approach uses the first order item with a positive tax percentage,
+    /// assuming that all items with tax share the same tax rate during order creation.
+    /// The [orElse] parameter ensures a fallback to an empty order item if no taxable item is found.
+    final taxPercentage = orderHistoryDetailsOrderItem
+        .firstWhere(
+          (element) => element.taxPercentage > 0,
+          orElse: () => OrderHistoryDetailsOrderItem.empty(),
+        )
+        .taxPercentage;
+
+    return StringUtils.displayNumberWithDecimal(taxPercentage);
+  }
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetails> {

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 const _fakeSaleOrgId = 'fake-sale-org-id-1234';
 const _fakeVNSalesOrgId = '3072';
@@ -16,6 +17,8 @@ const _fakeTWSalesOrgId = '2800';
 const _fakePHSalesOrgId = '2500';
 const _fakeIDSalesOrgId = '1900';
 const _fakeTHSalesOrgId = '2902';
+const _fakeKHSalesOrgId = '1500';
+const _fakeMMSalesOrgId = '2201';
 
 final fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
 final fakePHSalesOrg = SalesOrg(_fakePHSalesOrgId);
@@ -25,6 +28,8 @@ final fakeVNSalesOrg = SalesOrg(_fakeVNSalesOrgId);
 final fakeMYSalesOrg = SalesOrg(_fakeMYSalesOrgId);
 final fakeIDSalesOrg = SalesOrg(_fakeIDSalesOrgId);
 final fakeTHSalesOrg = SalesOrg(_fakeTHSalesOrgId);
+final fakeKHSalesOrg = SalesOrg(_fakeKHSalesOrgId);
+final fakeMMSalesOrg = SalesOrg(_fakeMMSalesOrgId);
 
 final fakeEmptySalesOrganisation = SalesOrganisation.empty();
 final fakeSalesOrganisation =
@@ -274,4 +279,18 @@ final fakeSalesOrgConfigWithHideStockDisplay =
 final fakeSalesOrgConfigWithdisableBundles =
     SalesOrganisationConfigs.empty().copyWith(
   disableBundles: true,
+);
+
+final salesOrgVariant = ValueVariant<SalesOrg>(
+  {
+    fakePHSalesOrg,
+    fakeSGSalesOrg,
+    fakeVNSalesOrg,
+    fakeMYSalesOrg,
+    fakeIDSalesOrg,
+    fakeTHSalesOrg,
+    fakeKHSalesOrg,
+    fakeMMSalesOrg,
+    fakeTWSalesOrg,
+  },
 );

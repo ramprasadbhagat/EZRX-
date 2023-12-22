@@ -736,6 +736,7 @@ class WidgetKeys {
   static const Key orderSuccessAttachment = Key('orderSuccessAttachment');
   static const Key orderSuccessAttachmentShowButton =
       Key('orderSuccessAttachmentShowButton');
+  static const Key orderSummaryTotalSaving = Key('orderSummaryTotalSaving');
 
   //============================================================
   //  Order History

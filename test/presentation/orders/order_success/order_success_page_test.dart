@@ -226,6 +226,11 @@ void main() {
     );
   }
 
+  //////////////////////Finder//////////////////////////////////////////////////
+  final orderSummaryTotalSaving =
+      find.byKey(WidgetKeys.orderSummaryTotalSaving);
+  /////////////////////////////////////////////////////////////////////////////
+
   group('Test Order Success Page', () {
     testWidgets(
       'Payment Term',
@@ -399,16 +404,14 @@ void main() {
     testWidgets(
       'Order summary check - Tax rate display for other market except VN',
       (tester) async {
-        const finalPrice = 88.0;
-        const vatValue = 9;
+        const finalPrice = 100.0;
+        const vatValue = 10.0;
         const quantity = 2;
         const subTotalValueWithoutTax = finalPrice * quantity;
         const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled.copyWith(
-              vatValue: vatValue,
-            ),
+            salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
             salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
@@ -418,6 +421,8 @@ void main() {
               orderHistoryDetailsOrderItem: [
                 OrderHistoryDetailsOrderItem.empty().copyWith(
                   qty: quantity,
+                  tax: vatValue,
+                  unitPrice: finalPrice,
                 )
               ],
               orderValue: subTotalValueWithoutTax,
@@ -437,7 +442,7 @@ void main() {
           const Offset(0, -300),
         );
         //Fetching the vat value for other market - 9
-        final taxRateFinder = find.text('Tax at $vatValue%:');
+        final taxRateFinder = find.text('Tax at ${vatValue.toInt()}%:');
         expect(
           find.descendant(
             of: find.byKey(
@@ -1179,6 +1184,46 @@ void main() {
       await tester.pump();
       expect(find.byKey(WidgetKeys.offerTag), findsOneWidget);
     });
+
+    testWidgets(
+      'Should not show total saving on SG',
+      (tester) async {
+        final currentSalesOrgVariant =
+            salesOrgVariant.currentValue ?? fakeSalesOrg;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeEmptySalesOrganisation.copyWith(
+              salesOrg: currentSalesOrgVariant,
+            ),
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [
+                OrderHistoryDetailsOrderItem.empty().copyWith(
+                  qty: 2,
+                )
+              ],
+              totalDiscount: 21.39,
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          orderSummaryTotalSaving,
+          currentSalesOrgVariant.isSg ? findsNothing : findsOneWidget,
+        );
+
+        expect(
+          find.textContaining('21.39', findRichText: true),
+          currentSalesOrgVariant.isSg ? findsNothing : findsOneWidget,
+        );
+      },
+      variant: salesOrgVariant,
+    );
   });
 }
 

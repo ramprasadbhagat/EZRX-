@@ -146,13 +146,15 @@ class SalesOrg extends ValueObject<String> {
 
   double get smallOrderThreshold => countrySmallOrderThreshold(country);
 
-  const SalesOrg._(this.value);
-
   bool get showSmallOrderFee => isID;
 
   bool get showTaxDescription => isTH || isMM || isKH;
 
   String get taxTitle => isVN ? 'Tax' : 'Tax at';
+
+  bool get showTotalSaving => !isSg;
+
+  const SalesOrg._(this.value);
 }
 
 class OosValue extends ValueObject<int> {

@@ -1296,8 +1296,8 @@ void main() {
     testWidgets(
         'Order summary section - Display Tax Rate for other market except VN',
         (tester) async {
-      const finalPrice = 88.0;
-      const vatValue = 9;
+      const finalPrice = 100.0;
+      const vatValue = 10.0;
       const quantity = 2;
       const subTotalValueWithoutTax = finalPrice * quantity;
       const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
@@ -1305,9 +1305,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
-          salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled.copyWith(
-            vatValue: vatValue,
-          ),
+          salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
         ),
       );
 
@@ -1316,6 +1314,8 @@ void main() {
           orderHistoryDetailsOrderItem: [
             fakeOrderHistoryItem.copyWith(
               totalPrice: grandTotalValue,
+              tax: vatValue,
+              unitPrice: finalPrice,
             )
           ],
           totalTax: totalTax,
@@ -1335,7 +1335,7 @@ void main() {
       expect(
         find.descendant(
           of: find.byKey(WidgetKeys.priceText),
-          matching: find.text('Tax at $vatValue%:'),
+          matching: find.text('Tax at ${vatValue.toInt()}%:'),
         ),
         findsOneWidget,
       );
