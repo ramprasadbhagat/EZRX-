@@ -26,7 +26,7 @@ void main() {
   late ViewByItemRepository viewByItemRepositoryMock;
   late OrderHistory orderHistoryMock;
   late List<OrderNumber> orderNumbersMock;
-  late Map<OrderNumber, InvoiceData> invoiceMapDataMock;
+  late Map<StringValue, InvoiceData> invoiceMapDataMock;
   late List<OrderHistoryItem> orderHistoryItemsListMock;
   final config = Config()..appFlavor = Flavor.mock;
   final fakeShipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
@@ -35,12 +35,12 @@ void main() {
 
   const offSet = 0;
   group('Orders View By Item', () {
-    Map<OrderNumber, InvoiceData> getInvoiceMapData({
+    Map<StringValue, InvoiceData> getInvoiceMapData({
       required List<InvoiceData> ordersInvoiceData,
     }) {
-      return ordersInvoiceData.fold<Map<OrderNumber, InvoiceData>>(
-        <OrderNumber, InvoiceData>{},
-        (map, invoiceData) => map..[invoiceData.orderNumber] = invoiceData,
+      return ordersInvoiceData.fold<Map<StringValue, InvoiceData>>(
+        <StringValue, InvoiceData>{},
+        (map, invoiceData) => map..[invoiceData.hashId] = invoiceData,
       );
     }
 
@@ -59,8 +59,8 @@ void main() {
       )
           .map(
             (orderItem) => orderItem.copyWith(
-              invoiceData: invoiceMapDataMock[orderItem.orderNumber] ??
-                  orderItem.invoiceData,
+              invoiceData:
+                  invoiceMapDataMock[orderItem.hashId] ?? orderItem.invoiceData,
             ),
           )
           .toList();
@@ -372,7 +372,7 @@ void main() {
         )
             .map(
               (orderItem) => orderItem.copyWith(
-                invoiceData: invoiceMapDataMock[orderItem.orderNumber] ??
+                invoiceData: invoiceMapDataMock[orderItem.hashId] ??
                     orderItem.invoiceData,
               ),
             )

@@ -100,6 +100,7 @@ class _OrderItemTile extends StatelessWidget {
       onTap: () => _goToViewByItemDetail(
         context,
         orderHistory,
+        orderItem,
       ),
       key: WidgetKeys.viewByOrderDetailItem(
         orderItem.materialNumber.displayMatNo,
@@ -165,6 +166,7 @@ class _OrderItemTile extends StatelessWidget {
   Future _goToViewByItemDetail(
     BuildContext context,
     OrderHistory orderHistory,
+    OrderHistoryDetailsOrderItem orderItem,
   ) async {
     trackMixpanelEvent(
       MixpanelEvents.orderDetailViewed,
@@ -176,10 +178,18 @@ class _OrderItemTile extends StatelessWidget {
     );
 
     final eligibilityState = context.read<EligibilityBloc>().state;
+    final orderHistoryItem = orderHistory.orderHistoryItems.firstWhere(
+      (
+        element,
+      ) =>
+          element.materialNumber == orderItem.materialNumber,
+      orElse: () => orderHistory.orderHistoryItems.first,
+    );
+
     context.read<ViewByItemDetailsBloc>().add(
           ViewByItemDetailsEvent.setItemOrderDetails(
             orderHistory: orderHistory,
-            orderHistoryItem: orderHistory.orderHistoryItems.first,
+            orderHistoryItem: orderHistoryItem,
             disableDeliveryDateForZyllemStatus:
                 eligibilityState.salesOrgConfigs.disableDeliveryDate,
           ),

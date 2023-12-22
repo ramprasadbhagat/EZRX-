@@ -29,6 +29,8 @@ mixin _$ViewByItemDetailsEvent {
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)
         searchOrderHistory,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,8 @@ mixin _$ViewByItemDetailsEvent {
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +63,8 @@ mixin _$ViewByItemDetailsEvent {
     TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,6 +75,8 @@ mixin _$ViewByItemDetailsEvent {
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
     required TResult Function(_SearchOrderHistory value) searchOrderHistory,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +86,7 @@ mixin _$ViewByItemDetailsEvent {
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +96,7 @@ mixin _$ViewByItemDetailsEvent {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -160,6 +170,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)
         searchOrderHistory,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) {
     return initialized();
   }
@@ -178,6 +190,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) {
     return initialized?.call();
   }
@@ -196,6 +210,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -212,6 +228,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
     required TResult Function(_SearchOrderHistory value) searchOrderHistory,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) {
     return initialized(this);
   }
@@ -224,6 +242,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) {
     return initialized?.call(this);
   }
@@ -236,6 +255,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -326,6 +346,8 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)
         searchOrderHistory,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) {
     return fetchZyllemStatus(invoiceNumber);
   }
@@ -344,6 +366,8 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) {
     return fetchZyllemStatus?.call(invoiceNumber);
   }
@@ -362,6 +386,8 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (fetchZyllemStatus != null) {
@@ -378,6 +404,8 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
     required TResult Function(_SearchOrderHistory value) searchOrderHistory,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) {
     return fetchZyllemStatus(this);
   }
@@ -390,6 +418,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) {
     return fetchZyllemStatus?.call(this);
   }
@@ -402,6 +431,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (fetchZyllemStatus != null) {
@@ -497,6 +527,8 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)
         searchOrderHistory,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) {
     return updateIsExpanded(isExpanded);
   }
@@ -515,6 +547,8 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) {
     return updateIsExpanded?.call(isExpanded);
   }
@@ -533,6 +567,8 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (updateIsExpanded != null) {
@@ -549,6 +585,8 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
     required TResult Function(_SearchOrderHistory value) searchOrderHistory,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) {
     return updateIsExpanded(this);
   }
@@ -561,6 +599,7 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) {
     return updateIsExpanded?.call(this);
   }
@@ -573,6 +612,7 @@ class _$_updateIsExpanded implements _updateIsExpanded {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (updateIsExpanded != null) {
@@ -716,6 +756,8 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)
         searchOrderHistory,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) {
     return setItemOrderDetails(
         orderHistory, orderHistoryItem, disableDeliveryDateForZyllemStatus);
@@ -735,6 +777,8 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) {
     return setItemOrderDetails?.call(
         orderHistory, orderHistoryItem, disableDeliveryDateForZyllemStatus);
@@ -754,6 +798,8 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (setItemOrderDetails != null) {
@@ -771,6 +817,8 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
     required TResult Function(_SearchOrderHistory value) searchOrderHistory,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) {
     return setItemOrderDetails(this);
   }
@@ -783,6 +831,7 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) {
     return setItemOrderDetails?.call(this);
   }
@@ -795,6 +844,7 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (setItemOrderDetails != null) {
@@ -959,6 +1009,8 @@ class _$_SearchOrderHistory implements _SearchOrderHistory {
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)
         searchOrderHistory,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) {
     return searchOrderHistory(
         customerCodeInfo, user, salesOrganisation, searchKey);
@@ -978,6 +1030,8 @@ class _$_SearchOrderHistory implements _SearchOrderHistory {
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) {
     return searchOrderHistory?.call(
         customerCodeInfo, user, salesOrganisation, searchKey);
@@ -997,6 +1051,8 @@ class _$_SearchOrderHistory implements _SearchOrderHistory {
     TResult Function(CustomerCodeInfo customerCodeInfo, User user,
             SalesOrganisation salesOrganisation, SearchKey searchKey)?
         searchOrderHistory,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (searchOrderHistory != null) {
@@ -1014,6 +1070,8 @@ class _$_SearchOrderHistory implements _SearchOrderHistory {
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
     required TResult Function(_SearchOrderHistory value) searchOrderHistory,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) {
     return searchOrderHistory(this);
   }
@@ -1026,6 +1084,7 @@ class _$_SearchOrderHistory implements _SearchOrderHistory {
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) {
     return searchOrderHistory?.call(this);
   }
@@ -1038,6 +1097,7 @@ class _$_SearchOrderHistory implements _SearchOrderHistory {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
     TResult Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (searchOrderHistory != null) {
@@ -1060,6 +1120,199 @@ abstract class _SearchOrderHistory implements ViewByItemDetailsEvent {
   SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_SearchOrderHistoryCopyWith<_$_SearchOrderHistory> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchOrdersInvoiceDataCopyWith<$Res> {
+  factory _$$_FetchOrdersInvoiceDataCopyWith(_$_FetchOrdersInvoiceData value,
+          $Res Function(_$_FetchOrdersInvoiceData) then) =
+      __$$_FetchOrdersInvoiceDataCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<OrderHistoryItem> orderHistoryItems});
+}
+
+/// @nodoc
+class __$$_FetchOrdersInvoiceDataCopyWithImpl<$Res>
+    extends _$ViewByItemDetailsEventCopyWithImpl<$Res,
+        _$_FetchOrdersInvoiceData>
+    implements _$$_FetchOrdersInvoiceDataCopyWith<$Res> {
+  __$$_FetchOrdersInvoiceDataCopyWithImpl(_$_FetchOrdersInvoiceData _value,
+      $Res Function(_$_FetchOrdersInvoiceData) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? orderHistoryItems = null,
+  }) {
+    return _then(_$_FetchOrdersInvoiceData(
+      orderHistoryItems: null == orderHistoryItems
+          ? _value._orderHistoryItems
+          : orderHistoryItems // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistoryItem>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_FetchOrdersInvoiceData implements _FetchOrdersInvoiceData {
+  const _$_FetchOrdersInvoiceData(
+      {required final List<OrderHistoryItem> orderHistoryItems})
+      : _orderHistoryItems = orderHistoryItems;
+
+  final List<OrderHistoryItem> _orderHistoryItems;
+  @override
+  List<OrderHistoryItem> get orderHistoryItems {
+    if (_orderHistoryItems is EqualUnmodifiableListView)
+      return _orderHistoryItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_orderHistoryItems);
+  }
+
+  @override
+  String toString() {
+    return 'ViewByItemDetailsEvent.fetchOrdersInvoiceData(orderHistoryItems: $orderHistoryItems)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchOrdersInvoiceData &&
+            const DeepCollectionEquality()
+                .equals(other._orderHistoryItems, _orderHistoryItems));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_orderHistoryItems));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchOrdersInvoiceDataCopyWith<_$_FetchOrdersInvoiceData> get copyWith =>
+      __$$_FetchOrdersInvoiceDataCopyWithImpl<_$_FetchOrdersInvoiceData>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(StringValue invoiceNumber) fetchZyllemStatus,
+    required TResult Function(bool isExpanded) updateIsExpanded,
+    required TResult Function(
+            OrderHistory orderHistory,
+            OrderHistoryItem orderHistoryItem,
+            bool disableDeliveryDateForZyllemStatus)
+        setItemOrderDetails,
+    required TResult Function(CustomerCodeInfo customerCodeInfo, User user,
+            SalesOrganisation salesOrganisation, SearchKey searchKey)
+        searchOrderHistory,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
+  }) {
+    return fetchOrdersInvoiceData(orderHistoryItems);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(StringValue invoiceNumber)? fetchZyllemStatus,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
+    TResult? Function(
+            OrderHistory orderHistory,
+            OrderHistoryItem orderHistoryItem,
+            bool disableDeliveryDateForZyllemStatus)?
+        setItemOrderDetails,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, User user,
+            SalesOrganisation salesOrganisation, SearchKey searchKey)?
+        searchOrderHistory,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
+  }) {
+    return fetchOrdersInvoiceData?.call(orderHistoryItems);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(StringValue invoiceNumber)? fetchZyllemStatus,
+    TResult Function(bool isExpanded)? updateIsExpanded,
+    TResult Function(
+            OrderHistory orderHistory,
+            OrderHistoryItem orderHistoryItem,
+            bool disableDeliveryDateForZyllemStatus)?
+        setItemOrderDetails,
+    TResult Function(CustomerCodeInfo customerCodeInfo, User user,
+            SalesOrganisation salesOrganisation, SearchKey searchKey)?
+        searchOrderHistory,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
+    required TResult orElse(),
+  }) {
+    if (fetchOrdersInvoiceData != null) {
+      return fetchOrdersInvoiceData(orderHistoryItems);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
+    required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
+    required TResult Function(_SearchOrderHistory value) searchOrderHistory,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
+  }) {
+    return fetchOrdersInvoiceData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
+    TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult? Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+  }) {
+    return fetchOrdersInvoiceData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
+    TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
+    TResult Function(_SearchOrderHistory value)? searchOrderHistory,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    required TResult orElse(),
+  }) {
+    if (fetchOrdersInvoiceData != null) {
+      return fetchOrdersInvoiceData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchOrdersInvoiceData implements ViewByItemDetailsEvent {
+  const factory _FetchOrdersInvoiceData(
+          {required final List<OrderHistoryItem> orderHistoryItems}) =
+      _$_FetchOrdersInvoiceData;
+
+  List<OrderHistoryItem> get orderHistoryItems;
+  @JsonKey(ignore: true)
+  _$$_FetchOrdersInvoiceDataCopyWith<_$_FetchOrdersInvoiceData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

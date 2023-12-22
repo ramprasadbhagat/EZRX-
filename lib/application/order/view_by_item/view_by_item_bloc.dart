@@ -193,7 +193,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
             )
                 .map(
                   (orderItem) => orderItem.copyWith(
-                    invoiceData: invoiceDataMap[orderItem.orderNumber] ??
+                    invoiceData: invoiceDataMap[orderItem.hashId] ??
                         orderItem.invoiceData,
                   ),
                 )

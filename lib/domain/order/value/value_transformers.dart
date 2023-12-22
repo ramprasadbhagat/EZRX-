@@ -152,6 +152,31 @@ List<OrderHistoryStep> getOrderHistorySteps({
         icon: Icons.cancel,
       ),
     ];
+  } else if (isEqual(stepTitle, 'Delivered - partial rejection') ||
+      isEqual(stepTitle, 'Delivered - rejected upon delivery')) {
+    result = <OrderHistoryStep>[
+      ...baseSteps,
+      OrderHistoryStep.empty().copyWith(
+        title: 'Pending release',
+        icon: Icons.query_builder,
+      ),
+      OrderHistoryStep.empty().copyWith(
+        title: 'Picking in progress',
+        icon: Icons.inventory_2_outlined,
+      ),
+      OrderHistoryStep.empty().copyWith(
+        title: 'Order packed and ready for delivery',
+        icon: Icons.inventory_2_outlined,
+      ),
+      OrderHistoryStep.empty().copyWith(
+        title: 'Out for delivery',
+        icon: Icons.local_shipping_outlined,
+      ),
+      OrderHistoryStep.empty().copyWith(
+        title: stepTitle,
+        icon: Icons.cancel,
+      ),
+    ];
   } else {
     final fullSteps = <OrderHistoryStep>[
       ...baseSteps,
@@ -162,6 +187,10 @@ List<OrderHistoryStep> getOrderHistorySteps({
         ),
       OrderHistoryStep.empty().copyWith(
         title: 'Picking in progress',
+        icon: Icons.inventory_2_outlined,
+      ),
+      OrderHistoryStep.empty().copyWith(
+        title: 'Order packed and ready for delivery',
         icon: Icons.inventory_2_outlined,
       ),
       OrderHistoryStep.empty().copyWith(
@@ -177,10 +206,17 @@ List<OrderHistoryStep> getOrderHistorySteps({
     final stepIndex = fullSteps.indexWhere(
       (step) => isEqual(step.title, stepTitle),
     );
-    if (stepIndex > -1) {
-      result = fullSteps.sublist(0, stepIndex + 1);
-    }
+    result = stepIndex > -1
+        ? fullSteps.sublist(0, stepIndex + 1)
+        : [
+            ...baseSteps,
+            OrderHistoryStep.empty().copyWith(
+              title: stepTitle,
+              icon: Icons.check,
+            ),
+          ];
   }
+
   if (result.isNotEmpty) {
     result = [
       if (result.length - 1 > -1) ...result.sublist(0, result.length - 1),

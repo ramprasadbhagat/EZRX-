@@ -24,4 +24,8 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
     required SalesOrganisation salesOrganisation,
     required SearchKey searchKey,
   }) = _SearchOrderHistory;
+
+  const factory ViewByItemDetailsEvent.fetchOrdersInvoiceData({
+    required List<OrderHistoryItem> orderHistoryItems,
+  }) = _FetchOrdersInvoiceData;
 }

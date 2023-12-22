@@ -117,7 +117,7 @@ class ViewByItemRepository implements IViewByItemRepository {
   }
 
   @override
-  Future<Either<ApiFailure, Map<OrderNumber, InvoiceData>>>
+  Future<Either<ApiFailure, Map<StringValue, InvoiceData>>>
       getOrdersInvoiceData({
     required List<OrderNumber> orderNumbers,
   }) async {
@@ -153,12 +153,12 @@ class ViewByItemRepository implements IViewByItemRepository {
     }
   }
 
-  Map<OrderNumber, InvoiceData> _getInvoiceMapData({
+  Map<StringValue, InvoiceData> _getInvoiceMapData({
     required List<InvoiceData> ordersInvoiceData,
   }) {
-    return ordersInvoiceData.fold<Map<OrderNumber, InvoiceData>>(
-      <OrderNumber, InvoiceData>{},
-      (map, invoiceData) => map..[invoiceData.orderNumber] = invoiceData,
+    return ordersInvoiceData.fold<Map<StringValue, InvoiceData>>(
+      <StringValue, InvoiceData>{},
+      (map, invoiceData) => map..[invoiceData.hashId] = invoiceData,
     );
   }
 }

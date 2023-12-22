@@ -16,6 +16,7 @@ part 'order_history_item.freezed.dart';
 @freezed
 class OrderHistoryItem with _$OrderHistoryItem {
   const OrderHistoryItem._();
+
   factory OrderHistoryItem({
     required MaterialNumber materialNumber,
     required String materialDescription,
@@ -87,6 +88,10 @@ class OrderHistoryItem with _$OrderHistoryItem {
   bool get isOfferItem => !isBundle && !isBonusMaterial && promoStatus;
 
   bool get isTypeMaterial => !isBundle && !isBonusMaterial;
+
+  StringValue get hashId => StringValue(
+        '${orderNumber.value.getOrElse(() => '')}${lineNumber.value.getOrElse(() => '')}',
+      );
 
   OrderHistoryItem copyWithTaxCal({
     required SalesOrganisationConfigs salesOrganisationConfigs,

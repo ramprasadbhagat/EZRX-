@@ -15,7 +15,9 @@ import 'package:ezrxmobile/domain/order/repository/i_order_status_tracker_reposi
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 
 part 'view_by_item_details_event.dart';
+
 part 'view_by_item_details_state.dart';
+
 part 'view_by_item_details_bloc.freezed.dart';
 
 class ViewByItemDetailsBloc
@@ -74,22 +76,70 @@ class ViewByItemDetailsBloc
                 isLoading: false,
               ),
             );
+
+            add(
+              _FetchOrdersInvoiceData(
+                orderHistoryItems: orderHistory.orderHistoryItems,
+              ),
+            );
+          },
+        );
+      },
+      fetchOrdersInvoiceData: (e) async {
+        final orderNumbers =
+            e.orderHistoryItems.map((e) => e.orderNumber).toList();
+
+        if (orderNumbers.isEmpty) return;
+
+        emit(
+          state.copyWith(
+            isLoading: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+
+        final failureOrSuccess =
+            await viewByItemRepository.getOrdersInvoiceData(
+          orderNumbers: orderNumbers,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isLoading: false,
+              ),
+            );
+          },
+          (invoiceDataMap) {
+            final orderHistoryItemsList = List<OrderHistoryItem>.from(
+              state.orderHistory.orderHistoryItems,
+            )
+                .map(
+                  (orderItem) => orderItem.copyWith(
+                    invoiceData: invoiceDataMap[orderItem.hashId] ??
+                        orderItem.invoiceData,
+                  ),
+                )
+                .toList();
+
+            emit(
+              state.copyWith(
+                orderHistory: state.orderHistory.copyWith(
+                  orderHistoryItems: orderHistoryItemsList,
+                ),
+                failureOrSuccessOption: none(),
+                isLoading: false,
+              ),
+            );
           },
         );
       },
       setItemOrderDetails: (e) {
-        final modifiedList = e.orderHistory.orderHistoryItems
-            .where(
-              (element) =>
-                  element.hashCode != e.orderHistoryItem.hashCode &&
-                  element.orderNumber == e.orderHistoryItem.orderNumber,
-            )
-            .toList();
         emit(
           state.copyWith(
-            orderHistory: e.orderHistory.copyWith(
-              orderHistoryItems: modifiedList,
-            ),
+            orderHistory: e.orderHistory,
             orderHistoryItem: e.orderHistoryItem,
           ),
         );

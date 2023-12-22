@@ -45,8 +45,8 @@ class OtherItemDetailsSection extends StatelessWidget {
                     state.isLoading
                         ? LoadingShimmer.tile()
                         : Column(
-                            children: state.orderHistory.orderHistoryItems
-                                .getViewByOrderItemDetailsList
+                            children: state
+                                .unSelectedItems.getViewByOrderItemDetailsList
                                 .map(
                                   (e) => Column(
                                     crossAxisAlignment:

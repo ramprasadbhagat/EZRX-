@@ -31,7 +31,7 @@ abstract class IViewByItemRepository {
     required SalesOrganisation salesOrganisation,
   });
 
-  Future<Either<ApiFailure, Map<OrderNumber, InvoiceData>>>
+  Future<Either<ApiFailure, Map<StringValue, InvoiceData>>>
       getOrdersInvoiceData({
     required List<OrderNumber> orderNumbers,
   });

@@ -3,6 +3,7 @@ part of 'view_by_item_details_bloc.dart';
 @freezed
 class ViewByItemDetailsState with _$ViewByItemDetailsState {
   const ViewByItemDetailsState._();
+
   const factory ViewByItemDetailsState({
     required OrderHistory orderHistory,
     required OrderHistoryItem orderHistoryItem,
@@ -27,4 +28,10 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
 
   bool get displayShowMoreOrLess =>
       orderHistoryItem.orderHistoryItemPoAttachments.length > 1;
+
+  List<OrderHistoryItem> get unSelectedItems => orderHistory.orderHistoryItems
+      .where(
+        (element) => element.hashCode != orderHistoryItem.hashCode,
+      )
+      .toList();
 }

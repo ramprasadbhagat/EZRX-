@@ -21,4 +21,8 @@ class InvoiceData with _$InvoiceData {
       );
 
   bool get invoiceNumberIsEmpty => !invoiceNumber.isValid();
+
+  StringValue get hashId => StringValue(
+        '${orderNumber.value.getOrElse(() => '')}${lineNumber.value.getOrElse(() => '')}',
+      );
 }

@@ -55,7 +55,7 @@ void main() async {
   final fakeInvoice =
       await ViewByItemLocalDataSource().getInvoiceDataForOrders();
   final fakeInvoiceMap = {
-    for (final invoice in fakeInvoice) invoice.orderNumber: invoice,
+    for (final invoice in fakeInvoice) invoice.hashId: invoice,
   };
 
   group('View by item repository test', () {
@@ -171,9 +171,42 @@ void main() async {
           orderNumbers: [OrderNumber('0200261763'), OrderNumber('')],
         );
 
+        final hashId = StringValue(
+          '${OrderNumber('0200261763').value.getOrElse(() => '')}${StringValue('000010').value.getOrElse(() => '')}',
+        );
         expect(
           result.fold((l) => {}, (r) => r),
-          {OrderNumber('0200261763'): fakeInvoice.first},
+          {hashId: fakeInvoice.first},
+        );
+      });
+
+      test('=> order ID same but different items', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => orderHistoryRemoteDataSource
+              .getInvoiceDataForOrders(orderNumbers: ['0200262259']),
+        ).thenAnswer(
+          (_) async => [fakeInvoice[fakeInvoice.length - 2], fakeInvoice.last],
+        );
+
+        final result = await repository.getOrdersInvoiceData(
+          orderNumbers: [OrderNumber('0200262259'), OrderNumber('')],
+        );
+
+        final hashIdFirst = StringValue(
+          '${OrderNumber('0200262259').value.getOrElse(() => '')}${StringValue('000060').value.getOrElse(() => '')}',
+        );
+
+        final hashIdLast = StringValue(
+          '${OrderNumber('0200262259').value.getOrElse(() => '')}${StringValue('000090').value.getOrElse(() => '')}',
+        );
+
+        expect(
+          result.fold((l) => {}, (r) => r),
+          {
+            hashIdFirst: fakeInvoice[fakeInvoice.length - 2],
+            hashIdLast: fakeInvoice.last
+          },
         );
       });
     });

@@ -131,29 +131,19 @@ void main() {
           ),
         ),
         expect: () {
-          final modifiedList = orderHistory.orderHistoryItems
-              .where(
-                (element) =>
-                    element.hashCode != fakeOrderHistoryItem.hashCode &&
-                    element.orderNumber == fakeOrderHistoryItem.orderNumber,
-              )
-              .toList();
-          final newViewByItemDetails = orderHistory.copyWith(
-            orderHistoryItems: modifiedList,
-          );
           return [
             ViewByItemDetailsState.initial().copyWith(
-              orderHistory: newViewByItemDetails,
+              orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
             ),
             ViewByItemDetailsState.initial().copyWith(
-              orderHistory: newViewByItemDetails,
+              orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
               isLoading: true,
             ),
             ViewByItemDetailsState.initial().copyWith(
               orderHistoryStatuses: fakeOrderStatusTracker,
-              orderHistory: newViewByItemDetails,
+              orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
             ),
           ];
