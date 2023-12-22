@@ -85,6 +85,7 @@ class _APLPaymentSelectorWidget extends StatelessWidget {
         );
       },
       child: Column(
+        key: WidgetKeys.aplPaymentSelector,
         children: paymentMethods
             .map(
               (paymentMethod) => CustomCard(

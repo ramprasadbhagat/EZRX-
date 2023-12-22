@@ -5,15 +5,19 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/bank_in_accounts/bank_in_accounts_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -27,11 +31,28 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../../utils/widget_utils.dart';
-import '../../new_payment_page_test.dart';
+
+class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
+    implements NewPaymentBloc {}
 
 class BankInAccountBlocMock
     extends MockBloc<BankInAccountsEvent, BankInAccountsState>
     implements BankInAccountsBloc {}
+
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
+class PaymentSummaryDetailsBlocMock
+    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
+    implements PaymentSummaryDetailsBloc {}
+
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
+class MixpanelServiceMock extends Mock implements MixpanelService {}
+
+class AppRouterMock extends Mock implements AppRouter {}
 
 void main() {
   late NewPaymentBloc newPaymentBlocMock;
@@ -39,20 +60,27 @@ void main() {
   late AppRouter autoRouterMock;
   late EligibilityBloc eligibilityBlocMock;
   late BankInAccountsBloc bankInAccountsBlocMock;
+  late PaymentSummaryDetailsBloc paymentSummaryDetailsBlocMock;
+  late List<NewPaymentMethod> paymentMethodList;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(() => AppRouterMock());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
-    autoRouterMock = locator<AppRouter>();
-  });
-
-  setUp(() async {
+    autoRouterMock = locator<AppRouterMock>();
     newPaymentBlocMock = NewPaymentBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
     bankInAccountsBlocMock = BankInAccountBlocMock();
     eligibilityBlocMock = EligibilityBlockMock();
+    paymentSummaryDetailsBlocMock = PaymentSummaryDetailsBlocMock();
+    registerFallbackValue((Route route) {
+      return route.settings.name == PaymentPageRoute.name;
+    });
+    paymentMethodList = await NewPaymentLocalDataSource().fetchPaymentMethods();
+  });
+
+  setUp(() async {
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
@@ -65,6 +93,8 @@ void main() {
     );
     when(() => bankInAccountsBlocMock.state)
         .thenReturn(BankInAccountsState.initial());
+    when(() => paymentSummaryDetailsBlocMock.state)
+        .thenReturn(PaymentSummaryDetailsState.initial());
   });
 
   Widget getWidget() {
@@ -84,6 +114,9 @@ void main() {
         ),
         BlocProvider<BankInAccountsBloc>(
           create: (context) => bankInAccountsBlocMock,
+        ),
+        BlocProvider<PaymentSummaryDetailsBloc>(
+          create: (context) => paymentSummaryDetailsBlocMock,
         ),
       ],
       child: const Scaffold(
@@ -135,20 +168,7 @@ void main() {
 
     group('Payment selector -', () {
       const selectedIndex = 0;
-      final paymentMethodList = [
-        NewPaymentMethod(
-          paymentMethod: PaymentMethodValue('fake-1'),
-          options: [],
-        ),
-        NewPaymentMethod(
-          paymentMethod: PaymentMethodValue('fake-2'),
-          options: [],
-        ),
-        NewPaymentMethod(
-          paymentMethod: PaymentMethodValue('fake-3'),
-          options: [],
-        ),
-      ];
+
       testWidgets('Show shimmer when loading', (tester) async {
         when(() => newPaymentBlocMock.state).thenReturn(
           NewPaymentState.initial().copyWith(isFetchingPaymentMethod: true),
@@ -209,7 +229,10 @@ void main() {
         for (var i = 0; i < paymentMethodList.length; i++) {
           final widget = tester.widget<Radio>(radio.at(i));
           expect(widget.value, paymentMethodList[i].paymentMethod);
-          expect(widget.groupValue, paymentMethodList[selectedIndex].paymentMethod);
+          expect(
+            widget.groupValue,
+            paymentMethodList[selectedIndex].paymentMethod,
+          );
         }
       });
 
@@ -473,6 +496,130 @@ void main() {
             of: amount.first,
             matching: find.text(priceText, findRichText: true),
           ),
+          findsOneWidget,
+        );
+      });
+    });
+
+    group('APL Payment Method Test', () {
+      setUp(
+        () {
+          when(() => newPaymentBlocMock.state).thenReturn(
+            NewPaymentState.initial().copyWith(
+              paymentMethods: paymentMethodList,
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeIDSalesOrganisation,
+            ),
+          );
+        },
+      );
+      testWidgets('Display For ID market', (tester) async {
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(find.byKey(WidgetKeys.aplPaymentSelector), findsOneWidget);
+        expect(
+          find.byKey(WidgetKeys.paymentMethodRadio),
+          findsNWidgets(paymentMethodList.length),
+        );
+      });
+
+      testWidgets('Payment success', (tester) async {
+        when(
+          () => autoRouterMock.pushAndPopUntil(
+            const PaymentAdviceCreatedPageRoute(),
+            predicate: any(named: 'predicate'),
+          ),
+        ).thenAnswer((invocation) => Future.value());
+
+        final expectStates = [
+          NewPaymentState.initial().copyWith(
+            paymentMethods: paymentMethodList,
+            isCreatingVirtualAccount: true,
+          ),
+          NewPaymentState.initial().copyWith(
+            paymentMethods: paymentMethodList,
+            createVirtualAccount: CreateVirtualAccount.empty(),
+          ),
+        ];
+        whenListen(newPaymentBlocMock, Stream.fromIterable(expectStates));
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        verify(
+          () => paymentSummaryDetailsBlocMock.add(
+            PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+              details: PaymentSummaryDetails.fromCreateVirtualAccount(
+                CreateVirtualAccount.empty(),
+              ),
+            ),
+          ),
+        ).called(1);
+
+        verify(
+          () => autoRouterMock.pushAndPopUntil(
+            const PaymentAdviceCreatedPageRoute(),
+            predicate: any(named: 'predicate'),
+          ),
+        ).called(1);
+      });
+
+      testWidgets('Show BottomSheet When Payment Failure', (tester) async {
+        final expectStates = [
+          NewPaymentState.initial().copyWith(
+            paymentMethods: paymentMethodList,
+            isCreatingVirtualAccount: true,
+          ),
+          NewPaymentState.initial().copyWith(
+            paymentMethods: paymentMethodList,
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake-erroe'))),
+          ),
+        ];
+        whenListen(newPaymentBlocMock, Stream.fromIterable(expectStates));
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        expect(find.byKey(WidgetKeys.confirmBottomSheet), findsOneWidget);
+        expect(find.text('Unable to create new payment'.tr()), findsOneWidget);
+        expect(
+          find.text(
+            'You have a pending payment which has not been completed. Please create a new payment only after the existing one has been cleared.'
+                .tr(),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('On Payment Option Change', (tester) async {
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final checkBoxFinder =
+            find.byKey(WidgetKeys.paymentMethodCheckbox).first;
+        await tester.tap(checkBoxFinder);
+        verify(
+          () => newPaymentBlocMock.add(
+            NewPaymentEvent.updatePaymentMethodOptionSelected(
+              paymentMethodOptionSelected:
+                  paymentMethodList.first.banksOnlyAllowTransferSameBank.first,
+            ),
+          ),
+        ).called(1);
+      });
+    });
+
+    group('Warning Announcement', () {
+      testWidgets('Show warning announcement for PH market', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.createPaymentAdviseWarning),
           findsOneWidget,
         );
       });

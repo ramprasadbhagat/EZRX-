@@ -1070,6 +1070,8 @@ class WidgetKeys {
       Key('createPaymentAdviseWarning');
   static const Key paymentMethodTile = Key('paymentMethodTile');
   static const Key paymentMethodRadio = Key('paymentMethodRadio');
+  static const Key aplPaymentSelector = Key('aplPaymentSelector');
+  static const Key paymentMethodCheckbox = Key('paymentMethodCheckbox');
   static const Key paymentMethodSelector = Key('paymentMethodSelector');
   static const Key bankInAccountInfo = Key('bankInAccountInfo');
   static const Key invoiceCreditListView = Key('invoiceCreditListView');

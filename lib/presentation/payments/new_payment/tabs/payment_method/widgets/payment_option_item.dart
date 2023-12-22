@@ -13,6 +13,7 @@ class _PaymentOptionItem extends StatelessWidget {
           current.selectedPaymentMethod.options,
       builder: (context, state) {
         return Padding(
+          key: WidgetKeys.paymentMethodCheckbox,
           padding: const EdgeInsets.only(bottom: 8),
           child: EdgeCheckbox(
             onChanged: (bool value) {
