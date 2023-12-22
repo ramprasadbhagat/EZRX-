@@ -165,8 +165,8 @@ void main() {
     final textDocumentType = find.byKey(const Key('Document typefake-PK'));
     expect(textDocumentType, findsOneWidget);
 
-    final textReturnNumber = find.byKey(const Key('Return numberNA'));
-    expect(textReturnNumber, findsOneWidget);
+    final textReferenceNumber = find.byKey(const Key('Reference NumberNA'));
+    expect(textReferenceNumber, findsOneWidget);
 
     final textDetail = find.byKey(const Key('Detailsfake-PK'));
     expect(textDetail, findsOneWidget);

@@ -281,7 +281,7 @@ void main() {
   testWidgets('EZRX-T169 | verify Credits Detail Page', (tester) async {
     //variables
     const documentType = 'Credit memo';
-    const returnNumber = '1100001268';
+    const referenceNumber = '1100001268';
     const documentDate = '25 Aug 2023';
     const returnMaterialNumber1 = '23348057';
     const returnMaterialNumber2 = returnMaterialNumber1;
@@ -320,7 +320,8 @@ void main() {
     accountCreditDetailsRobot.verifyCreditDetailStatus(creditStatus);
     accountCreditDetailsRobot.verifyCreditDetailDocumentDate(documentDate);
     accountCreditDetailsRobot.verifyCreditDetailDocumentType(documentType);
-    accountCreditDetailsRobot.verifyCreditDetailReturnNumber(returnNumber);
+    accountCreditDetailsRobot
+        .verifyCreditDetailReferenceNumber(referenceNumber);
     accountCreditDetailsRobot.verifyCreditDetails(documentType);
     //verify address
     accountCreditDetailsRobot.verifyCustomerCode(customerCode);

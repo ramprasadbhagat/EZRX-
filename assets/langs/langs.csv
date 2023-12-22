@@ -776,7 +776,6 @@ Any unsaved information will be lost,Any unsaved information will be lost,ข้
 Leave,Leave,ออก,Leave,Leave,Leave,ចាកចេញ,Meninggalkan
 Document date,Document date,วันที่เอกสาร,Document date,Document date,Ngày chứng từ,Document date,Tanggal dokumen
 Document type,Document type,Document type,Document type,Document type,Document type,Document type,Tipe dokumen
-Return number,Return number,หมายเลขเอกสารคืนสินค้า,Return number,Return number,Các số trả hàng,Return number,Nomor retur
 Details,Details,รายละเอียด,Details,Details,Details,Details,Detail
 Credit summary,Credit summary,สรุปยอดใบลดหนี้,Credit summary,Credit summary,Credit summary,Credit summary,Ringkasan Kredit
 Credit total:,Credit total:,ยอดรวมใบลดหนี้:,Credit total:,Credit total:,Credit total:,Credit total:,Total kredit:
@@ -1410,3 +1409,4 @@ Raise a return request and get notified of the approval status.,Raise a return r
 Hassle-free returns,Hassle-free returns,Hassle-free returns,Hassle-free returns,Hassle-free returns,Hassle-free returns,Hassle-free returns,Hassle-free returns
 Payments on the go,Payments on the go,Payments on the go,Payments on the go,Payments on the go,Payments on the go,Payments on the go,Payments on the go
 Order and track easily,Order and track easily,Order and track easily,Order and track easily,Order and track easily,Order and track easily,Order and track easily,Order and track easily
+Reference Number,Reference Number,Reference Number,Reference Number,Reference Number,Reference Number,Reference Number,Reference Number,

@@ -55,9 +55,11 @@ class AccountCreditDetailsRobot {
     );
   }
 
-  void verifyCreditDetailReturnNumber(String returnNumber) {
+  void verifyCreditDetailReferenceNumber(String referenceNumber) {
     expect(
-      find.byKey(WidgetKeys.balanceTextRow('Return number'.tr(), returnNumber)),
+      find.byKey(
+        WidgetKeys.balanceTextRow('Reference Number'.tr(), referenceNumber),
+      ),
       findsOneWidget,
     );
   }
@@ -144,11 +146,10 @@ class AccountCreditDetailsRobot {
     );
   }
 
-  Finder _getPriceFinder(String price) =>
-    find.byWidgetPredicate(
-      (widget) =>
-          widget is RichText &&
-          widget.key == WidgetKeys.priceComponent &&
-          widget.text.toPlainText().contains(price),
-    );
+  Finder _getPriceFinder(String price) => find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text.toPlainText().contains(price),
+      );
 }

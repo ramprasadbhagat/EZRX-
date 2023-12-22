@@ -73,7 +73,7 @@ class CreditDetailsSection extends StatelessWidget {
                         ),
               ),
               BalanceTextRow(
-                keyText: context.tr('Return number'),
+                keyText: context.tr('Reference Number'),
                 valueText: creditItem.invoiceReference.getOrDefaultValue('NA'),
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
