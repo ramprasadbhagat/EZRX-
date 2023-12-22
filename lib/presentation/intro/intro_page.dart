@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:ezrxmobile/presentation/intro/intro_step.dart';
@@ -70,6 +72,15 @@ class _IntroPageState extends State<IntroPage> {
   void _getStarted(BuildContext context) {
     context.read<IntroBloc>().add(const IntroEvent.setAppFirstLaunch());
     context.read<IntroBloc>().add(const IntroEvent.initialIndex());
+    context.read<SalesOrgBloc>().add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: context
+                .read<EligibilityBloc>()
+                .state
+                .user
+                .userSalesOrganisations,
+          ),
+        );
   }
 
   int get lastIndexIntroObject => getOnBoardingObject.length - 1;

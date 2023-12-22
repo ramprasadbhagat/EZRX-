@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,7 @@ class IntroStep extends StatelessWidget {
                       height: 50,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: OutlinedButton(
+                        key: WidgetKeys.introGetStartedButton,
                         style: Theme.of(context)
                             .outlinedButtonTheme
                             .style!
@@ -82,6 +84,7 @@ class IntroStep extends StatelessWidget {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.9,
                         child: TextButton(
+                          key: WidgetKeys.introSkipButton,
                           onPressed: getStarted,
                           child: Text(
                             context.tr('Skip'),

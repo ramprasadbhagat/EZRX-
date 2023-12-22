@@ -1166,6 +1166,7 @@ class WidgetKeys {
   //  Intro Page
   //============================================================
   static const Key introGetStartedButton = Key('getStarted');
+  static const Key introSkipButton = Key('skipButton');
 
   //============================================================
   // Orders tab

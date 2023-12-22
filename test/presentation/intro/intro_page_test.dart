@@ -1,86 +1,104 @@
-// import 'package:bloc_test/bloc_test.dart';
-// import 'package:ezrxmobile/application/intro/intro_bloc.dart';
-// import 'package:ezrxmobile/config.dart';
-// import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-// import 'package:ezrxmobile/presentation/intro/intro_page.dart';
-// import 'package:ezrxmobile/presentation/intro/intro_step.dart';
-// import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:get_it/get_it.dart';
-// import 'package:mocktail/mocktail.dart';
-// import '../../utils/widget_utils.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/presentation/intro/intro_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mocktail/mocktail.dart';
+import '../../common_mock_data/sales_organsiation_mock.dart';
+import '../../common_mock_data/user_mock.dart';
+import '../../utils/widget_utils.dart';
 
-// class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
-//     implements IntroBloc {}
+class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
+    implements IntroBloc {}
 
-// final locator = GetIt.instance;
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
 
-// void main() {
-//   late IntroBloc introBlocMock;
-//   late AppRouter autoRouterMock;
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
 
-//   setUpAll(() async {
-//     TestWidgetsFlutterBinding.ensureInitialized();
-//     locator.registerLazySingleton(() => AppRouter());
-//     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-//     autoRouterMock = locator<AppRouter>();
-//     introBlocMock = IntroBlocMock();
-//     when(() => introBlocMock.state).thenReturn(IntroState.initial());
-//   });
+final locator = GetIt.instance;
 
-//   Widget getIntroPage() {
-//     return WidgetUtils.getScopedWidget(
-//       autoRouterMock: autoRouterMock,
-//       usingLocalization: true,
-//       providers: [
-//         BlocProvider<IntroBloc>(
-//           create: (context) => introBlocMock,
-//         ),
-//       ],
-//       child: const IntroPage(),
-//     );
-//   }
+void main() {
+  late IntroBloc introBlocMock;
+  late AppRouter autoRouterMock;
+  late SalesOrgBloc salesOrgBlocMock;
+  late EligibilityBloc eligibilityBloc;
 
-//   group('Test "Intro Page"', () {
-//     testWidgets('Content Display', (tester) async {
-//       await tester.pumpWidget(getIntroPage());
-//       await tester.pump();
-//       expect(find.byType(PageView), findsOneWidget);
-//       expect(find.byType(IntroStep), findsAtLeastNWidgets(1));
-//       final haveHeaderTextFinder = find.text('Fuss-free returns');
-//       expect(haveHeaderTextFinder, findsOneWidget);
-//       final haveDescriptionTextFinder = find.text(
-//         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
-//       );
-//       expect(haveDescriptionTextFinder, findsOneWidget);
-//       final introGetStatedButtonFinder =
-//           find.byKey(WidgetKeys.introGetStartedButton);
-//       expect(introGetStatedButtonFinder, findsOneWidget);
-//       final haveButtonTextFinder = find.text(
-//         'Get started',
-//       );
-//       expect(haveButtonTextFinder, findsOneWidget);
-//     });
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    locator.registerLazySingleton(() => AppRouter());
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    autoRouterMock = locator<AppRouter>();
+    introBlocMock = IntroBlocMock();
+    salesOrgBlocMock = SalesOrgBlocMock();
+    eligibilityBloc = EligibilityBlocMock();
+    when(() => introBlocMock.state).thenReturn(IntroState.initial());
+    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+    when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
+  });
 
-//     testWidgets('Get Started Button On Tap', (tester) async {
-//       await tester.pumpWidget(getIntroPage());
-//       await tester.pump();
+  ////////////////////Finder///////////////////////////////////////////////////
+  final introGetStartedButton = find.byKey(const Key('getStarted'));
+  final introSkipButton = find.byKey(const Key('skipButton'));
+  //////////////////////////////////////////////////////////////////////////
 
-//       final introGetStatedButtonFinder =
-//           find.byKey(WidgetKeys.introGetStartedButton);
-//       await tester.tap(introGetStatedButtonFinder);
-//       verify(
-//         () => introBlocMock.add(
-//           const IntroEvent.setAppFirstLaunch(),
-//         ),
-//       ).called(1);
-//       verify(
-//         () => introBlocMock.add(
-//           const IntroEvent.initialIndex(),
-//         ),
-//       ).called(1);
-//     });
-//   });
-// }
+  Widget getIntroPage() {
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      usingLocalization: true,
+      providers: [
+        BlocProvider<IntroBloc>(
+          create: (context) => introBlocMock,
+        ),
+        BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+        BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
+      ],
+      child: const IntroPage(),
+    );
+  }
+
+  group('Test "Intro Page"', () {
+    testWidgets('Get Started Button On Tap', (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeClientUser.copyWith(
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getIntroPage());
+      await tester.pumpAndSettle();
+      expect(introGetStartedButton, findsOneWidget);
+      expect(introSkipButton, findsOneWidget);
+
+      await tester.tap(introSkipButton);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.setAppFirstLaunch(),
+        ),
+      ).called(1);
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.initialIndex(),
+        ),
+      ).called(1);
+      // await tester.pumpAndSettle();
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      ).called(1);
+    });
+  });
+}
