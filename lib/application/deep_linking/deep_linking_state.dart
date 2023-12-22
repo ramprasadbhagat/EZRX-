@@ -17,7 +17,11 @@ class DeepLinkingState with _$DeepLinkingState {
     ReturnRequestsId returnId,
   ) = _RedirectReturnDetail;
   const factory DeepLinkingState.redirectPaymentDetail(
-    StringValue paymentBatchAdditionalInfo,
+    PaymentSummaryDetails paymentIdentifierInfo,
   ) = _RedirectPaymentDetail;
+  const factory DeepLinkingState.redirectPaymentHome() = _RedirectPaymentHome;
+  const factory DeepLinkingState.redirectInvoiceDetail(
+    String invoiceNumber,
+  ) = _RedirectInvoiceDetail;
   const factory DeepLinkingState.error(ApiFailure failure) = _Error;
 }

@@ -1,7 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -158,56 +156,43 @@ void main() {
 
   Future getWidget(tester) async {
     return tester.pumpWidget(
-      EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          usingLocalization: true,
-          providers: [
-            BlocProvider<CreditAndInvoiceDetailsBloc>(
-              create: (context) => creditAndInvoiceDetailsBlocMock,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<UserBloc>(
-              create: (context) => userBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => salesOrgBlocMock,
-            ),
-            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-            BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock,
-            ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-            BlocProvider<ProductImageBloc>(
-              create: (context) => productImageBlocMock,
-            ),
-            BlocProvider<ViewByOrderBloc>(
-              create: (context) => viewByOrderBlocMock,
-            ),
-            BlocProvider<ViewByOrderDetailsBloc>(
-              create: (context) => viewByOrderDetailsBlocMock,
-            ),
-            BlocProvider<ViewByItemDetailsBloc>(
-              create: (context) => viewByItemDetailsBlocMock,
-            ),
-          ],
-          child: InvoiceDetailsPage(
-            invoiceItem: fakeInvoice,
+      WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<CreditAndInvoiceDetailsBloc>(
+            create: (context) => creditAndInvoiceDetailsBlocMock,
           ),
-        ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<UserBloc>(
+            create: (context) => userBlocMock,
+          ),
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => salesOrgBlocMock,
+          ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+          BlocProvider<ProductImageBloc>(
+            create: (context) => productImageBlocMock,
+          ),
+          BlocProvider<ViewByOrderBloc>(
+            create: (context) => viewByOrderBlocMock,
+          ),
+          BlocProvider<ViewByOrderDetailsBloc>(
+            create: (context) => viewByOrderDetailsBlocMock,
+          ),
+          BlocProvider<ViewByItemDetailsBloc>(
+            create: (context) => viewByItemDetailsBlocMock,
+          ),
+        ],
+        child: const InvoiceDetailsPage(),
       ),
     );
   }
@@ -217,9 +202,8 @@ void main() {
       testWidgets(' => download e-invoice button visible', (tester) async {
         when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
           CreditAndInvoiceDetailsState.initial().copyWith(
-            details: [
-              fakeInvoiceDetail,
-            ],
+            itemsInfo: [fakeInvoiceDetail],
+            basicInfo: fakeInvoice,
           ),
         );
 
@@ -262,14 +246,10 @@ void main() {
       final expectedState = [
         CreditAndInvoiceDetailsState.initial().copyWith(
           isLoading: true,
-          details: [
-            fakeInvoiceDetail,
-          ],
+          itemsInfo: [fakeInvoiceDetail],
         ),
         CreditAndInvoiceDetailsState.initial().copyWith(
-          details: [
-            fakeInvoiceDetail,
-          ],
+          itemsInfo: [fakeInvoiceDetail],
         ),
       ];
 
@@ -295,9 +275,8 @@ void main() {
         (tester) async {
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
         CreditAndInvoiceDetailsState.initial().copyWith(
-          details: [
-            fakeInvoiceDetail,
-          ],
+          itemsInfo: [fakeInvoiceDetail],
+          basicInfo: fakeInvoice,
         ),
       );
       when(() => viewByOrderBlocMock.state).thenReturn(
@@ -322,9 +301,8 @@ void main() {
     testWidgets(' => Detail page order number onTap Test', (tester) async {
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
         CreditAndInvoiceDetailsState.initial().copyWith(
-          details: [
-            fakeInvoiceDetail,
-          ],
+          itemsInfo: [fakeInvoiceDetail],
+          basicInfo: fakeInvoice,
         ),
       );
 
@@ -361,6 +339,9 @@ void main() {
         ],
       );
 
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(basicInfo: fakeInvoice),
+      );
       whenListen(
         viewByOrderBlocMock,
         Stream.fromIterable([
@@ -393,9 +374,7 @@ void main() {
       );
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
         CreditAndInvoiceDetailsState.initial().copyWith(
-          details: [
-            fakeInvoiceDetail,
-          ],
+          itemsInfo: [fakeInvoiceDetail],
         ),
       );
 
@@ -414,9 +393,7 @@ void main() {
       );
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
         CreditAndInvoiceDetailsState.initial().copyWith(
-          details: [
-            fakeInvoiceDetail,
-          ],
+          itemsInfo: [fakeInvoiceDetail],
         ),
       );
 

@@ -151,7 +151,7 @@ void main() {
     );
 
     when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
-      CreditAndInvoiceDetailsState.initial().copyWith(details: fakeDetails),
+      CreditAndInvoiceDetailsState.initial().copyWith(itemsInfo: fakeDetails),
     );
 
     when(() => productImageBlocMock.state).thenReturn(

@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -17,11 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'package:ezrxmobile/presentation/payments/invoice_details/widgets/order_item_count.dart';
 
 class InvoiceDetailsPage extends StatelessWidget {
-  final CreditAndInvoiceItem invoiceItem;
-  const InvoiceDetailsPage({
-    Key? key,
-    required this.invoiceItem,
-  }) : super(key: key);
+  const InvoiceDetailsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +32,7 @@ class InvoiceDetailsPage extends StatelessWidget {
                   buildWhen: (previous, current) =>
                       previous.isLoading != current.isLoading,
                   builder: (context, state) {
-                    return state.isLoading || state.details.isEmpty
+                    return state.isLoading || state.itemsInfo.isEmpty
                         ? const SizedBox.shrink()
                         : SafeArea(
                             child: Container(
@@ -77,7 +72,7 @@ class InvoiceDetailsPage extends StatelessWidget {
                     key: WidgetKeys.invoiceDetailsPageListView,
                     children: <Widget>[
                       InvoiceDetailsSection(
-                        invoiceItem: invoiceItem,
+                        invoiceItem: state.basicInfo,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -93,7 +88,7 @@ class InvoiceDetailsPage extends StatelessWidget {
                         height: 16,
                       ),
                       InvoiceSummary(
-                        invoiceItem: invoiceItem,
+                        invoiceItem: state.basicInfo,
                       ),
                       const Divider(
                         endIndent: 0,
@@ -103,7 +98,7 @@ class InvoiceDetailsPage extends StatelessWidget {
                       ),
                       const _OrderItemCount(),
                       InvoiceItemsSection(
-                        customerDocumentDetail: state.details,
+                        customerDocumentDetail: state.itemsInfo,
                       ),
                     ],
                   );

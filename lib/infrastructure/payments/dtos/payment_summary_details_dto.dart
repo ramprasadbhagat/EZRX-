@@ -129,6 +129,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       paymentBatchAdditionalInfo:
           details.paymentBatchAdditionalInfo.getOrDefaultValue(''),
       filterBy: _filterByToJson(
+        details.paymentID.getOrDefaultValue(''),
         details.zzAdvice.getOrDefaultValue(''),
         details.paymentBatchAdditionalInfo.getOrDefaultValue(''),
       ),
@@ -146,18 +147,25 @@ String paymentDate(Map json, String key) =>
     json[key]?.replaceAll('-', '') ?? '';
 
 Map<String, dynamic> _filterByToJson(
+  String paymentID,
   String zzAdvice,
   String paymentBatchAdditionalInfo,
 ) {
-  final field = paymentBatchAdditionalInfo.isNotEmpty
-      ? 'paymentBatchAdditionalInfo'
-      : 'zzAdvice';
-  final value = paymentBatchAdditionalInfo.isNotEmpty
-      ? paymentBatchAdditionalInfo
-      : zzAdvice;
+  if (paymentBatchAdditionalInfo.isNotEmpty) {
+    return {
+      'field': 'paymentBatchAdditionalInfo',
+      'value': paymentBatchAdditionalInfo,
+    };
+  }
+  if (zzAdvice.isNotEmpty) {
+    return {
+      'field': 'zzAdvice',
+      'value': zzAdvice,
+    };
+  }
 
   return {
-    'field': field,
-    'value': value,
+    'field': 'paymentID',
+    'value': paymentID,
   };
 }

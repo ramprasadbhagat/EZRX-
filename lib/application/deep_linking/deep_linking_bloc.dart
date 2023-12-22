@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,8 +46,7 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
         );
       },
       consumePendingLink: (event) {
-        state.when(
-          initial: () {},
+        state.whenOrNull(
           linkPending: (link) {
             if (link.path.startsWith('/product-details')) {
               final failureOrSuccess = repository.extractMaterialNumber(
@@ -108,7 +107,7 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
             } else if (link.path ==
                 '/payments/payment-summary/invoice-details') {
               final failureOrSuccess =
-                  repository.extractPaymentBatchAdditionalInfo(link: link);
+                  repository.extractPaymentIdentifierInfo(link: link);
 
               failureOrSuccess.fold(
                 (error) => emit(
@@ -120,14 +119,23 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   ),
                 ),
               );
+            } else if (link.path ==
+                '/payments/account-summary/invoice-details') {
+              final failureOrSuccess =
+                  repository.extractInvoiceNumber(link: link);
+
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (invoiceNumber) => emit(
+                  DeepLinkingState.redirectInvoiceDetail(invoiceNumber),
+                ),
+              );
+            } else if (link.path == '/my-account/payments') {
+              emit(const DeepLinkingState.redirectPaymentHome());
             }
           },
-          redirectProductDetail: (_) {},
-          redirectBundleDetail: (_) {},
-          redirectOrderDetail: (_) {},
-          redirectReturnDetail: (_) {},
-          redirectPaymentDetail: (_) {},
-          error: (_) {},
         );
       },
     );

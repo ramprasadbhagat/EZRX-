@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
@@ -8,6 +10,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 
@@ -84,17 +87,35 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
   }
 
   @override
-  Either<ApiFailure, StringValue> extractPaymentBatchAdditionalInfo({
+  Either<ApiFailure, PaymentSummaryDetails> extractPaymentIdentifierInfo({
     required Uri link,
   }) {
     final paymentBatchAdditionalInfo =
         StringValue(link.queryParameters['paymentBatchAdditionalInfo'] ?? '');
-    final isValidLink =
-        _validDomain(link) && paymentBatchAdditionalInfo.isValid();
+    final paymentID = StringValue(
+      utf8.decode((link.queryParameters['paymentID'] ?? '').codeUnits),
+    );
+    final isValidLink = _validDomain(link) &&
+        (paymentBatchAdditionalInfo.isValid() || paymentID.isValid());
 
     return isValidLink
-        ? Right(paymentBatchAdditionalInfo)
-        : const Left(ApiFailure.returnDetailRoute());
+        ? Right(
+            PaymentSummaryDetails.empty().copyWith(
+              paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
+              paymentID: paymentID,
+            ),
+          )
+        : const Left(ApiFailure.paymentDetailRoute());
+  }
+
+  @override
+  Either<ApiFailure, String> extractInvoiceNumber({required Uri link}) {
+    final invoiceNumber = link.queryParameters['invoiceNumber'] ?? '';
+    final isValidLink = _validDomain(link) && invoiceNumber.isNotEmpty;
+
+    return isValidLink
+        ? Right(invoiceNumber)
+        : const Left(ApiFailure.invoiceDetailRoute());
   }
 
   bool _validDomain(Uri link) {

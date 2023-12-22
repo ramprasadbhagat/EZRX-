@@ -1,30 +1,41 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/credit_and_invoice_details_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class CreditAndInvoiceDetailsRepositoryMock extends Mock
     implements CreditAndInvoiceDetailsRepository {}
+
+class AllCreditsAndInvoicesRepositoryMock extends Mock
+    implements AllCreditsAndInvoicesRepository {}
 
 class CustomerCodeRepositoryMock extends Mock
     implements CustomerCodeRepository {}
 
 void main() {
   late CreditAndInvoiceDetailsRepository creditAndInvoiceDetailsRepository;
+  late AllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
   late CreditAndInvoiceItem fakeInvoice;
+  final fakeInitialState = CreditAndInvoiceDetailsState.initial().copyWith(
+    customerCodeInfo: fakeCustomerCodeInfo,
+    salesOrganisation: fakeSalesOrganisation,
+  );
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     creditAndInvoiceDetailsRepository = CreditAndInvoiceDetailsRepositoryMock();
+    allCreditsAndInvoicesRepository = AllCreditsAndInvoicesRepositoryMock();
   });
 
   setUp(() {
@@ -43,10 +54,15 @@ void main() {
         'Initialize',
         build: () => CreditAndInvoiceDetailsBloc(
           creditAndInvoiceDetailsRepository: creditAndInvoiceDetailsRepository,
+          allCreditsAndInvoicesRepository: allCreditsAndInvoicesRepository,
         ),
-        act: (CreditAndInvoiceDetailsBloc bloc) =>
-            bloc.add(const CreditAndInvoiceDetailsEvent.initialized()),
-        expect: () => [CreditAndInvoiceDetailsState.initial()],
+        act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
+          CreditAndInvoiceDetailsEvent.initialized(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+          ),
+        ),
+        expect: () => [fakeInitialState],
       );
     },
   );
@@ -56,12 +72,14 @@ void main() {
       'fetch -> Invoice Details fetch fail',
       build: () => CreditAndInvoiceDetailsBloc(
         creditAndInvoiceDetailsRepository: creditAndInvoiceDetailsRepository,
+        allCreditsAndInvoicesRepository: allCreditsAndInvoicesRepository,
       ),
+      seed: () => fakeInitialState,
       setUp: () {
         when(
           () => creditAndInvoiceDetailsRepository.getCreditAndInvoiceDetails(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
             creditAndInvoiceItem: fakeInvoice,
           ),
         ).thenAnswer(
@@ -72,16 +90,13 @@ void main() {
       },
       act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
         CreditAndInvoiceDetailsEvent.fetch(
-          salesOrganisation: SalesOrganisation.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
           creditAndInvoiceItem: fakeInvoice,
         ),
       ),
       expect: () => [
-        CreditAndInvoiceDetailsState.initial().copyWith(
-          isLoading: true,
-        ),
-        CreditAndInvoiceDetailsState.initial().copyWith(
+        fakeInitialState.copyWith(isLoading: true, basicInfo: fakeInvoice),
+        fakeInitialState.copyWith(
+          basicInfo: fakeInvoice,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -94,12 +109,14 @@ void main() {
       'fetch -> Invoice Details fetch success',
       build: () => CreditAndInvoiceDetailsBloc(
         creditAndInvoiceDetailsRepository: creditAndInvoiceDetailsRepository,
+        allCreditsAndInvoicesRepository: allCreditsAndInvoicesRepository,
       ),
+      seed: () => fakeInitialState,
       setUp: () {
         when(
           () => creditAndInvoiceDetailsRepository.getCreditAndInvoiceDetails(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
             creditAndInvoiceItem: fakeInvoice,
           ),
         ).thenAnswer(
@@ -108,18 +125,15 @@ void main() {
       },
       act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
         CreditAndInvoiceDetailsEvent.fetch(
-          salesOrganisation: SalesOrganisation.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
           creditAndInvoiceItem: fakeInvoice,
         ),
       ),
       expect: () => [
-        CreditAndInvoiceDetailsState.initial().copyWith(
-          isLoading: true,
-        ),
-        CreditAndInvoiceDetailsState.initial().copyWith(
+        fakeInitialState.copyWith(isLoading: true, basicInfo: fakeInvoice),
+        fakeInitialState.copyWith(
           isLoading: false,
-          details: <CustomerDocumentDetail>[],
+          basicInfo: fakeInvoice,
+          itemsInfo: <CustomerDocumentDetail>[],
           failureOrSuccessOption:
               optionOf(const Right(<CustomerDocumentDetail>[])),
         ),

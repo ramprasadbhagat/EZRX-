@@ -52,6 +52,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.orderDetailRoute() = _OrderDetailRoute;
   const factory ApiFailure.returnDetailRoute() = _ReturnDetailRoute;
   const factory ApiFailure.paymentDetailRoute() = _PaymentDetailRoute;
+  const factory ApiFailure.invoiceDetailRoute() = _InvoiceDetailRoute;
 
   const factory ApiFailure.languageChangeFail() = _LanguageChangeFail;
   const factory ApiFailure.scannedProductNotFound(String productNumber) =
@@ -107,6 +108,8 @@ extension ApiFailureExt on ApiFailure {
             'This return request is not available on your account',
         paymentDetailRoute: (_) =>
             'This payment advice is not available on your account',
+        invoiceDetailRoute: (_) =>
+            'This invoice is not available on your account',
         passwordResetFail: (_) => 'Unable to reset password',
         languageChangeFail: (_) => 'Unable to change language',
         scannedProductNotFound: (scannedProduct) =>

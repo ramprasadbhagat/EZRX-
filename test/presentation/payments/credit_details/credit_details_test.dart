@@ -8,8 +8,6 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
@@ -46,7 +44,6 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late ProductImageBloc productImageBlocMock;
-  late CreditAndInvoiceItem fakeInvoice;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -68,13 +65,6 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     productImageBlocMock = ProductImageBlocMock();
-
-    fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
-      bpCustomerNumber: '0030032223',
-      fiscalYear: '2023',
-      accountingDocumentItem: '001',
-      invoiceProcessingStatus: StatusType('Cleared'),
-    );
 
     when(() => creditAndInvoiceDetailsBlocMock.state)
         .thenReturn(CreditAndInvoiceDetailsState.initial());
@@ -119,9 +109,7 @@ void main() {
             create: (context) => eligibilityBlocMock,
           ),
         ],
-        child: CreditDetailsPage(
-          creditItem: fakeInvoice,
-        ),
+        child: const CreditDetailsPage(),
       ),
     );
   }

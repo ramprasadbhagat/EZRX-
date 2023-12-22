@@ -34,7 +34,7 @@ class CreditItemsSection extends StatelessWidget {
                 vertical: 10.0,
               ),
               child: Text(
-                '${context.tr('Return items')} (${context.read<CreditAndInvoiceDetailsBloc>().state.details.itemCount})',
+                '${context.tr('Return items')} (${context.read<CreditAndInvoiceDetailsBloc>().state.itemsInfo.itemCount})',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.black,
                     ),

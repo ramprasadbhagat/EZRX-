@@ -2425,6 +2425,8 @@ void setupLocator() {
     () => CreditAndInvoiceDetailsBloc(
       creditAndInvoiceDetailsRepository:
           locator<CreditAndInvoiceDetailsRepository>(),
+      allCreditsAndInvoicesRepository:
+          locator<AllCreditsAndInvoicesRepository>(),
     ),
   );
   locator.registerLazySingleton(

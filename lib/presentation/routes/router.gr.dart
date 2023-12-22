@@ -14,11 +14,10 @@
 import 'package:auto_route/auto_route.dart' as _i90;
 import 'package:flutter/material.dart' as _i91;
 
-import '../../domain/account/entities/sales_organisation.dart' as _i95;
+import '../../domain/account/entities/sales_organisation.dart' as _i94;
 import '../../domain/account/value/value_objects.dart' as _i92;
 import '../../domain/announcement_info/entities/announcement_article_info.dart'
-    as _i94;
-import '../../domain/payments/entities/credit_and_invoice_item.dart' as _i93;
+    as _i93;
 import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i48;
 import '../account/change_password/change_password_page.dart' as _i21;
 import '../account/contact_us/contact_us_page.dart' as _i22;
@@ -425,23 +424,15 @@ class AppRouter extends _i90.RootStackRouter {
       );
     },
     InvoiceDetailsPageRoute.name: (routeData) {
-      final args = routeData.argsAs<InvoiceDetailsPageRouteArgs>();
       return _i90.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i41.InvoiceDetailsPage(
-          key: args.key,
-          invoiceItem: args.invoiceItem,
-        ),
+        child: const _i41.InvoiceDetailsPage(),
       );
     },
     CreditDetailsPageRoute.name: (routeData) {
-      final args = routeData.argsAs<CreditDetailsPageRouteArgs>();
       return _i90.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i42.CreditDetailsPage(
-          key: args.key,
-          creditItem: args.creditItem,
-        ),
+        child: const _i42.CreditDetailsPage(),
       );
     },
     PaymentWebviewPageRoute.name: (routeData) {
@@ -1783,72 +1774,26 @@ class AnnouncementInfoDetailsPageRoute extends _i90.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i41.InvoiceDetailsPage]
-class InvoiceDetailsPageRoute
-    extends _i90.PageRouteInfo<InvoiceDetailsPageRouteArgs> {
-  InvoiceDetailsPageRoute({
-    _i91.Key? key,
-    required _i93.CreditAndInvoiceItem invoiceItem,
-  }) : super(
+class InvoiceDetailsPageRoute extends _i90.PageRouteInfo<void> {
+  const InvoiceDetailsPageRoute()
+      : super(
           InvoiceDetailsPageRoute.name,
           path: 'payments/invoice_details',
-          args: InvoiceDetailsPageRouteArgs(
-            key: key,
-            invoiceItem: invoiceItem,
-          ),
         );
 
   static const String name = 'InvoiceDetailsPageRoute';
 }
 
-class InvoiceDetailsPageRouteArgs {
-  const InvoiceDetailsPageRouteArgs({
-    this.key,
-    required this.invoiceItem,
-  });
-
-  final _i91.Key? key;
-
-  final _i93.CreditAndInvoiceItem invoiceItem;
-
-  @override
-  String toString() {
-    return 'InvoiceDetailsPageRouteArgs{key: $key, invoiceItem: $invoiceItem}';
-  }
-}
-
 /// generated route for
 /// [_i42.CreditDetailsPage]
-class CreditDetailsPageRoute
-    extends _i90.PageRouteInfo<CreditDetailsPageRouteArgs> {
-  CreditDetailsPageRoute({
-    _i91.Key? key,
-    required _i93.CreditAndInvoiceItem creditItem,
-  }) : super(
+class CreditDetailsPageRoute extends _i90.PageRouteInfo<void> {
+  const CreditDetailsPageRoute()
+      : super(
           CreditDetailsPageRoute.name,
           path: 'payments/credit_details',
-          args: CreditDetailsPageRouteArgs(
-            key: key,
-            creditItem: creditItem,
-          ),
         );
 
   static const String name = 'CreditDetailsPageRoute';
-}
-
-class CreditDetailsPageRouteArgs {
-  const CreditDetailsPageRouteArgs({
-    this.key,
-    required this.creditItem,
-  });
-
-  final _i91.Key? key;
-
-  final _i93.CreditAndInvoiceItem creditItem;
-
-  @override
-  String toString() {
-    return 'CreditDetailsPageRouteArgs{key: $key, creditItem: $creditItem}';
-  }
 }
 
 /// generated route for
@@ -2099,7 +2044,7 @@ class AnnouncementsPageRoute extends _i90.PageRouteInfo<void> {
 class ArticleDetailsRoute extends _i90.PageRouteInfo<ArticleDetailsRouteArgs> {
   ArticleDetailsRoute({
     _i91.Key? key,
-    required _i94.AnnouncementArticleItem article,
+    required _i93.AnnouncementArticleItem article,
   }) : super(
           ArticleDetailsRoute.name,
           path: 'article_details',
@@ -2120,7 +2065,7 @@ class ArticleDetailsRouteArgs {
 
   final _i91.Key? key;
 
-  final _i94.AnnouncementArticleItem article;
+  final _i93.AnnouncementArticleItem article;
 
   @override
   String toString() {
@@ -2145,7 +2090,7 @@ class ReturnRequestDetailsRoute extends _i90.PageRouteInfo<void> {
 class SalesOrgSearchRoute extends _i90.PageRouteInfo<SalesOrgSearchRouteArgs> {
   SalesOrgSearchRoute({
     _i91.Key? key,
-    required List<_i95.SalesOrganisation> avialableSalesOrgList,
+    required List<_i94.SalesOrganisation> avialableSalesOrgList,
   }) : super(
           SalesOrgSearchRoute.name,
           path: 'salesOrg_search',
@@ -2166,7 +2111,7 @@ class SalesOrgSearchRouteArgs {
 
   final _i91.Key? key;
 
-  final List<_i95.SalesOrganisation> avialableSalesOrgList;
+  final List<_i94.SalesOrganisation> avialableSalesOrgList;
 
   @override
   String toString() {

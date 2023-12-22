@@ -54,7 +54,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
@@ -527,7 +526,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               (_) => _fetchProductImage(
                 context,
-                state.details,
+                state.itemsInfo,
               ),
             ),
           ),
@@ -748,18 +747,34 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   noAccessSnackbar.show(context);
                 }
               },
-              redirectPaymentDetail: (paymentBatchAdditionalInfo) {
+              redirectPaymentDetail: (paymentIdentifierInfo) {
                 if (eligibilityState.isPaymentEnabled) {
                   context.read<PaymentSummaryDetailsBloc>().add(
                         PaymentSummaryDetailsEvent
                             .fetchPaymentSummaryDetailsInfo(
-                          details: PaymentSummaryDetails.empty().copyWith(
-                            paymentBatchAdditionalInfo:
-                                paymentBatchAdditionalInfo,
-                          ),
+                          details: paymentIdentifierInfo,
                         ),
                       );
                   context.router.push(const PaymentSummaryDetailsPageRoute());
+                } else {
+                  noAccessSnackbar.show(context);
+                }
+              },
+              redirectPaymentHome: () {
+                if (eligibilityState.isPaymentEnabled) {
+                  context.router.push(const PaymentPageRoute());
+                } else {
+                  noAccessSnackbar.show(context);
+                }
+              },
+              redirectInvoiceDetail: (invoiceNumber) {
+                if (eligibilityState.isPaymentEnabled) {
+                  context.read<CreditAndInvoiceDetailsBloc>().add(
+                        CreditAndInvoiceDetailsEvent.fetchInvoiceById(
+                          invoiceId: invoiceNumber,
+                        ),
+                      );
+                  context.router.push(const InvoiceDetailsPageRoute());
                 } else {
                   noAccessSnackbar.show(context);
                 }
@@ -1312,6 +1327,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               user: user,
               shipToInfo: state.shipToInfo,
               salesOrgConfigs: salesOrgState.configs,
+            ),
+          );
+
+      context.read<CreditAndInvoiceDetailsBloc>().add(
+            CreditAndInvoiceDetailsEvent.initialized(
+              salesOrganisation: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
             ),
           );
 

@@ -334,8 +334,6 @@ void main() {
         () => creditAndInvoiceDetailsBlocMock.add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: creditItemList.first,
-            salesOrganisation: fakeSalesOrganisation,
-            customerCodeInfo: fakeCustomerCodeInfo,
           ),
         ),
       ).called(1);
@@ -379,8 +377,6 @@ void main() {
         () => creditAndInvoiceDetailsBlocMock.add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: creditItemList.first,
-            salesOrganisation: fakeIDSalesOrganisation,
-            customerCodeInfo: fakeCustomerCodeInfo,
           ),
         ),
       );

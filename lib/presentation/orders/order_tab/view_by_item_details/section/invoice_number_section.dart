@@ -67,20 +67,10 @@ class InvoiceNumberSection extends StatelessWidget {
                               context.read<CreditAndInvoiceDetailsBloc>().add(
                                     CreditAndInvoiceDetailsEvent.fetch(
                                       creditAndInvoiceItem: state.items.first,
-                                      salesOrganisation: context
-                                          .read<EligibilityBloc>()
-                                          .state
-                                          .salesOrganisation,
-                                      customerCodeInfo: context
-                                          .read<EligibilityBloc>()
-                                          .state
-                                          .customerCodeInfo,
                                     ),
                                   ),
                               context.router.push(
-                                InvoiceDetailsPageRoute(
-                                  invoiceItem: state.items.first,
-                                ),
+                                const InvoiceDetailsPageRoute(),
                               ),
                             },
                         },

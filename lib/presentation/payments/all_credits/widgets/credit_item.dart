@@ -45,13 +45,13 @@ class _CreditsItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                    creditItem.accountingDocumentType,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text(
+                  creditItem.accountingDocumentType,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
+              ),
               PriceComponent(
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
@@ -75,12 +75,8 @@ class _CreditsItem extends StatelessWidget {
     context.read<CreditAndInvoiceDetailsBloc>().add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: creditItem,
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
           ),
         );
-    context.router.push(CreditDetailsPageRoute(creditItem: creditItem));
+    context.router.push(const CreditDetailsPageRoute());
   }
 }

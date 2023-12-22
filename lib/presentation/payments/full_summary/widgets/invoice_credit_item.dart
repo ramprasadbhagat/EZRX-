@@ -26,24 +26,14 @@ class _InvoiceCreditItem extends StatelessWidget {
                 context.read<CreditAndInvoiceDetailsBloc>().add(
                       CreditAndInvoiceDetailsEvent.fetch(
                         creditAndInvoiceItem: data,
-                        salesOrganisation: eligibilityState.salesOrganisation,
-                        customerCodeInfo: eligibilityState.customerCodeInfo,
                       ),
                     );
                 if (data.debitCreditCode.isCredit) {
-                  context.router.push(
-                    CreditDetailsPageRoute(
-                      creditItem: data,
-                    ),
-                  );
+                  context.router.push(const CreditDetailsPageRoute());
 
                   return;
                 }
-                context.router.push(
-                  InvoiceDetailsPageRoute(
-                    invoiceItem: data,
-                  ),
-                );
+                context.router.push(const InvoiceDetailsPageRoute());
               },
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
