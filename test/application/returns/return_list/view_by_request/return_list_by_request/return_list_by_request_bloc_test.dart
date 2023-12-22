@@ -457,5 +457,41 @@ void main() {
         expect(bloc.state.returnItemList.length, 24),
       ],
     );
+
+    group('Fetch event do nothing', () {
+      blocTest<ReturnListByRequestBloc, ReturnListByRequestState>(
+        'When search key is invalid',
+        build: () => ReturnListByRequestBloc(
+          returnListRepository: returnListRepositoryMock,
+          config: config,
+        ),
+        act: (bloc) => bloc.add(
+          ReturnListByRequestEvent.fetch(
+            appliedFilter: mockAppliedFilter,
+            searchKey: SearchKey.searchFilter('1'),
+          ),
+        ),
+        expect: () => [],
+      );
+
+      blocTest<ReturnListByRequestBloc, ReturnListByRequestState>(
+        'When apply the same filter + search key',
+        build: () => ReturnListByRequestBloc(
+          returnListRepository: returnListRepositoryMock,
+          config: config,
+        ),
+        seed: () => ReturnListByRequestState.initial().copyWith(
+          searchKey: mockSearchKey,
+          appliedFilter: mockAppliedFilter,
+        ),
+        act: (bloc) => bloc.add(
+          ReturnListByRequestEvent.fetch(
+            appliedFilter: mockAppliedFilter,
+            searchKey: mockSearchKey,
+          ),
+        ),
+        expect: () => [],
+      );
+    });
   });
 }

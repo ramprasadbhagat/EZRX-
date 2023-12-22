@@ -521,5 +521,43 @@ void main() {
         ),
       ],
     );
+
+    group('Fetch event do nothing', () {
+      blocTest<ViewByItemsBloc, ViewByItemsState>(
+        'When search key is invalid',
+        build: () => ViewByItemsBloc(
+          viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
+        ),
+        act: (bloc) => bloc.add(
+          ViewByItemsEvent.fetch(
+            viewByItemFilter: viewByItemFilter,
+            searchKey: SearchKey.searchFilter('1'),
+          ),
+        ),
+        expect: () => [],
+      );
+
+      blocTest<ViewByItemsBloc, ViewByItemsState>(
+        'When apply the same filter + search key',
+        build: () => ViewByItemsBloc(
+          viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
+        ),
+        seed: () => ViewByItemsState.initial().copyWith(
+          searchKey: SearchKey.searchFilter('test'),
+          appliedFilter: ViewByItemFilter.empty()
+              .copyWith(orderDateFrom: DateTimeStringValue('test')),
+        ),
+        act: (bloc) => bloc.add(
+          ViewByItemsEvent.fetch(
+            viewByItemFilter: ViewByItemFilter.empty()
+                .copyWith(orderDateFrom: DateTimeStringValue('test')),
+            searchKey: SearchKey.searchFilter('test'),
+          ),
+        ),
+        expect: () => [],
+      );
+    });
   });
 }

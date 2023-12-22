@@ -46,6 +46,11 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
     });
     on<_Fetch>(
       (e, emit) async {
+        if (e.searchKey == state.searchKey &&
+            e.filter == state.appliedFilter &&
+            e.searchKey.validateNotEmpty) {
+          return;
+        }
         if (!e.searchKey.isValid()) return;
 
         emit(
