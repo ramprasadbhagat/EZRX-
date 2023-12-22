@@ -120,54 +120,59 @@ class User with _$User {
 
   String get userPreferredLanguageCode => preferredLanguage.languageCode;
 
-  String get userCountry => userSalesOrganisations.first.salesOrg.country;
-
   List<String> get _supportedMarketsForStaticFiles => <String>[
         'ID',
         'KH',
+        'VN',
         //TODO: Cover in another ticket
         // 'TW',
         // 'KR',
         // 'TH',
-        // 'VN',
         // 'MM',
       ];
 
   String get tncFile {
-    if (_supportedMarketsForStaticFiles.contains(userCountry)) {
-      return userPreferredLanguageCode == userCountry
-          ? 'assets/html/${userCountry.toLowerCase()}/eZRxTermsOfUse${userCountry}MarketTranslated.html'
-          : 'assets/html/${userCountry.toLowerCase()}/eZRxTermsOfUse${userCountry}Market.html';
+    if (_supportedMarketsForStaticFiles.contains(_userCountry)) {
+      return userPreferredLanguageCode == _userCountryLanguage
+          ? 'assets/html/${_userCountry.toLowerCase()}/eZRxTermsOfUse${_userCountry}MarketTranslated.html'
+          : 'assets/html/${_userCountry.toLowerCase()}/eZRxTermsOfUse${_userCountry}Market.html';
     }
 
     return 'assets/html/eZRxTermsOfUse.html';
   }
 
   String get tncStaticFile {
-    if (_supportedMarketsForStaticFiles.contains(userCountry)) {
-      return userPreferredLanguageCode == userCountry
-          ? 'assets/html/${userCountry.toLowerCase()}/eZRxTermsOfUse${userCountry}MarketTranslatedStatic.html'
-          : 'assets/html/${userCountry.toLowerCase()}/eZRxTermsOfUse${userCountry}MarketStatic.html';
+    if (_supportedMarketsForStaticFiles.contains(_userCountry)) {
+      return userPreferredLanguageCode == _userCountryLanguage
+          ? 'assets/html/${_userCountry.toLowerCase()}/eZRxTermsOfUse${_userCountry}MarketTranslatedStatic.html'
+          : 'assets/html/${_userCountry.toLowerCase()}/eZRxTermsOfUse${_userCountry}MarketStatic.html';
     }
 
     return 'assets/html/eZRxTermsOfUseStatic.html';
   }
 
   String get privacyPolicyFile {
-    if (_supportedMarketsForStaticFiles.contains(userCountry) &&
-        userPreferredLanguageCode == userCountry) {
-      return 'assets/html/${userCountry.toLowerCase()}/eZRxPrivacyPolicy${userCountry}MarketTranslated.html';
+    if (_supportedMarketsForStaticFiles.contains(_userCountry)) {
+      return userPreferredLanguageCode == _userCountryLanguage
+          ? 'assets/html/${_userCountry.toLowerCase()}/eZRxPrivacyPolicy${_userCountry}MarketTranslated.html'
+          : 'assets/html/${_userCountry.toLowerCase()}/eZRxPrivacyPolicy${_userCountry}Market.html';
     }
 
     return 'assets/html/eZRxPrivacyPolicy.html';
   }
 
   String get privacyPolicyStaticFile {
-    if (_supportedMarketsForStaticFiles.contains(userCountry) &&
-        userPreferredLanguageCode == userCountry) {
-      return 'assets/html/${userCountry.toLowerCase()}/eZRxPrivacyPolicy${userCountry}MarketTranslatedStatic.html';
+    if (_supportedMarketsForStaticFiles.contains(_userCountry)) {
+      return userPreferredLanguageCode == _userCountryLanguage
+          ? 'assets/html/${_userCountry.toLowerCase()}/eZRxPrivacyPolicy${_userCountry}MarketTranslatedStatic.html'
+          : 'assets/html/${_userCountry.toLowerCase()}/eZRxPrivacyPolicy${_userCountry}MarketStatic.html';
     }
 
     return 'assets/html/eZRxPrivacyPolicyStatic.html';
   }
+
+  String get _userCountry => userSalesOrganisations.first.salesOrg.country;
+
+  String get _userCountryLanguage =>
+      userSalesOrganisations.first.salesOrg.languageCode.toUpperCase();
 }
