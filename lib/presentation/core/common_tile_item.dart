@@ -85,7 +85,7 @@ class CommonTileItem extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Expanded(
+                            Flexible(
                               child: Text(
                                 label,
                                 key: WidgetKeys.commonTileItemLabel,
