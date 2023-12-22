@@ -10,6 +10,9 @@ class _APLPaymentSelectorWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  static const paymentFailureMessage =
+      'You have a pending payment which has not been completed. Please create a new payment only after the existing one has been cleared.';
+
   Future<bool?> _showConfirmBottomSheet(BuildContext context) {
     return showModalBottomSheet<bool>(
       context: context,
@@ -17,8 +20,7 @@ class _APLPaymentSelectorWidget extends StatelessWidget {
       builder: (_) => ConfirmBottomSheet(
         key: WidgetKeys.confirmBottomSheet,
         title: 'Unable to create new payment',
-        content:
-            'You have a pending payment which has not been completed. Please create a new payment only after the existing one has been cleared.',
+        content: paymentFailureMessage,
         confirmButtonText: 'Close',
         displayCancelButton: false,
         iconWidget: SvgPicture.asset(
@@ -45,6 +47,18 @@ class _APLPaymentSelectorWidget extends StatelessWidget {
                     ),
                   ),
                 );
+            trackMixpanelEvent(
+              MixpanelEvents.paymentSuccess,
+              props: {
+                MixpanelProps.paymentAmount: state.amountTotal,
+                MixpanelProps.paymentMethod: state
+                    .selectedPaymentMethod.paymentMethod
+                    .getOrDefaultValue(''),
+                MixpanelProps.paymentDocumentCount:
+                    state.allSelectedItems.length,
+                MixpanelProps.paymentAdviseId: state.createVirtualAccount.id,
+              },
+            );
             context.router.pushAndPopUntil(
               const PaymentAdviceCreatedPageRoute(),
               predicate: (Route route) =>
@@ -53,6 +67,17 @@ class _APLPaymentSelectorWidget extends StatelessWidget {
           },
           (either) => either.fold(
             (failure) {
+              trackMixpanelEvent(
+                MixpanelEvents.paymentFailure,
+                props: {
+                  MixpanelProps.errorMessage: paymentFailureMessage,
+                  MixpanelProps.paymentMethod: state
+                      .selectedPaymentMethod.paymentMethod
+                      .getOrDefaultValue(''),
+                  MixpanelProps.paymentDocumentCount:
+                      state.allSelectedItems.length,
+                },
+              );
               _showConfirmBottomSheet(context);
             },
             (_) {},
