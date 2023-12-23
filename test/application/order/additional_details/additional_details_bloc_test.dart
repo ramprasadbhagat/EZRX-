@@ -54,8 +54,7 @@ void main() {
               deliveryDate: DeliveryInfoData.defaultDeliveryDate,
               mobileNumber: MobileNumber(''),
             ),
-            isValidated: false,
-            showErrorMessages: false,
+            config: config,
           )
         ],
       );
@@ -77,8 +76,9 @@ void main() {
               deliveryDate: DeliveryInfoData.defaultDeliveryDate,
               mobileNumber: MobileNumber(''),
             ),
-            isValidated: false,
-            showErrorMessages: false,
+            config: config.copyWith(
+              futureDeliveryDay: FutureDeliveryDay(''),
+            ),
           )
         ],
       );
@@ -100,8 +100,6 @@ void main() {
               deliveryDate: DeliveryInfoData.defaultDeliveryDate,
               mobileNumber: MobileNumber('1234567890'),
             ),
-            isValidated: false,
-            showErrorMessages: false,
           )
         ],
       );
@@ -215,6 +213,43 @@ void main() {
       );
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Change showWarningBlock to false when form validated',
+        build: () => AdditionalDetailsBloc(),
+        seed: () => AdditionalDetailsState.initial().copyWith(
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            poReference: PoReference('CO REF'),
+            contactPerson: ContactPerson('PERSON'),
+            mobileNumber: MobileNumber(''),
+            paymentTerm: PaymentTerm('0001-TEST'),
+            referenceNote: ReferenceNote('Reference Note Test'),
+            deliveryInstruction: DeliveryInstruction('Instruction Test'),
+          ),
+          showErrorMessages: true,
+        ),
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(
+            const AdditionalDetailsEvent.onTextChange(
+              label: DeliveryInfoLabel.mobileNumber,
+              newValue: '1234567890',
+            ),
+          );
+        },
+        expect: () => [
+          AdditionalDetailsState.initial().copyWith(
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poReference: PoReference('CO REF'),
+              contactPerson: ContactPerson('PERSON'),
+              mobileNumber: MobileNumber('1234567890'),
+              paymentTerm: PaymentTerm('0001-TEST'),
+              referenceNote: ReferenceNote('Reference Note Test'),
+              deliveryInstruction: DeliveryInstruction('Instruction Test'),
+            ),
+            showErrorMessages: true,
+          ),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Validate AdditionalDetails Form Success',
         build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
@@ -229,15 +264,12 @@ void main() {
         ),
         act: (AdditionalDetailsBloc bloc) {
           bloc.add(
-            AdditionalDetailsEvent.validateForm(
-              config: config,
-            ),
+            const AdditionalDetailsEvent.validateForm(),
           );
         },
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             isValidated: true,
-            showErrorMessages: false,
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poReference: PoReference('CO REF'),
               contactPerson: ContactPerson('PERSON'),
@@ -262,18 +294,18 @@ void main() {
             referenceNote: ReferenceNote('Reference Note Test'),
             deliveryInstruction: DeliveryInstruction('Instruction Test'),
           ),
+          config: config,
         ),
         act: (AdditionalDetailsBloc bloc) {
           bloc.add(
-            AdditionalDetailsEvent.validateForm(
-              config: config,
-            ),
+            const AdditionalDetailsEvent.validateForm(),
           );
         },
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             isValidated: false,
             showErrorMessages: true,
+            config: config,
             focusTo: DeliveryInfoLabel.contactPerson,
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poReference: PoReference('CO REF'),

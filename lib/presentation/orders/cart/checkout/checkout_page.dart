@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -73,10 +72,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
     super.dispose();
   }
 
-  void _scrollToFocusedObject() {
-    _focusNodes[DeliveryInfoLabel.paymentTerm]?.requestFocus();
+  void _scrollToFocusedObject({required FocusNode focusNode}) {
+    focusNode.requestFocus();
+    if (focusNode.context == null) return;
     Scrollable.ensureVisible(
-      _focusNodes[DeliveryInfoLabel.paymentTerm]!.context!,
+      focusNode.context!,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
@@ -182,11 +182,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
               SafeArea(
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 10,
-                  ),
-                  child: BlocListener<AdditionalDetailsBloc,
+                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+                  child: BlocConsumer<AdditionalDetailsBloc,
                       AdditionalDetailsState>(
                     listenWhen: (previous, current) =>
                         previous.isValidated != current.isValidated ||
@@ -219,85 +216,98 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               ),
                             );
                       } else {
-                        if (state.focusTo == DeliveryInfoLabel.paymentTerm) {
-                          _scrollToFocusedObject();
+                        if (state.focusTo != null) {
+                          _scrollToFocusedObject(
+                            focusNode: _focusNodes[state.focusTo]!,
+                          );
                         }
-                        _focusNodes[state.focusTo]?.requestFocus();
                       }
                     },
-                    child: BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
-                      listenWhen: (previous, current) =>
-                          previous.isSubmitting != current.isSubmitting,
-                      listener: (context, state) {
-                        state.apiFailureOrSuccessOption.fold(
-                          () {
-                            if (!state.isSubmitting) {
-                              context.read<OrderSummaryBloc>().add(
-                                    OrderSummaryEvent.orderConfirmationDetail(
-                                      priceAggregate: context
-                                          .read<CartBloc>()
-                                          .state
-                                          .cartProducts,
-                                    ),
-                                  );
-                              context.read<PriceOverrideBloc>().add(
-                                    const PriceOverrideEvent.initialized(),
-                                  );
-                              context.read<PoAttachmentBloc>().add(
-                                    const PoAttachmentEvent.initialized(),
-                                  );
-                              context.router
-                                  .pushNamed('orders/order_confirmation');
-                            }
-                          },
-                          (either) => either.fold(
-                            (failure) {
-                              trackMixpanelEvent(
-                                MixpanelEvents.placeOrderFailure,
-                                props: {
-                                  MixpanelProps.errorMessage:
-                                      failure.failureMessage,
-                                },
-                              );
-                              ErrorUtils.handleApiFailure(context, failure);
+                    buildWhen: (previous, current) =>
+                        previous.showErrorMessages != current.showErrorMessages,
+                    builder: (context, additionalDetailsState) {
+                      return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
+                        listenWhen: (previous, current) =>
+                            previous.isSubmitting != current.isSubmitting,
+                        listener: (context, state) {
+                          state.apiFailureOrSuccessOption.fold(
+                            () {
+                              if (!state.isSubmitting) {
+                                context.read<OrderSummaryBloc>().add(
+                                      OrderSummaryEvent.orderConfirmationDetail(
+                                        priceAggregate: context
+                                            .read<CartBloc>()
+                                            .state
+                                            .cartProducts,
+                                      ),
+                                    );
+                                context.read<PriceOverrideBloc>().add(
+                                      const PriceOverrideEvent.initialized(),
+                                    );
+                                context.read<PoAttachmentBloc>().add(
+                                      const PoAttachmentEvent.initialized(),
+                                    );
+                                context.router
+                                    .pushNamed('orders/order_confirmation');
+                              }
                             },
-                            (_) {},
-                          ),
-                        );
-                      },
-                      builder: (context, state) {
-                        return ElevatedButton(
-                          key: WidgetKeys.checkoutButton,
-                          onPressed: state.isSubmitting ||
-                                  cartState.isCartDetailsFetching ||
-                                  !context
-                                      .read<CartBloc>()
-                                      .state
-                                      .isEligibleForCheckout(
-                                        !eligibilityState
-                                            .doNotAllowOutOfStockMaterials,
-                                      )
-                              ? null
-                              : () {
-                                  FocusScope.of(context)
-                                      .requestFocus(FocusNode());
-                                  context.read<AdditionalDetailsBloc>().add(
-                                        AdditionalDetailsEvent.validateForm(
-                                          config: context
-                                              .read<SalesOrgBloc>()
+                            (either) => either.fold(
+                              (failure) {
+                                trackMixpanelEvent(
+                                  MixpanelEvents.placeOrderFailure,
+                                  props: {
+                                    MixpanelProps.errorMessage:
+                                        failure.failureMessage,
+                                  },
+                                );
+                                ErrorUtils.handleApiFailure(context, failure);
+                              },
+                              (_) {},
+                            ),
+                          );
+                        },
+                        builder: (context, state) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              if (additionalDetailsState.showErrorMessages)
+                                const _ValidationsFailedWarning(),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: ElevatedButton(
+                                  key: WidgetKeys.checkoutButton,
+                                  onPressed: state.isSubmitting ||
+                                          cartState.isCartDetailsFetching ||
+                                          !context
+                                              .read<CartBloc>()
                                               .state
-                                              .configs,
-                                        ),
-                                      );
-                                },
-                          child: LoadingShimmer.withChild(
-                            enabled: state.isSubmitting ||
-                                cartState.isCartDetailsFetching,
-                            child: Text(context.tr('Place order')),
-                          ),
-                        );
-                      },
-                    ),
+                                              .isEligibleForCheckout(
+                                                !eligibilityState
+                                                    .doNotAllowOutOfStockMaterials,
+                                              )
+                                      ? null
+                                      : () {
+                                          FocusScope.of(context)
+                                              .requestFocus(FocusNode());
+                                          context
+                                              .read<AdditionalDetailsBloc>()
+                                              .add(
+                                                const AdditionalDetailsEvent
+                                                    .validateForm(),
+                                              );
+                                        },
+                                  child: LoadingShimmer.withChild(
+                                    enabled: state.isSubmitting ||
+                                        cartState.isCartDetailsFetching,
+                                    child: Text(context.tr('Place order')),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
               ),
@@ -305,6 +315,29 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ),
         );
       },
+    );
+  }
+}
+
+class _ValidationsFailedWarning extends StatelessWidget {
+  const _ValidationsFailedWarning({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 10,
+      ),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        color: ZPColors.lightRedStatusColor,
+      ),
+      child: Text(
+        context.tr('Please ensure all required fields are filled.'),
+        style: Theme.of(context).textTheme.bodySmall,
+        key: WidgetKeys.errorRequirementsFillAllField,
+      ),
     );
   }
 }

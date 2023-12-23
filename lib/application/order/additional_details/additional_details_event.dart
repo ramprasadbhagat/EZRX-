@@ -10,9 +10,8 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
     required DeliveryInfoLabel label,
     required String newValue,
   }) = _AdditionalDetailsTextOnChange;
-  const factory AdditionalDetailsEvent.validateForm({
-    required SalesOrganisationConfigs config,
-  }) = _AdditionalDetailsValidateForm;
+  const factory AdditionalDetailsEvent.validateForm() =
+      _AdditionalDetailsValidateForm;
   const factory AdditionalDetailsEvent.addPoDocument({
     required List<PoDocuments> poDocuments,
   }) = _AdditionalDetailsAddPoDocument;

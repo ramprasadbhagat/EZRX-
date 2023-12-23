@@ -23,11 +23,14 @@ class AdditionalDetailsBloc
   ) async {
     await event.map(
       initialized: (value) async => emit(
-        AdditionalDetailsState.initial().copyWith.deliveryInfoData(
-              mobileNumber: MobileNumber(
-                value.customerCodeInfo.telephoneNumber.getValue(),
-              ),
+        AdditionalDetailsState.initial().copyWith(
+          config: value.config,
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            mobileNumber: MobileNumber(
+              value.customerCodeInfo.telephoneNumber.getValue(),
             ),
+          ),
+        ),
       ),
       onTextChange: (value) async => _onTextChange(
         label: value.label,
@@ -36,16 +39,20 @@ class AdditionalDetailsBloc
       ),
       validateForm: (value) async => _validateAdditionalDetails(
         emit: emit,
-        config: value.config,
       ),
-      addPoDocument: (value) async => emit(
-        state.copyWith(
-          deliveryInfoData: state.deliveryInfoData.copyWith(
-            poDocuments: value.poDocuments,
+      addPoDocument: (value) {
+        emit(
+          state.copyWith(
+            deliveryInfoData: state.deliveryInfoData.copyWith(
+              poDocuments: value.poDocuments,
+            ),
+            isPoAttachmentValidated: true,
           ),
-          isPoAttachmentValidated: true,
-        ),
-      ),
+        );
+        if (state.showErrorMessages) {
+          _validateAdditionalDetails(emit: emit);
+        }
+      },
       removePoDocument: (value) {
         final updatedPoDocuments =
             List<PoDocuments>.from(state.deliveryInfoData.poDocuments)
@@ -94,32 +101,30 @@ class AdditionalDetailsBloc
 
   void _validateAdditionalDetails({
     required Emitter<AdditionalDetailsState> emit,
-    required SalesOrganisationConfigs config,
   }) {
     emit(
       state.copyWith(
-        isValidated: false,
-        showErrorMessages: false,
+        focusTo: null,
       ),
     );
-    final isCustomerPoReferenceValid = config.poNumberRequired.getValue()
+    final isCustomerPoReferenceValid = state.config.poNumberRequired.getValue()
         ? state.deliveryInfoData.poReference.isValid()
         : true;
 
-    final isReferenceNoteValid = config.enableReferenceNote
+    final isReferenceNoteValid = state.config.enableReferenceNote
         ? state.deliveryInfoData.referenceNote.isValid()
         : true;
-    final isContactPersonValid = config.enableMobileNumber
+    final isContactPersonValid = state.config.enableMobileNumber
         ? state.deliveryInfoData.contactPerson.isValid()
         : true;
-    final isContactNumberValid = config.enableMobileNumber
+    final isContactNumberValid = state.config.enableMobileNumber
         ? state.deliveryInfoData.mobileNumber.isValid()
         : true;
-    final isPaymentTermValid = config.enablePaymentTerms
+    final isPaymentTermValid = state.config.enablePaymentTerms
         ? state.deliveryInfoData.paymentTerm.isValid()
         : true;
     final isPoUploadAttachment =
-        config.enablePOAttachmentRequired && config.showPOAttachment
+        state.config.enablePOAttachmentRequired && state.config.showPOAttachment
             ? state.deliveryInfoData.poDocuments.isNotEmpty
             : true;
 
@@ -146,6 +151,12 @@ class AdditionalDetailsBloc
                         : !isPaymentTermValid
                             ? DeliveryInfoLabel.paymentTerm
                             : null,
+      ),
+    );
+
+    emit(
+      state.copyWith(
+        showErrorMessages: !isFormValid,
       ),
     );
   }

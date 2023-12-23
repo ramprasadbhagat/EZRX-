@@ -23,7 +23,7 @@ mixin _$AdditionalDetailsEvent {
         initialized,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function() validateForm,
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
@@ -39,7 +39,7 @@ mixin _$AdditionalDetailsEvent {
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function()? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
@@ -54,7 +54,7 @@ mixin _$AdditionalDetailsEvent {
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function()? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
@@ -235,7 +235,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function() validateForm,
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
@@ -254,7 +254,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function()? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
@@ -272,7 +272,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function()? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
@@ -448,7 +448,7 @@ class _$_AdditionalDetailsTextOnChange
         initialized,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function() validateForm,
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
@@ -467,7 +467,7 @@ class _$_AdditionalDetailsTextOnChange
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function()? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
@@ -485,7 +485,7 @@ class _$_AdditionalDetailsTextOnChange
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function()? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
@@ -584,10 +584,6 @@ abstract class _$$_AdditionalDetailsValidateFormCopyWith<$Res> {
           _$_AdditionalDetailsValidateForm value,
           $Res Function(_$_AdditionalDetailsValidateForm) then) =
       __$$_AdditionalDetailsValidateFormCopyWithImpl<$Res>;
-  @useResult
-  $Res call({SalesOrganisationConfigs config});
-
-  $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
 /// @nodoc
@@ -599,60 +595,28 @@ class __$$_AdditionalDetailsValidateFormCopyWithImpl<$Res>
       _$_AdditionalDetailsValidateForm _value,
       $Res Function(_$_AdditionalDetailsValidateForm) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? config = null,
-  }) {
-    return _then(_$_AdditionalDetailsValidateForm(
-      config: null == config
-          ? _value.config
-          : config // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get config {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
-      return _then(_value.copyWith(config: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_AdditionalDetailsValidateForm
     implements _AdditionalDetailsValidateForm {
-  const _$_AdditionalDetailsValidateForm({required this.config});
-
-  @override
-  final SalesOrganisationConfigs config;
+  const _$_AdditionalDetailsValidateForm();
 
   @override
   String toString() {
-    return 'AdditionalDetailsEvent.validateForm(config: $config)';
+    return 'AdditionalDetailsEvent.validateForm()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsValidateForm &&
-            (identical(other.config, config) || other.config == config));
+            other is _$_AdditionalDetailsValidateForm);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, config);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_AdditionalDetailsValidateFormCopyWith<_$_AdditionalDetailsValidateForm>
-      get copyWith => __$$_AdditionalDetailsValidateFormCopyWithImpl<
-          _$_AdditionalDetailsValidateForm>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -662,7 +626,7 @@ class _$_AdditionalDetailsValidateForm
         initialized,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function() validateForm,
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
@@ -671,7 +635,7 @@ class _$_AdditionalDetailsValidateForm
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
   }) {
-    return validateForm(config);
+    return validateForm();
   }
 
   @override
@@ -681,7 +645,7 @@ class _$_AdditionalDetailsValidateForm
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function()? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
@@ -689,7 +653,7 @@ class _$_AdditionalDetailsValidateForm
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) {
-    return validateForm?.call(config);
+    return validateForm?.call();
   }
 
   @override
@@ -699,7 +663,7 @@ class _$_AdditionalDetailsValidateForm
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function()? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
@@ -709,7 +673,7 @@ class _$_AdditionalDetailsValidateForm
     required TResult orElse(),
   }) {
     if (validateForm != null) {
-      return validateForm(config);
+      return validateForm();
     }
     return orElse();
   }
@@ -781,14 +745,8 @@ class _$_AdditionalDetailsValidateForm
 
 abstract class _AdditionalDetailsValidateForm
     implements AdditionalDetailsEvent {
-  const factory _AdditionalDetailsValidateForm(
-          {required final SalesOrganisationConfigs config}) =
+  const factory _AdditionalDetailsValidateForm() =
       _$_AdditionalDetailsValidateForm;
-
-  SalesOrganisationConfigs get config;
-  @JsonKey(ignore: true)
-  _$$_AdditionalDetailsValidateFormCopyWith<_$_AdditionalDetailsValidateForm>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -874,7 +832,7 @@ class _$_AdditionalDetailsAddPoDocument
         initialized,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function() validateForm,
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
@@ -893,7 +851,7 @@ class _$_AdditionalDetailsAddPoDocument
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function()? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
@@ -911,7 +869,7 @@ class _$_AdditionalDetailsAddPoDocument
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function()? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
@@ -1089,7 +1047,7 @@ class _$_AdditionalDetailsRemovePoDocument
         initialized,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function() validateForm,
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
@@ -1108,7 +1066,7 @@ class _$_AdditionalDetailsRemovePoDocument
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function()? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
@@ -1126,7 +1084,7 @@ class _$_AdditionalDetailsRemovePoDocument
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function()? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
@@ -1267,7 +1225,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         initialized,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function() validateForm,
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
@@ -1286,7 +1244,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function()? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
@@ -1304,7 +1262,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function()? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
@@ -1438,7 +1396,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
         initialized,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function() validateForm,
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
@@ -1457,7 +1415,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function()? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
@@ -1475,7 +1433,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function()? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
@@ -1665,7 +1623,7 @@ class _$_AdditionalDetailsInitiateFromHistory
         initialized,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function() validateForm,
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
@@ -1684,7 +1642,7 @@ class _$_AdditionalDetailsInitiateFromHistory
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function()? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
@@ -1702,7 +1660,7 @@ class _$_AdditionalDetailsInitiateFromHistory
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function()? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
@@ -1805,6 +1763,7 @@ mixin _$AdditionalDetailsState {
   bool get isPoAttachmentValidated => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get config => throw _privateConstructorUsedError;
   DeliveryInfoLabel? get focusTo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1825,9 +1784,11 @@ abstract class $AdditionalDetailsStateCopyWith<$Res> {
       bool isPoAttachmentValidated,
       bool isLoading,
       bool showErrorMessages,
+      SalesOrganisationConfigs config,
       DeliveryInfoLabel? focusTo});
 
   $DeliveryInfoDataCopyWith<$Res> get deliveryInfoData;
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
 /// @nodoc
@@ -1850,6 +1811,7 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
     Object? isPoAttachmentValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
+    Object? config = null,
     Object? focusTo = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1877,6 +1839,10 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       focusTo: freezed == focusTo
           ? _value.focusTo
           : focusTo // ignore: cast_nullable_to_non_nullable
@@ -1889,6 +1855,14 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
   $DeliveryInfoDataCopyWith<$Res> get deliveryInfoData {
     return $DeliveryInfoDataCopyWith<$Res>(_value.deliveryInfoData, (value) {
       return _then(_value.copyWith(deliveryInfoData: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get config {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
+      return _then(_value.copyWith(config: value) as $Val);
     });
   }
 }
@@ -1908,10 +1882,13 @@ abstract class _$$_AdditionalDetailsStateCopyWith<$Res>
       bool isPoAttachmentValidated,
       bool isLoading,
       bool showErrorMessages,
+      SalesOrganisationConfigs config,
       DeliveryInfoLabel? focusTo});
 
   @override
   $DeliveryInfoDataCopyWith<$Res> get deliveryInfoData;
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
 /// @nodoc
@@ -1932,6 +1909,7 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
     Object? isPoAttachmentValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
+    Object? config = null,
     Object? focusTo = freezed,
   }) {
     return _then(_$_AdditionalDetailsState(
@@ -1959,6 +1937,10 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       focusTo: freezed == focusTo
           ? _value.focusTo
           : focusTo // ignore: cast_nullable_to_non_nullable
@@ -1977,6 +1959,7 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
       required this.isPoAttachmentValidated,
       required this.isLoading,
       required this.showErrorMessages,
+      required this.config,
       this.focusTo})
       : super._();
 
@@ -1993,11 +1976,13 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
   @override
   final bool showErrorMessages;
   @override
+  final SalesOrganisationConfigs config;
+  @override
   final DeliveryInfoLabel? focusTo;
 
   @override
   String toString() {
-    return 'AdditionalDetailsState(deliveryInfoData: $deliveryInfoData, orderId: $orderId, isValidated: $isValidated, isPoAttachmentValidated: $isPoAttachmentValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages, focusTo: $focusTo)';
+    return 'AdditionalDetailsState(deliveryInfoData: $deliveryInfoData, orderId: $orderId, isValidated: $isValidated, isPoAttachmentValidated: $isPoAttachmentValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages, config: $config, focusTo: $focusTo)';
   }
 
   @override
@@ -2017,6 +2002,7 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
                 other.isLoading == isLoading) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
+            (identical(other.config, config) || other.config == config) &&
             (identical(other.focusTo, focusTo) || other.focusTo == focusTo));
   }
 
@@ -2029,6 +2015,7 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
       isPoAttachmentValidated,
       isLoading,
       showErrorMessages,
+      config,
       focusTo);
 
   @JsonKey(ignore: true)
@@ -2047,6 +2034,7 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
       required final bool isPoAttachmentValidated,
       required final bool isLoading,
       required final bool showErrorMessages,
+      required final SalesOrganisationConfigs config,
       final DeliveryInfoLabel? focusTo}) = _$_AdditionalDetailsState;
   const _AdditionalDetailsState._() : super._();
 
@@ -2062,6 +2050,8 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
   bool get isLoading;
   @override
   bool get showErrorMessages;
+  @override
+  SalesOrganisationConfigs get config;
   @override
   DeliveryInfoLabel? get focusTo;
   @override
