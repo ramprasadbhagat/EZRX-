@@ -380,6 +380,8 @@ class WidgetKeys {
   //  Returns by items
   //============================================================
   static const Key returnByItemsSearchBar = Key('returnByItemsSearchBar');
+  static const Key exportReturnByItem = Key('exportReturnByItem');
+  static const Key exportReturnByRequest = Key('exportReturnByRequest');
   static const Key returnByItemsFilterButton = Key('returnByItemsFilterButton');
   static const Key returnByItemsNewRequestButton =
       Key('returnByItemsNewRequestButton');

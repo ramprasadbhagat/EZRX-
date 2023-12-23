@@ -119,8 +119,12 @@ class _ReturnRootState extends State<ReturnRoot> {
                         ),
                         context.tabsRouter.current.name ==
                                 ReturnByItemPageRoute.name
-                            ? const _ExportReturnByItem()
-                            : const _ExportReturnByRequest(),
+                            ? const _ExportReturnByItem(
+                                key: WidgetKeys.exportReturnByItem,
+                              )
+                            : const _ExportReturnByRequest(
+                                key: WidgetKeys.exportReturnByRequest,
+                              ),
                         context.tabsRouter.current.name ==
                                 ReturnByItemPageRoute.name
                             ? const _FilterReturnByItem(
