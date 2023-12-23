@@ -793,7 +793,6 @@ void _initComboDealAndNavigate({
     context.read<ComboDealMaterialDetailBloc>().add(
           ComboDealMaterialDetailEvent.fetchComboDealDetail(
             comboDeal: comboDeal,
-            locale: context.locale,
             parentMaterialNumber: materialNumber,
             comboMaterialsCurrentQuantity: overrideQuantity,
           ),
@@ -811,7 +810,6 @@ void _initComboDealAndNavigate({
             comboDeal: comboDeal,
             principles: [principalCode],
             comboMaterialsCurrentQuantity: overrideQuantity,
-            locale: context.locale,
           ),
         );
   }

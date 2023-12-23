@@ -1,26 +1,26 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -363,7 +363,7 @@ void main() {
         when(
           () => productDetailRepository.getProductListDetail(
             customerCodeInfo: fakeCustomerCodeInfo,
-            locale: const Locale('vi'),
+            language: Language.english(),
             materialNumber: comboDeal.allMaterialNumbers,
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: fakeShipToInfo,
@@ -458,7 +458,6 @@ void main() {
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
         ComboDealMaterialDetailEvent.fetchComboDealDetail(
           comboDeal: comboDeal,
-          locale: const Locale('vi'),
           parentMaterialNumber: productList.first.getMaterialNumber,
           comboMaterialsCurrentQuantity: qty,
         ),
@@ -487,7 +486,7 @@ void main() {
         when(
           () => productDetailRepository.getProductListDetail(
             customerCodeInfo: fakeCustomerCodeInfo,
-            locale: const Locale('vi'),
+            language: Language.english(),
             materialNumber: qty.keys.toList(),
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: fakeShipToInfo,
@@ -618,7 +617,6 @@ void main() {
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
         ComboDealMaterialDetailEvent.fetchComboDealPrincipal(
           comboDeal: comboDeal,
-          locale: const Locale('vi'),
           principles: [
             productList.first.materialInfo.principalData.principalCode
                 .getOrDefaultValue('')

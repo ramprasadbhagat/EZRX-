@@ -1,6 +1,8 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/article_info/repository/article_info_repository.dart';
@@ -29,6 +31,8 @@ void main() {
   late ArticleInfoRepository repository;
   late AnnouncementArticleInfo fakeAnnouncementArticleInfo;
 
+  final fakeUser = User.empty();
+
   const pageSize = 24;
 
   setUpAll(() async {
@@ -55,6 +59,7 @@ void main() {
       ).thenAnswer((invocation) async => AnnouncementArticleInfo.empty());
 
       final result = await repository.getArticles(
+        user: fakeUser,
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',
@@ -74,6 +79,7 @@ void main() {
       );
 
       final result = await repository.getArticles(
+        user: fakeUser,
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',
@@ -92,7 +98,7 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.articleVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
-      when(() => mockSalesOrg.locale).thenReturn(const Locale('fake-code'));
+      when(() => fakeUser.preferredLanguage.locale).thenReturn(Language.english().locale);
       when(() => mockSalesOrg.isID).thenReturn((false));
 
       when(
@@ -102,10 +108,11 @@ void main() {
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
           pageSize: 24,
           after: '',
-          lang: 'fake-code',
+          lang: Language.english().locale.languageCode,
         ),
       ).thenAnswer((invocation) async => AnnouncementArticleInfo.empty());
       final result = await repository.getArticles(
+        user: fakeUser,
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',
@@ -136,6 +143,7 @@ void main() {
         ),
       ).thenAnswer((invocation) async => fakeAnnouncementArticleInfo);
       final result = await repository.getArticles(
+        user: fakeUser,
         salesOrg: fakeIDSalesOrg,
         pageSize: pageSize,
         after: '',
@@ -165,6 +173,7 @@ void main() {
         (invocation) async => Exception('fake-error'),
       );
       final result = await repository.getArticles(
+        user: fakeUser,
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',

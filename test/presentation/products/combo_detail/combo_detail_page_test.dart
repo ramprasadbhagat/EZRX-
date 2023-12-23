@@ -594,7 +594,6 @@ void main() {
             () => productDetailMockBloc.add(
               ProductDetailEvent.fetch(
                 materialInfo: fakeCartCombo.materialInfo,
-                locale: const Locale('en'),
               ),
             ),
           ).called(1);

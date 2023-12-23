@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool hideCustomer,
     required bool enableGimmickMaterial,
     required bool languageFilter,
-    required Locale languageValue,
+    required Language languageValue,
     required bool disablePrincipals,
     required List<SalesOrganisationConfigsPrincipal> principalList,
     required bool disableOrderType,
@@ -88,7 +87,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         hideCustomer: false,
         enableGimmickMaterial: false,
         languageFilter: false,
-        languageValue: const Locale(ApiLanguageCode.english),
+        languageValue: Language.english(),
         disablePrincipals: false,
         principalList: <SalesOrganisationConfigsPrincipal>[],
         disableOrderType: false,
@@ -152,8 +151,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   bool get shouldDisplayVATInPercentage =>
       enableVat && !currency.isVN || enableTaxAtTotalLevelOnly;
 
-  String get getConfigLanguageDefaultEnglish =>
-      languageFilter ? languageValue.languageCode : 'E';
+  Language get getConfigLanguageDefaultEnglish =>
+      languageFilter ? languageValue : Language.shortEnglish();
 
   List<String> get getExcludePrincipal {
     return disablePrincipals ? [] : getPrincipalCodeList;

@@ -328,7 +328,6 @@ void main() {
           verify(
             () => productDetailBlocMock.add(
               ProductDetailEvent.fetch(
-                locale: const Locale('en'),
                 materialInfo: materialResponseMock.products.first,
               ),
             ),
@@ -488,7 +487,6 @@ void main() {
             () => productDetailBlocMock.add(
               ProductDetailEvent.fetch(
                 materialInfo: materialResponseMock.products[12],
-                locale: const Locale('en'),
               ),
             ),
           ).called(1);

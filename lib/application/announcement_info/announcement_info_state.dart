@@ -5,6 +5,8 @@ class AnnouncementInfoState with _$AnnouncementInfoState {
   const AnnouncementInfoState._();
 
   const factory AnnouncementInfoState({
+    required User user,
+    required SalesOrg salesOrg,
     required AnnouncementArticleInfo announcementInfo,
     required bool isLoading,
     required bool canLoadMore,
@@ -13,6 +15,8 @@ class AnnouncementInfoState with _$AnnouncementInfoState {
   }) = _AnnouncementInfoState;
 
   factory AnnouncementInfoState.initial() => AnnouncementInfoState(
+        user: User.empty(),
+        salesOrg: SalesOrg(''),
         isLoading: false,
         canLoadMore: true,
         searchKey: SearchKey.searchFilter(''),

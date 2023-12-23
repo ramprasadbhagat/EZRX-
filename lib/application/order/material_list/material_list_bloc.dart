@@ -75,7 +75,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           pageSize: config.pageSize,
           offset: 0,
           selectedMaterialFilter: e.selectedMaterialFilter,
-          locale: e.configs.languageValue,
+          language: e.configs.languageValue,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -116,7 +116,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         pageSize: config.pageSize,
         offset: state.materialList.length,
         selectedMaterialFilter: state.selectedMaterialFilter,
-        locale: e.configs.languageValue,
+        language: e.configs.languageValue,
       );
       failureOrSuccess.fold(
         (failure) => emit(

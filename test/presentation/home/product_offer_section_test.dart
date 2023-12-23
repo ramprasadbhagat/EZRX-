@@ -443,7 +443,6 @@ void main() {
           () => productDetailBlocMock.add(
             ProductDetailEvent.fetch(
               materialInfo: fakeMaterialList.first,
-              locale: const Locale('en'),
             ),
           ),
         ).called(1);

@@ -260,10 +260,6 @@ class EligibilityState with _$EligibilityState {
   bool get isNotificationSettingsEnable =>
       user.userCanAccessOrderHistory || isPaymentEnabled || isReturnsEnable;
 
-  //TODO: need to move to value object
-  Locale get localeWithCountryCode =>
-      Locale(user.userPreferredLanguageCode, salesOrg.country);
-
   bool get isSOAApplicable => !isIDMarket;
 
   bool get disableCreateOrder =>

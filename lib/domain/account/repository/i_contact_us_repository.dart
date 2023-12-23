@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/account/entities/contact_us.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/account/entities/contact_us.dart';
 
 abstract class IContactUsRepository {
   Future<Either<ApiFailure, bool>> submit({

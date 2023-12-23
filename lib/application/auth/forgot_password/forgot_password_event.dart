@@ -5,6 +5,6 @@ class ForgotPasswordEvent with _$ForgotPasswordEvent {
   const factory ForgotPasswordEvent.initialized() = _Initialized;
   const factory ForgotPasswordEvent.usernameChanged(String usernameStr) =
       _ForgotPasswordEvent;
-  const factory ForgotPasswordEvent.requestPasswordReset(Locale local) =
+  const factory ForgotPasswordEvent.requestPasswordReset(Language language) =
       _RequestPasswordReset;
 }

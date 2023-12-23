@@ -2,12 +2,13 @@ part of 'announcement_info_bloc.dart';
 
 @freezed
 class AnnouncementInfoEvent with _$AnnouncementInfoEvent {
-  const factory AnnouncementInfoEvent.fetch({
+  const factory AnnouncementInfoEvent.initialize({
+    required User user,
     required SalesOrg salesOrg,
-  }) = _Fetch;
-  const factory AnnouncementInfoEvent.loadMore({
-    required SalesOrg salesOrg,
-  }) = _LoadMore;
+  }) = _Initialize;
+
+  const factory AnnouncementInfoEvent.fetch() = _Fetch;
+  const factory AnnouncementInfoEvent.loadMore() = _LoadMore;
   const factory AnnouncementInfoEvent.updateSearchKey({
     required String searchKey,
   }) = _UpdateSearchKey;

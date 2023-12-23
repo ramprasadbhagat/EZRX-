@@ -11,25 +11,3 @@ class DateTimeFormatString {
   static const String displayNotificationDateTimeFormat = 'dd MMM yyyy; HH:mm';
   static const String defaultDateTimeFormat = 'yyyy-MM-ddTHH:mm:ss';
 }
-
-class ApiLanguageCode {
-  static const String shortEnglish = 'E';
-  static const String english = 'EN';
-  static const String thai = 'TH';
-  static const String mandarin = 'ZH';
-  static const String burmese = 'MM';
-  static const String vietnamese = 'VN';
-  static const String khmer = 'KH';
-  static const String indonesian = 'ID';
-}
-
-class LanguageCode {
-  static const String shortEnglish = 'en';
-  static const String english = 'en';
-  static const String thai = 'th';
-  static const String mandarin = 'zh';
-  static const String burmese = 'my';
-  static const String vietnamese = 'vi';
-  static const String khmer = 'km';
-  static const String indonesian = 'id';
-}

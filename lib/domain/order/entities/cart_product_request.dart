@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -72,7 +73,7 @@ class CartProductRequest with _$CartProductRequest {
     required SalesOrg salesOrg,
     required String customerCode,
     required String shipToCustomerCode,
-    required String language,
+    required Language language,
     required MaterialInfo materialInfo,
     required String bundleCode,
   }) =>
@@ -82,7 +83,7 @@ class CartProductRequest with _$CartProductRequest {
         shipToId: shipToCustomerCode,
         productNumber: materialInfo.materialNumber.getOrCrash(),
         quantity: materialInfo.quantity.getOrCrash(),
-        language: language,
+        language: language.languageCode,
         parentID: bundleCode,
         type: 'bundle',
       );

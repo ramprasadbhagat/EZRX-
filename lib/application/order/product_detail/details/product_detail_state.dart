@@ -4,6 +4,7 @@ part of 'product_detail_bloc.dart';
 class ProductDetailState with _$ProductDetailState {
   const ProductDetailState._();
   const factory ProductDetailState({
+    required User user,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
@@ -28,6 +29,7 @@ class ProductDetailState with _$ProductDetailState {
         failureOrSuccessOption: none(),
         productDetailAggregate: ProductDetailAggregate.empty(),
         inputQty: 1,
+        user: User.empty(),
       );
 
   StringValue get selectedImage {

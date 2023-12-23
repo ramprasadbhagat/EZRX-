@@ -54,21 +54,24 @@ abstract class $AnnouncementInfoDetailsDtoCopyWith<$Res> {
           AnnouncementInfoDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: '') String id,
+      {@JsonKey(name: 'id', defaultValue: '')
+          String id,
       @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
-      String title,
+          String title,
       @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
-      String content,
-      @JsonKey(name: 'summary', defaultValue: '') String summary,
+          String content,
+      @JsonKey(name: 'summary', defaultValue: '')
+          String summary,
       @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
-      String thumbnail,
+          String thumbnail,
       @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
-      String publishedDate,
+          String publishedDate,
       @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
-      String manufacturer,
+          String manufacturer,
       @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
-      String source,
-      @JsonKey(name: 'tag', readValue: readTag) String tag});
+          String source,
+      @JsonKey(name: 'tag', readValue: readTag)
+          String tag});
 }
 
 /// @nodoc
@@ -146,21 +149,24 @@ abstract class _$$_AnnouncementInfoDetailsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: '') String id,
+      {@JsonKey(name: 'id', defaultValue: '')
+          String id,
       @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
-      String title,
+          String title,
       @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
-      String content,
-      @JsonKey(name: 'summary', defaultValue: '') String summary,
+          String content,
+      @JsonKey(name: 'summary', defaultValue: '')
+          String summary,
       @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
-      String thumbnail,
+          String thumbnail,
       @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
-      String publishedDate,
+          String publishedDate,
       @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
-      String manufacturer,
+          String manufacturer,
       @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
-      String source,
-      @JsonKey(name: 'tag', readValue: readTag) String tag});
+          String source,
+      @JsonKey(name: 'tag', readValue: readTag)
+          String tag});
 }
 
 /// @nodoc
@@ -231,21 +237,24 @@ class __$$_AnnouncementInfoDetailsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AnnouncementInfoDetailsDto extends _AnnouncementInfoDetailsDto {
   const _$_AnnouncementInfoDetailsDto(
-      {@JsonKey(name: 'id', defaultValue: '') required this.id,
+      {@JsonKey(name: 'id', defaultValue: '')
+          required this.id,
       @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
-      required this.title,
+          required this.title,
       @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
-      required this.content,
-      @JsonKey(name: 'summary', defaultValue: '') required this.summary,
+          required this.content,
+      @JsonKey(name: 'summary', defaultValue: '')
+          required this.summary,
       @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
-      required this.thumbnail,
+          required this.thumbnail,
       @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
-      required this.publishedDate,
+          required this.publishedDate,
       @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
-      required this.manufacturer,
+          required this.manufacturer,
       @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
-      required this.source,
-      @JsonKey(name: 'tag', readValue: readTag) required this.tag})
+          required this.source,
+      @JsonKey(name: 'tag', readValue: readTag)
+          required this.tag})
       : super._();
 
   factory _$_AnnouncementInfoDetailsDto.fromJson(Map<String, dynamic> json) =>
@@ -325,22 +334,24 @@ class _$_AnnouncementInfoDetailsDto extends _AnnouncementInfoDetailsDto {
 
 abstract class _AnnouncementInfoDetailsDto extends AnnouncementInfoDetailsDto {
   const factory _AnnouncementInfoDetailsDto(
-      {@JsonKey(name: 'id', defaultValue: '') required final String id,
+      {@JsonKey(name: 'id', defaultValue: '')
+          required final String id,
       @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
-      required final String title,
+          required final String title,
       @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
-      required final String content,
-      @JsonKey(name: 'summary', defaultValue: '') required final String summary,
+          required final String content,
+      @JsonKey(name: 'summary', defaultValue: '')
+          required final String summary,
       @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
-      required final String thumbnail,
+          required final String thumbnail,
       @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
-      required final String publishedDate,
+          required final String publishedDate,
       @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
-      required final String manufacturer,
+          required final String manufacturer,
       @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
-      required final String source,
+          required final String source,
       @JsonKey(name: 'tag', readValue: readTag)
-      required final String tag}) = _$_AnnouncementInfoDetailsDto;
+          required final String tag}) = _$_AnnouncementInfoDetailsDto;
   const _AnnouncementInfoDetailsDto._() : super._();
 
   factory _AnnouncementInfoDetailsDto.fromJson(Map<String, dynamic> json) =

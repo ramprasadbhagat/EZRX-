@@ -25,7 +25,6 @@ class ComboDealMaterialDetailEvent with _$ComboDealMaterialDetailEvent {
   }) = _UpdateItemSelection;
   const factory ComboDealMaterialDetailEvent.fetchComboDealDetail({
     required ComboDeal comboDeal,
-    required Locale locale,
     required MaterialNumber parentMaterialNumber,
     required Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
   }) = _FetchComboDealDetail;
@@ -44,7 +43,6 @@ class ComboDealMaterialDetailEvent with _$ComboDealMaterialDetailEvent {
     required ComboDeal comboDeal,
     required Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
     required List<String> principles,
-    required Locale locale,
   }) = _FetchComboDealPrincipal;
 
   const factory ComboDealMaterialDetailEvent.loadMoreComboDealPrincipal({

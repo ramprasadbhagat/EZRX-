@@ -316,7 +316,6 @@ class _AdminAttachmentDateFilter extends StatelessWidget {
               ),
               lastDate: DateTime.now(),
               initialDateRange: state.adminPoAttachmentFilter.filterDateRange,
-              locale: context.read<EligibilityBloc>().state.salesOrg.locale,
             );
             if (dateRange == null) return;
             adminPoAttachmentFilterBloc.add(

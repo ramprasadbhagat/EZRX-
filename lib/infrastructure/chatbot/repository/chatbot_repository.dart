@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:universal_io/io.dart';
 
 class ChatBotRepository implements IChatBotRepository {
@@ -57,6 +58,7 @@ class ChatBotRepository implements IChatBotRepository {
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required Locale locale,
   }) async {
     try {
       final toDate = DateTime.now();
@@ -75,7 +77,7 @@ class ChatBotRepository implements IChatBotRepository {
         'market': salesOrganisation.salesOrg.country,
         'userRole': user.role.name,
         'salesorg': salesOrganisation.salesOrg.getOrCrash(),
-        'locale': user.preferredLanguage.toLanguageTag(),
+        'locale': locale.toLanguageTag(),
         'fromDate': fromDateStringValue,
         'toDate': toDateStringValue,
         'currency': salesOrganisationConfigs.currency.code,

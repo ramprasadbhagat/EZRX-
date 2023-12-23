@@ -1,12 +1,10 @@
-import 'dart:ui';
-
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/update_sales_org/sales_org_id.dart';
 import 'package:ezrxmobile/domain/account/entities/update_sales_org/update_sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
@@ -63,7 +61,7 @@ void main() {
       vatValue: 0,
       netPriceOverride: false,
       languageFilter: false,
-      languageValue: const Locale(ApiLanguageCode.english),
+      languageValue: Language.english(),
       materialWithoutPrice: false,
       enablePaymentTerms: false,
       enableMobileNumber: true,

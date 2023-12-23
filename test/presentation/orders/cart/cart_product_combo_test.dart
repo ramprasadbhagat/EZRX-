@@ -358,7 +358,6 @@ void main() {
           () => comboDealMaterialDetailBlocMock.add(
             ComboDealMaterialDetailEvent.fetchComboDealDetail(
               comboDeal: cartItem.comboDeal,
-              locale: const Locale('en'),
               parentMaterialNumber: MaterialNumber(
                 '',
               ),
@@ -418,7 +417,6 @@ void main() {
               principles: [''],
               comboMaterialsCurrentQuantity:
                   cartItem.comboMaterialsCurrentQuantity,
-              locale: const Locale('en'),
             ),
           ),
         ).called(1);

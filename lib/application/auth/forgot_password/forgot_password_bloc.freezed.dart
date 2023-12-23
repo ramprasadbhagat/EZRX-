@@ -20,21 +20,21 @@ mixin _$ForgotPasswordEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function(Locale local) requestPasswordReset,
+    required TResult Function(Language language) requestPasswordReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(Locale local)? requestPasswordReset,
+    TResult? Function(Language language)? requestPasswordReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function(Locale local)? requestPasswordReset,
+    TResult Function(Language language)? requestPasswordReset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,7 +120,7 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function(Locale local) requestPasswordReset,
+    required TResult Function(Language language) requestPasswordReset,
   }) {
     return initialized();
   }
@@ -130,7 +130,7 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(Locale local)? requestPasswordReset,
+    TResult? Function(Language language)? requestPasswordReset,
   }) {
     return initialized?.call();
   }
@@ -140,7 +140,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function(Locale local)? requestPasswordReset,
+    TResult Function(Language language)? requestPasswordReset,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -256,7 +256,7 @@ class _$_ForgotPasswordEvent implements _ForgotPasswordEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function(Locale local) requestPasswordReset,
+    required TResult Function(Language language) requestPasswordReset,
   }) {
     return usernameChanged(usernameStr);
   }
@@ -266,7 +266,7 @@ class _$_ForgotPasswordEvent implements _ForgotPasswordEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(Locale local)? requestPasswordReset,
+    TResult? Function(Language language)? requestPasswordReset,
   }) {
     return usernameChanged?.call(usernameStr);
   }
@@ -276,7 +276,7 @@ class _$_ForgotPasswordEvent implements _ForgotPasswordEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function(Locale local)? requestPasswordReset,
+    TResult Function(Language language)? requestPasswordReset,
     required TResult orElse(),
   }) {
     if (usernameChanged != null) {
@@ -336,7 +336,7 @@ abstract class _$$_RequestPasswordResetCopyWith<$Res> {
           $Res Function(_$_RequestPasswordReset) then) =
       __$$_RequestPasswordResetCopyWithImpl<$Res>;
   @useResult
-  $Res call({Locale local});
+  $Res call({Language language});
 }
 
 /// @nodoc
@@ -350,13 +350,13 @@ class __$$_RequestPasswordResetCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? local = null,
+    Object? language = null,
   }) {
     return _then(_$_RequestPasswordReset(
-      null == local
-          ? _value.local
-          : local // ignore: cast_nullable_to_non_nullable
-              as Locale,
+      null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as Language,
     ));
   }
 }
@@ -364,14 +364,14 @@ class __$$_RequestPasswordResetCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_RequestPasswordReset implements _RequestPasswordReset {
-  const _$_RequestPasswordReset(this.local);
+  const _$_RequestPasswordReset(this.language);
 
   @override
-  final Locale local;
+  final Language language;
 
   @override
   String toString() {
-    return 'ForgotPasswordEvent.requestPasswordReset(local: $local)';
+    return 'ForgotPasswordEvent.requestPasswordReset(language: $language)';
   }
 
   @override
@@ -379,11 +379,12 @@ class _$_RequestPasswordReset implements _RequestPasswordReset {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RequestPasswordReset &&
-            (identical(other.local, local) || other.local == local));
+            (identical(other.language, language) ||
+                other.language == language));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, local);
+  int get hashCode => Object.hash(runtimeType, language);
 
   @JsonKey(ignore: true)
   @override
@@ -397,9 +398,9 @@ class _$_RequestPasswordReset implements _RequestPasswordReset {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function(Locale local) requestPasswordReset,
+    required TResult Function(Language language) requestPasswordReset,
   }) {
-    return requestPasswordReset(local);
+    return requestPasswordReset(language);
   }
 
   @override
@@ -407,9 +408,9 @@ class _$_RequestPasswordReset implements _RequestPasswordReset {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(Locale local)? requestPasswordReset,
+    TResult? Function(Language language)? requestPasswordReset,
   }) {
-    return requestPasswordReset?.call(local);
+    return requestPasswordReset?.call(language);
   }
 
   @override
@@ -417,11 +418,11 @@ class _$_RequestPasswordReset implements _RequestPasswordReset {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function(Locale local)? requestPasswordReset,
+    TResult Function(Language language)? requestPasswordReset,
     required TResult orElse(),
   }) {
     if (requestPasswordReset != null) {
-      return requestPasswordReset(local);
+      return requestPasswordReset(language);
     }
     return orElse();
   }
@@ -462,10 +463,10 @@ class _$_RequestPasswordReset implements _RequestPasswordReset {
 }
 
 abstract class _RequestPasswordReset implements ForgotPasswordEvent {
-  const factory _RequestPasswordReset(final Locale local) =
+  const factory _RequestPasswordReset(final Language language) =
       _$_RequestPasswordReset;
 
-  Locale get local;
+  Language get language;
   @JsonKey(ignore: true)
   _$$_RequestPasswordResetCopyWith<_$_RequestPasswordReset> get copyWith =>
       throw _privateConstructorUsedError;

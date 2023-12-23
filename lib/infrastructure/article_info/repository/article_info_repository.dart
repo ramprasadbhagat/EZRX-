@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -25,6 +26,7 @@ class ArticleInfoRepository extends IArticleInfoRepository {
 
   @override
   Future<Either<ApiFailure, AnnouncementArticleInfo>> getArticles({
+    required User user,
     required SalesOrg salesOrg,
     required int pageSize,
     required String after,
@@ -56,7 +58,7 @@ class ArticleInfoRepository extends IArticleInfoRepository {
               template: config.articleTemplate,
               pageSize: pageSize,
               variablePath: salesOrg.articleVariablePath,
-              lang: salesOrg.locale.languageCode,
+              lang: user.preferredLanguage.locale.languageCode,
               after: after,
             );
 

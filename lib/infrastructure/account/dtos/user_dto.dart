@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -10,13 +8,11 @@ import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/access_right_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_expiry_notification_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
-import 'package:ezrxmobile/presentation/core/language_picker.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_dto.freezed.dart';
@@ -113,7 +109,7 @@ class UserDto with _$UserDto {
           .settings.paymentNotification.paymentAdviceExpiryNotificationList
           .map((e) => PaymentAdviceExpiryNotificationDto.fromDomain(e))
           .toList(),
-      preferredLanguage: user.preferredLanguage.languageString(),
+      preferredLanguage: user.preferredLanguage.languageCode,
       mobileNumber: user.mobileNumber.getOrDefaultValue(''),
       supportedLanguages: <String>[],
     );
@@ -160,7 +156,7 @@ class UserDto with _$UserDto {
       settings: Settings(
         emailNotifications: emailNotifications,
         mobileNotifications: mobileNotifications,
-        languagePreference: Locale(
+        languagePreference: Language(
           languagePreference,
         ),
         paymentNotification: PaymentNotification(
@@ -176,9 +172,9 @@ class UserDto with _$UserDto {
       disablePaymentAccess: disablePaymentAccess,
       disableReturns: disableReturns,
       hasPriceOverride: hasPriceOverride,
-      preferredLanguage: Locale(preferredLanguage),
+      preferredLanguage: Language(preferredLanguage),
       mobileNumber: MobileNumber(mobileNumber),
-      supportedLanguages: supportedLanguages.map((e) => Locale(e)).toList(),
+      supportedLanguages: supportedLanguages.map((e) => Language(e)).toList(),
     );
   }
 
@@ -251,7 +247,7 @@ List<SalesOrganisationDto> _splitSalesOrg(
 String handleEmptyLanguagePreference(Map json, String key) {
   final String languagePreference = json[key] ?? '';
   if (languagePreference.isEmpty) {
-    return ApiLanguageCode.english;
+    return Language.english().languageCode;
   }
 
   return languagePreference;
@@ -261,6 +257,6 @@ List<String> handleSupportedLanguages(Map json, String key) {
   final List supportedLanguages = json[key] ?? [];
 
   return supportedLanguages.isEmpty
-      ? [ApiLanguageCode.english]
+      ? [Language.english().languageCode]
       : supportedLanguages.map((e) => e['language'].toString()).toList();
 }

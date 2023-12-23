@@ -198,7 +198,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
   void _callApiForId(BuildContext context, CartState cartState) {
     if (cartState.salesOrganisation.salesOrg.isID) {
       context.read<CartBloc>().add(
-            CartEvent.updatePriceForIdMarket(locale: context.locale),
+            const CartEvent.updatePriceForIdMarket(),
           );
     }
   }

@@ -1,7 +1,5 @@
-import 'dart:ui';
-
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'update_sales_organisation_configs.freezed.dart';
@@ -22,7 +20,7 @@ class UpdateSalesOrganisationConfigs with _$UpdateSalesOrganisationConfigs {
     required bool languageFilter,
     required bool enableVat,
     required bool enableZDP5,
-    required Locale languageValue,
+    required Language languageValue,
     required bool materialWithoutPrice,
     required bool enableZDP8Override,
     required bool displayOrderDiscount,
@@ -71,7 +69,7 @@ class UpdateSalesOrganisationConfigs with _$UpdateSalesOrganisationConfigs {
         hideCustomer: false,
         enableGimmickMaterial: false,
         languageFilter: false,
-        languageValue: const Locale(ApiLanguageCode.english),
+        languageValue: Language.english(),
         disableOrderType: false,
         enableBatchNumber: false,
         disableBundles: false,

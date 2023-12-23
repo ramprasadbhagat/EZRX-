@@ -36,7 +36,6 @@ class _SuggestedProductTile extends StatelessWidget {
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialInfo: product,
-            locale: context.locale,
           ),
         );
     if (context.read<EligibilityBloc>().state.isZDP5eligible) {

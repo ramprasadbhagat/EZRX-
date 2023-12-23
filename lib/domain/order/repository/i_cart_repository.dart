@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
@@ -59,7 +60,7 @@ abstract class ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
     required int quantity,
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
@@ -71,7 +72,7 @@ abstract class ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
   });
@@ -82,7 +83,7 @@ abstract class ICartRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
   });
 
   Future<Either<ApiFailure, List<PriceAggregate>>> getAddedToCartProductList();
@@ -92,7 +93,7 @@ abstract class ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
     required List<MaterialInfo> products,
   });
 
@@ -102,7 +103,6 @@ abstract class ICartRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
   });
 
   Future<Either<ApiFailure, AplSimulatorOrder>> aplSimulateOrder({
@@ -125,7 +125,7 @@ abstract class ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
     required RequestCounterOfferDetails counterOfferDetails,
   });
 
@@ -137,6 +137,6 @@ abstract class ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
   });
 }

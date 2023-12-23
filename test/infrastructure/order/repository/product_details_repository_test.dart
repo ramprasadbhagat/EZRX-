@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -56,7 +56,7 @@ void main() {
   late List<MaterialStockInfo> fakeStockInfoList;
 
   final mockMaterialNumber = MaterialNumber('12345');
-  const mockLocale = Locale(ApiLanguageCode.english);
+  final mockLanguage = Language.english();
   final mockPrincipalCode = PrincipalCode('fake_principalCode');
   final mockMaterialInfoTypeBundle = MaterialInfoType.bundle();
   final mockMaterialInfoTypeMaterial = MaterialInfoType.material();
@@ -99,7 +99,7 @@ void main() {
         final result = await productDetailRepository.getProductDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           shipToInfo: fakeShipToInfo,
           type: mockMaterialInfoTypeMaterial,
@@ -116,7 +116,7 @@ void main() {
         when(
           () => productDetailRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             materialNumber: mockMaterialNumber.getOrCrash(),
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
@@ -126,7 +126,7 @@ void main() {
         final result = await productDetailRepository.getProductDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           shipToInfo: fakeShipToInfo,
           type: mockMaterialInfoTypeMaterial,
@@ -146,7 +146,7 @@ void main() {
         final result = await productDetailRepository.getProductDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           shipToInfo: fakeShipToInfo,
           type: mockMaterialInfoTypeMaterial,
@@ -163,7 +163,7 @@ void main() {
         when(
           () => productDetailRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             materialNumber: mockMaterialNumber.getOrCrash(),
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
@@ -173,7 +173,7 @@ void main() {
         final result = await productDetailRepository.getProductDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           shipToInfo: fakeShipToInfo,
           type: mockMaterialInfoTypeMaterial,
@@ -195,7 +195,7 @@ void main() {
         final result = await productDetailRepository.getProductDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           shipToInfo: fakeShipToInfo,
           type: mockMaterialInfoTypeBundle,
@@ -212,7 +212,7 @@ void main() {
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             code: mockMaterialNumber.getOrCrash(),
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
@@ -223,7 +223,7 @@ void main() {
         final result = await productDetailRepository.getProductDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           shipToInfo: fakeShipToInfo,
           type: mockMaterialInfoTypeBundle,
@@ -243,7 +243,7 @@ void main() {
         final result = await productDetailRepository.getProductDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           shipToInfo: fakeShipToInfo,
           type: mockMaterialInfoTypeBundle,
@@ -260,7 +260,7 @@ void main() {
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             code: mockMaterialNumber.getOrCrash(),
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
@@ -271,7 +271,7 @@ void main() {
         final result = await productDetailRepository.getProductDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           shipToInfo: fakeShipToInfo,
           type: mockMaterialInfoTypeBundle,
@@ -294,7 +294,7 @@ void main() {
         final result = await productDetailRepository.getProductListDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: [mockMaterialNumber],
           shipToInfo: fakeShipToInfo,
           types: [mockMaterialInfoTypeMaterial],
@@ -311,7 +311,7 @@ void main() {
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             code: mockMaterialNumber.getOrCrash(),
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
@@ -322,7 +322,7 @@ void main() {
         final result = await productDetailRepository.getProductListDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: [mockMaterialNumber],
           shipToInfo: fakeShipToInfo,
           types: [mockMaterialInfoTypeMaterial],
@@ -342,7 +342,7 @@ void main() {
         final result = await productDetailRepository.getProductListDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: [mockMaterialNumber],
           shipToInfo: fakeShipToInfo,
           types: [mockMaterialInfoTypeMaterial],
@@ -359,7 +359,7 @@ void main() {
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             code: mockMaterialNumber.getOrCrash(),
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
@@ -370,7 +370,7 @@ void main() {
         final result = await productDetailRepository.getProductListDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: [mockMaterialNumber],
           shipToInfo: fakeShipToInfo,
           types: [mockMaterialInfoTypeMaterial],
@@ -397,7 +397,7 @@ void main() {
         final result = await productDetailRepository.getBundleListDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           bundleCodes: [mockMaterialNumber],
           shipToInfo: fakeShipToInfo,
         );
@@ -413,7 +413,7 @@ void main() {
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             code: mockMaterialNumber.getOrCrash(),
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
@@ -424,7 +424,7 @@ void main() {
         final result = await productDetailRepository.getBundleListDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           bundleCodes: [mockMaterialNumber],
           shipToInfo: fakeShipToInfo,
         );
@@ -443,7 +443,7 @@ void main() {
         final result = await productDetailRepository.getBundleListDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           bundleCodes: [mockMaterialNumber],
           shipToInfo: fakeShipToInfo,
         );
@@ -459,7 +459,7 @@ void main() {
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             code: mockMaterialNumber.getOrCrash(),
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
@@ -470,7 +470,7 @@ void main() {
         final result = await productDetailRepository.getBundleListDetail(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           bundleCodes: [mockMaterialNumber],
           shipToInfo: fakeShipToInfo,
         );
@@ -653,7 +653,7 @@ void main() {
         final result = await productDetailRepository.getSimilarProduct(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           principalCode: mockPrincipalCode,
           shipToInfo: fakeShipToInfo,
@@ -674,7 +674,7 @@ void main() {
             materialNumber: mockMaterialNumber.getOrCrash(),
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             principalCode: mockPrincipalCode.getOrCrash(),
           ),
         ).thenAnswer((invocation) async => [fakeMaterialInfo]);
@@ -689,7 +689,7 @@ void main() {
         final result = await productDetailRepository.getSimilarProduct(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           principalCode: mockPrincipalCode,
           shipToInfo: fakeShipToInfo,
@@ -708,7 +708,7 @@ void main() {
             materialNumber: mockMaterialNumber.getOrCrash(),
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             principalCode: mockPrincipalCode.getOrCrash(),
           ),
         ).thenAnswer(
@@ -732,7 +732,7 @@ void main() {
         final result = await productDetailRepository.getSimilarProduct(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           principalCode: mockPrincipalCode,
           shipToInfo: fakeShipToInfo,
@@ -752,7 +752,7 @@ void main() {
         final result = await productDetailRepository.getSimilarProduct(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           principalCode: mockPrincipalCode,
           shipToInfo: fakeShipToInfo,
@@ -772,7 +772,7 @@ void main() {
             materialNumber: mockMaterialNumber.getOrCrash(),
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
-            language: mockLocale.languageCode,
+            language: mockLanguage.languageCode,
             principalCode: mockPrincipalCode.getOrCrash(),
           ),
         ).thenThrow((invocation) async => MockException());
@@ -787,7 +787,7 @@ void main() {
         final result = await productDetailRepository.getSimilarProduct(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          locale: mockLocale,
+          language: mockLanguage,
           materialNumber: mockMaterialNumber,
           principalCode: mockPrincipalCode,
           shipToInfo: fakeShipToInfo,

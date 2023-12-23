@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
@@ -10,6 +9,7 @@ import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
@@ -147,7 +147,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Either<ApiFailure, UpdateLanguageResponse>> updateLanguage({
-    required Locale language,
+    required Language language,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {

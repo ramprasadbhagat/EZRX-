@@ -17,7 +17,7 @@ class _ForgotPasswordButton extends StatelessWidget {
                   FocusScope.of(context).unfocus();
                   context.read<ForgotPasswordBloc>().add(
                         ForgotPasswordEvent.requestPasswordReset(
-                          context.locale,
+                          Language.english(),
                         ),
                       );
                 },

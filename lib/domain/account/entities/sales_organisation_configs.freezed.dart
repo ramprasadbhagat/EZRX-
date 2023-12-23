@@ -23,7 +23,7 @@ mixin _$SalesOrganisationConfigs {
   bool get hideCustomer => throw _privateConstructorUsedError;
   bool get enableGimmickMaterial => throw _privateConstructorUsedError;
   bool get languageFilter => throw _privateConstructorUsedError;
-  Locale get languageValue => throw _privateConstructorUsedError;
+  Language get languageValue => throw _privateConstructorUsedError;
   bool get disablePrincipals => throw _privateConstructorUsedError;
   List<SalesOrganisationConfigsPrincipal> get principalList =>
       throw _privateConstructorUsedError;
@@ -102,7 +102,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool hideCustomer,
       bool enableGimmickMaterial,
       bool languageFilter,
-      Locale languageValue,
+      Language languageValue,
       bool disablePrincipals,
       List<SalesOrganisationConfigsPrincipal> principalList,
       bool disableOrderType,
@@ -270,7 +270,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
       languageValue: null == languageValue
           ? _value.languageValue
           : languageValue // ignore: cast_nullable_to_non_nullable
-              as Locale,
+              as Language,
       disablePrincipals: null == disablePrincipals
           ? _value.disablePrincipals
           : disablePrincipals // ignore: cast_nullable_to_non_nullable
@@ -512,7 +512,7 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool hideCustomer,
       bool enableGimmickMaterial,
       bool languageFilter,
-      Locale languageValue,
+      Language languageValue,
       bool disablePrincipals,
       List<SalesOrganisationConfigsPrincipal> principalList,
       bool disableOrderType,
@@ -678,7 +678,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
       languageValue: null == languageValue
           ? _value.languageValue
           : languageValue // ignore: cast_nullable_to_non_nullable
-              as Locale,
+              as Language,
       disablePrincipals: null == disablePrincipals
           ? _value.disablePrincipals
           : disablePrincipals // ignore: cast_nullable_to_non_nullable
@@ -988,7 +988,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   final bool languageFilter;
   @override
-  final Locale languageValue;
+  final Language languageValue;
   @override
   final bool disablePrincipals;
   final List<SalesOrganisationConfigsPrincipal> _principalList;
@@ -1295,7 +1295,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
           required final bool hideCustomer,
           required final bool enableGimmickMaterial,
           required final bool languageFilter,
-          required final Locale languageValue,
+          required final Language languageValue,
           required final bool disablePrincipals,
           required final List<SalesOrganisationConfigsPrincipal> principalList,
           required final bool disableOrderType,
@@ -1369,7 +1369,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   @override
   bool get languageFilter;
   @override
-  Locale get languageValue;
+  Language get languageValue;
   @override
   bool get disablePrincipals;
   @override

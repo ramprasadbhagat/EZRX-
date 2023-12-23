@@ -98,21 +98,11 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
                       ),
                       controller: _scrollController,
                       onRefresh: () => context.read<AnnouncementInfoBloc>().add(
-                            AnnouncementInfoEvent.fetch(
-                              salesOrg: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .salesOrg,
-                            ),
+                            const AnnouncementInfoEvent.fetch(),
                           ),
                       onLoadingMore: () =>
                           context.read<AnnouncementInfoBloc>().add(
-                                AnnouncementInfoEvent.loadMore(
-                                  salesOrg: context
-                                      .read<EligibilityBloc>()
-                                      .state
-                                      .salesOrg,
-                                ),
+                                const AnnouncementInfoEvent.loadMore(),
                               ),
                       isLoading: state.isLoading,
                       itemBuilder: (context, index, item) => GestureDetector(

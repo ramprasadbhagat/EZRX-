@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_info_details.dart';
@@ -32,6 +33,8 @@ void main() {
   late AnnouncementInfoLocalDataSource localDataSource;
   late AnnouncementInfoRepository repository;
 
+  final fakeUser = User.empty();
+
   const pageSize = 24;
 
   setUpAll(() {
@@ -56,6 +59,7 @@ void main() {
       ).thenAnswer((invocation) async => AnnouncementArticleInfo.empty());
 
       final result = await repository.getAnnouncement(
+        user: fakeUser,
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',
@@ -75,6 +79,7 @@ void main() {
       );
 
       final result = await repository.getAnnouncement(
+        user: fakeUser,
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',
@@ -93,7 +98,7 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.announcementVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
-      when(() => mockSalesOrg.locale).thenReturn((const Locale('EN')));
+      when(() => fakeUser.preferredLanguage.locale).thenReturn((const Locale('EN')));
 
       when(
         () => remoteDataSource.getAnnouncementInfo(
@@ -106,6 +111,7 @@ void main() {
         ),
       ).thenAnswer((invocation) async => AnnouncementArticleInfo.empty());
       final result = await repository.getAnnouncement(
+        user:fakeUser,
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',
@@ -131,6 +137,7 @@ void main() {
         (invocation) async => Exception('fake-error'),
       );
       final result = await repository.getAnnouncement(
+        user:fakeUser,
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',
@@ -186,7 +193,7 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.announcementVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
-      when(() => mockSalesOrg.locale).thenReturn((const Locale('EN')));
+      when(() => fakeUser.preferredLanguage.locale).thenReturn((const Locale('EN')));
       when(() => mockSalesOrg.announcementLocale)
           .thenReturn((const Locale('EN')));
       when(() => mockAnnouncementArticleInfo.announcementList).thenReturn(

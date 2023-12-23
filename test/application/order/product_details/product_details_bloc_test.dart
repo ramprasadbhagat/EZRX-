@@ -1,25 +1,25 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class ProductDetailRepositoryMock extends Mock
     implements ProductDetailRepository {}
@@ -40,7 +40,7 @@ void main() {
   late MaterialResponse fakeMaterialInfoList;
   late MaterialInfo fakeMaterialInfo;
   late MaterialInfo fakeMaterialInfoWithBundleMaterial;
-  const locale = Locale('en');
+  final language = Language.english();
 
   final materialInfoType = MaterialInfoType('material');
   final bundleInfoType = MaterialInfoType('bundle');
@@ -114,6 +114,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeUserWithLanguageCode,
           ),
         ),
         expect: () => [
@@ -121,6 +122,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeUserWithLanguageCode,
           ),
         ],
       );
@@ -137,7 +139,7 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-              locale: locale,
+              language: language,
               materialNumber: mockMaterialInfo.materialNumber,
               type: materialInfoType,
             ),
@@ -170,14 +172,13 @@ void main() {
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               materialNumber: mockMaterialInfo.materialNumber,
               principalCode: mockMaterialInfo.principalData.principalCode,
-              locale: locale,
+              language: language,
             ),
           ).thenAnswer((invocation) async => Right(mockSimilarProducts));
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetch(
-              locale: locale,
               materialInfo: mockMaterialInfo.copyWith(
                 type: materialInfoType,
               ),
@@ -252,7 +253,7 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-              locale: locale,
+              language: language,
               materialNumber: mockMaterialInfo.materialNumber,
               type: bundleInfoType,
             ),
@@ -281,7 +282,6 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetch(
-              locale: locale,
               materialInfo: mockMaterialInfo.copyWith(
                 type: bundleInfoType,
               ),
@@ -349,7 +349,7 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-              locale: locale,
+              language: language,
               materialNumber: mockMaterialInfo.materialNumber,
               type: materialInfoType,
             ),
@@ -360,7 +360,6 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetch(
-              locale: locale,
               materialInfo: mockMaterialInfo.copyWith(
                 type: materialInfoType,
               ),
@@ -400,7 +399,6 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetchStock(
-              locale: locale,
               materialNumber: mockMaterialInfo.materialNumber,
             ),
           );
@@ -447,7 +445,6 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetchStockForBundle(
-              locale: locale,
               materials: fakeMaterialInfoWithBundleMaterial.bundle.materials,
             ),
           );
@@ -496,7 +493,6 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetchStockForBundle(
-              locale: locale,
               materials: mockMaterialInfo.bundle.materials,
             ),
           );
@@ -543,9 +539,7 @@ void main() {
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
-            ProductDetailEvent.fetchMetaData(
-              locale: locale,
-            ),
+            ProductDetailEvent.fetchMetaData(),
           );
         },
         seed: () => mockInitialState.copyWith(
@@ -587,7 +581,7 @@ void main() {
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               materialNumber: mockMaterialInfo.materialNumber,
               principalCode: mockMaterialInfo.principalData.principalCode,
-              locale: locale,
+              language: language,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -595,9 +589,7 @@ void main() {
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
-            ProductDetailEvent.fetchSimilarProduct(
-              locale: locale,
-            ),
+            ProductDetailEvent.fetchSimilarProduct(),
           );
         },
         seed: () => mockInitialState.copyWith(
@@ -1105,7 +1097,7 @@ void main() {
       );
 
       blocTest<ProductDetailBloc, ProductDetailState>(
-        'Set Exeeded Qty',
+        'Set Exceeded Qty',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,

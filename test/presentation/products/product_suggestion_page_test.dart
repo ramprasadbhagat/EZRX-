@@ -188,7 +188,6 @@ void main() {
         verify(
           () => productDetailBloc.add(
             ProductDetailEvent.fetch(
-              locale: const Locale('en'),
               materialInfo: MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('fake-material-number'),
                 type: MaterialInfoType('material'),
@@ -245,7 +244,6 @@ void main() {
           verify(
             () => productDetailBloc.add(
               ProductDetailEvent.fetch(
-                locale: const Locale('en'),
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material-number'),
                   type: MaterialInfoType('bundle'),

@@ -1,12 +1,12 @@
+import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/forgot_password_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class ConfigMock extends Mock implements Config {}
 
@@ -24,7 +24,7 @@ void main() {
 
   final fakeUserName = Username('fake-user-name');
   final fakeError = Exception('fake-error');
-  const fakeLocale = Locale('fr', 'CH');
+  final fakeLanguage = Language.english();
 
   setUpAll(
     () {
@@ -53,7 +53,7 @@ void main() {
 
           final result = await repository.requestResetPassword(
             username: fakeUserName,
-            locale: fakeLocale,
+            language: fakeLanguage,
           );
           expect(result.isRight(), true);
         },
@@ -69,7 +69,7 @@ void main() {
 
           final result = await repository.requestResetPassword(
             username: fakeUserName,
-            locale: fakeLocale,
+            language: fakeLanguage,
           );
           expect(result.isLeft(), true);
         },
@@ -83,7 +83,7 @@ void main() {
           when(
             () => remoteDataSourceMock.requestResetPassword(
               username: fakeUserName.getOrCrash(),
-              language: fakeLocale.languageCode,
+              language: fakeLanguage.languageCode,
             ),
           ).thenAnswer(
             (invocation) async => ForgotPassword.empty().copyWith(
@@ -93,7 +93,7 @@ void main() {
 
           final result = await repository.requestResetPassword(
             username: fakeUserName,
-            locale: fakeLocale,
+            language: fakeLanguage,
           );
           expect(result.isRight(), true);
         },
@@ -107,7 +107,7 @@ void main() {
           when(
             () => remoteDataSourceMock.requestResetPassword(
               username: fakeUserName.getOrCrash(),
-              language: fakeLocale.languageCode,
+              language: fakeLanguage.languageCode,
             ),
           ).thenAnswer(
             (invocation) async => ForgotPassword.empty().copyWith(
@@ -117,7 +117,7 @@ void main() {
 
           final result = await repository.requestResetPassword(
             username: fakeUserName,
-            locale: fakeLocale,
+            language: fakeLanguage,
           );
           expect(result.isLeft(), true);
         },
@@ -131,13 +131,13 @@ void main() {
           when(
             () => remoteDataSourceMock.requestResetPassword(
               username: fakeUserName.getOrCrash(),
-              language: fakeLocale.languageCode,
+              language: fakeLanguage.languageCode,
             ),
           ).thenThrow((invocation) => fakeError);
 
           final result = await repository.requestResetPassword(
             username: fakeUserName,
-            locale: fakeLocale,
+            language: fakeLanguage,
           );
           expect(result.isLeft(), true);
         },

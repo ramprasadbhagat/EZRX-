@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/contact_us/entities/contact_us_details.dart';
 import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_local.dart';
 import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_remote.dart';
@@ -22,6 +23,8 @@ void main() {
   late ContactUsDetailsRemoteDataSource remoteDataSource;
   late ContactUsDetailsLocalDataSource localDataSource;
   late ContactUsDetailsRepository repository;
+
+  final fakeUser = User.empty();
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -72,7 +75,7 @@ void main() {
       when(
         () => remoteDataSource.getContactUsDetails(
           announcementUrlPath: '/api/announcement',
-          lang: fakeMYSalesOrg.locale.languageCode,
+          lang: fakeUser.preferredLanguage.locale.languageCode,
           contactUsId: fakeMYSalesOrg.contactUsItemId,
         ),
       ).thenAnswer((invocation) async => ContactUsDetails.empty());
@@ -91,7 +94,7 @@ void main() {
       when(
         () => remoteDataSource.getContactUsDetails(
           announcementUrlPath: '/api/announcement',
-          lang: fakeMYSalesOrg.locale.languageCode,
+          lang: fakeUser.preferredLanguage.locale.languageCode,
           contactUsId: fakeMYSalesOrg.contactUsItemId,
         ),
       ).thenThrow(

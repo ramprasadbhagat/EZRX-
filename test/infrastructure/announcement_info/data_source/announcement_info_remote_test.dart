@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_info_details.dart';
@@ -27,6 +28,8 @@ class AnnouncementArticleInfoDetailsMock extends Mock
 void main() {
   late AnnouncementInfoRemoteDataSource remoteDataSource;
   late Config config;
+  final fakeUser = User.empty();
+
 
   final dio = Dio(
     BaseOptions(
@@ -51,7 +54,7 @@ void main() {
       'pageSize': config.pageSize,
       'template': config.announcementTemplate,
       'path': config.announcementApiUrlPath,
-      'lang': salesOrg.locale.languageCode,
+      'lang': fakeUser.preferredLanguage.locale.languageCode,
       'after': '',
     };
     test('Get Announcement Info ', () async {
@@ -82,7 +85,7 @@ void main() {
         template: config.announcementTemplate,
         pageSize: config.pageSize,
         after: '',
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
       );
 
       expect(
@@ -112,7 +115,7 @@ void main() {
         template: config.announcementTemplate,
         pageSize: config.pageSize,
         after: '',
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -149,7 +152,7 @@ void main() {
         template: config.announcementTemplate,
         pageSize: config.pageSize,
         after: '',
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -182,7 +185,7 @@ void main() {
         template: config.announcementTemplate,
         pageSize: config.pageSize,
         after: '',
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
       )
           .onError((error, _) async {
         expect(error, isA<OtherException>());
@@ -194,7 +197,7 @@ void main() {
   group('Announcement Info Details remote data source test', () {
     final variables = {
       'itemId': 'fake_id',
-      'lang': salesOrg.locale.languageCode,
+      'lang': fakeUser.preferredLanguage.locale.languageCode,
     };
     test('Get Announcement Info Details', () async {
       final infoRes = json.decode(
@@ -221,7 +224,7 @@ void main() {
 
       final result = await remoteDataSource.getAnnouncementInfoDetails(
         announcementUrlPath: config.announcementApiUrlPath,
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
         announcementId: 'fake_id',
       );
 
@@ -249,7 +252,7 @@ void main() {
       await remoteDataSource
           .getAnnouncementInfoDetails(
         announcementUrlPath: config.announcementApiUrlPath,
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
         announcementId: 'fake_id',
       )
           .onError((error, _) async {
@@ -284,7 +287,7 @@ void main() {
       await remoteDataSource
           .getAnnouncementInfoDetails(
         announcementUrlPath: config.announcementApiUrlPath,
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
         announcementId: 'fake_id',
       )
           .onError((error, _) async {
@@ -315,7 +318,7 @@ void main() {
       await remoteDataSource
           .getAnnouncementInfoDetails(
         announcementUrlPath: config.announcementApiUrlPath,
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
         announcementId: 'fake_id',
       )
           .onError((error, _) async {

@@ -94,7 +94,6 @@ class CartProductCombo extends StatelessWidget {
                           comboDealDetailBloc.add(
                             ComboDealMaterialDetailEvent.fetchComboDealDetail(
                               comboDeal: comboDeal,
-                              locale: context.locale,
                               parentMaterialNumber: MaterialNumber(
                                 cartItem.comboMaterials.firstOrNull?.parentId ??
                                     '',
@@ -116,7 +115,6 @@ class CartProductCombo extends StatelessWidget {
                               principles: [principalCode],
                               comboMaterialsCurrentQuantity:
                                   cartItem.comboMaterialsCurrentQuantity,
-                              locale: context.locale,
                             ),
                           );
                         }

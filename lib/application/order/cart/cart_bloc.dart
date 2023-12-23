@@ -23,7 +23,6 @@ import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -124,7 +123,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           shipToInfo: state.shipToInfo,
           materialInfo: e.bonusMaterial,
           quantity: e.bonusMaterial.quantity.intValue,
-          language: state.user.settings.languagePreference.languageCode,
+          language: state.user.settings.languagePreference,
           counterOfferDetails: e.counterOfferDetails,
           itemId: e.bonusItemId.getValue(),
         );
@@ -199,7 +198,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisationConfig: state.config,
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
-          language: state.config.languageValue.languageCode,
+          language: state.config.languageValue,
           products: state.invalidSampleBonusList,
         );
 
@@ -367,7 +366,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisationConfig: state.config,
           shipToInfo: state.shipToInfo,
           product: e.priceAggregate,
-          language: state.config.getConfigLanguageDefaultEnglish,
+          language: state.user.preferredLanguage,
           counterOfferDetails:
               e.priceAggregate.materialInfo.counterOfferDetails.copyWith(
             counterOfferCurrency: state.config.currency,
@@ -441,7 +440,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               quantity: MaterialQty(e.quantity.intValue + currentQtyInCart),
             );
           }).toList(),
-          language: state.user.settings.languagePreference.languageCode,
+          language: state.user.settings.languagePreference,
           counterOfferDetails: e.counterOfferDetails,
           itemId: '',
         );
@@ -616,7 +615,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             salesOrganisationConfig: state.config,
             customerCodeInfo: state.customerCodeInfo,
             shipToInfo: state.shipToInfo,
-            language: state.config.languageValue.languageCode,
+            language: state.config.languageValue,
             products: [
               ...state.productsWithCounterOfferPrice,
               ...state.productsWithCounterOfferDiscount,
@@ -791,7 +790,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisationConfig: state.config,
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
-          language: state.config.languageValue.languageCode,
+          language: state.config.languageValue,
           products: e.invalidCartItems,
         );
 
@@ -835,7 +834,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisation: state.salesOrganisation,
           shipToInfo: state.shipToInfo,
           products: e.priceAggregates,
-          language: state.config.getConfigLanguageDefaultEnglish,
         );
 
         failureOrSuccess.fold(
@@ -943,7 +941,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             if (productDeterminationEligible) {
               add(
                 CartEvent.updateProductDetermination(
-                  locale: e.locale,
                   productDeterminationList: productDeterminationList,
                   updatedCartItems: updatedCartItems,
                 ),
@@ -967,7 +964,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisation: state.salesOrganisation,
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
-          locale: e.locale,
+          language: state.user.preferredLanguage,
           types: e.productDeterminationList
               .map((e) => MaterialInfoType.material())
               .toList(),
@@ -1006,7 +1003,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               salesOrganisationConfig: state.config,
               customerCodeInfo: state.customerCodeInfo,
               shipToInfo: state.shipToInfo,
-              language: state.user.settings.languagePreference.languageCode,
+              language: state.user.preferredLanguage,
             );
 
             reorderFailureOrSuccess.fold(

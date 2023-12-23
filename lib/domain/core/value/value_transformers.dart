@@ -696,3 +696,25 @@ String getStatusText(String apiStatus) {
 }
 
 String getUpperCaseValue(String value) => value.toUpperCase();
+
+String getLanguageString(String apiLanguageCode) {
+  final languageString = {
+    'TH': 'ภาษาไทย',
+    'ZH': '繁體中文',
+    'MY': 'ဗမာဘာသာစကား',
+    'VI': 'Tiếng Việt',
+    'KM': 'ភាសាខ្មែរ',
+    'ID': 'Indonesia',
+  };
+
+  return languageString[apiLanguageCode] ?? 'English';
+}
+
+String toSupportedLanguage(String value) {
+  final supportedLanguageList = ['TH', 'ZH', 'MY', 'VI', 'ID', 'KM'];
+
+  return supportedLanguageList.contains(value) ? value : 'EN';
+}
+
+Locale toLocale(String apiLanguageCode) =>
+    Locale(apiLanguageCode.toLowerCase());

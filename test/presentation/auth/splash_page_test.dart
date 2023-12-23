@@ -73,6 +73,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -392,7 +393,7 @@ void main() {
       description: 'fake-description',
     ),
     settings: Settings.empty().copyWith(
-      languagePreference: const Locale('zh'),
+      languagePreference: Language.mandarin(),
     ),
   );
 

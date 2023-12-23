@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -8,7 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
@@ -38,7 +36,7 @@ void main() {
   final orderHistoryDetailsMockList = OrderHistoryDetails.empty();
 
   final mockUser = User.empty().copyWith(
-    preferredLanguage: const Locale(ApiLanguageCode.english),
+    preferredLanguage: Language.english(),
   );
 
   final mockOrderHistoryItem = OrderHistoryDetails.empty();

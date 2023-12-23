@@ -47,7 +47,7 @@ class PaymentTermsRepository implements IPaymentTermsRepository {
         salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
         soldToCustomerCode: customerCodeInfo.customerCodeSoldTo,
         basePaymentTermCode: paymentCustomerInfo.paymentTerm,
-        language: salesOrgConfig.getConfigLanguageDefaultEnglish,
+        language: salesOrgConfig.getConfigLanguageDefaultEnglish.languageCode,
         principalCode: salesRepInfo.uniquePrincipalNumber,
       );
 

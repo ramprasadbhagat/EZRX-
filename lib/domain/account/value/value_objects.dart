@@ -118,7 +118,6 @@ class SalesOrg extends ValueObject<String> {
 
   int get countWhenValid => isValid() ? 1 : 0;
 
-  Locale get locale => Locale(languageCode, country);
   Locale get announcementLocale =>
       Locale(languageCodeForHelpAndSupport, country);
 

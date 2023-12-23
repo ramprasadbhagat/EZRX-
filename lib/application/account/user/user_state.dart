@@ -8,16 +8,14 @@ class UserState with _$UserState {
     required User user,
     required bool isLoginOnBehalf,
     required Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption,
-    required Locale activeLanguage,
+    required Language activeLanguage,
   }) = _UserState;
 
   factory UserState.initial() => UserState(
         user: User.empty(),
         isLoginOnBehalf: false,
         userFailureOrSuccessOption: none(),
-        activeLanguage: const Locale(
-          ApiLanguageCode.english,
-        ),
+        activeLanguage: Language.english(),
       );
 
   bool get haveSalesOrganisation => user.userSalesOrganisations.isNotEmpty;
@@ -27,7 +25,6 @@ class UserState with _$UserState {
   FullName get userFullName => user.fullName;
   bool get userCanLoginOnBehalf => user.role.type.canLoginOnBehalf;
   bool get userHasReturnsAdminAccess => user.role.type.hasReturnsAdminAccess;
-  Locale get languagePreference => user.settings.languagePreference;
   bool get emailNotifications => user.settings.emailNotifications;
   List<SalesOrganisation> get userSalesOrganisations =>
       user.userSalesOrganisations;

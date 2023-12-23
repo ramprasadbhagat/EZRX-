@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:dartz/dartz.dart';
@@ -21,6 +22,7 @@ class AnnouncementInfoRepository extends IAnnouncementInfoRepository {
   });
   @override
   Future<Either<ApiFailure, AnnouncementArticleInfo>> getAnnouncement({
+    required User user,
     required SalesOrg salesOrg,
     required int pageSize,
     required String after,
@@ -40,7 +42,7 @@ class AnnouncementInfoRepository extends IAnnouncementInfoRepository {
         template: config.announcementTemplate,
         pageSize: pageSize,
         variablePath: salesOrg.announcementVariablePath,
-        lang: salesOrg.locale.languageCode,
+        lang: user.preferredLanguage.locale.languageCode,
         after: after,
       );
 

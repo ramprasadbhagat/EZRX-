@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ArticlesInfoEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user, SalesOrg salesOrg, ShipToInfo shipToInfo)
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
@@ -27,7 +28,8 @@ mixin _$ArticlesInfoEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
@@ -35,7 +37,8 @@ mixin _$ArticlesInfoEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
@@ -93,8 +96,9 @@ abstract class _$$_InitializeCopyWith<$Res> {
           _$_Initialize value, $Res Function(_$_Initialize) then) =
       __$$_InitializeCopyWithImpl<$Res>;
   @useResult
-  $Res call({SalesOrg salesOrg, ShipToInfo shipToInfo});
+  $Res call({User user, SalesOrg salesOrg, ShipToInfo shipToInfo});
 
+  $UserCopyWith<$Res> get user;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
@@ -109,10 +113,15 @@ class __$$_InitializeCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? salesOrg = null,
     Object? shipToInfo = null,
   }) {
     return _then(_$_Initialize(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -122,6 +131,14 @@ class __$$_InitializeCopyWithImpl<$Res>
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
   }
 
   @override
@@ -136,8 +153,11 @@ class __$$_InitializeCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initialize implements _Initialize {
-  const _$_Initialize({required this.salesOrg, required this.shipToInfo});
+  const _$_Initialize(
+      {required this.user, required this.salesOrg, required this.shipToInfo});
 
+  @override
+  final User user;
   @override
   final SalesOrg salesOrg;
   @override
@@ -145,7 +165,7 @@ class _$_Initialize implements _Initialize {
 
   @override
   String toString() {
-    return 'ArticlesInfoEvent.initialize(salesOrg: $salesOrg, shipToInfo: $shipToInfo)';
+    return 'ArticlesInfoEvent.initialize(user: $user, salesOrg: $salesOrg, shipToInfo: $shipToInfo)';
   }
 
   @override
@@ -153,6 +173,7 @@ class _$_Initialize implements _Initialize {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initialize &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.shipToInfo, shipToInfo) ||
@@ -160,7 +181,7 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg, shipToInfo);
+  int get hashCode => Object.hash(runtimeType, user, salesOrg, shipToInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -171,37 +192,40 @@ class _$_Initialize implements _Initialize {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user, SalesOrg salesOrg, ShipToInfo shipToInfo)
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
     required TResult Function(String searchKey) setSearchKey,
   }) {
-    return initialize(salesOrg, shipToInfo);
+    return initialize(user, salesOrg, shipToInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
   }) {
-    return initialize?.call(salesOrg, shipToInfo);
+    return initialize?.call(user, salesOrg, shipToInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
     required TResult orElse(),
   }) {
     if (initialize != null) {
-      return initialize(salesOrg, shipToInfo);
+      return initialize(user, salesOrg, shipToInfo);
     }
     return orElse();
   }
@@ -246,9 +270,11 @@ class _$_Initialize implements _Initialize {
 
 abstract class _Initialize implements ArticlesInfoEvent {
   const factory _Initialize(
-      {required final SalesOrg salesOrg,
+      {required final User user,
+      required final SalesOrg salesOrg,
       required final ShipToInfo shipToInfo}) = _$_Initialize;
 
+  User get user;
   SalesOrg get salesOrg;
   ShipToInfo get shipToInfo;
   @JsonKey(ignore: true)
@@ -294,7 +320,8 @@ class _$_GetArticles implements _GetArticles {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user, SalesOrg salesOrg, ShipToInfo shipToInfo)
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
@@ -306,7 +333,8 @@ class _$_GetArticles implements _GetArticles {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
@@ -317,7 +345,8 @@ class _$_GetArticles implements _GetArticles {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
@@ -409,7 +438,8 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user, SalesOrg salesOrg, ShipToInfo shipToInfo)
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
@@ -421,7 +451,8 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
@@ -432,7 +463,8 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
@@ -551,7 +583,8 @@ class _$_SetSearchKey implements _SetSearchKey {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user, SalesOrg salesOrg, ShipToInfo shipToInfo)
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
@@ -563,7 +596,8 @@ class _$_SetSearchKey implements _SetSearchKey {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
@@ -574,7 +608,8 @@ class _$_SetSearchKey implements _SetSearchKey {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, ShipToInfo shipToInfo)? initialize,
+    TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
@@ -636,6 +671,7 @@ abstract class _SetSearchKey implements ArticlesInfoEvent {
 
 /// @nodoc
 mixin _$ArticlesInfoState {
+  User get user => throw _privateConstructorUsedError;
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   AnnouncementArticleInfo get articleInfo => throw _privateConstructorUsedError;
@@ -657,7 +693,8 @@ abstract class $ArticlesInfoStateCopyWith<$Res> {
       _$ArticlesInfoStateCopyWithImpl<$Res, ArticlesInfoState>;
   @useResult
   $Res call(
-      {SalesOrg salesOrg,
+      {User user,
+      SalesOrg salesOrg,
       ShipToInfo shipToInfo,
       AnnouncementArticleInfo articleInfo,
       bool isFetching,
@@ -665,6 +702,7 @@ abstract class $ArticlesInfoStateCopyWith<$Res> {
       SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
+  $UserCopyWith<$Res> get user;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $AnnouncementArticleInfoCopyWith<$Res> get articleInfo;
 }
@@ -682,6 +720,7 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? salesOrg = null,
     Object? shipToInfo = null,
     Object? articleInfo = null,
@@ -691,6 +730,10 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -724,6 +767,14 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
 
   @override
   @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get shipToInfo {
     return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
       return _then(_value.copyWith(shipToInfo: value) as $Val);
@@ -748,7 +799,8 @@ abstract class _$$_ArticlesInfoStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {SalesOrg salesOrg,
+      {User user,
+      SalesOrg salesOrg,
       ShipToInfo shipToInfo,
       AnnouncementArticleInfo articleInfo,
       bool isFetching,
@@ -756,6 +808,8 @@ abstract class _$$_ArticlesInfoStateCopyWith<$Res>
       SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
+  @override
+  $UserCopyWith<$Res> get user;
   @override
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   @override
@@ -773,6 +827,7 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? salesOrg = null,
     Object? shipToInfo = null,
     Object? articleInfo = null,
@@ -782,6 +837,10 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_ArticlesInfoState(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -818,7 +877,8 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
 
 class _$_ArticlesInfoState extends _ArticlesInfoState {
   const _$_ArticlesInfoState(
-      {required this.salesOrg,
+      {required this.user,
+      required this.salesOrg,
       required this.shipToInfo,
       required this.articleInfo,
       required this.isFetching,
@@ -827,6 +887,8 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
       required this.apiFailureOrSuccessOption})
       : super._();
 
+  @override
+  final User user;
   @override
   final SalesOrg salesOrg;
   @override
@@ -844,7 +906,7 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
 
   @override
   String toString() {
-    return 'ArticlesInfoState(salesOrg: $salesOrg, shipToInfo: $shipToInfo, articleInfo: $articleInfo, isFetching: $isFetching, canLoadMore: $canLoadMore, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'ArticlesInfoState(user: $user, salesOrg: $salesOrg, shipToInfo: $shipToInfo, articleInfo: $articleInfo, isFetching: $isFetching, canLoadMore: $canLoadMore, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -852,6 +914,7 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ArticlesInfoState &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.shipToInfo, shipToInfo) ||
@@ -872,6 +935,7 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      user,
       salesOrg,
       shipToInfo,
       articleInfo,
@@ -890,7 +954,8 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
 
 abstract class _ArticlesInfoState extends ArticlesInfoState {
   const factory _ArticlesInfoState(
-      {required final SalesOrg salesOrg,
+      {required final User user,
+      required final SalesOrg salesOrg,
       required final ShipToInfo shipToInfo,
       required final AnnouncementArticleInfo articleInfo,
       required final bool isFetching,
@@ -900,6 +965,8 @@ abstract class _ArticlesInfoState extends ArticlesInfoState {
           apiFailureOrSuccessOption}) = _$_ArticlesInfoState;
   const _ArticlesInfoState._() : super._();
 
+  @override
+  User get user;
   @override
   SalesOrg get salesOrg;
   @override

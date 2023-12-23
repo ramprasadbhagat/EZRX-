@@ -1,22 +1,22 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -117,7 +117,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
-          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
         );
         expect(
           result.isLeft(),
@@ -139,7 +139,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
-          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
         );
         expect(
           result.isRight(),
@@ -154,7 +154,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSGSalesOrganisation,
             shipToInfo: fakeShipToInfo,
-            locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+            language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
             materials: [fakeBundle],
           ),
         ).thenThrow((invocation) async => MockException());
@@ -163,7 +163,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSGSalesOrganisation,
           shipToInfo: fakeShipToInfo,
-          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
           materials: [fakeBundle],
         );
         expect(
@@ -215,7 +215,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
-          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
         );
         expect(
           result.isLeft(),
@@ -270,7 +270,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilterWithComboOffers,
           shipToInfo: fakeShipToInfo,
-          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
         );
         expect(
           result.isRight(),
@@ -537,7 +537,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           material: fakeMatchMaterialInfo,
           shipToInfo: fakeShipToInfo,
-          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
           type: '',
         );
         expect(
@@ -557,7 +557,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           material: fakeMatchMaterialInfo,
           shipToInfo: fakeShipToInfo,
-          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
           type: '',
         );
         expect(
@@ -585,7 +585,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           material: fakeMatchMaterialInfo,
           shipToInfo: fakeShipToInfo,
-          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
           type: '',
         );
         expect(
@@ -603,8 +603,8 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: '',
-            language: fakeSGSalesOrgConfigGimmickMaterialEnabled
-                .languageValue.languageCode,
+            language:
+                fakeSGSalesOrgConfigGimmickMaterialEnabled.getConfigLanguage,
           ),
         ).thenAnswer(
           (invocation) async => fakeMatchMaterialInfo,
@@ -615,7 +615,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           material: fakeMatchMaterialInfo,
           shipToInfo: fakeShipToInfo,
-          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
           type: '',
         );
         expect(

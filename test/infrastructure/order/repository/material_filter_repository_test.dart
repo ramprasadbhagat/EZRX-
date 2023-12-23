@@ -1,22 +1,20 @@
-import 'dart:ui';
-
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -105,7 +103,7 @@ void main() {
           salesOrganisation: '2601',
           soldToCustomerCode: '100000345',
           shipToCustomerCode: '1234567',
-          language: ApiLanguageCode.english,
+          language: Language.english().languageCode,
           gimmickMaterial: false,
           userName: 'user',
         ),
@@ -115,7 +113,7 @@ void main() {
         salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
           salesOrg: SalesOrg('2601'),
           languageFilter: true,
-          languageValue: const Locale(ApiLanguageCode.english),
+          languageValue: Language.english(),
           currency: Currency('SG'),
         ),
         salesOrganisation: fakeSaleOrg,
@@ -144,7 +142,7 @@ void main() {
           salesOrganisation: '2601',
           soldToCustomerCode: '100000345',
           shipToCustomerCode: '1234567',
-          language: ApiLanguageCode.english,
+          language: Language.english().languageCode,
           searchKey: '',
         ),
       ).thenAnswer((invocation) async => MaterialFilter.empty());
@@ -153,7 +151,7 @@ void main() {
         salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
           salesOrg: SalesOrg('2601'),
           languageFilter: true,
-          languageValue: const Locale(ApiLanguageCode.english),
+          languageValue: Language.english(),
           currency: Currency('SG'),
         ),
         salesOrganisation: fakeSaleOrg,
@@ -180,7 +178,7 @@ void main() {
           salesOrganisation: '2601',
           soldToCustomerCode: '100000345',
           shipToCustomerCode: '1234567',
-          language: ApiLanguageCode.english,
+          language: Language.english().languageCode,
           gimmickMaterial: false,
           userName: 'user',
         ),
@@ -208,7 +206,7 @@ void main() {
           salesOrganisation: '2601',
           soldToCustomerCode: '100000345',
           shipToCustomerCode: '1234567',
-          language: ApiLanguageCode.english,
+          language: Language.english().languageCode,
           searchKey: '',
         ),
       ).thenThrow((invocation) async => MockException());

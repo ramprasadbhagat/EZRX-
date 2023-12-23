@@ -19,7 +19,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dar
 import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
 class MaterialListRepository implements IMaterialListRepository {
   final Config config;
@@ -45,7 +44,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required int pageSize,
     required int offset,
     required MaterialFilter selectedMaterialFilter,
-    required Locale locale,
+    required Language language,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -98,7 +97,7 @@ class MaterialListRepository implements IMaterialListRepository {
         materials: materialListData.products,
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
-        locale: locale,
+        language: language,
       );
 
       return Right(
@@ -227,7 +226,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
   }) async {
     try {
       final materialInfoMap = <MaterialNumber, MaterialInfo>{};
@@ -241,7 +240,7 @@ class MaterialListRepository implements IMaterialListRepository {
           salesOrganisation: salesOrganisation,
           shipToInfo: shipToInfo,
           type: 'bundle',
-          locale: locale,
+          language: language,
         );
         materialInfoMap.addAll(
           {bundle.materialNumber: materialInfo.getOrElse(() => bundle)},
@@ -261,7 +260,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
     required String type,
-    required Locale locale,
+    required Language language,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -281,7 +280,7 @@ class MaterialListRepository implements IMaterialListRepository {
           customerCode: customerCodeInfo.customerCodeSoldTo,
           shipToCode: shipToInfo.shipToCustomerCode,
           type: type,
-          language: locale.languageCode,
+          language: language.languageCode,
         );
 
         return Right(materialData);
@@ -304,7 +303,6 @@ class MaterialListRepository implements IMaterialListRepository {
     required User user,
     required SearchKey searchKey,
   }) async {
-    final preferredLanguage = user.settings.languagePreference.languageCode;
     if (config.appFlavor == Flavor.mock) {
       try {
         final materialListData =
@@ -323,7 +321,7 @@ class MaterialListRepository implements IMaterialListRepository {
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCode: shipToInfo.shipToCustomerCode,
         pageSize: pageSize,
-        language: preferredLanguage,
+        language: user.settings.languagePreference.languageCode,
         gimmickMaterial: enableGimmickMaterial,
         bundleOffers: false,
         countryListCode: [],

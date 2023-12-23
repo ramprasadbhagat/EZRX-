@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
@@ -365,7 +366,7 @@ class CartRepository implements ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
     required String itemId,
     required int quantity,
     required RequestCounterOfferDetails counterOfferDetails,
@@ -392,7 +393,7 @@ class CartRepository implements ICartRepository {
         salesOrg: salesOrganisation.salesOrg,
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCustomerCode: shipToInfo.shipToCustomerCode,
-        language: language,
+        language: language.languageCode,
         materialInfo: materialInfo,
         itemId: itemId,
         quantity: quantity,
@@ -438,7 +439,7 @@ class CartRepository implements ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
     required RequestCounterOfferDetails counterOfferDetails,
   }) async {
     try {
@@ -484,7 +485,7 @@ class CartRepository implements ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
   }) async {
@@ -510,7 +511,7 @@ class CartRepository implements ICartRepository {
             salesOrg: salesOrganisation.salesOrg,
             customerCode: customerCodeInfo.customerCodeSoldTo,
             shipToCustomerCode: shipToInfo.shipToCustomerCode,
-            language: language,
+            language: language.languageCode,
             materialInfo: materialInfo,
             itemId: itemId,
             quantity: materialInfo.quantity.intValue,
@@ -533,7 +534,7 @@ class CartRepository implements ICartRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -617,7 +618,7 @@ class CartRepository implements ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
     required List<MaterialInfo> products,
   }) async {
     try {
@@ -659,7 +660,6 @@ class CartRepository implements ICartRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -769,7 +769,7 @@ class CartRepository implements ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String language,
+    required Language language,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -803,7 +803,7 @@ class CartRepository implements ICartRepository {
             salesOrg: salesOrganisation.salesOrg,
             customerCode: customerCodeInfo.customerCodeSoldTo,
             shipToCustomerCode: shipToInfo.shipToCustomerCode,
-            language: language,
+            language: language.languageCode,
             materialInfo: materialInfo,
             itemId: materialInfo.sampleBonusItemId,
             quantity: materialInfo.quantity.intValue,

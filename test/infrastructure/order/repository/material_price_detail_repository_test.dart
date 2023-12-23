@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -481,7 +481,7 @@ void main() {
           salesOrgCode: '',
           customerCode: '',
           shipToCode: '',
-          language: ApiLanguageCode.english,
+          language: Language.english().languageCode,
           materialNumbers: {},
         ),
       ).thenThrow(

@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/update_sales_org/update_sales
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/update_sales_org/update_sales_organisation_configs_dto.dart';
@@ -56,7 +56,7 @@ void main() {
         vatValue: 8,
         netPriceOverride: true,
         languageFilter: false,
-        languageValue: const Locale(ApiLanguageCode.english),
+        languageValue: Language.english(),
         materialWithoutPrice: true,
         enablePaymentTerms: false,
         enableMobileNumber: false,

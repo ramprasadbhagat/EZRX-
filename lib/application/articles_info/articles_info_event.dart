@@ -3,6 +3,7 @@ part of 'articles_info_bloc.dart';
 @freezed
 class ArticlesInfoEvent with _$ArticlesInfoEvent {
   const factory ArticlesInfoEvent.initialize({
+    required User user,
     required SalesOrg salesOrg,
     required ShipToInfo shipToInfo,
   }) = _Initialize;

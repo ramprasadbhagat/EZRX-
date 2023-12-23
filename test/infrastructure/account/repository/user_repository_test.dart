@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
@@ -71,7 +72,7 @@ void main() {
   late UpdateLanguageResponse updateLanguageResponseMock;
   final error = Error();
   final mockException = MockException(message: 'exception');
-  const locale = Locale('vn');
+  final locale = Language.vietnamese();
   setUpAll(
     () async {
       WidgetsFlutterBinding.ensureInitialized();

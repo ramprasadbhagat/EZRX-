@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
@@ -22,6 +23,8 @@ class AnnouncementArticleInfoMock extends Mock
 void main() {
   late ArticleInfoRemoteDataSource remoteDataSource;
   late Config config;
+
+  final fakeUser = User.empty();
 
   final dio = Dio(
     BaseOptions(
@@ -46,7 +49,7 @@ void main() {
       'template': config.articleTemplate,
       'path': config.announcementApiUrlPath,
       'pageSize': config.pageSize,
-      'lang': salesOrg.locale.languageCode,
+      'lang': fakeUser.preferredLanguage.locale.languageCode,
       'after': '',
     };
     test('Get Article Info ', () async {
@@ -76,7 +79,7 @@ void main() {
         template: config.articleTemplate,
         pageSize: config.pageSize,
         after: '',
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
       );
 
       expect(
@@ -106,7 +109,7 @@ void main() {
         template: config.articleTemplate,
         pageSize: config.pageSize,
         after: '',
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -143,7 +146,7 @@ void main() {
         template: config.articleTemplate,
         pageSize: config.pageSize,
         after: '',
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -176,7 +179,7 @@ void main() {
         template: config.articleTemplate,
         pageSize: config.pageSize,
         after: '',
-        lang: salesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
       )
           .onError((error, _) async {
         expect(error, isA<OtherException>());

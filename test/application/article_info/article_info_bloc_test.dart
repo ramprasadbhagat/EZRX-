@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -20,6 +21,7 @@ void main() {
   late AnnouncementArticleInfo articleInfoMock;
   final articlesInfoState = ArticlesInfoState.initial();
   final salesOrg = SalesOrg('');
+  final user = User.empty();
   late Config config;
   final shipToInfo = ShipToInfo.empty().copyWith(
     plant: '1920',
@@ -43,6 +45,7 @@ void main() {
       setUp: () {
         when(
           () => repository.getArticles(
+            user: user,
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: '',
@@ -78,6 +81,7 @@ void main() {
       setUp: () {
         when(
           () => repository.getArticles(
+            user: user,
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: '',
@@ -119,6 +123,7 @@ void main() {
       setUp: () {
         when(
           () => repository.getArticles(
+            user: user,
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: articleInfoMock.endCursor,
@@ -167,6 +172,7 @@ void main() {
       setUp: () {
         when(
           () => repository.getArticles(
+            user: user,
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: articleInfoMock.endCursor,

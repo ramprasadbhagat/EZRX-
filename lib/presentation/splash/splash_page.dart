@@ -57,7 +57,6 @@ import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
-import 'package:ezrxmobile/presentation/core/language_picker.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:universal_io/io.dart';
@@ -230,7 +229,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.user.id != current.user.id && current.user.id.isNotEmpty,
           listener: (context, state) {
             context
-                .setLocale(state.user.preferredLanguage.fromApiLanguageCode)
+                .setLocale(state.user.preferredLanguage.locale)
                 .then((value) async {
               /* We need delay for a short time here before display message because when change locale
                        the system need time to re-load the new translation files, so if we create string 
@@ -270,6 +269,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       context.read<SalesOrgBloc>().state.salesOrg,
                     ),
                   );
+              context.setLocale(state.user.preferredLanguage.locale);
             }
 
             _initializePaymentConfiguration(state);
@@ -411,7 +411,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context.read<ProductDetailBloc>().add(
                         ProductDetailEvent.fetch(
                           materialInfo: state.material,
-                          locale: context.locale,
                         ),
                       );
                   context.router.pushNamed('orders/material_details');
@@ -691,7 +690,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context.read<ProductDetailBloc>().add(
                         ProductDetailEvent.fetch(
                           materialInfo: materialInfo,
-                          locale: context.locale,
                         ),
                       );
 
@@ -709,7 +707,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                             materialNumber: materialNumber,
                             type: MaterialInfoType.bundle(),
                           ),
-                          locale: context.locale,
                         ),
                       );
                   context.router.push(const BundleDetailPageRoute());
@@ -825,12 +822,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         userInfo: context.read<UserBloc>().state.user,
                         selectedSalesOrg: state.salesOrganisation,
                         hideCustomer: state.configs.hideCustomer,
-                      ),
-                    );
-
-                context.read<AnnouncementInfoBloc>().add(
-                      AnnouncementInfoEvent.fetch(
-                        salesOrg: state.salesOrg,
                       ),
                     );
 
@@ -1064,6 +1055,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               salesOrganisation: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
               shipToInfo: state.shipToInfo,
+              user: user,
             ),
           );
 
@@ -1315,11 +1307,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context.read<ArticlesInfoBloc>().add(
             ArticlesInfoEvent.initialize(
+              user: user,
               salesOrg: salesOrgState.salesOrg,
               shipToInfo: state.shipToInfo,
             ),
           );
 
+      context.read<AnnouncementInfoBloc>().add(
+            AnnouncementInfoEvent.initialize(
+              user: user,
+              salesOrg: salesOrgState.salesOrg,
+            ),
+          );
       context.read<ScanMaterialInfoBloc>().add(
             ScanMaterialInfoEvent.initialized(
               salesOrganisation: salesOrgState.salesOrganisation,

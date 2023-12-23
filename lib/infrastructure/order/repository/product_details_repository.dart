@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -17,7 +18,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
-import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
 class ProductDetailRepository implements IProductDetailRepository {
   final Config config;
@@ -44,13 +44,13 @@ class ProductDetailRepository implements IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
     required MaterialInfoType type,
   }) async =>
       type.typeBundle
           ? await getBundleDetail(
               customerCodeInfo: customerCodeInfo,
-              locale: locale,
+              language: language,
               materialNumber: materialNumber,
               salesOrganisation: salesOrganisation,
               shipToInfo: shipToInfo,
@@ -58,7 +58,7 @@ class ProductDetailRepository implements IProductDetailRepository {
             )
           : await getMaterialDetail(
               customerCodeInfo: customerCodeInfo,
-              locale: locale,
+              language: language,
               materialNumber: materialNumber,
               salesOrganisation: salesOrganisation,
               shipToInfo: shipToInfo,
@@ -71,7 +71,7 @@ class ProductDetailRepository implements IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
     required List<MaterialInfoType> types,
   }) async {
     try {
@@ -82,7 +82,7 @@ class ProductDetailRepository implements IProductDetailRepository {
           salesOrganisation: salesOrganisation,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
-          locale: locale,
+          language: language,
           type: types[i],
         );
 
@@ -103,14 +103,14 @@ class ProductDetailRepository implements IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
   }) async {
     final bundleInfoMap = <MaterialNumber, MaterialInfo>{};
     await Future.wait(
       bundleCodes.map(
         (code) async {
           final bundleProductDetail = await getBundleDetail(
-            locale: locale,
+            language: language,
             materialNumber: code,
             shipToInfo: shipToInfo,
             type: MaterialInfoType.bundle(),
@@ -134,7 +134,7 @@ class ProductDetailRepository implements IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
     required MaterialInfoType type,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -152,7 +152,7 @@ class ProductDetailRepository implements IProductDetailRepository {
           await productDetailRemoteDataSource.getProductDetails(
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCode: shipToInfo.shipToCustomerCode,
-        language: locale.languageCode,
+        language: language.languageCode,
         materialNumber: materialNumber.getOrCrash(),
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
       );
@@ -169,7 +169,7 @@ class ProductDetailRepository implements IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
     required MaterialInfoType type,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -190,7 +190,7 @@ class ProductDetailRepository implements IProductDetailRepository {
           customerCode: customerCodeInfo.customerCodeSoldTo,
           shipToCode: shipToInfo.shipToCustomerCode,
           type: type.getValue(),
-          language: locale.languageCode,
+          language: language.languageCode,
         );
 
         return Right(
@@ -243,7 +243,7 @@ class ProductDetailRepository implements IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -258,7 +258,7 @@ class ProductDetailRepository implements IProductDetailRepository {
       final products = await productDetailRemoteDataSource.getSimilarProduct(
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCode: shipToInfo.shipToCustomerCode,
-        language: locale.languageCode,
+        language: language.languageCode,
         materialNumber: materialNumber.getOrCrash(),
         principalCode: principalCode.getOrCrash(),
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),

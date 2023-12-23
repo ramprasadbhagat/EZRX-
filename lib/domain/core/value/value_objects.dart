@@ -423,3 +423,34 @@ class FilterStatus extends ValueObject<String> {
 
   const FilterStatus._(this.value);
 }
+
+class Language extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Language(String input) {
+    return Language._(validateStringNotEmpty(input));
+  }
+
+  factory Language.english() {
+    return const Language._(Right('EN'));
+  }
+
+  factory Language.shortEnglish() {
+    return const Language._(Right('E'));
+  }
+
+  factory Language.vietnamese() {
+    return const Language._(Right('VI'));
+  }
+
+  factory Language.mandarin() {
+    return const Language._(Right('ZH'));
+  }
+
+  String get languageString => getLanguageString(value.getOrElse(() => ''));
+  String get languageCode => toSupportedLanguage(value.getOrElse(() => 'EN'));
+  Locale get locale => toLocale(languageCode);
+
+  const Language._(this.value);
+}

@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/about_us/entities/about_us.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_local.dart';
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_remote.dart';
@@ -23,6 +24,8 @@ void main() {
   late Config mockConfig;
   late AboutUsLocalDataSource aboutUsLocalDataSource;
   late AboutUsRemoteDataSource aboutUsRemoteDataSource;
+  final fakeUser = User.empty();
+
 
   setUpAll(
     () {
@@ -71,7 +74,7 @@ void main() {
           () => aboutUsRemoteDataSource.getAboutUsInfo(
             aboutUsUrlPath: mockConfig.announcementApiUrlPath,
             itemId: fakeSalesOrg.aboutUsVariablePath,
-            lang: fakeSalesOrg.locale.languageCode,
+            lang: fakeUser.preferredLanguage.languageCode,
           ),
         ).thenAnswer((_) async => AboutUs.empty());
         final result = await aboutUsRepository.getAboutUsInfo(
@@ -92,7 +95,7 @@ void main() {
           () => aboutUsRemoteDataSource.getAboutUsInfo(
             aboutUsUrlPath: mockConfig.announcementApiUrlPath,
             itemId: fakeSalesOrg.aboutUsVariablePath,
-            lang: fakeSalesOrg.locale.languageCode,
+            lang: fakeUser.preferredLanguage.locale.languageCode,
           ),
         ).thenThrow(MockException());
         final result = await aboutUsRepository.getAboutUsInfo(

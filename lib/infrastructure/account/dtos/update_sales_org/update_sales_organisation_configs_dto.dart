@@ -1,8 +1,6 @@
-import 'dart:ui';
-
 import 'package:ezrxmobile/domain/account/entities/update_sales_org/update_sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'update_sales_organisation_configs_dto.freezed.dart';
@@ -166,7 +164,7 @@ class UpdateSalesOrganisationConfigsDto
       hideCustomer: hideCustomer,
       enableGimmickMaterial: enableGimmickMaterial,
       languageFilter: languageFilter,
-      languageValue: Locale(
+      languageValue: Language(
         languageValue,
       ),
       disableOrderType: disableOrderType,
@@ -218,5 +216,7 @@ class UpdateSalesOrganisationConfigsDto
 String handleEmptyLanguageValue(Map json, String key) {
   final String languageValue = json[key] ?? '';
 
-  return languageValue.isNotEmpty ? languageValue : ApiLanguageCode.english;
+  return languageValue.isNotEmpty
+      ? languageValue
+      : Language.english().languageCode;
 }

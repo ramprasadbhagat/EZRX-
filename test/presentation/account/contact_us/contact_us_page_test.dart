@@ -23,7 +23,6 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart'
     as order_value_object;
@@ -92,7 +91,7 @@ void main() {
       name: 'fake-name',
       type: RoleType('fake-type'),
     ),
-    preferredLanguage: const Locale(ApiLanguageCode.english),
+    preferredLanguage: Language.english(),
   );
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(
     customerCodeSoldTo: '0030082707',

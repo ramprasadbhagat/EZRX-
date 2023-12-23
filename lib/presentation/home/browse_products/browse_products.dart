@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -150,7 +149,6 @@ class _BrowseProductCard extends StatelessWidget {
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialInfo: materialInfo,
-            locale: context.locale,
           ),
         );
     if (context.read<EligibilityBloc>().state.isZDP5eligible) {

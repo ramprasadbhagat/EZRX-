@@ -33,8 +33,8 @@ mixin _$User {
   bool get disableReturns => throw _privateConstructorUsedError;
   bool get disablePaymentAccess => throw _privateConstructorUsedError;
   bool get hasPriceOverride => throw _privateConstructorUsedError;
-  Locale get preferredLanguage => throw _privateConstructorUsedError;
-  List<Locale> get supportedLanguages => throw _privateConstructorUsedError;
+  Language get preferredLanguage => throw _privateConstructorUsedError;
+  List<Language> get supportedLanguages => throw _privateConstructorUsedError;
   MobileNumber get mobileNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -63,8 +63,8 @@ abstract class $UserCopyWith<$Res> {
       bool disableReturns,
       bool disablePaymentAccess,
       bool hasPriceOverride,
-      Locale preferredLanguage,
-      List<Locale> supportedLanguages,
+      Language preferredLanguage,
+      List<Language> supportedLanguages,
       MobileNumber mobileNumber});
 
   $FullNameCopyWith<$Res> get fullName;
@@ -174,11 +174,11 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       preferredLanguage: null == preferredLanguage
           ? _value.preferredLanguage
           : preferredLanguage // ignore: cast_nullable_to_non_nullable
-              as Locale,
+              as Language,
       supportedLanguages: null == supportedLanguages
           ? _value.supportedLanguages
           : supportedLanguages // ignore: cast_nullable_to_non_nullable
-              as List<Locale>,
+              as List<Language>,
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -242,8 +242,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool disableReturns,
       bool disablePaymentAccess,
       bool hasPriceOverride,
-      Locale preferredLanguage,
-      List<Locale> supportedLanguages,
+      Language preferredLanguage,
+      List<Language> supportedLanguages,
       MobileNumber mobileNumber});
 
   @override
@@ -353,11 +353,11 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       preferredLanguage: null == preferredLanguage
           ? _value.preferredLanguage
           : preferredLanguage // ignore: cast_nullable_to_non_nullable
-              as Locale,
+              as Language,
       supportedLanguages: null == supportedLanguages
           ? _value._supportedLanguages
           : supportedLanguages // ignore: cast_nullable_to_non_nullable
-              as List<Locale>,
+              as List<Language>,
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -387,7 +387,7 @@ class _$_User extends _User {
       required this.disablePaymentAccess,
       required this.hasPriceOverride,
       required this.preferredLanguage,
-      required final List<Locale> supportedLanguages,
+      required final List<Language> supportedLanguages,
       required this.mobileNumber})
       : _userSalesOrganisations = userSalesOrganisations,
         _supportedLanguages = supportedLanguages,
@@ -433,10 +433,10 @@ class _$_User extends _User {
   @override
   final bool hasPriceOverride;
   @override
-  final Locale preferredLanguage;
-  final List<Locale> _supportedLanguages;
+  final Language preferredLanguage;
+  final List<Language> _supportedLanguages;
   @override
-  List<Locale> get supportedLanguages {
+  List<Language> get supportedLanguages {
     if (_supportedLanguages is EqualUnmodifiableListView)
       return _supportedLanguages;
     // ignore: implicit_dynamic_type
@@ -542,8 +542,8 @@ abstract class _User extends User {
       required final bool disableReturns,
       required final bool disablePaymentAccess,
       required final bool hasPriceOverride,
-      required final Locale preferredLanguage,
-      required final List<Locale> supportedLanguages,
+      required final Language preferredLanguage,
+      required final List<Language> supportedLanguages,
       required final MobileNumber mobileNumber}) = _$_User;
   const _User._() : super._();
 
@@ -580,9 +580,9 @@ abstract class _User extends User {
   @override
   bool get hasPriceOverride;
   @override
-  Locale get preferredLanguage;
+  Language get preferredLanguage;
   @override
-  List<Locale> get supportedLanguages;
+  List<Language> get supportedLanguages;
   @override
   MobileNumber get mobileNumber;
   @override

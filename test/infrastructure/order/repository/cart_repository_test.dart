@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -10,28 +11,27 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
-import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_product_request_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
-import 'package:flutter/material.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -108,7 +108,7 @@ void main() {
     );
     mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
       languageFilter: true,
-      languageValue: const Locale(ApiLanguageCode.english),
+      languageValue: Language.english(),
       disablePrincipals: false,
       enableGimmickMaterial: true,
       principalList: [
@@ -659,7 +659,7 @@ void main() {
               salesOrg: fakeSalesOrganisation.salesOrg,
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
-              language: 'en',
+              language: Language.english().languageCode,
               materialInfo: materialInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: 'fake-item-Id',
@@ -683,7 +683,7 @@ void main() {
         shipToInfo: fakeShipToInfo,
         itemId: 'fake-item-Id',
         counterOfferDetails: RequestCounterOfferDetails.empty(),
-        language: 'en',
+        language: Language.english(),
         materialInfo: productList,
         salesOrganisationConfig: fakeSalesOrganisationConfigs,
       );
@@ -708,7 +708,7 @@ void main() {
               salesOrg: fakeSalesOrganisation.salesOrg,
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
-              language: 'en',
+              language: Language.english().languageCode,
               materialInfo: materialInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: 'fake-item-Id',
@@ -728,7 +728,7 @@ void main() {
         shipToInfo: fakeShipToInfo,
         itemId: 'fake-item-Id',
         counterOfferDetails: RequestCounterOfferDetails.empty(),
-        language: 'en',
+        language: Language.english(),
         materialInfo: productList,
         salesOrganisationConfig: fakeSalesOrganisationConfigs,
       );
@@ -747,7 +747,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
-        language: 'en',
         products: fakeCartProductsWithCombo,
       );
       expect(result.isRight(), true);
@@ -764,7 +763,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
-        language: 'en',
         products: [],
       );
       expect(result.isLeft(), true);
@@ -795,7 +793,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
-        language: 'en',
         products: fakeCartProductsWithCombo,
       );
       expect(result.isRight(), true);
@@ -815,7 +812,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
-        language: 'en',
         products: [],
       );
       expect(result.isLeft(), true);
@@ -831,7 +827,7 @@ void main() {
       final result = await cartRepository.removeSelectedProducts(
         salesOrganisationConfig: mockSalesOrganisationConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
-        language: '',
+        language: Language.english(),
         products: [
           MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('12345'))
         ],
@@ -858,7 +854,7 @@ void main() {
         shipToId: fakeShipToInfo.shipToCustomerCode,
         productNumber: '12345',
         quantity: 1,
-        language: 'en',
+        language: Language.english().languageCode,
         parentID: 'fake-parent-Id',
         counterOfferPrice: 0.0,
         discountOverridePercentage: 0.0,
@@ -879,7 +875,7 @@ void main() {
       final result = await cartRepository.removeSelectedProducts(
         salesOrganisationConfig: mockSalesOrganisationConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
-        language: 'en',
+        language: Language.english(),
         products: [
           MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('12345'))
         ],
@@ -951,7 +947,7 @@ void main() {
 
       final result = await cartRepository.upsertCartItems(
         customerCodeInfo: fakeCustomerCodeInfo,
-        language: 'en',
+        language: Language.english(),
         product: fakeCartProducts.first,
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
@@ -969,7 +965,7 @@ void main() {
 
       final result = await cartRepository.upsertCartItems(
         customerCodeInfo: fakeCustomerCodeInfo,
-        language: 'en',
+        language: Language.english(),
         product: fakeCartProducts.first,
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
@@ -988,7 +984,7 @@ void main() {
               salesOrg: fakeSalesOrganisation.salesOrg,
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
-              language: 'en',
+              language: Language.english(),
               materialInfo: materialInfo,
               bundleCode: fakeCartProducts.first.bundle.bundleCode,
             );
@@ -1002,7 +998,7 @@ void main() {
 
       final result = await cartRepository.upsertCartItems(
         customerCodeInfo: fakeCustomerCodeInfo,
-        language: 'en',
+        language: Language.english(),
         product: fakeCartProducts.first,
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
@@ -1021,7 +1017,7 @@ void main() {
               salesOrg: fakeSalesOrganisation.salesOrg,
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
-              language: 'en',
+              language: Language.english(),
               materialInfo: materialInfo,
               bundleCode: fakeCartProducts.first.bundle.bundleCode,
             );
@@ -1035,7 +1031,7 @@ void main() {
 
       final result = await cartRepository.upsertCartItems(
         customerCodeInfo: fakeCustomerCodeInfo,
-        language: 'en',
+        language: Language.english(),
         product: fakeCartProducts.first,
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
@@ -1177,7 +1173,7 @@ void main() {
       final result = await cartRepository.upsertCart(
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         quantity: 1,
-        language: 'en',
+        language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisationConfig: fakeSalesOrganisationConfigs,
@@ -1203,7 +1199,7 @@ void main() {
       final result = await cartRepository.upsertCart(
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         quantity: 1,
-        language: 'en',
+        language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisationConfig: fakeSalesOrganisationConfigs,
@@ -1223,7 +1219,7 @@ void main() {
       final result = await cartRepository.upsertCart(
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         quantity: 100000,
-        language: 'en',
+        language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisationConfig: fakeSalesOrganisationConfigs,
@@ -1278,7 +1274,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
         counterOfferDetails: RequestCounterOfferDetails.empty(),
-        language: 'en',
+        language: Language.english(),
         product: PriceAggregate.empty().copyWith(
           materialInfo: materialInfo,
         ),

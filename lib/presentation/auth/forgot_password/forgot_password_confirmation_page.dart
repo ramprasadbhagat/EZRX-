@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -97,7 +98,7 @@ class ForgetPasswordConfirmationPage extends StatelessWidget {
                                           .add(
                                             ForgotPasswordEvent
                                                 .requestPasswordReset(
-                                              context.locale,
+                                              Language.english(),
                                             ),
                                           ),
                                   ),

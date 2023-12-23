@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/contact_us/entities/contact_us_details.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
@@ -22,6 +23,7 @@ class ContactUsDetailsMock extends Mock implements ContactUsDetails {}
 void main() {
   late ContactUsDetailsRemoteDataSource remoteDataSource;
   late Config config;
+  final fakeUser = User.empty();
 
   final dio = Dio(
     BaseOptions(
@@ -44,7 +46,7 @@ void main() {
   group('Contact Us Details Remote DataSource test', () {
     final variables = {
       'itemId': fakeMYSalesOrg.contactUsItemId,
-      'lang': fakeMYSalesOrg.locale.languageCode,
+      'lang': fakeUser.preferredLanguage.locale.languageCode,
     };
     test('Get Contact Us Details ', () async {
       final infoRes = json.decode(
@@ -70,7 +72,7 @@ void main() {
 
       final result = await remoteDataSource.getContactUsDetails(
         announcementUrlPath: config.announcementApiUrlPath,
-        lang: fakeMYSalesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
         contactUsId: fakeMYSalesOrg.contactUsItemId,
       );
 
@@ -97,7 +99,7 @@ void main() {
       await remoteDataSource
           .getContactUsDetails(
         announcementUrlPath: config.announcementApiUrlPath,
-        lang: fakeMYSalesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
         contactUsId: fakeMYSalesOrg.contactUsItemId,
       )
           .onError((error, _) async {
@@ -131,7 +133,7 @@ void main() {
       await remoteDataSource
           .getContactUsDetails(
         announcementUrlPath: config.announcementApiUrlPath,
-        lang: fakeMYSalesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
         contactUsId: fakeMYSalesOrg.contactUsItemId,
       )
           .onError((error, _) async {
@@ -161,7 +163,7 @@ void main() {
       await remoteDataSource
           .getContactUsDetails(
         announcementUrlPath: config.announcementApiUrlPath,
-        lang: fakeMYSalesOrg.locale.languageCode,
+        lang: fakeUser.preferredLanguage.locale.languageCode,
         contactUsId: fakeMYSalesOrg.contactUsItemId,
       )
           .onError((error, _) async {

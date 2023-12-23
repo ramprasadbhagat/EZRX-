@@ -52,10 +52,8 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -94,8 +92,8 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -134,8 +132,8 @@ mixin _$CartEvent {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -445,10 +443,8 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -491,8 +487,8 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -535,8 +531,8 @@ class _$_Initialized implements _Initialized {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -798,10 +794,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -843,8 +837,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -886,8 +880,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -1161,10 +1155,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -1206,8 +1198,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -1250,8 +1242,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -1459,10 +1451,8 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -1504,8 +1494,8 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -1547,8 +1537,8 @@ class _$_RemoveSampleBonusFromCartConfig
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -1741,10 +1731,8 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -1786,8 +1774,8 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -1829,8 +1817,8 @@ class _$_ClearCart implements _ClearCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -2024,10 +2012,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -2069,8 +2055,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -2112,8 +2098,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -2342,10 +2328,8 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -2387,8 +2371,8 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -2430,8 +2414,8 @@ class _$_UpsertCart implements _UpsertCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -2688,10 +2672,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -2733,8 +2715,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -2776,8 +2758,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -3015,10 +2997,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -3060,8 +3040,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -3103,8 +3083,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -3341,10 +3321,8 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -3386,8 +3364,8 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -3429,8 +3407,8 @@ class _$_GetDetailsProductsAddedToCart
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -3665,10 +3643,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -3710,8 +3686,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -3753,8 +3729,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -3953,10 +3929,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -3998,8 +3972,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -4041,8 +4015,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -4271,10 +4245,8 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -4316,8 +4288,8 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -4359,8 +4331,8 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -4609,10 +4581,8 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -4654,8 +4624,8 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -4697,8 +4667,8 @@ class _$_UpsertCartItemsWithComboOffers
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -4941,10 +4911,8 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -4986,8 +4954,8 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -5029,8 +4997,8 @@ class _$_UpdateCartProductWithCounterOffer
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -5163,8 +5131,6 @@ abstract class _$$_UpdatePriceForIdMarketCopyWith<$Res> {
   factory _$$_UpdatePriceForIdMarketCopyWith(_$_UpdatePriceForIdMarket value,
           $Res Function(_$_UpdatePriceForIdMarket) then) =
       __$$_UpdatePriceForIdMarketCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Locale locale});
 }
 
 /// @nodoc
@@ -5174,51 +5140,27 @@ class __$$_UpdatePriceForIdMarketCopyWithImpl<$Res>
   __$$_UpdatePriceForIdMarketCopyWithImpl(_$_UpdatePriceForIdMarket _value,
       $Res Function(_$_UpdatePriceForIdMarket) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? locale = null,
-  }) {
-    return _then(_$_UpdatePriceForIdMarket(
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
-  const _$_UpdatePriceForIdMarket({required this.locale});
-
-  @override
-  final Locale locale;
+  const _$_UpdatePriceForIdMarket();
 
   @override
   String toString() {
-    return 'CartEvent.updatePriceForIdMarket(locale: $locale)';
+    return 'CartEvent.updatePriceForIdMarket()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdatePriceForIdMarket &&
-            (identical(other.locale, locale) || other.locale == locale));
+            other is _$_UpdatePriceForIdMarket);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, locale);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_UpdatePriceForIdMarketCopyWith<_$_UpdatePriceForIdMarket> get copyWith =>
-      __$$_UpdatePriceForIdMarketCopyWithImpl<_$_UpdatePriceForIdMarket>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -5257,15 +5199,13 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
-    return updatePriceForIdMarket(locale);
+    return updatePriceForIdMarket();
   }
 
   @override
@@ -5302,13 +5242,13 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
-    return updatePriceForIdMarket?.call(locale);
+    return updatePriceForIdMarket?.call();
   }
 
   @override
@@ -5345,15 +5285,15 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
     required TResult orElse(),
   }) {
     if (updatePriceForIdMarket != null) {
-      return updatePriceForIdMarket(locale);
+      return updatePriceForIdMarket();
     }
     return orElse();
   }
@@ -5463,13 +5403,7 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
 }
 
 abstract class _UpdatePriceForIdMarket implements CartEvent {
-  const factory _UpdatePriceForIdMarket({required final Locale locale}) =
-      _$_UpdatePriceForIdMarket;
-
-  Locale get locale;
-  @JsonKey(ignore: true)
-  _$$_UpdatePriceForIdMarketCopyWith<_$_UpdatePriceForIdMarket> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _UpdatePriceForIdMarket() = _$_UpdatePriceForIdMarket;
 }
 
 /// @nodoc
@@ -5480,8 +5414,7 @@ abstract class _$$_UpdateProductDeterminationCopyWith<$Res> {
       __$$_UpdateProductDeterminationCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {Locale locale,
-      List<AplProduct> productDeterminationList,
+      {List<AplProduct> productDeterminationList,
       List<PriceAggregate> updatedCartItems});
 }
 
@@ -5497,15 +5430,10 @@ class __$$_UpdateProductDeterminationCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? locale = null,
     Object? productDeterminationList = null,
     Object? updatedCartItems = null,
   }) {
     return _then(_$_UpdateProductDetermination(
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
       productDeterminationList: null == productDeterminationList
           ? _value._productDeterminationList
           : productDeterminationList // ignore: cast_nullable_to_non_nullable
@@ -5522,14 +5450,11 @@ class __$$_UpdateProductDeterminationCopyWithImpl<$Res>
 
 class _$_UpdateProductDetermination implements _UpdateProductDetermination {
   const _$_UpdateProductDetermination(
-      {required this.locale,
-      required final List<AplProduct> productDeterminationList,
+      {required final List<AplProduct> productDeterminationList,
       required final List<PriceAggregate> updatedCartItems})
       : _productDeterminationList = productDeterminationList,
         _updatedCartItems = updatedCartItems;
 
-  @override
-  final Locale locale;
   final List<AplProduct> _productDeterminationList;
   @override
   List<AplProduct> get productDeterminationList {
@@ -5550,7 +5475,7 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
 
   @override
   String toString() {
-    return 'CartEvent.updateProductDetermination(locale: $locale, productDeterminationList: $productDeterminationList, updatedCartItems: $updatedCartItems)';
+    return 'CartEvent.updateProductDetermination(productDeterminationList: $productDeterminationList, updatedCartItems: $updatedCartItems)';
   }
 
   @override
@@ -5558,7 +5483,6 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateProductDetermination &&
-            (identical(other.locale, locale) || other.locale == locale) &&
             const DeepCollectionEquality().equals(
                 other._productDeterminationList, _productDeterminationList) &&
             const DeepCollectionEquality()
@@ -5568,7 +5492,6 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      locale,
       const DeepCollectionEquality().hash(_productDeterminationList),
       const DeepCollectionEquality().hash(_updatedCartItems));
 
@@ -5616,16 +5539,14 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
     return updateProductDetermination(
-        locale, productDeterminationList, updatedCartItems);
+        productDeterminationList, updatedCartItems);
   }
 
   @override
@@ -5662,14 +5583,14 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
     return updateProductDetermination?.call(
-        locale, productDeterminationList, updatedCartItems);
+        productDeterminationList, updatedCartItems);
   }
 
   @override
@@ -5706,8 +5627,8 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
@@ -5715,7 +5636,7 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
   }) {
     if (updateProductDetermination != null) {
       return updateProductDetermination(
-          locale, productDeterminationList, updatedCartItems);
+          productDeterminationList, updatedCartItems);
     }
     return orElse();
   }
@@ -5826,12 +5747,10 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
 
 abstract class _UpdateProductDetermination implements CartEvent {
   const factory _UpdateProductDetermination(
-          {required final Locale locale,
-          required final List<AplProduct> productDeterminationList,
+          {required final List<AplProduct> productDeterminationList,
           required final List<PriceAggregate> updatedCartItems}) =
       _$_UpdateProductDetermination;
 
-  Locale get locale;
   List<AplProduct> get productDeterminationList;
   List<PriceAggregate> get updatedCartItems;
   @JsonKey(ignore: true)
@@ -5915,10 +5834,8 @@ class _$_FetchGrandTotalPriceForIdMarket
         upsertCartItemsWithComboOffers,
     required TResult Function(Price overriddenProductPrice)
         updateCartProductWithCounterOffer,
-    required TResult Function(Locale locale) updatePriceForIdMarket,
-    required TResult Function(
-            Locale locale,
-            List<AplProduct> productDeterminationList,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
@@ -5960,8 +5877,8 @@ class _$_FetchGrandTotalPriceForIdMarket
         upsertCartItemsWithComboOffers,
     TResult? Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult? Function(Locale locale)? updatePriceForIdMarket,
-    TResult? Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
@@ -6003,8 +5920,8 @@ class _$_FetchGrandTotalPriceForIdMarket
         upsertCartItemsWithComboOffers,
     TResult Function(Price overriddenProductPrice)?
         updateCartProductWithCounterOffer,
-    TResult Function(Locale locale)? updatePriceForIdMarket,
-    TResult Function(Locale locale, List<AplProduct> productDeterminationList,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,

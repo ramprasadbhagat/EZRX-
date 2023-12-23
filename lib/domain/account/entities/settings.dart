@@ -1,8 +1,6 @@
-import 'dart:ui';
-
-import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 
 part 'settings.freezed.dart';
 
@@ -14,13 +12,13 @@ class Settings with _$Settings {
     required bool emailNotifications,
     required bool mobileNotifications,
     required PaymentNotification paymentNotification,
-    required Locale languagePreference,
+    required Language languagePreference,
   }) = _Settings;
 
   factory Settings.empty() => Settings(
         emailNotifications: false,
         mobileNotifications: false,
         paymentNotification: PaymentNotification.empty(),
-        languagePreference: const Locale(ApiLanguageCode.english),
+        languagePreference: Language.english(),
       );
 }

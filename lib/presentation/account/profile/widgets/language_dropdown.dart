@@ -26,13 +26,12 @@ class _LanguageDropDown extends StatelessWidget {
                 previous.user.preferredLanguage !=
                 current.user.preferredLanguage,
             listener: (context, state) {
-              context
-                  .setLocale(state.user.preferredLanguage.fromApiLanguageCode);
+              context.setLocale(state.user.preferredLanguage.locale);
             },
             buildWhen: (previous, current) =>
                 current.activeLanguage != previous.activeLanguage,
             builder: (context, state) {
-              return DropdownButtonFormField2<Locale>(
+              return DropdownButtonFormField2<Language>(
                 key: WidgetKeys.profilePageLanguageDropdown,
                 decoration: const InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(0, 10, 12, 10),
@@ -45,12 +44,12 @@ class _LanguageDropDown extends StatelessWidget {
                 ),
                 items: state.user.supportedLanguages
                     .map(
-                      (e) => DropdownMenuItem<Locale>(
+                      (e) => DropdownMenuItem<Language>(
                         key: WidgetKeys.genericKey(
-                          key: 'language_${e.languageString()}',
+                          key: 'language_${e.languageString}',
                         ),
                         value: e,
-                        child: Text(e.languageString()),
+                        child: Text(e.languageString),
                       ),
                     )
                     .toList(),
@@ -58,8 +57,7 @@ class _LanguageDropDown extends StatelessWidget {
                 onChanged: state.user.supportMultipleLanguage
                     ? (selectedLanguage) => context.read<UserBloc>().add(
                           UserEvent.selectLanguage(
-                            selectedLanguage ??
-                                const Locale(ApiLanguageCode.english),
+                            selectedLanguage ?? Language.english(),
                           ),
                         )
                     : null,

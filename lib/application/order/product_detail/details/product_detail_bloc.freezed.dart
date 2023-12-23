@@ -19,15 +19,13 @@ mixin _$ProductDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -42,15 +40,17 @@ mixin _$ProductDetailEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -63,15 +63,17 @@ mixin _$ProductDetailEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -164,11 +166,13 @@ abstract class _$$_InitializedCopyWith<$Res> {
   $Res call(
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      User user});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -185,6 +189,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? user = null,
   }) {
     return _then(_$_Initialized(
       salesOrganisation: null == salesOrganisation
@@ -199,6 +204,10 @@ class __$$_InitializedCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
@@ -225,6 +234,14 @@ class __$$_InitializedCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -233,7 +250,8 @@ class _$_Initialized implements _Initialized {
   const _$_Initialized(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
-      required this.shipToInfo});
+      required this.shipToInfo,
+      required this.user});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -241,10 +259,12 @@ class _$_Initialized implements _Initialized {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'ProductDetailEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'ProductDetailEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user)';
   }
 
   @override
@@ -257,12 +277,13 @@ class _$_Initialized implements _Initialized {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrganisation, customerCodeInfo, shipToInfo);
+  int get hashCode => Object.hash(
+      runtimeType, salesOrganisation, customerCodeInfo, shipToInfo, user);
 
   @JsonKey(ignore: true)
   @override
@@ -274,15 +295,13 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -294,21 +313,23 @@ class _$_Initialized implements _Initialized {
     required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
     required TResult Function(bool exceedQty) setExceedQty,
   }) {
-    return initialized(salesOrganisation, customerCodeInfo, shipToInfo);
+    return initialized(salesOrganisation, customerCodeInfo, shipToInfo, user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -318,21 +339,24 @@ class _$_Initialized implements _Initialized {
     TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
     TResult? Function(bool exceedQty)? setExceedQty,
   }) {
-    return initialized?.call(salesOrganisation, customerCodeInfo, shipToInfo);
+    return initialized?.call(
+        salesOrganisation, customerCodeInfo, shipToInfo, user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -344,7 +368,7 @@ class _$_Initialized implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(salesOrganisation, customerCodeInfo, shipToInfo);
+      return initialized(salesOrganisation, customerCodeInfo, shipToInfo, user);
     }
     return orElse();
   }
@@ -418,11 +442,13 @@ abstract class _Initialized implements ProductDetailEvent {
   const factory _Initialized(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_Initialized;
+      required final ShipToInfo shipToInfo,
+      required final User user}) = _$_Initialized;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
+  User get user;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
@@ -433,7 +459,7 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call({MaterialInfo materialInfo, Locale locale});
+  $Res call({MaterialInfo materialInfo});
 
   $MaterialInfoCopyWith<$Res> get materialInfo;
 }
@@ -449,17 +475,12 @@ class __$$_FetchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? materialInfo = null,
-    Object? locale = null,
   }) {
     return _then(_$_Fetch(
       materialInfo: null == materialInfo
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
     ));
   }
 
@@ -475,16 +496,14 @@ class __$$_FetchCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  _$_Fetch({required this.materialInfo, required this.locale});
+  _$_Fetch({required this.materialInfo});
 
   @override
   final MaterialInfo materialInfo;
-  @override
-  final Locale locale;
 
   @override
   String toString() {
-    return 'ProductDetailEvent.fetch(materialInfo: $materialInfo, locale: $locale)';
+    return 'ProductDetailEvent.fetch(materialInfo: $materialInfo)';
   }
 
   @override
@@ -493,12 +512,11 @@ class _$_Fetch implements _Fetch {
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
             (identical(other.materialInfo, materialInfo) ||
-                other.materialInfo == materialInfo) &&
-            (identical(other.locale, locale) || other.locale == locale));
+                other.materialInfo == materialInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialInfo, locale);
+  int get hashCode => Object.hash(runtimeType, materialInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -510,15 +528,13 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -530,21 +546,23 @@ class _$_Fetch implements _Fetch {
     required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
     required TResult Function(bool exceedQty) setExceedQty,
   }) {
-    return fetch(materialInfo, locale);
+    return fetch(materialInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -554,21 +572,23 @@ class _$_Fetch implements _Fetch {
     TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
     TResult? Function(bool exceedQty)? setExceedQty,
   }) {
-    return fetch?.call(materialInfo, locale);
+    return fetch?.call(materialInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -580,7 +600,7 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(materialInfo, locale);
+      return fetch(materialInfo);
     }
     return orElse();
   }
@@ -651,12 +671,9 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements ProductDetailEvent {
-  factory _Fetch(
-      {required final MaterialInfo materialInfo,
-      required final Locale locale}) = _$_Fetch;
+  factory _Fetch({required final MaterialInfo materialInfo}) = _$_Fetch;
 
   MaterialInfo get materialInfo;
-  Locale get locale;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -667,8 +684,6 @@ abstract class _$$_FetchSimilarProductCopyWith<$Res> {
   factory _$$_FetchSimilarProductCopyWith(_$_FetchSimilarProduct value,
           $Res Function(_$_FetchSimilarProduct) then) =
       __$$_FetchSimilarProductCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Locale locale});
 }
 
 /// @nodoc
@@ -678,65 +693,38 @@ class __$$_FetchSimilarProductCopyWithImpl<$Res>
   __$$_FetchSimilarProductCopyWithImpl(_$_FetchSimilarProduct _value,
       $Res Function(_$_FetchSimilarProduct) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? locale = null,
-  }) {
-    return _then(_$_FetchSimilarProduct(
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_FetchSimilarProduct implements _FetchSimilarProduct {
-  _$_FetchSimilarProduct({required this.locale});
-
-  @override
-  final Locale locale;
+  _$_FetchSimilarProduct();
 
   @override
   String toString() {
-    return 'ProductDetailEvent.fetchSimilarProduct(locale: $locale)';
+    return 'ProductDetailEvent.fetchSimilarProduct()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_FetchSimilarProduct &&
-            (identical(other.locale, locale) || other.locale == locale));
+        (other.runtimeType == runtimeType && other is _$_FetchSimilarProduct);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, locale);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FetchSimilarProductCopyWith<_$_FetchSimilarProduct> get copyWith =>
-      __$$_FetchSimilarProductCopyWithImpl<_$_FetchSimilarProduct>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -748,21 +736,23 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
     required TResult Function(bool exceedQty) setExceedQty,
   }) {
-    return fetchSimilarProduct(locale);
+    return fetchSimilarProduct();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -772,21 +762,23 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
     TResult? Function(bool exceedQty)? setExceedQty,
   }) {
-    return fetchSimilarProduct?.call(locale);
+    return fetchSimilarProduct?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -798,7 +790,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     required TResult orElse(),
   }) {
     if (fetchSimilarProduct != null) {
-      return fetchSimilarProduct(locale);
+      return fetchSimilarProduct();
     }
     return orElse();
   }
@@ -869,13 +861,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
 }
 
 abstract class _FetchSimilarProduct implements ProductDetailEvent {
-  factory _FetchSimilarProduct({required final Locale locale}) =
-      _$_FetchSimilarProduct;
-
-  Locale get locale;
-  @JsonKey(ignore: true)
-  _$$_FetchSimilarProductCopyWith<_$_FetchSimilarProduct> get copyWith =>
-      throw _privateConstructorUsedError;
+  factory _FetchSimilarProduct() = _$_FetchSimilarProduct;
 }
 
 /// @nodoc
@@ -883,8 +869,6 @@ abstract class _$$_FetchMetaDataCopyWith<$Res> {
   factory _$$_FetchMetaDataCopyWith(
           _$_FetchMetaData value, $Res Function(_$_FetchMetaData) then) =
       __$$_FetchMetaDataCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Locale locale});
 }
 
 /// @nodoc
@@ -894,64 +878,38 @@ class __$$_FetchMetaDataCopyWithImpl<$Res>
   __$$_FetchMetaDataCopyWithImpl(
       _$_FetchMetaData _value, $Res Function(_$_FetchMetaData) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? locale = null,
-  }) {
-    return _then(_$_FetchMetaData(
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_FetchMetaData implements _FetchMetaData {
-  _$_FetchMetaData({required this.locale});
-
-  @override
-  final Locale locale;
+  _$_FetchMetaData();
 
   @override
   String toString() {
-    return 'ProductDetailEvent.fetchMetaData(locale: $locale)';
+    return 'ProductDetailEvent.fetchMetaData()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_FetchMetaData &&
-            (identical(other.locale, locale) || other.locale == locale));
+        (other.runtimeType == runtimeType && other is _$_FetchMetaData);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, locale);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FetchMetaDataCopyWith<_$_FetchMetaData> get copyWith =>
-      __$$_FetchMetaDataCopyWithImpl<_$_FetchMetaData>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -963,21 +921,23 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
     required TResult Function(bool exceedQty) setExceedQty,
   }) {
-    return fetchMetaData(locale);
+    return fetchMetaData();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -987,21 +947,23 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
     TResult? Function(bool exceedQty)? setExceedQty,
   }) {
-    return fetchMetaData?.call(locale);
+    return fetchMetaData?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1013,7 +975,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult orElse(),
   }) {
     if (fetchMetaData != null) {
-      return fetchMetaData(locale);
+      return fetchMetaData();
     }
     return orElse();
   }
@@ -1084,12 +1046,7 @@ class _$_FetchMetaData implements _FetchMetaData {
 }
 
 abstract class _FetchMetaData implements ProductDetailEvent {
-  factory _FetchMetaData({required final Locale locale}) = _$_FetchMetaData;
-
-  Locale get locale;
-  @JsonKey(ignore: true)
-  _$$_FetchMetaDataCopyWith<_$_FetchMetaData> get copyWith =>
-      throw _privateConstructorUsedError;
+  factory _FetchMetaData() = _$_FetchMetaData;
 }
 
 /// @nodoc
@@ -1098,7 +1055,7 @@ abstract class _$$_FetchStockCopyWith<$Res> {
           _$_FetchStock value, $Res Function(_$_FetchStock) then) =
       __$$_FetchStockCopyWithImpl<$Res>;
   @useResult
-  $Res call({MaterialNumber materialNumber, Locale locale});
+  $Res call({MaterialNumber materialNumber});
 }
 
 /// @nodoc
@@ -1113,17 +1070,12 @@ class __$$_FetchStockCopyWithImpl<$Res>
   @override
   $Res call({
     Object? materialNumber = null,
-    Object? locale = null,
   }) {
     return _then(_$_FetchStock(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
     ));
   }
 }
@@ -1131,16 +1083,14 @@ class __$$_FetchStockCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FetchStock implements _FetchStock {
-  _$_FetchStock({required this.materialNumber, required this.locale});
+  _$_FetchStock({required this.materialNumber});
 
   @override
   final MaterialNumber materialNumber;
-  @override
-  final Locale locale;
 
   @override
   String toString() {
-    return 'ProductDetailEvent.fetchStock(materialNumber: $materialNumber, locale: $locale)';
+    return 'ProductDetailEvent.fetchStock(materialNumber: $materialNumber)';
   }
 
   @override
@@ -1149,12 +1099,11 @@ class _$_FetchStock implements _FetchStock {
         (other.runtimeType == runtimeType &&
             other is _$_FetchStock &&
             (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
-            (identical(other.locale, locale) || other.locale == locale));
+                other.materialNumber == materialNumber));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber, locale);
+  int get hashCode => Object.hash(runtimeType, materialNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -1166,15 +1115,13 @@ class _$_FetchStock implements _FetchStock {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -1186,21 +1133,23 @@ class _$_FetchStock implements _FetchStock {
     required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
     required TResult Function(bool exceedQty) setExceedQty,
   }) {
-    return fetchStock(materialNumber, locale);
+    return fetchStock(materialNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1210,21 +1159,23 @@ class _$_FetchStock implements _FetchStock {
     TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
     TResult? Function(bool exceedQty)? setExceedQty,
   }) {
-    return fetchStock?.call(materialNumber, locale);
+    return fetchStock?.call(materialNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1236,7 +1187,7 @@ class _$_FetchStock implements _FetchStock {
     required TResult orElse(),
   }) {
     if (fetchStock != null) {
-      return fetchStock(materialNumber, locale);
+      return fetchStock(materialNumber);
     }
     return orElse();
   }
@@ -1307,12 +1258,10 @@ class _$_FetchStock implements _FetchStock {
 }
 
 abstract class _FetchStock implements ProductDetailEvent {
-  factory _FetchStock(
-      {required final MaterialNumber materialNumber,
-      required final Locale locale}) = _$_FetchStock;
+  factory _FetchStock({required final MaterialNumber materialNumber}) =
+      _$_FetchStock;
 
   MaterialNumber get materialNumber;
-  Locale get locale;
   @JsonKey(ignore: true)
   _$$_FetchStockCopyWith<_$_FetchStock> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1324,7 +1273,7 @@ abstract class _$$_FetchStockForBundleCopyWith<$Res> {
           $Res Function(_$_FetchStockForBundle) then) =
       __$$_FetchStockForBundleCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<MaterialInfo> materials, Locale locale});
+  $Res call({List<MaterialInfo> materials});
 }
 
 /// @nodoc
@@ -1339,17 +1288,12 @@ class __$$_FetchStockForBundleCopyWithImpl<$Res>
   @override
   $Res call({
     Object? materials = null,
-    Object? locale = null,
   }) {
     return _then(_$_FetchStockForBundle(
       materials: null == materials
           ? _value._materials
           : materials // ignore: cast_nullable_to_non_nullable
               as List<MaterialInfo>,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
     ));
   }
 }
@@ -1357,8 +1301,7 @@ class __$$_FetchStockForBundleCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FetchStockForBundle implements _FetchStockForBundle {
-  _$_FetchStockForBundle(
-      {required final List<MaterialInfo> materials, required this.locale})
+  _$_FetchStockForBundle({required final List<MaterialInfo> materials})
       : _materials = materials;
 
   final List<MaterialInfo> _materials;
@@ -1370,11 +1313,8 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
   }
 
   @override
-  final Locale locale;
-
-  @override
   String toString() {
-    return 'ProductDetailEvent.fetchStockForBundle(materials: $materials, locale: $locale)';
+    return 'ProductDetailEvent.fetchStockForBundle(materials: $materials)';
   }
 
   @override
@@ -1383,13 +1323,12 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
         (other.runtimeType == runtimeType &&
             other is _$_FetchStockForBundle &&
             const DeepCollectionEquality()
-                .equals(other._materials, _materials) &&
-            (identical(other.locale, locale) || other.locale == locale));
+                .equals(other._materials, _materials));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_materials), locale);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_materials));
 
   @JsonKey(ignore: true)
   @override
@@ -1402,15 +1341,13 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -1422,21 +1359,23 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
     required TResult Function(bool exceedQty) setExceedQty,
   }) {
-    return fetchStockForBundle(materials, locale);
+    return fetchStockForBundle(materials);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1446,21 +1385,23 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     TResult? Function(int quantity)? fetchItemQuantityForZdp5Discount,
     TResult? Function(bool exceedQty)? setExceedQty,
   }) {
-    return fetchStockForBundle?.call(materials, locale);
+    return fetchStockForBundle?.call(materials);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1472,7 +1413,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     required TResult orElse(),
   }) {
     if (fetchStockForBundle != null) {
-      return fetchStockForBundle(materials, locale);
+      return fetchStockForBundle(materials);
     }
     return orElse();
   }
@@ -1543,12 +1484,10 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
 }
 
 abstract class _FetchStockForBundle implements ProductDetailEvent {
-  factory _FetchStockForBundle(
-      {required final List<MaterialInfo> materials,
-      required final Locale locale}) = _$_FetchStockForBundle;
+  factory _FetchStockForBundle({required final List<MaterialInfo> materials}) =
+      _$_FetchStockForBundle;
 
   List<MaterialInfo> get materials;
-  Locale get locale;
   @JsonKey(ignore: true)
   _$$_FetchStockForBundleCopyWith<_$_FetchStockForBundle> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1619,15 +1558,13 @@ class _$_ChangeImage implements _ChangeImage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -1645,15 +1582,17 @@ class _$_ChangeImage implements _ChangeImage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1669,15 +1608,17 @@ class _$_ChangeImage implements _ChangeImage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1845,15 +1786,13 @@ class _$_AddFavourite implements _AddFavourite {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -1871,15 +1810,17 @@ class _$_AddFavourite implements _AddFavourite {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1895,15 +1836,17 @@ class _$_AddFavourite implements _AddFavourite {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2074,15 +2017,13 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -2100,15 +2041,17 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2124,15 +2067,17 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2291,15 +2236,13 @@ class _$_UpdateQty implements _UpdateQty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -2317,15 +2260,17 @@ class _$_UpdateQty implements _UpdateQty {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2341,15 +2286,17 @@ class _$_UpdateQty implements _UpdateQty {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2512,15 +2459,13 @@ class _$_FetchItemQuantityForZdp5Discount
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -2538,15 +2483,17 @@ class _$_FetchItemQuantityForZdp5Discount
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2562,15 +2509,17 @@ class _$_FetchItemQuantityForZdp5Discount
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2729,15 +2678,13 @@ class _$_SetExceedQty implements _SetExceedQty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
-    required TResult Function(MaterialInfo materialInfo, Locale locale) fetch,
-    required TResult Function(Locale locale) fetchSimilarProduct,
-    required TResult Function(Locale locale) fetchMetaData,
-    required TResult Function(MaterialNumber materialNumber, Locale locale)
-        fetchStock,
-    required TResult Function(List<MaterialInfo> materials, Locale locale)
-        fetchStockForBundle,
+    required TResult Function(MaterialInfo materialInfo) fetch,
+    required TResult Function() fetchSimilarProduct,
+    required TResult Function() fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber) fetchStock,
+    required TResult Function(List<MaterialInfo> materials) fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -2755,15 +2702,17 @@ class _$_SetExceedQty implements _SetExceedQty {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult? Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult? Function(Locale locale)? fetchSimilarProduct,
-    TResult? Function(Locale locale)? fetchMetaData,
-    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult? Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult? Function(MaterialInfo materialInfo)? fetch,
+    TResult? Function()? fetchSimilarProduct,
+    TResult? Function()? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2779,15 +2728,17 @@ class _$_SetExceedQty implements _SetExceedQty {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
-    TResult Function(MaterialInfo materialInfo, Locale locale)? fetch,
-    TResult Function(Locale locale)? fetchSimilarProduct,
-    TResult Function(Locale locale)? fetchMetaData,
-    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
-    TResult Function(List<MaterialInfo> materials, Locale locale)?
-        fetchStockForBundle,
+    TResult Function(MaterialInfo materialInfo)? fetch,
+    TResult Function()? fetchSimilarProduct,
+    TResult Function()? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber)? fetchStock,
+    TResult Function(List<MaterialInfo> materials)? fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2881,6 +2832,7 @@ abstract class _SetExceedQty implements ProductDetailEvent {
 
 /// @nodoc
 mixin _$ProductDetailState {
+  User get user => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
@@ -2907,7 +2859,8 @@ abstract class $ProductDetailStateCopyWith<$Res> {
       _$ProductDetailStateCopyWithImpl<$Res, ProductDetailState>;
   @useResult
   $Res call(
-      {SalesOrganisation salesOrganisation,
+      {User user,
+      SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -2919,6 +2872,7 @@ abstract class $ProductDetailStateCopyWith<$Res> {
       int inputQty,
       int selectedImageIndex});
 
+  $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
@@ -2938,6 +2892,7 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
@@ -2951,6 +2906,10 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
     Object? selectedImageIndex = null,
   }) {
     return _then(_value.copyWith(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -3000,6 +2959,14 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
 
   @override
   @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value) as $Val);
@@ -3041,7 +3008,8 @@ abstract class _$$_ProductDetailStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {SalesOrganisation salesOrganisation,
+      {User user,
+      SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -3053,6 +3021,8 @@ abstract class _$$_ProductDetailStateCopyWith<$Res>
       int inputQty,
       int selectedImageIndex});
 
+  @override
+  $UserCopyWith<$Res> get user;
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
@@ -3074,6 +3044,7 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
@@ -3087,6 +3058,10 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
     Object? selectedImageIndex = null,
   }) {
     return _then(_$_ProductDetailState(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -3139,7 +3114,8 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
 
 class _$_ProductDetailState extends _ProductDetailState {
   const _$_ProductDetailState(
-      {required this.salesOrganisation,
+      {required this.user,
+      required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.failureOrSuccessOption,
@@ -3152,6 +3128,8 @@ class _$_ProductDetailState extends _ProductDetailState {
       this.selectedImageIndex = 0})
       : super._();
 
+  @override
+  final User user;
   @override
   final SalesOrganisation salesOrganisation;
   @override
@@ -3178,7 +3156,7 @@ class _$_ProductDetailState extends _ProductDetailState {
 
   @override
   String toString() {
-    return 'ProductDetailState(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, failureOrSuccessOption: $failureOrSuccessOption, productDetailAggregate: $productDetailAggregate, isDetailFetching: $isDetailFetching, isStockFetching: $isStockFetching, isRelatedProductsFetching: $isRelatedProductsFetching, isMetadataFetching: $isMetadataFetching, inputQty: $inputQty, selectedImageIndex: $selectedImageIndex)';
+    return 'ProductDetailState(user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, failureOrSuccessOption: $failureOrSuccessOption, productDetailAggregate: $productDetailAggregate, isDetailFetching: $isDetailFetching, isStockFetching: $isStockFetching, isRelatedProductsFetching: $isRelatedProductsFetching, isMetadataFetching: $isMetadataFetching, inputQty: $inputQty, selectedImageIndex: $selectedImageIndex)';
   }
 
   @override
@@ -3186,6 +3164,7 @@ class _$_ProductDetailState extends _ProductDetailState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProductDetailState &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -3214,6 +3193,7 @@ class _$_ProductDetailState extends _ProductDetailState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      user,
       salesOrganisation,
       customerCodeInfo,
       shipToInfo,
@@ -3236,7 +3216,8 @@ class _$_ProductDetailState extends _ProductDetailState {
 
 abstract class _ProductDetailState extends ProductDetailState {
   const factory _ProductDetailState(
-      {required final SalesOrganisation salesOrganisation,
+      {required final User user,
+      required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -3249,6 +3230,8 @@ abstract class _ProductDetailState extends ProductDetailState {
       final int selectedImageIndex}) = _$_ProductDetailState;
   const _ProductDetailState._() : super._();
 
+  @override
+  User get user;
   @override
   SalesOrganisation get salesOrganisation;
   @override

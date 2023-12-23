@@ -17,7 +17,6 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
-import 'package:ezrxmobile/presentation/core/language_picker.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -275,9 +274,9 @@ void main() {
       final expectedState = Stream.fromIterable([
         UserState.initial().copyWith(
           user: userMock.copyWith(
-            supportedLanguages: [const Locale('zh'), const Locale('en')],
+            supportedLanguages: [Language.mandarin(), Language.english()],
           ),
-          activeLanguage: const Locale('zh'),
+          activeLanguage: Language.mandarin(),
         ),
       ]);
       whenListen(userBlockMock, expectedState);
@@ -296,10 +295,10 @@ void main() {
       );
       await tester.pumpAndSettle();
       final languageZH =
-          find.byKey(Key('language_${const Locale('zh').languageString()}'));
+          find.byKey(Key('language_${Language.mandarin().languageString}'));
       expect(languageZH, findsWidgets);
       final languageEN =
-          find.byKey(Key('language_${const Locale('en').languageString()}'));
+          find.byKey(Key('language_${Language.english().languageString}'));
       expect(languageEN, findsWidgets);
       await tester.tap(
         languageEN.last,
@@ -307,8 +306,8 @@ void main() {
       );
       verify(
         () => userBlockMock.add(
-          const UserEvent.selectLanguage(
-            Locale('en'),
+          UserEvent.selectLanguage(
+            Language.english(),
           ),
         ),
       ).called(1);

@@ -1,26 +1,23 @@
-import 'dart:ui';
-
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/repository/mixpanel_repository.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class ChatBotRepositoryMock extends Mock implements ChatBotRepository {}
 
@@ -67,7 +64,7 @@ void main() {
     disablePrincipals: false,
     enableGimmickMaterial: false,
     languageFilter: false,
-    languageValue: const Locale(ApiLanguageCode.english),
+    languageValue: Language.english(),
     disableBundles: false,
     principalList: [],
     enableBatchNumber: false,
@@ -139,6 +136,9 @@ void main() {
 
     blocTest(
       'Eligibility Update fail',
+      seed: () => EligibilityState.initial().copyWith(
+        salesOrganisation: fakeSaleOrg,
+      ),
       build: () => EligibilityBloc(
         chatBotRepository: chatBotRepositoryMock,
         mixpanelRepository: mixpanelRepositoryMock,
@@ -150,12 +150,8 @@ void main() {
             salesOrganisation: fakeSaleOrg,
             salesOrganisationConfigs: fakeSaleOrgConfig,
             shipToInfo: fakeShipToInfo,
-            user: fakeUser.copyWith(
-              preferredLanguage: Locale(
-                fakeUser.userPreferredLanguageCode,
-                fakeSaleOrg.salesOrg.country,
-              ),
-            ),
+            user: fakeUser,
+            locale: fakeUser.preferredLanguage.locale,
           ),
         ).thenAnswer(
           (invocation) async => const Right(true),
@@ -196,6 +192,9 @@ void main() {
 
     blocTest(
       'Eligibility Update',
+      seed: () => EligibilityState.initial().copyWith(
+        salesOrganisation: fakeSaleOrg,
+      ),
       build: () => EligibilityBloc(
         chatBotRepository: chatBotRepositoryMock,
         mixpanelRepository: mixpanelRepositoryMock,
@@ -207,12 +206,8 @@ void main() {
             salesOrganisation: fakeSaleOrg,
             salesOrganisationConfigs: fakeSaleOrgConfig,
             shipToInfo: fakeShipToInfo,
-            user: fakeUser.copyWith(
-              preferredLanguage: Locale(
-                fakeUser.userPreferredLanguageCode,
-                fakeSaleOrg.salesOrg.country,
-              ),
-            ),
+            user: fakeUser,
+            locale: fakeUser.preferredLanguage.locale,
           ),
         ).thenAnswer(
           (invocation) async => const Left(

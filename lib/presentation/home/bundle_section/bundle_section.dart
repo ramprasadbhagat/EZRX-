@@ -234,7 +234,6 @@ class _BundleSectionItem extends StatelessWidget {
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialInfo: materialInfo,
-            locale: context.locale,
           ),
         );
     context.router.pushNamed('orders/bundle_detail_page');

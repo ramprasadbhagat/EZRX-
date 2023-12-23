@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/announcement_info/repository/i_announcement_info_repository.dart';
@@ -30,6 +31,15 @@ class AnnouncementInfoBloc
     Emitter<AnnouncementInfoState> emit,
   ) async {
     await event.map(
+      initialize: (e) {
+        emit(
+          AnnouncementInfoState.initial().copyWith(
+            user: e.user,
+            salesOrg: e.salesOrg,
+          ),
+        );
+        add(const AnnouncementInfoEvent.fetch());
+      },
       fetch: (e) async {
         emit(
           state.copyWith(
@@ -41,7 +51,8 @@ class AnnouncementInfoBloc
         );
         final failureOrSuccess =
             await announcementInfoRepository.getAnnouncement(
-          salesOrg: e.salesOrg,
+          user: state.user,
+          salesOrg: state.salesOrg,
           pageSize: config.pageSize,
           after: '',
         );
@@ -79,7 +90,8 @@ class AnnouncementInfoBloc
 
         final failureOrSuccess =
             await announcementInfoRepository.getAnnouncement(
-          salesOrg: e.salesOrg,
+          user: state.user,
+          salesOrg: state.salesOrg,
           pageSize: config.pageSize,
           after: state.announcementInfo.endCursor,
         );

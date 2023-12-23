@@ -1,26 +1,25 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
-import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
-import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
-import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/payment_term_repository.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart'
     as value_object;
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 
 class PaymentTermsRepoMock extends Mock implements PaymentTermsRepository {}
 
@@ -51,7 +50,7 @@ void main() {
     disablePrincipals: false,
     enableGimmickMaterial: false,
     languageFilter: true,
-    languageValue: const Locale(ApiLanguageCode.english),
+    languageValue: Language.english(),
     disableBundles: false,
     principalList: [],
     enableBatchNumber: false,

@@ -95,7 +95,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           context.router.pop();
         } else {
           context.read<CartBloc>().add(
-                CartEvent.updatePriceForIdMarket(locale: context.locale),
+                const CartEvent.updatePriceForIdMarket(),
               );
         }
       },

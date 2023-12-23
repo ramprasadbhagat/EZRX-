@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
@@ -14,7 +15,6 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_favourites_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -36,6 +36,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisation: e.salesOrganisation,
           shipToInfo: e.shipToInfo,
+          user: e.user,
         ),
       ),
     );
@@ -51,7 +52,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         );
         final failureOrSuccess = await productDetailRepository.getProductDetail(
           customerCodeInfo: state.customerCodeInfo,
-          locale: e.locale,
+          language: state.user.preferredLanguage,
           materialNumber: e.materialInfo.materialNumber,
           salesOrganisation: state.salesOrganisation,
           shipToInfo: state.shipToInfo,
@@ -78,7 +79,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               add(
                 _FetchStockForBundle(
                   materials: materialInfo.bundle.materials,
-                  locale: e.locale,
                 ),
               );
             } else {
@@ -86,19 +86,14 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 _FetchStock(
                   materialNumber:
                       state.productDetailAggregate.materialInfo.materialNumber,
-                  locale: e.locale,
                 ),
               );
               add(
-                _FetchSimilarProduct(
-                  locale: e.locale,
-                ),
+                _FetchSimilarProduct(),
               );
             }
             add(
-              _FetchMetaData(
-                locale: e.locale,
-              ),
+              _FetchMetaData(),
             );
           },
         );
@@ -243,7 +238,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         final failureOrSuccess =
             await productDetailRepository.getSimilarProduct(
           customerCodeInfo: state.customerCodeInfo,
-          locale: e.locale,
+          language: state.user.preferredLanguage,
           materialNumber:
               state.productDetailAggregate.materialInfo.materialNumber,
           salesOrganisation: state.salesOrganisation,

@@ -117,7 +117,6 @@ class _SimilarProductCard extends StatelessWidget {
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialInfo: materialInfo,
-            locale: context.locale,
           ),
         );
     context.read<MaterialPriceBloc>().add(

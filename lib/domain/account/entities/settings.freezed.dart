@@ -20,7 +20,7 @@ mixin _$Settings {
   bool get mobileNotifications => throw _privateConstructorUsedError;
   PaymentNotification get paymentNotification =>
       throw _privateConstructorUsedError;
-  Locale get languagePreference => throw _privateConstructorUsedError;
+  Language get languagePreference => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsCopyWith<Settings> get copyWith =>
@@ -36,7 +36,7 @@ abstract class $SettingsCopyWith<$Res> {
       {bool emailNotifications,
       bool mobileNotifications,
       PaymentNotification paymentNotification,
-      Locale languagePreference});
+      Language languagePreference});
 
   $PaymentNotificationCopyWith<$Res> get paymentNotification;
 }
@@ -75,7 +75,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
       languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
-              as Locale,
+              as Language,
     ) as $Val);
   }
 
@@ -100,7 +100,7 @@ abstract class _$$_SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
       {bool emailNotifications,
       bool mobileNotifications,
       PaymentNotification paymentNotification,
-      Locale languagePreference});
+      Language languagePreference});
 
   @override
   $PaymentNotificationCopyWith<$Res> get paymentNotification;
@@ -138,7 +138,7 @@ class __$$_SettingsCopyWithImpl<$Res>
       languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
-              as Locale,
+              as Language,
     ));
   }
 }
@@ -160,7 +160,7 @@ class _$_Settings extends _Settings {
   @override
   final PaymentNotification paymentNotification;
   @override
-  final Locale languagePreference;
+  final Language languagePreference;
 
   @override
   String toString() {
@@ -198,7 +198,7 @@ abstract class _Settings extends Settings {
       {required final bool emailNotifications,
       required final bool mobileNotifications,
       required final PaymentNotification paymentNotification,
-      required final Locale languagePreference}) = _$_Settings;
+      required final Language languagePreference}) = _$_Settings;
   const _Settings._() : super._();
 
   @override
@@ -208,7 +208,7 @@ abstract class _Settings extends Settings {
   @override
   PaymentNotification get paymentNotification;
   @override
-  Locale get languagePreference;
+  Language get languagePreference;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsCopyWith<_$_Settings> get copyWith =>

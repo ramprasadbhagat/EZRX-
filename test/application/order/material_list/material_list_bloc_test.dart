@@ -1,26 +1,25 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/add_favourite.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/add_favourite.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/remove_favourite.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_local.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:ezrxmobile/config.dart';
 
 class MockMaterialListRepository extends Mock
     implements MaterialListRepository {}
@@ -95,7 +94,7 @@ void main() {
             pageSize: config.pageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            locale: const Locale('EN'),
+            language: Language.english(),
           ),
         ).thenAnswer(
           (invocation) async => Right(materialResponseMock),
@@ -165,7 +164,7 @@ void main() {
             pageSize: config.pageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            locale: const Locale('EN'),
+            language: Language.english(),
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -251,7 +250,7 @@ void main() {
             pageSize: config.pageSize,
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            locale: const Locale('EN'),
+            language: Language.english(),
           ),
         ).thenAnswer(
           (invocation) async => Right(materialResponseMock),
@@ -306,7 +305,7 @@ void main() {
             pageSize: config.pageSize,
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            locale: const Locale('EN'),
+            language: Language.english(),
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -362,7 +361,7 @@ void main() {
             pageSize: config.pageSize,
             offset: 24,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            locale: const Locale('EN'),
+            language: Language.english(),
           ),
         ).thenAnswer(
           (invocation) async => Right(

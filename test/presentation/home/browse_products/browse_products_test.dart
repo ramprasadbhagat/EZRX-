@@ -261,7 +261,6 @@ void main() {
           () => productDetailBlocMock.add(
             ProductDetailEvent.fetch(
               materialInfo: materialList.first,
-              locale: const Locale('en'),
             ),
           ),
         ).called(1);

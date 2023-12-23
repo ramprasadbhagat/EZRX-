@@ -1,14 +1,11 @@
-import 'dart:ui';
-
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_local.dart';
@@ -92,7 +89,7 @@ void main() {
           salesOrganisation: '2601-ZPSG',
           soldToCustomerCode: '000002510',
           basePaymentTermCode: 'K002',
-          language: 'E',
+          language: 'EN',
           principalCode: [
             '0000101991',
             '0000100797',
@@ -111,7 +108,7 @@ void main() {
             mockPaymentCustomerInformation.copyWith(paymentTerm: 'K002'),
         salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
           languageFilter: true,
-          languageValue: const Locale(ApiLanguageCode.shortEnglish),
+          languageValue: Language.english(),
         ),
         salesRepInfo: mockSalesRepresentativeInfo.copyWith(
           uniquePrincipalNumber: [

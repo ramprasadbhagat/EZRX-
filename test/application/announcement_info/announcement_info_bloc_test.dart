@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -20,6 +21,7 @@ void main() {
   late AnnouncementArticleInfo announcementInfoMock;
   final announcementInfoState = AnnouncementInfoState.initial();
   final salesOrg = SalesOrg('');
+  final user = User.empty();
   late Config config;
 
   setUpAll(() async {
@@ -40,6 +42,7 @@ void main() {
       setUp: () {
         when(
           () => repository.getAnnouncement(
+            user: user,
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: '',
@@ -52,9 +55,7 @@ void main() {
       },
       act: (AnnouncementInfoBloc bloc) => bloc
         ..add(
-          AnnouncementInfoEvent.fetch(
-            salesOrg: salesOrg,
-          ),
+          const AnnouncementInfoEvent.fetch(),
         ),
       expect: () => [
         announcementInfoState.copyWith(isLoading: true),
@@ -74,6 +75,7 @@ void main() {
       setUp: () {
         when(
           () => repository.getAnnouncement(
+            user: user,
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: '',
@@ -86,9 +88,7 @@ void main() {
       },
       act: (AnnouncementInfoBloc bloc) => bloc
         ..add(
-          AnnouncementInfoEvent.fetch(
-            salesOrg: salesOrg,
-          ),
+          const AnnouncementInfoEvent.fetch(),
         ),
       expect: () => [
         announcementInfoState.copyWith(isLoading: true),
@@ -110,6 +110,7 @@ void main() {
       setUp: () {
         when(
           () => repository.getAnnouncement(
+            user: user,
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: announcementInfoMock.endCursor,
@@ -122,9 +123,7 @@ void main() {
       },
       act: (AnnouncementInfoBloc bloc) => bloc
         ..add(
-          AnnouncementInfoEvent.loadMore(
-            salesOrg: salesOrg,
-          ),
+          const AnnouncementInfoEvent.loadMore(),
         ),
       expect: () => [
         announcementInfoState.copyWith(
@@ -155,6 +154,7 @@ void main() {
       setUp: () {
         when(
           () => repository.getAnnouncement(
+            user: user,
             salesOrg: salesOrg,
             pageSize: config.pageSize,
             after: announcementInfoMock.endCursor,
@@ -167,9 +167,7 @@ void main() {
       },
       act: (AnnouncementInfoBloc bloc) => bloc
         ..add(
-          AnnouncementInfoEvent.loadMore(
-            salesOrg: salesOrg,
-          ),
+          const AnnouncementInfoEvent.loadMore(),
         ),
       expect: () => [
         announcementInfoState.copyWith(

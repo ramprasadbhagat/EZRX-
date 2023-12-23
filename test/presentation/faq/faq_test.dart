@@ -10,7 +10,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/faq/entity/faq_info.dart';
 import 'package:ezrxmobile/domain/faq/value/value_object.dart';
@@ -197,7 +196,7 @@ void main() {
               name: 'fake-name',
               type: RoleType('fake-type'),
             ),
-            preferredLanguage: const Locale(ApiLanguageCode.english),
+            preferredLanguage: Language.english(),
           ),
         ),
       );
@@ -211,7 +210,7 @@ void main() {
               name: 'fake-name',
               type: RoleType('fake-type'),
             ),
-            preferredLanguage: const Locale(ApiLanguageCode.english),
+            preferredLanguage: Language.english(),
           ),
         ),
       );
@@ -279,7 +278,7 @@ void main() {
                 name: 'fake-name',
                 type: RoleType('fake-type'),
               ),
-              preferredLanguage: const Locale(ApiLanguageCode.english),
+              preferredLanguage: Language.english(),
             ),
           ),
         );
@@ -305,7 +304,7 @@ void main() {
                 name: 'fake-name',
                 type: RoleType('fake-type'),
               ),
-              preferredLanguage: const Locale(ApiLanguageCode.english),
+              preferredLanguage: Language.english(),
             ),
           ),
         );
@@ -360,7 +359,7 @@ void main() {
                 name: 'fake-name',
                 type: RoleType('fake-type'),
               ),
-              preferredLanguage: const Locale(ApiLanguageCode.english),
+              preferredLanguage: Language.english(),
             ),
           ),
         );

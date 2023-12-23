@@ -34,7 +34,6 @@ mixin _$ComboDealMaterialDetailEvent {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -44,8 +43,7 @@ mixin _$ComboDealMaterialDetailEvent {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -68,10 +66,7 @@ mixin _$ComboDealMaterialDetailEvent {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -80,8 +75,7 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -104,10 +98,7 @@ mixin _$ComboDealMaterialDetailEvent {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -116,8 +107,7 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -380,7 +370,6 @@ class _$_Initialize implements _Initialize {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -390,8 +379,7 @@ class _$_Initialize implements _Initialize {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -418,10 +406,7 @@ class _$_Initialize implements _Initialize {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -430,8 +415,7 @@ class _$_Initialize implements _Initialize {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -458,10 +442,7 @@ class _$_Initialize implements _Initialize {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -470,8 +451,7 @@ class _$_Initialize implements _Initialize {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -688,7 +668,6 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -698,8 +677,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -725,10 +703,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -737,8 +712,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -764,10 +738,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -776,8 +747,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -963,7 +933,6 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -973,8 +942,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -1000,10 +968,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -1012,8 +977,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1039,10 +1003,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -1051,8 +1012,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1236,7 +1196,6 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -1246,8 +1205,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -1273,10 +1231,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -1285,8 +1240,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1312,10 +1266,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -1324,8 +1275,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1503,7 +1453,6 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -1513,8 +1462,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -1540,10 +1488,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -1552,8 +1497,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1579,10 +1523,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -1591,8 +1532,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1694,7 +1634,6 @@ abstract class _$$_FetchComboDealDetailCopyWith<$Res> {
   @useResult
   $Res call(
       {ComboDeal comboDeal,
-      Locale locale,
       MaterialNumber parentMaterialNumber,
       Map<MaterialNumber, int> comboMaterialsCurrentQuantity});
 
@@ -1714,7 +1653,6 @@ class __$$_FetchComboDealDetailCopyWithImpl<$Res>
   @override
   $Res call({
     Object? comboDeal = null,
-    Object? locale = null,
     Object? parentMaterialNumber = null,
     Object? comboMaterialsCurrentQuantity = null,
   }) {
@@ -1723,10 +1661,6 @@ class __$$_FetchComboDealDetailCopyWithImpl<$Res>
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
               as ComboDeal,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
       parentMaterialNumber: null == parentMaterialNumber
           ? _value.parentMaterialNumber
           : parentMaterialNumber // ignore: cast_nullable_to_non_nullable
@@ -1752,15 +1686,12 @@ class __$$_FetchComboDealDetailCopyWithImpl<$Res>
 class _$_FetchComboDealDetail implements _FetchComboDealDetail {
   const _$_FetchComboDealDetail(
       {required this.comboDeal,
-      required this.locale,
       required this.parentMaterialNumber,
       required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity})
       : _comboMaterialsCurrentQuantity = comboMaterialsCurrentQuantity;
 
   @override
   final ComboDeal comboDeal;
-  @override
-  final Locale locale;
   @override
   final MaterialNumber parentMaterialNumber;
   final Map<MaterialNumber, int> _comboMaterialsCurrentQuantity;
@@ -1774,7 +1705,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
 
   @override
   String toString() {
-    return 'ComboDealMaterialDetailEvent.fetchComboDealDetail(comboDeal: $comboDeal, locale: $locale, parentMaterialNumber: $parentMaterialNumber, comboMaterialsCurrentQuantity: $comboMaterialsCurrentQuantity)';
+    return 'ComboDealMaterialDetailEvent.fetchComboDealDetail(comboDeal: $comboDeal, parentMaterialNumber: $parentMaterialNumber, comboMaterialsCurrentQuantity: $comboMaterialsCurrentQuantity)';
   }
 
   @override
@@ -1784,7 +1715,6 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
             other is _$_FetchComboDealDetail &&
             (identical(other.comboDeal, comboDeal) ||
                 other.comboDeal == comboDeal) &&
-            (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.parentMaterialNumber, parentMaterialNumber) ||
                 other.parentMaterialNumber == parentMaterialNumber) &&
             const DeepCollectionEquality().equals(
@@ -1793,11 +1723,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      comboDeal,
-      locale,
-      parentMaterialNumber,
+  int get hashCode => Object.hash(runtimeType, comboDeal, parentMaterialNumber,
       const DeepCollectionEquality().hash(_comboMaterialsCurrentQuantity));
 
   @JsonKey(ignore: true)
@@ -1826,7 +1752,6 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -1836,15 +1761,14 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
     required TResult Function() clearSelectedItem,
   }) {
     return fetchComboDealDetail(
-        comboDeal, locale, parentMaterialNumber, comboMaterialsCurrentQuantity);
+        comboDeal, parentMaterialNumber, comboMaterialsCurrentQuantity);
   }
 
   @override
@@ -1864,10 +1788,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -1876,15 +1797,14 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
     TResult? Function()? clearSelectedItem,
   }) {
     return fetchComboDealDetail?.call(
-        comboDeal, locale, parentMaterialNumber, comboMaterialsCurrentQuantity);
+        comboDeal, parentMaterialNumber, comboMaterialsCurrentQuantity);
   }
 
   @override
@@ -1904,10 +1824,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -1916,8 +1833,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1925,8 +1841,8 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     required TResult orElse(),
   }) {
     if (fetchComboDealDetail != null) {
-      return fetchComboDealDetail(comboDeal, locale, parentMaterialNumber,
-          comboMaterialsCurrentQuantity);
+      return fetchComboDealDetail(
+          comboDeal, parentMaterialNumber, comboMaterialsCurrentQuantity);
     }
     return orElse();
   }
@@ -2005,13 +1921,11 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
 abstract class _FetchComboDealDetail implements ComboDealMaterialDetailEvent {
   const factory _FetchComboDealDetail(
       {required final ComboDeal comboDeal,
-      required final Locale locale,
       required final MaterialNumber parentMaterialNumber,
       required final Map<MaterialNumber, int>
           comboMaterialsCurrentQuantity}) = _$_FetchComboDealDetail;
 
   ComboDeal get comboDeal;
-  Locale get locale;
   MaterialNumber get parentMaterialNumber;
   Map<MaterialNumber, int> get comboMaterialsCurrentQuantity;
   @JsonKey(ignore: true)
@@ -2098,7 +2012,6 @@ class _$_Search implements _Search {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -2108,8 +2021,7 @@ class _$_Search implements _Search {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -2135,10 +2047,7 @@ class _$_Search implements _Search {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -2147,8 +2056,7 @@ class _$_Search implements _Search {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2174,10 +2082,7 @@ class _$_Search implements _Search {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -2186,8 +2091,7 @@ class _$_Search implements _Search {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2363,7 +2267,6 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -2373,8 +2276,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -2400,10 +2302,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -2412,8 +2311,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2439,10 +2337,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -2451,8 +2346,7 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2601,7 +2495,6 @@ class _$_ClearSearch implements _ClearSearch {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -2611,8 +2504,7 @@ class _$_ClearSearch implements _ClearSearch {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -2638,10 +2530,7 @@ class _$_ClearSearch implements _ClearSearch {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -2650,8 +2539,7 @@ class _$_ClearSearch implements _ClearSearch {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2677,10 +2565,7 @@ class _$_ClearSearch implements _ClearSearch {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -2689,8 +2574,7 @@ class _$_ClearSearch implements _ClearSearch {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2787,8 +2671,7 @@ abstract class _$$_FetchComboDealPrincipalCopyWith<$Res> {
   $Res call(
       {ComboDeal comboDeal,
       Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-      List<String> principles,
-      Locale locale});
+      List<String> principles});
 
   $ComboDealCopyWith<$Res> get comboDeal;
 }
@@ -2808,7 +2691,6 @@ class __$$_FetchComboDealPrincipalCopyWithImpl<$Res>
     Object? comboDeal = null,
     Object? comboMaterialsCurrentQuantity = null,
     Object? principles = null,
-    Object? locale = null,
   }) {
     return _then(_$_FetchComboDealPrincipal(
       comboDeal: null == comboDeal
@@ -2823,10 +2705,6 @@ class __$$_FetchComboDealPrincipalCopyWithImpl<$Res>
           ? _value._principles
           : principles // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
     ));
   }
 
@@ -2845,8 +2723,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
   const _$_FetchComboDealPrincipal(
       {required this.comboDeal,
       required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-      required final List<String> principles,
-      required this.locale})
+      required final List<String> principles})
       : _comboMaterialsCurrentQuantity = comboMaterialsCurrentQuantity,
         _principles = principles;
 
@@ -2870,11 +2747,8 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
   }
 
   @override
-  final Locale locale;
-
-  @override
   String toString() {
-    return 'ComboDealMaterialDetailEvent.fetchComboDealPrincipal(comboDeal: $comboDeal, comboMaterialsCurrentQuantity: $comboMaterialsCurrentQuantity, principles: $principles, locale: $locale)';
+    return 'ComboDealMaterialDetailEvent.fetchComboDealPrincipal(comboDeal: $comboDeal, comboMaterialsCurrentQuantity: $comboMaterialsCurrentQuantity, principles: $principles)';
   }
 
   @override
@@ -2888,8 +2762,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
                 other._comboMaterialsCurrentQuantity,
                 _comboMaterialsCurrentQuantity) &&
             const DeepCollectionEquality()
-                .equals(other._principles, _principles) &&
-            (identical(other.locale, locale) || other.locale == locale));
+                .equals(other._principles, _principles));
   }
 
   @override
@@ -2897,8 +2770,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
       runtimeType,
       comboDeal,
       const DeepCollectionEquality().hash(_comboMaterialsCurrentQuantity),
-      const DeepCollectionEquality().hash(_principles),
-      locale);
+      const DeepCollectionEquality().hash(_principles));
 
   @JsonKey(ignore: true)
   @override
@@ -2927,7 +2799,6 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -2937,15 +2808,14 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
     required TResult Function() clearSelectedItem,
   }) {
     return fetchComboDealPrincipal(
-        comboDeal, comboMaterialsCurrentQuantity, principles, locale);
+        comboDeal, comboMaterialsCurrentQuantity, principles);
   }
 
   @override
@@ -2965,10 +2835,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -2977,15 +2844,14 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
     TResult? Function()? clearSelectedItem,
   }) {
     return fetchComboDealPrincipal?.call(
-        comboDeal, comboMaterialsCurrentQuantity, principles, locale);
+        comboDeal, comboMaterialsCurrentQuantity, principles);
   }
 
   @override
@@ -3005,10 +2871,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -3017,8 +2880,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -3027,7 +2889,7 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
   }) {
     if (fetchComboDealPrincipal != null) {
       return fetchComboDealPrincipal(
-          comboDeal, comboMaterialsCurrentQuantity, principles, locale);
+          comboDeal, comboMaterialsCurrentQuantity, principles);
     }
     return orElse();
   }
@@ -3108,13 +2970,11 @@ abstract class _FetchComboDealPrincipal
   const factory _FetchComboDealPrincipal(
       {required final ComboDeal comboDeal,
       required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-      required final List<String> principles,
-      required final Locale locale}) = _$_FetchComboDealPrincipal;
+      required final List<String> principles}) = _$_FetchComboDealPrincipal;
 
   ComboDeal get comboDeal;
   Map<MaterialNumber, int> get comboMaterialsCurrentQuantity;
   List<String> get principles;
-  Locale get locale;
   @JsonKey(ignore: true)
   _$$_FetchComboDealPrincipalCopyWith<_$_FetchComboDealPrincipal>
       get copyWith => throw _privateConstructorUsedError;
@@ -3232,7 +3092,6 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -3242,8 +3101,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -3269,10 +3127,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -3281,8 +3136,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -3308,10 +3162,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -3320,8 +3171,7 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -3472,7 +3322,6 @@ class _$_ClearSelectedItem implements _ClearSelectedItem {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
         fetchComboDealDetail,
@@ -3482,8 +3331,7 @@ class _$_ClearSelectedItem implements _ClearSelectedItem {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)
+            List<String> principles)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -3509,10 +3357,7 @@ class _$_ClearSelectedItem implements _ClearSelectedItem {
         setPriceInfo,
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
-    TResult? Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult? Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult? Function(SearchKey searchKey)? search,
@@ -3521,8 +3366,7 @@ class _$_ClearSelectedItem implements _ClearSelectedItem {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -3548,10 +3392,7 @@ class _$_ClearSelectedItem implements _ClearSelectedItem {
         setPriceInfo,
     TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult Function(MaterialNumber item)? updateItemSelection,
-    TResult Function(
-            ComboDeal comboDeal,
-            Locale locale,
-            MaterialNumber parentMaterialNumber,
+    TResult Function(ComboDeal comboDeal, MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
         fetchComboDealDetail,
     TResult Function(SearchKey searchKey)? search,
@@ -3560,8 +3401,7 @@ class _$_ClearSelectedItem implements _ClearSelectedItem {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles,
-            Locale locale)?
+            List<String> principles)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,

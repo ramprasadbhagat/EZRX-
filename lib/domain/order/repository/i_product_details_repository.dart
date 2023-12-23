@@ -4,11 +4,11 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
 abstract class IProductDetailRepository {
   Future<Either<ApiFailure, MaterialInfo>> getProductDetail({
@@ -16,7 +16,7 @@ abstract class IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
     required MaterialInfoType type,
   });
 
@@ -25,7 +25,7 @@ abstract class IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
     required List<MaterialInfoType> types,
   });
 
@@ -34,7 +34,7 @@ abstract class IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
   });
 
   Future<Either<ApiFailure, MaterialInfo>> getMaterialDetail({
@@ -42,7 +42,7 @@ abstract class IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
     required MaterialInfoType type,
   });
 
@@ -51,7 +51,7 @@ abstract class IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
     required MaterialInfoType type,
   });
 
@@ -67,7 +67,7 @@ abstract class IProductDetailRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Locale locale,
+    required Language language,
   });
 
   Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfoList({

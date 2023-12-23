@@ -14,7 +14,6 @@ import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -215,7 +214,7 @@ class ComboDealMaterialDetailBloc
 
         final materialsInfo = await _getMaterialsInfo(
           e.comboDeal.allMaterialNumbers,
-          e.locale,
+          state.user.preferredLanguage,
         );
 
         if (materialsInfo.isNotEmpty) {
@@ -331,7 +330,7 @@ class ComboDealMaterialDetailBloc
 
           final materialsInfo = await _getMaterialsInfo(
             materialsNextPage,
-            e.locale,
+            state.user.preferredLanguage,
           );
 
           if (materialsInfo.isNotEmpty) {
@@ -563,12 +562,12 @@ class ComboDealMaterialDetailBloc
 
   Future<List<MaterialInfo>> _getMaterialsInfo(
     List<MaterialNumber> items,
-    Locale locale,
+    Language language,
   ) async {
     final failureOrSuccessProductDetails =
         await productDetailRepository.getProductListDetail(
       customerCodeInfo: state.customerCodeInfo,
-      locale: locale,
+      language: language,
       materialNumber: items,
       salesOrganisation: state.salesOrganisation,
       shipToInfo: state.shipToInfo,

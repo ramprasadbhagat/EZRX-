@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -37,6 +38,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
           ArticlesInfoState.initial().copyWith(
             shipToInfo: e.shipToInfo,
             salesOrg: e.salesOrg,
+            user: e.user,
           ),
         );
         add(const ArticlesInfoEvent.getArticles());
@@ -52,6 +54,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
         );
 
         final failureOrSuccessOption = await articleInfoRepository.getArticles(
+          user: state.user,
           salesOrg: state.salesOrg,
           pageSize: config.pageSize,
           after: state.articleInfo.endCursor,
@@ -90,6 +93,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
         );
 
         final failureOrSuccessOption = await articleInfoRepository.getArticles(
+          user: state.user,
           salesOrg: state.salesOrg,
           pageSize: config.pageSize,
           after: state.articleInfo.endCursor,

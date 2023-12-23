@@ -1,12 +1,10 @@
 //Sales org
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const _fakeSaleOrgId = 'fake-sale-org-id-1234';
@@ -218,7 +216,7 @@ final fakeTWSalesOrgConfigGMCEnabled =
 final fakeSGSalesOrgConfigGimmickMaterialEnabled =
     SalesOrganisationConfigs.empty().copyWith(
   languageFilter: true,
-  languageValue: const Locale(ApiLanguageCode.english),
+  languageValue: Language.english(),
   enableGimmickMaterial: true,
   principalList: [
     SalesOrganisationConfigsPrincipal.empty().copyWith(

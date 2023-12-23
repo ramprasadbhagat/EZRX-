@@ -1,13 +1,14 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
-import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/infrastructure/auth/repository/forgot_password_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
+import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
+import 'package:ezrxmobile/infrastructure/auth/repository/forgot_password_repository.dart';
 
 class ForgotPasswordRepositoryMock extends Mock
     implements ForgotPasswordRepository {}
@@ -16,7 +17,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late ForgotPasswordRepository forgotPasswordRepositoryMock;
   final userName = Username('fake-username');
-  const local = Locale('en');
+  final language = Language.english();
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -59,7 +60,7 @@ void main() {
       seed: () =>
           ForgotPasswordState.initial().copyWith(username: Username('')),
       act: (ForgotPasswordBloc bloc) => bloc.add(
-        const ForgotPasswordEvent.requestPasswordReset(local),
+        ForgotPasswordEvent.requestPasswordReset(language),
       ),
       expect: () => [
         ForgotPasswordState.initial().copyWith(showErrorMessages: true),
@@ -74,7 +75,7 @@ void main() {
       setUp: () {
         when(
           () => forgotPasswordRepositoryMock.requestResetPassword(
-            locale: local,
+            language: language,
             username: userName,
           ),
         ).thenAnswer(
@@ -85,7 +86,7 @@ void main() {
       },
       seed: () => ForgotPasswordState.initial().copyWith(username: userName),
       act: (ForgotPasswordBloc bloc) => bloc.add(
-        const ForgotPasswordEvent.requestPasswordReset(local),
+        ForgotPasswordEvent.requestPasswordReset(language),
       ),
       expect: () => [
         ForgotPasswordState.initial().copyWith(
@@ -111,7 +112,7 @@ void main() {
       setUp: () {
         when(
           () => forgotPasswordRepositoryMock.requestResetPassword(
-            locale: local,
+            language: language,
             username: userName,
           ),
         ).thenAnswer(
@@ -122,7 +123,7 @@ void main() {
       },
       seed: () => ForgotPasswordState.initial().copyWith(username: userName),
       act: (ForgotPasswordBloc bloc) => bloc.add(
-        const ForgotPasswordEvent.requestPasswordReset(local),
+        ForgotPasswordEvent.requestPasswordReset(language),
       ),
       expect: () => [
         ForgotPasswordState.initial().copyWith(

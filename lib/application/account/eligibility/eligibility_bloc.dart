@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -56,11 +54,11 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
         );
         final failureOrSuccess = await chatBotRepository.passPayloadToChatbot(
           salesOrganisation: state.salesOrganisation,
-          user: state.user
-              .copyWith(preferredLanguage: state.localeWithCountryCode),
+          user: state.user,
           salesOrganisationConfigs: state.salesOrgConfigs,
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
+          locale: state.user.preferredLanguage.locale,
         );
         failureOrSuccess.fold(
           (failure) {

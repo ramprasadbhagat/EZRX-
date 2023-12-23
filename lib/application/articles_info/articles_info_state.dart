@@ -5,6 +5,7 @@ class ArticlesInfoState with _$ArticlesInfoState {
   const ArticlesInfoState._();
 
   const factory ArticlesInfoState({
+    required User user,
     required SalesOrg salesOrg,
     required ShipToInfo shipToInfo,
     required AnnouncementArticleInfo articleInfo,
@@ -15,6 +16,7 @@ class ArticlesInfoState with _$ArticlesInfoState {
   }) = _ArticlesInfoState;
 
   factory ArticlesInfoState.initial() => ArticlesInfoState(
+        user: User.empty(),
         salesOrg: SalesOrg(''),
         shipToInfo: ShipToInfo.empty(),
         isFetching: false,

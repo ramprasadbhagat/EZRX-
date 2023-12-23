@@ -149,7 +149,6 @@ class ComboOffersProduct extends StatelessWidget {
                                 ComboDealMaterialDetailEvent
                                     .fetchComboDealDetail(
                                   comboDeal: comboDeal,
-                                  locale: context.locale,
                                   parentMaterialNumber: materialNumber,
                                   comboMaterialsCurrentQuantity:
                                       overrideQuantity,
@@ -172,7 +171,6 @@ class ComboOffersProduct extends StatelessWidget {
                                   principles: [principalCode],
                                   comboMaterialsCurrentQuantity:
                                       overrideQuantity,
-                                  locale: context.locale,
                                 ),
                               );
                         }

@@ -157,9 +157,7 @@ void main() {
           await tester.pump(const Duration(seconds: 1));
           verify(
             () => announcementInfoBlocMock.add(
-              AnnouncementInfoEvent.fetch(
-                salesOrg: SalesOrg(''),
-              ),
+              const AnnouncementInfoEvent.fetch(),
             ),
           ).called(1);
           handle.dispose();
@@ -288,9 +286,7 @@ void main() {
           await tester.pump(const Duration(seconds: 1));
           verify(
             () => announcementInfoBlocMock.add(
-              AnnouncementInfoEvent.fetch(
-                salesOrg: SalesOrg(''),
-              ),
+              const AnnouncementInfoEvent.fetch(),
             ),
           ).called(1);
           handle.dispose();
@@ -372,9 +368,7 @@ void main() {
 
           verify(
             () => announcementInfoBlocMock.add(
-              AnnouncementInfoEvent.loadMore(
-                salesOrg: SalesOrg(''),
-              ),
+              const AnnouncementInfoEvent.loadMore(),
             ),
           ).called(1);
         },

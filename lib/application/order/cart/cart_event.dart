@@ -73,12 +73,9 @@ class CartEvent with _$CartEvent {
     required Price overriddenProductPrice,
   }) = _UpdateCartProductWithCounterOffer;
 
-  const factory CartEvent.updatePriceForIdMarket({
-    required Locale locale,
-  }) = _UpdatePriceForIdMarket;
+  const factory CartEvent.updatePriceForIdMarket() = _UpdatePriceForIdMarket;
 
   const factory CartEvent.updateProductDetermination({
-    required Locale locale,
     required List<AplProduct> productDeterminationList,
     required List<PriceAggregate> updatedCartItems,
   }) = _UpdateProductDetermination;

@@ -10,6 +10,8 @@ class _PaymentBasicInfoSection extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isDetailFetching != current.isDetailFetching,
       builder: (context, state) {
+        final eligibilityState = context.read<EligibilityBloc>().state;
+
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
           color: ZPColors.primary,
@@ -22,7 +24,7 @@ class _PaymentBasicInfoSection extends StatelessWidget {
                   state.isDetailFetching
                       ? SizedBox(width: 150, child: LoadingShimmer.tile())
                       : Text(
-                          '${context.read<EligibilityBloc>().state.salesOrg.paymentIdPretext} #${state.details.zzAdvice.displayZerosIfEmpty}',
+                          '${eligibilityState.salesOrg.paymentIdPretext} #${state.details.zzAdvice.displayZerosIfEmpty}',
                           style: Theme.of(context)
                               .textTheme
                               .labelMedium
@@ -59,7 +61,7 @@ class _PaymentBasicInfoSection extends StatelessWidget {
                 valueTextLoading: state.isDetailFetching,
                 valueText: DateFormat(
                   DateTimeFormatString.displayDateFormat,
-                  context.locale.languageCode,
+                  eligibilityState.user.preferredLanguage.languageCode,
                 ).format(state.details.createdDate.dateTime),
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,

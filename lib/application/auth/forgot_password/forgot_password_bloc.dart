@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_forgot_password_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:flutter/material.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -54,7 +54,7 @@ class ForgotPasswordBloc
         final failureOrSuccess =
             await forgotPasswordRepository.requestResetPassword(
           username: state.username,
-          locale: e.local,
+          language: e.language,
         );
         failureOrSuccess.fold(
           (failure) => emit(
