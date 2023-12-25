@@ -1,12 +1,41 @@
 part of 'package:ezrxmobile/presentation/payments/account_summary/account_summary_page.dart';
 
 class _Export extends StatelessWidget {
-  final bool isInvoiceTabActive;
-
+  final String currentActiveTabName;
   const _Export({
     Key? key,
-    required this.isInvoiceTabActive,
+    required this.currentActiveTabName,
   }) : super(key: key);
+
+  void _downloadAttachment(BuildContext context) {
+    if (currentActiveTabName == AllInvoicesPageRoute.name) {
+      context.read<DownloadPaymentAttachmentsBloc>().add(
+            DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
+              queryObject: context.read<AllInvoicesBloc>().state.appliedFilter,
+            ),
+          );
+
+      return;
+    }
+    if (currentActiveTabName == AllCreditsPageRoute.name) {
+      context.read<DownloadPaymentAttachmentsBloc>().add(
+            DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
+              queryObject: context.read<AllCreditsBloc>().state.appliedFilter,
+            ),
+          );
+
+      return;
+    }
+    if (currentActiveTabName == FullSummaryPageRoute.name) {
+      context.read<DownloadPaymentAttachmentsBloc>().add(
+            DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
+              queryObject: context.read<FullSummaryBloc>().state.appliedFilter,
+            ),
+          );
+
+      return;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +58,7 @@ class _Export extends StatelessWidget {
       },
       child: IconButton(
         padding: EdgeInsets.zero,
-        onPressed: () => isInvoiceTabActive
-            ? context.read<DownloadPaymentAttachmentsBloc>().add(
-                  DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-                    queryObject:
-                        context.read<AllInvoicesBloc>().state.appliedFilter,
-                  ),
-                )
-            : context.read<DownloadPaymentAttachmentsBloc>().add(
-                  DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-                    queryObject:
-                        context.read<AllCreditsBloc>().state.appliedFilter,
-                  ),
-                ),
+        onPressed: () => _downloadAttachment(context),
         color: ZPColors.primary,
         icon: const Icon(
           Icons.cloud_download_outlined,

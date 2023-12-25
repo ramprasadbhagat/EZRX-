@@ -28,16 +28,6 @@ class FullSummaryFilterDto with _$FullSummaryFilterDto {
     )
         required String documentDateTo,
     @JsonKey(
-      name: 'amountValueFrom',
-      defaultValue: '',
-    )
-        required String amountValueFrom,
-    @JsonKey(
-      name: 'amountValueTo',
-      defaultValue: '',
-    )
-        required String amountValueTo,
-    @JsonKey(
       name: 'filterStatuses',
       defaultValue: '',
     )
@@ -57,8 +47,6 @@ class FullSummaryFilterDto with _$FullSummaryFilterDto {
       dueDateTo: tempFilter.dueDateTo.apiDateWithDashString,
       documentDateTo: tempFilter.documentDateTo.apiDateWithDashString,
       documentDateFrom: tempFilter.documentDateFrom.apiDateWithDashString,
-      amountValueFrom: tempFilter.amountValueFrom.apiParameterValue,
-      amountValueTo: tempFilter.amountValueTo.apiParameterValue,
       filterStatuses: tempFilter.filterStatuses.join(','),
       searchKey: tempFilter.searchKey.getOrDefaultValue(''),
     );
@@ -67,5 +55,40 @@ class FullSummaryFilterDto with _$FullSummaryFilterDto {
   factory FullSummaryFilterDto.fromJson(Map<String, dynamic> json) =>
       _$FullSummaryFilterDtoFromJson(json);
 
-  List<Map<String, String>> get toMapList => <Map<String, String>>[];
+  List<Map<String, String>> get toMapList => <Map<String, String>>[
+        if (documentDateFrom.isNotEmpty && documentDateFrom != '-')
+          {
+            'field': 'documentDate',
+            'value': documentDateFrom,
+            'type': 'ge',
+          },
+        if (documentDateTo.isNotEmpty && documentDateTo != '-')
+          {
+            'field': 'documentDate',
+            'value': documentDateTo,
+            'type': 'le',
+          },
+        if (dueDateFrom.isNotEmpty && dueDateFrom != '-')
+          {
+            'field': 'netDueDate',
+            'value': dueDateFrom,
+            'type': 'ge',
+          },
+        if (dueDateTo.isNotEmpty && dueDateTo != '-')
+          {
+            'field': 'netDueDate',
+            'value': dueDateTo,
+            'type': 'le',
+          },
+        if (filterStatuses.isNotEmpty)
+          {
+            'field': 'invoiceProcessingStatus',
+            'value': filterStatuses,
+          },
+        if (searchKey.isNotEmpty)
+          {
+            'field': 'accountingDocument',
+            'value': searchKey,
+          },
+      ];
 }

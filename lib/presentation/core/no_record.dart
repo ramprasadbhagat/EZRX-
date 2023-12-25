@@ -131,6 +131,16 @@ class NoRecordFound extends StatelessWidget {
             )
           : const NoRecordFound();
 
+  factory NoRecordFound.fullSummary({
+    required bool isSearchAndFilterEmpty,
+  }) =>
+      isSearchAndFilterEmpty
+          ? const NoRecordFound(
+              title: 'No documents to show',
+              subTitle: 'Documents issued on eZRx+ will be shown here',
+            )
+          : const NoRecordFound();
+
   @override
   Widget build(BuildContext context) {
     return Padding(

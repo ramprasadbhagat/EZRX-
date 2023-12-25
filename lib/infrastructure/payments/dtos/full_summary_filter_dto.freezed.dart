@@ -28,10 +28,6 @@ mixin _$FullSummaryFilterDto {
   String get documentDateFrom => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentDateTo', defaultValue: '')
   String get documentDateTo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'amountValueFrom', defaultValue: '')
-  String get amountValueFrom => throw _privateConstructorUsedError;
-  @JsonKey(name: 'amountValueTo', defaultValue: '')
-  String get amountValueTo => throw _privateConstructorUsedError;
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   String get filterStatuses => throw _privateConstructorUsedError;
   @JsonKey(name: 'accountingDocument', defaultValue: '')
@@ -58,10 +54,6 @@ abstract class $FullSummaryFilterDtoCopyWith<$Res> {
           String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
           String documentDateTo,
-      @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          String amountValueFrom,
-      @JsonKey(name: 'amountValueTo', defaultValue: '')
-          String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
           String filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
@@ -86,8 +78,6 @@ class _$FullSummaryFilterDtoCopyWithImpl<$Res,
     Object? dueDateTo = null,
     Object? documentDateFrom = null,
     Object? documentDateTo = null,
-    Object? amountValueFrom = null,
-    Object? amountValueTo = null,
     Object? filterStatuses = null,
     Object? searchKey = null,
   }) {
@@ -107,14 +97,6 @@ class _$FullSummaryFilterDtoCopyWithImpl<$Res,
       documentDateTo: null == documentDateTo
           ? _value.documentDateTo
           : documentDateTo // ignore: cast_nullable_to_non_nullable
-              as String,
-      amountValueFrom: null == amountValueFrom
-          ? _value.amountValueFrom
-          : amountValueFrom // ignore: cast_nullable_to_non_nullable
-              as String,
-      amountValueTo: null == amountValueTo
-          ? _value.amountValueTo
-          : amountValueTo // ignore: cast_nullable_to_non_nullable
               as String,
       filterStatuses: null == filterStatuses
           ? _value.filterStatuses
@@ -145,10 +127,6 @@ abstract class _$$_FullSummaryFilterDtoCopyWith<$Res>
           String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
           String documentDateTo,
-      @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          String amountValueFrom,
-      @JsonKey(name: 'amountValueTo', defaultValue: '')
-          String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
           String filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
@@ -170,8 +148,6 @@ class __$$_FullSummaryFilterDtoCopyWithImpl<$Res>
     Object? dueDateTo = null,
     Object? documentDateFrom = null,
     Object? documentDateTo = null,
-    Object? amountValueFrom = null,
-    Object? amountValueTo = null,
     Object? filterStatuses = null,
     Object? searchKey = null,
   }) {
@@ -191,14 +167,6 @@ class __$$_FullSummaryFilterDtoCopyWithImpl<$Res>
       documentDateTo: null == documentDateTo
           ? _value.documentDateTo
           : documentDateTo // ignore: cast_nullable_to_non_nullable
-              as String,
-      amountValueFrom: null == amountValueFrom
-          ? _value.amountValueFrom
-          : amountValueFrom // ignore: cast_nullable_to_non_nullable
-              as String,
-      amountValueTo: null == amountValueTo
-          ? _value.amountValueTo
-          : amountValueTo // ignore: cast_nullable_to_non_nullable
               as String,
       filterStatuses: null == filterStatuses
           ? _value.filterStatuses
@@ -224,10 +192,6 @@ class _$_FullSummaryFilterDto extends _FullSummaryFilterDto {
           required this.documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
           required this.documentDateTo,
-      @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          required this.amountValueFrom,
-      @JsonKey(name: 'amountValueTo', defaultValue: '')
-          required this.amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
           required this.filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
@@ -250,12 +214,6 @@ class _$_FullSummaryFilterDto extends _FullSummaryFilterDto {
   @JsonKey(name: 'documentDateTo', defaultValue: '')
   final String documentDateTo;
   @override
-  @JsonKey(name: 'amountValueFrom', defaultValue: '')
-  final String amountValueFrom;
-  @override
-  @JsonKey(name: 'amountValueTo', defaultValue: '')
-  final String amountValueTo;
-  @override
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   final String filterStatuses;
   @override
@@ -264,7 +222,7 @@ class _$_FullSummaryFilterDto extends _FullSummaryFilterDto {
 
   @override
   String toString() {
-    return 'FullSummaryFilterDto(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
+    return 'FullSummaryFilterDto(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
   }
 
   @override
@@ -280,10 +238,6 @@ class _$_FullSummaryFilterDto extends _FullSummaryFilterDto {
                 other.documentDateFrom == documentDateFrom) &&
             (identical(other.documentDateTo, documentDateTo) ||
                 other.documentDateTo == documentDateTo) &&
-            (identical(other.amountValueFrom, amountValueFrom) ||
-                other.amountValueFrom == amountValueFrom) &&
-            (identical(other.amountValueTo, amountValueTo) ||
-                other.amountValueTo == amountValueTo) &&
             (identical(other.filterStatuses, filterStatuses) ||
                 other.filterStatuses == filterStatuses) &&
             (identical(other.searchKey, searchKey) ||
@@ -292,16 +246,8 @@ class _$_FullSummaryFilterDto extends _FullSummaryFilterDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      dueDateFrom,
-      dueDateTo,
-      documentDateFrom,
-      documentDateTo,
-      amountValueFrom,
-      amountValueTo,
-      filterStatuses,
-      searchKey);
+  int get hashCode => Object.hash(runtimeType, dueDateFrom, dueDateTo,
+      documentDateFrom, documentDateTo, filterStatuses, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -328,10 +274,6 @@ abstract class _FullSummaryFilterDto extends FullSummaryFilterDto {
           required final String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
           required final String documentDateTo,
-      @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          required final String amountValueFrom,
-      @JsonKey(name: 'amountValueTo', defaultValue: '')
-          required final String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
           required final String filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
@@ -353,12 +295,6 @@ abstract class _FullSummaryFilterDto extends FullSummaryFilterDto {
   @override
   @JsonKey(name: 'documentDateTo', defaultValue: '')
   String get documentDateTo;
-  @override
-  @JsonKey(name: 'amountValueFrom', defaultValue: '')
-  String get amountValueFrom;
-  @override
-  @JsonKey(name: 'amountValueTo', defaultValue: '')
-  String get amountValueTo;
   @override
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   String get filterStatuses;

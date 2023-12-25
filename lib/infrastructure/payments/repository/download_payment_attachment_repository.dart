@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_remote_datasource.dart';
@@ -23,6 +24,7 @@ import 'package:ezrxmobile/infrastructure/payments/dtos/all_invoices_filter_dto.
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/full_summary_filter_dto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -107,6 +109,35 @@ class DownloadPaymentAttachmentRepository
         customerCode: customerCode,
         excelFor: 'Credit',
         queryObject: AllCreditsFilterDto.fromDomain(queryObject).toMapList,
+      );
+
+      return Right(paymentSummaryStatus);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, DownloadPaymentAttachment>> fetchFullSummaryUrl({
+    required SalesOrganisation salesOrganization,
+    required CustomerCodeInfo customerCodeInfo,
+    required FullSummaryFilter queryObject,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final url = await localDataSource.getFileDownloadUrl();
+
+        return Right(url);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final paymentSummaryStatus = await remoteDataSource.getFileDownloadUrl(
+        salesOrg: salesOrganization.salesOrg.getOrCrash(),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        excelFor: 'AccountSummary',
+        queryObject: FullSummaryFilterDto.fromDomain(queryObject).toMapList,
       );
 
       return Right(paymentSummaryStatus);

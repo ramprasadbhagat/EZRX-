@@ -40,6 +40,7 @@ import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.d
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/bank_in_accounts/bank_in_accounts_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/filter/full_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
@@ -380,6 +381,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AllInvoicesFilterBloc>(
           create: (context) => locator<AllInvoicesFilterBloc>(),
+        ),
+        BlocProvider<FullSummaryFilterBloc>(
+          create: (context) => locator<FullSummaryFilterBloc>(),
         ),
         BlocProvider<AllInvoicesBloc>(
           create: (context) => locator<AllInvoicesBloc>(),

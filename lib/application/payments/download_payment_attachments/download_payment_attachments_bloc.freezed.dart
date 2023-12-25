@@ -23,6 +23,8 @@ mixin _$DownloadPaymentAttachmentEvent {
         initialized,
     required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
     required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function(FullSummaryFilter queryObject)
+        fetchFullSummaryUrl,
     required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
@@ -36,6 +38,7 @@ mixin _$DownloadPaymentAttachmentEvent {
         initialized,
     TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -49,6 +52,7 @@ mixin _$DownloadPaymentAttachmentEvent {
         initialized,
     TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -61,6 +65,7 @@ mixin _$DownloadPaymentAttachmentEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
+    required TResult Function(_FetchFullSummaryUrl value) fetchFullSummaryUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
         fetchPaymentSummaryUrl,
     required TResult Function(_DownloadPaymentAttachment value)
@@ -73,6 +78,7 @@ mixin _$DownloadPaymentAttachmentEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult? Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -84,6 +90,7 @@ mixin _$DownloadPaymentAttachmentEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -215,6 +222,8 @@ class _$_Initialized implements _Initialized {
         initialized,
     required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
     required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function(FullSummaryFilter queryObject)
+        fetchFullSummaryUrl,
     required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
@@ -231,6 +240,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -247,6 +257,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -265,6 +276,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
+    required TResult Function(_FetchFullSummaryUrl value) fetchFullSummaryUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
         fetchPaymentSummaryUrl,
     required TResult Function(_DownloadPaymentAttachment value)
@@ -280,6 +292,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult? Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -294,6 +307,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -400,6 +414,8 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
         initialized,
     required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
     required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function(FullSummaryFilter queryObject)
+        fetchFullSummaryUrl,
     required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
@@ -416,6 +432,7 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
         initialized,
     TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -432,6 +449,7 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
         initialized,
     TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -450,6 +468,7 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
+    required TResult Function(_FetchFullSummaryUrl value) fetchFullSummaryUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
         fetchPaymentSummaryUrl,
     required TResult Function(_DownloadPaymentAttachment value)
@@ -465,6 +484,7 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult? Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -479,6 +499,7 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -583,6 +604,8 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
         initialized,
     required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
     required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function(FullSummaryFilter queryObject)
+        fetchFullSummaryUrl,
     required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
@@ -599,6 +622,7 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
         initialized,
     TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -615,6 +639,7 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
         initialized,
     TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -633,6 +658,7 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
+    required TResult Function(_FetchFullSummaryUrl value) fetchFullSummaryUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
         fetchPaymentSummaryUrl,
     required TResult Function(_DownloadPaymentAttachment value)
@@ -648,6 +674,7 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult? Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -662,6 +689,7 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -682,6 +710,197 @@ abstract class _FetchAllCreditUrl implements DownloadPaymentAttachmentEvent {
   AllCreditsFilter get queryObject;
   @JsonKey(ignore: true)
   _$$_FetchAllCreditUrlCopyWith<_$_FetchAllCreditUrl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchFullSummaryUrlCopyWith<$Res> {
+  factory _$$_FetchFullSummaryUrlCopyWith(_$_FetchFullSummaryUrl value,
+          $Res Function(_$_FetchFullSummaryUrl) then) =
+      __$$_FetchFullSummaryUrlCopyWithImpl<$Res>;
+  @useResult
+  $Res call({FullSummaryFilter queryObject});
+
+  $FullSummaryFilterCopyWith<$Res> get queryObject;
+}
+
+/// @nodoc
+class __$$_FetchFullSummaryUrlCopyWithImpl<$Res>
+    extends _$DownloadPaymentAttachmentEventCopyWithImpl<$Res,
+        _$_FetchFullSummaryUrl>
+    implements _$$_FetchFullSummaryUrlCopyWith<$Res> {
+  __$$_FetchFullSummaryUrlCopyWithImpl(_$_FetchFullSummaryUrl _value,
+      $Res Function(_$_FetchFullSummaryUrl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? queryObject = null,
+  }) {
+    return _then(_$_FetchFullSummaryUrl(
+      queryObject: null == queryObject
+          ? _value.queryObject
+          : queryObject // ignore: cast_nullable_to_non_nullable
+              as FullSummaryFilter,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $FullSummaryFilterCopyWith<$Res> get queryObject {
+    return $FullSummaryFilterCopyWith<$Res>(_value.queryObject, (value) {
+      return _then(_value.copyWith(queryObject: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_FetchFullSummaryUrl implements _FetchFullSummaryUrl {
+  const _$_FetchFullSummaryUrl({required this.queryObject});
+
+  @override
+  final FullSummaryFilter queryObject;
+
+  @override
+  String toString() {
+    return 'DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(queryObject: $queryObject)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchFullSummaryUrl &&
+            (identical(other.queryObject, queryObject) ||
+                other.queryObject == queryObject));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, queryObject);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchFullSummaryUrlCopyWith<_$_FetchFullSummaryUrl> get copyWith =>
+      __$$_FetchFullSummaryUrlCopyWithImpl<_$_FetchFullSummaryUrl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)
+        initialized,
+    required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
+    required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function(FullSummaryFilter queryObject)
+        fetchFullSummaryUrl,
+    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(DownloadPaymentAttachment files)
+        downloadPaymentAttachment,
+    required TResult Function(SoaData soaData) downloadSOA,
+  }) {
+    return fetchFullSummaryUrl(queryObject);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
+    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(DownloadPaymentAttachment files)?
+        downloadPaymentAttachment,
+    TResult? Function(SoaData soaData)? downloadSOA,
+  }) {
+    return fetchFullSummaryUrl?.call(queryObject);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
+    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(DownloadPaymentAttachment files)?
+        downloadPaymentAttachment,
+    TResult Function(SoaData soaData)? downloadSOA,
+    required TResult orElse(),
+  }) {
+    if (fetchFullSummaryUrl != null) {
+      return fetchFullSummaryUrl(queryObject);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
+    required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
+    required TResult Function(_FetchFullSummaryUrl value) fetchFullSummaryUrl,
+    required TResult Function(_FetchPaymentSummaryUrl value)
+        fetchPaymentSummaryUrl,
+    required TResult Function(_DownloadPaymentAttachment value)
+        downloadPaymentAttachment,
+    required TResult Function(_DownloadSOA value) downloadSOA,
+  }) {
+    return fetchFullSummaryUrl(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
+    TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult? Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
+    TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
+    TResult? Function(_DownloadPaymentAttachment value)?
+        downloadPaymentAttachment,
+    TResult? Function(_DownloadSOA value)? downloadSOA,
+  }) {
+    return fetchFullSummaryUrl?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
+    TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
+    TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
+    TResult Function(_DownloadPaymentAttachment value)?
+        downloadPaymentAttachment,
+    TResult Function(_DownloadSOA value)? downloadSOA,
+    required TResult orElse(),
+  }) {
+    if (fetchFullSummaryUrl != null) {
+      return fetchFullSummaryUrl(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchFullSummaryUrl implements DownloadPaymentAttachmentEvent {
+  const factory _FetchFullSummaryUrl(
+      {required final FullSummaryFilter queryObject}) = _$_FetchFullSummaryUrl;
+
+  FullSummaryFilter get queryObject;
+  @JsonKey(ignore: true)
+  _$$_FetchFullSummaryUrlCopyWith<_$_FetchFullSummaryUrl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -730,6 +949,8 @@ class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
         initialized,
     required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
     required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function(FullSummaryFilter queryObject)
+        fetchFullSummaryUrl,
     required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
@@ -746,6 +967,7 @@ class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
         initialized,
     TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -762,6 +984,7 @@ class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
         initialized,
     TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -780,6 +1003,7 @@ class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
+    required TResult Function(_FetchFullSummaryUrl value) fetchFullSummaryUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
         fetchPaymentSummaryUrl,
     required TResult Function(_DownloadPaymentAttachment value)
@@ -795,6 +1019,7 @@ class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult? Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -809,6 +1034,7 @@ class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -910,6 +1136,8 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
         initialized,
     required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
     required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function(FullSummaryFilter queryObject)
+        fetchFullSummaryUrl,
     required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
@@ -926,6 +1154,7 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
         initialized,
     TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -942,6 +1171,7 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
         initialized,
     TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -960,6 +1190,7 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
+    required TResult Function(_FetchFullSummaryUrl value) fetchFullSummaryUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
         fetchPaymentSummaryUrl,
     required TResult Function(_DownloadPaymentAttachment value)
@@ -975,6 +1206,7 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult? Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -989,6 +1221,7 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -1083,6 +1316,8 @@ class _$_DownloadSOA implements _DownloadSOA {
         initialized,
     required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
     required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function(FullSummaryFilter queryObject)
+        fetchFullSummaryUrl,
     required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
@@ -1099,6 +1334,7 @@ class _$_DownloadSOA implements _DownloadSOA {
         initialized,
     TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -1115,6 +1351,7 @@ class _$_DownloadSOA implements _DownloadSOA {
         initialized,
     TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
     TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function(FullSummaryFilter queryObject)? fetchFullSummaryUrl,
     TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
@@ -1133,6 +1370,7 @@ class _$_DownloadSOA implements _DownloadSOA {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
+    required TResult Function(_FetchFullSummaryUrl value) fetchFullSummaryUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
         fetchPaymentSummaryUrl,
     required TResult Function(_DownloadPaymentAttachment value)
@@ -1148,6 +1386,7 @@ class _$_DownloadSOA implements _DownloadSOA {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult? Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
@@ -1162,6 +1401,7 @@ class _$_DownloadSOA implements _DownloadSOA {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,

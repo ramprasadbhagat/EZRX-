@@ -13,8 +13,6 @@ _$_FullSummaryFilterDto _$$_FullSummaryFilterDtoFromJson(
       dueDateTo: json['dueDateTo'] as String? ?? '',
       documentDateFrom: json['documentDateFrom'] as String? ?? '',
       documentDateTo: json['documentDateTo'] as String? ?? '',
-      amountValueFrom: json['amountValueFrom'] as String? ?? '',
-      amountValueTo: json['amountValueTo'] as String? ?? '',
       filterStatuses: json['filterStatuses'] as String? ?? '',
       searchKey: json['accountingDocument'] as String? ?? '',
     );
@@ -26,8 +24,6 @@ Map<String, dynamic> _$$_FullSummaryFilterDtoToJson(
       'dueDateTo': instance.dueDateTo,
       'documentDateFrom': instance.documentDateFrom,
       'documentDateTo': instance.documentDateTo,
-      'amountValueFrom': instance.amountValueFrom,
-      'amountValueTo': instance.amountValueTo,
       'filterStatuses': instance.filterStatuses,
       'accountingDocument': instance.searchKey,
     };

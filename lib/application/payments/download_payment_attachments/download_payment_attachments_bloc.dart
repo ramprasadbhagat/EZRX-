@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -79,6 +80,38 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         );
         final failureOrSuccess =
             await paymentAttachmentRepository.fetchAllCreditUrl(
+          queryObject: event.queryObject,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganization: state.salesOrganization,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                isDownloadInProgress: false,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          (paymentSummaryUrl) => add(
+            DownloadPaymentAttachmentEvent.downloadPaymentAttachment(
+              files: paymentSummaryUrl,
+            ),
+          ),
+        );
+      },
+    );
+    on<_FetchFullSummaryUrl>(
+      (event, emit) async {
+        emit(
+          state.copyWith(
+            isDownloadInProgress: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess =
+            await paymentAttachmentRepository.fetchFullSummaryUrl(
           queryObject: event.queryObject,
           customerCodeInfo: state.customerCodeInfo,
           salesOrganization: state.salesOrganization,

@@ -20,7 +20,6 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 
 part 'package:ezrxmobile/presentation/payments/full_summary/widgets/expandable_section.dart';
@@ -64,36 +63,30 @@ class _FullSummaryPageState extends State<FullSummaryPage> {
                 ),
               );
             },
-            buildWhen: (previous, current) => previous.items != current.items,
+            buildWhen: (previous, current) =>
+                previous.isLoading != current.isLoading,
             builder: (context, state) {
               return Expanded(
-                child: state.isLoading && state.items.groupList.isEmpty
-                    ? LoadingShimmer.logo(
-                        key: WidgetKeys.loaderImage,
-                      )
-                    : ScrollList<CreditAndInvoiceItem>(
-                        noRecordFoundWidget: const NoRecordFound(
-                          title: 'No documents to show',
-                          subTitle:
-                              'Documents issued on eZRx+ will be shown here',
+                child: ScrollList<CreditAndInvoiceItem>(
+                  noRecordFoundWidget: NoRecordFound.fullSummary(
+                    isSearchAndFilterEmpty:
+                        state.appliedFilter.searchKey.isValueEmpty,
+                  ),
+                  controller: _controller,
+                  onRefresh: () => context.read<FullSummaryBloc>().add(
+                        FullSummaryEvent.fetch(
+                          appliedFilter: FullSummaryFilter.empty(),
                         ),
-                        controller: _controller,
-                        onRefresh: () => context.read<FullSummaryBloc>().add(
-                              FullSummaryEvent.fetch(
-                                appliedFilter: FullSummaryFilter.empty(),
-                              ),
-                            ),
-                        onLoadingMore: () =>
-                            context.read<FullSummaryBloc>().add(
-                                  const FullSummaryEvent.loadMore(),
-                                ),
-                        isLoading: state.isLoading,
-                        itemBuilder: (context, index, item) =>
-                            _InvoiceCreditItem(
-                          data: item,
-                        ),
-                        items: state.items,
                       ),
+                  onLoadingMore: () => context.read<FullSummaryBloc>().add(
+                        const FullSummaryEvent.loadMore(),
+                      ),
+                  isLoading: state.isLoading,
+                  itemBuilder: (context, index, item) => _InvoiceCreditItem(
+                    data: item,
+                  ),
+                  items: state.items,
+                ),
               );
             },
           ),

@@ -21,8 +21,6 @@ mixin _$FullSummaryFilter {
   DateTimeStringValue get documentDateFrom =>
       throw _privateConstructorUsedError;
   DateTimeStringValue get documentDateTo => throw _privateConstructorUsedError;
-  RangeValue get amountValueFrom => throw _privateConstructorUsedError;
-  RangeValue get amountValueTo => throw _privateConstructorUsedError;
   List<String> get filterStatuses => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
 
@@ -42,8 +40,6 @@ abstract class $FullSummaryFilterCopyWith<$Res> {
       DateTimeStringValue dueDateTo,
       DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
-      RangeValue amountValueFrom,
-      RangeValue amountValueTo,
       List<String> filterStatuses,
       SearchKey searchKey});
 }
@@ -65,8 +61,6 @@ class _$FullSummaryFilterCopyWithImpl<$Res, $Val extends FullSummaryFilter>
     Object? dueDateTo = null,
     Object? documentDateFrom = null,
     Object? documentDateTo = null,
-    Object? amountValueFrom = null,
-    Object? amountValueTo = null,
     Object? filterStatuses = null,
     Object? searchKey = null,
   }) {
@@ -87,14 +81,6 @@ class _$FullSummaryFilterCopyWithImpl<$Res, $Val extends FullSummaryFilter>
           ? _value.documentDateTo
           : documentDateTo // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      amountValueFrom: null == amountValueFrom
-          ? _value.amountValueFrom
-          : amountValueFrom // ignore: cast_nullable_to_non_nullable
-              as RangeValue,
-      amountValueTo: null == amountValueTo
-          ? _value.amountValueTo
-          : amountValueTo // ignore: cast_nullable_to_non_nullable
-              as RangeValue,
       filterStatuses: null == filterStatuses
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
@@ -120,8 +106,6 @@ abstract class _$$_FullSummaryFilterCopyWith<$Res>
       DateTimeStringValue dueDateTo,
       DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
-      RangeValue amountValueFrom,
-      RangeValue amountValueTo,
       List<String> filterStatuses,
       SearchKey searchKey});
 }
@@ -141,8 +125,6 @@ class __$$_FullSummaryFilterCopyWithImpl<$Res>
     Object? dueDateTo = null,
     Object? documentDateFrom = null,
     Object? documentDateTo = null,
-    Object? amountValueFrom = null,
-    Object? amountValueTo = null,
     Object? filterStatuses = null,
     Object? searchKey = null,
   }) {
@@ -163,14 +145,6 @@ class __$$_FullSummaryFilterCopyWithImpl<$Res>
           ? _value.documentDateTo
           : documentDateTo // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      amountValueFrom: null == amountValueFrom
-          ? _value.amountValueFrom
-          : amountValueFrom // ignore: cast_nullable_to_non_nullable
-              as RangeValue,
-      amountValueTo: null == amountValueTo
-          ? _value.amountValueTo
-          : amountValueTo // ignore: cast_nullable_to_non_nullable
-              as RangeValue,
       filterStatuses: null == filterStatuses
           ? _value._filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
@@ -191,8 +165,6 @@ class _$_FullSummaryFilter extends _FullSummaryFilter {
       required this.dueDateTo,
       required this.documentDateFrom,
       required this.documentDateTo,
-      required this.amountValueFrom,
-      required this.amountValueTo,
       required final List<String> filterStatuses,
       required this.searchKey})
       : _filterStatuses = filterStatuses,
@@ -206,10 +178,6 @@ class _$_FullSummaryFilter extends _FullSummaryFilter {
   final DateTimeStringValue documentDateFrom;
   @override
   final DateTimeStringValue documentDateTo;
-  @override
-  final RangeValue amountValueFrom;
-  @override
-  final RangeValue amountValueTo;
   final List<String> _filterStatuses;
   @override
   List<String> get filterStatuses {
@@ -223,7 +191,7 @@ class _$_FullSummaryFilter extends _FullSummaryFilter {
 
   @override
   String toString() {
-    return 'FullSummaryFilter(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
+    return 'FullSummaryFilter(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
   }
 
   @override
@@ -239,10 +207,6 @@ class _$_FullSummaryFilter extends _FullSummaryFilter {
                 other.documentDateFrom == documentDateFrom) &&
             (identical(other.documentDateTo, documentDateTo) ||
                 other.documentDateTo == documentDateTo) &&
-            (identical(other.amountValueFrom, amountValueFrom) ||
-                other.amountValueFrom == amountValueFrom) &&
-            (identical(other.amountValueTo, amountValueTo) ||
-                other.amountValueTo == amountValueTo) &&
             const DeepCollectionEquality()
                 .equals(other._filterStatuses, _filterStatuses) &&
             (identical(other.searchKey, searchKey) ||
@@ -256,8 +220,6 @@ class _$_FullSummaryFilter extends _FullSummaryFilter {
       dueDateTo,
       documentDateFrom,
       documentDateTo,
-      amountValueFrom,
-      amountValueTo,
       const DeepCollectionEquality().hash(_filterStatuses),
       searchKey);
 
@@ -275,8 +237,6 @@ abstract class _FullSummaryFilter extends FullSummaryFilter {
       required final DateTimeStringValue dueDateTo,
       required final DateTimeStringValue documentDateFrom,
       required final DateTimeStringValue documentDateTo,
-      required final RangeValue amountValueFrom,
-      required final RangeValue amountValueTo,
       required final List<String> filterStatuses,
       required final SearchKey searchKey}) = _$_FullSummaryFilter;
   _FullSummaryFilter._() : super._();
@@ -289,10 +249,6 @@ abstract class _FullSummaryFilter extends FullSummaryFilter {
   DateTimeStringValue get documentDateFrom;
   @override
   DateTimeStringValue get documentDateTo;
-  @override
-  RangeValue get amountValueFrom;
-  @override
-  RangeValue get amountValueTo;
   @override
   List<String> get filterStatuses;
   @override

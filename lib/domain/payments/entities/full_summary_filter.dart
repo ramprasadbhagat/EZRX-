@@ -12,8 +12,6 @@ class FullSummaryFilter with _$FullSummaryFilter {
     required DateTimeStringValue dueDateTo,
     required DateTimeStringValue documentDateFrom,
     required DateTimeStringValue documentDateTo,
-    required RangeValue amountValueFrom,
-    required RangeValue amountValueTo,
     required List<String> filterStatuses,
     required SearchKey searchKey,
   }) = _FullSummaryFilter;
@@ -23,8 +21,6 @@ class FullSummaryFilter with _$FullSummaryFilter {
         dueDateTo: DateTimeStringValue(''),
         documentDateFrom: DateTimeStringValue(''),
         documentDateTo: DateTimeStringValue(''),
-        amountValueFrom: RangeValue(''),
-        amountValueTo: RangeValue(''),
         filterStatuses: <String>[],
         searchKey: SearchKey(''),
       );
@@ -54,18 +50,9 @@ class FullSummaryFilter with _$FullSummaryFilter {
     if (documentDateFrom.isValid() || documentDateTo.isValid()) {
       count += 1;
     }
-    if (amountValueFrom.isValid() || amountValueTo.isValid()) {
-      count += 1;
-    }
 
     return count;
   }
 
-  bool get isValid => anyFilterApplied && isAmountValueRangeValid;
-
-  bool get isAmountValueRangeValid =>
-      !RangeValue.checkIfAnyIsEmpty(amountValueFrom, amountValueTo) &&
-      RangeValue.checkIfRangeIsValid(amountValueFrom, amountValueTo);
-
-  bool get anyFilterApplied => appliedFilterCount > 0;
+  bool get isValid => appliedFilterCount > 0;
 }

@@ -14,6 +14,10 @@ class DownloadPaymentAttachmentEvent with _$DownloadPaymentAttachmentEvent {
     required AllCreditsFilter queryObject,
   }) = _FetchAllCreditUrl;
 
+  const factory DownloadPaymentAttachmentEvent.fetchFullSummaryUrl({
+    required FullSummaryFilter queryObject,
+  }) = _FetchFullSummaryUrl;
+
   const factory DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl() =
       _FetchPaymentSummaryUrl;
 

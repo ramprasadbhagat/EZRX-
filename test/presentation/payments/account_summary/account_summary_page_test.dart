@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
@@ -58,6 +59,9 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
     implements NewPaymentBloc {}
 
+class FullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
+    implements FullSummaryBloc {}
+
 void main() {
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
@@ -68,6 +72,7 @@ void main() {
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
+  late FullSummaryBloc fullSummaryBlocMock;
   late DownloadPaymentAttachmentsBloc mockDownloadPaymentAttachmentsBloc;
   final allCreditsFilter = AllCreditsFilter(
     amountValueFrom: RangeValue('0'),
@@ -103,6 +108,7 @@ void main() {
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     mockDownloadPaymentAttachmentsBloc = MockDownloadPaymentAttachmentsBloc();
     newPaymentBlocMock = NewPaymentBlocMock();
+    fullSummaryBlocMock = FullSummaryBlocMock();
   });
 
   setUp(() async {
@@ -123,6 +129,8 @@ void main() {
     when(() => allInvoicesFilterBlocMock.state)
         .thenReturn(AllInvoicesFilterState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
+    when(() => fullSummaryBlocMock.state)
+        .thenReturn(FullSummaryState.initial());
   });
 
   ///////////////////////////Finder//////////////////////////////////////////////
@@ -167,6 +175,9 @@ void main() {
         ),
         BlocProvider<NewPaymentBloc>(
           create: (context) => newPaymentBlocMock,
+        ),
+        BlocProvider<FullSummaryBloc>(
+          create: (context) => fullSummaryBlocMock,
         ),
       ],
       child: const AccountSummary(),

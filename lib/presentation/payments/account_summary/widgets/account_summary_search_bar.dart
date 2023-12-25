@@ -1,48 +1,61 @@
 part of 'package:ezrxmobile/presentation/payments/account_summary/account_summary_page.dart';
 
 class _AccountSummarySearchBar extends StatelessWidget {
-  final bool isInvoiceTabActive;
+  final String currentActiveTabName;
   const _AccountSummarySearchBar({
+    required this.currentActiveTabName,
     Key? key,
-    required this.isInvoiceTabActive,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return isInvoiceTabActive
-        ? BlocBuilder<AllInvoicesBloc, AllInvoicesState>(
-            buildWhen: (previous, current) =>
-                current.isLoading != previous.isLoading,
-            builder: (context, state) {
-              return _SummarySearchBar(
-                isEnable: !state.isLoading,
-                isInvoiceTabActive: isInvoiceTabActive,
-                searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
-              );
-            },
-          )
-        : BlocBuilder<AllCreditsBloc, AllCreditsState>(
-            buildWhen: (previous, current) =>
-                previous.isLoading != current.isLoading,
-            builder: (context, state) {
-              return _SummarySearchBar(
-                isEnable: !state.isLoading,
-                searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
-                isInvoiceTabActive: isInvoiceTabActive,
-              );
-            },
+    if (currentActiveTabName == AllInvoicesPageRoute.name) {
+      return BlocBuilder<AllInvoicesBloc, AllInvoicesState>(
+        buildWhen: (previous, current) =>
+            current.isLoading != previous.isLoading,
+        builder: (context, state) {
+          return _SummarySearchBar(
+            isEnable: !state.isLoading,
+            searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
           );
+        },
+      );
+    }
+    if (currentActiveTabName == AllCreditsPageRoute.name) {
+      return BlocBuilder<AllCreditsBloc, AllCreditsState>(
+        buildWhen: (previous, current) =>
+            previous.isLoading != current.isLoading,
+        builder: (context, state) {
+          return _SummarySearchBar(
+            isEnable: !state.isLoading,
+            searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
+          );
+        },
+      );
+    }
+    if (currentActiveTabName == FullSummaryPageRoute.name) {
+      return BlocBuilder<FullSummaryBloc, FullSummaryState>(
+        buildWhen: (previous, current) =>
+            previous.isLoading != current.isLoading,
+        builder: (context, state) {
+          return _SummarySearchBar(
+            isEnable: !state.isLoading,
+            searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
+          );
+        },
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 }
 
 class _SummarySearchBar extends StatelessWidget {
   final bool isEnable;
-  final bool isInvoiceTabActive;
   final String searchKey;
   const _SummarySearchBar({
     Key? key,
     required this.isEnable,
-    required this.isInvoiceTabActive,
     required this.searchKey,
   }) : super(key: key);
 
@@ -78,30 +91,56 @@ class _SummarySearchBar extends StatelessWidget {
     bool onClear = false,
   }) {
     //TODO: Will revisit this while enhancing the search implementation logic.
-    final previousSearchKey = isInvoiceTabActive
-        ? context.read<AllInvoicesBloc>().state.appliedFilter.searchKey
-        : context.read<AllCreditsBloc>().state.appliedFilter.searchKey;
+    var previousSearchKey = SearchKey('');
+    if (context.tabsRouter.current.name == AllInvoicesPageRoute.name) {
+      previousSearchKey =
+          context.read<AllInvoicesBloc>().state.appliedFilter.searchKey;
+    } else if (context.tabsRouter.current.name == AllCreditsPageRoute.name) {
+      previousSearchKey =
+          context.read<AllCreditsBloc>().state.appliedFilter.searchKey;
+    } else {
+      previousSearchKey =
+          context.read<FullSummaryBloc>().state.appliedFilter.searchKey;
+    }
+
     if (!onClear && searchKey.isEmpty ||
         searchKey == previousSearchKey.getOrDefaultValue('')) return;
-    isInvoiceTabActive
-        ? context.read<AllInvoicesBloc>().add(
-              AllInvoicesEvent.fetch(
-                appliedFilter: context
-                    .read<AllInvoicesBloc>()
-                    .state
-                    .appliedFilter
-                    .copyWith(
-                      searchKey: SearchKey.searchFilter(searchKey),
-                    ),
-              ),
-            )
-        : context.read<AllCreditsBloc>().add(
-              AllCreditsEvent.fetch(
-                appliedFilter:
-                    context.read<AllCreditsBloc>().state.appliedFilter.copyWith(
-                          searchKey: SearchKey.searchFilter(searchKey),
-                        ),
-              ),
-            );
+
+    if (context.tabsRouter.current.name == AllInvoicesPageRoute.name) {
+      context.read<AllInvoicesBloc>().add(
+            AllInvoicesEvent.fetch(
+              appliedFilter:
+                  context.read<AllInvoicesBloc>().state.appliedFilter.copyWith(
+                        searchKey: SearchKey.searchFilter(searchKey),
+                      ),
+            ),
+          );
+
+      return;
+    }
+    if (context.tabsRouter.current.name == AllCreditsPageRoute.name) {
+      context.read<AllCreditsBloc>().add(
+            AllCreditsEvent.fetch(
+              appliedFilter:
+                  context.read<AllCreditsBloc>().state.appliedFilter.copyWith(
+                        searchKey: SearchKey.searchFilter(searchKey),
+                      ),
+            ),
+          );
+
+      return;
+    }
+    if (context.tabsRouter.current.name == FullSummaryPageRoute.name) {
+      context.read<FullSummaryBloc>().add(
+            FullSummaryEvent.fetch(
+              appliedFilter:
+                  context.read<FullSummaryBloc>().state.appliedFilter.copyWith(
+                        searchKey: SearchKey.searchFilter(searchKey),
+                      ),
+            ),
+          );
+
+      return;
+    }
   }
 }

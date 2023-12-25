@@ -1,39 +1,58 @@
 part of 'package:ezrxmobile/presentation/payments/account_summary/account_summary_page.dart';
 
 class _FilterTuneIcon extends StatelessWidget {
-  final bool isInvoiceTabActive;
+  final String currentActiveTabName;
   const _FilterTuneIcon({
     Key? key,
-    required this.isInvoiceTabActive,
+    required this.currentActiveTabName,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return isInvoiceTabActive
-        ? BlocBuilder<AllInvoicesBloc, AllInvoicesState>(
-            buildWhen: (previous, current) =>
-                previous.appliedFilter.appliedFilterCount !=
-                    current.appliedFilter.appliedFilterCount ||
-                previous.isLoading != current.isLoading,
-            builder: (context, state) {
-              return _FilterElement(
-                isActive: !state.isLoading,
-                appliedFilterCount: state.appliedFilter.appliedFilterCount,
-              );
-            },
-          )
-        : BlocBuilder<AllCreditsBloc, AllCreditsState>(
-            buildWhen: (previous, current) =>
-                previous.appliedFilter.appliedFilterCount !=
-                    current.appliedFilter.appliedFilterCount ||
-                previous.isLoading != current.isLoading,
-            builder: (context, state) {
-              return _FilterElement(
-                isActive: !state.isLoading,
-                appliedFilterCount: state.appliedFilter.appliedFilterCount,
-              );
-            },
+    if (currentActiveTabName == AllInvoicesPageRoute.name) {
+      return BlocBuilder<AllInvoicesBloc, AllInvoicesState>(
+        buildWhen: (previous, current) =>
+            previous.appliedFilter.appliedFilterCount !=
+                current.appliedFilter.appliedFilterCount ||
+            previous.isLoading != current.isLoading,
+        builder: (context, state) {
+          return _FilterElement(
+            isActive: !state.isLoading,
+            appliedFilterCount: state.appliedFilter.appliedFilterCount,
           );
+        },
+      );
+    }
+    if (currentActiveTabName == AllCreditsPageRoute.name) {
+      return BlocBuilder<AllCreditsBloc, AllCreditsState>(
+        buildWhen: (previous, current) =>
+            previous.appliedFilter.appliedFilterCount !=
+                current.appliedFilter.appliedFilterCount ||
+            previous.isLoading != current.isLoading,
+        builder: (context, state) {
+          return _FilterElement(
+            isActive: !state.isLoading,
+            appliedFilterCount: state.appliedFilter.appliedFilterCount,
+          );
+        },
+      );
+    }
+    if (currentActiveTabName == FullSummaryPageRoute.name) {
+      return BlocBuilder<FullSummaryBloc, FullSummaryState>(
+        buildWhen: (previous, current) =>
+            previous.appliedFilter.appliedFilterCount !=
+                current.appliedFilter.appliedFilterCount ||
+            previous.isLoading != current.isLoading,
+        builder: (context, state) {
+          return _FilterElement(
+            isActive: !state.isLoading,
+            appliedFilterCount: state.appliedFilter.appliedFilterCount,
+          );
+        },
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 }
 
@@ -62,21 +81,32 @@ class _FilterElement extends StatelessWidget {
   }
 
   void _showFilterPage(BuildContext context) {
-    final isInvoiceTabActive =
-        context.tabsRouter.current.name == AllInvoicesPageRoute.name;
-    isInvoiceTabActive
-        ? context.read<AllInvoicesFilterBloc>().add(
-              AllInvoicesFilterEvent.openFilterBottomSheet(
-                appliedFilter:
-                    context.read<AllInvoicesBloc>().state.appliedFilter,
-              ),
-            )
-        : context.read<AllCreditsFilterBloc>().add(
-              AllCreditsFilterEvent.openFilterBottomSheet(
-                appliedFilter:
-                    context.read<AllCreditsBloc>().state.appliedFilter,
-              ),
-            );
+    final currentActiveTabName = context.tabsRouter.current.name;
+    if (currentActiveTabName == AllInvoicesPageRoute.name) {
+      context.read<AllInvoicesFilterBloc>().add(
+            AllInvoicesFilterEvent.openFilterBottomSheet(
+              appliedFilter:
+                  context.read<AllInvoicesBloc>().state.appliedFilter,
+            ),
+          );
+    }
+    if (currentActiveTabName == AllCreditsPageRoute.name) {
+      context.read<AllCreditsFilterBloc>().add(
+            AllCreditsFilterEvent.openFilterBottomSheet(
+              appliedFilter: context.read<AllCreditsBloc>().state.appliedFilter,
+            ),
+          );
+    }
+
+    if (currentActiveTabName == FullSummaryPageRoute.name) {
+      context.read<FullSummaryFilterBloc>().add(
+            FullSummaryFilterEvent.openFilterBottomSheet(
+              appliedFilter:
+                  context.read<FullSummaryBloc>().state.appliedFilter,
+            ),
+          );
+    }
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -88,9 +118,17 @@ class _FilterElement extends StatelessWidget {
         ),
       ),
       builder: (_) {
-        return isInvoiceTabActive
-            ? const AllInvoicesFilterBottomSheet()
-            : const AllCreditsFilterBottomSheet();
+        if (currentActiveTabName == AllInvoicesPageRoute.name) {
+          return const AllInvoicesFilterBottomSheet();
+        }
+        if (currentActiveTabName == AllCreditsPageRoute.name) {
+          return const AllCreditsFilterBottomSheet();
+        }
+        if (currentActiveTabName == FullSummaryPageRoute.name) {
+          return const FullSummaryFilterBottomSheet();
+        }
+
+        return const SizedBox.shrink();
       },
     );
   }

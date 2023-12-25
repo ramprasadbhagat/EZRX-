@@ -1,4 +1,7 @@
+import 'package:ezrxmobile/application/payments/full_summary/filter/full_summary_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
+import 'package:ezrxmobile/presentation/payments/full_summary/widgets/filter_bottom_sheet.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -79,19 +82,16 @@ class AccountSummary extends StatelessWidget {
                     child: Row(
                       children: [
                         _AccountSummarySearchBar(
+                          currentActiveTabName: context.tabsRouter.current.name,
                           key: WidgetKeys.accountSummarySearchBar,
-                          isInvoiceTabActive: context.tabsRouter.current.name ==
-                              AllInvoicesPageRoute.name,
                         ),
                         _FilterTuneIcon(
+                          currentActiveTabName: context.tabsRouter.current.name,
                           key: WidgetKeys.accountSummaryFilterButton,
-                          isInvoiceTabActive: context.tabsRouter.current.name ==
-                              AllInvoicesPageRoute.name,
                         ),
                         _Export(
+                          currentActiveTabName: context.tabsRouter.current.name,
                           key: WidgetKeys.accountSummaryDownloadButton,
-                          isInvoiceTabActive: context.tabsRouter.current.name ==
-                              AllInvoicesPageRoute.name,
                         ),
                       ],
                     ),
