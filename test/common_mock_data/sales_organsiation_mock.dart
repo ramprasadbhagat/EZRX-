@@ -195,6 +195,7 @@ final salesOrganisationPHConfigsWithEnablePrincipalList =
   salesOrg: fakePHSalesOrg,
   currency: Currency('PHP'),
   disablePrincipals: true,
+  enableFutureDeliveryDay: true,
   principalList: [
     SalesOrganisationConfigsPrincipal.empty().copyWith(
       date: DateTimeStringValue('2093041107'),

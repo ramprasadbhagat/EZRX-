@@ -250,7 +250,8 @@ class OrderRepository implements IOrderRepository {
       referenceNotes: data.referenceNote.getOrDefaultValue(''),
       specialInstructions: data.deliveryInstruction.getOrDefaultValue(''),
       companyName: CompanyName(shipToInfo.shipToName.toString()),
-      requestedDeliveryDate: data.deliveryDate.getValue(),
+      requestedDeliveryDate:
+          configs.enableFutureDeliveryDay ? data.deliveryDate.getValue() : '',
       poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
       telephone: data.mobileNumber.getTelephone,
       collectiveNumber: '',

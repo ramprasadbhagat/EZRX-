@@ -1930,7 +1930,10 @@ void main() {
         await tester.pumpAndSettle();
 
         await tester.fling(
-            find.byType(CustomScrollView), const Offset(0, -10000), 100,);
+          find.byType(CustomScrollView),
+          const Offset(0, -10000),
+          100,
+        );
         await tester.pump();
 
         //Hide the vat value
@@ -1971,7 +1974,11 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
 
-        await tester.fling(find.byType(CustomScrollView), const Offset(0, -10000), 100);
+        await tester.fling(
+          find.byType(CustomScrollView),
+          const Offset(0, -10000),
+          100,
+        );
         await tester.pump();
 
         //Fetching the vat value for other market - 2%
@@ -2081,10 +2088,7 @@ void main() {
 
     testWidgets('=> Selecting a date updates the delivery date text',
         (WidgetTester tester) async {
-      const dayOfWeek = 7;
-      final currentDate = DateTime.now();
-      final futureDeliveryDay =
-          dayOfWeek - currentDate.weekday + dayOfWeek + DateTime.monday;
+      const futureDeliveryDay = 7;
 
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -2125,7 +2129,10 @@ void main() {
       expect(okButton, findsOneWidget);
       await tester.tap(find.widgetWithIcon(IconButton, Icons.edit));
       await tester.pump();
-      selectedDate = currentDate.add(Duration(days: futureDeliveryDay + 1));
+      selectedDate = DateTimeUtils.addWorkingDay(
+        fakeMYSalesOrgConfigFutureDeliveryDayEnabled.deliveryStartDate,
+        futureDeliveryDay - 1,
+      ).add(const Duration(days: 1));
       await tester.enterText(
         find.byType(InputDatePickerFormField),
         '${selectedDate.month}/${selectedDate.day}/${selectedDate.year}',
@@ -2135,7 +2142,10 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Out of range.'), findsOneWidget);
 
-      selectedDate = currentDate.add(Duration(days: futureDeliveryDay));
+      selectedDate = DateTimeUtils.addWorkingDay(
+        fakeMYSalesOrgConfigFutureDeliveryDayEnabled.deliveryStartDate,
+        futureDeliveryDay - 1,
+      );
       await tester.enterText(
         find.byType(InputDatePickerFormField),
         '${selectedDate.month}/${selectedDate.day}/${selectedDate.year}',

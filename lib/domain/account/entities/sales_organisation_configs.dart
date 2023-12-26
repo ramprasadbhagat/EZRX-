@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_pr
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'sales_organisation_configs.freezed.dart';
@@ -232,6 +231,12 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   DateTime get deliveryStartDate {
     final currentTime = DateTime.now();
 
+    if (currentTime.weekday >= DateTime.friday &&
+        currentTime.hour >= salesOrg.cutOffTime) {
+      return DateTimeUtils.getNearestWorkingDate(currentTime)
+          .add(const Duration(days: 1));
+    }
+
     return DateTimeUtils.getNearestWorkingDate(
       currentTime.hour < salesOrg.cutOffTime
           ? currentTime
@@ -239,8 +244,9 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     );
   }
 
-  DateTime get deliveryEndDate => DateUtils.dateOnly(
-        DateTime.now().add(Duration(days: futureDeliveryDay.intValue)),
+  DateTime get deliveryEndDate => DateTimeUtils.addWorkingDay(
+        deliveryStartDate,
+        futureDeliveryDay.intValue - 1,
       );
 
   bool get showSubtotalTaxBreakdown =>

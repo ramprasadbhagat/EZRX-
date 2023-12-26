@@ -19,9 +19,18 @@ class DateTimeUtils {
     return DateUtils.dateOnly(time);
   }
 
+  static DateTime addWorkingDay(DateTime startDate, int duration) {
+    var endDate = startDate;
+    while (duration > 0) {
+      endDate = endDate.add(const Duration(days: 1));
+      if (!isWeekend(endDate)) {
+        duration--;
+      }
+    }
+
+    return DateUtils.dateOnly(endDate);
+  }
+
   static bool isWeekend(DateTime dateTime) =>
       dateTime.weekday >= DateTime.saturday;
-
-  static String getDateTimeString(DateTime dateTime) =>
-      DateFormat(DateTimeFormatString.displayDateTimeFormat).format(dateTime);
 }
