@@ -192,6 +192,8 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         if (showGMCPart && governmentMaterialCode.isNotEmpty)
           governmentMaterialCode,
       ].join(' | ');
+
+  bool get isNotEmpty => this != OrderHistoryDetailsOrderItem.empty();
 }
 
 extension ViewByOrderDetailsListExtension

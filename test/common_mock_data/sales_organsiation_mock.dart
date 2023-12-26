@@ -121,6 +121,10 @@ final fakeSalesOrgConfigSpecialInstructionsEnabled =
   enableSpecialInstructions: true,
 );
 
+final fakeSalesOrganisationDisplaySubtotalTaxBreakdown =
+    SalesOrganisationConfigs.empty()
+        .copyWith(displaySubtotalTaxBreakdown: true);
+
 final fakeSalesOrgConfigPoNumberRequired =
     SalesOrganisationConfigs.empty().copyWith(
   poNumberRequired: PoNumberRequired(true),

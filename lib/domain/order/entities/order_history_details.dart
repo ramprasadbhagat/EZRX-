@@ -207,14 +207,16 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     /// that includes tax. This approach uses the first order item with a positive tax percentage,
     /// assuming that all items with tax share the same tax rate during order creation.
     /// The [orElse] parameter ensures a fallback to an empty order item if no taxable item is found.
-    final taxPercentage = orderHistoryDetailsOrderItem
-        .firstWhere(
-          (element) => element.taxPercentage > 0,
-          orElse: () => OrderHistoryDetailsOrderItem.empty(),
-        )
-        .taxPercentage;
+    final firstOrderItemWithTax = orderHistoryDetailsOrderItem.firstWhere(
+      (element) => element.taxPercentage > 0,
+      orElse: () => OrderHistoryDetailsOrderItem.empty(),
+    );
 
-    return StringUtils.displayNumberWithDecimal(taxPercentage);
+    return firstOrderItemWithTax.isNotEmpty
+        ? StringUtils.displayNumberWithDecimal(
+            firstOrderItemWithTax.taxPercentage,
+          )
+        : '';
   }
 }
 

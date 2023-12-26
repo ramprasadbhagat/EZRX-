@@ -1224,6 +1224,40 @@ void main() {
       },
       variant: salesOrgVariant,
     );
+
+    testWidgets(
+      '=> Do not Show Tax Value if Tax value from item level is 0',
+      (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeSalesOrganisationDisplaySubtotalTaxBreakdown,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [
+                OrderHistoryDetailsOrderItem.empty()
+              ],
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final taxText = find.descendant(
+          of: find.byKey(WidgetKeys.orderSummaryTax),
+          matching: find.text('${'Tax at'.tr()} %:'),
+        );
+
+        expect(
+          taxText,
+          findsOneWidget,
+        );
+      },
+    );
   });
 }
 
