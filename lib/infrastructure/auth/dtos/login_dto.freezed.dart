@@ -24,6 +24,8 @@ mixin _$LoginDto {
   String get access => throw _privateConstructorUsedError;
   @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
   String get refresh => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user')
+  UserDto get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +41,10 @@ abstract class $LoginDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken) String access,
       @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
-      String refresh});
+      String refresh,
+      @JsonKey(name: 'user') UserDto user});
+
+  $UserDtoCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -57,6 +62,7 @@ class _$LoginDtoCopyWithImpl<$Res, $Val extends LoginDto>
   $Res call({
     Object? access = null,
     Object? refresh = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       access: null == access
@@ -67,7 +73,19 @@ class _$LoginDtoCopyWithImpl<$Res, $Val extends LoginDto>
           ? _value.refresh
           : refresh // ignore: cast_nullable_to_non_nullable
               as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserDto,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserDtoCopyWith<$Res> get user {
+    return $UserDtoCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
@@ -81,7 +99,11 @@ abstract class _$$_LoginDtoCopyWith<$Res> implements $LoginDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken) String access,
       @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
-      String refresh});
+      String refresh,
+      @JsonKey(name: 'user') UserDto user});
+
+  @override
+  $UserDtoCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -97,6 +119,7 @@ class __$$_LoginDtoCopyWithImpl<$Res>
   $Res call({
     Object? access = null,
     Object? refresh = null,
+    Object? user = null,
   }) {
     return _then(_$_LoginDto(
       access: null == access
@@ -107,6 +130,10 @@ class __$$_LoginDtoCopyWithImpl<$Res>
           ? _value.refresh
           : refresh // ignore: cast_nullable_to_non_nullable
               as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserDto,
     ));
   }
 }
@@ -118,7 +145,8 @@ class _$_LoginDto extends _LoginDto {
       {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
       required this.access,
       @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
-      required this.refresh})
+      required this.refresh,
+      @JsonKey(name: 'user') this.user = UserDto.emptyUserDto})
       : super._();
 
   factory _$_LoginDto.fromJson(Map<String, dynamic> json) =>
@@ -130,10 +158,13 @@ class _$_LoginDto extends _LoginDto {
   @override
   @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
   final String refresh;
+  @override
+  @JsonKey(name: 'user')
+  final UserDto user;
 
   @override
   String toString() {
-    return 'LoginDto(access: $access, refresh: $refresh)';
+    return 'LoginDto(access: $access, refresh: $refresh, user: $user)';
   }
 
   @override
@@ -142,12 +173,13 @@ class _$_LoginDto extends _LoginDto {
         (other.runtimeType == runtimeType &&
             other is _$_LoginDto &&
             (identical(other.access, access) || other.access == access) &&
-            (identical(other.refresh, refresh) || other.refresh == refresh));
+            (identical(other.refresh, refresh) || other.refresh == refresh) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, access, refresh);
+  int get hashCode => Object.hash(runtimeType, access, refresh, user);
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +200,8 @@ abstract class _LoginDto extends LoginDto {
       {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
       required final String access,
       @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
-      required final String refresh}) = _$_LoginDto;
+      required final String refresh,
+      @JsonKey(name: 'user') final UserDto user}) = _$_LoginDto;
   const _LoginDto._() : super._();
 
   factory _LoginDto.fromJson(Map<String, dynamic> json) = _$_LoginDto.fromJson;
@@ -179,6 +212,9 @@ abstract class _LoginDto extends LoginDto {
   @override
   @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
   String get refresh;
+  @override
+  @JsonKey(name: 'user')
+  UserDto get user;
   @override
   @JsonKey(ignore: true)
   _$$_LoginDtoCopyWith<_$_LoginDto> get copyWith =>

@@ -22,6 +22,10 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
                       SalesOrganisationDto.fromJson(e as Map<String, dynamic>))
                   .toList() ??
               [],
+      salesOrganisations: (json['salesOrganisations'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       accessRight: json['accessRight'] == null
           ? AccessRightDto.emptyAccessRightDto
           : AccessRightDto.fromJson(
@@ -65,6 +69,7 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'customerCode': instance.customerCode,
       'userSalesOrganisationList':
           instance.userSalesOrganisations.map((e) => e.toJson()).toList(),
+      'salesOrganisations': instance.salesOrganisations,
       'accessRight': instance.accessRight.toJson(),
       'emailNotifications': instance.emailNotifications,
       'mobileNotifications': instance.mobileNotifications,

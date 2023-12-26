@@ -37,6 +37,8 @@ mixin _$UserDto {
   @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
   List<SalesOrganisationDto> get userSalesOrganisations =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'salesOrganisations', defaultValue: [])
+  List<String> get salesOrganisations => throw _privateConstructorUsedError;
   @JsonKey(name: 'accessRight')
   AccessRightDto get accessRight => throw _privateConstructorUsedError;
   @JsonKey(name: 'emailNotifications', defaultValue: false)
@@ -96,6 +98,8 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'customerCode', defaultValue: '') String customerCode,
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
       List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'salesOrganisations', defaultValue: [])
+      List<String> salesOrganisations,
       @JsonKey(name: 'accessRight') AccessRightDto accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
       bool emailNotifications,
@@ -157,6 +161,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? role = null,
     Object? customerCode = null,
     Object? userSalesOrganisations = null,
+    Object? salesOrganisations = null,
     Object? accessRight = null,
     Object? emailNotifications = null,
     Object? mobileNotifications = null,
@@ -207,6 +212,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisationDto>,
+      salesOrganisations: null == salesOrganisations
+          ? _value.salesOrganisations
+          : salesOrganisations // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       accessRight: null == accessRight
           ? _value.accessRight
           : accessRight // ignore: cast_nullable_to_non_nullable
@@ -308,6 +317,8 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'customerCode', defaultValue: '') String customerCode,
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
       List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'salesOrganisations', defaultValue: [])
+      List<String> salesOrganisations,
       @JsonKey(name: 'accessRight') AccessRightDto accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
       bool emailNotifications,
@@ -368,6 +379,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? role = null,
     Object? customerCode = null,
     Object? userSalesOrganisations = null,
+    Object? salesOrganisations = null,
     Object? accessRight = null,
     Object? emailNotifications = null,
     Object? mobileNotifications = null,
@@ -418,6 +430,10 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value._userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisationDto>,
+      salesOrganisations: null == salesOrganisations
+          ? _value._salesOrganisations
+          : salesOrganisations // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       accessRight: null == accessRight
           ? _value.accessRight
           : accessRight // ignore: cast_nullable_to_non_nullable
@@ -500,6 +516,8 @@ class _$_UserDto extends _UserDto {
       required this.customerCode,
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
       required final List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'salesOrganisations', defaultValue: [])
+      required final List<String> salesOrganisations,
       @JsonKey(name: 'accessRight')
       this.accessRight = AccessRightDto.emptyAccessRightDto,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
@@ -541,6 +559,7 @@ class _$_UserDto extends _UserDto {
       @JsonKey(name: 'MobileNumber', defaultValue: '')
       required this.mobileNumber})
       : _userSalesOrganisations = userSalesOrganisations,
+        _salesOrganisations = salesOrganisations,
         _paymentNotification = paymentNotification,
         _supportedLanguages = supportedLanguages,
         super._();
@@ -577,6 +596,16 @@ class _$_UserDto extends _UserDto {
       return _userSalesOrganisations;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_userSalesOrganisations);
+  }
+
+  final List<String> _salesOrganisations;
+  @override
+  @JsonKey(name: 'salesOrganisations', defaultValue: [])
+  List<String> get salesOrganisations {
+    if (_salesOrganisations is EqualUnmodifiableListView)
+      return _salesOrganisations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_salesOrganisations);
   }
 
   @override
@@ -649,7 +678,7 @@ class _$_UserDto extends _UserDto {
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber)';
   }
 
   @override
@@ -670,6 +699,8 @@ class _$_UserDto extends _UserDto {
                 other.customerCode == customerCode) &&
             const DeepCollectionEquality().equals(
                 other._userSalesOrganisations, _userSalesOrganisations) &&
+            const DeepCollectionEquality()
+                .equals(other._salesOrganisations, _salesOrganisations) &&
             (identical(other.accessRight, accessRight) ||
                 other.accessRight == accessRight) &&
             (identical(other.emailNotifications, emailNotifications) ||
@@ -718,6 +749,7 @@ class _$_UserDto extends _UserDto {
         role,
         customerCode,
         const DeepCollectionEquality().hash(_userSalesOrganisations),
+        const DeepCollectionEquality().hash(_salesOrganisations),
         accessRight,
         emailNotifications,
         mobileNotifications,
@@ -765,6 +797,8 @@ abstract class _UserDto extends UserDto {
       required final String customerCode,
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
       required final List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'salesOrganisations', defaultValue: [])
+      required final List<String> salesOrganisations,
       @JsonKey(name: 'accessRight') final AccessRightDto accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
       required final bool emailNotifications,
@@ -832,6 +866,9 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
   List<SalesOrganisationDto> get userSalesOrganisations;
+  @override
+  @JsonKey(name: 'salesOrganisations', defaultValue: [])
+  List<String> get salesOrganisations;
   @override
   @JsonKey(name: 'accessRight')
   AccessRightDto get accessRight;

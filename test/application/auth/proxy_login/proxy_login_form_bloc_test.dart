@@ -155,8 +155,13 @@ void main() {
             salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
-          (invocation) async =>
-              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
+          (invocation) async => Right(
+            Login(
+              access: fakeJWT,
+              refresh: fakeRefresh,
+              user: User.empty(),
+            ),
+          ),
         );
 
         when(
@@ -217,8 +222,13 @@ void main() {
             salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
-          (invocation) async =>
-              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
+          (invocation) async => Right(
+            Login(
+              access: fakeJWT,
+              refresh: fakeRefresh,
+              user: User.empty(),
+            ),
+          ),
         );
 
         when(
@@ -278,8 +288,13 @@ void main() {
             salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
-          (invocation) async =>
-              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
+          (invocation) async => Right(
+            Login(
+              access: fakeJWT,
+              refresh: fakeRefresh,
+              user: User.empty(),
+            ),
+          ),
         );
 
         when(
@@ -340,8 +355,13 @@ void main() {
             salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
-          (invocation) async =>
-              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
+          (invocation) async => Right(
+            Login(
+              access: fakeJWT,
+              refresh: fakeRefresh,
+              user: User.empty(),
+            ),
+          ),
         );
 
         when(
@@ -413,7 +433,11 @@ void main() {
           ),
         ).thenAnswer(
           (invocation) async => Right(
-            Login(access: JWT('fake-JWT-client'), refresh: fakeRefresh),
+            Login(
+              access: JWT('fake-JWT-client'),
+              refresh: fakeRefresh,
+              user: User.empty(),
+            ),
           ),
         );
 

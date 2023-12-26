@@ -23,6 +23,18 @@
                 
              ],
              "mobileNotifications":false
+          },
+          "user": {
+            "role": {
+              "id": 7,
+              "name": "ROOT Admin",
+              "type": "root_admin",
+              "description": "ROOT Admin"
+            },
+            "username": "rootadmin",
+            "salesOrganisations": [
+              "2001"
+            ]
           }
        }
     }

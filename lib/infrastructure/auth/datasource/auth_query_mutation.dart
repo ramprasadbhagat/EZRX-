@@ -33,6 +33,16 @@ class AuthQueryMutation {
             }
             mobileNotifications
           }
+          user{
+            role {
+              id
+              name
+              type
+              description
+            }
+            username
+            salesOrganisations
+          }
       }
     }
     ''';

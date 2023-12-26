@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'login_dto.freezed.dart';
@@ -14,10 +15,15 @@ class LoginDto with _$LoginDto {
         required String access,
     @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
         required String refresh,
+    @Default(UserDto.emptyUserDto) @JsonKey(name: 'user') UserDto user,
   }) = _LoginDto;
 
   Login toDomain() {
-    return Login(access: JWT(access), refresh: JWT(refresh));
+    return Login(
+      access: JWT(access),
+      refresh: JWT(refresh),
+      user: user.toDomain(),
+    );
   }
 
   factory LoginDto.fromJson(Map<String, dynamic> json) =>

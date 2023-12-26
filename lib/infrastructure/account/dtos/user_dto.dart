@@ -40,6 +40,8 @@ class UserDto with _$UserDto {
         required String customerCode,
     @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
         required List<SalesOrganisationDto> userSalesOrganisations,
+    @JsonKey(name: 'salesOrganisations', defaultValue: [])
+        required List<String> salesOrganisations,
     @Default(AccessRightDto.emptyAccessRightDto)
     @JsonKey(name: 'accessRight')
         AccessRightDto accessRight,
@@ -92,6 +94,8 @@ class UserDto with _$UserDto {
       role: RoleDto.fromDomain(user.role),
       customerCode: user.customerCode.getOrCrash(),
       userSalesOrganisations: _splitSalesOrg(user.userSalesOrganisations),
+      salesOrganisations:
+          user.salesOrganisations.map((e) => e.getOrDefaultValue('')).toList(),
       accessRight: AccessRightDto.fromDomain(user.accessRight),
       emailNotifications: user.settings.emailNotifications,
       mobileNotifications: user.settings.mobileNotifications,
@@ -123,7 +127,7 @@ class UserDto with _$UserDto {
     firstName: '',
     hasBonusOverride: false,
     id: '',
-    languagePreference: '',
+    languagePreference: 'EN',
     lastName: '',
     mobileNotifications: false,
     username: '',
@@ -132,11 +136,12 @@ class UserDto with _$UserDto {
     disableReturns: false,
     disablePaymentAccess: false,
     hasPriceOverride: false,
-    disablePaymentNotification: false,
+    disablePaymentNotification: true,
     paymentNotification: <PaymentAdviceExpiryNotificationDto>[],
-    preferredLanguage: '',
+    preferredLanguage: 'EN',
     mobileNumber: '',
     supportedLanguages: <String>[],
+    salesOrganisations: <String>[],
   );
   User toDomain() {
     return User(
@@ -152,6 +157,7 @@ class UserDto with _$UserDto {
       ),
       customerCode: CustomerCode(customerCode),
       userSalesOrganisations: _mergeSalesOrg(userSalesOrganisations),
+      salesOrganisations: salesOrganisations.map((e) => SalesOrg(e)).toList(),
       accessRight: accessRight.toDomain(),
       settings: Settings(
         emailNotifications: emailNotifications,

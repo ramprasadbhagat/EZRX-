@@ -17,6 +17,7 @@ class MixpanelService {
     mixpanel = await Mixpanel.init(
       config.mixpanelKey,
       trackAutomaticEvents: true,
+      superProperties: {MixpanelProps.platform: 'app'},
     );
   }
 
@@ -36,7 +37,6 @@ class MixpanelService {
     required String customerCode,
     required String shipToAddress,
     required String userRole,
-    required String platform,
     required String market,
     required String currency,
   }) {
@@ -46,7 +46,6 @@ class MixpanelService {
       MixpanelProps.customerCode: customerCode,
       MixpanelProps.shipToAddress: shipToAddress,
       MixpanelProps.userRole: userRole,
-      MixpanelProps.platform: platform,
       MixpanelProps.market: market,
       MixpanelProps.currency: currency,
     });
@@ -54,6 +53,7 @@ class MixpanelService {
 
   void onLogout() {
     mixpanel.clearSuperProperties();
+    mixpanel.registerSuperProperties({MixpanelProps.platform: 'app'});
   }
 
   void setUser({

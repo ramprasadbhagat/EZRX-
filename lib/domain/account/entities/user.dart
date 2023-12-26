@@ -23,6 +23,7 @@ class User with _$User {
     required Role role,
     required CustomerCode customerCode,
     required List<SalesOrganisation> userSalesOrganisations,
+    required List<SalesOrg> salesOrganisations,
     required AccessRight accessRight,
     required Settings settings,
     required bool acceptPrivacyPolicy,
@@ -45,6 +46,7 @@ class User with _$User {
         role: Role(id: '', name: '', type: RoleType(''), description: ''),
         customerCode: CustomerCode(''),
         userSalesOrganisations: <SalesOrganisation>[],
+        salesOrganisations: <SalesOrg>[],
         accessRight: AccessRight.empty(),
         settings: Settings(
           emailNotifications: false,

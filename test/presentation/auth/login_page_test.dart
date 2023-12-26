@@ -24,6 +24,7 @@ import 'package:ezrxmobile/application/payments/account_summary/account_summary_
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -358,6 +359,7 @@ void main() {
               Login(
                 access: JWT('fake-success'),
                 refresh: JWT('fake-refresh'),
+                user: User.empty(),
               ),
             ),
           ),

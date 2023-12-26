@@ -29,7 +29,6 @@ class MixpanelRepository extends IMixpanelRepository {
       userRole: user.role.type.getOrDefaultValue(''),
       currency: salesOrgConfigs.currency.getOrDefaultValue('').toUpperCase(),
       market: salesOrg.country,
-      platform: 'app',
     );
   }
 }

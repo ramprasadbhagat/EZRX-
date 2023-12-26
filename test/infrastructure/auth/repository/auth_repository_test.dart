@@ -165,7 +165,8 @@ void main() {
           when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
 
           when(() => localDataSourceMock.loginWithPassword()).thenAnswer(
-            (_) async => Login(access: fakeJWT, refresh: fakeRefreshToken),
+            (_) async => Login.empty()
+                .copyWith(access: fakeJWT, refresh: fakeRefreshToken),
           );
           final result = await repository.login(
             password: fakePassword,
@@ -215,7 +216,7 @@ void main() {
             () => mixpanelService.trackEvent(
               eventName: MixpanelEvents.loginSuccess,
               properties: {
-                MixpanelProps.loginMethod: 'By username',
+                MixpanelProps.loginMethod: 'by_username',
               },
             ),
           ).called(1);
@@ -248,8 +249,9 @@ void main() {
             () => mixpanelService.trackEvent(
               eventName: MixpanelEvents.loginFailure,
               properties: {
+                MixpanelProps.username: fakeUserName.getValue(),
                 MixpanelProps.errorMessage: serverException.message,
-                MixpanelProps.loginMethod: 'By username',
+                MixpanelProps.loginMethod: 'by_username',
               },
             ),
           ).called(1);
@@ -261,7 +263,7 @@ void main() {
         () async {
           when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
           when(() => localDataSourceMock.proxyLoginWithUsername()).thenAnswer(
-            (_) async => Login(
+            (_) async => Login.empty().copyWith(
               access: fakeJWT,
               refresh: fakeRefreshToken,
             ),
@@ -299,7 +301,7 @@ void main() {
               salesOrg: fakeSalesOrg.getOrCrash(),
             ),
           ).thenAnswer(
-            (_) async => Login(
+            (_) async => Login.empty().copyWith(
               access: fakeJWT,
               refresh: fakeRefreshToken,
             ),
@@ -402,7 +404,7 @@ void main() {
           when(
             () => localDataSourceMock.loginWithOktaToken(),
           ).thenAnswer(
-            (_) async => Login(
+            (_) async => Login.empty().copyWith(
               access: fakeJWT,
               refresh: fakeRefreshToken,
             ),
@@ -441,7 +443,7 @@ void main() {
               fcmToken: fakeJWT.getOrCrash(),
             ),
           ).thenAnswer(
-            (_) async => Login(
+            (_) async => Login.empty().copyWith(
               access: fakeJWT,
               refresh: fakeRefreshToken,
             ),
@@ -1038,7 +1040,7 @@ void main() {
         when(
           () => localDataSourceMock.getAccessToken(),
         ).thenAnswer(
-          (_) async => Login(
+          (_) async => Login.empty().copyWith(
             access: fakeJWT,
             refresh: fakeRefreshToken,
           ),
@@ -1064,7 +1066,7 @@ void main() {
             refreshToken: fakeJWT.getOrCrash(),
           ),
         ).thenAnswer(
-          (_) async => Login(
+          (_) async => Login.empty().copyWith(
             access: fakeJWT,
             refresh: fakeRefreshToken,
           ),

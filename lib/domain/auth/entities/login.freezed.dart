@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Login {
   JWT get access => throw _privateConstructorUsedError;
   JWT get refresh => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginCopyWith<Login> get copyWith => throw _privateConstructorUsedError;
@@ -28,7 +29,9 @@ abstract class $LoginCopyWith<$Res> {
   factory $LoginCopyWith(Login value, $Res Function(Login) then) =
       _$LoginCopyWithImpl<$Res, Login>;
   @useResult
-  $Res call({JWT access, JWT refresh});
+  $Res call({JWT access, JWT refresh, User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -46,6 +49,7 @@ class _$LoginCopyWithImpl<$Res, $Val extends Login>
   $Res call({
     Object? access = null,
     Object? refresh = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       access: null == access
@@ -56,7 +60,19 @@ class _$LoginCopyWithImpl<$Res, $Val extends Login>
           ? _value.refresh
           : refresh // ignore: cast_nullable_to_non_nullable
               as JWT,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
@@ -66,7 +82,10 @@ abstract class _$$_LoginCopyWith<$Res> implements $LoginCopyWith<$Res> {
       __$$_LoginCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({JWT access, JWT refresh});
+  $Res call({JWT access, JWT refresh, User user});
+
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -80,6 +99,7 @@ class __$$_LoginCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res, _$_Login>
   $Res call({
     Object? access = null,
     Object? refresh = null,
+    Object? user = null,
   }) {
     return _then(_$_Login(
       access: null == access
@@ -90,6 +110,10 @@ class __$$_LoginCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res, _$_Login>
           ? _value.refresh
           : refresh // ignore: cast_nullable_to_non_nullable
               as JWT,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 }
@@ -97,16 +121,20 @@ class __$$_LoginCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res, _$_Login>
 /// @nodoc
 
 class _$_Login extends _Login {
-  const _$_Login({required this.access, required this.refresh}) : super._();
+  const _$_Login(
+      {required this.access, required this.refresh, required this.user})
+      : super._();
 
   @override
   final JWT access;
   @override
   final JWT refresh;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'Login(access: $access, refresh: $refresh)';
+    return 'Login(access: $access, refresh: $refresh, user: $user)';
   }
 
   @override
@@ -115,11 +143,12 @@ class _$_Login extends _Login {
         (other.runtimeType == runtimeType &&
             other is _$_Login &&
             (identical(other.access, access) || other.access == access) &&
-            (identical(other.refresh, refresh) || other.refresh == refresh));
+            (identical(other.refresh, refresh) || other.refresh == refresh) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, access, refresh);
+  int get hashCode => Object.hash(runtimeType, access, refresh, user);
 
   @JsonKey(ignore: true)
   @override
@@ -130,13 +159,17 @@ class _$_Login extends _Login {
 
 abstract class _Login extends Login {
   const factory _Login(
-      {required final JWT access, required final JWT refresh}) = _$_Login;
+      {required final JWT access,
+      required final JWT refresh,
+      required final User user}) = _$_Login;
   const _Login._() : super._();
 
   @override
   JWT get access;
   @override
   JWT get refresh;
+  @override
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_LoginCopyWith<_$_Login> get copyWith =>

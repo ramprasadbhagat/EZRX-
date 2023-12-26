@@ -24,6 +24,7 @@ mixin _$User {
   CustomerCode get customerCode => throw _privateConstructorUsedError;
   List<SalesOrganisation> get userSalesOrganisations =>
       throw _privateConstructorUsedError;
+  List<SalesOrg> get salesOrganisations => throw _privateConstructorUsedError;
   AccessRight get accessRight => throw _privateConstructorUsedError;
   Settings get settings => throw _privateConstructorUsedError;
   bool get acceptPrivacyPolicy => throw _privateConstructorUsedError;
@@ -54,6 +55,7 @@ abstract class $UserCopyWith<$Res> {
       Role role,
       CustomerCode customerCode,
       List<SalesOrganisation> userSalesOrganisations,
+      List<SalesOrg> salesOrganisations,
       AccessRight accessRight,
       Settings settings,
       bool acceptPrivacyPolicy,
@@ -93,6 +95,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? role = null,
     Object? customerCode = null,
     Object? userSalesOrganisations = null,
+    Object? salesOrganisations = null,
     Object? accessRight = null,
     Object? settings = null,
     Object? acceptPrivacyPolicy = null,
@@ -135,6 +138,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisation>,
+      salesOrganisations: null == salesOrganisations
+          ? _value.salesOrganisations
+          : salesOrganisations // ignore: cast_nullable_to_non_nullable
+              as List<SalesOrg>,
       accessRight: null == accessRight
           ? _value.accessRight
           : accessRight // ignore: cast_nullable_to_non_nullable
@@ -233,6 +240,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       Role role,
       CustomerCode customerCode,
       List<SalesOrganisation> userSalesOrganisations,
+      List<SalesOrg> salesOrganisations,
       AccessRight accessRight,
       Settings settings,
       bool acceptPrivacyPolicy,
@@ -272,6 +280,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? role = null,
     Object? customerCode = null,
     Object? userSalesOrganisations = null,
+    Object? salesOrganisations = null,
     Object? accessRight = null,
     Object? settings = null,
     Object? acceptPrivacyPolicy = null,
@@ -314,6 +323,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value._userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisation>,
+      salesOrganisations: null == salesOrganisations
+          ? _value._salesOrganisations
+          : salesOrganisations // ignore: cast_nullable_to_non_nullable
+              as List<SalesOrg>,
       accessRight: null == accessRight
           ? _value.accessRight
           : accessRight // ignore: cast_nullable_to_non_nullable
@@ -377,6 +390,7 @@ class _$_User extends _User {
       required this.role,
       required this.customerCode,
       required final List<SalesOrganisation> userSalesOrganisations,
+      required final List<SalesOrg> salesOrganisations,
       required this.accessRight,
       required this.settings,
       required this.acceptPrivacyPolicy,
@@ -390,6 +404,7 @@ class _$_User extends _User {
       required final List<Language> supportedLanguages,
       required this.mobileNumber})
       : _userSalesOrganisations = userSalesOrganisations,
+        _salesOrganisations = salesOrganisations,
         _supportedLanguages = supportedLanguages,
         super._();
 
@@ -412,6 +427,15 @@ class _$_User extends _User {
       return _userSalesOrganisations;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_userSalesOrganisations);
+  }
+
+  final List<SalesOrg> _salesOrganisations;
+  @override
+  List<SalesOrg> get salesOrganisations {
+    if (_salesOrganisations is EqualUnmodifiableListView)
+      return _salesOrganisations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_salesOrganisations);
   }
 
   @override
@@ -448,7 +472,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber)';
   }
 
   @override
@@ -467,6 +491,8 @@ class _$_User extends _User {
                 other.customerCode == customerCode) &&
             const DeepCollectionEquality().equals(
                 other._userSalesOrganisations, _userSalesOrganisations) &&
+            const DeepCollectionEquality()
+                .equals(other._salesOrganisations, _salesOrganisations) &&
             (identical(other.accessRight, accessRight) ||
                 other.accessRight == accessRight) &&
             (identical(other.settings, settings) ||
@@ -503,6 +529,7 @@ class _$_User extends _User {
         role,
         customerCode,
         const DeepCollectionEquality().hash(_userSalesOrganisations),
+        const DeepCollectionEquality().hash(_salesOrganisations),
         accessRight,
         settings,
         acceptPrivacyPolicy,
@@ -533,6 +560,7 @@ abstract class _User extends User {
       required final Role role,
       required final CustomerCode customerCode,
       required final List<SalesOrganisation> userSalesOrganisations,
+      required final List<SalesOrg> salesOrganisations,
       required final AccessRight accessRight,
       required final Settings settings,
       required final bool acceptPrivacyPolicy,
@@ -561,6 +589,8 @@ abstract class _User extends User {
   CustomerCode get customerCode;
   @override
   List<SalesOrganisation> get userSalesOrganisations;
+  @override
+  List<SalesOrg> get salesOrganisations;
   @override
   AccessRight get accessRight;
   @override

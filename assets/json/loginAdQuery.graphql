@@ -24,6 +24,16 @@
             }
             mobileNotifications
           }
+          user{
+            role {
+              id
+              name
+              type
+              description
+            }
+            username
+            salesOrganisations
+          }
   }
 
   variable : {

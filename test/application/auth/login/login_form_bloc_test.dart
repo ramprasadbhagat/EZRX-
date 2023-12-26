@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/cred.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -296,14 +297,7 @@ void main() {
         loginFormState.copyWith(
           isSubmitting: false,
           showErrorMessages: false,
-          authFailureOrSuccessOption: optionOf(
-            Right(
-              Login(
-                access: loginMockData.access,
-                refresh: loginMockData.refresh,
-              ),
-            ),
-          ),
+          authFailureOrSuccessOption: optionOf(Right(loginMockData)),
         ),
       ],
     );
@@ -369,14 +363,7 @@ void main() {
         loginFormState.copyWith(
           isSubmitting: false,
           showErrorMessages: false,
-          authFailureOrSuccessOption: optionOf(
-            Right(
-              Login(
-                access: loginMockData.access,
-                refresh: loginMockData.refresh,
-              ),
-            ),
-          ),
+          authFailureOrSuccessOption: optionOf(Right(loginMockData)),
         ),
       ],
     );
@@ -409,14 +396,7 @@ void main() {
         loginFormState.copyWith(
           isSubmitting: false,
           showErrorMessages: false,
-          authFailureOrSuccessOption: optionOf(
-            Right(
-              Login(
-                access: loginMockData.access,
-                refresh: loginMockData.refresh,
-              ),
-            ),
-          ),
+          authFailureOrSuccessOption: optionOf(Right(loginMockData)),
         ),
       ],
     );
@@ -510,8 +490,13 @@ void main() {
         when(
           () => authRepoMock.login(username: fakeUser, password: fakePassword),
         ).thenAnswer(
-          (invocation) async =>
-              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
+          (invocation) async => Right(
+            Login(
+              access: fakeJWT,
+              refresh: fakeRefresh,
+              user: User.empty(),
+            ),
+          ),
         );
 
         when(() => authRepoMock.storeJWT(access: fakeJWT, refresh: fakeRefresh))
@@ -540,7 +525,13 @@ void main() {
           username: Username(''),
           password: Password.login(''),
           authFailureOrSuccessOption: optionOf(
-            Right(Login(access: fakeJWT, refresh: fakeRefresh)),
+            Right(
+              Login(
+                access: fakeJWT,
+                refresh: fakeRefresh,
+                user: User.empty(),
+              ),
+            ),
           ),
         ),
       ],
@@ -603,14 +594,7 @@ void main() {
           showErrorMessages: false,
           username: Username(''),
           password: Password.login(''),
-          authFailureOrSuccessOption: optionOf(
-            Right(
-              Login(
-                access: loginMockData.access,
-                refresh: loginMockData.refresh,
-              ),
-            ),
-          ),
+          authFailureOrSuccessOption: optionOf(Right(loginMockData)),
         ),
       ],
     );
@@ -632,8 +616,13 @@ void main() {
         when(
           () => authRepoMock.login(username: fakeUser, password: fakePassword),
         ).thenAnswer(
-          (invocation) async =>
-              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
+          (invocation) async => Right(
+            Login(
+              access: fakeJWT,
+              refresh: fakeRefresh,
+              user: User.empty(),
+            ),
+          ),
         );
 
         when(() => authRepoMock.storeJWT(access: fakeJWT, refresh: fakeRefresh))
@@ -679,7 +668,13 @@ void main() {
           username: Username(''),
           password: Password.login(''),
           authFailureOrSuccessOption: optionOf(
-            Right(Login(access: fakeJWT, refresh: fakeRefresh)),
+            Right(
+              Login(
+                access: fakeJWT,
+                refresh: fakeRefresh,
+                user: User.empty(),
+              ),
+            ),
           ),
         ),
       ],
@@ -705,8 +700,13 @@ void main() {
             password: fakePassword,
           ),
         ).thenAnswer(
-          (invocation) async =>
-              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
+          (invocation) async => Right(
+            Login(
+              access: fakeJWT,
+              refresh: fakeRefresh,
+              user: User.empty(),
+            ),
+          ),
         );
       },
       act: (LoginFormBloc bloc) =>

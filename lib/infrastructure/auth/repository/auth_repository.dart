@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -86,11 +87,10 @@ class AuthRepository implements IAuthRepository {
         password: passwordStr,
         fcmToken: fcmToken,
       );
+      _registerMixpanelSuperProperties(login.user);
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.loginSuccess,
-        properties: {
-          MixpanelProps.loginMethod: 'By username',
-        },
+        properties: {MixpanelProps.loginMethod: 'by_username'},
       );
 
       return Right(login);
@@ -98,9 +98,10 @@ class AuthRepository implements IAuthRepository {
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.loginFailure,
         properties: {
+          MixpanelProps.username: usernameStr,
           MixpanelProps.errorMessage:
               FailureHandler.handleFailure(e).failureMessage,
-          MixpanelProps.loginMethod: 'By username',
+          MixpanelProps.loginMethod: 'by_username',
         },
       );
 
@@ -183,10 +184,18 @@ class AuthRepository implements IAuthRepository {
         oktaAccessToken: token,
         fcmToken: fcmToken,
       );
+      _registerMixpanelSuperProperties(login.user);
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.loginSuccess,
+        properties: {MixpanelProps.loginMethod: 'sso'},
+      );
 
       return Right(login);
     } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
+      final failure = FailureHandler.handleFailure(e);
+      _sendSSOLoginError(failure);
+
+      return Left(failure);
     }
   }
 
@@ -258,25 +267,12 @@ class AuthRepository implements IAuthRepository {
     try {
       await oktaLoginServices.login();
 
-      mixpanelService.trackEvent(
-        eventName: MixpanelEvents.loginSuccess,
-        properties: {
-          MixpanelProps.loginMethod: 'sso',
-        },
-      );
-
       return const Right(unit);
     } catch (e) {
-      mixpanelService.trackEvent(
-        eventName: MixpanelEvents.loginFailure,
-        properties: {
-          MixpanelProps.errorMessage:
-              FailureHandler.handleFailure(e).failureMessage,
-          MixpanelProps.loginMethod: 'sso',
-        },
-      );
+      final failure = FailureHandler.handleFailure(e);
+      _sendSSOLoginError(failure);
 
-      return Left(FailureHandler.handleFailure(e));
+      return Left(failure);
     }
   }
 
@@ -287,7 +283,10 @@ class AuthRepository implements IAuthRepository {
 
       return Right(JWT(result?['message']));
     } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
+      final failure = FailureHandler.handleFailure(e);
+      _sendSSOLoginError(failure);
+
+      return Left(failure);
     }
   }
 
@@ -510,5 +509,29 @@ class AuthRepository implements IAuthRepository {
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  void _sendSSOLoginError(ApiFailure failure) {
+    mixpanelService.trackEvent(
+      eventName: MixpanelEvents.loginFailure,
+      properties: {
+        MixpanelProps.errorMessage: failure.failureMessage,
+        MixpanelProps.loginMethod: 'sso',
+      },
+    );
+  }
+
+  void _registerMixpanelSuperProperties(User user) {
+    final salesOrg = user.salesOrganisations.firstOrNull;
+
+    mixpanelService.registerSuperProps(
+      username: user.username.getOrDefaultValue(''),
+      salesOrg: salesOrg?.getOrDefaultValue('') ?? '',
+      userRole: user.role.name,
+      market: salesOrg?.country ?? '',
+      customerCode: '',
+      shipToAddress: '',
+      currency: '',
+    );
   }
 }
