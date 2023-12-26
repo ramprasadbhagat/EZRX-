@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -25,6 +26,14 @@ void main() {
       expect(
         creditAndInvoiceItemDto.searchKey,
         StringValue('1100001228'),
+      );
+      expect(
+        creditAndInvoiceItemDto.debitCreditCode,
+        DebitCreditCode('S'),
+      );
+      expect(
+        creditAndInvoiceItemDto.referenceId,
+        ReferenceId(''),
       );
     });
   });

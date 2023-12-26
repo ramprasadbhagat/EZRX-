@@ -66,27 +66,25 @@ class _FullSummaryPageState extends State<FullSummaryPage> {
             buildWhen: (previous, current) =>
                 previous.isLoading != current.isLoading,
             builder: (context, state) {
-              return Expanded(
-                child: ScrollList<CreditAndInvoiceItem>(
-                  noRecordFoundWidget: NoRecordFound.fullSummary(
-                    isSearchAndFilterEmpty:
-                        state.appliedFilter.searchKey.isValueEmpty,
-                  ),
-                  controller: _controller,
-                  onRefresh: () => context.read<FullSummaryBloc>().add(
-                        FullSummaryEvent.fetch(
-                          appliedFilter: FullSummaryFilter.empty(),
-                        ),
-                      ),
-                  onLoadingMore: () => context.read<FullSummaryBloc>().add(
-                        const FullSummaryEvent.loadMore(),
-                      ),
-                  isLoading: state.isLoading,
-                  itemBuilder: (context, index, item) => _InvoiceCreditItem(
-                    data: item,
-                  ),
-                  items: state.items,
+              return ScrollList<CreditAndInvoiceItem>(
+                noRecordFoundWidget: NoRecordFound.fullSummary(
+                  isSearchAndFilterEmpty:
+                      state.appliedFilter.searchKey.isValueEmpty,
                 ),
+                controller: _controller,
+                onRefresh: () => context.read<FullSummaryBloc>().add(
+                      FullSummaryEvent.fetch(
+                        appliedFilter: FullSummaryFilter.empty(),
+                      ),
+                    ),
+                onLoadingMore: () => context.read<FullSummaryBloc>().add(
+                      const FullSummaryEvent.loadMore(),
+                    ),
+                isLoading: state.isLoading,
+                itemBuilder: (context, index, item) => _InvoiceCreditItem(
+                  data: item,
+                ),
+                items: state.items,
               );
             },
           ),

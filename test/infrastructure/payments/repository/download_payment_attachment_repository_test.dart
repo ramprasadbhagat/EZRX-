@@ -1,9 +1,12 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
+import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
@@ -12,6 +15,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_a
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/all_invoices_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/full_summary_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/download_payment_attachment_repository.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -50,6 +54,8 @@ void main() {
       AllInvoicesFilterDto.fromDomain(AllInvoicesFilter.empty()).toMapList;
   final filterListForCredits =
       AllCreditsFilterDto.fromDomain(AllCreditsFilter.empty()).toMapList;
+  final filterListForFullSummary =
+      FullSummaryFilterDto.fromDomain(FullSummaryFilter.empty()).toMapList;
 
   setUpAll(
     () async {
@@ -235,6 +241,88 @@ void main() {
         expect(
           result.isLeft(),
           true,
+        );
+      });
+    });
+
+    group('fetch FullSummary Url tests', () {
+      test('fetch FullSummary Url successfully local', () async {
+        mockConfig.appFlavor = Flavor.mock;
+        when(() => localDataSource.getFileDownloadUrl()).thenAnswer(
+          (invocation) async => downloadPaymentAttachment,
+        );
+
+        final result =
+            await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganization: fakeSalesOrganisation,
+          queryObject: FullSummaryFilter.empty(),
+        );
+        expect(
+          result,
+          Right(downloadPaymentAttachment),
+        );
+      });
+
+      test('fetch FullSummary Url failed local', () async {
+        when(() => localDataSource.getFileDownloadUrl())
+            .thenThrow(MockException());
+
+        final result =
+            await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganization: fakeSalesOrganisation,
+          queryObject: FullSummaryFilter.empty(),
+        );
+        expect(
+          result,
+          Left(FailureHandler.handleFailure(MockException())),
+        );
+      });
+
+      test('fetch FullSummary Url success remote', () async {
+        mockConfig.appFlavor = Flavor.uat;
+        when(
+          () => remoteDataSource.getFileDownloadUrl(
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            excelFor: 'AccountSummary',
+            queryObject: filterListForFullSummary,
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          ),
+        ).thenAnswer((invocation) async => downloadPaymentAttachment);
+
+        final result =
+            await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganization: fakeSalesOrganisation,
+          queryObject: FullSummaryFilter.empty(),
+        );
+        expect(
+          result,
+          Right(downloadPaymentAttachment),
+        );
+      });
+
+      test('fetch FullSummary Url failure remote', () async {
+        mockConfig.appFlavor = Flavor.uat;
+        when(
+          () => remoteDataSource.getFileDownloadUrl(
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            excelFor: 'AccountSummary',
+            queryObject: filterListForFullSummary,
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          ),
+        ).thenThrow(MockException());
+
+        final result =
+            await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganization: fakeSalesOrganisation,
+          queryObject: FullSummaryFilter.empty(),
+        );
+        expect(
+          result,
+          Left(FailureHandler.handleFailure(MockException())),
         );
       });
     });

@@ -1,3 +1,6 @@
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,6 +14,9 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
+
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class AllCreditsAndInvoicesLocalDataSourceMock extends Mock
     implements AllCreditsAndInvoicesLocalDataSource {}
@@ -50,7 +56,8 @@ void main() {
       localDataSource: allCreditsAndInvoicesLocalDataSourceMock,
       remoteDataSource: allCreditsAndInvoicesRemoteDataSourceMock,
     );
-    mockList = List<CreditAndInvoiceItem>.empty();
+    mockList =
+        await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
   });
 
   group('All Credits and Invoices Repository Test', () {
@@ -143,6 +150,100 @@ void main() {
           offset: 0,
         );
         expect(result.isLeft(), true);
+      });
+    });
+
+    group('filter Full Summary Test', () {
+      test('=> Locally success', () async {
+        when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () =>
+              allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList(),
+        ).thenAnswer(
+          (invocation) async => mockList,
+        );
+
+        final result = await allCreditsAndInvoicesRepository.filterFullSummary(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          filter: FullSummaryFilter.empty(),
+          pageSize: 1,
+          offset: 0,
+        );
+        expect(result, Right(mockList));
+      });
+
+      test('=> Locally Failure', () async {
+        when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () =>
+              allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList(),
+        ).thenThrow(MockException());
+
+        final result = await allCreditsAndInvoicesRepository.filterFullSummary(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          filter: FullSummaryFilter.empty(),
+          pageSize: 1,
+          offset: 0,
+        );
+        expect(
+          result,
+          Left(
+            FailureHandler.handleFailure(MockException()),
+          ),
+        );
+      });
+
+      test('=> Remote success', () async {
+        when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => allCreditsAndInvoicesRemoteDataSourceMock.filterFullSummary(
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            offset: 0,
+            pageSize: 24,
+            filterMap: <Map<String, dynamic>>[],
+          ),
+        ).thenAnswer(
+          (invocation) async => mockList,
+        );
+
+        final result = await allCreditsAndInvoicesRepository.filterFullSummary(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          filter: FullSummaryFilter.empty(),
+          pageSize: 24,
+          offset: 0,
+        );
+        expect(result, Right(mockList));
+      });
+
+      test('=> Remote Failure', () async {
+        when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => allCreditsAndInvoicesRemoteDataSourceMock.filterFullSummary(
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            offset: 0,
+            pageSize: 24,
+            filterMap: <Map<String, dynamic>>[],
+          ),
+        ).thenThrow(MockException());
+
+        final result = await allCreditsAndInvoicesRepository.filterFullSummary(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          filter: FullSummaryFilter.empty(),
+          pageSize: 24,
+          offset: 0,
+        );
+        expect(
+          result,
+          Left(
+            FailureHandler.handleFailure(MockException()),
+          ),
+        );
       });
     });
   });

@@ -11,6 +11,7 @@ void main() {
   late String price;
   late String label;
   late bool obscured;
+  late PriceStyle type;
 
   setUp(
     () {
@@ -18,6 +19,7 @@ void main() {
       label = '';
       price = '0';
       obscured = false;
+      type = PriceStyle.commonPrice;
     },
   );
 
@@ -31,6 +33,7 @@ void main() {
               price: price,
               title: label,
               obscured: obscured,
+              type: type,
             ),
           ),
         ),
@@ -145,6 +148,27 @@ void main() {
       expect(
         find.text(
           '${salesOrgConfig.currency.code} **.**',
+          findRichText: true,
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('PriceComponent with creditSummaryPrice style',
+        (WidgetTester tester) async {
+      price = '50.00';
+      type = PriceStyle.creditSummaryPrice;
+      await tester.pumpWidget(
+        getWidget(),
+      );
+      await tester.pump();
+      final priceComponentWidget = find.byKey(
+        WidgetKeys.priceComponent,
+      );
+      expect(priceComponentWidget, findsOneWidget);
+      expect(
+        find.text(
+          '${salesOrgConfig.currency.code} (50.00)',
           findRichText: true,
         ),
         findsOneWidget,

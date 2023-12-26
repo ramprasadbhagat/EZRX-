@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
+import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/download_payment_attachment_repository.dart';
 import 'package:flutter/material.dart';
@@ -469,6 +470,105 @@ void main() {
             ),
           ),
           isDownloadInProgress: false,
+        )
+      ],
+    );
+
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download full summary url success',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      seed: () => DownloadPaymentAttachmentsState.initial().copyWith(
+        customerCodeInfo: customerCodeInfo,
+        salesOrganization: salesOrganization,
+      ),
+      setUp: () {
+        when(
+          () => downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            queryObject: FullSummaryFilter.empty(),
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            downloadPaymentAttachmentMockData,
+          ),
+        );
+        when(() => downloadPaymentAttachmentRepository.downloadPermission())
+            .thenAnswer(
+          (invocation) async => const Right(PermissionStatus.granted),
+        );
+        when(
+          () => downloadPaymentAttachmentRepository.downloadFiles(
+            files: downloadPaymentAttachmentMockData,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(file),
+        );
+      },
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
+          queryObject: FullSummaryFilter.empty(),
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          isDownloadInProgress: true,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          failureOrSuccessOption: optionOf(
+            Right(file),
+          ),
+        )
+      ],
+    );
+
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download full summary url failure',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      seed: () => DownloadPaymentAttachmentsState.initial().copyWith(
+        customerCodeInfo: customerCodeInfo,
+        salesOrganization: salesOrganization,
+      ),
+      setUp: () {
+        when(
+          () => downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            queryObject: FullSummaryFilter.empty(),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
+          queryObject: FullSummaryFilter.empty(),
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          isDownloadInProgress: true,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
         )
       ],
     );

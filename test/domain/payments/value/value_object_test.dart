@@ -55,4 +55,38 @@ void main() {
       },
     );
   });
+
+  group('DebitCreditCode value object', () {
+    test(
+      'check is credit',
+      () async {
+        const input = 'H';
+        final adviceExpiry = DebitCreditCode(input);
+        final result = adviceExpiry.isCredit;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'check is debit',
+      () async {
+        const input = 'S';
+        final adviceExpiry = DebitCreditCode(input);
+        final result = adviceExpiry.isDedit;
+        expect(result, true);
+      },
+    );
+  });
+
+  group('ReferenceId value object', () {
+    test(
+      'get reference list string',
+      () async {
+        const input = '0000100585,0000100585';
+        final adviceExpiry = ReferenceId(input);
+        final result = adviceExpiry.referenceListString;
+        expect(result, '#0000100585, #0000100585');
+      },
+    );
+  });
 }

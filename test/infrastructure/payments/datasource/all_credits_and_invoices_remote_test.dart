@@ -185,6 +185,70 @@ void main() {
             });
           },
         );
+
+        test(
+          'get filter full summary success',
+          () async {
+            final variables = {
+              'request': {
+                'input': {
+                  'customerCode': 'fake-customer-code',
+                  'salesOrg': 'fake-sale-org',
+                  'first': 20,
+                  'after': 0,
+                  'excelFor': 'AccountSummary',
+                  'orderBy': [
+                    {
+                      'order': 'desc',
+                      'field': 'documentDate',
+                    }
+                  ],
+                  'filterBy': filterMap
+                }
+              },
+            };
+
+            final res = json.decode(
+              await rootBundle.loadString(
+                'assets/json/customerDocumentHeaderV2Response.json',
+              ),
+            );
+
+            dioAdapter.onPost(
+              '/api/ezpay',
+              (server) => server.reply(
+                200,
+                res,
+                delay: const Duration(seconds: 1),
+              ),
+              headers: {'Content-Type': 'application/json; charset=utf-8'},
+              data: jsonEncode({
+                'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
+                    .getDocumentHeaderListQuery(),
+                'variables': variables,
+              }),
+            );
+
+            final result = await remoteDataSource.filterFullSummary(
+              customerCode: 'fake-customer-code',
+              salesOrg: 'fake-sale-org',
+              filterMap: filterMap,
+              offset: 0,
+              pageSize: 20,
+            );
+
+            final expectResult = <CreditAndInvoiceItem>[];
+            for (final dynamic item in res['data']['customerDocumentHeaderV2']
+                ['documentHeaderList']) {
+              expectResult
+                  .add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+            }
+            expect(
+              result,
+              expectResult,
+            );
+          },
+        );
       });
     },
   );

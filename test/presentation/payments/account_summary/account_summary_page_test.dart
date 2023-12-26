@@ -1,11 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/filter/full_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/payments/full_summary/widgets/filter_bottom_sheet.dart';
 import 'package:file/file.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +57,10 @@ class AllInvoicesFilterBlocMock
     extends MockBloc<AllInvoicesFilterEvent, AllInvoicesFilterState>
     implements AllInvoicesFilterBloc {}
 
+class FullSummaryFilterBlocMock
+    extends MockBloc<FullSummaryFilterEvent, FullSummaryFilterState>
+    implements FullSummaryFilterBloc {}
+
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
@@ -73,6 +80,7 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
   late FullSummaryBloc fullSummaryBlocMock;
+  late FullSummaryFilterBloc fullSummaryFilterBlocMock;
   late DownloadPaymentAttachmentsBloc mockDownloadPaymentAttachmentsBloc;
   final allCreditsFilter = AllCreditsFilter(
     amountValueFrom: RangeValue('0'),
@@ -109,6 +117,7 @@ void main() {
     mockDownloadPaymentAttachmentsBloc = MockDownloadPaymentAttachmentsBloc();
     newPaymentBlocMock = NewPaymentBlocMock();
     fullSummaryBlocMock = FullSummaryBlocMock();
+    fullSummaryFilterBlocMock = FullSummaryFilterBlocMock();
   });
 
   setUp(() async {
@@ -131,6 +140,8 @@ void main() {
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => fullSummaryBlocMock.state)
         .thenReturn(FullSummaryState.initial());
+    when(() => fullSummaryFilterBlocMock.state)
+        .thenReturn(FullSummaryFilterState.initial());
   });
 
   ///////////////////////////Finder//////////////////////////////////////////////
@@ -143,6 +154,7 @@ void main() {
   final paymentSummaryFilterIcon =
       find.byKey(WidgetKeys.paymentSummaryFilterIcon);
   final creditsTab = find.byKey(WidgetKeys.creditsTab);
+  final fullSummaryTab = find.byKey(WidgetKeys.summaryTab);
   //////////////////////////////////////////////////////////////////////////////
 
   Widget getWidget() {
@@ -178,6 +190,9 @@ void main() {
         ),
         BlocProvider<FullSummaryBloc>(
           create: (context) => fullSummaryBlocMock,
+        ),
+        BlocProvider<FullSummaryFilterBloc>(
+          create: (context) => fullSummaryFilterBlocMock,
         ),
       ],
       child: const AccountSummary(),
@@ -521,6 +536,90 @@ void main() {
       await tester.tap(creditsTab);
       await tester.pumpAndSettle();
       expect(accountSummarySearchBar, findsOneWidget);
+    });
+
+    testWidgets('=> Test Full Summary Search Bar', (tester) async {
+      final expectedState = [
+        FullSummaryState.initial().copyWith(
+          isLoading: true,
+        ),
+        FullSummaryState.initial(),
+      ];
+      whenListen(
+        fullSummaryBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(fullSummaryTab, findsOneWidget);
+      await tester.tap(fullSummaryTab);
+      await tester.pumpAndSettle();
+      expect(accountSummarySearchBar, findsOneWidget);
+      await tester.enterText(accountSummarySearchBar, '123');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      verify(
+        () => fullSummaryBlocMock.add(
+          FullSummaryEvent.fetch(
+            appliedFilter: FullSummaryFilter.empty().copyWith(
+              searchKey: SearchKey.searchFilter('123'),
+            ),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('=> Test Full Summary Export Button', (tester) async {
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(fullSummaryTab, findsOneWidget);
+      await tester.tap(fullSummaryTab);
+      await tester.pumpAndSettle();
+      expect(accountSummaryDownloadButton, findsOneWidget);
+      await tester.tap(accountSummaryDownloadButton);
+      await tester.pump();
+      verify(
+        () => mockDownloadPaymentAttachmentsBloc.add(
+          DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
+            queryObject: FullSummaryFilter.empty(),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('=> Test Full Summary Filter Button', (tester) async {
+      final expectedState = [
+        FullSummaryState.initial().copyWith(
+          isLoading: true,
+        ),
+        FullSummaryState.initial().copyWith(
+          appliedFilter: FullSummaryFilter.empty().copyWith(
+            filterStatuses: ['fake-status'],
+          ),
+        ),
+      ];
+      whenListen(
+        fullSummaryBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(fullSummaryTab, findsOneWidget);
+      await tester.tap(fullSummaryTab);
+      await tester.pumpAndSettle();
+      expect(accountSummaryFilterButton, findsOneWidget);
+      await tester.tap(accountSummaryFilterButton);
+      await tester.pumpAndSettle();
+      verify(
+        () => fullSummaryFilterBlocMock.add(
+          FullSummaryFilterEvent.openFilterBottomSheet(
+            appliedFilter: FullSummaryFilter.empty().copyWith(
+              filterStatuses: ['fake-status'],
+            ),
+          ),
+        ),
+      ).called(1);
+      expect(find.byType(FullSummaryFilterBottomSheet), findsOneWidget);
     });
   });
 }
