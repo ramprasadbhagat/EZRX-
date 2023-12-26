@@ -75,6 +75,7 @@ class _BodyContent extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
+                    key: WidgetKeys.accountSummaryButton,
                     onPressed: () =>
                         context.router.pushNamed('payments/invoice_credit'),
                     style:
@@ -107,6 +108,7 @@ class _BodyContent extends StatelessWidget {
                 ),
                 Expanded(
                   child: ElevatedButton(
+                    key: WidgetKeys.paymentSummaryRouteButton,
                     onPressed: () {
                       context.read<PaymentSummaryBloc>().add(
                             PaymentSummaryEvent.fetch(

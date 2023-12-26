@@ -1046,6 +1046,8 @@ class WidgetKeys {
       Key('paymentAdviceCreatedPageBack');
   static const Key creditDetailsPageListView = Key('creditDetailsPageListView');
   static const Key newPaymentButton = Key('newPaymentButton');
+  static const Key paymentSummaryRouteButton = Key('paymentSummaryRouteButton');
+  static const Key accountSummaryButton = Key('accountSummaryButton');
 
   //===========================================================
   //  New Payment
