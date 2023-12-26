@@ -39,24 +39,18 @@ class HomeTab extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           key: WidgetKeys.homeScreen,
-          appBar: PreferredSize(
-            preferredSize:
-                Size.fromHeight(state.shipToInfo.customerBlock.appBarHeight),
-            child: CustomAppBar(
-              title: const CustomerCodeSelector(
-                key: WidgetKeys.customerCodeSelector,
-              ),
-              automaticallyImplyLeading: false,
-              actionWidget: const [
-                Padding(
-                  padding: EdgeInsets.only(right: 16.0),
-                  child: CartButton(),
-                ),
-              ],
-              isCustomerBlocked:
-                  state.shipToInfo.customerBlock.isCustomerBlocked,
-              isSearchBarVisible: state.user.userCanAccessProducts,
+          appBar: CustomAppBar.homeTabAppBar(
+            title: const CustomerCodeSelector(
+              key: WidgetKeys.customerCodeSelector,
             ),
+            actionWidget: const [
+              Padding(
+                padding: EdgeInsets.only(right: 16.0),
+                child: CartButton(),
+              ),
+            ],
+            customerBlocked: state.shipToInfo.customerBlock,
+            isSearchBarVisible: state.user.userCanAccessProducts,
           ),
           //SingleChildScrollView and Column is needed
           //as the ListView is rebuilding the BrowseProduct & BundleSection

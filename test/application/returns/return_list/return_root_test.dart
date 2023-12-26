@@ -57,6 +57,9 @@ class MockAnnouncementBloc
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class MockCustomerCodeBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
@@ -104,6 +107,7 @@ void main() {
   late ViewByRequestReturnFilterBloc mockViewByRequestReturnFilterBloc;
   late AuthBloc mockAuthBloc;
   late ReturnListByRequestBloc mockReturnListByRequestBloc;
+  late EligibilityBloc eligibilityBlocMock;
   final viewByItemTab = find.byKey(
     Key(
       StringUtils.changeToCamelCase(sentence: 'View by items'),
@@ -135,6 +139,7 @@ void main() {
     mockReturnListByRequestBloc = ReturnListByRequestBlocMock();
     mockViewByItemReturnFilterBloc = MockViewByItemReturnFilterBloc();
     mockViewByRequestReturnFilterBloc = MockViewByRequestReturnFilterBloc();
+    eligibilityBlocMock = EligibilityBlocMock();
   });
 
   group(
@@ -162,6 +167,8 @@ void main() {
             .thenReturn(ViewByItemReturnFilterState.initial());
         when(() => mockViewByRequestReturnFilterBloc.state)
             .thenReturn(ViewByRequestReturnFilterState.initial());
+        when(() => eligibilityBlocMock.state)
+            .thenReturn(EligibilityState.initial());
       });
 
       Widget getWUT() {
@@ -199,6 +206,9 @@ void main() {
             ),
             BlocProvider<ViewByRequestReturnFilterBloc>(
               create: (context) => mockViewByRequestReturnFilterBloc,
+            ),
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock,
             ),
           ],
           child: const ReturnRoot(),

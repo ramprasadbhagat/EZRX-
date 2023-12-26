@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_month_picker.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -50,11 +51,12 @@ class _StatementAccountsPageState extends State<StatementAccountsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: WidgetKeys.soaPage,
-      appBar: AppBar(
+      appBar: CustomAppBar.commonAppBar(
         title: Text(
           context.tr('Statement of accounts'),
         ),
-        centerTitle: false,
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
       ),
       floatingActionButton: NewPaymentButton.scale(
         controller: _scrollController,

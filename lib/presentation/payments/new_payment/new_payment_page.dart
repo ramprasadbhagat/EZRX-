@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -78,10 +79,13 @@ class NewPaymentPage extends StatelessWidget {
 
         return Scaffold(
           key: WidgetKeys.newPaymentPage,
-          appBar: AppBar(
-            centerTitle: false,
-            title: Text(context.tr('New payment')),
-            leading: _PreviousButton(
+          appBar: CustomAppBar.commonAppBar(
+            title: Text(
+              context.tr('New payment'),
+            ),
+            customerBlocked:
+                context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+            leadingWidget: _PreviousButton(
               tabController: tabController,
               step: step,
             ),

@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -57,13 +58,14 @@ class PaymentSummaryDetailsPage extends StatelessWidget {
         ),
       ),
       child: Scaffold(
-        appBar: AppBar(
+        appBar: CustomAppBar.commonAppBar(
           title: Text(
-            'Payment details'.tr(),
+            context.tr('Payment details'),
             style: Theme.of(context).textTheme.labelLarge,
           ),
-          centerTitle: false,
-          leading: IconButton(
+          customerBlocked:
+              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+          leadingWidget: IconButton(
             icon: const Icon(Icons.arrow_back_ios_sharp),
             onPressed: () => context.router.pop(),
           ),

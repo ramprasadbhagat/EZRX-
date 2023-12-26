@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
@@ -43,12 +44,16 @@ class NewRequestSuccessfulPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
+      appBar: CustomAppBar.commonAppBar(
+        title: Text(
+          context.tr('Return request submitted'),
+        ),
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        leadingWidget: IconButton(
           onPressed: () => context.router.pop(),
           icon: const Icon(Icons.close),
         ),
-        title: Text('Return request submitted'.tr()),
       ),
       body: const _BodyContent(),
     );

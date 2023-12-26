@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
@@ -68,14 +69,15 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: WidgetKeys.paymentSummaryPage,
-      appBar: AppBar(
+      appBar: CustomAppBar.commonAppBar(
         key: WidgetKeys.paymentSummaryAppBar,
         title: Text(
           context.tr('Payment Summary'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
-        centerTitle: false,
-        actions: const [_PaymentSummaryDownloadButton()],
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        actionWidget: const [_PaymentSummaryDownloadButton()],
       ),
       floatingActionButton: NewPaymentButton.scale(
         controller: _scrollController,

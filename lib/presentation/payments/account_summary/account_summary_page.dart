@@ -1,5 +1,7 @@
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/filter/full_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/payments/full_summary/widgets/filter_bottom_sheet.dart';
 import 'package:flutter/services.dart';
@@ -34,12 +36,13 @@ class AccountSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: WidgetKeys.accountSummaryPage,
-      appBar: AppBar(
+      appBar: CustomAppBar.commonAppBar(
         title: Text(
           context.tr('Account Summary'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
-        centerTitle: false,
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
       ),
       body: Column(
         children: [

@@ -24,6 +24,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -65,10 +66,11 @@ class PaymentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: WidgetKeys.paymentsTabPage,
-      appBar: AppBar(
+      appBar: CustomAppBar.commonAppBar(
         key: WidgetKeys.paymentHomeAppBar,
         title: Text(context.tr('Payments')),
-        centerTitle: false,
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
       ),
       bottomNavigationBar: BlocListener<NewPaymentBloc, NewPaymentState>(
         listenWhen: (previous, current) =>

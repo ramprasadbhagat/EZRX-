@@ -18,6 +18,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -56,18 +57,6 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _PaymentAdviceAppBar(),
-      body: const _BodyContent(),
-    );
-  }
-}
-
-class _BodyContent extends StatelessWidget {
-  const _BodyContent({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return BlocConsumer<NewPaymentBloc, NewPaymentState>(
       listenWhen: (previous, current) =>
           previous.isFetchingInvoiceInfoPdf != current.isFetchingInvoiceInfoPdf,
@@ -99,61 +88,48 @@ class _BodyContent extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isFetchingInvoiceInfoPdf != current.isFetchingInvoiceInfoPdf,
       builder: (context, state) {
-        return state.isFetchingInvoiceInfoPdf
-            ? Center(
-                child: LoadingShimmer.logo(
-                  key: WidgetKeys.paymentAdviceScreenLoader,
-                ),
-              )
-            : Column(
-                children: const [
-                  Expanded(
-                    child: _PaymentAdviceBodySection(),
-                  ),
-                  _PaymentAdviceFooterSection(),
-                ],
-              );
-      },
-    );
-  }
-}
-
-class _PaymentAdviceAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<NewPaymentBloc, NewPaymentState>(
-      buildWhen: (previous, current) =>
-          previous.isFetchingInvoiceInfoPdf != current.isFetchingInvoiceInfoPdf,
-      builder: (context, state) {
-        return AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: false,
-          leadingWidth: state.canDisplayCrossButton ? null : 5,
-          backgroundColor: ZPColors.white,
-          title: Text(
-            state.isFetchingInvoiceInfoPdf
-                ? context.tr('Generating payment advice...')
-                : context.tr('Payment advice generated'),
-          ),
-          leading: state.canDisplayCrossButton
-              ? IconButton(
-                  key: WidgetKeys.closeButton,
-                  onPressed: () => Navigator.pop(context),
-                  icon: const CircleAvatar(
-                    maxRadius: 16,
-                    backgroundColor: ZPColors.transparent,
-                    child: Icon(
-                      Icons.close,
-                      color: ZPColors.neutralsBlack,
+        return Scaffold(
+          appBar: CustomAppBar.commonAppBar(
+            automaticallyImplyLeading: false,
+            leadingWidth: state.canDisplayCrossButton ? null : 5,
+            title: Text(
+              state.isFetchingInvoiceInfoPdf
+                  ? context.tr('Generating payment advice...')
+                  : context.tr('Payment advice generated'),
+            ),
+            leadingWidget: state.canDisplayCrossButton
+                ? IconButton(
+                    key: WidgetKeys.closeButton,
+                    onPressed: () => Navigator.pop(context),
+                    icon: const CircleAvatar(
+                      maxRadius: 16,
+                      backgroundColor: ZPColors.transparent,
+                      child: Icon(
+                        Icons.close,
+                        color: ZPColors.neutralsBlack,
+                      ),
                     ),
+                  )
+                : const SizedBox.shrink(),
+            customerBlocked:
+                context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+          ),
+          body: state.isFetchingInvoiceInfoPdf
+              ? Center(
+                  child: LoadingShimmer.logo(
+                    key: WidgetKeys.paymentAdviceScreenLoader,
                   ),
                 )
-              : const SizedBox.shrink(),
+              : Column(
+                  children: const [
+                    Expanded(
+                      child: _PaymentAdviceBodySection(),
+                    ),
+                    _PaymentAdviceFooterSection(),
+                  ],
+                ),
         );
       },
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

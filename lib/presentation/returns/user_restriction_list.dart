@@ -29,9 +29,10 @@ class UserRestrictionListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: WidgetKeys.userRestrictionListPage,
-      appBar: const PreferredSize(
-        preferredSize: Size(double.infinity, 50),
-        child: CustomAppBar(title: UserRestrictionListSearch()),
+      appBar: CustomAppBar.commonAppBar(
+        title: const UserRestrictionListSearch(),
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

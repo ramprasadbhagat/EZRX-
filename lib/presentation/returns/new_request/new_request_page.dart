@@ -12,6 +12,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -54,10 +55,13 @@ class NewRequestPage extends StatelessWidget {
 
         return Scaffold(
           key: WidgetKeys.newRequestPage,
-          appBar: AppBar(
-            centerTitle: false,
-            title: Text('New return request'.tr()),
-            leading: _PreviousButton(
+          appBar: CustomAppBar.commonAppBar(
+            title: Text(
+              context.tr('New return request'),
+            ),
+            customerBlocked:
+                context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+            leadingWidget: _PreviousButton(
               tabController: tabController,
               step: step,
             ),

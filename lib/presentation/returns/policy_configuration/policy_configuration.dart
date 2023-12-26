@@ -27,9 +27,10 @@ class PolicyConfigurationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size(double.infinity, 60),
-        child: CustomAppBar(title: _PolicyConfigurationSearch()),
+      appBar: CustomAppBar.commonAppBar(
+        title: const _PolicyConfigurationSearch(),
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

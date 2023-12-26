@@ -520,7 +520,10 @@ class CustomerBlock extends ValueObject<String> {
   bool get isCustomerBlocked =>
       checkIfCustomerIsBlocked(value.getOrElse(() => ''));
 
-  double get appBarHeight => getAppBarHeight(isCustomerBlocked);
+  double get homeAppBarHeight =>
+      getCombinedAppBarHeight(isCustomerBlocked, true);
+
+  double get appBarHeight => getCombinedAppBarHeight(isCustomerBlocked, false);
 
   const CustomerBlock._(this.value);
 }
