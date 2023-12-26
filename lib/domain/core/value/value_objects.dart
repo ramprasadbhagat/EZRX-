@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 @immutable
 abstract class ValueObject<T> {
   const ValueObject();
+
   Either<ValueFailure<T>, T> get value;
 
   /// Throws [UnexpectedValueError] containing the [ValueFailure]
@@ -99,6 +100,8 @@ class DateTimeStringValue extends ValueObject<String> {
 
   bool get isNotEmpty => _valueOrEmpty.isNotEmpty;
 
+  bool get isEmpty => _valueOrEmpty.isEmpty;
+
   String get dateOrNaString => displayDateTimeString(
         _valueOrNa,
         DateTimeFormatString.displayDateFormat,
@@ -170,6 +173,7 @@ class DateTimeStringValue extends ValueObject<String> {
   DateTime? get dateTimeOrNull => tryParseDateTime(_valueOrEmpty);
 
   String get differenceTime => calculateDifferenceTime(_valueOrEmpty);
+
   String get notificationDateTime => displayDateTimeString(
         _valueOrEmpty,
         DateTimeFormatString.displayNotificationDateTimeFormat,
@@ -182,6 +186,7 @@ class DateTimeStringValue extends ValueObject<String> {
           dateTime,
         ),
       );
+
   int get paymentAttentionExpiry => paymentAttentionExpiryInDays(dateTime);
 
   const DateTimeStringValue._(this.value);
@@ -277,12 +282,14 @@ class StatusType extends ValueObject<String> {
       getReturnByRequestStatus(value.getOrElse(() => ''));
 
   bool get isApprovedStatus => isApproved(value.getOrElse(() => ''));
+
   bool get getIsBapiStatusFailed =>
       isBapiStatusFailed(value.getOrElse(() => ''));
 
   String get getIntermediateStatus => bapiStatusType(
         value.getOrElse(() => ''),
       );
+
   bool get isSuccess => getIntermediateStatus == 'Success';
 
   IconData get displayReturnStatusIcon =>
@@ -449,7 +456,9 @@ class Language extends ValueObject<String> {
   }
 
   String get languageString => getLanguageString(value.getOrElse(() => ''));
+
   String get languageCode => toSupportedLanguage(value.getOrElse(() => 'EN'));
+
   Locale get locale => toLocale(languageCode);
 
   const Language._(this.value);

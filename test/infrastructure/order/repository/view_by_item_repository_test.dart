@@ -160,6 +160,91 @@ void main() async {
         expect(result, Right(fakeOrderHistory));
       });
 
+      test('=> Success in remote filter have date filter', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => orderHistoryRemoteDataSource.getViewByItems(
+            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipTo: fakeShipToInfo.shipToCustomerCode,
+            pageSize: fakePageSize,
+            offset: fakeOffset,
+            language: fakeClientUser.preferredLanguage.languageCode,
+            searchKey: fakeSearchKey.getOrDefaultValue(''),
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
+            filterQuery: ViewByItemFilterDto.fromDomain(
+              fakeFilter.copyWith(
+                orderDateFrom: DateTimeStringValue(
+                  getDateStringByDateTime(DateTime(2023, 12, 22)),
+                ),
+                orderDateTo: DateTimeStringValue(
+                  getDateStringByDateTime(DateTime.now()),
+                ),
+              ),
+            ).toJson(),
+          ),
+        ).thenAnswer((_) async => fakeOrderHistory);
+
+        final result = await repository.getViewByItems(
+          salesOrganisation: fakeSalesOrganisation,
+          salesOrgConfig: fakeSalesOrganisationConfigs,
+          soldTo: fakeCustomerCodeInfo,
+          shipTo: fakeShipToInfo,
+          user: fakeClientUser,
+          pageSize: fakePageSize,
+          offset: fakeOffset,
+          viewByItemFilter: fakeFilter.copyWith(
+            orderDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(DateTime(2023, 12, 22)),
+            ),
+            orderDateTo: DateTimeStringValue(
+              getDateStringByDateTime(DateTime.now()),
+            ),
+          ),
+          searchKey: fakeSearchKey,
+        );
+
+        expect(result, Right(fakeOrderHistory));
+      });
+
+      test('=> Success in remote filter date empty', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => orderHistoryRemoteDataSource.getViewByItems(
+            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipTo: fakeShipToInfo.shipToCustomerCode,
+            pageSize: fakePageSize,
+            offset: fakeOffset,
+            language: fakeClientUser.preferredLanguage.languageCode,
+            searchKey: fakeSearchKey.getOrDefaultValue(''),
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
+            filterQuery: ViewByItemFilterDto.fromDomain(
+              ViewByItemFilter.empty(),
+            ).toJson(),
+          ),
+        ).thenAnswer((_) async => fakeOrderHistory);
+
+        final result = await repository.getViewByItems(
+          salesOrganisation: fakeSalesOrganisation,
+          salesOrgConfig: fakeSalesOrganisationConfigs,
+          soldTo: fakeCustomerCodeInfo,
+          shipTo: fakeShipToInfo,
+          user: fakeClientUser,
+          pageSize: fakePageSize,
+          offset: fakeOffset,
+          viewByItemFilter: fakeFilter.copyWith(
+            orderDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(DateTime(1900)),
+            ),
+            orderDateTo: DateTimeStringValue(
+              getDateStringByDateTime(DateTime.now()),
+            ),
+          ),
+          searchKey: fakeSearchKey,
+        );
+
+        expect(result, Right(fakeOrderHistory));
+      });
+
       test('=> test data', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(

@@ -53,6 +53,9 @@ class ViewByItemRepository implements IViewByItemRepository {
       }
     }
 
+    final applyNoDateFiler =
+        searchKey.validateNotEmpty && viewByItemFilter.dateRangeEmpty;
+
     try {
       final orderHistoryItemList =
           await viewByItemRemoteDataSource.getViewByItems(
@@ -63,16 +66,16 @@ class ViewByItemRepository implements IViewByItemRepository {
         language: user.preferredLanguage.languageCode,
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         filterQuery: ViewByItemFilterDto.fromDomain(
-          searchKey.isValueEmpty
-              ? viewByItemFilter
-              : viewByItemFilter.copyWith(
+          applyNoDateFiler
+              ? viewByItemFilter.copyWith(
                   orderDateFrom: DateTimeStringValue(
                     getDateStringByDateTime(DateTime(1900)),
                   ),
                   orderDateTo: DateTimeStringValue(
                     getDateStringByDateTime(DateTime.now()),
                   ),
-                ),
+                )
+              : viewByItemFilter,
         ).toJson(),
         searchKey: searchKey.getOrCrash(),
       );
