@@ -98,7 +98,6 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.articleVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
-      when(() => fakeUser.preferredLanguage.locale).thenReturn(Language.english().locale);
       when(() => mockSalesOrg.isID).thenReturn((false));
 
       when(
@@ -167,14 +166,14 @@ void main() {
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
           pageSize: 24,
           after: '',
-          lang: 'fake-code',
+          lang: fakeUser.preferredLanguage.languageCode,
         ),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
       );
       final result = await repository.getArticles(
         user: fakeUser,
-        salesOrg: mockSalesOrg,
+        salesOrg: fakeMYSalesOrg,
         pageSize: pageSize,
         after: '',
       );

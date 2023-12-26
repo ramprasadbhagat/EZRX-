@@ -39,6 +39,26 @@ jobs:
     displayName: Test infrastructure -> aup_tc
     steps:
       - bash: flutter375 test test/infrastructure/aup_tc
+  - job: TestInfrastructureAboutUs
+    pool: devops-flutter
+    displayName: Test infrastructure -> about_us
+    steps:
+      - bash: flutter375 test test/infrastructure/about_us
+  - job: TestInfrastructureAnnouncementInfo
+    pool: devops-flutter
+    displayName: Test infrastructure -> announcement_info
+    steps:
+      - bash: flutter375 test test/infrastructure/announcement_info
+  - job: TestInfrastructureArticle_info
+    pool: devops-flutter
+    displayName: Test infrastructure -> article_info
+    steps:
+      - bash: flutter375 test test/infrastructure/article_info
+  - job: TestInfrastructureContactUs
+    pool: devops-flutter
+    displayName: Test infrastructure -> contact_us
+    steps:
+      - bash: flutter375 test test/infrastructure/contact_us
   - job: TestInfrastructureAuth
     pool: devops-flutter
     displayName: Test infrastructure -> auth
@@ -69,6 +89,26 @@ jobs:
     displayName: Test infrastructure -> chatbot
     steps:
       - bash: flutter375 test test/infrastructure/chatbot
+  - job: TestInfrastructureCore
+    pool: devops-flutter
+    displayName: Test infrastructure -> core
+    steps:
+      - bash: flutter375 test test/infrastructure/core
+  - job: TestInfrastructureNotification
+    pool: devops-flutter
+    displayName: Test infrastructure -> notification
+    steps:
+      - bash: flutter375 test test/infrastructure/notification
+  - job: TestInfrastructureFaq
+    pool: devops-flutter
+    displayName: Test infrastructure -> faq
+    steps:
+      - bash: flutter375 test test/infrastructure/faq
+  - job: TestInfrastructureDeepLinking
+    pool: devops-flutter
+    displayName: Test infrastructure -> deep_linking
+    steps:
+      - bash: flutter375 test test/infrastructure/deep_linking
   - job: TestPresentationAccount
     pool: devops-flutter
     displayName: Test presentation -> account

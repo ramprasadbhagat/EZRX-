@@ -26,7 +26,6 @@ void main() {
   late AboutUsRemoteDataSource aboutUsRemoteDataSource;
   final fakeUser = User.empty();
 
-
   setUpAll(
     () {
       mockConfig = Config()..appFlavor = Flavor.mock;
@@ -74,7 +73,7 @@ void main() {
           () => aboutUsRemoteDataSource.getAboutUsInfo(
             aboutUsUrlPath: mockConfig.announcementApiUrlPath,
             itemId: fakeSalesOrg.aboutUsVariablePath,
-            lang: fakeUser.preferredLanguage.languageCode,
+            lang: fakeSalesOrg.languageCodeForHelpAndSupport,
           ),
         ).thenAnswer((_) async => AboutUs.empty());
         final result = await aboutUsRepository.getAboutUsInfo(

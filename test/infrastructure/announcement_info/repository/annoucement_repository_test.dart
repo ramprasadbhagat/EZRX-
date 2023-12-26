@@ -11,6 +11,8 @@ import 'package:ezrxmobile/infrastructure/announcement_info/repository/announcem
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class MockConfig extends Mock implements Config {}
 
 class MockSalesOrg extends Mock implements SalesOrg {}
@@ -98,7 +100,6 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.announcementVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
-      when(() => fakeUser.preferredLanguage.locale).thenReturn((const Locale('EN')));
 
       when(
         () => remoteDataSource.getAnnouncementInfo(
@@ -107,11 +108,11 @@ void main() {
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
           pageSize: 24,
           after: '',
-          lang: 'EN',
+          lang: fakeUser.preferredLanguage.locale.languageCode,
         ),
       ).thenAnswer((invocation) async => AnnouncementArticleInfo.empty());
       final result = await repository.getAnnouncement(
-        user:fakeUser,
+        user: fakeUser,
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',
@@ -131,13 +132,13 @@ void main() {
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
           pageSize: 24,
           after: '',
-          lang: 'EN',
+          lang: fakeUser.preferredLanguage.locale.languageCode,
         ),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
       );
       final result = await repository.getAnnouncement(
-        user:fakeUser,
+        user: fakeUser,
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',
@@ -193,7 +194,6 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.announcementVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
-      when(() => fakeUser.preferredLanguage.locale).thenReturn((const Locale('EN')));
       when(() => mockSalesOrg.announcementLocale)
           .thenReturn((const Locale('EN')));
       when(() => mockAnnouncementArticleInfo.announcementList).thenReturn(
@@ -203,12 +203,12 @@ void main() {
       when(
         () => remoteDataSource.getAnnouncementInfoDetails(
           announcementUrlPath: '/api/announcement',
-          lang: 'EN',
+          lang: fakeMYSalesOrg.announcementLocale.languageCode,
           announcementId: 'fake_id',
         ),
       ).thenAnswer((invocation) async => AnnouncementInfoDetails.empty());
       final result = await repository.getAnnouncementDetails(
-        salesOrg: mockSalesOrg,
+        salesOrg: fakeMYSalesOrg,
         announcementId: mockAnnouncementArticleInfo.announcementList.first.id,
       );
       expect(
