@@ -56,7 +56,7 @@ class ProductDetailDto with _$ProductDetailDto {
   MaterialInfo toDomain() => MaterialInfo(
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
-        governmentMaterialCode: governmentMaterialCode,
+        governmentMaterialCode: StringValue(governmentMaterialCode),
         hidePrice: hidePrice,
         isFavourite: isFavourite,
         itemBrand: itemBrand,

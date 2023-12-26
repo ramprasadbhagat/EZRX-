@@ -49,20 +49,29 @@ class _OrderItems extends StatelessWidget {
                                     eligibilityState.salesOrgConfigs.enableGMC,
                               ),
                               subtitle: '',
-                              priceComponent: Row(
+                              priceComponent: Column(
                                 children: [
-                                  ListPriceStrikeThroughComponent(
-                                    priceAggregate: e.priceAggregate,
+                                  Row(
+                                    children: [
+                                      ListPriceStrikeThroughComponent(
+                                        priceAggregate: e.priceAggregate,
+                                      ),
+                                      PriceComponent(
+                                        key: WidgetKeys
+                                            .orderSuccessItemUnitPrice,
+                                        price: e.itemUnitPrice(
+                                          isIDMarket,
+                                        ),
+                                        salesOrgConfig: context
+                                            .read<EligibilityBloc>()
+                                            .state
+                                            .salesOrgConfigs,
+                                      ),
+                                    ],
                                   ),
-                                  PriceComponent(
-                                    key: WidgetKeys.orderSuccessItemUnitPrice,
-                                    price: e.itemUnitPrice(
-                                      isIDMarket,
-                                    ),
-                                    salesOrgConfig: context
-                                        .read<EligibilityBloc>()
-                                        .state
-                                        .salesOrgConfigs,
+                                  ListPriceComponent(
+                                    price: e.priceAggregate
+                                        .display(PriceType.listPrice),
                                   ),
                                 ],
                               ),

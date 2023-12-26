@@ -35,7 +35,7 @@ class MaterialInfo with _$MaterialInfo {
     required CountryData countryData,
     required MaterialQty quantity,
     required String defaultMaterialDescription,
-    required String governmentMaterialCode,
+    required StringValue governmentMaterialCode,
     required StringValue unitOfMeasurement,
     required String parentID,
     required String therapeuticClass,
@@ -66,7 +66,7 @@ class MaterialInfo with _$MaterialInfo {
   factory MaterialInfo.empty() => MaterialInfo(
         materialNumber: MaterialNumber(''),
         materialDescription: '',
-        governmentMaterialCode: '',
+        governmentMaterialCode: StringValue(''),
         therapeuticClass: '',
         itemBrand: '',
         principalData: PrincipalData(
@@ -169,15 +169,14 @@ class MaterialInfo with _$MaterialInfo {
   ) =>
       quantity.intValue > zdp5MaxQuota || quantity.intValue > zdp5RemaningQuota;
 
-  String get _governmentMaterialCode =>
+  StringValue get getGMC =>
       data.isNotEmpty && data.first.governmentMaterialCode.isNotEmpty
           ? data.first.governmentMaterialCode
           : governmentMaterialCode;
 
   String combinationCode({required bool showGMCPart}) => <String>[
         materialNumber.displayMatNo,
-        if (showGMCPart && _governmentMaterialCode.isNotEmpty)
-          _governmentMaterialCode,
+        if (showGMCPart && getGMC.isNotEmpty) getGMC.getValue(),
       ].join(' | ');
 }
 
@@ -190,7 +189,7 @@ class MaterialData with _$MaterialData {
     required String materialDescription,
     required String defaultMaterialDescription,
     required String genericMaterialName,
-    required String governmentMaterialCode,
+    required StringValue governmentMaterialCode,
   }) = _MaterialData;
 
   factory MaterialData.empty() => MaterialData(
@@ -199,7 +198,7 @@ class MaterialData with _$MaterialData {
         materialDescription: '',
         defaultMaterialDescription: '',
         genericMaterialName: '',
-        governmentMaterialCode: '',
+        governmentMaterialCode: StringValue(''),
       );
 
   String get displayDescription => materialDescription.isNotEmpty

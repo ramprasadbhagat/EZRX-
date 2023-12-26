@@ -34,7 +34,7 @@ mixin _$MaterialInfo {
   CountryData get countryData => throw _privateConstructorUsedError;
   MaterialQty get quantity => throw _privateConstructorUsedError;
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
-  String get governmentMaterialCode => throw _privateConstructorUsedError;
+  StringValue get governmentMaterialCode => throw _privateConstructorUsedError;
   StringValue get unitOfMeasurement => throw _privateConstructorUsedError;
   String get parentID => throw _privateConstructorUsedError;
   String get therapeuticClass => throw _privateConstructorUsedError;
@@ -92,7 +92,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       CountryData countryData,
       MaterialQty quantity,
       String defaultMaterialDescription,
-      String governmentMaterialCode,
+      StringValue governmentMaterialCode,
       StringValue unitOfMeasurement,
       String parentID,
       String therapeuticClass,
@@ -256,7 +256,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       unitOfMeasurement: null == unitOfMeasurement
           ? _value.unitOfMeasurement
           : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
@@ -421,7 +421,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       CountryData countryData,
       MaterialQty quantity,
       String defaultMaterialDescription,
-      String governmentMaterialCode,
+      StringValue governmentMaterialCode,
       StringValue unitOfMeasurement,
       String parentID,
       String therapeuticClass,
@@ -588,7 +588,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       unitOfMeasurement: null == unitOfMeasurement
           ? _value.unitOfMeasurement
           : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
@@ -785,7 +785,7 @@ class _$_MaterialInfo extends _MaterialInfo {
   @override
   final String defaultMaterialDescription;
   @override
-  final String governmentMaterialCode;
+  final StringValue governmentMaterialCode;
   @override
   final StringValue unitOfMeasurement;
   @override
@@ -1004,7 +1004,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final CountryData countryData,
       required final MaterialQty quantity,
       required final String defaultMaterialDescription,
-      required final String governmentMaterialCode,
+      required final StringValue governmentMaterialCode,
       required final StringValue unitOfMeasurement,
       required final String parentID,
       required final String therapeuticClass,
@@ -1067,7 +1067,7 @@ abstract class _MaterialInfo extends MaterialInfo {
   @override
   String get defaultMaterialDescription;
   @override
-  String get governmentMaterialCode;
+  StringValue get governmentMaterialCode;
   @override
   StringValue get unitOfMeasurement;
   @override
@@ -1127,7 +1127,7 @@ mixin _$MaterialData {
   String get materialDescription => throw _privateConstructorUsedError;
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
-  String get governmentMaterialCode => throw _privateConstructorUsedError;
+  StringValue get governmentMaterialCode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialDataCopyWith<MaterialData> get copyWith =>
@@ -1146,7 +1146,7 @@ abstract class $MaterialDataCopyWith<$Res> {
       String materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
-      String governmentMaterialCode});
+      StringValue governmentMaterialCode});
 }
 
 /// @nodoc
@@ -1193,7 +1193,7 @@ class _$MaterialDataCopyWithImpl<$Res, $Val extends MaterialData>
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
     ) as $Val);
   }
 }
@@ -1212,7 +1212,7 @@ abstract class _$$_MaterialDataCopyWith<$Res>
       String materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
-      String governmentMaterialCode});
+      StringValue governmentMaterialCode});
 }
 
 /// @nodoc
@@ -1257,7 +1257,7 @@ class __$$_MaterialDataCopyWithImpl<$Res>
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
     ));
   }
 }
@@ -1285,7 +1285,7 @@ class _$_MaterialData extends _MaterialData {
   @override
   final String genericMaterialName;
   @override
-  final String governmentMaterialCode;
+  final StringValue governmentMaterialCode;
 
   @override
   String toString() {
@@ -1337,7 +1337,7 @@ abstract class _MaterialData extends MaterialData {
       required final String materialDescription,
       required final String defaultMaterialDescription,
       required final String genericMaterialName,
-      required final String governmentMaterialCode}) = _$_MaterialData;
+      required final StringValue governmentMaterialCode}) = _$_MaterialData;
   _MaterialData._() : super._();
 
   @override
@@ -1351,7 +1351,7 @@ abstract class _MaterialData extends MaterialData {
   @override
   String get genericMaterialName;
   @override
-  String get governmentMaterialCode;
+  StringValue get governmentMaterialCode;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialDataCopyWith<_$_MaterialData> get copyWith =>

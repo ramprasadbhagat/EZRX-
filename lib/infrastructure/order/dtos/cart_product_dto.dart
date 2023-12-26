@@ -124,9 +124,7 @@ class CartProductDto with _$CartProductDto {
       comboMaterials: [],
       comboDeal: PriceComboDealDto.empty,
       maximumQty: cartItemDetails.maximumQty,
-      governmentMaterialCode: cartItemDetails.materialInfo.data.isNotEmpty
-          ? cartItemDetails.materialInfo.data.first.governmentMaterialCode
-          : cartItemDetails.materialInfo.governmentMaterialCode,
+      governmentMaterialCode: cartItemDetails.materialInfo.getGMC.getValue(),
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -149,7 +147,7 @@ class CartProductDto with _$CartProductDto {
       data: <MaterialData>[
         MaterialData.empty().copyWith(
           materialNumber: MaterialNumber(productID),
-          governmentMaterialCode: governmentMaterialCode,
+          governmentMaterialCode: StringValue(governmentMaterialCode),
         ),
       ],
       counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(

@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -83,6 +84,9 @@ class ProductPriceLabel extends StatelessWidget {
                 price: priceAggregate.display(PriceType.unitPrice),
                 salesOrgConfig: salesOrgConfig,
               ),
+              ListPriceComponent(
+                price: priceAggregate.display(PriceType.listPrice),
+              ),
             ],
           );
         }
@@ -102,6 +106,9 @@ class ProductPriceLabel extends StatelessWidget {
               style: Theme.of(context).textTheme.labelMedium,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
+            ),
+            ListPriceComponent(
+              price: context.tr('Price Not Available'),
             ),
           ],
         );

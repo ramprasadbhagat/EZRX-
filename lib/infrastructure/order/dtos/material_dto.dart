@@ -107,7 +107,7 @@ class MaterialDto with _$MaterialDto {
       defaultMaterialDescription: materialInfo.defaultMaterialDescription,
       materialNumber: materialInfo.materialNumber.getOrDefaultValue(''),
       materialDescription: materialInfo.materialDescription,
-      governmentMaterialCode: materialInfo.governmentMaterialCode,
+      governmentMaterialCode: materialInfo.governmentMaterialCode.getOrDefaultValue(''),
       therapeuticClass: materialInfo.therapeuticClass,
       itemBrand: materialInfo.itemBrand,
       principalName:
@@ -149,7 +149,7 @@ class MaterialDto with _$MaterialDto {
     return MaterialInfo(
       materialNumber: _getMaterialNumber,
       materialDescription: materialDescription,
-      governmentMaterialCode: governmentMaterialCode,
+      governmentMaterialCode: StringValue(governmentMaterialCode),
       therapeuticClass: therapeuticClass,
       itemBrand: itemBrand,
       principalData: PrincipalData(
@@ -242,7 +242,7 @@ class MaterialDataDto with _$MaterialDataDto {
         materialDescription: materialDescription,
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
-        governmentMaterialCode: governmentMaterialCode,
+        governmentMaterialCode: StringValue(governmentMaterialCode),
       );
 
   factory MaterialDataDto.fromDomain(MaterialData materialData) =>
@@ -252,7 +252,7 @@ class MaterialDataDto with _$MaterialDataDto {
         materialDescription: materialData.materialDescription,
         defaultMaterialDescription: materialData.defaultMaterialDescription,
         genericMaterialName: materialData.genericMaterialName,
-        governmentMaterialCode: materialData.governmentMaterialCode,
+        governmentMaterialCode: materialData.governmentMaterialCode.getOrDefaultValue(''),
       );
 
   ProductImages toProductImage() => ProductImages.empty();

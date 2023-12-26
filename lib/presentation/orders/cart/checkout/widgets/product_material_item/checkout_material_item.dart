@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
@@ -173,6 +174,9 @@ class _ProductDetails extends StatelessWidget {
                     color: ZPColors.extraLightGrey4,
                   ),
             ),
+          ListPriceComponent(
+            price: cartItem.display(PriceType.listPrice),
+          ),
         ],
       ),
     );

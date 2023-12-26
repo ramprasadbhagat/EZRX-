@@ -143,6 +143,7 @@ enum PriceStyle {
   negativePrice,
   returnBonusPrice,
   materialListPriceStrikeThrough,
+  materialListPrice,
 }
 
 Color _priceTextColor(PriceStyle type) {
@@ -152,6 +153,7 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.bundleActiveOfferPrice:
     case PriceStyle.comboSubTotalExclTax:
     case PriceStyle.creditSummaryPrice:
+    case PriceStyle.materialListPrice:
       return ZPColors.primary;
 
     case PriceStyle.summaryPrice:
@@ -235,6 +237,7 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       priceTextStyle = Theme.of(context).textTheme.labelLarge;
       break;
     case PriceStyle.discountPrice:
+    case PriceStyle.materialListPrice:
       priceTextStyle = Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.extraLightGrey4,
           );
@@ -313,6 +316,10 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.bundleFinalPrice:
       return Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.darkGray,
+          );
+    case PriceStyle.materialListPrice:
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
+            color: ZPColors.primary,
           );
     case PriceStyle.returnBonusPrice:
     default:

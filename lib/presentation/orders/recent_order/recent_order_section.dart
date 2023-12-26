@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -164,6 +165,11 @@ class _ProductTile extends StatelessWidget {
                           eligibilityState.salesOrg.isID,
                         ),
                         salesOrgConfig: eligibilityState.salesOrgConfigs,
+                      ),
+                      ListPriceComponent(
+                        price: product.itemUnitPrice(
+                          eligibilityState.salesOrg.isID,
+                        ),
                       ),
                     ],
                   ),

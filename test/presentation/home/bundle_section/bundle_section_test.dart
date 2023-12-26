@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -70,7 +71,7 @@ void main() {
     materialDescription: 'materialDescription',
     defaultMaterialDescription: 'defaultMaterialDescription',
     genericMaterialName: '1234567',
-    governmentMaterialCode: '1234567',
+    governmentMaterialCode: StringValue('1234567'),
   );
 
   setUpAll(() async {

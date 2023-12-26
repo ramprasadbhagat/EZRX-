@@ -284,75 +284,89 @@ class _Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: Text(
-            materialInfo.defaultMaterialDescription,
+        if (context.read<EligibilityBloc>().state.salesOrg.isTW)
+          Text(
+            materialInfo.materialDescription,
             key: WidgetKeys.materialDetailsMaterialDescription,
             style: Theme.of(context).textTheme.labelSmall,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-        ),
-        BlocConsumer<ProductDetailBloc, ProductDetailState>(
-          listenWhen: (previous, current) =>
-              previous.productDetailAggregate.materialInfo.isFavourite !=
-                  current.productDetailAggregate.materialInfo.isFavourite &&
-              !current.isDetailAndStockFetching,
-          buildWhen: (previous, current) =>
-              previous.productDetailAggregate.materialInfo.isFavourite !=
-                  current.productDetailAggregate.materialInfo.isFavourite ||
-              previous.isDetailAndStockFetching !=
-                  current.isDetailAndStockFetching,
-          listener: (context, state) {
-            final toastMessage =
-                state.productDetailAggregate.materialInfo.isFavourite
-                    ? 'Product added as favourite'
-                    : 'Product removed as favourite';
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                materialInfo.defaultMaterialDescription,
+                key: WidgetKeys.materialDetailsMaterialDescription,
+                style: Theme.of(context).textTheme.labelSmall,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            BlocConsumer<ProductDetailBloc, ProductDetailState>(
+              listenWhen: (previous, current) =>
+                  previous.productDetailAggregate.materialInfo.isFavourite !=
+                      current.productDetailAggregate.materialInfo.isFavourite &&
+                  !current.isDetailAndStockFetching,
+              buildWhen: (previous, current) =>
+                  previous.productDetailAggregate.materialInfo.isFavourite !=
+                      current.productDetailAggregate.materialInfo.isFavourite ||
+                  previous.isDetailAndStockFetching !=
+                      current.isDetailAndStockFetching,
+              listener: (context, state) {
+                final toastMessage =
+                    state.productDetailAggregate.materialInfo.isFavourite
+                        ? 'Product added as favourite'
+                        : 'Product removed as favourite';
 
-            CustomSnackBar(
-              messageText: context.tr(toastMessage),
-            ).show(context);
-          },
-          builder: (context, state) {
-            return FavouriteIcon(
-              enable: !state.isDetailAndStockFetching,
-              key: WidgetKeys.materialDetailsFavoriteIcon,
-              isFavourite:
-                  state.productDetailAggregate.materialInfo.isFavourite,
-              constraints: const BoxConstraints(),
-              onTap: () {
-                if (materialInfo.isFavourite) {
-                  trackMixpanelEvent(
-                    MixpanelEvents.addProductToFavorite,
-                    props: {
-                      MixpanelProps.productName:
-                          materialInfo.displayDescription,
-                      MixpanelProps.productCode:
-                          materialInfo.materialNumber.displayMatNo,
-                      MixpanelProps.productManufacturer:
-                          materialInfo.getManufactured,
-                      MixpanelProps.clickAt: RouterUtils.buildRouteTrackingName(
-                        context.router.currentPath,
-                      ),
-                    },
-                  );
-                }
-                context.read<ProductDetailBloc>().add(
-                      state.productDetailAggregate.materialInfo.isFavourite
-                          ? ProductDetailEvent.deleteFavourite(
-                              isForSimilarProduct: false,
-                              materialNumber: materialInfo.materialNumber,
-                            )
-                          : ProductDetailEvent.addFavourite(
-                              isForSimilarProduct: false,
-                              materialNumber: materialInfo.materialNumber,
-                            ),
-                    );
+                CustomSnackBar(
+                  messageText: context.tr(toastMessage),
+                ).show(context);
               },
-            );
-          },
+              builder: (context, state) {
+                return FavouriteIcon(
+                  enable: !state.isDetailAndStockFetching,
+                  key: WidgetKeys.materialDetailsFavoriteIcon,
+                  isFavourite:
+                      state.productDetailAggregate.materialInfo.isFavourite,
+                  constraints: const BoxConstraints(),
+                  onTap: () {
+                    if (materialInfo.isFavourite) {
+                      trackMixpanelEvent(
+                        MixpanelEvents.addProductToFavorite,
+                        props: {
+                          MixpanelProps.productName:
+                              materialInfo.displayDescription,
+                          MixpanelProps.productCode:
+                              materialInfo.materialNumber.displayMatNo,
+                          MixpanelProps.productManufacturer:
+                              materialInfo.getManufactured,
+                          MixpanelProps.clickAt:
+                              RouterUtils.buildRouteTrackingName(
+                            context.router.currentPath,
+                          ),
+                        },
+                      );
+                    }
+                    context.read<ProductDetailBloc>().add(
+                          state.productDetailAggregate.materialInfo.isFavourite
+                              ? ProductDetailEvent.deleteFavourite(
+                                  isForSimilarProduct: false,
+                                  materialNumber: materialInfo.materialNumber,
+                                )
+                              : ProductDetailEvent.addFavourite(
+                                  isForSimilarProduct: false,
+                                  materialNumber: materialInfo.materialNumber,
+                                ),
+                        );
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ],
     );

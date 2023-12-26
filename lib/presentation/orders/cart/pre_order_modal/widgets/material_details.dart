@@ -42,7 +42,7 @@ class _MaterialDetails extends StatelessWidget {
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-          if (cartItem.materialInfo.type.typeMaterial)
+          if (cartItem.materialInfo.type.typeMaterial) ...[
             Row(
               children: [
                 ListPriceStrikeThroughComponent(priceAggregate: cartItem),
@@ -53,6 +53,10 @@ class _MaterialDetails extends StatelessWidget {
                 ),
               ],
             ),
+            ListPriceComponent(
+              price: cartItem.display(PriceType.listPrice),
+            ),
+          ],
         ],
       ),
     );

@@ -405,7 +405,7 @@ void main() {
             data: <MaterialData>[
               MaterialData.empty().copyWith(
                 materialNumber: MaterialNumber('000000000023168451'),
-                governmentMaterialCode: 'fake-code',
+                governmentMaterialCode: StringValue('fake-code'),
               )
             ],
           ),
@@ -678,7 +678,7 @@ void main() {
 
         final materialInfo = mockCartItemWithDataList.first.materialInfo;
         final combinationCode = find.text(
-          '${materialInfo.materialNumber.displayMatNo} | ${materialInfo.data.first.governmentMaterialCode}',
+          '${materialInfo.materialNumber.displayMatNo} | ${materialInfo.data.first.governmentMaterialCode.getOrDefaultValue('')}',
         );
         expect(combinationCode, findsOneWidget);
       });

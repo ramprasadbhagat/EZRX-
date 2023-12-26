@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
+import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
@@ -284,8 +285,7 @@ class _MaterialDetails extends StatelessWidget {
           ),
           Row(
             children: [
-              if (cartItem.displayCutOffListPrice &&
-                  cartItem.showStrikeThrough)
+              if (cartItem.displayCutOffListPrice && cartItem.showStrikeThrough)
                 PriceComponent(
                   key: WidgetKeys.cartItemCutOffListPrice,
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
@@ -311,6 +311,9 @@ class _MaterialDetails extends StatelessWidget {
                     color: ZPColors.extraLightGrey4,
                   ),
             ),
+          ListPriceComponent(
+            price: cartItem.display(PriceType.listPrice),
+          ),
           _MaterialQuantitySection(
             cartItem: cartItem,
             isInvalidCartItem: isInvalidCartItem,

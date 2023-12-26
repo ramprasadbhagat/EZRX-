@@ -152,7 +152,7 @@ class ProductDetailRepository implements IProductDetailRepository {
           await productDetailRemoteDataSource.getProductDetails(
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCode: shipToInfo.shipToCustomerCode,
-        language: language.languageCode,
+        language: language.languageCode.toUpperCase(),
         materialNumber: materialNumber.getOrCrash(),
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
       );

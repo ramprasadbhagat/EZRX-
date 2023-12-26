@@ -205,6 +205,8 @@ class StringValue extends ValueObject<String> {
 
   String get displayZerosIfEmpty => zerosIfEmpty(value.getOrElse(() => ''));
 
+  bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
+
   const StringValue._(this.value);
 }
 

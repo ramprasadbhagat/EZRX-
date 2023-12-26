@@ -98,6 +98,24 @@ class _MaterialInfoDialog extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 7),
+          if (context
+              .read<EligibilityBloc>()
+              .state
+              .salesOrgConfigs
+              .enableGMC) ...[
+            BalanceTextRow(
+              keyText: context.tr('Govt material number'),
+              valueText: materialInfo.getGMC.displayDashIfEmpty,
+              valueFlex: 1,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.black,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.darkGray,
+                  ),
+            ),
+            const SizedBox(height: 7),
+          ],
           BalanceTextRow(
             keyText: context.tr('Manufacturer'),
             valueText: materialInfo.principalData.principalName.name,

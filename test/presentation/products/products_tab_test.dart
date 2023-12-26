@@ -362,7 +362,7 @@ void main() {
 
         final materialInfo = materialResponseMock.products.first;
         final combinationCode = find.text(
-          '${materialInfo.materialNumber.displayMatNo} | ${materialInfo.data.first.governmentMaterialCode}',
+          '${materialInfo.materialNumber.displayMatNo} | ${materialInfo.data.first.governmentMaterialCode.getOrDefaultValue('')}',
         );
         expect(combinationCode, findsOneWidget);
       });
