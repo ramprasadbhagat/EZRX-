@@ -12,12 +12,19 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/return_summary_by_item_details.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_request_summary_item_section.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_bonus_item_section.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_details_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +67,7 @@ void main() {
   late ProductImageBlocMock productImageBlocMock;
   late AppRouter autoRouterMock;
   late ReturnRequestInformation requestInformationMock;
+  late ReturnRequestInformationHeader returnRequestInformationHeader;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -71,6 +79,10 @@ void main() {
                 .getRequestInformation())
             .returnRequestInformationList
             .first;
+    returnRequestInformationHeader =
+        (await ReturnSummaryDetailsRequestInformationLocal()
+                .getRequestInformation())
+            .requestInformationHeader;
   });
 
   setUp(() {
@@ -92,6 +104,14 @@ void main() {
         .thenReturn(ProductImageState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
   });
+
+  ////////////////////Finder/////////////////////////////////////////////
+  final returnItemDetailCopyButton =
+      find.byKey(WidgetKeys.returnItemDetailCopyButton);
+  final returnItemDetailRequestDate =
+      find.byKey(WidgetKeys.returnItemDetailRequestDate);
+  final returnDetailSummary = find.byKey(WidgetKeys.returnDetailSummary);
+  ///////////////////////////////////////////////////////////////////
 
   Widget getScopedWidget() {
     return WidgetUtils.getScopedWidget(
@@ -131,6 +151,269 @@ void main() {
           await tester.pump();
           expect(find.text('Return item details'.tr()), findsOneWidget);
           expect(find.byType(AnnouncementBanner), findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        '=> return details section',
+        (tester) async {
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock,
+              requestInformationHeader: returnRequestInformationHeader,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(
+            find.text(
+              '${'Return'.tr()} #${returnRequestInformationHeader.requestID}',
+            ),
+            findsOneWidget,
+          );
+          expect(
+            returnItemDetailCopyButton,
+            findsOneWidget,
+          );
+          expect(
+            returnItemDetailRequestDate,
+            findsOneWidget,
+          );
+          final returnReference = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Return reference',
+              returnRequestInformationHeader.returnReference.displayNAIfEmpty,
+            ),
+          );
+          expect(returnReference, findsOneWidget);
+          final specialInstructions = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Special instructions',
+              returnRequestInformationHeader
+                  .specialInstructions.displaySpecialInstructions,
+            ),
+          );
+          expect(specialInstructions, findsOneWidget);
+          expect(
+            find.descendant(
+              of: find.byType(StatusTrackerSection),
+              matching: find.text('Return request status'),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> return items approver details test',
+        (tester) async {
+          await tester.binding.setSurfaceSize(const Size(480, 900));
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                status: StatusType('APPROVED'),
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(find.byType(ReturnSummaryItemSection), findsOneWidget);
+          expect(find.byType(ReturnItemSection), findsOneWidget);
+          expect(find.byType(CommonTileItem), findsOneWidget);
+          final showDetailButtonFinder =
+              find.byKey(WidgetKeys.returnDetailShowDetailButton);
+          expect(showDetailButtonFinder, findsOneWidget);
+          await tester.tap(showDetailButtonFinder);
+          await tester.pumpAndSettle();
+          await tester.fling(
+            find.byKey(WidgetKeys.returnItemDetailScrollList),
+            const Offset(0.0, -1000.0),
+            1000.0,
+          );
+          expect(returnDetailSummary, findsOneWidget);
+          expect(find.text('Approval details'), findsOneWidget);
+          final reason = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Reason',
+              requestInformationMock.returnOrderDesc,
+            ),
+          );
+          expect(reason, findsWidgets);
+          final approvalNumber = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Approval number',
+              requestInformationMock.displayBapiStatus,
+            ),
+          );
+          expect(approvalNumber, findsWidgets);
+        },
+      );
+
+      testWidgets(
+        '=> return bonus item test',
+        (tester) async {
+          await tester.binding.setSurfaceSize(const Size(480, 900));
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                prsfd: Prsfd('B'),
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(find.text('Bonus Details'), findsOneWidget);
+          expect(
+            find.descendant(
+              of: find.byType(StatusLabel),
+              matching: find.text(requestInformationMock.status.displayStatus),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.text(requestInformationMock.materialNumber.displayMatNo),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(ReturnSummaryBonusItemSection),
+              matching: find.text('Bonus'),
+            ),
+            findsOneWidget,
+          );
+
+          expect(
+            find.descendant(
+              of: find.byType(ReturnSummaryBonusItemSection),
+              matching: find.text(
+                'Batch ${requestInformationMock.batch} (Expires ${requestInformationMock.expiryDate.dateString})',
+              ),
+            ),
+            findsOneWidget,
+          );
+          expect(find.byType(PriceComponent), findsWidgets);
+
+          expect(
+            find.descendant(
+              of: find.byType(ReturnSummaryBonusItemSection),
+              matching: find.text(
+                'Qty: ${requestInformationMock.returnQuantity} ',
+              ),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> return bonus item test for ID',
+        (tester) async {
+          await tester.binding.setSurfaceSize(const Size(480, 900));
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+            ),
+          );
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                prsfd: Prsfd('B'),
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(find.text('Bonus Details'), findsOneWidget);
+          expect(
+            find.descendant(
+              of: find.byType(StatusLabel),
+              matching: find.text(requestInformationMock.status.displayStatus),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.text(requestInformationMock.materialNumber.displayMatNo),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(ReturnSummaryBonusItemSection),
+              matching: find.text('Bonus'),
+            ),
+            findsNothing,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> return bonus item details test',
+        (tester) async {
+          await tester.binding.setSurfaceSize(const Size(480, 900));
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                prsfd: Prsfd('B'),
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(find.text('Bonus Details'), findsOneWidget);
+          expect(
+            find.descendant(
+              of: find.byType(StatusLabel),
+              matching: find.text(requestInformationMock.status.displayStatus),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.text(requestInformationMock.materialNumber.displayMatNo),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(ReturnSummaryBonusItemSection),
+              matching: find.text('Bonus'),
+            ),
+            findsOneWidget,
+          );
+          final showDetailsButton = find.text('Show details');
+          final hideDetailsButton = find.text('Hide details');
+
+          expect(hideDetailsButton, findsOneWidget);
+          await tester.tap(hideDetailsButton);
+          await tester.pumpAndSettle();
+          expect(
+            find.descendant(
+              of: find.byType(ReturnSummaryBonusItemSection),
+              matching: find.text('Bonus return details'),
+            ),
+            findsNothing,
+          );
+          expect(showDetailsButton, findsOneWidget);
+          await tester.tap(showDetailsButton);
+          await tester.pumpAndSettle();
+          expect(
+            find.descendant(
+              of: find.byType(ReturnSummaryBonusItemSection),
+              matching: find.text('Bonus return details'),
+            ),
+            findsOneWidget,
+          );
+          final reason = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Reason',
+              requestInformationMock.returnOrderDesc,
+            ),
+          );
+          expect(reason, findsWidgets);
+          final comment = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Comments',
+              requestInformationMock.comment.getOrDefaultValue(''),
+            ),
+          );
+          expect(comment, findsWidgets);
         },
       );
 
