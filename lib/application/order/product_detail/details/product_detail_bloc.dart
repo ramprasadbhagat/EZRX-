@@ -2,8 +2,8 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
@@ -36,7 +36,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisation: e.salesOrganisation,
           shipToInfo: e.shipToInfo,
-          user: e.user,
+          configs: e.configs,
         ),
       ),
     );
@@ -52,7 +52,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         );
         final failureOrSuccess = await productDetailRepository.getProductDetail(
           customerCodeInfo: state.customerCodeInfo,
-          language: state.user.preferredLanguage,
+          language: state.configs.languageValue,
           materialNumber: e.materialInfo.materialNumber,
           salesOrganisation: state.salesOrganisation,
           shipToInfo: state.shipToInfo,
@@ -238,7 +238,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         final failureOrSuccess =
             await productDetailRepository.getSimilarProduct(
           customerCodeInfo: state.customerCodeInfo,
-          language: state.user.preferredLanguage,
+          language: state.configs.languageValue,
           materialNumber:
               state.productDetailAggregate.materialInfo.materialNumber,
           salesOrganisation: state.salesOrganisation,

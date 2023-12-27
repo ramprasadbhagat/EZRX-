@@ -1055,7 +1055,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               salesOrganisation: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
               shipToInfo: state.shipToInfo,
-              user: user,
+              configs: salesOrgState.configs,
             ),
           );
 

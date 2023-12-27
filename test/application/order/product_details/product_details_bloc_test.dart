@@ -19,7 +19,6 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../common_mock_data/user_mock.dart';
 
 class ProductDetailRepositoryMock extends Mock
     implements ProductDetailRepository {}
@@ -114,7 +113,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            user: fakeUserWithLanguageCode,
+            configs: fakeSalesOrganisationConfigs,
           ),
         ),
         expect: () => [
@@ -122,7 +121,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            user: fakeUserWithLanguageCode,
+            configs: fakeLanguageSalesOrganisationConfigs,
           ),
         ],
       );

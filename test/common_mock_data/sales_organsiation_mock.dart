@@ -297,3 +297,6 @@ final salesOrgVariant = ValueVariant<SalesOrg>(
     fakeTWSalesOrg,
   },
 );
+
+final fakeLanguageSalesOrganisationConfigs =
+    fakeSalesOrganisationConfigs.copyWith(languageValue: Language.english());
