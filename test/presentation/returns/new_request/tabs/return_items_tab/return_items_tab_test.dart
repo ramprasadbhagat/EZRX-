@@ -1,14 +1,20 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +23,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../utils/widget_utils.dart';
+import '../../../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../../../utils/widget_utils.dart';
 
 class ReturnItemsBlocMock extends MockBloc<ReturnItemsEvent, ReturnItemsState>
     implements ReturnItemsBloc {}
@@ -33,6 +39,10 @@ class ProductImageBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class ReturnItemsFilterBlocMock
+    extends MockBloc<ReturnItemsFilterEvent, ReturnItemsFilterState>
+    implements ReturnItemsFilterBloc {}
+
 final locator = GetIt.instance;
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -43,16 +53,21 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late ReturnMaterialList fakeReturnMaterialList;
   late ReturnMaterial fakeReturnMaterial;
+  late ReturnItemsFilterBloc returnItemsFilterBlocMock;
+  late Config config;
   const fakeUnitPrice = 8.77;
   const fakeBalanceQuantity = 5;
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
+    config = locator<Config>();
     autoRouterMock = locator<AppRouter>();
     returnItemsBlocMock = ReturnItemsBlocMock();
     newRequestBlocMock = NewRequestBlocMock();
     productImageBlocMock = ProductImageBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
+    returnItemsFilterBlocMock = ReturnItemsFilterBlocMock();
     fakeReturnMaterialList =
         await ReturnRequestLocalDataSource().searchReturnMaterials();
     fakeReturnMaterial = fakeReturnMaterialList.items.first.copyWith(
@@ -72,6 +87,9 @@ void main() {
     when(() => eligibilityBlocMock.state).thenReturn(
       EligibilityState.initial(),
     );
+    when(() => returnItemsFilterBlocMock.state).thenReturn(
+      ReturnItemsFilterState.initial(),
+    );
   });
 
   Widget getScopedWidget() {
@@ -90,6 +108,9 @@ void main() {
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
+        ),
+        BlocProvider<ReturnItemsFilterBloc>(
+          create: (context) => returnItemsFilterBlocMock,
         ),
       ],
       child: const Material(
@@ -198,5 +219,171 @@ void main() {
         expect(bonusQty, findsOneWidget);
       },
     );
+
+    testWidgets('=> On Press New Request Filter Button', (tester) async {
+      final fakeFilter = ReturnItemsFilter.empty().copyWith(
+        invoiceDateFrom: DateTimeStringValue('2023-12-27'),
+      );
+      final expectStates = [
+        ReturnItemsState.initial().copyWith(
+          appliedFilter: fakeFilter,
+        ),
+      ];
+      whenListen(returnItemsBlocMock, Stream.fromIterable(expectStates));
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final filterButton = find.byKey(WidgetKeys.newRequestFilterIcon);
+      expect(filterButton, findsOneWidget);
+      await tester.tap(filterButton);
+      await tester.pumpAndSettle();
+      verify(
+        () => returnItemsFilterBlocMock.add(
+          ReturnItemsFilterEvent.openFilterBottomSheet(
+            appliedFilter: fakeFilter,
+          ),
+        ),
+      ).called(1);
+      expect(find.byType(ReturnItemsFilterBottomSheet), findsOneWidget);
+    });
+
+    testWidgets('=> Show snackbar when api error', (tester) async {
+      final expectStates = [
+        ReturnItemsState.initial(),
+        ReturnItemsState.initial().copyWith(
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+        ),
+      ];
+      whenListen(returnItemsBlocMock, Stream.fromIterable(expectStates));
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+    });
+    testWidgets('=> Pull To Refresh', (tester) async {
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final scrollListFinder =
+          find.byKey(WidgetKeys.newRequestListItemAbleToReturn);
+      expect(scrollListFinder, findsOneWidget);
+      await tester.drag(
+        scrollListFinder,
+        const Offset(0.0, 1000.0),
+      );
+      await tester.pumpAndSettle();
+      verify(
+        () => returnItemsBlocMock.add(
+          ReturnItemsEvent.fetch(
+            appliedFilter: ReturnItemsFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('=> Loadmore Test', (tester) async {
+      when(() => returnItemsBlocMock.state).thenReturn(
+        ReturnItemsState.initial().copyWith(
+          items: List.filled(
+            8,
+            fakeReturnMaterial,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final scrollListFinder =
+          find.byKey(WidgetKeys.newRequestListItemAbleToReturn);
+      expect(scrollListFinder, findsOneWidget);
+      await tester.drag(
+        scrollListFinder,
+        const Offset(0.0, -2000.0),
+      );
+      await tester.pumpAndSettle();
+      verify(
+        () => returnItemsBlocMock.add(
+          const ReturnItemsEvent.loadMore(),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('=> On Press Item Test', (tester) async {
+      when(() => returnItemsBlocMock.state).thenReturn(
+        ReturnItemsState.initial().copyWith(
+          items: [
+            fakeReturnMaterial,
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      await tester.tap(
+        find.byKey(WidgetKeys.newReturnItem),
+      );
+      verify(
+        () => newRequestBlocMock.add(
+          NewRequestEvent.toggleReturnItem(
+            selected: true,
+            item: fakeReturnMaterial,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => newRequestBlocMock.add(
+          const NewRequestEvent.validateStep(
+            step: 1,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('=> Search Bar Test', (tester) async {
+      when(() => returnItemsBlocMock.state).thenReturn(
+        ReturnItemsState.initial().copyWith(
+          searchKey: SearchKey('12'),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final searchBarFinder = find.byKey(
+        WidgetKeys.genericKey(key: '12'),
+      );
+      expect(searchBarFinder, findsOneWidget);
+      await tester.enterText(searchBarFinder, '123');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      verify(
+        () => returnItemsBlocMock.add(
+          ReturnItemsEvent.fetch(
+            appliedFilter: ReturnItemsFilter.empty(),
+            searchKey: SearchKey.searchFilter('123'),
+          ),
+        ),
+      ).called(1);
+      await tester.enterText(searchBarFinder, '1234');
+      await tester.pump(Duration(seconds: config.autoSearchTimeout));
+      verify(
+        () => returnItemsBlocMock.add(
+          ReturnItemsEvent.fetch(
+            appliedFilter: ReturnItemsFilter.empty(),
+            searchKey: SearchKey.searchFilter('1234'),
+          ),
+        ),
+      ).called(1);
+      final clearButton = find.byKey(WidgetKeys.clearIconKey);
+      expect(clearButton, findsOneWidget);
+      await tester.tap(clearButton);
+      verify(
+        () => returnItemsBlocMock.add(
+          ReturnItemsEvent.fetch(
+            appliedFilter: ReturnItemsFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+      ).called(1);
+    });
   });
 }

@@ -11,15 +11,8 @@ class _ReturnItemsSearchBar extends StatelessWidget {
             previous.searchKey != current.searchKey,
         listener: (context, state) {
           state.failureOrSuccessOption.fold(
-            () {
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
+            () => FocusScope.of(context).requestFocus(FocusNode()),
+            (either) {},
           );
         },
         builder: (context, state) => CustomSearchBar(
