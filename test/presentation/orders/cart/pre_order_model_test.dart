@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -26,6 +28,7 @@ import 'package:ezrxmobile/presentation/core/list_price_strike_through_component
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
+import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -82,6 +85,10 @@ class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class MaterialPriceBlocMock
+    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+    implements MaterialPriceBloc {}
+
 class MockAppRouter extends Mock implements AppRouter {}
 
 class MockMixpanelService extends Mock implements MixpanelService {}
@@ -99,6 +106,7 @@ void main() {
   late PriceOverrideBloc priceOverrideBloc;
   late ComboDealListBloc comboDealListBloc;
   late ProductImageBloc productImageBloc;
+  late MaterialPriceBloc materialPriceBlocMock;
   final userBlocMock = UserMockBloc();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   final fakeCartProduct = <PriceAggregate>[
@@ -143,6 +151,7 @@ void main() {
       priceOverrideBloc = PriceOverrideBlocMock();
       comboDealListBloc = ComboDealListBlocMock();
       productImageBloc = ProductImageBlocMock();
+      materialPriceBlocMock = MaterialPriceBlocMock();
 
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial(),
@@ -173,6 +182,9 @@ void main() {
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
       when(() => productImageBloc.state).thenReturn(
         ProductImageState.initial(),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial(),
       );
     });
     Widget getScopedWidget() {
@@ -220,6 +232,9 @@ void main() {
             BlocProvider<CartBloc>(create: (context) => cartBloc),
             BlocProvider<ProductImageBloc>(
               create: (context) => productImageBloc,
+            ),
+            BlocProvider<MaterialPriceBloc>(
+              create: (context) => materialPriceBlocMock,
             ),
           ],
           child: const Material(
@@ -479,6 +494,41 @@ void main() {
           ),
           findsNothing,
         );
+      },
+    );
+
+    testWidgets(
+      '=> Find Offer Tag',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              fakeCartProduct.first.copyWith(
+                price: Price.empty().copyWith(
+                  tiers: [
+                    PriceTier.empty().copyWith(
+                      tier: 'C',
+                      items: [
+                        PriceTierItem.empty().copyWith(
+                          rate: 41,
+                          quantity: 5,
+                        ),
+                        PriceTierItem.empty().copyWith(
+                          rate: 20,
+                          quantity: 10,
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final offerTag = find.byType(OfferLabel);
+        expect(offerTag, findsOneWidget);
       },
     );
   });
