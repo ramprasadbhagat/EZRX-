@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 class CartProductComboItem extends StatelessWidget {
   final ComboMaterialItem comboMaterialItem;
   final ComboDealScheme comboScheme;
+
   const CartProductComboItem({
     Key? key,
     required this.comboMaterialItem,
@@ -48,6 +49,7 @@ class CartProductComboItem extends StatelessWidget {
 class _MaterialDetailsSection extends StatelessWidget {
   final ComboMaterialItem comboMaterialItem;
   final ComboDealScheme comboScheme;
+
   const _MaterialDetailsSection({
     Key? key,
     required this.comboMaterialItem,
@@ -144,7 +146,9 @@ class _ComboSubTotalSection extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: comboMaterialItem.itemTax.toString(),
+                price: (comboScheme.displayOriginalPrice
+                    ? comboMaterialItem.originalItemTax.toString()
+                    : comboMaterialItem.itemTax.toString()),
                 title: '+ ',
                 type: PriceStyle.taxPrice,
               ),
@@ -176,6 +180,7 @@ class _ComboSubTotalSection extends StatelessWidget {
 class _MaterialDetails extends StatelessWidget {
   final ComboMaterialItem comboMaterialItem;
   final ComboDealScheme comboScheme;
+
   const _MaterialDetails({
     Key? key,
     required this.comboMaterialItem,

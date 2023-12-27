@@ -86,12 +86,14 @@ class ComboMaterialItem with _$ComboMaterialItem {
 
   double get itemTax => (discountedSubTotal * itemTaxPercent) / 100;
 
+  double get originalItemTax => (originalSubTotal * itemTaxPercent) / 100;
+
   String get originalPriceDisplay =>
       NumUtils.roundToPlaces(listPrice).toString();
 
   double get originalSubTotal => NumUtils.roundToPlaces(listPrice * quantity);
 
-  double get originalTotalWithTax => originalSubTotal + itemTax;
+  double get originalTotalWithTax => originalSubTotal + originalItemTax;
 
   String get discountedPriceDisplay =>
       NumUtils.roundToPlaces(finalIndividualPrice).toString();
