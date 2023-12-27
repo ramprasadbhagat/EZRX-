@@ -10,16 +10,14 @@ class _PaymentInvoicePdf extends StatelessWidget {
         : Container(
             key: WidgetKeys.pdfView,
             width: double.infinity,
-            height: 650,
+            constraints: const BoxConstraints(minHeight: 650),
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: PdfPreview(
+            child: PdfPreviewCustom(
               maxPageWidth: double.infinity,
-              initialPageFormat: PdfPageFormat.a4,
-              allowPrinting: false,
-              allowSharing: false,
-              canChangeOrientation: false,
-              canChangePageFormat: false,
+              pageFormat: PdfPageFormat.a4,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
               previewPageMargin: EdgeInsets.zero,
+              shrinkWrap: true,
               pdfPreviewPageDecoration:
                   const BoxDecoration(color: ZPColors.white),
               scrollViewDecoration: const BoxDecoration(color: ZPColors.white),
