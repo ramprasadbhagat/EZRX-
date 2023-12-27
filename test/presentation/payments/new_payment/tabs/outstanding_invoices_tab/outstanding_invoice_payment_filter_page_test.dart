@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoice_payment_filter_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -29,7 +30,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../utils/widget_utils.dart';
-import '../../new_payment_page_test.dart';
+import '../../../../mock_object/mock_object.dart';
 
 void main() {
   late AccountSummaryBloc accountSummaryBlocMock;
@@ -482,6 +483,39 @@ void main() {
             value: true,
           ),
         ),
+      );
+    });
+
+    testWidgets('amount filter Invalid Amount range', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: salesOrg,
+        ),
+      );
+
+      when(() => outstandingInvoiceFilterBlocMock.state).thenReturn(
+        OutstandingInvoiceFilterState.initial().copyWith(
+          filter: OutstandingInvoiceFilter.empty().copyWith(
+            amountValueFrom: RangeValue('100'),
+            amountValueTo: RangeValue('10'),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final amountValueFrom = find.byKey(WidgetKeys.amountValueFrom);
+      expect(amountValueFrom, findsOneWidget);
+
+      await tester.pump();
+      expect(find.byType(ValueRangeError), findsOneWidget);
+      expect(
+        find.descendant(
+          of: find.byType(ValueRangeError),
+          matching: find.text('Invalid Amount range!'),
+        ),
+        findsOneWidget,
       );
     });
   });

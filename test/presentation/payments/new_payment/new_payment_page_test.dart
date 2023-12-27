@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/bank_in_accounts/bank_in_accounts_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
@@ -13,9 +15,15 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/new_payment_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -27,49 +35,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class AccountSummaryBlocMock
-    extends MockBloc<AccountSummaryEvent, AccountSummaryState>
-    implements AccountSummaryBloc {}
-
-class OutstandingInvoicesBlocMock
-    extends MockBloc<OutstandingInvoicesEvent, OutstandingInvoicesState>
-    implements OutstandingInvoicesBloc {}
-
-class OutstandingInvoiceFilterBlocMock extends MockBloc<
-    OutstandingInvoiceFilterEvent,
-    OutstandingInvoiceFilterState> implements OutstandingInvoiceFilterBloc {}
-
-class AvailableCreditsBlocMock
-    extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
-    implements AvailableCreditsBloc {}
-
-class AvailableCreditFilterBlocMock
-    extends MockBloc<AvailableCreditFilterEvent, AvailableCreditFilterState>
-    implements AvailableCreditFilterBloc {}
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
+import '../../mock_object/mock_object.dart';
 
 void main() {
   late AccountSummaryBloc accountSummaryBlocMock;
@@ -86,7 +52,8 @@ void main() {
   final locator = GetIt.instance;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
-
+  const error = Left(ApiFailure.other('fake-error'));
+  late BankInAccountBlocMock bankInAccountsBlocMock;
   final fakeInvoices = [
     CustomerOpenItem(
       status: StatusType('Overdue'),
@@ -270,6 +237,7 @@ void main() {
     salesOrgBlocMock = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
+    bankInAccountsBlocMock = BankInAccountBlocMock();
 
     when(() => accountSummaryBlocMock.state)
         .thenReturn(AccountSummaryState.initial());
@@ -296,7 +264,19 @@ void main() {
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    when(() => bankInAccountsBlocMock.state)
+        .thenReturn(BankInAccountsState.initial());
   });
+
+  //////////////////////////////Finder//////////////////////////////////////
+  final confirmBottomSheetConfirmButton =
+      find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
+  final closeButton = find.byKey(WidgetKeys.closeButton);
+  final nextButton = find.byKey(WidgetKeys.nextButton);
+  final checkAllWidget = find.byKey(WidgetKeys.checkAllWidget);
+  final confirmBottomSheet = find.byKey(WidgetKeys.confirmBottomSheet);
+
+  ///////////////////////////////////////////////////////////////////////
 
   Widget getWidget() {
     return WidgetUtils.getScopedWidget(
@@ -337,6 +317,9 @@ void main() {
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<AnnouncementBloc>(
           create: (context) => announcementBlocMock,
+        ),
+        BlocProvider<BankInAccountsBloc>(
+          create: (context) => bankInAccountsBlocMock,
         ),
       ],
       child: const NewPaymentPage(),
@@ -702,40 +685,275 @@ void main() {
         await tester.pumpAndSettle();
         expect(autoRouterMock.currentPath, 'payments/payment_advice_created');
       });
+      testWidgets('=> Test Invoice/credit already in use dialog',
+          (WidgetTester tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              isLoading: true,
+            ),
+            NewPaymentState.initial().copyWith(
+              failureOrSuccessOption: optionOf(error),
+            ),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: find.text('Invoice/credit already in use'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: confirmBottomSheetConfirmButton,
+          ),
+          findsOneWidget,
+        );
+        await tester.tap(confirmBottomSheetConfirmButton);
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: confirmBottomSheetConfirmButton,
+          ),
+          findsNothing,
+        );
+      });
 
-      //TODO: Update widget test later
-      // testWidgets('=> Tap Pay now button fails', (WidgetTester tester) async {
-      //   when(() => outstandingInvoicesBlocMock.state).thenReturn(
-      //     OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
-      //   );
-      //   when(() => availableCreditsBlocMock.state).thenReturn(
-      //     AvailableCreditsState.initial().copyWith(items: fakeCredits),
-      //   );
-      //   when(() => newPaymentBlocMock.state).thenReturn(
-      //     NewPaymentState.initial().copyWith(
-      //       selectedInvoices: [fakeInvoices.first],
-      //     ),
-      //   );
-      //   whenListen(
-      //     newPaymentBlocMock,
-      //     Stream.fromIterable([
-      //       NewPaymentState.initial().copyWith(
-      //         isLoading: true,
-      //       ),
-      //       NewPaymentState.initial().copyWith(
-      //         isLoading: false,
-      //         failureOrSuccessOption: optionOf(
-      //           const Left(
-      //             ApiFailure.other('Fake-error'),
-      //           ),
-      //         ),
-      //       ),
-      //     ]),
-      //   );
-      //   await tester.pumpWidget(getWidget());
-      //   await tester.pumpAndSettle();
-      //   expect(find.byKey(WidgetKeys.confirmBottomSheet), findsOneWidget);
-      // });
+      testWidgets('=> Test Previous button', (WidgetTester tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              failureOrSuccessOption: optionOf(error),
+            ),
+            NewPaymentState.initial(),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(closeButton, findsOneWidget);
+        await tester.tap(closeButton);
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: closeButton,
+          ),
+          findsNothing,
+        );
+      });
+
+      testWidgets('=> Test new payment amount is negative',
+          (WidgetTester tester) async {
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedInvoices: fakeInvoices
+                .map(
+                  (e) => e.copyWith(
+                    openAmountInTransCrcy: -100,
+                  ),
+                )
+                .toList(),
+            selectedCredits: fakeCredits,
+            selectedPaymentMethod: NewPaymentMethod(
+              paymentMethod: PaymentMethodValue('Bank-In'),
+              options: [
+                PaymentMethodOption.empty(),
+              ],
+            ),
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: find.byType(InfoLabel),
+            matching:
+                find.text('Total credit amount cannot exceed invoice amount.'),
+          ),
+          findsOneWidget,
+        );
+        await tester.tap(nextButton);
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: find.byType(InfoLabel),
+            matching:
+                find.text('Please select your virtual bank account to proceed'),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('=> Payment step 3 rebuild', (WidgetTester tester) async {
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedInvoices: fakeInvoices,
+            selectedCredits: fakeCredits,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(nextButton, findsOneWidget);
+        await tester.tap(nextButton);
+        await tester.pumpAndSettle();
+        expect(nextButton, findsOneWidget);
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              selectedInvoices: fakeInvoices,
+              selectedCredits: fakeCredits,
+              isLoading: true,
+            ),
+            NewPaymentState.initial().copyWith(
+              selectedInvoices: fakeInvoices,
+              selectedCredits: fakeCredits,
+            ),
+          ]),
+        );
+        await tester.tap(nextButton);
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets('=> Payment check invoice all selection',
+          (WidgetTester tester) async {
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedInvoices: fakeInvoices,
+            selectedCredits: fakeCredits,
+          ),
+        );
+        whenListen(
+          outstandingInvoicesBlocMock,
+          Stream.fromIterable([
+            OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(checkAllWidget, findsOneWidget);
+        await tester.tap(checkAllWidget);
+        await tester.pumpAndSettle();
+        verify(
+          () => newPaymentBlocMock
+              .add(const NewPaymentEvent.updateAllInvoices(items: [])),
+        ).called(1);
+      });
+
+      testWidgets('=> Payment check Credit all selection',
+          (WidgetTester tester) async {
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedInvoices: fakeInvoices,
+            selectedCredits: fakeCredits,
+          ),
+        );
+        whenListen(
+          outstandingInvoicesBlocMock,
+          Stream.fromIterable([
+            OutstandingInvoicesState.initial(),
+            OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(nextButton, findsOneWidget);
+        await tester.tap(nextButton);
+        await tester.pumpAndSettle();
+        expect(checkAllWidget, findsOneWidget);
+        await tester.tap(checkAllWidget);
+        await tester.pumpAndSettle();
+        verify(
+          () => newPaymentBlocMock
+              .add(const NewPaymentEvent.updateAllCredits(items: [])),
+        ).called(1);
+      });
+
+      testWidgets('=> Payment check total for ID', (WidgetTester tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedInvoices: fakeInvoices,
+            selectedCredits: fakeCredits,
+            paymentMethods: [
+              NewPaymentMethod(
+                paymentMethod: PaymentMethodValue('Bank-In'),
+                options: [
+                  PaymentMethodOption.empty().copyWith(
+                    bankOptionId: BankOptionId('permata'),
+                  ),
+                ],
+              )
+            ],
+            selectedPaymentMethod: NewPaymentMethod(
+              paymentMethod: PaymentMethodValue('Bank-In'),
+              options: [
+                PaymentMethodOption.empty().copyWith(
+                  bankOptionId: BankOptionId('permata'),
+                ),
+              ],
+            ),
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        whenListen(
+          availableCreditsBlocMock,
+          Stream.fromIterable([
+            AvailableCreditsState.initial(),
+            AvailableCreditsState.initial().copyWith(items: fakeCredits),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(nextButton, findsOneWidget);
+        await tester.tap(nextButton);
+        await tester.pumpAndSettle();
+        await tester.tap(nextButton);
+        await tester.pumpAndSettle();
+        expect(
+          confirmBottomSheet,
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: confirmBottomSheet,
+            matching: find.text('Confirm payment settings?'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: confirmBottomSheetConfirmButton,
+          ),
+          findsOneWidget,
+        );
+        await tester.tap(confirmBottomSheetConfirmButton);
+        await tester.pumpAndSettle();
+        verify(
+          () => newPaymentBlocMock.add(
+            const NewPaymentEvent.createVirtualAccount(),
+          ),
+        ).called(1);
+      });
     });
   });
 }

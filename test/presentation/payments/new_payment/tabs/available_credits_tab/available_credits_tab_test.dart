@@ -28,24 +28,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../utils/widget_utils.dart';
+import '../../../../mock_object/mock_object.dart';
 
-class AvailableCreditsBlocMock
-    extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
-    implements AvailableCreditsBloc {}
-
-class AvailableCreditFilterBlocMock
-    extends MockBloc<AvailableCreditFilterEvent, AvailableCreditFilterState>
-    implements AvailableCreditFilterBloc {}
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
-
-class AutoRouteMock extends Mock implements AppRouter {}
 
 void main() {
   late AvailableCreditsBloc availableCreditsBlocMock;
@@ -72,8 +56,6 @@ void main() {
     autoRouterMock = locator<AppRouter>();
     mixpanelServiceMock = locator<MixpanelService>();
     configMock = locator<Config>();
-
-    availableCreditsBlocMock = AvailableCreditsBlocMock();
     availableCreditFilterBlocMock = AvailableCreditFilterBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
     eligibilityBlocMock = EligibilityBlockMock();
@@ -81,6 +63,7 @@ void main() {
   });
 
   setUp(() async {
+    availableCreditsBlocMock = AvailableCreditsBlocMock();
     when(() => availableCreditsBlocMock.state)
         .thenReturn(AvailableCreditsState.initial());
     when(() => availableCreditFilterBlocMock.state)
@@ -139,6 +122,21 @@ void main() {
   group('Available credit tab test', () {
     Future openFilterBottomSheet(WidgetTester tester) async {
       final filterBadge = find.byType(CustomBadge);
+      whenListen(
+        availableCreditsBlocMock,
+        Stream.fromIterable(
+          [
+            AvailableCreditsState.initial().copyWith(
+              failureOrSuccessOption: optionOf(
+                const Left(
+                  ApiFailure.other('fake-error'),
+                ),
+              ),
+            ),
+            AvailableCreditsState.initial(),
+          ],
+        ),
+      );
       expect(filterBadge, findsOneWidget);
 
       await tester.tap(filterBadge);
@@ -154,6 +152,17 @@ void main() {
     }
 
     testWidgets('Search bar show', (tester) async {
+      whenListen(
+        availableCreditsBlocMock,
+        Stream.fromIterable(
+          [
+            AvailableCreditsState.initial().copyWith(
+              isLoading: true,
+            ),
+            AvailableCreditsState.initial(),
+          ],
+        ),
+      );
       await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(
@@ -493,7 +502,6 @@ void main() {
           items: fakeCredits,
         ),
       );
-
       await tester.pumpWidget(getWidget());
       await tester.pump();
 
