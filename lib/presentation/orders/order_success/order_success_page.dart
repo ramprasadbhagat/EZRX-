@@ -7,10 +7,15 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -64,6 +69,18 @@ class OrderSuccessPage extends StatelessWidget {
               previous.isConfirming != current.isConfirming,
           listener: (context, state) {
             if (!state.isConfirming) {
+              context.read<ViewByOrderBloc>().add(
+                    ViewByOrderEvent.fetch(
+                      filter: ViewByOrdersFilter.empty(),
+                      searchKey: SearchKey.searchFilter(''),
+                    ),
+                  );
+              context.read<ViewByItemsBloc>().add(
+                    ViewByItemsEvent.fetch(
+                      viewByItemFilter: ViewByItemFilter.empty(),
+                      searchKey: SearchKey.searchFilter(''),
+                    ),
+                  );
               _trackOrderSuccess(context, state);
               CustomSnackBar(
                 messageText: 'Order submitted'.tr(),

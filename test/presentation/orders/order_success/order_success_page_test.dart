@@ -11,7 +11,9 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -27,6 +29,8 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -63,6 +67,12 @@ class AnnouncementBlocMock
     implements AnnouncementBloc {}
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
+class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
+    implements ViewByOrderBloc {}
+
+class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+    implements ViewByItemsBloc {}
 
 class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
@@ -113,6 +123,8 @@ void main() {
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late ProductImageBloc productImageBlocMock;
   late PoAttachmentBloc poAttachmentBlocMock;
+  late ViewByOrderBloc viewByOrderBlocMock;
+  late ViewByItemsBloc viewByItemsBlocMock;
   final fakeOrderNumber = OrderNumber('fake-order-number');
   final fakeBundleItem = OrderHistoryDetailsOrderItem.empty().copyWith(
     productType: MaterialInfoType.bundle(),
@@ -134,6 +146,8 @@ void main() {
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       orderSummaryBlocMock = OrderSummaryBlocMock();
+      viewByOrderBlocMock = ViewByOrderBlocMock();
+      viewByItemsBlocMock = ViewByItemsBlocMock();
       userBlocMock = UserBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
@@ -177,6 +191,12 @@ void main() {
       when(() => poAttachmentBlocMock.state).thenReturn(
         PoAttachmentState.initial(),
       );
+      when(() => viewByOrderBlocMock.state).thenReturn(
+        ViewByOrderState.initial(),
+      );
+      when(() => viewByItemsBlocMock.state).thenReturn(
+        ViewByItemsState.initial(),
+      );
       when(() => autoRouterMock.currentPath).thenReturn('fake-path');
     },
   );
@@ -218,6 +238,12 @@ void main() {
         ),
         BlocProvider<ProductImageBloc>(
           create: (context) => productImageBlocMock,
+        ),
+        BlocProvider<ViewByOrderBloc>(
+          create: (context) => viewByOrderBlocMock,
+        ),
+        BlocProvider<ViewByItemsBloc>(
+          create: (context) => viewByItemsBlocMock,
         ),
         BlocProvider<PoAttachmentBloc>(
           create: (context) => poAttachmentBlocMock,
@@ -689,6 +715,24 @@ void main() {
               false,
             ),
           },
+        ),
+      ).called(1);
+
+      verify(
+        () => viewByOrderBlocMock.add(
+          ViewByOrderEvent.fetch(
+            filter: ViewByOrdersFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => viewByItemsBlocMock.add(
+          ViewByItemsEvent.fetch(
+            viewByItemFilter: ViewByItemFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
         ),
       ).called(1);
 
