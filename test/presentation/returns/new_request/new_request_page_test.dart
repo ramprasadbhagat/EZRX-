@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -8,9 +9,18 @@ import 'package:ezrxmobile/application/returns/new_request/return_items/return_i
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/new_request_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -23,6 +33,8 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
@@ -60,6 +72,8 @@ class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
+class MixpanelServiceMock extends Mock implements MixpanelService {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -85,12 +99,14 @@ void main() {
   final sgSalesOrganisation = SalesOrganisation.empty().copyWith(
     salesOrg: SalesOrg('2601'),
   );
+  final nextButtonFinder = find.byKey(WidgetKeys.nextButton);
 
   setUpAll(() async {
     fakeReturnMaterial = ReturnMaterial.empty().copyWith(
       unitPrice: RangeValue('100'),
     );
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
   });
 
   group('New Request page', () {
@@ -248,6 +264,373 @@ void main() {
         find.byKey(WidgetKeys.addressInfoSectionActionLabel),
         findsOneWidget,
       );
+    });
+    testWidgets('=> Previous Button test for step 1', (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: sgSalesOrganisation.salesOrg,
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              itemNumber: '1',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+            fakeReturnMaterial.copyWith(
+              itemNumber: '2',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(WidgetKeys.closeButton),
+        findsOneWidget,
+      );
+      await tester.tap(find.byKey(WidgetKeys.closeButton));
+      await tester.pumpAndSettle();
+      expect(find.byType(ConfirmBottomSheet), findsOneWidget);
+    });
+
+    testWidgets('=> Previous Button test for step 2', (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: sgSalesOrganisation.salesOrg,
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              itemNumber: '1',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+            fakeReturnMaterial.copyWith(
+              itemNumber: '2',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        nextButtonFinder,
+        findsOneWidget,
+      );
+      await tester.tap(nextButtonFinder);
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(WidgetKeys.backButton),
+        findsOneWidget,
+      );
+      await tester.tap(find.byKey(WidgetKeys.backButton));
+      await tester.pumpAndSettle();
+      expect(find.byType(ConfirmBottomSheet), findsNothing);
+    });
+
+    testWidgets('=> Next Button test for step 1', (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: sgSalesOrganisation.salesOrg,
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              itemNumber: '1',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+            fakeReturnMaterial.copyWith(
+              itemNumber: '2',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        nextButtonFinder,
+        findsOneWidget,
+      );
+      await tester.tap(nextButtonFinder);
+      await tester.pumpAndSettle();
+      verify(
+        () => newRequestBlocMock.add(
+          const NewRequestEvent.validateStep(step: 1),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('=> Next Button test for step 2', (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: sgSalesOrganisation.salesOrg,
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              invoiceNumber: fakeReturnMaterial.itemNumber,
+              returnItemDetailsList: [
+                ReturnItemDetails.empty().copyWith(
+                  balanceQty: IntegerValue('1'),
+                  returnReason: 'fake_reason',
+                  returnQuantity: ReturnQuantity('1'),
+                )
+              ],
+            )
+          ],
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              itemNumber: '1',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+            fakeReturnMaterial.copyWith(
+              itemNumber: '2',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        nextButtonFinder,
+        findsOneWidget,
+      );
+      await tester.tap(nextButtonFinder);
+      await tester.pumpAndSettle();
+      verify(
+        () => newRequestBlocMock.add(
+          const NewRequestEvent.validateStep(step: 1),
+        ),
+      ).called(1);
+      expect(
+        nextButtonFinder,
+        findsOneWidget,
+      );
+      await tester.tap(nextButtonFinder);
+      await tester.pumpAndSettle();
+      verify(
+        () => newRequestBlocMock.add(
+          const NewRequestEvent.validateStep(step: 2),
+        ),
+      ).called(1);
+      verify(
+        () => trackMixpanelEvent(
+          MixpanelEvents.newReturnRequestStep,
+          props: <String, dynamic>{
+            MixpanelProps.step: 2,
+            MixpanelProps.stepName: 'Fill in return details',
+          },
+        ),
+      ).called(1);
+    });
+    testWidgets('=> Submit Button test ', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeRootAdminUser,
+        ),
+      );
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: sgSalesOrganisation.salesOrg,
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              invoiceNumber: fakeReturnMaterial.itemNumber,
+              returnItemDetailsList: [
+                ReturnItemDetails.empty().copyWith(
+                  balanceQty: IntegerValue('1'),
+                  returnReason: 'fake_reason',
+                  returnQuantity: ReturnQuantity('1'),
+                )
+              ],
+            )
+          ],
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              itemNumber: '1',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+            fakeReturnMaterial.copyWith(
+              itemNumber: '2',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        nextButtonFinder,
+        findsOneWidget,
+      );
+      await tester.tap(nextButtonFinder);
+      await tester.pumpAndSettle();
+      expect(
+        nextButtonFinder,
+        findsOneWidget,
+      );
+      await tester.tap(nextButtonFinder);
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(WidgetKeys.submitButton),
+        findsOneWidget,
+      );
+      await tester.tap(find.byKey(WidgetKeys.submitButton));
+      await tester.pumpAndSettle();
+      verify(
+        () => trackMixpanelEvent(
+          MixpanelEvents.newReturnRequestStep,
+          props: <String, dynamic>{
+            MixpanelProps.step: 3,
+            MixpanelProps.stepName: 'Review return details',
+          },
+        ),
+      ).called(1);
+      verify(
+        () => newRequestBlocMock.add(
+          NewRequestEvent.submit(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeRootAdminUser,
+          ),
+        ),
+      ).called(1);
+    });
+    testWidgets('=> Submit Button error section test ', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeRootAdminUser,
+        ),
+      );
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: sgSalesOrganisation.salesOrg,
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              invoiceNumber: fakeReturnMaterial.itemNumber,
+              returnItemDetailsList: [
+                ReturnItemDetails.empty().copyWith(
+                  balanceQty: IntegerValue('1'),
+                  returnReason: 'fake_reason',
+                  returnQuantity: ReturnQuantity('1'),
+                )
+              ],
+            )
+          ],
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              itemNumber: '1',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+            fakeReturnMaterial.copyWith(
+              itemNumber: '2',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        nextButtonFinder,
+        findsOneWidget,
+      );
+      await tester.tap(nextButtonFinder);
+      await tester.pumpAndSettle();
+      expect(
+        nextButtonFinder,
+        findsOneWidget,
+      );
+      whenListen(
+        newRequestBlocMock,
+        Stream.fromIterable([
+          NewRequestState.initial().copyWith(isSubmitting: true),
+          NewRequestState.initial().copyWith(
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake_error'))),
+          ),
+        ]),
+      );
+      await tester.tap(nextButtonFinder);
+      await tester.pumpAndSettle();
+      verify(
+        () => trackMixpanelEvent(
+          MixpanelEvents.returnRequestFailure,
+          props: {
+            MixpanelProps.errorMessage: 'fake_error',
+          },
+        ),
+      ).called(1);
+    });
+
+    testWidgets('=> Submit Button test when failureOrSuccessOption is none ',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeRootAdminUser,
+        ),
+      );
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: sgSalesOrganisation.salesOrg,
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              invoiceNumber: fakeReturnMaterial.itemNumber,
+              returnItemDetailsList: [
+                ReturnItemDetails.empty().copyWith(
+                  balanceQty: IntegerValue('1'),
+                  returnReason: 'fake_reason',
+                  returnQuantity: ReturnQuantity('1'),
+                )
+              ],
+            )
+          ],
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              itemNumber: '1',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+            fakeReturnMaterial.copyWith(
+              itemNumber: '2',
+              principalCode: PrincipalCode('fake-PrincipalCode-1'),
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        nextButtonFinder,
+        findsOneWidget,
+      );
+      await tester.tap(nextButtonFinder);
+      await tester.pumpAndSettle();
+      expect(
+        nextButtonFinder,
+        findsOneWidget,
+      );
+      whenListen(
+        newRequestBlocMock,
+        Stream.fromIterable([
+          NewRequestState.initial().copyWith(isSubmitting: true),
+          NewRequestState.initial(),
+        ]),
+      );
+      await tester.tap(nextButtonFinder);
+      await tester.pumpAndSettle();
+      verify(
+        () => trackMixpanelEvent(
+          MixpanelEvents.returnRequestSuccess,
+          props: {
+            MixpanelProps.returnId: '',
+            MixpanelProps.totalQty: 0,
+            MixpanelProps.totalPrice: 0.0,
+            MixpanelProps.isSingle: false,
+            MixpanelProps.isBonusIncluded: false,
+            MixpanelProps.returnReason: [],
+            MixpanelProps.productName: [],
+            MixpanelProps.productManufacturer: [],
+            MixpanelProps.unitPrice: [],
+          },
+        ),
+      ).called(1);
+      expect(autoRouterMock.current.path, 'returns/new_request_successful');
     });
   });
 }

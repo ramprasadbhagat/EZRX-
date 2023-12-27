@@ -1,15 +1,18 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
@@ -26,6 +29,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -106,6 +110,15 @@ void main() {
     );
     fakeReturnItemDetails = fakeReturnMaterial.validatedItemDetails.copyWith(
       returnQuantity: ReturnQuantity(fakeReturnQuantity.toString()),
+      assignmentNumber: fakeReturnMaterial.assignmentNumber,
+      itemNumber: fakeReturnMaterial.itemNumber,
+      uploadedFiles: [
+        ReturnRequestAttachment.empty().copyWith(
+          name: 'fake_name',
+          path: 'fake_path',
+          size: FileSize(1),
+        )
+      ],
     );
 
     fakeUsageList = await UsageCodeLocalDataSource().getUsages();
@@ -214,6 +227,163 @@ void main() {
           matching: find.byKey(WidgetKeys.returnDetailsSectionKey),
         ),
         findsOneWidget,
+      );
+    });
+
+    testWidgets(' =>  Body Test - Uploaded File List section', (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails,
+              ],
+            ),
+          ],
+        ),
+      );
+
+      when(() => usageCodeBlocMock.state).thenReturn(
+        UsageCodeState.initial().copyWith(
+          usages: fakeUsageList,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(WidgetKeys.returnDetailsSectionKey),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.text('fake_name - 0.00 Kb'),
+        findsWidgets,
+      );
+      expect(
+        find.byIcon(Icons.cloud_download_outlined),
+        findsWidgets,
+      );
+      await tester.tap(find.byIcon(Icons.cloud_download_outlined).first);
+      await tester.pumpAndSettle();
+      verify(
+        () => returnRequestAttachmentBlocMock.add(
+          ReturnRequestAttachmentEvent.downloadFile(
+            file: ReturnRequestAttachment.empty().copyWith(
+              name: 'fake_name',
+              path: 'fake_path',
+              size: FileSize(1),
+            ),
+          ),
+        ),
+      ).called(1);
+    });
+    testWidgets(' =>  Body Test - Uploaded File List section error test',
+        (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails,
+              ],
+            ),
+          ],
+        ),
+      );
+      whenListen(
+        returnRequestAttachmentBlocMock,
+        Stream.fromIterable([
+          ReturnRequestAttachmentState.initial(),
+          ReturnRequestAttachmentState.initial().copyWith(
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake_error'))),
+          ),
+        ]),
+      );
+
+      when(() => usageCodeBlocMock.state).thenReturn(
+        UsageCodeState.initial().copyWith(
+          usages: fakeUsageList,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(WidgetKeys.returnDetailsSectionKey),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.text('fake_name - 0.00 Kb'),
+        findsWidgets,
+      );
+      expect(
+        find.byIcon(Icons.cloud_download_outlined),
+        findsWidgets,
+      );
+      expect(
+        find.text('Attachments downloaded successfully.'),
+        findsNothing,
+      );
+    });
+    testWidgets(' =>  Body Test - Uploaded File List section success test',
+        (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails,
+              ],
+            ),
+          ],
+        ),
+      );
+      whenListen(
+        returnRequestAttachmentBlocMock,
+        Stream.fromIterable([
+          ReturnRequestAttachmentState.initial(),
+          ReturnRequestAttachmentState.initial().copyWith(
+            failureOrSuccessOption: optionOf(const Right(PermissionStatus)),
+          ),
+        ]),
+      );
+
+      when(() => usageCodeBlocMock.state).thenReturn(
+        UsageCodeState.initial().copyWith(
+          usages: fakeUsageList,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(WidgetKeys.returnDetailsSectionKey),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.text('fake_name - 0.00 Kb'),
+        findsWidgets,
+      );
+      expect(
+        find.byIcon(Icons.cloud_download_outlined),
+        findsWidgets,
+      );
+      expect(
+        find.text('Attachments downloaded successfully.'),
+        findsWidgets,
       );
     });
 
