@@ -37,6 +37,8 @@ mixin _$OrderHistoryDetailsDto {
   String get processingStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ExpectedDeliveryDate', defaultValue: '')
+  String get expectedDeliveryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'Type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
@@ -105,6 +107,8 @@ abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
       String processingStatus,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       String requestedDeliveryDate,
+      @JsonKey(name: 'ExpectedDeliveryDate', defaultValue: '')
+      String expectedDeliveryDate,
       @JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       String telephoneNumber,
@@ -158,6 +162,7 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
     Object? totalDiscount = null,
     Object? processingStatus = null,
     Object? requestedDeliveryDate = null,
+    Object? expectedDeliveryDate = null,
     Object? type = null,
     Object? telephoneNumber = null,
     Object? createdDate = null,
@@ -211,6 +216,10 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      expectedDeliveryDate: null == expectedDeliveryDate
+          ? _value.expectedDeliveryDate
+          : expectedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
       type: null == type
           ? _value.type
@@ -327,6 +336,8 @@ abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
       String processingStatus,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       String requestedDeliveryDate,
+      @JsonKey(name: 'ExpectedDeliveryDate', defaultValue: '')
+      String expectedDeliveryDate,
       @JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       String telephoneNumber,
@@ -379,6 +390,7 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
     Object? totalDiscount = null,
     Object? processingStatus = null,
     Object? requestedDeliveryDate = null,
+    Object? expectedDeliveryDate = null,
     Object? type = null,
     Object? telephoneNumber = null,
     Object? createdDate = null,
@@ -432,6 +444,10 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      expectedDeliveryDate: null == expectedDeliveryDate
+          ? _value.expectedDeliveryDate
+          : expectedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
       type: null == type
           ? _value.type
@@ -533,6 +549,8 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
       required this.processingStatus,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       required this.requestedDeliveryDate,
+      @JsonKey(name: 'ExpectedDeliveryDate', defaultValue: '')
+      required this.expectedDeliveryDate,
       @JsonKey(name: 'Type', defaultValue: '') required this.type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       required this.telephoneNumber,
@@ -595,6 +613,9 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   @override
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   final String requestedDeliveryDate;
+  @override
+  @JsonKey(name: 'ExpectedDeliveryDate', defaultValue: '')
+  final String expectedDeliveryDate;
   @override
   @JsonKey(name: 'Type', defaultValue: '')
   final String type;
@@ -672,7 +693,7 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsDto(orderValue: $orderValue, totalTax: $totalTax, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, companyName: $companyName, orderNumber: $orderNumber, pOReference: $pOReference, shipTo: $shipTo, soldTo: $soldTo, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, itemCount: $itemCount)';
+    return 'OrderHistoryDetailsDto(orderValue: $orderValue, totalTax: $totalTax, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, expectedDeliveryDate: $expectedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, companyName: $companyName, orderNumber: $orderNumber, pOReference: $pOReference, shipTo: $shipTo, soldTo: $soldTo, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, itemCount: $itemCount)';
   }
 
   @override
@@ -696,6 +717,8 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
                 other.processingStatus == processingStatus) &&
             (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
+            (identical(other.expectedDeliveryDate, expectedDeliveryDate) ||
+                other.expectedDeliveryDate == expectedDeliveryDate) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.telephoneNumber, telephoneNumber) ||
                 other.telephoneNumber == telephoneNumber) &&
@@ -752,6 +775,7 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
         totalDiscount,
         processingStatus,
         requestedDeliveryDate,
+        expectedDeliveryDate,
         type,
         telephoneNumber,
         createdDate,
@@ -807,6 +831,8 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
       required final String processingStatus,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
       required final String requestedDeliveryDate,
+      @JsonKey(name: 'ExpectedDeliveryDate', defaultValue: '')
+      required final String expectedDeliveryDate,
       @JsonKey(name: 'Type', defaultValue: '') required final String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       required final String telephoneNumber,
@@ -875,6 +901,9 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   @override
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate;
+  @override
+  @JsonKey(name: 'ExpectedDeliveryDate', defaultValue: '')
+  String get expectedDeliveryDate;
   @override
   @JsonKey(name: 'Type', defaultValue: '')
   String get type;

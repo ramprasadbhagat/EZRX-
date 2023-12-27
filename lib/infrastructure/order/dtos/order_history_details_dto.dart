@@ -29,6 +29,8 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         required String processingStatus,
     @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
         required String requestedDeliveryDate,
+    @JsonKey(name: 'ExpectedDeliveryDate', defaultValue: '')
+        required String expectedDeliveryDate,
     @JsonKey(name: 'Type', defaultValue: '')
         required String type,
     @JsonKey(name: 'TelephoneNumber', defaultValue: '')
@@ -75,7 +77,6 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
     @JsonKey(name: 'ItmCount', defaultValue: 0)
         required int itemCount,
   }) = _OrderHistoryDetailsDto;
-
   factory OrderHistoryDetailsDto.fromDomain(
     OrderHistoryDetails orderHistoryDetails,
   ) {
@@ -89,6 +90,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
           orderHistoryDetails.processingStatus.getOrDefaultValue(''),
       requestedDeliveryDate:
           orderHistoryDetails.requestedDeliveryDate.dateString,
+      expectedDeliveryDate: orderHistoryDetails.expectedDeliveryDate.dateString,
       type: orderHistoryDetails.type,
       telephoneNumber:
           orderHistoryDetails.telephoneNumber.displayTelephoneNumber,
@@ -133,6 +135,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       totalTax: totalTax,
       processingStatus: OrderStepValue(processingStatus),
       requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),
+      expectedDeliveryDate: DateTimeStringValue(expectedDeliveryDate),
       type: type,
       telephoneNumber: PhoneNumber(telephoneNumber),
       orderValue: orderValue,

@@ -237,3 +237,11 @@ String getOrderSAPStatus(String status) {
       return status;
   }
 }
+
+String getDeliveryDateTitle(String status) {
+  if (status.contains('Delivered')) {
+    return 'Delivered';
+  }
+
+  return 'Expected delivery';
+}

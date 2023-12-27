@@ -20,6 +20,7 @@ query orderHistoryQuery($soldTo: String!, $language: String, $searchKey: String,
       CreatedDate
       CreatedTime
       RequestedDeliveryDate
+      ExpectedDeliveryDate
       OrderBy
       TelephoneNumber
       POReference

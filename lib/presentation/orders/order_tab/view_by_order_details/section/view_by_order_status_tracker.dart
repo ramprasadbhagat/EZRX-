@@ -31,7 +31,9 @@ class _ViewByOrderStatusTracker extends StatelessWidget {
       constraints:
           BoxConstraints(maxHeight: MediaQuery.of(context).size.height * .8),
       builder: (_) => OrderStatusSection(
-        deliveryDate: orderHistoryDetails.requestedDeliveryDate,
+        deliveryDate: orderHistoryDetails.expectedDeliveryDate,
+        deliveryDateTitle:
+            orderHistoryDetails.processingStatus.deliveryDateTitle,
         steps: orderHistoryDetails.processingStatus.viewByOrderHistorySteps,
       ),
     );

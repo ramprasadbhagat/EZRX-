@@ -39,6 +39,7 @@
           },
           "OrderItems": [
             {
+              "ExpectedDeliveryDate": "20231230",
               "isCounterOffer": true,
               "Type": "Comm",
               "MaterialCode": "000000000021038302",
@@ -73,6 +74,7 @@
               "TenderContractDetails": null
             },
             {
+              "ExpectedDeliveryDate": "20231230",
               "isCounterOffer": true,
               "Type": "Comm",
               "MaterialCode": "000000000021038305",
@@ -107,6 +109,7 @@
               "TenderContractDetails": null
             },
             {
+              "ExpectedDeliveryDate": "20231230",
               "isCounterOffer": true,
               "Type": "Comm",
               "MaterialCode": "000000000021041773",
@@ -141,6 +144,7 @@
               "TenderContractDetails": null
             },
             {
+              "ExpectedDeliveryDate": "20231230",
               "isCounterOffer": true,
               "Type": "Bonus",
               "MaterialCode": "000000000021038305",
@@ -172,8 +176,8 @@
               "GovernmentMaterialCode": null,
               "ItemRegistrationNumber": null,
               "IsTenderContractMaterial": false,
-              "TenderContractDetails": null         
-          }
+              "TenderContractDetails": null
+            }
           ],
           "OrderHolidays": {
             "Monday": false,

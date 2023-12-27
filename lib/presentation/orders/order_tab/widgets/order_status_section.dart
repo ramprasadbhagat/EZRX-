@@ -10,10 +10,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class OrderStatusSection extends StatelessWidget {
   final List<OrderHistoryStep> steps;
   final DateTimeStringValue deliveryDate;
+  final String deliveryDateTitle;
 
   const OrderStatusSection({
     Key? key,
     required this.steps,
+    required this.deliveryDateTitle,
     required this.deliveryDate,
   }) : super(key: key);
 
@@ -39,7 +41,7 @@ class OrderStatusSection extends StatelessWidget {
                       .salesOrgConfigs
                       .disableDeliveryDate
                   ? Text(
-                      '${context.tr('Expected delivery')}: ${deliveryDate.dateString}',
+                      '${context.tr(deliveryDateTitle)}: ${deliveryDate.dateOrDashString}',
                       style: Theme.of(context).textTheme.bodyMedium,
                     )
                   : const SizedBox.shrink(),

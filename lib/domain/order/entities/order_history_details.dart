@@ -26,6 +26,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     required double totalDiscount,
     required OrderStepValue processingStatus,
     required DateTimeStringValue requestedDeliveryDate,
+    required DateTimeStringValue expectedDeliveryDate,
     required String type,
     required PhoneNumber telephoneNumber,
     required DateTimeStringValue createdDate,
@@ -48,6 +49,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     required SpecialInstructions orderHistoryDetailsSpecialInstructions,
     required List<PoDocuments> orderHistoryDetailsPoDocuments,
   }) = _OrderHistoryDetails;
+
   factory OrderHistoryDetails.empty() => OrderHistoryDetails(
         totalTax: 0.0,
         deliveryFee: 0.0,
@@ -60,6 +62,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         telephoneNumber: PhoneNumber(''),
         orderValue: 0.0,
         createdDate: DateTimeStringValue(''),
+        expectedDeliveryDate: DateTimeStringValue(''),
         eZRXNumber: '',
         orderBy: StringValue(''),
         referenceNotes: '',

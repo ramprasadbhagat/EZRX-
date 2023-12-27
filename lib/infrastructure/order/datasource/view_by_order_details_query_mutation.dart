@@ -49,6 +49,7 @@ class ViewByOrderDetailsQueryMutation {
       CreatedDate
       CreatedTime
       RequestedDeliveryDate
+      ExpectedDeliveryDate
       OrderBy
       TelephoneNumber
       POReference

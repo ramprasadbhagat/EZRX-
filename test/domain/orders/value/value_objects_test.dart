@@ -380,4 +380,19 @@ void main() {
       );
     });
   });
+
+  group('Order Step Value Object', () {
+    test('Counter Offer Discount Value Get Expect Delivery Title', () {
+      final notDeliveryYet = OrderStepValue('');
+      final delivered = OrderStepValue('Delivered');
+      expect(
+        notDeliveryYet.deliveryDateTitle,
+        'Expected delivery',
+      );
+      expect(
+        delivered.deliveryDateTitle,
+        'Delivered',
+      );
+    });
+  });
 }

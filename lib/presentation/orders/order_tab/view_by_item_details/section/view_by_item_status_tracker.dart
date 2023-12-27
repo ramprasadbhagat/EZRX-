@@ -31,6 +31,7 @@ class _ViewByItemStatusTracker extends StatelessWidget {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (_) => OrderStatusSection(
         deliveryDate: orderHistoryItem.deliveryDate,
+        deliveryDateTitle: orderHistoryItem.status.deliveryDateTitle,
         steps: orderHistoryItem.status.viewByItemHistorySteps
             .updatedOutOfDeliverySubSteps(subSteps),
       ),

@@ -25,6 +25,8 @@ mixin _$OrderHistoryDetails {
   OrderStepValue get processingStatus => throw _privateConstructorUsedError;
   DateTimeStringValue get requestedDeliveryDate =>
       throw _privateConstructorUsedError;
+  DateTimeStringValue get expectedDeliveryDate =>
+      throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
@@ -71,6 +73,7 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       double totalDiscount,
       OrderStepValue processingStatus,
       DateTimeStringValue requestedDeliveryDate,
+      DateTimeStringValue expectedDeliveryDate,
       String type,
       PhoneNumber telephoneNumber,
       DateTimeStringValue createdDate,
@@ -117,6 +120,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
     Object? totalDiscount = null,
     Object? processingStatus = null,
     Object? requestedDeliveryDate = null,
+    Object? expectedDeliveryDate = null,
     Object? type = null,
     Object? telephoneNumber = null,
     Object? createdDate = null,
@@ -170,6 +174,10 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      expectedDeliveryDate: null == expectedDeliveryDate
+          ? _value.expectedDeliveryDate
+          : expectedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
       type: null == type
           ? _value.type
@@ -284,6 +292,7 @@ abstract class _$$_OrderHistoryDetailsCopyWith<$Res>
       double totalDiscount,
       OrderStepValue processingStatus,
       DateTimeStringValue requestedDeliveryDate,
+      DateTimeStringValue expectedDeliveryDate,
       String type,
       PhoneNumber telephoneNumber,
       DateTimeStringValue createdDate,
@@ -329,6 +338,7 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
     Object? totalDiscount = null,
     Object? processingStatus = null,
     Object? requestedDeliveryDate = null,
+    Object? expectedDeliveryDate = null,
     Object? type = null,
     Object? telephoneNumber = null,
     Object? createdDate = null,
@@ -382,6 +392,10 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      expectedDeliveryDate: null == expectedDeliveryDate
+          ? _value.expectedDeliveryDate
+          : expectedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
       type: null == type
           ? _value.type
@@ -480,6 +494,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
       required this.totalDiscount,
       required this.processingStatus,
       required this.requestedDeliveryDate,
+      required this.expectedDeliveryDate,
       required this.type,
       required this.telephoneNumber,
       required this.createdDate,
@@ -521,6 +536,8 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   final OrderStepValue processingStatus;
   @override
   final DateTimeStringValue requestedDeliveryDate;
+  @override
+  final DateTimeStringValue expectedDeliveryDate;
   @override
   final String type;
   @override
@@ -578,7 +595,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
 
   @override
   String toString() {
-    return 'OrderHistoryDetails(totalTax: $totalTax, orderValue: $orderValue, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, pOReference: $pOReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, itemCount: $itemCount, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments)';
+    return 'OrderHistoryDetails(totalTax: $totalTax, orderValue: $orderValue, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, expectedDeliveryDate: $expectedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, pOReference: $pOReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, itemCount: $itemCount, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments)';
   }
 
   @override
@@ -602,6 +619,8 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
                 other.processingStatus == processingStatus) &&
             (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
+            (identical(other.expectedDeliveryDate, expectedDeliveryDate) ||
+                other.expectedDeliveryDate == expectedDeliveryDate) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.telephoneNumber, telephoneNumber) ||
                 other.telephoneNumber == telephoneNumber) &&
@@ -657,6 +676,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
         totalDiscount,
         processingStatus,
         requestedDeliveryDate,
+        expectedDeliveryDate,
         type,
         telephoneNumber,
         createdDate,
@@ -697,6 +717,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
       required final double totalDiscount,
       required final OrderStepValue processingStatus,
       required final DateTimeStringValue requestedDeliveryDate,
+      required final DateTimeStringValue expectedDeliveryDate,
       required final String type,
       required final PhoneNumber telephoneNumber,
       required final DateTimeStringValue createdDate,
@@ -738,6 +759,8 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   OrderStepValue get processingStatus;
   @override
   DateTimeStringValue get requestedDeliveryDate;
+  @override
+  DateTimeStringValue get expectedDeliveryDate;
   @override
   String get type;
   @override
