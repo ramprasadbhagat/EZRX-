@@ -324,13 +324,6 @@ class CartState with _$CartState {
       totalMaterialsPriceWithTax +
       totalComboPriceWithTax;
 
-  int get totalItems => cartProducts.fold(
-        0,
-        (previousValue, element) => !element.materialInfo.type.typeBundle
-            ? previousValue + 1
-            : previousValue + element.bundle.materials.length,
-      );
-
   //This getter is used for displaying grandTotal value in
   //cart, checkout page and for Order Submission
   double get grandTotalHidePriceMaterial => _isID
@@ -534,4 +527,42 @@ class CartState with _$CartState {
             orElse: () => PriceAggregate.empty(),
           )
           .bonusSampleItems;
+
+  // The [_getTotalCount] helps to extract the count of the materials present
+  // inside the cart based on material type
+  int _getTotalCount(
+    bool Function(PriceAggregate) typeCheck,
+    int Function(PriceAggregate) countExtractor,
+  ) {
+    return cartProducts.where(typeCheck).fold(
+          0,
+          (previousValue, product) => previousValue + countExtractor(product),
+        );
+  }
+
+  int get totalMaterialsCount => _getTotalCount(
+        (product) => product.materialInfo.type.typeMaterial,
+        (product) => 1,
+      );
+
+  int get totalBundleItemsCount => _getTotalCount(
+        (product) => product.materialInfo.type.typeBundle,
+        (product) => product.bundle.materials.length,
+      );
+
+  int get totalComboCount => _getTotalCount(
+        (product) => product.materialInfo.type.typeCombo,
+        (product) => product.comboMaterials.length,
+      );
+
+  int get totalBonusCount => _getTotalCount(
+        (product) => product.materialInfo.type.typeMaterial,
+        (product) => product.bonusSampleItems.length,
+      );
+
+  int get totalCartCount =>
+      totalMaterialsCount +
+      totalBonusCount +
+      totalBundleItemsCount +
+      totalComboCount;
 }

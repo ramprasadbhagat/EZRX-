@@ -243,7 +243,7 @@ class _CartPageState extends State<CartPage> {
               key: WidgetKeys.cartPage,
               appBar: CustomAppBar.commonAppBar(
                 title: Text(
-                  '${'Cart'.tr()} (${state.cartProducts.length})',
+                  '${context.tr('Cart')} (${state.totalCartCount})',
                   key: WidgetKeys.cartPageAppBarTitle,
                   style: Theme.of(context).textTheme.labelLarge,
                 ),

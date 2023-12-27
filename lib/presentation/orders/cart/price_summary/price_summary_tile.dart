@@ -31,7 +31,7 @@ class PriceSummaryTile extends StatelessWidget {
       visualDensity: VisualDensity.compact,
       contentPadding: const EdgeInsets.symmetric(horizontal: 12),
       title: Text(
-        '${cartState.totalItems} ${context.tr('items')}',
+        '${cartState.totalCartCount} ${context.tr('items')}',
         key: WidgetKeys.checkoutStickyTotalQty,
         style: Theme.of(context).textTheme.titleSmall,
       ),

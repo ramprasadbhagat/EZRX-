@@ -392,10 +392,12 @@ void main() {
             BonusSampleItem.empty().copyWith(
               materialNumber: MaterialNumber('0000000000111111'),
               materialDescription: ' Mosys D',
+              qty: MaterialQty(1),
             ),
           ],
           quantity: 1,
           materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
             materialNumber: MaterialNumber('000000000023168451'),
             materialDescription: ' Triglyceride Mosys D',
             principalData: PrincipalData.empty().copyWith(
@@ -2967,6 +2969,23 @@ void main() {
           );
         },
         variant: salesOrgVariant,
+      );
+
+      testWidgets(
+        ' -> Find Cart Count With Bonus Included',
+        (WidgetTester tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: mockCartItemWithDataList,
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final cartCountFinder = find.text('Cart (2)');
+
+          expect(cartCountFinder, findsOneWidget);
+        },
       );
     },
   );

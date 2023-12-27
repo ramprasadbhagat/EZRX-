@@ -636,7 +636,17 @@ void main() {
           EligibilityState.initial().copyWith(user: fakeClientUser),
         );
         when(() => cartBlocMock.state).thenReturn(
-          CartState.initial().copyWith(cartProducts: mockCartItems),
+          CartState.initial().copyWith(
+            cartProducts: mockCartItems
+                .map(
+                  (e) => e.copyWith(
+                    materialInfo: e.materialInfo.copyWith(
+                      type: MaterialInfoType('material'),
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
         );
         whenListen(
           cartBlocMock,

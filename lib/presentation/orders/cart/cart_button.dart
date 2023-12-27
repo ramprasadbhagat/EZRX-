@@ -38,11 +38,11 @@ class CartButton extends StatelessWidget {
         ? const SizedBox.shrink()
         : BlocBuilder<CartBloc, CartState>(
             buildWhen: (previous, current) =>
-                previous.cartProducts.length != current.cartProducts.length,
+                previous.totalCartCount != current.totalCartCount,
             builder: (context, state) {
               return bd.Badge(
                 badgeContent: Text(
-                  state.cartProducts.length.toString(),
+                  state.totalCartCount.toString(),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: ZPColors.white,
                       ),

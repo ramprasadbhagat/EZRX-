@@ -3509,7 +3509,7 @@ void main() {
             cartProducts: priceAggregates,
           );
           expect(
-            cartBlocState.totalItems,
+            cartBlocState.totalCartCount,
             12,
           );
         },
@@ -3564,6 +3564,36 @@ void main() {
           expect(
             cartBlocState.isCartDetailsFetching,
             true,
+          );
+        },
+      );
+
+      test(
+        'Testing CartBloc state totalBonusCount => 1',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
+            ],
+          );
+          expect(
+            cartBlocState.totalBonusCount,
+            1,
+          );
+        },
+      );
+
+      test(
+        'Testing CartBloc state totalCartCount => 2',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
+            ],
+          );
+          expect(
+            cartBlocState.totalCartCount,
+            2,
           );
         },
       );

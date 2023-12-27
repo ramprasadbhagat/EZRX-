@@ -87,7 +87,7 @@ class ComboDetailPage extends StatelessWidget {
               onPressed: () async {
                 final confirmed = await _showConfirmBottomSheet(context);
                 if (confirmed ?? false) {
-                  if (context.mounted) await context.router.pop();
+                  if (context.mounted) context.router.navigateBack();
                 }
               },
             ),
