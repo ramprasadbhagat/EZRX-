@@ -13,7 +13,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
@@ -241,22 +241,21 @@ class _CartPageState extends State<CartPage> {
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: Scaffold(
               key: WidgetKeys.cartPage,
-              appBar: AppBar(
+              appBar: CustomAppBar.commonAppBar(
                 title: Text(
                   '${'Cart'.tr()} (${state.cartProducts.length})',
                   key: WidgetKeys.cartPageAppBarTitle,
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                centerTitle: false,
                 titleSpacing: 0,
-                leading: IconButton(
+                leadingWidget: IconButton(
                   key: WidgetKeys.closeButton,
                   icon: const Icon(
                     Icons.close,
                   ),
                   onPressed: () => context.router.navigateBack(),
                 ),
-                actions: state.cartProducts.isNotEmpty
+                actionWidget: state.cartProducts.isNotEmpty
                     ? [
                         state.isClearing
                             ? Align(
@@ -284,7 +283,12 @@ class _CartPageState extends State<CartPage> {
                                 },
                               ),
                       ]
-                    : null,
+                    : [],
+                customerBlocked: context
+                    .read<EligibilityBloc>()
+                    .state
+                    .shipToInfo
+                    .customerBlock,
               ),
               body: Column(
                 children: [
@@ -292,7 +296,6 @@ class _CartPageState extends State<CartPage> {
                     currentPath: context.router.currentPath,
                   ),
                   const AccountSuspendedBanner(),
-                  const CustomerBlockedBanner(),
                   if (!state.priceUnderLoadingShimmer)
                     const _CartPageInvalidItemsBanner(),
                   const _CartPageCartScrollList(),

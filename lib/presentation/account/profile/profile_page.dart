@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -31,9 +32,10 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: WidgetKeys.profilePage,
-      appBar: AppBar(
+      appBar: CustomAppBar.commonAppBar(
         title: Text(context.tr('Profile')),
-        centerTitle: false,
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 12, right: 12, top: 12),

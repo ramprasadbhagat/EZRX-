@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -90,9 +91,10 @@ class NotificationSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomAppBar.commonAppBar(
         title: Text(context.tr('Notifications')),
-        centerTitle: false,
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
       ),
       body: BlocConsumer<NotificationSettingsBloc, NotificationSettingsState>(
         listenWhen: (previous, current) =>

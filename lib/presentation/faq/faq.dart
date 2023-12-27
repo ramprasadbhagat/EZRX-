@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/faq/entity/faq_item.dart';
 import 'package:ezrxmobile/domain/faq/value/value_object.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/faq/faq_info.dart';
@@ -27,13 +28,12 @@ class FAQPage extends StatelessWidget {
           ),
         ),
       child: Scaffold(
-        appBar: AppBar(
+        appBar: CustomAppBar.commonAppBar(
           title: Text(
             context.tr('FAQ'),
             style: Theme.of(context).textTheme.labelLarge,
           ),
-          centerTitle: false,
-          leading: IconButton(
+          leadingWidget: IconButton(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(
               Icons.chevron_left,
@@ -41,6 +41,8 @@ class FAQPage extends StatelessWidget {
               size: 30,
             ),
           ),
+          customerBlocked:
+              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
         ),
         body: BlocBuilder<FaqBloc, FaqState>(
           buildWhen: (previous, current) =>

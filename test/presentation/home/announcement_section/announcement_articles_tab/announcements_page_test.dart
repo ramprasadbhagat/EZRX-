@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
@@ -32,6 +33,9 @@ class ArticlesInfoBlocMock
     extends MockBloc<ArticlesInfoEvent, ArticlesInfoState>
     implements ArticlesInfoBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class ConfigMock extends Mock implements Config {}
 
 void main() {
@@ -41,6 +45,7 @@ void main() {
   late ArticlesInfoBloc articlesInfoBloc;
   late AuthBloc authBloc;
   late Config configMock;
+  late EligibilityBloc eligibilityBlocMock;
   const fakeKeyWord = 'fake-keyword';
 
   setUpAll(() {
@@ -52,11 +57,14 @@ void main() {
     announcementBloc = AnnouncementBlocMock();
     articlesInfoBloc = ArticlesInfoBlocMock();
     authBloc = AuthBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     when(() => announcementInfoBloc.state)
         .thenReturn(AnnouncementInfoState.initial());
     when(() => announcementBloc.state).thenReturn(AnnouncementState.initial());
     when(() => authBloc.state).thenReturn(const AuthState.initial());
     when(() => articlesInfoBloc.state).thenReturn(ArticlesInfoState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
   Future setUpWidgetArticleTab(WidgetTester tester) async {
@@ -81,6 +89,9 @@ void main() {
         ),
         BlocProvider<ArticlesInfoBloc>(
           create: (context) => articlesInfoBloc,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
         ),
       ],
       child: const AnnouncementsPage(),

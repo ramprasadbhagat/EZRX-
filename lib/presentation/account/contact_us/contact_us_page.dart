@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
@@ -50,9 +51,10 @@ class ContactUsPage extends StatelessWidget {
         ),
       ],
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Contact us').tr(),
-          centerTitle: false,
+        appBar: CustomAppBar.commonAppBar(
+          title: Text(context.tr('Contact us')),
+          customerBlocked:
+              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
         ),
         body: AnnouncementBanner(
           currentPath: context.router.currentPath,

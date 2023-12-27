@@ -9,8 +9,8 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
@@ -34,81 +34,90 @@ class ProductsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: WidgetKeys.materialListPage,
-      appBar: AppBar(
-        title: const CustomerCodeSelector(
-          key: WidgetKeys.customerCodeSelector,
-        ),
-        backgroundColor: ZPColors.primary,
-        automaticallyImplyLeading: false,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 16, 8),
-            child: CartButton(),
-          ),
-        ],
-      ),
-      body: BlocBuilder<MaterialListBloc, MaterialListState>(
-        buildWhen: (previous, current) =>
-            previous.materialList != current.materialList ||
-            previous.isFetching != current.isFetching,
-        builder: (context, state) {
-          final isFavourite = context
-              .read<MaterialFilterBloc>()
-              .state
-              .materialFilter
-              .isFavourite;
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const CustomerBlockedBanner(),
-              const SearchAndFilter(),
-              FilterValueList(
-                isFetching: state.isFetching,
-              ),
-              Expanded(
-                child: state.isFetching && state.materialList.isEmpty
-                    ? LoadingShimmer.logo(
-                        key: WidgetKeys.loaderImage,
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: ScrollableGridView<MaterialInfo>(
-                          noRecordFoundWidget: NoRecordFound.productTab(
-                            context,
-                            isFavourite: isFavourite,
-                          ),
-                          header: const _TotalMaterialCount(),
-                          isLoading: state.isFetching,
-                          items: state.materialList,
-                          onRefresh: () => _onRefresh(context),
-                          onLoadingMore: () => _onLoadingMore(context),
-                          mainAxisSpacing: 0,
-                          crossAxisSpacing: 0,
-                          itemBuilder: (
-                            BuildContext context,
-                            int index,
-                            MaterialInfo item,
-                          ) =>
-                              item.type.typeMaterial
-                                  ? MaterialGridItem(
-                                      materialInfo: item,
-                                      onTap: () => _productOnTap(context, item),
-                                      onFavouriteTap: () =>
-                                          onFavouriteTap(context, item),
-                                    )
-                                  : _BundleGridItem(
-                                      materialInfo: item,
-                                    ),
-                        ),
-                      ),
+    return BlocBuilder<EligibilityBloc, EligibilityState>(
+      buildWhen: (previous, current) =>
+          previous.shipToInfo.customerBlock != current.shipToInfo.customerBlock,
+      builder: (context, state) {
+        return Scaffold(
+          key: WidgetKeys.materialListPage,
+          appBar: CustomAppBar.commonAppBar(
+            title: const CustomerCodeSelector(
+              key: WidgetKeys.customerCodeSelector,
+            ),
+            backGroundColor: ZPColors.primary,
+            automaticallyImplyLeading: false,
+            titleSpacing: 0,
+            actionWidget: const [
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 16, 8),
+                child: CartButton(),
               ),
             ],
-          );
-        },
-      ),
+            customerBlocked: state.shipToInfo.customerBlock,
+          ),
+          body: BlocBuilder<MaterialListBloc, MaterialListState>(
+            buildWhen: (previous, current) =>
+                previous.materialList != current.materialList ||
+                previous.isFetching != current.isFetching,
+            builder: (context, state) {
+              final isFavourite = context
+                  .read<MaterialFilterBloc>()
+                  .state
+                  .materialFilter
+                  .isFavourite;
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SearchAndFilter(),
+                  FilterValueList(
+                    isFetching: state.isFetching,
+                  ),
+                  Expanded(
+                    child: state.isFetching && state.materialList.isEmpty
+                        ? LoadingShimmer.logo(
+                            key: WidgetKeys.loaderImage,
+                          )
+                        : Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: ScrollableGridView<MaterialInfo>(
+                              noRecordFoundWidget: NoRecordFound.productTab(
+                                context,
+                                isFavourite: isFavourite,
+                              ),
+                              header: const _TotalMaterialCount(),
+                              isLoading: state.isFetching,
+                              items: state.materialList,
+                              onRefresh: () => _onRefresh(context),
+                              onLoadingMore: () => _onLoadingMore(context),
+                              mainAxisSpacing: 0,
+                              crossAxisSpacing: 0,
+                              itemBuilder: (
+                                BuildContext context,
+                                int index,
+                                MaterialInfo item,
+                              ) =>
+                                  item.type.typeMaterial
+                                      ? MaterialGridItem(
+                                          materialInfo: item,
+                                          onTap: () =>
+                                              _productOnTap(context, item),
+                                          onFavouriteTap: () =>
+                                              onFavouriteTap(context, item),
+                                        )
+                                      : _BundleGridItem(
+                                          materialInfo: item,
+                                        ),
+                            ),
+                          ),
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      },
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
@@ -9,11 +10,11 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
-import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -30,75 +31,84 @@ class OrdersTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        key: WidgetKeys.ordersTab,
-        backgroundColor: ZPColors.primary,
-        title: Text(
-          context.tr('Orders'),
-          style: Theme.of(context)
-              .textTheme
-              .labelLarge
-              ?.copyWith(color: ZPColors.white),
-        ),
-        automaticallyImplyLeading: false,
-        centerTitle: false,
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
-          child: CustomerCodeSelector(
-            key: WidgetKeys.customerCodeSelector,
-          ),
-        ),
-      ),
-      body: Column(
-        children: [
-          AnnouncementWidget(
-            currentPath: context.router.currentPath,
-          ),
-          const CustomerBlockedBanner(),
-          Expanded(
-            child: AutoTabsRouter.tabBar(
-              routes: const [
-                ViewByItemsPageRoute(),
-                ViewByOrdersPageRoute(),
+    return BlocBuilder<EligibilityBloc, EligibilityState>(
+      buildWhen: (previous, current) =>
+          previous.shipToInfo.customerBlock != current.shipToInfo.customerBlock,
+      builder: (context, state) {
+        return Scaffold(
+          appBar: CustomAppBar.ordersTabAppBar(
+            key: WidgetKeys.ordersTab,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 13),
+                  child: Text(
+                    context.tr('Orders'),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelLarge
+                        ?.copyWith(color: ZPColors.white),
+                  ),
+                ),
+                const CustomerCodeSelector(
+                  key: WidgetKeys.customerCodeSelector,
+                ),
               ],
-              builder: (context, child, tabController) => Column(
-                children: [
-                  TabBar(
-                    controller: tabController,
-                    tabs: ['View by items', 'View by orders']
-                        .map(
-                          (e) => Tab(
-                            key: Key(e.toLowerCase()),
-                            text: context.tr(e),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-                    child: Row(
-                      children: [
-                        _OrdersTabSearchBar(
-                          key: WidgetKeys.ordersTabSearchBarKey,
-                          isFromViewByOrder: context.tabsRouter.current.name ==
-                              ViewByOrdersPageRoute.name,
-                        ),
-                        _OrdersTabFilter(
-                          key: WidgetKeys.ordersTabFilterButtonKey,
-                          viewByItem: context.tabsRouter.current.name ==
-                              ViewByItemsPageRoute.name,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(child: child),
-                ],
-              ),
             ),
+            customerBlocked: state.shipToInfo.customerBlock,
           ),
-        ],
-      ),
+          body: Column(
+            children: [
+              AnnouncementWidget(
+                currentPath: context.router.currentPath,
+              ),
+              Expanded(
+                child: AutoTabsRouter.tabBar(
+                  routes: const [
+                    ViewByItemsPageRoute(),
+                    ViewByOrdersPageRoute(),
+                  ],
+                  builder: (context, child, tabController) => Column(
+                    children: [
+                      TabBar(
+                        controller: tabController,
+                        tabs: ['View by items', 'View by orders']
+                            .map(
+                              (e) => Tab(
+                                key: Key(e.toLowerCase()),
+                                text: context.tr(e),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+                        child: Row(
+                          children: [
+                            _OrdersTabSearchBar(
+                              key: WidgetKeys.ordersTabSearchBarKey,
+                              isFromViewByOrder:
+                                  context.tabsRouter.current.name ==
+                                      ViewByOrdersPageRoute.name,
+                            ),
+                            _OrdersTabFilter(
+                              key: WidgetKeys.ordersTabFilterButtonKey,
+                              viewByItem: context.tabsRouter.current.name ==
+                                  ViewByItemsPageRoute.name,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(child: child),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

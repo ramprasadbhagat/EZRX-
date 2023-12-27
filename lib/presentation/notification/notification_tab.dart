@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification_data.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -31,13 +32,11 @@ class NotificationTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomAppBar.commonAppBar(
         title: Text(context.tr('Notifications')),
         automaticallyImplyLeading: false,
-        centerTitle: false,
-        elevation: 8,
-        backgroundColor: ZPColors.white,
-        actions: [
+        titleSpacing: 20,
+        actionWidget: [
           IconButton(
             key: WidgetKeys.notificationDeleteButton,
             onPressed: () {
@@ -51,6 +50,8 @@ class NotificationTab extends StatelessWidget {
             ),
           ),
         ],
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
       ),
       body: BlocConsumer<NotificationBloc, NotificationState>(
         listenWhen: (previous, current) =>

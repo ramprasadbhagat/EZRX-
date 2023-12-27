@@ -1,8 +1,8 @@
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
-import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_status_section.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -38,9 +38,10 @@ class ViewByOrderDetailsPage extends StatelessWidget {
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
+          appBar: CustomAppBar.commonAppBar(
             title: Text(context.tr('Order Details')),
-            centerTitle: false,
+            customerBlocked:
+                context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
           ),
           body: AnnouncementBanner(
             currentPath: context.router.currentPath,
@@ -51,7 +52,6 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                 : ListView(
                     key: WidgetKeys.viewByOrderDetailsPageListView,
                     children: <Widget>[
-                      const CustomerBlockedBanner(),
                       const OrderHeaderSection(),
                       if (eligibilityState.salesOrg.isID)
                         _ViewByOrderStatusTracker(

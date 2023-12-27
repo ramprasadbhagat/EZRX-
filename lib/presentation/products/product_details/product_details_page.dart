@@ -17,7 +17,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
@@ -95,11 +95,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
+      appBar: CustomAppBar.commonAppBar(
         automaticallyImplyLeading: false,
-        backgroundColor:
+        backGroundColor:
             _isScrollAtInitialPosition ? Colors.transparent : ZPColors.white,
-        leading: IconButton(
+        leadingWidget: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: CircleAvatar(
             maxRadius: 16,
@@ -114,7 +114,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
           ),
         ),
-        actions: [
+        actionWidget: [
           Padding(
             key: WidgetKeys.materialDetailsPageCartIcon,
             padding: const EdgeInsets.all(10),
@@ -129,6 +129,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
           ),
         ],
+        customerBlocked:
+            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
       ),
       floatingActionButton: !_isScrollAtInitialPosition
           ? FloatingActionButton(
@@ -146,7 +148,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         key: WidgetKeys.productDetailList,
         controller: _scrollController,
         children: [
-          const CustomerBlockedBanner(),
           const _ProductImageSection(),
           const _BodyContent(),
           _SimilarProducts(),

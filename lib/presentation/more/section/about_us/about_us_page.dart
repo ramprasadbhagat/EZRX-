@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:auto_route/auto_route.dart';
@@ -71,11 +72,12 @@ class _AboutUsPageState extends State<AboutUsPage> {
           ),
         ),
       child: Scaffold(
-        appBar: AppBar(
+        appBar: CustomAppBar.commonAppBar(
           title: Text(
             context.tr('About Us'),
           ),
-          centerTitle: false,
+          customerBlocked:
+              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
         ),
         body: BlocConsumer<AboutUsBloc, AboutUsState>(
           listenWhen: (previous, current) =>

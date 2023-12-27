@@ -15,9 +15,9 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_details_header_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/item_details_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_other_item_details_section.dart';
@@ -52,9 +52,10 @@ class ViewByItemDetailsPage extends StatelessWidget {
           ),
         ),
       child: Scaffold(
-        appBar: AppBar(
+        appBar: CustomAppBar.commonAppBar(
           title: Text(context.tr('Item Details')),
-          centerTitle: false,
+          customerBlocked:
+              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
         ),
         bottomNavigationBar:
             context.read<EligibilityBloc>().state.user.role.type.isSalesRepRole
@@ -86,7 +87,6 @@ class ViewByItemDetailsPage extends StatelessWidget {
                     child: ListView(
                       key: WidgetKeys.viewByItemsOrderDetailPage,
                       children: <Widget>[
-                        const CustomerBlockedBanner(),
                         ViewByItemDetailsHeaderSection(
                           orderHistoryItem: state.orderHistoryItem,
                         ),
