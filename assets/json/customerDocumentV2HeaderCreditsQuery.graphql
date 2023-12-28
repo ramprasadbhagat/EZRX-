@@ -66,9 +66,10 @@ variables : {
   "input": {
     "customerCode": "0030082707",
     "salesOrg": "2001",
-    "first": 10,
+    "first": 24,
     "after": 0,
-    "excelFor": "Debit",
+    "excelFor": "Credit",
+    "allCreditItems": true,
     "orderBy": [
       {
         "order": "desc",
@@ -78,7 +79,7 @@ variables : {
     "filterBy": [
       {
         "field": "accountingDocumentType",
-        "value": "Invoice"
+        "value": "Credit Memo"
       }
     ]
   }

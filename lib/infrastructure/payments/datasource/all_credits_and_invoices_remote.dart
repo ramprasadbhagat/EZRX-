@@ -45,6 +45,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
               'first': pageSize,
               'after': offset,
               'excelFor': 'Debit',
+              'allDebitItems': true,
               'orderBy': [
                 {
                   'order': sortDirection,
@@ -91,6 +92,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
               'first': pageSize,
               'after': offset,
               'excelFor': 'Credit',
+              'allCreditItems': true,
               'orderBy': [
                 {
                   'order': sortDirection,
