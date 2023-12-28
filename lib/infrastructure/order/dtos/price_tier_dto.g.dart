@@ -28,8 +28,8 @@ _$_PriceTierItemDto _$$_PriceTierItemDtoFromJson(Map<String, dynamic> json) =>
       sequence: json['sequence'] as int? ?? 0,
       quantity: json['quantity'] as int? ?? 0,
       rate: (json['rate'] as num?)?.toDouble() ?? 0,
-      percentage: json['percentage'] as int? ?? 0,
-      minAmount: json['minAmount'] as int? ?? 0,
+      percentage: (json['percentage'] as num?)?.toDouble() ?? 0,
+      minAmount: (json['minAmount'] as num?)?.toDouble() ?? 0,
       scaleBasis: json['scaleBasis'] as String? ?? '',
     );
 

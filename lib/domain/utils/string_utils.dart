@@ -89,7 +89,7 @@ class StringUtils {
     double price,
   ) =>
       salesOrgConfig.salesOrg.isID
-          ? displayNumberWithDecimal(price)
+          ? displayNumberWithDecimal(price.roundToDouble())
           : displayNumber(price);
 
   static String displayNumberWithDecimal(

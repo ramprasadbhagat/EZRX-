@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_tier_dto.freezed.dart';
-
 part 'price_tier_dto.g.dart';
 
 @freezed
@@ -48,8 +47,8 @@ class PriceTierItemDto with _$PriceTierItemDto {
     @JsonKey(name: 'sequence', defaultValue: 0) required int sequence,
     @JsonKey(name: 'quantity', defaultValue: 0) required int quantity,
     @JsonKey(name: 'rate', defaultValue: 0) required double rate,
-    @JsonKey(name: 'percentage', defaultValue: 0) required int percentage,
-    @JsonKey(name: 'minAmount', defaultValue: 0) required int minAmount,
+    @JsonKey(name: 'percentage', defaultValue: 0) required double percentage,
+    @JsonKey(name: 'minAmount', defaultValue: 0) required double minAmount,
     @JsonKey(name: 'scaleBasis', defaultValue: '') required String scaleBasis,
   }) = _PriceTierItemDto;
 

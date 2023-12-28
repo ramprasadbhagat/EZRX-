@@ -210,9 +210,9 @@ mixin _$PriceTierItemDto {
   @JsonKey(name: 'rate', defaultValue: 0)
   double get rate => throw _privateConstructorUsedError;
   @JsonKey(name: 'percentage', defaultValue: 0)
-  int get percentage => throw _privateConstructorUsedError;
+  double get percentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'minAmount', defaultValue: 0)
-  int get minAmount => throw _privateConstructorUsedError;
+  double get minAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'scaleBasis', defaultValue: '')
   String get scaleBasis => throw _privateConstructorUsedError;
 
@@ -234,8 +234,8 @@ abstract class $PriceTierItemDtoCopyWith<$Res> {
       @JsonKey(name: 'sequence', defaultValue: 0) int sequence,
       @JsonKey(name: 'quantity', defaultValue: 0) int quantity,
       @JsonKey(name: 'rate', defaultValue: 0) double rate,
-      @JsonKey(name: 'percentage', defaultValue: 0) int percentage,
-      @JsonKey(name: 'minAmount', defaultValue: 0) int minAmount,
+      @JsonKey(name: 'percentage', defaultValue: 0) double percentage,
+      @JsonKey(name: 'minAmount', defaultValue: 0) double minAmount,
       @JsonKey(name: 'scaleBasis', defaultValue: '') String scaleBasis});
 }
 
@@ -285,11 +285,11 @@ class _$PriceTierItemDtoCopyWithImpl<$Res, $Val extends PriceTierItemDto>
       percentage: null == percentage
           ? _value.percentage
           : percentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       minAmount: null == minAmount
           ? _value.minAmount
           : minAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       scaleBasis: null == scaleBasis
           ? _value.scaleBasis
           : scaleBasis // ignore: cast_nullable_to_non_nullable
@@ -312,8 +312,8 @@ abstract class _$$_PriceTierItemDtoCopyWith<$Res>
       @JsonKey(name: 'sequence', defaultValue: 0) int sequence,
       @JsonKey(name: 'quantity', defaultValue: 0) int quantity,
       @JsonKey(name: 'rate', defaultValue: 0) double rate,
-      @JsonKey(name: 'percentage', defaultValue: 0) int percentage,
-      @JsonKey(name: 'minAmount', defaultValue: 0) int minAmount,
+      @JsonKey(name: 'percentage', defaultValue: 0) double percentage,
+      @JsonKey(name: 'minAmount', defaultValue: 0) double minAmount,
       @JsonKey(name: 'scaleBasis', defaultValue: '') String scaleBasis});
 }
 
@@ -361,11 +361,11 @@ class __$$_PriceTierItemDtoCopyWithImpl<$Res>
       percentage: null == percentage
           ? _value.percentage
           : percentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       minAmount: null == minAmount
           ? _value.minAmount
           : minAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       scaleBasis: null == scaleBasis
           ? _value.scaleBasis
           : scaleBasis // ignore: cast_nullable_to_non_nullable
@@ -409,10 +409,10 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
   final double rate;
   @override
   @JsonKey(name: 'percentage', defaultValue: 0)
-  final int percentage;
+  final double percentage;
   @override
   @JsonKey(name: 'minAmount', defaultValue: 0)
-  final int minAmount;
+  final double minAmount;
   @override
   @JsonKey(name: 'scaleBasis', defaultValue: '')
   final String scaleBasis;
@@ -471,8 +471,9 @@ abstract class _PriceTierItemDto extends PriceTierItemDto {
       @JsonKey(name: 'quantity', defaultValue: 0) required final int quantity,
       @JsonKey(name: 'rate', defaultValue: 0) required final double rate,
       @JsonKey(name: 'percentage', defaultValue: 0)
-      required final int percentage,
-      @JsonKey(name: 'minAmount', defaultValue: 0) required final int minAmount,
+      required final double percentage,
+      @JsonKey(name: 'minAmount', defaultValue: 0)
+      required final double minAmount,
       @JsonKey(name: 'scaleBasis', defaultValue: '')
       required final String scaleBasis}) = _$_PriceTierItemDto;
   const _PriceTierItemDto._() : super._();
@@ -497,10 +498,10 @@ abstract class _PriceTierItemDto extends PriceTierItemDto {
   double get rate;
   @override
   @JsonKey(name: 'percentage', defaultValue: 0)
-  int get percentage;
+  double get percentage;
   @override
   @JsonKey(name: 'minAmount', defaultValue: 0)
-  int get minAmount;
+  double get minAmount;
   @override
   @JsonKey(name: 'scaleBasis', defaultValue: '')
   String get scaleBasis;

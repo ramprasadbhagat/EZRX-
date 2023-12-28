@@ -164,8 +164,8 @@ mixin _$PriceTierItem {
   int get sequence => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   double get rate => throw _privateConstructorUsedError;
-  int get percentage => throw _privateConstructorUsedError;
-  int get minAmount => throw _privateConstructorUsedError;
+  double get percentage => throw _privateConstructorUsedError;
+  double get minAmount => throw _privateConstructorUsedError;
   ScaleBasis get scaleBasis => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -185,8 +185,8 @@ abstract class $PriceTierItemCopyWith<$Res> {
       int sequence,
       int quantity,
       double rate,
-      int percentage,
-      int minAmount,
+      double percentage,
+      double minAmount,
       ScaleBasis scaleBasis});
 }
 
@@ -236,11 +236,11 @@ class _$PriceTierItemCopyWithImpl<$Res, $Val extends PriceTierItem>
       percentage: null == percentage
           ? _value.percentage
           : percentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       minAmount: null == minAmount
           ? _value.minAmount
           : minAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       scaleBasis: null == scaleBasis
           ? _value.scaleBasis
           : scaleBasis // ignore: cast_nullable_to_non_nullable
@@ -263,8 +263,8 @@ abstract class _$$_PriceTierItemCopyWith<$Res>
       int sequence,
       int quantity,
       double rate,
-      int percentage,
-      int minAmount,
+      double percentage,
+      double minAmount,
       ScaleBasis scaleBasis});
 }
 
@@ -312,11 +312,11 @@ class __$$_PriceTierItemCopyWithImpl<$Res>
       percentage: null == percentage
           ? _value.percentage
           : percentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       minAmount: null == minAmount
           ? _value.minAmount
           : minAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       scaleBasis: null == scaleBasis
           ? _value.scaleBasis
           : scaleBasis // ignore: cast_nullable_to_non_nullable
@@ -350,9 +350,9 @@ class _$_PriceTierItem extends _PriceTierItem {
   @override
   final double rate;
   @override
-  final int percentage;
+  final double percentage;
   @override
-  final int minAmount;
+  final double minAmount;
   @override
   final ScaleBasis scaleBasis;
 
@@ -400,8 +400,8 @@ abstract class _PriceTierItem extends PriceTierItem {
       required final int sequence,
       required final int quantity,
       required final double rate,
-      required final int percentage,
-      required final int minAmount,
+      required final double percentage,
+      required final double minAmount,
       required final ScaleBasis scaleBasis}) = _$_PriceTierItem;
   const _PriceTierItem._() : super._();
 
@@ -416,9 +416,9 @@ abstract class _PriceTierItem extends PriceTierItem {
   @override
   double get rate;
   @override
-  int get percentage;
+  double get percentage;
   @override
-  int get minAmount;
+  double get minAmount;
   @override
   ScaleBasis get scaleBasis;
   @override

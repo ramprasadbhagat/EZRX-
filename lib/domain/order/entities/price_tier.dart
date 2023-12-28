@@ -37,8 +37,8 @@ class PriceTierItem with _$PriceTierItem {
     required int sequence,
     required int quantity,
     required double rate,
-    required int percentage,
-    required int minAmount,
+    required double percentage,
+    required double minAmount,
     required ScaleBasis scaleBasis,
   }) = _PriceTierItem;
 
