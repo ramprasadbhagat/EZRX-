@@ -52,6 +52,7 @@ import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_s
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
@@ -71,9 +72,12 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -310,6 +314,10 @@ class ArticlesInfoBlocMock
 class FullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
     implements FullSummaryBloc {}
 
+class ProductImageBlocMock
+    extends MockBloc<ProductImageEvent, ProductImageState>
+    implements ProductImageBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -338,7 +346,7 @@ void main() {
   late MaterialFilterBloc materialFilterBlocMock;
   late ProductDetailBloc productDetailBloc;
   late LoginFormBloc loginFormBloc;
-
+  late ProductImageBloc productImageBloc;
   late OrderDocumentTypeBloc orderDocumentTypeMock;
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBlocMock returnApproverFilterBlocMock;
@@ -485,6 +493,7 @@ void main() {
       paymentSummaryFilterBlocMock = PaymentSummaryFilterBlocMock();
       reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
       articlesInfoBlocMock = ArticlesInfoBlocMock();
+      productImageBloc = ProductImageBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => fullSummaryBlocMock.state)
           .thenReturn(FullSummaryState.initial());
@@ -594,6 +603,8 @@ void main() {
           .thenReturn(ReOrderPermissionState.initial());
       when(() => articlesInfoBlocMock.state)
           .thenReturn(ArticlesInfoState.initial());
+      when(() => productImageBloc.state)
+          .thenReturn(ProductImageState.initial());
     });
 
     Future getWidget(tester) async {
@@ -771,6 +782,9 @@ void main() {
               ),
               BlocProvider<ArticlesInfoBloc>(
                 create: (context) => articlesInfoBlocMock,
+              ),
+              BlocProvider<ProductImageBloc>(
+                create: (context) => productImageBloc,
               ),
             ],
             child: const SplashPage(),
@@ -1205,6 +1219,84 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets('fetch product details image', (tester) async {
+      final material = MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('fake-material'),
+      );
+      final expectedUserListStates = [
+        ProductDetailState.initial().copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: material,
+          ),
+          failureOrSuccessOption: optionOf(const Right(unit)),
+        ),
+      ];
+
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser,
+        ),
+      );
+
+      whenListen(
+        productDetailBloc,
+        Stream.fromIterable(expectedUserListStates),
+      );
+
+      await getWidget(tester);
+      verify(
+        () => productImageBloc.add(
+          ProductImageEvent.fetch(
+            list: [material],
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('fetch bundle details image', (tester) async {
+      final materials = [
+        MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-material-1'),
+        ),
+        MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-material-2'),
+        )
+      ];
+      final expectedUserListStates = [
+        ProductDetailState.initial().copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              type: MaterialInfoType.bundle(),
+              bundle: Bundle.empty().copyWith(
+                materials: materials,
+              ),
+            ),
+          ),
+          failureOrSuccessOption: optionOf(const Right(unit)),
+        ),
+      ];
+
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser,
+        ),
+      );
+
+      whenListen(
+        productDetailBloc,
+        Stream.fromIterable(expectedUserListStates),
+      );
+
+      await getWidget(tester);
+      verify(
+        () => productImageBloc.add(
+          ProductImageEvent.fetch(
+            list: materials,
+          ),
+        ),
+      ).called(1);
     });
   });
 }

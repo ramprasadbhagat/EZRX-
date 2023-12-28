@@ -441,6 +441,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   ErrorUtils.handleApiFailure(context, failure);
                 },
                 (_) {
+                  _fetchProductImage(
+                    context,
+                    state.productDetailAggregate.allMaterial,
+                  );
                   if (state.productDetailAggregate.similarProduct.isNotEmpty) {
                     _fetchMaterialPrice(
                       context,
@@ -454,12 +458,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 },
               ),
             );
-            if (state.productDetailAggregate.materialInfo.type.typeBundle) {
-              _fetchProductImage(
-                context,
-                state.productDetailAggregate.materialInfo.bundle.materials,
-              );
-            }
           },
         ),
         BlocListener<ReturnListByItemBloc, ReturnListByItemState>(

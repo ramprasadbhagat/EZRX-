@@ -37,4 +37,8 @@ class ProductDetailAggregate with _$ProductDetailAggregate {
   bool hasRemainingQuotaReached(int zdp5RemainingQuota) =>
       isRemainingQuantityNotExceeded(zdp5RemainingQuota) ||
       isRemainingQuantityExceeded(zdp5RemainingQuota);
+
+  List<MaterialInfo> get allMaterial => materialInfo.type.typeBundle
+      ? materialInfo.bundle.materials
+      : [materialInfo];
 }
