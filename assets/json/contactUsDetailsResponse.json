@@ -1,29 +1,30 @@
 {
-    "data": {
-      "item": {
-        "id": "FD4EBB5A7740435491C798642E735337",
-        "title": {
-          "value": "General Contact us 1111 test222"
-        },
-        "backgroundImage": {
-          "jsonValue": {
-            "value": {
-              "src": "https://edge.sitecorecloud.io/zuelligphar9b34-zpcms-test-fcf9/media/Project/ezrx/ezrx/Contact-Us/Media/hinh-nen-4k-laptop-va-pc/Group-237581.png?h=541&iar=0&w=471",
-              "alt": "",
-              "width": "471",
-              "height": "541"
-            }
+  "data": {
+    "item": {
+      "id": "FD4EBB5A7740435491C798642E735337",
+      "title": {
+        "value": "Contact usmmm"
+      },
+      "backgroundImage": {
+        "jsonValue": {
+          "value": {
+            "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Contact-Us/Media/contact-us.png?h=735&iar=0&w=521",
+            "alt": "",
+            "width": "521",
+            "height": "735"
           }
-        },
-        "content": {
-          "value": "<p><strong><span style=\"color: #234455;\">Customer Center11111</span></strong></p>\n<p><strong>&nbsp;<span style=\"color: #234455;\"></span></strong></p>\n<p>Weekdays AM 09:00 - PM 18:00<br />\nLunchtime PM 12:00 - PM 13:00<br />\nClosed on weekends and public holidays</p>\n<p>&nbsp;</p>\n<hr />\n<table style=\"height: 228px; width: 537px;\">\n    <tbody>\n        <tr>\n            <td style=\"text-align: left;\">\n            <p>Saxenda, Novo, Dupixent Order Inquiry</p>\n            <p><span style=\"color: #234455;\">1899-4156</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>Larochopose/skinceuticals order inquiry</p>\n            <p><span style=\"color: #234455;\">02-2006-0816</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;Physiogel order inquiry</p>\n            <p><span style=\"color: #234455;\">080-2005-080</span></p>\n            </td>\n        </tr>\n        <tr>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;Saxenda Product Inquiry</p>\n            <p><span style=\"color: #234455;\">1833-8561</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;larocheposay product inquiry</p>\n            <p><span style=\"color: #234455;\">080-344-0088</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;Physiogel product inquiry</p>\n            <p><span style=\"color: #234455;\">080-023-7007</span></p>\n            </td>\n        </tr>\n        <tr>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;Novo Product Inquiry</p>\n            <p><span style=\"color: #234455;\">02-2188-8900</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;Skinceuticals product inquiry</p>\n            <p><span style=\"color: #234455;\">080-348-0086</span></p>\n            </td>\n            <td style=\"text-align: left;\">\n            <p>&nbsp;<span>Dupixent product inquiry</span></p>\n            <p><span style=\"color: #234455;\">02-2136-9000</span></p>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<p><hr />\n</p>\n<br />"
-        },
-        "preloginSendToEmail": {
-          "value": "support@ezrxplus.com"
-        },
-        "postloginSendToEmail": {
-          "value": "support@ezrxplus.com"
         }
-      }
+      },
+      "content": {
+        "value": "<p><span style=\"line-height: 150%; font-size: 16px; color: #234455;\"><strong>Support Hours</strong></span></p>\n<p><span style=\"line-height: 50%; font-size: 16px;\">&nbsp;</span></p>\n<p><span style=\"font-size: 14px; line-height: 150%;\">Monday to Friday: 8am - 8pm</span></p>\n<p><span style=\"font-size: 14px; line-height: 150%;\">Saturday: 8am - 5pm</span></p>\n<p><span style=\"line-height: 150%; font-size: 16px;\">&nbsp;</span></p>\n<p><span style=\"line-height: 150%; font-size: 16px; color: #234455;\"><strong>Have any questions? We&rsquo;d love to hear from you.</strong></span></p>\n<p><span style=\"line-height: 50%; font-size: 16px;\">&nbsp;</span></p>\n<p><span style=\"font-size: 14px; line-height: 150%; display: flex; padding: 8px; justify-content: center; align-items: center; gap: 8px; border-radius: 8px; border: 1px solid var(--neutrals-pebble-gray, #C4C4C4); width: 150px; height: 40px;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewbox=\"0 0 18 18\" fill=\"none\">\n<path d=\"M3.62 7.79C5.06 10.62 7.38 12.94 10.21 14.38L12.41 12.18C12.69 11.9 13.08 11.82 13.43 11.93C14.55 12.3 15.75 12.5 17 12.5C17.2652 12.5 17.5196 12.6054 17.7071 12.7929C17.8946 12.9804 18 13.2348 18 13.5V17C18 17.2652 17.8946 17.5196 17.7071 17.7071C17.5196 17.8946 17.2652 18 17 18C12.4913 18 8.1673 16.2089 4.97918 13.0208C1.79107 9.8327 0 5.50868 0 1C0 0.734784 0.105357 0.48043 0.292893 0.292893C0.48043 0.105357 0.734784 0 1 0H4.5C4.76522 0 5.01957 0.105357 5.20711 0.292893C5.39464 0.48043 5.5 0.734784 5.5 1C5.5 2.25 5.7 3.45 6.07 4.57C6.18 4.92 6.1 5.31 5.82 5.59L3.62 7.79Z\" fill=\"#234455\"></path>\n</svg>+632 82366498</span></p>"
+      },
+      "preloginSendToEmail": {
+        "value": "ttklien@zuelligpharma.com"
+      },
+      "postloginSendToEmail": {
+        "value": "support@ezrxplus.com"
+      },
+      "saleOrgDictionary": null
     }
   }
+}

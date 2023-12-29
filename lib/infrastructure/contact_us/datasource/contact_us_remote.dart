@@ -23,6 +23,7 @@ class ContactUsDetailsRemoteDataSource {
     required String announcementUrlPath,
     required String lang,
     required String contactUsId,
+    required String token,
   }) async {
     final variableData = {
       'itemId': contactUsId,
@@ -37,6 +38,7 @@ class ContactUsDetailsRemoteDataSource {
           'query': queryMutation.getContactUsQuery(),
           'variables': variableData,
         }),
+        headers: {'X-GQL-Token': token},
       );
       _contactUsDetailsExceptionChecker(
         res: res,

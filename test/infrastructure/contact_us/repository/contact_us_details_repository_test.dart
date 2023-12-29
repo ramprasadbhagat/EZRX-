@@ -70,6 +70,7 @@ void main() {
     });
     test('get Contact Us Details successfully Remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => mockConfig.xGQLToken).thenReturn('fake-token');
       when(() => mockConfig.announcementApiUrlPath)
           .thenReturn('/api/announcement');
       when(
@@ -77,6 +78,7 @@ void main() {
           announcementUrlPath: '/api/announcement',
           lang: fakeUser.preferredLanguage.locale.languageCode,
           contactUsId: fakeMYSalesOrg.contactUsItemId,
+          token: 'fake-token',
         ),
       ).thenAnswer((invocation) async => ContactUsDetails.empty());
       final result = await repository.getContactUsDetails(
@@ -89,6 +91,7 @@ void main() {
     });
     test('get Contact Us Details fail Remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => mockConfig.xGQLToken).thenReturn('fake-token');
       when(() => mockConfig.announcementApiUrlPath)
           .thenReturn('/api/announcement');
       when(
@@ -96,6 +99,7 @@ void main() {
           announcementUrlPath: '/api/announcement',
           lang: fakeUser.preferredLanguage.locale.languageCode,
           contactUsId: fakeMYSalesOrg.contactUsItemId,
+          token: 'fake-token',
         ),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),

@@ -35,7 +35,7 @@ class HttpService {
     String apiEndpoint = '',
     bool overrideBaseUrl = false,
     String cacheControl = '',
-    String salesOrg = '',
+    Map<String, dynamic> headers = const <String, dynamic>{},
   }) async {
     try {
       if (overrideBaseUrl) _dio.options.baseUrl = url;
@@ -44,8 +44,8 @@ class HttpService {
       _dio.options.responseType = responseType;
       _dio.options.headers['apiEndpoint'] = apiEndpoint;
       _dio.options.headers['cache-control'] = cacheControl;
-      if (salesOrg.isNotEmpty) {
-        _dio.options.headers['salesorg'] = salesOrg;
+      for (final headerInfo in headers.entries) {
+        _dio.options.headers[headerInfo.key] = headerInfo.value;
       }
 
       return await _dio.request(

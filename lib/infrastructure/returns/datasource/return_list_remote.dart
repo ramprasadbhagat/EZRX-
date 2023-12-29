@@ -114,7 +114,7 @@ class ReturnListRemoteDataSource {
               },
             },
           ),
-          salesOrg: salesOrg,
+          headers: {'salesorg': salesOrg},
         );
         _returnRequestTypeCodeExceptionChecker(res: res);
 

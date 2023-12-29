@@ -122,7 +122,7 @@ class ReturnRequestRemoteDataSource {
         method: 'POST',
         url: '${config.urlConstants}upload-ereturn',
         data: FormData.fromMap(data),
-        salesOrg: salesOrg,
+        headers: {'salesorg': salesOrg},
       );
 
       _exceptionChecker(response: response, property: 'addRequestFileUpload');

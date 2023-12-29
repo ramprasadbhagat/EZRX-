@@ -63,6 +63,7 @@ void main() {
         ),
         headers: {
           'Content-Type': 'application/json charset=utf-8',
+          'X-GQL-Token': 'fake-token',
         },
         data: jsonEncode({
           'query': remoteDataSource.queryMutation.getContactUsQuery(),
@@ -74,6 +75,7 @@ void main() {
         announcementUrlPath: config.announcementApiUrlPath,
         lang: fakeUser.preferredLanguage.locale.languageCode,
         contactUsId: fakeMYSalesOrg.contactUsItemId,
+        token: 'fake-token',
       );
 
       expect(
@@ -89,7 +91,10 @@ void main() {
           {'data': []},
           delay: const Duration(seconds: 1),
         ),
-        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'X-GQL-Token': 'fake-token',
+        },
         data: jsonEncode({
           'query': remoteDataSource.queryMutation.getContactUsQuery(),
           'variables': variables,
@@ -101,6 +106,7 @@ void main() {
         announcementUrlPath: config.announcementApiUrlPath,
         lang: fakeUser.preferredLanguage.locale.languageCode,
         contactUsId: fakeMYSalesOrg.contactUsItemId,
+        token: 'fake-token',
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -123,6 +129,7 @@ void main() {
         ),
         headers: {
           'Content-Type': 'application/json charset=utf-8',
+          'X-GQL-Token': 'fake-token',
         },
         data: jsonEncode({
           'query': remoteDataSource.queryMutation.getContactUsQuery(),
@@ -135,6 +142,7 @@ void main() {
         announcementUrlPath: config.announcementApiUrlPath,
         lang: fakeUser.preferredLanguage.locale.languageCode,
         contactUsId: fakeMYSalesOrg.contactUsItemId,
+        token: 'fake-token',
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -153,6 +161,7 @@ void main() {
         ),
         headers: {
           'Content-Type': 'application/json charset=utf-8',
+          'X-GQL-Token': 'fake-token',
         },
         data: jsonEncode({
           'query': remoteDataSource.queryMutation.getContactUsQuery(),
@@ -165,6 +174,7 @@ void main() {
         announcementUrlPath: config.announcementApiUrlPath,
         lang: fakeUser.preferredLanguage.locale.languageCode,
         contactUsId: fakeMYSalesOrg.contactUsItemId,
+        token: 'fake-token',
       )
           .onError((error, _) async {
         expect(error, isA<OtherException>());

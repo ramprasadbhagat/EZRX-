@@ -36,6 +36,7 @@ class ContactUsDetailsRepository extends IContactUsDetailsRepository {
         announcementUrlPath: config.announcementApiUrlPath,
         lang: salesOrg.announcementLocale.languageCode,
         contactUsId: salesOrg.contactUsItemId,
+        token: config.xGQLToken,
       );
 
       return Right(contactUsDetails);

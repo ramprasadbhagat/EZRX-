@@ -413,6 +413,23 @@ class Config {
     }
   }
 
+  //============================================================
+  //  Contact us
+  //
+  //============================================================
+
+  String get xGQLToken {
+    switch (appFlavor) {
+      case Flavor.prod:
+        return 'OGtnRUErUi9uZGl0cE9LV213L0tHZXh3Vjl5cjcwa1VNTGpWNk9acGprbz18enVlbGxpZ3BoYXIzYzkwLXpwY21zLXByb2QtNDUzMg==';
+      case Flavor.mock:
+      case Flavor.uat:
+        return 'YjdLWWNucEk1akpGNDBWdFU3VUFuaUx3Sk9MVExVMlRsUXo1Y1Y2bXpwQT18enVlbGxpZ3BoYXI0MDBmLXpwY21zLXVhdC1jZTBm';
+      case Flavor.dev:
+        return 'TDFxR1Z0VlhIcjE5LzRHNHJ0MG9jNWMyUmhvUmdDdldjMS9LbzZoNnJYQT18enVlbGxpZ3BoYXI5YjM0LXpwY21zLXRlc3QtZmNmOQ==';
+    }
+  }
+
   String get getCleverTapId {
     switch (appFlavor) {
       case Flavor.prod:
