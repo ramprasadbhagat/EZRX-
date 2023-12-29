@@ -173,8 +173,6 @@ class PriceAggregate with _$PriceAggregate {
       price.tiers.isNotEmpty ||
       price.bonuses.isNotEmpty;
 
-  bool get showStrikeThrough => !salesOrgConfig.salesOrg.isID;
-
   double get listPrice {
     return NumUtils.roundToPlaces(vatCalculation(price.lastPrice.getOrCrash()));
   }
@@ -814,7 +812,8 @@ class PriceAggregate with _$PriceAggregate {
     final listPrice = display(PriceType.listPrice);
     final finalPrice = display(PriceType.finalPrice);
 
-    return !(regex.hasMatch(listPrice) || regex.hasMatch(finalPrice)) &&
+    return salesOrgConfig.enableListPrice &&
+        !(regex.hasMatch(listPrice) || regex.hasMatch(finalPrice)) &&
         double.parse(listPrice) > double.parse(finalPrice);
   }
 

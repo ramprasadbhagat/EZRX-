@@ -14,8 +14,7 @@ class ListPriceStrikeThroughComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return priceAggregate.showMaterialListPrice &&
-            priceAggregate.showStrikeThrough
+    return priceAggregate.showMaterialListPrice
         ? PriceComponent(
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,

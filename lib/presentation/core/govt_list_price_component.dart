@@ -4,8 +4,8 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ListPriceComponent extends StatelessWidget {
-  const ListPriceComponent({
+class GovtListPriceComponent extends StatelessWidget {
+  const GovtListPriceComponent({
     Key? key,
     required this.price,
   }) : super(key: key);
@@ -17,14 +17,14 @@ class ListPriceComponent extends StatelessWidget {
     final salesOrgConfigs =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
-    return salesOrgConfigs.enableListPrice
+    return salesOrgConfigs.showGovtListPrice
         ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Expanded(
                 child: PriceComponent(
                   title: '${context.tr('List price')}: ',
-                  type: PriceStyle.materialListPrice,
+                  type: PriceStyle.govtMaterialListPrice,
                   price: price,
                   salesOrgConfig: salesOrgConfigs,
                 ),

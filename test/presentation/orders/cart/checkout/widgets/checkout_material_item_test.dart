@@ -18,6 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
@@ -106,7 +107,7 @@ void main() {
     });
 
     testWidgets(
-        '=> List price strike through price visible, if final price is less than list price',
+        '=> List price strike through price visible, if final price is less than list price && enableListPrice = true',
         (tester) async {
       final finalPrice = MaterialPrice(80);
       final listPrice = MaterialPrice(100);
@@ -115,6 +116,7 @@ void main() {
           lastPrice: listPrice,
           finalPrice: finalPrice,
         ),
+        salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
         materialInfo: MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material'),
           type: MaterialInfoType('material'),
@@ -138,9 +140,46 @@ void main() {
         findsOneWidget,
       );
     });
+
+    testWidgets(
+        '=> List price strike through price not visible, if final price is less than list price && enableListPrice = false',
+        (tester) async {
+      final finalPrice = MaterialPrice(80);
+      final listPrice = MaterialPrice(100);
+      final cartItem = PriceAggregate.empty().copyWith(
+        price: Price.empty().copyWith(
+          lastPrice: listPrice,
+          finalPrice: finalPrice,
+        ),
+        salesOrgConfig: fakeMYSalesOrgConfigListPriceDisabled,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-material'),
+          type: MaterialInfoType('material'),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(cartItem));
+      await tester.pump();
+      final materialListPriceStrikeThroughFinder =
+          find.byKey(WidgetKeys.materialListPriceStrikeThrough);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text
+                .toPlainText()
+                .contains(listPrice.getOrCrash().toString()),
+      );
+      expect(
+        find.descendant(
+          of: materialListPriceStrikeThroughFinder,
+          matching: listPriceFinder,
+        ),
+        findsNothing,
+      );
+    });
     
     testWidgets(
-        '=> List price strike through price not visible, if final price is greater than and equal to list price',
+        '=> List price strike through price not visible, if final price is greater than and equal to list price && enableListPrice = true',
         (tester) async {
       final finalPrice = MaterialPrice(200);
       final listPrice = MaterialPrice(100);
@@ -149,6 +188,7 @@ void main() {
           lastPrice: listPrice,
           finalPrice: finalPrice,
         ),
+        salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
         materialInfo: MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material'),
           type: MaterialInfoType('material'),

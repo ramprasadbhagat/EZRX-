@@ -253,4 +253,6 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
       displaySubtotalTaxBreakdown || salesOrg.isID;
 
   String get displayPrefixTax => showSubtotalTaxBreakdown ? 'excl' : 'incl';
+
+  bool get showGovtListPrice => enableListPrice && salesOrg.isTW;
 }

@@ -596,34 +596,18 @@ void main() {
         expect(cartItemCutOffListPriceKey, findsOneWidget);
       });
 
-      testWidgets('Do not display CutOff List Price while in ID', (tester) async {
-        final pnGCartItem = cartItem.copyWith(
-          quantity: 2,
-          price: Price.empty().copyWith(
-            isPriceOverride: true,
-            finalPrice: MaterialPrice(364.80),
-            lastPrice: MaterialPrice(364.80),
-          ),
-          salesOrgConfig:  SalesOrganisationConfigs.empty().copyWith(
-            priceOverride: true,
-            salesOrg: SalesOrg('1900'),
-          ),
-          materialInfo: MaterialInfo.empty().copyWith(
-            type: MaterialInfoType('material'),
-          ),
-        );
-
+      testWidgets('Do not display CutOff List Price while in ID',
+          (tester) async {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              priceOverride: true,
               salesOrg: SalesOrg('1900'),
             ),
           ),
         );
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            cartProducts: [pnGCartItem],
+            cartProducts: [cartItem],
           ),
         );
 
@@ -631,10 +615,10 @@ void main() {
         await tester.pump();
 
         final materialKey =
-        find.byKey(WidgetKeys.cartItemProductMaterialNumber);
+            find.byKey(WidgetKeys.cartItemProductMaterialNumber);
         expect(materialKey, findsOneWidget);
         final cartItemCutOffListPriceKey =
-        find.byKey(WidgetKeys.cartItemCutOffListPrice);
+            find.byKey(WidgetKeys.cartItemCutOffListPrice);
         expect(cartItemCutOffListPriceKey, findsNothing);
       });
 

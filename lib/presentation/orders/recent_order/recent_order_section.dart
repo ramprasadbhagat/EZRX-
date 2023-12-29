@@ -166,7 +166,7 @@ class _ProductTile extends StatelessWidget {
                         ),
                         salesOrgConfig: eligibilityState.salesOrgConfigs,
                       ),
-                      ListPriceComponent(
+                      GovtListPriceComponent(
                         price: product.itemUnitPrice(
                           eligibilityState.salesOrg.isID,
                         ),

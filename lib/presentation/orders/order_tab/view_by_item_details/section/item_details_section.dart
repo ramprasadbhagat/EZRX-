@@ -49,13 +49,12 @@ class ItemDetailsSection extends StatelessWidget {
                 ? null
                 : Row(
                     children: [
-                      if (orderHistoryItem.showMaterialListPrice)
+                      if (orderHistoryItem.showMaterialListPrice(
+                        config: eligibilityState.salesOrgConfigs,
+                      ))
                         PriceComponent(
                           key: WidgetKeys.materialListPriceStrikeThrough,
-                          salesOrgConfig: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .salesOrgConfigs,
+                          salesOrgConfig: eligibilityState.salesOrgConfigs,
                           price: orderHistoryItem.originPrice.toString(),
                           type: PriceStyle.materialListPriceStrikeThrough,
                         ),

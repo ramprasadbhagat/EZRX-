@@ -153,7 +153,8 @@ class OrderHistoryItem with _$OrderHistoryItem {
     return price.toString();
   }
 
-  bool get showMaterialListPrice => originPrice > unitPrice && !hidePrice;
+  bool showMaterialListPrice({required SalesOrganisationConfigs config}) =>
+      originPrice > unitPrice && !hidePrice && config.enableListPrice;
 
   bool get batchNumHasData => batch.isValid() || expiryDate.isNotEmpty;
 

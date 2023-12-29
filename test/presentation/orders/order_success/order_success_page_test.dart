@@ -800,7 +800,7 @@ void main() {
     });
 
     testWidgets(
-        'List price strike through price visible, if final price is less than list price',
+        'List price strike through price visible, if final price is less than list price && enableListPrice = true',
         (tester) async {
       final finalPrice = MaterialPrice(80);
       final listPrice = MaterialPrice(100);
@@ -813,6 +813,7 @@ void main() {
                   materialNumber: MaterialNumber('fake-material-1'),
                 ),
                 priceAggregate: PriceAggregate.empty().copyWith(
+                  salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
                   price: Price.empty().copyWith(
                     lastPrice: listPrice,
                     finalPrice: finalPrice,
@@ -850,7 +851,58 @@ void main() {
     });
 
     testWidgets(
-        'List price strike through price not visible, if final price is greater than and equal to list price',
+        'List price strike through price not visible, if final price is less than list price && enableListPrice = false',
+        (tester) async {
+      final finalPrice = MaterialPrice(80);
+      final listPrice = MaterialPrice(100);
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeMaterialItem.copyWith(
+                material: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-material-1'),
+                ),
+                priceAggregate: PriceAggregate.empty().copyWith(
+                  salesOrgConfig: fakeMYSalesOrgConfigListPriceDisabled,
+                  price: Price.empty().copyWith(
+                    lastPrice: listPrice,
+                    finalPrice: finalPrice,
+                    materialNumber: MaterialNumber('fake-material-1'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.orderSuccessItemsSection),
+        findsOneWidget,
+      );
+      final listPriceStrikeThroughComponent =
+          find.byType(ListPriceStrikeThroughComponent);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text
+                .toPlainText()
+                .contains(listPrice.getOrCrash().toString()),
+      );
+      expect(
+        find.descendant(
+          of: listPriceStrikeThroughComponent,
+          matching: listPriceFinder,
+        ),
+        findsNothing,
+      );
+    });
+
+    testWidgets(
+        'List price strike through price not visible, if final price is greater than and equal to list price && enableListPrice = true',
         (tester) async {
       final finalPrice = MaterialPrice(200);
       final listPrice = MaterialPrice(100);
@@ -863,6 +915,7 @@ void main() {
                   materialNumber: MaterialNumber('fake-material-1'),
                 ),
                 priceAggregate: PriceAggregate.empty().copyWith(
+                  salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
                   price: Price.empty().copyWith(
                     lastPrice: listPrice,
                     finalPrice: finalPrice,

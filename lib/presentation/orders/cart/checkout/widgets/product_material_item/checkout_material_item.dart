@@ -174,7 +174,7 @@ class _ProductDetails extends StatelessWidget {
                     color: ZPColors.extraLightGrey4,
                   ),
             ),
-          ListPriceComponent(
+          GovtListPriceComponent(
             price: cartItem.display(PriceType.listPrice),
           ),
         ],

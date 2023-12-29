@@ -24,6 +24,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class ProductImageBlocMock
@@ -124,11 +125,16 @@ void main() {
     );
 
     testWidgets(
-      'List price strike through price visible, if final price is less than list price',
+      'List price strike through price visible, if final price is less than list price && enableListPrice = true',
       (tester) async {
         await tester.runAsync(() async {
           final finalPrice = MaterialPrice(80);
           final listPrice = MaterialPrice(100);
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigListPriceEnabled,
+            ),
+          );
           when(() => materialPriceBlocMock.state).thenReturn(
             MaterialPriceState.initial().copyWith(
               materialPrice: {
@@ -164,11 +170,61 @@ void main() {
     );
 
     testWidgets(
-      'List price strike through price not visible, if final price is greater than and equal to list price',
+      'List price strike through price not visible, if final price is less than list price && enableListPrice = false',
+      (tester) async {
+        await tester.runAsync(() async {
+          final finalPrice = MaterialPrice(80);
+          final listPrice = MaterialPrice(100);
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigListPriceDisabled,
+            ),
+          );
+          when(() => materialPriceBlocMock.state).thenReturn(
+            MaterialPriceState.initial().copyWith(
+              materialPrice: {
+                materialInfoMock.materialNumber: Price.empty().copyWith(
+                  lastPrice: listPrice,
+                  finalPrice: finalPrice,
+                  materialNumber: materialInfoMock.materialNumber,
+                ),
+              },
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final listPriceStrikeThroughComponent =
+              find.byType(ListPriceStrikeThroughComponent);
+          final listPriceFinder = find.byWidgetPredicate(
+            (widget) =>
+                widget is RichText &&
+                widget.key == WidgetKeys.priceComponent &&
+                widget.text
+                    .toPlainText()
+                    .contains(listPrice.getOrCrash().toString()),
+          );
+          expect(
+            find.descendant(
+              of: listPriceStrikeThroughComponent,
+              matching: listPriceFinder,
+            ),
+            findsNothing,
+          );
+        });
+      },
+    );
+
+    testWidgets(
+      'List price strike through price not visible, if final price is greater than and equal to list price && enableListPrice = true',
       (tester) async {
         await tester.runAsync(() async {
           final finalPrice = MaterialPrice(200);
           final listPrice = MaterialPrice(100);
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigListPriceEnabled,
+            ),
+          );
           when(() => materialPriceBlocMock.state).thenReturn(
             MaterialPriceState.initial().copyWith(
               materialPrice: {

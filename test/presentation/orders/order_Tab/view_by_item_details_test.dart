@@ -1468,13 +1468,18 @@ void main() {
     });
 
     testWidgets(
-        'List price strike through price visible, if final price is less than list price',
+        'List price strike through price visible, if final price is less than list price && enableListPrice = true',
         (tester) async {
       final fakeOrderHistoryItemWithCounterOffer =
           fakeOrderHistoryItem.copyWith(
         originPrice: 100.1,
         unitPrice: 98.0,
         isCounterOffer: true,
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigListPriceEnabled,
+        ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
@@ -1504,7 +1509,48 @@ void main() {
     });
 
     testWidgets(
-        'List price strike through price not visible, if final price is greater than list price',
+        'List price strike through price not visible, if final price is less than list price && enableListPrice = false',
+        (tester) async {
+      final fakeOrderHistoryItemWithCounterOffer =
+          fakeOrderHistoryItem.copyWith(
+        originPrice: 100.1,
+        unitPrice: 98.0,
+        isCounterOffer: true,
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigListPriceDisabled,
+        ),
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItemWithCounterOffer,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItemWithCounterOffer],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final materialListPriceStrikeThroughFinder =
+          find.byKey(WidgetKeys.materialListPriceStrikeThrough);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text.toPlainText().contains('100.1'),
+      );
+      expect(
+        find.descendant(
+          of: materialListPriceStrikeThroughFinder,
+          matching: listPriceFinder,
+        ),
+        findsNothing,
+      );
+    });
+
+    testWidgets(
+        'List price strike through price not visible, if final price is greater than list price && enableListPrice = true',
         (tester) async {
       const originPrice = 80.0;
       const unitPrice = 100.0;

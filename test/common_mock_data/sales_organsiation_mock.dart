@@ -151,6 +151,18 @@ final fakeSalesOrgConfigPaymentTermsEnabled =
   enablePaymentTerms: true,
 );
 
+final fakeMYSalesOrgConfigListPriceEnabled =
+    SalesOrganisationConfigs.empty().copyWith(
+  enableListPrice: true,
+  salesOrg: SalesOrg('2001'),
+);
+
+final fakeMYSalesOrgConfigListPriceDisabled =
+    SalesOrganisationConfigs.empty().copyWith(
+  enableListPrice: false,
+  salesOrg: SalesOrg('2001'),
+);
+
 final fakeSalesOrgConfigDisablePaymentTermsDisplay =
     SalesOrganisationConfigs.empty().copyWith(
   disablePaymentTermsDisplay: true,

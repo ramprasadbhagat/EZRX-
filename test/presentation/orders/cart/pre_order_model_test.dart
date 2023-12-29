@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -414,7 +415,7 @@ void main() {
     );
 
     testWidgets(
-      '=> List price strike through price visible, if final price is less than list price',
+      '=> List price strike through price visible, if final price is less than list price && enableListPrice = true',
       (tester) async {
         final finalPrice = MaterialPrice(80);
         final listPrice = MaterialPrice(100);
@@ -422,6 +423,9 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [
               fakeCartProduct.first.copyWith(
+                salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled.copyWith(
+                  addOosMaterials: OosMaterial(true),
+                ),
                 price: Price.empty().copyWith(
                   lastPrice: listPrice,
                   finalPrice: finalPrice,
@@ -456,7 +460,52 @@ void main() {
     );
 
     testWidgets(
-      '=> List price strike through price not visible, if final price is greater than and equal to list price',
+      '=> List price strike through price not visible, if final price is less than list price && enableListPrice = false',
+      (tester) async {
+        final finalPrice = MaterialPrice(80);
+        final listPrice = MaterialPrice(100);
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              fakeCartProduct.first.copyWith(
+                salesOrgConfig: fakeMYSalesOrgConfigListPriceDisabled.copyWith(
+                  addOosMaterials: OosMaterial(true),
+                ),
+                price: Price.empty().copyWith(
+                  lastPrice: listPrice,
+                  finalPrice: finalPrice,
+                  materialNumber:
+                      fakeCartProduct.first.materialInfo.materialNumber,
+                ),
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final listPriceStrikeThroughComponent =
+            find.byType(ListPriceStrikeThroughComponent);
+        final listPriceFinder = find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text
+                  .toPlainText()
+                  .contains(listPrice.getOrCrash().toString()),
+        );
+        expect(
+          find.descendant(
+            of: listPriceStrikeThroughComponent,
+            matching: listPriceFinder,
+          ),
+          findsNothing,
+        );
+      },
+    );
+
+    testWidgets(
+      '=> List price strike through price not visible, if final price is greater than and equal to list price && enableListPrice = true',
       (tester) async {
         final finalPrice = MaterialPrice(200);
         final listPrice = MaterialPrice(100);
@@ -464,6 +513,9 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [
               fakeCartProduct.first.copyWith(
+                salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled.copyWith(
+                  addOosMaterials: OosMaterial(true),
+                ),
                 price: Price.empty().copyWith(
                   lastPrice: listPrice,
                   finalPrice: finalPrice,

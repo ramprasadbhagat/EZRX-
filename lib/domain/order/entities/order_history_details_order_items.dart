@@ -185,7 +185,10 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         quantity: MaterialQty(qty),
       );
 
-  bool get showMaterialListPrice => originPrice > unitPrice && !hidePrice;
+  bool get showMaterialListPrice =>
+      originPrice > unitPrice &&
+      !hidePrice &&
+      priceAggregate.salesOrgConfig.enableListPrice;
 
   String combinationCode({required bool showGMCPart}) => <String>[
         materialNumber.displayMatNo,

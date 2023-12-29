@@ -21,6 +21,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -1705,7 +1706,7 @@ void main() {
     });
 
     testWidgets(
-        '=> List price strike through price visible, if final price is less than list price',
+        '=> List price strike through price visible, if final price is less than list price && enableListPrice = true',
         (tester) async {
       const originPrice = 100.0;
       const unitPrice = 80.0;
@@ -1717,7 +1718,10 @@ void main() {
                   .copyWith(
                 originPrice: originPrice,
                 unitPrice: unitPrice,
-              )
+                priceAggregate: PriceAggregate.empty().copyWith(
+                  salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
+                ),
+              ),
             ],
           ),
         ),
@@ -1748,7 +1752,53 @@ void main() {
     });
 
     testWidgets(
-        '=> List price strike through price not visible, if final price is greater than and equal to list price',
+        '=> List price strike through price not visible, if final price is less than list price && enableListPrice = false',
+        (tester) async {
+      const originPrice = 100.0;
+      const unitPrice = 80.0;
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
+            orderHistoryDetailsOrderItem: [
+              viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first
+                  .copyWith(
+                originPrice: originPrice,
+                unitPrice: unitPrice,
+                priceAggregate: PriceAggregate.empty().copyWith(
+                  salesOrgConfig: fakeMYSalesOrgConfigListPriceDisabled,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      final materialListPriceStrikeThroughFinder =
+          find.byKey(WidgetKeys.materialListPriceStrikeThrough);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text.toPlainText().contains('$originPrice'),
+      );
+      expect(
+        find.descendant(
+          of: materialListPriceStrikeThroughFinder,
+          matching: listPriceFinder,
+        ),
+        findsNothing,
+      );
+    });
+
+    testWidgets(
+        '=> List price strike through price not visible, if final price is greater than and equal to list price && enableListPrice = true',
         (tester) async {
       const originPrice = 100.0;
       const unitPrice = 200.0;

@@ -285,7 +285,7 @@ class _MaterialDetails extends StatelessWidget {
           ),
           Row(
             children: [
-              if (cartItem.displayCutOffListPrice && cartItem.showStrikeThrough)
+              if (cartItem.displayCutOffListPrice)
                 PriceComponent(
                   key: WidgetKeys.cartItemCutOffListPrice,
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
@@ -311,7 +311,7 @@ class _MaterialDetails extends StatelessWidget {
                     color: ZPColors.extraLightGrey4,
                   ),
             ),
-          ListPriceComponent(
+          GovtListPriceComponent(
             price: cartItem.display(PriceType.listPrice),
           ),
           _MaterialQuantitySection(

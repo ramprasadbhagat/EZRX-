@@ -53,7 +53,7 @@ class _MaterialDetails extends StatelessWidget {
                 ),
               ],
             ),
-            ListPriceComponent(
+            GovtListPriceComponent(
               price: cartItem.display(PriceType.listPrice),
             ),
           ],

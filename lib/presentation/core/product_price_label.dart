@@ -84,7 +84,7 @@ class ProductPriceLabel extends StatelessWidget {
                 price: priceAggregate.display(PriceType.unitPrice),
                 salesOrgConfig: salesOrgConfig,
               ),
-              ListPriceComponent(
+              GovtListPriceComponent(
                 price: priceAggregate.display(PriceType.listPrice),
               ),
             ],
@@ -107,9 +107,7 @@ class ProductPriceLabel extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            ListPriceComponent(
-              price: context.tr('Price Not Available'),
-            ),
+            const GovtListPriceComponent(price: 'Price Not Available'),
           ],
         );
       },

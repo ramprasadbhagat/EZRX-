@@ -69,7 +69,7 @@ class _OrderItems extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  ListPriceComponent(
+                                  GovtListPriceComponent(
                                     price: e.priceAggregate
                                         .display(PriceType.listPrice),
                                   ),
