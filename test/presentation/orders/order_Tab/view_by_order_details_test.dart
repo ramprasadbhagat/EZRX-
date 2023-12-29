@@ -263,7 +263,7 @@ void main() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
-        useMediaQuery: true,
+        useMediaQuery: false,
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => mockAuthBloc,
@@ -788,6 +788,7 @@ void main() {
             invoiceNumber: StringValue(''),
             orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
               OrderHistoryDetailsOrderItem.empty().copyWith(
+                hidePrice: true,
                 principalData: PrincipalData.empty().copyWith(
                   principalCode: PrincipalCode('0000101308'),
                   principalName: PrincipalName('PROCTER AND GAMBLE'),
@@ -805,10 +806,20 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      final subTotalFinder = find.byKey(WidgetKeys.viewByOrderSubtotalKey);
-      final grandTotalFinder = find.byKey(WidgetKeys.viewByOrderGrandTotalKey);
-      expect(subTotalFinder, findsOneWidget);
-      expect(grandTotalFinder, findsOneWidget);
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderSubtotalKey),
+          matching: find.text('Subtotal (incl.tax):'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
+          matching: find.textContaining('Grand total:'),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets(
@@ -1273,21 +1284,21 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         find.descendant(
-          of: find.byKey(WidgetKeys.priceText),
+          of: find.byKey(WidgetKeys.viewByOrderSubtotalKey),
           matching: find.text('Subtotal (excl.tax):'),
         ),
         findsOneWidget,
       );
       expect(
         find.descendant(
-          of: find.byKey(WidgetKeys.priceText),
+          of: find.byKey(WidgetKeys.viewByOrderTaxKey),
           matching: find.text('Tax:'),
         ),
         findsOneWidget,
       );
       expect(
         find.descendant(
-          of: find.byKey(WidgetKeys.priceText),
+          of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
           matching: find.textContaining('Grand total:'),
         ),
         findsOneWidget,
@@ -1328,21 +1339,21 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         find.descendant(
-          of: find.byKey(WidgetKeys.priceText),
+          of: find.byKey(WidgetKeys.viewByOrderSubtotalKey),
           matching: find.text('Subtotal (excl.tax):'),
         ),
         findsOneWidget,
       );
       expect(
         find.descendant(
-          of: find.byKey(WidgetKeys.priceText),
+          of: find.byKey(WidgetKeys.viewByOrderTaxKey),
           matching: find.text('Tax at ${vatValue.toInt()}%:'),
         ),
         findsOneWidget,
       );
       expect(
         find.descendant(
-          of: find.byKey(WidgetKeys.priceText),
+          of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
           matching: find.textContaining('Grand total:'),
         ),
         findsOneWidget,
@@ -1473,21 +1484,21 @@ void main() {
         await tester.pumpAndSettle();
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.priceText),
+            of: find.byKey(WidgetKeys.viewByOrderIdSubtotalKey),
             matching: find.text('Subtotal (excl.tax):'),
           ),
           findsOneWidget,
         );
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.priceText),
+            of: find.byKey(WidgetKeys.viewByOrderIdSmallOrderFeeKey),
             matching: find.text('Small order fee:'),
           ),
           findsOneWidget,
         );
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.priceText),
+            of: find.byKey(WidgetKeys.viewByOrderIdTaxKey),
             matching: find.text('Tax at 11%:'),
           ),
           findsOneWidget,
@@ -1500,21 +1511,21 @@ void main() {
         );
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.priceText),
+            of: find.byKey(WidgetKeys.viewByOrderIdManualFeeKey),
             matching: find.textContaining('Manual fee:'),
           ),
           findsOneWidget,
         );
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.priceText),
+            of: find.byKey(WidgetKeys.viewByOrderIdGrandTotalKey),
             matching: find.textContaining('Grand total:'),
           ),
           findsOneWidget,
         );
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.priceText),
+            of: find.byKey(WidgetKeys.viewByOrderIdTotalSavingsKey),
             matching: find.textContaining('Total savings:'),
           ),
           findsOneWidget,
@@ -1683,7 +1694,10 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+            displaySubtotalTaxBreakdown: true,
+            currency: Currency('myr'),
+          ),
         ),
       );
       when(() => viewByOrderBlocMock.state).thenReturn(
@@ -1702,7 +1716,14 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-      expect(viewByOrderTaxKey, findsOneWidget);
+
+      expect(
+        find.descendant(
+          of: viewByOrderTaxKey,
+          matching: find.text('MYR 0.00', findRichText: true),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets(
@@ -1910,6 +1931,201 @@ void main() {
       );
       expect(priceMessageWidgetFinder, findsOneWidget);
       expect(priceMessageFinder, findsOneWidget);
+    });
+
+    testWidgets(
+        'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is enabled ',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        displaySubtotalTaxBreakdown: true,
+        currency: Currency('myr'),
+        salesOrg: fakeMYSalesOrg,
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: config,
+        ),
+      );
+      final bundleList = [
+        OrderHistoryDetailsOrderItem.empty().copyWith(
+          productType: MaterialInfoType.bundle(),
+          material: MaterialInfo.empty().copyWith(
+            bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
+          ),
+        )
+      ];
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderNumber: OrderNumber('Fake-Order-Number'),
+            orderValue: 990.0,
+            totalTax: 99.0,
+            orderHistoryDetailsOrderItem: bundleList,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderSubtotalKey),
+          matching:
+              find.textContaining('Subtotal (${config.displayPrefixTax}.tax)'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderSubtotalKey),
+          matching: find.text(
+            'MYR 990.00',
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderTaxKey),
+          matching: find.text(
+            'MYR 99.00',
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
+          matching: find.textContaining('Grand total:'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
+          matching: find.text(
+            'MYR 1,089.00',
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      expect(
+        find.byKey(WidgetKeys.viewByOrderDetailBundleSection),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.orderHistoryBundleInformation),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is disabled ',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        currency: Currency('myr'),
+        salesOrg: fakeMYSalesOrg,
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: config,
+        ),
+      );
+      final bundleList = [
+        OrderHistoryDetailsOrderItem.empty().copyWith(
+          productType: MaterialInfoType.bundle(),
+          material: MaterialInfo.empty().copyWith(
+            bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
+          ),
+        )
+      ];
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderNumber: OrderNumber('Fake-Order-Number'),
+            orderValue: 990.0,
+            totalTax: 99.0,
+            orderHistoryDetailsOrderItem: bundleList,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderSubtotalKey),
+          matching:
+              find.textContaining('Subtotal (${config.displayPrefixTax}.tax)'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderSubtotalKey),
+          matching: find.text(
+            'MYR 990.00',
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderTaxKey),
+          matching: find.textContaining('Tax at 10%'),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderTaxKey),
+          matching: find.text(
+            'MYR 99.00',
+            findRichText: true,
+          ),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
+          matching: find.textContaining('Grand total:'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
+          matching: find.text(
+            'MYR 990.00',
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      await tester.fling(
+        find.byType(ListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      expect(
+        find.byKey(WidgetKeys.viewByOrderDetailBundleSection),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.orderHistoryBundleInformation),
+        findsOneWidget,
+      );
     });
   });
 }

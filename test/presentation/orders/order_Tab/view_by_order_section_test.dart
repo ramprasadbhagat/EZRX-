@@ -498,6 +498,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeEmptySalesConfigs.copyWith(
+            displaySubtotalTaxBreakdown: true,
             currency: Currency('SGD'),
           ),
         ),

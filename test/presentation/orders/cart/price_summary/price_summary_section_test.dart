@@ -1,11 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
 import 'package:flutter/material.dart';
@@ -48,11 +51,14 @@ void main() {
     quantity: qty,
   );
 
+  late List<PriceAggregate> mockCartBundleItems;
+
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerFactory<AppRouter>(() => MockAppRouter());
     autoRouter = locator<AppRouter>();
+    mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
   });
 
   RouteData fakeRouteData(String name) => RouteData(
@@ -162,7 +168,7 @@ void main() {
         );
       });
 
-      testWidgets('Show 0 in cart page', (tester) async {
+      testWidgets('Not displayed in cart page', (tester) async {
         final cartState = CartState.initial().copyWith(
           cartProducts: [item],
           salesOrganisation: fakeSalesOrganisation,
@@ -183,17 +189,17 @@ void main() {
         );
         await tester.pumpWidget(getWidget(cartState));
         await tester.pumpAndSettle();
-        expect(widget, findsOneWidget);
+        expect(widget, findsNothing);
         expect(
           find.descendant(
             of: widget,
             matching: find.textContaining(totalSavingText, findRichText: true),
           ),
-          findsOneWidget,
+          findsNothing,
         );
       });
 
-      testWidgets('Show 0 in checkout page', (tester) async {
+      testWidgets('Not displayed in checkout page', (tester) async {
         final cartState = CartState.initial().copyWith(
           cartProducts: [item],
           salesOrganisation: fakeSalesOrganisation,
@@ -214,11 +220,446 @@ void main() {
         );
         await tester.pumpWidget(getWidget(cartState));
         await tester.pumpAndSettle();
-        expect(widget, findsOneWidget);
+        expect(widget, findsNothing);
         expect(
           find.descendant(
             of: widget,
             matching: find.textContaining(totalSavingText, findRichText: true),
+          ),
+          findsNothing,
+        );
+      });
+    });
+
+    group('Test SubTotal', () {
+      testWidgets('Test Sub total Cart page for bundles ', (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: mockCartBundleItems,
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: config,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CartPageRoute.name));
+        when(() => cartBloc.state).thenReturn(cartState);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: config,
+          ),
+        );
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
+            matching: find
+                .textContaining('Subtotal (${config.displayPrefixTax}.tax)'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
+            matching: find.text(
+              'MYR 990.00',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('Test Sub total in Checkout page for bundles',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+          displaySubtotalTaxBreakdown: true,
+          vatValue: 10,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: [
+            mockCartBundleItems.first.copyWith(salesOrgConfig: config)
+          ],
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: config,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CheckoutPageRoute.name));
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: config,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(cartState);
+
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
+            matching: find
+                .textContaining('Subtotal (${config.displayPrefixTax}.tax)'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
+            matching: find.text(
+              'MYR 990.00',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+    });
+    group('Test Tax', () {
+      testWidgets(
+          'Test Tax value in Cart page for bundles with displaySubtotalTaxBreakdown disabled',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: mockCartBundleItems,
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: config,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CartPageRoute.name));
+        when(() => cartBloc.state).thenReturn(cartState);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: config,
+          ),
+        );
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.checkoutSummaryTax), findsNothing);
+      });
+
+      testWidgets(
+          'Test Tax value in Cart page for bundles with displaySubtotalTaxBreakdown enabled',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+          displaySubtotalTaxBreakdown: true,
+          vatValue: 10,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: [
+            mockCartBundleItems.first.copyWith(salesOrgConfig: config)
+          ],
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: config,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CartPageRoute.name));
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: config,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(cartState);
+
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.checkoutSummaryTax), findsOneWidget);
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryTax),
+            matching: find.textContaining('Tax at 10%'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryTax),
+            matching: find.text(
+              'MYR 99.00',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+      testWidgets(
+          'Test Tax value in Checkout page for bundles with displaySubtotalTaxBreakdown disabled',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: mockCartBundleItems,
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: config,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CartPageRoute.name));
+        when(() => cartBloc.state).thenReturn(cartState);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: config,
+          ),
+        );
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+
+        expect(find.byKey(WidgetKeys.checkoutSummaryTax), findsNothing);
+      });
+
+      testWidgets(
+          'Test Tax value in Checkout page for bundles with displaySubtotalTaxBreakdown enabled',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+          displaySubtotalTaxBreakdown: true,
+          vatValue: 10,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: [
+            mockCartBundleItems.first.copyWith(salesOrgConfig: config)
+          ],
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: config,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CartPageRoute.name));
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: config,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(cartState);
+
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.checkoutSummaryTax), findsOneWidget);
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryTax),
+            matching: find.textContaining('Tax at 10%'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryTax),
+            matching: find.text(
+              'MYR 99.00',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+    });
+
+    group('Test Grand Total', () {
+      testWidgets(
+          'Test Grand Total value in Cart page for bundles with displaySubtotalTaxBreakdown disabled',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: mockCartBundleItems,
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: config,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CartPageRoute.name));
+        when(() => cartBloc.state).thenReturn(cartState);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: config,
+          ),
+        );
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+            matching: find.textContaining('Grand total:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+            matching: find.text(
+              'MYR 990.00',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Test Grand Total value in Cart page for bundle with displaySubtotalTaxBreakdown enabled',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+          displaySubtotalTaxBreakdown: true,
+          vatValue: 10,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: [
+            mockCartBundleItems.first.copyWith(salesOrgConfig: config)
+          ],
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: config,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CartPageRoute.name));
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: config,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(cartState);
+
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+            matching: find.textContaining('Grand total:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+            matching: find.text(
+              'MYR 1,089.00',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Test Grand Total value in Checkout page for bundles with displaySubtotalTaxBreakdown disabled',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: mockCartBundleItems,
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: config,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CheckoutPageRoute.name));
+        when(() => cartBloc.state).thenReturn(cartState);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: config,
+          ),
+        );
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+            matching: find.textContaining('Grand total:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+            matching: find.text(
+              'MYR 990.00',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Test Grand Total value in Checkout page for bundle with displaySubtotalTaxBreakdown enabled',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+          displaySubtotalTaxBreakdown: true,
+          vatValue: 10,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: [
+            mockCartBundleItems.first.copyWith(salesOrgConfig: config)
+          ],
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: config,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CheckoutPageRoute.name));
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: config,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(cartState);
+
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+            matching: find.textContaining('Grand total:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+            matching: find.text(
+              'MYR 1,089.00',
+              findRichText: true,
+            ),
           ),
           findsOneWidget,
         );

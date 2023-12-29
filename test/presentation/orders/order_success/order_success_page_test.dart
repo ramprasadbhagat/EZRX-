@@ -23,6 +23,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
@@ -355,9 +356,8 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enablePaymentTerms: true,
-              vatValue: vatValue,
-              displayItemTaxBreakdown: true,
+              currency: Currency('sgd'),
+              displaySubtotalTaxBreakdown: true,
               salesOrg: SalesOrg('2601'),
             ),
           ),
@@ -391,7 +391,7 @@ void main() {
         expect(
           find.descendant(
             of: orderSummarySection,
-            matching: find.text('Subtotal (incl.tax):'),
+            matching: find.text('Subtotal (excl.tax):'),
           ),
           findsOneWidget,
         );
@@ -1312,12 +1312,12 @@ void main() {
 
         expect(
           orderSummaryTotalSaving,
-          currentSalesOrgVariant.isSg ? findsNothing : findsOneWidget,
+          currentSalesOrgVariant.isID ? findsOneWidget : findsNothing,
         );
 
         expect(
           find.textContaining('21.39', findRichText: true),
-          currentSalesOrgVariant.isSg ? findsNothing : findsOneWidget,
+          currentSalesOrgVariant.isID ? findsOneWidget : findsNothing,
         );
       },
       variant: salesOrgVariant,
@@ -1389,6 +1389,183 @@ void main() {
       );
       expect(priceMessageWidgetFinder, findsOneWidget);
       expect(priceMessageFinder, findsOneWidget);
+    });
+
+    testWidgets(
+        'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is enabled ',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        displaySubtotalTaxBreakdown: true,
+        currency: Currency('myr'),
+        salesOrg: fakeMYSalesOrg,
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: config,
+        ),
+      );
+      final bundleList = [
+        OrderHistoryDetailsOrderItem.empty().copyWith(
+          productType: MaterialInfoType.bundle(),
+          material: MaterialInfo.empty().copyWith(
+            bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
+          ),
+        )
+      ];
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderNumber: OrderNumber('Fake-Order-Number'),
+            orderValue: 990.0,
+            totalTax: 99.0,
+            orderHistoryDetailsOrderItem: bundleList,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessSubTotal),
+          matching:
+              find.textContaining('Subtotal (${config.displayPrefixTax}.tax)'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessSubTotal),
+          matching: find.text(
+            'MYR 990.00',
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSummaryTax),
+          matching: find.text(
+            'MYR 99.00',
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
+          matching: find.textContaining('Grand total:'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
+          matching: find.text(
+            'MYR 1,089.00',
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is disabled ',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        displaySubtotalTaxBreakdown: false,
+        currency: Currency('myr'),
+        salesOrg: fakeMYSalesOrg,
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: config,
+        ),
+      );
+      final bundleList = [
+        OrderHistoryDetailsOrderItem.empty().copyWith(
+          productType: MaterialInfoType.bundle(),
+          material: MaterialInfo.empty().copyWith(
+            bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
+          ),
+        )
+      ];
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderNumber: OrderNumber('Fake-Order-Number'),
+            orderValue: 990.0,
+            totalTax: 99.0,
+            orderHistoryDetailsOrderItem: bundleList,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessSubTotal),
+          matching:
+              find.textContaining('Subtotal (${config.displayPrefixTax}.tax)'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessSubTotal),
+          matching: find.text(
+            'MYR 990.00',
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSummaryTax),
+          matching: find.textContaining('Tax at 10%'),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSummaryTax),
+          matching: find.text(
+            'MYR 99.00',
+            findRichText: true,
+          ),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
+          matching: find.textContaining('Grand total:'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
+          matching: find.text(
+            'MYR 990.00',
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+        findsOneWidget,
+      );
     });
   });
 }

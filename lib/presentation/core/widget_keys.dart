@@ -1248,6 +1248,15 @@ class WidgetKeys {
       const Key('viewByOrderOrderNumberLoading');
   static Key viewByOrderOrderNumberButton =
       const Key('viewByOrderOrderNumberButton');
+  static Key viewByOrderIdSubtotalKey = const Key('viewByOrderIdSubtotalKey');
+  static Key viewByOrderIdTaxKey = const Key('viewByOrderIdTaxKey');
+  static Key viewByOrderIdGrandTotalKey =
+      const Key('viewByOrderIdGrandTotalKey');
+  static Key viewByOrderIdTotalSavingsKey =
+      const Key('viewByOrderIdTotalSavingsKey');
+  static Key viewByOrderIdManualFeeKey = const Key('viewByOrderIdManualFeeKey');
+  static Key viewByOrderIdSmallOrderFeeKey =
+      const Key('viewByOrderIdSmallOrderFeeKey');
   //============================================================
   // View By Orders filter bottom sheet
   //============================================================
@@ -1268,6 +1277,7 @@ class WidgetKeys {
       const Key('viewByOrderDetailOrderDate');
   static Key viewByOrderDetailItem(String materialNumber, bool isBonus) =>
       Key('viewByOrderDetailItem$materialNumber$isBonus');
+
   //===========================================================
   //  Intro Page
   //============================================================

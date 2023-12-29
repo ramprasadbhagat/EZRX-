@@ -3015,7 +3015,7 @@ void main() {
           await tester.pumpAndSettle();
           expect(
             checkoutSummaryTotalSaving,
-            currentSalesOrgVariant.isSg ? findsNothing : findsOneWidget,
+            currentSalesOrgVariant.isID ? findsOneWidget : findsNothing,
           );
         },
         variant: salesOrgVariant,
@@ -3037,6 +3037,86 @@ void main() {
           expect(cartCountFinder, findsOneWidget);
         },
       );
+
+      testWidgets(
+          'Test Grand Total value for bundles with displaySubtotalTaxBreakdown disabled',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: config,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            config: config,
+            salesOrganisation: fakeMYSalesOrganisation,
+            cartProducts: mockCartBundleItems,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        expect(grandTotal, findsOneWidget);
+        expect(
+          find.text(
+            'Grand total: MYR 990.00',
+            findRichText: true,
+          ),
+          findsOneWidget,
+        );
+        await tester.tap(grandTotal);
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
+      });
+
+      testWidgets(
+          'Test Grand Total value for bundles with displaySubtotalTaxBreakdown enabled',
+          (tester) async {
+        final config = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          salesOrg: fakeMYSalesOrg,
+          displaySubtotalTaxBreakdown: true,
+          vatValue: 10,
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: config,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            config: config,
+            salesOrganisation: fakeMYSalesOrganisation,
+            cartProducts: [
+              mockCartBundleItems.first.copyWith(salesOrgConfig: config)
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        expect(grandTotal, findsOneWidget);
+        expect(
+          find.text(
+            'Grand total: MYR 1,089.00',
+            findRichText: true,
+          ),
+          findsOneWidget,
+        );
+        await tester.tap(grandTotal);
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
+      });
     },
   );
 }

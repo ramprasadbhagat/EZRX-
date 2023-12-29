@@ -151,7 +151,7 @@ class SalesOrg extends ValueObject<String> {
 
   String get taxTitle => isVN ? 'Tax' : 'Tax at';
 
-  bool get showTotalSaving => !isSg;
+  bool get showTotalSaving => isID;
 
   const SalesOrg._(this.value);
 }

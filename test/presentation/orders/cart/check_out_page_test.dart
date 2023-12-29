@@ -42,6 +42,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -131,6 +132,7 @@ void main() {
   late MaterialPriceBloc materialPriceBlocMock;
   late OrderEligibilityBloc orderEligibilityBlocMock;
 
+  late List<PriceAggregate> mockCartBundleItems;
   final fakeCartProduct = <PriceAggregate>[
     PriceAggregate.empty().copyWith(
       materialInfo: MaterialInfo.empty().copyWith(
@@ -151,6 +153,7 @@ void main() {
     locator.registerSingleton<MixpanelService>(MockMixpanelService());
 
     autoRouterMock = locator<AppRouter>();
+    mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
   });
   group('Checkout Page Test', () {
     setUp(() {
@@ -2267,5 +2270,108 @@ void main() {
         expect(priceMessageFinder, findsOneWidget);
       },
     );
+
+    testWidgets(
+        'Test Grand Total value for bundles with displaySubtotalTaxBreakdown enabled',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        currency: Currency('myr'),
+        salesOrg: fakeMYSalesOrg,
+        displaySubtotalTaxBreakdown: true,
+        vatValue: 10,
+      );
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: config,
+          salesOrganisation: fakeMYSalesOrganisation,
+        ),
+      );
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          config: config,
+          salesOrganisation: fakeMYSalesOrganisation,
+          cartProducts: [
+            mockCartBundleItems.first.copyWith(salesOrgConfig: config)
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+      expect(scrollListFinder, findsOneWidget);
+
+      final subTotalTextFinder = find.descendant(
+        of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
+        matching:
+            find.textContaining('Subtotal (${config.displayPrefixTax}.tax)'),
+      );
+      final subTotalValueFinder = find.descendant(
+        of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
+        matching: find.text(
+          'MYR 990.00',
+          findRichText: true,
+        ),
+      );
+      final taxAtTextFinder = find.descendant(
+        of: find.byKey(WidgetKeys.checkoutSummaryTax),
+        matching: find.textContaining('Tax at 10%'),
+      );
+      final taxAtValueFinder = find.descendant(
+        of: find.byKey(WidgetKeys.checkoutSummaryTax),
+        matching: find.text(
+          'MYR 99.00',
+          findRichText: true,
+        ),
+      );
+      final grandTotalTextFinder = find.descendant(
+        of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+        matching: find.textContaining('Grand total:'),
+      );
+      final grandTotalValueFinder = find.descendant(
+        of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+        matching: find.text(
+          'MYR 1,089.00',
+          findRichText: true,
+        ),
+      );
+
+      await tester.dragUntilVisible(
+        subTotalTextFinder,
+        scrollListFinder,
+        const Offset(0.0, -300.0),
+      );
+
+      await tester.dragUntilVisible(
+        subTotalValueFinder,
+        scrollListFinder,
+        const Offset(0.0, -300.0),
+      );
+
+      await tester.dragUntilVisible(
+        taxAtTextFinder,
+        scrollListFinder,
+        const Offset(0.0, -300.0),
+      );
+
+      await tester.dragUntilVisible(
+        taxAtValueFinder,
+        scrollListFinder,
+        const Offset(0.0, -300.0),
+      );
+
+      await tester.dragUntilVisible(
+        grandTotalTextFinder,
+        scrollListFinder,
+        const Offset(0.0, -300.0),
+      );
+
+      await tester.dragUntilVisible(
+        grandTotalValueFinder,
+        scrollListFinder,
+        const Offset(0.0, -300.0),
+      );
+    });
   });
 }

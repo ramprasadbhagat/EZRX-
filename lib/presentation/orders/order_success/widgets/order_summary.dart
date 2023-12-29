@@ -24,6 +24,7 @@ class _OrderSummary extends StatelessWidget {
       subtitle: Column(
         children: [
           Row(
+            key: WidgetKeys.orderSuccessSubTotal,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -33,7 +34,6 @@ class _OrderSummary extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
-                key: WidgetKeys.orderSuccessSubTotal,
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price:
@@ -53,7 +53,6 @@ class _OrderSummary extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 PriceComponent(
-                  key: WidgetKeys.orderSuccessSubTotal,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: orderHistoryDetails.totalTax.toString(),
@@ -67,6 +66,7 @@ class _OrderSummary extends StatelessWidget {
             height: 15,
           ),
           Row(
+            key: WidgetKeys.orderSuccessGrandTotal,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -74,11 +74,11 @@ class _OrderSummary extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
-                key: WidgetKeys.orderSuccessGrandTotal,
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price:
-                    '${orderHistoryDetails.grandTotal(eligibilityState.isMYExternalSalesRepUser)}',
+                salesOrgConfig: eligibilityState.salesOrgConfigs,
+                price: eligibilityState
+                        .salesOrgConfigs.displaySubtotalTaxBreakdown
+                    ? '${orderHistoryDetails.grandTotal(eligibilityState.isMYExternalSalesRepUser, isIDMarket: eligibilityState.isIDMarket)}'
+                    : '${orderHistoryDetails.orderedItemsValue(eligibilityState.isMYExternalSalesRepUser, isIDMarket: eligibilityState.isIDMarket)}',
               ),
             ],
           ),

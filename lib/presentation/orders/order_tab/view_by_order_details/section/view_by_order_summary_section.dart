@@ -21,7 +21,7 @@ class OrderSummarySection extends StatelessWidget {
     final salesOrgConfigs = eligibilityState.salesOrgConfigs;
     final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
     final taxDisplayForOrderHistoryAndDetails =
-        salesOrgConfigs.taxDisplayForOrderHistoryAndDetails;
+        salesOrgConfigs.displaySubtotalTaxBreakdown;
     final orderDetails =
         context.read<ViewByOrderDetailsBloc>().state.orderHistoryDetails;
 
@@ -42,12 +42,14 @@ class OrderSummarySection extends StatelessWidget {
           ),
           if (eligibilityState.salesOrg.isID) ...[
             _PriceTile(
+              key: WidgetKeys.viewByOrderIdSubtotalKey,
               orderNumber: orderDetails.orderNumber,
               title: context.tr('Subtotal (excl.tax)'),
               value: orderDetails.orderValue,
             ),
             const SizedBox(height: 10),
             _PriceTile(
+              key: WidgetKeys.viewByOrderIdTaxKey,
               orderNumber: orderDetails.orderNumber,
               title:
                   '${context.tr('Tax at')} ${eligibilityState.salesOrg.orderTaxValue}%',
@@ -55,6 +57,7 @@ class OrderSummarySection extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             _PriceTile(
+              key: WidgetKeys.viewByOrderIdSmallOrderFeeKey,
               orderNumber: orderDetails.orderNumber,
               title: context.tr('Small order fee'),
               value: orderDetails.deliveryFee,
@@ -67,12 +70,14 @@ class OrderSummarySection extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             _PriceTile(
+              key: WidgetKeys.viewByOrderIdManualFeeKey,
               orderNumber: orderDetails.orderNumber,
               title: context.tr('Manual fee'),
               value: orderDetails.manualFee,
             ),
             const _SectionDivider(),
             _PriceTile(
+              key: WidgetKeys.viewByOrderIdGrandTotalKey,
               orderNumber: orderDetails.orderNumber,
               title: context.tr('Grand total'),
               value: orderDetails.totalValue,
@@ -80,6 +85,7 @@ class OrderSummarySection extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             _PriceTile(
+              key: WidgetKeys.viewByOrderIdTotalSavingsKey,
               orderNumber: orderDetails.orderNumber,
               title: context.tr('Total savings'),
               value: orderDetails.totalDiscount,
@@ -88,20 +94,23 @@ class OrderSummarySection extends StatelessWidget {
             _PriceTile(
               key: WidgetKeys.viewByOrderSubtotalKey,
               orderNumber: orderDetails.orderNumber,
-              title: context.tr('Subtotal (excl.tax)'),
+              title: context.tr(
+                'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
+              ),
               value: orderDetails.subTotalExcludeTax(isMYExternalSalesRep),
             ),
             const SizedBox(
               height: 5,
             ),
-            _PriceTile(
-              key: WidgetKeys.viewByOrderTaxKey,
-              orderNumber: orderDetails.orderNumber,
-              title: eligibilityState.salesOrg.isVN
-                  ? context.tr('Tax')
-                  : '${context.tr('Tax at')} ${orderDetails.totalTaxPercentage}%',
-              value: orderDetails.totalTax,
-            ),
+            if (eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)
+              _PriceTile(
+                key: WidgetKeys.viewByOrderTaxKey,
+                orderNumber: orderDetails.orderNumber,
+                title: eligibilityState.salesOrg.isVN
+                    ? context.tr('Tax')
+                    : '${context.tr('Tax at')} ${orderDetails.totalTaxPercentage}%',
+                value: orderDetails.totalTax,
+              ),
             const SizedBox(
               height: 5,
             ),
@@ -155,7 +164,7 @@ class _PriceTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      key: WidgetKeys.priceText,
+      key: key,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text('$title:'),

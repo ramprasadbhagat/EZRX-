@@ -161,17 +161,23 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         .first;
   }
 
-  double grandTotal(bool isMYExternalSalesRep) =>
-      orderHistoryDetailsOrderItem.fold(
-        grandTotalWithTax,
-        (previousValue, element) => isMYExternalSalesRep &&
-                element.type.isMaterialTypeComm &&
-                element.principalData.principalCode.isPnG &&
-                !invoiceNumber.isValid() &&
-                orderValue > 0
-            ? grandTotalWithTax - element.totalPrice
-            : previousValue,
-      );
+  double grandTotal(
+    bool isMYExternalSalesRep, {
+    bool isIDMarket = false,
+  }) {
+    if (isIDMarket) return totalValue;
+
+    return orderHistoryDetailsOrderItem.fold(
+      grandTotalWithTax,
+      (previousValue, element) => isMYExternalSalesRep &&
+              element.type.isMaterialTypeComm &&
+              element.principalData.principalCode.isPnG &&
+              !invoiceNumber.isValid() &&
+              orderValue > 0
+          ? grandTotalWithTax - element.totalPrice
+          : previousValue,
+    );
+  }
 
   double subTotalExcludeTax(bool isMYExternalSalesRep) =>
       orderHistoryDetailsOrderItem.fold(
@@ -194,7 +200,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     }
 
     return orderHistoryDetailsOrderItem.fold(
-      grandTotalWithTax,
+      orderValue,
       (previousValue, element) => isMYExternalSalesRep &&
               element.type.isMaterialTypeComm &&
               element.principalData.principalCode.isPnG &&

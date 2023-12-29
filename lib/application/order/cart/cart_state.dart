@@ -214,7 +214,7 @@ class CartState with _$CartState {
       : 0.0;
 
   double get totalTax =>
-      _isID ? aplSimulatorOrder.totalTax : taxMaterial + taxCombo;
+      _isID ? aplSimulatorOrder.totalTax : taxMaterial + taxCombo + taxBundle;
 
   bool get _isID => salesOrganisation.salesOrg.isID;
 
@@ -309,7 +309,7 @@ class CartState with _$CartState {
       );
 
   //Total product price with tax
-  double get totalBundlePriceWithTax => totalBundlesPrice;
+  double get totalBundlePriceWithTax => totalBundlesPrice + taxBundle;
 
   double get totalMaterialsPriceWithTax => totalMaterialsPrice + taxMaterial;
 
