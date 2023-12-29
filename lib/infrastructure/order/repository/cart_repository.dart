@@ -192,17 +192,20 @@ class CartRepository implements ICartRepository {
       for (final item in items) {
         final response = await getStockInfo(
           customerCodeInfo: customerCodeInfo,
-          material: item,
+          materials: [item],
           salesOrganisation: salesOrganisation,
-          salesOrganisationConfigs: salesOrganisationConfigs,
-          shipToInfo: shipToInfo,
         );
-        final stockInfo = response.fold(
-          (failure) => <StockInfo>[],
-          (stockInfo) => stockInfo,
-        );
+        final stockInfo = response
+            .fold(
+              (failure) => <MaterialStockInfo>[],
+              (stockInfo) => stockInfo,
+            )
+            .firstWhere(
+              (element) => element.materialNumber == item.materialNumber,
+              orElse: () => MaterialStockInfo.empty(),
+            );
         stockInfoMap.addAll(
-          {item.materialNumber: stockInfo},
+          {item.materialNumber: stockInfo.stockInfos},
         );
       }
 
@@ -213,18 +216,15 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<StockInfo>>> getStockInfo({
-    required MaterialInfo material,
+  Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfo({
+    required List<MaterialInfo> materials,
     required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final stockInfoList = salesOrganisationConfigs.enableBatchNumber
-            ? await stockInfoLocalDataSource.getStockInfoList()
-            : [await stockInfoLocalDataSource.getStockInfo()];
+        final stockInfoList =
+            await stockInfoLocalDataSource.getMaterialStockInfoList();
 
         return Right(stockInfoList);
       } catch (e) {
@@ -232,20 +232,13 @@ class CartRepository implements ICartRepository {
       }
     } else {
       try {
-        final stockInfoList = salesOrganisationConfigs.enableBatchNumber
-            ? await stockInfoRemoteDataSource.getStockInfoList(
-                materialNumber: material.materialNumber.getOrCrash(),
-                plant: shipToInfo.plant,
-                salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-                selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
-              )
-            : [
-                await stockInfoRemoteDataSource.getStockInfo(
-                  materialNumber: material.materialNumber.getOrCrash(),
-                  salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-                  selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
-                ),
-              ];
+        final stockInfoList =
+            await stockInfoRemoteDataSource.getMaterialStockInfoList(
+          materialNumbers:
+              materials.map((e) => e.materialNumber.getOrCrash()).toList(),
+          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+          selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
+        );
 
         return Right(stockInfoList);
       } catch (e) {
@@ -407,21 +400,24 @@ class CartRepository implements ICartRepository {
 
       final response = await getStockInfo(
         customerCodeInfo: customerCodeInfo,
-        material: materialInfo,
+        materials: [materialInfo],
         salesOrganisation: salesOrganisation,
-        salesOrganisationConfigs: salesOrganisationConfig,
-        shipToInfo: shipToInfo,
       );
-      final stockInfo = response.fold(
-        (failure) => <StockInfo>[],
-        (stockInfo) => stockInfo,
-      );
+      final stockInfo = response
+          .fold(
+            (failure) => <MaterialStockInfo>[],
+            (stockInfo) => stockInfo,
+          )
+          .firstWhere(
+            (element) => element.materialNumber == materialInfo.materialNumber,
+            orElse: () => MaterialStockInfo.empty(),
+          );
 
       final updatedProductList = productList
           .map(
             (element) =>
                 element.getMaterialNumber == materialInfo.materialNumber
-                    ? element.copyWith(stockInfoList: stockInfo)
+                    ? element.copyWith(stockInfoList: stockInfo.stockInfos)
                     : element,
           )
           .toList();

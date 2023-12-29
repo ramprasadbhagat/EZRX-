@@ -45,12 +45,10 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
   });
 
-  Future<Either<ApiFailure, List<StockInfo>>> getStockInfo({
-    required MaterialInfo material,
+  Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfo({
+    required List<MaterialInfo> materials,
     required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
   });
 
   //TODO: evaluate which methods will be removed with addition to this

@@ -84,7 +84,7 @@ void main() {
       test('Get StockInfoList', () async {
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/stockInformationListResponse.json'),
+              .loadString('assets/json/getStockInformationList.json'),
         );
 
         dioAdapter.onPost(
@@ -96,28 +96,28 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.stockInfoQueryMutation.getStockInfoList(),
+            'query': remoteDataSource.stockInfoQueryMutation
+                .getMaterialStockInfoListQuery(),
             'variables': {
-              'materialNumber': 'fake-material',
-              'plant': 'fake-plant',
-              'customerCode': 'fake-customercode',
-              'salesOrganisation': 'fake-salesorg',
-            },
+              'request': {
+                'materialNumbers': ['fake-material'],
+                'customerCode': 'fake-customercode',
+                'salesOrganisation': 'fake-salesorg',
+              },
+            }
           }),
         );
 
-        final result = await remoteDataSource.getStockInfoList(
-          materialNumber: 'fake-material',
-          plant: 'fake-plant',
+        final result = await remoteDataSource.getMaterialStockInfoList(
+          materialNumbers: ['fake-material'],
           salesOrg: 'fake-salesorg',
           selectedCustomerCode: 'fake-customercode',
         );
 
         expect(
           result,
-          List.from(res['data']['stockInformationList'])
-              .map((e) => StockInfoDto.fromJson(e).toDomain())
-              .toList(),
+          List.from(res['data']['getStockInformationLists'])
+              .map((e) => MaterialStockInfoDto.fromJson(e).toDomain()),
         );
       });
 

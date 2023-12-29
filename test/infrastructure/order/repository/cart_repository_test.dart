@@ -162,24 +162,23 @@ void main() {
     );
 
     when(
-      () => stockInfoRemoteDataSource.getStockInfo(
-        materialNumber: fakeCartProducts.first.materialNumberString,
+      () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+        materialNumbers: [fakeCartProducts.first.materialNumberString],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
       ),
     ).thenAnswer(
-      (invocation) async => StockInfo.empty(),
+      (invocation) async => [MaterialStockInfo.empty()],
     );
 
     when(
-      () => stockInfoRemoteDataSource.getStockInfoList(
-        materialNumber: fakeCartProducts.first.materialNumberString,
+      () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+        materialNumbers: [fakeCartProducts.first.materialNumberString],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        plant: fakeShipToInfo.plant,
       ),
     ).thenAnswer(
-      (invocation) async => [StockInfo.empty()],
+      (invocation) async => [MaterialStockInfo.empty()],
     );
     when(() => mockConfig.maximumCartQuantity).thenReturn(99999);
   });
@@ -573,31 +572,38 @@ void main() {
   // });
 
   test('Test Get Stock Info - Success', () async {
+    when(
+      () => stockInfoLocalDataSource.getMaterialStockInfoList(),
+    ).thenAnswer(
+      (invocation) async => [MaterialStockInfo.empty()],
+    );
     final result = await cartRepository.getStockInfo(
-      salesOrganisationConfigs: mockSalesOrganisationConfigs,
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeSalesOrganisation,
-      shipToInfo: fakeShipToInfo,
-      material: fakeCartProducts.first.materialInfo,
+      materials: [fakeCartProducts.first.materialInfo],
     );
     expect(result.isRight(), true);
   });
 
   test('Test Get Stock Info - UAT - Success', () async {
     when(
-      () => stockInfoLocalDataSource.getStockInfo(),
+      () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+        materialNumbers: [
+          fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+        ],
+        salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+        selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+      ),
     ).thenAnswer(
-      (invocation) async => StockInfo.empty(),
+      (invocation) async => [MaterialStockInfo.empty()],
     );
 
     when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
     final result = await cartRepository.getStockInfo(
-      salesOrganisationConfigs: mockSalesOrganisationConfigs,
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeSalesOrganisation,
-      shipToInfo: fakeShipToInfo,
-      material: fakeCartProducts.first.materialInfo,
+      materials: [fakeCartProducts.first.materialInfo],
     );
     expect(result.isRight(), true);
   });
@@ -605,8 +611,8 @@ void main() {
   test('Test Get Stock Info - UAT - Failure', () async {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
     when(
-      () => stockInfoRemoteDataSource.getStockInfo(
-        materialNumber: fakeCartProducts.first.materialNumberString,
+      () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+        materialNumbers: [fakeCartProducts.first.materialNumberString],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
       ),
@@ -615,11 +621,9 @@ void main() {
     );
 
     final result = await cartRepository.getStockInfo(
-      salesOrganisationConfigs: mockSalesOrganisationConfigs,
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeSalesOrganisation,
-      shipToInfo: fakeShipToInfo,
-      material: fakeCartProducts.first.materialInfo,
+      materials: [fakeCartProducts.first.materialInfo],
     );
     expect(result.isLeft(), true);
   });
@@ -627,45 +631,51 @@ void main() {
   test('Test Get Stock Info - Failure', () async {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
     when(
-      () => stockInfoLocalDataSource.getStockInfo(),
+      () => stockInfoLocalDataSource.getMaterialStockInfoList(),
     ).thenThrow(
       (invocation) async => MockException(),
     );
 
     final result = await cartRepository.getStockInfo(
-      salesOrganisationConfigs: mockSalesOrganisationConfigs,
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeSalesOrganisation,
-      shipToInfo: fakeShipToInfo,
-      material: fakeCartProducts.first.materialInfo,
+      materials: [fakeCartProducts.first.materialInfo],
     );
     expect(result.isLeft(), true);
   });
 
   test('Test Get Stock Info enableBatchNumber - Success', () async {
+    when(
+      () => stockInfoLocalDataSource.getMaterialStockInfoList(),
+    ).thenAnswer(
+      (invocation) async => [MaterialStockInfo.empty()],
+    );
     final result = await cartRepository.getStockInfo(
-      salesOrganisationConfigs: mockSalesOrganisationConfigs.copyWith(
-        enableBatchNumber: true,
-      ),
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeSalesOrganisation,
-      shipToInfo: fakeShipToInfo,
-      material: fakeCartProducts.first.materialInfo,
+      materials: [fakeCartProducts.first.materialInfo],
     );
     expect(result.isRight(), true);
   });
 
   test('Test Get Stock Info enableBatchNumber - UAT - Success', () async {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    when(
+      () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+        materialNumbers: [
+          fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+        ],
+        salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+        selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+      ),
+    ).thenAnswer(
+      (invocation) async => [MaterialStockInfo.empty()],
+    );
 
     final result = await cartRepository.getStockInfo(
-      salesOrganisationConfigs: mockSalesOrganisationConfigs.copyWith(
-        enableBatchNumber: true,
-      ),
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeSalesOrganisation,
-      shipToInfo: fakeShipToInfo,
-      material: fakeCartProducts.first.materialInfo,
+      materials: [fakeCartProducts.first.materialInfo],
     );
     expect(result.isRight(), true);
   });
@@ -1319,6 +1329,23 @@ void main() {
             fakeCartProducts.first.materialInfo.counterOfferDetails,
       );
       when(
+        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+          materialNumbers: [
+            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+          ],
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        ),
+      ).thenAnswer(
+        (invocation) async => [
+          MaterialStockInfo.empty().copyWith(
+            materialNumber: fakeCartProducts.first.materialInfo.materialNumber,
+            stockInfos: [StockInfo.empty()],
+          )
+        ],
+      );
+
+      when(
         () => cartRemoteDataSource.upsertCart(
           requestParams:
               CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
@@ -1758,6 +1785,18 @@ void main() {
       );
 
       when(
+        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+          materialNumbers: [
+            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+          ],
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        ),
+      ).thenAnswer(
+        (invocation) async => [MaterialStockInfo.empty()],
+      );
+
+      when(
         () => stockInfoRemoteDataSource.getStockInfo(
           materialNumber: fakeCartProducts.first.materialNumberString,
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
@@ -1813,6 +1852,23 @@ void main() {
         ),
       ).thenAnswer(
         (invocation) async => StockInfo.empty(),
+      );
+
+      when(
+        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+          materialNumbers: [
+            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+          ],
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        ),
+      ).thenAnswer(
+        (invocation) async => [
+          MaterialStockInfo.empty().copyWith(
+            materialNumber: fakeCartProducts.first.materialInfo.materialNumber,
+            stockInfos: [StockInfo.empty()],
+          )
+        ],
       );
 
       final result = await cartRepository.upsertCart(
@@ -1938,6 +1994,77 @@ void main() {
       );
       expect(result.getOrElse(() => []), [
         fakeCartProducts.first.copyWith(stockInfoList: [StockInfo.empty()])
+      ]);
+    });
+
+    test('Test update stock info with upsert cart', () async {
+      final upsertCartRequest = CartProductRequest.toMaterialRequest(
+        salesOrg: fakeSalesOrganisation.salesOrg,
+        customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+        language: 'EN',
+        materialInfo: fakeCartProducts.first.materialInfo,
+        itemId: fakeCartProducts.first.materialInfo.parentID,
+        quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
+        counterOfferDetails:
+            fakeCartProducts.first.materialInfo.counterOfferDetails,
+      );
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(
+        () => cartRemoteDataSource.upsertCart(
+          requestParams:
+              CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+        ),
+      ).thenAnswer(
+        (invocation) async => fakeCartProducts,
+      );
+
+      when(
+        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+          materialNumbers: [
+            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+          ],
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        ),
+      ).thenAnswer(
+        (invocation) async => [
+          MaterialStockInfo.empty().copyWith(
+            materialNumber: fakeCartProducts.first.materialInfo.materialNumber,
+            stockInfos: [
+              StockInfo.empty().copyWith(
+                materialNumber:
+                    fakeCartProducts.first.materialInfo.materialNumber,
+                inStock: MaterialInStock('Yes'),
+              )
+            ],
+          )
+        ],
+      );
+
+      final result = await cartRepository.upsertCart(
+        counterOfferDetails:
+            fakeCartProducts.first.materialInfo.counterOfferDetails,
+        quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
+        language: Language.english(),
+        shipToInfo: fakeShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisation: fakeSalesOrganisation,
+        materialInfo: fakeCartProducts.first.materialInfo,
+        itemId: fakeCartProducts.first.materialInfo.parentID,
+      );
+
+      expect(result.getOrElse(() => []), [
+        fakeCartProducts.first.copyWith(
+          stockInfoList: [
+            StockInfo.empty().copyWith(
+              materialNumber:
+                  fakeCartProducts.first.materialInfo.materialNumber,
+              inStock: MaterialInStock('Yes'),
+            )
+          ],
+        )
       ]);
     });
   });
