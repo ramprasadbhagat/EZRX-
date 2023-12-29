@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
@@ -2071,6 +2072,68 @@ void main() {
         expect(
           customPriceAggregate.toSubmitMaterialInfo().price,
           20,
+        );
+      },
+    );
+
+    test(
+      'Find exhausted deal bonus with quantity 0 from dealBonusList',
+      () {
+        final parentProduct = MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-product'),
+          quantity: MaterialQty(7),
+        );
+        final emptyBonus = MaterialInfo.empty();
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          quantity: 7,
+          materialInfo: parentProduct,
+          bonusSampleItems: [
+            BonusSampleItem.empty().copyWith(
+              itemId: StringValue('123'),
+              materialNumber: MaterialNumber('fake-bonus1'),
+              qty: MaterialQty(2),
+              type: MaterialInfoType('Deals'),
+            )
+          ],
+          price: Price.empty().copyWith(
+            bonuses: [
+              PriceBonus.empty().copyWith(
+                items: [
+                  PriceBonusItem.empty().copyWith(
+                    calculation: BonusMaterialCalculation('913'),
+                    qualifyingQuantity: 7,
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        materialNumber: MaterialNumber('fake-bonus2'),
+                        calculation: BonusMaterialCalculation('913'),
+                        qualifyingQuantity: 7,
+                        bonusQuantity: 1,
+                        limitPerTransaction: 0,
+                      )
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+        );
+        expect(
+          customPriceAggregate.dealBonusList,
+          [
+            emptyBonus.copyWith(
+              materialNumber: MaterialNumber('fake-bonus2'),
+              quantity: MaterialQty(1),
+              type: MaterialInfoType('Deals'),
+              parentID: 'fake-product',
+            ),
+            emptyBonus.copyWith(
+              materialNumber: MaterialNumber('fake-bonus1'),
+              quantity: MaterialQty(0),
+              type: MaterialInfoType('Deals'),
+              sampleBonusItemId: '123',
+              parentID: 'fake-product',
+            )
+          ],
         );
       },
     );

@@ -544,9 +544,6 @@ class PriceAggregate with _$PriceAggregate {
       .toList();
 
   List<MaterialInfo> get dealBonusList {
-    final inValidDeal =
-        existingProductDealBonus.isNotEmpty && getMaterialItemBonus.isEmpty;
-
     final existingBonus = existingProductDealBonus.firstWhere(
       (element) => element.quantity.isValid(),
       orElse: () => MaterialInfo.empty(),
@@ -561,11 +558,17 @@ class PriceAggregate with _$PriceAggregate {
       return <MaterialInfo>[];
     }
 
-    return inValidDeal
-        ? existingProductDealBonus
-            .map((e) => e.copyWith(quantity: MaterialQty(0)))
-            .toList()
-        : _applicableProductDealBonus;
+    final exhaustedBonus = existingProductDealBonus
+        .where(
+          (e) => !_applicableProductDealBonus.any(
+            (applicableBonus) =>
+                e.sampleBonusItemId == applicableBonus.sampleBonusItemId,
+          ),
+        )
+        .map((e) => e.copyWith(quantity: MaterialQty(0)))
+        .toList();
+
+    return [..._applicableProductDealBonus, ...exhaustedBonus];
   }
 
   List<MaterialInfo> get _applicableProductDealBonus => getMaterialItemBonus
