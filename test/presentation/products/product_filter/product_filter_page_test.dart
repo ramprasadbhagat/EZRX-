@@ -338,6 +338,17 @@ void main() {
       testWidgets(
         'Test Product Filter Reset Button',
         (tester) async {
+          when(() => mockMaterialListBloc.state).thenReturn(
+            MaterialListState.initial().copyWith(
+              selectedMaterialFilter: MaterialFilter.empty().copyWith(
+                bundleOffers: true,
+              ),
+            ),
+          );
+          when(() => mockMaterialFilterBloc.state).thenReturn(
+            MaterialFilterState.initial(),
+          );
+
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
 

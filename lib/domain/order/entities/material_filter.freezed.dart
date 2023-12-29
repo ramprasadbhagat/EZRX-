@@ -17,11 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MaterialFilter {
   bool get isFavourite => throw _privateConstructorUsedError;
-  bool get isFOCMaterial => throw _privateConstructorUsedError;
+  bool get isCovidSelected => throw _privateConstructorUsedError;
   bool get bundleOffers => throw _privateConstructorUsedError;
   bool get comboOffers => throw _privateConstructorUsedError;
   bool get isProductOffer => throw _privateConstructorUsedError;
   Sort get sortBy => throw _privateConstructorUsedError;
+  bool get hasAccessToCovidMaterial => throw _privateConstructorUsedError;
   Map<String, bool> get manufactureMapOptions =>
       throw _privateConstructorUsedError;
   Map<MaterialFilterCountry, bool> get countryMapOptions =>
@@ -45,11 +46,12 @@ abstract class $MaterialFilterCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isFavourite,
-      bool isFOCMaterial,
+      bool isCovidSelected,
       bool bundleOffers,
       bool comboOffers,
       bool isProductOffer,
       Sort sortBy,
+      bool hasAccessToCovidMaterial,
       Map<String, bool> manufactureMapOptions,
       Map<MaterialFilterCountry, bool> countryMapOptions,
       List<String> brandList,
@@ -71,11 +73,12 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
   @override
   $Res call({
     Object? isFavourite = null,
-    Object? isFOCMaterial = null,
+    Object? isCovidSelected = null,
     Object? bundleOffers = null,
     Object? comboOffers = null,
     Object? isProductOffer = null,
     Object? sortBy = null,
+    Object? hasAccessToCovidMaterial = null,
     Object? manufactureMapOptions = null,
     Object? countryMapOptions = null,
     Object? brandList = null,
@@ -87,9 +90,9 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFOCMaterial: null == isFOCMaterial
-          ? _value.isFOCMaterial
-          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
+      isCovidSelected: null == isCovidSelected
+          ? _value.isCovidSelected
+          : isCovidSelected // ignore: cast_nullable_to_non_nullable
               as bool,
       bundleOffers: null == bundleOffers
           ? _value.bundleOffers
@@ -107,6 +110,10 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
               as Sort,
+      hasAccessToCovidMaterial: null == hasAccessToCovidMaterial
+          ? _value.hasAccessToCovidMaterial
+          : hasAccessToCovidMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
       manufactureMapOptions: null == manufactureMapOptions
           ? _value.manufactureMapOptions
           : manufactureMapOptions // ignore: cast_nullable_to_non_nullable
@@ -141,11 +148,12 @@ abstract class _$$_MaterialFilterCopyWith<$Res>
   @useResult
   $Res call(
       {bool isFavourite,
-      bool isFOCMaterial,
+      bool isCovidSelected,
       bool bundleOffers,
       bool comboOffers,
       bool isProductOffer,
       Sort sortBy,
+      bool hasAccessToCovidMaterial,
       Map<String, bool> manufactureMapOptions,
       Map<MaterialFilterCountry, bool> countryMapOptions,
       List<String> brandList,
@@ -165,11 +173,12 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isFavourite = null,
-    Object? isFOCMaterial = null,
+    Object? isCovidSelected = null,
     Object? bundleOffers = null,
     Object? comboOffers = null,
     Object? isProductOffer = null,
     Object? sortBy = null,
+    Object? hasAccessToCovidMaterial = null,
     Object? manufactureMapOptions = null,
     Object? countryMapOptions = null,
     Object? brandList = null,
@@ -181,9 +190,9 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFOCMaterial: null == isFOCMaterial
-          ? _value.isFOCMaterial
-          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
+      isCovidSelected: null == isCovidSelected
+          ? _value.isCovidSelected
+          : isCovidSelected // ignore: cast_nullable_to_non_nullable
               as bool,
       bundleOffers: null == bundleOffers
           ? _value.bundleOffers
@@ -201,6 +210,10 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
               as Sort,
+      hasAccessToCovidMaterial: null == hasAccessToCovidMaterial
+          ? _value.hasAccessToCovidMaterial
+          : hasAccessToCovidMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
       manufactureMapOptions: null == manufactureMapOptions
           ? _value._manufactureMapOptions
           : manufactureMapOptions // ignore: cast_nullable_to_non_nullable
@@ -230,11 +243,12 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
 class _$_MaterialFilter extends _MaterialFilter {
   const _$_MaterialFilter(
       {this.isFavourite = false,
-      this.isFOCMaterial = false,
+      this.isCovidSelected = false,
       this.bundleOffers = false,
       this.comboOffers = false,
       this.isProductOffer = false,
       this.sortBy = Sort.az,
+      this.hasAccessToCovidMaterial = false,
       required final Map<String, bool> manufactureMapOptions,
       required final Map<MaterialFilterCountry, bool> countryMapOptions,
       required final List<String> brandList,
@@ -253,7 +267,7 @@ class _$_MaterialFilter extends _MaterialFilter {
   final bool isFavourite;
   @override
   @JsonKey()
-  final bool isFOCMaterial;
+  final bool isCovidSelected;
   @override
   @JsonKey()
   final bool bundleOffers;
@@ -266,6 +280,9 @@ class _$_MaterialFilter extends _MaterialFilter {
   @override
   @JsonKey()
   final Sort sortBy;
+  @override
+  @JsonKey()
+  final bool hasAccessToCovidMaterial;
   final Map<String, bool> _manufactureMapOptions;
   @override
   Map<String, bool> get manufactureMapOptions {
@@ -314,7 +331,7 @@ class _$_MaterialFilter extends _MaterialFilter {
 
   @override
   String toString() {
-    return 'MaterialFilter(isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, bundleOffers: $bundleOffers, comboOffers: $comboOffers, isProductOffer: $isProductOffer, sortBy: $sortBy, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
+    return 'MaterialFilter(isFavourite: $isFavourite, isCovidSelected: $isCovidSelected, bundleOffers: $bundleOffers, comboOffers: $comboOffers, isProductOffer: $isProductOffer, sortBy: $sortBy, hasAccessToCovidMaterial: $hasAccessToCovidMaterial, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
   }
 
   @override
@@ -324,8 +341,8 @@ class _$_MaterialFilter extends _MaterialFilter {
             other is _$_MaterialFilter &&
             (identical(other.isFavourite, isFavourite) ||
                 other.isFavourite == isFavourite) &&
-            (identical(other.isFOCMaterial, isFOCMaterial) ||
-                other.isFOCMaterial == isFOCMaterial) &&
+            (identical(other.isCovidSelected, isCovidSelected) ||
+                other.isCovidSelected == isCovidSelected) &&
             (identical(other.bundleOffers, bundleOffers) ||
                 other.bundleOffers == bundleOffers) &&
             (identical(other.comboOffers, comboOffers) ||
@@ -333,6 +350,9 @@ class _$_MaterialFilter extends _MaterialFilter {
             (identical(other.isProductOffer, isProductOffer) ||
                 other.isProductOffer == isProductOffer) &&
             (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
+            (identical(
+                    other.hasAccessToCovidMaterial, hasAccessToCovidMaterial) ||
+                other.hasAccessToCovidMaterial == hasAccessToCovidMaterial) &&
             const DeepCollectionEquality()
                 .equals(other._manufactureMapOptions, _manufactureMapOptions) &&
             const DeepCollectionEquality()
@@ -349,11 +369,12 @@ class _$_MaterialFilter extends _MaterialFilter {
   int get hashCode => Object.hash(
       runtimeType,
       isFavourite,
-      isFOCMaterial,
+      isCovidSelected,
       bundleOffers,
       comboOffers,
       isProductOffer,
       sortBy,
+      hasAccessToCovidMaterial,
       const DeepCollectionEquality().hash(_manufactureMapOptions),
       const DeepCollectionEquality().hash(_countryMapOptions),
       const DeepCollectionEquality().hash(_brandList),
@@ -370,11 +391,12 @@ class _$_MaterialFilter extends _MaterialFilter {
 abstract class _MaterialFilter extends MaterialFilter {
   const factory _MaterialFilter(
           {final bool isFavourite,
-          final bool isFOCMaterial,
+          final bool isCovidSelected,
           final bool bundleOffers,
           final bool comboOffers,
           final bool isProductOffer,
           final Sort sortBy,
+          final bool hasAccessToCovidMaterial,
           required final Map<String, bool> manufactureMapOptions,
           required final Map<MaterialFilterCountry, bool> countryMapOptions,
           required final List<String> brandList,
@@ -386,7 +408,7 @@ abstract class _MaterialFilter extends MaterialFilter {
   @override
   bool get isFavourite;
   @override
-  bool get isFOCMaterial;
+  bool get isCovidSelected;
   @override
   bool get bundleOffers;
   @override
@@ -395,6 +417,8 @@ abstract class _MaterialFilter extends MaterialFilter {
   bool get isProductOffer;
   @override
   Sort get sortBy;
+  @override
+  bool get hasAccessToCovidMaterial;
   @override
   Map<String, bool> get manufactureMapOptions;
   @override

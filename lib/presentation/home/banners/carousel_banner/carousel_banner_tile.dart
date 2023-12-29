@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -52,6 +53,8 @@ class CarouselBannerTile extends StatelessWidget {
                     searchKey: SearchKey.search(
                       banner.keyword,
                     ),
+                    materialFilter:
+                        context.read<MaterialFilterBloc>().state.materialFilter,
                   ),
                 );
             await context.router.push(

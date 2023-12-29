@@ -9,8 +9,9 @@ class ScanMaterialInfoEvent with _$ScanMaterialInfoEvent {
     required ShipToInfo shipToInfo,
     required SalesOrganisationConfigs salesOrgConfigs,
   }) = _initialized;
-  const factory ScanMaterialInfoEvent.scanMaterialNumberFromCamera() =
-      _scanMaterialNumberFromCamera;
+  const factory ScanMaterialInfoEvent.scanMaterialNumberFromCamera({
+    required MaterialFilter materialFilter,
+  }) = _scanMaterialNumberFromCamera;
   const factory ScanMaterialInfoEvent.disableScan() = _disableScan;
   const factory ScanMaterialInfoEvent.scanImageFromDeviceStorage() =
       _scanImageFromDeviceStorage;

@@ -47,6 +47,8 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
             context.read<ProductSearchBloc>().add(
                   ProductSearchEvent.searchProduct(
                     searchKey: SearchKey.search(value),
+                    materialFilter:
+                        context.read<MaterialFilterBloc>().state.materialFilter,
                   ),
                 );
           },
@@ -55,6 +57,8 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
             context.read<ProductSearchBloc>().add(
                   ProductSearchEvent.searchProduct(
                     searchKey: SearchKey.search(value),
+                    materialFilter:
+                        context.read<MaterialFilterBloc>().state.materialFilter,
                   ),
                 );
           },
@@ -74,7 +78,12 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
               trackMixpanelEvent(MixpanelEvents.scanClicked),
               context.router.pushNamed('orders/scan_material_info'),
               context.read<ScanMaterialInfoBloc>().add(
-                    const ScanMaterialInfoEvent.scanMaterialNumberFromCamera(),
+                    ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
+                      materialFilter: context
+                          .read<MaterialFilterBloc>()
+                          .state
+                          .materialFilter,
+                    ),
                   ),
             },
           ),

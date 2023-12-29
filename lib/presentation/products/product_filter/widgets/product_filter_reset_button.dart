@@ -9,14 +9,7 @@ class _ProductFilterResetButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       key: WidgetKeys.filterResetButton,
-      onPressed: () {
-        context.read<MaterialFilterBloc>().add(
-              const MaterialFilterEvent.resetFilter(),
-            );
-        Navigator.of(context).pop(
-          context.read<MaterialFilterBloc>().state.emptyMaterialFilter,
-        );
-      },
+      onPressed: () => _onResetPressed(context),
       style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
             backgroundColor: const MaterialStatePropertyAll(
               ZPColors.white,
@@ -35,5 +28,32 @@ class _ProductFilterResetButton extends StatelessWidget {
             ),
       ),
     );
+  }
+
+  Future<void> _onResetPressed(BuildContext context) async {
+    final selectedFilter =
+        context.read<MaterialListBloc>().state.selectedMaterialFilter;
+    final materialFilterBloc = context.read<MaterialFilterBloc>();
+
+    if (selectedFilter == MaterialFilter.empty()) {
+      await context.router.pop(selectedFilter);
+
+      return;
+    }
+
+    materialFilterBloc.add(
+      const MaterialFilterEvent.resetFilter(),
+    );
+
+    final materialFilterState = await materialFilterBloc.stream.firstWhere(
+      (element) => element.materialFilter != selectedFilter,
+      orElse: () => MaterialFilterState.initial(),
+    );
+
+    if (context.mounted) {
+      await context.router.pop(
+        materialFilterState.materialFilter,
+      );
+    }
   }
 }

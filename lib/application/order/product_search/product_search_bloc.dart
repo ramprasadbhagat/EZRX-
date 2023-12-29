@@ -1,4 +1,5 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
@@ -67,6 +68,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
         emit(
           state.copyWith(
             searchKey: event.searchKey,
+            materialFilter: event.materialFilter,
             suggestedProductList: <MaterialInfo>[],
             isSearching: true,
             canLoadMore: true,
@@ -83,6 +85,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           searchKey: event.searchKey,
           pageSize: config.pageSize,
           offset: state.suggestedProductList.length,
+          materialFilter: state.materialFilter,
         );
 
         failureOrSuccess.fold(
@@ -128,6 +131,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           searchKey: state.searchKey,
           pageSize: config.pageSize,
           offset: state.suggestedProductList.length,
+          materialFilter: state.materialFilter,
         );
 
         failureOrSuccess.fold(

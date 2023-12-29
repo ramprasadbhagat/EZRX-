@@ -130,6 +130,12 @@ class SearchAndFilter extends StatelessWidget {
                 .state
                 .selectedMaterialFilter
                 .comboOffers !=
-            value.comboOffers;
+            value.comboOffers ||
+        context
+                .read<MaterialListBloc>()
+                .state
+                .selectedMaterialFilter
+                .isCovidSelected !=
+            value.isCovidSelected;
   }
 }

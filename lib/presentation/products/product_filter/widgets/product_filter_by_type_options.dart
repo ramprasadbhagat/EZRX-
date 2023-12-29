@@ -63,6 +63,19 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                   },
                   title: 'Combo offers',
                 ),
+              if (context.read<EligibilityBloc>().state.isCovidMaterialEnable)
+                _ListTileThemeWidget(
+                  value: state.materialFilter.isCovidSelected,
+                  onChanged: (value) {
+                    context.read<MaterialFilterBloc>().add(
+                          MaterialFilterEvent.updateSelectedMaterialFilter(
+                            MaterialFilterType.isCovidSelected,
+                            !state.materialFilter.isCovidSelected,
+                          ),
+                        );
+                  },
+                  title: 'Covid-19',
+                ),
             ],
           ],
         );

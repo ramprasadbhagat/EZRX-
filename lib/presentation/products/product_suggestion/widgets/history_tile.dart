@@ -15,6 +15,8 @@ class _HistoryTile extends StatelessWidget {
                   searchKey: SearchKey.search(
                     searchKey.searchValueOrEmpty,
                   ),
+                  materialFilter:
+                      context.read<MaterialFilterBloc>().state.materialFilter,
                 ),
               ),
           leading: const Icon(

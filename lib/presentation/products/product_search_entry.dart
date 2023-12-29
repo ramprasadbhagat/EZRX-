@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,10 @@ class ProductSearchEntry extends StatelessWidget {
             trackMixpanelEvent(MixpanelEvents.scanClicked),
             context.router.pushNamed('orders/scan_material_info'),
             context.read<ScanMaterialInfoBloc>().add(
-                  const ScanMaterialInfoEvent.scanMaterialNumberFromCamera(),
+                  ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
+                    materialFilter:
+                        context.read<MaterialFilterBloc>().state.materialFilter,
+                  ),
                 ),
           },
         ),

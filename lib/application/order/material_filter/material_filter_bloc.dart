@@ -36,6 +36,7 @@ class MaterialFilterBloc
             apiFailureOrSuccessOption: none(),
             isFetching: true,
             salesOrganisation: e.salesOrganisation,
+            hasAccessToCovidMaterial: e.hasAccessToCovidMaterial,
           ),
         );
         final failureOrSuccess =
@@ -61,7 +62,9 @@ class MaterialFilterBloc
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
-                materialFilter: materialFilter,
+                materialFilter: materialFilter.copyWith(
+                  hasAccessToCovidMaterial: state.hasAccessToCovidMaterial,
+                ),
                 isFetching: false,
               ),
             );
@@ -121,11 +124,11 @@ class MaterialFilterBloc
               ),
             );
             break;
-          case MaterialFilterType.isFOCMaterial:
+          case MaterialFilterType.isCovidSelected:
             emit(
               state.copyWith(
-                materialFilter:
-                    state.materialFilter.copyWith(isFOCMaterial: e.key as bool),
+                materialFilter: state.materialFilter
+                    .copyWith(isCovidSelected: e.key as bool),
               ),
             );
             break;
@@ -220,6 +223,7 @@ class MaterialFilterBloc
         emit(
           state.copyWith(
             materialFilter: MaterialFilter.empty().copyWith(
+              hasAccessToCovidMaterial: state.hasAccessToCovidMaterial,
               manufactureMapOptions: manufactureMap,
               countryMapOptions: countryMap,
             ),

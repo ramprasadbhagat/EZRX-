@@ -1,7 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -22,12 +24,17 @@ class ScanMaterialInfoBlocMock
     extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
     implements ScanMaterialInfoBloc {}
 
+class MockMaterialFilterBloc
+    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
+    implements MaterialFilterBloc {}
+
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
 void main() {
   late ScanMaterialInfoBlocMock scanMaterialInfoBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late AppRouter autoRouterMock;
+  late MaterialFilterBloc materialFilterBlocMock;
 
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
@@ -43,10 +50,13 @@ void main() {
       locator = GetIt.instance;
       scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      materialFilterBlocMock = MockMaterialFilterBloc();
       when(() => scanMaterialInfoBlocMock.state)
           .thenReturn(ScanMaterialInfoState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
+      when(() => materialFilterBlocMock.state)
+          .thenReturn(MaterialFilterState.initial());
     });
 
     Widget getScopedWidget() {
@@ -59,6 +69,9 @@ void main() {
           ),
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
+          ),
+          BlocProvider<MaterialFilterBloc>(
+            create: (context) => materialFilterBlocMock,
           ),
         ],
         child: const Material(
@@ -119,7 +132,9 @@ void main() {
         expect(autoRouterMock.current.path, 'orders/scan_material_info');
         verify(
           () => scanMaterialInfoBlocMock.add(
-            const ScanMaterialInfoEvent.scanMaterialNumberFromCamera(),
+            ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
+              materialFilter: MaterialFilter.empty(),
+            ),
           ),
         ).called(1);
       },

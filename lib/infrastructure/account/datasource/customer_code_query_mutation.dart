@@ -24,6 +24,7 @@ query customerInformationSearch(
       paymentTerm
       paymentTermDescription
       customerGrp4
+      customerAttr7
       name1
       name2
       name3

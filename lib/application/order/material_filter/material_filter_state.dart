@@ -9,6 +9,7 @@ class MaterialFilterState with _$MaterialFilterState {
     required SalesOrganisation salesOrganisation,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
+    required bool hasAccessToCovidMaterial,
   }) = _MaterialFilterState;
 
   factory MaterialFilterState.initial() => MaterialFilterState(
@@ -20,6 +21,7 @@ class MaterialFilterState with _$MaterialFilterState {
           brandList: <String>[],
         ),
         searchKey: SearchKey.searchFilter(''),
+        hasAccessToCovidMaterial: false,
         apiFailureOrSuccessOption: none(),
       );
 
@@ -50,6 +52,4 @@ class MaterialFilterState with _$MaterialFilterState {
         ),
         brandList: <String>[],
       );
-
-  MaterialFilter get emptyMaterialFilter => MaterialFilter.empty();
 }

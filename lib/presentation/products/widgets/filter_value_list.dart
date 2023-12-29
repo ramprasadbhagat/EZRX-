@@ -92,22 +92,22 @@ class _FilterValueListState extends State<FilterValueList> {
           ),
           BlocBuilder<MaterialListBloc, MaterialListState>(
             buildWhen: (previous, current) =>
-                previous.selectedMaterialFilter.isFOCMaterial !=
-                current.selectedMaterialFilter.isFOCMaterial,
+                previous.selectedMaterialFilter.isCovidSelected !=
+                current.selectedMaterialFilter.isCovidSelected,
             builder: (context, state) {
               return context.read<EligibilityBloc>().state.isCovidMaterialEnable
                   ? ChoiceChip(
                       label: Text(
                         'Covid-19'.tr(),
                       ),
-                      selected: state.selectedMaterialFilter.isFOCMaterial,
+                      selected: state.selectedMaterialFilter.isCovidSelected,
                       backgroundColor: ZPColors.secondaryEmerald10,
                       selectedColor: ZPColors.primary,
                       labelStyle: Theme.of(context)
                           .chipTheme
                           .labelStyle
                           ?.copyWith(
-                            color: state.selectedMaterialFilter.isFOCMaterial
+                            color: state.selectedMaterialFilter.isCovidSelected
                                 ? ZPColors.white
                                 : ZPColors.shadesBlack,
                           ),
@@ -123,9 +123,9 @@ class _FilterValueListState extends State<FilterValueList> {
                               context.read<MaterialFilterBloc>().add(
                                     MaterialFilterEvent
                                         .updateSelectedMaterialFilter(
-                                      MaterialFilterType.isFOCMaterial,
-                                      !state
-                                          .selectedMaterialFilter.isFOCMaterial,
+                                      MaterialFilterType.isCovidSelected,
+                                      !state.selectedMaterialFilter
+                                          .isCovidSelected,
                                     ),
                                   );
                               context.read<MaterialListBloc>().add(
@@ -148,9 +148,13 @@ class _FilterValueListState extends State<FilterValueList> {
                                           .shipToInfo,
                                       selectedMaterialFilter:
                                           state.selectedMaterialFilter.copyWith(
-                                        isFOCMaterial: !state
+                                        hasAccessToCovidMaterial: context
+                                            .read<EligibilityBloc>()
+                                            .state
+                                            .isCovidMaterialEnable,
+                                        isCovidSelected: !state
                                             .selectedMaterialFilter
-                                            .isFOCMaterial,
+                                            .isCovidSelected,
                                       ),
                                     ),
                                   );

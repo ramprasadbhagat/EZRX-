@@ -10,6 +10,7 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
     required User user,
     required SalesOrganisationConfigs salesOrgConfig,
     required String pickAndPack,
+    required bool hasAccessToCovidMaterial,
   }) = _fetch;
   const factory MaterialFilterEvent.updateSelectedMaterialFilter(
     MaterialFilterType filterType,
@@ -26,7 +27,7 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
 
 enum MaterialFilterType {
   isFavourite,
-  isFOCMaterial,
+  isCovidSelected,
   productOffers,
   bundleOffers,
   sortBy,

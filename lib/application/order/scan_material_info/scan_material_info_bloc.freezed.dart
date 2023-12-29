@@ -25,7 +25,8 @@ mixin _$ScanMaterialInfoEvent {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)
         initialized,
-    required TResult Function() scanMaterialNumberFromCamera,
+    required TResult Function(MaterialFilter materialFilter)
+        scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
     required TResult Function() scanImageFromDeviceStorage,
     required TResult Function(Ean scannedRes) emitScannedData,
@@ -41,7 +42,8 @@ mixin _$ScanMaterialInfoEvent {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult? Function()? scanMaterialNumberFromCamera,
+    TResult? Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
     TResult? Function()? scanImageFromDeviceStorage,
     TResult? Function(Ean scannedRes)? emitScannedData,
@@ -57,7 +59,8 @@ mixin _$ScanMaterialInfoEvent {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult Function()? scanMaterialNumberFromCamera,
+    TResult Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
     TResult Function()? scanImageFromDeviceStorage,
     TResult Function(Ean scannedRes)? emitScannedData,
@@ -288,7 +291,8 @@ class _$_initialized implements _initialized {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)
         initialized,
-    required TResult Function() scanMaterialNumberFromCamera,
+    required TResult Function(MaterialFilter materialFilter)
+        scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
     required TResult Function() scanImageFromDeviceStorage,
     required TResult Function(Ean scannedRes) emitScannedData,
@@ -308,7 +312,8 @@ class _$_initialized implements _initialized {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult? Function()? scanMaterialNumberFromCamera,
+    TResult? Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
     TResult? Function()? scanImageFromDeviceStorage,
     TResult? Function(Ean scannedRes)? emitScannedData,
@@ -328,7 +333,8 @@ class _$_initialized implements _initialized {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult Function()? scanMaterialNumberFromCamera,
+    TResult Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
     TResult Function()? scanImageFromDeviceStorage,
     TResult Function(Ean scannedRes)? emitScannedData,
@@ -417,6 +423,10 @@ abstract class _$$_scanMaterialNumberFromCameraCopyWith<$Res> {
           _$_scanMaterialNumberFromCamera value,
           $Res Function(_$_scanMaterialNumberFromCamera) then) =
       __$$_scanMaterialNumberFromCameraCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialFilter materialFilter});
+
+  $MaterialFilterCopyWith<$Res> get materialFilter;
 }
 
 /// @nodoc
@@ -428,27 +438,60 @@ class __$$_scanMaterialNumberFromCameraCopyWithImpl<$Res>
       _$_scanMaterialNumberFromCamera _value,
       $Res Function(_$_scanMaterialNumberFromCamera) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? materialFilter = null,
+  }) {
+    return _then(_$_scanMaterialNumberFromCamera(
+      materialFilter: null == materialFilter
+          ? _value.materialFilter
+          : materialFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialFilter,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialFilterCopyWith<$Res> get materialFilter {
+    return $MaterialFilterCopyWith<$Res>(_value.materialFilter, (value) {
+      return _then(_value.copyWith(materialFilter: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
-  const _$_scanMaterialNumberFromCamera();
+  const _$_scanMaterialNumberFromCamera({required this.materialFilter});
+
+  @override
+  final MaterialFilter materialFilter;
 
   @override
   String toString() {
-    return 'ScanMaterialInfoEvent.scanMaterialNumberFromCamera()';
+    return 'ScanMaterialInfoEvent.scanMaterialNumberFromCamera(materialFilter: $materialFilter)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_scanMaterialNumberFromCamera);
+            other is _$_scanMaterialNumberFromCamera &&
+            (identical(other.materialFilter, materialFilter) ||
+                other.materialFilter == materialFilter));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, materialFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_scanMaterialNumberFromCameraCopyWith<_$_scanMaterialNumberFromCamera>
+      get copyWith => __$$_scanMaterialNumberFromCameraCopyWithImpl<
+          _$_scanMaterialNumberFromCamera>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -460,13 +503,14 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)
         initialized,
-    required TResult Function() scanMaterialNumberFromCamera,
+    required TResult Function(MaterialFilter materialFilter)
+        scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
     required TResult Function() scanImageFromDeviceStorage,
     required TResult Function(Ean scannedRes) emitScannedData,
     required TResult Function(bool torchState) updateTorchState,
   }) {
-    return scanMaterialNumberFromCamera();
+    return scanMaterialNumberFromCamera(materialFilter);
   }
 
   @override
@@ -479,13 +523,14 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult? Function()? scanMaterialNumberFromCamera,
+    TResult? Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
     TResult? Function()? scanImageFromDeviceStorage,
     TResult? Function(Ean scannedRes)? emitScannedData,
     TResult? Function(bool torchState)? updateTorchState,
   }) {
-    return scanMaterialNumberFromCamera?.call();
+    return scanMaterialNumberFromCamera?.call(materialFilter);
   }
 
   @override
@@ -498,7 +543,8 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult Function()? scanMaterialNumberFromCamera,
+    TResult Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
     TResult Function()? scanImageFromDeviceStorage,
     TResult Function(Ean scannedRes)? emitScannedData,
@@ -506,7 +552,7 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
     required TResult orElse(),
   }) {
     if (scanMaterialNumberFromCamera != null) {
-      return scanMaterialNumberFromCamera();
+      return scanMaterialNumberFromCamera(materialFilter);
     }
     return orElse();
   }
@@ -562,8 +608,14 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
 }
 
 abstract class _scanMaterialNumberFromCamera implements ScanMaterialInfoEvent {
-  const factory _scanMaterialNumberFromCamera() =
+  const factory _scanMaterialNumberFromCamera(
+          {required final MaterialFilter materialFilter}) =
       _$_scanMaterialNumberFromCamera;
+
+  MaterialFilter get materialFilter;
+  @JsonKey(ignore: true)
+  _$$_scanMaterialNumberFromCameraCopyWith<_$_scanMaterialNumberFromCamera>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -611,7 +663,8 @@ class _$_disableScan implements _disableScan {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)
         initialized,
-    required TResult Function() scanMaterialNumberFromCamera,
+    required TResult Function(MaterialFilter materialFilter)
+        scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
     required TResult Function() scanImageFromDeviceStorage,
     required TResult Function(Ean scannedRes) emitScannedData,
@@ -630,7 +683,8 @@ class _$_disableScan implements _disableScan {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult? Function()? scanMaterialNumberFromCamera,
+    TResult? Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
     TResult? Function()? scanImageFromDeviceStorage,
     TResult? Function(Ean scannedRes)? emitScannedData,
@@ -649,7 +703,8 @@ class _$_disableScan implements _disableScan {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult Function()? scanMaterialNumberFromCamera,
+    TResult Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
     TResult Function()? scanImageFromDeviceStorage,
     TResult Function(Ean scannedRes)? emitScannedData,
@@ -765,7 +820,8 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)
         initialized,
-    required TResult Function() scanMaterialNumberFromCamera,
+    required TResult Function(MaterialFilter materialFilter)
+        scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
     required TResult Function() scanImageFromDeviceStorage,
     required TResult Function(Ean scannedRes) emitScannedData,
@@ -784,7 +840,8 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult? Function()? scanMaterialNumberFromCamera,
+    TResult? Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
     TResult? Function()? scanImageFromDeviceStorage,
     TResult? Function(Ean scannedRes)? emitScannedData,
@@ -803,7 +860,8 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult Function()? scanMaterialNumberFromCamera,
+    TResult Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
     TResult Function()? scanImageFromDeviceStorage,
     TResult Function(Ean scannedRes)? emitScannedData,
@@ -942,7 +1000,8 @@ class _$_emitScannedData implements _emitScannedData {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)
         initialized,
-    required TResult Function() scanMaterialNumberFromCamera,
+    required TResult Function(MaterialFilter materialFilter)
+        scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
     required TResult Function() scanImageFromDeviceStorage,
     required TResult Function(Ean scannedRes) emitScannedData,
@@ -961,7 +1020,8 @@ class _$_emitScannedData implements _emitScannedData {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult? Function()? scanMaterialNumberFromCamera,
+    TResult? Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
     TResult? Function()? scanImageFromDeviceStorage,
     TResult? Function(Ean scannedRes)? emitScannedData,
@@ -980,7 +1040,8 @@ class _$_emitScannedData implements _emitScannedData {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult Function()? scanMaterialNumberFromCamera,
+    TResult Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
     TResult Function()? scanImageFromDeviceStorage,
     TResult Function(Ean scannedRes)? emitScannedData,
@@ -1125,7 +1186,8 @@ class _$_UpdateTorchState implements _UpdateTorchState {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)
         initialized,
-    required TResult Function() scanMaterialNumberFromCamera,
+    required TResult Function(MaterialFilter materialFilter)
+        scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
     required TResult Function() scanImageFromDeviceStorage,
     required TResult Function(Ean scannedRes) emitScannedData,
@@ -1144,7 +1206,8 @@ class _$_UpdateTorchState implements _UpdateTorchState {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult? Function()? scanMaterialNumberFromCamera,
+    TResult? Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
     TResult? Function()? scanImageFromDeviceStorage,
     TResult? Function(Ean scannedRes)? emitScannedData,
@@ -1163,7 +1226,8 @@ class _$_UpdateTorchState implements _UpdateTorchState {
             ShipToInfo shipToInfo,
             SalesOrganisationConfigs salesOrgConfigs)?
         initialized,
-    TResult Function()? scanMaterialNumberFromCamera,
+    TResult Function(MaterialFilter materialFilter)?
+        scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
     TResult Function()? scanImageFromDeviceStorage,
     TResult Function(Ean scannedRes)? emitScannedData,
@@ -1249,6 +1313,7 @@ mixin _$ScanMaterialInfoState {
       throw _privateConstructorUsedError;
   bool get isScanInProgress => throw _privateConstructorUsedError;
   bool get isTorchStateEnabled => throw _privateConstructorUsedError;
+  MaterialFilter get materialFilter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ScanMaterialInfoStateCopyWith<ScanMaterialInfoState> get copyWith =>
@@ -1270,7 +1335,8 @@ abstract class $ScanMaterialInfoStateCopyWith<$Res> {
       ShipToInfo shipToInfo,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isScanInProgress,
-      bool isTorchStateEnabled});
+      bool isTorchStateEnabled,
+      MaterialFilter materialFilter});
 
   $MaterialInfoCopyWith<$Res> get material;
   $UserCopyWith<$Res> get user;
@@ -1278,6 +1344,7 @@ abstract class $ScanMaterialInfoStateCopyWith<$Res> {
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $MaterialFilterCopyWith<$Res> get materialFilter;
 }
 
 /// @nodoc
@@ -1303,6 +1370,7 @@ class _$ScanMaterialInfoStateCopyWithImpl<$Res,
     Object? apiFailureOrSuccessOption = null,
     Object? isScanInProgress = null,
     Object? isTorchStateEnabled = null,
+    Object? materialFilter = null,
   }) {
     return _then(_value.copyWith(
       material: null == material
@@ -1341,6 +1409,10 @@ class _$ScanMaterialInfoStateCopyWithImpl<$Res,
           ? _value.isTorchStateEnabled
           : isTorchStateEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      materialFilter: null == materialFilter
+          ? _value.materialFilter
+          : materialFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialFilter,
     ) as $Val);
   }
 
@@ -1392,6 +1464,14 @@ class _$ScanMaterialInfoStateCopyWithImpl<$Res,
       return _then(_value.copyWith(shipToInfo: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialFilterCopyWith<$Res> get materialFilter {
+    return $MaterialFilterCopyWith<$Res>(_value.materialFilter, (value) {
+      return _then(_value.copyWith(materialFilter: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1411,7 +1491,8 @@ abstract class _$$_ScanMaterialInfoStateCopyWith<$Res>
       ShipToInfo shipToInfo,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isScanInProgress,
-      bool isTorchStateEnabled});
+      bool isTorchStateEnabled,
+      MaterialFilter materialFilter});
 
   @override
   $MaterialInfoCopyWith<$Res> get material;
@@ -1425,6 +1506,8 @@ abstract class _$$_ScanMaterialInfoStateCopyWith<$Res>
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   @override
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
+  $MaterialFilterCopyWith<$Res> get materialFilter;
 }
 
 /// @nodoc
@@ -1447,6 +1530,7 @@ class __$$_ScanMaterialInfoStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? isScanInProgress = null,
     Object? isTorchStateEnabled = null,
+    Object? materialFilter = null,
   }) {
     return _then(_$_ScanMaterialInfoState(
       material: null == material
@@ -1485,6 +1569,10 @@ class __$$_ScanMaterialInfoStateCopyWithImpl<$Res>
           ? _value.isTorchStateEnabled
           : isTorchStateEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      materialFilter: null == materialFilter
+          ? _value.materialFilter
+          : materialFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialFilter,
     ));
   }
 }
@@ -1501,7 +1589,8 @@ class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
       required this.shipToInfo,
       required this.apiFailureOrSuccessOption,
       required this.isScanInProgress,
-      required this.isTorchStateEnabled})
+      required this.isTorchStateEnabled,
+      required this.materialFilter})
       : super._();
 
   @override
@@ -1522,10 +1611,12 @@ class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
   final bool isScanInProgress;
   @override
   final bool isTorchStateEnabled;
+  @override
+  final MaterialFilter materialFilter;
 
   @override
   String toString() {
-    return 'ScanMaterialInfoState(material: $material, user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, salesOrgConfigs: $salesOrgConfigs, shipToInfo: $shipToInfo, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isScanInProgress: $isScanInProgress, isTorchStateEnabled: $isTorchStateEnabled)';
+    return 'ScanMaterialInfoState(material: $material, user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, salesOrgConfigs: $salesOrgConfigs, shipToInfo: $shipToInfo, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isScanInProgress: $isScanInProgress, isTorchStateEnabled: $isTorchStateEnabled, materialFilter: $materialFilter)';
   }
 
   @override
@@ -1550,7 +1641,9 @@ class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
             (identical(other.isScanInProgress, isScanInProgress) ||
                 other.isScanInProgress == isScanInProgress) &&
             (identical(other.isTorchStateEnabled, isTorchStateEnabled) ||
-                other.isTorchStateEnabled == isTorchStateEnabled));
+                other.isTorchStateEnabled == isTorchStateEnabled) &&
+            (identical(other.materialFilter, materialFilter) ||
+                other.materialFilter == materialFilter));
   }
 
   @override
@@ -1564,7 +1657,8 @@ class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
       shipToInfo,
       apiFailureOrSuccessOption,
       isScanInProgress,
-      isTorchStateEnabled);
+      isTorchStateEnabled,
+      materialFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -1585,7 +1679,8 @@ abstract class _ScanMaterialInfoState extends ScanMaterialInfoState {
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
       required final bool isScanInProgress,
-      required final bool isTorchStateEnabled}) = _$_ScanMaterialInfoState;
+      required final bool isTorchStateEnabled,
+      required final MaterialFilter materialFilter}) = _$_ScanMaterialInfoState;
   const _ScanMaterialInfoState._() : super._();
 
   @override
@@ -1606,6 +1701,8 @@ abstract class _ScanMaterialInfoState extends ScanMaterialInfoState {
   bool get isScanInProgress;
   @override
   bool get isTorchStateEnabled;
+  @override
+  MaterialFilter get materialFilter;
   @override
   @JsonKey(ignore: true)
   _$$_ScanMaterialInfoStateCopyWith<_$_ScanMaterialInfoState> get copyWith =>

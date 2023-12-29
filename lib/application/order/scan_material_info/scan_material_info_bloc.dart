@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,6 +63,7 @@ class ScanMaterialInfoBloc
         emit(
           state.copyWith(
             isScanInProgress: true,
+            materialFilter: e.materialFilter,
             material: MaterialInfo.empty(),
           ),
         );
@@ -159,6 +161,7 @@ class ScanMaterialInfoBloc
           eanNumber: e.scannedRes,
           user: state.user,
           salesOrgConfig: state.salesOrgConfigs,
+          materialFilter: state.materialFilter,
         );
         failureOrSuccess.fold(
           (failure) => emit(

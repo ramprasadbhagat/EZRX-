@@ -13,6 +13,7 @@ class ScanMaterialInfoState with _$ScanMaterialInfoState {
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isScanInProgress,
     required bool isTorchStateEnabled,
+    required MaterialFilter materialFilter,
   }) = _ScanMaterialInfoState;
 
   factory ScanMaterialInfoState.initial() => ScanMaterialInfoState(
@@ -25,5 +26,6 @@ class ScanMaterialInfoState with _$ScanMaterialInfoState {
         apiFailureOrSuccessOption: none(),
         isScanInProgress: false,
         isTorchStateEnabled: false,
+        materialFilter: MaterialFilter.empty(),
       );
 }

@@ -32,7 +32,7 @@ class MaterialListRemoteDataSource {
     required bool gimmickMaterial,
     required String language,
     required bool isFavourite,
-    required bool isFOCMaterial,
+    required bool? isCovidSelected,
     required bool bundleOffers,
     required bool isProductOffer,
     required String orderByName,
@@ -58,6 +58,7 @@ class MaterialListRemoteDataSource {
           'ShipTo': shipToCode,
           'isGimmick': gimmickMaterial,
           'SearchKey': searchKey,
+          'isFOCMaterial': isCovidSelected,
           if (showSampleItem) 'fromAddBonus': showSampleItem,
         },
       };
@@ -68,7 +69,7 @@ class MaterialListRemoteDataSource {
         variables['request']!['OrderByPrice'] = orderByPrice;
       }
       if (isFavourite) variables['request']!['IsFavourite'] = isFavourite;
-      if (isFOCMaterial) variables['request']!['isFOCMaterial'] = isFOCMaterial;
+
       if (bundleOffers) variables['request']!['Type'] = 'bundle';
       if (isProductOffer) variables['request']!['isOffer'] = isProductOffer;
       if (manufactureList.isNotEmpty) {

@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_search_repository.dart';
@@ -120,6 +121,7 @@ void main() {
               searchKey: SearchKey('diff-search-key'),
               pageSize: config.pageSize,
               offset: 0,
+              materialFilter: MaterialFilter.empty(),
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -128,6 +130,7 @@ void main() {
           ..add(
             ProductSearchEvent.searchProduct(
               searchKey: SearchKey.search('diff-search-key'),
+              materialFilter: MaterialFilter.empty(),
             ),
           ),
         expect: () => [
@@ -174,6 +177,7 @@ void main() {
               searchKey: searchKey,
               pageSize: config.pageSize,
               offset: 0,
+              materialFilter: MaterialFilter.empty(),
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -181,6 +185,7 @@ void main() {
         act: (bloc) => bloc.add(
           ProductSearchEvent.searchProduct(
             searchKey: SearchKey.search(searchKey.getValue()),
+            materialFilter: MaterialFilter.empty(),
           ),
         ),
         expect: () => [
@@ -228,6 +233,7 @@ void main() {
               searchKey: searchKey,
               pageSize: config.pageSize,
               offset: 0,
+              materialFilter: MaterialFilter.empty(),
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -237,6 +243,7 @@ void main() {
         act: (bloc) => bloc.add(
           ProductSearchEvent.searchProduct(
             searchKey: SearchKey.search(searchKey.getValue()),
+            materialFilter: MaterialFilter.empty(),
           ),
         ),
         expect: () => [
@@ -289,6 +296,7 @@ void main() {
               searchKey: SearchKey('diff-search-key'),
               pageSize: config.pageSize,
               offset: 0,
+              materialFilter: MaterialFilter.empty(),
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -296,6 +304,7 @@ void main() {
         act: (bloc) => bloc.add(
           ProductSearchEvent.searchProduct(
             searchKey: SearchKey.search('diff-search-key'),
+            materialFilter: MaterialFilter.empty(),
           ),
         ),
         wait: const Duration(milliseconds: 1500),
@@ -350,6 +359,7 @@ void main() {
               searchKey: searchKey,
               pageSize: config.pageSize,
               offset: 24,
+              materialFilter: MaterialFilter.empty(),
             ),
           ).thenAnswer((_) async => Right(fakeResponse2));
           return productSearchBloc;
@@ -397,6 +407,7 @@ void main() {
               searchKey: searchKey,
               pageSize: config.pageSize,
               offset: 0,
+              materialFilter: MaterialFilter.empty(),
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -441,6 +452,7 @@ void main() {
               searchKey: searchKey,
               pageSize: config.pageSize,
               offset: 24,
+              materialFilter: MaterialFilter.empty(),
             ),
           ).thenAnswer(
             (_) async => const Left(

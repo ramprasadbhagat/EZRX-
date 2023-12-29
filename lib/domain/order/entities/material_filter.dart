@@ -10,11 +10,12 @@ class MaterialFilter with _$MaterialFilter {
 
   const factory MaterialFilter({
     @Default(false) bool isFavourite,
-    @Default(false) bool isFOCMaterial,
+    @Default(false) bool isCovidSelected,
     @Default(false) bool bundleOffers,
     @Default(false) bool comboOffers,
     @Default(false) bool isProductOffer,
     @Default(Sort.az) Sort sortBy,
+    @Default(false) bool hasAccessToCovidMaterial,
     required Map<String, bool> manufactureMapOptions,
     required Map<MaterialFilterCountry, bool> countryMapOptions,
     required List<String> brandList,
@@ -56,6 +57,21 @@ class MaterialFilter with _$MaterialFilter {
             countryListSelected.map((e) => e.name).toList(),
     };
   }
+
+  //Please don't reference this [isCovidSelectedFilterValue] for any future
+  //implementation this is implemented now because of bad API design we have
+  //right now, it helps to determine the value for isFOCMaterial that we have
+  //to send to api:
+  // Here [hasAccessToCovidMaterial] is the flag which determines whether the
+  // selected customer code is eligible for covid materials.
+  //i) if hasAccessToCovidMaterial --> true and isCovidSelected --> true then it will
+  // return true.
+  //ii) if hasAccessToCovidMaterial --> true and isCovidSelected --> false then it
+  // will return null.
+  //iii) if hasAccessToCovidMaterial --> false and isCovidSelected --> false then it
+  // will return false.
+  bool? get isCovidSelectedFilterValue =>
+      hasAccessToCovidMaterial && !isCovidSelected ? null : isCovidSelected;
 }
 
 @freezed

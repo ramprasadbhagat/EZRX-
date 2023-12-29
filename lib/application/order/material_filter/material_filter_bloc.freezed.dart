@@ -25,7 +25,8 @@ mixin _$MaterialFilterEvent {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
         updateSelectedMaterialFilter,
@@ -45,7 +46,8 @@ mixin _$MaterialFilterEvent {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -65,7 +67,8 @@ mixin _$MaterialFilterEvent {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -182,7 +185,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
         updateSelectedMaterialFilter,
@@ -205,7 +209,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -228,7 +233,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -313,7 +319,8 @@ abstract class _$$_fetchCopyWith<$Res> {
       ShipToInfo shipToInfo,
       User user,
       SalesOrganisationConfigs salesOrgConfig,
-      String pickAndPack});
+      String pickAndPack,
+      bool hasAccessToCovidMaterial});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -338,6 +345,7 @@ class __$$_fetchCopyWithImpl<$Res>
     Object? user = null,
     Object? salesOrgConfig = null,
     Object? pickAndPack = null,
+    Object? hasAccessToCovidMaterial = null,
   }) {
     return _then(_$_fetch(
       salesOrganisation: null == salesOrganisation
@@ -364,6 +372,10 @@ class __$$_fetchCopyWithImpl<$Res>
           ? _value.pickAndPack
           : pickAndPack // ignore: cast_nullable_to_non_nullable
               as String,
+      hasAccessToCovidMaterial: null == hasAccessToCovidMaterial
+          ? _value.hasAccessToCovidMaterial
+          : hasAccessToCovidMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -418,7 +430,8 @@ class _$_fetch implements _fetch {
       required this.shipToInfo,
       required this.user,
       required this.salesOrgConfig,
-      required this.pickAndPack});
+      required this.pickAndPack,
+      required this.hasAccessToCovidMaterial});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -432,10 +445,12 @@ class _$_fetch implements _fetch {
   final SalesOrganisationConfigs salesOrgConfig;
   @override
   final String pickAndPack;
+  @override
+  final bool hasAccessToCovidMaterial;
 
   @override
   String toString() {
-    return 'MaterialFilterEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrgConfig: $salesOrgConfig, pickAndPack: $pickAndPack)';
+    return 'MaterialFilterEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrgConfig: $salesOrgConfig, pickAndPack: $pickAndPack, hasAccessToCovidMaterial: $hasAccessToCovidMaterial)';
   }
 
   @override
@@ -453,12 +468,22 @@ class _$_fetch implements _fetch {
             (identical(other.salesOrgConfig, salesOrgConfig) ||
                 other.salesOrgConfig == salesOrgConfig) &&
             (identical(other.pickAndPack, pickAndPack) ||
-                other.pickAndPack == pickAndPack));
+                other.pickAndPack == pickAndPack) &&
+            (identical(
+                    other.hasAccessToCovidMaterial, hasAccessToCovidMaterial) ||
+                other.hasAccessToCovidMaterial == hasAccessToCovidMaterial));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrganisation,
-      customerCodeInfo, shipToInfo, user, salesOrgConfig, pickAndPack);
+  int get hashCode => Object.hash(
+      runtimeType,
+      salesOrganisation,
+      customerCodeInfo,
+      shipToInfo,
+      user,
+      salesOrgConfig,
+      pickAndPack,
+      hasAccessToCovidMaterial);
 
   @JsonKey(ignore: true)
   @override
@@ -476,7 +501,8 @@ class _$_fetch implements _fetch {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
         updateSelectedMaterialFilter,
@@ -487,7 +513,7 @@ class _$_fetch implements _fetch {
     required TResult Function() resetFilter,
   }) {
     return fetch(salesOrganisation, customerCodeInfo, shipToInfo, user,
-        salesOrgConfig, pickAndPack);
+        salesOrgConfig, pickAndPack, hasAccessToCovidMaterial);
   }
 
   @override
@@ -500,7 +526,8 @@ class _$_fetch implements _fetch {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -511,7 +538,7 @@ class _$_fetch implements _fetch {
     TResult? Function()? resetFilter,
   }) {
     return fetch?.call(salesOrganisation, customerCodeInfo, shipToInfo, user,
-        salesOrgConfig, pickAndPack);
+        salesOrgConfig, pickAndPack, hasAccessToCovidMaterial);
   }
 
   @override
@@ -524,7 +551,8 @@ class _$_fetch implements _fetch {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -537,7 +565,7 @@ class _$_fetch implements _fetch {
   }) {
     if (fetch != null) {
       return fetch(salesOrganisation, customerCodeInfo, shipToInfo, user,
-          salesOrgConfig, pickAndPack);
+          salesOrgConfig, pickAndPack, hasAccessToCovidMaterial);
     }
     return orElse();
   }
@@ -602,7 +630,8 @@ abstract class _fetch implements MaterialFilterEvent {
       required final ShipToInfo shipToInfo,
       required final User user,
       required final SalesOrganisationConfigs salesOrgConfig,
-      required final String pickAndPack}) = _$_fetch;
+      required final String pickAndPack,
+      required final bool hasAccessToCovidMaterial}) = _$_fetch;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
@@ -610,6 +639,7 @@ abstract class _fetch implements MaterialFilterEvent {
   User get user;
   SalesOrganisationConfigs get salesOrgConfig;
   String get pickAndPack;
+  bool get hasAccessToCovidMaterial;
   @JsonKey(ignore: true)
   _$$_fetchCopyWith<_$_fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -697,7 +727,8 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
         updateSelectedMaterialFilter,
@@ -720,7 +751,8 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -743,7 +775,8 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -912,7 +945,8 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
         updateSelectedMaterialFilter,
@@ -935,7 +969,8 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -958,7 +993,8 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -1111,7 +1147,8 @@ class _$_updateSearchKey implements _updateSearchKey {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
         updateSelectedMaterialFilter,
@@ -1134,7 +1171,8 @@ class _$_updateSearchKey implements _updateSearchKey {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -1157,7 +1195,8 @@ class _$_updateSearchKey implements _updateSearchKey {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -1279,7 +1318,8 @@ class _$_search implements _search {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
         updateSelectedMaterialFilter,
@@ -1302,7 +1342,8 @@ class _$_search implements _search {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -1325,7 +1366,8 @@ class _$_search implements _search {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -1444,7 +1486,8 @@ class _$_resetFilter implements _resetFilter {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
         updateSelectedMaterialFilter,
@@ -1467,7 +1510,8 @@ class _$_resetFilter implements _resetFilter {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -1490,7 +1534,8 @@ class _$_resetFilter implements _resetFilter {
             ShipToInfo shipToInfo,
             User user,
             SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack)?
+            String pickAndPack,
+            bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
         updateSelectedMaterialFilter,
@@ -1572,6 +1617,7 @@ mixin _$MaterialFilterState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  bool get hasAccessToCovidMaterial => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialFilterStateCopyWith<MaterialFilterState> get copyWith =>
@@ -1589,7 +1635,8 @@ abstract class $MaterialFilterStateCopyWith<$Res> {
       SearchKey searchKey,
       SalesOrganisation salesOrganisation,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isFetching});
+      bool isFetching,
+      bool hasAccessToCovidMaterial});
 
   $MaterialFilterCopyWith<$Res> get materialFilter;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -1613,6 +1660,7 @@ class _$MaterialFilterStateCopyWithImpl<$Res, $Val extends MaterialFilterState>
     Object? salesOrganisation = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
+    Object? hasAccessToCovidMaterial = null,
   }) {
     return _then(_value.copyWith(
       materialFilter: null == materialFilter
@@ -1634,6 +1682,10 @@ class _$MaterialFilterStateCopyWithImpl<$Res, $Val extends MaterialFilterState>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasAccessToCovidMaterial: null == hasAccessToCovidMaterial
+          ? _value.hasAccessToCovidMaterial
+          : hasAccessToCovidMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -1668,7 +1720,8 @@ abstract class _$$_MaterialFilterStateCopyWith<$Res>
       SearchKey searchKey,
       SalesOrganisation salesOrganisation,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isFetching});
+      bool isFetching,
+      bool hasAccessToCovidMaterial});
 
   @override
   $MaterialFilterCopyWith<$Res> get materialFilter;
@@ -1692,6 +1745,7 @@ class __$$_MaterialFilterStateCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
+    Object? hasAccessToCovidMaterial = null,
   }) {
     return _then(_$_MaterialFilterState(
       materialFilter: null == materialFilter
@@ -1714,6 +1768,10 @@ class __$$_MaterialFilterStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasAccessToCovidMaterial: null == hasAccessToCovidMaterial
+          ? _value.hasAccessToCovidMaterial
+          : hasAccessToCovidMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1726,7 +1784,8 @@ class _$_MaterialFilterState extends _MaterialFilterState {
       required this.searchKey,
       required this.salesOrganisation,
       required this.apiFailureOrSuccessOption,
-      required this.isFetching})
+      required this.isFetching,
+      required this.hasAccessToCovidMaterial})
       : super._();
 
   @override
@@ -1739,10 +1798,12 @@ class _$_MaterialFilterState extends _MaterialFilterState {
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
   final bool isFetching;
+  @override
+  final bool hasAccessToCovidMaterial;
 
   @override
   String toString() {
-    return 'MaterialFilterState(materialFilter: $materialFilter, searchKey: $searchKey, salesOrganisation: $salesOrganisation, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching)';
+    return 'MaterialFilterState(materialFilter: $materialFilter, searchKey: $searchKey, salesOrganisation: $salesOrganisation, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, hasAccessToCovidMaterial: $hasAccessToCovidMaterial)';
   }
 
   @override
@@ -1760,12 +1821,21 @@ class _$_MaterialFilterState extends _MaterialFilterState {
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
             (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching));
+                other.isFetching == isFetching) &&
+            (identical(
+                    other.hasAccessToCovidMaterial, hasAccessToCovidMaterial) ||
+                other.hasAccessToCovidMaterial == hasAccessToCovidMaterial));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialFilter, searchKey,
-      salesOrganisation, apiFailureOrSuccessOption, isFetching);
+  int get hashCode => Object.hash(
+      runtimeType,
+      materialFilter,
+      searchKey,
+      salesOrganisation,
+      apiFailureOrSuccessOption,
+      isFetching,
+      hasAccessToCovidMaterial);
 
   @JsonKey(ignore: true)
   @override
@@ -1782,7 +1852,8 @@ abstract class _MaterialFilterState extends MaterialFilterState {
       required final SalesOrganisation salesOrganisation,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
-      required final bool isFetching}) = _$_MaterialFilterState;
+      required final bool isFetching,
+      required final bool hasAccessToCovidMaterial}) = _$_MaterialFilterState;
   const _MaterialFilterState._() : super._();
 
   @override
@@ -1795,6 +1866,8 @@ abstract class _MaterialFilterState extends MaterialFilterState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   bool get isFetching;
+  @override
+  bool get hasAccessToCovidMaterial;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialFilterStateCopyWith<_$_MaterialFilterState> get copyWith =>

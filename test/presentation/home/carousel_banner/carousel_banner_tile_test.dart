@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/product_search/product_search_bloc.
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -66,7 +67,7 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late MaterialListBloc materialListBloc;
   late EligibilityBlocMock eligibilityBlocMock;
-  late MaterialFilterBloc materialfilterBlocMock;
+  late MaterialFilterBloc materialFilterBlocMock;
   late ProductSearchBloc productSearchBlocMock;
   late AppRouter autoRouterMock;
   const fakeKeyword = 'Test Keyword';
@@ -92,7 +93,7 @@ void main() {
     customerCodeBlocMock = CustomerCodeBlocMock();
     materialListBloc = MaterialListBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
-    materialfilterBlocMock = MockMaterialFilterBloc();
+    materialFilterBlocMock = MockMaterialFilterBloc();
     productSearchBlocMock = MockProductSearchBloc();
     autoRouterMock = locator<AppRouter>();
 
@@ -104,7 +105,7 @@ void main() {
     when(() => materialListBloc.state).thenReturn(MaterialListState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
-    when(() => materialfilterBlocMock.state)
+    when(() => materialFilterBlocMock.state)
         .thenReturn(MaterialFilterState.initial());
 
     when(() => productSearchBlocMock.state)
@@ -127,6 +128,9 @@ void main() {
         providers: [
           BlocProvider<ProductSearchBloc>(
             create: (context) => productSearchBlocMock,
+          ),
+          BlocProvider<MaterialFilterBloc>(
+            create: (context) => materialFilterBlocMock,
           ),
         ],
         child: Material(
@@ -179,6 +183,7 @@ void main() {
             searchKey: SearchKey.search(
               fakeKeyword,
             ),
+            materialFilter: MaterialFilter.empty(),
           ),
         ),
       ).called(1);

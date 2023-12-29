@@ -1139,6 +1139,7 @@
                     "city2": "SEREI SAOPHOAN",
                     "status": "",
                     "customerGrp4": "",
+                    "customerAttr7": "",
                     "paymentTerm": "0001",
                     "paymentTermDescription": "Pay immediately (Standard SAP)",
                     "shipTo": [
@@ -1171,6 +1172,7 @@
                 },
                 {
                     "customerCodeSoldTo": "0030331518",
+                    "customerAttr7": "ZEV",
                     "customerGrp4": "",
                     "name1": "Dr. Kuy Sok",
                     "name2": "",
@@ -1224,6 +1226,7 @@
                     "paymentTerm": "0001",
                     "paymentTermDescription": "Pay immediately (Standard SAP)",
                     "customerGrp4": "YP",
+                    "customerAttr7": "",
                     "name1": "RSD HOSPITALS SDN BHD (SJMC)",
                     "name2": "",
                     "name3": "",

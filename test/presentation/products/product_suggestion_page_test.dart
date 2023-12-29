@@ -1,12 +1,14 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -46,6 +48,10 @@ class ScanMaterialInfoBlocMock
     extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
     implements ScanMaterialInfoBloc {}
 
+class MockMaterialFilterBloc
+    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
+    implements MaterialFilterBloc {}
+
 void main() {
   late ProductSearchBloc productSearchBlocMock;
   late EligibilityBloc eligibilityBloc;
@@ -53,6 +59,7 @@ void main() {
   late MaterialPriceBloc materialPriceBloc;
   late ScanMaterialInfoBloc scanMaterialInfoBlocMock;
   late AppRouter autoRouterMock;
+  late MaterialFilterBloc materialFilterBlocMock;
   final locator = GetIt.instance;
   const fakeSearchText = 'fake-search-text';
 
@@ -77,6 +84,7 @@ void main() {
     materialPriceBloc = MaterialPriceBlocMock();
     scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
     productSearchBlocMock = ProductSearchBlocMock();
+    materialFilterBlocMock = MockMaterialFilterBloc();
 
     when(() => productSearchBlocMock.state).thenReturn(
       ProductSearchState.initial().copyWith(
@@ -96,6 +104,8 @@ void main() {
     when(() => scanMaterialInfoBlocMock.state).thenReturn(
       ScanMaterialInfoState.initial(),
     );
+    when(() => materialFilterBlocMock.state)
+        .thenReturn(MaterialFilterState.initial());
   });
 
   Widget getWidget() {
@@ -117,6 +127,9 @@ void main() {
         ),
         BlocProvider<ScanMaterialInfoBloc>(
           create: (context) => scanMaterialInfoBlocMock,
+        ),
+        BlocProvider<MaterialFilterBloc>(
+          create: (context) => materialFilterBlocMock,
         ),
       ],
       child: const ProductSuggestionPage(parentRoute: ''),
@@ -267,6 +280,7 @@ void main() {
             () => productSearchBlocMock.add(
               ProductSearchEvent.searchProduct(
                 searchKey: SearchKey.search(fakeSearchText),
+                materialFilter: MaterialFilter.empty(),
               ),
             ),
           ).called(1);
@@ -276,7 +290,9 @@ void main() {
           await tester.tap(scanIconFinder);
           verify(
             () => scanMaterialInfoBlocMock.add(
-              const ScanMaterialInfoEvent.scanMaterialNumberFromCamera(),
+              ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
+                materialFilter: MaterialFilter.empty(),
+              ),
             ),
           ).called(1);
           expect(autoRouterMock.current.path, 'orders/scan_material_info');
@@ -406,6 +422,7 @@ void main() {
                 searchKey: SearchKey.search(
                   fakeSearchText,
                 ),
+                materialFilter: MaterialFilter.empty(),
               ),
             ),
           ).called(1);

@@ -35,6 +35,7 @@ class ProductSearchRemoteDataSource {
     required String language,
     required String searchKey,
     required String eanNumber,
+    required bool? isCovidSelected,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery();
@@ -50,6 +51,7 @@ class ProductSearchRemoteDataSource {
           'ShipTo': shipToCode,
           'isGimmick': gimmickMaterial,
           'SearchKey': searchKey,
+          'isFOCMaterial': isCovidSelected,
         },
       };
       if (eanNumber.isNotEmpty) variables['request']!['ean'] = eanNumber;

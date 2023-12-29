@@ -123,7 +123,7 @@ void main() {
             selectedMaterialFilter:
                 materialState.selectedMaterialFilter.copyWith(
               isFavourite: mockSelectedMaterialFilter.isFavourite,
-              isFOCMaterial: mockSelectedMaterialFilter.isFOCMaterial,
+              isCovidSelected: mockSelectedMaterialFilter.isCovidSelected,
               bundleOffers: mockSelectedMaterialFilter.bundleOffers,
               isProductOffer: mockSelectedMaterialFilter.isProductOffer,
               sortBy: mockSelectedMaterialFilter.sortBy,
@@ -193,7 +193,7 @@ void main() {
           isScanFromBarcode: false,
           selectedMaterialFilter: materialState.selectedMaterialFilter.copyWith(
             isFavourite: mockSelectedMaterialFilter.isFavourite,
-            isFOCMaterial: mockSelectedMaterialFilter.isFOCMaterial,
+            isCovidSelected: mockSelectedMaterialFilter.isCovidSelected,
             bundleOffers: mockSelectedMaterialFilter.bundleOffers,
             isProductOffer: mockSelectedMaterialFilter.isProductOffer,
             sortBy: mockSelectedMaterialFilter.sortBy,

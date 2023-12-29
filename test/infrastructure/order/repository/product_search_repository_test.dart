@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
@@ -117,6 +118,7 @@ void main() async {
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
           eanNumber: Ean(fakeEanNumber),
+          materialFilter: MaterialFilter.empty(),
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -134,6 +136,7 @@ void main() async {
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
           eanNumber: Ean(fakeEanNumber),
+          materialFilter: MaterialFilter.empty(),
         );
 
         expect(result, Right(fakeMaterialResponse.products.first));
@@ -152,6 +155,7 @@ void main() async {
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
             searchKey: '',
             shipToCode: fakeShipToInfo.shipToCustomerCode,
+            isCovidSelected: false,
           ),
         ).thenThrow(fakeException);
 
@@ -162,6 +166,7 @@ void main() async {
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
           eanNumber: Ean(fakeEanNumber),
+          materialFilter: MaterialFilter.empty(),
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -180,6 +185,7 @@ void main() async {
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
             searchKey: '',
             shipToCode: fakeShipToInfo.shipToCustomerCode,
+            isCovidSelected: false,
           ),
         ).thenAnswer((_) async => fakeMaterialResponse.copyWith(products: []));
 
@@ -190,6 +196,7 @@ void main() async {
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
           eanNumber: Ean(fakeEanNumber),
+          materialFilter: MaterialFilter.empty(),
         );
 
         expect(
@@ -211,6 +218,7 @@ void main() async {
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
             searchKey: '',
             shipToCode: fakeShipToInfo.shipToCustomerCode,
+            isCovidSelected: false,
           ),
         ).thenAnswer((_) async => fakeMaterialResponse);
 
@@ -221,6 +229,7 @@ void main() async {
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
           eanNumber: Ean(fakeEanNumber),
+          materialFilter: MaterialFilter.empty(),
         );
 
         expect(result, Right(fakeMaterialResponse.products.first));
@@ -241,6 +250,7 @@ void main() async {
           searchKey: fakeSearchKey,
           pageSize: fakePageSize,
           offset: fakeOffset,
+          materialFilter: MaterialFilter.empty(),
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -258,6 +268,7 @@ void main() async {
           searchKey: fakeSearchKey,
           pageSize: fakePageSize,
           offset: fakeOffset,
+          materialFilter: MaterialFilter.empty(),
         );
 
         expect(result, Right(fakeMaterialResponse));
@@ -284,6 +295,7 @@ void main() async {
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
             searchKey: fakeSearchKey.getOrDefaultValue(''),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
+            isCovidSelected: false,
           ),
         ).thenThrow(fakeException);
 
@@ -295,6 +307,7 @@ void main() async {
           searchKey: fakeSearchKey,
           pageSize: fakePageSize,
           offset: fakeOffset,
+          materialFilter: MaterialFilter.empty(),
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -328,6 +341,7 @@ void main() async {
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
             searchKey: fakeSearchKey.getOrDefaultValue(''),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
+            isCovidSelected: false,
           ),
         ).thenThrow(fakeException);
 
@@ -339,6 +353,7 @@ void main() async {
           searchKey: fakeSearchKey,
           pageSize: fakePageSize,
           offset: fakeOffset,
+          materialFilter: MaterialFilter.empty(),
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -372,6 +387,7 @@ void main() async {
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
             searchKey: fakeSearchKey.getOrDefaultValue(''),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
+            isCovidSelected: false,
           ),
         ).thenAnswer((_) async => fakeMaterialResponse);
 
@@ -383,6 +399,7 @@ void main() async {
           searchKey: fakeSearchKey,
           pageSize: fakePageSize,
           offset: fakeOffset,
+          materialFilter: MaterialFilter.empty(),
         );
 
         expect(result, Right(fakeMaterialResponse));

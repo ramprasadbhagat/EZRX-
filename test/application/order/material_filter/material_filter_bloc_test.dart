@@ -107,6 +107,7 @@ void main() {
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
           pickAndPack: 'fake_pick_and_pack',
+          hasAccessToCovidMaterial: false,
         ),
       ),
       expect: () => [
@@ -154,6 +155,7 @@ void main() {
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
           pickAndPack: 'fake_pick_and_pack',
+          hasAccessToCovidMaterial: false,
         ),
       ),
       expect: () => [
@@ -279,14 +281,14 @@ void main() {
       seed: () => filterState,
       act: (MaterialFilterBloc bloc) => bloc.add(
         const MaterialFilterEvent.updateSelectedMaterialFilter(
-          MaterialFilterType.isFOCMaterial,
+          MaterialFilterType.isCovidSelected,
           fakeFOCMaterialFilterKey,
         ),
       ),
       expect: () => [
         MaterialFilterState.initial().copyWith(
           materialFilter: filterState.materialFilter
-              .copyWith(isFOCMaterial: fakeFOCMaterialFilterKey),
+              .copyWith(isCovidSelected: fakeFOCMaterialFilterKey),
         ),
       ],
     );
@@ -501,16 +503,6 @@ void main() {
         brandList: <String>[],
       );
       expect(materialFilterBloc.state.displayMaterialFilter, materialFilter);
-    });
-
-    test('Test Get Empty Material Filter', () {
-      final materialFilterBloc = MaterialFilterBloc(
-        materialFilterRepository: materialFilterRepositoryMock,
-      );
-      expect(
-        materialFilterBloc.state.emptyMaterialFilter,
-        MaterialFilter.empty(),
-      );
     });
 
     test('Get sort filter list by default', () {

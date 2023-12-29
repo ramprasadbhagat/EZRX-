@@ -723,7 +723,8 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfoForCovid,
               shipToInfo: fakeShipToInfo,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
-                isFOCMaterial: true,
+                hasAccessToCovidMaterial: true,
+                isCovidSelected: true,
               ),
             ),
           ),
@@ -731,7 +732,7 @@ void main() {
         verify(
           () => materialFilterBlocMock.add(
             const MaterialFilterEvent.updateSelectedMaterialFilter(
-              MaterialFilterType.isFOCMaterial,
+              MaterialFilterType.isCovidSelected,
               true,
             ),
           ),

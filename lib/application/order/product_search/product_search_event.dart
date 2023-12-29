@@ -11,6 +11,7 @@ class ProductSearchEvent with _$ProductSearchEvent {
 
   const factory ProductSearchEvent.searchProduct({
     required SearchKey searchKey,
+    required MaterialFilter materialFilter,
   }) = _SearchProduct;
 
   const factory ProductSearchEvent.loadMoreProductList() = _LoadMoreProductList;

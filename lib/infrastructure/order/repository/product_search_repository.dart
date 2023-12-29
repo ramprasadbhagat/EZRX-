@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 
 import 'package:ezrxmobile/domain/order/repository/i_product_search_repository.dart';
 
@@ -52,6 +53,7 @@ class ProductSearchRepository implements IProductSearchRepository {
     required SearchKey searchKey,
     required int pageSize,
     required int offset,
+    required MaterialFilter materialFilter,
   }) async {
     final customerCode = customerCodeInfo.customerCodeSoldTo;
     final salesOrg = salesOrganization.salesOrg.getOrCrash();
@@ -86,6 +88,7 @@ class ProductSearchRepository implements IProductSearchRepository {
         offset: offset,
         pageSize: pageSize,
         eanNumber: '',
+        isCovidSelected: materialFilter.isCovidSelectedFilterValue,
       );
 
       return Right(materialList);
@@ -141,6 +144,7 @@ class ProductSearchRepository implements IProductSearchRepository {
     required Ean eanNumber,
     required SalesOrganisationConfigs salesOrgConfig,
     required User user,
+    required MaterialFilter materialFilter,
   }) async {
     final customerCode = customerCodeInfo.customerCodeSoldTo;
     final salesOrg = salesOrganization.salesOrg.getOrCrash();
@@ -165,6 +169,7 @@ class ProductSearchRepository implements IProductSearchRepository {
         offset: 0,
         pageSize: 24,
         eanNumber: eanNumber.getOrCrash(),
+        isCovidSelected: materialFilter.isCovidSelectedFilterValue,
       );
 
       if (materialList.products.isEmpty) {
