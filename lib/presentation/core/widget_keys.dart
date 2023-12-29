@@ -536,8 +536,9 @@ class WidgetKeys {
       Key('counterOfferListPriceWidget');
   static const Key counterOfferPriceWidget = Key('counterOfferPriceWidget');
   static const Key cartPageAppBarTitle = Key('cartPageAppBarTitle');
-  static const Key cartPagePriceMessageWidget =
-      Key('cartPagePriceMessageWidget');
+  static const Key priceNotAvailableMessageWidget =
+      Key('priceNotAvailableMessageWidget');
+  static const Key invalidItemsMessageWidget = Key('invalidItemsMessageWidget');
   static const Key cartClearButton = Key('cartClearButton');
   static const Key cartShipToAddress = Key('cartShipToAddress');
   static const Key cartShipToAddressSheet = Key('cartShipToAddressSheet');

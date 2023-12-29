@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
@@ -31,6 +32,7 @@ import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bun
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_material_item/checkout_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
 import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -179,6 +181,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 color: ZPColors.extraLightGrey2,
               ),
               PriceSummaryTile(cartState: cartState),
+              if (context
+                  .read<OrderEligibilityBloc>()
+                  .state
+                  .displayPriceNotAvailableMessage)
+                const PriceNotAvailableMessage(
+                  margin: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                ),
               SafeArea(
                 child: Container(
                   width: double.infinity,

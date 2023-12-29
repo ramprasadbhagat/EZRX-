@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/cart/price_override/price_override_
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
@@ -101,6 +102,10 @@ class PriceOverrideBlocMock
     extends MockBloc<PriceOverrideEvent, PriceOverrideState>
     implements PriceOverrideBloc {}
 
+class OrderEligibilityBlocMock
+    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
+    implements OrderEligibilityBloc {}
+
 class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
@@ -124,6 +129,8 @@ void main() {
   final userBlocMock = UserMockBloc();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
+  late OrderEligibilityBloc orderEligibilityBlocMock;
+
   final fakeCartProduct = <PriceAggregate>[
     PriceAggregate.empty().copyWith(
       materialInfo: MaterialInfo.empty().copyWith(
@@ -166,6 +173,7 @@ void main() {
       priceOverrideBloc = PriceOverrideBlocMock();
       comboDealListBloc = ComboDealListBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
+      orderEligibilityBlocMock = OrderEligibilityBlocMock();
 
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial(),
@@ -196,6 +204,9 @@ void main() {
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
+      when(
+        () => orderEligibilityBlocMock.state,
+      ).thenReturn(OrderEligibilityState.initial());
     });
     Widget getScopedWidget() {
       return EasyLocalization(
@@ -242,6 +253,9 @@ void main() {
             BlocProvider<CartBloc>(create: (context) => cartBloc),
             BlocProvider<MaterialPriceBloc>(
               create: (context) => materialPriceBlocMock,
+            ),
+            BlocProvider<OrderEligibilityBloc>(
+              create: (context) => orderEligibilityBlocMock,
             ),
           ],
           child: const Material(
@@ -2201,5 +2215,57 @@ void main() {
         const Offset(0.0, -200.0),
       );
     });
+
+    testWidgets(
+      'Display Price Not Available Message for hide price materials',
+      (tester) async {
+        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+          materialWithoutPrice: true,
+        );
+        final cartProducts = <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('123456789'),
+              quantity: MaterialQty(1),
+              taxClassification:
+                  MaterialTaxClassification('Product : Full Tax'),
+              type: MaterialInfoType('material'),
+              hidePrice: true,
+            ),
+            price: Price.empty().copyWith(
+              finalPrice: MaterialPrice(354.60),
+            ),
+          ),
+        ];
+        final cartState = CartState.initial().copyWith(
+          cartProducts: cartProducts,
+        );
+
+        final orderEligibilityState = OrderEligibilityState.initial().copyWith(
+          configs: salesOrgConfig,
+          cartItems: cartProducts,
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          orderEligibilityState,
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final priceMessageWidgetFinder =
+            find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
+        final priceMessageFinder = find.text(
+          'Price is not available for at least one item. Grand total reflected may not be accurate.'
+              .tr(),
+        );
+        expect(priceMessageWidgetFinder, findsOneWidget);
+        expect(priceMessageFinder, findsOneWidget);
+      },
+    );
   });
 }

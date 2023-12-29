@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -122,6 +123,10 @@ class OrderSummarySection extends StatelessWidget {
                   ? orderDetails.grandTotal(isMYExternalSalesRep)
                   : orderDetails.orderedItemsValue(isMYExternalSalesRep),
             ),
+            if (orderDetails.orderContainsHidePriceMaterial)
+              const PriceNotAvailableMessage(
+                margin: EdgeInsets.symmetric(vertical: 8),
+              ),
             // const BalanceTextRow(
             //   keyText: 'Total savings', // TODO: after getting information will enhance and allign with web
             //   valueText: '',

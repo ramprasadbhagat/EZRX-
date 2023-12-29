@@ -31,6 +31,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -1355,6 +1356,40 @@ void main() {
         );
       },
     );
+    testWidgets('Display Price Not Available Message for hide price materials',
+        (tester) async {
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderValue: 516.0,
+            orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+              OrderHistoryDetailsOrderItem.empty().copyWith(
+                principalData: PrincipalData.empty().copyWith(
+                  principalCode: PrincipalCode('0000101308'),
+                  principalName: PrincipalName('PROCTER AND GAMBLE'),
+                ),
+                materialNumber: MaterialNumber(''),
+                unitPrice: 17.2,
+                totalPrice: 516,
+                type: OrderItemType('Comm'),
+                productType: MaterialInfoType('material'),
+                hidePrice: true,
+              )
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      final priceMessageWidgetFinder =
+          find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
+      final priceMessageFinder = find.text(
+        'Price is not available for at least one item. Grand total reflected may not be accurate.'
+            .tr(),
+      );
+      expect(priceMessageWidgetFinder, findsOneWidget);
+      expect(priceMessageFinder, findsOneWidget);
+    });
   });
 }
 

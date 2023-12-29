@@ -453,7 +453,7 @@ void main() {
       });
 
       testWidgets(
-          'Counter offer button visible for MY External sales rep having PnG material(Hide Price ----> true)',
+          'Counter offer button not visible for MY External sales rep having PnG material(Hide Price ----> true)',
           (tester) async {
         final pnGCartItem = cartItem.copyWith(
           quantity: 2,
@@ -498,15 +498,7 @@ void main() {
 
         final counterOfferButton =
             find.byKey(WidgetKeys.counterOfferPriceButtonKey);
-        expect(counterOfferButton, findsOneWidget);
-        await tester.tap(counterOfferButton);
-        verify(
-          () => priceOverrideBloc.add(
-            PriceOverrideEvent.setProduct(
-              item: pnGCartItem,
-            ),
-          ),
-        ).called(1);
+        expect(counterOfferButton, findsNothing);
       });
 
       testWidgets(

@@ -90,7 +90,7 @@ abstract class ZPColors {
   static const Color orangeChipColor = Color.fromRGBO(244, 214, 170, 1);
   static const Color errorSnackBarColor = Color.fromRGBO(250, 196, 196, 1);
   static const Color attachmentColor = Color.fromRGBO(187, 207, 48, 1);
-  static const Color priceWarning = Color.fromRGBO(248, 227, 198, 1);
+  static const Color priceWarning = Color.fromRGBO(253, 246, 237, 1);
   static const Color priceNegative = Color.fromRGBO(238, 66, 66, 1);
   static const Color warningTextColor = Color.fromRGBO(241, 104, 104, 1);
 

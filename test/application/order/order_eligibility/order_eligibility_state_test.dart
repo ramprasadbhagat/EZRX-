@@ -263,7 +263,7 @@ void main() {
 
     test(' => displayCartPagePriceMessage should return correct value', () {
       // displayCartPagePriceMessage is false
-      expect(initializedState.displayCartPagePriceMessage, false);
+      expect(initializedState.displayPriceNotAvailableMessage, false);
 
       // displayCartPagePriceMessage is true
       final modifiedState = initializedState.copyWith(
@@ -278,7 +278,7 @@ void main() {
           )
         ],
       );
-      expect(modifiedState.displayCartPagePriceMessage, true);
+      expect(modifiedState.displayPriceNotAvailableMessage, true);
     });
 
     test(' => invalidBundleCartItems should return correct value', () {

@@ -1441,7 +1441,7 @@ void main() {
               find.widgetWithText(ElevatedButton, 'Check out');
 
           final priceMessageWidgetFinder =
-              find.byKey(WidgetKeys.cartPagePriceMessageWidget);
+              find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
           final priceMessageFinder = find.text(
             'Price is not available for at least one item. Grand total reflected may not be accurate.'
                 .tr(),
@@ -1498,7 +1498,7 @@ void main() {
               find.widgetWithText(ElevatedButton, 'Check out');
 
           final priceMessageWidgetFinder =
-              find.byKey(WidgetKeys.cartPagePriceMessageWidget);
+              find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
           final priceMessageFinder = find.text(
             'Price is not available for at least one item. Grand total reflected may not be accurate.'
                 .tr(),
@@ -1551,7 +1551,7 @@ void main() {
               find.widgetWithText(ElevatedButton, 'Check out');
 
           final priceMessageWidgetFinder =
-              find.byKey(WidgetKeys.cartPagePriceMessageWidget);
+              find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
           final priceMessageFinder = find.text(
             'Price is not available for at least one item. Grand total reflected may not be accurate.'
                 .tr(),
@@ -2381,7 +2381,7 @@ void main() {
         final priceText = find.byKey(WidgetKeys.cartItemProductTotalPrice);
         expect(priceText, findsOneWidget);
         final cartPagePriceMessageWidget =
-            find.byKey(WidgetKeys.cartPagePriceMessageWidget);
+            find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
         expect(cartPagePriceMessageWidget, findsOneWidget);
         final cartPagePriceMessage = find.text(
           'Price is not available for at least one item. Grand total reflected may not be accurate.',

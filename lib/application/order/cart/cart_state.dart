@@ -565,4 +565,14 @@ class CartState with _$CartState {
       totalBonusCount +
       totalBundleItemsCount +
       totalComboCount;
+  RequestCounterOfferDetails productCounterOfferDetails(
+    MaterialNumber material,
+  ) =>
+      cartProducts
+          .firstWhere(
+            (element) => element.materialInfo.materialNumber == material,
+            orElse: () => PriceAggregate.empty(),
+          )
+          .materialInfo
+          .counterOfferDetails;
 }

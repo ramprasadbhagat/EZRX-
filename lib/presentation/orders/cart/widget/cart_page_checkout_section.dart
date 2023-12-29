@@ -35,11 +35,17 @@ class _CartPageCheckoutSection extends StatelessWidget {
                 size: 20,
               ),
             ),
-            const _CartPagePriceMessage(),
             const _MovCheckMessage(),
             const _StockInvalidIDMarketMessage(),
             const _CartPageInvalidItemsMessage(),
             PriceSummaryTile(cartState: state),
+            if (context
+                .read<OrderEligibilityBloc>()
+                .state
+                .displayPriceNotAvailableMessage)
+              const PriceNotAvailableMessage(
+                margin: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              ),
             _CartPageCheckoutButton(),
           ],
         );

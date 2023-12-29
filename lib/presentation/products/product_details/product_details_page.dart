@@ -763,22 +763,26 @@ void upsertCart({
   required CartState stateCart,
   required String quantityText,
 }) {
+  final materialNumber =
+      state.productDetailAggregate.materialInfo.materialNumber;
   context.read<CartBloc>().add(
         CartEvent.upsertCart(
           priceAggregate: PriceAggregate.empty().copyWith(
-            materialInfo: state.productDetailAggregate.materialInfo,
+            materialInfo: state.productDetailAggregate.materialInfo.copyWith(
+              counterOfferDetails:
+                  stateCart.productCounterOfferDetails(materialNumber),
+            ),
             price: price,
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,
             quantity: stateCart.getQuantityOfProduct(
-                  productNumber:
-                      state.productDetailAggregate.materialInfo.materialNumber,
+                  productNumber: materialNumber,
                 ) +
                 int.parse(
                   quantityText,
                 ),
             bonusSampleItems: context.read<CartBloc>().state.productBonusList(
-                  state.productDetailAggregate.materialInfo.materialNumber,
+                  materialNumber,
                 ),
           ),
         ),

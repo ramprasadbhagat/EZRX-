@@ -1873,5 +1873,43 @@ void main() {
       final orderCreatedText = find.text('Pending release - on backorder');
       expect(orderCreatedText, findsOneWidget);
     });
+
+    testWidgets('Display Price Not Available Message for hide price materials',
+        (tester) async {
+      final materialNumber = MaterialNumber('000000000021247719');
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderValue: 516.0,
+            orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+              OrderHistoryDetailsOrderItem.empty().copyWith(
+                principalData: PrincipalData.empty().copyWith(
+                  principalCode: PrincipalCode('0000101308'),
+                  principalName: PrincipalName('PROCTER AND GAMBLE'),
+                ),
+                materialNumber: materialNumber,
+                unitPrice: 17.2,
+                totalPrice: 516,
+                type: OrderItemType('Comm'),
+                productType: MaterialInfoType('material'),
+                hidePrice: true,
+              )
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final priceMessageWidgetFinder =
+          find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
+      final priceMessageFinder = find.text(
+        'Price is not available for at least one item. Grand total reflected may not be accurate.'
+            .tr(),
+      );
+      expect(priceMessageWidgetFinder, findsOneWidget);
+      expect(priceMessageFinder, findsOneWidget);
+    });
   });
 }

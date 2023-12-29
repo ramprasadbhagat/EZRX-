@@ -221,6 +221,9 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
           )
         : '';
   }
+
+  bool get orderContainsHidePriceMaterial =>
+      orderHistoryDetailsOrderItem.any((element) => element.hidePrice);
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetails> {

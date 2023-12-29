@@ -476,7 +476,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
         cartItem.price.additionalBonusEligible &&
         (!cartItem.materialInfo.hidePrice || isMYPnGSalesRep);
     final isCounterOfferEnable = eligibilityState.isCounterOfferVisible &&
-        (!cartItem.materialInfo.hidePrice || isMYPnGSalesRep);
+        !cartItem.materialInfo.hidePrice;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),

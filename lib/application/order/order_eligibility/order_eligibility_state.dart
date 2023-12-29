@@ -220,7 +220,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       .map((item) => item.materialInfo.copyWith(quantity: MaterialQty(0)))
       .toList();
 
-  bool get displayCartPagePriceMessage =>
+  bool get displayPriceNotAvailableMessage =>
       configs.materialWithoutPrice &&
       cartItems.any(
         (e) => e.materialInfo.type.typeMaterial && e.invalidPrice,

@@ -15,7 +15,7 @@ class _CartPageInvalidItemsMessage extends StatelessWidget {
         }
 
         return InfoLabel(
-          key: WidgetKeys.cartPagePriceMessageWidget,
+          key: WidgetKeys.invalidItemsMessageWidget,
           margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
           mainColor: ZPColors.lightRedStatusColor,
           textValue: context.tr(

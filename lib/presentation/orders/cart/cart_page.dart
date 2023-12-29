@@ -29,6 +29,7 @@ import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart'
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,6 @@ part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_l
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list_item.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_checkout_section.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items_banner.dart';
-part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_price_message.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/stock_invalid_id_message.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items_message.dart';
 
