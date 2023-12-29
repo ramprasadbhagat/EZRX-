@@ -72,6 +72,7 @@ class CustomImage extends StatelessWidget {
 class _ErrorWidget extends StatelessWidget {
   final double height;
   final double width;
+
   const _ErrorWidget({
     Key? key,
     required this.height,
@@ -81,7 +82,7 @@ class _ErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.all(5),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(8.0),
