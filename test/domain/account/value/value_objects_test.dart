@@ -134,6 +134,26 @@ void main() {
         expect(salesOrg.isPH, true);
       },
     );
+
+    test(
+      'cutOffTime should return 15h for SG',
+      () {
+        const input = '2601';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.cutOffTime;
+        expect(result, 15);
+      },
+    );
+
+    test(
+      'cutOffTime should return 17h for TH',
+      () {
+        const input = '2902';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.cutOffTime;
+        expect(result, 17);
+      },
+    );
   });
 
   group('RoleType value object', () {

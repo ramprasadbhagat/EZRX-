@@ -542,6 +542,7 @@ String getPaymentIdPretext(String country) {
 int countryCutOffTime(String country) {
   final salesOrgCountryMap = {
     'SG': 15,
+    'TH': 17,
   };
 
   return salesOrgCountryMap[country] ?? 15;
