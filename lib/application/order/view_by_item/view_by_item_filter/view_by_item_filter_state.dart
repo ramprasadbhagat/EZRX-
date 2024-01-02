@@ -15,7 +15,7 @@ class ViewByItemFilterState with _$ViewByItemFilterState {
           StatusType('Order Created'),
           StatusType('Pending'),
           StatusType('Order packed and ready for delivery'),
-          StatusType('Picking in-progress'),
+          StatusType('Picking in progress'),
           StatusType('Out for delivery'),
           StatusType('Delivered'),
           StatusType('Cancelled'),

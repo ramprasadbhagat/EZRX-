@@ -15,7 +15,7 @@ class ViewByItemsFilterRobot {
     'Order created',
     'Pending',
     'Order packed and ready for delivery',
-    'Picking in-progress',
+    'Picking in progress',
     'Out for delivery',
     'Delivered',
     'Cancelled',

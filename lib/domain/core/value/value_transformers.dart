@@ -290,7 +290,7 @@ Color getStatusLabelColor(String statusType) {
   final lightYellow = {
     'Pending': ZPColors.lightYellow,
     'OOS-Preorder': ZPColors.lightYellow,
-    'Picking in-progress': ZPColors.lightYellow,
+    'Picking in progress': ZPColors.lightYellow,
     'Out for delivery': ZPColors.lightYellow,
     'Pending Approval': ZPColors.lightYellow,
     'Out for re-delivery': ZPColors.lightYellow,

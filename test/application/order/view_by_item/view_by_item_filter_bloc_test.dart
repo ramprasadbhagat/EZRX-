@@ -25,7 +25,7 @@ void main() {
     StatusType('Order Created'),
     StatusType('Pending'),
     StatusType('Order packed and ready for delivery'),
-    StatusType('Picking in-progress'),
+    StatusType('Picking in progress'),
     StatusType('Out for delivery'),
     StatusType('Delivered'),
     StatusType('Cancelled'),
@@ -82,7 +82,7 @@ void main() {
           );
           bloc.add(
             ViewByItemFilterEvent.setOrderStatus(
-              status: StatusType('Picking in-progress'),
+              status: StatusType('Picking in progress'),
               value: true,
             ),
           );
@@ -100,7 +100,7 @@ void main() {
             filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
                 StatusType('Order Created'),
-                StatusType('Picking in-progress'),
+                StatusType('Picking in progress'),
               ],
             ),
             statusList: statusList,
@@ -114,7 +114,7 @@ void main() {
         act: (bloc) {
           bloc.add(
             ViewByItemFilterEvent.setOrderStatus(
-              status: StatusType('Picking in-progress'),
+              status: StatusType('Picking in progress'),
               value: false,
             ),
           );
@@ -123,7 +123,7 @@ void main() {
           filter: ViewByItemFilter.empty().copyWith(
             orderStatusList: <StatusType>[
               StatusType('Order created'),
-              StatusType('Picking in-progress'),
+              StatusType('Picking in progress'),
             ],
           ),
           statusList: statusList,
@@ -149,7 +149,7 @@ void main() {
               lastAppliedFilter: ViewByItemFilter.empty().copyWith(
                 orderStatusList: <StatusType>[
                   StatusType('Order created'),
-                  StatusType('Picking in-progress'),
+                  StatusType('Picking in progress'),
                 ],
                 orderDateFrom: DateTimeStringValue(
                   getDateStringByDateTime(fakeStartDate),
@@ -166,7 +166,7 @@ void main() {
             filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
                 StatusType('Order created'),
-                StatusType('Picking in-progress'),
+                StatusType('Picking in progress'),
               ],
               orderDateFrom: DateTimeStringValue(
                 getDateStringByDateTime(fakeStartDate),
