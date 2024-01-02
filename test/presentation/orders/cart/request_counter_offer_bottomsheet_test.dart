@@ -40,6 +40,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
@@ -1363,65 +1364,6 @@ void main() {
       expect(autoRouter.current.route.name, 'Root');
     });
 
-    testWidgets('List Price Displayed Price Not Available for PnG material ',
-        (tester) async {
-      final cartItem = cartItems.first.copyWith(
-        materialInfo: cartItems.first.materialInfo.copyWith(
-          hidePrice: true,
-          principalData: PrincipalData.empty().copyWith(
-            principalName: PrincipalName('Procter And Gamble'),
-            principalCode: PrincipalCode('000000105307'),
-          ),
-        ),
-      );
-
-      when(() => priceOverrideBloc.state).thenReturn(
-        PriceOverrideState.initial().copyWith(
-          item: cartItem,
-        ),
-      );
-
-      when(() => eligibilityBloc.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          user: User.empty().copyWith(
-            hasPriceOverride: true,
-            role: Role.empty().copyWith(
-              type: RoleType('internal_sales_rep'),
-            ),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            priceOverride: true,
-            enableZDP8Override: true,
-          ),
-        ),
-      );
-
-      await tester.pumpWidget(
-        getWidget(
-          child: Scaffold(
-            body: RequestCounterOfferBottomSheet(
-              cartItem: cartItem,
-            ),
-          ),
-        ),
-      );
-      await tester.pump();
-
-      final counterOfferBottomSheetFinder =
-          find.byKey(WidgetKeys.counterOfferBottomSheet);
-      expect(counterOfferBottomSheetFinder, findsOneWidget);
-
-      final counterOfferListPriceWidgetFinder =
-          find.byKey(WidgetKeys.counterOfferListPriceWidget);
-      expect(counterOfferListPriceWidgetFinder, findsOneWidget);
-
-      final listPriceTextFinder = find.text(
-        '${'List price'.tr()} : Price Not Available',
-        findRichText: true,
-      );
-      expect(listPriceTextFinder, findsOneWidget);
-    });
-
     testWidgets(
         'Offer Price Price Displayed Price Not Available for PnG material ',
         (tester) async {
@@ -1482,40 +1424,28 @@ void main() {
       expect(counterOfferPriceTextFinder, findsOneWidget);
     });
 
-    testWidgets(
-        'Final counter offer price displayed Price Not Available for PnG material ',
+
+    testWidgets('Check list price for counter offer bottom sheet.',
         (tester) async {
       final cartItem = cartItems.first.copyWith(
-        materialInfo: cartItems.first.materialInfo.copyWith(
-          hidePrice: true,
-          principalData: PrincipalData.empty().copyWith(
-            principalName: PrincipalName('Procter And Gamble'),
-            principalCode: PrincipalCode('000000105307'),
-          ),
+        price: cartItems.first.price.copyWith(
+          finalPrice: MaterialPrice(10),
+          lastPrice: MaterialPrice(20),
+        ),
+        salesOrgConfig: cartItems.first.salesOrgConfig.copyWith(
+          enableListPrice: true,
         ),
       );
-
       when(() => priceOverrideBloc.state).thenReturn(
         PriceOverrideState.initial().copyWith(
           item: cartItem,
         ),
       );
-
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          user: User.empty().copyWith(
-            hasPriceOverride: true,
-            role: Role.empty().copyWith(
-              type: RoleType('internal_sales_rep'),
-            ),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            priceOverride: true,
-            enableZDP8Override: true,
-          ),
+          salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
         ),
       );
-
       await tester.pumpWidget(
         getWidget(
           child: Scaffold(
@@ -1530,16 +1460,16 @@ void main() {
       final counterOfferBottomSheetFinder =
           find.byKey(WidgetKeys.counterOfferBottomSheet);
       expect(counterOfferBottomSheetFinder, findsOneWidget);
-
-      final counterOfferListPriceWidgetFinder =
-          find.byKey(WidgetKeys.counterOfferDiscountedPriceWidget);
-      expect(counterOfferListPriceWidgetFinder, findsOneWidget);
-
-      final priceNotAvailableFinder = find.textContaining(
-        'Price Not Available',
-        findRichText: true,
+      final listPriceStrikeThroughComponent =
+          find.byKey(WidgetKeys.counterOfferListPriceWidget);
+      expect(listPriceStrikeThroughComponent, findsOneWidget);
+      expect(
+        find.descendant(
+          of: listPriceStrikeThroughComponent,
+          matching: find.text('List price : MYR 20.00 ', findRichText: true),
+        ),
+        findsOneWidget,
       );
-      expect(priceNotAvailableFinder, findsNWidgets(3));
     });
   });
 }

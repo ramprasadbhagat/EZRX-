@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
+import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/regexes.dart';
@@ -103,17 +104,10 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                PriceComponent(
+                ListPriceStrikeThroughComponent(
                   key: WidgetKeys.counterOfferListPriceWidget,
+                  priceAggregate: state.item,
                   title: '${context.tr('List price')} : ',
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: cartItem.display(PriceType.listPrice),
-                  priceLabelStyle:
-                      Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: ZPColors.darkGray,
-                          ),
-                  type: PriceStyle.counterOfferPrice,
                 ),
                 PriceComponent(
                   key: WidgetKeys.counterOfferPriceWidget,
