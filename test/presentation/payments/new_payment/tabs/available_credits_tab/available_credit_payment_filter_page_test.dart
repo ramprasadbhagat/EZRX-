@@ -24,7 +24,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../utils/widget_utils.dart';
-import '../../../../mock_object/mock_object.dart';
+import '../../../../../common_mock_data/mock_bloc.dart';
 
 void main() {
   late AccountSummaryBloc accountSummaryBlocMock;
@@ -68,7 +68,7 @@ void main() {
     salesOrgBlocMock = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
-    eligibilityBlocMock = EligibilityBlockMock();
+    eligibilityBlocMock = EligibilityBlocMock();
 
     when(() => accountSummaryBlocMock.state)
         .thenReturn(AccountSummaryState.initial());

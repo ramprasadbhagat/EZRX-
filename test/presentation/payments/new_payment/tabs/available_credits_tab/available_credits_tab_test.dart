@@ -27,8 +27,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../common_mock_data/mock_other.dart';
 import '../../../../../utils/widget_utils.dart';
-import '../../../../mock_object/mock_object.dart';
+import '../../../../../common_mock_data/mock_bloc.dart';
 
 
 void main() {
@@ -58,7 +59,7 @@ void main() {
     configMock = locator<Config>();
     availableCreditFilterBlocMock = AvailableCreditFilterBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
-    eligibilityBlocMock = EligibilityBlockMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     fakeCredits = await NewPaymentLocalDataSource().getCustomerOpenItems();
   });
 

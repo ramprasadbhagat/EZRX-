@@ -1,66 +1,49 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+
+import 'package:get_it/get_it.dart';
+import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
-import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
-import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_local.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/return_review_tab.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_local.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_info.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/upload_file_list.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_info.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_info_widget.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_details_section.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_return_info.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_quantity_and_price.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/return_review_tab.dart';
+import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/widgets/bonus_material_return_widget.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class NewRequestMockBloc extends MockBloc<NewRequestEvent, NewRequestState>
-    implements NewRequestBloc {}
-
-class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState>
-    implements UsageCodeBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class ReturnRequestAttachmentBlocMock
-    extends MockBloc<ReturnRequestAttachmentEvent, ReturnRequestAttachmentState>
-    implements ReturnRequestAttachmentBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
 
 final locator = GetIt.instance;
 const link = 'https://www.google.com/';
@@ -87,11 +70,13 @@ void main() {
   late int fakeReturnQuantity;
   late List<Usage> fakeUsageList;
   late ReturnMaterialList fakeReturnMaterialList;
+  final remarks = Remarks('test-remarks');
 
   ///////////////////////////Finder/////////////////////////////////////////
   final specialInstructionsField =
       find.byKey(WidgetKeys.specialInstructionsField);
   final returnReferenceField = find.byKey(WidgetKeys.returnReferenceField);
+  final returnReviewItemKey = find.byKey(WidgetKeys.returnReviewItemKey);
   /////////////////////////////////////////////////////////////////////////
 
   setUpAll(() async {
@@ -146,10 +131,11 @@ void main() {
     when(() => productImageBlocMock.state)
         .thenReturn(ProductImageState.initial());
   });
-  Widget getScopedWidget() {
+  Widget getScopedWidget({useMediaQuery = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
+      useMediaQuery: useMediaQuery,
       providers: [
         BlocProvider<UserBloc>(create: (context) => userBlocMock),
         BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
@@ -178,13 +164,19 @@ void main() {
 
   group('Return Review Tab test', () {
     testWidgets(' => Body Test', (tester) async {
-      when(() => newRequestBlocMock.state).thenReturn(
-        NewRequestState.initial().copyWith(
-          selectedItems: [fakeReturnMaterial],
-          invoiceDetails: [
-            InvoiceDetails.empty().copyWith(
-              returnItemDetailsList: [
-                fakeReturnItemDetails,
+      whenListen(
+        newRequestBlocMock,
+        Stream.fromIterable(
+          [
+            NewRequestState.initial(),
+            NewRequestState.initial().copyWith(
+              selectedItems: [fakeReturnMaterial],
+              invoiceDetails: [
+                InvoiceDetails.empty().copyWith(
+                  returnItemDetailsList: [
+                    fakeReturnItemDetails,
+                  ],
+                ),
               ],
             ),
           ],
@@ -197,16 +189,52 @@ void main() {
         find.byKey(WidgetKeys.returnReviewTabBodyKey),
         findsOneWidget,
       );
+      expect(
+        find.byKey(WidgetKeys.returnReferenceField),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+        findsOneWidget,
+      );
+      expect(
+        returnReviewItemKey,
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byType(MaterialInfoWidget),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byType(MaterialQuantityAndPrice),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byType(MaterialDetailsSection),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets(' =>  Body Test - Return details section', (tester) async {
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
-          selectedItems: [fakeReturnMaterial],
+          selectedItems: [fakeReturnMaterial.copyWith(bonusItems: [])],
           invoiceDetails: [
             InvoiceDetails.empty().copyWith(
               returnItemDetailsList: [
-                fakeReturnItemDetails,
+                fakeReturnItemDetails.copyWith(
+                  returnReason: fakeUsageList.first.usageCode,
+                  remarks: remarks,
+                ),
               ],
             ),
           ],
@@ -225,6 +253,44 @@ void main() {
         find.descendant(
           of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
           matching: find.byKey(WidgetKeys.returnDetailsSectionKey),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.widgetWithText(ExpandableInfo, 'Return details'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Reason',
+              fakeUsageList.first.usageDescription,
+            ),
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Comments',
+              remarks.getValue(),
+            ),
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byType(UploadedFileList),
         ),
         findsOneWidget,
       );
@@ -670,6 +736,304 @@ void main() {
             find.descendant(
               of: cardFinder.last,
               matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+            ),
+            findsNothing,
+          );
+        },
+      );
+    });
+
+    group('Return item bonus check', () {
+      testWidgets('=> check bonus widget for return item',
+          (WidgetTester tester) async {
+        whenListen(
+          newRequestBlocMock,
+          Stream.fromIterable([
+            NewRequestState.initial(),
+            NewRequestState.initial().copyWith(
+              selectedItems: [fakeReturnMaterial],
+              invoiceDetails: [
+                InvoiceDetails.empty().copyWith(
+                  returnItemDetailsList: [
+                    fakeReturnItemDetails.copyWith(
+                      returnReason: fakeUsageList.first.usageCode,
+                      remarks: remarks,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ]),
+        );
+        when(() => usageCodeBlocMock.state).thenReturn(
+          UsageCodeState.initial().copyWith(
+            usages: fakeUsageList,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget(useMediaQuery: true));
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+            matching: find.text('Bonus details'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+            matching: find.byType(BonusMaterialReturnInfo),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+            matching: find.byType(BonusMaterialInfo),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+            matching: find.text('Bonus return details'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(BonusMaterialReturnInfo),
+            matching: find.byKey(
+              WidgetKeys.balanceTextRow(
+                'Reason',
+                fakeUsageList.first.usageDescription,
+              ),
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(BonusMaterialReturnInfo),
+            matching: find.byKey(
+              WidgetKeys.balanceTextRow(
+                'Comments',
+                remarks.getValue(),
+              ),
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(BonusMaterialReturnInfo),
+            matching: find.byType(UploadedFileList),
+          ),
+          findsOneWidget,
+        );
+      });
+    });
+    group('Return Review Tab test for only bonus returns', () {
+      testWidgets(
+        '=> return only bonus',
+        (tester) async {
+          when(() => newRequestBlocMock.state).thenReturn(
+            NewRequestState.initial().copyWith(
+              selectedItems: <ReturnMaterial>[
+                fakeReturnMaterial.copyWith(
+                  balanceQuantity: IntegerValue('0'),
+                )
+              ],
+              invoiceDetails: <InvoiceDetails>[
+                InvoiceDetails.empty().copyWith(
+                  returnItemDetailsList: [
+                    fakeReturnItemDetails,
+                  ],
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget(useMediaQuery: true));
+          await tester.pump();
+          expect(find.byType(BonusMaterialReturnWidget), findsOneWidget);
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byType(CustomCard),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.text('Bonus Details'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byType(BonusMaterialInfo),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.text('Hide details'),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+      testWidgets(
+        '=> return only bonus expansion',
+        (tester) async {
+          final hideDetailsButtonFinder = find.descendant(
+            of: find.byType(BonusMaterialReturnWidget),
+            matching: find.text('Hide details'),
+          );
+          when(() => newRequestBlocMock.state).thenReturn(
+            NewRequestState.initial().copyWith(
+              selectedItems: <ReturnMaterial>[
+                fakeReturnMaterial.copyWith(
+                  balanceQuantity: IntegerValue('0'),
+                )
+              ],
+              invoiceDetails: <InvoiceDetails>[
+                InvoiceDetails.empty().copyWith(
+                  returnItemDetailsList: [
+                    fakeReturnItemDetails.copyWith(
+                      returnReason: fakeUsageList.first.usageCode,
+                      remarks: remarks,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+          when(() => usageCodeBlocMock.state).thenReturn(
+            UsageCodeState.initial().copyWith(
+              usages: fakeUsageList,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget(useMediaQuery: true));
+          await tester.pump();
+          expect(find.byType(BonusMaterialReturnWidget), findsOneWidget);
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byType(CustomCard),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            hideDetailsButtonFinder,
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byIcon(Icons.keyboard_arrow_up),
+            ),
+            findsOneWidget,
+          );
+          await tester.fling(
+            find.byKey(WidgetKeys.returnReviewTabBodyKey),
+            const Offset(0.0, -1000.0),
+            1000.0,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byType(Divider),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.text('Bonus return details'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.text('Bonus return details'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byKey(
+                WidgetKeys.balanceTextRow(
+                  'Reason',
+                  fakeUsageList.first.usageDescription,
+                ),
+              ),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byKey(
+                WidgetKeys.balanceTextRow(
+                  'Comments',
+                  remarks.getValue(),
+                ),
+              ),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byType(UploadedFileList),
+            ),
+            findsOneWidget,
+          );
+          await tester.tap(hideDetailsButtonFinder);
+          await tester.pumpAndSettle();
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.text('Show details'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byIcon(Icons.keyboard_arrow_down),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byType(Divider),
+            ),
+            findsNothing,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.text('Bonus return details'),
+            ),
+            findsNothing,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialReturnWidget),
+              matching: find.byType(UploadedFileList),
             ),
             findsNothing,
           );
