@@ -64,6 +64,23 @@ class InvoiceDetailsSection extends StatelessWidget {
                   color: ZPColors.white,
                 ),
           ),
+          if (context.read<EligibilityBloc>().state.salesOrg.showGovNumber)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: BalanceTextRow(
+                keyFlex: 2,
+                valueFlex: 3,
+                keyText: context.tr('Gov. no'),
+                valueText: invoiceItem.documentReferenceID.displayDashIfEmpty,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.white,
+                        ),
+              ),
+            ),
           const SizedBox(height: 8),
           OrderNumberSection(
             orderNumber: invoiceItem.orderId.getOrDefaultValue(''),

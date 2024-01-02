@@ -61,6 +61,8 @@ mixin _$CreditAndInvoiceItemDto {
   String get debitCreditCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceId', defaultValue: '')
   String get referenceId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'documentReferenceID', defaultValue: '')
+  String get documentReferenceID => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -76,45 +78,36 @@ abstract class $CreditAndInvoiceItemDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'bpCustomerNumber', defaultValue: '')
-          String bpCustomerNumber,
-      @JsonKey(name: 'fiscalYear', defaultValue: '')
-          String fiscalYear,
+      String bpCustomerNumber,
+      @JsonKey(name: 'fiscalYear', defaultValue: '') String fiscalYear,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String accountingDocument,
+      String accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          String accountingDocumentItem,
+      String accountingDocumentItem,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-          String accountingDocumentType,
-      @JsonKey(name: 'postingKeyName', defaultValue: '')
-          String postingKeyName,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          String netDueDate,
-      @JsonKey(name: 'postingDate', defaultValue: '')
-          String postingDate,
+      String accountingDocumentType,
+      @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
+      @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
+      @JsonKey(name: 'postingDate', defaultValue: '') String postingDate,
       @JsonKey(name: 'referenceDocumentNumber', defaultValue: '')
-          String referenceDocumentNumber,
-      @JsonKey(name: 'documentDate', defaultValue: '')
-          String documentDate,
+      String referenceDocumentNumber,
+      @JsonKey(name: 'documentDate', defaultValue: '') String documentDate,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0.0)
-          double amountInTransactionCurrency,
-      @JsonKey(name: 'deliveryFee', defaultValue: 0.0)
-          double deliveryFee,
-      @JsonKey(name: 'discount', defaultValue: 0.0)
-          double discount,
-      @JsonKey(name: 'manualFee', defaultValue: 0.0)
-          double manualFee,
-      @JsonKey(name: 'taxAmount', defaultValue: 0.0)
-          double taxAmount,
+      double amountInTransactionCurrency,
+      @JsonKey(name: 'deliveryFee', defaultValue: 0.0) double deliveryFee,
+      @JsonKey(name: 'discount', defaultValue: 0.0) double discount,
+      @JsonKey(name: 'manualFee', defaultValue: 0.0) double manualFee,
+      @JsonKey(name: 'taxAmount', defaultValue: 0.0) double taxAmount,
       @JsonKey(name: 'invoiceReference', defaultValue: '')
-          String invoiceReference,
+      String invoiceReference,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
-          String invoiceProcessingStatus,
-      @JsonKey(name: 'orderId', defaultValue: '')
-          String orderId,
+      String invoiceProcessingStatus,
+      @JsonKey(name: 'orderId', defaultValue: '') String orderId,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
-          String debitCreditCode,
-      @JsonKey(name: 'referenceId', defaultValue: '')
-          String referenceId});
+      String debitCreditCode,
+      @JsonKey(name: 'referenceId', defaultValue: '') String referenceId,
+      @JsonKey(name: 'documentReferenceID', defaultValue: '')
+      String documentReferenceID});
 }
 
 /// @nodoc
@@ -151,6 +144,7 @@ class _$CreditAndInvoiceItemDtoCopyWithImpl<$Res,
     Object? orderId = null,
     Object? debitCreditCode = null,
     Object? referenceId = null,
+    Object? documentReferenceID = null,
   }) {
     return _then(_value.copyWith(
       bpCustomerNumber: null == bpCustomerNumber
@@ -233,6 +227,10 @@ class _$CreditAndInvoiceItemDtoCopyWithImpl<$Res,
           ? _value.referenceId
           : referenceId // ignore: cast_nullable_to_non_nullable
               as String,
+      documentReferenceID: null == documentReferenceID
+          ? _value.documentReferenceID
+          : documentReferenceID // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -247,45 +245,36 @@ abstract class _$$_CreditAndInvoiceItemDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'bpCustomerNumber', defaultValue: '')
-          String bpCustomerNumber,
-      @JsonKey(name: 'fiscalYear', defaultValue: '')
-          String fiscalYear,
+      String bpCustomerNumber,
+      @JsonKey(name: 'fiscalYear', defaultValue: '') String fiscalYear,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String accountingDocument,
+      String accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          String accountingDocumentItem,
+      String accountingDocumentItem,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-          String accountingDocumentType,
-      @JsonKey(name: 'postingKeyName', defaultValue: '')
-          String postingKeyName,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          String netDueDate,
-      @JsonKey(name: 'postingDate', defaultValue: '')
-          String postingDate,
+      String accountingDocumentType,
+      @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
+      @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
+      @JsonKey(name: 'postingDate', defaultValue: '') String postingDate,
       @JsonKey(name: 'referenceDocumentNumber', defaultValue: '')
-          String referenceDocumentNumber,
-      @JsonKey(name: 'documentDate', defaultValue: '')
-          String documentDate,
+      String referenceDocumentNumber,
+      @JsonKey(name: 'documentDate', defaultValue: '') String documentDate,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0.0)
-          double amountInTransactionCurrency,
-      @JsonKey(name: 'deliveryFee', defaultValue: 0.0)
-          double deliveryFee,
-      @JsonKey(name: 'discount', defaultValue: 0.0)
-          double discount,
-      @JsonKey(name: 'manualFee', defaultValue: 0.0)
-          double manualFee,
-      @JsonKey(name: 'taxAmount', defaultValue: 0.0)
-          double taxAmount,
+      double amountInTransactionCurrency,
+      @JsonKey(name: 'deliveryFee', defaultValue: 0.0) double deliveryFee,
+      @JsonKey(name: 'discount', defaultValue: 0.0) double discount,
+      @JsonKey(name: 'manualFee', defaultValue: 0.0) double manualFee,
+      @JsonKey(name: 'taxAmount', defaultValue: 0.0) double taxAmount,
       @JsonKey(name: 'invoiceReference', defaultValue: '')
-          String invoiceReference,
+      String invoiceReference,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
-          String invoiceProcessingStatus,
-      @JsonKey(name: 'orderId', defaultValue: '')
-          String orderId,
+      String invoiceProcessingStatus,
+      @JsonKey(name: 'orderId', defaultValue: '') String orderId,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
-          String debitCreditCode,
-      @JsonKey(name: 'referenceId', defaultValue: '')
-          String referenceId});
+      String debitCreditCode,
+      @JsonKey(name: 'referenceId', defaultValue: '') String referenceId,
+      @JsonKey(name: 'documentReferenceID', defaultValue: '')
+      String documentReferenceID});
 }
 
 /// @nodoc
@@ -320,6 +309,7 @@ class __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>
     Object? orderId = null,
     Object? debitCreditCode = null,
     Object? referenceId = null,
+    Object? documentReferenceID = null,
   }) {
     return _then(_$_CreditAndInvoiceItemDto(
       bpCustomerNumber: null == bpCustomerNumber
@@ -402,6 +392,10 @@ class __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>
           ? _value.referenceId
           : referenceId // ignore: cast_nullable_to_non_nullable
               as String,
+      documentReferenceID: null == documentReferenceID
+          ? _value.documentReferenceID
+          : documentReferenceID // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -411,45 +405,39 @@ class __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>
 class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
   _$_CreditAndInvoiceItemDto(
       {@JsonKey(name: 'bpCustomerNumber', defaultValue: '')
-          required this.bpCustomerNumber,
-      @JsonKey(name: 'fiscalYear', defaultValue: '')
-          required this.fiscalYear,
+      required this.bpCustomerNumber,
+      @JsonKey(name: 'fiscalYear', defaultValue: '') required this.fiscalYear,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required this.accountingDocument,
+      required this.accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          required this.accountingDocumentItem,
+      required this.accountingDocumentItem,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-          required this.accountingDocumentType,
+      required this.accountingDocumentType,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
-          required this.postingKeyName,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          required this.netDueDate,
-      @JsonKey(name: 'postingDate', defaultValue: '')
-          required this.postingDate,
+      required this.postingKeyName,
+      @JsonKey(name: 'netDueDate', defaultValue: '') required this.netDueDate,
+      @JsonKey(name: 'postingDate', defaultValue: '') required this.postingDate,
       @JsonKey(name: 'referenceDocumentNumber', defaultValue: '')
-          required this.referenceDocumentNumber,
+      required this.referenceDocumentNumber,
       @JsonKey(name: 'documentDate', defaultValue: '')
-          required this.documentDate,
+      required this.documentDate,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0.0)
-          required this.amountInTransactionCurrency,
+      required this.amountInTransactionCurrency,
       @JsonKey(name: 'deliveryFee', defaultValue: 0.0)
-          required this.deliveryFee,
-      @JsonKey(name: 'discount', defaultValue: 0.0)
-          required this.discount,
-      @JsonKey(name: 'manualFee', defaultValue: 0.0)
-          required this.manualFee,
-      @JsonKey(name: 'taxAmount', defaultValue: 0.0)
-          required this.taxAmount,
+      required this.deliveryFee,
+      @JsonKey(name: 'discount', defaultValue: 0.0) required this.discount,
+      @JsonKey(name: 'manualFee', defaultValue: 0.0) required this.manualFee,
+      @JsonKey(name: 'taxAmount', defaultValue: 0.0) required this.taxAmount,
       @JsonKey(name: 'invoiceReference', defaultValue: '')
-          required this.invoiceReference,
+      required this.invoiceReference,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
-          required this.invoiceProcessingStatus,
-      @JsonKey(name: 'orderId', defaultValue: '')
-          required this.orderId,
+      required this.invoiceProcessingStatus,
+      @JsonKey(name: 'orderId', defaultValue: '') required this.orderId,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
-          required this.debitCreditCode,
-      @JsonKey(name: 'referenceId', defaultValue: '')
-          required this.referenceId})
+      required this.debitCreditCode,
+      @JsonKey(name: 'referenceId', defaultValue: '') required this.referenceId,
+      @JsonKey(name: 'documentReferenceID', defaultValue: '')
+      required this.documentReferenceID})
       : super._();
 
   factory _$_CreditAndInvoiceItemDto.fromJson(Map<String, dynamic> json) =>
@@ -515,10 +503,13 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
   @override
   @JsonKey(name: 'referenceId', defaultValue: '')
   final String referenceId;
+  @override
+  @JsonKey(name: 'documentReferenceID', defaultValue: '')
+  final String documentReferenceID;
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItemDto(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId)';
+    return 'CreditAndInvoiceItemDto(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, documentReferenceID: $documentReferenceID)';
   }
 
   @override
@@ -568,7 +559,9 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
             (identical(other.debitCreditCode, debitCreditCode) ||
                 other.debitCreditCode == debitCreditCode) &&
             (identical(other.referenceId, referenceId) ||
-                other.referenceId == referenceId));
+                other.referenceId == referenceId) &&
+            (identical(other.documentReferenceID, documentReferenceID) ||
+                other.documentReferenceID == documentReferenceID));
   }
 
   @JsonKey(ignore: true)
@@ -594,7 +587,8 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
         invoiceProcessingStatus,
         orderId,
         debitCreditCode,
-        referenceId
+        referenceId,
+        documentReferenceID
       ]);
 
   @JsonKey(ignore: true)
@@ -616,45 +610,46 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
 abstract class _CreditAndInvoiceItemDto extends CreditAndInvoiceItemDto {
   factory _CreditAndInvoiceItemDto(
       {@JsonKey(name: 'bpCustomerNumber', defaultValue: '')
-          required final String bpCustomerNumber,
+      required final String bpCustomerNumber,
       @JsonKey(name: 'fiscalYear', defaultValue: '')
-          required final String fiscalYear,
+      required final String fiscalYear,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required final String accountingDocument,
+      required final String accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          required final String accountingDocumentItem,
+      required final String accountingDocumentItem,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-          required final String accountingDocumentType,
+      required final String accountingDocumentType,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
-          required final String postingKeyName,
+      required final String postingKeyName,
       @JsonKey(name: 'netDueDate', defaultValue: '')
-          required final String netDueDate,
+      required final String netDueDate,
       @JsonKey(name: 'postingDate', defaultValue: '')
-          required final String postingDate,
+      required final String postingDate,
       @JsonKey(name: 'referenceDocumentNumber', defaultValue: '')
-          required final String referenceDocumentNumber,
+      required final String referenceDocumentNumber,
       @JsonKey(name: 'documentDate', defaultValue: '')
-          required final String documentDate,
+      required final String documentDate,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0.0)
-          required final double amountInTransactionCurrency,
+      required final double amountInTransactionCurrency,
       @JsonKey(name: 'deliveryFee', defaultValue: 0.0)
-          required final double deliveryFee,
+      required final double deliveryFee,
       @JsonKey(name: 'discount', defaultValue: 0.0)
-          required final double discount,
+      required final double discount,
       @JsonKey(name: 'manualFee', defaultValue: 0.0)
-          required final double manualFee,
+      required final double manualFee,
       @JsonKey(name: 'taxAmount', defaultValue: 0.0)
-          required final double taxAmount,
+      required final double taxAmount,
       @JsonKey(name: 'invoiceReference', defaultValue: '')
-          required final String invoiceReference,
+      required final String invoiceReference,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
-          required final String invoiceProcessingStatus,
-      @JsonKey(name: 'orderId', defaultValue: '')
-          required final String orderId,
+      required final String invoiceProcessingStatus,
+      @JsonKey(name: 'orderId', defaultValue: '') required final String orderId,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
-          required final String debitCreditCode,
+      required final String debitCreditCode,
       @JsonKey(name: 'referenceId', defaultValue: '')
-          required final String referenceId}) = _$_CreditAndInvoiceItemDto;
+      required final String referenceId,
+      @JsonKey(name: 'documentReferenceID', defaultValue: '')
+      required final String documentReferenceID}) = _$_CreditAndInvoiceItemDto;
   _CreditAndInvoiceItemDto._() : super._();
 
   factory _CreditAndInvoiceItemDto.fromJson(Map<String, dynamic> json) =
@@ -720,6 +715,9 @@ abstract class _CreditAndInvoiceItemDto extends CreditAndInvoiceItemDto {
   @override
   @JsonKey(name: 'referenceId', defaultValue: '')
   String get referenceId;
+  @override
+  @JsonKey(name: 'documentReferenceID', defaultValue: '')
+  String get documentReferenceID;
   @override
   @JsonKey(ignore: true)
   _$$_CreditAndInvoiceItemDtoCopyWith<_$_CreditAndInvoiceItemDto>

@@ -34,6 +34,7 @@ class AllCreditsAndInvoicesQueryMutation {
           documentDate
           debitCreditCode
           referenceId
+          documentReferenceID
         }
         totalCount
       }

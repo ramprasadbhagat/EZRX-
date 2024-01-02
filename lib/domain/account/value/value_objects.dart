@@ -155,6 +155,8 @@ class SalesOrg extends ValueObject<String> {
 
   bool get showTotalSaving => isID;
 
+  bool get showGovNumber => isVN;
+
   const SalesOrg._(this.value);
 }
 

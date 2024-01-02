@@ -110,6 +110,8 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       defaultValue: '',
     )
         required String referenceId,
+    @JsonKey(name: 'documentReferenceID', defaultValue: '')
+        required String documentReferenceID,
   }) = _CreditAndInvoiceItemDto;
 
   CreditAndInvoiceItem toDomain() {
@@ -134,6 +136,7 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       orderId: StringValue(orderId),
       debitCreditCode: DebitCreditCode(debitCreditCode),
       referenceId: ReferenceId(referenceId),
+      documentReferenceID: StringValue(documentReferenceID),
     );
   }
 

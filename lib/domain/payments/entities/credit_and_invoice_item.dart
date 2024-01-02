@@ -30,6 +30,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
     required StringValue orderId,
     required DebitCreditCode debitCreditCode,
     required ReferenceId referenceId,
+    required StringValue documentReferenceID,
     @Default(true) isLoadingOrder,
   }) = _CreditAndInvoiceItem;
 
@@ -54,6 +55,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
         taxAmount: 0.0,
         debitCreditCode: DebitCreditCode(''),
         referenceId: ReferenceId(''),
+        documentReferenceID: StringValue(''),
       );
 
 //to convert if amountInTransactionCurrency value is negative

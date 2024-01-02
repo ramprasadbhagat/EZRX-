@@ -19,21 +19,34 @@ class _CreditsItem extends StatelessWidget {
       child: ListTile(
         key: WidgetKeys.creditsItemTile,
         onTap: !isIDMarket ? () => _onItemClick(context) : null,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${context.tr('Account credit')} #${creditItem.searchKey.getOrDefaultValue('')}',
-              key: WidgetKeys.creditItemId(
-                creditItem.searchKey.getOrDefaultValue(''),
-              ),
-              style: Theme.of(context).textTheme.labelSmall,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${context.tr('Account credit')} #${creditItem.searchKey.getOrDefaultValue('')}',
+                  key: WidgetKeys.creditItemId(
+                    creditItem.searchKey.getOrDefaultValue(''),
+                  ),
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                if (!isIDMarket)
+                  StatusLabel(
+                    key: WidgetKeys.creditStatusTag,
+                    status: StatusType(
+                      creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
+                    ),
+                  ),
+              ],
             ),
-            if (!isIDMarket)
-              StatusLabel(
-                key: WidgetKeys.creditStatusTag,
-                status: StatusType(
-                  creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
+            if (context.read<EligibilityBloc>().state.salesOrg.showGovNumber)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 2.0),
+                child: Text(
+                  '${context.tr('Gov. no')} ${creditItem.documentReferenceID.displayDashIfEmpty}',
+                  style: Theme.of(context).textTheme.labelSmall,
                 ),
               ),
           ],

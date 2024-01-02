@@ -36,6 +36,7 @@ mixin _$CreditAndInvoiceItem {
   StringValue get orderId => throw _privateConstructorUsedError;
   DebitCreditCode get debitCreditCode => throw _privateConstructorUsedError;
   ReferenceId get referenceId => throw _privateConstructorUsedError;
+  StringValue get documentReferenceID => throw _privateConstructorUsedError;
   dynamic get isLoadingOrder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -70,6 +71,7 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
       StringValue orderId,
       DebitCreditCode debitCreditCode,
       ReferenceId referenceId,
+      StringValue documentReferenceID,
       dynamic isLoadingOrder});
 }
 
@@ -107,6 +109,7 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
     Object? orderId = null,
     Object? debitCreditCode = null,
     Object? referenceId = null,
+    Object? documentReferenceID = null,
     Object? isLoadingOrder = freezed,
   }) {
     return _then(_value.copyWith(
@@ -190,6 +193,10 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
           ? _value.referenceId
           : referenceId // ignore: cast_nullable_to_non_nullable
               as ReferenceId,
+      documentReferenceID: null == documentReferenceID
+          ? _value.documentReferenceID
+          : documentReferenceID // ignore: cast_nullable_to_non_nullable
+              as StringValue,
       isLoadingOrder: freezed == isLoadingOrder
           ? _value.isLoadingOrder
           : isLoadingOrder // ignore: cast_nullable_to_non_nullable
@@ -227,6 +234,7 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
       StringValue orderId,
       DebitCreditCode debitCreditCode,
       ReferenceId referenceId,
+      StringValue documentReferenceID,
       dynamic isLoadingOrder});
 }
 
@@ -261,6 +269,7 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
     Object? orderId = null,
     Object? debitCreditCode = null,
     Object? referenceId = null,
+    Object? documentReferenceID = null,
     Object? isLoadingOrder = freezed,
   }) {
     return _then(_$_CreditAndInvoiceItem(
@@ -344,6 +353,10 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
           ? _value.referenceId
           : referenceId // ignore: cast_nullable_to_non_nullable
               as ReferenceId,
+      documentReferenceID: null == documentReferenceID
+          ? _value.documentReferenceID
+          : documentReferenceID // ignore: cast_nullable_to_non_nullable
+              as StringValue,
       isLoadingOrder:
           freezed == isLoadingOrder ? _value.isLoadingOrder! : isLoadingOrder,
     ));
@@ -374,6 +387,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
       required this.orderId,
       required this.debitCreditCode,
       required this.referenceId,
+      required this.documentReferenceID,
       this.isLoadingOrder = true})
       : super._();
 
@@ -418,12 +432,14 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final ReferenceId referenceId;
   @override
+  final StringValue documentReferenceID;
+  @override
   @JsonKey()
   final dynamic isLoadingOrder;
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, isLoadingOrder: $isLoadingOrder)';
+    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, documentReferenceID: $documentReferenceID, isLoadingOrder: $isLoadingOrder)';
   }
 
   @override
@@ -474,6 +490,8 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
                 other.debitCreditCode == debitCreditCode) &&
             (identical(other.referenceId, referenceId) ||
                 other.referenceId == referenceId) &&
+            (identical(other.documentReferenceID, documentReferenceID) ||
+                other.documentReferenceID == documentReferenceID) &&
             const DeepCollectionEquality()
                 .equals(other.isLoadingOrder, isLoadingOrder));
   }
@@ -501,6 +519,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
         orderId,
         debitCreditCode,
         referenceId,
+        documentReferenceID,
         const DeepCollectionEquality().hash(isLoadingOrder)
       ]);
 
@@ -534,6 +553,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
       required final StringValue orderId,
       required final DebitCreditCode debitCreditCode,
       required final ReferenceId referenceId,
+      required final StringValue documentReferenceID,
       final dynamic isLoadingOrder}) = _$_CreditAndInvoiceItem;
   _CreditAndInvoiceItem._() : super._();
 
@@ -577,6 +597,8 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   DebitCreditCode get debitCreditCode;
   @override
   ReferenceId get referenceId;
+  @override
+  StringValue get documentReferenceID;
   @override
   dynamic get isLoadingOrder;
   @override

@@ -84,6 +84,20 @@ class CreditDetailsSection extends StatelessWidget {
                           color: ZPColors.white,
                         ),
               ),
+              if (context.read<EligibilityBloc>().state.salesOrg.showGovNumber)
+                BalanceTextRow(
+                  valueFlex: 1,
+                  keyText: context.tr('Gov. no'),
+                  valueText: creditItem.documentReferenceID.displayDashIfEmpty,
+                  keyTextStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                  valueTextStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                ),
               BalanceTextRow(
                 keyText: context.tr('Details'),
                 valueText: creditItem.postingKeyName,
