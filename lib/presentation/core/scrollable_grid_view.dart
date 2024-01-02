@@ -111,7 +111,7 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
       return 1 / 1.8;
     }
 
-    return 1 / 1.7;
+    return 1 / 1.8;
   }
 }
 
