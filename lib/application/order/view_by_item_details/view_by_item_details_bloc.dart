@@ -137,9 +137,23 @@ class ViewByItemDetailsBloc
         );
       },
       setItemOrderDetails: (e) {
+        // [filteredItems] represents other items in this order section of
+        // view by items details screen, it filter out the order history items
+        // list based on order number of item and also remove selected item from
+        // list.
+        final filteredItems = e.orderHistory.orderHistoryItems
+            .where(
+              (element) =>
+                  element.hashCode != e.orderHistoryItem.hashCode &&
+                  element.orderNumber == e.orderHistoryItem.orderNumber,
+            )
+            .toList();
+
         emit(
           state.copyWith(
-            orderHistory: e.orderHistory,
+            orderHistory: e.orderHistory.copyWith(
+              orderHistoryItems: filteredItems,
+            ),
             orderHistoryItem: e.orderHistoryItem,
           ),
         );
