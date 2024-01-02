@@ -261,4 +261,36 @@ class DownloadPaymentAttachmentRepository
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Future<Either<ApiFailure, File>> eInvoiceDownload({
+    required DownloadPaymentAttachment eInvoice,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final localFile = await localDataSource.eInvoiceDownload();
+        final downloadedFile = await fileSystemHelper.getDownloadedFile(
+          localFile,
+          await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
+        );
+
+        return Right(downloadedFile);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final localFile = await remoteDataSource.eInvoiceDownload(
+        eInvoice.url,
+      );
+      final downloadedFile = await fileSystemHelper.getDownloadedFile(
+        localFile,
+        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
+      );
+
+      return Right(downloadedFile);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
 }

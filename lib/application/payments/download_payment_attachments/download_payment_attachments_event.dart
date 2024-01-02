@@ -28,4 +28,7 @@ class DownloadPaymentAttachmentEvent with _$DownloadPaymentAttachmentEvent {
   const factory DownloadPaymentAttachmentEvent.downloadSOA({
     required SoaData soaData,
   }) = _DownloadSOA;
+  const factory DownloadPaymentAttachmentEvent.downloadEInvoice({
+    required DownloadPaymentAttachment eInvoice,
+  }) = _DownloadEInvoice;
 }

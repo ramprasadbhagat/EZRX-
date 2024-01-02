@@ -176,6 +176,7 @@ class _InvoiceItem extends StatelessWidget {
                   creditAndInvoiceItem: invoiceItem,
                 ),
               );
+
           context.router.push(const InvoiceDetailsPageRoute());
         },
         title: Column(

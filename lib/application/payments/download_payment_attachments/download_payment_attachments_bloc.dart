@@ -242,5 +242,47 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         },
       );
     });
+    on<_DownloadEInvoice>((event, emit) async {
+      emit(
+        state.copyWith(
+          isDownloadInProgress: true,
+          failureOrSuccessOption: none(),
+          fileUrl: DownloadPaymentAttachment(
+            url: event.eInvoice.url,
+          ),
+        ),
+      );
+      final failureOrSuccessPermission =
+          await paymentAttachmentRepository.downloadPermission();
+
+      await failureOrSuccessPermission.fold(
+        (failure) async => emit(
+          state.copyWith(
+            isDownloadInProgress: false,
+            failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+          ),
+        ),
+        (_) async {
+          final failureOrSuccess =
+              await paymentAttachmentRepository.eInvoiceDownload(
+            eInvoice: event.eInvoice,
+          );
+          failureOrSuccess.fold(
+            (failure) => emit(
+              state.copyWith(
+                isDownloadInProgress: false,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            ),
+            (_) => emit(
+              state.copyWith(
+                isDownloadInProgress: false,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            ),
+          );
+        },
+      );
+    });
   }
 }

@@ -2,6 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_e_invoice/download_e_invoice_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
@@ -13,62 +17,39 @@ import 'package:ezrxmobile/presentation/payments/invoice_details/section/summary
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 part 'package:ezrxmobile/presentation/payments/invoice_details/widgets/order_item_count.dart';
+part 'package:ezrxmobile/presentation/payments/invoice_details/widgets/download_e_invoice_button.dart';
 
 class InvoiceDetailsPage extends StatelessWidget {
   const InvoiceDetailsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar.commonAppBar(
-        title: Text(
-          context.tr('Invoice details'),
-        ),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
-      ),
-      bottomNavigationBar:
-          !context.read<EligibilityBloc>().state.salesOrganisation.salesOrg.isID
-              ? BlocBuilder<CreditAndInvoiceDetailsBloc,
-                  CreditAndInvoiceDetailsState>(
-                  buildWhen: (previous, current) =>
-                      previous.isLoading != current.isLoading,
-                  builder: (context, state) {
-                    return state.isLoading || state.itemsInfo.isEmpty
-                        ? const SizedBox.shrink()
-                        : SafeArea(
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              decoration: const BoxDecoration(
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                    color: ZPColors.boxShadowGray,
-                                    blurRadius: 2.0,
-                                    offset: Offset(0.1, -2.75),
-                                  ),
-                                ],
-                                color: ZPColors.white,
-                              ),
-                              child: OutlinedButton(
-                                key: WidgetKeys.downloadEInvoiceButton,
-                                onPressed: () {},
-                                child: Text(context.tr('Download e-invoice')),
-                              ),
-                            ),
-                          );
-                  },
-                )
+    return BlocBuilder<CreditAndInvoiceDetailsBloc,
+        CreditAndInvoiceDetailsState>(
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+      builder: (context, state) {
+        return Scaffold(
+          appBar: CustomAppBar.commonAppBar(
+            title: Text(
+              context.tr('Invoice details'),
+            ),
+            customerBlocked:
+                context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+          ),
+          bottomNavigationBar: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .salesOrg
+                      .showDownloadInvoiceButton &&
+                  !state.isLoading
+              ? const _DownloadEInvoiceButton()
               : const SizedBox.shrink(),
-      body: AnnouncementBanner(
-        currentPath: context.router.currentPath,
-        child: BlocBuilder<CreditAndInvoiceDetailsBloc,
-            CreditAndInvoiceDetailsState>(
-          buildWhen: (previous, current) =>
-              previous.isLoading != current.isLoading,
-          builder: (context, state) {
-            return state.isLoading
+          body: AnnouncementBanner(
+            currentPath: context.router.currentPath,
+            child: state.isLoading
                 ? LoadingShimmer.logo(
                     key: WidgetKeys.loaderImage,
                   )
@@ -105,10 +86,10 @@ class InvoiceDetailsPage extends StatelessWidget {
                         customerDocumentDetail: state.itemsInfo,
                       ),
                     ],
-                  );
-          },
-        ),
-      ),
+                  ),
+          ),
+        );
+      },
     );
   }
 }

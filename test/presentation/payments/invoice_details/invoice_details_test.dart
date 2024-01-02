@@ -10,6 +10,8 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_e_invoice/download_e_invoice_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -21,6 +23,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -37,6 +40,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
@@ -63,6 +67,14 @@ class ViewByItemDetailsBlocMock
     extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
     implements ViewByItemDetailsBloc {}
 
+class DownloadEInvoiceBlocMock
+    extends MockBloc<DownloadEInvoiceEvent, DownloadEInvoiceState>
+    implements DownloadEInvoiceBloc {}
+
+class DownloadPaymentAttachmentsBlocMock extends MockBloc<
+        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
+    implements DownloadPaymentAttachmentsBloc {}
+
 void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
@@ -78,6 +90,8 @@ void main() {
   late ViewByOrderBlocMock viewByOrderBlocMock;
   late ViewByOrderDetailsBlocMock viewByOrderDetailsBlocMock;
   late ViewByItemDetailsBlocMock viewByItemDetailsBlocMock;
+  late DownloadEInvoiceBlocMock downloadEInvoiceBlocMock;
+  late DownloadPaymentAttachmentsBlocMock downloadPaymentAttachmentsBlocMock;
   late CreditAndInvoiceItem fakeInvoice;
   late CustomerDocumentDetail fakeInvoiceDetail;
   setUpAll(() async {
@@ -87,6 +101,8 @@ void main() {
       () => MixpanelService(config: locator<Config>()),
     );
     locator.registerFactory<ViewByOrderBloc>(() => viewByOrderBlocMock);
+    locator
+        .registerFactory<DownloadEInvoiceBloc>(() => downloadEInvoiceBlocMock);
 
     autoRouterMock = locator<AppRouter>();
   });
@@ -105,6 +121,8 @@ void main() {
     viewByOrderBlocMock = ViewByOrderBlocMock();
     viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
     viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
+    downloadEInvoiceBlocMock = DownloadEInvoiceBlocMock();
+    downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
 
     fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
       bpCustomerNumber: '0030032223',
@@ -154,6 +172,10 @@ void main() {
         .thenReturn(ViewByOrderDetailsState.initial());
     when(() => viewByItemDetailsBlocMock.state)
         .thenReturn(ViewByItemDetailsState.initial());
+    when(() => downloadEInvoiceBlocMock.state)
+        .thenReturn(DownloadEInvoiceState.initial());
+    when(() => downloadPaymentAttachmentsBlocMock.state)
+        .thenReturn(DownloadPaymentAttachmentsState.initial());
   });
 
   Future getWidget(tester) async {
@@ -193,6 +215,9 @@ void main() {
           BlocProvider<ViewByItemDetailsBloc>(
             create: (context) => viewByItemDetailsBlocMock,
           ),
+          BlocProvider<DownloadPaymentAttachmentsBloc>(
+            create: (context) => downloadPaymentAttachmentsBlocMock,
+          ),
         ],
         child: const InvoiceDetailsPage(),
       ),
@@ -206,6 +231,18 @@ void main() {
           CreditAndInvoiceDetailsState.initial().copyWith(
             itemsInfo: [fakeInvoiceDetail],
             basicInfo: fakeInvoice,
+          ),
+        );
+        when(() => downloadEInvoiceBlocMock.state).thenReturn(
+          DownloadEInvoiceState.initial().copyWith(
+            eInvoice:
+                DownloadPaymentAttachment.empty().copyWith(url: 'fake_url'),
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeSGSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
           ),
         );
 

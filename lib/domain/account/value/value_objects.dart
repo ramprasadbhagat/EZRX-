@@ -70,6 +70,8 @@ class SalesOrg extends ValueObject<String> {
     return subTotalTextString(country);
   }
 
+  bool get showDownloadInvoiceButton => isPH || isSg;
+
   bool get isVN {
     return country == 'VN';
   }

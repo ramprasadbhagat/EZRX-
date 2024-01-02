@@ -1134,6 +1134,8 @@ class WidgetKeys {
   static const Key invoiceDetailsPageListView =
       Key('invoiceDetailsPageListView');
   static const Key downloadEInvoiceButton = Key('downloadEInvoiceButton');
+  static const Key downloadEInvoiceloadingAnimationWidget =
+      Key('downloadEInvoiceloadingAnimationWidget');
   static const Key invoiceDetailSubTotal = Key('invoiceDetailSubTotal');
   static const Key invoiceDetailGrandTotal = Key('invoiceDetailGrandTotal');
   static Key invoiceDetailMaterial(int groupIndex, int index) =>

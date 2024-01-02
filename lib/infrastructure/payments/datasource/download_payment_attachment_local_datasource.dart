@@ -52,4 +52,13 @@ class DownloadPaymentAttachmentLocalDataSource {
       buffer: data.buffer.asUint8List(),
     );
   }
+
+  Future<AttachmentFileBuffer> eInvoiceDownload() async {
+    final data = await rootBundle.load('assets/images/splash.png');
+
+    return AttachmentFileBuffer(
+      name: 'paymentAttachments',
+      buffer: data.buffer.asUint8List(),
+    );
+  }
 }
