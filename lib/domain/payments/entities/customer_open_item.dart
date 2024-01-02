@@ -31,10 +31,12 @@ class CustomerOpenItem with _$CustomerOpenItem {
     required String accountingDocumentItemRef,
     required String partialPaymentHistoryDesc,
     required double paymentAmountInDisplayCrcy,
+    required String billingDocument,
     required String companyCode,
     @Default(0.0) double g2Tax,
     @Default(0.0) double g4Tax,
     required double openAmountInTransCrcy,
+    required StringValue orderId,
   }) = _CustomerOpenItem;
 
   factory CustomerOpenItem.empty() => CustomerOpenItem(
@@ -64,6 +66,8 @@ class CustomerOpenItem with _$CustomerOpenItem {
         g2Tax: 0,
         g4Tax: 0,
         openAmountInTransCrcy: 0,
+        orderId: StringValue(''),
+        billingDocument: '',
       );
 
   double get displayItemAmount =>

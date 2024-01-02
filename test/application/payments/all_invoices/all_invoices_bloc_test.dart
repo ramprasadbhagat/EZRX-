@@ -126,7 +126,9 @@ void main() {
           );
           when(
             () => repository.fetchOrder(
-              invoices: creditAndInvoiceItemList,
+              invoiceIds: creditAndInvoiceItemList
+                  .map((e) => e.searchKey.getValue())
+                  .toList(),
             ),
           ).thenAnswer(
             (invocation) async => Left(exception),
@@ -185,10 +187,12 @@ void main() {
           );
           when(
             () => repository.fetchOrder(
-              invoices: creditAndInvoiceItemList,
+              invoiceIds: creditAndInvoiceItemList
+                  .map((e) => e.searchKey.getValue())
+                  .toList(),
             ),
           ).thenAnswer(
-            (invocation) async => Right(invoiceOrderItems),
+            (invocation) async => Right(invoiceOrderItems.toMap),
           );
         },
         act: (AllInvoicesBloc bloc) => bloc.add(
@@ -289,11 +293,8 @@ void main() {
         config: config,
       ),
       seed: () => AllInvoicesState.initial().copyWith(
-        isLoading: false,
-        items: List.filled(
-          config.pageSize,
-          fakeResult.first,
-        ),
+        items: creditAndInvoiceItemList,
+        appliedFilter: allInvoicesFilter,
       ),
       setUp: () {
         when(
@@ -301,55 +302,54 @@ void main() {
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             filter: allInvoicesFilter,
-            offset: config.pageSize,
+            offset: creditAndInvoiceItemList.length,
             pageSize: config.pageSize,
           ),
         ).thenAnswer(
-          (invocation) async => Right(
-            List.filled(
-              config.pageSize,
-              fakeResult.first,
-            ),
-          ),
+          (invocation) async => Right(creditAndInvoiceItemList),
         );
         when(
           () => repository.fetchOrder(
-            invoices: List.filled(
-              config.pageSize,
-              fakeResult.first,
-            ),
+            invoiceIds: creditAndInvoiceItemList
+                .map((e) => e.searchKey.getValue())
+                .toList(),
           ),
         ).thenAnswer(
-          (invocation) async => Left(exception),
+          (invocation) async => Right(invoiceOrderItems.toMap),
         );
       },
       act: (AllInvoicesBloc bloc) => bloc.add(
         const AllInvoicesEvent.loadMore(),
       ),
-      expect: () => [
-        AllInvoicesState.initial().copyWith(
-          items: List.filled(
-            config.pageSize,
-            fakeResult.first,
+      expect: () {
+        final newList = [
+          ...creditAndInvoiceItemList,
+          ...creditAndInvoiceItemList,
+        ];
+        return [
+          AllInvoicesState.initial().copyWith(
+            items: creditAndInvoiceItemList,
+            appliedFilter: allInvoicesFilter,
+            isLoading: true,
           ),
-          isLoading: true,
-        ),
-        AllInvoicesState.initial().copyWith(
-          items: List.filled(
-            config.pageSize * 2,
-            fakeResult.first,
+          AllInvoicesState.initial().copyWith(
+            appliedFilter: allInvoicesFilter,
+            items: newList,
+            canLoadMore: false,
           ),
-        ),
-        AllInvoicesState.initial().copyWith(
-          items: List.filled(
-            config.pageSize * 2,
-            fakeResult.first.copyWith(isLoadingOrder: false),
+          AllInvoicesState.initial().copyWith(
+            appliedFilter: allInvoicesFilter,
+            canLoadMore: false,
+            items: newList
+                .map(
+                  (e) => e.copyWith(
+                    isLoadingOrder: false,
+                  ),
+                )
+                .toList(),
           ),
-          failureOrSuccessOption: optionOf(
-            Left(exception),
-          ),
-        ),
-      ],
+        ];
+      },
     );
   });
 }

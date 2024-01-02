@@ -29,6 +29,7 @@ class NewPaymentQuery {
           paymentAmountInDisplayCrcy
           companyCode
           openAmountInTransCrcy
+          billingDocument
         }
       }
     }

@@ -326,11 +326,11 @@ void main() {
     });
 
     testWidgets('First item show for other market except PH', (tester) async {
-      final invoiceItem = fakeInvoices.first;
+      final invoiceItem =
+          fakeInvoices.first.copyWith(orderId: StringValue('0800072883'));
       final invoiceAmount = invoiceItem.openAmountInTransCrcy.toString();
       when(() => outstandingInvoicesBlocMock.state).thenReturn(
-        OutstandingInvoicesState.initial()
-            .copyWith(items: [invoiceItem]),
+        OutstandingInvoicesState.initial().copyWith(items: [invoiceItem]),
       );
 
       await tester.pumpWidget(getWidget());
@@ -359,9 +359,12 @@ void main() {
       );
     });
 
-    testWidgets('First item show for PH - G2 & G4 tax excluded', (tester) async {
-      final invoiceItem =
-          fakeInvoices.first.copyWith(displayCurrency: Currency('PHP'));
+    testWidgets('First item show for PH - G2 & G4 tax excluded',
+        (tester) async {
+      final invoiceItem = fakeInvoices.first.copyWith(
+        displayCurrency: Currency('PHP'),
+        orderId: StringValue('0800072883'),
+      );
       final invoiceAmountForPH = invoiceItem.displayItemAmount.toString();
       when(() => outstandingInvoicesBlocMock.state).thenReturn(
         OutstandingInvoicesState.initial().copyWith(items: [invoiceItem]),
@@ -392,7 +395,7 @@ void main() {
         findsOneWidget,
       );
     });
-   
+
     testWidgets('Select invoice test', (tester) async {
       when(() => outstandingInvoicesBlocMock.state).thenReturn(
         OutstandingInvoicesState.initial()

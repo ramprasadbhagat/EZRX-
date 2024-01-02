@@ -95,7 +95,8 @@ class OutstandingInvoicesTab extends StatelessWidget {
             );
           },
           buildWhen: (previous, current) =>
-              previous.isLoading != current.isLoading,
+              previous.isLoading != current.isLoading ||
+              previous.items != current.items,
           builder: (context, state) {
             return Expanded(
               child: state.isLoading && state.items.isEmpty

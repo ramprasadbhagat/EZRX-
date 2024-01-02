@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:flutter/material.dart';
@@ -45,10 +47,8 @@ class InvoiceItemCard extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 3,
-                  child: Text(
-                    '${context.tr('Order')} #${customerOpenItem.documentReferenceID}',
-                    style: Theme.of(context).textTheme.titleSmall,
-                    key: WidgetKeys.orderId,
+                  child: _OrderNumber(
+                    invoiceItem: customerOpenItem,
                   ),
                 ),
                 Expanded(
@@ -76,6 +76,40 @@ class InvoiceItemCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _OrderNumber extends StatelessWidget {
+  final CustomerOpenItem invoiceItem;
+
+  const _OrderNumber({
+    Key? key,
+    required this.invoiceItem,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OutstandingInvoicesBloc, OutstandingInvoicesState>(
+      buildWhen: (previous, current) =>
+          previous.isOrderFetching != current.isOrderFetching,
+      builder: (context, state) {
+        if (state.isOrderFetching &&
+            state.orderFetchingInvoiceIdList
+                .contains(invoiceItem.billingDocument)) {
+          return SizedBox(
+            key: WidgetKeys.invoiceItemOrderIdLoadingShimmer,
+            width: 40,
+            child: LoadingShimmer.tile(),
+          );
+        }
+
+        return Text(
+          '${context.tr('Order')} #${invoiceItem.orderId.displayNAIfEmpty}',
+          key: WidgetKeys.invoiceItemOrderId,
+          style: Theme.of(context).textTheme.titleSmall,
+        );
+      },
     );
   }
 }

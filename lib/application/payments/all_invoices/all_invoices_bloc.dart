@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
@@ -124,15 +124,19 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
     on<_FetchOrder>(
       (e, emit) async {
         if (e.invoices.isEmpty) return;
-        
+
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
           ),
         );
+        final invoiceIds = e.invoices
+            .where((e) => e.searchKey.isValid())
+            .map((e) => e.searchKey.getValue())
+            .toList();
         final failureOrSuccess =
             await allCreditsAndInvoicesRepository.fetchOrder(
-          invoices: e.invoices,
+          invoiceIds: invoiceIds,
         );
 
         failureOrSuccess.fold(
@@ -158,13 +162,8 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
                       (e) => e.isLoadingOrder
                           ? e.copyWith(
                               isLoadingOrder: false,
-                              orderId: responseData
-                                  .firstWhere(
-                                    (element) =>
-                                        element.invoiceId == e.searchKey,
-                                    orElse: () => InvoiceOrderItem.empty(),
-                                  )
-                                  .orderId,
+                              orderId: responseData[e.searchKey.getValue()] ??
+                                  StringValue(''),
                             )
                           : e,
                     )

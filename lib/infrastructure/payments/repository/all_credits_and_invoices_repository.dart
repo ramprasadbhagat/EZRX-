@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -139,14 +140,14 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<InvoiceOrderItem>>> fetchOrder({
-    required List<CreditAndInvoiceItem> invoices,
+  Future<Either<ApiFailure, Map<String, StringValue>>> fetchOrder({
+    required List<String> invoiceIds,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
         final response = await localDataSource.getOrderForInvoice();
 
-        return Right(response);
+        return Right(response.toMap);
       } catch (e) {
         return Left(
           FailureHandler.handleFailure(e),
@@ -154,13 +155,9 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
       }
     }
     try {
-      final invoiceIds = invoices
-          .where((e) => e.searchKey.isValid())
-          .map((e) => e.searchKey.getValue())
-          .toList();
       final response = await remoteDataSource.getOrderForInvoice(invoiceIds);
 
-      return Right(response);
+      return Right(response.toMap);
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),

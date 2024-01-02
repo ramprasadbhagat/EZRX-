@@ -52,6 +52,8 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
     @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
         required double paymentAmountInDisplayCrcy,
     @JsonKey(name: 'companyCode', defaultValue: '') required String companyCode,
+    @JsonKey(name: 'billingDocument', defaultValue: '')
+        required String billingDocument,
     @JsonKey(name: 'openAmountInTransCrcy', defaultValue: 0)
         required double openAmountInTransCrcy,
   }) = _CustomerOpenItemDto;
@@ -90,6 +92,8 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
           ) ??
           0,
       openAmountInTransCrcy: openAmountInTransCrcy,
+      orderId: StringValue(''),
+      billingDocument: billingDocument,
     );
   }
 

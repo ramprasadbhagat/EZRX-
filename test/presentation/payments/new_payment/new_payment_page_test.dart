@@ -58,6 +58,7 @@ void main() {
     CustomerOpenItem(
       status: StatusType('Overdue'),
       accountingDocument: 'fake-AD',
+      billingDocument: 'fake-BD',
       netDueDate: DateTimeStringValue('2023041107'),
       documentDate: DateTimeStringValue('2013-04-11'),
       amountInTransactionCurrency: 100,
@@ -80,10 +81,12 @@ void main() {
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
+      orderId: StringValue(''),
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
       accountingDocument: 'fake-AD',
+      billingDocument: 'fake-BD',
       netDueDate: DateTimeStringValue('2023041107'),
       documentDate: DateTimeStringValue('2013-04-11'),
       amountInTransactionCurrency: 100,
@@ -106,10 +109,12 @@ void main() {
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
+      orderId: StringValue(''),
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
       accountingDocument: 'fake-AD',
+      billingDocument: 'fake-BD',
       netDueDate: DateTimeStringValue('2023041107'),
       documentDate: DateTimeStringValue('2013-04-11'),
       amountInTransactionCurrency: 100,
@@ -132,6 +137,7 @@ void main() {
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
+      orderId: StringValue(''),
     ),
   ];
 
@@ -139,6 +145,7 @@ void main() {
     CustomerOpenItem(
       status: StatusType('Overdue'),
       accountingDocument: 'fake-AD',
+      billingDocument: 'fake-BD',
       netDueDate: DateTimeStringValue('2023041107'),
       documentDate: DateTimeStringValue('2013-04-11'),
       amountInTransactionCurrency: 100,
@@ -161,10 +168,12 @@ void main() {
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
+      orderId: StringValue(''),
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
       accountingDocument: 'fake-AD',
+      billingDocument: 'fake-BD',
       netDueDate: DateTimeStringValue('2023041107'),
       documentDate: DateTimeStringValue('2013-04-11'),
       amountInTransactionCurrency: 100,
@@ -187,10 +196,12 @@ void main() {
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
+      orderId: StringValue(''),
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
       accountingDocument: 'fake-AD',
+      billingDocument: 'fake-BD',
       netDueDate: DateTimeStringValue('2023041107'),
       documentDate: DateTimeStringValue('2013-04-11'),
       amountInTransactionCurrency: 100,
@@ -213,6 +224,7 @@ void main() {
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
+      orderId: StringValue(''),
     ),
   ];
 

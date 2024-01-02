@@ -25,6 +25,8 @@ mixin _$OutstandingInvoicesEvent {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
+    required TResult Function(List<CustomerOpenItem> invoices)
+        fetchOrderForInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +38,7 @@ mixin _$OutstandingInvoicesEvent {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
         fetch,
     TResult? Function()? loadMore,
+    TResult? Function(List<CustomerOpenItem> invoices)? fetchOrderForInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +50,7 @@ mixin _$OutstandingInvoicesEvent {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
         fetch,
     TResult Function()? loadMore,
+    TResult Function(List<CustomerOpenItem> invoices)? fetchOrderForInvoices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +59,8 @@ mixin _$OutstandingInvoicesEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchOrderForInvoices value)
+        fetchOrderForInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +68,7 @@ mixin _$OutstandingInvoicesEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchOrderForInvoices value)? fetchOrderForInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +76,7 @@ mixin _$OutstandingInvoicesEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchOrderForInvoices value)? fetchOrderForInvoices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -196,6 +204,8 @@ class _$_Initialized implements _Initialized {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
+    required TResult Function(List<CustomerOpenItem> invoices)
+        fetchOrderForInvoices,
   }) {
     return initialized(salesOrganisation, customerCodeInfo);
   }
@@ -210,6 +220,7 @@ class _$_Initialized implements _Initialized {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
         fetch,
     TResult? Function()? loadMore,
+    TResult? Function(List<CustomerOpenItem> invoices)? fetchOrderForInvoices,
   }) {
     return initialized?.call(salesOrganisation, customerCodeInfo);
   }
@@ -224,6 +235,7 @@ class _$_Initialized implements _Initialized {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
         fetch,
     TResult Function()? loadMore,
+    TResult Function(List<CustomerOpenItem> invoices)? fetchOrderForInvoices,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -238,6 +250,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchOrderForInvoices value)
+        fetchOrderForInvoices,
   }) {
     return initialized(this);
   }
@@ -248,6 +262,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchOrderForInvoices value)? fetchOrderForInvoices,
   }) {
     return initialized?.call(this);
   }
@@ -258,6 +273,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchOrderForInvoices value)? fetchOrderForInvoices,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -369,6 +385,8 @@ class _$_Fetch implements _Fetch {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
+    required TResult Function(List<CustomerOpenItem> invoices)
+        fetchOrderForInvoices,
   }) {
     return fetch(appliedFilter, searchKey);
   }
@@ -383,6 +401,7 @@ class _$_Fetch implements _Fetch {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
         fetch,
     TResult? Function()? loadMore,
+    TResult? Function(List<CustomerOpenItem> invoices)? fetchOrderForInvoices,
   }) {
     return fetch?.call(appliedFilter, searchKey);
   }
@@ -397,6 +416,7 @@ class _$_Fetch implements _Fetch {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
         fetch,
     TResult Function()? loadMore,
+    TResult Function(List<CustomerOpenItem> invoices)? fetchOrderForInvoices,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -411,6 +431,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchOrderForInvoices value)
+        fetchOrderForInvoices,
   }) {
     return fetch(this);
   }
@@ -421,6 +443,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchOrderForInvoices value)? fetchOrderForInvoices,
   }) {
     return fetch?.call(this);
   }
@@ -431,6 +454,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchOrderForInvoices value)? fetchOrderForInvoices,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -497,6 +521,8 @@ class _$_LoadMore implements _LoadMore {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
+    required TResult Function(List<CustomerOpenItem> invoices)
+        fetchOrderForInvoices,
   }) {
     return loadMore();
   }
@@ -511,6 +537,7 @@ class _$_LoadMore implements _LoadMore {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
         fetch,
     TResult? Function()? loadMore,
+    TResult? Function(List<CustomerOpenItem> invoices)? fetchOrderForInvoices,
   }) {
     return loadMore?.call();
   }
@@ -525,6 +552,7 @@ class _$_LoadMore implements _LoadMore {
             OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
         fetch,
     TResult Function()? loadMore,
+    TResult Function(List<CustomerOpenItem> invoices)? fetchOrderForInvoices,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -539,6 +567,8 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchOrderForInvoices value)
+        fetchOrderForInvoices,
   }) {
     return loadMore(this);
   }
@@ -549,6 +579,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchOrderForInvoices value)? fetchOrderForInvoices,
   }) {
     return loadMore?.call(this);
   }
@@ -559,6 +590,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchOrderForInvoices value)? fetchOrderForInvoices,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -573,6 +605,177 @@ abstract class _LoadMore implements OutstandingInvoicesEvent {
 }
 
 /// @nodoc
+abstract class _$$_FetchOrderForInvoicesCopyWith<$Res> {
+  factory _$$_FetchOrderForInvoicesCopyWith(_$_FetchOrderForInvoices value,
+          $Res Function(_$_FetchOrderForInvoices) then) =
+      __$$_FetchOrderForInvoicesCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<CustomerOpenItem> invoices});
+}
+
+/// @nodoc
+class __$$_FetchOrderForInvoicesCopyWithImpl<$Res>
+    extends _$OutstandingInvoicesEventCopyWithImpl<$Res,
+        _$_FetchOrderForInvoices>
+    implements _$$_FetchOrderForInvoicesCopyWith<$Res> {
+  __$$_FetchOrderForInvoicesCopyWithImpl(_$_FetchOrderForInvoices _value,
+      $Res Function(_$_FetchOrderForInvoices) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? invoices = null,
+  }) {
+    return _then(_$_FetchOrderForInvoices(
+      invoices: null == invoices
+          ? _value._invoices
+          : invoices // ignore: cast_nullable_to_non_nullable
+              as List<CustomerOpenItem>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_FetchOrderForInvoices implements _FetchOrderForInvoices {
+  const _$_FetchOrderForInvoices(
+      {required final List<CustomerOpenItem> invoices})
+      : _invoices = invoices;
+
+  final List<CustomerOpenItem> _invoices;
+  @override
+  List<CustomerOpenItem> get invoices {
+    if (_invoices is EqualUnmodifiableListView) return _invoices;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_invoices);
+  }
+
+  @override
+  String toString() {
+    return 'OutstandingInvoicesEvent.fetchOrderForInvoices(invoices: $invoices)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchOrderForInvoices &&
+            const DeepCollectionEquality().equals(other._invoices, _invoices));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_invoices));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchOrderForInvoicesCopyWith<_$_FetchOrderForInvoices> get copyWith =>
+      __$$_FetchOrderForInvoicesCopyWithImpl<_$_FetchOrderForInvoices>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)
+        fetch,
+    required TResult Function() loadMore,
+    required TResult Function(List<CustomerOpenItem> invoices)
+        fetchOrderForInvoices,
+  }) {
+    return fetchOrderForInvoices(invoices);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
+        fetch,
+    TResult? Function()? loadMore,
+    TResult? Function(List<CustomerOpenItem> invoices)? fetchOrderForInvoices,
+  }) {
+    return fetchOrderForInvoices?.call(invoices);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
+        fetch,
+    TResult Function()? loadMore,
+    TResult Function(List<CustomerOpenItem> invoices)? fetchOrderForInvoices,
+    required TResult orElse(),
+  }) {
+    if (fetchOrderForInvoices != null) {
+      return fetchOrderForInvoices(invoices);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchOrderForInvoices value)
+        fetchOrderForInvoices,
+  }) {
+    return fetchOrderForInvoices(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchOrderForInvoices value)? fetchOrderForInvoices,
+  }) {
+    return fetchOrderForInvoices?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchOrderForInvoices value)? fetchOrderForInvoices,
+    required TResult orElse(),
+  }) {
+    if (fetchOrderForInvoices != null) {
+      return fetchOrderForInvoices(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchOrderForInvoices implements OutstandingInvoicesEvent {
+  const factory _FetchOrderForInvoices(
+          {required final List<CustomerOpenItem> invoices}) =
+      _$_FetchOrderForInvoices;
+
+  List<CustomerOpenItem> get invoices;
+  @JsonKey(ignore: true)
+  _$$_FetchOrderForInvoicesCopyWith<_$_FetchOrderForInvoices> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$OutstandingInvoicesState {
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
@@ -580,8 +783,11 @@ mixin _$OutstandingInvoicesState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isOrderFetching => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   OutstandingInvoiceFilter get appliedFilter =>
+      throw _privateConstructorUsedError;
+  List<String> get orderFetchingInvoiceIdList =>
       throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
 
@@ -602,8 +808,10 @@ abstract class $OutstandingInvoicesStateCopyWith<$Res> {
       List<CustomerOpenItem> items,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
+      bool isOrderFetching,
       bool canLoadMore,
       OutstandingInvoiceFilter appliedFilter,
+      List<String> orderFetchingInvoiceIdList,
       SearchKey searchKey});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -630,8 +838,10 @@ class _$OutstandingInvoicesStateCopyWithImpl<$Res,
     Object? items = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
+    Object? isOrderFetching = null,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
+    Object? orderFetchingInvoiceIdList = null,
     Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
@@ -655,6 +865,10 @@ class _$OutstandingInvoicesStateCopyWithImpl<$Res,
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isOrderFetching: null == isOrderFetching
+          ? _value.isOrderFetching
+          : isOrderFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
@@ -663,6 +877,10 @@ class _$OutstandingInvoicesStateCopyWithImpl<$Res,
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as OutstandingInvoiceFilter,
+      orderFetchingInvoiceIdList: null == orderFetchingInvoiceIdList
+          ? _value.orderFetchingInvoiceIdList
+          : orderFetchingInvoiceIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -711,8 +929,10 @@ abstract class _$$_OutstandingInvoicesStateCopyWith<$Res>
       List<CustomerOpenItem> items,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
+      bool isOrderFetching,
       bool canLoadMore,
       OutstandingInvoiceFilter appliedFilter,
+      List<String> orderFetchingInvoiceIdList,
       SearchKey searchKey});
 
   @override
@@ -740,8 +960,10 @@ class __$$_OutstandingInvoicesStateCopyWithImpl<$Res>
     Object? items = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
+    Object? isOrderFetching = null,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
+    Object? orderFetchingInvoiceIdList = null,
     Object? searchKey = null,
   }) {
     return _then(_$_OutstandingInvoicesState(
@@ -765,6 +987,10 @@ class __$$_OutstandingInvoicesStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isOrderFetching: null == isOrderFetching
+          ? _value.isOrderFetching
+          : isOrderFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
@@ -773,6 +999,10 @@ class __$$_OutstandingInvoicesStateCopyWithImpl<$Res>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as OutstandingInvoiceFilter,
+      orderFetchingInvoiceIdList: null == orderFetchingInvoiceIdList
+          ? _value._orderFetchingInvoiceIdList
+          : orderFetchingInvoiceIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -790,10 +1020,13 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
       required final List<CustomerOpenItem> items,
       required this.failureOrSuccessOption,
       required this.isLoading,
+      required this.isOrderFetching,
       required this.canLoadMore,
       required this.appliedFilter,
+      required final List<String> orderFetchingInvoiceIdList,
       required this.searchKey})
       : _items = items,
+        _orderFetchingInvoiceIdList = orderFetchingInvoiceIdList,
         super._();
 
   @override
@@ -813,15 +1046,26 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
   @override
   final bool isLoading;
   @override
+  final bool isOrderFetching;
+  @override
   final bool canLoadMore;
   @override
   final OutstandingInvoiceFilter appliedFilter;
+  final List<String> _orderFetchingInvoiceIdList;
+  @override
+  List<String> get orderFetchingInvoiceIdList {
+    if (_orderFetchingInvoiceIdList is EqualUnmodifiableListView)
+      return _orderFetchingInvoiceIdList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_orderFetchingInvoiceIdList);
+  }
+
   @override
   final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'OutstandingInvoicesState(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, searchKey: $searchKey)';
+    return 'OutstandingInvoicesState(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, isOrderFetching: $isOrderFetching, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, orderFetchingInvoiceIdList: $orderFetchingInvoiceIdList, searchKey: $searchKey)';
   }
 
   @override
@@ -838,10 +1082,15 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isOrderFetching, isOrderFetching) ||
+                other.isOrderFetching == isOrderFetching) &&
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter) &&
+            const DeepCollectionEquality().equals(
+                other._orderFetchingInvoiceIdList,
+                _orderFetchingInvoiceIdList) &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
@@ -854,8 +1103,10 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
       const DeepCollectionEquality().hash(_items),
       failureOrSuccessOption,
       isLoading,
+      isOrderFetching,
       canLoadMore,
       appliedFilter,
+      const DeepCollectionEquality().hash(_orderFetchingInvoiceIdList),
       searchKey);
 
   @JsonKey(ignore: true)
@@ -873,8 +1124,10 @@ abstract class _OutstandingInvoicesState extends OutstandingInvoicesState {
       required final List<CustomerOpenItem> items,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
+      required final bool isOrderFetching,
       required final bool canLoadMore,
       required final OutstandingInvoiceFilter appliedFilter,
+      required final List<String> orderFetchingInvoiceIdList,
       required final SearchKey searchKey}) = _$_OutstandingInvoicesState;
   const _OutstandingInvoicesState._() : super._();
 
@@ -889,9 +1142,13 @@ abstract class _OutstandingInvoicesState extends OutstandingInvoicesState {
   @override
   bool get isLoading;
   @override
+  bool get isOrderFetching;
+  @override
   bool get canLoadMore;
   @override
   OutstandingInvoiceFilter get appliedFilter;
+  @override
+  List<String> get orderFetchingInvoiceIdList;
   @override
   SearchKey get searchKey;
   @override

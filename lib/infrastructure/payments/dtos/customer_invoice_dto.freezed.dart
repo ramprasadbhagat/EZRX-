@@ -73,30 +73,41 @@ abstract class $CustomerInvoiceDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      String accountingDocExternalReference,
+          String accountingDocExternalReference,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-      String accountingDocument,
-      @JsonKey(name: 'bpCustomerNumber') String bpCustomerNumber,
+          String accountingDocument,
+      @JsonKey(name: 'bpCustomerNumber')
+          String bpCustomerNumber,
       @JsonKey(name: 'debitCreditFlag', defaultValue: '')
-      String debitCreditFlag,
-      @JsonKey(name: 'discountAmount', defaultValue: '') String discountAmount,
-      @JsonKey(name: 'discountDate', defaultValue: '') String discountDate,
-      @JsonKey(name: 'displayAmount', defaultValue: '') String displayAmount,
+          String debitCreditFlag,
+      @JsonKey(name: 'discountAmount', defaultValue: '')
+          String discountAmount,
+      @JsonKey(name: 'discountDate', defaultValue: '')
+          String discountDate,
+      @JsonKey(name: 'displayAmount', defaultValue: '')
+          String displayAmount,
       @JsonKey(name: 'displayCurrency', defaultValue: '')
-      String displayCurrency,
+          String displayCurrency,
       @JsonKey(name: 'displayOpenAmount', defaultValue: '')
-      String displayOpenAmount,
-      @JsonKey(name: 'dueDate', defaultValue: '') String dueDate,
-      @JsonKey(name: 'fiscalYear', defaultValue: '') String fiscalYear,
-      @JsonKey(name: 'isDisputed', defaultValue: '') String isDisputed,
-      @JsonKey(name: 'lineItemNumber', defaultValue: '') String lineItemNumber,
-      @JsonKey(name: 'lineNumber', defaultValue: '') String lineNumber,
+          String displayOpenAmount,
+      @JsonKey(name: 'dueDate', defaultValue: '')
+          String dueDate,
+      @JsonKey(name: 'fiscalYear', defaultValue: '')
+          String fiscalYear,
+      @JsonKey(name: 'isDisputed', defaultValue: '')
+          String isDisputed,
+      @JsonKey(name: 'lineItemNumber', defaultValue: '')
+          String lineItemNumber,
+      @JsonKey(name: 'lineNumber', defaultValue: '')
+          String lineNumber,
       @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
-      String partialPaymentHistoryDesc,
-      @JsonKey(name: 'paymentAmount', defaultValue: '') String paymentAmount,
-      @JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+          String partialPaymentHistoryDesc,
+      @JsonKey(name: 'paymentAmount', defaultValue: '')
+          String paymentAmount,
+      @JsonKey(name: 'salesOrg', defaultValue: '')
+          String salesOrg,
       @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
-      List<PaymentDeductionDto> zzDeductCode});
+          List<PaymentDeductionDto> zzDeductCode});
 }
 
 /// @nodoc
@@ -218,30 +229,41 @@ abstract class _$$_CustomerInvoiceDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      String accountingDocExternalReference,
+          String accountingDocExternalReference,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-      String accountingDocument,
-      @JsonKey(name: 'bpCustomerNumber') String bpCustomerNumber,
+          String accountingDocument,
+      @JsonKey(name: 'bpCustomerNumber')
+          String bpCustomerNumber,
       @JsonKey(name: 'debitCreditFlag', defaultValue: '')
-      String debitCreditFlag,
-      @JsonKey(name: 'discountAmount', defaultValue: '') String discountAmount,
-      @JsonKey(name: 'discountDate', defaultValue: '') String discountDate,
-      @JsonKey(name: 'displayAmount', defaultValue: '') String displayAmount,
+          String debitCreditFlag,
+      @JsonKey(name: 'discountAmount', defaultValue: '')
+          String discountAmount,
+      @JsonKey(name: 'discountDate', defaultValue: '')
+          String discountDate,
+      @JsonKey(name: 'displayAmount', defaultValue: '')
+          String displayAmount,
       @JsonKey(name: 'displayCurrency', defaultValue: '')
-      String displayCurrency,
+          String displayCurrency,
       @JsonKey(name: 'displayOpenAmount', defaultValue: '')
-      String displayOpenAmount,
-      @JsonKey(name: 'dueDate', defaultValue: '') String dueDate,
-      @JsonKey(name: 'fiscalYear', defaultValue: '') String fiscalYear,
-      @JsonKey(name: 'isDisputed', defaultValue: '') String isDisputed,
-      @JsonKey(name: 'lineItemNumber', defaultValue: '') String lineItemNumber,
-      @JsonKey(name: 'lineNumber', defaultValue: '') String lineNumber,
+          String displayOpenAmount,
+      @JsonKey(name: 'dueDate', defaultValue: '')
+          String dueDate,
+      @JsonKey(name: 'fiscalYear', defaultValue: '')
+          String fiscalYear,
+      @JsonKey(name: 'isDisputed', defaultValue: '')
+          String isDisputed,
+      @JsonKey(name: 'lineItemNumber', defaultValue: '')
+          String lineItemNumber,
+      @JsonKey(name: 'lineNumber', defaultValue: '')
+          String lineNumber,
       @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
-      String partialPaymentHistoryDesc,
-      @JsonKey(name: 'paymentAmount', defaultValue: '') String paymentAmount,
-      @JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+          String partialPaymentHistoryDesc,
+      @JsonKey(name: 'paymentAmount', defaultValue: '')
+          String paymentAmount,
+      @JsonKey(name: 'salesOrg', defaultValue: '')
+          String salesOrg,
       @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
-      List<PaymentDeductionDto> zzDeductCode});
+          List<PaymentDeductionDto> zzDeductCode});
 }
 
 /// @nodoc
@@ -356,35 +378,41 @@ class __$$_CustomerInvoiceDtoCopyWithImpl<$Res>
 class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
   const _$_CustomerInvoiceDto(
       {@JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      required this.accountingDocExternalReference,
+          required this.accountingDocExternalReference,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-      required this.accountingDocument,
-      @JsonKey(name: 'bpCustomerNumber') required this.bpCustomerNumber,
+          required this.accountingDocument,
+      @JsonKey(name: 'bpCustomerNumber')
+          required this.bpCustomerNumber,
       @JsonKey(name: 'debitCreditFlag', defaultValue: '')
-      required this.debitCreditFlag,
+          required this.debitCreditFlag,
       @JsonKey(name: 'discountAmount', defaultValue: '')
-      required this.discountAmount,
+          required this.discountAmount,
       @JsonKey(name: 'discountDate', defaultValue: '')
-      required this.discountDate,
+          required this.discountDate,
       @JsonKey(name: 'displayAmount', defaultValue: '')
-      required this.displayAmount,
+          required this.displayAmount,
       @JsonKey(name: 'displayCurrency', defaultValue: '')
-      required this.displayCurrency,
+          required this.displayCurrency,
       @JsonKey(name: 'displayOpenAmount', defaultValue: '')
-      required this.displayOpenAmount,
-      @JsonKey(name: 'dueDate', defaultValue: '') required this.dueDate,
-      @JsonKey(name: 'fiscalYear', defaultValue: '') required this.fiscalYear,
-      @JsonKey(name: 'isDisputed', defaultValue: '') required this.isDisputed,
+          required this.displayOpenAmount,
+      @JsonKey(name: 'dueDate', defaultValue: '')
+          required this.dueDate,
+      @JsonKey(name: 'fiscalYear', defaultValue: '')
+          required this.fiscalYear,
+      @JsonKey(name: 'isDisputed', defaultValue: '')
+          required this.isDisputed,
       @JsonKey(name: 'lineItemNumber', defaultValue: '')
-      required this.lineItemNumber,
-      @JsonKey(name: 'lineNumber', defaultValue: '') required this.lineNumber,
+          required this.lineItemNumber,
+      @JsonKey(name: 'lineNumber', defaultValue: '')
+          required this.lineNumber,
       @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
-      required this.partialPaymentHistoryDesc,
+          required this.partialPaymentHistoryDesc,
       @JsonKey(name: 'paymentAmount', defaultValue: '')
-      required this.paymentAmount,
-      @JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
+          required this.paymentAmount,
+      @JsonKey(name: 'salesOrg', defaultValue: '')
+          required this.salesOrg,
       @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
-      required final List<PaymentDeductionDto> zzDeductCode})
+          required final List<PaymentDeductionDto> zzDeductCode})
       : _zzDeductCode = zzDeductCode,
         super._();
 
@@ -541,41 +569,43 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
 
 abstract class _CustomerInvoiceDto extends CustomerInvoiceDto {
   const factory _CustomerInvoiceDto(
-      {@JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      required final String accountingDocExternalReference,
-      @JsonKey(name: 'accountingDocument', defaultValue: '')
-      required final String accountingDocument,
-      @JsonKey(name: 'bpCustomerNumber') required final String bpCustomerNumber,
-      @JsonKey(name: 'debitCreditFlag', defaultValue: '')
-      required final String debitCreditFlag,
-      @JsonKey(name: 'discountAmount', defaultValue: '')
-      required final String discountAmount,
-      @JsonKey(name: 'discountDate', defaultValue: '')
-      required final String discountDate,
-      @JsonKey(name: 'displayAmount', defaultValue: '')
-      required final String displayAmount,
-      @JsonKey(name: 'displayCurrency', defaultValue: '')
-      required final String displayCurrency,
-      @JsonKey(name: 'displayOpenAmount', defaultValue: '')
-      required final String displayOpenAmount,
-      @JsonKey(name: 'dueDate', defaultValue: '') required final String dueDate,
-      @JsonKey(name: 'fiscalYear', defaultValue: '')
-      required final String fiscalYear,
-      @JsonKey(name: 'isDisputed', defaultValue: '')
-      required final String isDisputed,
-      @JsonKey(name: 'lineItemNumber', defaultValue: '')
-      required final String lineItemNumber,
-      @JsonKey(name: 'lineNumber', defaultValue: '')
-      required final String lineNumber,
-      @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
-      required final String partialPaymentHistoryDesc,
-      @JsonKey(name: 'paymentAmount', defaultValue: '')
-      required final String paymentAmount,
-      @JsonKey(name: 'salesOrg', defaultValue: '')
-      required final String salesOrg,
-      @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
-      required final List<PaymentDeductionDto>
-          zzDeductCode}) = _$_CustomerInvoiceDto;
+          {@JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+              required final String accountingDocExternalReference,
+          @JsonKey(name: 'accountingDocument', defaultValue: '')
+              required final String accountingDocument,
+          @JsonKey(name: 'bpCustomerNumber')
+              required final String bpCustomerNumber,
+          @JsonKey(name: 'debitCreditFlag', defaultValue: '')
+              required final String debitCreditFlag,
+          @JsonKey(name: 'discountAmount', defaultValue: '')
+              required final String discountAmount,
+          @JsonKey(name: 'discountDate', defaultValue: '')
+              required final String discountDate,
+          @JsonKey(name: 'displayAmount', defaultValue: '')
+              required final String displayAmount,
+          @JsonKey(name: 'displayCurrency', defaultValue: '')
+              required final String displayCurrency,
+          @JsonKey(name: 'displayOpenAmount', defaultValue: '')
+              required final String displayOpenAmount,
+          @JsonKey(name: 'dueDate', defaultValue: '')
+              required final String dueDate,
+          @JsonKey(name: 'fiscalYear', defaultValue: '')
+              required final String fiscalYear,
+          @JsonKey(name: 'isDisputed', defaultValue: '')
+              required final String isDisputed,
+          @JsonKey(name: 'lineItemNumber', defaultValue: '')
+              required final String lineItemNumber,
+          @JsonKey(name: 'lineNumber', defaultValue: '')
+              required final String lineNumber,
+          @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
+              required final String partialPaymentHistoryDesc,
+          @JsonKey(name: 'paymentAmount', defaultValue: '')
+              required final String paymentAmount,
+          @JsonKey(name: 'salesOrg', defaultValue: '')
+              required final String salesOrg,
+          @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
+              required final List<PaymentDeductionDto> zzDeductCode}) =
+      _$_CustomerInvoiceDto;
   const _CustomerInvoiceDto._() : super._();
 
   factory _CustomerInvoiceDto.fromJson(Map<String, dynamic> json) =
@@ -665,9 +695,10 @@ abstract class $PaymentDeductionDtoCopyWith<$Res> {
       _$PaymentDeductionDtoCopyWithImpl<$Res, PaymentDeductionDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'deductCode', defaultValue: '') String deductCode,
+      {@JsonKey(name: 'deductCode', defaultValue: '')
+          String deductCode,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-      double amountInTransactionCurrency});
+          double amountInTransactionCurrency});
 }
 
 /// @nodoc
@@ -708,9 +739,10 @@ abstract class _$$_PaymentDeductionDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'deductCode', defaultValue: '') String deductCode,
+      {@JsonKey(name: 'deductCode', defaultValue: '')
+          String deductCode,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-      double amountInTransactionCurrency});
+          double amountInTransactionCurrency});
 }
 
 /// @nodoc
@@ -744,9 +776,10 @@ class __$$_PaymentDeductionDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PaymentDeductionDto extends _PaymentDeductionDto {
   const _$_PaymentDeductionDto(
-      {@JsonKey(name: 'deductCode', defaultValue: '') required this.deductCode,
+      {@JsonKey(name: 'deductCode', defaultValue: '')
+          required this.deductCode,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-      required this.amountInTransactionCurrency})
+          required this.amountInTransactionCurrency})
       : super._();
 
   factory _$_PaymentDeductionDto.fromJson(Map<String, dynamic> json) =>
@@ -800,9 +833,9 @@ class _$_PaymentDeductionDto extends _PaymentDeductionDto {
 abstract class _PaymentDeductionDto extends PaymentDeductionDto {
   const factory _PaymentDeductionDto(
           {@JsonKey(name: 'deductCode', defaultValue: '')
-          required final String deductCode,
+              required final String deductCode,
           @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          required final double amountInTransactionCurrency}) =
+              required final double amountInTransactionCurrency}) =
       _$_PaymentDeductionDto;
   const _PaymentDeductionDto._() : super._();
 

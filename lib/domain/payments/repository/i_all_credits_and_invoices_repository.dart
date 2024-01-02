@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
 
 abstract class IAllCreditsAndInvoicesRepository {
   Future<Either<ApiFailure, List<CreditAndInvoiceItem>>> filterInvoices({
@@ -30,7 +30,7 @@ abstract class IAllCreditsAndInvoicesRepository {
     required int offset,
     required FullSummaryFilter filter,
   });
-  Future<Either<ApiFailure, List<InvoiceOrderItem>>> fetchOrder({
-    required List<CreditAndInvoiceItem> invoices,
+  Future<Either<ApiFailure, Map<String, StringValue>>> fetchOrder({
+    required List<String> invoiceIds,
   });
 }

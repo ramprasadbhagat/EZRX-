@@ -2513,6 +2513,8 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => OutstandingInvoicesBloc(
       newPaymentRepository: locator<NewPaymentRepository>(),
+      allCreditsAndInvoicesRepository:
+          locator<AllCreditsAndInvoicesRepository>(),
       config: locator<Config>(),
     ),
   );

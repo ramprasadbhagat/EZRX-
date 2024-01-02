@@ -211,14 +211,16 @@ void main() {
         (invocation) async => invoiceOrderItems,
       );
       final result = await allCreditsAndInvoicesRepository.fetchOrder(
-        invoices: invoiceOrderItems
+        invoiceIds: invoiceOrderItems
             .map(
-              (e) =>
-                  CreditAndInvoiceItem.empty().copyWith(searchKey: e.invoiceId),
+              (e) => e.invoiceId.getValue(),
             )
             .toList(),
       );
-      expect(result.getOrElse(() => []), invoiceOrderItems);
+      expect(
+        result.getOrElse(() => <String, StringValue>{}),
+        invoiceOrderItems.toMap,
+      );
     });
 
     test('=> locally fail', () async {
@@ -228,10 +230,9 @@ void main() {
         (invocation) async => MockException(),
       );
       final result = await allCreditsAndInvoicesRepository.fetchOrder(
-        invoices: invoiceOrderItems
+        invoiceIds: invoiceOrderItems
             .map(
-              (e) =>
-                  CreditAndInvoiceItem.empty().copyWith(searchKey: e.invoiceId),
+              (e) => e.invoiceId.getValue(),
             )
             .toList(),
       );
@@ -248,14 +249,16 @@ void main() {
         (invocation) async => invoiceOrderItems,
       );
       final result = await allCreditsAndInvoicesRepository.fetchOrder(
-        invoices: invoiceOrderItems
+        invoiceIds: invoiceOrderItems
             .map(
-              (e) =>
-                  CreditAndInvoiceItem.empty().copyWith(searchKey: e.invoiceId),
+              (e) => e.invoiceId.getValue(),
             )
             .toList(),
       );
-      expect(result.getOrElse(() => []), invoiceOrderItems);
+      expect(
+        result.getOrElse(() => <String, StringValue>{}),
+        invoiceOrderItems.toMap,
+      );
     });
     test('=> remote fail', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
@@ -267,10 +270,9 @@ void main() {
         (invocation) async => MockException(),
       );
       final result = await allCreditsAndInvoicesRepository.fetchOrder(
-        invoices: invoiceOrderItems
+        invoiceIds: invoiceOrderItems
             .map(
-              (e) =>
-                  CreditAndInvoiceItem.empty().copyWith(searchKey: e.invoiceId),
+              (e) => e.invoiceId.getValue(),
             )
             .toList(),
       );

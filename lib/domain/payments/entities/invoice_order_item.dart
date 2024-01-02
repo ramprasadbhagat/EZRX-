@@ -15,3 +15,8 @@ class InvoiceOrderItem with _$InvoiceOrderItem {
         orderId: StringValue(''),
       );
 }
+
+extension PaymentItemListExtension on List<InvoiceOrderItem> {
+  Map<String, StringValue> get toMap =>
+      {for (final item in this) item.invoiceId.getValue(): item.orderId};
+}

@@ -40,6 +40,7 @@ _$_CustomerOpenItemDto _$$_CustomerOpenItemDtoFromJson(
       paymentAmountInDisplayCrcy:
           (json['paymentAmountInDisplayCrcy'] as num?)?.toDouble() ?? 0,
       companyCode: json['companyCode'] as String? ?? '',
+      billingDocument: json['billingDocument'] as String? ?? '',
       openAmountInTransCrcy:
           (json['openAmountInTransCrcy'] as num?)?.toDouble() ?? 0,
     );
@@ -70,5 +71,6 @@ Map<String, dynamic> _$$_CustomerOpenItemDtoToJson(
       'partialPaymentHistoryDesc': instance.partialPaymentHistoryDesc,
       'paymentAmountInDisplayCrcy': instance.paymentAmountInDisplayCrcy,
       'companyCode': instance.companyCode,
+      'billingDocument': instance.billingDocument,
       'openAmountInTransCrcy': instance.openAmountInTransCrcy,
     };
