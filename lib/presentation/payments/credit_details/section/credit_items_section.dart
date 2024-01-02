@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_details_group.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
@@ -34,7 +33,7 @@ class CreditItemsSection extends StatelessWidget {
                 vertical: 10.0,
               ),
               child: Text(
-                '${context.tr('Return items')} (${context.read<CreditAndInvoiceDetailsBloc>().state.itemsInfo.itemCount})',
+                '${context.tr('Return items')} (${context.read<CreditAndInvoiceDetailsBloc>().state.itemsInfo.length})',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.black,
                     ),
@@ -51,23 +50,20 @@ class CreditItemsSection extends StatelessWidget {
             ),
             Column(
               children: creditItems[index].items.map(
-                (e) {
+                (creditItem) {
                   return CommonTileItem(
                     headerText:
-                        '${context.tr('Batch')} ${e.batchNumber.getOrDefaultValue('')} (EXP:${e.expiryDate.dateString})',
-                    materialNumber: e.materialNumber,
+                        '${context.tr('Batch')} ${creditItem.batchNumber.getOrDefaultValue('')} (EXP:${creditItem.expiryDate.dateString})',
+                    materialNumber: creditItem.materialNumber,
                     label: removeLeadingZero(
-                      e.materialNumber.getOrDefaultValue(''),
+                      creditItem.materialNumber.getOrDefaultValue(''),
                     ),
                     subtitle: StringUtils.displayPrice(
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
-                      double.parse(
-                        (e.grossAmount / e.billingQuantity.getOrDefaultValue(1))
-                            .toStringAsFixed(2),
-                      ),
+                      creditItem.unitPrice,
                     ),
-                    title: e.billingDocumentItemText,
-                    quantity: '${e.billingQuantity.getOrDefaultValue(0)}',
+                    title: creditItem.billingDocumentItemText,
+                    quantity: creditItem.billingQuantity.stringValue,
                     isQuantityBelowImage: true,
                     isQuantityRequired: false,
                     statusWidget: const SizedBox.shrink(),
@@ -75,7 +71,7 @@ class CreditItemsSection extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${context.tr('Qty')}: ${e.billingQuantity.getOrDefaultValue(0)}',
+                          '${context.tr('Qty')}: ${creditItem.billingQuantity.getOrDefaultValue(0)}',
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.black,
@@ -86,7 +82,7 @@ class CreditItemsSection extends StatelessWidget {
                               .read<EligibilityBloc>()
                               .state
                               .salesOrgConfigs,
-                          price: e.grossAmount.toStringAsFixed(2),
+                          price: creditItem.netAmount.toStringAsFixed(2),
                         ),
                       ],
                     ),

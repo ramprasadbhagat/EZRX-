@@ -192,6 +192,10 @@ final fakeMYSalesOrgConfigTaxBreakdownEnabled =
   currency: Currency('myr'),
 );
 
+final fakeMYSalesOrgConfigCurrency = SalesOrganisationConfigs.empty().copyWith(
+  currency: Currency('myr'),
+);
+
 final fakeTHSalesOrgConfigTaxBreakdownEnabled =
     SalesOrganisationConfigs.empty().copyWith(
   displaySubtotalTaxBreakdown: true,

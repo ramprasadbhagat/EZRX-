@@ -20,7 +20,9 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
@@ -116,14 +118,14 @@ void main() {
       billingDocumentItem: '000010',
       materialNumber: MaterialNumber('000000000023046005'),
       billingDocumentItemText: "COZAARTABS50MG30'S",
-      billingQuantity: IntegerValue('300'),
+      billingQuantity: IntegerValue('3'),
       billingQuantityUnit: 'BOX',
       salesMeasureISOUnit: 'BX',
       referenceSDDocument: '0800055109',
       referenceSDDocumentItem: '000010',
       referenceSDDocumentCategory: 'J',
-      grossAmount: 1.2768e+06,
-      netAmount: 1.2768e+06,
+      grossAmount: 0,
+      netAmount: 360,
       taxAmount: 0,
       batchNumber: BatchNumber('V3475'),
       expiryDate: DateTimeStringValue('20500718'),
@@ -388,7 +390,7 @@ void main() {
     testWidgets(' => Display invoice item section', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigCurrency,
         ),
       );
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
@@ -418,6 +420,23 @@ void main() {
         ) as PriceComponent)
             .price,
         fakeInvoiceDetail.unitPrice.toString(),
+      );
+      expect(
+        find.descendant(
+          of: find.byType(CommonTileItem),
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget is RichText &&
+                widget.key == WidgetKeys.priceComponent &&
+                widget.text.toPlainText().contains(
+                      StringUtils.displayPrice(
+                        fakeMYSalesOrgConfigCurrency,
+                        fakeInvoiceDetail.netAmount,
+                      ),
+                    ),
+          ),
+        ),
+        findsOneWidget,
       );
     });
   });
