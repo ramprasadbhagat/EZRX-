@@ -20,13 +20,14 @@ class BuyAgainButton extends StatelessWidget {
                 reOrderPermissionOrderNumber &&
             (currentRoutePath == 'main/orders_tab/orders/view_by_orders' ||
                 currentRoutePath == 'orders/view_by_order_details_page')) {
+          context.read<ReOrderPermissionBloc>().add(
+                ReOrderPermissionEvent.resetOrderNumberWillUpsert(
+                  orderNumberWillUpsert: OrderNumber(''),
+                ),
+              );
+
           state.apiFailureOrSuccessOption.fold(
             () {
-              context.read<ReOrderPermissionBloc>().add(
-                    ReOrderPermissionEvent.resetOrderNumberWillUpsert(
-                      orderNumberWillUpsert: OrderNumber(''),
-                    ),
-                  );
               context.router.pushNamed('orders/cart');
             },
             (either) => either.fold(
@@ -50,14 +51,29 @@ class BuyAgainButton extends StatelessWidget {
               current.orderNumberWillUpsert ==
                   viewByOrderHistoryItem.orderNumber,
           listener: (context, reOrderState) {
-            context.read<CartBloc>().add(
-                  CartEvent.addHistoryItemsToCart(
-                    items: reOrderState.availableProducts(
-                      context.read<MaterialPriceBloc>().state.materialPrice,
-                    ),
-                    counterOfferDetails: RequestCounterOfferDetails.empty(),
-                  ),
-                );
+            reOrderState.failureOrSuccessOption.fold(
+              () {
+                context.read<CartBloc>().add(
+                      CartEvent.addHistoryItemsToCart(
+                        items: reOrderState.availableProducts(
+                          context.read<MaterialPriceBloc>().state.materialPrice,
+                        ),
+                        counterOfferDetails: RequestCounterOfferDetails.empty(),
+                      ),
+                    );
+              },
+              (either) => either.fold(
+                (failure) {
+                  context.read<ReOrderPermissionBloc>().add(
+                        ReOrderPermissionEvent.resetOrderNumberWillUpsert(
+                          orderNumberWillUpsert: OrderNumber(''),
+                        ),
+                      );
+                  ErrorUtils.handleReorderFailure(context, failure);
+                },
+                (_) {},
+              ),
+            );
           },
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching ||

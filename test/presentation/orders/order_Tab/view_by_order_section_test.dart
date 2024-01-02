@@ -415,7 +415,59 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('Buy again button go to cart page Upserting', (tester) async {
+    testWidgets('Show snackbar when add reorder items to cart failure',
+        (tester) async {
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          viewByOrderList: viewByOrder
+              .copyWith(orderHeaders: [viewByOrder.orderHeaders.first]),
+        ),
+      );
+      when(() => reOrderPermissionBlocMock.state).thenReturn(
+        ReOrderPermissionState.initial().copyWith(
+          orderNumberWillUpsert: viewByOrder.orderHeaders.first.orderNumber,
+        ),
+      );
+
+      whenListen(
+        cartBlocMock,
+        Stream.fromIterable(
+          [
+            CartState.initial().copyWith(isBuyAgain: true),
+            CartState.initial().copyWith(
+              apiFailureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other('test'))),
+            )
+          ],
+        ),
+      );
+      when(
+        () => autoRouterMock.currentPath,
+      ).thenAnswer((invocation) => 'orders/view_by_order_details_page');
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.customSnackBarMessage),
+        findsOneWidget,
+      );
+
+      verify(
+        () => reOrderPermissionBlocMock.add(
+          ReOrderPermissionEvent.resetOrderNumberWillUpsert(
+            orderNumberWillUpsert: OrderNumber(''),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Show snackbar when get reorder permission failure',
+        (tester) async {
       when(() => mockViewByOrderBloc.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           viewByOrderList: viewByOrder
@@ -432,56 +484,24 @@ void main() {
             ),
             ReOrderPermissionState.initial().copyWith(
               orderNumberWillUpsert: viewByOrder.orderHeaders.first.orderNumber,
+              failureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other('test'))),
             )
           ],
         ),
       );
 
-      whenListen(
-        cartBlocMock,
-        Stream.fromIterable(
-          [
-            CartState.initial().copyWith(
-              isFetching: true,
-              isBuyAgain: true,
-            ),
-            CartState.initial().copyWith(
-              isBuyAgain: false,
-            )
-          ],
-        ),
-      );
-      when(
-        () => autoRouterMock.currentPath,
-      ).thenAnswer((invocation) => 'orders/view_by_order_details_page');
-      when(
-        () => autoRouterMock.pushNamed('orders/cart'),
-      ).thenAnswer((invocation) => Future(() => null));
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final buyAgainButton =
-          find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
-
-      expect(buyAgainButton, findsOneWidget);
-      verify(
-        () => cartBlocMock.add(
-          CartEvent.addHistoryItemsToCart(
-            items: [],
-            counterOfferDetails: RequestCounterOfferDetails.empty(),
-          ),
-        ),
-      ).called(1);
-      verify(
-        () => reOrderPermissionBlocMock.add(
-          ReOrderPermissionEvent.resetOrderNumberWillUpsert(
-            orderNumberWillUpsert: OrderNumber(''),
-          ),
-        ),
-      ).called(1);
-      verify(
-        () => autoRouterMock.pushNamed('orders/cart'),
-      ).called(1);
+      expect(
+        find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.customSnackBarMessage),
+        findsOneWidget,
+      );
     });
 
     testWidgets('Test order total price visibility with tax', (tester) async {
