@@ -313,4 +313,95 @@ void main() {
       },
     );
   });
+
+  group('StatusType displayStatusLabelColor for order', () {
+    test(
+      'Status Order Created',
+      () {
+        final statusType = FilterStatus('Order Created');
+        expect(statusType.displayStatusLabelColor, ZPColors.invoiceStatusBlue);
+      },
+    );
+    test(
+      'Status Order Creating',
+      () {
+        final statusType = FilterStatus('Order Creating');
+        expect(statusType.displayStatusLabelColor, ZPColors.invoiceStatusBlue);
+      },
+    );
+    test(
+      'Status Order created',
+      () {
+        final statusType = FilterStatus('Order created');
+        expect(statusType.displayStatusLabelColor, ZPColors.invoiceStatusBlue);
+      },
+    );
+    test(
+      'Status Order Pending release',
+      () {
+        final statusType = FilterStatus('Pending release');
+        expect(statusType.displayStatusLabelColor, ZPColors.lightYellow);
+      },
+    );
+
+    test(
+      'Status Order Order packed and ready for delivery',
+      () {
+        final statusType = FilterStatus('Order packed and ready for delivery');
+        expect(statusType.displayStatusLabelColor, ZPColors.lightYellow);
+      },
+    );
+
+    test(
+      'Status Order Picking in progress',
+      () {
+        final statusType = FilterStatus('Picking in progress');
+        expect(statusType.displayStatusLabelColor, ZPColors.lightYellow);
+      },
+    );
+
+    test(
+      'Status Order Picking in progress',
+      () {
+        final statusType = FilterStatus('Picking in progress');
+        expect(statusType.displayStatusLabelColor, ZPColors.lightYellow);
+      },
+    );
+
+    test(
+      'Status Order Out for delivery',
+      () {
+        final statusType = FilterStatus('Out for delivery');
+        expect(statusType.displayStatusLabelColor, ZPColors.lightYellow);
+      },
+    );
+    test(
+      'Status Order Delivered',
+      () {
+        final statusType = FilterStatus('Delivered');
+        expect(statusType.displayStatusLabelColor, ZPColors.secondary);
+      },
+    );
+    test(
+      'Status Order Cancelled',
+      () {
+        final statusType = FilterStatus('Cancelled');
+        expect(
+          statusType.displayStatusLabelColor,
+          ZPColors.lightRedStatusColor,
+        );
+      },
+    );
+
+    test(
+      'Status Order Failed',
+      () {
+        final statusType = FilterStatus('Failed');
+        expect(
+          statusType.displayStatusLabelColor,
+          ZPColors.lightRedStatusColor,
+        );
+      },
+    );
+  });
 }
