@@ -28,7 +28,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
@@ -356,6 +358,15 @@ void main() {
     testWidgets('Tap on view by item Tile ', (tester) async {
       final orderHistoryList = orderHistory.copyWith(
         orderHistoryItems: fakeOrderHistoryItems,
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrganisation: fakeSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeRootAdminUser,
+        ),
       );
       when(() => mockViewByItemsBloc.state).thenReturn(
         ViewByItemsState.initial().copyWith(

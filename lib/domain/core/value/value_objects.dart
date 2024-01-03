@@ -81,6 +81,8 @@ class SearchKey extends ValueObject<String> {
 
   String get upperCaseValue => getUpperCaseValue(searchValueOrEmpty);
 
+  bool get isInvalidSearchKey => isValueEmpty || !isValid();
+
   const SearchKey._(this.value);
 }
 

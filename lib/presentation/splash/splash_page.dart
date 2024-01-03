@@ -719,9 +719,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       );
                   context.read<ViewByItemDetailsBloc>().add(
                         ViewByItemDetailsEvent.searchOrderHistory(
-                          customerCodeInfo: eligibilityState.customerCodeInfo,
-                          user: eligibilityState.user,
-                          salesOrganisation: eligibilityState.salesOrganisation,
                           searchKey: SearchKey(orderNumber.getValue()),
                         ),
                       );
@@ -1043,6 +1040,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
      * inside state.haveShipTo
      */
     if (state.haveShipTo) {
+      context.read<ViewByItemDetailsBloc>().add(
+            ViewByItemDetailsEvent.initialized(
+              salesOrganisation: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              salesOrgConfig: salesOrgState.configs,
+              user: user,
+            ),
+          );
       context.read<PaymentSummaryDetailsBloc>().add(
             PaymentSummaryDetailsEvent.initialized(
               salesOrganization: salesOrgState.salesOrganisation,

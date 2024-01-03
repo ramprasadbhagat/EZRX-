@@ -380,9 +380,6 @@ void main() {
       verify(
         () => viewByItemDetailsBlocMock.add(
           ViewByItemDetailsEvent.searchOrderHistory(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            user: fakeUser,
-            salesOrganisation: fakeSalesOrganisation,
             searchKey: SearchKey(notificationList.first.orderNumber.getValue()),
           ),
         ),

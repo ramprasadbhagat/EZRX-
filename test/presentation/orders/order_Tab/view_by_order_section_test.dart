@@ -657,11 +657,6 @@ void main() {
         verify(
           () => mockViewByItemDetailsBloc.add(
             ViewByItemDetailsEvent.searchOrderHistory(
-              customerCodeInfo: fakeCustomerCodeInfo,
-              user: User.empty().copyWith(
-                disableCreateOrder: true,
-              ),
-              salesOrganisation: fakeSalesOrganisation,
               searchKey: SearchKey(
                 viewByOrder.orderHeaders.first.orderNumber.getValue(),
               ),

@@ -87,6 +87,40 @@ class ViewByItemRepository implements IViewByItemRepository {
   }
 
   @override
+  Future<Either<ApiFailure, OrderHistory>> getViewByItemDetails({
+    required SalesOrganisationConfigs salesOrgConfig,
+    required CustomerCodeInfo soldTo,
+    required User user,
+    required SearchKey searchKey,
+    required SalesOrganisation salesOrganisation,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final orderHistoryItemsList =
+            await viewByItemLocalDataSource.getViewByItems();
+
+        return Right(orderHistoryItemsList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+
+    try {
+      final orderHistoryItemList =
+          await viewByItemRemoteDataSource.getViewByItemDetails(
+        soldTo: soldTo.customerCodeSoldTo,
+        language: salesOrganisation.salesOrg.languageCode,
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        orderNumber: searchKey.getOrCrash(),
+      );
+
+      return Right(orderHistoryItemList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
   Future<Either<ApiFailure, OrderHistory>> searchOrderHistory({
     required CustomerCodeInfo soldTo,
     required User user,

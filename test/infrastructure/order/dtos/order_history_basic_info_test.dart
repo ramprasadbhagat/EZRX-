@@ -10,7 +10,11 @@ void main() {
       data = {
         'SoldTo': 'fake-soldto',
         'ShipTo': 'fake-shipto',
-        'CompanyName': 'fake-companyname'
+        'CompanyName': 'fake-companyname',
+        'PaymentTerm': {
+          'PaymentTermCode': 'E001',
+          'PaymentTermDescription': '30 days from end-of-Month',
+        },
       };
     });
     test('Test toDomain', () {

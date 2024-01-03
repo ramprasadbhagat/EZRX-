@@ -72,11 +72,6 @@ class OrderNumberSection extends StatelessWidget {
                                 );
                             context.read<ViewByItemDetailsBloc>().add(
                                   ViewByItemDetailsEvent.searchOrderHistory(
-                                    customerCodeInfo:
-                                        eligibilityState.customerCodeInfo,
-                                    user: eligibilityState.user,
-                                    salesOrganisation:
-                                        eligibilityState.salesOrganisation,
                                     searchKey: SearchKey(
                                       orderNumber,
                                     ),

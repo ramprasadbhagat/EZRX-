@@ -51,6 +51,22 @@ class ViewByItemRemoteDataSource {
     return await _getOrderHistory(variables: variables);
   }
 
+  Future<OrderHistory> getViewByItemDetails({
+    required String soldTo,
+    required String language,
+    required String orderNumber,
+    required String salesOrg,
+  }) async {
+    final variables = {
+      'soldTo': soldTo,
+      'language': language,
+      'salesOrg': [salesOrg],
+      'orderNumber': orderNumber,
+    };
+
+    return await _getOrderHistory(variables: variables);
+  }
+
   Future<OrderHistory> searchOrderHistory({
     required String soldTo,
     required String language,

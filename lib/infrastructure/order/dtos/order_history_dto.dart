@@ -34,6 +34,7 @@ class OrderHistoryDto with _$OrderHistoryDto {
         soldTo: orderBasicInformation.soldTo,
         shipTo: orderBasicInformation.shipTo,
         companyName: CompanyName(orderBasicInformation.companyName),
+        paymentTerm: orderBasicInformation.paymentTerm.toDomain(),
       ),
       orderHistoryItems: orderItems.map((e) => e.toDomain()).toList(),
     );

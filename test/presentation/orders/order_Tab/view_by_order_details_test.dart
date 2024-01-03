@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
@@ -88,6 +89,9 @@ class ViewByOrderDetailsBlockMock
     extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
     implements ViewByOrderDetailsBloc {}
 
+class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+    implements ViewByItemsBloc {}
+
 class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
@@ -117,6 +121,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final viewByOrderBlocMock = ViewByOrderBlocMock();
   final mockViewByItemDetailsBloc = ViewByItemDetailsBlocMock();
+  final mockViewByItemsBloc = ViewByItemsBlocMock();
   final viewByOrderDetailsBlocMock = ViewByOrderDetailsBlockMock();
   late SalesOrgMockBloc mockSalesOrgBloc;
   final userBlocMock = UserMockBloc();
@@ -206,6 +211,8 @@ void main() {
           .thenReturn(ReOrderPermissionState.initial());
       when(() => mockProductImageBloc.state)
           .thenReturn(ProductImageState.initial());
+      when(() => mockViewByItemsBloc.state)
+          .thenReturn(ViewByItemsState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           configs: SalesOrganisationConfigs.empty().copyWith(
@@ -283,6 +290,9 @@ void main() {
           ),
           BlocProvider<ViewByOrderDetailsBloc>(
             create: (context) => viewByOrderDetailsBlocMock,
+          ),
+          BlocProvider<ViewByItemsBloc>(
+            create: (context) => mockViewByItemsBloc,
           ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<EligibilityBloc>(
@@ -1376,6 +1386,15 @@ void main() {
           productType: MaterialInfoType.bundle(),
         )
       ];
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrganisation: fakeSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeRootAdminUser,
+        ),
+      );
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
               orderHistoryDetailsOrderItem: bundleList,

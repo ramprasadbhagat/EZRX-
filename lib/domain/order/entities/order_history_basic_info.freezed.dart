@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderHistoryBasicInfo {
   String get soldTo => throw _privateConstructorUsedError;
   String get shipTo => throw _privateConstructorUsedError;
-  CompanyName get companyName => throw _privateConstructorUsedError;
+  value_objects.CompanyName get companyName =>
+      throw _privateConstructorUsedError;
+  PaymentTerm get paymentTerm => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryBasicInfoCopyWith<OrderHistoryBasicInfo> get copyWith =>
@@ -31,7 +33,13 @@ abstract class $OrderHistoryBasicInfoCopyWith<$Res> {
           $Res Function(OrderHistoryBasicInfo) then) =
       _$OrderHistoryBasicInfoCopyWithImpl<$Res, OrderHistoryBasicInfo>;
   @useResult
-  $Res call({String soldTo, String shipTo, CompanyName companyName});
+  $Res call(
+      {String soldTo,
+      String shipTo,
+      value_objects.CompanyName companyName,
+      PaymentTerm paymentTerm});
+
+  $PaymentTermCopyWith<$Res> get paymentTerm;
 }
 
 /// @nodoc
@@ -51,6 +59,7 @@ class _$OrderHistoryBasicInfoCopyWithImpl<$Res,
     Object? soldTo = null,
     Object? shipTo = null,
     Object? companyName = null,
+    Object? paymentTerm = null,
   }) {
     return _then(_value.copyWith(
       soldTo: null == soldTo
@@ -64,8 +73,20 @@ class _$OrderHistoryBasicInfoCopyWithImpl<$Res,
       companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
-              as CompanyName,
+              as value_objects.CompanyName,
+      paymentTerm: null == paymentTerm
+          ? _value.paymentTerm
+          : paymentTerm // ignore: cast_nullable_to_non_nullable
+              as PaymentTerm,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentTermCopyWith<$Res> get paymentTerm {
+    return $PaymentTermCopyWith<$Res>(_value.paymentTerm, (value) {
+      return _then(_value.copyWith(paymentTerm: value) as $Val);
+    });
   }
 }
 
@@ -77,7 +98,14 @@ abstract class _$$_OrderHistoryBasicInfoCopyWith<$Res>
       __$$_OrderHistoryBasicInfoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String soldTo, String shipTo, CompanyName companyName});
+  $Res call(
+      {String soldTo,
+      String shipTo,
+      value_objects.CompanyName companyName,
+      PaymentTerm paymentTerm});
+
+  @override
+  $PaymentTermCopyWith<$Res> get paymentTerm;
 }
 
 /// @nodoc
@@ -94,6 +122,7 @@ class __$$_OrderHistoryBasicInfoCopyWithImpl<$Res>
     Object? soldTo = null,
     Object? shipTo = null,
     Object? companyName = null,
+    Object? paymentTerm = null,
   }) {
     return _then(_$_OrderHistoryBasicInfo(
       soldTo: null == soldTo
@@ -107,7 +136,11 @@ class __$$_OrderHistoryBasicInfoCopyWithImpl<$Res>
       companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
-              as CompanyName,
+              as value_objects.CompanyName,
+      paymentTerm: null == paymentTerm
+          ? _value.paymentTerm
+          : paymentTerm // ignore: cast_nullable_to_non_nullable
+              as PaymentTerm,
     ));
   }
 }
@@ -116,7 +149,10 @@ class __$$_OrderHistoryBasicInfoCopyWithImpl<$Res>
 
 class _$_OrderHistoryBasicInfo extends _OrderHistoryBasicInfo {
   _$_OrderHistoryBasicInfo(
-      {required this.soldTo, required this.shipTo, required this.companyName})
+      {required this.soldTo,
+      required this.shipTo,
+      required this.companyName,
+      required this.paymentTerm})
       : super._();
 
   @override
@@ -124,11 +160,13 @@ class _$_OrderHistoryBasicInfo extends _OrderHistoryBasicInfo {
   @override
   final String shipTo;
   @override
-  final CompanyName companyName;
+  final value_objects.CompanyName companyName;
+  @override
+  final PaymentTerm paymentTerm;
 
   @override
   String toString() {
-    return 'OrderHistoryBasicInfo(soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName)';
+    return 'OrderHistoryBasicInfo(soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, paymentTerm: $paymentTerm)';
   }
 
   @override
@@ -139,11 +177,14 @@ class _$_OrderHistoryBasicInfo extends _OrderHistoryBasicInfo {
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
             (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
             (identical(other.companyName, companyName) ||
-                other.companyName == companyName));
+                other.companyName == companyName) &&
+            (identical(other.paymentTerm, paymentTerm) ||
+                other.paymentTerm == paymentTerm));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, soldTo, shipTo, companyName);
+  int get hashCode =>
+      Object.hash(runtimeType, soldTo, shipTo, companyName, paymentTerm);
 
   @JsonKey(ignore: true)
   @override
@@ -157,7 +198,8 @@ abstract class _OrderHistoryBasicInfo extends OrderHistoryBasicInfo {
   factory _OrderHistoryBasicInfo(
       {required final String soldTo,
       required final String shipTo,
-      required final CompanyName companyName}) = _$_OrderHistoryBasicInfo;
+      required final value_objects.CompanyName companyName,
+      required final PaymentTerm paymentTerm}) = _$_OrderHistoryBasicInfo;
   _OrderHistoryBasicInfo._() : super._();
 
   @override
@@ -165,7 +207,9 @@ abstract class _OrderHistoryBasicInfo extends OrderHistoryBasicInfo {
   @override
   String get shipTo;
   @override
-  CompanyName get companyName;
+  value_objects.CompanyName get companyName;
+  @override
+  PaymentTerm get paymentTerm;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryBasicInfoCopyWith<_$_OrderHistoryBasicInfo> get copyWith =>

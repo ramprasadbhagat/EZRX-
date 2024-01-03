@@ -23,6 +23,13 @@ abstract class IViewByItemRepository {
     required SearchKey searchKey,
     required SalesOrganisation salesOrganisation,
   });
+  Future<Either<ApiFailure, OrderHistory>> getViewByItemDetails({
+    required SalesOrganisationConfigs salesOrgConfig,
+    required CustomerCodeInfo soldTo,
+    required User user,
+    required SearchKey searchKey,
+    required SalesOrganisation salesOrganisation,
+  });
 
   Future<Either<ApiFailure, OrderHistory>> searchOrderHistory({
     required CustomerCodeInfo soldTo,

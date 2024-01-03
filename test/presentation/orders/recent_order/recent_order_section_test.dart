@@ -185,17 +185,20 @@ void main() {
           OrderHistoryItem.empty(),
         ],
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrganisation: fakeSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeRootAdminUser,
+        ),
+      );
       when(
         () => viewByItemsBlocMock.state,
       ).thenAnswer(
         (invocation) => ViewByItemsState.initial().copyWith(
           orderHistory: fakeOrderHistory,
-        ),
-      );
-
-      when(() => eligibilityBlocMock.state).thenAnswer(
-        (invocation) => EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
         ),
       );
 

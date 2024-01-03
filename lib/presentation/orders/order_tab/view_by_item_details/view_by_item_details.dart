@@ -75,6 +75,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
           },
           buildWhen: (previous, current) =>
               previous.isLoading != current.isLoading ||
+              previous.isDetailsLoading != current.isDetailsLoading ||
               previous.orderHistoryItem != current.orderHistoryItem ||
               previous.orderHistoryStatuses != current.orderHistoryStatuses,
           builder: (context, state) {
@@ -89,6 +90,8 @@ class ViewByItemDetailsPage extends StatelessWidget {
                       children: <Widget>[
                         ViewByItemDetailsHeaderSection(
                           orderHistoryItem: state.orderHistoryItem,
+                          orderHistoryBasicInfo:
+                              state.orderHistory.orderBasicInformation,
                         ),
                         _ViewByItemStatusTracker(
                           orderHistoryItem: state.orderHistoryItem,

@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -37,7 +38,14 @@ class ViewByItemDetailsBloc
     Emitter<ViewByItemDetailsState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(ViewByItemDetailsState.initial()),
+      initialized: (e) async => emit(
+        ViewByItemDetailsState.initial().copyWith(
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrgConfig: e.salesOrgConfig,
+          salesOrganisation: e.salesOrganisation,
+          user: e.user,
+        ),
+      ),
       searchOrderHistory: (e) async {
         if (!e.searchKey.validateNotEmpty || !e.searchKey.isValid()) return;
 
@@ -51,10 +59,10 @@ class ViewByItemDetailsBloc
         );
 
         final failureOrSuccess = await viewByItemRepository.searchOrderHistory(
-          soldTo: e.customerCodeInfo,
-          user: e.user,
+          soldTo: state.customerCodeInfo,
+          user: state.user,
           searchKey: e.searchKey,
-          salesOrganisation: e.salesOrganisation,
+          salesOrganisation: state.salesOrganisation,
         );
 
         failureOrSuccess.fold(
@@ -157,6 +165,12 @@ class ViewByItemDetailsBloc
             orderHistoryItem: e.orderHistoryItem,
           ),
         );
+        add(
+          _FetchOrderHistoryDetails(
+            searchKey:
+                SearchKey(e.orderHistoryItem.orderNumber.getOrDefaultValue('')),
+          ),
+        );
         if (!e.disableDeliveryDateForZyllemStatus &&
             e.orderHistoryItem.status.fetchZyllemStatusesNeeded) {
           add(
@@ -188,6 +202,46 @@ class ViewByItemDetailsBloc
                 orderHistoryStatuses: orderHistoryStatuses,
                 failureOrSuccessOption: none(),
                 isLoading: false,
+              ),
+            );
+          },
+        );
+      },
+      fetchOrderHistoryDetails: (e) async {
+        if (e.searchKey.isInvalidSearchKey) return;
+
+        emit(
+          state.copyWith(
+            isDetailsLoading: true,
+          ),
+        );
+
+        final failureOrSuccess =
+            await viewByItemRepository.getViewByItemDetails(
+          soldTo: state.customerCodeInfo,
+          user: state.user,
+          searchKey: e.searchKey,
+          salesOrganisation: state.salesOrganisation,
+          salesOrgConfig: state.salesOrgConfig,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isDetailsLoading: false,
+              ),
+            );
+          },
+          (orderHistory) {
+            emit(
+              state.copyWith(
+                orderHistory: state.orderHistory.copyWith(
+                  orderBasicInformation: orderHistory.orderBasicInformation,
+                ),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isDetailsLoading: false,
               ),
             );
           },
