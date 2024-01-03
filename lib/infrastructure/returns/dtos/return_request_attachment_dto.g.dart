@@ -9,17 +9,13 @@ part of 'return_request_attachment_dto.dart';
 _$_ReturnRequestAttachmentDto _$$_ReturnRequestAttachmentDtoFromJson(
         Map<String, dynamic> json) =>
     _$_ReturnRequestAttachmentDto(
-      path: json['path'] as String? ?? '',
-      id: json['id'] as int? ?? 0,
-      name: json['name'] as String? ?? '',
-      size: json['size'] as int? ?? 0,
+      path: json['url'] as String? ?? '',
+      name: json['filename'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ReturnRequestAttachmentDtoToJson(
         _$_ReturnRequestAttachmentDto instance) =>
     <String, dynamic>{
-      'path': instance.path,
-      'id': instance.id,
-      'name': instance.name,
-      'size': instance.size,
+      'url': instance.path,
+      'filename': instance.name,
     };

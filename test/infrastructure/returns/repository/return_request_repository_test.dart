@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:dio/dio.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -387,9 +388,8 @@ void main() {
             (_) async => ReturnRequestAttachment.empty(),
           );
           final result = await repository.uploadFiles(
-            assignmentNumber: 'fake-assignment_number',
             files: [],
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           );
           expect(result.isRight(), true);
         },
@@ -403,9 +403,8 @@ void main() {
             (_) => errorMock,
           );
           final result = await repository.uploadFiles(
-            assignmentNumber: 'fake-assignment_number',
             files: [],
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           );
           expect(result.isLeft(), true);
         },
@@ -416,9 +415,8 @@ void main() {
         () async {
           when(() => configMock.appFlavor).thenReturn(Flavor.uat);
           final result = await repository.uploadFiles(
-            assignmentNumber: 'fake-assignment_number',
             files: List.generate(11, (index) => fakeFile),
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           );
           expect(result.isLeft(), true);
         },
@@ -429,9 +427,8 @@ void main() {
         () async {
           when(() => configMock.appFlavor).thenReturn(Flavor.uat);
           final result = await repository.uploadFiles(
-            assignmentNumber: 'fake-assignment_number',
             files: [fakeBigFile],
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           );
           expect(result.isLeft(), true);
         },
@@ -441,19 +438,24 @@ void main() {
         'Upload Files Success Remote',
         () async {
           when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          final file = MultipartFile.fromBytes([1, 2, 3]);
+           when(
+            () => fileSystemHelperMock.toMultipartFile(
+              name: any(named: 'name'),
+              path: any(named: 'path'),
+            ),
+          ).thenReturn(file);
           when(
             () => remoteDataSourceMock.uploadFile(
-              folder: 'fake-folder',
-              file: fakeFile,
-              salesOrg: fakeMYSalesOrg.getOrCrash(),
+              file: file,
+              userName: fakeClient.username.getOrCrash(),
             ),
           ).thenAnswer(
             (_) async => ReturnRequestAttachment.empty(),
           );
           final result = await repository.uploadFiles(
-            assignmentNumber: 'fake-folder',
             files: [fakeFile],
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           );
           expect(result.isRight(), true);
         },
@@ -463,19 +465,24 @@ void main() {
         'Upload Files Failure Remote',
         () async {
           when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+          final file = MultipartFile.fromBytes([1, 2, 3]);
+          when(
+            () => fileSystemHelperMock.toMultipartFile(
+              name: any(named: 'name'),
+              path: any(named: 'path'),
+            ),
+          ).thenReturn(file);
           when(
             () => remoteDataSourceMock.uploadFile(
-              folder: 'fake-folder',
-              file: fakeFile,
-              salesOrg: fakeMYSalesOrg.getOrCrash(),
+              file: file,
+              userName: fakeClient.username.getOrCrash(),
             ),
           ).thenThrow(
             (_) => errorMock,
           );
           final result = await repository.uploadFiles(
-            assignmentNumber: 'fake-folder',
             files: [fakeFile],
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           );
           expect(result.isLeft(), true);
         },

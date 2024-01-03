@@ -37,6 +37,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -930,6 +931,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeSalesOrganisationConfigs,
+          user: fakeClientUser,
         ),
       );
       when(() => newRequestBlocMock.state).thenReturn(
@@ -1006,7 +1008,7 @@ void main() {
             returnUuid: fakeReturnMaterial.uuid,
             assignmentNumber: fakeReturnMaterial.assignmentNumber,
             uploadOptionType: UploadOptionType.file,
-            salesOrg: fakeEmptySalesConfigs.salesOrg,
+            user: fakeClientUser,
           ),
         ),
       ).called(1);
@@ -1017,6 +1019,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeSalesOrganisationConfigs,
+          user: fakeClientUser,
         ),
       );
       when(() => newRequestBlocMock.state).thenReturn(
@@ -1084,7 +1087,7 @@ void main() {
             returnUuid: fakeReturnMaterial.uuid,
             assignmentNumber: fakeReturnMaterial.assignmentNumber,
             uploadOptionType: UploadOptionType.gallery,
-            salesOrg: fakeEmptySalesConfigs.salesOrg,
+            user: fakeClientUser,
           ),
         ),
       ).called(1);
@@ -1200,7 +1203,6 @@ void main() {
     });
     testWidgets(' => attachment Delete test', (WidgetTester tester) async {
       final attachment = ReturnRequestAttachment(
-        id: 1,
         name: 'fake-file',
         path: 'fake-path',
         size: FileSize(1),

@@ -14,7 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../../common_mock_data/user_mock.dart';
 
 class ReturnRequestRepositoryMock extends Mock
     implements ReturnRequestRepository {}
@@ -71,7 +71,7 @@ void main() {
             assignmentNumber: fakeAssignmentNumber,
             returnUuid: fakeReturnUUID,
             uploadOptionType: fakeUploadOptionType,
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           ),
         ),
         setUp: () {
@@ -91,9 +91,8 @@ void main() {
           );
           when(
             () => returnRequestRepository.uploadFiles(
-              assignmentNumber: fakeAssignmentNumber,
               files: [fakePlatformFile],
-              salesOrg: fakeMYSalesOrg,
+              user: fakeClientUser,
             ),
           ).thenAnswer(
             (invocation) async => Right(fakeListFile),
@@ -122,7 +121,7 @@ void main() {
             assignmentNumber: fakeAssignmentNumber,
             returnUuid: fakeReturnUUID,
             uploadOptionType: fakeUploadOptionType,
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           ),
         ),
         setUp: () {
@@ -157,7 +156,7 @@ void main() {
             assignmentNumber: fakeAssignmentNumber,
             returnUuid: fakeReturnUUID,
             uploadOptionType: fakeUploadOptionType,
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           ),
         ),
         setUp: () {
@@ -177,9 +176,8 @@ void main() {
           );
           when(
             () => returnRequestRepository.uploadFiles(
-              assignmentNumber: fakeAssignmentNumber,
               files: [fakePlatformFile],
-              salesOrg: fakeMYSalesOrg,
+              user: fakeClientUser,
             ),
           ).thenAnswer(
             (invocation) async => const Left(fakeApiFailure),
@@ -208,7 +206,7 @@ void main() {
             assignmentNumber: fakeAssignmentNumber,
             returnUuid: fakeReturnUUID,
             uploadOptionType: fakeUploadOptionType,
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           ),
         ),
         setUp: () {
@@ -251,7 +249,7 @@ void main() {
             assignmentNumber: fakeAssignmentNumber,
             returnUuid: fakeReturnUUID,
             uploadOptionType: fakeUploadOptionType,
-            salesOrg: fakeMYSalesOrg,
+            user: fakeClientUser,
           ),
         ),
         setUp: () {

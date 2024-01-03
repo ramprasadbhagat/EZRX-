@@ -21,14 +21,10 @@ ReturnRequestAttachmentDto _$ReturnRequestAttachmentDtoFromJson(
 
 /// @nodoc
 mixin _$ReturnRequestAttachmentDto {
-  @JsonKey(name: 'path', defaultValue: '')
+  @JsonKey(name: 'url', defaultValue: '')
   String get path => throw _privateConstructorUsedError;
-  @JsonKey(name: 'id', defaultValue: 0)
-  int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'name', defaultValue: '')
+  @JsonKey(name: 'filename', defaultValue: '')
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'size', defaultValue: 0)
-  int get size => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,10 +40,8 @@ abstract class $ReturnRequestAttachmentDtoCopyWith<$Res> {
           ReturnRequestAttachmentDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'path', defaultValue: '') String path,
-      @JsonKey(name: 'id', defaultValue: 0) int id,
-      @JsonKey(name: 'name', defaultValue: '') String name,
-      @JsonKey(name: 'size', defaultValue: 0) int size});
+      {@JsonKey(name: 'url', defaultValue: '') String path,
+      @JsonKey(name: 'filename', defaultValue: '') String name});
 }
 
 /// @nodoc
@@ -65,27 +59,17 @@ class _$ReturnRequestAttachmentDtoCopyWithImpl<$Res,
   @override
   $Res call({
     Object? path = null,
-    Object? id = null,
     Object? name = null,
-    Object? size = null,
   }) {
     return _then(_value.copyWith(
       path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      size: null == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 }
@@ -100,10 +84,8 @@ abstract class _$$_ReturnRequestAttachmentDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'path', defaultValue: '') String path,
-      @JsonKey(name: 'id', defaultValue: 0) int id,
-      @JsonKey(name: 'name', defaultValue: '') String name,
-      @JsonKey(name: 'size', defaultValue: 0) int size});
+      {@JsonKey(name: 'url', defaultValue: '') String path,
+      @JsonKey(name: 'filename', defaultValue: '') String name});
 }
 
 /// @nodoc
@@ -120,27 +102,17 @@ class __$$_ReturnRequestAttachmentDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? path = null,
-    Object? id = null,
     Object? name = null,
-    Object? size = null,
   }) {
     return _then(_$_ReturnRequestAttachmentDto(
       path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      size: null == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -149,31 +121,23 @@ class __$$_ReturnRequestAttachmentDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ReturnRequestAttachmentDto extends _ReturnRequestAttachmentDto {
   const _$_ReturnRequestAttachmentDto(
-      {@JsonKey(name: 'path', defaultValue: '') required this.path,
-      @JsonKey(name: 'id', defaultValue: 0) required this.id,
-      @JsonKey(name: 'name', defaultValue: '') required this.name,
-      @JsonKey(name: 'size', defaultValue: 0) required this.size})
+      {@JsonKey(name: 'url', defaultValue: '') required this.path,
+      @JsonKey(name: 'filename', defaultValue: '') required this.name})
       : super._();
 
   factory _$_ReturnRequestAttachmentDto.fromJson(Map<String, dynamic> json) =>
       _$$_ReturnRequestAttachmentDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'path', defaultValue: '')
+  @JsonKey(name: 'url', defaultValue: '')
   final String path;
   @override
-  @JsonKey(name: 'id', defaultValue: 0)
-  final int id;
-  @override
-  @JsonKey(name: 'name', defaultValue: '')
+  @JsonKey(name: 'filename', defaultValue: '')
   final String name;
-  @override
-  @JsonKey(name: 'size', defaultValue: 0)
-  final int size;
 
   @override
   String toString() {
-    return 'ReturnRequestAttachmentDto(path: $path, id: $id, name: $name, size: $size)';
+    return 'ReturnRequestAttachmentDto(path: $path, name: $name)';
   }
 
   @override
@@ -182,14 +146,12 @@ class _$_ReturnRequestAttachmentDto extends _ReturnRequestAttachmentDto {
         (other.runtimeType == runtimeType &&
             other is _$_ReturnRequestAttachmentDto &&
             (identical(other.path, path) || other.path == path) &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.size, size) || other.size == size));
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, path, id, name, size);
+  int get hashCode => Object.hash(runtimeType, path, name);
 
   @JsonKey(ignore: true)
   @override
@@ -208,28 +170,20 @@ class _$_ReturnRequestAttachmentDto extends _ReturnRequestAttachmentDto {
 
 abstract class _ReturnRequestAttachmentDto extends ReturnRequestAttachmentDto {
   const factory _ReturnRequestAttachmentDto(
-          {@JsonKey(name: 'path', defaultValue: '') required final String path,
-          @JsonKey(name: 'id', defaultValue: 0) required final int id,
-          @JsonKey(name: 'name', defaultValue: '') required final String name,
-          @JsonKey(name: 'size', defaultValue: 0) required final int size}) =
-      _$_ReturnRequestAttachmentDto;
+      {@JsonKey(name: 'url', defaultValue: '') required final String path,
+      @JsonKey(name: 'filename', defaultValue: '')
+      required final String name}) = _$_ReturnRequestAttachmentDto;
   const _ReturnRequestAttachmentDto._() : super._();
 
   factory _ReturnRequestAttachmentDto.fromJson(Map<String, dynamic> json) =
       _$_ReturnRequestAttachmentDto.fromJson;
 
   @override
-  @JsonKey(name: 'path', defaultValue: '')
+  @JsonKey(name: 'url', defaultValue: '')
   String get path;
   @override
-  @JsonKey(name: 'id', defaultValue: 0)
-  int get id;
-  @override
-  @JsonKey(name: 'name', defaultValue: '')
+  @JsonKey(name: 'filename', defaultValue: '')
   String get name;
-  @override
-  @JsonKey(name: 'size', defaultValue: 0)
-  int get size;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnRequestAttachmentDtoCopyWith<_$_ReturnRequestAttachmentDto>

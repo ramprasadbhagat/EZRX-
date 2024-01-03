@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -23,8 +23,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:open_file_safe/open_file_safe.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class FileMock extends Mock implements File {}
 
@@ -617,7 +616,7 @@ void main() {
         files: [
           fakePlatformFile,
         ],
-        salesOrg: fakeSalesOrg,
+        user: fakeClientUser,
       );
       expect(
         result.isRight(),
@@ -640,7 +639,7 @@ void main() {
         files: [
           PlatformFile(name: fakeFileName, size: 0),
         ],
-        salesOrg: fakeSalesOrg,
+        user: fakeClientUser,
       );
       expect(
         result.isLeft(),
@@ -651,18 +650,22 @@ void main() {
 
     test('uploadFiles remote success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      final file = MultipartFile.fromBytes([1, 2, 3]);
+      when(
+        () => fileSystemHelperMock.toMultipartFile(
+          name: any(named: 'name'),
+          path: any(named: 'path'),
+        ),
+      ).thenReturn(file);
       when(
         () => poDocumentRemoteDataSourceMock.fileUpload(
-          folder: '',
-          file: fakePlatformFile,
-          salesOrg: fakeSalesOrg.getOrCrash(),
+          file: file,
+          userName: fakeClient.username.getOrCrash(),
         ),
-      ).thenAnswer(
-        (invocation) async => fakePODocuments,
-      );
+      ).thenAnswer((_) async => fakePODocuments);
       final result = await poAttachmentRepository.uploadFiles(
         files: [fakePlatformFile],
-        salesOrg: fakeSalesOrg,
+        user: fakeClientUser,
       );
       expect(
         result.isRight(),
@@ -678,18 +681,25 @@ void main() {
 
     test('uploadFiles remote fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      final file = MultipartFile.fromBytes([1, 2, 3]);
+      when(
+        () => fileSystemHelperMock.toMultipartFile(
+          name: any(named: 'name'),
+          path: any(named: 'path'),
+        ),
+      ).thenReturn(file);
       when(
         () => poDocumentRemoteDataSourceMock.fileUpload(
-          folder: '',
-          file: fakePlatformFile,
-          salesOrg: fakeSalesOrg.getOrCrash(),
+          file: file,
+          userName: fakeClient.username.getOrCrash(),
         ),
       ).thenThrow(fakeException);
+
       final result = await poAttachmentRepository.uploadFiles(
         files: [
           fakePlatformFile,
         ],
-        salesOrg: fakeSalesOrg,
+        user: fakeClientUser,
       );
       expect(
         result.isLeft(),
@@ -707,7 +717,7 @@ void main() {
             size: (20 * pow(1024, 2) + 1).toInt(),
           ),
         ],
-        salesOrg: fakeSalesOrg,
+        user: fakeClientUser,
       );
       expect(
         result.isLeft(),

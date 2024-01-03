@@ -12,7 +12,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:open_file_safe/open_file_safe.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class PoAttachmentRepositoryMock extends Mock
     implements PoAttachmentRepository {}
@@ -296,7 +296,7 @@ void main() {
           PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
             uploadOptionType: UploadOptionType.file,
-            salesOrg: fakeSalesOrg,
+            user: fakeClientUser,
           ),
         ),
         expect: () => [
@@ -343,7 +343,7 @@ void main() {
           PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
             uploadOptionType: UploadOptionType.file,
-            salesOrg: fakeSalesOrg,
+            user: fakeClientUser,
           ),
         ),
         expect: () => [
@@ -388,7 +388,7 @@ void main() {
           PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
             uploadOptionType: UploadOptionType.file,
-            salesOrg: fakeSalesOrg,
+            user: fakeClientUser,
           ),
         ),
         expect: () => [
@@ -413,7 +413,7 @@ void main() {
                   size: 0,
                 ),
               ],
-              salesOrg: fakeSalesOrg,
+              user: fakeClientUser,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -450,7 +450,7 @@ void main() {
           PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
             uploadOptionType: UploadOptionType.file,
-            salesOrg: fakeSalesOrg,
+            user: fakeClientUser,
           ),
         ),
         expect: () => [
@@ -480,7 +480,7 @@ void main() {
                   size: 0,
                 ),
               ],
-              salesOrg: fakeSalesOrg,
+              user: fakeClientUser,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -517,7 +517,7 @@ void main() {
           PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
             uploadOptionType: UploadOptionType.file,
-            salesOrg: fakeSalesOrg,
+            user: fakeClientUser,
           ),
         ),
         expect: () => [

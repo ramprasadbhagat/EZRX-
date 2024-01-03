@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ReturnRequestAttachment {
-  int get id => throw _privateConstructorUsedError;
   String get path => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   FileSize get size => throw _privateConstructorUsedError;
@@ -32,7 +31,7 @@ abstract class $ReturnRequestAttachmentCopyWith<$Res> {
           $Res Function(ReturnRequestAttachment) then) =
       _$ReturnRequestAttachmentCopyWithImpl<$Res, ReturnRequestAttachment>;
   @useResult
-  $Res call({int id, String path, String name, FileSize size});
+  $Res call({String path, String name, FileSize size});
 }
 
 /// @nodoc
@@ -49,16 +48,11 @@ class _$ReturnRequestAttachmentCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? path = null,
     Object? name = null,
     Object? size = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
@@ -83,7 +77,7 @@ abstract class _$$_ReturnRequestAttachmentCopyWith<$Res>
       __$$_ReturnRequestAttachmentCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String path, String name, FileSize size});
+  $Res call({String path, String name, FileSize size});
 }
 
 /// @nodoc
@@ -98,16 +92,11 @@ class __$$_ReturnRequestAttachmentCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? path = null,
     Object? name = null,
     Object? size = null,
   }) {
     return _then(_$_ReturnRequestAttachment(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
@@ -128,14 +117,9 @@ class __$$_ReturnRequestAttachmentCopyWithImpl<$Res>
 
 class _$_ReturnRequestAttachment extends _ReturnRequestAttachment {
   _$_ReturnRequestAttachment(
-      {required this.id,
-      required this.path,
-      required this.name,
-      required this.size})
+      {required this.path, required this.name, required this.size})
       : super._();
 
-  @override
-  final int id;
   @override
   final String path;
   @override
@@ -145,7 +129,7 @@ class _$_ReturnRequestAttachment extends _ReturnRequestAttachment {
 
   @override
   String toString() {
-    return 'ReturnRequestAttachment(id: $id, path: $path, name: $name, size: $size)';
+    return 'ReturnRequestAttachment(path: $path, name: $name, size: $size)';
   }
 
   @override
@@ -153,14 +137,13 @@ class _$_ReturnRequestAttachment extends _ReturnRequestAttachment {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReturnRequestAttachment &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.path, path) || other.path == path) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.size, size) || other.size == size));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, path, name, size);
+  int get hashCode => Object.hash(runtimeType, path, name, size);
 
   @JsonKey(ignore: true)
   @override
@@ -173,14 +156,11 @@ class _$_ReturnRequestAttachment extends _ReturnRequestAttachment {
 
 abstract class _ReturnRequestAttachment extends ReturnRequestAttachment {
   factory _ReturnRequestAttachment(
-      {required final int id,
-      required final String path,
+      {required final String path,
       required final String name,
       required final FileSize size}) = _$_ReturnRequestAttachment;
   _ReturnRequestAttachment._() : super._();
 
-  @override
-  int get id;
   @override
   String get path;
   @override

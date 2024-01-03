@@ -9,7 +9,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_query.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
-import 'package:file_picker/file_picker.dart';
 
 class PoDocumentRemoteDataSource {
   final HttpService httpService;
@@ -56,54 +55,21 @@ class PoDocumentRemoteDataSource {
   }
 
   Future<PoDocuments> fileUpload({
-    required String folder,
-    required PlatformFile file,
-    required String salesOrg,
+    required MultipartFile file,
+    required String userName,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = queryMutation.getAddFileRequest();
-      final variables = {
-        'folder': folder,
-        'req': [
-          {
-            'id': 10,
-            'file': null,
-          },
-        ],
-      };
-      final operations = {
-        'query': queryData,
-        'variables': variables,
-      };
-
-      final map = {
-        '0': ['variables.req.0.file'],
-      };
-
-      final fileFieldKeys = map.keys.toList();
-      final fileName = file.path!.split('/').last;
-      final data = {
-        fileFieldKeys.first: await MultipartFile.fromFile(
-          file.path!,
-          filename: fileName,
-        ),
-        'operations': jsonEncode(operations),
-        'map': jsonEncode(map),
-      };
-      final response = await httpService.request(
+      final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}upload-ereturn',
-        data: FormData.fromMap(data),
-        headers: {'salesorg': salesOrg},
+        url: '${config.urlConstants}po-upload',
+        data: FormData.fromMap({
+          'files': file,
+          'userName': userName,
+        }),
       );
-      _fileUploadExceptionChecker(
-        res: response,
-      );
-      final uploadedFiles = response.data['data']['addRequestFileUpload'];
-      final newUploadedFiles =
-          PoDocumentsDto.fromJson(uploadedFiles[0]).toDomain();
+      _fileUploadExceptionChecker(res: res);
 
-      return newUploadedFiles.copyWith(name: fileName);
+      return PoDocumentsDto.fromJson(res.data).toDomain();
     });
   }
 

@@ -201,7 +201,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
                 .deliveryInfoData
                 .poDocuments,
             uploadOptionType: uploadOptionType,
-            salesOrg: context.read<EligibilityBloc>().state.salesOrg,
+            user: context.read<EligibilityBloc>().state.user,
           ),
         );
     context.router.pop();

@@ -7,10 +7,10 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_material_list_dto.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_request_attachment_dto.dart';
 
 class ReturnRequestRemoteDataSource {
@@ -82,62 +82,26 @@ class ReturnRequestRemoteDataSource {
   }
 
   Future<ReturnRequestAttachment> uploadFile({
-    required String folder,
-    required PlatformFile file,
-    required String salesOrg,
+    required MultipartFile file,
+    required String userName,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = query.addFileRequest();
-
-      final variables = {
-        'folder': folder,
-        'req': [
-          {
-            'id': 10,
-            'file': null,
-          },
-        ],
-      };
-
-      final operations = {
-        'query': queryData,
-        'variables': variables,
-      };
-
-      final map = {
-        '0': ['variables.req.0.file'],
-      };
-
-      final fileFieldKeys = map.keys.toList();
-      final fileName = file.path!.split('/').last;
-      final data = {
-        fileFieldKeys.first: await MultipartFile.fromFile(
-          file.path!,
-          filename: fileName,
-        ),
-        'operations': jsonEncode(operations),
-        'map': jsonEncode(map),
-      };
       final response = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}upload-ereturn',
-        data: FormData.fromMap(data),
-        headers: {'salesorg': salesOrg},
+        url: '${config.urlConstants}po-upload',
+        data: FormData.fromMap({
+          'files': file,
+          'userName': userName,
+        }),
       );
 
-      _exceptionChecker(response: response, property: 'addRequestFileUpload');
+      _fileUploadExceptionChecker(
+        res: response,
+      );
 
-      final uploadedFiles = response.data['data']['addRequestFileUpload'];
-
-      return uploadedFiles.isNotEmpty
-          ? ReturnRequestAttachmentDto.fromJson(
-              {
-                ...uploadedFiles[0],
-                'name': fileName,
-                'size': file.size,
-              },
-            ).toDomain()
-          : ReturnRequestAttachment.empty();
+      return ReturnRequestAttachmentDto.fromJson(response.data)
+          .toDomain()
+          .copyWith(size: FileSize(file.length));
     });
   }
 
@@ -230,6 +194,17 @@ class ReturnRequestRemoteDataSource {
 
   void _fileDownloadExceptionChecker({required Response<dynamic> res}) {
     if (res.data is List && res.data.isEmpty) {
+      throw ServerException(message: res.data['errors'][0]['message']);
+    } else if (res.statusCode != 200) {
+      throw ServerException(
+        code: res.statusCode ?? 0,
+        message: res.statusMessage ?? '',
+      );
+    }
+  }
+
+  void _fileUploadExceptionChecker({required Response<dynamic> res}) {
+    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

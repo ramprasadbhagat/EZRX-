@@ -10,18 +10,15 @@ class ReturnRequestAttachmentDto with _$ReturnRequestAttachmentDto {
   const ReturnRequestAttachmentDto._();
 
   const factory ReturnRequestAttachmentDto({
-    @JsonKey(name: 'path', defaultValue: '') required String path,
-    @JsonKey(name: 'id', defaultValue: 0) required int id,
-    @JsonKey(name: 'name', defaultValue: '') required String name,
-    @JsonKey(name: 'size', defaultValue: 0) required int size,
+    @JsonKey(name: 'url', defaultValue: '') required String path,
+    @JsonKey(name: 'filename', defaultValue: '') required String name,
   }) = _ReturnRequestAttachmentDto;
 
   ReturnRequestAttachment toDomain() {
     return ReturnRequestAttachment(
       path: path,
-      id: id,
       name: name,
-      size: FileSize(size),
+      size: FileSize(0),
     );
   }
 

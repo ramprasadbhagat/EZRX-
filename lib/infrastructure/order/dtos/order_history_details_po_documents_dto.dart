@@ -28,7 +28,7 @@ class PoDocumentsDto with _$PoDocumentsDto {
 
   PoDocuments toDomain() {
     return PoDocuments(
-      url: path,
+      url: url,
       name: name,
     );
   }

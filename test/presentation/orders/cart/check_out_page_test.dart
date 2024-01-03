@@ -1287,6 +1287,7 @@ void main() {
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeSalesOrgConfigShowPOAttachmentRequired,
             salesOrganisation: fakeMYSalesOrganisation,
+            user: fakeClientUser,
           ),
         );
 
@@ -1355,7 +1356,7 @@ void main() {
                 )
               ],
               uploadOptionType: UploadOptionType.gallery,
-              salesOrg: fakeMYSalesOrg,
+              user: fakeClientUser,
             ),
           ),
         ).called(1);
@@ -1374,7 +1375,7 @@ void main() {
                 )
               ],
               uploadOptionType: UploadOptionType.file,
-              salesOrg: fakeMYSalesOrg,
+              user: fakeClientUser,
             ),
           ),
         ).called(1);

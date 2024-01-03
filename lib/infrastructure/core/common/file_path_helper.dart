@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:open_file_safe/open_file_safe.dart';
@@ -43,4 +44,13 @@ class FileSystemHelper {
 
     return await OpenFile.open(openFile.path);
   }
+
+  MultipartFile toMultipartFile({
+    required String name,
+    required String path,
+  }) =>
+      MultipartFile.fromFileSync(
+        path,
+        filename: name,
+      );
 }

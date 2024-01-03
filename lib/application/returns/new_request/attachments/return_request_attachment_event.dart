@@ -7,7 +7,7 @@ class ReturnRequestAttachmentEvent with _$ReturnRequestAttachmentEvent {
     required String assignmentNumber,
     required String returnUuid,
     required UploadOptionType uploadOptionType,
-    required SalesOrg salesOrg,
+    required User user,
   }) = _UpLoadFile;
   const factory ReturnRequestAttachmentEvent.deleteFile({
     required ReturnRequestAttachment file,

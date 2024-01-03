@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
@@ -161,9 +161,8 @@ class ReturnRequestRepository extends IReturnRequestRepository {
 
   @override
   Future<Either<ApiFailure, List<ReturnRequestAttachment>>> uploadFiles({
-    required String assignmentNumber,
     required List<PlatformFile> files,
-    required SalesOrg salesOrg,
+    required User user,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -193,9 +192,11 @@ class ReturnRequestRepository extends IReturnRequestRepository {
       final upLoadedFiles = Future.wait(
         files.map(
           (file) async => await remoteDataSource.uploadFile(
-            folder: assignmentNumber,
-            file: file,
-            salesOrg: salesOrg.getOrCrash(),
+            file: fileSystemHelper.toMultipartFile(
+              name: file.name,
+              path: file.path ?? '',
+            ),
+            userName: user.username.getOrCrash(),
           ),
         ),
       );
