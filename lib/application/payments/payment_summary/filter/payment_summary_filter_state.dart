@@ -3,6 +3,7 @@ part of 'payment_summary_filter_bloc.dart';
 @freezed
 class PaymentSummaryFilterState with _$PaymentSummaryFilterState {
   const PaymentSummaryFilterState._();
+
   const factory PaymentSummaryFilterState({
     required SalesOrg salesOrg,
     required PaymentSummaryFilter filter,
@@ -26,6 +27,12 @@ class PaymentSummaryFilterState with _$PaymentSummaryFilterState {
       statusList = <FilterStatus>[
         FilterStatus('Pending'),
         FilterStatus('Processed'),
+      ];
+    }
+    if (salesOrg.isPH) {
+      statusList = <FilterStatus>[
+        ...statusList,
+        FilterStatus('Pending'),
       ];
     }
     if (salesOrg.isID) {

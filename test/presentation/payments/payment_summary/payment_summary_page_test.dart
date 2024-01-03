@@ -1122,5 +1122,48 @@ void main() {
         ),
       ).called(1);
     });
+
+    testWidgets('Payment Summary Filter Status Initial - For PH',
+        (tester) async {
+      when(() => paymentSummaryFilterBloc.state).thenReturn(
+        PaymentSummaryFilterState.initial().copyWith(
+          salesOrg: fakePHSalesOrg,
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryPage),
+        findsOneWidget,
+      );
+      await tester.tap(find.byKey(WidgetKeys.paymentSummaryFilterIcon));
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Expired')),
+        findsNothing,
+      );
+    });
   });
 }
