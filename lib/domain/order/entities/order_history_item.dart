@@ -154,7 +154,9 @@ class OrderHistoryItem with _$OrderHistoryItem {
   }
 
   bool showMaterialListPrice({required SalesOrganisationConfigs config}) =>
-      originPrice > unitPrice && !hidePrice && config.enableListPrice;
+      getListPrice > unitPrice && !hidePrice && config.enableListPrice;
+
+  double get getListPrice => originPrice - tax;
 
   bool get batchNumHasData => batch.isValid() || expiryDate.isNotEmpty;
 

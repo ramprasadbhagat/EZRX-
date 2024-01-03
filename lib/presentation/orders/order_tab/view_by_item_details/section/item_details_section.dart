@@ -55,7 +55,7 @@ class ItemDetailsSection extends StatelessWidget {
                         PriceComponent(
                           key: WidgetKeys.materialListPriceStrikeThrough,
                           salesOrgConfig: eligibilityState.salesOrgConfigs,
-                          price: orderHistoryItem.originPrice.toString(),
+                          price: orderHistoryItem.getListPrice.toString(),
                           type: PriceStyle.materialListPriceStrikeThrough,
                         ),
                       OrderItemPrice(

@@ -130,4 +130,11 @@ class Price with _$Price {
           counterOfferDetails.discountOverridePercentage.isValid(),
     );
   }
+
+  double get getListPrice {
+    final finalPriceValue = finalPrice.getOrDefaultValue(0);
+    final listPriceValue = lastPrice.getOrDefaultValue(0);
+
+    return finalPriceValue > listPriceValue ? finalPriceValue : listPriceValue;
+  }
 }

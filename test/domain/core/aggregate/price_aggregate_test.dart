@@ -176,6 +176,46 @@ void main() {
     });
 
     test(
+        'toSubmitMaterialInfo from PriceAggregate should return mrp value as list price if list price is greater than final price',
+        () {
+      const finalPrice = 88.0;
+      const listPrice = 100.0;
+
+      final customPriceAggregate = emptyPriceAggregate.copyWith(
+        price: Price.empty().copyWith(
+          finalPrice: MaterialPrice(finalPrice),
+          lastPrice: MaterialPrice(listPrice),
+        ),
+      );
+      final submitMaterialInfo = customPriceAggregate.toSubmitMaterialInfo();
+
+      expect(
+        submitMaterialInfo.mrp,
+        listPrice,
+      );
+    });
+
+    test(
+        'toSubmitMaterialInfo from PriceAggregate should return mrp value as final price if final price is greater than list price',
+        () {
+      const finalPrice = 88.0;
+      const listPrice = 70.0;
+
+      final customPriceAggregate = emptyPriceAggregate.copyWith(
+        price: Price.empty().copyWith(
+          finalPrice: MaterialPrice(finalPrice),
+          lastPrice: MaterialPrice(listPrice),
+        ),
+      );
+      final submitMaterialInfo = customPriceAggregate.toSubmitMaterialInfo();
+
+      expect(
+        submitMaterialInfo.mrp,
+        finalPrice,
+      );
+    });
+
+    test(
       'vatCalculation from PriceAggregate',
       () {
         expect(emptyPriceAggregate.vatCalculation(100), 100);

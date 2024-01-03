@@ -117,9 +117,8 @@ class _OrderItemTile extends StatelessWidget {
                 if (orderItem.showMaterialListPrice)
                   PriceComponent(
                     key: WidgetKeys.materialListPriceStrikeThrough,
-                    salesOrgConfig:
-                        context.read<EligibilityBloc>().state.salesOrgConfigs,
-                    price: orderItem.originPrice.toString(),
+                    salesOrgConfig: salesOrgConfig,
+                    price: orderItem.getListPrice.toString(),
                     type: PriceStyle.materialListPriceStrikeThrough,
                   ),
                 OrderItemPrice(
