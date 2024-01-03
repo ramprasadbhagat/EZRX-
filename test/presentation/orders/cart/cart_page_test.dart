@@ -3117,6 +3117,65 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
       });
+
+      testWidgets(
+        'Show tax details on material level when displayItemTaxBreakdown is enabled and Product have Special Scheme tax classification',
+        (tester) async {
+          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+            displayItemTaxBreakdown: true,
+            currency: Currency('vnd'),
+            salesOrg: fakeVNSalesOrg,
+          );
+
+          final cartState = CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  type: MaterialInfoType('material'),
+                  materialNumber: MaterialNumber('123456789'),
+                  quantity: MaterialQty(1),
+                  taxClassification:
+                      MaterialTaxClassification('Special Scheme'),
+                  tax: 10,
+                ),
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(234.50),
+                ),
+                salesOrgConfig: salesOrgConfig,
+              ),
+            ],
+          );
+
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: salesOrgConfig,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => cartBloc.state).thenReturn(
+            cartState,
+          );
+
+          await tester.pumpWidget(getWidget());
+
+          await tester.pumpAndSettle();
+
+          final taxLevelFinder = find.text('Total with tax:');
+          expect(taxLevelFinder, findsOneWidget);
+          final taxPercentageFinder = find.text('(10% tax)');
+
+          final listPriceWithTax = cartState
+              .cartProducts.first.finalPriceTotalWithTax
+              .toStringAsFixed(2);
+          expect(
+            find.text(
+              'VND $listPriceWithTax',
+              findRichText: true,
+            ),
+            findsOneWidget,
+          );
+        },
+      );
     },
   );
 }

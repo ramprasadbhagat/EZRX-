@@ -1668,6 +1668,7 @@ void main() {
               principalCode: PrincipalCode('100822'),
             ),
             tax: 5.0,
+            taxClassification: MaterialTaxClassification('noTax'),
           ),
           salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
             displayItemTaxBreakdown: true,

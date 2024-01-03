@@ -66,7 +66,7 @@ class ComboMaterialItem with _$ComboMaterialItem {
 
   double get itemTaxPercent {
     if (!salesOrgConfig.displayItemTaxBreakdown ||
-        !materialInfo.taxClassification.isFullTax) {
+        materialInfo.taxClassification.isNoTax) {
       return 0.0;
     }
     final salesOrg = salesOrgConfig.salesOrg;

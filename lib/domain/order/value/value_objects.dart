@@ -285,18 +285,18 @@ class MaterialTaxClassification extends ValueObject<String> {
   }
 
   const MaterialTaxClassification._(this.value);
+  // In Tax classification we are only holding noTax value and for
+  // other classifications we are checking [!isNoTax] which is considered
+  // as Full Tax and Special Scheme
 
   bool get isNoTax {
     return materialTaxClassificationIsNoTax(value.getOrElse(() => ''));
   }
 
-  bool get isExempt {
-    return materialTaxClassificationIsExempt(value.getOrElse(() => ''));
-  }
-
-  bool get isFullTax {
-    return materialTaxClassificationIsFullTax(value.getOrElse(() => ''));
-  }
+  // Need to revisit once Tax Exempt User story is ready
+  // bool get isExempt {
+  //   return materialTaxClassificationIsExempt(value.getOrElse(() => ''));
+  // }
 }
 
 class SpecialInstructions extends ValueObject<String> {
@@ -876,7 +876,8 @@ class OrderStepValue extends ValueObject<String> {
   String get displaySAPOrderStatus =>
       getOrderSAPStatus(value.getOrElse(() => ''));
 
-  String get deliveryDateTitle => getDeliveryDateTitle(value.getOrElse(() => ''));
+  String get deliveryDateTitle =>
+      getDeliveryDateTitle(value.getOrElse(() => ''));
 
   bool get fetchZyllemStatusesNeeded =>
       checkIsEligibleForFetchZyllemStatues(value.getOrElse(() => ''));

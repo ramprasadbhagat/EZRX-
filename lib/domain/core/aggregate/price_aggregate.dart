@@ -161,7 +161,7 @@ class PriceAggregate with _$PriceAggregate {
     // Non VN VAT
     if (salesOrgConfig.enableVat &&
         salesOrgConfig.enableTaxClassification &&
-        materialInfo.taxClassification.isFullTax) {
+        !materialInfo.taxClassification.isNoTax) {
       return value + (value * (salesOrgConfig.vatValue / 100));
     }
 
@@ -265,7 +265,7 @@ class PriceAggregate with _$PriceAggregate {
     // Non VN VAT
     if (salesOrgConfig.enableVat &&
         salesOrgConfig.enableTaxClassification &&
-        materialInfo.taxClassification.isFullTax) {
+        !materialInfo.taxClassification.isNoTax) {
       return value + (value * (salesOrgConfig.vatValue / 100));
     }
 
@@ -306,7 +306,7 @@ class PriceAggregate with _$PriceAggregate {
 
   double get itemTaxPercent {
     if (!salesOrgConfig.displayItemTaxBreakdown ||
-        !materialInfo.taxClassification.isFullTax) {
+        materialInfo.taxClassification.isNoTax) {
       return 0.0;
     }
     final salesOrg = salesOrgConfig.salesOrg;
@@ -346,7 +346,7 @@ class PriceAggregate with _$PriceAggregate {
       )
       .rate;
 
-  double getNewPrice() => materialInfo.taxClassification.isExempt
+  double getNewPrice() => !materialInfo.taxClassification.isNoTax
       ? price.finalPrice.getOrCrash()
       : ((price.finalPrice.getOrCrash()) /
           (1 +

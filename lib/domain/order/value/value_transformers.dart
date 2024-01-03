@@ -56,14 +56,10 @@ bool materialBundleTypeIsPercent(String bundleType) {
 bool materialTaxClassificationIsNoTax(String taxClassification) {
   return taxClassification == 'noTax';
 }
-
-bool materialTaxClassificationIsExempt(String taxClassification) {
-  return taxClassification == 'Exempt';
-}
-
-bool materialTaxClassificationIsFullTax(String taxClassification) {
-  return taxClassification == 'Product : Full Tax';
-}
+// Need to revisit once Tax Exempt User story is ready
+// bool materialTaxClassificationIsExempt(String taxClassification) {
+//   return taxClassification == 'Exempt';
+// }
 
 bool havingPrincipalCodeForAllMaterial(String principalCode) =>
     principalCode == '0000000000';

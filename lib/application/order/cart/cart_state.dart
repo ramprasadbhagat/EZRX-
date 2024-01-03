@@ -164,7 +164,7 @@ class CartState with _$CartState {
                 !item.materialInfo.hidePrice &&
                 !item.materialInfo.type.typeBundle &&
                 !item.materialInfo.type.typeCombo &&
-                item.materialInfo.taxClassification.isFullTax,
+                !item.materialInfo.taxClassification.isNoTax,
           )
           .fold<double>(
             0,
@@ -366,7 +366,9 @@ class CartState with _$CartState {
   }
 
   double get materialLevelFinalPriceWithTaxForFullTax => cartProducts
-      .where((element) => element.materialInfo.taxClassification.isFullTax)
+      .where(
+        (element) => !element.materialInfo.taxClassification.isNoTax,
+      )
       .fold<double>(
         0.0,
         (previousValue, element) =>
@@ -374,7 +376,9 @@ class CartState with _$CartState {
       );
 
   double get materialLevelEligibleTotalFinalPrice => cartProducts
-      .where((element) => element.materialInfo.taxClassification.isFullTax)
+      .where(
+        (element) => !element.materialInfo.taxClassification.isNoTax,
+      )
       .fold<double>(
         0.0,
         (previousValue, element) => previousValue + element.finalPrice,

@@ -103,32 +103,33 @@ void main() {
       expect(result, false);
     });
 
-    test('should return true when there is Exempt', () {
-      const input = 'Exempt';
-      final valObj = MaterialTaxClassification(input);
-      final result = valObj.isExempt;
-      expect(result, true);
-    });
+    //Need to revisit when Tax Exempt will be covered in another User story
+    // test('should return true when there is Exempt', () {
+    //   const input = 'Exempt';
+    //   final valObj = MaterialTaxClassification(input);
+    //   final result = valObj.isExempt;
+    //   expect(result, true);
+    // });
 
-    test('should return false when there is not Exempt', () {
-      const input = 'fake-data';
-      final valObj = MaterialTaxClassification(input);
-      final result = valObj.isExempt;
-      expect(result, false);
-    });
+    // test('should return false when there is not Exempt', () {
+    //   const input = 'fake-data';
+    //   final valObj = MaterialTaxClassification(input);
+    //   final result = valObj.isExempt;
+    //   expect(result, false);
+    // });
 
     test('should return true when there is full tax', () {
       const input = 'Product : Full Tax';
       final valObj = MaterialTaxClassification(input);
-      final result = valObj.isFullTax;
+      final result = !valObj.isNoTax;
       expect(result, true);
     });
 
-    test('should return false when there is no is full tax', () {
-      const input = 'fake-data';
+    test('should return true when there is no is Special Scheme', () {
+      const input = 'Special Scheme';
       final valObj = MaterialTaxClassification(input);
-      final result = valObj.isFullTax;
-      expect(result, false);
+      final result = !valObj.isNoTax;
+      expect(result, true);
     });
   });
 
