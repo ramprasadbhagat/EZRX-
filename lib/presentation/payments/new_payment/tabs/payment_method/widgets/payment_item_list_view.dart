@@ -46,6 +46,14 @@ class _InvoiceCreditItemTile extends StatelessWidget {
             key: WidgetKeys.invoiceCreditItemId,
             style: Theme.of(context).textTheme.labelMedium,
           ),
+          if (context.read<EligibilityBloc>().state.salesOrg.showGovNumber)
+            Padding(
+              padding: const EdgeInsets.only(top: 2),
+              child: Text(
+                '${context.tr('Gov. no')} ${customerOpenItem.documentReferenceID.displayDashIfEmpty}',
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0, bottom: 10.0),
             child: Row(
@@ -62,8 +70,7 @@ class _InvoiceCreditItemTile extends StatelessWidget {
                   key: WidgetKeys.invoiceCreditItemAmount,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price:
-                      customerOpenItem.displayItemAmount.abs().toString(),
+                  price: customerOpenItem.displayItemAmount.abs().toString(),
                 ),
               ],
             ),

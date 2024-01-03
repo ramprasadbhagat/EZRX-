@@ -59,7 +59,7 @@ void main() {
 
   final customerOpenItemsList = [
     CustomerOpenItem.empty().copyWith(
-      documentReferenceID: 'fake-id',
+      documentReferenceID: StringValue('fake-id'),
     )
   ];
   final paymentInfo = PaymentInfo.empty();

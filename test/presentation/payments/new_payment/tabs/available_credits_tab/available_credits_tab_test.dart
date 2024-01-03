@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/payments/new_payment/available_credits/av
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -30,7 +31,6 @@ import 'package:mocktail/mocktail.dart';
 import '../../../../../common_mock_data/mock_other.dart';
 import '../../../../../utils/widget_utils.dart';
 import '../../../../../common_mock_data/mock_bloc.dart';
-
 
 void main() {
   late AvailableCreditsBloc availableCreditsBlocMock;
@@ -276,13 +276,22 @@ void main() {
       expect(noRecordSubTitleText, findsOneWidget);
     });
 
-    testWidgets('First item credit show for other market except PH', (tester) async {
+    testWidgets('First item credit show for other market except PH',
+        (tester) async {
       final creditItem = fakeCredits.first;
       final creditAmount = creditItem.openAmountInTransCrcy.abs().toString();
 
       when(() => availableCreditsBlocMock.state).thenReturn(
         AvailableCreditsState.initial().copyWith(
           items: [creditItem],
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('3070'),
+          ),
         ),
       );
 
@@ -295,7 +304,7 @@ void main() {
       final dateText = find.text('31 Jul 2023');
       expect(dateText, findsOneWidget);
 
-      final documentReferenceID = find.text('0800072883');
+      final documentReferenceID = find.text('Gov. no 0800072883');
       expect(documentReferenceID, findsOneWidget);
 
       expect(
@@ -309,7 +318,8 @@ void main() {
       );
     });
 
-    testWidgets('First item credit show for PH - G2 & G4 tax excluded', (tester) async {
+    testWidgets('First item credit show for PH - G2 & G4 tax excluded',
+        (tester) async {
       final creditItem =
           fakeCredits.first.copyWith(displayCurrency: Currency('PHP'));
       final creditAmountForPH = creditItem.displayItemAmount.abs().toString();
@@ -317,6 +327,14 @@ void main() {
       when(() => availableCreditsBlocMock.state).thenReturn(
         AvailableCreditsState.initial().copyWith(
           items: [creditItem],
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('3070'),
+          ),
         ),
       );
 
@@ -329,7 +347,7 @@ void main() {
       final dateText = find.text('31 Jul 2023');
       expect(dateText, findsOneWidget);
 
-      final documentReferenceID = find.text('0800072883');
+      final documentReferenceID = find.text('Gov. no 0800072883');
       expect(documentReferenceID, findsOneWidget);
 
       expect(

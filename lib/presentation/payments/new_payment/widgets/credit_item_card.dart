@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -40,11 +41,16 @@ class CreditItemCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  customerOpenItem.documentReferenceID,
-                  style: Theme.of(context).textTheme.titleSmall,
-                  key: WidgetKeys.documentReferenceID,
-                ),
+                if (context
+                    .read<EligibilityBloc>()
+                    .state
+                    .salesOrg
+                    .showGovNumber)
+                  Text(
+                    '${context.tr('Gov. no')} ${customerOpenItem.documentReferenceID.displayDashIfEmpty}',
+                    style: Theme.of(context).textTheme.labelSmall,
+                    key: WidgetKeys.documentReferenceID,
+                  ),
                 PriceComponent(
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,

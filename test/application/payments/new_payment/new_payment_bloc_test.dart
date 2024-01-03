@@ -52,7 +52,7 @@ void main() {
         netDueDate: DateTimeStringValue('2023-07-31'),
         documentDate: DateTimeStringValue('2021-01-02'),
         amountInTransactionCurrency: 999,
-        documentReferenceID: '0800072883',
+        documentReferenceID: StringValue('0800072883'),
         postingKeyName: 'Invoice',
         transactionCurrency: Currency('MYR'),
         accountingDocExternalReference: '200120231100001163001SD 1100001163',
@@ -151,8 +151,7 @@ void main() {
           NewPaymentEvent.initialized(
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
-                        shipToInfo: ShipToInfo.empty(),
-
+            shipToInfo: ShipToInfo.empty(),
             user: User.empty(),
           ),
         ),

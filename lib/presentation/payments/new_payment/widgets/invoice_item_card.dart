@@ -40,6 +40,11 @@ class InvoiceItemCard extends StatelessWidget {
               ),
             ],
           ),
+          if (context.read<EligibilityBloc>().state.salesOrg.showGovNumber)
+            Text(
+              '${context.tr('Gov. no')} ${customerOpenItem.documentReferenceID.displayDashIfEmpty}',
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0, bottom: 10.0),
             child: Row(

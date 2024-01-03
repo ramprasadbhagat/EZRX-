@@ -66,7 +66,7 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
       postingKeyName: postingKeyName,
       netDueDate: DateTimeStringValue(netDueDate),
       documentDate: DateTimeStringValue(documentDate),
-      documentReferenceID: documentReferenceID,
+      documentReferenceID: StringValue(documentReferenceID),
       transactionCurrency: Currency(transactionCurrency),
       accountingDocExternalReference: accountingDocExternalReference,
       bpCustomerNumber: bpCustomerNumber,

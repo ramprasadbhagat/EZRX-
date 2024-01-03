@@ -21,7 +21,7 @@ mixin _$CustomerOpenItem {
   DateTimeStringValue get netDueDate => throw _privateConstructorUsedError;
   DateTimeStringValue get documentDate => throw _privateConstructorUsedError;
   double get amountInTransactionCurrency => throw _privateConstructorUsedError;
-  String get documentReferenceID => throw _privateConstructorUsedError;
+  StringValue get documentReferenceID => throw _privateConstructorUsedError;
   String get postingKeyName => throw _privateConstructorUsedError;
   Currency get transactionCurrency => throw _privateConstructorUsedError;
   String get accountingDocExternalReference =>
@@ -64,7 +64,7 @@ abstract class $CustomerOpenItemCopyWith<$Res> {
       DateTimeStringValue netDueDate,
       DateTimeStringValue documentDate,
       double amountInTransactionCurrency,
-      String documentReferenceID,
+      StringValue documentReferenceID,
       String postingKeyName,
       Currency transactionCurrency,
       String accountingDocExternalReference,
@@ -155,7 +155,7 @@ class _$CustomerOpenItemCopyWithImpl<$Res, $Val extends CustomerOpenItem>
       documentReferenceID: null == documentReferenceID
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       postingKeyName: null == postingKeyName
           ? _value.postingKeyName
           : postingKeyName // ignore: cast_nullable_to_non_nullable
@@ -262,7 +262,7 @@ abstract class _$$_CustomerOpenItemCopyWith<$Res>
       DateTimeStringValue netDueDate,
       DateTimeStringValue documentDate,
       double amountInTransactionCurrency,
-      String documentReferenceID,
+      StringValue documentReferenceID,
       String postingKeyName,
       Currency transactionCurrency,
       String accountingDocExternalReference,
@@ -351,7 +351,7 @@ class __$$_CustomerOpenItemCopyWithImpl<$Res>
       documentReferenceID: null == documentReferenceID
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       postingKeyName: null == postingKeyName
           ? _value.postingKeyName
           : postingKeyName // ignore: cast_nullable_to_non_nullable
@@ -489,7 +489,7 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
   @override
   final double amountInTransactionCurrency;
   @override
-  final String documentReferenceID;
+  final StringValue documentReferenceID;
   @override
   final String postingKeyName;
   @override
@@ -652,7 +652,7 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
       required final DateTimeStringValue netDueDate,
       required final DateTimeStringValue documentDate,
       required final double amountInTransactionCurrency,
-      required final String documentReferenceID,
+      required final StringValue documentReferenceID,
       required final String postingKeyName,
       required final Currency transactionCurrency,
       required final String accountingDocExternalReference,
@@ -688,7 +688,7 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
   @override
   double get amountInTransactionCurrency;
   @override
-  String get documentReferenceID;
+  StringValue get documentReferenceID;
   @override
   String get postingKeyName;
   @override
