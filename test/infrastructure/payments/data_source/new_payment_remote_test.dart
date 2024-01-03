@@ -238,6 +238,7 @@ void main() {
           paymentBatchAdditionalInfo: 'fake-paymentBatchAdditionalInfo',
           paymentId: 'fake-paymentId',
           salesOrg: 'fake-salesOrg',
+          zzAdviceNumber: 'fake-adviceNumber',
         );
 
         expect(
@@ -284,6 +285,7 @@ void main() {
           paymentBatchAdditionalInfo: 'fake-paymentBatchAdditionalInfo',
           paymentId: 'fake-paymentId',
           salesOrg: 'fake-salesOrg',
+          zzAdviceNumber: 'fake-adviceNumber',
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -333,6 +335,7 @@ void main() {
           paymentBatchAdditionalInfo: 'fake-paymentBatchAdditionalInfo',
           paymentId: 'fake-paymentId',
           salesOrg: 'fake-salesOrg',
+          zzAdviceNumber: 'fake-adviceNumber',
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());

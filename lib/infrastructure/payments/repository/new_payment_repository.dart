@@ -260,6 +260,7 @@ class NewPaymentRepository extends INewPaymentRepository {
             paymentInfo.accountingDocExternalReference,
         paymentBatchAdditionalInfo: paymentInfo.paymentBatchAdditionalInfo,
         paymentId: paymentInfo.paymentID,
+        zzAdviceNumber: paymentInfo.zzAdvice,
       );
 
       return Right(invoiceInfoPdf);

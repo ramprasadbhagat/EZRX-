@@ -67,6 +67,7 @@ void main() {
       paymentBatchAdditionalInfo: details.paymentBatchAdditionalInfo.getValue(),
       paymentID: details.paymentID.getValue(),
       accountingDocExternalReference: details.accountingDocExternalReference,
+      zzAdvice: details.zzAdvice.getValue(),
     );
   });
   group('Payment Summary Details Bloc Test', () {
@@ -176,13 +177,6 @@ void main() {
         bankInstructionRepository: bankInstructionRepository,
       ),
       setUp: () {
-        final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
-          paymentBatchAdditionalInfo:
-              details.paymentBatchAdditionalInfo.getValue(),
-          paymentID: details.paymentID.getValue(),
-          accountingDocExternalReference:
-              details.accountingDocExternalReference,
-        );
         when(
           () => newPaymentRepository.getPaymentInvoiceInfoPdf(
             customerCodeInfo: fakeCustomerCodeInfo,
@@ -245,13 +239,6 @@ void main() {
         bankInstructionRepository: bankInstructionRepository,
       ),
       setUp: () {
-        final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
-          paymentBatchAdditionalInfo:
-              details.paymentBatchAdditionalInfo.getValue(),
-          paymentID: details.paymentID.getValue(),
-          accountingDocExternalReference:
-              details.accountingDocExternalReference,
-        );
         when(
           () => newPaymentRepository.getPaymentInvoiceInfoPdf(
             customerCodeInfo: fakeCustomerCodeInfo,
@@ -318,13 +305,6 @@ void main() {
         bankInstructionRepository: bankInstructionRepository,
       ),
       setUp: () {
-        final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
-          paymentBatchAdditionalInfo: '',
-          paymentID: details.paymentID.getValue(),
-          accountingDocExternalReference:
-              details.accountingDocExternalReference,
-        );
-
         when(
           () => paymentSummaryDetailsMockRepository
               .fetchPaymentSummaryDetailsInfo(
@@ -355,7 +335,9 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeMYSalesOrganisation,
             user: fakeClientUser,
-            paymentInfo: customerPaymentInfo,
+            paymentInfo: customerPaymentInfo.copyWith(
+              paymentBatchAdditionalInfo: '',
+            ),
           ),
         ).thenAnswer(
           (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
@@ -502,13 +484,7 @@ void main() {
         ).thenAnswer(
           (invocation) async => Right(paymentList),
         );
-        final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
-          paymentBatchAdditionalInfo:
-              details.paymentBatchAdditionalInfo.getValue(),
-          paymentID: details.paymentID.getValue(),
-          accountingDocExternalReference:
-              details.accountingDocExternalReference,
-        );
+
         when(
           () => newPaymentRepository.getPaymentInvoiceInfoPdf(
             customerCodeInfo: fakeCustomerCodeInfo,

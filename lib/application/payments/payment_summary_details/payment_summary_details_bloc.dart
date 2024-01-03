@@ -219,6 +219,7 @@ class PaymentSummaryDetailsBloc
           paymentBatchAdditionalInfo:
               state.details.paymentBatchAdditionalInfo.getOrDefaultValue(''),
           paymentID: state.details.paymentID.getOrDefaultValue(''),
+          zzAdvice: state.details.zzAdvice.getOrDefaultValue(''),
           accountingDocExternalReference:
               state.details.accountingDocExternalReference,
         );

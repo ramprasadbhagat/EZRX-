@@ -231,6 +231,7 @@ class NewPaymentRemoteDataSource {
     required String accountingDocExternalReference,
     required String paymentBatchAdditionalInfo,
     required String paymentId,
+    required String zzAdviceNumber,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -245,6 +246,7 @@ class NewPaymentRemoteDataSource {
               'customerName': customerName,
               'payer': customerCode,
               'paymentBatchAdditionalInfo': paymentBatchAdditionalInfo,
+              'zzAdvice': zzAdviceNumber,
               'paymentId': paymentId,
               'salesOrg': salesOrg,
             },

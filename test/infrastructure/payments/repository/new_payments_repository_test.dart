@@ -750,6 +750,7 @@ void main() {
             paymentId: '123',
             accountingDocExternalReference: '123',
             paymentBatchAdditionalInfo: '123',
+            zzAdviceNumber: '092323EZ34245',
           ),
         ).thenAnswer((invocation) async => PaymentInvoiceInfoPdf.empty());
 
@@ -758,6 +759,7 @@ void main() {
           user: User.empty().copyWith(username: Username(fakeUserName)),
           paymentInfo: CustomerPaymentInfo.empty().copyWith(
             paymentID: '123',
+            zzAdvice: '092323EZ34245',
             accountingDocExternalReference: '123',
             paymentBatchAdditionalInfo: '123',
           ),
@@ -780,6 +782,7 @@ void main() {
             paymentId: '123',
             accountingDocExternalReference: '123',
             paymentBatchAdditionalInfo: '123',
+            zzAdviceNumber: '092323EZ34245',
           ),
         ).thenThrow((invocation) => MockException());
 
