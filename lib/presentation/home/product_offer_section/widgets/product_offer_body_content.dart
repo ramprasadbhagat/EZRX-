@@ -9,7 +9,7 @@ class _ProductOfferBodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MaterialListBloc, MaterialListState>(
       buildWhen: (previous, current) =>
-          previous.materialList != current.materialList,
+          previous.isFetching != current.isFetching,
       builder: (context, state) {
         return state.isFetching || state.materialList.isNotEmpty
             ? Column(

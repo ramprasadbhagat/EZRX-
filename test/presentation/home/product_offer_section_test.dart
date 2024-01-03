@@ -413,6 +413,37 @@ void main() {
     );
 
     testWidgets(
+      'ProductsOnOffer test - Material List is Empty',
+      (tester) async {
+        when(() => autoRouterMock.navigate(const ProductsTabRoute()))
+            .thenAnswer(
+          (_) => Future.value(),
+        );
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList: [],
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.productOfferSectionLoaderImage),
+          findsNothing,
+        );
+        expect(find.byKey(WidgetKeys.productsOnOffer), findsNothing);
+       
+      },
+    );
+
+    testWidgets(
       'ProductsOnOffer test - Tap on Tile',
       (tester) async {
         when(() => autoRouterMock.currentPath).thenReturn(
