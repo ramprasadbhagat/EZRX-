@@ -1108,6 +1108,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<NotificationBloc>().add(
             const NotificationEvent.fetch(),
           );
+      
+      context
+          .read<PaymentCustomerInformationBloc>()
+          .add(const PaymentCustomerInformationEvent.initialized());
+
       context.read<PaymentCustomerInformationBloc>().add(
             PaymentCustomerInformationEvent.fetch(
               customeCodeInfo: state.customerCodeInfo,

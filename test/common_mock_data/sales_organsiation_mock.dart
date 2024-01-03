@@ -60,6 +60,9 @@ final fakeIDSalesOrganisationConfigs =
   salesOrg: fakeIDSalesOrg,
 );
 
+final fakeTWSalesOrganisation =
+    SalesOrganisation.empty().copyWith(salesOrg: fakeTWSalesOrg);
+
 final fakePHSalesOrganisationConfigsMaterialWithoutPrice =
     SalesOrganisationConfigs.empty().copyWith(
   salesOrg: fakePHSalesOrg,

@@ -96,6 +96,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:upgrader/upgrader.dart';
+import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
@@ -872,6 +874,43 @@ void main() {
               paymentTerm: 'paymentTerm',
               shipToInfoList: <ShipToInfo>[],
             ),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('When PaymentCustomerInformation bloc event call when customer code changes',
+        (tester) async {
+      final expectedStates = [
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(
+          shipToInfo: fakeShipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        )
+      ];
+      when(() => salesOrgBlocMock.state).thenAnswer(
+        (invocation) => SalesOrgState.initial().copyWith(
+          salesOrganisation: fakeTWSalesOrganisation,
+        ),
+      );
+      whenListen(
+        customerCodeBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await getWidget(tester);
+      await tester.pump();
+
+
+      verify(() => paymentCustomerInformationBlocMock
+          .add(const PaymentCustomerInformationEvent.initialized()),).called(1);
+
+      verify(
+        () => paymentCustomerInformationBlocMock.add(
+          PaymentCustomerInformationEvent.fetch(
+            customeCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeTWSalesOrganisation,
+            selectedShipToCode: fakeShipToInfo.shipToCustomerCode,
           ),
         ),
       ).called(1);
