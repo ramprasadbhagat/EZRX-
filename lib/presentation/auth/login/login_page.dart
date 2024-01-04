@@ -2,8 +2,6 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/auth/login/login_mobile.dart';
-import 'package:ezrxmobile/presentation/auth/login/login_web.dart';
-import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,19 +42,9 @@ class LoginPage extends StatelessWidget {
               previous.showErrorMessages != current.showErrorMessages ||
               previous.currentMarket != current.currentMarket,
           builder: (context, state) {
-            return Responsive(
-              tablet: LoginWeb(
-                key: WidgetKeys.loginWebScreen,
-                state: state,
-              ),
-              mobile: LoginMobile(
+            return LoginMobile(
                 key: WidgetKeys.loginMobileScreen,
-                state: state,
-              ),
-              web: LoginWeb(
-                key: WidgetKeys.loginWebScreen,
-                state: state,
-              ),
+              state: state,
             );
           },
         ),

@@ -59,7 +59,7 @@ class WidgetKeys {
   //============================================================
 
   static const Key loginMobileScreen = Key('loginMobileScreen');
-  static const Key loginWebScreen = Key('loginMobileScreen');
+  static const Key loginWebScreen = Key('loginWebScreen');
   static const Key loginUsernameField = Key('loginUsernameField');
   static const Key loginPasswordField = Key('loginPasswordField');
   static const Key loginPasswordFieldSuffixIcon =
