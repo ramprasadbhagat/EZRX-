@@ -15,9 +15,13 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/repository/mixpanel_repository.dart';
+
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class ChatBotRepositoryMock extends Mock implements ChatBotRepository {}
 
@@ -49,74 +53,8 @@ void main() {
     ),
     enableOrderType: true,
   );
-  final fakeSaleOrg = SalesOrganisation(
-    salesOrg: SalesOrg('fake-1234'),
+  final fakeSaleOrg = fakeSGSalesOrganisation.copyWith(
     customerInfos: fakeSalesOrgCustomerInfos,
-  );
-  final fakeSaleOrgConfig = SalesOrganisationConfigs(
-    salesOrg: SalesOrg('2601'),
-    enableIRN: false,
-    enableDefaultMD: false,
-    disableProcessingStatus: false,
-    currency: Currency(''),
-    hideCustomer: false,
-    disableOrderType: false,
-    disablePrincipals: false,
-    enableGimmickMaterial: false,
-    languageFilter: false,
-    languageValue: Language.english(),
-    disableBundles: false,
-    principalList: [],
-    enableBatchNumber: false,
-    enableTaxClassification: false,
-    enableVat: false,
-    enableTaxAtTotalLevelOnly: false,
-    enableZDP5: false,
-    vatValue: 0,
-    materialWithoutPrice: false,
-    enableCollectiveNumber: false,
-    enableFutureDeliveryDay: false,
-    enableMobileNumber: false,
-    enablePaymentTerms: false,
-    enableReferenceNote: false,
-    enableSpecialInstructions: false,
-    futureDeliveryDay: FutureDeliveryDay(''),
-    enableGMC: false,
-    enableListPrice: false,
-    priceOverride: false,
-    disablePaymentTermsDisplay: false,
-    disablePayment: false,
-    disableDeliveryDate: false,
-    enableBillTo: true,
-    showPOAttachment: false,
-    addOosMaterials: OosMaterial(false),
-    expiryDateDisplay: false,
-    hideStockDisplay: false,
-    oosValue: OosValue(0),
-    enableRemarks: false,
-    enableOHPrice: true,
-    poNumberRequired: PoNumberRequired(false),
-    enableTaxDisplay: false,
-    netPriceOverride: false,
-    batchNumDisplay: false,
-    displayOrderDiscount: false,
-    minOrderAmount: '0',
-    enableZDP8Override: false,
-    disableReturnsAccessSR: false,
-    disableReturnsAccess: false,
-    enableGreenDelivery: false,
-    greenDeliveryDelayInDays: 0,
-    enableComboDeals: false,
-    greenDeliveryUserRole: GreenDeliveryUserRole(0),
-    comboDealsUserRole: ComboDealUserRole(0),
-    enableGMN: false,
-    displayItemTaxBreakdown: false,
-    displaySubtotalTaxBreakdown: false,
-    disableOverrideFieldCustomer: false,
-    disableOverrideFieldSR: false,
-    enablePOAttachmentRequired: false,
-    hideCredit: false,
-    allowReturnsOutsidePolicy: false,
   );
   final chatBotRepositoryMock = ChatBotRepositoryMock();
   final mixpanelRepositoryMock = MixpanelRepoMock();
@@ -148,7 +86,7 @@ void main() {
           () => chatBotRepositoryMock.passPayloadToChatbot(
             customerCodeInfo: fakeCustomerInfo,
             salesOrganisation: fakeSaleOrg,
-            salesOrganisationConfigs: fakeSaleOrgConfig,
+            salesOrganisationConfigs: fakeSGSalesOrgConfigs,
             shipToInfo: fakeShipToInfo,
             user: fakeUser,
             locale: fakeUser.preferredLanguage.locale,
@@ -162,7 +100,7 @@ void main() {
           EligibilityEvent.update(
             user: fakeUser,
             salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: fakeSaleOrgConfig,
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
             customerCodeInfo: fakeCustomerInfo,
             shipToInfo: fakeShipToInfo,
             selectedOrderType: OrderDocumentType.empty(),
@@ -173,19 +111,17 @@ void main() {
         EligibilityState.initial().copyWith(
           user: fakeUser,
           salesOrganisation: fakeSaleOrg,
-          salesOrgConfigs: fakeSaleOrgConfig,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeShipToInfo,
-          failureOrSuccessOption: const None(),
           isLoading: true,
         ),
         EligibilityState.initial().copyWith(
           user: fakeUser,
           salesOrganisation: fakeSaleOrg,
-          salesOrgConfigs: fakeSaleOrgConfig,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeShipToInfo,
-          failureOrSuccessOption: const None(),
         ),
       ],
     );
@@ -204,7 +140,7 @@ void main() {
           () => chatBotRepositoryMock.passPayloadToChatbot(
             customerCodeInfo: fakeCustomerInfo,
             salesOrganisation: fakeSaleOrg,
-            salesOrganisationConfigs: fakeSaleOrgConfig,
+            salesOrganisationConfigs: fakeSGSalesOrgConfigs,
             shipToInfo: fakeShipToInfo,
             user: fakeUser,
             locale: fakeUser.preferredLanguage.locale,
@@ -220,7 +156,7 @@ void main() {
           EligibilityEvent.update(
             user: fakeUser,
             salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: fakeSaleOrgConfig,
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
             customerCodeInfo: fakeCustomerInfo,
             shipToInfo: fakeShipToInfo,
             selectedOrderType: OrderDocumentType.empty(),
@@ -231,7 +167,7 @@ void main() {
         EligibilityState.initial().copyWith(
           user: fakeUser,
           salesOrganisation: fakeSaleOrg,
-          salesOrgConfigs: fakeSaleOrgConfig,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeShipToInfo,
           failureOrSuccessOption: const None(),
@@ -240,7 +176,7 @@ void main() {
         EligibilityState.initial().copyWith(
           user: fakeUser,
           salesOrganisation: fakeSaleOrg,
-          salesOrgConfigs: fakeSaleOrgConfig,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeShipToInfo,
           failureOrSuccessOption: optionOf(
@@ -362,7 +298,7 @@ void main() {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        salesOrgConfigs: fakeSaleOrgConfig,
+        salesOrgConfigs: fakeSGSalesOrgConfigs,
         customerCodeInfo: fakeCustomerInfo,
         shipToInfo: fakeShipToInfo,
       );
@@ -382,7 +318,7 @@ void main() {
           ),
         ),
         salesOrganisation: fakeSaleOrg,
-        salesOrgConfigs: fakeSaleOrgConfig,
+        salesOrgConfigs: fakeSGSalesOrgConfigs,
         customerCodeInfo: fakeCustomerInfo,
         shipToInfo: fakeShipToInfo,
       );
@@ -402,9 +338,7 @@ void main() {
           ),
         ),
         salesOrganisation: fakeSaleOrg,
-        salesOrgConfigs: fakeSaleOrgConfig.copyWith(
-          addOosMaterials: OosMaterial(true),
-        ),
+        salesOrgConfigs: fakeSGSalesOrgConfigs,
         customerCodeInfo: fakeCustomerInfo,
         shipToInfo: fakeShipToInfo,
       );
@@ -421,7 +355,7 @@ void main() {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        salesOrgConfigs: fakeSaleOrgConfig.copyWith(
+        salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
           displayOrderDiscount: true,
         ),
         customerCodeInfo: fakeCustomerInfo,
@@ -440,7 +374,7 @@ void main() {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        salesOrgConfigs: fakeSaleOrgConfig.copyWith(
+        salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
           enableRemarks: true,
         ),
         customerCodeInfo: fakeCustomerInfo,
@@ -458,7 +392,7 @@ void main() {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        salesOrgConfigs: fakeSaleOrgConfig,
+        salesOrgConfigs: fakeSGSalesOrgConfigs,
         customerCodeInfo:
             fakeCustomerInfo.copyWith(customerCodeSoldTo: 'customer1234'),
         shipToInfo: fakeShipToInfo,
@@ -475,7 +409,7 @@ void main() {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        salesOrgConfigs: fakeSaleOrgConfig,
+        salesOrgConfigs: fakeSGSalesOrgConfigs,
         customerCodeInfo: fakeCustomerInfo.copyWith(
           billToInfos: [],
         ),
@@ -502,10 +436,7 @@ void main() {
     'isSalesRepAndBonusEligible',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
-        user: fakeUser.copyWith(
-          role: Role.empty().copyWith(
-            type: RoleType('external_sales_rep'),
-          ),
+        user: fakeExternalSalesRepUser.copyWith(
           hasBonusOverride: true,
         ),
         salesOrganisation: SalesOrganisation.empty().copyWith(
@@ -568,9 +499,7 @@ void main() {
           final eligibilityState = EligibilityState.initial().copyWith(
             user: fakeUser,
             salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: false,
-            ),
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
             customerCodeInfo: fakeCustomerInfo,
             shipToInfo: fakeShipToInfo,
           );
@@ -585,9 +514,7 @@ void main() {
           final eligibilityState = EligibilityState.initial().copyWith(
             user: fakeUser,
             salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: true,
-            ),
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               comboEligible: false,
             ),
@@ -604,10 +531,7 @@ void main() {
           final eligibilityState = EligibilityState.initial().copyWith(
             user: fakeUser,
             salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: true,
-              comboDealsUserRole: ComboDealUserRole(1),
-            ),
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerInfo.copyWith(
               salesDeals: [SalesDealNumber('0000000000')],
             ),
@@ -624,8 +548,7 @@ void main() {
           final eligibilityState = EligibilityState.initial().copyWith(
             user: fakeUser,
             salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: true,
+            salesOrgConfigs: fakeKHSalesOrgConfigs.copyWith(
               comboDealsUserRole: ComboDealUserRole(2),
             ),
             customerCodeInfo: fakeCustomerInfo.copyWith(
@@ -644,8 +567,7 @@ void main() {
           final eligibilityState = EligibilityState.initial().copyWith(
             user: fakeUser,
             salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: true,
+            salesOrgConfigs: fakeKHSalesOrgConfigs.copyWith(
               comboDealsUserRole: ComboDealUserRole(3),
             ),
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
@@ -690,8 +612,7 @@ void main() {
       'bonus override none sales rep ',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          salesOrgConfigs:
-              SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         );
         expect(eligibilityState.isBonusOverrideEnable, true);
       },
@@ -701,8 +622,7 @@ void main() {
       'bonus override sales rep ',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          user: fakeExternalSalesRepUser.copyWith(
             hasBonusOverride: true,
           ),
         );
@@ -715,11 +635,8 @@ void main() {
       'ZDP8Override Override',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
-              .copyWith(enableZDP8Override: true),
+          user: fakeExternalSalesRepUser,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         );
 
         expect(eligibilityState.isZDP8Override, true);
@@ -729,8 +646,7 @@ void main() {
       'isPriceOverrideEnable Override none sales rep ',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          salesOrgConfigs:
-              SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         );
 
         expect(eligibilityState.isPriceOverrideEnable, true);
@@ -741,8 +657,7 @@ void main() {
       'isPriceOverrideEnable Override sales rep ',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          user: fakeExternalSalesRepUser.copyWith(
             hasPriceOverride: true,
           ),
         );
@@ -757,7 +672,7 @@ void main() {
       'Return disable for any user with disableReturns',
       () {
         final eligibilityState = EligibilityState.initial()
-            .copyWith(user: fakeUser.copyWith(disableReturns: true));
+            .copyWith(user: fakeClientUser.copyWith(disableReturns: true));
 
         expect(eligibilityState.isReturnsEnable, false);
       },
@@ -766,10 +681,9 @@ void main() {
       'Return disable for sales rep user with disableReturnsAccessSR',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
+          user: fakeExternalSalesRepUser,
+          salesOrgConfigs:
+              fakeSGSalesOrgConfigs
               .copyWith(disableReturnsAccessSR: true),
         );
 
@@ -781,9 +695,7 @@ void main() {
       'Return disable for customer user with disableReturnsAccessSR',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('client_user')),
-          ),
+          user: fakeClientUser,
         );
 
         expect(eligibilityState.isReturnsEnable, true);
@@ -794,10 +706,9 @@ void main() {
       'Return enable',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('client_user')),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
+          user: fakeClientUser,
+          salesOrgConfigs:
+              fakeSGSalesOrgConfigs
               .copyWith(disableReturnsAccess: true),
         );
 
@@ -811,7 +722,7 @@ void main() {
       'showGreenDeliveryBox salesOrgConfigs disable',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
             enableGreenDelivery: false,
           ),
         );
@@ -824,7 +735,7 @@ void main() {
       'salesOrgConfigs gdEligibleRole all user',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
             enableGreenDelivery: true,
             greenDeliveryUserRole: GreenDeliveryUserRole(1),
           ),
@@ -838,10 +749,8 @@ void main() {
       'salesOrgConfigs gdEligibleRole customer',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('client_user')),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+          user: fakeClientUser,
+          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
             enableGreenDelivery: true,
             greenDeliveryUserRole: GreenDeliveryUserRole(2),
           ),
@@ -855,10 +764,8 @@ void main() {
       'salesOrgConfigs gdEligibleRole sales rep',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+          user: fakeExternalSalesRepUser,
+          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
             enableGreenDelivery: true,
             greenDeliveryUserRole: GreenDeliveryUserRole(3),
           ),
@@ -872,11 +779,8 @@ void main() {
       'salesOrgConfigs isOutOfStockMaterialAllowed for all',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            addOosMaterials: OosMaterial(true),
+          user: fakeExternalSalesRepUser,
+          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
             oosValue: OosValue(0),
           ),
         );
@@ -888,11 +792,8 @@ void main() {
       'salesOrgConfigs isOutOfStockMaterialAllowed for all',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            addOosMaterials: OosMaterial(true),
+          user: fakeExternalSalesRepUser,
+          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
             oosValue: OosValue(0),
           ),
         );
@@ -905,13 +806,8 @@ void main() {
       'salesOrgConfigs isOutOfStockMaterialAllowed for sales rep',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            addOosMaterials: OosMaterial(true),
-            oosValue: OosValue(1),
-          ),
+          user: fakeExternalSalesRepUser,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         );
 
         expect(eligibilityState.isOutOfStockMaterialAllowed, true);
@@ -922,12 +818,9 @@ void main() {
       'salesOrgConfigs isOutOfStockMaterialAllowed not allowed',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+          user: fakeExternalSalesRepUser,
+          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
             addOosMaterials: OosMaterial(false),
-            oosValue: OosValue(1),
           ),
         );
 
