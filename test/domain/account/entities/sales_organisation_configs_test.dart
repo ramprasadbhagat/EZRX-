@@ -2,6 +2,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 void main() {
   late SalesOrganisationConfigs configs;
 
@@ -47,6 +49,34 @@ void main() {
           configs.deliveryStartDate,
           configs.futureDeliveryDay.intValue - 1,
         ),
+      );
+    });
+
+    test('Show Gov Price For TW And enableListPrice = true Test', () {
+      configs = fakeTWSalesOrgConfigShowGovtListPrice;
+      expect(
+        configs.showGovtListPrice,
+        true,
+      );
+    });
+
+    test('Hide Gov Price If enableListPrice = false Test', () {
+      configs = fakeTWSalesOrgConfigShowGovtListPrice.copyWith(
+        enableListPrice: false,
+      );
+      expect(
+        configs.showGovtListPrice,
+        false,
+      );
+    });
+
+    test('Hide Gov Price If Market Is Not TW Test', () {
+      configs = fakeTWSalesOrgConfigShowGovtListPrice.copyWith(
+        salesOrg: fakeSalesOrg,
+      );
+      expect(
+        configs.showGovtListPrice,
+        false,
       );
     });
   });

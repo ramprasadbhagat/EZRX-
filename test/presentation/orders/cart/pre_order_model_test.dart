@@ -25,6 +25,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
+import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
@@ -325,6 +326,10 @@ void main() {
         );
         expect(preOrderMaterialFinder, findsOneWidget);
         expect(find.byType(CovidTag), findsOneWidget);
+        expect(
+          find.byType(GovtListPriceComponent),
+          findsOneWidget,
+        );
       },
     );
     testWidgets(

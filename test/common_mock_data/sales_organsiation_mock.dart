@@ -237,6 +237,12 @@ final fakeTWSalesOrgConfigGMCEnabled =
   salesOrg: fakeTWSalesOrg,
 );
 
+final fakeTWSalesOrgConfigShowGovtListPrice =
+    SalesOrganisationConfigs.empty().copyWith(
+  enableListPrice: true,
+  salesOrg: fakeTWSalesOrg,
+);
+
 final fakeSGSalesOrgConfigGimmickMaterialEnabled =
     SalesOrganisationConfigs.empty().copyWith(
   languageFilter: true,
@@ -268,6 +274,7 @@ final fakeSGSalesOrgConfigForBundle = SalesOrganisationConfigs.empty().copyWith(
   enableRemarks: true,
   priceOverride: true,
 );
+
 final fakeSGSalesOrgConfigPriceOverride =
     SalesOrganisationConfigs.empty().copyWith(priceOverride: true);
 

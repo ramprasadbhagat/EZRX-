@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_material_item/checkout_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/order_tag.dart';
@@ -104,6 +105,10 @@ void main() {
         find.byKey(WidgetKeys.cartItemProductTotalPrice),
         findsOneWidget,
       );
+      expect(
+        find.byType(GovtListPriceComponent),
+        findsOneWidget,
+      );
     });
 
     testWidgets(
@@ -130,7 +135,9 @@ void main() {
         (widget) =>
             widget is RichText &&
             widget.key == WidgetKeys.priceComponent &&
-            widget.text.toPlainText().contains(listPrice.getOrCrash().toString()),
+            widget.text
+                .toPlainText()
+                .contains(listPrice.getOrCrash().toString()),
       );
       expect(
         find.descendant(
@@ -177,7 +184,7 @@ void main() {
         findsNothing,
       );
     });
-    
+
     testWidgets(
         '=> List price strike through price not visible, if final price is greater than and equal to list price && enableListPrice = true',
         (tester) async {
@@ -214,6 +221,5 @@ void main() {
         findsNothing,
       );
     });
-  
   });
 }

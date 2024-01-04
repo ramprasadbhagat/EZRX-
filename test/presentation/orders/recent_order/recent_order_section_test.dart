@@ -7,7 +7,9 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -43,8 +45,10 @@ void main() {
   late ProductImageBloc productImageBlocMock;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late AppRouter autoRouterMock;
+  late OrderHistory fakeOrderHistory;
 
-  setUpAll(() {
+  setUpAll(() async {
+    WidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => MockAppRouter());
     eligibilityBlocMock = EligibilityBlocMock();
     viewByItemsBlocMock = ViewByItemsBlocMock();
@@ -52,6 +56,7 @@ void main() {
     viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
     locator.registerLazySingleton(() => viewByItemsBlocMock);
     autoRouterMock = locator<MockAppRouter>();
+    fakeOrderHistory = await ViewByItemLocalDataSource().getViewByItems();
   });
 
   setUp(() {
@@ -264,6 +269,25 @@ void main() {
           find.text('MYR 10.00', findRichText: true);
       expect(bonusMaterialFreeTag, findsOneWidget);
       expect(commercialMaterialTotalPrice, findsOneWidget);
+    });
+
+    testWidgets('Show GovtListPriceComponent for material item',
+        (tester) async {
+      when(
+        () => viewByItemsBlocMock.state,
+      ).thenAnswer(
+        (invocation) => ViewByItemsState.initial().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [
+              fakeOrderHistory.orderHistoryItems.first,
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(find.byType(GovtListPriceComponent), findsOneWidget);
     });
   });
 }

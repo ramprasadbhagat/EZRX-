@@ -39,6 +39,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
@@ -1567,6 +1568,26 @@ void main() {
         findsOneWidget,
       );
     });
+
+    testWidgets(
+      'Show GovtListPriceComponent For Material Item',
+      (tester) async {
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [fakeMaterialItem],
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        expect(
+          find.byType(GovtListPriceComponent),
+          findsOneWidget,
+        );
+      },
+    );
   });
 }
 
