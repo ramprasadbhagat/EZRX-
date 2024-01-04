@@ -388,6 +388,8 @@ class Config {
 
   String get announcementTemplate => 'EA1748E3-EF3B-4D38-B2C9-937B90864DED';
 
+  String get announcementVnTemplate => '{E95336DD-CB51-4663-BCB3-422246B12D45}';
+
   String get articleTemplate => 'DA48D344-04CE-411B-B721-5D1B4F807860';
   String get idMarketArticleTemplate1 => '54EA13A9-6EDE-46ED-B5CB-7A4B14D99D69';
   String get idMarketArticleTemplate2 => 'DD1070C3-A45A-4412-B2CD-7892567B136E';

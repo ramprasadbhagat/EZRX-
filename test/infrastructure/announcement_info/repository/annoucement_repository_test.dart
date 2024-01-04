@@ -100,12 +100,15 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.announcementVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
+      when(() => mockConfig.announcementVnTemplate)
+          .thenReturn('fake-vn-template');
 
       when(
         () => remoteDataSource.getAnnouncementInfo(
           announcementUrlPath: '/api/announcement',
           variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
+          vnTemplate: 'fake-vn-template',
           pageSize: 24,
           after: '',
           lang: fakeUser.preferredLanguage.locale.languageCode,
@@ -130,6 +133,7 @@ void main() {
           announcementUrlPath: '/api/announcement',
           variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
+          vnTemplate: 'fake-vn-template',
           pageSize: 24,
           after: '',
           lang: fakeUser.preferredLanguage.locale.languageCode,

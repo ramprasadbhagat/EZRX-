@@ -24,6 +24,7 @@ class AnnouncementInfoRemoteDataSource {
   Future<AnnouncementArticleInfo> getAnnouncementInfo({
     required String announcementUrlPath,
     required String template,
+    required String vnTemplate,
     required String variablePath,
     required int pageSize,
     required String lang,
@@ -31,6 +32,7 @@ class AnnouncementInfoRemoteDataSource {
   }) async {
     final variableData = {
       'template': template,
+      'vntemplate': vnTemplate,
       'path': variablePath,
       'pageSize': pageSize,
       'lang': lang,

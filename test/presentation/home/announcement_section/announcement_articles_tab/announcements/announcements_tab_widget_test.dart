@@ -338,7 +338,10 @@ void main() {
         (tester) async {
           when(() => announcementInfoBlocMock.state).thenReturn(
             AnnouncementInfoState.initial().copyWith(
-              announcementInfo: announcementInfo,
+              announcementInfo: announcementInfo.copyWith(
+                announcementList:
+                    announcementInfo.announcementList.take(10).toList(),
+              ),
               canLoadMore: true,
             ),
           );

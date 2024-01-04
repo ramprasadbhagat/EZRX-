@@ -1,117 +1,141 @@
 class AnnouncementInfoQueryMutation {
   String getAnnouncementInfoQuery() {
-    return '''
-    query(\$pageSize: Int!,\$template: String!, \$path : String!, \$lang : String!, \$after:String) {
-      search(
-        where: {
-          AND: [
-            {
-              name: "_templates"
-              value: \$template
-              operator: CONTAINS
-            }
-            {
-              name: "_path"
-              value: \$path
-              operator: CONTAINS
-            }
-            {
-              name: "_language"
-              value: \$lang
-              operator: CONTAINS
-            }
-          ]
-        }
-        first: \$pageSize
-        after:\$after
-        orderBy: { name: "Published Date", direction: DESC }
+    return r'''
+      query (
+        $pageSize: Int!
+        $template: String!
+        $vntemplate: String!
+        $path: String!
+        $lang: String!
+        $after: String
       ) {
-        pageInfo {
-          endCursor
+        search(
+          where: {
+            AND: [
+              {
+                OR: [
+                  { name: "_templates", value: $template, operator: CONTAINS },
+                  { name: "_templates", value: $vntemplate, operator: CONTAINS }
+                ]
+              },
+              { name: "_path", value: $path, operator: CONTAINS },
+              { name: "_language", value: $lang, operator: CONTAINS }
+            ]
+          },
+          first: $pageSize,
+          after: $after,
+          orderBy: { name: "Release Date", direction: DESC }
+        ) {
+          pageInfo {
+            endCursor
+            hasNext
+          }
+          total
+          results {
+            ...itemDetail
+          }
         }
-        total
-        results {
-        ...itemDetail
-        }
-      
       }
-    }
-
-    fragment itemDetail on Item {
-    ... on Announcement 
-            {    
-              id
-              title:field(name:"Title")
-              {
-              ...textFields
+      
+      fragment itemDetail on Item {
+        id
+        title: field(name: "Title") {
+          ...textFields
+        }
+        content: field(name: "Content") {
+          ...richTextFields
+        }
+        summary: field(name: "Summary") {
+          ...textFields
+        }
+        thumbnail: field(name: "Thumbnail") {
+          ...imageFields
+        }
+        publishedDate: field(name: "Published Date") {
+          ...dateFields
+        }
+        releaseDate: field(name: "Release Date") {
+          ...dateFields
+        }
+        documents: field(name: "Documents") {
+          ...multilistFields
+        }
+        manufacturer: field(name: "Manufacturer") {
+          ...textFields
+        }
+        source: field(name: "Source") {
+          ...textFields
+        }
+        tag: field(name: "Tag") {
+          ...lookupFields
+        }
+        pinToTop: field(name: "Pin To Top") {
+          ...checkboxFields
+        }
+        saleOrgDictionary: field(name: "Sale Org Dictionary") {
+          ... on MultilistField {
+            value: targetItems {
+              key: field(name: "Key") {
+                value
               }
-              summary:field(name:"Summary")
-              {
-              ...textFields
+              valueForPhytoSaleOrg: field(name: "Value for Phyto sale org") {
+                value
               }
-              manufacturer:field(name:"Manufacturer")
-              {
-              ...textFields
+              valueForMetroSaleOrg: field(name: "Value for Metro sale org") {
+                value
               }
-              source:field(name:"Source")
-              {
-              ...textFields
-              }
-              content:field(name:"Content")
-              { 
-                ...richTextFields
-              }
-              thumbnail:field(name:"Thumbnail")
-              { 
-                ...imageFields
-              }
-              publishedDate: field(name:"Published Date")
-              {
-                ...dateFields
-              }
-              documents: field(name: "Documents") {
-                ...multilistFieldsAnnouncements
-              }
-              tag: field(name: "Tag") {
-                ...lookupFields
+              valueForSangSaleOrg: field(name: "Value for Sang sale org") {
+                value
               }
             }
-    }
-    fragment multilistFieldsAnnouncements on MultilistField {
-      value: targetItems {
-        url {
-          value: url
+          }
         }
       }
-    }
-    fragment lookupFields on LookupField {
-      value: targetItem {
-        name
+      
+      fragment textFields on TextField {
+        value
       }
-    }
-    fragment textFields on TextField 
-    {
-      value
-    }
-    fragment dateFields on DateField 
-    {
-      isoValue:value
-    }
-    fragment imageFields on ImageField 
-    {
-      src
-    }
-    fragment richTextFields on RichTextField 
-    {
-      value
-    }
-    ''';
+      
+      fragment checkboxFields on CheckboxField {
+        boolValue
+      }
+      
+      fragment richTextFields on RichTextField {
+        value
+      }
+      
+      fragment dateFields on DateField {
+        isoValue: value
+        formattedDateValue: formattedDateValue
+      }
+      
+      fragment imageFields on ImageField {
+        src
+      }
+      
+      fragment multilistFields on MultilistField {
+        jsonValue
+      }
+      
+      fragment lookupFields on LookupField {
+        value: targetItem {
+          id
+          name
+          displayName
+        }
+      }
+''';
   }
 
   String getAnnouncementInfoDetailsQuery() {
-    return '''
-    query (\$itemId: String!, \$lang: String!) {
-      item(path: \$itemId, language: \$lang) {
+    return r'''
+      query ($itemId: String!, $lang: String!) {
+        item(path: $itemId, language: $lang) {
+          ...itemDetail
+        }
+      }
+      
+      fragment itemDetail on Item {
         id
         title: field(name: "Title") {
           ...textFields
@@ -128,38 +152,7 @@ class AnnouncementInfoQueryMutation {
         publishedDate: field(name: "Published Date") {
           ...dateFields
         }
-        documents: field(name: "Documents") {
-          ...multilistFields
-        }
-        manufacturer: field(name: "Manufacturer") {
-          ...textFields
-        }
-        source: field(name: "Source") {
-          ...textFields
-        }
-        tag: field(name: "Tag") {
-          ...lookupFields
-        }
-        ...itemDetail
-      }
-    }
-
-    fragment itemDetail on Item {
-      ... on Announcement {
-        id
-        title: field(name: "Title") {
-          ...textFields
-        }
-        content: field(name: "Content") {
-          ...richTextFields
-        }
-        summary: field(name: "Summary") {
-          ...textFields
-        }
-        thumbnail: field(name: "Thumbnail") {
-          ...imageFields
-        }
-        publishedDate: field(name: "Published Date") {
+        releaseDate: field(name: "Release Date") {
           ...dateFields
         }
         documents: field(name: "Documents") {
@@ -174,40 +167,61 @@ class AnnouncementInfoQueryMutation {
         tag: field(name: "Tag") {
           ...lookupFields
         }
-      }
-    }
-
-    fragment textFields on TextField {
-      value
-    }
-
-    fragment richTextFields on RichTextField {
-      value
-    }
-
-    fragment dateFields on DateField {
-      isoValue: value
-    }
-
-    fragment imageFields on ImageField {
-      src
-    }
-
-    fragment multilistFields on MultilistField {
-      value: targetItems {
-        url {
-          value: url
+        pinToTop: field(name: "Pin To Top") {
+          ...checkboxFields
+        }
+        saleOrgDictionary: field(name: "Sale Org Dictionary") {
+          ... on MultilistField {
+            value: targetItems {
+              key: field(name: "Key") {
+                value
+              }
+              valueForPhytoSaleOrg: field(name: "Value for Phyto sale org") {
+                value
+              }
+              valueForMetroSaleOrg: field(name: "Value for Metro sale org") {
+                value
+              }
+              valueForSangSaleOrg: field(name: "Value for Sang sale org") {
+                value
+              }
+            }
+          }
         }
       }
-    }
-
-    fragment lookupFields on LookupField {
-      value: targetItem {
-        id
-        name
-        displayName
+      
+      fragment textFields on TextField {
+        value
       }
-    }
-    ''';
+      
+      fragment checkboxFields on CheckboxField {
+        boolValue
+      }
+      
+      fragment richTextFields on RichTextField {
+        value
+      }
+      
+      fragment dateFields on DateField {
+        isoValue: value
+        formattedDateValue: formattedDateValue
+      }
+      
+      fragment imageFields on ImageField {
+        src
+      }
+      
+      fragment multilistFields on MultilistField {
+        jsonValue
+      }
+      
+      fragment lookupFields on LookupField {
+        value: targetItem {
+          id
+          name
+          displayName
+        }
+      }
+''';
   }
 }

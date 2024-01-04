@@ -40,6 +40,7 @@ class AnnouncementInfoRepository extends IAnnouncementInfoRepository {
       final announcementInfo = await remoteDataSource.getAnnouncementInfo(
         announcementUrlPath: config.announcementApiUrlPath,
         template: config.announcementTemplate,
+        vnTemplate: config.announcementVnTemplate,
         pageSize: pageSize,
         variablePath: salesOrg.announcementVariablePath,
         lang: user.preferredLanguage.locale.languageCode,

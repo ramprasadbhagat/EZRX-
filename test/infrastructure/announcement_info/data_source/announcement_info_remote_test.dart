@@ -30,7 +30,6 @@ void main() {
   late Config config;
   final fakeUser = User.empty();
 
-
   final dio = Dio(
     BaseOptions(
       baseUrl: 'https://uat-my.ezrx.com',
@@ -53,6 +52,7 @@ void main() {
     final variables = {
       'pageSize': config.pageSize,
       'template': config.announcementTemplate,
+      'vntemplate': config.announcementVnTemplate,
       'path': config.announcementApiUrlPath,
       'lang': fakeUser.preferredLanguage.locale.languageCode,
       'after': '',
@@ -83,6 +83,7 @@ void main() {
         announcementUrlPath: config.announcementApiUrlPath,
         variablePath: salesOrg.announcementVariablePath,
         template: config.announcementTemplate,
+        vnTemplate: config.announcementVnTemplate,
         pageSize: config.pageSize,
         after: '',
         lang: fakeUser.preferredLanguage.locale.languageCode,
@@ -113,6 +114,7 @@ void main() {
         announcementUrlPath: config.announcementApiUrlPath,
         variablePath: salesOrg.announcementVariablePath,
         template: config.announcementTemplate,
+        vnTemplate: config.announcementVnTemplate,
         pageSize: config.pageSize,
         after: '',
         lang: fakeUser.preferredLanguage.locale.languageCode,
@@ -149,6 +151,7 @@ void main() {
           .getAnnouncementInfo(
         announcementUrlPath: config.announcementApiUrlPath,
         variablePath: salesOrg.announcementVariablePath,
+        vnTemplate: config.announcementVnTemplate,
         template: config.announcementTemplate,
         pageSize: config.pageSize,
         after: '',
@@ -182,6 +185,7 @@ void main() {
           .getAnnouncementInfo(
         announcementUrlPath: config.announcementApiUrlPath,
         variablePath: salesOrg.announcementVariablePath,
+        vnTemplate: config.announcementVnTemplate,
         template: config.announcementTemplate,
         pageSize: config.pageSize,
         after: '',

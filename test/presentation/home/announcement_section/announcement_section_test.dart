@@ -140,7 +140,7 @@ void main() async {
       verify(
         () => announcementInfoDetailsBloc.add(
           AnnouncementInfoDetailsEvent.fetch(
-            itemId: '532E19B7CF044A1D92DA00B2A551FC34',
+            itemId: announcementArticleInfo.announcementList.first.id,
             salesOrg: salesOrg,
           ),
         ),
