@@ -22,12 +22,17 @@ class CreatePaymentInvoicePdf {
   DateTimeStringValue expiryDate({
     required DateTimeStringValue valueDate,
     required int expiryDays,
-  }) =>
-      DateTimeStringValue(
-        DateFormat(DateTimeFormatString.apiDateWithDashFormat).format(
-          DateTime.parse(valueDate.getValue()).add(Duration(days: expiryDays)),
-        ),
-      );
+  }) {
+    if (valueDate.isEmpty) {
+      return DateTimeStringValue('');
+    }
+
+    return DateTimeStringValue(
+      DateFormat(DateTimeFormatString.apiDateWithDashFormat).format(
+        DateTime.parse(valueDate.getValue()).add(Duration(days: expiryDays)),
+      ),
+    );
+  }
 
   Future<pw.MemoryImage> _captureImageDescription({
     required String pleaseNote,
@@ -323,7 +328,7 @@ class CreatePaymentInvoicePdf {
               overflow: pw.TextOverflow.clip,
             ),
             pw.Text(
-              createdDate.dateString,
+              createdDate.dateTimeOrNaString,
               style: pw.TextStyle(
                 fontSize: 16,
                 color: PdfColor.fromInt(ZPColors.primary.value),
@@ -356,7 +361,7 @@ class CreatePaymentInvoicePdf {
               overflow: pw.TextOverflow.clip,
             ),
             pw.Text(
-              expiryDate.dateString,
+              expiryDate.dateTimeOrNaString,
               style: pw.TextStyle(
                 fontSize: 16,
                 color: PdfColor.fromInt(ZPColors.primary.value),
