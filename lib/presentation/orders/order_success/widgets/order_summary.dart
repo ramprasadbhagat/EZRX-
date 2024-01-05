@@ -22,6 +22,7 @@ class _OrderSummary extends StatelessWidget {
         ),
       ),
       subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             key: WidgetKeys.orderSuccessSubTotal,
@@ -34,30 +35,77 @@ class _OrderSummary extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                salesOrgConfig: eligibilityState.salesOrgConfigs,
                 price:
                     '${orderHistoryDetails.subTotalExcludeTax(eligibilityState.isMYExternalSalesRepUser)}',
               ),
             ],
           ),
           if (eligibilityState.salesOrgConfigs.showSubtotalTaxBreakdown)
-            Row(
-              key: WidgetKeys.orderSummaryTax,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  eligibilityState.salesOrg.isVN
-                      ? '${context.tr('Tax')}:'
-                      : '${context.tr('Tax at')} ${orderHistoryDetails.totalTaxPercentage}%:',
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                PriceComponent(
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: orderHistoryDetails.totalTax.toString(),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Row(
+                key: WidgetKeys.orderSummaryTax,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    eligibilityState.salesOrg.isVN
+                        ? '${context.tr('Tax')}:'
+                        : '${context.tr('Tax at')} ${orderHistoryDetails.totalTaxPercentage}%:',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  PriceComponent(
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
+                    price: orderHistoryDetails.totalTax.toString(),
+                  ),
+                ],
+              ),
+            ),
+          if (eligibilityState.salesOrg.showSmallOrderFee) ...[
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Row(
+                key: WidgetKeys.orderSummarySmallFee,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${context.tr('Small order fee')}:',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  PriceComponent(
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
+                    price: orderHistoryDetails.deliveryFee.toString(),
+                  ),
+                ],
+              ),
+            ),
+            Text(
+              '${context.tr('Applies to orders less than')} ${StringUtils.displayPrice(
+                eligibilityState.salesOrgConfigs,
+                eligibilityState.salesOrg.smallOrderThreshold,
+              )}',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontSize: 10,
+                  ),
+            ),
+          ],
+          if (eligibilityState.salesOrg.showManualFee)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Row(
+                key: WidgetKeys.orderSummaryManualFee,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${context.tr('Manual fee')}:',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  PriceComponent(
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
+                    price: orderHistoryDetails.manualFee.toString(),
+                  ),
+                ],
+              ),
             ),
           const Divider(
             indent: 0,

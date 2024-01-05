@@ -149,6 +149,8 @@ class SalesOrg extends ValueObject<String> {
 
   bool get showSmallOrderFee => isID;
 
+  bool get showManualFee => isID;
+
   bool get showTaxDescription => isTH || isMM || isKH;
 
   String get taxTitle => isVN ? 'Tax' : 'Tax at';

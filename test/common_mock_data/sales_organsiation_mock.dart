@@ -58,6 +58,7 @@ final fakeSalesOrganisationConfigs =
 final fakeIDSalesOrganisationConfigs =
     SalesOrganisationConfigs.empty().copyWith(
   salesOrg: fakeIDSalesOrg,
+  currency: Currency('idr'),
 );
 
 final fakeTWSalesOrganisation =

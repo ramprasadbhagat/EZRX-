@@ -163,7 +163,7 @@ class _SummaryBreakDownForID extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${context.tr('Manual Fee')}:',
+                '${context.tr('Manual fee')}:',
               ),
               PriceComponent(
                 type: PriceStyle.summaryPrice,

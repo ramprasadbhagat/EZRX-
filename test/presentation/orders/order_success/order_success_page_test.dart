@@ -34,9 +34,11 @@ import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
@@ -135,8 +137,9 @@ void main() {
   final fakeMaterialItem = OrderHistoryDetailsOrderItem.empty().copyWith(
     productType: MaterialInfoType.material(),
   );
+  late OrderHistoryDetails fakeOrderHistoryDetails;
   setUpAll(
-    () {
+    () async {
       WidgetsFlutterBinding.ensureInitialized();
 
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -160,6 +163,8 @@ void main() {
       productImageBlocMock = ProductImageBlocMock();
       poAttachmentBlocMock = PoAttachmentBlocMock();
       mixpanelServiceMock = locator<MixpanelService>();
+      fakeOrderHistoryDetails =
+          await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
     },
   );
   setUp(
@@ -1588,6 +1593,77 @@ void main() {
         );
       },
     );
+    testWidgets('Show Small Order Fee And Manual Fee For ID Market',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+        ),
+      );
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: fakeOrderHistoryDetails,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final smallFeeSection = find.byKey(WidgetKeys.orderSummarySmallFee);
+      final manualFeeSection = find.byKey(WidgetKeys.orderSummaryManualFee);
+      expect(smallFeeSection, findsOneWidget);
+      expect(manualFeeSection, findsOneWidget);
+
+      expect(
+        find.descendant(
+          of: smallFeeSection,
+          matching: find.text('${'Small order fee'.tr()}:'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: smallFeeSection,
+          matching: find.text(
+            StringUtils.priceComponentDisplayPrice(
+              fakeIDSalesOrganisationConfigs,
+              fakeOrderHistoryDetails.deliveryFee,
+              false,
+            ),
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.text(
+            '${'Applies to orders less than'.tr()} ${StringUtils.displayPrice(
+          fakeIDSalesOrganisationConfigs,
+          fakeIDSalesOrganisation.salesOrg.smallOrderThreshold,
+        )}'),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: manualFeeSection,
+          matching: find.text('${'Manual fee'.tr()}:'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: manualFeeSection,
+          matching: find.text(
+            StringUtils.priceComponentDisplayPrice(
+              fakeIDSalesOrganisationConfigs,
+              fakeOrderHistoryDetails.manualFee,
+              false,
+            ),
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
   });
 }
 
