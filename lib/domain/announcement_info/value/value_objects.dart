@@ -14,6 +14,9 @@ class HtmlContent extends ValueObject<String> {
   String get appendedImgSrcWithBaseUrl =>
       addBaseUrlToImgSrc(value.getOrElse(() => ''));
 
+  String get appendedImgSrcWithBaseUrlWithMedia =>
+      addBaseUrlToImgSrcWithMedia(value.getOrElse(() => ''));
+
   const HtmlContent._(this.value);
 }
 

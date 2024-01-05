@@ -34,8 +34,8 @@ class _ContactDetails extends StatelessWidget {
                             margin: const EdgeInsets.all(0),
                           ),
                         },
-                        data: state
-                            .contactUsDetails.content.appendedImgSrcWithBaseUrl,
+                        data: state.contactUsDetails.content
+                            .appendedImgSrcWithBaseUrlWithMedia,
                         shrinkWrap: true,
                       ),
                       _ContactItem(

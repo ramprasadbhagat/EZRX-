@@ -16,6 +16,21 @@ String addBaseUrlToImgSrc(String input) {
   return document.outerHtml;
 }
 
+String addBaseUrlToImgSrcWithMedia(String input) {
+  final document = HtmlParser.parseHTML(input);
+  final imgElements = document.querySelectorAll('img');
+  for (final element in imgElements) {
+    final srcAttribute = element.attributes['src'];
+    if (srcAttribute != null && !srcAttribute.startsWith('http')) {
+      final cleanedSrcAttribute = srcAttribute.replaceAll('"', '');
+      element.attributes['src'] =
+          '${GetIt.instance<Config>().announcementImageBaseUrl}media$cleanedSrcAttribute';
+    }
+  }
+
+  return document.outerHtml;
+}
+
 String constructSourceBy(String source) {
   return source.isEmpty ? '' : 'Sourced By $source';
 }
