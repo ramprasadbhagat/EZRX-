@@ -80,7 +80,10 @@ class MaterialDto with _$MaterialDto {
         required String manufactured,
     @JsonKey(name: 'isFavourite', defaultValue: false)
         required bool isFavourite,
-    @JsonKey(name: 'type', defaultValue: '')
+    // TODO: The default on type is assigned temporarily as material
+    // will update this once issue is resolved from BE side
+    // https://zuelligpharma.atlassian.net/browse/EZRX-16463
+    @JsonKey(name: 'type', defaultValue: 'material')
         required String type,
     @JsonKey(
       name: 'hidePrice',
@@ -107,7 +110,8 @@ class MaterialDto with _$MaterialDto {
       defaultMaterialDescription: materialInfo.defaultMaterialDescription,
       materialNumber: materialInfo.materialNumber.getOrDefaultValue(''),
       materialDescription: materialInfo.materialDescription,
-      governmentMaterialCode: materialInfo.governmentMaterialCode.getOrDefaultValue(''),
+      governmentMaterialCode:
+          materialInfo.governmentMaterialCode.getOrDefaultValue(''),
       therapeuticClass: materialInfo.therapeuticClass,
       itemBrand: materialInfo.itemBrand,
       principalName:
@@ -252,7 +256,8 @@ class MaterialDataDto with _$MaterialDataDto {
         materialDescription: materialData.materialDescription,
         defaultMaterialDescription: materialData.defaultMaterialDescription,
         genericMaterialName: materialData.genericMaterialName,
-        governmentMaterialCode: materialData.governmentMaterialCode.getOrDefaultValue(''),
+        governmentMaterialCode:
+            materialData.governmentMaterialCode.getOrDefaultValue(''),
       );
 
   ProductImages toProductImage() => ProductImages.empty();

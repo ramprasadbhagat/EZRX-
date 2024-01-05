@@ -38,7 +38,7 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
       materialDescription: json['materialDescription'] as String? ?? '',
       manufactured: json['manufactured'] as String? ?? '',
       isFavourite: json['isFavourite'] as bool? ?? false,
-      type: json['type'] as String? ?? '',
+      type: json['type'] as String? ?? 'material',
       hidePrice: json['hidePrice'] as bool? ?? false,
       dataTotalCount: json['dataTotalCount'] as int? ?? 0,
       dataTotalHidden: json['dataTotalHidden'] as int? ?? 0,

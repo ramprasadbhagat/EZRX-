@@ -49,5 +49,13 @@ void main() {
               .toList();
       expect(similarProducts.first.hidePrice, true);
     });
+
+    test('Test Similar Products toDomain for type material', () {
+      final similarProducts =
+          List.from(similarProductsData['data']['similarSearches']['materials'])
+              .map((e) => MaterialDto.fromJson(e).toDomain())
+              .toList();
+      expect(similarProducts.first.type.getValue(), 'material');
+    });
   });
 }

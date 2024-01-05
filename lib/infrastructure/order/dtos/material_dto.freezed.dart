@@ -75,7 +75,7 @@ mixin _$MaterialDto {
   String get manufactured => throw _privateConstructorUsedError;
   @JsonKey(name: 'isFavourite', defaultValue: false)
   bool get isFavourite => throw _privateConstructorUsedError;
-  @JsonKey(name: 'type', defaultValue: '')
+  @JsonKey(name: 'type', defaultValue: 'material')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'hidePrice', defaultValue: false)
   bool get hidePrice => throw _privateConstructorUsedError;
@@ -145,7 +145,7 @@ abstract class $MaterialDtoCopyWith<$Res> {
       String materialDescription,
       @JsonKey(name: 'manufactured', defaultValue: '') String manufactured,
       @JsonKey(name: 'isFavourite', defaultValue: false) bool isFavourite,
-      @JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'type', defaultValue: 'material') String type,
       @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'dataTotalCount', defaultValue: 0) int dataTotalCount,
       @JsonKey(name: 'dataTotalHidden', defaultValue: 0) int dataTotalHidden,
@@ -411,7 +411,7 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
       String materialDescription,
       @JsonKey(name: 'manufactured', defaultValue: '') String manufactured,
       @JsonKey(name: 'isFavourite', defaultValue: false) bool isFavourite,
-      @JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'type', defaultValue: 'material') String type,
       @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'dataTotalCount', defaultValue: 0) int dataTotalCount,
       @JsonKey(name: 'dataTotalHidden', defaultValue: 0) int dataTotalHidden,
@@ -671,7 +671,7 @@ class _$_MaterialDto extends _MaterialDto {
       required this.manufactured,
       @JsonKey(name: 'isFavourite', defaultValue: false)
       required this.isFavourite,
-      @JsonKey(name: 'type', defaultValue: '') required this.type,
+      @JsonKey(name: 'type', defaultValue: 'material') required this.type,
       @JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(name: 'dataTotalCount', defaultValue: 0)
       required this.dataTotalCount,
@@ -774,7 +774,7 @@ class _$_MaterialDto extends _MaterialDto {
   @JsonKey(name: 'isFavourite', defaultValue: false)
   final bool isFavourite;
   @override
-  @JsonKey(name: 'type', defaultValue: '')
+  @JsonKey(name: 'type', defaultValue: 'material')
   final String type;
   @override
   @JsonKey(name: 'hidePrice', defaultValue: false)
@@ -993,7 +993,8 @@ abstract class _MaterialDto extends MaterialDto {
       required final String manufactured,
       @JsonKey(name: 'isFavourite', defaultValue: false)
       required final bool isFavourite,
-      @JsonKey(name: 'type', defaultValue: '') required final String type,
+      @JsonKey(name: 'type', defaultValue: 'material')
+      required final String type,
       @JsonKey(name: 'hidePrice', defaultValue: false)
       required final bool hidePrice,
       @JsonKey(name: 'dataTotalCount', defaultValue: 0)
@@ -1095,7 +1096,7 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'isFavourite', defaultValue: false)
   bool get isFavourite;
   @override
-  @JsonKey(name: 'type', defaultValue: '')
+  @JsonKey(name: 'type', defaultValue: 'material')
   String get type;
   @override
   @JsonKey(name: 'hidePrice', defaultValue: false)
