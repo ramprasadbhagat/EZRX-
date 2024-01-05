@@ -1,4 +1,6 @@
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
+import 'package:ezrxmobile/domain/banner/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ez_reach_banner_dto.freezed.dart';
@@ -44,13 +46,12 @@ class EZReachBannerDto with _$EZReachBannerDto {
       mobileBannerUrl: mobileBannerUrl.isEmpty ? tabBannerUrl : mobileBannerUrl,
       title: bannerCampaignName,
       description: targetProduct,
-      navigationalURL: navigationalURL,
+      navigationalURL: EZReachBannerLink(navigationalURL),
       serial: bannerCountId,
       isCustomer: customers,
-      keyword: keyWord,
       tabBannerUrl: tabBannerUrl,
+      keyword: StringValue(keyWord),
       isEZRXBanner: false,
-      isKeyword: navigationalURL.isEmpty && keyWord.isNotEmpty,
     );
   }
 
@@ -60,10 +61,10 @@ class EZReachBannerDto with _$EZReachBannerDto {
       tabBannerUrl: banner.tabBannerUrl,
       bannerCampaignName: banner.title,
       targetProduct: banner.description,
-      navigationalURL: banner.navigationalURL,
+      navigationalURL: banner.navigationalURL.getOrDefaultValue(''),
       bannerCountId: banner.serial,
       customers: banner.isCustomer,
-      keyWord: banner.keyword,
+      keyWord: banner.keyword.getOrDefaultValue(''),
       salesOrg: [banner.salesOrg],
       mobileBannerUrl: banner.mobileBannerUrl,
       startDate: '',

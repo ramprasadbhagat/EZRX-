@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
+import 'package:ezrxmobile/domain/banner/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -71,6 +72,7 @@ void main() {
   late ProductSearchBloc productSearchBlocMock;
   late AppRouter autoRouterMock;
   const fakeKeyword = 'Test Keyword';
+  const redirectionURL = 'https://test.com';
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -113,14 +115,13 @@ void main() {
   });
 
   group('Banner Tile', () {
-    Widget getWUT() {
+    Widget getWUT({String redirectionURL = redirectionURL}) {
       final banner = EZReachBanner.empty().copyWith(
         id: '1',
         title: 'Test Banner',
         tabBannerUrl: 'https://test.com/banner.jpg',
-        navigationalURL: 'https://test.com',
-        isKeyword: true,
-        keyword: fakeKeyword,
+        navigationalURL: EZReachBannerLink(redirectionURL),
+        keyword: StringValue(fakeKeyword),
       );
       final bannerTile = CarouselBannerTile(banner: banner, bannerPosition: 1);
       return WidgetUtils.getScopedWidget(
@@ -156,9 +157,8 @@ void main() {
         id: '1',
         title: 'Test Banner',
         tabBannerUrl: 'https://example.com/banner.jpg',
-        navigationalURL: 'https://example.com',
-        isKeyword: true,
-        keyword: 'test',
+        navigationalURL: EZReachBannerLink('https://example.com'),
+        keyword: StringValue('test'),
       );
 
       await tester.pumpWidget(
@@ -173,7 +173,7 @@ void main() {
     });
 
     testWidgets('Tap on banner and search keyword', (tester) async {
-      await tester.pumpWidget(getWUT());
+      await tester.pumpWidget(getWUT(redirectionURL: ''));
       await tester.pump();
       final bannerTile = find.byType(CarouselBannerTile);
       await tester.tap(bannerTile);

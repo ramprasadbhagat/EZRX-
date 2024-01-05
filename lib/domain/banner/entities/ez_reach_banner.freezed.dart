@@ -25,10 +25,9 @@ mixin _$EZReachBanner {
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get buttonLabel => throw _privateConstructorUsedError;
-  String get navigationalURL => throw _privateConstructorUsedError;
+  EZReachBannerLink get navigationalURL => throw _privateConstructorUsedError;
   String get salesOrg => throw _privateConstructorUsedError;
-  bool get isKeyword => throw _privateConstructorUsedError;
-  String get keyword => throw _privateConstructorUsedError;
+  StringValue get keyword => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   bool get isEZRXBanner => throw _privateConstructorUsedError;
 
@@ -53,10 +52,9 @@ abstract class $EZReachBannerCopyWith<$Res> {
       String title,
       String description,
       String buttonLabel,
-      String navigationalURL,
+      EZReachBannerLink navigationalURL,
       String salesOrg,
-      bool isKeyword,
-      String keyword,
+      StringValue keyword,
       String category,
       bool isEZRXBanner});
 }
@@ -85,7 +83,6 @@ class _$EZReachBannerCopyWithImpl<$Res, $Val extends EZReachBanner>
     Object? buttonLabel = null,
     Object? navigationalURL = null,
     Object? salesOrg = null,
-    Object? isKeyword = null,
     Object? keyword = null,
     Object? category = null,
     Object? isEZRXBanner = null,
@@ -130,19 +127,15 @@ class _$EZReachBannerCopyWithImpl<$Res, $Val extends EZReachBanner>
       navigationalURL: null == navigationalURL
           ? _value.navigationalURL
           : navigationalURL // ignore: cast_nullable_to_non_nullable
-              as String,
+              as EZReachBannerLink,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
-      isKeyword: null == isKeyword
-          ? _value.isKeyword
-          : isKeyword // ignore: cast_nullable_to_non_nullable
-              as bool,
       keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -173,10 +166,9 @@ abstract class _$$_EZReachBannerCopyWith<$Res>
       String title,
       String description,
       String buttonLabel,
-      String navigationalURL,
+      EZReachBannerLink navigationalURL,
       String salesOrg,
-      bool isKeyword,
-      String keyword,
+      StringValue keyword,
       String category,
       bool isEZRXBanner});
 }
@@ -203,7 +195,6 @@ class __$$_EZReachBannerCopyWithImpl<$Res>
     Object? buttonLabel = null,
     Object? navigationalURL = null,
     Object? salesOrg = null,
-    Object? isKeyword = null,
     Object? keyword = null,
     Object? category = null,
     Object? isEZRXBanner = null,
@@ -248,19 +239,15 @@ class __$$_EZReachBannerCopyWithImpl<$Res>
       navigationalURL: null == navigationalURL
           ? _value.navigationalURL
           : navigationalURL // ignore: cast_nullable_to_non_nullable
-              as String,
+              as EZReachBannerLink,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
-      isKeyword: null == isKeyword
-          ? _value.isKeyword
-          : isKeyword // ignore: cast_nullable_to_non_nullable
-              as bool,
       keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -288,7 +275,6 @@ class _$_EZReachBanner extends _EZReachBanner {
       required this.buttonLabel,
       required this.navigationalURL,
       required this.salesOrg,
-      required this.isKeyword,
       required this.keyword,
       required this.category,
       required this.isEZRXBanner})
@@ -313,13 +299,11 @@ class _$_EZReachBanner extends _EZReachBanner {
   @override
   final String buttonLabel;
   @override
-  final String navigationalURL;
+  final EZReachBannerLink navigationalURL;
   @override
   final String salesOrg;
   @override
-  final bool isKeyword;
-  @override
-  final String keyword;
+  final StringValue keyword;
   @override
   final String category;
   @override
@@ -327,7 +311,7 @@ class _$_EZReachBanner extends _EZReachBanner {
 
   @override
   String toString() {
-    return 'EZReachBanner(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, mobileBannerUrl: $mobileBannerUrl, tabBannerUrl: $tabBannerUrl, title: $title, description: $description, buttonLabel: $buttonLabel, navigationalURL: $navigationalURL, salesOrg: $salesOrg, isKeyword: $isKeyword, keyword: $keyword, category: $category, isEZRXBanner: $isEZRXBanner)';
+    return 'EZReachBanner(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, mobileBannerUrl: $mobileBannerUrl, tabBannerUrl: $tabBannerUrl, title: $title, description: $description, buttonLabel: $buttonLabel, navigationalURL: $navigationalURL, salesOrg: $salesOrg, keyword: $keyword, category: $category, isEZRXBanner: $isEZRXBanner)';
   }
 
   @override
@@ -354,8 +338,6 @@ class _$_EZReachBanner extends _EZReachBanner {
                 other.navigationalURL == navigationalURL) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
-            (identical(other.isKeyword, isKeyword) ||
-                other.isKeyword == isKeyword) &&
             (identical(other.keyword, keyword) || other.keyword == keyword) &&
             (identical(other.category, category) ||
                 other.category == category) &&
@@ -377,7 +359,6 @@ class _$_EZReachBanner extends _EZReachBanner {
       buttonLabel,
       navigationalURL,
       salesOrg,
-      isKeyword,
       keyword,
       category,
       isEZRXBanner);
@@ -400,10 +381,9 @@ abstract class _EZReachBanner extends EZReachBanner {
       required final String title,
       required final String description,
       required final String buttonLabel,
-      required final String navigationalURL,
+      required final EZReachBannerLink navigationalURL,
       required final String salesOrg,
-      required final bool isKeyword,
-      required final String keyword,
+      required final StringValue keyword,
       required final String category,
       required final bool isEZRXBanner}) = _$_EZReachBanner;
   const _EZReachBanner._() : super._();
@@ -427,13 +407,11 @@ abstract class _EZReachBanner extends EZReachBanner {
   @override
   String get buttonLabel;
   @override
-  String get navigationalURL;
+  EZReachBannerLink get navigationalURL;
   @override
   String get salesOrg;
   @override
-  bool get isKeyword;
-  @override
-  String get keyword;
+  StringValue get keyword;
   @override
   String get category;
   @override

@@ -22,16 +22,14 @@ void main() {
       ).toDomain();
       expect(eZReachFirstBannerData.mobileBannerUrl.isNotEmpty, true);
       expect(eZReachFirstBannerData.tabBannerUrl.isNotEmpty, true);
-      expect(eZReachFirstBannerData.navigationalURL.isNotEmpty, true);
-      expect(eZReachFirstBannerData.keyword.isNotEmpty, true);
-      expect(eZReachFirstBannerData.isKeyword, false);
+      expect(eZReachFirstBannerData.navigationalURL.isValid(), true);
+      expect(eZReachFirstBannerData.keyword.isValid(), true);
 
       final eZReachSecondBannerData = EZReachBannerDto.fromJson(
         eZReachData['data']['getLiveCampaigns']['data'][1],
       ).toDomain();
-      expect(eZReachSecondBannerData.navigationalURL.isEmpty, true);
-      expect(eZReachSecondBannerData.keyword.isNotEmpty, true);
-      expect(eZReachSecondBannerData.isKeyword, true);
+      expect(!eZReachSecondBannerData.navigationalURL.isValid(), true);
+      expect(eZReachSecondBannerData.keyword.isValid(), true);
     });
   });
 }

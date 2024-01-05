@@ -16,20 +16,31 @@ class Config {
   int maximumCartQuantity = 99999;
   String customScheme = 'ezrx://';
 
+String get domain {
+    switch (appFlavor) {
+      case Flavor.prod:
+        return '.ezrxplus.com';
+      case Flavor.uat:
+        return '.ezrx.com';
+      default:
+        return '.ezrx.com';
+    }
+  }
+  
   String baseUrl({AppMarket? currentMarket}) {
     final marketDomain = currentMarket?.marketDomain;
     switch (appFlavor) {
       // https://my.ezrxplus.com/
       case Flavor.prod:
-        return '$schema$marketDomain.ezrxplus.com';
+        return '$schema$marketDomain$domain';
       // https://ezrxplus-dev.ezrx.com/
       case Flavor.dev:
-        return '${schema}ezrxplus-$env.ezrx.com';
+        return '${schema}ezrxplus-$env$domain';
       // https://my.ezrx.com/
       case Flavor.mock:
       case Flavor.uat:
       default:
-        return '$schema$env-$marketDomain.ezrx.com';
+        return '$schema$env-$marketDomain$domain';
     }
   }
 
@@ -443,4 +454,6 @@ class Config {
         return 'TEST-464-R68-876Z';
     }
   }
+
+  
 }

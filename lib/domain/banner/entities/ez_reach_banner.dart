@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/banner/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ez_reach_banner.freezed.dart';
@@ -16,15 +18,14 @@ class EZReachBanner with _$EZReachBanner {
     required String title,
     required String description,
     required String buttonLabel,
-    required String navigationalURL,
+    required EZReachBannerLink navigationalURL,
     required String salesOrg,
-    required bool isKeyword,
-    required String keyword,
+    required StringValue keyword,
     required String category,
     required bool isEZRXBanner,
   }) = _EZReachBanner;
 
-  factory EZReachBanner.empty() => const EZReachBanner(
+  factory EZReachBanner.empty() => EZReachBanner(
         id: '',
         serial: 0,
         isPreSalesOrg: false,
@@ -33,12 +34,12 @@ class EZReachBanner with _$EZReachBanner {
         title: '',
         description: '',
         buttonLabel: '',
-        navigationalURL: '',
+        navigationalURL: EZReachBannerLink(''),
         salesOrg: '',
-        isKeyword: false,
-        keyword: '',
+        keyword: StringValue(''),
         category: '',
         isEZRXBanner: true,
         tabBannerUrl: '',
       );
+      
 }

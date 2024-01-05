@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
@@ -41,34 +42,33 @@ class CarouselBannerTile extends StatelessWidget {
             MixpanelProps.bannerId: banner.id,
             MixpanelProps.bannerTitle: banner.title,
             MixpanelProps.bannerOrder: bannerPosition,
-            MixpanelProps.bannerRedirected:
-                bannerUrl.startsWith('https') ? 'external_web' : 'internal',
+            MixpanelProps.bannerRedirected: banner.navigationalURL.type,
           },
         );
-        if (banner.isKeyword) {
-          if (context.mounted) {
-            locator<MixpanelService>().setBannerOrderFlow(banner);
-            context.read<ProductSearchBloc>().add(
-                  ProductSearchEvent.searchProduct(
-                    searchKey: SearchKey.search(
-                      banner.keyword,
-                    ),
-                    materialFilter:
-                        context.read<MaterialFilterBloc>().state.materialFilter,
+        if (banner.navigationalURL.isInternalLink) {
+          context.read<DeepLinkingBloc>().add(
+                DeepLinkingEvent.addPendingLink(banner.navigationalURL.uri),
+              );
+        } else if (banner.navigationalURL.isExternalLink) {
+          await context.router.push(
+            WebViewPageRoute(
+              url: banner.navigationalURL.getOrDefaultValue(''),
+            ),
+          );
+        } else if (banner.keyword.isValid() && context.mounted) {
+          locator<MixpanelService>().setBannerOrderFlow(banner);
+          context.read<ProductSearchBloc>().add(
+                ProductSearchEvent.searchProduct(
+                  searchKey: SearchKey.search(
+                    banner.keyword.getOrDefaultValue(''),
                   ),
-                );
-            await context.router.push(
-              ProductSuggestionPageRoute(parentRoute: context.routeData.path),
-            );
-          }
-        } else if (banner.navigationalURL.isNotEmpty) {
-          if (context.mounted) {
-            await context.router.push(
-              WebViewPageRoute(
-                url: banner.navigationalURL,
-              ),
-            );
-          }
+                  materialFilter:
+                      context.read<MaterialFilterBloc>().state.materialFilter,
+                ),
+              );
+          await context.router.push(
+            ProductSuggestionPageRoute(parentRoute: context.routeData.path),
+          );
         }
       },
       child: CustomImage(
