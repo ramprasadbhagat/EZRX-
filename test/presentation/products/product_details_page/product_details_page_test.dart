@@ -1725,6 +1725,74 @@ void main() {
           findsOneWidget,
         );
       });
+
+      testWidgets(
+          'Product details Page should not display batch number for SG Market',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              stockInfo: stockInfo,
+            ),
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeSGSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.textContaining(
+            'Batch 12S017',
+            findRichText: true,
+          ),
+          findsNothing,
+        );
+      });
+
+      testWidgets(
+          '_MaterialInfoDialog should be shown when tap icon - not display batch for SG Market',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+            ),
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeSGSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+          find.byKey(WidgetKeys.productDetailList),
+          const Offset(0, -200),
+        );
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.materialDetailsInfoTile), findsOneWidget);
+        await tester.tap(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.materialInfoDialog),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
+          ),
+          findsNothing,
+        );
+      });
     },
   );
 }

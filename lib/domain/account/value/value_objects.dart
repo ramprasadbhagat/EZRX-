@@ -159,9 +159,9 @@ class SalesOrg extends ValueObject<String> {
 
   bool get showGovNumber => isVN;
 
-  //This is a temporary fix for hiding batch display for TW Market
+  //This is a temporary fix for hiding batch display for TW and SG Market
   // later can be introduce as remote config
-  bool get showBatchNumber => !isTW;
+  bool get showBatchNumber => !isTW && !isSg;
 
   const SalesOrg._(this.value);
 }
