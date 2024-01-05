@@ -152,6 +152,7 @@ class HomeRobot {
 
   Future<void> tapBundlesIcon() async {
     final iconArrow = find.byKey(WidgetKeys.sectionTileIcon('Bundles'.tr()));
+    await _scrollEnsureVisible(iconArrow);
     await tester.tap(iconArrow);
     await tester.pumpAndSettle();
   }
@@ -376,5 +377,6 @@ class HomeRobot {
       listView,
       const Offset(0, -250),
     );
+    await tester.pump();
   }
 }

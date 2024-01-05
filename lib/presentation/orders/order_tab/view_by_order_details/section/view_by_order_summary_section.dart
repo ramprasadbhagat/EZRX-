@@ -164,7 +164,6 @@ class _PriceTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      key: key,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text('$title:'),

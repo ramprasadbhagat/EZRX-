@@ -69,7 +69,11 @@ class CustomerSearchRobot {
   }
 
   void verifySearchNotFound() {
-    final message = find.text('That didn’t match anything'.tr());
-    expect(message, findsWidgets);
+    expect(
+      find.text(
+        '${'Check the location name or code you have entered for any errors'.tr()}.',
+      ),
+      findsWidgets,
+    );
   }
 }

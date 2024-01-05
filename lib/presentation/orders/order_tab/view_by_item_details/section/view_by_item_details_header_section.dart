@@ -54,10 +54,10 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                 ),
           ),
           InvoiceNumberSection(
+            key: WidgetKeys.viewByItemsOrderDetailInvoiceNumber,
             invoiceNumber: orderHistoryItem.invoiceData.invoiceNumber
                 .getOrDefaultValue(''),
           ),
-
           BalanceTextRow(
             valueFlex: 1,
             key: WidgetKeys.viewByItemsOrderDetailPoReference,

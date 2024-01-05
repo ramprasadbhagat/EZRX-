@@ -37,7 +37,7 @@ class CartProductTileBonus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomSlidable(
-      key: WidgetKeys.cartItemBonusSample(
+      key: WidgetKeys.cartItemBonus(
         cartProduct.materialInfo.materialNumber.displayMatNo,
         bonusItem.materialNumber.displayMatNo,
       ),
@@ -134,7 +134,7 @@ class _ItemSubTotalSection extends StatelessWidget {
               )
             : Text(
                 'FREE'.tr(),
-                key: WidgetKeys.cartItemBonusSampleFreeLabel,
+                key: WidgetKeys.cartItemBonusFreeLabel,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.textButtonColor,
                     ),
@@ -178,7 +178,7 @@ class _MaterialDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
               bonusItem.materialDescription,
-              key: WidgetKeys.cartItemBonusSampleMaterialDescription,
+              key: WidgetKeys.cartItemBonusMaterialDescription,
               maxLines: 2,
               style: Theme.of(context).textTheme.labelSmall,
             ),
@@ -257,12 +257,12 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: CartItemQuantityInput(
+      child: CartItemQuantityInput( 
         isEnabled:
             context.read<EligibilityBloc>().state.isBonusSampleItemVisible,
-        quantityAddKey: WidgetKeys.cartItemAddKey,
-        quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
-        quantityTextKey: WidgetKeys.quantityInputTextKey,
+        quantityAddKey: WidgetKeys.bonusOfferItemAddKey,
+        quantityDeleteKey: WidgetKeys.bonusOfferItemDeleteKey,
+        quantityTextKey: WidgetKeys.bonusOfferItemInputKey,
         controller: _controller,
         isLoading: context.read<CartBloc>().state.isUpserting,
         onFieldChange: (value) {},

@@ -576,15 +576,6 @@ class WidgetKeys {
   static const Key cartItemBonusMaterialDescription =
       Key('cartItemBonusMaterialDescription');
   static const Key cartItemBonusFreeLabel = Key('cartItemBonusFreeLabel');
-  static Key cartItemBonusSample(
-    String materialNumber,
-    String bonusSampleMaterialNumber,
-  ) =>
-      Key('cartItemBonus$materialNumber$bonusSampleMaterialNumber');
-  static const Key cartItemBonusSampleMaterialDescription =
-      Key('cartItemBonusSampleMaterialDescription');
-  static const Key cartItemBonusSampleFreeLabel =
-      Key('cartItemBonusSampleFreeLabel');
   static const Key bonusSampleSheet = Key('bonusSampleBottomSheet');
   static const Key bonusSampleSheetCloseButton =
       Key('bonusSampleBottomSheetCloseButton');

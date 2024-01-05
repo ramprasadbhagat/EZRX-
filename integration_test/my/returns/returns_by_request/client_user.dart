@@ -7,6 +7,7 @@ import '../../../core/common.dart';
 import '../../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../../robots/common/common_robot.dart';
+import '../../../robots/common/enum.dart';
 import '../../../robots/common/extension.dart';
 import '../../../robots/home/home_robot.dart';
 import '../../../robots/login_robot.dart';
@@ -77,7 +78,7 @@ void main() {
     await runAppForTesting(tester);
     await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
     await commonRobot.changeDeliveryAddress(shipToCode);
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapReturnsTile();
 
     //verify

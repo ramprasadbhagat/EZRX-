@@ -6,6 +6,7 @@ import '../../../core/common.dart';
 import '../../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../../robots/common/common_robot.dart';
+import '../../../robots/common/enum.dart';
 import '../../../robots/login_robot.dart';
 import '../../../robots/more/more_robot.dart';
 
@@ -54,7 +55,7 @@ void main() {
     await runAppForTesting(tester);
     await loginToHomeTab();
     await tester.pumpAndSettle();
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentRobot.tapNewPayment();
     newPaymentStep1Robot.verifyStep1InitialField();
@@ -65,7 +66,7 @@ void main() {
       (tester) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentRobot.tapNewPayment();
     await commonRobot.searchWithSearchIcon('');
@@ -79,7 +80,7 @@ void main() {
       (tester) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentRobot.tapNewPayment();
     await newPaymentStep1Robot.clickFilter();
@@ -102,7 +103,7 @@ void main() {
       (tester) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentRobot.tapNewPayment();
     await newPaymentStep1Robot.clickFilter();
@@ -132,7 +133,7 @@ void main() {
       (tester) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentRobot.tapNewPayment();
     await newPaymentStep1Robot.clickFilter();
@@ -156,7 +157,7 @@ void main() {
       (tester) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentRobot.tapNewPayment();
     await newPaymentStep1Robot.clickFilter();
@@ -179,7 +180,7 @@ void main() {
       (tester) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentRobot.tapNewPayment();
     await newPaymentStep1Robot.clickFilter();
@@ -205,7 +206,7 @@ void main() {
       (tester) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentRobot.tapNewPayment();
     await newPaymentStep1Robot.clickFilter();
@@ -226,7 +227,7 @@ void main() {
       (tester) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentRobot.tapNewPayment();
     await newPaymentStep1Robot.clickFilter();
@@ -247,7 +248,7 @@ void main() {
       (tester) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentRobot.tapNewPayment();
     await newPaymentStep1Robot.clickFilter();

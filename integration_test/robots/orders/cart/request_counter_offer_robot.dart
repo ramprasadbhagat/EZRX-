@@ -38,13 +38,13 @@ class RequestCounterOfferRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyListPrice(String price) {
+  void verifyListPrice(String price, {bool isVisible = true}) {
     expect(
       find.descendant(
         of: listPrice,
         matching: find.textContaining(price, findRichText: true),
       ),
-      findsOneWidget,
+      isVisible ? findsOneWidget : findsNothing,
     );
   }
 

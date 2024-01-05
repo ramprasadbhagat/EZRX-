@@ -25,7 +25,7 @@ class ProfileRobot {
     expect(infoRow, findsOneWidget);
   }
 
-  void verifyAccountAndBussinessDetailsVisible({
+  void verifyAccountAndBusinessDetailsVisible({
     required String firstName,
     required String lastName,
     required String email,
@@ -40,7 +40,7 @@ class ProfileRobot {
     _verifyInfoRowVisible('Last name', lastName);
     _verifyInfoRowVisible('Email', email);
     _verifyInfoRowVisible('Username', username);
-    _verifyInfoRowVisible('Mobile number', mobilePhone);
+    _verifyInfoRowVisible('Contact number', mobilePhone);
     _verifyTextVisible('Language');
     _verifyTextVisible(language);
   }

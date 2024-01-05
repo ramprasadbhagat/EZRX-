@@ -54,7 +54,7 @@ void main() {
     //login without username and password
     await loginRobot.login(username, password);
 
-    await loginRobot.tapGetStartedButton();
+    await loginRobot.tapSkipIntroButton();
     await commonRobot.changeDeliveryAddress(customerCode);
 
     await homeRobot.tapPaymentQuickAccess();

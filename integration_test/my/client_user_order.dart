@@ -6,8 +6,9 @@ import 'package:integration_test/integration_test.dart';
 import '../core/common.dart';
 import '../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../core/infrastructure/zephyr/repository/zephyr_repository.dart';
-import '../robots/announcement_article/announcement/announcement_detail_robot.dart';
 import '../robots/announcement_article/announcement_article_root_robot.dart';
+import '../robots/announcement_article/articles/articles_details_robot.dart';
+import '../robots/announcement_article/articles/articles_robot.dart';
 import '../robots/auth/forgot_password_robot.dart';
 import '../robots/common/common_robot.dart';
 import '../robots/common/enum.dart';
@@ -15,7 +16,10 @@ import '../robots/common/extension.dart';
 import '../robots/home/customer_search_robot.dart';
 import '../robots/home/home_robot.dart';
 import '../robots/login_robot.dart';
+import '../robots/more/contact_us_robot.dart';
 import '../robots/more/more_robot.dart';
+import '../robots/more/profile_robot.dart';
+import '../robots/more/security_robot.dart';
 import '../robots/notification/notification_robot.dart';
 import '../robots/orders/cart/bonus_sample_robot.dart';
 import '../robots/orders/cart/cart_delivery_address_robot.dart';
@@ -50,6 +54,23 @@ void main() {
   late ForgotPasswordRobot forgotPasswordRobot;
   late HomeRobot homeRobot;
   late CustomerSearchRobot customerSearchRobot;
+  late ContactUsRobot contactUsRobot;
+  late ProfileRobot profileRobot;
+  late SecurityRobot securityRobot;
+  late NotificationRobot notificationRobot;
+  late MoreRobot moreRobot;
+
+  late AnnouncementArticleRootRobot announcementArticleRootRobot;
+  // late AnnouncementDetailRobot announcementDetailRobot;
+  // late AnnouncementRobot announcementRobot;
+  late ArticleRobot articleRobot;
+  late ArticleDetailsRobot articleDetailsRobot;
+
+  late ProductRobot productRobot;
+  late ProductDetailRobot productDetailRobot;
+  late FilterSortProductRobot filterSortProductRobot;
+  late ProductSuggestionRobot productSuggestionRobot;
+  late BundleDetailRobot bundleDetailRobot;
   late CartRobot cartRobot;
   late OOSPreOrderRobot oosPreOrderRobot;
   late CartDeliveryAddressRobot cartDeliveryAddressDetailRobot;
@@ -58,19 +79,7 @@ void main() {
   late OrderPriceSummaryRobot orderPriceSummaryRobot;
   late CheckoutRobot checkoutRobot;
   late OrderSuccessRobot orderSuccessRobot;
-  late ProductRobot productRobot;
-  late ProductDetailRobot productDetailRobot;
-  late FilterSortProductRobot filterSortProductRobot;
-  late ProductSuggestionRobot productSuggestionRobot;
-  late NotificationRobot notificationRobot;
-  late ReturnsByItemsDetailRobot returnsByItemsDetailRobot;
-  late PaymentDetailRobot paymentDetailRobot;
-  late MoreRobot moreRobot;
-  late BundleDetailRobot bundleDetailRobot;
-  late ReturnsRootRobot returnsRootRobot;
-  late PaymentHomeRobot paymentHomeRobot;
-  late AnnouncementArticleRootRobot announcementArticleRootRobot;
-  late AnnouncementDetailRobot announcementDetailRobot;
+
   late OrdersRootRobot ordersRootRobot;
   late ViewByItemsDetailRobot viewByItemsDetailRobot;
   late ViewByItemsRobot viewByItemsRobot;
@@ -79,12 +88,35 @@ void main() {
   late ViewByOrdersFilterRobot viewByOrdersFilterRobot;
   late ViewByOrdersDetailRobot viewByOrdersDetailRobot;
 
+  late ReturnsRootRobot returnsRootRobot;
+  late ReturnsByItemsDetailRobot returnsByItemsDetailRobot;
+
+  late PaymentHomeRobot paymentHomeRobot;
+  late PaymentDetailRobot paymentDetailRobot;
+
   void initializeRobot(WidgetTester tester) {
     commonRobot = CommonRobot(tester);
     loginRobot = LoginRobot(tester);
     forgotPasswordRobot = ForgotPasswordRobot(tester);
     homeRobot = HomeRobot(tester);
     customerSearchRobot = CustomerSearchRobot(tester);
+    contactUsRobot = ContactUsRobot(tester);
+    profileRobot = ProfileRobot(tester);
+    securityRobot = SecurityRobot(tester);
+    moreRobot = MoreRobot(tester);
+    notificationRobot = NotificationRobot(tester);
+
+    announcementArticleRootRobot = AnnouncementArticleRootRobot(tester);
+    // announcementDetailRobot = AnnouncementDetailRobot(tester);
+    // announcementRobot = AnnouncementRobot(tester);
+    articleRobot = ArticleRobot(tester);
+    articleDetailsRobot = ArticleDetailsRobot(tester);
+
+    productRobot = ProductRobot(tester);
+    productDetailRobot = ProductDetailRobot(tester);
+    filterSortProductRobot = FilterSortProductRobot(tester);
+    productSuggestionRobot = ProductSuggestionRobot(tester);
+    bundleDetailRobot = BundleDetailRobot(tester);
     cartRobot = CartRobot(tester);
     oosPreOrderRobot = OOSPreOrderRobot(tester);
     cartDeliveryAddressDetailRobot = CartDeliveryAddressRobot(tester);
@@ -93,19 +125,7 @@ void main() {
     orderPriceSummaryRobot = OrderPriceSummaryRobot(tester);
     checkoutRobot = CheckoutRobot(tester);
     orderSuccessRobot = OrderSuccessRobot(tester);
-    productRobot = ProductRobot(tester);
-    productDetailRobot = ProductDetailRobot(tester);
-    filterSortProductRobot = FilterSortProductRobot(tester);
-    productSuggestionRobot = ProductSuggestionRobot(tester);
-    moreRobot = MoreRobot(tester);
-    notificationRobot = NotificationRobot(tester);
-    returnsByItemsDetailRobot = ReturnsByItemsDetailRobot(tester);
-    paymentDetailRobot = PaymentDetailRobot(tester);
-    bundleDetailRobot = BundleDetailRobot(tester);
-    returnsRootRobot = ReturnsRootRobot(tester);
-    paymentHomeRobot = PaymentHomeRobot(tester);
-    announcementArticleRootRobot = AnnouncementArticleRootRobot(tester);
-    announcementDetailRobot = AnnouncementDetailRobot(tester);
+
     ordersRootRobot = OrdersRootRobot(tester);
     viewByItemsDetailRobot = ViewByItemsDetailRobot(tester);
     viewByItemsRobot = ViewByItemsRobot(tester);
@@ -113,6 +133,12 @@ void main() {
     viewByOrdersRobot = ViewByOrdersRobot(tester);
     viewByOrdersFilterRobot = ViewByOrdersFilterRobot(tester);
     viewByOrdersDetailRobot = ViewByOrdersDetailRobot(tester);
+
+    returnsRootRobot = ReturnsRootRobot(tester);
+    returnsByItemsDetailRobot = ReturnsByItemsDetailRobot(tester);
+
+    paymentHomeRobot = PaymentHomeRobot(tester);
+    paymentDetailRobot = PaymentDetailRobot(tester);
   }
 
   const marketMalaysia = 'Malaysia';
@@ -127,13 +153,13 @@ void main() {
   const invalidSearchKey = 'auto-test-auto-test';
   const invalidNumberSearchKey = '1231762381236123';
   const minOrderAmount = 300.0;
-  const materialNumber = '23348928';
-  const materialName = '(Z) ZELBORAF TAB FC 240MG 56 MY';
-  const materialPrincipalName = 'ROCHE (MALAYSIA) SDN BHD';
-  const materialCountryOfOrigin = 'France';
+  const materialNumber = '21037004';
+  const materialName = 'AMO AC51L 0011011.0D';
+  const materialPrincipalName = 'ABBOTT MEDICAL OPTICS';
+  const materialCountryOfOrigin = 'USA';
   const materialUnitMeasurement = 'EA';
-  const materialBatch = 'M1336MC';
-  const materialUnitPrice = 6900.0;
+  const materialBatch = '+180036983';
+  const materialUnitPrice = 1000.0;
   const multiImageMaterialNumber = '21041738';
   const otherInfoMaterialNumber = '21041738';
   const lowPriceMaterialNumber = '21247735';
@@ -171,6 +197,30 @@ void main() {
     }
     await commonRobot.dismissSnackbar(dismissAll: true);
     await commonRobot.changeDeliveryAddress(shipToCode);
+  }
+
+  Future<void> browseProductFromEmptyCart() async {
+    await homeRobot.tapMiniCartIcon();
+    await cartRobot.clearCart();
+    await cartRobot.tapBrowseProductButton();
+    await productRobot.openSearchProductScreen();
+  }
+
+  Future<void> checkoutWithMaterial(
+    String materialNumber,
+    int qty, {
+    bool isPreOrder = false,
+  }) async {
+    await browseProductFromEmptyCart();
+    await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+    await productSuggestionRobot.tapSearchResult(materialNumber);
+    await productDetailRobot.tapAddToCart();
+    await productDetailRobot.tapCartButton();
+    await cartRobot.changeMaterialQty(materialNumber, qty);
+    await cartRobot.tapCheckoutButton();
+    if (isPreOrder) {
+      await oosPreOrderRobot.tapContinueButton();
+    }
   }
 
   group('Authentication - ', () {
@@ -342,8 +392,8 @@ void main() {
       await loginRobot.login(username, password);
 
       //intro page
-      loginRobot.findGetStartedButton();
-      await loginRobot.tapGetStartedButton();
+      loginRobot.findSkipIntroButton();
+      await loginRobot.tapSkipIntroButton();
 
       //home page
       homeRobot.verify();
@@ -463,7 +513,7 @@ void main() {
       homeRobot.findQuickAccessMenu();
       homeRobot.findBannerInHomeScreen();
       await homeRobot.findBrowseProductsIcon();
-      await homeRobot.findAnnouncementsIcon();
+      // await homeRobot.findAnnouncementsIcon();
     });
 
     testWidgets(
@@ -719,18 +769,18 @@ void main() {
       productRobot.verifyPageVisible();
     });
 
-    testWidgets('EZRX-T48 | Verify display Announcements in Homepage',
-        (tester) async {
-      //init app
-      await pumpAppWithHomeScreen(tester);
+    // testWidgets('EZRX-T48 | Verify display Announcements in Homepage',
+    //     (tester) async {
+    //   //init app
+    //   await pumpAppWithHomeScreen(tester);
 
-      //tap on browse products
-      await homeRobot.findAnnouncementsIcon();
-      await homeRobot.tapAnnouncementsIcon();
+    //   //tap on browse products
+    //   await homeRobot.findAnnouncementsIcon();
+    //   await homeRobot.tapAnnouncementsIcon();
 
-      //verify go to announcements page
-      announcementArticleRootRobot.verifyAnnouncementPage();
-    });
+    //   //verify go to announcements page
+    //   announcementArticleRootRobot.verifyAnnouncementPage();
+    // });
 
     testWidgets('EZRX-T46 | Verify display Recently ordered in Homepage',
         (tester) async {
@@ -874,20 +924,20 @@ void main() {
       productDetailRobot.verifyPage();
     });
 
-    testWidgets('EZRX-T59 | Verify click on Announcement in Announcements',
-        (tester) async {
-      //init app
-      await pumpAppWithHomeScreen(tester);
+    // testWidgets('EZRX-T59 | Verify click on Announcement in Announcements',
+    //     (tester) async {
+    //   //init app
+    //   await pumpAppWithHomeScreen(tester);
 
-      //move to Announcements
-      await homeRobot.findAnnouncementsIcon();
+    //   //move to Announcements
+    //   await homeRobot.findAnnouncementsIcon();
 
-      //tap on first product
-      await homeRobot.tapOnFirstAnnouncement();
+    //   //tap on first product
+    //   await homeRobot.tapOnFirstAnnouncement();
 
-      //verify announcement detail page
-      announcementDetailRobot.verifyPage();
-    });
+    //   //verify announcement detail page
+    //   announcementDetailRobot.verifyPage();
+    // });
   });
 
   group('Product Tab - ', () {
@@ -1273,30 +1323,6 @@ void main() {
     });
   });
 
-  Future<void> browseProductFromEmptyCart() async {
-    await homeRobot.tapMiniCartIcon();
-    await cartRobot.clearCart();
-    await cartRobot.tapBrowseProductButton();
-    await productRobot.openSearchProductScreen();
-  }
-
-  Future<void> checkoutWithMaterial(
-    String materialNumber,
-    int qty, {
-    bool isPreOrder = false,
-  }) async {
-    await browseProductFromEmptyCart();
-    await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-    await productSuggestionRobot.tapSearchResult(materialNumber);
-    await productDetailRobot.tapAddToCart();
-    await productDetailRobot.tapCartButton();
-    await cartRobot.changeMaterialQty(materialNumber, qty);
-    await cartRobot.tapCheckoutButton();
-    if (isPreOrder) {
-      await oosPreOrderRobot.tapContinueButton();
-    }
-  }
-
   group('Cart - ', () {
     testWidgets('EZRX-T97 | Verify Cart when NO product is added to cart',
         (tester) async {
@@ -1395,7 +1421,7 @@ void main() {
         materialQty2,
       );
       await bundleDetailRobot.tapSheetAddToCartButton();
-      bundleDetailRobot.verifyCartButtonQty(1);
+      bundleDetailRobot.verifyCartButtonQty(2);
       await bundleDetailRobot.tapCartButton();
       cartRobot.verifyPage();
       await cartRobot.verifyBundle(bundleNumber);
@@ -1496,13 +1522,13 @@ void main() {
       );
       await bundleDetailRobot.tapSheetAddToCartButton();
       await bundleDetailRobot.dismissSnackbar();
-      bundleDetailRobot.verifyCartButtonQty(1);
+      bundleDetailRobot.verifyCartButtonQty(2);
       await bundleDetailRobot.tapBackButton();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productSuggestionRobot.tapSearchResult(materialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
-      productDetailRobot.verifyCartButtonQty(2);
+      productDetailRobot.verifyCartButtonQty(3);
       await productDetailRobot.tapCartButton();
       cartRobot.verifyPage();
       await cartRobot.verifyMaterial(materialNumber);
@@ -1545,7 +1571,7 @@ void main() {
         bundleTotalPrice.priceDisplay(currency),
       );
       cartRobot.verifyCartQty(3);
-      cartRobot.verifyQtyOnAppBar(2);
+      cartRobot.verifyQtyOnAppBar(3);
       cartRobot.verifyCartShipToAddress(shipToAddress);
       cartRobot.verifyCartTotalPrice(totalPrice.priceDisplay(currency));
       cartRobot.verifyCheckoutButton();
@@ -1879,7 +1905,7 @@ void main() {
         bonusMaterialNumber,
         bonusMaterialNumber,
       );
-      const newBonusQty = 2;
+      var newBonusQty = 2;
       await cartRobot.changeMaterialQty(
         bonusMaterialNumber,
         bonusMaterialNumberTierQty * newBonusQty,
@@ -1893,6 +1919,7 @@ void main() {
         bonusMaterialNumber,
         bonusMaterialNumber,
       );
+      newBonusQty--;
       await cartRobot.verifyBonusMaterialQty(
         bonusMaterialNumber,
         bonusMaterialNumber,
@@ -1902,6 +1929,7 @@ void main() {
         bonusMaterialNumber,
         bonusMaterialNumber,
       );
+      newBonusQty++;
       await cartRobot.verifyBonusMaterialQty(
         bonusMaterialNumber,
         bonusMaterialNumber,
@@ -1931,6 +1959,7 @@ void main() {
       requestCounterOfferRobot.verifySheet(isVisible: true);
       requestCounterOfferRobot.verifyListPrice(
         materialUnitPrice.priceDisplay(currency),
+        isVisible: false,
       );
       requestCounterOfferRobot.verifyOfferPrice(
         materialUnitPrice.priceDisplay(currency),
@@ -1953,7 +1982,7 @@ void main() {
     testWidgets(
         'EZRX-T106 | Verify request counter offer for the product added to cart',
         (tester) async {
-      const newUnitPrice = 1000;
+      const newUnitPrice = materialUnitPrice + 100;
       const remark = 'AUTO-TEST';
 
       //init app
@@ -1976,6 +2005,7 @@ void main() {
       await cartRobot.tapMaterialCounterOfferButton(materialNumber);
       requestCounterOfferRobot.verifyListPrice(
         materialUnitPrice.priceDisplay(currency),
+        isVisible: false,
       );
       requestCounterOfferRobot.verifyOfferPrice(
         materialUnitPrice.priceDisplay(currency),
@@ -1993,6 +2023,7 @@ void main() {
       await cartRobot.tapMaterialCounterOfferButton(materialNumber);
       requestCounterOfferRobot.verifyListPrice(
         materialUnitPrice.priceDisplay(currency),
+        isVisible: false,
       );
       requestCounterOfferRobot
           .verifyOfferPrice(newUnitPrice.priceDisplay(currency));
@@ -2079,29 +2110,29 @@ void main() {
       await bonusSampleRobot.dismissSnackbar();
       await bonusSampleRobot.tapCloseButton();
       bonusSampleRobot.verifySheet(isVisible: false);
-      await cartRobot.verifyBonusSampleMaterial(
+      await cartRobot.verifyBonusMaterial(
         materialNumber,
         bonusSampleMaterialNumber,
       );
-      cartRobot.verifyBonusSampleMaterialQty(
+      await cartRobot.verifyBonusMaterialQty(
         materialNumber,
         bonusSampleMaterialNumber,
         bonusSampleQty,
       );
-      cartRobot.verifyBonusSampleMaterialDescription(
+      cartRobot.verifyBonusMaterialDescription(
         materialNumber,
         bonusSampleMaterialNumber,
         bonusSampleMaterialDescription,
       );
-      cartRobot.verifyBonusSampleMaterialFreeLabel(
+      cartRobot.verifyBonusMaterialFreeLabel(
         materialNumber,
         bonusSampleMaterialNumber,
       );
-      cartRobot.verifyBonusSampleMaterialTag(
+      cartRobot.verifyBonusMaterialTag(
         materialNumber,
         bonusSampleMaterialNumber,
       );
-      cartRobot.verifyBonusSampleMaterialImage(
+      cartRobot.verifyBonusMaterialImage(
         materialNumber,
         bonusSampleMaterialNumber,
       );
@@ -2131,7 +2162,6 @@ void main() {
           .verifySubTotalLabel(materialUnitPrice.priceDisplay(currency));
       await checkoutRobot
           .verifyGrandTotalLabel(materialUnitPrice.priceDisplay(currency));
-      await checkoutRobot.verifyTotalSavingLabel(0.priceDisplay(currency));
       checkoutRobot.verifyStickyTotalQty(1);
       checkoutRobot
           .verifyStickyGrandTotal(materialUnitPrice.priceDisplay(currency));
@@ -2207,7 +2237,6 @@ void main() {
           .verifySubTotalLabel(materialUnitPrice.priceDisplay(currency));
       orderPriceSummaryRobot
           .verifyGrandTotalLabel(materialUnitPrice.priceDisplay(currency));
-      orderPriceSummaryRobot.verifyTotalSavingLabel(0.priceDisplay(currency));
       await orderPriceSummaryRobot.tapCloseButton();
       orderPriceSummaryRobot.verifySheet(isVisible: false);
     });
@@ -2244,7 +2273,7 @@ void main() {
 
     testWidgets('EZRX-T119 | Verify display Product in Checkout page',
         (tester) async {
-      const newUnitPrice = 1000;
+      const newUnitPrice = materialUnitPrice + 100;
 
       //init app
       await pumpAppWithHomeScreen(tester);
@@ -2290,7 +2319,6 @@ void main() {
           .verifySubTotalLabel(newUnitPrice.priceDisplay(currency));
       await checkoutRobot
           .verifyGrandTotalLabel(newUnitPrice.priceDisplay(currency));
-      await checkoutRobot.verifyTotalSavingLabel(0.priceDisplay(currency));
       checkoutRobot.verifyStickyTotalQty(1);
       checkoutRobot.verifyStickyGrandTotal(newUnitPrice.priceDisplay(currency));
     });
@@ -2371,7 +2399,6 @@ void main() {
           .verifySubTotalLabel(bundleTotalPrice.priceDisplay(currency));
       await checkoutRobot
           .verifyGrandTotalLabel(bundleTotalPrice.priceDisplay(currency));
-      await checkoutRobot.verifyTotalSavingLabel(0.priceDisplay(currency));
       checkoutRobot.verifyBundleTotalPrice(
         bundleNumber,
         bundleTotalPrice.priceDisplay(currency),
@@ -2441,12 +2468,12 @@ void main() {
     });
   });
 
-  group('Order Tab - ', () {
-    final fromDate = DateTime.now().subtract(const Duration(days: 30));
+  group('Order Tab -', () {
+    final fromDate = DateTime.now().subtract(const Duration(days: 150));
     final toDate = DateTime.now().subtract(const Duration(days: 2));
 
-    group('View by items - ', () {
-      const statusFilter = 'Order created';
+    group('View by items -', () {
+      const statusFilter = 'Order Created';
 
       testWidgets('EZRX-T69 | Verify display items in Orders tab',
           (tester) async {
@@ -2991,6 +3018,573 @@ void main() {
         // TODO: Revist when popup 'Reoder for this delivery address? is added to add new test step
       });
     });
+  });
+
+  group('Profile -', () {
+    void verifyAllComponentsVisible() {
+      profileRobot.verifyAccountAndBusinessDetailsVisible(
+        firstName: 'MYClientUser',
+        lastName: 'User91',
+        email: 'jhchoo@zuelligpharma.com',
+        username: username,
+        mobilePhone: 'NA',
+        language: 'English',
+      );
+      profileRobot.verifyLicenseListVisible();
+      profileRobot.verifyButtonsDisabled();
+    }
+
+    testWidgets('EZRX-T176 | Verify Profile Page', (tester) async {
+      //navigate to page
+      await pumpAppWithHomeScreen(tester);
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.tapProfileTile();
+
+      //verify
+      profileRobot.verifyPageVisible();
+      verifyAllComponentsVisible();
+    });
+
+    testWidgets('EZRX-T177 | Verify Refresh Profile Page', (tester) async {
+      //navigate to page
+      await pumpAppWithHomeScreen(tester);
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.tapProfileTile();
+
+      //verify
+      profileRobot.verifyPageVisible();
+      verifyAllComponentsVisible();
+      await commonRobot.pullToRefresh();
+      verifyAllComponentsVisible();
+    });
+
+    testWidgets('EZRX-T179 | Verify change language suscess', (tester) async {
+      //Cannot change Language because MY market has only English language.
+      //Skip this test cases
+    });
+
+    testWidgets('EZRX-T180 | Verify update profile after clear changes',
+        (tester) async {
+      //Cannot change Language because MY market has only English language,
+      //So that cannot verify update profile after clear changes,
+      //Skip this test cases
+    });
+  });
+
+  group('Contact us -', () {
+    const phoneNumber = '0981234567';
+    const userNameInitValue = 'MYClientUser User91';
+    const emailInitValue = 'jhchoo@zuelligpharma.com';
+
+    Future<void> goToContactUs() async {
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.tapContactUsTile();
+    }
+
+    testWidgets('EZRX-T201 | Verify page contact us is displayed',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToContactUs();
+
+      contactUsRobot.verifyContactDetailHtml();
+      contactUsRobot.verifyAllFieldVisible();
+      contactUsRobot.verifyInitValueField(
+        userName: userNameInitValue,
+        email: emailInitValue,
+      );
+    });
+
+    testWidgets('EZRX-T202 | Verify send message successful', (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToContactUs();
+
+      await contactUsRobot.enterPhoneNumberField(phoneNumber);
+      await contactUsRobot.enterMessageField(phoneNumber);
+      await contactUsRobot.tapToSendMessage();
+      contactUsRobot.verifyContactUsSuccessMessage();
+    });
+
+    testWidgets('EZRX-T203 | Verify send message without Your Name',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToContactUs();
+
+      await contactUsRobot.enterUserNameField('');
+      await contactUsRobot.tapToSendMessage();
+      contactUsRobot.verifyUserNameRequireErrorMsg();
+    });
+
+    testWidgets('EZRX-T204 | Verify send message without Contact Number',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToContactUs();
+
+      await contactUsRobot.tapToSendMessage();
+      contactUsRobot.verifyPhoneNumberInValidErrorMsg();
+    });
+
+    testWidgets('EZRX-T205 | Verify send message without E-mail',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToContactUs();
+
+      await contactUsRobot.enterEmailField('');
+      await contactUsRobot.tapToSendMessage();
+      contactUsRobot.verifyEmailRequireErrorMsg();
+    });
+
+    testWidgets('EZRX-T206 | Verify send message without Message',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToContactUs();
+
+      await contactUsRobot.enterMessageField('');
+      await contactUsRobot.tapToSendMessage();
+      contactUsRobot.verifyMessageFieldRequireErrorMsg();
+    });
+
+    testWidgets('EZRX-T207 | Verify send message with email invalid',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToContactUs();
+
+      await contactUsRobot.enterEmailField('integrationTest@mail');
+      await contactUsRobot.tapToSendMessage();
+      contactUsRobot.verifyEmailInValidErrorMsg();
+    });
+  });
+
+  group('Security -', () {
+    Future<void> goToSecurityPage() async {
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.tapSecurityTile();
+    }
+
+    testWidgets(
+        'EZRX-T240 | Verify Security(Change Password) page - all initial fields',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToSecurityPage();
+
+      securityRobot.verifyAllItemVisible();
+      securityRobot.verifyAllFieldEmpty();
+      securityRobot.verifyObscureTextCurrentPassword(true);
+      securityRobot.verifyObscureTextNewPassword(true);
+      securityRobot.verifyObscureTextConfirmPassword(true);
+
+      await securityRobot.tapToBackToMoreScreen();
+      moreRobot.verifyMoreScreenVisible();
+    });
+
+    testWidgets(
+        'EZRX-T241 | Verify Security(Change Password) page - current password validation',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToSecurityPage();
+
+      await securityRobot.tapToSaveButton();
+      securityRobot.verifyRequireErrorMsgCurrentPassword(true);
+      securityRobot.verifyErrorMessageAllFieldRequire();
+
+      await securityRobot.fillToCurrentPasswordField(password);
+      securityRobot.verifyObscureTextCurrentPassword(true);
+      securityRobot.verifyRequireErrorMsgCurrentPassword(false);
+
+      await securityRobot.tapToObscureIconInCurrentPasswordField(false);
+      securityRobot.verifyObscureTextCurrentPassword(false);
+      securityRobot.verifyValueCurrentPasswordField(password);
+
+      await securityRobot.tapToObscureIconInCurrentPasswordField(true);
+      securityRobot.verifyObscureTextCurrentPassword(true);
+    });
+
+    testWidgets(
+        'EZRX-T242 | Verify Security(Change Password) page - new password validation',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToSecurityPage();
+
+      await securityRobot.tapToObscureIconInNewPasswordField(false);
+      securityRobot.verifyObscureTextNewPassword(false);
+
+      await securityRobot.tapToSaveButton();
+      securityRobot.verifyRequireErrorMsgNewPassword(true);
+      securityRobot.verifyErrorMessageAllFieldRequire();
+
+      securityRobot.verifyConditionValidationPasswordMinimumLength(false);
+      securityRobot.verifyConditionValidationPasswordContainUppercase(false);
+      securityRobot.verifyConditionValidationPasswordContainLowercase(false);
+      securityRobot.verifyConditionValidationPasswordContainNumeric(false);
+      securityRobot.verifyConditionValidationPasswordContainSpecialCharacter(
+        false,
+      );
+      securityRobot
+          .verifyConditionValidationPasswordNotContain2ConsecutiveCharactersUsername(
+        false,
+      );
+
+      await securityRobot.fillToNewPasswordField('S');
+      securityRobot.verifyRequireErrorMsgNewPassword(false);
+
+      securityRobot.verifyConditionValidationPasswordMinimumLength(false);
+      securityRobot.verifyConditionValidationPasswordContainUppercase(true);
+      securityRobot.verifyConditionValidationPasswordContainLowercase(false);
+      securityRobot.verifyConditionValidationPasswordContainNumeric(false);
+      securityRobot.verifyConditionValidationPasswordContainSpecialCharacter(
+        false,
+      );
+      securityRobot
+          .verifyConditionValidationPasswordNotContain2ConsecutiveCharactersUsername(
+        true,
+      );
+
+      await securityRobot.tapToConfirmPasswordField();
+      await securityRobot.fillToNewPasswordField('St');
+      securityRobot.verifyRequireErrorMsgNewPassword(false);
+
+      securityRobot.verifyConditionValidationPasswordMinimumLength(false);
+      securityRobot.verifyConditionValidationPasswordContainUppercase(true);
+      securityRobot.verifyConditionValidationPasswordContainLowercase(true);
+      securityRobot.verifyConditionValidationPasswordContainNumeric(false);
+      securityRobot.verifyConditionValidationPasswordContainSpecialCharacter(
+        false,
+      );
+      securityRobot
+          .verifyConditionValidationPasswordNotContain2ConsecutiveCharactersUsername(
+        true,
+      );
+
+      await securityRobot.tapToConfirmPasswordField();
+      await securityRobot.fillToNewPasswordField('St@');
+
+      securityRobot.verifyRequireErrorMsgNewPassword(false);
+
+      securityRobot.verifyConditionValidationPasswordMinimumLength(false);
+      securityRobot.verifyConditionValidationPasswordContainUppercase(true);
+      securityRobot.verifyConditionValidationPasswordContainLowercase(true);
+      securityRobot.verifyConditionValidationPasswordContainNumeric(false);
+      securityRobot.verifyConditionValidationPasswordContainSpecialCharacter(
+        true,
+      );
+      securityRobot
+          .verifyConditionValidationPasswordNotContain2ConsecutiveCharactersUsername(
+        true,
+      );
+
+      await securityRobot.tapToConfirmPasswordField();
+      await securityRobot.fillToNewPasswordField('St@use');
+      securityRobot.verifyRequireErrorMsgNewPassword(false);
+
+      securityRobot.verifyConditionValidationPasswordMinimumLength(false);
+      securityRobot.verifyConditionValidationPasswordContainUppercase(true);
+      securityRobot.verifyConditionValidationPasswordContainLowercase(true);
+      securityRobot.verifyConditionValidationPasswordContainNumeric(false);
+      securityRobot.verifyConditionValidationPasswordContainSpecialCharacter(
+        true,
+      );
+      securityRobot
+          .verifyConditionValidationPasswordNotContain2ConsecutiveCharactersUsername(
+        false,
+      );
+
+      await securityRobot.tapToConfirmPasswordField();
+      await securityRobot.fillToNewPasswordField('St@ysafe0');
+      securityRobot.verifyRequireErrorMsgNewPassword(false);
+
+      securityRobot.verifyConditionValidationPasswordMinimumLength(false);
+      securityRobot.verifyConditionValidationPasswordContainUppercase(true);
+      securityRobot.verifyConditionValidationPasswordContainLowercase(true);
+      securityRobot.verifyConditionValidationPasswordContainNumeric(true);
+      securityRobot.verifyConditionValidationPasswordContainSpecialCharacter(
+        true,
+      );
+      securityRobot
+          .verifyConditionValidationPasswordNotContain2ConsecutiveCharactersUsername(
+        true,
+      );
+
+      await securityRobot.tapToConfirmPasswordField();
+      await securityRobot.fillToNewPasswordField('St@ysafe01');
+      securityRobot.verifyRequireErrorMsgNewPassword(false);
+
+      securityRobot.verifyConditionValidationPasswordMinimumLength(true);
+      securityRobot.verifyConditionValidationPasswordContainUppercase(true);
+      securityRobot.verifyConditionValidationPasswordContainLowercase(true);
+      securityRobot.verifyConditionValidationPasswordContainNumeric(true);
+      securityRobot.verifyConditionValidationPasswordContainSpecialCharacter(
+        true,
+      );
+      securityRobot
+          .verifyConditionValidationPasswordNotContain2ConsecutiveCharactersUsername(
+        true,
+      );
+
+      await securityRobot.tapToObscureIconInNewPasswordField(true);
+      securityRobot.verifyObscureTextNewPassword(true);
+    });
+
+    testWidgets(
+        'EZRX-T243 | Verify Security(Change Password) page - new password again validation',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToSecurityPage();
+
+      await securityRobot.tapToSaveButton();
+      securityRobot.verifyRequireErrorMsgConfirmPassword(true);
+      securityRobot.verifyErrorMessageAllFieldRequire();
+
+      await securityRobot.fillToConfirmPasswordField(password);
+      securityRobot.verifyObscureTextConfirmPassword(true);
+      securityRobot.verifyPasswordMismatchErrorMsg();
+
+      await securityRobot.tapToObscureIconInConfirmPasswordField(false);
+      securityRobot.verifyObscureTextConfirmPassword(false);
+      securityRobot.verifyValueConfirmPasswordField(password);
+
+      await securityRobot.tapToObscureIconInConfirmPasswordField(true);
+      securityRobot.verifyObscureTextConfirmPassword(true);
+    });
+
+    testWidgets(
+        'EZRX-T244 | Verify Security(Change Password) page - current, new password & new password again validation',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await goToSecurityPage();
+
+      await securityRobot.tapToObscureIconInCurrentPasswordField(false);
+      await securityRobot.tapToObscureIconInNewPasswordField(false);
+      await securityRobot.tapToObscureIconInConfirmPasswordField(false);
+      securityRobot.verifyObscureTextCurrentPassword(false);
+      securityRobot.verifyObscureTextNewPassword(false);
+      securityRobot.verifyObscureTextConfirmPassword(false);
+
+      await securityRobot.tapToSaveButton();
+      securityRobot.verifyRequireErrorMsgCurrentPassword(true);
+      securityRobot.verifyRequireErrorMsgNewPassword(true);
+      securityRobot.verifyRequireErrorMsgConfirmPassword(true);
+      securityRobot.verifyErrorMessageAllFieldRequire();
+
+      securityRobot.verifyConditionValidationPasswordMinimumLength(false);
+      securityRobot.verifyConditionValidationPasswordContainUppercase(false);
+      securityRobot.verifyConditionValidationPasswordContainLowercase(false);
+      securityRobot.verifyConditionValidationPasswordContainNumeric(false);
+      securityRobot.verifyConditionValidationPasswordContainSpecialCharacter(
+        false,
+      );
+      securityRobot
+          .verifyConditionValidationPasswordNotContain2ConsecutiveCharactersUsername(
+        false,
+      );
+
+      await securityRobot.fillToCurrentPasswordField(password);
+      await securityRobot.fillToNewPasswordField(password);
+      securityRobot.verifyRequireErrorMsgCurrentPassword(false);
+      securityRobot.verifyRequireErrorMsgNewPassword(false);
+      securityRobot.verifySameOldPasswordErrorMsg(true);
+
+      await securityRobot.fillToCurrentPasswordField(password);
+      await securityRobot.tapToConfirmPasswordField();
+      await securityRobot.fillToNewPasswordField('St@ysafe012');
+      securityRobot.verifyRequireErrorMsgCurrentPassword(false);
+      securityRobot.verifySameOldPasswordErrorMsg(false);
+
+      await securityRobot.fillToCurrentPasswordField(password);
+      await securityRobot.tapToConfirmPasswordField();
+      await securityRobot.fillToNewPasswordField('St@ysafe012');
+      await securityRobot.fillToConfirmPasswordField('St@ysafe011');
+      securityRobot.verifyPasswordMismatchErrorMsg();
+
+      await securityRobot.tapToClearChangeButton();
+      securityRobot.verifyAllFieldEmpty();
+    });
+  });
+
+  group('Announcement & Article -', () {
+    Future<void> goToAnnouncementArticlePage() async {
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.tapAnnouncementArticleTile();
+    }
+
+    group('Article -', () {
+      Future<void> goToArticlePage() async {
+        announcementArticleRootRobot.verifyAnnouncementPage();
+        await announcementArticleRootRobot.switchToArticleTab();
+      }
+
+      testWidgets('EZRX-T160 | Verify articles page', (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
+
+        announcementArticleRootRobot.verifyAnnouncementPage();
+        announcementArticleRootRobot.verifyTabBar();
+        await goToArticlePage();
+        articleRobot.verifySearchBar();
+        articleRobot.verifyFilterIcon();
+        articleRobot.verifyArticleItemsVisible();
+      });
+
+      testWidgets('EZRX-T163 | Verify detail articles', (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
+        await goToArticlePage();
+
+        articleRobot.verifySearchBar();
+        await commonRobot.searchWithSearchIcon(articleRobot.getFirstTitle());
+        await articleRobot.tapArticleItem();
+        articleDetailsRobot.verifyArticleDetailsPage();
+        await articleDetailsRobot.tapArticleDetailsBackButton();
+        announcementArticleRootRobot.verifyArticlesPage();
+      });
+
+      testWidgets('EZRX-T165 | Verify search articles invalid data',
+          (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
+        await goToArticlePage();
+
+        await commonRobot.searchWithSearchIcon(invalidSearchKey);
+        articleRobot.verifyNotFoundData();
+
+        await commonRobot.tapClearSearch();
+        articleRobot.verifyArticleItemsVisible();
+      });
+
+      testWidgets(
+          'EZRX-T166 | Verify search Article valid data - on done keyboard button',
+          (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
+        await goToArticlePage();
+
+        final validSearchKey = articleRobot.getFirstTitle();
+        await commonRobot.searchWithKeyboardAction(validSearchKey);
+        articleRobot.verifyArticleItemsVisible();
+        articleRobot.verifyArticleItemWithSearchKey(searchKey: validSearchKey);
+      });
+
+      testWidgets(
+          'EZRX-T252 | Verify search Article valid data - on search icon button',
+          (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
+        await goToArticlePage();
+
+        final validSearchKey = articleRobot.getFirstTitle();
+        articleRobot.verifyArticleItemsVisible();
+        await commonRobot.searchWithSearchIcon(validSearchKey);
+        articleRobot.verifyArticleItemsVisible();
+        articleRobot.verifyArticleItemWithSearchKey(searchKey: validSearchKey);
+      });
+
+      testWidgets(
+          'EZRX-T171 | Verify search any one item & Tap & Verify Detail page in details',
+          (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
+        await goToArticlePage();
+
+        articleRobot.verifyArticleItemsVisible();
+        await commonRobot.searchWithSearchIcon(articleRobot.getFirstTitle());
+        articleRobot.verifyArticleItemsVisible();
+        await articleRobot.tapArticleItem();
+        articleDetailsRobot.verifyArticleDetailsPage();
+      });
+    });
+
+    // group('Announcement -', () {
+    //   const validSearchKey = 'new';
+
+    //   testWidgets('EZRX-T170 | Verify announcements page', (tester) async {
+    //     await pumpAppWithHomeScreen(tester);
+    //     await goToAnnouncementArticlePage();
+
+    //     announcementArticleRootRobot.verifyTabBar();
+    //     announcementArticleRootRobot.verifyAnnouncementPage();
+    //     // announcementRobot.verifyFilterButton();
+    //     announcementRobot.verifySearchBar();
+    //     announcementRobot.verifySearchBarText('');
+    //   });
+
+    //   testWidgets('EZRX-T168 | Verify detail announcements', (tester) async {
+    //     await pumpAppWithHomeScreen(tester);
+    //     await goToAnnouncementArticlePage();
+
+    //     await announcementRobot.searchWithKeyboardAction(validSearchKey);
+    //     announcementRobot.verifyItemsWithKeyword(validSearchKey);
+    //     await announcementRobot.tapFirstItem();
+    //     announcementDetailRobot.verifyPage();
+    //     announcementDetailRobot.verifyBackButton();
+    //     announcementDetailRobot.verifyAnnouncementImage();
+    //     announcementDetailRobot.verifyAnnouncementDate();
+    //     announcementDetailRobot.verifyOtherAnnouncementSection();
+    //   });
+
+    //   testWidgets('EZRX-T172 | Verify search announcements invalid data',
+    //       (tester) async {
+    //     await pumpAppWithHomeScreen(tester);
+    //     await goToAnnouncementArticlePage();
+
+    //     announcementRobot.verifyItems();
+    //     await announcementRobot.autoSearch(invalidLengthSearchKey);
+    //     announcementRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+    //     announcementRobot.verifyLoadingImage(isVisible: false);
+    //     await announcementRobot.searchWithSearchIcon(invalidLengthSearchKey);
+    //     announcementRobot.verifyInvalidLengthSearchMessage(isVisible: true);
+    //     await announcementRobot.dismissSnackbar();
+    //     await announcementRobot.autoSearch(invalidSearchKey);
+    //     announcementRobot.verifyNoRecordFound();
+    //     await announcementRobot.tapClearSearch();
+    //     announcementRobot.verifyItems();
+    //   });
+
+    //   testWidgets(
+    //       'EZRX-T173 | Verify search announcements valid data - on done keyboard button',
+    //       (tester) async {
+    //     await pumpAppWithHomeScreen(tester);
+    //     await goToAnnouncementArticlePage();
+
+    //     await announcementRobot.searchWithKeyboardAction(validSearchKey);
+    //     await announcementRobot.waitAutoSearchDuration();
+    //     announcementRobot.verifyLoadingImage(isVisible: false);
+    //     announcementRobot.verifyItemsWithKeyword(validSearchKey);
+    //     await announcementRobot.pullToRefresh();
+    //     announcementRobot.verifySearchBarText('');
+    //   });
+
+    //   testWidgets('EZRX-T174 | Verify Filter Announcements', (tester) async {
+    //     //TODO: Revisit to implement test cases after the filter feature is implemented
+    //   });
+
+    //   testWidgets(
+    //       'EZRX-T175 | Verify search any one item & Tap & Verify Detail page in details',
+    //       (tester) async {
+    //     await pumpAppWithHomeScreen(tester);
+    //     await goToAnnouncementArticlePage();
+
+    //     await announcementRobot.searchWithKeyboardAction(validSearchKey);
+    //     announcementRobot.verifyItemsWithKeyword(validSearchKey);
+    //     await announcementRobot.tapFirstItem();
+    //     announcementArticleRootRobot.verifyAnnouncementPage(isVisible: false);
+    //     announcementDetailRobot.verifyPage(isVisible: true);
+    //     await announcementDetailRobot.tapBackButton();
+    //     announcementDetailRobot.verifyPage(isVisible: false);
+    //     announcementArticleRootRobot.verifyAnnouncementPage(isVisible: true);
+    //   });
+
+    //   testWidgets(
+    //       'EZRX-T251 | Verify search announcements valid data - on search button',
+    //       (tester) async {
+    //     await pumpAppWithHomeScreen(tester);
+    //     await goToAnnouncementArticlePage();
+
+    //     await announcementRobot.searchWithKeyboardAction(validSearchKey);
+    //     await announcementRobot.waitAutoSearchDuration();
+    //     announcementRobot.verifyLoadingImage(isVisible: false);
+    //     announcementRobot.verifyItemsWithKeyword(validSearchKey);
+    //     await announcementRobot.pullToRefresh();
+    //     announcementRobot.verifySearchBarText('');
+    //   });
+    // });
   });
 
   tearDown(() async {

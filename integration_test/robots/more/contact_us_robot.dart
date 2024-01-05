@@ -8,43 +8,31 @@ import '../common/common_robot.dart';
 class ContactUsRobot extends CommonRobot {
   ContactUsRobot(WidgetTester tester) : super(tester);
 
-  final scrollView = find.byKey(WidgetKeys.userNameKey);
+  final scrollView = find.byKey(WidgetKeys.scrollList);
   final userNameKey = find.byKey(WidgetKeys.userNameKey);
   final phoneNumberKey = find.byKey(WidgetKeys.phoneNumberKey);
   final emailKey = find.byKey(WidgetKeys.emailKey);
   final contactMessageKey = find.byKey(WidgetKeys.contactMessageKey);
-  final contactDetails = find.byKey(WidgetKeys.contactDetailsKey);
-  final timeSupport = find.byKey(WidgetKeys.timeSupport);
   final sendMessageButtonKey = find.byKey(WidgetKeys.sendMessageButtonKey);
-  final internationalPhoneNumberInputKey =
-      find.byKey(WidgetKeys.internationalPhoneNumberInputKey);
 
   Future<void> enterUserNameField(String name) async {
-    await tester.tap(userNameKey);
-    await tester.enterText(userNameKey, name);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
+    await scrollEnsureFinderVisible(userNameKey);
+    await _enterText(userNameKey, name);
   }
 
   Future<void> enterPhoneNumberField(String phoneNumber) async {
-    await tester.tap(phoneNumberKey);
-    await tester.enterText(phoneNumberKey, phoneNumber);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
+    await scrollEnsureFinderVisible(phoneNumberKey);
+    await _enterText(phoneNumberKey, phoneNumber);
   }
 
   Future<void> enterEmailField(String email) async {
-    await tester.tap(emailKey);
-    await tester.enterText(emailKey, email);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
+    await scrollEnsureFinderVisible(emailKey);
+    await _enterText(emailKey, email);
   }
 
   Future<void> enterMessageField(String message) async {
-    await tester.tap(contactMessageKey);
-    await tester.enterText(contactMessageKey, message);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
+    await scrollEnsureFinderVisible(contactMessageKey);
+    await _enterText(contactMessageKey, message);
   }
 
   Future<void> tapToSendMessage() async {
@@ -54,32 +42,9 @@ class ContactUsRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyContactDetailInfo({
-    required String email,
-    required String numberPhone,
-  }) {
+  void verifyContactDetailHtml() {
     expect(
-      find.descendant(
-        of: contactDetails,
-        matching: find.text(email.tr()),
-      ),
-      findsOneWidget,
-    );
-    expect(
-      find.descendant(
-        of: contactDetails,
-        matching: find.text(numberPhone.tr()),
-      ),
-      findsOneWidget,
-    );
-  }
-
-  void verifyTimeSupport() {
-    expect(
-      find.descendant(
-        of: timeSupport,
-        matching: find.text('Monday to Friday: 8.30am - 5pm'.tr()),
-      ),
+      find.byKey(WidgetKeys.contactDetailsSectionKey),
       findsOneWidget,
     );
   }
@@ -92,12 +57,9 @@ class ContactUsRobot extends CommonRobot {
     expect(sendMessageButtonKey, sendMessageButtonKey);
   }
 
-  void verifyInitValueField({
-    required String userName,
-    required String email,
-  }) {
+  void verifyInitValueField({required String userName, required String email}) {
     expect(_getValueTextFormField(userNameKey), userName);
-    expect(_getValueTextFormField(emailKey), emailKey);
+    expect(_getValueTextFormField(emailKey), email);
   }
 
   String _getValueTextFormField(Finder finder) {
@@ -105,6 +67,7 @@ class ContactUsRobot extends CommonRobot {
       of: finder,
       matching: find.byType(EditableText),
     );
+
     return tester.widget<EditableText>(editableText).controller.text;
   }
 
@@ -143,10 +106,20 @@ class ContactUsRobot extends CommonRobot {
     );
   }
 
+  void verifyContactUsSuccessMessage() =>
+      verifyCustomSnackBar(message: 'Message has been received.'.tr());
+
   Finder _errorMessageField(Finder ancestorFinder, String errorMessage) {
     return find.descendant(
       of: ancestorFinder,
       matching: find.text(errorMessage.tr()),
     );
+  }
+
+  Future<void> _enterText(Finder target, String text) async {
+    await tester.tap(target);
+    await tester.enterText(target, text);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
   }
 }

@@ -93,10 +93,10 @@ class MoreDetailsTile {
         ),
       );
   factory MoreDetailsTile.contactUs(BuildContext context) => MoreDetailsTile(
+        key: WidgetKeys.contactUsTile,
         icon: const Icon(
           Icons.mail_outline,
           color: ZPColors.greenIconColor,
-          key: WidgetKeys.contactUsTile,
         ),
         onTap: () {
           context.navigateTo(

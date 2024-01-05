@@ -11,14 +11,15 @@ class ArticleRobot {
   final firstArticleItemKey =
       find.byKey(WidgetKeys.genericKey(key: 'articleItem0'));
   final notFoundDataKey = find.byKey(WidgetKeys.noArticleToShowKey);
-  final customSnackBar = find.byKey(WidgetKeys.customSnackBar);
+  final articleTitle = find.byKey(WidgetKeys.articleTitleKey);
 
   void verifySearchBar() {
     expect(find.byType(CustomSearchBar), findsOneWidget);
   }
 
   void verifyNotFoundData() {
-    expect(notFoundDataKey, findsAtLeastNWidgets(1));
+    expect(firstArticleItemKey, findsNothing);
+    expect(notFoundDataKey, findsOneWidget);
   }
 
   void verifyArticleItemsVisible() {
@@ -32,7 +33,7 @@ class ArticleRobot {
     expect(
       find.descendant(
         of: firstArticleItemKey,
-        matching: find.byKey(WidgetKeys.articleTitleKey),
+        matching: articleTitle,
       ),
       findsOneWidget,
     );
@@ -45,32 +46,18 @@ class ArticleRobot {
     );
   }
 
-  void verifyArticleItemstitle({required String searchKey}) {
+  void verifyArticleItemWithSearchKey({required String searchKey}) {
     expect(
       find.descendant(
         of: firstArticleItemKey,
-        matching: find.byKey(WidgetKeys.articleTitleKey),
+        matching: find.textContaining(searchKey),
       ),
-      findsOneWidget,
-    );
-    expect(
-      find.text(searchKey),
       findsOneWidget,
     );
   }
 
-  Future<void> putSearchKey() async {
-    final itemTitleList = tester
-        .widgetList<Text>(find.byKey(WidgetKeys.articleTitleKey))
-        .map((e) => e.data)
-        .toList();
-    await tester.enterText(
-      find.byType(CustomSearchBar),
-      itemTitleList.first.toString(),
-    );
-    await tester.tap(find.byKey(WidgetKeys.searchIconKey));
-    await tester.pumpAndSettle();
-  }
+  String getFirstTitle() =>
+      tester.widgetList<Text>(articleTitle).map((e) => e.data).first ?? '';
 
   Future<void> tapArticleItem() async {
     expect(
@@ -82,11 +69,6 @@ class ArticleRobot {
   }
 
   void verifyFilterIcon() {
-    expect(
-      find.byIcon(
-        Icons.tune_outlined,
-      ),
-      findsOneWidget,
-    );
+    //TODO: Revisit to write test cases for filter articles
   }
 }

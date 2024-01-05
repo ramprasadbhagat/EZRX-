@@ -277,7 +277,7 @@ void main() {
         await tester.drag(accountSuspendedBanner, const Offset(0, -100));
         await tester.pump();
         final bonusSampleItemButton = find.byKey(
-          WidgetKeys.cartItemBonusSample(
+          WidgetKeys.cartItemBonus(
             cartItem.materialInfo.materialNumber.displayMatNo,
             cartItem.bonusSampleItems.first.materialNumber.displayMatNo,
           ),
@@ -332,7 +332,7 @@ void main() {
         await tester.pump();
 
         final bonusSampleItemButton = find.byKey(
-          WidgetKeys.cartItemBonusSample(
+          WidgetKeys.cartItemBonus(
             cartItem.materialInfo.materialNumber.displayMatNo,
             cartItem.bonusSampleItems.first.materialNumber.displayMatNo,
           ),
@@ -340,12 +340,12 @@ void main() {
         expect(bonusSampleItemButton, findsOneWidget);
         final cartItemQuantityInputKey = find.byType(CartItemQuantityInput);
         expect(cartItemQuantityInputKey, findsWidgets);
-        final cartItemAddKey = find.byKey(WidgetKeys.cartItemAddKey);
+        final cartItemAddKey = find.byKey(WidgetKeys.bonusOfferItemAddKey);
         expect(cartItemAddKey, findsWidgets);
-        final cartItemDeleteKey = find.byKey(WidgetKeys.cartItemDeleteKey);
+        final cartItemDeleteKey = find.byKey(WidgetKeys.bonusOfferItemDeleteKey);
         expect(cartItemDeleteKey, findsWidgets);
         final quantityInputTextKey =
-            find.byKey(WidgetKeys.quantityInputTextKey);
+            find.byKey(WidgetKeys.bonusOfferItemInputKey);
         expect(quantityInputTextKey, findsWidgets);
         await tester.tap(cartItemAddKey.last);
         await tester.pump();

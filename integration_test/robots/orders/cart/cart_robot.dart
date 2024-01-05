@@ -67,8 +67,8 @@ class CartRobot {
       findsOneWidget,
     );
     expect(
-      find.text(
-        'Looks like you haven’t added anything to your cart yet.'.tr(),
+      find.textContaining(
+        'Looks like you haven’t added anything to your cart yet'.tr(),
       ),
       findsOneWidget,
     );
@@ -718,101 +718,4 @@ class CartRobot {
 
   Finder _bonusItem(String materialNumber, String bonusMaterialNumber) =>
       find.byKey(WidgetKeys.cartItemBonus(materialNumber, bonusMaterialNumber));
-
-  //============================================================
-  //  Bonus Sample
-  //============================================================
-
-  Future<void> verifyBonusSampleMaterial(
-    String materialNumber,
-    String bonusSampleMaterialNumber,
-  ) async {
-    final bonus = _bonusSampleItem(materialNumber, bonusSampleMaterialNumber);
-    await tester.dragUntilVisible(bonus, scrollList, defaultScrollOffset);
-    await tester.pump();
-    expect(bonus, findsOneWidget);
-  }
-
-  void verifyBonusSampleMaterialDescription(
-    String materialNumber,
-    String bonusSampleMaterialNumber,
-    String text,
-  ) {
-    expect(
-      find.descendant(
-        of: _bonusSampleItem(materialNumber, bonusSampleMaterialNumber),
-        matching: find.byWidgetPredicate(
-          (widget) =>
-              widget.key == WidgetKeys.cartItemBonusSampleMaterialDescription &&
-              widget is Text &&
-              widget.data == text,
-        ),
-      ),
-      findsOneWidget,
-    );
-  }
-
-  void verifyBonusSampleMaterialImage(
-    String materialNumber,
-    String bonusSampleMaterialNumber,
-  ) {
-    expect(
-      find.descendant(
-        of: _bonusSampleItem(materialNumber, bonusSampleMaterialNumber),
-        matching: find.byType(CustomImage),
-      ),
-      findsOneWidget,
-    );
-  }
-
-  void verifyBonusSampleMaterialQty(
-    String materialNumber,
-    String bonusSampleMaterialNumber,
-    int qty,
-  ) {
-    expect(
-      find.descendant(
-        of: find.descendant(
-          of: _bonusSampleItem(materialNumber, bonusSampleMaterialNumber),
-          matching: find.byKey(WidgetKeys.quantityInputTextKey),
-        ),
-        matching: find.text(qty.toString()),
-      ),
-      findsOneWidget,
-    );
-  }
-
-  void verifyBonusSampleMaterialFreeLabel(
-    String materialNumber,
-    String bonusSampleMaterialNumber,
-  ) {
-    expect(
-      find.descendant(
-        of: _bonusSampleItem(materialNumber, bonusSampleMaterialNumber),
-        matching: find.byKey(WidgetKeys.cartItemBonusSampleFreeLabel),
-      ),
-      findsOneWidget,
-    );
-  }
-
-  void verifyBonusSampleMaterialTag(
-    String materialNumber,
-    String bonusSampleMaterialNumber,
-  ) {
-    expect(
-      find.descendant(
-        of: _bonusSampleItem(materialNumber, bonusSampleMaterialNumber),
-        matching: find.byType(BonusTag),
-      ),
-      findsOneWidget,
-    );
-  }
-
-  Finder _bonusSampleItem(
-    String materialNumber,
-    String bonusSampleMaterialNumber,
-  ) =>
-      find.byKey(
-        WidgetKeys.cartItemBonus(materialNumber, bonusSampleMaterialNumber),
-      );
 }

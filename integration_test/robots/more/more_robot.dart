@@ -18,6 +18,7 @@ class MoreRobot extends CommonRobot {
   final logout = find.byKey(WidgetKeys.logOutTile);
   final announcementArticleTile =
       find.byKey(WidgetKeys.announcementArticleTile);
+  final scrollList = find.byKey(WidgetKeys.moreTapListContent);
 
   Future<void> tapReturnsTile() async {
     await tester.tap(returnsTile);
@@ -25,6 +26,12 @@ class MoreRobot extends CommonRobot {
   }
 
   Future<void> tapContactUsTile() async {
+    await tester.dragUntilVisible(
+      contactUsTile,
+      scrollList,
+      const Offset(0.0, -200),
+    );
+    await tester.pump();
     await tester.tap(contactUsTile);
     await tester.pumpAndSettle();
   }

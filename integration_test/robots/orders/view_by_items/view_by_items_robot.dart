@@ -125,9 +125,12 @@ class ViewByItemsRobot {
     expect(orderGroups, findsNothing);
     expect(orderItems, findsNothing);
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
-    expect(find.text('No past orders to show'.tr()), findsOneWidget);
+    expect(find.text('No orders found'.tr()), findsOneWidget);
     expect(
-      find.text('${'Items ordered on eZRx+ will be shown here'.tr()}.'),
+      find.textContaining(
+        'Try adjusting your search or filter selection to find what you’re looking for'
+            .tr(),
+      ),
       findsOneWidget,
     );
     expect(find.byKey(WidgetKeys.startBrowsingViewByItem), findsOneWidget);

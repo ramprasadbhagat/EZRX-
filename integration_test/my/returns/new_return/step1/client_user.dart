@@ -6,6 +6,7 @@ import '../../../../core/common.dart';
 import '../../../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../../../robots/common/common_robot.dart';
+import '../../../../robots/common/enum.dart';
 import '../../../../robots/login_robot.dart';
 import '../../../../robots/more/more_robot.dart';
 import '../../../../robots/returns/new_return/step1/new_return_step1_robot.dart';
@@ -30,7 +31,7 @@ void main() {
 
   Future<void> goToNewRequest() async {
     //Go returns
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapReturnsTile();
     await returnsByItemsRobot.tapNewRequestFloatingButton();
   }

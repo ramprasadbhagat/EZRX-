@@ -6,6 +6,7 @@ import '../../../../core/infrastructure/infra_core/zephyr_service/zephyr_service
 import '../../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../../../core/common.dart';
 import '../../../../robots/common/common_robot.dart';
+import '../../../../robots/common/enum.dart';
 import '../../../../robots/common/extension.dart';
 import '../../../../robots/login_robot.dart';
 import '../../../../robots/more/more_robot.dart';
@@ -81,7 +82,7 @@ void main() {
   Future<void> goToInvoice() async {
     await commonRobot.changeDeliveryAddress(shipToCode);
     await commonRobot.dismissSnackbar();
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentHomeRobot.tapAccountSummaryMenu();
   }

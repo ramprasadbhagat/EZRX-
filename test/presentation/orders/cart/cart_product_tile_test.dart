@@ -293,7 +293,7 @@ void main() {
         await tester.pump();
 
         final bonusSampleItem = find.byKey(
-          WidgetKeys.cartItemBonusSample(materialNumber, materialNumber),
+          WidgetKeys.cartItemBonus(materialNumber, materialNumber),
         );
         expect(bonusSampleItem, findsOneWidget);
         expect(

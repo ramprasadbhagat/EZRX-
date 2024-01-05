@@ -56,7 +56,9 @@ class ProductDetailRobot extends CommonRobot {
   }
 
   Future<void> tapToSeeMore() async {
-    await tester.tap(find.byKey(WidgetKeys.expandIcon));
+    final expandIcon = find.byKey(WidgetKeys.expandIcon);
+    await tester.pumpUntilVisible(expandIcon);
+    await tester.tap(expandIcon);
   }
 
   void verifyCountryOfOriginDisplayed(String country) {
@@ -192,7 +194,7 @@ class ProductDetailRobot extends CommonRobot {
   Future<void> tapToImageMaterial(int index, bool selected) async {
     await tester
         .tap(find.byKey(WidgetKeys.genericKey(key: 'selected$index$selected')));
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   Future<void> openAvailableOffers() async {

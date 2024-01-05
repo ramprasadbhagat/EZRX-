@@ -22,26 +22,11 @@ class CommonRobot {
   final searchBar = find.byType(CustomSearchBar);
   final invalidLengthSearchMessage =
       find.text('Please enter at least 2 characters.'.tr());
-
-  Future<void> goToMoreTab() async {
-    await tester.tap(moreTab);
-    await tester.pumpAndSettle();
-  }
-
   final homeTabBar = find.byKey(WidgetKeys.homeTabBar);
   final homeTab = find.byKey(WidgetKeys.homeTab);
   final productsTab = find.byKey(WidgetKeys.productsTab);
   final cartButton = find.byType(CartButton);
 
-  Future<void> goToHomeTab() async {
-    await tester.tap(homeTab);
-    await tester.pumpAndSettle();
-  }
-
-  Future<void> goToOrderTab() async {
-    await tester.tap(ordersTab);
-    await tester.pumpAndSettle();
-  }
 
   Future<void> changeDeliveryAddress(String shipToCode) async {
     if ((tester

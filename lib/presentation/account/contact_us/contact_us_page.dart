@@ -63,6 +63,7 @@ class ContactUsPage extends StatelessWidget {
                 previous.salesOrg != current.salesOrg,
             builder: (context, state) {
               return ListView(
+                key: WidgetKeys.scrollList,
                 padding: const EdgeInsets.only(
                   left: 20,
                   right: 20,

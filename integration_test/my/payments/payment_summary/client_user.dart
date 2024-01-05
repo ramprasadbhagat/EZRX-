@@ -6,6 +6,7 @@ import '../../../core/common.dart';
 import '../../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../../robots/common/common_robot.dart';
+import '../../../robots/common/enum.dart';
 import '../../../robots/login_robot.dart';
 import '../../../robots/more/more_robot.dart';
 import '../../../robots/payments/payment_home_robot.dart';
@@ -66,7 +67,7 @@ void main() {
     }
 
     //Go Payment summary page
-    await commonRobot.goToMoreTab();
+    await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapPaymentTile();
     await paymentHomeRobot.tapPaymentSummaryMenu();
   }
