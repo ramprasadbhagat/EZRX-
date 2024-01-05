@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -23,6 +24,8 @@ class ProductStockInfo extends StatelessWidget {
           current.isDetailAndStockFetching != previous.isDetailAndStockFetching,
       builder: (context, state) {
         final stockInfo = state.productDetailAggregate.stockInfo;
+        final eligibilityState = context.read<EligibilityBloc>().state;
+
         if (state.isDetailAndStockFetching) {
           return SizedBox(
             width: 100,
@@ -41,22 +44,18 @@ class ProductStockInfo extends StatelessWidget {
                         .bodySmall
                         ?.copyWith(color: ZPColors.darkGray),
                     children: [
-                      stockInfo.batch.isValid()
-                          ? TextSpan(
-                              text:
-                                  '${context.tr('Batch')} ${stockInfo.batch.getOrDefaultValue('')} ',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(color: ZPColors.darkGray),
-                            )
-                          : const WidgetSpan(child: SizedBox.shrink()),
-                      stockInfo.expiryDate.isValid()
-                          ? TextSpan(
-                              text:
-                                  '(${context.tr('EXP')}: ${stockInfo.expiryDate.dateString})',
-                            )
-                          : const WidgetSpan(child: SizedBox.shrink()),
+                      if (eligibilityState.salesOrg.showBatchNumber &&
+                          stockInfo.batch.isValid())
+                        TextSpan(
+                          text:
+                              '${context.tr('Batch')} ${stockInfo.batch.getOrDefaultValue('')} ',
+                        ),
+                      if (eligibilityState.salesOrgConfigs.expiryDateDisplay &&
+                          stockInfo.expiryDate.isValid())
+                        TextSpan(
+                          text:
+                              '(${context.tr('EXP')}: ${stockInfo.expiryDate.dateString})',
+                        ),
                     ],
                   ),
                 ),

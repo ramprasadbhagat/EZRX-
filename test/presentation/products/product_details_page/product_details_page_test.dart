@@ -284,7 +284,10 @@ void main() {
             find.byKey(WidgetKeys.materialDetailsAddToCartSnackBar);
         expect(cartButtonFinder, findsOneWidget);
         expect(addToCartButton, findsOneWidget);
-        await tester.tap(addToCartButton);
+        await tester.tap(
+          addToCartButton,
+          warnIfMissed: false,
+        );
         await tester.pump(const Duration(seconds: 1));
         expect(itemAddedSnackBar, findsOneWidget);
       });
@@ -1584,6 +1587,142 @@ void main() {
             matching: listPriceFinder,
           ),
           findsNothing,
+        );
+      });
+
+      testWidgets(
+          'Product details Page should not display batch number for TW Market',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              stockInfo: stockInfo,
+            ),
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeTWSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.textContaining(
+            'Batch 12S017',
+            findRichText: true,
+          ),
+          findsNothing,
+        );
+      });
+
+      testWidgets(
+          '_MaterialInfoDialog should be shown when tap icon - not display batch for TW Market',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+            ),
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeTWSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+          find.byKey(WidgetKeys.productDetailList),
+          const Offset(0, -200),
+        );
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.materialDetailsInfoTile), findsOneWidget);
+        await tester.tap(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.materialInfoDialog),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
+          ),
+          findsNothing,
+        );
+      });
+
+      testWidgets(
+          'Product details Page should display batch number for Other Market',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              stockInfo: stockInfo,
+            ),
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.textContaining(
+            'Batch 12S017',
+            findRichText: true,
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          '_MaterialInfoDialog should be shown when tap icon - display batch for Other Market',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+            ),
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+          find.byKey(WidgetKeys.productDetailList),
+          const Offset(0, -200),
+        );
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.materialDetailsInfoTile), findsOneWidget);
+        await tester.tap(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.materialInfoDialog),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
+          ),
+          findsOneWidget,
         );
       });
     },

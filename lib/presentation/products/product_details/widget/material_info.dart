@@ -71,6 +71,7 @@ class _MaterialInfoDialog extends StatelessWidget {
     final productDetailAggregate =
         context.read<ProductDetailBloc>().state.productDetailAggregate;
     final materialInfo = productDetailAggregate.materialInfo;
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
     return Padding(
       key: WidgetKeys.materialInfoDialog,
@@ -98,11 +99,7 @@ class _MaterialInfoDialog extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 7),
-          if (context
-              .read<EligibilityBloc>()
-              .state
-              .salesOrgConfigs
-              .enableGMC) ...[
+          if (eligibilityState.salesOrgConfigs.enableGMC) ...[
             BalanceTextRow(
               keyText: context.tr('Govt material number'),
               valueText: materialInfo.getGMC.displayDashIfEmpty,
@@ -152,22 +149,19 @@ class _MaterialInfoDialog extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 7),
-          BalanceTextRow(
-            keyText: context.tr('Batch'),
-            valueText: productDetailAggregate.stockInfo.batch.displayLabel,
-            valueFlex: 1,
-            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.black,
-                ),
-            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.darkGray,
-                ),
-          ),
-          if (context
-              .read<EligibilityBloc>()
-              .state
-              .salesOrgConfigs
-              .expiryDateDisplay)
+          if (eligibilityState.salesOrg.showBatchNumber)
+            BalanceTextRow(
+              keyText: context.tr('Batch'),
+              valueText: productDetailAggregate.stockInfo.batch.displayLabel,
+              valueFlex: 1,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.black,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.darkGray,
+                  ),
+            ),
+          if (eligibilityState.salesOrgConfigs.expiryDateDisplay)
             _ExpiryDateWidget(
               expiryDateText:
                   productDetailAggregate.stockInfo.expiryDate.dateOrNaString,
