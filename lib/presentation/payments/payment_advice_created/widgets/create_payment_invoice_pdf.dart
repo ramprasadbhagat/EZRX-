@@ -845,6 +845,24 @@ class CreatePaymentInvoicePdf {
     );
   }
 
+  pw.ThemeData _getThemeData(pw.Font font) {
+    final textStyle = pw.TextStyle(font: font);
+
+    return pw.ThemeData(
+      defaultTextStyle: textStyle,
+      paragraphStyle: textStyle,
+      header0: textStyle,
+      header1: textStyle,
+      header2: textStyle,
+      header3: textStyle,
+      header4: textStyle,
+      header5: textStyle,
+      bulletStyle: textStyle,
+      tableHeader: textStyle,
+      tableCell: textStyle,
+    );
+  }
+
   Future<Uint8List> createInvoicePdf({
     required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
     required ShipToInfo shipToInfo,
@@ -853,6 +871,7 @@ class CreatePaymentInvoicePdf {
     required AdviceExpiryValue adviceExpiry,
   }) async {
     final pdf = pw.Document();
+    final font = await PdfGoogleFonts.notoSansThaiMedium();
     final headerInvoice = await _headerInvoice(
       headerLogoPath: paymentInvoiceInfoPdf.headerLogoPath,
       zzAdvice: paymentInvoiceInfoPdf.zzAdvice,
@@ -865,6 +884,7 @@ class CreatePaymentInvoicePdf {
       pw.Page(
         pageFormat: PdfPageFormat.a4.copyWith(height: double.infinity),
         margin: const pw.EdgeInsets.all(16.0),
+        theme: _getThemeData(font),
         build: (context) {
           return pw.Column(
             children: [
