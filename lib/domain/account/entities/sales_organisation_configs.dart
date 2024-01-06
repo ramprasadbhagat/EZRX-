@@ -231,17 +231,20 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   DateTime get deliveryStartDate {
     final currentTime = DateTime.now();
 
-    if (currentTime.weekday >= DateTime.friday &&
-        currentTime.hour >= salesOrg.cutOffTime) {
-      return DateTimeUtils.getNearestWorkingDate(currentTime)
-          .add(const Duration(days: 1));
+    if (currentTime.hour < salesOrg.cutOffTime &&
+        currentTime.weekday <= DateTime.friday) {
+      return DateTimeUtils.getNearestWorkingDate(currentTime);
     }
 
-    return DateTimeUtils.getNearestWorkingDate(
-      currentTime.hour < salesOrg.cutOffTime
-          ? currentTime
-          : currentTime.add(const Duration(days: 1)),
-    );
+    if (currentTime.hour >= salesOrg.cutOffTime &&
+        currentTime.weekday < DateTime.friday) {
+      return DateTimeUtils.getNearestWorkingDate(
+        currentTime.add(const Duration(days: 1)),
+      );
+    }
+
+    return DateTimeUtils.getNearestWorkingDate(currentTime)
+        .add(const Duration(days: 1));
   }
 
   DateTime get deliveryEndDate => DateTimeUtils.addWorkingDay(
