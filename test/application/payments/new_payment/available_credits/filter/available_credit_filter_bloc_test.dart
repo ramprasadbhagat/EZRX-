@@ -60,7 +60,7 @@ void main() {
         ),
         expect: () => [
           AvailableCreditFilterState.initial().copyWith(
-            filter: AvailableCreditFilter.empty().copyWith(
+            filter: AvailableCreditFilter.init().copyWith(
               amountValueFrom: RangeValue('10'),
             ),
           ),
@@ -74,7 +74,7 @@ void main() {
             .add(const AvailableCreditFilterEvent.setAmountTo(amountTo: '100')),
         expect: () => [
           AvailableCreditFilterState.initial().copyWith(
-            filter: AvailableCreditFilter.empty().copyWith(
+            filter: AvailableCreditFilter.init().copyWith(
               amountValueTo: RangeValue('100'),
             ),
           ),
@@ -99,27 +99,6 @@ void main() {
               amountValueTo: RangeValue('10'),
             ),
             showErrorMessage: true,
-          ),
-        ],
-      );
-
-      blocTest<AvailableCreditFilterBloc, AvailableCreditFilterState>(
-        'For "updateFilterToLastApplied" Event with Failure',
-        build: () => AvailableCreditFilterBloc(),
-        act: (bloc) => bloc.add(
-          AvailableCreditFilterEvent.updateFilterToLastApplied(
-            lastAppliedFilter: AvailableCreditFilter.empty().copyWith(
-              amountValueFrom: RangeValue('10'),
-              amountValueTo: RangeValue('100'),
-            ),
-          ),
-        ),
-        expect: () => [
-          AvailableCreditFilterState.initial().copyWith(
-            filter: AvailableCreditFilter.empty().copyWith(
-              amountValueFrom: RangeValue('10'),
-              amountValueTo: RangeValue('100'),
-            ),
           ),
         ],
       );

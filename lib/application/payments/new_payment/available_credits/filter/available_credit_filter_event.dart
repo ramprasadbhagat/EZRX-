@@ -3,9 +3,6 @@ part of 'available_credit_filter_bloc.dart';
 @freezed
 class AvailableCreditFilterEvent with _$AvailableCreditFilterEvent {
   const factory AvailableCreditFilterEvent.initialize() = _Initialize;
-  const factory AvailableCreditFilterEvent.updateFilterToLastApplied({
-    required AvailableCreditFilter lastAppliedFilter,
-  }) = _UpdateFiltersToLastApplied;
   const factory AvailableCreditFilterEvent.setDocumentDate({
     required DateTimeRange documentDateRange,
   }) = _SetDocumentDate;

@@ -38,7 +38,7 @@ void main() {
   late List<InvoiceOrderItem> invoiceOrderItems;
   final fakeToDate = DateTime.now();
   final fakeFromDate = DateTime.now().subtract(
-    const Duration(days: 30),
+    const Duration(days: 29),
   );
 
   setUpAll(() async {

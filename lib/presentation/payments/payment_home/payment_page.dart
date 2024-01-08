@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
@@ -98,9 +99,12 @@ class PaymentPage extends StatelessWidget {
                 );
             context.read<AvailableCreditsBloc>().add(
                   AvailableCreditsEvent.fetch(
-                    appliedFilter: AvailableCreditFilter.empty(),
+                    appliedFilter: AvailableCreditFilter.init(),
                     searchKey: SearchKey.searchFilter(''),
                   ),
+                );
+            context.read<AvailableCreditFilterBloc>().add(
+                  const AvailableCreditFilterEvent.initialize(),
                 );
             context.router.push(const NewPaymentPageRoute());
           } else {

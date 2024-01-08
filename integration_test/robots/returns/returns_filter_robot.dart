@@ -21,7 +21,7 @@ abstract class ReturnsFilterRobot {
     final currentTime = DateTime.now();
     verifyNoStatusFilterApplied();
     verifyDateRangeFilterApplied(
-      fromDate: currentTime.subtract(const Duration(days: 30)),
+      fromDate: currentTime.subtract(const Duration(days: 29)),
       toDate: currentTime,
     );
     verifyAmountRangeFilterApplied(

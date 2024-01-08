@@ -10,7 +10,7 @@ class AvailableCreditFilterState with _$AvailableCreditFilterState {
   }) = _AvailableCreditFilterState;
 
   factory AvailableCreditFilterState.initial() => AvailableCreditFilterState(
-        filter: AvailableCreditFilter.empty(),
+        filter: AvailableCreditFilter.init(),
         showErrorMessage: false,
       );
 }

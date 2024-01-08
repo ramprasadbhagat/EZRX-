@@ -49,7 +49,7 @@ void main() {
   final fakeFromDate = DateTime.parse(
     DateFormat('yyyy-MM-dd').format(
       DateTime.now().subtract(
-        const Duration(days: 30),
+        const Duration(days: 29),
       ),
     ),
   );

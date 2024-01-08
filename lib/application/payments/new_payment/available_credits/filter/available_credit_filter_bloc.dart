@@ -55,12 +55,6 @@ class AvailableCreditFilterBloc
               !state.filter.isAvailableCreditAmountValueRangeValid,
         ),
       ),
-      updateFilterToLastApplied: (e) async => emit(
-        state.copyWith(
-          filter: e.lastAppliedFilter,
-          showErrorMessage: false,
-        ),
-      ),
       resetFilters: (e) async => emit(
         AvailableCreditFilterState.initial().copyWith(
           filter: AvailableCreditFilter.empty(),

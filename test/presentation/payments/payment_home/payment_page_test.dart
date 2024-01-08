@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
@@ -60,6 +61,10 @@ class AvailableCreditsBlocMock
     extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
     implements AvailableCreditsBloc {}
 
+class AvailableCreditFilterBlocMock
+    extends MockBloc<AvailableCreditFilterEvent, AvailableCreditFilterState>
+    implements AvailableCreditFilterBloc {}
+
 class PaymentInProgressBlocMock
     extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
     implements PaymentInProgressBloc {}
@@ -109,6 +114,7 @@ void main() {
   late PaymentInProgressBloc paymentInProgressBloc;
   late PaymentInProgressState paymentInProgressState;
   late AvailableCreditsBloc availableCreditsBlocMock;
+  late AvailableCreditFilterBloc availableCreditFilterBloc;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBloc;
   late SoaFilterBloc soaFilterBlocMock;
@@ -177,6 +183,7 @@ void main() {
     accountSummaryBlocMock = AccountSummaryBlocMock();
     paymentInProgressBloc = PaymentInProgressBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();
+    availableCreditFilterBloc = AvailableCreditFilterBlocMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
     downloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
     soaFilterBlocMock = SoaFilterBlocMock();
@@ -192,6 +199,8 @@ void main() {
         .thenReturn(AvailableCreditsState.initial());
     when(() => availableCreditsBlocMock.state)
         .thenReturn(AvailableCreditsState.initial());
+     when(() => availableCreditFilterBloc.state)
+        .thenReturn(AvailableCreditFilterState.initial());
     when(() => outstandingInvoicesBlocMock.state)
         .thenReturn(OutstandingInvoicesState.initial());
     when(() => outstandingInvoicesBlocMock.state)
@@ -250,6 +259,9 @@ void main() {
         ),
         BlocProvider<AvailableCreditsBloc>(
           create: (context) => availableCreditsBlocMock,
+        ),
+        BlocProvider<AvailableCreditFilterBloc>(
+          create: (context) => availableCreditFilterBloc,
         ),
         BlocProvider<OutstandingInvoicesBloc>(
           create: (context) => outstandingInvoicesBlocMock,
@@ -360,9 +372,14 @@ void main() {
     verify(
       () => availableCreditsBlocMock.add(
         AvailableCreditsEvent.fetch(
-          appliedFilter: AvailableCreditFilter.empty(),
+          appliedFilter: AvailableCreditFilter.init(),
           searchKey: SearchKey.searchFilter(''),
         ),
+      ),
+    ).called(1);
+    verify(
+      () => availableCreditFilterBloc.add(
+        const AvailableCreditFilterEvent.initialize(),
       ),
     ).called(1);
   });
@@ -396,7 +413,7 @@ void main() {
     verify(
       () => availableCreditsBlocMock.add(
         AvailableCreditsEvent.fetch(
-          appliedFilter: AvailableCreditFilter.empty(),
+          appliedFilter: AvailableCreditFilter.init(),
           searchKey: SearchKey.searchFilter(''),
         ),
       ),
@@ -862,7 +879,6 @@ void main() {
             isDownloadInProgress: true,
           ),
           DownloadPaymentAttachmentsState.initial(),
-
         ]),
       );
       await tester.binding.setSurfaceSize(const Size(480, 900));

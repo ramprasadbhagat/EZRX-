@@ -31,22 +31,18 @@ class OutstandingInvoiceFilter with _$OutstandingInvoiceFilter {
         outstandingInvoiceStatus: StatusType(''),
       );
 
-  factory OutstandingInvoiceFilter.init() => OutstandingInvoiceFilter(
+  factory OutstandingInvoiceFilter.init() =>
+      OutstandingInvoiceFilter.empty().copyWith(
         documentDateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(
-              const Duration(days: 30),
+              const Duration(days: 29),
             ),
           ),
         ),
         documentDateTo: DateTimeStringValue(
           getDateStringByDateTime(DateTime.now()),
         ),
-        dueDateFrom: DateTimeStringValue(''),
-        dueDateTo: DateTimeStringValue(''),
-        amountValueFrom: RangeValue(''),
-        amountValueTo: RangeValue(''),
-        outstandingInvoiceStatus: StatusType(''),
       );
 
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(
