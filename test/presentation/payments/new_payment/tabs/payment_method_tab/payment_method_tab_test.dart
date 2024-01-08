@@ -467,6 +467,7 @@ void main() {
         accountingDocument: fakeAccountingDocument,
         openAmountInTransCrcy: fakeAmount,
         netDueDate: fakeNetDueDate,
+        documentReferenceID: StringValue('0800072883'),
       );
       final items = [fakeItem, fakeItem];
       testWidgets('Not display when no selected invoice and credit ',
@@ -599,6 +600,26 @@ void main() {
             ),
           ),
         ).called(1);
+      });
+
+      testWidgets('Find Gov.No in payment method tab', (tester) async {
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedInvoices: [fakeItem],
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final documentReferenceID = find.text('Gov. no 0800072883');
+        expect(documentReferenceID, findsOneWidget);
       });
 
       testWidgets('Apl payment fetch Payment Summary DetailsInfo',

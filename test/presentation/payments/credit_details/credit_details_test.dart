@@ -8,7 +8,9 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -18,6 +20,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
@@ -44,6 +47,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late ProductImageBloc productImageBlocMock;
+  late List<CreditAndInvoiceItem> customerDocumentDetails;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -65,6 +69,8 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     productImageBlocMock = ProductImageBlocMock();
+    customerDocumentDetails =
+        await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
 
     when(() => creditAndInvoiceDetailsBlocMock.state)
         .thenReturn(CreditAndInvoiceDetailsState.initial());
@@ -146,6 +152,26 @@ void main() {
       final creditDetailsPageListView =
           find.byKey(WidgetKeys.creditDetailsPageListView);
       expect(creditDetailsPageListView, findsOneWidget);
+    });
+
+    testWidgets('Find Gov.No in Credit Details Page', (tester) async {
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial()
+            .copyWith(basicInfo: customerDocumentDetails.first),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeVNSalesOrganisation,
+        ),
+      );
+
+      await getWidget(tester);
+      await tester.pump();
+
+      final documentReferenceID =
+          find.byKey(WidgetKeys.balanceTextRow('Gov. no', '0810055826'));
+      expect(documentReferenceID, findsOneWidget);
     });
   });
 }

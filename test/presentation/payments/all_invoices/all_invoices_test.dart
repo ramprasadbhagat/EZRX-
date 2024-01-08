@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -29,6 +30,7 @@ import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.d
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
@@ -70,6 +72,7 @@ void main() {
   final locator = GetIt.instance;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late List<CreditAndInvoiceItem> allInvoicesData;
   final thSalesOrganisation = SalesOrganisation.empty().copyWith(
     salesOrg: SalesOrg('2900'),
   );
@@ -98,6 +101,8 @@ void main() {
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
+    allInvoicesData =
+        await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
 
     when(() => allInvoicesBlocMock.state)
         .thenReturn(AllInvoicesState.initial());
@@ -503,6 +508,24 @@ void main() {
         find.byKey(WidgetKeys.invoiceItemOrderIdLoadingShimmer),
         findsWidgets,
       );
+    });
+
+    testWidgets('Find Gov.No for all invoices', (tester) async {
+      when(() => allInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(items: allInvoicesData),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeVNSalesOrganisation,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final documentReferenceID = find.text('Gov. no 0810055826');
+      expect(documentReferenceID, findsOneWidget);
     });
   });
 }

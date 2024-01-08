@@ -33,6 +33,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../common_mock_data/mock_other.dart';
+import '../../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../../utils/widget_utils.dart';
 import '../../../../../common_mock_data/mock_bloc.dart';
 
@@ -579,6 +580,24 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets('Find Gov.No in outstanding invoices', (tester) async {
+      when(() => outstandingInvoicesBlocMock.state).thenReturn(
+        OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeVNSalesOrganisation,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final documentReferenceID = find.text('Gov. no 0800072883');
+      expect(documentReferenceID, findsOneWidget);
     });
   });
 }

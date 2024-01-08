@@ -130,6 +130,7 @@ void main() {
       orderId: StringValue('1234567'),
       accountingDocumentItem: '001',
       invoiceProcessingStatus: StatusType('Cleared'),
+      documentReferenceID: StringValue('0810055826'),
     );
     fakeInvoiceDetail = CustomerDocumentDetail.empty().copyWith(
       salesDocumentItemType: StringValue('fake-salesDocumentItemType'),
@@ -475,6 +476,25 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets('Find Gov.No in Invoice Details Page', (tester) async {
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(basicInfo: fakeInvoice),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeVNSalesOrganisation,
+        ),
+      );
+
+      await getWidget(tester);
+      await tester.pump();
+
+      final documentReferenceID =
+          find.byKey(WidgetKeys.balanceTextRow('Gov. no', '0810055826'));
+      expect(documentReferenceID, findsOneWidget);
     });
   });
 }

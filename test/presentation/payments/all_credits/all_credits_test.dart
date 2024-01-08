@@ -381,5 +381,23 @@ void main() {
         ),
       );
     });
+
+    testWidgets('Find Gov.No for all credits', (tester) async {
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(items: creditItemList),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeVNSalesOrganisation,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final documentReferenceID = find.text('Gov. no 0810055826');
+      expect(documentReferenceID, findsOneWidget);
+    });
   });
 }

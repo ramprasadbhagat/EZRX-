@@ -27,6 +27,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class FullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
@@ -485,6 +486,24 @@ void main() {
         ),
       ).called(1);
       expect(autoRouterMock.currentPath, 'payments/credit_details');
+    });
+
+    testWidgets('Find Gov.No in full Summary', (tester) async {
+      when(() => fullSummaryBlocMock.state).thenReturn(
+        FullSummaryState.initial().copyWith(items: fullSummaryList),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeVNSalesOrganisation,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final documentReferenceID = find.text('Gov. no 0810055826');
+      expect(documentReferenceID, findsOneWidget);
     });
   });
 }
