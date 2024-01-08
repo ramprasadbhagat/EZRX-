@@ -1,25 +1,25 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 
 class SalesOrgRepositoryMock extends Mock implements SalesOrgRepository {}
 
 void main() {
   late SalesOrgRepository salesOrgRepositoryMock;
-
-  final fakeSalesOrgList = [
-    SalesOrganisation(salesOrg: SalesOrg('fake-salesOrg'), customerInfos: [])
-  ];
-  group('Sales_Org BLOC Testing', () {
+  const fakeError = ApiFailure.other('Fake Error');
+  final fakeSalesOrgList = [fakeSalesOrganisation];
+  group('Sales_Org Bloc Testing', () {
     setUp(
       () {
         salesOrgRepositoryMock = SalesOrgRepositoryMock();
@@ -40,42 +40,33 @@ void main() {
       setUp: () {
         when(
           () => salesOrgRepositoryMock.storeSalesOrg(
-            salesOrg: 'mockSalesOrg - Unknown',
+            salesOrg: '${fakeSalesOrg.getOrCrash()} - Unknown',
           ),
         ).thenAnswer(
           (invocation) async => const Right(unit),
         );
         when(
           () => salesOrgRepositoryMock.getSalesOrganisationConfigs(
-            SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('mockSalesOrg'),
-            ),
+            fakeSalesOrganisation,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(ApiFailure.other('Fake Error')),
+          (invocation) async => const Left(fakeError),
         );
       },
       act: (bloc) => bloc.add(
         SalesOrgEvent.selected(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('mockSalesOrg'),
-          ),
+          salesOrganisation: fakeSalesOrganisation,
         ),
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('mockSalesOrg'),
-          ),
+          salesOrganisation: fakeSalesOrganisation,
           isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('mockSalesOrg'),
-          ),
-          configs: SalesOrganisationConfigs.empty(),
+          salesOrganisation: fakeSalesOrganisation,
           salesOrgFailureOrSuccessOption:
-              optionOf(const Left(ApiFailure.other('Fake Error'))),
+              optionOf(const Left(fakeError)),
         )
       ],
     );
@@ -84,35 +75,31 @@ void main() {
       build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
       setUp: () {
         when(
-          () => salesOrgRepositoryMock
-              .getSalesOrganisationConfigs(SalesOrganisation.empty()),
-        ).thenAnswer(
-          (invocation) async => Right(
-            SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('myr'),
-            ),
+          () => salesOrgRepositoryMock.getSalesOrganisationConfigs(
+            fakeMYSalesOrganisation,
           ),
+        ).thenAnswer(
+          (invocation) async => Right(fakeMYSalesOrgConfigs),
         );
         when(
           () => salesOrgRepositoryMock.storeSalesOrg(
-            salesOrg: ' - Unknown',
+            salesOrg: fakeMYSalesOrg.fullName,
           ),
         ).thenAnswer(
           (invocation) async => const Right(unit),
         );
       },
       act: (bloc) => bloc.add(
-        SalesOrgEvent.selected(salesOrganisation: SalesOrganisation.empty()),
+        SalesOrgEvent.selected(salesOrganisation: fakeMYSalesOrganisation),
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
           isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
-          configs: SalesOrganisationConfigs.empty().copyWith(
-            currency: Currency('myr'),
-          ),
+          salesOrganisation: fakeMYSalesOrganisation,
+          configs: fakeMYSalesOrgConfigs,
         )
       ],
     );
@@ -129,18 +116,14 @@ void main() {
 
         when(
           () => salesOrgRepositoryMock
-              .getSalesOrganisationConfigs(SalesOrganisation.empty()),
+              .getSalesOrganisationConfigs(fakeMYSalesOrganisation),
         ).thenAnswer(
-          (invocation) async => Right(
-            SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('myr'),
-            ),
-          ),
+          (invocation) async => Right(fakeMYSalesOrgConfigs),
         );
 
         when(
           () => salesOrgRepositoryMock.storeSalesOrg(
-            salesOrg: ' - Unknown',
+            salesOrg: fakeMYSalesOrg.fullName,
           ),
         ).thenAnswer(
           (invocation) async => const Right(unit),
@@ -149,20 +132,19 @@ void main() {
       act: (bloc) => bloc.add(
         SalesOrgEvent.loadSavedOrganisation(
           salesOrganisations: [
-            SalesOrganisation.empty(),
-            SalesOrganisation.empty(),
+            fakeMYSalesOrganisation,
+            fakeSGSalesOrganisation,
           ],
         ),
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
           isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
-          configs: SalesOrganisationConfigs.empty().copyWith(
-            currency: Currency('myr'),
-          ),
+          salesOrganisation: fakeMYSalesOrganisation,
+          configs: fakeMYSalesOrgConfigs,
         ),
       ],
     );
@@ -173,48 +155,40 @@ void main() {
       setUp: () {
         when(
           () => salesOrgRepositoryMock.storeSalesOrg(
-            salesOrg: ' - Unknown',
+            salesOrg: fakeMYSalesOrg.fullName,
           ),
         ).thenAnswer(
           (invocation) async => const Right(unit),
         );
 
         when(() => salesOrgRepositoryMock.getSalesOrg()).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('mock'),
-          ),
+          (invocation) async => const Left(fakeError),
         );
 
         when(
           () => salesOrgRepositoryMock.getSalesOrganisationConfigs(
-            SalesOrganisation.empty(),
+            fakeMYSalesOrganisation,
           ),
         ).thenAnswer(
-          (invocation) async => Right(
-            SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('myr'),
-            ),
-          ),
+          (invocation) async => Right(fakeMYSalesOrgConfigs),
         );
       },
       act: (bloc) => bloc.add(
         SalesOrgEvent.loadSavedOrganisation(
           salesOrganisations: [
-            SalesOrganisation.empty(),
-            SalesOrganisation.empty(),
+            fakeMYSalesOrganisation,
+            fakeSGSalesOrganisation,
           ],
         ),
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
           isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty(),
-          configs: SalesOrganisationConfigs.empty().copyWith(
-            currency: Currency('myr'),
-          ),
+          salesOrganisation: fakeMYSalesOrganisation,
+          configs: fakeMYSalesOrgConfigs,
         ),
       ],
     );
@@ -238,12 +212,10 @@ void main() {
       act: (bloc) {
         final currency = SalesOrgState.initial()
             .copyWith(
-              configs: SalesOrganisationConfigs.empty().copyWith(
-                currency: Currency('PHP'),
-              ),
+              configs: fakePHSalesOrgConfigs,
             )
             .currency;
-        expect(currency.getOrCrash(), 'PHP');
+        expect(currency.getOrCrash(), 'php');
       },
     );
 
@@ -255,9 +227,7 @@ void main() {
       act: (bloc) {
         final isDisableBundles = SalesOrgState.initial()
             .copyWith(
-              configs: SalesOrganisationConfigs.empty().copyWith(
-                disableBundles: true,
-              ),
+              configs: fakeIDSalesOrgConfigs,
             )
             .disableBundles;
         expect(isDisableBundles, true);
@@ -272,10 +242,7 @@ void main() {
         const SalesOrgEvent.fetchAvailableSalesOrg(avialableSalesOrgList: []),
       ),
       expect: () => [
-        SalesOrgState.initial().copyWith(
-          availableSalesOrg: [],
-          salesOrgFailureOrSuccessOption: none(),
-        ),
+        SalesOrgState.initial(),
       ],
     );
     blocTest<SalesOrgBloc, SalesOrgState>(
@@ -285,15 +252,14 @@ void main() {
       ),
       act: (bloc) => bloc.add(
         SalesOrgEvent.searchSalesOrg(
-          searchKey: SearchKey('fake-salesOrg'),
+          searchKey: SearchKey(fakeSalesOrg.getOrCrash()),
           salesOrgList: fakeSalesOrgList,
         ),
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
           availableSalesOrg: fakeSalesOrgList,
-          salesOrgFailureOrSuccessOption: none(),
-          searchKey: SearchKey('fake-salesOrg'),
+          searchKey: SearchKey(fakeSalesOrg.getOrCrash()),
         ),
       ],
     );
@@ -303,49 +269,30 @@ void main() {
       setUp: () {
         when(
           () => salesOrgRepositoryMock.getSalesOrganisationConfigs(
-            SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2500'),
-            ),
+            fakePHSalesOrganisation,
           ),
         ).thenAnswer(
-          (invocation) async => Right(
-            SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('php'),
-              salesOrg: SalesOrg('2500'),
-            ),
-          ),
+          (invocation) async => Right(fakePHSalesOrgConfigs),
         );
         when(
           () => salesOrgRepositoryMock.storeSalesOrg(
-            salesOrg: SalesOrg('2500').fullName,
+            salesOrg: fakePHSalesOrg.fullName,
           ),
         ).thenAnswer(
           (invocation) async => const Right(unit),
         );
       },
       act: (bloc) => bloc.add(
-        SalesOrgEvent.selected(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2500'),
-          ),
-        ),
+        SalesOrgEvent.selected(salesOrganisation: fakePHSalesOrganisation),
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2500'),
-          ),
+          salesOrganisation: fakePHSalesOrganisation,
           isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2500'),
-          ),
-          configs: SalesOrganisationConfigs.empty().copyWith(
-            currency: Currency('php'),
-            salesOrg: SalesOrg('2500'),
-          ),
-          isLoading: false,
+          salesOrganisation: fakePHSalesOrganisation,
+          configs: fakePHSalesOrgConfigs,
         )
       ],
     );
