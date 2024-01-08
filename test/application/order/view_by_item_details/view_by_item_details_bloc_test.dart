@@ -1,24 +1,26 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_repository.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 
+import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../common_mock_data/user_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 
 class OrderStatusTrackerRepositoryMock extends Mock
     implements OrderStatusTrackerRepository {}
@@ -32,8 +34,10 @@ void main() {
   late ViewByItemRepository viewByItemRepositoryMock;
   late List<OrderStatusTracker> fakeOrderStatusTracker;
   late OrderHistoryItem fakeOrderHistoryItem;
+  late List<InvoiceData> invoiceDataForOrders;
   final fakeStatus = OrderStepValue('Out for delivery');
-
+  late ViewByItemDetailsState seedState;
+  const fakeError = ApiFailure.other('fake-error');
   group(
     'ViewByItemDetailsBloc Test => ',
     () {
@@ -41,8 +45,27 @@ void main() {
         fakeOrderStatusTracker =
             await OrderStatusTrackerLocalDataSource().getOrderStatusTracker();
         orderHistory = await ViewByItemLocalDataSource().getViewByItems();
+        invoiceDataForOrders =
+            await ViewByItemLocalDataSource().getInvoiceDataForOrders();
+
         fakeOrderHistoryItem = orderHistory.orderHistoryItems.first.copyWith(
           status: fakeStatus,
+        );
+        seedState = ViewByItemDetailsState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          salesOrganisation: fakeMYSalesOrganisation,
+          user: fakeRootAdminUser,
+          orderHistory: orderHistory.copyWith(
+            orderHistoryItems: orderHistory.orderHistoryItems
+                .where(
+                  (element) =>
+                      element.hashCode != fakeOrderHistoryItem.hashCode &&
+                      element.orderNumber == fakeOrderHistoryItem.orderNumber,
+                )
+                .toList(),
+          ),
+          orderHistoryItem: orderHistory.orderHistoryItems.first,
         );
       });
 
@@ -93,9 +116,7 @@ void main() {
               invoiceNumber: fakeOrderHistoryItem.invoiceData.invoiceNumber,
             ),
           ).thenAnswer(
-            (invocation) async => const Left(
-              ApiFailure.other('Fake-Error'),
-            ),
+            (invocation) async => const Left(fakeError),
           );
         },
         act: (bloc) => bloc.add(
@@ -117,9 +138,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             user: fakeRootAdminUser,
             failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Fake-Error'),
-              ),
+              const Left(fakeError),
             ),
           ),
         ],
@@ -330,6 +349,45 @@ void main() {
         },
       );
 
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'For "fetchOrderHistoryDetails" Event failure',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => seedState,
+        setUp: () {
+          when(
+            () => (viewByItemRepositoryMock.getViewByItemDetails(
+              soldTo: seedState.customerCodeInfo,
+              salesOrgConfig: seedState.salesOrgConfig,
+              salesOrganisation: seedState.salesOrganisation,
+              user: seedState.user,
+              searchKey: SearchKey(
+                fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
+              ),
+            )),
+          ).thenAnswer(
+            (invocation) async => const Left(fakeError),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+            searchKey: SearchKey(
+              fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
+            ),
+          ),
+        ),
+        expect: () => [
+          seedState.copyWith(
+            isDetailsLoading: true,
+          ),
+          seedState.copyWith(
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
+          ),
+        ],
+      );
+
       test(
         'Get "poDocumentsList" when isExpanded = true',
         () {
@@ -397,6 +455,299 @@ void main() {
           expect(
             orderHistoryBloc.state.displayShowMoreOrLess,
             false,
+          );
+        },
+      );
+
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'SearchOrderHistory with empty keyword',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        setUp: () {
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.searchOrderHistory(
+            searchKey: SearchKey(''),
+          ),
+        ),
+        expect: () => [],
+      );
+
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'SearchOrderHistory with keyword failure',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => seedState,
+        setUp: () {
+          when(
+            () => (viewByItemRepositoryMock.searchOrderHistory(
+              soldTo: seedState.customerCodeInfo,
+              salesOrganisation: seedState.salesOrganisation,
+              user: seedState.user,
+              searchKey: SearchKey('fake-search-keyword'),
+            )),
+          ).thenAnswer(
+            (invocation) async => const Left(fakeError),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.searchOrderHistory(
+            searchKey: SearchKey('fake-search-keyword'),
+          ),
+        ),
+        expect: () => [
+          seedState.copyWith(
+            isLoading: true,
+            orderHistory: OrderHistory.empty(),
+            orderHistoryItem: OrderHistoryItem.empty(),
+          ),
+          seedState.copyWith(
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
+            orderHistory: OrderHistory.empty(),
+            orderHistoryItem: OrderHistoryItem.empty(),
+          )
+        ],
+      );
+
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'SearchOrderHistory with keyword success with order number fetch failure',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => seedState,
+        setUp: () {
+          when(
+            () => (viewByItemRepositoryMock.searchOrderHistory(
+              soldTo: seedState.customerCodeInfo,
+              salesOrganisation: seedState.salesOrganisation,
+              user: seedState.user,
+              searchKey: SearchKey('fake-search-keyword'),
+            )),
+          ).thenAnswer(
+            (invocation) async => Right(seedState.orderHistory),
+          );
+          when(
+            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
+              orderNumbers: seedState.orderHistory.orderHistoryItems
+                  .map((e) => e.orderNumber)
+                  .toList(),
+            )),
+          ).thenAnswer(
+            (invocation) async => const Left(fakeError),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.searchOrderHistory(
+            searchKey: SearchKey('fake-search-keyword'),
+          ),
+        ),
+        expect: () => [
+          seedState.copyWith(
+            isLoading: true,
+            orderHistory: OrderHistory.empty(),
+            orderHistoryItem: OrderHistoryItem.empty(),
+          ),
+          seedState.copyWith(
+            failureOrSuccessOption: optionOf(
+              Right(seedState.orderHistory),
+            ),
+          ),
+          seedState.copyWith(
+            isLoading: true,
+          ),
+          seedState.copyWith(
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
+          )
+        ],
+      );
+
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'SearchOrderHistory with keyword success with order number fetch Success',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => seedState,
+        setUp: () {
+          when(
+            () => (viewByItemRepositoryMock.searchOrderHistory(
+              soldTo: seedState.customerCodeInfo,
+              salesOrganisation: seedState.salesOrganisation,
+              user: seedState.user,
+              searchKey: SearchKey('fake-search-keyword'),
+            )),
+          ).thenAnswer(
+            (invocation) async => Right(seedState.orderHistory),
+          );
+          when(
+            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
+              orderNumbers: seedState.orderHistory.orderHistoryItems
+                  .map((e) => e.orderNumber)
+                  .toList(),
+            )),
+          ).thenAnswer(
+            (invocation) async => Right(
+              {
+                for (InvoiceData item in invoiceDataForOrders)
+                  item.hashId: item,
+              },
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.searchOrderHistory(
+            searchKey: SearchKey('fake-search-keyword'),
+          ),
+        ),
+        expect: () => [
+          seedState.copyWith(
+            isLoading: true,
+            orderHistory: OrderHistory.empty(),
+            orderHistoryItem: OrderHistoryItem.empty(),
+          ),
+          seedState.copyWith(
+            failureOrSuccessOption: optionOf(
+              Right(seedState.orderHistory),
+            ),
+          ),
+          seedState.copyWith(
+            isLoading: true,
+          ),
+          seedState.copyWith(
+            orderHistory: seedState.orderHistory.copyWith(
+              orderHistoryItems: seedState.orderHistory.orderHistoryItems
+                  .map(
+                    (e) => e.copyWith(
+                      invoiceData: invoiceDataForOrders.first,
+                    ),
+                  )
+                  .toList(),
+            ),
+          )
+        ],
+      );
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'SearchOrderHistory with keyword success with no order item',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => seedState,
+        setUp: () {
+          when(
+            () => (viewByItemRepositoryMock.searchOrderHistory(
+              soldTo: seedState.customerCodeInfo,
+              salesOrganisation: seedState.salesOrganisation,
+              user: seedState.user,
+              searchKey: SearchKey('fake-search-keyword'),
+            )),
+          ).thenAnswer(
+            (invocation) async => Right(
+              seedState.orderHistory.copyWith(
+                orderHistoryItems: <OrderHistoryItem>[],
+              ),
+            ),
+          );
+          when(
+            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
+              orderNumbers: seedState.orderHistory.orderHistoryItems
+                  .map((e) => e.orderNumber)
+                  .toList(),
+            )),
+          ).thenAnswer(
+            (invocation) async => const Right(<StringValue, InvoiceData>{}),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.searchOrderHistory(
+            searchKey: SearchKey('fake-search-keyword'),
+          ),
+        ),
+        expect: () => [
+          seedState.copyWith(
+            isLoading: true,
+            orderHistory: OrderHistory.empty(),
+            orderHistoryItem: OrderHistoryItem.empty(),
+          ),
+          seedState.copyWith(
+            failureOrSuccessOption: optionOf(
+              Right(
+                seedState.orderHistory.copyWith(
+                  orderHistoryItems: <OrderHistoryItem>[],
+                ),
+              ),
+            ),
+            orderHistory: seedState.orderHistory.copyWith(
+              orderHistoryItems: <OrderHistoryItem>[],
+            ),
+            orderHistoryItem: OrderHistoryItem.empty(),
+          ),
+        ],
+      );
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'SearchOrderHistory with keyword success with order number fetch Success with no order Id',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => seedState,
+        setUp: () {
+          when(
+            () => (viewByItemRepositoryMock.searchOrderHistory(
+              soldTo: seedState.customerCodeInfo,
+              salesOrganisation: seedState.salesOrganisation,
+              user: seedState.user,
+              searchKey: SearchKey('fake-search-keyword'),
+            )),
+          ).thenAnswer(
+            (invocation) async => Right(seedState.orderHistory),
+          );
+          when(
+            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
+              orderNumbers: seedState.orderHistory.orderHistoryItems
+                  .map((e) => e.orderNumber)
+                  .toList(),
+            )),
+          ).thenAnswer(
+            (invocation) async => const Right(<StringValue, InvoiceData>{}),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.searchOrderHistory(
+            searchKey: SearchKey('fake-search-keyword'),
+          ),
+        ),
+        expect: () => [
+          seedState.copyWith(
+            isLoading: true,
+            orderHistory: OrderHistory.empty(),
+            orderHistoryItem: OrderHistoryItem.empty(),
+          ),
+          seedState.copyWith(
+            failureOrSuccessOption: optionOf(
+              Right(seedState.orderHistory),
+            ),
+          ),
+          seedState.copyWith(
+            isLoading: true,
+          ),
+          seedState
+        ],
+      );
+      test(
+        'unSelectedItems item check',
+        () {
+          final orderHistoryState = seedState.copyWith(
+            orderHistoryItem: OrderHistoryItem.empty(),
+          );
+          expect(
+            orderHistoryState.unSelectedItems,
+            [orderHistory.orderHistoryItems.first],
           );
         },
       );
