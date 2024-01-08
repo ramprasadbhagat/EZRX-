@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
@@ -28,6 +29,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../utils/widget_utils.dart';
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -413,5 +415,45 @@ void main() {
       );
       expect(bonusComment, findsOneWidget);
     });
+
+    testWidgets(
+      'Return Request Details Subtotal text',
+      (tester) async {
+        when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+          ReturnDetailsByRequestState.initial().copyWith(
+            isLoading: false,
+            requestInformation: [
+              ReturnRequestInformation.empty()
+                  .copyWith(returnQuantity: '1')
+            ],
+            requestInformationHeader:
+                ReturnRequestInformationHeader.empty().copyWith(
+              requestID: 'fake-id',
+            ),
+          ),
+        );
+        final currentSalesOrgVariant =
+            salesOrgVariant.currentValue ?? fakeSalesOrg;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: currentSalesOrgVariant,
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        expect(
+          find.byType(RequestDetailsSection),
+          findsOneWidget,
+        );
+        expect(
+          find.text('${currentSalesOrgVariant.returnSubTotalText}:'),
+          findsOneWidget,
+        );
+      },
+      variant: salesOrgVariant,
+    );
   });
 }

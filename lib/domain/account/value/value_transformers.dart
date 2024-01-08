@@ -385,6 +385,12 @@ String subTotalTextString(String country) {
   return country == 'ID' ? 'Subtotal (excl.tax)' : 'Subtotal with tax';
 }
 
+String returnSubTotalTextString(String country) {
+  return country == 'SG' 
+      ? 'Subtotal (excl.tax)'
+      : 'Subtotal with tax';
+}
+
 bool countrySupportOrderType(country) {
   switch (country) {
     case 'TH':

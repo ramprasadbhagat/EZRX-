@@ -5,6 +5,8 @@ class _ReturnSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
       child: BlocBuilder<NewRequestBloc, NewRequestState>(
@@ -27,14 +29,13 @@ class _ReturnSummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${context.tr('Subtotal with tax')}:',
+                    '${context.tr(eligibilityState.salesOrg.returnSubTotalText)}:',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: ZPColors.neutralsBlack,
                         ),
                   ),
                   PriceComponent(
-                    salesOrgConfig:
-                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
                     price: state.returnTotal.toString(),
                     type: PriceStyle.summaryPrice,
                   ),

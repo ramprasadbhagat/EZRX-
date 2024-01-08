@@ -152,7 +152,8 @@ class _InvoiceSummarySection extends StatelessWidget {
           ),
           _PriceWidget(
             key: WidgetKeys.returnRequestDetailSubTotal,
-            title: 'Subtotal with tax:',
+            title:
+                '${context.tr(context.read<EligibilityBloc>().state.salesOrg.returnSubTotalText)}:',
             price: requestInformationHeader.refundTotal.refundTotal.toString(),
           ),
           const Divider(

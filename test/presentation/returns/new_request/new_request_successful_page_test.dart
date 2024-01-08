@@ -497,5 +497,43 @@ void main() {
       );
       expect(grandTotal, findsWidgets);
     });
+
+    testWidgets(
+      ' => check subtotal text',
+      (WidgetTester tester) async {
+        final currentSalesOrgVariant =
+            salesOrgVariant.currentValue ?? fakeSalesOrg;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: currentSalesOrgVariant,
+            ),
+          ),
+        );
+        when(() => newRequestBlocMock.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: [
+              fakeReturnMaterial,
+            ],
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                returnItemDetailsList: [
+                  fakeReturnItemDetails,
+                  fakeReturnBonusItemDetails
+                ],
+              ),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(
+          find.text('${currentSalesOrgVariant.returnSubTotalText}:'),
+          findsOneWidget,
+        );
+      },
+      variant: salesOrgVariant,
+    );
   });
 }
