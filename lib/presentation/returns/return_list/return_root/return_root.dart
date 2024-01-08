@@ -120,19 +120,19 @@ class _ReturnRootState extends State<ReturnRoot> {
                         ),
                         context.tabsRouter.current.name ==
                                 ReturnByItemPageRoute.name
-                            ? const _ExportReturnByItem(
-                                key: WidgetKeys.exportReturnByItem,
-                              )
-                            : const _ExportReturnByRequest(
-                                key: WidgetKeys.exportReturnByRequest,
-                              ),
-                        context.tabsRouter.current.name ==
-                                ReturnByItemPageRoute.name
                             ? const _FilterReturnByItem(
                                 key: WidgetKeys.returnByItemsFilterButton,
                               )
                             : const _FilterReturnByRequest(
                                 key: WidgetKeys.returnByRequestFilterButton,
+                              ),
+                        context.tabsRouter.current.name ==
+                                ReturnByItemPageRoute.name
+                            ? const _ExportReturnByItem(
+                                key: WidgetKeys.exportReturnByItem,
+                              )
+                            : const _ExportReturnByRequest(
+                                key: WidgetKeys.exportReturnByRequest,
                               ),
                       ],
                     ),

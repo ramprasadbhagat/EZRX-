@@ -28,10 +28,11 @@ class _ExportReturnByRequest extends StatelessWidget {
           enabled: state.isDownloadInProgress,
           child: IconButton(
             padding: EdgeInsets.zero,
+            visualDensity: VisualDensity.compact,
             onPressed: () => context
                 .read<ReturnListByRequestBloc>()
                 .add(const ReturnListByRequestEvent.downloadFile()),
-            color: ZPColors.primary,
+            color: ZPColors.gradient,
             icon: const Icon(
               Icons.cloud_download_outlined,
             ),
