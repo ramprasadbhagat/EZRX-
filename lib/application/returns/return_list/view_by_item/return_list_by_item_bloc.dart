@@ -167,6 +167,7 @@ class ReturnListByItemBloc
             shipToInfo: state.shipInfo,
             username: state.user.username,
             salesOrg: state.salesOrg,
+            isViewByReturn: false,
           );
           await fileUrlFailureOrSuccess.fold(
             (failure) async => emit(

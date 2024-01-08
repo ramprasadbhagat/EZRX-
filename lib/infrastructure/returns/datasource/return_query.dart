@@ -49,7 +49,7 @@ class ReturnQuery {
 
   String getRequestsByItemsExcel() {
     return '''
-     query requestsByItemsExcel(\$input: requestsByItems!) {
+     query requestsByItemsExcel(\$input: requestsByItemsExcel!) {
         requestsByItemsExcel(request: \$input) {
           url
         }

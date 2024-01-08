@@ -158,6 +158,7 @@ class ReturnListRepository extends IReturnListRepository {
     required ShipToInfo shipToInfo,
     required Username username,
     required SalesOrg salesOrg,
+    required bool isViewByReturn,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -174,6 +175,7 @@ class ReturnListRepository extends IReturnListRepository {
         shipTo: shipToInfo.shipToCustomerCode,
         username: username.getOrCrash(),
         salesOrg: salesOrg.getOrCrash(),
+        isViewByReturn: isViewByReturn,
       );
 
       return Right(fileUrl);

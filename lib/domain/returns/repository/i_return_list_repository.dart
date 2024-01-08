@@ -42,6 +42,7 @@ abstract class IReturnListRepository {
     required ShipToInfo shipToInfo,
     required Username username,
     required SalesOrg salesOrg,
+    required bool isViewByReturn,
   });
 
   Future<Either<ApiFailure, File>> downloadFile({

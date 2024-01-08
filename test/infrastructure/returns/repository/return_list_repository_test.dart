@@ -1,4 +1,6 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
@@ -278,6 +280,100 @@ void main() {
             searchKey: searchKeyMock,
           );
           expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'Download Excel File - Return Item By Request Success Locally',
+        () async {
+          const expectedResult = 'fake-url';
+          when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+          when(
+            () => returnListLocalDataSource.getFileUrl(),
+          ).thenAnswer((invocation) async => expectedResult);
+
+          final result = await returnListRepository.getFileUrl(
+            salesOrg: fakeSalesOrg,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            username: fakeClient.username,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            isViewByReturn: true,
+          );
+          expect(
+            result,
+            const Right(expectedResult),
+          );
+        },
+      );
+
+      test(
+        'Download Excel File - Return Item By Request Failure Locally',
+        () async {
+          when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+          when(
+            () => returnListLocalDataSource.getFileUrl(),
+          ).thenThrow(errorMock);
+          final result = await returnListRepository.getFileUrl(
+            salesOrg: fakeSalesOrg,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            username: fakeClient.username,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            isViewByReturn: true,
+          );
+          expect(result, Left(FailureHandler.handleFailure(errorMock)));
+        },
+      );
+
+      test(
+        'Download Excel File - Return Item By Request Success Remote',
+        () async {
+          const expectedResult = 'fake-url';
+          when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => returnListRemoteDataSource.getFileUrl(
+              isViewByReturn: true,
+              salesOrg: fakeSalesOrg.getOrCrash(),
+              soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+              shipTo: fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+              username: fakeClient.username.getOrCrash(),
+            ),
+          ).thenAnswer((invocation) async => expectedResult);
+
+          final result = await returnListRepository.getFileUrl(
+            salesOrg: fakeSalesOrg,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            username: fakeClient.username,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            isViewByReturn: true,
+          );
+          expect(
+            result,
+            const Right(expectedResult),
+          );
+        },
+      );
+
+      test(
+        'Download Excel File - Return Item By Request Failure Remote',
+        () async {
+          when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+          when(
+            () => returnListRemoteDataSource.getFileUrl(
+              isViewByReturn: true,
+              salesOrg: fakeSalesOrg.getOrCrash(),
+              soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+              shipTo: fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+              username: fakeClient.username.getOrCrash(),
+            ),
+          ).thenThrow(errorMock);
+          final result = await returnListRepository.getFileUrl(
+            salesOrg: fakeSalesOrg,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            username: fakeClient.username,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            isViewByReturn: true,
+          );
+          expect(result, Left(FailureHandler.handleFailure(errorMock)));
         },
       );
     },
