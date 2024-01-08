@@ -288,7 +288,7 @@ class _Description extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (context.read<EligibilityBloc>().state.salesOrg.isTW)
+        if (context.read<EligibilityBloc>().state.showMaterialDescInMandarin)
           Text(
             materialInfo.materialDescription,
             key: WidgetKeys.materialDetailsMaterialDescription,

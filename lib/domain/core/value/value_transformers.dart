@@ -713,6 +713,8 @@ String getLanguageString(String apiLanguageCode) {
   return languageString[apiLanguageCode] ?? 'English';
 }
 
+bool checkIfMandarin(String languageCode) => languageCode == 'ZH';
+
 String toSupportedLanguage(String value) {
   final supportedLanguageList = ['TH', 'ZH', 'MY', 'VI', 'ID', 'KM'];
 

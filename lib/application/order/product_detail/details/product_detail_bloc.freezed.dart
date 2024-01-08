@@ -18,11 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProductDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -47,7 +44,7 @@ mixin _$ProductDetailEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -70,7 +67,7 @@ mixin _$ProductDetailEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -170,12 +167,12 @@ abstract class _$$_InitializedCopyWith<$Res> {
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      SalesOrganisationConfigs configs});
+      User user});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
-  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -192,7 +189,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
-    Object? configs = null,
+    Object? user = null,
   }) {
     return _then(_$_Initialized(
       salesOrganisation: null == salesOrganisation
@@ -207,10 +204,10 @@ class __$$_InitializedCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      configs: null == configs
-          ? _value.configs
-          : configs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
@@ -240,9 +237,9 @@ class __$$_InitializedCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get configs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
-      return _then(_value.copyWith(configs: value));
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
     });
   }
 }
@@ -254,7 +251,7 @@ class _$_Initialized implements _Initialized {
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.configs});
+      required this.user});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -263,11 +260,11 @@ class _$_Initialized implements _Initialized {
   @override
   final ShipToInfo shipToInfo;
   @override
-  final SalesOrganisationConfigs configs;
+  final User user;
 
   @override
   String toString() {
-    return 'ProductDetailEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, configs: $configs)';
+    return 'ProductDetailEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user)';
   }
 
   @override
@@ -281,12 +278,12 @@ class _$_Initialized implements _Initialized {
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
-            (identical(other.configs, configs) || other.configs == configs));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, customerCodeInfo, shipToInfo, configs);
+      runtimeType, salesOrganisation, customerCodeInfo, shipToInfo, user);
 
   @JsonKey(ignore: true)
   @override
@@ -297,11 +294,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -319,8 +313,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(int quantity) fetchItemQuantityForZdp5Discount,
     required TResult Function(bool exceedQty) setExceedQty,
   }) {
-    return initialized(
-        salesOrganisation, customerCodeInfo, shipToInfo, configs);
+    return initialized(salesOrganisation, customerCodeInfo, shipToInfo, user);
   }
 
   @override
@@ -330,7 +323,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -347,7 +340,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(bool exceedQty)? setExceedQty,
   }) {
     return initialized?.call(
-        salesOrganisation, customerCodeInfo, shipToInfo, configs);
+        salesOrganisation, customerCodeInfo, shipToInfo, user);
   }
 
   @override
@@ -357,7 +350,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -375,8 +368,7 @@ class _$_Initialized implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(
-          salesOrganisation, customerCodeInfo, shipToInfo, configs);
+      return initialized(salesOrganisation, customerCodeInfo, shipToInfo, user);
     }
     return orElse();
   }
@@ -451,12 +443,12 @@ abstract class _Initialized implements ProductDetailEvent {
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final SalesOrganisationConfigs configs}) = _$_Initialized;
+      required final User user}) = _$_Initialized;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
-  SalesOrganisationConfigs get configs;
+  User get user;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
@@ -535,11 +527,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -567,7 +556,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -593,7 +582,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -728,11 +717,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -760,7 +746,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -786,7 +772,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -916,11 +902,8 @@ class _$_FetchMetaData implements _FetchMetaData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -948,7 +931,7 @@ class _$_FetchMetaData implements _FetchMetaData {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -974,7 +957,7 @@ class _$_FetchMetaData implements _FetchMetaData {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -1131,11 +1114,8 @@ class _$_FetchStock implements _FetchStock {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -1163,7 +1143,7 @@ class _$_FetchStock implements _FetchStock {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -1189,7 +1169,7 @@ class _$_FetchStock implements _FetchStock {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -1360,11 +1340,8 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -1392,7 +1369,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -1418,7 +1395,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -1580,11 +1557,8 @@ class _$_ChangeImage implements _ChangeImage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -1612,7 +1586,7 @@ class _$_ChangeImage implements _ChangeImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -1638,7 +1612,7 @@ class _$_ChangeImage implements _ChangeImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -1811,11 +1785,8 @@ class _$_AddFavourite implements _AddFavourite {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -1843,7 +1814,7 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -1869,7 +1840,7 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -2045,11 +2016,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -2077,7 +2045,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -2103,7 +2071,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -2267,11 +2235,8 @@ class _$_UpdateQty implements _UpdateQty {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -2299,7 +2264,7 @@ class _$_UpdateQty implements _UpdateQty {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -2325,7 +2290,7 @@ class _$_UpdateQty implements _UpdateQty {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -2493,11 +2458,8 @@ class _$_FetchItemQuantityForZdp5Discount
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -2525,7 +2487,7 @@ class _$_FetchItemQuantityForZdp5Discount
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -2551,7 +2513,7 @@ class _$_FetchItemQuantityForZdp5Discount
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -2715,11 +2677,8 @@ class _$_SetExceedQty implements _SetExceedQty {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         initialized,
     required TResult Function(MaterialInfo materialInfo) fetch,
     required TResult Function() fetchSimilarProduct,
@@ -2747,7 +2706,7 @@ class _$_SetExceedQty implements _SetExceedQty {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult? Function(MaterialInfo materialInfo)? fetch,
     TResult? Function()? fetchSimilarProduct,
@@ -2773,7 +2732,7 @@ class _$_SetExceedQty implements _SetExceedQty {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            SalesOrganisationConfigs configs)?
+            User user)?
         initialized,
     TResult Function(MaterialInfo materialInfo)? fetch,
     TResult Function()? fetchSimilarProduct,
@@ -2873,7 +2832,7 @@ abstract class _SetExceedQty implements ProductDetailEvent {
 
 /// @nodoc
 mixin _$ProductDetailState {
-  SalesOrganisationConfigs get configs => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
@@ -2900,7 +2859,7 @@ abstract class $ProductDetailStateCopyWith<$Res> {
       _$ProductDetailStateCopyWithImpl<$Res, ProductDetailState>;
   @useResult
   $Res call(
-      {SalesOrganisationConfigs configs,
+      {User user,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
@@ -2913,7 +2872,7 @@ abstract class $ProductDetailStateCopyWith<$Res> {
       int inputQty,
       int selectedImageIndex});
 
-  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
@@ -2933,7 +2892,7 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? configs = null,
+    Object? user = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
@@ -2947,10 +2906,10 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
     Object? selectedImageIndex = null,
   }) {
     return _then(_value.copyWith(
-      configs: null == configs
-          ? _value.configs
-          : configs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -3000,9 +2959,9 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
 
   @override
   @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get configs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
-      return _then(_value.copyWith(configs: value) as $Val);
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 
@@ -3049,7 +3008,7 @@ abstract class _$$_ProductDetailStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {SalesOrganisationConfigs configs,
+      {User user,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
@@ -3063,7 +3022,7 @@ abstract class _$$_ProductDetailStateCopyWith<$Res>
       int selectedImageIndex});
 
   @override
-  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $UserCopyWith<$Res> get user;
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
@@ -3085,7 +3044,7 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? configs = null,
+    Object? user = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
@@ -3099,10 +3058,10 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
     Object? selectedImageIndex = null,
   }) {
     return _then(_$_ProductDetailState(
-      configs: null == configs
-          ? _value.configs
-          : configs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -3155,7 +3114,7 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
 
 class _$_ProductDetailState extends _ProductDetailState {
   const _$_ProductDetailState(
-      {required this.configs,
+      {required this.user,
       required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
@@ -3170,7 +3129,7 @@ class _$_ProductDetailState extends _ProductDetailState {
       : super._();
 
   @override
-  final SalesOrganisationConfigs configs;
+  final User user;
   @override
   final SalesOrganisation salesOrganisation;
   @override
@@ -3197,7 +3156,7 @@ class _$_ProductDetailState extends _ProductDetailState {
 
   @override
   String toString() {
-    return 'ProductDetailState(configs: $configs, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, failureOrSuccessOption: $failureOrSuccessOption, productDetailAggregate: $productDetailAggregate, isDetailFetching: $isDetailFetching, isStockFetching: $isStockFetching, isRelatedProductsFetching: $isRelatedProductsFetching, isMetadataFetching: $isMetadataFetching, inputQty: $inputQty, selectedImageIndex: $selectedImageIndex)';
+    return 'ProductDetailState(user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, failureOrSuccessOption: $failureOrSuccessOption, productDetailAggregate: $productDetailAggregate, isDetailFetching: $isDetailFetching, isStockFetching: $isStockFetching, isRelatedProductsFetching: $isRelatedProductsFetching, isMetadataFetching: $isMetadataFetching, inputQty: $inputQty, selectedImageIndex: $selectedImageIndex)';
   }
 
   @override
@@ -3205,7 +3164,7 @@ class _$_ProductDetailState extends _ProductDetailState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProductDetailState &&
-            (identical(other.configs, configs) || other.configs == configs) &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -3234,7 +3193,7 @@ class _$_ProductDetailState extends _ProductDetailState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      configs,
+      user,
       salesOrganisation,
       customerCodeInfo,
       shipToInfo,
@@ -3257,7 +3216,7 @@ class _$_ProductDetailState extends _ProductDetailState {
 
 abstract class _ProductDetailState extends ProductDetailState {
   const factory _ProductDetailState(
-      {required final SalesOrganisationConfigs configs,
+      {required final User user,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
@@ -3272,7 +3231,7 @@ abstract class _ProductDetailState extends ProductDetailState {
   const _ProductDetailState._() : super._();
 
   @override
-  SalesOrganisationConfigs get configs;
+  User get user;
   @override
   SalesOrganisation get salesOrganisation;
   @override

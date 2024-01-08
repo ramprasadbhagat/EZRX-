@@ -463,6 +463,8 @@ class Language extends ValueObject<String> {
 
   String get languageCode => toSupportedLanguage(value.getOrElse(() => 'EN'));
 
+  bool get isMandarin => checkIfMandarin(value.getOrElse(() => ''));
+
   Locale get locale => toLocale(languageCode);
 
   const Language._(this.value);

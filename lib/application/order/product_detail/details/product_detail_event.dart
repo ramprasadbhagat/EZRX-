@@ -6,7 +6,7 @@ class ProductDetailEvent with _$ProductDetailEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required SalesOrganisationConfigs configs,
+    required User user,
   }) = _Initialized;
   factory ProductDetailEvent.fetch({
     required MaterialInfo materialInfo,

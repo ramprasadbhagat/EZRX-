@@ -264,4 +264,7 @@ class EligibilityState with _$EligibilityState {
 
   bool get disableCreateOrder =>
       !user.userCanCreateOrder || shipToInfo.customerBlock.isCustomerBlocked;
+
+  bool get showMaterialDescInMandarin =>
+      salesOrg.isTW && user.preferredLanguage.isMandarin;
 }
