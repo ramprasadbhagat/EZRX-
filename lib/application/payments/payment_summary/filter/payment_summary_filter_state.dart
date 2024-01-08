@@ -17,33 +17,44 @@ class PaymentSummaryFilterState with _$PaymentSummaryFilterState {
       );
 
   List<FilterStatus> get statuses {
-    var statusList = <FilterStatus>[
-      FilterStatus('In Progress'),
-      FilterStatus('Failed'),
-      FilterStatus('Processed'),
-      FilterStatus('Successful'),
-    ];
     if (salesOrg.isSg) {
-      statusList = <FilterStatus>[
+      return <FilterStatus>[
         FilterStatus('Pending'),
         FilterStatus('Processed'),
       ];
     }
     if (salesOrg.isPH) {
-      statusList = <FilterStatus>[
-        ...statusList,
+      return <FilterStatus>[
+        FilterStatus('In Progress'),
+        FilterStatus('Failed'),
+        FilterStatus('Processed'),
+        FilterStatus('Successful'),
         FilterStatus('Pending'),
       ];
     }
     if (salesOrg.isID) {
-      statusList = <FilterStatus>[
+      return <FilterStatus>[
         FilterStatus('In progress'),
         FilterStatus('Expired'),
         FilterStatus('Successful'),
         FilterStatus('Cancelled'),
       ];
     }
+    if (salesOrg.isTH) {
+      return <FilterStatus>[
+        FilterStatus('In Progress'),
+        FilterStatus('Failed'),
+        FilterStatus('Successful'),
+        FilterStatus('Processed'),
+        FilterStatus('Payment Received'),
+      ];
+    }
 
-    return statusList;
+    return <FilterStatus>[
+      FilterStatus('In Progress'),
+      FilterStatus('Failed'),
+      FilterStatus('Processed'),
+      FilterStatus('Successful'),
+    ];
   }
 }

@@ -272,6 +272,7 @@ Color getStatusLabelColor(String statusType) {
     'Reviewed': ZPColors.lightSecondary,
     'Bonus': ZPColors.primary,
     'Active': ZPColors.lightSecondary,
+    'Payment Received': ZPColors.lightSecondary,
   };
 
   final lightRedStatusColor = {

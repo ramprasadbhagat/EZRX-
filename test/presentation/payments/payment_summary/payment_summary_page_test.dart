@@ -355,6 +355,10 @@ void main() {
         findsOneWidget,
       );
       expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Payment Received')),
+        findsOneWidget,
+      );
+      expect(
         find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending')),
         findsNothing,
       );
