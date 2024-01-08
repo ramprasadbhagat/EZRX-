@@ -712,6 +712,26 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   noAccessSnackbar.show(context);
                 }
               },
+              redirectProductSuggestion: (searchKey) {
+                if (eligibilityState.user.userCanAccessProducts) {
+                  context.read<ProductSearchBloc>().add(
+                        ProductSearchEvent.searchProduct(
+                          searchKey: searchKey,
+                          materialFilter: context
+                              .read<MaterialFilterBloc>()
+                              .state
+                              .materialFilter,
+                        ),
+                      );
+                  context.router.push(
+                    ProductSuggestionPageRoute(
+                      parentRoute: context.router.current.path,
+                    ),
+                  );
+                } else {
+                  noAccessSnackbar.show(context);
+                }
+              },
               redirectOrderDetail: (orderNumber) {
                 if (eligibilityState.user.userCanAccessOrderHistory) {
                   context.read<ViewByOrderDetailsBloc>().add(
@@ -1113,7 +1133,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<NotificationBloc>().add(
             const NotificationEvent.fetch(),
           );
-      
+
       context
           .read<PaymentCustomerInformationBloc>()
           .add(const PaymentCustomerInformationEvent.initialized());

@@ -10,6 +10,9 @@ class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.redirectProductDetail(
     MaterialNumber materialNumber,
   ) = _RedirectProductDetail;
+  const factory DeepLinkingState.redirectProductSuggestion(
+    SearchKey searchKey,
+  ) = _RedirectProductSuggestion;
   const factory DeepLinkingState.redirectOrderDetail(
     OrderNumber orderNumber,
   ) = _RedirectOrderDetail;

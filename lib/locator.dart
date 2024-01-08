@@ -2233,6 +2233,7 @@ void setupLocator() {
     () => DeepLinkingBloc(
       repository: locator<DeepLinkingRepository>(),
       service: locator<DeepLinkingService>(),
+      chatBotService: locator<ChatBotService>(),
     ),
   );
 
@@ -2765,9 +2766,11 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ChatBotRepository(
       chatBotService: locator<ChatBotService>(),
+      deepLinkingService: locator<DeepLinkingService>(),
       tokenStorage: locator<TokenStorage>(),
       config: locator<Config>(),
       deviceStorage: locator<DeviceStorage>(),
+
     ),
   );
 

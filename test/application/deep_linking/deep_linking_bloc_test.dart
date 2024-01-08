@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -17,9 +18,12 @@ class DeepLinkingRepositoryMock extends Mock
 
 class UniversalLinkServiceMock extends Mock implements DeepLinkingService {}
 
+class ChatBotServiceMock extends Mock implements ChatBotService {}
+
 void main() {
   late IDeepLinkingRepository repository;
   late DeepLinkingService service;
+  late ChatBotService chatBotService;
   const fakeStream = Stream.empty();
   final fakeSubscription = fakeStream.listen((_) {});
   final fakeCustomerCode = CustomerCodeInfo.empty();
@@ -29,6 +33,7 @@ void main() {
   setUp(() {
     repository = DeepLinkingRepositoryMock();
     service = UniversalLinkServiceMock();
+    chatBotService = ChatBotServiceMock();
   });
 
   blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -36,6 +41,7 @@ void main() {
     build: () => DeepLinkingBloc(
       service: service,
       repository: repository,
+      chatBotService: chatBotService,
     ),
     act: (bloc) => bloc.add(const DeepLinkingEvent.initialize()),
     setUp: () {
@@ -51,7 +57,12 @@ void main() {
     build: () => DeepLinkingBloc(
       service: service,
       repository: repository,
+      chatBotService: chatBotService,
     ),
+    setUp: () {
+      when(() => chatBotService.closeChatBot())
+          .thenAnswer((invocation) => Future.value(true));
+    },
     act: (bloc) => bloc.add(
       DeepLinkingEvent.addPendingLink(
         Uri(scheme: 'fakeScheme', host: 'fakeHost'),
@@ -69,6 +80,7 @@ void main() {
     build: () => DeepLinkingBloc(
       service: service,
       repository: repository,
+      chatBotService: chatBotService,
     ),
     seed: () => const DeepLinkingState.error(ApiFailure.orderDetailRoute()),
     act: (bloc) => bloc.add(
@@ -85,6 +97,7 @@ void main() {
     build: () => DeepLinkingBloc(
       service: service,
       repository: repository,
+      chatBotService: chatBotService,
     ),
     seed: () => DeepLinkingState.linkPending(
       Uri(scheme: 'fakeScheme', host: 'fakeHost'),
@@ -103,6 +116,7 @@ void main() {
     build: () => DeepLinkingBloc(
       service: service,
       repository: repository,
+      chatBotService: chatBotService,
     ),
     setUp: () {
       when(
@@ -129,6 +143,7 @@ void main() {
     build: () => DeepLinkingBloc(
       service: service,
       repository: repository,
+      chatBotService: chatBotService,
     ),
     setUp: () {
       when(

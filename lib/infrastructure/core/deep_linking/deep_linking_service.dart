@@ -16,16 +16,16 @@ class DeepLinkingService {
       // Because init() will be called whenever shipTo changed, this check is to prevent handle
       // the link that open the app more than 1 time
       final initialUri = await _appLinks.getInitialAppLink();
-      _handleDeepLink(initialUri);
+      handleDeepLink(initialUri);
       setInitialLinkHandled();
     }
 
-    return _appLinks.uriLinkStream.listen(_handleDeepLink);
+    return _appLinks.uriLinkStream.listen(handleDeepLink);
   }
 
   void setInitialLinkHandled() => _initialLinkHandled = true;
 
-  void _handleDeepLink(Uri? deepLink) {
+  void handleDeepLink(Uri? deepLink) {
     if (deepLink != null) {
       debugPrint('_handleDeepLink | deeplink: $deepLink');
       locator<DeepLinkingBloc>().add(

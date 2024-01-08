@@ -29,7 +29,7 @@ void main() {
         when(() => chatBotRepositoryMock.startChatbot()).thenAnswer(
           (invocation) async => const Right(true),
         );
-        when(() => chatBotRepositoryMock.closeChatbotOnIncomingDeepLink())
+        when(() => chatBotRepositoryMock.processDeepLinkOnIncomingEvent())
             .thenReturn(const Stream.empty().listen((event) {}));
       },
       expect: () => [

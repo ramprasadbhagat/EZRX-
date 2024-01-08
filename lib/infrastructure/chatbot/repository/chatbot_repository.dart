@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
@@ -13,6 +12,7 @@ import 'package:ezrxmobile/domain/chatbot/repository/i_chatbot_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
+import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +20,7 @@ import 'package:universal_io/io.dart';
 
 class ChatBotRepository implements IChatBotRepository {
   final ChatBotService chatBotService;
+  final DeepLinkingService deepLinkingService;
   final TokenStorage tokenStorage;
   final Config config;
   final DeviceStorage deviceStorage;
@@ -29,6 +30,7 @@ class ChatBotRepository implements IChatBotRepository {
     required this.tokenStorage,
     required this.config,
     required this.deviceStorage,
+    required this.deepLinkingService,
   });
 
   @override
@@ -124,15 +126,16 @@ class ChatBotRepository implements IChatBotRepository {
   }
 
   @override
-  StreamSubscription closeChatbotOnIncomingDeepLink() {
-    return chatBotService.chatBotEventData().listen((event) async {
+  StreamSubscription processDeepLinkOnIncomingEvent() {
+    return chatBotService.chatBotEventData().listen((event) {
       //This try/catch is required to handle data from chatbot because event data type can be both String and Map
       try {
         final eventCode = event['code'];
-        final url = json.decode(event['data'])['url'];
-        if (eventCode != 'ym_event_card_action') return;
-        if (!url.startsWith(config.customScheme)) return;
-        await chatBotService.closeChatBot();
+        final eventData = event['data'];
+        if (eventCode == 'product_view_more' &&
+            eventData.startsWith(config.customScheme)) {
+          deepLinkingService.handleDeepLink(Uri.tryParse(eventData));
+        }
       } catch (_) {}
     });
   }

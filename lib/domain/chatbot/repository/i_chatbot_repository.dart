@@ -12,7 +12,7 @@ import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 abstract class IChatBotRepository {
   Future<Either<ApiFailure, bool>> startChatbot();
 
-  StreamSubscription closeChatbotOnIncomingDeepLink();
+  StreamSubscription processDeepLinkOnIncomingEvent();
 
   Future<Either<ApiFailure, bool>> passPayloadToChatbot({
     required SalesOrganisation salesOrganisation,

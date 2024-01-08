@@ -44,7 +44,7 @@ class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
           (_) {
             _deepLinkHandlerStreamSubscription?.cancel;
             _deepLinkHandlerStreamSubscription =
-                chatBotRepository.closeChatbotOnIncomingDeepLink();
+                chatBotRepository.processDeepLinkOnIncomingEvent();
 
             emit(
               state.copyWith(

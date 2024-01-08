@@ -680,6 +680,7 @@ mixin _$DeepLinkingState {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -695,6 +696,7 @@ mixin _$DeepLinkingState {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -710,6 +712,7 @@ mixin _$DeepLinkingState {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -727,6 +730,8 @@ mixin _$DeepLinkingState {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -743,6 +748,8 @@ mixin _$DeepLinkingState {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -757,6 +764,8 @@ mixin _$DeepLinkingState {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -829,6 +838,7 @@ class _$_Initial implements _Initial {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -847,6 +857,7 @@ class _$_Initial implements _Initial {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -865,6 +876,7 @@ class _$_Initial implements _Initial {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -888,6 +900,8 @@ class _$_Initial implements _Initial {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -907,6 +921,8 @@ class _$_Initial implements _Initial {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -924,6 +940,8 @@ class _$_Initial implements _Initial {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1013,6 +1031,7 @@ class _$_LinkPending implements _LinkPending {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -1031,6 +1050,7 @@ class _$_LinkPending implements _LinkPending {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -1049,6 +1069,7 @@ class _$_LinkPending implements _LinkPending {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -1072,6 +1093,8 @@ class _$_LinkPending implements _LinkPending {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -1091,6 +1114,8 @@ class _$_LinkPending implements _LinkPending {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1108,6 +1133,8 @@ class _$_LinkPending implements _LinkPending {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1204,6 +1231,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -1222,6 +1250,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -1240,6 +1269,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -1263,6 +1293,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -1282,6 +1314,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1299,6 +1333,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1396,6 +1432,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -1414,6 +1451,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -1432,6 +1470,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -1455,6 +1494,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -1474,6 +1515,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1491,6 +1534,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1514,6 +1559,209 @@ abstract class _RedirectProductDetail implements DeepLinkingState {
   @JsonKey(ignore: true)
   _$$_RedirectProductDetailCopyWith<_$_RedirectProductDetail> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RedirectProductSuggestionCopyWith<$Res> {
+  factory _$$_RedirectProductSuggestionCopyWith(
+          _$_RedirectProductSuggestion value,
+          $Res Function(_$_RedirectProductSuggestion) then) =
+      __$$_RedirectProductSuggestionCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SearchKey searchKey});
+}
+
+/// @nodoc
+class __$$_RedirectProductSuggestionCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectProductSuggestion>
+    implements _$$_RedirectProductSuggestionCopyWith<$Res> {
+  __$$_RedirectProductSuggestionCopyWithImpl(
+      _$_RedirectProductSuggestion _value,
+      $Res Function(_$_RedirectProductSuggestion) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchKey = null,
+  }) {
+    return _then(_$_RedirectProductSuggestion(
+      null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
+  const _$_RedirectProductSuggestion(this.searchKey);
+
+  @override
+  final SearchKey searchKey;
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectProductSuggestion(searchKey: $searchKey)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RedirectProductSuggestion &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, searchKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RedirectProductSuggestionCopyWith<_$_RedirectProductSuggestion>
+      get copyWith => __$$_RedirectProductSuggestionCopyWithImpl<
+          _$_RedirectProductSuggestion>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+        redirectPaymentDetail,
+    required TResult Function() redirectPaymentHome,
+    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(ApiFailure failure) error,
+  }) {
+    return redirectProductSuggestion(searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+        redirectPaymentDetail,
+    TResult? Function()? redirectPaymentHome,
+    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(ApiFailure failure)? error,
+  }) {
+    return redirectProductSuggestion?.call(searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+        redirectPaymentDetail,
+    TResult Function()? redirectPaymentHome,
+    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(ApiFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectProductSuggestion != null) {
+      return redirectProductSuggestion(searchKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_Error value) error,
+  }) {
+    return redirectProductSuggestion(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_Error value)? error,
+  }) {
+    return redirectProductSuggestion?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectProductSuggestion != null) {
+      return redirectProductSuggestion(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectProductSuggestion implements DeepLinkingState {
+  const factory _RedirectProductSuggestion(final SearchKey searchKey) =
+      _$_RedirectProductSuggestion;
+
+  SearchKey get searchKey;
+  @JsonKey(ignore: true)
+  _$$_RedirectProductSuggestionCopyWith<_$_RedirectProductSuggestion>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1588,6 +1836,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -1606,6 +1855,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -1624,6 +1874,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -1647,6 +1898,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -1666,6 +1919,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1683,6 +1938,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1790,6 +2047,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -1808,6 +2066,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -1826,6 +2085,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -1849,6 +2109,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -1868,6 +2130,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1885,6 +2149,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -1993,6 +2259,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -2011,6 +2278,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -2029,6 +2297,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -2052,6 +2321,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -2071,6 +2342,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -2088,6 +2361,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -2158,6 +2433,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -2176,6 +2452,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -2194,6 +2471,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -2217,6 +2495,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -2236,6 +2516,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -2253,6 +2535,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -2344,6 +2628,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -2362,6 +2647,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -2380,6 +2666,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -2403,6 +2690,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -2422,6 +2711,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -2439,6 +2730,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -2542,6 +2835,7 @@ class _$_Error implements _Error {
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
         redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
     required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
@@ -2560,6 +2854,7 @@ class _$_Error implements _Error {
     TResult? Function(Uri link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -2578,6 +2873,7 @@ class _$_Error implements _Error {
     TResult Function(Uri link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
     TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
@@ -2601,6 +2897,8 @@ class _$_Error implements _Error {
     required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
     required TResult Function(_RedirectProductDetail value)
         redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
     required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
@@ -2620,6 +2918,8 @@ class _$_Error implements _Error {
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
@@ -2637,6 +2937,8 @@ class _$_Error implements _Error {
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
     TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,

@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,12 +19,14 @@ part 'deep_linking_bloc.freezed.dart';
 
 class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
   final DeepLinkingService service;
+  final ChatBotService chatBotService;
   final IDeepLinkingRepository repository;
   StreamSubscription? dynamicLinkStream;
 
   DeepLinkingBloc({
     required this.service,
     required this.repository,
+    required this.chatBotService,
   }) : super(const DeepLinkingState.initial()) {
     on<DeepLinkingEvent>(_onEvent);
   }
@@ -40,10 +44,15 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
         dynamicLinkStream?.cancel();
         dynamicLinkStream = null;
       },
-      addPendingLink: (event) {
+      addPendingLink: (event) async {
         emit(
           DeepLinkingState.linkPending(event.link),
         );
+        // ChatBot is managed by plugin and the ChatBot screen is an overlay.
+        // For now, whenever we tap on the deep link, a screen opened from the
+        // link will be behind the ChatBot, so we need to close the chatbot when
+        // receive the link to be able to see the screen from the link
+        await chatBotService.closeChatBot();
       },
       consumePendingLink: (event) {
         state.whenOrNull(
@@ -72,6 +81,19 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                 ),
                 (materialNumber) => emit(
                   DeepLinkingState.redirectBundleDetail(materialNumber),
+                ),
+              );
+            } else if (link.path == '/product-listing') {
+              final failureOrSuccess = repository.extractProductSearchKey(
+                link: link,
+              );
+
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (searchKey) => emit(
+                  DeepLinkingState.redirectProductSuggestion(searchKey),
                 ),
               );
             } else if (link.path == '/my-account/orders/order-detail') {

@@ -36,6 +36,12 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
   }
 
   @override
+  Either<ApiFailure, SearchKey> extractProductSearchKey({
+    required Uri link,
+  }) =>
+      Right(SearchKey.search(link.queryParameters['q'] ?? ''));
+
+  @override
   Either<ApiFailure, OrderNumber> extractOrderNumber({
     required CustomerCodeInfo selectedCustomerCode,
     required ShipToInfo selectedShipTo,

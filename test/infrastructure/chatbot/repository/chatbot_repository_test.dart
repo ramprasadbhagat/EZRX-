@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
+import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,8 @@ class DeviceStorageMock extends Mock implements DeviceStorage {}
 
 class InternetAddressMock extends Mock implements InternetAddress {}
 
+class DeepLinkServiceMock extends Mock implements DeepLinkingService {}
+
 void main() {
   late Config configMock;
   late ChatBotService chatBotService;
@@ -38,6 +41,7 @@ void main() {
   late EmailAddress fakeEmail;
   late ChatBotRepository chatBotRepository;
   late Exception errorMock;
+  late DeepLinkingService deepLinkingService;
 
   setUpAll(
     () {
@@ -46,6 +50,7 @@ void main() {
       chatBotService = ChatBotServiceMock();
       tokenStorageMock = TokenStorageMock();
       deviceStorageMock = DeviceStorageMock();
+      deepLinkingService = DeepLinkServiceMock();
       jwtDto = JWTDto(
         access: 'access_token',
         refresh: 'refresh_token',
@@ -57,6 +62,7 @@ void main() {
         tokenStorage: tokenStorageMock,
         config: configMock..appFlavor = Flavor.uat,
         deviceStorage: deviceStorageMock,
+        deepLinkingService: deepLinkingService,
       );
       when(
         () => deviceStorageMock.currentMarket(),
