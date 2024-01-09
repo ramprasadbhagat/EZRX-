@@ -14,7 +14,6 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
@@ -662,29 +661,7 @@ void main() {
         expect(find.byKey(WidgetKeys.cartButton), findsOneWidget);
         expect(find.text('3'), findsOneWidget);
       });
-      testWidgets(
-          'should initialize the OrderEligibilityBloc when click icon button',
-          (tester) async {
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
-        final cartButton = find.byKey(WidgetKeys.cartButton);
-        expect(cartButton, findsOneWidget);
-        await tester.ensureVisible(cartButton);
-        await tester.tap(cartButton);
-        await tester.pumpAndSettle();
-        verify(
-          () => orderEligibilityBloc.add(
-            OrderEligibilityEvent.initialized(
-              configs: fakeEmptySalesConfigs,
-              customerCodeInfo: fakeEmptyCustomerCodeInfo,
-              orderType: '',
-              salesOrg: fakeEmptySalesOrganisation,
-              shipInfo: ShipToInfo.empty(),
-              user: User.empty(),
-            ),
-          ),
-        ).called(1);
-      });
+
       testWidgets('Test the Covid filter button', (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(

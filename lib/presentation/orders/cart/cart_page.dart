@@ -60,6 +60,19 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     final eligibilityState = context.read<EligibilityBloc>().state;
+
+    context.read<OrderEligibilityBloc>().add(
+          OrderEligibilityEvent.initialized(
+            configs: eligibilityState.salesOrgConfigs,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            orderType: eligibilityState.selectedOrderType.documentType
+                .getOrDefaultValue(''),
+            salesOrg: eligibilityState.salesOrganisation,
+            shipInfo: eligibilityState.shipToInfo,
+            user: eligibilityState.user,
+          ),
+        );
+
     final cartProducts = context.read<CartBloc>().state.cartProducts;
     if (cartProducts.isNotEmpty) {
       context.read<CartBloc>().add(

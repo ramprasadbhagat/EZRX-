@@ -10,8 +10,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
-
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 
 class CartButton extends StatelessWidget {
@@ -70,33 +68,6 @@ class CartButton extends StatelessWidget {
                     onPressed: () {
                       trackMixpanelEvent(MixpanelEvents.cartIconClicked);
 
-                      context.read<OrderEligibilityBloc>().add(
-                            OrderEligibilityEvent.initialized(
-                              configs: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .salesOrgConfigs,
-                              customerCodeInfo: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                              orderType: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .selectedOrderType
-                                  .documentType
-                                  .getOrDefaultValue(''),
-                              salesOrg: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              shipInfo: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .shipToInfo,
-                              user: context.read<EligibilityBloc>().state.user,
-                            ),
-                          );
                       final product = context
                           .read<ProductDetailBloc>()
                           .state

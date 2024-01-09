@@ -64,7 +64,9 @@ import 'package:ezrxmobile/presentation/orders/widgets/account_suspended_warning
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
@@ -2129,8 +2131,21 @@ void main() {
       });
 
       testWidgets(
-        'Fetch detail when cart has items in initState',
+        'Init OrderEligibilityBloc and Fetch detail when cart has items in initState',
         (tester) async {
+          final fakeOrderType = OrderDocumentType.empty().copyWith(
+            documentType: DocumentType('test'),
+          );
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfigs: fakeSGSalesOrgConfigs,
+              salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeShipToInfo,
+              user: fakeClientUser,
+              selectedOrderType: fakeOrderType,
+            ),
+          );
           final cartItem = mockCartItems.last.copyWith
               .materialInfo(type: MaterialInfoType.material());
 
@@ -2147,6 +2162,19 @@ void main() {
             () => cartBloc.add(
               CartEvent.getDetailsProductsAddedToCart(
                 cartProducts: [cartItem],
+              ),
+            ),
+          ).called(1);
+
+          verify(
+            () => orderEligibilityBlocMock.add(
+              OrderEligibilityEvent.initialized(
+                customerCodeInfo: fakeCustomerCodeInfo,
+                configs: fakeSGSalesOrgConfigs,
+                salesOrg: fakeSalesOrganisation,
+                shipInfo: fakeShipToInfo,
+                user: fakeClientUser,
+                orderType: fakeOrderType.documentType.getOrDefaultValue(''),
               ),
             ),
           ).called(1);
