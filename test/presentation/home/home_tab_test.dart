@@ -52,6 +52,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
@@ -465,7 +466,7 @@ void main() {
           EligibilityState.initial().copyWith(
             user: fakeRootAdminUser,
             salesOrganisation: fakeIDSalesOrganisation,
-            salesOrgConfigs: fakeSalesOrgConfigWithdisableBundles,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
           ),
         );
 

@@ -32,6 +32,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -517,10 +518,7 @@ void main() {
 
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeEmptySalesConfigs.copyWith(
-            displaySubtotalTaxBreakdown: true,
-            currency: Currency('SGD'),
-          ),
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         ),
       );
 

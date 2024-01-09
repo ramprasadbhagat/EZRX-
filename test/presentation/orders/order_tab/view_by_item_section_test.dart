@@ -29,6 +29,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -231,7 +233,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeTWSalesOrgConfigGMCEnabled,
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
         ),
       );
       when(() => mockViewByItemsBloc.state).thenReturn(
@@ -257,7 +259,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => mockViewByItemsBloc.state).thenReturn(
@@ -362,7 +364,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           user: fakeRootAdminUser,

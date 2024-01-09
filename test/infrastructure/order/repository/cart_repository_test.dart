@@ -39,6 +39,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import 'order_repository_test.dart';
@@ -82,7 +83,7 @@ void main() {
 
   final fakeCartProducts = [
     PriceAggregate.empty().copyWith(
-      salesOrgConfig: fakeSalesOrganisationConfigs,
+      salesOrgConfig: fakeMYSalesOrgConfigs,
       materialInfo: MaterialInfo.empty().copyWith(
         materialNumber: MaterialNumber('1'),
         quantity: MaterialQty(5),
@@ -725,7 +726,7 @@ void main() {
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         language: Language.english(),
         materialInfo: productList,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
       );
       expect(result.isRight(), true);
     });
@@ -770,7 +771,7 @@ void main() {
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         language: Language.english(),
         materialInfo: productList,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
       );
       expect(result.isLeft(), true);
     });
@@ -792,7 +793,7 @@ void main() {
             fakeCartProducts.first.materialInfo.counterOfferDetails,
         language: fakeClientUser.settings.languagePreference,
         materialInfo: fakeCartProducts.materialInfos,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
       );
       expect(result, Right(fakeCartProducts));
     });
@@ -814,7 +815,7 @@ void main() {
             fakeCartProducts.first.materialInfo.counterOfferDetails,
         language: fakeClientUser.settings.languagePreference,
         materialInfo: fakeCartProducts.materialInfos,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
       );
 
       expect(result, Left(FailureHandler.handleFailure(fakeException)));
@@ -1091,7 +1092,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         productDeterminationList: fakeCartProducts.materialInfos,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         shipToInfo: fakeShipToInfo,
         updatedCartItems: fakeCartProducts,
         language: fakeClientUser.settings.languagePreference,
@@ -1111,7 +1112,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         productDeterminationList: fakeCartProducts.materialInfos,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         shipToInfo: fakeShipToInfo,
         updatedCartItems: fakeCartProducts,
         language: fakeClientUser.settings.languagePreference,
@@ -1151,7 +1152,7 @@ void main() {
     //     customerCodeInfo: fakeCustomerCodeInfo,
     //     salesOrganisation: fakeSalesOrganisation,
     //     productDeterminationList: fakeCartProducts.materialInfos,
-    //     salesOrganisationConfig: fakeSalesOrganisationConfigs,
+    //     salesOrganisationConfig: fakeMYSalesOrgConfigs,
     //     shipToInfo: fakeShipToInfo,
     //     updatedCartItems: fakeCartProducts,
     //     language: fakeClientUser.settings.languagePreference,
@@ -1172,7 +1173,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         productDeterminationList: fakeCartProducts.materialInfos,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         shipToInfo: fakeShipToInfo,
         updatedCartItems: fakeCartProducts,
         language: fakeClientUser.settings.languagePreference,
@@ -1222,7 +1223,7 @@ void main() {
         language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         productDeterminationList: fakeCartProducts.materialInfos,
         updatedCartItems: fakeCartProducts,
@@ -1273,7 +1274,7 @@ void main() {
         language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         productDeterminationList: fakeCartProducts.materialInfos,
         updatedCartItems: fakeCartProducts,
@@ -1724,7 +1725,7 @@ void main() {
         language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         materialInfo: MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material-number'),
@@ -1750,7 +1751,7 @@ void main() {
         language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         materialInfo: MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material-number'),
@@ -1813,7 +1814,7 @@ void main() {
         language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         materialInfo: fakeCartProducts.first.materialInfo,
         itemId: fakeCartProducts.first.materialInfo.parentID,
@@ -1878,7 +1879,7 @@ void main() {
         language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         materialInfo: fakeCartProducts.first.materialInfo,
         itemId: fakeCartProducts.first.materialInfo.parentID,
@@ -1899,7 +1900,7 @@ void main() {
         language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         materialInfo: MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material-number'),
@@ -1955,7 +1956,7 @@ void main() {
         product: PriceAggregate.empty().copyWith(
           materialInfo: materialInfo,
         ),
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
       );
       expect(result.isLeft(), true);
     });
@@ -1988,7 +1989,7 @@ void main() {
         shipToInfo: fakeShipToInfo,
         language: Language.english(),
         product: fakeCartProducts.first,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         counterOfferDetails:
             fakeCartProducts.first.materialInfo.counterOfferDetails,
       );
@@ -2049,7 +2050,7 @@ void main() {
         language: Language.english(),
         shipToInfo: fakeShipToInfo,
         customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisationConfig: fakeSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         materialInfo: fakeCartProducts.first.materialInfo,
         itemId: fakeCartProducts.first.materialInfo.parentID,

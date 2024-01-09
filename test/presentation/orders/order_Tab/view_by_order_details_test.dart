@@ -61,6 +61,11 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -364,7 +369,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeTWSalesOrgConfigGMCEnabled,
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
         ),
       );
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
@@ -392,7 +397,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
@@ -554,7 +559,7 @@ void main() {
       setUp(() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigShowPoAttachment,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
           ),
         );
       });
@@ -893,7 +898,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfigDisabledBatchNumDisplay,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         ),
       );
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
@@ -929,7 +934,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfigEnabledBatchNumDisplay,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
@@ -1246,7 +1251,7 @@ void main() {
     testWidgets('Bundle information is visible', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfigEnabledBatchNumDisplay,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         ),
       );
       final bundleList = [
@@ -1286,9 +1291,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeVNSalesOrganisation,
-          salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled.copyWith(
-            vatValue: 9,
-          ),
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
         ),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -1424,7 +1427,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           user: fakeRootAdminUser,
@@ -1527,11 +1530,11 @@ void main() {
         );
       });
 
-      testWidgets('Order summary section', (tester) async {
+      testWidgets('Order summary section for ID', (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -1559,7 +1562,7 @@ void main() {
         );
         expect(
           find.textContaining(
-            'Applies to orders less than ${StringUtils.displayPrice(fakeEmptySalesConfigs, 300000)}',
+            'Applies to orders less than ${StringUtils.displayPrice(fakeIDSalesOrgConfigs, 300000)}',
           ),
           findsOneWidget,
         );
@@ -1594,14 +1597,14 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByOrderBlocMock.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           viewByOrderList: viewByOrderWithCounterOffer,
         ),
       );
@@ -1631,14 +1634,14 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByOrderBlocMock.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           viewByOrderList: viewByOrder,
         ),
       );
@@ -1668,14 +1671,14 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByOrderBlocMock.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           viewByOrderList: viewByOrderWithTax,
         ),
       );
@@ -1705,14 +1708,14 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByOrderBlocMock.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           viewByOrderList: viewByOrder,
         ),
       );
@@ -1739,26 +1742,21 @@ void main() {
         (tester) async {
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
-          configs: SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: true,
-          ),
+          configs: fakeSGSalesOrgConfigs,
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
-            displaySubtotalTaxBreakdown: true,
-            currency: Currency('myr'),
-          ),
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         ),
       );
       when(() => viewByOrderBlocMock.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
           viewByOrderList: viewByOrder,
         ),
       );
@@ -1774,7 +1772,7 @@ void main() {
       expect(
         find.descendant(
           of: viewByOrderTaxKey,
-          matching: find.text('MYR 0.00', findRichText: true),
+          matching: find.text('SGD 0.00', findRichText: true),
         ),
         findsOneWidget,
       );
@@ -1794,7 +1792,7 @@ void main() {
                 originPrice: originPrice,
                 unitPrice: unitPrice,
                 priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
+                  salesOrgConfig: fakeIDSalesOrgConfigs,
                 ),
               ),
             ],
@@ -1840,7 +1838,7 @@ void main() {
                 originPrice: originPrice,
                 unitPrice: unitPrice,
                 priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeMYSalesOrgConfigListPriceDisabled,
+                  salesOrgConfig: fakeMYSalesOrgConfigs,
                 ),
               ),
             ],

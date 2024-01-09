@@ -14,6 +14,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datas
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -31,16 +34,14 @@ void main() {
           initializedState = OrderEligibilityState.initial().copyWith(
             user: fakeExternalSalesRepUser,
             salesOrg: fakeSalesOrganisation.copyWith(salesOrg: fakeSalesOrg),
-            configs: fakeEmptySalesConfigs.copyWith(
-              minOrderAmount: '50.0',
-            ),
+            configs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo.copyWith(division: 'div'),
             shipInfo: fakeShipToInfo.copyWith(city1: 'Kol'),
           );
           changedState = initializedState.copyWith(
             cartItems: [fakeCartItem],
-            grandTotal: 100.0,
-            subTotal: 80.0,
+            grandTotal: 350.0,
+            subTotal: 300.0,
           );
         },
       );
@@ -83,6 +84,7 @@ void main() {
         ' => showErrorMessage when state.isMWPNotAllowedAndPresentInCart is true',
         build: () => OrderEligibilityBloc(),
         seed: () => changedState.copyWith(
+          configs: fakePHSalesOrgConfigs,
           cartItems: [
             fakeCartItem.copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
@@ -102,6 +104,7 @@ void main() {
         },
         expect: () => [
           changedState.copyWith(
+            configs: fakePHSalesOrgConfigs,
             cartItems: [
               fakeCartItem.copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
@@ -122,9 +125,7 @@ void main() {
         ' => showErrorMessage when state.isOOSOrderAllowedToSubmit is false',
         build: () => OrderEligibilityBloc(),
         seed: () => changedState.copyWith(
-          configs: fakeEmptySalesConfigs.copyWith(
-            materialWithoutPrice: true,
-          ),
+          configs: fakeKHSalesOrgConfigs,
           cartItems: [
             fakeCartItem.copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
@@ -142,9 +143,7 @@ void main() {
         },
         expect: () => [
           changedState.copyWith(
-            configs: fakeEmptySalesConfigs.copyWith(
-              materialWithoutPrice: true,
-            ),
+            configs: fakeKHSalesOrgConfigs,
             cartItems: [
               fakeCartItem.copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
@@ -226,7 +225,7 @@ void main() {
               .copyWith(
                 salesOrg: SalesOrganisation.empty()
                     .copyWith(salesOrg: SalesOrg('2902')),
-                subTotal: 50.0,
+                subTotal: 300.0,
               )
               .isMinOrderValuePassed;
           expect(isMinOrderValuePassed, true);
@@ -241,7 +240,7 @@ void main() {
               .copyWith(
                 salesOrg: SalesOrganisation.empty()
                     .copyWith(salesOrg: SalesOrg('2902')),
-                subTotal: 60.0,
+                subTotal: 310.0,
               )
               .isMinOrderValuePassed;
           expect(isMinOrderValuePassed, true);

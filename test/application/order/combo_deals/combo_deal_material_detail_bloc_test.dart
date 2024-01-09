@@ -23,6 +23,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -61,7 +62,7 @@ void main() {
       salesOrganisation: fakeSalesOrganisation,
       customerCodeInfo: fakeCustomerCodeInfo,
       shipToInfo: fakeShipToInfo,
-      salesConfigs: fakeSalesOrganisationConfigs,
+      salesConfigs: fakeMYSalesOrgConfigs,
       user: fakeClientUser,
     );
     initialState = ComboDealMaterialDetailState.initial().copyWith(
@@ -116,7 +117,7 @@ void main() {
         items = {
           for (final item in productList)
             item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
             ),
         };
         selectedItems = {
@@ -133,7 +134,7 @@ void main() {
             for (final materialNumber in missingComboItemMaterialNumbers)
               materialNumber: PriceAggregate.empty()
                   .copyWith(
-                    salesOrgConfig: fakeSalesOrganisationConfigs,
+                    salesOrgConfig: fakeMYSalesOrgConfigs,
                     materialInfo: MaterialInfo.empty().copyWith(
                       materialNumber: materialNumber,
                     ),
@@ -157,7 +158,7 @@ void main() {
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
         ComboDealMaterialDetailEvent.initFromCartComboDealItems(
           items: productList,
-          salesConfigs: fakeSalesOrganisationConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
         ),
       ),
       expect: () => [
@@ -174,7 +175,7 @@ void main() {
         items = {
           for (final item in productList)
             item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
             ),
         };
         final priceMap = {
@@ -200,7 +201,7 @@ void main() {
         items: {
           for (final item in productList)
             item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
             ),
         },
       ),
@@ -225,7 +226,7 @@ void main() {
         items = {
           for (final item in productList)
             item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
             ),
         };
         items[productList.first.getMaterialNumber] =
@@ -240,7 +241,7 @@ void main() {
         items: {
           for (final item in productList)
             item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
             ),
         },
       ),
@@ -262,7 +263,7 @@ void main() {
         items = {
           for (final item in productList)
             item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
             ),
         };
         items[productList.first.getMaterialNumber] =
@@ -277,7 +278,7 @@ void main() {
         items: {
           for (final item in productList)
             item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
             ),
         },
       ),
@@ -299,7 +300,7 @@ void main() {
         items = {
           for (final item in productList)
             item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
             ),
         };
         selectionStatus = {
@@ -429,7 +430,7 @@ void main() {
           });
         }
         itemsAfterGetMaterials.forEach((key, value) {
-          value = value.copyWith(salesOrgConfig: fakeSalesOrganisationConfigs);
+          value = value.copyWith(salesOrgConfig: fakeMYSalesOrgConfigs);
         });
 
         selectedItems = <MaterialNumber, bool>{};
@@ -510,7 +511,7 @@ void main() {
               productList.first.materialInfo.principalData.principalCode
                   .getOrDefaultValue('')
             ],
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
           ),
         ).thenAnswer(
           (_) async => Right(
@@ -536,7 +537,7 @@ void main() {
                         .copyWith(
                   materialInfo: materialInfo,
                   comboDeal: comboDeal,
-                  salesOrgConfig: fakeSalesOrganisationConfigs,
+                  salesOrgConfig: fakeMYSalesOrgConfigs,
                 );
               }
             }
@@ -548,7 +549,7 @@ void main() {
               .map(
                 (material) => PriceAggregate.empty().copyWith(
                   materialInfo: material,
-                  salesOrgConfig: fakeSalesOrganisationConfigs,
+                  salesOrgConfig: fakeMYSalesOrgConfigs,
                   comboDeal: comboDeal,
                 ),
               )
@@ -609,7 +610,7 @@ void main() {
       seed: () => initialState.copyWith(
         items: items,
         user: fakeClientUser,
-        salesConfigs: fakeSalesOrganisationConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
         selectedItems: {
           for (final item in productList) item.getMaterialNumber: true
         },
@@ -631,7 +632,7 @@ void main() {
           selectedItems: selectedItems,
           isFetchingPrice: true,
           user: fakeClientUser,
-          salesConfigs: fakeSalesOrganisationConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           nextPageIndex: 1,
           materialCount: 13,
         ),
@@ -665,7 +666,7 @@ void main() {
               productList.first.materialInfo.principalData.principalCode
                   .getOrDefaultValue('')
             ],
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
           ),
         ).thenAnswer(
           (_) async => Right(
@@ -676,7 +677,7 @@ void main() {
             .map(
               (material) => PriceAggregate.empty().copyWith(
                 materialInfo: material,
-                salesOrgConfig: fakeSalesOrganisationConfigs,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
                 comboDeal: comboDeal,
               ),
             )
@@ -737,7 +738,7 @@ void main() {
         items: items,
         canLoadMore: true,
         user: fakeClientUser,
-        salesConfigs: fakeSalesOrganisationConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
         ComboDealMaterialDetailEvent.loadMoreComboDealPrincipal(
@@ -754,7 +755,7 @@ void main() {
           items: itemsAfterGetMaterials,
           selectedItems: selectedItems,
           user: fakeClientUser,
-          salesConfigs: fakeSalesOrganisationConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           nextPageIndex: 1,
           materialCount: 0,
         ),
@@ -845,7 +846,7 @@ void main() {
               productList.first.materialInfo.principalData.principalCode
                   .getOrDefaultValue('')
             ],
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
           ),
         ).thenAnswer(
           (_) async => const Left(
@@ -862,7 +863,7 @@ void main() {
         items: items,
         canLoadMore: true,
         user: fakeClientUser,
-        salesConfigs: fakeSalesOrganisationConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
         ComboDealMaterialDetailEvent.loadMoreComboDealPrincipal(
@@ -884,7 +885,7 @@ void main() {
           isLoadMore: false,
           items: items,
           user: fakeClientUser,
-          salesConfigs: fakeSalesOrganisationConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
         ),
       ],
     );
@@ -896,7 +897,7 @@ void main() {
       items = {
         for (final item in productList)
           item.getMaterialNumber: item.copyWith(
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             comboDeal: comboDeal,
           ),
       };
@@ -923,7 +924,7 @@ void main() {
         items: {
           for (final item in productList)
             item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               comboDeal: comboDeal,
             ),
         },

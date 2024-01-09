@@ -15,6 +15,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -67,7 +68,7 @@ void main() async {
 
         final result = await repository.getViewByItems(
           salesOrganisation: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           soldTo: fakeCustomerCodeInfo,
           shipTo: fakeShipToInfo,
           user: fakeClientUser,
@@ -87,7 +88,7 @@ void main() async {
 
         final result = await repository.getViewByItems(
           salesOrganisation: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           soldTo: fakeCustomerCodeInfo,
           shipTo: fakeShipToInfo,
           user: fakeClientUser,
@@ -117,7 +118,7 @@ void main() async {
 
         final result = await repository.getViewByItems(
           salesOrganisation: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           soldTo: fakeCustomerCodeInfo,
           shipTo: fakeShipToInfo,
           user: fakeClientUser,
@@ -147,7 +148,7 @@ void main() async {
 
         final result = await repository.getViewByItems(
           salesOrganisation: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           soldTo: fakeCustomerCodeInfo,
           shipTo: fakeShipToInfo,
           user: fakeClientUser,
@@ -186,7 +187,7 @@ void main() async {
 
         final result = await repository.getViewByItems(
           salesOrganisation: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           soldTo: fakeCustomerCodeInfo,
           shipTo: fakeShipToInfo,
           user: fakeClientUser,
@@ -225,7 +226,7 @@ void main() async {
 
         final result = await repository.getViewByItems(
           salesOrganisation: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           soldTo: fakeCustomerCodeInfo,
           shipTo: fakeShipToInfo,
           user: fakeClientUser,

@@ -11,7 +11,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 
 class ConfigMock extends Mock implements Config {}
 
@@ -342,7 +342,7 @@ void main() {
             (_) async => FavouriteStatus.empty(),
           );
           final result = await repository.getFavouritesForList(
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             list: materialListMock,
           );
           expect(result.isRight(), true);
@@ -358,7 +358,7 @@ void main() {
             () => localDataSourceMock.getFavouriteStatus(),
           ).thenThrow(errorMock);
           final result = await repository.getFavouritesForList(
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             list: materialListMock,
           );
           expect(result.isLeft(), true);
@@ -372,7 +372,7 @@ void main() {
           when(
             () => remoteDataSourceMock.getFavouriteStatus(
               materialNumber: nonFavouriteMaterialMock.getOrCrash(),
-              language: fakeEmptySalesConfigs.getConfigLanguage,
+              language: fakeMYSalesOrgConfigs.getConfigLanguage,
             ),
           ).thenAnswer(
             (_) async => const FavouriteStatus(isFavourite: false),
@@ -380,13 +380,13 @@ void main() {
           when(
             () => remoteDataSourceMock.getFavouriteStatus(
               materialNumber: favouriteMaterialMock.getOrCrash(),
-              language: fakeEmptySalesConfigs.getConfigLanguage,
+              language: fakeMYSalesOrgConfigs.getConfigLanguage,
             ),
           ).thenAnswer(
             (_) async => const FavouriteStatus(isFavourite: true),
           );
           final result = await repository.getFavouritesForList(
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             list: materialListMock,
           );
           expect(result.isRight(), true);
@@ -401,12 +401,12 @@ void main() {
           when(
             () => remoteDataSourceMock.getFavouriteStatus(
               materialNumber: nonFavouriteMaterialMock.getOrCrash(),
-              language: fakeEmptySalesConfigs.getConfigLanguage,
+              language: fakeMYSalesOrgConfigs.getConfigLanguage,
             ),
           ).thenThrow(errorMock);
 
           final result = await repository.getFavouritesForList(
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             list: materialListMock,
           );
           expect(result.isRight(), true);

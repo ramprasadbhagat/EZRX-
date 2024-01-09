@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -20,6 +19,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -44,10 +44,7 @@ void main() {
     user: fakeRootAdminUser.copyWith(email: EmailAddress('awsib@gmail.com')),
     customerCodeInfo: fakeCustomerCodeInfo.copyWith(division: 'div'),
     shipToInfo: fakeShipToInfo,
-    salesOrgConfig: fakeSalesOrganisationConfigs.copyWith(
-      currency: Currency('PHP'),
-      salesOrg: fakeSalesOrg,
-    ),
+    salesOrgConfig: fakePHSalesOrgConfigs,
     salesOrganisation: fakeSalesOrganisation.copyWith(salesOrg: fakeSalesOrg),
     orderDocumentType: OrderDocumentType.empty(),
   );

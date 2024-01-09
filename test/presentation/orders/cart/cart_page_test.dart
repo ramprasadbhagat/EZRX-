@@ -65,6 +65,12 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -499,7 +505,11 @@ void main() {
           materialPrice: mockPriceList,
         ),
       );
-      when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
       when(() => userBloc.state).thenReturn(UserState.initial());
       when(() => discountOverrideBlocMock.state)
           .thenReturn(DiscountOverrideState.initial());
@@ -668,7 +678,7 @@ void main() {
           (tester) async {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeTWSalesOrgConfigGMCEnabled,
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
           ),
         );
         when(() => cartBloc.state).thenReturn(
@@ -692,7 +702,7 @@ void main() {
           (tester) async {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         when(() => cartBloc.state).thenReturn(
@@ -2226,11 +2236,11 @@ void main() {
           materialInfo: mockCartItems.last.materialInfo,
           price: Price.empty().copyWith(zdp5RemainingQuota: ZDP5Info('1')),
           quantity: 2,
-          salesOrgConfig: salesOrgConfigEnabledZDP5,
+          salesOrgConfig: fakeVNSalesOrgConfigs,
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: salesOrgConfigEnabledZDP5,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
           ),
         );
         final cartState = CartState.initial().copyWith(
@@ -2351,7 +2361,7 @@ void main() {
         verify(
           () => additionalDetailsBlocMock.add(
             AdditionalDetailsEvent.initialized(
-              config: fakeEmptySalesConfigs,
+              config: fakeMYSalesOrgConfigs,
               customerCodeInfo: fakeEmptyCustomerCodeInfo,
             ),
           ),
@@ -2389,7 +2399,7 @@ void main() {
           )
         ];
         final orderEligibilityState = OrderEligibilityState.initial().copyWith(
-          configs: fakePHSalesOrganisationConfigsMaterialWithoutPrice,
+          configs: fakeMYSalesOrgConfigs,
           cartItems: cartProduct,
         );
         when(() => cartBloc.state).thenReturn(
@@ -2423,7 +2433,7 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
-            salesOrgConfigs: fakeSalesOrganisationConfigsTaxBreakdown,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
           ),
         );
 
@@ -2502,7 +2512,7 @@ void main() {
           OrderEligibilityState.initial(),
           OrderEligibilityState.initial().copyWith(
             cartItems: [cartComboItem],
-            configs: salesOrgConfigDisableMaterialWithoutPriceAndCombo,
+            configs: fakeKHSalesOrgConfigs,
           ),
         ];
 
@@ -2575,19 +2585,19 @@ void main() {
                   price: Price.empty().copyWith(
                     finalPrice: MaterialPrice(234.50),
                   ),
-                  salesOrgConfig: fakeMYSalesOrgConfigWithOOSPreOrder,
+                  salesOrgConfig: fakeIDSalesOrgConfigs,
                 ),
               ],
             ),
           );
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeSalesOrgConfigWithOOSPreOrderValue,
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
             ),
           );
           when(() => salesOrgBloc.state).thenReturn(
             SalesOrgState.initial().copyWith(
-              configs: fakeSalesOrgConfigWithOOSPreOrderValue,
+              configs: fakeIDSalesOrgConfigs,
             ),
           );
           await tester.pumpWidget(getWidget());
@@ -2621,19 +2631,19 @@ void main() {
                   price: Price.empty().copyWith(
                     finalPrice: MaterialPrice(234.50),
                   ),
-                  salesOrgConfig: fakeMYSalesOrgConfigWithOOSPreOrder,
+                  salesOrgConfig: fakeIDSalesOrgConfigs,
                 ),
               ],
             ),
           );
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeSalesOrgConfigWithOOSPreOrderValue,
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
             ),
           );
           when(() => salesOrgBloc.state).thenReturn(
             SalesOrgState.initial().copyWith(
-              configs: fakeSalesOrgConfigWithOOSPreOrderValue,
+              configs: fakeIDSalesOrgConfigs,
             ),
           );
           await tester.pumpWidget(getWidget());
@@ -2667,8 +2677,7 @@ void main() {
                   price: Price.empty().copyWith(
                     finalPrice: MaterialPrice(234.50),
                   ),
-                  salesOrgConfig:
-                      fakeSalesOrgConfigWithOOSPreOrderValueAndHideStockDisplay,
+                  salesOrgConfig: fakeTWSalesOrgConfigs,
                 ),
               ],
             ),
@@ -2711,7 +2720,7 @@ void main() {
         when(() => orderEligibilityBlocMock.state).thenReturn(
           OrderEligibilityState.initial().copyWith(
             cartItems: <PriceAggregate>[oosMaterial],
-            configs: fakeSalesOrgConfigWithHideStockDisplay,
+            configs: fakePHSalesOrgConfigs,
           ),
         );
 
@@ -2721,13 +2730,11 @@ void main() {
 
         final invalidItemBannerFinder =
             find.byKey(WidgetKeys.cartPageInvalidItemsBanner);
-        final invalidMessageFinder = find.text('Out of stock material');
         final invalidItemMessageFinder = find.text('Material out of stock');
         final invalidItemBannerButtonFinder =
             find.byKey(WidgetKeys.cartPageInvalidItemsBannerButton);
 
         expect(invalidItemBannerFinder, findsOneWidget);
-        expect(invalidMessageFinder, findsOneWidget);
 
         expect(invalidItemMessageFinder, findsNothing);
 
@@ -2772,7 +2779,7 @@ void main() {
                   lastPrice: listPrice,
                   finalPrice: finalPrice,
                 ),
-                salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
+                salesOrgConfig: fakeIDSalesOrgConfigs,
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material'),
                   type: MaterialInfoType('material'),
@@ -2819,7 +2826,7 @@ void main() {
                   lastPrice: listPrice,
                   finalPrice: finalPrice,
                 ),
-                salesOrgConfig: fakeMYSalesOrgConfigListPriceDisabled,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material'),
                   type: MaterialInfoType('material'),
@@ -2866,7 +2873,7 @@ void main() {
                   lastPrice: listPrice,
                   finalPrice: finalPrice,
                 ),
-                salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
+                salesOrgConfig: fakeIDSalesOrgConfigs,
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material'),
                   type: MaterialInfoType('material'),

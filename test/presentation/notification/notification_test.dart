@@ -30,6 +30,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/widget_utils.dart';
 
@@ -355,7 +356,7 @@ void main() {
           user: fakeUser,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
         ),
       );

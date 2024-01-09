@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
@@ -19,6 +18,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -105,7 +105,7 @@ void main() {
               isLoading: true,
             ),
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeSalesOrganisationConfigs,
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
               customerCodeInfo: fakeCustomerCodeInfo,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               user: fakeClientUser,
@@ -119,7 +119,7 @@ void main() {
       verify(
         () => viewByItemsBlocMock.add(
           ViewByItemsEvent.initialized(
-            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeClientUser,
@@ -193,7 +193,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           user: fakeRootAdminUser,
@@ -220,7 +220,7 @@ void main() {
             orderHistory: fakeOrderHistory,
             orderHistoryItem: fakeOrderHistory.orderHistoryItems.first,
             disableDeliveryDateForZyllemStatus:
-                fakeSalesOrganisationConfigs.disableDeliveryDate,
+                fakeMYSalesOrgConfigs.disableDeliveryDate,
           ),
         ),
       ).called(1);
@@ -248,9 +248,7 @@ void main() {
         () => eligibilityBlocMock.state,
       ).thenAnswer(
         (invocation) => EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeEmptySalesConfigs.copyWith(
-            currency: Currency('MYR'),
-          ),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(

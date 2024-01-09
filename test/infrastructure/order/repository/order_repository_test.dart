@@ -39,14 +39,16 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -55,9 +57,6 @@ class StockInfoLocalDataSourceMock extends Mock
 
 class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
-
-class SalesOrganisationConfigsMock extends Mock
-    implements SalesOrganisationConfigs {}
 
 class MockConfig extends Mock implements Config {}
 
@@ -90,7 +89,6 @@ void main() {
   late OrderHistoryDetails orderHistoryDetailsMock;
   late OrderRemoteDataSource orderRemoteDataSource;
   late StockInfoLocalDataSource stockInfoLocalDataSource;
-  late SalesOrganisationConfigs salesOrganisationConfigs;
   late StockInfoRemoteDataSource stockInfoRemoteDataSource;
   final mockShipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
   late ViewByOrderDetailsLocalDataSource viewByOrderDetailsLocalDataSource;
@@ -105,7 +103,6 @@ void main() {
     orderRemoteDataSource = OrderRemoteDataSourceMock();
 
     mixpanelService = MixpanelServiceMock();
-    salesOrganisationConfigs = SalesOrganisationConfigsMock();
     viewByOrderDetailsLocalDataSource = ViewByOrderDetailsLocalDataSourceMock();
     viewByOrderDetailsRemoteDataSource =
         ViewByOrderDetailsRemoteDataSourceMock();
@@ -133,7 +130,7 @@ void main() {
         .map(
           (e) => PriceAggregate.empty().copyWith(
             materialInfo: e.copyWith(isFOCMaterial: false),
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             quantity: 1,
           ),
         )
@@ -161,7 +158,9 @@ void main() {
       referenceNotes: deliveryInfoData.referenceNote.getValue(),
       specialInstructions: deliveryInfoData.deliveryInstruction.getValue(),
       companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-      requestedDeliveryDate: deliveryInfoData.deliveryDate.getValue(),
+      requestedDeliveryDate: fakePHSalesOrgConfigs.enableFutureDeliveryDay
+          ? deliveryInfoData.deliveryDate.getValue()
+          : '',
       poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
       telephone: deliveryInfoData.mobileNumber.getTelephone,
       collectiveNumber: '',
@@ -174,8 +173,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation.salesOrg.getOrCrash(),
       ),
       language: 'EN',
-      blockOrder:
-          salesOrganisationPHConfigsWithEnablePrincipalList.enablePrincipalList,
+      blockOrder: fakePHSalesOrgConfigs.enablePrincipalList,
       products: cartMaterials
           .expand(
             (element) => !element.materialInfo.type.typeBundle
@@ -204,21 +202,6 @@ void main() {
   test('get submit order successfully locally ', () async {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-    salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
-      currency: Currency('PHP'),
-      disablePrincipals: true,
-      principalList: [
-        SalesOrganisationConfigsPrincipal.empty().copyWith(
-          date: DateTimeStringValue('2093041107'),
-          principalCode: PrincipalCode('0000140332'),
-        ),
-        SalesOrganisationConfigsPrincipal.empty().copyWith(
-          date: DateTimeStringValue('2023041107'),
-          principalCode: PrincipalCode('0000000000'),
-        )
-      ],
-    );
-
     final cartMaterial = <PriceAggregate>[
       PriceAggregate.empty().copyWith(
         quantity: 2,
@@ -231,7 +214,7 @@ void main() {
           contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
           tenderOrderReason: TenderContractReason('reas'),
         ),
-        salesOrgConfig: salesOrganisationConfigs,
+        salesOrgConfig: fakePHSalesOrgConfigs,
       )
     ];
 
@@ -265,7 +248,7 @@ void main() {
         division: fakeCustomerCodeInfo.division,
         salesOrganisation: fakeSalesOrganisation.salesOrg.getOrCrash(),
       ),
-      blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+      blockOrder: fakePHSalesOrgConfigs.enablePrincipalList &&
           cartMaterial.any((item) => item.checkSalesCutOff),
       products: <PriceAggregate>[
         PriceAggregate.empty().copyWith(
@@ -303,7 +286,7 @@ void main() {
       data: deliveryInfoData,
       orderDocumentType: OrderDocumentType.empty()
           .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-      configs: salesOrganisationConfigs,
+      configs: fakePHSalesOrgConfigs,
       orderValue: 100.0,
       totalTax: 100,
       smallOrderFee: 12500.0,
@@ -312,28 +295,13 @@ void main() {
       result.isRight(),
       true,
     );
-    expect(submitOrder.blockOrder, true);
+    expect(submitOrder.blockOrder, false);
   });
 
   test('get submit order successfully locally with payment term validation ',
       () async {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-    salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
-      currency: Currency('PHP'),
-      disablePrincipals: true,
-      principalList: [
-        SalesOrganisationConfigsPrincipal.empty().copyWith(
-          date: DateTimeStringValue('2093041107'),
-          principalCode: PrincipalCode('0000140332'),
-        ),
-        SalesOrganisationConfigsPrincipal.empty().copyWith(
-          date: DateTimeStringValue('2023041107'),
-          principalCode: PrincipalCode('0000000000'),
-        )
-      ],
-    );
-
     final cartMaterial = <PriceAggregate>[
       PriceAggregate.empty().copyWith(
         quantity: 2,
@@ -346,7 +314,7 @@ void main() {
           contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
           tenderOrderReason: TenderContractReason('reas'),
         ),
-        salesOrgConfig: salesOrganisationPHConfigsWithEnablePrincipalList,
+        salesOrgConfig: fakePHSalesOrgConfigs,
       )
     ];
 
@@ -380,7 +348,7 @@ void main() {
         division: fakeCustomerCodeInfo.division,
         salesOrganisation: fakeSalesOrganisation.salesOrg.getOrCrash(),
       ),
-      blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+      blockOrder: fakePHSalesOrgConfigs.enablePrincipalList &&
           cartMaterial.any((item) => item.checkSalesCutOff),
       products: <PriceAggregate>[
         PriceAggregate.empty().copyWith(
@@ -418,7 +386,7 @@ void main() {
       data: deliveryInfoData,
       orderDocumentType: OrderDocumentType.empty()
           .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-      configs: salesOrganisationConfigs,
+      configs: fakePHSalesOrgConfigs,
       orderValue: 100.0,
       totalTax: 100,
       smallOrderFee: 12500.0,
@@ -427,24 +395,11 @@ void main() {
       result.isRight(),
       true,
     );
-    expect(submitOrder.blockOrder, true);
+    expect(submitOrder.blockOrder, false);
   });
   test('get submit order fail locally ', () async {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-    salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
-      currency: Currency('PHP'),
-      disablePrincipals: true,
-      principalList: [
-        SalesOrganisationConfigsPrincipal.empty().copyWith(
-          date: DateTimeStringValue('2023041107'),
-          principalCode: PrincipalCode('0000140332'),
-        ),
-        SalesOrganisationConfigsPrincipal.empty().copyWith(
-          date: DateTimeStringValue('2023041208'),
-          principalCode: PrincipalCode('0000000000'),
-        )
-      ],
-    );
+
     final cartMaterial = <PriceAggregate>[
       PriceAggregate.empty().copyWith(
         quantity: 2,
@@ -468,7 +423,7 @@ void main() {
           quantity: 2,
         )
       ],
-      blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+      blockOrder: fakePHSalesOrgConfigs.enablePrincipalList &&
           cartMaterial.any((item) => item.checkSalesCutOff),
     );
 
@@ -490,7 +445,7 @@ void main() {
           DeliveryInfoData.empty().copyWith(paymentTerm: PaymentTerm('A004-')),
       orderDocumentType: OrderDocumentType.empty()
           .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-      configs: salesOrganisationConfigs,
+      configs: fakePHSalesOrgConfigs,
       orderValue: 100.0,
       totalTax: 100,
       smallOrderFee: 12500.0,
@@ -520,7 +475,7 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
         smallOrderFee: 12500.0,
@@ -561,7 +516,7 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
         smallOrderFee: 12500.0,
@@ -600,7 +555,7 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
         smallOrderFee: 12500.0,
@@ -641,7 +596,7 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
         smallOrderFee: 12500.0,
@@ -701,7 +656,7 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPVF'), orderReason: ''),
-        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
         smallOrderFee: 12500.0,
@@ -752,7 +707,7 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPVF'), orderReason: ''),
-        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
         smallOrderFee: 12500.0,
@@ -825,7 +780,7 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
         smallOrderFee: 12500.0,
@@ -870,7 +825,7 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
         smallOrderFee: 12500.0,
@@ -893,7 +848,7 @@ void main() {
               materialInfo: e.copyWith(
                 type: MaterialInfoType.combo(),
               ),
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
               quantity: 1,
               comboMaterials: [
                 ComboMaterialItem.empty().copyWith(
@@ -935,7 +890,9 @@ void main() {
         referenceNotes: deliveryInfoData.referenceNote.getValue(),
         specialInstructions: deliveryInfoData.deliveryInstruction.getValue(),
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        requestedDeliveryDate: deliveryInfoData.deliveryDate.getValue(),
+        requestedDeliveryDate: fakeVNSalesOrgConfigs.enableFutureDeliveryDay
+            ? deliveryInfoData.deliveryDate.getValue()
+            : '',
         poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
         telephone: deliveryInfoData.mobileNumber.getTelephone,
         collectiveNumber: '',
@@ -949,8 +906,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation.salesOrg.getOrCrash(),
         ),
         language: 'EN',
-        blockOrder: salesOrganisationPHConfigsWithEnablePrincipalList
-            .enablePrincipalList,
+        blockOrder: fakeVNSalesOrgConfigs.enablePrincipalList,
         products: cartMaterialsCombo
             .expand(
               (element) => element.comboMaterials.map(
@@ -989,7 +945,7 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        configs: fakePHSalesOrgConfigs,
       );
       expect(
         result.isRight(),
@@ -1006,6 +962,9 @@ void main() {
         () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       final submitOrderMockIDMarket = submitOrderMock.copyWith(
+        requestedDeliveryDate: fakeIDSalesOrgConfigs.enableFutureDeliveryDay
+            ? deliveryInfoData.deliveryDate.getValue()
+            : '',
         customer: submitOrderMock.customer.copyWith(
           salesOrganisation:
               fakeIDSalesOrganisation.salesOrg.getOrDefaultValue(''),
@@ -1040,7 +999,7 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+        configs: fakeIDSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
         smallOrderFee: 12500.0,
@@ -1089,7 +1048,7 @@ void main() {
       data: deliveryInfoData,
       orderDocumentType: OrderDocumentType.empty()
           .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-      configs: salesOrganisationPHConfigsWithEnablePrincipalList,
+      configs: fakePHSalesOrgConfigs,
       orderValue: 310000.00,
       totalTax: 100,
       smallOrderFee: 12500.0,

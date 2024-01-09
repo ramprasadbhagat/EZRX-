@@ -9,7 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../common_mock_data/sales_organsiation_mock.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../utils/widget_utils.dart';
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
@@ -25,7 +26,7 @@ void main() {
     eligibilityBlocMock = EligibilityBlocMock();
     when(() => eligibilityBlocMock.state).thenReturn(
       EligibilityState.initial().copyWith(
-        salesOrgConfigs: fakeTWSalesOrgConfigShowGovtListPrice,
+        salesOrgConfigs: fakeTWSalesOrgConfigs,
       ),
     );
   });
@@ -56,7 +57,7 @@ void main() {
   testWidgets('Hide gov price if showGovtListPrice is false', (tester) async {
     when(() => eligibilityBlocMock.state).thenReturn(
       EligibilityState.initial().copyWith(
-        salesOrgConfigs: fakeSalesOrganisationConfigs,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
       ),
     );
     await tester.pumpWidget(getScopedWidget());

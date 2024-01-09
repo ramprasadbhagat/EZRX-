@@ -13,7 +13,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ void main() {
     items = {
       for (final item in productList)
         item.getMaterialNumber: item.copyWith(
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
         ),
     };
   });
@@ -67,7 +67,7 @@ void main() {
       items = {
         for (final item in productList)
           item.getMaterialNumber: item.copyWith(
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
           ),
       };
       final state = ComboDealMaterialDetailState.initial().copyWith(

@@ -56,6 +56,9 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -445,8 +448,8 @@ void main() {
         const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+            salesOrganisation: fakeSGSalesOrganisation,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -477,7 +480,8 @@ void main() {
         );
         //Fetching the vat value for other market - 5
         final taxRateFinder = find.text(
-            'Tax at ${fakeMYSalesOrgConfigTaxBreakdownEnabled.vatValue}%:',);
+          'Tax at ${fakeSGSalesOrgConfigs.vatValue}%:',
+        );
         expect(
           find.descendant(
             of: find.byKey(
@@ -874,7 +878,7 @@ void main() {
                   materialNumber: MaterialNumber('fake-material-1'),
                 ),
                 priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
+                  salesOrgConfig: fakeIDSalesOrgConfigs,
                   price: Price.empty().copyWith(
                     lastPrice: listPrice,
                     finalPrice: finalPrice,
@@ -925,7 +929,7 @@ void main() {
                   materialNumber: MaterialNumber('fake-material-1'),
                 ),
                 priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeMYSalesOrgConfigListPriceDisabled,
+                  salesOrgConfig: fakeMYSalesOrgConfigs,
                   price: Price.empty().copyWith(
                     lastPrice: listPrice,
                     finalPrice: finalPrice,
@@ -976,7 +980,7 @@ void main() {
                   materialNumber: MaterialNumber('fake-material-1'),
                 ),
                 priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
+                  salesOrgConfig: fakeIDSalesOrgConfigs,
                   price: Price.empty().copyWith(
                     lastPrice: listPrice,
                     finalPrice: finalPrice,
@@ -1122,9 +1126,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenAnswer(
         (invocation) => EligibilityState.initial().copyWith(
           customerCodeInfo: customerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
-            enableBillTo: true,
-          ),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => orderSummaryBlocMock.state).thenAnswer(
@@ -1652,7 +1654,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeIDSalesOrganisation,
-          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
       when(() => orderSummaryBlocMock.state).thenAnswer(
@@ -1679,7 +1681,7 @@ void main() {
           of: smallFeeSection,
           matching: find.text(
             StringUtils.priceComponentDisplayPrice(
-              fakeIDSalesOrganisationConfigs,
+              fakeIDSalesOrgConfigs,
               fakeOrderHistoryDetails.deliveryFee,
               false,
             ),
@@ -1691,7 +1693,7 @@ void main() {
       expect(
         find.text(
             '${'Applies to orders less than'.tr()} ${StringUtils.displayPrice(
-          fakeIDSalesOrganisationConfigs,
+          fakeIDSalesOrgConfigs,
           fakeIDSalesOrganisation.salesOrg.smallOrderThreshold,
         )}'),
         findsOneWidget,
@@ -1708,7 +1710,7 @@ void main() {
           of: manualFeeSection,
           matching: find.text(
             StringUtils.priceComponentDisplayPrice(
-              fakeIDSalesOrganisationConfigs,
+              fakeIDSalesOrgConfigs,
               fakeOrderHistoryDetails.manualFee,
               false,
             ),

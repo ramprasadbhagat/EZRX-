@@ -27,6 +27,8 @@ import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -376,7 +378,7 @@ void main() {
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigAllowReturnsOutsidePolicy,
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
           ),
         );
         when(() => newRequestBlocMock.state).thenReturn(
@@ -465,7 +467,7 @@ void main() {
         (WidgetTester tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeTHSalesOrgConfigTaxBreakdownEnabled,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         ),
       );
       when(() => newRequestBlocMock.state).thenReturn(
@@ -487,12 +489,12 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       final subtotal = find.text(
-        'THB ${(fakeReturnItemDetails.returnValue + fakeReturnBonusItemDetails.returnValue).toStringAsFixed(2)}',
+        'SGD ${(fakeReturnItemDetails.returnValue + fakeReturnBonusItemDetails.returnValue).toStringAsFixed(2)}',
         findRichText: true,
       );
       expect(subtotal, findsWidgets);
       final grandTotal = find.text(
-        'THB ${(fakeReturnItemDetails.returnValue + fakeReturnBonusItemDetails.returnValue).toStringAsFixed(2)}',
+        'SGD ${(fakeReturnItemDetails.returnValue + fakeReturnBonusItemDetails.returnValue).toStringAsFixed(2)}',
         findRichText: true,
       );
       expect(grandTotal, findsWidgets);

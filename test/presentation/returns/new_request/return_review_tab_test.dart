@@ -42,7 +42,7 @@ import 'package:ezrxmobile/application/returns/new_request/attachments/return_re
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/widgets/bonus_material_return_widget.dart';
 
 import '../../../common_mock_data/mock_bloc.dart';
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 
 final locator = GetIt.instance;
@@ -685,7 +685,7 @@ void main() {
         (tester) async {
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeSalesOrgConfigAllowReturnsOutsidePolicy,
+              salesOrgConfigs: fakeTHSalesOrgConfigs,
             ),
           );
           when(() => newRequestBlocMock.state).thenReturn(

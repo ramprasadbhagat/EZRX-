@@ -23,7 +23,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../../../utils/widget_utils.dart';
 
 class ReturnItemsBlocMock extends MockBloc<ReturnItemsEvent, ReturnItemsState>
@@ -125,7 +127,7 @@ void main() {
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigAllowReturnsOutsidePolicy,
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
           ),
         );
         when(() => returnItemsBlocMock.state).thenReturn(
@@ -158,7 +160,7 @@ void main() {
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         when(() => returnItemsBlocMock.state).thenReturn(
@@ -192,7 +194,7 @@ void main() {
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeTHSalesOrgConfigTaxBreakdownEnabled,
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
           ),
         );
         when(() => returnItemsBlocMock.state).thenReturn(
@@ -209,7 +211,7 @@ void main() {
         final hideBonusDetail = find.text('Hide details'.tr());
         expect(hideBonusDetail, findsOneWidget);
         final bonusPrice = find.text(
-          'THB 402.80',
+          'SGD 402.80',
           findRichText: true,
         );
         expect(bonusPrice, findsOneWidget);

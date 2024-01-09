@@ -1,7 +1,5 @@
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -12,6 +10,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datas
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -27,9 +28,7 @@ void main() {
         initializedState = OrderEligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
           salesOrg: fakeSalesOrganisation.copyWith(salesOrg: fakeSalesOrg),
-          configs: fakeEmptySalesConfigs.copyWith(
-            minOrderAmount: '50.0',
-          ),
+          configs: fakeKHSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo.copyWith(division: 'div'),
           shipInfo: fakeShipToInfo.copyWith(city1: 'Kol'),
         );
@@ -186,20 +185,20 @@ void main() {
 
       // isOOSOrderAllowedToSubmit is true
       final modifiedState = initializedState.copyWith(
-        configs: fakeEmptySalesConfigs.copyWith(
-          addOosMaterials: OosMaterial(true),
-          oosValue: OosValue(0),
-        ),
+        configs: fakeMYSalesOrgConfigs,
       );
       expect(modifiedState.isOOSOrderAllowedToSubmit, true);
     });
 
     test(' => displayMWPNotAllowedWarning should return correct value', () {
       // displayMWPNotAllowedWarning is false
-      expect(initializedState.displayMWPNotAllowedWarning, false);
+      final state = initializedState.copyWith(
+        configs: fakeTHSalesOrgConfigs,
+      );
+      expect(state.displayMWPNotAllowedWarning, false);
 
       // displayMWPNotAllowedWarning is true
-      final modifiedState = initializedState.copyWith(
+      final modifiedState = state.copyWith(
         showErrorMessage: true,
         cartItems: [
           fakeCartItem.copyWith(
@@ -267,7 +266,7 @@ void main() {
 
       // displayCartPagePriceMessage is true
       final modifiedState = initializedState.copyWith(
-        configs: fakeEmptySalesConfigs.copyWith(materialWithoutPrice: true),
+        configs: fakeMYSalesOrgConfigs,
         cartItems: [
           fakeCartItem.copyWith(
             price: Price.empty(),
@@ -382,11 +381,7 @@ void main() {
       expect(initializedState.eligibleForOrderSubmit, false);
       // eligibleForOrderSubmit is true
       final modifiedState = initializedState.copyWith(
-        configs: fakeEmptySalesConfigs.copyWith(
-          materialWithoutPrice: true,
-          addOosMaterials: OosMaterial(true),
-          oosValue: OosValue(0),
-        ),
+        configs: fakeMYSalesOrgConfigs,
         orderType: 'ZPFC',
         cartItems: [
           fakeCartItem.copyWith(

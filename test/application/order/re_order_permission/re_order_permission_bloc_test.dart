@@ -17,6 +17,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class ReOrderPermissionRepositoryMock extends Mock
@@ -33,7 +34,7 @@ void main() {
   late OrderHistory fakeViewByItemDetail;
   late OrderHistoryItem fakeOrderHistoryItem;
   final initializedState = ReOrderPermissionState.initial().copyWith(
-    salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+    salesOrganisationConfigs: fakeMYSalesOrgConfigs,
     customerCodeInfo: fakeCustomerCodeInfo,
     salesOrganisation: fakeSalesOrganisation,
     shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
@@ -70,7 +71,7 @@ void main() {
           ReOrderPermissionBloc(reOrderPermissionRepository: repository),
       act: (ReOrderPermissionBloc bloc) => bloc.add(
         ReOrderPermissionEvent.initialized(
-          salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+          salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
           shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,

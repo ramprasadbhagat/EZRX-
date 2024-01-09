@@ -2,7 +2,9 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 
 void main() {
   late SalesOrganisationConfigs configs;
@@ -53,7 +55,7 @@ void main() {
     });
 
     test('Show Gov Price For TW And enableListPrice = true Test', () {
-      configs = fakeTWSalesOrgConfigShowGovtListPrice;
+      configs = fakeTWSalesOrgConfigs;
       expect(
         configs.showGovtListPrice,
         true,
@@ -61,9 +63,7 @@ void main() {
     });
 
     test('Hide Gov Price If enableListPrice = false Test', () {
-      configs = fakeTWSalesOrgConfigShowGovtListPrice.copyWith(
-        enableListPrice: false,
-      );
+      configs = fakeMYSalesOrgConfigs;
       expect(
         configs.showGovtListPrice,
         false,
@@ -71,9 +71,7 @@ void main() {
     });
 
     test('Hide Gov Price If Market Is Not TW Test', () {
-      configs = fakeTWSalesOrgConfigShowGovtListPrice.copyWith(
-        salesOrg: fakeSalesOrg,
-      );
+      configs = fakeSGSalesOrgConfigs;
       expect(
         configs.showGovtListPrice,
         false,

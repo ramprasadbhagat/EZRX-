@@ -24,7 +24,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 
 class ProductImageBlocMock
@@ -132,7 +134,7 @@ void main() {
           final listPrice = MaterialPrice(100);
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeMYSalesOrgConfigListPriceEnabled,
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
             ),
           );
           when(() => materialPriceBlocMock.state).thenReturn(
@@ -177,7 +179,7 @@ void main() {
           final listPrice = MaterialPrice(100);
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeMYSalesOrgConfigListPriceDisabled,
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
             ),
           );
           when(() => materialPriceBlocMock.state).thenReturn(
@@ -222,7 +224,7 @@ void main() {
           final listPrice = MaterialPrice(100);
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeMYSalesOrgConfigListPriceEnabled,
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
             ),
           );
           when(() => materialPriceBlocMock.state).thenReturn(

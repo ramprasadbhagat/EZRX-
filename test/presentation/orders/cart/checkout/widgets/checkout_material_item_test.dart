@@ -19,7 +19,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
@@ -121,7 +122,7 @@ void main() {
           lastPrice: listPrice,
           finalPrice: finalPrice,
         ),
-        salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
+        salesOrgConfig: fakeIDSalesOrgConfigs,
         materialInfo: MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material'),
           type: MaterialInfoType('material'),
@@ -158,7 +159,7 @@ void main() {
           lastPrice: listPrice,
           finalPrice: finalPrice,
         ),
-        salesOrgConfig: fakeMYSalesOrgConfigListPriceDisabled,
+        salesOrgConfig: fakeMYSalesOrgConfigs,
         materialInfo: MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material'),
           type: MaterialInfoType('material'),
@@ -195,7 +196,7 @@ void main() {
           lastPrice: listPrice,
           finalPrice: finalPrice,
         ),
-        salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled,
+        salesOrgConfig: fakeIDSalesOrgConfigs,
         materialInfo: MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material'),
           type: MaterialInfoType('material'),

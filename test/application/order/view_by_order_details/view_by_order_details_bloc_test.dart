@@ -15,6 +15,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/product_details_repos
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -79,7 +80,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            configs: fakeEmptySalesConfigs,
+            configs: fakeMYSalesOrgConfigs,
           ),
         ),
         expect: () => [
@@ -88,7 +89,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            configs: fakeEmptySalesConfigs,
+            configs: fakeMYSalesOrgConfigs,
           ),
         ],
       );

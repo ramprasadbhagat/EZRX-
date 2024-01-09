@@ -33,7 +33,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 
 class ReturnSummaryDetailsBlocMock
@@ -311,7 +312,7 @@ void main() {
           await tester.binding.setSurfaceSize(const Size(480, 900));
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
             ),
           );
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(
@@ -503,7 +504,7 @@ void main() {
         (tester) async {
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeSalesOrgConfigAllowReturnsOutsidePolicy,
+              salesOrgConfigs: fakeTHSalesOrgConfigs,
             ),
           );
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(

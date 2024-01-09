@@ -31,6 +31,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../../utils/widget_utils.dart';
 
@@ -94,7 +95,7 @@ void main() {
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => eligibilityBlocMock.state).thenReturn(
       EligibilityState.initial().copyWith(
-        salesOrgConfigs: fakeSalesOrganisationConfigs,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
       ),
     );
@@ -458,7 +459,7 @@ void main() {
       const fakeAccountingDocument = 'fake-id';
       const fakeAmount = 10000.0;
       final priceText = StringUtils.priceComponentDisplayPrice(
-        fakeSalesOrganisationConfigs,
+        fakeMYSalesOrgConfigs,
         fakeAmount,
         true,
       );

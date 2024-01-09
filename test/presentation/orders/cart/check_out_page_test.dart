@@ -58,6 +58,13 @@ import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -144,7 +151,7 @@ void main() {
       price: Price.empty().copyWith(
         finalPrice: MaterialPrice(234.50),
       ),
-      salesOrgConfig: fakeVNSalesOrgConfigTaxBreakdownEnabled,
+      salesOrgConfig: fakeVNSalesOrgConfigs,
     ),
   ];
 
@@ -512,9 +519,8 @@ void main() {
       (tester) async {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
-                .copyWith(futureDeliveryDay: FutureDeliveryDay('7')),
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
+            salesOrganisation: fakeTHSalesOrganisation,
           ),
         );
         final expectedState = [
@@ -562,9 +568,7 @@ void main() {
           checkoutScrollListFinder,
           const Offset(0, -100),
         );
-        if (DateTime.now().hour <
-            fakeSalesOrgConfigEnableFutureDeliveryDayRequired
-                .salesOrg.cutOffTime) {
+        if (DateTime.now().hour < fakeTHSalesOrgConfigs.salesOrg.cutOffTime) {
           await tester.tap(deliveryDateFinder);
           await tester.pumpAndSettle();
           expect(find.byType(CalendarDatePicker), findsOneWidget);
@@ -576,9 +580,8 @@ void main() {
       (tester) async {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
-                .copyWith(futureDeliveryDay: FutureDeliveryDay('7')),
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
+            salesOrganisation: fakeTHSalesOrganisation,
           ),
         );
 
@@ -605,9 +608,7 @@ void main() {
           checkoutScrollListFinder,
           const Offset(0, -100),
         );
-        if (DateTime.now().hour <
-            fakeSalesOrgConfigEnableFutureDeliveryDayRequired
-                .salesOrg.cutOffTime) {
+        if (DateTime.now().hour < fakeTHSalesOrgConfigs.salesOrg.cutOffTime) {
           await tester.tap(deliveryDateFinder);
           await tester.pumpAndSettle();
           expect(find.byType(CalendarDatePicker), findsOneWidget);
@@ -782,7 +783,7 @@ void main() {
                 ],
               ),
             ],
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrganisation: fakeSalesOrganisation,
             additionInfo: {
               MaterialNumber('12345'): ProductMetaData.empty().copyWith(
                 productImages: [
@@ -795,9 +796,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
-                .copyWith(futureDeliveryDay: FutureDeliveryDay('1')),
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
+            salesOrganisation: fakeSalesOrganisation,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -850,7 +850,7 @@ void main() {
                 ],
               ),
             ],
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrganisation: fakeSalesOrganisation,
             additionInfo: {
               MaterialNumber('12345'): ProductMetaData.empty().copyWith(
                 productImages: [
@@ -863,9 +863,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
-                .copyWith(futureDeliveryDay: FutureDeliveryDay('1')),
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
+            salesOrganisation: fakeSalesOrganisation,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -944,9 +943,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
-                .copyWith(futureDeliveryDay: FutureDeliveryDay('1')),
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
+            salesOrganisation: fakeSalesOrganisation,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -1001,9 +999,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigEnableFutureDeliveryDayRequired
-                .copyWith(futureDeliveryDay: FutureDeliveryDay('1')),
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
+            salesOrganisation: fakeTHSalesOrganisation,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -1038,14 +1035,14 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrgConfigPoNumberRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            configs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigPoNumberRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
 
@@ -1083,14 +1080,14 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrgConfigEnableReferenceNoteRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            configs: fakeTHSalesOrgConfigs,
+            salesOrganisation: fakeTHSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigEnableReferenceNoteRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
+            salesOrganisation: fakeTHSalesOrganisation,
           ),
         );
 
@@ -1129,14 +1126,14 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrgConfigPaymentTermsEnabled,
-            salesOrganisation: fakeMYSalesOrganisation,
+            configs: fakeTWSalesOrgConfigs,
+            salesOrganisation: fakeTWSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigPaymentTermsEnabled,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
+            salesOrganisation: fakeTWSalesOrganisation,
           ),
         );
 
@@ -1176,14 +1173,14 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrgConfigEnableMobileNumberRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            configs: fakeVNSalesOrgConfigs,
+            salesOrganisation: fakeVNSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigEnableMobileNumberRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+            salesOrganisation: fakeVNSalesOrganisation,
           ),
         );
 
@@ -1225,13 +1222,13 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrgConfigEnableMobileNumberRequired,
+            configs: fakeVNSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigEnableMobileNumberRequired,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
@@ -1279,14 +1276,14 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrgConfigShowPOAttachmentRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            configs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigShowPOAttachmentRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
             user: fakeClientUser,
           ),
         );
@@ -1397,21 +1394,17 @@ void main() {
             ),
           ),
         );
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            isSubmitting: true,
-          ),
-        );
+
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrgConfigShowPOAttachmentRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            configs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigShowPOAttachmentRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
 
@@ -1436,7 +1429,7 @@ void main() {
         );
 
         await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final placeOrder = find.text('Place order');
         expect(placeOrder, findsOneWidget);
@@ -1462,6 +1455,15 @@ void main() {
         expect(uploadAttachmentKeyKey, findsOneWidget);
         final itemDeleteButtonKey = find.byIcon(Icons.delete_outline_outlined);
         expect(itemDeleteButtonKey, findsOneWidget);
+        final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+        expect(scrollListFinder, findsOneWidget);
+
+        await tester.dragUntilVisible(
+          itemDeleteButtonKey,
+          scrollListFinder,
+          const Offset(0.0, -200.0),
+        );
+        await tester.pumpAndSettle();
         await tester.tap(itemDeleteButtonKey);
         await tester.pump();
         verify(
@@ -1491,14 +1493,14 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrgConfigShowPOAttachmentRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            configs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigShowPOAttachmentRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
 
@@ -1536,14 +1538,14 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrgConfigShowPOAttachmentRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            configs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigShowPOAttachmentRequired,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
 
@@ -1588,7 +1590,7 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrganisationConfigs,
+            configs: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
@@ -1730,14 +1732,14 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrgConfigPaymentTermsEnabled,
-            salesOrganisation: fakeMYSalesOrganisation,
+            configs: fakeTWSalesOrgConfigs,
+            salesOrganisation: fakeTWSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigPaymentTermsEnabled,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
+            salesOrganisation: fakeTWSalesOrganisation,
           ),
         );
 
@@ -1768,7 +1770,7 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: fakeSalesOrganisationConfigs,
+            configs: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
@@ -1790,7 +1792,7 @@ void main() {
       (tester) async {
         final salesOrgState = SalesOrgState.initial().copyWith(
           salesOrganisation: fakeVNSalesOrganisation,
-          configs: fakeVNSalesOrgConfigTaxBreakdownEnabled,
+          configs: fakeVNSalesOrgConfigs,
         );
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[
@@ -1805,10 +1807,10 @@ void main() {
               price: Price.empty().copyWith(
                 finalPrice: MaterialPrice(234.50),
               ),
-              salesOrgConfig: fakeVNSalesOrgConfigTaxBreakdownEnabled,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
             ),
           ],
-          config: fakeVNSalesOrgConfigTaxBreakdownEnabled,
+          config: fakeVNSalesOrgConfigs,
         );
 
         when(() => salesOrgBlocMock.state).thenReturn(
@@ -1821,7 +1823,7 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeVNSalesOrganisation,
-            salesOrgConfigs: fakeVNSalesOrgConfigTaxBreakdownEnabled,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
           ),
         );
 
@@ -1858,11 +1860,11 @@ void main() {
     );
 
     testWidgets(
-      '=> Do not Show tax details on total when displaySubtotalTaxBreakdown is disabled for vn',
+      '=> Do not Show tax details on total when displaySubtotalTaxBreakdown is disabled for ph',
       (tester) async {
         final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: fakeVNSalesOrganisation,
-          configs: fakeVNSalesOrgConfigItemTaxBreakdownEnabled,
+          salesOrganisation: fakePHSalesOrganisation,
+          configs: fakePHSalesOrgConfigs,
         );
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[
@@ -1878,10 +1880,10 @@ void main() {
               price: Price.empty().copyWith(
                 finalPrice: MaterialPrice(234.50),
               ),
-              salesOrgConfig: fakeVNSalesOrgConfigItemTaxBreakdownEnabled,
+              salesOrgConfig: fakePHSalesOrgConfigs,
             ),
           ],
-          config: fakeVNSalesOrgConfigItemTaxBreakdownEnabled,
+          config: fakePHSalesOrgConfigs,
         );
 
         when(() => salesOrgBlocMock.state).thenReturn(
@@ -1889,8 +1891,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: fakeVNSalesOrganisation,
-            salesOrgConfigs: fakeVNSalesOrgConfigItemTaxBreakdownEnabled,
+            salesOrganisation: fakePHSalesOrganisation,
+            salesOrgConfigs: fakePHSalesOrgConfigs,
           ),
         );
         when(() => cartBloc.state).thenReturn(
@@ -1917,7 +1919,7 @@ void main() {
             .toStringAsFixed(2);
         expect(
           find.text(
-            'VND $listPriceWithTax',
+            'PHP $listPriceWithTax',
             findRichText: true,
           ),
           findsAtLeastNWidgets(1),
@@ -1932,7 +1934,7 @@ void main() {
         final cartState = CartState.initial().copyWith(
           salesOrganisation: fakeVNSalesOrganisation,
           cartProducts: <PriceAggregate>[PriceAggregate.empty()],
-          config: fakeVNSalesOrgConfigTaxBreakdownEnabled,
+          config: fakeVNSalesOrgConfigs,
         );
 
         when(() => cartBloc.state).thenReturn(
@@ -1940,7 +1942,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeVNSalesOrgConfigTaxBreakdownEnabled,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+            salesOrganisation: fakeVNSalesOrganisation,
           ),
         );
 
@@ -1969,15 +1972,12 @@ void main() {
     testWidgets(
       '=> Show tax rate on material level when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for VN',
       (tester) async {
-        const vatValue = 2;
         final cartState = CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           cartProducts: <PriceAggregate>[
             PriceAggregate.empty(),
           ],
-          config: fakeMYSalesOrgConfigTaxBreakdownEnabled.copyWith(
-            vatValue: vatValue,
-          ),
+          config: fakeVNSalesOrgConfigs,
         );
 
         when(() => cartBloc.state).thenReturn(
@@ -1985,7 +1985,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+            salesOrganisation: fakeVNSalesOrganisation,
           ),
         );
 
@@ -1999,8 +2000,7 @@ void main() {
         );
         await tester.pump();
 
-        //Fetching the vat value for other market - 2%
-        final taxRateFinder = find.text('Tax at $vatValue%:');
+        final taxRateFinder = find.text('Tax at:');
         expect(
           find.descendant(
             of: find.byKey(WidgetKeys.checkoutSummaryTax),
@@ -2016,7 +2016,7 @@ void main() {
       (tester) async {
         final salesOrgState = SalesOrgState.initial().copyWith(
           salesOrganisation: fakeVNSalesOrganisation,
-          configs: fakeEmptySalesConfigs,
+          configs: fakeMYSalesOrgConfigs,
         );
 
         when(() => salesOrgBlocMock.state).thenReturn(
@@ -2037,12 +2037,12 @@ void main() {
       (tester) async {
         final salesOrgState = SalesOrgState.initial().copyWith(
           salesOrganisation: fakeVNSalesOrganisation,
-          configs: fakeSalesOrgConfigSpecialInstructionsEnabled,
+          configs: fakeMYSalesOrgConfigs,
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeVNSalesOrganisation,
-            salesOrgConfigs: fakeSalesOrgConfigSpecialInstructionsEnabled,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
 
@@ -2064,7 +2064,7 @@ void main() {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
 
@@ -2086,7 +2086,7 @@ void main() {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
-          salesOrgConfigs: fakeMYSalesOrgConfigFutureDeliveryDayEnabled,
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
         ),
       );
 
@@ -2106,15 +2106,10 @@ void main() {
 
     testWidgets('=> Selecting a date updates the delivery date text',
         (WidgetTester tester) async {
-      const futureDeliveryDay = 7;
-
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
-          salesOrgConfigs:
-              fakeMYSalesOrgConfigFutureDeliveryDayEnabled.copyWith(
-            futureDeliveryDay: FutureDeliveryDay(futureDeliveryDay.toString()),
-          ),
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
         ),
       );
 
@@ -2130,8 +2125,7 @@ void main() {
         find.textContaining('Select date'.tr(), findRichText: true),
         findsOneWidget,
       );
-      var selectedDate =
-          fakeMYSalesOrgConfigFutureDeliveryDayEnabled.deliveryStartDate;
+      var selectedDate = fakeTHSalesOrgConfigs.deliveryStartDate;
 
       expect(
         find.text(DateTimeUtils.getDeliveryDateString(selectedDate)),
@@ -2148,8 +2142,8 @@ void main() {
       await tester.tap(find.widgetWithIcon(IconButton, Icons.edit));
       await tester.pump();
       selectedDate = DateTimeUtils.addWorkingDay(
-        fakeMYSalesOrgConfigFutureDeliveryDayEnabled.deliveryStartDate,
-        futureDeliveryDay - 1,
+        fakeTHSalesOrgConfigs.deliveryStartDate,
+        fakeTHSalesOrgConfigs.futureDeliveryDay.intValue - 1,
       ).add(const Duration(days: 1));
       await tester.enterText(
         find.byType(InputDatePickerFormField),
@@ -2161,8 +2155,8 @@ void main() {
       expect(find.text('Out of range.'), findsOneWidget);
 
       selectedDate = DateTimeUtils.addWorkingDay(
-        fakeMYSalesOrgConfigFutureDeliveryDayEnabled.deliveryStartDate,
-        futureDeliveryDay - 1,
+        fakeTHSalesOrgConfigs.deliveryStartDate,
+        fakeTHSalesOrgConfigs.futureDeliveryDay.intValue - 1,
       );
       await tester.enterText(
         find.byType(InputDatePickerFormField),
@@ -2181,8 +2175,8 @@ void main() {
     testWidgets('Find Total Tax', (WidgetTester tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: fakeMYSalesOrganisation,
-          salesOrgConfigs: fakeTHSalesOrgConfigTaxBreakdownEnabled,
+          salesOrganisation: fakeSGSalesOrganisation,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         ),
       );
 
@@ -2197,10 +2191,10 @@ void main() {
             price: Price.empty().copyWith(
               finalPrice: MaterialPrice(234.50),
             ),
-            salesOrgConfig: fakeTHSalesOrgConfigTaxBreakdownEnabled,
+            salesOrgConfig: fakeSGSalesOrgConfigs,
           ),
         ],
-        config: fakeTHSalesOrgConfigTaxBreakdownEnabled,
+        config: fakeSGSalesOrgConfigs,
       );
 
       when(() => cartBloc.state).thenReturn(cartState);
@@ -2211,8 +2205,9 @@ void main() {
       final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
       expect(scrollListFinder, findsOneWidget);
 
-      final taxValue = find.textContaining('Tax at 6%:');
-
+      final taxValue = find.textContaining(
+        'Tax at 9%:',
+      );
       await tester.dragUntilVisible(
         taxValue,
         scrollListFinder,

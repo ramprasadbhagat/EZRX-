@@ -25,6 +25,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:universal_io/io.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -55,6 +56,7 @@ void main() {
   late AppRouter appRouter;
   final eligibilityState = EligibilityState.initial().copyWith(
     salesOrganisation: fakeMYSalesOrganisation,
+    salesOrgConfigs: fakeMYSalesOrgConfigs,
   );
   late List<MaterialInfo> bonusItemsList;
   late CartState cartState;
@@ -315,7 +317,7 @@ void main() {
       verify(
         () => bonusMaterialBloc.add(
           BonusMaterialEvent.fetch(
-            configs: fakeEmptySalesConfigs,
+            configs: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: eligibilityState.customerCodeInfo,
             shipToInfo: eligibilityState.shipToInfo,
@@ -353,7 +355,7 @@ void main() {
       verify(
         () => bonusMaterialBloc.add(
           BonusMaterialEvent.loadMoreBonusItem(
-            configs: fakeEmptySalesConfigs,
+            configs: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: eligibilityState.customerCodeInfo,
             shipToInfo: eligibilityState.shipToInfo,
@@ -421,7 +423,7 @@ void main() {
       verify(
         () => bonusMaterialBloc.add(
           BonusMaterialEvent.fetch(
-            configs: fakeEmptySalesConfigs,
+            configs: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: eligibilityState.customerCodeInfo,
             shipToInfo: eligibilityState.shipToInfo,
@@ -461,7 +463,7 @@ void main() {
       verify(
         () => bonusMaterialBloc.add(
           BonusMaterialEvent.fetch(
-            configs: fakeEmptySalesConfigs,
+            configs: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: eligibilityState.customerCodeInfo,
             shipToInfo: eligibilityState.shipToInfo,

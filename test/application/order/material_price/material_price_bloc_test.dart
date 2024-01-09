@@ -16,6 +16,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class MaterialPriceRepositoryMock extends Mock
@@ -81,7 +82,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
         ),
       ),
       expect: () => [
@@ -89,7 +90,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
         )
       ],
     );
@@ -101,7 +102,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
         materialPrice: {
           for (var number in fakeMaterialQuery)
             number.materialNumber: Price.empty().copyWith(
@@ -123,7 +124,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             isFetching: true,
             materialPrice: {
               for (var number in fakeMaterialQuery)
@@ -138,7 +139,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             materialPrice: {
               for (var number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
@@ -159,7 +160,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetch(
@@ -172,14 +173,14 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: materialPrice,
         ),
@@ -187,7 +188,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: materialPrice,
         ),
       ],
@@ -200,7 +201,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
         when(
@@ -208,7 +209,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             materialNumberList: fakeMaterialNumberQuery,
             comboDealEligible: false,
           ),
@@ -227,14 +228,14 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: mockPriceMap,
         ),
       ],
@@ -247,7 +248,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
         when(
@@ -255,7 +256,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             materialNumberList: fakeMaterialNumberQuery,
             comboDealEligible: false,
           ),
@@ -274,14 +275,14 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
         ),
       ],
     );
@@ -295,7 +296,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
         materialPrice: {
           for (var number in fakeMaterialQuery)
             number.materialNumber: Price.empty().copyWith(
@@ -317,7 +318,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             isFetching: true,
             materialPrice: {
               for (var number in fakeMaterialQuery)
@@ -332,7 +333,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             materialPrice: {
               for (var number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
@@ -376,7 +377,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
         when(
@@ -384,7 +385,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             materialNumberList: fakeMaterialNumberQuery,
             comboDealEligible: false,
           ),
@@ -403,14 +404,14 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: mockPriceMap,
         ),
       ],
@@ -423,7 +424,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
         when(
@@ -431,7 +432,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             materialNumberList: fakeMaterialNumberQuery,
             comboDealEligible: false,
           ),
@@ -450,7 +451,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
       ],
@@ -464,7 +465,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
         when(
@@ -472,7 +473,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             materialNumber: fakeMaterialNumberQuery.first,
             exceedQty: false,
           ),
@@ -491,7 +492,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: mockPriceMap,
         ),
@@ -499,7 +500,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: mockPriceMap,
         ),
       ],
@@ -513,7 +514,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
         when(
@@ -521,7 +522,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             materialNumber: fakeMaterialNumberQuery.first,
             exceedQty: true,
           ),
@@ -540,7 +541,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: mockPriceMap,
         ),
@@ -548,7 +549,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: mockPriceMap,
         ),
       ],
@@ -562,7 +563,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
         when(
@@ -570,7 +571,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
-            salesConfigs: fakeEmptySalesConfigs,
+            salesConfigs: fakeMYSalesOrgConfigs,
             materialNumber: fakeMaterialNumberQuery.first,
             exceedQty: true,
           ),
@@ -589,7 +590,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: mockPriceMap,
         ),
@@ -597,7 +598,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: mockPriceMap,
         ),
       ],
@@ -610,7 +611,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetch(
@@ -623,14 +624,14 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: {
             fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
@@ -643,7 +644,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: {
             fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
               materialNumber: fakeMaterialQuery.first.materialNumber,
@@ -660,7 +661,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         salesOrganisation: fakeSalesOrganisation,
-        salesConfigs: fakeEmptySalesConfigs,
+        salesConfigs: fakeMYSalesOrgConfigs,
       ),
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetchPriceCartProduct(
@@ -673,14 +674,14 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: {
             fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
@@ -693,7 +694,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrganisation,
-          salesConfigs: fakeEmptySalesConfigs,
+          salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: {
             fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
               materialNumber: fakeMaterialQuery.first.materialNumber,

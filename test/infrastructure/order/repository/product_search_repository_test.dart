@@ -16,6 +16,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -113,7 +114,7 @@ void main() async {
 
         final result = await repository.getScanProduct(
           salesOrganization: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
@@ -131,7 +132,7 @@ void main() async {
 
         final result = await repository.getScanProduct(
           salesOrganization: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
@@ -148,7 +149,7 @@ void main() async {
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             eanNumber: fakeEanNumber,
-            gimmickMaterial: fakeSalesOrganisationConfigs.enableGimmickMaterial,
+            gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
             language: fakeClientUser.settings.languagePreference.languageCode,
             offset: 0,
             pageSize: 24,
@@ -161,7 +162,7 @@ void main() async {
 
         final result = await repository.getScanProduct(
           salesOrganization: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
@@ -178,7 +179,7 @@ void main() async {
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             eanNumber: fakeEanNumber,
-            gimmickMaterial: fakeSalesOrganisationConfigs.enableGimmickMaterial,
+            gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
             language: fakeClientUser.settings.languagePreference.languageCode,
             offset: 0,
             pageSize: 24,
@@ -191,7 +192,7 @@ void main() async {
 
         final result = await repository.getScanProduct(
           salesOrganization: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
@@ -211,7 +212,7 @@ void main() async {
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             eanNumber: fakeEanNumber,
-            gimmickMaterial: fakeSalesOrganisationConfigs.enableGimmickMaterial,
+            gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
             language: fakeClientUser.settings.languagePreference.languageCode,
             offset: 0,
             pageSize: 24,
@@ -224,7 +225,7 @@ void main() async {
 
         final result = await repository.getScanProduct(
           salesOrganization: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
@@ -244,7 +245,7 @@ void main() async {
 
         final result = await repository.searchProductList(
           salesOrganization: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           searchKey: fakeSearchKey,
@@ -262,7 +263,7 @@ void main() async {
             .thenAnswer((_) async => fakeMaterialResponse);
         final result = await repository.searchProductList(
           salesOrganization: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           searchKey: fakeSearchKey,
@@ -288,8 +289,8 @@ void main() async {
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             eanNumber: '',
-            gimmickMaterial: fakeSalesOrganisationConfigs.enableGimmickMaterial,
-            language: fakeSalesOrganisationConfigs.getConfigLanguage,
+            gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
+            language: fakeMYSalesOrgConfigs.getConfigLanguage,
             offset: fakeOffset,
             pageSize: fakePageSize,
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
@@ -301,7 +302,7 @@ void main() async {
 
         final result = await repository.searchProductList(
           salesOrganization: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           searchKey: fakeSearchKey,
@@ -334,8 +335,8 @@ void main() async {
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             eanNumber: '',
-            gimmickMaterial: fakeSalesOrganisationConfigs.enableGimmickMaterial,
-            language: fakeSalesOrganisationConfigs.getConfigLanguage,
+            gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
+            language: fakeMYSalesOrgConfigs.getConfigLanguage,
             offset: fakeOffset,
             pageSize: fakePageSize,
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
@@ -347,7 +348,7 @@ void main() async {
 
         final result = await repository.searchProductList(
           salesOrganization: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           searchKey: fakeSearchKey,
@@ -380,8 +381,8 @@ void main() async {
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             eanNumber: '',
-            gimmickMaterial: fakeSalesOrganisationConfigs.enableGimmickMaterial,
-            language: fakeSalesOrganisationConfigs.getConfigLanguage,
+            gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
+            language: fakeMYSalesOrgConfigs.getConfigLanguage,
             offset: fakeOffset,
             pageSize: fakePageSize,
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
@@ -393,7 +394,7 @@ void main() async {
 
         final result = await repository.searchProductList(
           salesOrganization: fakeSalesOrganisation,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           searchKey: fakeSearchKey,

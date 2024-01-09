@@ -46,6 +46,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -958,7 +963,7 @@ void main() {
           EligibilityState.initial().copyWith(
             user: user,
             salesOrganisation: fakeMYSalesOrganisation,
-            salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
 
@@ -990,8 +995,8 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: user,
-            salesOrganisation: fakeMYSalesOrganisation,
-            salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPriceAndCombo,
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
             customerCodeInfo: CustomerCodeInfo.empty()
                 .copyWith(salesDeals: [SalesDealNumber('0000000000')]),
           ),
@@ -1066,7 +1071,7 @@ void main() {
           EligibilityState.initial().copyWith(
             user: user,
             salesOrganisation: fakeMYSalesOrganisation,
-            salesOrgConfigs: salesOrgConfigEnabledExpiryDisplay,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -1110,8 +1115,8 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: user,
-            salesOrganisation: fakeMYSalesOrganisation,
-            salesOrgConfigs: salesOrgConfigDisabledExpiryDisplay,
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakePHSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -1179,8 +1184,8 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: user,
-            salesOrganisation: fakeMYSalesOrganisation,
-            salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -1227,7 +1232,7 @@ void main() {
           EligibilityState.initial().copyWith(
             user: user,
             salesOrganisation: fakeMYSalesOrganisation,
-            salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -1257,7 +1262,7 @@ void main() {
           EligibilityState.initial().copyWith(
             user: user,
             salesOrganisation: fakeVNSalesOrganisation,
-            salesOrgConfigs: salesOrgConfigEnabledZDP5,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -1287,7 +1292,7 @@ void main() {
             user: user,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeVNSalesOrganisation,
-            salesOrgConfigs: salesOrgConfigEnabledZDP5,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
           ),
         );
 
@@ -1379,7 +1384,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakePHSalesOrganisation,
-            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            salesOrgConfigs: fakePHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfoForCovid,
             user: fakeRootAdminUser,
           ),
@@ -1447,7 +1452,7 @@ void main() {
         final listPrice = MaterialPrice(100);
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigListPriceEnabled,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
           ),
         );
         when(() => productDetailMockBloc.state).thenReturn(
@@ -1497,7 +1502,7 @@ void main() {
         final listPrice = MaterialPrice(100);
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigListPriceDisabled,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         when(() => productDetailMockBloc.state).thenReturn(
@@ -1547,7 +1552,7 @@ void main() {
         final listPrice = MaterialPrice(80);
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigListPriceEnabled,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
           ),
         );
         when(() => productDetailMockBloc.state).thenReturn(

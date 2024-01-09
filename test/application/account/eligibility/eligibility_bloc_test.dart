@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -18,8 +17,10 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/repository/mixpanel_repository.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -298,7 +299,7 @@ void main() {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        salesOrgConfigs: fakeSGSalesOrgConfigs,
+        salesOrgConfigs: fakeIDSalesOrgConfigs,
         customerCodeInfo: fakeCustomerInfo,
         shipToInfo: fakeShipToInfo,
       );
@@ -350,39 +351,35 @@ void main() {
   );
 
   test(
-    'eligibility state displayOrderDiscount should return true',
+    'eligibility state displayOrderDiscount should return false',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
-          displayOrderDiscount: true,
-        ),
+        salesOrgConfigs: fakeSGSalesOrgConfigs,
         customerCodeInfo: fakeCustomerInfo,
         shipToInfo: fakeShipToInfo,
       );
 
       final displayOrderDiscount =
           eligibilityState.salesOrgConfigs.displayOrderDiscount;
-      expect(displayOrderDiscount, true);
+      expect(displayOrderDiscount, false);
     },
   );
 
   test(
-    'eligibility state enableRemarks return true',
+    'eligibility state enableRemarks return false',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
-          enableRemarks: true,
-        ),
+        salesOrgConfigs: fakeSGSalesOrgConfigs,
         customerCodeInfo: fakeCustomerInfo,
         shipToInfo: fakeShipToInfo,
       );
 
       final enableRemarks = eligibilityState.salesOrgConfigs.enableRemarks;
-      expect(enableRemarks, true);
+      expect(enableRemarks, false);
     },
   );
 
@@ -548,9 +545,7 @@ void main() {
           final eligibilityState = EligibilityState.initial().copyWith(
             user: fakeUser,
             salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: fakeKHSalesOrgConfigs.copyWith(
-              comboDealsUserRole: ComboDealUserRole(2),
-            ),
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
             customerCodeInfo: fakeCustomerInfo.copyWith(
               salesDeals: [SalesDealNumber('0000000000')],
             ),
@@ -567,9 +562,7 @@ void main() {
           final eligibilityState = EligibilityState.initial().copyWith(
             user: fakeUser,
             salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: fakeKHSalesOrgConfigs.copyWith(
-              comboDealsUserRole: ComboDealUserRole(3),
-            ),
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               comboEligible: true,
             ),
@@ -682,12 +675,10 @@ void main() {
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
-          salesOrgConfigs:
-              fakeSGSalesOrgConfigs
-              .copyWith(disableReturnsAccessSR: true),
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         );
 
-        expect(eligibilityState.isReturnsEnable, false);
+        expect(eligibilityState.isReturnsEnable, true);
       },
     );
 
@@ -707,95 +698,71 @@ void main() {
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
           user: fakeClientUser,
-          salesOrgConfigs:
-              fakeSGSalesOrgConfigs
-              .copyWith(disableReturnsAccess: true),
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         );
 
-        expect(eligibilityState.isReturnsEnable, false);
+        expect(eligibilityState.isReturnsEnable, true);
       },
     );
   });
 
-  group('showGreenDeliveryBox', () {
-    test(
-      'showGreenDeliveryBox salesOrgConfigs disable',
-      () {
-        final eligibilityState = EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
-            enableGreenDelivery: false,
-          ),
-        );
+  // Feature not available anymore
+  //
+  // group('showGreenDeliveryBox', () {
+  //   test(
+  //     'showGreenDeliveryBox salesOrgConfigs disable',
+  //     () {
+  //       final eligibilityState = EligibilityState.initial().copyWith(
+  //         salesOrgConfigs: fakeSGSalesOrgConfigs,
+  //       );
 
-        expect(eligibilityState.showGreenDeliveryBox, false);
-      },
-    );
+  //       expect(eligibilityState.showGreenDeliveryBox, false);
+  //     },
+  //   );
 
-    test(
-      'salesOrgConfigs gdEligibleRole all user',
-      () {
-        final eligibilityState = EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
-            enableGreenDelivery: true,
-            greenDeliveryUserRole: GreenDeliveryUserRole(1),
-          ),
-        );
+  //   test(
+  //     'salesOrgConfigs gdEligibleRole all user',
+  //     () {
+  //       final eligibilityState = EligibilityState.initial().copyWith(
+  //         salesOrgConfigs: fakeSGSalesOrgConfigs,
+  //       );
 
-        expect(eligibilityState.showGreenDeliveryBox, true);
-      },
-    );
+  //       expect(eligibilityState.showGreenDeliveryBox, true);
+  //     },
+  //   );
 
-    test(
-      'salesOrgConfigs gdEligibleRole customer',
-      () {
-        final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeClientUser,
-          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
-            enableGreenDelivery: true,
-            greenDeliveryUserRole: GreenDeliveryUserRole(2),
-          ),
-        );
+  //   test(
+  //     'salesOrgConfigs gdEligibleRole customer',
+  //     () {
+  //       final eligibilityState = EligibilityState.initial().copyWith(
+  //         user: fakeClientUser,
+  //         salesOrgConfigs: fakeSGSalesOrgConfigs,
+  //       );
 
-        expect(eligibilityState.showGreenDeliveryBox, true);
-      },
-    );
+  //       expect(eligibilityState.showGreenDeliveryBox, true);
+  //     },
+  //   );
 
-    test(
-      'salesOrgConfigs gdEligibleRole sales rep',
-      () {
-        final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeExternalSalesRepUser,
-          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
-            enableGreenDelivery: true,
-            greenDeliveryUserRole: GreenDeliveryUserRole(3),
-          ),
-        );
+  //   test(
+  //     'salesOrgConfigs gdEligibleRole sales rep',
+  //     () {
+  //       final eligibilityState = EligibilityState.initial().copyWith(
+  //         user: fakeExternalSalesRepUser,
+  //         salesOrgConfigs: fakeSGSalesOrgConfigs,
+  //       );
 
-        expect(eligibilityState.showGreenDeliveryBox, true);
-      },
-    );
+  //       expect(eligibilityState.showGreenDeliveryBox, true);
+  //     },
+  //   );
+  // });
 
+  group('isOutOfStockMaterialAllowed', () {
     test(
       'salesOrgConfigs isOutOfStockMaterialAllowed for all',
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
-          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
-            oosValue: OosValue(0),
-          ),
-        );
-
-        expect(eligibilityState.isOutOfStockMaterialAllowed, true);
-      },
-    );
-    test(
-      'salesOrgConfigs isOutOfStockMaterialAllowed for all',
-      () {
-        final eligibilityState = EligibilityState.initial().copyWith(
-          user: fakeExternalSalesRepUser,
-          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
-            oosValue: OosValue(0),
-          ),
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         );
 
         expect(eligibilityState.isOutOfStockMaterialAllowed, true);
@@ -819,9 +786,7 @@ void main() {
       () {
         final eligibilityState = EligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
-          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
-            addOosMaterials: OosMaterial(false),
-          ),
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
         );
 
         expect(eligibilityState.isOutOfStockMaterialAllowed, false);

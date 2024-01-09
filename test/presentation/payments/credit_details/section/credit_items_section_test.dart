@@ -24,7 +24,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../utils/widget_utils.dart';
 import '../../../account/account_tab_test.dart';
 
@@ -137,7 +137,7 @@ void main() {
   testWidgets('credit items section ...', (tester) async {
     when(() => eligibilityBlocMock.state).thenReturn(
       EligibilityState.initial().copyWith(
-        salesOrgConfigs: fakeMYSalesOrgConfigCurrency,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
       ),
     );
 
@@ -196,6 +196,6 @@ void main() {
 }
 
 String _priceValue(double value) => StringUtils.displayPrice(
-      fakeMYSalesOrgConfigCurrency,
+      fakeMYSalesOrgConfigs,
       value,
     );

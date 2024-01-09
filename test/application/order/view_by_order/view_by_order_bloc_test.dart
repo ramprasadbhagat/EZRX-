@@ -13,6 +13,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -50,7 +51,7 @@ void main() {
           when(
             () => viewByOrderRepository.getViewByOrders(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrgConfig: fakeEmptySalesConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               soldTo: fakeCustomerCodeInfo,
               user: fakeClient,
               pageSize: config.pageSize,
@@ -71,7 +72,7 @@ void main() {
         act: (bloc) => bloc.add(
           ViewByOrderEvent.initialized(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
             sortDirection: fakeSort,
@@ -81,7 +82,7 @@ void main() {
         expect: () => [
           ViewByOrderState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
             sortDirection: fakeSort,
@@ -89,7 +90,7 @@ void main() {
           ),
           ViewByOrderState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
             sortDirection: fakeSort,
@@ -100,7 +101,7 @@ void main() {
           ),
           ViewByOrderState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
             sortDirection: fakeSort,
@@ -124,7 +125,7 @@ void main() {
           config: config,
         ),
         seed: () => ViewByOrderState.initial().copyWith(
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClient,
           sortDirection: fakeSort,
@@ -135,7 +136,7 @@ void main() {
           when(
             () => viewByOrderRepository.getViewByOrders(
               orderBy: fakeOrderBy,
-              salesOrgConfig: fakeEmptySalesConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               soldTo: fakeCustomerCodeInfo,
               user: fakeClient,
               pageSize: config.pageSize,
@@ -161,7 +162,7 @@ void main() {
         ),
         expect: () => [
           ViewByOrderState.initial().copyWith(
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
             sortDirection: fakeSort,
@@ -172,7 +173,7 @@ void main() {
             shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderState.initial().copyWith(
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
             sortDirection: fakeSort,
@@ -198,7 +199,7 @@ void main() {
         ),
         seed: () => ViewByOrderState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClient,
           sortDirection: fakeSort,
@@ -210,7 +211,7 @@ void main() {
         setUp: () {
           when(
             () => viewByOrderRepository.getViewByOrders(
-              salesOrgConfig: fakeEmptySalesConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               soldTo: fakeCustomerCodeInfo,
               user: fakeClient,
               pageSize: config.pageSize,
@@ -235,7 +236,7 @@ void main() {
         expect: () => [
           ViewByOrderState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
             sortDirection: fakeSort,
@@ -247,7 +248,7 @@ void main() {
           ),
           ViewByOrderState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
@@ -272,7 +273,7 @@ void main() {
         ),
         seed: () => ViewByOrderState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClient,
           sortDirection: fakeSort,
@@ -284,7 +285,7 @@ void main() {
         setUp: () {
           when(
             () => viewByOrderRepository.getViewByOrders(
-              salesOrgConfig: fakeEmptySalesConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               soldTo: fakeCustomerCodeInfo,
               user: fakeClient,
               pageSize: config.pageSize,
@@ -307,7 +308,7 @@ void main() {
         expect: () => [
           ViewByOrderState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
@@ -319,7 +320,7 @@ void main() {
           ),
           ViewByOrderState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,

@@ -12,6 +12,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -58,7 +59,7 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await viewByOrderRepository.getViewByOrders(
-        salesOrgConfig: fakeSalesOrganisationConfigs,
+        salesOrgConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         soldTo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -84,7 +85,7 @@ void main() {
       );
 
       final result = await viewByOrderRepository.getViewByOrders(
-        salesOrgConfig: fakeSalesOrganisationConfigs,
+        salesOrgConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         soldTo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -121,7 +122,7 @@ void main() {
       ).thenThrow((invocation) async => MockException());
 
       final result = await viewByOrderRepository.getViewByOrders(
-        salesOrgConfig: fakeSalesOrganisationConfigs,
+        salesOrgConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         soldTo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -160,7 +161,7 @@ void main() {
       );
 
       final result = await viewByOrderRepository.getViewByOrders(
-        salesOrgConfig: fakeSalesOrganisationConfigs,
+        salesOrgConfig: fakeMYSalesOrgConfigs,
         salesOrganisation: fakeSalesOrganisation,
         soldTo: fakeCustomerCodeInfo,
         user: fakeClientUser,

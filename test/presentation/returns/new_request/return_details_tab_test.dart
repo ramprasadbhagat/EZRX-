@@ -36,6 +36,9 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -306,7 +309,7 @@ void main() {
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrgConfigAllowReturnsOutsidePolicy,
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
           ),
         );
         when(() => newRequestBlocMock.state).thenReturn(
@@ -568,9 +571,7 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(480, 900));
       when(() => usageCodeBlocMock.state).thenReturn(
         UsageCodeState.initial().copyWith(
-          usages: [
-            returnReasonUsage
-          ],
+          usages: [returnReasonUsage],
         ),
       );
       when(() => newRequestBlocMock.state).thenReturn(
@@ -772,7 +773,7 @@ void main() {
     testWidgets(' => Material info section check', (WidgetTester tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: salesOrganisationPHConfigsWithEnablePrincipalList,
+          salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
       whenListen(
@@ -930,7 +931,7 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(480, 900));
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           user: fakeClientUser,
         ),
       );
@@ -1018,7 +1019,7 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(480, 900));
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           user: fakeClientUser,
         ),
       );

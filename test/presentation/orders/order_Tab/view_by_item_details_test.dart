@@ -57,6 +57,12 @@ import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/se
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_attachment_section.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -320,7 +326,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeTWSalesOrgConfigGMCEnabled,
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -345,7 +351,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -528,7 +534,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfigDisabledBatchNumDisplay,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -563,7 +569,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfigEnabledBatchNumDisplay,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -644,7 +650,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: fakeClientUser,
-            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
@@ -787,16 +793,42 @@ void main() {
       });
     });
 
-    testWidgets('Header section test ', (tester) async {
+    testWidgets('Header section test for VN', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
-            enableFutureDeliveryDay: true,
-            enableMobileNumber: true,
-            showPOAttachment: true,
-          ),
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
+          user: fakeRootAdminUser,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final orderNumberSectionFinder = find.byType(OrderNumberSection);
+      expect(orderNumberSectionFinder, findsOneWidget);
+      final viewByItemsOrderDetailOrderDate =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailOrderDate);
+      expect(viewByItemsOrderDetailOrderDate, findsOneWidget);
+      final invoiceSectionFinder = find.byType(InvoiceNumberSection);
+      expect(invoiceSectionFinder, findsOneWidget);
+      final viewByItemsOrderDetailPoReference =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailPoReference);
+      expect(viewByItemsOrderDetailPoReference, findsOneWidget);
+      final viewByItemsOrderDetailsContactPerson =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailsContactPerson);
+      expect(viewByItemsOrderDetailsContactPerson, findsOneWidget);
+      final viewByItemsOrderDetailsContactNumber =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailsContactNumber);
+      expect(viewByItemsOrderDetailsContactNumber, findsOneWidget);
+    });
+
+    testWidgets('Header section test For TH', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
           user: fakeRootAdminUser,
         ),
       );
@@ -816,12 +848,6 @@ void main() {
       final viewByItemsOrderDetailsRequestedDeliveryDate =
           find.byKey(WidgetKeys.viewByItemsOrderDetailsRequestedDeliveryDate);
       expect(viewByItemsOrderDetailsRequestedDeliveryDate, findsOneWidget);
-      final viewByItemsOrderDetailsContactPerson =
-          find.byKey(WidgetKeys.viewByItemsOrderDetailsContactPerson);
-      expect(viewByItemsOrderDetailsContactPerson, findsOneWidget);
-      final viewByItemsOrderDetailsContactNumber =
-          find.byKey(WidgetKeys.viewByItemsOrderDetailsContactNumber);
-      expect(viewByItemsOrderDetailsContactNumber, findsOneWidget);
       final viewByItemAttachmentSection =
           find.byType(ViewByItemAttachmentSection);
       expect(viewByItemAttachmentSection, findsOneWidget);
@@ -978,7 +1004,7 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           user: fakeRootAdminUser,
           shipToInfo: fakeShipToInfo,
         ),
@@ -1015,7 +1041,7 @@ void main() {
           ViewByOrderEvent.initialized(
             salesOrganisation: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
             sortDirection: 'desc',
             shipToInfo: fakeShipToInfo,
@@ -1054,9 +1080,7 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
-            showPOAttachment: true,
-          ),
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
 
@@ -1082,9 +1106,7 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
-            showPOAttachment: true,
-          ),
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
 
@@ -1131,9 +1153,7 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
-            showPOAttachment: true,
-          ),
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
 
@@ -1180,9 +1200,7 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
-            showPOAttachment: true,
-          ),
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
 
@@ -1228,9 +1246,7 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
-            showPOAttachment: true,
-          ),
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
 
@@ -1478,7 +1494,7 @@ void main() {
       );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeMYSalesOrgConfigListPriceEnabled,
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -1519,7 +1535,7 @@ void main() {
       );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeMYSalesOrgConfigListPriceDisabled,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(

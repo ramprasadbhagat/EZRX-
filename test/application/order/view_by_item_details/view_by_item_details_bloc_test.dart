@@ -19,8 +19,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/
 
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
-import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class OrderStatusTrackerRepositoryMock extends Mock
     implements OrderStatusTrackerRepository {}
@@ -83,7 +83,7 @@ void main() {
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.initialized(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeRootAdminUser,
           ),
@@ -91,7 +91,7 @@ void main() {
         expect: () => [
           ViewByItemDetailsState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeRootAdminUser,
           )
@@ -106,7 +106,7 @@ void main() {
         ),
         seed: () => ViewByItemDetailsState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
           user: fakeRootAdminUser,
         ),
@@ -127,14 +127,14 @@ void main() {
         expect: () => [
           ViewByItemDetailsState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeRootAdminUser,
             isLoading: true,
           ),
           ViewByItemDetailsState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeRootAdminUser,
             failureOrSuccessOption: optionOf(
@@ -152,7 +152,7 @@ void main() {
         ),
         seed: () => ViewByItemDetailsState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
           user: fakeRootAdminUser,
         ),
@@ -162,7 +162,7 @@ void main() {
         expect: () => [
           ViewByItemDetailsState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeRootAdminUser,
             isExpanded: true,
@@ -178,7 +178,7 @@ void main() {
         ),
         seed: () => ViewByItemDetailsState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
           user: fakeRootAdminUser,
         ),
@@ -193,7 +193,7 @@ void main() {
           when(
             () => (viewByItemRepositoryMock.getViewByItemDetails(
               soldTo: fakeCustomerCodeInfo,
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
               searchKey: SearchKey(
@@ -225,7 +225,7 @@ void main() {
           return [
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: newViewByItemDetails,
@@ -233,7 +233,7 @@ void main() {
             ),
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: newViewByItemDetails,
@@ -242,7 +242,7 @@ void main() {
             ),
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: newViewByItemDetails,
@@ -251,7 +251,7 @@ void main() {
             ),
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: newViewByItemDetails,
@@ -261,7 +261,7 @@ void main() {
             ),
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistoryStatuses: fakeOrderStatusTracker,
@@ -279,7 +279,7 @@ void main() {
         ),
         seed: () => ViewByItemDetailsState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfig: fakeSalesOrganisationConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
           user: fakeRootAdminUser,
           orderHistory: orderHistory.copyWith(
@@ -297,7 +297,7 @@ void main() {
           when(
             () => (viewByItemRepositoryMock.getViewByItemDetails(
               soldTo: fakeCustomerCodeInfo,
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
               searchKey: SearchKey(
@@ -329,7 +329,7 @@ void main() {
           return [
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: newViewByItemDetails,
@@ -338,7 +338,7 @@ void main() {
             ),
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrgConfig: fakeSalesOrganisationConfigs,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: newViewByItemDetails,
@@ -465,8 +465,7 @@ void main() {
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
         ),
-        setUp: () {
-        },
+        setUp: () {},
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.searchOrderHistory(
             searchKey: SearchKey(''),

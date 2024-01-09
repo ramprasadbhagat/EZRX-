@@ -40,6 +40,7 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -342,7 +343,7 @@ void main() {
       );
       when(() => salesOrgBlocMock.state).thenReturn(
         SalesOrgState.initial().copyWith(
-          configs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
+          configs: fakeVNSalesOrgConfigs,
         ),
       );
       when(
@@ -354,7 +355,7 @@ void main() {
       expect(createAdviceSummary, findsOneWidget);
       expect(priceText, findsAtLeastNWidgets(2));
       final payableAmount = find.text(
-        'Amount payable (MYR)',
+        'Amount payable (VND)',
       );
       expect(payableAmount, findsOneWidget);
       final invoiceAmount = find.text(
@@ -362,7 +363,7 @@ void main() {
       );
       expect(invoiceAmount, findsOneWidget);
       final creditApplied = find.text(
-        'Credit applied (MYR)',
+        'Credit applied (VND)',
       );
       expect(creditApplied, findsOneWidget);
       final totalText = find.text(
@@ -371,7 +372,7 @@ void main() {
       );
       expect(totalText, findsOneWidget);
       final totalAmount = find.text(
-        'MYR 999.00',
+        'VND 999.00',
         findRichText: true,
       );
       expect(totalAmount, findsOneWidget);
@@ -396,7 +397,7 @@ void main() {
       );
       when(() => salesOrgBlocMock.state).thenReturn(
         SalesOrgState.initial().copyWith(
-          configs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
+          configs: fakeVNSalesOrgConfigs,
         ),
       );
       when(

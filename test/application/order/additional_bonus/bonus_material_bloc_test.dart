@@ -15,6 +15,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -65,7 +66,7 @@ void main() {
             offset: 0,
             pageSize: config.pageSize,
             principalData: fakePrincipalData,
-            salesOrgConfig: fakeEmptySalesConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
             searchKey: SearchKey(''),
           ),
@@ -75,7 +76,7 @@ void main() {
       },
       act: (BonusMaterialBloc bloc) => bloc.add(
         BonusMaterialEvent.fetch(
-          configs: fakeEmptySalesConfigs,
+          configs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           isGimmickMaterialEnabled: false,
           principalData: fakePrincipalData,
@@ -112,7 +113,7 @@ void main() {
             offset: 0,
             pageSize: config.pageSize,
             principalData: fakePrincipalData,
-            salesOrgConfig: fakeEmptySalesConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
             searchKey: SearchKey(''),
           ),
@@ -122,7 +123,7 @@ void main() {
       },
       act: (BonusMaterialBloc bloc) => bloc.add(
         BonusMaterialEvent.fetch(
-          configs: fakeEmptySalesConfigs,
+          configs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           isGimmickMaterialEnabled: false,
           principalData: fakePrincipalData,
@@ -163,7 +164,7 @@ void main() {
             offset: fakeMaterialListData.products.length,
             pageSize: config.pageSize,
             principalData: fakePrincipalData,
-            salesOrgConfig: fakeEmptySalesConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
             searchKey: SearchKey(''),
           ),
@@ -173,7 +174,7 @@ void main() {
       },
       act: (BonusMaterialBloc bloc) => bloc.add(
         BonusMaterialEvent.loadMoreBonusItem(
-          configs: fakeEmptySalesConfigs,
+          configs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           isGimmickMaterialEnabled: false,
           principalData: fakePrincipalData,
@@ -219,7 +220,7 @@ void main() {
             offset: fakeMaterialListData.products.length,
             pageSize: config.pageSize,
             principalData: fakePrincipalData,
-            salesOrgConfig: fakeEmptySalesConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
             searchKey: SearchKey(''),
           ),
@@ -229,7 +230,7 @@ void main() {
       },
       act: (BonusMaterialBloc bloc) => bloc.add(
         BonusMaterialEvent.loadMoreBonusItem(
-          configs: fakeEmptySalesConfigs,
+          configs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           isGimmickMaterialEnabled: false,
           principalData: fakePrincipalData,

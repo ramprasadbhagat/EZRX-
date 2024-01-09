@@ -16,6 +16,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -76,7 +77,7 @@ void main() {
       setUp: () {
         when(
           () => viewByItemRepositoryMock.getViewByItems(
-            salesOrgConfig: fakeEmptySalesConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             soldTo: fakeCustomerCodeInfo,
             shipTo: fakeShipToInfo,
             user: fakeClient,
@@ -103,7 +104,7 @@ void main() {
       },
       act: (ViewByItemsBloc bloc) => bloc.add(
         ViewByItemsEvent.initialized(
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClient,
           shipToInfo: fakeShipToInfo,
@@ -112,14 +113,14 @@ void main() {
       ),
       expect: () => [
         ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
           salesOrganisation: fakeSalesOrganisation,
         ),
         ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -138,7 +139,7 @@ void main() {
               orderHistoryMock.orderHistoryItems.length >= config.pageSize,
           nextPageIndex: 1,
           appliedFilter: viewByItemFilter,
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -151,7 +152,7 @@ void main() {
               orderHistoryMock.orderHistoryItems.length >= config.pageSize,
           nextPageIndex: 1,
           appliedFilter: viewByItemFilter,
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -165,7 +166,7 @@ void main() {
               orderHistoryMock.orderHistoryItems.length >= config.pageSize,
           nextPageIndex: 1,
           appliedFilter: viewByItemFilter,
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -181,7 +182,7 @@ void main() {
         config: config,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
-        salesOrgConfigs: fakeEmptySalesConfigs,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: fakeClient,
@@ -190,7 +191,7 @@ void main() {
       setUp: () {
         when(
           () => viewByItemRepositoryMock.getViewByItems(
-            salesOrgConfig: fakeEmptySalesConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             soldTo: fakeCustomerCodeInfo,
             shipTo: fakeShipToInfo,
             user: fakeClient,
@@ -214,7 +215,7 @@ void main() {
       ),
       expect: () => [
         ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -229,7 +230,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -255,7 +256,7 @@ void main() {
             orderHistoryMock.orderHistoryItems.length >= config.pageSize,
         nextPageIndex: 1,
         appliedFilter: viewByItemFilter,
-        salesOrgConfigs: fakeEmptySalesConfigs,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: fakeClient,
@@ -285,7 +286,7 @@ void main() {
               orderHistoryMock.orderHistoryItems.length >= config.pageSize,
           nextPageIndex: 1,
           appliedFilter: viewByItemFilter,
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -302,7 +303,7 @@ void main() {
               orderHistoryMock.orderHistoryItems.length >= config.pageSize,
           nextPageIndex: 1,
           appliedFilter: viewByItemFilter,
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -324,7 +325,7 @@ void main() {
         canLoadMore: true,
         nextPageIndex: 1,
         appliedFilter: viewByItemFilter,
-        salesOrgConfigs: fakeEmptySalesConfigs,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: fakeClient,
@@ -333,7 +334,7 @@ void main() {
       setUp: () {
         when(
           () => viewByItemRepositoryMock.getViewByItems(
-            salesOrgConfig: fakeEmptySalesConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             soldTo: fakeCustomerCodeInfo,
             shipTo: fakeShipToInfo,
             user: fakeClient,
@@ -387,7 +388,7 @@ void main() {
             canLoadMore: true,
             nextPageIndex: 1,
             appliedFilter: viewByItemFilter,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
@@ -405,7 +406,7 @@ void main() {
             canLoadMore: orderHistoryItemsListMock.length >= config.pageSize,
             nextPageIndex: 2,
             appliedFilter: viewByItemFilter,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
@@ -419,7 +420,7 @@ void main() {
             canLoadMore: orderHistoryItemsListMock.length >= config.pageSize,
             nextPageIndex: 2,
             appliedFilter: viewByItemFilter,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
@@ -432,7 +433,7 @@ void main() {
             canLoadMore: orderHistoryItemsListMock.length >= config.pageSize,
             nextPageIndex: 2,
             appliedFilter: viewByItemFilter,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
@@ -455,7 +456,7 @@ void main() {
         canLoadMore: true,
         nextPageIndex: 1,
         appliedFilter: viewByItemFilter,
-        salesOrgConfigs: fakeEmptySalesConfigs,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: fakeClient,
@@ -464,7 +465,7 @@ void main() {
       setUp: () {
         when(
           () => viewByItemRepositoryMock.getViewByItems(
-            salesOrgConfig: fakeEmptySalesConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             soldTo: fakeCustomerCodeInfo,
             shipTo: fakeShipToInfo,
             user: fakeClient,
@@ -495,7 +496,7 @@ void main() {
           canLoadMore: true,
           nextPageIndex: 1,
           appliedFilter: viewByItemFilter,
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -513,7 +514,7 @@ void main() {
           canLoadMore: true,
           nextPageIndex: 1,
           appliedFilter: viewByItemFilter,
-          salesOrgConfigs: fakeEmptySalesConfigs,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,

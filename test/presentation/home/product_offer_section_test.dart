@@ -32,6 +32,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/widget_utils.dart';
 
@@ -220,7 +221,7 @@ void main() {
           ),
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
@@ -235,7 +236,7 @@ void main() {
           () => materialListBlocMock.add(
             MaterialListEvent.fetch(
               salesOrganisation: fakeSalesOrganisation,
-              configs: fakeEmptySalesConfigs,
+              configs: fakeMYSalesOrgConfigs,
               customerCodeInfo: fakeCustomerCodeInfo,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
@@ -275,7 +276,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         when(() => customerCodeBlocMock.state).thenReturn(
@@ -345,7 +346,7 @@ void main() {
           () => materialListBlocMock.add(
             MaterialListEvent.fetch(
               salesOrganisation: fakeSalesOrganisation,
-              configs: fakeEmptySalesConfigs,
+              configs: fakeMYSalesOrgConfigs,
               customerCodeInfo: fakeCustomerCodeInfo,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
@@ -375,7 +376,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
@@ -397,7 +398,7 @@ void main() {
           () => materialListBlocMock.add(
             MaterialListEvent.fetch(
               salesOrganisation: fakeSalesOrganisation,
-              configs: fakeEmptySalesConfigs,
+              configs: fakeMYSalesOrgConfigs,
               customerCodeInfo: fakeCustomerCodeInfo,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
@@ -427,7 +428,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
@@ -439,7 +440,6 @@ void main() {
           findsNothing,
         );
         expect(find.byKey(WidgetKeys.productsOnOffer), findsNothing);
-       
       },
     );
 
@@ -461,7 +461,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),

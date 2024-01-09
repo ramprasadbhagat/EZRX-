@@ -16,7 +16,6 @@ import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -38,7 +37,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -122,7 +122,7 @@ void main() {
       price: Price.empty().copyWith(
         finalPrice: MaterialPrice(234.50),
       ),
-      salesOrgConfig: fakeMYSalesOrgConfigWithOOSPreOrder,
+      salesOrgConfig: fakeIDSalesOrgConfigs,
     ),
   ];
 
@@ -428,9 +428,7 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [
               fakeCartProduct.first.copyWith(
-                salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled.copyWith(
-                  addOosMaterials: OosMaterial(true),
-                ),
+                salesOrgConfig: fakeIDSalesOrgConfigs,
                 price: Price.empty().copyWith(
                   lastPrice: listPrice,
                   finalPrice: finalPrice,
@@ -473,9 +471,7 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [
               fakeCartProduct.first.copyWith(
-                salesOrgConfig: fakeMYSalesOrgConfigListPriceDisabled.copyWith(
-                  addOosMaterials: OosMaterial(true),
-                ),
+                salesOrgConfig: fakeMYSalesOrgConfigs,
                 price: Price.empty().copyWith(
                   lastPrice: listPrice,
                   finalPrice: finalPrice,
@@ -518,9 +514,7 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [
               fakeCartProduct.first.copyWith(
-                salesOrgConfig: fakeMYSalesOrgConfigListPriceEnabled.copyWith(
-                  addOosMaterials: OosMaterial(true),
-                ),
+                salesOrgConfig: fakeIDSalesOrgConfigs,
                 price: Price.empty().copyWith(
                   lastPrice: listPrice,
                   finalPrice: finalPrice,

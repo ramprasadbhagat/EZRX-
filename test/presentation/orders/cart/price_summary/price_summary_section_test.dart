@@ -21,6 +21,8 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
+import '../../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../utils/widget_utils.dart';
 
@@ -108,7 +110,7 @@ void main() {
           salesOrganisation: fakeIDSalesOrganisation,
         );
         final totalSavingText = StringUtils.priceComponentDisplayPrice(
-          fakeIDSalesOrganisationConfigs,
+          fakeIDSalesOrgConfigs,
           totalSaving,
           false,
         );
@@ -118,7 +120,7 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
-            salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
           ),
         );
 
@@ -142,7 +144,7 @@ void main() {
           aplSimulatorOrder: aplSimulatorOrder,
         );
         final totalSavingText = StringUtils.priceComponentDisplayPrice(
-          fakeIDSalesOrganisationConfigs,
+          fakeIDSalesOrgConfigs,
           aplSimulatorOrder.totalDiscountValue,
           false,
         );
@@ -152,7 +154,7 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
-            salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
           ),
         );
 
@@ -174,7 +176,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
         );
         final totalSavingText = StringUtils.priceComponentDisplayPrice(
-          fakeSalesOrganisationConfigs,
+          fakeMYSalesOrgConfigs,
           0,
           false,
         );
@@ -184,7 +186,7 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getWidget(cartState));
@@ -205,7 +207,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
         );
         final totalSavingText = StringUtils.priceComponentDisplayPrice(
-          fakeSalesOrganisationConfigs,
+          fakeMYSalesOrgConfigs,
           0,
           false,
         );
@@ -215,7 +217,7 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getWidget(cartState));

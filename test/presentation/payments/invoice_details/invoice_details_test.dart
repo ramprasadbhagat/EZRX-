@@ -41,6 +41,8 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
@@ -409,7 +411,7 @@ void main() {
     testWidgets(' => Display invoice summary with ID market', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
@@ -428,7 +430,7 @@ void main() {
     testWidgets(' => Display invoice item section', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeMYSalesOrgConfigCurrency,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
@@ -468,7 +470,7 @@ void main() {
                 widget.key == WidgetKeys.priceComponent &&
                 widget.text.toPlainText().contains(
                       StringUtils.displayPrice(
-                        fakeMYSalesOrgConfigCurrency,
+                        fakeMYSalesOrgConfigs,
                         fakeInvoiceDetail.netAmount,
                       ),
                     ),

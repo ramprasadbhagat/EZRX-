@@ -36,6 +36,7 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
@@ -165,7 +166,7 @@ void main() {
       );
       when(() => salesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
-          configs: fakeSGSalesOrgConfigForBundle,
+          configs: fakeSGSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
         ),
       );
@@ -250,7 +251,7 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSGSalesOrgConfigPriceOverride,
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getWidget());

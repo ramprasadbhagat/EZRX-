@@ -28,6 +28,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -261,7 +262,7 @@ void main() {
         EligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
           salesOrganisation: fakeIDSalesOrganisation,
-          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
       when(() => materialPriceBlocMock.state).thenReturn(
@@ -294,7 +295,7 @@ void main() {
         EligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
           salesOrganisation: fakeIDSalesOrganisation,
-          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
       when(() => materialPriceBlocMock.state).thenReturn(
@@ -349,7 +350,7 @@ void main() {
         EligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
           salesOrganisation: fakeIDSalesOrganisation,
-          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
       when(() => materialPriceBlocMock.state).thenReturn(
@@ -407,7 +408,7 @@ void main() {
         EligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
           salesOrganisation: fakeIDSalesOrganisation,
-          salesOrgConfigs: fakeIDSalesOrganisationConfigs,
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
       when(() => materialPriceBlocMock.state).thenReturn(

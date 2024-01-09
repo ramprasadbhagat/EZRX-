@@ -19,6 +19,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -113,11 +115,11 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 10,
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeSGSalesOrgConfigs,
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
-          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigs.languageValue,
         );
         expect(
           result.isLeft(),
@@ -135,11 +137,11 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 10,
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeSGSalesOrgConfigs,
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
-          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigs.languageValue,
         );
         expect(
           result.isRight(),
@@ -154,7 +156,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSGSalesOrganisation,
             shipToInfo: fakeShipToInfo,
-            language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+            language: fakeSGSalesOrgConfigs.languageValue,
             materials: [fakeBundle],
           ),
         ).thenThrow((invocation) async => MockException());
@@ -163,7 +165,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSGSalesOrganisation,
           shipToInfo: fakeShipToInfo,
-          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigs.languageValue,
           materials: [fakeBundle],
         );
         expect(
@@ -180,10 +182,8 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             pageSize: 10,
-            language:
-                fakeSGSalesOrgConfigGimmickMaterialEnabled.getConfigLanguage,
-            gimmickMaterial: fakeSGSalesOrgConfigGimmickMaterialEnabled
-                .enableGimmickMaterial,
+            language: fakeSGSalesOrgConfigs.getConfigLanguage,
+            gimmickMaterial: fakeSGSalesOrgConfigs.enableGimmickMaterial,
             isFavourite: fakeMaterialFilter.isFavourite,
             isCovidSelected: fakeMaterialFilter.isCovidSelected,
             bundleOffers: fakeMaterialFilter.bundleOffers,
@@ -211,11 +211,11 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 10,
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeSGSalesOrgConfigs,
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
-          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigs.languageValue,
         );
         expect(
           result.isLeft(),
@@ -231,10 +231,8 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             pageSize: 10,
-            language:
-                fakeSGSalesOrgConfigGimmickMaterialEnabled.getConfigLanguage,
-            gimmickMaterial: fakeSGSalesOrgConfigGimmickMaterialEnabled
-                .enableGimmickMaterial,
+            language: fakeSGSalesOrgConfigs.getConfigLanguage,
+            gimmickMaterial: fakeSGSalesOrgConfigs.enableGimmickMaterial,
             isFavourite: fakeMaterialFilterWithComboOffers.isFavourite,
             isCovidSelected: fakeMaterialFilterWithComboOffers.isCovidSelected,
             bundleOffers: fakeMaterialFilterWithComboOffers.bundleOffers,
@@ -266,11 +264,11 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 10,
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeSGSalesOrgConfigs,
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilterWithComboOffers,
           shipToInfo: fakeShipToInfo,
-          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigs.languageValue,
         );
         expect(
           result.isRight(),
@@ -340,11 +338,11 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 24,
-          salesOrganisation: fakeSGSalesOrganisation,
+          salesOrganisation: fakeTWSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           user: fakeExternalSalesRepUser,
           principles: [fakePrinciple],
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeTWSalesOrgConfigs,
         );
         expect(
           result.isLeft(),
@@ -363,11 +361,11 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 24,
-          salesOrganisation: fakeSGSalesOrganisation,
+          salesOrganisation: fakeTWSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           user: fakeExternalSalesRepUser,
           principles: [fakePrinciple],
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeTWSalesOrgConfigs,
         );
         expect(
           result.isRight(),
@@ -379,11 +377,10 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
         when(
           () => materialListRemoteDataSource.getComboDealMaterialsPrincipalCode(
-            salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            salesOrgCode: fakeTWSalesOrganisation.salesOrg.getOrCrash(),
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
-            language:
-                fakeSGSalesOrgConfigGimmickMaterialEnabled.getConfigLanguage,
+            language: fakeTWSalesOrgConfigs.getConfigLanguage,
             pageSize: 10,
             offset: 0,
             principalCodeList: [
@@ -396,11 +393,11 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 10,
-          salesOrganisation: fakeSGSalesOrganisation,
+          salesOrganisation: fakeTWSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
           principles: [fakePrinciple],
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeTWSalesOrgConfigs,
         );
         expect(
           result.isLeft(),
@@ -412,7 +409,7 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
         when(
           () => materialListRemoteDataSource.getComboDealMaterialsPrincipalCode(
-            salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            salesOrgCode: fakeTWSalesOrganisation.salesOrg.getOrCrash(),
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             pageSize: 10,
@@ -420,8 +417,7 @@ void main() {
             principalCodeList: [
               fakePrincipleData.principalCode.getOrDefaultValue(''),
             ],
-            language:
-                fakeSGSalesOrgConfigGimmickMaterialEnabled.getConfigLanguage,
+            language: fakeTWSalesOrgConfigs.getConfigLanguage,
           ),
         ).thenAnswer((invocation) async => fakeComboDealMaterialResponse);
 
@@ -429,11 +425,11 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 10,
-          salesOrganisation: fakeSGSalesOrganisation,
+          salesOrganisation: fakeTWSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
           principles: [fakePrinciple],
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeTWSalesOrgConfigs,
         );
         expect(
           result.isRight(),
@@ -537,7 +533,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           material: fakeMatchMaterialInfo,
           shipToInfo: fakeShipToInfo,
-          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigs.languageValue,
           type: '',
         );
         expect(
@@ -557,7 +553,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           material: fakeMatchMaterialInfo,
           shipToInfo: fakeShipToInfo,
-          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigs.languageValue,
           type: '',
         );
         expect(
@@ -575,8 +571,7 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: '',
-            language: fakeSGSalesOrgConfigGimmickMaterialEnabled
-                .languageValue.languageCode,
+            language: fakeSGSalesOrgConfigs.languageValue.languageCode,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -585,7 +580,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           material: fakeMatchMaterialInfo,
           shipToInfo: fakeShipToInfo,
-          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigs.languageValue,
           type: '',
         );
         expect(
@@ -603,8 +598,7 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: '',
-            language:
-                fakeSGSalesOrgConfigGimmickMaterialEnabled.getConfigLanguage,
+            language: fakeSGSalesOrgConfigs.languageValue.languageCode,
           ),
         ).thenAnswer(
           (invocation) async => fakeMatchMaterialInfo,
@@ -615,7 +609,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           material: fakeMatchMaterialInfo,
           shipToInfo: fakeShipToInfo,
-          language: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          language: fakeSGSalesOrgConfigs.languageValue,
           type: '',
         );
         expect(
@@ -635,7 +629,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSGSalesOrganisation,
           shipToInfo: fakeShipToInfo,
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeSGSalesOrgConfigs,
           principalData: fakePrincipleData,
           user: fakeExternalSalesRepUser,
           enableGimmickMaterial: false,
@@ -659,7 +653,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSGSalesOrganisation,
           shipToInfo: fakeShipToInfo,
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeSGSalesOrgConfigs,
           principalData: fakePrincipleData,
           user: fakeExternalSalesRepUser,
           enableGimmickMaterial: false,
@@ -705,7 +699,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSGSalesOrganisation,
           shipToInfo: fakeShipToInfo,
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeSGSalesOrgConfigs,
           principalData: fakePrincipleData,
           user: fakeExternalSalesRepUser,
           enableGimmickMaterial: false,
@@ -753,7 +747,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSGSalesOrganisation,
           shipToInfo: fakeShipToInfo,
-          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrgConfig: fakeSGSalesOrgConfigs,
           principalData: fakePrincipleData,
           user: fakeExternalSalesRepUser,
           enableGimmickMaterial: false,

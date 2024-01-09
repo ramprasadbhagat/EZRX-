@@ -22,6 +22,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -192,7 +193,7 @@ void main() {
             .thenAnswer((_) async => true);
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrganisation,
@@ -219,7 +220,7 @@ void main() {
         verify(
           () => materialListBlocMock.add(
             MaterialListEvent.fetch(
-              configs: fakeSalesOrganisationConfigs,
+              configs: fakeMYSalesOrgConfigs,
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeSalesOrganisation,
               selectedMaterialFilter: MaterialFilter.empty(),

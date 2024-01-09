@@ -17,6 +17,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -113,10 +114,7 @@ void main() {
         'locale': fakeClientUser.preferredLanguage.locale.toLanguageTag(),
         'fromDate': fromDateStringValue,
         'toDate': toDateStringValue,
-        'currency': fakeSalesOrganisationConfigs
-            .copyWith(salesOrg: fakeMYSalesOrg)
-            .currency
-            .code,
+        'currency': fakeMYSalesOrgConfigs.currency.code,
         'name': fakeClientUser.fullName.displayFullName,
         'email': fakeClientUser.copyWith(email: fakeEmail).email.getOrCrash(),
         'baseUrl': configMock.baseUrl(
@@ -137,8 +135,7 @@ void main() {
       final result = await chatBotRepository.passPayloadToChatbot(
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeMYSalesOrganisation,
-        salesOrganisationConfigs:
-            fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeMYSalesOrg),
+        salesOrganisationConfigs: fakeMYSalesOrgConfigs,
         shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
         user: fakeClientUser.copyWith(
           email: fakeEmail,
@@ -168,10 +165,7 @@ void main() {
         'locale': fakeClientUser.preferredLanguage.locale.toLanguageTag(),
         'fromDate': fromDateStringValue,
         'toDate': toDateStringValue,
-        'currency': fakeSalesOrganisationConfigs
-            .copyWith(salesOrg: fakeMYSalesOrg)
-            .currency
-            .code,
+        'currency': fakeMYSalesOrgConfigs.currency.code,
         'name': fakeClientUser.fullName.displayFullName,
         'email': fakeClientUser.copyWith(email: fakeEmail).email.getOrCrash(),
         'baseUrl': configMock.baseUrl(
@@ -192,8 +186,7 @@ void main() {
       final result = await chatBotRepository.passPayloadToChatbot(
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeMYSalesOrganisation,
-        salesOrganisationConfigs:
-            fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeMYSalesOrg),
+        salesOrganisationConfigs: fakeMYSalesOrgConfigs,
         shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
         user: fakeClientUser.copyWith(
           email: fakeEmail,

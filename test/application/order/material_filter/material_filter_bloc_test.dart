@@ -13,6 +13,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -86,7 +87,7 @@ void main() {
         when(
           () => materialFilterRepositoryMock.getMaterialFilterList(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfig: fakeEmptySalesConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
@@ -101,7 +102,7 @@ void main() {
       },
       act: (MaterialFilterBloc bloc) => bloc.add(
         MaterialFilterEvent.fetch(
-          salesOrgConfig: fakeEmptySalesConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
@@ -134,7 +135,7 @@ void main() {
         when(
           () => materialFilterRepositoryMock.getMaterialFilterList(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfig: fakeEmptySalesConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
@@ -149,7 +150,7 @@ void main() {
       },
       act: (MaterialFilterBloc bloc) => bloc.add(
         MaterialFilterEvent.fetch(
-          salesOrgConfig: fakeEmptySalesConfigs,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,

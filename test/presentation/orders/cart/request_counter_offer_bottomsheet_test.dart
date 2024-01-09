@@ -40,7 +40,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
@@ -1424,7 +1424,6 @@ void main() {
       expect(counterOfferPriceTextFinder, findsOneWidget);
     });
 
-
     testWidgets('Check list price for counter offer bottom sheet.',
         (tester) async {
       final cartItem = cartItems.first.copyWith(
@@ -1443,7 +1442,7 @@ void main() {
       );
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
         ),
       );
       await tester.pumpWidget(
@@ -1466,7 +1465,7 @@ void main() {
       expect(
         find.descendant(
           of: listPriceStrikeThroughComponent,
-          matching: find.text('List price : MYR 20.00 ', findRichText: true),
+          matching: find.text('List price : VND 20.00 ', findRichText: true),
         ),
         findsOneWidget,
       );

@@ -13,7 +13,6 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -28,6 +27,13 @@ import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.d
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -48,8 +54,10 @@ void main() {
   late CartRepository cartRepositoryMock;
   late ProductDetailRepository productDetailRepository;
   late List<PriceAggregate> priceAggregates;
+  late List<PriceAggregate> priceAggregatesForID;
   late List<BonusSampleItem> bonusSampleItem;
   late List<PriceTier> priceTiers;
+  late RequestCounterOfferDetails fakeCounterOfferDetails;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -83,7 +91,7 @@ void main() {
         .map(
           (e) => PriceAggregate.empty().copyWith(
             materialInfo: e,
-            salesOrgConfig: fakeSalesOrganisationConfigs,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             quantity: 1,
             bundle: e.bundle.copyWith(
               materials: e.bundle.materials
@@ -93,6 +101,24 @@ void main() {
           ),
         )
         .toList();
+    priceAggregatesForID = materialListResponse.products
+        .map(
+          (e) => PriceAggregate.empty().copyWith(
+            materialInfo: e,
+            salesOrgConfig: fakeIDSalesOrgConfigs,
+            quantity: 1,
+            bundle: e.bundle.copyWith(
+              materials: e.bundle.materials
+                  .map((e) => e.copyWith(quantity: MaterialQty(1)))
+                  .toList(),
+            ),
+          ),
+        )
+        .toList();
+    fakeCounterOfferDetails =
+        priceAggregates.first.materialInfo.counterOfferDetails.copyWith(
+      counterOfferCurrency: fakeMYSalesOrgConfigs.currency,
+    );
     final bundleFromPriceAggregateList = priceAggregates.firstWhere(
       (element) => element.materialInfo.type.typeBundle,
       orElse: () => PriceAggregate.empty(),
@@ -157,14 +183,14 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             user: fakeClientUser,
           ),
         ),
         expect: () => [
           CartState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClientUser,
@@ -172,7 +198,7 @@ void main() {
           CartState.initial().copyWith(
             isFetching: true,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClientUser,
@@ -180,7 +206,7 @@ void main() {
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClientUser,
@@ -204,14 +230,14 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             user: fakeClientUser,
           ),
         ),
         expect: () => [
           CartState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClientUser,
@@ -219,7 +245,7 @@ void main() {
           CartState.initial().copyWith(
             isFetching: true,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClientUser,
@@ -227,7 +253,7 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClientUser,
@@ -257,7 +283,7 @@ void main() {
           expectedCartState = [
             CartState.initial().copyWith(
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -265,7 +291,7 @@ void main() {
             CartState.initial().copyWith(
               isFetching: true,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -273,7 +299,7 @@ void main() {
             CartState.initial().copyWith(
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -282,7 +308,7 @@ void main() {
               isFetchingCartProductDetail: true,
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -291,7 +317,7 @@ void main() {
               apiFailureOrSuccessOption: optionOf(Left(fakeError)),
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -324,7 +350,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             user: fakeClientUser,
           ),
         ),
@@ -359,7 +385,7 @@ void main() {
           expectedCartState = [
             CartState.initial().copyWith(
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -367,7 +393,7 @@ void main() {
             CartState.initial().copyWith(
               isFetching: true,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -375,7 +401,7 @@ void main() {
             CartState.initial().copyWith(
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -384,7 +410,7 @@ void main() {
               isFetchingCartProductDetail: true,
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -393,7 +419,7 @@ void main() {
               additionInfo: allAdditionInfo,
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -403,7 +429,7 @@ void main() {
               isUpdatingStock: true,
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -413,7 +439,7 @@ void main() {
               apiFailureOrSuccessOption: optionOf(Left(fakeError)),
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -425,7 +451,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -455,7 +481,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             user: fakeClientUser,
           ),
         ),
@@ -518,7 +544,7 @@ void main() {
           expectedCartState = [
             CartState.initial().copyWith(
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -526,7 +552,7 @@ void main() {
             CartState.initial().copyWith(
               isFetching: true,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -534,7 +560,7 @@ void main() {
             CartState.initial().copyWith(
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -543,7 +569,7 @@ void main() {
               isFetchingCartProductDetail: true,
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -552,7 +578,7 @@ void main() {
               additionInfo: allAdditionInfo,
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -562,7 +588,7 @@ void main() {
               isUpdatingStock: true,
               cartProducts: updatedPriceAggregates,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -571,7 +597,7 @@ void main() {
               additionInfo: allAdditionInfo,
               cartProducts: updatedCartStockList,
               salesOrganisation: fakeSalesOrganisation,
-              config: fakeSalesOrganisationConfigs,
+              config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
@@ -583,7 +609,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             ),
           ).thenAnswer(
             (invocation) async => Right(stockInfo),
@@ -613,7 +639,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             user: fakeClientUser,
           ),
         ),
@@ -646,7 +672,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -654,7 +680,7 @@ void main() {
           when(
             () => cartRepositoryMock.updateMaterialDealBonus(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               materials:
@@ -685,7 +711,7 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: priceAggregates,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -693,7 +719,7 @@ void main() {
             isFetchingBonus: true,
             cartProducts: priceAggregates,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -701,7 +727,7 @@ void main() {
             cartProducts: priceAggregates,
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -713,7 +739,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -721,7 +747,7 @@ void main() {
           when(
             () => cartRepositoryMock.updateMaterialDealBonus(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               materials:
@@ -752,7 +778,7 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: priceAggregates,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -760,14 +786,14 @@ void main() {
             isFetchingBonus: true,
             cartProducts: priceAggregates,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: priceAggregates,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -784,7 +810,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -792,7 +818,7 @@ void main() {
           when(
             () => cartRepositoryMock.upsertCart(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
@@ -823,7 +849,7 @@ void main() {
                   .hashCode
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -831,7 +857,7 @@ void main() {
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             upsertBonusItemInProgressHashCode: [],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -844,7 +870,7 @@ void main() {
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.first],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -852,7 +878,7 @@ void main() {
           when(
             () => cartRepositoryMock.upsertCart(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
@@ -875,7 +901,7 @@ void main() {
           when(
             () => cartRepositoryMock.updateMaterialDealBonus(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               materials: [
@@ -913,7 +939,7 @@ void main() {
               priceAggregates.first,
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -922,7 +948,7 @@ void main() {
               priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -933,7 +959,7 @@ void main() {
               priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -943,7 +969,7 @@ void main() {
               priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             isFetchingBonus: false,
@@ -962,7 +988,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -970,10 +996,10 @@ void main() {
           when(
             () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              counterOfferDetails: fakeCounterOfferDetails,
               language: Language.english(),
               product: priceAggregates.first.copyWith(
                 quantity: 2,
@@ -994,14 +1020,14 @@ void main() {
           CartState.initial().copyWith(
             isUpserting: true,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1014,7 +1040,7 @@ void main() {
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.first.copyWith(quantity: 1)],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1034,7 +1060,7 @@ void main() {
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.elementAt(1)],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1042,10 +1068,10 @@ void main() {
           when(
             () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              counterOfferDetails: fakeCounterOfferDetails,
               language: Language.english(),
               product: priceAggregates.first.copyWith(
                 quantity: 2,
@@ -1069,14 +1095,14 @@ void main() {
             isUpserting: true,
             cartProducts: [priceAggregates.elementAt(1)],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: [priceAggregates.first.copyWith(quantity: 2)],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1088,7 +1114,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1096,10 +1122,10 @@ void main() {
           when(
             () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              counterOfferDetails: fakeCounterOfferDetails,
               language: Language.english(),
               product: priceAggregates.first.copyWith(
                 quantity: 2,
@@ -1122,14 +1148,14 @@ void main() {
           CartState.initial().copyWith(
             isUpserting: true,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: [priceAggregates.first.copyWith(quantity: 2)],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1141,7 +1167,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeIDSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeIDSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1149,20 +1175,22 @@ void main() {
           when(
             () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeIDSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeIDSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              counterOfferDetails: fakeCounterOfferDetails.copyWith(
+                counterOfferCurrency: fakeIDSalesOrgConfigs.currency,
+              ),
               language: Language.english(),
-              product: priceAggregates.first.copyWith(
+              product: priceAggregatesForID.first.copyWith(
                 quantity: 2,
               ),
             ),
-          ).thenAnswer((_) async => Right([priceAggregates.first]));
+          ).thenAnswer((_) async => Right([priceAggregatesForID.first]));
           when(
             () => cartRepositoryMock.fetchGrandTotalPriceForIdMarket(
-              totalPrice: priceAggregates.first.finalPriceTotal,
-              materialNumbers: [priceAggregates.first.getMaterialNumber],
+              totalPrice: priceAggregatesForID.first.finalPriceTotal,
+              materialNumbers: [priceAggregatesForID.first.getMaterialNumber],
               salesOrganisation: fakeIDSalesOrganisation,
               customerCodeInfo: fakeCustomerCodeInfo,
             ),
@@ -1170,7 +1198,7 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.upsertCart(
-            priceAggregate: priceAggregates.first.copyWith(
+            priceAggregate: priceAggregatesForID.first.copyWith(
               quantity: 2,
             ),
           ),
@@ -1179,31 +1207,31 @@ void main() {
           CartState.initial().copyWith(
             isUpserting: true,
             salesOrganisation: fakeIDSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeIDSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
-            cartProducts: [priceAggregates.first],
+            cartProducts: [priceAggregatesForID.first],
             salesOrganisation: fakeIDSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeIDSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             isAplProductLoading: true,
-            cartProducts: [priceAggregates.first],
+            cartProducts: [priceAggregatesForID.first],
             salesOrganisation: fakeIDSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeIDSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake'))),
-            cartProducts: [priceAggregates.first],
+            cartProducts: [priceAggregatesForID.first],
             salesOrganisation: fakeIDSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeIDSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1215,7 +1243,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeIDSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeIDSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1223,10 +1251,12 @@ void main() {
           when(
             () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeIDSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeIDSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              counterOfferDetails: fakeCounterOfferDetails.copyWith(
+                counterOfferCurrency: fakeIDSalesOrgConfigs.currency,
+              ),
               language: Language.english(),
               product: priceAggregates.first.copyWith(
                 quantity: 2,
@@ -1245,14 +1275,14 @@ void main() {
           CartState.initial().copyWith(
             isUpserting: true,
             salesOrganisation: fakeIDSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeIDSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: [],
             salesOrganisation: fakeIDSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeIDSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1269,7 +1299,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1279,8 +1309,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language:
-                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
+              language: fakeMYSalesOrgConfigs.getConfigLanguageDefaultEnglish,
               product: priceAggregates.elementAt(1),
             ),
           ).thenAnswer(
@@ -1296,14 +1325,14 @@ void main() {
           CartState.initial().copyWith(
             isUpserting: true,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1318,7 +1347,7 @@ void main() {
             priceAggregates.elementAt(1),
           ],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1328,8 +1357,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language:
-                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
+              language: fakeMYSalesOrgConfigs.getConfigLanguageDefaultEnglish,
               product: priceAggregates.elementAt(1),
             ),
           ).thenAnswer(
@@ -1357,7 +1385,7 @@ void main() {
             ),
           ],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1367,8 +1395,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language:
-                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
+              language: fakeMYSalesOrgConfigs.getConfigLanguageDefaultEnglish,
               product: bundleItem.copyWith(
                 bundle: bundleItem.bundle.copyWith(
                   materials: bundleItem.bundle.materials
@@ -1396,7 +1423,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -1426,7 +1453,7 @@ void main() {
               ),
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1441,7 +1468,7 @@ void main() {
               ),
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1457,7 +1484,7 @@ void main() {
               ),
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1473,7 +1500,7 @@ void main() {
               ),
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1485,7 +1512,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1495,8 +1522,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language:
-                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
+              language: fakeMYSalesOrgConfigs.getConfigLanguageDefaultEnglish,
               product: bundleItem,
             ),
           ).thenAnswer(
@@ -1510,7 +1536,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -1525,14 +1551,14 @@ void main() {
           CartState.initial().copyWith(
             isUpserting: true,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: [bundleItem],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1540,7 +1566,7 @@ void main() {
             isUpdatingStock: true,
             cartProducts: [bundleItem],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1548,7 +1574,7 @@ void main() {
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             cartProducts: [bundleItem],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1565,7 +1591,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1579,7 +1605,7 @@ void main() {
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: '',
               materialInfo: [priceAggregates.first.materialInfo],
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -1595,14 +1621,14 @@ void main() {
           CartState.initial().copyWith(
             isBuyAgain: true,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1614,7 +1640,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1625,7 +1651,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -1639,7 +1665,7 @@ void main() {
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: '',
               materialInfo: [priceAggregates.first.materialInfo],
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
             ),
           ).thenAnswer(
             (invocation) async =>
@@ -1656,14 +1682,14 @@ void main() {
           CartState.initial().copyWith(
             isBuyAgain: true,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: [priceAggregates.first.copyWith(quantity: 2)],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1671,7 +1697,7 @@ void main() {
             isUpdatingStock: true,
             cartProducts: [priceAggregates.first.copyWith(quantity: 2)],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1679,7 +1705,7 @@ void main() {
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             cartProducts: [priceAggregates.first.copyWith(quantity: 2)],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1703,7 +1729,7 @@ void main() {
             )
           ],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1711,7 +1737,7 @@ void main() {
           when(
             () => cartRepositoryMock.updateMaterialDealBonus(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               materials: [
@@ -1744,7 +1770,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1755,7 +1781,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1767,7 +1793,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1778,7 +1804,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             apiFailureOrSuccessOption: optionOf(
@@ -1800,7 +1826,7 @@ void main() {
             )
           ],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1808,7 +1834,7 @@ void main() {
           when(
             () => cartRepositoryMock.updateMaterialDealBonus(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               materials: [
@@ -1839,7 +1865,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1850,7 +1876,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1862,7 +1888,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1873,7 +1899,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             apiFailureOrSuccessOption: optionOf(
@@ -1894,7 +1920,7 @@ void main() {
             )
           ],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1902,7 +1928,7 @@ void main() {
           when(
             () => cartRepositoryMock.updateMaterialDealBonus(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               materials: [priceAggregates.first.copyWith(price: prices.first)],
@@ -1927,14 +1953,14 @@ void main() {
               priceAggregates.first.copyWith(price: prices.elementAt(1))
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -1942,14 +1968,14 @@ void main() {
             isFetchingBonus: true,
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             apiFailureOrSuccessOption: optionOf(
@@ -1971,7 +1997,7 @@ void main() {
             )
           ],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -1979,7 +2005,7 @@ void main() {
           when(
             () => cartRepositoryMock.updateMaterialDealBonus(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               materials: [
@@ -2015,7 +2041,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2029,7 +2055,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2044,7 +2070,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2058,7 +2084,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             apiFailureOrSuccessOption: optionOf(
@@ -2081,7 +2107,7 @@ void main() {
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.first, bundleItem],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -2089,11 +2115,11 @@ void main() {
           when(
             () => cartRepositoryMock.removeSelectedProducts(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               products: [priceAggregates.first.materialInfo],
-              language: fakeSalesOrganisationConfigs.languageValue,
+              language: fakeMYSalesOrgConfigs.languageValue,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -2111,14 +2137,14 @@ void main() {
             isClearing: true,
             cartProducts: [priceAggregates.first, bundleItem],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: [bundleItem],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2130,7 +2156,7 @@ void main() {
         seed: () => CartState.initial().copyWith(
           cartProducts: priceAggregates,
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -2138,11 +2164,11 @@ void main() {
           when(
             () => cartRepositoryMock.removeSelectedProducts(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               products: [priceAggregates.first.materialInfo],
-              language: fakeSalesOrganisationConfigs.languageValue,
+              language: fakeMYSalesOrgConfigs.languageValue,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -2160,14 +2186,14 @@ void main() {
             isClearing: true,
             cartProducts: priceAggregates,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: [priceAggregates.elementAt(1)],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2180,7 +2206,7 @@ void main() {
         seed: () => CartState.initial().copyWith(
           cartProducts: priceAggregates,
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -2188,11 +2214,11 @@ void main() {
           when(
             () => cartRepositoryMock.removeSelectedProducts(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               products: [priceAggregates.first.materialInfo],
-              language: fakeSalesOrganisationConfigs.languageValue,
+              language: fakeMYSalesOrgConfigs.languageValue,
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -2208,7 +2234,7 @@ void main() {
             isClearing: true,
             cartProducts: priceAggregates,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2216,7 +2242,7 @@ void main() {
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             cartProducts: priceAggregates,
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2238,7 +2264,7 @@ void main() {
             )
           ],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -2246,7 +2272,7 @@ void main() {
           when(
             () => cartRepositoryMock.removeSelectedProducts(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               products: [
@@ -2257,7 +2283,7 @@ void main() {
                   sampleBonusItemId: 'fake-item-id',
                 )
               ],
-              language: fakeSalesOrganisationConfigs.languageValue,
+              language: fakeMYSalesOrgConfigs.languageValue,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -2277,14 +2303,14 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             cartProducts: [priceAggregates.first],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2300,7 +2326,7 @@ void main() {
             )
           ],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -2308,7 +2334,7 @@ void main() {
           when(
             () => cartRepositoryMock.removeSelectedProducts(
               salesOrganisation: fakeSalesOrganisation,
-              salesOrganisationConfig: fakeSalesOrganisationConfigs,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               products: [
@@ -2319,7 +2345,7 @@ void main() {
                   sampleBonusItemId: 'fake-item-id',
                 )
               ],
-              language: fakeSalesOrganisationConfigs.languageValue,
+              language: fakeMYSalesOrgConfigs.languageValue,
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -2337,7 +2363,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2349,7 +2375,7 @@ void main() {
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2369,7 +2395,7 @@ void main() {
   //       seed: () => CartState.initial().copyWith(
   //         cartProducts: priceAggregates,
   //         salesOrganisation: fakeSalesOrganisation,
-  //         config: fakeSalesOrganisationConfigs,
+  //         config: fakeMYSalesOrgConfigs,
   //         shipToInfo: shipToInfo,
   //         customerCodeInfo: fakeCustomerCodeInfo,
   //       ),
@@ -2384,7 +2410,7 @@ void main() {
   //           isFetching: true,
   //           cartProducts: priceAggregates,
   //           salesOrganisation: fakeSalesOrganisation,
-  //           config: fakeSalesOrganisationConfigs,
+  //           config: fakeMYSalesOrgConfigs,
   //           shipToInfo: shipToInfo,
   //           customerCodeInfo: fakeCustomerCodeInfo,
   //         ),
@@ -2411,7 +2437,7 @@ void main() {
         seed: () => CartState.initial().copyWith(
           cartProducts: [PriceAggregate.empty()],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -2423,13 +2449,13 @@ void main() {
             isClearing: true,
             cartProducts: [PriceAggregate.empty()],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
           CartState.initial().copyWith(
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2448,7 +2474,7 @@ void main() {
         seed: () => CartState.initial().copyWith(
           cartProducts: [PriceAggregate.empty()],
           salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
+          config: fakeMYSalesOrgConfigs,
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -2460,7 +2486,7 @@ void main() {
             isClearing: true,
             cartProducts: [PriceAggregate.empty()],
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -2468,7 +2494,7 @@ void main() {
             cartProducts: [PriceAggregate.empty()],
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
+            config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
@@ -3270,14 +3296,11 @@ void main() {
                 ),
               ),
             ],
-            config: fakeSalesOrganisationConfigs.copyWith(
-              currency: Currency('thb'),
-              vatValue: 6,
-            ),
+            config: fakeTHSalesOrgConfigs,
           );
           expect(
             cartBlocState.totalTaxPercent,
-            '6',
+            '0',
           );
         },
       );
@@ -3296,11 +3319,11 @@ void main() {
                 ),
               ),
             ],
-            config: fakeSalesOrganisationConfigs.copyWith(vatValue: 2),
+            config: fakeSGSalesOrgConfigs,
           );
           expect(
             cartBlocState.totalTaxPercent,
-            '2',
+            '9',
           );
         },
       );
@@ -3319,9 +3342,7 @@ void main() {
                 ),
               )
             ],
-            config: fakeSalesOrganisationConfigs.copyWith(
-              displaySubtotalTaxBreakdown: true,
-            ),
+            config: fakeIDSalesOrgConfigs,
           );
           expect(
             cartBlocState.taxMaterial,
@@ -3344,10 +3365,7 @@ void main() {
                 ),
               )
             ],
-            config: fakeSalesOrganisationConfigs.copyWith(
-              displaySubtotalTaxBreakdown: true,
-              vatValue: 10,
-            ),
+            config: fakeKHSalesOrgConfigs,
           );
           expect(
             cartBlocState.taxMaterial,
@@ -3370,11 +3388,7 @@ void main() {
                 ),
               )
             ],
-            config: fakeSalesOrganisationConfigs.copyWith(
-              displaySubtotalTaxBreakdown: true,
-              vatValue: 10,
-              salesOrg: fakeVNSalesOrg,
-            ),
+            config: fakeVNSalesOrgConfigs,
           );
           expect(
             cartBlocState.taxMaterial,
@@ -3397,10 +3411,7 @@ void main() {
       //           ),
       //         )
       //       ],
-      //       config: fakeSalesOrganisationConfigs.copyWith(
-      //         displaySubtotalTaxBreakdown: true,
-      //         vatValue: 10,
-      //       ),
+      //       config: fakeMYSalesOrgConfigs,
       //     );
       //     expect(
       //       cartBlocState.taxMaterial,
@@ -3422,11 +3433,7 @@ void main() {
       //           ),
       //         )
       //       ],
-      //       config: fakeSalesOrganisationConfigs.copyWith(
-      //         displaySubtotalTaxBreakdown: true,
-      //         vatValue: 10,
-      //         currency: Currency('vnd'),
-      //       ),
+      //       config: fakeMYSalesOrgConfigs,
       //     );
       //     expect(
       //       cartBlocState.taxMaterial,
@@ -3459,11 +3466,7 @@ void main() {
                 quantity: 50,
               )
             ],
-            config: fakeSalesOrganisationConfigs.copyWith(
-              displaySubtotalTaxBreakdown: true,
-              vatValue: 10,
-              currency: Currency('khr'),
-            ),
+            config: fakeKHSalesOrgConfigs,
           );
           expect(
             cartBlocState.taxMaterial,
@@ -3478,8 +3481,7 @@ void main() {
           final cartBlocState = CartState.initial().copyWith(
             cartProducts: [
               bundleItem.copyWith(
-                salesOrgConfig:
-                    fakeSalesOrganisationConfigs.copyWith(vatValue: 10),
+                salesOrgConfig: fakeTWSalesOrgConfigs,
               )
             ],
           );

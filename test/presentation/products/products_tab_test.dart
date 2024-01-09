@@ -12,7 +12,6 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -39,6 +38,9 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
@@ -134,8 +136,11 @@ void main() {
         );
         when(() => materialListBlocMock.state)
             .thenReturn(MaterialListState.initial());
-        when(() => eligibilityBlocMock.state)
-            .thenReturn(EligibilityState.initial());
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
         when(() => orderEligibilityBloc.state)
             .thenReturn(OrderEligibilityState.initial());
         when(() => productDetailBlocMock.state)
@@ -270,7 +275,7 @@ void main() {
             () => materialListBlocMock.add(
               MaterialListEvent.fetch(
                 salesOrganisation: SalesOrganisation.empty(),
-                configs: SalesOrganisationConfigs.empty(),
+                configs: fakeMYSalesOrgConfigs,
                 customerCodeInfo: CustomerCodeInfo.empty(),
                 shipToInfo: ShipToInfo.empty(),
                 selectedMaterialFilter: MaterialFilter.empty(),
@@ -289,9 +294,7 @@ void main() {
               canLoadMore: true,
             ),
           );
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial(),
-          );
+
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           await tester.fling(
@@ -303,7 +306,7 @@ void main() {
             () => materialListBlocMock.add(
               MaterialListEvent.loadMore(
                 salesOrganisation: SalesOrganisation.empty(),
-                configs: SalesOrganisationConfigs.empty(),
+                configs: fakeMYSalesOrgConfigs,
                 customerCodeInfo: CustomerCodeInfo.empty(),
                 shipToInfo: ShipToInfo.empty(),
               ),
@@ -348,7 +351,7 @@ void main() {
           (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeTWSalesOrgConfigGMCEnabled,
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
           ),
         );
         when(() => materialListBlocMock.state).thenReturn(
@@ -371,7 +374,7 @@ void main() {
           (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeEmptySalesConfigs,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         when(() => materialListBlocMock.state).thenReturn(
@@ -573,9 +576,8 @@ void main() {
         (tester) async {
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrganisation: fakeMYSalesOrganisation,
-              salesOrgConfigs:
-                  salesOrgConfigEnabledMaterialWithoutPriceAndCombo,
+              salesOrganisation: fakeSalesOrganisation,
+              salesOrgConfigs: fakeKHSalesOrgConfigs,
               customerCodeInfo: CustomerCodeInfo.empty()
                   .copyWith(salesDeals: [SalesDealNumber('0000000000')]),
             ),
@@ -661,20 +663,19 @@ void main() {
         expect(find.byKey(WidgetKeys.cartButton), findsOneWidget);
         expect(find.text('3'), findsOneWidget);
       });
-
       testWidgets('Test the Covid filter button', (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: fakePHSalesOrganisation,
-            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfoForCovid,
             user: fakeRootAdminUser,
           ),
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            salesOrganisation: fakePHSalesOrganisation,
-            configs: fakeSalesOrganisationConfigs,
+            salesOrganisation: fakeSalesOrganisation,
+            configs: fakeMYSalesOrgConfigs,
           ),
         );
         when(() => customerCodeBlocMock.state).thenReturn(
@@ -695,8 +696,8 @@ void main() {
         verify(
           () => materialListBlocMock.add(
             MaterialListEvent.fetch(
-              salesOrganisation: fakePHSalesOrganisation,
-              configs: fakeSalesOrganisationConfigs,
+              salesOrganisation: fakeSalesOrganisation,
+              configs: fakeMYSalesOrgConfigs,
               customerCodeInfo: fakeCustomerCodeInfoForCovid,
               shipToInfo: fakeShipToInfo,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
@@ -720,8 +721,8 @@ void main() {
           (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: fakePHSalesOrganisation,
-            salesOrgConfigs: fakeSalesOrganisationConfigs,
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfoForCovid,
             user: fakeRootAdminUser,
           ),
