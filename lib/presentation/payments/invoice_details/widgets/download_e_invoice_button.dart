@@ -60,7 +60,7 @@ class _DownloadEInvoiceButton extends StatelessWidget {
                         child: OutlinedButton(
                           key: WidgetKeys.downloadEInvoiceButton,
                           onPressed: downloadEInvoiceState
-                                      .isEligibileForEInvoiceButton ||
+                                      .isEligibleForEInvoiceButton ||
                                   state.isDownloadInProgress
                               ? null
                               : () {

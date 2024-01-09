@@ -14,5 +14,5 @@ class DownloadEInvoiceState with _$DownloadEInvoiceState {
         failureOrSuccessOption: none(),
         eInvoice: DownloadPaymentAttachment.empty(),
       );
-  bool get isEligibileForEInvoiceButton => isFetching && eInvoice.url.isEmpty;
+  bool get isEligibleForEInvoiceButton => isFetching && eInvoice.url.isEmpty;
 }
