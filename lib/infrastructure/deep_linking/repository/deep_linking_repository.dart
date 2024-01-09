@@ -126,9 +126,12 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
 
   bool _validDomain(Uri link) {
     final domain = link.host;
-    final currentDomain =
-        config.baseUrl(currentMarket: AppMarket(deviceStorage.currentMarket()));
+    final availableMarketDomain =
+        AppMarket(deviceStorage.currentMarket()).availableMarketDomain;
 
-    return currentDomain.contains(domain);
+    return availableMarketDomain.any(
+      (marketDomain) =>
+          config.baseUrl(marketDomain: marketDomain).contains(domain),
+    );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 
@@ -27,8 +26,7 @@ String get domain {
     }
   }
   
-  String baseUrl({AppMarket? currentMarket}) {
-    final marketDomain = currentMarket?.marketDomain;
+  String baseUrl({String? marketDomain}) {
     switch (appFlavor) {
       // https://my.ezrxplus.com/
       case Flavor.prod:
@@ -39,7 +37,6 @@ String get domain {
       // https://my.ezrx.com/
       case Flavor.mock:
       case Flavor.uat:
-      default:
         return '$schema$env-$marketDomain$domain';
     }
   }

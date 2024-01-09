@@ -543,6 +543,24 @@ String getMarketDomain(String country) {
   return marketDomainMap[country] ?? 'my';
 }
 
+List<String> getAvailableMarketDomain(String country) {
+  final marketDomainMap = {
+    'hk': ['hk'],
+    'kh': ['kh'],
+    'kr': ['kr2'],
+    'mm': ['mm'],
+    'ph': ['ph'],
+    'sg': ['sg'],
+    'th': ['th'],
+    'tw': ['tw'],
+    'vn': ['vn', 'vns', 'vnm', 'vnp'],
+    'my': ['my'],
+    'id': ['id'],
+  };
+
+  return marketDomainMap[country] ?? [];
+}
+
 String getCurrency(String country) {
   final marketCurrencyMap = {
     'sg': 'SGD',

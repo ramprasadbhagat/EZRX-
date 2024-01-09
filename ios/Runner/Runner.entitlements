@@ -16,6 +16,9 @@
 		<string>applinks:uat-tw.ezrx.com</string>
 		<string>applinks:uat-mm.ezrx.com</string>
 		<string>applinks:uat-vn.ezrx.com</string>
+		<string>applinks:uat-vns.ezrx.com</string>
+		<string>applinks:uat-vnm.ezrx.com</string>
+		<string>applinks:uat-vnp.ezrx.com</string>
 		<string>applinks:uat-id.ezrx.com</string>
 		<string>applinks:uat-kr.ezrx.com</string>
 		<string>applinks:uat-hk.ezrx.com</string>
@@ -28,6 +31,9 @@
 		<string>applinks:tw.ezrxplus.com</string>
 		<string>applinks:mm.ezrxplus.com</string>
 		<string>applinks:vn.ezrxplus.com</string>
+		<string>applinks:vns.ezrxplus.com</string>
+		<string>applinks:vnm.ezrxplus.com</string>
+		<string>applinks:vnp.ezrxplus.com</string>
 		<string>applinks:id.ezrxplus.com</string>
 		<string>applinks:kr.ezrxplus.com</string>
 		<string>applinks:hk.ezrxplus.com</string>
@@ -40,6 +46,9 @@
 		<string>webcredentials:uat-tw.ezrx.com</string>
 		<string>webcredentials:uat-mm.ezrx.com</string>
 		<string>webcredentials:uat-vn.ezrx.com</string>
+		<string>webcredentials:uat-vns.ezrx.com</string>
+		<string>webcredentials:uat-vnm.ezrx.com</string>
+		<string>webcredentials:uat-vnp.ezrx.com</string>
 		<string>webcredentials:uat-id.ezrx.com</string>
 		<string>webcredentials:uat-kr.ezrx.com</string>
 		<string>webcredentials:uat-hk.ezrx.com</string>
@@ -52,6 +61,9 @@
 		<string>webcredentials:tw.ezrxplus.com</string>
 		<string>webcredentials:mm.ezrxplus.com</string>
 		<string>webcredentials:vn.ezrxplus.com</string>
+		<string>webcredentials:vns.ezrxplus.com</string>
+		<string>webcredentials:vnm.ezrxplus.com</string>
+		<string>webcredentials:vnp.ezrxplus.com</string>
 		<string>webcredentials:id.ezrxplus.com</string>
 		<string>webcredentials:kr.ezrxplus.com</string>
 		<string>webcredentials:hk.ezrxplus.com</string>

@@ -120,9 +120,9 @@ void main() {
         'name': fakeClientUser.fullName.displayFullName,
         'email': fakeClientUser.copyWith(email: fakeEmail).email.getOrCrash(),
         'baseUrl': configMock.baseUrl(
-          currentMarket: AppMarket(
+          marketDomain: AppMarket(
             deviceStorageMock.currentMarket(),
-          ),
+          ).marketDomain,
         ),
       };
       when(
@@ -175,9 +175,9 @@ void main() {
         'name': fakeClientUser.fullName.displayFullName,
         'email': fakeClientUser.copyWith(email: fakeEmail).email.getOrCrash(),
         'baseUrl': configMock.baseUrl(
-          currentMarket: AppMarket(
+          marketDomain: AppMarket(
             deviceStorageMock.currentMarket(),
-          ),
+          ).marketDomain,
         ),
       };
       when(
@@ -213,7 +213,7 @@ void main() {
         'token': '',
         'username': '',
         'baseUrl': configMock.baseUrl(
-          currentMarket: market,
+          marketDomain: market.marketDomain,
         ),
         'market': marketDomain,
         'locale': market.locale,
@@ -242,7 +242,7 @@ void main() {
         'token': '',
         'username': '',
         'baseUrl': configMock.baseUrl(
-          currentMarket: market,
+          marketDomain: market.marketDomain,
         ),
         'market': marketDomain,
         'locale': market.locale,

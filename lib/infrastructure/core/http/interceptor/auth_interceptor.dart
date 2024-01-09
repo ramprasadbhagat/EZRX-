@@ -23,6 +23,9 @@ class AuthInterceptor extends Interceptor {
   final AuthQueryMutation authQueryMutation;
   final PushNotificationService pushNotificationService;
 
+  String get _marketDomain =>
+      AppMarket(deviceStorage.currentMarket()).marketDomain;
+
   AuthInterceptor({
     required this.deviceStorage,
     required this.tokenStorage,
@@ -36,11 +39,7 @@ class AuthInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    options.baseUrl = config.baseUrl(
-      currentMarket: AppMarket(
-        deviceStorage.currentMarket(),
-      ),
-    );
+    options.baseUrl = config.baseUrl(marketDomain: _marketDomain);
 
     try {
       var token = await tokenStorage.get();
@@ -111,11 +110,7 @@ class AuthInterceptor extends Interceptor {
       final refreshToken = JWT(token.refresh);
       final dio = Dio(
         BaseOptions(
-          baseUrl: config.baseUrl(
-            currentMarket: AppMarket(
-              deviceStorage.currentMarket(),
-            ),
-          ),
+          baseUrl: config.baseUrl(marketDomain: _marketDomain),
           method: 'POST',
         ),
       );
@@ -152,11 +147,7 @@ class AuthInterceptor extends Interceptor {
   ) async {
     final dio = Dio(
       BaseOptions(
-        baseUrl: config.baseUrl(
-          currentMarket: AppMarket(
-            deviceStorage.currentMarket(),
-          ),
-        ),
+        baseUrl: config.baseUrl(marketDomain: _marketDomain),
         sendTimeout: config.httpSendTimeout,
         connectTimeout: config.httpConnectTimeout,
         receiveTimeout: config.httpReceiveTimeout,

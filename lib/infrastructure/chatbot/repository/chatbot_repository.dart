@@ -86,9 +86,7 @@ class ChatBotRepository implements IChatBotRepository {
         'name': user.fullName.displayFullName,
         'email': user.email.getOrCrash(),
         'baseUrl': config.baseUrl(
-          currentMarket: AppMarket(
-            deviceStorage.currentMarket(),
-          ),
+          marketDomain: AppMarket(deviceStorage.currentMarket()).marketDomain,
         ),
       };
 
@@ -111,7 +109,7 @@ class ChatBotRepository implements IChatBotRepository {
         'token': '',
         'username': '',
         'baseUrl': config.baseUrl(
-          currentMarket: market,
+          marketDomain: AppMarket(deviceStorage.currentMarket()).marketDomain,
         ),
         'market': marketDomain,
         'locale': market.locale,

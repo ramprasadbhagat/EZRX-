@@ -21,6 +21,9 @@ class AppMarket extends ValueObject<String> {
 
   String get marketDomain => getMarketDomain(value.getOrElse(() => ''));
 
+  List<String> get availableMarketDomain =>
+      getAvailableMarketDomain(value.getOrElse(() => ''));
+
   const AppMarket._(this.value);
 
   bool get isVN => value.getOrElse(() => '') == 'vn';

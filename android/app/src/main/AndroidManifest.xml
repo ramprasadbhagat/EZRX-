@@ -32,6 +32,9 @@
 				<data android:host="uat-tw.ezrx.com" />
 				<data android:host="uat-mm.ezrx.com" />
 				<data android:host="uat-vn.ezrx.com" />
+				<data android:host="uat-vns.ezrx.com" />
+				<data android:host="uat-vnm.ezrx.com" />
+				<data android:host="uat-vnp.ezrx.com" />
 				<data android:host="uat-id.ezrx.com" />
 				<data android:host="uat-kr.ezrx.com" />
 				<data android:host="uat-hk.ezrx.com" />
@@ -44,6 +47,9 @@
 				<data android:host="tw.ezrxplus.com" />
 				<data android:host="mm.ezrxplus.com" />
 				<data android:host="vn.ezrxplus.com" />
+				<data android:host="vns.ezrxplus.com" />
+				<data android:host="vnm.ezrxplus.com" />
+				<data android:host="vnp.ezrxplus.com" />
 				<data android:host="id.ezrxplus.com" />
 				<data android:host="kr.ezrxplus.com" />
 				<data android:host="hk.ezrxplus.com" />

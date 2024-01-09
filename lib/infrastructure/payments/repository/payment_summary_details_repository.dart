@@ -123,7 +123,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
       final paymentItemList = await remoteDataSource.getPaymentItemList(
         customerCode: customerCode,
         salesOrg: salesOrgCode,
-        paymentID: details.paymentID.getOrCrash(),
+        paymentID: details.paymentID.getOrDefaultValue(''),
         paymentBatchAdditionalInfo:
             details.paymentBatchAdditionalInfo.getOrDefaultValue(''),
         accountingDocExternalReference: details.accountingDocExternalReference,

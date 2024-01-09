@@ -111,9 +111,7 @@ void main() {
       verify(() => tokenStorage.get()).called(1);
       verify(
         () => config.baseUrl(
-          currentMarket: AppMarket(
-            deviceStorage.currentMarket(),
-          ),
+          marketDomain: AppMarket(deviceStorage.currentMarket()).marketDomain,
         ),
       ).called(1);
       verify(() => authQueryMutation.getAccessToken()).called(1);

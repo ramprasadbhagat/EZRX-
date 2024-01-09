@@ -29,9 +29,7 @@ class DatadogService {
     final appVersion = '$version($buildNumber)';
     final apiUrlWithoutHttps = config
         .baseUrl(
-          currentMarket: AppMarket(
-            deviceStorage.currentMarket(),
-          ),
+          marketDomain: AppMarket(deviceStorage.currentMarket()).marketDomain,
         )
         .replaceFirst('https://', '');
     configuration = DdSdkConfiguration(
