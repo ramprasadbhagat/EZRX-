@@ -106,9 +106,7 @@ class OrderSummarySection extends StatelessWidget {
               _PriceTile(
                 key: WidgetKeys.viewByOrderTaxKey,
                 orderNumber: orderDetails.orderNumber,
-                title: eligibilityState.salesOrg.isVN
-                    ? context.tr('Tax')
-                    : '${context.tr('Tax at')} ${orderDetails.totalTaxPercentage}%',
+                title: context.tr('Tax'),
                 value: orderDetails.totalTax,
               ),
             const SizedBox(

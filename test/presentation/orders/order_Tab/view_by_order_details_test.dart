@@ -60,6 +60,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -1316,35 +1317,14 @@ void main() {
     });
 
     testWidgets(
-        'Order summary section - Display Tax Rate for other market except VN',
+        'Order summary section - Hide Tax Rate for other market except VN',
         (tester) async {
-      const finalPrice = 100.0;
-      const vatValue = 10.0;
-      const quantity = 2;
-      const subTotalValueWithoutTax = finalPrice * quantity;
-      const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
-      const grandTotalValue = subTotalValueWithoutTax + totalTax;
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: fakeMYSalesOrganisation,
-          salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
+          salesOrganisation: fakeKHSalesOrganisation,
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
         ),
       );
-
-      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
-        ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
-          orderHistoryDetailsOrderItem: [
-            fakeOrderHistoryItem.copyWith(
-              totalPrice: grandTotalValue,
-              tax: vatValue,
-              unitPrice: finalPrice,
-            )
-          ],
-          totalTax: totalTax,
-          orderValue: subTotalValueWithoutTax,
-        ),
-      );
-
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       expect(
@@ -1357,7 +1337,7 @@ void main() {
       expect(
         find.descendant(
           of: find.byKey(WidgetKeys.viewByOrderTaxKey),
-          matching: find.text('Tax at ${vatValue.toInt()}%:'),
+          matching: find.text('Tax:'),
         ),
         findsOneWidget,
       );
@@ -1369,6 +1349,61 @@ void main() {
         findsOneWidget,
       );
     });
+
+    // testWidgets(
+    //     'Order summary section - Display Tax Rate for other market except VN',
+    //     (tester) async {
+    //   const finalPrice = 100.0;
+    //   const vatValue = 10.0;
+    //   const quantity = 2;
+    //   const subTotalValueWithoutTax = finalPrice * quantity;
+    //   const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
+    //   const grandTotalValue = subTotalValueWithoutTax + totalTax;
+    //   when(() => eligibilityBlocMock.state).thenReturn(
+    //     EligibilityState.initial().copyWith(
+    //       salesOrganisation: fakeMYSalesOrganisation,
+    //       salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
+    //     ),
+    //   );
+
+    //   when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+    //     ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+    //       orderHistoryDetailsOrderItem: [
+    //         fakeOrderHistoryItem.copyWith(
+    //           totalPrice: grandTotalValue,
+    //           tax: vatValue,
+    //           unitPrice: finalPrice,
+    //         )
+    //       ],
+    //       totalTax: totalTax,
+    //       orderValue: subTotalValueWithoutTax,
+    //     ),
+    //   );
+
+    //   await tester.pumpWidget(getScopedWidget());
+    //   await tester.pumpAndSettle();
+    //   expect(
+    //     find.descendant(
+    //       of: find.byKey(WidgetKeys.viewByOrderSubtotalKey),
+    //       matching: find.text('Subtotal (excl.tax):'),
+    //     ),
+    //     findsOneWidget,
+    //   );
+    //   expect(
+    //     find.descendant(
+    //       of: find.byKey(WidgetKeys.viewByOrderTaxKey),
+    //       matching: find.text('Tax at ${vatValue.toInt()}%:'),
+    //     ),
+    //     findsOneWidget,
+    //   );
+    //   expect(
+    //     find.descendant(
+    //       of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
+    //       matching: find.textContaining('Grand total:'),
+    //     ),
+    //     findsOneWidget,
+    //   );
+    // });
 
     testWidgets('BundleItemMaterial is visible', (tester) async {
       final fakeOrderHistory = OrderHistory.empty().copyWith(

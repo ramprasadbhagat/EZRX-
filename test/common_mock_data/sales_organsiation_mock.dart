@@ -50,6 +50,9 @@ final fakeIDSalesOrganisation =
 final fakeTHSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeTHSalesOrg);
 
+final fakeKHSalesOrganisation =
+    SalesOrganisation.empty().copyWith(salesOrg: fakeKHSalesOrg);    
+
 final fakeEmptySalesConfigs = SalesOrganisationConfigs.empty();
 
 final fakeSalesOrganisationConfigs =

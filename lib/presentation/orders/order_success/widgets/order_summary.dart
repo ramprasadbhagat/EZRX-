@@ -51,7 +51,7 @@ class _OrderSummary extends StatelessWidget {
                   Text(
                     eligibilityState.salesOrg.isVN
                         ? '${context.tr('Tax')}:'
-                        : '${context.tr('Tax at')} ${orderHistoryDetails.totalTaxPercentage}%:',
+                        : '${context.tr('Tax at')} ${eligibilityState.salesOrgConfigs.vatValue}%:',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   PriceComponent(

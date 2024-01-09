@@ -55,6 +55,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -474,8 +475,61 @@ void main() {
           scrollList,
           const Offset(0, -300),
         );
-        //Fetching the vat value for other market - 9
-        final taxRateFinder = find.text('Tax at ${vatValue.toInt()}%:');
+        //Fetching the vat value for other market - 5
+        final taxRateFinder = find.text(
+            'Tax at ${fakeMYSalesOrgConfigTaxBreakdownEnabled.vatValue}%:',);
+        expect(
+          find.descendant(
+            of: find.byKey(
+              WidgetKeys.orderSummaryTax,
+            ),
+            matching: taxRateFinder,
+          ),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      'Order summary check - Tax rate display from salesOrgConfig vat value for other market except VN',
+      (tester) async {
+        const finalPrice = 100.0;
+        const quantity = 2;
+        const subTotalValueWithoutTax = finalPrice * quantity;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
+            salesOrganisation: fakeKHSalesOrganisation,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [
+                OrderHistoryDetailsOrderItem.empty().copyWith(
+                  qty: quantity,
+                  unitPrice: finalPrice,
+                )
+              ],
+              orderValue: subTotalValueWithoutTax,
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final orderSummarySection =
+            find.byKey(WidgetKeys.orderSuccessOrderSummarySection);
+        final scrollList = find.byKey(WidgetKeys.scrollList);
+        await tester.dragUntilVisible(
+          orderSummarySection,
+          scrollList,
+          const Offset(0, -300),
+        );
+        //Fetching the vat value from salesOrgConfig - 10
+        final taxRateFinder = find.text(
+          'Tax at ${fakeKHSalesOrgConfigs.vatValue}%:',
+        );
         expect(
           find.descendant(
             of: find.byKey(
@@ -1329,39 +1383,39 @@ void main() {
       variant: salesOrgVariant,
     );
 
-    testWidgets(
-      '=> Do not Show Tax Value if Tax value from item level is 0',
-      (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeSalesOrganisationDisplaySubtotalTaxBreakdown,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsOrderItem: [
-                OrderHistoryDetailsOrderItem.empty()
-              ],
-            ),
-          ),
-        );
+    // testWidgets(
+    //   '=> Do not Show Tax Value if Tax value from item level is 0',
+    //   (tester) async {
+    //     when(() => eligibilityBlocMock.state).thenReturn(
+    //       EligibilityState.initial().copyWith(
+    //         salesOrganisation: fakeSalesOrganisation,
+    //         salesOrgConfigs: fakeSalesOrganisationDisplaySubtotalTaxBreakdown,
+    //       ),
+    //     );
+    //     when(() => orderSummaryBlocMock.state).thenReturn(
+    //       OrderSummaryState.initial().copyWith(
+    //         orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+    //           orderHistoryDetailsOrderItem: [
+    //             OrderHistoryDetailsOrderItem.empty()
+    //           ],
+    //         ),
+    //       ),
+    //     );
 
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+    //     await tester.pumpWidget(getWidget());
+    //     await tester.pumpAndSettle();
 
-        final taxText = find.descendant(
-          of: find.byKey(WidgetKeys.orderSummaryTax),
-          matching: find.text('${'Tax at'.tr()} %:'),
-        );
+    //     final taxText = find.descendant(
+    //       of: find.byKey(WidgetKeys.orderSummaryTax),
+    //       matching: find.text('${'Tax at'.tr()} %:'),
+    //     );
 
-        expect(
-          taxText,
-          findsOneWidget,
-        );
-      },
-    );
+    //     expect(
+    //       taxText,
+    //       findsOneWidget,
+    //     );
+    //   },
+    // );
     testWidgets('Display Price Not Available Message for hide price materials',
         (tester) async {
       when(() => orderSummaryBlocMock.state).thenAnswer(
