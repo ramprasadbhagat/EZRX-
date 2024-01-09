@@ -40,6 +40,20 @@ class MaterialFilter with _$MaterialFilter {
   bool get displayCategorySection =>
       displayManufactureOption || displayCountryOfOriginOption;
 
+  String get type {
+    // If both bundle and product offers are selected, Type is empty
+    if (bundleOffers && isProductOffer) return '';
+
+    // If only bundle offer is selected, Type is 'bundle'
+    if (bundleOffers) return 'bundle';
+
+    // If only product offer is selected, Type is 'material'
+    if (isProductOffer) return 'material';
+
+    // If neither bundle nor product offers are selected, Type is empty
+    return '';
+  }
+
   Map<String, dynamic> get trackingInfo {
     final showProductFilter = <String>[];
     if (isFavourite) showProductFilter.add('Favourites');

@@ -213,7 +213,7 @@ void main() {
     final result = await remoteDataSource.getProductList(
       gimmickMaterial: false,
       isFavourite: false,
-      bundleOffers: false,
+      type: '',
       isProductOffer: false,
       isCovidSelected: false,
       orderByName: '',
@@ -276,7 +276,7 @@ void main() {
     final result = await remoteDataSource.getProductList(
       gimmickMaterial: false,
       isFavourite: false,
-      bundleOffers: false,
+      type: 'material',
       isProductOffer: false,
       isCovidSelected: false,
       orderByName: '',
