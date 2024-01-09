@@ -110,7 +110,7 @@ String getEndCursorValue(Map json, String key) => json[key]?['endCursor'] ?? '';
 String readTag(Map json, String key) => json[key]?['value']?['name'] ?? '';
 
 List<dynamic> getDocumentsList(Map json, String _) {
-  final urlList = json['documents']?['value'] ?? [];
+  final urlList = json['documents']?['jsonValue'] ?? [];
 
-  return urlList.map((e) => e['url']?['value'] ?? '').toList();
+  return urlList.map((e) => e['url'] ?? '').toList();
 }
