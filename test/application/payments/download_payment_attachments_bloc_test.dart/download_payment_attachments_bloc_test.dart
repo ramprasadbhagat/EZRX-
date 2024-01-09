@@ -1,21 +1,22 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:universal_io/io.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/soa_local.dart';
+import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/download_payment_attachment_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:universal_io/io.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_local_datasource.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class DownloadPaymentAttachmentRepositoryMock extends Mock
     implements DownloadPaymentAttachmentRepository {}
@@ -24,22 +25,22 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late DownloadPaymentAttachmentRepository downloadPaymentAttachmentRepository;
   late DownloadPaymentAttachment downloadPaymentAttachmentMockData;
-
-  final salesOrganization =
-      SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('fake-salesOrg'));
-
-  final customerCodeInfo = CustomerCodeInfo.empty()
-      .copyWith(customerCodeSoldTo: 'fake-customerCode');
-
+  late List<Soa> soaList;
+  const fakeError = ApiFailure.other('fake-error');
+  final salesOrganization = fakeMYSalesOrganisation;
+  final customerCodeInfo = fakeCustomerCodeInfo;
   final file = File('fake-url');
+
   group('Download Payment Attachment', () {
-    setUp(() async {
+    setUpAll(() async {
       downloadPaymentAttachmentRepository =
           DownloadPaymentAttachmentRepositoryMock();
 
       downloadPaymentAttachmentMockData =
           await DownloadPaymentAttachmentLocalDataSource().getFileDownloadUrl();
-      WidgetsFlutterBinding.ensureInitialized();
+      soaList = await SoaLocalDataSource().getSoa();
+      downloadPaymentAttachmentMockData =
+          await DownloadPaymentAttachmentLocalDataSource().getFileDownloadUrl();
     });
 
     blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
@@ -60,9 +61,7 @@ void main() {
             queryObject: AllInvoicesFilter.empty(),
           ),
         ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
+          (invocation) async => const Left(fakeError),
         );
       },
       act: (bloc) => bloc.add(
@@ -85,9 +84,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('fake-error'),
-            ),
+            const Left(fakeError),
           ),
           isDownloadInProgress: false,
         )
@@ -169,7 +166,7 @@ void main() {
             queryObject: AllCreditsFilter.empty(),
           ),
         ).thenAnswer(
-          (invocation) async => const Left(ApiFailure.other('fake-error')),
+          (invocation) async => const Left(fakeError),
         );
       },
       act: (bloc) => bloc.add(
@@ -192,9 +189,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('fake-error'),
-            ),
+            const Left(fakeError),
           ),
           isDownloadInProgress: false,
         )
@@ -275,9 +270,7 @@ void main() {
             salesOrganization: salesOrganization,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
+          (invocation) async => const Left(fakeError),
         );
       },
       act: (bloc) => bloc.add(
@@ -298,9 +291,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('fake-error'),
-            ),
+            const Left(fakeError),
           ),
           isDownloadInProgress: false,
         )
@@ -382,9 +373,7 @@ void main() {
         );
         when(() => downloadPaymentAttachmentRepository.downloadPermission())
             .thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
+          (invocation) async => const Left(fakeError),
         );
       },
       act: (bloc) => bloc.add(
@@ -405,9 +394,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('fake-error'),
-            ),
+            const Left(fakeError),
           ),
           isDownloadInProgress: false,
         )
@@ -442,9 +429,7 @@ void main() {
             files: downloadPaymentAttachmentMockData,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
+          (invocation) async => const Left(fakeError),
         );
       },
       act: (bloc) => bloc.add(
@@ -465,9 +450,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('fake-error'),
-            ),
+            const Left(fakeError),
           ),
           isDownloadInProgress: false,
         )
@@ -545,9 +528,7 @@ void main() {
             queryObject: FullSummaryFilter.empty(),
           ),
         ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
+          (invocation) async => const Left(fakeError),
         );
       },
       act: (bloc) => bloc.add(
@@ -565,11 +546,285 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('fake-error'),
-            ),
+            const Left(fakeError),
           ),
         )
+      ],
+    );
+
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download Soa url success',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      seed: () => DownloadPaymentAttachmentsState.initial().copyWith(
+        customerCodeInfo: customerCodeInfo,
+        salesOrganization: salesOrganization,
+      ),
+      setUp: () {
+        when(() => downloadPaymentAttachmentRepository.downloadPermission())
+            .thenAnswer(
+          (invocation) async => const Right(PermissionStatus.granted),
+        );
+        when(
+          () => downloadPaymentAttachmentRepository.soaDownload(
+            soaData: soaList.first.soaData,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(file),
+        );
+      },
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.downloadSOA(
+          soaData: soaList.first.soaData,
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          isDownloadInProgress: true,
+          fileUrl: DownloadPaymentAttachment(
+            url: soaList.first.soaData.getValue(),
+          ),
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          fileUrl: DownloadPaymentAttachment(
+            url: soaList.first.soaData.getValue(),
+          ),
+          failureOrSuccessOption: optionOf(
+            Right(file),
+          ),
+        ),
+      ],
+    );
+
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download Soa url fail',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      seed: () => DownloadPaymentAttachmentsState.initial().copyWith(
+        customerCodeInfo: customerCodeInfo,
+        salesOrganization: salesOrganization,
+      ),
+      setUp: () {
+        when(() => downloadPaymentAttachmentRepository.downloadPermission())
+            .thenAnswer(
+          (invocation) async => const Right(PermissionStatus.granted),
+        );
+        when(
+          () => downloadPaymentAttachmentRepository.soaDownload(
+            soaData: soaList.first.soaData,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(fakeError),
+        );
+      },
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.downloadSOA(
+          soaData: soaList.first.soaData,
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          isDownloadInProgress: true,
+          fileUrl: DownloadPaymentAttachment(
+            url: soaList.first.soaData.getValue(),
+          ),
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          fileUrl: DownloadPaymentAttachment(
+            url: soaList.first.soaData.getValue(),
+          ),
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
+        ),
+      ],
+    );
+
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download Soa storage permission failure',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      seed: () => DownloadPaymentAttachmentsState.initial().copyWith(
+        customerCodeInfo: customerCodeInfo,
+        salesOrganization: salesOrganization,
+      ),
+      setUp: () {
+        when(() => downloadPaymentAttachmentRepository.downloadPermission())
+            .thenAnswer(
+          (invocation) async => const Left(fakeError),
+        );
+      },
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.downloadSOA(
+          soaData: soaList.first.soaData,
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          isDownloadInProgress: true,
+          fileUrl: DownloadPaymentAttachment(
+            url: soaList.first.soaData.getValue(),
+          ),
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          fileUrl: DownloadPaymentAttachment(
+            url: soaList.first.soaData.getValue(),
+          ),
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
+        ),
+      ],
+    );
+
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download e-invoice success',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      seed: () => DownloadPaymentAttachmentsState.initial().copyWith(
+        customerCodeInfo: customerCodeInfo,
+        salesOrganization: salesOrganization,
+      ),
+      setUp: () {
+        when(() => downloadPaymentAttachmentRepository.downloadPermission())
+            .thenAnswer(
+          (invocation) async => const Right(PermissionStatus.granted),
+        );
+        when(
+          () => downloadPaymentAttachmentRepository.eInvoiceDownload(
+            eInvoice: downloadPaymentAttachmentMockData,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(file),
+        );
+      },
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.downloadEInvoice(
+          eInvoice: downloadPaymentAttachmentMockData,
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          isDownloadInProgress: true,
+          fileUrl: DownloadPaymentAttachment(
+            url: downloadPaymentAttachmentMockData.url,
+          ),
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          fileUrl: DownloadPaymentAttachment(
+            url: downloadPaymentAttachmentMockData.url,
+          ),
+          failureOrSuccessOption: optionOf(
+            Right(file),
+          ),
+        ),
+      ],
+    );
+
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download e-invoice fail',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      seed: () => DownloadPaymentAttachmentsState.initial().copyWith(
+        customerCodeInfo: customerCodeInfo,
+        salesOrganization: salesOrganization,
+      ),
+      setUp: () {
+        when(() => downloadPaymentAttachmentRepository.downloadPermission())
+            .thenAnswer(
+          (invocation) async => const Right(PermissionStatus.granted),
+        );
+        when(
+          () => downloadPaymentAttachmentRepository.eInvoiceDownload(
+            eInvoice: downloadPaymentAttachmentMockData,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(fakeError),
+        );
+      },
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.downloadEInvoice(
+          eInvoice: downloadPaymentAttachmentMockData,
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          isDownloadInProgress: true,
+          fileUrl: DownloadPaymentAttachment(
+            url: downloadPaymentAttachmentMockData.url,
+          ),
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          fileUrl: DownloadPaymentAttachment(
+            url: downloadPaymentAttachmentMockData.url,
+          ),
+          failureOrSuccessOption: optionOf(
+            const Left(fakeError),
+          ),
+        ),
+      ],
+    );
+
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download e-invoice storage permission failure',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      seed: () => DownloadPaymentAttachmentsState.initial().copyWith(
+        customerCodeInfo: customerCodeInfo,
+        salesOrganization: salesOrganization,
+      ),
+      setUp: () {
+        when(() => downloadPaymentAttachmentRepository.downloadPermission())
+            .thenAnswer(
+          (invocation) async => const Left(fakeError),
+        );
+      },
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.downloadEInvoice(
+          eInvoice: downloadPaymentAttachmentMockData,
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          isDownloadInProgress: true,
+          fileUrl: DownloadPaymentAttachment(
+            url: downloadPaymentAttachmentMockData.url,
+          ),
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          fileUrl: DownloadPaymentAttachment(
+            url: downloadPaymentAttachmentMockData.url,
+          ),
+          failureOrSuccessOption: optionOf(
+            const Left(fakeError),
+          ),
+        ),
       ],
     );
   });
