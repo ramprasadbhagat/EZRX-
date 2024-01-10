@@ -56,15 +56,7 @@ void main() {
           salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeMYSalesOrganisation,
           user: fakeRootAdminUser,
-          orderHistory: orderHistory.copyWith(
-            orderHistoryItems: orderHistory.orderHistoryItems
-                .where(
-                  (element) =>
-                      element.hashCode != fakeOrderHistoryItem.hashCode &&
-                      element.orderNumber == fakeOrderHistoryItem.orderNumber,
-                )
-                .toList(),
-          ),
+          orderHistory: orderHistory,
           orderHistoryItem: orderHistory.orderHistoryItems.first,
         );
       });
@@ -212,23 +204,13 @@ void main() {
           ),
         ),
         expect: () {
-          final modifiedList = orderHistory.orderHistoryItems
-              .where(
-                (element) =>
-                    element.hashCode != fakeOrderHistoryItem.hashCode &&
-                    element.orderNumber == fakeOrderHistoryItem.orderNumber,
-              )
-              .toList();
-          final newViewByItemDetails = orderHistory.copyWith(
-            orderHistoryItems: modifiedList,
-          );
           return [
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
-              orderHistory: newViewByItemDetails,
+              orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
             ),
             ViewByItemDetailsState.initial().copyWith(
@@ -236,7 +218,7 @@ void main() {
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
-              orderHistory: newViewByItemDetails,
+              orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
               isDetailsLoading: true,
             ),
@@ -245,7 +227,7 @@ void main() {
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
-              orderHistory: newViewByItemDetails,
+              orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
               failureOrSuccessOption: optionOf(Right(orderHistory)),
             ),
@@ -254,7 +236,7 @@ void main() {
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
-              orderHistory: newViewByItemDetails,
+              orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
               isLoading: true,
               failureOrSuccessOption: optionOf(Right(orderHistory)),
@@ -265,7 +247,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistoryStatuses: fakeOrderStatusTracker,
-              orderHistory: newViewByItemDetails,
+              orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
             ),
           ];
@@ -591,10 +573,7 @@ void main() {
             )),
           ).thenAnswer(
             (invocation) async => Right(
-              {
-                for (InvoiceData item in invoiceDataForOrders)
-                  item.hashId: item,
-              },
+              {for (final item in invoiceDataForOrders) item.hashId: item},
             ),
           );
         },
@@ -621,8 +600,11 @@ void main() {
             orderHistory: seedState.orderHistory.copyWith(
               orderHistoryItems: seedState.orderHistory.orderHistoryItems
                   .map(
-                    (e) => e.copyWith(
-                      invoiceData: invoiceDataForOrders.first,
+                    (order) => order.copyWith(
+                      invoiceData: invoiceDataForOrders.firstWhere(
+                        (e) => e.hashId == order.hashId,
+                        orElse: () => order.invoiceData,
+                      ),
                     ),
                   )
                   .toList(),
@@ -738,18 +720,16 @@ void main() {
           seedState
         ],
       );
-      test(
-        'unSelectedItems item check',
-        () {
-          final orderHistoryState = seedState.copyWith(
-            orderHistoryItem: OrderHistoryItem.empty(),
-          );
-          expect(
-            orderHistoryState.unSelectedItems,
-            [orderHistory.orderHistoryItems.first],
-          );
-        },
-      );
+
+      test('Get other items will filter out current item based on lineNumber',
+          () {
+        expect(
+          seedState.otherItems,
+          orderHistory.orderHistoryItems
+              .where((e) => e.lineNumber != fakeOrderHistoryItem.lineNumber)
+              .toList(),
+        );
+      });
     },
   );
 }

@@ -39,9 +39,7 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
   bool get displayShowMoreOrLess =>
       orderHistoryItem.orderHistoryItemPoAttachments.length > 1;
 
-  List<OrderHistoryItem> get unSelectedItems => orderHistory.orderHistoryItems
-      .where(
-        (element) => element.hashCode != orderHistoryItem.hashCode,
-      )
+  List<OrderHistoryItem> get otherItems => orderHistory.orderHistoryItems
+      .where((e) => e.lineNumber != orderHistoryItem.lineNumber)
       .toList();
 }

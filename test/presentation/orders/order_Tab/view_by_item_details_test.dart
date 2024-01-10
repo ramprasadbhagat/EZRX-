@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
+import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -16,10 +18,8 @@ import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
@@ -169,22 +169,23 @@ void main() {
     locator.registerFactory<AllInvoicesBloc>(
       () => allInvoicesBlocMock,
     );
-    fakeOrderHistoryItem = OrderHistoryItem.empty().copyWith(
-      status: OrderStepValue('Picking in progress'),
-      createdDate: DateTimeStringValue(fakeCreatedDate),
-      expiryDate: DateTimeStringValue('2023-10-04'),
-      batch: StringValue('fake-batch-number'),
-      orderNumber: OrderNumber('1234567'),
-      invoiceData:
-          InvoiceData.empty().copyWith(invoiceNumber: StringValue('123456')),
-      materialNumber: MaterialNumber('fakeMaterialNumber'),
-      governmentMaterialCode: 'fakegovernmentMaterialCode',
-    );
+
     fakeItemList =
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
     fakeOrder = await ViewByOrderLocalDataSource().getViewByOrders();
     mockViewByItemsOrderHistory =
         await ViewByItemLocalDataSource().getViewByItems();
+    fakeOrderHistoryItem = mockViewByItemsOrderHistory.orderHistoryItems
+        .firstWhere((e) => e.isTypeMaterial)
+        .copyWith(
+          status: OrderStepValue('Picking in progress'),
+          createdDate: DateTimeStringValue(fakeCreatedDate),
+          governmentMaterialCode: 'fakegovernmentMaterialCode',
+          batch: StringValue('fake-batch-number'),
+          expiryDate: DateTimeStringValue('2023-10-04'),
+          invoiceData: InvoiceData.empty()
+              .copyWith(invoiceNumber: StringValue('123456')),
+        );
   });
   group('Order History Details By Item Page', () {
     setUp(() {
@@ -402,9 +403,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final statusTrackerSection = find.byType(
-        StatusTrackerSection,
-      );
+      final statusTrackerSection = find.byType(StatusTrackerSection);
 
       expect(statusTrackerSection, findsOneWidget);
       await tester.tap(statusTrackerSection);
@@ -602,13 +601,8 @@ void main() {
     testWidgets('on Offer material', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [
-              fakeOrderHistoryItem.copyWith(
-                promoStatus: true,
-              ),
-            ],
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            promoStatus: true,
           ),
         ),
       );
@@ -625,13 +619,8 @@ void main() {
     testWidgets('bundle material', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [
-              fakeOrderHistoryItem.copyWith(
-                isBundle: true,
-              ),
-            ],
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            isBundle: true,
           ),
         ),
       );
@@ -639,7 +628,7 @@ void main() {
       await tester.pump();
       await tester.drag(
         find.byKey(WidgetKeys.viewByItemsOrderDetailPage),
-        const Offset(0, -500),
+        const Offset(0, -300),
       );
       await tester.pump();
       expect(find.byWidget(ProductTag.bundleOfferIcon()), findsOneWidget);

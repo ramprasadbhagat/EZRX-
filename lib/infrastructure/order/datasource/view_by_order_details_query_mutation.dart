@@ -91,6 +91,7 @@ class ViewByOrderDetailsQueryMutation {
         UnitPrice
         TotalPrice
         LineReferenceNotes
+        LineNumber
         Batch
         ExpiryDate
         SAPStatus

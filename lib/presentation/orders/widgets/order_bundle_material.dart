@@ -42,7 +42,10 @@ class BundleItemMaterial extends StatelessWidget {
     context.read<ViewByItemDetailsBloc>().add(
           ViewByItemDetailsEvent.setItemOrderDetails(
             orderHistory: orderHistory,
-            orderHistoryItem: orderHistory.orderHistoryItems.first,
+            orderHistoryItem: orderHistory.orderHistoryItems.firstWhere(
+              (e) => e.lineNumber == orderItem.lineNumber,
+              orElse: () => orderHistory.orderHistoryItems.first,
+            ),
             disableDeliveryDateForZyllemStatus:
                 eligibilityState.salesOrgConfigs.disableDeliveryDate,
           ),

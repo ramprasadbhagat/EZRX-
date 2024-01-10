@@ -34,6 +34,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required StringValue batch,
     required DateTimeStringValue expiryDate,
     required Remarks lineReferenceNotes,
+    required LineNumber lineNumber,
     required bool isTenderContractMaterial,
     required List<OrderHistoryDetailsOrderItemDetails> details,
     required OrderHistoryDetailsOrderItemTenderContractDetails
@@ -66,6 +67,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         batch: StringValue(''),
         expiryDate: DateTimeStringValue(''),
         lineReferenceNotes: Remarks(''),
+        lineNumber: LineNumber(''),
         isTenderContractMaterial: false,
         details: <OrderHistoryDetailsOrderItemDetails>[],
         tenderContractDetails:

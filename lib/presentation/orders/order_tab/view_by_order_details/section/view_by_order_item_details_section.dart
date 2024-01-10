@@ -178,10 +178,7 @@ class _OrderItemTile extends StatelessWidget {
 
     final eligibilityState = context.read<EligibilityBloc>().state;
     final orderHistoryItem = orderHistory.orderHistoryItems.firstWhere(
-      (
-        element,
-      ) =>
-          element.materialNumber == orderItem.materialNumber,
+      (e) => e.lineNumber == orderItem.lineNumber,
       orElse: () => orderHistory.orderHistoryItems.first,
     );
 

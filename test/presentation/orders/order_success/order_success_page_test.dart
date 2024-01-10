@@ -25,6 +25,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
@@ -38,6 +39,7 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 
 import 'package:ezrxmobile/locator.dart';
@@ -46,6 +48,7 @@ import 'package:ezrxmobile/presentation/core/list_price_strike_through_component
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_material.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -135,13 +138,10 @@ void main() {
   late ViewByOrderBloc viewByOrderBlocMock;
   late ViewByItemsBloc viewByItemsBlocMock;
   final fakeOrderNumber = OrderNumber('fake-order-number');
-  final fakeBundleItem = OrderHistoryDetailsOrderItem.empty().copyWith(
-    productType: MaterialInfoType.bundle(),
-  );
-  final fakeMaterialItem = OrderHistoryDetailsOrderItem.empty().copyWith(
-    productType: MaterialInfoType.material(),
-  );
+  late OrderHistoryDetailsOrderItem fakeBundleItem;
+  late OrderHistoryDetailsOrderItem fakeMaterialItem;
   late OrderHistoryDetails fakeOrderHistoryDetails;
+  late OrderHistory fakeOrderHistory;
   setUpAll(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
@@ -169,6 +169,13 @@ void main() {
       mixpanelServiceMock = locator<MixpanelService>();
       fakeOrderHistoryDetails =
           await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
+      fakeOrderHistory = await ViewByItemLocalDataSource().getViewByItems();
+      fakeBundleItem = fakeOrderHistoryDetails.orderHistoryDetailsOrderItem
+          .firstWhere((e) => e.productType.typeBundle);
+      fakeMaterialItem =
+          fakeOrderHistoryDetails.orderHistoryDetailsOrderItem.firstWhere(
+        (e) => e.productType.typeMaterial && e.type.isMaterialTypeComm,
+      );
     },
   );
   setUp(
@@ -195,7 +202,9 @@ void main() {
         CartState.initial(),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
-        ViewByItemDetailsState.initial(),
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistory: fakeOrderHistory,
+        ),
       );
       when(() => productImageBlocMock.state).thenReturn(
         ProductImageState.initial(),
@@ -801,6 +810,16 @@ void main() {
         ),
       ).called(1);
 
+      verify(
+        () => viewByItemDetailsBlocMock.add(
+          ViewByItemDetailsEvent.searchOrderHistory(
+            searchKey: SearchKey(
+              fakeOrderDetail.orderNumber.getOrDefaultValue(''),
+            ),
+          ),
+        ),
+      ).called(1);
+
       expect(
         find.descendant(
           of: find.byKey(WidgetKeys.customSnackBar),
@@ -828,40 +847,154 @@ void main() {
       expect(find.byKey(WidgetKeys.loaderImage), findsOneWidget);
     });
 
-    testWidgets('Show Bundle Section When Have Data', (tester) async {
-      when(() => orderSummaryBlocMock.state).thenAnswer(
-        (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsOrderItem: [
-              fakeBundleItem,
-            ],
+    group('Bundle -', () {
+      setUp(() {
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith.orderHistoryDetails(
+            orderHistoryDetailsOrderItem: [fakeBundleItem],
           ),
-        ),
-      );
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      expect(
-        find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
-        findsOneWidget,
-      );
+        );
+      });
+      testWidgets('Show section when have data', (tester) async {
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+          findsOneWidget,
+        );
+        expect(find.byType(BundleItemMaterial), findsWidgets);
+
+        expect(
+          find.byKey(
+            WidgetKeys.orderHistoryBundleItemMaterial(
+              fakeBundleItem.materialNumber.displayMatNo,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('Show nothing when view by item detail API failure',
+          (tester) async {
+        when(() => viewByItemDetailsBlocMock.state)
+            .thenReturn(ViewByItemDetailsState.initial());
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+          findsOneWidget,
+        );
+        expect(find.byType(BundleItemMaterial), findsNothing);
+      });
+
+      testWidgets('Navigate to item detail on tap', (tester) async {
+        when(() => autoRouterMock.push(const ViewByItemDetailsPageRoute()))
+            .thenAnswer((_) => Future.value(true));
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final item = find.byKey(
+          WidgetKeys.orderHistoryBundleItemMaterial(
+            fakeBundleItem.materialNumber.displayMatNo,
+          ),
+        );
+        await tester.dragUntilVisible(
+          item,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -200),
+        );
+        await tester.pump();
+        await tester.tap(item);
+
+        verify(() => autoRouterMock.push(const ViewByItemDetailsPageRoute()))
+            .called(1);
+
+        verify(
+          () => mixpanelServiceMock.trackEvent(
+            eventName: MixpanelEvents.orderDetailViewed,
+            properties: any(named: 'properties'),
+          ),
+        ).called(1);
+
+        verify(
+          () => viewByItemDetailsBlocMock.add(
+            ViewByItemDetailsEvent.setItemOrderDetails(
+              orderHistory: fakeOrderHistory,
+              orderHistoryItem: fakeOrderHistory.orderHistoryItems[1],
+              disableDeliveryDateForZyllemStatus: false,
+            ),
+          ),
+        ).called(1);
+      });
     });
 
-    testWidgets('Show Material Section When Have Data', (tester) async {
-      when(() => orderSummaryBlocMock.state).thenAnswer(
-        (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsOrderItem: [
-              fakeMaterialItem,
-            ],
+    group('Material -', () {
+      setUp(() {
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith.orderHistoryDetails(
+            orderHistoryDetailsOrderItem: [fakeMaterialItem],
           ),
-        ),
-      );
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      expect(
-        find.byKey(WidgetKeys.orderSuccessItemsSection),
-        findsOneWidget,
-      );
+        );
+      });
+
+      testWidgets('Show section when have data', (tester) async {
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.orderSuccessItemsSection),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('Show nothing when view by item detail API failure',
+          (tester) async {
+        when(() => viewByItemDetailsBlocMock.state)
+            .thenReturn(ViewByItemDetailsState.initial());
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.orderSuccessItemsSection),
+          findsNothing,
+        );
+      });
+
+      testWidgets('Navigate to item detail on tap', (tester) async {
+        when(() => autoRouterMock.push(const ViewByItemDetailsPageRoute()))
+            .thenAnswer((_) => Future.value(true));
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final item = find.byKey(WidgetKeys.orderSuccessItem(0)).first;
+        await tester.dragUntilVisible(
+          item,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -200),
+        );
+        await tester.pump();
+        await tester.tap(item);
+
+        verify(() => autoRouterMock.push(const ViewByItemDetailsPageRoute()))
+            .called(1);
+
+        verify(
+          () => mixpanelServiceMock.trackEvent(
+            eventName: MixpanelEvents.orderDetailViewed,
+            properties: any(named: 'properties'),
+          ),
+        ).called(1);
+
+        verify(
+          () => viewByItemDetailsBlocMock.add(
+            ViewByItemDetailsEvent.setItemOrderDetails(
+              orderHistory: fakeOrderHistory,
+              orderHistoryItem: fakeOrderHistory.orderHistoryItems[3],
+              disableDeliveryDateForZyllemStatus: false,
+            ),
+          ),
+        ).called(1);
+      });
     });
 
     testWidgets(

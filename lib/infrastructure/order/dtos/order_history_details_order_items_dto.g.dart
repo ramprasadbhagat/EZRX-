@@ -23,6 +23,7 @@ _$_OrderHistoryDetailsOrderItemDto _$$_OrderHistoryDetailsOrderItemDtoFromJson(
       batch: json['Batch'] as String? ?? '',
       expiryDate: json['ExpiryDate'] as String? ?? '',
       lineReferenceNotes: json['LineReferenceNotes'] as String? ?? '',
+      lineNumber: json['LineNumber'] as String? ?? '',
       isTenderContractMaterial:
           boolStringFormatCheck(json, 'IsTenderContractMaterial') as bool? ??
               false,
@@ -62,6 +63,7 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
       'Batch': instance.batch,
       'ExpiryDate': instance.expiryDate,
       'LineReferenceNotes': instance.lineReferenceNotes,
+      'LineNumber': instance.lineNumber,
       'IsTenderContractMaterial': instance.isTenderContractMaterial,
       'ParentID': instance.parentId,
       'Details': instance.details.map((e) => e.toJson()).toList(),

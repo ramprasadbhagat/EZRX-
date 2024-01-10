@@ -30,7 +30,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late ViewByOrderDetailsRepository viewByOrderDetailsRepositoryMock;
   late ProductDetailRepository productDetailRepositoryMock;
-  final fakeOrderNumber = OrderNumber('');
+  late OrderNumber fakeOrderNumber;
   final fakeTenderContract = TenderContract.empty().copyWith(
     isNearToExpire: true,
   );
@@ -53,7 +53,14 @@ void main() {
               isTenderContractMaterial: true,
             ),
             orderHistoryDetailsMock.orderHistoryDetailsOrderItem.last,
-          ],
+          ]
+              .map(
+                (e) => e.copyWith(
+                  type: OrderItemType('Comm'),
+                  productType: MaterialInfoType.material(),
+                ),
+              )
+              .toList(),
         );
 
         fakeMaterials = {
@@ -66,6 +73,7 @@ void main() {
               item.orderItem.queryInfo: true,
         };
         fakeQueryInfo = fakeMaterials.keys.first;
+        fakeOrderNumber = orderHistoryDetailsMock.orderNumber;
       });
 
       blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(

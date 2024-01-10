@@ -8,10 +8,12 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
@@ -35,6 +37,7 @@ import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_succe
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -81,6 +84,13 @@ class OrderSuccessPage extends StatelessWidget {
                     ViewByItemsEvent.fetch(
                       viewByItemFilter: ViewByItemFilter.empty(),
                       searchKey: SearchKey.searchFilter(''),
+                    ),
+                  );
+              context.read<ViewByItemDetailsBloc>().add(
+                    ViewByItemDetailsEvent.searchOrderHistory(
+                      searchKey: SearchKey(
+                        state.orderHistoryDetails.orderNumber.getValue(),
+                      ),
                     ),
                   );
               _trackOrderSuccess(context, state);
@@ -212,7 +222,7 @@ class _BodyContent extends StatelessWidget {
                               .orderHistoryDetailsOrderItem
                               .bundleItemDetailsList,
                         ),
-                        _OrderItems(
+                        _MaterialItemSection(
                           orderItems: state
                               .orderHistoryDetails
                               .orderHistoryDetailsOrderItem

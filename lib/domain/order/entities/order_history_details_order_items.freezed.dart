@@ -31,6 +31,7 @@ mixin _$OrderHistoryDetailsOrderItem {
   StringValue get batch => throw _privateConstructorUsedError;
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   Remarks get lineReferenceNotes => throw _privateConstructorUsedError;
+  LineNumber get lineNumber => throw _privateConstructorUsedError;
   bool get isTenderContractMaterial => throw _privateConstructorUsedError;
   List<OrderHistoryDetailsOrderItemDetails> get details =>
       throw _privateConstructorUsedError;
@@ -76,6 +77,7 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       StringValue batch,
       DateTimeStringValue expiryDate,
       Remarks lineReferenceNotes,
+      LineNumber lineNumber,
       bool isTenderContractMaterial,
       List<OrderHistoryDetailsOrderItemDetails> details,
       OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails,
@@ -128,6 +130,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? batch = null,
     Object? expiryDate = null,
     Object? lineReferenceNotes = null,
+    Object? lineNumber = null,
     Object? isTenderContractMaterial = null,
     Object? details = null,
     Object? tenderContractDetails = null,
@@ -200,6 +203,10 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
               as Remarks,
+      lineNumber: null == lineNumber
+          ? _value.lineNumber
+          : lineNumber // ignore: cast_nullable_to_non_nullable
+              as LineNumber,
       isTenderContractMaterial: null == isTenderContractMaterial
           ? _value.isTenderContractMaterial
           : isTenderContractMaterial // ignore: cast_nullable_to_non_nullable
@@ -334,6 +341,7 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
       StringValue batch,
       DateTimeStringValue expiryDate,
       Remarks lineReferenceNotes,
+      LineNumber lineNumber,
       bool isTenderContractMaterial,
       List<OrderHistoryDetailsOrderItemDetails> details,
       OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails,
@@ -391,6 +399,7 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
     Object? batch = null,
     Object? expiryDate = null,
     Object? lineReferenceNotes = null,
+    Object? lineNumber = null,
     Object? isTenderContractMaterial = null,
     Object? details = null,
     Object? tenderContractDetails = null,
@@ -463,6 +472,10 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
               as Remarks,
+      lineNumber: null == lineNumber
+          ? _value.lineNumber
+          : lineNumber // ignore: cast_nullable_to_non_nullable
+              as LineNumber,
       isTenderContractMaterial: null == isTenderContractMaterial
           ? _value.isTenderContractMaterial
           : isTenderContractMaterial // ignore: cast_nullable_to_non_nullable
@@ -541,6 +554,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
       required this.batch,
       required this.expiryDate,
       required this.lineReferenceNotes,
+      required this.lineNumber,
       required this.isTenderContractMaterial,
       required final List<OrderHistoryDetailsOrderItemDetails> details,
       required this.tenderContractDetails,
@@ -587,6 +601,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   @override
   final Remarks lineReferenceNotes;
   @override
+  final LineNumber lineNumber;
+  @override
   final bool isTenderContractMaterial;
   final List<OrderHistoryDetailsOrderItemDetails> _details;
   @override
@@ -623,7 +639,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice)';
+    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice)';
   }
 
   @override
@@ -655,6 +671,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
                 other.expiryDate == expiryDate) &&
             (identical(other.lineReferenceNotes, lineReferenceNotes) ||
                 other.lineReferenceNotes == lineReferenceNotes) &&
+            (identical(other.lineNumber, lineNumber) ||
+                other.lineNumber == lineNumber) &&
             (identical(
                     other.isTenderContractMaterial, isTenderContractMaterial) ||
                 other.isTenderContractMaterial == isTenderContractMaterial) &&
@@ -702,6 +720,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
         batch,
         expiryDate,
         lineReferenceNotes,
+        lineNumber,
         isTenderContractMaterial,
         const DeepCollectionEquality().hash(_details),
         tenderContractDetails,
@@ -743,6 +762,7 @@ abstract class _OrderHistoryDetailsOrderItem
       required final StringValue batch,
       required final DateTimeStringValue expiryDate,
       required final Remarks lineReferenceNotes,
+      required final LineNumber lineNumber,
       required final bool isTenderContractMaterial,
       required final List<OrderHistoryDetailsOrderItemDetails> details,
       required final OrderHistoryDetailsOrderItemTenderContractDetails
@@ -788,6 +808,8 @@ abstract class _OrderHistoryDetailsOrderItem
   DateTimeStringValue get expiryDate;
   @override
   Remarks get lineReferenceNotes;
+  @override
+  LineNumber get lineNumber;
   @override
   bool get isTenderContractMaterial;
   @override
