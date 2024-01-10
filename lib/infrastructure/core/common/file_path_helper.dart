@@ -9,25 +9,23 @@ import 'package:path_provider/path_provider.dart';
 class FileSystemHelper {
   Future<File> getDownloadedFile(
     AttachmentFileBuffer file,
-    bool isAndroidSdk33,
   ) async {
     final downloadFile = File(
-      '${await _getDownloadedFilePath(isAndroidSdk33)}/${file.name}',
+      '${await _getDownloadedFilePath()}/${file.name.split('.').first}_${DateTime.now().millisecondsSinceEpoch}.${file.name.split('.').last}',
     );
     await downloadFile.writeAsBytes(file.buffer);
 
     return downloadFile;
   }
 
-  Future<String> _getDownloadedFilePath(bool isAndroidSdk33) async {
+  Future<String> _getDownloadedFilePath() async {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      final directory = isAndroidSdk33
-          ? await getDownloadsDirectory()
-          : await getExternalStorageDirectory();
 
-      return isAndroidSdk33
-          ? '${directory?.path}'
-          : '${directory?.path.split('Android').first}Download';
+      ///Android/data/ this path is restricted from sdk 31
+      ///reference: https://developer.android.com/training/data-storage/manage-all-files#:~:text=Write%20access%20to%20all%20internal,data/%20on%20a%20storage%20volume.
+      ///so we are not able to create Android/data/com.zuelligpharma.ezrxplus.uat/files/downloads
+
+      return 'storage/emulated/0/Download';
     } else {
       final directory = await getApplicationDocumentsDirectory();
 

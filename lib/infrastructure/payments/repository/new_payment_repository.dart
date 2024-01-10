@@ -309,7 +309,6 @@ class NewPaymentRepository extends INewPaymentRepository {
           buffer: pdfData,
           name: 'invoice_${DateTime.now().millisecondsSinceEpoch}.pdf',
         ),
-        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
       );
 
       return const Right(unit);

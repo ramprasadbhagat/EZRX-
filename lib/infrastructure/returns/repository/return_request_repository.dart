@@ -268,7 +268,6 @@ class ReturnRequestRepository extends IReturnRequestRepository {
         final localFile = await localDataSource.downloadFile();
         final downloadedFile = await fileSystemHelper.getDownloadedFile(
           localFile,
-          await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
         );
 
         return Right(downloadedFile);
@@ -280,7 +279,6 @@ class ReturnRequestRepository extends IReturnRequestRepository {
       final localFile = await remoteDataSource.downloadFile(file);
       final downloadedFile = await fileSystemHelper.getDownloadedFile(
         localFile,
-        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
       );
 
       return Right(downloadedFile);

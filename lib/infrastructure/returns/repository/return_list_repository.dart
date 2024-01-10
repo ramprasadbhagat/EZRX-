@@ -192,7 +192,6 @@ class ReturnListRepository extends IReturnListRepository {
       );
       final downloadedFile = await fileSystemHelper.getDownloadedFile(
         localFile,
-        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
       );
 
       return Right(downloadedFile);

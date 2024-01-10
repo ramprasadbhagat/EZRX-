@@ -848,7 +848,6 @@ void main() {
               buffer: buffer,
               name: 'invoice_${DateTime.now().millisecondsSinceEpoch}.pdf',
             ),
-            false,
           ),
         ).thenThrow((invocation) => MockException());
 

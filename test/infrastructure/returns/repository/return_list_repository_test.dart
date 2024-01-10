@@ -470,7 +470,6 @@ void main() {
                 name: Uri.parse('fake_url').pathSegments.last,
                 buffer: buffer,
               ),
-              false,
             ),
           ).thenAnswer((invocation) async => File('fake_url'));
           final result = await returnListRepository.downloadFile(
@@ -499,7 +498,6 @@ void main() {
                 name: Uri.parse('fake_url').pathSegments.last,
                 buffer: buffer,
               ),
-              false,
             ),
           ).thenAnswer((invocation) async => File('fake_url'));
           final result = await returnListRepository.downloadFile(
@@ -533,7 +531,6 @@ void main() {
                 name: Uri.parse('fake_url').pathSegments.last,
                 buffer: buffer,
               ),
-              false,
             ),
           ).thenAnswer((invocation) async => File('fake_url'));
           final result = await returnListRepository.downloadFile(
@@ -562,7 +559,6 @@ void main() {
                 name: Uri.parse('fake_url').pathSegments.last,
                 buffer: buffer,
               ),
-              false,
             ),
           ).thenAnswer((invocation) async => File('fake_url'));
           final result = await returnListRepository.downloadFile(

@@ -105,7 +105,6 @@ void main() {
       when(
         () => fileSystemHelperMock.getDownloadedFile(
           AttachmentFileBuffer.empty().copyWith(name: fakeFileName),
-          false,
         ),
       ).thenAnswer(
         (invocation) async => file,
@@ -163,7 +162,6 @@ void main() {
       when(
         () => fileSystemHelperMock.getDownloadedFile(
           AttachmentFileBuffer.empty().copyWith(name: fakeFileName),
-          false,
         ),
       ).thenAnswer(
         (invocation) async => file,

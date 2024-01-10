@@ -209,7 +209,6 @@ class DownloadPaymentAttachmentRepository
         final localFile = await localDataSource.fileDownload();
         final downloadedFile = await fileSystemHelper.getDownloadedFile(
           localFile,
-          await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
         );
 
         return Right(downloadedFile);
@@ -221,7 +220,6 @@ class DownloadPaymentAttachmentRepository
       final localFile = await remoteDataSource.fileDownload(files.url);
       final downloadedFile = await fileSystemHelper.getDownloadedFile(
         localFile,
-        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
       );
 
       return Right(downloadedFile);
@@ -239,7 +237,6 @@ class DownloadPaymentAttachmentRepository
         final localFile = await localDataSource.soaDownload();
         final downloadedFile = await fileSystemHelper.getDownloadedFile(
           localFile,
-          await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
         );
 
         return Right(downloadedFile);
@@ -253,7 +250,6 @@ class DownloadPaymentAttachmentRepository
       );
       final downloadedFile = await fileSystemHelper.getDownloadedFile(
         localFile,
-        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
       );
 
       return Right(downloadedFile);
@@ -271,7 +267,6 @@ class DownloadPaymentAttachmentRepository
         final localFile = await localDataSource.eInvoiceDownload();
         final downloadedFile = await fileSystemHelper.getDownloadedFile(
           localFile,
-          await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
         );
 
         return Right(downloadedFile);
@@ -285,7 +280,6 @@ class DownloadPaymentAttachmentRepository
       );
       final downloadedFile = await fileSystemHelper.getDownloadedFile(
         localFile,
-        await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
       );
 
       return Right(downloadedFile);

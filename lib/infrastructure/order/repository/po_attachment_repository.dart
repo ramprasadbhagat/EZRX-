@@ -58,7 +58,6 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
 
               return await fileSystemHelper.getDownloadedFile(
                 downloadedFile,
-                await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
               );
             },
           ).toList(),
@@ -80,7 +79,6 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
 
             return await fileSystemHelper.getDownloadedFile(
               downloadedFile,
-              await deviceInfo.checkIfDeviceIsAndroidWithSDK33(),
             );
           },
         ).toList(),

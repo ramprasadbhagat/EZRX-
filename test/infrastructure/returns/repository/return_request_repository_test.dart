@@ -566,7 +566,6 @@ void main() {
           when(
             () => fileSystemHelperMock.getDownloadedFile(
               fakeAttachmentFile,
-              true,
             ),
           ).thenAnswer((_) async => File(fakePath));
           final result = await repository.downloadFile(
@@ -608,7 +607,6 @@ void main() {
           when(
             () => fileSystemHelperMock.getDownloadedFile(
               fakeAttachmentFile,
-              false,
             ),
           ).thenAnswer((_) async => File(fakePath));
           final result = await repository.downloadFile(
