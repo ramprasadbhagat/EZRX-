@@ -16,7 +16,7 @@ class _ShipToAddressInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            shipToInfo.shipToName.name1,
+            shipToInfo.shipToName.toString(),
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),

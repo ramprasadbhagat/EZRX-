@@ -24,6 +24,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -190,6 +192,30 @@ void main() {
       final customerSearchPage = find.byKey(const Key('customerSearchPage'));
       expect(customerSearchPage, findsOneWidget);
     });
+    testWidgets(
+      'Find Full Ship To Name',
+      (tester) async {
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            isFetching: false,
+            customerCodeList: [fakeCustomerCodeInfo],
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+
+        await tester.pumpAndSettle();
+
+        final shipToName =
+            find.text('fake-name1 fake-name2 fake-name3 fake-name4');
+        expect(shipToName, findsOneWidget);
+      },
+    );
 
     // testWidgets(
     //   'Test Customer Code Selector tile and search',
