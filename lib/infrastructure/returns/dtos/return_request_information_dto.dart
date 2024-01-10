@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_attachment_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'return_request_information_dto.freezed.dart';
@@ -68,6 +69,9 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       defaultValue: <ReturnRequestInformationDto>[],
     )
         required List<ReturnRequestInformationDto> bonusInformation,
+    @StringToDoubleConverter()
+    @JsonKey(name: 'overrideValue', defaultValue: 0)
+        required double overrideValue,
   }) = _ReturnRequestInformationDto;
 
   ReturnRequestInformation toDomain() {
@@ -99,6 +103,7 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       prsfd: Prsfd(prsfd),
       bonusInformation: bonusInformation.map((e) => e.toDomain()).toList(),
       remarks: Remarks(remarks),
+      overrideValue: overrideValue,
     );
   }
 

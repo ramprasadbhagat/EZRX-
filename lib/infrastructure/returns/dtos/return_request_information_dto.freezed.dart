@@ -78,6 +78,9 @@ mixin _$ReturnRequestInformationDto {
       name: 'bonusInformation', defaultValue: <ReturnRequestInformationDto>[])
   List<ReturnRequestInformationDto> get bonusInformation =>
       throw _privateConstructorUsedError;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'overrideValue', defaultValue: 0)
+  double get overrideValue => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -129,7 +132,10 @@ abstract class $ReturnRequestInformationDtoCopyWith<$Res> {
       @JsonKey(
           name: 'bonusInformation',
           defaultValue: <ReturnRequestInformationDto>[])
-      List<ReturnRequestInformationDto> bonusInformation});
+      List<ReturnRequestInformationDto> bonusInformation,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'overrideValue', defaultValue: 0)
+      double overrideValue});
 }
 
 /// @nodoc
@@ -173,6 +179,7 @@ class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
     Object? prsfd = null,
     Object? remarks = null,
     Object? bonusInformation = null,
+    Object? overrideValue = null,
   }) {
     return _then(_value.copyWith(
       invoiceNo: null == invoiceNo
@@ -283,6 +290,10 @@ class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
           ? _value.bonusInformation
           : bonusInformation // ignore: cast_nullable_to_non_nullable
               as List<ReturnRequestInformationDto>,
+      overrideValue: null == overrideValue
+          ? _value.overrideValue
+          : overrideValue // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -332,7 +343,10 @@ abstract class _$$_ReturnRequestInformationDtoCopyWith<$Res>
       @JsonKey(
           name: 'bonusInformation',
           defaultValue: <ReturnRequestInformationDto>[])
-      List<ReturnRequestInformationDto> bonusInformation});
+      List<ReturnRequestInformationDto> bonusInformation,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'overrideValue', defaultValue: 0)
+      double overrideValue});
 }
 
 /// @nodoc
@@ -375,6 +389,7 @@ class __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>
     Object? prsfd = null,
     Object? remarks = null,
     Object? bonusInformation = null,
+    Object? overrideValue = null,
   }) {
     return _then(_$_ReturnRequestInformationDto(
       invoiceNo: null == invoiceNo
@@ -485,6 +500,10 @@ class __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>
           ? _value._bonusInformation
           : bonusInformation // ignore: cast_nullable_to_non_nullable
               as List<ReturnRequestInformationDto>,
+      overrideValue: null == overrideValue
+          ? _value.overrideValue
+          : overrideValue // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -535,7 +554,10 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
       @JsonKey(
           name: 'bonusInformation',
           defaultValue: <ReturnRequestInformationDto>[])
-      required final List<ReturnRequestInformationDto> bonusInformation})
+      required final List<ReturnRequestInformationDto> bonusInformation,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'overrideValue', defaultValue: 0)
+      required this.overrideValue})
       : _imageUrl = imageUrl,
         _attachments = attachments,
         _attachmentUrl = attachmentUrl,
@@ -653,8 +675,13 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
   }
 
   @override
+  @StringToDoubleConverter()
+  @JsonKey(name: 'overrideValue', defaultValue: 0)
+  final double overrideValue;
+
+  @override
   String toString() {
-    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, returnOrderDesc: $returnOrderDesc, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, remarks: $remarks, bonusInformation: $bonusInformation)';
+    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, returnOrderDesc: $returnOrderDesc, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, remarks: $remarks, bonusInformation: $bonusInformation, overrideValue: $overrideValue)';
   }
 
   @override
@@ -709,7 +736,9 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
             (identical(other.prsfd, prsfd) || other.prsfd == prsfd) &&
             (identical(other.remarks, remarks) || other.remarks == remarks) &&
             const DeepCollectionEquality()
-                .equals(other._bonusInformation, _bonusInformation));
+                .equals(other._bonusInformation, _bonusInformation) &&
+            (identical(other.overrideValue, overrideValue) ||
+                other.overrideValue == overrideValue));
   }
 
   @JsonKey(ignore: true)
@@ -742,7 +771,8 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
         invoiceDate,
         prsfd,
         remarks,
-        const DeepCollectionEquality().hash(_bonusInformation)
+        const DeepCollectionEquality().hash(_bonusInformation),
+        overrideValue
       ]);
 
   @JsonKey(ignore: true)
@@ -813,8 +843,10 @@ abstract class _ReturnRequestInformationDto
       @JsonKey(
           name: 'bonusInformation',
           defaultValue: <ReturnRequestInformationDto>[])
-      required final List<ReturnRequestInformationDto>
-          bonusInformation}) = _$_ReturnRequestInformationDto;
+      required final List<ReturnRequestInformationDto> bonusInformation,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'overrideValue', defaultValue: 0)
+      required final double overrideValue}) = _$_ReturnRequestInformationDto;
   _ReturnRequestInformationDto._() : super._();
 
   factory _ReturnRequestInformationDto.fromJson(Map<String, dynamic> json) =
@@ -902,6 +934,10 @@ abstract class _ReturnRequestInformationDto
   @JsonKey(
       name: 'bonusInformation', defaultValue: <ReturnRequestInformationDto>[])
   List<ReturnRequestInformationDto> get bonusInformation;
+  @override
+  @StringToDoubleConverter()
+  @JsonKey(name: 'overrideValue', defaultValue: 0)
+  double get overrideValue;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnRequestInformationDtoCopyWith<_$_ReturnRequestInformationDto>

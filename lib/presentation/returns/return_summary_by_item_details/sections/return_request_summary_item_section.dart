@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/return_summary_item_price.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,10 +70,10 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
           'Batch ${widget.requestInformation.batch}\n(Expires ${widget.requestInformation.expiryDate.dateString})',
       quantity: widget.requestInformation.returnQuantity.toString(),
       isQuantityBelowImage: false,
-      priceComponent: PriceComponent(
-        salesOrgConfig: salesOrgConfig,
-        price: widget.requestInformation.calculatedUnitPrice.toString(),
-        type: PriceStyle.bonusPrice,
+      priceComponent: ReturnSummaryItemPrice(
+        showPreviousPrice: widget.requestInformation.isCounterOfferRequested,
+        originPrice: widget.requestInformation.unitPrice.toString(),
+        unitPrice: widget.requestInformation.calculatedUnitPrice.toString(),
       ),
       statusWidget: StatusLabel(
         status: StatusType(

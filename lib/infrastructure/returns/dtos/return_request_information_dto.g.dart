@@ -50,6 +50,10 @@ _$_ReturnRequestInformationDto _$$_ReturnRequestInformationDtoFromJson(
                   e as Map<String, dynamic>))
               .toList() ??
           [],
+      overrideValue: json['overrideValue'] == null
+          ? 0
+          : const StringToDoubleConverter()
+              .fromJson(json['overrideValue'] as String),
     );
 
 Map<String, dynamic> _$$_ReturnRequestInformationDtoToJson(
@@ -83,4 +87,6 @@ Map<String, dynamic> _$$_ReturnRequestInformationDtoToJson(
       'remarks': instance.remarks,
       'bonusInformation':
           instance.bonusInformation.map((e) => e.toJson()).toList(),
+      'overrideValue':
+          const StringToDoubleConverter().toJson(instance.overrideValue),
     };

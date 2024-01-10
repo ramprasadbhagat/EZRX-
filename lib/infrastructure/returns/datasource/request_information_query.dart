@@ -36,6 +36,7 @@ class RequestInformationQuery {
       attachments
       priceDate
       createdDate
+      overrideValue
       returnOrderDesc
       principal
       principalName
