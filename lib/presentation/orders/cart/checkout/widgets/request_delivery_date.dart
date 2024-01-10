@@ -17,9 +17,7 @@ class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
     final salesConfig = context.read<EligibilityBloc>().state.salesOrgConfigs;
     _startDate = salesConfig.deliveryStartDate;
     _endDate = salesConfig.deliveryEndDate;
-    _deliveryDateText = TextEditingController.fromValue(
-      TextEditingValue(text: DateTimeUtils.getDeliveryDateString(_startDate)),
-    );
+    _deliveryDateText = TextEditingController();
     super.initState();
   }
 
@@ -44,28 +42,12 @@ class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
             fieldKey: WidgetKeys.deliveryDate,
             labelText: context.tr('Request delivery date'),
             controller: _deliveryDateText,
-            validator: (_) {
-              return context
-                  .read<AdditionalDetailsBloc>()
-                  .state
-                  .deliveryInfoData
-                  .deliveryDate
-                  .value
-                  .fold(
-                    (f) => f.maybeMap(
-                      empty: (_) =>
-                          'Request delivery date is a required field.'.tr(),
-                      orElse: () => null,
-                    ),
-                    (_) => null,
-                  );
-            },
             onTap: state.deliveryInfoData.greenDeliveryEnabled ||
                     state.isLoading
                 ? null
                 : ([bool mounted = true]) async {
                     final dateTime = await pickDate(context);
-                    if (!mounted) return;
+                    if (!mounted || dateTime == null) return;
                     _deliveryDateText.text =
                         DateTimeUtils.getDeliveryDateString(dateTime);
                     context.read<AdditionalDetailsBloc>().add(
@@ -96,15 +78,11 @@ class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
     );
   }
 
-  Future<DateTime> pickDate(BuildContext context) async {
-    final orderDate = await showDatePicker(
-      context: context,
-      firstDate: _startDate,
-      lastDate: _endDate,
-      initialDate: _startDate,
-      selectableDayPredicate: (DateTime val) => !DateTimeUtils.isWeekend(val),
-    );
-
-    return orderDate ?? _startDate;
-  }
+  Future<DateTime?> pickDate(BuildContext context) => showDatePicker(
+        context: context,
+        firstDate: _startDate,
+        lastDate: _endDate,
+        initialDate: _startDate,
+        selectableDayPredicate: (DateTime val) => !DateTimeUtils.isWeekend(val),
+      );
 }

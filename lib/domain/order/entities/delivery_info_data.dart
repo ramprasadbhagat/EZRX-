@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
@@ -58,16 +57,10 @@ class DeliveryInfoData with _$DeliveryInfoData {
         contactPerson: ContactPerson(''),
         mobileNumber: MobileNumber(''),
         paymentTerm: PaymentTerm(''),
-        deliveryDate: defaultDeliveryDate,
+        deliveryDate: DateTimeStringValue(''),
         poDocuments: <PoDocuments>[],
         greenDeliveryEnabled: false,
       );
 
-  static DateTimeStringValue get defaultDeliveryDate => DateTimeStringValue(
-        DateFormat('yyyy-MM-dd').format(
-          DateTime.now().add(
-            const Duration(days: 1),
-          ),
-        ),
-      );
+
 }

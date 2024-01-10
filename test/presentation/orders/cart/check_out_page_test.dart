@@ -2085,7 +2085,7 @@ void main() {
     testWidgets('=> Show Request Delivery Date', (WidgetTester tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisation: fakeTHSalesOrganisation,
           salesOrgConfigs: fakeTHSalesOrgConfigs,
         ),
       );
@@ -2108,7 +2108,7 @@ void main() {
         (WidgetTester tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisation: fakeTHSalesOrganisation,
           salesOrgConfigs: fakeTHSalesOrgConfigs,
         ),
       );
@@ -2129,7 +2129,7 @@ void main() {
 
       expect(
         find.text(DateTimeUtils.getDeliveryDateString(selectedDate)),
-        findsOneWidget,
+        findsNothing,
       );
 
       // Simulate tapping the select date button

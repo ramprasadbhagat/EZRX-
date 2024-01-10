@@ -51,7 +51,7 @@ void main() {
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              deliveryDate: DeliveryInfoData.defaultDeliveryDate,
+              deliveryDate: DateTimeStringValue(''),
               mobileNumber: MobileNumber(''),
             ),
             config: config,
@@ -73,7 +73,7 @@ void main() {
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              deliveryDate: DeliveryInfoData.defaultDeliveryDate,
+              deliveryDate: DateTimeStringValue(''),
               mobileNumber: MobileNumber(''),
             ),
             config: config.copyWith(
@@ -97,7 +97,7 @@ void main() {
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              deliveryDate: DeliveryInfoData.defaultDeliveryDate,
+              deliveryDate: DateTimeStringValue(''),
               mobileNumber: MobileNumber('1234567890'),
             ),
           )
