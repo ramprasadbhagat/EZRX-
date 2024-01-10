@@ -95,7 +95,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
       when(
-        () => remoteDataSource.getSoa('0030082707', '2001'),
+        () => remoteDataSource.getSoa('20010030082707'),
       ).thenAnswer(
         (invocation) async => fakeSoaMockList,
       );
@@ -113,7 +113,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
       when(
-        () => remoteDataSource.getSoa('0030082707', '2001'),
+        () => remoteDataSource.getSoa('20010030082707'),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
       );
@@ -124,6 +124,26 @@ void main() {
       );
       expect(
         result.isLeft(),
+        true,
+      );
+    });
+
+    test('get Soa successfully Remote for all markets other than MY ',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+      when(
+        () => remoteDataSource.getSoa('0030082707'),
+      ).thenAnswer(
+        (invocation) async => fakeSoaMockList,
+      );
+      final result = await repository.fetchSoa(
+        customerCodeInfo:
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0030082707'),
+        salesOrg: fakeSGSalesOrg,
+      );
+      expect(
+        result.isRight(),
         true,
       );
     });

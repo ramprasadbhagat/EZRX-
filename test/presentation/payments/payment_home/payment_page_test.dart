@@ -199,7 +199,7 @@ void main() {
         .thenReturn(AvailableCreditsState.initial());
     when(() => availableCreditsBlocMock.state)
         .thenReturn(AvailableCreditsState.initial());
-     when(() => availableCreditFilterBloc.state)
+    when(() => availableCreditFilterBloc.state)
         .thenReturn(AvailableCreditFilterState.initial());
     when(() => outstandingInvoicesBlocMock.state)
         .thenReturn(OutstandingInvoicesState.initial());

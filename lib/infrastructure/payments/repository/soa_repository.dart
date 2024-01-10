@@ -37,10 +37,11 @@ class SoaRepository extends ISoaRepository {
       }
     }
     try {
-      final soaResponse = await remoteDataSource.getSoa(
-        customerCodeInfo.customerCodeSoldTo,
-        salesOrg.getOrCrash(),
-      );
+      final soaInput = salesOrg.isMY
+          ? '${salesOrg.getOrCrash()}${customerCodeInfo.customerCodeSoldTo}'
+          : customerCodeInfo.customerCodeSoldTo;
+
+      final soaResponse = await remoteDataSource.getSoa(soaInput);
       final dateSortedSoaResponse = soaResponse
         ..sort(
           (a, b) => b.soaData.date.compareTo(a.soaData.date),

@@ -60,8 +60,7 @@ void main() {
       );
 
       final result = await remoteDataSource.getSoa(
-        '0030082707',
-        '2601',
+        '26010030082707',
       );
 
       expect(
@@ -85,8 +84,7 @@ void main() {
 
       await remoteDataSource
           .getSoa(
-        '0030082707',
-        '2601',
+        '26010030082707',
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -113,8 +111,7 @@ void main() {
 
       await remoteDataSource
           .getSoa(
-        '0030082707',
-        '2601',
+        '26010030082707',
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -135,8 +132,7 @@ void main() {
 
       await remoteDataSource
           .getSoa(
-        '0030082707',
-        '2601',
+        '26010030082707',
       )
           .onError((error, _) async {
         expect(error, isA<OtherException>());

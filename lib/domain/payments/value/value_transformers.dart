@@ -9,9 +9,23 @@ bool checkIsCredit(String documentType) {
 }
 
 String findDate(String input) {
-  final dateFinderRgx = RegExp(r'(20\d{2})[0-1](\d{1})[0-3](\d{1})');
+  //Need two regex expressions as we have a difference between the file format
+  //of MY and other markets.
 
-  return dateFinderRgx.allMatches(input).last.group(0) ?? '';
+  final dateFinderRgx = RegExp(r'(\d{6})_(\d{6})\.pdf');
+  final dateFinderRgxMyMarket = RegExp(r'(20\d{2})[0-1](\d{1})[0-3](\d{1})');
+
+  if (dateFinderRgxMyMarket.hasMatch(input)) {
+    return dateFinderRgxMyMarket.allMatches(input).last.group(0) ?? '';
+  }
+
+  if (dateFinderRgx.hasMatch(input)) {
+    final extractedDate = dateFinderRgx.firstMatch(input)?.group(2) ?? '';
+
+    return extractedDate.padRight(extractedDate.length + 2, '01');
+  }
+
+  return '';
 }
 
 bool checkIsQrCode(String paymentMethodValue) =>

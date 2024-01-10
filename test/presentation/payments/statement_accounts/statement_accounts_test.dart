@@ -103,7 +103,7 @@ void main() {
   final salesOrg = SalesOrg('2001');
   final applyFilter = SoaFilter.empty().copyWith(
     fromDate: DateTimeStringValue('20230615'),
-    toDate: DateTimeStringValue('20230705'),
+    toDate: DateTimeStringValue('20231105'),
   );
 
   setUpAll(() async {
@@ -736,6 +736,28 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.byKey(WidgetKeys.monthPickerKey), findsOneWidget);
       });
+    });
+
+    testWidgets('Body Test - Load with data with updated response format',
+        (tester) async {
+      when(() => mockSoaBloc.state).thenReturn(
+        SoaState.initial().copyWith(
+          soaList: fakeSoaList,
+          appliedFilter: applyFilter,
+        ),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+      final findSoaItem = find.text('Oct 2023');
+      expect(findSoaItem, findsOneWidget);
+      final downloadButtonKey = find.byKey(
+        WidgetKeys.genericKey(
+          key: 'soaDownloadButton#${fakeSoaList[3].soaData.simpleDateString}',
+        ),
+      );
+      expect(downloadButtonKey, findsOneWidget);
+      await tester.tap(downloadButtonKey);
     });
   });
 }
