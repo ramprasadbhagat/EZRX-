@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_summary_item_price.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/return_override_info_icon.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,11 +95,21 @@ class _ReturnItemSectionState extends State<_ReturnItemSection> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '${'Qty:'.tr()} ${widget.returnRequestinformation.returnQuantity.toString()}',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: ZPColors.black,
+              Row(
+                children: [
+                  Text(
+                    '${'Qty:'.tr()} ${widget.returnRequestinformation.returnQuantity.toString()}',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: ZPColors.black,
+                        ),
+                  ),
+                  if (widget
+                      .returnRequestinformation.isApprovedQuantityOverride)
+                    ReturnOverrideInfoIcon.quantity(
+                      initialQuantity:
+                          widget.returnRequestinformation.initialQuantity,
                     ),
+                ],
               ),
               PriceComponent(
                 salesOrgConfig:

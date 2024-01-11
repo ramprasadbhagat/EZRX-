@@ -70,6 +70,7 @@ query requestInformationV2($request: requestInformationRequest!) {
       returnQuantity
       unitPrice
       totalPrice
+      initialQuantity
       billingItemNumber
       salesDocumentItemNumber
       materialNumber

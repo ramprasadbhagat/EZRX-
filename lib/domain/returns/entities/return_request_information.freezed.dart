@@ -46,6 +46,7 @@ mixin _$ReturnRequestInformation {
       throw _privateConstructorUsedError;
   Remarks get remarks => throw _privateConstructorUsedError;
   double get overrideValue => throw _privateConstructorUsedError;
+  int get initialQuantity => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnRequestInformationCopyWith<ReturnRequestInformation> get copyWith =>
@@ -86,7 +87,8 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       Prsfd prsfd,
       List<ReturnRequestInformation> bonusInformation,
       Remarks remarks,
-      double overrideValue});
+      double overrideValue,
+      int initialQuantity});
 }
 
 /// @nodoc
@@ -131,6 +133,7 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
     Object? bonusInformation = null,
     Object? remarks = null,
     Object? overrideValue = null,
+    Object? initialQuantity = null,
   }) {
     return _then(_value.copyWith(
       invoiceNo: null == invoiceNo
@@ -245,6 +248,10 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
           ? _value.overrideValue
           : overrideValue // ignore: cast_nullable_to_non_nullable
               as double,
+      initialQuantity: null == initialQuantity
+          ? _value.initialQuantity
+          : initialQuantity // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -286,7 +293,8 @@ abstract class _$$_ReturnRequestInformationCopyWith<$Res>
       Prsfd prsfd,
       List<ReturnRequestInformation> bonusInformation,
       Remarks remarks,
-      double overrideValue});
+      double overrideValue,
+      int initialQuantity});
 }
 
 /// @nodoc
@@ -329,6 +337,7 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
     Object? bonusInformation = null,
     Object? remarks = null,
     Object? overrideValue = null,
+    Object? initialQuantity = null,
   }) {
     return _then(_$_ReturnRequestInformation(
       invoiceNo: null == invoiceNo
@@ -443,6 +452,10 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
           ? _value.overrideValue
           : overrideValue // ignore: cast_nullable_to_non_nullable
               as double,
+      initialQuantity: null == initialQuantity
+          ? _value.initialQuantity
+          : initialQuantity // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -478,7 +491,8 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
       required this.prsfd,
       required final List<ReturnRequestInformation> bonusInformation,
       required this.remarks,
-      required this.overrideValue})
+      required this.overrideValue,
+      required this.initialQuantity})
       : _imageUrl = imageUrl,
         _attachments = attachments,
         _attachmentUrl = attachmentUrl,
@@ -566,10 +580,12 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
   final Remarks remarks;
   @override
   final double overrideValue;
+  @override
+  final int initialQuantity;
 
   @override
   String toString() {
-    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks, overrideValue: $overrideValue)';
+    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks, overrideValue: $overrideValue, initialQuantity: $initialQuantity)';
   }
 
   @override
@@ -626,7 +642,9 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
                 .equals(other._bonusInformation, _bonusInformation) &&
             (identical(other.remarks, remarks) || other.remarks == remarks) &&
             (identical(other.overrideValue, overrideValue) ||
-                other.overrideValue == overrideValue));
+                other.overrideValue == overrideValue) &&
+            (identical(other.initialQuantity, initialQuantity) ||
+                other.initialQuantity == initialQuantity));
   }
 
   @override
@@ -659,7 +677,8 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
         prsfd,
         const DeepCollectionEquality().hash(_bonusInformation),
         remarks,
-        overrideValue
+        overrideValue,
+        initialQuantity
       ]);
 
   @JsonKey(ignore: true)
@@ -699,7 +718,8 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
       required final Prsfd prsfd,
       required final List<ReturnRequestInformation> bonusInformation,
       required final Remarks remarks,
-      required final double overrideValue}) = _$_ReturnRequestInformation;
+      required final double overrideValue,
+      required final int initialQuantity}) = _$_ReturnRequestInformation;
   _ReturnRequestInformation._() : super._();
 
   @override
@@ -758,6 +778,8 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   Remarks get remarks;
   @override
   double get overrideValue;
+  @override
+  int get initialQuantity;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnRequestInformationCopyWith<_$_ReturnRequestInformation>

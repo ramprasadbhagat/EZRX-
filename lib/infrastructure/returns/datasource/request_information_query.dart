@@ -24,6 +24,7 @@ class RequestInformationQuery {
       returnQuantity
       unitPrice
       totalPrice
+      initialQuantity
       materialNumber
       materialDescription
       batch
@@ -76,7 +77,6 @@ class RequestInformationQuery {
       statusReason
       outsidePolicy
       invoiceDate
-      
       }
     }
   }

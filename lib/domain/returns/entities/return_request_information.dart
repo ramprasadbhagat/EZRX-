@@ -36,6 +36,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required List<ReturnRequestInformation> bonusInformation,
     required Remarks remarks,
     required double overrideValue,
+    required int initialQuantity,
   }) = _ReturnRequestInformation;
 
   factory ReturnRequestInformation.empty() => ReturnRequestInformation(
@@ -67,6 +68,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         prsfd: Prsfd(''),
         remarks: Remarks(''),
         overrideValue: 0.0,
+        initialQuantity: 0,
       );
 
   double get calculatedUnitPrice {
@@ -85,4 +87,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
       outsidePolicy && allowReturnsOutsidePolicy;
 
   bool get isCounterOfferRequested => overrideValue > 0;
+
+  bool get isApprovedQuantityOverride =>
+      status.isApprovedStatus && initialQuantity > 0;
 }

@@ -54,6 +54,10 @@ _$_ReturnRequestInformationDto _$$_ReturnRequestInformationDtoFromJson(
           ? 0
           : const StringToDoubleConverter()
               .fromJson(json['overrideValue'] as String),
+      initialQuantity: json['initialQuantity'] == null
+          ? 0
+          : const StringToIntConverter()
+              .fromJson(json['initialQuantity'] as String),
     );
 
 Map<String, dynamic> _$$_ReturnRequestInformationDtoToJson(
@@ -89,4 +93,6 @@ Map<String, dynamic> _$$_ReturnRequestInformationDtoToJson(
           instance.bonusInformation.map((e) => e.toJson()).toList(),
       'overrideValue':
           const StringToDoubleConverter().toJson(instance.overrideValue),
+      'initialQuantity':
+          const StringToIntConverter().toJson(instance.initialQuantity),
     };

@@ -72,6 +72,9 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
     @StringToDoubleConverter()
     @JsonKey(name: 'overrideValue', defaultValue: 0)
         required double overrideValue,
+    @StringToIntConverter()
+    @JsonKey(name: 'initialQuantity', defaultValue: 0)
+        required int initialQuantity,
   }) = _ReturnRequestInformationDto;
 
   ReturnRequestInformation toDomain() {
@@ -104,6 +107,7 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       bonusInformation: bonusInformation.map((e) => e.toDomain()).toList(),
       remarks: Remarks(remarks),
       overrideValue: overrideValue,
+      initialQuantity: initialQuantity,
     );
   }
 
