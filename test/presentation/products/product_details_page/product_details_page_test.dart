@@ -31,7 +31,6 @@ import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
@@ -183,7 +182,9 @@ void main() {
       inStock: MaterialInStock('Yes'),
     );
     productImage =
-        (await ProductImageLocalDataSource().getItemProductDetails()).first;
+        (await ProductDetailLocalDataSource().getItemProductMetaData())
+            .productImages
+            .first;
     registerFallbackValue(const ComboDetailPageRoute());
   });
 

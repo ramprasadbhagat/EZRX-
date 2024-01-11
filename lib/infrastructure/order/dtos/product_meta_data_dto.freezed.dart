@@ -40,9 +40,9 @@ abstract class $ProductMetaDataDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'orderCloudProduct', defaultValue: <ProductImagesDto>[])
-          List<ProductImagesDto> productImages,
+      List<ProductImagesDto> productImages,
       @JsonKey(name: 'Items', defaultValue: <ProductItemDto>[])
-          List<ProductItemDto> items});
+      List<ProductItemDto> items});
 }
 
 /// @nodoc
@@ -84,9 +84,9 @@ abstract class _$$_ProductMetaDataDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'orderCloudProduct', defaultValue: <ProductImagesDto>[])
-          List<ProductImagesDto> productImages,
+      List<ProductImagesDto> productImages,
       @JsonKey(name: 'Items', defaultValue: <ProductItemDto>[])
-          List<ProductItemDto> items});
+      List<ProductItemDto> items});
 }
 
 /// @nodoc
@@ -121,9 +121,9 @@ class __$$_ProductMetaDataDtoCopyWithImpl<$Res>
 class _$_ProductMetaDataDto extends _ProductMetaDataDto {
   _$_ProductMetaDataDto(
       {@JsonKey(name: 'orderCloudProduct', defaultValue: <ProductImagesDto>[])
-          required final List<ProductImagesDto> productImages,
+      required final List<ProductImagesDto> productImages,
       @JsonKey(name: 'Items', defaultValue: <ProductItemDto>[])
-          required final List<ProductItemDto> items})
+      required final List<ProductItemDto> items})
       : _productImages = productImages,
         _items = items,
         super._();
@@ -189,9 +189,9 @@ class _$_ProductMetaDataDto extends _ProductMetaDataDto {
 abstract class _ProductMetaDataDto extends ProductMetaDataDto {
   factory _ProductMetaDataDto(
       {@JsonKey(name: 'orderCloudProduct', defaultValue: <ProductImagesDto>[])
-          required final List<ProductImagesDto> productImages,
+      required final List<ProductImagesDto> productImages,
       @JsonKey(name: 'Items', defaultValue: <ProductItemDto>[])
-          required final List<ProductItemDto> items}) = _$_ProductMetaDataDto;
+      required final List<ProductItemDto> items}) = _$_ProductMetaDataDto;
   _ProductMetaDataDto._() : super._();
 
   factory _ProductMetaDataDto.fromJson(Map<String, dynamic> json) =
@@ -217,6 +217,8 @@ ProductItemDto _$ProductItemDtoFromJson(Map<String, dynamic> json) {
 mixin _$ProductItemDto {
   @JsonKey(name: 'PromotionMaterial', defaultValue: '')
   String get promotionMaterial => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ID', defaultValue: '')
+  String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'XP')
   ProductItemXpDto get xp => throw _privateConstructorUsedError;
 
@@ -234,9 +236,9 @@ abstract class $ProductItemDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'PromotionMaterial', defaultValue: '')
-          String promotionMaterial,
-      @JsonKey(name: 'XP')
-          ProductItemXpDto xp});
+      String promotionMaterial,
+      @JsonKey(name: 'ID', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'XP') ProductItemXpDto xp});
 
   $ProductItemXpDtoCopyWith<$Res> get xp;
 }
@@ -255,12 +257,17 @@ class _$ProductItemDtoCopyWithImpl<$Res, $Val extends ProductItemDto>
   @override
   $Res call({
     Object? promotionMaterial = null,
+    Object? materialNumber = null,
     Object? xp = null,
   }) {
     return _then(_value.copyWith(
       promotionMaterial: null == promotionMaterial
           ? _value.promotionMaterial
           : promotionMaterial // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
       xp: null == xp
           ? _value.xp
@@ -288,9 +295,9 @@ abstract class _$$_ProductItemDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'PromotionMaterial', defaultValue: '')
-          String promotionMaterial,
-      @JsonKey(name: 'XP')
-          ProductItemXpDto xp});
+      String promotionMaterial,
+      @JsonKey(name: 'ID', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'XP') ProductItemXpDto xp});
 
   @override
   $ProductItemXpDtoCopyWith<$Res> get xp;
@@ -308,12 +315,17 @@ class __$$_ProductItemDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? promotionMaterial = null,
+    Object? materialNumber = null,
     Object? xp = null,
   }) {
     return _then(_$_ProductItemDto(
       promotionMaterial: null == promotionMaterial
           ? _value.promotionMaterial
           : promotionMaterial // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
       xp: null == xp
           ? _value.xp
@@ -328,9 +340,9 @@ class __$$_ProductItemDtoCopyWithImpl<$Res>
 class _$_ProductItemDto extends _ProductItemDto {
   const _$_ProductItemDto(
       {@JsonKey(name: 'PromotionMaterial', defaultValue: '')
-          required this.promotionMaterial,
-      @JsonKey(name: 'XP')
-          required this.xp})
+      required this.promotionMaterial,
+      @JsonKey(name: 'ID', defaultValue: '') required this.materialNumber,
+      @JsonKey(name: 'XP') required this.xp})
       : super._();
 
   factory _$_ProductItemDto.fromJson(Map<String, dynamic> json) =>
@@ -340,12 +352,15 @@ class _$_ProductItemDto extends _ProductItemDto {
   @JsonKey(name: 'PromotionMaterial', defaultValue: '')
   final String promotionMaterial;
   @override
+  @JsonKey(name: 'ID', defaultValue: '')
+  final String materialNumber;
+  @override
   @JsonKey(name: 'XP')
   final ProductItemXpDto xp;
 
   @override
   String toString() {
-    return 'ProductItemDto(promotionMaterial: $promotionMaterial, xp: $xp)';
+    return 'ProductItemDto(promotionMaterial: $promotionMaterial, materialNumber: $materialNumber, xp: $xp)';
   }
 
   @override
@@ -355,12 +370,15 @@ class _$_ProductItemDto extends _ProductItemDto {
             other is _$_ProductItemDto &&
             (identical(other.promotionMaterial, promotionMaterial) ||
                 other.promotionMaterial == promotionMaterial) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
             (identical(other.xp, xp) || other.xp == xp));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, promotionMaterial, xp);
+  int get hashCode =>
+      Object.hash(runtimeType, promotionMaterial, materialNumber, xp);
 
   @JsonKey(ignore: true)
   @override
@@ -378,10 +396,12 @@ class _$_ProductItemDto extends _ProductItemDto {
 
 abstract class _ProductItemDto extends ProductItemDto {
   const factory _ProductItemDto(
-      {@JsonKey(name: 'PromotionMaterial', defaultValue: '')
+          {@JsonKey(name: 'PromotionMaterial', defaultValue: '')
           required final String promotionMaterial,
-      @JsonKey(name: 'XP')
-          required final ProductItemXpDto xp}) = _$_ProductItemDto;
+          @JsonKey(name: 'ID', defaultValue: '')
+          required final String materialNumber,
+          @JsonKey(name: 'XP') required final ProductItemXpDto xp}) =
+      _$_ProductItemDto;
   const _ProductItemDto._() : super._();
 
   factory _ProductItemDto.fromJson(Map<String, dynamic> json) =
@@ -390,6 +410,9 @@ abstract class _ProductItemDto extends ProductItemDto {
   @override
   @JsonKey(name: 'PromotionMaterial', defaultValue: '')
   String get promotionMaterial;
+  @override
+  @JsonKey(name: 'ID', defaultValue: '')
+  String get materialNumber;
   @override
   @JsonKey(name: 'XP')
   ProductItemXpDto get xp;
@@ -427,14 +450,11 @@ abstract class $ProductItemXpDtoCopyWith<$Res> {
       _$ProductItemXpDtoCopyWithImpl<$Res, ProductItemXpDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Dosage', defaultValue: '')
-          String dosage,
-      @JsonKey(name: 'HowToUse', defaultValue: '')
-          String howToUse,
-      @JsonKey(name: 'Composition', defaultValue: '')
-          String composition,
+      {@JsonKey(name: 'Dosage', defaultValue: '') String dosage,
+      @JsonKey(name: 'HowToUse', defaultValue: '') String howToUse,
+      @JsonKey(name: 'Composition', defaultValue: '') String composition,
       @JsonKey(name: 'DeliveryInstructions', defaultValue: '')
-          String deliveryInstructions});
+      String deliveryInstructions});
 }
 
 /// @nodoc
@@ -485,14 +505,11 @@ abstract class _$$_ProductItemXpDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Dosage', defaultValue: '')
-          String dosage,
-      @JsonKey(name: 'HowToUse', defaultValue: '')
-          String howToUse,
-      @JsonKey(name: 'Composition', defaultValue: '')
-          String composition,
+      {@JsonKey(name: 'Dosage', defaultValue: '') String dosage,
+      @JsonKey(name: 'HowToUse', defaultValue: '') String howToUse,
+      @JsonKey(name: 'Composition', defaultValue: '') String composition,
       @JsonKey(name: 'DeliveryInstructions', defaultValue: '')
-          String deliveryInstructions});
+      String deliveryInstructions});
 }
 
 /// @nodoc
@@ -536,14 +553,11 @@ class __$$_ProductItemXpDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ProductItemXpDto extends _ProductItemXpDto {
   const _$_ProductItemXpDto(
-      {@JsonKey(name: 'Dosage', defaultValue: '')
-          required this.dosage,
-      @JsonKey(name: 'HowToUse', defaultValue: '')
-          required this.howToUse,
-      @JsonKey(name: 'Composition', defaultValue: '')
-          required this.composition,
+      {@JsonKey(name: 'Dosage', defaultValue: '') required this.dosage,
+      @JsonKey(name: 'HowToUse', defaultValue: '') required this.howToUse,
+      @JsonKey(name: 'Composition', defaultValue: '') required this.composition,
       @JsonKey(name: 'DeliveryInstructions', defaultValue: '')
-          required this.deliveryInstructions})
+      required this.deliveryInstructions})
       : super._();
 
   factory _$_ProductItemXpDto.fromJson(Map<String, dynamic> json) =>
@@ -602,14 +616,13 @@ class _$_ProductItemXpDto extends _ProductItemXpDto {
 
 abstract class _ProductItemXpDto extends ProductItemXpDto {
   const factory _ProductItemXpDto(
-      {@JsonKey(name: 'Dosage', defaultValue: '')
-          required final String dosage,
+      {@JsonKey(name: 'Dosage', defaultValue: '') required final String dosage,
       @JsonKey(name: 'HowToUse', defaultValue: '')
-          required final String howToUse,
+      required final String howToUse,
       @JsonKey(name: 'Composition', defaultValue: '')
-          required final String composition,
+      required final String composition,
       @JsonKey(name: 'DeliveryInstructions', defaultValue: '')
-          required final String deliveryInstructions}) = _$_ProductItemXpDto;
+      required final String deliveryInstructions}) = _$_ProductItemXpDto;
   const _ProductItemXpDto._() : super._();
 
   factory _ProductItemXpDto.fromJson(Map<String, dynamic> json) =

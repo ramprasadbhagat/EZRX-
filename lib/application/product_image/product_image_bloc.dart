@@ -1,5 +1,7 @@
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
-import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,10 +11,10 @@ part 'product_image_event.dart';
 part 'product_image_state.dart';
 
 class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
-  final IProductImagesRepository productImagesRepository;
+  final IProductDetailRepository repository;
 
   ProductImageBloc({
-    required this.productImagesRepository,
+    required this.repository,
   }) : super(ProductImageState.initial()) {
     on<ProductImageEvent>(_onEvent);
   }
@@ -22,7 +24,12 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
     Emitter<ProductImageState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(ProductImageState.initial()),
+      initialized: (e) async => emit(
+        ProductImageState.initial().copyWith(
+          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: e.customerCodeInfo,
+        ),
+      ),
       set: (e) {
         final updatedMap = {...state.productImageMap};
         for (final entry in e.productImageMap.entries) {
@@ -59,9 +66,10 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
 
           return;
         }
-        final failureOrSuccess =
-            await productImagesRepository.getImagesForMaterials(
-          list: queryMaterialNumber,
+        final failureOrSuccess = await repository.getProductsMetaData(
+          materialNumbers: queryMaterialNumber,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -69,8 +77,8 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
               isFetching: false,
             ),
           ),
-          (productImageMap) =>
-              add(ProductImageEvent.set(productImageMap: productImageMap)),
+          (metaData) =>
+              add(ProductImageEvent.set(productImageMap: metaData.imageMap)),
         );
       },
     );

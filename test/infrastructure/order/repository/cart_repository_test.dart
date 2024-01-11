@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
@@ -22,15 +21,12 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_product_request_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
@@ -59,12 +55,6 @@ class DiscountOverrideRemoteDataSourceMock extends Mock
 class StockInfoLocalDataSourceMock extends Mock
     implements StockInfoLocalDataSource {}
 
-class ViewByItemRemoteDataSourceMock extends Mock
-    implements ViewByItemRemoteDataSource {}
-
-class ViewByItemLocalDataSourceMock extends Mock
-    implements ViewByItemLocalDataSource {}
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late Config mockConfig;
@@ -76,8 +66,6 @@ void main() {
   late SalesOrganisationConfigs mockSalesOrganisationConfigs;
   late MixpanelService mixpanelService;
   late CartRemoteDataSource cartRemoteDataSource;
-  late ViewByItemLocalDataSource orderHistoryLocalDataSource;
-  late ViewByItemRemoteDataSource viewByItemRemoteDataSource;
   late AplSimulatorOrder aplSimulatorOrder;
   late AplSimulatorOrder aplSimulatorGetTotalPrice;
 
@@ -110,8 +98,7 @@ void main() {
         DiscountOverrideRemoteDataSourceMock();
     mixpanelService = MixpanelServiceMock();
     cartRemoteDataSource = CartRemoteDataSourceMock();
-    orderHistoryLocalDataSource = ViewByItemLocalDataSourceMock();
-    viewByItemRemoteDataSource = ViewByItemRemoteDataSourceMock();
+
     cartRepository = CartRepository(
       mixpanelService: mixpanelService,
       cartLocalDataSource: cartLocalDataSourceMock,
@@ -120,8 +107,6 @@ void main() {
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
       cartRemoteDataSource: cartRemoteDataSource,
-      viewByItemLocalDataSource: orderHistoryLocalDataSource,
-      viewByItemRemoteDataSource: viewByItemRemoteDataSource,
     );
     mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
       languageFilter: true,
@@ -1412,80 +1397,6 @@ void main() {
       expect(result.getOrElse(() => <PriceAggregate>[]), <PriceAggregate>[]);
     });
     /////////////////////////////////-removeSelectedProducts-////////////////////////
-
-    test('getProduct remote test success', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(
-        () => viewByItemRemoteDataSource.getItemProductDetails(
-          materialIDs: ['1234'],
-        ),
-      ).thenAnswer(
-        (invocation) async => ProductMetaData.empty().copyWith(
-          productImages: [
-            ProductImages.empty()
-                .copyWith(materialNumber: MaterialNumber('1234'))
-          ],
-        ),
-      );
-
-      final result = await cartRepository.getProducts(
-        materialNumbers: [MaterialNumber('1234')],
-      );
-      expect(result.isRight(), true);
-    });
-
-    test('getProduct remote test failure', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(
-        () => viewByItemRemoteDataSource.getItemProductDetails(
-          materialIDs: ['1234'],
-        ),
-      ).thenThrow(
-        fakeException,
-      );
-
-      final result = await cartRepository.getProducts(
-        materialNumbers: [MaterialNumber('1234')],
-      );
-      expect(result, Left(FailureHandler.handleFailure(fakeException)));
-    });
-
-    test('getProduct local test success', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      final fakeMaterialNumber =
-          fakeCartProducts.first.materialInfo.materialNumber;
-      final fakeProductMetaData = ProductMetaData.empty().copyWith(
-        productImages: [
-          ProductImages.empty().copyWith(materialNumber: fakeMaterialNumber)
-        ],
-      );
-      when(
-        () => orderHistoryLocalDataSource.getItemProductDetails(),
-      ).thenAnswer(
-        (invocation) async => fakeProductMetaData,
-      );
-
-      final result = await cartRepository.getProducts(
-        materialNumbers: [fakeMaterialNumber],
-      );
-      expect(result.getOrElse(() => {}), {
-        fakeMaterialNumber: fakeProductMetaData,
-      });
-    });
-
-    test('getProduct local test failure', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(
-        () => orderHistoryLocalDataSource.getItemProductDetails(),
-      ).thenThrow(
-        (invocation) async => MockException(),
-      );
-
-      final result = await cartRepository.getProducts(
-        materialNumbers: [MaterialNumber('1234')],
-      );
-      expect(result.isLeft(), true);
-    });
 
     test('upsertCartItems local test failure', () async {
       when(

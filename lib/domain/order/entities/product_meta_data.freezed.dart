@@ -174,6 +174,7 @@ abstract class _ProductMetaData extends ProductMetaData {
 mixin _$ProductItem {
   StringValue get promotionMaterial => throw _privateConstructorUsedError;
   ProductItemXp get productItemXp => throw _privateConstructorUsedError;
+  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductItemCopyWith<ProductItem> get copyWith =>
@@ -186,7 +187,10 @@ abstract class $ProductItemCopyWith<$Res> {
           ProductItem value, $Res Function(ProductItem) then) =
       _$ProductItemCopyWithImpl<$Res, ProductItem>;
   @useResult
-  $Res call({StringValue promotionMaterial, ProductItemXp productItemXp});
+  $Res call(
+      {StringValue promotionMaterial,
+      ProductItemXp productItemXp,
+      MaterialNumber materialNumber});
 
   $ProductItemXpCopyWith<$Res> get productItemXp;
 }
@@ -206,6 +210,7 @@ class _$ProductItemCopyWithImpl<$Res, $Val extends ProductItem>
   $Res call({
     Object? promotionMaterial = null,
     Object? productItemXp = null,
+    Object? materialNumber = null,
   }) {
     return _then(_value.copyWith(
       promotionMaterial: null == promotionMaterial
@@ -216,6 +221,10 @@ class _$ProductItemCopyWithImpl<$Res, $Val extends ProductItem>
           ? _value.productItemXp
           : productItemXp // ignore: cast_nullable_to_non_nullable
               as ProductItemXp,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
     ) as $Val);
   }
 
@@ -236,7 +245,10 @@ abstract class _$$_ProductItemCopyWith<$Res>
       __$$_ProductItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({StringValue promotionMaterial, ProductItemXp productItemXp});
+  $Res call(
+      {StringValue promotionMaterial,
+      ProductItemXp productItemXp,
+      MaterialNumber materialNumber});
 
   @override
   $ProductItemXpCopyWith<$Res> get productItemXp;
@@ -255,6 +267,7 @@ class __$$_ProductItemCopyWithImpl<$Res>
   $Res call({
     Object? promotionMaterial = null,
     Object? productItemXp = null,
+    Object? materialNumber = null,
   }) {
     return _then(_$_ProductItem(
       promotionMaterial: null == promotionMaterial
@@ -265,6 +278,10 @@ class __$$_ProductItemCopyWithImpl<$Res>
           ? _value.productItemXp
           : productItemXp // ignore: cast_nullable_to_non_nullable
               as ProductItemXp,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
     ));
   }
 }
@@ -272,17 +289,22 @@ class __$$_ProductItemCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ProductItem extends _ProductItem {
-  _$_ProductItem({required this.promotionMaterial, required this.productItemXp})
+  _$_ProductItem(
+      {required this.promotionMaterial,
+      required this.productItemXp,
+      required this.materialNumber})
       : super._();
 
   @override
   final StringValue promotionMaterial;
   @override
   final ProductItemXp productItemXp;
+  @override
+  final MaterialNumber materialNumber;
 
   @override
   String toString() {
-    return 'ProductItem(promotionMaterial: $promotionMaterial, productItemXp: $productItemXp)';
+    return 'ProductItem(promotionMaterial: $promotionMaterial, productItemXp: $productItemXp, materialNumber: $materialNumber)';
   }
 
   @override
@@ -293,12 +315,14 @@ class _$_ProductItem extends _ProductItem {
             (identical(other.promotionMaterial, promotionMaterial) ||
                 other.promotionMaterial == promotionMaterial) &&
             (identical(other.productItemXp, productItemXp) ||
-                other.productItemXp == productItemXp));
+                other.productItemXp == productItemXp) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, promotionMaterial, productItemXp);
+  int get hashCode => Object.hash(
+      runtimeType, promotionMaterial, productItemXp, materialNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -310,13 +334,16 @@ class _$_ProductItem extends _ProductItem {
 abstract class _ProductItem extends ProductItem {
   factory _ProductItem(
       {required final StringValue promotionMaterial,
-      required final ProductItemXp productItemXp}) = _$_ProductItem;
+      required final ProductItemXp productItemXp,
+      required final MaterialNumber materialNumber}) = _$_ProductItem;
   _ProductItem._() : super._();
 
   @override
   StringValue get promotionMaterial;
   @override
   ProductItemXp get productItemXp;
+  @override
+  MaterialNumber get materialNumber;
   @override
   @JsonKey(ignore: true)
   _$$_ProductItemCopyWith<_$_ProductItem> get copyWith =>

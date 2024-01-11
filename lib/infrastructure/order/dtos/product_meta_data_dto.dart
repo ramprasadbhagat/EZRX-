@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/product_images/dtos/product_images_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -49,6 +50,8 @@ class ProductItemDto with _$ProductItemDto {
       defaultValue: '',
     )
         required String promotionMaterial,
+    @JsonKey(name: 'ID', defaultValue: '')
+        required String materialNumber,
     @JsonKey(name: 'XP')
         required ProductItemXpDto xp,
   }) = _ProductItemDto;
@@ -56,11 +59,13 @@ class ProductItemDto with _$ProductItemDto {
   ProductItem get toDomain => ProductItem(
         promotionMaterial: StringValue(promotionMaterial),
         productItemXp: xp.toDomain,
+        materialNumber: MaterialNumber(materialNumber),
       );
 
   factory ProductItemDto.fromDomain(ProductItem productItem) => ProductItemDto(
         promotionMaterial: productItem.promotionMaterial.getOrDefaultValue(''),
         xp: ProductItemXpDto.fromDomain(productItem.productItemXp),
+        materialNumber: productItem.materialNumber.getOrDefaultValue(''),
       );
 
   factory ProductItemDto.fromJson(Map<String, dynamic> json) =>

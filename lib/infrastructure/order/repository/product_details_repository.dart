@@ -3,7 +3,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -323,8 +322,10 @@ class ProductDetailRepository implements IProductDetailRepository {
   }
 
   @override
-  Future<Either<ApiFailure, ProductMetaData>> getItemProductMetaData({
-    required ProductDetailAggregate productDetailAggregate,
+  Future<Either<ApiFailure, ProductMetaData>> getProductsMetaData({
+    required List<MaterialNumber> materialNumbers,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -339,11 +340,10 @@ class ProductDetailRepository implements IProductDetailRepository {
       }
     }
     try {
-      final response =
-          await productDetailRemoteDataSource.getItemProductMetaData(
-        materialIDs: [
-          productDetailAggregate.materialInfo.materialNumber.getOrCrash(),
-        ],
+      final response = await productDetailRemoteDataSource.getProductsMetaData(
+        materialIDs: materialNumbers.map((e) => e.getOrCrash()).toList(),
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
       );
 
       return Right(response);

@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProductImageEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        initialized,
     required TResult Function(List<dynamic> list) fetch,
     required TResult Function(
             Map<MaterialNumber, ProductImages> productImageMap)
@@ -27,14 +29,18 @@ mixin _$ProductImageEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
     TResult? Function(List<dynamic> list)? fetch,
     TResult? Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
     TResult Function(List<dynamic> list)? fetch,
     TResult Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
     required TResult orElse(),
@@ -87,6 +93,12 @@ abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -96,59 +108,117 @@ class __$$_InitializedCopyWithImpl<$Res>
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
+  }) {
+    return _then(_$_Initialized(
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+  const _$_Initialized(
+      {required this.salesOrganisation, required this.customerCodeInfo});
+
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
 
   @override
   String toString() {
-    return 'ProductImageEvent.initialized()';
+    return 'ProductImageEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrganisation, customerCodeInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        initialized,
     required TResult Function(List<dynamic> list) fetch,
     required TResult Function(
             Map<MaterialNumber, ProductImages> productImageMap)
         set,
   }) {
-    return initialized();
+    return initialized(salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
     TResult? Function(List<dynamic> list)? fetch,
     TResult? Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
   }) {
-    return initialized?.call();
+    return initialized?.call(salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
     TResult Function(List<dynamic> list)? fetch,
     TResult Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized();
+      return initialized(salesOrganisation, customerCodeInfo);
     }
     return orElse();
   }
@@ -189,7 +259,15 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements ProductImageEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized(
+      {required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_Initialized;
+
+  SalesOrganisation get salesOrganisation;
+  CustomerCodeInfo get customerCodeInfo;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -260,7 +338,9 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        initialized,
     required TResult Function(List<dynamic> list) fetch,
     required TResult Function(
             Map<MaterialNumber, ProductImages> productImageMap)
@@ -272,7 +352,9 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
     TResult? Function(List<dynamic> list)? fetch,
     TResult? Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
   }) {
@@ -282,7 +364,9 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
     TResult Function(List<dynamic> list)? fetch,
     TResult Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
     required TResult orElse(),
@@ -408,7 +492,9 @@ class _$_Set implements _Set {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        initialized,
     required TResult Function(List<dynamic> list) fetch,
     required TResult Function(
             Map<MaterialNumber, ProductImages> productImageMap)
@@ -420,7 +506,9 @@ class _$_Set implements _Set {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
     TResult? Function(List<dynamic> list)? fetch,
     TResult? Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
   }) {
@@ -430,7 +518,9 @@ class _$_Set implements _Set {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
     TResult Function(List<dynamic> list)? fetch,
     TResult Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
     required TResult orElse(),
@@ -491,6 +581,8 @@ mixin _$ProductImageState {
   Map<MaterialNumber, ProductImages> get productImageMap =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductImageStateCopyWith<ProductImageState> get copyWith =>
@@ -504,7 +596,13 @@ abstract class $ProductImageStateCopyWith<$Res> {
       _$ProductImageStateCopyWithImpl<$Res, ProductImageState>;
   @useResult
   $Res call(
-      {Map<MaterialNumber, ProductImages> productImageMap, bool isFetching});
+      {Map<MaterialNumber, ProductImages> productImageMap,
+      bool isFetching,
+      SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -522,6 +620,8 @@ class _$ProductImageStateCopyWithImpl<$Res, $Val extends ProductImageState>
   $Res call({
     Object? productImageMap = null,
     Object? isFetching = null,
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
   }) {
     return _then(_value.copyWith(
       productImageMap: null == productImageMap
@@ -532,7 +632,31 @@ class _$ProductImageStateCopyWithImpl<$Res, $Val extends ProductImageState>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+    });
   }
 }
 
@@ -545,7 +669,15 @@ abstract class _$$_ProductImageStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Map<MaterialNumber, ProductImages> productImageMap, bool isFetching});
+      {Map<MaterialNumber, ProductImages> productImageMap,
+      bool isFetching,
+      SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo});
+
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -561,6 +693,8 @@ class __$$_ProductImageStateCopyWithImpl<$Res>
   $Res call({
     Object? productImageMap = null,
     Object? isFetching = null,
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
   }) {
     return _then(_$_ProductImageState(
       productImageMap: null == productImageMap
@@ -571,6 +705,14 @@ class __$$_ProductImageStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
     ));
   }
 }
@@ -580,7 +722,9 @@ class __$$_ProductImageStateCopyWithImpl<$Res>
 class _$_ProductImageState extends _ProductImageState {
   const _$_ProductImageState(
       {required final Map<MaterialNumber, ProductImages> productImageMap,
-      required this.isFetching})
+      required this.isFetching,
+      required this.salesOrganisation,
+      required this.customerCodeInfo})
       : _productImageMap = productImageMap,
         super._();
 
@@ -594,10 +738,14 @@ class _$_ProductImageState extends _ProductImageState {
 
   @override
   final bool isFetching;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
 
   @override
   String toString() {
-    return 'ProductImageState(productImageMap: $productImageMap, isFetching: $isFetching)';
+    return 'ProductImageState(productImageMap: $productImageMap, isFetching: $isFetching, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
   }
 
   @override
@@ -608,12 +756,20 @@ class _$_ProductImageState extends _ProductImageState {
             const DeepCollectionEquality()
                 .equals(other._productImageMap, _productImageMap) &&
             (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching));
+                other.isFetching == isFetching) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_productImageMap), isFetching);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_productImageMap),
+      isFetching,
+      salesOrganisation,
+      customerCodeInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -626,13 +782,19 @@ class _$_ProductImageState extends _ProductImageState {
 abstract class _ProductImageState extends ProductImageState {
   const factory _ProductImageState(
       {required final Map<MaterialNumber, ProductImages> productImageMap,
-      required final bool isFetching}) = _$_ProductImageState;
+      required final bool isFetching,
+      required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_ProductImageState;
   const _ProductImageState._() : super._();
 
   @override
   Map<MaterialNumber, ProductImages> get productImageMap;
   @override
   bool get isFetching;
+  @override
+  SalesOrganisation get salesOrganisation;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
   @override
   @JsonKey(ignore: true)
   _$$_ProductImageStateCopyWith<_$_ProductImageState> get copyWith =>

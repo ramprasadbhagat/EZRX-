@@ -93,6 +93,8 @@ class ProductDetailQuery {
           }
           Items {
             PromotionMaterial
+            HidePrice
+            ID
             XP {
               Dosage
               HowToUse

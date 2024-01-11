@@ -1022,6 +1022,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
 
+    context.read<ProductImageBloc>().add(
+          ProductImageEvent.initialized(
+            salesOrganisation: salesOrgState.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        );
+
     context.read<AllInvoicesBloc>().add(
           AllInvoicesEvent.initialized(
             salesOrganisation: salesOrgState.salesOrganisation,

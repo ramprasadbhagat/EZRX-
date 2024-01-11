@@ -240,13 +240,6 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/repository/mixpanel_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
-import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_local.dart';
-import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_query.dart';
-import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_remote.dart';
-import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_local.dart';
-import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_query.dart';
-import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_remote.dart';
-import 'package:ezrxmobile/infrastructure/core/product_images/repository/product_images_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_repository.dart';
 import 'package:ezrxmobile/infrastructure/faq/datasource/faq_local.dart';
@@ -1732,8 +1725,6 @@ void setupLocator() {
           locator<DiscountOverrideRemoteDataSource>(),
       cartLocalDataSource: locator<CartLocalDataSource>(),
       cartRemoteDataSource: locator<CartRemoteDataSource>(),
-      viewByItemLocalDataSource: locator<ViewByItemLocalDataSource>(),
-      viewByItemRemoteDataSource: locator<ViewByItemRemoteDataSource>(),
     ),
   );
 
@@ -2770,7 +2761,6 @@ void setupLocator() {
       tokenStorage: locator<TokenStorage>(),
       config: locator<Config>(),
       deviceStorage: locator<DeviceStorage>(),
-
     ),
   );
 
@@ -2786,29 +2776,8 @@ void setupLocator() {
   //
   //============================================================
   locator.registerLazySingleton(
-    () => ProductImagesRepository(
-      config: locator<Config>(),
-      productImagesLocalDataSource: locator<ProductImagesLocalDataSource>(),
-      productImagesRemoteDataSource: locator<ProductImagesRemoteDataSource>(),
-    ),
-  );
-  locator.registerLazySingleton(
-    () => ProductImagesLocalDataSource(),
-  );
-  locator.registerLazySingleton(
-    () => ProductImagesRemoteDataSource(
-      httpService: locator<HttpService>(),
-      config: locator<Config>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      productImageQuery: locator<ProductImagesQuery>(),
-    ),
-  );
-  locator.registerLazySingleton(
-    () => ProductImagesQuery(),
-  );
-  locator.registerLazySingleton(
     () => ProductImageBloc(
-      productImagesRepository: locator<ProductImagesRepository>(),
+      repository: locator<ProductDetailRepository>(),
     ),
   );
 
@@ -2842,18 +2811,6 @@ void setupLocator() {
   //  View by item Details
   //
   //============================================================
-
-  locator.registerLazySingleton(() => ProductImageLocalDataSource());
-  locator.registerLazySingleton(() => ProductImageQuery());
-
-  locator.registerLazySingleton(
-    () => ProductImageRemoteDataSource(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      productImageQuery: locator<ProductImageQuery>(),
-    ),
-  );
 
   locator.registerLazySingleton(
     () => ViewByItemDetailsBloc(

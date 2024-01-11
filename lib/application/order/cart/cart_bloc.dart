@@ -569,8 +569,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           }
         }
 
-        final failureOrSuccess = await repository.getProducts(
+        final failureOrSuccess =
+            await productDetailRepository.getProductsMetaData(
           materialNumbers: materialNumberList,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
         );
 
         failureOrSuccess.fold(
@@ -582,10 +585,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartProductList) {
+          (newMetaData) {
             final newProductInfoMap = Map<MaterialNumber, ProductMetaData>.from(
               state.additionInfo,
-            )..addAll(cartProductList);
+            )..addAll(newMetaData.metaDataMap);
 
             emit(
               state.copyWith(

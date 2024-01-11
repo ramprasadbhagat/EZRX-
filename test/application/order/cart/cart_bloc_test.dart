@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:flutter/material.dart';
@@ -324,10 +325,12 @@ void main() {
             ),
           ];
           when(
-            () => cartRepositoryMock.getProducts(
+            () => productDetailRepository.getProductsMetaData(
               materialNumbers: allMaterial(priceAggregates)
                   .map((e) => e.materialNumber)
                   .toList(),
+              salesOrganisation: fakeSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
             ),
           ).thenAnswer(
             (invocation) async => Left(
@@ -362,10 +365,21 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           final priceAggregateAllMaterial = allMaterial(priceAggregates);
-          final allAdditionInfo = {
-            for (MaterialInfo i in priceAggregateAllMaterial)
-              i.materialNumber: ProductMetaData.empty()
-          };
+          final metaDataResponse = ProductMetaData(
+            productImages: priceAggregateAllMaterial
+                .map(
+                  (e) => ProductImages.empty()
+                      .copyWith(materialNumber: e.materialNumber),
+                )
+                .toList(),
+            items: priceAggregateAllMaterial
+                .map(
+                  (e) => ProductItem.empty()
+                      .copyWith(materialNumber: e.materialNumber),
+                )
+                .toList(),
+          );
+          final allAdditionInfo = metaDataResponse.metaDataMap;
           final updatedPriceAggregates = priceAggregates
               .map(
                 (e) => e.materialInfo.type.typeBundle
@@ -457,13 +471,15 @@ void main() {
             (invocation) async => Left(fakeError),
           );
           when(
-            () => cartRepositoryMock.getProducts(
+            () => productDetailRepository.getProductsMetaData(
               materialNumbers: allMaterial(priceAggregates)
                   .map((e) => e.materialNumber)
                   .toList(),
+              salesOrganisation: fakeSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
             ),
           ).thenAnswer(
-            (invocation) async => Right(allAdditionInfo),
+            (invocation) async => Right(metaDataResponse),
           );
           when(
             () => cartRepositoryMock.getAddedToCartProductList(),
@@ -493,10 +509,21 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           final priceAggregateAllMaterial = allMaterial(priceAggregates);
-          final allAdditionInfo = {
-            for (MaterialInfo i in priceAggregateAllMaterial)
-              i.materialNumber: ProductMetaData.empty()
-          };
+          final metaDataResponse = ProductMetaData(
+            productImages: priceAggregateAllMaterial
+                .map(
+                  (e) => ProductImages.empty()
+                      .copyWith(materialNumber: e.materialNumber),
+                )
+                .toList(),
+            items: priceAggregateAllMaterial
+                .map(
+                  (e) => ProductItem.empty()
+                      .copyWith(materialNumber: e.materialNumber),
+                )
+                .toList(),
+          );
+          final allAdditionInfo = metaDataResponse.metaDataMap;
           final stockInfo = {
             for (MaterialInfo i in priceAggregateAllMaterial)
               i.materialNumber: [
@@ -615,13 +642,15 @@ void main() {
             (invocation) async => Right(stockInfo),
           );
           when(
-            () => cartRepositoryMock.getProducts(
+            () => productDetailRepository.getProductsMetaData(
               materialNumbers: allMaterial(priceAggregates)
                   .map((e) => e.materialNumber)
                   .toList(),
+              salesOrganisation: fakeSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
             ),
           ).thenAnswer(
-            (invocation) async => Right(allAdditionInfo),
+            (invocation) async => Right(metaDataResponse),
           );
           when(
             () => cartRepositoryMock.getAddedToCartProductList(),

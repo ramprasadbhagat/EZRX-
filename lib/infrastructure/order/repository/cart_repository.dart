@@ -11,7 +11,6 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
@@ -21,8 +20,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datas
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_product_request_dto.dart';
 
@@ -36,8 +33,6 @@ class CartRepository implements ICartRepository {
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
   final DiscountOverrideRemoteDataSource discountOverrideRemoteDataSource;
-  final ViewByItemLocalDataSource viewByItemLocalDataSource;
-  final ViewByItemRemoteDataSource viewByItemRemoteDataSource;
   final MixpanelService mixpanelService;
 
   CartRepository({
@@ -48,8 +43,6 @@ class CartRepository implements ICartRepository {
     required this.mixpanelService,
     required this.cartLocalDataSource,
     required this.cartRemoteDataSource,
-    required this.viewByItemRemoteDataSource,
-    required this.viewByItemLocalDataSource,
   });
 
   @override
@@ -561,50 +554,6 @@ class CartRepository implements ICartRepository {
       return Right(productList);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, Map<MaterialNumber, ProductMetaData>>> getProducts({
-    required List<MaterialNumber> materialNumbers,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final products =
-            await viewByItemLocalDataSource.getItemProductDetails();
-
-        return Right({
-          for (var product in products.productImages)
-            product.materialNumber: products,
-        });
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final queryMaterialNumbers =
-          materialNumbers.map((e) => e.getOrDefaultValue('')).toList();
-      final additionInfoData = <MaterialNumber, ProductMetaData>{};
-      await Future.wait(
-        queryMaterialNumbers.map((e) async {
-          final products =
-              await viewByItemRemoteDataSource.getItemProductDetails(
-            materialIDs: [e],
-          );
-
-          for (final product in products.productImages) {
-            additionInfoData.addAll({product.materialNumber: products});
-          }
-        }),
-      );
-
-      return Right(additionInfoData);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
     }
   }
 

@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -807,9 +806,10 @@ void main() {
           () => productDetailLocalDataSource.getItemProductMetaData(),
         ).thenAnswer((invocation) async => fakeProductMetaData);
 
-        final result = await productDetailRepository.getItemProductMetaData(
-          productDetailAggregate: ProductDetailAggregate.empty()
-              .copyWith(materialInfo: fakeMaterialInfo),
+        final result = await productDetailRepository.getProductsMetaData(
+          materialNumbers: [fakeMaterialInfo.materialNumber],
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
         );
         expect(
           result.isRight(),
@@ -826,9 +826,10 @@ void main() {
               fakeProductMetaData.copyWith(items: [], productImages: []),
         );
 
-        final result = await productDetailRepository.getItemProductMetaData(
-          productDetailAggregate: ProductDetailAggregate.empty()
-              .copyWith(materialInfo: fakeMaterialInfo),
+        final result = await productDetailRepository.getProductsMetaData(
+          materialNumbers: [fakeMaterialInfo.materialNumber],
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
         );
         expect(
           result.isRight(),
@@ -840,14 +841,17 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
         when(
-          () => productDetailRemoteDataSource.getItemProductMetaData(
+          () => productDetailRemoteDataSource.getProductsMetaData(
             materialIDs: [fakeMaterialInfo.materialNumber.getOrCrash()],
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           ),
         ).thenAnswer((invocation) async => fakeProductMetaData);
 
-        final result = await productDetailRepository.getItemProductMetaData(
-          productDetailAggregate: ProductDetailAggregate.empty()
-              .copyWith(materialInfo: fakeMaterialInfo),
+        final result = await productDetailRepository.getProductsMetaData(
+          materialNumbers: [fakeMaterialInfo.materialNumber],
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
         );
         expect(
           result.isRight(),
@@ -859,17 +863,20 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
         when(
-          () => productDetailRemoteDataSource.getItemProductMetaData(
+          () => productDetailRemoteDataSource.getProductsMetaData(
             materialIDs: [fakeMaterialInfo.materialNumber.getOrCrash()],
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           ),
         ).thenAnswer(
           (invocation) async =>
               fakeProductMetaData.copyWith(items: [], productImages: []),
         );
 
-        final result = await productDetailRepository.getItemProductMetaData(
-          productDetailAggregate: ProductDetailAggregate.empty()
-              .copyWith(materialInfo: fakeMaterialInfo),
+        final result = await productDetailRepository.getProductsMetaData(
+          materialNumbers: [fakeMaterialInfo.materialNumber],
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
         );
         expect(
           result.isRight(),
@@ -883,9 +890,10 @@ void main() {
           () => productDetailLocalDataSource.getItemProductMetaData(),
         ).thenThrow((invocation) async => MockException());
 
-        final result = await productDetailRepository.getItemProductMetaData(
-          productDetailAggregate: ProductDetailAggregate.empty()
-              .copyWith(materialInfo: fakeMaterialInfo),
+        final result = await productDetailRepository.getProductsMetaData(
+          materialNumbers: [fakeMaterialInfo.materialNumber],
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
         );
         expect(
           result.isLeft(),
@@ -897,14 +905,17 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
         when(
-          () => productDetailRemoteDataSource.getItemProductMetaData(
+          () => productDetailRemoteDataSource.getProductsMetaData(
             materialIDs: [fakeMaterialInfo.materialNumber.getOrCrash()],
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           ),
         ).thenThrow((invocation) async => MockException());
 
-        final result = await productDetailRepository.getItemProductMetaData(
-          productDetailAggregate: ProductDetailAggregate.empty()
-              .copyWith(materialInfo: fakeMaterialInfo),
+        final result = await productDetailRepository.getProductsMetaData(
+          materialNumbers: [fakeMaterialInfo.materialNumber],
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
         );
         expect(
           result.isLeft(),

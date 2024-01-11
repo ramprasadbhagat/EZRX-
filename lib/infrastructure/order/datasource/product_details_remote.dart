@@ -95,8 +95,10 @@ class ProductDetailRemoteDataSource {
     });
   }
 
-  Future<ProductMetaData> getItemProductMetaData({
+  Future<ProductMetaData> getProductsMetaData({
     required List<String> materialIDs,
+    required String salesOrg,
+    required String customerCode,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -107,6 +109,8 @@ class ProductDetailRemoteDataSource {
           'variables': {
             'request': {
               'materialID': materialIDs,
+              'customerCode': customerCode,
+              'salesOrg': salesOrg,
             },
           },
         },

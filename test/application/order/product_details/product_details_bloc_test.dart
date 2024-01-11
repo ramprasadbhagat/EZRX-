@@ -154,11 +154,10 @@ void main() {
             ),
           ).thenAnswer((invocation) async => Right(mockStockInfo));
           when(
-            () => productDetailMockRepository.getItemProductMetaData(
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                stockInfo: mockStockInfo,
-                materialInfo: mockMaterialInfo,
-              ),
+            () => productDetailMockRepository.getProductsMetaData(
+              materialNumbers: [mockMaterialInfo.materialNumber],
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -268,10 +267,10 @@ void main() {
             ),
           ).thenAnswer((invocation) async => Right(mockMaterialStockInfo));
           when(
-            () => productDetailMockRepository.getItemProductMetaData(
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                materialInfo: mockMaterialInfo,
-              ),
+            () => productDetailMockRepository.getProductsMetaData(
+              materialNumbers: [mockMaterialInfo.materialNumber],
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -527,11 +526,10 @@ void main() {
         ),
         setUp: () {
           when(
-            () => productDetailMockRepository.getItemProductMetaData(
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                stockInfo: mockStockInfo,
-                materialInfo: mockMaterialInfo,
-              ),
+            () => productDetailMockRepository.getProductsMetaData(
+              materialNumbers: [mockMaterialInfo.materialNumber],
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),

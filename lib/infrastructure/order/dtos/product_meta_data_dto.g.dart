@@ -30,12 +30,14 @@ Map<String, dynamic> _$$_ProductMetaDataDtoToJson(
 _$_ProductItemDto _$$_ProductItemDtoFromJson(Map<String, dynamic> json) =>
     _$_ProductItemDto(
       promotionMaterial: json['PromotionMaterial'] as String? ?? '',
+      materialNumber: json['ID'] as String? ?? '',
       xp: ProductItemXpDto.fromJson(json['XP'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_ProductItemDtoToJson(_$_ProductItemDto instance) =>
     <String, dynamic>{
       'PromotionMaterial': instance.promotionMaterial,
+      'ID': instance.materialNumber,
       'XP': instance.xp.toJson(),
     };
 

@@ -194,8 +194,12 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           ),
         );
         final metaDataFailureOrSuccess =
-            await productDetailRepository.getItemProductMetaData(
-          productDetailAggregate: state.productDetailAggregate,
+            await productDetailRepository.getProductsMetaData(
+          materialNumbers: [
+            state.productDetailAggregate.materialInfo.materialNumber,
+          ],
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
         );
         metaDataFailureOrSuccess.fold(
           (failure) => emit(
