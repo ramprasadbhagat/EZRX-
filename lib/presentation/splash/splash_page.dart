@@ -186,7 +186,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 //     );
                 context
                     .read<DeepLinkingBloc>()
-                    .add(const DeepLinkingEvent.stopConsumeLink());
+                    .add(const DeepLinkingEvent.initialize());
                 context.read<UserBloc>().add(const UserEvent.initialized());
                 context
                     .read<ChatBotBloc>()
@@ -792,6 +792,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 } else {
                   noAccessSnackbar.show(context);
                 }
+              },
+              redirectFAQ: () {
+                context.router.push(const FAQPageRoute());
+              },
+              redirectContactUs: (market) {
+                context.router.push(ContactUsPageRoute(appMarket: market));
               },
               error: (error) {
                 ErrorUtils.handleApiFailure(context, error);

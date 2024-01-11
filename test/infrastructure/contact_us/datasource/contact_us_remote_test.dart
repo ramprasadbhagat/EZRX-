@@ -16,8 +16,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
-
 class ContactUsDetailsMock extends Mock implements ContactUsDetails {}
 
 void main() {
@@ -45,7 +43,7 @@ void main() {
 
   group('Contact Us Details Remote DataSource test', () {
     final variables = {
-      'itemId': fakeMYSalesOrg.contactUsItemId,
+      'itemId': 'fake-id',
       'lang': fakeUser.preferredLanguage.locale.languageCode,
     };
     test('Get Contact Us Details ', () async {
@@ -74,7 +72,7 @@ void main() {
       final result = await remoteDataSource.getContactUsDetails(
         announcementUrlPath: config.announcementApiUrlPath,
         lang: fakeUser.preferredLanguage.locale.languageCode,
-        contactUsId: fakeMYSalesOrg.contactUsItemId,
+        contactUsId: 'fake-id',
         token: 'fake-token',
       );
 
@@ -105,7 +103,7 @@ void main() {
           .getContactUsDetails(
         announcementUrlPath: config.announcementApiUrlPath,
         lang: fakeUser.preferredLanguage.locale.languageCode,
-        contactUsId: fakeMYSalesOrg.contactUsItemId,
+        contactUsId: 'fake-id',
         token: 'fake-token',
       )
           .onError((error, _) async {
@@ -141,7 +139,7 @@ void main() {
           .getContactUsDetails(
         announcementUrlPath: config.announcementApiUrlPath,
         lang: fakeUser.preferredLanguage.locale.languageCode,
-        contactUsId: fakeMYSalesOrg.contactUsItemId,
+        contactUsId: 'fake-id',
         token: 'fake-token',
       )
           .onError((error, _) async {
@@ -173,7 +171,7 @@ void main() {
           .getContactUsDetails(
         announcementUrlPath: config.announcementApiUrlPath,
         lang: fakeUser.preferredLanguage.locale.languageCode,
-        contactUsId: fakeMYSalesOrg.contactUsItemId,
+        contactUsId: 'fake-id',
         token: 'fake-token',
       )
           .onError((error, _) async {

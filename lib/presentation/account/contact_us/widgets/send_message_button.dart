@@ -15,12 +15,9 @@ class _SendMessageButton extends StatelessWidget {
               ? null
               : () {
                   FocusScope.of(context).unfocus();
-                  context.read<ContactUsBloc>().add(
-                        ContactUsEvent.submit(
-                          salesOrg:
-                              context.read<EligibilityBloc>().state.salesOrg,
-                        ),
-                      );
+                  context
+                      .read<ContactUsBloc>()
+                      .add(const ContactUsEvent.submit());
                 },
           child: LoadingShimmer.withChild(
             enabled: state.isSubmitting,

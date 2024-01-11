@@ -1,12 +1,7 @@
 part of 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 
 class _ContactDetails extends StatelessWidget {
-  const _ContactDetails({
-    Key? key,
-    required this.salesOrg,
-  }) : super(key: key);
-
-  final SalesOrg salesOrg;
+  const _ContactDetails({Key? key}) : super(key: key);
 
   final contactText = 'Have any questions? we\'d love to hear from you.';
 
@@ -38,34 +33,11 @@ class _ContactDetails extends StatelessWidget {
                             .appendedImgSrcWithBaseUrlWithMedia,
                         shrinkWrap: true,
                       ),
-                      _ContactItem(
-                        key: WidgetKeys.genericKey(
-                          key: state.contactUsDetails.postloginSendToEmail,
-                        ),
-                        label: state.contactUsDetails.postloginSendToEmail,
-                        icon: Icons.mail_outline,
-                        onTap: () => _sendEmail(
-                          state.contactUsDetails.postloginSendToEmail,
-                          salesOrg.contactPersonName,
-                        ),
-                      ),
                     ],
                   );
           },
         ),
       ],
     );
-  }
-
-  Future<void> _sendEmail(String email, String personName) async {
-    final emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: email,
-      queryParameters: {
-        'subject': 'Example Subject & Symbols are allowed!',
-        'body': 'Dear $personName',
-      },
-    );
-    await launchUrl(emailLaunchUri);
   }
 }

@@ -17,13 +17,11 @@ class DeepLinkingService {
       // the link that open the app more than 1 time
       final initialUri = await _appLinks.getInitialAppLink();
       handleDeepLink(initialUri);
-      setInitialLinkHandled();
+      _initialLinkHandled = true;
     }
 
     return _appLinks.uriLinkStream.listen(handleDeepLink);
   }
-
-  void setInitialLinkHandled() => _initialLinkHandled = true;
 
   void handleDeepLink(Uri? deepLink) {
     if (deepLink != null) {

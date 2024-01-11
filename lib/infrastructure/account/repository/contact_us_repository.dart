@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/contact_us.dart';
 import 'package:ezrxmobile/domain/account/repository/i_contact_us_repository.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/contact_us_local.dart';
@@ -22,8 +23,7 @@ class ContactUsRepository implements IContactUsRepository {
   @override
   Future<Either<ApiFailure, bool>> submit({
     required ContactUs contactUs,
-    required String sendToEmail,
-    required String country,
+    required AppMarket appMarket,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -37,8 +37,8 @@ class ContactUsRepository implements IContactUsRepository {
     try {
       final isSuccess = await remoteDataSource.submit(
         contactUsMap: ContactUsDto.fromDomain(contactUs).toJson(),
-        country: country,
-        sendToEmail: sendToEmail,
+        country: appMarket.country,
+        sendToEmail: appMarket.contactUsEmail,
       );
 
       return Right(isSuccess);

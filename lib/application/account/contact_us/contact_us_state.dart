@@ -6,6 +6,7 @@ class ContactUsState with _$ContactUsState {
 
   const factory ContactUsState({
     required ContactUs contactUs,
+    required AppMarket appMarket,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isSubmitting,
     required bool showErrorMessage,
@@ -14,6 +15,7 @@ class ContactUsState with _$ContactUsState {
 
   factory ContactUsState.initial() => ContactUsState(
         contactUs: ContactUs.empty(),
+        appMarket: AppMarket.malaysia(),
         apiFailureOrSuccessOption: none(),
         isSubmitting: false,
         showErrorMessage: false,

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
@@ -39,11 +40,6 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
       initialize: (_) async {
         dynamicLinkStream ??= await service.init();
       },
-      stopConsumeLink: (_) {
-        service.setInitialLinkHandled();
-        dynamicLinkStream?.cancel();
-        dynamicLinkStream = null;
-      },
       addPendingLink: (event) async {
         emit(
           DeepLinkingState.linkPending(event.link),
@@ -57,6 +53,21 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
       consumePendingLink: (event) {
         state.whenOrNull(
           linkPending: (link) {
+            if (link.path == '/contact-us') {
+              final failureOrSuccess = repository.getCurrentMarket();
+
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (market) => emit(
+                  DeepLinkingState.redirectContactUs(market),
+                ),
+              );
+            }
+
+            if (event.selectedShipTo == ShipToInfo.empty()) return;
+
             if (link.path.startsWith('/product-details')) {
               final failureOrSuccess = repository.extractMaterialNumber(
                 link: link,
@@ -156,6 +167,8 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
               );
             } else if (link.path == '/my-account/payments') {
               emit(const DeepLinkingState.redirectPaymentHome());
+            } else if (link.path == '/faq') {
+              emit(const DeepLinkingState.redirectFAQ());
             }
           },
         );

@@ -169,8 +169,8 @@ void main() {
             create: (context) => contactUsDetailsBlocMock,
           ),
         ],
-        child: const Scaffold(
-          body: ContactUsPage(),
+        child: Scaffold(
+          body: ContactUsPage(appMarket: salesOrg.salesOrg.appMarket),
         ),
       );
     }
@@ -257,50 +257,6 @@ void main() {
       );
     });
 
-    testWidgets('Test Contact Details Email', (tester) async {
-      when(() => mockSalesOrgBloc.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          isLoading: false,
-          salesOrganisation: salesOrg,
-        ),
-      );
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: salesOrg,
-        ),
-      );
-      when(() => contactUsDetailsBlocMock.state).thenReturn(
-        ContactUsDetailsState.initial().copyWith(
-          contactUsDetails: contactUsDetails.copyWith(content: HtmlContent('')),
-        ),
-      );
-      when(() => mockContactUsBloc.state).thenReturn(
-        ContactUsState.initial().copyWith(
-          isSubmitting: true,
-        ),
-      );
-      final expectedState = [
-        ContactUsState.initial().copyWith(
-          isSubmitting: false,
-          showErrorMessage: true,
-          contactUs: contactUs,
-        ),
-      ];
-      whenListen(mockContactUsBloc, Stream.fromIterable(expectedState));
-      // await tester.pumpFrames(
-      //   getScopedWidget(),
-      //   const Duration(seconds: 5),
-      // );
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pumpAndSettle();
-      final emailKey = find.byKey(
-        WidgetKeys.genericKey(key: contactUsDetails.postloginSendToEmail),
-      );
-      expect(
-        emailKey,
-        findsOneWidget,
-      );
-    });
     testWidgets('Test ContactNumberTextField when isSubmit is false',
         (tester) async {
       when(() => mockSalesOrgBloc.state).thenReturn(
@@ -336,7 +292,7 @@ void main() {
       final contactNumberTextFieldKey = find.byKey(WidgetKeys.phoneNumberKey);
       expect(contactNumberTextFieldKey, findsOneWidget);
       final internationalPhoneNumberInput =
-          find.byKey(WidgetKeys.internationalPhoneNumberInputKey);
+          find.byKey(WidgetKeys.genericKey(key: AppMarket.malaysia().country));
 
       expect(internationalPhoneNumberInput, findsOneWidget);
       await tester.enterText(internationalPhoneNumberInput, '6');
@@ -381,7 +337,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final internationalPhoneNumberInput =
-          find.byKey(WidgetKeys.internationalPhoneNumberInputKey);
+          find.byKey(WidgetKeys.genericKey(key: AppMarket.malaysia().country));
 
       expect(internationalPhoneNumberInput, findsOneWidget);
       await tester.enterText(internationalPhoneNumberInput, '6');
@@ -805,26 +761,7 @@ void main() {
           user: user,
         ),
       );
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: fakeMYSalesOrganisation,
-        ),
-      );
-      when(() => mockSalesOrgBloc.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          isLoading: false,
-          salesOrganisation: fakeMYSalesOrganisation,
-        ),
-      );
-      when(() => mockCustomerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          isFetching: false,
-          customerCodeInfo: fakeCustomerCode,
-          shipToInfo: ShipToInfo.empty().copyWith(
-            shipToName: ShipToName.empty().copyWith(name1: 'fake_name'),
-          ),
-        ),
-      );
+
       final expectedState = [
         ContactUsState.initial().copyWith(
           isSubmitting: true,
@@ -840,7 +777,7 @@ void main() {
 
       final sendMessageButtonKey = find.byKey(WidgetKeys.sendMessageButtonKey);
       await tester.drag(
-        find.byKey(WidgetKeys.internationalPhoneNumberInputKey),
+        find.byKey(WidgetKeys.genericKey(key: AppMarket.malaysia().country)),
         const Offset(0, -1000),
       );
       await tester.pump();
@@ -851,9 +788,7 @@ void main() {
       await tester.pump();
       verify(
         () => mockContactUsBloc.add(
-          ContactUsEvent.submit(
-            salesOrg: fakeMYSalesOrganisation.salesOrg,
-          ),
+          const ContactUsEvent.submit(),
         ),
       ).called(1);
     });

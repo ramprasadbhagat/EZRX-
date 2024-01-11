@@ -100,7 +100,10 @@ class MoreDetailsTile {
         ),
         onTap: () {
           context.navigateTo(
-            const ContactUsPageRoute(),
+            ContactUsPageRoute(
+              appMarket:
+                  context.read<EligibilityBloc>().state.salesOrg.appMarket,
+            ),
           );
         },
         label: 'Contact us',

@@ -16,20 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ContactUsDetailsEvent {
-  SalesOrg get salesOrg => throw _privateConstructorUsedError;
+  AppMarket get market => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg) fetch,
+    required TResult Function(AppMarket market) fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg)? fetch,
+    TResult? Function(AppMarket market)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg)? fetch,
+    TResult Function(AppMarket market)? fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $ContactUsDetailsEventCopyWith<$Res> {
           $Res Function(ContactUsDetailsEvent) then) =
       _$ContactUsDetailsEventCopyWithImpl<$Res, ContactUsDetailsEvent>;
   @useResult
-  $Res call({SalesOrg salesOrg});
+  $Res call({AppMarket market});
 }
 
 /// @nodoc
@@ -78,13 +78,13 @@ class _$ContactUsDetailsEventCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrg = null,
+    Object? market = null,
   }) {
     return _then(_value.copyWith(
-      salesOrg: null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
+      market: null == market
+          ? _value.market
+          : market // ignore: cast_nullable_to_non_nullable
+              as AppMarket,
     ) as $Val);
   }
 }
@@ -96,7 +96,7 @@ abstract class _$$_FetchCopyWith<$Res>
       __$$_FetchCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SalesOrg salesOrg});
+  $Res call({AppMarket market});
 }
 
 /// @nodoc
@@ -109,13 +109,13 @@ class __$$_FetchCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrg = null,
+    Object? market = null,
   }) {
     return _then(_$_Fetch(
-      salesOrg: null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
+      market: null == market
+          ? _value.market
+          : market // ignore: cast_nullable_to_non_nullable
+              as AppMarket,
     ));
   }
 }
@@ -123,14 +123,14 @@ class __$$_FetchCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.salesOrg});
+  const _$_Fetch({required this.market});
 
   @override
-  final SalesOrg salesOrg;
+  final AppMarket market;
 
   @override
   String toString() {
-    return 'ContactUsDetailsEvent.fetch(salesOrg: $salesOrg)';
+    return 'ContactUsDetailsEvent.fetch(market: $market)';
   }
 
   @override
@@ -138,12 +138,11 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg));
+            (identical(other.market, market) || other.market == market));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg);
+  int get hashCode => Object.hash(runtimeType, market);
 
   @JsonKey(ignore: true)
   @override
@@ -154,27 +153,27 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg) fetch,
+    required TResult Function(AppMarket market) fetch,
   }) {
-    return fetch(salesOrg);
+    return fetch(market);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg)? fetch,
+    TResult? Function(AppMarket market)? fetch,
   }) {
-    return fetch?.call(salesOrg);
+    return fetch?.call(market);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg)? fetch,
+    TResult Function(AppMarket market)? fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrg);
+      return fetch(market);
     }
     return orElse();
   }
@@ -209,10 +208,10 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements ContactUsDetailsEvent {
-  const factory _Fetch({required final SalesOrg salesOrg}) = _$_Fetch;
+  const factory _Fetch({required final AppMarket market}) = _$_Fetch;
 
   @override
-  SalesOrg get salesOrg;
+  AppMarket get market;
   @override
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>

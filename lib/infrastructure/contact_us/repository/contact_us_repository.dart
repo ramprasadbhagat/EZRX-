@@ -1,6 +1,6 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/contact_us/entities/contact_us_details.dart';
 import 'package:ezrxmobile/domain/contact_us/repository/i_contact_us_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -20,7 +20,7 @@ class ContactUsDetailsRepository extends IContactUsDetailsRepository {
   });
   @override
   Future<Either<ApiFailure, ContactUsDetails>> getContactUsDetails({
-    required SalesOrg salesOrg,
+    required AppMarket market,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -34,8 +34,8 @@ class ContactUsDetailsRepository extends IContactUsDetailsRepository {
     try {
       final contactUsDetails = await remoteDataSource.getContactUsDetails(
         announcementUrlPath: config.announcementApiUrlPath,
-        lang: salesOrg.announcementLocale.languageCode,
-        contactUsId: salesOrg.contactUsItemId,
+        lang: market.announcementLocale.languageCode,
+        contactUsId: market.contactUsItemId,
         token: config.xGQLToken,
       );
 

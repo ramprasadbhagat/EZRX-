@@ -1,11 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/auth/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/auth/value/value_validators.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
+import 'package:flutter/material.dart';
 
 class AppMarket extends ValueObject<String> {
   @override
@@ -14,6 +16,8 @@ class AppMarket extends ValueObject<String> {
   factory AppMarket(String input) {
     return AppMarket._(validateStringNotEmpty(input));
   }
+
+  factory AppMarket.malaysia() => AppMarket('my');
 
   String get marketName => getMarketName(value.getOrElse(() => ''));
 
@@ -25,6 +29,15 @@ class AppMarket extends ValueObject<String> {
       getAvailableMarketDomain(value.getOrElse(() => ''));
 
   const AppMarket._(this.value);
+
+  String get contactUsEmail => countryContactUsEmail(country);
+
+  String get contactUsItemId => countryContactUsItemId(country);
+
+  Locale get announcementLocale =>
+      Locale(helpAndSupportLanguageCode(country), country);
+
+  String get country => value.getOrElse(() => '').toUpperCase();
 
   bool get isVN => value.getOrElse(() => '') == 'vn';
 

@@ -46,7 +46,7 @@ void main() {
       ).thenAnswer((invocation) async => ContactUsDetails.empty());
 
       final result = await repository.getContactUsDetails(
-        salesOrg: fakeMYSalesOrg,
+        market: fakeMYSalesOrg.appMarket,
       );
       expect(
         result.isRight(),
@@ -61,7 +61,7 @@ void main() {
       );
 
       final result = await repository.getContactUsDetails(
-        salesOrg: fakeMYSalesOrg,
+        market: fakeMYSalesOrg.appMarket,
       );
       expect(
         result.isLeft(),
@@ -77,12 +77,12 @@ void main() {
         () => remoteDataSource.getContactUsDetails(
           announcementUrlPath: '/api/announcement',
           lang: fakeUser.preferredLanguage.locale.languageCode,
-          contactUsId: fakeMYSalesOrg.contactUsItemId,
+          contactUsId: fakeMYSalesOrg.appMarket.contactUsItemId,
           token: 'fake-token',
         ),
       ).thenAnswer((invocation) async => ContactUsDetails.empty());
       final result = await repository.getContactUsDetails(
-        salesOrg: fakeMYSalesOrg,
+        market: fakeMYSalesOrg.appMarket,
       );
       expect(
         result.isRight(),
@@ -98,14 +98,14 @@ void main() {
         () => remoteDataSource.getContactUsDetails(
           announcementUrlPath: '/api/announcement',
           lang: fakeUser.preferredLanguage.locale.languageCode,
-          contactUsId: fakeMYSalesOrg.contactUsItemId,
+          contactUsId: fakeMYSalesOrg.appMarket.contactUsItemId,
           token: 'fake-token',
         ),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
       );
       final result = await repository.getContactUsDetails(
-        salesOrg: fakeMYSalesOrg,
+        market: fakeMYSalesOrg.appMarket,
       );
       expect(
         result.isLeft(),

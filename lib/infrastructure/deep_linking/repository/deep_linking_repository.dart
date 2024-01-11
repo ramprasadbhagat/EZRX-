@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -124,10 +125,21 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
         : const Left(ApiFailure.invoiceDetailRoute());
   }
 
+  @override
+  Either<ApiFailure, AppMarket> getCurrentMarket() {
+    try {
+      final currentMarket = deviceStorage.currentMarket();
+
+      return Right(AppMarket(currentMarket));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
   bool _validDomain(Uri link) {
     final domain = link.host;
     final availableMarketDomain =
-        AppMarket(deviceStorage.currentMarket()).availableMarketDomain;
+        getCurrentMarket().getOrElse(() => AppMarket('')).availableMarketDomain;
 
     return availableMarketDomain.any(
       (marketDomain) =>

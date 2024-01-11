@@ -8,7 +8,8 @@ class _ContactNumberTextField extends StatelessWidget {
     return BlocBuilder<ContactUsBloc, ContactUsState>(
       buildWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting ||
-          previous.showErrorMessage != current.showErrorMessage,
+          previous.showErrorMessage != current.showErrorMessage ||
+          previous.appMarket != current.appMarket,
       builder: (context, state) {
         return Column(
           key: WidgetKeys.phoneNumberKey,
@@ -33,10 +34,8 @@ class _ContactNumberTextField extends StatelessWidget {
               height: 8,
             ),
             InternationalPhoneNumberInput(
-              key: WidgetKeys.internationalPhoneNumberInputKey,
-              countries: [
-                context.read<EligibilityBloc>().state.salesOrg.country,
-              ],
+              key: WidgetKeys.genericKey(key: state.appMarket.country),
+              countries: [state.appMarket.country],
               onInputValidated: (bool value) {},
               autoValidateMode: state.showErrorMessage
                   ? AutovalidateMode.always

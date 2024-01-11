@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ContactUsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrg salesOrg) submit,
+    required TResult Function(AppMarket market) initialized,
+    required TResult Function() submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -28,8 +28,8 @@ mixin _$ContactUsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg)? submit,
+    TResult? Function(AppMarket market)? initialized,
+    TResult? Function()? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -38,8 +38,8 @@ mixin _$ContactUsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg)? submit,
+    TResult Function(AppMarket market)? initialized,
+    TResult Function()? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -103,6 +103,8 @@ abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AppMarket market});
 }
 
 /// @nodoc
@@ -112,58 +114,82 @@ class __$$_InitializedCopyWithImpl<$Res>
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? market = null,
+  }) {
+    return _then(_$_Initialized(
+      market: null == market
+          ? _value.market
+          : market // ignore: cast_nullable_to_non_nullable
+              as AppMarket,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+  const _$_Initialized({required this.market});
+
+  @override
+  final AppMarket market;
 
   @override
   String toString() {
-    return 'ContactUsEvent.initialized()';
+    return 'ContactUsEvent.initialized(market: $market)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.market, market) || other.market == market));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, market);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrg salesOrg) submit,
+    required TResult Function(AppMarket market) initialized,
+    required TResult Function() submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
     required TResult Function(String newValue) onMessageChange,
   }) {
-    return initialized();
+    return initialized(market);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg)? submit,
+    TResult? Function(AppMarket market)? initialized,
+    TResult? Function()? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
     TResult? Function(String newValue)? onMessageChange,
   }) {
-    return initialized?.call();
+    return initialized?.call(market);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg)? submit,
+    TResult Function(AppMarket market)? initialized,
+    TResult Function()? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -171,7 +197,7 @@ class _$_Initialized implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized();
+      return initialized(market);
     }
     return orElse();
   }
@@ -221,15 +247,19 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements ContactUsEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized({required final AppMarket market}) =
+      _$_Initialized;
+
+  AppMarket get market;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$_SubmitCopyWith<$Res> {
   factory _$$_SubmitCopyWith(_$_Submit value, $Res Function(_$_Submit) then) =
       __$$_SubmitCopyWithImpl<$Res>;
-  @useResult
-  $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -238,83 +268,58 @@ class __$$_SubmitCopyWithImpl<$Res>
     implements _$$_SubmitCopyWith<$Res> {
   __$$_SubmitCopyWithImpl(_$_Submit _value, $Res Function(_$_Submit) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrg = null,
-  }) {
-    return _then(_$_Submit(
-      salesOrg: null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_Submit implements _Submit {
-  const _$_Submit({required this.salesOrg});
-
-  @override
-  final SalesOrg salesOrg;
+  const _$_Submit();
 
   @override
   String toString() {
-    return 'ContactUsEvent.submit(salesOrg: $salesOrg)';
+    return 'ContactUsEvent.submit()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Submit &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg));
+        (other.runtimeType == runtimeType && other is _$_Submit);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SubmitCopyWith<_$_Submit> get copyWith =>
-      __$$_SubmitCopyWithImpl<_$_Submit>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrg salesOrg) submit,
+    required TResult Function(AppMarket market) initialized,
+    required TResult Function() submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
     required TResult Function(String newValue) onMessageChange,
   }) {
-    return submit(salesOrg);
+    return submit();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg)? submit,
+    TResult? Function(AppMarket market)? initialized,
+    TResult? Function()? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
     TResult? Function(String newValue)? onMessageChange,
   }) {
-    return submit?.call(salesOrg);
+    return submit?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg)? submit,
+    TResult Function(AppMarket market)? initialized,
+    TResult Function()? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -322,7 +327,7 @@ class _$_Submit implements _Submit {
     required TResult orElse(),
   }) {
     if (submit != null) {
-      return submit(salesOrg);
+      return submit();
     }
     return orElse();
   }
@@ -372,12 +377,7 @@ class _$_Submit implements _Submit {
 }
 
 abstract class _Submit implements ContactUsEvent {
-  const factory _Submit({required final SalesOrg salesOrg}) = _$_Submit;
-
-  SalesOrg get salesOrg;
-  @JsonKey(ignore: true)
-  _$$_SubmitCopyWith<_$_Submit> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _Submit() = _$_Submit;
 }
 
 /// @nodoc
@@ -445,8 +445,8 @@ class _$_UsernameChange implements _UsernameChange {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrg salesOrg) submit,
+    required TResult Function(AppMarket market) initialized,
+    required TResult Function() submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -458,8 +458,8 @@ class _$_UsernameChange implements _UsernameChange {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg)? submit,
+    TResult? Function(AppMarket market)? initialized,
+    TResult? Function()? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -471,8 +471,8 @@ class _$_UsernameChange implements _UsernameChange {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg)? submit,
+    TResult Function(AppMarket market)? initialized,
+    TResult Function()? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -604,8 +604,8 @@ class _$_EmailChange implements _EmailChange {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrg salesOrg) submit,
+    required TResult Function(AppMarket market) initialized,
+    required TResult Function() submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -617,8 +617,8 @@ class _$_EmailChange implements _EmailChange {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg)? submit,
+    TResult? Function(AppMarket market)? initialized,
+    TResult? Function()? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -630,8 +630,8 @@ class _$_EmailChange implements _EmailChange {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg)? submit,
+    TResult Function(AppMarket market)? initialized,
+    TResult Function()? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -763,8 +763,8 @@ class _$_ContactNumberChange implements _ContactNumberChange {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrg salesOrg) submit,
+    required TResult Function(AppMarket market) initialized,
+    required TResult Function() submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -776,8 +776,8 @@ class _$_ContactNumberChange implements _ContactNumberChange {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg)? submit,
+    TResult? Function(AppMarket market)? initialized,
+    TResult? Function()? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -789,8 +789,8 @@ class _$_ContactNumberChange implements _ContactNumberChange {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg)? submit,
+    TResult Function(AppMarket market)? initialized,
+    TResult Function()? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -922,8 +922,8 @@ class _$_MessageChange implements _MessageChange {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrg salesOrg) submit,
+    required TResult Function(AppMarket market) initialized,
+    required TResult Function() submit,
     required TResult Function(String newValue) onUsernameChange,
     required TResult Function(String newValue) onEmailChange,
     required TResult Function(String newValue) onContactNumberChange,
@@ -935,8 +935,8 @@ class _$_MessageChange implements _MessageChange {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg)? submit,
+    TResult? Function(AppMarket market)? initialized,
+    TResult? Function()? submit,
     TResult? Function(String newValue)? onUsernameChange,
     TResult? Function(String newValue)? onEmailChange,
     TResult? Function(String newValue)? onContactNumberChange,
@@ -948,8 +948,8 @@ class _$_MessageChange implements _MessageChange {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg)? submit,
+    TResult Function(AppMarket market)? initialized,
+    TResult Function()? submit,
     TResult Function(String newValue)? onUsernameChange,
     TResult Function(String newValue)? onEmailChange,
     TResult Function(String newValue)? onContactNumberChange,
@@ -1019,6 +1019,7 @@ abstract class _MessageChange implements ContactUsEvent {
 /// @nodoc
 mixin _$ContactUsState {
   ContactUs get contactUs => throw _privateConstructorUsedError;
+  AppMarket get appMarket => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
@@ -1038,6 +1039,7 @@ abstract class $ContactUsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {ContactUs contactUs,
+      AppMarket appMarket,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isSubmitting,
       bool showErrorMessage,
@@ -1060,6 +1062,7 @@ class _$ContactUsStateCopyWithImpl<$Res, $Val extends ContactUsState>
   @override
   $Res call({
     Object? contactUs = null,
+    Object? appMarket = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isSubmitting = null,
     Object? showErrorMessage = null,
@@ -1070,6 +1073,10 @@ class _$ContactUsStateCopyWithImpl<$Res, $Val extends ContactUsState>
           ? _value.contactUs
           : contactUs // ignore: cast_nullable_to_non_nullable
               as ContactUs,
+      appMarket: null == appMarket
+          ? _value.appMarket
+          : appMarket // ignore: cast_nullable_to_non_nullable
+              as AppMarket,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1108,6 +1115,7 @@ abstract class _$$_ContactUsStateCopyWith<$Res>
   @useResult
   $Res call(
       {ContactUs contactUs,
+      AppMarket appMarket,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isSubmitting,
       bool showErrorMessage,
@@ -1129,6 +1137,7 @@ class __$$_ContactUsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contactUs = null,
+    Object? appMarket = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isSubmitting = null,
     Object? showErrorMessage = null,
@@ -1139,6 +1148,10 @@ class __$$_ContactUsStateCopyWithImpl<$Res>
           ? _value.contactUs
           : contactUs // ignore: cast_nullable_to_non_nullable
               as ContactUs,
+      appMarket: null == appMarket
+          ? _value.appMarket
+          : appMarket // ignore: cast_nullable_to_non_nullable
+              as AppMarket,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1164,6 +1177,7 @@ class __$$_ContactUsStateCopyWithImpl<$Res>
 class _$_ContactUsState extends _ContactUsState {
   const _$_ContactUsState(
       {required this.contactUs,
+      required this.appMarket,
       required this.apiFailureOrSuccessOption,
       required this.isSubmitting,
       required this.showErrorMessage,
@@ -1172,6 +1186,8 @@ class _$_ContactUsState extends _ContactUsState {
 
   @override
   final ContactUs contactUs;
+  @override
+  final AppMarket appMarket;
   @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
@@ -1183,7 +1199,7 @@ class _$_ContactUsState extends _ContactUsState {
 
   @override
   String toString() {
-    return 'ContactUsState(contactUs: $contactUs, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isSubmitting: $isSubmitting, showErrorMessage: $showErrorMessage, responseFlag: $responseFlag)';
+    return 'ContactUsState(contactUs: $contactUs, appMarket: $appMarket, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isSubmitting: $isSubmitting, showErrorMessage: $showErrorMessage, responseFlag: $responseFlag)';
   }
 
   @override
@@ -1193,6 +1209,8 @@ class _$_ContactUsState extends _ContactUsState {
             other is _$_ContactUsState &&
             (identical(other.contactUs, contactUs) ||
                 other.contactUs == contactUs) &&
+            (identical(other.appMarket, appMarket) ||
+                other.appMarket == appMarket) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
@@ -1205,7 +1223,7 @@ class _$_ContactUsState extends _ContactUsState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, contactUs,
+  int get hashCode => Object.hash(runtimeType, contactUs, appMarket,
       apiFailureOrSuccessOption, isSubmitting, showErrorMessage, responseFlag);
 
   @JsonKey(ignore: true)
@@ -1218,6 +1236,7 @@ class _$_ContactUsState extends _ContactUsState {
 abstract class _ContactUsState extends ContactUsState {
   const factory _ContactUsState(
       {required final ContactUs contactUs,
+      required final AppMarket appMarket,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
       required final bool isSubmitting,
@@ -1227,6 +1246,8 @@ abstract class _ContactUsState extends ContactUsState {
 
   @override
   ContactUs get contactUs;
+  @override
+  AppMarket get appMarket;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override

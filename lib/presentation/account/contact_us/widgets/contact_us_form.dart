@@ -1,6 +1,8 @@
 part of 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 
 class _ContactUsForm extends StatelessWidget {
+  const _ContactUsForm();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ContactUsBloc, ContactUsState>(

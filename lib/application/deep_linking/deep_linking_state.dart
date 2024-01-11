@@ -26,5 +26,9 @@ class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.redirectInvoiceDetail(
     String invoiceNumber,
   ) = _RedirectInvoiceDetail;
+  const factory DeepLinkingState.redirectFAQ() = _RedirectFAQ;
+  const factory DeepLinkingState.redirectContactUs(
+    AppMarket market,
+  ) = _RedirectContactUs;
   const factory DeepLinkingState.error(ApiFailure failure) = _Error;
 }

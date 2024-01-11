@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/contact_us/entities/contact_us_details.dart';
 import 'package:ezrxmobile/domain/contact_us/repository/i_contact_us_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +29,7 @@ class ContactUsDetailsBloc
         );
 
         final failureOrSuccess = await contactUsRepository.getContactUsDetails(
-          salesOrg: e.salesOrg,
+          market: e.market,
         );
         failureOrSuccess.fold(
           (failure) {

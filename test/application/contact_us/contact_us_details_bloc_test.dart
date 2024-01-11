@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/contact_us/contact_us_details_bloc.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/contact_us/entities/contact_us_details.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_local.dart';
@@ -9,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../common_mock_data/sales_organsiation_mock.dart';
-
 class ContactUsDetailsRepositoryMock extends Mock
     implements ContactUsDetailsRepository {}
 
@@ -18,6 +17,7 @@ void main() {
   late ContactUsDetailsRepositoryMock repository;
   late ContactUsDetails contactUsDetails;
   final contactUsDetailsState = ContactUsDetailsState.initial();
+  final fakeMarket = AppMarket('fake');
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ void main() {
       setUp: () {
         when(
           () => repository.getContactUsDetails(
-            salesOrg: fakeMYSalesOrg,
+            market: fakeMarket,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -46,7 +46,7 @@ void main() {
       act: (ContactUsDetailsBloc bloc) => bloc
         ..add(
           ContactUsDetailsEvent.fetch(
-            salesOrg: fakeMYSalesOrg,
+            market: fakeMarket,
           ),
         ),
       expect: () => [
@@ -63,7 +63,7 @@ void main() {
       setUp: () {
         when(
           () => repository.getContactUsDetails(
-            salesOrg: fakeMYSalesOrg,
+            market: fakeMarket,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -74,7 +74,7 @@ void main() {
       act: (ContactUsDetailsBloc bloc) => bloc
         ..add(
           ContactUsDetailsEvent.fetch(
-            salesOrg: fakeMYSalesOrg,
+            market: fakeMarket,
           ),
         ),
       expect: () => [

@@ -14,10 +14,11 @@
 import 'package:auto_route/auto_route.dart' as _i90;
 import 'package:flutter/material.dart' as _i91;
 
-import '../../domain/account/entities/sales_organisation.dart' as _i94;
+import '../../domain/account/entities/sales_organisation.dart' as _i95;
 import '../../domain/account/value/value_objects.dart' as _i92;
 import '../../domain/announcement_info/entities/announcement_article_info.dart'
-    as _i93;
+    as _i94;
+import '../../domain/auth/value/value_objects.dart' as _i93;
 import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i48;
 import '../account/change_password/change_password_page.dart' as _i21;
 import '../account/contact_us/contact_us_page.dart' as _i22;
@@ -298,9 +299,13 @@ class AppRouter extends _i90.RootStackRouter {
       );
     },
     ContactUsPageRoute.name: (routeData) {
+      final args = routeData.argsAs<ContactUsPageRouteArgs>();
       return _i90.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i22.ContactUsPage(),
+        child: _i22.ContactUsPage(
+          key: args.key,
+          appMarket: args.appMarket,
+        ),
       );
     },
     NotificationSettingsPageRoute.name: (routeData) {
@@ -1497,14 +1502,36 @@ class ChangePasswordPageRoute extends _i90.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i22.ContactUsPage]
-class ContactUsPageRoute extends _i90.PageRouteInfo<void> {
-  const ContactUsPageRoute()
-      : super(
+class ContactUsPageRoute extends _i90.PageRouteInfo<ContactUsPageRouteArgs> {
+  ContactUsPageRoute({
+    _i91.Key? key,
+    required _i93.AppMarket appMarket,
+  }) : super(
           ContactUsPageRoute.name,
           path: 'contact_us',
+          args: ContactUsPageRouteArgs(
+            key: key,
+            appMarket: appMarket,
+          ),
         );
 
   static const String name = 'ContactUsPageRoute';
+}
+
+class ContactUsPageRouteArgs {
+  const ContactUsPageRouteArgs({
+    this.key,
+    required this.appMarket,
+  });
+
+  final _i91.Key? key;
+
+  final _i93.AppMarket appMarket;
+
+  @override
+  String toString() {
+    return 'ContactUsPageRouteArgs{key: $key, appMarket: $appMarket}';
+  }
 }
 
 /// generated route for
@@ -2044,7 +2071,7 @@ class AnnouncementsPageRoute extends _i90.PageRouteInfo<void> {
 class ArticleDetailsRoute extends _i90.PageRouteInfo<ArticleDetailsRouteArgs> {
   ArticleDetailsRoute({
     _i91.Key? key,
-    required _i93.AnnouncementArticleItem article,
+    required _i94.AnnouncementArticleItem article,
   }) : super(
           ArticleDetailsRoute.name,
           path: 'article_details',
@@ -2065,7 +2092,7 @@ class ArticleDetailsRouteArgs {
 
   final _i91.Key? key;
 
-  final _i93.AnnouncementArticleItem article;
+  final _i94.AnnouncementArticleItem article;
 
   @override
   String toString() {
@@ -2090,7 +2117,7 @@ class ReturnRequestDetailsRoute extends _i90.PageRouteInfo<void> {
 class SalesOrgSearchRoute extends _i90.PageRouteInfo<SalesOrgSearchRouteArgs> {
   SalesOrgSearchRoute({
     _i91.Key? key,
-    required List<_i94.SalesOrganisation> avialableSalesOrgList,
+    required List<_i95.SalesOrganisation> avialableSalesOrgList,
   }) : super(
           SalesOrgSearchRoute.name,
           path: 'salesOrg_search',
@@ -2111,7 +2138,7 @@ class SalesOrgSearchRouteArgs {
 
   final _i91.Key? key;
 
-  final List<_i94.SalesOrganisation> avialableSalesOrgList;
+  final List<_i95.SalesOrganisation> avialableSalesOrgList;
 
   @override
   String toString() {

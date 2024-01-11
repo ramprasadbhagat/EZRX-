@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +16,10 @@ class ContactUsButton extends StatelessWidget {
         minimumSize: const Size(30, 45),
       ),
       onPressed: () {
-        context.read<ContactUsBloc>().add(const ContactUsEvent.initialized());
         context.navigateTo(
-          const ContactUsPageRoute(),
+          ContactUsPageRoute(
+            appMarket: context.read<EligibilityBloc>().state.salesOrg.appMarket,
+          ),
         );
       },
       child: Text(

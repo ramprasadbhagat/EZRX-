@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/bu_contact.dart';
 import 'package:ezrxmobile/domain/account/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
@@ -49,6 +50,8 @@ class SalesOrg extends ValueObject<String> {
   String get country {
     return salesOrgCountry(value.getOrElse(() => ''));
   }
+
+  AppMarket get appMarket => AppMarket(country);
 
   String get contactEmail {
     return salesOrgEmail(value.getOrElse(() => ''));
@@ -128,10 +131,8 @@ class SalesOrg extends ValueObject<String> {
       Locale(languageCodeForHelpAndSupport, country);
 
   String get announcementVariablePath => countryAnnouncementPath(country);
-  String get contactUsItemId => countryContactUsItemId(country);
 
   String get articleVariablePath => countryArticlePath(country);
-  String get contactUsEmail => countryContactUsEmail(country);
 
   String get aboutUsVariablePath => countryAboutUsPath(country);
 

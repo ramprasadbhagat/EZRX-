@@ -19,7 +19,6 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() stopConsumeLink,
     required TResult Function(Uri link) addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
@@ -29,7 +28,6 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? stopConsumeLink,
     TResult? Function(Uri link)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
@@ -39,7 +37,6 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? stopConsumeLink,
     TResult Function(Uri link)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
@@ -50,7 +47,6 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_StopConsumeLink value) stopConsumeLink,
     required TResult Function(_AddPendingLink value) addPendingLink,
     required TResult Function(_ConsumePendingLink value) consumePendingLink,
   }) =>
@@ -58,7 +54,6 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_StopConsumeLink value)? stopConsumeLink,
     TResult? Function(_AddPendingLink value)? addPendingLink,
     TResult? Function(_ConsumePendingLink value)? consumePendingLink,
   }) =>
@@ -66,7 +61,6 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_StopConsumeLink value)? stopConsumeLink,
     TResult Function(_AddPendingLink value)? addPendingLink,
     TResult Function(_ConsumePendingLink value)? consumePendingLink,
     required TResult orElse(),
@@ -131,7 +125,6 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() stopConsumeLink,
     required TResult Function(Uri link) addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
@@ -144,7 +137,6 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? stopConsumeLink,
     TResult? Function(Uri link)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
@@ -157,7 +149,6 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? stopConsumeLink,
     TResult Function(Uri link)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
@@ -174,7 +165,6 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_StopConsumeLink value) stopConsumeLink,
     required TResult Function(_AddPendingLink value) addPendingLink,
     required TResult Function(_ConsumePendingLink value) consumePendingLink,
   }) {
@@ -185,7 +175,6 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_StopConsumeLink value)? stopConsumeLink,
     TResult? Function(_AddPendingLink value)? addPendingLink,
     TResult? Function(_ConsumePendingLink value)? consumePendingLink,
   }) {
@@ -196,7 +185,6 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_StopConsumeLink value)? stopConsumeLink,
     TResult Function(_AddPendingLink value)? addPendingLink,
     TResult Function(_ConsumePendingLink value)? consumePendingLink,
     required TResult orElse(),
@@ -210,126 +198,6 @@ class _$_Initialize implements _Initialize {
 
 abstract class _Initialize implements DeepLinkingEvent {
   const factory _Initialize() = _$_Initialize;
-}
-
-/// @nodoc
-abstract class _$$_StopConsumeLinkCopyWith<$Res> {
-  factory _$$_StopConsumeLinkCopyWith(
-          _$_StopConsumeLink value, $Res Function(_$_StopConsumeLink) then) =
-      __$$_StopConsumeLinkCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_StopConsumeLinkCopyWithImpl<$Res>
-    extends _$DeepLinkingEventCopyWithImpl<$Res, _$_StopConsumeLink>
-    implements _$$_StopConsumeLinkCopyWith<$Res> {
-  __$$_StopConsumeLinkCopyWithImpl(
-      _$_StopConsumeLink _value, $Res Function(_$_StopConsumeLink) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_StopConsumeLink implements _StopConsumeLink {
-  const _$_StopConsumeLink();
-
-  @override
-  String toString() {
-    return 'DeepLinkingEvent.stopConsumeLink()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_StopConsumeLink);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function() stopConsumeLink,
-    required TResult Function(Uri link) addPendingLink,
-    required TResult Function(
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
-        consumePendingLink,
-  }) {
-    return stopConsumeLink();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function()? stopConsumeLink,
-    TResult? Function(Uri link)? addPendingLink,
-    TResult? Function(
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
-        consumePendingLink,
-  }) {
-    return stopConsumeLink?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function()? stopConsumeLink,
-    TResult Function(Uri link)? addPendingLink,
-    TResult Function(
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
-        consumePendingLink,
-    required TResult orElse(),
-  }) {
-    if (stopConsumeLink != null) {
-      return stopConsumeLink();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialize value) initialize,
-    required TResult Function(_StopConsumeLink value) stopConsumeLink,
-    required TResult Function(_AddPendingLink value) addPendingLink,
-    required TResult Function(_ConsumePendingLink value) consumePendingLink,
-  }) {
-    return stopConsumeLink(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_StopConsumeLink value)? stopConsumeLink,
-    TResult? Function(_AddPendingLink value)? addPendingLink,
-    TResult? Function(_ConsumePendingLink value)? consumePendingLink,
-  }) {
-    return stopConsumeLink?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_StopConsumeLink value)? stopConsumeLink,
-    TResult Function(_AddPendingLink value)? addPendingLink,
-    TResult Function(_ConsumePendingLink value)? consumePendingLink,
-    required TResult orElse(),
-  }) {
-    if (stopConsumeLink != null) {
-      return stopConsumeLink(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _StopConsumeLink implements DeepLinkingEvent {
-  const factory _StopConsumeLink() = _$_StopConsumeLink;
 }
 
 /// @nodoc
@@ -397,7 +265,6 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() stopConsumeLink,
     required TResult Function(Uri link) addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
@@ -410,7 +277,6 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? stopConsumeLink,
     TResult? Function(Uri link)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
@@ -423,7 +289,6 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? stopConsumeLink,
     TResult Function(Uri link)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
@@ -440,7 +305,6 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_StopConsumeLink value) stopConsumeLink,
     required TResult Function(_AddPendingLink value) addPendingLink,
     required TResult Function(_ConsumePendingLink value) consumePendingLink,
   }) {
@@ -451,7 +315,6 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_StopConsumeLink value)? stopConsumeLink,
     TResult? Function(_AddPendingLink value)? addPendingLink,
     TResult? Function(_ConsumePendingLink value)? consumePendingLink,
   }) {
@@ -462,7 +325,6 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_StopConsumeLink value)? stopConsumeLink,
     TResult Function(_AddPendingLink value)? addPendingLink,
     TResult Function(_ConsumePendingLink value)? consumePendingLink,
     required TResult orElse(),
@@ -581,7 +443,6 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() stopConsumeLink,
     required TResult Function(Uri link) addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
@@ -594,7 +455,6 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? stopConsumeLink,
     TResult? Function(Uri link)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
@@ -607,7 +467,6 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? stopConsumeLink,
     TResult Function(Uri link)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
@@ -624,7 +483,6 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_StopConsumeLink value) stopConsumeLink,
     required TResult Function(_AddPendingLink value) addPendingLink,
     required TResult Function(_ConsumePendingLink value) consumePendingLink,
   }) {
@@ -635,7 +493,6 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_StopConsumeLink value)? stopConsumeLink,
     TResult? Function(_AddPendingLink value)? addPendingLink,
     TResult? Function(_ConsumePendingLink value)? consumePendingLink,
   }) {
@@ -646,7 +503,6 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_StopConsumeLink value)? stopConsumeLink,
     TResult Function(_AddPendingLink value)? addPendingLink,
     TResult Function(_ConsumePendingLink value)? consumePendingLink,
     required TResult orElse(),
@@ -687,6 +543,8 @@ mixin _$DeepLinkingState {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -703,6 +561,8 @@ mixin _$DeepLinkingState {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -719,6 +579,8 @@ mixin _$DeepLinkingState {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) =>
@@ -739,6 +601,8 @@ mixin _$DeepLinkingState {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -755,6 +619,8 @@ mixin _$DeepLinkingState {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -771,6 +637,8 @@ mixin _$DeepLinkingState {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -845,6 +713,8 @@ class _$_Initial implements _Initial {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return initial();
@@ -864,6 +734,8 @@ class _$_Initial implements _Initial {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return initial?.call();
@@ -883,6 +755,8 @@ class _$_Initial implements _Initial {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -909,6 +783,8 @@ class _$_Initial implements _Initial {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -928,6 +804,8 @@ class _$_Initial implements _Initial {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -947,6 +825,8 @@ class _$_Initial implements _Initial {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1038,6 +918,8 @@ class _$_LinkPending implements _LinkPending {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return linkPending(link);
@@ -1057,6 +939,8 @@ class _$_LinkPending implements _LinkPending {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return linkPending?.call(link);
@@ -1076,6 +960,8 @@ class _$_LinkPending implements _LinkPending {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -1102,6 +988,8 @@ class _$_LinkPending implements _LinkPending {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return linkPending(this);
@@ -1121,6 +1009,8 @@ class _$_LinkPending implements _LinkPending {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return linkPending?.call(this);
@@ -1140,6 +1030,8 @@ class _$_LinkPending implements _LinkPending {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1238,6 +1130,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return redirectBundleDetail(materialNumber);
@@ -1257,6 +1151,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return redirectBundleDetail?.call(materialNumber);
@@ -1276,6 +1172,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -1302,6 +1200,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return redirectBundleDetail(this);
@@ -1321,6 +1221,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return redirectBundleDetail?.call(this);
@@ -1340,6 +1242,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1439,6 +1343,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return redirectProductDetail(materialNumber);
@@ -1458,6 +1364,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return redirectProductDetail?.call(materialNumber);
@@ -1477,6 +1385,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -1503,6 +1413,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return redirectProductDetail(this);
@@ -1522,6 +1434,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return redirectProductDetail?.call(this);
@@ -1541,6 +1455,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1642,6 +1558,8 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return redirectProductSuggestion(searchKey);
@@ -1661,6 +1579,8 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return redirectProductSuggestion?.call(searchKey);
@@ -1680,6 +1600,8 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -1706,6 +1628,8 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return redirectProductSuggestion(this);
@@ -1725,6 +1649,8 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return redirectProductSuggestion?.call(this);
@@ -1744,6 +1670,8 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1843,6 +1771,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return redirectOrderDetail(orderNumber);
@@ -1862,6 +1792,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return redirectOrderDetail?.call(orderNumber);
@@ -1881,6 +1813,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -1907,6 +1841,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return redirectOrderDetail(this);
@@ -1926,6 +1862,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return redirectOrderDetail?.call(this);
@@ -1945,6 +1883,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -2054,6 +1994,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return redirectReturnDetail(returnId);
@@ -2073,6 +2015,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return redirectReturnDetail?.call(returnId);
@@ -2092,6 +2036,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -2118,6 +2064,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return redirectReturnDetail(this);
@@ -2137,6 +2085,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return redirectReturnDetail?.call(this);
@@ -2156,6 +2106,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -2266,6 +2218,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return redirectPaymentDetail(paymentIdentifierInfo);
@@ -2285,6 +2239,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return redirectPaymentDetail?.call(paymentIdentifierInfo);
@@ -2304,6 +2260,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -2330,6 +2288,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return redirectPaymentDetail(this);
@@ -2349,6 +2309,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return redirectPaymentDetail?.call(this);
@@ -2368,6 +2330,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -2440,6 +2404,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return redirectPaymentHome();
@@ -2459,6 +2425,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return redirectPaymentHome?.call();
@@ -2478,6 +2446,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -2504,6 +2474,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return redirectPaymentHome(this);
@@ -2523,6 +2495,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return redirectPaymentHome?.call(this);
@@ -2542,6 +2516,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -2635,6 +2611,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return redirectInvoiceDetail(invoiceNumber);
@@ -2654,6 +2632,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return redirectInvoiceDetail?.call(invoiceNumber);
@@ -2673,6 +2653,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -2699,6 +2681,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return redirectInvoiceDetail(this);
@@ -2718,6 +2702,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return redirectInvoiceDetail?.call(this);
@@ -2737,6 +2723,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -2754,6 +2742,397 @@ abstract class _RedirectInvoiceDetail implements DeepLinkingState {
   String get invoiceNumber;
   @JsonKey(ignore: true)
   _$$_RedirectInvoiceDetailCopyWith<_$_RedirectInvoiceDetail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RedirectFAQCopyWith<$Res> {
+  factory _$$_RedirectFAQCopyWith(
+          _$_RedirectFAQ value, $Res Function(_$_RedirectFAQ) then) =
+      __$$_RedirectFAQCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RedirectFAQCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectFAQ>
+    implements _$$_RedirectFAQCopyWith<$Res> {
+  __$$_RedirectFAQCopyWithImpl(
+      _$_RedirectFAQ _value, $Res Function(_$_RedirectFAQ) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_RedirectFAQ implements _RedirectFAQ {
+  const _$_RedirectFAQ();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectFAQ()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RedirectFAQ);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+        redirectPaymentDetail,
+    required TResult Function() redirectPaymentHome,
+    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function(ApiFailure failure) error,
+  }) {
+    return redirectFAQ();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+        redirectPaymentDetail,
+    TResult? Function()? redirectPaymentHome,
+    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function(ApiFailure failure)? error,
+  }) {
+    return redirectFAQ?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+        redirectPaymentDetail,
+    TResult Function()? redirectPaymentHome,
+    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function(ApiFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectFAQ != null) {
+      return redirectFAQ();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_Error value) error,
+  }) {
+    return redirectFAQ(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_Error value)? error,
+  }) {
+    return redirectFAQ?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectFAQ != null) {
+      return redirectFAQ(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectFAQ implements DeepLinkingState {
+  const factory _RedirectFAQ() = _$_RedirectFAQ;
+}
+
+/// @nodoc
+abstract class _$$_RedirectContactUsCopyWith<$Res> {
+  factory _$$_RedirectContactUsCopyWith(_$_RedirectContactUs value,
+          $Res Function(_$_RedirectContactUs) then) =
+      __$$_RedirectContactUsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AppMarket market});
+}
+
+/// @nodoc
+class __$$_RedirectContactUsCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectContactUs>
+    implements _$$_RedirectContactUsCopyWith<$Res> {
+  __$$_RedirectContactUsCopyWithImpl(
+      _$_RedirectContactUs _value, $Res Function(_$_RedirectContactUs) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? market = null,
+  }) {
+    return _then(_$_RedirectContactUs(
+      null == market
+          ? _value.market
+          : market // ignore: cast_nullable_to_non_nullable
+              as AppMarket,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RedirectContactUs implements _RedirectContactUs {
+  const _$_RedirectContactUs(this.market);
+
+  @override
+  final AppMarket market;
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectContactUs(market: $market)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RedirectContactUs &&
+            (identical(other.market, market) || other.market == market));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, market);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RedirectContactUsCopyWith<_$_RedirectContactUs> get copyWith =>
+      __$$_RedirectContactUsCopyWithImpl<_$_RedirectContactUs>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+        redirectPaymentDetail,
+    required TResult Function() redirectPaymentHome,
+    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function(ApiFailure failure) error,
+  }) {
+    return redirectContactUs(market);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+        redirectPaymentDetail,
+    TResult? Function()? redirectPaymentHome,
+    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function(ApiFailure failure)? error,
+  }) {
+    return redirectContactUs?.call(market);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+        redirectPaymentDetail,
+    TResult Function()? redirectPaymentHome,
+    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function(ApiFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectContactUs != null) {
+      return redirectContactUs(market);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_Error value) error,
+  }) {
+    return redirectContactUs(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_Error value)? error,
+  }) {
+    return redirectContactUs?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectContactUs != null) {
+      return redirectContactUs(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectContactUs implements DeepLinkingState {
+  const factory _RedirectContactUs(final AppMarket market) =
+      _$_RedirectContactUs;
+
+  AppMarket get market;
+  @JsonKey(ignore: true)
+  _$$_RedirectContactUsCopyWith<_$_RedirectContactUs> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2842,6 +3221,8 @@ class _$_Error implements _Error {
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
     return error(failure);
@@ -2861,6 +3242,8 @@ class _$_Error implements _Error {
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
     return error?.call(failure);
@@ -2880,6 +3263,8 @@ class _$_Error implements _Error {
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -2906,6 +3291,8 @@ class _$_Error implements _Error {
     required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -2925,6 +3312,8 @@ class _$_Error implements _Error {
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -2944,6 +3333,8 @@ class _$_Error implements _Error {
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

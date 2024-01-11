@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -12,6 +10,8 @@ import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../common_mock_data/customer_code_mock.dart';
 
 class DeepLinkingRepositoryMock extends Mock
     implements IDeepLinkingRepository {}
@@ -26,8 +26,8 @@ void main() {
   late ChatBotService chatBotService;
   const fakeStream = Stream.empty();
   final fakeSubscription = fakeStream.listen((_) {});
-  final fakeCustomerCode = CustomerCodeInfo.empty();
-  final fakeShipToCode = ShipToInfo.empty();
+  final fakeCustomerCode = fakeCustomerCodeInfo;
+  final fakeShipToCode = fakeShipToInfo;
   const orderDetailLink = '/my-account/orders/order-detail';
 
   setUp(() {

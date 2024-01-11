@@ -11,8 +11,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/contact_us_local.da
 import 'package:ezrxmobile/infrastructure/account/datasource/contact_us_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/contact_us_repository.dart';
 
-import '../../../common_mock_data/sales_organsiation_mock.dart';
-
 class ConfigMock extends Mock implements Config {}
 
 class ContactUsRemoteDataSourceMock extends Mock
@@ -27,6 +25,7 @@ void main() {
   late ContactUsRemoteDataSource remoteDataSourceMock;
   late ContactUsRepository repository;
   late ContactUs contactUsMock;
+  final fakeMarket = AppMarket('fake');
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -58,8 +57,7 @@ void main() {
 
       final result = await repository.submit(
         contactUs: contactUsMock,
-        country: fakeSalesOrg.country,
-        sendToEmail: fakeSalesOrg.contactUsEmail,
+        appMarket: fakeMarket,
       );
       expect(result.isLeft(), true);
     });
@@ -72,8 +70,7 @@ void main() {
 
       final result = await repository.submit(
         contactUs: contactUsMock,
-        country: fakeSalesOrg.country,
-        sendToEmail: fakeSalesOrg.contactUsEmail,
+        appMarket: fakeMarket,
       );
       expect(result.isRight(), true);
     });
@@ -83,15 +80,14 @@ void main() {
       when(
         () => remoteDataSourceMock.submit(
           contactUsMap: ContactUsDto.fromDomain(contactUsMock).toJson(),
-          country: fakeSalesOrg.country,
-          sendToEmail: fakeSalesOrg.contactUsEmail,
+          country: fakeMarket.country,
+          sendToEmail: fakeMarket.contactUsEmail,
         ),
       ).thenThrow((invocation) async => MockException());
 
       final result = await repository.submit(
         contactUs: contactUsMock,
-        country: fakeSalesOrg.country,
-        sendToEmail: fakeSalesOrg.contactUsEmail,
+        appMarket: fakeMarket,
       );
       expect(result.isLeft(), true);
     });
@@ -101,15 +97,14 @@ void main() {
       when(
         () => remoteDataSourceMock.submit(
           contactUsMap: ContactUsDto.fromDomain(contactUsMock).toJson(),
-          country: fakeSalesOrg.country,
-          sendToEmail: fakeSalesOrg.contactUsEmail,
+          country: fakeMarket.country,
+          sendToEmail: fakeMarket.contactUsEmail,
         ),
       ).thenAnswer((invocation) async => true);
 
       final result = await repository.submit(
         contactUs: contactUsMock,
-        country: fakeSalesOrg.country,
-        sendToEmail: fakeSalesOrg.contactUsEmail,
+        appMarket: fakeMarket,
       );
       expect(result.isRight(), true);
     });
