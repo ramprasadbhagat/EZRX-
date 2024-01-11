@@ -53,22 +53,24 @@ class _CertificationsItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            RichText(
-              text: TextSpan(
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
+            Expanded(
+              child: RichText(
+                text: TextSpan(
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                  children: [
+                    TextSpan(
+                      text: certifications.certificationType,
                     ),
-                children: [
-                  TextSpan(
-                    text: certifications.certificationType,
-                  ),
-                  const TextSpan(
-                    text: ' | ',
-                  ),
-                  TextSpan(
-                    text: certifications.certificationName,
-                  ),
-                ],
+                    const TextSpan(
+                      text: ' | ',
+                    ),
+                    TextSpan(
+                      text: certifications.certificationName,
+                    ),
+                  ],
+                ),
               ),
             ),
             Text(

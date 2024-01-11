@@ -5,9 +5,25 @@ query($itemId: String!, $lang: String!) {
 }
 #About Us
 fragment itemDetail on Item {
-  ... on AboutUsPage {
-    components: field(name: "Components") {
-      ...componentsField
+  components: field(name: "Components") {
+    ...componentsField
+  }
+  saleOrgDictionary: field(name: "Sale Org Dictionary") {
+    ... on MultilistField {
+      value: targetItems {
+        key: field(name: "Key") {
+          value
+        }
+        valueForPhytoSaleOrg: field(name: "Value for Phyto sale org") {
+          value
+        }
+        valueForMetroSaleOrg: field(name: "Value for Metro sale org") {
+          value
+        }
+        valueForSangSaleOrg: field(name: "Value for Sang sale org") {
+          value
+        }
+      }
     }
   }
 }
@@ -42,6 +58,15 @@ fragment bannerDetail on Item {
     buttonName {
       value
     }
+    buttonUrl {
+      jsonValue
+    }
+    backgroundColor {
+      value
+    }
+    backgroundImage {
+      ...imageFields
+    }
   }
 }
 
@@ -54,12 +79,17 @@ fragment mediaListDetail on Item {
     description: field(name: "Description") {
       ...textFields
     }
-        maxNumberOfItem:field(name:"Max number of item")
-					{
-					 ...intField
-					}
+    maxNumberOfItem: field(name: "Max number of item") {
+      ...intField
+    }
     mediaItems: field(name: "Media") {
       ...multiMediaFields
+    }
+    buttonName {
+      value
+    }
+    buttonUrl {
+      jsonValue
     }
   }
 }
@@ -82,10 +112,9 @@ fragment horizontalListDetail on Item {
     description: field(name: "Description") {
       ...textFields
     }
-         maxNumberOfItem:field(name:"Max number of item")
-					{
-					 ...intField
-					}
+    maxNumberOfItem: field(name: "Max number of item") {
+      ...intField
+    }
     list: field(name: "List") {
       ...horizontalListFields
     }
@@ -129,6 +158,15 @@ fragment contentSplitDetail on Item {
     description: field(name: "Description") {
       ...richtextFields
     }
+    buttonName {
+      value
+    }
+    buttonUrl {
+      jsonValue
+    }
+    greyBackgroundColor {
+      boolValue
+    }
   }
 }
 
@@ -138,12 +176,14 @@ fragment sliderDetail on Item {
     title: field(name: "Title") {
       ...textFields
     }
-      maxNumberOfItem:field(name:"Max number of item")
-					{
-					 ...intField
-					}
+    maxNumberOfItem: field(name: "Max number of item") {
+      ...intField
+    }
     certificates: field(name: "Certificates") {
       ...certificatesField
+    }
+    subtitle {
+      value
     }
   }
 }
@@ -180,15 +220,18 @@ fragment richtextFields on RichTextField {
   value
 }
 fragment imageFields on ImageField {
+  src
+  width
+  height
   jsonValue
 }
-fragment intField on IntegerField 
-{ 
- value
+fragment intField on IntegerField {
+  value
 }
+
 
 variable:{
 "itemId": "{C6392052-7603-4BA8-AC70-66D32B1D118D}",
-"lang": "en"
+  	"lang": "en"
   	
 }
