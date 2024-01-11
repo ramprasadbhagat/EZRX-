@@ -2104,6 +2104,25 @@ void main() {
       );
     });
 
+    testWidgets('=> Test default request delivery date is empty',
+        (WidgetTester tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation,
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final rddFieldFinder = find.byKey(WidgetKeys.deliveryDate);
+      expect(rddFieldFinder, findsOneWidget);
+      final textField =
+          rddFieldFinder.evaluate().single.widget as TextFormField;
+      expect(textField.initialValue, '');
+    });
+
     testWidgets('=> Selecting a date updates the delivery date text',
         (WidgetTester tester) async {
       when(() => eligibilityBloc.state).thenReturn(
