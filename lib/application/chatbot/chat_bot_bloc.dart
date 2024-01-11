@@ -25,7 +25,12 @@ class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
     Emitter<ChatBotState> emit,
   ) async {
     await event.map(
-      initialize: (_) async => emit(ChatBotState.initial()),
+      initialize: (_) {
+        _deepLinkHandlerStreamSubscription?.cancel;
+        _deepLinkHandlerStreamSubscription =
+            chatBotRepository.processDeepLinkOnIncomingEvent();
+        emit(ChatBotState.initial());
+      },
       startChatbot: (_) async {
         emit(
           state.copyWith(
@@ -42,10 +47,6 @@ class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
             ),
           ),
           (_) {
-            _deepLinkHandlerStreamSubscription?.cancel;
-            _deepLinkHandlerStreamSubscription =
-                chatBotRepository.processDeepLinkOnIncomingEvent();
-
             emit(
               state.copyWith(
                 isLoading: false,

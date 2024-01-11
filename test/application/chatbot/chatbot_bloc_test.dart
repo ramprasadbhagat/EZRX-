@@ -17,6 +17,10 @@ void main() {
     blocTest(
       'Initialize',
       build: () => ChatBotBloc(chatBotRepository: chatBotRepositoryMock),
+      setUp: () {
+        when(() => chatBotRepositoryMock.processDeepLinkOnIncomingEvent())
+            .thenReturn(const Stream.empty().listen((event) {}));
+      },
       act: (ChatBotBloc bloc) => bloc.add(const ChatBotEvent.initialize()),
       expect: () => [ChatBotState.initial()],
     );
@@ -29,8 +33,6 @@ void main() {
         when(() => chatBotRepositoryMock.startChatbot()).thenAnswer(
           (invocation) async => const Right(true),
         );
-        when(() => chatBotRepositoryMock.processDeepLinkOnIncomingEvent())
-            .thenReturn(const Stream.empty().listen((event) {}));
       },
       expect: () => [
         ChatBotState.initial().copyWith(isLoading: true),

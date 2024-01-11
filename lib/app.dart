@@ -458,7 +458,8 @@ class App extends StatelessWidget {
           create: (context) => locator<ViewByOrderFilterBloc>(),
         ),
         BlocProvider<ChatBotBloc>(
-          create: (context) => locator<ChatBotBloc>(),
+          create: (context) =>
+              locator<ChatBotBloc>()..add(const ChatBotEvent.initialize()),
         ),
         BlocProvider<ReturnListByItemBloc>(
           create: (context) => locator<ReturnListByItemBloc>(),
