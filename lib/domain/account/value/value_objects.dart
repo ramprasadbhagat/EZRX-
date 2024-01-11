@@ -167,6 +167,8 @@ class SalesOrg extends ValueObject<String> {
   // later can be introduce as remote config
   bool get showBatchNumber => !isTW && !isSg;
 
+  bool get isProductDeterminationApplicable => isID;
+
   const SalesOrg._(this.value);
 }
 

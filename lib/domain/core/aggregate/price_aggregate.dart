@@ -836,6 +836,10 @@ class PriceAggregate with _$PriceAggregate {
               .getOrDefaultValue('')
               .compareTo(b.itemId.getOrDefaultValue('')),
         );
+
+  bool get isIDProductStockInvalid =>
+      salesOrgConfig.salesOrg.isProductDeterminationApplicable &&
+      (!inStock || _isStockQtyExceedsForId);
 }
 
 enum PriceType {

@@ -34,6 +34,7 @@ class StockInfoQueryMutation {
           InStock
           ShelfLife
           SalesDistrict
+          StockQuantity
         }
       }
     }

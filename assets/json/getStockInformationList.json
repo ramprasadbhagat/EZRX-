@@ -14,7 +14,8 @@
                         "ExpiryDate": "20251130",
                         "InStock": "Yes",
                         "ShelfLife": 180,
-                        "SalesDistrict": null
+                        "SalesDistrict": null,
+                        "StockQuantity": 156
                     }
                 ]
             },
@@ -63,7 +64,8 @@
                         "ExpiryDate": "20231106",
                         "InStock": "Yes",
                         "ShelfLife": 90,
-                        "SalesDistrict": null
+                        "SalesDistrict": null,
+                        "StockQuantity": 156
                     }
                 ]
             }

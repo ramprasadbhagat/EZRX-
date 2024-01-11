@@ -93,8 +93,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
           previous.isFetchingBonus != current.isFetchingBonus &&
           !current.isFetchingBonus,
       listener: (context, state) {
-        if (state.cartProducts.any((e) => !e.inStock)) {
-          context.router.pop();
+        if (state.isProductDeterminationFailed) {
+          context.router.navigateBack();
         } else {
           context.read<CartBloc>().add(
                 const CartEvent.updatePriceForIdMarket(),

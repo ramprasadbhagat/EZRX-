@@ -579,4 +579,7 @@ class CartState with _$CartState {
           )
           .materialInfo
           .counterOfferDetails;
+
+  bool get isProductDeterminationFailed =>
+      cartProducts.any((e) => e.isIDProductStockInvalid);
 }

@@ -8,6 +8,7 @@ query ($request: GetStockInformationListsRequest!) {
       InStock
       ShelfLife
       SalesDistrict
+      StockQuantity
     }
   }
 }
