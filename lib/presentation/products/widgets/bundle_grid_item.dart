@@ -33,13 +33,7 @@ class _BundleGridItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          materialInfo.combinationCode(
-                            showGMCPart: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .salesOrgConfigs
-                                .enableGMC,
-                          ),
+                          materialInfo.bundle.bundleCode,
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.darkGray,

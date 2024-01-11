@@ -56,6 +56,7 @@ void main() {
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
   late List<MaterialInfo> materialList;
+  late MaterialResponse materialResponseMock;
   final routeData = RouteData(
     route: const RouteMatch(
       name: 'HomeTabRoute',
@@ -84,6 +85,7 @@ void main() {
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
     locator.registerLazySingleton(() => PackageInfoService());
     materialList = await MaterialListLocalDataSource().getMaterialList();
+    materialResponseMock = await MaterialListLocalDataSource().getProductList();
   });
 
   setUp(() async {
@@ -364,6 +366,24 @@ void main() {
         expect(bundleBody, findsOneWidget);
         final bundleName = find.text('fake-name');
         expect(bundleName, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Find Bundle Code Inside Bundle Section',
+      (WidgetTester tester) async {
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList: [materialResponseMock.products[12]],
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        final bundleCode = find.text(
+          materialResponseMock.products[12].bundle.bundleCode,
+        );
+        expect(bundleCode, findsOneWidget);
       },
     );
   });

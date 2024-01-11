@@ -24,6 +24,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -98,7 +99,7 @@ void main() {
   late AppRouter autoRouterMock;
   late MaterialInfo bundle;
   late BundleAddToCartBloc bundleAddToCartBloc;
-
+  late MaterialResponse materialResponseMock;
   //////////////////////Finder//////////////////////////////////////////////////
   final bundleImage = find.byKey(
     WidgetKeys.bundleImage,
@@ -127,7 +128,7 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
-
+    materialResponseMock = await MaterialListLocalDataSource().getProductList();
     bundle = MaterialInfo.empty().copyWith(
       materialNumber: MaterialNumber('fake-bundle'),
       type: MaterialInfoType('bundle'),
@@ -586,7 +587,6 @@ void main() {
       });
 
       testWidgets('add bundle item quantity test', (tester) async {
-
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
@@ -803,6 +803,23 @@ void main() {
         await tester.tap(materialDetailsAddToCartButton);
         await tester.pumpAndSettle();
         verify(() => autoRouterMock.pop()).called(1);
+      });
+
+      testWidgets('Test full bundle code displayed in bundle details page',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialResponseMock.products[12],
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        final price =
+            find.text(materialResponseMock.products[12].bundle.bundleCode);
+        expect(price, findsOneWidget);
       });
     },
   );

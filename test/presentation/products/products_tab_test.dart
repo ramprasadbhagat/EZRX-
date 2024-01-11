@@ -772,6 +772,27 @@ void main() {
           expect(customerBlockedBanner, findsOneWidget);
         },
       );
+
+      testWidgets(
+        '=> Test full bundle code displayed ',
+        (tester) async {
+          when(() => materialListBlocMock.state).thenReturn(
+            MaterialListState.initial().copyWith(
+              materialList: [materialResponseMock.products[12]],
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          final bundleFinder =
+              find.byKey(WidgetKeys.materialListBundleCard).first;
+          expect(bundleFinder, findsOneWidget);
+          expect(
+            find.text(materialResponseMock.products[12].bundle.bundleCode),
+            findsOneWidget,
+          );
+        },
+      );
     },
   );
 }
