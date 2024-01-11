@@ -83,5 +83,18 @@ void main() async {
         expect(orderHistoryItem.taxPercentage, 5.0);
       });
     });
+
+    test('filter items by order number', () {
+      final itemWithOrderNumber =
+          parentItem.copyWith(orderNumber: OrderNumber('fakeOrderNumber'));
+      final entity = OrderHistory.empty().copyWith(
+        orderHistoryItems: [parentItem, itemWithOrderNumber],
+      );
+
+      expect(
+        entity.filterItemsByOrderId(itemWithOrderNumber.orderNumber),
+        OrderHistory.empty().copyWith(orderHistoryItems: [itemWithOrderNumber]),
+      );
+    });
   });
 }

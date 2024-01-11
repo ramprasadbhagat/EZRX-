@@ -198,7 +198,13 @@ void main() {
         },
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.setItemOrderDetails(
-            orderHistory: orderHistory,
+            orderHistory: orderHistory.copyWith(
+              orderHistoryItems: [
+                ...orderHistory.orderHistoryItems,
+                orderHistory.orderHistoryItems.first
+                    .copyWith(orderNumber: OrderNumber('fake'))
+              ],
+            ),
             orderHistoryItem: fakeOrderHistoryItem,
             disableDeliveryDateForZyllemStatus: false,
           ),

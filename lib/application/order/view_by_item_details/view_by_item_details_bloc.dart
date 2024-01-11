@@ -147,7 +147,8 @@ class ViewByItemDetailsBloc
       setItemOrderDetails: (e) {
         emit(
           state.copyWith(
-            orderHistory: e.orderHistory,
+            orderHistory: e.orderHistory
+                .filterItemsByOrderId(e.orderHistoryItem.orderNumber),
             orderHistoryItem: e.orderHistoryItem,
           ),
         );

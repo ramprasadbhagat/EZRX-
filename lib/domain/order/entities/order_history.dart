@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_history.freezed.dart';
@@ -18,6 +19,12 @@ class OrderHistory with _$OrderHistory {
       );
 
   bool get isOthersOrderItemsSectionVisible => orderHistoryItems.isNotEmpty;
+
+  OrderHistory filterItemsByOrderId(OrderNumber orderNumber) => copyWith(
+        orderHistoryItems: orderHistoryItems
+            .where((e) => e.orderNumber == orderNumber)
+            .toList(),
+      );
 
   OrderHistoryItem getParentMaterial(OrderHistoryItem bonusMaterial) {
     if (!bonusMaterial.isBonusMaterial || !bonusMaterial.lineNumber.isValid()) {

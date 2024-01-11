@@ -2,14 +2,10 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/v
 
 class _ViewByOrderItem extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
-  final CustomerCodeInfo customerCodeInfo;
-  final OrderHistoryBasicInfo orderHistoryBasicInfo;
 
   const _ViewByOrderItem({
     Key? key,
     required this.orderHistoryItem,
-    required this.customerCodeInfo,
-    required this.orderHistoryBasicInfo,
   }) : super(key: key);
 
   @override

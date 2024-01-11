@@ -4,9 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
