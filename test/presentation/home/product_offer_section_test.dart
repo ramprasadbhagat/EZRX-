@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -34,6 +35,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
+import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
@@ -65,6 +67,8 @@ class MixpanelServiceMock extends Mock implements MixpanelService {}
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 void main() {
   late GetIt locator;
   late EligibilityBloc eligibilityBlocMock;
@@ -74,6 +78,7 @@ void main() {
   late ProductImageBloc productImageBlocMock;
   late ProductDetailBloc productDetailBlocMock;
   late CartBloc cartBloc;
+  late UserBlocMock userBlocMock;
   late List<MaterialInfo> fakeMaterialList;
   late AppRouter autoRouterMock;
 
@@ -91,6 +96,7 @@ void main() {
     productImageBlocMock = ProductImageBlocMock();
     productDetailBlocMock = ProductDetailBlocMock();
     cartBloc = CartBlocMock();
+    userBlocMock = UserBlocMock();
 
     fakeMaterialList =
         (await MaterialListLocalDataSource().getProductList()).products;
@@ -111,6 +117,9 @@ void main() {
       when(() => productDetailBlocMock.state)
           .thenReturn(ProductDetailState.initial());
       when(() => cartBloc.state).thenReturn(CartState.initial());
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial(),
+      );
     });
     RouteDataScope getWUT() {
       return WidgetUtils.getScopedWidget(
@@ -139,6 +148,7 @@ void main() {
           BlocProvider<CartBloc>(
             create: (context) => cartBloc,
           ),
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
         ],
         child: const Scaffold(body: ProductsOnOffer()),
       );
@@ -178,6 +188,7 @@ void main() {
               bundleOffers: false,
               isProductOffer: true,
             ),
+            user: fakeClientUser,
           ),
         ),
       ).called(1);
@@ -207,6 +218,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             shipToInfo: ShipToInfo.empty(),
             selectedMaterialFilter: MaterialFilter.empty(),
+            user: fakeClientUser,
           ),
         ),
       ).called(1);
@@ -215,6 +227,11 @@ void main() {
     testWidgets(
       'ProductsOnOffer test - listen when EligibilityState finish loading',
       (tester) async {
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeClientUser,
+          ),
+        );
         final expectedState = [
           EligibilityState.initial().copyWith(
             isLoading: true,
@@ -242,6 +259,7 @@ void main() {
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
                 isProductOffer: true,
               ),
+              user: fakeClientUser,
             ),
           ),
         ).called(1);
@@ -352,6 +370,7 @@ void main() {
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
                 isProductOffer: true,
               ),
+              user: fakeClientUser,
             ),
           ),
         );
@@ -364,6 +383,11 @@ void main() {
     testWidgets(
       'ProductsOnOffer test - Material List Not Empty',
       (tester) async {
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeClientUser,
+          ),
+        );
         when(() => autoRouterMock.navigate(const ProductsTabRoute()))
             .thenAnswer(
           (_) => Future.value(),
@@ -404,6 +428,7 @@ void main() {
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
                 isProductOffer: true,
               ),
+              user: fakeClientUser,
             ),
           ),
         ).called(1);

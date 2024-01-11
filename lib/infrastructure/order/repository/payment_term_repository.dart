@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/domain/order/repository/i_payment_term_repository.dart';
@@ -32,6 +33,7 @@ class PaymentTermsRepository implements IPaymentTermsRepository {
     required PaymentCustomerInformation paymentCustomerInfo,
     required SalesOrganisationConfigs salesOrgConfig,
     required SalesRepresentativeInfo salesRepInfo,
+    required Language preferredLanguage,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -47,7 +49,7 @@ class PaymentTermsRepository implements IPaymentTermsRepository {
         salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
         soldToCustomerCode: customerCodeInfo.customerCodeSoldTo,
         basePaymentTermCode: paymentCustomerInfo.paymentTerm,
-        language: salesOrgConfig.getConfigLanguageDefaultEnglish.languageCode,
+        language: preferredLanguage.languageCode,
         principalCode: salesRepInfo.uniquePrincipalNumber,
       );
 

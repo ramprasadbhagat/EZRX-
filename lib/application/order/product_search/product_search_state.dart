@@ -14,6 +14,7 @@ class ProductSearchState with _$ProductSearchState {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required MaterialFilter materialFilter,
+    required User user,
   }) = _ProductSearchState;
 
   factory ProductSearchState.initial() => ProductSearchState(
@@ -28,5 +29,6 @@ class ProductSearchState with _$ProductSearchState {
         salesOrganization: SalesOrganisation.empty(),
         shipToInfo: ShipToInfo.empty(),
         materialFilter: MaterialFilter.empty(),
+        user: User.empty(),
       );
 }

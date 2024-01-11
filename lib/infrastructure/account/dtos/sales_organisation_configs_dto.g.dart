@@ -13,8 +13,6 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       currency: json['currency'] as String,
       hideCustomer: json['hideCustomer'] as bool? ?? false,
       enableGimmickMaterial: json['enableGimmickMaterial'] as bool? ?? false,
-      languageFilter: json['languageFilter'] as bool? ?? false,
-      languageValue: handleEmptyLanguageValue(json, 'languageValue') as String,
       disablePrincipals: json['disablePrincipals'] as bool? ?? false,
       principalList: const _PrincipalListConverter()
           .fromJson(json['principalList'] as Map<String, dynamic>),
@@ -92,8 +90,6 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'currency': instance.currency,
       'hideCustomer': instance.hideCustomer,
       'enableGimmickMaterial': instance.enableGimmickMaterial,
-      'languageFilter': instance.languageFilter,
-      'languageValue': instance.languageValue,
       'disablePrincipals': instance.disablePrincipals,
       'principalList':
           const _PrincipalListConverter().toJson(instance.principalList),

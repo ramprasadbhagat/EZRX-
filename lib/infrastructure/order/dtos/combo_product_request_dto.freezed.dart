@@ -69,8 +69,6 @@ mixin _$ComboProductRequestDto {
   PriceComboDealRequestDto get comboDeal => throw _privateConstructorUsedError;
   @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
   double get finalIndividualPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Language', defaultValue: 'EN')
-  String get language => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -112,8 +110,7 @@ abstract class $ComboProductRequestDtoCopyWith<$Res> {
       bool isComboEligible,
       @JsonKey(name: 'ComboDeals') PriceComboDealRequestDto comboDeal,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
-      double finalIndividualPrice,
-      @JsonKey(name: 'Language', defaultValue: 'EN') String language});
+      double finalIndividualPrice});
 
   $PriceComboDealRequestDtoCopyWith<$Res> get comboDeal;
 }
@@ -156,7 +153,6 @@ class _$ComboProductRequestDtoCopyWithImpl<$Res,
     Object? isComboEligible = null,
     Object? comboDeal = null,
     Object? finalIndividualPrice = null,
-    Object? language = null,
   }) {
     return _then(_value.copyWith(
       productId: null == productId
@@ -255,10 +251,6 @@ class _$ComboProductRequestDtoCopyWithImpl<$Res,
           ? _value.finalIndividualPrice
           : finalIndividualPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 
@@ -307,8 +299,7 @@ abstract class _$$_ComboProductRequestDtoCopyWith<$Res>
       bool isComboEligible,
       @JsonKey(name: 'ComboDeals') PriceComboDealRequestDto comboDeal,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
-      double finalIndividualPrice,
-      @JsonKey(name: 'Language', defaultValue: 'EN') String language});
+      double finalIndividualPrice});
 
   @override
   $PriceComboDealRequestDtoCopyWith<$Res> get comboDeal;
@@ -350,7 +341,6 @@ class __$$_ComboProductRequestDtoCopyWithImpl<$Res>
     Object? isComboEligible = null,
     Object? comboDeal = null,
     Object? finalIndividualPrice = null,
-    Object? language = null,
   }) {
     return _then(_$_ComboProductRequestDto(
       productId: null == productId
@@ -449,10 +439,6 @@ class __$$_ComboProductRequestDtoCopyWithImpl<$Res>
           ? _value.finalIndividualPrice
           : finalIndividualPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -494,8 +480,7 @@ class _$_ComboProductRequestDto extends _ComboProductRequestDto {
       @JsonKey(name: 'ComboDeals')
       this.comboDeal = PriceComboDealRequestDto.empty,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
-      required this.finalIndividualPrice,
-      @JsonKey(name: 'Language', defaultValue: 'EN') required this.language})
+      required this.finalIndividualPrice})
       : super._();
 
   factory _$_ComboProductRequestDto.fromJson(Map<String, dynamic> json) =>
@@ -573,13 +558,10 @@ class _$_ComboProductRequestDto extends _ComboProductRequestDto {
   @override
   @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
   final double finalIndividualPrice;
-  @override
-  @JsonKey(name: 'Language', defaultValue: 'EN')
-  final String language;
 
   @override
   String toString() {
-    return 'ComboProductRequestDto(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, itemSource: $itemSource, customerCode: $customerCode, shipToId: $shipToId, salesOrg: $salesOrg, minQty: $minQty, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principleName: $principleName, listPrice: $listPrice, itemCheck: $itemCheck, principalCode: $principalCode, valid: $valid, type: $type, comboDealType: $comboDealType, isComboEligible: $isComboEligible, comboDeal: $comboDeal, finalIndividualPrice: $finalIndividualPrice, language: $language)';
+    return 'ComboProductRequestDto(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, itemSource: $itemSource, customerCode: $customerCode, shipToId: $shipToId, salesOrg: $salesOrg, minQty: $minQty, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principleName: $principleName, listPrice: $listPrice, itemCheck: $itemCheck, principalCode: $principalCode, valid: $valid, type: $type, comboDealType: $comboDealType, isComboEligible: $isComboEligible, comboDeal: $comboDeal, finalIndividualPrice: $finalIndividualPrice)';
   }
 
   @override
@@ -628,9 +610,7 @@ class _$_ComboProductRequestDto extends _ComboProductRequestDto {
             (identical(other.comboDeal, comboDeal) ||
                 other.comboDeal == comboDeal) &&
             (identical(other.finalIndividualPrice, finalIndividualPrice) ||
-                other.finalIndividualPrice == finalIndividualPrice) &&
-            (identical(other.language, language) ||
-                other.language == language));
+                other.finalIndividualPrice == finalIndividualPrice));
   }
 
   @JsonKey(ignore: true)
@@ -660,8 +640,7 @@ class _$_ComboProductRequestDto extends _ComboProductRequestDto {
         comboDealType,
         isComboEligible,
         comboDeal,
-        finalIndividualPrice,
-        language
+        finalIndividualPrice
       ]);
 
   @JsonKey(ignore: true)
@@ -720,9 +699,7 @@ abstract class _ComboProductRequestDto extends ComboProductRequestDto {
       required final bool isComboEligible,
       @JsonKey(name: 'ComboDeals') final PriceComboDealRequestDto comboDeal,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
-      required final double finalIndividualPrice,
-      @JsonKey(name: 'Language', defaultValue: 'EN')
-      required final String language}) = _$_ComboProductRequestDto;
+      required final double finalIndividualPrice}) = _$_ComboProductRequestDto;
   const _ComboProductRequestDto._() : super._();
 
   factory _ComboProductRequestDto.fromJson(Map<String, dynamic> json) =
@@ -800,9 +777,6 @@ abstract class _ComboProductRequestDto extends ComboProductRequestDto {
   @override
   @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
   double get finalIndividualPrice;
-  @override
-  @JsonKey(name: 'Language', defaultValue: 'EN')
-  String get language;
   @override
   @JsonKey(ignore: true)
   _$$_ComboProductRequestDtoCopyWith<_$_ComboProductRequestDto> get copyWith =>

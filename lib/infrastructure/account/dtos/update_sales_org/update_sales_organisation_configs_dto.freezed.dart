@@ -37,14 +37,10 @@ mixin _$UpdateSalesOrganisationConfigsDto {
   String get currency => throw _privateConstructorUsedError;
   @JsonKey(name: 'netPriceOverride', defaultValue: false)
   bool get netPriceOverride => throw _privateConstructorUsedError;
-  @JsonKey(name: 'languageFilter', defaultValue: false)
-  bool get languageFilter => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableVat', defaultValue: false)
   bool get enableVat => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableZDP5', defaultValue: false)
   bool get enableZDP5 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-  String get languageValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
   bool get materialWithoutPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableZDP8Override', defaultValue: false)
@@ -143,11 +139,8 @@ abstract class $UpdateSalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'currency') String currency,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
       bool netPriceOverride,
-      @JsonKey(name: 'languageFilter', defaultValue: false) bool languageFilter,
       @JsonKey(name: 'enableVat', defaultValue: false) bool enableVat,
       @JsonKey(name: 'enableZDP5', defaultValue: false) bool enableZDP5,
-      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-      String languageValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
       bool materialWithoutPrice,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
@@ -230,10 +223,8 @@ class _$UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? enableBatchNumber = null,
     Object? currency = null,
     Object? netPriceOverride = null,
-    Object? languageFilter = null,
     Object? enableVat = null,
     Object? enableZDP5 = null,
-    Object? languageValue = null,
     Object? materialWithoutPrice = null,
     Object? enableZDP8Override = null,
     Object? displayOrderDiscount = null,
@@ -303,10 +294,6 @@ class _$UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.netPriceOverride
           : netPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageFilter: null == languageFilter
-          ? _value.languageFilter
-          : languageFilter // ignore: cast_nullable_to_non_nullable
-              as bool,
       enableVat: null == enableVat
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
@@ -315,10 +302,6 @@ class _$UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.enableZDP5
           : enableZDP5 // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageValue: null == languageValue
-          ? _value.languageValue
-          : languageValue // ignore: cast_nullable_to_non_nullable
-              as String,
       materialWithoutPrice: null == materialWithoutPrice
           ? _value.materialWithoutPrice
           : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
@@ -485,11 +468,8 @@ abstract class _$$_UpdateSalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'currency') String currency,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
       bool netPriceOverride,
-      @JsonKey(name: 'languageFilter', defaultValue: false) bool languageFilter,
       @JsonKey(name: 'enableVat', defaultValue: false) bool enableVat,
       @JsonKey(name: 'enableZDP5', defaultValue: false) bool enableZDP5,
-      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-      String languageValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
       bool materialWithoutPrice,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
@@ -571,10 +551,8 @@ class __$$_UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableBatchNumber = null,
     Object? currency = null,
     Object? netPriceOverride = null,
-    Object? languageFilter = null,
     Object? enableVat = null,
     Object? enableZDP5 = null,
-    Object? languageValue = null,
     Object? materialWithoutPrice = null,
     Object? enableZDP8Override = null,
     Object? displayOrderDiscount = null,
@@ -644,10 +622,6 @@ class __$$_UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.netPriceOverride
           : netPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageFilter: null == languageFilter
-          ? _value.languageFilter
-          : languageFilter // ignore: cast_nullable_to_non_nullable
-              as bool,
       enableVat: null == enableVat
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
@@ -656,10 +630,6 @@ class __$$_UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableZDP5
           : enableZDP5 // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageValue: null == languageValue
-          ? _value.languageValue
-          : languageValue // ignore: cast_nullable_to_non_nullable
-              as String,
       materialWithoutPrice: null == materialWithoutPrice
           ? _value.materialWithoutPrice
           : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
@@ -823,13 +793,9 @@ class _$_UpdateSalesOrganisationConfigsDto
       @JsonKey(name: 'currency') required this.currency,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
       required this.netPriceOverride,
-      @JsonKey(name: 'languageFilter', defaultValue: false)
-      required this.languageFilter,
       @JsonKey(name: 'enableVat', defaultValue: false) required this.enableVat,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
       required this.enableZDP5,
-      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-      required this.languageValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
       required this.materialWithoutPrice,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
@@ -926,17 +892,11 @@ class _$_UpdateSalesOrganisationConfigsDto
   @JsonKey(name: 'netPriceOverride', defaultValue: false)
   final bool netPriceOverride;
   @override
-  @JsonKey(name: 'languageFilter', defaultValue: false)
-  final bool languageFilter;
-  @override
   @JsonKey(name: 'enableVat', defaultValue: false)
   final bool enableVat;
   @override
   @JsonKey(name: 'enableZDP5', defaultValue: false)
   final bool enableZDP5;
-  @override
-  @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-  final String languageValue;
   @override
   @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
   final bool materialWithoutPrice;
@@ -1045,7 +1005,7 @@ class _$_UpdateSalesOrganisationConfigsDto
 
   @override
   String toString() {
-    return 'UpdateSalesOrganisationConfigsDto(salesOrg: $salesOrg, poNumberRequired: $poNumberRequired, priceOverride: $priceOverride, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, enableBatchNumber: $enableBatchNumber, currency: $currency, netPriceOverride: $netPriceOverride, languageFilter: $languageFilter, enableVat: $enableVat, enableZDP5: $enableZDP5, languageValue: $languageValue, materialWithoutPrice: $materialWithoutPrice, enableZDP8Override: $enableZDP8Override, displayOrderDiscount: $displayOrderDiscount, enableIRN: $enableIRN, enableTaxClassification: $enableTaxClassification, disableBundles: $disableBundles, disableProcessingStatus: $disableProcessingStatus, enableCollectiveNumber: $enableCollectiveNumber, enableGimmickMaterial: $enableGimmickMaterial, hideStockDisplay: $hideStockDisplay, showPOAttachment: $showPOAttachment, disableDeliveryDate: $disableDeliveryDate, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, minOrderAmount: $minOrderAmount, hideCustomer: $hideCustomer, disableOrderType: $disableOrderType, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableMobileNumber: $enableMobileNumber, enablePaymentTerms: $enablePaymentTerms, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, enableBillTo: $enableBillTo, enableOHPrice: $enableOHPrice, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableTaxDisplay: $enableTaxDisplay, enableGMN: $enableGMN)';
+    return 'UpdateSalesOrganisationConfigsDto(salesOrg: $salesOrg, poNumberRequired: $poNumberRequired, priceOverride: $priceOverride, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, enableBatchNumber: $enableBatchNumber, currency: $currency, netPriceOverride: $netPriceOverride, enableVat: $enableVat, enableZDP5: $enableZDP5, materialWithoutPrice: $materialWithoutPrice, enableZDP8Override: $enableZDP8Override, displayOrderDiscount: $displayOrderDiscount, enableIRN: $enableIRN, enableTaxClassification: $enableTaxClassification, disableBundles: $disableBundles, disableProcessingStatus: $disableProcessingStatus, enableCollectiveNumber: $enableCollectiveNumber, enableGimmickMaterial: $enableGimmickMaterial, hideStockDisplay: $hideStockDisplay, showPOAttachment: $showPOAttachment, disableDeliveryDate: $disableDeliveryDate, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, minOrderAmount: $minOrderAmount, hideCustomer: $hideCustomer, disableOrderType: $disableOrderType, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableMobileNumber: $enableMobileNumber, enablePaymentTerms: $enablePaymentTerms, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, enableBillTo: $enableBillTo, enableOHPrice: $enableOHPrice, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableTaxDisplay: $enableTaxDisplay, enableGMN: $enableGMN)';
   }
 
   @override
@@ -1069,14 +1029,10 @@ class _$_UpdateSalesOrganisationConfigsDto
                 other.currency == currency) &&
             (identical(other.netPriceOverride, netPriceOverride) ||
                 other.netPriceOverride == netPriceOverride) &&
-            (identical(other.languageFilter, languageFilter) ||
-                other.languageFilter == languageFilter) &&
             (identical(other.enableVat, enableVat) ||
                 other.enableVat == enableVat) &&
             (identical(other.enableZDP5, enableZDP5) ||
                 other.enableZDP5 == enableZDP5) &&
-            (identical(other.languageValue, languageValue) ||
-                other.languageValue == languageValue) &&
             (identical(other.materialWithoutPrice, materialWithoutPrice) ||
                 other.materialWithoutPrice == materialWithoutPrice) &&
             (identical(other.enableZDP8Override, enableZDP8Override) ||
@@ -1123,7 +1079,8 @@ class _$_UpdateSalesOrganisationConfigsDto
                 other.enableReferenceNote == enableReferenceNote) &&
             (identical(other.enableMobileNumber, enableMobileNumber) ||
                 other.enableMobileNumber == enableMobileNumber) &&
-            (identical(other.enablePaymentTerms, enablePaymentTerms) || other.enablePaymentTerms == enablePaymentTerms) &&
+            (identical(other.enablePaymentTerms, enablePaymentTerms) ||
+                other.enablePaymentTerms == enablePaymentTerms) &&
             (identical(other.enableGMC, enableGMC) || other.enableGMC == enableGMC) &&
             (identical(other.enableListPrice, enableListPrice) || other.enableListPrice == enableListPrice) &&
             (identical(other.enableDefaultMD, enableDefaultMD) || other.enableDefaultMD == enableDefaultMD) &&
@@ -1149,10 +1106,8 @@ class _$_UpdateSalesOrganisationConfigsDto
         enableBatchNumber,
         currency,
         netPriceOverride,
-        languageFilter,
         enableVat,
         enableZDP5,
-        languageValue,
         materialWithoutPrice,
         enableZDP8Override,
         displayOrderDiscount,
@@ -1224,14 +1179,10 @@ abstract class _UpdateSalesOrganisationConfigsDto
       @JsonKey(name: 'currency') required final String currency,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
       required final bool netPriceOverride,
-      @JsonKey(name: 'languageFilter', defaultValue: false)
-      required final bool languageFilter,
       @JsonKey(name: 'enableVat', defaultValue: false)
       required final bool enableVat,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
       required final bool enableZDP5,
-      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-      required final String languageValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
       required final bool materialWithoutPrice,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
@@ -1331,17 +1282,11 @@ abstract class _UpdateSalesOrganisationConfigsDto
   @JsonKey(name: 'netPriceOverride', defaultValue: false)
   bool get netPriceOverride;
   @override
-  @JsonKey(name: 'languageFilter', defaultValue: false)
-  bool get languageFilter;
-  @override
   @JsonKey(name: 'enableVat', defaultValue: false)
   bool get enableVat;
   @override
   @JsonKey(name: 'enableZDP5', defaultValue: false)
   bool get enableZDP5;
-  @override
-  @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-  String get languageValue;
   @override
   @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
   bool get materialWithoutPrice;

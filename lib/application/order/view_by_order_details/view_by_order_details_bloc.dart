@@ -161,7 +161,7 @@ class ViewByOrderDetailsBloc
           bundleCodes: state.bundleCodes,
           salesOrganisation: state.salesOrganisation,
           shipToInfo: state.shipToInfo,
-          language: state.configs.languageValue,
+          language: state.user.preferredLanguage,
         );
         emit(
           state.copyWith(

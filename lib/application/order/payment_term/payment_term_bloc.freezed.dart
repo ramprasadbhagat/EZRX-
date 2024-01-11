@@ -24,7 +24,8 @@ mixin _$PaymentTermEvent {
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesRepresentativeInfo salesRepresentativeInfo,
-            PaymentCustomerInformation paymentCustomerInformation)
+            PaymentCustomerInformation paymentCustomerInformation,
+            User user)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ mixin _$PaymentTermEvent {
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesRepresentativeInfo salesRepresentativeInfo,
-            PaymentCustomerInformation paymentCustomerInformation)?
+            PaymentCustomerInformation paymentCustomerInformation,
+            User user)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -48,7 +50,8 @@ mixin _$PaymentTermEvent {
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesRepresentativeInfo salesRepresentativeInfo,
-            PaymentCustomerInformation paymentCustomerInformation)?
+            PaymentCustomerInformation paymentCustomerInformation,
+            User user)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -136,7 +139,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesRepresentativeInfo salesRepresentativeInfo,
-            PaymentCustomerInformation paymentCustomerInformation)
+            PaymentCustomerInformation paymentCustomerInformation,
+            User user)
         fetch,
   }) {
     return initialized();
@@ -151,7 +155,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesRepresentativeInfo salesRepresentativeInfo,
-            PaymentCustomerInformation paymentCustomerInformation)?
+            PaymentCustomerInformation paymentCustomerInformation,
+            User user)?
         fetch,
   }) {
     return initialized?.call();
@@ -166,7 +171,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesRepresentativeInfo salesRepresentativeInfo,
-            PaymentCustomerInformation paymentCustomerInformation)?
+            PaymentCustomerInformation paymentCustomerInformation,
+            User user)?
         fetch,
     required TResult orElse(),
   }) {
@@ -222,13 +228,15 @@ abstract class _$$_FetchCopyWith<$Res> {
       CustomerCodeInfo customeCodeInfo,
       SalesOrganisationConfigs salesOrganisationConfigs,
       SalesRepresentativeInfo salesRepresentativeInfo,
-      PaymentCustomerInformation paymentCustomerInformation});
+      PaymentCustomerInformation paymentCustomerInformation,
+      User user});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
   $SalesRepresentativeInfoCopyWith<$Res> get salesRepresentativeInfo;
   $PaymentCustomerInformationCopyWith<$Res> get paymentCustomerInformation;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -246,6 +254,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? salesOrganisationConfigs = null,
     Object? salesRepresentativeInfo = null,
     Object? paymentCustomerInformation = null,
+    Object? user = null,
   }) {
     return _then(_$_Fetch(
       salesOrganisation: null == salesOrganisation
@@ -268,6 +277,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.paymentCustomerInformation
           : paymentCustomerInformation // ignore: cast_nullable_to_non_nullable
               as PaymentCustomerInformation,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
@@ -313,6 +326,14 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(paymentCustomerInformation: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -323,7 +344,8 @@ class _$_Fetch implements _Fetch {
       required this.customeCodeInfo,
       required this.salesOrganisationConfigs,
       required this.salesRepresentativeInfo,
-      required this.paymentCustomerInformation});
+      required this.paymentCustomerInformation,
+      required this.user});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -335,10 +357,12 @@ class _$_Fetch implements _Fetch {
   final SalesRepresentativeInfo salesRepresentativeInfo;
   @override
   final PaymentCustomerInformation paymentCustomerInformation;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'PaymentTermEvent.fetch(salesOrganisation: $salesOrganisation, customeCodeInfo: $customeCodeInfo, salesOrganisationConfigs: $salesOrganisationConfigs, salesRepresentativeInfo: $salesRepresentativeInfo, paymentCustomerInformation: $paymentCustomerInformation)';
+    return 'PaymentTermEvent.fetch(salesOrganisation: $salesOrganisation, customeCodeInfo: $customeCodeInfo, salesOrganisationConfigs: $salesOrganisationConfigs, salesRepresentativeInfo: $salesRepresentativeInfo, paymentCustomerInformation: $paymentCustomerInformation, user: $user)';
   }
 
   @override
@@ -359,7 +383,8 @@ class _$_Fetch implements _Fetch {
             (identical(other.paymentCustomerInformation,
                     paymentCustomerInformation) ||
                 other.paymentCustomerInformation ==
-                    paymentCustomerInformation));
+                    paymentCustomerInformation) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
@@ -369,7 +394,8 @@ class _$_Fetch implements _Fetch {
       customeCodeInfo,
       salesOrganisationConfigs,
       salesRepresentativeInfo,
-      paymentCustomerInformation);
+      paymentCustomerInformation,
+      user);
 
   @JsonKey(ignore: true)
   @override
@@ -386,11 +412,12 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesRepresentativeInfo salesRepresentativeInfo,
-            PaymentCustomerInformation paymentCustomerInformation)
+            PaymentCustomerInformation paymentCustomerInformation,
+            User user)
         fetch,
   }) {
     return fetch(salesOrganisation, customeCodeInfo, salesOrganisationConfigs,
-        salesRepresentativeInfo, paymentCustomerInformation);
+        salesRepresentativeInfo, paymentCustomerInformation, user);
   }
 
   @override
@@ -402,7 +429,8 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesRepresentativeInfo salesRepresentativeInfo,
-            PaymentCustomerInformation paymentCustomerInformation)?
+            PaymentCustomerInformation paymentCustomerInformation,
+            User user)?
         fetch,
   }) {
     return fetch?.call(
@@ -410,7 +438,8 @@ class _$_Fetch implements _Fetch {
         customeCodeInfo,
         salesOrganisationConfigs,
         salesRepresentativeInfo,
-        paymentCustomerInformation);
+        paymentCustomerInformation,
+        user);
   }
 
   @override
@@ -422,13 +451,14 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesRepresentativeInfo salesRepresentativeInfo,
-            PaymentCustomerInformation paymentCustomerInformation)?
+            PaymentCustomerInformation paymentCustomerInformation,
+            User user)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
       return fetch(salesOrganisation, customeCodeInfo, salesOrganisationConfigs,
-          salesRepresentativeInfo, paymentCustomerInformation);
+          salesRepresentativeInfo, paymentCustomerInformation, user);
     }
     return orElse();
   }
@@ -471,14 +501,15 @@ abstract class _Fetch implements PaymentTermEvent {
       required final CustomerCodeInfo customeCodeInfo,
       required final SalesOrganisationConfigs salesOrganisationConfigs,
       required final SalesRepresentativeInfo salesRepresentativeInfo,
-      required final PaymentCustomerInformation
-          paymentCustomerInformation}) = _$_Fetch;
+      required final PaymentCustomerInformation paymentCustomerInformation,
+      required final User user}) = _$_Fetch;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customeCodeInfo;
   SalesOrganisationConfigs get salesOrganisationConfigs;
   SalesRepresentativeInfo get salesRepresentativeInfo;
   PaymentCustomerInformation get paymentCustomerInformation;
+  User get user;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;

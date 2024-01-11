@@ -9,5 +9,6 @@ class PaymentTermEvent with _$PaymentTermEvent {
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesRepresentativeInfo salesRepresentativeInfo,
     required PaymentCustomerInformation paymentCustomerInformation,
+    required User user,
   }) = _Fetch;
 }

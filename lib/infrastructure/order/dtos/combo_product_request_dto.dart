@@ -45,7 +45,6 @@ class ComboProductRequestDto with _$ComboProductRequestDto {
         PriceComboDealRequestDto comboDeal,
     @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
         required double finalIndividualPrice,
-    @JsonKey(name: 'Language', defaultValue: 'EN') required String language,
   }) = _ComboProductRequestDto;
 
   factory ComboProductRequestDto.fromDomain({
@@ -75,7 +74,6 @@ class ComboProductRequestDto with _$ComboProductRequestDto {
       suffix: comboProductRequest.suffix,
       setNo: comboProductRequest.setNo,
       comboDealType: comboProductRequest.comboDealType,
-      language: comboProductRequest.language,
       parentId: comboProductRequest.parentId,
       type: 'combo',
       itemSource: 'EZRX',

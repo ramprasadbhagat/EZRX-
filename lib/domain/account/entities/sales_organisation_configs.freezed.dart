@@ -22,8 +22,6 @@ mixin _$SalesOrganisationConfigs {
   Currency get currency => throw _privateConstructorUsedError;
   bool get hideCustomer => throw _privateConstructorUsedError;
   bool get enableGimmickMaterial => throw _privateConstructorUsedError;
-  bool get languageFilter => throw _privateConstructorUsedError;
-  Language get languageValue => throw _privateConstructorUsedError;
   bool get disablePrincipals => throw _privateConstructorUsedError;
   List<SalesOrganisationConfigsPrincipal> get principalList =>
       throw _privateConstructorUsedError;
@@ -101,8 +99,6 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       Currency currency,
       bool hideCustomer,
       bool enableGimmickMaterial,
-      bool languageFilter,
-      Language languageValue,
       bool disablePrincipals,
       List<SalesOrganisationConfigsPrincipal> principalList,
       bool disableOrderType,
@@ -180,8 +176,6 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? currency = null,
     Object? hideCustomer = null,
     Object? enableGimmickMaterial = null,
-    Object? languageFilter = null,
-    Object? languageValue = null,
     Object? disablePrincipals = null,
     Object? principalList = null,
     Object? disableOrderType = null,
@@ -263,14 +257,6 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.enableGimmickMaterial
           : enableGimmickMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageFilter: null == languageFilter
-          ? _value.languageFilter
-          : languageFilter // ignore: cast_nullable_to_non_nullable
-              as bool,
-      languageValue: null == languageValue
-          ? _value.languageValue
-          : languageValue // ignore: cast_nullable_to_non_nullable
-              as Language,
       disablePrincipals: null == disablePrincipals
           ? _value.disablePrincipals
           : disablePrincipals // ignore: cast_nullable_to_non_nullable
@@ -511,8 +497,6 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       Currency currency,
       bool hideCustomer,
       bool enableGimmickMaterial,
-      bool languageFilter,
-      Language languageValue,
       bool disablePrincipals,
       List<SalesOrganisationConfigsPrincipal> principalList,
       bool disableOrderType,
@@ -588,8 +572,6 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? currency = null,
     Object? hideCustomer = null,
     Object? enableGimmickMaterial = null,
-    Object? languageFilter = null,
-    Object? languageValue = null,
     Object? disablePrincipals = null,
     Object? principalList = null,
     Object? disableOrderType = null,
@@ -671,14 +653,6 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.enableGimmickMaterial
           : enableGimmickMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageFilter: null == languageFilter
-          ? _value.languageFilter
-          : languageFilter // ignore: cast_nullable_to_non_nullable
-              as bool,
-      languageValue: null == languageValue
-          ? _value.languageValue
-          : languageValue // ignore: cast_nullable_to_non_nullable
-              as Language,
       disablePrincipals: null == disablePrincipals
           ? _value.disablePrincipals
           : disablePrincipals // ignore: cast_nullable_to_non_nullable
@@ -913,8 +887,6 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.currency,
       required this.hideCustomer,
       required this.enableGimmickMaterial,
-      required this.languageFilter,
-      required this.languageValue,
       required this.disablePrincipals,
       required final List<SalesOrganisationConfigsPrincipal> principalList,
       required this.disableOrderType,
@@ -985,10 +957,6 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool hideCustomer;
   @override
   final bool enableGimmickMaterial;
-  @override
-  final bool languageFilter;
-  @override
-  final Language languageValue;
   @override
   final bool disablePrincipals;
   final List<SalesOrganisationConfigsPrincipal> _principalList;
@@ -1108,7 +1076,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy)';
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy)';
   }
 
   @override
@@ -1128,10 +1096,6 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
                 other.hideCustomer == hideCustomer) &&
             (identical(other.enableGimmickMaterial, enableGimmickMaterial) ||
                 other.enableGimmickMaterial == enableGimmickMaterial) &&
-            (identical(other.languageFilter, languageFilter) ||
-                other.languageFilter == languageFilter) &&
-            (identical(other.languageValue, languageValue) ||
-                other.languageValue == languageValue) &&
             (identical(other.disablePrincipals, disablePrincipals) ||
                 other.disablePrincipals == disablePrincipals) &&
             const DeepCollectionEquality()
@@ -1173,7 +1137,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
                 other.futureDeliveryDay == futureDeliveryDay) &&
             (identical(other.enableGMC, enableGMC) ||
                 other.enableGMC == enableGMC) &&
-            (identical(other.enableListPrice, enableListPrice) || other.enableListPrice == enableListPrice) &&
+            (identical(other.enableListPrice, enableListPrice) ||
+                other.enableListPrice == enableListPrice) &&
             (identical(other.priceOverride, priceOverride) || other.priceOverride == priceOverride) &&
             (identical(other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) || other.disablePaymentTermsDisplay == disablePaymentTermsDisplay) &&
             (identical(other.disablePayment, disablePayment) || other.disablePayment == disablePayment) &&
@@ -1219,8 +1184,6 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         currency,
         hideCustomer,
         enableGimmickMaterial,
-        languageFilter,
-        languageValue,
         disablePrincipals,
         const DeepCollectionEquality().hash(_principalList),
         disableOrderType,
@@ -1294,8 +1257,6 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
           required final Currency currency,
           required final bool hideCustomer,
           required final bool enableGimmickMaterial,
-          required final bool languageFilter,
-          required final Language languageValue,
           required final bool disablePrincipals,
           required final List<SalesOrganisationConfigsPrincipal> principalList,
           required final bool disableOrderType,
@@ -1366,10 +1327,6 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get hideCustomer;
   @override
   bool get enableGimmickMaterial;
-  @override
-  bool get languageFilter;
-  @override
-  Language get languageValue;
   @override
   bool get disablePrincipals;
   @override

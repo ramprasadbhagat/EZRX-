@@ -28,8 +28,6 @@
             "enableFutureDeliveryDay": true,
             "futureDeliveryDay": "",
             "plantNumber": "",
-            "languageFilter": false,
-            "languageValue": "",
             "materialWithoutPrice": false,
             "enablePaymentTerms": true,
             "enableBatchNumber": true,

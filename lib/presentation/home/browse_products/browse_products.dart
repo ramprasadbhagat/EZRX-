@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -40,6 +41,7 @@ class BrowseProduct extends StatelessWidget {
                       context.read<EligibilityBloc>().state.customerCodeInfo,
                   shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
                   selectedMaterialFilter: MaterialFilter.empty(),
+                  user: context.read<UserBloc>().state.user,
                 ),
               );
         },
@@ -94,6 +96,7 @@ class BrowseProduct extends StatelessWidget {
                   context.read<EligibilityBloc>().state.customerCodeInfo,
               shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
               selectedMaterialFilter: MaterialFilter.empty(),
+              user: context.read<UserBloc>().state.user,
             ),
           );
     }

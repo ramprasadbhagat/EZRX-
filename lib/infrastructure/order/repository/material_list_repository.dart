@@ -65,7 +65,7 @@ class MaterialListRepository implements IMaterialListRepository {
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCode: shipToInfo.shipToCustomerCode,
         pageSize: pageSize,
-        language: salesOrgConfig.getConfigLanguage,
+        language: language.languageCode,
         gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
         isFavourite: selectedMaterialFilter.isFavourite,
         isCovidSelected: selectedMaterialFilter.isCovidSelectedFilterValue,
@@ -179,7 +179,7 @@ class MaterialListRepository implements IMaterialListRepository {
         pageSize: pageSize,
         offset: offset,
         principalCodeList: principles,
-        language: salesOrgConfig.getConfigLanguage,
+        language: user.preferredLanguage.languageCode,
       );
 
       return Right(materialListData);

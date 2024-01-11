@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -59,6 +60,7 @@ class ProductsOnOffer extends StatelessWidget {
                       selectedMaterialFilter: MaterialFilter.empty().copyWith(
                         isProductOffer: true,
                       ),
+                      user: context.read<UserBloc>().state.user,
                     ),
                   );
             },

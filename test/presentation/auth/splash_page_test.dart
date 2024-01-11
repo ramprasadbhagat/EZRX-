@@ -98,6 +98,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:upgrader/upgrader.dart';
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
+import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
@@ -874,6 +875,7 @@ void main() {
               paymentTerm: 'paymentTerm',
               shipToInfoList: <ShipToInfo>[],
             ),
+            user: fakeClientUser,
           ),
         ),
       ).called(1);
@@ -1100,6 +1102,7 @@ void main() {
             customerCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
             shipToInfo: eligibilityBlocMock.state.shipToInfo,
             selectedMaterialFilter: materialFilterBlocMock.state.materialFilter,
+            user: fakeClientUser,
           ),
         ),
       ).called(2);

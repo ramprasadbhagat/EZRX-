@@ -11,7 +11,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class ConfigMock extends Mock implements Config {}
 
@@ -33,6 +33,7 @@ void main() {
   late MaterialNumber favouriteMaterialMock;
 
   final errorMock = Exception('fake-error');
+   
 
   setUpAll(
     () async {
@@ -342,7 +343,7 @@ void main() {
             (_) async => FavouriteStatus.empty(),
           );
           final result = await repository.getFavouritesForList(
-            salesConfigs: fakeMYSalesOrgConfigs,
+            preferredLanguage: fakeClientUser.preferredLanguage,
             list: materialListMock,
           );
           expect(result.isRight(), true);
@@ -358,7 +359,7 @@ void main() {
             () => localDataSourceMock.getFavouriteStatus(),
           ).thenThrow(errorMock);
           final result = await repository.getFavouritesForList(
-            salesConfigs: fakeMYSalesOrgConfigs,
+            preferredLanguage: fakeClientUser.preferredLanguage,
             list: materialListMock,
           );
           expect(result.isLeft(), true);
@@ -372,7 +373,7 @@ void main() {
           when(
             () => remoteDataSourceMock.getFavouriteStatus(
               materialNumber: nonFavouriteMaterialMock.getOrCrash(),
-              language: fakeMYSalesOrgConfigs.getConfigLanguage,
+              language: fakeClientUser.preferredLanguage.languageCode,
             ),
           ).thenAnswer(
             (_) async => const FavouriteStatus(isFavourite: false),
@@ -380,13 +381,13 @@ void main() {
           when(
             () => remoteDataSourceMock.getFavouriteStatus(
               materialNumber: favouriteMaterialMock.getOrCrash(),
-              language: fakeMYSalesOrgConfigs.getConfigLanguage,
+              language: fakeClientUser.preferredLanguage.languageCode,
             ),
           ).thenAnswer(
             (_) async => const FavouriteStatus(isFavourite: true),
           );
           final result = await repository.getFavouritesForList(
-            salesConfigs: fakeMYSalesOrgConfigs,
+            preferredLanguage: fakeClientUser.preferredLanguage,
             list: materialListMock,
           );
           expect(result.isRight(), true);
@@ -401,12 +402,12 @@ void main() {
           when(
             () => remoteDataSourceMock.getFavouriteStatus(
               materialNumber: nonFavouriteMaterialMock.getOrCrash(),
-              language: fakeMYSalesOrgConfigs.getConfigLanguage,
+              language: fakeClientUser.preferredLanguage.languageCode,
             ),
           ).thenThrow(errorMock);
 
           final result = await repository.getFavouritesForList(
-            salesConfigs: fakeMYSalesOrgConfigs,
+            preferredLanguage: fakeClientUser.preferredLanguage,
             list: materialListMock,
           );
           expect(result.isRight(), true);

@@ -56,6 +56,7 @@ class _ProductOfferBodyContent extends StatelessWidget {
             selectedMaterialFilter: MaterialFilter.empty().copyWith(
               isProductOffer: true,
             ),
+            user: context.read<UserBloc>().state.user,
           ),
         );
     context.navigateTo(const ProductsTabRoute());

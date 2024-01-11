@@ -159,8 +159,6 @@ extension PriceAggregateExtension on List<PriceAggregate> {
               materialNumber: product.getMaterialNumber,
             ),
             comboDealType: product.comboDeal.scheme.comboDealType,
-            language: product
-                .salesOrgConfig.getConfigLanguageDefaultEnglish.languageCode,
             parentId: product.materialInfo.parentID,
             rate: comboMaterialItemRate,
             materialInfo: product.materialInfo,

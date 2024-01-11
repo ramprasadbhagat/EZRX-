@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_price_detail_repository.dart';
@@ -36,6 +37,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
     required ShipToInfo shipToCodeInfo,
     required MaterialNumber materialNumber,
     bool isComboDealMaterials = false,
+    required Language preferredLanguage,
   }) async {
     final queryInfo = MaterialQueryInfo.empty().copyWith(
       value: materialNumber,
@@ -47,6 +49,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
       shipToCodeInfo: shipToCodeInfo,
       materialQueryList: [queryInfo],
       isComboDealMaterials: isComboDealMaterials,
+      preferredLanguage: preferredLanguage,
     );
 
     return materialDetailList.fold(
@@ -66,6 +69,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
     required ShipToInfo shipToCodeInfo,
     required List<MaterialQueryInfo> materialQueryList,
     bool isComboDealMaterials = false,
+    required Language preferredLanguage,
   }) async {
     var materialDetailData = <MaterialPriceDetail>[];
     final materialDetails = <MaterialQueryInfo, MaterialPriceDetail>{};
@@ -91,7 +95,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
         final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
         final customerCode = customerCodeInfo.customerCodeSoldTo;
         final shipToCode = shipToCodeInfo.shipToCustomerCode;
-        final language = salesOrganisationConfigs.getConfigLanguage;
+        final language = preferredLanguage.languageCode;
         final queryMaterialNumbers = materialQueryList
             .map(
               (e) => e.priceQuery,
@@ -127,6 +131,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
         customerCodeInfo,
         shipToCodeInfo,
         materialDetails,
+        preferredLanguage,
       );
     }
 
@@ -141,6 +146,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
     CustomerCodeInfo customerCodeInfo,
     ShipToInfo shipToCodeInfo,
     Map<MaterialQueryInfo, MaterialPriceDetail> materialDetails,
+    Language preferredLanguage,
   ) async {
     final materialDetailWithZDP5Data = materialDetailData
         .where(
@@ -164,6 +170,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
         customerCodeInfo: customerCodeInfo,
         shipToCodeInfo: shipToCodeInfo,
         materialQueryList: materialZDP5EnabledQueryList,
+        preferredLanguage: preferredLanguage,
       );
 
       materialDetailZDP5EnabledMap.fold(
@@ -191,6 +198,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToCodeInfo,
     required Map<MaterialQueryInfo, MaterialPriceDetail> materialQueryList,
+    required Language preferredLanguage,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -211,7 +219,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
       final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
       final customerCode = customerCodeInfo.customerCodeSoldTo;
       final shipToCode = shipToCodeInfo.shipToCustomerCode;
-      final language = salesOrganisationConfigs.getConfigLanguage;
+      final language = preferredLanguage.languageCode;
       final queryMaterialNumbers = materialQueryList.map(
         (materialQueryInfo, materialDetail) => MapEntry(
           materialQueryInfo.value.getOrCrash(),

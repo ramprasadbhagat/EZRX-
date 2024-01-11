@@ -852,7 +852,7 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: StringValue('fake-bonus-item-id').getValue(),
-              language: fakeClientUser.settings.languagePreference,
+              language: fakeClientUser.preferredLanguage,
               materialInfo: priceAggregates.first.materialInfo
                   .copyWith(quantity: MaterialQty(1)),
               quantity: 1,
@@ -912,7 +912,7 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: StringValue('fake-bonus-item-id').getValue(),
-              language: fakeClientUser.settings.languagePreference,
+              language: fakeClientUser.preferredLanguage,
               materialInfo: priceAggregates.first.materialInfo.copyWith(
                 quantity: MaterialQty(1),
               ),
@@ -1029,7 +1029,7 @@ void main() {
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: fakeCounterOfferDetails,
-              language: Language.english(),
+              language: fakeClientUser.preferredLanguage,
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
@@ -1101,7 +1101,7 @@ void main() {
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: fakeCounterOfferDetails,
-              language: Language.english(),
+              language: fakeClientUser.preferredLanguage,
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
@@ -1155,7 +1155,7 @@ void main() {
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: fakeCounterOfferDetails,
-              language: Language.english(),
+              language: fakeClientUser.preferredLanguage,
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
@@ -1198,6 +1198,7 @@ void main() {
           salesOrganisation: fakeIDSalesOrganisation,
           config: fakeIDSalesOrgConfigs,
           shipToInfo: shipToInfo,
+          user: fakeClientUser,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
         setUp: () {
@@ -1210,7 +1211,7 @@ void main() {
               counterOfferDetails: fakeCounterOfferDetails.copyWith(
                 counterOfferCurrency: fakeIDSalesOrgConfigs.currency,
               ),
-              language: Language.english(),
+              language: fakeClientUser.preferredLanguage,
               product: priceAggregatesForID.first.copyWith(
                 quantity: 2,
               ),
@@ -1239,6 +1240,7 @@ void main() {
             config: fakeIDSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
           ),
           CartState.initial().copyWith(
             cartProducts: [priceAggregatesForID.first],
@@ -1246,6 +1248,7 @@ void main() {
             config: fakeIDSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
           ),
           CartState.initial().copyWith(
             isAplProductLoading: true,
@@ -1254,6 +1257,7 @@ void main() {
             config: fakeIDSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption:
@@ -1263,6 +1267,7 @@ void main() {
             config: fakeIDSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
           ),
         ],
       );
@@ -1286,7 +1291,7 @@ void main() {
               counterOfferDetails: fakeCounterOfferDetails.copyWith(
                 counterOfferCurrency: fakeIDSalesOrgConfigs.currency,
               ),
-              language: Language.english(),
+              language: fakeClientUser.preferredLanguage,
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
@@ -1338,7 +1343,8 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language: fakeMYSalesOrgConfigs.getConfigLanguageDefaultEnglish,
+              language:
+                  fakeClientUser.preferredLanguage,
               product: priceAggregates.elementAt(1),
             ),
           ).thenAnswer(
@@ -1386,7 +1392,8 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language: fakeMYSalesOrgConfigs.getConfigLanguageDefaultEnglish,
+              language:
+                  fakeClientUser.preferredLanguage,
               product: priceAggregates.elementAt(1),
             ),
           ).thenAnswer(
@@ -1424,7 +1431,8 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language: fakeMYSalesOrgConfigs.getConfigLanguageDefaultEnglish,
+              language:
+                  fakeClientUser.preferredLanguage,
               product: bundleItem.copyWith(
                 bundle: bundleItem.bundle.copyWith(
                   materials: bundleItem.bundle.materials
@@ -1551,7 +1559,8 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language: fakeMYSalesOrgConfigs.getConfigLanguageDefaultEnglish,
+              language:
+                  fakeClientUser.preferredLanguage,
               product: bundleItem,
             ),
           ).thenAnswer(
@@ -1630,7 +1639,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language: fakeClientUser.settings.languagePreference,
+              language: fakeClientUser.preferredLanguage,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: '',
               materialInfo: [priceAggregates.first.materialInfo],
@@ -1690,7 +1699,7 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language: fakeClientUser.settings.languagePreference,
+              language: fakeClientUser.preferredLanguage,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: '',
               materialInfo: [priceAggregates.first.materialInfo],
@@ -2148,7 +2157,7 @@ void main() {
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               products: [priceAggregates.first.materialInfo],
-              language: fakeMYSalesOrgConfigs.languageValue,
+              language: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -2197,7 +2206,7 @@ void main() {
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               products: [priceAggregates.first.materialInfo],
-              language: fakeMYSalesOrgConfigs.languageValue,
+              language: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -2247,7 +2256,7 @@ void main() {
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               products: [priceAggregates.first.materialInfo],
-              language: fakeMYSalesOrgConfigs.languageValue,
+              language: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -2312,7 +2321,7 @@ void main() {
                   sampleBonusItemId: 'fake-item-id',
                 )
               ],
-              language: fakeMYSalesOrgConfigs.languageValue,
+              language: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -2374,7 +2383,7 @@ void main() {
                   sampleBonusItemId: 'fake-item-id',
                 )
               ],
-              language: fakeMYSalesOrgConfigs.languageValue,
+              language: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),

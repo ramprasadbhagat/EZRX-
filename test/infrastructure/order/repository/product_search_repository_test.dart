@@ -252,6 +252,7 @@ void main() async {
           pageSize: fakePageSize,
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
+          preferredLanguage: fakeClientUser.preferredLanguage,
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -270,6 +271,7 @@ void main() async {
           pageSize: fakePageSize,
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
+          preferredLanguage: fakeClientUser.preferredLanguage,
         );
 
         expect(result, Right(fakeMaterialResponse));
@@ -290,7 +292,7 @@ void main() async {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             eanNumber: '',
             gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
-            language: fakeMYSalesOrgConfigs.getConfigLanguage,
+            language: fakeClientUser.preferredLanguage.languageCode,
             offset: fakeOffset,
             pageSize: fakePageSize,
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
@@ -309,6 +311,7 @@ void main() async {
           pageSize: fakePageSize,
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
+          preferredLanguage: fakeClientUser.preferredLanguage,
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -336,7 +339,7 @@ void main() async {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             eanNumber: '',
             gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
-            language: fakeMYSalesOrgConfigs.getConfigLanguage,
+            language: fakeClientUser.preferredLanguage.languageCode,
             offset: fakeOffset,
             pageSize: fakePageSize,
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
@@ -355,6 +358,7 @@ void main() async {
           pageSize: fakePageSize,
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
+          preferredLanguage: fakeClientUser.preferredLanguage,
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -382,7 +386,7 @@ void main() async {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             eanNumber: '',
             gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
-            language: fakeMYSalesOrgConfigs.getConfigLanguage,
+            language: fakeClientUser.preferredLanguage.languageCode,
             offset: fakeOffset,
             pageSize: fakePageSize,
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
@@ -401,6 +405,7 @@ void main() async {
           pageSize: fakePageSize,
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
+          preferredLanguage: fakeClientUser.preferredLanguage,
         );
 
         expect(result, Right(fakeMaterialResponse));

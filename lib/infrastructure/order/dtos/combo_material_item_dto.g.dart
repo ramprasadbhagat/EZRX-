@@ -29,7 +29,6 @@ _$_ComboMaterialItemDto _$$_ComboMaterialItemDtoFromJson(
       isComboEligible: json['isComboEligible'] as bool? ?? false,
       finalIndividualPrice:
           (json['finalIndividualPrice'] as num?)?.toDouble() ?? 0.0,
-      language: json['language'] as String? ?? '',
       materialNumber: json['materialNumber'] as String? ?? 'EN',
       taxM1: json['taxM1'] as String? ?? '',
       tax: (handleTax(json, 'taxes') as num).toDouble(),
@@ -60,7 +59,6 @@ Map<String, dynamic> _$$_ComboMaterialItemDtoToJson(
       'comboDealType': instance.comboDealType,
       'isComboEligible': instance.isComboEligible,
       'finalIndividualPrice': instance.finalIndividualPrice,
-      'language': instance.language,
       'materialNumber': instance.materialNumber,
       'taxM1': instance.taxM1,
       'taxes': instance.tax,

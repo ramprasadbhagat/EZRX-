@@ -30,6 +30,7 @@ final fakeRootAdminUser = User.empty().copyWith(
 );
 
 final fakeClientUser = User.empty().copyWith(
+  preferredLanguage: Language.english(),
   username: Username(_fakeUserName),
   id: _fakeId,
   role: Role.empty().copyWith(

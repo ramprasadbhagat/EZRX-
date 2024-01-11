@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -46,6 +47,7 @@ class BundleSection extends StatelessWidget {
                   selectedMaterialFilter: MaterialFilter.empty().copyWith(
                     bundleOffers: true,
                   ),
+                  user: context.read<UserBloc>().state.user,
                 ),
               );
         },
@@ -108,6 +110,7 @@ class BundleSection extends StatelessWidget {
               bundleOffers: true,
               isProductOffer: true,
             ),
+            user: context.read<UserBloc>().state.user,
           ),
         );
     context.navigateTo(const ProductsTabRoute());

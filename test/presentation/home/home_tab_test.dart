@@ -745,6 +745,11 @@ void main() {
       testWidgets('BundleSection Visible when product accessright is true',
           (tester) async {
         final materialListBloc = locator<MaterialListBloc>();
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeClientUser,
+          ),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
@@ -760,6 +765,7 @@ void main() {
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
                 bundleOffers: true,
               ),
+              user: fakeClientUser,
             ),
           ),
         ).called(1);

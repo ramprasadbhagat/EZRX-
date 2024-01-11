@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -84,6 +85,7 @@ class _FilterValueListState extends State<FilterValueList> {
                                   isFavourite:
                                       !state.selectedMaterialFilter.isFavourite,
                                 ),
+                                user: context.read<UserBloc>().state.user,
                               ),
                             );
                       },
@@ -156,6 +158,7 @@ class _FilterValueListState extends State<FilterValueList> {
                                             .selectedMaterialFilter
                                             .isCovidSelected,
                                       ),
+                                      user: context.read<UserBloc>().state.user,
                                     ),
                                   );
                             },

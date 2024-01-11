@@ -18,10 +18,6 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
         required bool hideCustomer,
     @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
         required bool enableGimmickMaterial,
-    @JsonKey(name: 'languageFilter', defaultValue: false)
-        required bool languageFilter,
-    @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-        required String languageValue,
     @JsonKey(name: 'disablePrincipals', defaultValue: false)
         required bool disablePrincipals,
     @JsonKey(name: 'principalList')
@@ -142,8 +138,6 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       currency: configs.currency.getOrDefaultValue(''),
       hideCustomer: configs.hideCustomer,
       enableGimmickMaterial: configs.enableGimmickMaterial,
-      languageFilter: configs.languageFilter,
-      languageValue: configs.languageValue.languageCode,
       disablePrincipals: configs.disablePrincipals,
       principalList: List.from(configs.principalList)
           .map((e) => SalesOrganisationConfigsPrincipalDto.fromDomain(e))
@@ -211,8 +205,6 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       currency: Currency(currency),
       hideCustomer: hideCustomer,
       enableGimmickMaterial: enableGimmickMaterial,
-      languageFilter: languageFilter,
-      languageValue: Language(languageValue),
       disablePrincipals: disablePrincipals,
       principalList: principalList.map((e) => e.toDomain()).toList(),
       disableOrderType: disableOrderType,
@@ -305,10 +297,3 @@ class _PrincipalListConverter extends JsonConverter<
   }
 }
 
-String handleEmptyLanguageValue(Map json, String key) {
-  final String languageValue = json[key] ?? '';
-
-  return languageValue.isNotEmpty
-      ? languageValue
-      : Language.english().languageCode;
-}

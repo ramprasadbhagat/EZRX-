@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
@@ -75,7 +76,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           pageSize: config.pageSize,
           offset: 0,
           selectedMaterialFilter: e.selectedMaterialFilter,
-          language: e.configs.languageValue,
+          language: e.user.preferredLanguage,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -116,7 +117,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         pageSize: config.pageSize,
         offset: state.materialList.length,
         selectedMaterialFilter: state.selectedMaterialFilter,
-        language: e.configs.languageValue,
+        language: e.user.preferredLanguage,
       );
       failureOrSuccess.fold(
         (failure) => emit(

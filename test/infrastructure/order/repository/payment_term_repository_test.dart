@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_local.dart';
@@ -13,6 +12,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_remote.d
 import 'package:ezrxmobile/infrastructure/order/repository/payment_term_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/user_mock.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -59,6 +60,7 @@ void main() {
         paymentCustomerInfo: mockPaymentCustomerInformation,
         salesOrgConfig: mockSalesOrganisationConfigs,
         salesRepInfo: mockSalesRepresentativeInfo,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
       expect(
         result.isRight(),
@@ -76,6 +78,7 @@ void main() {
         paymentCustomerInfo: mockPaymentCustomerInformation,
         salesOrgConfig: mockSalesOrganisationConfigs,
         salesRepInfo: mockSalesRepresentativeInfo,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
       expect(
         result.isLeft(),
@@ -107,8 +110,6 @@ void main() {
         paymentCustomerInfo:
             mockPaymentCustomerInformation.copyWith(paymentTerm: 'K002'),
         salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
-          languageFilter: true,
-          languageValue: Language.english(),
         ),
         salesRepInfo: mockSalesRepresentativeInfo.copyWith(
           uniquePrincipalNumber: [
@@ -118,6 +119,7 @@ void main() {
             '0000102272',
           ],
         ),
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
       expect(
         result.isRight(),
@@ -142,6 +144,7 @@ void main() {
         paymentCustomerInfo: mockPaymentCustomerInformation,
         salesOrgConfig: mockSalesOrganisationConfigs,
         salesRepInfo: mockSalesRepresentativeInfo,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
       expect(
         result.isLeft(),

@@ -21,6 +21,8 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart'
     as value_object;
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 
+import '../../../common_mock_data/user_mock.dart';
+
 class PaymentTermsRepoMock extends Mock implements PaymentTermsRepository {}
 
 class PaymentCustomerInfoMockBloc extends MockBloc<
@@ -49,8 +51,6 @@ void main() {
     disableOrderType: false,
     disablePrincipals: false,
     enableGimmickMaterial: false,
-    languageFilter: true,
-    languageValue: Language.english(),
     disableBundles: false,
     principalList: [],
     enableBatchNumber: false,
@@ -152,6 +152,7 @@ void main() {
             salesOrgConfig: fakeSaleOrgConfig,
             paymentCustomerInfo: fakepaymentCustomerInformation,
             salesRepInfo: fakesalesRepInfo,
+            preferredLanguage: fakeClientUser.preferredLanguage,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -166,6 +167,8 @@ void main() {
           paymentCustomerInformation: fakepaymentCustomerInformation,
           salesOrganisationConfigs: fakeSaleOrgConfig,
           salesRepresentativeInfo: fakesalesRepInfo,
+          user: fakeClientUser,
+          
         ),
       ),
       expect: () => [
@@ -190,9 +193,10 @@ void main() {
             customerCodeInfo: fakeCustomerCode,
             salesOrganisation: fakeSaleOrganisation,
             salesOrgConfig:
-                fakeSaleOrgConfig, //.copyWith(languageFilter: true),
+                fakeSaleOrgConfig,
             paymentCustomerInfo: fakepaymentCustomerInformation,
             salesRepInfo: fakesalesRepInfo,
+            preferredLanguage: fakeClientUser.preferredLanguage,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -207,6 +211,7 @@ void main() {
           paymentCustomerInformation: fakepaymentCustomerInformation,
           salesOrganisationConfigs: fakeSaleOrgConfig,
           salesRepresentativeInfo: fakesalesRepInfo,
+          user: fakeClientUser,
         ),
       ),
       expect: () => [

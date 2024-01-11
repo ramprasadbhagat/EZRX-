@@ -1,4 +1,5 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -40,6 +41,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           configs: event.configs,
           customerCodeInfo: event.customerCodeInfo,
           shipToInfo: event.shipToInfo,
+          user: event.user,
         ),
       );
       final failureOrSuccess = await productSearchRepository.getSearchKeys();
@@ -86,6 +88,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           pageSize: config.pageSize,
           offset: state.suggestedProductList.length,
           materialFilter: state.materialFilter,
+          preferredLanguage: state.user.preferredLanguage,
         );
 
         failureOrSuccess.fold(
@@ -132,6 +135,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           pageSize: config.pageSize,
           offset: state.suggestedProductList.length,
           materialFilter: state.materialFilter,
+          preferredLanguage: state.user.preferredLanguage,
         );
 
         failureOrSuccess.fold(
@@ -174,6 +178,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
             configs: state.configs,
             customerCodeInfo: state.customerCodeInfo,
             shipToInfo: state.shipToInfo,
+            user:state.user,
           ),
         );
       },

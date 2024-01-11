@@ -27,14 +27,16 @@ mixin _$MaterialListEvent {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            MaterialFilter selectedMaterialFilter,
+            User user)
         fetch,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
@@ -50,14 +52,16 @@ mixin _$MaterialListEvent {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
@@ -73,14 +77,16 @@ mixin _$MaterialListEvent {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
@@ -191,14 +197,16 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            MaterialFilter selectedMaterialFilter,
+            User user)
         fetch,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
@@ -217,14 +225,16 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
@@ -243,14 +253,16 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
@@ -363,14 +375,16 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            MaterialFilter selectedMaterialFilter,
+            User user)
         fetch,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
@@ -389,14 +403,16 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
@@ -415,14 +431,16 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
@@ -573,14 +591,16 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            MaterialFilter selectedMaterialFilter,
+            User user)
         fetch,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
@@ -599,14 +619,16 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
@@ -625,14 +647,16 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
@@ -714,13 +738,15 @@ abstract class _$$_FetchCopyWith<$Res> {
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      MaterialFilter selectedMaterialFilter});
+      MaterialFilter selectedMaterialFilter,
+      User user});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -738,6 +764,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? selectedMaterialFilter = null,
+    Object? user = null,
   }) {
     return _then(_$_Fetch(
       salesOrganisation: null == salesOrganisation
@@ -760,6 +787,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.selectedMaterialFilter
           : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
               as MaterialFilter,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
@@ -803,6 +834,14 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(selectedMaterialFilter: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -813,7 +852,8 @@ class _$_Fetch implements _Fetch {
       required this.configs,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.selectedMaterialFilter});
+      required this.selectedMaterialFilter,
+      required this.user});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -825,10 +865,12 @@ class _$_Fetch implements _Fetch {
   final ShipToInfo shipToInfo;
   @override
   final MaterialFilter selectedMaterialFilter;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'MaterialListEvent.fetch(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter)';
+    return 'MaterialListEvent.fetch(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter, user: $user)';
   }
 
   @override
@@ -844,12 +886,13 @@ class _$_Fetch implements _Fetch {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
-                other.selectedMaterialFilter == selectedMaterialFilter));
+                other.selectedMaterialFilter == selectedMaterialFilter) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, salesOrganisation, configs,
-      customerCodeInfo, shipToInfo, selectedMaterialFilter);
+      customerCodeInfo, shipToInfo, selectedMaterialFilter, user);
 
   @JsonKey(ignore: true)
   @override
@@ -869,20 +912,22 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            MaterialFilter selectedMaterialFilter,
+            User user)
         fetch,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
     return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo,
-        selectedMaterialFilter);
+        selectedMaterialFilter, user);
   }
 
   @override
@@ -896,20 +941,22 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
     return fetch?.call(salesOrganisation, configs, customerCodeInfo, shipToInfo,
-        selectedMaterialFilter);
+        selectedMaterialFilter, user);
   }
 
   @override
@@ -923,14 +970,16 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
@@ -938,7 +987,7 @@ class _$_Fetch implements _Fetch {
   }) {
     if (fetch != null) {
       return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo,
-          selectedMaterialFilter);
+          selectedMaterialFilter, user);
     }
     return orElse();
   }
@@ -999,13 +1048,15 @@ abstract class _Fetch implements MaterialListEvent {
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final MaterialFilter selectedMaterialFilter}) = _$_Fetch;
+      required final MaterialFilter selectedMaterialFilter,
+      required final User user}) = _$_Fetch;
 
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   MaterialFilter get selectedMaterialFilter;
+  User get user;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1085,14 +1136,16 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            MaterialFilter selectedMaterialFilter,
+            User user)
         fetch,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
@@ -1111,14 +1164,16 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
@@ -1137,14 +1192,16 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
@@ -1226,12 +1283,14 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
       {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      User user});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -1249,6 +1308,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
     Object? configs = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? user = null,
   }) {
     return _then(_$_LoadMore(
       salesOrganisation: null == salesOrganisation
@@ -1267,6 +1327,10 @@ class __$$_LoadMoreCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
@@ -1301,6 +1365,14 @@ class __$$_LoadMoreCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -1310,7 +1382,8 @@ class _$_LoadMore implements _LoadMore {
       {required this.salesOrganisation,
       required this.configs,
       required this.customerCodeInfo,
-      required this.shipToInfo});
+      required this.shipToInfo,
+      required this.user});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -1320,10 +1393,12 @@ class _$_LoadMore implements _LoadMore {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'MaterialListEvent.loadMore(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'MaterialListEvent.loadMore(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user)';
   }
 
   @override
@@ -1337,12 +1412,13 @@ class _$_LoadMore implements _LoadMore {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, configs, customerCodeInfo, shipToInfo);
+  int get hashCode => Object.hash(runtimeType, salesOrganisation, configs,
+      customerCodeInfo, shipToInfo, user);
 
   @JsonKey(ignore: true)
   @override
@@ -1362,19 +1438,22 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            MaterialFilter selectedMaterialFilter,
+            User user)
         fetch,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
-    return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo);
+    return loadMore(
+        salesOrganisation, configs, customerCodeInfo, shipToInfo, user);
   }
 
   @override
@@ -1388,20 +1467,22 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
     return loadMore?.call(
-        salesOrganisation, configs, customerCodeInfo, shipToInfo);
+        salesOrganisation, configs, customerCodeInfo, shipToInfo, user);
   }
 
   @override
@@ -1415,21 +1496,24 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo);
+      return loadMore(
+          salesOrganisation, configs, customerCodeInfo, shipToInfo, user);
     }
     return orElse();
   }
@@ -1489,12 +1573,14 @@ abstract class _LoadMore implements MaterialListEvent {
       {required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_LoadMore;
+      required final ShipToInfo shipToInfo,
+      required final User user}) = _$_LoadMore;
 
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
+  User get user;
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1583,14 +1669,16 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            MaterialFilter selectedMaterialFilter,
+            User user)
         fetch,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
@@ -1609,14 +1697,16 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
@@ -1635,14 +1725,16 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
@@ -1796,14 +1888,16 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            MaterialFilter selectedMaterialFilter,
+            User user)
         fetch,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
@@ -1822,14 +1916,16 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
@@ -1848,14 +1944,16 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            MaterialFilter selectedMaterialFilter,
+            User user)?
         fetch,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,

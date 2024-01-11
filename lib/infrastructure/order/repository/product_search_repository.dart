@@ -54,6 +54,7 @@ class ProductSearchRepository implements IProductSearchRepository {
     required int pageSize,
     required int offset,
     required MaterialFilter materialFilter,
+    required Language preferredLanguage,
   }) async {
     final customerCode = customerCodeInfo.customerCodeSoldTo;
     final salesOrg = salesOrganization.salesOrg.getOrCrash();
@@ -82,7 +83,7 @@ class ProductSearchRepository implements IProductSearchRepository {
         customerCode: customerCode,
         salesOrgCode: salesOrg,
         gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
-        language: salesOrgConfig.getConfigLanguage,
+        language: preferredLanguage.languageCode,
         shipToCode: shipToCode,
         searchKey: searchKey.getOrCrash(),
         offset: offset,

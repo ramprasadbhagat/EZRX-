@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -85,6 +86,8 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 
 class MockAppRouter extends Mock implements AppRouter {}
 
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 void main() {
   late MaterialListBlocMock materialListBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
@@ -101,6 +104,7 @@ void main() {
   late List<Price> priceList;
   late Map<MaterialNumber, Price> materialPriceMock;
   late List<PriceAggregate> mockCartItems;
+  late UserBlocMock userBlocMock;
   setUpAll(() async {
     locator.registerFactory(() => MockAppRouter());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
@@ -131,6 +135,7 @@ void main() {
         materialPriceMock = Map.fromEntries(
           priceList.map((price) => MapEntry(price.materialNumber, price)),
         );
+        userBlocMock = UserBlocMock();
         when(() => autoRouterMock.pushNamed(any())).thenAnswer(
           (_) => Future.value(),
         );
@@ -157,6 +162,9 @@ void main() {
             .thenReturn(MaterialFilterState.initial());
         when(() => productImageBlocMock.state)
             .thenReturn(ProductImageState.initial());
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial(),
+        );
       });
 
       Widget getScopedWidget() {
@@ -194,6 +202,7 @@ void main() {
             BlocProvider<ProductImageBloc>(
               create: (context) => productImageBlocMock,
             ),
+            BlocProvider<UserBloc>(create: (context) => userBlocMock),
           ],
           child: const ProductsTab(),
         );
@@ -258,6 +267,11 @@ void main() {
               materialList: materialResponseMock.products,
             ),
           );
+          when(() => userBlocMock.state).thenReturn(
+            UserState.initial().copyWith(
+              user: fakeClientUser,
+            ),
+          );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           await tester.fling(
@@ -279,6 +293,7 @@ void main() {
                 customerCodeInfo: CustomerCodeInfo.empty(),
                 shipToInfo: ShipToInfo.empty(),
                 selectedMaterialFilter: MaterialFilter.empty(),
+                user: fakeClientUser,
               ),
             ),
           ).called(1);
@@ -294,7 +309,11 @@ void main() {
               canLoadMore: true,
             ),
           );
-
+          when(() => userBlocMock.state).thenReturn(
+            UserState.initial().copyWith(
+              user: fakeClientUser,
+            ),
+          );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           await tester.fling(
@@ -309,6 +328,7 @@ void main() {
                 configs: fakeMYSalesOrgConfigs,
                 customerCodeInfo: CustomerCodeInfo.empty(),
                 shipToInfo: ShipToInfo.empty(),
+                user: fakeClientUser,
               ),
             ),
           ).called(1);
@@ -684,6 +704,11 @@ void main() {
             shipToInfo: fakeShipToInfo,
           ),
         );
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeClientUser,
+          ),
+        );
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
@@ -704,6 +729,7 @@ void main() {
                 hasAccessToCovidMaterial: true,
                 isCovidSelected: true,
               ),
+              user: fakeClientUser,
             ),
           ),
         ).called(1);

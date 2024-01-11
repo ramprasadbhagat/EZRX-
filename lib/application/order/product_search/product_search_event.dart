@@ -7,6 +7,7 @@ class ProductSearchEvent with _$ProductSearchEvent {
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required User user,
   }) = _Initialized;
 
   const factory ProductSearchEvent.searchProduct({

@@ -57,9 +57,8 @@ mixin _$ComboMaterialItemDto {
   @JsonKey(name: 'isComboEligible', defaultValue: false)
   bool get isComboEligible => throw _privateConstructorUsedError;
   @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
-  double get finalIndividualPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'language', defaultValue: '')
-  String get language => throw _privateConstructorUsedError;
+  double get finalIndividualPrice =>
+      throw _privateConstructorUsedError; // @JsonKey(name: 'language', defaultValue: '') required String language,
   @JsonKey(name: 'materialNumber', defaultValue: 'EN')
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxM1', defaultValue: '')
@@ -109,7 +108,6 @@ abstract class $ComboMaterialItemDtoCopyWith<$Res> {
       bool isComboEligible,
       @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
       double finalIndividualPrice,
-      @JsonKey(name: 'language', defaultValue: '') String language,
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') String taxM1,
@@ -153,7 +151,6 @@ class _$ComboMaterialItemDtoCopyWithImpl<$Res,
     Object? comboDealType = null,
     Object? isComboEligible = null,
     Object? finalIndividualPrice = null,
-    Object? language = null,
     Object? materialNumber = null,
     Object? taxM1 = null,
     Object? tax = null,
@@ -238,10 +235,6 @@ class _$ComboMaterialItemDtoCopyWithImpl<$Res,
           ? _value.finalIndividualPrice
           : finalIndividualPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -302,7 +295,6 @@ abstract class _$$_ComboMaterialItemDtoCopyWith<$Res>
       bool isComboEligible,
       @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
       double finalIndividualPrice,
-      @JsonKey(name: 'language', defaultValue: '') String language,
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') String taxM1,
@@ -343,7 +335,6 @@ class __$$_ComboMaterialItemDtoCopyWithImpl<$Res>
     Object? comboDealType = null,
     Object? isComboEligible = null,
     Object? finalIndividualPrice = null,
-    Object? language = null,
     Object? materialNumber = null,
     Object? taxM1 = null,
     Object? tax = null,
@@ -428,10 +419,6 @@ class __$$_ComboMaterialItemDtoCopyWithImpl<$Res>
           ? _value.finalIndividualPrice
           : finalIndividualPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -491,7 +478,6 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
       required this.isComboEligible,
       @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
       required this.finalIndividualPrice,
-      @JsonKey(name: 'language', defaultValue: '') required this.language,
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       required this.materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') required this.taxM1,
@@ -563,9 +549,7 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
   @override
   @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
   final double finalIndividualPrice;
-  @override
-  @JsonKey(name: 'language', defaultValue: '')
-  final String language;
+// @JsonKey(name: 'language', defaultValue: '') required String language,
   @override
   @JsonKey(name: 'materialNumber', defaultValue: 'EN')
   final String materialNumber;
@@ -587,7 +571,7 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
 
   @override
   String toString() {
-    return 'ComboMaterialItemDto(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, itemSource: $itemSource, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principalName: $principalName, listPrice: $listPrice, itemCheck: $itemCheck, principalCode: $principalCode, valid: $valid, type: $type, comboDealType: $comboDealType, isComboEligible: $isComboEligible, finalIndividualPrice: $finalIndividualPrice, language: $language, materialNumber: $materialNumber, taxM1: $taxM1, tax: $tax, isFOCMaterial: $isFOCMaterial, hidePrice: $hidePrice, taxClassification: $taxClassification)';
+    return 'ComboMaterialItemDto(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, itemSource: $itemSource, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principalName: $principalName, listPrice: $listPrice, itemCheck: $itemCheck, principalCode: $principalCode, valid: $valid, type: $type, comboDealType: $comboDealType, isComboEligible: $isComboEligible, finalIndividualPrice: $finalIndividualPrice, materialNumber: $materialNumber, taxM1: $taxM1, tax: $tax, isFOCMaterial: $isFOCMaterial, hidePrice: $hidePrice, taxClassification: $taxClassification)';
   }
 
   @override
@@ -628,8 +612,6 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
                 other.isComboEligible == isComboEligible) &&
             (identical(other.finalIndividualPrice, finalIndividualPrice) ||
                 other.finalIndividualPrice == finalIndividualPrice) &&
-            (identical(other.language, language) ||
-                other.language == language) &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.taxM1, taxM1) || other.taxM1 == taxM1) &&
@@ -665,7 +647,6 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
         comboDealType,
         isComboEligible,
         finalIndividualPrice,
-        language,
         materialNumber,
         taxM1,
         tax,
@@ -723,8 +704,6 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
       required final bool isComboEligible,
       @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
       required final double finalIndividualPrice,
-      @JsonKey(name: 'language', defaultValue: '')
-      required final String language,
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       required final String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') required final String taxM1,
@@ -797,10 +776,7 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
   @override
   @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
   double get finalIndividualPrice;
-  @override
-  @JsonKey(name: 'language', defaultValue: '')
-  String get language;
-  @override
+  @override // @JsonKey(name: 'language', defaultValue: '') required String language,
   @JsonKey(name: 'materialNumber', defaultValue: 'EN')
   String get materialNumber;
   @override

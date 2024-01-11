@@ -18,6 +18,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 
+import '../../../common_mock_data/user_mock.dart';
+
 class MockProductSearchRepository extends Mock
     implements IProductSearchRepository {}
 
@@ -82,6 +84,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           salesOrganization: salesOrganization,
           shipToInfo: shipToInfo,
+          user: fakeClientUser,
         ),
       ),
       expect: () => [
@@ -90,6 +93,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           salesOrganization: salesOrganization,
           shipToInfo: shipToInfo,
+          user: fakeClientUser,
         ),
         ProductSearchState.initial().copyWith(
           configs: salesOrgConfigs,
@@ -97,6 +101,7 @@ void main() {
           salesOrganization: salesOrganization,
           shipToInfo: shipToInfo,
           productSuggestionHistory: searchKeys,
+          user: fakeClientUser,
         ),
       ],
     );
@@ -122,6 +127,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
+              preferredLanguage: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -178,6 +184,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
+              preferredLanguage: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -234,6 +241,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
+              preferredLanguage: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -297,6 +305,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
+              preferredLanguage: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -360,6 +369,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 24,
               materialFilter: MaterialFilter.empty(),
+              preferredLanguage: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer((_) async => Right(fakeResponse2));
           return productSearchBloc;
@@ -408,6 +418,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
+              preferredLanguage: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -453,6 +464,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 24,
               materialFilter: MaterialFilter.empty(),
+              preferredLanguage: fakeClientUser.preferredLanguage,
             ),
           ).thenAnswer(
             (_) async => const Left(

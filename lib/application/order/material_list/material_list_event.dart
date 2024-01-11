@@ -14,6 +14,7 @@ class MaterialListEvent with _$MaterialListEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required MaterialFilter selectedMaterialFilter,
+    required User user,
   }) = _Fetch;
 
   const factory MaterialListEvent.updateSearchKey({required String searchKey}) =
@@ -24,6 +25,7 @@ class MaterialListEvent with _$MaterialListEvent {
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required User user,
   }) = _LoadMore;
 
   factory MaterialListEvent.addFavourite({

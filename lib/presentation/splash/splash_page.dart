@@ -327,6 +327,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                           context.read<SalesOrgBloc>().state.configs,
                       salesRepresentativeInfo:
                           context.read<SalesRepBloc>().state.salesRepInfo,
+                      user: context.read<UserBloc>().state.user,    
                     ),
                   );
             }
@@ -643,6 +644,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     shipToInfo:
                         context.read<EligibilityBloc>().state.shipToInfo,
                     selectedMaterialFilter: MaterialFilter.empty(),
+                    user: context.read<UserBloc>().state.user,
                   ),
                 );
           },
@@ -923,6 +925,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         context.read<EligibilityBloc>().state.shipToInfo,
                     selectedMaterialFilter:
                         context.read<MaterialFilterBloc>().state.materialFilter,
+                    user: context.read<UserBloc>().state.user,    
                   ),
                 );
           },
@@ -1099,6 +1102,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               salesOrganization: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
               shipToInfo: state.shipToInfo,
+              user: user,
             ),
           );
 
@@ -1248,6 +1252,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               salesOrganization: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
               shipToInfo: state.shipToInfo,
+              user: user,
             ),
           );
       if (context.read<EligibilityBloc>().state.isReturnsEnable) {
@@ -1518,6 +1523,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             shipToInfo: eligibilityBloc.state.shipToInfo,
             selectedMaterialFilter:
                 context.read<MaterialFilterBloc>().state.materialFilter,
+            user: context.read<UserBloc>().state.user,    
           ),
         );
   }

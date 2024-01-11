@@ -40,7 +40,6 @@ class ComboMaterialItemDto with _$ComboMaterialItemDto {
         required bool isComboEligible,
     @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
         required double finalIndividualPrice,
-    @JsonKey(name: 'language', defaultValue: '') required String language,
     @JsonKey(name: 'materialNumber', defaultValue: 'EN')
         required String materialNumber,
     @JsonKey(name: 'taxM1', defaultValue: '') required String taxM1,
@@ -92,7 +91,6 @@ class ComboMaterialItemDto with _$ComboMaterialItemDto {
       suffix: suffix,
       setNo: setNo,
       comboDealType: comboDealType,
-      language: language,
       parentId: parentId,
       materialInfo: toMaterialInfo,
     );

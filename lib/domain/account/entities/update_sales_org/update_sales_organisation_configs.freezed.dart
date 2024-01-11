@@ -24,10 +24,8 @@ mixin _$UpdateSalesOrganisationConfigs {
   bool get enableBatchNumber => throw _privateConstructorUsedError;
   Currency get currency => throw _privateConstructorUsedError;
   bool get netPriceOverride => throw _privateConstructorUsedError;
-  bool get languageFilter => throw _privateConstructorUsedError;
   bool get enableVat => throw _privateConstructorUsedError;
   bool get enableZDP5 => throw _privateConstructorUsedError;
-  Language get languageValue => throw _privateConstructorUsedError;
   bool get materialWithoutPrice => throw _privateConstructorUsedError;
   bool get enableZDP8Override => throw _privateConstructorUsedError;
   bool get displayOrderDiscount => throw _privateConstructorUsedError;
@@ -87,10 +85,8 @@ abstract class $UpdateSalesOrganisationConfigsCopyWith<$Res> {
       bool enableBatchNumber,
       Currency currency,
       bool netPriceOverride,
-      bool languageFilter,
       bool enableVat,
       bool enableZDP5,
-      Language languageValue,
       bool materialWithoutPrice,
       bool enableZDP8Override,
       bool displayOrderDiscount,
@@ -150,10 +146,8 @@ class _$UpdateSalesOrganisationConfigsCopyWithImpl<$Res,
     Object? enableBatchNumber = null,
     Object? currency = null,
     Object? netPriceOverride = null,
-    Object? languageFilter = null,
     Object? enableVat = null,
     Object? enableZDP5 = null,
-    Object? languageValue = null,
     Object? materialWithoutPrice = null,
     Object? enableZDP8Override = null,
     Object? displayOrderDiscount = null,
@@ -223,10 +217,6 @@ class _$UpdateSalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.netPriceOverride
           : netPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageFilter: null == languageFilter
-          ? _value.languageFilter
-          : languageFilter // ignore: cast_nullable_to_non_nullable
-              as bool,
       enableVat: null == enableVat
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
@@ -235,10 +225,6 @@ class _$UpdateSalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.enableZDP5
           : enableZDP5 // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageValue: null == languageValue
-          ? _value.languageValue
-          : languageValue // ignore: cast_nullable_to_non_nullable
-              as Language,
       materialWithoutPrice: null == materialWithoutPrice
           ? _value.materialWithoutPrice
           : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
@@ -401,10 +387,8 @@ abstract class _$$_UpdateSalesOrganisationConfigsCopyWith<$Res>
       bool enableBatchNumber,
       Currency currency,
       bool netPriceOverride,
-      bool languageFilter,
       bool enableVat,
       bool enableZDP5,
-      Language languageValue,
       bool materialWithoutPrice,
       bool enableZDP8Override,
       bool displayOrderDiscount,
@@ -463,10 +447,8 @@ class __$$_UpdateSalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableBatchNumber = null,
     Object? currency = null,
     Object? netPriceOverride = null,
-    Object? languageFilter = null,
     Object? enableVat = null,
     Object? enableZDP5 = null,
-    Object? languageValue = null,
     Object? materialWithoutPrice = null,
     Object? enableZDP8Override = null,
     Object? displayOrderDiscount = null,
@@ -536,10 +518,6 @@ class __$$_UpdateSalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.netPriceOverride
           : netPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageFilter: null == languageFilter
-          ? _value.languageFilter
-          : languageFilter // ignore: cast_nullable_to_non_nullable
-              as bool,
       enableVat: null == enableVat
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
@@ -548,10 +526,6 @@ class __$$_UpdateSalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.enableZDP5
           : enableZDP5 // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageValue: null == languageValue
-          ? _value.languageValue
-          : languageValue // ignore: cast_nullable_to_non_nullable
-              as Language,
       materialWithoutPrice: null == materialWithoutPrice
           ? _value.materialWithoutPrice
           : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
@@ -709,10 +683,8 @@ class _$_UpdateSalesOrganisationConfigs
       required this.enableBatchNumber,
       required this.currency,
       required this.netPriceOverride,
-      required this.languageFilter,
       required this.enableVat,
       required this.enableZDP5,
-      required this.languageValue,
       required this.materialWithoutPrice,
       required this.enableZDP8Override,
       required this.displayOrderDiscount,
@@ -767,13 +739,9 @@ class _$_UpdateSalesOrganisationConfigs
   @override
   final bool netPriceOverride;
   @override
-  final bool languageFilter;
-  @override
   final bool enableVat;
   @override
   final bool enableZDP5;
-  @override
-  final Language languageValue;
   @override
   final bool materialWithoutPrice;
   @override
@@ -847,7 +815,7 @@ class _$_UpdateSalesOrganisationConfigs
 
   @override
   String toString() {
-    return 'UpdateSalesOrganisationConfigs(salesOrg: $salesOrg, poNumberRequired: $poNumberRequired, priceOverride: $priceOverride, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, enableBatchNumber: $enableBatchNumber, currency: $currency, netPriceOverride: $netPriceOverride, languageFilter: $languageFilter, enableVat: $enableVat, enableZDP5: $enableZDP5, languageValue: $languageValue, materialWithoutPrice: $materialWithoutPrice, enableZDP8Override: $enableZDP8Override, displayOrderDiscount: $displayOrderDiscount, enableIRN: $enableIRN, enableTaxClassification: $enableTaxClassification, disableBundles: $disableBundles, disableProcessingStatus: $disableProcessingStatus, enableCollectiveNumber: $enableCollectiveNumber, enableGimmickMaterial: $enableGimmickMaterial, hideStockDisplay: $hideStockDisplay, showPOAttachment: $showPOAttachment, disableDeliveryDate: $disableDeliveryDate, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, minOrderAmount: $minOrderAmount, hideCustomer: $hideCustomer, disableOrderType: $disableOrderType, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableMobileNumber: $enableMobileNumber, enablePaymentTerms: $enablePaymentTerms, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, enableBillTo: $enableBillTo, enableOHPrice: $enableOHPrice, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableTaxDisplay: $enableTaxDisplay, enableGMN: $enableGMN)';
+    return 'UpdateSalesOrganisationConfigs(salesOrg: $salesOrg, poNumberRequired: $poNumberRequired, priceOverride: $priceOverride, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, enableBatchNumber: $enableBatchNumber, currency: $currency, netPriceOverride: $netPriceOverride, enableVat: $enableVat, enableZDP5: $enableZDP5, materialWithoutPrice: $materialWithoutPrice, enableZDP8Override: $enableZDP8Override, displayOrderDiscount: $displayOrderDiscount, enableIRN: $enableIRN, enableTaxClassification: $enableTaxClassification, disableBundles: $disableBundles, disableProcessingStatus: $disableProcessingStatus, enableCollectiveNumber: $enableCollectiveNumber, enableGimmickMaterial: $enableGimmickMaterial, hideStockDisplay: $hideStockDisplay, showPOAttachment: $showPOAttachment, disableDeliveryDate: $disableDeliveryDate, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, minOrderAmount: $minOrderAmount, hideCustomer: $hideCustomer, disableOrderType: $disableOrderType, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableMobileNumber: $enableMobileNumber, enablePaymentTerms: $enablePaymentTerms, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, enableBillTo: $enableBillTo, enableOHPrice: $enableOHPrice, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableTaxDisplay: $enableTaxDisplay, enableGMN: $enableGMN)';
   }
 
   @override
@@ -871,14 +839,10 @@ class _$_UpdateSalesOrganisationConfigs
                 other.currency == currency) &&
             (identical(other.netPriceOverride, netPriceOverride) ||
                 other.netPriceOverride == netPriceOverride) &&
-            (identical(other.languageFilter, languageFilter) ||
-                other.languageFilter == languageFilter) &&
             (identical(other.enableVat, enableVat) ||
                 other.enableVat == enableVat) &&
             (identical(other.enableZDP5, enableZDP5) ||
                 other.enableZDP5 == enableZDP5) &&
-            (identical(other.languageValue, languageValue) ||
-                other.languageValue == languageValue) &&
             (identical(other.materialWithoutPrice, materialWithoutPrice) ||
                 other.materialWithoutPrice == materialWithoutPrice) &&
             (identical(other.enableZDP8Override, enableZDP8Override) ||
@@ -925,7 +889,8 @@ class _$_UpdateSalesOrganisationConfigs
                 other.enableReferenceNote == enableReferenceNote) &&
             (identical(other.enableMobileNumber, enableMobileNumber) ||
                 other.enableMobileNumber == enableMobileNumber) &&
-            (identical(other.enablePaymentTerms, enablePaymentTerms) || other.enablePaymentTerms == enablePaymentTerms) &&
+            (identical(other.enablePaymentTerms, enablePaymentTerms) ||
+                other.enablePaymentTerms == enablePaymentTerms) &&
             (identical(other.enableGMC, enableGMC) || other.enableGMC == enableGMC) &&
             (identical(other.enableListPrice, enableListPrice) || other.enableListPrice == enableListPrice) &&
             (identical(other.enableDefaultMD, enableDefaultMD) || other.enableDefaultMD == enableDefaultMD) &&
@@ -950,10 +915,8 @@ class _$_UpdateSalesOrganisationConfigs
         enableBatchNumber,
         currency,
         netPriceOverride,
-        languageFilter,
         enableVat,
         enableZDP5,
-        languageValue,
         materialWithoutPrice,
         enableZDP8Override,
         displayOrderDiscount,
@@ -1010,10 +973,8 @@ abstract class _UpdateSalesOrganisationConfigs
       required final bool enableBatchNumber,
       required final Currency currency,
       required final bool netPriceOverride,
-      required final bool languageFilter,
       required final bool enableVat,
       required final bool enableZDP5,
-      required final Language languageValue,
       required final bool materialWithoutPrice,
       required final bool enableZDP8Override,
       required final bool displayOrderDiscount,
@@ -1068,13 +1029,9 @@ abstract class _UpdateSalesOrganisationConfigs
   @override
   bool get netPriceOverride;
   @override
-  bool get languageFilter;
-  @override
   bool get enableVat;
   @override
   bool get enableZDP5;
-  @override
-  Language get languageValue;
   @override
   bool get materialWithoutPrice;
   @override

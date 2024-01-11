@@ -9,10 +9,8 @@ mutation updateSalesorgconfigMutation($input: UpdateSalesOrgConfigInput!) {
       enableBatchNumber
       currency
       netPriceOverride
-      languageFilter
       enableVat
       enableZDP5
-      languageValue
       materialWithoutPrice
       enableZDP8Override
       displayOrderDiscount
@@ -68,8 +66,6 @@ variable:
       "minOrderAmount": "1000000",
       "vatValue": 7,
       "netPriceOverride": true,
-      "languageFilter": true,
-      "languageValue": "E",
       "materialWithoutPrice": false,
       "enablePaymentTerms": false,
       "enableMobileNumber": false,

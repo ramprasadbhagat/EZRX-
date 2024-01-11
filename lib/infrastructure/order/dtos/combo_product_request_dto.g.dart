@@ -37,7 +37,6 @@ _$_ComboProductRequestDto _$$_ComboProductRequestDtoFromJson(
               json['ComboDeals'] as Map<String, dynamic>),
       finalIndividualPrice:
           (json['FinalIndividualPrice'] as num?)?.toDouble() ?? 0.0,
-      language: json['Language'] as String? ?? 'EN',
     );
 
 Map<String, dynamic> _$$_ComboProductRequestDtoToJson(
@@ -67,5 +66,4 @@ Map<String, dynamic> _$$_ComboProductRequestDtoToJson(
       'IsComboEligible': instance.isComboEligible,
       'ComboDeals': instance.comboDeal.toJson(),
       'FinalIndividualPrice': instance.finalIndividualPrice,
-      'Language': instance.language,
     };

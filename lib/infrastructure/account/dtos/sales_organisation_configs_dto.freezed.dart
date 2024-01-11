@@ -29,10 +29,6 @@ mixin _$SalesOrganisationConfigsDto {
   bool get hideCustomer => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
   bool get enableGimmickMaterial => throw _privateConstructorUsedError;
-  @JsonKey(name: 'languageFilter', defaultValue: false)
-  bool get languageFilter => throw _privateConstructorUsedError;
-  @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-  String get languageValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'disablePrincipals', defaultValue: false)
   bool get disablePrincipals => throw _privateConstructorUsedError;
   @JsonKey(name: 'principalList')
@@ -170,9 +166,6 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'hideCustomer', defaultValue: false) bool hideCustomer,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
       bool enableGimmickMaterial,
-      @JsonKey(name: 'languageFilter', defaultValue: false) bool languageFilter,
-      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-      String languageValue,
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       bool disablePrincipals,
       @JsonKey(name: 'principalList')
@@ -291,8 +284,6 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? currency = null,
     Object? hideCustomer = null,
     Object? enableGimmickMaterial = null,
-    Object? languageFilter = null,
-    Object? languageValue = null,
     Object? disablePrincipals = null,
     Object? principalList = null,
     Object? disableOrderType = null,
@@ -368,14 +359,6 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.enableGimmickMaterial
           : enableGimmickMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageFilter: null == languageFilter
-          ? _value.languageFilter
-          : languageFilter // ignore: cast_nullable_to_non_nullable
-              as bool,
-      languageValue: null == languageValue
-          ? _value.languageValue
-          : languageValue // ignore: cast_nullable_to_non_nullable
-              as String,
       disablePrincipals: null == disablePrincipals
           ? _value.disablePrincipals
           : disablePrincipals // ignore: cast_nullable_to_non_nullable
@@ -623,9 +606,6 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'hideCustomer', defaultValue: false) bool hideCustomer,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
       bool enableGimmickMaterial,
-      @JsonKey(name: 'languageFilter', defaultValue: false) bool languageFilter,
-      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-      String languageValue,
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       bool disablePrincipals,
       @JsonKey(name: 'principalList')
@@ -743,8 +723,6 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? currency = null,
     Object? hideCustomer = null,
     Object? enableGimmickMaterial = null,
-    Object? languageFilter = null,
-    Object? languageValue = null,
     Object? disablePrincipals = null,
     Object? principalList = null,
     Object? disableOrderType = null,
@@ -820,14 +798,6 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableGimmickMaterial
           : enableGimmickMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageFilter: null == languageFilter
-          ? _value.languageFilter
-          : languageFilter // ignore: cast_nullable_to_non_nullable
-              as bool,
-      languageValue: null == languageValue
-          ? _value.languageValue
-          : languageValue // ignore: cast_nullable_to_non_nullable
-              as String,
       disablePrincipals: null == disablePrincipals
           ? _value.disablePrincipals
           : disablePrincipals // ignore: cast_nullable_to_non_nullable
@@ -1071,10 +1041,6 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       required this.hideCustomer,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
       required this.enableGimmickMaterial,
-      @JsonKey(name: 'languageFilter', defaultValue: false)
-      required this.languageFilter,
-      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-      required this.languageValue,
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       required this.disablePrincipals,
       @JsonKey(name: 'principalList')
@@ -1201,12 +1167,6 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @override
   @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
   final bool enableGimmickMaterial;
-  @override
-  @JsonKey(name: 'languageFilter', defaultValue: false)
-  final bool languageFilter;
-  @override
-  @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-  final String languageValue;
   @override
   @JsonKey(name: 'disablePrincipals', defaultValue: false)
   final bool disablePrincipals;
@@ -1388,7 +1348,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy)';
   }
 
   @override
@@ -1404,10 +1364,6 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
                 other.hideCustomer == hideCustomer) &&
             (identical(other.enableGimmickMaterial, enableGimmickMaterial) ||
                 other.enableGimmickMaterial == enableGimmickMaterial) &&
-            (identical(other.languageFilter, languageFilter) ||
-                other.languageFilter == languageFilter) &&
-            (identical(other.languageValue, languageValue) ||
-                other.languageValue == languageValue) &&
             (identical(other.disablePrincipals, disablePrincipals) ||
                 other.disablePrincipals == disablePrincipals) &&
             const DeepCollectionEquality()
@@ -1453,7 +1409,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
                 other.enableDefaultMD == enableDefaultMD) &&
             (identical(other.priceOverride, priceOverride) ||
                 other.priceOverride == priceOverride) &&
-            (identical(other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) || other.disablePaymentTermsDisplay == disablePaymentTermsDisplay) &&
+            (identical(other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) ||
+                other.disablePaymentTermsDisplay == disablePaymentTermsDisplay) &&
             (identical(other.disableDeliveryDate, disableDeliveryDate) || other.disableDeliveryDate == disableDeliveryDate) &&
             (identical(other.enableBillTo, enableBillTo) || other.enableBillTo == enableBillTo) &&
             (identical(other.showPOAttachment, showPOAttachment) || other.showPOAttachment == showPOAttachment) &&
@@ -1498,8 +1455,6 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         currency,
         hideCustomer,
         enableGimmickMaterial,
-        languageFilter,
-        languageValue,
         disablePrincipals,
         const DeepCollectionEquality().hash(_principalList),
         disableOrderType,
@@ -1584,10 +1539,6 @@ abstract class _SalesOrganisationConfigsDto
       required final bool hideCustomer,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
       required final bool enableGimmickMaterial,
-      @JsonKey(name: 'languageFilter', defaultValue: false)
-      required final bool languageFilter,
-      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-      required final String languageValue,
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       required final bool disablePrincipals,
       @JsonKey(name: 'principalList')
@@ -1719,12 +1670,6 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
   bool get enableGimmickMaterial;
-  @override
-  @JsonKey(name: 'languageFilter', defaultValue: false)
-  bool get languageFilter;
-  @override
-  @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
-  String get languageValue;
   @override
   @JsonKey(name: 'disablePrincipals', defaultValue: false)
   bool get disablePrincipals;

@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'update_sales_organisation_configs.freezed.dart';
@@ -17,10 +16,8 @@ class UpdateSalesOrganisationConfigs with _$UpdateSalesOrganisationConfigs {
     required bool enableBatchNumber,
     required Currency currency,
     required bool netPriceOverride,
-    required bool languageFilter,
     required bool enableVat,
     required bool enableZDP5,
-    required Language languageValue,
     required bool materialWithoutPrice,
     required bool enableZDP8Override,
     required bool displayOrderDiscount,
@@ -68,8 +65,6 @@ class UpdateSalesOrganisationConfigs with _$UpdateSalesOrganisationConfigs {
         currency: Currency(''),
         hideCustomer: false,
         enableGimmickMaterial: false,
-        languageFilter: false,
-        languageValue: Language.english(),
         disableOrderType: false,
         enableBatchNumber: false,
         disableBundles: false,

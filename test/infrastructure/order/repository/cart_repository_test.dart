@@ -109,8 +109,6 @@ void main() {
       cartRemoteDataSource: cartRemoteDataSource,
     );
     mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
-      languageFilter: true,
-      languageValue: Language.english(),
       disablePrincipals: false,
       enableGimmickMaterial: true,
       principalList: [

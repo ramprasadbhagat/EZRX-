@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -132,6 +133,7 @@ class ProductsTab extends StatelessWidget {
             shipToInfo: eligibilityBloc.state.shipToInfo,
             selectedMaterialFilter:
                 context.read<MaterialFilterBloc>().state.materialFilter,
+            user: context.read<UserBloc>().state.user,
           ),
         );
   }
@@ -145,6 +147,7 @@ class ProductsTab extends StatelessWidget {
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
+            user: context.read<UserBloc>().state.user,
           ),
         );
   }

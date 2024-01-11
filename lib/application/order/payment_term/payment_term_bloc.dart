@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
@@ -37,6 +38,7 @@ class PaymentTermBloc extends Bloc<PaymentTermEvent, PaymentTermState> {
           paymentCustomerInfo: e.paymentCustomerInformation,
           salesOrgConfig: e.salesOrganisationConfigs,
           salesRepInfo: e.salesRepresentativeInfo,
+          preferredLanguage: e.user.preferredLanguage,
         );
         failureOrSuccess.fold(
           (faliure) => emit(

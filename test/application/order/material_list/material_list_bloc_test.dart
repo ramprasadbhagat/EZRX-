@@ -21,6 +21,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.d
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 
+import '../../../common_mock_data/user_mock.dart';
+
 class MockMaterialListRepository extends Mock
     implements MaterialListRepository {}
 
@@ -109,6 +111,7 @@ void main() {
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
             selectedMaterialFilter: mockSelectedMaterialFilter,
+            user: fakeClientUser,
           ),
         );
       },
@@ -180,6 +183,7 @@ void main() {
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
             selectedMaterialFilter: mockSelectedMaterialFilter,
+            user: fakeClientUser,
           ),
         );
       },
@@ -264,6 +268,7 @@ void main() {
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
+            user: fakeClientUser,
           ),
         );
       },
@@ -319,6 +324,7 @@ void main() {
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
+            user: fakeClientUser,
           ),
         );
       },
@@ -379,6 +385,7 @@ void main() {
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
+            user: fakeClientUser,
           ),
         );
       },

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/favourite_status.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_favourites_repository.dart';
@@ -147,7 +147,7 @@ class FavouriteRepository implements IFavouriteRepository {
 
   @override
   Future<Either<ApiFailure, List>> getFavouritesForList({
-    required SalesOrganisationConfigs salesConfigs,
+    required Language preferredLanguage,
     required List list,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -169,7 +169,7 @@ class FavouriteRepository implements IFavouriteRepository {
           (e) async {
             final status = await _getFavouriteStatusForMaterial(
               materialCode: e.materialNumber,
-              salesOrgConfig: salesConfigs,
+              preferredLanguage: preferredLanguage,
             );
             status.fold(
               (failure) {},
@@ -196,13 +196,13 @@ class FavouriteRepository implements IFavouriteRepository {
   }
 
   Future<Either<ApiFailure, FavouriteStatus>> _getFavouriteStatusForMaterial({
-    required SalesOrganisationConfigs salesOrgConfig,
+    required Language preferredLanguage,
     required MaterialNumber materialCode,
   }) async {
     try {
       final status = await favouriteRemoteDataSource.getFavouriteStatus(
         materialNumber: materialCode.getOrCrash(),
-        language: salesOrgConfig.getConfigLanguage,
+        language: preferredLanguage.languageCode,
       );
 
       return Right(status);

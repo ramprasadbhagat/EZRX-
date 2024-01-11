@@ -32,8 +32,8 @@ mixin _$ComboMaterialItem {
   String get comboDealType => throw _privateConstructorUsedError;
   bool get isComboEligible => throw _privateConstructorUsedError;
   PriceComboDeal get comboDeals => throw _privateConstructorUsedError;
-  double get finalIndividualPrice => throw _privateConstructorUsedError;
-  String get language => throw _privateConstructorUsedError;
+  double get finalIndividualPrice =>
+      throw _privateConstructorUsedError; //required String language,
   SalesOrganisationConfigs get salesOrgConfig =>
       throw _privateConstructorUsedError;
   MaterialInfo get materialInfo => throw _privateConstructorUsedError;
@@ -67,7 +67,6 @@ abstract class $ComboMaterialItemCopyWith<$Res> {
       bool isComboEligible,
       PriceComboDeal comboDeals,
       double finalIndividualPrice,
-      String language,
       SalesOrganisationConfigs salesOrgConfig,
       MaterialInfo materialInfo});
 
@@ -107,7 +106,6 @@ class _$ComboMaterialItemCopyWithImpl<$Res, $Val extends ComboMaterialItem>
     Object? isComboEligible = null,
     Object? comboDeals = null,
     Object? finalIndividualPrice = null,
-    Object? language = null,
     Object? salesOrgConfig = null,
     Object? materialInfo = null,
   }) {
@@ -180,10 +178,6 @@ class _$ComboMaterialItemCopyWithImpl<$Res, $Val extends ComboMaterialItem>
           ? _value.finalIndividualPrice
           : finalIndividualPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -255,7 +249,6 @@ abstract class _$$_ComboMaterialItemCopyWith<$Res>
       bool isComboEligible,
       PriceComboDeal comboDeals,
       double finalIndividualPrice,
-      String language,
       SalesOrganisationConfigs salesOrgConfig,
       MaterialInfo materialInfo});
 
@@ -297,7 +290,6 @@ class __$$_ComboMaterialItemCopyWithImpl<$Res>
     Object? isComboEligible = null,
     Object? comboDeals = null,
     Object? finalIndividualPrice = null,
-    Object? language = null,
     Object? salesOrgConfig = null,
     Object? materialInfo = null,
   }) {
@@ -370,10 +362,6 @@ class __$$_ComboMaterialItemCopyWithImpl<$Res>
           ? _value.finalIndividualPrice
           : finalIndividualPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -407,7 +395,6 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
       required this.isComboEligible,
       required this.comboDeals,
       required this.finalIndividualPrice,
-      required this.language,
       required this.salesOrgConfig,
       required this.materialInfo})
       : super._();
@@ -446,8 +433,7 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
   final PriceComboDeal comboDeals;
   @override
   final double finalIndividualPrice;
-  @override
-  final String language;
+//required String language,
   @override
   final SalesOrganisationConfigs salesOrgConfig;
   @override
@@ -455,7 +441,7 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
 
   @override
   String toString() {
-    return 'ComboMaterialItem(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, minQty: $minQty, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principalData: $principalData, listPrice: $listPrice, valid: $valid, comboDealType: $comboDealType, isComboEligible: $isComboEligible, comboDeals: $comboDeals, finalIndividualPrice: $finalIndividualPrice, language: $language, salesOrgConfig: $salesOrgConfig, materialInfo: $materialInfo)';
+    return 'ComboMaterialItem(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, minQty: $minQty, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principalData: $principalData, listPrice: $listPrice, valid: $valid, comboDealType: $comboDealType, isComboEligible: $isComboEligible, comboDeals: $comboDeals, finalIndividualPrice: $finalIndividualPrice, salesOrgConfig: $salesOrgConfig, materialInfo: $materialInfo)';
   }
 
   @override
@@ -492,8 +478,6 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
                 other.comboDeals == comboDeals) &&
             (identical(other.finalIndividualPrice, finalIndividualPrice) ||
                 other.finalIndividualPrice == finalIndividualPrice) &&
-            (identical(other.language, language) ||
-                other.language == language) &&
             (identical(other.salesOrgConfig, salesOrgConfig) ||
                 other.salesOrgConfig == salesOrgConfig) &&
             (identical(other.materialInfo, materialInfo) ||
@@ -520,7 +504,6 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
         isComboEligible,
         comboDeals,
         finalIndividualPrice,
-        language,
         salesOrgConfig,
         materialInfo
       ]);
@@ -552,7 +535,6 @@ abstract class _ComboMaterialItem extends ComboMaterialItem {
       required final bool isComboEligible,
       required final PriceComboDeal comboDeals,
       required final double finalIndividualPrice,
-      required final String language,
       required final SalesOrganisationConfigs salesOrgConfig,
       required final MaterialInfo materialInfo}) = _$_ComboMaterialItem;
   const _ComboMaterialItem._() : super._();
@@ -591,9 +573,7 @@ abstract class _ComboMaterialItem extends ComboMaterialItem {
   PriceComboDeal get comboDeals;
   @override
   double get finalIndividualPrice;
-  @override
-  String get language;
-  @override
+  @override //required String language,
   SalesOrganisationConfigs get salesOrgConfig;
   @override
   MaterialInfo get materialInfo;

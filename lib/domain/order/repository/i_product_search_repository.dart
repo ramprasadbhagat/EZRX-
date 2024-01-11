@@ -26,6 +26,7 @@ abstract class IProductSearchRepository {
     required int pageSize,
     required int offset,
     required MaterialFilter materialFilter,
+    required Language preferredLanguage,
   });
 
   Future<Either<ApiFailure, ProductSuggestionHistory>> getSearchKeys();

@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/user_mock.dart';
+
 class MaterialDetailRemoteDataSourceMock extends Mock
     implements MaterialPriceDetailRemoteDataSource {}
 
@@ -35,6 +37,7 @@ void main() {
 
   final fakeSaleOrg =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('fake-saleOrg'));
+
   final fakeCustomerCodeInfo = CustomerCodeInfo.empty()
       .copyWith(customerCodeSoldTo: 'fake-customer-code');
   final fakeShipToInfo =
@@ -143,6 +146,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       expect(result.isRight(), true);
@@ -168,6 +172,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       expect(result.isLeft(), true);
@@ -181,7 +186,7 @@ void main() {
           salesOrgCode: 'fake-saleOrg',
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
-          language: '',
+          language: 'EN',
           listPriceOnly: false,
           queryString: [
             {
@@ -205,6 +210,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       expect(result.isRight(), true);
@@ -229,7 +235,7 @@ void main() {
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           listPriceOnly: false,
-          language: '',
+          language: 'EN',
           queryString: [
             {
               'MaterialNumber': 'fake-material-1',
@@ -250,6 +256,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       expect(result.isLeft(), true);
@@ -268,6 +275,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       expect(result.isRight(), true);
@@ -287,6 +295,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: <MaterialQueryInfo>[],
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       expect(result.isLeft(), true);
@@ -302,7 +311,7 @@ void main() {
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           listPriceOnly: false,
-          language: '',
+          language: 'EN',
           queryString: [
             {
               'MaterialNumber': 'fake-material-1',
@@ -323,7 +332,7 @@ void main() {
           salesOrgCode: 'fake-saleOrg',
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
-          language: '',
+          language: 'EN',
           materialNumbers: {
             'fake-material-2': true,
             'fake-material-3': true,
@@ -339,6 +348,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       verify(
@@ -346,7 +356,7 @@ void main() {
           salesOrgCode: 'fake-saleOrg',
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
-          language: '',
+          language: 'EN',
           materialNumbers: {
             'fake-material-2': true,
             'fake-material-3': true,
@@ -378,7 +388,7 @@ void main() {
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           listPriceOnly: false,
-          language: '',
+          language: 'EN',
           queryString: [
             {
               'MaterialNumber': 'fake-material-1',
@@ -399,7 +409,7 @@ void main() {
           salesOrgCode: 'fake-saleOrg',
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
-          language: '',
+          language: 'EN',
           materialNumbers: {
             'fake-material-2': true,
             'fake-material-3': true,
@@ -413,6 +423,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       verify(
@@ -420,7 +431,7 @@ void main() {
           salesOrgCode: 'fake-saleOrg',
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
-          language: '',
+          language: 'EN',
           materialNumbers: {
             'fake-material-2': true,
             'fake-material-3': true,
@@ -440,7 +451,7 @@ void main() {
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           listPriceOnly: false,
-          language: '',
+          language: 'EN',
           queryString: [
             {
               'MaterialNumber': 'fake-material-1',
@@ -459,6 +470,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQueryWithOverride,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       expect(result.isRight(), true);
@@ -494,6 +506,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: {},
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       await result.fold((l) async {}, (r) async {
@@ -522,6 +535,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQueryWithOverride,
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       expect(result.isRight(), true);
@@ -549,6 +563,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: {},
+        preferredLanguage: fakeClientUser.preferredLanguage,
       );
 
       expect(result.isLeft(), true);
@@ -577,6 +592,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToCodeInfo: fakeShipToInfo,
           materialNumber: fakeQuery.first.value,
+          preferredLanguage: fakeClientUser.preferredLanguage,
         );
 
         expect(result.isRight(), true);
@@ -595,6 +611,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToCodeInfo: fakeShipToInfo,
           materialNumber: fakeQuery.first.value,
+          preferredLanguage: fakeClientUser.preferredLanguage,
         );
 
         expect(result.isLeft(), true);
@@ -607,7 +624,7 @@ void main() {
             salesOrgCode: 'fake-saleOrg',
             customerCode: 'fake-customer-code',
             shipToCode: 'fake-ship-to-code',
-            language: '',
+            language: 'EN',
             listPriceOnly: false,
             queryString: [
               {'MaterialNumber': 'fake-material-1'}
@@ -623,6 +640,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToCodeInfo: fakeShipToInfo,
           materialNumber: fakeQuery.first.value,
+          preferredLanguage: fakeClientUser.preferredLanguage,
         );
 
         expect(result.isRight(), true);
@@ -640,7 +658,7 @@ void main() {
             customerCode: 'fake-customer-code',
             shipToCode: 'fake-ship-to-code',
             listPriceOnly: false,
-            language: '',
+            language: 'EN',
             queryString: [
               {'MaterialNumber': 'fake-material-1'}
             ],
@@ -653,6 +671,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToCodeInfo: fakeShipToInfo,
           materialNumber: fakeQuery.first.value,
+          preferredLanguage: fakeClientUser.preferredLanguage,
         );
 
         expect(result.isLeft(), true);

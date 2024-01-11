@@ -16,6 +16,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
 
+import '../../../common_mock_data/user_mock.dart';
+
 class MockConfig extends Mock implements Config {}
 
 class MaterialFilterLocalDataSourceMock extends Mock
@@ -43,7 +45,7 @@ void main() {
   final mockUser = User.empty();
   final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
 
-  setUpAll(() {
+  setUp(() {
     mockConfig = MockConfig();
     materialFilterLocalDataSource = MaterialFilterLocalDataSourceMock();
     materialFilterRemoteDataSource = MaterialFilterRemoteDataSourceMock();
@@ -103,7 +105,7 @@ void main() {
           salesOrganisation: '2601',
           soldToCustomerCode: '100000345',
           shipToCustomerCode: '1234567',
-          language: Language.english().languageCode,
+          language: fakeClientUser.preferredLanguage.languageCode,
           gimmickMaterial: false,
           userName: 'user',
         ),
@@ -112,8 +114,6 @@ void main() {
       final result = await materialFilterRepository.getMaterialFilterList(
         salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
           salesOrg: SalesOrg('2601'),
-          languageFilter: true,
-          languageValue: Language.english(),
           currency: Currency('SG'),
         ),
         salesOrganisation: fakeSaleOrg,
@@ -150,8 +150,6 @@ void main() {
       final result = await materialFilterRepository.getMaterialFilterList(
         salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
           salesOrg: SalesOrg('2601'),
-          languageFilter: true,
-          languageValue: Language.english(),
           currency: Currency('SG'),
         ),
         salesOrganisation: fakeSaleOrg,
@@ -178,7 +176,7 @@ void main() {
           salesOrganisation: '2601',
           soldToCustomerCode: '100000345',
           shipToCustomerCode: '1234567',
-          language: Language.english().languageCode,
+          language: fakeClientUser.preferredLanguage.languageCode,
           gimmickMaterial: false,
           userName: 'user',
         ),

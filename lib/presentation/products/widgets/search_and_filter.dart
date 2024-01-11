@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
@@ -85,6 +86,7 @@ class SearchAndFilter extends StatelessWidget {
                       context.read<EligibilityBloc>().state.customerCodeInfo,
                   shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
                   selectedMaterialFilter: value,
+                  user: context.read<UserBloc>().state.user,
                 ),
               );
         }

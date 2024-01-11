@@ -33,14 +33,12 @@ class ComboMaterialItem with _$ComboMaterialItem {
     required bool isComboEligible,
     required PriceComboDeal comboDeals,
     required double finalIndividualPrice,
-    required String language,
     required SalesOrganisationConfigs salesOrgConfig,
     required MaterialInfo materialInfo,
   }) = _ComboMaterialItem;
 
   factory ComboMaterialItem.empty() => ComboMaterialItem(
         quantity: 0,
-        language: '',
         productId: MaterialNumber(''),
         parentId: '',
         setNo: '',

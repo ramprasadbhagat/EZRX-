@@ -22,7 +22,8 @@ mixin _$ProductSearchEvent {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         initialized,
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
@@ -38,7 +39,8 @@ mixin _$ProductSearchEvent {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -53,7 +55,8 @@ mixin _$ProductSearchEvent {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -124,12 +127,14 @@ abstract class _$$_InitializedCopyWith<$Res> {
       {SalesOrganisation salesOrganization,
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      User user});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganization;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -147,6 +152,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? configs = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? user = null,
   }) {
     return _then(_$_Initialized(
       salesOrganization: null == salesOrganization
@@ -165,6 +171,10 @@ class __$$_InitializedCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
@@ -199,6 +209,14 @@ class __$$_InitializedCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -208,7 +226,8 @@ class _$_Initialized implements _Initialized {
       {required this.salesOrganization,
       required this.configs,
       required this.customerCodeInfo,
-      required this.shipToInfo});
+      required this.shipToInfo,
+      required this.user});
 
   @override
   final SalesOrganisation salesOrganization;
@@ -218,10 +237,12 @@ class _$_Initialized implements _Initialized {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'ProductSearchEvent.initialized(salesOrganization: $salesOrganization, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'ProductSearchEvent.initialized(salesOrganization: $salesOrganization, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user)';
   }
 
   @override
@@ -235,12 +256,13 @@ class _$_Initialized implements _Initialized {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganization, configs, customerCodeInfo, shipToInfo);
+  int get hashCode => Object.hash(runtimeType, salesOrganization, configs,
+      customerCodeInfo, shipToInfo, user);
 
   @JsonKey(ignore: true)
   @override
@@ -255,7 +277,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         initialized,
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
@@ -265,7 +288,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function() clearProductSearchSuggestionHistory,
   }) {
     return initialized(
-        salesOrganization, configs, customerCodeInfo, shipToInfo);
+        salesOrganization, configs, customerCodeInfo, shipToInfo, user);
   }
 
   @override
@@ -275,7 +298,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -284,7 +308,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? clearProductSearchSuggestionHistory,
   }) {
     return initialized?.call(
-        salesOrganization, configs, customerCodeInfo, shipToInfo);
+        salesOrganization, configs, customerCodeInfo, shipToInfo, user);
   }
 
   @override
@@ -294,7 +318,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -305,7 +330,7 @@ class _$_Initialized implements _Initialized {
   }) {
     if (initialized != null) {
       return initialized(
-          salesOrganization, configs, customerCodeInfo, shipToInfo);
+          salesOrganization, configs, customerCodeInfo, shipToInfo, user);
     }
     return orElse();
   }
@@ -359,12 +384,14 @@ abstract class _Initialized implements ProductSearchEvent {
       {required final SalesOrganisation salesOrganization,
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_Initialized;
+      required final ShipToInfo shipToInfo,
+      required final User user}) = _$_Initialized;
 
   SalesOrganisation get salesOrganization;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
+  User get user;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
@@ -459,7 +486,8 @@ class _$_SearchProduct implements _SearchProduct {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         initialized,
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
@@ -478,7 +506,8 @@ class _$_SearchProduct implements _SearchProduct {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -496,7 +525,8 @@ class _$_SearchProduct implements _SearchProduct {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -609,7 +639,8 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         initialized,
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
@@ -628,7 +659,8 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -646,7 +678,8 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -751,7 +784,8 @@ class _$_ClearSearch implements _ClearSearch {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         initialized,
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
@@ -770,7 +804,8 @@ class _$_ClearSearch implements _ClearSearch {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -788,7 +823,8 @@ class _$_ClearSearch implements _ClearSearch {
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -898,7 +934,8 @@ class _$_ClearProductSearchSuggestionHistory
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            User user)
         initialized,
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
@@ -917,7 +954,8 @@ class _$_ClearProductSearchSuggestionHistory
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -935,7 +973,8 @@ class _$_ClearProductSearchSuggestionHistory
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            User user)?
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
@@ -1016,6 +1055,7 @@ mixin _$ProductSearchState {
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   MaterialFilter get materialFilter => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductSearchStateCopyWith<ProductSearchState> get copyWith =>
@@ -1039,7 +1079,8 @@ abstract class $ProductSearchStateCopyWith<$Res> {
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      MaterialFilter materialFilter});
+      MaterialFilter materialFilter,
+      User user});
 
   $ProductSuggestionHistoryCopyWith<$Res> get productSuggestionHistory;
   $SalesOrganisationCopyWith<$Res> get salesOrganization;
@@ -1047,6 +1088,7 @@ abstract class $ProductSearchStateCopyWith<$Res> {
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $MaterialFilterCopyWith<$Res> get materialFilter;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -1073,6 +1115,7 @@ class _$ProductSearchStateCopyWithImpl<$Res, $Val extends ProductSearchState>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? materialFilter = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       isSearching: null == isSearching
@@ -1119,6 +1162,10 @@ class _$ProductSearchStateCopyWithImpl<$Res, $Val extends ProductSearchState>
           ? _value.materialFilter
           : materialFilter // ignore: cast_nullable_to_non_nullable
               as MaterialFilter,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ) as $Val);
   }
 
@@ -1170,6 +1217,14 @@ class _$ProductSearchStateCopyWithImpl<$Res, $Val extends ProductSearchState>
       return _then(_value.copyWith(materialFilter: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1191,7 +1246,8 @@ abstract class _$$_ProductSearchStateCopyWith<$Res>
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      MaterialFilter materialFilter});
+      MaterialFilter materialFilter,
+      User user});
 
   @override
   $ProductSuggestionHistoryCopyWith<$Res> get productSuggestionHistory;
@@ -1205,6 +1261,8 @@ abstract class _$$_ProductSearchStateCopyWith<$Res>
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   @override
   $MaterialFilterCopyWith<$Res> get materialFilter;
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -1229,6 +1287,7 @@ class __$$_ProductSearchStateCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? materialFilter = null,
+    Object? user = null,
   }) {
     return _then(_$_ProductSearchState(
       isSearching: null == isSearching
@@ -1275,6 +1334,10 @@ class __$$_ProductSearchStateCopyWithImpl<$Res>
           ? _value.materialFilter
           : materialFilter // ignore: cast_nullable_to_non_nullable
               as MaterialFilter,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 }
@@ -1293,7 +1356,8 @@ class _$_ProductSearchState implements _ProductSearchState {
       required this.configs,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.materialFilter})
+      required this.materialFilter,
+      required this.user})
       : _suggestedProductList = suggestedProductList;
 
   @override
@@ -1325,10 +1389,12 @@ class _$_ProductSearchState implements _ProductSearchState {
   final ShipToInfo shipToInfo;
   @override
   final MaterialFilter materialFilter;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'ProductSearchState(isSearching: $isSearching, suggestedProductList: $suggestedProductList, canLoadMore: $canLoadMore, productSuggestionHistory: $productSuggestionHistory, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, searchKey: $searchKey, salesOrganization: $salesOrganization, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, materialFilter: $materialFilter)';
+    return 'ProductSearchState(isSearching: $isSearching, suggestedProductList: $suggestedProductList, canLoadMore: $canLoadMore, productSuggestionHistory: $productSuggestionHistory, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, searchKey: $searchKey, salesOrganization: $salesOrganization, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, materialFilter: $materialFilter, user: $user)';
   }
 
   @override
@@ -1358,7 +1424,8 @@ class _$_ProductSearchState implements _ProductSearchState {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.materialFilter, materialFilter) ||
-                other.materialFilter == materialFilter));
+                other.materialFilter == materialFilter) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
@@ -1374,7 +1441,8 @@ class _$_ProductSearchState implements _ProductSearchState {
       configs,
       customerCodeInfo,
       shipToInfo,
-      materialFilter);
+      materialFilter,
+      user);
 
   @JsonKey(ignore: true)
   @override
@@ -1397,7 +1465,8 @@ abstract class _ProductSearchState implements ProductSearchState {
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final MaterialFilter materialFilter}) = _$_ProductSearchState;
+      required final MaterialFilter materialFilter,
+      required final User user}) = _$_ProductSearchState;
 
   @override
   bool get isSearching;
@@ -1421,6 +1490,8 @@ abstract class _ProductSearchState implements ProductSearchState {
   ShipToInfo get shipToInfo;
   @override
   MaterialFilter get materialFilter;
+  @override
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_ProductSearchStateCopyWith<_$_ProductSearchState> get copyWith =>

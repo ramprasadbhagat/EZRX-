@@ -41,10 +41,8 @@ class SalesOrgQueryMutation {
     futureDeliveryDay
     enablePaymentTerms
     plantNumber
-    languageFilter
     enableVat
     enableZDP5
-    languageValue
     materialWithoutPrice
     enableDeliveryStatus
     enableOMC

@@ -11,10 +11,8 @@ class UpdateSalesOrgQueryMutation {
             enableBatchNumber
             currency
             netPriceOverride
-            languageFilter
             enableVat
             enableZDP5
-            languageValue
             materialWithoutPrice
             enableZDP8Override
             displayOrderDiscount

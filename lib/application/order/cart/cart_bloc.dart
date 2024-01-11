@@ -123,7 +123,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           shipToInfo: state.shipToInfo,
           materialInfo: e.bonusMaterial,
           quantity: e.bonusMaterial.quantity.intValue,
-          language: state.user.settings.languagePreference,
+          language: state.user.preferredLanguage,
           counterOfferDetails: e.counterOfferDetails,
           itemId: e.bonusItemId.getValue(),
         );
@@ -198,7 +198,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisationConfig: state.config,
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
-          language: state.config.languageValue,
+          language: state.user.preferredLanguage,
           products: state.invalidSampleBonusList,
         );
 
@@ -440,7 +440,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               quantity: MaterialQty(e.quantity.intValue + currentQtyInCart),
             );
           }).toList(),
-          language: state.user.settings.languagePreference,
+          language: state.user.preferredLanguage,
           counterOfferDetails: e.counterOfferDetails,
           itemId: '',
         );
@@ -498,7 +498,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisation: state.salesOrganisation,
           shipToInfo: state.shipToInfo,
           product: e.priceAggregate,
-          language: state.config.getConfigLanguageDefaultEnglish,
+          language: state.user.preferredLanguage,
         );
 
         failureOrSuccess.fold(
@@ -618,7 +618,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             salesOrganisationConfig: state.config,
             customerCodeInfo: state.customerCodeInfo,
             shipToInfo: state.shipToInfo,
-            language: state.config.languageValue,
+            language: state.user.preferredLanguage,
             products: [
               ...state.productsWithCounterOfferPrice,
               ...state.productsWithCounterOfferDiscount,
@@ -793,7 +793,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisationConfig: state.config,
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
-          language: state.config.languageValue,
+          language: state.user.preferredLanguage,
           products: e.invalidCartItems,
         );
 

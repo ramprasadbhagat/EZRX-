@@ -18,8 +18,6 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required Currency currency,
     required bool hideCustomer,
     required bool enableGimmickMaterial,
-    required bool languageFilter,
-    required Language languageValue,
     required bool disablePrincipals,
     required List<SalesOrganisationConfigsPrincipal> principalList,
     required bool disableOrderType,
@@ -85,8 +83,6 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         currency: Currency(''),
         hideCustomer: false,
         enableGimmickMaterial: false,
-        languageFilter: false,
-        languageValue: Language.english(),
         disablePrincipals: false,
         principalList: <SalesOrganisationConfigsPrincipal>[],
         disableOrderType: false,
@@ -143,15 +139,9 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         allowReturnsOutsidePolicy: false,
       );
 
-  String get getConfigLanguage {
-    return languageFilter ? languageValue.languageCode : '';
-  }
 
   bool get shouldDisplayVATInPercentage =>
       enableVat && !currency.isVN || enableTaxAtTotalLevelOnly;
-
-  Language get getConfigLanguageDefaultEnglish =>
-      languageFilter ? languageValue : Language.shortEnglish();
 
   List<String> get getExcludePrincipal {
     return disablePrincipals ? [] : getPrincipalCodeList;

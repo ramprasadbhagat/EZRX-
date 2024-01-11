@@ -434,7 +434,6 @@ void main() {
         //   disableCreateOrder: false,
         //   disableReturns: false,
         //   hasPriceOverride: false,
-        //   preferredLanguage: LanguageValue('EN'),
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
@@ -514,7 +513,6 @@ void main() {
         //   disableCreateOrder: false,
         //   disableReturns: false,
         //   hasPriceOverride: false,
-        //   preferredLanguage: LanguageValue('EN'),
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
@@ -557,7 +555,6 @@ void main() {
         //   disableCreateOrder: false,
         //   disableReturns: false,
         //   hasPriceOverride: false,
-        //   preferredLanguage: LanguageValue('EN'),
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
@@ -600,7 +597,6 @@ void main() {
         //   disableCreateOrder: false,
         //   disableReturns: false,
         //   hasPriceOverride: false,
-        //   preferredLanguage: LanguageValue('EN'),
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
@@ -643,7 +639,6 @@ void main() {
         //   disableCreateOrder: false,
         //   disableReturns: false,
         //   hasPriceOverride: false,
-        //   preferredLanguage: LanguageValue('EN'),
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
@@ -687,7 +682,6 @@ void main() {
         //   disableCreateOrder: false,
         //   disableReturns: false,
         //   hasPriceOverride: false,
-        //   preferredLanguage: LanguageValue('EN'),
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
@@ -774,7 +768,6 @@ void main() {
         //   disableCreateOrder: false,
         //   disableReturns: false,
         //   hasPriceOverride: false,
-        //   preferredLanguage: LanguageValue('EN'),
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -30,6 +31,7 @@ import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockAppRouter extends Mock implements AppRouter {}
@@ -49,11 +51,14 @@ class MockMixpanelService extends Mock implements MixpanelService {}
 
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 void main() {
   late MaterialListBlocMock materialListBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late ProductDetailBloc productDetailBlocMock;
   late AppRouter autoRouterMock;
+  late UserBlocMock userBlocMock;
   final locator = GetIt.instance;
   late List<MaterialInfo> materialList;
   late MaterialResponse materialResponseMock;
@@ -95,6 +100,7 @@ void main() {
     when(() => autoRouterMock.currentPath).thenReturn('home');
     when(() => autoRouterMock.current).thenReturn(routeData);
     materialListBlocMock = MaterialListBlocMock();
+    userBlocMock = UserBlocMock();
     when(() => materialListBlocMock.state)
         .thenReturn(MaterialListState.initial());
     eligibilityBlocMock = EligibilityBlocMock();
@@ -102,6 +108,9 @@ void main() {
         .thenReturn(EligibilityState.initial());
     when(() => productDetailBlocMock.state)
         .thenReturn(ProductDetailState.initial());
+    when(() => userBlocMock.state).thenReturn(
+      UserState.initial(),
+    );
   });
 
   Future getWidget(tester) async {
@@ -119,6 +128,7 @@ void main() {
           BlocProvider<ProductDetailBloc>(
             create: (context) => productDetailBlocMock,
           ),
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
         ],
         child: const Scaffold(body: BundleSection()),
       ),
@@ -225,6 +235,11 @@ void main() {
             materialList: materialList,
           ),
         );
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeClientUser,
+          ),
+        );
 
         await getWidget(tester);
         await tester.pump();
@@ -246,6 +261,7 @@ void main() {
                 isProductOffer: true,
               ),
               shipToInfo: fakeShipToInfo,
+              user: fakeClientUser,
             ),
           ),
         ).called(1);
