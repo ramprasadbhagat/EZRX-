@@ -40,6 +40,8 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
 
   bool get isLoading => isDetailFetching || isListLoading;
 
+  bool get isButtonLoading => isLoading || isFetchingAdvice;
+
   bool get isSavingOrDeleting => isSavingAdvice || isDeletingPayment;
 
   String get adviceExpiryText {

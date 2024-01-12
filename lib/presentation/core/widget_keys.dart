@@ -997,6 +997,7 @@ class WidgetKeys {
 
   static Key returnContactUsFieldKeyRequest(String key, String msg) =>
       Key('$key$msg');
+  static const Key paymentAdviceButtonLoading = Key('paymentAdviceButtonLoading');
   //============================================================
   // Notification page
   //============================================================

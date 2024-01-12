@@ -198,7 +198,7 @@ void main() {
       );
       final expectedStates = [
         PaymentSummaryDetailsState.initial().copyWith(
-          isDetailFetching: true,
+          isFetchingAdvice: true,
         ),
       ];
       whenListen(
@@ -216,6 +216,11 @@ void main() {
       expect(
         find.byType(LoadingShimmer),
         findsWidgets,
+      );
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.paymentAdviceButtonLoading),
+        findsOneWidget,
       );
     });
     testWidgets(

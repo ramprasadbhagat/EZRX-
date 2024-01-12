@@ -45,11 +45,6 @@ class _PaymentAdviceButton extends StatelessWidget {
           previous.isDeletingPayment != current.isDeletingPayment ||
           previous.isCancelingAdvice != current.isCancelingAdvice,
       builder: (context, state) {
-        if (state.isLoading ||
-            state.details.paymentItems.isEmpty ||
-            state.isFetchingAdvice) {
-          return const SizedBox.shrink();
-        }
         final eligibilityState = context.read<EligibilityBloc>().state;
         var buttons = _getDefaultButtons(state);
         if (eligibilityState.salesOrg.isID) {
@@ -75,10 +70,16 @@ class _PaymentAdviceButton extends StatelessWidget {
                   top: 16,
                   bottom: 30,
                 ),
-                child: Row(
-                  key: WidgetKeys.buttonRowKey,
-                  children: buttons,
-                ),
+                child: state.isButtonLoading
+                    ? SizedBox(
+                        key: WidgetKeys.paymentAdviceButtonLoading,
+                        height: 20,
+                        child: LoadingShimmer.tile(),
+                      )
+                    : Row(
+                        key: WidgetKeys.buttonRowKey,
+                        children: buttons,
+                      ),
               );
       },
     );
