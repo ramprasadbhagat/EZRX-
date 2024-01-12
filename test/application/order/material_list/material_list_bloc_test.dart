@@ -5,23 +5,20 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/add_favourite.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/remove_favourite.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_local.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 
 import '../../../common_mock_data/user_mock.dart';
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 
 class MockMaterialListRepository extends Mock
     implements MaterialListRepository {}
@@ -33,15 +30,7 @@ void main() {
   late MaterialListRepository materialListMockRepository;
   late FavouriteRepository favouriteMockRepository;
   late Config config;
-  final salesOrg2601 = SalesOrg('2601');
-  final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
-  final mockCustomerCodeInfo = CustomerCodeInfo.empty();
-  final mockShipToInfo = ShipToInfo.empty();
   final mockSelectedMaterialFilter = MaterialFilter.empty();
-  final mockSalesOrganisation = SalesOrganisation(
-    salesOrg: salesOrg2601,
-    customerInfos: <SalesOrgCustomerInfo>[],
-  );
   late final MaterialResponse materialResponseMock;
   late final AddFavourite addToFavouritesResponseMock;
   late final RemoveFavourite removeFavouritesResponseMock;
@@ -89,10 +78,10 @@ void main() {
       setUp: () {
         when(
           () => materialListMockRepository.getMaterialList(
-            salesOrganisation: mockSalesOrganisation,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfig: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             pageSize: config.pageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
@@ -102,14 +91,13 @@ void main() {
           (invocation) async => Right(materialResponseMock),
         );
       },
-      seed: () => materialState,
       act: (MaterialListBloc bloc) {
         bloc.add(
           MaterialListEvent.fetch(
-            salesOrganisation: mockSalesOrganisation,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            configs: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
           ),
@@ -122,7 +110,6 @@ void main() {
             materialList: <MaterialInfo>[],
             nextPageIndex: 0,
             apiFailureOrSuccessOption: none(),
-            isScanFromBarcode: false,
             selectedMaterialFilter:
                 materialState.selectedMaterialFilter.copyWith(
               isFavourite: mockSelectedMaterialFilter.isFavourite,
@@ -141,7 +128,6 @@ void main() {
             materialCount: materialResponseMock.count,
             materialList: materialResponseMock.products,
             apiFailureOrSuccessOption: optionOf(Right(materialResponseMock)),
-            isFetching: false,
             canLoadMore:
                 materialResponseMock.products.length >= config.pageSize,
             nextPageIndex: 1,
@@ -160,10 +146,10 @@ void main() {
       setUp: () {
         when(
           () => materialListMockRepository.getMaterialList(
-            salesOrganisation: mockSalesOrganisation,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfig: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             pageSize: config.pageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
@@ -178,10 +164,10 @@ void main() {
       act: (MaterialListBloc bloc) {
         bloc.add(
           MaterialListEvent.fetch(
-            salesOrganisation: mockSalesOrganisation,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            configs: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
           ),
@@ -191,10 +177,6 @@ void main() {
       expect: () => [
         materialState.copyWith(
           isFetching: true,
-          materialList: <MaterialInfo>[],
-          nextPageIndex: 0,
-          apiFailureOrSuccessOption: none(),
-          isScanFromBarcode: false,
           selectedMaterialFilter: materialState.selectedMaterialFilter.copyWith(
             isFavourite: mockSelectedMaterialFilter.isFavourite,
             isCovidSelected: mockSelectedMaterialFilter.isCovidSelected,
@@ -208,7 +190,6 @@ void main() {
           ),
         ),
         materialState.copyWith(
-          isFetching: false,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
         ),
@@ -247,10 +228,10 @@ void main() {
       setUp: () {
         when(
           () => materialListMockRepository.getMaterialList(
-            salesOrganisation: mockSalesOrganisation,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfig: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             pageSize: config.pageSize,
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
@@ -264,10 +245,10 @@ void main() {
       act: (MaterialListBloc bloc) {
         bloc.add(
           MaterialListEvent.loadMore(
-            salesOrganisation: mockSalesOrganisation,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            configs: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeClientUser,
           ),
         );
@@ -278,14 +259,10 @@ void main() {
         return [
           materialState.copyWith(
             isFetching: true,
-            apiFailureOrSuccessOption: none(),
-            isScanFromBarcode: false,
           ),
           materialState.copyWith(
             materialCount: materialResponseMock.count,
             materialList: productList,
-            apiFailureOrSuccessOption: none(),
-            isFetching: false,
             canLoadMore: productList.length >= config.pageSize,
             nextPageIndex: materialState.nextPageIndex + 1,
           ),
@@ -303,10 +280,10 @@ void main() {
       setUp: () {
         when(
           () => materialListMockRepository.getMaterialList(
-            salesOrganisation: mockSalesOrganisation,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfig: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             pageSize: config.pageSize,
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
@@ -320,10 +297,10 @@ void main() {
       act: (MaterialListBloc bloc) {
         bloc.add(
           MaterialListEvent.loadMore(
-            salesOrganisation: mockSalesOrganisation,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            configs: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeClientUser,
           ),
         );
@@ -331,13 +308,10 @@ void main() {
       expect: () => [
         materialState.copyWith(
           isFetching: true,
-          apiFailureOrSuccessOption: none(),
-          isScanFromBarcode: false,
         ),
         materialState.copyWith(
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
-          isFetching: false,
         ),
       ],
     );
@@ -360,10 +334,10 @@ void main() {
       setUp: () {
         when(
           () => materialListMockRepository.getMaterialList(
-            salesOrganisation: mockSalesOrganisation,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfig: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             pageSize: config.pageSize,
             offset: 24,
             selectedMaterialFilter: mockSelectedMaterialFilter,
@@ -381,10 +355,10 @@ void main() {
       act: (MaterialListBloc bloc) {
         bloc.add(
           MaterialListEvent.loadMore(
-            salesOrganisation: mockSalesOrganisation,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            configs: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeClientUser,
           ),
         );
@@ -460,7 +434,6 @@ void main() {
         materialState.copyWith(
           materialList:
               addToFavouritesList.map((e) => e as MaterialInfo).toList(),
-          isFetching: false,
         ),
       ],
     );
@@ -494,7 +467,6 @@ void main() {
         materialState.copyWith(
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
-          isFetching: false,
         ),
       ],
     );
@@ -543,7 +515,6 @@ void main() {
         materialState.copyWith(
           materialList:
               removeFavouritesList.map((e) => e as MaterialInfo).toList(),
-          isFetching: false,
         ),
       ],
     );
@@ -579,7 +550,6 @@ void main() {
         materialState.copyWith(
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
-          isFetching: false,
         ),
       ],
     );
@@ -602,7 +572,7 @@ void main() {
         when(() => favouriteMockRepository.watchFavoriteStatus()).thenAnswer(
           (_) => Stream.fromIterable(
             [
-              materialResponseMock.products.first.copyWith(isFavourite: false),
+              materialResponseMock.products.first,
               materialResponseMock.products.first.copyWith(isFavourite: true)
             ],
           ),
@@ -610,9 +580,7 @@ void main() {
       },
       expect: () => [
         MaterialListState.initial().copyWith(
-          materialList: [
-            materialResponseMock.products.first.copyWith(isFavourite: false)
-          ],
+          materialList: [materialResponseMock.products.first],
         ),
         MaterialListState.initial().copyWith(
           materialList: [
@@ -636,15 +604,12 @@ void main() {
       ),
       act: (MaterialListBloc bloc) => bloc.add(
         MaterialListEvent.updateFavoriteStatus(
-          updatedMaterial:
-              materialResponseMock.products.first.copyWith(isFavourite: false),
+          updatedMaterial: materialResponseMock.products.first,
         ),
       ),
       expect: () => [
         MaterialListState.initial().copyWith(
-          materialList: [
-            materialResponseMock.products.first.copyWith(isFavourite: false)
-          ],
+          materialList: [materialResponseMock.products.first],
         ),
       ],
     );

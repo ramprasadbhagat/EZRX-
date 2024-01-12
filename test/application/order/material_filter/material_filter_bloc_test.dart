@@ -88,7 +88,7 @@ void main() {
           () => materialFilterRepositoryMock.getMaterialFilterList(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
             pickAndPack: 'fake_pick_and_pack',
@@ -103,7 +103,7 @@ void main() {
       act: (MaterialFilterBloc bloc) => bloc.add(
         MaterialFilterEvent.fetch(
           salesOrgConfig: fakeMYSalesOrgConfigs,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -113,12 +113,12 @@ void main() {
       ),
       expect: () => [
         MaterialFilterState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           apiFailureOrSuccessOption: none(),
           isFetching: true,
         ),
         MaterialFilterState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           materialFilter: materialFilterMockData,
           apiFailureOrSuccessOption: none(),
           isFetching: false,
@@ -136,7 +136,7 @@ void main() {
           () => materialFilterRepositoryMock.getMaterialFilterList(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
             pickAndPack: 'fake_pick_and_pack',
@@ -151,7 +151,7 @@ void main() {
       act: (MaterialFilterBloc bloc) => bloc.add(
         MaterialFilterEvent.fetch(
           salesOrgConfig: fakeMYSalesOrgConfigs,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
@@ -162,10 +162,10 @@ void main() {
       expect: () => [
         MaterialFilterState.initial().copyWith(
           isFetching: true,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         ),
         MaterialFilterState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           isFetching: false,
           apiFailureOrSuccessOption: optionOf(
             const Left(

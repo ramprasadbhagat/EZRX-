@@ -1,19 +1,19 @@
-import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
-import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
-import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 
-import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ void main() {
     items = {
       for (final item in productList)
         item.getMaterialNumber: item.copyWith(
-          salesOrgConfig: fakeMYSalesOrgConfigs,
+          salesOrgConfig: fakeKHSalesOrgConfigs,
         ),
     };
   });
@@ -58,7 +58,7 @@ void main() {
       final mockComboDeal = ComboDeal.empty().copyWith(
         materialComboDeals: [
           ComboDealMaterialSet.empty().copyWith(
-            materials: [ComboDealMaterial.empty().copyWith(mandatory: false)],
+            materials: [ComboDealMaterial.empty()],
           ),
         ],
         groupDeal: ComboDealGroupDeal.empty().copyWith(minTotalQuantity: 1),
@@ -67,7 +67,7 @@ void main() {
       items = {
         for (final item in productList)
           item.getMaterialNumber: item.copyWith(
-            salesOrgConfig: fakeMYSalesOrgConfigs,
+            salesOrgConfig: fakeKHSalesOrgConfigs,
           ),
       };
       final state = ComboDealMaterialDetailState.initial().copyWith(
@@ -81,7 +81,7 @@ void main() {
         materialComboDeals: [
           ComboDealMaterialSet.empty().copyWith(
             materials: [
-              ComboDealMaterial.empty().copyWith(mandatory: false),
+              ComboDealMaterial.empty(),
               ComboDealMaterial.empty().copyWith(mandatory: true)
             ],
           ),

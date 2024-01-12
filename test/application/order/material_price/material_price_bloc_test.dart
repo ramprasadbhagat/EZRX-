@@ -81,7 +81,7 @@ void main() {
         MaterialPriceEvent.initialized(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
         ),
       ),
@@ -89,7 +89,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
         )
       ],
@@ -101,7 +101,7 @@ void main() {
       seed: () => MaterialPriceState.initial().copyWith(
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
         materialPrice: {
           for (var number in fakeMaterialQuery)
@@ -123,7 +123,7 @@ void main() {
           MaterialPriceState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             isFetching: true,
             materialPrice: {
@@ -138,7 +138,7 @@ void main() {
           MaterialPriceState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialPrice: {
               for (var number in fakeMaterialQuery)
@@ -159,7 +159,7 @@ void main() {
       seed: () => MaterialPriceState.initial().copyWith(
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
       ),
       act: (MaterialPriceBloc bloc) => bloc.add(
@@ -172,14 +172,14 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: materialPrice,
@@ -187,7 +187,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: materialPrice,
         ),
@@ -200,7 +200,7 @@ void main() {
       seed: () => MaterialPriceState.initial().copyWith(
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
@@ -208,7 +208,7 @@ void main() {
           () => repository.getMaterialPrice(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialNumberList: fakeMaterialNumberQuery,
             comboDealEligible: false,
@@ -227,14 +227,14 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: mockPriceMap,
         ),
@@ -247,7 +247,7 @@ void main() {
       seed: () => MaterialPriceState.initial().copyWith(
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
@@ -255,7 +255,7 @@ void main() {
           () => repository.getMaterialPrice(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialNumberList: fakeMaterialNumberQuery,
             comboDealEligible: false,
@@ -274,14 +274,14 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
         ),
       ],
@@ -295,7 +295,7 @@ void main() {
       seed: () => MaterialPriceState.initial().copyWith(
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
         materialPrice: {
           for (var number in fakeMaterialQuery)
@@ -317,7 +317,7 @@ void main() {
           MaterialPriceState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             isFetching: true,
             materialPrice: {
@@ -332,7 +332,7 @@ void main() {
           MaterialPriceState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialPrice: {
               for (var number in fakeMaterialQuery)
@@ -376,7 +376,7 @@ void main() {
       seed: () => MaterialPriceState.initial().copyWith(
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
@@ -384,7 +384,7 @@ void main() {
           () => repository.getMaterialPrice(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialNumberList: fakeMaterialNumberQuery,
             comboDealEligible: false,
@@ -403,14 +403,14 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: mockPriceMap,
         ),
@@ -423,7 +423,7 @@ void main() {
       seed: () => MaterialPriceState.initial().copyWith(
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
@@ -431,7 +431,7 @@ void main() {
           () => repository.getMaterialPrice(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialNumberList: fakeMaterialNumberQuery,
             comboDealEligible: false,
@@ -450,7 +450,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
@@ -464,7 +464,7 @@ void main() {
         materialPrice: mockPriceMap,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
@@ -472,7 +472,7 @@ void main() {
           () => repository.getMaterialPriceForZDP5Material(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialNumber: fakeMaterialNumberQuery.first,
             exceedQty: false,
@@ -491,7 +491,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: mockPriceMap,
@@ -499,7 +499,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: mockPriceMap,
         ),
@@ -513,7 +513,7 @@ void main() {
         materialPrice: mockPriceMap,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
@@ -521,7 +521,7 @@ void main() {
           () => repository.getMaterialPriceForZDP5Material(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialNumber: fakeMaterialNumberQuery.first,
             exceedQty: true,
@@ -540,7 +540,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: mockPriceMap,
@@ -548,7 +548,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: mockPriceMap,
         ),
@@ -562,7 +562,7 @@ void main() {
         materialPrice: mockPriceMap,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
       ),
       setUp: () {
@@ -570,7 +570,7 @@ void main() {
           () => repository.getMaterialPriceForZDP5Material(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialNumber: fakeMaterialNumberQuery.first,
             exceedQty: true,
@@ -589,7 +589,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: mockPriceMap,
@@ -597,7 +597,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: mockPriceMap,
         ),
@@ -610,7 +610,7 @@ void main() {
       seed: () => MaterialPriceState.initial().copyWith(
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
       ),
       act: (MaterialPriceBloc bloc) => bloc.add(
@@ -623,14 +623,14 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: {
@@ -643,7 +643,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: {
             fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
@@ -660,7 +660,7 @@ void main() {
       seed: () => MaterialPriceState.initial().copyWith(
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
       ),
       act: (MaterialPriceBloc bloc) => bloc.add(
@@ -673,14 +673,14 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           isFetching: true,
           materialPrice: {
@@ -693,7 +693,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
           materialPrice: {
             fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(

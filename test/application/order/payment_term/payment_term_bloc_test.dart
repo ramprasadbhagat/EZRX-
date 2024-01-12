@@ -4,16 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/payment_term_repository.dart';
@@ -22,6 +18,8 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart'
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 
 import '../../../common_mock_data/user_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_mm_sales_org_config.dart';
 
 class PaymentTermsRepoMock extends Mock implements PaymentTermsRepository {}
 
@@ -36,74 +34,6 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late PaymentTermsRepository paymentTermsRepositoryMock;
   late List<PaymentTerm> paymentTermMockData;
-
-  final fakeSaleOrganisation = SalesOrganisation.empty().copyWith(
-    salesOrg: SalesOrg('fake-1234'),
-  );
-
-  final fakeSaleOrgConfig = SalesOrganisationConfigs(
-    salesOrg: SalesOrg(''),
-    enableIRN: false,
-    enableDefaultMD: false,
-    disableProcessingStatus: false,
-    currency: Currency(''),
-    hideCustomer: false,
-    disableOrderType: false,
-    disablePrincipals: false,
-    enableGimmickMaterial: false,
-    disableBundles: false,
-    principalList: [],
-    enableBatchNumber: false,
-    enableZDP5: false,
-    enableTaxClassification: false,
-    enableVat: false,
-    enableTaxAtTotalLevelOnly: false,
-    vatValue: 0,
-    materialWithoutPrice: false,
-    enableCollectiveNumber: false,
-    enableFutureDeliveryDay: false,
-    enableMobileNumber: false,
-    enablePaymentTerms: false,
-    enableReferenceNote: false,
-    enableSpecialInstructions: false,
-    futureDeliveryDay: FutureDeliveryDay(''),
-    enableGMC: false,
-    enableListPrice: false,
-    priceOverride: false,
-    disablePaymentTermsDisplay: false,
-    disablePayment: false,
-    disableDeliveryDate: false,
-    enableBillTo: false,
-    showPOAttachment: false,
-    expiryDateDisplay: false,
-    hideStockDisplay: false,
-    addOosMaterials: OosMaterial(false),
-    oosValue: OosValue(0),
-    enableRemarks: false,
-    enableOHPrice: true,
-    poNumberRequired: PoNumberRequired(false),
-    enableTaxDisplay: false,
-    netPriceOverride: false,
-    batchNumDisplay: false,
-    displayOrderDiscount: false,
-    minOrderAmount: '0',
-    enableZDP8Override: false,
-    disableReturnsAccessSR: false,
-    disableReturnsAccess: false,
-    enableGreenDelivery: false,
-    greenDeliveryDelayInDays: 0,
-    enableComboDeals: false,
-    greenDeliveryUserRole: GreenDeliveryUserRole(0),
-    comboDealsUserRole: ComboDealUserRole(0),
-    enableGMN: false,
-    displayItemTaxBreakdown: false,
-    displaySubtotalTaxBreakdown: false,
-    disableOverrideFieldCustomer: false,
-    disableOverrideFieldSR: false,
-    enablePOAttachmentRequired: false,
-    hideCredit: false,
-    allowReturnsOutsidePolicy: false,
-  );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(
     customerCodeSoldTo: 'fake-1234',
@@ -148,8 +78,8 @@ void main() {
         when(
           () => paymentTermsRepositoryMock.getPaymentTerms(
             customerCodeInfo: fakeCustomerCode,
-            salesOrganisation: fakeSaleOrganisation,
-            salesOrgConfig: fakeSaleOrgConfig,
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfig: fakeMMSalesOrgConfigs,
             paymentCustomerInfo: fakepaymentCustomerInformation,
             salesRepInfo: fakesalesRepInfo,
             preferredLanguage: fakeClientUser.preferredLanguage,
@@ -163,12 +93,11 @@ void main() {
       act: (bloc) => bloc.add(
         PaymentTermEvent.fetch(
           customeCodeInfo: fakeCustomerCode,
-          salesOrganisation: fakeSaleOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           paymentCustomerInformation: fakepaymentCustomerInformation,
-          salesOrganisationConfigs: fakeSaleOrgConfig,
+          salesOrganisationConfigs: fakeMMSalesOrgConfigs,
           salesRepresentativeInfo: fakesalesRepInfo,
           user: fakeClientUser,
-          
         ),
       ),
       expect: () => [
@@ -191,9 +120,8 @@ void main() {
         when(
           () => paymentTermsRepositoryMock.getPaymentTerms(
             customerCodeInfo: fakeCustomerCode,
-            salesOrganisation: fakeSaleOrganisation,
-            salesOrgConfig:
-                fakeSaleOrgConfig,
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfig: fakeMMSalesOrgConfigs,
             paymentCustomerInfo: fakepaymentCustomerInformation,
             salesRepInfo: fakesalesRepInfo,
             preferredLanguage: fakeClientUser.preferredLanguage,
@@ -207,9 +135,9 @@ void main() {
       act: (bloc) => bloc.add(
         PaymentTermEvent.fetch(
           customeCodeInfo: fakeCustomerCode,
-          salesOrganisation: fakeSaleOrganisation,
           paymentCustomerInformation: fakepaymentCustomerInformation,
-          salesOrganisationConfigs: fakeSaleOrgConfig,
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfigs: fakeMMSalesOrgConfigs,
           salesRepresentativeInfo: fakesalesRepInfo,
           user: fakeClientUser,
         ),

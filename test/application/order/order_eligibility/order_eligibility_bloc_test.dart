@@ -1,13 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
@@ -15,8 +13,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -33,8 +31,8 @@ void main() {
           fakeCartItem = (await CartLocalDataSource().upsertCartItems())[0];
           initializedState = OrderEligibilityState.initial().copyWith(
             user: fakeExternalSalesRepUser,
-            salesOrg: fakeSalesOrganisation.copyWith(salesOrg: fakeSalesOrg),
-            configs: fakeMYSalesOrgConfigs,
+            salesOrg: fakeKHSalesOrganisation,
+            configs: fakeKHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo.copyWith(division: 'div'),
             shipInfo: fakeShipToInfo.copyWith(city1: 'Kol'),
           );
@@ -93,7 +91,6 @@ void main() {
                 ),
                 type: MaterialInfoType('material'),
               ),
-              price: Price.empty(),
             )
           ],
         ),
@@ -113,7 +110,6 @@ void main() {
                   ),
                   type: MaterialInfoType('material'),
                 ),
-                price: Price.empty(),
               )
             ],
             showErrorMessage: true,
@@ -125,7 +121,9 @@ void main() {
         ' => showErrorMessage when state.isOOSOrderAllowedToSubmit is false',
         build: () => OrderEligibilityBloc(),
         seed: () => changedState.copyWith(
-          configs: fakeKHSalesOrgConfigs,
+          configs: fakeKHSalesOrgConfigs.copyWith(
+            addOosMaterials: OosMaterial(false),
+          ),
           cartItems: [
             fakeCartItem.copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
@@ -143,7 +141,9 @@ void main() {
         },
         expect: () => [
           changedState.copyWith(
-            configs: fakeKHSalesOrgConfigs,
+            configs: fakeKHSalesOrgConfigs.copyWith(
+              addOosMaterials: OosMaterial(false),
+            ),
             cartItems: [
               fakeCartItem.copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
@@ -208,8 +208,8 @@ void main() {
         act: (bloc) {
           final isMinOrderValuePassed = initializedState
               .copyWith(
-                salesOrg: SalesOrganisation.empty()
-                    .copyWith(salesOrg: SalesOrg('2902')),
+                salesOrg: fakeTHSalesOrganisation,
+                configs: fakeTHSalesOrgConfigs,
                 subTotal: 40.0,
               )
               .isMinOrderValuePassed;
@@ -223,9 +223,9 @@ void main() {
         act: (bloc) {
           final isMinOrderValuePassed = initializedState
               .copyWith(
-                salesOrg: SalesOrganisation.empty()
-                    .copyWith(salesOrg: SalesOrg('2902')),
-                subTotal: 300.0,
+                salesOrg: fakeTHSalesOrganisation,
+                configs: fakeTHSalesOrgConfigs,
+                subTotal: 100.0,
               )
               .isMinOrderValuePassed;
           expect(isMinOrderValuePassed, true);
@@ -238,9 +238,9 @@ void main() {
         act: (bloc) {
           final isMinOrderValuePassed = initializedState
               .copyWith(
-                salesOrg: SalesOrganisation.empty()
-                    .copyWith(salesOrg: SalesOrg('2902')),
-                subTotal: 310.0,
+                salesOrg: fakeTHSalesOrganisation,
+                configs: fakeTHSalesOrgConfigs,
+                subTotal: 110.0,
               )
               .isMinOrderValuePassed;
           expect(isMinOrderValuePassed, true);
@@ -292,8 +292,6 @@ void main() {
               )
             ],
             subTotal: 99,
-            configs: SalesOrganisationConfigs.empty()
-                .copyWith(minOrderAmount: '100'),
           );
 
           expect(eligibilityState.isMinOrderValuePassed, true);
@@ -306,8 +304,7 @@ void main() {
             user: initializedState.user,
             cartItems: [PriceAggregate.empty()],
             grandTotal: 99,
-            configs: SalesOrganisationConfigs.empty()
-                .copyWith(minOrderAmount: '100'),
+            configs: fakeTHSalesOrgConfigs,
           );
 
           expect(eligibilityState.isMinOrderValuePassed, false);
@@ -329,8 +326,7 @@ void main() {
               )
             ],
             grandTotal: 99,
-            configs: SalesOrganisationConfigs.empty()
-                .copyWith(minOrderAmount: '100'),
+            configs: fakeTHSalesOrgConfigs,
           );
 
           expect(eligibilityState.isMinOrderValuePassed, true);
@@ -343,8 +339,7 @@ void main() {
             user: initializedState.user,
             cartItems: [PriceAggregate.empty()],
             grandTotal: 99,
-            configs: SalesOrganisationConfigs.empty()
-                .copyWith(minOrderAmount: '100'),
+            configs: fakeTHSalesOrgConfigs,
           );
 
           expect(eligibilityState.isMinOrderValuePassed, false);

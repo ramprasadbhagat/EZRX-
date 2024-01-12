@@ -17,9 +17,9 @@ import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class OrderStatusTrackerRepositoryMock extends Mock
@@ -76,7 +76,7 @@ void main() {
           ViewByItemDetailsEvent.initialized(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
           ),
         ),
@@ -84,7 +84,7 @@ void main() {
           ViewByItemDetailsState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
           )
         ],
@@ -99,7 +99,7 @@ void main() {
         seed: () => ViewByItemDetailsState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeMYSalesOrgConfigs,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           user: fakeRootAdminUser,
         ),
         setUp: () {
@@ -120,14 +120,14 @@ void main() {
           ViewByItemDetailsState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
             isLoading: true,
           ),
           ViewByItemDetailsState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
             failureOrSuccessOption: optionOf(
               const Left(fakeError),
@@ -145,7 +145,7 @@ void main() {
         seed: () => ViewByItemDetailsState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeMYSalesOrgConfigs,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           user: fakeRootAdminUser,
         ),
         act: (bloc) => bloc.add(
@@ -155,7 +155,7 @@ void main() {
           ViewByItemDetailsState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
             isExpanded: true,
           ),
@@ -171,7 +171,7 @@ void main() {
         seed: () => ViewByItemDetailsState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeMYSalesOrgConfigs,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           user: fakeRootAdminUser,
         ),
         setUp: () {
@@ -186,7 +186,7 @@ void main() {
             () => (viewByItemRepositoryMock.getViewByItemDetails(
               soldTo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               searchKey: SearchKey(
                 fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
@@ -214,7 +214,7 @@ void main() {
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
@@ -222,7 +222,7 @@ void main() {
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
@@ -231,7 +231,7 @@ void main() {
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
@@ -240,7 +240,7 @@ void main() {
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
               orderHistoryItem: fakeOrderHistoryItem,
@@ -250,7 +250,7 @@ void main() {
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistoryStatuses: fakeOrderStatusTracker,
               orderHistory: orderHistory,
@@ -268,7 +268,7 @@ void main() {
         seed: () => ViewByItemDetailsState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeMYSalesOrgConfigs,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           user: fakeRootAdminUser,
           orderHistory: orderHistory.copyWith(
             orderHistoryItems: orderHistory.orderHistoryItems
@@ -286,7 +286,7 @@ void main() {
             () => (viewByItemRepositoryMock.getViewByItemDetails(
               soldTo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               searchKey: SearchKey(
                 fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
@@ -318,7 +318,7 @@ void main() {
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: newViewByItemDetails,
               orderHistoryItem: fakeOrderHistoryItem,
@@ -327,7 +327,7 @@ void main() {
             ViewByItemDetailsState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: newViewByItemDetails,
               orderHistoryItem: fakeOrderHistoryItem,

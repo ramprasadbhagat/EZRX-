@@ -50,7 +50,7 @@ void main() {
         setUp: () {
           when(
             () => viewByOrderRepository.getViewByOrders(
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               soldTo: fakeCustomerCodeInfo,
               user: fakeClient,
@@ -71,7 +71,7 @@ void main() {
         },
         act: (bloc) => bloc.add(
           ViewByOrderEvent.initialized(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
@@ -81,7 +81,7 @@ void main() {
         ),
         expect: () => [
           ViewByOrderState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
@@ -89,7 +89,7 @@ void main() {
             shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
@@ -100,7 +100,7 @@ void main() {
             shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
@@ -129,7 +129,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClient,
           sortDirection: fakeSort,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           shipToInfo: fakeShipToInfo,
         ),
         setUp: () {
@@ -145,7 +145,7 @@ void main() {
               searchKey: searchKey,
               viewByOrder: ViewByOrder.empty(),
               viewByOrdersFilter: viewByOrdersFilter,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
@@ -169,7 +169,7 @@ void main() {
             isFetching: true,
             searchKey: searchKey,
             appliedFilter: viewByOrdersFilter,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderState.initial().copyWith(
@@ -185,7 +185,7 @@ void main() {
             appliedFilter: viewByOrdersFilter,
             isFetching: false,
             searchKey: searchKey,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
           )
         ],
@@ -198,7 +198,7 @@ void main() {
           config: config,
         ),
         seed: () => ViewByOrderState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClient,
@@ -221,7 +221,7 @@ void main() {
               sort: fakeSort,
               searchKey: searchKey,
               viewByOrder: viewByOrderMockData,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
@@ -235,7 +235,7 @@ void main() {
         ),
         expect: () => [
           ViewByOrderState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             user: fakeClient,
@@ -247,7 +247,7 @@ void main() {
             shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
@@ -272,7 +272,7 @@ void main() {
           config: config,
         ),
         seed: () => ViewByOrderState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClient,
@@ -295,7 +295,7 @@ void main() {
               sort: fakeSort,
               searchKey: searchKey,
               viewByOrder: viewByOrderMockData,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
@@ -307,7 +307,7 @@ void main() {
         ),
         expect: () => [
           ViewByOrderState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
@@ -319,7 +319,7 @@ void main() {
             isFetching: true,
           ),
           ViewByOrderState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,

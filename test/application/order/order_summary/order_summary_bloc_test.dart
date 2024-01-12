@@ -14,9 +14,9 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
@@ -45,7 +45,7 @@ void main() {
     customerCodeInfo: fakeCustomerCodeInfo.copyWith(division: 'div'),
     shipToInfo: fakeShipToInfo,
     salesOrgConfig: fakePHSalesOrgConfigs,
-    salesOrganisation: fakeSalesOrganisation.copyWith(salesOrg: fakeSalesOrg),
+    salesOrganisation: fakePHSalesOrganisation,
     orderDocumentType: OrderDocumentType.empty(),
   );
   final stockInfoList = <MaterialStockInfo>[MaterialStockInfo.empty()];
@@ -84,8 +84,7 @@ void main() {
             shipToInfo: seedState.shipToInfo,
             user: seedState.user,
             customerCodeInfo: seedState.customerCodeInfo,
-            salesOrganisation:
-                seedState.salesOrganisation.copyWith(salesOrg: fakeSalesOrg),
+            salesOrganisation: fakePHSalesOrganisation,
             data: DeliveryInfoData.empty(),
             orderDocumentType: seedState.orderDocumentType,
             configs: seedState.salesOrgConfig,
@@ -144,8 +143,7 @@ void main() {
             ],
             grandTotal: 100.0,
             customerCodeInfo: seedState.customerCodeInfo,
-            salesOrganisation:
-                seedState.salesOrganisation.copyWith(salesOrg: fakeSalesOrg),
+            salesOrganisation: seedState.salesOrganisation,
             data: DeliveryInfoData.empty(),
             orderDocumentType: seedState.orderDocumentType,
             configs: seedState.salesOrgConfig,
@@ -194,8 +192,7 @@ void main() {
             shipToInfo: seedState.shipToInfo,
             user: seedState.user,
             customerCodeInfo: seedState.customerCodeInfo,
-            salesOrganisation:
-                seedState.salesOrganisation.copyWith(salesOrg: fakeSalesOrg),
+            salesOrganisation: seedState.salesOrganisation,
             data: DeliveryInfoData.empty(),
             orderDocumentType: seedState.orderDocumentType,
             configs: seedState.salesOrgConfig,
@@ -354,8 +351,7 @@ void main() {
           () => orderRepositoryMock.getOrderConfirmationDetail(
             user: seedState.user,
             customerCodeInfo: seedState.customerCodeInfo,
-            salesOrganisation:
-                fakeSalesOrganisation.copyWith(salesOrg: fakeSalesOrg),
+            salesOrganisation: seedState.salesOrganisation,
             orderResponse: submitOrderResponse,
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(

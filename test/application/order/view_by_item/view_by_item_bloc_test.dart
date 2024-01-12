@@ -85,7 +85,7 @@ void main() {
             offset: offSet,
             searchKey: searchKey,
             viewByItemFilter: viewByItemFilter,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -108,7 +108,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClient,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         ),
       ),
       expect: () => [
@@ -117,14 +117,14 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         ),
         ViewByItemsState.initial().copyWith(
           salesOrgConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           isFetching: true,
           nextPageIndex: 0,
           searchKey: searchKey,
@@ -143,7 +143,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         ),
         ViewByItemsState.initial().copyWith(
           isFetchingInvoices: true,
@@ -156,7 +156,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         ),
         ViewByItemsState.initial().copyWith(
           orderHistory: orderHistoryMock.copyWith(
@@ -170,7 +170,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         ),
       ],
     );
@@ -186,7 +186,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: fakeClient,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
       ),
       setUp: () {
         when(
@@ -199,7 +199,7 @@ void main() {
             offset: offSet,
             searchKey: searchKey,
             viewByItemFilter: viewByItemFilter,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -219,7 +219,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           isFetching: true,
           searchKey: searchKey,
           appliedFilter: viewByItemFilter,
@@ -234,7 +234,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           searchKey: searchKey,
           appliedFilter: viewByItemFilter,
         )
@@ -260,7 +260,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: fakeClient,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
       ),
       setUp: () {
         when(
@@ -290,7 +290,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         ),
         ViewByItemsState.initial().copyWith(
           failureOrSuccessOption: optionOf(
@@ -307,7 +307,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         )
       ],
     );
@@ -329,7 +329,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: fakeClient,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
       ),
       setUp: () {
         when(
@@ -342,7 +342,7 @@ void main() {
             offset: orderHistoryItemsListMock.length,
             searchKey: searchKey,
             viewByItemFilter: viewByItemFilter,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -392,7 +392,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
           ViewByItemsState.initial().copyWith(
             orderHistory: orderHistoryMock.copyWith(
@@ -410,7 +410,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
           ViewByItemsState.initial().copyWith(
             isFetchingInvoices: true,
@@ -424,7 +424,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
           ViewByItemsState.initial().copyWith(
             orderHistory: orderHistoryMock.copyWith(
@@ -437,7 +437,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         ];
       },
@@ -460,7 +460,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: fakeClient,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
       ),
       setUp: () {
         when(
@@ -473,7 +473,7 @@ void main() {
             offset: orderHistoryItemsListMock.length,
             searchKey: searchKey,
             viewByItemFilter: viewByItemFilter,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -500,7 +500,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         ),
         ViewByItemsState.initial().copyWith(
           failureOrSuccessOption: optionOf(
@@ -518,7 +518,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         ),
       ],
     );

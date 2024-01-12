@@ -1,20 +1,22 @@
-import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 
+import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
-import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../common_mock_data/user_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -27,8 +29,8 @@ void main() {
         fakeCartItem = (await CartLocalDataSource().upsertCartItems())[0];
         initializedState = OrderEligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
-          salesOrg: fakeSalesOrganisation.copyWith(salesOrg: fakeSalesOrg),
-          configs: fakeKHSalesOrgConfigs,
+          salesOrg: fakeMYSalesOrganisation,
+          configs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo.copyWith(division: 'div'),
           shipInfo: fakeShipToInfo.copyWith(city1: 'Kol'),
         );
@@ -53,9 +55,7 @@ void main() {
       // containsRegularMaterials is true
       final changeState = initializedState.copyWith(
         cartItems: [
-          fakeCartItem.copyWith(
-            materialInfo: MaterialInfo.empty(),
-          ),
+          fakeCartItem,
         ],
       );
       expect(changeState.containsRegularMaterials, true);
@@ -98,6 +98,9 @@ void main() {
             ),
           ),
         ],
+        configs: fakeKHSalesOrgConfigs.copyWith(
+          addOosMaterials: OosMaterial(false),
+        ),
       );
       expect(modifiedState.isOOSAllowedIfPresentInCart, false);
     });
@@ -107,6 +110,9 @@ void main() {
       expect(initializedState.displayOOSWarning, false);
       // displayOOSWarning is true
       final modifiedState = initializedState.copyWith(
+        configs: fakeKHSalesOrgConfigs.copyWith(
+          addOosMaterials: OosMaterial(false),
+        ),
         cartItems: [
           fakeCartItem.copyWith(
             materialInfo: MaterialInfo.empty().copyWith(
@@ -181,11 +187,20 @@ void main() {
 
     test(' => isOOSOrderAllowedToSubmit should return correct value', () {
       // isOOSOrderAllowedToSubmit is false
-      expect(initializedState.isOOSOrderAllowedToSubmit, false);
+      expect(
+        initializedState
+            .copyWith(
+              configs: fakeKHSalesOrgConfigs,
+            )
+            .isOOSOrderAllowedToSubmit,
+        false,
+      );
 
       // isOOSOrderAllowedToSubmit is true
       final modifiedState = initializedState.copyWith(
-        configs: fakeMYSalesOrgConfigs,
+        configs: fakeMYSalesOrgConfigs.copyWith(
+          oosValue: OosValue(0),
+        ),
       );
       expect(modifiedState.isOOSOrderAllowedToSubmit, true);
     });
@@ -198,11 +213,11 @@ void main() {
       expect(state.displayMWPNotAllowedWarning, false);
 
       // displayMWPNotAllowedWarning is true
-      final modifiedState = state.copyWith(
+      final modifiedState = initializedState.copyWith(
+        configs: fakePHSalesOrgConfigs,
         showErrorMessage: true,
         cartItems: [
           fakeCartItem.copyWith(
-            price: Price.empty(),
             materialInfo: MaterialInfo.empty().copyWith(
               type: MaterialInfoType('material'),
             ),
@@ -221,7 +236,6 @@ void main() {
         showErrorMessage: true,
         cartItems: [
           fakeCartItem.copyWith(
-            price: Price.empty(),
             materialInfo: MaterialInfo.empty().copyWith(
               type: MaterialInfoType('material'),
               isSuspended: true,
@@ -266,10 +280,8 @@ void main() {
 
       // displayCartPagePriceMessage is true
       final modifiedState = initializedState.copyWith(
-        configs: fakeMYSalesOrgConfigs,
         cartItems: [
           fakeCartItem.copyWith(
-            price: Price.empty(),
             materialInfo: MaterialInfo.empty().copyWith(
               type: MaterialInfoType('material'),
               isSuspended: true,
@@ -286,6 +298,9 @@ void main() {
 
       // invalidBundleCartItems is not empty
       final modifiedState = initializedState.copyWith(
+        configs: fakeKHSalesOrgConfigs.copyWith(
+          addOosMaterials: OosMaterial(false),
+        ),
         showErrorMessage: true,
         cartItems: [
           fakeCartItem.copyWith(
@@ -381,7 +396,6 @@ void main() {
       expect(initializedState.eligibleForOrderSubmit, false);
       // eligibleForOrderSubmit is true
       final modifiedState = initializedState.copyWith(
-        configs: fakeMYSalesOrgConfigs,
         orderType: 'ZPFC',
         cartItems: [
           fakeCartItem.copyWith(
@@ -391,7 +405,6 @@ void main() {
               ),
               type: MaterialInfoType('material'),
             ),
-            price: Price.empty(),
             stockInfoList: [StockInfo.empty()],
           ),
         ],

@@ -36,7 +36,7 @@ void main() {
   final initializedState = ReOrderPermissionState.initial().copyWith(
     salesOrganisationConfigs: fakeMYSalesOrgConfigs,
     customerCodeInfo: fakeCustomerCodeInfo,
-    salesOrganisation: fakeSalesOrganisation,
+    salesOrganisation: fakeMYSalesOrganisation,
     shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
   );
 
@@ -73,7 +73,7 @@ void main() {
         ReOrderPermissionEvent.initialized(
           salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
         ),
       ),
@@ -92,7 +92,7 @@ void main() {
             materialNumbers: fakeOrderHistoryDetailsOrderItems
                 .map((e) => e.materialNumber)
                 .toList(),
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
         ).thenAnswer(
@@ -131,7 +131,7 @@ void main() {
             materialNumbers: fakeOrderHistoryDetailsOrderItems
                 .map((e) => e.materialNumber)
                 .toList(),
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
         ).thenAnswer(
@@ -190,7 +190,7 @@ void main() {
             materialNumbers: [
               fakeViewByItemDetail.orderHistoryItems.first.materialNumber
             ],
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
         ).thenAnswer(
@@ -228,7 +228,7 @@ void main() {
           () => repository.getReorderPermission(
             customerCodeInfo: fakeCustomerCodeInfo,
             materialNumbers: [fakeOrderHistoryItem.materialNumber],
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
         ).thenAnswer(
@@ -270,7 +270,7 @@ void main() {
           () => repository.getReorderPermission(
             customerCodeInfo: fakeCustomerCodeInfo,
             materialNumbers: [fakeOrderHistoryItem.materialNumber],
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
         ).thenAnswer(
@@ -333,7 +333,7 @@ void main() {
           () => repository.getReorderPermission(
             customerCodeInfo: fakeCustomerCodeInfo,
             materialNumbers: [fakeOrderHistoryItem.materialNumber],
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
         ).thenAnswer(

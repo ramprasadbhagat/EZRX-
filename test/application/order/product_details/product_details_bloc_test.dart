@@ -51,7 +51,7 @@ void main() {
   );
   final mockInitialState = ProductDetailState.initial().copyWith(
     customerCodeInfo: fakeCustomerCodeInfo,
-    salesOrganisation: fakeSalesOrganisation,
+    salesOrganisation: fakeMYSalesOrganisation,
     shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
   );
 
@@ -112,7 +112,7 @@ void main() {
         act: (ProductDetailBloc bloc) => bloc.add(
           ProductDetailEvent.initialized(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeUserWithLanguageCode,
           ),
@@ -120,7 +120,7 @@ void main() {
         expect: () => [
           ProductDetailState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeUserWithLanguageCode,
           ),
@@ -137,7 +137,7 @@ void main() {
           when(
             () => productDetailMockRepository.getProductDetail(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               language: language,
               materialNumber: mockMaterialInfo.materialNumber,
@@ -149,7 +149,7 @@ void main() {
           when(
             () => productDetailMockRepository.getStockInfo(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               materialNumber: mockMaterialInfo.materialNumber,
             ),
           ).thenAnswer((invocation) async => Right(mockStockInfo));
@@ -157,7 +157,7 @@ void main() {
             () => productDetailMockRepository.getProductsMetaData(
               materialNumbers: [mockMaterialInfo.materialNumber],
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -167,7 +167,7 @@ void main() {
           when(
             () => productDetailMockRepository.getSimilarProduct(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               materialNumber: mockMaterialInfo.materialNumber,
               principalCode: mockMaterialInfo.principalData.principalCode,
@@ -250,7 +250,7 @@ void main() {
           when(
             () => productDetailMockRepository.getProductDetail(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               language: language,
               materialNumber: mockMaterialInfo.materialNumber,
@@ -262,7 +262,7 @@ void main() {
           when(
             () => productDetailMockRepository.getStockInfoList(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               materials: mockMaterialInfo.bundle.materials,
             ),
           ).thenAnswer((invocation) async => Right(mockMaterialStockInfo));
@@ -270,7 +270,7 @@ void main() {
             () => productDetailMockRepository.getProductsMetaData(
               materialNumbers: [mockMaterialInfo.materialNumber],
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -346,7 +346,7 @@ void main() {
           when(
             () => productDetailMockRepository.getProductDetail(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               language: language,
               materialNumber: mockMaterialInfo.materialNumber,
@@ -388,7 +388,7 @@ void main() {
           when(
             () => productDetailMockRepository.getStockInfo(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               materialNumber: mockMaterialInfo.materialNumber,
             ),
           ).thenAnswer(
@@ -434,7 +434,7 @@ void main() {
           when(
             () => productDetailMockRepository.getStockInfoList(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               materials: fakeMaterialInfoWithBundleMaterial.bundle.materials,
             ),
           ).thenAnswer(
@@ -482,7 +482,7 @@ void main() {
           when(
             () => productDetailMockRepository.getStockInfoList(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               materials: mockMaterialInfo.bundle.materials,
             ),
           ).thenAnswer(
@@ -529,7 +529,7 @@ void main() {
             () => productDetailMockRepository.getProductsMetaData(
               materialNumbers: [mockMaterialInfo.materialNumber],
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -575,7 +575,7 @@ void main() {
           when(
             () => productDetailMockRepository.getSimilarProduct(
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               materialNumber: mockMaterialInfo.materialNumber,
               principalCode: mockMaterialInfo.principalData.principalCode,

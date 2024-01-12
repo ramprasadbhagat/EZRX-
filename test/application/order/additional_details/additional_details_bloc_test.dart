@@ -1,17 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 
 class OrderRepositoryMock extends Mock implements OrderRepository {}
 
@@ -19,23 +21,12 @@ class CartRepositoryMock extends Mock implements CartRepository {}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  late SalesOrganisationConfigs config;
-  late CustomerCodeInfo customerCodeInfo;
   late DeliveryInfoData data;
   group(
     'Additional Details Bloc Test',
     () {
       setUp(
         () {
-          config = SalesOrganisationConfigs.empty().copyWith(
-            enableMobileNumber: true,
-            poNumberRequired: PoNumberRequired(true),
-            enablePaymentTerms: true,
-            enableFutureDeliveryDay: true,
-            futureDeliveryDay: FutureDeliveryDay('4'),
-            enableReferenceNote: true,
-          );
-          customerCodeInfo = CustomerCodeInfo.empty();
           data = DeliveryInfoData.empty();
         },
       );
@@ -44,8 +35,8 @@ void main() {
         build: () => AdditionalDetailsBloc(),
         act: (bloc) => bloc.add(
           AdditionalDetailsEvent.initialized(
-            config: config,
-            customerCodeInfo: customerCodeInfo,
+            config: fakeIDSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
           ),
         ),
         expect: () => [
@@ -54,7 +45,7 @@ void main() {
               deliveryDate: DateTimeStringValue(''),
               mobileNumber: MobileNumber(''),
             ),
-            config: config,
+            config: fakeIDSalesOrgConfigs,
           )
         ],
       );
@@ -64,10 +55,10 @@ void main() {
         build: () => AdditionalDetailsBloc(),
         act: (bloc) => bloc.add(
           AdditionalDetailsEvent.initialized(
-            config: config.copyWith(
+            config: fakeIDSalesOrgConfigs.copyWith(
               futureDeliveryDay: FutureDeliveryDay(''),
             ),
-            customerCodeInfo: customerCodeInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
           ),
         ),
         expect: () => [
@@ -76,7 +67,7 @@ void main() {
               deliveryDate: DateTimeStringValue(''),
               mobileNumber: MobileNumber(''),
             ),
-            config: config.copyWith(
+            config: fakeIDSalesOrgConfigs.copyWith(
               futureDeliveryDay: FutureDeliveryDay(''),
             ),
           )
@@ -89,7 +80,7 @@ void main() {
         act: (bloc) => bloc.add(
           AdditionalDetailsEvent.initiateFromHistory(
             data: data,
-            customerCodeInfo: customerCodeInfo.copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo.copyWith(
               telephoneNumber: PhoneNumber('1234567890'),
             ),
           ),
@@ -294,7 +285,7 @@ void main() {
             referenceNote: ReferenceNote('Reference Note Test'),
             deliveryInstruction: DeliveryInstruction('Instruction Test'),
           ),
-          config: config,
+          config: fakeTHSalesOrgConfigs.copyWith(enableMobileNumber: true),
         ),
         act: (AdditionalDetailsBloc bloc) {
           bloc.add(
@@ -305,7 +296,7 @@ void main() {
           AdditionalDetailsState.initial().copyWith(
             isValidated: false,
             showErrorMessages: true,
-            config: config,
+            config: fakeTHSalesOrgConfigs.copyWith(enableMobileNumber: true),
             focusTo: DeliveryInfoLabel.contactPerson,
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poReference: PoReference('CO REF'),

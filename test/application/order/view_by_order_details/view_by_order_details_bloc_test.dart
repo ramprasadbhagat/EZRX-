@@ -86,7 +86,7 @@ void main() {
           ViewByOrderDetailsEvent.initialized(
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             configs: fakeMYSalesOrgConfigs,
           ),
@@ -95,7 +95,7 @@ void main() {
           ViewByOrderDetailsState.initial().copyWith(
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             configs: fakeMYSalesOrgConfigs,
           ),
@@ -111,7 +111,7 @@ void main() {
         seed: () => ViewByOrderDetailsState.initial().copyWith(
           user: fakeClient,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           shipToInfo: fakeShipToInfo,
         ),
         setUp: () {
@@ -120,7 +120,7 @@ void main() {
               user: fakeClient,
               orderNumber: fakeOrderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer((invocation) async => Right(orderHistoryDetailsMock));
@@ -134,14 +134,14 @@ void main() {
           ViewByOrderDetailsState.initial().copyWith(
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             isLoading: true,
           ),
           ViewByOrderDetailsState.initial().copyWith(
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             orderHistoryDetails: orderHistoryDetailsMock,
             failureOrSuccessOption: optionOf(Right(orderHistoryDetailsMock)),
@@ -160,7 +160,7 @@ void main() {
         seed: () => ViewByOrderDetailsState.initial().copyWith(
           user: fakeClient,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           shipToInfo: fakeShipToInfo,
         ),
         setUp: () {
@@ -169,7 +169,7 @@ void main() {
               user: fakeClient,
               orderNumber: fakeOrderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
@@ -186,14 +186,14 @@ void main() {
             isLoading: true,
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
           ),
           ViewByOrderDetailsState.initial().copyWith(
             isLoading: false,
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             failureOrSuccessOption: optionOf(
               const Left(
@@ -213,7 +213,7 @@ void main() {
         seed: () => ViewByOrderDetailsState.initial().copyWith(
           user: fakeClient,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         ),
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.setOrderDetails(
@@ -224,7 +224,7 @@ void main() {
           ViewByOrderDetailsState.initial().copyWith(
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             orderHistoryDetails: orderHistoryDetailsMock,
             materials: fakeMaterials,
             isLoadingTenderContract: fakeIsLoadingTenderContract,
@@ -247,7 +247,7 @@ void main() {
         seed: () => ViewByOrderDetailsState.initial().copyWith(
           user: fakeClient,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
           orderHistoryDetails: orderHistoryDetailsMock,
           materials: fakeMaterials,
           isLoadingTenderContract: fakeIsLoadingTenderContract,
@@ -280,7 +280,7 @@ void main() {
             ViewByOrderDetailsState.initial().copyWith(
               user: fakeClient,
               customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeMYSalesOrganisation,
               orderHistoryDetails: orderHistoryDetailsMock,
               materials: materialsWithUpdatedTenderContract,
               isLoadingTenderContract: loadingTenderContractStatus,

@@ -26,13 +26,13 @@ void main() {
       act: (ViewByOrderFilterBloc bloc) {
         bloc.add(
           ViewByOrderFilterEvent.initialized(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
       },
       expect: () => [
         ViewByOrderFilterState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeMYSalesOrganisation,
         )
       ],
     );
@@ -125,7 +125,7 @@ void main() {
 
     test('Get order status list in other market', () {
       final viewByOrderFilterState = ViewByOrderFilterState.initial().copyWith(
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeMYSalesOrganisation,
       );
 
       expect(viewByOrderFilterState.statusList, <StatusType>[]);
