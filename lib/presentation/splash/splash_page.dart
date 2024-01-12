@@ -6,8 +6,10 @@ import 'package:ezrxmobile/application/account/payment_configuration/sales_distr
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
@@ -1360,6 +1362,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               user: user,
               salesOrg: salesOrgState.salesOrg,
               shipToInfo: state.shipToInfo,
+            ),
+          );
+      context.read<ArticlesInfoFilterBloc>().add(
+            ArticlesInfoFilterEvent.fetchCategory(
+              salesOrg: salesOrgState.salesOrg,
+            ),
+          );
+      context.read<AnnouncementFilterBloc>().add(
+            AnnouncementFilterEvent.fetchCategory(
+              salesOrg: salesOrgState.salesOrg,
             ),
           );
 

@@ -11,6 +11,7 @@ class AnnouncementInfoState with _$AnnouncementInfoState {
     required bool isLoading,
     required bool canLoadMore,
     required SearchKey searchKey,
+    required List<String> categoryKeyList,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
   }) = _AnnouncementInfoState;
 
@@ -20,10 +21,14 @@ class AnnouncementInfoState with _$AnnouncementInfoState {
         isLoading: false,
         canLoadMore: true,
         searchKey: SearchKey.searchFilter(''),
+        categoryKeyList: <String>[],
         announcementInfo: AnnouncementArticleInfo.empty(),
         apiFailureOrSuccessOption: none(),
       );
 
-  List<AnnouncementArticleItem> get searchedAnnouncementList => announcementInfo
-      .filterAnnouncementListBySearchKey(searchKey.searchValueOrEmpty);
+  List<AnnouncementArticleItem> get searchedAnnouncementList =>
+      announcementInfo.filterAnnouncementListBySearchKey(
+        searchKey.searchValueOrEmpty,
+        categoryKeyList,
+      );
 }

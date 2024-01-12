@@ -177,28 +177,6 @@ class _AnnouncementInfoDetailsPageState
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  state.announcementInfoDetails.tag.isNotEmpty
-                                      ? Container(
-                                          padding: const EdgeInsets.all(6),
-                                          margin: const EdgeInsets.only(
-                                            top: 6,
-                                            right: 5,
-                                            bottom: 8,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: ZPColors.paleBlueGray,
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                          ),
-                                          child: Text(
-                                            state.announcementInfoDetails.tag,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodySmall
-                                                ?.copyWith(fontSize: 10),
-                                          ),
-                                        )
-                                      : const SizedBox.shrink(),
                                   Html(
                                     style: {
                                       'body': Style(

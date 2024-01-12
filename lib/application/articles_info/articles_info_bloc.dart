@@ -137,6 +137,13 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
           );
         }
       },
+      setCategoryKey: (e) {
+        emit(
+          state.copyWith(
+            categoryKeyList: e.categoryKeyList,
+          ),
+        );
+      },
     );
   }
 

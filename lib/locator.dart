@@ -19,9 +19,11 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
@@ -180,9 +182,13 @@ import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_l
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_remote.dart';
 import 'package:ezrxmobile/infrastructure/announcement/repository/announcement_repository.dart';
+import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_article_tag_local.dart';
+import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_article_tag_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_article_tag_remote.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/announcement_info/repository/announcement_article_tag_repository.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/repository/announcement_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_query_mutation.dart';
@@ -2850,6 +2856,31 @@ void setupLocator() {
     ),
   );
 
+  locator.registerLazySingleton(() => AnnouncementArticleTagQueryMutation());
+  locator.registerLazySingleton(() => AnnouncementArticleTagLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => AnnouncementArticlTagRemoteDataSource(
+      httpService: locator<HttpService>(),
+      exceptionHandler: locator<DataSourceExceptionHandler>(),
+      queryMutation: locator<AnnouncementArticleTagQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AnnouncementArticleTagRepository(
+      config: locator<Config>(),
+      localDataSource: locator<AnnouncementArticleTagLocalDataSource>(),
+      remoteDataSource: locator<AnnouncementArticlTagRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => ArticlesInfoFilterBloc(
+      announcementArticleTagRepository:
+          locator<AnnouncementArticleTagRepository>(),
+    ),
+  );
+
   //============================================================
   //  Announcement
   //
@@ -2884,6 +2915,12 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AnnouncementInfoDetailsBloc(
       announcementInfoRepository: locator<AnnouncementInfoRepository>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => AnnouncementFilterBloc(
+      announcementArticleTagRepository:
+          locator<AnnouncementArticleTagRepository>(),
     ),
   );
   //============================================================

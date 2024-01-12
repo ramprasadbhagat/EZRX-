@@ -15,4 +15,8 @@ class ArticlesInfoEvent with _$ArticlesInfoEvent {
   const factory ArticlesInfoEvent.setSearchKey({
     required String searchKey,
   }) = _SetSearchKey;
+
+  const factory ArticlesInfoEvent.setCategoryKey({
+    required List<String> categoryKeyList,
+  }) = _SetCategoryKey;
 }

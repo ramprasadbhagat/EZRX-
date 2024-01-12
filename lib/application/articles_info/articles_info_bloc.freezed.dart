@@ -24,6 +24,7 @@ mixin _$ArticlesInfoEvent {
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
     required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +34,7 @@ mixin _$ArticlesInfoEvent {
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +44,7 @@ mixin _$ArticlesInfoEvent {
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
+    TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,7 @@ mixin _$ArticlesInfoEvent {
     required TResult Function(_GetArticles value) getArticles,
     required TResult Function(_LoadMoreArticles value) loadMoreArticles,
     required TResult Function(_SetSearchKey value) setSearchKey,
+    required TResult Function(_SetCategoryKey value) setCategoryKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +63,7 @@ mixin _$ArticlesInfoEvent {
     TResult? Function(_GetArticles value)? getArticles,
     TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult? Function(_SetSearchKey value)? setSearchKey,
+    TResult? Function(_SetCategoryKey value)? setCategoryKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +72,7 @@ mixin _$ArticlesInfoEvent {
     TResult Function(_GetArticles value)? getArticles,
     TResult Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult Function(_SetSearchKey value)? setSearchKey,
+    TResult Function(_SetCategoryKey value)? setCategoryKey,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -198,6 +204,7 @@ class _$_Initialize implements _Initialize {
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
     required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) {
     return initialize(user, salesOrg, shipToInfo);
   }
@@ -210,6 +217,7 @@ class _$_Initialize implements _Initialize {
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) {
     return initialize?.call(user, salesOrg, shipToInfo);
   }
@@ -222,6 +230,7 @@ class _$_Initialize implements _Initialize {
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
+    TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -237,6 +246,7 @@ class _$_Initialize implements _Initialize {
     required TResult Function(_GetArticles value) getArticles,
     required TResult Function(_LoadMoreArticles value) loadMoreArticles,
     required TResult Function(_SetSearchKey value) setSearchKey,
+    required TResult Function(_SetCategoryKey value) setCategoryKey,
   }) {
     return initialize(this);
   }
@@ -248,6 +258,7 @@ class _$_Initialize implements _Initialize {
     TResult? Function(_GetArticles value)? getArticles,
     TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult? Function(_SetSearchKey value)? setSearchKey,
+    TResult? Function(_SetCategoryKey value)? setCategoryKey,
   }) {
     return initialize?.call(this);
   }
@@ -259,6 +270,7 @@ class _$_Initialize implements _Initialize {
     TResult Function(_GetArticles value)? getArticles,
     TResult Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult Function(_SetSearchKey value)? setSearchKey,
+    TResult Function(_SetCategoryKey value)? setCategoryKey,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -326,6 +338,7 @@ class _$_GetArticles implements _GetArticles {
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
     required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) {
     return getArticles();
   }
@@ -338,6 +351,7 @@ class _$_GetArticles implements _GetArticles {
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) {
     return getArticles?.call();
   }
@@ -350,6 +364,7 @@ class _$_GetArticles implements _GetArticles {
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
+    TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) {
     if (getArticles != null) {
@@ -365,6 +380,7 @@ class _$_GetArticles implements _GetArticles {
     required TResult Function(_GetArticles value) getArticles,
     required TResult Function(_LoadMoreArticles value) loadMoreArticles,
     required TResult Function(_SetSearchKey value) setSearchKey,
+    required TResult Function(_SetCategoryKey value) setCategoryKey,
   }) {
     return getArticles(this);
   }
@@ -376,6 +392,7 @@ class _$_GetArticles implements _GetArticles {
     TResult? Function(_GetArticles value)? getArticles,
     TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult? Function(_SetSearchKey value)? setSearchKey,
+    TResult? Function(_SetCategoryKey value)? setCategoryKey,
   }) {
     return getArticles?.call(this);
   }
@@ -387,6 +404,7 @@ class _$_GetArticles implements _GetArticles {
     TResult Function(_GetArticles value)? getArticles,
     TResult Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult Function(_SetSearchKey value)? setSearchKey,
+    TResult Function(_SetCategoryKey value)? setCategoryKey,
     required TResult orElse(),
   }) {
     if (getArticles != null) {
@@ -444,6 +462,7 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
     required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) {
     return loadMoreArticles();
   }
@@ -456,6 +475,7 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) {
     return loadMoreArticles?.call();
   }
@@ -468,6 +488,7 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
+    TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) {
     if (loadMoreArticles != null) {
@@ -483,6 +504,7 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
     required TResult Function(_GetArticles value) getArticles,
     required TResult Function(_LoadMoreArticles value) loadMoreArticles,
     required TResult Function(_SetSearchKey value) setSearchKey,
+    required TResult Function(_SetCategoryKey value) setCategoryKey,
   }) {
     return loadMoreArticles(this);
   }
@@ -494,6 +516,7 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
     TResult? Function(_GetArticles value)? getArticles,
     TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult? Function(_SetSearchKey value)? setSearchKey,
+    TResult? Function(_SetCategoryKey value)? setCategoryKey,
   }) {
     return loadMoreArticles?.call(this);
   }
@@ -505,6 +528,7 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
     TResult Function(_GetArticles value)? getArticles,
     TResult Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult Function(_SetSearchKey value)? setSearchKey,
+    TResult Function(_SetCategoryKey value)? setCategoryKey,
     required TResult orElse(),
   }) {
     if (loadMoreArticles != null) {
@@ -589,6 +613,7 @@ class _$_SetSearchKey implements _SetSearchKey {
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
     required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) {
     return setSearchKey(searchKey);
   }
@@ -601,6 +626,7 @@ class _$_SetSearchKey implements _SetSearchKey {
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
     TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) {
     return setSearchKey?.call(searchKey);
   }
@@ -613,6 +639,7 @@ class _$_SetSearchKey implements _SetSearchKey {
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
     TResult Function(String searchKey)? setSearchKey,
+    TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) {
     if (setSearchKey != null) {
@@ -628,6 +655,7 @@ class _$_SetSearchKey implements _SetSearchKey {
     required TResult Function(_GetArticles value) getArticles,
     required TResult Function(_LoadMoreArticles value) loadMoreArticles,
     required TResult Function(_SetSearchKey value) setSearchKey,
+    required TResult Function(_SetCategoryKey value) setCategoryKey,
   }) {
     return setSearchKey(this);
   }
@@ -639,6 +667,7 @@ class _$_SetSearchKey implements _SetSearchKey {
     TResult? Function(_GetArticles value)? getArticles,
     TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult? Function(_SetSearchKey value)? setSearchKey,
+    TResult? Function(_SetCategoryKey value)? setCategoryKey,
   }) {
     return setSearchKey?.call(this);
   }
@@ -650,6 +679,7 @@ class _$_SetSearchKey implements _SetSearchKey {
     TResult Function(_GetArticles value)? getArticles,
     TResult Function(_LoadMoreArticles value)? loadMoreArticles,
     TResult Function(_SetSearchKey value)? setSearchKey,
+    TResult Function(_SetCategoryKey value)? setCategoryKey,
     required TResult orElse(),
   }) {
     if (setSearchKey != null) {
@@ -670,6 +700,170 @@ abstract class _SetSearchKey implements ArticlesInfoEvent {
 }
 
 /// @nodoc
+abstract class _$$_SetCategoryKeyCopyWith<$Res> {
+  factory _$$_SetCategoryKeyCopyWith(
+          _$_SetCategoryKey value, $Res Function(_$_SetCategoryKey) then) =
+      __$$_SetCategoryKeyCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> categoryKeyList});
+}
+
+/// @nodoc
+class __$$_SetCategoryKeyCopyWithImpl<$Res>
+    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$_SetCategoryKey>
+    implements _$$_SetCategoryKeyCopyWith<$Res> {
+  __$$_SetCategoryKeyCopyWithImpl(
+      _$_SetCategoryKey _value, $Res Function(_$_SetCategoryKey) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? categoryKeyList = null,
+  }) {
+    return _then(_$_SetCategoryKey(
+      categoryKeyList: null == categoryKeyList
+          ? _value._categoryKeyList
+          : categoryKeyList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetCategoryKey implements _SetCategoryKey {
+  const _$_SetCategoryKey({required final List<String> categoryKeyList})
+      : _categoryKeyList = categoryKeyList;
+
+  final List<String> _categoryKeyList;
+  @override
+  List<String> get categoryKeyList {
+    if (_categoryKeyList is EqualUnmodifiableListView) return _categoryKeyList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categoryKeyList);
+  }
+
+  @override
+  String toString() {
+    return 'ArticlesInfoEvent.setCategoryKey(categoryKeyList: $categoryKeyList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetCategoryKey &&
+            const DeepCollectionEquality()
+                .equals(other._categoryKeyList, _categoryKeyList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_categoryKeyList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetCategoryKeyCopyWith<_$_SetCategoryKey> get copyWith =>
+      __$$_SetCategoryKeyCopyWithImpl<_$_SetCategoryKey>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            User user, SalesOrg salesOrg, ShipToInfo shipToInfo)
+        initialize,
+    required TResult Function() getArticles,
+    required TResult Function() loadMoreArticles,
+    required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(List<String> categoryKeyList) setCategoryKey,
+  }) {
+    return setCategoryKey(categoryKeyList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
+    TResult? Function()? getArticles,
+    TResult? Function()? loadMoreArticles,
+    TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(List<String> categoryKeyList)? setCategoryKey,
+  }) {
+    return setCategoryKey?.call(categoryKeyList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipToInfo)?
+        initialize,
+    TResult Function()? getArticles,
+    TResult Function()? loadMoreArticles,
+    TResult Function(String searchKey)? setSearchKey,
+    TResult Function(List<String> categoryKeyList)? setCategoryKey,
+    required TResult orElse(),
+  }) {
+    if (setCategoryKey != null) {
+      return setCategoryKey(categoryKeyList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_GetArticles value) getArticles,
+    required TResult Function(_LoadMoreArticles value) loadMoreArticles,
+    required TResult Function(_SetSearchKey value) setSearchKey,
+    required TResult Function(_SetCategoryKey value) setCategoryKey,
+  }) {
+    return setCategoryKey(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_GetArticles value)? getArticles,
+    TResult? Function(_LoadMoreArticles value)? loadMoreArticles,
+    TResult? Function(_SetSearchKey value)? setSearchKey,
+    TResult? Function(_SetCategoryKey value)? setCategoryKey,
+  }) {
+    return setCategoryKey?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_GetArticles value)? getArticles,
+    TResult Function(_LoadMoreArticles value)? loadMoreArticles,
+    TResult Function(_SetSearchKey value)? setSearchKey,
+    TResult Function(_SetCategoryKey value)? setCategoryKey,
+    required TResult orElse(),
+  }) {
+    if (setCategoryKey != null) {
+      return setCategoryKey(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetCategoryKey implements ArticlesInfoEvent {
+  const factory _SetCategoryKey({required final List<String> categoryKeyList}) =
+      _$_SetCategoryKey;
+
+  List<String> get categoryKeyList;
+  @JsonKey(ignore: true)
+  _$$_SetCategoryKeyCopyWith<_$_SetCategoryKey> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ArticlesInfoState {
   User get user => throw _privateConstructorUsedError;
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
@@ -678,6 +872,7 @@ mixin _$ArticlesInfoState {
   bool get isFetching => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
+  List<String> get categoryKeyList => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -700,6 +895,7 @@ abstract class $ArticlesInfoStateCopyWith<$Res> {
       bool isFetching,
       bool canLoadMore,
       SearchKey searchKey,
+      List<String> categoryKeyList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
   $UserCopyWith<$Res> get user;
@@ -727,6 +923,7 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
     Object? isFetching = null,
     Object? canLoadMore = null,
     Object? searchKey = null,
+    Object? categoryKeyList = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -758,6 +955,10 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      categoryKeyList: null == categoryKeyList
+          ? _value.categoryKeyList
+          : categoryKeyList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -806,6 +1007,7 @@ abstract class _$$_ArticlesInfoStateCopyWith<$Res>
       bool isFetching,
       bool canLoadMore,
       SearchKey searchKey,
+      List<String> categoryKeyList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
   @override
@@ -834,6 +1036,7 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? canLoadMore = null,
     Object? searchKey = null,
+    Object? categoryKeyList = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_ArticlesInfoState(
@@ -865,6 +1068,10 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      categoryKeyList: null == categoryKeyList
+          ? _value._categoryKeyList
+          : categoryKeyList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -884,8 +1091,10 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
       required this.isFetching,
       required this.canLoadMore,
       required this.searchKey,
+      required final List<String> categoryKeyList,
       required this.apiFailureOrSuccessOption})
-      : super._();
+      : _categoryKeyList = categoryKeyList,
+        super._();
 
   @override
   final User user;
@@ -901,12 +1110,20 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
   final bool canLoadMore;
   @override
   final SearchKey searchKey;
+  final List<String> _categoryKeyList;
+  @override
+  List<String> get categoryKeyList {
+    if (_categoryKeyList is EqualUnmodifiableListView) return _categoryKeyList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categoryKeyList);
+  }
+
   @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'ArticlesInfoState(user: $user, salesOrg: $salesOrg, shipToInfo: $shipToInfo, articleInfo: $articleInfo, isFetching: $isFetching, canLoadMore: $canLoadMore, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'ArticlesInfoState(user: $user, salesOrg: $salesOrg, shipToInfo: $shipToInfo, articleInfo: $articleInfo, isFetching: $isFetching, canLoadMore: $canLoadMore, searchKey: $searchKey, categoryKeyList: $categoryKeyList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -927,6 +1144,8 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
                 other.canLoadMore == canLoadMore) &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey) &&
+            const DeepCollectionEquality()
+                .equals(other._categoryKeyList, _categoryKeyList) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption));
@@ -942,6 +1161,7 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
       isFetching,
       canLoadMore,
       searchKey,
+      const DeepCollectionEquality().hash(_categoryKeyList),
       apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
@@ -961,6 +1181,7 @@ abstract class _ArticlesInfoState extends ArticlesInfoState {
       required final bool isFetching,
       required final bool canLoadMore,
       required final SearchKey searchKey,
+      required final List<String> categoryKeyList,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption}) = _$_ArticlesInfoState;
   const _ArticlesInfoState._() : super._();
@@ -979,6 +1200,8 @@ abstract class _ArticlesInfoState extends ArticlesInfoState {
   bool get canLoadMore;
   @override
   SearchKey get searchKey;
+  @override
+  List<String> get categoryKeyList;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override

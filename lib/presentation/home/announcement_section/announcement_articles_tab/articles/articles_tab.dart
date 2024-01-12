@@ -59,7 +59,8 @@ class _ArticlesTabState extends State<ArticlesTab> {
       body: BlocBuilder<ArticlesInfoBloc, ArticlesInfoState>(
         buildWhen: (previous, current) =>
             previous.isFetching != current.isFetching ||
-            previous.searchKey != current.searchKey,
+            previous.searchKey != current.searchKey ||
+            previous.categoryKeyList != current.categoryKeyList,
         builder: (context, state) {
           return state.isFetching && state.articleInfo.announcementList.isEmpty
               ? LoadingShimmer.logo(

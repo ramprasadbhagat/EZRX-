@@ -56,6 +56,7 @@ mixin _$ApiFailure {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -98,6 +99,7 @@ mixin _$ApiFailure {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -140,6 +142,7 @@ mixin _$ApiFailure {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -201,6 +204,8 @@ mixin _$ApiFailure {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -250,6 +255,8 @@ mixin _$ApiFailure {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -299,6 +306,8 @@ mixin _$ApiFailure {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -422,6 +431,7 @@ class _$_Other implements _Other {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return other(message);
   }
@@ -467,6 +477,7 @@ class _$_Other implements _Other {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return other?.call(message);
   }
@@ -512,6 +523,7 @@ class _$_Other implements _Other {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -579,6 +591,8 @@ class _$_Other implements _Other {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return other(this);
   }
@@ -631,6 +645,8 @@ class _$_Other implements _Other {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return other?.call(this);
   }
@@ -683,6 +699,8 @@ class _$_Other implements _Other {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -803,6 +821,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return serverError(message);
   }
@@ -848,6 +867,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return serverError?.call(message);
   }
@@ -893,6 +913,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -960,6 +981,8 @@ class _$_ServerError implements _ServerError {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return serverError(this);
   }
@@ -1012,6 +1035,8 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return serverError?.call(this);
   }
@@ -1064,6 +1089,8 @@ class _$_ServerError implements _ServerError {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -1158,6 +1185,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return poorConnection();
   }
@@ -1203,6 +1231,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return poorConnection?.call();
   }
@@ -1248,6 +1277,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1315,6 +1345,8 @@ class _$_PoorConnection implements _PoorConnection {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return poorConnection(this);
   }
@@ -1367,6 +1399,8 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return poorConnection?.call(this);
   }
@@ -1419,6 +1453,8 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1508,6 +1544,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return serverTimeout();
   }
@@ -1553,6 +1590,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return serverTimeout?.call();
   }
@@ -1598,6 +1636,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1665,6 +1704,8 @@ class _$_ServerTimeout implements _ServerTimeout {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return serverTimeout(this);
   }
@@ -1717,6 +1758,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return serverTimeout?.call(this);
   }
@@ -1769,6 +1812,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1858,6 +1903,7 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return userNotFound();
   }
@@ -1903,6 +1949,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return userNotFound?.call();
   }
@@ -1948,6 +1995,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -2015,6 +2063,8 @@ class _$_UserNotFound implements _UserNotFound {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return userNotFound(this);
   }
@@ -2067,6 +2117,8 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return userNotFound?.call(this);
   }
@@ -2119,6 +2171,8 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -2213,6 +2267,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -2258,6 +2313,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -2303,6 +2359,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -2370,6 +2427,8 @@ class _$_InvalidEmailAndPasswordCombination
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -2422,6 +2481,8 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -2474,6 +2535,8 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -2564,6 +2627,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return accountLocked();
   }
@@ -2609,6 +2673,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return accountLocked?.call();
   }
@@ -2654,6 +2719,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -2721,6 +2787,8 @@ class _$_AccountLocked implements _AccountLocked {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return accountLocked(this);
   }
@@ -2773,6 +2841,8 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return accountLocked?.call(this);
   }
@@ -2825,6 +2895,8 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -2914,6 +2986,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return accountExpired();
   }
@@ -2959,6 +3032,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return accountExpired?.call();
   }
@@ -3004,6 +3078,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -3071,6 +3146,8 @@ class _$_AccountExpired implements _AccountExpired {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return accountExpired(this);
   }
@@ -3123,6 +3200,8 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return accountExpired?.call(this);
   }
@@ -3175,6 +3254,8 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -3264,6 +3345,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return tokenExpired();
   }
@@ -3309,6 +3391,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return tokenExpired?.call();
   }
@@ -3354,6 +3437,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -3421,6 +3505,8 @@ class _$_TokenExpired implements _TokenExpired {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return tokenExpired(this);
   }
@@ -3473,6 +3559,8 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return tokenExpired?.call(this);
   }
@@ -3525,6 +3613,8 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -3614,6 +3704,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return authenticationFailed();
   }
@@ -3659,6 +3750,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return authenticationFailed?.call();
   }
@@ -3704,6 +3796,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -3771,6 +3864,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return authenticationFailed(this);
   }
@@ -3823,6 +3918,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return authenticationFailed?.call(this);
   }
@@ -3875,6 +3972,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -3968,6 +4067,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return proxyLoginRolePermissionNotMatch();
   }
@@ -4013,6 +4113,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return proxyLoginRolePermissionNotMatch?.call();
   }
@@ -4058,6 +4159,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -4125,6 +4227,8 @@ class _$_ProxyLoginRolePermissionNotMatch
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return proxyLoginRolePermissionNotMatch(this);
   }
@@ -4177,6 +4281,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return proxyLoginRolePermissionNotMatch?.call(this);
   }
@@ -4229,6 +4335,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -4323,6 +4431,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return proxyLoginZPTargetRoleNotMatch();
   }
@@ -4368,6 +4477,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call();
   }
@@ -4413,6 +4523,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -4480,6 +4591,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return proxyLoginZPTargetRoleNotMatch(this);
   }
@@ -4532,6 +4645,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call(this);
   }
@@ -4584,6 +4699,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -4677,6 +4794,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return proxyLoginZPSalesOrgNotMatch();
   }
@@ -4722,6 +4840,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call();
   }
@@ -4767,6 +4886,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -4834,6 +4954,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return proxyLoginZPSalesOrgNotMatch(this);
   }
@@ -4886,6 +5008,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call(this);
   }
@@ -4938,6 +5062,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -5028,6 +5154,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return passwordResetFail();
   }
@@ -5073,6 +5200,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return passwordResetFail?.call();
   }
@@ -5118,6 +5246,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -5185,6 +5314,8 @@ class _$_PasswordResetFail implements _PasswordResetFail {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return passwordResetFail(this);
   }
@@ -5237,6 +5368,8 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return passwordResetFail?.call(this);
   }
@@ -5289,6 +5422,8 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -5381,6 +5516,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return deviceNotSupportBiometric();
   }
@@ -5426,6 +5562,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return deviceNotSupportBiometric?.call();
   }
@@ -5471,6 +5608,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -5538,6 +5676,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return deviceNotSupportBiometric(this);
   }
@@ -5590,6 +5730,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return deviceNotSupportBiometric?.call(this);
   }
@@ -5642,6 +5784,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -5731,6 +5875,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return cannotCheckBiometrics();
   }
@@ -5776,6 +5921,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -5821,6 +5967,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -5888,6 +6035,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return cannotCheckBiometrics(this);
   }
@@ -5940,6 +6089,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -5992,6 +6143,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -6081,6 +6234,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return noSupportedBiometrics();
   }
@@ -6126,6 +6280,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -6171,6 +6326,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -6238,6 +6394,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return noSupportedBiometrics(this);
   }
@@ -6290,6 +6448,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -6342,6 +6502,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -6431,6 +6593,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return invalidBiometric();
   }
@@ -6476,6 +6639,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return invalidBiometric?.call();
   }
@@ -6521,6 +6685,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -6588,6 +6753,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return invalidBiometric(this);
   }
@@ -6640,6 +6807,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return invalidBiometric?.call(this);
   }
@@ -6692,6 +6861,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -6781,6 +6952,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return priceOverrideNotFound();
   }
@@ -6826,6 +6998,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return priceOverrideNotFound?.call();
   }
@@ -6871,6 +7044,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -6938,6 +7112,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return priceOverrideNotFound(this);
   }
@@ -6990,6 +7166,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return priceOverrideNotFound?.call(this);
   }
@@ -7042,6 +7220,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -7131,6 +7311,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return productOutOfStock();
   }
@@ -7176,6 +7357,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return productOutOfStock?.call();
   }
@@ -7221,6 +7403,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -7288,6 +7471,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return productOutOfStock(this);
   }
@@ -7340,6 +7525,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return productOutOfStock?.call(this);
   }
@@ -7392,6 +7579,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -7481,6 +7670,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return photoPermissionFailed();
   }
@@ -7526,6 +7716,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return photoPermissionFailed?.call();
   }
@@ -7571,6 +7762,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -7638,6 +7830,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return photoPermissionFailed(this);
   }
@@ -7690,6 +7884,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return photoPermissionFailed?.call(this);
   }
@@ -7742,6 +7938,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -7832,6 +8030,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return storagePermissionFailed();
   }
@@ -7877,6 +8076,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return storagePermissionFailed?.call();
   }
@@ -7922,6 +8122,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -7989,6 +8190,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return storagePermissionFailed(this);
   }
@@ -8041,6 +8244,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return storagePermissionFailed?.call(this);
   }
@@ -8093,6 +8298,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -8182,6 +8389,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return invalidFileFormat();
   }
@@ -8227,6 +8435,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return invalidFileFormat?.call();
   }
@@ -8272,6 +8481,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -8339,6 +8549,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return invalidFileFormat(this);
   }
@@ -8391,6 +8603,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return invalidFileFormat?.call(this);
   }
@@ -8443,6 +8657,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -8533,6 +8749,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return uploadCountExcideLimit();
   }
@@ -8578,6 +8795,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return uploadCountExcideLimit?.call();
   }
@@ -8623,6 +8841,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -8690,6 +8909,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return uploadCountExcideLimit(this);
   }
@@ -8742,6 +8963,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return uploadCountExcideLimit?.call(this);
   }
@@ -8794,6 +9017,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -8883,6 +9108,7 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return productDetailRoute();
   }
@@ -8928,6 +9154,7 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return productDetailRoute?.call();
   }
@@ -8973,6 +9200,7 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (productDetailRoute != null) {
@@ -9040,6 +9268,8 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return productDetailRoute(this);
   }
@@ -9092,6 +9322,8 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return productDetailRoute?.call(this);
   }
@@ -9144,6 +9376,8 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (productDetailRoute != null) {
@@ -9233,6 +9467,7 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return orderDetailRoute();
   }
@@ -9278,6 +9513,7 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return orderDetailRoute?.call();
   }
@@ -9323,6 +9559,7 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (orderDetailRoute != null) {
@@ -9390,6 +9627,8 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return orderDetailRoute(this);
   }
@@ -9442,6 +9681,8 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return orderDetailRoute?.call(this);
   }
@@ -9494,6 +9735,8 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (orderDetailRoute != null) {
@@ -9583,6 +9826,7 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return returnDetailRoute();
   }
@@ -9628,6 +9872,7 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return returnDetailRoute?.call();
   }
@@ -9673,6 +9918,7 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (returnDetailRoute != null) {
@@ -9740,6 +9986,8 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return returnDetailRoute(this);
   }
@@ -9792,6 +10040,8 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return returnDetailRoute?.call(this);
   }
@@ -9844,6 +10094,8 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (returnDetailRoute != null) {
@@ -9933,6 +10185,7 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return paymentDetailRoute();
   }
@@ -9978,6 +10231,7 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return paymentDetailRoute?.call();
   }
@@ -10023,6 +10277,7 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (paymentDetailRoute != null) {
@@ -10090,6 +10345,8 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return paymentDetailRoute(this);
   }
@@ -10142,6 +10399,8 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return paymentDetailRoute?.call(this);
   }
@@ -10194,6 +10453,8 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (paymentDetailRoute != null) {
@@ -10283,6 +10544,7 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return invoiceDetailRoute();
   }
@@ -10328,6 +10590,7 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return invoiceDetailRoute?.call();
   }
@@ -10373,6 +10636,7 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (invoiceDetailRoute != null) {
@@ -10440,6 +10704,8 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return invoiceDetailRoute(this);
   }
@@ -10492,6 +10758,8 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return invoiceDetailRoute?.call(this);
   }
@@ -10544,6 +10812,8 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (invoiceDetailRoute != null) {
@@ -10633,6 +10903,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return languageChangeFail();
   }
@@ -10678,6 +10949,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return languageChangeFail?.call();
   }
@@ -10723,6 +10995,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (languageChangeFail != null) {
@@ -10790,6 +11063,8 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return languageChangeFail(this);
   }
@@ -10842,6 +11117,8 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return languageChangeFail?.call(this);
   }
@@ -10894,6 +11171,8 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (languageChangeFail != null) {
@@ -11011,6 +11290,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return scannedProductNotFound(productNumber);
   }
@@ -11056,6 +11336,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return scannedProductNotFound?.call(productNumber);
   }
@@ -11101,6 +11382,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (scannedProductNotFound != null) {
@@ -11168,6 +11450,8 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return scannedProductNotFound(this);
   }
@@ -11220,6 +11504,8 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return scannedProductNotFound?.call(this);
   }
@@ -11272,6 +11558,8 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (scannedProductNotFound != null) {
@@ -11368,6 +11656,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return cameraPermissionFailed();
   }
@@ -11413,6 +11702,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return cameraPermissionFailed?.call();
   }
@@ -11458,6 +11748,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (cameraPermissionFailed != null) {
@@ -11525,6 +11816,8 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return cameraPermissionFailed(this);
   }
@@ -11577,6 +11870,8 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return cameraPermissionFailed?.call(this);
   }
@@ -11629,6 +11924,8 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (cameraPermissionFailed != null) {
@@ -11718,6 +12015,7 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return userNameNotFound();
   }
@@ -11763,6 +12061,7 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return userNameNotFound?.call();
   }
@@ -11808,6 +12107,7 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (userNameNotFound != null) {
@@ -11875,6 +12175,8 @@ class _$_UserNameNotFound implements _UserNameNotFound {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return userNameNotFound(this);
   }
@@ -11927,6 +12229,8 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return userNameNotFound?.call(this);
   }
@@ -11979,6 +12283,8 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (userNameNotFound != null) {
@@ -12069,6 +12375,7 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return uploadedFileSizeExceed();
   }
@@ -12114,6 +12421,7 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return uploadedFileSizeExceed?.call();
   }
@@ -12159,6 +12467,7 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (uploadedFileSizeExceed != null) {
@@ -12226,6 +12535,8 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return uploadedFileSizeExceed(this);
   }
@@ -12278,6 +12589,8 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return uploadedFileSizeExceed?.call(this);
   }
@@ -12330,6 +12643,8 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (uploadedFileSizeExceed != null) {
@@ -12449,6 +12764,7 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return paymentAdviceDeleteFailed(adviceNumber);
   }
@@ -12494,6 +12810,7 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return paymentAdviceDeleteFailed?.call(adviceNumber);
   }
@@ -12539,6 +12856,7 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (paymentAdviceDeleteFailed != null) {
@@ -12606,6 +12924,8 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return paymentAdviceDeleteFailed(this);
   }
@@ -12658,6 +12978,8 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return paymentAdviceDeleteFailed?.call(this);
   }
@@ -12710,6 +13032,8 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (paymentAdviceDeleteFailed != null) {
@@ -12805,6 +13129,7 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return allReorderItemInvalid();
   }
@@ -12850,6 +13175,7 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return allReorderItemInvalid?.call();
   }
@@ -12895,6 +13221,7 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (allReorderItemInvalid != null) {
@@ -12962,6 +13289,8 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return allReorderItemInvalid(this);
   }
@@ -13014,6 +13343,8 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return allReorderItemInvalid?.call(this);
   }
@@ -13066,6 +13397,8 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (allReorderItemInvalid != null) {
@@ -13185,6 +13518,7 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return maximumCartQuantityExceed(maximumNumber);
   }
@@ -13230,6 +13564,7 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return maximumCartQuantityExceed?.call(maximumNumber);
   }
@@ -13275,6 +13610,7 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (maximumCartQuantityExceed != null) {
@@ -13342,6 +13678,8 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return maximumCartQuantityExceed(this);
   }
@@ -13394,6 +13732,8 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return maximumCartQuantityExceed?.call(this);
   }
@@ -13446,6 +13786,8 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (maximumCartQuantityExceed != null) {
@@ -13542,6 +13884,7 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     required TResult Function() allReorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
   }) {
     return cartHasDifferentAddress();
   }
@@ -13587,6 +13930,7 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult? Function()? allReorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
   }) {
     return cartHasDifferentAddress?.call();
   }
@@ -13632,6 +13976,7 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult Function()? allReorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (cartHasDifferentAddress != null) {
@@ -13699,6 +14044,8 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
         cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
   }) {
     return cartHasDifferentAddress(this);
   }
@@ -13751,6 +14098,8 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
   }) {
     return cartHasDifferentAddress?.call(this);
   }
@@ -13803,6 +14152,8 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
     required TResult orElse(),
   }) {
     if (cartHasDifferentAddress != null) {
@@ -13814,4 +14165,369 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
 
 abstract class _CartHasDifferentAddress implements ApiFailure {
   const factory _CartHasDifferentAddress() = _$_CartHasDifferentAddress;
+}
+
+/// @nodoc
+abstract class _$$_ArticleannuncementTagFetchingErrorCopyWith<$Res> {
+  factory _$$_ArticleannuncementTagFetchingErrorCopyWith(
+          _$_ArticleannuncementTagFetchingError value,
+          $Res Function(_$_ArticleannuncementTagFetchingError) then) =
+      __$$_ArticleannuncementTagFetchingErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ArticleannuncementTagFetchingErrorCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res,
+        _$_ArticleannuncementTagFetchingError>
+    implements _$$_ArticleannuncementTagFetchingErrorCopyWith<$Res> {
+  __$$_ArticleannuncementTagFetchingErrorCopyWithImpl(
+      _$_ArticleannuncementTagFetchingError _value,
+      $Res Function(_$_ArticleannuncementTagFetchingError) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ArticleannuncementTagFetchingError
+    implements _ArticleannuncementTagFetchingError {
+  const _$_ArticleannuncementTagFetchingError();
+
+  @override
+  String toString() {
+    return 'ApiFailure.articleannuncementTagFetchingError()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ArticleannuncementTagFetchingError);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() passwordResetFail,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() productDetailRoute,
+    required TResult Function() orderDetailRoute,
+    required TResult Function() returnDetailRoute,
+    required TResult Function() paymentDetailRoute,
+    required TResult Function() invoiceDetailRoute,
+    required TResult Function() languageChangeFail,
+    required TResult Function(String productNumber) scannedProductNotFound,
+    required TResult Function() cameraPermissionFailed,
+    required TResult Function() userNameNotFound,
+    required TResult Function() uploadedFileSizeExceed,
+    required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
+    required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
+    required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
+  }) {
+    return articleannuncementTagFetchingError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? productDetailRoute,
+    TResult? Function()? orderDetailRoute,
+    TResult? Function()? returnDetailRoute,
+    TResult? Function()? paymentDetailRoute,
+    TResult? Function()? invoiceDetailRoute,
+    TResult? Function()? languageChangeFail,
+    TResult? Function(String productNumber)? scannedProductNotFound,
+    TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? userNameNotFound,
+    TResult? Function()? uploadedFileSizeExceed,
+    TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
+  }) {
+    return articleannuncementTagFetchingError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? passwordResetFail,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? productDetailRoute,
+    TResult Function()? orderDetailRoute,
+    TResult Function()? returnDetailRoute,
+    TResult Function()? paymentDetailRoute,
+    TResult Function()? invoiceDetailRoute,
+    TResult Function()? languageChangeFail,
+    TResult Function(String productNumber)? scannedProductNotFound,
+    TResult Function()? cameraPermissionFailed,
+    TResult Function()? userNameNotFound,
+    TResult Function()? uploadedFileSizeExceed,
+    TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
+    required TResult orElse(),
+  }) {
+    if (articleannuncementTagFetchingError != null) {
+      return articleannuncementTagFetchingError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_ProductDetailRoute value) productDetailRoute,
+    required TResult Function(_OrderDetailRoute value) orderDetailRoute,
+    required TResult Function(_ReturnDetailRoute value) returnDetailRoute,
+    required TResult Function(_PaymentDetailRoute value) paymentDetailRoute,
+    required TResult Function(_InvoiceDetailRoute value) invoiceDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+    required TResult Function(_ScannedProductNotFound value)
+        scannedProductNotFound,
+    required TResult Function(_CameraPermissionFailed value)
+        cameraPermissionFailed,
+    required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_UploadedFileSizeExceed value)
+        uploadedFileSizeExceed,
+    required TResult Function(_PaymentAdviceDeleteFailed value)
+        paymentAdviceDeleteFailed,
+    required TResult Function(_AllReorderItemInvalid value)
+        allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
+    required TResult Function(_CartHasDifferentAddress value)
+        cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
+  }) {
+    return articleannuncementTagFetchingError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult? Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult? Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult? Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult? Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult? Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+  }) {
+    return articleannuncementTagFetchingError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    required TResult orElse(),
+  }) {
+    if (articleannuncementTagFetchingError != null) {
+      return articleannuncementTagFetchingError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ArticleannuncementTagFetchingError implements ApiFailure {
+  const factory _ArticleannuncementTagFetchingError() =
+      _$_ArticleannuncementTagFetchingError;
 }

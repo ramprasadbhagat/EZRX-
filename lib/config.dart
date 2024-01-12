@@ -399,6 +399,8 @@ String get domain {
   String get announcementVnTemplate => '{E95336DD-CB51-4663-BCB3-422246B12D45}';
 
   String get articleTemplate => 'DA48D344-04CE-411B-B721-5D1B4F807860';
+  String get announcementArticleTagTemplate =>
+      'F507E453-59E6-4204-8547-379EF37256CA';
   String get idMarketArticleTemplate1 => '54EA13A9-6EDE-46ED-B5CB-7A4B14D99D69';
   String get idMarketArticleTemplate2 => 'DD1070C3-A45A-4412-B2CD-7892567B136E';
   String get faqTemplate => '4A583EF3-A105-4A00-BC98-EC96A9967966';

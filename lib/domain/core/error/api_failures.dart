@@ -67,6 +67,8 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.maximumCartQuantityExceed(String maximumNumber) =
       _MaximumCartQuantityExceed;
   const factory ApiFailure.cartHasDifferentAddress() = _CartHasDifferentAddress;
+  const factory ApiFailure.articleannuncementTagFetchingError() =
+      _ArticleannuncementTagFetchingError;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -125,5 +127,7 @@ extension ApiFailureExt on ApiFailure {
             'In cart quantity should not be more than ${maximumExeption.maximumNumber}.',
         cartHasDifferentAddress: (_) =>
             'shipToAddress changed from existing cart. Delete the cart and then add new item',
+        articleannuncementTagFetchingError: (_) =>
+            'Error while fetching announcement article tag list!',
       );
 }

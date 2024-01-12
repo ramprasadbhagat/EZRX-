@@ -22,12 +22,30 @@ class AnnouncementArticleInfo with _$AnnouncementArticleInfo {
 
   List<AnnouncementArticleItem> filterAnnouncementListBySearchKey(
     String searchKey,
-  ) =>
-      announcementList
-          .where(
-            (element) => element.isSearchKeyMatching(searchKey),
-          )
-          .toList();
+    List<String> categoryKey,
+  ) {
+    final searchList = announcementList
+        .where(
+          (element) => element.isSearchKeyMatching(searchKey),
+        )
+        .toList();
+    if (categoryKey.isEmpty) {
+      return searchList;
+    } else {
+      final filterList = <AnnouncementArticleItem>[];
+      for (final category in categoryKey) {
+        filterList.addAll(
+          searchList
+              .where(
+                (element) => element.isCategoryMatching(category),
+              )
+              .toList(),
+        );
+      }
+
+      return filterList;
+    }
+  }
 
   List<AnnouncementArticleItem> filterAnnouncementListWithoutId(
     String announcementInfoId,
@@ -77,6 +95,9 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
 
   bool isSearchKeyMatching(String searchKey) =>
       title.toLowerCase().contains(searchKey);
+
+  bool isCategoryMatching(String categoryhKey) =>
+      tag.toLowerCase().contains(categoryhKey.toLowerCase());
 }
 
 @freezed

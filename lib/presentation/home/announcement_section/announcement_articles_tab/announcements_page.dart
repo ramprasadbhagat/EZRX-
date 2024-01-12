@@ -1,5 +1,10 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
+import 'package:ezrxmobile/presentation/core/custom_badge.dart';
+import 'package:ezrxmobile/presentation/core/custom_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +19,10 @@ import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.
 
 part 'widgets/announcement_search.dart';
 part 'articles/widgets/search_article.dart';
+part 'articles/widgets/filter_article.dart';
+part 'articles/widgets/filter_article_bottomsheet.dart';
+part 'announcements/widgets/filter_announcement.dart';
+part 'announcements/widgets/filter_announcement_bottomsheet.dart';
 
 class AnnouncementsPage extends StatelessWidget {
   const AnnouncementsPage({Key? key}) : super(key: key);
@@ -72,14 +81,10 @@ class AnnouncementsPage extends StatelessWidget {
                               ? const _SearchAnnouncement()
                               : const _SearchArticle(),
                         ),
-                        //TODO: Backend don't support filter yet, will revisit when filter option available from backend
-                        // IconButton(
-                        //  key: WidgetKeys.announcementFilterKey,
-                        //   onPressed: () => {},
-                        //   icon: const Icon(
-                        //     Icons.tune_outlined,
-                        //   ),
-                        // ),
+                        context.tabsRouter.current.name ==
+                                AnnouncementsTabRoute.name
+                            ? const _AnnouncementFilterIcon()
+                            : const _ArticleFilterIcon(),
                       ],
                     ),
                   ),

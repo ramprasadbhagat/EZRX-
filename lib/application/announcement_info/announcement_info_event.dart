@@ -12,4 +12,8 @@ class AnnouncementInfoEvent with _$AnnouncementInfoEvent {
   const factory AnnouncementInfoEvent.updateSearchKey({
     required String searchKey,
   }) = _UpdateSearchKey;
+
+  const factory AnnouncementInfoEvent.setCategoryKey({
+    required List<String> categoryKeyList,
+  }) = _SetCategoryKey;
 }

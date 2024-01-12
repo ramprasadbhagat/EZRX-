@@ -134,6 +134,13 @@ class AnnouncementInfoBloc
           );
         }
       },
+      setCategoryKey: (e) {
+        emit(
+          state.copyWith(
+            categoryKeyList: e.categoryKeyList,
+          ),
+        );
+      },
     );
   }
 }

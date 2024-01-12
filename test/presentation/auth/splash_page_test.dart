@@ -9,8 +9,10 @@ import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
@@ -321,6 +323,14 @@ class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class ArticlesInfoFilterBlocMock
+    extends MockBloc<ArticlesInfoFilterEvent, ArticlesInfoFilterState>
+    implements ArticlesInfoFilterBloc {}
+
+class AnnouncementFilterBlocMock
+    extends MockBloc<AnnouncementFilterEvent, AnnouncementFilterState>
+    implements AnnouncementFilterBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -387,6 +397,8 @@ void main() {
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late ArticlesInfoBloc articlesInfoBlocMock;
   late FullSummaryBloc fullSummaryBlocMock;
+  late ArticlesInfoFilterBloc articlesInfoFilterBlocMock;
+  late AnnouncementFilterBloc announcementFilterBlocMock;
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
@@ -497,6 +509,8 @@ void main() {
       reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
       articlesInfoBlocMock = ArticlesInfoBlocMock();
       productImageBloc = ProductImageBlocMock();
+      articlesInfoFilterBlocMock = ArticlesInfoFilterBlocMock();
+      announcementFilterBlocMock = AnnouncementFilterBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => fullSummaryBlocMock.state)
           .thenReturn(FullSummaryState.initial());
@@ -608,6 +622,10 @@ void main() {
           .thenReturn(ArticlesInfoState.initial());
       when(() => productImageBloc.state)
           .thenReturn(ProductImageState.initial());
+      when(() => articlesInfoFilterBlocMock.state)
+          .thenReturn(ArticlesInfoFilterState.initial());
+      when(() => announcementFilterBlocMock.state)
+          .thenReturn(AnnouncementFilterState.initial());
     });
 
     Future getWidget(tester) async {
@@ -788,6 +806,12 @@ void main() {
               ),
               BlocProvider<ProductImageBloc>(
                 create: (context) => productImageBloc,
+              ),
+              BlocProvider<ArticlesInfoFilterBloc>(
+                create: (context) => articlesInfoFilterBlocMock,
+              ),
+              BlocProvider<AnnouncementFilterBloc>(
+                create: (context) => announcementFilterBlocMock,
               ),
             ],
             child: const SplashPage(),

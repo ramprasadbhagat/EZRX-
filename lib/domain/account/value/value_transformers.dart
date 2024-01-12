@@ -478,6 +478,40 @@ String countryContactUsItemId(String country) {
   return salesOrgCountryMap[country] ?? '';
 }
 
+String countryArticleTagPath(String country) {
+  final salesOrgCountryMap = {
+    'MY': '188B233B-B81D-4679-A70B-036F07B2F649',
+    'PH': '89286340-245D-4854-A22C-EFE81D0C7E23',
+    'SG': 'F3271446-85C2-4AD6-825C-171296C64239',
+    'ID': '8D05F353-F579-4754-85F3-396BE1303D65',
+    'KH': '4E99201A-E040-4C5E-86B6-C10D714C3EDF',
+    'KR': '4218330C-2AD9-47CF-997C-06C24E509119',
+    'MM': '229CB61C-36C6-4BC6-8727-C79009416C3C',
+    'TH': 'C3F323E8-30B2-4DFC-8566-07B3AB63D042',
+    'TW': '4C69345D-2610-4520-9310-9AD8F410424D',
+    'VN': '3AF1F6FB-E595-465B-A5E9-A6E984921AF9',
+  };
+
+  return salesOrgCountryMap[country] ?? '';
+}
+
+String countryAnnouncementTagPath(String country) {
+  final salesOrgCountryMap = {
+    'MY': '188B233B-B81D-4679-A70B-036F07B2F649',
+    'PH': 'ED179A30-BF78-4264-BA4D-6F036D3299D7',
+    'SG': 'B47137E7-2D89-4575-A27D-A02F2DA0B438',
+    'ID': '9B16AD26-0BBD-415D-A42B-838DFC4CE71B',
+    'KH': '4DC12A82-A014-47FF-9CE0-B71E61A20968',
+    'KR': 'A2F1EDC4-4EEE-49C7-A48A-92B3BAFBD6CC',
+    'MM': 'D3986473-9A6C-467E-B0A8-1024846575B2',
+    'TH': '91AD900E-AE8D-4D9C-B79F-AB6AFB92A1F4',
+    'TW': 'D27BAC33-EF85-4A8F-A1A3-4F931E7DF03D',
+    'VN': '7474E03F-09AC-4D66-A08B-B366573172B9',
+  };
+
+  return salesOrgCountryMap[country] ?? '';
+}
+
 String countryFaqPath(String country) {
   final salesOrgCountryMap = {
     'MY': '51B88D33-B26E-475D-90FC-BEFD9FF0A348',

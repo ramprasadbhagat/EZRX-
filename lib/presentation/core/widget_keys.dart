@@ -886,6 +886,10 @@ class WidgetKeys {
   static const Key announcementDetailOtherSection =
       Key('announcementDetailOtherSection');
 
+  static Key announcementStatusFilter(String name, bool value) =>
+      Key('announcementStatusFilter$name$value');
+  static const Key announcementFilterIcon = Key('announcementFilterIcon');
+
   //============================================================
   //  Article
   //============================================================
@@ -904,6 +908,10 @@ class WidgetKeys {
   static const Key articleDetailsTimeKey = Key('articleDetailsTime');
   static const Key articleDetailsBodyKey = Key('articleDetailsBody');
   static const Key articleDetailsImageKey = Key('articleDetailsImage');
+  static const Key articleFilterKey = Key('articleFilter');
+  static Key articleStatusFilter(String name, bool value) =>
+      Key('articleStatusFilter$name$value');
+  static const Key articleFilterIcon = Key('articleFilterIcon');
 
   //============================================================
   //  Change Password

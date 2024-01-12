@@ -12,6 +12,7 @@ class ArticlesInfoState with _$ArticlesInfoState {
     required bool isFetching,
     required bool canLoadMore,
     required SearchKey searchKey,
+    required List<String> categoryKeyList,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
   }) = _ArticlesInfoState;
 
@@ -23,11 +24,13 @@ class ArticlesInfoState with _$ArticlesInfoState {
         articleInfo: AnnouncementArticleInfo.empty(),
         canLoadMore: true,
         searchKey: SearchKey(''),
+        categoryKeyList: [],
         apiFailureOrSuccessOption: none(),
       );
 
   List<AnnouncementArticleItem> get filterAnnouncementListBySearchKey =>
       articleInfo.filterAnnouncementListBySearchKey(
         searchKey.searchValueOrEmpty.toLowerCase(),
+        categoryKeyList,
       );
 }
