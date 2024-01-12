@@ -1310,7 +1310,7 @@ void main() {
           orderHistoryItem: fakeOrderHistoryItem.copyWith(
             unitPrice: 60,
             qty: 30,
-            tax: 4.2,
+            tax: 126,
           ),
         ),
       ];
@@ -1336,6 +1336,37 @@ void main() {
         findRichText: true,
       );
       expect(expectedPrice, findsOneWidget);
+    });
+
+    testWidgets(' => Order history Tax calculation test', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial(),
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
+      final expectedStates = [
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            unitPrice: 136.5,
+            qty: 5,
+            tax: 68.25,
+          ),
+        ),
+      ];
+      whenListen(
+        viewByItemDetailsBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final expectedTax = find.text(
+        '(10.0% tax)',
+      );
+      expect(expectedTax, findsOneWidget);
+      
     });
     // TODO:Revisit while ID tax improvement
     // testWidgets(' => QuantityAndPriceWithTax test for ID market',
@@ -1407,7 +1438,7 @@ void main() {
           orderHistoryItem: fakeOrderHistoryItem.copyWith(
             unitPrice: 60,
             qty: 30,
-            tax: 4.2,
+            tax: 126,
           ),
         ),
       ];

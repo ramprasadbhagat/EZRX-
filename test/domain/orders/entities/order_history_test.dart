@@ -80,7 +80,7 @@ void main() async {
           tax: 5.0,
         );
 
-        expect(orderHistoryItem.taxPercentage, 5.0);
+        expect(orderHistoryItem.taxPercentage, 0.5);
       });
     });
 
