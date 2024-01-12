@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -38,11 +39,13 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart'
     as payment_term;
 import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -58,7 +61,10 @@ import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_mm_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
@@ -138,8 +144,22 @@ void main() {
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late OrderEligibilityBloc orderEligibilityBlocMock;
-
+  late List<PriceAggregate> mockCartItems;
   late List<PriceAggregate> mockCartBundleItems;
+  late List<Price> priceList;
+  late AplSimulatorOrder aplSimulatorOrder;
+  final checkoutPageRouteRouteData = RouteData(
+    route: const RouteMatch(
+      name: CheckoutPageRoute.name,
+      segments: [],
+      path: 'orders/cart/checkout',
+      stringMatch: 'orders/cart/checkout',
+      key: ValueKey('CheckoutPageRoute'),
+    ),
+    router: MockAppRouter(),
+    pendingChildren: [],
+  );
+
   final fakeCartProduct = <PriceAggregate>[
     PriceAggregate.empty().copyWith(
       materialInfo: MaterialInfo.empty().copyWith(
@@ -155,13 +175,43 @@ void main() {
     ),
   ];
 
+  final salesOrgConfigVariant = ValueVariant<SalesOrganisationConfigs>(
+    {
+      fakeIDSalesOrgConfigs,
+      fakeKHSalesOrgConfigs,
+      fakeMMSalesOrgConfigs,
+      fakeMYSalesOrgConfigs,
+      fakePHSalesOrgConfigs,
+      fakeSGSalesOrgConfigs,
+      fakeTHSalesOrgConfigs,
+      fakeTWSalesOrgConfigs,
+      fakeVNSalesOrgConfigs,
+    },
+  );
+
   setUpAll(() async {
-    locator.registerFactory(() => AppRouter());
+    locator.registerFactory(() => AutoRouteMock());
     locator.registerSingleton<MixpanelService>(MockMixpanelService());
 
-    autoRouterMock = locator<AppRouter>();
+    autoRouterMock = locator<AutoRouteMock>();
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
+    mockCartItems = await CartLocalDataSource().getAddedToCartProductList();
+    priceList = await MaterialPriceLocalDataSource().getPriceList();
+    aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
   });
+
+  ///////////////////////////Finder//////////////////////////////////////////
+  final checkoutSummaryTax = find.byKey(WidgetKeys.checkoutSummaryTax);
+  final checkoutSummarySmallOrderFee =
+      find.byKey(WidgetKeys.checkoutSummarySmallOrderFee);
+  final checkoutSummaryGrandTotalPrice =
+      find.byKey(WidgetKeys.checkoutSummaryGrandTotalPrice);
+  final checkoutSummaryTaxPrice =
+      find.byKey(WidgetKeys.checkoutSummaryTaxPrice);
+  final checkoutSummaryTotalSaving =
+      find.byKey(WidgetKeys.checkoutSummaryTotalSaving);
+
+  //////////////////////////////////////////////////////////////////////////
   group('Checkout Page Test', () {
     setUp(() {
       locator = GetIt.instance;
@@ -176,7 +226,6 @@ void main() {
       paymentTermBlocMock = PaymentTermBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       customerCodeBloc = CustomerCodeBlocMock();
-      autoRouterMock = locator<AppRouter>();
       orderSummaryBlocMock = OrderSummaryBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       poAttachmentBloc = PoAttachmentBlocMock();
@@ -217,6 +266,10 @@ void main() {
       when(
         () => orderEligibilityBlocMock.state,
       ).thenReturn(OrderEligibilityState.initial());
+      when(() => autoRouterMock.current).thenReturn(checkoutPageRouteRouteData);
+      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+      when(() => autoRouterMock.pushNamed(any()))
+          .thenAnswer((invocation) async => null);
     });
     Widget getScopedWidget() {
       return EasyLocalization(
@@ -287,7 +340,7 @@ void main() {
         expect(closeButtonFinder, findsOneWidget);
         await tester.tap(closeButtonFinder);
         await tester.pump();
-        expect(autoRouterMock.current.name != 'CheckoutPageRoute', true);
+        verify(() => autoRouterMock.navigateBack()).called(1);
       },
     );
 
@@ -303,7 +356,7 @@ void main() {
             find.byKey(WidgetKeys.showOrderSumaryListTile);
         expect(showOrderSumaryListTileFinder, findsOneWidget);
         await tester.tap(showOrderSumaryListTileFinder);
-        await tester.pump();
+        await tester.pumpAndSettle();
         final orderPriceSummarySheetFinder =
             find.byKey(WidgetKeys.orderPriceSummarySheet);
         expect(orderPriceSummarySheetFinder, findsOneWidget);
@@ -313,8 +366,8 @@ void main() {
         );
         expect(orderPriceSummarySheetCloseButtonFinder, findsOneWidget);
         await tester.tap(orderPriceSummarySheetCloseButtonFinder);
-        await tester.pump();
-        expect(autoRouterMock.current.name != 'CheckoutPageRoute', true);
+        await tester.pumpAndSettle();
+        verify(() => autoRouterMock.pop()).called(1);
       },
     );
     testWidgets(
@@ -422,7 +475,7 @@ void main() {
         );
 
         await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
         expect(checkoutPageFinder, findsOneWidget);
@@ -443,7 +496,8 @@ void main() {
             const PoAttachmentEvent.initialized(),
           ),
         ).called(1);
-        expect(autoRouterMock.current.name == 'OrderSuccessPageRoute', true);
+        verify(() => autoRouterMock..pushNamed('orders/order_confirmation'))
+            .called(1);
       },
     );
     testWidgets(
@@ -2388,5 +2442,132 @@ void main() {
         const Offset(0.0, -300.0),
       );
     });
+
+    testWidgets(
+      'Checkout page Price Breakdown for every market',
+      (tester) async {
+        final currentSalesOrgConfigVariant =
+            salesOrgConfigVariant.currentValue ?? fakeIDSalesOrgConfigs;
+        final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
+          salesOrg: currentSalesOrgConfigVariant.salesOrg,
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: currentSalesOrgConfigVariant,
+            salesOrganisation: currentSalesOrganisation,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            config: currentSalesOrgConfigVariant,
+            salesOrganisation: currentSalesOrganisation,
+            cartProducts: [
+              mockCartItems.first.copyWith(
+                salesOrgConfig: currentSalesOrgConfigVariant,
+                price: priceList.first,
+                quantity: 1,
+              )
+            ],
+            aplSimulatorOrder: aplSimulatorOrder,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+        expect(scrollListFinder, findsOneWidget);
+
+        final subTotalTextFinder = find.descendant(
+          of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
+          matching: find.textContaining(
+            'Subtotal (${currentSalesOrgConfigVariant.displayPrefixTax}.tax)',
+          ),
+        );
+        await tester.dragUntilVisible(
+          subTotalTextFinder,
+          scrollListFinder,
+          const Offset(0.0, -300.0),
+        );
+        final subTotalValueFinder = find.descendant(
+          of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
+          matching: find.text(
+            StringUtils.priceComponentDisplayPrice(
+              currentSalesOrgConfigVariant,
+              currentSalesOrgConfigVariant.salesOrg.isID
+                  ? aplSimulatorOrder.totalPriceWithoutTax
+                  : priceList.first.finalPrice.getValue(),
+              false,
+            ),
+            findRichText: true,
+          ),
+        );
+        expect(subTotalValueFinder, findsOneWidget);
+        expect(
+          checkoutSummaryTax,
+          currentSalesOrgConfigVariant.showSubtotalTaxBreakdown
+              ? findsOneWidget
+              : findsNothing,
+        );
+        expect(
+          checkoutSummaryTaxPrice,
+          currentSalesOrgConfigVariant.showSubtotalTaxBreakdown
+              ? findsOneWidget
+              : findsNothing,
+        );
+        expect(
+          checkoutSummarySmallOrderFee,
+          currentSalesOrgConfigVariant.salesOrg.showSmallOrderFee
+              ? findsOneWidget
+              : findsNothing,
+        );
+        final checkoutSummarySmallOrderFeePriceFinder = find.descendant(
+          of: find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+          matching: find.text(
+            StringUtils.priceComponentDisplayPrice(
+              currentSalesOrgConfigVariant,
+              aplSimulatorOrder.smallOrderFee,
+              false,
+            ),
+            findRichText: true,
+          ),
+        );
+        expect(
+          checkoutSummarySmallOrderFeePriceFinder,
+          currentSalesOrgConfigVariant.salesOrg.showSmallOrderFee
+              ? findsOneWidget
+              : findsNothing,
+        );
+        expect(checkoutSummaryGrandTotalPrice, findsOneWidget);
+        final totalSaving = find.descendant(
+          of: checkoutSummaryTotalSaving,
+          matching: find.text('Total savings:'),
+        );
+        expect(
+          totalSaving,
+          currentSalesOrgConfigVariant.salesOrg.showTotalSaving
+              ? findsOneWidget
+              : findsNothing,
+        );
+        final totalSavingValue = find.descendant(
+          of: checkoutSummaryTotalSaving,
+          matching: find.text(
+            StringUtils.priceComponentDisplayPrice(
+              currentSalesOrgConfigVariant,
+              aplSimulatorOrder.totalDiscountValue,
+              false,
+            ),
+            findRichText: true,
+          ),
+        );
+        expect(
+          totalSavingValue,
+          currentSalesOrgConfigVariant.salesOrg.showTotalSaving
+              ? findsOneWidget
+              : findsNothing,
+        );
+      },
+      variant: salesOrgConfigVariant,
+    );
   });
 }

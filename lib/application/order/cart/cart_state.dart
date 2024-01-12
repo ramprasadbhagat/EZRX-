@@ -333,9 +333,14 @@ class CartState with _$CartState {
           totalMaterialsPriceHidePriceWithTax;
 
   //This getter is used for displaying subtotal value in
-  // cart, checkout page and for Order Submission
+  // cart and for Order Submission
   double get subTotalHidePriceMaterial =>
       totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice;
+
+  //This getter is used for displaying subtotal value in checkout page
+  double get checkoutSubTotalHidePriceMaterial => _isID
+      ? aplSimulatorOrder.totalPriceWithoutTax
+      : subTotalHidePriceMaterial;
 
   bool get isOOSOrderPresent =>
       cartProducts.any((element) => element.isAnyOOSItemPresentInCart);

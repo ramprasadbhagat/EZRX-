@@ -30,6 +30,8 @@ import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 void main() {
@@ -63,6 +65,22 @@ void main() {
       )
     ],
   );
+
+  final priceTiers = [
+    PriceTier.empty().copyWith(
+      tier: 'C',
+      items: [
+        PriceTierItem.empty().copyWith(
+          rate: 41,
+          quantity: 5,
+        ),
+        PriceTierItem.empty().copyWith(
+          rate: 20,
+          quantity: 10,
+        )
+      ],
+    )
+  ];
   group('Price Aggregate Test', () {
     test('should return correct price aggregate object', () {
       final priceAggregate = PriceAggregate(
@@ -2178,5 +2196,89 @@ void main() {
         );
       },
     );
+
+    test('=> aplFinalPriceTotal', () {
+      const finalPrice = 80.0;
+      const quantity = 2;
+      final customPriceAggregate = emptyPriceAggregate.copyWith(
+        price: Price.empty().copyWith(
+          finalPrice: MaterialPrice(finalPrice),
+        ),
+        quantity: quantity,
+      );
+
+      expect(
+        customPriceAggregate.aplFinalPriceTotal,
+        finalPrice * quantity,
+      );
+    });
+
+    test('=> finalCheckoutTotalForAllMaterial for ID', () {
+      const finalPrice = 80.0;
+      const quantity = 5;
+      final customPriceAggregate = emptyPriceAggregate.copyWith(
+        price: bonusPrice.copyWith(
+          finalPrice: MaterialPrice(finalPrice),
+          tiers: priceTiers,
+        ),
+        quantity: quantity,
+        salesOrgConfig: fakeIDSalesOrgConfigs,
+      );
+
+      expect(
+        customPriceAggregate.finalCheckoutTotalForAllMaterial,
+        '${finalPrice * quantity}',
+      );
+    });
+
+    test('=> finalCheckoutTotalForAllMaterial for Other market', () {
+      const quantity = 5;
+      final customPriceAggregate = emptyPriceAggregate.copyWith(
+        price: bonusPrice.copyWith(
+          finalPrice: MaterialPrice(80.0),
+          tiers: priceTiers,
+        ),
+        quantity: quantity,
+        salesOrgConfig: fakeMYSalesOrgConfigs,
+      );
+
+      expect(
+        customPriceAggregate.finalCheckoutTotalForAllMaterial,
+        '${priceTiers.first.items.first.rate * quantity}',
+      );
+    });
+
+    test('=> toSubmitMaterialInfo for Id market', () {
+      const finalPrice = 80.0;
+      final customPriceAggregate = emptyPriceAggregate.copyWith(
+        price: bonusPrice.copyWith(
+          finalPrice: MaterialPrice(finalPrice),
+          tiers: priceTiers,
+        ),
+        quantity: 5,
+        salesOrgConfig: fakeIDSalesOrgConfigs,
+      );
+
+      expect(
+        customPriceAggregate.toSubmitMaterialInfo().price,
+        finalPrice,
+      );
+    });
+
+    test('=> toSubmitMaterialInfo for Other market', () {
+      final customPriceAggregate = emptyPriceAggregate.copyWith(
+        price: bonusPrice.copyWith(
+          finalPrice: MaterialPrice(80.0),
+          tiers: priceTiers,
+        ),
+        quantity: 5,
+        salesOrgConfig: fakeMYSalesOrgConfigs,
+      );
+
+      expect(
+        customPriceAggregate.toSubmitMaterialInfo().price,
+        priceTiers.first.items.first.rate,
+      );
+    });
   });
 }

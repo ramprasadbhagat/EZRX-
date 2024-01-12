@@ -137,7 +137,9 @@ class PriceAggregate with _$PriceAggregate {
           MaterialItemOverrideDto.fromPriceAggregate(this).toDomain(),
       price: materialInfo.type.typeBundle
           ? bundle.currentBundleInfo.rate
-          : finalPrice,
+          : salesOrgConfig.salesOrg.isID
+              ? price.finalPrice.getOrDefaultValue(0)
+              : finalPrice,
       productType: materialInfo.type.getValue().toUpperCase(),
       parentID: materialInfo.type.typeBundle
           ? bundle.bundleCode
@@ -286,6 +288,10 @@ class PriceAggregate with _$PriceAggregate {
     return finalPrice * quantity;
   }
 
+  double get aplFinalPriceTotal {
+    return price.finalPrice.getOrDefaultValue(0) * quantity;
+  }
+
   double get savingAmount =>
       (price.lastPrice.getOrDefaultValue(0) -
           price.finalPrice.getOrDefaultValue(0)) *
@@ -301,6 +307,10 @@ class PriceAggregate with _$PriceAggregate {
         ? 'Price not available'
         : display(PriceType.finalPriceTotal);
   }
+
+  String get finalCheckoutTotalForAllMaterial => salesOrgConfig.salesOrg.isID
+      ? display(PriceType.aplFinalPriceTotal)
+      : finalPriceTotalForAllMaterial;
 
   double get finalPriceTotalWithTax => finalPriceTotal + itemTax;
 
@@ -393,6 +403,9 @@ class PriceAggregate with _$PriceAggregate {
         break;
       case PriceType.listPriceTotal:
         result = listPriceTotal;
+        break;
+      case PriceType.aplFinalPriceTotal:
+        result = aplFinalPriceTotal;
         break;
       case PriceType.listPrice:
       default:
@@ -849,4 +862,5 @@ enum PriceType {
   finalPriceTotal,
   unitPriceTotal,
   listPriceTotal,
+  aplFinalPriceTotal,
 }

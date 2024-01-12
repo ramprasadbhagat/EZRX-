@@ -210,7 +210,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 orderValue: context
                                     .read<CartBloc>()
                                     .state
-                                    .subTotalHidePriceMaterial,
+                                    .checkoutSubTotalHidePriceMaterial,
                                 smallOrderFee: context
                                     .read<CartBloc>()
                                     .state

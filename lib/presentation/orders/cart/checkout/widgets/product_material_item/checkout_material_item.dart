@@ -216,7 +216,7 @@ class _QuantityAndPrice extends StatelessWidget {
                     child: PriceComponent(
                       salesOrgConfig:
                           context.read<EligibilityBloc>().state.salesOrgConfigs,
-                      price: cartItem.finalPriceTotalForAllMaterial,
+                      price: cartItem.finalCheckoutTotalForAllMaterial,
                     ),
                   ),
                   if (cartItem.showTaxBreakDown &&

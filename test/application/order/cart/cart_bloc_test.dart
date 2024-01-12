@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -18,6 +19,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
@@ -25,7 +27,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.d
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
-
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -55,6 +57,7 @@ void main() {
   late List<PriceAggregate> priceAggregatesForID;
   late ProductDetailRepository productDetailRepository;
   late RequestCounterOfferDetails fakeCounterOfferDetails;
+  late AplSimulatorOrder aplSimulatorOrder;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -62,6 +65,7 @@ void main() {
     shipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
     final materialListResponse =
         await MaterialListLocalDataSource().getProductList();
+    aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
     bonusSampleItem = [
       BonusSampleItem.empty().copyWith(
         materialNumber: MaterialNumber('fake-bonus-sample-item-1'),
@@ -3643,6 +3647,41 @@ void main() {
           expect(
             cartBlocState.totalCartCount,
             2,
+          );
+        },
+      );
+      test(
+        'Testing CartBloc checkoutSubTotalHidePriceMaterial for ID',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first,
+            ],
+            aplSimulatorOrder: aplSimulatorOrder,
+            config: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
+          );
+          expect(
+            cartBlocState.checkoutSubTotalHidePriceMaterial,
+            aplSimulatorOrder.totalPriceWithoutTax,
+          );
+        },
+      );
+
+      test(
+        'Testing CartBloc checkoutSubTotalHidePriceMaterial for Other then ID',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first,
+            ],
+            aplSimulatorOrder: aplSimulatorOrder,
+            config: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+          );
+          expect(
+            cartBlocState.checkoutSubTotalHidePriceMaterial,
+            cartBlocState.subTotalHidePriceMaterial,
           );
         },
       );
