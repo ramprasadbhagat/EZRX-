@@ -22,7 +22,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'new_payment_bloc.freezed.dart';
+
 part 'new_payment_event.dart';
+
 part 'new_payment_state.dart';
 
 class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
@@ -49,6 +51,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             salesOrganisation: e.salesOrganisation,
             isFetchingPaymentMethod: true,
             shipToInfo: e.shipToInfo,
+            createVirtualAccountFailed: false,
           ),
         );
 
@@ -302,6 +305,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
           state.copyWith(
             failureOrSuccessOption: none(),
             isCreatingVirtualAccount: true,
+            createVirtualAccountFailed: false,
           ),
         );
 
@@ -319,6 +323,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isCreatingVirtualAccount: false,
+                createVirtualAccountFailed: true,
               ),
             );
           },
@@ -328,6 +333,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
                 failureOrSuccessOption: none(),
                 isCreatingVirtualAccount: false,
                 createVirtualAccount: createVirtualAccount,
+                createVirtualAccountFailed: false,
               ),
             );
           },

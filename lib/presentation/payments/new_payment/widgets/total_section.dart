@@ -3,6 +3,7 @@ part of 'package:ezrxmobile/presentation/payments/new_payment/new_payment_page.d
 class _TotalAmountSection extends StatelessWidget {
   final int currentStep;
   final TabController tabController;
+
   const _TotalAmountSection({
     required this.currentStep,
     required this.tabController,
@@ -66,40 +67,28 @@ class _TotalAmountSection extends StatelessWidget {
             ),
           if (currentStep == 2)
             isID
-                ? BlocBuilder<NewPaymentBloc, NewPaymentState>(
-                    buildWhen: (previous, current) =>
-                        previous.isCreatingVirtualAccount !=
-                            current.isCreatingVirtualAccount ||
-                        previous.selectedPaymentMethod.options !=
-                            current.selectedPaymentMethod.options,
-                    builder: (context, state) {
-                      return LoadingShimmer.withChild(
-                        enabled: state.isCreatingVirtualAccount,
-                        child: ElevatedButton(
-                          key: WidgetKeys.nextButton,
-                          onPressed: state.enableCreateVirtualAccount
-                              ? () async {
-                                  final confirmed =
-                                      await _showConfirmPaymentPopup(
-                                    context,
+                ? _NextButtonID(
+                    onTab: state.enableCreateVirtualAccount
+                        ? () async {
+                            final confirmed = await _showConfirmPaymentPopup(
+                              context,
+                            );
+                            if ((confirmed ?? false) && context.mounted) {
+                              context.read<NewPaymentBloc>().add(
+                                    const NewPaymentEvent
+                                        .createVirtualAccount(),
                                   );
-                                  if ((confirmed ?? false) && context.mounted) {
-                                    context.read<NewPaymentBloc>().add(
-                                          const NewPaymentEvent
-                                              .createVirtualAccount(),
-                                        );
-                                  }
-                                }
-                              : null,
-                          child: Text(
-                            context.tr('Next'),
-                            style: const TextStyle(
-                              color: ZPColors.white,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+                              unawaited(
+                                context.router.pushAndPopUntil(
+                                  const PaymentAdviceCreatedPageRoute(),
+                                  predicate: (Route route) =>
+                                      route.settings.name ==
+                                      PaymentPageRoute.name,
+                                ),
+                              );
+                            }
+                          }
+                        : null,
                   )
                 : _NextButton(
                     tabController: tabController,

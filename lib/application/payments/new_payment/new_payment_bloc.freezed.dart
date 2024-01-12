@@ -3507,6 +3507,7 @@ mixin _$NewPaymentState {
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
   bool get isCreatingVirtualAccount => throw _privateConstructorUsedError;
+  bool get createVirtualAccountFailed => throw _privateConstructorUsedError;
   CreateVirtualAccount get createVirtualAccount =>
       throw _privateConstructorUsedError;
   bool get isFetchingPrincipalCutoffs => throw _privateConstructorUsedError;
@@ -3540,6 +3541,7 @@ abstract class $NewPaymentStateCopyWith<$Res> {
       ShipToInfo shipToInfo,
       User user,
       bool isCreatingVirtualAccount,
+      bool createVirtualAccountFailed,
       CreateVirtualAccount createVirtualAccount,
       bool isFetchingPrincipalCutoffs,
       PrincipalCutoffs principalCutoffs});
@@ -3584,6 +3586,7 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
     Object? shipToInfo = null,
     Object? user = null,
     Object? isCreatingVirtualAccount = null,
+    Object? createVirtualAccountFailed = null,
     Object? createVirtualAccount = null,
     Object? isFetchingPrincipalCutoffs = null,
     Object? principalCutoffs = null,
@@ -3652,6 +3655,10 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
       isCreatingVirtualAccount: null == isCreatingVirtualAccount
           ? _value.isCreatingVirtualAccount
           : isCreatingVirtualAccount // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createVirtualAccountFailed: null == createVirtualAccountFailed
+          ? _value.createVirtualAccountFailed
+          : createVirtualAccountFailed // ignore: cast_nullable_to_non_nullable
               as bool,
       createVirtualAccount: null == createVirtualAccount
           ? _value.createVirtualAccount
@@ -3770,6 +3777,7 @@ abstract class _$$_NewPaymentStateCopyWith<$Res>
       ShipToInfo shipToInfo,
       User user,
       bool isCreatingVirtualAccount,
+      bool createVirtualAccountFailed,
       CreateVirtualAccount createVirtualAccount,
       bool isFetchingPrincipalCutoffs,
       PrincipalCutoffs principalCutoffs});
@@ -3821,6 +3829,7 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? user = null,
     Object? isCreatingVirtualAccount = null,
+    Object? createVirtualAccountFailed = null,
     Object? createVirtualAccount = null,
     Object? isFetchingPrincipalCutoffs = null,
     Object? principalCutoffs = null,
@@ -3890,6 +3899,10 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
           ? _value.isCreatingVirtualAccount
           : isCreatingVirtualAccount // ignore: cast_nullable_to_non_nullable
               as bool,
+      createVirtualAccountFailed: null == createVirtualAccountFailed
+          ? _value.createVirtualAccountFailed
+          : createVirtualAccountFailed // ignore: cast_nullable_to_non_nullable
+              as bool,
       createVirtualAccount: null == createVirtualAccount
           ? _value.createVirtualAccount
           : createVirtualAccount // ignore: cast_nullable_to_non_nullable
@@ -3926,6 +3939,7 @@ class _$_NewPaymentState extends _NewPaymentState {
       required this.shipToInfo,
       required this.user,
       required this.isCreatingVirtualAccount,
+      required this.createVirtualAccountFailed,
       required this.createVirtualAccount,
       required this.isFetchingPrincipalCutoffs,
       required this.principalCutoffs})
@@ -3986,6 +4000,8 @@ class _$_NewPaymentState extends _NewPaymentState {
   @override
   final bool isCreatingVirtualAccount;
   @override
+  final bool createVirtualAccountFailed;
+  @override
   final CreateVirtualAccount createVirtualAccount;
   @override
   final bool isFetchingPrincipalCutoffs;
@@ -3994,7 +4010,7 @@ class _$_NewPaymentState extends _NewPaymentState {
 
   @override
   String toString() {
-    return 'NewPaymentState(customerPaymentInfo: $customerPaymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, isCreatingVirtualAccount: $isCreatingVirtualAccount, createVirtualAccount: $createVirtualAccount, isFetchingPrincipalCutoffs: $isFetchingPrincipalCutoffs, principalCutoffs: $principalCutoffs)';
+    return 'NewPaymentState(customerPaymentInfo: $customerPaymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, isCreatingVirtualAccount: $isCreatingVirtualAccount, createVirtualAccountFailed: $createVirtualAccountFailed, createVirtualAccount: $createVirtualAccount, isFetchingPrincipalCutoffs: $isFetchingPrincipalCutoffs, principalCutoffs: $principalCutoffs)';
   }
 
   @override
@@ -4012,15 +4028,13 @@ class _$_NewPaymentState extends _NewPaymentState {
                 .equals(other._selectedInvoices, _selectedInvoices) &&
             const DeepCollectionEquality()
                 .equals(other._selectedCredits, _selectedCredits) &&
-            (identical(
-                    other.isFetchingInvoiceInfoPdf, isFetchingInvoiceInfoPdf) ||
+            (identical(other.isFetchingInvoiceInfoPdf, isFetchingInvoiceInfoPdf) ||
                 other.isFetchingInvoiceInfoPdf == isFetchingInvoiceInfoPdf) &&
             (identical(other.paymentInvoiceInfoPdf, paymentInvoiceInfoPdf) ||
                 other.paymentInvoiceInfoPdf == paymentInvoiceInfoPdf) &&
             (identical(other.isSavingInvoicePdf, isSavingInvoicePdf) ||
                 other.isSavingInvoicePdf == isSavingInvoicePdf) &&
-            (identical(
-                    other.isFetchingPaymentMethod, isFetchingPaymentMethod) ||
+            (identical(other.isFetchingPaymentMethod, isFetchingPaymentMethod) ||
                 other.isFetchingPaymentMethod == isFetchingPaymentMethod) &&
             const DeepCollectionEquality()
                 .equals(other._paymentMethods, _paymentMethods) &&
@@ -4033,9 +4047,12 @@ class _$_NewPaymentState extends _NewPaymentState {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(
-                    other.isCreatingVirtualAccount, isCreatingVirtualAccount) ||
+            (identical(other.isCreatingVirtualAccount, isCreatingVirtualAccount) ||
                 other.isCreatingVirtualAccount == isCreatingVirtualAccount) &&
+            (identical(other.createVirtualAccountFailed,
+                    createVirtualAccountFailed) ||
+                other.createVirtualAccountFailed ==
+                    createVirtualAccountFailed) &&
             (identical(other.createVirtualAccount, createVirtualAccount) ||
                 other.createVirtualAccount == createVirtualAccount) &&
             (identical(other.isFetchingPrincipalCutoffs,
@@ -4065,6 +4082,7 @@ class _$_NewPaymentState extends _NewPaymentState {
         shipToInfo,
         user,
         isCreatingVirtualAccount,
+        createVirtualAccountFailed,
         createVirtualAccount,
         isFetchingPrincipalCutoffs,
         principalCutoffs
@@ -4095,6 +4113,7 @@ abstract class _NewPaymentState extends NewPaymentState {
       required final ShipToInfo shipToInfo,
       required final User user,
       required final bool isCreatingVirtualAccount,
+      required final bool createVirtualAccountFailed,
       required final CreateVirtualAccount createVirtualAccount,
       required final bool isFetchingPrincipalCutoffs,
       required final PrincipalCutoffs principalCutoffs}) = _$_NewPaymentState;
@@ -4132,6 +4151,8 @@ abstract class _NewPaymentState extends NewPaymentState {
   User get user;
   @override
   bool get isCreatingVirtualAccount;
+  @override
+  bool get createVirtualAccountFailed;
   @override
   CreateVirtualAccount get createVirtualAccount;
   @override

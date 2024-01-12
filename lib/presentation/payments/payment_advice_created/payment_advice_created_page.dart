@@ -41,16 +41,28 @@ import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_invoice_pdf.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_save_pdf_button.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_next_step.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payments_advice_message.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_summary_section.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_please_note.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_buttons.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_footer_section.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_body_section.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_body_apl_section.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_cancel_advice_button.dart';
+
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_va_failed.dart';
 
 class PaymentAdviceCreatedPage extends StatelessWidget {
   const PaymentAdviceCreatedPage({Key? key}) : super(key: key);
@@ -59,8 +71,55 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<NewPaymentBloc, NewPaymentState>(
       listenWhen: (previous, current) =>
-          previous.isFetchingInvoiceInfoPdf != current.isFetchingInvoiceInfoPdf,
+          previous.isFetchingInvoiceInfoPdf !=
+              current.isFetchingInvoiceInfoPdf ||
+          (previous.isCreatingVirtualAccount !=
+                  current.isCreatingVirtualAccount &&
+              !current.isCreatingVirtualAccount),
       listener: (context, state) {
+        if (!state.isCreatingVirtualAccount) {
+          state.failureOrSuccessOption.fold(
+            () {
+              context.read<PaymentSummaryDetailsBloc>().add(
+                    PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+                      details: PaymentSummaryDetails.fromCreateVirtualAccount(
+                        state.createVirtualAccount,
+                      ),
+                    ),
+                  );
+              trackMixpanelEvent(
+                MixpanelEvents.paymentSuccess,
+                props: {
+                  MixpanelProps.paymentAmount: state.amountTotal,
+                  MixpanelProps.paymentMethod: state
+                      .selectedPaymentMethod.paymentMethod
+                      .getOrDefaultValue(''),
+                  MixpanelProps.paymentDocumentCount:
+                      state.allSelectedItems.length,
+                  MixpanelProps.paymentAdviseId: state.createVirtualAccount.id,
+                },
+              );
+            },
+            (either) => either.fold(
+              (failure) {
+                trackMixpanelEvent(
+                  MixpanelEvents.paymentFailure,
+                  props: {
+                    MixpanelProps.errorMessage:
+                        'Creating Virtual Account for payment advise failure with error message: ${failure.failureMessage}',
+                    MixpanelProps.paymentMethod: state
+                        .selectedPaymentMethod.paymentMethod
+                        .getOrDefaultValue(''),
+                    MixpanelProps.paymentDocumentCount:
+                        state.allSelectedItems.length,
+                  },
+                );
+              },
+              (_) {},
+            ),
+          );
+        }
+
         if (!state.isFetchingInvoiceInfoPdf) {
           state.failureOrSuccessOption.fold(
             () {},
@@ -86,14 +145,19 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
         }
       },
       buildWhen: (previous, current) =>
-          previous.isFetchingInvoiceInfoPdf != current.isFetchingInvoiceInfoPdf,
+          previous.isFetchingInvoiceInfoPdf !=
+              current.isFetchingInvoiceInfoPdf ||
+          previous.isCreatingVirtualAccount !=
+              current.isCreatingVirtualAccount ||
+          previous.createVirtualAccountFailed !=
+              current.createVirtualAccountFailed,
       builder: (context, state) {
         return Scaffold(
           appBar: CustomAppBar.commonAppBar(
             automaticallyImplyLeading: false,
             leadingWidth: state.canDisplayCrossButton ? null : 5,
             title: Text(
-              state.isFetchingInvoiceInfoPdf
+              state.isFetchingInvoiceInfoPdf || state.isCreatingVirtualAccount
                   ? context.tr('Generating payment advice...')
                   : context.tr('Payment advice generated'),
             ),
@@ -114,20 +178,22 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
             customerBlocked:
                 context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
           ),
-          body: state.isFetchingInvoiceInfoPdf
+          body: state.isFetchingInvoiceInfoPdf || state.isCreatingVirtualAccount
               ? Center(
                   child: LoadingShimmer.logo(
                     key: WidgetKeys.paymentAdviceScreenLoader,
                   ),
                 )
-              : Column(
-                  children: const [
-                    Expanded(
-                      child: _PaymentAdviceBodySection(),
+              : state.createVirtualAccountFailed
+                  ? _PaymentVirtualAccountFailed()
+                  : Column(
+                      children: const [
+                        Expanded(
+                          child: _PaymentAdviceBodySection(),
+                        ),
+                        _PaymentAdviceFooterSection(),
+                      ],
                     ),
-                    _PaymentAdviceFooterSection(),
-                  ],
-                ),
         );
       },
     );

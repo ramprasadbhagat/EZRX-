@@ -28,9 +28,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 part 'package:ezrxmobile/presentation/payments/new_payment/widgets/warning_label_virtual_bank.dart';
+
 part 'package:ezrxmobile/presentation/payments/new_payment/widgets/total_section.dart';
+
 part 'package:ezrxmobile/presentation/payments/new_payment/widgets/new_payment_body.dart';
+
 part 'package:ezrxmobile/presentation/payments/new_payment/widgets/new_payment_footer.dart';
+
 part 'package:ezrxmobile/presentation/payments/new_payment/widgets/select_all_section.dart';
 
 class NewPaymentPage extends StatelessWidget {
@@ -188,6 +192,41 @@ class _PreviousButton extends StatelessWidget {
             },
             icon: const Icon(Icons.chevron_left),
           );
+  }
+}
+
+class _NextButtonID extends StatelessWidget {
+  final VoidCallback? onTab;
+
+  const _NextButtonID({
+    Key? key,
+    this.onTab,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<NewPaymentBloc, NewPaymentState>(
+      buildWhen: (previous, current) =>
+          previous.isCreatingVirtualAccount !=
+              current.isCreatingVirtualAccount ||
+          previous.selectedPaymentMethod.options !=
+              current.selectedPaymentMethod.options,
+      builder: (context, state) {
+        return LoadingShimmer.withChild(
+          enabled: state.isCreatingVirtualAccount,
+          child: ElevatedButton(
+            key: WidgetKeys.nextButton,
+            onPressed: onTab,
+            child: Text(
+              context.tr('Next'),
+              style: const TextStyle(
+                color: ZPColors.white,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 

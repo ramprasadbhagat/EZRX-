@@ -73,6 +73,9 @@ void main() {
   late PaymentInvoiceInfoPdf fakePaymentInvoiceInfoPdf;
   late PaymentSummaryDetails fakePaymentSummaryDetails;
   late PaymentSummaryBloc mockPaymentSummaryBloc;
+  const fakeErrorMessage = 'fake-error';
+
+  final paymentAdviceFailed = find.byKey(WidgetKeys.paymentAdviceFailed);
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -751,6 +754,151 @@ void main() {
             predicate: any(named: 'predicate'),
           ),
         ).called(1);
+      });
+    });
+    group('APL Payment Method Test', () {
+      testWidgets('Apl payment fetch Payment Summary DetailsInfo',
+          (tester) async {
+        final paymentMethodOption = PaymentMethodOption.empty().copyWith(
+          bankOptionId: BankOptionId('permata'),
+        );
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              paymentMethods: [
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [
+                    paymentMethodOption.copyWith(
+                      bankOptionId: BankOptionId('mandiri'),
+                    ),
+                  ],
+                ),
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [paymentMethodOption],
+                ),
+              ],
+              isCreatingVirtualAccount: true,
+            ),
+            NewPaymentState.initial().copyWith(
+              paymentMethods: [
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [
+                    paymentMethodOption.copyWith(
+                      bankOptionId: BankOptionId('mandiri'),
+                    ),
+                  ],
+                ),
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [paymentMethodOption],
+                ),
+              ],
+            ),
+          ]),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        verify(
+          () => paymentSummaryDetailsBlocMock.add(
+            PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+              details: PaymentSummaryDetails.empty(),
+            ),
+          ),
+        ).called(1);
+      });
+
+      testWidgets('Apl payment Unable to create new payment', (tester) async {
+        final paymentMethodOption = PaymentMethodOption.empty().copyWith(
+          bankOptionId: BankOptionId('permata'),
+        );
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              paymentMethods: [
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [
+                    paymentMethodOption.copyWith(
+                      bankOptionId: BankOptionId('mandiri'),
+                    ),
+                  ],
+                ),
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [paymentMethodOption],
+                ),
+              ],
+              isCreatingVirtualAccount: true,
+            ),
+            NewPaymentState.initial().copyWith(
+              paymentMethods: [
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [
+                    paymentMethodOption.copyWith(
+                      bankOptionId: BankOptionId('mandiri'),
+                    ),
+                  ],
+                ),
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [paymentMethodOption],
+                ),
+              ],
+              failureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other(fakeErrorMessage))),
+              isCreatingVirtualAccount: false,
+              createVirtualAccountFailed: true,
+            ),
+          ]),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(
+          paymentAdviceFailed,
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: paymentAdviceFailed,
+            matching: find.text('Payment Failed!'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: paymentAdviceFailed,
+            matching: find.text(
+              'Sorry your payment creation is failed, please do try again later',
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: paymentAdviceFailed,
+            matching: find.text(
+              'Payment Summary',
+            ),
+          ),
+          findsOneWidget,
+        );
       });
     });
   });

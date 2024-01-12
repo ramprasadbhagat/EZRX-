@@ -10,11 +10,9 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -107,8 +105,6 @@ void main() {
 
   //////////////////Finder////////////////////////////////////////////////////
   final paymentMethodRadio = find.byKey(WidgetKeys.paymentMethodRadio);
-  final confirmBottomSheet = find.byKey(WidgetKeys.confirmBottomSheet);
-
   ////////////////////////////////////////////////////////////////////////////
 
   Widget getWidget() {
@@ -622,187 +618,6 @@ void main() {
         final documentReferenceID = find.text('Gov. no 0800072883');
         expect(documentReferenceID, findsOneWidget);
       });
-
-      testWidgets('Apl payment fetch Payment Summary DetailsInfo',
-          (tester) async {
-        when(
-          () => autoRouterMock.pushAndPopUntil(
-            const PaymentAdviceCreatedPageRoute(),
-            predicate: any(named: 'predicate'),
-          ),
-        ).thenAnswer((invocation) => Future.value());
-        final paymentMethodOption = PaymentMethodOption.empty().copyWith(
-          bankOptionId: BankOptionId('permata'),
-        );
-        when(() => newPaymentBlocMock.state).thenReturn(
-          NewPaymentState.initial().copyWith(
-            paymentMethods: [
-              NewPaymentMethod(
-                paymentMethod: PaymentMethodValue('Bank-In'),
-                options: [
-                  paymentMethodOption.copyWith(
-                    bankOptionId: BankOptionId('mandiri'),
-                  ),
-                ],
-              ),
-              NewPaymentMethod(
-                paymentMethod: PaymentMethodValue('Bank-In'),
-                options: [paymentMethodOption],
-              ),
-            ],
-          ),
-        );
-        whenListen(
-          newPaymentBlocMock,
-          Stream.fromIterable([
-            NewPaymentState.initial().copyWith(
-              paymentMethods: [
-                NewPaymentMethod(
-                  paymentMethod: PaymentMethodValue('Bank-In'),
-                  options: [
-                    paymentMethodOption.copyWith(
-                      bankOptionId: BankOptionId('mandiri'),
-                    ),
-                  ],
-                ),
-                NewPaymentMethod(
-                  paymentMethod: PaymentMethodValue('Bank-In'),
-                  options: [paymentMethodOption],
-                ),
-              ],
-              isCreatingVirtualAccount: true,
-            ),
-            NewPaymentState.initial().copyWith(
-              paymentMethods: [
-                NewPaymentMethod(
-                  paymentMethod: PaymentMethodValue('Bank-In'),
-                  options: [
-                    paymentMethodOption.copyWith(
-                      bankOptionId: BankOptionId('mandiri'),
-                    ),
-                  ],
-                ),
-                NewPaymentMethod(
-                  paymentMethod: PaymentMethodValue('Bank-In'),
-                  options: [paymentMethodOption],
-                ),
-              ],
-            ),
-          ]),
-        );
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeIDSalesOrganisation,
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-
-        verify(
-          () => paymentSummaryDetailsBlocMock.add(
-            PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-              details: PaymentSummaryDetails.empty(),
-            ),
-          ),
-        ).called(1);
-        verify(
-          () => autoRouterMock.pushAndPopUntil(
-            const PaymentAdviceCreatedPageRoute(),
-            predicate: any(named: 'predicate'),
-          ),
-        ).called(1);
-      });
-
-      testWidgets('Apl payment Unable to create new payment', (tester) async {
-        final paymentMethodOption = PaymentMethodOption.empty().copyWith(
-          bankOptionId: BankOptionId('permata'),
-        );
-        when(() => newPaymentBlocMock.state).thenReturn(
-          NewPaymentState.initial().copyWith(
-            paymentMethods: [
-              NewPaymentMethod(
-                paymentMethod: PaymentMethodValue('Bank-In'),
-                options: [
-                  paymentMethodOption.copyWith(
-                    bankOptionId: BankOptionId('mandiri'),
-                  ),
-                ],
-              ),
-              NewPaymentMethod(
-                paymentMethod: PaymentMethodValue('Bank-In'),
-                options: [paymentMethodOption],
-              ),
-            ],
-          ),
-        );
-        whenListen(
-          newPaymentBlocMock,
-          Stream.fromIterable([
-            NewPaymentState.initial().copyWith(
-              paymentMethods: [
-                NewPaymentMethod(
-                  paymentMethod: PaymentMethodValue('Bank-In'),
-                  options: [
-                    paymentMethodOption.copyWith(
-                      bankOptionId: BankOptionId('mandiri'),
-                    ),
-                  ],
-                ),
-                NewPaymentMethod(
-                  paymentMethod: PaymentMethodValue('Bank-In'),
-                  options: [paymentMethodOption],
-                ),
-              ],
-              isCreatingVirtualAccount: true,
-            ),
-            NewPaymentState.initial().copyWith(
-              paymentMethods: [
-                NewPaymentMethod(
-                  paymentMethod: PaymentMethodValue('Bank-In'),
-                  options: [
-                    paymentMethodOption.copyWith(
-                      bankOptionId: BankOptionId('mandiri'),
-                    ),
-                  ],
-                ),
-                NewPaymentMethod(
-                  paymentMethod: PaymentMethodValue('Bank-In'),
-                  options: [paymentMethodOption],
-                ),
-              ],
-              failureOrSuccessOption:
-                  optionOf(const Left(ApiFailure.other(fakeErrorMessage))),
-            ),
-          ]),
-        );
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeIDSalesOrganisation,
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-        expect(
-          confirmBottomSheet,
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: confirmBottomSheet,
-            matching: find.text('Unable to create new payment'),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: confirmBottomSheet,
-            matching: find.text(
-              'You have a pending payment which has not been completed. Please create a new payment only after the existing one has been cleared.',
-            ),
-          ),
-          findsOneWidget,
-        );
-      });
     });
 
     group('APL Payment Method Test', () {
@@ -827,72 +642,6 @@ void main() {
         expect(
           find.byKey(WidgetKeys.paymentMethodRadio),
           findsNWidgets(paymentMethodList.length),
-        );
-      });
-
-      testWidgets('Payment success', (tester) async {
-        when(
-          () => autoRouterMock.pushAndPopUntil(
-            const PaymentAdviceCreatedPageRoute(),
-            predicate: any(named: 'predicate'),
-          ),
-        ).thenAnswer((invocation) => Future.value());
-
-        final expectStates = [
-          NewPaymentState.initial().copyWith(
-            paymentMethods: paymentMethodList,
-            isCreatingVirtualAccount: true,
-          ),
-          NewPaymentState.initial().copyWith(
-            paymentMethods: paymentMethodList,
-            createVirtualAccount: CreateVirtualAccount.empty(),
-          ),
-        ];
-        whenListen(newPaymentBlocMock, Stream.fromIterable(expectStates));
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-        verify(
-          () => paymentSummaryDetailsBlocMock.add(
-            PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-              details: PaymentSummaryDetails.fromCreateVirtualAccount(
-                CreateVirtualAccount.empty(),
-              ),
-            ),
-          ),
-        ).called(1);
-
-        verify(
-          () => autoRouterMock.pushAndPopUntil(
-            const PaymentAdviceCreatedPageRoute(),
-            predicate: any(named: 'predicate'),
-          ),
-        ).called(1);
-      });
-
-      testWidgets('Show BottomSheet When Payment Failure', (tester) async {
-        final expectStates = [
-          NewPaymentState.initial().copyWith(
-            paymentMethods: paymentMethodList,
-            isCreatingVirtualAccount: true,
-          ),
-          NewPaymentState.initial().copyWith(
-            paymentMethods: paymentMethodList,
-            failureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('fake-erroe'))),
-          ),
-        ];
-        whenListen(newPaymentBlocMock, Stream.fromIterable(expectStates));
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-
-        expect(find.byKey(WidgetKeys.confirmBottomSheet), findsOneWidget);
-        expect(find.text('Unable to create new payment'.tr()), findsOneWidget);
-        expect(
-          find.text(
-            'You have a pending payment which has not been completed. Please create a new payment only after the existing one has been cleared.'
-                .tr(),
-          ),
-          findsOneWidget,
         );
       });
 
