@@ -50,7 +50,7 @@ class LoginOnBehalf extends StatelessWidget {
                   children: [
                     Text(
                       context.tr(
-                        'Login on behalf',
+                        'Log in on behalf',
                       ),
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                             color: ZPColors.gradient,

@@ -89,7 +89,7 @@ void main() {
     );
   }
 
-  group('Test "Login on Behalf Sheet"', () {
+  group('Test "Log in on Behalf Sheet"', () {
     testWidgets('On Press Log in on behalf and show bottomsheet',
         (tester) async {
       when(() => proxyLoginFormBlocMock.state).thenReturn(

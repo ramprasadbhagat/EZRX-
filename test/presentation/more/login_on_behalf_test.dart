@@ -83,7 +83,7 @@ void main() {
     );
   }
 
-  group('Test "Login on Behalf"', () {
+  group('Test "Log in on Behalf"', () {
     testWidgets('Content Display When User Can Login Behalf', (tester) async {
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
@@ -96,7 +96,7 @@ void main() {
       await tester.pump();
       expect(find.byKey(WidgetKeys.loginOnBehalfButtonKey), findsOneWidget);
       final loginOnBehalfTextFinder = find.text(
-        'Login on behalf',
+        'Log in on behalf',
       );
       expect(loginOnBehalfTextFinder, findsOneWidget);
     });

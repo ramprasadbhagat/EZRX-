@@ -77,7 +77,7 @@ class LoginOnBehalfSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  context.tr('Login on behalf'),
+                  context.tr('Log in on behalf'),
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge

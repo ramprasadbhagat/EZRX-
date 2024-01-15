@@ -26,7 +26,7 @@ class _LoginButton extends StatelessWidget {
                     ),
                   );
             },
-            child: Text('Login'.tr()),
+            child: Text('Log in'.tr()),
           ),
         );
       },
