@@ -8,12 +8,14 @@ import 'package:flutter_test/flutter_test.dart';
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   final fakeMaterialNumber = MaterialNumber('fake-material');
+  final fakeSecondMaterialNumber = MaterialNumber('fake-material-2');
   final fakeBonusMaterialNumber = MaterialNumber('fake-bonus');
 
   final material = PriceAggregate.empty().copyWith(
     materialInfo:
         MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber),
   );
+
   final materialApl = AplProduct.empty().copyWith(
     type: MaterialInfoType.material(),
     materialNumber: fakeMaterialNumber,
@@ -25,8 +27,21 @@ void main() async {
     itemNumber: '2',
     parentItemNumber: '1',
   );
+  final secondMaterialApl = AplProduct.empty().copyWith(
+    type: MaterialInfoType.material(),
+    materialNumber: fakeSecondMaterialNumber,
+    itemNumber: '2',
+  );
 
   group('AplSimulatorOrder entity -', () {
+    test('productDeterminationList', () {
+      final testedValue = AplSimulatorOrder.empty().copyWith(
+        aplProducts: [materialApl, secondMaterialApl],
+      ).productDeterminationList(
+        [materialApl.toPriceAggregate(material)],
+      );
+      expect(testedValue, [secondMaterialApl]);
+    });
     test('toCartItemList', () {
       final newMaterial = materialApl.toPriceAggregate(material);
       final testedValue = AplSimulatorOrder.empty().copyWith(

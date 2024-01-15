@@ -1,5 +1,10 @@
 import 'package:dartz/dartz.dart';
 
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_product.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
+
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -9,7 +14,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
@@ -22,11 +26,9 @@ import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
-import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
@@ -2550,6 +2552,264 @@ void main() {
       );
     },
   );
+
+  group('Testing CartBloc updateProductDetermination test', () {
+    blocTest<CartBloc, CartState>(
+      'updateProductDetermination get product list failure',
+      build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+      setUp: () {
+        when(
+          () => productDetailRepository.getProductListDetail(
+            materialNumber: [MaterialNumber('fake-material-number')],
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: shipToInfo,
+            language: fakeClientUser.preferredLanguage,
+            types: [MaterialInfoType.material()],
+          ),
+        ).thenAnswer(
+          (invocation) async => Left(
+            fakeError,
+          ),
+        );
+      },
+      seed: () => CartState.initial().copyWith(
+        cartProducts: [PriceAggregate.empty()],
+        salesOrganisation: fakeSalesOrganisation,
+        config: fakeMYSalesOrgConfigs,
+        shipToInfo: shipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+      ),
+      act: (bloc) => bloc.add(
+        CartEvent.updateProductDetermination(
+          productDeterminationList: [
+            AplProduct.empty().copyWith(
+              materialNumber: MaterialNumber('fake-material-number'),
+            ),
+          ],
+          updatedCartItems: [PriceAggregate.empty()],
+        ),
+      ),
+      expect: () => [
+        CartState.initial().copyWith(
+          cartProducts: [PriceAggregate.empty()],
+          salesOrganisation: fakeSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isUpdateProductDetermination: true,
+        ),
+        CartState.initial().copyWith(
+          cartProducts: [PriceAggregate.empty()],
+          salesOrganisation: fakeSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          updateFailureOrSuccessOption: optionOf(
+            Left(
+              fakeError,
+            ),
+          ),
+        ),
+      ],
+    );
+
+    blocTest<CartBloc, CartState>(
+      'updateProductDetermination Update Cart With Product Determination failure',
+      build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+      setUp: () {
+        when(
+          () => productDetailRepository.getProductListDetail(
+            materialNumber: [MaterialNumber('fake-material-number')],
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: shipToInfo,
+            language: fakeClientUser.preferredLanguage,
+            types: [MaterialInfoType.material()],
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            [
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-number'),
+              ),
+            ],
+          ),
+        );
+
+        when(
+          () => cartRepositoryMock.updateCartWithProductDetermination(
+            productDeterminationList: [
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-number'),
+                quantity: MaterialQty(100),
+              ),
+            ],
+            updatedCartItems: [PriceAggregate.empty()],
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisationConfig: fakeMYSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: shipToInfo,
+            language: fakeClientUser.preferredLanguage,
+          ),
+        ).thenAnswer(
+          (invocation) async => Left(fakeError),
+        );
+      },
+      seed: () => CartState.initial().copyWith(
+        cartProducts: [PriceAggregate.empty()],
+        salesOrganisation: fakeSalesOrganisation,
+        config: fakeMYSalesOrgConfigs,
+        shipToInfo: shipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+      ),
+      act: (bloc) => bloc.add(
+        CartEvent.updateProductDetermination(
+          productDeterminationList: [
+            AplProduct.empty().copyWith(
+              materialNumber: MaterialNumber('fake-material-number'),
+              productQty: MaterialQty(100),
+            ),
+          ],
+          updatedCartItems: [PriceAggregate.empty()],
+        ),
+      ),
+      expect: () => [
+        CartState.initial().copyWith(
+          cartProducts: [PriceAggregate.empty()],
+          salesOrganisation: fakeSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isUpdateProductDetermination: true,
+        ),
+        CartState.initial().copyWith(
+          cartProducts: [PriceAggregate.empty()],
+          salesOrganisation: fakeSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          updateFailureOrSuccessOption: optionOf(
+            Left(
+              fakeError,
+            ),
+          ),
+        ),
+      ],
+    );
+
+    blocTest<CartBloc, CartState>(
+      'updateProductDetermination update Cart With Product Determination success',
+      build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+      setUp: () {
+        when(
+          () => productDetailRepository.getProductListDetail(
+            materialNumber: [MaterialNumber('fake-material-number')],
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: shipToInfo,
+            language: fakeClientUser.preferredLanguage,
+            types: [MaterialInfoType.material()],
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            [
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-number'),
+              ),
+            ],
+          ),
+        );
+
+        when(
+          () => cartRepositoryMock.updateCartWithProductDetermination(
+            productDeterminationList: [
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-number'),
+                quantity: MaterialQty(100),
+              ),
+            ],
+            updatedCartItems: priceAggregates,
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisationConfig: fakeMYSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: shipToInfo,
+            language: fakeClientUser.preferredLanguage,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(priceAggregatesForID),
+        );
+
+        when(
+          () => cartRepositoryMock.getStockInfoList(
+            items: priceAggregatesForID
+                .map(
+                  (element) => element.toStockListMaterials,
+                )
+                .expand((element) => element)
+                .toList(),
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: shipToInfo,
+          ),
+        ).thenAnswer(
+          (invocation) async => Left(fakeError),
+        );
+      },
+      seed: () => CartState.initial().copyWith(
+        cartProducts: priceAggregates,
+        salesOrganisation: fakeSalesOrganisation,
+        config: fakeMYSalesOrgConfigs,
+        shipToInfo: shipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+      ),
+      act: (bloc) => bloc.add(
+        CartEvent.updateProductDetermination(
+          productDeterminationList: [
+            AplProduct.empty().copyWith(
+              materialNumber: MaterialNumber('fake-material-number'),
+              productQty: MaterialQty(100),
+            ),
+          ],
+          updatedCartItems: priceAggregates,
+        ),
+      ),
+      expect: () => [
+        CartState.initial().copyWith(
+          cartProducts: priceAggregates,
+          salesOrganisation: fakeSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isUpdateProductDetermination: true,
+        ),
+        CartState.initial().copyWith(
+          cartProducts: priceAggregatesForID,
+          salesOrganisation: fakeSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        CartState.initial().copyWith(
+          cartProducts: priceAggregatesForID,
+          salesOrganisation: fakeSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isUpdatingStock: true,
+        ),
+        CartState.initial().copyWith(
+          cartProducts: priceAggregatesForID,
+          salesOrganisation: fakeSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          apiFailureOrSuccessOption: optionOf(Left(fakeError)),
+        ),
+      ],
+    );
+  });
 
   group(
     'Testing CartBloc state test',

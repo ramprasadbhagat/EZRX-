@@ -7,6 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
@@ -3209,6 +3210,39 @@ void main() {
             ),
             findsOneWidget,
           );
+        },
+      );
+
+      testWidgets(
+        'pop to cart page if updateProductDetermination fail',
+        (tester) async {
+          whenListen(
+            cartBloc,
+            Stream.fromIterable([
+              CartState.initial().copyWith(
+                isUpdateProductDetermination: true,
+              ),
+              CartState.initial().copyWith(
+                isUpdateProductDetermination: false,
+                updateFailureOrSuccessOption:
+                    optionOf(const Left(ApiFailure.other('fake-error'))),
+              )
+            ]),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          final snackBarError = find.byKey(WidgetKeys.customSnackBar);
+          expect(snackBarError, findsOneWidget);
+          expect(
+            find.descendant(
+              of: snackBarError,
+              matching: find.text('fake-error'),
+            ),
+            findsOneWidget,
+          );
+          verify(() => autoRouterMock.popUntilRouteWithName(CartPageRoute.name))
+              .called(1);
         },
       );
     },
