@@ -3,7 +3,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -11,12 +10,9 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
-
-import '../../../common_mock_data/user_mock.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -43,7 +39,6 @@ void main() {
   final fakeShipToInfo = ShipToInfo.empty()
       .copyWith(shipToCustomerCode: '1234567', status: Status('fake_status'));
   final mockUser = User.empty();
-  final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
 
   setUp(() {
     mockConfig = MockConfig();
@@ -64,13 +59,10 @@ void main() {
           .thenAnswer((invocation) async => MaterialFilter.empty());
 
       final result = await materialFilterRepository.getMaterialFilterList(
-        salesOrgConfig:
-            mockSalesOrganisationConfigs.copyWith(salesOrg: SalesOrg('2601')),
         salesOrganisation: fakeSaleOrg,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: mockUser.copyWith(username: Username('fake_user')),
-        pickAndPack: '',
         searchKey: '',
       );
       expect(
@@ -84,53 +76,14 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await materialFilterRepository.getMaterialFilterList(
-        salesOrgConfig:
-            mockSalesOrganisationConfigs.copyWith(salesOrg: SalesOrg('2601')),
         salesOrganisation: fakeSaleOrg,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: mockUser.copyWith(username: Username('fake_user')),
-        pickAndPack: '',
         searchKey: '',
       );
       expect(
         result.isLeft(),
-        true,
-      );
-    });
-    test('get materialFilter successfully remote for salesrep', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(
-        () => materialFilterRemoteDataSource.getFiltersSalesRep(
-          salesOrganisation: '2601',
-          soldToCustomerCode: '100000345',
-          shipToCustomerCode: '1234567',
-          language: fakeClientUser.preferredLanguage.languageCode,
-          gimmickMaterial: false,
-          userName: 'user',
-        ),
-      ).thenAnswer((invocation) async => MaterialFilter.empty());
-
-      final result = await materialFilterRepository.getMaterialFilterList(
-        salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
-          salesOrg: SalesOrg('2601'),
-          currency: Currency('SG'),
-        ),
-        salesOrganisation: fakeSaleOrg,
-        customerCodeInfo: fakeCustomerCodeInfo,
-        shipToInfo: fakeShipToInfo,
-        user: mockUser.copyWith(
-          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-          id: '1',
-          username: Username('user'),
-          email: EmailAddress('user@gmail.com'),
-          customerCode: CustomerCode('100007654'),
-        ),
-        pickAndPack: '',
-        searchKey: '',
-      );
-      expect(
-        result.isRight(),
         true,
       );
     });
@@ -148,10 +101,6 @@ void main() {
       ).thenAnswer((invocation) async => MaterialFilter.empty());
 
       final result = await materialFilterRepository.getMaterialFilterList(
-        salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
-          salesOrg: SalesOrg('2601'),
-          currency: Currency('SG'),
-        ),
         salesOrganisation: fakeSaleOrg,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
@@ -161,7 +110,6 @@ void main() {
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'),
         ),
-        pickAndPack: '',
         searchKey: '',
       );
       expect(
@@ -169,34 +117,7 @@ void main() {
         true,
       );
     });
-    test('get materialFilter fail remote for salesrep', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(
-        () => materialFilterRemoteDataSource.getFiltersSalesRep(
-          salesOrganisation: '2601',
-          soldToCustomerCode: '100000345',
-          shipToCustomerCode: '1234567',
-          language: fakeClientUser.preferredLanguage.languageCode,
-          gimmickMaterial: false,
-          userName: 'user',
-        ),
-      ).thenThrow((invocation) async => MockException());
 
-      final result = await materialFilterRepository.getMaterialFilterList(
-        salesOrgConfig:
-            mockSalesOrganisationConfigs.copyWith(salesOrg: SalesOrg('2601')),
-        salesOrganisation: fakeSaleOrg,
-        customerCodeInfo: fakeCustomerCodeInfo,
-        shipToInfo: fakeShipToInfo,
-        user: mockUser.copyWith(username: Username('fake_user')),
-        pickAndPack: '',
-        searchKey: '',
-      );
-      expect(
-        result.isLeft(),
-        true,
-      );
-    });
     test('get materialFilter fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
@@ -210,13 +131,10 @@ void main() {
       ).thenThrow((invocation) async => MockException());
 
       final result = await materialFilterRepository.getMaterialFilterList(
-        salesOrgConfig:
-            mockSalesOrganisationConfigs.copyWith(salesOrg: SalesOrg('2601')),
         salesOrganisation: fakeSaleOrg,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
         user: mockUser.copyWith(username: Username('fake_user')),
-        pickAndPack: '',
         searchKey: '',
       );
       expect(

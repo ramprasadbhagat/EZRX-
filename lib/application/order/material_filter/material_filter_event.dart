@@ -8,8 +8,6 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
-    required SalesOrganisationConfigs salesOrgConfig,
-    required String pickAndPack,
     required bool hasAccessToCovidMaterial,
   }) = _fetch;
   const factory MaterialFilterEvent.updateSelectedMaterialFilter(
@@ -21,7 +19,6 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
   ) = _initSelectedMaterialFilter;
   const factory MaterialFilterEvent.updateSearchKey(String searchKey) =
       _updateSearchKey;
-  const factory MaterialFilterEvent.search() = _search;
   const factory MaterialFilterEvent.resetFilter() = _resetFilter;
 }
 

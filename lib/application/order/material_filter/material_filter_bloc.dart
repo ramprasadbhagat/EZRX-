@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -41,12 +40,10 @@ class MaterialFilterBloc
         );
         final failureOrSuccess =
             await materialFilterRepository.getMaterialFilterList(
-          salesOrgConfig: e.salesOrgConfig,
           salesOrganisation: state.salesOrganisation,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
           user: e.user,
-          pickAndPack: e.pickAndPack,
           searchKey: '',
         );
         failureOrSuccess.fold(
@@ -71,7 +68,6 @@ class MaterialFilterBloc
           },
         );
       },
-      search: (e) {},
       updateSelectedMaterialFilter: (e) {
         switch (e.filterType) {
           case MaterialFilterType.countryList:

@@ -255,17 +255,6 @@ class WidgetKeys {
       Key('materialDeliveryInstructions');
 
   //============================================================
-  //  Search Bonus page Keys
-  //============================================================
-  static Key addBonusTextField(String searchKey) =>
-      Key('addBonusTextField$searchKey');
-  static Key addItem(String materialNumber) => Key('addItem$materialNumber');
-  static const Key addBonus = Key('addBonus');
-  static const Key addBonusEmpty = Key('empty');
-  static const Key addBonusLoaderImage = Key('loaderImage');
-  static const Key bonusItemList = Key('bonusItemList');
-
-  //============================================================
   //  Combo Deal Page Keys
   //============================================================
   static const Key comboDealDetailPage = Key('comboDealDetailPage');

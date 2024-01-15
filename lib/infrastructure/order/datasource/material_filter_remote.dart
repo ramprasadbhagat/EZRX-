@@ -59,45 +59,6 @@ class MaterialFilterRemoteDataSource {
     });
   }
 
-  Future<MaterialFilter> getFiltersSalesRep({
-    required String salesOrganisation,
-    required String soldToCustomerCode,
-    required String shipToCustomerCode,
-    required String userName,
-    required bool gimmickMaterial,
-    required String language,
-  }) async {
-    return await dataSourceExceptionHandler.handle(() async {
-      final queryMaterialFilters =
-          materialFilterQueryMutation.getMaterialFilterCategoryListSalesRep();
-
-      final materialFilterInputVariables = {
-        'customer': soldToCustomerCode,
-        'salesOrganisation': salesOrganisation,
-        'customerShipToCode': shipToCustomerCode,
-        'username': userName,
-        'gimmickMaterial': gimmickMaterial,
-        'language': language,
-      };
-
-      final resMaterialFilters = await httpService.request(
-        method: 'POST',
-        url: '${config.urlConstants}license',
-        data: jsonEncode({
-          'query': queryMaterialFilters,
-          'variables': materialFilterInputVariables,
-        }),
-        apiEndpoint: 'customerMaterialsForSalesRep',
-      );
-
-      _materialFilterExceptionChecker(res: resMaterialFilters);
-      final finalData = resMaterialFilters.data['data']
-          ['customerMaterialsForSalesRep']['rawMetaData'];
-
-      return MaterialFilterDto.fromJson(finalData).toDomain();
-    });
-  }
-
   void _materialFilterExceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);

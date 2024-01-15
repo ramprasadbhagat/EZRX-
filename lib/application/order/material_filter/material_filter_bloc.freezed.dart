@@ -24,8 +24,6 @@ mixin _$MaterialFilterEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
@@ -33,7 +31,6 @@ mixin _$MaterialFilterEvent {
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function() search,
     required TResult Function() resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -45,8 +42,6 @@ mixin _$MaterialFilterEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
@@ -54,7 +49,6 @@ mixin _$MaterialFilterEvent {
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -66,8 +60,6 @@ mixin _$MaterialFilterEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
@@ -75,7 +67,6 @@ mixin _$MaterialFilterEvent {
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) =>
@@ -89,7 +80,6 @@ mixin _$MaterialFilterEvent {
     required TResult Function(_initSelectedMaterialFilter value)
         initSelectedMaterialFilter,
     required TResult Function(_updateSearchKey value) updateSearchKey,
-    required TResult Function(_search value) search,
     required TResult Function(_resetFilter value) resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -102,7 +92,6 @@ mixin _$MaterialFilterEvent {
     TResult? Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
-    TResult? Function(_search value)? search,
     TResult? Function(_resetFilter value)? resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -115,7 +104,6 @@ mixin _$MaterialFilterEvent {
     TResult Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult Function(_updateSearchKey value)? updateSearchKey,
-    TResult Function(_search value)? search,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) =>
@@ -184,8 +172,6 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
@@ -193,7 +179,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
     return initialized();
@@ -208,8 +193,6 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
@@ -217,7 +200,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
     return initialized?.call();
@@ -232,8 +214,6 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
@@ -241,7 +221,6 @@ class _$_Initialized implements _Initialized {
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -261,7 +240,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_initSelectedMaterialFilter value)
         initSelectedMaterialFilter,
     required TResult Function(_updateSearchKey value) updateSearchKey,
-    required TResult Function(_search value) search,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return initialized(this);
@@ -277,7 +255,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
-    TResult? Function(_search value)? search,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return initialized?.call(this);
@@ -293,7 +270,6 @@ class _$_Initialized implements _Initialized {
     TResult Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult Function(_updateSearchKey value)? updateSearchKey,
-    TResult Function(_search value)? search,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -318,15 +294,12 @@ abstract class _$$_fetchCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       User user,
-      SalesOrganisationConfigs salesOrgConfig,
-      String pickAndPack,
       bool hasAccessToCovidMaterial});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
 }
 
 /// @nodoc
@@ -343,8 +316,6 @@ class __$$_fetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? user = null,
-    Object? salesOrgConfig = null,
-    Object? pickAndPack = null,
     Object? hasAccessToCovidMaterial = null,
   }) {
     return _then(_$_fetch(
@@ -364,14 +335,6 @@ class __$$_fetchCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      salesOrgConfig: null == salesOrgConfig
-          ? _value.salesOrgConfig
-          : salesOrgConfig // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      pickAndPack: null == pickAndPack
-          ? _value.pickAndPack
-          : pickAndPack // ignore: cast_nullable_to_non_nullable
-              as String,
       hasAccessToCovidMaterial: null == hasAccessToCovidMaterial
           ? _value.hasAccessToCovidMaterial
           : hasAccessToCovidMaterial // ignore: cast_nullable_to_non_nullable
@@ -410,15 +373,6 @@ class __$$_fetchCopyWithImpl<$Res>
       return _then(_value.copyWith(user: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
-        (value) {
-      return _then(_value.copyWith(salesOrgConfig: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -429,8 +383,6 @@ class _$_fetch implements _fetch {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.user,
-      required this.salesOrgConfig,
-      required this.pickAndPack,
       required this.hasAccessToCovidMaterial});
 
   @override
@@ -442,15 +394,11 @@ class _$_fetch implements _fetch {
   @override
   final User user;
   @override
-  final SalesOrganisationConfigs salesOrgConfig;
-  @override
-  final String pickAndPack;
-  @override
   final bool hasAccessToCovidMaterial;
 
   @override
   String toString() {
-    return 'MaterialFilterEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrgConfig: $salesOrgConfig, pickAndPack: $pickAndPack, hasAccessToCovidMaterial: $hasAccessToCovidMaterial)';
+    return 'MaterialFilterEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, hasAccessToCovidMaterial: $hasAccessToCovidMaterial)';
   }
 
   @override
@@ -465,25 +413,14 @@ class _$_fetch implements _fetch {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.salesOrgConfig, salesOrgConfig) ||
-                other.salesOrgConfig == salesOrgConfig) &&
-            (identical(other.pickAndPack, pickAndPack) ||
-                other.pickAndPack == pickAndPack) &&
             (identical(
                     other.hasAccessToCovidMaterial, hasAccessToCovidMaterial) ||
                 other.hasAccessToCovidMaterial == hasAccessToCovidMaterial));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      salesOrganisation,
-      customerCodeInfo,
-      shipToInfo,
-      user,
-      salesOrgConfig,
-      pickAndPack,
-      hasAccessToCovidMaterial);
+  int get hashCode => Object.hash(runtimeType, salesOrganisation,
+      customerCodeInfo, shipToInfo, user, hasAccessToCovidMaterial);
 
   @JsonKey(ignore: true)
   @override
@@ -500,8 +437,6 @@ class _$_fetch implements _fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
@@ -509,11 +444,10 @@ class _$_fetch implements _fetch {
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
     return fetch(salesOrganisation, customerCodeInfo, shipToInfo, user,
-        salesOrgConfig, pickAndPack, hasAccessToCovidMaterial);
+        hasAccessToCovidMaterial);
   }
 
   @override
@@ -525,8 +459,6 @@ class _$_fetch implements _fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
@@ -534,11 +466,10 @@ class _$_fetch implements _fetch {
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
     return fetch?.call(salesOrganisation, customerCodeInfo, shipToInfo, user,
-        salesOrgConfig, pickAndPack, hasAccessToCovidMaterial);
+        hasAccessToCovidMaterial);
   }
 
   @override
@@ -550,8 +481,6 @@ class _$_fetch implements _fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
@@ -559,13 +488,12 @@ class _$_fetch implements _fetch {
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
     if (fetch != null) {
       return fetch(salesOrganisation, customerCodeInfo, shipToInfo, user,
-          salesOrgConfig, pickAndPack, hasAccessToCovidMaterial);
+          hasAccessToCovidMaterial);
     }
     return orElse();
   }
@@ -580,7 +508,6 @@ class _$_fetch implements _fetch {
     required TResult Function(_initSelectedMaterialFilter value)
         initSelectedMaterialFilter,
     required TResult Function(_updateSearchKey value) updateSearchKey,
-    required TResult Function(_search value) search,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return fetch(this);
@@ -596,7 +523,6 @@ class _$_fetch implements _fetch {
     TResult? Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
-    TResult? Function(_search value)? search,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return fetch?.call(this);
@@ -612,7 +538,6 @@ class _$_fetch implements _fetch {
     TResult Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult Function(_updateSearchKey value)? updateSearchKey,
-    TResult Function(_search value)? search,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -629,16 +554,12 @@ abstract class _fetch implements MaterialFilterEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final User user,
-      required final SalesOrganisationConfigs salesOrgConfig,
-      required final String pickAndPack,
       required final bool hasAccessToCovidMaterial}) = _$_fetch;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   User get user;
-  SalesOrganisationConfigs get salesOrgConfig;
-  String get pickAndPack;
   bool get hasAccessToCovidMaterial;
   @JsonKey(ignore: true)
   _$$_fetchCopyWith<_$_fetch> get copyWith =>
@@ -726,8 +647,6 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
@@ -735,7 +654,6 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
     return updateSelectedMaterialFilter(filterType, key);
@@ -750,8 +668,6 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
@@ -759,7 +675,6 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
     return updateSelectedMaterialFilter?.call(filterType, key);
@@ -774,8 +689,6 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
@@ -783,7 +696,6 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -803,7 +715,6 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
     required TResult Function(_initSelectedMaterialFilter value)
         initSelectedMaterialFilter,
     required TResult Function(_updateSearchKey value) updateSearchKey,
-    required TResult Function(_search value) search,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return updateSelectedMaterialFilter(this);
@@ -819,7 +730,6 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
     TResult? Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
-    TResult? Function(_search value)? search,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return updateSelectedMaterialFilter?.call(this);
@@ -835,7 +745,6 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
     TResult Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult Function(_updateSearchKey value)? updateSearchKey,
-    TResult Function(_search value)? search,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -944,8 +853,6 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
@@ -953,7 +860,6 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
     return initSelectedMaterialFilter(selectedMaterialFilter);
@@ -968,8 +874,6 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
@@ -977,7 +881,6 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
     return initSelectedMaterialFilter?.call(selectedMaterialFilter);
@@ -992,8 +895,6 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
@@ -1001,7 +902,6 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -1021,7 +921,6 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
     required TResult Function(_initSelectedMaterialFilter value)
         initSelectedMaterialFilter,
     required TResult Function(_updateSearchKey value) updateSearchKey,
-    required TResult Function(_search value) search,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return initSelectedMaterialFilter(this);
@@ -1037,7 +936,6 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
     TResult? Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
-    TResult? Function(_search value)? search,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return initSelectedMaterialFilter?.call(this);
@@ -1053,7 +951,6 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
     TResult Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult Function(_updateSearchKey value)? updateSearchKey,
-    TResult Function(_search value)? search,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -1146,8 +1043,6 @@ class _$_updateSearchKey implements _updateSearchKey {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
@@ -1155,7 +1050,6 @@ class _$_updateSearchKey implements _updateSearchKey {
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
     return updateSearchKey(searchKey);
@@ -1170,8 +1064,6 @@ class _$_updateSearchKey implements _updateSearchKey {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
@@ -1179,7 +1071,6 @@ class _$_updateSearchKey implements _updateSearchKey {
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
     return updateSearchKey?.call(searchKey);
@@ -1194,8 +1085,6 @@ class _$_updateSearchKey implements _updateSearchKey {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
@@ -1203,7 +1092,6 @@ class _$_updateSearchKey implements _updateSearchKey {
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -1223,7 +1111,6 @@ class _$_updateSearchKey implements _updateSearchKey {
     required TResult Function(_initSelectedMaterialFilter value)
         initSelectedMaterialFilter,
     required TResult Function(_updateSearchKey value) updateSearchKey,
-    required TResult Function(_search value) search,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return updateSearchKey(this);
@@ -1239,7 +1126,6 @@ class _$_updateSearchKey implements _updateSearchKey {
     TResult? Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
-    TResult? Function(_search value)? search,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return updateSearchKey?.call(this);
@@ -1255,7 +1141,6 @@ class _$_updateSearchKey implements _updateSearchKey {
     TResult Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult Function(_updateSearchKey value)? updateSearchKey,
-    TResult Function(_search value)? search,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -1273,172 +1158,6 @@ abstract class _updateSearchKey implements MaterialFilterEvent {
   @JsonKey(ignore: true)
   _$$_updateSearchKeyCopyWith<_$_updateSearchKey> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_searchCopyWith<$Res> {
-  factory _$$_searchCopyWith(_$_search value, $Res Function(_$_search) then) =
-      __$$_searchCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_searchCopyWithImpl<$Res>
-    extends _$MaterialFilterEventCopyWithImpl<$Res, _$_search>
-    implements _$$_searchCopyWith<$Res> {
-  __$$_searchCopyWithImpl(_$_search _value, $Res Function(_$_search) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_search implements _search {
-  const _$_search();
-
-  @override
-  String toString() {
-    return 'MaterialFilterEvent.search()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_search);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
-            bool hasAccessToCovidMaterial)
-        fetch,
-    required TResult Function(MaterialFilterType filterType, Object key)
-        updateSelectedMaterialFilter,
-    required TResult Function(MaterialFilter selectedMaterialFilter)
-        initSelectedMaterialFilter,
-    required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function() search,
-    required TResult Function() resetFilter,
-  }) {
-    return search();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
-            bool hasAccessToCovidMaterial)?
-        fetch,
-    TResult? Function(MaterialFilterType filterType, Object key)?
-        updateSelectedMaterialFilter,
-    TResult? Function(MaterialFilter selectedMaterialFilter)?
-        initSelectedMaterialFilter,
-    TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function()? search,
-    TResult? Function()? resetFilter,
-  }) {
-    return search?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
-            bool hasAccessToCovidMaterial)?
-        fetch,
-    TResult Function(MaterialFilterType filterType, Object key)?
-        updateSelectedMaterialFilter,
-    TResult Function(MaterialFilter selectedMaterialFilter)?
-        initSelectedMaterialFilter,
-    TResult Function(String searchKey)? updateSearchKey,
-    TResult Function()? search,
-    TResult Function()? resetFilter,
-    required TResult orElse(),
-  }) {
-    if (search != null) {
-      return search();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_fetch value) fetch,
-    required TResult Function(_updateSelectedMaterialFilter value)
-        updateSelectedMaterialFilter,
-    required TResult Function(_initSelectedMaterialFilter value)
-        initSelectedMaterialFilter,
-    required TResult Function(_updateSearchKey value) updateSearchKey,
-    required TResult Function(_search value) search,
-    required TResult Function(_resetFilter value) resetFilter,
-  }) {
-    return search(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_fetch value)? fetch,
-    TResult? Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
-    TResult? Function(_initSelectedMaterialFilter value)?
-        initSelectedMaterialFilter,
-    TResult? Function(_updateSearchKey value)? updateSearchKey,
-    TResult? Function(_search value)? search,
-    TResult? Function(_resetFilter value)? resetFilter,
-  }) {
-    return search?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_fetch value)? fetch,
-    TResult Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
-    TResult Function(_initSelectedMaterialFilter value)?
-        initSelectedMaterialFilter,
-    TResult Function(_updateSearchKey value)? updateSearchKey,
-    TResult Function(_search value)? search,
-    TResult Function(_resetFilter value)? resetFilter,
-    required TResult orElse(),
-  }) {
-    if (search != null) {
-      return search(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _search implements MaterialFilterEvent {
-  const factory _search() = _$_search;
 }
 
 /// @nodoc
@@ -1485,8 +1204,6 @@ class _$_resetFilter implements _resetFilter {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)
         fetch,
     required TResult Function(MaterialFilterType filterType, Object key)
@@ -1494,7 +1211,6 @@ class _$_resetFilter implements _resetFilter {
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
     return resetFilter();
@@ -1509,8 +1225,6 @@ class _$_resetFilter implements _resetFilter {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult? Function(MaterialFilterType filterType, Object key)?
@@ -1518,7 +1232,6 @@ class _$_resetFilter implements _resetFilter {
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
     return resetFilter?.call();
@@ -1533,8 +1246,6 @@ class _$_resetFilter implements _resetFilter {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig,
-            String pickAndPack,
             bool hasAccessToCovidMaterial)?
         fetch,
     TResult Function(MaterialFilterType filterType, Object key)?
@@ -1542,7 +1253,6 @@ class _$_resetFilter implements _resetFilter {
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -1562,7 +1272,6 @@ class _$_resetFilter implements _resetFilter {
     required TResult Function(_initSelectedMaterialFilter value)
         initSelectedMaterialFilter,
     required TResult Function(_updateSearchKey value) updateSearchKey,
-    required TResult Function(_search value) search,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return resetFilter(this);
@@ -1578,7 +1287,6 @@ class _$_resetFilter implements _resetFilter {
     TResult? Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
-    TResult? Function(_search value)? search,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return resetFilter?.call(this);
@@ -1594,7 +1302,6 @@ class _$_resetFilter implements _resetFilter {
     TResult Function(_initSelectedMaterialFilter value)?
         initSelectedMaterialFilter,
     TResult Function(_updateSearchKey value)? updateSearchKey,
-    TResult Function(_search value)? search,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {

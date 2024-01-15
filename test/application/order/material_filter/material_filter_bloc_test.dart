@@ -13,7 +13,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -87,11 +86,9 @@ void main() {
         when(
           () => materialFilterRepositoryMock.getMaterialFilterList(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
-            pickAndPack: 'fake_pick_and_pack',
             searchKey: '',
           ),
         ).thenAnswer(
@@ -102,12 +99,10 @@ void main() {
       },
       act: (MaterialFilterBloc bloc) => bloc.add(
         MaterialFilterEvent.fetch(
-          salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          pickAndPack: 'fake_pick_and_pack',
           hasAccessToCovidMaterial: false,
         ),
       ),
@@ -135,11 +130,9 @@ void main() {
         when(
           () => materialFilterRepositoryMock.getMaterialFilterList(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             user: fakeClient,
-            pickAndPack: 'fake_pick_and_pack',
             searchKey: '',
           ),
         ).thenAnswer(
@@ -150,12 +143,10 @@ void main() {
       },
       act: (MaterialFilterBloc bloc) => bloc.add(
         MaterialFilterEvent.fetch(
-          salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
-          pickAndPack: 'fake_pick_and_pack',
           hasAccessToCovidMaterial: false,
         ),
       ),
@@ -174,16 +165,6 @@ void main() {
           ),
         )
       ],
-    );
-
-    blocTest(
-      'Material Filter search',
-      build: () => MaterialFilterBloc(
-        materialFilterRepository: materialFilterRepositoryMock,
-      ),
-      act: (MaterialFilterBloc bloc) => bloc.add(
-        const MaterialFilterEvent.search(),
-      ),
     );
 
     blocTest(

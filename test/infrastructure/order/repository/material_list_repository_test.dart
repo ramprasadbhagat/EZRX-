@@ -81,7 +81,6 @@ void main() {
     dataTotalHidden: DataTotalHidden(1),
   );
   late MaterialResponse fakeMaterialResponse;
-  late List<MaterialInfo> fakeMaterialInfos;
   late MaterialResponse fakeComboDealMaterialResponse;
 
   setUpAll(() async {
@@ -98,8 +97,6 @@ void main() {
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
     );
     fakeMaterialResponse = await MaterialListLocalDataSource().getProductList();
-    fakeMaterialInfos =
-        await MaterialListLocalDataSource().getMaterialListSalesRep();
     fakeComboDealMaterialResponse = await MaterialListLocalDataSource()
         .getComboDealMaterialsPrincipalCode();
   });
@@ -183,8 +180,7 @@ void main() {
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             pageSize: 10,
             gimmickMaterial: fakeSGSalesOrgConfigs.enableGimmickMaterial,
-            language:
-                fakeClientUser.preferredLanguage.languageCode,
+            language: fakeClientUser.preferredLanguage.languageCode,
             isFavourite: fakeMaterialFilter.isFavourite,
             isCovidSelected: fakeMaterialFilter.isCovidSelected,
             type: fakeMaterialFilter.type,
@@ -233,8 +229,7 @@ void main() {
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             pageSize: 10,
             gimmickMaterial: fakeSGSalesOrgConfigs.enableGimmickMaterial,
-            language:
-                fakeClientUser.preferredLanguage.languageCode,
+            language: fakeClientUser.preferredLanguage.languageCode,
             isFavourite: fakeMaterialFilterWithComboOffers.isFavourite,
             isCovidSelected: fakeMaterialFilterWithComboOffers.isCovidSelected,
             type: fakeMaterialFilterWithComboOffers.type,
@@ -382,8 +377,7 @@ void main() {
             salesOrgCode: fakeTWSalesOrganisation.salesOrg.getOrCrash(),
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
-            language:
-                fakeClientUser.preferredLanguage.languageCode,
+            language: fakeClientUser.preferredLanguage.languageCode,
             pageSize: 10,
             offset: 0,
             principalCodeList: [
@@ -420,8 +414,7 @@ void main() {
             principalCodeList: [
               fakePrincipleData.principalCode.getOrDefaultValue(''),
             ],
-            language:
-                fakeClientUser.preferredLanguage.languageCode,
+            language: fakeClientUser.preferredLanguage.languageCode,
           ),
         ).thenAnswer((invocation) async => fakeComboDealMaterialResponse);
 
@@ -451,7 +444,7 @@ void main() {
         final result = await materialListRepository.getStockInfoList(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSGSalesOrganisation,
-          materials: fakeMaterialInfos,
+          materials: fakeMaterialResponse.products,
         );
         expect(
           result.isLeft(),
@@ -469,7 +462,7 @@ void main() {
         final result = await materialListRepository.getStockInfoList(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSGSalesOrganisation,
-          materials: fakeMaterialInfos,
+          materials: fakeMaterialResponse.products,
         );
         expect(
           result.isRight(),
@@ -481,7 +474,7 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
         when(
           () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            materialNumbers: fakeMaterialInfos
+            materialNumbers: fakeMaterialResponse.products
                 .map((e) => e.materialNumber.getOrCrash())
                 .toList(),
             salesOrg: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
@@ -492,7 +485,7 @@ void main() {
         final result = await materialListRepository.getStockInfoList(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSGSalesOrganisation,
-          materials: fakeMaterialInfos,
+          materials: fakeMaterialResponse.products,
         );
         expect(
           result.isLeft(),
@@ -504,7 +497,7 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
         when(
           () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            materialNumbers: fakeMaterialInfos
+            materialNumbers: fakeMaterialResponse.products
                 .map((e) => e.materialNumber.getOrCrash())
                 .toList(),
             salesOrg: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
@@ -517,7 +510,7 @@ void main() {
         final result = await materialListRepository.getStockInfoList(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSGSalesOrganisation,
-          materials: fakeMaterialInfos,
+          materials: fakeMaterialResponse.products,
         );
         expect(
           result.isRight(),
@@ -602,8 +595,7 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: '',
-            language:
-                fakeClientUser.preferredLanguage.languageCode,
+            language: fakeClientUser.preferredLanguage.languageCode,
           ),
         ).thenAnswer(
           (invocation) async => fakeMatchMaterialInfo,

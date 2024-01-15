@@ -329,7 +329,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                           context.read<SalesOrgBloc>().state.configs,
                       salesRepresentativeInfo:
                           context.read<SalesRepBloc>().state.salesRepInfo,
-                      user: context.read<UserBloc>().state.user,    
+                      user: context.read<UserBloc>().state.user,
                     ),
                   );
             }
@@ -894,15 +894,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     user: context.read<UserBloc>().state.user,
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
-                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     shipToInfo:
                         context.read<EligibilityBloc>().state.shipToInfo,
-                    pickAndPack: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .getPNPValueMaterial,
                     hasAccessToCovidMaterial: context
                         .read<EligibilityBloc>()
                         .state
@@ -933,7 +928,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         context.read<EligibilityBloc>().state.shipToInfo,
                     selectedMaterialFilter:
                         context.read<MaterialFilterBloc>().state.materialFilter,
-                    user: context.read<UserBloc>().state.user,    
+                    user: context.read<UserBloc>().state.user,
                   ),
                 );
           },
@@ -1521,10 +1516,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           MaterialFilterEvent.fetch(
             user: context.read<UserBloc>().state.user,
             salesOrganisation: eligibilityBloc.state.salesOrganisation,
-            salesOrgConfig: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
-            pickAndPack: eligibilityBloc.state.getPNPValueMaterial,
             hasAccessToCovidMaterial:
                 eligibilityBloc.state.isCovidMaterialEnable,
           ),
@@ -1541,7 +1534,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             shipToInfo: eligibilityBloc.state.shipToInfo,
             selectedMaterialFilter:
                 context.read<MaterialFilterBloc>().state.materialFilter,
-            user: context.read<UserBloc>().state.user,    
+            user: context.read<UserBloc>().state.user,
           ),
         );
   }

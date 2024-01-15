@@ -256,9 +256,6 @@ import 'package:ezrxmobile/infrastructure/notification/datasource/notification_l
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_remote.dart';
 import 'package:ezrxmobile/infrastructure/notification/repository/notification_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
@@ -329,7 +326,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.d
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/combo_deal_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
@@ -734,30 +730,6 @@ void setupLocator() {
   //  Additional bonus
   //
   //============================================================
-  locator.registerLazySingleton(
-    () => BonusMaterialLocalDataSource(),
-  );
-
-  locator.registerLazySingleton(
-    () => BonusMaterialRemoteDataSource(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      bonusQueryMutation: locator<BonusMaterialQueryMutation>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => BonusMaterialQueryMutation(),
-  );
-
-  locator.registerLazySingleton(
-    () => BonusMaterialRepository(
-      remoteDataSource: locator<BonusMaterialRemoteDataSource>(),
-      config: locator<Config>(),
-      localDataSource: locator<BonusMaterialLocalDataSource>(),
-    ),
-  );
   locator.registerFactory(
     () => BonusMaterialBloc(
       materialListRepository: locator<MaterialListRepository>(),

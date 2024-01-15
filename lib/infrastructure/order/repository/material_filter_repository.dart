@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -25,21 +24,12 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
 
   @override
   Future<Either<ApiFailure, MaterialFilter>> getMaterialFilterList({
-    required SalesOrganisationConfigs salesOrgConfig,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
-    required String pickAndPack,
     required String searchKey,
   }) async {
-    final salesOrg = salesOrganisation.salesOrg.getOrCrash();
-    final customerCode = customerCodeInfo.customerCodeSoldTo;
-    final shipToCode = shipToInfo.shipToCustomerCode;
-    final userName = user.username.getOrCrash();
-    final gimmickMaterial = salesOrgConfig.enableGimmickMaterial;
-    final language = user.preferredLanguage.languageCode;
-
     if (config.appFlavor == Flavor.mock) {
       try {
         final filterMaterialData =
@@ -51,22 +41,14 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
       }
     }
     try {
-      final filterMaterialData = user.role.type.isSalesRepRole
-          ? await filterMaterialRemoteDataSource.getFiltersSalesRep(
-              salesOrganisation: salesOrg,
-              soldToCustomerCode: customerCode,
-              shipToCustomerCode: shipToCode,
-              gimmickMaterial: gimmickMaterial,
-              language: language,
-              userName: userName,
-            )
-          : await filterMaterialRemoteDataSource.getFilters(
-              salesOrganisation: salesOrg,
-              shipToCustomerCode: shipToCode,
-              soldToCustomerCode: customerCode,
-              language: language,
-              searchKey: searchKey,
-            );
+      final filterMaterialData =
+          await filterMaterialRemoteDataSource.getFilters(
+        salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
+        shipToCustomerCode: shipToInfo.shipToCustomerCode,
+        soldToCustomerCode: customerCodeInfo.customerCodeSoldTo,
+        language: user.preferredLanguage.languageCode,
+        searchKey: searchKey,
+      );
 
       return Right(filterMaterialData);
     } catch (e) {

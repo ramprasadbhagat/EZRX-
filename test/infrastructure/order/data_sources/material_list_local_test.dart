@@ -44,27 +44,6 @@ void main() {
       );
 
       test(
-        'Get material list for sales rep',
-        () async {
-          final res = json.decode(
-            await rootBundle.loadString(
-              'assets/json/getCustomerMaterialsForSalesRepResponse.json',
-            ),
-          );
-
-          final result = await localDataSource.getMaterialListSalesRep();
-          final finalData =
-              res['data']['customerMaterialsForSalesRep']['materials'];
-          expect(
-            result,
-            List.from(finalData)
-                .map((e) => MaterialDto.fromJson(e).toDomain())
-                .toList(),
-          );
-        },
-      );
-
-      test(
         'search material list',
         () async {
           final res = json.decode(
@@ -74,27 +53,6 @@ void main() {
 
           final result = await localDataSource.searchMaterialList();
           final finalData = res['data']['materialsWithMeta']['materials'];
-          expect(
-            result,
-            List.from(finalData)
-                .map((e) => MaterialDto.fromJson(e).toDomain())
-                .toList(),
-          );
-        },
-      );
-
-      test(
-        'search material list for sales rep',
-        () async {
-          final res = json.decode(
-            await rootBundle.loadString(
-              'assets/json/getCustomerMaterialsForSalesRepResponse.json',
-            ),
-          );
-
-          final result = await localDataSource.searchMaterialListSalesRep();
-          final finalData =
-              res['data']['customerMaterialsForSalesRep']['materials'];
           expect(
             result,
             List.from(finalData)
