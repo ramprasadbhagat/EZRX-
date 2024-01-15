@@ -830,6 +830,104 @@ void main() {
           ),
         ],
       );
+
+      blocTest<CartBloc, CartState>(
+        'Cart verifyMaterialDealBonus emitted with updated price info of state has',
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          cartProducts: [
+            priceAggregates.first.copyWith(
+              quantity: 15,
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(35.0),
+                lastPrice: MaterialPrice(39.0),
+              ),
+            )
+          ],
+        ),
+        setUp: () {
+          when(
+            () => cartRepositoryMock.updateMaterialDealBonus(
+              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              materials: [
+                priceAggregates.first.copyWith(
+                  quantity: 15,
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(39.0),
+                    lastPrice: MaterialPrice(39.0),
+                  ),
+                )
+              ],
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              <PriceAggregate>[
+                priceAggregates.first.copyWith(
+                  quantity: 15,
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(39.0),
+                    lastPrice: MaterialPrice(39.0),
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.verifyMaterialDealBonus(
+            item: PriceAggregate.empty(),
+            items: <PriceAggregate>[
+              priceAggregates.first.copyWith(
+                quantity: 15,
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(39.0),
+                  lastPrice: MaterialPrice(39.0),
+                ),
+              )
+            ],
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isFetchingBonus: true,
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                quantity: 15,
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(35.0),
+                  lastPrice: MaterialPrice(39.0),
+                ),
+              )
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                quantity: 15,
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(35.0),
+                  lastPrice: MaterialPrice(39.0),
+                ),
+              )
+            ],
+            salesOrganisation: fakeSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ],
+      );
     },
   );
 

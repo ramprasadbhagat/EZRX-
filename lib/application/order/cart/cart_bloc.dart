@@ -95,9 +95,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (cartItemList) {
+            final newCartProductList = _mappingPreviousInfo(
+              previousCartProducts: state.cartProducts,
+              currentCartProducts: cartItemList,
+              salesOrganisationConfigs: state.config,
+            );
+
             emit(
               state.copyWith(
-                cartProducts: cartItemList,
+                cartProducts: newCartProductList,
                 apiFailureOrSuccessOption: none(),
                 isFetchingBonus: false,
               ),
