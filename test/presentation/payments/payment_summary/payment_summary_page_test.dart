@@ -1,8 +1,8 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -14,12 +14,9 @@ import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_p
 import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
-import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
@@ -41,57 +38,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class PaymentInProgressBlocMock
-    extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
-    implements PaymentInProgressBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MockCustomerCodeBloc
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
-
-class PaymentSummaryBlocMock
-    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
-    implements PaymentSummaryBloc {}
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class OutstandingInvoicesBlocMock
-    extends MockBloc<OutstandingInvoicesEvent, OutstandingInvoicesState>
-    implements OutstandingInvoicesBloc {}
-
-class PaymentSummaryFilterBlocMock
-    extends MockBloc<PaymentSummaryFilterEvent, PaymentSummaryFilterState>
-    implements PaymentSummaryFilterBloc {}
-
-class PaymentSummaryDetailBlocMock
-    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
-    implements PaymentSummaryDetailsBloc {}
-
-class DownloadPaymentAttachmentsBlocMock extends MockBloc<
-        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
-    implements DownloadPaymentAttachmentsBloc {}
-
-class AvailableCreditsBlocMock
-    extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
-    implements AvailableCreditsBloc {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
 
 final locator = GetIt.instance;
 
@@ -106,7 +58,7 @@ void main() {
   late EligibilityBloc eligibilityBloc;
   late List<PaymentSummaryDetails> paymentSummaryList;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
-  late PaymentSummaryDetailBlocMock paymentSummaryDetailBlocMock;
+  late PaymentSummaryDetailsBlocMock paymentSummaryDetailBlocMock;
   late AvailableCreditsBlocMock availableCreditsBlocMock;
   late NewPaymentBlocMock newPaymentBlocMock;
   late PaymentSummaryDetails paymentSummaryDetails;
@@ -158,11 +110,20 @@ void main() {
     paymentSummaryFilterBloc = PaymentSummaryFilterBlocMock();
     eligibilityBloc = EligibilityBlocMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
-    paymentSummaryDetailBlocMock = PaymentSummaryDetailBlocMock();
+    paymentSummaryDetailBlocMock = PaymentSummaryDetailsBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
   });
-
+  ////////////////////////Finder///////////////////////////////////////////////
+  final filterResetButton = find.byKey(WidgetKeys.filterResetButton);
+  final paymentSummaryFilter = find.byKey(WidgetKeys.paymentSummaryFilter);
+  final paymentSummaryPage = find.byKey(WidgetKeys.paymentSummaryPage);
+  final paymentSummaryFilterIcon =
+      find.byKey(WidgetKeys.paymentSummaryFilterIcon);
+  final filterApplyButton = find.byKey(WidgetKeys.filterApplyButton);
+  final amountValueTo = find.byKey(WidgetKeys.amountValueTo);
+  final fromDocumentDateField = find.byKey(WidgetKeys.fromDocumentDateField);
+  /////////////////////////////////////////////////////////////////////////////
   group('Payment Summary', () {
     setUp(() {
       when(() => announcementBlocMock.state)
@@ -236,131 +197,12 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
       expect(
-        find.byKey(WidgetKeys.paymentSummaryPage),
+        paymentSummaryPage,
         findsOneWidget,
       );
       expect(
         find.byType(ScaleButton),
         findsOneWidget,
-      );
-    });
-
-    testWidgets('Payment Summary Filter Status Initial - For SG Market',
-        (tester) async {
-      when(() => paymentSummaryFilterBloc.state).thenReturn(
-        PaymentSummaryFilterState.initial().copyWith(
-          salesOrg: SalesOrg('2601'),
-        ),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryPage),
-        findsOneWidget,
-      );
-      await tester.tap(find.byKey(WidgetKeys.paymentSummaryFilterIcon));
-      await tester.pump();
-      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
-        findsNothing,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed')),
-        findsNothing,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
-        findsNothing,
-      );
-    });
-
-    testWidgets(
-        'Payment Summary Filter Status Initial - For Other Market (Except SG)',
-        (tester) async {
-      when(() => paymentSummaryFilterBloc.state).thenReturn(
-        PaymentSummaryFilterState.initial().copyWith(
-          salesOrg: SalesOrg('2001'),
-        ),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryPage),
-        findsOneWidget,
-      );
-      await tester.tap(find.byKey(WidgetKeys.paymentSummaryFilterIcon));
-      await tester.pump();
-      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending')),
-        findsNothing,
-      );
-    });
-
-    testWidgets('Payment Summary Filter Status Initial - For TH Market',
-        (tester) async {
-      when(() => paymentSummaryFilterBloc.state).thenReturn(
-        PaymentSummaryFilterState.initial().copyWith(
-          salesOrg: SalesOrg('2900'),
-        ),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryPage),
-        findsOneWidget,
-      );
-      await tester.tap(find.byKey(WidgetKeys.paymentSummaryFilterIcon));
-      await tester.pump();
-      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Payment Received')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending')),
-        findsNothing,
       );
     });
 
@@ -370,16 +212,22 @@ void main() {
           details: paymentSummaryList,
         ),
       );
-      when(() => eligibilityBloc.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            currency: Currency('MYR'),
-          ),
+      whenListen(
+        paymentInProgressBlocMock,
+        Stream.fromIterable(
+          [
+            PaymentInProgressState.initial().copyWith(
+              isFetching: true,
+            ),
+            PaymentInProgressState.initial().copyWith(
+              amount: StringValue('200'),
+            ),
+          ],
         ),
       );
-      when(() => paymentInProgressBlocMock.state).thenReturn(
-        PaymentInProgressState.initial().copyWith(
-          amount: StringValue('200'),
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       await tester.pumpWidget(getWUT());
@@ -526,12 +374,12 @@ void main() {
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.paymentSummaryPage),
+        paymentSummaryPage,
         findsOneWidget,
       );
-      await tester.tap(find.byKey(WidgetKeys.paymentSummaryFilterIcon));
+      await tester.tap(paymentSummaryFilterIcon);
       await tester.pumpAndSettle();
-      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
+      expect(paymentSummaryFilter, findsOneWidget);
 
       verify(
         () => paymentSummaryFilterBloc.add(
@@ -767,7 +615,7 @@ void main() {
       await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
+      expect(paymentSummaryFilter, findsOneWidget);
     });
 
     testWidgets('Payment Summary filter status Test', (tester) async {
@@ -790,7 +638,7 @@ void main() {
       await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
+      expect(paymentSummaryFilter, findsOneWidget);
 
       final inProgressRadio = find.text('In Progress');
 
@@ -818,11 +666,11 @@ void main() {
       await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
+      expect(paymentSummaryFilter, findsOneWidget);
 
-      expect(find.byKey(WidgetKeys.filterResetButton), findsOneWidget);
+      expect(filterResetButton, findsOneWidget);
 
-      await tester.tap(find.byKey(WidgetKeys.filterResetButton));
+      await tester.tap(filterResetButton);
       await tester.pumpAndSettle();
     });
     testWidgets('Payment Summary filter applyButton Test', (tester) async {
@@ -846,11 +694,11 @@ void main() {
       await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
+      expect(paymentSummaryFilter, findsOneWidget);
 
-      expect(find.byKey(WidgetKeys.filterApplyButton), findsOneWidget);
+      expect(filterApplyButton, findsOneWidget);
       await tester.tap(
-        find.byKey(WidgetKeys.filterApplyButton),
+        filterApplyButton,
         warnIfMissed: false,
       );
       await tester.pump();
@@ -895,9 +743,9 @@ void main() {
       await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(WidgetKeys.fromDocumentDateField), findsOneWidget);
+      expect(fromDocumentDateField, findsOneWidget);
 
-      await tester.tap(find.byKey(WidgetKeys.fromDocumentDateField));
+      await tester.tap(fromDocumentDateField);
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('SAVE'.tr()));
@@ -940,8 +788,8 @@ void main() {
       await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(WidgetKeys.amountValueTo), findsOneWidget);
-      await tester.enterText(find.byKey(WidgetKeys.amountValueTo), '100');
+      expect(amountValueTo, findsOneWidget);
+      await tester.enterText(amountValueTo, '100');
       await tester.pump();
 
       verify(
@@ -987,10 +835,10 @@ void main() {
       await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
+      expect(paymentSummaryFilter, findsOneWidget);
 
       await tester.tap(
-        find.byKey(WidgetKeys.paymentSummaryFilter),
+        paymentSummaryFilter,
         warnIfMissed: false,
       );
       await tester.pumpAndSettle();
@@ -1127,47 +975,218 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('Payment Summary Filter Status Initial - For PH',
-        (tester) async {
-      when(() => paymentSummaryFilterBloc.state).thenReturn(
-        PaymentSummaryFilterState.initial().copyWith(
-          salesOrg: fakePHSalesOrg,
-        ),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
+    testWidgets(
+      'Payment Summary Filter Status',
+      (tester) async {
+        final currentSalesOrgVariant =
+            salesOrgVariant.currentValue ?? fakeSGSalesOrg;
+        when(() => paymentSummaryFilterBloc.state).thenReturn(
+          PaymentSummaryFilterState.initial().copyWith(
+            salesOrg: currentSalesOrgVariant,
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
 
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryPage),
-        findsOneWidget,
-      );
-      await tester.tap(find.byKey(WidgetKeys.paymentSummaryFilterIcon));
-      await tester.pump();
-      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending')),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Expired')),
-        findsNothing,
-      );
-    });
+        expect(
+          paymentSummaryPage,
+          findsOneWidget,
+        );
+        await tester.tap(paymentSummaryFilterIcon);
+        await tester.pumpAndSettle();
+        expect(paymentSummaryFilter, findsOneWidget);
+        expect(
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending')),
+          currentSalesOrgVariant.isSg || currentSalesOrgVariant.isPH
+              ? findsOneWidget
+              : findsNothing,
+        );
+        expect(
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed')),
+          currentSalesOrgVariant.isID ? findsNothing : findsOneWidget,
+        );
+        expect(
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
+          currentSalesOrgVariant.isSg || currentSalesOrgVariant.isID
+              ? findsNothing
+              : findsOneWidget,
+        );
+
+        expect(
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
+          currentSalesOrgVariant.isSg ? findsNothing : findsOneWidget,
+        );
+        expect(
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus('In progress')),
+          currentSalesOrgVariant.isID ? findsOneWidget : findsNothing,
+        );
+        expect(
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus('Expired')),
+          currentSalesOrgVariant.isID ? findsOneWidget : findsNothing,
+        );
+        expect(
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus('Cancelled')),
+          currentSalesOrgVariant.isID ? findsOneWidget : findsNothing,
+        );
+        expect(
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed')),
+          currentSalesOrgVariant.isSg || currentSalesOrgVariant.isID
+              ? findsNothing
+              : findsOneWidget,
+        );
+        expect(
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus('Payment Received')),
+          currentSalesOrgVariant.isTH ? findsOneWidget : findsNothing,
+        );
+        await tester.tap(
+          currentSalesOrgVariant.isSg
+              ? find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed'))
+              : find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
+        );
+        verify(
+          () => paymentSummaryFilterBloc.add(
+            PaymentSummaryFilterEvent.statusChanged(
+              currentSalesOrgVariant.isSg
+                  ? FilterStatus('Processed')
+                  : FilterStatus('Successful'),
+            ),
+          ),
+        ).called(1);
+      },
+      variant: salesOrgVariant,
+    );
+
+    testWidgets(
+      'Payment Summary Filter amount filter check',
+      (tester) async {
+        final filter = PaymentSummaryFilter.empty().copyWith(
+          amountValueFrom: RangeValue('12'),
+          amountValueTo: RangeValue('15'),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        expect(
+          paymentSummaryPage,
+          findsOneWidget,
+        );
+        whenListen(
+          paymentSummaryFilterBloc,
+          Stream.fromIterable(
+            [
+              PaymentSummaryFilterState.initial(),
+              PaymentSummaryFilterState.initial().copyWith(filter: filter),
+            ],
+          ),
+        );
+        await tester.tap(paymentSummaryFilterIcon);
+        await tester.pumpAndSettle();
+        expect(paymentSummaryFilter, findsOneWidget);
+        expect(filterApplyButton, findsOneWidget);
+        await tester.tap(
+          filterApplyButton,
+          warnIfMissed: false,
+        );
+        await tester.pump();
+
+        verify(
+          () => paymentSummaryFilterBloc.add(
+            const PaymentSummaryFilterEvent.validateFilters(),
+          ),
+        ).called(1);
+
+        verify(
+          () => paymentSummaryBloc.add(
+            PaymentSummaryEvent.fetch(
+              appliedFilter: filter,
+              searchKey: SearchKey(''),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      'Payment Summary Filter document date filter check',
+      (tester) async {
+        final filter = PaymentSummaryFilter.empty().copyWith(
+          createdDateTo: DateTimeStringValue(fakeToDate.toString()),
+          createdDateFrom: DateTimeStringValue(fakeFromDate.toString()),
+        );
+        when(() => paymentSummaryFilterBloc.state).thenReturn(
+          PaymentSummaryFilterState.initial().copyWith(filter: filter),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        expect(
+          paymentSummaryPage,
+          findsOneWidget,
+        );
+        await tester.tap(paymentSummaryFilterIcon);
+        await tester.pumpAndSettle();
+        expect(paymentSummaryFilter, findsOneWidget);
+        expect(filterApplyButton, findsOneWidget);
+        await tester.tap(filterApplyButton);
+        await tester.pumpAndSettle();
+        verify(
+          () => paymentSummaryFilterBloc.add(
+            const PaymentSummaryFilterEvent.validateFilters(),
+          ),
+        ).called(1);
+
+        verify(
+          () => paymentSummaryBloc.add(
+            PaymentSummaryEvent.fetch(
+              appliedFilter: filter,
+              searchKey: SearchKey(''),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      'Payment Summary Filter reset',
+      (tester) async {
+        when(() => paymentSummaryBloc.state).thenReturn(
+          PaymentSummaryState.initial().copyWith(
+            appliedFilter: PaymentSummaryFilter.empty().copyWith(
+              amountValueFrom: RangeValue('12'),
+              amountValueTo: RangeValue('15'),
+            ),
+          ),
+        );
+        when(() => paymentSummaryFilterBloc.state).thenReturn(
+          PaymentSummaryFilterState.initial().copyWith(
+            filter: PaymentSummaryFilter.empty().copyWith(
+              createdDateTo: DateTimeStringValue(fakeToDate.toString()),
+              createdDateFrom: DateTimeStringValue(fakeFromDate.toString()),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        expect(
+          paymentSummaryPage,
+          findsOneWidget,
+        );
+        await tester.tap(paymentSummaryFilterIcon);
+        await tester.pumpAndSettle();
+        expect(paymentSummaryFilter, findsOneWidget);
+        expect(filterResetButton, findsOneWidget);
+        await tester.tap(filterResetButton);
+        verify(
+          () => paymentSummaryBloc.add(
+            PaymentSummaryEvent.fetch(
+              appliedFilter: PaymentSummaryFilter.empty(),
+              searchKey: SearchKey(''),
+            ),
+          ),
+        ).called(1);
+      },
+    );
   });
 }
