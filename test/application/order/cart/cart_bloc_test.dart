@@ -1288,7 +1288,7 @@ void main() {
       );
 
       blocTest<CartBloc, CartState>(
-        'Cart upsertCart old Item',
+        'Cart upsertCart old Item and call update stock event afterward',
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.elementAt(1)],
@@ -1311,10 +1311,20 @@ void main() {
               ),
             ),
           ).thenAnswer(
-            (invocation) async => Right(
-              [priceAggregates.first.copyWith(quantity: 2)],
-            ),
+            (_) async => Right([priceAggregates.first.copyWith(quantity: 2)]),
           );
+
+          when(
+            () => cartRepositoryMock.getStockInfoList(
+              items: priceAggregates.first
+                  .copyWith(quantity: 2)
+                  .toStockListMaterials,
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer((_) async => const Left(ApiFailure.other('fake')));
         },
         act: (bloc) => bloc.add(
           CartEvent.upsertCart(
@@ -1339,11 +1349,28 @@ void main() {
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
+          CartState.initial().copyWith(
+            cartProducts: [priceAggregates.first.copyWith(quantity: 2)],
+            salesOrganisation: fakeMYSalesOrganisation,
+            isUpdatingStock: true,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [priceAggregates.first.copyWith(quantity: 2)],
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake'))),
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
         ],
       );
 
       blocTest<CartBloc, CartState>(
-        'Cart upsertCart new Item',
+        'Cart upsertCart new Item and call update stock event afterward',
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
@@ -1365,10 +1392,20 @@ void main() {
               ),
             ),
           ).thenAnswer(
-            (invocation) async => Right(
-              [priceAggregates.first.copyWith(quantity: 2)],
-            ),
+            (_) async => Right([priceAggregates.first.copyWith(quantity: 2)]),
           );
+
+          when(
+            () => cartRepositoryMock.getStockInfoList(
+              items: priceAggregates.first
+                  .copyWith(quantity: 2)
+                  .toStockListMaterials,
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer((_) async => const Left(ApiFailure.other('fake')));
         },
         act: (bloc) => bloc.add(
           CartEvent.upsertCart(
@@ -1392,11 +1429,28 @@ void main() {
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
+          CartState.initial().copyWith(
+            cartProducts: [priceAggregates.first.copyWith(quantity: 2)],
+            salesOrganisation: fakeMYSalesOrganisation,
+            isUpdatingStock: true,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [priceAggregates.first.copyWith(quantity: 2)],
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake'))),
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
         ],
       );
 
       blocTest<CartBloc, CartState>(
-        'Should add fetch total price event for ID market after upsert success',
+        'Should add fetch total price event and update stock for ID market after upsert success',
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeIDSalesOrganisation,
@@ -1422,6 +1476,15 @@ void main() {
               ),
             ),
           ).thenAnswer((_) async => Right([priceAggregatesForID.first]));
+          when(
+            () => cartRepositoryMock.getStockInfoList(
+              items: priceAggregatesForID.first.toStockListMaterials,
+              salesOrganisation: fakeIDSalesOrganisation,
+              salesOrganisationConfigs: fakeIDSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer((_) async => const Left(ApiFailure.other('fake')));
           when(
             () => cartRepositoryMock.fetchGrandTotalPriceForIdMarket(
               totalPrice: priceAggregatesForID.first.finalPriceTotal,
@@ -1449,6 +1512,33 @@ void main() {
             user: fakeClientUser,
           ),
           CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                salesOrgConfig: fakeIDSalesOrgConfigs,
+              ),
+            ],
+            salesOrganisation: fakeIDSalesOrganisation,
+            config: fakeIDSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
+          ),
+          CartState.initial().copyWith(
+            isUpdatingStock: true,
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                salesOrgConfig: fakeIDSalesOrgConfigs,
+              ),
+            ],
+            salesOrganisation: fakeIDSalesOrganisation,
+            config: fakeIDSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake'))),
             cartProducts: [
               priceAggregates.first.copyWith(
                 salesOrgConfig: fakeIDSalesOrgConfigs,

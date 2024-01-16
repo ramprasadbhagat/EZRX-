@@ -404,17 +404,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
             if (newCartProductList.isNotEmpty) {
-              add(
-                _VerifyMaterialDealBonus(
-                  item: newCartProductList.firstWhere(
-                    (element) =>
-                        element.materialInfo.materialNumber ==
-                        e.priceAggregate.materialInfo.materialNumber,
-                    orElse: () => PriceAggregate.empty(),
-                  ),
-                  items: newCartProductList,
-                ),
-              );
+              add(const CartEvent.updateProductStock());
+
               add(const CartEvent.fetchGrandTotalPriceForIdMarket());
             }
           },
