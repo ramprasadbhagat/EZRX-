@@ -143,7 +143,6 @@ class CustomNumericTextField extends StatefulWidget {
 
           CommaToDotFormatter(),
           FilteringTextInputFormatter.allow(ZPRegexes.onlyDecimal),
-          FilteringTextInputFormatter.deny(ZPRegexes.leadingZero),
         ],
       );
 
