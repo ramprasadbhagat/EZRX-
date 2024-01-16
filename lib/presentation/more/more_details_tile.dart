@@ -58,6 +58,28 @@ class MoreDetailsTile {
             ),
       );
 
+  factory MoreDetailsTile.userGuide(BuildContext context) => MoreDetailsTile(
+        icon: const Icon(
+          Icons
+              .menu_book_outlined, //TODO : will update it after Design Them update the Figma
+          color: ZPColors.greenIconColor,
+        ),
+        label: 'User guide',
+        onTap: () => context.navigateTo(
+          WebViewPageRoute(
+            url: locator<Config>().getUserGuidePdfUrl(
+              context
+                  .read<EligibilityBloc>()
+                  .state
+                  .salesOrg
+                  .country
+                  .toLowerCase(),
+            ),
+            titleText: 'User guide',
+          ),
+        ),
+      );
+
   factory MoreDetailsTile.termsOfUse(BuildContext context) => MoreDetailsTile(
         icon: const Icon(
           Icons.description_outlined,

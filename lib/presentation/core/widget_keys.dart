@@ -1319,6 +1319,10 @@ class WidgetKeys {
   static Key ezPointWebviewPage = const Key('ezPointWebviewPage');
   static Key ezPointErrorPage = const Key('ezPointErrorPage');
   //============================================================
+  // User guide Page
+  //============================================================
+  static Key userGuideWebviewPage = const Key('userGuideWebviewPage');
+  //============================================================
   // Notification Settings Page
   //============================================================
   static Key notificationSettingsPage = const Key('notificationSettingsPage');

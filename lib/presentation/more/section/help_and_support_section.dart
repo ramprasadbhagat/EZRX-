@@ -9,6 +9,7 @@ class HelpAndSupportTile extends StatelessWidget {
       <MoreDetailsTile>[
         MoreDetailsTile.faq(context),
         MoreDetailsTile.announcementAndArticleTab(context),
+        MoreDetailsTile.userGuide(context),
         MoreDetailsTile.aboutUs(context),
         MoreDetailsTile.chatSupport(context),
         MoreDetailsTile.termsOfUse(context),

@@ -15,7 +15,7 @@ class Config {
   int maximumCartQuantity = 99999;
   String customScheme = 'ezrx://';
 
-String get domain {
+  String get domain {
     switch (appFlavor) {
       case Flavor.prod:
         return '.ezrxplus.com';
@@ -25,7 +25,7 @@ String get domain {
         return '.ezrx.com';
     }
   }
-  
+
   String baseUrl({String? marketDomain}) {
     switch (appFlavor) {
       // https://my.ezrxplus.com/
@@ -454,5 +454,6 @@ String get domain {
     }
   }
 
-  
+  String getUserGuidePdfUrl(String marketDomain) =>
+      '${baseUrl(marketDomain: marketDomain)}${'/static/mobileUserGuide.pdf'}';
 }
