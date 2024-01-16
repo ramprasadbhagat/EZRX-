@@ -103,7 +103,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
             emit(
               state.copyWith(
-                cartProducts: newCartProductList,
+                cartProducts:
+                    newCartProductList.priceAggregateWithDiscountedCount,
                 apiFailureOrSuccessOption: none(),
                 isFetchingBonus: false,
               ),
