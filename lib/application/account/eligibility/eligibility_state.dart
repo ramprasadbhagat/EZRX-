@@ -41,9 +41,17 @@ class EligibilityState with _$EligibilityState {
     return true;
   }
 
-  bool get isPaymentEnabled =>
-      user.role.type.hasAdminAccess ||
-      !salesOrgConfigs.disablePayment && !user.disablePaymentAccess;
+  bool get isPaymentEnabled {
+    if (user.role.type.hasAdminAccess) {
+      return true;
+    }
+
+    if (salesOrgConfigs.disablePayment) {
+      return false;
+    }
+
+    return user.role.type.isCustomer && !user.disablePaymentAccess;
+  }
 
   bool get isCovidMaterialEnable {
     // 1. SG Covid tab
@@ -143,6 +151,7 @@ class EligibilityState with _$EligibilityState {
 
   bool get isZDP8Override =>
       user.role.type.isSalesRepRole && salesOrgConfigs.enableZDP8Override;
+
   bool get isPriceOverrideEnable => user.role.type.isSalesRepRole
       ? user.hasPriceOverride
       : salesOrgConfigs.priceOverride;

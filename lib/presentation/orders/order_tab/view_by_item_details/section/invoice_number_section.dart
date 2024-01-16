@@ -19,11 +19,15 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class InvoiceNumberSection extends StatelessWidget {
   final String invoiceNumber;
+
   const InvoiceNumberSection({Key? key, required this.invoiceNumber})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final enablePayment =
+        context.read<EligibilityBloc>().state.isPaymentEnabled;
+
     return Row(
       children: [
         Expanded(
@@ -102,30 +106,32 @@ class InvoiceNumberSection extends StatelessWidget {
                                     size: 20,
                                   ),
                                 )
-                              : IconButton(
-                                  key: WidgetKeys
-                                      .viewByItemsOrderDetailsInvoiceNumberButton,
-                                  padding: EdgeInsets.zero,
-                                  constraints: const BoxConstraints(),
-                                  onPressed: () => context
-                                      .read<AllInvoicesBloc>()
-                                      .add(
-                                        AllInvoicesEvent.fetch(
-                                          appliedFilter:
-                                              AllInvoicesFilter.empty()
-                                                  .copyWith(
-                                            searchKey: SearchKey.searchFilter(
-                                              invoiceNumber,
-                                            ),
-                                          ),
-                                        ),
+                              : enablePayment
+                                  ? IconButton(
+                                      key: WidgetKeys
+                                          .viewByItemsOrderDetailsInvoiceNumberButton,
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(),
+                                      onPressed: () =>
+                                          context.read<AllInvoicesBloc>().add(
+                                                AllInvoicesEvent.fetch(
+                                                  appliedFilter:
+                                                      AllInvoicesFilter.empty()
+                                                          .copyWith(
+                                                    searchKey:
+                                                        SearchKey.searchFilter(
+                                                      invoiceNumber,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                      icon: const Icon(
+                                        Icons.open_in_new,
+                                        color: ZPColors.attachmentColor,
+                                        size: 20,
                                       ),
-                                  icon: const Icon(
-                                    Icons.open_in_new,
-                                    color: ZPColors.attachmentColor,
-                                    size: 20,
-                                  ),
-                                ),
+                                    )
+                                  : const SizedBox(),
                         ],
                       ),
                     );

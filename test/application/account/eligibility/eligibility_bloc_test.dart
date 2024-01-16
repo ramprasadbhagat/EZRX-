@@ -430,6 +430,45 @@ void main() {
   );
 
   test(
+    'isPaymentEnable',
+    () {
+      var eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeRootAdminUser,
+      );
+
+      expect(eligibilityState.isPaymentEnabled, true);
+
+      eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeClientAdmin.copyWith(disablePaymentAccess: true),
+        salesOrgConfigs: fakeKHSalesOrgConfigs,
+      );
+
+      expect(eligibilityState.isPaymentEnabled, false);
+
+      eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeClientAdmin.copyWith(disablePaymentAccess: false),
+        salesOrgConfigs: fakeIDSalesOrgConfigs,
+      );
+
+      expect(eligibilityState.isPaymentEnabled, true);
+
+      eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeClientUser.copyWith(disablePaymentAccess: false),
+        salesOrgConfigs: fakeIDSalesOrgConfigs,
+      );
+
+      expect(eligibilityState.isPaymentEnabled, true);
+
+      eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeSalesRepUser.copyWith(disablePaymentAccess: false),
+        salesOrgConfigs: fakeIDSalesOrgConfigs,
+      );
+
+      expect(eligibilityState.isPaymentEnabled, false);
+    },
+  );
+
+  test(
     'isSalesRepAndBonusEligible',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(

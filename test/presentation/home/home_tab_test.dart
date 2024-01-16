@@ -53,6 +53,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
@@ -563,23 +564,9 @@ void main() {
           VisibilityDetectorController.instance.updateInterval = Duration.zero;
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrganisation: SalesOrganisation.empty().copyWith(
-                //Philippine market: ZPC PH
-                salesOrg: SalesOrg('2500'),
-              ),
-              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-                //Enable Payment Configuration is on
-                disablePayment: false,
-              ),
-            ),
-          );
-          when(() => userBlocMock.state).thenReturn(
-            UserState.initial().copyWith(
-              user: User.empty().copyWith(
-                role: Role.empty().copyWith(
-                  type: RoleType('client_user'),
-                ),
-              ),
+              salesOrganisation: fakePHSalesOrganisation,
+              salesOrgConfigs: fakePHSalesOrgConfigs,
+              user: fakeClientUser,
             ),
           );
 

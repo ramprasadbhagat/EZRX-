@@ -896,11 +896,69 @@ void main() {
         ),
       );
     });
-    testWidgets('Invoice Number section test ', (tester) async {
+    testWidgets('Invoice Number section test salesRep', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          user: fakeSalesRepUser.copyWith(disablePaymentAccess: true),
+        ),
+      );
+
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+
+      final expectedStates = [
+        AllInvoicesState.initial().copyWith(
+          failureOrSuccessOption: optionOf(Right(fakeItemList)),
+          items: fakeItemList,
+        ),
+      ];
+      whenListen(
+        allInvoicesBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      verify(
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.initialized(
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => creditAndInvoiceDetailsBlocMock.add(
+          CreditAndInvoiceDetailsEvent.fetch(
+            creditAndInvoiceItem: fakeItemList.first,
+          ),
+        ),
+      ).called(1);
+      final invoiceNoTextFinder = find.text(
+        fakeOrderHistoryItem.invoiceData.invoiceNumber.getOrDefaultValue(''),
+      );
+      expect(invoiceNoTextFinder, findsWidgets);
+      final iconFinder =
+          find.byKey(WidgetKeys.viewByItemsOrderDetailsInvoiceNumberButton);
+      expect(iconFinder, findsNothing);
+    });
+
+    testWidgets('Invoice Number section test rootadmin', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          user: fakeRootAdminUser,
         ),
       );
 
@@ -1366,7 +1424,6 @@ void main() {
         '(10.0% tax)',
       );
       expect(expectedTax, findsOneWidget);
-      
     });
     // TODO:Revisit while ID tax improvement
     // testWidgets(' => QuantityAndPriceWithTax test for ID market',

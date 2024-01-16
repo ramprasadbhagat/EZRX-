@@ -21,7 +21,7 @@ class ServiceTile extends StatelessWidget {
             crossAxisCount: (MediaQuery.of(context).size.width / 80).round(),
             childAspectRatio: 1,
             shrinkWrap: true,
-            children: _getServiceTabs(context).map((item) {
+            children: _getServiceTabs(context, state).map((item) {
               return InkWell(
                 key: item.key,
                 onTap: item.onTap,
@@ -46,16 +46,17 @@ class ServiceTile extends StatelessWidget {
     );
   }
 
-  List<MoreDetailsTile> _getServiceTabs(BuildContext context) {
-    final eligibilityState = context.read<EligibilityBloc>().state;
-
+  List<MoreDetailsTile> _getServiceTabs(
+    BuildContext context,
+    EligibilityState state,
+  ) {
     return <MoreDetailsTile>[
-      if (eligibilityState.user.userCanAccessOrderHistory)
+      if (state.user.userCanAccessOrderHistory)
         MoreDetailsTile.orderTab(context),
-      if (eligibilityState.isReturnsEnable) MoreDetailsTile.returnsTab(context),
-      if (eligibilityState.isPaymentEnabled)
+      if (state.isReturnsEnable) MoreDetailsTile.returnsTab(context),
+      if (state.isPaymentEnabled)
         MoreDetailsTile.paymentsTab(context),
-      if (eligibilityState.isIDMarket) MoreDetailsTile.eZPointTab(context),
+      if (state.isIDMarket) MoreDetailsTile.eZPointTab(context),
     ];
   }
 }

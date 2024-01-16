@@ -12,6 +12,7 @@ const _roleTypeRootAdmin = 'root_admin';
 const _roleTypeZPAdmin = 'zp_admin';
 const _roleTypeSalesRep = 'salesRep';
 const _roleTypeClient = 'client';
+const _roleTypeClientAdmin = 'client_admin';
 const _roleTypeClientUser = 'client_user';
 const _roleTypeReturnApprover = 'return_approver';
 const _fakeUserName = 'fake-user';
@@ -47,6 +48,16 @@ final fakeClient = User.empty().copyWith(
     description: _fakeRoleDesc,
     id: _fakeRoleId,
     type: RoleType(_roleTypeClient),
+  ),
+);
+
+final fakeClientAdmin = User.empty().copyWith(
+  username: Username(_fakeUserName),
+  id: _fakeId,
+  role: Role.empty().copyWith(
+    description: _fakeRoleDesc,
+    id: _fakeRoleId,
+    type: RoleType(_roleTypeClientAdmin),
   ),
 );
 
