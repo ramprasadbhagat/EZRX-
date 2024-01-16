@@ -105,6 +105,8 @@ class PrincipalCode extends ValueObject<String> {
   bool get isAllMaterial => havingPrincipalCodeForAllMaterial(_valueOrEmpty);
 
   bool get isPnG => havingPnGPrincipalCode(_shortValue);
+
+  bool get isAbbot => havingAbbotPrincipalCode(_shortValue);
 }
 
 class MaterialNumber extends ValueObject<String> {

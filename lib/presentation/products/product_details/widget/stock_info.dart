@@ -36,7 +36,7 @@ class ProductStockInfo extends StatelessWidget {
         return stockInfo.batchExpiryDateAvailable
             ? Padding(
                 key: WidgetKeys.materialDetailsStock,
-                padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
                 child: RichText(
                   text: TextSpan(
                     style: Theme.of(context)
@@ -50,11 +50,10 @@ class ProductStockInfo extends StatelessWidget {
                           text:
                               '${context.tr('Batch')} ${stockInfo.batch.getOrDefaultValue('')} ',
                         ),
-                      if (eligibilityState.salesOrgConfigs.expiryDateDisplay &&
-                          stockInfo.expiryDate.isValid())
+                      if (eligibilityState.salesOrgConfigs.expiryDateDisplay)
                         TextSpan(
                           text:
-                              '(${context.tr('EXP')}: ${stockInfo.expiryDate.dateString})',
+                              '(${context.tr('EXP')}: ${state.expiryDate.dateOrNaString})',
                         ),
                     ],
                   ),

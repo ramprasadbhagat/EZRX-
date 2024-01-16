@@ -73,6 +73,9 @@ bool havingSubmitPrincipalForSalesRep(String principalCode) =>
 bool havingPnGPrincipalCode(String principalCode) =>
     principalCode == '105307' || principalCode == '101308';
 
+bool havingAbbotPrincipalCode(String principalCode) =>
+    principalCode == '107381';
+
 int getParsedValue(String zDP5Value) =>
     zDP5Value.isEmpty ? 0 : int.parse(zDP5Value);
 

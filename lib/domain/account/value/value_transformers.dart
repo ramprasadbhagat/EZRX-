@@ -612,3 +612,5 @@ double getCombinedAppBarHeight(bool value, bool isFromHomePage) {
 
   return value ? baseHeight : alternativeHeight;
 }
+
+bool salesOrgIsPhMdi(String salesOrg) => salesOrg == '2501';

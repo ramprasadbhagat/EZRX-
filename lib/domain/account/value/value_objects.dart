@@ -115,6 +115,8 @@ class SalesOrg extends ValueObject<String> {
     return country == 'KH';
   }
 
+  bool get isPhMdi => salesOrgIsPhMdi(value.getOrElse(() => ''));
+
   bool get needUpdatePaymentGateway => isMY || isVN;
 
   bool get isPaymentNeedOpenWebView => !isSg;

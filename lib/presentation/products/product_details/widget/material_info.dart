@@ -68,9 +68,9 @@ class _MaterialInfoDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productDetailAggregate =
-        context.read<ProductDetailBloc>().state.productDetailAggregate;
-    final materialInfo = productDetailAggregate.materialInfo;
+    final productDetailState = context.read<ProductDetailBloc>().state;
+
+    final materialInfo = productDetailState.productDetailAggregate.materialInfo;
     final eligibilityState = context.read<EligibilityBloc>().state;
 
     return Padding(
@@ -152,7 +152,8 @@ class _MaterialInfoDialog extends StatelessWidget {
           if (eligibilityState.salesOrg.showBatchNumber)
             BalanceTextRow(
               keyText: context.tr('Batch'),
-              valueText: productDetailAggregate.stockInfo.batch.displayLabel,
+              valueText: productDetailState
+                  .productDetailAggregate.stockInfo.batch.displayLabel,
               valueFlex: 1,
               keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.black,
@@ -163,8 +164,7 @@ class _MaterialInfoDialog extends StatelessWidget {
             ),
           if (eligibilityState.salesOrgConfigs.expiryDateDisplay)
             _ExpiryDateWidget(
-              expiryDateText:
-                  productDetailAggregate.stockInfo.expiryDate.dateOrNaString,
+              expiryDateText: productDetailState.expiryDate.dateOrNaString,
             ),
           const SizedBox(height: 20),
           Row(
