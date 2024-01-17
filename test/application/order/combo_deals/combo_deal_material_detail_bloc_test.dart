@@ -56,7 +56,9 @@ void main() {
     productDetailRepository = ProductDetailRepositoryMock();
     materialListRepository = MaterialListRepositoryMock();
     config = ConfigMock();
-    productList = await CartLocalDataSource().getAddedToCartProductList();
+    productList = (await CartLocalDataSource().getAddedToCartProductList())
+        .where((e) => e.materialInfo.type.typeMaterial)
+        .toList();
     initialEvent = ComboDealMaterialDetailEvent.initialize(
       salesOrganisation: fakeKHSalesOrganisation,
       customerCodeInfo: fakeCustomerCodeInfo,

@@ -322,7 +322,7 @@ void main() {
             customerCodeInfo: eligibilityState.customerCodeInfo,
             shipToInfo: eligibilityState.shipToInfo,
             principalData: cartState
-                .updatedCartProduct(priceAggregate.getMaterialNumber)
+                .findItemById(priceAggregate.id)
                 .materialInfo
                 .principalData,
             user: eligibilityState.user,
@@ -360,7 +360,7 @@ void main() {
             customerCodeInfo: eligibilityState.customerCodeInfo,
             shipToInfo: eligibilityState.shipToInfo,
             principalData: cartState
-                .updatedCartProduct(priceAggregate.getMaterialNumber)
+                .findItemById(priceAggregate.id)
                 .materialInfo
                 .principalData,
             user: eligibilityState.user,

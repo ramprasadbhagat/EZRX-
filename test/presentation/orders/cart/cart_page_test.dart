@@ -15,7 +15,6 @@ import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
@@ -761,76 +760,73 @@ void main() {
           ),
         ).called(1);
       });
-      testWidgets(
-          'Test SnackBarMessage when delete the item from cart by swapping',
-          (tester) async {
-        when(() => cartBloc.state).thenReturn(
-          CartState.initial().copyWith(
-            cartProducts: mockCartItemWithDataList2,
-            isClearing: true,
-            isUpserting: true,
-          ),
+      testWidgets('Display snackbar when delete item', (tester) async {
+        final currentState = CartState.initial().copyWith(
+          cartProducts: [...mockCartItemWithDataList2]..removeLast(),
         );
-        final expectedStates = [
-          CartState.initial().copyWith(
-            cartProducts: [
-              ...mockCartItemWithDataList2,
-              ...mockCartItemWithDataList2
-            ],
-            isClearing: false,
-            isUpserting: false,
-          ),
-        ];
-        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+        final previousState = CartState.initial().copyWith(
+          cartProducts: [...mockCartItemWithDataList2],
+          isUpserting: true,
+        );
+        when(() => cartBloc.state).thenReturn(currentState);
+
+        whenListen(
+          cartBloc,
+          Stream.fromIterable([previousState, currentState]),
+        );
         await tester.pumpWidget(getWidget());
 
         await tester.pump();
-        await tester.pump(const Duration(seconds: 1));
-        final msg = find.textContaining(
-          'Cart has been emptied.'.tr(),
+        await tester.pumpAndSettle();
+        final msg =
+            tester.widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage));
+        expect(
+          msg.data,
+          equals(currentState.deleteSuccessMessage(previousState)),
         );
-        expect(msg, findsOneWidget);
       });
-      testWidgets('Test SnackBarMessage when delete the item from cart ',
+
+      testWidgets(
+          'Display snackbar and clear additional info bloc when clear cart',
           (tester) async {
-        when(
-          () => autoRouterMock.currentPath,
-        ).thenReturn('orders/cart');
-        when(() => cartBloc.state).thenReturn(
-          CartState.initial().copyWith(
-            isClearing: true,
+        final currentState = CartState.initial().copyWith(
+          cartProducts: [],
+        );
+        final previousState = CartState.initial().copyWith(
+          cartProducts: [...mockCartItemWithDataList2],
+          isClearing: true,
+        );
+        when(() => cartBloc.state).thenReturn(currentState);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
           ),
         );
-        final expectedStates = [
-          CartState.initial().copyWith(
-            cartProducts: [
-              ...mockCartItemWithDataList2,
-            ],
-          ),
-        ];
-        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+
+        whenListen(
+          cartBloc,
+          Stream.fromIterable([previousState, currentState]),
+        );
         await tester.pumpWidget(getWidget());
 
+        await tester.pump();
         await tester.pumpAndSettle();
-        final deleteIcon = find.byIcon(
-          Icons.delete_outlined,
-        );
-        expect(deleteIcon, findsOneWidget);
-
-        await tester.tap(
-          deleteIcon,
-          warnIfMissed: true,
+        final msg =
+            tester.widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage));
+        expect(
+          msg.data,
+          equals(currentState.deleteSuccessMessage(previousState)),
         );
 
-        final closeIcon = find.widgetWithIcon(
-          CustomSnackBar,
-          Icons.close,
-        );
-        expect(closeIcon, findsOneWidget);
-        final msg = find.textContaining(
-          'Cart has been emptied.'.tr(),
-        );
-        expect(msg, findsOneWidget);
+        verify(
+          () => additionalDetailsBlocMock.add(
+            AdditionalDetailsEvent.initialized(
+              config: fakeMYSalesOrgConfigs,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ),
+        ).called(1);
       });
 
       testWidgets('Bundle item allowed out of stock material', (tester) async {
@@ -2992,41 +2988,31 @@ void main() {
         when(
           () => autoRouterMock.currentPath,
         ).thenReturn('orders/cart');
-        when(() => cartBloc.state).thenReturn(
-          CartState.initial().copyWith(
-            isClearing: true,
-          ),
+        final currentState = CartState.initial().copyWith(
+          cartProducts: [],
         );
-        final expectedStates = [
-          CartState.initial().copyWith(
-            cartProducts: [
-              ...mockCartItemWithDataList2,
-            ],
-          ),
-        ];
-        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+        final previousState = CartState.initial().copyWith(
+          cartProducts: [...mockCartItemWithDataList2],
+          isClearing: true,
+        );
+        when(() => cartBloc.state).thenReturn(currentState);
+
+        whenListen(
+          cartBloc,
+          Stream.fromIterable([previousState, currentState]),
+        );
         await tester.pumpWidget(getWidget());
 
         await tester.pumpAndSettle();
-        final deleteIcon = find.byIcon(
-          Icons.delete_outlined,
-        );
-        expect(deleteIcon, findsOneWidget);
 
-        await tester.tap(
-          deleteIcon,
-          warnIfMissed: true,
-        );
-        final msg = find.textContaining(
-          'Cart has been emptied.'.tr(),
-        );
+        final msg = find.textContaining('Cart has been emptied.'.tr());
         expect(msg, findsOneWidget);
-
         final cartCloseButtonFinder = find.byKey(WidgetKeys.closeButton);
         expect(cartCloseButtonFinder, findsOneWidget);
         await tester.tap(cartCloseButtonFinder);
         verify(() => autoRouterMock.navigateBack()).called(1);
       });
+
       testWidgets(
         'Should not show total saving on SG',
         (tester) async {

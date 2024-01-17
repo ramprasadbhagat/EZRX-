@@ -98,10 +98,7 @@ class BonusItemsSheet extends StatelessWidget {
               ),
               _BonusItemSearchBar(cartItem: cartProduct),
               const _BonusQuantityEmptyWarning(),
-              _BodyContent(
-                cartProduct:
-                    state.updatedCartProduct(cartProduct.getMaterialNumber),
-              ),
+              _BodyContent(cartProduct: state.findItemById(cartProduct.id)),
               const BonusItemsSheetFooter(),
             ],
           ),

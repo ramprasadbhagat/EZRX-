@@ -302,9 +302,9 @@ class CartState with _$CartState {
   double get subTotal =>
       totalBundlesPrice + totalMaterialsPrice + totalComboPrice;
 
-  PriceAggregate updatedCartProduct(MaterialNumber matNumber) =>
+  PriceAggregate findItemById(MaterialNumber matNumber) =>
       cartProducts.firstWhere(
-        (element) => element.getMaterialNumber == matNumber,
+        (element) => element.id == matNumber,
         orElse: () => PriceAggregate.empty(),
       );
 
@@ -587,4 +587,50 @@ class CartState with _$CartState {
 
   bool get isProductDeterminationFailed =>
       cartProducts.any((e) => e.isIDProductStockInvalid);
+
+  String deleteSuccessMessage(CartState previousCartState) {
+    final previousAllMaterialNumbers = previousCartState._allMaterialNumbers;
+
+    if (previousAllMaterialNumbers.isNotEmpty && _allMaterialNumbers.isEmpty) {
+      return 'Cart has been emptied.';
+    }
+
+    for (final entry in previousAllMaterialNumbers.entries) {
+      final previousProduct = previousCartState.findItemById(entry.key);
+      final currentProduct = findItemById(entry.key);
+      final previousProductChildren = entry.value;
+      final currentProductChildren = _allMaterialNumbers[entry.key] ?? [];
+
+      if (currentProduct == PriceAggregate.empty()) {
+        if (previousProduct.materialInfo.type.typeBundle) {
+          return 'Bundle has been removed from cart.';
+        }
+
+        if (previousProduct.materialInfo.type.typeCombo) {
+          return 'Combo has been removed from cart.';
+        }
+
+        return 'Item has been removed from cart.';
+      }
+
+      if (previousProductChildren.length > currentProductChildren.length) {
+        if (previousProduct.materialInfo.type.typeBundle) {
+          return 'Item has been removed from bundle.';
+        }
+
+        return 'Item has been removed from cart.';
+      }
+    }
+
+    return '';
+  }
+
+  Map<MaterialNumber, List<MaterialNumber>> get _allMaterialNumbers => {
+        for (final item in cartProducts)
+          item.id: [
+            ...item.bonusSampleItems.map((e) => e.materialNumber),
+            ...item.bundle.materials.map((e) => e.materialNumber),
+            ...item.comboMaterials.map((e) => e.materialInfo.materialNumber),
+          ],
+      };
 }

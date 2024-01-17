@@ -28,7 +28,7 @@ void main() async {
           final result = await localDataSource.getAddedToCartProductList();
           expect(
             result,
-            List.from(finalData)
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
                 .map((e) => CartProductDto.fromJson(e).toDomain)
                 .toList(),
           );

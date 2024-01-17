@@ -18,9 +18,9 @@ class CartLocalDataSource {
     );
     final finalData = data['data']['cart']['EzRxItems'];
 
-    return List.from(finalData)
-        .map((e) => CartProductDto.fromJson(e).toDomain)
-        .toList();
+    return List.from(
+      makeResponseCamelCase(jsonEncode(finalData)),
+    ).map((e) => CartProductDto.fromJson(e).toDomain).toList();
   }
 
   Future<List<PriceAggregate>> upsertCart() async {

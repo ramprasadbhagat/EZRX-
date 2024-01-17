@@ -57,6 +57,8 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  var errorMessage = '';
+
   @override
   void initState() {
     final eligibilityState = context.read<EligibilityBloc>().state;
@@ -225,10 +227,19 @@ class _CartPageState extends State<CartPage> {
         ),
       ],
       child: BlocConsumer<CartBloc, CartState>(
-        listenWhen: (previous, current) =>
-            previous.cartProducts.length != current.cartProducts.length &&
-            (previous.isUpserting != current.isUpserting ||
-                previous.isClearing != current.isClearing),
+        listenWhen: (previous, current) {
+          final upsertCompleted = previous.isUpserting != current.isUpserting &&
+              !current.isUpserting;
+          final clearCompleted =
+              previous.isClearing != current.isClearing && !current.isClearing;
+          if (upsertCompleted || clearCompleted) {
+            errorMessage = current.deleteSuccessMessage(previous);
+
+            return true;
+          }
+
+          return false;
+        },
         listener: (context, state) {
           if (state.cartProducts.isEmpty) {
             context.read<AdditionalDetailsBloc>().add(
@@ -241,10 +252,10 @@ class _CartPageState extends State<CartPage> {
                 );
           }
 
-          if ((!state.isUpserting || !state.isClearing) &&
-              context.router.current.path == 'orders/cart') {
+          if (context.router.current.path == 'orders/cart' &&
+              errorMessage.isNotEmpty) {
             CustomSnackBar(
-              messageText: context.tr('Cart has been emptied.'),
+              messageText: context.tr(errorMessage),
             ).show(context);
           }
         },

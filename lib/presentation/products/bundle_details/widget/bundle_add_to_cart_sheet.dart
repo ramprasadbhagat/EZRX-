@@ -268,8 +268,8 @@ class _BundleSheetFooter extends StatelessWidget {
                               _trackAddToCartSuccess(context, state);
                               context.router.popForced();
                               CustomSnackBar(
-                                messageText:
-                                    context.tr('Item has been added to cart'),
+                                messageText: context
+                                    .tr('Bundle has been added to cart.'),
                               ).show(context);
                             }
                           },

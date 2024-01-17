@@ -22,7 +22,9 @@ void main() {
   late Map<MaterialNumber, PriceAggregate> items;
   setUpAll(() async {
     comboDeal = (await ComboDealLocalDataSource().getComboDealList()).first;
-    productList = await CartLocalDataSource().getAddedToCartProductList();
+    productList = (await CartLocalDataSource().getAddedToCartProductList())
+        .where((e) => e.materialInfo.type.typeMaterial)
+        .toList();
 
     for (var i = 0; i < productList.length; i++) {
       productList[i] = productList[i].copyWith(

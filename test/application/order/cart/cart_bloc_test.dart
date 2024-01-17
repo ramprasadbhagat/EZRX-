@@ -63,6 +63,7 @@ void main() {
   late ProductDetailRepository productDetailRepository;
   late RequestCounterOfferDetails fakeCounterOfferDetails;
   late AplSimulatorOrder aplSimulatorOrder;
+  late final List<PriceAggregate> cartProducts;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -179,6 +180,7 @@ void main() {
         quantity: 20,
       )
     ];
+    cartProducts = await CartLocalDataSource().getAddedToCartProductList();
   });
   setUp(() {
     cartRepositoryMock = CartRepositoryMock();
@@ -3811,8 +3813,7 @@ void main() {
             ],
           );
           expect(
-            cartBlocState
-                .updatedCartProduct(priceAggregates.first.getMaterialNumber),
+            cartBlocState.findItemById(priceAggregates.first.getMaterialNumber),
             priceAggregates.first.copyWith(price: prices.first),
           );
         },
@@ -3823,8 +3824,7 @@ void main() {
         () {
           final cartBlocState = CartState.initial();
           expect(
-            cartBlocState
-                .updatedCartProduct(priceAggregates.first.getMaterialNumber),
+            cartBlocState.findItemById(priceAggregates.first.getMaterialNumber),
             PriceAggregate.empty(),
           );
         },
@@ -4237,6 +4237,107 @@ void main() {
           );
         },
       );
+
+      group('deleteSuccessMessage -', () {
+        test('when cart is empty', () {
+          final previousState =
+              CartState.initial().copyWith(cartProducts: cartProducts);
+          final currentState = previousState.copyWith(cartProducts: []);
+
+          expect(
+            currentState.deleteSuccessMessage(previousState),
+            'Cart has been emptied.',
+          );
+        });
+
+        test('when remove material', () {
+          final materialIndex =
+              cartProducts.indexWhere((e) => e.materialInfo.type.typeMaterial);
+          final previousState = CartState.initial().copyWith(
+            cartProducts: cartProducts,
+          );
+          final currentState = previousState.copyWith(
+            cartProducts: [...priceAggregates]..removeAt(materialIndex),
+          );
+
+          expect(
+            currentState.deleteSuccessMessage(previousState),
+            'Item has been removed from cart.',
+          );
+        });
+
+        test('when remove bonus from material', () {
+          final materialWithBonus = cartProducts.firstWhere(
+            (e) =>
+                e.materialInfo.type.typeMaterial &&
+                e.bonusSampleItems.isNotEmpty,
+          );
+          final previousState = CartState.initial().copyWith(
+            cartProducts: [materialWithBonus],
+          );
+          final currentState = previousState.copyWith(
+            cartProducts: [materialWithBonus.copyWith(bonusSampleItems: [])],
+          );
+
+          expect(
+            currentState.deleteSuccessMessage(previousState),
+            'Item has been removed from cart.',
+          );
+        });
+
+        test('when remove bundle', () {
+          final bundleIndex =
+              cartProducts.indexWhere((e) => e.materialInfo.type.typeBundle);
+          final previousState = CartState.initial().copyWith(
+            cartProducts: cartProducts,
+          );
+          final currentState = previousState.copyWith(
+            cartProducts: [...cartProducts]..removeAt(bundleIndex),
+          );
+
+          expect(
+            currentState.deleteSuccessMessage(previousState),
+            'Bundle has been removed from cart.',
+          );
+        });
+
+        test('when remove item from bundle', () {
+          final bundle = cartProducts.firstWhere(
+            (e) =>
+                e.materialInfo.type.typeBundle && e.bundle.materials.isNotEmpty,
+          );
+          final previousState = CartState.initial().copyWith(
+            cartProducts: [bundle],
+          );
+          final currentState = previousState.copyWith(
+            cartProducts: [
+              bundle.copyWith
+                  .bundle(materials: [...bundle.bundle.materials]..removeLast())
+            ],
+          );
+          expect(
+            currentState.deleteSuccessMessage(previousState),
+            'Item has been removed from bundle.',
+          );
+        });
+
+        test('when remove combo', () {
+          final comboIndex = cartProducts.indexWhere(
+            (e) => e.materialInfo.type.typeCombo,
+          );
+          final previousState = CartState.initial().copyWith(
+            cartProducts: cartProducts,
+          );
+          final currentState = previousState.copyWith(
+            cartProducts: [...cartProducts]..removeAt(comboIndex),
+          );
+
+          expect(
+            currentState.deleteSuccessMessage(previousState),
+            'Combo has been removed from cart.',
+          );
+        });
+      });
     },
   );
 }

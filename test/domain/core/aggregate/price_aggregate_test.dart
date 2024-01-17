@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
@@ -773,53 +774,43 @@ void main() {
       },
     );
 
-    test(
-      'isFromBundle from PriceAggregate',
-      () {
-        final customPriceAggregate = emptyPriceAggregate.copyWith(
+    group('id getter', () {
+      test('returns combo id for combo deal', () {
+        final priceComboDeal = PriceComboDeal.empty().copyWith(
+          flexibleGroup: FlexibleGroup('fake-group'),
+          salesDeal: SalesDealNumber('fake-sales-deal'),
+        );
+        final combo = emptyPriceAggregate.copyWith(
+          materialInfo:
+              MaterialInfo.empty().copyWith(type: MaterialInfoType.combo()),
+          comboMaterials: [
+            ComboMaterialItem.empty().copyWith(comboDeals: priceComboDeal)
+          ],
+        );
+
+        expect(combo.id, MaterialNumber(priceComboDeal.id));
+      });
+      test('returns bundle code for bundle', () {
+        final bundle = emptyPriceAggregate.copyWith(
+          materialInfo:
+              MaterialInfo.empty().copyWith(type: MaterialInfoType.bundle()),
           bundle: emptyBundle.copyWith(
             bundleCode: '123',
           ),
         );
-        expect(
-          customPriceAggregate.isFromBundle,
-          true,
-        );
-      },
-    );
+        expect(bundle.id, MaterialNumber('123'));
+      });
 
-    test(
-      'materialNumberString from PriceAggregate for materialNumberFromPrice.isEmpty',
-      () {
-        final customPriceAggregate = emptyPriceAggregate.copyWith(
-          materialInfo: emptyMaterialInfo.copyWith(
-            materialNumber: MaterialNumber('10'),
+      test('returns material number for material', () {
+        final bundle = emptyPriceAggregate.copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType.material(),
+            materialNumber: MaterialNumber('fake'),
           ),
         );
-        expect(
-          customPriceAggregate.materialNumberString,
-          '10',
-        );
-      },
-    );
-
-    test(
-      'materialNumberString from PriceAggregate',
-      () {
-        final customPriceAggregate = emptyPriceAggregate.copyWith(
-          price: emptyPrice.copyWith(
-            materialNumber: MaterialNumber('22'),
-          ),
-          materialInfo: emptyMaterialInfo.copyWith(
-            materialNumber: MaterialNumber('22'),
-          ),
-        );
-        expect(
-          customPriceAggregate.materialNumberString,
-          '22',
-        );
-      },
-    );
+        expect(bundle.id, MaterialNumber('fake'));
+      });
+    });
 
     test(
       'getMaterialNumber from PriceAggregate',

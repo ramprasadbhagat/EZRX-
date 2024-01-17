@@ -762,9 +762,7 @@ void main() {
         expect(
           find.descendant(
             of: find.byType(CustomSnackBar),
-            matching: find.text(
-              'Item has been added to cart',
-            ),
+            matching: find.text('Bundle has been added to cart.'),
           ),
           findsOneWidget,
         );

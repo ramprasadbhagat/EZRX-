@@ -130,7 +130,9 @@ void main() {
 
     when(
       () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-        materialNumbers: [fakeCartProducts.first.materialNumberString],
+        materialNumbers: [
+          fakeCartProducts.first.getMaterialNumber.getOrDefaultValue('')
+        ],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
       ),
@@ -140,7 +142,9 @@ void main() {
 
     when(
       () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-        materialNumbers: [fakeCartProducts.first.materialNumberString],
+        materialNumbers: [
+          fakeCartProducts.first.getMaterialNumber.getOrDefaultValue('')
+        ],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
       ),
@@ -573,7 +577,9 @@ void main() {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
     when(
       () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-        materialNumbers: [fakeCartProducts.first.materialNumberString],
+        materialNumbers: [
+          fakeCartProducts.first.getMaterialNumber.getOrDefaultValue('')
+        ],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
       ),
@@ -1685,7 +1691,8 @@ void main() {
 
       when(
         () => stockInfoRemoteDataSource.getStockInfo(
-          materialNumber: fakeCartProducts.first.materialNumberString,
+          materialNumber:
+              fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         ),
@@ -1733,7 +1740,8 @@ void main() {
       );
       when(
         () => stockInfoRemoteDataSource.getStockInfo(
-          materialNumber: fakeCartProducts.first.materialNumberString,
+          materialNumber:
+              fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         ),

@@ -421,16 +421,15 @@ class PriceAggregate with _$PriceAggregate {
         materialInfo.defaultMaterialDescription.isNotEmpty;
   }
 
-  bool get isFromBundle => bundle != Bundle.empty();
+  MaterialNumber get id {
+    if (materialInfo.type.typeCombo) {
+      return MaterialNumber(comboMaterials.firstOrNull?.comboDeals.id ?? '');
+    }
+    if (materialInfo.type.typeBundle) {
+      return MaterialNumber(bundle.bundleCode);
+    }
 
-  String get materialNumberString {
-    final materialNumberFromPrice = price.materialNumber.getOrDefaultValue('');
-    final materialNumberFromInfo =
-        materialInfo.materialNumber.getOrDefaultValue('');
-
-    return materialNumberFromPrice.isEmpty
-        ? materialNumberFromInfo
-        : materialNumberFromPrice;
+    return materialInfo.materialNumber;
   }
 
   MaterialNumber get getMaterialNumber => materialInfo.materialNumber;
