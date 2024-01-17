@@ -127,6 +127,8 @@ class SalesOrg extends ValueObject<String> {
 
   bool get isPaymentClaimEnabled => isPH;
 
+  bool get isAboutUsEnabled => !isVN;
+
   int get countWhenValid => isValid() ? 1 : 0;
 
   Locale get announcementLocale =>
