@@ -29,6 +29,7 @@ class SoaBloc extends Bloc<SoaEvent, SoaState> {
         emit(
           state.copyWith(
             isFetching: true,
+            appliedFilter: SoaFilter.empty(),
             soaList: <Soa>[],
             failureOrSuccessOption: none(),
           ),
@@ -49,14 +50,6 @@ class SoaBloc extends Bloc<SoaEvent, SoaState> {
               failureOrSuccessOption: none(),
               isFetching: false,
               soaList: soaList,
-              appliedFilter: SoaFilter(
-                fromDate: soaList.isNotEmpty
-                    ? soaList.last.soaData.simpleDateStringValue
-                    : SoaFilter.empty().fromDate,
-                toDate: soaList.isNotEmpty
-                    ? soaList.first.soaData.simpleDateStringValue
-                    : SoaFilter.empty().toDate,
-              ),
             ),
           ),
         );

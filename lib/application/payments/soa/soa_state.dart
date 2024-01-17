@@ -17,20 +17,24 @@ class SoaState with _$SoaState {
         appliedFilter: SoaFilter.empty(),
       );
 
-  List<Soa> get filterList => soaList.getSoaListRespectMonth
-      .where(
-        (element) => (DateUtils.isSameMonth(
-              element.soaData.date,
-              appliedFilter.fromDate.dateTime,
-            ) ||
-            DateUtils.isSameMonth(
-              element.soaData.date,
-              appliedFilter.toDate.dateTime,
-            ) ||
-            (element.soaData.date.isAfter(appliedFilter.fromDate.dateTime) &&
-                element.soaData.date.isBefore(appliedFilter.toDate.dateTime))),
-      )
-      .toList();
+  List<Soa> get filterList => appliedFilter.isAppliedFilterValid
+      ? soaList.getSoaListRespectMonth
+          .where(
+            (element) => (DateUtils.isSameMonth(
+                  element.soaData.date,
+                  appliedFilter.fromDate.dateTime,
+                ) ||
+                DateUtils.isSameMonth(
+                  element.soaData.date,
+                  appliedFilter.toDate.dateTime,
+                ) ||
+                (element.soaData.date
+                        .isAfter(appliedFilter.fromDate.dateTime) &&
+                    element.soaData.date
+                        .isBefore(appliedFilter.toDate.dateTime))),
+          )
+          .toList()
+      : soaList.getSoaListRespectMonth;
 
   DateTimeStringValue get initialFilterFormDate => soaList.isNotEmpty
       ? soaList.last.soaData.simpleDateStringValue

@@ -265,7 +265,6 @@ void main() {
       await tester.pumpAndSettle();
       final findSoaItem = find.byKey(WidgetKeys.genericKey(key: 'SoaItem#0'));
       expect(findSoaItem, findsOneWidget);
-      expect(find.text('Search results'), findsOneWidget);
     });
 
     testWidgets('Body Test - Header Test', (tester) async {

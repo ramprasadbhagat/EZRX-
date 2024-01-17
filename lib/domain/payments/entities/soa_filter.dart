@@ -1,5 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'soa_filter.freezed.dart';
@@ -13,13 +13,15 @@ class SoaFilter with _$SoaFilter {
   }) = _SoaFilter;
 
   factory SoaFilter.empty() => SoaFilter(
-        fromDate: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime.now().subtract(const Duration(days: 365)),
-          ),
-        ),
-        toDate: DateTimeStringValue(getDateStringByDateTime(DateTime.now())),
+        fromDate: DateTimeStringValue(''),
+        toDate: DateTimeStringValue(''),
       );
 
-  int get appliedFilterCount => 1;
+  bool get isAppliedFilterMonthRangeValid =>
+      toDate.dateTime.isAfter(fromDate.dateTime) ||
+      DateUtils.isSameMonth(toDate.dateTime, fromDate.dateTime);
+
+  bool get isAppliedFilterValid => toDate.isValid() && fromDate.isValid();
+
+  int get appliedFilterCount => isAppliedFilterValid ? 1 : 0;
 }

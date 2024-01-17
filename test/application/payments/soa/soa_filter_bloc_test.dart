@@ -37,7 +37,8 @@ void main() {
       ),
       expect: () => [
         SoaFilterState.initial().copyWith(
-          filter: SoaFilter.empty().copyWith(fromDate: fakeFromDate),
+          filter: SoaFilter.empty()
+              .copyWith(fromDate: fakeFromDate, toDate: fakeFromDate),
         ),
       ],
     );
@@ -50,7 +51,8 @@ void main() {
       ),
       expect: () => [
         SoaFilterState.initial().copyWith(
-          filter: SoaFilter.empty().copyWith(toDate: fakeToDate),
+          filter: SoaFilter.empty()
+              .copyWith(toDate: fakeToDate, fromDate: fakeToDate),
         ),
       ],
     );

@@ -50,6 +50,20 @@ class _SOAFilterBottomSheet extends StatelessWidget {
                     const _ToDateField(),
                   ],
                 ),
+                BlocBuilder<SoaFilterBloc, SoaFilterState>(
+                  buildWhen: (previous, current) =>
+                      previous.filter.isAppliedFilterMonthRangeValid !=
+                      current.filter.isAppliedFilterMonthRangeValid,
+                  builder: (context, state) {
+                    return !state.filter.isAppliedFilterMonthRangeValid
+                        ? ValueRangeError(
+                            label: '${(context.tr('Invalid Month range'))}!',
+                            isValid:
+                                state.filter.isAppliedFilterMonthRangeValid,
+                          )
+                        : const SizedBox.shrink();
+                  },
+                ),
                 const SizedBox(height: 20),
                 Row(
                   children: const [
@@ -84,6 +98,7 @@ class _FromDateField extends StatelessWidget {
             text: state.filter.fromDate.simpleDateString,
           ),
           decoration: InputDecoration(
+            hintText: context.tr('Date from'),
             suffixIcon: const Padding(
               padding: EdgeInsets.only(right: 8.0),
               child: Icon(
@@ -105,8 +120,6 @@ class _FromDateField extends StatelessWidget {
     final formDate = await showMonthPicker(
       context: context,
       initialDate: soaFilterBloc.state.filter.fromDate.dateTime,
-      firstDate: context.read<SoaBloc>().state.initialFilterFormDate.dateTime,
-      lastDate: soaFilterBloc.state.filter.toDate.dateTime,
     );
     if (formDate == null) return;
     if (context.mounted) {
@@ -136,6 +149,7 @@ class _ToDateField extends StatelessWidget {
             text: state.filter.toDate.simpleDateString,
           ),
           decoration: InputDecoration(
+            hintText: context.tr('Date to'),
             suffixIcon: const Padding(
               padding: EdgeInsets.only(right: 8.0),
               child: Icon(
@@ -157,8 +171,6 @@ class _ToDateField extends StatelessWidget {
     final toDate = await showMonthPicker(
       context: context,
       initialDate: soaFilterBloc.state.filter.toDate.dateTime,
-      firstDate: soaFilterBloc.state.filter.fromDate.dateTime,
-      lastDate: context.read<SoaBloc>().state.initialFilterToDate.dateTime,
     );
     if (toDate == null) return;
     if (context.mounted) {
@@ -179,12 +191,7 @@ class _ResetButton extends StatelessWidget {
     return Expanded(
       child: OutlinedButton(
         key: WidgetKeys.soaFilterResetButtonKey,
-        onPressed: () => Navigator.of(context).pop(
-          SoaFilter(
-            toDate: context.read<SoaBloc>().state.initialFilterToDate,
-            fromDate: context.read<SoaBloc>().state.initialFilterFormDate,
-          ),
-        ),
+        onPressed: () => Navigator.of(context).pop(SoaFilter.empty()),
         child: Text(
           context.tr('Reset'),
           style: const TextStyle(color: ZPColors.primary),
@@ -202,9 +209,17 @@ class _ApplyButton extends StatelessWidget {
     return Expanded(
       child: ElevatedButton(
         key: WidgetKeys.soaFilterApplyButtonKey,
-        onPressed: () => Navigator.of(context).pop(
-          context.read<SoaFilterBloc>().state.filter,
-        ),
+        onPressed: () {
+          if (context
+              .read<SoaFilterBloc>()
+              .state
+              .filter
+              .isAppliedFilterMonthRangeValid) {
+            Navigator.of(context).pop(
+              context.read<SoaFilterBloc>().state.filter,
+            );
+          }
+        },
         child: Text(
           context.tr('Apply'),
           style: const TextStyle(color: ZPColors.white),

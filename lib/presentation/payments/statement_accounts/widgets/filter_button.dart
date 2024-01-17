@@ -9,108 +9,40 @@ class _Filter extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.filterList != current.filterList,
       builder: (context, state) {
-        return state.filterList.isNotEmpty
-            ? Column(
-                children: <Widget>[
-                  const _FilterButton(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 6,
+        return state.soaList.isNotEmpty
+            ? Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    BlocBuilder<SoaBloc, SoaState>(
+                      buildWhen: (previous, current) =>
+                          previous.isFetching != current.isFetching ||
+                          previous.appliedFilter != current.appliedFilter,
+                      builder: (context, state) {
+                        return CustomBadge(
+                          Icons.tune_outlined,
+                          key: WidgetKeys.soaFilterButton,
+                          badgeColor: ZPColors.orange,
+                          count: state.appliedFilter.appliedFilterCount,
+                          onPressed: () => state.isFetching
+                              ? null
+                              : _showFilterBottomSheet(context),
+                        );
+                      },
                     ),
-                    child: Row(
-                      children: [
-                        Text(
-                          context.tr('Search results'),
-                          style: Theme.of(context).textTheme.labelMedium,
-                          key: WidgetKeys.soaSearchResultsKey,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 5,
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 5,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: ZPColors.paleBlueGray,
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          child: Text(
-                            state.filterList.length.toString(),
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                        ),
-                      ],
+                    const SizedBox(width: 5),
+                    Text(
+                      context.tr('Filter by month'),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: ZPColors.neutralsBlack),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )
             : const SizedBox.shrink();
       },
-    );
-  }
-}
-
-class _FilterButton extends StatelessWidget {
-  const _FilterButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          BlocBuilder<SoaBloc, SoaState>(
-            buildWhen: (previous, current) =>
-                previous.isFetching != current.isFetching,
-            builder: (context, state) {
-              return Stack(
-                children: <Widget>[
-                  IconButton(
-                    key: WidgetKeys.soaFilterButton,
-                    onPressed: state.isFetching || state.filterList.isEmpty
-                        ? null
-                        : () => _showFilterBottomSheet(context),
-                    icon: const Icon(Icons.tune_outlined),
-                  ),
-                  Positioned(
-                    right: 4,
-                    top: 4,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ZPColors.orange,
-                      ),
-                      padding: const EdgeInsets.all(3),
-                      alignment: Alignment.center,
-                      child: Text(
-                        state.appliedFilter.appliedFilterCount.toString(),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              fontSize: 10,
-                              color: ZPColors.white,
-                            ),
-                        key: WidgetKeys.genericKey(
-                          key:
-                              'soaFilterCount#${state.appliedFilter.appliedFilterCount.toString()}',
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-          Text(
-            context.tr('Filter by month'),
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(color: ZPColors.neutralsBlack),
-          ),
-        ],
-      ),
     );
   }
 

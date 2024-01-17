@@ -13,8 +13,6 @@ import 'package:intl/intl.dart';
 Future<DateTime?> showMonthPicker({
   required BuildContext context,
   required DateTime initialDate,
-  required DateTime firstDate,
-  required DateTime lastDate,
 }) async {
   return await showDialog(
     context: context,
@@ -22,8 +20,6 @@ Future<DateTime?> showMonthPicker({
       return _MonthPicker(
         key: WidgetKeys.monthPickerKey,
         initialDate: initialDate,
-        firstDate: firstDate,
-        lastDate: lastDate,
       );
     },
   );
@@ -31,14 +27,10 @@ Future<DateTime?> showMonthPicker({
 
 class _MonthPicker extends StatefulWidget {
   final DateTime initialDate;
-  final DateTime firstDate;
-  final DateTime lastDate;
 
   const _MonthPicker({
     Key? key,
     required this.initialDate,
-    required this.firstDate,
-    required this.lastDate,
   }) : super(key: key);
 
   @override
@@ -51,14 +43,11 @@ class __MonthPickerState extends State<_MonthPicker> {
   late int _displayedPage;
   late DateTime _selectedDate;
   bool _isYearSelection = false;
-  late final DateTime _firstDate;
-  late final DateTime _lastDate;
 
   @override
   void initState() {
     super.initState();
-    _firstDate = DateTime(widget.firstDate.year, widget.firstDate.month);
-    _lastDate = DateTime(widget.lastDate.year, widget.lastDate.month);
+
     _selectedDate = DateTime(widget.initialDate.year, widget.initialDate.month);
     _displayedPage = _selectedDate.year;
     _pageController = PageController(initialPage: _displayedPage);
@@ -197,12 +186,9 @@ class __MonthPickerState extends State<_MonthPicker> {
   TextButton _getMonthButton(DateTime date, ColorScheme colorScheme) {
     final isSelected =
         date.month == _selectedDate.month && date.year == _selectedDate.year;
-    final isFirstDate = _firstDate.compareTo(date);
-    final isLastDate = _lastDate.compareTo(date);
 
-    final callback = (isFirstDate <= 0) && (isLastDate >= 0)
-        ? () => setState(() => _selectedDate = DateTime(date.year, date.month))
-        : null;
+    void callback() =>
+        setState(() => _selectedDate = DateTime(date.year, date.month));
 
     return TextButton(
       onPressed: callback,

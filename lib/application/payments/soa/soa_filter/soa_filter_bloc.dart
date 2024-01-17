@@ -25,12 +25,22 @@ class SoaFilterBloc extends Bloc<SoaFilterEvent, SoaFilterState> {
       },
       changeToDate: (_ChangeToDate e) => emit(
         state.copyWith(
-          filter: state.filter.copyWith(toDate: e.toDate),
+          filter: state.filter.copyWith(
+            toDate: e.toDate,
+            fromDate: state.filter.fromDate.isNotEmpty
+                ? state.filter.fromDate
+                : e.toDate,
+          ),
         ),
       ),
       changeFormDate: (_changeFormDate e) => emit(
         state.copyWith(
-          filter: state.filter.copyWith(fromDate: e.formDate),
+          filter: state.filter.copyWith(
+            fromDate: e.formDate,
+            toDate: state.filter.toDate.isNotEmpty
+                ? state.filter.toDate
+                : e.formDate,
+          ),
         ),
       ),
     );

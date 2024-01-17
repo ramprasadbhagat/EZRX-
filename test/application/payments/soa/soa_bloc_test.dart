@@ -86,11 +86,9 @@ void main() {
       expect: () => [
         SoaState.initial().copyWith(
           isFetching: true,
-          appliedFilter: soaFilter,
         ),
         SoaState.initial().copyWith(
           soaList: mockSoaList,
-          appliedFilter: soaFilter,
         ),
       ],
       verify: (SoaBloc bloc) => [
@@ -125,7 +123,6 @@ void main() {
       expect: () => [
         SoaState.initial().copyWith(
           isFetching: true,
-          appliedFilter: soaFilter,
         ),
         SoaState.initial().copyWith(
           failureOrSuccessOption: optionOf(
@@ -134,7 +131,6 @@ void main() {
             ),
           ),
           isFetching: false,
-          appliedFilter: soaFilter,
         ),
       ],
       verify: (SoaBloc bloc) => [
