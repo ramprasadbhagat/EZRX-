@@ -123,7 +123,7 @@ class ProductTag extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         key: WidgetKeys.productTag,
         children: [
-          if (hasIcon) ...[
+          if (hasIcon)
             assetIconSvg.isNotEmpty
                 ? SvgPicture.asset(
                     assetIconSvg,
@@ -136,16 +136,19 @@ class ProductTag extends StatelessWidget {
                     size: 20,
                     color: ZPColors.white,
                   ),
-            if (labelTag.isNotEmpty) const SizedBox(width: 8),
-          ],
-          Text(
-            context.tr(labelTag),
-            style: labelStyle ??
-                Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: textColor, fontWeight: FontWeight.w600),
-          ),
+          if (labelTag.isNotEmpty)
+            Flexible(
+              child: FittedBox(
+                child: Text(
+                  context.tr(labelTag),
+                  style: labelStyle ??
+                      Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: textColor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                ),
+              ),
+            ),
         ],
       ),
     );
