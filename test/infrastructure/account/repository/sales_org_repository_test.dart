@@ -1,16 +1,18 @@
+import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 
 class SalesOrgLocalDataSourceMock extends Mock
     implements SalesOrgLocalDataSource {}
@@ -64,10 +66,11 @@ void main() {
 
       when(
         () => salesOrgLocalDataSourceMock.getConfig(),
-      ).thenAnswer((invocation) async => SalesOrganisationConfigs.empty());
+      ).thenAnswer((invocation) async => fakeSGSalesOrgConfigs);
 
       final result =
-          await salesOrgRepository.getSalesOrganisationConfigs(mockSalesOrg);
+          await salesOrgRepository
+          .getSalesOrganisationConfigs(fakeSalesOrganisation);
 
       expect(result.isRight(), true);
     });
@@ -93,12 +96,13 @@ void main() {
 
       when(
         () => salesOrgRemoteDataSourceMock.getConfig(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          salesOrg: fakeSGSalesOrgConfigs.salesOrg.getOrCrash(),
         ),
-      ).thenAnswer((invocation) async => SalesOrganisationConfigs.empty());
+      ).thenAnswer((invocation) async => fakeSGSalesOrgConfigs);
 
       final result =
-          await salesOrgRepository.getSalesOrganisationConfigs(mockSalesOrg);
+          await salesOrgRepository
+          .getSalesOrganisationConfigs(fakeSGSalesOrganisation);
 
       expect(result.isRight(), true);
     });

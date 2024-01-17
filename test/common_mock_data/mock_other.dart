@@ -1,4 +1,4 @@
-
+import 'package:ezrxmobile/config.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
@@ -12,3 +12,5 @@ class AutoRouteMock extends Mock implements AppRouter {}
 class UniversalLinkServiceMock extends Mock implements DeepLinkingService {}
 
 class ChatBotServiceMock extends Mock implements ChatBotService {}
+
+class ConfigMock extends Mock implements Config {}

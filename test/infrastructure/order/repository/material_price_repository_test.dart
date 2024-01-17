@@ -1,19 +1,20 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
-class MockConfig extends Mock implements Config {}
+import '../../../common_mock_data/mock_other.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
+
 
 class MaterialPriceLocalDataSourceMock extends Mock
     implements MaterialPriceLocalDataSource {}
@@ -26,15 +27,9 @@ void main() {
   late Config mockConfig;
   late MaterialPriceLocalDataSource materialPriceLocalDataSource;
   late MaterialPriceRemoteDataSource materialPriceRemoteDataSource;
-
-  final mockSalesOrganisation = SalesOrganisation.empty().copyWith(
-    salesOrg: SalesOrg('fake-name'),
-  );
-
   final mockCustomerCodeInfo = CustomerCodeInfo.empty()
       .copyWith(customerCodeSoldTo: 'fake-customer-code');
 
-  final mockSalesConfigs = SalesOrganisationConfigs.empty();
   final mockShipToInfo = ShipToInfo.empty().copyWith(
     shipToCustomerCode: 'fake-ship-code',
   );
@@ -44,7 +39,7 @@ void main() {
   ];
 
   setUpAll(() {
-    mockConfig = MockConfig();
+    mockConfig = ConfigMock();
     materialPriceLocalDataSource = MaterialPriceLocalDataSourceMock();
     materialPriceRemoteDataSource = MaterialPriceRemoteDataSourceMock();
 
@@ -63,9 +58,9 @@ void main() {
 
       final result = await materialPriceRepository.getMaterialPrice(
         customerCodeInfo: mockCustomerCodeInfo,
-        salesOrganisation: mockSalesOrganisation,
+        salesOrganisation: fakeSGSalesOrganisation,
         materialNumberList: fakeMaterialNumberQuery,
-        salesConfigs: mockSalesConfigs,
+        salesConfigs: fakeSGSalesOrgConfigs,
         shipToInfo: mockShipToInfo,
         comboDealEligible: false,
       );
@@ -80,9 +75,9 @@ void main() {
           .thenThrow((invocation) async => MockException());
       final result = await materialPriceRepository.getMaterialPrice(
         customerCodeInfo: mockCustomerCodeInfo,
-        salesOrganisation: mockSalesOrganisation,
+        salesOrganisation: fakeSGSalesOrganisation,
         materialNumberList: fakeMaterialNumberQuery,
-        salesConfigs: mockSalesConfigs,
+        salesConfigs: fakeSGSalesOrgConfigs,
         shipToInfo: mockShipToInfo,
         comboDealEligible: false,
       );
@@ -104,9 +99,9 @@ void main() {
 
       final result = await materialPriceRepository.getMaterialPrice(
         customerCodeInfo: mockCustomerCodeInfo,
-        salesOrganisation: mockSalesOrganisation,
+        salesOrganisation: fakeSGSalesOrganisation,
         materialNumberList: fakeMaterialNumberQuery,
-        salesConfigs: mockSalesConfigs,
+        salesConfigs: fakeSGSalesOrgConfigs,
         shipToInfo: mockShipToInfo,
         comboDealEligible: false,
       );
@@ -117,20 +112,11 @@ void main() {
     });
     test('get materialPrice fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(
-        () => materialPriceRemoteDataSource.getMaterialPriceList(
-          salesOrgCode: '23456700',
-          customerCode: '',
-          materialNumbers: [],
-          shipToCode: 'fake-ship-code',
-        ),
-      ).thenThrow((invocation) async => MockException());
       final result = await materialPriceRepository.getMaterialPrice(
         customerCodeInfo: mockCustomerCodeInfo.copyWith(customerCodeSoldTo: ''),
-        salesOrganisation:
-            mockSalesOrganisation.copyWith(salesOrg: SalesOrg('')),
+        salesOrganisation: fakeEmptySalesOrganisation,
         materialNumberList: fakeMaterialNumberQuery,
-        salesConfigs: mockSalesConfigs,
+        salesConfigs: fakeSGSalesOrgConfigs,
         shipToInfo: mockShipToInfo,
         comboDealEligible: false,
       );
@@ -159,9 +145,9 @@ void main() {
 
     final result = await materialPriceRepository.getMaterialPrice(
       customerCodeInfo: mockCustomerCodeInfo,
-      salesOrganisation: mockSalesOrganisation,
+      salesOrganisation: fakeSGSalesOrganisation,
       materialNumberList: [MaterialNumber('fake-number')],
-      salesConfigs: mockSalesConfigs,
+      salesConfigs: fakeSGSalesOrgConfigs,
       shipToInfo: mockShipToInfo,
       comboDealEligible: false,
     );
@@ -175,7 +161,7 @@ void main() {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
     when(
       () => materialPriceRemoteDataSource.getMaterialPriceForZDP5(
-        salesOrgCode: 'fake-name',
+        salesOrgCode: fakeVNSalesOrg.getValue(),
         customerCode: 'fake-customer-code',
         shipToCode: 'fake-ship-code',
         materialNumber: 'fake-number',
@@ -191,9 +177,9 @@ void main() {
     final result =
         await materialPriceRepository.getMaterialPriceForZDP5Material(
       customerCodeInfo: mockCustomerCodeInfo,
-      salesOrganisation: mockSalesOrganisation,
+      salesOrganisation: fakeVNSalesOrganisation,
       materialNumber: MaterialNumber('fake-number'),
-      salesConfigs: mockSalesConfigs,
+      salesConfigs: fakeVNSalesOrgConfigs,
       shipToInfo: mockShipToInfo,
       exceedQty: true,
     );
@@ -220,9 +206,9 @@ void main() {
     final result =
         await materialPriceRepository.getMaterialPriceForZDP5Material(
       customerCodeInfo: mockCustomerCodeInfo,
-      salesOrganisation: mockSalesOrganisation,
+      salesOrganisation: fakeSGSalesOrganisation,
       materialNumber: MaterialNumber('fake-number'),
-      salesConfigs: mockSalesConfigs,
+      salesConfigs: fakeSGSalesOrgConfigs,
       shipToInfo: mockShipToInfo,
       exceedQty: true,
     );

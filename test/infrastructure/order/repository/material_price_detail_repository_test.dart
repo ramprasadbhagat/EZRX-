@@ -1,22 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
-import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_detail_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/user_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 
 class MaterialDetailRemoteDataSourceMock extends Mock
     implements MaterialPriceDetailRemoteDataSource {}
@@ -24,7 +25,6 @@ class MaterialDetailRemoteDataSourceMock extends Mock
 class MaterialDetailLocalDataSourceMock extends Mock
     implements MaterialPriceDetailLocalDataSource {}
 
-class ConfigMock extends Mock implements Config {}
 
 class MaterialPriceDetailRepositoryMock extends Mock
     implements MaterialPriceDetailRepository {}
@@ -35,16 +35,10 @@ void main() {
   late Config configMock;
   late MaterialPriceDetailLocalDataSource localDataSourceMock;
 
-  final fakeSaleOrg =
-      SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('fake-saleOrg'));
-
   final fakeCustomerCodeInfo = CustomerCodeInfo.empty()
       .copyWith(customerCodeSoldTo: 'fake-customer-code');
   final fakeShipToInfo =
       ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-ship-to-code');
-  final fakeSaleOrgConfig = SalesOrganisationConfigs.empty();
-  final fakeSaleConfigEnableZDP5 =
-      SalesOrganisationConfigs.empty().copyWith(enableZDP5: true);
 
   final fakeQuery = [
     MaterialQueryInfo.empty().copyWith(
@@ -141,8 +135,8 @@ void main() {
       );
 
       final result = await repository.getMaterialDetailList(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleOrgConfig,
+        salesOrganisation: fakeMYSalesOrganisation,
+        salesOrganisationConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
@@ -167,8 +161,8 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await repository.getMaterialDetailList(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleOrgConfig,
+        salesOrganisation: fakeMYSalesOrganisation,
+        salesOrganisationConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
@@ -183,7 +177,7 @@ void main() {
 
       when(
         () => remoteDataSourceMock.getMaterialDetail(
-          salesOrgCode: 'fake-saleOrg',
+          salesOrgCode: fakeMYSalesOrganisation.salesOrg.getValue(),
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           language: 'EN',
@@ -205,8 +199,8 @@ void main() {
       );
 
       final result = await repository.getMaterialDetailList(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleOrgConfig,
+        salesOrganisation: fakeMYSalesOrganisation,
+        salesOrganisationConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
@@ -231,7 +225,7 @@ void main() {
 
       when(
         () => remoteDataSourceMock.getMaterialDetail(
-          salesOrgCode: 'fake-saleOrg',
+          salesOrgCode: fakeMYSalesOrganisation.salesOrg.getValue(),
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           listPriceOnly: false,
@@ -251,8 +245,8 @@ void main() {
       ).thenThrow((invocation) async => MockException());
 
       final result = await repository.getMaterialDetailList(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleOrgConfig,
+        salesOrganisation: fakeMYSalesOrganisation,
+        salesOrganisationConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
@@ -270,8 +264,8 @@ void main() {
       );
 
       final result = await repository.getMaterialDetailList(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleConfigEnableZDP5,
+        salesOrganisation: fakeMYSalesOrganisation,
+        salesOrganisationConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
@@ -290,8 +284,8 @@ void main() {
       );
 
       final result = await repository.getMaterialDetailList(
-        salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: fakeSaleConfigEnableZDP5,
+        salesOrganisation: fakeMYSalesOrganisation,
+        salesOrganisationConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: <MaterialQueryInfo>[],
@@ -307,7 +301,7 @@ void main() {
 
       when(
         () => remoteDataSourceMock.getMaterialDetail(
-          salesOrgCode: 'fake-saleOrg',
+          salesOrgCode: fakeVNSalesOrganisation.salesOrg.getValue(),
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           listPriceOnly: false,
@@ -329,7 +323,7 @@ void main() {
       );
       when(
         () => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
-          salesOrgCode: 'fake-saleOrg',
+          salesOrgCode: fakeVNSalesOrganisation.salesOrg.getValue(),
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           language: 'EN',
@@ -343,8 +337,8 @@ void main() {
       );
 
       final result = await repository.getMaterialDetailList(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleConfigEnableZDP5,
+        salesOrganisation: fakeVNSalesOrganisation,
+        salesOrganisationConfigs: fakeVNSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
@@ -353,7 +347,7 @@ void main() {
 
       verify(
         () => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
-          salesOrgCode: 'fake-saleOrg',
+          salesOrgCode: fakeVNSalesOrganisation.salesOrg.getValue(),
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           language: 'EN',
@@ -384,7 +378,7 @@ void main() {
 
       when(
         () => remoteDataSourceMock.getMaterialDetail(
-          salesOrgCode: 'fake-saleOrg',
+          salesOrgCode: fakeVNSalesOrganisation.salesOrg.getValue(),
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           listPriceOnly: false,
@@ -406,7 +400,7 @@ void main() {
       );
       when(
         () => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
-          salesOrgCode: 'fake-saleOrg',
+          salesOrgCode: fakeVNSalesOrganisation.salesOrg.getValue(),
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           language: 'EN',
@@ -418,8 +412,8 @@ void main() {
       ).thenThrow((invocation) async => MockException());
 
       final result = await repository.getMaterialDetailList(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleConfigEnableZDP5,
+        salesOrganisation: fakeVNSalesOrganisation,
+        salesOrganisationConfigs: fakeVNSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQuery,
@@ -428,7 +422,7 @@ void main() {
 
       verify(
         () => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
-          salesOrgCode: 'fake-saleOrg',
+          salesOrgCode: fakeVNSalesOrganisation.salesOrg.getValue(),
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           language: 'EN',
@@ -447,7 +441,7 @@ void main() {
 
       when(
         () => remoteDataSourceMock.getMaterialDetail(
-          salesOrgCode: 'fake-saleOrg',
+          salesOrgCode: fakeVNSalesOrganisation.salesOrg.getValue(),
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           listPriceOnly: false,
@@ -465,8 +459,8 @@ void main() {
       );
 
       final result = await repository.getMaterialDetailList(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleOrgConfig,
+        salesOrganisation: fakeVNSalesOrganisation,
+        salesOrganisationConfigs: fakeVNSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQueryWithOverride,
@@ -490,7 +484,7 @@ void main() {
 
       when(
         () => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
-          salesOrgCode: '',
+          salesOrgCode: fakeVNSalesOrganisation.salesOrg.getValue(),
           customerCode: '',
           shipToCode: '',
           language: Language.english().languageCode,
@@ -501,8 +495,8 @@ void main() {
       );
 
       final result = await repository.getMaterialDetailListWithZDP5Enabled(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleOrgConfig,
+        salesOrganisation: fakeVNSalesOrganisation,
+        salesOrganisationConfigs: fakeVNSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: {},
@@ -530,8 +524,8 @@ void main() {
       );
 
       final result = await repository.getMaterialDetailList(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleOrgConfig,
+        salesOrganisation: fakeVNSalesOrganisation,
+        salesOrganisationConfigs: fakeVNSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: fakeQueryWithOverride,
@@ -558,8 +552,8 @@ void main() {
       );
 
       final result = await repository.getMaterialDetailListWithZDP5Enabled(
-        salesOrganisation: fakeSaleOrg,
-        salesOrganisationConfigs: fakeSaleOrgConfig,
+        salesOrganisation: fakeVNSalesOrganisation,
+        salesOrganisationConfigs: fakeVNSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToCodeInfo: fakeShipToInfo,
         materialQueryList: {},
@@ -587,8 +581,8 @@ void main() {
         );
 
         final result = await repository.getMaterialDetail(
-          salesOrganisation: fakeSaleOrg,
-          salesOrganisationConfigs: fakeSaleOrgConfig,
+          salesOrganisation: fakeVNSalesOrganisation,
+          salesOrganisationConfigs: fakeVNSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToCodeInfo: fakeShipToInfo,
           materialNumber: fakeQuery.first.value,
@@ -606,8 +600,8 @@ void main() {
             .thenThrow((invocation) async => MockException());
 
         final result = await repository.getMaterialDetail(
-          salesOrganisation: fakeSaleOrg,
-          salesOrganisationConfigs: fakeSaleOrgConfig,
+          salesOrganisation: fakeVNSalesOrganisation,
+          salesOrganisationConfigs: fakeVNSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToCodeInfo: fakeShipToInfo,
           materialNumber: fakeQuery.first.value,
@@ -621,7 +615,7 @@ void main() {
 
         when(
           () => remoteDataSourceMock.getMaterialDetail(
-            salesOrgCode: 'fake-saleOrg',
+            salesOrgCode: fakeMYSalesOrganisation.salesOrg.getValue(),
             customerCode: 'fake-customer-code',
             shipToCode: 'fake-ship-to-code',
             language: 'EN',
@@ -635,8 +629,8 @@ void main() {
         );
 
         final result = await repository.getMaterialDetail(
-          salesOrganisation: fakeSaleOrg,
-          salesOrganisationConfigs: fakeSaleOrgConfig,
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToCodeInfo: fakeShipToInfo,
           materialNumber: fakeQuery.first.value,
@@ -654,7 +648,7 @@ void main() {
 
         when(
           () => remoteDataSourceMock.getMaterialDetail(
-            salesOrgCode: 'fake-saleOrg',
+            salesOrgCode: fakeMYSalesOrganisation.salesOrg.getValue(),
             customerCode: 'fake-customer-code',
             shipToCode: 'fake-ship-to-code',
             listPriceOnly: false,
@@ -666,8 +660,8 @@ void main() {
         ).thenThrow((invocation) async => MockException());
 
         final result = await repository.getMaterialDetail(
-          salesOrganisation: fakeSaleOrg,
-          salesOrganisationConfigs: fakeSaleOrgConfig,
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToCodeInfo: fakeShipToInfo,
           materialNumber: fakeQuery.first.value,

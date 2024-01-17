@@ -1,11 +1,11 @@
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
+
+import '../../../common_mock_data/sales_org_config_mock/fake_mm_sales_org_config.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,9 +52,7 @@ void main() {
             finalPrice: MaterialPrice(1),
             zdp8Override: Zdp8OverrideValue(1),
           ),
-          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-            currency: Currency('myr'),
-          ),
+          salesOrgConfig: fakeMMSalesOrgConfigs,
         ),
       );
       expect(configsDtoMap.valueOverride[0].price, 1);

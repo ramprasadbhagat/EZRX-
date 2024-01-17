@@ -1,8 +1,8 @@
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
+
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 void main() {
   late NewPaymentLocalDataSource localDataSource;
@@ -45,11 +45,8 @@ void main() {
       test(
         'get customer payment on MY market',
         () async {
-          final fakeMYSaleOrg = SalesOrganisationConfigs.empty().copyWith(
-            salesOrg: SalesOrg('2001'),
-          );
           final result = await localDataSource.getCustomerPayment(
-            salesOrg: fakeMYSaleOrg.salesOrg,
+            salesOrg: fakeMMSalesOrg,
           );
           expect(
             result.zzHtmcs,
@@ -61,11 +58,8 @@ void main() {
       test(
         'pay on PH market',
         () async {
-          final fakePHSaleOrg = SalesOrganisationConfigs.empty().copyWith(
-            salesOrg: SalesOrg('2500'),
-          );
           final result = await localDataSource.getCustomerPayment(
-            salesOrg: fakePHSaleOrg.salesOrg,
+            salesOrg: fakePHSalesOrg,
           );
           expect(
             result.zzHtmcs,
@@ -77,11 +71,8 @@ void main() {
       test(
         'pay on VN market',
         () async {
-          final fakeVNSaleOrg = SalesOrganisationConfigs.empty().copyWith(
-            salesOrg: SalesOrg('3070'),
-          );
           final result = await localDataSource.getCustomerPayment(
-            salesOrg: fakeVNSaleOrg.salesOrg,
+            salesOrg: fakeVNSalesOrg,
           );
           expect(
             result.zzHtmcs,
@@ -93,11 +84,8 @@ void main() {
       test(
         'pay on TH market',
         () async {
-          final fakeTHSaleOrg = SalesOrganisationConfigs.empty().copyWith(
-            salesOrg: SalesOrg('2900'),
-          );
           final result = await localDataSource.getCustomerPayment(
-            salesOrg: fakeTHSaleOrg.salesOrg,
+            salesOrg: fakeTHSalesOrg,
           );
           expect(
             result.zzHtmcs,
@@ -109,11 +97,8 @@ void main() {
       test(
         'pay on SG market',
         () async {
-          final fakeSGSaleOrg = SalesOrganisationConfigs.empty().copyWith(
-            salesOrg: SalesOrg('2601'),
-          );
           final result = await localDataSource.getCustomerPayment(
-            salesOrg: fakeSGSaleOrg.salesOrg,
+            salesOrg: fakeSGSalesOrg,
           );
           expect(
             result.zzHtmcs,

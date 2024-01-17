@@ -1,26 +1,24 @@
-import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
-import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
@@ -36,11 +34,11 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import 'order_repository_test.dart';
 
-class MockConfig extends Mock implements Config {}
 
 class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
@@ -63,7 +61,6 @@ void main() {
   late CartLocalDataSourceMock cartLocalDataSourceMock;
   late DiscountOverrideRemoteDataSource discountOverrideRemoteDataSourceMock;
   late CartRepository cartRepository;
-  late SalesOrganisationConfigs mockSalesOrganisationConfigs;
   late MixpanelService mixpanelService;
   late CartRemoteDataSource cartRemoteDataSource;
   late AplSimulatorOrder aplSimulatorOrder;
@@ -107,20 +104,6 @@ void main() {
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
       cartRemoteDataSource: cartRemoteDataSource,
-    );
-    mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
-      disablePrincipals: false,
-      enableGimmickMaterial: true,
-      principalList: [
-        SalesOrganisationConfigsPrincipal.empty()
-            .copyWith(principalCode: PrincipalCode('123')),
-        SalesOrganisationConfigsPrincipal.empty()
-            .copyWith(principalCode: PrincipalCode('234')),
-        SalesOrganisationConfigsPrincipal.empty()
-            .copyWith(principalCode: PrincipalCode('345')),
-      ],
-      currency: Currency('SG'),
-      salesOrg: fakeSalesOrg,
     );
 
     fakeCartProductsWithCombo
@@ -212,7 +195,7 @@ void main() {
       salesOrganisation:
           SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001')),
       customerCodeInfo: CustomerCodeInfo.empty(),
-      salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+      salesOrganisationConfigs: fakeMYSalesOrgConfigs,
     );
     expect(result.isRight(), true);
   });
@@ -264,9 +247,7 @@ void main() {
       shipToInfo: fakeShipToInfo,
       salesOrganisation: fakeSalesOrganisation,
       customerCodeInfo: fakeCustomerCodeInfo,
-      salesOrganisationConfigs: mockSalesOrganisationConfigs.copyWith(
-        enableBatchNumber: false,
-      ),
+      salesOrganisationConfigs: fakeSGSalesOrgConfigs,
     );
     if (result.isRight()) {
       result.fold((l) => {}, (r) {
@@ -328,9 +309,7 @@ void main() {
       shipToInfo: fakeShipToInfo,
       salesOrganisation: fakeSalesOrganisation,
       customerCodeInfo: fakeCustomerCodeInfo,
-      salesOrganisationConfigs: mockSalesOrganisationConfigs.copyWith(
-        enableBatchNumber: false,
-      ),
+      salesOrganisationConfigs: fakeSGSalesOrgConfigs,
     );
     if (result.isRight()) {
       result.fold((l) => {}, (r) {
@@ -393,9 +372,7 @@ void main() {
       shipToInfo: fakeShipToInfo,
       salesOrganisation: fakeSalesOrganisation,
       customerCodeInfo: fakeCustomerCodeInfo,
-      salesOrganisationConfigs: mockSalesOrganisationConfigs.copyWith(
-        enableBatchNumber: false,
-      ),
+      salesOrganisationConfigs: fakeSGSalesOrgConfigs,
     );
     if (result.isRight()) {
       result.fold((l) => {}, (r) {
@@ -422,7 +399,7 @@ void main() {
       shipToInfo: fakeShipToInfo,
       salesOrganisation: fakeSalesOrganisation,
       customerCodeInfo: fakeCustomerCodeInfo,
-      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      salesOrganisationConfigs: fakeSGSalesOrgConfigs,
     );
     if (result.isRight()) {
       result.fold((l) => {}, (r) {
@@ -843,7 +820,7 @@ void main() {
             (productUpsertRequest) => ComboProductRequestDto.fromDomain(
               comboProductRequest: productUpsertRequest,
               salesOrg:
-                  mockSalesOrganisationConfigs.salesOrg.getOrDefaultValue(''),
+                  fakeSGSalesOrganisation.salesOrg.getOrDefaultValue(''),
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               shipToId: fakeShipToInfo.shipToCustomerCode,
             ).toMap(),
@@ -860,7 +837,7 @@ void main() {
 
       final result = await cartRepository.upsertCartItemsWithComboOffers(
         customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakeSGSalesOrganisation,
         shipToInfo: fakeShipToInfo,
         products: fakeCartProductsWithCombo,
       );
@@ -1278,7 +1255,7 @@ void main() {
       );
 
       final result = await cartRepository.removeSelectedProducts(
-        salesOrganisationConfig: mockSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeSGSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         language: Language.english(),
         products: [
@@ -1339,7 +1316,7 @@ void main() {
       );
 
       final result = await cartRepository.removeSelectedProducts(
-        salesOrganisationConfig: mockSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeSGSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         language: Language.english(),
         products: fakeCartProducts.materialInfos,
@@ -1384,7 +1361,7 @@ void main() {
       );
 
       final result = await cartRepository.removeSelectedProducts(
-        salesOrganisationConfig: mockSalesOrganisationConfigs,
+        salesOrganisationConfig: fakeSGSalesOrgConfigs,
         customerCodeInfo: fakeCustomerCodeInfo,
         language: Language.english(),
         products: fakeCartProducts.materialInfos,
