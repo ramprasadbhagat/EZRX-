@@ -95,11 +95,14 @@ class _BodyContent extends StatelessWidget {
                                 ),
                               ),
                             ),
-                    child: Text(
-                      context.tr('Account summary'),
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: ZPColors.primary,
-                          ),
+                    child: FittedBox(
+                      child: Text(
+                        context.tr('Account summary'),
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  color: ZPColors.primary,
+                                ),
+                      ),
                     ),
                   ),
                 ),
@@ -135,11 +138,14 @@ class _BodyContent extends StatelessWidget {
                                 ),
                               ),
                             ),
-                    child: Text(
-                      context.tr('Payment summary'),
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: ZPColors.white,
-                          ),
+                    child: FittedBox(
+                      child: Text(
+                        context.tr('Payment summary'),
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  color: ZPColors.white,
+                                ),
+                      ),
                     ),
                   ),
                 ),
