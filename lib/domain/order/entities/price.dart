@@ -110,8 +110,6 @@ class Price with _$Price {
           ? finalPrice.getOrDefaultValue(0)
           : lastPrice.getOrDefaultValue(0);
 
-  bool get isOverrideValid => priceOverride.isValid() || zdp8Override.isValid();
-
   Price offerPriceWithDiscount(
     RequestCounterOfferDetails counterOfferDetails,
   ) {

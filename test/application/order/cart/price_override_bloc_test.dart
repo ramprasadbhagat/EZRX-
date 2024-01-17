@@ -477,6 +477,36 @@ void main() {
           );
         },
       );
+      blocTest<PriceOverrideBloc, PriceOverrideState>(
+        'Price Override Bloc Set Product Counter Offer Details has Value',
+        build: () => PriceOverrideBloc(
+          priceOverrideRepository: priceOverrideRepositoryMock,
+        ),
+        act: (bloc) => bloc.add(
+          PriceOverrideEvent.setProduct(
+            item: cartItems.first.copyWith(
+              materialInfo: cartItems.first.materialInfo.copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('100.0'),
+                ),
+              ),
+            ),
+          ),
+        ),
+        expect: () => [
+          PriceOverrideState.initial().copyWith(
+            item: cartItems.first.copyWith(
+              materialInfo: cartItems.first.materialInfo.copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('100.0'),
+                ),
+              ),
+            ),
+          )
+        ],
+      );
     },
   );
 }
