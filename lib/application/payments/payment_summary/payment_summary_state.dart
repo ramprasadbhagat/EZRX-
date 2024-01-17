@@ -29,4 +29,7 @@ class PaymentSummaryState with _$PaymentSummaryState {
         createdDateFrom: DateTimeStringValue(''),
         createdDateTo: DateTimeStringValue(''),
       );
+
+  bool get includeInprogressPayment =>
+      details.any((element) => element.status.getIsInProgress);
 }

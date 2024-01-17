@@ -68,27 +68,23 @@ class _TotalAmountSection extends StatelessWidget {
           if (currentStep == 2)
             isID
                 ? _NextButtonID(
-                    onTab: state.enableCreateVirtualAccount
-                        ? () async {
-                            final confirmed = await _showConfirmPaymentPopup(
-                              context,
+                    onTab: () async {
+                      final confirmed = await _showConfirmPaymentPopup(
+                        context,
+                      );
+                      if ((confirmed ?? false) && context.mounted) {
+                        context.read<NewPaymentBloc>().add(
+                              const NewPaymentEvent.createVirtualAccount(),
                             );
-                            if ((confirmed ?? false) && context.mounted) {
-                              context.read<NewPaymentBloc>().add(
-                                    const NewPaymentEvent
-                                        .createVirtualAccount(),
-                                  );
-                              unawaited(
-                                context.router.pushAndPopUntil(
-                                  const PaymentAdviceCreatedPageRoute(),
-                                  predicate: (Route route) =>
-                                      route.settings.name ==
-                                      PaymentPageRoute.name,
-                                ),
-                              );
-                            }
-                          }
-                        : null,
+                        unawaited(
+                          context.router.pushAndPopUntil(
+                            const PaymentAdviceCreatedPageRoute(),
+                            predicate: (Route route) =>
+                                route.settings.name == PaymentPageRoute.name,
+                          ),
+                        );
+                      }
+                    },
                   )
                 : _NextButton(
                     tabController: tabController,

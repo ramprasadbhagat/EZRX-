@@ -152,50 +152,71 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
           previous.createVirtualAccountFailed !=
               current.createVirtualAccountFailed,
       builder: (context, state) {
-        return Scaffold(
-          appBar: CustomAppBar.commonAppBar(
-            automaticallyImplyLeading: false,
-            leadingWidth: state.canDisplayCrossButton ? null : 5,
-            title: Text(
-              state.isFetchingInvoiceInfoPdf || state.isCreatingVirtualAccount
-                  ? context.tr('Generating payment advice...')
-                  : context.tr('Payment advice generated'),
-            ),
-            leadingWidget: state.canDisplayCrossButton
-                ? IconButton(
-                    key: WidgetKeys.closeButton,
-                    onPressed: () => Navigator.pop(context),
-                    icon: const CircleAvatar(
-                      maxRadius: 16,
-                      backgroundColor: ZPColors.transparent,
-                      child: Icon(
-                        Icons.close,
-                        color: ZPColors.neutralsBlack,
-                      ),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-            customerBlocked:
-                context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
-          ),
-          body: state.isFetchingInvoiceInfoPdf || state.isCreatingVirtualAccount
-              ? Center(
-                  child: LoadingShimmer.logo(
-                    key: WidgetKeys.paymentAdviceScreenLoader,
-                  ),
-                )
-              : state.createVirtualAccountFailed
-                  ? _PaymentVirtualAccountFailed()
-                  : Column(
-                      children: const [
-                        Expanded(
-                          child: _PaymentAdviceBodySection(),
+        return WillPopScope(
+          onWillPop: () async {
+            _onClosePressed(context);
+
+            return false;
+          },
+          child: Scaffold(
+            appBar: CustomAppBar.commonAppBar(
+              automaticallyImplyLeading: false,
+              leadingWidth: state.canDisplayCrossButton ? null : 5,
+              title: Text(
+                state.isFetchingInvoiceInfoPdf || state.isCreatingVirtualAccount
+                    ? context.tr('Generating payment advice...')
+                    : context.tr('Payment advice generated'),
+              ),
+              leadingWidget: state.canDisplayCrossButton
+                  ? IconButton(
+                      key: WidgetKeys.closeButton,
+                      onPressed: () => _onClosePressed(context),
+                      icon: const CircleAvatar(
+                        maxRadius: 16,
+                        backgroundColor: ZPColors.transparent,
+                        child: Icon(
+                          Icons.close,
+                          color: ZPColors.neutralsBlack,
                         ),
-                        _PaymentAdviceFooterSection(),
-                      ],
-                    ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              customerBlocked: context
+                  .read<EligibilityBloc>()
+                  .state
+                  .shipToInfo
+                  .customerBlock,
+            ),
+            body:
+                state.isFetchingInvoiceInfoPdf || state.isCreatingVirtualAccount
+                    ? Center(
+                        child: LoadingShimmer.logo(
+                          key: WidgetKeys.paymentAdviceScreenLoader,
+                        ),
+                      )
+                    : state.createVirtualAccountFailed
+                        ? _PaymentVirtualAccountFailed()
+                        : Column(
+                            children: const [
+                              Expanded(
+                                child: _PaymentAdviceBodySection(),
+                              ),
+                              _PaymentAdviceFooterSection(),
+                            ],
+                          ),
+          ),
         );
       },
     );
+  }
+
+  void _onClosePressed(BuildContext context) {
+    context.read<PaymentSummaryBloc>().add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: PaymentSummaryFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        );
+    Navigator.pop(context);
   }
 }

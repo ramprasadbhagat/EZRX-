@@ -117,18 +117,21 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
       listenWhen: (previous, current) =>
-          previous.isDeletingPayment != current.isDeletingPayment,
+          (previous.isDeletingPayment != current.isDeletingPayment &&
+              !current.isDeletingPayment) ||
+          (previous.isCancelingAdvice != current.isCancelingAdvice &&
+              !current.isCancelingAdvice),
       listener: (context, state) {
-        if (!state.isDeletingPayment) {
-          state.failureOrSuccessOption.fold(
-            () {
-              context.read<PaymentSummaryBloc>().add(
-                    PaymentSummaryEvent.fetch(
-                      appliedFilter: PaymentSummaryFilter.empty(),
-                      searchKey: SearchKey.searchFilter(''),
-                    ),
-                  );
+        state.failureOrSuccessOption.fold(
+          () {
+            context.read<PaymentSummaryBloc>().add(
+                  PaymentSummaryEvent.fetch(
+                    appliedFilter: PaymentSummaryFilter.empty(),
+                    searchKey: SearchKey.searchFilter(''),
+                  ),
+                );
 
+            if (isDelete) {
               final containPaymentSummaryPage = context.router.stack.any(
                 (element) => element.name == PaymentSummaryPageRoute.name,
               );
@@ -145,17 +148,17 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
               }
 
               CustomSnackBar(
-                    messageText: state.adviceDeletedMessage,
-                  ).show(context);
+                messageText: state.adviceDeletedMessage,
+              ).show(context);
+            }
+          },
+          (either) => either.fold(
+            (failure) {
+              ErrorUtils.handleApiFailure(context, failure);
             },
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-        }
+            (_) {},
+          ),
+        );
       },
       buildWhen: (previous, current) =>
           previous.isDeletingPayment != current.isDeletingPayment,

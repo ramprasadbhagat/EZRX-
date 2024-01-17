@@ -29,6 +29,12 @@ class _PaymentAdviceButton extends StatelessWidget {
                       details: state.details,
                     ),
                   );
+              context.read<PaymentSummaryBloc>().add(
+                    PaymentSummaryEvent.fetch(
+                      appliedFilter: PaymentSummaryFilter.empty(),
+                      searchKey: SearchKey.searchFilter(''),
+                    ),
+                  );
             }
           },
           (option) => option.fold(

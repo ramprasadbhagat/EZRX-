@@ -432,6 +432,8 @@ class FilterStatus extends ValueObject<String> {
 
   bool get getIsPending => isPending(value.getOrElse(() => ''));
 
+  bool get getIsInProgress => isInProgress(value.getOrElse(() => ''));
+
   const FilterStatus._(this.value);
 }
 

@@ -2,15 +2,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NewPaymentButton extends StatelessWidget {
   final ScrollController? scrollController;
@@ -22,7 +26,27 @@ class NewPaymentButton extends StatelessWidget {
 
   const NewPaymentButton._(this.scrollController, {Key? key}) : super(key: key);
 
-  final title = 'New Payment';
+  static const title = 'New Payment';
+
+  static const paymentFailureMessage =
+      'You have a pending payment which has not been completed. Please create a new payment only after the existing one has been cleared.';
+
+  Future<bool?> _showFailedBottomSheet(BuildContext context) {
+    return showModalBottomSheet<bool>(
+      context: context,
+      enableDrag: false,
+      builder: (_) => ConfirmBottomSheet(
+        key: WidgetKeys.confirmBottomSheet,
+        title: 'Unable to create new payment',
+        content: paymentFailureMessage,
+        confirmButtonText: 'Close',
+        displayCancelButton: false,
+        iconWidget: SvgPicture.asset(
+          SvgImage.alert,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,17 +83,23 @@ class NewPaymentButton extends StatelessWidget {
       },
     );
 
-    context.read<NewPaymentBloc>()
-      ..add(
-        NewPaymentEvent.initialized(
-          user: context.read<EligibilityBloc>().state.user,
-          customerCodeInfo:
-              context.read<EligibilityBloc>().state.customerCodeInfo,
-          salesOrganisation:
-              context.read<EligibilityBloc>().state.salesOrganisation,
-          shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
-        ),
-      )
-      ..add(const NewPaymentEvent.getPrincipalCutoffs());
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final cannotProcessPayment = eligibilityState.salesOrg.isID &&
+        context.read<PaymentSummaryBloc>().state.includeInprogressPayment;
+
+    if (cannotProcessPayment) {
+      _showFailedBottomSheet(context);
+    } else {
+      context.read<NewPaymentBloc>()
+        ..add(
+          NewPaymentEvent.initialized(
+            user: eligibilityState.user,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            salesOrganisation: eligibilityState.salesOrganisation,
+            shipToInfo: eligibilityState.shipToInfo,
+          ),
+        )
+        ..add(const NewPaymentEvent.getPrincipalCutoffs());
+    }
   }
 }

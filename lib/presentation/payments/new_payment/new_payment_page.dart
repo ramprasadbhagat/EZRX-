@@ -196,11 +196,11 @@ class _PreviousButton extends StatelessWidget {
 }
 
 class _NextButtonID extends StatelessWidget {
-  final VoidCallback? onTab;
+  final VoidCallback onTab;
 
   const _NextButtonID({
     Key? key,
-    this.onTab,
+    required this.onTab,
   }) : super(key: key);
 
   @override
@@ -216,7 +216,7 @@ class _NextButtonID extends StatelessWidget {
           enabled: state.isCreatingVirtualAccount,
           child: ElevatedButton(
             key: WidgetKeys.nextButton,
-            onPressed: onTab,
+            onPressed: state.enableCreateVirtualAccount ? onTab : null,
             child: Text(
               context.tr('Next'),
               style: const TextStyle(

@@ -644,11 +644,14 @@ bool isFailed(String status) => status == 'Failed';
 
 bool isPending(String status) => status == 'Pending';
 
-bool getIsInProgress(String status) =>
-    status == 'creating' || status == 'In Progress' || status == 'waiting';
+bool isInProgress(String status) =>
+    status == 'creating' ||
+    status == 'In Progress' ||
+    status == 'waiting' ||
+    status == 'processing';
 
 Color getAdviceExpiryColorFailed(String status) {
-  return getIsInProgress(status) ||
+  return isInProgress(status) ||
           isFailed(status) ||
           getExpiredOrCanceled(status)
       ? ZPColors.red
