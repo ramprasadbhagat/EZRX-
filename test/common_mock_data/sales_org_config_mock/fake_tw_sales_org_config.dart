@@ -50,7 +50,7 @@ final fakeTWSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableGimmickMaterial: true,
   hideCustomer: false,
   enableBillTo: true,
-  disablePaymentTermsDisplay: false,
+  disablePaymentTermsDisplay: true,
   disableReturnsAccess: false,
   disablePayment: false,
   disableReturnsAccessSR: false,

@@ -39,7 +39,6 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
@@ -378,8 +377,7 @@ void main() {
     testWidgets('When disableDeliveryDate is false', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
-              .copyWith(disableDeliveryDate: false),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -414,8 +412,7 @@ void main() {
     testWidgets('When disableDeliveryDate is true ', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
-              .copyWith(disableDeliveryDate: true),
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -476,8 +473,7 @@ void main() {
     testWidgets('When enableSpecialInstructions is true', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
-              .copyWith(enableSpecialInstructions: true),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       final expectedStates = [
@@ -1337,9 +1333,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            enableMobileNumber: true,
-          ),
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
         ),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -1353,9 +1347,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            currency: Currency('thb'),
-          ),
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -1433,9 +1425,7 @@ void main() {
     //       salesOrganisation: SalesOrganisation.empty().copyWith(
     //         salesOrg: SalesOrg('1900'),
     //       ),
-    //       salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-    //         currency: Currency('idr'),
-    //       ),
+    //       salesOrgConfigs: fakeIDSalesOrgConfigs,
     //     ),
     //   );
     //   when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -1480,9 +1470,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            currency: Currency('myr'),
-          ),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
@@ -1540,9 +1528,7 @@ void main() {
 
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2001'),
-          ),
+          salesOrganisation: fakeMYSalesOrganisation,
           user: User.empty().copyWith(
             role: Role.empty().copyWith(
               type: RoleType('external_sales_rep'),

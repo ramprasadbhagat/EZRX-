@@ -18,8 +18,6 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -62,6 +60,8 @@ import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -285,9 +285,7 @@ void main() {
         VisibilityDetectorController.instance.updateInterval = Duration.zero;
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enablePaymentTerms: true,
-            ),
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -374,11 +372,7 @@ void main() {
         const grandTotalValue = subTotalValueWithoutTax + totalTax;
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('sgd'),
-              displaySubtotalTaxBreakdown: true,
-              salesOrg: SalesOrg('2601'),
-            ),
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -565,10 +559,7 @@ void main() {
         const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              vatValue: vatValue,
-              displaySubtotalTaxBreakdown: true,
-            ),
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
             salesOrganisation: fakeVNSalesOrganisation,
           ),
         );
@@ -620,13 +611,7 @@ void main() {
         const grandTotalValue = subTotalValueWithoutTax + totalTax;
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enablePaymentTerms: true,
-              vatValue: vatValue,
-              displayItemTaxBreakdown: true,
-              salesOrg: SalesOrg('2601'),
-              displaySubtotalTaxBreakdown: true,
-            ),
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -1155,17 +1140,11 @@ void main() {
       const fakeReferenceNotes = 'fake-ref-note';
       final fakeOrderHistoryDetailsPaymentTerm =
           OrderHistoryDetailsPaymentTerm.empty();
-      final fakeContactPerson = ContactPerson('fake-contact-person');
-      final fakePhoneNumber = PhoneNumber('fake-phone-number');
       final fakeInstruction = SpecialInstructions('fake-instruction');
       when(() => eligibilityBlocMock.state).thenAnswer(
-        (invocation) => EligibilityState.initial().copyWith.salesOrgConfigs(
-              enableFutureDeliveryDay: true,
-              enableReferenceNote: true,
-              enableMobileNumber: true,
-              enableSpecialInstructions: true,
-              showPOAttachment: true,
-            ),
+        (invocation) => EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
+        ),
       );
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) =>
@@ -1174,16 +1153,10 @@ void main() {
                   referenceNotes: fakeReferenceNotes,
                   orderHistoryDetailsPaymentTerm:
                       fakeOrderHistoryDetailsPaymentTerm,
-                  telephoneNumber: fakePhoneNumber,
                   orderHistoryDetailsSpecialInstructions: fakeInstruction,
                 ),
       );
-      when(() => additionalDetailsBlocMock.state).thenAnswer(
-        (invocation) =>
-            AdditionalDetailsState.initial().copyWith.deliveryInfoData(
-                  contactPerson: fakeContactPerson,
-                ),
-      );
+
       await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(
@@ -1217,6 +1190,44 @@ void main() {
       expect(
         find.byKey(
           WidgetKeys.balanceTextRow(
+            'Delivery instructions'.tr(),
+            fakeInstruction.displaySpecialInstructions,
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.byType(OrderSuccessAttachmentSection),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Show Contact Detail In Order Detail Header', (tester) async {
+      final fakeContactPerson = ContactPerson('fake-contact-person');
+      final fakePhoneNumber = PhoneNumber('fake-phone-number');
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
+        ),
+      );
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) =>
+            OrderSummaryState.initial().copyWith.orderHistoryDetails(
+                  telephoneNumber: fakePhoneNumber,
+                ),
+      );
+      when(() => additionalDetailsBlocMock.state).thenAnswer(
+        (invocation) =>
+            AdditionalDetailsState.initial().copyWith.deliveryInfoData(
+                  contactPerson: fakeContactPerson,
+                ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      expect(
+        find.byKey(
+          WidgetKeys.balanceTextRow(
             'Contact person'.tr(),
             fakeContactPerson.getOrDefaultValue(''),
           ),
@@ -1230,19 +1241,6 @@ void main() {
             fakePhoneNumber.displayTelephoneNumber,
           ),
         ),
-        findsOneWidget,
-      );
-      expect(
-        find.byKey(
-          WidgetKeys.balanceTextRow(
-            'Delivery instructions'.tr(),
-            fakeInstruction.displaySpecialInstructions,
-          ),
-        ),
-        findsOneWidget,
-      );
-      expect(
-        find.byType(OrderSuccessAttachmentSection),
         findsOneWidget,
       );
     });
@@ -1290,9 +1288,9 @@ void main() {
         ),
       );
       when(() => eligibilityBlocMock.state).thenAnswer(
-        (invocation) => EligibilityState.initial().copyWith.salesOrgConfigs(
-              showPOAttachment: true,
-            ),
+        (invocation) => EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
+        ),
       );
 
       await tester.pumpWidget(getWidget());
@@ -1336,9 +1334,9 @@ void main() {
       );
 
       when(() => eligibilityBlocMock.state).thenAnswer(
-        (invocation) => EligibilityState.initial().copyWith.salesOrgConfigs(
-              showPOAttachment: true,
-            ),
+        (invocation) => EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
+        ),
       );
 
       await tester.pumpWidget(getWidget());
@@ -1383,9 +1381,9 @@ void main() {
       );
 
       when(() => eligibilityBlocMock.state).thenAnswer(
-        (invocation) => EligibilityState.initial().copyWith.salesOrgConfigs(
-              showPOAttachment: true,
-            ),
+        (invocation) => EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
+        ),
       );
       whenListen(
         poAttachmentBlocMock,
@@ -1431,9 +1429,9 @@ void main() {
       );
 
       when(() => eligibilityBlocMock.state).thenAnswer(
-        (invocation) => EligibilityState.initial().copyWith.salesOrgConfigs(
-              showPOAttachment: true,
-            ),
+        (invocation) => EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
+        ),
       );
       whenListen(
         poAttachmentBlocMock,
@@ -1589,14 +1587,9 @@ void main() {
     testWidgets(
         'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is enabled ',
         (tester) async {
-      final config = SalesOrganisationConfigs.empty().copyWith(
-        displaySubtotalTaxBreakdown: true,
-        currency: Currency('myr'),
-        salesOrg: fakeMYSalesOrg,
-      );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: config,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
         ),
       );
       final bundleList = [
@@ -1623,8 +1616,9 @@ void main() {
       expect(
         find.descendant(
           of: find.byKey(WidgetKeys.orderSuccessSubTotal),
-          matching:
-              find.textContaining('Subtotal (${config.displayPrefixTax}.tax)'),
+          matching: find.textContaining(
+            'Subtotal (${fakeSGSalesOrgConfigs.displayPrefixTax}.tax)',
+          ),
         ),
         findsOneWidget,
       );
@@ -1632,7 +1626,7 @@ void main() {
         find.descendant(
           of: find.byKey(WidgetKeys.orderSuccessSubTotal),
           matching: find.text(
-            'MYR 990.00',
+            'SGD 990.00',
             findRichText: true,
           ),
         ),
@@ -1642,7 +1636,7 @@ void main() {
         find.descendant(
           of: find.byKey(WidgetKeys.orderSummaryTax),
           matching: find.text(
-            'MYR 99.00',
+            'SGD 99.00',
             findRichText: true,
           ),
         ),
@@ -1659,7 +1653,7 @@ void main() {
         find.descendant(
           of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
           matching: find.text(
-            'MYR 1,089.00',
+            'SGD 1,089.00',
             findRichText: true,
           ),
         ),
@@ -1674,14 +1668,9 @@ void main() {
     testWidgets(
         'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is disabled ',
         (tester) async {
-      final config = SalesOrganisationConfigs.empty().copyWith(
-        displaySubtotalTaxBreakdown: false,
-        currency: Currency('myr'),
-        salesOrg: fakeMYSalesOrg,
-      );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: config,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       final bundleList = [
@@ -1708,8 +1697,9 @@ void main() {
       expect(
         find.descendant(
           of: find.byKey(WidgetKeys.orderSuccessSubTotal),
-          matching:
-              find.textContaining('Subtotal (${config.displayPrefixTax}.tax)'),
+          matching: find.textContaining(
+            'Subtotal (${fakeMYSalesOrgConfigs.displayPrefixTax}.tax)',
+          ),
         ),
         findsOneWidget,
       );
