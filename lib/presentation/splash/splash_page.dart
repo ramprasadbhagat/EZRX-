@@ -4,8 +4,6 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_adv
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
-import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
-import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
@@ -46,7 +44,6 @@ import 'package:ezrxmobile/application/returns/new_request/return_items/return_i
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -625,7 +622,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   previous.salesOrgConfigs != current.salesOrgConfigs) &&
               current != EligibilityState.initial(),
           listener: (context, state) {
-            _getAdminPoAttachment(state);
+            // _getAdminPoAttachment(state);
             context.read<CartBloc>().add(
                   const CartEvent.fetchProductsAddedToCart(),
                 );
@@ -1422,24 +1419,24 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     );
   }
 
-  void _getAdminPoAttachment(EligibilityState eligibilityState) {
-    if (!eligibilityState.user.accessRight.adminPOAttachment) return;
-    final salesOrg = eligibilityState.salesOrganisation.salesOrg;
-    final customerCodeInfo = eligibilityState.customerCodeInfo;
+  // void _getAdminPoAttachment(EligibilityState eligibilityState) {
+  //   if (!eligibilityState.user.accessRight.adminPOAttachment) return;
+  //   final salesOrg = eligibilityState.salesOrganisation.salesOrg;
+  //   final customerCodeInfo = eligibilityState.customerCodeInfo;
 
-    context.read<AdminPoAttachmentFilterBloc>()
-      ..add(AdminPoAttachmentFilterEvent.salesOrgChanged(salesOrg))
-      ..add(AdminPoAttachmentFilterEvent.soldToChanged(customerCodeInfo));
+  //   context.read<AdminPoAttachmentFilterBloc>()
+  //     ..add(AdminPoAttachmentFilterEvent.salesOrgChanged(salesOrg))
+  //     ..add(AdminPoAttachmentFilterEvent.soldToChanged(customerCodeInfo));
 
-    context.read<AdminPoAttachmentBloc>().add(
-          AdminPoAttachmentEvent.fetch(
-            adminPoAttachmentFilter: AdminPoAttachmentFilter.empty().copyWith(
-              salesOrg: salesOrg,
-              soldTo: customerCodeInfo,
-            ),
-          ),
-        );
-  }
+  //   context.read<AdminPoAttachmentBloc>().add(
+  //         AdminPoAttachmentEvent.fetch(
+  //           adminPoAttachmentFilter: AdminPoAttachmentFilter.empty().copyWith(
+  //             salesOrg: salesOrg,
+  //             soldTo: customerCodeInfo,
+  //           ),
+  //         ),
+  //       );
+  // }
 
   void _showBioMetricPermissionDialog() {
     CustomDialogs.confirmationDialog(

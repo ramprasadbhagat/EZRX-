@@ -18,8 +18,6 @@ import 'package:ezrxmobile/application/articles_info/articles_info_filter/articl
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
-import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/faq/faq_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
@@ -372,12 +370,12 @@ class App extends StatelessWidget {
         BlocProvider<DeepLinkingBloc>(
           create: (context) => locator<DeepLinkingBloc>(),
         ),
-        BlocProvider<AdminPoAttachmentBloc>(
-          create: (context) => locator<AdminPoAttachmentBloc>(),
-        ),
-        BlocProvider<AdminPoAttachmentFilterBloc>(
-          create: (context) => locator<AdminPoAttachmentFilterBloc>(),
-        ),
+        // BlocProvider<AdminPoAttachmentBloc>(
+        //   create: (context) => locator<AdminPoAttachmentBloc>(),
+        // ),
+        // BlocProvider<AdminPoAttachmentFilterBloc>(
+        //   create: (context) => locator<AdminPoAttachmentFilterBloc>(),
+        // ),
         BlocProvider<PaymentMethodsBloc>(
           create: (context) => locator<PaymentMethodsBloc>(),
         ),
