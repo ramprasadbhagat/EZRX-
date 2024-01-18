@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
+import 'package:ezrxmobile/presentation/more/section/help_and_support_section.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -629,6 +631,33 @@ void main() {
         final paymentsTileFinder = find.byKey(WidgetKeys.paymentsTile);
         expect(paymentsTileFinder, findsOneWidget);
       },
+    );
+
+    testWidgets(
+      ' -> Help & Support - About us Section',
+      (WidgetTester tester) async {
+        final currentSalesOrgVariant =
+            salesOrgVariant.currentValue ?? fakeSalesOrg;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation.copyWith(
+              salesOrg: currentSalesOrgVariant,
+            ),
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        expect(
+          find.descendant(
+            of: find.byType(HelpAndSupportTile),
+            matching: find.text('About us'.tr()),
+          ),
+          currentSalesOrgVariant.isAboutUsEnabled
+              ? findsOneWidget
+              : findsNothing,
+        );
+      },
+      variant: salesOrgVariant,
     );
   });
 }
