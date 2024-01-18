@@ -498,8 +498,8 @@ void main() {
         when(
           () => stockInfoRemoteDataSource.getMaterialStockInfoList(
             materialNumbers: fakeMaterialResponse.products
-                .map((e) => e.materialNumber.getOrCrash())
-                .toList(),
+              .where((element) => element.type.typeMaterial)
+              .map((e) => e.materialNumber.getOrCrash()).toList(),
             salesOrg: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
             selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
           ),

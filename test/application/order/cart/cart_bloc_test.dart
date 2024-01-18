@@ -4118,7 +4118,7 @@ void main() {
           );
           expect(
             cartBlocState.taxBundle,
-            145.0,
+            193.0,
           );
         },
       );
@@ -4146,7 +4146,7 @@ void main() {
           );
           expect(
             cartBlocState.totalCartCount,
-            12,
+            11,
           );
         },
       );

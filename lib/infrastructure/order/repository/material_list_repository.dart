@@ -208,7 +208,9 @@ class MaterialListRepository implements IMaterialListRepository {
         final stockInfoList =
             await stockInfoRemoteDataSource.getMaterialStockInfoList(
           materialNumbers:
-              materials.map((e) => e.materialNumber.getOrCrash()).toList(),
+              materials
+              .where((element) => element.type.typeMaterial)
+              .map((e) => e.materialNumber.getOrCrash()).toList(),
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
         );

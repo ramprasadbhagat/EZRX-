@@ -31,6 +31,75 @@
                     "IsGimmick": false
                 },
                 {
+                    "Code": "0047278981",
+                    "Name": "Entresto",
+                    "PrincipalCode": "",
+                    "materialNumber": "",
+                    "materialDescription": "",
+                    "Manufactured": "Novartis (Singapore) Pte Ltd",
+                    "IsFavourite": false,
+                    "Type": "bundle",
+                    "HidePrice": false,
+                    "BundleInformation": {
+                        "BundleName": "Entresto",
+                        "BundleCode": "0047278981",
+                        "Conditions": "",
+                        "BonusEligible": false,
+                        "BundleInformation": [
+                            {
+                                "Sequence": 1,
+                                "Quantity": 1,
+                                "Type": "SGD",
+                                "Rate": 193,
+                                "__typename": "BundleInformation"
+                            },
+                            {
+                                "Sequence": 4,
+                                "Quantity": 15,
+                                "Type": "SGD",
+                                "Rate": 183,
+                                "__typename": "BundleInformation"
+                            }
+                        ],
+                        "__typename": "Bundle"
+                    },
+                    "Data": [
+                        {
+                            "Active": true,
+                            "MaterialCode": "000000000023062280",
+                            "Manufactured": "Novartis (Singapore) Pte Ltd",
+                            "MaterialDescription": "Entresto FCT 100mg 56s (4X14) SG",
+                            "DefaultMaterialDescription": "Entresto FCT 100mg 56s (4X14) SG",
+                            "GenericMaterialName": "",
+                            "MaterialImageURL": "https://ezrxprd.blob.core.windows.net/pmp-assets/Production/sg/23062280/thumb-23062280%20(1).png",
+                            "GovernmentMaterialCode": "",
+                            "ItemRegistrationNumber": null,
+                            "__typename": "ProductMaterial"
+                        },
+                        {
+                            "Active": true,
+                            "MaterialCode": "000000000023062281",
+                            "Manufactured": "Novartis (Singapore) Pte Ltd",
+                            "MaterialDescription": "Entresto FCT 200mg 56s (8X7) SG",
+                            "DefaultMaterialDescription": "Entresto FCT 200mg 56s (8X7) SG",
+                            "GenericMaterialName": "",
+                            "MaterialImageURL": "https://ezrxprd.blob.core.windows.net/pmp-assets/Production/sg/23062281/thumb-23062281%20(1).png",
+                            "GovernmentMaterialCode": "",
+                            "ItemRegistrationNumber": null,
+                            "__typename": "ProductMaterial"
+                        }
+                    ],
+                    "DataTotalCount": 2,
+                    "DataTotalHidden": 0,
+                    "IsGimmick": null,
+                    "suspensionStatus": false,
+                    "hasValidTenderContract": null,
+                    "hasMandatoryTenderContract": null,
+                    "isFOCMaterial": false,
+                    "taxClassification": "",
+                    "__typename": "Product"
+                },
+                {
                     "Code": "000000000023344239",
                     "Name": "Bone Impactor V3",
                     "PrincipalCode": "0000102575",
@@ -103,33 +172,6 @@
                             "MaterialDescription": "EXETER V40 KL 42",
                             "DefaultMaterialDescription": "EXETER V40 KL 42",
                             "GenericMaterialName": "EXETER V40 KL 42",
-                            "MaterialImageURL": "",
-                            "GovernmentMaterialCode": ""
-                        }
-                    ],
-                    "DataTotalCount": 1,
-                    "DataTotalHidden": 0,
-                    "IsGimmick": false
-                },
-                {
-                    "Code": "000000000023344244",
-                    "Name": "SCORPIO NRG X3 PS TIBIAL INSERT#518MM V2",
-                    "PrincipalCode": "0000102575",
-                    "materialNumber": "",
-                    "materialDescription": "",
-                    "Manufactured": "STRYKER CORPORATION (M) SDN BHD",
-                    "IsFavourite": false,
-                    "isFOCMaterial": false,
-                    "Type": "material",
-                    "HidePrice": false,
-                    "BundleInformation": null,
-                    "Data": [
-                        {
-                            "MaterialCode": "000000000023344244",
-                            "Manufactured": "STRYKER CORPORATION (M) SDN BHD",
-                            "MaterialDescription": "SCORPIO NRG X3 PS TIBIAL INSERT#518MM V2",
-                            "DefaultMaterialDescription": "SCORPIO NRG X3 PS TIBIAL INSERT#518MM V2",
-                            "GenericMaterialName": "SCORPIO NRG X3 PS TIBIAL INSER V2",
                             "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }

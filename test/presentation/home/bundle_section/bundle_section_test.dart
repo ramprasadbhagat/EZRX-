@@ -390,14 +390,14 @@ void main() {
       (WidgetTester tester) async {
         when(() => materialListBlocMock.state).thenReturn(
           MaterialListState.initial().copyWith(
-            materialList: [materialResponseMock.products[12]],
+            materialList: [materialResponseMock.products[1]],
           ),
         );
 
         await getWidget(tester);
         await tester.pump();
         final bundleCode = find.text(
-          materialResponseMock.products[12].bundle.bundleCode,
+          materialResponseMock.products[1].bundle.bundleCode,
         );
         expect(bundleCode, findsOneWidget);
       },
