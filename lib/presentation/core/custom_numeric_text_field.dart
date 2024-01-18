@@ -60,7 +60,7 @@ class CustomNumericTextField extends StatefulWidget {
     bool mandatory = false,
     bool readOnly = false,
     FocusNode? focusNode,
-    List<TextInputFormatter>? inputFormatters,
+    required List<TextInputFormatter> inputFormatters,
     TapRegionCallback? onTapOutside,
     TextAlign textAlign = TextAlign.start,
     TextStyle? style,
@@ -87,8 +87,7 @@ class CustomNumericTextField extends StatefulWidget {
           decimal: false,
         ),
         inputFormatters: [
-          if (inputFormatters != null && inputFormatters.isNotEmpty)
-            ...inputFormatters,
+          if (inputFormatters.isNotEmpty) ...inputFormatters,
           FilteringTextInputFormatter.allow(ZPRegexes.onlyDigits),
           FilteringTextInputFormatter.deny(ZPRegexes.leadingZero),
         ],

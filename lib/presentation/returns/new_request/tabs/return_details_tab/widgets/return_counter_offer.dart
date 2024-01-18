@@ -40,7 +40,7 @@ class ReturnCounterOfferField extends StatelessWidget {
                       .priceOverride
                       .getOrDefaultValue('');
 
-                  return CustomNumericTextField.wholeNumber(
+                  return CustomNumericTextField.decimalNumber(
                     fieldKey: enabled
                         ? WidgetKeys.requestCounterOfferTextField(uuid)
                         : WidgetKeys.requestCounterOfferTextField(initValue),

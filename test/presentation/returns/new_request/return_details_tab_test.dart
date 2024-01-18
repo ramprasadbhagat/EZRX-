@@ -411,6 +411,39 @@ void main() {
         );
       },
     );
+
+    testWidgets(
+      '=> The counter offer field should accept decimal value as well as less than 1 ',
+      (tester) async {
+        const textLessThanOne = '0.01';
+        when(() => newRequestBlocMock.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: [
+              //make return material detail is not allowed to edit
+              fakeReturnMaterialList.items[1].copyWith(
+                balanceQuantity: IntegerValue('0'),
+              )
+            ],
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                returnItemDetailsList: [
+                  fakeReturnMaterialList.items[1].validatedItemDetails,
+                ],
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.enterText(
+          find.byType(ReturnCounterOfferField),
+          textLessThanOne,
+        );
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+        expect(find.text(textLessThanOne), findsOneWidget);
+      },
+    );
     testWidgets(
         ' => commercial item with balance quantity 0 with bonus material balance quantity not zero bonus toggle should active and disable ',
         (WidgetTester tester) async {
