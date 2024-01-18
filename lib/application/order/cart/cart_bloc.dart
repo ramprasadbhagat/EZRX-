@@ -539,6 +539,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       getDetailsProductsAddedToCart: (e) async {
+        add(const _UpdateProductStock());
+
         if (state.isFetchingCartProductDetail) return;
 
         emit(
@@ -594,10 +596,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 apiFailureOrSuccessOption: none(),
                 isFetchingCartProductDetail: false,
               ),
-            );
-
-            add(
-              const _UpdateProductStock(),
             );
           },
         );

@@ -356,7 +356,38 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               user: fakeClientUser,
             ),
+            CartState.initial().copyWith(
+              apiFailureOrSuccessOption: optionOf(Left(fakeError)),
+              isUpdatingStock: true,
+              cartProducts: updatedPriceAggregates,
+              salesOrganisation: fakeMYSalesOrganisation,
+              config: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
+            ),
+            CartState.initial().copyWith(
+              apiFailureOrSuccessOption: optionOf(Left(fakeError)),
+              cartProducts: updatedPriceAggregates,
+              salesOrganisation: fakeMYSalesOrganisation,
+              config: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
+            ),
           ];
+          when(
+            () => cartRepositoryMock.getStockInfoList(
+              items: priceAggregates
+                  .map((e) => e.toStockListMaterials)
+                  .expand((e) => e)
+                  .toList(),
+              salesOrganisation: fakeMYSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+            ),
+          ).thenAnswer((_) async => Left(fakeError));
           when(
             () => productDetailRepository.getProductsMetaData(
               materialNumbers: allMaterial(priceAggregates)
@@ -3382,7 +3413,7 @@ void main() {
           final cartBlocState = CartState.initial().copyWith(
             isFetchingCartProductDetail: true,
           );
-          expect(cartBlocState.priceUnderLoadingShimmer, true);
+          expect(cartBlocState.priceUnderLoadingShimmer, false);
         },
       );
       test(
@@ -4155,7 +4186,7 @@ void main() {
           );
           expect(
             cartBlocState.isCartDetailsFetching,
-            true,
+            false,
           );
         },
       );

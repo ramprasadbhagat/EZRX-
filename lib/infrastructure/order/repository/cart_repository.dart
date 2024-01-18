@@ -181,26 +181,30 @@ class CartRepository implements ICartRepository {
     required ShipToInfo shipToInfo,
   }) async {
     try {
+      if (items.isEmpty) return const Right({});
+
       final stockInfoMap = <MaterialNumber, List<StockInfo>>{};
-      for (final item in items) {
-        final response = await getStockInfo(
-          customerCodeInfo: customerCodeInfo,
-          materials: [item],
-          salesOrganisation: salesOrganisation,
-        );
-        final stockInfo = response
-            .fold(
-              (failure) => <MaterialStockInfo>[],
-              (stockInfo) => stockInfo,
-            )
-            .firstWhere(
-              (element) => element.materialNumber == item.materialNumber,
-              orElse: () => MaterialStockInfo.empty(),
-            );
-        stockInfoMap.addAll(
-          {item.materialNumber: stockInfo.stockInfos},
-        );
-      }
+
+      final response = await getStockInfo(
+        customerCodeInfo: customerCodeInfo,
+        materials: items,
+        salesOrganisation: salesOrganisation,
+      );
+      final stockInfo = response.fold(
+        (failure) => <MaterialStockInfo>[],
+        (stockInfo) => stockInfo,
+      );
+      stockInfoMap.addAll(
+        {
+          for (final item in items)
+            item.materialNumber: stockInfo
+                .firstWhere(
+                  (element) => element.materialNumber == item.materialNumber,
+                  orElse: () => MaterialStockInfo.empty(),
+                )
+                .stockInfos,
+        },
+      );
 
       return Right(stockInfoMap);
     } catch (e) {

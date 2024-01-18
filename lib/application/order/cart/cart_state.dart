@@ -429,10 +429,7 @@ class CartState with _$CartState {
       cartProducts.where((e) => e.isPreOrder).toList().length > 1;
 
   bool get priceUnderLoadingShimmer =>
-      isFetchingCartProductDetail ||
-      isUpserting ||
-      isUpdatingStock ||
-      isMappingPrice;
+      isUpserting || isUpdatingStock || isMappingPrice;
 
   List<MaterialInfo> get invalidSampleBonusList =>
       cartProducts.expand((item) => item.convertedSampleBonusList).toList();
@@ -440,7 +437,6 @@ class CartState with _$CartState {
   bool get isCartDetailsFetching =>
       isUpdatingStock ||
       isUpserting ||
-      isFetchingCartProductDetail ||
       isFetchingBonus ||
       isAplProductLoading ||
       isUpdateProductDetermination ||
