@@ -41,26 +41,20 @@ class ProductsOnOffer extends StatelessWidget {
         listeners: [
           BlocListener<EligibilityBloc, EligibilityState>(
             listenWhen: (previous, current) =>
-                previous.isLoading != current.isLoading && !current.isLoading,
+                previous.isLoading != current.isLoading &&
+                !current.isLoading &&
+                current.haveShipTo,
             listener: (context, state) {
               context.read<MaterialListBloc>().add(
                     MaterialListEvent.fetch(
-                      salesOrganisation: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrganisation,
-                      configs:
-                          context.read<EligibilityBloc>().state.salesOrgConfigs,
-                      customerCodeInfo: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<EligibilityBloc>().state.shipToInfo,
+                      salesOrganisation: state.salesOrganisation,
+                      configs: state.salesOrgConfigs,
+                      customerCodeInfo: state.customerCodeInfo,
+                      shipToInfo: state.shipToInfo,
                       selectedMaterialFilter: MaterialFilter.empty().copyWith(
                         isProductOffer: true,
                       ),
-                      user: context.read<UserBloc>().state.user,
+                      user: state.user,
                     ),
                   );
             },

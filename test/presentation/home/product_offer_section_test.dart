@@ -12,9 +12,7 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -120,6 +118,7 @@ void main() {
       when(() => userBlocMock.state).thenReturn(
         UserState.initial(),
       );
+      resetMocktailState();
     });
     RouteDataScope getWUT() {
       return WidgetUtils.getScopedWidget(
@@ -195,13 +194,15 @@ void main() {
     });
     testWidgets('ProductsOnOffer test - when Salesorg  changed - Success',
         (tester) async {
-      final materialListBloc = locator<MaterialListBloc>();
       final expectedState = [
+        EligibilityState.initial().copyWith(isLoading: true),
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
-              .copyWith(salesOrg: SalesOrg('2100')),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          salesOrganisation: fakeMYSalesOrganisation,
+          user: fakeClientUser,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
         ),
-        EligibilityState.initial(),
       ];
       whenListen(
         eligibilityBlocMock,
@@ -209,16 +210,17 @@ void main() {
       );
 
       await tester.pumpWidget(getWUT());
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pumpAndSettle();
       verify(
-        () => materialListBloc.add(
+        () => materialListBlocMock.add(
           MaterialListEvent.fetch(
-            salesOrganisation: SalesOrganisation.empty(),
-            configs: eligibilityBlocMock.state.salesOrgConfigs,
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            selectedMaterialFilter: MaterialFilter.empty(),
+            shipToInfo: fakeShipToInfo,
+            configs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
             user: fakeClientUser,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            selectedMaterialFilter:
+                MaterialFilter.empty().copyWith(isProductOffer: true),
           ),
         ),
       ).called(1);
@@ -227,16 +229,12 @@ void main() {
     testWidgets(
       'ProductsOnOffer test - listen when EligibilityState finish loading',
       (tester) async {
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeClientUser,
-          ),
-        );
         final expectedState = [
           EligibilityState.initial().copyWith(
             isLoading: true,
           ),
           EligibilityState.initial().copyWith(
+            user: fakeClientUser,
             salesOrganisation: fakeSalesOrganisation,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,

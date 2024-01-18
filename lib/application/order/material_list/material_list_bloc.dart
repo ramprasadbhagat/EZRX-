@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -78,6 +79,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           selectedMaterialFilter: e.selectedMaterialFilter,
           language: e.user.preferredLanguage,
         );
+        if (emit.isDone) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -99,6 +101,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           },
         );
       },
+      transformer: restartable(),
     );
     on<_LoadMore>((e, emit) async {
       if (state.isFetching || !state.canLoadMore) return;
