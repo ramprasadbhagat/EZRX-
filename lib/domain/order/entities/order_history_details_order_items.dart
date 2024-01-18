@@ -188,10 +188,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         quantity: MaterialQty(qty),
       );
 
-  bool get showMaterialListPrice =>
-      getListPrice > unitPrice &&
-      !hidePrice &&
-      priceAggregate.salesOrgConfig.enableListPrice;
+  bool get showMaterialListPrice => !hidePrice && getListPrice > unitPrice;
 
   double get getListPrice => originPrice - tax;
 

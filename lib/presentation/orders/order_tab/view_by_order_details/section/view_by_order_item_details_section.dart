@@ -114,7 +114,8 @@ class _OrderItemTile extends StatelessWidget {
           ? null
           : Row(
               children: [
-                if (orderItem.showMaterialListPrice)
+                if (salesOrgConfig.enableListPrice &&
+                    orderItem.showMaterialListPrice)
                   PriceComponent(
                     key: WidgetKeys.materialListPriceStrikeThrough,
                     salesOrgConfig: salesOrgConfig,

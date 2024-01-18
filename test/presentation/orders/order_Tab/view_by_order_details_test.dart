@@ -62,6 +62,7 @@ import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
@@ -1752,6 +1753,16 @@ void main() {
         (tester) async {
       const originPrice = 100.0;
       const unitPrice = 80.0;
+      const tax = 5.0;
+      const listPrice = originPrice - tax;
+      //For SG : enableListPrice = true
+      when(
+        () => eligibilityBlocMock.state,
+      ).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+        ),
+      );
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
@@ -1760,9 +1771,8 @@ void main() {
                   .copyWith(
                 originPrice: originPrice,
                 unitPrice: unitPrice,
-                priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeIDSalesOrgConfigs,
-                ),
+                tax: tax,
+                priceAggregate: PriceAggregate.empty(),
               ),
             ],
           ),
@@ -1782,7 +1792,7 @@ void main() {
         (widget) =>
             widget is RichText &&
             widget.key == WidgetKeys.priceComponent &&
-            widget.text.toPlainText().contains('$originPrice'),
+            widget.text.toPlainText().contains('$listPrice'),
       );
       expect(
         find.descendant(
@@ -1798,6 +1808,14 @@ void main() {
         (tester) async {
       const originPrice = 100.0;
       const unitPrice = 80.0;
+      //For PH : enableListPrice = false
+      when(
+        () => eligibilityBlocMock.state,
+      ).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakePHSalesOrgConfigs,
+        ),
+      );
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
@@ -1806,9 +1824,7 @@ void main() {
                   .copyWith(
                 originPrice: originPrice,
                 unitPrice: unitPrice,
-                priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeMYSalesOrgConfigs,
-                ),
+                priceAggregate: PriceAggregate.empty(),
               ),
             ],
           ),
@@ -1844,6 +1860,14 @@ void main() {
         (tester) async {
       const originPrice = 100.0;
       const unitPrice = 200.0;
+      //For SG : enableListPrice = true
+      when(
+        () => eligibilityBlocMock.state,
+      ).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+        ),
+      );
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(

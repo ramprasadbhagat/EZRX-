@@ -153,8 +153,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     return price.toString();
   }
 
-  bool showMaterialListPrice({required SalesOrganisationConfigs config}) =>
-      getListPrice > unitPrice && !hidePrice && config.enableListPrice;
+  bool get showMaterialListPrice => !hidePrice && getListPrice > unitPrice;
 
   double get getListPrice => originPrice - tax;
 
