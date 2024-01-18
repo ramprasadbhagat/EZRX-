@@ -50,6 +50,7 @@ class MoreRobot extends CommonRobot {
 
   Future<void> tapNewRequestFloatingButton() async {
     await tester.tap(newRequestFloatingButton);
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapSecurityTile() async {

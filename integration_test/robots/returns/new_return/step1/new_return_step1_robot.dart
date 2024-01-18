@@ -1,6 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/product_image.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_info.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_item_price.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -38,6 +43,7 @@ class NewReturnStep1Robot {
   final clearIcon = find.byKey(WidgetKeys.clearIconKey);
   final cannotMoveToNextStep = find.byKey(WidgetKeys.cannotMoveToNextStep);
   final step2Title = find.byKey(WidgetKeys.newRequestStep2Title);
+  final expandableSection = find.byKey(WidgetKeys.expandableSection);
   void verifySearchItemVisible() {
     expect(
       searchItem,
@@ -252,5 +258,97 @@ class NewReturnStep1Robot {
         .map((e) => e.data!)
         .first;
     expect(itemTitleAfterReset, equals(firstItemTitleWithoutFilter));
+  }
+
+  void verifyReturnItemVisible() {
+    expect(item, findsAtLeastNWidgets(1));
+    // Verify image
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is ProductImage &&
+            widget.key == WidgetKeys.newReturnItemImage,
+      ),
+      findsAtLeastNWidgets(1),
+    );
+    // Verify material Qty
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is Text && widget.key == WidgetKeys.itemQtyKey,
+      ),
+      findsAtLeastNWidgets(1),
+    );
+    // Verify material number
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is Text && widget.key == WidgetKeys.itemMaterialNumberKey,
+      ),
+      findsAtLeastNWidgets(1),
+    );
+    //Verify unit price
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is ReturnItemPrice,
+      ),
+      findsAtLeastNWidgets(1),
+    );
+    // Verify total price
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is PriceComponent &&
+            widget.key == WidgetKeys.itemTotalPriceKey,
+      ),
+      findsAtLeastNWidgets(1),
+    );
+    // Verify batch
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is Text && widget.key == WidgetKeys.itemBatchKey,
+      ),
+      findsAtLeastNWidgets(1),
+    );
+    //Verify Expires
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is Text && widget.key == WidgetKeys.itemExpiresKey,
+      ),
+      findsAtLeastNWidgets(1),
+    );
+  }
+
+  void verifyDetailCollapsed(bool isCollapsed) {
+    expect(
+      find.descendant(
+        of: expandableSection,
+        matching:
+            find.text(isCollapsed ? 'Show details'.tr() : 'Hide details'.tr()),
+      ),
+      findsAtLeastNWidgets(1),
+    );
+  }
+
+  void verifyReturnItemWithBonusVisible() {
+    // Verify BonusTag
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is StatusLabel && widget.key == WidgetKeys.itemBonusTagKey,
+      ),
+      findsAtLeastNWidgets(1),
+    );
+    // Verify BonusItem
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is BonusMaterialInfo,
+      ),
+      findsAtLeastNWidgets(1),
+    );
+  }
+
+  Future<void> tapShowDetailButton() async {
+    await tester.tap(expandableSection.first);
+    await tester.pump();
   }
 }

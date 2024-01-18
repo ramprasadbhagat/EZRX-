@@ -23,6 +23,7 @@ class WidgetKeys {
   static const Key arrowButton = Key('arrowButton');
   static const Key commonTileItemHeader = Key('commonTileItemHeader');
   static const Key commonTileItemQty = Key('commonTileItemQty');
+  static const Key commonTileItemImage = Key('commonTileItemImage');
   static const Key commonTileItemLabel = Key('commonTileItemLabel');
   static const Key commonTileItemStatusLabel = Key('commonTileItemStatusLabel');
   static const Key commonTileItemTitle = Key('commonTileItemTitle');
@@ -47,6 +48,7 @@ class WidgetKeys {
   static const Key priceTextTitle = Key('priceTextTitle');
   static const Key radioPaymentGateway = Key('radioPaymentGateway');
   static Key detailInfoSection(String label) => Key('detailInfoSection$label');
+  static const Key expandableSection = Key('expandableSection');
   //============================================================
   //  PRE-ORDER-MODAL
   //============================================================
@@ -337,9 +339,16 @@ class WidgetKeys {
   static const Key newRequestListItemAbleToReturn = Key('listItemAbleToReturn');
   static const Key newRequestReturnFor = Key('newRequestReturnFor');
   static const Key newReturnItem = Key('newReturnItem');
+  static const Key newReturnItemImage = Key('newReturnItemImage');
   static const Key closeSummaryInfoNewRequestPage =
       Key('closeSummaryInfoNewRequestPage');
   static const Key itemTitleKey = Key('itemTitleKey');
+  static const Key itemMaterialNumberKey = Key('itemMaterialNumberKey');
+  static const Key itemQtyKey = Key('itemQtyKey');
+  static const Key itemTotalPriceKey = Key('itemTotalPriceKey');
+  static const Key itemBonusTagKey = Key('itemBonusTagKey');
+  static const Key itemBatchKey = Key('itemBatchKey');
+  static const Key itemExpiresKey = Key('itemExpiresKey');
   static const Key cannotMoveToNextStep = Key('cannotMoveToNextStep');
 
   // step2
@@ -378,6 +387,7 @@ class WidgetKeys {
   static const Key returnItemTile = Key('returnItemTile');
   static const Key returnItemGroupDate = Key('returnItemGroupDate');
   static const Key returnItemTileStatus = Key('returnItemTileStatus');
+  static const Key returnItemTileBonusTag = Key('returnItemTileBonusTag');
   static const Key returnInvoiceId = Key('returnInvoiceId');
 
   //============================================================
@@ -386,6 +396,7 @@ class WidgetKeys {
   static const Key returnItemDetailScrollList =
       Key('returnItemDetailScrollList');
   static const Key returnItemDetailReturnId = Key('returnItemDetailReturnId');
+  static const Key returnItemDetailBonusItem = Key('returnItemDetailBonusItem');
   static const Key returnItemDetailCopyButton =
       Key('returnItemDetailCopyButton');
   static Key returnItemDetailMaterial(
@@ -396,6 +407,8 @@ class WidgetKeys {
       Key('returnItemDetailMaterial$materialNumber$qty$totalPrice');
   static const Key returnDetailShowDetailButton =
       Key('returnDetailShowMaterialDetailButton');
+  static const Key returnDetailShowBonusDetailButton =
+      Key('returnDetailShowBonusDetailButton');
   static const Key returnItemDetailRequestDate =
       Key('returnItemDetailRequestDate');
   static const Key returnItemDetailMaterialInvoiceDate =

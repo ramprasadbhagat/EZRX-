@@ -12,6 +12,7 @@ class ReturnsByRequestRobot {
   ReturnsByRequestRobot(this.tester);
 
   final searchBar = find.byKey(WidgetKeys.returnByRequestSearchBar);
+  final exportReturnByRequest = find.byKey(WidgetKeys.exportReturnByRequest);
   final filterButton = find.byKey(WidgetKeys.returnByRequestFilterButton);
   final newRequestButton =
       find.byKey(WidgetKeys.returnByRequestNewRequestButton);
@@ -23,6 +24,16 @@ class ReturnsByRequestRobot {
 
   void verifySearchBarVisible() {
     expect(searchBar, findsOneWidget);
+  }
+
+  void verifyExportButtonVisible() {
+    expect(exportReturnByRequest, findsOneWidget);
+  }
+
+  Future<void> tapExportButton() async {
+    expect(exportReturnByRequest, findsOneWidget);
+    await tester.tap(exportReturnByRequest);
+    await tester.pumpAndSettle();
   }
 
   void verifyFilterButtonVisible() {
@@ -80,14 +91,7 @@ class ReturnsByRequestRobot {
   void verifyNoRecordFoundVisible() {
     expect(item, findsNothing);
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
-    expect(find.text('No return request to show'.tr()), findsOneWidget);
-    expect(
-      find.text(
-        'Try adjusting your search or filter selection to find what you’re looking for.'
-            .tr(),
-      ),
-      findsOneWidget,
-    );
+    expect(find.text("That didn't match anything".tr()), findsOneWidget);
   }
 
   void verifyReturnsWithIdVisible(String searchKey) {

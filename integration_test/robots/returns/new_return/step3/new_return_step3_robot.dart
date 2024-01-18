@@ -44,9 +44,8 @@ class NewReturnStep3Robot {
   void verifySubmitSuccessFully(String shipToAddress) {
     expect(newRequestSuccessMessage, findsOneWidget);
     expect(returnForAddress, contains(shipToAddress));
-    final itemTitleSuccessPage = tester
-        .widget<Text>(find.byKey(WidgetKeys.newRequestSuccessItemTitle))
-        .data!;
+    final itemTitleSuccessPage =
+        tester.widget<Text>(find.byKey(WidgetKeys.itemTitleKey)).data!;
     expect(itemTitleSuccessPage, equals(itemTitle));
     final grandTotalSuccessPage = grandTotal = tester
         .widget<RichText>(find.byKey(WidgetKeys.priceComponent).last)

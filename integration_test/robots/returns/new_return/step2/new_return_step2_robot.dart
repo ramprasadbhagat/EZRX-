@@ -7,10 +7,13 @@ class NewReturnStep2Robot {
   NewReturnStep2Robot(this.tester);
   final newRequestStep2ItemImage =
       find.byKey(WidgetKeys.newRequestStep2ItemImage);
+  final newRequestStep2ItemproductImage = find.byKey(WidgetKeys.productImage);
   final newRequestStep2QuantityAndPrice =
       find.byKey(WidgetKeys.newRequestStep2QuantityAndPrice);
   final newRequestStep2DetailsSection =
       find.byKey(WidgetKeys.newRequestStep2DetailsSection);
+  final newRequestStep2BonusItemSection =
+      find.byKey(WidgetKeys.bonusItemSection);
   Finder newRequestStep2BalanceQuantityTextField(uuid) =>
       find.byKey(WidgetKeys.returnQuantityField(uuid));
   Finder bonusQuantityField(uuid) =>
@@ -34,8 +37,17 @@ class NewReturnStep2Robot {
     expect(find.text(materialNumber), findsOneWidget);
     expect(find.text(materialName), findsOneWidget);
     expect(newRequestStep2ItemImage, findsAtLeastNWidgets(1));
+    expect(newRequestStep2ItemproductImage, findsAtLeastNWidgets(1));
     expect(newRequestStep2QuantityAndPrice, findsAtLeastNWidgets(1));
     expect(newRequestStep2DetailsSection, findsAtLeastNWidgets(1));
+  }
+
+  void verifyReturnDetailDisplayedWithBonus() {
+    expect(newRequestStep2ItemImage, findsAtLeastNWidgets(1));
+    expect(newRequestStep2ItemproductImage, findsAtLeastNWidgets(1));
+    expect(newRequestStep2QuantityAndPrice, findsAtLeastNWidgets(1));
+    expect(newRequestStep2DetailsSection, findsAtLeastNWidgets(1));
+    expect(newRequestStep2BonusItemSection, findsAtLeastNWidgets(1));
   }
 
   bool _hasBonusSection(String uuid) {

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,6 +58,7 @@ class _ReturnSummaryBonusItemSectionState
           ),
           const SizedBox(height: 8.0),
           InkWell(
+            key: WidgetKeys.returnDetailShowBonusDetailButton,
             onTap: () {
               setState(() {
                 _isExpanded = !_isExpanded;

@@ -2,6 +2,7 @@ STR := $$(perl -MYAML -le 'print YAML::LoadFile(shift)->{version}' ./pubspec.yam
 VERSION := $$( echo $(STR) | cut -d '+' -f 1 )
 BUILD := $$( echo $(STR) | cut -d '+' -f 2 )
 CLIENTUSER := 'client_user.dart'
+CLIENTUSERRETURN := 'client_user_return.dart'
 EXTERNALSALESREP := 'external_sales_rep.dart'
 CLIENTUSERORDER := 'client_user_order.dart'
 SALESORGCONFIG := 'reset_sales_org_config.sh'
@@ -79,6 +80,8 @@ run_mm_external_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/mm/${EXTERNALSALESREP}
 run_my_client_order_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENTUSERORDER} 
+run_my_client_return_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENTUSERRETURN}
 run_my_external_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${EXTERNALSALESREP}
 run_ph_client_test:
@@ -90,11 +93,9 @@ run_th_client_test:
 run_th_external_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${EXTERNALSALESREP}
 run_my_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/returns_by_items/${CLIENTUSER}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/returns_by_request/${CLIENTUSER}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/new_return/step1/${CLIENTUSER}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/account_summary/account_invoice/${CLIENTUSER}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/payments_home/${CLIENTUSER}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/soa/${CLIENTUSER}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/account_summary/account_credits/${CLIENTUSER}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/payment_summary/${CLIENTUSER}
+	

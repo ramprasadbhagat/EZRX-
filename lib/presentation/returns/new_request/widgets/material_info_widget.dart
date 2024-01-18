@@ -27,6 +27,7 @@ class MaterialInfoWidget extends StatelessWidget {
           Text(
             data.materialNumber.displayMatNo,
             style: Theme.of(context).textTheme.titleSmall,
+            key: WidgetKeys.itemMaterialNumberKey,
           ),
           Text(
             data.materialDescription,
@@ -44,6 +45,7 @@ class MaterialInfoWidget extends StatelessWidget {
                         color: ZPColors.darkGray,
                         fontSize: 12,
                       ),
+                  key: WidgetKeys.itemBatchKey,
                 ),
                 Text(
                   '(${'Expires'.tr()} ${data.expiryDate.dateString})',
@@ -51,6 +53,7 @@ class MaterialInfoWidget extends StatelessWidget {
                         color: ZPColors.darkGray,
                         fontSize: 12,
                       ),
+                  key: WidgetKeys.itemExpiresKey,
                 ),
               ],
             ),

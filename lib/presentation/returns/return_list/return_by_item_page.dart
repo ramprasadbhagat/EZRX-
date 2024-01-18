@@ -171,6 +171,7 @@ class _ReturnItem extends StatelessWidget {
                 label: data.materialNumber.displayMatNo,
                 labelTrailing: data.prsfd.isBonus && !salesOrg.isID
                     ? const BonusTag(
+                        key: WidgetKeys.returnItemTileBonusTag,
                         margin: EdgeInsets.symmetric(horizontal: 4),
                       )
                     : null,

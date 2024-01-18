@@ -286,6 +286,7 @@ class _ImageBox extends StatelessWidget {
                 child: Stack(
                   children: [
                     ProductImage(
+                      key: WidgetKeys.commonTileItemImage,
                       fit: BoxFit.fitHeight,
                       materialNumber: materialNumber,
                     ),

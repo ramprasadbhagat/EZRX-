@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_item_price.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,7 @@ class BonusMaterialInfo extends StatelessWidget {
               ),
               if (!context.read<EligibilityBloc>().state.salesOrg.isID)
                 StatusLabel(
+                  key: WidgetKeys.itemBonusTagKey,
                   status: StatusType('Bonus'),
                   valueColor: ZPColors.white,
                 ),

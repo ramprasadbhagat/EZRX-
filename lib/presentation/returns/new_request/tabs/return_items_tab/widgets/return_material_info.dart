@@ -34,6 +34,7 @@ class _ReturnMaterialInfo extends StatelessWidget {
                 showShadow: false,
                 showBorder: true,
                 child: ProductImage(
+                  key: WidgetKeys.newReturnItemImage,
                   width: MediaQuery.of(context).size.height * 0.1,
                   height: MediaQuery.of(context).size.height * 0.1,
                   fit: BoxFit.fitHeight,
@@ -50,6 +51,7 @@ class _ReturnMaterialInfo extends StatelessWidget {
             totalPrice: data.totalPrice.getOrDefaultValue(0),
           ),
           ExpandableSection(
+            key: WidgetKeys.expandableSection,
             expanded: false,
             children: [
               MaterialDetailsSection(

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/return_summary_by_item_details.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_request_summary_item_section.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_bonus_item_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -13,6 +14,8 @@ class ReturnsByItemsDetailRobot {
   final scrollView = find.byKey(WidgetKeys.returnItemDetailScrollList);
   final copyButton = find.byKey(WidgetKeys.returnItemDetailCopyButton);
   final showDetailButton = find.byKey(WidgetKeys.returnDetailShowDetailButton);
+  final showDetailButtonFoBonus =
+      find.byKey(WidgetKeys.returnDetailShowBonusDetailButton);
 
   void verifyPage() {
     expect(find.byType(ReturnRequestSummaryByItemDetails), findsOneWidget);
@@ -102,6 +105,14 @@ class ReturnsByItemsDetailRobot {
     );
   }
 
+  Future<void> dragToVerifyBonusSectionVisible() async {
+    await tester.dragUntilVisible(
+      find.byType(ReturnSummaryBonusItemSection),
+      scrollView,
+      const Offset(0.0, -200),
+    );
+  }
+
   void verifyMaterialVisible(String materialNumber, int qty, String price) {
     expect(
       find.byKey(
@@ -110,6 +121,29 @@ class ReturnsByItemsDetailRobot {
           qty.toString(),
           price,
         ),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyMaterialVisibleWithBonus(
+    String materialNumber,
+    int qty,
+    String price,
+  ) {
+    expect(
+      find.byKey(
+        WidgetKeys.returnItemDetailMaterial(
+          materialNumber,
+          qty.toString(),
+          price,
+        ),
+      ),
+      findsNothing,
+    );
+    expect(
+      find.byKey(
+        WidgetKeys.returnItemDetailBonusItem,
       ),
       findsOneWidget,
     );
@@ -126,8 +160,24 @@ class ReturnsByItemsDetailRobot {
     );
   }
 
+  void verifyBonusDetailCollapsed(bool isCollapsed) {
+    expect(
+      find.descendant(
+        of: showDetailButtonFoBonus,
+        matching:
+            find.text(isCollapsed ? 'Show details'.tr() : 'Hide details'.tr()),
+      ),
+      findsOneWidget,
+    );
+  }
+
   Future<void> tapShowDetailButton() async {
     await tester.tap(showDetailButton);
+    await tester.pump();
+  }
+
+  Future<void> tapShowDetailButtonForBonus() async {
+    await tester.tap(showDetailButtonFoBonus);
     await tester.pump();
   }
 
@@ -175,7 +225,7 @@ class ReturnsByItemsDetailRobot {
 
   Future<void> tapCopyButton() async {
     await tester.tap(copyButton);
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   void verifyCopiedTextVisible() {

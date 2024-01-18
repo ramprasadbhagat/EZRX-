@@ -88,6 +88,7 @@ class ReturnRequestSummaryByItemDetails extends StatelessWidget {
                       ),
                       state.requestInformation.prsfd.isBonus
                           ? ReturnSummaryBonusItemSection(
+                              key: WidgetKeys.returnItemDetailBonusItem,
                               returnRequestInformation:
                                   state.requestInformation,
                             )

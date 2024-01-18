@@ -152,6 +152,6 @@ class NewRequestState with _$NewRequestState {
             )
             .toList(),
         MixpanelProps.unitPrice:
-            allItemDetails.map((e) => e.unitPrice).toList(),
+            allItemDetails.map((e) => e.unitPrice.apiParameterValue).toList(),
       };
 }

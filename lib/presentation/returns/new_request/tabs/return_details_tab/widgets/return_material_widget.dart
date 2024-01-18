@@ -40,6 +40,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
                     showShadow: false,
                     showBorder: true,
                     child: ProductImage(
+                      key: WidgetKeys.newRequestStep2ItemImage,
                       width: MediaQuery.of(context).size.height * 0.1,
                       height: MediaQuery.of(context).size.height * 0.1,
                       fit: BoxFit.fitHeight,
