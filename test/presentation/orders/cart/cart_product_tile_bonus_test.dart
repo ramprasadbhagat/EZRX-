@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
@@ -41,6 +42,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
@@ -342,7 +344,8 @@ void main() {
         expect(cartItemQuantityInputKey, findsWidgets);
         final cartItemAddKey = find.byKey(WidgetKeys.bonusOfferItemAddKey);
         expect(cartItemAddKey, findsWidgets);
-        final cartItemDeleteKey = find.byKey(WidgetKeys.bonusOfferItemDeleteKey);
+        final cartItemDeleteKey =
+            find.byKey(WidgetKeys.bonusOfferItemDeleteKey);
         expect(cartItemDeleteKey, findsWidgets);
         final quantityInputTextKey =
             find.byKey(WidgetKeys.bonusOfferItemInputKey);
@@ -396,6 +399,39 @@ void main() {
             ),
           ),
         ).called(1);
+      });
+
+      testWidgets(
+          'Deal Bonus cannot be deleted if bonusOverride is disable from config',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItem],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final bonusItem = WidgetKeys.cartItemBonus(
+          cartItem.materialInfo.materialNumber.displayMatNo,
+          cartItem.bonusSampleItems.first.materialNumber.displayMatNo,
+        );
+
+        expect(
+          find.byWidgetPredicate(
+            (widget) =>
+                widget.key == bonusItem &&
+                widget is CustomSlidable &&
+                widget.endActionPaneActions.isNotEmpty,
+          ),
+          findsNothing,
+        );
       });
     },
   );

@@ -43,24 +43,25 @@ class CartProductTileBonus extends StatelessWidget {
       ),
       extentRatio: 0.24,
       endActionPaneActions: [
-        CustomSlidableAction(
-          key: WidgetKeys.cartItemSwipeDeleteButtonForBonus,
-          label: '',
-          icon: Icons.delete_outline,
-          onPressed: (v) => context.read<CartBloc>().add(
-                CartEvent.addBonusToCartItem(
-                  bonusMaterial: MaterialInfo.empty().copyWith(
-                    materialNumber: bonusItem.materialNumber,
-                    parentID: cartProduct.materialInfo.materialNumber
-                        .getOrDefaultValue(''),
-                    quantity: MaterialQty(0),
-                    type: bonusItem.type,
+        if (context.read<EligibilityBloc>().state.isBonusSampleItemVisible)
+          CustomSlidableAction(
+            key: WidgetKeys.cartItemSwipeDeleteButtonForBonus,
+            label: '',
+            icon: Icons.delete_outline,
+            onPressed: (v) => context.read<CartBloc>().add(
+                  CartEvent.addBonusToCartItem(
+                    bonusMaterial: MaterialInfo.empty().copyWith(
+                      materialNumber: bonusItem.materialNumber,
+                      parentID: cartProduct.materialInfo.materialNumber
+                          .getOrDefaultValue(''),
+                      quantity: MaterialQty(0),
+                      type: bonusItem.type,
+                    ),
+                    counterOfferDetails: RequestCounterOfferDetails.empty(),
+                    bonusItemId: bonusItem.itemId,
                   ),
-                  counterOfferDetails: RequestCounterOfferDetails.empty(),
-                  bonusItemId: bonusItem.itemId,
                 ),
-              ),
-        ),
+          ),
       ],
       borderRadius: 8,
       child: CustomCard(
@@ -257,7 +258,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: CartItemQuantityInput( 
+      child: CartItemQuantityInput(
         isEnabled:
             context.read<EligibilityBloc>().state.isBonusSampleItemVisible,
         quantityAddKey: WidgetKeys.bonusOfferItemAddKey,
