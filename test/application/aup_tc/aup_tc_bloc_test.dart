@@ -244,6 +244,66 @@ void main() {
           )
         ],
       );
+
+      blocTest<AupTcBloc, AupTcState>(
+        '''Loged in and userbloc state is Not empty, tncConsent - true
+        ''',
+        seed: () => AupTcState(
+          showTermsAndCondition: true,
+          privacyFile: config.getPrivacyPolicyFile,
+          tncFile: config.getTnCFile,
+          tncConsent: false,
+          privacyConsent: false,
+        ),
+        build: () => AupTcBloc(
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
+        act: (AupTcBloc bloc) {
+          bloc.add(
+            const AupTcEvent.termsOfUseConsent(newValue: true),
+          );
+        },
+        expect: () => [
+          AupTcState(
+            showTermsAndCondition: true,
+            privacyFile: config.getPrivacyPolicyFile,
+            tncFile: config.getTnCFile,
+            tncConsent: true,
+            privacyConsent: false,
+          )
+        ],
+      );
+
+      blocTest<AupTcBloc, AupTcState>(
+        '''Loged in and userbloc state is Not empty, acceptPrivacyPolicy - true
+        ''',
+        seed: () => AupTcState(
+          showTermsAndCondition: true,
+          privacyFile: config.getPrivacyPolicyFile,
+          tncFile: config.getTnCFile,
+          tncConsent: false,
+          privacyConsent: false,
+        ),
+        build: () => AupTcBloc(
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
+        act: (AupTcBloc bloc) {
+          bloc.add(
+            const AupTcEvent.privacyPolicyConsent(newValue: true),
+          );
+        },
+        expect: () => [
+          AupTcState(
+            showTermsAndCondition: true,
+            privacyFile: config.getPrivacyPolicyFile,
+            tncFile: config.getTnCFile,
+            tncConsent: false,
+            privacyConsent: true,
+          )
+        ],
+      );
     },
   );
 }
