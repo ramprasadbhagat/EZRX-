@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
@@ -564,6 +565,59 @@ void main() {
           matching: find.byKey(WidgetKeys.priceLoading),
         );
         expect(priceComponentFinder, findsOneWidget);
+      },
+    );
+
+testWidgets(
+      'ProductsOnOffer test - Tap on FavIcon',
+      (tester) async {
+        final fakeFavList = [
+          MaterialInfo.empty().copyWith(
+            isFavourite: false,
+            materialNumber: MaterialNumber('1234'),
+          )
+        ];
+
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList: fakeFavList,
+          ),
+        );
+
+        final expectedState = [
+          MaterialListState.initial().copyWith(
+            materialList: [fakeFavList.first.copyWith(isFavourite: true)],
+          ),
+        ];
+        whenListen(
+          materialListBlocMock,
+          Stream.fromIterable(expectedState),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final isFavFalse = find.byKey(WidgetKeys.statusFavoriteIcon(false));
+        expect(
+          isFavFalse,
+          findsOneWidget,
+        );
+
+        final favIconFinder = find.byType(FavouriteIcon);
+        await tester.tap(favIconFinder);
+        verify(
+          () => materialListBlocMock.add(
+            MaterialListEvent.addFavourite(
+              item: fakeFavList.first,
+            ),
+          ),
+        ).called(1);
+        await tester.pumpAndSettle();
+
+        final isFavTrue = find.byKey(WidgetKeys.statusFavoriteIcon(true));
+        expect(
+          isFavTrue,
+          findsOneWidget,
+        );
       },
     );
   });

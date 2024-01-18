@@ -49,6 +49,7 @@ class WidgetKeys {
   static const Key radioPaymentGateway = Key('radioPaymentGateway');
   static Key detailInfoSection(String label) => Key('detailInfoSection$label');
   static const Key expandableSection = Key('expandableSection');
+  static Key favIcon(String label) => Key('favIcon$label');
   //============================================================
   //  PRE-ORDER-MODAL
   //============================================================
@@ -1007,7 +1008,8 @@ class WidgetKeys {
 
   static Key returnContactUsFieldKeyRequest(String key, String msg) =>
       Key('$key$msg');
-  static const Key paymentAdviceButtonLoading = Key('paymentAdviceButtonLoading');
+  static const Key paymentAdviceButtonLoading =
+      Key('paymentAdviceButtonLoading');
   //============================================================
   // Notification page
   //============================================================
