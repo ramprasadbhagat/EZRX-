@@ -608,9 +608,11 @@ class PriceAggregate with _$PriceAggregate {
         exceedQuantity: exceedQty,
       );
 
-  bool get isEligibleAddAdditionBonus =>
-      !materialInfo.materialGroup4.isFOC &&
-      !materialInfo.hidePrice &&
+  bool get isBonusEligibleForNonMYPnGSalesRep =>
+      isEligibleForAdditionalBonus && !materialInfo.hidePrice;
+
+  bool get isEligibleForAdditionalBonus =>
+      !materialInfo.isFOCMaterial &&
       (salesOrgConfig.netPriceOverride || price.additionalBonusEligible);
 
   bool get hasSalesRepPrincipal =>

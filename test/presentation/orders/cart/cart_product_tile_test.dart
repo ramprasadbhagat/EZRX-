@@ -39,6 +39,7 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
@@ -862,6 +863,33 @@ void main() {
         final bonusSampleItemButton =
             find.byKey(WidgetKeys.bonusSampleItemButtonKey);
         expect(bonusSampleItemButton, findsNothing);
+      });
+
+      testWidgets(
+          'Bonus sample item button visible when AdditionalBonusEligible is false and NetPriceOverride is true',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartItem.copyWith(
+                salesOrgConfig: fakeSGSalesOrgConfigs,
+              ),
+            ],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final bonusSampleItemButton =
+            find.byKey(WidgetKeys.bonusSampleItemButtonKey);
+        expect(bonusSampleItemButton, findsOneWidget);
       });
     },
   );

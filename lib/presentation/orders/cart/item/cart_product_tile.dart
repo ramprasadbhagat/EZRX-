@@ -470,11 +470,14 @@ class _BonusPriceCounterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
-    final isMYPnGSalesRep = eligibilityState.isMYExternalSalesRepUser &&
-        cartItem.materialInfo.isPnGPrinciple;
+    final isMYPnGSalesRepEligible = eligibilityState.isMYExternalSalesRepUser &&
+        cartItem.materialInfo.isPnGPrinciple &&
+        cartItem.isEligibleForAdditionalBonus;
+
     final isBonusOverrideEnable = eligibilityState.isBonusSampleItemVisible &&
-        cartItem.price.additionalBonusEligible &&
-        (!cartItem.materialInfo.hidePrice || isMYPnGSalesRep);
+        (cartItem.isBonusEligibleForNonMYPnGSalesRep ||
+            isMYPnGSalesRepEligible);
+
     final isCounterOfferEnable = eligibilityState.isCounterOfferVisible &&
         !cartItem.materialInfo.hidePrice;
 

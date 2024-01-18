@@ -33,6 +33,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 void main() {
@@ -1109,7 +1110,7 @@ void main() {
           ),
         );
         expect(
-          customPriceAggregate.isEligibleAddAdditionBonus,
+          customPriceAggregate.isBonusEligibleForNonMYPnGSalesRep,
           false,
         );
       },
@@ -1124,7 +1125,7 @@ void main() {
           ),
         );
         expect(
-          customPriceAggregate.isEligibleAddAdditionBonus,
+          customPriceAggregate.isBonusEligibleForNonMYPnGSalesRep,
           false,
         );
       },
@@ -1135,15 +1136,12 @@ void main() {
       'price.additionalBonusEligible is false',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            netPriceOverride: false,
-          ),
           price: emptyPrice.copyWith(
             additionalBonusEligible: false,
           ),
         );
         expect(
-          customPriceAggregate.isEligibleAddAdditionBonus,
+          customPriceAggregate.isBonusEligibleForNonMYPnGSalesRep,
           false,
         );
       },
@@ -1153,19 +1151,35 @@ void main() {
       'isEligibleAddAdditionBonus from PriceAggregate',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            netPriceOverride: true,
-          ),
+          salesOrgConfig: fakeSGSalesOrgConfigs,
           materialInfo: emptyMaterialInfo.copyWith(
             hidePrice: false,
-            materialGroup4: MaterialGroup.four(''),
           ),
           price: emptyPrice.copyWith(
             additionalBonusEligible: true,
           ),
         );
         expect(
-          customPriceAggregate.isEligibleAddAdditionBonus,
+          customPriceAggregate.isBonusEligibleForNonMYPnGSalesRep,
+          true,
+        );
+      },
+    );
+
+    test(
+      'isEligibleAddAdditionBonus from PriceAggregate for MYPnGExternalSalesRep Case',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          materialInfo: emptyMaterialInfo.copyWith(
+            hidePrice: true,
+          ),
+          price: emptyPrice.copyWith(
+            additionalBonusEligible: true,
+          ),
+        );
+        expect(
+          customPriceAggregate.isEligibleForAdditionalBonus,
           true,
         );
       },
