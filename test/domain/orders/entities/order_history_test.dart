@@ -20,13 +20,6 @@ void main() async {
     orderHistoryItems: [parentItem, bonusItem],
   );
   group('OrderHistory entity -', () {
-    test('show other order item section', () {
-      expect(
-        entity.copyWith(orderHistoryItems: []).isOthersOrderItemsSectionVisible,
-        false,
-      );
-      expect(entity.isOthersOrderItemsSectionVisible, true);
-    });
     group('get parent material of bonus -', () {
       test('return empty when input is not bonus', () {
         expect(

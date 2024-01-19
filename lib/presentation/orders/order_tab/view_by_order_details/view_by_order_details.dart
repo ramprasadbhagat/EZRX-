@@ -50,7 +50,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                     key: WidgetKeys.loaderImage,
                   )
                 : ListView(
-                    key: WidgetKeys.viewByOrderDetailsPageListView,
+                    key: WidgetKeys.scrollList,
                     children: <Widget>[
                       const OrderHeaderSection(),
                       if (eligibilityState.salesOrg.isID)

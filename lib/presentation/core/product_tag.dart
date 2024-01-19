@@ -41,6 +41,7 @@ class ProductTag extends StatelessWidget {
         labelStyle: labelStyle,
       );
   factory ProductTag.bundleOfferIcon() => const ProductTag._(
+        key: WidgetKeys.bundleTag,
         labelTag: '',
         backgroundColor: ZPColors.skyBlueColor,
         assetIconSvg: SvgImage.bonusOffer,
@@ -81,6 +82,7 @@ class ProductTag extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       );
   factory ProductTag.onOfferTag({TextStyle? labelStyle}) => ProductTag._(
+        key: WidgetKeys.offerTag,
         labelTag: 'On offer',
         backgroundColor: ZPColors.orange,
         textColor: ZPColors.white,

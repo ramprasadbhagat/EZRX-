@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/order_number_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,7 @@ class InvoiceDetailsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           BalanceTextRow(
+            key: WidgetKeys.invoiceDetailIdAndStatus,
             keyText:
                 '${context.tr('Invoice')} #${invoiceItem.referenceDocumentNumber.getOrDefaultValue('')}',
             isStatus: true,

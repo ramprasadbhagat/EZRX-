@@ -27,32 +27,6 @@ class CommonRobot {
   final productsTab = find.byKey(WidgetKeys.productsTab);
   final cartButton = find.byType(CartButton);
 
-
-  Future<void> changeDeliveryAddress(String shipToCode) async {
-    if ((tester
-                .widget<ListTile>(find.byKey(WidgetKeys.customerCodeSelect))
-                .title as Text)
-            .data ==
-        shipToCode) {
-      return;
-    } else {
-      await tester.tap(customerCodeSelector);
-      await tester.pumpAndSettle();
-      await searchWithKeyboardAction(shipToCode);
-      await tester
-          .tap(find.byKey(WidgetKeys.shipToAddressOption(shipToCode)).first);
-      await tester.pumpAndSettle();
-      final changeAddressButton = find.descendant(
-        of: find.byKey(WidgetKeys.confirmButton),
-        matching: find.text('Change address'.tr()),
-      );
-      if (tester.widgetList(changeAddressButton).isNotEmpty) {
-        await tester.tap(changeAddressButton);
-        await tester.pumpAndSettle();
-      }
-    }
-  }
-
   Future<void> setDateRangePickerValue({
     required DateTime fromDate,
     required DateTime toDate,
@@ -141,8 +115,47 @@ class CommonRobot {
   }
 
   //============================================================
+  //  Customer code selector
+  //============================================================
+
+  void verifyCustomerCodeSelector() {
+    expect(customerCodeSelector, findsOneWidget);
+  }
+
+  Future<void> tapCustomerCodeSelector() async {
+    await tester.tap(customerCodeSelector);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> changeDeliveryAddress(String shipToCode) async {
+    if ((tester
+                .widget<ListTile>(find.byKey(WidgetKeys.customerCodeSelect))
+                .title as Text)
+            .data ==
+        shipToCode) {
+      return;
+    } else {
+      await tester.tap(customerCodeSelector);
+      await tester.pumpAndSettle();
+      await searchWithKeyboardAction(shipToCode);
+      await tester
+          .tap(find.byKey(WidgetKeys.shipToAddressOption(shipToCode)).first);
+      await tester.pumpAndSettle();
+      final changeAddressButton = find.descendant(
+        of: find.byKey(WidgetKeys.confirmButton),
+        matching: find.text('Change address'.tr()),
+      );
+      if (tester.widgetList(changeAddressButton).isNotEmpty) {
+        await tester.tap(changeAddressButton);
+        await tester.pumpAndSettle();
+      }
+    }
+  }
+
+  //============================================================
   //  Search bar
   //============================================================
+
   void verifySearchBarText(String text) {
     final editableText = find.descendant(
       of: searchBar,
@@ -197,17 +210,13 @@ class CommonRobot {
     expect(homeTabBar, findsOneWidget);
   }
 
-  void verifyCustomerCodeSelectorVisible() {
-    expect(customerCodeSelector, findsOneWidget);
-  }
-
   Future<void> verifySnackbarVisible() async {
     expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
     await tester.pumpAndSettle();
   }
 
   Future<void> tapToBackIcon() async {
-    final backButton = find.byKey(WidgetKeys.backButton).first;
+    final backButton = find.byKey(WidgetKeys.backButton).last;
     await tester.tap(backButton);
     await tester.pumpAndSettle();
   }
@@ -248,5 +257,6 @@ class CommonRobot {
       find.byKey(WidgetKeys.scrollList),
       const Offset(0.0, -200),
     );
+    await tester.pump();
   }
 }

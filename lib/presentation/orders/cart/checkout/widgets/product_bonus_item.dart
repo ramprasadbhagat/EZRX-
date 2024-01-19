@@ -2,14 +2,21 @@ part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart
 
 class _CheckoutProductBonusItem extends StatelessWidget {
   final BonusSampleItem bonusItem;
+  final MaterialNumber parentMaterialNumber;
+
   const _CheckoutProductBonusItem({
     Key? key,
     required this.bonusItem,
+    required this.parentMaterialNumber,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.cartItemBonus(
+        parentMaterialNumber.displayMatNo,
+        bonusItem.materialNumber.displayMatNo,
+      ),
       showBorder: true,
       margin: const EdgeInsets.all(15),
       child: Column(
@@ -103,6 +110,7 @@ class _ProductDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
               bonusItem.materialDescription,
+              key: WidgetKeys.cartItemBonusMaterialDescription,
               maxLines: 2,
               style: Theme.of(context).textTheme.labelSmall,
             ),
@@ -133,7 +141,7 @@ class _QuantityAndPrice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
-    
+
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
       child: Row(
@@ -141,6 +149,7 @@ class _QuantityAndPrice extends StatelessWidget {
         children: [
           Text(
             '${'Qty:'.tr()} ${bonusItem.qty.getOrDefaultValue(0).toString()}',
+            key: WidgetKeys.cartItemBonusQty,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),

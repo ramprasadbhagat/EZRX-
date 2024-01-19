@@ -3,15 +3,19 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../common/common_robot.dart';
+import '../common/extension.dart';
 
 class BundleDetailRobot extends CommonRobot {
   BundleDetailRobot(WidgetTester tester) : super(tester);
 
   final addToCartButton = find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+  final sheetAddToCart = find.byKey(WidgetKeys.bundleAddToCartSheet);
   final sheetAddToCartButton =
       find.byKey(WidgetKeys.bundleAddToCartSheetSubmitButton);
+  final sheetInvalidQtyWarning =
+      find.byKey(WidgetKeys.addBundleInvalidQtyWarning);
 
-  void verifyBundleDetailPage() {
+  void verifyPage() {
     final bundlesDetail = find.byKey(WidgetKeys.bundleDetailPage);
     expect(bundlesDetail, findsOneWidget);
   }
@@ -59,4 +63,57 @@ class BundleDetailRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.bundleOfferMaterialInfo), findsOneWidget);
     expect(addToCartButton, findsOneWidget);
   }
+
+  void verifyFavoriteStatus(bool isFavorite) => expect(
+        find.byKey(WidgetKeys.statusFavoriteIcon(isFavorite)),
+        findsOneWidget,
+      );
+
+  Future<void> setFavoriteStatus(bool isFavorite) async {
+    final favoriteIcon = find.byKey(WidgetKeys.favoritesIcon);
+    final statusFavorite =
+        find.byKey(WidgetKeys.statusFavoriteIcon(isFavorite));
+    if (statusFavorite.evaluate().isEmpty) {
+      await tester.tap(favoriteIcon);
+      await tester.pumpAndSettle();
+    } else {
+      await tester.tap(favoriteIcon);
+      await tester.pumpAndSettle();
+      await tester.tap(favoriteIcon);
+      await tester.pumpAndSettle();
+    }
+
+    await tester.pumpUntilVisible(statusFavorite);
+  }
+
+  void verifyAddBundleBottomSheet({bool isVisible = true}) =>
+      expect(sheetAddToCart, isVisible ? findsOneWidget : findsNothing);
+
+  void verifyAddBundleMinimumQty(int value) => _findWidgetContainText(
+        find.byKey(WidgetKeys.addBundleMinimumQty),
+        value.toString(),
+      );
+
+  void verifyAddBundleTotalQty(int value) => _findWidgetContainText(
+        find.byKey(WidgetKeys.addBundleTotalQty),
+        value.toString(),
+      );
+
+  void verifyAddBundleRate(String value) => _findWidgetContainText(
+        find.byKey(WidgetKeys.addBundleRate),
+        value,
+      );
+
+  void verifyAddBundleInvalidQtyWarning(int value, {bool isVisible = true}) =>
+      isVisible
+          ? _findWidgetContainText(sheetInvalidQtyWarning, value.toString())
+          : expect(sheetInvalidQtyWarning, findsNothing);
+
+  void _findWidgetContainText(Finder finder, String text) => expect(
+        find.descendant(
+          of: finder,
+          matching: find.textContaining(text, findRichText: true),
+        ),
+        findsOneWidget,
+      );
 }

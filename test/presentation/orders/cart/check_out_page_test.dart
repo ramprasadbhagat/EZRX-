@@ -353,12 +353,12 @@ void main() {
         final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
         expect(checkoutPageFinder, findsOneWidget);
         final showOrderSumaryListTileFinder =
-            find.byKey(WidgetKeys.showOrderSumaryListTile);
+            find.byKey(WidgetKeys.priceSummaryListTile);
         expect(showOrderSumaryListTileFinder, findsOneWidget);
         await tester.tap(showOrderSumaryListTileFinder);
         await tester.pumpAndSettle();
         final orderPriceSummarySheetFinder =
-            find.byKey(WidgetKeys.orderPriceSummarySheet);
+            find.byKey(WidgetKeys.priceSummarySheet);
         expect(orderPriceSummarySheetFinder, findsOneWidget);
         final orderPriceSummarySheetCloseButtonFinder = find.descendant(
           of: find.byKey(WidgetKeys.closeButton),
@@ -400,10 +400,10 @@ void main() {
         final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
         expect(checkoutPageFinder, findsOneWidget);
         final showOrderSumaryListTileFinder =
-            find.byKey(WidgetKeys.showOrderSumaryListTile);
+            find.byKey(WidgetKeys.priceSummaryListTile);
         expect(showOrderSumaryListTileFinder, findsOneWidget);
         final checkoutStickyGrandTotalFinder =
-            find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+            find.byKey(WidgetKeys.priceSummaryGrandTotal);
         expect(checkoutStickyGrandTotalFinder, findsOneWidget);
         verify(
           () => orderSummaryBlocMock.add(
@@ -446,10 +446,10 @@ void main() {
         final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
         expect(checkoutPageFinder, findsOneWidget);
         final showOrderSumaryListTileFinder =
-            find.byKey(WidgetKeys.showOrderSumaryListTile);
+            find.byKey(WidgetKeys.priceSummaryListTile);
         expect(showOrderSumaryListTileFinder, findsOneWidget);
         final checkoutStickyGrandTotalFinder =
-            find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+            find.byKey(WidgetKeys.priceSummaryGrandTotal);
         expect(checkoutStickyGrandTotalFinder, findsOneWidget);
       },
     );

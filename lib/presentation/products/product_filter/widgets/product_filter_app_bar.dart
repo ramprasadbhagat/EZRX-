@@ -15,6 +15,7 @@ class _ProductFilterAppBar extends StatelessWidget {
             ?.copyWith(color: ZPColors.primary),
       ),
       trailing: IconButton(
+        key: WidgetKeys.backButton,
         onPressed: () => Navigator.of(context).pop(),
         icon: const Icon(
           Icons.close_outlined,

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
@@ -25,7 +26,7 @@ class CheckoutRobot {
   final deliveryInstructionField =
       find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey'));
   final poAttachmentSection = find.byType(PoAttachmentUpload);
-  final stickyGrandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+  final stickyGrandTotal = find.byKey(WidgetKeys.priceSummaryGrandTotal);
   final principalLabel = find.byKey(WidgetKeys.cartPrincipalLabel);
   final materialQtyLabel = find.byKey(WidgetKeys.cartItemProductQty);
   final materialDescriptionLabel =
@@ -133,7 +134,7 @@ class CheckoutRobot {
 
   void verifyStickyTotalQty(int qty) {
     expect(
-      tester.widget<Text>(find.byKey(WidgetKeys.checkoutStickyTotalQty)).data,
+      tester.widget<Text>(find.byKey(WidgetKeys.priceSummaryTotalQty)).data,
       contains(qty.toString()),
     );
   }
@@ -385,6 +386,89 @@ class CheckoutRobot {
 
   Finder _bundle(String bundleNumber) =>
       find.byKey(WidgetKeys.cartItemBundleTile(bundleNumber));
+
+  //============================================================
+  //  Bonus
+  //============================================================
+
+  Future<void> verifyBonusMaterial(
+    String materialNumber,
+    String bonusMaterialNumber,
+  ) =>
+      _scrollUntilVisible(_bonusItem(materialNumber, bonusMaterialNumber));
+
+  void verifyBonusMaterialDescription(
+    String materialNumber,
+    String bonusMaterialNumber,
+    String text,
+  ) {
+    expect(
+      find.descendant(
+        of: _bonusItem(materialNumber, bonusMaterialNumber),
+        matching: find.byWidgetPredicate(
+          (widget) =>
+              widget.key == WidgetKeys.cartItemBonusMaterialDescription &&
+              widget is Text &&
+              widget.data == text,
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyBonusMaterialImage(
+    String materialNumber,
+    String bonusMaterialNumber,
+  ) {
+    expect(
+      find.descendant(
+        of: _bonusItem(materialNumber, bonusMaterialNumber),
+        matching: find.byType(CustomImage),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyBonusMaterialQty(
+    String materialNumber,
+    String bonusMaterialNumber,
+    int qty,
+  ) {
+    final qtyLabel = find.descendant(
+      of: _bonusItem(materialNumber, bonusMaterialNumber),
+      matching: find.byKey(WidgetKeys.cartItemBonusQty),
+    );
+    expect(tester.widget<Text>(qtyLabel).data, contains(qty.toString()));
+  }
+
+  void verifyBonusMaterialFreeLabel(
+    String materialNumber,
+    String bonusMaterialNumber,
+  ) {
+    expect(
+      find.descendant(
+        of: _bonusItem(materialNumber, bonusMaterialNumber),
+        matching: find.byKey(WidgetKeys.cartItemBonusFreeLabel),
+      ),
+      findsNWidgets(2),
+    );
+  }
+
+  void verifyBonusMaterialTag(
+    String materialNumber,
+    String bonusMaterialNumber,
+  ) {
+    expect(
+      find.descendant(
+        of: _bonusItem(materialNumber, bonusMaterialNumber),
+        matching: find.byType(BonusTag),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  Finder _bonusItem(String materialNumber, String bonusMaterialNumber) =>
+      find.byKey(WidgetKeys.cartItemBonus(materialNumber, bonusMaterialNumber));
 
   Future<void> _scrollUntilVisible(
     Finder finder, {

@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +62,9 @@ class BundleItemMaterial extends StatelessWidget {
     final configs = context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return InkWell(
+      key: WidgetKeys.orderHistoryBundleItemMaterial(
+        orderItem.materialNumber.displayMatNo,
+      ),
       onTap: () => _goToViewByItemDetail(context, orderHistory),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -118,6 +122,7 @@ class BundleItemMaterial extends StatelessWidget {
                       Text(
                         '${context.tr('Qty')}: ${orderItem.qty}',
                         style: Theme.of(context).textTheme.bodySmall,
+                        key: WidgetKeys.cartItemProductQty,
                       ),
                     ],
                   ),

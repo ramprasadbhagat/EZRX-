@@ -951,7 +951,7 @@ void main() {
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
-        final item = find.byKey(WidgetKeys.orderSuccessItem(0)).first;
+        final item = find.byKey(WidgetKeys.orderSuccessMaterialItem(0)).first;
         await tester.dragUntilVisible(
           item,
           find.byKey(WidgetKeys.scrollList),

@@ -25,14 +25,14 @@ class PriceSummaryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      key: WidgetKeys.showOrderSumaryListTile,
+      key: WidgetKeys.priceSummaryListTile,
       onTap: () => _showOrderSummary(context, cartState),
       dense: true,
       visualDensity: VisualDensity.compact,
       contentPadding: const EdgeInsets.symmetric(horizontal: 12),
       title: Text(
         '${cartState.totalCartCount} ${context.tr('items')}',
-        key: WidgetKeys.checkoutStickyTotalQty,
+        key: WidgetKeys.priceSummaryTotalQty,
         style: Theme.of(context).textTheme.titleSmall,
       ),
       trailing: Row(
@@ -43,7 +43,7 @@ class PriceSummaryTile extends StatelessWidget {
             children: [
               _DisplayPrice(
                 priceComponent: PriceComponent(
-                  key: WidgetKeys.checkoutStickyGrandTotal,
+                  key: WidgetKeys.priceSummaryGrandTotal,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartState.grandTotalHidePriceMaterial.toString(),
@@ -73,7 +73,7 @@ class PriceSummaryTile extends StatelessWidget {
       enableDrag: false,
       useSafeArea: true,
       builder: (_) => Padding(
-        key: WidgetKeys.orderPriceSummarySheet,
+        key: WidgetKeys.priceSummarySheet,
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,

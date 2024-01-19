@@ -24,6 +24,9 @@ class OrderBundleItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.cartItemBundleTile(
+        viewByOrdersGroup.parentId.getOrDefaultValue(''),
+      ),
       children: [
         CustomCard(
           showShadow: false,
@@ -73,24 +76,20 @@ class OrderBundleItem extends StatelessWidget {
                 buildWhen: (previous, current) =>
                     previous.orderHistory.orderHistoryItems !=
                     current.orderHistory.orderHistoryItems,
-                builder: (context, state) => state
-                        .orderHistory.orderHistoryItems.isEmpty
-                    ? const SizedBox.shrink()
-                    : Column(
-                        children: viewByOrdersGroup.viewByOrderItem
-                            .map(
-                              (orderHistoryDetailsOrderItem) =>
-                                  BundleItemMaterial(
-                                key: WidgetKeys.orderHistoryBundleItemMaterial(
-                                  orderHistoryDetailsOrderItem
-                                      .materialNumber.displayMatNo,
-                                ),
-                                orderItem: orderHistoryDetailsOrderItem,
-                                orderHistory: state.orderHistory,
-                              ),
-                            )
-                            .toList(),
-                      ),
+                builder: (context, state) =>
+                    state.orderHistory.orderHistoryItems.isEmpty
+                        ? const SizedBox.shrink()
+                        : Column(
+                            children: viewByOrdersGroup.viewByOrderItem
+                                .map(
+                                  (orderHistoryDetailsOrderItem) =>
+                                      BundleItemMaterial(
+                                    orderItem: orderHistoryDetailsOrderItem,
+                                    orderHistory: state.orderHistory,
+                                  ),
+                                )
+                                .toList(),
+                          ),
               ),
               Padding(
                 padding:
@@ -100,11 +99,13 @@ class OrderBundleItem extends StatelessWidget {
                   children: [
                     Text(
                       '${context.tr('Total qty')}: ${viewByOrdersGroup.totalMaterialCount}',
+                      key: WidgetKeys.cartItemBundleQty,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.neutralsBlack,
                           ),
                     ),
                     PriceComponent(
+                      key: WidgetKeys.cartItemBundleTotalPrice,
                       salesOrgConfig:
                           context.read<EligibilityBloc>().state.salesOrgConfigs,
                       price: viewByOrdersGroup.totalPrice.toString(),
@@ -163,6 +164,7 @@ class _BundleInformation extends StatelessWidget {
           ],
         ),
         Row(
+          key: WidgetKeys.cartItemBundleRate,
           children: [
             Text(
               '${context.tr('Purchase')} ${viewByOrdersGroup.bundleOffer.quantity} ${context.tr('or more for')} ',

@@ -145,7 +145,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             )
           : const SizedBox.shrink(),
       body: ListView(
-        key: WidgetKeys.productDetailList,
+        key: WidgetKeys.scrollList,
         controller: _scrollController,
         children: [
           const _ProductImageSection(),
@@ -489,6 +489,7 @@ class _FooterState extends State<_Footer> {
                   InfoLabel(
                     textValue:
                         context.tr('This material is currently suspended'),
+                    key: WidgetKeys.productDetailSuspended,
                     margin: const EdgeInsets.only(
                       top: 16,
                       bottom: 8,

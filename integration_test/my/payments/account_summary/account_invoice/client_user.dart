@@ -481,7 +481,7 @@ void main() {
     await invoiceRobot.searchWithKeyboardAction(invoiceId);
     await invoiceRobot.tapFirstItem();
     detailRobot.verifyPage();
-    detailRobot.verifyInvoiceId(invoiceId, invoiceStatus);
+    detailRobot.verifyInvoiceIdAndStatus(invoiceId, invoiceStatus);
     detailRobot.verifyCustomerCode(customerCode);
     detailRobot.verifyDeliveryTo(shipToCode);
     detailRobot.verifyOrderAddress(shipToAddress);

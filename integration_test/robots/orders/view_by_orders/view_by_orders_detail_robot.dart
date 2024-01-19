@@ -2,24 +2,24 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_summary_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
-class ViewByOrdersDetailRobot {
-  final WidgetTester tester;
+class ViewByOrdersDetailRobot extends CommonRobot {
+  ViewByOrdersDetailRobot(WidgetTester tester) : super(tester);
 
-  ViewByOrdersDetailRobot(this.tester);
-
-  final scrollView = find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
   final buyAgainButton = find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+  late Finder _verifyingItem;
 
   void verifyPage() {
     expect(find.byType(ViewByOrderDetailsPage), findsOneWidget);
   }
 
-  void verifyOrderIdVisible(String orderId) {
+  void verifyOrderId(String orderId) {
     expect(
       find.byWidgetPredicate(
         (widget) =>
@@ -31,28 +31,28 @@ class ViewByOrdersDetailRobot {
     );
   }
 
-  void verifyOrderDateVisible() {
+  void verifyOrderDate() {
     expect(
       find.byKey(WidgetKeys.viewByOrderDetailOrderDate),
       findsOneWidget,
     );
   }
 
-  void verifyPoReferenceVisible(String text) {
+  void verifyPoReference(String text) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('PO reference'.tr(), text)),
       findsOneWidget,
     );
   }
 
-  void verifyDeliveryInstructionsVisible(String text) {
+  void verifyDeliveryInstructions(String text) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('Delivery instructions'.tr(), text)),
       findsOneWidget,
     );
   }
 
-  void verifyOrderAddressVisible(String address) {
+  void verifyOrderAddress(String address) {
     expect(
       find.byWidgetPredicate(
         (widget) =>
@@ -64,7 +64,7 @@ class ViewByOrdersDetailRobot {
     );
   }
 
-  void verifyCustomerCodeVisible(String customerCode) {
+  void verifyCustomerCode(String customerCode) {
     expect(
       find.byWidgetPredicate(
         (widget) =>
@@ -76,7 +76,7 @@ class ViewByOrdersDetailRobot {
     );
   }
 
-  void verifyDeliveryToVisible(String shipToCode) {
+  void verifyDeliveryTo(String shipToCode) {
     expect(
       find.byWidgetPredicate(
         (widget) =>
@@ -88,15 +88,10 @@ class ViewByOrdersDetailRobot {
     );
   }
 
-  Future<void> dragToVerifySummaryVisible() async {
-    await tester.dragUntilVisible(
-      find.byType(OrderSummarySection),
-      scrollView,
-      const Offset(0.0, -200),
-    );
-  }
+  Future<void> dragToVerifySummary() =>
+      scrollEnsureFinderVisible(find.byType(OrderSummarySection));
 
-  void verifySubTotalVisible(String value) {
+  void verifySubTotal(String value) {
     final subTotalWidget = find.byKey(WidgetKeys.viewByOrderSubtotalKey);
     expect(subTotalWidget, findsOneWidget);
     expect(
@@ -108,7 +103,7 @@ class ViewByOrdersDetailRobot {
     );
   }
 
-  void verifyGrandTotalVisible(String value) {
+  void verifyGrandTotal(String value) {
     final subTotalWidget = find.byKey(WidgetKeys.viewByOrderGrandTotalKey);
     expect(subTotalWidget, findsOneWidget);
     expect(
@@ -120,49 +115,134 @@ class ViewByOrdersDetailRobot {
     );
   }
 
-  Future<void> dragToVerifyItemsSectionVisible() async {
-    await tester.dragUntilVisible(
-      find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
-      scrollView,
-      const Offset(0.0, -200),
-    );
+  Future<void> dragToVerifyItemsSection() => scrollEnsureFinderVisible(
+        find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+      );
+
+  Future<void> startVerifyMaterial(
+    String materialNumber, {
+    bool isBonus = false,
+  }) async {
+    final productWidget =
+        find.byKey(WidgetKeys.viewByOrderDetailItem(materialNumber, isBonus));
+    await tester.pumpUntilVisible(productWidget);
+    await scrollEnsureFinderVisible(productWidget);
+    _verifyingItem = productWidget;
+    await Future.delayed(const Duration(seconds: 4));
   }
 
-  Future<void> verifyMaterialVisible(
-    String materialNumber,
-    int qty,
-    String price,
-  ) async {
-    final productWidget =
-        find.byKey(WidgetKeys.viewByOrderDetailItem(materialNumber, false));
-    await tester.pumpUntilVisible(productWidget);
-    expect(productWidget, findsOneWidget);
-    expect(
-      tester
-          .widget<Text>(
-            find.descendant(
-              of: productWidget,
-              matching: find.byKey(WidgetKeys.cartItemProductQty),
-            ),
-          )
-          .data,
-      contains(qty.toString()),
+  void verifyMaterialTotalPrice(String price, {bool isFree = false}) => expect(
+        find.descendant(
+          of: find.descendant(
+            of: _verifyingItem,
+            matching: find.byKey(WidgetKeys.cartItemProductTotalPrice),
+          ),
+          matching: find.text(isFree ? 'FREE' : price, findRichText: true),
+        ),
+        findsOneWidget,
+      );
+
+  Future<void> startVerifyBundle(String bundleNumber) async {
+    final bundle = find.byKey(WidgetKeys.cartItemBundleTile(bundleNumber));
+    _verifyingItem = bundle;
+    await tester.pumpUntilVisible(find.byType(OrderBundleItem));
+    await scrollEnsureFinderVisible(bundle);
+    expect(bundle, findsOneWidget);
+  }
+
+  void verifyBundleRate(int qty, String rate) {
+    final rateWidget = find.descendant(
+      of: _verifyingItem,
+      matching: find.byKey(WidgetKeys.cartItemBundleRate),
     );
     expect(
       find.descendant(
-        of: find.descendant(
-          of: productWidget,
-          matching: find.byKey(WidgetKeys.cartItemProductTotalPrice),
-        ),
-        matching: find.text(price, findRichText: true),
+        of: rateWidget,
+        matching: find.textContaining(qty.toString()),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: rateWidget,
+        matching: find.textContaining(rate, findRichText: true),
       ),
       findsOneWidget,
     );
   }
 
-  void verifyBuyAgainButtonVisible() {
-    expect(buyAgainButton, findsOneWidget);
+  void verifyBundleTotalPrice(String price) {
+    final priceWidget = find.descendant(
+      of: _verifyingItem,
+      matching: find.byKey(WidgetKeys.cartItemBundleTotalPrice),
+    );
+    expect(
+      find.descendant(
+        of: priceWidget,
+        matching: find.textContaining(price, findRichText: true),
+      ),
+      findsOneWidget,
+    );
   }
+
+  void verifyBundleTotalQty(int qty) {
+    final widget = tester.widget<Text>(
+      find.descendant(
+        of: _verifyingItem,
+        matching: find.byKey(WidgetKeys.cartItemBundleQty),
+      ),
+    );
+    expect(widget.data, contains(qty.toString()));
+  }
+
+  Future<void> startVerifyBundleItem(
+    String bundleNumber,
+    String materialNumber,
+  ) async {
+    final bundle = find.byKey(WidgetKeys.cartItemBundleTile(bundleNumber));
+    final item = find.descendant(
+      of: bundle,
+      matching:
+          find.byKey(WidgetKeys.orderHistoryBundleItemMaterial(materialNumber)),
+    );
+    await tester.pumpUntilVisible(item);
+    await scrollEnsureFinderVisible(item);
+    _verifyingItem = item;
+  }
+
+  Future<void> tapVerifyingItem() async {
+    await tester.tap(_verifyingItem);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyQty(int qty) {
+    final widget = find.descendant(
+      of: _verifyingItem,
+      matching: find.byKey(WidgetKeys.cartItemProductQty),
+    );
+    expect(
+      tester.widget<Text>(widget).data,
+      contains(qty.toString()),
+    );
+  }
+
+  void verifyOfferTag() => expect(
+        find.descendant(
+          of: _verifyingItem,
+          matching: find.byKey(WidgetKeys.offerTag),
+        ),
+        findsOneWidget,
+      );
+
+  void verifyBonusTag() => expect(
+        find.descendant(
+          of: _verifyingItem,
+          matching: find.byKey(WidgetKeys.commonTileItemStatusLabel),
+        ),
+        findsOneWidget,
+      );
+
+  void verifyBuyAgainButton() => expect(buyAgainButton, findsOneWidget);
 
   Future<void> tapBuyAgainButton() async {
     await tester.tap(buyAgainButton);

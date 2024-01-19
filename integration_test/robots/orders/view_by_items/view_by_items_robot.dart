@@ -20,6 +20,7 @@ class ViewByItemsRobot {
   final productQty = find.byKey(WidgetKeys.commonTileItemQty);
   final orderStatus = find.byKey(WidgetKeys.orderItemStatusKey);
   final bonusLabel = find.byKey(WidgetKeys.commonTileItemStatusLabel);
+  final offerTag = find.byKey(WidgetKeys.offerTag);
 
   void verifyOrders() {
     verifyOrderGroups();
@@ -79,6 +80,15 @@ class ViewByItemsRobot {
 
   Future<void> tapFirstBonusLabel() async {
     await tester.tap(bonusLabel.first);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyOfferTag() {
+    expect(offerTag, findsAtLeastNWidgets(1));
+  }
+
+  Future<void> tapFirstOfferTag() async {
+    await tester.tap(offerTag.first);
     await tester.pumpAndSettle();
   }
 
@@ -184,6 +194,20 @@ class ViewByItemsRobot {
 
   Future<void> tapFirstOrder() async {
     await tester.tap(orderItems.first);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapFirstOrderWithMaterial(String materialNumber) async {
+    await tester.tap(
+      find
+          .byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.commonTileItemLabel &&
+                widget is Text &&
+                (widget.data ?? '').contains(materialNumber),
+          )
+          .first,
+    );
     await tester.pumpAndSettle();
   }
 }

@@ -136,7 +136,8 @@ class _BundleDetails extends StatelessWidget {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
           previous.productDetailAggregate.materialInfo !=
-          current.productDetailAggregate.materialInfo,
+              current.productDetailAggregate.materialInfo ||
+          previous.isDetailAndStockFetching != current.isDetailAndStockFetching,
       builder: (context, state) {
         final material = state.productDetailAggregate.materialInfo;
 

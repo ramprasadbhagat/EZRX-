@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -12,12 +13,22 @@ class FilterSortProductRobot extends CommonRobot {
 
   FilterSortProductRobot(WidgetTester tester) : super(tester);
 
+  void verifySheet({bool isVisible = true}) => expect(
+        find.byType(ProductFilterPage),
+        isVisible ? findsOneWidget : findsNothing,
+      );
+
   void verifyCheckboxCheckedShowProduct(String checkbox, bool isChecked) {
     final checkboxWidget = find.byKey(WidgetKeys.showProductCheckbox(checkbox));
     expect(
       tester.widget<CheckboxListTile>(checkboxWidget).value,
       isChecked,
     );
+  }
+
+  Future<void> tapProductTypeCheckbox(String checkbox) async {
+    await tester.tap(find.byKey(WidgetKeys.showProductCheckbox(checkbox)));
+    await tester.pumpAndSettle();
   }
 
   Future<void> chooseSortProductsBy(String sortType) async {
@@ -52,7 +63,7 @@ class FilterSortProductRobot extends CommonRobot {
               )
               .data ??
           ' ',
-      '$countSelected selected',
+      '$countSelected ${'selected'.tr()}',
     );
   }
 
@@ -64,7 +75,7 @@ class FilterSortProductRobot extends CommonRobot {
               )
               .data ??
           ' ',
-      '$countSelected selected',
+      '$countSelected ${'selected'.tr()}',
     );
   }
 

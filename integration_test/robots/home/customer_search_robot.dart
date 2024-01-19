@@ -11,7 +11,7 @@ class CustomerSearchRobot {
   final cancelChangeAddress = find.byKey(WidgetKeys.cancelButton);
   final customerCodeSearchField = find.byKey(WidgetKeys.searchBar);
 
-  void verify() {
+  void verifyPage() {
     final customerSearchPage = find.byKey(WidgetKeys.customerSearchPage);
     expect(customerSearchPage, findsOneWidget);
   }

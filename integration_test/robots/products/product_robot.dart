@@ -2,25 +2,35 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../common/common_robot.dart';
+import '../common/extension.dart';
 
 class ProductRobot extends CommonRobot {
   ProductRobot(WidgetTester tester) : super(tester);
 
-  final materialCart = find.byKey(WidgetKeys.materialListMaterialCard);
+  final materialCard = find.byKey(WidgetKeys.materialListMaterialCard);
+  final bundleCard = find.byKey(WidgetKeys.materialListBundleCard);
   final nameCart = find.byKey(WidgetKeys.nameCart);
   final priceComponent = find.byKey(WidgetKeys.priceComponent);
   final labelFilterFavorites = find.byKey(WidgetKeys.favoritesChoiceChip);
-
-  // Search bar
   final searchProductField = find.byKey(WidgetKeys.searchProductField);
-  final txtSearchProductField = find.byKey(WidgetKeys.txtSearchProductField);
 
   void verifyPageVisible() {
     expect(find.byKey(WidgetKeys.materialListPage), findsOneWidget);
   }
 
-  void verifyMaterialCartVisible() {
-    expect(materialCart.first, findsOneWidget);
+  void verifyMaterial() => expect(materialCard, findsAtLeastNWidgets(1));
+
+  void verifyBundle() => expect(bundleCard, findsAtLeastNWidgets(1));
+
+  void verifyOnOfferLabel() {
+    final cardCount = materialCard.evaluate().length;
+    expect(
+      find.descendant(
+        of: materialCard,
+        matching: find.byKey(WidgetKeys.offerTag),
+      ),
+      findsNWidgets(cardCount),
+    );
   }
 
   void verifyCartButtonVisible() {
@@ -68,16 +78,14 @@ class ProductRobot extends CommonRobot {
     expect(listNameProduct, sortedList);
   }
 
-  void verifyProductFilterMatched(String nameProduct) {
+  void verifyProductFilter(String nameProduct, {required bool matched}) {
     final listNameProduct =
         tester.widgetList<Text>(nameCart).map((e) => e.data);
-    expect(listNameProduct.first, nameProduct);
-  }
-
-  void verifyNotProductFilterMatched(String nameProduct) {
-    final listNameProduct =
-        tester.widgetList<Text>(nameCart).map((e) => e.data);
-    expect(listNameProduct.first != nameProduct, true);
+    if (matched) {
+      expect(listNameProduct.first, nameProduct);
+    } else {
+      expect(listNameProduct.first != nameProduct, true);
+    }
   }
 
   void verifyManufacturerMaterialFilterMatched(
@@ -100,8 +108,13 @@ class ProductRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> openDetailFirstProduct() async {
-    await tester.tap(materialCart.first);
+  Future<void> tapFirstMaterial() async {
+    await tester.tap(materialCard.first);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapFirstBundle() async {
+    await tester.tap(bundleCard.first);
     await tester.pumpAndSettle();
   }
 
@@ -110,10 +123,22 @@ class ProductRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapToProductByIndex(int index) async {
-    final productIndex =
-        find.byKey(WidgetKeys.materialListMaterialCard).at(index);
-    await tester.tap(productIndex);
-    await tester.pumpAndSettle();
+  Future<void> setProductFavoriteStatus(int index, bool isFavorite) async {
+    final favoriteIcon = find.byKey(WidgetKeys.favoritesIcon).at(index);
+    final statusFavorite = find.descendant(
+      of: materialCard.at(index),
+      matching: find.byKey(WidgetKeys.statusFavoriteIcon(isFavorite)),
+    );
+    if (statusFavorite.evaluate().isEmpty) {
+      await tester.tap(favoriteIcon);
+      await tester.pumpAndSettle();
+    } else {
+      await tester.tap(favoriteIcon);
+      await tester.pumpAndSettle();
+      await tester.tap(favoriteIcon);
+      await tester.pumpAndSettle();
+    }
+
+    await tester.pumpUntilVisible(statusFavorite);
   }
 }

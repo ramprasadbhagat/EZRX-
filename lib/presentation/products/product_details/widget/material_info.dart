@@ -198,7 +198,6 @@ class _ExpiryDateWidget extends StatelessWidget {
       children: [
         const SizedBox(height: 7),
         BalanceTextRow(
-          key: WidgetKeys.productDetailExpiryDate,
           keyText: context.tr('Expiry'),
           valueText: expiryDateText,
           valueFlex: 1,

@@ -10,10 +10,8 @@ class HomeRobot {
   final WidgetTester tester;
   HomeRobot(this.tester);
 
-  final customerCodeSelect = find.byKey(WidgetKeys.customerCodeSelector);
   final moreTab = find.byKey(WidgetKeys.moreTab);
   final searchBar = find.byKey(WidgetKeys.homeProductSearchBar);
-  final customerSelector = find.byKey(WidgetKeys.customerCodeSelector);
   final miniCart = find.byType(CartButton);
   final quickAccessMenu = find.byType(QuickAccessMenuPanel);
   final banner = find.byType(CarouselBanner);
@@ -51,7 +49,7 @@ class HomeRobot {
   final productManufactured = find.byKey(WidgetKeys.manufacturerMaterials);
   final productPrice = find.byKey(WidgetKeys.priceComponent);
   final productNumber = find.byKey(WidgetKeys.materialNumberText);
-  final productFavouriteIcon = find.byKey(WidgetKeys.favouriteIcon);
+  final productFavoriteIcon = find.byKey(WidgetKeys.favoritesIcon);
   final searchByProductField = find.byKey(WidgetKeys.searchProductField);
   final listView = find.byType(SingleChildScrollView).last;
 
@@ -93,15 +91,6 @@ class HomeRobot {
     final iconArrow =
         find.byKey(WidgetKeys.sectionTileIcon('Announcements'.tr()));
     await tester.tap(iconArrow);
-    await tester.pumpAndSettle();
-  }
-
-  void findCustomerCodeSelector() {
-    expect(customerCodeSelect, findsWidgets);
-  }
-
-  Future<void> tapCustomerCodeSelector() async {
-    await tester.tap(customerCodeSelect);
     await tester.pumpAndSettle();
   }
 
@@ -347,7 +336,7 @@ class HomeRobot {
   }
 
   void findProductFavouriteIcon() {
-    expect(productFavouriteIcon, findsWidgets);
+    expect(productFavoriteIcon, findsWidgets);
   }
 
   void verifyProductNumber() {

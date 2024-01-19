@@ -86,7 +86,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
                 : AnnouncementBanner(
                     currentPath: context.router.currentPath,
                     child: ListView(
-                      key: WidgetKeys.viewByItemsOrderDetailPage,
+                      key: WidgetKeys.scrollList,
                       children: <Widget>[
                         ViewByItemDetailsHeaderSection(
                           orderHistoryItem: state.orderHistoryItem,

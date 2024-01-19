@@ -316,8 +316,7 @@ void main() {
         WidgetKeys.loaderImage,
       );
       expect(loaderImage, findsOneWidget);
-      final viewByOrderDetailsPageListView =
-          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final viewByOrderDetailsPageListView = find.byKey(WidgetKeys.scrollList);
       expect(viewByOrderDetailsPageListView, findsNothing);
     });
 
@@ -605,7 +604,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       await tester.drag(
-        find.byKey(WidgetKeys.viewByItemsOrderDetailPage),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0, -500),
       );
       await tester.pump();
@@ -623,7 +622,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       await tester.drag(
-        find.byKey(WidgetKeys.viewByItemsOrderDetailPage),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0, -300),
       );
       await tester.pump();

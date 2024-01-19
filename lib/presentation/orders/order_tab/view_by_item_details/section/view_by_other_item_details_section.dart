@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
@@ -28,7 +29,7 @@ class OtherItemDetailsSection extends StatelessWidget {
       builder: (context, state) {
         final eligibilityState = context.read<EligibilityBloc>().state;
 
-        return state.orderHistory.isOthersOrderItemsSectionVisible
+        return state.otherItems.isNotEmpty
             ? Padding(
                 padding: const EdgeInsets.only(
                   top: 12.0,
@@ -39,6 +40,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                   initiallyExpanded: true,
                   title: Text(
                     context.tr('Other items in this order'),
+                    key: WidgetKeys.viewByItemDetailExpandButton,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   children: [
@@ -66,8 +68,11 @@ class OtherItemDetailsSection extends StatelessWidget {
                                       ),
                                       Column(
                                         children: e.orderHistoryItem
-                                            .map(
-                                              (e) => CommonTileItem(
+                                            .mapIndexed(
+                                              (index, e) => CommonTileItem(
+                                                key: WidgetKeys.genericKey(
+                                                  key: index.toString(),
+                                                ),
                                                 label: e.combinationCode(
                                                   showGMCPart: eligibilityState
                                                       .salesOrgConfigs

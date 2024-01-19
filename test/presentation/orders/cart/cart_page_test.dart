@@ -1393,7 +1393,7 @@ void main() {
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
-        final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        final grandTotal = find.byKey(WidgetKeys.priceSummaryGrandTotal);
         expect(grandTotal, findsOneWidget);
         expect(
           find.text(
@@ -2378,11 +2378,11 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
-        final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        final grandTotal = find.byKey(WidgetKeys.priceSummaryGrandTotal);
         expect(grandTotal, findsOneWidget);
         await tester.tap(grandTotal);
         await tester.pumpAndSettle();
-        expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
+        expect(find.byKey(WidgetKeys.priceSummarySheet), findsOneWidget);
       });
 
       testWidgets('Covid material test', (tester) async {
@@ -2445,11 +2445,11 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
-        final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        final grandTotal = find.byKey(WidgetKeys.priceSummaryGrandTotal);
         expect(grandTotal, findsOneWidget);
         await tester.tap(grandTotal);
         await tester.pumpAndSettle();
-        expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
+        expect(find.byKey(WidgetKeys.priceSummarySheet), findsOneWidget);
         expect(find.byKey(WidgetKeys.checkoutSummarySubTotal), findsOneWidget);
         expect(
           find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
@@ -3031,7 +3031,7 @@ void main() {
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
 
-          final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+          final grandTotal = find.byKey(WidgetKeys.priceSummaryGrandTotal);
           expect(grandTotal, findsOneWidget);
           await tester.tap(grandTotal);
           await tester.pumpAndSettle();
@@ -3084,7 +3084,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
-        final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        final grandTotal = find.byKey(WidgetKeys.priceSummaryGrandTotal);
         expect(grandTotal, findsOneWidget);
         expect(
           find.text(
@@ -3095,7 +3095,7 @@ void main() {
         );
         await tester.tap(grandTotal);
         await tester.pumpAndSettle();
-        expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
+        expect(find.byKey(WidgetKeys.priceSummarySheet), findsOneWidget);
       });
 
       testWidgets(
@@ -3126,7 +3126,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
-        final grandTotal = find.byKey(WidgetKeys.checkoutStickyGrandTotal);
+        final grandTotal = find.byKey(WidgetKeys.priceSummaryGrandTotal);
         expect(grandTotal, findsOneWidget);
         expect(
           find.text(
@@ -3137,7 +3137,7 @@ void main() {
         );
         await tester.tap(grandTotal);
         await tester.pumpAndSettle();
-        expect(find.byKey(WidgetKeys.orderPriceSummarySheet), findsOneWidget);
+        expect(find.byKey(WidgetKeys.priceSummarySheet), findsOneWidget);
       });
 
       testWidgets(

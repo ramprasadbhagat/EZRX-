@@ -77,7 +77,6 @@ class MaterialGridItem extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: FavouriteIcon(
-                        key: WidgetKeys.favouriteIcon,
                         isFavourite: materialInfo.isFavourite,
                         onTap: () {
                           if (!materialInfo.isFavourite) {

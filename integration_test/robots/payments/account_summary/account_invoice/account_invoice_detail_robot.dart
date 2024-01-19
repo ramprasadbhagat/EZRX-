@@ -15,12 +15,20 @@ class AccountInvoiceDetailRobot {
     expect(find.byType(InvoiceDetailsPage), findsOneWidget);
   }
 
-  void verifyInvoiceId(String id, String status) {
+  void verifyInvoiceIdAndStatus(String id, String status) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('${'Invoice'.tr()} #$id', status)),
       findsOneWidget,
     );
   }
+
+  void verifyInvoiceId(String id) => expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.invoiceDetailIdAndStatus),
+          matching: find.textContaining(id, findRichText: true),
+        ),
+        findsOneWidget,
+      );
 
   void verifyCustomerCode(String customerCode) {
     expect(

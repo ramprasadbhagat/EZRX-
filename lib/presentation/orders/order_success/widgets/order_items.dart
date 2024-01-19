@@ -43,7 +43,7 @@ class _MaterialItemSection extends StatelessWidget {
                       ...item.viewByOrderItem
                           .mapIndexed(
                             (index, e) => _MaterialItem(
-                              key: WidgetKeys.orderSuccessItem(index),
+                              key: WidgetKeys.orderSuccessMaterialItem(index),
                               orderItem: e,
                               viewByItemOrderHistory: state.orderHistory,
                             ),
@@ -120,7 +120,7 @@ class _MaterialItem extends StatelessWidget {
         children: [
           Text(
             '${'Qty'.tr()}: ${orderItem.qty}',
-            key: WidgetKeys.orderSuccessItemQty,
+            key: WidgetKeys.cartItemProductQty,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: ZPColors.black,
                 ),

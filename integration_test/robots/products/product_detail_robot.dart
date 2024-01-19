@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/show_offer_dialog_widget.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
+import 'package:ezrxmobile/presentation/products/product_details/widget/similar_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -17,6 +18,10 @@ class ProductDetailRobot extends CommonRobot {
   final materialDetailsInfoTile =
       find.byKey(WidgetKeys.materialDetailsInfoTile);
   final favoritesIcon = find.byKey(WidgetKeys.favoritesIcon);
+  final relatedMaterialCard = find.byKey(WidgetKeys.materialCard);
+  final addToCartSuccessMessage =
+      find.byKey(WidgetKeys.materialDetailsAddToCartSnackBar);
+  final body = find.byKey(WidgetKeys.bodyContentProductDetail);
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
@@ -31,9 +36,25 @@ class ProductDetailRobot extends CommonRobot {
         '';
   }
 
+  void verifyFavorite(bool value) => expect(
+        find.descendant(
+          of: body,
+          matching: find.byKey(WidgetKeys.statusFavoriteIcon(value)),
+        ),
+        findsOneWidget,
+      );
+
+  void verifyOnOfferLabel() => expect(
+        find.descendant(
+          of: body,
+          matching: find.byKey(WidgetKeys.offerTag),
+        ),
+        findsOneWidget,
+      );
+
   Future<void> setProductToFavoriteList(bool isFavorite) async {
     final statusFavorite = find.descendant(
-      of: find.byKey(WidgetKeys.bodyContentProductDetail),
+      of: body,
       matching: find.byKey(WidgetKeys.statusFavoriteIcon(isFavorite)),
     );
     if (statusFavorite.evaluate().isEmpty) {
@@ -156,23 +177,27 @@ class ProductDetailRobot extends CommonRobot {
     );
   }
 
-  void verifyBatchLabelDisplayed(String value) {
-    expect(
-      find.byKey(WidgetKeys.balanceTextRow('Batch'.tr(), value)),
-      findsOneWidget,
-    );
-  }
-
-  void verifyExpiryLabelDisplayed() {
-    expect(
-      find.byKey(WidgetKeys.productDetailExpiryDate),
-      findsOneWidget,
-    );
+  Future<void> changeQty(int value) async {
+    final input = find.byKey(WidgetKeys.materialDetailsQuantityInput);
+    await tester.tap(input);
+    await tester.enterText(input, value.toString());
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapAddToCart() async {
     await tester.tap(addToCartButton);
-    await tester.pumpAndSettle();
+    await tester.pumpUntilVisible(find.byKey(WidgetKeys.customSnackBar));
+  }
+
+  void verifyAddToCartSuccessMessage({bool isVisible = true}) => expect(
+        addToCartSuccessMessage,
+        isVisible ? findsOneWidget : findsNothing,
+      );
+
+  void verifyAddToCartFailureMessage() {
+    verifyAddToCartSuccessMessage(isVisible: false);
+    expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
   }
 
   Future<void> tapBackButton() async {
@@ -180,8 +205,14 @@ class ProductDetailRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyMultipleImageMaterialDisplayed() {
-    expect(find.byKey(WidgetKeys.materialDetailsCarouselImage), findsWidgets);
+  Future<void> verifyMultipleImages() async {
+    await tester.pumpUntilVisible(
+      find.byKey(WidgetKeys.genericKey(key: 'selected1false')),
+    );
+    expect(
+      find.byKey(WidgetKeys.materialDetailsCarouselImage),
+      findsAtLeastNWidgets(2),
+    );
   }
 
   void verifyImageMaterialSelected(int index, bool selected) {
@@ -240,8 +271,16 @@ class ProductDetailRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.closeButton), findsOneWidget);
   }
 
-  void verifyRelateProductDisplayed() {
-    final materialCard = find.byKey(WidgetKeys.materialCard);
-    expect(materialCard, findsWidgets);
+  Future<void> verifyRelateProductDisplayed() async {
+    await scrollEnsureFinderVisible(find.byType(SimilarProduct));
+    expect(relatedMaterialCard, findsWidgets);
   }
+
+  Future<void> tapFirstRelateProduct() async {
+    await tester.tap(relatedMaterialCard.first);
+    await tester.pumpAndSettle();
+  }
+
+  void verifySuspendedBanner() =>
+      expect(find.byKey(WidgetKeys.productDetailSuspended), findsOneWidget);
 }

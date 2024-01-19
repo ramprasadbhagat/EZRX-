@@ -25,6 +25,9 @@ class CheckoutMaterialItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.cartItemProductTile(
+        cartItem.materialInfo.materialNumber.displayMatNo,
+      ),
       showBorder: true,
       margin: const EdgeInsets.all(15),
       child: Column(

@@ -125,7 +125,7 @@ class CartRobot {
     expect(
       find.byWidgetPredicate(
         (widget) =>
-            widget.key == WidgetKeys.checkoutStickyTotalQty &&
+            widget.key == WidgetKeys.priceSummaryTotalQty &&
             widget is Text &&
             (widget.data ?? '').contains(qty.toString()),
       ),
@@ -153,11 +153,16 @@ class CartRobot {
   void verifyCartTotalPrice(String price) {
     expect(
       find.descendant(
-        of: find.byKey(WidgetKeys.checkoutStickyGrandTotal),
+        of: find.byKey(WidgetKeys.priceSummaryGrandTotal),
         matching: find.textContaining(price, findRichText: true),
       ),
       findsOneWidget,
     );
+  }
+
+  Future<void> tapShowPriceSummary() async {
+    await tester.tap(find.byKey(WidgetKeys.priceSummaryListTile));
+    await tester.pumpAndSettle();
   }
 
   //============================================================

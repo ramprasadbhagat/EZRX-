@@ -31,7 +31,6 @@ class WidgetKeys {
   static const Key confirmBottomSheetConfirmButton =
       Key('confirmBottomSheetConfirmButton');
   static const Key addToCartErrorSection = Key('addToCartErrorSection');
-  static const Key productDetailList = Key('productDetailList');
   static const Key moreTapListContent = Key('moreTapListContent');
   static const Key settingTile = Key('settingTile');
   static const Key versionDisplay = Key('versionDisplay');
@@ -44,6 +43,7 @@ class WidgetKeys {
       Key('addressInfoSectionDeliveryToLabel');
   static Key statusTracker(String status) => Key('statusTracker$status');
   static const Key offerTag = Key('offerTag');
+  static const Key bundleTag = Key('bundleTag');
   static const Key priceTextData = Key('priceTextData');
   static const Key priceTextTitle = Key('priceTextTitle');
   static const Key radioPaymentGateway = Key('radioPaymentGateway');
@@ -229,7 +229,6 @@ class WidgetKeys {
   static Key sortByRadio(String type) => Key('radioSort$type');
   static const Key clearSearchFilter = Key('clearSearchFilter');
   static const Key searchProductField = Key('searchProductField');
-  static const Key txtSearchProductField = Key('txtSearchProductField');
   static const Key favoritesIcon = Key('favoritesIcon');
   static const Key suggestedProductsTile = Key('suggestedProductsTile');
   static const Key suggestedManufacturer = Key('suggestedManufacturer');
@@ -578,6 +577,7 @@ class WidgetKeys {
       Key('cartItemBonus$materialNumber$bonusMaterialNumber');
   static const Key cartItemBonusMaterialDescription =
       Key('cartItemBonusMaterialDescription');
+  static const Key cartItemBonusQty = Key('cartItemBonusQty');
   static const Key cartItemBonusFreeLabel = Key('cartItemBonusFreeLabel');
   static const Key bonusSampleSheet = Key('bonusSampleBottomSheet');
   static const Key bonusSampleSheetCloseButton =
@@ -633,13 +633,13 @@ class WidgetKeys {
   static const Key checkoutSummaryTotalSaving =
       Key('checkoutSummaryTotalSaving');
   static const Key checkoutItemsTotalQty = Key('checkoutItemsTotalQty');
-  static const Key checkoutStickyGrandTotal = Key('checkoutStickyGrandTotal');
-  static const Key checkoutStickyTotalQty = Key('checkoutStickyTotalQty');
-  static const Key orderPriceSummarySheet = Key('orderPriceSummarySheet');
+  static const Key priceSummaryGrandTotal = Key('checkoutStickyGrandTotal');
+  static const Key priceSummaryTotalQty = Key('checkoutStickyTotalQty');
+  static const Key priceSummarySheet = Key('orderPriceSummarySheet');
+  static const Key priceSummaryListTile = Key('showOrderSummaryListTile');
   static const Key quantityAndPrice = Key('quantityAndPrice');
   static const Key productImageSection = Key('productImageSection');
   static const Key bonusProductDetail = Key('bonusProductDetail');
-  static const Key showOrderSumaryListTile = Key('showOrderSumaryListTile');
 
   //============================================================
   //  Material List
@@ -656,7 +656,6 @@ class WidgetKeys {
   static Key materialListBundleMaterial(String materialNumber) =>
       Key('bundleMaterialCard$materialNumber');
   static const Key materialNumberText = Key('materialNumberText');
-  static const Key favouriteIcon = Key('favouriteIcon');
   static const Key covidLabel = Key('covidLabel');
   //============================================================
   //  ProductSearch Keys
@@ -667,6 +666,9 @@ class WidgetKeys {
   static const Key materialFavoriteButton = Key('materialFavoriteButton');
   static Key searchedProduct(String materialNumber) =>
       Key('searchedProduct$materialNumber');
+  static Key searchProductHistory = const Key('searchProductHistory');
+  static Key deleteProductHistory = const Key('deleteProductHistory');
+  static Key noProductHistory = const Key('noProductHistory');
   static const Key searchBar = Key('searchBar');
   static const Key scanProductInfoDialog = Key('scanProductInfoDialog');
   static const Key scanFromGallery = Key('scanFromGallery');
@@ -727,8 +729,8 @@ class WidgetKeys {
   static const Key orderSummarySmallFee = Key('orderSummarySmallFee');
   static const Key orderSummaryManualFee = Key('orderSummaryManualFee');
   static const Key orderSuccessGrandTotal = Key('orderSuccessGrandTotal');
-  static Key orderSuccessItem(int index) => Key('orderSuccessItem$index');
-  static const Key orderSuccessItemQty = Key('orderSuccessItemQty');
+  static Key orderSuccessMaterialItem(int index) =>
+      Key('orderSuccessItem$index');
   static const Key orderSuccessItemUnitPrice = Key('orderSuccessItemUnitPrice');
   static const Key orderSuccessItemTotalPrice =
       Key('orderSuccessItemTotalPrice');
@@ -743,8 +745,6 @@ class WidgetKeys {
 
   static const Key fromOrderDateField = Key('fromOrderDateField');
   static const Key toOrderDateField = Key('toOrderDateField');
-  static const Key viewByOrderDetailsPageListView =
-      Key('viewByOrderDetailsPageListView');
   static const Key poAttachmentTile = Key('poAttachmentTile');
   static const Key orderHistoryBundleInformation =
       Key('orderHistoryBundleInformation');
@@ -788,7 +788,6 @@ class WidgetKeys {
   static const Key materialDetailsCarouselImage =
       Key('materialDetailsCarouselImage');
   static const Key customSnackBarCloseIcon = Key('customSnackBarCloseIcon');
-  static const Key productDetailExpiryDate = Key('productDetailExpiryDate');
   static const Key productDetailQuantityAddKey =
       Key('productDetailQuantityAddKey');
   static const Key productDetailQuantityDeleteKey =
@@ -798,12 +797,18 @@ class WidgetKeys {
   static const Key availableOfferColumnKey = Key('availableOfferColumn');
   static const Key materialInfoDialog = Key('materialInfoDialog');
   static const Key bodyContentProductDetail = Key('bodyContentProductDetail');
+  static const Key productDetailSuspended = Key('productDetailSuspended');
 
   //============================================================
   //  bundle Details
   //============================================================
   static const Key bundleImage = Key('bundleImage');
   static const Key bundleDetailsCarousel = Key('bundleDetailsCarousel');
+  static const Key addBundleMinimumQty = Key('addBundleMinimumQty');
+  static const Key addBundleTotalQty = Key('addBundleTotalQty');
+  static const Key addBundleInvalidQtyWarning =
+      Key('addBundleInvalidQtyWarning');
+  static const Key addBundleRate = Key('addBundleRate');
 
   //============================================================
   //  Payment Summary
@@ -1155,6 +1160,7 @@ class WidgetKeys {
       Key('invoiceDetailsOrderNumberLoading');
   static const Key invoiceDetailsOrderNumberButton =
       Key('invoiceDetailsOrderNumberButton');
+  static const Key invoiceDetailIdAndStatus = Key('invoiceDetailIdAndStatus');
   //============================================================
   //  All Credits
   //============================================================
@@ -1209,8 +1215,6 @@ class WidgetKeys {
   //============================================================
   // View By Item Detail
   //============================================================
-  static Key viewByItemsOrderDetailPage =
-      const Key('viewByItemsOrderDetailPage');
   static Key viewByItemsOrderDetailOrderCode =
       const Key('viewByItemsOrderDetailOrderCode');
   static Key viewByItemsOrderDetailOrderDate =
@@ -1235,6 +1239,8 @@ class WidgetKeys {
       const Key('viewByItemsOrderDetailsShowMoreAttachments');
   static Key viewByItemDetailBuyAgainButton =
       const Key('viewByItemDetailBuyAgainButton');
+  static Key viewByItemDetailExpandButton =
+      const Key('viewByItemDetailExpandButton');
   static const Key materialListPriceStrikeThrough =
       Key('materialListPriceStrikeThrough');
 

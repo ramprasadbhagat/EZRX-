@@ -25,6 +25,7 @@ class _ProductSearchHistorySuggestionSection extends StatelessWidget {
                         ),
                   ),
                   IconButton(
+                    key: WidgetKeys.deleteProductHistory,
                     icon: Icon(
                       Icons.delete_outlined,
                       color: searchKeyList.isNotEmpty
@@ -61,6 +62,7 @@ class _ProductSearchHistorySuggestionSection extends StatelessWidget {
                   )
                 : Text(
                     context.tr('No search history available'),
+                    key: WidgetKeys.noProductHistory,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
           ],

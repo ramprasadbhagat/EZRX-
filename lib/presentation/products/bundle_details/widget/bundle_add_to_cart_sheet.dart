@@ -51,6 +51,7 @@ class BundlesAddToCartSheet extends StatelessWidget {
           InfoLabel(
             textValue:
                 '${context.tr('Please note that the minimum total purchase quantity for this bundle offer is')} ${bundleAddToCartState.bundle.bundle.minimumQuantityBundleMaterial.quantity}.',
+            key: WidgetKeys.addBundleMinimumQty,
           ),
           Expanded(
             child: ListView.builder(
@@ -227,9 +228,11 @@ class _BundleSheetFooter extends StatelessWidget {
               Text(
                 'Total quantity: ${state.totalCount}',
                 style: Theme.of(context).textTheme.bodyLarge,
+                key: WidgetKeys.addBundleTotalQty,
               ),
               if (state.displayErrorMessage)
                 ErrorTextWithIcon(
+                  key: WidgetKeys.addBundleInvalidQtyWarning,
                   textPadding: EdgeInsets.zero,
                   valueText:
                       '${context.tr('Minimum total purchase qty')}: ${state.bundle.bundle.minimumQuantityBundleMaterial.quantity}',
@@ -240,6 +243,7 @@ class _BundleSheetFooter extends StatelessWidget {
                 price: state.bundleOffer.rate.toString(),
                 type: PriceStyle.bundlePrice,
                 trailingText: context.tr('per item'),
+                key: WidgetKeys.addBundleRate,
               ),
               const SizedBox(height: 20),
               Row(

@@ -6,7 +6,7 @@ class OrderPriceSummaryRobot {
 
   OrderPriceSummaryRobot(this.tester);
 
-  final bottomSheet = find.byKey(WidgetKeys.orderPriceSummarySheet);
+  final bottomSheet = find.byKey(WidgetKeys.priceSummarySheet);
   final closeButton = find.byKey(WidgetKeys.closeButton);
 
   void verifySheet({required bool isVisible}) {

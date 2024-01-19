@@ -1,22 +1,38 @@
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/invoice_number_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/item_details_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_other_item_details_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
+import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class ViewByItemsDetailRobot {
-  final WidgetTester tester;
+import '../../common/common_robot.dart';
+import '../../common/extension.dart';
 
-  ViewByItemsDetailRobot(this.tester);
+class ViewByItemsDetailRobot extends CommonRobot {
+  ViewByItemsDetailRobot(WidgetTester tester) : super(tester);
 
-  final scrollView = find.byKey(WidgetKeys.viewByItemsOrderDetailPage);
   final statusTrackerSection = find.byType(StatusTrackerSection);
   final addressSection = find.byType(AddressInfoSection);
   final itemDetailSection = find.byType(ItemDetailsSection);
   final otherItemDetailSection = find.byType(OtherItemDetailsSection);
+  final orderItem = find.byType(CommonTileItem);
+  final offerTag = find.byKey(WidgetKeys.offerTag);
+  final bundleTag = find.byKey(WidgetKeys.bundleTag);
+  final bonusTag = find.byKey(WidgetKeys.commonTileItemStatusLabel);
+  final freePrice = find.descendant(
+    of: find.byKey(WidgetKeys.cartItemProductTotalPrice),
+    matching: find.text('FREE', findRichText: true),
+  );
+  final buyAgainButton = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+  final expandButton = find.byKey(WidgetKeys.viewByItemDetailExpandButton);
+  final qtyLabel = find.byKey(WidgetKeys.cartItemProductQty);
 
   void verifyPage() {
     expect(find.byType(ViewByItemDetailsPage), findsOneWidget);
@@ -41,6 +57,25 @@ class ViewByItemsDetailRobot {
     );
   }
 
+  Future<void> tapOrderNumber() async {
+    await tester.tap(find.byKey(WidgetKeys.viewByOrderOrderNumberButton));
+    await tester.pumpUntilVisible(find.byType(ViewByOrderDetailsPage));
+  }
+
+  String getInvoiceNumber() {
+    final invoiceWidget = tester.widget<InvoiceNumberSection>(
+      find.byKey(WidgetKeys.viewByItemsOrderDetailInvoiceNumber),
+    );
+
+    return invoiceWidget.invoiceNumber;
+  }
+
+  Future<void> tapInvoiceNumber() async {
+    await tester
+        .tap(find.byKey(WidgetKeys.viewByItemsOrderDetailsInvoiceNumberButton));
+    await tester.pumpUntilVisible(find.byType(InvoiceDetailsPage));
+  }
+
   void verifyStatusTracker() {
     expect(statusTrackerSection, findsOneWidget);
   }
@@ -60,47 +95,105 @@ class ViewByItemsDetailRobot {
     );
   }
 
-  Future<void> dragToEnsureItemsVisible() async {
-    await tester.dragUntilVisible(
-      itemDetailSection,
-      scrollView,
-      const Offset(0.0, -200),
-    );
-    await tester.dragUntilVisible(
-      otherItemDetailSection,
-      scrollView,
-      const Offset(0.0, -200),
-    );
-    expect(
-      find.byKey(WidgetKeys.commonTileItemTitle),
-      findsAtLeastNWidgets(1),
-    );
+  void verifyExpandButton({bool isVisible = true}) =>
+      expect(expandButton, isVisible ? findsOneWidget : findsNothing);
 
-    expect(
-      find.byKey(WidgetKeys.commonTileItemLabel),
-      findsAtLeastNWidgets(1),
-    );
+  Future<void> tapExpandButton() async {
+    await tester.tap(expandButton);
+    await tester.pumpAndSettle();
+  }
 
-    expect(
-      find.byType(ProductImage),
-      findsAtLeastNWidgets(1),
-    );
+  void verifyBuyAgainButton() => expect(buyAgainButton, findsOneWidget);
 
-    expect(
-      find.byKey(WidgetKeys.orderItemStatusKey),
-      findsAtLeastNWidgets(1),
-    );
+  Future<void> tapBuyAgainButton() async {
+    await tester.tap(buyAgainButton);
+    await tester.pumpAndSettle();
+  }
 
+  Future<void> verifyItemComponent() async {
+    await scrollEnsureFinderVisible(qtyLabel.first);
+    _verifyItemComponent(orderItem);
+    _verifyItemComponent(find.byKey(WidgetKeys.commonTileItemTitle));
+    _verifyItemComponent(find.byKey(WidgetKeys.commonTileItemLabel));
+    _verifyItemComponent(find.byType(ProductImage));
+    _verifyItemComponent(find.byKey(WidgetKeys.orderItemStatusKey));
+    _verifyItemComponent(qtyLabel);
+  }
+
+  void verifyMaterialNumber(String materialNumber) => _verifyItemComponent(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget.key == WidgetKeys.commonTileItemLabel &&
+              widget is Text &&
+              (widget.data ?? '').contains(materialNumber),
+        ),
+      );
+
+  void verifyQty(int qty) {
+    final widget = tester.widget<Text>(
+      find.descendant(of: itemDetailSection, matching: qtyLabel),
+    );
+    expect(widget.data ?? '', contains(qty.toString()));
+  }
+
+  void verifyBonusLabel() => _verifyItemComponent(bonusTag);
+
+  void verifyOfferTag() => _verifyItemComponent(offerTag);
+
+  void verifyBundleTag() => _verifyItemComponent(bundleTag);
+
+  void verifyFreePrice() => _verifyItemComponent(freePrice);
+
+  void _verifyItemComponent(Finder finder) => expect(
+        find.descendant(of: itemDetailSection, matching: finder),
+        findsOneWidget,
+      );
+
+  Future<void> verifyOtherItemsComponent({bool isVisible = true}) async {
+    await scrollEnsureFinderVisible(otherItemDetailSection);
     expect(
-      find.byKey(WidgetKeys.cartItemProductQty),
-      findsAtLeastNWidgets(1),
+      find.descendant(of: otherItemDetailSection, matching: orderItem),
+      isVisible ? findsWidgets : findsNothing,
     );
   }
 
-  void verifyBonusLabelVisible() {
-    expect(
-      find.byKey(WidgetKeys.commonTileItemStatusLabel),
-      findsAtLeastNWidgets(1),
+  late Finder _verifyingItem;
+
+  Future<void> startVerifyOtherItem(int index) async {
+    final item = find.descendant(
+      of: otherItemDetailSection,
+      matching: find.byKey(WidgetKeys.genericKey(key: index.toString())),
     );
+    await scrollEnsureFinderVisible(
+      find.descendant(of: item, matching: qtyLabel),
+    );
+    _verifyingItem = item;
   }
+
+  void verifyOtherItemQty(int qty) {
+    final widget = tester.widget<Text>(
+      find.descendant(of: _verifyingItem, matching: qtyLabel),
+    );
+    expect(widget.data ?? '', contains(qty.toString()));
+  }
+
+  void verifyOtherItemBonusLabel() => expect(
+        find.descendant(of: _verifyingItem, matching: bonusTag),
+        findsOneWidget,
+      );
+
+  void verifyOtherItemOfferTag() => expect(
+        find.descendant(of: _verifyingItem, matching: offerTag),
+        findsOneWidget,
+      );
+
+  void verifyOtherItemBundleTag() => expect(
+        find.descendant(of: _verifyingItem, matching: bundleTag),
+        findsOneWidget,
+      );
+
+  void verifyOtherItemFreePrice() => expect(
+        find.descendant(of: _verifyingItem, matching: freePrice),
+        findsOneWidget,
+      );
 }

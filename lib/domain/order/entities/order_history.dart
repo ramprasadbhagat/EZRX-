@@ -18,8 +18,6 @@ class OrderHistory with _$OrderHistory {
         orderHistoryItems: <OrderHistoryItem>[],
       );
 
-  bool get isOthersOrderItemsSectionVisible => orderHistoryItems.isNotEmpty;
-
   OrderHistory filterItemsByOrderId(OrderNumber orderNumber) => copyWith(
         orderHistoryItems: orderHistoryItems
             .where((e) => e.orderNumber == orderNumber)

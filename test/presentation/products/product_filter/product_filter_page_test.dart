@@ -221,8 +221,14 @@ void main() {
           await tester.pump();
           await tester.tap(countryOfOriginFilter);
           await tester.pumpAndSettle();
-          expect(find.byType(FilterByPage), findsOneWidget);
-          await tester.tap(find.byKey(WidgetKeys.backButton));
+          final page = find.byType(FilterByPage);
+          expect(page, findsOneWidget);
+          await tester.tap(
+            find.descendant(
+              of: page,
+              matching: find.byKey(WidgetKeys.backButton),
+            ),
+          );
           await tester.pumpAndSettle();
           verify(
             () => mockMaterialFilterBloc.add(

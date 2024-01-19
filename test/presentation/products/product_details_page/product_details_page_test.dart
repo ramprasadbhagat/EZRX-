@@ -1079,7 +1079,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.dragUntilVisible(
           find.byKey(WidgetKeys.materialDetailsInfoTile),
-          find.byKey(WidgetKeys.productDetailList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0, -200),
         );
         await tester.pumpAndSettle();
@@ -1124,7 +1124,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.dragUntilVisible(
           find.byKey(WidgetKeys.materialDetailsInfoTile),
-          find.byKey(WidgetKeys.productDetailList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0, -200),
         );
         await tester.pumpAndSettle();
@@ -1193,7 +1193,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.dragUntilVisible(
           find.byKey(WidgetKeys.favoritesIcon).last,
-          find.byKey(WidgetKeys.productDetailList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0, -200),
         );
         await tester.pumpAndSettle();
@@ -1403,9 +1403,7 @@ void main() {
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final productDetailList = find.byKey(
-          WidgetKeys.productDetailList,
-        );
+        final productDetailList = find.byType(ProductDetailsPage);
         expect(productDetailList, findsOneWidget);
         final covidLabel = find.byKey(
           WidgetKeys.covidLabel,
@@ -1643,7 +1641,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.dragUntilVisible(
           find.byKey(WidgetKeys.materialDetailsInfoTile),
-          find.byKey(WidgetKeys.productDetailList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0, -200),
         );
         await tester.pumpAndSettle();
@@ -1711,7 +1709,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.dragUntilVisible(
           find.byKey(WidgetKeys.materialDetailsInfoTile),
-          find.byKey(WidgetKeys.productDetailList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0, -200),
         );
         await tester.pumpAndSettle();
@@ -1779,7 +1777,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.dragUntilVisible(
           find.byKey(WidgetKeys.materialDetailsInfoTile),
-          find.byKey(WidgetKeys.productDetailList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0, -200),
         );
         await tester.pumpAndSettle();

@@ -35,9 +35,6 @@ class _ProductScrollList extends StatelessWidget {
                 ),
               if (item.materialInfo.type.typeMaterial)
                 _CheckoutProductMaterialWithBonus(
-                  key: WidgetKeys.cartItemProductTile(
-                    item.materialInfo.materialNumber.displayMatNo,
-                  ),
                   cartItem: item,
                 ),
               if (item.materialInfo.type.typeCombo)
@@ -73,6 +70,7 @@ class _CheckoutProductMaterialWithBonus extends StatelessWidget {
               .map(
                 (e) => _CheckoutProductBonusItem(
                   bonusItem: e,
+                  parentMaterialNumber: cartItem.getMaterialNumber,
                 ),
               )
               .toList(),

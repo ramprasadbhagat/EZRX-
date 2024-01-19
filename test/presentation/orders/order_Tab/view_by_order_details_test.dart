@@ -359,8 +359,7 @@ void main() {
         WidgetKeys.loaderImage,
       );
       expect(loaderImage, findsOneWidget);
-      final viewByOrderDetailsPageListView =
-          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final viewByOrderDetailsPageListView = find.byKey(WidgetKeys.scrollList);
       expect(viewByOrderDetailsPageListView, findsNothing);
     });
 
@@ -442,8 +441,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
 
-      final viewByOrderDetailsPageListView =
-          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final viewByOrderDetailsPageListView = find.byKey(WidgetKeys.scrollList);
       expect(viewByOrderDetailsPageListView, findsOneWidget);
 
       final paymentTermsSection = find.byKey(
@@ -476,8 +474,7 @@ void main() {
 
       await tester.pump();
 
-      final viewByOrderDetailsPageListView =
-          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final viewByOrderDetailsPageListView = find.byKey(WidgetKeys.scrollList);
 
       expect(viewByOrderDetailsPageListView, findsOneWidget);
 
@@ -505,8 +502,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
 
-      final viewByOrderDetailsPageListView =
-          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final viewByOrderDetailsPageListView = find.byKey(WidgetKeys.scrollList);
       expect(viewByOrderDetailsPageListView, findsOneWidget);
 
       final paymentTermsSection = find.byKey(
@@ -1010,8 +1006,7 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      final viewByOrderDetailsList =
-          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final viewByOrderDetailsList = find.byKey(WidgetKeys.scrollList);
       final orderItemsList = find.byKey(
         WidgetKeys.viewByOrderDetailItemsSection,
       );
@@ -1043,8 +1038,7 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      final viewByOrderDetailsList =
-          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final viewByOrderDetailsList = find.byKey(WidgetKeys.scrollList);
       final orderItemsList = find.byKey(
         WidgetKeys.viewByOrderDetailItemsSection,
       );
@@ -1074,7 +1068,7 @@ void main() {
 
         await tester.dragUntilVisible(
           find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
-          find.byKey(WidgetKeys.viewByOrderDetailsPageListView),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -200.0),
         );
         expect(find.byKey(WidgetKeys.offerTag), findsOneWidget);
@@ -1098,7 +1092,7 @@ void main() {
 
         await tester.dragUntilVisible(
           find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
-          find.byKey(WidgetKeys.viewByOrderDetailsPageListView),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -200.0),
         );
         expect(find.byKey(WidgetKeys.offerTag), findsNothing);
@@ -1436,7 +1430,7 @@ void main() {
 
       await tester.dragUntilVisible(
         orderHistoryBundleItemMaterial,
-        find.byKey(WidgetKeys.viewByOrderDetailsPageListView),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0, -200),
       );
       expect(orderHistoryBundleItemMaterial, findsOneWidget);
@@ -1923,8 +1917,7 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      final viewByOrderDetailsList =
-          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final viewByOrderDetailsList = find.byKey(WidgetKeys.scrollList);
       final orderItemsList = find.byKey(
         WidgetKeys.viewByOrderDetailItemsSection,
       );
