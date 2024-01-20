@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_alt_name.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_name.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bill_to_info.freezed.dart';
@@ -15,7 +16,7 @@ class BillToInfo with _$BillToInfo {
     required BillToName billToName,
     required BillToAddress billToAddress,
     required BillToAltName billToAltName,
-    required List<String> emailAddresses,
+    required List<EmailAddress> emailAddresses,
     required String taxNumber,
     required String status,
     required String country,
@@ -64,7 +65,7 @@ class BillToInfo with _$BillToInfo {
           altName3: '',
           altName4: '',
         ),
-        emailAddresses: <String>[],
+        emailAddresses: <EmailAddress>[],
         taxNumber: '',
         status: '',
         country: '',

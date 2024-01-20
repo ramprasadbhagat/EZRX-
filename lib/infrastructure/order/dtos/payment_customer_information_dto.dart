@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/bill_to_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/ship_to_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,6 +12,7 @@ class PaymentCustomerInformationDto with _$PaymentCustomerInformationDto {
   const factory PaymentCustomerInformationDto({
     @JsonKey(name: 'paymentTerm') required String paymentTerm,
     @JsonKey(name: 'shipTo') required List<ShipToDto> shipToDtoList,
+    @JsonKey(name: 'billTo') required List<BillToDto> billToDto,
   }) = _PaymentCustomerInformationDto;
 
   factory PaymentCustomerInformationDto.fromDomain(
@@ -21,6 +23,9 @@ class PaymentCustomerInformationDto with _$PaymentCustomerInformationDto {
       shipToDtoList: paymentCustomerInformation.shipToInfoList
           .map((e) => ShipToDto.fromDomain(e))
           .toList(),
+      billToDto: paymentCustomerInformation.billToInfo
+          .map((e) => BillToDto.fromDomain(e))
+          .toList(),
     );
   }
 
@@ -28,6 +33,7 @@ class PaymentCustomerInformationDto with _$PaymentCustomerInformationDto {
     return PaymentCustomerInformation(
       paymentTerm: paymentTerm,
       shipToInfoList: shipToDtoList.map((e) => e.toDomain()).toList(),
+      billToInfo: billToDto.map((e) => e.toDomain()).toList(),
     );
   }
 

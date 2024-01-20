@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/order/re_order_permission/re_order_permis
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_status_section.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +71,12 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                         endIndent: 0,
                         thickness: 2.5,
                         color: ZPColors.lightGray2,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: PayerInformation(
+                          expanded: false,
+                        ),
                       ),
                       const OrderSummarySection(),
                       const Divider(

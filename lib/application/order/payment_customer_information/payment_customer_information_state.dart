@@ -15,6 +15,7 @@ class PaymentCustomerInformationState with _$PaymentCustomerInformationState {
       PaymentCustomerInformationState(
         paymentCustomerInformation: const PaymentCustomerInformation(
           paymentTerm: '',
+          billToInfo: <BillToInfo>[],
           shipToInfoList: <ShipToInfo>[],
         ),
         licenses: <LicenseInfo>[],
@@ -26,4 +27,17 @@ class PaymentCustomerInformationState with _$PaymentCustomerInformationState {
 
   String get getLicensesType =>
       licenses.isNotEmpty ? licenses.first.licenceType : 'NA';
+
+  bool get billToInfoAvailable =>
+      paymentCustomerInformation.billToInfo.isNotEmpty;
+
+  BillToInfo get getBillToInfo => billToInfoAvailable
+      ? paymentCustomerInformation.billToInfo.first
+      : BillToInfo.empty();
+
+  String get customerEmailAddress {
+    return getBillToInfo.emailAddresses.isNotEmpty
+        ? getBillToInfo.emailAddresses.first.value.getOrElse(() => 'NA')
+        : 'NA';
+  }
 }

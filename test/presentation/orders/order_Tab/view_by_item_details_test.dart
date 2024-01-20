@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:flutter/material.dart';
@@ -124,6 +125,10 @@ class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
 
+class PaymentCustomerInformationBlocMock extends MockBloc<
+        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -149,6 +154,7 @@ void main() {
   late OrderHistory mockViewByItemsOrderHistory;
   late ProductImageBloc mockProductImageBloc;
   late MaterialPriceBloc materialPriceBlocMock;
+  late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
 
   const fakeCreatedDate = '20230412';
   setUpAll(() async {
@@ -203,6 +209,7 @@ void main() {
       mockAuthBloc = MockAuthBloc();
       mockProductImageBloc = MockProductImageBloc();
       materialPriceBlocMock = MaterialPriceBlocMock();
+      paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
@@ -238,6 +245,9 @@ void main() {
           .thenReturn(ProductImageState.initial());
       when(() => materialPriceBlocMock.state).thenReturn(
         MaterialPriceState.initial(),
+      );
+      when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+        PaymentCustomerInformationState.initial(),
       );
     });
 
@@ -294,6 +304,9 @@ void main() {
           ),
           BlocProvider<MaterialPriceBloc>(
             create: ((context) => materialPriceBlocMock),
+          ),
+          BlocProvider<PaymentCustomerInformationBloc>(
+            create: ((context) => paymentCustomerInformationBlocMock),
           ),
         ],
         child: const Material(

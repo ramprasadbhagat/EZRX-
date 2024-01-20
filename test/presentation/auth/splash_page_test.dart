@@ -65,6 +65,7 @@ import 'package:ezrxmobile/application/returns/return_request_type_code/return_r
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -875,6 +876,7 @@ void main() {
           paymentCustomerInformation: const PaymentCustomerInformation(
             paymentTerm: 'paymentTerm',
             shipToInfoList: <ShipToInfo>[],
+            billToInfo: <BillToInfo>[],
           ),
         )
       ];

@@ -21,7 +21,7 @@ mixin _$BillToInfo {
   BillToName get billToName => throw _privateConstructorUsedError;
   BillToAddress get billToAddress => throw _privateConstructorUsedError;
   BillToAltName get billToAltName => throw _privateConstructorUsedError;
-  List<String> get emailAddresses => throw _privateConstructorUsedError;
+  List<EmailAddress> get emailAddresses => throw _privateConstructorUsedError;
   String get taxNumber => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
@@ -62,7 +62,7 @@ abstract class $BillToInfoCopyWith<$Res> {
       BillToName billToName,
       BillToAddress billToAddress,
       BillToAltName billToAltName,
-      List<String> emailAddresses,
+      List<EmailAddress> emailAddresses,
       String taxNumber,
       String status,
       String country,
@@ -157,7 +157,7 @@ class _$BillToInfoCopyWithImpl<$Res, $Val extends BillToInfo>
       emailAddresses: null == emailAddresses
           ? _value.emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<EmailAddress>,
       taxNumber: null == taxNumber
           ? _value.taxNumber
           : taxNumber // ignore: cast_nullable_to_non_nullable
@@ -288,7 +288,7 @@ abstract class _$$_BillToInfoCopyWith<$Res>
       BillToName billToName,
       BillToAddress billToAddress,
       BillToAltName billToAltName,
-      List<String> emailAddresses,
+      List<EmailAddress> emailAddresses,
       String taxNumber,
       String status,
       String country,
@@ -384,7 +384,7 @@ class __$$_BillToInfoCopyWithImpl<$Res>
       emailAddresses: null == emailAddresses
           ? _value._emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<EmailAddress>,
       taxNumber: null == taxNumber
           ? _value.taxNumber
           : taxNumber // ignore: cast_nullable_to_non_nullable
@@ -486,7 +486,7 @@ class _$_BillToInfo extends _BillToInfo {
       required this.billToName,
       required this.billToAddress,
       required this.billToAltName,
-      required final List<String> emailAddresses,
+      required final List<EmailAddress> emailAddresses,
       required this.taxNumber,
       required this.status,
       required this.country,
@@ -522,9 +522,9 @@ class _$_BillToInfo extends _BillToInfo {
   final BillToAddress billToAddress;
   @override
   final BillToAltName billToAltName;
-  final List<String> _emailAddresses;
+  final List<EmailAddress> _emailAddresses;
   @override
-  List<String> get emailAddresses {
+  List<EmailAddress> get emailAddresses {
     if (_emailAddresses is EqualUnmodifiableListView) return _emailAddresses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_emailAddresses);
@@ -685,7 +685,7 @@ abstract class _BillToInfo extends BillToInfo {
       required final BillToName billToName,
       required final BillToAddress billToAddress,
       required final BillToAltName billToAltName,
-      required final List<String> emailAddresses,
+      required final List<EmailAddress> emailAddresses,
       required final String taxNumber,
       required final String status,
       required final String country,
@@ -721,7 +721,7 @@ abstract class _BillToInfo extends BillToInfo {
   @override
   BillToAltName get billToAltName;
   @override
-  List<String> get emailAddresses;
+  List<EmailAddress> get emailAddresses;
   @override
   String get taxNumber;
   @override

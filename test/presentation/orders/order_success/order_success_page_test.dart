@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
@@ -18,6 +19,7 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -37,6 +39,7 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 
@@ -119,6 +122,11 @@ class PoAttachmentBlocMock
 
 class MockMixpanelService extends Mock implements MixpanelService {}
 
+class PaymentCustomerInformationBlocMock extends MockBloc<
+        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}
+
+
 void main() {
   late AppRouter autoRouterMock;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -142,6 +150,7 @@ void main() {
   late OrderHistoryDetailsOrderItem fakeMaterialItem;
   late OrderHistoryDetails fakeOrderHistoryDetails;
   late OrderHistory fakeOrderHistory;
+  late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   setUpAll(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
@@ -167,6 +176,7 @@ void main() {
       productImageBlocMock = ProductImageBlocMock();
       poAttachmentBlocMock = PoAttachmentBlocMock();
       mixpanelServiceMock = locator<MixpanelService>();
+      paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       fakeOrderHistoryDetails =
           await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
       fakeOrderHistory = await ViewByItemLocalDataSource().getViewByItems();
@@ -179,7 +189,7 @@ void main() {
     },
   );
   setUp(
-    () {
+    () async{
       mockSalesOrgBloc = MockSalesOrgBloc();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
@@ -219,6 +229,13 @@ void main() {
         ViewByItemsState.initial(),
       );
       when(() => autoRouterMock.currentPath).thenReturn('fake-path');
+       when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+        PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation:
+              await PaymentCustomerInformationLocalDataSource()
+                  .getPaymentCustomerInformation(),
+        ),
+      ); 
     },
   );
 
@@ -268,6 +285,9 @@ void main() {
         ),
         BlocProvider<PoAttachmentBloc>(
           create: (context) => poAttachmentBlocMock,
+        ),
+        BlocProvider<PaymentCustomerInformationBloc>(
+          create: ((context) => paymentCustomerInformationBlocMock),
         ),
       ],
     );
@@ -1250,7 +1270,7 @@ void main() {
         billToInfos: [
           BillToInfo.empty().copyWith(
             billToCustomerCode: 'fake-bill-to',
-            emailAddresses: ['fake-email'],
+            emailAddresses: [EmailAddress('fake-email@fake.com')],
           ),
         ],
       );

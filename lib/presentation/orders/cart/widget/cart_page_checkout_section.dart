@@ -65,10 +65,12 @@ class _CartPageCheckoutSection extends StatelessWidget {
             20,
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(height: 16),
               AddressInfoSection.order(),
+              const PayerInformation(expanded: true),
               const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,

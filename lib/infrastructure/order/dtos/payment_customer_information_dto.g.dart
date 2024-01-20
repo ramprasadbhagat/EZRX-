@@ -13,6 +13,9 @@ _$_PaymentCustomerInformationDto _$$_PaymentCustomerInformationDtoFromJson(
       shipToDtoList: (json['shipTo'] as List<dynamic>)
           .map((e) => ShipToDto.fromJson(e as Map<String, dynamic>))
           .toList(),
+      billToDto: (json['billTo'] as List<dynamic>)
+          .map((e) => BillToDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_PaymentCustomerInformationDtoToJson(
@@ -20,4 +23,5 @@ Map<String, dynamic> _$$_PaymentCustomerInformationDtoToJson(
     <String, dynamic>{
       'paymentTerm': instance.paymentTerm,
       'shipTo': instance.shipToDtoList.map((e) => e.toJson()).toList(),
+      'billTo': instance.billToDto.map((e) => e.toJson()).toList(),
     };

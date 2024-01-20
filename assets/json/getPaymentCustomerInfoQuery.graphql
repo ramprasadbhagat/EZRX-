@@ -1,8 +1,4 @@
-class PaymentCustomerInformationQueryMutation {
-  // For fetching Payment Customer Information
-  String getPaymentCustomerInformationQuery() {
-    return '''
-      query customerInformation(\$customer: String!,\$salesOrganisation: String!,\$filterBlockCustomer: Boolean,){
+query customerInformation(\$customer: String!,\$salesOrganisation: String!,\$filterBlockCustomer: Boolean,){
       customerInformation(customer: \$customer, salesOrganisation: \$salesOrganisation, filterBlockCustomer: \$filterBlockCustomer) {
         paymentTerm
            billTo {
@@ -77,6 +73,8 @@ class PaymentCustomerInformationQueryMutation {
         }
       }
     }
-    ''';
-  }
+
+variables = {
+    'customer': '0000002010',
+    'salesOrganisation': '2001',
 }

@@ -25,6 +25,7 @@ import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -130,12 +131,18 @@ class _CheckoutPageState extends State<CheckoutPage> {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
+                    horizontal: 12.0,
+                    vertical: 5.0,
                   ),
                   child: AddressInfoSection.noAction(),
                 ),
               ),
-              const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
+              const SliverPadding(
+                padding: EdgeInsets.only(left: 12, right: 22),
+                sliver: SliverToBoxAdapter(
+                  child: PayerInformation(expanded: false),
+                ),
+              ),
               _DeliveryInfo(focusNodes: _focusNodes),
               const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
               const SliverToBoxAdapter(

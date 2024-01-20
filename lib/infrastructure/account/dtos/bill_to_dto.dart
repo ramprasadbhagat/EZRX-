@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_alt_name.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_name.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bill_to_dto.freezed.dart';
@@ -94,7 +95,7 @@ class BillToDto with _$BillToDto {
       postalCode2: postalCode2,
       city1: city1,
       city2: city2,
-      emailAddresses: emailAddresses,
+      emailAddresses: emailAddresses.map((e) => EmailAddress(e)).toList(),
       telephoneNumber: telephoneNumber,
       telephoneExtension: telephoneExtension,
       faxNumber: faxNumber,
@@ -110,6 +111,49 @@ class BillToDto with _$BillToDto {
       taxIncludedBySalesOrganization: taxIncludedBySalesOrganization,
       customerClassification: customerClassification,
       customerLocalGroup: customerLocalGroup,
+    );
+  }
+
+  factory BillToDto.fromDomain(BillToInfo billToInfo) {
+    return BillToDto(
+      altName1: billToInfo.billToAltName.altName1,
+      altName2: billToInfo.billToAltName.altName2,
+      altName3: billToInfo.billToAltName.altName3,
+      altName4: billToInfo.billToAltName.altName4,
+      billToCustomerCode: billToInfo.billToCustomerCode,
+      building: billToInfo.building,
+      city1: billToInfo.city1,
+      city2: billToInfo.city2,
+      country: billToInfo.country,
+      customerClassification: billToInfo.customerClassification,
+      customerLocalGroup: billToInfo.customerLocalGroup,
+      defaulBillToAddress: billToInfo.defaulBillToAddress,
+      district: billToInfo.district,
+      emailAddresses: billToInfo.emailAddresses.map((e) => e.getValue()).toList(),
+      faxExtension: billToInfo.faxExtension,
+      faxNumber: billToInfo.faxNumber,
+      floor: billToInfo.floor,
+      houseNumber1: billToInfo.houseNumber1,
+      houseNumber2: billToInfo.houseNumber2,
+      name1: billToInfo.billToName.name1,
+      name2: billToInfo.billToName.name2,
+      name3: billToInfo.billToName.name3,
+      name4: billToInfo.billToName.name4,
+      plant: billToInfo.plant,
+      postalCode2: billToInfo.postalCode2,
+      postalCode: billToInfo.postalCode,
+      region: billToInfo.region,
+      roomnumber: billToInfo.roomnumber,
+      status: billToInfo.status,
+      street2: billToInfo.billToAddress.street2,
+      street3: billToInfo.billToAddress.street3,
+      street4: billToInfo.billToAddress.street4,
+      street5: billToInfo.billToAddress.street5,
+      street: billToInfo.billToAddress.street,
+      taxIncludedBySalesOrganization: billToInfo.taxIncludedBySalesOrganization,
+      taxNumber: billToInfo.taxNumber,
+      telephoneExtension: billToInfo.telephoneExtension,
+      telephoneNumber: billToInfo.telephoneNumber,
     );
   }
 

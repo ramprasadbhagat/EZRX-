@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -47,6 +48,7 @@ void main() {
   );
 
   const fakepaymentCustomerInformation = PaymentCustomerInformation(
+    billToInfo: <BillToInfo>[],
     paymentTerm: 'fake-term',
     shipToInfoList: <ShipToInfo>[],
   );

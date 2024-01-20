@@ -28,7 +28,7 @@ void main() {
           ],
         ),
       );
-      expect(configsDto.paymentTerm, 'K002');
+      expect(configsDto.paymentTerm, 'T019');
     });
 
     test('Test toJson', () {
@@ -41,7 +41,7 @@ void main() {
           ],
         ),
       ).toJson();
-      expect(configsDto['paymentTerm'], 'K002');
+      expect(configsDto['paymentTerm'], 'T019');
     });
   });
 }

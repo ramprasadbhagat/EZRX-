@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
@@ -123,6 +124,10 @@ class MockPoAttachmentBloc
 
 class MockMixpanelService extends Mock implements MixpanelService {}
 
+class PaymentCustomerInformationBlocMock extends MockBloc<
+        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -146,7 +151,7 @@ void main() {
   late ViewByOrder viewByOrderWithCounterOffer;
   late ViewByOrder viewByOrderWithTax;
   late OrderHistoryDetailsOrderItem fakeOrderHistoryItem;
-
+  late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
@@ -200,6 +205,7 @@ void main() {
       mockAuthBloc = MockAuthBloc();
       mockPoAttachmentBloc = MockPoAttachmentBloc();
       mockSalesOrgBloc = SalesOrgMockBloc();
+      paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
       when(() => userBlocMock.state).thenReturn(
@@ -250,6 +256,10 @@ void main() {
       );
       when(() => mockPoAttachmentBloc.state)
           .thenReturn(PoAttachmentState.initial());
+
+      when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+        PaymentCustomerInformationState.initial(),
+      );    
 
       when(() => mockViewByItemDetailsBloc.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
@@ -315,7 +325,10 @@ void main() {
           ),
           BlocProvider<PoAttachmentBloc>(
             create: (context) => mockPoAttachmentBloc,
-          )
+          ),
+          BlocProvider<PaymentCustomerInformationBloc>(
+            create: ((context) => paymentCustomerInformationBlocMock),
+          ),
         ],
         child: const Material(
           child: ViewByOrderDetailsPage(),

@@ -15,6 +15,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -46,6 +47,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -128,6 +130,10 @@ class MockAppRouter extends Mock implements AppRouter {}
 
 class MockMixpanelService extends Mock implements MixpanelService {}
 
+class PaymentCustomerInformationBlocMock extends MockBloc<
+        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}
+
 void main() {
   late CartBloc cartBloc;
   late SalesOrgBloc salesOrgBlocMock;
@@ -148,6 +154,7 @@ void main() {
   late List<PriceAggregate> mockCartBundleItems;
   late List<Price> priceList;
   late AplSimulatorOrder aplSimulatorOrder;
+  late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   final checkoutPageRouteRouteData = RouteData(
     route: const RouteMatch(
       name: CheckoutPageRoute.name,
@@ -213,7 +220,7 @@ void main() {
 
   //////////////////////////////////////////////////////////////////////////
   group('Checkout Page Test', () {
-    setUp(() {
+    setUp(()async{
       locator = GetIt.instance;
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
@@ -233,6 +240,7 @@ void main() {
       comboDealListBloc = ComboDealListBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
+      paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
 
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial(),
@@ -270,6 +278,15 @@ void main() {
       when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
       when(() => autoRouterMock.pushNamed(any()))
           .thenAnswer((invocation) async => null);
+     
+      when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+        PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation:
+              await PaymentCustomerInformationLocalDataSource()
+                  .getPaymentCustomerInformation(),
+        ),
+      ); 
+
     });
     Widget getScopedWidget() {
       return EasyLocalization(
@@ -319,6 +336,9 @@ void main() {
             ),
             BlocProvider<OrderEligibilityBloc>(
               create: (context) => orderEligibilityBlocMock,
+            ),
+            BlocProvider<PaymentCustomerInformationBloc>(
+              create: ((context) => paymentCustomerInformationBlocMock),
             ),
           ],
           child: const Material(

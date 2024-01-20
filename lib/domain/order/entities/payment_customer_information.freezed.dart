@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PaymentCustomerInformation {
   String get paymentTerm => throw _privateConstructorUsedError;
   List<ShipToInfo> get shipToInfoList => throw _privateConstructorUsedError;
+  List<BillToInfo> get billToInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentCustomerInformationCopyWith<PaymentCustomerInformation>
@@ -31,7 +32,10 @@ abstract class $PaymentCustomerInformationCopyWith<$Res> {
       _$PaymentCustomerInformationCopyWithImpl<$Res,
           PaymentCustomerInformation>;
   @useResult
-  $Res call({String paymentTerm, List<ShipToInfo> shipToInfoList});
+  $Res call(
+      {String paymentTerm,
+      List<ShipToInfo> shipToInfoList,
+      List<BillToInfo> billToInfo});
 }
 
 /// @nodoc
@@ -50,6 +54,7 @@ class _$PaymentCustomerInformationCopyWithImpl<$Res,
   $Res call({
     Object? paymentTerm = null,
     Object? shipToInfoList = null,
+    Object? billToInfo = null,
   }) {
     return _then(_value.copyWith(
       paymentTerm: null == paymentTerm
@@ -60,6 +65,10 @@ class _$PaymentCustomerInformationCopyWithImpl<$Res,
           ? _value.shipToInfoList
           : shipToInfoList // ignore: cast_nullable_to_non_nullable
               as List<ShipToInfo>,
+      billToInfo: null == billToInfo
+          ? _value.billToInfo
+          : billToInfo // ignore: cast_nullable_to_non_nullable
+              as List<BillToInfo>,
     ) as $Val);
   }
 }
@@ -73,7 +82,10 @@ abstract class _$$_PaymentCustomerInformationCopyWith<$Res>
       __$$_PaymentCustomerInformationCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String paymentTerm, List<ShipToInfo> shipToInfoList});
+  $Res call(
+      {String paymentTerm,
+      List<ShipToInfo> shipToInfoList,
+      List<BillToInfo> billToInfo});
 }
 
 /// @nodoc
@@ -91,6 +103,7 @@ class __$$_PaymentCustomerInformationCopyWithImpl<$Res>
   $Res call({
     Object? paymentTerm = null,
     Object? shipToInfoList = null,
+    Object? billToInfo = null,
   }) {
     return _then(_$_PaymentCustomerInformation(
       paymentTerm: null == paymentTerm
@@ -101,6 +114,10 @@ class __$$_PaymentCustomerInformationCopyWithImpl<$Res>
           ? _value._shipToInfoList
           : shipToInfoList // ignore: cast_nullable_to_non_nullable
               as List<ShipToInfo>,
+      billToInfo: null == billToInfo
+          ? _value._billToInfo
+          : billToInfo // ignore: cast_nullable_to_non_nullable
+              as List<BillToInfo>,
     ));
   }
 }
@@ -110,8 +127,10 @@ class __$$_PaymentCustomerInformationCopyWithImpl<$Res>
 class _$_PaymentCustomerInformation extends _PaymentCustomerInformation {
   const _$_PaymentCustomerInformation(
       {required this.paymentTerm,
-      required final List<ShipToInfo> shipToInfoList})
+      required final List<ShipToInfo> shipToInfoList,
+      required final List<BillToInfo> billToInfo})
       : _shipToInfoList = shipToInfoList,
+        _billToInfo = billToInfo,
         super._();
 
   @override
@@ -124,9 +143,17 @@ class _$_PaymentCustomerInformation extends _PaymentCustomerInformation {
     return EqualUnmodifiableListView(_shipToInfoList);
   }
 
+  final List<BillToInfo> _billToInfo;
+  @override
+  List<BillToInfo> get billToInfo {
+    if (_billToInfo is EqualUnmodifiableListView) return _billToInfo;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_billToInfo);
+  }
+
   @override
   String toString() {
-    return 'PaymentCustomerInformation(paymentTerm: $paymentTerm, shipToInfoList: $shipToInfoList)';
+    return 'PaymentCustomerInformation(paymentTerm: $paymentTerm, shipToInfoList: $shipToInfoList, billToInfo: $billToInfo)';
   }
 
   @override
@@ -137,12 +164,17 @@ class _$_PaymentCustomerInformation extends _PaymentCustomerInformation {
             (identical(other.paymentTerm, paymentTerm) ||
                 other.paymentTerm == paymentTerm) &&
             const DeepCollectionEquality()
-                .equals(other._shipToInfoList, _shipToInfoList));
+                .equals(other._shipToInfoList, _shipToInfoList) &&
+            const DeepCollectionEquality()
+                .equals(other._billToInfo, _billToInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, paymentTerm,
-      const DeepCollectionEquality().hash(_shipToInfoList));
+  int get hashCode => Object.hash(
+      runtimeType,
+      paymentTerm,
+      const DeepCollectionEquality().hash(_shipToInfoList),
+      const DeepCollectionEquality().hash(_billToInfo));
 
   @JsonKey(ignore: true)
   @override
@@ -155,7 +187,8 @@ class _$_PaymentCustomerInformation extends _PaymentCustomerInformation {
 abstract class _PaymentCustomerInformation extends PaymentCustomerInformation {
   const factory _PaymentCustomerInformation(
           {required final String paymentTerm,
-          required final List<ShipToInfo> shipToInfoList}) =
+          required final List<ShipToInfo> shipToInfoList,
+          required final List<BillToInfo> billToInfo}) =
       _$_PaymentCustomerInformation;
   const _PaymentCustomerInformation._() : super._();
 
@@ -163,6 +196,8 @@ abstract class _PaymentCustomerInformation extends PaymentCustomerInformation {
   String get paymentTerm;
   @override
   List<ShipToInfo> get shipToInfoList;
+  @override
+  List<BillToInfo> get billToInfo;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentCustomerInformationCopyWith<_$_PaymentCustomerInformation>

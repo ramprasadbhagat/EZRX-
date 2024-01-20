@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -30,6 +29,7 @@ import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -46,7 +46,6 @@ import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_items.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/bundle_items.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_summary.dart';
-part 'package:ezrxmobile/presentation/orders/order_success/widgets/payer_information.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_detail_header.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_message.dart';
 
@@ -175,7 +174,7 @@ class _BodyContent extends StatelessWidget {
                         _OrderDetailHeader(),
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0,
+                            horizontal: 16.0,
                             vertical: 16,
                           ),
                           child: AddressInfoSection.order(),
@@ -185,7 +184,10 @@ class _BodyContent extends StatelessWidget {
                           endIndent: 0,
                           thickness: 0.2,
                         ),
-                        const _PayerInformation(),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: PayerInformation(expanded: false),
+                        ),
                         const Divider(
                           indent: 0,
                           endIndent: 0,
