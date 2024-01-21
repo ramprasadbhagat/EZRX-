@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -245,8 +244,7 @@ void main() {
         await tester.pump();
         final bundlesIconFinder = find.byKey(WidgetKeys.bundles);
         expect(bundlesIconFinder, findsOneWidget);
-        final bundlesIcon =
-            find.byKey(WidgetKeys.sectionTileIcon('Bundles'.tr()));
+        final bundlesIcon = find.byKey(WidgetKeys.sectionTileIcon('Bundles'));
         expect(bundlesIcon, findsOneWidget);
         await tester.tap(bundlesIcon);
         await tester.pump();
@@ -258,7 +256,6 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
                 bundleOffers: true,
-                isProductOffer: true,
               ),
               shipToInfo: fakeShipToInfo,
               user: fakeClientUser,
