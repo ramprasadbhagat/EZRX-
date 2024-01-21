@@ -55,4 +55,6 @@ class FullSummaryFilter with _$FullSummaryFilter {
   }
 
   bool get isValid => appliedFilterCount > 0;
+
+  bool get isEmpty => !isValid && searchKey.isValueEmpty;
 }

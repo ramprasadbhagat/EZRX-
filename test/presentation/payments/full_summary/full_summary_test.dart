@@ -505,5 +505,25 @@ void main() {
       final documentReferenceID = find.text('Gov. no 0810055826');
       expect(documentReferenceID, findsOneWidget);
     });
+
+    testWidgets('Show correct empty text when filter return empty data',
+        (tester) async {
+      when(() => fullSummaryBlocMock.state).thenReturn(
+        FullSummaryState.initial().copyWith(
+          appliedFilter: FullSummaryFilter.empty()
+              .copyWith(filterStatuses: ['fake-status']),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(find.text("That didn't match anything".tr()), findsOneWidget);
+      expect(
+        find.text(
+          'Try adjusting your search or filter selection to find what you’re looking for.'
+              .tr(),
+        ),
+        findsOneWidget,
+      );
+    });
   });
 }

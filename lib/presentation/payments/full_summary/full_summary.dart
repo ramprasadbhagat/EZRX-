@@ -68,8 +68,7 @@ class _FullSummaryPageState extends State<FullSummaryPage> {
             builder: (context, state) {
               return ScrollList<CreditAndInvoiceItem>(
                 noRecordFoundWidget: NoRecordFound.fullSummary(
-                  isSearchAndFilterEmpty:
-                      state.appliedFilter.searchKey.isValueEmpty,
+                  isSearchAndFilterEmpty: state.appliedFilter.isEmpty,
                 ),
                 controller: _controller,
                 onRefresh: () => context.read<FullSummaryBloc>().add(
