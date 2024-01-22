@@ -187,6 +187,7 @@ Invoice,Invoice,อินวอยซ์,發票資訊,ငွေတောင်�
 Invoice Amount,Invoice Amount,ยอดเงินที่ต้องชำระ,Invoice Amount,Invoice Amount,Số tiền trên hóa đơn,Invoice Amount,Jumlah tagihan
 Invoice Date,Invoice Date,หมายเลขใบแจ้งหนี้,發票日,Invoice Date,Ngày hóa đơn,កាលបរិច្ឆេទចេញវិក្កយបត្រ,Tanggal faktur
 Invoice Number,Invoice Number,หมายเลขอินวอยซ์,發票號碼,ငွေတောင်းခံလွှာ နံပါတ်,Số hoá đơn,លេខវិក្កយបត្រ,Nomor faktur
+Invoice number,Invoice number,หมายเลขอินวอยซ์,發票號碼,ငွေတောင်းခံလွှာနံပါတ်,Invoice number,លេខ​វិ​ក័​យ​ប័ត្រ,Nomor faktur
 Invoice Price,Invoice Price,Invoice Price,發票金額,Invoice Price,Giá tiền,Invoice Price,Harga faktur
 Invoices,Invoices,ใบแจ้งหนี้,Invoices,Invoices,Hóa đơn,Invoices,Faktur
 Item count can't be greater than 999999,Item count can't be greater than 999999,Item count can't be greater than 999999,商品數量不能大於 999999,ပစ္စည်းအရေအတွက် ၉၉၉ ထက် ပိုကြီးသောကြောင့် မရပါ,Số lượng sản phẩm không được lớn hơn 999999,ចំនួនផលិតផលមិនអាចលើសពី ៩៩៩៩៩៩ បានទេ,Hitungan item tidak bisa lebih besar dari 999999
@@ -753,7 +754,6 @@ Please ensure all required fields are filled.,Please ensure all required fields 
 Material details,Material details,รายละเอียดสินค้า,產品資訊,Material details,Material details,Material details,Detail produk
 Principal code,Principal code,Principal code,Principal code,အဓိကကုဒ်,Principal code,លេខកូដដៃគូពាណិជ្ជកម្ម,Kode Utama
 Principal name,Principal name,Principal name,Principal name,Pအဓိကအမည်,Principal name,ឈ្មោះដៃគូពាណិជ្ជកម្ម,Nama utama
-Invoice number,Invoice number,หมายเลขอินวอยซ์,发票号码,ငွေတောင်းခံလွှာနံပါတ်,Invoice number,លេខ​វិ​ក័​យ​ប័ត្រ,Nomor faktur
 Invoice date,Invoice date,หมายเลขใบแจ้งหนี้,發票日,Iငွေတောင်းခံလွှာ,Ngày hóa đơn,កាលបរិច្ឆេទចេញវិក្កយបត្រ,Tanggal faktur
 Hide details,Hide details,Hide details,Hide details,Hအသေးစိတ်အချက်အလက်များကိုဖျောက်ထားပါ,Hide details,Hលាក់ព័ត៌មានលម្អិត,Sembunyikan detail
 Show details,Show details,Show details,Show details,အသေးစိတ်ပြ,Show details,Sបង្ហាញព័ត៌មានលម្អិត,Tampilkan detail
