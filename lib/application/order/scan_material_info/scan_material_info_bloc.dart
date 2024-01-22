@@ -71,8 +71,8 @@ class ScanMaterialInfoBloc
         final permissionsResult = await scanInfoRepository.getPermission(
           type: PermissionType.camera,
         );
-        permissionsResult.fold(
-          (failure) => emit(
+        await permissionsResult.fold(
+          (failure) async => emit(
             state.copyWith(
               apiFailureOrSuccessOption: optionOf(permissionsResult),
             ),
@@ -105,8 +105,8 @@ class ScanMaterialInfoBloc
         final permissionsResult = await scanInfoRepository.getPermission(
           type: PermissionType.files,
         );
-        permissionsResult.fold(
-          (failure) => emit(
+        await permissionsResult.fold(
+          (failure) async => emit(
             state.copyWith(
               apiFailureOrSuccessOption: optionOf(permissionsResult),
             ),
