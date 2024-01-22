@@ -301,7 +301,7 @@ class _FromDueDateFilter extends StatelessWidget {
             final dueDateRange = await showDateRangePicker(
               context: context,
               firstDate: DateTime(1900),
-              lastDate: DateTime.now(),
+              lastDate: DateTime.now().add(const Duration(days: 365 * 10)),
               initialDateRange: state.filter.getDueDateFilterDateRange,
             );
             if (dueDateRange == null) return;
@@ -356,7 +356,7 @@ class _ToDueDateFilter extends StatelessWidget {
             final dueDateRange = await showDateRangePicker(
               context: context,
               firstDate: DateTime(1900),
-              lastDate: DateTime.now(),
+              lastDate: DateTime.now().add(const Duration(days: 365 * 10)),
               initialDateRange: state.filter.getDueDateFilterDateRange,
             );
             if (dueDateRange == null) return;
