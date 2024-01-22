@@ -8,8 +8,7 @@ class AnnouncementArticleTagLocalDataSource {
       await rootBundle.loadString('assets/json/announcementArticleTag.json'),
     );
 
-    final List<String> tagList =
-        res['data']['search']['results']
+    final List<String> tagList = res['data']['search']['results']
         .map<String>(
           (e) => e['displayName'] as String,
         )
