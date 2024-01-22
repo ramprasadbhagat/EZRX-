@@ -36,3 +36,11 @@ String getFileSizeString(int sizeInBytes) {
 
   return '';
 }
+
+bool isUserOverride(String value) {
+  return value == 'USEROVR';
+}
+
+bool isApproverOverride(String value) {
+  return value == 'Approver';
+}

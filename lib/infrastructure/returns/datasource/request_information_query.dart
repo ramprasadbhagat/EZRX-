@@ -25,6 +25,10 @@ class RequestInformationQuery {
       unitPrice
       totalPrice
       initialQuantity
+      priceOverrideTrail {
+          overriderRole
+          overrideValue
+      }
       materialNumber
       materialDescription
       batch

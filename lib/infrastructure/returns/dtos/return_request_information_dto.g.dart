@@ -58,6 +58,11 @@ _$_ReturnRequestInformationDto _$$_ReturnRequestInformationDtoFromJson(
           ? 0
           : const StringToIntConverter()
               .fromJson(json['initialQuantity'] as String),
+      priceOverrideTrail: (json['priceOverrideTrail'] as List<dynamic>?)
+              ?.map((e) =>
+                  PriceOverrideTrailDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_ReturnRequestInformationDtoToJson(
@@ -95,4 +100,24 @@ Map<String, dynamic> _$$_ReturnRequestInformationDtoToJson(
           const StringToDoubleConverter().toJson(instance.overrideValue),
       'initialQuantity':
           const StringToIntConverter().toJson(instance.initialQuantity),
+      'priceOverrideTrail':
+          instance.priceOverrideTrail.map((e) => e.toJson()).toList(),
+    };
+
+_$_PriceOverrideTrailDto _$$_PriceOverrideTrailDtoFromJson(
+        Map<String, dynamic> json) =>
+    _$_PriceOverrideTrailDto(
+      overrideValue: json['overrideValue'] == null
+          ? 0
+          : const StringToDoubleConverter()
+              .fromJson(json['overrideValue'] as String),
+      overrideRole: json['overriderRole'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_PriceOverrideTrailDtoToJson(
+        _$_PriceOverrideTrailDto instance) =>
+    <String, dynamic>{
+      'overrideValue':
+          const StringToDoubleConverter().toJson(instance.overrideValue),
+      'overriderRole': instance.overrideRole,
     };

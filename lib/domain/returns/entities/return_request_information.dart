@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'return_request_information.freezed.dart';
 
@@ -37,6 +38,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required Remarks remarks,
     required double overrideValue,
     required int initialQuantity,
+    required List<PriceOverrideTrail> priceOverrideTrail,
   }) = _ReturnRequestInformation;
 
   factory ReturnRequestInformation.empty() => ReturnRequestInformation(
@@ -69,6 +71,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         remarks: Remarks(''),
         overrideValue: 0.0,
         initialQuantity: 0,
+        priceOverrideTrail: <PriceOverrideTrail>[],
       );
 
   double get calculatedUnitPrice {
@@ -90,4 +93,40 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
 
   bool get isApprovedQuantityOverride =>
       status.isApprovedStatus && initialQuantity > 0;
+
+  // [isApproverOverride] check whether the approver has overridden the return
+  // value
+  bool get isApproverOverride =>
+      priceOverrideTrail.any((element) => element.overrideRole.isApprover);
+
+  // [userOverrideValue] get overridden value from [priceOverrideTrail]
+  // done by user end when return status is approved and approver has
+  // updated the value.
+  double get userOverrideValue => priceOverrideTrail
+      .firstWhere(
+        (element) => status.isApprovedStatus && element.overrideRole.isUser,
+        orElse: () => PriceOverrideTrail.empty(),
+      )
+      .overrideValue;
+
+  bool get isUnapprovedCounterOffer =>
+      !status.isApprovedStatus && isCounterOfferRequested;
+
+  bool get isApprovedCounterOffer =>
+      status.isApprovedStatus && isCounterOfferRequested;
+}
+
+@freezed
+class PriceOverrideTrail with _$PriceOverrideTrail {
+  const PriceOverrideTrail._();
+
+  factory PriceOverrideTrail({
+    required double overrideValue,
+    required OverrideRole overrideRole,
+  }) = _PriceOverrideTrail;
+
+  factory PriceOverrideTrail.empty() => PriceOverrideTrail(
+        overrideValue: 0.0,
+        overrideRole: OverrideRole(''),
+      );
 }

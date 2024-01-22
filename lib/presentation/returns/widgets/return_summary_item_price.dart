@@ -1,20 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/return_override_info_icon.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnSummaryItemPrice extends StatelessWidget {
-  final bool showPreviousPrice;
-  final String originPrice;
-  final String unitPrice;
+  final ReturnRequestInformation requestInformation;
 
   const ReturnSummaryItemPrice({
     Key? key,
-    required this.showPreviousPrice,
-    required this.originPrice,
-    required this.unitPrice,
+    required this.requestInformation,
   }) : super(key: key);
 
   @override
@@ -26,23 +24,29 @@ class ReturnSummaryItemPrice extends StatelessWidget {
       children: [
         Row(
           children: [
-            if (showPreviousPrice)
+            if (requestInformation.isUnapprovedCounterOffer)
               Padding(
                 padding: const EdgeInsets.only(right: 4.0),
                 child: PriceComponent(
                   salesOrgConfig: configs,
-                  price: originPrice,
+                  price: requestInformation.unitPrice.toString(),
                   type: PriceStyle.returnOriginPriceStrikeThrough,
                 ),
               ),
             PriceComponent(
               salesOrgConfig: configs,
-              price: unitPrice,
+              price: requestInformation.calculatedUnitPrice.toString(),
               type: PriceStyle.bonusPrice,
             ),
+            if (requestInformation.isApprovedCounterOffer)
+              ReturnOverrideInfoIcon.price(
+                context: context,
+                price: requestInformation.userOverrideValue.toString(),
+                displaySubContent: requestInformation.isApproverOverride,
+              ),
           ],
         ),
-        if (showPreviousPrice)
+        if (requestInformation.isCounterOfferRequested)
           Text(
             context.tr('Requested return value counter offer'),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(

@@ -130,3 +130,22 @@ class FileSize extends ValueObject<int> {
 
   const FileSize._(this.value);
 }
+
+class OverrideRole extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory OverrideRole(String input) {
+    return OverrideRole._(validateStringNotEmpty(input));
+  }
+
+  bool get isUser {
+    return isUserOverride(value.getOrElse(() => ''));
+  }
+
+  bool get isApprover {
+    return isApproverOverride(value.getOrElse(() => ''));
+  }
+
+  const OverrideRole._(this.value);
+}

@@ -62,6 +62,16 @@
                     "unitPrice": "15",
                     "totalPrice": "11",
                     "initialQuantity": "2",
+                    "priceOverrideTrail": [
+                        {
+                            "overriderRole": "USEROVR",
+                            "overrideValue": "110"
+                        },
+                        {
+                            "overriderRole": "Approver",
+                            "overrideValue": "11"
+                        }
+                    ],
                     "billingItemNumber": "000010",
                     "salesDocumentItemNumber": "000010",
                     "materialNumber": "000000000021041790",

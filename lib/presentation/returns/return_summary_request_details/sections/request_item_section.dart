@@ -79,11 +79,7 @@ class _ReturnItemSectionState extends State<_ReturnItemSection> {
       quantity: widget.returnRequestinformation.returnQuantity.toString(),
       isQuantityBelowImage: false,
       priceComponent: ReturnSummaryItemPrice(
-        showPreviousPrice:
-            widget.returnRequestinformation.isCounterOfferRequested,
-        originPrice: widget.returnRequestinformation.unitPrice.toString(),
-        unitPrice:
-            widget.returnRequestinformation.calculatedUnitPrice.toString(),
+        requestInformation: widget.returnRequestinformation,
       ),
       statusWidget: StatusLabel(
         status: StatusType(
@@ -106,6 +102,7 @@ class _ReturnItemSectionState extends State<_ReturnItemSection> {
                   if (widget
                       .returnRequestinformation.isApprovedQuantityOverride)
                     ReturnOverrideInfoIcon.quantity(
+                      context: context,
                       initialQuantity:
                           widget.returnRequestinformation.initialQuantity,
                     ),

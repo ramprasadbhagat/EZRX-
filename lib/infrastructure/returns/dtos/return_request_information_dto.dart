@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_attachment_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -75,6 +76,8 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
     @StringToIntConverter()
     @JsonKey(name: 'initialQuantity', defaultValue: 0)
         required int initialQuantity,
+    @JsonKey(name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
+        required List<PriceOverrideTrailDto> priceOverrideTrail,
   }) = _ReturnRequestInformationDto;
 
   ReturnRequestInformation toDomain() {
@@ -108,6 +111,7 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       remarks: Remarks(remarks),
       overrideValue: overrideValue,
       initialQuantity: initialQuantity,
+      priceOverrideTrail: priceOverrideTrail.map((e) => e.toDomain()).toList(),
     );
   }
 
@@ -115,4 +119,27 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
     Map<String, dynamic> json,
   ) =>
       _$ReturnRequestInformationDtoFromJson(json);
+}
+
+@freezed
+class PriceOverrideTrailDto with _$PriceOverrideTrailDto {
+  const PriceOverrideTrailDto._();
+
+  factory PriceOverrideTrailDto({
+    @StringToDoubleConverter()
+    @JsonKey(name: 'overrideValue', defaultValue: 0)
+        required double overrideValue,
+    @JsonKey(name: 'overriderRole', defaultValue: '')
+        required String overrideRole,
+  }) = _PriceOverrideTrailDto;
+
+  PriceOverrideTrail toDomain() {
+    return PriceOverrideTrail(
+      overrideValue: overrideValue,
+      overrideRole: OverrideRole(overrideRole),
+    );
+  }
+
+  factory PriceOverrideTrailDto.fromJson(Map<String, dynamic> json) =>
+      _$PriceOverrideTrailDtoFromJson(json);
 }

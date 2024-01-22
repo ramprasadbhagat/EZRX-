@@ -15,16 +15,34 @@ class ReturnOverrideInfoIcon extends StatelessWidget {
     required this.subContent,
   }) : super(key: key);
 
-  factory ReturnOverrideInfoIcon.quantity({required int initialQuantity}) =>
+  factory ReturnOverrideInfoIcon.quantity({
+    required BuildContext context,
+    required int initialQuantity,
+  }) =>
       ReturnOverrideInfoIcon._(
-        header: 'Return quantity changed',
-        content: '${'Request Return quantity :'} <$initialQuantity>',
-        subContent: 'Approver updated the QTY',
+        header: context.tr('Return quantity changed'),
+        content:
+            '${context.tr('Request Return quantity :')} <$initialQuantity>',
+        subContent: context.tr('Approver updated the QTY'),
+      );
+
+  factory ReturnOverrideInfoIcon.price({
+    required BuildContext context,
+    required String price,
+    required bool displaySubContent,
+  }) =>
+      ReturnOverrideInfoIcon._(
+        header: context.tr('Return value changed'),
+        content: '${context.tr('Request counter offer :')} <$price>',
+        subContent:
+            displaySubContent ? context.tr('Approver updated the value') : '',
       );
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      padding: EdgeInsets.zero,
+      constraints: const BoxConstraints(),
       onPressed: () {
         showModalBottomSheet(
           context: context,
@@ -73,7 +91,7 @@ class _ReturnInfoBottomSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            context.tr(header),
+            header,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: ZPColors.primary,
                 ),
@@ -82,17 +100,18 @@ class _ReturnInfoBottomSheet extends StatelessWidget {
             height: 5,
           ),
           Text(
-            context.tr(content),
+            content,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.extraLightGrey4,
                 ),
           ),
-          Text(
-            context.tr(subContent),
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: ZPColors.extraLightGrey4,
-                ),
-          ),
+          if (subContent.isNotEmpty)
+            Text(
+              subContent,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.extraLightGrey4,
+                  ),
+            ),
           const SizedBox(
             height: 30,
           ),
