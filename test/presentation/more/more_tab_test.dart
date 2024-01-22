@@ -659,5 +659,30 @@ void main() {
       },
       variant: salesOrgVariant,
     );
+
+    testWidgets(
+      ' -> Test User guide',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        final userGuideTileFinder = find.byKey(WidgetKeys.userGuideTile);
+        await tester.dragUntilVisible(
+          userGuideTileFinder,
+          find.byKey(WidgetKeys.moreTapListContent),
+          const Offset(0, -500),
+        );
+        await tester.pumpAndSettle();
+        expect(userGuideTileFinder, findsOneWidget);
+        await tester.tap(userGuideTileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'WebViewPageRoute');
+      },
+    );
   });
 }

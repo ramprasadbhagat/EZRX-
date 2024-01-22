@@ -161,6 +161,7 @@ class WidgetKeys {
   static const Key securityTile = Key('securityTile');
   static const Key notificationTile = Key('notificationTile');
   static const Key contactUsTile = Key('contactUsTile');
+  static const Key userGuideTile = Key('userGuideTile');
   static const Key proxyLoginUserNameField = Key('proxyLoginUserNameField');
   static const Key proxyLoginButton = Key('proxyLoginButton');
   static const Key proxyLoginSheet = Key('proxyLoginSheet');

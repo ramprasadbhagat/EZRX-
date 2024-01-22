@@ -59,6 +59,7 @@ class MoreDetailsTile {
       );
 
   factory MoreDetailsTile.userGuide(BuildContext context) => MoreDetailsTile(
+        key: WidgetKeys.userGuideTile,
         icon: const Icon(
           Icons
               .menu_book_outlined, //TODO : will update it after Design Them update the Figma
