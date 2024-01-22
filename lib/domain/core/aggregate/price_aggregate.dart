@@ -769,7 +769,8 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   bool get showTaxBreakDown =>
-      salesOrgConfig.displayItemTaxBreakdown && !materialInfo.hidePrice;
+      salesOrgConfig.displayItemTaxBreakdown &&
+      materialInfo.isPriceVisibleForNonFOC;
 
   List<MaterialInfo> get convertedSampleBonusList {
     return bonusSampleItems

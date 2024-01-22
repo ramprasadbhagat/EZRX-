@@ -222,8 +222,7 @@ class _QuantityAndPrice extends StatelessWidget {
                       price: cartItem.finalCheckoutTotalForAllMaterial,
                     ),
                   ),
-                  if (cartItem.showTaxBreakDown &&
-                      !cartItem.materialInfo.isFOCMaterial)
+                  if (cartItem.showTaxBreakDown)
                     ItemTax(
                       cartItem: cartItem,
                     ),

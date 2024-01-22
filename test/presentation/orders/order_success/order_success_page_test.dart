@@ -47,6 +47,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_material.dart';
@@ -1862,6 +1863,53 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets('Find Material tax Breakdown', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
+        ),
+      );
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: fakeOrderHistoryDetails.copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeMaterialItem.copyWith(
+                priceAggregate: PriceAggregate.empty().copyWith(
+                  salesOrgConfig: fakeVNSalesOrgConfigs,
+                  materialInfo: MaterialInfo.empty().copyWith(tax: 5),
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(100),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      final orderItemsSection = find.byKey(WidgetKeys.orderSuccessItemsSection);
+      await tester.scrollUntilVisible(orderItemsSection, -500);
+      expect(orderItemsSection, findsOneWidget);
+      final itemTax = find.byType(ItemTax);
+      expect(itemTax, findsOneWidget);
+      final totalPriceWithTax = find.textContaining(
+        'VND 105.00',
+        findRichText: true,
+      );
+      final tax = find.textContaining(
+        '(5% tax)',
+        findRichText: true,
+      );
+      final taxAmount = find.textContaining(
+        'VND 5.00',
+        findRichText: true,
+      );
+      expect(tax, findsOneWidget);
+      expect(taxAmount, findsOneWidget);
+      expect(totalPriceWithTax, findsOneWidget);
     });
   });
 }

@@ -189,8 +189,7 @@ class _ItemSubTotalSection extends StatelessWidget {
             ],
           ),
         ),
-        if (cartProduct.showTaxBreakDown &&
-            !cartProduct.materialInfo.isFOCMaterial)
+        if (cartProduct.showTaxBreakDown)
           Padding(
             padding: const EdgeInsets.only(
               left: 16,

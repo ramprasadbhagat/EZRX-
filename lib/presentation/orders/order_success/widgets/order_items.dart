@@ -125,12 +125,20 @@ class _MaterialItem extends StatelessWidget {
                   color: ZPColors.black,
                 ),
           ),
-          PriceComponent(
-            key: WidgetKeys.orderSuccessItemTotalPrice,
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-            price: orderItem.itemTotalPrice(
-              isIDMarket,
-            ),
+          Column(
+            children: [
+              PriceComponent(
+                key: WidgetKeys.orderSuccessItemTotalPrice,
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                price: orderItem.itemTotalPrice(
+                  isIDMarket,
+                ),
+              ),
+              if (orderItem.showItemTax)
+                ItemTax(
+                  cartItem: orderItem.priceAggregate,
+                ),
+            ],
           ),
         ],
       ),

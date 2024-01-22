@@ -199,6 +199,9 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
       ].join(' | ');
 
   bool get isNotEmpty => this != OrderHistoryDetailsOrderItem.empty();
+
+  bool get showItemTax =>
+      priceAggregate.showTaxBreakDown && !type.isMaterialTypeBonus;
 }
 
 extension ViewByOrderDetailsListExtension

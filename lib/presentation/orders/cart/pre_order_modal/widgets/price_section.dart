@@ -14,8 +14,7 @@ class _PriceSection extends StatelessWidget {
           salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
           price: cartProduct.finalPriceTotalForAllMaterial,
         ),
-        if (cartProduct.showTaxBreakDown &&
-            !cartProduct.materialInfo.isFOCMaterial)
+        if (cartProduct.showTaxBreakDown)
           ItemTax(
             cartItem: cartProduct,
           ),

@@ -178,6 +178,8 @@ class MaterialInfo with _$MaterialInfo {
         materialNumber.displayMatNo,
         if (showGMCPart && getGMC.isNotEmpty) getGMC.getValue(),
       ].join(' | ');
+
+  bool get isPriceVisibleForNonFOC => !hidePrice && !isFOCMaterial;
 }
 
 @freezed
