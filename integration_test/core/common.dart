@@ -8,10 +8,13 @@ import 'infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import 'infrastructure/zephyr/repository/zephyr_repository.dart';
 import 'test_locator.dart' as test;
 
-Future<void> runAppForTesting(WidgetTester tester) async {
+Future<void> runAppForTesting(
+  WidgetTester tester, {
+  Flavor flavor = Flavor.uat,
+}) async {
   Hive.resetAdapters();
   await locator.reset(dispose: true);
-  await initialSetup(flavor: Flavor.uat);
+  await initialSetup(flavor: flavor);
   await runAppWithCrashlyticsAndLocalization();
   test.setUpTestLocator();
   await tester.pump();

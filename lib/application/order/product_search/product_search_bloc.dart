@@ -34,16 +34,9 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
     required this.productSearchRepository,
     required this.config,
   }) : super(ProductSearchState.initial()) {
-    on<_Initialized>((event, emit) async {
-      emit(
-        state.copyWith(
-          salesOrganization: event.salesOrganization,
-          configs: event.configs,
-          customerCodeInfo: event.customerCodeInfo,
-          shipToInfo: event.shipToInfo,
-          user: event.user,
-        ),
-      );
+    Future<void> fetchSearchKeys(
+      Emitter<ProductSearchState> emit,
+    ) async {
       final failureOrSuccess = await productSearchRepository.getSearchKeys();
       failureOrSuccess.fold(
         (failure) => emit(
@@ -58,6 +51,19 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           ),
         ),
       );
+    }
+
+    on<_Initialized>((event, emit) {
+      emit(
+        state.copyWith(
+          salesOrganization: event.salesOrganization,
+          configs: event.configs,
+          customerCodeInfo: event.customerCodeInfo,
+          shipToInfo: event.shipToInfo,
+          user: event.user,
+        ),
+      );
+      fetchSearchKeys(emit);
     });
     on<_SearchProduct>(
       (event, emit) async {
@@ -172,15 +178,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
             suggestedProductList: <MaterialInfo>[],
           ),
         );
-        add(
-          ProductSearchEvent.initialized(
-            salesOrganization: state.salesOrganization,
-            configs: state.configs,
-            customerCodeInfo: state.customerCodeInfo,
-            shipToInfo: state.shipToInfo,
-            user:state.user,
-          ),
-        );
+        fetchSearchKeys(emit);
       },
     );
 

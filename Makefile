@@ -92,6 +92,8 @@ run_th_client_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${CLIENTUSER}
 run_th_external_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${EXTERNALSALESREP}
+run_id_prod_user_cart_test:
+	./integration_test/id/prod_user_cart_runner.sh
 run_my_client_Integration_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/account_summary/account_invoice/${CLIENTUSER}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/payments_home/${CLIENTUSER}
