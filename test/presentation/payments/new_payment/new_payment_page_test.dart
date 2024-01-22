@@ -286,6 +286,7 @@ void main() {
       find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
   final closeButton = find.byKey(WidgetKeys.closeButton);
   final nextButton = find.byKey(WidgetKeys.nextButton);
+  final nextButtonID = find.byKey(WidgetKeys.nextButtonID);
   final checkAllWidget = find.byKey(WidgetKeys.checkAllWidget);
   final confirmBottomSheet = find.byKey(WidgetKeys.confirmBottomSheet);
 
@@ -937,7 +938,243 @@ void main() {
         expect(nextButton, findsOneWidget);
         await tester.tap(nextButton);
         await tester.pumpAndSettle();
+        await tester.tap(nextButtonID);
+        await tester.pumpAndSettle();
+        expect(
+          confirmBottomSheet,
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: confirmBottomSheet,
+            matching: find.text('Confirm payment settings?'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: confirmBottomSheetConfirmButton,
+          ),
+          findsOneWidget,
+        );
+        await tester.tap(confirmBottomSheetConfirmButton);
+        await tester.pumpAndSettle();
+        verify(
+          () => newPaymentBlocMock.add(
+            const NewPaymentEvent.createVirtualAccount(),
+          ),
+        ).called(1);
+      });
+
+      testWidgets('=> Button Next ID listener disable',
+          (WidgetTester tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedInvoices: fakeInvoices,
+            selectedCredits: fakeCredits,
+            paymentMethods: [
+              NewPaymentMethod(
+                paymentMethod: PaymentMethodValue('Bank-In'),
+                options: [
+                  PaymentMethodOption.empty().copyWith(
+                    bankOptionId: BankOptionId('permata'),
+                  ),
+                ],
+              )
+            ],
+            selectedPaymentMethod: NewPaymentMethod(
+              paymentMethod: PaymentMethodValue('Bank-In'),
+              options: [
+                PaymentMethodOption.empty().copyWith(
+                  bankOptionId: BankOptionId('permata'),
+                ),
+              ],
+            ),
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        whenListen(
+          availableCreditsBlocMock,
+          Stream.fromIterable([
+            AvailableCreditsState.initial(),
+            AvailableCreditsState.initial().copyWith(items: fakeCredits),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(nextButton, findsOneWidget);
         await tester.tap(nextButton);
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              selectedInvoices: fakeInvoices,
+              selectedCredits: fakeCredits,
+              paymentMethods: [
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [
+                    PaymentMethodOption.empty().copyWith(
+                      bankOptionId: BankOptionId('permata'),
+                    ),
+                  ],
+                )
+              ],
+              selectedPaymentMethod: NewPaymentMethod(
+                paymentMethod: PaymentMethodValue('Bank-In'),
+                options: [
+                  PaymentMethodOption.empty().copyWith(
+                    bankOptionId: BankOptionId('permata'),
+                  ),
+                ],
+              ),
+            ),
+            NewPaymentState.initial().copyWith(
+              selectedInvoices: fakeInvoices,
+              selectedCredits: fakeCredits,
+              paymentMethods: [
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [
+                    PaymentMethodOption.empty().copyWith(
+                      bankOptionId: BankOptionId('permata'),
+                    ),
+                  ],
+                )
+              ],
+              selectedPaymentMethod: NewPaymentMethod(
+                paymentMethod: PaymentMethodValue('Bank-In'),
+                options: [PaymentMethodOption.empty()],
+              ),
+            ),
+          ]),
+        );
+        await tester.pumpAndSettle();
+        await tester.tap(nextButtonID);
+        await tester.pumpAndSettle();
+        expect(
+          confirmBottomSheet,
+          findsNothing,
+        );
+        expect(
+          find.descendant(
+            of: confirmBottomSheet,
+            matching: find.text('Confirm payment settings?'),
+          ),
+          findsNothing,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: confirmBottomSheetConfirmButton,
+          ),
+          findsNothing,
+        );
+        verifyNever(
+          () => newPaymentBlocMock.add(
+            const NewPaymentEvent.createVirtualAccount(),
+          ),
+        );
+      });
+
+      testWidgets('=> Button Next ID listener enable',
+          (WidgetTester tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedInvoices: fakeInvoices,
+            selectedCredits: fakeCredits,
+            paymentMethods: [
+              NewPaymentMethod(
+                paymentMethod: PaymentMethodValue('Bank-In'),
+                options: [
+                  PaymentMethodOption.empty().copyWith(
+                    bankOptionId: BankOptionId('permata'),
+                  ),
+                ],
+              )
+            ],
+            selectedPaymentMethod: NewPaymentMethod(
+              paymentMethod: PaymentMethodValue('Bank-In'),
+              options: [
+                PaymentMethodOption.empty().copyWith(
+                  bankOptionId: BankOptionId('permata'),
+                ),
+              ],
+            ),
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        whenListen(
+          availableCreditsBlocMock,
+          Stream.fromIterable([
+            AvailableCreditsState.initial(),
+            AvailableCreditsState.initial().copyWith(items: fakeCredits),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(nextButton, findsOneWidget);
+        await tester.tap(nextButton);
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              selectedInvoices: fakeInvoices,
+              selectedCredits: fakeCredits,
+              paymentMethods: [
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [
+                    PaymentMethodOption.empty().copyWith(
+                      bankOptionId: BankOptionId('permata'),
+                    ),
+                  ],
+                )
+              ],
+              selectedPaymentMethod: NewPaymentMethod(
+                paymentMethod: PaymentMethodValue('Bank-In'),
+                options: [PaymentMethodOption.empty()],
+              ),
+            ),
+            NewPaymentState.initial().copyWith(
+              selectedInvoices: fakeInvoices,
+              selectedCredits: fakeCredits,
+              paymentMethods: [
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [
+                    PaymentMethodOption.empty().copyWith(
+                      bankOptionId: BankOptionId('permata'),
+                    ),
+                  ],
+                )
+              ],
+              selectedPaymentMethod: NewPaymentMethod(
+                paymentMethod: PaymentMethodValue('Bank-In'),
+                options: [
+                  PaymentMethodOption.empty().copyWith(
+                    bankOptionId: BankOptionId('permata'),
+                  ),
+                ],
+              ),
+            ),
+          ]),
+        );
+        await tester.pumpAndSettle();
+        await tester.tap(nextButtonID);
         await tester.pumpAndSettle();
         expect(
           confirmBottomSheet,

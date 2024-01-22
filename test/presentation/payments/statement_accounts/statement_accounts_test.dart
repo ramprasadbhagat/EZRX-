@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/payments/download_payment_attachments/dow
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -22,6 +23,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -35,6 +37,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -80,6 +84,10 @@ class MockAvailableCreditsBloc
 class MockNewPaymentBloc extends MockBloc<NewPaymentEvent, NewPaymentState>
     implements NewPaymentBloc {}
 
+class MockPaymentSummary
+    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
+    implements PaymentSummaryBloc {}
+
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
 final locator = GetIt.instance;
@@ -89,6 +97,7 @@ void main() {
   late AppRouter autoRouterMock;
   late UserBloc mockUserBloc;
   late EligibilityBloc eligibilityBlocMock;
+  late PaymentSummaryBloc paymentSummaryBlocMock;
   late CustomerCodeBloc mockCustomerCodeBloc;
   late EligibilityBloc mockEligibilityBloc;
   late AnnouncementBloc mockAnnouncementBloc;
@@ -119,6 +128,7 @@ void main() {
     mockSalesOrgBloc = MockSalesOrgBloc();
     mockUserBloc = MockUserBloc();
     eligibilityBlocMock = EligibilityBlockMock();
+    paymentSummaryBlocMock = MockPaymentSummary();
     autoRouterMock = locator<AppRouter>();
     mockCustomerCodeBloc = MockCustomerCodeBloc();
     mockEligibilityBloc = MockEligibilityBloc();
@@ -196,6 +206,9 @@ void main() {
           ),
           BlocProvider<NewPaymentBloc>(
             create: (context) => mockNewPaymentBloc,
+          ),
+          BlocProvider<PaymentSummaryBloc>(
+            create: (context) => paymentSummaryBlocMock,
           ),
         ],
         child: const Scaffold(
@@ -405,18 +418,14 @@ void main() {
         () => mockSalesOrgBloc.state,
       ).thenReturn(
         SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: salesOrg,
-          ),
+          salesOrganisation: fakeSalesOrganisation,
         ),
       );
       when(
         () => eligibilityBlocMock.state,
       ).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: salesOrg,
-          ),
+          salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerCodeSoldTo: 'mock-customerCodeSoldTo',
           ),
@@ -444,6 +453,38 @@ void main() {
       verify(
         () => mockNewPaymentBloc.add(
           NewPaymentEvent.initialized(
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'mock-customerCodeSoldTo',
+            ),
+            shipToInfo: ShipToInfo.empty(),
+            user: User.empty(),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('New payment Button disable', (tester) async {
+      whenListen(
+        mockNewPaymentBloc,
+        Stream.fromIterable([
+          NewPaymentState.initial().copyWith(isFetchingPrincipalCutoffs: true),
+        ]),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      final paymentButton = find.byKey(WidgetKeys.newPaymentButton);
+      expect(
+        paymentButton,
+        findsOneWidget,
+      );
+      await tester.tap(paymentButton);
+      await tester.pumpAndSettle();
+      verifyNever(
+        () => mockNewPaymentBloc.add(
+          NewPaymentEvent.initialized(
             salesOrganisation: SalesOrganisation.empty().copyWith(
               salesOrg: salesOrg,
             ),
@@ -454,8 +495,114 @@ void main() {
             user: User.empty(),
           ),
         ),
+      );
+    });
+
+    testWidgets('New payment Button show failed bottom sheet', (tester) async {
+      when(() => paymentSummaryBlocMock.state).thenReturn(
+        PaymentSummaryState.initial().copyWith(
+          details: [
+            PaymentSummaryDetails.empty().copyWith(
+              status: FilterStatus('In Progress'),
+            )
+          ],
+        ),
+      );
+
+      when(
+        () => eligibilityBlocMock.state,
+      ).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: fakeIDSalesOrgConfigs.salesOrg,
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'mock-customerCodeSoldTo',
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      final paymentButton = find.byKey(WidgetKeys.newPaymentButton);
+      expect(
+        paymentButton,
+        findsOneWidget,
+      );
+      await tester.tap(paymentButton);
+      await tester.pumpAndSettle();
+
+      final confirmBottomSheet = find.byKey(WidgetKeys.confirmBottomSheet);
+      expect(
+        confirmBottomSheet,
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('New payment Button success', (tester) async {
+      when(() => paymentSummaryBlocMock.state).thenReturn(
+        PaymentSummaryState.initial().copyWith(
+          details: [
+            PaymentSummaryDetails.empty().copyWith(
+              status: FilterStatus('Pending'),
+            )
+          ],
+        ),
+      );
+
+      when(
+        () => eligibilityBlocMock.state,
+      ).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: fakeIDSalesOrgConfigs.salesOrg,
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'mock-customerCodeSoldTo',
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      final paymentButton = find.byKey(WidgetKeys.newPaymentButton);
+      expect(
+        paymentButton,
+        findsOneWidget,
+      );
+      await tester.tap(paymentButton);
+      await tester.pumpAndSettle();
+
+      final confirmBottomSheet = find.byKey(WidgetKeys.confirmBottomSheet);
+      expect(
+        confirmBottomSheet,
+        findsNothing,
+      );
+
+      verify(
+        () => mockNewPaymentBloc.add(
+          NewPaymentEvent.initialized(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: fakeIDSalesOrgConfigs.salesOrg,
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'mock-customerCodeSoldTo',
+            ),
+            shipToInfo: ShipToInfo.empty(),
+            user: User.empty(),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => mockNewPaymentBloc.add(
+          const NewPaymentEvent.getPrincipalCutoffs(),
+        ),
       ).called(1);
     });
+
     group('Filter test-', () {
       testWidgets('Test filter section when data is empty ', (tester) async {
         await tester.pumpWidget(getWUT());

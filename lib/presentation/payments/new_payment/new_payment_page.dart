@@ -215,7 +215,7 @@ class _NextButtonID extends StatelessWidget {
         return LoadingShimmer.withChild(
           enabled: state.isCreatingVirtualAccount,
           child: ElevatedButton(
-            key: WidgetKeys.nextButton,
+            key: WidgetKeys.nextButtonID,
             onPressed: state.enableCreateVirtualAccount ? onTab : null,
             child: Text(
               context.tr('Next'),

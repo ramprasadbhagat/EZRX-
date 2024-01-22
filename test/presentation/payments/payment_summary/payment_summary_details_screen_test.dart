@@ -582,6 +582,15 @@ void main() {
           ),
         ),
       );
+
+      verify(
+        () => paymentSummaryBloc.add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: PaymentSummaryFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+      ).called(1);
     });
 
     testWidgets('Payment Summary Details Page - Cancel payment advice fail',

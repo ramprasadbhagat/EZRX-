@@ -19,6 +19,7 @@ class WidgetKeys {
   static const Key snackBarDismissButton = Key('snackBarDismissButton');
   static const Key scrollToTopArrowIcon = Key('scrollToTopArrowIconKey');
   static const Key nextButton = Key('nextButton');
+  static const Key nextButtonID = Key('nextButtonID');
   static const Key backButton = Key('backButton');
   static const Key arrowButton = Key('arrowButton');
   static const Key commonTileItemHeader = Key('commonTileItemHeader');
