@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -1043,7 +1044,23 @@ void main() {
           find.byKey(WidgetKeys.viewByOrderOrderNumberLoading);
       expect(loadingWidgetFinder, findsOneWidget);
     });
+
     testWidgets('Order Number section failure test ', (tester) async {
+      const failureMessage = 'fakeMessage';
+      final expectedStates = [
+        ViewByOrderState.initial().copyWith(
+          isFetching: true,
+        ),
+        ViewByOrderState.initial().copyWith(
+          failureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other(failureMessage))),
+          searchKey: SearchKey.searchFilter('fake_searchKey'),
+        ),
+      ];
+      whenListen(
+        viewByOrderBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       verifyNever(
@@ -1052,6 +1069,16 @@ void main() {
             orderHistoryDetails: fakeOrder.orderHeaders.first,
           ),
         ),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byType(CustomSnackBar),
+          matching: find.text(
+            failureMessage,
+          ),
+        ),
+        findsOneWidget,
       );
     });
     testWidgets('Order Number section test ', (tester) async {
@@ -1110,6 +1137,8 @@ void main() {
           ),
         ),
       ).called(1);
+      expect(autoRouterMock.current.name, ViewByOrderDetailsPageRoute.name);
+
       final orderNoTextFinder = find.textContaining(
         fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
       );

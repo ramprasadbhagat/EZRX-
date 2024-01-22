@@ -538,27 +538,6 @@ void main() {
         ),
         expect: () => [],
       );
-
-      blocTest<ViewByItemsBloc, ViewByItemsState>(
-        'When apply the same filter + search key',
-        build: () => ViewByItemsBloc(
-          viewByItemRepository: viewByItemRepositoryMock,
-          config: config,
-        ),
-        seed: () => ViewByItemsState.initial().copyWith(
-          searchKey: SearchKey.searchFilter('test'),
-          appliedFilter: ViewByItemFilter.empty()
-              .copyWith(orderDateFrom: DateTimeStringValue('test')),
-        ),
-        act: (bloc) => bloc.add(
-          ViewByItemsEvent.fetch(
-            viewByItemFilter: ViewByItemFilter.empty()
-                .copyWith(orderDateFrom: DateTimeStringValue('test')),
-            searchKey: SearchKey.searchFilter('test'),
-          ),
-        ),
-        expect: () => [],
-      );
     });
   });
 }

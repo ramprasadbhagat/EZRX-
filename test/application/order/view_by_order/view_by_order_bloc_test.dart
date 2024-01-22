@@ -352,27 +352,6 @@ void main() {
           ),
           expect: () => [],
         );
-
-        blocTest<ViewByOrderBloc, ViewByOrderState>(
-          'When apply the same filter + search key',
-          build: () => ViewByOrderBloc(
-            viewByOrderRepository: viewByOrderRepository,
-            config: config,
-          ),
-          seed: () => ViewByOrderState.initial().copyWith(
-            searchKey: SearchKey.searchFilter('test'),
-            appliedFilter: ViewByOrdersFilter.empty()
-                .copyWith(orderDateFrom: DateTimeStringValue('test')),
-          ),
-          act: (bloc) => bloc.add(
-            ViewByOrderEvent.fetch(
-              filter: ViewByOrdersFilter.empty()
-                  .copyWith(orderDateFrom: DateTimeStringValue('test')),
-              searchKey: SearchKey.searchFilter('test'),
-            ),
-          ),
-          expect: () => [],
-        );
       });
     },
   );

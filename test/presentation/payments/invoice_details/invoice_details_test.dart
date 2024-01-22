@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/payments/download_e_invoice/download_e_in
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -27,6 +28,7 @@ import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_details_section.dart';
@@ -406,6 +408,50 @@ void main() {
           ),
         ),
       ).called(1);
+      verify(
+        () => viewByItemDetailsBlocMock.add(
+          ViewByItemDetailsEvent.searchOrderHistory(
+            searchKey: SearchKey(
+              fakeInvoice.orderId.getOrDefaultValue(''),
+            ),
+          ),
+        ),
+      ).called(1);
+      expect(autoRouterMock.current.name, ViewByOrderDetailsPageRoute.name);
+    });
+
+    testWidgets(
+        ' => Order number section listen when onTap Test - failure case',
+        (tester) async {
+      const failureMessage = 'fakeMessage';
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(basicInfo: fakeInvoice),
+      );
+      whenListen(
+        viewByOrderBlocMock,
+        Stream.fromIterable([
+          ViewByOrderState.initial().copyWith(isFetching: true),
+          ViewByOrderState.initial().copyWith(
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other(failureMessage))),
+            searchKey: SearchKey.searchFilter('fake_searchKey'),
+          )
+        ]),
+      );
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byType(CustomSnackBar),
+          matching: find.text(
+            failureMessage,
+          ),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets(' => Display invoice summary with ID market', (tester) async {
