@@ -6,12 +6,15 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_article_tag_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/repository/announcement_info_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
+
+import '../../common_mock_data/sales_organsiation_mock.dart';
 
 class AnnouncementInfoRepositoryRepo extends Mock
     implements AnnouncementInfoRepository {}
@@ -23,16 +26,56 @@ void main() {
   final salesOrg = SalesOrg('');
   final user = User.empty();
   late Config config;
-
+  late List<String> announcementArticleTag;
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = AnnouncementInfoRepositoryRepo();
     config = Config()..appFlavor = Flavor.mock;
     announcementInfoMock =
         await AnnouncementInfoLocalDataSource().getAnnouncementInfo();
+    announcementArticleTag = await AnnouncementArticleTagLocalDataSource()
+        .getAnnouncementArticleTags();
   });
 
   group('Announcement Info Bloc', () {
+
+    blocTest(
+      'Get announcement info Initialize',
+      build: () => AnnouncementInfoBloc(
+        announcementInfoRepository: repository,
+        config: config,
+      ),
+      setUp: () {
+        when(
+          () => repository.getAnnouncement(
+            user: user,
+            salesOrg: salesOrg,
+            pageSize: config.pageSize,
+            after: '',
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            announcementInfoMock,
+          ),
+        );
+      },
+      act: (AnnouncementInfoBloc bloc) => bloc.add(
+        AnnouncementInfoEvent.initialize(user: user, salesOrg: salesOrg),
+      ),
+      expect: () => [
+        announcementInfoState.copyWith(user: user, salesOrg: salesOrg),
+        announcementInfoState.copyWith(
+          isLoading: true,
+          user: user,
+          salesOrg: salesOrg,
+        ),
+        announcementInfoState.copyWith(
+          announcementInfo: announcementInfoMock,
+          user: user,
+          salesOrg: salesOrg,
+        ),
+      ],
+    );
     blocTest(
       'Get announcement info fail',
       build: () => AnnouncementInfoBloc(
@@ -199,6 +242,52 @@ void main() {
           searchKey: SearchKey.searchFilter('fake_searchKey'),
         ),
       ],
+    );
+
+    blocTest(
+      'Get announcement info setCategoryKey',
+      build: () => AnnouncementInfoBloc(
+        announcementInfoRepository: repository,
+        config: config,
+      ),
+      seed: () => announcementInfoState.copyWith(
+        announcementInfo: announcementInfoMock,
+        user: user,
+        salesOrg: fakeMYSalesOrg,
+      ),
+      act: (AnnouncementInfoBloc bloc) => bloc.add(
+        AnnouncementInfoEvent.setCategoryKey(
+          categoryKeyList: announcementArticleTag,
+        ),
+      ),
+      expect: () => [
+        announcementInfoState.copyWith(
+          announcementInfo: announcementInfoMock,
+          user: user,
+          salesOrg: fakeMYSalesOrg,
+          categoryKeyList: announcementArticleTag,
+        ),
+      ],
+    );
+
+    test(
+      'AnnouncementInfo State searchedAnnouncementList',
+      () {
+        final announcementInfo = announcementInfoState.copyWith(
+          announcementInfo: announcementInfoMock,
+          searchKey: SearchKey(
+            announcementInfoMock.announcementList.first.title.toLowerCase(),
+          ),
+        );
+        expect(
+          announcementInfo.searchedAnnouncementList,
+          announcementInfoMock.announcementList.where(
+            (element) => element.title.contains(
+              announcementInfoMock.announcementList.first.title,
+            ),
+          ),
+        );
+      },
     );
   });
 }

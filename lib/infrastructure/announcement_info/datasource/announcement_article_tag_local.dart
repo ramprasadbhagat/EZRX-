@@ -9,7 +9,11 @@ class AnnouncementArticleTagLocalDataSource {
     );
 
     final List<String> tagList =
-        res.data['data']['search'].map((e) => e['displayName']).toList();
+        res['data']['search']['results']
+        .map<String>(
+          (e) => e['displayName'] as String,
+        )
+        .toList();
     tagList.removeWhere((element) => element.isEmpty);
 
     return tagList;
