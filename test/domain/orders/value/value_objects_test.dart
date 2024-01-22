@@ -395,5 +395,238 @@ void main() {
         'Delivered',
       );
     });
+
+    test('Status is eligible For Fetch Zyllem Statues ', () {
+      final orderCreating = OrderStepValue('Order Creating');
+      final outForDelivery = OrderStepValue('Out for delivery');
+      final delivered = OrderStepValue('Delivered');
+      expect(
+        delivered.fetchZyllemStatusesNeeded,
+        true,
+      );
+      expect(
+        outForDelivery.fetchZyllemStatusesNeeded,
+        true,
+      );
+      expect(
+        orderCreating.fetchZyllemStatusesNeeded,
+        false,
+      );
+    });
+
+    test('History steps display or status == Order received', () {
+      final orderReceived = OrderStepValue('Order received');
+      expect(
+        orderReceived.viewByOrderHistorySteps.map((e) => e.title).toList(),
+        ['Order received'],
+      );
+
+      expect(
+        orderReceived.viewByItemHistorySteps.map((e) => e.title).toList(),
+        ['Order received'],
+      );
+    });
+
+    test('History steps display or status == Cancelled || Order Cancelled', () {
+      final orderCancelled = OrderStepValue('Order Cancelled');
+      final cancelled = OrderStepValue('Cancelled');
+
+      expect(
+        orderCancelled.viewByOrderHistorySteps.map((e) => e.title).toList(),
+        ['Order Cancelled', 'Order Created', 'Order received'],
+      );
+      expect(
+        cancelled.viewByOrderHistorySteps.map((e) => e.title).toList(),
+        ['Cancelled', 'Order Created', 'Order received'],
+      );
+
+      expect(
+        orderCancelled.viewByItemHistorySteps.map((e) => e.title).toList(),
+        ['Order Cancelled', 'Order Created'],
+      );
+      expect(
+        cancelled.viewByItemHistorySteps.map((e) => e.title).toList(),
+        ['Cancelled', 'Order Created'],
+      );
+    });
+
+    test(
+        'History steps display or status == Delivered - partial rejection || Delivered - rejected upon delivery',
+        () {
+      final partialRejection = OrderStepValue('Delivered - partial rejection');
+      final rejectUponDelivery =
+          OrderStepValue('Delivered - rejected upon delivery');
+
+      final fixedStep = [
+        'Out for delivery',
+        'Order packed and ready for delivery',
+        'Picking in progress',
+        'Pending release',
+        'Order Created',
+        'Order received',
+      ];
+
+      final viewByItemFixedSteps =
+          fixedStep.where((element) => element != 'Order received').toList();
+
+      expect(
+        partialRejection.viewByOrderHistorySteps.map((e) => e.title).toList(),
+        ['Delivered - partial rejection', ...fixedStep],
+      );
+      expect(
+        rejectUponDelivery.viewByOrderHistorySteps.map((e) => e.title).toList(),
+        ['Delivered - rejected upon delivery', ...fixedStep],
+      );
+
+      expect(
+        partialRejection.viewByItemHistorySteps.map((e) => e.title).toList(),
+        ['Delivered - partial rejection', ...viewByItemFixedSteps],
+      );
+      expect(
+        rejectUponDelivery.viewByItemHistorySteps.map((e) => e.title).toList(),
+        ['Delivered - rejected upon delivery', ...viewByItemFixedSteps],
+      );
+    });
+
+    test('History steps display or status == Pending release', () {
+      final pendingRelease = OrderStepValue('Pending release');
+
+      final fixedStep = [
+        'Order Created',
+        'Order received',
+      ];
+
+      expect(
+        pendingRelease.viewByOrderHistorySteps.map((e) => e.title).toList(),
+        ['Pending release', ...fixedStep],
+      );
+
+      final viewByItemFixedStep = [
+        'Order Created',
+      ];
+
+      expect(
+        pendingRelease.viewByItemHistorySteps.map((e) => e.title).toList(),
+        ['Pending release', ...viewByItemFixedStep],
+      );
+    });
+
+    test('History steps display or status == Picking in progress', () {
+      final pickInProgress = OrderStepValue('Picking in progress');
+
+      final fixedStep = [
+        'Pending release',
+        'Order Created',
+        'Order received',
+      ];
+
+      final viewByOrderFixedSteps =
+          fixedStep.where((element) => element != 'Pending release').toList();
+
+      final viewByItemFixedSteps =
+          fixedStep.where((element) => element != 'Order received').toList();
+
+      expect(
+        pickInProgress.viewByOrderHistorySteps.map((e) => e.title).toList(),
+        ['Picking in progress', ...viewByOrderFixedSteps],
+      );
+
+      expect(
+        pickInProgress.viewByItemHistorySteps.map((e) => e.title).toList(),
+        ['Picking in progress', ...viewByItemFixedSteps],
+      );
+    });
+
+    test(
+        'History steps display or status == Order packed and ready for delivery',
+        () {
+      final orderPacked = OrderStepValue('Order packed and ready for delivery');
+
+      final fixedStep = [
+        'Picking in progress',
+        'Pending release',
+        'Order Created',
+        'Order received',
+      ];
+
+      final viewByOrderFixedSteps =
+          fixedStep.where((element) => element != 'Pending release').toList();
+
+      final viewByItemFixedSteps =
+          fixedStep.where((element) => element != 'Order received').toList();
+
+      expect(
+        orderPacked.viewByOrderHistorySteps.map((e) => e.title).toList(),
+        [
+          'Order packed and ready for delivery',
+          ...viewByOrderFixedSteps
+        ],
+      );
+
+      expect(
+        orderPacked.viewByItemHistorySteps.map((e) => e.title).toList(),
+        [
+          'Order packed and ready for delivery',
+          ...viewByItemFixedSteps
+        ],
+      );
+    });
+
+    test('History steps display or status == Out for delivery', () {
+      final outForDelivery = OrderStepValue('Out for delivery');
+
+      final fixedStep = [
+        'Order packed and ready for delivery',
+        'Picking in progress',
+        'Pending release',
+        'Order Created',
+        'Order received',
+      ];
+
+      final viewByOrderFixedSteps =
+          fixedStep.where((element) => element != 'Pending release').toList();
+
+      final viewByItemFixedSteps =
+          fixedStep.where((element) => element != 'Order received').toList();
+
+      expect(
+        outForDelivery.viewByOrderHistorySteps.map((e) => e.title).toList(),
+        ['Out for delivery', ...viewByOrderFixedSteps],
+      );
+
+      expect(
+        outForDelivery.viewByItemHistorySteps.map((e) => e.title).toList(),
+        ['Out for delivery', ...viewByItemFixedSteps],
+      );
+    });
+
+    test('History steps display or status == Delivered', () {
+      final outForDelivery = OrderStepValue('Delivered');
+
+      final fixedStep = [
+        'Out for delivery',
+        'Order packed and ready for delivery',
+        'Picking in progress',
+        'Pending release',
+        'Order Created',
+        'Order received',
+      ];
+
+      final viewByOrderFixedSteps =
+          fixedStep.where((element) => element != 'Pending release').toList();
+
+      final viewByItemFixedSteps =
+          fixedStep.where((element) => element != 'Order received').toList();
+
+      expect(
+        outForDelivery.viewByOrderHistorySteps.map((e) => e.title).toList(),
+        ['Delivered', ...viewByOrderFixedSteps],
+      );
+
+      expect(
+        outForDelivery.viewByItemHistorySteps.map((e) => e.title).toList(),
+        ['Delivered', ...viewByItemFixedSteps],
+      );
+    });
   });
 }

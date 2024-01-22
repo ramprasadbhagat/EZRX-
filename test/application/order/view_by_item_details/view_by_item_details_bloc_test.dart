@@ -35,7 +35,9 @@ void main() {
   late List<OrderStatusTracker> fakeOrderStatusTracker;
   late OrderHistoryItem fakeOrderHistoryItem;
   late List<InvoiceData> invoiceDataForOrders;
-  final fakeStatus = OrderStepValue('Out for delivery');
+  final fakeOutForDeliveryStatus = OrderStepValue('Out for delivery');
+  final fakeOrderCreatingStatus = OrderStepValue('Order Creating');
+
   late ViewByItemDetailsState seedState;
   const fakeError = ApiFailure.other('fake-error');
   group(
@@ -49,7 +51,7 @@ void main() {
             await ViewByItemLocalDataSource().getInvoiceDataForOrders();
 
         fakeOrderHistoryItem = orderHistory.orderHistoryItems.first.copyWith(
-          status: fakeStatus,
+          status: fakeOutForDeliveryStatus,
         );
         seedState = ViewByItemDetailsState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -87,6 +89,50 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
           )
+        ],
+      );
+
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'For "fetchZyllemStatus" Event success',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => ViewByItemDetailsState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          salesOrganisation: fakeSalesOrganisation,
+          user: fakeRootAdminUser,
+        ),
+        setUp: () {
+          when(
+            () => orderStatusTrackerRepositoryMock.getOrderStatusTracker(
+              invoiceNumber: fakeOrderHistoryItem.invoiceData.invoiceNumber,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(fakeOrderStatusTracker),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.fetchZyllemStatus(
+            invoiceNumber: fakeOrderHistoryItem.invoiceData.invoiceNumber,
+          ),
+        ),
+        expect: () => [
+          ViewByItemDetailsState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeSalesOrganisation,
+            user: fakeRootAdminUser,
+            isLoading: true,
+          ),
+          ViewByItemDetailsState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeSalesOrganisation,
+            user: fakeRootAdminUser,
+            orderHistoryStatuses: fakeOrderStatusTracker,
+          ),
         ],
       );
 
@@ -163,7 +209,7 @@ void main() {
       );
 
       blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
-        'For "setItemOrderDetails" Event',
+        'For "setItemOrderDetails" Event and called fetchZyllemStatus',
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
@@ -259,6 +305,85 @@ void main() {
           ];
         },
       );
+
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'For "setItemOrderDetails" Event and not call fetchZyllemStatus',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => ViewByItemDetailsState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          salesOrganisation: fakeSalesOrganisation,
+          user: fakeRootAdminUser,
+        ),
+        setUp: () {
+          fakeOrderHistoryItem = orderHistory.orderHistoryItems.first.copyWith(
+            status: fakeOrderCreatingStatus,
+          );
+          when(
+            () => (viewByItemRepositoryMock.getViewByItemDetails(
+              soldTo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeSalesOrganisation,
+              user: fakeRootAdminUser,
+              searchKey: SearchKey(
+                fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
+              ),
+            )),
+          ).thenAnswer(
+            (invocation) async => Right(orderHistory),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.setItemOrderDetails(
+            orderHistory: orderHistory,
+            orderHistoryItem: fakeOrderHistoryItem,
+            disableDeliveryDateForZyllemStatus: false,
+          ),
+        ),
+        expect: () {
+          final modifiedList = orderHistory.orderHistoryItems
+              .where(
+                (element) =>
+                    element.orderNumber == fakeOrderHistoryItem.orderNumber,
+              )
+              .toList();
+          final newViewByItemDetails = orderHistory.copyWith(
+            orderHistoryItems: modifiedList,
+          );
+          return [
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: newViewByItemDetails,
+              orderHistoryItem: fakeOrderHistoryItem,
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: newViewByItemDetails,
+              orderHistoryItem: fakeOrderHistoryItem,
+              isDetailsLoading: true,
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: newViewByItemDetails,
+              orderHistoryItem: fakeOrderHistoryItem,
+              failureOrSuccessOption: optionOf(Right(orderHistory)),
+            ),
+          ];
+        },
+      );
+
       blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
         'For "fetchOrderHistoryDetails" Event',
         build: () => ViewByItemDetailsBloc(
@@ -274,7 +399,6 @@ void main() {
             orderHistoryItems: orderHistory.orderHistoryItems
                 .where(
                   (element) =>
-                      element.hashCode != fakeOrderHistoryItem.hashCode &&
                       element.orderNumber == fakeOrderHistoryItem.orderNumber,
                 )
                 .toList(),
@@ -307,7 +431,6 @@ void main() {
           final modifiedList = orderHistory.orderHistoryItems
               .where(
                 (element) =>
-                    element.hashCode != fakeOrderHistoryItem.hashCode &&
                     element.orderNumber == fakeOrderHistoryItem.orderNumber,
               )
               .toList();
