@@ -70,7 +70,7 @@ class _InvoiceCreditItemTile extends StatelessWidget {
                   key: WidgetKeys.invoiceCreditItemAmount,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: customerOpenItem.displayItemAmount.abs().toString(),
+                  price: customerOpenItem.openAmountInTransCrcy.toString(),
                 ),
               ],
             ),

@@ -28,11 +28,6 @@ _$_CustomerInvoiceDto _$$_CustomerInvoiceDtoFromJson(
           json['partialPaymentHistoryDesc'] as String? ?? '',
       paymentAmount: json['paymentAmount'] as String? ?? '',
       salesOrg: json['salesOrg'] as String? ?? '',
-      zzDeductCode: (json['zzDeductCode'] as List<dynamic>?)
-              ?.map((e) =>
-                  PaymentDeductionDto.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
     );
 
 Map<String, dynamic> _$$_CustomerInvoiceDtoToJson(
@@ -55,20 +50,4 @@ Map<String, dynamic> _$$_CustomerInvoiceDtoToJson(
       'partialPaymentHistoryDesc': instance.partialPaymentHistoryDesc,
       'paymentAmount': instance.paymentAmount,
       'salesOrg': instance.salesOrg,
-      'zzDeductCode': instance.zzDeductCode.map((e) => e.toJson()).toList(),
-    };
-
-_$_PaymentDeductionDto _$$_PaymentDeductionDtoFromJson(
-        Map<String, dynamic> json) =>
-    _$_PaymentDeductionDto(
-      deductCode: json['deductCode'] as String? ?? '',
-      amountInTransactionCurrency:
-          (json['amountInTransactionCurrency'] as num?)?.toDouble() ?? 0,
-    );
-
-Map<String, dynamic> _$$_PaymentDeductionDtoToJson(
-        _$_PaymentDeductionDto instance) =>
-    <String, dynamic>{
-      'deductCode': instance.deductCode,
-      'amountInTransactionCurrency': instance.amountInTransactionCurrency,
     };

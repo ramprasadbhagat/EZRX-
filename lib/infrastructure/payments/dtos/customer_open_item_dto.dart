@@ -83,14 +83,6 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
       partialPaymentHistoryDesc: partialPaymentHistoryDesc,
       paymentAmountInDisplayCrcy: paymentAmountInDisplayCrcy,
       companyCode: companyCode,
-      g2Tax: double.tryParse(
-            (openAmountInTransCrcy * 5 / 100).toStringAsFixed(2),
-          ) ??
-          0,
-      g4Tax: double.tryParse(
-            (openAmountInTransCrcy * 1 / 100).toStringAsFixed(2),
-          ) ??
-          0,
       openAmountInTransCrcy: openAmountInTransCrcy,
       orderId: StringValue(''),
       billingDocument: billingDocument,

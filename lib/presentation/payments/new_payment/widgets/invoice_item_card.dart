@@ -77,7 +77,7 @@ class InvoiceItemCard extends StatelessWidget {
           PriceComponent(
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,
-            price: customerOpenItem.displayItemAmount.toString(),
+            price: customerOpenItem.openAmountInTransCrcy.toString(),
           ),
         ],
       ),

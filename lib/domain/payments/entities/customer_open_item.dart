@@ -33,8 +33,6 @@ class CustomerOpenItem with _$CustomerOpenItem {
     required double paymentAmountInDisplayCrcy,
     required String billingDocument,
     required String companyCode,
-    @Default(0.0) double g2Tax,
-    @Default(0.0) double g4Tax,
     required double openAmountInTransCrcy,
     required StringValue orderId,
   }) = _CustomerOpenItem;
@@ -63,25 +61,16 @@ class CustomerOpenItem with _$CustomerOpenItem {
         partialPaymentHistoryDesc: '',
         paymentAmountInDisplayCrcy: 0,
         companyCode: '',
-        g2Tax: 0,
-        g4Tax: 0,
         openAmountInTransCrcy: 0,
         orderId: StringValue(''),
         billingDocument: '',
       );
-
-  double get displayItemAmount =>
-      displayCurrency.isPH ? openAmountInForPH : openAmountInTransCrcy;
-
-  double get openAmountInForPH => openAmountInTransCrcy - g2Tax - g4Tax;
 }
 
 extension CustomerOpenItemListExtension on List<CustomerOpenItem> {
   double get amountTotal => fold<double>(
         0,
-        (sum, item) => item.displayCurrency.isPH
-            ? sum + item.openAmountInForPH
-            : sum + item.openAmountInTransCrcy,
+        (sum, item) => sum + item.openAmountInTransCrcy,
       );
 
   bool isEqual(List<CustomerOpenItem> list) {

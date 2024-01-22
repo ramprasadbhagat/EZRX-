@@ -26,17 +26,7 @@ mutation addCustomerPayment($input: addCustomerPaymentInput!) {
                "lineNumber":"000013",
                "partialPaymentHistoryDesc":"250020230160000509001:",
                "paymentAmount":"0.02",
-               "salesOrg":"2500",
-               "zzDeductCode":[
-                  {
-                     "deductCode":"G2",
-                     "amountInTransactionCurrency":0.0
-                  },
-                  {
-                     "deductCode":"G4",
-                     "amountInTransactionCurrency":0.0
-                  }
-               ]
+               "salesOrg":"2500"
             }
          ],
          "paymentMethod":"Bank-In",

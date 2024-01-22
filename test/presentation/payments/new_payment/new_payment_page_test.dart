@@ -484,8 +484,6 @@ void main() {
             selectedInvoices: [
               fakeInvoices.first.copyWith(
                 displayCurrency: Currency('php'),
-                g2Tax: 5,
-                g4Tax: 1,
               )
             ],
           ),
@@ -498,7 +496,7 @@ void main() {
         final value =
             (tester.firstWidget(nextButton1) as ElevatedButton).enabled;
         expect(value, true);
-        expect(find.text('44.00'), findsWidgets);
+        expect(find.text('50.00'), findsWidgets);
       });
     });
 

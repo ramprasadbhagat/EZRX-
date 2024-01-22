@@ -367,7 +367,7 @@ void main() {
         displayCurrency: Currency('PHP'),
         orderId: StringValue('0800072883'),
       );
-      final invoiceAmountForPH = invoiceItem.displayItemAmount.toString();
+      final invoiceAmountForPH = invoiceItem.openAmountInTransCrcy.toString();
       when(() => outstandingInvoicesBlocMock.state).thenReturn(
         OutstandingInvoicesState.initial().copyWith(items: [invoiceItem]),
       );
