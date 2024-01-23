@@ -46,9 +46,10 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
             salesOrg: state.salesOrg,
             returnItemDetailsList: [
               e.item.validatedItemDetails,
-              ...e.item.bonusItems.map(
-                (bonusItem) => bonusItem.validatedItemDetails,
-              ),
+              if (e.item.balanceQuantity.isZero)
+                ...e.item.bonusItems.map(
+                  (bonusItem) => bonusItem.validatedItemDetails,
+                ),
             ],
           );
           emit(

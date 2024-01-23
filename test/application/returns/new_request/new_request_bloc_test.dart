@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
@@ -198,7 +199,7 @@ void main() {
       );
 
       blocTest(
-        ' => toggleReturnItem select a return material item',
+        ' => toggleReturnItem select not a return material item',
         build: () => NewRequestBloc(newRequestRepository: newRequestRepository),
         seed: () => NewRequestState.initial().copyWith(
           salesOrg: fakeSalesOrg,
@@ -219,6 +220,42 @@ void main() {
                 salesOrg: fakeSalesOrg,
                 returnItemDetailsList: [
                   fakeReturnMaterial.validatedItemDetails,
+                ],
+              )
+            ],
+          )
+        ],
+      );
+
+      blocTest(
+        ' => toggleReturnItem select a return material item',
+        build: () => NewRequestBloc(newRequestRepository: newRequestRepository),
+        seed: () => NewRequestState.initial().copyWith(
+          salesOrg: fakeSalesOrg,
+        ),
+        act: (NewRequestBloc bloc) => bloc.add(
+          NewRequestEvent.toggleReturnItem(
+            item: fakeReturnMaterial.copyWith(
+              balanceQuantity: IntegerValue('0'),
+            ),
+            selected: true,
+          ),
+        ),
+        expect: () => [
+          NewRequestState.initial().copyWith(
+            salesOrg: fakeSalesOrg,
+            selectedItems: [
+              fakeReturnMaterial.copyWith(
+                balanceQuantity: IntegerValue('0'),
+              ),
+            ],
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                invoiceNumber: fakeReturnMaterial.assignmentNumber,
+                salesOrg: fakeSalesOrg,
+                returnItemDetailsList: [
+                  fakeReturnMaterial.validatedItemDetails
+                      .copyWith(balanceQty: IntegerValue('0')),
                   ...fakeReturnMaterial.bonusItems.map(
                     (bonusItem) => bonusItem.validatedItemDetails,
                   ),

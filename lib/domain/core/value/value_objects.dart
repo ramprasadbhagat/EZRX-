@@ -251,6 +251,8 @@ class IntegerValue extends ValueObject<int> {
 
   bool get isGreaterThanZero => value.getOrElse(() => 0) > 0;
 
+  bool get isZero => value.getOrElse(() => 0) == 0;
+
   const IntegerValue._(this.value);
 }
 

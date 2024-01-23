@@ -72,7 +72,7 @@ class _ToggleActiveButton extends StatelessWidget {
               ),
               child: Switch(
                 key: WidgetKeys.toggleIncludeBonusButton,
-                activeTrackColor: ZPColors.textButtonColor,
+                activeTrackColor: returnItem.activeColor,
                 inactiveTrackColor: ZPColors.extraLightGrey3,
                 thumbColor: MaterialStateProperty.resolveWith<Color?>(
                   (Set<MaterialState> states) => ZPColors.white,

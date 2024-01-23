@@ -8,6 +8,8 @@ abstract class ZPColors {
   static const Color darkGreen = Color.fromRGBO(128, 128, 0, 1.0);
   static const Color darkerGreen = Color.fromRGBO(5, 38, 8, 1.0);
   static const Color textButtonColor = Color.fromRGBO(45, 94, 100, 1.0);
+  static const Color toggleOnDisableState = Color.fromRGBO(176, 202, 204, 1);
+
   static const Color lightGray = Color.fromRGBO(170, 170, 170, 1.0);
   static const Color extraLightGray = Color.fromRGBO(238, 238, 238, 1.0);
   static const Color shadowColor = Color.fromRGBO(245, 245, 245, 1.0);

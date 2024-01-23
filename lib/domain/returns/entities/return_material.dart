@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_material.freezed.dart';
@@ -49,7 +52,12 @@ class ReturnMaterial with _$ReturnMaterial {
 
   String get uuid => '$assignmentNumber$itemNumber';
 
+  Color get activeColor => balanceQuantity.isGreaterThanZero
+      ? ZPColors.textButtonColor
+      : ZPColors.toggleOnDisableState;
+
   bool get editDetailsAllowed => balanceQuantity.isGreaterThanZero;
+
   bool displayOutSidePolicy(bool allowReturnsOutsidePolicy) =>
       outsidePolicy && allowReturnsOutsidePolicy;
 

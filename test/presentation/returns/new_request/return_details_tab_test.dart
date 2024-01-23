@@ -26,6 +26,7 @@ import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_details_section.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_info_widget.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -744,6 +745,64 @@ void main() {
       expect(
         toggleIncludeBonusButton,
         findsWidgets,
+      );
+    });
+
+    testWidgets(' => switch button active track color smaller than 0',
+        (WidgetTester tester) async {
+      whenListen(
+        newRequestBlocMock,
+        Stream.fromIterable([
+          NewRequestState.initial().copyWith(
+            selectedItems: [
+              fakeReturnMaterial.copyWith(
+                balanceQuantity: IntegerValue('0'),
+              ),
+            ],
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                returnItemDetailsList: [fakeReturnItemDetails],
+              ),
+            ],
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final switchWdt = tester.widget<Switch>(toggleIncludeBonusButton);
+
+      expect(
+        switchWdt.activeTrackColor,
+        ZPColors.toggleOnDisableState,
+      );
+    });
+
+    testWidgets(' => switch button active track color greater than 0',
+        (WidgetTester tester) async {
+      whenListen(
+        newRequestBlocMock,
+        Stream.fromIterable([
+          NewRequestState.initial().copyWith(
+            selectedItems: [fakeReturnMaterial],
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                returnItemDetailsList: [
+                  fakeReturnItemDetails,
+                ],
+              ),
+            ],
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final switchWdt = tester.widget<Switch>(toggleIncludeBonusButton);
+
+      expect(
+        switchWdt.activeTrackColor,
+        ZPColors.textButtonColor,
       );
     });
 
