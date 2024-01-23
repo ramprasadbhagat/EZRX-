@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.da
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -146,7 +147,7 @@ void main() {
   late CartBlocMock cartBlocMock;
   late ProductImageBloc mockProductImageBloc;
   late PoAttachmentBloc mockPoAttachmentBloc;
-  late List<CustomerCodeInfo> customerCodeInfoList;
+  late CustomerInformation customerCodeInfoList;
   late ViewByOrder viewByOrder;
   late ViewByOrder viewByOrderWithCounterOffer;
   late ViewByOrder viewByOrderWithTax;
@@ -1115,8 +1116,9 @@ void main() {
     testWidgets('Test display full customer address', (tester) async {
       when(() => customerCodeBlocMock.state).thenReturn(
         CustomerCodeState.initial().copyWith(
-          customerCodeInfo: customerCodeInfoList.last,
-          shipToInfo: customerCodeInfoList.last.shipToInfos.first,
+          customerCodeInfo: customerCodeInfoList.soldToInformation.last,
+          shipToInfo:
+              customerCodeInfoList.soldToInformation.last.shipToInfos.first,
         ),
       );
 
@@ -1133,8 +1135,9 @@ void main() {
     testWidgets('Test display full ship-to address', (tester) async {
       when(() => customerCodeBlocMock.state).thenReturn(
         CustomerCodeState.initial().copyWith(
-          customerCodeInfo: customerCodeInfoList.last,
-          shipToInfo: customerCodeInfoList.last.shipToInfos.first,
+          customerCodeInfo: customerCodeInfoList.soldToInformation.last,
+          shipToInfo:
+              customerCodeInfoList.soldToInformation.last.shipToInfos.first,
         ),
       );
 

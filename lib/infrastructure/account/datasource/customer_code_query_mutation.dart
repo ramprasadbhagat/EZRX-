@@ -18,6 +18,7 @@ query customerInformationSearch(
     filterBlockCustomer: \$filterBlockCustomer
     customerCodeString: \$customerCodeString
   ) {
+    shipToCount
     SoldToInformation {
       customerCodeSoldTo
       salesDeals
@@ -79,33 +80,14 @@ query customerInformationSearch(
         \$customerInformationSalesRepInput: customerInformationSalesRepInput!
       ) {
         customerInformationSalesRep(input: \$customerInformationSalesRepInput) {
-          customerCodeSoldTo
-          name1
-          name2
-          name3
-          name4
-          street1
-          street2
-          street3
-          street4
-          building
-          floor
-          houseNumber1
-          postalCode
-          city1
-          city2
-          status
-          salesDeals
-          paymentTerm
-          paymentTermDescription
-          shipTo {
-            defaultShipToAddress
-            shipToCustomerCode
+          shipToCount
+          SoldToInformation {
+            customerCodeSoldTo
             name1
             name2
             name3
             name4
-            street
+            street1
             street2
             street3
             street4
@@ -116,6 +98,28 @@ query customerInformationSearch(
             city1
             city2
             status
+            salesDeals
+            paymentTerm
+            paymentTermDescription
+            shipTo {
+              defaultShipToAddress
+              shipToCustomerCode
+              name1
+              name2
+              name3
+              name4
+              street
+              street2
+              street3
+              street4
+              building
+              floor
+              houseNumber1
+              postalCode
+              city1
+              city2
+              status
+            }
           }
         }
       }    

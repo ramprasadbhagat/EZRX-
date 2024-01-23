@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -66,7 +67,7 @@ void main() {
   late SalesOrgBloc salesOrgBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late AppRouter autoRouterMock;
-  late List<CustomerCodeInfo> customerCodeListMock;
+  late CustomerInformation customerInformationMock;
   late CartBloc cartBlocMock;
   //final fakeMaterialNumber = MaterialNumber('000000000023168451');
   // final fakeMaterialInfo = MaterialInfo(
@@ -116,7 +117,7 @@ void main() {
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       autoRouterMock = locator<AppRouter>();
-      customerCodeListMock =
+      customerInformationMock =
           await CustomerCodeLocalDataSource().getCustomerCodeList();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -273,8 +274,8 @@ void main() {
         initialState: customerCodeBlocMock.state.copyWith(
           isFetching: false,
           canLoadMore: true,
-          customerCodeInfo: customerCodeListMock.first,
-          customerCodeList: customerCodeListMock,
+          customerCodeInfo: customerInformationMock.soldToInformation.first,
+          customerCodeList: customerInformationMock.soldToInformation,
         ),
       );
       when(() => salesOrgBlocMock.state).thenReturn(
@@ -319,8 +320,8 @@ void main() {
         initialState: customerCodeBlocMock.state.copyWith(
           isFetching: true,
           canLoadMore: true,
-          customerCodeInfo: customerCodeListMock.first,
-          customerCodeList: customerCodeListMock,
+          customerCodeInfo: customerInformationMock.soldToInformation.first,
+          customerCodeList: customerInformationMock.soldToInformation,
         ),
       );
       when(() => salesOrgBlocMock.state).thenReturn(
@@ -354,9 +355,10 @@ void main() {
       when(() => customerCodeBlocMock.state).thenReturn(
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-          customerCodeList: [customerCodeListMock.last],
-          customerCodeInfo: customerCodeListMock.last,
-          shipToInfo: customerCodeListMock.last.shipToInfos.first,
+          customerCodeList: [customerInformationMock.soldToInformation.last],
+          customerCodeInfo: customerInformationMock.soldToInformation.last,
+          shipToInfo:
+              customerInformationMock.soldToInformation.last.shipToInfos.first,
         ),
       );
       when(() => salesOrgBlocMock.state).thenReturn(
@@ -630,7 +632,7 @@ void main() {
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       autoRouterMock = locator<MockAppRouter>();
-      customerCodeListMock =
+      customerInformationMock =
           await CustomerCodeLocalDataSource().getCustomerCodeList();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());

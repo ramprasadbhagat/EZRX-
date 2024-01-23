@@ -13,7 +13,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'customer_code_bloc.freezed.dart';
+
 part 'customer_code_event.dart';
+
 part 'customer_code_state.dart';
 
 class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
@@ -87,14 +89,14 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
               ),
             );
           },
-          (customerCodeList) {
+          (customerInformation) {
             if (emit.isDone) return;
             emit(
               state.copyWith(
-                customerCodeList: customerCodeList,
+                customerCodeList: customerInformation.soldToInformation,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: customerCodeList.length >= config.pageSize,
+                canLoadMore: customerInformation.shipToCount >= config.pageSize,
                 searchKey: e.searchValue,
               ),
             );
@@ -144,7 +146,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       final customerCodeInfoList =
           failureOrSuccess.fold<List<CustomerCodeInfo>>(
         (_) => <CustomerCodeInfo>[],
-        (customerCodeList) => customerCodeList,
+        (customerInformation) => customerInformation.soldToInformation,
       );
 
       if (customerCodeInfoList.isEmpty) {
@@ -227,11 +229,12 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
               ),
             );
           },
-          (customerCodeList) {
+          (customerInformation) {
             if (finalCustomerCodeInfo.length == 1) {
-              finalCustomerCodeInfoList = customerCodeList;
+              finalCustomerCodeInfoList = customerInformation.soldToInformation;
             } else {
-              for (final customerData in customerCodeList) {
+              for (final customerData
+                  in customerInformation.soldToInformation) {
                 finalCustomerCodeInfoList.add(customerData);
               }
             }
@@ -241,7 +244,8 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                   customerCodeList: finalCustomerCodeInfoList,
                   apiFailureOrSuccessOption: none(),
                   isFetching: false,
-                  canLoadMore: customerCodeList.length >= config.pageSize,
+                  canLoadMore:
+                      customerInformation.shipToCount >= config.pageSize,
                   customerCodeInfo:
                       state.customerCodeInfo != CustomerCodeInfo.empty()
                           ? state.customerCodeInfo
@@ -287,16 +291,16 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
             ),
           );
         },
-        (customerCodeList) {
+        (customerInformation) {
           final finalCustomerCodeInfoList =
               List<CustomerCodeInfo>.from(state.customerCodeList)
-                ..addAll(customerCodeList);
+                ..addAll(customerInformation.soldToInformation);
           emit(
             state.copyWith(
               customerCodeList: finalCustomerCodeInfoList,
               apiFailureOrSuccessOption: none(),
               isFetching: false,
-              canLoadMore: customerCodeList.length >= config.pageSize,
+              canLoadMore: customerInformation.shipToCount >= config.pageSize,
             ),
           );
         },

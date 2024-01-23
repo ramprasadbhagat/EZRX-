@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
@@ -26,7 +26,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late AppRouter autoRouterMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  late List<CustomerCodeInfo> customerCodeListMock;
+  late CustomerInformation customerInformationMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -34,7 +34,7 @@ void main() {
       () => MixpanelService(config: locator<Config>()),
     );
     locator.registerLazySingleton(() => AppRouter());
-    customerCodeListMock =
+    customerInformationMock =
         await CustomerCodeLocalDataSource().getCustomerCodeList();
   });
 
@@ -62,8 +62,9 @@ void main() {
     testWidgets('Test customer code address in proper format', (tester) async {
       when(() => customerCodeBlocMock.state).thenReturn(
         CustomerCodeState.initial().copyWith(
-          customerCodeInfo: customerCodeListMock.last,
-          shipToInfo: customerCodeListMock.last.shipToInfos.first,
+          customerCodeInfo: customerInformationMock.soldToInformation.last,
+          shipToInfo:
+              customerInformationMock.soldToInformation.last.shipToInfos.first,
         ),
       );
       await tester.pumpWidget(getWidget());
@@ -81,8 +82,9 @@ void main() {
     testWidgets('Test ship to code address in proper format', (tester) async {
       when(() => customerCodeBlocMock.state).thenReturn(
         CustomerCodeState.initial().copyWith(
-          customerCodeInfo: customerCodeListMock.last,
-          shipToInfo: customerCodeListMock.last.shipToInfos.first,
+          customerCodeInfo: customerInformationMock.soldToInformation.last,
+          shipToInfo:
+              customerInformationMock.soldToInformation.last.shipToInfos.first,
         ),
       );
       await tester.pumpWidget(getWidget());

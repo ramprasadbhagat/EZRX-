@@ -46,7 +46,9 @@ void main() {
     config = Config()..appFlavor = Flavor.mock;
 
     mockCustomerCodeInfo =
-        (await CustomerCodeLocalDataSource().getCustomerCodeList()).first;
+        (await CustomerCodeLocalDataSource().getCustomerCodeList())
+            .soldToInformation
+            .first;
     fakeCustomerOpenItem =
         await NewPaymentLocalDataSource().getCustomerOpenItems();
     fakeInvoiceOrder =

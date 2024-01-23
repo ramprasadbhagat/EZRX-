@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -23,7 +24,7 @@ class CustomerCodeMockRepo extends Mock implements CustomerCodeRepository {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  late List<CustomerCodeInfo> customerMockData;
+  late CustomerInformation customerMockData;
   final CustomerCodeRepository customerCodeMockRepo = CustomerCodeMockRepo();
   late Config config;
   final fakeSalesOrgCustomerInfos = [
@@ -232,16 +233,17 @@ void main() {
             ],
           ),
           isFetching: false,
-          customerCodeInfo: customerMockData.first,
-          customerCodeList: customerMockData,
+          customerCodeInfo: customerMockData.soldToInformation.first,
+          customerCodeList: customerMockData.soldToInformation,
           apiFailureOrSuccessOption: none(),
           canLoadMore: true,
-          shipToInfo: customerMockData.first.shipToInfos.first,
+          shipToInfo:
+              customerMockData.soldToInformation.first.shipToInfos.first,
         ),
       ],
       verify: (CustomerCodeBloc bloc) => expect(
         bloc.state.customerCodeList,
-        customerMockData,
+        customerMockData.soldToInformation,
       ),
     );
 
@@ -289,12 +291,15 @@ void main() {
           ),
         ).thenAnswer(
           (invocation) async => Right(
-            [
-              customerMockData.first,
-              customerMockData.first,
-              customerMockData.first,
-              customerMockData.first,
-            ],
+            customerMockData.copyWith(
+              shipToCount: 4,
+              soldToInformation: [
+                customerMockData.soldToInformation.first,
+                customerMockData.soldToInformation.first,
+                customerMockData.soldToInformation.first,
+                customerMockData.soldToInformation.first,
+              ],
+            ),
           ),
         );
       },
@@ -318,13 +323,14 @@ void main() {
               ],
             ),
             isFetching: false,
-            customerCodeInfo: customerMockData.first,
-            shipToInfo: customerMockData.first.shipToInfos.first,
+            customerCodeInfo: customerMockData.soldToInformation.first,
+            shipToInfo:
+                customerMockData.soldToInformation.first.shipToInfos.first,
             customerCodeList: [
-              customerMockData.first,
-              customerMockData.first,
-              customerMockData.first,
-              customerMockData.first,
+              customerMockData.soldToInformation.first,
+              customerMockData.soldToInformation.first,
+              customerMockData.soldToInformation.first,
+              customerMockData.soldToInformation.first,
             ],
             apiFailureOrSuccessOption: none(),
             canLoadMore: false,
@@ -334,10 +340,10 @@ void main() {
       verify: (CustomerCodeBloc bloc) => expect(
         bloc.state.customerCodeList,
         [
-          customerMockData.first,
-          customerMockData.first,
-          customerMockData.first,
-          customerMockData.first,
+          customerMockData.soldToInformation.first,
+          customerMockData.soldToInformation.first,
+          customerMockData.soldToInformation.first,
+          customerMockData.soldToInformation.first,
         ],
       ),
     );
@@ -400,10 +406,13 @@ void main() {
           ),
         ).thenAnswer(
           (invocation) async => Right(
-            [
-              CustomerCodeInfo.empty()
-                  .copyWith(customerCodeSoldTo: 'fake-customer-code')
-            ],
+            customerMockData.copyWith(
+              shipToCount: 1,
+              soldToInformation: [
+                CustomerCodeInfo.empty()
+                    .copyWith(customerCodeSoldTo: 'fake-customer-code')
+              ],
+            ),
           ),
         );
       },
@@ -466,8 +475,8 @@ void main() {
             pageSize: fakePageSize,
           ),
         ).thenAnswer(
-          (invocation) async => const Right(
-            [],
+          (invocation) async => Right(
+            CustomerInformation.empty(),
           ),
         );
       },
@@ -597,10 +606,13 @@ void main() {
           ),
         ).thenAnswer(
           (invocation) async => Right(
-            [
-              CustomerCodeInfo.empty()
-                  .copyWith(customerCodeSoldTo: 'fake-customer-code')
-            ],
+            customerMockData.copyWith(
+              shipToCount: 1,
+              soldToInformation: [
+                CustomerCodeInfo.empty()
+                    .copyWith(customerCodeSoldTo: 'fake-customer-code')
+              ],
+            ),
           ),
         );
       },
@@ -773,9 +785,10 @@ void main() {
       setUp: () {
         when(
           () => customerCodeMockRepo.storeCustomerInfo(
-            customerCode: customerMockData.first.customerCodeSoldTo,
-            shippingAddress:
-                customerMockData.first.shipToInfos.first.shipToCustomerCode,
+            customerCode:
+                customerMockData.soldToInformation.first.customerCodeSoldTo,
+            shippingAddress: customerMockData
+                .soldToInformation.first.shipToInfos.first.shipToCustomerCode,
           ),
         ).thenAnswer((invocation) async => const Right(unit));
 
@@ -799,7 +812,11 @@ void main() {
             pageSize: fakePageSize,
           ),
         ).thenAnswer(
-          (invocation) async => Right([customerMockData.first]),
+          (invocation) async => Right(
+            customerMockData.copyWith(
+              soldToInformation: [customerMockData.soldToInformation.first],
+            ),
+          ),
         );
 
         when(
@@ -830,12 +847,13 @@ void main() {
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
           isSearchActive: true,
-          customerCodeInfo: customerMockData.first,
+          customerCodeInfo: customerMockData.soldToInformation.first,
           isFetching: false,
           canLoadMore: false,
-          customerCodeList: [customerMockData.first],
+          customerCodeList: [customerMockData.soldToInformation.first],
           searchKey: SearchKey('mockShippingAddress'),
-          shipToInfo: customerMockData.first.shipToInfos.first,
+          shipToInfo:
+              customerMockData.soldToInformation.first.shipToInfos.first,
         ),
       ],
     );
@@ -881,10 +899,15 @@ void main() {
             pageSize: fakePageSize,
           ),
         ).thenAnswer(
-          (invocation) async => Right([
-            customerMockData.first,
-            customerMockData.first,
-          ]),
+          (invocation) async => Right(
+            customerMockData.copyWith(
+              shipToCount: 2,
+              soldToInformation: [
+                customerMockData.soldToInformation.first,
+                customerMockData.soldToInformation.first,
+              ],
+            ),
+          ),
         );
       },
       act: (CustomerCodeBloc bloc) {
@@ -898,19 +921,23 @@ void main() {
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrgWithMultipleCustomerInfo,
           isFetching: false,
-          customerCodeInfo: customerMockData.first,
+          customerCodeInfo: customerMockData.soldToInformation.first,
           customerCodeList: [
-            customerMockData.first,
-            customerMockData.first,
+            customerMockData.soldToInformation.first,
+            customerMockData.soldToInformation.first,
           ],
           apiFailureOrSuccessOption: none(),
           canLoadMore: false,
-          shipToInfo: customerMockData.first.shipToInfos.first,
+          shipToInfo:
+              customerMockData.soldToInformation.first.shipToInfos.first,
         ),
       ],
       verify: (CustomerCodeBloc bloc) => expect(
         bloc.state.customerCodeList,
-        [customerMockData.first, customerMockData.first],
+        [
+          customerMockData.soldToInformation.first,
+          customerMockData.soldToInformation.first
+        ],
       ),
     );
 
@@ -940,7 +967,7 @@ void main() {
             pageSize: fakePageSize,
           ),
         ).thenAnswer(
-          (invocation) async => const Right(<CustomerCodeInfo>[]),
+          (invocation) async => Right(CustomerInformation.empty()),
         );
       },
       act: (CustomerCodeBloc bloc) {
@@ -989,7 +1016,11 @@ void main() {
             pageSize: fakePageSize,
           ),
         ).thenAnswer(
-          (invocation) async => Right([customerMockData.first]),
+          (invocation) async => Right(
+            customerMockData.copyWith(
+              soldToInformation: [customerMockData.soldToInformation.first],
+            ),
+          ),
         );
       },
       seed: () => CustomerCodeState.initial().copyWith(
@@ -1009,12 +1040,13 @@ void main() {
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
           isSearchActive: true,
-          customerCodeInfo: customerMockData.first,
+          customerCodeInfo: customerMockData.soldToInformation.first,
           isFetching: false,
           canLoadMore: false,
-          customerCodeList: [customerMockData.first],
+          customerCodeList: [customerMockData.soldToInformation.first],
           searchKey: SearchKey('mockShippingAddress'),
-          shipToInfo: customerMockData.first.shipToInfos.first,
+          shipToInfo:
+              customerMockData.soldToInformation.first.shipToInfos.first,
         ),
       ],
     );
@@ -1066,11 +1098,12 @@ void main() {
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
           isSearchActive: true,
-          customerCodeInfo: customerMockData[1],
+          customerCodeInfo: customerMockData.soldToInformation[1],
           isFetching: false,
-          customerCodeList: customerMockData,
+          customerCodeList: customerMockData.soldToInformation,
           searchKey: SearchKey('mockShippingAddress'),
-          shipToInfo: customerMockData.first.shipToInfos.first,
+          shipToInfo:
+              customerMockData.soldToInformation.first.shipToInfos.first,
         ),
       ],
     );

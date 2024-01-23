@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -86,7 +87,9 @@ void main() {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
 
       when(() => customerCodeLocalDataSourceMock.getSalesRepCustomerCodeList())
-          .thenAnswer((invocation) async => <CustomerCodeInfo>[]);
+          .thenAnswer(
+        (invocation) async => CustomerInformation.empty(),
+      );
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
@@ -125,7 +128,9 @@ void main() {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
 
       when(() => customerCodeLocalDataSourceMock.getCustomerCodeList())
-          .thenAnswer((invocation) async => <CustomerCodeInfo>[]);
+          .thenAnswer(
+        (invocation) async => CustomerInformation.empty(),
+      );
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
@@ -175,10 +180,12 @@ void main() {
           ),
         ),
       ).thenAnswer(
-        (invocation) async => <CustomerCodeInfo>[
-          CustomerCodeInfo.empty(),
-          CustomerCodeInfo.empty(),
-        ],
+        (invocation) async => CustomerInformation.empty().copyWith(
+          soldToInformation: [
+            CustomerCodeInfo.empty(),
+            CustomerCodeInfo.empty(),
+          ],
+        ),
       );
 
       when(
@@ -192,10 +199,12 @@ void main() {
           ),
         ),
       ).thenAnswer(
-        (invocation) async => <CustomerCodeInfo>[
-          CustomerCodeInfo.empty(),
-          CustomerCodeInfo.empty(),
-        ],
+        (invocation) async => CustomerInformation.empty().copyWith(
+          soldToInformation: [
+            CustomerCodeInfo.empty(),
+            CustomerCodeInfo.empty(),
+          ],
+        ),
       );
 
       when(
@@ -209,10 +218,12 @@ void main() {
           ),
         ),
       ).thenAnswer(
-        (invocation) async => <CustomerCodeInfo>[
-          CustomerCodeInfo.empty(),
-          CustomerCodeInfo.empty(),
-        ],
+        (invocation) async => CustomerInformation.empty().copyWith(
+          soldToInformation: [
+            CustomerCodeInfo.empty(),
+            CustomerCodeInfo.empty(),
+          ],
+        ),
       );
 
       final result = await customerCodeRepository.getCustomerCode(
@@ -229,7 +240,7 @@ void main() {
       );
 
       expect(result.isRight(), true);
-      result.fold((_) {}, (r) => expect(r.length, 6));
+      result.fold((_) {}, (r) => expect(r.soldToInformation.length, 6));
     });
 
     test('Get Customer Code from remote data source failed for sales rep test',
@@ -247,10 +258,12 @@ void main() {
           ),
         ),
       ).thenAnswer(
-        (invocation) async => <CustomerCodeInfo>[
-          CustomerCodeInfo.empty(),
-          CustomerCodeInfo.empty(),
-        ],
+        (invocation) async => CustomerInformation.empty().copyWith(
+          soldToInformation: [
+            CustomerCodeInfo.empty(),
+            CustomerCodeInfo.empty(),
+          ],
+        ),
       );
 
       when(
@@ -276,10 +289,12 @@ void main() {
           ),
         ),
       ).thenAnswer(
-        (invocation) async => <CustomerCodeInfo>[
-          CustomerCodeInfo.empty(),
-          CustomerCodeInfo.empty(),
-        ],
+        (invocation) async => CustomerInformation.empty().copyWith(
+          soldToInformation: [
+            CustomerCodeInfo.empty(),
+            CustomerCodeInfo.empty(),
+          ],
+        ),
       );
 
       final result = await customerCodeRepository.getCustomerCode(
@@ -296,7 +311,7 @@ void main() {
       );
 
       expect(result.isRight(), true);
-      result.fold((_) {}, (r) => expect(r.length, 4));
+      result.fold((_) {}, (r) => expect(r.soldToInformation.length, 4));
     });
 
     test(
@@ -354,7 +369,7 @@ void main() {
       );
 
       expect(result.isRight(), true);
-      result.fold((_) {}, (r) => expect(r.length, 0));
+      result.fold((_) {}, (r) => expect(r.soldToInformation.length, 0));
     });
 
     test(
@@ -371,10 +386,12 @@ void main() {
           pageSize: pageSize,
         ),
       ).thenAnswer(
-        (invocation) async => <CustomerCodeInfo>[
-          CustomerCodeInfo.empty(),
-          CustomerCodeInfo.empty(),
-        ],
+        (invocation) async => CustomerInformation.empty().copyWith(
+          soldToInformation: [
+            CustomerCodeInfo.empty(),
+            CustomerCodeInfo.empty(),
+          ],
+        ),
       );
 
       when(
@@ -386,10 +403,12 @@ void main() {
           pageSize: pageSize,
         ),
       ).thenAnswer(
-        (invocation) async => <CustomerCodeInfo>[
-          CustomerCodeInfo.empty(),
-          CustomerCodeInfo.empty(),
-        ],
+        (invocation) async => CustomerInformation.empty().copyWith(
+          soldToInformation: [
+            CustomerCodeInfo.empty(),
+            CustomerCodeInfo.empty(),
+          ],
+        ),
       );
 
       when(
@@ -401,10 +420,12 @@ void main() {
           pageSize: pageSize,
         ),
       ).thenAnswer(
-        (invocation) async => <CustomerCodeInfo>[
-          CustomerCodeInfo.empty(),
-          CustomerCodeInfo.empty(),
-        ],
+        (invocation) async => CustomerInformation.empty().copyWith(
+          soldToInformation: [
+            CustomerCodeInfo.empty(),
+            CustomerCodeInfo.empty(),
+          ],
+        ),
       );
 
       final result = await customerCodeRepository.getCustomerCode(
@@ -421,7 +442,7 @@ void main() {
       );
 
       expect(result.isRight(), true);
-      result.fold((_) {}, (r) => expect(r.length, 6));
+      result.fold((_) {}, (r) => expect(r.soldToInformation.length, 6));
     });
 
     test(
@@ -438,10 +459,12 @@ void main() {
           pageSize: pageSize,
         ),
       ).thenAnswer(
-        (invocation) async => <CustomerCodeInfo>[
-          CustomerCodeInfo.empty(),
-          CustomerCodeInfo.empty(),
-        ],
+        (invocation) async => CustomerInformation.empty().copyWith(
+          soldToInformation: [
+            CustomerCodeInfo.empty(),
+            CustomerCodeInfo.empty(),
+          ],
+        ),
       );
 
       when(
@@ -463,10 +486,12 @@ void main() {
           pageSize: pageSize,
         ),
       ).thenAnswer(
-        (invocation) async => <CustomerCodeInfo>[
-          CustomerCodeInfo.empty(),
-          CustomerCodeInfo.empty(),
-        ],
+        (invocation) async => CustomerInformation.empty().copyWith(
+          soldToInformation: [
+            CustomerCodeInfo.empty(),
+            CustomerCodeInfo.empty(),
+          ],
+        ),
       );
 
       final result = await customerCodeRepository.getCustomerCode(
@@ -483,7 +508,7 @@ void main() {
       );
 
       expect(result.isRight(), true);
-      result.fold((_) {}, (r) => expect(r.length, 4));
+      result.fold((_) {}, (r) => expect(r.soldToInformation.length, 4));
     });
 
     test('Get customer code from account storage successfully test', () async {

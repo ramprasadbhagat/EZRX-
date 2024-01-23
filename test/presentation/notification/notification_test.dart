@@ -8,7 +8,7 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -66,6 +66,7 @@ class MockNotificationBloc
     implements NotificationBloc {}
 
 final locator = GetIt.instance;
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,7 +76,7 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late NotificationBloc notificationBlocMock;
   late Notifications notifications;
-  late List<CustomerCodeInfo> customerCodeListMock;
+  late CustomerInformation customerInformationMock;
   late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
   late PaymentSummaryDetailsBloc paymentSummaryDetailsBlockMock;
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
@@ -84,7 +85,7 @@ void main() {
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
     notifications = await NotificationLocalDataSource().getNotificationList();
-    customerCodeListMock =
+    customerInformationMock =
         await CustomerCodeLocalDataSource().getCustomerCodeList();
   });
   group('Notification Screen', () {
@@ -447,13 +448,13 @@ void main() {
         );
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(
-            customerCodeInfo: customerCodeListMock.first,
+            customerCodeInfo: customerInformationMock.soldToInformation.first,
           ),
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final customerDetails = find.text(
-          '${customerCodeListMock.first.customerName}(${customerCodeListMock.first.customerCodeSoldTo})',
+          '${customerInformationMock.soldToInformation.first.customerName}(${customerInformationMock.soldToInformation.first.customerCodeSoldTo})',
         );
         expect(
           customerDetails,

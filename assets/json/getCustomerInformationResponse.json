@@ -1,6 +1,7 @@
 {
     "data": {
         "customerInformationSearch": {
+            "shipToCount": 24,
             "SoldToInformation": [
                 {
                     "customerClassification": "",

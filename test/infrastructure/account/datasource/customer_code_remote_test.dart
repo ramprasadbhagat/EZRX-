@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
@@ -96,7 +96,7 @@ void main() {
             offset: 0,
           );
           expect(
-            result.length,
+            result.soldToInformation.length,
             res['data']['customerInformationSearch']['SoldToInformation']
                 .length,
           );
@@ -137,7 +137,7 @@ void main() {
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
-            return Future.value([CustomerCodeInfo.empty()]);
+            return Future.value(CustomerInformation.empty());
           });
         },
       );
@@ -173,7 +173,7 @@ void main() {
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
-            return Future.value([CustomerCodeInfo.empty()]);
+            return Future.value(CustomerInformation.empty());
           });
         },
       );
@@ -222,8 +222,8 @@ void main() {
             ),
           );
           expect(
-            result.length,
-            res['data']['customerInformationSalesRep'].length,
+            result.soldToInformation.length,
+            res['data']['customerInformationSalesRep']['SoldToInformation'].length,
           );
         },
       );

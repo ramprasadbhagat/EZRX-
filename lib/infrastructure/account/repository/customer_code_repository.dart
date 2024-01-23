@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_customer_code_repository.dart';
@@ -29,7 +30,7 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
   });
 
   @override
-  Future<Either<ApiFailure, List<CustomerCodeInfo>>> getCustomerCode({
+  Future<Either<ApiFailure, CustomerInformation>> getCustomerCode({
     required SalesOrganisation salesOrganisation,
     required List<String> customerCodes,
     required bool hideCustomer,
@@ -40,17 +41,18 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
     final salesOrg = salesOrganisation.salesOrg.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final customerCodeInfo = user.role.type.isSalesRepRole
+        final customerCodeInfoList = user.role.type.isSalesRepRole
             ? await localCustomerCodeDataSource.getSalesRepCustomerCodeList()
             : await localCustomerCodeDataSource.getCustomerCodeList();
 
-        return Right(customerCodeInfo);
+        return Right(customerCodeInfoList);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
     }
     final futureResults = <List<CustomerCodeInfo>>[];
     Object? exception;
+    var shipToCount = 0;
     await Future.wait(
       customerCodes.map(
         (customerCode) async {
@@ -72,7 +74,8 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
                     pageSize: pageSize,
                     offset: offset,
                   );
-            futureResults.add(response);
+            futureResults.add(response.soldToInformation);
+            shipToCount += response.shipToCount;
           } catch (e) {
             //for single calls, we will capture error
             //for clubbed concurrent calls, we will not capture any error
@@ -92,7 +95,12 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
       ...futureResults.expand((codeList) => codeList),
     ];
 
-    return Right(customerCodeList);
+    return Right(
+      CustomerInformation(
+        shipToCount: shipToCount,
+        soldToInformation: customerCodeList,
+      ),
+    );
   }
 
   @override
