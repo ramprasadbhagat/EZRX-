@@ -13,6 +13,18 @@ class AppMarket extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
+  static final supportMarkets = [
+    AppMarket('kh'),
+    AppMarket('id'),
+    AppMarket('my'),
+    AppMarket('mm'),
+    AppMarket('ph'),
+    AppMarket('sg'),
+    AppMarket('tw'),
+    AppMarket('th'),
+    AppMarket('vn'),
+  ];
+
   factory AppMarket(String input) {
     return AppMarket._(validateStringNotEmpty(input));
   }
@@ -42,6 +54,13 @@ class AppMarket extends ValueObject<String> {
   bool get isVN => value.getOrElse(() => '') == 'vn';
 
   bool get isID => value.getOrElse(() => '') == 'id';
+
+  bool get isSupportMarket {
+    return supportMarkets.any(
+      (element) =>
+          element.getValue() == value.getOrElse(() => '').toLowerCase(),
+    );
+  }
 
   String get currency => getCurrency(value.getOrElse(() => ''));
 

@@ -7,7 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'login_form_bloc.freezed.dart';
+
 part 'login_form_event.dart';
+
 part 'login_form_state.dart';
 
 class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
@@ -217,7 +219,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
           (market) {
             emit(
               state.copyWith(
-                currentMarket: AppMarket(e.currentMarket),
+                currentMarket: e.currentMarket,
                 authFailureOrSuccessOption: optionOf(currentMarket),
               ),
             );

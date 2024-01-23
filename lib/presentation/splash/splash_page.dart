@@ -47,6 +47,7 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/retur
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -199,6 +200,17 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     );
 
                 // Check if the device's language code is supported
+                final appMarket = AppMarket(
+                  context.deviceLocale.countryCode?.toLowerCase() ?? 'my',
+                );
+                context.read<LoginFormBloc>().add(
+                      LoginFormEvent.setCurrentMarket(
+                        appMarket.isSupportMarket
+                            ? appMarket
+                            : AppMarket.malaysia(),
+                      ),
+                    );
+
                 if (context.supportedLocales
                     .map((locale) => locale.languageCode)
                     .contains(context.deviceLocale.languageCode)) {
@@ -231,8 +243,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 .setLocale(state.user.preferredLanguage.locale)
                 .then((value) async {
               /* We need delay for a short time here before display message because when change locale
-                       the system need time to re-load the new translation files, so if we create string 
-                       translate variables before reloaded, we won't use the lastest locale changed 
+                       the system need time to re-load the new translation files, so if we create string
+                       translate variables before reloaded, we won't use the lastest locale changed
                     */
               await Future.delayed(const Duration(milliseconds: 500));
               _welcomeUserMessage(state);

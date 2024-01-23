@@ -19,19 +19,7 @@ class MarketSelector extends StatefulWidget {
 }
 
 class _MarketSelectorState extends State<MarketSelector> {
-  List<AppMarket> markets = [
-    AppMarket('kh'),
-    // AppMarket('hk'),
-    AppMarket('id'),
-    // AppMarket('kr'),
-    AppMarket('my'),
-    AppMarket('mm'),
-    AppMarket('ph'),
-    AppMarket('sg'),
-    AppMarket('tw'),
-    AppMarket('th'),
-    AppMarket('vn'),
-  ];
+  final markets = AppMarket.supportMarkets;
 
   @override
   Widget build(BuildContext context) {
@@ -132,8 +120,7 @@ class _MarketSelectorState extends State<MarketSelector> {
               onChanged: (selectedMarket) => {
                 context.read<LoginFormBloc>().add(
                       LoginFormEvent.setCurrentMarket(
-                        selectedMarket?.getValue() ??
-                            AppMarket('my').getValue(),
+                        selectedMarket ?? AppMarket.malaysia(),
                       ),
                     ),
               },

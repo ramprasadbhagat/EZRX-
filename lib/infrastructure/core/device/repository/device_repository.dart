@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -58,11 +59,11 @@ class DeviceRepository implements IDeviceRepository {
 
   @override
   Future<Either<ApiFailure, Unit>> setCurrentMarket({
-    required String currentMarket,
+    required AppMarket currentMarket,
   }) async {
     try {
       await deviceStorage.putCurrentMarket(
-        currentMarket: currentMarket,
+        currentMarket: currentMarket.value.getOrElse(() => ''),
       );
 
       return const Right(unit);

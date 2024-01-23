@@ -789,7 +789,9 @@ void main() {
       ),
       setUp: () {
         when(
-          () => deviceRepoMock.setCurrentMarket(currentMarket: 'fake-market'),
+          () => deviceRepoMock.setCurrentMarket(
+            currentMarket: AppMarket.malaysia(),
+          ),
         ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
@@ -797,7 +799,7 @@ void main() {
         );
       },
       act: (LoginFormBloc bloc) =>
-          bloc..add(const LoginFormEvent.setCurrentMarket('fake-market')),
+          bloc..add(LoginFormEvent.setCurrentMarket(AppMarket.malaysia())),
       expect: () => [
         loginFormState.copyWith(
           authFailureOrSuccessOption: optionOf(
@@ -816,7 +818,9 @@ void main() {
       ),
       setUp: () {
         when(
-          () => deviceRepoMock.setCurrentMarket(currentMarket: 'fake-market'),
+          () => deviceRepoMock.setCurrentMarket(
+            currentMarket: AppMarket.malaysia(),
+          ),
         ).thenAnswer(
           (invocation) async => const Right(
             unit,
@@ -824,10 +828,10 @@ void main() {
         );
       },
       act: (LoginFormBloc bloc) =>
-          bloc..add(const LoginFormEvent.setCurrentMarket('fake-market')),
+          bloc..add(LoginFormEvent.setCurrentMarket(AppMarket.malaysia())),
       expect: () => [
         loginFormState.copyWith(
-          currentMarket: AppMarket('fake-market'),
+          currentMarket: AppMarket.malaysia(),
           authFailureOrSuccessOption: optionOf(
             const Right(
               unit,

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
@@ -20,10 +21,11 @@ void main() {
   late DeviceInfo mockDeviceInfo;
   late DeviceRepository repository;
   final mockException = MockException(message: 'exception');
-  const mockMarket = 'mock-market';
+  late String mockMarket;
 
   setUp(
     () async {
+      mockMarket = AppMarket.malaysia().value.getOrElse(() => '');
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
       mockDeviceStorage = MockDeviceStorage();
       mockPermissionService = MockPermissionService();
@@ -94,8 +96,9 @@ void main() {
         when(
           () => mockDeviceStorage.putCurrentMarket(currentMarket: mockMarket),
         ).thenAnswer((_) => Future.value());
-        final result =
-            await repository.setCurrentMarket(currentMarket: mockMarket);
+        final result = await repository.setCurrentMarket(
+          currentMarket: AppMarket.malaysia(),
+        );
         expect(result.isRight(), true);
       });
 
@@ -103,8 +106,9 @@ void main() {
         when(
           () => mockDeviceStorage.putCurrentMarket(currentMarket: mockMarket),
         ).thenThrow(mockException);
-        final result =
-            await repository.setCurrentMarket(currentMarket: mockMarket);
+        final result = await repository.setCurrentMarket(
+          currentMarket: AppMarket.malaysia(),
+        );
         expect(result.isLeft(), true);
       });
 
