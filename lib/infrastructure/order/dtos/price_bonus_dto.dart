@@ -21,9 +21,15 @@ class PriceBonusDto with _$PriceBonusDto {
     );
   }
 
-  PriceBonus toDomain() => PriceBonus(
-        items: items.map((e) => e.toDomain()).toList(),
-      );
+  PriceBonus toDomain() {
+    //this sorting to be handle by BE, so we have the temporary fix here
+    final sortedItems = List<PriceBonusItemDto>.from(items);
+    sortedItems.sort(
+      (a, b) => a.qualifyingQuantity.compareTo(b.qualifyingQuantity),
+    );
+
+    return PriceBonus(items: sortedItems.map((e) => e.toDomain()).toList());
+  }
 
   factory PriceBonusDto.fromJson(Map<String, dynamic> json) =>
       _$PriceBonusDtoFromJson(json);

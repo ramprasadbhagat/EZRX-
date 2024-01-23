@@ -13,20 +13,6 @@ class PriceBonus with _$PriceBonus {
   factory PriceBonus.empty() => const PriceBonus(
         items: [],
       );
-
-  List<PriceBonusItem> get sortedPriceBonusItem =>
-      List<PriceBonusItem>.from(items)
-        ..sort(
-          (
-            PriceBonusItem a,
-            PriceBonusItem b,
-          ) =>
-              b.qualifyingQuantity.compareTo(a.qualifyingQuantity),
-        );
-
-  List<BonusMaterial> get getItems => sortedPriceBonusItem
-      .map<BonusMaterial>((PriceBonusItem e) => e.bonusMaterials.first)
-      .toList();
 }
 
 @freezed

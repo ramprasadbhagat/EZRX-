@@ -29,6 +29,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -61,6 +62,36 @@ void main() {
           )
         ],
       )
+    ],
+  );
+
+  final unsortedBonus = PriceBonus.empty().copyWith(
+    items: [
+      PriceBonusItem.empty().copyWith(
+        bonusMaterials: [
+          BonusMaterial.empty().copyWith(
+            id: 1,
+            materialNumber: MaterialNumber('"000000000023156808'),
+            materialDescription: '0.3cc 31G Syr. 10Bag  8mm 100/Bx',
+            calculation: BonusMaterialCalculation('915'),
+            bonusRatio: 1,
+            bonusQuantity: 1,
+            qualifyingQuantity: 10,
+          )
+        ],
+      ),
+      PriceBonusItem.empty().copyWith(
+        bonusMaterials: [
+          BonusMaterial.empty().copyWith(
+            id: 2,
+            materialNumber: MaterialNumber('"000000000023156808'),
+            materialDescription: '0.3cc 31G Syr. 10Bag  8mm 100/Bx',
+            bonusRatio: 1,
+            bonusQuantity: 3,
+            qualifyingQuantity: 20,
+          )
+        ],
+      ),
     ],
   );
 
@@ -450,6 +481,48 @@ void main() {
           AvailableOfferItem,
         ),
         findsWidgets,
+      );
+    });
+
+    testWidgets('Available Offer Item test sorted Bonus offer listing ',
+        (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTWSalesOrganisation,
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+        ),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            materialInfoMock.materialNumber: materialPrice.copyWith(
+              bonuses: [unsortedBonus],
+              tiers: <PriceTier>[],
+            )
+          },
+        ),
+      );
+      when(() => productDetailMockBloc.state).thenReturn(
+        ProductDetailState.initial().copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: materialInfoMock,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final availableOfferItemFinder = find.byType(AvailableOfferItem);
+      expect(availableOfferItemFinder, findsWidgets);
+      final quantityTextFinder = find.text('For every 10 quantity, receive');
+      expect(quantityTextFinder, findsOneWidget);
+      expect(
+        find.descendant(
+          of: availableOfferItemFinder.first,
+          matching: quantityTextFinder,
+        ),
+        findsOneWidget,
       );
     });
   });

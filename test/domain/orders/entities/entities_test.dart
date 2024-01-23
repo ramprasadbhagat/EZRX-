@@ -22,9 +22,9 @@ void main() {
           PriceBonusItem.empty().copyWith(qualifyingQuantity: 1),
           PriceBonusItem.empty().copyWith(qualifyingQuantity: 2)
         ];
-        final companyName = PriceBonus(items: input);
-        final result = companyName.sortedPriceBonusItem;
-        expect(result, input.reversed.toList());
+        final bonus = PriceBonus(items: input);
+        final result = bonus.items;
+        expect(result, input);
       },
     );
 
@@ -47,11 +47,11 @@ void main() {
             ],
           )
         ];
-        final companyName = PriceBonus(items: input);
-        final result = companyName.getItems;
+        final bonus = PriceBonus(items: input);
+        final result = bonus.items;
         expect(result, [
-          input.last.bonusMaterials.first,
-          input.first.bonusMaterials.first
+          input.first,
+          input.last,
         ]);
       },
     );
@@ -87,7 +87,7 @@ void main() {
           bonuses: bonuses,
         );
         final result = price.priceBonusItem;
-        expect(result, priceBonusItemList.reversed.toList());
+        expect(result, priceBonusItemList);
       },
     );
 
@@ -173,8 +173,8 @@ void main() {
 
         final result = price.otherMaterialBonus;
         expect(result, [
-          priceBonusItemList.last.bonusMaterials.first,
           priceBonusItemList.first.bonusMaterials.last,
+          priceBonusItemList.last.bonusMaterials.first,
         ]);
       },
     );

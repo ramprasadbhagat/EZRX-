@@ -27,7 +27,7 @@ class AvailableOffer extends StatelessWidget {
       builder: (context, state) {
         final price = state.getPriceForMaterial(materialNumber);
 
-        final bonusMaterialList = price.availableBonus.toList();
+        final bonusMaterialList = price.availableBonus;
         final productDetailsState = context.read<ProductDetailBloc>().state;
 
         final eligibilityState = context.read<EligibilityBloc>().state;
@@ -64,7 +64,9 @@ class AvailableOffer extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16)
                     .copyWith(top: 6, bottom: 8),
                 child: Text(
-                  context.tr("The offers you get will based on eligibility. You'll know which promo you received after you do check out."),
+                  context.tr(
+                    "The offers you get will based on eligibility. You'll know which promo you received after you do check out.",
+                  ),
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: ZPColors.extraLightGrey4,
                       ),

@@ -81,12 +81,11 @@ class Price with _$Price {
 
   bool get isComboDealEligible => comboDeal.isEligible;
 
-  List<PriceBonusItem> get priceBonusItem => bonuses.isNotEmpty
-      ? bonuses.first.sortedPriceBonusItem
-      : <PriceBonusItem>[];
+  List<PriceBonusItem> get priceBonusItem =>
+      bonuses.isNotEmpty ? bonuses.first.items : <PriceBonusItem>[];
 
-  Iterable<BonusMaterial> get availableBonus =>
-      priceBonusItem.expand((element) => element.bonusMaterials);
+  List<BonusMaterial> get availableBonus =>
+      priceBonusItem.expand((element) => element.bonusMaterials).toList();
 
   Iterable<BonusMaterial> get sameMaterialBonus => availableBonus.where(
         (BonusMaterial element) => element.materialNumber == materialNumber,
