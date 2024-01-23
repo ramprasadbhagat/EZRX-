@@ -3,9 +3,12 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/credit_and_invoice_details_repository.dart';
 import 'package:flutter/material.dart';
@@ -28,14 +31,22 @@ void main() {
   late CreditAndInvoiceDetailsRepository creditAndInvoiceDetailsRepository;
   late AllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
   late CreditAndInvoiceItem fakeInvoice;
+  late List<CustomerDocumentDetail> customerDocumentDetailList;
+  late List<CreditAndInvoiceItem> creditAndInvoiceItemList;
   final fakeInitialState = CreditAndInvoiceDetailsState.initial().copyWith(
     customerCodeInfo: fakeCustomerCodeInfo,
-    salesOrganisation: fakeSalesOrganisation,
+    salesOrganisation: fakeMYSalesOrganisation,
   );
+  const fakeError = ApiFailure.other('fake-error');
+
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     creditAndInvoiceDetailsRepository = CreditAndInvoiceDetailsRepositoryMock();
     allCreditsAndInvoicesRepository = AllCreditsAndInvoicesRepositoryMock();
+    creditAndInvoiceItemList =
+        await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
+    customerDocumentDetailList = await CreditAndInvoiceDetailsLocalDataSource()
+        .getCreditAndInvoiceDetails();
   });
 
   setUp(() {
@@ -59,7 +70,7 @@ void main() {
         act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
           CreditAndInvoiceDetailsEvent.initialized(
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         ),
         expect: () => [fakeInitialState],
@@ -78,7 +89,7 @@ void main() {
       setUp: () {
         when(
           () => creditAndInvoiceDetailsRepository.getCreditAndInvoiceDetails(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             creditAndInvoiceItem: fakeInvoice,
           ),
@@ -115,7 +126,7 @@ void main() {
       setUp: () {
         when(
           () => creditAndInvoiceDetailsRepository.getCreditAndInvoiceDetails(
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             creditAndInvoiceItem: fakeInvoice,
           ),
@@ -136,6 +147,138 @@ void main() {
           itemsInfo: <CustomerDocumentDetail>[],
           failureOrSuccessOption:
               optionOf(const Right(<CustomerDocumentDetail>[])),
+        ),
+      ],
+    );
+
+    blocTest(
+      'fetch -> Invoice Details fetch By Id success',
+      build: () => CreditAndInvoiceDetailsBloc(
+        creditAndInvoiceDetailsRepository: creditAndInvoiceDetailsRepository,
+        allCreditsAndInvoicesRepository: allCreditsAndInvoicesRepository,
+      ),
+      seed: () => fakeInitialState,
+      setUp: () {
+        when(
+          () => allCreditsAndInvoicesRepository.filterInvoices(
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            filter: AllInvoicesFilter.empty().copyWith(
+              searchKey: SearchKey(
+                creditAndInvoiceItemList.first.searchKey.getValue(),
+              ),
+            ),
+            pageSize: 1,
+            offset: 0,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(creditAndInvoiceItemList),
+        );
+        when(
+          () => creditAndInvoiceDetailsRepository.getCreditAndInvoiceDetails(
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            creditAndInvoiceItem: creditAndInvoiceItemList.first,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(customerDocumentDetailList),
+        );
+      },
+      act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
+        CreditAndInvoiceDetailsEvent.fetchInvoiceById(
+          invoiceId: creditAndInvoiceItemList.first.searchKey.getValue(),
+        ),
+      ),
+      expect: () => [
+        fakeInitialState.copyWith(isLoading: true),
+        fakeInitialState.copyWith(
+          basicInfo: creditAndInvoiceItemList.first,
+          itemsInfo: customerDocumentDetailList,
+          failureOrSuccessOption: optionOf(Right(customerDocumentDetailList)),
+        ),
+      ],
+    );
+
+    blocTest(
+      'fetch -> Invoice Details fetch By Id fail',
+      build: () => CreditAndInvoiceDetailsBloc(
+        creditAndInvoiceDetailsRepository: creditAndInvoiceDetailsRepository,
+        allCreditsAndInvoicesRepository: allCreditsAndInvoicesRepository,
+      ),
+      seed: () => fakeInitialState,
+      setUp: () {
+        when(
+          () => allCreditsAndInvoicesRepository.filterInvoices(
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            filter: AllInvoicesFilter.empty().copyWith(
+              searchKey: SearchKey(
+                creditAndInvoiceItemList.first.searchKey.getValue(),
+              ),
+            ),
+            pageSize: 1,
+            offset: 0,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(fakeError),
+        );
+      },
+      act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
+        CreditAndInvoiceDetailsEvent.fetchInvoiceById(
+          invoiceId: creditAndInvoiceItemList.first.searchKey.getValue(),
+        ),
+      ),
+      expect: () => [
+        fakeInitialState.copyWith(isLoading: true),
+        fakeInitialState.copyWith(
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
+        ),
+      ],
+    );
+
+    blocTest(
+      'fetch -> Invoice Details fetch By Id Invoice details fetch fail',
+      build: () => CreditAndInvoiceDetailsBloc(
+        creditAndInvoiceDetailsRepository: creditAndInvoiceDetailsRepository,
+        allCreditsAndInvoicesRepository: allCreditsAndInvoicesRepository,
+      ),
+      seed: () => fakeInitialState,
+      setUp: () {
+        when(
+          () => allCreditsAndInvoicesRepository.filterInvoices(
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            filter: AllInvoicesFilter.empty().copyWith(
+              searchKey: SearchKey(
+                creditAndInvoiceItemList.first.searchKey.getValue(),
+              ),
+            ),
+            pageSize: 1,
+            offset: 0,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(creditAndInvoiceItemList),
+        );
+        when(
+          () => creditAndInvoiceDetailsRepository.getCreditAndInvoiceDetails(
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            creditAndInvoiceItem: creditAndInvoiceItemList.first,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(fakeError),
+        );
+      },
+      act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
+        CreditAndInvoiceDetailsEvent.fetchInvoiceById(
+          invoiceId: creditAndInvoiceItemList.first.searchKey.getValue(),
+        ),
+      ),
+      expect: () => [
+        fakeInitialState.copyWith(isLoading: true),
+        fakeInitialState.copyWith(
+          basicInfo: creditAndInvoiceItemList.first,
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
         ),
       ],
     );
