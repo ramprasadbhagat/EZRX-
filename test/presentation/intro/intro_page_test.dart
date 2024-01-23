@@ -10,6 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
@@ -79,6 +82,188 @@ void main() {
       expect(introSkipButton, findsOneWidget);
 
       await tester.tap(introSkipButton);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.setAppFirstLaunch(),
+        ),
+      ).called(1);
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.initialIndex(),
+        ),
+      ).called(1);
+      // await tester.pumpAndSettle();
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('User disable Payment & Return - Get started button only',
+        (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+          user: fakeClientUser.copyWith(
+            disablePaymentAccess: true,
+            disableReturns: true,
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getIntroPage());
+      await tester.pumpAndSettle();
+      expect(introGetStartedButton, findsOneWidget);
+      expect(introSkipButton, findsNothing);
+
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.setAppFirstLaunch(),
+        ),
+      ).called(1);
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.initialIndex(),
+        ),
+      ).called(1);
+      // await tester.pumpAndSettle();
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('SaleOrg disable Payment & Return - Get started button only',
+        (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          //Due to this ticket https://zuelligpharma.atlassian.net/browse/EZRX-16961?focusedCommentId=118024
+          //we need to create TWSalesOrgConfigs disable return and payment of client_user, but the fakeTWSalesOrgConfigs wont' match
+          //so it will need copyWith in here
+          salesOrgConfigs: fakeTWSalesOrgConfigs.copyWith(
+            disableReturnsAccess: true,
+            disablePayment: true,
+          ),
+          user: fakeClientUser.copyWith(
+            disablePaymentAccess: false,
+            disableReturns: false,
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getIntroPage());
+      await tester.pumpAndSettle();
+      expect(introGetStartedButton, findsOneWidget);
+      expect(introSkipButton, findsNothing);
+
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.setAppFirstLaunch(),
+        ),
+      ).called(1);
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.initialIndex(),
+        ),
+      ).called(1);
+      // await tester.pumpAndSettle();
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Root admin - SaleOrg return disable & payment enable',
+        (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+          user: fakeRootAdminUser.copyWith(
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getIntroPage());
+      await tester.pumpAndSettle();
+      expect(introGetStartedButton, findsOneWidget);
+      expect(introSkipButton, findsOneWidget);
+      expect(find.text('Order and track easily'), findsOneWidget);
+
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Payments on the go'), findsOneWidget);
+      expect(introSkipButton, findsOneWidget);
+
+      await tester.tap(introSkipButton);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.setAppFirstLaunch(),
+        ),
+      ).called(1);
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.initialIndex(),
+        ),
+      ).called(1);
+      // await tester.pumpAndSettle();
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Client user - MY SaleOrg & Return & Payment enable',
+        (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          user: fakeClientUser.copyWith(
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getIntroPage());
+      await tester.pumpAndSettle();
+      expect(introGetStartedButton, findsOneWidget);
+      expect(introSkipButton, findsOneWidget);
+      expect(find.text('Order and track easily'), findsOneWidget);
+
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Payments on the go'), findsOneWidget);
+      expect(introSkipButton, findsOneWidget);
+
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Hassle-free returns'), findsOneWidget);
+      expect(introSkipButton, findsNothing);
+
+      await tester.tap(introGetStartedButton);
       await tester.pumpAndSettle();
 
       verify(

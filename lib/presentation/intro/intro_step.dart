@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class IntroStep extends StatelessWidget {
   final IntroObject introObject;
-  final bool canSkip;
+  final bool isLastPage;
   final Function() getStarted;
   final Function() nextPage;
 
@@ -15,7 +15,7 @@ class IntroStep extends StatelessWidget {
     required this.introObject,
     required this.getStarted,
     required this.nextPage,
-    required this.canSkip,
+    required this.isLastPage,
   }) : super(key: key);
 
   @override
@@ -70,9 +70,11 @@ class IntroStep extends StatelessWidget {
                                 introObject.buttonBGColor,
                               ),
                             ),
-                        onPressed: canSkip ? nextPage : getStarted,
+                        onPressed: isLastPage ? getStarted : nextPage,
                         child: Text(
-                          context.tr(introObject.buttonText),
+                          context.tr(
+                            isLastPage ? 'Get started' : 'Next',
+                          ),
                           style: Theme.of(context)
                               .textTheme
                               .labelMedium
@@ -80,7 +82,7 @@ class IntroStep extends StatelessWidget {
                         ),
                       ),
                     ),
-                    if (canSkip)
+                    if (!isLastPage)
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.9,
                         child: TextButton(

@@ -18,47 +18,48 @@ class _IntroPageState extends State<IntroPage> {
   final PageController _pageController =
       PageController(initialPage: 0, keepPage: true);
 
-  List<IntroObject> getOnBoardingObject = [
-    IntroObject(
-      heading: 'Order and track easily',
-      description:
-          'With the new and improved eZRx+ mobile app, you can order your prescription drugs, view order history and track delivery statuses easily.',
-      buttonText: 'Next',
-      assetsPath: 'assets/images/temp1.png',
-      backgroundColor: ZPColors.introBlueBGColor,
-      headingColor: ZPColors.white,
-      descriptionColor: ZPColors.white,
-      buttonBorderColor: ZPColors.neutralsBlack,
-      buttonTextColor: ZPColors.neutralsBlack,
-      buttonBGColor: ZPColors.lightLime,
-    ),
-    IntroObject(
-      heading: 'Payments on the go',
-      description:
-          'Make payments, check credit limit and account summary balance with greater convenience.',
-      buttonText: 'Next',
-      assetsPath: 'assets/images/temp3.png',
-      backgroundColor: ZPColors.lightVioletBGColor,
-      headingColor: ZPColors.white,
-      descriptionColor: ZPColors.white,
-      buttonBorderColor: ZPColors.neutralsBlack,
-      buttonTextColor: ZPColors.neutralsBlack,
-      buttonBGColor: ZPColors.lightLime,
-    ),
-    IntroObject(
-      heading: 'Hassle-free returns',
-      description:
-          'Raise a return request and get notified of the approval status.',
-      buttonText: 'Get started',
-      assetsPath: 'assets/images/temp2.png',
-      backgroundColor: ZPColors.blueBGColor,
-      headingColor: ZPColors.white,
-      descriptionColor: ZPColors.white,
-      buttonBorderColor: ZPColors.white,
-      buttonTextColor: ZPColors.neutralsBlack,
-      buttonBGColor: ZPColors.lightLime,
-    ),
-  ];
+  List<IntroObject> getOnBoardingObject(EligibilityState state) {
+    return [
+      IntroObject(
+        heading: 'Order and track easily',
+        description:
+            'With the new and improved eZRx+ mobile app, you can order your prescription drugs, view order history and track delivery statuses easily.',
+        assetsPath: 'assets/images/temp1.png',
+        backgroundColor: ZPColors.introBlueBGColor,
+        headingColor: ZPColors.white,
+        descriptionColor: ZPColors.white,
+        buttonBorderColor: ZPColors.neutralsBlack,
+        buttonTextColor: ZPColors.neutralsBlack,
+        buttonBGColor: ZPColors.lightLime,
+      ),
+      if (state.isPaymentEnabled)
+        IntroObject(
+          heading: 'Payments on the go',
+          description:
+              'Make payments, check credit limit and account summary balance with greater convenience.',
+          assetsPath: 'assets/images/temp3.png',
+          backgroundColor: ZPColors.lightVioletBGColor,
+          headingColor: ZPColors.white,
+          descriptionColor: ZPColors.white,
+          buttonBorderColor: ZPColors.neutralsBlack,
+          buttonTextColor: ZPColors.neutralsBlack,
+          buttonBGColor: ZPColors.lightLime,
+        ),
+      if (state.isReturnsEnable)
+        IntroObject(
+          heading: 'Hassle-free returns',
+          description:
+              'Raise a return request and get notified of the approval status.',
+          assetsPath: 'assets/images/temp2.png',
+          backgroundColor: ZPColors.blueBGColor,
+          headingColor: ZPColors.white,
+          descriptionColor: ZPColors.white,
+          buttonBorderColor: ZPColors.white,
+          buttonTextColor: ZPColors.neutralsBlack,
+          buttonBGColor: ZPColors.lightLime,
+        ),
+    ];
+  }
 
   void _nextPage() {
     if (_pageController.hasClients) {
@@ -83,8 +84,6 @@ class _IntroPageState extends State<IntroPage> {
         );
   }
 
-  int get lastIndexIntroObject => getOnBoardingObject.length - 1;
-
   @override
   void dispose() {
     _pageController.dispose();
@@ -93,55 +92,66 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      allowImplicitScrolling: true,
-      onPageChanged: (index) =>
-          context.read<IntroBloc>().add(IntroEvent.setIndex(index: index)),
-      scrollDirection: Axis.horizontal,
-      controller: _pageController,
-      itemCount: getOnBoardingObject.length,
-      itemBuilder: (context, i) {
-        return Scaffold(
-          body: Container(
-            padding: const EdgeInsets.all(20),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  'assets/images/intro_background.png',
-                ),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: BlocBuilder<IntroBloc, IntroState>(
-                    buildWhen: (previous, current) =>
-                        previous.index != current.index,
-                    builder: (context, state) {
-                      return _CustomIndicator(
-                        index: state.index,
-                        lastIndex: lastIndexIntroObject,
-                        length: getOnBoardingObject.length,
-                      );
-                    },
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: BlocBuilder<EligibilityBloc, EligibilityState>(
+        buildWhen: (pre, cur) => pre.isLoading != cur.isLoading,
+        builder: (context, state) {
+          final list = getOnBoardingObject(state);
+
+          return PageView.builder(
+            allowImplicitScrolling: true,
+            onPageChanged: (index) => context
+                .read<IntroBloc>()
+                .add(IntroEvent.setIndex(index: index)),
+            scrollDirection: Axis.horizontal,
+            controller: _pageController,
+            itemCount: list.length,
+            itemBuilder: (context, i) {
+              return Scaffold(
+                body: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/images/intro_background.png',
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: BlocBuilder<IntroBloc, IntroState>(
+                          buildWhen: (previous, current) =>
+                              previous.index != current.index,
+                          builder: (context, state) {
+                            return _CustomIndicator(
+                              index: state.index,
+                              lastIndex: list.length - 1,
+                              length: list.length,
+                            );
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        flex: 9,
+                        child: IntroStep(
+                          introObject: list[i],
+                          isLastPage: i == (list.length - 1),
+                          getStarted: () => _getStarted(context),
+                          nextPage: _nextPage,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Expanded(
-                  flex: 9,
-                  child: IntroStep(
-                    introObject: getOnBoardingObject[i],
-                    canSkip: i != lastIndexIntroObject,
-                    getStarted: () => _getStarted(context),
-                    nextPage: _nextPage,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
@@ -150,6 +160,7 @@ class _CustomIndicator extends StatelessWidget {
   final int index;
   final int lastIndex;
   final int length;
+
   const _CustomIndicator({
     Key? key,
     required this.index,

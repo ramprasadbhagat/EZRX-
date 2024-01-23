@@ -7,10 +7,10 @@ class IntroObject {
   final Color headingColor;
   final String description;
   final Color descriptionColor;
-  final String buttonText;
   final Color buttonTextColor;
   final Color buttonBorderColor;
   final Color buttonBGColor;
+
   IntroObject({
     required this.assetsPath,
     required this.backgroundColor,
@@ -18,7 +18,6 @@ class IntroObject {
     required this.headingColor,
     required this.description,
     required this.descriptionColor,
-    required this.buttonText,
     required this.buttonTextColor,
     required this.buttonBorderColor,
     required this.buttonBGColor,
