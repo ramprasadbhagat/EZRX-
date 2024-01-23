@@ -8,9 +8,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
     return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) =>
           previous.cartProducts != current.cartProducts ||
-          previous.isUpdatingStock != current.isUpdatingStock ||
-          previous.isUpserting != current.isUpserting ||
-          previous.isAplProductLoading != current.isAplProductLoading,
+          previous.isCartDetailsFetching != current.isCartDetailsFetching,
       builder: (context, state) {
         return Column(
           children: [
@@ -35,17 +33,14 @@ class _CartPageCheckoutSection extends StatelessWidget {
                 size: 20,
               ),
             ),
-            const _MovCheckMessage(),
-            const _StockInvalidIDMarketMessage(),
-            const _CartPageInvalidItemsMessage(),
+            if (!state.isCartDetailsFetching) ...[
+              const _MovCheckMessage(),
+              const _StockInvalidIDMarketMessage(),
+              const _CartPageInvalidItemsMessage(),
+            ],
             PriceSummaryTile(cartState: state),
-            if (context
-                .read<OrderEligibilityBloc>()
-                .state
-                .displayPriceNotAvailableMessage)
-              const PriceNotAvailableMessage(
-                margin: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              ),
+            if (!state.isCartDetailsFetching)
+              const _CartPagePriceNotAvailableMessage(),
             _CartPageCheckoutButton(),
           ],
         );

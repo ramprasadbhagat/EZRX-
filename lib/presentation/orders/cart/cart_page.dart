@@ -49,6 +49,7 @@ part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_checkout_sect
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items_banner.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/stock_invalid_id_message.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items_message.dart';
+part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_price_not_available_message.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -117,6 +118,23 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        BlocListener<EligibilityBloc, EligibilityState>(
+          listenWhen: (previous, current) =>
+              previous.isLoading != current.isLoading,
+          listener: (context, state) {
+            context.read<OrderEligibilityBloc>().add(
+                  OrderEligibilityEvent.initialized(
+                    configs: state.salesOrgConfigs,
+                    customerCodeInfo: state.customerCodeInfo,
+                    orderType: state.selectedOrderType.documentType
+                        .getOrDefaultValue(''),
+                    salesOrg: state.salesOrganisation,
+                    shipInfo: state.shipToInfo,
+                    user: state.user,
+                  ),
+                );
+          },
+        ),
         BlocListener<CartBloc, CartState>(
           listenWhen: (previous, current) =>
               previous.isUpdateProductDetermination !=

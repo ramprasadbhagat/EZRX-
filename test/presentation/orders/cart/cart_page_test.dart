@@ -3231,6 +3231,43 @@ void main() {
               .called(1);
         },
       );
+
+      testWidgets(
+          'Order Eligibility Bloc should be initialized every time EligibilityState change',
+          (tester) async {
+        final orderType =
+            OrderDocumentType.defaultSelected(salesOrg: fakeMYSalesOrg);
+        whenListen(
+          eligibilityBloc,
+          Stream.fromIterable([
+            EligibilityState.initial().copyWith(isLoading: true),
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeMYSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              selectedOrderType: orderType,
+              shipToInfo: fakeShipToInfo,
+              user: fakeClientUser,
+            ),
+          ]),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        verify(
+          () => orderEligibilityBlocMock.add(
+            OrderEligibilityEvent.initialized(
+              configs: fakeMYSalesOrgConfigs,
+              salesOrg: fakeMYSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              orderType: orderType.documentType.getOrDefaultValue(''),
+              shipInfo: fakeShipToInfo,
+              user: fakeClientUser,
+            ),
+          ),
+        ).called(1);
+      });
     },
   );
 }
