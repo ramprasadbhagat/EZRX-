@@ -1,9 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/repository/aup_tc_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
@@ -25,7 +23,7 @@ void main() {
   late AupTcRepository aupTcRepository = MockAupTcRepository();
   late Config config;
   late User user;
-  late SalesOrganisation salesOrganisation;
+
   // late TncDate tncDate;
   // late Role role;
   late TokenStorage tokenStorage;
@@ -57,8 +55,6 @@ void main() {
     'UserLogin Accept Updated Privacy Policy',
     () {
       setUpAll(() async {
-        salesOrganisation = user.userSalesOrganisations.first
-            .copyWith(salesOrg: SalesOrg('2500'));
         when(() => MockTokenStorage().get())
             .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));
         user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
@@ -75,13 +71,11 @@ void main() {
           bloc.add(
             AupTcEvent.show(
               user.copyWith(acceptPrivacyPolicy: false),
-              salesOrganisation.salesOrg,
             ),
           );
         },
         expect: () => [
           AupTcState(
-            showTermsAndCondition: true,
             privacyFile: config.getPrivacyPolicyFile,
             tncFile: config.getTnCFile,
             tncConsent: false,
@@ -100,13 +94,11 @@ void main() {
           bloc.add(
             AupTcEvent.show(
               user.copyWith(acceptPrivacyPolicy: true),
-              salesOrganisation.salesOrg,
             ),
           );
         },
         expect: () => [
           AupTcState(
-            showTermsAndCondition: false,
             privacyFile: config.getPrivacyPolicyFile,
             tncFile: config.getTnCFile,
             tncConsent: false,
@@ -126,13 +118,11 @@ void main() {
           bloc.add(
             AupTcEvent.show(
               user.copyWith(acceptPrivacyPolicy: false),
-              SalesOrg('3070'),
             ),
           );
         },
         expect: () => [
           AupTcState(
-            showTermsAndCondition: true,
             privacyFile: config.getPrivacyPolicyFile,
             tncFile: config.getTnCFile,
             tncConsent: false,
@@ -152,13 +142,11 @@ void main() {
           bloc.add(
             AupTcEvent.show(
               user.copyWith(acceptPrivacyPolicy: false),
-              SalesOrg('2800'),
             ),
           );
         },
         expect: () => [
           AupTcState(
-            showTermsAndCondition: true,
             privacyFile: config.getPrivacyPolicyFile,
             tncFile: config.getTnCFile,
             tncConsent: false,
@@ -178,13 +166,11 @@ void main() {
           bloc.add(
             AupTcEvent.show(
               user.copyWith(acceptPrivacyPolicy: false),
-              SalesOrg('2902'),
             ),
           );
         },
         expect: () => [
           AupTcState(
-            showTermsAndCondition: true,
             privacyFile: config.getPrivacyPolicyFile,
             tncFile: config.getTnCFile,
             tncConsent: false,
@@ -204,13 +190,11 @@ void main() {
           bloc.add(
             AupTcEvent.show(
               user.copyWith(acceptPrivacyPolicy: false),
-              SalesOrg('2201'),
             ),
           );
         },
         expect: () => [
           AupTcState(
-            showTermsAndCondition: true,
             privacyFile: config.getPrivacyPolicyFile,
             tncFile: config.getTnCFile,
             tncConsent: false,
@@ -230,13 +214,11 @@ void main() {
           bloc.add(
             AupTcEvent.show(
               user.copyWith(acceptPrivacyPolicy: false),
-              SalesOrg('1500'),
             ),
           );
         },
         expect: () => [
           AupTcState(
-            showTermsAndCondition: true,
             privacyFile: config.getPrivacyPolicyFile,
             tncFile: config.getTnCFile,
             tncConsent: false,
@@ -249,7 +231,6 @@ void main() {
         '''Loged in and userbloc state is Not empty, tncConsent - true
         ''',
         seed: () => AupTcState(
-          showTermsAndCondition: true,
           privacyFile: config.getPrivacyPolicyFile,
           tncFile: config.getTnCFile,
           tncConsent: false,
@@ -266,7 +247,6 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            showTermsAndCondition: true,
             privacyFile: config.getPrivacyPolicyFile,
             tncFile: config.getTnCFile,
             tncConsent: true,
@@ -279,7 +259,6 @@ void main() {
         '''Loged in and userbloc state is Not empty, acceptPrivacyPolicy - true
         ''',
         seed: () => AupTcState(
-          showTermsAndCondition: true,
           privacyFile: config.getPrivacyPolicyFile,
           tncFile: config.getTnCFile,
           tncConsent: false,
@@ -296,7 +275,6 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            showTermsAndCondition: true,
             privacyFile: config.getPrivacyPolicyFile,
             tncFile: config.getTnCFile,
             tncConsent: false,

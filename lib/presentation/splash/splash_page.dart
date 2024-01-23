@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/announcement_info/announcement_filter/ann
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
+import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
@@ -66,7 +67,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
@@ -262,13 +262,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   );
             }
             if (state.isNotEmpty) {
-              context.read<AupTcBloc>().add(
-                    AupTcEvent.show(
-                      state.user,
-                      context.read<SalesOrgBloc>().state.salesOrg,
-                    ),
-                  );
               context.setLocale(state.user.preferredLanguage.locale);
+            }
+            if (state.showTermsAndConditionDialog) {
+              context.read<AupTcBloc>().add(AupTcEvent.show(state.user));
             }
 
             _initializePaymentConfiguration(state);

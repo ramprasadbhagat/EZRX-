@@ -907,7 +907,8 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('When PaymentCustomerInformation bloc event call when customer code changes',
+    testWidgets(
+        'When PaymentCustomerInformation bloc event call when customer code changes',
         (tester) async {
       final expectedStates = [
         CustomerCodeState.initial(),
@@ -929,9 +930,10 @@ void main() {
       await getWidget(tester);
       await tester.pump();
 
-
-      verify(() => paymentCustomerInformationBlocMock
-          .add(const PaymentCustomerInformationEvent.initialized()),).called(1);
+      verify(
+        () => paymentCustomerInformationBlocMock
+            .add(const PaymentCustomerInformationEvent.initialized()),
+      ).called(1);
 
       verify(
         () => paymentCustomerInformationBlocMock.add(
@@ -1233,13 +1235,29 @@ void main() {
 
       await getWidget(tester);
       verify(
-        () => aupTcBlocMock
-            .add(AupTcEvent.show(fakeUser, salesOrgBlocMock.state.salesOrg)),
-      ).called(2);
+        () => aupTcBlocMock.add(AupTcEvent.show(fakeUser)),
+      ).called(1);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       expect(
         EasyLocalization.of(tester.element(find.byType(Scaffold)))?.locale,
         const Locale('en'),
+      );
+    });
+
+    testWidgets('When Login on Behalf terms and condition page not displayed',
+        (tester) async {
+      final expectedUserListStates = [
+        UserState.initial().copyWith(
+          user: fakeUser,
+          isLoginOnBehalf: true,
+        ),
+      ];
+      whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
+
+      await getWidget(tester);
+      await tester.pump(const Duration(milliseconds: 500));
+      verifyNever(
+        () => aupTcBlocMock.add(AupTcEvent.show(fakeUser)),
       );
     });
 

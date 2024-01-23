@@ -151,6 +151,7 @@ void main() {
     role: Role.empty().copyWith(
       type: RoleType('client'),
     ),
+    acceptPrivacyPolicy: true,
     enableOrderType: true,
   );
 
@@ -236,7 +237,6 @@ void main() {
 
       when(() => mockAupTcBloc.state).thenReturn(
         AupTcState.initial().copyWith(
-          showTermsAndCondition: false,
           privacyConsent: false,
           tncConsent: false,
         ),
@@ -688,6 +688,7 @@ void main() {
         final fakeUser = User.empty().copyWith(
           accessRight: AccessRight.empty().copyWith(products: true),
           role: Role.empty().copyWith(type: RoleType('client_user')),
+          acceptPrivacyPolicy: true,
         );
         when(
           () => userBlocMock.state,
@@ -784,6 +785,7 @@ void main() {
         final fakeUser = User.empty().copyWith(
           accessRight: AccessRight.empty().copyWith(products: false),
           role: Role.empty().copyWith(type: RoleType('root_admin')),
+          acceptPrivacyPolicy: true,
         );
         when(
           () => eligibilityBlocMock.state,
@@ -833,6 +835,11 @@ void main() {
 
       testWidgets('ProductTab Visible when user role has AdminOrderAccess',
           (tester) async {
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
         await tester.pumpWidget(
           getWidget(widget: const HomeNavigationTabbar()),
         );
@@ -848,6 +855,7 @@ void main() {
         final fakeUser = User.empty().copyWith(
           accessRight: AccessRight.empty().copyWith(products: true),
           role: Role.empty().copyWith(type: RoleType('return_admin')),
+          acceptPrivacyPolicy: true,
         );
         when(
           () => userBlocMock.state,

@@ -23,7 +23,8 @@ class AupTCDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AupTcBloc, AupTcState>(
       buildWhen: (previous, current) =>
-          previous.showTermsAndCondition != current.showTermsAndCondition,
+          previous.tncFile != current.tncFile ||
+          previous.privacyFile != current.privacyFile,
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(

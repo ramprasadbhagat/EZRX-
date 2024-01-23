@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/aup_tc/repository/i_aup_tc_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -24,7 +23,6 @@ class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {
       show: (e) {
         emit(
           state.copyWith(
-            showTermsAndCondition: !e.user.acceptPrivacyPolicy,
             tncFile: e.user.tncFile,
             privacyFile: e.user.privacyPolicyFile,
             tncConsent: false,

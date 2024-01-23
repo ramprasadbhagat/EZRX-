@@ -2,7 +2,7 @@ part of 'aup_tc_bloc.dart';
 
 @freezed
 class AupTcEvent with _$AupTcEvent {
-  const factory AupTcEvent.show(User user, SalesOrg salesOrg) = _Show;
+  const factory AupTcEvent.show(User user) = _Show;
   const factory AupTcEvent.termsOfUseConsent({
     required bool newValue,
   }) = _TermsOfUseConsent;

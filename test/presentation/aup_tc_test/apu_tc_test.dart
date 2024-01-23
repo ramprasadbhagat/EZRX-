@@ -25,6 +25,8 @@ import 'package:ezrxmobile/application/payments/account_summary/account_summary_
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -154,6 +156,7 @@ void main() {
   late ProductDetailBloc productDetailBloc;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
   late ChatBotBloc chatBotBloc;
+  late User fakeUser;
 
   setUpAll(() async {
     setupLocator();
@@ -179,6 +182,9 @@ void main() {
     locator<Config>().oktaConfig;
     locator<Config>().packageName;
     autoRouterMock = locator<AppRouter>();
+    fakeUser = User.empty().copyWith(
+      username: Username('fake-user'),
+    );
     PackageInfo.setMockInitialValues(
       appName: '',
       packageName: '"packageName"',
@@ -249,9 +255,13 @@ void main() {
         (tester) async {
       when(() => mockAupTcBloc.state).thenReturn(
         AupTcState.initial().copyWith(
-          showTermsAndCondition: true,
           privacyConsent: true,
           tncConsent: true,
+        ),
+      );
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser,
         ),
       );
       await tester.pumpWidget(
@@ -342,12 +352,6 @@ void main() {
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndCondition=false',
         (tester) async {
-      when(() => mockAupTcBloc.state).thenReturn(
-        AupTcState.initial().copyWith(
-          showTermsAndCondition: false,
-        ),
-      );
-
       await tester.pumpWidget(
         WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
@@ -432,9 +436,13 @@ void main() {
   testWidgets('Test - AupTc Widget localization test', (tester) async {
     when(() => mockAupTcBloc.state).thenReturn(
       AupTcState.initial().copyWith(
-        showTermsAndCondition: true,
         privacyConsent: false,
         tncConsent: false,
+      ),
+    );
+    when(() => userBlocMock.state).thenReturn(
+      UserState.initial().copyWith(
+        user: fakeUser,
       ),
     );
     await tester.pumpWidget(
@@ -449,6 +457,9 @@ void main() {
             ),
             BlocProvider<AupTcBloc>(
               create: (context) => mockAupTcBloc,
+            ),
+            BlocProvider<UserBloc>(
+              create: (context) => userBlocMock,
             ),
           ],
           child: const HomeNavigationTabbar(),

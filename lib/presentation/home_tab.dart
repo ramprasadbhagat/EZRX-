@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -21,11 +21,12 @@ class HomeNavigationTabbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AupTcBloc, AupTcState>(
+    return BlocBuilder<UserBloc, UserState>(
       buildWhen: (previous, current) =>
-          previous.showTermsAndCondition != current.showTermsAndCondition,
+          previous.showTermsAndConditionDialog !=
+          current.showTermsAndConditionDialog,
       builder: (context, state) {
-        return state.showTermsAndCondition
+        return state.showTermsAndConditionDialog
             ? const AupTCDialog(
                 key: WidgetKeys.aupTcScreen,
               )

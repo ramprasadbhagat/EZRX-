@@ -18,21 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AupTcEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user, SalesOrg salesOrg) show,
+    required TResult Function(User user) show,
     required TResult Function(bool newValue) termsOfUseConsent,
     required TResult Function(bool newValue) privacyPolicyConsent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user, SalesOrg salesOrg)? show,
+    TResult? Function(User user)? show,
     TResult? Function(bool newValue)? termsOfUseConsent,
     TResult? Function(bool newValue)? privacyPolicyConsent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user, SalesOrg salesOrg)? show,
+    TResult Function(User user)? show,
     TResult Function(bool newValue)? termsOfUseConsent,
     TResult Function(bool newValue)? privacyPolicyConsent,
     required TResult orElse(),
@@ -85,7 +85,7 @@ abstract class _$$_ShowCopyWith<$Res> {
   factory _$$_ShowCopyWith(_$_Show value, $Res Function(_$_Show) then) =
       __$$_ShowCopyWithImpl<$Res>;
   @useResult
-  $Res call({User user, SalesOrg salesOrg});
+  $Res call({User user});
 
   $UserCopyWith<$Res> get user;
 }
@@ -101,17 +101,12 @@ class __$$_ShowCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
-    Object? salesOrg = null,
   }) {
     return _then(_$_Show(
       null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
     ));
   }
 
@@ -127,16 +122,14 @@ class __$$_ShowCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Show implements _Show {
-  const _$_Show(this.user, this.salesOrg);
+  const _$_Show(this.user);
 
   @override
   final User user;
-  @override
-  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'AupTcEvent.show(user: $user, salesOrg: $salesOrg)';
+    return 'AupTcEvent.show(user: $user)';
   }
 
   @override
@@ -144,13 +137,11 @@ class _$_Show implements _Show {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Show &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, salesOrg);
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
@@ -161,33 +152,33 @@ class _$_Show implements _Show {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user, SalesOrg salesOrg) show,
+    required TResult Function(User user) show,
     required TResult Function(bool newValue) termsOfUseConsent,
     required TResult Function(bool newValue) privacyPolicyConsent,
   }) {
-    return show(user, salesOrg);
+    return show(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user, SalesOrg salesOrg)? show,
+    TResult? Function(User user)? show,
     TResult? Function(bool newValue)? termsOfUseConsent,
     TResult? Function(bool newValue)? privacyPolicyConsent,
   }) {
-    return show?.call(user, salesOrg);
+    return show?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user, SalesOrg salesOrg)? show,
+    TResult Function(User user)? show,
     TResult Function(bool newValue)? termsOfUseConsent,
     TResult Function(bool newValue)? privacyPolicyConsent,
     required TResult orElse(),
   }) {
     if (show != null) {
-      return show(user, salesOrg);
+      return show(user);
     }
     return orElse();
   }
@@ -228,10 +219,9 @@ class _$_Show implements _Show {
 }
 
 abstract class _Show implements AupTcEvent {
-  const factory _Show(final User user, final SalesOrg salesOrg) = _$_Show;
+  const factory _Show(final User user) = _$_Show;
 
   User get user;
-  SalesOrg get salesOrg;
   @JsonKey(ignore: true)
   _$$_ShowCopyWith<_$_Show> get copyWith => throw _privateConstructorUsedError;
 }
@@ -302,7 +292,7 @@ class _$_TermsOfUseConsent implements _TermsOfUseConsent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user, SalesOrg salesOrg) show,
+    required TResult Function(User user) show,
     required TResult Function(bool newValue) termsOfUseConsent,
     required TResult Function(bool newValue) privacyPolicyConsent,
   }) {
@@ -312,7 +302,7 @@ class _$_TermsOfUseConsent implements _TermsOfUseConsent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user, SalesOrg salesOrg)? show,
+    TResult? Function(User user)? show,
     TResult? Function(bool newValue)? termsOfUseConsent,
     TResult? Function(bool newValue)? privacyPolicyConsent,
   }) {
@@ -322,7 +312,7 @@ class _$_TermsOfUseConsent implements _TermsOfUseConsent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user, SalesOrg salesOrg)? show,
+    TResult Function(User user)? show,
     TResult Function(bool newValue)? termsOfUseConsent,
     TResult Function(bool newValue)? privacyPolicyConsent,
     required TResult orElse(),
@@ -444,7 +434,7 @@ class _$_PrivacyPolicyConsent implements _PrivacyPolicyConsent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user, SalesOrg salesOrg) show,
+    required TResult Function(User user) show,
     required TResult Function(bool newValue) termsOfUseConsent,
     required TResult Function(bool newValue) privacyPolicyConsent,
   }) {
@@ -454,7 +444,7 @@ class _$_PrivacyPolicyConsent implements _PrivacyPolicyConsent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user, SalesOrg salesOrg)? show,
+    TResult? Function(User user)? show,
     TResult? Function(bool newValue)? termsOfUseConsent,
     TResult? Function(bool newValue)? privacyPolicyConsent,
   }) {
@@ -464,7 +454,7 @@ class _$_PrivacyPolicyConsent implements _PrivacyPolicyConsent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user, SalesOrg salesOrg)? show,
+    TResult Function(User user)? show,
     TResult Function(bool newValue)? termsOfUseConsent,
     TResult Function(bool newValue)? privacyPolicyConsent,
     required TResult orElse(),
@@ -522,7 +512,6 @@ abstract class _PrivacyPolicyConsent implements AupTcEvent {
 
 /// @nodoc
 mixin _$AupTcState {
-  bool get showTermsAndCondition => throw _privateConstructorUsedError;
   String get tncFile => throw _privateConstructorUsedError;
   String get privacyFile => throw _privateConstructorUsedError;
   bool get tncConsent => throw _privateConstructorUsedError;
@@ -540,8 +529,7 @@ abstract class $AupTcStateCopyWith<$Res> {
       _$AupTcStateCopyWithImpl<$Res, AupTcState>;
   @useResult
   $Res call(
-      {bool showTermsAndCondition,
-      String tncFile,
+      {String tncFile,
       String privacyFile,
       bool tncConsent,
       bool privacyConsent});
@@ -560,17 +548,12 @@ class _$AupTcStateCopyWithImpl<$Res, $Val extends AupTcState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? showTermsAndCondition = null,
     Object? tncFile = null,
     Object? privacyFile = null,
     Object? tncConsent = null,
     Object? privacyConsent = null,
   }) {
     return _then(_value.copyWith(
-      showTermsAndCondition: null == showTermsAndCondition
-          ? _value.showTermsAndCondition
-          : showTermsAndCondition // ignore: cast_nullable_to_non_nullable
-              as bool,
       tncFile: null == tncFile
           ? _value.tncFile
           : tncFile // ignore: cast_nullable_to_non_nullable
@@ -600,8 +583,7 @@ abstract class _$$_AupTcStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool showTermsAndCondition,
-      String tncFile,
+      {String tncFile,
       String privacyFile,
       bool tncConsent,
       bool privacyConsent});
@@ -618,17 +600,12 @@ class __$$_AupTcStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? showTermsAndCondition = null,
     Object? tncFile = null,
     Object? privacyFile = null,
     Object? tncConsent = null,
     Object? privacyConsent = null,
   }) {
     return _then(_$_AupTcState(
-      showTermsAndCondition: null == showTermsAndCondition
-          ? _value.showTermsAndCondition
-          : showTermsAndCondition // ignore: cast_nullable_to_non_nullable
-              as bool,
       tncFile: null == tncFile
           ? _value.tncFile
           : tncFile // ignore: cast_nullable_to_non_nullable
@@ -653,14 +630,11 @@ class __$$_AupTcStateCopyWithImpl<$Res>
 
 class _$_AupTcState implements _AupTcState {
   const _$_AupTcState(
-      {required this.showTermsAndCondition,
-      required this.tncFile,
+      {required this.tncFile,
       required this.privacyFile,
       required this.tncConsent,
       required this.privacyConsent});
 
-  @override
-  final bool showTermsAndCondition;
   @override
   final String tncFile;
   @override
@@ -672,7 +646,7 @@ class _$_AupTcState implements _AupTcState {
 
   @override
   String toString() {
-    return 'AupTcState(showTermsAndCondition: $showTermsAndCondition, tncFile: $tncFile, privacyFile: $privacyFile, tncConsent: $tncConsent, privacyConsent: $privacyConsent)';
+    return 'AupTcState(tncFile: $tncFile, privacyFile: $privacyFile, tncConsent: $tncConsent, privacyConsent: $privacyConsent)';
   }
 
   @override
@@ -680,8 +654,6 @@ class _$_AupTcState implements _AupTcState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AupTcState &&
-            (identical(other.showTermsAndCondition, showTermsAndCondition) ||
-                other.showTermsAndCondition == showTermsAndCondition) &&
             (identical(other.tncFile, tncFile) || other.tncFile == tncFile) &&
             (identical(other.privacyFile, privacyFile) ||
                 other.privacyFile == privacyFile) &&
@@ -692,8 +664,8 @@ class _$_AupTcState implements _AupTcState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, showTermsAndCondition, tncFile,
-      privacyFile, tncConsent, privacyConsent);
+  int get hashCode => Object.hash(
+      runtimeType, tncFile, privacyFile, tncConsent, privacyConsent);
 
   @JsonKey(ignore: true)
   @override
@@ -704,14 +676,11 @@ class _$_AupTcState implements _AupTcState {
 
 abstract class _AupTcState implements AupTcState {
   const factory _AupTcState(
-      {required final bool showTermsAndCondition,
-      required final String tncFile,
+      {required final String tncFile,
       required final String privacyFile,
       required final bool tncConsent,
       required final bool privacyConsent}) = _$_AupTcState;
 
-  @override
-  bool get showTermsAndCondition;
   @override
   String get tncFile;
   @override

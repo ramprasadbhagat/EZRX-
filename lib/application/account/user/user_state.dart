@@ -30,4 +30,6 @@ class UserState with _$UserState {
       user.userSalesOrganisations;
   List<String> get salesOrgValue =>
       userSalesOrganisations.map((e) => e.salesOrg.getValue()).toList();
+  bool get showTermsAndConditionDialog =>
+      isNotEmpty && !isLoginOnBehalf && !user.acceptPrivacyPolicy;
 }
