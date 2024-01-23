@@ -149,4 +149,18 @@ class PaymentSummaryRobot {
       );
     }
   }
+
+  void verifyStatusValue(String valueExpected) {
+    final status = find.textContaining(valueExpected);
+
+    expect(
+      status,
+      findsAtLeastNWidgets(1),
+    );
+  }
+
+  void verifyStatusNonContains(String valueExpected) {
+    final customerCode = find.textContaining(valueExpected);
+    expect(customerCode, findsNothing);
+  }
 }

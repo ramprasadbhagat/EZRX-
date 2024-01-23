@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +29,7 @@ class StatusLabel extends StatelessWidget {
       ),
       child: Text(
         context.tr(status.displayStatusText),
+        key: WidgetKeys.paymentSummaryTextStatus,
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: valueColor,
             ),

@@ -23,12 +23,8 @@ class PaymentSummaryFilterRobot {
   ];
 
   void verifyDefaultFilterApplied() {
-    final currentTime = DateTime.now();
     verifyNoStatusFilterApplied();
-    verifyDateRangeFilterApplied(
-      fromDate: currentTime.subtract(const Duration(days: 29)),
-      toDate: currentTime,
-    );
+    verifyDateRangeFilterApplied();
     verifyAmountRangeFilterApplied(
       fromAmount: '',
       toAmount: '',
@@ -37,9 +33,11 @@ class PaymentSummaryFilterRobot {
 
   void verifyNoStatusFilterApplied() {
     for (final option in statusFilterOptions) {
+      final radioSort =
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus(option));
       expect(
-        find.byKey(WidgetKeys.paymentSummaryFilterStatus(option)),
-        findsNothing,
+        tester.firstWidget<RadioListTile>(radioSort).checked,
+        false,
       );
     }
   }
@@ -86,14 +84,16 @@ class PaymentSummaryFilterRobot {
   }
 
   void verifyDateRangeFilterApplied({
-    required DateTime fromDate,
-    required DateTime toDate,
+    DateTime? fromDate,
+    DateTime? toDate,
   }) {
     expect(
       find.descendant(
         of: fromDateFilter,
         matching: find.text(
-          DateTimeStringValue(fromDate.toIso8601String()).dateString,
+          fromDate != null
+              ? DateTimeStringValue(fromDate.toIso8601String()).dateString
+              : '',
         ),
       ),
       findsOneWidget,
@@ -102,7 +102,9 @@ class PaymentSummaryFilterRobot {
       find.descendant(
         of: toDateFilter,
         matching: find.text(
-          DateTimeStringValue(toDate.toIso8601String()).dateString,
+          toDate != null
+              ? DateTimeStringValue(toDate.toIso8601String()).dateString
+              : '',
         ),
       ),
       findsOneWidget,
@@ -143,7 +145,8 @@ class PaymentSummaryFilterRobot {
   }
 
   Future<void> tapStatusCheckbox(String name) async {
-    await tester.tap(find.widgetWithText(CheckboxListTile, name));
+    final radioSort = find.byKey(WidgetKeys.paymentSummaryFilterStatus(name));
+    await tester.tap(radioSort);
     await tester.pump();
   }
 

@@ -81,7 +81,6 @@ void main() {
     paymentSummaryRobot.verifyDownloadButtonVisible();
     paymentSummaryRobot.verifySearchBarVisible();
     paymentSummaryRobot.verifyFilterButtonVisible();
-    paymentSummaryRobot.verifyFilterApplied(1);
     paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
     paymentSummaryRobot.verifyNewPaymentButtonVisible();
 
@@ -177,7 +176,6 @@ void main() {
 
     //verify
     paymentSummaryRobot.verifyPageVisible();
-    paymentSummaryRobot.verifyFilterApplied(1);
 
     //change filter date
     await paymentSummaryRobot.tapFilterButton();
@@ -209,10 +207,6 @@ void main() {
 
     //change status
     await paymentSummaryRobot.tapFilterButton();
-    await paymentSummaryFilterRobot.tapStatusCheckbox(statusFilter);
-    paymentSummaryFilterRobot.verifyStatusFilterValue(statusFilter, true);
-    await paymentSummaryFilterRobot.tapStatusCheckbox(statusFilter);
-    paymentSummaryFilterRobot.verifyStatusFilterValue(statusFilter, false);
     await paymentSummaryFilterRobot.tapStatusCheckbox(statusFilter);
     paymentSummaryFilterRobot.verifyStatusFilterValue(statusFilter, true);
     await paymentSummaryFilterRobot.tapApplyButton();

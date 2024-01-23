@@ -829,6 +829,7 @@ class WidgetKeys {
   static const Key paymentSummaryGroupDate = Key('paymentSummaryGroupDate');
   static const Key paymentSummaryTile = Key('paymentSummaryTile');
   static const Key paymentSummaryTileStatus = Key('paymentSummaryTileStatus');
+  static const Key paymentSummaryTextStatus = Key('paymentSummaryTextStatus');
   static const Key paymentSummaryDateOrExpiry =
       Key('paymentSummaryDateOrExpiry');
   static const Key paymentSummaryAmountAndCurrency =
