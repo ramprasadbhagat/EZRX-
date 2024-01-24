@@ -333,14 +333,13 @@ String getOrderType({
       cartItems.any((element) => element.materialInfo.isFOCMaterial);
 
   if (hasFocMaterial) {
-    if (customerCodeInfo.customerGrp4.isVP) {
+    if (salesOrg.isSg && customerCodeInfo.customerAttr7.isZEV) {
+      return 'ZPFC';
+    } else if (salesOrg.isPH && customerCodeInfo.customerGrp4.isVP) {
       return 'ZPFV';
-    } else if (customerCodeInfo.customerGrp4.isVR) {
+    } else if (salesOrg.isPH && customerCodeInfo.customerGrp4.isVR) {
       return 'ZPVF';
     }
-  }
-  if (salesOrg.isSg && customerCodeInfo.customerAttr7.isZEV && hasFocMaterial) {
-    return 'ZPFC';
   }
 
   return '';
