@@ -135,11 +135,7 @@ class PriceAggregate with _$PriceAggregate {
       quantity: quantity,
       materialItemOverride:
           MaterialItemOverrideDto.fromPriceAggregate(this).toDomain(),
-      price: materialInfo.type.typeBundle
-          ? bundle.currentBundleInfo.rate
-          : salesOrgConfig.salesOrg.isID
-              ? price.finalPrice.getOrDefaultValue(0)
-              : finalPrice,
+      price: _priceSubmitted,
       productType: materialInfo.type.getValue().toUpperCase(),
       parentID: materialInfo.type.typeBundle
           ? bundle.bundleCode
@@ -150,6 +146,19 @@ class PriceAggregate with _$PriceAggregate {
       promoType: materialInfo.promoType,
       principalData: materialInfo.principalData,
     );
+  }
+
+  double get _priceSubmitted {
+    if (materialInfo.type.typeBundle) {
+      return bundle.currentBundleInfo.rate;
+    }
+    if (materialInfo.hidePrice) {
+      return 0.0;
+    }
+
+    return salesOrgConfig.salesOrg.isID
+        ? price.finalPrice.getOrDefaultValue(0.0)
+        : finalPrice;
   }
 
   double vatCalculation(double value) {

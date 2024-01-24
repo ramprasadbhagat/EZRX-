@@ -2286,4 +2286,21 @@ void main() {
       );
     });
   });
+
+  test('=> toSubmitMaterialInfo with hide price material', () {
+    final customPriceAggregate = emptyPriceAggregate.copyWith(
+      price: bonusPrice.copyWith(
+        finalPrice: MaterialPrice(80.0),
+      ),
+      quantity: 5,
+      materialInfo: MaterialInfo.empty().copyWith(
+        hidePrice: true,
+      ),
+    );
+
+    expect(
+      customPriceAggregate.toSubmitMaterialInfo().price,
+      0,
+    );
+  });
 }
