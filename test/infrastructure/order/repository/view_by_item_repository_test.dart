@@ -3,10 +3,11 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_request.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 
 import 'package:flutter/material.dart';
@@ -103,16 +104,21 @@ void main() async {
 
       test('=> Failure in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+        final viewByItemRequest = ViewByItemRequest.empty().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          language: fakeClientUser.preferredLanguage.languageCode,
+          pageSize: fakePageSize,
+          offSet: fakeOffset,
+          searchKey: fakeSearchKey.getOrDefaultValue(''),
+          viewByItemFilter: fakeFilter,
+        );
         when(
-          () => orderHistoryRemoteDataSource.getViewByItems(
-            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
-            shipTo: fakeShipToInfo.shipToCustomerCode,
-            pageSize: fakePageSize,
-            offset: fakeOffset,
-            language: fakeClientUser.preferredLanguage.languageCode,
-            searchKey: fakeSearchKey.getOrDefaultValue(''),
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
-            filterQuery: ViewByItemFilterDto.fromDomain(fakeFilter).toJson(),
+          () => orderHistoryRemoteDataSource.getOrderHistory(
+            variables:
+                ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson(),
           ),
         ).thenThrow(fakeException);
 
@@ -133,16 +139,20 @@ void main() async {
 
       test('=> Success in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        final viewByItemRequest = ViewByItemRequest.empty().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          language: fakeClientUser.preferredLanguage.languageCode,
+          pageSize: fakePageSize,
+          offSet: fakeOffset,
+          searchKey: fakeSearchKey.getOrDefaultValue(''),
+          viewByItemFilter: fakeFilter,
+        );
         when(
-          () => orderHistoryRemoteDataSource.getViewByItems(
-            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
-            shipTo: fakeShipToInfo.shipToCustomerCode,
-            pageSize: fakePageSize,
-            offset: fakeOffset,
-            language: fakeClientUser.preferredLanguage.languageCode,
-            searchKey: fakeSearchKey.getOrDefaultValue(''),
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
-            filterQuery: ViewByItemFilterDto.fromDomain(fakeFilter).toJson(),
+          () => orderHistoryRemoteDataSource.getOrderHistory(
+            variables:
+                ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson(),
           ),
         ).thenAnswer((_) async => fakeOrderHistory);
 
@@ -163,25 +173,27 @@ void main() async {
 
       test('=> Success in remote filter have date filter', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        final viewByItemRequest = ViewByItemRequest.empty().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          language: fakeClientUser.preferredLanguage.languageCode,
+          pageSize: fakePageSize,
+          offSet: fakeOffset,
+          searchKey: fakeSearchKey.getOrDefaultValue(''),
+          viewByItemFilter: fakeFilter.copyWith(
+            orderDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(DateTime(2023, 12, 22)),
+            ),
+            orderDateTo: DateTimeStringValue(
+              getDateStringByDateTime(DateTime.now()),
+            ),
+          ),
+        );
         when(
-          () => orderHistoryRemoteDataSource.getViewByItems(
-            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
-            shipTo: fakeShipToInfo.shipToCustomerCode,
-            pageSize: fakePageSize,
-            offset: fakeOffset,
-            language: fakeClientUser.preferredLanguage.languageCode,
-            searchKey: fakeSearchKey.getOrDefaultValue(''),
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
-            filterQuery: ViewByItemFilterDto.fromDomain(
-              fakeFilter.copyWith(
-                orderDateFrom: DateTimeStringValue(
-                  getDateStringByDateTime(DateTime(2023, 12, 22)),
-                ),
-                orderDateTo: DateTimeStringValue(
-                  getDateStringByDateTime(DateTime.now()),
-                ),
-              ),
-            ).toJson(),
+          () => orderHistoryRemoteDataSource.getOrderHistory(
+            variables:
+                ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson(),
           ),
         ).thenAnswer((_) async => fakeOrderHistory);
 
@@ -209,18 +221,28 @@ void main() async {
 
       test('=> Success in remote filter date empty', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+        final viewByItemRequest = ViewByItemRequest.empty().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          language: fakeClientUser.preferredLanguage.languageCode,
+          pageSize: fakePageSize,
+          offSet: fakeOffset,
+          searchKey: fakeSearchKey.getOrDefaultValue(''),
+          viewByItemFilter: fakeFilter.copyWith(
+            orderDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(DateTime(1900)),
+            ),
+            orderDateTo: DateTimeStringValue(
+              getDateStringByDateTime(DateTime.now()),
+            ),
+          ),
+        );
         when(
-          () => orderHistoryRemoteDataSource.getViewByItems(
-            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
-            shipTo: fakeShipToInfo.shipToCustomerCode,
-            pageSize: fakePageSize,
-            offset: fakeOffset,
-            language: fakeClientUser.preferredLanguage.languageCode,
-            searchKey: fakeSearchKey.getOrDefaultValue(''),
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
-            filterQuery: ViewByItemFilterDto.fromDomain(
-              ViewByItemFilter.empty(),
-            ).toJson(),
+          () => orderHistoryRemoteDataSource.getOrderHistory(
+            variables:
+                ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson(),
           ),
         ).thenAnswer((_) async => fakeOrderHistory);
 
@@ -232,14 +254,7 @@ void main() async {
           user: fakeClientUser,
           pageSize: fakePageSize,
           offset: fakeOffset,
-          viewByItemFilter: fakeFilter.copyWith(
-            orderDateFrom: DateTimeStringValue(
-              getDateStringByDateTime(DateTime(1900)),
-            ),
-            orderDateTo: DateTimeStringValue(
-              getDateStringByDateTime(DateTime.now()),
-            ),
-          ),
+          viewByItemFilter: ViewByItemFilter.empty(),
           searchKey: fakeSearchKey,
         );
 
@@ -386,12 +401,16 @@ void main() async {
 
       test('=> Failure in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        final viewByItemSearchRequest = ViewByItemRequest.empty().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          language: fakeClientUser.preferredLanguage.languageCode,
+          searchKey: fakeSearchKey.getOrCrash(),
+        );
         when(
-          () => orderHistoryRemoteDataSource.searchOrderHistory(
-            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
-            language: fakeClientUser.preferredLanguage.languageCode,
-            searchKey: fakeSearchKey.getOrDefaultValue(''),
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
+          () => orderHistoryRemoteDataSource.getOrderHistory(
+            variables: ViewByItemRequestDto.fromDomain(viewByItemSearchRequest)
+                .toMapJson(),
           ),
         ).thenThrow(fakeException);
 
@@ -407,12 +426,16 @@ void main() async {
 
       test('=> Success in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        final viewByItemSearchRequest = ViewByItemRequest.empty().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          language: fakeClientUser.preferredLanguage.languageCode,
+          searchKey: fakeSearchKey.getOrCrash(),
+        );
         when(
-          () => orderHistoryRemoteDataSource.searchOrderHistory(
-            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
-            language: fakeClientUser.preferredLanguage.languageCode,
-            searchKey: fakeSearchKey.getOrDefaultValue(''),
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
+          () => orderHistoryRemoteDataSource.getOrderHistory(
+            variables: ViewByItemRequestDto.fromDomain(viewByItemSearchRequest)
+                .toMapJson(),
           ),
         ).thenAnswer((_) async => fakeOrderHistory);
 

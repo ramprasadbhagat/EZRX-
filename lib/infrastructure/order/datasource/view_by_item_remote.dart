@@ -25,63 +25,7 @@ class ViewByItemRemoteDataSource {
     required this.dataSourceExceptionHandler,
   });
 
-  Future<OrderHistory> getViewByItems({
-    required String soldTo,
-    required String shipTo,
-    required int pageSize,
-    required int offset,
-    required String language,
-    required String searchKey,
-    required String salesOrg,
-    required Map<String, dynamic> filterQuery,
-  }) async {
-    final variables = {
-      'soldTo': soldTo,
-      'shipTo': [shipTo],
-      'first': pageSize,
-      'after': offset,
-      'language': language,
-      'salesOrg': [salesOrg],
-      'searchKey': searchKey,
-      ...filterQuery,
-    };
-
-    return await _getOrderHistory(variables: variables);
-  }
-
-  Future<OrderHistory> getViewByItemDetails({
-    required String soldTo,
-    required String language,
-    required String orderNumber,
-    required String salesOrg,
-  }) async {
-    final variables = {
-      'soldTo': soldTo,
-      'language': language,
-      'salesOrg': [salesOrg],
-      'orderNumber': orderNumber,
-    };
-
-    return await _getOrderHistory(variables: variables);
-  }
-
-  Future<OrderHistory> searchOrderHistory({
-    required String soldTo,
-    required String language,
-    required String searchKey,
-    required String salesOrg,
-  }) async {
-    final variables = {
-      'soldTo': soldTo,
-      'language': language,
-      'salesOrg': [salesOrg],
-      'searchKey': searchKey,
-    };
-
-    return await _getOrderHistory(variables: variables);
-  }
-
-  Future<OrderHistory> _getOrderHistory({
+  Future<OrderHistory> getOrderHistory({
     required Map<String, dynamic> variables,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {

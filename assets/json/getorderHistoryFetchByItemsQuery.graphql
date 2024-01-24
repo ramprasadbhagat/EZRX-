@@ -1,4 +1,4 @@
-query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $language: String, $orderStatus: [String!], $searchKey: String, $salesOrg: [String], $filterBlockCustomer: Boolean, $materialSearch: String) {
+query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $language: String, $orderStatus: [String!], $searchKey: String, $salesOrg: [String], $filterBlockCustomer: Boolean, $materialSearch: String, $isOptimised: Boolean) {
   orderHistoryFetchByItems(
     soldTo: $soldTo
     fromDate: $fromDate
@@ -13,6 +13,7 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
     salesOrg: $salesOrg
     materialSearch: $materialSearch
     filterBlockedCustomer: $filterBlockCustomer
+    isOptimised: $isOptimised
   ) {
     OrderCount
     OrderHistory {
@@ -96,4 +97,5 @@ variables : {
   "language": "EN",
   "fromDate": "20230805",
   "toDate": "20230811"
+  "isOptimised":true,
 }

@@ -1,7 +1,7 @@
 class ViewByItemQueryMutation {
   String getViewByItem() {
     return '''
-     query orderHistoryFetchByItems(\$soldTo: String!, \$fromDate: String, \$toDate: String, \$shipTo: [String], \$first: Int, \$after: Int, \$language: String, \$orderStatus: [String!], \$searchKey: String, \$salesOrg: [String], \$filterBlockCustomer: Boolean, \$materialSearch: String, \$orderNumber: String,) {
+     query orderHistoryFetchByItems(\$soldTo: String!, \$fromDate: String, \$toDate: String, \$shipTo: [String], \$first: Int, \$after: Int, \$language: String, \$orderStatus: [String!], \$searchKey: String, \$salesOrg: [String], \$filterBlockCustomer: Boolean, \$materialSearch: String, \$orderNumber: String, \$isOptimised: Boolean,) {
   orderHistoryFetchByItems(
     soldTo: \$soldTo
     fromDate: \$fromDate
@@ -16,6 +16,7 @@ class ViewByItemQueryMutation {
     materialSearch: \$materialSearch
     filterBlockedCustomer: \$filterBlockCustomer
     orderNumber: \$orderNumber
+    isOptimised: \$isOptimised
   ) {
     OrderCount
     OrderHistory {

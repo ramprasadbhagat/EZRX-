@@ -11,13 +11,14 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_request.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_filter_dto.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_request_dto.dart';
 
 class ViewByItemRepository implements IViewByItemRepository {
   final Config config;
@@ -57,27 +58,29 @@ class ViewByItemRepository implements IViewByItemRepository {
         searchKey.validateNotEmpty && viewByItemFilter.dateRangeEmpty;
 
     try {
-      final orderHistoryItemList =
-          await viewByItemRemoteDataSource.getViewByItems(
-        shipTo: shipTo.shipToCustomerCode,
-        soldTo: soldTo.customerCodeSoldTo,
-        pageSize: pageSize,
-        offset: offset,
-        language: user.preferredLanguage.languageCode,
+      final viewByItemsRequest = ViewByItemRequest.empty().copyWith(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        filterQuery: ViewByItemFilterDto.fromDomain(
-          applyNoDateFiler
-              ? viewByItemFilter.copyWith(
-                  orderDateFrom: DateTimeStringValue(
-                    getDateStringByDateTime(DateTime(1900)),
-                  ),
-                  orderDateTo: DateTimeStringValue(
-                    getDateStringByDateTime(DateTime.now()),
-                  ),
-                )
-              : viewByItemFilter,
-        ).toJson(),
-        searchKey: searchKey.getOrCrash(),
+        customerCodeSoldTo: soldTo.customerCodeSoldTo,
+        shipToCustomerCode: shipTo.shipToCustomerCode,
+        language: user.preferredLanguage.languageCode,
+        pageSize: pageSize,
+        offSet: offset,
+        searchKey: searchKey.getOrDefaultValue(''),
+        viewByItemFilter: applyNoDateFiler
+            ? viewByItemFilter.copyWith(
+                orderDateFrom: DateTimeStringValue(
+                  getDateStringByDateTime(DateTime(1900)),
+                ),
+                orderDateTo: DateTimeStringValue(
+                  getDateStringByDateTime(DateTime.now()),
+                ),
+              )
+            : viewByItemFilter,
+      );
+      final orderHistoryItemList =
+          await viewByItemRemoteDataSource.getOrderHistory(
+        variables:
+            ViewByItemRequestDto.fromDomain(viewByItemsRequest).toMapJson(),
       );
 
       return Right(orderHistoryItemList);
@@ -106,12 +109,17 @@ class ViewByItemRepository implements IViewByItemRepository {
     }
 
     try {
-      final orderHistoryItemList =
-          await viewByItemRemoteDataSource.getViewByItemDetails(
-        soldTo: soldTo.customerCodeSoldTo,
-        language: salesOrganisation.salesOrg.languageCode,
+      final viewByItemDetailRequest = ViewByItemRequest.empty().copyWith(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        orderNumber: searchKey.getOrCrash(),
+        customerCodeSoldTo: soldTo.customerCodeSoldTo,
+        language: user.preferredLanguage.languageCode,
+        searchKey: searchKey.getOrCrash(),
+      );
+
+      final orderHistoryItemList =
+          await viewByItemRemoteDataSource.getOrderHistory(
+        variables: ViewByItemRequestDto.fromDomain(viewByItemDetailRequest)
+            .toMapJson(),
       );
 
       return Right(orderHistoryItemList);
@@ -139,12 +147,16 @@ class ViewByItemRepository implements IViewByItemRepository {
     }
 
     try {
-      final orderHistoryItemList =
-          await viewByItemRemoteDataSource.searchOrderHistory(
-        soldTo: soldTo.customerCodeSoldTo,
-        language: user.preferredLanguage.languageCode,
+      final viewByItemSearchRequest = ViewByItemRequest.empty().copyWith(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        customerCodeSoldTo: soldTo.customerCodeSoldTo,
+        language: user.preferredLanguage.languageCode,
         searchKey: searchKey.getOrCrash(),
+      );
+      final orderHistoryItemList =
+          await viewByItemRemoteDataSource.getOrderHistory(
+        variables: ViewByItemRequestDto.fromDomain(viewByItemSearchRequest)
+            .toMapJson(),
       );
 
       return Right(orderHistoryItemList);
