@@ -58,7 +58,9 @@ class AupTCDialog extends StatelessWidget {
                     height: 8,
                   ),
                   Text(
-                    'As a new user of eZRx+, we will require you to acknowledge the Terms of Use and Regional Privacy Policy before proceeding.',
+                    context.tr(
+                      'As a new user of eZRx+, we will require you to acknowledge the Terms of Use and Regional Privacy Policy before proceeding.',
+                    ),
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
@@ -112,7 +114,7 @@ class _TermsOfUseConsentCheckBox extends StatelessWidget {
           contentPadding: const EdgeInsets.all(0),
           value: state.tncConsent,
           title: Text(
-            'I have read and hereby agree to the Terms of Use.',
+            context.tr('I have read and hereby agree to the Terms of Use'),
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: ZPColors.darkerGrey,
                 ),
@@ -145,7 +147,9 @@ class _PrivacyPolicyConsentCheckBox extends StatelessWidget {
           contentPadding: const EdgeInsets.all(0),
           value: state.privacyConsent,
           title: Text(
-            'I have read and hereby consent to Zuellig Pharma and its affiliates processing my personal data in accordance with the Regional Privacy Policy.',
+            context.tr(
+              'I have read and hereby consent to Zuellig Pharma and its affiliates processing my personal data in accordance with the Regional Privacy Policy.',
+            ),
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: ZPColors.darkerGrey,
                 ),
@@ -244,8 +248,8 @@ class AcceptButton extends StatelessWidget {
                         ? ZPColors.primary
                         : ZPColors.unselectedLabelColor,
                   ),
-                  child: const Text(
-                    'Accept and continue',
+                  child: Text(
+                    context.tr('Accept and continue'),
                   ),
                 ),
                 TextButton(
@@ -255,7 +259,7 @@ class AcceptButton extends StatelessWidget {
                         );
                   },
                   child: Text(
-                    'Cancel',
+                    context.tr('Cancel'),
                     style: Theme.of(context).textTheme.labelSmall!.copyWith(
                           color: ZPColors.orange,
                         ),

@@ -159,6 +159,7 @@ flutter:
     - assets/html/id/
     - assets/html/kh/
     - assets/html/vn/
+    - assets/html/mm/
     - assets/svg/
     - assets/svg/flags/
 
