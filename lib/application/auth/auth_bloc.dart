@@ -81,8 +81,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           },
         );
       },
-      logout: (e) {
-        authRepository.logout();
+      logout: (e) async {
+        await authRepository.logout();
         emit(const AuthState.unauthenticated());
       },
       checkIfBiometricDenied: (e) async {
