@@ -1,6 +1,7 @@
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -9,9 +10,13 @@ import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/bank_in_accounts/bank_in_accounts_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
@@ -53,6 +58,28 @@ class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 ///////////////////////////////////////////////////////////////////////////
+
+/////////////////////////Price////////////////////////////////////////////
+class MaterialPriceBlocMock
+    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+    implements MaterialPriceBloc {}
+
+class PriceOverrideBlocMock
+    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
+    implements PriceOverrideBloc {}
+/////////////////////////////////////////////////////////////////////////
+
+/////////////////////////Order////////////////////////////////////////////
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
+class OrderEligibilityBlocMock
+    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
+    implements OrderEligibilityBloc {}
+
+class OrderSummaryBlocMock
+    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
+    implements OrderSummaryBloc {}
+//////////////////////////////////////////////////////////////////////////
 
 ///////////////////////Payment///////////////////////////////////////////////
 class BankInAccountBlocMock

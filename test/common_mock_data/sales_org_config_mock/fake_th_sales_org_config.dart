@@ -18,7 +18,7 @@ final fakeTHSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableListPrice: false,
   enableTaxDisplay: false,
   addOosMaterials: OosMaterial(true),
-  oosValue: OosValue(1),
+  oosValue: OosValue(0),
   enableDefaultMD: false,
   enableZDP8Override: true,
   enableGMC: false,

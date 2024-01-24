@@ -23,8 +23,6 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -40,6 +38,10 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_mm_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
@@ -224,8 +226,7 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs:
-                SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
+            salesOrgConfigs: fakeMMSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -248,8 +249,7 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs:
-                SalesOrganisationConfigs.empty().copyWith(priceOverride: false),
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
 
@@ -282,11 +282,8 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('1900')),
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              priceOverride: false,
-            ),
+            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
           ),
         );
 
@@ -389,9 +386,7 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              disableOrderType: false,
-            ),
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             user: User.empty().copyWith(
               role: Role.empty().copyWith(
                 type: RoleType('internal_sales_rep'),
@@ -422,9 +417,7 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              disableOrderType: false,
-            ),
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             user: User.empty().copyWith(
               role: Role.empty().copyWith(
                 type: RoleType('internal_sales_rep'),
@@ -479,12 +472,8 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableZDP8Override: true,
-            ),
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
             user: User.empty().copyWith(
               role: Role.empty().copyWith(
                 type: RoleType('external_sales_rep'),
@@ -531,12 +520,8 @@ void main() {
           EligibilityState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableZDP8Override: true,
-            ),
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
             user: User.empty().copyWith(
               role: Role.empty().copyWith(
                 type: RoleType('external_sales_rep'),
@@ -593,9 +578,7 @@ void main() {
           (tester) async {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              salesOrg: SalesOrg('1900'),
-            ),
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
           ),
         );
         when(() => cartBloc.state).thenReturn(
@@ -645,9 +628,8 @@ void main() {
       });
 
       testWidgets('Show Stock Error', (tester) async {
-        final cartItemtWithStock = cartItem.copyWith(
-          salesOrgConfig: SalesOrganisationConfigs.empty()
-              .copyWith(salesOrg: SalesOrg('1900')),
+        final cartItemWithStock = cartItem.copyWith(
+          salesOrgConfig: fakeIDSalesOrgConfigs,
           quantity: 2,
           stockInfoList: [
             StockInfo.empty().copyWith(
@@ -659,7 +641,7 @@ void main() {
 
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            cartProducts: [cartItemtWithStock],
+            cartProducts: [cartItemWithStock],
           ),
         );
 
@@ -817,9 +799,7 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              priceOverride: true,
-            ),
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
 

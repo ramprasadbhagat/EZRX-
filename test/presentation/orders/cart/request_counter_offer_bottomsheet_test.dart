@@ -1,88 +1,52 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
-import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/price_override_repository.dart';
-import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
-import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/locator.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 
-import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
+
 import '../../../utils/widget_utils.dart';
+import '../../../common_mock_data/user_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
-class CartRepositoryMock extends Mock implements CartRepository {}
-
-class PriceOverrideRepositoryMock extends Mock
-    implements PriceOverrideRepository {}
-
-class OrderEligibilityBlocMock
-    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
-    implements OrderEligibilityBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class PriceOverrideBlocMock
-    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
-    implements PriceOverrideBloc {}
-
-class OrderSummaryBlocMock
-    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
-    implements OrderSummaryBloc {}
 
 void main() {
   late CartBloc cartBloc;
@@ -159,9 +123,7 @@ void main() {
         );
         when(() => salesOrgBloc.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              priceOverride: true,
-            ),
+            configs: fakePHSalesOrgConfigs,
             salesOrganisation: SalesOrganisation.empty().copyWith(
               salesOrg: SalesOrg('2001'),
             ),
@@ -180,12 +142,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              priceOverride: true,
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation, 
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: '1234',
             ),
@@ -240,16 +198,12 @@ void main() {
     testWidgets('Initialize Cart Page', (tester) async {
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(
-          isFetching: false,
-          apiFailureOrSuccessOption: none(),
           cartProducts: cartItems,
         ),
       );
-
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs:
-              SalesOrganisationConfigs.empty().copyWith(priceOverride: false),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       await tester.pumpWidget(
@@ -271,16 +225,13 @@ void main() {
     testWidgets('Open counter offer sheet from cart', (tester) async {
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(
-          isFetching: false,
-          apiFailureOrSuccessOption: none(),
           cartProducts: cartItems,
         ),
       );
 
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs:
-              SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
 
@@ -317,17 +268,13 @@ void main() {
     testWidgets('Find and Test Counter Offer Price Field', (tester) async {
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(
-          isFetching: false,
-          apiFailureOrSuccessOption: none(),
           cartProducts: cartItems,
         ),
       );
 
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            priceOverride: true,
-          ),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
 
@@ -400,14 +347,8 @@ void main() {
 
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          user: User.empty().copyWith(
-            role: Role.empty().copyWith(
-              type: RoleType('internal_sales_rep'),
-            ),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            enableZDP8Override: true,
-          ),
+          user: fakeInternalSalesRepUser,
+          salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
 
@@ -435,7 +376,9 @@ void main() {
       await tester.pump();
       verify(
         () => priceOverrideBloc.add(
-          PriceOverrideEvent.setProduct(item: cartItems.first),
+          PriceOverrideEvent.setProduct(
+            item: cartItems.first,
+          ),
         ),
       ).called(1);
 
@@ -489,7 +432,7 @@ void main() {
             ),
             hasPriceOverride: true,
           ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty(),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
 
@@ -534,15 +477,8 @@ void main() {
 
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          user: User.empty().copyWith(
-            role: Role.empty().copyWith(
-              type: RoleType('root_admin'),
-            ),
-          ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            enableZDP8Override: true,
-            priceOverride: true,
-          ),
+          user: fakeRootAdminUser,
+          salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
 
@@ -579,12 +515,8 @@ void main() {
     testWidgets('Submit Counter Offer Price', (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            priceOverride: true,
-          ),
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2001'),
-          ),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          salesOrganisation: fakeMYSalesOrganisation,
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerCodeSoldTo: '1234',
           ),
@@ -701,9 +633,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: '1234',
             ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         ),
       ).called(1);
@@ -720,13 +650,8 @@ void main() {
     testWidgets('Submit Counter Offer Discount', (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            priceOverride: true,
-            enableZDP8Override: true,
-          ),
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2001'),
-          ),
+          salesOrgConfigs: fakePHSalesOrgConfigs,
+          salesOrganisation: fakePHSalesOrganisation,
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerCodeSoldTo: '1234',
           ),
@@ -766,10 +691,8 @@ void main() {
           Stream<PriceOverrideState>.fromIterable([
         confirmedPriceOverrideState.copyWith(
           isFetching: true,
-          apiFailureOrSuccessOption: none(),
         ),
         confirmedPriceOverrideState.copyWith(
-          isFetching: false,
           apiFailureOrSuccessOption: optionOf(Right(item)),
           item: item,
         )
@@ -778,11 +701,8 @@ void main() {
       final expectedCartState = Stream<CartState>.fromIterable([
         CartState.initial().copyWith(
           isUpserting: true,
-          apiFailureOrSuccessOption: none(),
         ),
         CartState.initial().copyWith(
-          isUpserting: false,
-          apiFailureOrSuccessOption: none(),
           cartProducts: [confirmedPriceOverrideState.item],
         ),
       ]);
@@ -790,9 +710,6 @@ void main() {
         cartBloc,
         expectedCartState,
         initialState: CartState.initial().copyWith(
-          isUpserting: false,
-          isFetching: false,
-          apiFailureOrSuccessOption: none(),
           cartProducts: cartItems,
         ),
       );
@@ -849,9 +766,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: '1234',
             ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            salesOrganisation: fakePHSalesOrganisation,
           ),
         ),
       ).called(1);
@@ -874,8 +789,7 @@ void main() {
               type: RoleType('internal_sales_rep'),
             ),
           ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
-              .copyWith(priceOverride: true, enableZDP8Override: true),
+          salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
 
@@ -898,9 +812,7 @@ void main() {
 
       final expectedPriceOverrideState =
           Stream<PriceOverrideState>.fromIterable([
-        confirmedPriceOverrideState.copyWith(
-          showErrorMessages: false,
-        ),
+        confirmedPriceOverrideState,
         confirmedPriceOverrideState.copyWith(
           showErrorMessages: true,
           item: confirmedPriceOverrideState.item,
@@ -952,8 +864,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs:
-              SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
 
@@ -984,10 +895,8 @@ void main() {
           Stream<PriceOverrideState>.fromIterable([
         confirmedPriceOverrideState.copyWith(
           isFetching: true,
-          apiFailureOrSuccessOption: none(),
         ),
         confirmedPriceOverrideState.copyWith(
-          isFetching: false,
           apiFailureOrSuccessOption: optionOf(Right(item)),
           item: item,
         )
@@ -996,10 +905,8 @@ void main() {
       final expectedCartState = Stream<CartState>.fromIterable([
         CartState.initial().copyWith(
           isUpserting: true,
-          apiFailureOrSuccessOption: none(),
         ),
         CartState.initial().copyWith(
-          isUpserting: false,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error Message'))),
           cartProducts: [confirmedPriceOverrideState.item],
@@ -1009,9 +916,6 @@ void main() {
         cartBloc,
         expectedCartState,
         initialState: CartState.initial().copyWith(
-          isUpserting: false,
-          isFetching: false,
-          apiFailureOrSuccessOption: none(),
           cartProducts: cartItems,
         ),
       );
@@ -1068,11 +972,8 @@ void main() {
     testWidgets('Submit Counter Offer Error While Price Fail', (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
-              .copyWith(priceOverride: true, enableZDP8Override: true),
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2001'),
-          ),
+          salesOrgConfigs: fakePHSalesOrgConfigs,
+          salesOrganisation: fakePHSalesOrganisation,
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerCodeSoldTo: '1234',
           ),
@@ -1104,11 +1005,8 @@ void main() {
       final expectedCartState = Stream<CartState>.fromIterable([
         CartState.initial().copyWith(
           isUpserting: true,
-          apiFailureOrSuccessOption: none(),
         ),
         CartState.initial().copyWith(
-          isUpserting: false,
-          apiFailureOrSuccessOption: none(),
           cartProducts: [confirmedPriceOverrideState.item],
         ),
       ]);
@@ -1117,10 +1015,8 @@ void main() {
           Stream<PriceOverrideState>.fromIterable([
         confirmedPriceOverrideState.copyWith(
           isFetching: true,
-          apiFailureOrSuccessOption: none(),
         ),
         confirmedPriceOverrideState.copyWith(
-          isFetching: false,
           showErrorMessages: true,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error Message'))),
@@ -1130,9 +1026,6 @@ void main() {
         cartBloc,
         expectedCartState,
         initialState: CartState.initial().copyWith(
-          isUpserting: false,
-          isFetching: false,
-          apiFailureOrSuccessOption: none(),
           cartProducts: cartItems,
         ),
       );
@@ -1188,9 +1081,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: '1234',
             ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            salesOrganisation: fakePHSalesOrganisation,
           ),
         ),
       ).called(1);
@@ -1208,10 +1099,7 @@ void main() {
               type: RoleType('internal_sales_rep'),
             ),
           ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            priceOverride: true,
-            enableZDP8Override: true,
-          ),
+          salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
 
@@ -1269,10 +1157,7 @@ void main() {
               type: RoleType('internal_sales_rep'),
             ),
           ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            priceOverride: true,
-            enableZDP8Override: true,
-          ),
+          salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
 
@@ -1334,10 +1219,7 @@ void main() {
               type: RoleType('internal_sales_rep'),
             ),
           ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            priceOverride: true,
-            enableZDP8Override: true,
-          ),
+          salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
 
@@ -1391,10 +1273,7 @@ void main() {
               type: RoleType('internal_sales_rep'),
             ),
           ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            priceOverride: true,
-            enableZDP8Override: true,
-          ),
+          salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
 
@@ -1431,9 +1310,7 @@ void main() {
           finalPrice: MaterialPrice(10),
           lastPrice: MaterialPrice(20),
         ),
-        salesOrgConfig: cartItems.first.salesOrgConfig.copyWith(
-          enableListPrice: true,
-        ),
+        salesOrgConfig: fakeVNSalesOrgConfigs,
       );
       when(() => priceOverrideBloc.state).thenReturn(
         PriceOverrideState.initial().copyWith(

@@ -1,8 +1,10 @@
 // ignore_for_file: unused_local_variable
-
-import 'package:auto_route/auto_route.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -18,9 +20,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
+
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
@@ -43,7 +43,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -287,10 +286,7 @@ void main() {
             materialNumber: MaterialNumber('fake-bundle'),
             type: MaterialInfoType('bundle'),
           ),
-          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-            addOosMaterials: OosMaterial(true),
-            oosValue: OosValue(1),
-          ),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
         ),
       ];
 
@@ -521,18 +517,7 @@ void main() {
       );
       when(() => salesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
-          configs: SalesOrganisationConfigs.empty().copyWith(
-            enableReferenceNote: true,
-            enableVat: true,
-            enableFutureDeliveryDay: true,
-            enableMobileNumber: true,
-            enableSpecialInstructions: true,
-            disableOrderType: false,
-            enableCollectiveNumber: true,
-            enablePaymentTerms: true,
-            enableRemarks: true,
-            priceOverride: true,
-          ),
+          configs: fakeSGSalesOrgConfigs,
           salesOrganisation: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('2601'),
           ),
@@ -833,25 +818,12 @@ void main() {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: mockCartItemBundles2,
-            config: SalesOrganisationConfigs.empty().copyWith(
-              materialWithoutPrice: true,
-            ),
+            config: fakeMYSalesOrgConfigs,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              addOosMaterials: OosMaterial(true),
-              oosValue: OosValue(1),
-            ),
-          ),
-        );
-        when(() => salesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              addOosMaterials: OosMaterial(true),
-              oosValue: OosValue(1),
-            ),
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -934,13 +906,8 @@ void main() {
         (tester) async {
           when(() => salesOrgBloc.state).thenReturn(
             SalesOrgState.initial().copyWith(
-              salesOrganisation: SalesOrganisation.empty().copyWith(
-                salesOrg: SalesOrg('3700'),
-              ),
-              configs: SalesOrganisationConfigs.empty().copyWith(
-                displayItemTaxBreakdown: false,
-                vatValue: 5,
-              ),
+              salesOrganisation: fakePHSalesOrganisation,
+              configs: fakePHSalesOrgConfigs,
             ),
           );
 
@@ -990,11 +957,7 @@ void main() {
                   ),
                 ),
               ],
-              config: SalesOrganisationConfigs.empty().copyWith(
-                displayItemTaxBreakdown: false,
-                displaySubtotalTaxBreakdown: true,
-                vatValue: 10,
-              ),
+              config: fakeKHSalesOrgConfigs,
             ),
           );
 
@@ -1010,17 +973,9 @@ void main() {
       testWidgets(
         'Show tax details on material level when displayItemTaxBreakdown is enabled for vn with material level tax',
         (tester) async {
-          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: true,
-            vatValue: 5,
-            currency: Currency('vnd'),
-            salesOrg: fakeVNSalesOrg,
-          );
           final salesOrgState = SalesOrgState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('3700'),
-            ),
-            configs: salesOrgConfig,
+            salesOrganisation: fakeVNSalesOrganisation,
+            configs: fakeVNSalesOrgConfigs,
           );
           final cartState = CartState.initial().copyWith(
             cartProducts: <PriceAggregate>[
@@ -1036,7 +991,7 @@ void main() {
                 price: Price.empty().copyWith(
                   finalPrice: MaterialPrice(234.50),
                 ),
-                salesOrgConfig: salesOrgConfig,
+                salesOrgConfig: fakeVNSalesOrgConfigs,
               ),
             ],
           );
@@ -1046,10 +1001,8 @@ void main() {
           );
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: salesOrgConfig,
-              salesOrganisation: SalesOrganisation.empty().copyWith(
-                salesOrg: SalesOrg('3700'),
-              ),
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
             ),
           );
           when(() => cartBloc.state).thenReturn(
@@ -1080,19 +1033,8 @@ void main() {
       );
 
       testWidgets(
-        'Show tax details on material level when displayItemTaxBreakdown is enabled for my with material level tax',
+        'Show tax details on material level when displayItemTaxBreakdown is enabled for KH with material level tax',
         (tester) async {
-          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: true,
-            vatValue: 5,
-            currency: Currency('myr'),
-          );
-          final salesOrgState = SalesOrgState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
-            configs: salesOrgConfig,
-          );
           final cartState = CartState.initial().copyWith(
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
@@ -1107,22 +1049,16 @@ void main() {
                 price: Price.empty().copyWith(
                   finalPrice: MaterialPrice(234.50),
                 ),
-                salesOrgConfig: salesOrgConfig,
+                salesOrgConfig: fakeKHSalesOrgConfigs,
               ),
             ],
           );
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: salesOrgConfig,
-              salesOrganisation: SalesOrganisation.empty().copyWith(
-                salesOrg: SalesOrg('2001'),
-              ),
+              salesOrgConfigs: fakeKHSalesOrgConfigs,
+              salesOrganisation: fakeKHSalesOrganisation,
             ),
           );
-          when(() => salesOrgBloc.state).thenReturn(
-            salesOrgState,
-          );
-
           when(() => cartBloc.state).thenReturn(
             cartState,
           );
@@ -1133,16 +1069,17 @@ void main() {
 
           final taxLevelFinder = find.text('Total with tax:');
           expect(taxLevelFinder, findsOneWidget);
-          final taxPercentageFinder = find.text('(10% tax)');
+          final taxPercentageFinder = find.text('(5% tax)');
           expect(taxPercentageFinder, findsNothing);
-          final vatPercentageFinder = find.text('(5% tax)');
+          final vatPercentageFinder =
+              find.text('(${fakeKHSalesOrgConfigs.vatValue}% tax)');
           expect(vatPercentageFinder, findsOneWidget);
           final listPriceWithTax = cartState
               .cartProducts.first.finalPriceTotalWithTax
               .toStringAsFixed(2);
           expect(
             find.text(
-              'MYR $listPriceWithTax',
+              '${fakeKHSalesOrgConfigs.currency.code} $listPriceWithTax',
               findRichText: true,
             ),
             findsOneWidget,
@@ -1151,21 +1088,8 @@ void main() {
       );
 
       testWidgets(
-        'Show tax details on material level when displayItemTaxBreakdown is enabled for my with material level tax on pre-Ordermodel',
+        'Show tax details on material level when displayItemTaxBreakdown is enabled for VN with material level tax on pre-Ordermodel',
         (tester) async {
-          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: true,
-            vatValue: 5,
-            currency: Currency('myr'),
-            addOosMaterials: OosMaterial(true),
-            oosValue: OosValue(1),
-          );
-          final salesOrgState = SalesOrgState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
-            configs: salesOrgConfig,
-          );
           final cartState = CartState.initial().copyWith(
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
@@ -1186,13 +1110,9 @@ void main() {
                 price: Price.empty().copyWith(
                   finalPrice: MaterialPrice(234.50),
                 ),
-                salesOrgConfig: salesOrgConfig,
+                salesOrgConfig: fakeVNSalesOrgConfigs,
               ),
             ],
-          );
-
-          when(() => salesOrgBloc.state).thenReturn(
-            salesOrgState,
           );
 
           when(() => cartBloc.state).thenReturn(
@@ -1201,7 +1121,7 @@ void main() {
 
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: salesOrgConfig,
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
             ),
           );
 
@@ -1210,16 +1130,16 @@ void main() {
 
           final taxLevelFinder = find.text('Total with tax:');
           expect(taxLevelFinder, findsOneWidget);
-          final taxPercentageFinder = find.text('(10% tax)');
+          final taxPercentageFinder = find.text('(0% tax)');
           expect(taxPercentageFinder, findsNothing);
-          final vatPercentageFinder = find.text('(5% tax)');
+          final vatPercentageFinder = find.text('(10% tax)');
           expect(vatPercentageFinder, findsOneWidget);
           final listPriceWithTax = cartState
               .cartProducts.first.finalPriceTotalWithTax
               .toStringAsFixed(2);
           expect(
             find.text(
-              'MYR $listPriceWithTax',
+              '${fakeVNSalesOrgConfigs.currency.code} $listPriceWithTax',
               findRichText: true,
             ),
             findsOneWidget,
@@ -1230,19 +1150,6 @@ void main() {
       testWidgets(
         'Show out of stock tag when oos is enabled for salesrep but user is a client',
         (tester) async {
-          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: true,
-            vatValue: 5,
-            currency: Currency('myr'),
-            oosValue: OosValue(0),
-            addOosMaterials: OosMaterial(true),
-          );
-          final salesOrgState = SalesOrgState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
-            configs: salesOrgConfig,
-          );
           final cartState = CartState.initial().copyWith(
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
@@ -1262,22 +1169,14 @@ void main() {
                 price: Price.empty().copyWith(
                   finalPrice: MaterialPrice(234.50),
                 ),
-                salesOrgConfig: salesOrgConfig,
+                salesOrgConfig: fakeKHSalesOrgConfigs,
               ),
             ],
           );
 
           final eligibilityState = EligibilityState.initial().copyWith(
-            user: User.empty().copyWith(
-              role: Role.empty().copyWith(
-                type: RoleType('client_user'),
-              ),
-            ),
-            salesOrgConfigs: salesOrgConfig,
-          );
-
-          when(() => salesOrgBloc.state).thenReturn(
-            salesOrgState,
+            user: fakeClient,
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
           );
 
           when(() => cartBloc.state).thenReturn(
@@ -1311,23 +1210,11 @@ void main() {
       );
 
       testWidgets('Grand total check', (tester) async {
-        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-          currency: Currency('myr'),
-        );
-
-        final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2001'),
-          ),
-          configs: salesOrgConfig,
-        );
-
         final mockCartProductList = [
           PriceAggregate.empty().copyWith(
             quantity: 1,
             price: Price.empty().copyWith(finalPrice: MaterialPrice(100.00)),
             materialInfo: MaterialInfo.empty().copyWith(
-              hidePrice: false,
               type: MaterialInfoType('material'),
               materialNumber: MaterialNumber('000000000023168451'),
               materialDescription: ' Triglyceride Mosys D',
@@ -1370,24 +1257,19 @@ void main() {
               materialNumber: MaterialNumber('fake-bundle'),
               type: MaterialInfoType('bundle'),
             ),
-            salesOrgConfig: salesOrgConfig,
+            salesOrgConfig: fakeMYSalesOrgConfigs,
           ),
         ];
 
-        when(() => salesOrgBloc.state).thenReturn(
-          salesOrgState,
-        );
-
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: salesOrgConfig,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
 
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: mockCartProductList,
-            isAplProductLoading: false,
           ),
         );
 
@@ -1407,10 +1289,6 @@ void main() {
       testWidgets(
         'Display cart page price message when material price is zero',
         (tester) async {
-          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-            materialWithoutPrice: true,
-          );
-
           final cartProducts = <PriceAggregate>[
             PriceAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
@@ -1431,7 +1309,7 @@ void main() {
 
           final orderEligibilityState =
               OrderEligibilityState.initial().copyWith(
-            configs: salesOrgConfig,
+            configs: fakeMYSalesOrgConfigs,
             cartItems: cartProducts,
           );
 
@@ -1464,9 +1342,6 @@ void main() {
       testWidgets(
         'Display cart page price message for hide price material',
         (tester) async {
-          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-            materialWithoutPrice: true,
-          );
           final cartProducts = <PriceAggregate>[
             PriceAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
@@ -1488,7 +1363,7 @@ void main() {
 
           final orderEligibilityState =
               OrderEligibilityState.initial().copyWith(
-            configs: salesOrgConfig,
+            configs: fakeMYSalesOrgConfigs,
             cartItems: cartProducts,
           );
 
@@ -1521,10 +1396,6 @@ void main() {
       testWidgets(
         'Display cart page price message for isFoc material',
         (tester) async {
-          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-            materialWithoutPrice: true,
-          );
-
           final cartProducts = <PriceAggregate>[
             PriceAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
@@ -1541,7 +1412,7 @@ void main() {
 
           final orderEligibilityState =
               OrderEligibilityState.initial().copyWith(
-            configs: salesOrgConfig,
+            configs: fakeMYSalesOrgConfigs,
             cartItems: cartProducts,
           );
 
@@ -1908,10 +1779,7 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('MYR'),
-              minOrderAmount: '100',
-            ),
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
 
@@ -2147,7 +2015,7 @@ void main() {
             EligibilityState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfigs: fakeSGSalesOrgConfigs,
-              salesOrganisation: fakeSalesOrganisation,
+              salesOrganisation: fakeSGSalesOrganisation,
               shipToInfo: fakeShipToInfo,
               user: fakeClientUser,
               selectedOrderType: fakeOrderType,
@@ -2178,7 +2046,7 @@ void main() {
               OrderEligibilityEvent.initialized(
                 customerCodeInfo: fakeCustomerCodeInfo,
                 configs: fakeSGSalesOrgConfigs,
-                salesOrg: fakeSalesOrganisation,
+                salesOrg: fakeSGSalesOrganisation,
                 shipInfo: fakeShipToInfo,
                 user: fakeClientUser,
                 orderType: fakeOrderType.documentType.getOrDefaultValue(''),
@@ -2927,13 +2795,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('MYR'),
-              minOrderAmount: '100',
-            ),
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             user: User.empty().copyWith(
               role: Role.empty().copyWith(
                 type: RoleType('external_sales_rep'),
@@ -2951,19 +2814,13 @@ void main() {
             cartItems: [pnGCartItem],
             grandTotal: cartStateInitial.grandTotal,
             subTotal: cartStateInitial.subTotal,
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('MYR'),
-              minOrderAmount: '100',
-            ),
+            configs: fakeMYSalesOrgConfigs,
           ),
           OrderEligibilityState.initial().copyWith(
             cartItems: [pnGCartItem],
             grandTotal: cartStateInitial.grandTotal,
             subTotal: cartStateInitial.subTotal,
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('MYR'),
-              minOrderAmount: '100',
-            ),
+            configs: fakeMYSalesOrgConfigs,
             showErrorMessage: true,
           ),
         ];
@@ -3063,19 +2920,15 @@ void main() {
       testWidgets(
           'Test Grand Total value for bundles with displaySubtotalTaxBreakdown disabled',
           (tester) async {
-        final config = SalesOrganisationConfigs.empty().copyWith(
-          currency: Currency('myr'),
-          salesOrg: fakeMYSalesOrg,
-        );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: config,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            config: config,
+            config: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             cartProducts: mockCartBundleItems,
           ),
@@ -3101,24 +2954,19 @@ void main() {
       testWidgets(
           'Test Grand Total value for bundles with displaySubtotalTaxBreakdown enabled',
           (tester) async {
-        final config = SalesOrganisationConfigs.empty().copyWith(
-          currency: Currency('myr'),
-          salesOrg: fakeMYSalesOrg,
-          displaySubtotalTaxBreakdown: true,
-          vatValue: 10,
-        );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: config,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakePHSalesOrganisation,
           ),
         );
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            config: config,
+            config: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             cartProducts: [
-              mockCartBundleItems.first.copyWith(salesOrgConfig: config)
+              mockCartBundleItems.first
+                  .copyWith(salesOrgConfig: fakeMYSalesOrgConfigs)
             ],
           ),
         );
@@ -3130,7 +2978,7 @@ void main() {
         expect(grandTotal, findsOneWidget);
         expect(
           find.text(
-            'Grand total: MYR 1,089.00',
+            'Grand total: ${fakeMYSalesOrgConfigs.currency.code} 990.00',
             findRichText: true,
           ),
           findsOneWidget,
@@ -3143,12 +2991,6 @@ void main() {
       testWidgets(
         'Show tax details on material level when displayItemTaxBreakdown is enabled and Product have Special Scheme tax classification',
         (tester) async {
-          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: true,
-            currency: Currency('vnd'),
-            salesOrg: fakeVNSalesOrg,
-          );
-
           final cartState = CartState.initial().copyWith(
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
@@ -3163,14 +3005,14 @@ void main() {
                 price: Price.empty().copyWith(
                   finalPrice: MaterialPrice(234.50),
                 ),
-                salesOrgConfig: salesOrgConfig,
+                salesOrgConfig: fakeVNSalesOrgConfigs,
               ),
             ],
           );
 
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: salesOrgConfig,
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
             ),
           );

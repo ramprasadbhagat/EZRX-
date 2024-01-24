@@ -167,7 +167,7 @@ void main() {
       when(() => salesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           configs: fakeSGSalesOrgConfigs,
-          salesOrganisation: fakeSalesOrganisation,
+          salesOrganisation: fakeSGSalesOrganisation,
         ),
       );
       when(() => customerCodeBloc.state).thenReturn(

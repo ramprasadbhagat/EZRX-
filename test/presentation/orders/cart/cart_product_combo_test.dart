@@ -26,8 +26,6 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -42,6 +40,10 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
@@ -189,21 +191,8 @@ void main() {
       );
       when(() => salesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
-          configs: SalesOrganisationConfigs.empty().copyWith(
-            enableReferenceNote: true,
-            enableVat: true,
-            enableFutureDeliveryDay: true,
-            enableMobileNumber: true,
-            enableSpecialInstructions: true,
-            disableOrderType: false,
-            enableCollectiveNumber: true,
-            enablePaymentTerms: true,
-            enableRemarks: true,
-            priceOverride: true,
-          ),
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2601'),
-          ),
+          configs: fakeSGSalesOrgConfigs,
+          salesOrganisation: fakeSGSalesOrganisation,
         ),
       );
       when(() => customerCodeBloc.state).thenReturn(
@@ -295,8 +284,7 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs:
-                SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -328,10 +316,7 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: true,
-              comboDealsUserRole: ComboDealUserRole(1),
-            ),
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo
                 .copyWith(salesDeals: [SalesDealNumber('12345')]),
           ),
@@ -384,10 +369,7 @@ void main() {
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: true,
-              comboDealsUserRole: ComboDealUserRole(1),
-            ),
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo
                 .copyWith(salesDeals: [SalesDealNumber('12345')]),
           ),
@@ -440,10 +422,7 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: true,
-              comboDealsUserRole: ComboDealUserRole(1),
-            ),
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo
                 .copyWith(salesDeals: [SalesDealNumber('12345')]),
           ),
@@ -472,9 +451,7 @@ void main() {
               cartItem.copyWith(
                 comboMaterials: [
                   cartItem.comboMaterials.first.copyWith(
-                    salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-                      displayItemTaxBreakdown: true,
-                    ),
+                    salesOrgConfig: fakeKHSalesOrgConfigs,
                     comboDealType: 'K2',
                     comboDeals: PriceComboDeal.empty(),
                   )
@@ -485,10 +462,7 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: true,
-              comboDealsUserRole: ComboDealUserRole(1),
-            ),
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo
                 .copyWith(salesDeals: [SalesDealNumber('12345')]),
           ),
@@ -517,10 +491,7 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: true,
-              comboDealsUserRole: ComboDealUserRole(1),
-            ),
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo
                 .copyWith(salesDeals: [SalesDealNumber('12345')]),
           ),

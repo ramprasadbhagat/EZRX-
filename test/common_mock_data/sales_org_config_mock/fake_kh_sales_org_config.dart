@@ -18,7 +18,7 @@ final fakeKHSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableListPrice: false,
   enableTaxDisplay: false,
   addOosMaterials: OosMaterial(false),
-  oosValue: OosValue(1),
+  oosValue: OosValue(0),
   enableDefaultMD: false,
   enableZDP8Override: false,
   enableGMC: false,

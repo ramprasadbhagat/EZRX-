@@ -18,9 +18,7 @@ import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.da
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
@@ -690,16 +688,11 @@ void main() {
       },
     );
 
-    testWidgets('=> test DeliveryInfo', (tester) async {
+    testWidgets('=> test DeliveryInfo with reference note', (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            enableReferenceNote: true,
-            enablePaymentTerms: true,
-            enableMobileNumber: true,
-            enableSpecialInstructions: true,
-          ),
-          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
+          salesOrganisation: fakeTHSalesOrganisation,
         ),
       );
       final expectedState = [
@@ -723,8 +716,68 @@ void main() {
       final referenceNoteKeyFinder =
           find.byKey(WidgetKeys.genericKey(key: 'referenceNoteKey'));
       expect(referenceNoteKeyFinder, findsOneWidget);
+      final deliveryInstructionKeyFinder =
+          find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey'));
+      expect(deliveryInstructionKeyFinder, findsOneWidget);
+    });
+
+    testWidgets('=> test DeliveryInfo with payment Terms', (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+          salesOrganisation: fakeTWSalesOrganisation,
+        ),
+      );
+      final expectedState = [
+        AdditionalDetailsState.initial().copyWith(
+          isLoading: true,
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            greenDeliveryEnabled: true,
+            deliveryDate: DateTimeStringValue(''),
+          ),
+        ),
+        AdditionalDetailsState.initial(),
+      ];
+      whenListen(
+        additionalDetailsBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
       final paymentTermKeyFinder = find.byKey(WidgetKeys.paymentTermKey);
       expect(paymentTermKeyFinder, findsOneWidget);
+      final deliveryInstructionKeyFinder =
+          find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey'));
+      expect(deliveryInstructionKeyFinder, findsOneWidget);
+    });
+
+    testWidgets('=> test DeliveryInfo with contact details', (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
+          salesOrganisation: fakeVNSalesOrganisation,
+        ),
+      );
+      final expectedState = [
+        AdditionalDetailsState.initial().copyWith(
+          isLoading: true,
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            greenDeliveryEnabled: true,
+            deliveryDate: DateTimeStringValue(''),
+          ),
+        ),
+        AdditionalDetailsState.initial(),
+      ];
+      whenListen(
+        additionalDetailsBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
       final contactPersonKeyFinder =
           find.byKey(WidgetKeys.genericKey(key: 'contactPersonKey'));
       expect(contactPersonKeyFinder, findsOneWidget);
@@ -734,14 +787,13 @@ void main() {
           find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey'));
       expect(deliveryInstructionKeyFinder, findsOneWidget);
     });
+
     testWidgets('=> test TextEditingValue on change for Reference Note',
         (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            enableReferenceNote: true,
-          ),
-          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
+          salesOrganisation: fakeTHSalesOrganisation,
         ),
       );
       final expectedState = [
@@ -783,10 +835,8 @@ void main() {
         (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            enablePaymentTerms: true,
-          ),
-          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+          salesOrganisation: fakeTWSalesOrganisation,
         ),
       );
       when(() => additionalDetailsBlocMock.state).thenReturn(
@@ -857,7 +907,7 @@ void main() {
                 ],
               ),
             ],
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeTHSalesOrganisation,
             additionInfo: {
               MaterialNumber('12345'): ProductMetaData.empty().copyWith(
                 productImages: [
@@ -871,7 +921,7 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeTHSalesOrgConfigs,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeTHSalesOrganisation,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -924,7 +974,7 @@ void main() {
                 ],
               ),
             ],
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeTHSalesOrganisation,
             additionInfo: {
               MaterialNumber('12345'): ProductMetaData.empty().copyWith(
                 productImages: [
@@ -938,7 +988,7 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeTHSalesOrgConfigs,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeTHSalesOrganisation,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -1018,7 +1068,7 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeTHSalesOrgConfigs,
-            salesOrganisation: fakeSalesOrganisation,
+            salesOrganisation: fakeTHSalesOrganisation,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -1699,13 +1749,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              showPOAttachment: true,
-              enablePOAttachmentRequired: true,
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
 
@@ -1743,12 +1788,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              showPOAttachment: true,
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
 
@@ -2311,9 +2352,6 @@ void main() {
     testWidgets(
       'Display Price Not Available Message for hide price materials',
       (tester) async {
-        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-          materialWithoutPrice: true,
-        );
         final cartProducts = <PriceAggregate>[
           PriceAggregate.empty().copyWith(
             materialInfo: MaterialInfo.empty().copyWith(
@@ -2334,7 +2372,7 @@ void main() {
         );
 
         final orderEligibilityState = OrderEligibilityState.initial().copyWith(
-          configs: salesOrgConfig,
+          configs: fakeMYSalesOrgConfigs,
           cartItems: cartProducts,
         );
 
@@ -2363,24 +2401,20 @@ void main() {
     testWidgets(
         'Test Grand Total value for bundles with displaySubtotalTaxBreakdown enabled',
         (tester) async {
-      final config = SalesOrganisationConfigs.empty().copyWith(
-        currency: Currency('myr'),
-        salesOrg: fakeMYSalesOrg,
-        displaySubtotalTaxBreakdown: true,
-        vatValue: 10,
-      );
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: config,
-          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+          salesOrganisation: fakeKHSalesOrganisation,
         ),
       );
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(
-          config: config,
-          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeKHSalesOrgConfigs,
+          salesOrganisation: fakeKHSalesOrganisation,
           cartProducts: [
-            mockCartBundleItems.first.copyWith(salesOrgConfig: config)
+            mockCartBundleItems.first.copyWith(
+              salesOrgConfig: fakeKHSalesOrgConfigs,
+            )
           ],
         ),
       );
@@ -2394,12 +2428,14 @@ void main() {
       final subTotalTextFinder = find.descendant(
         of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
         matching:
-            find.textContaining('Subtotal (${config.displayPrefixTax}.tax)'),
+            find.textContaining(
+          'Subtotal (${fakeKHSalesOrgConfigs.displayPrefixTax}.tax)',
+        ),
       );
       final subTotalValueFinder = find.descendant(
         of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
         matching: find.text(
-          'MYR 990.00',
+          '${fakeKHSalesOrgConfigs.currency.code} 990.00',
           findRichText: true,
         ),
       );
@@ -2410,7 +2446,7 @@ void main() {
       final taxAtValueFinder = find.descendant(
         of: find.byKey(WidgetKeys.checkoutSummaryTax),
         matching: find.text(
-          'MYR 99.00',
+          '${fakeKHSalesOrgConfigs.currency.code} 99.00',
           findRichText: true,
         ),
       );
@@ -2421,7 +2457,7 @@ void main() {
       final grandTotalValueFinder = find.descendant(
         of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
         matching: find.text(
-          'MYR 1,089.00',
+          '${fakeKHSalesOrgConfigs.currency.code} 1,089.00',
           findRichText: true,
         ),
       );
