@@ -237,13 +237,31 @@ class CommonRobot {
     );
   }
 
-  void verifyCustomSnackBar({
+  Future<void> verifyCustomSnackBar({
     required String message,
-  }) {
-    expect(
-      tester.widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage)).data,
-      message,
-    );
+  }) async {
+    // Maximum number of attempts (60 seconds with 1-second intervals)
+    const maxAttempts = 60;
+
+    for (var count = 0; count < maxAttempts; count++) {
+      // Find the custom SnackBar
+      final customSnackBarFinder = find.byKey(WidgetKeys.customSnackBarMessage);
+      // Check if the SnackBar is present
+      if (customSnackBarFinder.evaluate().isNotEmpty) {
+        expect(
+          find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.customSnackBarMessage &&
+                widget is Text &&
+                widget.data == message,
+          ),
+          findsWidgets,
+        );
+        return;
+      }
+      await tester.pump(const Duration(seconds: 1));
+    }
+    fail('Custom SnackBar not found after $maxAttempts attempts.');
   }
 
   Future<void> tapToBackScreen() async {

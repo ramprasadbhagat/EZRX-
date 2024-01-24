@@ -22,6 +22,7 @@ class PaymentSummaryRobot {
   final item = find.byKey(WidgetKeys.paymentSummaryTile);
   final itemGroupDate = find.byKey(WidgetKeys.paymentSummaryGroupDate);
   final newPaymentButton = find.byKey(WidgetKeys.newPaymentButton);
+  final resetButton = find.byKey(WidgetKeys.filterResetButton);
 
   void verifyPageVisible() {
     expect(page, findsOneWidget);
@@ -79,6 +80,15 @@ class PaymentSummaryRobot {
     await tester.pumpAndSettle();
   }
 
+  void verifyResetButton() {
+    expect(resetButton, findsOneWidget);
+  }
+
+  Future<void> tapResetButton() async {
+    await tester.tap(resetButton);
+    await tester.pumpAndSettle();
+  }
+
   void verifyFilterApplied(int count) {
     expect(
       find.descendant(
@@ -106,6 +116,11 @@ class PaymentSummaryRobot {
 
   Future<void> scrollDown() async {
     await tester.drag(find.byKey(WidgetKeys.scrollList), const Offset(0, -500));
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapItem() async {
+    await tester.tap(item);
     await tester.pumpAndSettle();
   }
 

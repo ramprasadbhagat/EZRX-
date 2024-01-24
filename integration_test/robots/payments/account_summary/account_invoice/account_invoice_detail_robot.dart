@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +16,46 @@ class AccountInvoiceDetailRobot {
     expect(find.byType(InvoiceDetailsPage), findsOneWidget);
   }
 
-  void verifyInvoiceIdAndStatus(String id, String status) {
+  void verifyInvoiceDetails(
+    String id,
+    String status,
+    String orderNumber,
+  ) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('${'Invoice'.tr()} #$id', status)),
       findsOneWidget,
     );
+    expect(
+      find.descendant(
+        of: find.byType(BalanceTextRow),
+        matching: find.textContaining('Document date'.tr()),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: find.byType(BalanceTextRow),
+        matching: find.textContaining('Due on'.tr()),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(WidgetKeys.invoiceOrderNumber(orderNumber)),
+      findsOneWidget,
+    );
+  }
+
+  void verifyHyperLinkToOrderDetails() {
+    expect(
+      find.byKey(WidgetKeys.invoiceDetailsOrderNumberButton),
+      findsOneWidget,
+    );
+  }
+
+  Future<void> redirectToOrderDetails() async {
+    await tester.tap(find.byKey(WidgetKeys.invoiceDetailsOrderNumberButton));
+    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
   }
 
   void verifyInvoiceId(String id) => expect(
@@ -82,10 +118,6 @@ class AccountInvoiceDetailRobot {
       ),
       findsOneWidget,
     );
-  }
-
-  void verifyDownloadEInvoiceButton() {
-    expect(find.byKey(WidgetKeys.downloadEInvoiceButton), findsOneWidget);
   }
 
   Future<void> verifyMaterial(int groupIndex, int index) async {

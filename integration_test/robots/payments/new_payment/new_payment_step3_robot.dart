@@ -1,7 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../common/extension.dart';
 
 class NewPaymentStep3Robot {
   final WidgetTester tester;
@@ -10,34 +14,23 @@ class NewPaymentStep3Robot {
     WidgetKeys.generatePaymentAdvice,
   );
   final payButton = find.byKey(WidgetKeys.payButton);
-  final radioPaymentGateway = find.byKey(WidgetKeys.radioPaymentGateway);
+  final radioPaymentGateway = find.byKey(WidgetKeys.paymentMethodRadio);
   final paymentWebviewPage = find.byKey(WidgetKeys.paymentWebviewPage);
-  void verifyStep3InitialField({
-    required String step3Title,
-    required String defaultPaymentMethod,
-    required String salesOrg,
-  }) {
+  final createPaymentAdviseNote =
+      find.byKey(WidgetKeys.createPaymentAdviseNote);
+
+  void verifyStep3InitialField() {
+    final defaultPaymentMethod = 'Payment Gateway'.tr();
+
+    verifyWarningMessage();
     expect(
-      find.textContaining(step3Title),
+      find.textContaining('Select payment method'.tr()),
       findsAtLeastNWidgets(1),
     );
     expect(
       find.textContaining(defaultPaymentMethod),
       findsAtLeastNWidgets(1),
     );
-    final amountPayable = tester
-            .widget<Text>(
-              find.byKey(WidgetKeys.priceTextData).first,
-            )
-            .data ??
-        '';
-
-    expect(
-      find.textContaining(amountPayable, findRichText: true),
-      findsAtLeastNWidgets(2),
-    );
-    expect(generatePaymentAdviceButton, findsOneWidget);
-    expect(find.textContaining(salesOrg), findsAtLeastNWidgets(1));
     expect(radioPaymentGateway, findsAtLeastNWidgets(1));
     expect(
       tester.widget<Radio>(radioPaymentGateway).value,
@@ -45,24 +38,74 @@ class NewPaymentStep3Robot {
     );
   }
 
-  Future<void> tapGeneratePaymentAdvice() async {
-    await tester.tap(generatePaymentAdviceButton);
-    await tester.pumpAndSettle();
+  void verifyWarningMessage() {
+    expect(createPaymentAdviseNote, findsOneWidget);
   }
 
-  void verifyPaymentAdviceGenerated(String paymentAdviceGenerated) {
+  void verifyOrderAddressVisible(String address) {
     expect(
-      find.textContaining(paymentAdviceGenerated),
-      findsAtLeastNWidgets(1),
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.addressInfoSectionActionLabel &&
+            widget is Text &&
+            (widget.data ?? '').contains(address),
+      ),
+      findsOneWidget,
     );
   }
 
-  Future<void> tapPayNow() async {
-    await tester.tap(payButton);
-    await tester.pumpAndSettle();
+  void verifyCustomerCode(String customerCode) {
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.addressInfoSectionCustomerCodeLabel &&
+            widget is Text &&
+            (widget.data ?? '').contains(customerCode),
+      ),
+      findsOneWidget,
+    );
   }
 
-  void verifyWebviewVisible() {
-    expect(paymentWebviewPage, findsOneWidget);
+  void verifyShipToCode(String shipToCode) {
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.addressInfoSectionDeliveryToLabel &&
+            widget is Text &&
+            (widget.data ?? '').contains(shipToCode),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyGeneratePaymentAdviceButton() {
+    expect(generatePaymentAdviceButton, findsOneWidget);
+  }
+
+  void verifyThePriceAndButton(
+    double priceWithoutCredit,
+    double priceWithCredit,
+  ) {
+    expect(
+      find.textContaining(priceWithCredit.priceFormatted, findRichText: true),
+      findsAtLeastNWidgets(1),
+    );
+    expect(
+      find.textContaining(
+        priceWithoutCredit.priceFormatted,
+        findRichText: true,
+      ),
+      findsAtLeastNWidgets(1),
+    );
+    expect(generatePaymentAdviceButton, findsOneWidget);
+  }
+
+  void verifyTotalAmountToPay(double invoicePrice, double creditPrice) {
+    final totalAmount = double.parse(
+      tester
+          .widget<PriceComponent>(find.byKey(WidgetKeys.totalAmountToPay))
+          .price,
+    );
+    expect(totalAmount, invoicePrice - creditPrice);
   }
 }

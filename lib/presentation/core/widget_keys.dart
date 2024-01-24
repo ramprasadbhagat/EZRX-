@@ -354,6 +354,7 @@ class WidgetKeys {
   static const Key cannotMoveToNextStep = Key('cannotMoveToNextStep');
 
   // step2
+  static const Key availableCreditsTabPage = Key('availableCreditsTabPage');
   static const Key newRequestStep2Title = Key('newRequestStep2Title');
   static const Key newRequestStep2ItemImage = Key('newRequestStep2ItemImage');
   static const Key newRequestStep2QuantityAndPrice =
@@ -861,7 +862,7 @@ class WidgetKeys {
   static const Key payButton = Key('payButton');
   static const Key paymentWebviewPage = Key('paymentWebviewPage');
   static const Key invoiceId = Key('invoiceId');
-  static const Key orderId = Key('orderId');
+  static const Key invoiceIdPrice = Key('invoiceIdPrice');
   static const Key creditPaymentFilterPage = Key('creditPaymentFilterPage');
   static const Key outstandingInvoiceFilterPage =
       Key('outstandingInvoiceFilterPage');
@@ -1001,6 +1002,7 @@ class WidgetKeys {
   //============================================================
   //  Payment summary details page
   //============================================================
+  static const Key paymentSummaryDetailsPage = Key('paymentSummaryDetailsPage');
   static const Key paymentSummaryFilter = Key('paymentSummaryFilter');
   static const Key downloadAdviceButton = Key('downloadAdviceButton');
 
@@ -1018,6 +1020,13 @@ class WidgetKeys {
       Key('$key$msg');
   static const Key paymentAdviceButtonLoading =
       Key('paymentAdviceButtonLoading');
+  static const Key paymentSummaryDetails = Key('paymentSummaryDetails');
+  static Key paymentSummaryTitle(
+    String title,
+  ) =>
+      Key('paymentSummaryTitle-$title');
+  static Key paymentItems(String title, String id) =>
+      Key('paymentItems$title$id');
   //============================================================
   // Notification page
   //============================================================
@@ -1070,6 +1079,7 @@ class WidgetKeys {
   static const Key priceText = Key('priceText');
   static const Key checkAllWidget = Key('checkAllWidget');
   //step 1
+  static const Key outstandingInvoicesPage = Key('outstandingInvoicesPage');
   static const Key textOutstanding = Key('textOutstanding');
   static const Key paymentItem = Key('paymentItem');
   static const Key itemCheckBadge = Key('itemCheckBadge');
@@ -1077,6 +1087,7 @@ class WidgetKeys {
   static const Key creditPaymentItem = Key('creditPaymentItem');
   static const Key documentReferenceID = Key('documentReferenceID');
   static const Key accountingDocument = Key('accountingDocument');
+  static const Key creditIdPrice = Key('creditIdPrice');
   static const Key itemStatementAccounts = Key('itemStatementAccounts');
   static const Key downloadStatementAccountIcon =
       Key('downloadStatementAccountIcon');
@@ -1145,6 +1156,8 @@ class WidgetKeys {
   //============================================================
   //  Invoice Details
   //============================================================
+  static Key invoiceOrderNumber(String orderNumber) =>
+      Key('invoiceOrderNumber$orderNumber');
   static const Key invoiceDetailsPageListView =
       Key('invoiceDetailsPageListView');
   static const Key downloadEInvoiceButton = Key('downloadEInvoiceButton');
@@ -1185,7 +1198,7 @@ class WidgetKeys {
   //===========================================================
   //  Account Summary Page - Full summary
   //============================================================
-
+  static const Key allSummaryPage = Key('allSummaryPage');
   static const Key summaryExpandableSection = Key('summaryExpandableSection');
   static const Key invoiceCreditItem = Key('invoiceCreditItem');
 
@@ -1307,7 +1320,7 @@ class WidgetKeys {
   static const Key soaFromDateFieldKey = Key('fromDateField');
   static const Key soaLoadingAnimationWidgetKey = Key('loadingAnimationWidget');
   static const Key soaHeaderCustomerCodeKey = Key('soaHeaderCustomerCode');
-  static const Key soaFilterbottomSheetKey = Key('soaFilterbottomSheet');
+  static const Key soaFilterBottomSheetKey = Key('soaFilterbottomSheet');
   static const Key soaFilterApplyButtonKey = Key('soaFilterApplyButton');
   static const Key soaFilterResetButtonKey = Key('soaFilterResetButton');
   static const Key soaItemTextKey = Key('soaItemText');
@@ -1394,4 +1407,5 @@ class WidgetKeys {
   static Key paymentAdviceNextStep = const Key('paymentAdviceNextStep');
   static Key customerBlockedBanner = const Key('customerBlockedBanner');
   static Key paymentAdviceFailed = const Key('paymentAdviceFailed');
+  static Key totalAmountToPay = const Key('totalAmountToPay');
 }

@@ -58,6 +58,7 @@ class PaymentSummaryDetailsPage extends StatelessWidget {
         ),
       ),
       child: Scaffold(
+        key: WidgetKeys.paymentSummaryDetailsPage,
         appBar: CustomAppBar.commonAppBar(
           title: Text(
             context.tr('Payment details'),

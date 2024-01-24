@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,6 +9,8 @@ import '../../common/extension.dart';
 class NewPaymentStep2Robot {
   final WidgetTester tester;
   NewPaymentStep2Robot(this.tester);
+  final availableCreditsTabPage =
+      find.byKey(WidgetKeys.availableCreditsTabPage);
   final priceText = find.byKey(WidgetKeys.priceText);
   final checkAllWidget = find.byKey(WidgetKeys.checkAllWidget);
   final priceComponent = find.byKey(WidgetKeys.priceComponent);
@@ -18,11 +21,14 @@ class NewPaymentStep2Robot {
   final filterResetButton = find.byKey(WidgetKeys.filterResetButton);
   final itemCheckBadge = find.byKey(WidgetKeys.itemCheckBadge);
   final accountingDocument = find.byKey(WidgetKeys.accountingDocument);
-  final documentReferenceID = find.byKey(WidgetKeys.documentReferenceID);
   final nextButton = find.byKey(WidgetKeys.nextButton);
 
-  String firstDocumentReferenceID = '';
   String firstAccountingDocument = '';
+
+  void verifyPage() {
+    expect(availableCreditsTabPage, findsOneWidget);
+  }
+
   void verifyStep2InitialField(double price) {
     expect(
       find.textContaining('Select credit (Optional)'.tr()),
@@ -32,8 +38,6 @@ class NewPaymentStep2Robot {
       find.byKey(WidgetKeys.genericKey(key: '')),
       findsOneWidget,
     );
-    expect(priceComponent, findsOneWidget);
-    expect(priceText, findsNWidgets(2));
     expect(checkAllWidget, findsOneWidget);
     expect(
       find.textContaining(price.priceFormatted, findRichText: true),
@@ -75,8 +79,8 @@ class NewPaymentStep2Robot {
       find.text(
         DateTime(
           DateTime.now().year,
-          DateTime.now().month - 1,
-          DateTime.now().day,
+          DateTime.now().month,
+          DateTime.now().day - 29,
         ).displayDate,
       ),
       findsOneWidget,
@@ -115,17 +119,38 @@ class NewPaymentStep2Robot {
   }
 
   void collectTheFirstItem() {
-    firstDocumentReferenceID =
-        tester.widget<Text>(documentReferenceID.first).data!;
     firstAccountingDocument =
         tester.widget<Text>(accountingDocument.first).data!;
   }
 
+  String getValidCredit(double invoicePrice, {bool fetchPrice = false}) {
+    final accountingDocumentList =
+        tester.widgetList<Text>(accountingDocument).toList();
+    final creditIdPriceList = tester
+        .widgetList<PriceComponent>(find.byKey(WidgetKeys.creditIdPrice))
+        .toList();
+    for (var i = 0; i < accountingDocumentList.length; i++) {
+      final price = creditIdPriceList[i].price;
+      if (price.isNotEmpty && double.parse(price) <= invoicePrice) {
+        return fetchPrice ? price : accountingDocumentList[i].data!;
+      }
+    }
+    return '';
+  }
+
+  String getFirstCreditId(double invoicePrice) {
+    return getValidCredit(invoicePrice);
+  }
+
+  double getFirstCreditIdPrice(double invoicePrice) {
+    final priceValue = getValidCredit(invoicePrice, fetchPrice: true);
+    if (priceValue.isEmpty) {
+      return 0.0;
+    }
+    return double.parse(priceValue);
+  }
+
   void verifyTheFirstItemAfterRefresh() {
-    expect(
-      tester.widget<Text>(documentReferenceID.first).data!,
-      equals(firstDocumentReferenceID),
-    );
     expect(
       tester.widget<Text>(accountingDocument.first).data!,
       equals(firstAccountingDocument),

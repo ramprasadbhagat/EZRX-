@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,6 +8,8 @@ import 'package:flutter_test/flutter_test.dart';
 class NewPaymentStep1Robot {
   final WidgetTester tester;
   NewPaymentStep1Robot(this.tester);
+  final outstandingInvoicesPage =
+      find.byKey(WidgetKeys.outstandingInvoicesPage);
   final filterBadge = find.byKey(WidgetKeys.customBadge);
   final textOutStanding = find.byKey(WidgetKeys.textOutstanding);
   final priceComponent = find.byKey(WidgetKeys.priceComponent);
@@ -25,6 +28,11 @@ class NewPaymentStep1Robot {
 
   String invoiceId = '';
   String orderId = '';
+  String invoiceIdPrice = '';
+
+  void verifyPage() {
+    expect(outstandingInvoicesPage, findsOneWidget);
+  }
 
   void verifyStep1InitialField() {
     expect(
@@ -53,7 +61,22 @@ class NewPaymentStep1Robot {
   void collectTheFirstItem() {
     invoiceId =
         tester.widget<Text>(find.byKey(WidgetKeys.invoiceId).first).data!;
-    orderId = tester.widget<Text>(find.byKey(WidgetKeys.orderId).first).data!;
+    invoiceIdPrice = tester
+        .widget<PriceComponent>(find.byKey(WidgetKeys.invoiceIdPrice).first)
+        .price;
+    orderId = tester
+        .widget<Text>(find.byKey(WidgetKeys.invoiceItemOrderId).first)
+        .data!;
+  }
+
+  String get getFirstInvoiceId {
+    collectTheFirstItem();
+    return invoiceId;
+  }
+
+  double get getFirstInvoiceIdPrice {
+    collectTheFirstItem();
+    return double.parse(invoiceIdPrice);
   }
 
   Future<void> pullToRefresh() async {
@@ -67,7 +90,9 @@ class NewPaymentStep1Robot {
       equals(invoiceId),
     );
     expect(
-      tester.widget<Text>(find.byKey(WidgetKeys.orderId).first).data!,
+      tester
+          .widget<Text>(find.byKey(WidgetKeys.invoiceItemOrderId).first)
+          .data!,
       equals(orderId),
     );
   }
@@ -149,8 +174,8 @@ class NewPaymentStep1Robot {
         DateTimeStringValue(
           DateTime(
             DateTime.now().year,
-            DateTime.now().month - 1,
-            DateTime.now().day,
+            DateTime.now().month,
+            DateTime.now().day - 29,
           ).toIso8601String(),
         ).dateString,
       ),

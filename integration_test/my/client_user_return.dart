@@ -199,7 +199,7 @@ void main() {
       returnsByItemsRobot.verifyFilterButtonVisible();
       returnsByItemsRobot.verifyExportButtonVisible();
       await returnsByItemsRobot.tapExportButton();
-      commonRobot.verifyCustomSnackBar(
+      await commonRobot.verifyCustomSnackBar(
         message: 'File downloaded successfully',
       );
     });
@@ -599,7 +599,7 @@ void main() {
       returnsByRequestRobot.verifyFilterButtonVisible();
       returnsByRequestRobot.verifyExportButtonVisible();
       await returnsByRequestRobot.tapExportButton();
-      commonRobot.verifyCustomSnackBar(
+      await commonRobot.verifyCustomSnackBar(
         message: 'File downloaded successfully',
       );
     });

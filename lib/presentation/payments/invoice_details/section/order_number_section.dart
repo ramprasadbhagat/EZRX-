@@ -25,6 +25,7 @@ class OrderNumberSection extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
 
     return Row(
+      key: WidgetKeys.invoiceOrderNumber(orderNumber),
       children: [
         Expanded(
           flex: 2,

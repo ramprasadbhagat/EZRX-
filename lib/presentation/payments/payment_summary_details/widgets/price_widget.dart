@@ -13,6 +13,7 @@ class _PriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      key: WidgetKeys.paymentSummaryTitle(title),
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(

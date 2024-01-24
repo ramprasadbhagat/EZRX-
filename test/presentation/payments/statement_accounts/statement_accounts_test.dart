@@ -647,10 +647,10 @@ void main() {
         );
         await tester.tap(filterIcon);
         await tester.pumpAndSettle();
-        final soaFilterbottomSheetFinder =
-            find.byKey(WidgetKeys.soaFilterbottomSheetKey);
+        final soaFilterBottomSheetFinder =
+            find.byKey(WidgetKeys.soaFilterBottomSheetKey);
         expect(
-          soaFilterbottomSheetFinder,
+          soaFilterBottomSheetFinder,
           findsOneWidget,
         );
         final closeButtonFinder = find.byKey(WidgetKeys.closeButton);
@@ -658,7 +658,7 @@ void main() {
         await tester.tap(closeButtonFinder);
         await tester.pumpAndSettle();
         expect(
-          soaFilterbottomSheetFinder,
+          soaFilterBottomSheetFinder,
           findsNothing,
         );
       });
@@ -688,10 +688,10 @@ void main() {
         );
         await tester.tap(filterIcon);
         await tester.pumpAndSettle();
-        final soaFilterbottomSheetFinder =
-            find.byKey(WidgetKeys.soaFilterbottomSheetKey);
+        final soaFilterBottomSheetFinder =
+            find.byKey(WidgetKeys.soaFilterBottomSheetKey);
         expect(
-          soaFilterbottomSheetFinder,
+          soaFilterBottomSheetFinder,
           findsOneWidget,
         );
 
@@ -702,7 +702,7 @@ void main() {
         await tester.tap(applyButtonKey);
         await tester.pumpAndSettle();
         expect(
-          soaFilterbottomSheetFinder,
+          soaFilterBottomSheetFinder,
           findsNothing,
         );
       });
@@ -732,10 +732,10 @@ void main() {
         );
         await tester.tap(filterIcon);
         await tester.pumpAndSettle();
-        final soaFilterbottomSheetFinder =
-            find.byKey(WidgetKeys.soaFilterbottomSheetKey);
+        final soaFilterBottomSheetFinder =
+            find.byKey(WidgetKeys.soaFilterBottomSheetKey);
         expect(
-          soaFilterbottomSheetFinder,
+          soaFilterBottomSheetFinder,
           findsOneWidget,
         );
         await tester.pumpAndSettle();
@@ -746,7 +746,7 @@ void main() {
         await tester.tap(resetButtonKey);
         await tester.pumpAndSettle();
         expect(
-          soaFilterbottomSheetFinder,
+          soaFilterBottomSheetFinder,
           findsNothing,
         );
       });
@@ -782,10 +782,10 @@ void main() {
         );
         await tester.tap(filterIcon);
         await tester.pumpAndSettle();
-        final soaFilterbottomSheetFinder =
-            find.byKey(WidgetKeys.soaFilterbottomSheetKey);
+        final soaFilterBottomSheetFinder =
+            find.byKey(WidgetKeys.soaFilterBottomSheetKey);
         expect(
-          soaFilterbottomSheetFinder,
+          soaFilterBottomSheetFinder,
           findsOneWidget,
         );
         await tester.pumpAndSettle();
@@ -823,10 +823,10 @@ void main() {
         );
         await tester.tap(filterIcon);
         await tester.pumpAndSettle();
-        final soaFilterbottomSheetFinder =
-            find.byKey(WidgetKeys.soaFilterbottomSheetKey);
+        final soaFilterBottomSheetFinder =
+            find.byKey(WidgetKeys.soaFilterBottomSheetKey);
         expect(
-          soaFilterbottomSheetFinder,
+          soaFilterBottomSheetFinder,
           findsOneWidget,
         );
         await tester.pumpAndSettle();
@@ -869,10 +869,10 @@ void main() {
         );
         await tester.tap(filterIcon);
         await tester.pumpAndSettle();
-        final soaFilterbottomSheetFinder =
-            find.byKey(WidgetKeys.soaFilterbottomSheetKey);
+        final soaFilterBottomSheetFinder =
+            find.byKey(WidgetKeys.soaFilterBottomSheetKey);
         expect(
-          soaFilterbottomSheetFinder,
+          soaFilterBottomSheetFinder,
           findsOneWidget,
         );
         await tester.pumpAndSettle();

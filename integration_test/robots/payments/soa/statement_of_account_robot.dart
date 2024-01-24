@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,13 +18,13 @@ class StatementOfAccountRobot {
   final soaFromDateFilter = find.byKey(WidgetKeys.soaFromDateFieldKey);
   final soaToDateFilter = find.byKey(WidgetKeys.soaToDateFieldKey);
   final soaSearchResultsKey = find.byKey(WidgetKeys.soaSearchResultsKey);
-  final soaNewpaymentButtonKey = find.byKey(WidgetKeys.newPaymentButton);
+  final soaNewPaymentButtonKey = find.byKey(WidgetKeys.newPaymentButton);
   final soaFilterApplyButtonKey =
       find.byKey(WidgetKeys.soaFilterApplyButtonKey);
   final firstSoaItemKey = find.byKey(WidgetKeys.genericKey(key: 'SoaItem#0'));
   final soaDownloadButtonKey = find.byKey(WidgetKeys.soaItemTextKey);
-  final soaFilterbottomSheetKey =
-      find.byKey(WidgetKeys.soaFilterbottomSheetKey);
+  final soaFilterBottomSheetKey =
+      find.byKey(WidgetKeys.soaFilterBottomSheetKey);
   final soaDownloadButtonLoadingKey =
       find.byKey(WidgetKeys.soaLoadingAnimationWidgetKey);
   final soaFilterResetButtonKey =
@@ -40,6 +41,10 @@ class StatementOfAccountRobot {
 
   void verifySOAPage() {
     expect(page, findsOneWidget);
+  }
+
+  void verifySOAShipToAddress(String shipToAddress) {
+    expect(find.text(shipToAddress), findsOneWidget);
   }
 
   void verifySOACustomerCode(String shipToCode) {
@@ -59,15 +64,19 @@ class StatementOfAccountRobot {
     }
   }
 
-  void verifySOAFilterCount() {
-    if (getItemList().isEmpty) {
-      expect(soaFilterButtonKey, findsNothing);
-    } else {
-      expect(soaFilterDefaultCountKey, findsOneWidget);
-    }
+  void verifySOAFilterCount(int count) {
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.soaFilterButton &&
+            widget is CustomBadge &&
+            widget.count == count,
+      ),
+      findsOneWidget,
+    );
   }
 
-  void verifSOASearchResults() {
+  void verifySOASearchResults() {
     if (getItemList().isEmpty) {
       expect(soaSearchResultsKey, findsNothing);
     } else {
@@ -75,20 +84,20 @@ class StatementOfAccountRobot {
     }
   }
 
-  void verifySOANewpaymentButton() {
-    expect(soaNewpaymentButtonKey, findsOneWidget);
+  void verifySOANewPaymentButton() {
+    expect(soaNewPaymentButtonKey, findsOneWidget);
   }
 
-  void verifySOAFilterbottomSheet() {
+  void verifySOAFilterBottomSheet() {
     if (getItemList().isEmpty) {
-      verifySOAFilterbottomSheetNot();
+      verifySOAFilterBottomSheetNot();
     } else {
-      expect(soaFilterbottomSheetKey, findsOneWidget);
+      expect(soaFilterBottomSheetKey, findsOneWidget);
     }
   }
 
-  void verifySOAFilterbottomSheetNot() {
-    expect(soaFilterbottomSheetKey, findsNothing);
+  void verifySOAFilterBottomSheetNot() {
+    expect(soaFilterBottomSheetKey, findsNothing);
   }
 
   void verifySOAItemText(String item) {
@@ -179,8 +188,8 @@ class StatementOfAccountRobot {
     }
   }
 
-  Future<void> tapSOANewpaymentButton() async {
-    await tester.tap(soaNewpaymentButtonKey);
+  Future<void> tapSOANewPaymentButton() async {
+    await tester.tap(soaNewPaymentButtonKey);
     await tester.pumpAndSettle();
   }
 

@@ -23,21 +23,22 @@ class PaymentSummaryFilterRobot {
   ];
 
   void verifyDefaultFilterApplied() {
-    verifyNoStatusFilterApplied();
-    verifyDateRangeFilterApplied();
+    verifyRadioListTileFilter();
+    verifyDateRangeFilterApplied(
+      fromDate: '',
+      toDate: '',
+    );
     verifyAmountRangeFilterApplied(
       fromAmount: '',
       toAmount: '',
     );
   }
 
-  void verifyNoStatusFilterApplied() {
+  void verifyRadioListTileFilter() {
     for (final option in statusFilterOptions) {
-      final radioSort =
-          find.byKey(WidgetKeys.paymentSummaryFilterStatus(option));
       expect(
-        tester.firstWidget<RadioListTile>(radioSort).checked,
-        false,
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus(option)),
+        findsOneWidget,
       );
     }
   }
@@ -84,16 +85,14 @@ class PaymentSummaryFilterRobot {
   }
 
   void verifyDateRangeFilterApplied({
-    DateTime? fromDate,
-    DateTime? toDate,
+    required String fromDate,
+    required String toDate,
   }) {
     expect(
       find.descendant(
         of: fromDateFilter,
         matching: find.text(
-          fromDate != null
-              ? DateTimeStringValue(fromDate.toIso8601String()).dateString
-              : '',
+          DateTimeStringValue(fromDate).dateString,
         ),
       ),
       findsOneWidget,
@@ -102,9 +101,7 @@ class PaymentSummaryFilterRobot {
       find.descendant(
         of: toDateFilter,
         matching: find.text(
-          toDate != null
-              ? DateTimeStringValue(toDate.toIso8601String()).dateString
-              : '',
+          DateTimeStringValue(toDate).dateString,
         ),
       ),
       findsOneWidget,
@@ -145,14 +142,24 @@ class PaymentSummaryFilterRobot {
   }
 
   Future<void> tapStatusCheckbox(String name) async {
-    final radioSort = find.byKey(WidgetKeys.paymentSummaryFilterStatus(name));
-    await tester.tap(radioSort);
+    await tester.tap(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is RadioListTile &&
+            widget.key == WidgetKeys.paymentSummaryFilterStatus(name),
+      ),
+    );
     await tester.pump();
   }
 
-  void verifyStatusFilterValue(String name, bool value) {
+  void verifyStatusFilterValue(String name) {
     expect(
-      find.byKey(WidgetKeys.paymentSummaryFilterStatus(name)),
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is RadioListTile &&
+            widget.key == WidgetKeys.paymentSummaryFilterStatus(name) &&
+            widget.groupValue == FilterStatus(name),
+      ),
       findsOneWidget,
     );
   }

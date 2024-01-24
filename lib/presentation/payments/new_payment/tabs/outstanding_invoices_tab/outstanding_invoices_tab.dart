@@ -36,6 +36,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.outstandingInvoicesPage,
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),

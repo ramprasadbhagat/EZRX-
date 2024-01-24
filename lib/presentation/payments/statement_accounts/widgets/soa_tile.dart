@@ -14,6 +14,7 @@ class _SoaTile extends StatelessWidget {
           previous.isDownloadInProgress != current.isDownloadInProgress,
       builder: (context, state) {
         return Card(
+          key: WidgetKeys.soaSearchResultsKey,
           margin: const EdgeInsets.symmetric(
             horizontal: 12.0,
             vertical: 8.0,

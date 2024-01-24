@@ -64,7 +64,7 @@ class _Filter extends StatelessWidget {
       ),
       builder: (_) {
         return const _SOAFilterBottomSheet(
-          key: WidgetKeys.soaFilterbottomSheetKey,
+          key: WidgetKeys.soaFilterBottomSheetKey,
         );
       },
     ).then(

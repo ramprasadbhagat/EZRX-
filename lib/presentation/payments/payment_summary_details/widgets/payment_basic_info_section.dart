@@ -13,6 +13,7 @@ class _PaymentBasicInfoSection extends StatelessWidget {
         final eligibilityState = context.read<EligibilityBloc>().state;
 
         return Container(
+          key: WidgetKeys.paymentSummaryDetails,
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
           color: ZPColors.primary,
           child: Column(

@@ -30,9 +30,12 @@ class _FilterTuneIcon extends StatelessWidget {
                 current.appliedFilter.appliedFilterCount ||
             previous.isLoading != current.isLoading,
         builder: (context, state) {
+          final count = state.appliedFilter.appliedFilterCount;
+          
           return _FilterElement(
+            key: WidgetKeys.creditFilterApplied(count),
             isActive: !state.isLoading,
-            appliedFilterCount: state.appliedFilter.appliedFilterCount,
+            appliedFilterCount: count,
           );
         },
       );

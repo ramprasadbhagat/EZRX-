@@ -46,8 +46,13 @@ class AccountCreditsRobot {
     expect(find.byKey(WidgetKeys.creditFilterApplied(count)), findsOneWidget);
   }
 
-  void verifyFileDownloadButton() {
+  void verifyDownloadButton() {
     expect(_fileDownloadButtonFinder, findsOneWidget);
+  }
+
+  Future<void> tapDownloadButton() async {
+    await _tester.tap(_fileDownloadButtonFinder);
+    await _tester.pumpAndSettle();
   }
 
   void verifyNewPaymentButton() {

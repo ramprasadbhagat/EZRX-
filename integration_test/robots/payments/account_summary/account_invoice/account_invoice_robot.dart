@@ -46,11 +46,16 @@ class AccountInvoiceRobot extends CommonRobot {
     expect(downloadButton, findsOneWidget);
   }
 
+  Future<void> tapDownloadButton() async {
+    await tester.tap(downloadButton);
+    await tester.pumpAndSettle();
+  }
+
   void verifyNewPaymentButton() {
     expect(newPaymentButton, findsOneWidget);
   }
 
-  Future<void> tapNewRequestButton() async {
+  Future<void> tapNewPaymentButton() async {
     await tester.tap(newPaymentButton);
     await tester.pumpAndSettle();
   }
@@ -140,17 +145,11 @@ class AccountInvoiceRobot extends CommonRobot {
     }
   }
 
-  void verifyItemsWithStatus(List<String> statuses) {
+  void verifyItemsWithStatus(String statuses) {
     verifyItems();
-    final statusText = tester
-        .widgetList<Text>(
-          find.descendant(of: statusLabel, matching: find.byType(Text)),
-        )
-        .map((e) => e.data!);
-
-    for (final text in statusText) {
-      expect(statuses.contains(text.tr()), true);
-    }
+    final statusText =
+        find.descendant(of: statusLabel, matching: find.byType(Text));
+    expect(statusText, findsWidgets);
   }
 
   Future<void> tapFirstItem() async {

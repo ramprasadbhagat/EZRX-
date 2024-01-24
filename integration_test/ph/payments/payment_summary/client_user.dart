@@ -91,7 +91,7 @@ void main() {
     await paymentSummaryRobot.tapFilterButton();
     paymentSummaryFilterRobot.verifyDefaultFilterApplied();
     await paymentSummaryFilterRobot.tapStatusCheckbox(statusFilter);
-    paymentSummaryFilterRobot.verifyStatusFilterValue(statusFilter, true);
+    paymentSummaryFilterRobot.verifyStatusFilterValue(statusFilter);
     await paymentSummaryFilterRobot.tapApplyButton();
     paymentSummaryRobot.verifyFilterApplied(1);
 

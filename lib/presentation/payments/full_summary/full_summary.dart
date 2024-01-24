@@ -44,6 +44,7 @@ class _FullSummaryPageState extends State<FullSummaryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: WidgetKeys.allSummaryPage,
       body: Padding(
         padding: const EdgeInsets.only(top: 8),
         child: AnnouncementBanner(

@@ -50,6 +50,10 @@ class _PaymentItem extends StatelessWidget {
               color: ZPColors.lightGray2,
             ),
           ListTile(
+            key: WidgetKeys.paymentItems(
+              paymentItem.postingKeyName,
+              paymentItem.searchKey,
+            ),
             contentPadding: const EdgeInsets.symmetric(
               vertical: 10,
             ),

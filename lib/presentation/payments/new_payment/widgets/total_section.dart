@@ -53,6 +53,7 @@ class _TotalAmountSection extends StatelessWidget {
                 ),
           ),
           PriceComponent(
+            key: WidgetKeys.totalAmountToPay,
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             price: state.amountTotal.abs().toString(),
             type: state.negativeAmount

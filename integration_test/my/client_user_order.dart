@@ -93,7 +93,7 @@ void main() {
   late ReturnsByItemsDetailRobot returnsByItemsDetailRobot;
 
   late PaymentHomeRobot paymentHomeRobot;
-  late PaymentDetailRobot paymentDetailRobot;
+  late PaymentSummaryDetailRobot paymentDetailRobot;
   late AccountInvoiceDetailRobot accountInvoiceDetailRobot;
 
   void initializeRobot(WidgetTester tester) {
@@ -140,7 +140,7 @@ void main() {
     returnsByItemsDetailRobot = ReturnsByItemsDetailRobot(tester);
 
     paymentHomeRobot = PaymentHomeRobot(tester);
-    paymentDetailRobot = PaymentDetailRobot(tester);
+    paymentDetailRobot = PaymentSummaryDetailRobot(tester);
     accountInvoiceDetailRobot = AccountInvoiceDetailRobot(tester);
   }
 
