@@ -811,7 +811,7 @@ Filter by month,Filter by month,ตัวกรองตามเดือน,Fi
 Deliver to:,Deliver to:,รหัสลูกค้า:,Deliver to:,Deliver to:,Deliver to:,Deliver to:,Dikirim ke:
 once your return has been approved.,once your return has been approved.,once your return has been approved.,once your return has been approved.,once your return has been approved.,once your return has been approved.,once your return has been approved.,Setelah retur Anda disetujui.
 "Track your returned items under ","Track your returned items under ","Track your returned items under ","Track your returned items under ","Track your returned items under ","Track your returned items under ","Track your returned items under ",Lacak item yang Anda kembalikan di bawah
-EXP,EXP,EXP,EXP,EXP,EXP,EXP,Exp
+EXP,EXP,EXP,EXP,EXP,EXP,EXP,Tanggal kadaluarsa
 Please ensure that the order value satisfies the minimum order value of,Please ensure that the order value satisfies the minimum order value of,Please ensure that the order value satisfies the minimum order value of,請確認訂單金額滿足最低出貨金額,Please ensure that the order value satisfies the minimum order value of,Please ensure that the order value satisfies the minimum order value of,សូម​ប្រាកដ​ថា​តម្លៃ​នៃ​ការ​បញ្ជា​ទិញ​បំពេញ​តម្លៃ​បញ្ជា​ទិញ​អប្បបរមា​នៃ,Harap pastikan bahwa nilai pesanan memenuhi nilai pesanan minimum
 Return details,Return details,รายละเอียดการคืนสินค้า,Return details,အသေးစိတ်ကိုပြန်သွားပါ,Return details,ព័ត៌មានលម្អិតនៃការបញ្ចូនផលិតផលត្រឡប់ទៅវិញ,Detail Pengembalian
 Reason,Reason,เหตุผลการคืน,Reason,အကြောင်းပြချက်,Reason,ហេតុផល,Alasan
@@ -913,7 +913,7 @@ Invoice total,Invoice total,ยอดรวมอินวอยซ์,Invoice t
 Credits applied,Credits applied,ยอดใบลดหนี้ที่ใช้,Credits applied,Credits applied,Credits applied,Credits applied,Kredit diterapkan
 Payment details,Payment details,รายการชำระเงิน,Payment details,Payment details,Payment details,Payment details,Rincian Pembayaran
 Payment method,Payment method,วิธีการชำระเงิน,Payment method,Payment method,Payment method,Payment method,Cara Pembayaran
-Advice expiry,Advice expiry,ใบแจ้งยอดเงินหมดอายุ,Advice expiry,Advice expiry,Ngày chứng từ hết hạn,Advice expiry,Nasihat Kedaluwarsa
+Advice expiry,Advice expiry,ใบแจ้งยอดเงินหมดอายุ,Advice expiry,Advice expiry,Ngày chứng từ hết hạn,Advice expiry,Kadaluarsa pembayaran
 PA created date,PA created date,วันที่สร้างใบแจ้งยอดชำระ,PA created date,PA created date,PA created date,PA created date,Tanggal yang dibuat PA
 Amount payable,Amount payable,จำนวนเงินที่ต้องชำระ,Amount payable,Amount payable,Amount payable,Amount payable,Jumlah yang dibayarkan
 Payment Info,Payment Info,ข้อมูลการชำระเงิน,Payment Info,Payment Info,Payment Info,Payment Info,Informasi pembayaran
