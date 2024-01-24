@@ -128,9 +128,6 @@ void main() {
           ),
         ).thenAnswer((invocation) async => Right(orderDocumentTypeListMock));
         when(
-          () => orderDocumentTypeRepository.getOrderTypeFromCartStorage(),
-        ).thenAnswer((invocation) => Right(orderTypeFromStorage));
-        when(
           () => orderDocumentTypeRepository.putOrderTypeToCartStorage(
             orderType: orderTypeFromStorage,
           ),

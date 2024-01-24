@@ -109,6 +109,9 @@ class OrderRepository implements IOrderRepository {
           submitOrderData.addAll({'deliveryFee': smallOrderFee.toString()});
         }
       }
+      if (submitOrder.orderType.isNotEmpty) {
+        submitOrderData.addAll({'orderType': submitOrder.orderType});
+      }
 
       final encryptedData = encryption.encryptionData(
         data: submitOrderData,
@@ -271,6 +274,7 @@ class OrderRepository implements IOrderRepository {
       orderType: getOrderType(
         cartItems: cartProducts,
         customerCodeInfo: customerCodeInfo,
+        salesOrg: salesOrganisation.salesOrg,
       ),
       purchaseOrderType: user.role.type.purchaseOrderType,
     );
@@ -323,6 +327,7 @@ List<SubmitMaterialInfo> _getMaterialInfoList({
 String getOrderType({
   required List<PriceAggregate> cartItems,
   required CustomerCodeInfo customerCodeInfo,
+  required SalesOrg salesOrg,
 }) {
   final hasFocMaterial =
       cartItems.any((element) => element.materialInfo.isFOCMaterial);
@@ -334,6 +339,9 @@ String getOrderType({
       return 'ZPVF';
     }
   }
+  if (salesOrg.isSg && customerCodeInfo.customerAttr7.isZEV && hasFocMaterial) {
+    return 'ZPFC';
+  }
 
-  return 'ZPOR';
+  return '';
 }

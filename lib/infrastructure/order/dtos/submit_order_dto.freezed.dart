@@ -41,8 +41,6 @@ mixin _$SubmitOrderDto {
   double get orderValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'totalTax', defaultValue: 0)
   double get totalTax => throw _privateConstructorUsedError;
-  @JsonKey(name: 'orderType', defaultValue: '')
-  String get orderType => throw _privateConstructorUsedError;
   @JsonKey(name: 'Telephone', defaultValue: '')
   String get telephone => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNotes', defaultValue: '')
@@ -88,7 +86,6 @@ abstract class $SubmitOrderDtoCopyWith<$Res> {
       String specialInstructions,
       @JsonKey(name: 'orderValue', defaultValue: 0) double orderValue,
       @JsonKey(name: 'totalTax', defaultValue: 0) double totalTax,
-      @JsonKey(name: 'orderType', defaultValue: '') String orderType,
       @JsonKey(name: 'Telephone', defaultValue: '') String telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
       @JsonKey(name: 'paymentTerms', defaultValue: '') String paymentTerms,
@@ -129,7 +126,6 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
     Object? specialInstructions = null,
     Object? orderValue = null,
     Object? totalTax = null,
-    Object? orderType = null,
     Object? telephone = null,
     Object? referenceNotes = null,
     Object? paymentTerms = null,
@@ -181,10 +177,6 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
       telephone: null == telephone
           ? _value.telephone
           : telephone // ignore: cast_nullable_to_non_nullable
@@ -255,7 +247,6 @@ abstract class _$$_SubmitOrderDtoCopyWith<$Res>
       String specialInstructions,
       @JsonKey(name: 'orderValue', defaultValue: 0) double orderValue,
       @JsonKey(name: 'totalTax', defaultValue: 0) double totalTax,
-      @JsonKey(name: 'orderType', defaultValue: '') String orderType,
       @JsonKey(name: 'Telephone', defaultValue: '') String telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
       @JsonKey(name: 'paymentTerms', defaultValue: '') String paymentTerms,
@@ -295,7 +286,6 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
     Object? specialInstructions = null,
     Object? orderValue = null,
     Object? totalTax = null,
-    Object? orderType = null,
     Object? telephone = null,
     Object? referenceNotes = null,
     Object? paymentTerms = null,
@@ -347,10 +337,6 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
       telephone: null == telephone
           ? _value.telephone
           : telephone // ignore: cast_nullable_to_non_nullable
@@ -408,7 +394,6 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
       required this.specialInstructions,
       @JsonKey(name: 'orderValue', defaultValue: 0) required this.orderValue,
       @JsonKey(name: 'totalTax', defaultValue: 0) required this.totalTax,
-      @JsonKey(name: 'orderType', defaultValue: '') required this.orderType,
       @JsonKey(name: 'Telephone', defaultValue: '') required this.telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
       required this.referenceNotes,
@@ -469,9 +454,6 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
   @JsonKey(name: 'totalTax', defaultValue: 0)
   final double totalTax;
   @override
-  @JsonKey(name: 'orderType', defaultValue: '')
-  final String orderType;
-  @override
   @JsonKey(name: 'Telephone', defaultValue: '')
   final String telephone;
   @override
@@ -506,7 +488,7 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
 
   @override
   String toString() {
-    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, orderType: $orderType, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType, poDocuments: $poDocuments)';
+    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType, poDocuments: $poDocuments)';
   }
 
   @override
@@ -533,8 +515,6 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
                 other.orderValue == orderValue) &&
             (identical(other.totalTax, totalTax) ||
                 other.totalTax == totalTax) &&
-            (identical(other.orderType, orderType) ||
-                other.orderType == orderType) &&
             (identical(other.telephone, telephone) ||
                 other.telephone == telephone) &&
             (identical(other.referenceNotes, referenceNotes) ||
@@ -569,7 +549,6 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
         specialInstructions,
         orderValue,
         totalTax,
-        orderType,
         telephone,
         referenceNotes,
         paymentTerms,
@@ -615,8 +594,6 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
       required final double orderValue,
       @JsonKey(name: 'totalTax', defaultValue: 0)
       required final double totalTax,
-      @JsonKey(name: 'orderType', defaultValue: '')
-      required final String orderType,
       @JsonKey(name: 'Telephone', defaultValue: '')
       required final String telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
@@ -670,9 +647,6 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
   @override
   @JsonKey(name: 'totalTax', defaultValue: 0)
   double get totalTax;
-  @override
-  @JsonKey(name: 'orderType', defaultValue: '')
-  String get orderType;
   @override
   @JsonKey(name: 'Telephone', defaultValue: '')
   String get telephone;

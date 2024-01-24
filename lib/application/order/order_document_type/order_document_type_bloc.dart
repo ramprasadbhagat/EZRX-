@@ -60,13 +60,7 @@ class OrderDocumentTypeBloc
               orderDocumentTypeList
                   .removeWhere((item) => item.documentType.isZPOR);
             }
-            final storedOrderType = _getOrderTypeFromStorage();
-            final selectedOrderType =
-                storedOrderType != OrderDocumentType.empty()
-                    ? orderDocumentTypeList.contains(storedOrderType)
-                        ? storedOrderType
-                        : orderDocumentTypeList.first
-                    : orderDocumentTypeList.first;
+            final selectedOrderType = orderDocumentTypeList.first;
             add(
               OrderDocumentTypeEvent.selectedOrderType(
                 selectedOrderType: selectedOrderType,
@@ -123,19 +117,5 @@ class OrderDocumentTypeBloc
         ),
       );
     }
-  }
-
-  OrderDocumentType _getOrderTypeFromStorage() {
-    final orderTypeFromStorage =
-        orderDocumentTypeRepository.getOrderTypeFromCartStorage();
-
-    return orderTypeFromStorage.fold(
-      (failure) {
-        return OrderDocumentType.empty();
-      },
-      (orderDocumentType) {
-        return orderDocumentType;
-      },
-    );
   }
 }

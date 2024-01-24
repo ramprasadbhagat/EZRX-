@@ -64,7 +64,6 @@ void main() {
             materials: [],
             poDate: '',
             totalTax: 0,
-            orderType: '',
             requestedDeliveryDate: '',
             specialInstructions: '',
             telephone: '',
