@@ -30,11 +30,13 @@ class Logo extends StatelessWidget {
               indent: 8,
               endIndent: 8,
             ),
-            Text(
-              context.tr(title),
-              style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    fontSize: 20,
-                  ),
+            Expanded(
+              child: Text(
+                context.tr(title),
+                style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                      fontSize: 20,
+                    ),
+              ),
             ),
           ],
         ),

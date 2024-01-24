@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc
 import 'package:ezrxmobile/presentation/auth/forgot_password/widgets/back_to_login_button.dart';
 
 part 'package:ezrxmobile/presentation/auth/forgot_password/widgets/user_name_field.dart';
+
 part 'package:ezrxmobile/presentation/auth/forgot_password/widgets/forgot_password_button.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
@@ -42,7 +43,7 @@ class ForgetPasswordPage extends StatelessWidget {
               children: [
                 Text(
                   context.tr(
-                    'Let us know your Zuellig Pharma username and we`ll send you a verification email.',
+                    'Let us know your eZRx+ username and we`ll send you a verification email.',
                   ),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: ZPColors.passwordValidationsColor,

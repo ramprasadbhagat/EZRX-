@@ -81,7 +81,7 @@ void main() {
         expect(find.byType(ListView), findsOneWidget);
         expect(
           find.text(
-            'Let us know your Zuellig Pharma username and we`ll send you a verification email.',
+            'Let us know your eZRx+ username and we`ll send you a verification email.',
           ),
           findsOneWidget,
         );
