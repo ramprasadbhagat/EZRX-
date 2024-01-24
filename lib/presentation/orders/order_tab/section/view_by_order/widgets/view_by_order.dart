@@ -42,20 +42,21 @@ class _ViewByOrder extends StatelessWidget {
             );
           }
         },
-        contentPadding: const EdgeInsets.all(10),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
+                Flexible(
                   child: Text(
-                    '${context.tr('Order')} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                    '${context.tr(viewByOrderHistoryItem.processingStatus.prefix)} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
                     key: WidgetKeys.viewByOrdersCodeLabelKey,
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ),
+                if (viewByOrderHistoryItem.processingStatus.isInQueue)
+                  const QueueNumberInfoIcon(),
                 if (eligibilityState.salesOrg.isID)
                   StatusLabel(
                     status: StatusType(

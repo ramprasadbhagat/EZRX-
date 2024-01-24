@@ -889,9 +889,13 @@ class OrderStepValue extends ValueObject<String> {
         stepTitle: value.getOrElse(() => ''),
       );
 
+  bool get isInQueue => checkIfInQueue(value.getOrElse(() => ''));
+
+  String get prefix => getOrderNumberPrefix(isInQueue);
+
   List<OrderHistoryStep> get viewByItemHistorySteps => getOrderHistorySteps(
         isViewByOrder: false,
-        stepTitle: value.getOrElse(() => ''),
+        stepTitle: displaySAPOrderStatus,
       );
 }
 

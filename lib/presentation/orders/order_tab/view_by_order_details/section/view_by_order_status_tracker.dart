@@ -12,7 +12,7 @@ class _ViewByOrderStatusTracker extends StatelessWidget {
     return StatusTrackerSection(
       createDateTime: orderHistoryDetails.createdDate,
       title: context.tr('Order status'),
-      status: orderHistoryDetails.processingStatus.getOrDefaultValue(''),
+      status: orderHistoryDetails.processingStatus.displaySAPOrderStatus,
       onTap: () => _showDetailsPage(
         context: context,
       ),

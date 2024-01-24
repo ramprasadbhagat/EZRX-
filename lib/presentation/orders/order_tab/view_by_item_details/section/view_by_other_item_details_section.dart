@@ -99,8 +99,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                   key: WidgetKeys
                                                       .orderItemStatusKey,
                                                   status: StatusType(
-                                                    e.status
-                                                        .getOrDefaultValue(''),
+                                                    e.status.displayOrderStatus,
                                                   ),
                                                 ),
                                                 quantity: '',

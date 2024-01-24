@@ -13,7 +13,7 @@ class _ViewByItemStatusTracker extends StatelessWidget {
   Widget build(BuildContext context) {
     return StatusTrackerSection(
       title: context.tr('Order status'),
-      status: orderHistoryItem.status.getOrDefaultValue(''),
+      status: orderHistoryItem.status.displaySAPOrderStatus,
       onTap: () => _showDetailsPage(
         context: context,
       ),

@@ -21,6 +21,7 @@ class CommonTileItem extends StatelessWidget {
     required this.isQuantityBelowImage,
     required this.footerWidget,
     this.headerText,
+    this.headerTextInfoIcon,
     this.statusWidget,
     this.statusTag,
     this.priceComponent,
@@ -38,6 +39,7 @@ class CommonTileItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final String? headerText;
+  final Widget? headerTextInfoIcon;
   final Widget? priceComponent;
   final Widget? statusWidget;
   final String quantity;
@@ -64,6 +66,7 @@ class CommonTileItem extends StatelessWidget {
               header: headerText,
               statusWidget: statusWidget,
               topHeaderWidget: topHeaderWidget,
+              headerTextInfoIcon: headerTextInfoIcon,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,9 +218,11 @@ class _HeaderItem extends StatelessWidget {
     this.header,
     this.statusWidget,
     this.topHeaderWidget,
+    this.headerTextInfoIcon,
   }) : super(key: key);
 
   final String? header;
+  final Widget? headerTextInfoIcon;
   final Widget? statusWidget;
   final Widget? topHeaderWidget;
 
@@ -235,17 +240,18 @@ class _HeaderItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    headerText,
-                    key: WidgetKeys.commonTileItemHeader,
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: ZPColors.darkerGrey,
-                        ),
-                  ),
-                ],
+              child: RichText(
+                text: TextSpan(
+                  text: headerText,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: ZPColors.darkerGrey,
+                      ),
+                  children: [
+                    WidgetSpan(
+                      child: headerTextInfoIcon ?? const SizedBox.shrink(),
+                    ),
+                  ],
+                ),
               ),
             ),
             statusWidget ?? const SizedBox.shrink(),

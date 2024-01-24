@@ -46,11 +46,14 @@ class _ViewByOrderItem extends StatelessWidget {
             orderHistoryItem.principalData.principalName.getOrDefaultValue(''),
         isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
         headerText:
-            '${context.tr('Order')} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+            '${context.tr(orderHistoryItem.status.prefix)} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+        headerTextInfoIcon: orderHistoryItem.status.isInQueue
+            ? const QueueNumberInfoIcon()
+            : null,
         statusWidget: StatusLabel(
           key: WidgetKeys.orderItemStatusKey,
           status: StatusType(
-            context.tr(orderHistoryItem.status.getOrDefaultValue('')),
+            context.tr(orderHistoryItem.status.displayOrderStatus),
           ),
         ),
         quantity: orderHistoryItem.qty.toString(),

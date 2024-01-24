@@ -13,21 +13,37 @@ class _OrderDetailHeader extends StatelessWidget {
           minVerticalPadding: 15.0,
           contentPadding: const EdgeInsets.symmetric(horizontal: 12),
           tileColor: ZPColors.primary,
-          title: InkWell(
-            onTap: () {
-              context.read<ViewByOrderDetailsBloc>().add(
-                    ViewByOrderDetailsEvent.fetch(
-                      orderNumber: state.orderHistoryDetails.orderNumber,
+          title: RichText(
+            text: TextSpan(
+              children: [
+                WidgetSpan(
+                  child: InkWell(
+                    onTap: () {
+                      context.read<ViewByOrderDetailsBloc>().add(
+                            ViewByOrderDetailsEvent.fetch(
+                              orderNumber:
+                                  state.orderHistoryDetails.orderNumber,
+                            ),
+                          );
+                      context.router.push(const ViewByOrderDetailsPageRoute());
+                    },
+                    child: Text(
+                      '${context.tr(state.orderHistoryDetails.processingStatus.prefix)} #${state.orderHistoryDetails.orderNumber.getOrDefaultValue(' ')}',
+                      key: WidgetKeys.orderSuccessOrderId,
+                      softWrap: true,
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: ZPColors.white,
+                          ),
                     ),
-                  );
-              context.router.push(const ViewByOrderDetailsPageRoute());
-            },
-            child: Text(
-              '${'Order'.tr()} #${state.orderHistoryDetails.orderNumber.getOrDefaultValue('')}',
-              key: WidgetKeys.orderSuccessOrderId,
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: ZPColors.white,
                   ),
+                ),
+                if (state.orderHistoryDetails.processingStatus.isInQueue)
+                  const WidgetSpan(
+                    child: QueueNumberInfoIcon(
+                      iconColor: ZPColors.attachmentColor,
+                    ),
+                  ),
+              ],
             ),
           ),
           subtitle: Column(

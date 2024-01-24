@@ -603,6 +603,7 @@ void main() {
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
         '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        findRichText: true,
       );
       expect(expectedDelivery, findsOneWidget);
     });
@@ -1141,6 +1142,7 @@ void main() {
 
       final orderNoTextFinder = find.textContaining(
         fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
+        findRichText: true,
       );
       expect(orderNoTextFinder, findsWidgets);
       final iconFinder = find.byKey(WidgetKeys.viewByOrderOrderNumberButton);

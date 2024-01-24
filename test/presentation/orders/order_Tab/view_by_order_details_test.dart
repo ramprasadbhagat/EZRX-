@@ -945,6 +945,7 @@ void main() {
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
         '${'Batch'.tr()}: ${fakeBatch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        findRichText: true,
       );
       expect(expectedDelivery, findsOneWidget);
     });
@@ -1032,7 +1033,7 @@ void main() {
       );
 
       await tester.pumpAndSettle();
-      final orderCreatedText = find.text('Order Created');
+      final orderCreatedText = find.text('In queue');
       expect(orderCreatedText, findsOneWidget);
     });
 

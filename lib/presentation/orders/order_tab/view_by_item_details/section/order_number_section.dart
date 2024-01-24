@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -14,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
-
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class OrderNumberSection extends StatelessWidget {
@@ -70,13 +70,23 @@ class OrderNumberSection extends StatelessWidget {
         builder: (context, state) {
           return Row(
             children: [
-              Expanded(
-                child: Text(
-                  '${context.tr('Order')} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
-                  key: WidgetKeys.viewByItemsOrderDetailOrderCode,
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: ZPColors.white,
-                      ),
+              Flexible(
+                child: RichText(
+                  text: TextSpan(
+                    text:
+                        '${context.tr(orderHistoryItem.status.prefix)} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: ZPColors.white,
+                        ),
+                    children: [
+                      if (orderHistoryItem.status.isInQueue)
+                        const WidgetSpan(
+                          child: QueueNumberInfoIcon(
+                            iconColor: ZPColors.attachmentColor,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
               state.isFetching

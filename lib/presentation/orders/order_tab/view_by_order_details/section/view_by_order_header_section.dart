@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/attachment_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -31,12 +32,27 @@ class OrderHeaderSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '${context.tr('Order')} #${orderDetails.orderNumber.getOrDefaultValue('')}',
-                key: WidgetKeys.viewByOrderDetailOrderCode,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.white,
+              Row(
+                children: [
+                  Flexible(
+                    child: RichText(
+                      text: TextSpan(
+                        text:
+                            '${context.tr(orderDetails.processingStatus.prefix)} #${orderDetails.orderNumber.getOrDefaultValue('')}',
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  color: ZPColors.white,
+                                ),
+                        children: [
+                          if (orderDetails.processingStatus.isInQueue)
+                            const WidgetSpan(
+                              child: QueueNumberInfoIcon(),
+                            ),
+                        ],
+                      ),
                     ),
+                  ),
+                ],
               ),
               const SizedBox(height: 10),
               BalanceTextRow(

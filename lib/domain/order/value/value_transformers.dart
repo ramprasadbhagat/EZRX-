@@ -110,13 +110,17 @@ String getOrderStatus(String status) {
     case 'Pending release - seller approval required':
       return 'Pending release';
     case 'Order Creating':
-      return 'Order Created';
+      return 'In queue';
     case '':
       return '-';
     default:
       return status;
   }
 }
+
+bool checkIfInQueue(String value) => value.toLowerCase() == 'order creating';
+
+String getOrderNumberPrefix(bool value) => value ? 'Queue' : 'Order';
 
 bool isEqual(String value1, String value2) =>
     value1.trim().toLowerCase() == value2.trim().toLowerCase();
@@ -229,7 +233,7 @@ List<OrderHistoryStep> getOrderHistorySteps({
 String getOrderSAPStatus(String status) {
   switch (status) {
     case 'Order Creating':
-      return 'Order Created';
+      return 'In queue';
     case '':
       return '-';
     default:
