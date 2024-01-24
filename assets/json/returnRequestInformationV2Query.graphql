@@ -58,6 +58,7 @@ query requestInformationV2($request: requestInformationRequest!) {
         returnQuantity
         unitPrice
         totalPrice
+        overrideValue
         materialNumber
         materialDescription
         batch

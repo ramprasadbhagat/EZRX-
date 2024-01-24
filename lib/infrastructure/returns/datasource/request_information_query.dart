@@ -53,13 +53,14 @@ class RequestInformationQuery {
       outsidePolicy
       invoiceDate
       bonusInformation {
-       invoiceNo
+      invoiceNo
       expiryDate
       comment
       rejectReason
       returnQuantity
       unitPrice
       totalPrice
+      overrideValue
       materialNumber
       materialDescription
       batch

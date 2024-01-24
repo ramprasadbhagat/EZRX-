@@ -507,14 +507,11 @@ class _BonusItemSection extends StatelessWidget {
                                     key: WidgetKeys.bonusPriceComponent,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      PriceComponent(
-                                        salesOrgConfig: context
-                                            .read<EligibilityBloc>()
-                                            .state
-                                            .salesOrgConfigs,
-                                        price: bonus.totalPrice.toString(),
-                                        type: PriceStyle.returnBonusPrice,
+                                      ReturnSummaryItemPrice(
+                                        requestInformation: bonus,
                                       ),
                                       Text(
                                         '${context.tr('Qty')}: ${bonus.returnQuantity} ',
@@ -525,6 +522,18 @@ class _BonusItemSection extends StatelessWidget {
                                     ],
                                   ),
                                 ),
+                          Text(
+                            context.tr(
+                              'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).',
+                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  color: ZPColors.darkGray,
+                                  fontSize: 10,
+                                ),
+                          ),
                         ],
                       ),
                     ),

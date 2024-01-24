@@ -118,6 +118,7 @@ void main() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
+      useMediaQuery: false,
       providers: [
         BlocProvider<ReturnSummaryDetailsBloc>(
           create: (context) => returnSummaryDetailsBlocMock,
@@ -618,6 +619,7 @@ void main() {
                 bonusInformation: [
                   ReturnRequestInformation.empty().copyWith(
                     totalPrice: 200,
+                    returnQuantity: '1',
                   )
                 ],
               ),
@@ -637,7 +639,7 @@ void main() {
           await tester.scrollUntilVisible(showDetailButtonFinder, -500);
           await tester.pump();
           await tester.tap(showDetailButtonFinder);
-          await tester.pump();
+          await tester.pumpAndSettle();
           final bonusPrice = find.text('MYR 200.00', findRichText: true);
           expect(bonusPrice, findsOneWidget);
         },

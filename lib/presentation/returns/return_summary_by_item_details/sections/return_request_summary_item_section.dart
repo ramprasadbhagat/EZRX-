@@ -419,20 +419,30 @@ class _BonusItemSection extends StatelessWidget {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              PriceComponent(
-                                salesOrgConfig: context
-                                    .read<EligibilityBloc>()
-                                    .state
-                                    .salesOrgConfigs,
-                                price: e.totalPrice.toString(),
-                                type: PriceStyle.returnBonusPrice,
+                              Expanded(
+                                child: ReturnSummaryItemPrice(
+                                  requestInformation: e,
+                                ),
                               ),
                               Text(
-                                'Qty: ${e.returnQuantity} ',
+                                '${context.tr('Qty')}: ${e.returnQuantity} ',
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ],
+                          ),
+                          Text(
+                            context.tr(
+                              'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).',
+                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  color: ZPColors.darkGray,
+                                  fontSize: 10,
+                                ),
                           ),
                         ],
                       ),
