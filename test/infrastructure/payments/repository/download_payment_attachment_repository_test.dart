@@ -23,8 +23,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../order/repository/po_attachment_repository_test.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -56,6 +56,8 @@ void main() {
       AllCreditsFilterDto.fromDomain(AllCreditsFilter.empty()).toMapList;
   final filterListForFullSummary =
       FullSummaryFilterDto.fromDomain(FullSummaryFilter.empty()).toMapList;
+  final fakeError = MockException(message: 'fake-exception');
+  final fileMock = FileMock();
 
   setUpAll(
     () async {
@@ -95,14 +97,13 @@ void main() {
           queryObject: AllInvoicesFilter.empty(),
         );
         expect(
-          result.isRight(),
-          true,
+          result,
+          Right(downloadPaymentAttachment),
         );
       });
 
       test('fetch AllInvoice Url failed local', () async {
-        when(() => localDataSource.getFileDownloadUrl())
-            .thenThrow((invocation) async => MockException());
+        when(() => localDataSource.getFileDownloadUrl()).thenThrow(fakeError);
 
         final result =
             await downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
@@ -111,8 +112,8 @@ void main() {
           queryObject: AllInvoicesFilter.empty(),
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
 
@@ -134,8 +135,8 @@ void main() {
           queryObject: AllInvoicesFilter.empty(),
         );
         expect(
-          result.isRight(),
-          true,
+          result,
+          Right(downloadPaymentAttachment),
         );
       });
 
@@ -146,19 +147,19 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             excelFor: 'Debit',
             queryObject: filterListForInvoice,
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
           ),
-        ).thenThrow((invocation) async => MockException());
+        ).thenThrow(fakeError);
 
         final result =
             await downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           queryObject: AllInvoicesFilter.empty(),
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
     });
@@ -177,24 +178,23 @@ void main() {
           queryObject: AllCreditsFilter.empty(),
         );
         expect(
-          result.isRight(),
-          true,
+          result,
+          Right(downloadPaymentAttachment),
         );
       });
 
       test('fetch AllCredit Url failed local', () async {
-        when(() => localDataSource.getFileDownloadUrl())
-            .thenThrow((invocation) async => MockException());
+        when(() => localDataSource.getFileDownloadUrl()).thenThrow(fakeError);
 
         final result =
             await downloadPaymentAttachmentRepository.fetchAllCreditUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           queryObject: AllCreditsFilter.empty(),
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
 
@@ -205,19 +205,19 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             excelFor: 'Credit',
             queryObject: filterListForCredits,
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
           ),
         ).thenAnswer((invocation) async => downloadPaymentAttachment);
 
         final result =
             await downloadPaymentAttachmentRepository.fetchAllCreditUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           queryObject: AllCreditsFilter.empty(),
         );
         expect(
-          result.isRight(),
-          true,
+          result,
+          Right(downloadPaymentAttachment),
         );
       });
 
@@ -228,19 +228,19 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             excelFor: 'Credit',
             queryObject: filterListForCredits,
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
           ),
-        ).thenThrow((invocation) async => MockException());
+        ).thenThrow(fakeError);
 
         final result =
             await downloadPaymentAttachmentRepository.fetchAllCreditUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           queryObject: AllCreditsFilter.empty(),
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
     });
@@ -255,7 +255,7 @@ void main() {
         final result =
             await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           queryObject: FullSummaryFilter.empty(),
         );
         expect(
@@ -271,7 +271,7 @@ void main() {
         final result =
             await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           queryObject: FullSummaryFilter.empty(),
         );
         expect(
@@ -287,14 +287,14 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             excelFor: 'AccountSummary',
             queryObject: filterListForFullSummary,
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
           ),
         ).thenAnswer((invocation) async => downloadPaymentAttachment);
 
         final result =
             await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           queryObject: FullSummaryFilter.empty(),
         );
         expect(
@@ -310,19 +310,19 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             excelFor: 'AccountSummary',
             queryObject: filterListForFullSummary,
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
           ),
-        ).thenThrow(MockException());
+        ).thenThrow(fakeError);
 
         final result =
             await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
           queryObject: FullSummaryFilter.empty(),
         );
         expect(
           result,
-          Left(FailureHandler.handleFailure(MockException())),
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
     });
@@ -337,29 +337,27 @@ void main() {
         final result =
             await downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
         );
         expect(
-          result.isRight(),
-          true,
+          result,
+          Right(downloadPaymentAttachment),
         );
       });
 
       test('fetch Payment Summary Url failure local', () async {
         mockConfig.appFlavor = Flavor.mock;
         when(() => localDataSource.getPaymentSummaryFileDownloadUrl())
-            .thenThrow(
-          (invocation) async => MockException(),
-        );
+            .thenThrow(fakeError);
 
         final result =
             await downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
 
@@ -368,7 +366,7 @@ void main() {
         when(
           () => remoteDataSource.getPaymentSummaryFileDownloadUrl(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
           ),
         ).thenAnswer(
           (invocation) async => downloadPaymentAttachment,
@@ -377,11 +375,11 @@ void main() {
         final result =
             await downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
         );
         expect(
-          result.isRight(),
-          true,
+          result,
+          Right(downloadPaymentAttachment),
         );
       });
 
@@ -390,20 +388,18 @@ void main() {
         when(
           () => remoteDataSource.getPaymentSummaryFileDownloadUrl(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
           ),
-        ).thenThrow(
-          (invocation) async => MockException(),
-        );
+        ).thenThrow(fakeError);
 
         final result =
             await downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganization: fakeSalesOrganisation,
+          salesOrganization: fakeMYSalesOrganisation,
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
     });
@@ -419,8 +415,8 @@ void main() {
         final result =
             await downloadPaymentAttachmentRepository.downloadPermission();
         expect(
-          result.isRight(),
-          true,
+          result,
+          const Right(PermissionStatus.granted),
         );
       });
 
@@ -437,8 +433,8 @@ void main() {
         final result =
             await downloadPaymentAttachmentRepository.downloadPermission();
         expect(
-          result.isRight(),
-          true,
+          result,
+          const Right(PermissionStatus.granted),
         );
       });
 
@@ -455,17 +451,16 @@ void main() {
         final result =
             await downloadPaymentAttachmentRepository.downloadPermission();
         expect(
-          result.isRight(),
-          true,
+          result,
+          const Right(PermissionStatus.limited),
         );
       });
 
       test(
           'Download Permission failed when checkIfDeviceIsAndroidWithSDK33 is false and PermissionStatus is other than granted & limited',
           () async {
-        when(() => deviceInfo.checkIfDeviceIsAndroidWithSDK33()).thenAnswer(
-          (_) async => false,
-        );
+        when(() => deviceInfo.checkIfDeviceIsAndroidWithSDK33())
+            .thenThrow(fakeError);
         when(() => permissionService.requestStoragePermission()).thenAnswer(
           (_) async => PermissionStatus.denied,
         );
@@ -473,8 +468,8 @@ void main() {
         final result =
             await downloadPaymentAttachmentRepository.downloadPermission();
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
     });
@@ -486,17 +481,19 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer,),
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
         ).thenAnswer(
-          (_) async => FileMock(),
+          (_) async => fileMock,
         );
 
         final result = await downloadPaymentAttachmentRepository.downloadFiles(
           files: downloadPaymentAttachment,
         );
         expect(
-          result.isRight(),
-          true,
+          result,
+          Right(fileMock),
         );
       });
 
@@ -505,17 +502,17 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer,),
-        ).thenThrow(
-          (_) async => MockException(),
-        );
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
+        ).thenThrow(fakeError);
 
         final result = await downloadPaymentAttachmentRepository.downloadFiles(
           files: downloadPaymentAttachment,
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
 
@@ -526,37 +523,40 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer,),
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
         ).thenAnswer(
-          (_) async => FileMock(),
+          (_) async => fileMock,
         );
 
         final result = await downloadPaymentAttachmentRepository.downloadFiles(
           files: downloadPaymentAttachment,
         );
         expect(
-          result.isRight(),
-          true,
+          result,
+          Right(fileMock),
         );
       });
 
       test('Download Files failure remote', () async {
         mockConfig.appFlavor = Flavor.uat;
-        when(() => remoteDataSource.fileDownload('')).thenAnswer(
+        when(() => remoteDataSource.fileDownload(downloadPaymentAttachment.url))
+            .thenAnswer(
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer,),
-        ).thenThrow(
-          (_) async => MockException(),
-        );
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
+        ).thenThrow(fakeError);
 
         final result = await downloadPaymentAttachmentRepository.downloadFiles(
           files: downloadPaymentAttachment,
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
     });
@@ -568,36 +568,36 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer,),
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
         ).thenAnswer(
-          (_) async => FileMock(),
+          (_) async => fileMock,
         );
 
         final result = await downloadPaymentAttachmentRepository.soaDownload(
           soaData: SoaData(''),
         );
         expect(
-          result.isRight(),
-          true,
+          result,
+          Right(fileMock),
         );
       });
 
       test('Soa Download failure local', () async {
-        when(() => localDataSource.soaDownload()).thenThrow(
-          (_) async => MockException(),
-        );
+        when(() => localDataSource.soaDownload()).thenThrow(fakeError);
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer,),
-        ).thenThrow(
-          (_) async => MockException(),
-        );
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
+        ).thenThrow(fakeError);
 
         final result = await downloadPaymentAttachmentRepository.soaDownload(
           soaData: SoaData(''),
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
 
@@ -607,36 +607,126 @@ void main() {
           (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer,),
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
         ).thenAnswer(
-          (_) async => FileMock(),
+          (_) async => fileMock,
         );
 
         final result = await downloadPaymentAttachmentRepository.soaDownload(
           soaData: SoaData('fake_Data'),
         );
         expect(
-          result.isRight(),
-          true,
+          result,
+          Right(fileMock),
         );
       });
 
       test('Soa Download failure remote', () async {
-        when(() => remoteDataSource.soaDownload('')).thenThrow(
-          (_) async => MockException(),
+        mockConfig.appFlavor = Flavor.uat;
+        when(() => remoteDataSource.soaDownload('fake_Data')).thenAnswer(
+          (_) async => attachmentFileBuffer,
         );
         when(
-          () => fileSystemHelper.getDownloadedFile(attachmentFileBuffer,),
-        ).thenThrow(
-          (_) async => MockException(),
-        );
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
+        ).thenThrow(fakeError);
 
         final result = await downloadPaymentAttachmentRepository.soaDownload(
-          soaData: SoaData(''),
+          soaData: SoaData('fake_Data'),
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
+        );
+      });
+    });
+
+    group('eInvoiceDownload Download tests', () {
+      test('eInvoiceDownload Download successfully local', () async {
+        mockConfig.appFlavor = Flavor.mock;
+        when(() => localDataSource.eInvoiceDownload()).thenAnswer(
+          (_) async => attachmentFileBuffer,
+        );
+        when(
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
+        ).thenAnswer(
+          (_) async => fileMock,
+        );
+
+        final result =
+            await downloadPaymentAttachmentRepository.eInvoiceDownload(
+          eInvoice: DownloadPaymentAttachment.empty(),
+        );
+        expect(
+          result,
+          Right(fileMock),
+        );
+      });
+
+      test('eInvoiceDownload Download failure local', () async {
+        when(() => localDataSource.eInvoiceDownload()).thenThrow(fakeError);
+        when(
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
+        ).thenThrow(
+          (_) async => fakeError,
+        );
+
+        final result =
+            await downloadPaymentAttachmentRepository.eInvoiceDownload(
+          eInvoice: DownloadPaymentAttachment.empty(),
+        );
+        expect(
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
+        );
+      });
+
+      test('eInvoiceDownload Download successfully remote', () async {
+        mockConfig.appFlavor = Flavor.uat;
+        when(() => remoteDataSource.eInvoiceDownload('fake-url')).thenAnswer(
+          (_) async => attachmentFileBuffer,
+        );
+        when(
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
+        ).thenAnswer(
+          (_) async => fileMock,
+        );
+
+        final result =
+            await downloadPaymentAttachmentRepository.eInvoiceDownload(
+          eInvoice: const DownloadPaymentAttachment(url: 'fake-url'),
+        );
+        expect(
+          result,
+          Right(fileMock),
+        );
+      });
+
+      test('eInvoiceDownload Download failure remote', () async {
+        when(() => remoteDataSource.eInvoiceDownload('fake-url'))
+            .thenThrow(fakeError);
+        when(
+          () => fileSystemHelper.getDownloadedFile(
+            attachmentFileBuffer,
+          ),
+        ).thenThrow(fakeError);
+
+        final result =
+            await downloadPaymentAttachmentRepository.eInvoiceDownload(
+          eInvoice: const DownloadPaymentAttachment(url: 'fake-url'),
+        );
+        expect(
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       });
     });

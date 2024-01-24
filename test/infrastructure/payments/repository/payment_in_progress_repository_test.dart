@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -9,6 +10,9 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/payment_in_progres
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_in_progress_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class PaymentInProgressLocalDataSourceMock extends Mock
     implements PaymentInProgressLocalDataSource {}
@@ -83,6 +87,24 @@ void main() {
             .copyWith(salesOrg: SalesOrg('mock_salesOrg')),
       );
       expect(result.isRight(), true);
+    });
+
+    test('getPaymentInProgress remote success with empty value', () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+      when(
+        () => paymentInProgressRemoteDataSource.getPaymentInProgress(
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          salesOrg: fakeMYSalesOrganisation.salesOrg.getValue(),
+        ),
+      ).thenAnswer(
+        (invocation) async => [StringValue('')],
+      );
+
+      final result = await paymentInProgressRepository.getPaymentInProgress(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganization: fakeMYSalesOrganisation,
+      );
+      expect(result, Right(StringValue('')));
     });
 
     test('=> filterCredits remote failed', () async {

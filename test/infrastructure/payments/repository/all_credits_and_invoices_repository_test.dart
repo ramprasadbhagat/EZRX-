@@ -34,14 +34,15 @@ void main() {
   late AllCreditsAndInvoicesRemoteDataSource
       allCreditsAndInvoicesRemoteDataSourceMock;
   late AllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
+  final fakeError = MockException(message: 'fake-exception');
   const fakeFromDate = '2023-05-01';
   const fakeToDate = '2023-05-28';
   final filterMap = [
-    {'field': 'debitCreditCode', 'value': 'S'},
+    {'field': 'accountingDocumentType', 'value': 'Invoice'},
+    {'field': 'documentDate', 'value': fakeFromDate, 'type': 'ge'},
+    {'field': 'documentDate', 'value': fakeToDate, 'type': 'le'},
     {'field': 'netDueDate', 'value': fakeFromDate, 'type': 'ge'},
     {'field': 'netDueDate', 'value': fakeToDate, 'type': 'le'},
-    {'field': 'postingDate', 'value': fakeFromDate, 'type': 'ge'},
-    {'field': 'postingDate', 'value': fakeToDate, 'type': 'le'},
   ];
 
   setUpAll(() async {
@@ -78,7 +79,7 @@ void main() {
           pageSize: 1,
           offset: 0,
         );
-        expect(result.isRight(), true);
+        expect(result, Right(mockList));
       });
 
       test('=> filterInvoices locally failed', () async {
@@ -86,7 +87,7 @@ void main() {
         when(
           () =>
               allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList(),
-        ).thenThrow((invocation) async => MockException());
+        ).thenThrow(fakeError);
 
         final result = await allCreditsAndInvoicesRepository.filterInvoices(
           customerCodeInfo: CustomerCodeInfo.empty(),
@@ -96,14 +97,17 @@ void main() {
           pageSize: 1,
           offset: 0,
         );
-        expect(result.isLeft(), true);
+        expect(
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
+        );
       });
       test('=> filterInvoices remote success', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.uat);
         when(
           () => allCreditsAndInvoicesRemoteDataSourceMock.filterInvoices(
-            customerCode: 'mock_soldTo',
-            salesOrg: 'mock_salesOrg',
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: fakeMYSalesOrg.getValue(),
             filterMap: filterMap,
             pageSize: 1,
             offset: 0,
@@ -111,12 +115,9 @@ void main() {
         ).thenAnswer(
           (invocation) async => mockList,
         );
-
         final result = await allCreditsAndInvoicesRepository.filterInvoices(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: 'mock_soldTo'),
-          salesOrganisation: SalesOrganisation.empty()
-              .copyWith(salesOrg: SalesOrg('mock_salesOrg')),
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeMYSalesOrganisation,
           filter: AllInvoicesFilter.empty().copyWith(
             dueDateFrom: DateTimeStringValue(fakeFromDate),
             dueDateTo: DateTimeStringValue(fakeToDate),
@@ -126,7 +127,7 @@ void main() {
           pageSize: 1,
           offset: 0,
         );
-        expect(result.isRight(), false);
+        expect(result, Right(mockList));
       });
 
       test('=> filterInvoices remote failed', () async {

@@ -261,7 +261,7 @@ void main() {
       );
     });
     test('=> remote fail', () async {
-      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+      when(() => configMock.appFlavor).thenReturn(Flavor.uat);
       when(
         () => allCreditsAndInvoicesRemoteDataSourceMock.getOrderForInvoice(
           invoiceOrderItems.map((e) => e.invoiceId.getValue()).toList(),
