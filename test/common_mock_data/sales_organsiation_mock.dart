@@ -9,6 +9,7 @@ const _fakeMYSalesOrgId = '2001';
 const _fakeSGSalesOrgId = '2601';
 const _fakeTWSalesOrgId = '2800';
 const _fakePHSalesOrgId = '2500';
+const _fakePhMDISalesOrgId = '2501';
 const _fakeIDSalesOrgId = '1900';
 const _fakeTHSalesOrgId = '2902';
 const _fakeKHSalesOrgId = '1500';
@@ -24,6 +25,7 @@ final fakeIDSalesOrg = SalesOrg(_fakeIDSalesOrgId);
 final fakeTHSalesOrg = SalesOrg(_fakeTHSalesOrgId);
 final fakeKHSalesOrg = SalesOrg(_fakeKHSalesOrgId);
 final fakeMMSalesOrg = SalesOrg(_fakeMMSalesOrgId);
+final fakePhMDISalesOrg = SalesOrg(_fakePhMDISalesOrgId);
 
 final fakeEmptySalesOrganisation = SalesOrganisation.empty();
 final fakeSalesOrganisation =
@@ -40,6 +42,9 @@ final fakeSGSalesOrganisation =
 
 final fakePHSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakePHSalesOrg);
+
+final fakePhMDISalesOrganisation =
+    SalesOrganisation.empty().copyWith(salesOrg: fakePhMDISalesOrg);
 
 final fakeIDSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeIDSalesOrg);

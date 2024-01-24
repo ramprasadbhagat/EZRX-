@@ -27,6 +27,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -1793,6 +1794,182 @@ void main() {
         expect(
           find.byKey(
             WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
+          ),
+          findsNothing,
+        );
+      });
+
+      testWidgets(
+          'Expiry Date visible for PH Mdi for materials with principal code 107381',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                principalData: PrincipalData.empty().copyWith(
+                  principalCode: PrincipalCode('107381'),
+                ),
+              ),
+              stockInfo: stockInfo,
+            ),
+            salesOrganisation: fakePhMDISalesOrganisation,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.textContaining('EXP: 30 Nov 2025', findRichText: true),
+          findsOneWidget,
+        );
+
+        await tester.tap(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.materialInfoDialog),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Expiry Date not visible for PH Mdi for materials with any principal code other than 107381',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                principalData: PrincipalData.empty().copyWith(
+                  principalCode: PrincipalCode('fake-code'),
+                ),
+              ),
+              stockInfo: stockInfo,
+            ),
+            salesOrganisation: fakePhMDISalesOrganisation,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.textContaining('EXP: NA', findRichText: true),
+          findsOneWidget,
+        );
+
+        await tester.tap(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.materialInfoDialog),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow('Expiry', 'NA'),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Expiry Date visible for all markets and all materials except PH Mdi for materials without principal code 107381',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+            ),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.textContaining('EXP: 30 Nov 2025', findRichText: true),
+          findsOneWidget,
+        );
+
+        await tester.tap(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.materialInfoDialog),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Expiry Date not visible for all markets if expiry date toggle is off from salesOrgConfig',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+            ),
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakePHSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.textContaining('EXP: 30 Nov 2025', findRichText: true),
+          findsNothing,
+        );
+
+        await tester.tap(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.materialInfoDialog),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
           ),
           findsNothing,
         );
