@@ -691,9 +691,7 @@ void main() {
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
         ),
-      ).thenAnswer(
-        (invocation) async => submitOrderResponseMock,
-      );
+      ).thenThrow(MockException);
 
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
