@@ -1,6 +1,6 @@
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
@@ -11,7 +11,7 @@ void main() {
 
   group('sales organisation configs test', () {
     setUpAll(() {
-      configs = SalesOrganisationConfigs.empty();
+      configs = fakeMYSalesOrgConfigs;
     });
     test('deliveryStartDate test', () {
       final currentTime = DateTime.now();

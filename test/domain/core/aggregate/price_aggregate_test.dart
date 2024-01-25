@@ -1,46 +1,45 @@
-import 'dart:convert';
 import 'dart:io';
-
+import 'dart:convert';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
-import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/utils/num_utils.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
-import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 
 void main() {
   final emptyPrice = Price.empty();
   final emptyMaterialInfo = MaterialInfo.empty();
   final emptyBundle = Bundle.empty();
-  final emptySalesOrganisationConfigs = SalesOrganisationConfigs.empty();
   const fakeQuantity = 7;
   const fakeDiscountedMaterialCount = 10;
   final emptyStockInfo = StockInfo.empty();
@@ -90,7 +89,7 @@ void main() {
         price: emptyPrice,
         materialInfo: emptyMaterialInfo,
         bundle: emptyBundle,
-        salesOrgConfig: emptySalesOrganisationConfigs,
+        salesOrgConfig: fakeMYSalesOrgConfigs,
         quantity: fakeQuantity,
         discountedMaterialCount: fakeDiscountedMaterialCount,
         stockInfo: emptyStockInfo,
@@ -104,7 +103,7 @@ void main() {
       expect(priceAggregate.price, emptyPrice);
       expect(priceAggregate.materialInfo, emptyMaterialInfo);
       expect(priceAggregate.bundle, emptyBundle);
-      expect(priceAggregate.salesOrgConfig, emptySalesOrganisationConfigs);
+      expect(priceAggregate.salesOrgConfig, fakeMYSalesOrgConfigs);
       expect(priceAggregate.quantity, fakeQuantity);
       expect(
         priceAggregate.discountedMaterialCount,
@@ -115,11 +114,13 @@ void main() {
     });
 
     test('Empty PriceAggregate', () {
-      final priceAggregate = PriceAggregate.empty();
+      final priceAggregate = PriceAggregate.empty().copyWith(
+        salesOrgConfig: fakeMYSalesOrgConfigs,
+      );
       expect(priceAggregate.price, emptyPrice);
       expect(priceAggregate.materialInfo, emptyMaterialInfo);
       expect(priceAggregate.bundle, emptyBundle);
-      expect(priceAggregate.salesOrgConfig, emptySalesOrganisationConfigs);
+      expect(priceAggregate.salesOrgConfig, fakeMYSalesOrgConfigs);
       expect(priceAggregate.quantity, 1);
       expect(priceAggregate.discountedMaterialCount, 0);
       expect(priceAggregate.stockInfo, emptyStockInfo);
@@ -149,7 +150,7 @@ void main() {
         () {
       final customPriceAggregate = emptyPriceAggregate.copyWith(
         salesOrgConfig:
-            emptySalesOrganisationConfigs.copyWith(enableBatchNumber: false),
+            fakeMYSalesOrgConfigs,
       );
       final submitMaterialInfo = customPriceAggregate.toSubmitMaterialInfo();
       expect(submitMaterialInfo.batch, BatchNumber(''));
@@ -169,29 +170,25 @@ void main() {
 
     test('toSubmitMaterialInfo from PriceAggregate should return price', () {
       const finalPrice = 88.0;
-      const vatValue = 9;
 
       final customPriceAggregate = emptyPriceAggregate.copyWith(
         price: Price.empty().copyWith(finalPrice: MaterialPrice(finalPrice)),
         materialInfo: MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material'),
           taxClassification: MaterialTaxClassification('Product : Full Tax'),
+          tax: 10,
         ),
-        salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-          enableBatchNumber: false,
-          vatValue: vatValue,
-          displayItemTaxBreakdown: true,
-        ),
+        salesOrgConfig: fakeKHSalesOrgConfigs,
       );
       final submitMaterialInfo = customPriceAggregate.toSubmitMaterialInfo();
 
       expect(
         submitMaterialInfo.mrp,
-        finalPrice + (finalPrice * vatValue) / 100,
+        finalPrice + (finalPrice * fakeKHSalesOrgConfigs.vatValue) / 100,
       );
       expect(
         submitMaterialInfo.tax,
-        (finalPrice * vatValue) / 100,
+        (finalPrice * fakeKHSalesOrgConfigs.vatValue) / 100,
       );
     });
 
@@ -246,11 +243,7 @@ void main() {
       'vatCalculation from PriceAggregate for vn',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableVat: true,
-            enableTaxClassification: true,
-            currency: Currency('vnd'),
-          ),
+          salesOrgConfig: fakeVNSalesOrgConfigs,
           materialInfo: emptyPriceAggregate.materialInfo.copyWith(
             tax: 15,
           ),
@@ -263,11 +256,7 @@ void main() {
       'vatCalculation from PriceAggregate for vn when taxes is empty',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableVat: true,
-            enableTaxClassification: true,
-            currency: Currency('vnd'),
-          ),
+          salesOrgConfig: fakeVNSalesOrgConfigs,
         );
         expect(customPriceAggregate.vatCalculation(10), 10);
       },
@@ -277,13 +266,10 @@ void main() {
       'vatCalculation from PriceAggregate for Non vn',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableVat: true,
-            enableTaxClassification: true,
-            vatValue: 5,
-          ),
+          salesOrgConfig: fakeVNSalesOrgConfigs,
           materialInfo: emptyPriceAggregate.materialInfo.copyWith(
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
+            tax: 5,
           ),
         );
         expect(customPriceAggregate.vatCalculation(20), 21.0);
@@ -400,11 +386,7 @@ void main() {
               PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
             ],
           ),
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableVat: true,
-            enableTaxClassification: true,
-            currency: Currency('vnd'),
-          ),
+          salesOrgConfig: fakeVNSalesOrgConfigs,
           materialInfo: emptyMaterialInfo.copyWith(
             tax: 5,
           ),
@@ -427,10 +409,8 @@ void main() {
               PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
             ],
           ),
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableTaxAtTotalLevelOnly: true,
-            currency: Currency('vnd'),
-          ),
+          salesOrgConfig:
+              fakeVNSalesOrgConfigs,
           materialInfo: emptyMaterialInfo.copyWith(
             tax: 5,
           ),
@@ -453,10 +433,7 @@ void main() {
               PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
             ],
           ),
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableTaxAtTotalLevelOnly: true,
-            currency: Currency('vnd'),
-          ),
+          salesOrgConfig: fakeVNSalesOrgConfigs,
         );
         expect(customPriceAggregate.unitPriceForTotal, 20);
       },
@@ -476,13 +453,10 @@ void main() {
               PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
             ],
           ),
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableVat: true,
-            enableTaxClassification: true,
-            vatValue: 5,
-          ),
+          salesOrgConfig: fakeVNSalesOrgConfigs,
           materialInfo: emptyPriceAggregate.materialInfo.copyWith(
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
+            tax: 5,
           ),
         );
         expect(customPriceAggregate.unitPriceForTotal, 10.5);
@@ -500,9 +474,7 @@ void main() {
       'unitPriceTotal from PriceAggregate for enableTaxAtTotalLevelOnly',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableTaxAtTotalLevelOnly: true,
-          ),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.unitPriceTotal,
@@ -516,9 +488,7 @@ void main() {
       'unitPriceTotal from PriceAggregate',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableTaxAtTotalLevelOnly: true,
-          ),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.unitPriceTotal,
@@ -572,9 +542,7 @@ void main() {
           materialInfo: emptyMaterialInfo.copyWith(
             taxClassification: MaterialTaxClassification('noTax'),
           ),
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            vatValue: 4,
-          ),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.getNewPrice(),
@@ -691,9 +659,7 @@ void main() {
       'display from PriceAggregate for PriceType.unitPrice with salesOrgConfig.enableTaxAtTotalLevelOnly',
       () async {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableTaxAtTotalLevelOnly: true,
-          ),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.display(PriceType.unitPrice),
@@ -726,9 +692,7 @@ void main() {
       'display from PriceAggregate for PriceType.unitPriceTotal with salesOrgConfig.enableTaxAtTotalLevelOnly',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableTaxAtTotalLevelOnly: true,
-          ),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.display(PriceType.unitPriceTotal),
@@ -761,9 +725,7 @@ void main() {
       'isDefaultMDEnabled from PriceAggregate',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            enableDefaultMD: true,
-          ),
+          salesOrgConfig: fakeSGSalesOrgConfigs,
           materialInfo: emptyMaterialInfo.copyWith(
             defaultMaterialDescription: 'Mat Default Description',
           ),
@@ -827,18 +789,12 @@ void main() {
       'taxDetails from PriceAggregate for salesOrgConfig.currency.isVN',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
-            currency: Currency('vnd'),
-          ),
+          salesOrgConfig: fakeVNSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.taxDetails,
           customPriceAggregate.materialInfo.getTotalTax(
-            emptySalesOrganisationConfigs
-                .copyWith(
-                  currency: Currency('vnd'),
-                )
-                .enableTaxDisplay,
+            fakeVNSalesOrgConfigs.enableTaxDisplay,
           ),
         );
       },
@@ -850,8 +806,8 @@ void main() {
         expect(
           emptyPriceAggregate.taxDetails,
           emptyPriceAggregate.materialInfo.getTaxClassification(
-            emptySalesOrganisationConfigs.enableTaxDisplay,
-            emptySalesOrganisationConfigs.enableTaxClassification,
+            fakeMYSalesOrgConfigs.enableTaxDisplay,
+            fakeMYSalesOrgConfigs.enableTaxClassification,
           ),
         );
       },
@@ -1710,10 +1666,7 @@ void main() {
             ),
             tax: 5.0,
           ),
-          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: false,
-            vatValue: 10,
-          ),
+          salesOrgConfig: fakeTWSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.itemTaxPercent,
@@ -1733,10 +1686,7 @@ void main() {
             tax: 5.0,
             taxClassification: MaterialTaxClassification('noTax'),
           ),
-          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: true,
-            vatValue: 10,
-          ),
+          salesOrgConfig: fakeIDSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.itemTaxPercent,
@@ -1756,11 +1706,7 @@ void main() {
             tax: 5.0,
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
           ),
-          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: true,
-            vatValue: 10,
-            salesOrg: fakeVNSalesOrg,
-          ),
+          salesOrgConfig: fakeVNSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.itemTaxPercent,
@@ -1780,11 +1726,7 @@ void main() {
             tax: 5.0,
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
           ),
-          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: true,
-            vatValue: 10,
-            salesOrg: fakeIDSalesOrg,
-          ),
+          salesOrgConfig: fakeIDSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.itemTaxPercent,
@@ -1798,17 +1740,10 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           materialInfo: emptyMaterialInfo.copyWith(
-            principalData: PrincipalData.empty().copyWith(
-              principalCode: PrincipalCode('100822'),
-            ),
             tax: 5.0,
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
           ),
-          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-            displayItemTaxBreakdown: true,
-            vatValue: 10,
-            currency: Currency('php'),
-          ),
+          salesOrgConfig: fakeKHSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.itemTaxPercent,
@@ -2048,8 +1983,7 @@ void main() {
               materialNumber: MaterialNumber('fake-number'),
             )
           ],
-          salesOrgConfig: SalesOrganisationConfigs.empty()
-              .copyWith(salesOrg: SalesOrg('2001'), currency: Currency('MYR')),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
         );
         expect(
           customPriceAggregate
@@ -2076,7 +2010,6 @@ void main() {
       'PriceAggregate ZPO1 test on additionalBonusFlag',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          quantity: 3,
           price: Price.empty()
               .copyWith(finalPrice: MaterialPrice(10), isPriceOverride: true),
           bonusSampleItems: [
@@ -2085,8 +2018,7 @@ void main() {
               materialNumber: MaterialNumber('fake-number'),
             )
           ],
-          salesOrgConfig: SalesOrganisationConfigs.empty()
-              .copyWith(salesOrg: SalesOrg('2001'), currency: Currency('MYR')),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
         );
         expect(
           customPriceAggregate
