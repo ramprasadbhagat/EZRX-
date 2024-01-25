@@ -60,6 +60,7 @@ void main() {
           user: fakeRootAdminUser,
           orderHistory: orderHistory,
           orderHistoryItem: orderHistory.orderHistoryItems.first,
+          shipToInfo: fakeShipToInfo,
         );
       });
 
@@ -80,6 +81,7 @@ void main() {
             salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
+            shipToInfo: fakeShipToInfo,
           ),
         ),
         expect: () => [
@@ -88,6 +90,7 @@ void main() {
             salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
+            shipToInfo: fakeShipToInfo,
           )
         ],
       );
@@ -599,6 +602,7 @@ void main() {
               salesOrganisation: seedState.salesOrganisation,
               user: seedState.user,
               searchKey: SearchKey('fake-search-keyword'),
+              shipToInfo: fakeShipToInfo,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -637,6 +641,7 @@ void main() {
               salesOrganisation: seedState.salesOrganisation,
               user: seedState.user,
               searchKey: SearchKey('fake-search-keyword'),
+              shipToInfo: fakeShipToInfo,
             )),
           ).thenAnswer(
             (invocation) async => Right(seedState.orderHistory),
@@ -690,6 +695,7 @@ void main() {
               salesOrganisation: seedState.salesOrganisation,
               user: seedState.user,
               searchKey: SearchKey('fake-search-keyword'),
+              shipToInfo: fakeShipToInfo,
             )),
           ).thenAnswer(
             (invocation) async => Right(seedState.orderHistory),
@@ -755,6 +761,7 @@ void main() {
               salesOrganisation: seedState.salesOrganisation,
               user: seedState.user,
               searchKey: SearchKey('fake-search-keyword'),
+              shipToInfo: fakeShipToInfo,
             )),
           ).thenAnswer(
             (invocation) async => Right(
@@ -813,6 +820,7 @@ void main() {
               salesOrganisation: seedState.salesOrganisation,
               user: seedState.user,
               searchKey: SearchKey('fake-search-keyword'),
+              shipToInfo: fakeShipToInfo,
             )),
           ).thenAnswer(
             (invocation) async => Right(seedState.orderHistory),

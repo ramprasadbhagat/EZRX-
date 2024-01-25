@@ -22,7 +22,8 @@ mixin _$ViewByItemDetailsEvent {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(StringValue invoiceNumber) fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
@@ -43,7 +44,8 @@ mixin _$ViewByItemDetailsEvent {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
@@ -64,7 +66,8 @@ mixin _$ViewByItemDetailsEvent {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
@@ -148,12 +151,14 @@ abstract class _$$_InitializedCopyWith<$Res> {
       {CustomerCodeInfo customerCodeInfo,
       User user,
       SalesOrganisation salesOrganisation,
-      SalesOrganisationConfigs salesOrgConfig});
+      SalesOrganisationConfigs salesOrgConfig,
+      ShipToInfo shipToInfo});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -171,6 +176,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? user = null,
     Object? salesOrganisation = null,
     Object? salesOrgConfig = null,
+    Object? shipToInfo = null,
   }) {
     return _then(_$_Initialized(
       customerCodeInfo: null == customerCodeInfo
@@ -189,6 +195,10 @@ class __$$_InitializedCopyWithImpl<$Res>
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ));
   }
 
@@ -224,6 +234,14 @@ class __$$_InitializedCopyWithImpl<$Res>
       return _then(_value.copyWith(salesOrgConfig: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -233,7 +251,8 @@ class _$_Initialized implements _Initialized {
       {required this.customerCodeInfo,
       required this.user,
       required this.salesOrganisation,
-      required this.salesOrgConfig});
+      required this.salesOrgConfig,
+      required this.shipToInfo});
 
   @override
   final CustomerCodeInfo customerCodeInfo;
@@ -243,10 +262,12 @@ class _$_Initialized implements _Initialized {
   final SalesOrganisation salesOrganisation;
   @override
   final SalesOrganisationConfigs salesOrgConfig;
+  @override
+  final ShipToInfo shipToInfo;
 
   @override
   String toString() {
-    return 'ViewByItemDetailsEvent.initialized(customerCodeInfo: $customerCodeInfo, user: $user, salesOrganisation: $salesOrganisation, salesOrgConfig: $salesOrgConfig)';
+    return 'ViewByItemDetailsEvent.initialized(customerCodeInfo: $customerCodeInfo, user: $user, salesOrganisation: $salesOrganisation, salesOrgConfig: $salesOrgConfig, shipToInfo: $shipToInfo)';
   }
 
   @override
@@ -260,12 +281,14 @@ class _$_Initialized implements _Initialized {
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.salesOrgConfig, salesOrgConfig) ||
-                other.salesOrgConfig == salesOrgConfig));
+                other.salesOrgConfig == salesOrgConfig) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, customerCodeInfo, user, salesOrganisation, salesOrgConfig);
+  int get hashCode => Object.hash(runtimeType, customerCodeInfo, user,
+      salesOrganisation, salesOrgConfig, shipToInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -280,7 +303,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(StringValue invoiceNumber) fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
@@ -295,7 +319,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(SearchKey searchKey) fetchOrderHistoryDetails,
   }) {
     return initialized(
-        customerCodeInfo, user, salesOrganisation, salesOrgConfig);
+        customerCodeInfo, user, salesOrganisation, salesOrgConfig, shipToInfo);
   }
 
   @override
@@ -305,7 +329,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
@@ -320,7 +345,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(SearchKey searchKey)? fetchOrderHistoryDetails,
   }) {
     return initialized?.call(
-        customerCodeInfo, user, salesOrganisation, salesOrgConfig);
+        customerCodeInfo, user, salesOrganisation, salesOrgConfig, shipToInfo);
   }
 
   @override
@@ -330,7 +355,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
@@ -346,8 +372,8 @@ class _$_Initialized implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(
-          customerCodeInfo, user, salesOrganisation, salesOrgConfig);
+      return initialized(customerCodeInfo, user, salesOrganisation,
+          salesOrgConfig, shipToInfo);
     }
     return orElse();
   }
@@ -407,12 +433,14 @@ abstract class _Initialized implements ViewByItemDetailsEvent {
       {required final CustomerCodeInfo customerCodeInfo,
       required final User user,
       required final SalesOrganisation salesOrganisation,
-      required final SalesOrganisationConfigs salesOrgConfig}) = _$_Initialized;
+      required final SalesOrganisationConfigs salesOrgConfig,
+      required final ShipToInfo shipToInfo}) = _$_Initialized;
 
   CustomerCodeInfo get customerCodeInfo;
   User get user;
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get salesOrgConfig;
+  ShipToInfo get shipToInfo;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
@@ -488,7 +516,8 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(StringValue invoiceNumber) fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
@@ -512,7 +541,8 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
@@ -536,7 +566,8 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
@@ -686,7 +717,8 @@ class _$_updateIsExpanded implements _updateIsExpanded {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(StringValue invoiceNumber) fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
@@ -710,7 +742,8 @@ class _$_updateIsExpanded implements _updateIsExpanded {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
@@ -734,7 +767,8 @@ class _$_updateIsExpanded implements _updateIsExpanded {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
@@ -932,7 +966,8 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(StringValue invoiceNumber) fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
@@ -957,7 +992,8 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
@@ -982,7 +1018,8 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
@@ -1139,7 +1176,8 @@ class _$_SearchOrderHistory implements _SearchOrderHistory {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(StringValue invoiceNumber) fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
@@ -1163,7 +1201,8 @@ class _$_SearchOrderHistory implements _SearchOrderHistory {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
@@ -1187,7 +1226,8 @@ class _$_SearchOrderHistory implements _SearchOrderHistory {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
@@ -1348,7 +1388,8 @@ class _$_FetchOrdersInvoiceData implements _FetchOrdersInvoiceData {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(StringValue invoiceNumber) fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
@@ -1372,7 +1413,8 @@ class _$_FetchOrdersInvoiceData implements _FetchOrdersInvoiceData {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
@@ -1396,7 +1438,8 @@ class _$_FetchOrdersInvoiceData implements _FetchOrdersInvoiceData {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
@@ -1550,7 +1593,8 @@ class _$_FetchOrderHistoryDetails implements _FetchOrderHistoryDetails {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(StringValue invoiceNumber) fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
@@ -1574,7 +1618,8 @@ class _$_FetchOrderHistoryDetails implements _FetchOrderHistoryDetails {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
@@ -1598,7 +1643,8 @@ class _$_FetchOrderHistoryDetails implements _FetchOrderHistoryDetails {
             CustomerCodeInfo customerCodeInfo,
             User user,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(StringValue invoiceNumber)? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
@@ -1695,6 +1741,7 @@ mixin _$ViewByItemDetailsState {
   bool get isExpanded => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByItemDetailsStateCopyWith<ViewByItemDetailsState> get copyWith =>
@@ -1718,7 +1765,8 @@ abstract class $ViewByItemDetailsStateCopyWith<$Res> {
       bool isLoading,
       bool isDetailsLoading,
       bool isExpanded,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      ShipToInfo shipToInfo});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $UserCopyWith<$Res> get user;
@@ -1726,6 +1774,7 @@ abstract class $ViewByItemDetailsStateCopyWith<$Res> {
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
   $OrderHistoryCopyWith<$Res> get orderHistory;
   $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -1753,6 +1802,7 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
     Object? isDetailsLoading = null,
     Object? isExpanded = null,
     Object? failureOrSuccessOption = null,
+    Object? shipToInfo = null,
   }) {
     return _then(_value.copyWith(
       customerCodeInfo: null == customerCodeInfo
@@ -1799,6 +1849,10 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ) as $Val);
   }
 
@@ -1850,6 +1904,14 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
       return _then(_value.copyWith(orderHistoryItem: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1871,7 +1933,8 @@ abstract class _$$_ViewByItemDetailsStateCopyWith<$Res>
       bool isLoading,
       bool isDetailsLoading,
       bool isExpanded,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      ShipToInfo shipToInfo});
 
   @override
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -1885,6 +1948,8 @@ abstract class _$$_ViewByItemDetailsStateCopyWith<$Res>
   $OrderHistoryCopyWith<$Res> get orderHistory;
   @override
   $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -1910,6 +1975,7 @@ class __$$_ViewByItemDetailsStateCopyWithImpl<$Res>
     Object? isDetailsLoading = null,
     Object? isExpanded = null,
     Object? failureOrSuccessOption = null,
+    Object? shipToInfo = null,
   }) {
     return _then(_$_ViewByItemDetailsState(
       customerCodeInfo: null == customerCodeInfo
@@ -1956,6 +2022,10 @@ class __$$_ViewByItemDetailsStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ));
   }
 }
@@ -1974,7 +2044,8 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
       required this.isLoading,
       required this.isDetailsLoading,
       required this.isExpanded,
-      required this.failureOrSuccessOption})
+      required this.failureOrSuccessOption,
+      required this.shipToInfo})
       : _orderHistoryStatuses = orderHistoryStatuses,
         super._();
 
@@ -2007,10 +2078,12 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
   final bool isExpanded;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
+  @override
+  final ShipToInfo shipToInfo;
 
   @override
   String toString() {
-    return 'ViewByItemDetailsState(customerCodeInfo: $customerCodeInfo, user: $user, salesOrganisation: $salesOrganisation, salesOrgConfig: $salesOrgConfig, orderHistory: $orderHistory, orderHistoryItem: $orderHistoryItem, orderHistoryStatuses: $orderHistoryStatuses, isLoading: $isLoading, isDetailsLoading: $isDetailsLoading, isExpanded: $isExpanded, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByItemDetailsState(customerCodeInfo: $customerCodeInfo, user: $user, salesOrganisation: $salesOrganisation, salesOrgConfig: $salesOrgConfig, orderHistory: $orderHistory, orderHistoryItem: $orderHistoryItem, orderHistoryStatuses: $orderHistoryStatuses, isLoading: $isLoading, isDetailsLoading: $isDetailsLoading, isExpanded: $isExpanded, failureOrSuccessOption: $failureOrSuccessOption, shipToInfo: $shipToInfo)';
   }
 
   @override
@@ -2038,7 +2111,9 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
             (identical(other.isExpanded, isExpanded) ||
                 other.isExpanded == isExpanded) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
-                other.failureOrSuccessOption == failureOrSuccessOption));
+                other.failureOrSuccessOption == failureOrSuccessOption) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
   }
 
   @override
@@ -2054,7 +2129,8 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
       isLoading,
       isDetailsLoading,
       isExpanded,
-      failureOrSuccessOption);
+      failureOrSuccessOption,
+      shipToInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -2076,8 +2152,8 @@ abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
       required final bool isLoading,
       required final bool isDetailsLoading,
       required final bool isExpanded,
-      required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_ViewByItemDetailsState;
+      required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      required final ShipToInfo shipToInfo}) = _$_ViewByItemDetailsState;
   const _ViewByItemDetailsState._() : super._();
 
   @override
@@ -2102,6 +2178,8 @@ abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
   bool get isExpanded;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
+  @override
+  ShipToInfo get shipToInfo;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByItemDetailsStateCopyWith<_$_ViewByItemDetailsState> get copyWith =>

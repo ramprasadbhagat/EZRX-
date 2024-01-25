@@ -138,8 +138,6 @@ class OrderRepository implements IOrderRepository {
     required List<PriceAggregate> cartProducts,
     required ShipToInfo shipToInfo,
   }) async {
-    const apiRetryCounter = 15;
-
     if (config.appFlavor == Flavor.mock) {
       try {
         final result =
@@ -150,53 +148,44 @@ class OrderRepository implements IOrderRepository {
         return Left(FailureHandler.handleFailure(e));
       }
     }
-    for (var i = 1; i <= apiRetryCounter; i++) {
-      await Future.delayed(const Duration(seconds: 2));
 
-      try {
-        final orderHistoryDetails =
-            await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-          searchKey: orderResponse.salesDocument,
-          language: user.preferredLanguage.languageCode,
-          soldTo: customerCodeInfo.customerCodeSoldTo,
-          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-          shipTo: shipToInfo.shipToCustomerCode,
-        );
+    try {
+      final orderHistoryDetails =
+          await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
+        searchKey: orderResponse.salesDocument,
+        language: user.preferredLanguage.languageCode,
+        soldTo: customerCodeInfo.customerCodeSoldTo,
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        shipTo: shipToInfo.shipToCustomerCode,
+      );
 
-        final orderHistoryDetailsWithMaterialInfo =
-            orderHistoryDetails.copyWith(
-          orderHistoryDetailsOrderItem:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.map(
-            (e) {
-              final priceAggregate = cartProducts.firstWhere(
-                (element) {
-                  return element.getMaterialNumber ==
-                      MaterialNumber(e.parentId);
-                },
-                orElse: () => PriceAggregate.empty(),
-              );
+      final orderHistoryDetailsWithMaterialInfo = orderHistoryDetails.copyWith(
+        orderHistoryDetailsOrderItem:
+            orderHistoryDetails.orderHistoryDetailsOrderItem.map(
+          (e) {
+            final priceAggregate = cartProducts.firstWhere(
+              (element) {
+                return element.getMaterialNumber == MaterialNumber(e.parentId);
+              },
+              orElse: () => PriceAggregate.empty(),
+            );
 
-              return e.copyWith(
-                material: MaterialInfo.empty().copyWith(
-                  materialNumber: priceAggregate.getMaterialNumber,
-                  bundle: priceAggregate.bundle,
-                ),
-              );
-            },
-          ).toList(),
-        );
+            return e.copyWith(
+              material: MaterialInfo.empty().copyWith(
+                materialNumber: priceAggregate.getMaterialNumber,
+                bundle: priceAggregate.bundle,
+              ),
+            );
+          },
+        ).toList(),
+      );
 
-        return Right(orderHistoryDetailsWithMaterialInfo);
-      } catch (e) {
-        if (i == apiRetryCounter) {
-          return Left(
-            FailureHandler.handleFailure(e),
-          );
-        }
-      }
+      return Right(orderHistoryDetailsWithMaterialInfo);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
     }
-
-    return Right(OrderHistoryDetails.empty());
   }
 
   @override

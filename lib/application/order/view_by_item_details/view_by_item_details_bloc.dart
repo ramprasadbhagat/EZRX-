@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -44,6 +45,7 @@ class ViewByItemDetailsBloc
           salesOrgConfig: e.salesOrgConfig,
           salesOrganisation: e.salesOrganisation,
           user: e.user,
+          shipToInfo: e.shipToInfo,
         ),
       ),
       searchOrderHistory: (e) async {
@@ -63,6 +65,7 @@ class ViewByItemDetailsBloc
           user: state.user,
           searchKey: e.searchKey,
           salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
         );
 
         failureOrSuccess.fold(

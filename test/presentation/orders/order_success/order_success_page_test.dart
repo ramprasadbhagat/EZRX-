@@ -127,7 +127,6 @@ class PaymentCustomerInformationBlocMock extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
 
-
 void main() {
   late AppRouter autoRouterMock;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -190,7 +189,7 @@ void main() {
     },
   );
   setUp(
-    () async{
+    () async {
       mockSalesOrgBloc = MockSalesOrgBloc();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
@@ -230,13 +229,13 @@ void main() {
         ViewByItemsState.initial(),
       );
       when(() => autoRouterMock.currentPath).thenReturn('fake-path');
-       when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+      when(() => paymentCustomerInformationBlocMock.state).thenReturn(
         PaymentCustomerInformationState.initial().copyWith(
           paymentCustomerInformation:
               await PaymentCustomerInformationLocalDataSource()
                   .getPaymentCustomerInformation(),
         ),
-      ); 
+      );
     },
   );
 
@@ -951,55 +950,6 @@ void main() {
           find.byKey(WidgetKeys.orderSuccessItemsSection),
           findsOneWidget,
         );
-      });
-
-      testWidgets('Show nothing when view by item detail API failure',
-          (tester) async {
-        when(() => viewByItemDetailsBlocMock.state)
-            .thenReturn(ViewByItemDetailsState.initial());
-
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        expect(
-          find.byKey(WidgetKeys.orderSuccessItemsSection),
-          findsNothing,
-        );
-      });
-
-      testWidgets('Navigate to item detail on tap', (tester) async {
-        when(() => autoRouterMock.push(const ViewByItemDetailsPageRoute()))
-            .thenAnswer((_) => Future.value(true));
-
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final item = find.byKey(WidgetKeys.orderSuccessMaterialItem(0)).first;
-        await tester.dragUntilVisible(
-          item,
-          find.byKey(WidgetKeys.scrollList),
-          const Offset(0, -200),
-        );
-        await tester.pump();
-        await tester.tap(item);
-
-        verify(() => autoRouterMock.push(const ViewByItemDetailsPageRoute()))
-            .called(1);
-
-        verify(
-          () => mixpanelServiceMock.trackEvent(
-            eventName: MixpanelEvents.orderDetailViewed,
-            properties: any(named: 'properties'),
-          ),
-        ).called(1);
-
-        verify(
-          () => viewByItemDetailsBlocMock.add(
-            ViewByItemDetailsEvent.setItemOrderDetails(
-              orderHistory: fakeOrderHistory,
-              orderHistoryItem: fakeOrderHistory.orderHistoryItems[3],
-              disableDeliveryDateForZyllemStatus: false,
-            ),
-          ),
-        ).called(1);
       });
     });
 

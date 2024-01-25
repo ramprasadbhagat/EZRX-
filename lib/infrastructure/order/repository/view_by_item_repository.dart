@@ -134,6 +134,7 @@ class ViewByItemRepository implements IViewByItemRepository {
     required User user,
     required SearchKey searchKey,
     required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -152,6 +153,8 @@ class ViewByItemRepository implements IViewByItemRepository {
         customerCodeSoldTo: soldTo.customerCodeSoldTo,
         language: user.preferredLanguage.languageCode,
         searchKey: searchKey.getOrCrash(),
+        shipToCustomerCode: shipToInfo.shipToCustomerCode,
+        pageSize: 24,
       );
       final orderHistoryItemList =
           await viewByItemRemoteDataSource.getOrderHistory(

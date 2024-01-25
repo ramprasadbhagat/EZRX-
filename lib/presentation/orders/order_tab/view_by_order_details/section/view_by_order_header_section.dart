@@ -46,7 +46,9 @@ class OrderHeaderSection extends StatelessWidget {
                         children: [
                           if (orderDetails.processingStatus.isInQueue)
                             const WidgetSpan(
-                              child: QueueNumberInfoIcon(),
+                              child: QueueNumberInfoIcon(
+                                iconColor: ZPColors.attachmentColor,
+                              ),
                             ),
                         ],
                       ),

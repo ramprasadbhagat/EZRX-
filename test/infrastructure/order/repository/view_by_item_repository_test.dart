@@ -379,6 +379,7 @@ void main() async {
           soldTo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           searchKey: fakeSearchKey,
+          shipToInfo: fakeShipToInfo,
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -394,6 +395,7 @@ void main() async {
           soldTo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           searchKey: fakeSearchKey,
+          shipToInfo: fakeShipToInfo,
         );
 
         expect(result, Right(fakeOrderHistory));
@@ -406,6 +408,8 @@ void main() async {
           customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
           language: fakeClientUser.preferredLanguage.languageCode,
           searchKey: fakeSearchKey.getOrCrash(),
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          pageSize: 24,
         );
         when(
           () => orderHistoryRemoteDataSource.getOrderHistory(
@@ -419,6 +423,7 @@ void main() async {
           soldTo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           searchKey: fakeSearchKey,
+          shipToInfo: fakeShipToInfo,
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -431,6 +436,8 @@ void main() async {
           customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
           language: fakeClientUser.preferredLanguage.languageCode,
           searchKey: fakeSearchKey.getOrCrash(),
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          pageSize: 24,
         );
         when(
           () => orderHistoryRemoteDataSource.getOrderHistory(
@@ -444,6 +451,7 @@ void main() async {
           soldTo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           searchKey: fakeSearchKey,
+          shipToInfo: fakeShipToInfo,
         );
 
         expect(result, Right(fakeOrderHistory));

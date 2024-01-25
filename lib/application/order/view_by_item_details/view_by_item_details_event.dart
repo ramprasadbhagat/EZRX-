@@ -7,6 +7,7 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
     required User user,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrgConfig,
+    required ShipToInfo shipToInfo,
   }) = _Initialized;
 
   const factory ViewByItemDetailsEvent.fetchZyllemStatus({

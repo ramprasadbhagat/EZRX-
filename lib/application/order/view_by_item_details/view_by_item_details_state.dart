@@ -16,6 +16,7 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
     required bool isDetailsLoading,
     required bool isExpanded,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+    required ShipToInfo shipToInfo,
   }) = _ViewByItemDetailsState;
 
   factory ViewByItemDetailsState.initial() => ViewByItemDetailsState(
@@ -30,6 +31,7 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
         isLoading: false,
         isDetailsLoading: false,
         isExpanded: false,
+        shipToInfo: ShipToInfo.empty(),
       );
 
   List<PoDocuments> get poDocumentsList => isExpanded

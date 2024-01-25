@@ -36,6 +36,7 @@ abstract class IViewByItemRepository {
     required User user,
     required SearchKey searchKey,
     required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
   });
 
   Future<Either<ApiFailure, Map<StringValue, InvoiceData>>>

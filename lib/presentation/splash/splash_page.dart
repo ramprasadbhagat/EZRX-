@@ -1085,6 +1085,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               customerCodeInfo: state.customerCodeInfo,
               salesOrgConfig: salesOrgState.configs,
               user: user,
+              shipToInfo: state.shipToInfo,
             ),
           );
       context.read<PaymentSummaryDetailsBloc>().add(
