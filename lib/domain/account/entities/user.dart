@@ -124,10 +124,10 @@ class User with _$User {
         'KH',
         'VN',
         'MM',
+        'TH',
         //TODO: Cover in another ticket
         // 'TW',
         // 'KR',
-        // 'TH',
       ];
 
   String get tncFile {
