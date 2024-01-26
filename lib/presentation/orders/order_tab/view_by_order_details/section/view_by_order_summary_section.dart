@@ -63,7 +63,10 @@ class OrderSummarySection extends StatelessWidget {
               value: orderDetails.deliveryFee,
             ),
             Text(
-              '${context.tr('Applies to orders less than')} ${StringUtils.displayPrice(salesOrgConfigs, eligibilityState.salesOrg.smallOrderThreshold)}',
+              '${context.tr('Applies to orders less than')} ${StringUtils.formatPrice(
+                salesOrgConfigs,
+                eligibilityState.salesOrg.smallOrderThreshold,
+              )}',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),

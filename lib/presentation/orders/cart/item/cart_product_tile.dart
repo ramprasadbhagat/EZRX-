@@ -486,64 +486,72 @@ class _BonusPriceCounterSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           if (isBonusOverrideEnable)
-            TextButton.icon(
-              key: WidgetKeys.bonusSampleItemButtonKey,
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  isDismissible: false,
-                  constraints: BoxConstraints.loose(
-                    Size(
-                      MediaQuery.of(context).size.width,
-                      MediaQuery.of(context).size.height * 0.80,
-                    ),
-                  ),
-                  builder: (_) {
-                    return BonusItemsSheet(cartProduct: cartItem);
+            Flexible(
+              child: FittedBox(
+                child: TextButton.icon(
+                  key: WidgetKeys.bonusSampleItemButtonKey,
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      isDismissible: false,
+                      constraints: BoxConstraints.loose(
+                        Size(
+                          MediaQuery.of(context).size.width,
+                          MediaQuery.of(context).size.height * 0.80,
+                        ),
+                      ),
+                      builder: (_) {
+                        return BonusItemsSheet(cartProduct: cartItem);
+                      },
+                    );
                   },
-                );
-              },
-              icon: const Icon(
-                Icons.add_circle_outline,
-                color: ZPColors.extraDarkGreen,
-              ),
-              label: Text(
-                context.tr('Bonus/sample item'),
-                style: Theme.of(context)
-                    .textTheme
-                    .labelSmall
-                    ?.copyWith(color: ZPColors.extraDarkGreen),
+                  icon: const Icon(
+                    Icons.add_circle_outline,
+                    color: ZPColors.extraDarkGreen,
+                  ),
+                  label: Text(
+                    context.tr('Bonus/sample item'),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelSmall
+                        ?.copyWith(color: ZPColors.extraDarkGreen),
+                  ),
+                ),
               ),
             ),
           if (isCounterOfferEnable)
-            TextButton.icon(
-              key: WidgetKeys.counterOfferPriceButtonKey,
-              onPressed: () {
-                context
-                    .read<PriceOverrideBloc>()
-                    .add(PriceOverrideEvent.setProduct(item: cartItem));
-                showModalBottomSheet(
-                  isDismissible: false,
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (_) {
-                    return RequestCounterOfferBottomSheet(
-                      cartItem: cartItem,
+            Flexible(
+              child: FittedBox(
+                child: TextButton.icon(
+                  key: WidgetKeys.counterOfferPriceButtonKey,
+                  onPressed: () {
+                    context
+                        .read<PriceOverrideBloc>()
+                        .add(PriceOverrideEvent.setProduct(item: cartItem));
+                    showModalBottomSheet(
+                      isDismissible: false,
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (_) {
+                        return RequestCounterOfferBottomSheet(
+                          cartItem: cartItem,
+                        );
+                      },
                     );
                   },
-                );
-              },
-              icon: const Icon(
-                Icons.swap_horiz_sharp,
-                color: ZPColors.extraDarkGreen,
-              ),
-              label: Text(
-                context.tr('Counter offer'),
-                style: Theme.of(context)
-                    .textTheme
-                    .labelSmall
-                    ?.copyWith(color: ZPColors.extraDarkGreen),
+                  icon: const Icon(
+                    Icons.swap_horiz_sharp,
+                    color: ZPColors.extraDarkGreen,
+                  ),
+                  label: Text(
+                    context.tr('Counter offer'),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelSmall
+                        ?.copyWith(color: ZPColors.extraDarkGreen),
+                  ),
+                ),
               ),
             ),
         ],

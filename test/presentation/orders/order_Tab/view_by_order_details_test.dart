@@ -260,7 +260,7 @@ void main() {
 
       when(() => paymentCustomerInformationBlocMock.state).thenReturn(
         PaymentCustomerInformationState.initial(),
-      );    
+      );
 
       when(() => mockViewByItemDetailsBloc.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
@@ -1543,7 +1543,7 @@ void main() {
         );
         expect(
           find.textContaining(
-            'Applies to orders less than ${StringUtils.displayPrice(fakeIDSalesOrgConfigs, 300000)}',
+            'Applies to orders less than ${StringUtils.formatPrice(fakeIDSalesOrgConfigs, 300000)}',
           ),
           findsOneWidget,
         );
