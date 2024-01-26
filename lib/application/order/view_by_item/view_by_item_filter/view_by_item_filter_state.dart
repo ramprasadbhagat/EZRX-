@@ -20,6 +20,7 @@ class ViewByItemFilterState with _$ViewByItemFilterState {
           StatusType('Delivered'),
           StatusType('Cancelled'),
           StatusType('Failed'),
+          StatusType('Order Creating'),
         ],
       );
 

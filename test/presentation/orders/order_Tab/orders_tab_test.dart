@@ -219,11 +219,12 @@ void main() {
     });
     testWidgets('Show view by item filter when tap filter icon',
         (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       await tester.pumpWidget(testWidget(const OrdersTab()));
       await tester.pump();
       expect(find.byType(ViewByItemsPage), findsOneWidget);
       await tester.tap(find.byKey(WidgetKeys.ordersTabFilterButtonKey));
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(find.byType(ViewByItemFilterSheet), findsOneWidget);
     });
   });
@@ -400,6 +401,7 @@ void main() {
     });
 
     testWidgets('reset filter by items', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       final fakeSearchKey = SearchKey('test');
       when(() => viewByItemsBlocMock.state).thenReturn(
         ViewByItemsState.initial().copyWith(
@@ -470,6 +472,7 @@ void main() {
       );
     });
     testWidgets('apply filter view by items filter', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       final fakeFilter = ViewByItemFilter.empty()
           .copyWith(orderStatusList: [StatusType('test')]);
       when(() => viewByItemFilterBlocMock.state).thenReturn(
@@ -555,6 +558,7 @@ void main() {
     });
 
     testWidgets('apply from/to date view by items filter', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       final fakeStartDate = DateTime.now().subtract(const Duration(days: 2));
       final fakeEndDate = DateTime.now().subtract(const Duration(days: 1));
       final fromDateString =
@@ -606,6 +610,7 @@ void main() {
     });
 
     testWidgets('apply status view by items filter', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       await tester.pumpWidget(testWidget(const ViewByItemFilterSheet()));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Order Created'));
@@ -623,6 +628,7 @@ void main() {
 
     testWidgets('should rebuild the filter date range when order date changed',
         (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       final fakeStartDate = DateTime.now().subtract(const Duration(days: 2));
       final fakeEndDate = DateTime.now().subtract(const Duration(days: 1));
       whenListen(

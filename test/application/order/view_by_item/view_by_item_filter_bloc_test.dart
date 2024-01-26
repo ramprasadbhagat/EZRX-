@@ -30,6 +30,7 @@ void main() {
     StatusType('Delivered'),
     StatusType('Cancelled'),
     StatusType('Failed'),
+    StatusType('Order Creating'),
   ];
   group(
     'Order View By Item Filter Bloc',

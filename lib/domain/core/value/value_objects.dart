@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
+import 'package:ezrxmobile/domain/order/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 
 @immutable
@@ -306,6 +307,8 @@ class StatusType extends ValueObject<String> {
 
   Color get displayStatusTextColor =>
       getStatusTextColor(value.getOrElse(() => ''));
+
+  String get statusLabel => getOrderSAPStatus(value.getOrElse(() => ''));
 
   const StatusType._(this.value);
 }
