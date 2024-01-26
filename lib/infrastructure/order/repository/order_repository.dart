@@ -325,9 +325,9 @@ String getOrderType({
     if (salesOrg.isSg && customerCodeInfo.customerAttr7.isZEV) {
       return 'ZPFC';
     } else if (salesOrg.isPH && customerCodeInfo.customerGrp4.isVP) {
-      return 'ZPFV';
-    } else if (salesOrg.isPH && customerCodeInfo.customerGrp4.isVR) {
       return 'ZPVF';
+    } else if (salesOrg.isPH && customerCodeInfo.customerGrp4.isVR) {
+      return 'ZPFV';
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,6 @@ import 'package:ezrxmobile/domain/order/entities/order_encryption.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
@@ -39,7 +39,6 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
-import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
@@ -48,6 +47,7 @@ import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
@@ -94,6 +94,7 @@ void main() {
   late ViewByOrderDetailsLocalDataSource viewByOrderDetailsLocalDataSource;
   late ViewByOrderDetailsRemoteDataSource viewByOrderDetailsRemoteDataSource;
   const fakeSecretKey = 'fake-key';
+  final fakeError = MockException(message: 'fake-exception');
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -265,15 +266,7 @@ void main() {
     );
 
     when(() => orderLocalDataSource.submitOrder()).thenAnswer(
-      (invocation) async => SubmitOrderResponse.empty().copyWith(
-        salesDocument: 'fake-sales-document',
-        messages: [
-          SubmitOrderResponseMessage.empty().copyWith(
-            message: 'EZRX-b628ca8',
-            type: 'S',
-          ),
-        ],
-      ),
+      (invocation) async => submitOrderResponseMock,
     );
 
     final result = await orderRepository.submitOrder(
@@ -292,8 +285,8 @@ void main() {
       smallOrderFee: 12500.0,
     );
     expect(
-      result.isRight(),
-      true,
+      result,
+      Right(submitOrderResponseMock),
     );
     expect(submitOrder.blockOrder, false);
   });
@@ -365,15 +358,7 @@ void main() {
     );
 
     when(() => orderLocalDataSource.submitOrder()).thenAnswer(
-      (invocation) async => SubmitOrderResponse.empty().copyWith(
-        salesDocument: 'fake-sales-document',
-        messages: [
-          SubmitOrderResponseMessage.empty().copyWith(
-            message: 'EZRX-b628ca8',
-            type: 'S',
-          ),
-        ],
-      ),
+      (invocation) async => submitOrderResponseMock,
     );
 
     final result = await orderRepository.submitOrder(
@@ -392,8 +377,8 @@ void main() {
       smallOrderFee: 12500.0,
     );
     expect(
-      result.isRight(),
-      true,
+      result,
+      Right(submitOrderResponseMock),
     );
     expect(submitOrder.blockOrder, false);
   });
@@ -427,8 +412,7 @@ void main() {
           cartMaterial.any((item) => item.checkSalesCutOff),
     );
 
-    when(() => orderLocalDataSource.submitOrder())
-        .thenThrow((invocation) async => MockException());
+    when(() => orderLocalDataSource.submitOrder()).thenThrow(fakeError);
 
     final result = await orderRepository.submitOrder(
       shipToInfo: ShipToInfo.empty(),
@@ -439,8 +423,7 @@ void main() {
       cartProducts: cartMaterial,
       grandTotal: 100.0,
       customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
-      salesOrganisation:
-          SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+      salesOrganisation: fakeSGSalesOrganisation,
       data:
           DeliveryInfoData.empty().copyWith(paymentTerm: PaymentTerm('A004-')),
       orderDocumentType: OrderDocumentType.empty()
@@ -451,8 +434,8 @@ void main() {
       smallOrderFee: 12500.0,
     );
     expect(
-      result.isLeft(),
-      true,
+      result,
+      Left(FailureHandler.handleFailure(fakeError)),
     );
     expect(submitOrder.blockOrder, false);
   });
@@ -461,9 +444,7 @@ void main() {
     test('get submit order successfully locally fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => orderLocalDataSource.submitOrder()).thenThrow(
-        (invocation) async => MockException(),
-      );
+      when(() => orderLocalDataSource.submitOrder()).thenThrow(fakeError);
 
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
@@ -481,17 +462,15 @@ void main() {
         smallOrderFee: 12500.0,
       );
       expect(
-        result.isLeft(),
-        true,
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
       );
     });
 
     test('get submit order successfully locally bonus item success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => orderLocalDataSource.submitOrder()).thenThrow(
-        (invocation) async => submitOrderResponseMock,
-      );
+      when(() => orderLocalDataSource.submitOrder()).thenThrow(fakeError);
 
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
@@ -522,17 +501,15 @@ void main() {
         smallOrderFee: 12500.0,
       );
       expect(
-        result.isLeft(),
-        true,
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
       );
     });
 
     test('get submit order successfully locally fail for bundle', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => orderLocalDataSource.submitOrder()).thenThrow(
-        (invocation) async => MockException(),
-      );
+      when(() => orderLocalDataSource.submitOrder()).thenThrow(fakeError);
 
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
@@ -561,8 +538,8 @@ void main() {
         smallOrderFee: 12500.0,
       );
       expect(
-        result.isLeft(),
-        true,
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
       );
     });
 
@@ -602,12 +579,63 @@ void main() {
         smallOrderFee: 12500.0,
       );
       expect(
-        result.isRight(),
-        true,
+        result,
+        Right(submitOrderResponseMock),
+      );
+    });
+
+    test('get submit order successfully Remote fail ZPFC order', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      final focMaterial = cartMaterials
+          .map(
+            (e) => e.copyWith(
+              materialInfo: e.materialInfo.copyWith(isFOCMaterial: true),
+            ),
+          )
+          .toList();
+
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+      when(
+        () => encryption.encryptionData(
+          data: SubmitOrderDto.fromDomain(
+            submitOrderMock.copyWith(
+              orderType: 'ZPFC',
+              customer: submitOrderMock.customer.copyWith(
+                salesOrganisation: fakeSGSalesOrganisation.salesOrg.getValue(),
+              ),
+            ),
+          ).toJson()
+            ..addAll({'orderType': 'ZPFC'}),
+          secretKey: fakeSecretKey,
+        ),
+      ).thenReturn(orderEncryptionMock);
+      when(
+        () => orderRemoteDataSource.submitOrder(
+          orderEncryption: orderEncryptionMock,
+        ),
+      ).thenThrow(fakeError);
+
+      final result = await orderRepository.submitOrder(
+        shipToInfo: mockShipToInfo,
+        user: fakeClientUser,
+        cartProducts: focMaterial,
+        grandTotal: 100.0,
+        customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          customerAttr7: CustomerAttr7('ZEV'),
+        ),
+        salesOrganisation: fakeSGSalesOrganisation,
+        data: deliveryInfoData,
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPVF'), orderReason: ''),
+        configs: fakeSGSalesOrgConfigs,
+        orderValue: 100.0,
+        totalTax: 100,
+        smallOrderFee: 12500.0,
       );
       expect(
-        result.getOrElse(() => SubmitOrderResponse.empty()),
-        submitOrderResponseMock,
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
       );
     });
 
@@ -622,12 +650,18 @@ void main() {
           .toList();
 
       when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
-
       when(
         () => encryption.encryptionData(
           data: SubmitOrderDto.fromDomain(
-            submitOrderMock,
-          ).toJson(),
+            submitOrderMock.copyWith(
+              orderType: 'ZPVF',
+              customer: submitOrderMock.customer.copyWith(
+                division: 'mock_div',
+                salesOrganisation: fakePHSalesOrganisation.salesOrg.getValue(),
+              ),
+            ),
+          ).toJson()
+            ..addAll({'orderType': 'ZPVF'}),
           secretKey: fakeSecretKey,
         ),
       ).thenReturn(orderEncryptionMock);
@@ -635,9 +669,7 @@ void main() {
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
         ),
-      ).thenAnswer(
-        (invocation) async => submitOrderResponseMock,
-      );
+      ).thenThrow(fakeError);
 
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
@@ -645,14 +677,13 @@ void main() {
         cartProducts: focMaterial,
         grandTotal: 100.0,
         customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-          customerCodeSoldTo: '100000345',
-          customerAttr7: CustomerAttr7('ZEV'),
-          customerGrp4: CustomerGrp4('VR'),
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          customerGrp4: CustomerGrp4('VP'),
           status: Status('fake_status'),
           customerName: CustomerName.empty().copyWith(name1: 'cust1'),
           division: 'mock_div',
         ),
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakePHSalesOrganisation,
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPVF'), orderReason: ''),
@@ -662,8 +693,8 @@ void main() {
         smallOrderFee: 12500.0,
       );
       expect(
-        result.isLeft(),
-        true,
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
       );
     });
 
@@ -682,8 +713,14 @@ void main() {
       when(
         () => encryption.encryptionData(
           data: SubmitOrderDto.fromDomain(
-            submitOrderMock,
-          ).toJson(),
+            submitOrderMock.copyWith(
+              orderType: 'ZPFV',
+              customer: submitOrderMock.customer.copyWith(
+                salesOrganisation: fakePHSalesOrganisation.salesOrg.getValue(),
+              ),
+            ),
+          ).toJson()
+            ..addAll({'orderType': 'ZPFV'}),
           secretKey: fakeSecretKey,
         ),
       ).thenReturn(orderEncryptionMock);
@@ -691,7 +728,7 @@ void main() {
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
         ),
-      ).thenThrow(MockException);
+      ).thenThrow(fakeError);
 
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
@@ -699,9 +736,9 @@ void main() {
         cartProducts: focMaterial,
         grandTotal: 100.0,
         customerCodeInfo: fakeCustomerCodeInfo.copyWith(
-          customerGrp4: CustomerGrp4('VP'),
+          customerGrp4: CustomerGrp4('VR'),
         ),
-        salesOrganisation: fakeSalesOrganisation,
+        salesOrganisation: fakePHSalesOrganisation,
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPVF'), orderReason: ''),
@@ -711,8 +748,8 @@ void main() {
         smallOrderFee: 12500.0,
       );
       expect(
-        result.isLeft(),
-        true,
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
       );
     });
 
@@ -784,12 +821,8 @@ void main() {
         smallOrderFee: 12500.0,
       );
       expect(
-        result.isRight(),
-        true,
-      );
-      expect(
-        result.getOrElse(() => SubmitOrderResponse.empty()),
-        submitOrderResponseMock,
+        result,
+        Right(submitOrderResponseMock),
       );
     });
 
@@ -809,9 +842,7 @@ void main() {
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
         ),
-      ).thenThrow(
-        (invocation) async => MockException(message: 'fake-exception'),
-      );
+      ).thenThrow(fakeError);
 
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
@@ -829,8 +860,8 @@ void main() {
         smallOrderFee: 12500.0,
       );
       expect(
-        result.isLeft(),
-        true,
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
       );
     });
 
@@ -946,12 +977,8 @@ void main() {
         configs: fakePHSalesOrgConfigs,
       );
       expect(
-        result.isRight(),
-        true,
-      );
-      expect(
-        result.getOrElse(() => SubmitOrderResponse.empty()),
-        submitOrderResponseMock,
+        result,
+        Right(submitOrderResponseMock),
       );
     });
 
@@ -1073,12 +1100,8 @@ void main() {
         shipToInfo: fakeShipToInfo,
       );
       expect(
-        result.isRight(),
-        true,
-      );
-      expect(
-        result.getOrElse(() => OrderHistoryDetails.empty()),
-        orderHistoryDetailsMock,
+        result,
+        Right(orderHistoryDetailsMock),
       );
     });
 
@@ -1086,9 +1109,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
       when(() => viewByOrderDetailsLocalDataSource.getOrderHistoryDetails())
-          .thenThrow(
-        (invocation) async => MockException(),
-      );
+          .thenThrow(fakeError);
 
       final result = await orderRepository.getOrderConfirmationDetail(
         user: fakeClientUser,
@@ -1099,8 +1120,8 @@ void main() {
         shipToInfo: fakeShipToInfo,
       );
       expect(
-        result.isLeft(),
-        true,
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
       );
     });
 
@@ -1128,12 +1149,8 @@ void main() {
         shipToInfo: fakeShipToInfo,
       );
       expect(
-        result.isRight(),
-        true,
-      );
-      expect(
-        result.getOrElse(() => OrderHistoryDetails.empty()),
-        orderHistoryDetailsMock,
+        result,
+        Right(orderHistoryDetailsMock),
       );
     });
 
@@ -1150,9 +1167,7 @@ void main() {
             soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipTo: fakeShipToInfo.shipToCustomerCode,
           ),
-        ).thenThrow(
-          (invocation) async => MockException(),
-        );
+        ).thenThrow(fakeError);
 
         final result = await orderRepository.getOrderConfirmationDetail(
           user: fakeClientUser,
@@ -1163,8 +1178,8 @@ void main() {
           shipToInfo: fakeShipToInfo,
         );
         expect(
-          result.isLeft(),
-          true,
+          result,
+          Left(FailureHandler.handleFailure(fakeError)),
         );
       },
       timeout: const Timeout(
@@ -1189,21 +1204,16 @@ void main() {
         orderHistoryDetails: orderHistoryDetailsMock,
       );
       expect(
-        result.isRight(),
-        true,
-      );
-      expect(
-        result.getOrElse(() => <MaterialStockInfo>[]),
-        stockInfoListMock,
+        result,
+        Right(stockInfoListMock),
       );
     });
 
     test('get submit order getConfirmedOrderStockInfo locally fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => stockInfoLocalDataSource.getMaterialStockInfoList()).thenThrow(
-        (invocation) async => MockException(),
-      );
+      when(() => stockInfoLocalDataSource.getMaterialStockInfoList())
+          .thenThrow(fakeError);
 
       final result = await orderRepository.getConfirmedOrderStockInfo(
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -1211,8 +1221,8 @@ void main() {
         orderHistoryDetails: orderHistoryDetailsMock,
       );
       expect(
-        result.isLeft(),
-        true,
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
       );
     });
 
@@ -1238,12 +1248,8 @@ void main() {
         orderHistoryDetails: orderHistoryDetailsMock,
       );
       expect(
-        result.isRight(),
-        true,
-      );
-      expect(
-        result.getOrElse(() => <MaterialStockInfo>[]),
-        stockInfoListMock,
+        result,
+        Right(stockInfoListMock),
       );
     });
 
@@ -1258,9 +1264,7 @@ void main() {
           salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         ),
-      ).thenThrow(
-        (invocation) async => MockException(),
-      );
+      ).thenThrow(fakeError);
 
       final result = await orderRepository.getConfirmedOrderStockInfo(
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -1268,8 +1272,8 @@ void main() {
         orderHistoryDetails: orderHistoryDetailsMock,
       );
       expect(
-        result.isLeft(),
-        true,
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
       );
     });
   });
