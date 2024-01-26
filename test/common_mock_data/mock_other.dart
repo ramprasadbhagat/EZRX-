@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
@@ -18,3 +19,5 @@ class ChatBotServiceMock extends Mock implements ChatBotService {}
 class ConfigMock extends Mock implements Config {}
 
 class FileMock extends Mock implements File {}
+
+class DeviceStorageMock extends Mock implements DeviceStorage {}
