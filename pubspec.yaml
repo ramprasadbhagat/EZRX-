@@ -161,6 +161,7 @@ flutter:
     - assets/html/vn/
     - assets/html/th/
     - assets/html/mm/
+    - assets/html/tw/
     - assets/svg/
     - assets/svg/flags/
 
