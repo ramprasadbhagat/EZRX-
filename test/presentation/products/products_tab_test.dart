@@ -41,6 +41,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
@@ -686,16 +687,16 @@ void main() {
       testWidgets('Test the Covid filter button', (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakePHSalesOrganisation,
+            salesOrgConfigs: fakePHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfoForCovid,
-            user: fakeRootAdminUser,
+            user: fakeClientAdmin,
           ),
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
-            configs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakePHSalesOrganisation,
+            configs: fakePHSalesOrgConfigs,
           ),
         );
         when(() => customerCodeBlocMock.state).thenReturn(
@@ -706,7 +707,7 @@ void main() {
         );
         when(() => userBlocMock.state).thenReturn(
           UserState.initial().copyWith(
-            user: fakeClientUser,
+            user: fakeClientAdmin,
           ),
         );
 
@@ -721,15 +722,15 @@ void main() {
         verify(
           () => materialListBlocMock.add(
             MaterialListEvent.fetch(
-              salesOrganisation: fakeSalesOrganisation,
-              configs: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakePHSalesOrganisation,
+              configs: fakePHSalesOrgConfigs,
               customerCodeInfo: fakeCustomerCodeInfoForCovid,
               shipToInfo: fakeShipToInfo,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
                 hasAccessToCovidMaterial: true,
                 isCovidSelected: true,
               ),
-              user: fakeClientUser,
+              user: fakeClientAdmin,
             ),
           ),
         ).called(1);
@@ -747,10 +748,10 @@ void main() {
           (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakePHSalesOrganisation,
+            salesOrgConfigs: fakePHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfoForCovid,
-            user: fakeRootAdminUser,
+            user: fakeClientAdmin,
           ),
         );
         when(() => materialListBlocMock.state).thenReturn(

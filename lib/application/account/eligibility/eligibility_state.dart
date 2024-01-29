@@ -53,17 +53,17 @@ class EligibilityState with _$EligibilityState {
     return user.role.type.isCustomer && !user.disablePaymentAccess;
   }
 
-  bool get isCovidMaterialEnable {
-    // 1. SG Covid tab
-    return (customerCodeInfo.customerAttr7.isZEV &&
+  bool get canOrderCovidMaterial {
+    // 1. SG Covid
+    return (
             user.role.type.isCustomer &&
-            salesOrganisation.salesOrg.isSg) ||
-        // 2. Sample item
-        customerCodeInfo.customerGrp4.canOrderCovidMaterial ||
-        // 3. PH Covid tab
-        (!user.role.type.isSalesRepRole &&
-            customerCodeInfo.customerGrp4.canOrderCovidMaterial &&
-            salesOrganisation.salesOrg.isPH);
+            salesOrganisation.salesOrg.isSg &&
+            customerCodeInfo.customerAttr7.isZEV) ||
+
+        // 2. PH Covid
+        (user.role.type.isCustomer &&
+            salesOrganisation.salesOrg.isPH &&
+            customerCodeInfo.customerGrp4.canOrderCovidMaterial);
   }
 
   bool get isOrderTypeEnable {

@@ -63,7 +63,7 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                   },
                   title: 'Combo offers',
                 ),
-              if (context.read<EligibilityBloc>().state.isCovidMaterialEnable)
+              if (context.read<EligibilityBloc>().state.canOrderCovidMaterial)
                 _ListTileThemeWidget(
                   value: state.materialFilter.isCovidSelected,
                   onChanged: (value) {

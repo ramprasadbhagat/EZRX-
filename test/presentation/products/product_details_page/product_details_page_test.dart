@@ -1388,7 +1388,7 @@ void main() {
             salesOrganisation: fakePHSalesOrganisation,
             salesOrgConfigs: fakePHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfoForCovid,
-            user: fakeRootAdminUser,
+            user: fakeClientAdmin,
           ),
         );
         when(() => productDetailMockBloc.state).thenReturn(

@@ -18,7 +18,7 @@ class CovidLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return context.read<EligibilityBloc>().state.isCovidMaterialEnable &&
+    return context.read<EligibilityBloc>().state.canOrderCovidMaterial &&
             materialInfo.isFOCMaterial
         ? ProductTag.covidTag()
         : const SizedBox.shrink();

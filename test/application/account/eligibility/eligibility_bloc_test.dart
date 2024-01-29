@@ -507,22 +507,71 @@ void main() {
   );
 
   test(
-    'isCovidMaterialEnable',
+    'isCovidMaterialEnable for sg market',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
-        user: fakeUser.copyWith(
-          role: Role.empty().copyWith(
-            type: RoleType('client_user'),
-          ),
-        ),
-        salesOrganisation: SalesOrganisation.empty().copyWith(
-          salesOrg: SalesOrg('2601'),
-        ),
+        user: fakeClientAdmin,
+        salesOrganisation: fakeSaleOrg,
         customerCodeInfo:
             fakeCustomerInfo.copyWith(customerAttr7: CustomerAttr7('ZEV')),
       );
 
-      expect(eligibilityState.isCovidMaterialEnable, true);
+      expect(eligibilityState.canOrderCovidMaterial, true);
+    },
+  );
+
+  test(
+    'isCovidMaterialEnable for sg market for root admin',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeRootAdminUser,
+        salesOrganisation: fakeSaleOrg,
+        customerCodeInfo:
+            fakeCustomerInfo.copyWith(customerAttr7: CustomerAttr7('ZEV')),
+      );
+
+      expect(eligibilityState.canOrderCovidMaterial, false);
+    },
+  );
+  test(
+    'isCovidMaterialEnable for PH market for VR',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeClientAdmin,
+        salesOrganisation: fakePHSalesOrganisation,
+        customerCodeInfo:
+            fakeCustomerInfo.copyWith(customerGrp4: CustomerGrp4('VR')),
+      );
+
+      expect(eligibilityState.canOrderCovidMaterial, true);
+    },
+  );
+
+  test(
+    'isCovidMaterialEnable for PH market for VP',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeClientAdmin,
+        salesOrganisation: fakePHSalesOrganisation,
+        customerCodeInfo:
+            fakeCustomerInfo.copyWith(customerGrp4: CustomerGrp4('VP')),
+      );
+
+      expect(eligibilityState.canOrderCovidMaterial, true);
+    },
+  );
+
+  test(
+    'isCovidMaterialEnable for PH market',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeRootAdminUser,
+        salesOrganisation: fakePHSalesOrganisation,
+        customerCodeInfo:
+            fakeCustomerInfo.copyWith(customerGrp4: CustomerGrp4('VR')),
+      );
+
+      expect(eligibilityState.canOrderCovidMaterial, false);
     },
   );
 

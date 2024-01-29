@@ -535,8 +535,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           listenWhen: (previous, current) =>
               // context.read<UserBloc>().state.userCanCreateOrder &&
               current != EligibilityState.initial() &&
-              (previous.isCovidMaterialEnable !=
-                      current.isCovidMaterialEnable ||
+              (previous.canOrderCovidMaterial !=
+                      current.canOrderCovidMaterial ||
                   previous.salesOrgConfigs.disableBundles !=
                       current.salesOrgConfigs.disableBundles ||
                   previous.isOrderTypeEnable != current.isOrderTypeEnable ||
@@ -901,7 +901,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     hasAccessToCovidMaterial: context
                         .read<EligibilityBloc>()
                         .state
-                        .isCovidMaterialEnable,
+                        .canOrderCovidMaterial,
                   ),
                 );
             context.read<EligibilityBloc>().add(
@@ -1520,7 +1520,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
             hasAccessToCovidMaterial:
-                eligibilityBloc.state.isCovidMaterialEnable,
+                eligibilityBloc.state.canOrderCovidMaterial,
           ),
         );
     // context.read<MaterialFilterBloc>().add(

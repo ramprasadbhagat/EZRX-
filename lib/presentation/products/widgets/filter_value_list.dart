@@ -97,7 +97,7 @@ class _FilterValueListState extends State<FilterValueList> {
                 previous.selectedMaterialFilter.isCovidSelected !=
                 current.selectedMaterialFilter.isCovidSelected,
             builder: (context, state) {
-              return context.read<EligibilityBloc>().state.isCovidMaterialEnable
+              return context.read<EligibilityBloc>().state.canOrderCovidMaterial
                   ? ChoiceChip(
                       label: Text(
                         'Covid-19'.tr(),
@@ -153,7 +153,7 @@ class _FilterValueListState extends State<FilterValueList> {
                                         hasAccessToCovidMaterial: context
                                             .read<EligibilityBloc>()
                                             .state
-                                            .isCovidMaterialEnable,
+                                            .canOrderCovidMaterial,
                                         isCovidSelected: !state
                                             .selectedMaterialFilter
                                             .isCovidSelected,
