@@ -195,22 +195,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     .read<EligibilityBloc>()
                     .add(const EligibilityEvent.initialized());
 
+                final appMarket = AppMarket(
+                  context.deviceLocale.countryCode?.toLowerCase() ??
+                      AppMarket.defaultMarket().getOrDefaultValue('kh'),
+                ).defaultMarket;
+
                 context.read<LoginFormBloc>().add(
-                      const LoginFormEvent.loadLastSavedCred(),
+                      LoginFormEvent.loadLastSavedCred(appMarket),
                     );
 
                 // Check if the device's language code is supported
-                final appMarket = AppMarket(
-                  context.deviceLocale.countryCode?.toLowerCase() ?? 'my',
-                );
-                context.read<LoginFormBloc>().add(
-                      LoginFormEvent.setCurrentMarket(
-                        appMarket.isSupportMarket
-                            ? appMarket
-                            : AppMarket.malaysia(),
-                      ),
-                    );
-
                 if (context.supportedLocales
                     .map((locale) => locale.languageCode)
                     .contains(context.deviceLocale.languageCode)) {

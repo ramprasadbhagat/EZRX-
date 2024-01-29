@@ -45,7 +45,7 @@ class DeviceStorage {
     try {
       return _box.get(
         _currentMarketKey,
-        defaultValue: 'my',
+        defaultValue: '',
       );
     } catch (e) {
       throw CacheException(message: e.toString());

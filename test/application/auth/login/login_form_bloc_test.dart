@@ -31,6 +31,7 @@ void main() {
 
   var loginFormState = LoginFormState.initial();
 
+  const mockDefaultCurrentMarket = 'vn';
   final credMock = Cred(
     username: fakeUser,
     password: fakePassword,
@@ -47,17 +48,23 @@ void main() {
 
   group('Login Form Bloc', () {
     blocTest(
-      'Create bloc and load last saved cred success',
+      'Load last saved cred success with not empty default currentMarket',
       build: () => LoginFormBloc(
         authRepository: authRepoMock,
         deviceRepository: deviceRepoMock,
       ),
       setUp: () {
+        when(() => deviceRepoMock.getCurrentMarket()).thenAnswer(
+          (invocation) async => const Right(mockDefaultCurrentMarket),
+        );
         when(() => authRepoMock.loadCredential())
             .thenAnswer((invocation) async => Right(credMock));
       },
-      act: (LoginFormBloc bloc) =>
-          bloc.add(const LoginFormEvent.loadLastSavedCred()),
+      act: (LoginFormBloc bloc) => bloc.add(
+        LoginFormEvent.loadLastSavedCred(
+          AppMarket.defaultMarket(),
+        ),
+      ),
       expect: () => [
         loginFormState.copyWith(
           isSubmitting: true,
@@ -67,6 +74,61 @@ void main() {
           password: credMock.password,
           rememberPassword: true,
           authFailureOrSuccessOption: none(),
+          isSubmitting: false,
+          currentMarket: AppMarket.vietnam(),
+        )
+      ],
+    );
+
+    blocTest(
+      'Load last saved cred success with empty default currentMarket',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(() => deviceRepoMock.getCurrentMarket())
+            .thenAnswer((invocation) async => const Right(''));
+        when(() => authRepoMock.loadCredential())
+            .thenAnswer((invocation) async => Right(credMock));
+      },
+      act: (LoginFormBloc bloc) => bloc.add(
+        LoginFormEvent.loadLastSavedCred(
+          AppMarket.vietnam(),
+        ),
+      ),
+      expect: () => [
+        loginFormState.copyWith(
+          isSubmitting: true,
+        ),
+        loginFormState.copyWith(
+          username: credMock.username,
+          password: credMock.password,
+          rememberPassword: true,
+          authFailureOrSuccessOption: none(),
+          isSubmitting: false,
+          currentMarket: AppMarket.vietnam(),
+        )
+      ],
+    );
+
+    blocTest(
+      'Create bloc and load last saved cred success',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(() => authRepoMock.loadCredential())
+            .thenAnswer((invocation) async => Right(credMock));
+      },
+      act: (LoginFormBloc bloc) => bloc.add(
+        LoginFormEvent.loadLastSavedCred(
+          AppMarket.defaultMarket(),
+        ),
+      ),
+      expect: () => [
+        loginFormState.copyWith(
           isSubmitting: true,
         ),
         loginFormState.copyWith(
@@ -93,7 +155,11 @@ void main() {
             .thenAnswer((invocation) async => const Right(false));
       },
       act: (LoginFormBloc bloc) {
-        bloc.add(const LoginFormEvent.loadLastSavedCred());
+        bloc.add(
+          LoginFormEvent.loadLastSavedCred(
+            AppMarket.defaultMarket(),
+          ),
+        );
         expect(bloc.state.username, Username(''));
       },
     );
@@ -111,8 +177,11 @@ void main() {
           ),
         );
       },
-      act: (LoginFormBloc bloc) =>
-          bloc.add(const LoginFormEvent.loadLastSavedCred()),
+      act: (LoginFormBloc bloc) => bloc.add(
+        LoginFormEvent.loadLastSavedCred(
+          AppMarket.defaultMarket(),
+        ),
+      ),
       expect: () => [
         loginFormState.copyWith(
           isSubmitting: true,
@@ -276,6 +345,13 @@ void main() {
           ),
         );
         when(
+          () => deviceRepoMock.setCurrentMarket(
+            currentMarket: AppMarket.defaultMarket(),
+          ),
+        ).thenAnswer(
+          (_) async => const Right(unit),
+        );
+        when(
           () => authRepoMock.storeJWT(
             access: loginMockData.access,
             refresh: loginMockData.refresh,
@@ -293,11 +369,13 @@ void main() {
           isSubmitting: true,
           showErrorMessages: false,
           authFailureOrSuccessOption: none(),
+          currentMarket: AppMarket.defaultMarket(),
         ),
         loginFormState.copyWith(
           isSubmitting: false,
           showErrorMessages: false,
           authFailureOrSuccessOption: optionOf(Right(loginMockData)),
+          currentMarket: AppMarket.defaultMarket(),
         ),
       ],
     );
@@ -782,61 +860,16 @@ void main() {
       ],
     );
     blocTest(
-      'setCurrentMarket failed test',
-      build: () => LoginFormBloc(
-        authRepository: authRepoMock,
-        deviceRepository: deviceRepoMock,
-      ),
-      setUp: () {
-        when(
-          () => deviceRepoMock.setCurrentMarket(
-            currentMarket: AppMarket.malaysia(),
-          ),
-        ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
-        );
-      },
-      act: (LoginFormBloc bloc) =>
-          bloc..add(LoginFormEvent.setCurrentMarket(AppMarket.malaysia())),
-      expect: () => [
-        loginFormState.copyWith(
-          authFailureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('fake-error'),
-            ),
-          ),
-        ),
-      ],
-    );
-    blocTest(
       'setCurrentMarket success test',
       build: () => LoginFormBloc(
         authRepository: authRepoMock,
         deviceRepository: deviceRepoMock,
       ),
-      setUp: () {
-        when(
-          () => deviceRepoMock.setCurrentMarket(
-            currentMarket: AppMarket.malaysia(),
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(
-            unit,
-          ),
-        );
-      },
       act: (LoginFormBloc bloc) =>
-          bloc..add(LoginFormEvent.setCurrentMarket(AppMarket.malaysia())),
+          bloc..add(LoginFormEvent.setCurrentMarket(AppMarket.vietnam())),
       expect: () => [
         loginFormState.copyWith(
-          currentMarket: AppMarket.malaysia(),
-          authFailureOrSuccessOption: optionOf(
-            const Right(
-              unit,
-            ),
-          ),
+          currentMarket: AppMarket.vietnam(),
         ),
       ],
     );

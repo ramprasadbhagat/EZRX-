@@ -291,16 +291,16 @@ void main() {
       await tester.pumpAndSettle();
       final contactNumberTextFieldKey = find.byKey(WidgetKeys.phoneNumberKey);
       expect(contactNumberTextFieldKey, findsOneWidget);
-      final internationalPhoneNumberInput =
-          find.byKey(WidgetKeys.genericKey(key: AppMarket.malaysia().country));
+      final internationalPhoneNumberInput = find
+          .byKey(WidgetKeys.genericKey(key: AppMarket.defaultMarket().country));
 
       expect(internationalPhoneNumberInput, findsOneWidget);
-      await tester.enterText(internationalPhoneNumberInput, '6');
+      await tester.enterText(internationalPhoneNumberInput, '8');
       await tester.pump();
       verify(
         () => mockContactUsBloc.add(
           const ContactUsEvent.onContactNumberChange(
-            newValue: '+606',
+            newValue: '+8558',
           ),
         ),
       );
@@ -336,8 +336,8 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-      final internationalPhoneNumberInput =
-          find.byKey(WidgetKeys.genericKey(key: AppMarket.malaysia().country));
+      final internationalPhoneNumberInput = find
+          .byKey(WidgetKeys.genericKey(key: AppMarket.defaultMarket().country));
 
       expect(internationalPhoneNumberInput, findsOneWidget);
       await tester.enterText(internationalPhoneNumberInput, '6');
@@ -777,7 +777,9 @@ void main() {
 
       final sendMessageButtonKey = find.byKey(WidgetKeys.sendMessageButtonKey);
       await tester.drag(
-        find.byKey(WidgetKeys.genericKey(key: AppMarket.malaysia().country)),
+        find.byKey(
+          WidgetKeys.genericKey(key: AppMarket.defaultMarket().country),
+        ),
         const Offset(0, -1000),
       );
       await tester.pump();

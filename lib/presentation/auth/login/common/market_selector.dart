@@ -120,7 +120,7 @@ class _MarketSelectorState extends State<MarketSelector> {
               onChanged: (selectedMarket) => {
                 context.read<LoginFormBloc>().add(
                       LoginFormEvent.setCurrentMarket(
-                        selectedMarket ?? AppMarket.malaysia(),
+                        selectedMarket ?? AppMarket.defaultMarket(),
                       ),
                     ),
               },

@@ -15,7 +15,7 @@ class ContactUsState with _$ContactUsState {
 
   factory ContactUsState.initial() => ContactUsState(
         contactUs: ContactUs.empty(),
-        appMarket: AppMarket.malaysia(),
+        appMarket: AppMarket.defaultMarket(),
         apiFailureOrSuccessOption: none(),
         isSubmitting: false,
         showErrorMessage: false,

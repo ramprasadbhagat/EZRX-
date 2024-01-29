@@ -29,7 +29,11 @@ class AppMarket extends ValueObject<String> {
     return AppMarket._(validateStringNotEmpty(input));
   }
 
-  factory AppMarket.malaysia() => AppMarket('my');
+  factory AppMarket.defaultMarket() => supportMarkets.first;
+
+  AppMarket get defaultMarket => isSupportMarket ? this : supportMarkets.first;
+
+  factory AppMarket.vietnam() => AppMarket('vn');
 
   String get marketName => getMarketName(value.getOrElse(() => ''));
 

@@ -20,7 +20,6 @@ import '../../common_mock_data/customer_code_mock.dart';
 class DeepLinkingRepositoryMock extends Mock
     implements IDeepLinkingRepository {}
 
-
 void main() {
   late IDeepLinkingRepository repository;
   late DeepLinkingService service;
@@ -39,13 +38,10 @@ void main() {
   const returnSummaryLink = '/my-account/return-summary-details';
   const paymentSummaryInvoiceDetailsLink =
       '/payments/payment-summary/invoice-details';
-const accountSummaryInvoiceDetailsLink =
+  const accountSummaryInvoiceDetailsLink =
       '/payments/account-summary/invoice-details';
   const paymentLink = '/my-account/payments';
   const faqLink = '/faq';
-
-
-
 
   setUpAll(() {
     repository = DeepLinkingRepositoryMock();
@@ -198,7 +194,7 @@ const accountSummaryInvoiceDetailsLink =
       setUp: () {
         when(
           () => repository.getCurrentMarket(),
-        ).thenReturn(Right(AppMarket.malaysia()));
+        ).thenReturn(Right(AppMarket.defaultMarket()));
       },
       seed: () => DeepLinkingState.linkPending(
         Uri(path: contactUsLink),
@@ -210,7 +206,7 @@ const accountSummaryInvoiceDetailsLink =
         ),
       ),
       expect: () => [
-        DeepLinkingState.redirectContactUs(AppMarket.malaysia()),
+        DeepLinkingState.redirectContactUs(AppMarket.defaultMarket()),
       ],
     );
     blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -474,7 +470,6 @@ const accountSummaryInvoiceDetailsLink =
   });
 
   group('Payment redirection', () {
-
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect Payment home success',
       build: () => DeepLinkingBloc(
@@ -616,7 +611,7 @@ const accountSummaryInvoiceDetailsLink =
       ],
     );
   });
-group('Redirect FAQ', () {
+  group('Redirect FAQ', () {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect FAQ success',
       build: () => DeepLinkingBloc(
@@ -638,5 +633,4 @@ group('Redirect FAQ', () {
       ],
     );
   });
-  
 }

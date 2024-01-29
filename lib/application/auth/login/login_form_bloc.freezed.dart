@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginFormEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -33,7 +33,7 @@ mixin _$LoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -48,7 +48,7 @@ mixin _$LoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -140,6 +140,8 @@ abstract class _$$_LoadLastSavedCredCopyWith<$Res> {
   factory _$$_LoadLastSavedCredCopyWith(_$_LoadLastSavedCred value,
           $Res Function(_$_LoadLastSavedCred) then) =
       __$$_LoadLastSavedCredCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AppMarket appMarket});
 }
 
 /// @nodoc
@@ -149,31 +151,57 @@ class __$$_LoadLastSavedCredCopyWithImpl<$Res>
   __$$_LoadLastSavedCredCopyWithImpl(
       _$_LoadLastSavedCred _value, $Res Function(_$_LoadLastSavedCred) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? appMarket = null,
+  }) {
+    return _then(_$_LoadLastSavedCred(
+      null == appMarket
+          ? _value.appMarket
+          : appMarket // ignore: cast_nullable_to_non_nullable
+              as AppMarket,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_LoadLastSavedCred implements _LoadLastSavedCred {
-  const _$_LoadLastSavedCred();
+  const _$_LoadLastSavedCred(this.appMarket);
+
+  @override
+  final AppMarket appMarket;
 
   @override
   String toString() {
-    return 'LoginFormEvent.loadLastSavedCred()';
+    return 'LoginFormEvent.loadLastSavedCred(appMarket: $appMarket)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadLastSavedCred);
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadLastSavedCred &&
+            (identical(other.appMarket, appMarket) ||
+                other.appMarket == appMarket));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, appMarket);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoadLastSavedCredCopyWith<_$_LoadLastSavedCred> get copyWith =>
+      __$$_LoadLastSavedCredCopyWithImpl<_$_LoadLastSavedCred>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -185,13 +213,13 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
     required TResult Function() fetchCurrentMarket,
     required TResult Function(AppMarket currentMarket) setCurrentMarket,
   }) {
-    return loadLastSavedCred();
+    return loadLastSavedCred(appMarket);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -203,13 +231,13 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
     TResult? Function()? fetchCurrentMarket,
     TResult? Function(AppMarket currentMarket)? setCurrentMarket,
   }) {
-    return loadLastSavedCred?.call();
+    return loadLastSavedCred?.call(appMarket);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -223,7 +251,7 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
     required TResult orElse(),
   }) {
     if (loadLastSavedCred != null) {
-      return loadLastSavedCred();
+      return loadLastSavedCred(appMarket);
     }
     return orElse();
   }
@@ -295,7 +323,13 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
 }
 
 abstract class _LoadLastSavedCred implements LoginFormEvent {
-  const factory _LoadLastSavedCred() = _$_LoadLastSavedCred;
+  const factory _LoadLastSavedCred(final AppMarket appMarket) =
+      _$_LoadLastSavedCred;
+
+  AppMarket get appMarket;
+  @JsonKey(ignore: true)
+  _$$_LoadLastSavedCredCopyWith<_$_LoadLastSavedCred> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -363,7 +397,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -381,7 +415,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -399,7 +433,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -558,7 +592,7 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -576,7 +610,7 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -594,7 +628,7 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -727,7 +761,7 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -745,7 +779,7 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -763,7 +797,7 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -890,7 +924,7 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -908,7 +942,7 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -926,7 +960,7 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -1058,7 +1092,7 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -1076,7 +1110,7 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -1094,7 +1128,7 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -1225,7 +1259,7 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -1243,7 +1277,7 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -1261,7 +1295,7 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -1388,7 +1422,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -1406,7 +1440,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -1424,7 +1458,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -1579,7 +1613,7 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -1597,7 +1631,7 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -1615,7 +1649,7 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -1748,7 +1782,7 @@ class _$_FetchCurrentMarket implements _FetchCurrentMarket {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -1766,7 +1800,7 @@ class _$_FetchCurrentMarket implements _FetchCurrentMarket {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -1784,7 +1818,7 @@ class _$_FetchCurrentMarket implements _FetchCurrentMarket {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -1938,7 +1972,7 @@ class _$_SetCurrentMarket implements _SetCurrentMarket {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadLastSavedCred,
+    required TResult Function(AppMarket appMarket) loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -1956,7 +1990,7 @@ class _$_SetCurrentMarket implements _SetCurrentMarket {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
+    TResult? Function(AppMarket appMarket)? loadLastSavedCred,
     TResult? Function(String usernameStr)? usernameChanged,
     TResult? Function(String passwordStr)? passwordChanged,
     TResult? Function()? passwordVisibilityChanged,
@@ -1974,7 +2008,7 @@ class _$_SetCurrentMarket implements _SetCurrentMarket {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadLastSavedCred,
+    TResult Function(AppMarket appMarket)? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,

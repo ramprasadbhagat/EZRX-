@@ -2,7 +2,7 @@ part of 'login_form_bloc.dart';
 
 @freezed
 class LoginFormEvent with _$LoginFormEvent {
-  const factory LoginFormEvent.loadLastSavedCred() = _LoadLastSavedCred;
+  const factory LoginFormEvent.loadLastSavedCred(AppMarket appMarket) = _LoadLastSavedCred;
   const factory LoginFormEvent.usernameChanged(String usernameStr) =
       _UsernameChanged;
   const factory LoginFormEvent.passwordChanged(String passwordStr) =

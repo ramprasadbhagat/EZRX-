@@ -23,6 +23,6 @@ class LoginFormState with _$LoginFormState {
         showErrorMessages: false,
         isSubmitting: false,
         authFailureOrSuccessOption: none(),
-        currentMarket: AppMarket('my'),
+        currentMarket: AppMarket.defaultMarket(),
       );
 }

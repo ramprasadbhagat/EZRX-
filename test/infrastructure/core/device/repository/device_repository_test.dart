@@ -25,7 +25,7 @@ void main() {
 
   setUp(
     () async {
-      mockMarket = AppMarket.malaysia().value.getOrElse(() => '');
+      mockMarket = AppMarket.defaultMarket().value.getOrElse(() => '');
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
       mockDeviceStorage = MockDeviceStorage();
       mockPermissionService = MockPermissionService();
@@ -97,7 +97,7 @@ void main() {
           () => mockDeviceStorage.putCurrentMarket(currentMarket: mockMarket),
         ).thenAnswer((_) => Future.value());
         final result = await repository.setCurrentMarket(
-          currentMarket: AppMarket.malaysia(),
+          currentMarket: AppMarket.defaultMarket(),
         );
         expect(result.isRight(), true);
       });
@@ -107,7 +107,7 @@ void main() {
           () => mockDeviceStorage.putCurrentMarket(currentMarket: mockMarket),
         ).thenThrow(mockException);
         final result = await repository.setCurrentMarket(
-          currentMarket: AppMarket.malaysia(),
+          currentMarket: AppMarket.defaultMarket(),
         );
         expect(result.isLeft(), true);
       });
