@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -90,7 +91,14 @@ void main() async {
     testWidgets('List fetched', (tester) async {
       when(() => announcementInfoBloc.state).thenReturn(
         AnnouncementInfoState.initial().copyWith(
-          announcementInfo: announcementArticleInfo,
+          announcementInfo: announcementArticleInfo.copyWith(
+            announcementList: [
+              announcementArticleInfo.announcementList.first.copyWith(
+                releaseDate:
+                    DateTimeStringValue(DateTime.now().toIso8601String()),
+              )
+            ],
+          ),
         ),
       );
       await tester.pumpWidget(getWUT());
@@ -112,7 +120,8 @@ void main() async {
 
       final announcementIconButton = find.byKey(WidgetKeys.announcementIcon);
       expect(announcementIconButton, findsOneWidget);
-      await tester.tap(find.byKey(WidgetKeys.sectionTileIcon('Announcements'.tr())));
+      await tester
+          .tap(find.byKey(WidgetKeys.sectionTileIcon('Announcements'.tr())));
       expect(autoRouterMock.current.path, 'announcements_page');
     });
 

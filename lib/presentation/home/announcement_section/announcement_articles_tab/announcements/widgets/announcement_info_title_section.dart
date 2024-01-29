@@ -10,87 +10,84 @@ class _AnnouncementInfoTitleSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  FittedBox(
+                    child: Text(
+                      details.releaseDate.dateTimeOrDashString,
+                      key: WidgetKeys.announcementDetailDateKey,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.neutralsGrey1,
+                            fontSize: 10,
+                          ),
+                    ),
+                  ),
+                  if (details.title.isNotEmpty)
                     FittedBox(
                       child: Text(
-                        details.publishedDate.dateOrDashString,
-                        key: WidgetKeys.announcementDetailDateKey,
+                        details.title,
+                        style: Theme.of(context).textTheme.labelSmall,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  if (details.sourceAndOrAuthorLabel.isNotEmpty)
+                    FittedBox(
+                      child: Text(
+                        details.sourceAndOrAuthorLabel,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: ZPColors.neutralsGrey1,
                               fontSize: 10,
+                              fontWeight: FontWeight.w400,
                             ),
                       ),
                     ),
-                    if (details.title.isNotEmpty)
-                      FittedBox(
-                        child: Text(
-                          details.title,
-                          style: Theme.of(context).textTheme.labelSmall,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                        ),
+                  if (details.tag.isNotEmpty)
+                    Container(
+                      padding: const EdgeInsets.all(6),
+                      margin:
+                          const EdgeInsets.only(top: 5, bottom: 5, right: 5),
+                      decoration: BoxDecoration(
+                        color: ZPColors.paleBlueGray,
+                        borderRadius: BorderRadius.circular(15.0),
                       ),
-                    if (details.sourceAndOrAuthorLabel.isNotEmpty)
-                      FittedBox(
-                        child: Text(
-                          details.sourceAndOrAuthorLabel,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.neutralsGrey1,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                        ),
+                      child: Text(
+                        details.tag,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
-              const SizedBox(
-                width: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 2,
-                ),
-                decoration: const BoxDecoration(
-                  color: ZPColors.orange,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                child: Text(
-                  context.tr('New'),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.whiteBgCard,
-                        fontSize: 10,
-                      ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-        ],
-      ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            if (details.publishedDate.aWeekDifference)
+              const NewAnnouncementIcon(),
+          ],
+        ),
+        const Divider(
+          indent: 0,
+          thickness: 1,
+          height: 5,
+          endIndent: 0,
+          color: ZPColors.extraLightGrey3,
+        ),
+      ],
     );
   }
 }

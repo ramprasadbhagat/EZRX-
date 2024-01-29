@@ -25,6 +25,7 @@ mixin _$AnnouncementInfoDetails {
   Manufacturer get manufacturer => throw _privateConstructorUsedError;
   Source get source => throw _privateConstructorUsedError;
   String get tag => throw _privateConstructorUsedError;
+  DateTimeStringValue get releaseDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnnouncementInfoDetailsCopyWith<AnnouncementInfoDetails> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $AnnouncementInfoDetailsCopyWith<$Res> {
       DateTimeStringValue publishedDate,
       Manufacturer manufacturer,
       Source source,
-      String tag});
+      String tag,
+      DateTimeStringValue releaseDate});
 }
 
 /// @nodoc
@@ -72,6 +74,7 @@ class _$AnnouncementInfoDetailsCopyWithImpl<$Res,
     Object? manufacturer = null,
     Object? source = null,
     Object? tag = null,
+    Object? releaseDate = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -110,6 +113,10 @@ class _$AnnouncementInfoDetailsCopyWithImpl<$Res,
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
               as String,
+      releaseDate: null == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
     ) as $Val);
   }
 }
@@ -131,7 +138,8 @@ abstract class _$$_AnnouncementInfoDetailsCopyWith<$Res>
       DateTimeStringValue publishedDate,
       Manufacturer manufacturer,
       Source source,
-      String tag});
+      String tag,
+      DateTimeStringValue releaseDate});
 }
 
 /// @nodoc
@@ -155,6 +163,7 @@ class __$$_AnnouncementInfoDetailsCopyWithImpl<$Res>
     Object? manufacturer = null,
     Object? source = null,
     Object? tag = null,
+    Object? releaseDate = null,
   }) {
     return _then(_$_AnnouncementInfoDetails(
       id: null == id
@@ -193,6 +202,10 @@ class __$$_AnnouncementInfoDetailsCopyWithImpl<$Res>
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
               as String,
+      releaseDate: null == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
     ));
   }
 }
@@ -209,7 +222,8 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
       required this.publishedDate,
       required this.manufacturer,
       required this.source,
-      required this.tag})
+      required this.tag,
+      required this.releaseDate})
       : super._();
 
   @override
@@ -230,10 +244,12 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
   final Source source;
   @override
   final String tag;
+  @override
+  final DateTimeStringValue releaseDate;
 
   @override
   String toString() {
-    return 'AnnouncementInfoDetails(id: $id, title: $title, content: $content, summary: $summary, thumbnail: $thumbnail, publishedDate: $publishedDate, manufacturer: $manufacturer, source: $source, tag: $tag)';
+    return 'AnnouncementInfoDetails(id: $id, title: $title, content: $content, summary: $summary, thumbnail: $thumbnail, publishedDate: $publishedDate, manufacturer: $manufacturer, source: $source, tag: $tag, releaseDate: $releaseDate)';
   }
 
   @override
@@ -252,12 +268,14 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
             (identical(other.manufacturer, manufacturer) ||
                 other.manufacturer == manufacturer) &&
             (identical(other.source, source) || other.source == source) &&
-            (identical(other.tag, tag) || other.tag == tag));
+            (identical(other.tag, tag) || other.tag == tag) &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, title, content, summary,
-      thumbnail, publishedDate, manufacturer, source, tag);
+      thumbnail, publishedDate, manufacturer, source, tag, releaseDate);
 
   @JsonKey(ignore: true)
   @override
@@ -270,15 +288,17 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
 
 abstract class _AnnouncementInfoDetails extends AnnouncementInfoDetails {
   const factory _AnnouncementInfoDetails(
-      {required final String id,
-      required final String title,
-      required final HtmlContent content,
-      required final String summary,
-      required final String thumbnail,
-      required final DateTimeStringValue publishedDate,
-      required final Manufacturer manufacturer,
-      required final Source source,
-      required final String tag}) = _$_AnnouncementInfoDetails;
+          {required final String id,
+          required final String title,
+          required final HtmlContent content,
+          required final String summary,
+          required final String thumbnail,
+          required final DateTimeStringValue publishedDate,
+          required final Manufacturer manufacturer,
+          required final Source source,
+          required final String tag,
+          required final DateTimeStringValue releaseDate}) =
+      _$_AnnouncementInfoDetails;
   const _AnnouncementInfoDetails._() : super._();
 
   @override
@@ -299,6 +319,8 @@ abstract class _AnnouncementInfoDetails extends AnnouncementInfoDetails {
   Source get source;
   @override
   String get tag;
+  @override
+  DateTimeStringValue get releaseDate;
   @override
   @JsonKey(ignore: true)
   _$$_AnnouncementInfoDetailsCopyWith<_$_AnnouncementInfoDetails>

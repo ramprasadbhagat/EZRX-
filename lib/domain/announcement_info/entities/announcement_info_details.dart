@@ -18,6 +18,7 @@ class AnnouncementInfoDetails with _$AnnouncementInfoDetails {
     required Manufacturer manufacturer,
     required Source source,
     required String tag,
+    required DateTimeStringValue releaseDate,
   }) = _AnnouncementInfoDetails;
 
   factory AnnouncementInfoDetails.empty() => AnnouncementInfoDetails(
@@ -30,6 +31,7 @@ class AnnouncementInfoDetails with _$AnnouncementInfoDetails {
         manufacturer: Manufacturer(''),
         source: Source(''),
         tag: '',
+        releaseDate: DateTimeStringValue(''),
       );
 
   String get sourceAndOrAuthorLabel {

@@ -248,7 +248,6 @@ void main() {
       testWidgets(
         'Load announcement_tab with data then do onRefresh',
         (tester) async {
-          final handle = tester.ensureSemantics();
           when(() => announcementInfoBlocMock.state).thenReturn(
             AnnouncementInfoState.initial().copyWith(
               announcementInfo: announcementInfo,
@@ -267,19 +266,12 @@ void main() {
               find.byKey(WidgetKeys.scrollToTopArrowIcon);
           expect(scrollToTopArrowIcon, findsNothing);
 
-          await tester.drag(
-            itemKey,
+          await tester.dragUntilVisible(
+            find.byType(RefreshProgressIndicator),
+            find.byKey(WidgetKeys.announcementListKey),
             const Offset(0.0, 1000.0),
-            warnIfMissed: false,
           );
-          await tester.pump(const Duration(seconds: 1));
-
-          expect(
-            tester.getSemantics(find.byType(RefreshProgressIndicator)),
-            matchesSemantics(
-              label: 'Refresh',
-            ),
-          );
+          await tester.pumpAndSettle();
 
           await tester.pump(const Duration(seconds: 1));
           await tester.pump(const Duration(seconds: 1));
@@ -289,7 +281,6 @@ void main() {
               const AnnouncementInfoEvent.fetch(),
             ),
           ).called(1);
-          handle.dispose();
         },
       );
 
@@ -317,6 +308,12 @@ void main() {
           expect(scrollWidget, findsOneWidget);
           final itemKey2 =
               find.byKey(Key(announcementInfo.announcementList[3].id));
+          await tester.dragUntilVisible(
+            itemKey2,
+            find.byKey(WidgetKeys.announcementListKey),
+            const Offset(0.0, -500.0),
+          );
+          await tester.pumpAndSettle();
           expect(itemKey2, findsOneWidget);
           await tester.drag(
             itemKey2,
@@ -366,7 +363,7 @@ void main() {
           );
           await tester.pump();
 
-          expect(itemKey, findsNothing);
+          expect(itemKey, findsOneWidget);
           expect(scrollToTopArrowIcon, findsOneWidget);
 
           verify(
@@ -393,16 +390,22 @@ void main() {
               find.byKey(WidgetKeys.announcementNotFoundRecordKey);
           expect(announcementNotFoundRecordKey, findsNothing);
           final itemKey =
-              find.byKey(Key(announcementInfo.announcementList.first.id));
+              find.byKey(Key(announcementInfo.announcementList[6].id));
+          await tester.dragUntilVisible(
+            itemKey,
+            find.byKey(WidgetKeys.announcementListKey),
+            const Offset(0.0, -500.0),
+          );
+          await tester.pumpAndSettle();
           expect(itemKey, findsOneWidget);
           final scrollToTopArrowIcon =
               find.byKey(WidgetKeys.scrollToTopArrowIcon);
-          expect(scrollToTopArrowIcon, findsNothing);
+          expect(scrollToTopArrowIcon, findsOneWidget);
           await tester.tap(itemKey);
           verify(
             () => announcementInfoDetailsBlocMock.add(
               AnnouncementInfoDetailsEvent.fetch(
-                itemId: announcementInfo.announcementList.first.id,
+                itemId: announcementInfo.announcementList[6].id,
                 salesOrg: SalesOrg(''),
               ),
             ),

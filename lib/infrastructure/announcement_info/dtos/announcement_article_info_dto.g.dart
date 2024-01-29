@@ -35,6 +35,7 @@ _$_AnnouncementArticleItemDto _$$_AnnouncementArticleItemDtoFromJson(
       thumbnail: getSrcValue(json, 'thumbnail') as String,
       content: getContent(json, 'content') as String,
       publishedDate: getDateValue(json, 'publishedDate') as String,
+      releaseDate: getDateValue(json, 'releaseDate') as String,
       branchInfo: (getBranchNames(json, 'branch') as List<dynamic>)
           .map((e) => BranchAndIc4InfoDto.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -46,6 +47,7 @@ _$_AnnouncementArticleItemDto _$$_AnnouncementArticleItemDtoFromJson(
       documentsList: (getDocumentsList(json, 'documents') as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      pinToTop: readPinToTop(json, 'pinToTop') as bool,
     );
 
 Map<String, dynamic> _$$_AnnouncementArticleItemDtoToJson(
@@ -57,11 +59,13 @@ Map<String, dynamic> _$$_AnnouncementArticleItemDtoToJson(
       'thumbnail': instance.thumbnail,
       'content': instance.content,
       'publishedDate': instance.publishedDate,
+      'releaseDate': instance.releaseDate,
       'branch': instance.branchInfo.map((e) => e.toJson()).toList(),
       'iC4': instance.iC4Info.map((e) => e.toJson()).toList(),
       'tag': instance.tag,
       'manufacturer': instance.manufacturer,
       'documents': instance.documentsList,
+      'pinToTop': instance.pinToTop,
     };
 
 _$_BranchAndIc4Dto _$$_BranchAndIc4DtoFromJson(Map<String, dynamic> json) =>

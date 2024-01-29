@@ -20,11 +20,30 @@ class AnnouncementArticleInfo with _$AnnouncementArticleInfo {
         endCursor: '',
       );
 
+  List<AnnouncementArticleItem> get _sortedAnnouncementsWithPinned {
+    final pinnedAnnouncementArticleList =
+        announcementList.where((element) => element.pinToTop).toList()
+          ..sort(
+            (a, b) => b.releaseDate.dateTime.compareTo(a.releaseDate.dateTime),
+          );
+
+    final unPinnedAnnouncementArticleList =
+        announcementList.where((element) => !element.pinToTop).toList()
+          ..sort(
+            (a, b) => b.releaseDate.dateTime.compareTo(a.releaseDate.dateTime),
+          );
+
+    return [
+      ...pinnedAnnouncementArticleList,
+      ...unPinnedAnnouncementArticleList,
+    ];
+  }
+
   List<AnnouncementArticleItem> filterAnnouncementListBySearchKey(
     String searchKey,
     List<String> categoryKey,
   ) {
-    final searchList = announcementList
+    final searchList = _sortedAnnouncementsWithPinned
         .where(
           (element) => element.isSearchKeyMatching(searchKey),
         )
@@ -72,11 +91,13 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
     required String thumbnail,
     required HtmlContent content,
     required DateTimeStringValue publishedDate,
+    required DateTimeStringValue releaseDate,
     required List<BranchAndIc4Info> branchInfo,
     required List<BranchAndIc4Info> iC4Info,
     required String tag,
     required String manufacturer,
     required List<String> documents,
+    required bool pinToTop,
   }) = _AnnouncementArticleItem;
 
   factory AnnouncementArticleItem.empty() => AnnouncementArticleItem(
@@ -86,11 +107,13 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
         thumbnail: '',
         content: HtmlContent(''),
         publishedDate: DateTimeStringValue(''),
+        releaseDate: DateTimeStringValue(''),
         branchInfo: <BranchAndIc4Info>[],
         iC4Info: <BranchAndIc4Info>[],
         tag: '',
         manufacturer: '',
         documents: [],
+        pinToTop: false,
       );
 
   bool isSearchKeyMatching(String searchKey) =>

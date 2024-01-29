@@ -256,6 +256,8 @@ mixin _$AnnouncementArticleItemDto {
   String get content => throw _privateConstructorUsedError;
   @JsonKey(name: 'publishedDate', readValue: getDateValue)
   String get publishedDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'releaseDate', readValue: getDateValue)
+  String get releaseDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'branch', readValue: getBranchNames)
   List<BranchAndIc4InfoDto> get branchInfo =>
       throw _privateConstructorUsedError;
@@ -267,6 +269,8 @@ mixin _$AnnouncementArticleItemDto {
   String get manufacturer => throw _privateConstructorUsedError;
   @JsonKey(name: 'documents', readValue: getDocumentsList)
   List<String> get documentsList => throw _privateConstructorUsedError;
+  @JsonKey(name: 'pinToTop', readValue: readPinToTop)
+  bool get pinToTop => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -289,6 +293,7 @@ abstract class $AnnouncementArticleItemDtoCopyWith<$Res> {
       @JsonKey(name: 'content', readValue: getContent) String content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
       String publishedDate,
+      @JsonKey(name: 'releaseDate', readValue: getDateValue) String releaseDate,
       @JsonKey(name: 'branch', readValue: getBranchNames)
       List<BranchAndIc4InfoDto> branchInfo,
       @JsonKey(name: 'iC4', readValue: getIC4Names)
@@ -296,7 +301,8 @@ abstract class $AnnouncementArticleItemDtoCopyWith<$Res> {
       @JsonKey(name: 'tag', readValue: readTag) String tag,
       @JsonKey(name: 'manufacturer', readValue: getValue) String manufacturer,
       @JsonKey(name: 'documents', readValue: getDocumentsList)
-      List<String> documentsList});
+      List<String> documentsList,
+      @JsonKey(name: 'pinToTop', readValue: readPinToTop) bool pinToTop});
 }
 
 /// @nodoc
@@ -319,11 +325,13 @@ class _$AnnouncementArticleItemDtoCopyWithImpl<$Res,
     Object? thumbnail = null,
     Object? content = null,
     Object? publishedDate = null,
+    Object? releaseDate = null,
     Object? branchInfo = null,
     Object? iC4Info = null,
     Object? tag = null,
     Object? manufacturer = null,
     Object? documentsList = null,
+    Object? pinToTop = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -350,6 +358,10 @@ class _$AnnouncementArticleItemDtoCopyWithImpl<$Res,
           ? _value.publishedDate
           : publishedDate // ignore: cast_nullable_to_non_nullable
               as String,
+      releaseDate: null == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as String,
       branchInfo: null == branchInfo
           ? _value.branchInfo
           : branchInfo // ignore: cast_nullable_to_non_nullable
@@ -370,6 +382,10 @@ class _$AnnouncementArticleItemDtoCopyWithImpl<$Res,
           ? _value.documentsList
           : documentsList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      pinToTop: null == pinToTop
+          ? _value.pinToTop
+          : pinToTop // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -391,6 +407,7 @@ abstract class _$$_AnnouncementArticleItemDtoCopyWith<$Res>
       @JsonKey(name: 'content', readValue: getContent) String content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
       String publishedDate,
+      @JsonKey(name: 'releaseDate', readValue: getDateValue) String releaseDate,
       @JsonKey(name: 'branch', readValue: getBranchNames)
       List<BranchAndIc4InfoDto> branchInfo,
       @JsonKey(name: 'iC4', readValue: getIC4Names)
@@ -398,7 +415,8 @@ abstract class _$$_AnnouncementArticleItemDtoCopyWith<$Res>
       @JsonKey(name: 'tag', readValue: readTag) String tag,
       @JsonKey(name: 'manufacturer', readValue: getValue) String manufacturer,
       @JsonKey(name: 'documents', readValue: getDocumentsList)
-      List<String> documentsList});
+      List<String> documentsList,
+      @JsonKey(name: 'pinToTop', readValue: readPinToTop) bool pinToTop});
 }
 
 /// @nodoc
@@ -420,11 +438,13 @@ class __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>
     Object? thumbnail = null,
     Object? content = null,
     Object? publishedDate = null,
+    Object? releaseDate = null,
     Object? branchInfo = null,
     Object? iC4Info = null,
     Object? tag = null,
     Object? manufacturer = null,
     Object? documentsList = null,
+    Object? pinToTop = null,
   }) {
     return _then(_$_AnnouncementArticleItemDto(
       id: null == id
@@ -451,6 +471,10 @@ class __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>
           ? _value.publishedDate
           : publishedDate // ignore: cast_nullable_to_non_nullable
               as String,
+      releaseDate: null == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as String,
       branchInfo: null == branchInfo
           ? _value._branchInfo
           : branchInfo // ignore: cast_nullable_to_non_nullable
@@ -471,6 +495,10 @@ class __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>
           ? _value._documentsList
           : documentsList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      pinToTop: null == pinToTop
+          ? _value.pinToTop
+          : pinToTop // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -487,6 +515,8 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
       @JsonKey(name: 'content', readValue: getContent) required this.content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
       required this.publishedDate,
+      @JsonKey(name: 'releaseDate', readValue: getDateValue)
+      required this.releaseDate,
       @JsonKey(name: 'branch', readValue: getBranchNames)
       required final List<BranchAndIc4InfoDto> branchInfo,
       @JsonKey(name: 'iC4', readValue: getIC4Names)
@@ -495,7 +525,9 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
       @JsonKey(name: 'manufacturer', readValue: getValue)
       required this.manufacturer,
       @JsonKey(name: 'documents', readValue: getDocumentsList)
-      required final List<String> documentsList})
+      required final List<String> documentsList,
+      @JsonKey(name: 'pinToTop', readValue: readPinToTop)
+      required this.pinToTop})
       : _branchInfo = branchInfo,
         _iC4Info = iC4Info,
         _documentsList = documentsList,
@@ -522,6 +554,9 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
   @override
   @JsonKey(name: 'publishedDate', readValue: getDateValue)
   final String publishedDate;
+  @override
+  @JsonKey(name: 'releaseDate', readValue: getDateValue)
+  final String releaseDate;
   final List<BranchAndIc4InfoDto> _branchInfo;
   @override
   @JsonKey(name: 'branch', readValue: getBranchNames)
@@ -556,8 +591,12 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
   }
 
   @override
+  @JsonKey(name: 'pinToTop', readValue: readPinToTop)
+  final bool pinToTop;
+
+  @override
   String toString() {
-    return 'AnnouncementArticleItemDto(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate, branchInfo: $branchInfo, iC4Info: $iC4Info, tag: $tag, manufacturer: $manufacturer, documentsList: $documentsList)';
+    return 'AnnouncementArticleItemDto(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate, releaseDate: $releaseDate, branchInfo: $branchInfo, iC4Info: $iC4Info, tag: $tag, manufacturer: $manufacturer, documentsList: $documentsList, pinToTop: $pinToTop)';
   }
 
   @override
@@ -573,6 +612,8 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
             (identical(other.content, content) || other.content == content) &&
             (identical(other.publishedDate, publishedDate) ||
                 other.publishedDate == publishedDate) &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate) &&
             const DeepCollectionEquality()
                 .equals(other._branchInfo, _branchInfo) &&
             const DeepCollectionEquality().equals(other._iC4Info, _iC4Info) &&
@@ -580,7 +621,9 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
             (identical(other.manufacturer, manufacturer) ||
                 other.manufacturer == manufacturer) &&
             const DeepCollectionEquality()
-                .equals(other._documentsList, _documentsList));
+                .equals(other._documentsList, _documentsList) &&
+            (identical(other.pinToTop, pinToTop) ||
+                other.pinToTop == pinToTop));
   }
 
   @JsonKey(ignore: true)
@@ -593,11 +636,13 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
       thumbnail,
       content,
       publishedDate,
+      releaseDate,
       const DeepCollectionEquality().hash(_branchInfo),
       const DeepCollectionEquality().hash(_iC4Info),
       tag,
       manufacturer,
-      const DeepCollectionEquality().hash(_documentsList));
+      const DeepCollectionEquality().hash(_documentsList),
+      pinToTop);
 
   @JsonKey(ignore: true)
   @override
@@ -626,6 +671,8 @@ abstract class _AnnouncementArticleItemDto extends AnnouncementArticleItemDto {
       required final String content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
       required final String publishedDate,
+      @JsonKey(name: 'releaseDate', readValue: getDateValue)
+      required final String releaseDate,
       @JsonKey(name: 'branch', readValue: getBranchNames)
       required final List<BranchAndIc4InfoDto> branchInfo,
       @JsonKey(name: 'iC4', readValue: getIC4Names)
@@ -634,8 +681,9 @@ abstract class _AnnouncementArticleItemDto extends AnnouncementArticleItemDto {
       @JsonKey(name: 'manufacturer', readValue: getValue)
       required final String manufacturer,
       @JsonKey(name: 'documents', readValue: getDocumentsList)
-      required final List<String>
-          documentsList}) = _$_AnnouncementArticleItemDto;
+      required final List<String> documentsList,
+      @JsonKey(name: 'pinToTop', readValue: readPinToTop)
+      required final bool pinToTop}) = _$_AnnouncementArticleItemDto;
   const _AnnouncementArticleItemDto._() : super._();
 
   factory _AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =
@@ -660,6 +708,9 @@ abstract class _AnnouncementArticleItemDto extends AnnouncementArticleItemDto {
   @JsonKey(name: 'publishedDate', readValue: getDateValue)
   String get publishedDate;
   @override
+  @JsonKey(name: 'releaseDate', readValue: getDateValue)
+  String get releaseDate;
+  @override
   @JsonKey(name: 'branch', readValue: getBranchNames)
   List<BranchAndIc4InfoDto> get branchInfo;
   @override
@@ -674,6 +725,9 @@ abstract class _AnnouncementArticleItemDto extends AnnouncementArticleItemDto {
   @override
   @JsonKey(name: 'documents', readValue: getDocumentsList)
   List<String> get documentsList;
+  @override
+  @JsonKey(name: 'pinToTop', readValue: readPinToTop)
+  bool get pinToTop;
   @override
   @JsonKey(ignore: true)
   _$$_AnnouncementArticleItemDtoCopyWith<_$_AnnouncementArticleItemDto>

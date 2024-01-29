@@ -74,7 +74,7 @@ class _AnnouncementInfoBottomSheet extends StatelessWidget {
                           child: _AnnouncementInfoItemDescription(
                             title: currentAnnouncement.title,
                             description: currentAnnouncement.summary,
-                            publishedDate: currentAnnouncement.publishedDate,
+                            releaseDate: currentAnnouncement.releaseDate,
                           ),
                         ),
                       ),

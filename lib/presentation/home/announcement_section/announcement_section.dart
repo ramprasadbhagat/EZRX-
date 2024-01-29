@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
@@ -9,6 +8,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -73,7 +73,7 @@ class _AnnouncementSectionItem extends StatelessWidget {
         child: _ItemDescription(
           title: announcementItem.title,
           description: announcementItem.summary,
-          publishedDate: announcementItem.publishedDate,
+          publishedDate: announcementItem.releaseDate,
         ),
       ),
     );
@@ -110,24 +110,7 @@ class _ItemDescription extends StatelessWidget {
                       ?.copyWith(color: ZPColors.extraLightGrey4, fontSize: 10),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 2,
-                ),
-                decoration: const BoxDecoration(
-                  color: ZPColors.orange,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                child: Text(
-                  context.tr('New'),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.whiteBgCard,
-                      ),
-                ),
-              ),
+              if (publishedDate.aWeekDifference) const NewAnnouncementIcon(),
             ],
           ),
           Text(

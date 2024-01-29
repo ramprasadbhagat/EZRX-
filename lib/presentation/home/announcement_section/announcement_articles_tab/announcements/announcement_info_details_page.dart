@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,8 +21,6 @@ import 'package:flutter_html/flutter_html.dart';
 part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_bottom_sheet.dart';
 part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_item_description.dart';
 part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_title_section.dart';
-
-const offSet = 60.0;
 
 class AnnouncementInfoDetailsPage extends StatefulWidget {
   const AnnouncementInfoDetailsPage({Key? key}) : super(key: key);
@@ -143,28 +142,6 @@ class _AnnouncementInfoDetailsPageState
                           ],
                         ),
                         centerTitle: false,
-                        bottom: PreferredSize(
-                          preferredSize: const Size.fromHeight(offSet),
-                          child: AppBar(
-                            automaticallyImplyLeading: false,
-                            leading: _isBackButtonEnableForAppbar
-                                ? IconButton(
-                                    key: WidgetKeys
-                                        .announcementDetailsBottomBackButtonKey,
-                                    onPressed: () => context.router.pop(),
-                                    icon: const Icon(
-                                      Icons.arrow_back_ios_rounded,
-                                      size: 20,
-                                    ),
-                                  )
-                                : const SizedBox.shrink(),
-                            centerTitle: false,
-                            leadingWidth: _isBackButtonEnableForAppbar ? 20 : 0,
-                            title: _AnnouncementInfoTitleSection(
-                              details: state.announcementInfoDetails,
-                            ),
-                          ),
-                        ),
                       ),
                       SliverList(
                         delegate: SliverChildListDelegate(
@@ -172,11 +149,34 @@ class _AnnouncementInfoDetailsPageState
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 16,
-                                vertical: 10,
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  ListTile(
+                                    contentPadding: EdgeInsets.zero,
+                                    minLeadingWidth: 0,
+                                    horizontalTitleGap:
+                                        _isBackButtonEnableForAppbar ? 5 : 0,
+                                    leading: _isBackButtonEnableForAppbar
+                                        ? IconButton(
+                                            key: WidgetKeys
+                                                .announcementDetailsBottomBackButtonKey,
+                                            onPressed: () =>
+                                                context.router.pop(),
+                                            constraints: const BoxConstraints(),
+                                            padding:
+                                                const EdgeInsets.only(top: 5),
+                                            icon: const Icon(
+                                              Icons.arrow_back_ios_rounded,
+                                              size: 20,
+                                            ),
+                                          )
+                                        : null,
+                                    title: _AnnouncementInfoTitleSection(
+                                      details: state.announcementInfoDetails,
+                                    ),
+                                  ),
                                   Html(
                                     style: {
                                       'body': Style(

@@ -40,6 +40,7 @@ void main() {
       summary: 'Summary',
       thumbnail: 'https://picsum.photos/200/300',
       publishedDate: DateTimeStringValue(''),
+      releaseDate: DateTimeStringValue(''),
       manufacturer: Manufacturer('Manufacturer'),
       source: Source(''),
       tag: '',

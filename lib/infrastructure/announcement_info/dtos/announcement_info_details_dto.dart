@@ -21,6 +21,8 @@ class AnnouncementInfoDetailsDto with _$AnnouncementInfoDetailsDto {
         required String thumbnail,
     @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
         required String publishedDate,
+    @JsonKey(name: 'releaseDate', readValue: readIso)
+        required String releaseDate,
     @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
         required String manufacturer,
     @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
@@ -38,6 +40,7 @@ class AnnouncementInfoDetailsDto with _$AnnouncementInfoDetailsDto {
         manufacturer: Manufacturer(manufacturer),
         source: Source(source),
         tag: tag,
+        releaseDate: DateTimeStringValue(releaseDate),
       );
 
   factory AnnouncementInfoDetailsDto.fromJson(Map<String, dynamic> json) =>

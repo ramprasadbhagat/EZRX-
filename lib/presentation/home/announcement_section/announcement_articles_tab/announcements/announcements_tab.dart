@@ -1,12 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -92,6 +93,7 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
                       vertical: 10,
                     ),
                     child: ScrollList<AnnouncementArticleItem>(
+                      key: WidgetKeys.announcementListKey,
                       noRecordFoundWidget: const NoRecordFound(
                         key: WidgetKeys.announcementNotFoundRecordKey,
                         title: 'No Announcement found',
@@ -164,7 +166,7 @@ class _AnnouncementItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    item.publishedDate.dateOrDashString,
+                    item.releaseDate.dateTimeOrDashString,
                     key: WidgetKeys.announcementItemDateKey,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: ZPColors.neutralsGrey1,
@@ -173,24 +175,16 @@ class _AnnouncementItem extends StatelessWidget {
                         ),
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 2,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: ZPColors.orange,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
-                  child: Text(
-                    context.tr('New'),
-                    key: WidgetKeys.announcementItemNewTagKey,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: ZPColors.whiteBgCard,
-                        ),
-                  ),
+                Row(
+                  children: [
+                    if (item.releaseDate.aWeekDifference)
+                      const NewAnnouncementIcon(),
+                    if (item.pinToTop)
+                      const Icon(
+                        Icons.push_pin,
+                        color: ZPColors.kPrimaryColor,
+                      ),
+                  ],
                 ),
               ],
             ),

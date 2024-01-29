@@ -3,11 +3,11 @@ part of 'package:ezrxmobile/presentation/home/announcement_section/announcement_
 class _AnnouncementInfoItemDescription extends StatelessWidget {
   final String title;
   final String description;
-  final DateTimeStringValue publishedDate;
+  final DateTimeStringValue releaseDate;
   const _AnnouncementInfoItemDescription({
     Key? key,
     required this.title,
-    required this.publishedDate,
+    required this.releaseDate,
     required this.description,
   }) : super(key: key);
 
@@ -19,7 +19,7 @@ class _AnnouncementInfoItemDescription extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            publishedDate.dateOrDashString,
+            releaseDate.dateTimeOrDashString,
             style: Theme.of(context)
                 .textTheme
                 .bodySmall
@@ -30,16 +30,16 @@ class _AnnouncementInfoItemDescription extends StatelessWidget {
             maxLines: Responsive.isMobile(context) ? 2 : 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: ZPColors.neutralsBlack,
-            ),
+                  color: ZPColors.neutralsBlack,
+                ),
           ),
           Text(
             description,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: ZPColors.extraLightGrey4,
-            ),
+                  color: ZPColors.extraLightGrey4,
+                ),
           ),
         ],
       ),

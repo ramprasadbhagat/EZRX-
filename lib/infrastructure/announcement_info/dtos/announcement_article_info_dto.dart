@@ -41,6 +41,8 @@ class AnnouncementArticleItemDto with _$AnnouncementArticleItemDto {
     @JsonKey(name: 'content', readValue: getContent) required String content,
     @JsonKey(name: 'publishedDate', readValue: getDateValue)
         required String publishedDate,
+    @JsonKey(name: 'releaseDate', readValue: getDateValue)
+        required String releaseDate,
     @JsonKey(name: 'branch', readValue: getBranchNames)
         required List<BranchAndIc4InfoDto> branchInfo,
     @JsonKey(name: 'iC4', readValue: getIC4Names)
@@ -50,6 +52,7 @@ class AnnouncementArticleItemDto with _$AnnouncementArticleItemDto {
         required String manufacturer,
     @JsonKey(name: 'documents', readValue: getDocumentsList)
         required List<String> documentsList,
+    @JsonKey(name: 'pinToTop', readValue: readPinToTop) required bool pinToTop,
   }) = _AnnouncementArticleItemDto;
 
   factory AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =>
@@ -67,6 +70,8 @@ class AnnouncementArticleItemDto with _$AnnouncementArticleItemDto {
         tag: tag,
         manufacturer: manufacturer,
         documents: documentsList,
+        pinToTop: pinToTop,
+        releaseDate: DateTimeStringValue(releaseDate),
       );
 }
 
@@ -114,3 +119,5 @@ List<dynamic> getDocumentsList(Map json, String _) {
 
   return urlList.map((e) => e['url'] ?? '').toList();
 }
+
+bool readPinToTop(Map json, String key) => json[key]?['boolValue'] ?? false;

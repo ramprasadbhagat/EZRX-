@@ -201,11 +201,13 @@ mixin _$AnnouncementArticleItem {
   String get thumbnail => throw _privateConstructorUsedError;
   HtmlContent get content => throw _privateConstructorUsedError;
   DateTimeStringValue get publishedDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get releaseDate => throw _privateConstructorUsedError;
   List<BranchAndIc4Info> get branchInfo => throw _privateConstructorUsedError;
   List<BranchAndIc4Info> get iC4Info => throw _privateConstructorUsedError;
   String get tag => throw _privateConstructorUsedError;
   String get manufacturer => throw _privateConstructorUsedError;
   List<String> get documents => throw _privateConstructorUsedError;
+  bool get pinToTop => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnnouncementArticleItemCopyWith<AnnouncementArticleItem> get copyWith =>
@@ -225,11 +227,13 @@ abstract class $AnnouncementArticleItemCopyWith<$Res> {
       String thumbnail,
       HtmlContent content,
       DateTimeStringValue publishedDate,
+      DateTimeStringValue releaseDate,
       List<BranchAndIc4Info> branchInfo,
       List<BranchAndIc4Info> iC4Info,
       String tag,
       String manufacturer,
-      List<String> documents});
+      List<String> documents,
+      bool pinToTop});
 }
 
 /// @nodoc
@@ -252,11 +256,13 @@ class _$AnnouncementArticleItemCopyWithImpl<$Res,
     Object? thumbnail = null,
     Object? content = null,
     Object? publishedDate = null,
+    Object? releaseDate = null,
     Object? branchInfo = null,
     Object? iC4Info = null,
     Object? tag = null,
     Object? manufacturer = null,
     Object? documents = null,
+    Object? pinToTop = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -283,6 +289,10 @@ class _$AnnouncementArticleItemCopyWithImpl<$Res,
           ? _value.publishedDate
           : publishedDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      releaseDate: null == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
       branchInfo: null == branchInfo
           ? _value.branchInfo
           : branchInfo // ignore: cast_nullable_to_non_nullable
@@ -303,6 +313,10 @@ class _$AnnouncementArticleItemCopyWithImpl<$Res,
           ? _value.documents
           : documents // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      pinToTop: null == pinToTop
+          ? _value.pinToTop
+          : pinToTop // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -322,11 +336,13 @@ abstract class _$$_AnnouncementArticleItemCopyWith<$Res>
       String thumbnail,
       HtmlContent content,
       DateTimeStringValue publishedDate,
+      DateTimeStringValue releaseDate,
       List<BranchAndIc4Info> branchInfo,
       List<BranchAndIc4Info> iC4Info,
       String tag,
       String manufacturer,
-      List<String> documents});
+      List<String> documents,
+      bool pinToTop});
 }
 
 /// @nodoc
@@ -347,11 +363,13 @@ class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
     Object? thumbnail = null,
     Object? content = null,
     Object? publishedDate = null,
+    Object? releaseDate = null,
     Object? branchInfo = null,
     Object? iC4Info = null,
     Object? tag = null,
     Object? manufacturer = null,
     Object? documents = null,
+    Object? pinToTop = null,
   }) {
     return _then(_$_AnnouncementArticleItem(
       id: null == id
@@ -378,6 +396,10 @@ class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
           ? _value.publishedDate
           : publishedDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      releaseDate: null == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
       branchInfo: null == branchInfo
           ? _value._branchInfo
           : branchInfo // ignore: cast_nullable_to_non_nullable
@@ -398,6 +420,10 @@ class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
           ? _value._documents
           : documents // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      pinToTop: null == pinToTop
+          ? _value.pinToTop
+          : pinToTop // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -412,11 +438,13 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
       required this.thumbnail,
       required this.content,
       required this.publishedDate,
+      required this.releaseDate,
       required final List<BranchAndIc4Info> branchInfo,
       required final List<BranchAndIc4Info> iC4Info,
       required this.tag,
       required this.manufacturer,
-      required final List<String> documents})
+      required final List<String> documents,
+      required this.pinToTop})
       : _branchInfo = branchInfo,
         _iC4Info = iC4Info,
         _documents = documents,
@@ -434,6 +462,8 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
   final HtmlContent content;
   @override
   final DateTimeStringValue publishedDate;
+  @override
+  final DateTimeStringValue releaseDate;
   final List<BranchAndIc4Info> _branchInfo;
   @override
   List<BranchAndIc4Info> get branchInfo {
@@ -463,8 +493,11 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
   }
 
   @override
+  final bool pinToTop;
+
+  @override
   String toString() {
-    return 'AnnouncementArticleItem(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate, branchInfo: $branchInfo, iC4Info: $iC4Info, tag: $tag, manufacturer: $manufacturer, documents: $documents)';
+    return 'AnnouncementArticleItem(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate, releaseDate: $releaseDate, branchInfo: $branchInfo, iC4Info: $iC4Info, tag: $tag, manufacturer: $manufacturer, documents: $documents, pinToTop: $pinToTop)';
   }
 
   @override
@@ -480,6 +513,8 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
             (identical(other.content, content) || other.content == content) &&
             (identical(other.publishedDate, publishedDate) ||
                 other.publishedDate == publishedDate) &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate) &&
             const DeepCollectionEquality()
                 .equals(other._branchInfo, _branchInfo) &&
             const DeepCollectionEquality().equals(other._iC4Info, _iC4Info) &&
@@ -487,7 +522,9 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
             (identical(other.manufacturer, manufacturer) ||
                 other.manufacturer == manufacturer) &&
             const DeepCollectionEquality()
-                .equals(other._documents, _documents));
+                .equals(other._documents, _documents) &&
+            (identical(other.pinToTop, pinToTop) ||
+                other.pinToTop == pinToTop));
   }
 
   @override
@@ -499,11 +536,13 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
       thumbnail,
       content,
       publishedDate,
+      releaseDate,
       const DeepCollectionEquality().hash(_branchInfo),
       const DeepCollectionEquality().hash(_iC4Info),
       tag,
       manufacturer,
-      const DeepCollectionEquality().hash(_documents));
+      const DeepCollectionEquality().hash(_documents),
+      pinToTop);
 
   @JsonKey(ignore: true)
   @override
@@ -522,11 +561,13 @@ abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
       required final String thumbnail,
       required final HtmlContent content,
       required final DateTimeStringValue publishedDate,
+      required final DateTimeStringValue releaseDate,
       required final List<BranchAndIc4Info> branchInfo,
       required final List<BranchAndIc4Info> iC4Info,
       required final String tag,
       required final String manufacturer,
-      required final List<String> documents}) = _$_AnnouncementArticleItem;
+      required final List<String> documents,
+      required final bool pinToTop}) = _$_AnnouncementArticleItem;
   const _AnnouncementArticleItem._() : super._();
 
   @override
@@ -542,6 +583,8 @@ abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
   @override
   DateTimeStringValue get publishedDate;
   @override
+  DateTimeStringValue get releaseDate;
+  @override
   List<BranchAndIc4Info> get branchInfo;
   @override
   List<BranchAndIc4Info> get iC4Info;
@@ -551,6 +594,8 @@ abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
   String get manufacturer;
   @override
   List<String> get documents;
+  @override
+  bool get pinToTop;
   @override
   @JsonKey(ignore: true)
   _$$_AnnouncementArticleItemCopyWith<_$_AnnouncementArticleItem>
