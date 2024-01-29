@@ -9,6 +9,7 @@ class NewPaymentQuery {
           accountingDocument
           netDueDate
           documentDate
+          postingDate
           amountInTransactionCurrency
           documentReferenceID
           postingKeyName

@@ -6,6 +6,7 @@ query customerOpenItems($request: customerOpenItemsRequest!) {
             accountingDocument
             netDueDate
             documentDate
+            postingDate
             amountInTransactionCurrency
             documentReferenceID
             postingKeyName

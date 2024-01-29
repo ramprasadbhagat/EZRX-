@@ -301,7 +301,7 @@ void main() {
       final availableText = find.text('Invoice #1100001163');
       expect(availableText, findsOneWidget);
 
-      final dateText = find.text('31 Jul 2023');
+      final dateText = find.text('31 Jul 2016');
       expect(dateText, findsOneWidget);
 
       final documentReferenceID = find.text('Gov. no 0800072883');
@@ -344,7 +344,7 @@ void main() {
       final availableText = find.text('Invoice #1100001163');
       expect(availableText, findsOneWidget);
 
-      final dateText = find.text('31 Jul 2023');
+      final dateText = find.text('31 Jul 2016');
       expect(dateText, findsOneWidget);
 
       final documentReferenceID = find.text('Gov. no 0800072883');
@@ -676,6 +676,18 @@ void main() {
           ),
         ),
       ).called(1);
+    });
+
+    testWidgets('Find postingDate in available credits tab', (tester) async {
+      when(() => availableCreditsBlocMock.state).thenReturn(
+        AvailableCreditsState.initial().copyWith(items: fakeCredits),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final postingDate = find.text('31 Jul 2016');
+      expect(postingDate, findsOneWidget);
     });
   });
 }

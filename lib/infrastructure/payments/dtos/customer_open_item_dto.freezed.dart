@@ -28,6 +28,8 @@ mixin _$CustomerOpenItemDto {
   String get netDueDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentDate', defaultValue: '')
   String get documentDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'postingDate', defaultValue: '')
+  String get postingDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   String get documentReferenceID => throw _privateConstructorUsedError;
   @JsonKey(name: 'postingKeyName', defaultValue: '')
@@ -90,6 +92,7 @@ abstract class $CustomerOpenItemDtoCopyWith<$Res> {
       String accountingDocument,
       @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
       @JsonKey(name: 'documentDate', defaultValue: '') String documentDate,
+      @JsonKey(name: 'postingDate', defaultValue: '') String postingDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
       String documentReferenceID,
       @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
@@ -147,6 +150,7 @@ class _$CustomerOpenItemDtoCopyWithImpl<$Res, $Val extends CustomerOpenItemDto>
     Object? accountingDocument = null,
     Object? netDueDate = null,
     Object? documentDate = null,
+    Object? postingDate = null,
     Object? documentReferenceID = null,
     Object? postingKeyName = null,
     Object? amountInTransactionCurrency = null,
@@ -185,6 +189,10 @@ class _$CustomerOpenItemDtoCopyWithImpl<$Res, $Val extends CustomerOpenItemDto>
       documentDate: null == documentDate
           ? _value.documentDate
           : documentDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      postingDate: null == postingDate
+          ? _value.postingDate
+          : postingDate // ignore: cast_nullable_to_non_nullable
               as String,
       documentReferenceID: null == documentReferenceID
           ? _value.documentReferenceID
@@ -288,6 +296,7 @@ abstract class _$$_CustomerOpenItemDtoCopyWith<$Res>
       String accountingDocument,
       @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
       @JsonKey(name: 'documentDate', defaultValue: '') String documentDate,
+      @JsonKey(name: 'postingDate', defaultValue: '') String postingDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
       String documentReferenceID,
       @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
@@ -343,6 +352,7 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
     Object? accountingDocument = null,
     Object? netDueDate = null,
     Object? documentDate = null,
+    Object? postingDate = null,
     Object? documentReferenceID = null,
     Object? postingKeyName = null,
     Object? amountInTransactionCurrency = null,
@@ -381,6 +391,10 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
       documentDate: null == documentDate
           ? _value.documentDate
           : documentDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      postingDate: null == postingDate
+          ? _value.postingDate
+          : postingDate // ignore: cast_nullable_to_non_nullable
               as String,
       documentReferenceID: null == documentReferenceID
           ? _value.documentReferenceID
@@ -480,6 +494,7 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
       @JsonKey(name: 'netDueDate', defaultValue: '') required this.netDueDate,
       @JsonKey(name: 'documentDate', defaultValue: '')
       required this.documentDate,
+      @JsonKey(name: 'postingDate', defaultValue: '') required this.postingDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
       required this.documentReferenceID,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
@@ -536,6 +551,9 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
   @override
   @JsonKey(name: 'documentDate', defaultValue: '')
   final String documentDate;
+  @override
+  @JsonKey(name: 'postingDate', defaultValue: '')
+  final String postingDate;
   @override
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   final String documentReferenceID;
@@ -602,7 +620,7 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
 
   @override
   String toString() {
-    return 'CustomerOpenItemDto(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentDate: $documentDate, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, amountInTransactionCurrency: $amountInTransactionCurrency, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, companyCode: $companyCode, billingDocument: $billingDocument, openAmountInTransCrcy: $openAmountInTransCrcy)';
+    return 'CustomerOpenItemDto(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentDate: $documentDate, postingDate: $postingDate, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, amountInTransactionCurrency: $amountInTransactionCurrency, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, companyCode: $companyCode, billingDocument: $billingDocument, openAmountInTransCrcy: $openAmountInTransCrcy)';
   }
 
   @override
@@ -617,6 +635,8 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
                 other.netDueDate == netDueDate) &&
             (identical(other.documentDate, documentDate) ||
                 other.documentDate == documentDate) &&
+            (identical(other.postingDate, postingDate) ||
+                other.postingDate == postingDate) &&
             (identical(other.documentReferenceID, documentReferenceID) ||
                 other.documentReferenceID == documentReferenceID) &&
             (identical(other.postingKeyName, postingKeyName) ||
@@ -673,6 +693,7 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
         accountingDocument,
         netDueDate,
         documentDate,
+        postingDate,
         documentReferenceID,
         postingKeyName,
         amountInTransactionCurrency,
@@ -720,6 +741,8 @@ abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
       required final String netDueDate,
       @JsonKey(name: 'documentDate', defaultValue: '')
       required final String documentDate,
+      @JsonKey(name: 'postingDate', defaultValue: '')
+      required final String postingDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
       required final String documentReferenceID,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
@@ -779,6 +802,9 @@ abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
   @override
   @JsonKey(name: 'documentDate', defaultValue: '')
   String get documentDate;
+  @override
+  @JsonKey(name: 'postingDate', defaultValue: '')
+  String get postingDate;
   @override
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   String get documentReferenceID;

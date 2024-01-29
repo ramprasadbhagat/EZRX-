@@ -83,6 +83,7 @@ void main() {
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
       orderId: StringValue(''),
+      postingDate: DateTimeStringValue('2016-07-31'),
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
@@ -111,6 +112,7 @@ void main() {
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
       orderId: StringValue(''),
+      postingDate: DateTimeStringValue('2016-07-31'),
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
@@ -139,6 +141,7 @@ void main() {
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
       orderId: StringValue(''),
+      postingDate: DateTimeStringValue('2016-07-31'),
     ),
   ];
 
@@ -170,6 +173,7 @@ void main() {
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
       orderId: StringValue(''),
+      postingDate: DateTimeStringValue('2016-07-31'),
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
@@ -198,6 +202,7 @@ void main() {
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
       orderId: StringValue(''),
+      postingDate: DateTimeStringValue('2016-07-31'),
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
@@ -226,6 +231,7 @@ void main() {
       accountingDocExternalReference: 'fake-ADER',
       openAmountInTransCrcy: 50,
       orderId: StringValue(''),
+      postingDate: DateTimeStringValue('2016-07-31'),
     ),
   ];
 

@@ -35,6 +35,7 @@ class CustomerOpenItem with _$CustomerOpenItem {
     required String companyCode,
     required double openAmountInTransCrcy,
     required StringValue orderId,
+    required DateTimeStringValue postingDate,
   }) = _CustomerOpenItem;
 
   factory CustomerOpenItem.empty() => CustomerOpenItem(
@@ -64,6 +65,7 @@ class CustomerOpenItem with _$CustomerOpenItem {
         openAmountInTransCrcy: 0,
         orderId: StringValue(''),
         billingDocument: '',
+        postingDate: DateTimeStringValue(''),
       );
 }
 

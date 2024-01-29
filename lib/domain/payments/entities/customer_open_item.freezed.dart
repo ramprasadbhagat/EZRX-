@@ -44,6 +44,7 @@ mixin _$CustomerOpenItem {
   String get companyCode => throw _privateConstructorUsedError;
   double get openAmountInTransCrcy => throw _privateConstructorUsedError;
   StringValue get orderId => throw _privateConstructorUsedError;
+  DateTimeStringValue get postingDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerOpenItemCopyWith<CustomerOpenItem> get copyWith =>
@@ -82,7 +83,8 @@ abstract class $CustomerOpenItemCopyWith<$Res> {
       String billingDocument,
       String companyCode,
       double openAmountInTransCrcy,
-      StringValue orderId});
+      StringValue orderId,
+      DateTimeStringValue postingDate});
 }
 
 /// @nodoc
@@ -124,6 +126,7 @@ class _$CustomerOpenItemCopyWithImpl<$Res, $Val extends CustomerOpenItem>
     Object? companyCode = null,
     Object? openAmountInTransCrcy = null,
     Object? orderId = null,
+    Object? postingDate = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -230,6 +233,10 @@ class _$CustomerOpenItemCopyWithImpl<$Res, $Val extends CustomerOpenItem>
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      postingDate: null == postingDate
+          ? _value.postingDate
+          : postingDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
     ) as $Val);
   }
 }
@@ -268,7 +275,8 @@ abstract class _$$_CustomerOpenItemCopyWith<$Res>
       String billingDocument,
       String companyCode,
       double openAmountInTransCrcy,
-      StringValue orderId});
+      StringValue orderId,
+      DateTimeStringValue postingDate});
 }
 
 /// @nodoc
@@ -308,6 +316,7 @@ class __$$_CustomerOpenItemCopyWithImpl<$Res>
     Object? companyCode = null,
     Object? openAmountInTransCrcy = null,
     Object? orderId = null,
+    Object? postingDate = null,
   }) {
     return _then(_$_CustomerOpenItem(
       status: null == status
@@ -414,6 +423,10 @@ class __$$_CustomerOpenItemCopyWithImpl<$Res>
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      postingDate: null == postingDate
+          ? _value.postingDate
+          : postingDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
     ));
   }
 }
@@ -447,7 +460,8 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
       required this.billingDocument,
       required this.companyCode,
       required this.openAmountInTransCrcy,
-      required this.orderId})
+      required this.orderId,
+      required this.postingDate})
       : super._();
 
   @override
@@ -502,10 +516,12 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
   final double openAmountInTransCrcy;
   @override
   final StringValue orderId;
+  @override
+  final DateTimeStringValue postingDate;
 
   @override
   String toString() {
-    return 'CustomerOpenItem(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, billingDocument: $billingDocument, companyCode: $companyCode, openAmountInTransCrcy: $openAmountInTransCrcy, orderId: $orderId)';
+    return 'CustomerOpenItem(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, billingDocument: $billingDocument, companyCode: $companyCode, openAmountInTransCrcy: $openAmountInTransCrcy, orderId: $orderId, postingDate: $postingDate)';
   }
 
   @override
@@ -566,7 +582,8 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
                 other.companyCode == companyCode) &&
             (identical(other.openAmountInTransCrcy, openAmountInTransCrcy) ||
                 other.openAmountInTransCrcy == openAmountInTransCrcy) &&
-            (identical(other.orderId, orderId) || other.orderId == orderId));
+            (identical(other.orderId, orderId) || other.orderId == orderId) &&
+            (identical(other.postingDate, postingDate) || other.postingDate == postingDate));
   }
 
   @override
@@ -597,7 +614,8 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
         billingDocument,
         companyCode,
         openAmountInTransCrcy,
-        orderId
+        orderId,
+        postingDate
       ]);
 
   @JsonKey(ignore: true)
@@ -634,7 +652,8 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
       required final String billingDocument,
       required final String companyCode,
       required final double openAmountInTransCrcy,
-      required final StringValue orderId}) = _$_CustomerOpenItem;
+      required final StringValue orderId,
+      required final DateTimeStringValue postingDate}) = _$_CustomerOpenItem;
   _CustomerOpenItem._() : super._();
 
   @override
@@ -689,6 +708,8 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
   double get openAmountInTransCrcy;
   @override
   StringValue get orderId;
+  @override
+  DateTimeStringValue get postingDate;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerOpenItemCopyWith<_$_CustomerOpenItem> get copyWith =>

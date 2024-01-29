@@ -17,6 +17,7 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
     @JsonKey(name: 'netDueDate', defaultValue: '') required String netDueDate,
     @JsonKey(name: 'documentDate', defaultValue: '')
         required String documentDate,
+    @JsonKey(name: 'postingDate', defaultValue: '') required String postingDate,
     @JsonKey(name: 'documentReferenceID', defaultValue: '')
         required String documentReferenceID,
     @JsonKey(name: 'postingKeyName', defaultValue: '')
@@ -86,6 +87,7 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
       openAmountInTransCrcy: openAmountInTransCrcy,
       orderId: StringValue(''),
       billingDocument: billingDocument,
+      postingDate: DateTimeStringValue(postingDate),
     );
   }
 

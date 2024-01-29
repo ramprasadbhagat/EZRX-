@@ -29,7 +29,7 @@ class CreditItemCard extends StatelessWidget {
                 key: WidgetKeys.accountingDocument,
               ),
               Text(
-                customerOpenItem.netDueDate.dateString,
+                customerOpenItem.postingDate.dateString,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.darkGray,
                     ),
