@@ -11,14 +11,12 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 
 import '../../../common_mock_data/user_mock.dart';
@@ -46,7 +44,6 @@ void main() {
   late Map<MaterialNumber, PriceAggregate> itemsAfterGetMaterials;
   late Map<MaterialNumber, bool> selectedItems;
   late ComboDeal comboDeal;
-  late List<MaterialPriceDetail> materialPrices;
   late Map<MaterialNumber, bool> selectionStatus;
   late Map<MaterialNumber, int> qty;
   late List<MaterialInfo> materialInfos;
@@ -72,11 +69,6 @@ void main() {
       shipToInfo: fakeShipToInfo,
     );
     comboDeal = (await ComboDealLocalDataSource().getComboDealList()).first;
-
-    materialPrices =
-        (await MaterialPriceDetailLocalDataSource().getMaterialDetailList())
-            .take(3)
-            .toList();
     materialInfos = await MaterialListLocalDataSource().getMaterialList();
     materialStockInfos =
         await StockInfoLocalDataSource().getMaterialStockInfoList();
@@ -84,11 +76,6 @@ void main() {
       productList[i] = productList[i].copyWith(
         materialInfo: productList[i]
             .materialInfo
-            .copyWith(materialNumber: comboDeal.allMaterialNumbers[i]),
-      );
-      materialPrices[i] = materialPrices[i].copyWith(
-        info: materialPrices[i]
-            .info
             .copyWith(materialNumber: comboDeal.allMaterialNumbers[i]),
       );
       materialInfos[i] = materialInfos[i].copyWith(
@@ -167,56 +154,6 @@ void main() {
           items: items,
           selectedItems: selectedItems,
           isFetchingPrice: true,
-        )
-      ],
-    );
-    blocTest(
-      'combo deal material bloc setPriceInfo',
-      setUp: () {
-        items = {
-          for (final item in productList)
-            item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeKHSalesOrgConfigs,
-            ),
-        };
-        final priceMap = {
-          for (int i = 0; i < 2; i++)
-            productList[i].getMaterialNumber: materialPrices[i]
-        };
-        priceMap.forEach(
-          (key, value) {
-            if (items[key] != null) {
-              items[key] = items[key]!.copyWith(
-                price: value.price,
-              );
-            }
-          },
-        );
-      },
-      build: () => ComboDealMaterialDetailBloc(
-        productDetailRepository: productDetailRepository,
-        materialListRepository: materialListRepository,
-        config: config,
-      ),
-      seed: () => initialState.copyWith(
-        items: {
-          for (final item in productList)
-            item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: fakeKHSalesOrgConfigs,
-            ),
-        },
-      ),
-      act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
-        ComboDealMaterialDetailEvent.setPriceInfo(
-          priceMap: {
-            for (int i = 0; i < 2; i++)
-              productList[i].getMaterialNumber: materialPrices[i]
-          },
-        ),
-      ),
-      expect: () => [
-        initialState.copyWith(
-          items: items,
         )
       ],
     );

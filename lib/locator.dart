@@ -289,9 +289,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote.dart';
@@ -332,7 +329,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.
 import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/material_price_detail_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
@@ -1330,32 +1326,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => MaterialPriceBloc(
       repository: locator<MaterialPriceRepository>(),
-    ),
-  );
-
-  //============================================================
-  //  Material Price Detail
-  //
-  //============================================================
-
-  locator.registerLazySingleton(() => MaterialPriceDetailQueryMutation());
-
-  locator.registerLazySingleton(() => MaterialPriceDetailLocalDataSource());
-
-  locator.registerLazySingleton(
-    () => MaterialPriceDetailRemoteDataSource(
-      config: locator<Config>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      httpService: locator<HttpService>(),
-      queryMutation: locator<MaterialPriceDetailQueryMutation>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => MaterialPriceDetailRepository(
-      config: locator<Config>(),
-      localDataSource: locator<MaterialPriceDetailLocalDataSource>(),
-      remoteDataSource: locator<MaterialPriceDetailRemoteDataSource>(),
     ),
   );
 
