@@ -3,6 +3,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class IntroStep extends StatelessWidget {
   final IntroObject introObject;
@@ -25,7 +26,7 @@ class IntroStep extends StatelessWidget {
       children: [
         Expanded(
           flex: 3,
-          child: Image.asset(
+          child: SvgPicture.asset(
             introObject.assetsPath,
             fit: BoxFit.contain,
           ),

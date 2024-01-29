@@ -24,7 +24,7 @@ class _IntroPageState extends State<IntroPage> {
         heading: 'Order and track easily',
         description:
             'With the new and improved eZRx+ mobile app, you can order your prescription drugs, view order history and track delivery statuses easily.',
-        assetsPath: 'assets/images/temp1.png',
+        assetsPath: 'assets/svg/intro_notes.svg',
         backgroundColor: ZPColors.introBlueBGColor,
         headingColor: ZPColors.white,
         descriptionColor: ZPColors.white,
@@ -37,7 +37,7 @@ class _IntroPageState extends State<IntroPage> {
           heading: 'Payments on the go',
           description:
               'Make payments, check credit limit and account summary balance with greater convenience.',
-          assetsPath: 'assets/images/temp3.png',
+          assetsPath: 'assets/svg/intro_shopping_bag.svg',
           backgroundColor: ZPColors.lightVioletBGColor,
           headingColor: ZPColors.white,
           descriptionColor: ZPColors.white,
@@ -50,7 +50,7 @@ class _IntroPageState extends State<IntroPage> {
           heading: 'Hassle-free returns',
           description:
               'Raise a return request and get notified of the approval status.',
-          assetsPath: 'assets/images/temp2.png',
+          assetsPath: 'assets/svg/intro_wallet.svg',
           backgroundColor: ZPColors.blueBGColor,
           headingColor: ZPColors.white,
           descriptionColor: ZPColors.white,
