@@ -52,10 +52,16 @@ class MaterialItemOverrideDto with _$MaterialItemOverrideDto {
   factory MaterialItemOverrideDto.fromPriceAggregate(
     PriceAggregate priceAggregate,
   ) {
+    // for bundles we've to pass the override price,
+    // else SAP will consider the material's actual
+    // price instead of bundle unit price
+    final isMaterialItemOverride = priceAggregate.price.isPriceOverride ||
+        priceAggregate.materialInfo.type.typeBundle;
+
     return MaterialItemOverrideDto(
       reference: '',
       valueOverride: [
-        if (priceAggregate.price.isPriceOverride)
+        if (isMaterialItemOverride)
           ValueOverrideDto.fromDomain(
             ValueOverride.empty().copyWith(
               price: priceAggregate.materialInfo.type.typeBundle

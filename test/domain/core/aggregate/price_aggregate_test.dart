@@ -149,8 +149,7 @@ void main() {
         'toSubmitMaterialInfo from PriceAggregate should return empty batch number',
         () {
       final customPriceAggregate = emptyPriceAggregate.copyWith(
-        salesOrgConfig:
-            fakeMYSalesOrgConfigs,
+        salesOrgConfig: fakeMYSalesOrgConfigs,
       );
       final submitMaterialInfo = customPriceAggregate.toSubmitMaterialInfo();
       expect(submitMaterialInfo.batch, BatchNumber(''));
@@ -409,8 +408,7 @@ void main() {
               PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
             ],
           ),
-          salesOrgConfig:
-              fakeVNSalesOrgConfigs,
+          salesOrgConfig: fakeVNSalesOrgConfigs,
           materialInfo: emptyMaterialInfo.copyWith(
             tax: 5,
           ),
@@ -2233,6 +2231,35 @@ void main() {
     expect(
       customPriceAggregate.toSubmitMaterialInfo().price,
       0,
+    );
+  });
+
+  test('=> toSubmitMaterialInfo with bundle item materialItemOverride override',
+      () {
+    final customPriceAggregate = emptyPriceAggregate.copyWith(
+      bundle: Bundle.empty().copyWith(
+        bundleInformation: [
+          BundleInfo(
+            sequence: 1,
+            quantity: 40,
+            type: DiscountType('SGD'),
+            rate: 20,
+          ),
+        ],
+      ),
+      quantity: 45,
+      materialInfo: MaterialInfo.empty().copyWith(
+        type: MaterialInfoType('bundle'),
+      ),
+    );
+
+    expect(
+      customPriceAggregate
+          .toSubmitMaterialInfo()
+          .materialItemOverride
+          .valueOverride
+          .isNotEmpty,
+      true,
     );
   });
 }
