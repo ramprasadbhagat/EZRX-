@@ -18,7 +18,7 @@ class CustomerBlockedBanner extends StatelessWidget {
         return state.shipToInfo.customerBlock.isCustomerBlocked
             ? ColorContainer(
                 key: WidgetKeys.customerBlockedBanner,
-                color: ZPColors.priceWarning,
+                color: ZPColors.customerBlockedBannerColor,
                 margin: const EdgeInsets.all(0),
                 padding: const EdgeInsets.symmetric(
                   vertical: 12,
