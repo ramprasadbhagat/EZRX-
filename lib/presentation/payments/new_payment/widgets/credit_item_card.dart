@@ -55,7 +55,8 @@ class CreditItemCard extends StatelessWidget {
                   key: WidgetKeys.creditIdPrice,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: customerOpenItem.openAmountInTransCrcy.toString(),
+                  price:
+                      customerOpenItem.openAmountInTransCrcy.abs().toString(),
                 ),
               ],
             ),

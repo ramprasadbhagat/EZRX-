@@ -279,7 +279,7 @@ void main() {
     testWidgets('First item credit show for other market except PH',
         (tester) async {
       final creditItem = fakeCredits.first;
-      final creditAmount = creditItem.openAmountInTransCrcy.toString();
+      final creditAmount = creditItem.openAmountInTransCrcy.abs().toString();
 
       when(() => availableCreditsBlocMock.state).thenReturn(
         AvailableCreditsState.initial().copyWith(
@@ -322,7 +322,8 @@ void main() {
         (tester) async {
       final creditItem =
           fakeCredits.first.copyWith(displayCurrency: Currency('PHP'));
-      final creditAmountForPH = creditItem.openAmountInTransCrcy.toString();
+      final creditAmountForPH =
+          creditItem.openAmountInTransCrcy.abs().toString();
 
       when(() => availableCreditsBlocMock.state).thenReturn(
         AvailableCreditsState.initial().copyWith(
