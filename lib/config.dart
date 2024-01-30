@@ -405,8 +405,22 @@ class Config {
   String get idMarketArticleTemplate2 => 'DD1070C3-A45A-4412-B2CD-7892567B136E';
   String get faqTemplate => '4A583EF3-A105-4A00-BC98-EC96A9967966';
 
-  String get announcementImageBaseUrl =>
-      'https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/';
+  String get announcementImageBaseUrl {
+    switch (appFlavor) {
+      case Flavor.dev:
+        return 'https://edge.sitecorecloud.io/zuelligphar9b34-zpcms-test-fcf9/';
+      case Flavor.uat:
+        return 'https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/';
+      case Flavor.prod:
+        return 'https://edge.sitecorecloud.io/zuelligphar3c90-zpcms-prod-4532/';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
+
+  // String get announcementImageBaseUrl =>
+  //     'https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/';
 
   //============================================================
   //  EZPoint
