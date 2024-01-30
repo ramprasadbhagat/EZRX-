@@ -67,6 +67,7 @@ class _MaterialItem extends StatelessWidget {
       ),
       subtitle: '',
       priceComponent: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [

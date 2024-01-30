@@ -18,18 +18,11 @@ class GovtListPriceComponent extends StatelessWidget {
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return salesOrgConfigs.showGovtListPrice
-        ? Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Expanded(
-                child: PriceComponent(
-                  title: '${context.tr('List price')}: ',
-                  type: PriceStyle.govtMaterialListPrice,
-                  price: price,
-                  salesOrgConfig: salesOrgConfigs,
-                ),
-              ),
-            ],
+        ? PriceComponent(
+            title: '${context.tr('List price')}: ',
+            type: PriceStyle.govtMaterialListPrice,
+            price: price,
+            salesOrgConfig: salesOrgConfigs,
           )
         : const SizedBox.shrink();
   }

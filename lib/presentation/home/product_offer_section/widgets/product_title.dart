@@ -77,7 +77,9 @@ class _ProductTile extends StatelessWidget {
                                 ),
                               ),
                               FavouriteIcon(
-                                key: WidgetKeys.favIcon(materialInfo.materialNumber.getOrDefaultValue('')),
+                                key: WidgetKeys.favIcon(materialInfo
+                                    .materialNumber
+                                    .getOrDefaultValue(''),),
                                 isFavourite: materialInfo.isFavourite,
                                 visualDensity: const VisualDensity(
                                   horizontal: -4,
