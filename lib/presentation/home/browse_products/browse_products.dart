@@ -27,24 +27,50 @@ class BrowseProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<MaterialListBloc>(
       create: (context) => locator<MaterialListBloc>(),
-      child: BlocListener<EligibilityBloc, EligibilityState>(
-        listenWhen: (previous, current) =>
-            previous.isLoading != current.isLoading && !current.isLoading,
-        listener: (context, state) {
-          context.read<MaterialListBloc>().add(
-                MaterialListEvent.fetch(
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  configs:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
-                  shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
-                  selectedMaterialFilter: MaterialFilter.empty(),
-                  user: context.read<UserBloc>().state.user,
-                ),
-              );
-        },
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<EligibilityBloc, EligibilityState>(
+            listenWhen: (previous, current) =>
+                previous.isLoading != current.isLoading && !current.isLoading,
+            listener: (context, state) {
+              context.read<MaterialListBloc>().add(
+                    MaterialListEvent.fetch(
+                      salesOrganisation: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .salesOrganisation,
+                      configs:
+                          context.read<EligibilityBloc>().state.salesOrgConfigs,
+                      customerCodeInfo: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<EligibilityBloc>().state.shipToInfo,
+                      selectedMaterialFilter: MaterialFilter.empty(),
+                      user: context.read<UserBloc>().state.user,
+                    ),
+                  );
+            },
+          ),
+          BlocListener<MaterialListBloc, MaterialListState>(
+            listenWhen: (previous, current) =>
+                previous.materialList != current.materialList,
+            listener: (context, state) {
+              if (state.materialList.isNotEmpty) {
+                context.read<MaterialPriceBloc>().add(
+                      MaterialPriceEvent.fetch(
+                        comboDealEligible: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .comboDealEligible,
+                        materials: state.materialList,
+                      ),
+                    );
+              }
+            },
+          ),
+        ],
         child: BlocBuilder<MaterialListBloc, MaterialListState>(
           buildWhen: (previous, current) =>
               previous.materialList != current.materialList,

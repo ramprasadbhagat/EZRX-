@@ -340,5 +340,28 @@ void main() {
         ).called(1);
       },
     );
+
+    testWidgets(
+      '-> Test Price Fetch',
+      (WidgetTester tester) async {
+        whenListen(
+          materialListBlocMock,
+          Stream.fromIterable([
+            MaterialListState.initial().copyWith(materialList: materialList),
+          ]),
+        );
+
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+        verify(
+          () => materialPriceBlocMock.add(
+            MaterialPriceEvent.fetch(
+              comboDealEligible: false,
+              materials: materialList,
+            ),
+          ),
+        ).called(1);
+      },
+    );
   });
 }
