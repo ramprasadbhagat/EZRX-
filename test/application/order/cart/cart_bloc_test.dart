@@ -741,6 +741,105 @@ void main() {
         ),
         expect: () => expectedCartState,
       );
+
+      blocTest<CartBloc, CartState>(
+        'fetch Bonus Items Meta Data when bonus sample items is added to cart',
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        setUp: () {
+          final priceAggregateAllMaterial = allMaterial([
+            priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem)
+          ]);
+
+          expectedCartState = [
+            CartState.initial().copyWith(
+              salesOrganisation: fakeMYSalesOrganisation,
+              config: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              cartProducts: [
+                priceAggregates.first
+                    .copyWith(bonusSampleItems: bonusSampleItem),
+              ],
+              isFetchingCartProductDetail: true,
+            ),
+            CartState.initial().copyWith(
+              salesOrganisation: fakeMYSalesOrganisation,
+              config: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              cartProducts: [
+                priceAggregates.first
+                    .copyWith(bonusSampleItems: bonusSampleItem),
+              ],
+              additionInfo: ProductMetaData.empty().metaDataMap,
+            ),
+            CartState.initial().copyWith(
+              salesOrganisation: fakeMYSalesOrganisation,
+              config: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              isUpdatingStock: true,
+              cartProducts: [
+                priceAggregates.first
+                    .copyWith(bonusSampleItems: bonusSampleItem)
+              ],
+              additionInfo: ProductMetaData.empty().metaDataMap,
+            ),
+            CartState.initial().copyWith(
+              salesOrganisation: fakeMYSalesOrganisation,
+              config: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              cartProducts: [
+                priceAggregates.first
+                    .copyWith(bonusSampleItems: bonusSampleItem),
+              ],
+              apiFailureOrSuccessOption: optionOf(Left(fakeError)),
+              additionInfo: ProductMetaData.empty().metaDataMap,
+            ),
+          ];
+          when(
+            () => cartRepositoryMock.getStockInfoList(
+              items: priceAggregateAllMaterial,
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+            ),
+          ).thenAnswer(
+            (invocation) async => Left(fakeError),
+          );
+          when(
+            () => productDetailRepository.getProductsMetaData(
+              materialNumbers: [
+                MaterialNumber('000000000021041772'),
+                MaterialNumber('fake-bonus-sample-item-1')
+              ],
+              salesOrganisation: fakeMYSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(ProductMetaData.empty()),
+          );
+        },
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          cartProducts: [
+            priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem)
+          ],
+        ),
+        act: (bloc) => bloc.add(
+          CartEvent.getDetailsProductsAddedToCart(
+            cartProducts: [
+              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem)
+            ],
+          ),
+        ),
+        expect: () => expectedCartState,
+      );
     },
   );
 

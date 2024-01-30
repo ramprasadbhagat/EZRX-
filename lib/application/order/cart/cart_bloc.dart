@@ -567,6 +567,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                   .map((comboMaterial) => comboMaterial.productId),
             );
           }
+          materialNumberList.addAll(
+            cartProduct.bonusSampleItems.map((e) => e.materialNumber),
+          );
         }
 
         final failureOrSuccess =
