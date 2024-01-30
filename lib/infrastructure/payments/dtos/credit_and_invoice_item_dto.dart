@@ -112,6 +112,16 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
         required String referenceId,
     @JsonKey(name: 'documentReferenceID', defaultValue: '')
         required String documentReferenceID,
+    @JsonKey(
+      name: 'grossAmount',
+      defaultValue: 0.0,
+    )
+        required double grossAmount,
+    @JsonKey(
+      name: 'netAmount',
+      defaultValue: 0.0,
+    )
+        required double netAmount,
   }) = _CreditAndInvoiceItemDto;
 
   CreditAndInvoiceItem toDomain() {
@@ -131,6 +141,8 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       discount: discount,
       manualFee: manualFee,
       taxAmount: taxAmount,
+      grossAmount: grossAmount,
+      netAmount: netAmount,
       invoiceReference: StringValue(invoiceReference),
       invoiceProcessingStatus: StatusType(invoiceProcessingStatus),
       orderId: StringValue(orderId),

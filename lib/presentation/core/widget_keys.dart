@@ -1178,6 +1178,12 @@ class WidgetKeys {
   static const Key invoiceDetailsOrderNumberButton =
       Key('invoiceDetailsOrderNumberButton');
   static const Key invoiceDetailIdAndStatus = Key('invoiceDetailIdAndStatus');
+  static const Key invoiceDetailTax = Key('invoiceDetailTax');
+  static const Key invoiceDetailTotalSaving = Key('invoiceDetailTotalSaving');
+  static const Key invoiceDetailSmallOrderFee =
+      Key('invoiceDetailSmallOrderFee');
+  static const Key invoiceDetailManualFee = Key('invoiceDetailManualFee');
+
   //============================================================
   //  All Credits
   //============================================================
@@ -1195,6 +1201,11 @@ class WidgetKeys {
   static const Key creditDetailsTile = Key('creditDetailsTile');
   static const Key creditSummaryTile = Key('creditSummaryTile');
   static const Key creditStatusTag = Key('creditStatusTag');
+  static const Key creditDetailCreditTotal = Key('creditDetailCreditTotal');
+  static const Key creditDetailSubTotal = Key('creditDetailSubTotal');
+  static const Key creditDetailTax = Key('creditDetailTax');
+  static const Key creditDetailSmallOrderFee = Key('creditDetailSmallOrderFee');
+  static const Key creditDetailManualFee = Key('creditDetailManualFee');
 
   //===========================================================
   //  Account Summary Page - Full summary

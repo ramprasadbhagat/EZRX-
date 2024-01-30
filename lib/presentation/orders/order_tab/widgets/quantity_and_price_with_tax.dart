@@ -24,6 +24,7 @@ class QuantityAndPriceWithTax extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //TODO: Will cover this parse in another refactoring task later
+    final eligibilityState = context.read<EligibilityBloc>().state;
     final netPriceValue = double.tryParse(netPrice) ?? 0;
 
     return Row(
@@ -53,13 +54,15 @@ class QuantityAndPriceWithTax extends StatelessWidget {
           children: [
             PriceComponent(
               key: WidgetKeys.cartItemProductTotalPrice,
-              salesOrgConfig:
-                  context.read<EligibilityBloc>().state.salesOrgConfigs,
-              price: netPrice,
+              salesOrgConfig: eligibilityState.salesOrgConfigs,
+              price: (eligibilityState
+                          .salesOrgConfigs.displaySubtotalTaxBreakdown ||
+                      netPriceValue == 0)
+                  ? netPrice
+                  : (netPriceValue * (1 + taxPercentage / 100)).toString(),
             ),
-            if (taxPercentage > 0 &&
-                netPriceValue > 0 &&
-                !context.read<EligibilityBloc>().state.salesOrg.isID)
+            if (eligibilityState.salesOrgConfigs.displayItemTaxBreakdown &&
+                netPriceValue > 0)
               MaterialTax(
                 totalPrice: netPriceValue,
                 percentage: taxPercentage,

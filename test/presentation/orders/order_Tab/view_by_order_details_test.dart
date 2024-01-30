@@ -1652,14 +1652,14 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
         ),
       );
       when(() => viewByOrderBlocMock.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
           viewByOrderList: viewByOrderWithTax,
         ),
       );

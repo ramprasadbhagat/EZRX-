@@ -38,7 +38,10 @@ class CreditDetailsPage extends StatelessWidget {
           return ListView(
             key: WidgetKeys.creditDetailsPageListView,
             children: [
-              CreditDetailsSection(creditItem: state.basicInfo),
+              CreditDetailsSection(
+                creditItem: state.basicInfo,
+                creditItems: state.itemsInfo,
+              ),
               CreditItemsSection(creditItems: state.itemsInfo.groupList),
             ],
           );

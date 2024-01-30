@@ -23,8 +23,8 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -32,7 +32,6 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_details_section.dart';
-import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_items_section.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/order_number_section.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/summary.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -470,7 +469,6 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byKey(WidgetKeys.invoiceDetailsPageListView), findsOneWidget);
       expect(find.byType(InvoiceSummary), findsOneWidget);
-      expect(find.textContaining('Total savings'), findsOneWidget);
     });
 
     testWidgets(' => Display invoice item section', (tester) async {
@@ -486,26 +484,25 @@ void main() {
       );
 
       await getWidget(tester);
-      await tester.pumpAndSettle();
-      expect(find.byType(InvoiceSummary), findsOneWidget);
-      await tester.drag(find.byType(InvoiceSummary), const Offset(0, -1000));
-      await tester.pumpAndSettle();
-      expect(
-        find.byType(InvoiceItemsSection),
-        findsOneWidget,
-      );
-      expect(
+      await tester.pump();
+
+      await tester.dragUntilVisible(
         find.byKey(
           WidgetKeys.invoiceDetailMaterialUnitPrice,
         ),
-        findsOneWidget,
+        find.byKey(
+          WidgetKeys.invoiceDetailsPageListView,
+        ),
+        const Offset(0.0, -500),
       );
+      await tester.pumpAndSettle();
+
       expect(
         (tester.widget(
           find.byKey(WidgetKeys.invoiceDetailMaterialUnitPrice),
         ) as PriceComponent)
             .price,
-        fakeInvoiceDetail.unitPrice.toString(),
+        fakeInvoiceDetail.unitGrossPrice.toString(),
       );
       expect(
         find.descendant(

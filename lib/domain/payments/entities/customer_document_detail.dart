@@ -54,8 +54,22 @@ class CustomerDocumentDetail with _$CustomerDocumentDetail {
         ),
         productImages: ProductImages.empty(),
       );
+  bool get batchNumHasData => batchNumber.isValid() || expiryDate.isNotEmpty;
+  double get unitNetPrice => netAmount / billingQuantity.getOrDefaultValue(1);
+  double get unitGrossPrice =>
+      grossAmount / billingQuantity.getOrDefaultValue(1);
 
-  double get unitPrice => netAmount / billingQuantity.getOrDefaultValue(1);
+  bool get isNotFree => unitNetPrice != 0;
+  String get netPriceText => isNotFree ? netAmount.toString() : 'FREE';
+  double get taxPercent {
+    if (isNotFree) {
+      return double.parse(
+        (taxAmount / netAmount * 100).toStringAsExponential(2),
+      );
+    }
+
+    return 0;
+  }
 }
 
 extension CustomerDocumentDetailExtension on List<CustomerDocumentDetail> {
@@ -69,5 +83,22 @@ extension CustomerDocumentDetailExtension on List<CustomerDocumentDetail> {
           ),
         )
         .toList();
+  }
+
+  double get totalNetAmount =>
+      fold<double>(0, (previousValue, e) => previousValue + e.netAmount);
+
+  double get totalGrossAmount =>
+      fold<double>(0, (previousValue, e) => previousValue + e.grossAmount);
+
+  double get totalTaxAmount =>
+      fold<double>(0, (previousValue, e) => previousValue + e.taxAmount);
+
+  double get taxPercent {
+    if (totalNetAmount == 0) return 0;
+
+    return double.parse(
+      (totalTaxAmount / totalNetAmount * 100).toStringAsExponential(2),
+    );
   }
 }

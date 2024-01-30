@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -85,8 +86,10 @@ class _InvoiceItemDetail extends StatelessWidget {
 
     return CommonTileItem(
       key: Key(customerDocumentDetail.batchNumber.getOrDefaultValue('')),
-      headerText:
-          '${context.tr('Batch')} ${customerDocumentDetail.batchNumber.getOrDefaultValue('')} (EXP:${customerDocumentDetail.expiryDate.dateString})',
+      headerText: salesOrgConfigs.batchNumDisplay &&
+              customerDocumentDetail.batchNumHasData
+          ? '${context.tr('Batch')} ${customerDocumentDetail.batchNumber.getOrDefaultValue('')} (EXP:${customerDocumentDetail.expiryDate.dateString})'
+          : null,
       materialNumber: customerDocumentDetail.materialNumber,
       label: customerDocumentDetail.materialNumber.displayMatNo,
       subtitle: '',
@@ -96,28 +99,20 @@ class _InvoiceItemDetail extends StatelessWidget {
       isQuantityBelowImage: true,
       isQuantityRequired: false,
       statusWidget: const SizedBox.shrink(),
-      footerWidget: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            '${context.tr('Qty')}: ${customerDocumentDetail.billingQuantity.getOrDefaultValue(0)}',
-            key: WidgetKeys.invoiceDetailMaterialQty,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: ZPColors.black,
-                ),
-          ),
-          PriceComponent(
-            key: WidgetKeys.invoiceDetailMaterialTotalPrice,
-            salesOrgConfig: salesOrgConfigs,
-            price: customerDocumentDetail.netAmount.toString(),
-          ),
-        ],
+      footerWidget: QuantityAndPriceWithTax(
+        quantity: customerDocumentDetail.billingQuantity.getOrDefaultValue(0),
+        taxPercentage: customerDocumentDetail.taxPercent,
+        netPrice: customerDocumentDetail.netPriceText,
       ),
-      priceComponent: PriceComponent(
-        key: WidgetKeys.invoiceDetailMaterialUnitPrice,
-        salesOrgConfig: salesOrgConfigs,
-        price: customerDocumentDetail.unitPrice.toString(),
-      ),
+      priceComponent: customerDocumentDetail.isNotFree
+          ? PriceComponent(
+              key: WidgetKeys.invoiceDetailMaterialUnitPrice,
+              salesOrgConfig: salesOrgConfigs,
+              price: salesOrgConfigs.displaySubtotalTaxBreakdown
+                  ? customerDocumentDetail.unitNetPrice.toString()
+                  : customerDocumentDetail.unitGrossPrice.toString(),
+            )
+          : null,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -10,16 +11,17 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 
 class InvoiceSummary extends StatelessWidget {
   final CreditAndInvoiceItem invoiceItem;
+  final List<CustomerDocumentDetail> customerDocumentDetail;
 
   const InvoiceSummary({
     Key? key,
     required this.invoiceItem,
+    required this.customerDocumentDetail,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final salesOrgConfigs =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
     return Padding(
       padding: const EdgeInsets.all(20),
@@ -35,23 +37,89 @@ class InvoiceSummary extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            key: WidgetKeys.invoiceDetailSubTotal,
             children: [
               Text(
-                '${context.tr(salesOrgConfigs.salesOrg.subTotalText)}:',
+                context.tr(
+                  'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
+                ),
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
                 type: PriceStyle.summaryPrice,
-                key: WidgetKeys.invoiceDetailSubTotal,
-                salesOrgConfig: salesOrgConfigs,
-                price: salesOrgConfigs.salesOrg.isID
-                    ? invoiceItem.totalExcludeTax.toString()
-                    : invoiceItem.amountInTransactionCurrency.toString(),
+                salesOrgConfig: eligibilityState.salesOrgConfigs,
+                price: eligibilityState.salesOrgConfigs.showSubtotalTaxBreakdown
+                    ? customerDocumentDetail.totalNetAmount.toString()
+                    : customerDocumentDetail.totalGrossAmount.toString(),
               ),
             ],
           ),
-          if (salesOrgConfigs.salesOrg.isID)
-            _SummaryBreakDownForID(
-              invoiceItem: invoiceItem,
+          if (eligibilityState.salesOrgConfigs.showSubtotalTaxBreakdown) ...[
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Row(
+                key: WidgetKeys.invoiceDetailTax,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    eligibilityState.salesOrg.isVN
+                        ? context.tr('Tax')
+                        : '${context.tr('Tax at')} ${customerDocumentDetail.taxPercent}%',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  PriceComponent(
+                    type: PriceStyle.summaryPrice,
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
+                    price: customerDocumentDetail.totalTaxAmount.toString(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          if (eligibilityState.salesOrg.showSmallOrderFee) ...[
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Row(
+                key: WidgetKeys.invoiceDetailSmallOrderFee,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${context.tr('Small order fee')}:',
+                  ),
+                  PriceComponent(
+                    type: PriceStyle.summaryPrice,
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
+                    price: invoiceItem.deliveryFee.toString(),
+                  ),
+                ],
+              ),
+            ),
+            Text(
+              '${context.tr('Applies to orders less than')} ${StringUtils.formatPrice(
+                eligibilityState.salesOrgConfigs,
+                eligibilityState.salesOrgConfigs.salesOrg.smallOrderThreshold,
+              )}',
+              style:
+                  Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10),
+            ),
+          ],
+          if (eligibilityState.salesOrg.showManualFee)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Row(
+                key: WidgetKeys.invoiceDetailManualFee,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${context.tr('Manual fee')}:',
+                  ),
+                  PriceComponent(
+                    type: PriceStyle.summaryPrice,
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
+                    price: invoiceItem.manualFee.toString(),
+                  ),
+                ],
+              ),
             ),
           const Divider(
             endIndent: 0,
@@ -61,115 +129,17 @@ class InvoiceSummary extends StatelessWidget {
             thickness: 0.5,
           ),
           Row(
+            key: WidgetKeys.invoiceDetailGrandTotal,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${context.tr('Grand total')}:',
+                context.tr('Grand total'),
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
                 type: PriceStyle.totalPrice,
-                key: WidgetKeys.invoiceDetailGrandTotal,
-                salesOrgConfig: salesOrgConfigs,
+                salesOrgConfig: eligibilityState.salesOrgConfigs,
                 price: invoiceItem.amountInTransactionCurrency.toString(),
-              ),
-            ],
-          ),
-          if (salesOrgConfigs.salesOrg.isID)
-            Padding(
-              padding: const EdgeInsets.only(top: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${context.tr('Total savings')}:',
-                  ),
-                  PriceComponent(
-                    type: PriceStyle.summaryPrice,
-                    key: WidgetKeys.invoiceDetailSubTotal,
-                    salesOrgConfig: salesOrgConfigs,
-                    price: invoiceItem.discount.toString(),
-                  ),
-                ],
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SummaryBreakDownForID extends StatelessWidget {
-  final CreditAndInvoiceItem invoiceItem;
-  const _SummaryBreakDownForID({Key? key, required this.invoiceItem})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final salesOrgConfigs =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '${context.tr('Tax at')} ${salesOrgConfigs.vatValue}%:',
-              ),
-              PriceComponent(
-                type: PriceStyle.summaryPrice,
-                key: WidgetKeys.invoiceDetailSubTotal,
-                salesOrgConfig: salesOrgConfigs,
-                price: invoiceItem.taxAmount.toString(),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${context.tr('Small order fee')}:',
-                    ),
-                    Text(
-                      '${context.tr('Applies to orders less than')} ${StringUtils.formatPrice(
-                        salesOrgConfigs,
-                        salesOrgConfigs.salesOrg.smallOrderThreshold,
-                      )}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(fontSize: 10),
-                    ),
-                  ],
-                ),
-                PriceComponent(
-                  type: PriceStyle.summaryPrice,
-                  key: WidgetKeys.invoiceDetailSubTotal,
-                  salesOrgConfig: salesOrgConfigs,
-                  price: invoiceItem.deliveryFee.toString(),
-                ),
-              ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '${context.tr('Manual fee')}:',
-              ),
-              PriceComponent(
-                type: PriceStyle.summaryPrice,
-                key: WidgetKeys.invoiceDetailSubTotal,
-                salesOrgConfig: salesOrgConfigs,
-                price: invoiceItem.manualFee.toString(),
               ),
             ],
           ),

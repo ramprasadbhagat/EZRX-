@@ -1413,17 +1413,17 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
+
       final expectedNetPrice = find.text(
         'THB 1,800.00',
         findRichText: true,
       );
       expect(expectedNetPrice, findsOneWidget);
-      await tester.pump();
       final taxPercentage = find.text(
         '(7.0% ${'tax'.tr()})',
       );
       expect(taxPercentage, findsOneWidget);
-      await tester.pump();
+
       final expectedPrice = find.text(
         'THB 1,926.00',
         findRichText: true,
@@ -1433,7 +1433,9 @@ void main() {
 
     testWidgets(' => Order history Tax calculation test', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial(),
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
+        ),
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
@@ -1536,17 +1538,7 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-      final expectedNetPrice = find.text(
-        'MYR 1,800.00',
-        findRichText: true,
-      );
-      expect(expectedNetPrice, findsOneWidget);
-      await tester.pump();
-      final taxPercentage = find.text(
-        '(7.0% ${'tax'.tr()})',
-      );
-      expect(taxPercentage, findsOneWidget);
-      await tester.pump();
+
       final expectedPrice = find.text(
         'MYR 1,926.00',
         findRichText: true,

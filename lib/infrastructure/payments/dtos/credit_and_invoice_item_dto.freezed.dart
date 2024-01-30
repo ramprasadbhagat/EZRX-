@@ -63,6 +63,10 @@ mixin _$CreditAndInvoiceItemDto {
   String get referenceId => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   String get documentReferenceID => throw _privateConstructorUsedError;
+  @JsonKey(name: 'grossAmount', defaultValue: 0.0)
+  double get grossAmount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'netAmount', defaultValue: 0.0)
+  double get netAmount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -107,7 +111,9 @@ abstract class $CreditAndInvoiceItemDtoCopyWith<$Res> {
       String debitCreditCode,
       @JsonKey(name: 'referenceId', defaultValue: '') String referenceId,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-      String documentReferenceID});
+      String documentReferenceID,
+      @JsonKey(name: 'grossAmount', defaultValue: 0.0) double grossAmount,
+      @JsonKey(name: 'netAmount', defaultValue: 0.0) double netAmount});
 }
 
 /// @nodoc
@@ -145,6 +151,8 @@ class _$CreditAndInvoiceItemDtoCopyWithImpl<$Res,
     Object? debitCreditCode = null,
     Object? referenceId = null,
     Object? documentReferenceID = null,
+    Object? grossAmount = null,
+    Object? netAmount = null,
   }) {
     return _then(_value.copyWith(
       bpCustomerNumber: null == bpCustomerNumber
@@ -231,6 +239,14 @@ class _$CreditAndInvoiceItemDtoCopyWithImpl<$Res,
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as String,
+      grossAmount: null == grossAmount
+          ? _value.grossAmount
+          : grossAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      netAmount: null == netAmount
+          ? _value.netAmount
+          : netAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -274,7 +290,9 @@ abstract class _$$_CreditAndInvoiceItemDtoCopyWith<$Res>
       String debitCreditCode,
       @JsonKey(name: 'referenceId', defaultValue: '') String referenceId,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-      String documentReferenceID});
+      String documentReferenceID,
+      @JsonKey(name: 'grossAmount', defaultValue: 0.0) double grossAmount,
+      @JsonKey(name: 'netAmount', defaultValue: 0.0) double netAmount});
 }
 
 /// @nodoc
@@ -310,6 +328,8 @@ class __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>
     Object? debitCreditCode = null,
     Object? referenceId = null,
     Object? documentReferenceID = null,
+    Object? grossAmount = null,
+    Object? netAmount = null,
   }) {
     return _then(_$_CreditAndInvoiceItemDto(
       bpCustomerNumber: null == bpCustomerNumber
@@ -396,6 +416,14 @@ class __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as String,
+      grossAmount: null == grossAmount
+          ? _value.grossAmount
+          : grossAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      netAmount: null == netAmount
+          ? _value.netAmount
+          : netAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -437,7 +465,10 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
       required this.debitCreditCode,
       @JsonKey(name: 'referenceId', defaultValue: '') required this.referenceId,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-      required this.documentReferenceID})
+      required this.documentReferenceID,
+      @JsonKey(name: 'grossAmount', defaultValue: 0.0)
+      required this.grossAmount,
+      @JsonKey(name: 'netAmount', defaultValue: 0.0) required this.netAmount})
       : super._();
 
   factory _$_CreditAndInvoiceItemDto.fromJson(Map<String, dynamic> json) =>
@@ -506,10 +537,16 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
   @override
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   final String documentReferenceID;
+  @override
+  @JsonKey(name: 'grossAmount', defaultValue: 0.0)
+  final double grossAmount;
+  @override
+  @JsonKey(name: 'netAmount', defaultValue: 0.0)
+  final double netAmount;
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItemDto(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, documentReferenceID: $documentReferenceID)';
+    return 'CreditAndInvoiceItemDto(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, documentReferenceID: $documentReferenceID, grossAmount: $grossAmount, netAmount: $netAmount)';
   }
 
   @override
@@ -561,7 +598,11 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
             (identical(other.referenceId, referenceId) ||
                 other.referenceId == referenceId) &&
             (identical(other.documentReferenceID, documentReferenceID) ||
-                other.documentReferenceID == documentReferenceID));
+                other.documentReferenceID == documentReferenceID) &&
+            (identical(other.grossAmount, grossAmount) ||
+                other.grossAmount == grossAmount) &&
+            (identical(other.netAmount, netAmount) ||
+                other.netAmount == netAmount));
   }
 
   @JsonKey(ignore: true)
@@ -588,7 +629,9 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
         orderId,
         debitCreditCode,
         referenceId,
-        documentReferenceID
+        documentReferenceID,
+        grossAmount,
+        netAmount
       ]);
 
   @JsonKey(ignore: true)
@@ -649,7 +692,11 @@ abstract class _CreditAndInvoiceItemDto extends CreditAndInvoiceItemDto {
       @JsonKey(name: 'referenceId', defaultValue: '')
       required final String referenceId,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-      required final String documentReferenceID}) = _$_CreditAndInvoiceItemDto;
+      required final String documentReferenceID,
+      @JsonKey(name: 'grossAmount', defaultValue: 0.0)
+      required final double grossAmount,
+      @JsonKey(name: 'netAmount', defaultValue: 0.0)
+      required final double netAmount}) = _$_CreditAndInvoiceItemDto;
   _CreditAndInvoiceItemDto._() : super._();
 
   factory _CreditAndInvoiceItemDto.fromJson(Map<String, dynamic> json) =
@@ -718,6 +765,12 @@ abstract class _CreditAndInvoiceItemDto extends CreditAndInvoiceItemDto {
   @override
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   String get documentReferenceID;
+  @override
+  @JsonKey(name: 'grossAmount', defaultValue: 0.0)
+  double get grossAmount;
+  @override
+  @JsonKey(name: 'netAmount', defaultValue: 0.0)
+  double get netAmount;
   @override
   @JsonKey(ignore: true)
   _$$_CreditAndInvoiceItemDtoCopyWith<_$_CreditAndInvoiceItemDto>

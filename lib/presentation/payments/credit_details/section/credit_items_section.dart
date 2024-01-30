@@ -3,9 +3,10 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_details_group.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,9 @@ class CreditItemsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final salesOrgConfigs =
+        context.read<EligibilityBloc>().state.salesOrgConfigs;
+
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -52,39 +56,33 @@ class CreditItemsSection extends StatelessWidget {
               children: creditItems[index].items.map(
                 (creditItem) {
                   return CommonTileItem(
-                    headerText:
-                        '${context.tr('Batch')} ${creditItem.batchNumber.getOrDefaultValue('')} (EXP:${creditItem.expiryDate.dateString})',
+                    headerText: salesOrgConfigs.batchNumDisplay &&
+                            creditItem.batchNumHasData
+                        ? '${context.tr('Batch')} ${creditItem.batchNumber.getOrDefaultValue('')} (EXP:${creditItem.expiryDate.dateString})'
+                        : null,
                     materialNumber: creditItem.materialNumber,
                     label: removeLeadingZero(
                       creditItem.materialNumber.getOrDefaultValue(''),
                     ),
-                    subtitle: StringUtils.displayPrice(
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                      creditItem.unitPrice,
-                    ),
+                    subtitle: '',
                     title: creditItem.billingDocumentItemText,
                     quantity: creditItem.billingQuantity.stringValue,
                     isQuantityBelowImage: true,
                     isQuantityRequired: false,
                     statusWidget: const SizedBox.shrink(),
-                    footerWidget: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${context.tr('Qty')}: ${creditItem.billingQuantity.getOrDefaultValue(0)}',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.black,
-                                  ),
-                        ),
-                        PriceComponent(
-                          salesOrgConfig: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .salesOrgConfigs,
-                          price: creditItem.netAmount.toStringAsFixed(2),
-                        ),
-                      ],
+                    priceComponent: creditItem.isNotFree
+                        ? PriceComponent(
+                            key: WidgetKeys.invoiceDetailMaterialUnitPrice,
+                            salesOrgConfig: salesOrgConfigs,
+                            price: salesOrgConfigs.displaySubtotalTaxBreakdown
+                                ? creditItem.unitNetPrice.toString()
+                                : creditItem.unitGrossPrice.toString(),
+                          )
+                        : null,
+                    footerWidget: QuantityAndPriceWithTax(
+                      quantity: creditItem.billingQuantity.getOrDefaultValue(0),
+                      taxPercentage: creditItem.taxPercent,
+                      netPrice: creditItem.netPriceText,
                     ),
                   );
                 },

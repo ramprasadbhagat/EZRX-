@@ -25,6 +25,8 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
     required double discount,
     required double manualFee,
     required double taxAmount,
+    required double grossAmount,
+    required double netAmount,
     required StringValue invoiceReference,
     required StatusType invoiceProcessingStatus,
     required StringValue orderId,
@@ -53,6 +55,8 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
         discount: 0.0,
         manualFee: 0.0,
         taxAmount: 0.0,
+        grossAmount: 0.0,
+        netAmount: 0.0,
         debitCreditCode: DebitCreditCode(''),
         referenceId: ReferenceId(''),
         documentReferenceID: StringValue(''),
@@ -61,7 +65,6 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
 //to convert if amountInTransactionCurrency value is negative
   double get convertIfAmountInTransactionCurrencyIsNegative =>
       amountInTransactionCurrency.abs();
-  double get totalExcludeTax => amountInTransactionCurrency - taxAmount;
 }
 
 extension CreditAndInvoiceListExtension on List<CreditAndInvoiceItem> {

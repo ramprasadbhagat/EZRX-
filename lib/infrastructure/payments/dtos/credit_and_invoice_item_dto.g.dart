@@ -31,6 +31,8 @@ _$_CreditAndInvoiceItemDto _$$_CreditAndInvoiceItemDtoFromJson(
       debitCreditCode: json['debitCreditCode'] as String? ?? '',
       referenceId: json['referenceId'] as String? ?? '',
       documentReferenceID: json['documentReferenceID'] as String? ?? '',
+      grossAmount: (json['grossAmount'] as num?)?.toDouble() ?? 0.0,
+      netAmount: (json['netAmount'] as num?)?.toDouble() ?? 0.0,
     );
 
 Map<String, dynamic> _$$_CreditAndInvoiceItemDtoToJson(
@@ -57,4 +59,6 @@ Map<String, dynamic> _$$_CreditAndInvoiceItemDtoToJson(
       'debitCreditCode': instance.debitCreditCode,
       'referenceId': instance.referenceId,
       'documentReferenceID': instance.documentReferenceID,
+      'grossAmount': instance.grossAmount,
+      'netAmount': instance.netAmount,
     };

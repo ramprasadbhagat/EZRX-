@@ -11,7 +11,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_details_group.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
@@ -172,10 +171,7 @@ void main() {
               widget is CommonTileItem &&
               widget.label == e.materialNumber.displayMatNo &&
               widget.quantity == e.billingQuantity.stringValue &&
-              widget.subtitle ==
-                  _priceValue(
-                    e.unitPrice,
-                  ),
+              widget.subtitle == '',
         ),
         findsOneWidget,
       );
@@ -186,7 +182,7 @@ void main() {
             (widget) =>
                 widget is RichText &&
                 widget.key == WidgetKeys.priceComponent &&
-                widget.text.toPlainText().contains(_priceValue(e.netAmount)),
+                widget.text.toPlainText().contains('FREE'),
           ),
         ),
         findsOneWidget,
@@ -194,8 +190,3 @@ void main() {
     }
   });
 }
-
-String _priceValue(double value) => StringUtils.displayPrice(
-      fakeMYSalesOrgConfigs,
-      value,
-    );

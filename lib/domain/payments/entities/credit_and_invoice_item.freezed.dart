@@ -31,6 +31,8 @@ mixin _$CreditAndInvoiceItem {
   double get discount => throw _privateConstructorUsedError;
   double get manualFee => throw _privateConstructorUsedError;
   double get taxAmount => throw _privateConstructorUsedError;
+  double get grossAmount => throw _privateConstructorUsedError;
+  double get netAmount => throw _privateConstructorUsedError;
   StringValue get invoiceReference => throw _privateConstructorUsedError;
   StatusType get invoiceProcessingStatus => throw _privateConstructorUsedError;
   StringValue get orderId => throw _privateConstructorUsedError;
@@ -66,6 +68,8 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
       double discount,
       double manualFee,
       double taxAmount,
+      double grossAmount,
+      double netAmount,
       StringValue invoiceReference,
       StatusType invoiceProcessingStatus,
       StringValue orderId,
@@ -104,6 +108,8 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
     Object? discount = null,
     Object? manualFee = null,
     Object? taxAmount = null,
+    Object? grossAmount = null,
+    Object? netAmount = null,
     Object? invoiceReference = null,
     Object? invoiceProcessingStatus = null,
     Object? orderId = null,
@@ -173,6 +179,14 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
           ? _value.taxAmount
           : taxAmount // ignore: cast_nullable_to_non_nullable
               as double,
+      grossAmount: null == grossAmount
+          ? _value.grossAmount
+          : grossAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      netAmount: null == netAmount
+          ? _value.netAmount
+          : netAmount // ignore: cast_nullable_to_non_nullable
+              as double,
       invoiceReference: null == invoiceReference
           ? _value.invoiceReference
           : invoiceReference // ignore: cast_nullable_to_non_nullable
@@ -229,6 +243,8 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
       double discount,
       double manualFee,
       double taxAmount,
+      double grossAmount,
+      double netAmount,
       StringValue invoiceReference,
       StatusType invoiceProcessingStatus,
       StringValue orderId,
@@ -264,6 +280,8 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
     Object? discount = null,
     Object? manualFee = null,
     Object? taxAmount = null,
+    Object? grossAmount = null,
+    Object? netAmount = null,
     Object? invoiceReference = null,
     Object? invoiceProcessingStatus = null,
     Object? orderId = null,
@@ -333,6 +351,14 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
           ? _value.taxAmount
           : taxAmount // ignore: cast_nullable_to_non_nullable
               as double,
+      grossAmount: null == grossAmount
+          ? _value.grossAmount
+          : grossAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      netAmount: null == netAmount
+          ? _value.netAmount
+          : netAmount // ignore: cast_nullable_to_non_nullable
+              as double,
       invoiceReference: null == invoiceReference
           ? _value.invoiceReference
           : invoiceReference // ignore: cast_nullable_to_non_nullable
@@ -382,6 +408,8 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
       required this.discount,
       required this.manualFee,
       required this.taxAmount,
+      required this.grossAmount,
+      required this.netAmount,
       required this.invoiceReference,
       required this.invoiceProcessingStatus,
       required this.orderId,
@@ -422,6 +450,10 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final double taxAmount;
   @override
+  final double grossAmount;
+  @override
+  final double netAmount;
+  @override
   final StringValue invoiceReference;
   @override
   final StatusType invoiceProcessingStatus;
@@ -439,7 +471,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, documentReferenceID: $documentReferenceID, isLoadingOrder: $isLoadingOrder)';
+    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, grossAmount: $grossAmount, netAmount: $netAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, documentReferenceID: $documentReferenceID, isLoadingOrder: $isLoadingOrder)';
   }
 
   @override
@@ -480,6 +512,10 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
                 other.manualFee == manualFee) &&
             (identical(other.taxAmount, taxAmount) ||
                 other.taxAmount == taxAmount) &&
+            (identical(other.grossAmount, grossAmount) ||
+                other.grossAmount == grossAmount) &&
+            (identical(other.netAmount, netAmount) ||
+                other.netAmount == netAmount) &&
             (identical(other.invoiceReference, invoiceReference) ||
                 other.invoiceReference == invoiceReference) &&
             (identical(
@@ -514,6 +550,8 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
         discount,
         manualFee,
         taxAmount,
+        grossAmount,
+        netAmount,
         invoiceReference,
         invoiceProcessingStatus,
         orderId,
@@ -548,6 +586,8 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
       required final double discount,
       required final double manualFee,
       required final double taxAmount,
+      required final double grossAmount,
+      required final double netAmount,
       required final StringValue invoiceReference,
       required final StatusType invoiceProcessingStatus,
       required final StringValue orderId,
@@ -587,6 +627,10 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   double get manualFee;
   @override
   double get taxAmount;
+  @override
+  double get grossAmount;
+  @override
+  double get netAmount;
   @override
   StringValue get invoiceReference;
   @override

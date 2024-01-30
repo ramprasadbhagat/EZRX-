@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -51,6 +53,7 @@ void main() {
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
+  late List<CustomerDocumentDetail> fakeItemList;
 
   final fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
     bpCustomerNumber: '0030032223',
@@ -64,12 +67,15 @@ void main() {
   );
 
   setUpAll(() async {
+    WidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(
       () => MixpanelService(config: locator<Config>()),
     );
     autoRouterMock = locator<AppRouter>();
+    fakeItemList = await CreditAndInvoiceDetailsLocalDataSource()
+        .getCreditAndInvoiceDetails();
   });
 
   setUp(() async {
@@ -128,7 +134,10 @@ void main() {
           ),
         ],
         child: Scaffold(
-          body: CreditDetailsSection(creditItem: fakeInvoice),
+          body: CreditDetailsSection(
+            creditItem: fakeInvoice,
+            creditItems: fakeItemList,
+          ),
         ),
       ),
     );

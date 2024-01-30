@@ -74,6 +74,7 @@ class InvoiceDetailsPage extends StatelessWidget {
                       ),
                       InvoiceSummary(
                         invoiceItem: state.basicInfo,
+                        customerDocumentDetail: state.itemsInfo,
                       ),
                       const Divider(
                         endIndent: 0,
