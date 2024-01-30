@@ -14,7 +14,7 @@ class TestConfig {
   String PROJECT_KEY = 'EZRX'; //Get from Jira
 // const String CYCLE_KEY = 'EZRX-R5'; //Get from Zephyr Scale
   String TOKEN =
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250ZXh0Ijp7ImJhc2VVcmwiOiJodHRwczovL3p1ZWxsaWdwaGFybWEuYXRsYXNzaWFuLm5ldCIsInVzZXIiOnsiYWNjb3VudElkIjoiNjNkNzhlNTkxYjEzZDQyOTk4ZTA2NTlmIn19LCJpc3MiOiJjb20ua2Fub2FoLnRlc3QtbWFuYWdlciIsInN1YiI6IjFiMDNjM2Y3LTZhNTMtM2Q5ZC1iN2Y3LTg0MTlhMmNkMTlkMCIsImV4cCI6MTcyNDE0OTMxNywiaWF0IjoxNjkyNjEzMzE3fQ.QvwQ9ESY4hkxYEreAX9d56M2ye73q7KrntfxvB1S8iU';
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250ZXh0Ijp7ImJhc2VVcmwiOiJodHRwczovL3p1ZWxsaWdwaGFybWEuYXRsYXNzaWFuLm5ldCIsInVzZXIiOnsiYWNjb3VudElkIjoiNzEyMDIwOjA1NWRmODQ2LTVhN2QtNDY2Zi1hYmRjLWYwOTliOGVmMmI3NSJ9fSwiaXNzIjoiY29tLmthbm9haC50ZXN0LW1hbmFnZXIiLCJzdWIiOiIxYjAzYzNmNy02YTUzLTNkOWQtYjdmNy04NDE5YTJjZDE5ZDAiLCJleHAiOjE3MzgxMjM5NjMsImlhdCI6MTcwNjU4Nzk2M30.-aufWytGvqtsmz2zEQ8pfuddI2mXDpwQu-Vri8HeFXo';
 
   String STEP_URL =
       'https://api.zephyrscale.smartbear.com/v2/testcases/{ID}/teststeps';
