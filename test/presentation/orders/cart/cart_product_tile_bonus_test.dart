@@ -6,8 +6,10 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -325,13 +327,29 @@ void main() {
         );
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            cartProducts: [cartItem],
+            cartProducts: [
+              cartItem.copyWith(
+                bonusSampleItems: cartItem.bonusSampleItems
+                    .map(
+                      (e) => e.copyWith(
+                        inStock: MaterialInStock('Yes'),
+                      ),
+                    )
+                    .toList(),
+              )
+            ],
           ),
         );
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
-
+        expect(
+          find.descendant(
+            of: find.byType(CartProductTileBonus),
+            matching: find.byType(StatusLabel),
+          ),
+          findsNothing,
+        );
         final bonusSampleItemButton = find.byKey(
           WidgetKeys.cartItemBonus(
             cartItem.materialInfo.materialNumber.displayMatNo,

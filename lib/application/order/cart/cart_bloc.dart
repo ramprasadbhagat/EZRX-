@@ -405,7 +405,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
             if (newCartProductList.isNotEmpty) {
               add(const CartEvent.updateProductStock());
-
+              
               add(const CartEvent.fetchGrandTotalPriceForIdMarket());
             }
           },

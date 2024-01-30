@@ -29,4 +29,5 @@ class BonusSampleItem with _$BonusSampleItem {
         type: MaterialInfoType(''),
         inStock: MaterialInStock(''),
       );
+
 }

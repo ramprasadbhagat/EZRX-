@@ -103,7 +103,16 @@ class _ProductDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              if (!eligibilityState.isIDMarket) const BonusTag(),
+              if (eligibilityState.salesOrg.showBonus) const BonusTag(),
+              if (!bonusItem.inStock.isMaterialInStock)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: StatusLabel(
+                    status: eligibilityState.outOfStockProductStatus,
+                    valueColor: eligibilityState
+                        .outOfStockProductStatus.displayStatusTextColor,
+                  ),
+                ),
             ],
           ),
           Padding(

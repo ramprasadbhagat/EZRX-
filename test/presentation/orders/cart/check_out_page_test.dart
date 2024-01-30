@@ -33,6 +33,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart'
@@ -48,6 +49,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
@@ -2624,6 +2626,50 @@ void main() {
         );
       },
       variant: salesOrgConfigVariant,
+    );
+    testWidgets(
+      '=> test Checkout Bonus stock tag',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              mockCartItems.first.copyWith(
+                materialInfo: mockCartItems.first.materialInfo.copyWith(
+                  type: MaterialInfoType.material(),
+                ),
+                bonusSampleItems: [
+                  BonusSampleItem.empty().copyWith(
+                    materialNumber: mockCartItems.first.getMaterialNumber,
+                  )
+                ],
+                stockInfoList: [
+                  StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('Yes'),
+                    materialNumber: mockCartItems.first.getMaterialNumber,
+                  )
+                ],
+              ),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        await tester.fling(
+          find.byKey(WidgetKeys.checkoutScrollList),
+          const Offset(0.0, -1000.0),
+          1000.0,
+        );
+        final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPageFinder, findsOneWidget);
+        expect(
+          find.descendant(
+            of: find.byType(StatusLabel),
+            matching: find.text('Out of stock'),
+          ),
+          findsOneWidget,
+        );
+      },
     );
   });
 }

@@ -72,13 +72,7 @@ void main() {
     final materialListResponse =
         await MaterialListLocalDataSource().getProductList();
     aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
-    bonusSampleItem = [
-      BonusSampleItem.empty().copyWith(
-        materialNumber: MaterialNumber('fake-bonus-sample-item-1'),
-        itemId: StringValue('fake-item-id'),
-        qty: MaterialQty(1),
-      ),
-    ];
+    
     priceTiers = [
       PriceTier.empty().copyWith(
         tier: 'C',
@@ -145,6 +139,9 @@ void main() {
       (element) => element.materialInfo.type.typeBundle,
       orElse: () => PriceAggregate.empty(),
     );
+
+    
+
     bundleItem = bundleFromPriceAggregateList.copyWith(
       bundle: bundleFromPriceAggregateList.bundle.copyWith(
         materials: bundleFromPriceAggregateList.materialInfo.data
@@ -152,11 +149,17 @@ void main() {
             .toList(),
       ),
     );
-
+    bonusSampleItem = [
+      BonusSampleItem.empty().copyWith(
+        materialNumber: priceAggregates.first.getMaterialNumber,
+        itemId: StringValue('fake-item-id'),
+        qty: MaterialQty(1),
+      ),
+    ];
     bonusMaterial = <BonusMaterial>[
       BonusMaterial.empty().copyWith(
         qualifyingQuantity: 2,
-        materialNumber: MaterialNumber('bonus-material-1'),
+        materialNumber: priceAggregates.first.getMaterialNumber,
         bonusRatio: 1,
         bonusQuantity: 1,
       )

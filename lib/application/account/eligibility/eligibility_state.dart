@@ -276,4 +276,10 @@ class EligibilityState with _$EligibilityState {
 
   bool get showMaterialDescInMandarin =>
       salesOrg.isTW && user.preferredLanguage.isMandarin;
+
+  StatusType get outOfStockProductStatus => StatusType(
+        validateOutOfStockValue
+            ? salesOrgConfigs.addOosMaterials.oosMaterialTag
+            : salesOrgConfigs.addOosMaterials.oosTag,
+      );
 }

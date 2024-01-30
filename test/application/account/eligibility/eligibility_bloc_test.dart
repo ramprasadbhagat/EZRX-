@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,12 +18,12 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/repository/mixpanel_repository.dart';
 
-import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/user_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
-import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../common_mock_data/user_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 
 class ChatBotRepositoryMock extends Mock implements ChatBotRepository {}
 
@@ -878,6 +879,35 @@ void main() {
         );
 
         expect(eligibilityState.isOutOfStockMaterialAllowed, false);
+      },
+    );
+
+    test(
+      'outOfStockProductStatus- Out of stock Test',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeSalesRepUser,
+        );
+
+        expect(
+          eligibilityState.outOfStockProductStatus,
+          StatusType('Out of stock'),
+        );
+      },
+    );
+
+    test(
+      'outOfStockProductStatus- OOS-Preorder',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeSalesRepUser,
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
+        );
+
+        expect(
+          eligibilityState.outOfStockProductStatus,
+          StatusType('OOS-Preorder'),
+        );
       },
     );
   });

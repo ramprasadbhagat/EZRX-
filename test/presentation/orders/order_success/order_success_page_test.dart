@@ -46,6 +46,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
@@ -1860,6 +1861,45 @@ void main() {
       expect(tax, findsOneWidget);
       expect(taxAmount, findsOneWidget);
       expect(totalPriceWithTax, findsOneWidget);
+    });
+    testWidgets('Bonus Stock tag', (tester) async {
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: fakeOrderHistoryDetails,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.orderSuccessItemsSection),
+        findsOneWidget,
+      );
+      await tester.fling(
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -10000),
+        100,
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(WidgetKeys.orderSuccessMaterialItem(0)),
+        findsWidgets,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessMaterialItem(0)).first,
+          matching: find.widgetWithText(StatusLabel, 'Bonus'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessMaterialItem(0)).first,
+          matching: find.widgetWithText(StatusLabel, 'Out of stock'),
+        ),
+        findsOneWidget,
+      );
     });
   });
 }

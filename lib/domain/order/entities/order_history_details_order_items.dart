@@ -126,6 +126,10 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     return StatusType('');
   }
 
+  bool get inStock =>
+      materialStockInfo.stockInfos
+          .any((element) => element.inStock.isMaterialInStock);
+
   /*For ViewByOrderDetails only bonus tag is displayed align with web */
   StatusType get orderDetailBonusTag => StatusType(isBonus ? 'Bonus' : '');
 

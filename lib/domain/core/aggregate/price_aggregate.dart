@@ -864,6 +864,11 @@ class PriceAggregate with _$PriceAggregate {
   bool get isIDProductStockInvalid =>
       salesOrgConfig.salesOrg.isProductDeterminationApplicable &&
       (!inStock || _isStockQtyExceedsForId);
+
+  int get totalBonusCount => bonusSampleItems.fold<int>(
+        0,
+        (sum, bonus) => sum + bonus.qty.intValue,
+      );
 }
 
 enum PriceType {

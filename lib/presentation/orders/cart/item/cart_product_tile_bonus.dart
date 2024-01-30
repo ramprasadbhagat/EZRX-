@@ -7,6 +7,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -156,6 +157,8 @@ class _MaterialDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,8 +174,28 @@ class _MaterialDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              if (!context.read<EligibilityBloc>().state.isIDMarket)
+              if (eligibilityState.salesOrg.showBonus)
                 const BonusTag(),
+              BlocBuilder<CartBloc, CartState>(
+                buildWhen: (previous, current) =>
+                    previous.isUpdatingStock != current.isUpdatingStock &&
+                    !current.isUpdatingStock,
+                builder: (context, state) {
+                  return bonusItem.inStock.isMaterialInStock ||
+                          state.isUpdatingStock
+                      ? const SizedBox.shrink()
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: StatusLabel(
+                            status:
+                                eligibilityState.outOfStockProductStatus,
+                            valueColor: eligibilityState
+                                .outOfStockProductStatus
+                                .displayStatusTextColor,
+                          ),
+                        );
+                },
+              ),
             ],
           ),
           Padding(

@@ -94,6 +94,16 @@ class _MaterialItem extends StatelessWidget {
       isQuantityRequired: false,
       statusTag: orderItem.productTag,
       showOfferTag: orderItem.showOfferTag,
+      labelTrailing: orderItem.isBonus && !orderItem.inStock
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: StatusLabel(
+                status: eligibilityState.outOfStockProductStatus,
+                valueColor: eligibilityState
+                    .outOfStockProductStatus.displayStatusTextColor,
+              ),
+            )
+          : null,
       footerWidget: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
