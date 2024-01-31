@@ -75,7 +75,7 @@ void main() {
 
       expect(
         modifiedState.adviceExpiryText,
-        '-',
+        'NA',
       );
     });
 

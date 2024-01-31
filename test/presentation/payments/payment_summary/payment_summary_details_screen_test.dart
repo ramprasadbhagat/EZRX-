@@ -690,5 +690,60 @@ void main() {
 
       expect(find.text('in 23 Day(s)'), findsNothing);
     });
+
+    testWidgets(
+        'Payment Summary Details Page - find PA created date NA if Empty for Successful',
+        (tester) async {
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        PaymentSummaryDetailsState.initial().copyWith(
+          details: mockPaymentDetails.copyWith(
+            status: FilterStatus('Successful'),
+            createdDate: DateTimeStringValue(''),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final paCreatedDateFinder = find.byKey(
+        WidgetKeys.balanceTextRow(
+          'PA created date',
+          'NA',
+        ),
+      );
+
+      expect(paCreatedDateFinder, findsOneWidget);
+    });
+
+    testWidgets(
+        'Payment Summary Details Page - find Payment date NA if Empty for Successful',
+        (tester) async {
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        PaymentSummaryDetailsState.initial().copyWith(
+          details: mockPaymentDetails.copyWith(
+            valueDate: DateTimeStringValue(''),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final paCreatedDateFinder = find.byKey(
+        WidgetKeys.balanceTextRow(
+          'Payment date',
+          'NA',
+        ),
+      );
+
+      expect(paCreatedDateFinder, findsOneWidget);
+    });
   });
 }

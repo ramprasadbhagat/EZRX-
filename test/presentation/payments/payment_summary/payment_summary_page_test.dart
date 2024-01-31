@@ -860,7 +860,7 @@ void main() {
           PaymentSummaryState.initial().copyWith(
             details: [
               PaymentSummaryDetails.empty().copyWith(
-                createdDate: fakeDate,
+                valueDate: fakeDate,
                 status: filterStatusVariant.currentValue ?? FilterStatus(''),
                 adviceExpiry: fakeAdviceExpiry,
               )
@@ -880,7 +880,7 @@ void main() {
             false) {
           expect(
             dateTextFinder.data,
-            '${'Payment date'.tr()}: ${fakeDate.dateString}',
+            '${'Payment date'.tr()}: ${fakeDate.dateOrNaString}',
           );
         }
       },
@@ -899,7 +899,7 @@ void main() {
           PaymentSummaryState.initial().copyWith(
             details: [
               PaymentSummaryDetails.empty().copyWith(
-                createdDate: fakeDate,
+                valueDate: fakeDate,
                 status: filterStatusVariant.currentValue ?? FilterStatus(''),
                 adviceExpiry: fakeAdviceExpiry,
               )
@@ -918,7 +918,7 @@ void main() {
             false) {
           expect(
             dateTextFinder.data,
-            '${'Payment date'.tr()}: ${fakeDate.dateString}',
+            '${'Payment date'.tr()}: ${fakeDate.dateOrNaString}',
           );
         } else {
           expect(

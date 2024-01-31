@@ -48,7 +48,7 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
     if (details.status.isSuccessful ||
         details.status.isPaymentReceived ||
         details.status.isExpiredOrCanceled) {
-      return '-';
+      return 'NA';
     }
 
     return salesOrganization.salesOrg.isID

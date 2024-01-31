@@ -155,15 +155,15 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         },
       );
 
-  String get paymentDate =>
-      status.getIsSuccessfulOrProcessed ? valueDate.dateString.tr() : '-'.tr();
-
   bool get allIdentifierInfoValid =>
       paymentBatchAdditionalInfo.isValid() &&
       zzAdvice.isValid() &&
       paymentID.isValid();
 
   bool get isEmpty => this == PaymentSummaryDetails.empty();
+
+  bool get displayPaymentDate =>
+      valueDate.isValid() && status.getIsSuccessfulOrProcessed;
 }
 
 extension PaymentSummaryListExtension on List<PaymentSummaryDetails> {

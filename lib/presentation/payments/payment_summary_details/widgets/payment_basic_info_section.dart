@@ -11,6 +11,18 @@ class _PaymentBasicInfoSection extends StatelessWidget {
           previous.isDetailFetching != current.isDetailFetching,
       builder: (context, state) {
         final eligibilityState = context.read<EligibilityBloc>().state;
+        final paymentDate = state.details.displayPaymentDate
+            ? DateFormat(
+                DateTimeFormatString.displayDateFormat,
+                context.locale.languageCode,
+              ).format(state.details.valueDate.dateTime)
+            : 'NA';
+        final paCreatedDate = state.details.createdDate.isValid()
+            ? DateFormat(
+                DateTimeFormatString.displayDateFormat,
+                context.locale.languageCode,
+              ).format(state.details.createdDate.dateTime)
+            : 'NA';
 
         return Container(
           key: WidgetKeys.paymentSummaryDetails,
@@ -60,10 +72,7 @@ class _PaymentBasicInfoSection extends StatelessWidget {
                 valueFlex: 3,
                 keyText: context.tr('PA created date'),
                 valueTextLoading: state.isDetailFetching,
-                valueText: DateFormat(
-                  DateTimeFormatString.displayDateFormat,
-                  eligibilityState.user.preferredLanguage.languageCode,
-                ).format(state.details.createdDate.dateTime),
+                valueText: paCreatedDate,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -90,7 +99,7 @@ class _PaymentBasicInfoSection extends StatelessWidget {
                 valueFlex: 3,
                 keyText: context.tr('Payment date'),
                 valueTextLoading: state.isDetailFetching,
-                valueText: state.details.paymentDate,
+                valueText: paymentDate,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),
