@@ -836,6 +836,16 @@ void main() {
           ),
           findsOneWidget,
         );
+        expect(
+          find.descendant(
+            of: find.byType(BonusMaterialInfo),
+            matching: find.text(
+              'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).'
+                  .tr(),
+            ),
+          ),
+          findsOneWidget,
+        );
       });
     });
     group('Return Review Tab test for only bonus returns', () {
@@ -879,6 +889,16 @@ void main() {
             find.descendant(
               of: find.byType(BonusMaterialReturnWidget),
               matching: find.byType(BonusMaterialInfo),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(BonusMaterialInfo),
+              matching: find.text(
+                'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).'
+                    .tr(),
+              ),
             ),
             findsOneWidget,
           );

@@ -304,6 +304,17 @@ void main() {
             ),
             findsOneWidget,
           );
+
+          expect(
+            find.descendant(
+              of: find.byType(ReturnSummaryBonusItemSection),
+              matching: find.text(
+                'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).'
+                    .tr(),
+              ),
+            ),
+            findsOneWidget,
+          );
         },
       );
 

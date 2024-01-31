@@ -366,7 +366,7 @@ class _BonusItemSection extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
-                        color: ZPColors.lightGray2,
+                        color: ZPColors.extraLightGray,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

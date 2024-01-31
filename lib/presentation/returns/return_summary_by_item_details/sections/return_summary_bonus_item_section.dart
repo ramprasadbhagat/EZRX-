@@ -145,7 +145,7 @@ class _BonusItemDetails extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        color: ZPColors.lightGray2,
+        color: ZPColors.extraLightGray,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,7 +189,7 @@ class _BonusItemDetails extends StatelessWidget {
             style: Theme.of(context).textTheme.labelMedium,
           ),
           Text(
-            'Batch ${returnRequestInformation.batch} (Expires ${returnRequestInformation.expiryDate.dateString})',
+            '${context.tr('Batch')} ${returnRequestInformation.batch} (${context.tr('Expires')} ${returnRequestInformation.expiryDate.dateString})',
             style: Theme.of(context).textTheme.bodySmall,
           ),
           Row(
@@ -202,10 +202,19 @@ class _BonusItemDetails extends StatelessWidget {
                 type: PriceStyle.returnBonusPrice,
               ),
               Text(
-                'Qty: ${returnRequestInformation.returnQuantity} ',
+                '${context.tr('Qty')}: ${returnRequestInformation.returnQuantity} ',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
+          ),
+          Text(
+            context.tr(
+              'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).',
+            ),
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.changePasswordRecommendationColor,
+                  fontSize: 10,
+                ),
           ),
         ],
       ),

@@ -23,7 +23,9 @@ class BonusMaterialReturnInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BonusMaterialInfo(data: returnMaterial),
+        BonusMaterialInfo(
+          data: returnMaterial,
+        ),
         const SizedBox(height: 8.0),
         const Divider(
           indent: 0,

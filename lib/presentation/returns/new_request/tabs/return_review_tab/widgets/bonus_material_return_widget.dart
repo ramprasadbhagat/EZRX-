@@ -41,7 +41,9 @@ class _BonusMaterialReturnInfoState extends State<BonusMaterialReturnWidget> {
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-          BonusMaterialInfo(data: widget.returnMaterial),
+          BonusMaterialInfo(
+            data: widget.returnMaterial,
+          ),
           const SizedBox(height: 8.0),
           InkWell(
             onTap: () {

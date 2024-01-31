@@ -14,11 +14,9 @@ class BonusMaterialInfo extends StatelessWidget {
   const BonusMaterialInfo({
     Key? key,
     required this.data,
-    this.noteLineVisible = false,
   }) : super(key: key);
 
   final ReturnMaterial data;
-  final bool noteLineVisible;
 
   String getQuantity(BuildContext context) {
     final details =
@@ -81,16 +79,15 @@ class BonusMaterialInfo extends StatelessWidget {
               ),
             ],
           ),
-          if (noteLineVisible)
-            Text(
-              context.tr(
-                'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).',
-              ),
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.changePasswordRecommendationColor,
-                    fontSize: 10,
-                  ),
+          Text(
+            context.tr(
+              'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).',
             ),
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.changePasswordRecommendationColor,
+                  fontSize: 10,
+                ),
+          ),
         ],
       ),
     );
