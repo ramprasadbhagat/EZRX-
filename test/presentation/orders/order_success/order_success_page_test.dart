@@ -18,8 +18,6 @@ import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.da
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -30,6 +28,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
@@ -66,6 +65,7 @@ import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -231,11 +231,7 @@ void main() {
       );
       when(() => autoRouterMock.currentPath).thenReturn('fake-path');
       when(() => paymentCustomerInformationBlocMock.state).thenReturn(
-        PaymentCustomerInformationState.initial().copyWith(
-          paymentCustomerInformation:
-              await PaymentCustomerInformationLocalDataSource()
-                  .getPaymentCustomerInformation(),
-        ),
+        PaymentCustomerInformationState.initial(),
       );
     },
   );
@@ -1217,38 +1213,6 @@ void main() {
       );
     });
 
-    testWidgets('Show Payer Information', (tester) async {
-      final customerCodeInfo = fakeCustomerCodeInfo.copyWith(
-        billToInfos: [
-          BillToInfo.empty().copyWith(
-            billToCustomerCode: 'fake-bill-to',
-            emailAddresses: [EmailAddress('fake-email@fake.com')],
-          ),
-        ],
-      );
-      when(() => eligibilityBlocMock.state).thenAnswer(
-        (invocation) => EligibilityState.initial().copyWith(
-          customerCodeInfo: customerCodeInfo,
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
-        ),
-      );
-      when(() => orderSummaryBlocMock.state).thenAnswer(
-        (invocation) =>
-            OrderSummaryState.initial().copyWith.orderHistoryDetails(
-                  referenceNotes: 'fake-reference-notes',
-                ),
-      );
-      when(() => customerCodeBlocMock.state).thenAnswer(
-        (invocation) => CustomerCodeState.initial().copyWith(
-          customerCodeInfo: customerCodeInfo,
-        ),
-      );
-
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      expect(find.byType(ExpansionTile), findsOneWidget);
-    });
-
     testWidgets('Show Attachment Document Showing Less', (tester) async {
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) =>
@@ -1861,7 +1825,81 @@ void main() {
       expect(tax, findsOneWidget);
       expect(taxAmount, findsOneWidget);
       expect(totalPriceWithTax, findsOneWidget);
+
     });
+      testWidgets('BillToInfo when enable bill to true', (tester) async {
+        when(() => eligibilityBlocMock.state).thenAnswer(
+          (invocation) => EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenAnswer(
+          (invocation) =>
+              OrderSummaryState.initial().copyWith.orderHistoryDetails(
+                    referenceNotes: 'fake-reference-notes',
+                  ),
+        );
+
+        when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+        PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation:
+              await PaymentCustomerInformationLocalDataSource()
+                  .getPaymentCustomerInformation(),
+        ),
+      );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(find.byKey(WidgetKeys.payerInformation), findsOneWidget);
+      });
+
+      testWidgets('BillToInfo when enable bill to true and billToInfo is empty',
+          (tester) async {
+        when(() => paymentCustomerInformationBlocMock.state).thenAnswer(
+          (invocation) => PaymentCustomerInformationState.initial().copyWith(
+            paymentCustomerInformation: PaymentCustomerInformation.empty(),
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenAnswer(
+          (invocation) => EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenAnswer(
+          (invocation) =>
+              OrderSummaryState.initial().copyWith.orderHistoryDetails(
+                    referenceNotes: 'fake-reference-notes',
+                  ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
+      });
+
+      testWidgets('BillToInfo when enable bill to false', (tester) async {
+        when(() => eligibilityBlocMock.state).thenAnswer(
+          (invocation) => EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenAnswer(
+          (invocation) =>
+              OrderSummaryState.initial().copyWith.orderHistoryDetails(
+                    referenceNotes: 'fake-reference-notes',
+                  ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
+      });
+    });
+    
     testWidgets('Bonus Stock tag', (tester) async {
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
@@ -1901,7 +1939,6 @@ void main() {
         findsOneWidget,
       );
     });
-  });
 }
 
 bool findTextAndTap(InlineSpan visitor, String text) {

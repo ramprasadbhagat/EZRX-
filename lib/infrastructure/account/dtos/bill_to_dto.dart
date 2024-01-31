@@ -131,9 +131,6 @@ class BillToDto with _$BillToDto {
       district: billToInfo.district,
       emailAddresses: billToInfo.emailAddresses.map((e) => e.getValue()).toList(),
       faxExtension: billToInfo.faxExtension,
-      faxNumber: billToInfo.faxNumber,
-      floor: billToInfo.floor,
-      houseNumber1: billToInfo.houseNumber1,
       houseNumber2: billToInfo.houseNumber2,
       name1: billToInfo.billToName.name1,
       name2: billToInfo.billToName.name2,
@@ -154,6 +151,9 @@ class BillToDto with _$BillToDto {
       taxNumber: billToInfo.taxNumber,
       telephoneExtension: billToInfo.telephoneExtension,
       telephoneNumber: billToInfo.telephoneNumber,
+      faxNumber: billToInfo.faxNumber,
+      floor: billToInfo.floor,
+      houseNumber1: billToInfo.houseNumber1,
     );
   }
 

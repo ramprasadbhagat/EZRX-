@@ -19,6 +19,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
               height: 15,
             ),
             ListTile(
+              key: WidgetKeys.summaryInfoButton,
               onTap: () => _showSumaryInfo(context),
               dense: true,
               visualDensity: VisualDensity.compact,

@@ -30,6 +30,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
@@ -278,7 +279,6 @@ void main() {
       when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
       when(() => autoRouterMock.pushNamed(any()))
           .thenAnswer((invocation) async => null);
-     
       when(() => paymentCustomerInformationBlocMock.state).thenReturn(
         PaymentCustomerInformationState.initial().copyWith(
           paymentCustomerInformation:
@@ -2671,5 +2671,112 @@ void main() {
         );
       },
     );
+
+    testWidgets('BillToInfo test when enablebillto is true', (tester) async {
+      
+
+      final cartState = CartState.initial().copyWith(
+        cartProducts: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              type: MaterialInfoType('material'),
+              materialNumber: MaterialNumber('123456789'),
+              quantity: MaterialQty(1),
+            ),
+            salesOrgConfig: fakeKHSalesOrgConfigs,
+          ),
+        ],
+      );
+
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+          salesOrganisation: fakeKHSalesOrganisation,
+        ),
+      );
+      when(() => cartBloc.state).thenReturn(
+        cartState,
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final payerInformation = find.byKey(WidgetKeys.payerInformation);
+      expect(payerInformation, findsOneWidget);
+    });
+
+    testWidgets(
+        'BillToInfo test when enablebillto is true and billToInfo empty',
+        (tester) async {
+      
+
+      final cartState = CartState.initial().copyWith(
+        cartProducts: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              type: MaterialInfoType('material'),
+              materialNumber: MaterialNumber('123456789'),
+              quantity: MaterialQty(1),
+            ),
+            salesOrgConfig: fakeKHSalesOrgConfigs,
+          ),
+        ],
+      );
+
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+          salesOrganisation: fakeKHSalesOrganisation,
+        ),
+      );
+      when(() => cartBloc.state).thenReturn(
+        cartState,
+      );
+
+      when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+        PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation: PaymentCustomerInformation.empty(),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final payerInformation = find.byKey(WidgetKeys.payerInformation);
+      expect(payerInformation, findsNothing);
+    });
+
+    testWidgets('BillToInfo test when enablebillto is false', (tester) async {
+    
+
+      final cartState = CartState.initial().copyWith(
+        cartProducts: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              type: MaterialInfoType('material'),
+              materialNumber: MaterialNumber('123456789'),
+              quantity: MaterialQty(1),
+            ),
+            salesOrgConfig: fakeSGSalesOrgConfigs,
+          ),
+        ],
+      );
+
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+          salesOrganisation: fakeSGSalesOrganisation,
+        ),
+      );
+      when(() => cartBloc.state).thenReturn(
+        cartState,
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final payerInformation = find.byKey(WidgetKeys.payerInformation);
+      expect(payerInformation, findsNothing);
+    });
   });
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: unused_local_variable
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -8,14 +9,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -150,12 +154,17 @@ class MockMixpanelService extends Mock implements MixpanelService {}
 
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
+class PaymentCustomerInformationMockBloc extends MockBloc<
+        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
   late EligibilityBloc eligibilityBloc;
+  late PaymentCustomerInformationBloc paymentCustomerInformationBloc;
   late UserBloc userBloc;
   late SalesOrgBloc salesOrgBloc;
   late CustomerCodeBloc customerCodeBloc;
@@ -184,6 +193,7 @@ void main() {
   late List<PriceAggregate> mockCartBundleItems;
   late List<ComboMaterialItem> fakeComboMaterialItems;
   late AplSimulatorOrder aplSimulatorOrder;
+  late PaymentCustomerInformationMockBloc paymentCustomerInformationMock;
   final routeData = RouteData(
     route: const RouteMatch(
       name: 'CartsPageRoute',
@@ -226,7 +236,7 @@ void main() {
     aplSimulatorOrder = await CartLocalDataSource().aplGetTotalPrice();
   });
   setUp(
-    () {
+    () async {
       WidgetsFlutterBinding.ensureInitialized();
       materialListBlocMock = MaterialListBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
@@ -247,6 +257,7 @@ void main() {
       announcementBlocMock = AnnouncementBlocMock();
       autoRouterMock = MockAppRouter();
       productImageBloc = ProductImageBlocMock();
+      paymentCustomerInformationMock = PaymentCustomerInformationMockBloc();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -560,6 +571,9 @@ void main() {
         ProductImageState.initial(),
       );
       when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+      when(() => paymentCustomerInformationMock.state).thenReturn(
+        PaymentCustomerInformationState.initial(),
+      );
     },
   );
 
@@ -618,6 +632,9 @@ void main() {
             BlocProvider<ProductImageBloc>(
               create: (context) => productImageBloc,
             ),
+            BlocProvider<PaymentCustomerInformationBloc>(
+              create: (context) => paymentCustomerInformationMock,
+            )
           ],
           child: const CartPage(),
         );
@@ -3131,7 +3148,7 @@ void main() {
               ),
             ],
           );
-
+          
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeVNSalesOrgConfigs,
@@ -3157,6 +3174,138 @@ void main() {
           );
         },
       );
+
+      testWidgets('BillToInfo test when enablebillto is true', (tester) async {
+        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+          displayItemTaxBreakdown: true,
+          currency: Currency('usd'),
+          salesOrg: fakeVNSalesOrg,
+          enableBillTo: true,
+        );
+
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                type: MaterialInfoType('material'),
+                materialNumber: MaterialNumber('123456789'),
+                quantity: MaterialQty(1),
+              ),
+              salesOrgConfig: fakeKHSalesOrgConfigs,
+            ),
+          ],
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
+            salesOrganisation: fakeKHSalesOrganisation,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        when(() => paymentCustomerInformationMock.state).thenReturn(
+          PaymentCustomerInformationState.initial().copyWith(
+            paymentCustomerInformation:
+                await PaymentCustomerInformationLocalDataSource()
+                    .getPaymentCustomerInformation(),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final summaryInfoButton = find.byKey(WidgetKeys.summaryInfoButton);
+        await tester.tap(summaryInfoButton);
+
+        await tester.pumpAndSettle();
+
+        final payerInformation = find.byKey(WidgetKeys.payerInformation);
+        expect(payerInformation, findsOneWidget);
+      });
+      testWidgets(
+          'BillToInfo test when enablebillto is true and billToInfo is empty',
+          (tester) async {
+        when(() => paymentCustomerInformationMock.state).thenReturn(
+          PaymentCustomerInformationState.initial().copyWith(
+            paymentCustomerInformation: PaymentCustomerInformation.empty(),
+          ),
+        );
+
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                type: MaterialInfoType('material'),
+                materialNumber: MaterialNumber('123456789'),
+                quantity: MaterialQty(1),
+              ),
+              salesOrgConfig: fakeKHSalesOrgConfigs,
+            ),
+          ],
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
+            salesOrganisation: fakeKHSalesOrganisation,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final summaryInfoButton = find.byKey(WidgetKeys.summaryInfoButton);
+        await tester.tap(summaryInfoButton);
+
+        await tester.pumpAndSettle();
+
+        final payerInformation = find.byKey(WidgetKeys.payerInformation);
+        expect(payerInformation, findsNothing);
+      });
+
+      testWidgets('BillToInfo test when enablebillto is false', (tester) async {
+       
+
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                type: MaterialInfoType('material'),
+                materialNumber: MaterialNumber('123456789'),
+                quantity: MaterialQty(1),
+              ),
+              salesOrgConfig: fakeTWSalesOrgConfigs,
+            ),
+          ],
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
+            salesOrganisation: fakeKHSalesOrganisation,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final summaryInfoButton = find.byKey(WidgetKeys.summaryInfoButton);
+        await tester.tap(summaryInfoButton);
+
+        await tester.pumpAndSettle();
+
+        final payerInformation = find.byKey(WidgetKeys.payerInformation);
+        expect(payerInformation, findsNothing);
+      });
     },
   );
 }

@@ -51,6 +51,7 @@ class WidgetKeys {
   static Key detailInfoSection(String label) => Key('detailInfoSection$label');
   static const Key expandableSection = Key('expandableSection');
   static Key favIcon(String label) => Key('favIcon$label');
+  static const Key payerInformation = Key('payerInformation');
   //============================================================
   //  PRE-ORDER-MODAL
   //============================================================
@@ -603,6 +604,7 @@ class WidgetKeys {
       Key('cartPageInvalidItemsBanner');
   static const Key cartPageInvalidItemsBannerButton =
       Key('cartPageInvalidItemsBannerButton');
+  static const Key summaryInfoButton = Key('summaryInfoButton');
 
   //============================================================
   //  Checkout Page Keys

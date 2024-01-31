@@ -34,6 +34,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -41,6 +42,7 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -198,7 +200,7 @@ void main() {
     );
   });
   group('Order History Details Page', () {
-    setUp(() {
+    setUp(() async {
       customerCodeBlocMock = CustomerCodeBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
@@ -2174,6 +2176,75 @@ void main() {
         find.byKey(WidgetKeys.orderHistoryBundleInformation),
         findsOneWidget,
       );
+    });
+
+    testWidgets('BillToInfo when enable bill to true', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+        PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation:
+              await PaymentCustomerInformationLocalDataSource()
+                  .getPaymentCustomerInformation(),
+        ),
+      );
+      
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.payerInformation), findsOneWidget);
+    });
+
+    testWidgets('BillToInfo when enable bill to true and billToInfo is empty',
+        (tester) async {
+      when(() => paymentCustomerInformationBlocMock.state).thenAnswer(
+        (invocation) => PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation: PaymentCustomerInformation.empty(),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
+    });
+
+    testWidgets('BillToInfo when enable bill to false', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
     });
   });
 }

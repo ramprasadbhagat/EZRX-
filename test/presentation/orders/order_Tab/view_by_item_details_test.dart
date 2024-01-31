@@ -2,7 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -59,6 +61,7 @@ import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/se
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
@@ -194,7 +197,7 @@ void main() {
         );
   });
   group('Order History Details By Item Page', () {
-    setUp(() {
+    setUp(() async {
       cartBlocMock = CartBlocMock();
       viewByItemsBlocMock = ViewByItemsBlocMock();
       viewByItemDetailsBlocMock = ViewByItemDetailsBlockMock();
@@ -1701,6 +1704,78 @@ void main() {
         ),
         findsNothing,
       );
+    });
+
+    testWidgets('BillToInfo when enable bill to true', (tester) async {
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+        ),
+      );
+
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+        ),
+      );
+
+      when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+        PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation:
+              await PaymentCustomerInformationLocalDataSource()
+                  .getPaymentCustomerInformation(),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.payerInformation), findsOneWidget);
+    });
+
+    testWidgets('BillToInfo when enable bill to true billToInfo is empty',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+        ),
+      );
+
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+        ),
+      );
+
+      when(() => paymentCustomerInformationBlocMock.state).thenAnswer(
+        (invocation) => PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation: PaymentCustomerInformation.empty(),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
+    });
+
+    testWidgets('BillToInfo when enable bill to false', (tester) async {
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+        ),
+      );
+
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
     });
   });
 }
