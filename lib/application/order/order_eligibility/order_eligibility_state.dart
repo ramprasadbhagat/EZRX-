@@ -114,7 +114,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   bool get isCartItemsContainsFOCMaterial {
     return cartItems
-        .where((element) => element.materialInfo.materialGroup4.isFOC)
+        .where((element) => element.materialInfo.isFOCMaterial)
         .isNotEmpty;
   }
 

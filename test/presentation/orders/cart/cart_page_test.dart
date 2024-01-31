@@ -1,5 +1,6 @@
 // ignore_for_file: unused_local_variable
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:auto_route/auto_route.dart';
@@ -3110,6 +3111,52 @@ void main() {
           ),
         ).called(1);
       });
+
+      testWidgets(
+        'do not Show Mov Check Message when cart contain covid material',
+        (tester) async {
+          final cartState = CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  type: MaterialInfoType('material'),
+                  materialNumber: MaterialNumber('123456789'),
+                  quantity: MaterialQty(1),
+                  isFOCMaterial: true,
+                ),
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(234.50),
+                ),
+                salesOrgConfig: fakePHSalesOrgConfigs,
+              ),
+            ],
+          );
+
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => cartBloc.state).thenReturn(
+            cartState,
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              cartItems: cartState.cartProducts,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+
+          await tester.pumpAndSettle();
+
+          expect(
+            find.byType(InfoLabel),
+            findsNothing,
+          );
+        },
+      );
     },
   );
 }
