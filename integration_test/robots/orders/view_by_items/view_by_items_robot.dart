@@ -123,9 +123,9 @@ class ViewByItemsRobot {
     expect(
       find.byWidgetPredicate(
         (widget) =>
-            widget is Text &&
+            widget is RichText &&
             widget.key == WidgetKeys.commonTileItemHeader &&
-            (widget.data ?? '').contains(searchKey),
+            widget.text.toPlainText().contains(searchKey),
       ),
       findsAtLeastNWidgets(1),
     );
@@ -183,8 +183,11 @@ class ViewByItemsRobot {
     }
   }
 
-  String getFirstOrderId() =>
-      _getText(orderId.first).split('${'Order'.tr()} #')[1];
+  String getFirstOrderId() => tester
+      .widget<RichText>(orderId.first)
+      .text
+      .toPlainText()
+      .split('${'Order'.tr()} #')[1];
 
   String getFirstProductName() => _getText(productName.first);
 

@@ -161,6 +161,7 @@ class _TierItem extends StatelessWidget {
           style: Theme.of(context).textTheme.labelSmall!.copyWith(
                 color: ZPColors.primary,
               ),
+          key: WidgetKeys.productPriceOfferTitle,
         ),
         PriceComponent(
           price: priceTier.rate.toStringAsFixed(0),

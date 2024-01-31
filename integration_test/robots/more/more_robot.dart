@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -23,6 +25,15 @@ class MoreRobot extends CommonRobot {
   Future<void> tapReturnsTile() async {
     await tester.tap(returnsTile);
     await tester.pumpAndSettle();
+  }
+
+  void verifyProfileName(String firstName, String lastName) {
+    expect(
+      find.textContaining(
+        '${'Hello'.tr()}, ${FullName(firstName: firstName, lastName: lastName).toTitleCase}',
+      ),
+      findsOneWidget,
+    );
   }
 
   Future<void> tapContactUsTile() async {
@@ -62,16 +73,11 @@ class MoreRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.moreScreen), findsOneWidget);
   }
 
-  Future<void> loginOnBehalfToMoreTab(String userName) async {
-    await _dragToVerify(loginOnBehalf);
+  Future<void> verifyLoginOnBehalfTile() => _dragToVerify(loginOnBehalf);
+
+  Future<void> tapLoginOnBehalfTile() async {
     await tester.tap(loginOnBehalf);
     await tester.pumpAndSettle();
-    await tester.enterText(
-      find.byKey(WidgetKeys.proxyLoginUserNameField),
-      userName,
-    );
-    await tester.pumpAndSettle();
-    await tester.tap(find.byKey(WidgetKeys.loginOnBehalfLoginButtonKey));
   }
 
   Future<void> verifyAnnouncementArticleTile() =>

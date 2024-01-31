@@ -4,7 +4,8 @@ BUILD := $$( echo $(STR) | cut -d '+' -f 2 )
 CLIENTUSER := 'client_user.dart'
 CLIENTUSERRETURN := 'client_user_return.dart'
 CLIENTUSERPAYMENT := 'client_user_payment.dart'
-EXTERNALSALESREP := 'external_sales_rep.dart'
+EXTERNALSALESREPORDER := 'external_sales_rep/external_sales_rep_user_order.dart'
+EXTERNALSALESREPRETURN := 'external_sales_rep/external_sales_rep_user_return.dart'
 CLIENTUSERORDER := 'client_user_order.dart'
 SALESORGCONFIG := 'reset_sales_org_config.sh'
 
@@ -85,8 +86,10 @@ run_my_client_return_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENTUSERRETURN}
 run_my_client_payment_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENTUSERPAYMENT} 
-run_my_external_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${EXTERNALSALESREP}
+run_my_external_order_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${EXTERNALSALESREPORDER}
+run_my_external_return_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${EXTERNALSALESREPRETURN}
 run_ph_payment_summary_client_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/ph/payments/payment_summary/${CLIENTUSER}
 run_ph_client_test:

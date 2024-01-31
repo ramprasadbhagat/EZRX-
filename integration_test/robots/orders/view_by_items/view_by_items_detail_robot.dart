@@ -103,11 +103,13 @@ class ViewByItemsDetailRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyBuyAgainButton() => expect(buyAgainButton, findsOneWidget);
-
   Future<void> tapBuyAgainButton() async {
     await tester.tap(buyAgainButton);
     await tester.pumpAndSettle();
+  }
+
+  void verifyBuyAgainButton({required bool isVisible}) {
+    expect(buyAgainButton, isVisible ? findsOneWidget : findsNothing);
   }
 
   Future<void> verifyItemComponent() async {

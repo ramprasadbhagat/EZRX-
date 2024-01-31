@@ -72,6 +72,7 @@ class OrderNumberSection extends StatelessWidget {
             children: [
               Flexible(
                 child: RichText(
+                  key: WidgetKeys.viewByItemsOrderDetailOrderCode,
                   text: TextSpan(
                     text:
                         '${context.tr(orderHistoryItem.status.prefix)} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',

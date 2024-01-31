@@ -22,6 +22,7 @@ class ProductDetailRobot extends CommonRobot {
   final addToCartSuccessMessage =
       find.byKey(WidgetKeys.materialDetailsAddToCartSnackBar);
   final body = find.byKey(WidgetKeys.bodyContentProductDetail);
+  final offerBottomSheetCloseButton = find.byKey(WidgetKeys.closeButton);
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
@@ -72,7 +73,9 @@ class ProductDetailRobot extends CommonRobot {
   }
 
   Future<void> openMaterialInformation() async {
-    await tester.tap(find.byKey(WidgetKeys.materialDetailsInfoTile));
+    await scrollEnsureFinderVisible(materialDetailsInfoTile);
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+    await tester.tap(materialDetailsInfoTile);
     await tester.pumpAndSettle();
   }
 
@@ -267,8 +270,20 @@ class ProductDetailRobot extends CommonRobot {
     );
   }
 
-  void verifyButtonCloseDisplayed() {
-    expect(find.byKey(WidgetKeys.closeButton), findsOneWidget);
+  void verifyOfferBottomSheetCloseButton() {
+    expect(offerBottomSheetCloseButton, findsOneWidget);
+  }
+
+  Future<void> tapOfferBottomSheetCloseButton() async {
+    await tester.tap(offerBottomSheetCloseButton);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyProductPriceOfferTitle({required bool isVisible}) {
+    expect(
+      find.byKey(WidgetKeys.productPriceOfferTitle),
+      isVisible ? findsOneWidget : findsNothing,
+    );
   }
 
   Future<void> verifyRelateProductDisplayed() async {

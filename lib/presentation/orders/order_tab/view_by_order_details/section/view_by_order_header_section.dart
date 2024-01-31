@@ -36,6 +36,7 @@ class OrderHeaderSection extends StatelessWidget {
                 children: [
                   Flexible(
                     child: RichText(
+                      key: WidgetKeys.viewByOrderDetailOrderCode,
                       text: TextSpan(
                         text:
                             '${context.tr(orderDetails.processingStatus.prefix)} #${orderDetails.orderNumber.getOrDefaultValue('')}',

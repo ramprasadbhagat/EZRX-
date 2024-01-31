@@ -259,6 +259,7 @@ class WidgetKeys {
   static const Key availableOffersTile = Key('availableOffersTile');
   static const Key materialDeliveryInstructions =
       Key('materialDeliveryInstructions');
+  static const Key productPriceOfferTitle = Key('productPriceOfferTitle');
 
   //============================================================
   //  Combo Deal Page Keys
@@ -379,6 +380,10 @@ class WidgetKeys {
       Key('materialReturnDetailsSection');
   static const Key newRequestSuccessMessage = Key('newRequestSuccessMessage');
   static const Key bonusItemSection = Key('bonusItemSection');
+
+  //step 3
+  static const Key newReturnBonusDetailsCard = Key('newReturnBonusDetailsCard');
+
   //============================================================
   //  Returns by items
   //============================================================

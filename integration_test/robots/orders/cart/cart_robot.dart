@@ -321,13 +321,16 @@ class CartRobot {
     );
   }
 
-  void verifyMaterialCounterOfferButton(String materialNumber) {
+  void verifyMaterialCounterOfferButton(
+    String materialNumber, {
+    bool isVisible = true,
+  }) {
     expect(
       find.descendant(
         of: _materialItem(materialNumber),
         matching: counterOfferButton,
       ),
-      findsOneWidget,
+      isVisible ? findsOneWidget : findsNothing,
     );
   }
 
@@ -723,4 +726,16 @@ class CartRobot {
 
   Finder _bonusItem(String materialNumber, String bonusMaterialNumber) =>
       find.byKey(WidgetKeys.cartItemBonus(materialNumber, bonusMaterialNumber));
+
+  void verifyPriceNotAvailableForAtLeastOneItem() {
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.priceNotAvailableMessageWidget),
+        matching: find.text(
+          'Price is not available for at least one item. Grand total reflected may not be accurate.',
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
 }

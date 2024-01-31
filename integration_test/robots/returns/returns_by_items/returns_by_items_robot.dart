@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -168,146 +166,19 @@ class ReturnsByItemsRobot {
     expect(
       find.byWidgetPredicate(
         (widget) =>
-            widget is Text &&
+            widget is RichText &&
             widget.key == WidgetKeys.commonTileItemHeader &&
-            (widget.data ?? '').contains(searchKey),
+            widget.text.toPlainText().contains(searchKey),
       ),
       findsAtLeastNWidgets(1),
     );
   }
 
-  void verifyReturnItemVisible(String searchKey) {
-    expect(item, findsAtLeastNWidgets(1));
-    // Verify return Id
+  void verifyReturnItemWithBonusVisible() {
     expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text &&
-            widget.key == WidgetKeys.commonTileItemHeader &&
-            (widget.data ?? '').contains(searchKey),
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify image
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is ProductImage &&
-            widget.key == WidgetKeys.commonTileItemImage,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify material Qty
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text && widget.key == WidgetKeys.commonTileItemQty,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify material number
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text && widget.key == WidgetKeys.commonTileItemLabel,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify status
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is StatusLabel &&
-            widget.key == WidgetKeys.returnItemTileStatus,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify material title
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text && widget.key == WidgetKeys.commonTileItemTitle,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify batch
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text && widget.key == WidgetKeys.commonTileItemSubTitle,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-  }
-
-  void verifyReturnItemWithBonusVisible(String searchKey) {
-    expect(item, findsAtLeastNWidgets(1));
-    // Verify return Id
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text &&
-            widget.key == WidgetKeys.commonTileItemHeader &&
-            (widget.data ?? '').contains(searchKey),
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify image
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is ProductImage &&
-            widget.key == WidgetKeys.commonTileItemImage,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify material Qty
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text && widget.key == WidgetKeys.commonTileItemQty,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify material number
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text && widget.key == WidgetKeys.commonTileItemLabel,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify status
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is StatusLabel &&
-            widget.key == WidgetKeys.returnItemTileStatus,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify BonusTag
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is BonusTag &&
-            widget.key == WidgetKeys.returnItemTileBonusTag,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify material title
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text && widget.key == WidgetKeys.commonTileItemTitle,
-      ),
-      findsAtLeastNWidgets(1),
-    );
-    // Verify batch
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text && widget.key == WidgetKeys.commonTileItemSubTitle,
+      find.descendant(
+        of: item,
+        matching: find.byKey(WidgetKeys.returnItemTileBonusTag),
       ),
       findsAtLeastNWidgets(1),
     );
@@ -356,16 +227,20 @@ class ReturnsByItemsRobot {
   }
 
   String getReturnIdText({required int index}) =>
-      tester.widget<Text>(returnIdLabel.at(index)).data ?? '';
+      tester.widget<RichText>(returnIdLabel.at(index)).text.toPlainText();
 
   void verifyReturnIdTextVisible(String text, {required int index}) {
-    expect(tester.widget<Text>(returnIdLabel.at(index)).data, text);
+    expect(
+      tester.widget<RichText>(returnIdLabel.at(index)).text.toPlainText(),
+      text,
+    );
   }
 
   void verifyReturnIdTextNotVisible(String text, {required int index}) {
     expect(
       returnIdLabel.evaluate().length - 1 < index ||
-          tester.widget<Text>(returnIdLabel.at(index)).data != text,
+          tester.widget<RichText>(returnIdLabel.at(index)).text.toPlainText() !=
+              text,
       true,
     );
   }

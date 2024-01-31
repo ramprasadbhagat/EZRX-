@@ -24,8 +24,8 @@ class ViewByOrdersDetailRobot extends CommonRobot {
       find.byWidgetPredicate(
         (widget) =>
             widget.key == WidgetKeys.viewByOrderDetailOrderCode &&
-            widget is Text &&
-            (widget.data ?? '').contains(orderId),
+            widget is RichText &&
+            widget.text.toPlainText().contains(orderId),
       ),
       findsOneWidget,
     );

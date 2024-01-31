@@ -241,6 +241,7 @@ class _HeaderItem extends StatelessWidget {
           children: [
             Expanded(
               child: RichText(
+                key: WidgetKeys.commonTileItemHeader,
                 text: TextSpan(
                   text: headerText,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(

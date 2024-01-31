@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -141,4 +142,21 @@ class ProductRobot extends CommonRobot {
 
     await tester.pumpUntilVisible(statusFavorite);
   }
+
+  void verifyPAndGMaterialPriceForExternalSalesRep() {
+    expect(
+      find.descendant(
+        of: materialCard,
+        matching: _getPriceFinder('Price Not Available'.tr()),
+      ),
+      findsWidgets,
+    );
+  }
+
+  Finder _getPriceFinder(String price) => find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text.toPlainText().contains(price),
+      );
 }

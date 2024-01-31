@@ -482,4 +482,17 @@ class CheckoutRobot {
     expect(finder, findsOneWidget);
     await tester.pump();
   }
+
+  void verifyPriceNotAvailableForAtLeastOneItem() {
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.priceNotAvailableMessageWidget),
+        matching: find.text(
+          'Price is not available for at least one item. Grand total reflected may not be accurate.'
+              .tr(),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
 }

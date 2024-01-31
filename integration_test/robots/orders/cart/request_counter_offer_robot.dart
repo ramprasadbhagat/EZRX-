@@ -15,6 +15,8 @@ class RequestCounterOfferRobot {
   final offerPrice = find.byKey(WidgetKeys.counterOfferPriceWidget);
   final priceTextField = find.byKey(WidgetKeys.counterOfferPriceField);
   final remarkTextField = find.byKey(WidgetKeys.counterOfferRemarksField);
+  final counterOfferDiscountField =
+      find.byKey(WidgetKeys.counterOfferDiscountField);
 
   void verifySheet({required bool isVisible}) {
     expect(bottomSheet, isVisible ? findsOneWidget : findsNothing);
@@ -86,6 +88,19 @@ class RequestCounterOfferRobot {
     );
   }
 
+  void verifyPriceTextErrorMessage() {
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.counterOfferEmptyFieldErrorMessage),
+        matching: find.text(
+          'Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.'
+              .tr(),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyRemarkTextField() {
     expect(remarkTextField, findsOneWidget);
   }
@@ -111,6 +126,20 @@ class RequestCounterOfferRobot {
         matching: find.text('Maximum: 132 characters'.tr()),
       ),
       findsOneWidget,
+    );
+  }
+
+  Future<void> enterDiscountCounterPriceRate(String text) async {
+    await tester.tap(counterOfferDiscountField);
+    await tester.enterText(counterOfferDiscountField, text);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyDiscountCounterPriceRate(String text) {
+    expect(
+      tester.widget<TextFormField>(counterOfferDiscountField).controller?.text,
+      text,
     );
   }
 }

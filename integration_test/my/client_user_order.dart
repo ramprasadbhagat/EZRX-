@@ -1346,7 +1346,7 @@ void main() {
       productDetailRobot.verifyNameProductOffer(productName);
       productDetailRobot.verifyCodeProductOffer(bonusMaterialNumber);
       productDetailRobot.verifyQuantityProductDisplayed();
-      productDetailRobot.verifyButtonCloseDisplayed();
+      productDetailRobot.verifyOfferBottomSheetCloseButton();
     });
 
     testWidgets('EZRX-T66 | Verify Related products in the material detail',

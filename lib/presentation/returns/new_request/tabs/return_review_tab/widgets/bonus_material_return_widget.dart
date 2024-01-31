@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_info.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/upload_file_list.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -38,6 +39,7 @@ class _BonusMaterialReturnInfoState extends State<BonusMaterialReturnWidget> {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               context.tr('Bonus Details'),
+              key: WidgetKeys.newReturnBonusDetailsCard,
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),

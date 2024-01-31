@@ -42,12 +42,17 @@ class NewReturnStep2Robot {
     expect(newRequestStep2DetailsSection, findsAtLeastNWidgets(1));
   }
 
-  void verifyReturnDetailDisplayedWithBonus() {
-    expect(newRequestStep2ItemImage, findsAtLeastNWidgets(1));
-    expect(newRequestStep2ItemproductImage, findsAtLeastNWidgets(1));
-    expect(newRequestStep2QuantityAndPrice, findsAtLeastNWidgets(1));
-    expect(newRequestStep2DetailsSection, findsAtLeastNWidgets(1));
-    expect(newRequestStep2BonusItemSection, findsAtLeastNWidgets(1));
+  void verifyReturnDetailDisplayedWithBonus(
+    String materialNumber,
+    String materialName,
+  ) {
+    expect(find.text(materialNumber), findsWidgets);
+    expect(find.text(materialName), findsWidgets);
+    expect(newRequestStep2ItemImage, findsWidgets);
+    expect(newRequestStep2ItemproductImage, findsWidgets);
+    expect(newRequestStep2QuantityAndPrice, findsWidgets);
+    expect(newRequestStep2DetailsSection, findsWidgets);
+    expect(newRequestStep2BonusItemSection, findsWidgets);
   }
 
   bool _hasBonusSection(String uuid) {
@@ -87,6 +92,39 @@ class NewReturnStep2Robot {
       await _dragTo(materialTextField);
       return;
     }
+  }
+
+  Future<void> enterBonusReturnQuantityWithCommercialItem(
+    String returnQuantity,
+    String uuid,
+  ) async {
+    final bonusTextField = find.descendant(
+      of: bonusQuantityField(uuid),
+      matching: newRequestStep2BalanceQuantityTextField(uuid),
+    );
+    await _dragTo(bonusTextField);
+
+    await tester.enterText(bonusTextField, returnQuantity);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
+  }
+
+  Future<void> selectBonusReasonWithCommercialItem(
+    String reason,
+    String uuid,
+  ) async {
+    final bonusTextField = find.descendant(
+      of: bonusQuantityField(uuid),
+      matching: newRequestStep2BalanceQuantityTextField(uuid),
+    );
+    await _dragTo(bonusTextField);
+
+    await tester.tap(newRequestStep2ReasonDropdown);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(reason));
+    await tester.pumpAndSettle();
+    await tester.tap(nextButton);
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapNextButton() async {
@@ -135,8 +173,8 @@ class NewReturnStep2Robot {
   }
 
   void verifyNextToStep3(String materialNumber, String materialName) {
-    expect(find.text(materialNumber), findsOneWidget);
-    expect(find.text(materialName), findsOneWidget);
+    expect(find.text(materialNumber), findsWidgets);
+    expect(find.text(materialName), findsWidgets);
   }
 
   Future<void> deleteItem() async {
