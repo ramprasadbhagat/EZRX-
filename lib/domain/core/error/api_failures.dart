@@ -69,6 +69,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.cartHasDifferentAddress() = _CartHasDifferentAddress;
   const factory ApiFailure.articleannuncementTagFetchingError() =
       _ArticleannuncementTagFetchingError;
+  const factory ApiFailure.attachmentDownloadError() = _AttachmentDownloadError;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -129,5 +130,6 @@ extension ApiFailureExt on ApiFailure {
             'shipToAddress changed from existing cart. Delete the cart and then add new item',
         articleannuncementTagFetchingError: (_) =>
             'Error while fetching announcement article tag list!',
+        attachmentDownloadError: (_) => 'File download failed',
       );
 }

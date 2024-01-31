@@ -1,4 +1,6 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get_it/get_it.dart';
 
@@ -37,4 +39,17 @@ String constructSourceBy(String source) {
 
 String constructManufacturerBy(String manufacturer) {
   return manufacturer.isEmpty ? '' : 'By $manufacturer';
+}
+
+String svgIconForFileType(String source) {
+  switch (fileTypeFromPath(source)) {
+    case '.pdf':
+      return SvgImage.pdfIcon;
+    case '.doc':
+      return SvgImage.documentIcon;
+    case '.xls':
+      return SvgImage.xlsIcon;
+    default:
+      return SvgImage.documentIcon;
+  }
 }

@@ -1,16 +1,20 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_attachment_bloc/announcement_attachment_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_info_details.dart';
+import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
@@ -18,9 +22,11 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_bottom_sheet.dart';
 part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_item_description.dart';
 part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_title_section.dart';
+part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_attachment_section.dart';
 
 class AnnouncementInfoDetailsPage extends StatefulWidget {
   const AnnouncementInfoDetailsPage({Key? key}) : super(key: key);
@@ -185,7 +191,7 @@ class _AnnouncementInfoDetailsPageState
                                       ),
                                     },
                                     data: state.announcementInfoDetails.content
-                                        .appendedImgSrcWithBaseUrl,
+                                        .appendedImgSrcWithBaseUrlWithMedia,
                                     shrinkWrap: true,
                                   ),
                                   const SizedBox(
@@ -193,6 +199,10 @@ class _AnnouncementInfoDetailsPageState
                                   ),
                                 ],
                               ),
+                            ),
+                            _AnnouncementInfoAttachmentSection(
+                              documentList:
+                                  state.announcementInfoDetails.documents,
                             ),
                             _AnnouncementInfoBottomSheet(
                               key: WidgetKeys.announcementDetailOtherSection,

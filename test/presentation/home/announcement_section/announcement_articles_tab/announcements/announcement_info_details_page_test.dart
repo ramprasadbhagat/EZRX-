@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_attachment_bloc/announcement_attachment_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -22,9 +23,14 @@ import 'package:universal_io/io.dart';
 import '../../../../../utils/widget_utils.dart';
 import 'announcements_tab_widget_test.dart';
 
+class AnnouncementAttachmentBlocMock
+    extends MockBloc<AnnouncementAttachmentEvent, AnnouncementAttachmentState>
+    implements AnnouncementAttachmentBloc {}
+
 void main() {
   late AnnouncementInfoDetailsBloc announcementInfoDetailsBlocMock;
   late AnnouncementInfoBloc announcementInfoBlocMock;
+  late AnnouncementAttachmentBloc announcementAttachmentBlocMock;
 
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
@@ -44,6 +50,7 @@ void main() {
       manufacturer: Manufacturer('Manufacturer'),
       source: Source(''),
       tag: '',
+      documents: [],
     ),
   );
 
@@ -52,8 +59,12 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerFactory<AnnouncementAttachmentBloc>(
+      () => announcementAttachmentBlocMock,
+    );
     autoRouterMock = locator<AppRouter>();
     announcementInfoDetailsBlocMock = AnnouncementInfoDetailsBlocMock();
+    announcementAttachmentBlocMock = AnnouncementAttachmentBlocMock();
     announcementInfoBlocMock = AnnouncementInfoBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     moclAnnouncementInfoDetails =
@@ -64,6 +75,8 @@ void main() {
         .thenReturn(AnnouncementInfoDetailsState.initial());
     when(() => announcementInfoBlocMock.state)
         .thenReturn(AnnouncementInfoState.initial());
+    when(() => announcementAttachmentBlocMock.state)
+        .thenReturn(AnnouncementAttachmentState.initial());
   });
 
   Widget getAnnouncementInfoDetailsPage() {
@@ -79,6 +92,9 @@ void main() {
         ),
         BlocProvider<AnnouncementInfoDetailsBloc>(
           create: (context) => announcementInfoDetailsBlocMock,
+        ),
+        BlocProvider<AnnouncementAttachmentBloc>(
+          create: (context) => announcementAttachmentBlocMock,
         ),
       ],
       child: const AnnouncementInfoDetailsPage(),

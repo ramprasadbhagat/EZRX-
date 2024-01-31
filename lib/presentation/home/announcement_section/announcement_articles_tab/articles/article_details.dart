@@ -175,8 +175,8 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                               margin: const EdgeInsets.all(0),
                             ),
                           },
-                          data:
-                              widget.article.content.appendedImgSrcWithBaseUrl,
+                          data: widget.article.content
+                              .appendedImgSrcWithBaseUrlWithMedia,
                           shrinkWrap: true,
                         ),
                         const SizedBox(

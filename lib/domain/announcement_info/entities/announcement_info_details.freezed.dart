@@ -26,6 +26,7 @@ mixin _$AnnouncementInfoDetails {
   Source get source => throw _privateConstructorUsedError;
   String get tag => throw _privateConstructorUsedError;
   DateTimeStringValue get releaseDate => throw _privateConstructorUsedError;
+  List<Attachment> get documents => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnnouncementInfoDetailsCopyWith<AnnouncementInfoDetails> get copyWith =>
@@ -48,7 +49,8 @@ abstract class $AnnouncementInfoDetailsCopyWith<$Res> {
       Manufacturer manufacturer,
       Source source,
       String tag,
-      DateTimeStringValue releaseDate});
+      DateTimeStringValue releaseDate,
+      List<Attachment> documents});
 }
 
 /// @nodoc
@@ -75,6 +77,7 @@ class _$AnnouncementInfoDetailsCopyWithImpl<$Res,
     Object? source = null,
     Object? tag = null,
     Object? releaseDate = null,
+    Object? documents = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -117,6 +120,10 @@ class _$AnnouncementInfoDetailsCopyWithImpl<$Res,
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      documents: null == documents
+          ? _value.documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as List<Attachment>,
     ) as $Val);
   }
 }
@@ -139,7 +146,8 @@ abstract class _$$_AnnouncementInfoDetailsCopyWith<$Res>
       Manufacturer manufacturer,
       Source source,
       String tag,
-      DateTimeStringValue releaseDate});
+      DateTimeStringValue releaseDate,
+      List<Attachment> documents});
 }
 
 /// @nodoc
@@ -164,6 +172,7 @@ class __$$_AnnouncementInfoDetailsCopyWithImpl<$Res>
     Object? source = null,
     Object? tag = null,
     Object? releaseDate = null,
+    Object? documents = null,
   }) {
     return _then(_$_AnnouncementInfoDetails(
       id: null == id
@@ -206,6 +215,10 @@ class __$$_AnnouncementInfoDetailsCopyWithImpl<$Res>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      documents: null == documents
+          ? _value._documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as List<Attachment>,
     ));
   }
 }
@@ -223,8 +236,10 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
       required this.manufacturer,
       required this.source,
       required this.tag,
-      required this.releaseDate})
-      : super._();
+      required this.releaseDate,
+      required final List<Attachment> documents})
+      : _documents = documents,
+        super._();
 
   @override
   final String id;
@@ -246,10 +261,17 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
   final String tag;
   @override
   final DateTimeStringValue releaseDate;
+  final List<Attachment> _documents;
+  @override
+  List<Attachment> get documents {
+    if (_documents is EqualUnmodifiableListView) return _documents;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_documents);
+  }
 
   @override
   String toString() {
-    return 'AnnouncementInfoDetails(id: $id, title: $title, content: $content, summary: $summary, thumbnail: $thumbnail, publishedDate: $publishedDate, manufacturer: $manufacturer, source: $source, tag: $tag, releaseDate: $releaseDate)';
+    return 'AnnouncementInfoDetails(id: $id, title: $title, content: $content, summary: $summary, thumbnail: $thumbnail, publishedDate: $publishedDate, manufacturer: $manufacturer, source: $source, tag: $tag, releaseDate: $releaseDate, documents: $documents)';
   }
 
   @override
@@ -270,12 +292,25 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
             (identical(other.source, source) || other.source == source) &&
             (identical(other.tag, tag) || other.tag == tag) &&
             (identical(other.releaseDate, releaseDate) ||
-                other.releaseDate == releaseDate));
+                other.releaseDate == releaseDate) &&
+            const DeepCollectionEquality()
+                .equals(other._documents, _documents));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, content, summary,
-      thumbnail, publishedDate, manufacturer, source, tag, releaseDate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      content,
+      summary,
+      thumbnail,
+      publishedDate,
+      manufacturer,
+      source,
+      tag,
+      releaseDate,
+      const DeepCollectionEquality().hash(_documents));
 
   @JsonKey(ignore: true)
   @override
@@ -288,17 +323,17 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
 
 abstract class _AnnouncementInfoDetails extends AnnouncementInfoDetails {
   const factory _AnnouncementInfoDetails(
-          {required final String id,
-          required final String title,
-          required final HtmlContent content,
-          required final String summary,
-          required final String thumbnail,
-          required final DateTimeStringValue publishedDate,
-          required final Manufacturer manufacturer,
-          required final Source source,
-          required final String tag,
-          required final DateTimeStringValue releaseDate}) =
-      _$_AnnouncementInfoDetails;
+      {required final String id,
+      required final String title,
+      required final HtmlContent content,
+      required final String summary,
+      required final String thumbnail,
+      required final DateTimeStringValue publishedDate,
+      required final Manufacturer manufacturer,
+      required final Source source,
+      required final String tag,
+      required final DateTimeStringValue releaseDate,
+      required final List<Attachment> documents}) = _$_AnnouncementInfoDetails;
   const _AnnouncementInfoDetails._() : super._();
 
   @override
@@ -321,6 +356,8 @@ abstract class _AnnouncementInfoDetails extends AnnouncementInfoDetails {
   String get tag;
   @override
   DateTimeStringValue get releaseDate;
+  @override
+  List<Attachment> get documents;
   @override
   @JsonKey(ignore: true)
   _$$_AnnouncementInfoDetailsCopyWith<_$_AnnouncementInfoDetails>

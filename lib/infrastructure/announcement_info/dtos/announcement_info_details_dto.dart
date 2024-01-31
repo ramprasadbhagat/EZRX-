@@ -28,6 +28,8 @@ class AnnouncementInfoDetailsDto with _$AnnouncementInfoDetailsDto {
     @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
         required String source,
     @JsonKey(name: 'tag', readValue: readTag) required String tag,
+    @JsonKey(name: 'documents', readValue: getDocumentsList)
+        required List<String> documentsList,
   }) = _AnnouncementInfoDetailsDto;
 
   AnnouncementInfoDetails get toDomain => AnnouncementInfoDetails(
@@ -41,6 +43,7 @@ class AnnouncementInfoDetailsDto with _$AnnouncementInfoDetailsDto {
         source: Source(source),
         tag: tag,
         releaseDate: DateTimeStringValue(releaseDate),
+        documents: documentsList.map((e) => Attachment(e)).toList(),
       );
 
   factory AnnouncementInfoDetailsDto.fromJson(Map<String, dynamic> json) =>
@@ -51,3 +54,8 @@ String readValue(Map json, String key) => json[key]['value'] ?? '';
 String readTag(Map json, String key) => json[key]['value']?['name'] ?? '';
 String readSrc(Map json, String key) => json[key]['src'] ?? '';
 String readIso(Map json, String key) => json[key]['isoValue'] ?? '';
+List<dynamic> getDocumentsList(Map json, String key) {
+  final urlList = json[key]?['jsonValue'] ?? [];
+
+  return urlList.map((e) => e['url'] ?? '').toList();
+}

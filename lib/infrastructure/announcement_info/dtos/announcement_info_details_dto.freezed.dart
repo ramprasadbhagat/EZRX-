@@ -41,6 +41,8 @@ mixin _$AnnouncementInfoDetailsDto {
   String get source => throw _privateConstructorUsedError;
   @JsonKey(name: 'tag', readValue: readTag)
   String get tag => throw _privateConstructorUsedError;
+  @JsonKey(name: 'documents', readValue: getDocumentsList)
+  List<String> get documentsList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -71,7 +73,9 @@ abstract class $AnnouncementInfoDetailsDtoCopyWith<$Res> {
       String manufacturer,
       @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
       String source,
-      @JsonKey(name: 'tag', readValue: readTag) String tag});
+      @JsonKey(name: 'tag', readValue: readTag) String tag,
+      @JsonKey(name: 'documents', readValue: getDocumentsList)
+      List<String> documentsList});
 }
 
 /// @nodoc
@@ -98,6 +102,7 @@ class _$AnnouncementInfoDetailsDtoCopyWithImpl<$Res,
     Object? manufacturer = null,
     Object? source = null,
     Object? tag = null,
+    Object? documentsList = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -140,6 +145,10 @@ class _$AnnouncementInfoDetailsDtoCopyWithImpl<$Res,
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
               as String,
+      documentsList: null == documentsList
+          ? _value.documentsList
+          : documentsList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -169,7 +178,9 @@ abstract class _$$_AnnouncementInfoDetailsDtoCopyWith<$Res>
       String manufacturer,
       @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
       String source,
-      @JsonKey(name: 'tag', readValue: readTag) String tag});
+      @JsonKey(name: 'tag', readValue: readTag) String tag,
+      @JsonKey(name: 'documents', readValue: getDocumentsList)
+      List<String> documentsList});
 }
 
 /// @nodoc
@@ -195,6 +206,7 @@ class __$$_AnnouncementInfoDetailsDtoCopyWithImpl<$Res>
     Object? manufacturer = null,
     Object? source = null,
     Object? tag = null,
+    Object? documentsList = null,
   }) {
     return _then(_$_AnnouncementInfoDetailsDto(
       id: null == id
@@ -237,6 +249,10 @@ class __$$_AnnouncementInfoDetailsDtoCopyWithImpl<$Res>
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
               as String,
+      documentsList: null == documentsList
+          ? _value._documentsList
+          : documentsList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -261,8 +277,11 @@ class _$_AnnouncementInfoDetailsDto extends _AnnouncementInfoDetailsDto {
       required this.manufacturer,
       @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
       required this.source,
-      @JsonKey(name: 'tag', readValue: readTag) required this.tag})
-      : super._();
+      @JsonKey(name: 'tag', readValue: readTag) required this.tag,
+      @JsonKey(name: 'documents', readValue: getDocumentsList)
+      required final List<String> documentsList})
+      : _documentsList = documentsList,
+        super._();
 
   factory _$_AnnouncementInfoDetailsDto.fromJson(Map<String, dynamic> json) =>
       _$$_AnnouncementInfoDetailsDtoFromJson(json);
@@ -297,10 +316,18 @@ class _$_AnnouncementInfoDetailsDto extends _AnnouncementInfoDetailsDto {
   @override
   @JsonKey(name: 'tag', readValue: readTag)
   final String tag;
+  final List<String> _documentsList;
+  @override
+  @JsonKey(name: 'documents', readValue: getDocumentsList)
+  List<String> get documentsList {
+    if (_documentsList is EqualUnmodifiableListView) return _documentsList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_documentsList);
+  }
 
   @override
   String toString() {
-    return 'AnnouncementInfoDetailsDto(id: $id, title: $title, content: $content, summary: $summary, thumbnail: $thumbnail, publishedDate: $publishedDate, releaseDate: $releaseDate, manufacturer: $manufacturer, source: $source, tag: $tag)';
+    return 'AnnouncementInfoDetailsDto(id: $id, title: $title, content: $content, summary: $summary, thumbnail: $thumbnail, publishedDate: $publishedDate, releaseDate: $releaseDate, manufacturer: $manufacturer, source: $source, tag: $tag, documentsList: $documentsList)';
   }
 
   @override
@@ -321,13 +348,26 @@ class _$_AnnouncementInfoDetailsDto extends _AnnouncementInfoDetailsDto {
             (identical(other.manufacturer, manufacturer) ||
                 other.manufacturer == manufacturer) &&
             (identical(other.source, source) || other.source == source) &&
-            (identical(other.tag, tag) || other.tag == tag));
+            (identical(other.tag, tag) || other.tag == tag) &&
+            const DeepCollectionEquality()
+                .equals(other._documentsList, _documentsList));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, content, summary,
-      thumbnail, publishedDate, releaseDate, manufacturer, source, tag);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      content,
+      summary,
+      thumbnail,
+      publishedDate,
+      releaseDate,
+      manufacturer,
+      source,
+      tag,
+      const DeepCollectionEquality().hash(_documentsList));
 
   @JsonKey(ignore: true)
   @override
@@ -362,8 +402,10 @@ abstract class _AnnouncementInfoDetailsDto extends AnnouncementInfoDetailsDto {
       required final String manufacturer,
       @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
       required final String source,
-      @JsonKey(name: 'tag', readValue: readTag)
-      required final String tag}) = _$_AnnouncementInfoDetailsDto;
+      @JsonKey(name: 'tag', readValue: readTag) required final String tag,
+      @JsonKey(name: 'documents', readValue: getDocumentsList)
+      required final List<String>
+          documentsList}) = _$_AnnouncementInfoDetailsDto;
   const _AnnouncementInfoDetailsDto._() : super._();
 
   factory _AnnouncementInfoDetailsDto.fromJson(Map<String, dynamic> json) =
@@ -399,6 +441,9 @@ abstract class _AnnouncementInfoDetailsDto extends AnnouncementInfoDetailsDto {
   @override
   @JsonKey(name: 'tag', readValue: readTag)
   String get tag;
+  @override
+  @JsonKey(name: 'documents', readValue: getDocumentsList)
+  List<String> get documentsList;
   @override
   @JsonKey(ignore: true)
   _$$_AnnouncementInfoDetailsDtoCopyWith<_$_AnnouncementInfoDetailsDto>

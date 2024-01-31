@@ -15,6 +15,7 @@ abstract class SvgImage {
   static const String contactUs = '${_basePath}contact_us.svg';
   static const String defaultProductImage =
       '${_basePath}default_product_image.svg';
+  static const String defaultdocImage = '${_basePath}doc.svg';
   static const String faqSearch = '${_basePath}faq_search_icon.svg';
   static const String downloadIcon = '${_basePath}cloud_download.svg';
   static const String alert = '${_basePath}alert.svg';
@@ -22,6 +23,9 @@ abstract class SvgImage {
   static const String bonusOffer = '${_basePath}bonus_offer_tag.svg';
   static const String emptyFavourite = '${_basePath}empty_favourite.svg';
   static const String checkCircle = '${_basePath}check_circle.svg';
+  static const String documentIcon = '${_basePath}document_icon.svg';
+  static const String pdfIcon = '${_basePath}pdf_icon.svg';
+  static const String xlsIcon = '${_basePath}xls_icon.svg';
   static String paymentMethodOptionLogo(String optionID) =>
       '${_basePath}payment_option_$optionID.svg';
 }

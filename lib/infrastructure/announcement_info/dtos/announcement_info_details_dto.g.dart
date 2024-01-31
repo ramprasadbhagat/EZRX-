@@ -19,6 +19,9 @@ _$_AnnouncementInfoDetailsDto _$$_AnnouncementInfoDetailsDtoFromJson(
       manufacturer: readValue(json, 'manufacturer') as String? ?? '',
       source: readValue(json, 'source') as String? ?? '',
       tag: readTag(json, 'tag') as String,
+      documentsList: (getDocumentsList(json, 'documents') as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$_AnnouncementInfoDetailsDtoToJson(
@@ -34,4 +37,5 @@ Map<String, dynamic> _$$_AnnouncementInfoDetailsDtoToJson(
       'manufacturer': instance.manufacturer,
       'source': instance.source,
       'tag': instance.tag,
+      'documents': instance.documentsList,
     };

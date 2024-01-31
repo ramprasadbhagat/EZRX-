@@ -19,6 +19,7 @@ class AnnouncementInfoDetails with _$AnnouncementInfoDetails {
     required Source source,
     required String tag,
     required DateTimeStringValue releaseDate,
+    required List<Attachment> documents,
   }) = _AnnouncementInfoDetails;
 
   factory AnnouncementInfoDetails.empty() => AnnouncementInfoDetails(
@@ -32,6 +33,7 @@ class AnnouncementInfoDetails with _$AnnouncementInfoDetails {
         source: Source(''),
         tag: '',
         releaseDate: DateTimeStringValue(''),
+        documents: <Attachment>[],
       );
 
   String get sourceAndOrAuthorLabel {

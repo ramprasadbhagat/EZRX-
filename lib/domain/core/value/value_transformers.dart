@@ -3,6 +3,8 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart' as path;
 
 String stringCapitalize(String text) {
   if (text.isEmpty) return '';
@@ -744,3 +746,9 @@ String toSupportedLanguage(String value) {
 
 Locale toLocale(String apiLanguageCode) =>
     Locale(apiLanguageCode.toLowerCase());
+
+String fileNameFromPath(String source) => path.basename(source);
+
+String fileTypeFromPath(String source) {
+  return path.extension(source);
+}
