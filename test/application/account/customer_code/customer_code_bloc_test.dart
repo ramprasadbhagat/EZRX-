@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -45,7 +46,10 @@ void main() {
     )
   ];
 
-  final fakeShipToInfo = ShipToInfo.empty().copyWith(building: 'fakeBuilding');
+  final fakeShipToInfo = ShipToInfo.empty().copyWith(
+    building: 'fakeBuilding',
+    shipToName: ShipToName.empty().copyWith(name1: 'fake_name'),
+  );
   final fakeCustomerInfo =
       CustomerCodeInfo.empty().copyWith(shipToInfos: [fakeShipToInfo]);
   final fakeUser = User.empty().copyWith(
@@ -1107,5 +1111,25 @@ void main() {
         ),
       ],
     );
+
+    test('displayShipTo Test', () async {
+      final customerCodeState = CustomerCodeState.initial().copyWith(
+        customerCodeInfo: fakeCustomerInfo.copyWith(
+          shipToInfos: [
+            fakeShipToInfo.copyWith(
+              shipToName: ShipToName.empty().copyWith(
+                name1: 'fake-default-name',
+              ),
+            ),
+            fakeShipToInfo,
+          ],
+        ),
+        shipToInfo: fakeShipToInfo,
+      );
+      expect(
+        customerCodeState.displayShipTo,
+        fakeShipToInfo.fullDeliveryAddress,
+      );
+    });
   });
 }
