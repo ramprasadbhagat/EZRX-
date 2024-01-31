@@ -58,6 +58,9 @@ final fakeKHSalesOrganisation =
 final fakeTWSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeTWSalesOrg);
 
+final fakeMMSalesOrganisation =
+    SalesOrganisation.empty().copyWith(salesOrg: fakeMMSalesOrg);
+
 final salesOrgVariant = ValueVariant<SalesOrg>(
   {
     fakePHSalesOrg,

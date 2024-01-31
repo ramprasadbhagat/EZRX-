@@ -190,7 +190,7 @@ class CreditDetailsSection extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Row(
-                      key: WidgetKeys.invoiceDetailSmallOrderFee,
+                      key: WidgetKeys.creditDetailSmallOrderFee,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -220,7 +220,7 @@ class CreditDetailsSection extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Row(
-                      key: WidgetKeys.invoiceDetailManualFee,
+                      key: WidgetKeys.creditDetailManualFee,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(

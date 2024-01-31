@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -11,10 +12,12 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_details_group.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/material_tax.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_items_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +26,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_mm_sales_org_config.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
+import '../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../utils/widget_utils.dart';
 import '../../../account/account_tab_test.dart';
 
@@ -57,6 +69,47 @@ void main() {
   late List<CustomerDocumentDetail> fakeDetails;
   late List<CustomerDocumentDetailGroup> fakeCreditItems;
 
+  final eligibilityStateVariant = ValueVariant<EligibilityState>(
+    {
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakePHSalesOrgConfigs,
+        salesOrganisation: fakePHSalesOrganisation,
+      ),
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeSGSalesOrgConfigs,
+        salesOrganisation: fakeSGSalesOrganisation,
+      ),
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeVNSalesOrgConfigs,
+        salesOrganisation: fakeVNSalesOrganisation,
+      ),
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+        salesOrganisation: fakeMYSalesOrganisation,
+      ),
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeIDSalesOrgConfigs,
+        salesOrganisation: fakeIDSalesOrganisation,
+      ),
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeTHSalesOrgConfigs,
+        salesOrganisation: fakeTHSalesOrganisation,
+      ),
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeKHSalesOrgConfigs,
+        salesOrganisation: fakeKHSalesOrganisation,
+      ),
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeMMSalesOrgConfigs,
+        salesOrganisation: fakeMMSalesOrganisation,
+      ),
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeTWSalesOrgConfigs,
+        salesOrganisation: fakeTWSalesOrganisation,
+      ),
+    },
+  );
+
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -65,8 +118,10 @@ void main() {
       () => MixpanelService(config: locator<Config>()),
     );
     autoRouterMock = locator<AppRouter>();
-    fakeDetails = await CreditAndInvoiceDetailsLocalDataSource()
-        .getCreditAndInvoiceDetails();
+    fakeDetails = (await CreditAndInvoiceDetailsLocalDataSource()
+            .getCreditAndInvoiceDetails())
+        .take(1)
+        .toList();
     fakeCreditItems = [
       CustomerDocumentDetailGroup.empty().copyWith(
         principalName: PrincipalName('fake-PN'),
@@ -133,60 +188,127 @@ void main() {
     );
   }
 
-  testWidgets('credit items section ...', (tester) async {
-    when(() => eligibilityBlocMock.state).thenReturn(
-      EligibilityState.initial().copyWith(
-        salesOrgConfigs: fakeMYSalesOrgConfigs,
-      ),
-    );
-
-    when(() => customerCodeBlocMock.state).thenReturn(
-      CustomerCodeState.initial(),
-    );
-
-    when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
-      CreditAndInvoiceDetailsState.initial().copyWith(itemsInfo: fakeDetails),
-    );
-
-    when(() => productImageBlocMock.state).thenReturn(
-      ProductImageState.initial(),
-    );
-
-    await getWidget(tester);
-    await tester.pump();
-
-    final textReturnItemCount =
-        find.text('Return items (${fakeDetails.length})');
-    expect(textReturnItemCount, findsOneWidget);
-
-    final principalName = find.text('fake-PN');
-    expect(principalName, findsOneWidget);
-
-    final commonTileItem = find.byType(CommonTileItem);
-    expect(commonTileItem, findsNWidgets(fakeDetails.length));
-    for (final e in fakeDetails) {
-      expect(
-        find.byWidgetPredicate(
-          (widget) =>
-              widget is CommonTileItem &&
-              widget.label == e.materialNumber.displayMatNo &&
-              widget.quantity == e.billingQuantity.stringValue &&
-              widget.subtitle == '',
+  testWidgets(
+    'credit items section ...',
+    (tester) async {
+      final currentEligibilityState =
+          eligibilityStateVariant.currentValue ?? EligibilityState.initial();
+      final currentSalesOrgConfigs = currentEligibilityState.salesOrgConfigs;
+      final currentSalesOrganisation =
+          currentEligibilityState.salesOrganisation;
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: currentSalesOrgConfigs,
+          salesOrganisation: currentSalesOrganisation,
         ),
-        findsOneWidget,
       );
-      expect(
-        find.descendant(
-          of: find.byType(CommonTileItem),
-          matching: find.byWidgetPredicate(
-            (widget) =>
-                widget is RichText &&
-                widget.key == WidgetKeys.priceComponent &&
-                widget.text.toPlainText().contains('FREE'),
+
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial(),
+      );
+
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(itemsInfo: fakeDetails),
+      );
+
+      when(() => productImageBlocMock.state).thenReturn(
+        ProductImageState.initial(),
+      );
+
+      await getWidget(tester);
+      await tester.pump();
+
+      final textReturnItemCount =
+          find.text('Return items (${fakeDetails.length})');
+      expect(textReturnItemCount, findsOneWidget);
+
+      final principalName = find.text('fake-PN');
+      expect(principalName, findsOneWidget);
+
+      final commonTileItem = find.byType(CommonTileItem);
+      expect(commonTileItem, findsNWidgets(fakeDetails.length));
+      for (final e in fakeDetails) {
+        expect(
+          find.descendant(
+            of: find.byType(CommonTileItem),
+            matching: find.textContaining(
+              '${'Batch'.tr()} ${e.batchNumber.getOrDefaultValue('')} (EXP:${e.expiryDate.dateString})',
+              findRichText: true,
+            ),
           ),
-        ),
-        findsOneWidget,
-      );
-    }
-  });
+          currentSalesOrgConfigs.batchNumDisplay && e.batchNumHasData
+              ? findsOneWidget
+              : findsNothing,
+        );
+        expect(
+          find.text(
+            '${'Qty'.tr()}: ${e.billingQuantity.getOrDefaultValue(0)}',
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.invoiceDetailMaterialUnitPrice),
+            matching: find.text(
+              StringUtils.priceComponentDisplayPrice(
+                currentSalesOrgConfigs,
+                currentSalesOrgConfigs.displaySubtotalTaxBreakdown
+                    ? e.unitNetPrice
+                    : e.unitGrossPrice,
+                false,
+              ),
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.cartItemProductTotalPrice),
+            matching: find.text(
+              e.unitNetPrice == 0
+                  ? 'FREE'
+                  : StringUtils.priceComponentDisplayPrice(
+                      currentSalesOrgConfigs,
+                      currentSalesOrgConfigs.displaySubtotalTaxBreakdown
+                          ? e.netAmount
+                          : (e.netAmount * (1 + e.taxPercent / 100)),
+                      false,
+                    ),
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(MaterialTax),
+            matching: find.text(
+              '(${e.taxPercent}% ${'tax'.tr()})',
+            ),
+          ),
+          (currentSalesOrgConfigs.displayItemTaxBreakdown && e.netAmount > 0)
+              ? findsOneWidget
+              : findsNothing,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(MaterialTax),
+            matching: find.text(
+              StringUtils.priceComponentDisplayPrice(
+                currentSalesOrgConfigs,
+                e.netAmount * (1 + e.taxPercent / 100),
+                false,
+              ),
+              findRichText: true,
+            ),
+          ),
+          (currentSalesOrgConfigs.displayItemTaxBreakdown && e.netAmount > 0)
+              ? findsOneWidget
+              : findsNothing,
+        );
+      }
+    },
+    variant: eligibilityStateVariant,
+  );
 }
