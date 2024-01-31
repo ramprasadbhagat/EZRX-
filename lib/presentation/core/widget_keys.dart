@@ -422,6 +422,9 @@ class WidgetKeys {
   static const Key returnAttachmentDownloadButton =
       Key('returnAttachmentDownloadButton');
 
+  static const Key returnBonusApprovalDetail = Key('returnBonusApprovalDetail');
+  static const Key returnBonusReturnDetail = Key('returnBonusReturnDetail');
+
   //============================================================
   //  Returns by request
   //============================================================
@@ -451,6 +454,8 @@ class WidgetKeys {
   static Key returnRequestDetailMaterial(int index) =>
       Key('returnRequestDetailMaterial$index');
   static const Key bonusPriceComponent = Key('bonusPriceComponent');
+  static const Key returnRequestDetailSection =
+      Key('returnRequestDetailSection');
   //============================================================
   //============================================================
   //  Reset Password

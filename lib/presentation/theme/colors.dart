@@ -118,6 +118,7 @@ abstract class ZPColors {
   static const Color paleLime = Color.fromRGBO(224, 232, 160, 1);
   static const Color customerBlockedBannerColor =
       Color.fromRGBO(248, 227, 198, 1);
+  static const Color downPink = Color.fromRGBO(236, 236, 236, 1);
 
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,

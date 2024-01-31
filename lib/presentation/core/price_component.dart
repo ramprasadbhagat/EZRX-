@@ -162,6 +162,7 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.credits:
     case PriceStyle.grandTotalPrice:
     case PriceStyle.bundlePrice:
+    case PriceStyle.bonusPrice:
       return ZPColors.neutralsBlack;
 
     case PriceStyle.comboOfferPrice:
@@ -170,7 +171,6 @@ Color _priceTextColor(PriceStyle type) {
 
     case PriceStyle.bundleListPriceStrikeThrough:
     case PriceStyle.counterOfferPrice:
-    case PriceStyle.bonusPrice:
     case PriceStyle.taxPrice:
     case PriceStyle.comboSubTotalItemWithTax:
     case PriceStyle.bundleFinalPrice:
@@ -281,7 +281,7 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
           );
     case PriceStyle.bonusPrice:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
-            color: ZPColors.darkGray,
+            color: ZPColors.neutralsBlack,
           );
     case PriceStyle.taxPrice:
       return Theme.of(context).textTheme.titleSmall!.copyWith(

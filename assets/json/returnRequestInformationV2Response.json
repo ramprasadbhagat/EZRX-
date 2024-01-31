@@ -62,6 +62,7 @@
                     "unitPrice": "15",
                     "totalPrice": "11",
                     "initialQuantity": "2",
+                    "prsfd": "X",
                     "priceOverrideTrail": [
                         {
                             "overriderRole": "USEROVR",

@@ -14,14 +14,16 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/retur
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/return_request_details.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_request_details/sections/request_details_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -231,7 +233,7 @@ void main() {
 
       await tester.pump(const Duration(seconds: 2));
       expect(
-        find.byType(RequestDetailsSection),
+        find.byKey(WidgetKeys.returnRequestDetailSection),
         findsOneWidget,
       );
       await tester.pump();
@@ -300,7 +302,9 @@ void main() {
           requestInformation: requestInformation.returnRequestInformationList
               .map(
                 (e) => e.copyWith(
-                  bapiStatus: StatusType('FAILED'),
+                  bonusInformation: e.bonusInformation
+                      .map((e) => e.copyWith(bapiStatus: StatusType('FAILED')))
+                      .toList(),
                 ),
               )
               .toList(),
@@ -321,7 +325,8 @@ void main() {
       final bonusReturnReason = find.byKey(
         WidgetKeys.balanceTextRow(
           'Reason for return',
-          requestInformation.returnRequestInformationList.first.returnOrderDesc,
+          requestInformation.returnRequestInformationList.first.bonusInformation
+              .first.returnOrderDesc,
         ),
       );
       expect(bonusReturnReason, findsOneWidget);
@@ -423,8 +428,7 @@ void main() {
           ReturnDetailsByRequestState.initial().copyWith(
             isLoading: false,
             requestInformation: [
-              ReturnRequestInformation.empty()
-                  .copyWith(returnQuantity: '1')
+              ReturnRequestInformation.empty().copyWith(returnQuantity: '1')
             ],
             requestInformationHeader:
                 ReturnRequestInformationHeader.empty().copyWith(
@@ -445,7 +449,7 @@ void main() {
         await tester.pump();
 
         expect(
-          find.byType(RequestDetailsSection),
+          find.byKey(WidgetKeys.returnRequestDetailSection),
           findsOneWidget,
         );
         expect(
@@ -454,6 +458,76 @@ void main() {
         );
       },
       variant: salesOrgVariant,
+    );
+
+    testWidgets(
+      'Return Request Details Bonus Item Only',
+      (tester) async {
+        when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+          ReturnDetailsByRequestState.initial().copyWith(
+            requestInformation: [
+              requestInformation.returnRequestInformationList.first.copyWith(
+                prsfd: Prsfd('B'),
+                bonusInformation: <ReturnRequestInformation>[],
+              ),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        expect(find.text('Bonus details'.tr()), findsOneWidget);
+        expect(
+          find.descendant(
+            of: find.byType(CustomCard),
+            matching: find.byType(StatusLabel),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(CustomCard),
+            matching: find.text('Bonus'.tr()),
+          ),
+          findsOneWidget,
+        );
+
+        final showHideButton = find.descendant(
+          of: find.byType(CustomCard),
+          matching: find.byKey(WidgetKeys.returnDetailShowDetailButton),
+        );
+        expect(
+          showHideButton,
+          findsOneWidget,
+        );
+        await tester.dragUntilVisible(
+          showHideButton,
+          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          const Offset(0, -200),
+        );
+        await tester.pumpAndSettle();
+        await tester.tap(showHideButton);
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: find.byType(CustomCard),
+            matching: find.byKey(
+              WidgetKeys.returnBonusApprovalDetail,
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(CustomCard),
+            matching: find.byKey(
+              WidgetKeys.returnBonusReturnDetail,
+            ),
+          ),
+          findsOneWidget,
+        );
+      },
     );
   });
 }

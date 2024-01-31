@@ -7,7 +7,7 @@ import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_request_details/sections/return_status_section.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/return_status_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +22,7 @@ class RequestDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.returnRequestDetailSection,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _ReturnDetailsSection(
