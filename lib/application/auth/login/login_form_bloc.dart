@@ -109,10 +109,6 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               );
             },
             (login) async {
-              await deviceRepository.setCurrentMarket(
-                currentMarket: state.currentMarket,
-              );
-
               await authRepository.storeJWT(
                 access: login.access,
                 refresh: login.refresh,
@@ -190,10 +186,6 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             ),
           ),
           (login) async {
-            await deviceRepository.setCurrentMarket(
-              currentMarket: state.currentMarket,
-            );
-
             await authRepository.storeJWT(
               access: login.access,
               refresh: login.refresh,
@@ -227,11 +219,24 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
           },
         );
       },
-      setCurrentMarket: (e) {
-        emit(
-          state.copyWith(
-            currentMarket: e.currentMarket,
+      setCurrentMarket: (e) async {
+        final currentMarket = await deviceRepository.setCurrentMarket(
+          currentMarket: e.currentMarket,
+        );
+        await currentMarket.fold(
+          (failure) async => emit(
+            state.copyWith(
+              authFailureOrSuccessOption: optionOf(currentMarket),
+            ),
           ),
+          (market) {
+            emit(
+              state.copyWith(
+                currentMarket: e.currentMarket,
+                authFailureOrSuccessOption: optionOf(currentMarket),
+              ),
+            );
+          },
         );
       },
     );

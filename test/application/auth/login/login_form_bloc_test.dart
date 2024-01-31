@@ -865,11 +865,21 @@ void main() {
         authRepository: authRepoMock,
         deviceRepository: deviceRepoMock,
       ),
+      setUp: () {
+        when(
+          () => deviceRepoMock.setCurrentMarket(
+            currentMarket: AppMarket.vietnam(),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+      },
       act: (LoginFormBloc bloc) =>
           bloc..add(LoginFormEvent.setCurrentMarket(AppMarket.vietnam())),
       expect: () => [
         loginFormState.copyWith(
           currentMarket: AppMarket.vietnam(),
+          authFailureOrSuccessOption: optionOf(const Right(unit)),
         ),
       ],
     );
