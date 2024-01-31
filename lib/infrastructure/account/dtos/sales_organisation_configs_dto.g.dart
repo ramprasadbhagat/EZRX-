@@ -81,6 +81,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       hideCredit: json['hideCredit'] as bool? ?? false,
       allowReturnsOutsidePolicy:
           json['allowReturnsOutsidePolicy'] as bool? ?? false,
+      enableMarketPlace: json['enableMarketPlace'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -148,4 +149,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'disablePayment': instance.disablePayment,
       'hideCredit': instance.hideCredit,
       'allowReturnsOutsidePolicy': instance.allowReturnsOutsidePolicy,
+      'enableMarketPlace': instance.enableMarketPlace,
     };

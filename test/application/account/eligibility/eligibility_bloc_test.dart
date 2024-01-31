@@ -21,6 +21,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/repository/mixpanel_repo
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
@@ -910,5 +911,21 @@ void main() {
         );
       },
     );
+  });
+
+  group('showMarketPlaceProduct getter', () {
+    test('return false when sales org disable marketplace', () {
+      final state = EligibilityState.initial()
+          .copyWith(salesOrgConfigs: fakeSGSalesOrgConfigs);
+
+      expect(state.showMarketPlaceProduct, false);
+    });
+
+    test('return true when sales org enable marketplace', () {
+      final state = EligibilityState.initial()
+          .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs);
+
+      expect(state.showMarketPlaceProduct, true);
+    });
   });
 }

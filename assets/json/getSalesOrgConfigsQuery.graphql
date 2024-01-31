@@ -93,6 +93,7 @@ query salesOrgConfigs($request: SalesOrgConfigRequest) {
     enablePOAttachmentRequired
     enableComboDeals
     comboDealsUserRole
+    enableMarketPlace
     }
 }
 

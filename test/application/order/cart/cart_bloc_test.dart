@@ -151,7 +151,7 @@ void main() {
     );
     bonusSampleItem = [
       BonusSampleItem.empty().copyWith(
-        materialNumber: priceAggregates.first.getMaterialNumber,
+        materialNumber: MaterialNumber('fake-bonus-sample-item-1'),
         itemId: StringValue('fake-item-id'),
         qty: MaterialQty(1),
       ),

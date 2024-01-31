@@ -73,6 +73,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool disableOverrideFieldSR,
     required bool hideCredit,
     required bool allowReturnsOutsidePolicy,
+    required bool enableMarketPlace,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -137,6 +138,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         disableOverrideFieldSR: false,
         hideCredit: false,
         allowReturnsOutsidePolicy: false,
+        enableMarketPlace: false,
       );
 
 

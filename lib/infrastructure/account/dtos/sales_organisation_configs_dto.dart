@@ -124,6 +124,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'hideCredit', defaultValue: false) required bool hideCredit,
     @JsonKey(name: 'allowReturnsOutsidePolicy', defaultValue: false)
         required bool allowReturnsOutsidePolicy,
+    @JsonKey(name: 'enableMarketPlace', defaultValue: false)
+        required bool enableMarketPlace,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -193,6 +195,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disablePayment: configs.disablePayment,
       hideCredit: configs.hideCredit,
       allowReturnsOutsidePolicy: configs.allowReturnsOutsidePolicy,
+      enableMarketPlace: configs.enableMarketPlace,
     );
   }
 
@@ -259,6 +262,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disablePayment: disablePayment,
       hideCredit: hideCredit,
       allowReturnsOutsidePolicy: allowReturnsOutsidePolicy,
+      enableMarketPlace: enableMarketPlace,
     );
   }
 
@@ -296,4 +300,3 @@ class _PrincipalListConverter extends JsonConverter<
     };
   }
 }
-

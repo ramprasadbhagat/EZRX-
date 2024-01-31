@@ -10,7 +10,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late dynamic data;
   group('Test SalesOrganisationConfigsDto ', () {
-    setUp(() async {
+    setUpAll(() async {
       data = json.decode(
         await rootBundle
             .loadString('assets/json/getSalesOrgConfigsResponse.json'),
@@ -21,7 +21,9 @@ void main() {
         data['data']['salesOrgConfigs'][0],
       ).toDomain();
       expect(configs.currency, Currency('myr'));
+      expect(configs.enableMarketPlace, true);
     });
+
     test('Test fromDomain', () {
       final configsDto = SalesOrganisationConfigsDto.fromDomain(
         SalesOrganisationConfigsDto.fromJson(
@@ -29,7 +31,9 @@ void main() {
         ).toDomain(),
       );
       expect(configsDto.currency, 'myr');
+      expect(configsDto.enableMarketPlace, true);
     });
+
     test('Test toJson', () {
       final configsDtoMap = SalesOrganisationConfigsDto.fromDomain(
         SalesOrganisationConfigsDto.fromJson(
@@ -37,6 +41,18 @@ void main() {
         ).toDomain(),
       ).toJson();
       expect(configsDtoMap['currency'], 'myr');
+      expect(configsDtoMap['enableMarketPlace'], true);
+    });
+
+    test('Test fromJson with default value', () {
+      final json = data['data']['salesOrgConfigs'][0] as Map<String, dynamic>;
+
+      expect(
+        SalesOrganisationConfigsDto.fromJson(
+          {...json}..remove('enableMarketPlace'),
+        ).enableMarketPlace,
+        false,
+      );
     });
   });
 }

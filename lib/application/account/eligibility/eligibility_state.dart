@@ -55,8 +55,7 @@ class EligibilityState with _$EligibilityState {
 
   bool get canOrderCovidMaterial {
     // 1. SG Covid
-    return (
-            user.role.type.isCustomer &&
+    return (user.role.type.isCustomer &&
             salesOrganisation.salesOrg.isSg &&
             customerCodeInfo.customerAttr7.isZEV) ||
 
@@ -282,4 +281,10 @@ class EligibilityState with _$EligibilityState {
             ? salesOrgConfigs.addOosMaterials.oosMaterialTag
             : salesOrgConfigs.addOosMaterials.oosTag,
       );
+  bool get showMarketPlaceProduct {
+    if (!salesOrgConfigs.enableMarketPlace) return false;
+    //TODO: Add more conditions related to user + customerCode in upcoming ticket
+
+    return true;
+  }
 }

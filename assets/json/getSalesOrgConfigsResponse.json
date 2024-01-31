@@ -78,7 +78,8 @@
             "disableReturnsAccess": false,
             "disableOverrideFieldCustomer": false,
             "disableOverrideFieldSR": false,
-            "enablePOAttachmentRequired": false
+            "enablePOAttachmentRequired": false,
+            "enableMarketPlace": true
          }
       ]
    }
