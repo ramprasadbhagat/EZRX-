@@ -399,5 +399,43 @@ void main() {
         expect(bundleCode, findsOneWidget);
       },
     );
+
+    testWidgets(
+      ' -> Bundle Section List item test regarding material count',
+      (WidgetTester tester) async {
+        when(() => autoRouterMock.pushNamed(any()))
+            .thenAnswer((invocation) async => true);
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList: [
+              MaterialInfo.empty().copyWith(
+                type: MaterialInfoType.bundle(),
+                bundle: Bundle.empty().copyWith(
+                  bundleCode: '1234',
+                ),
+                data: [
+                  fakeMaterialData,
+                  fakeMaterialData,
+                  fakeMaterialData,
+                  fakeMaterialData,
+                  fakeMaterialData,
+                  fakeMaterialData,
+                  fakeMaterialData,
+                  fakeMaterialData,
+                ],
+              )
+            ],
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        final bundleMaterialCount =
+            find.byKey(WidgetKeys.bundleMaterialCount('1234'));
+        expect(bundleMaterialCount, findsOneWidget);
+
+        expect(find.text('+ 6 materials'), findsOneWidget);
+      },
+    );
   });
 }

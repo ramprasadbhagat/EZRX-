@@ -201,7 +201,10 @@ class _BundleSectionItem extends StatelessWidget {
                       bottom: 10,
                     ),
                     child: Text(
-                      '+ ${materialInfo.listingVisibleMaterial.skip(2).length} ${context.tr('materials')}',
+                      '+ ${materialInfo.data.skip(2).length} ${context.tr('materials')}',
+                      key: WidgetKeys.bundleMaterialCount(
+                        materialInfo.bundle.bundleCode,
+                      ),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: ZPColors.darkerGrey,
                           ),

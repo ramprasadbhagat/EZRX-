@@ -73,7 +73,7 @@ class _BundleGridItem extends StatelessWidget {
                 ? Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Text(
-                      '+ ${materialInfo.data.skip(4).length} materials',
+                      '+ ${materialInfo.data.skip(materialInfo.listingVisibleMaterial.length).length} materials',
                       style: Theme.of(context).textTheme.bodySmall,
                       maxLines: 1,
                     ),

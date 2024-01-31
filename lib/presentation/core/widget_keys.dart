@@ -143,7 +143,8 @@ class WidgetKeys {
       Key('browseProductLoadingShimmer');
   static Key sectionTileIcon(String title) => Key('sectionTitleIcon$title');
   static Key searchSectionTab(String title) => Key('searchSectionTab$title');
-
+  static Key bundleMaterialCount(String title) =>
+      Key('bundleMaterialCount$title');
   //============================================================
   //  MORE TAB BAR
   //============================================================

@@ -151,7 +151,7 @@ class MaterialInfo with _$MaterialInfo {
 
   int get listingHiddenMaterialCount => data.length - 5;
 
-  List<MaterialData> get listingVisibleMaterial => data.take(4).toList();
+  List<MaterialData> get listingVisibleMaterial => data.take(5).toList();
 
   String get getManufactured => manufactured.isNotEmpty
       ? manufactured
