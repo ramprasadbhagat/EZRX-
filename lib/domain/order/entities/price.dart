@@ -87,6 +87,9 @@ class Price with _$Price {
   List<BonusMaterial> get availableBonus =>
       priceBonusItem.expand((element) => element.bonusMaterials).toList();
 
+  List<BonusMaterial> get displayBonusTierAscOrder =>
+      availableBonus.reversed.toList();
+
   Iterable<BonusMaterial> get sameMaterialBonus => availableBonus.where(
         (BonusMaterial element) => element.materialNumber == materialNumber,
       );

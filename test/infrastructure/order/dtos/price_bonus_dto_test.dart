@@ -61,5 +61,42 @@ void main() {
       );
       expect(configs.bonusQuantity, 1);
     });
+
+    test('Test Sorted Bonus Material Dto', () {
+      const data = {
+        'BonusTiers': [
+          {
+            'BonusMaterial': [
+              {
+                'MaterialNumber': '000000000023270437',
+                'Calculation': '915',
+                'BonusRatio': 1,
+                'QualifyingQuantity': 36,
+                'BonusQuantity': 8,
+              }
+            ],
+            'Calculation': '915',
+            'QualifyingQuantity': 36,
+          },
+          {
+            'BonusMaterial': [
+              {
+                'MaterialNumber': '000000000023270437',
+                'Calculation': '915',
+                'BonusRatio': 1,
+                'QualifyingQuantity': 50,
+                'BonusQuantity': 13,
+              }
+            ],
+            'Calculation': '915',
+            'QualifyingQuantity': 50,
+          }
+        ],
+      };
+      final priceBonusDto =
+          PriceBonusDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
+              .toDomain();
+      expect(priceBonusDto.items.first.qualifyingQuantity, 50);
+    });
   });
 }

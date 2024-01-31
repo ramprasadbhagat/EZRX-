@@ -70,6 +70,18 @@ void main() {
       PriceBonusItem.empty().copyWith(
         bonusMaterials: [
           BonusMaterial.empty().copyWith(
+            id: 2,
+            materialNumber: MaterialNumber('"000000000023156808'),
+            materialDescription: '0.3cc 31G Syr. 10Bag  8mm 100/Bx',
+            bonusRatio: 1,
+            bonusQuantity: 3,
+            qualifyingQuantity: 20,
+          )
+        ],
+      ),
+      PriceBonusItem.empty().copyWith(
+        bonusMaterials: [
+          BonusMaterial.empty().copyWith(
             id: 1,
             materialNumber: MaterialNumber('"000000000023156808'),
             materialDescription: '0.3cc 31G Syr. 10Bag  8mm 100/Bx',
@@ -77,18 +89,6 @@ void main() {
             bonusRatio: 1,
             bonusQuantity: 1,
             qualifyingQuantity: 10,
-          )
-        ],
-      ),
-      PriceBonusItem.empty().copyWith(
-        bonusMaterials: [
-          BonusMaterial.empty().copyWith(
-            id: 2,
-            materialNumber: MaterialNumber('"000000000023156808'),
-            materialDescription: '0.3cc 31G Syr. 10Bag  8mm 100/Bx',
-            bonusRatio: 1,
-            bonusQuantity: 3,
-            qualifyingQuantity: 20,
           )
         ],
       ),

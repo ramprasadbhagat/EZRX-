@@ -27,7 +27,7 @@ class AvailableOffer extends StatelessWidget {
       builder: (context, state) {
         final price = state.getPriceForMaterial(materialNumber);
 
-        final bonusMaterialList = price.availableBonus;
+        final bonusMaterialList = price.displayBonusTierAscOrder;
         final productDetailsState = context.read<ProductDetailBloc>().state;
 
         final eligibilityState = context.read<EligibilityBloc>().state;
