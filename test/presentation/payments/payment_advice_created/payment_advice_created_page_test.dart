@@ -9,11 +9,14 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
@@ -73,7 +76,9 @@ void main() {
   late PaymentInvoiceInfoPdf fakePaymentInvoiceInfoPdf;
   late PaymentSummaryDetails fakePaymentSummaryDetails;
   late PaymentSummaryBloc mockPaymentSummaryBloc;
+  late List<PaymentItem> paymentList;
   const fakeErrorMessage = 'fake-error';
+  const fakeMockId = 'mock-id';
 
   final paymentAdviceFailed = find.byKey(WidgetKeys.paymentAdviceFailed);
 
@@ -87,6 +92,7 @@ void main() {
     registerFallbackValue(Uint8List(0));
 
     autoRouterMock = locator<AppRouterMock>();
+    paymentList = await PaymentItemLocalDataSource().getPaymentItems();
     newPaymentBlocMock = NewPaymentBlocMock();
     eligibilityBlocMock = EligibilityBlockMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
@@ -615,6 +621,55 @@ void main() {
         ).called(1);
       });
 
+      testWidgets('On Tap Delete info PDF note empty', (tester) async {
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty().copyWith(
+              paymentID: fakeMockId,
+              paymentItems: paymentList,
+              zzAdvice: fakeMockId,
+              paymentBatchAdditionalInfo: fakeMockId,
+            ),
+            salesOrganisation: fakeMYSalesOrganisation,
+            selectedPaymentMethod: NewPaymentMethod(
+              options: <PaymentMethodOption>[],
+              paymentMethod: PaymentMethodValue('Virtual Accounts Transfer'),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final richTextElement = find
+            .textContaining(
+              'If there\'s any error in the selected invoice/credit notes, please '
+                  .tr(),
+              findRichText: true,
+            )
+            .evaluate()
+            .single;
+        findAndTapRichText(parent: richTextElement, text: 'delete'.tr());
+
+        verify(
+          () => paymentSummaryDetailsBlocMock.add(
+            PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+              details: PaymentSummaryDetails.empty().copyWith(
+                paymentAmount: paymentList.totalInInvoice,
+                paymentID: StringValue(fakeMockId),
+                transactionCurrency: Currency(
+                  paymentList.first.transactionCurrency,
+                ),
+                createdDate: DateTimeStringValue(''),
+                adviceExpiry: AdviceExpiryValue(''),
+                zzAdvice: StringValue(fakeMockId),
+                paymentBatchAdditionalInfo: StringValue(fakeMockId),
+                accountingDocExternalReference: '',
+                paymentItems: paymentList,
+              ),
+            ),
+          ),
+        ).called(1);
+      });
+
       testWidgets('Hide When paymentInvoiceInfoPdf Empty', (tester) async {
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -757,7 +812,7 @@ void main() {
       });
     });
     group('APL Payment Method Test', () {
-      testWidgets('Apl payment fetch Payment Summary DetailsInfo',
+      testWidgets('Apl payment non fetch Payment Summary DetailsInfo',
           (tester) async {
         final paymentMethodOption = PaymentMethodOption.empty().copyWith(
           bankOptionId: BankOptionId('permata'),
@@ -808,10 +863,78 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
-        verify(
+        verifyNever(
           () => paymentSummaryDetailsBlocMock.add(
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
               details: PaymentSummaryDetails.empty(),
+            ),
+          ),
+        );
+      });
+
+      testWidgets('Apl payment fetch Payment Summary DetailsInfo',
+          (tester) async {
+        final paymentMethodOption = PaymentMethodOption.empty().copyWith(
+          bankOptionId: BankOptionId('permata'),
+        );
+        final createVirtualAccount =
+            CreateVirtualAccount.empty().copyWith(id: 'mock-id');
+
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              createVirtualAccount: createVirtualAccount,
+              paymentMethods: [
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [
+                    paymentMethodOption.copyWith(
+                      bankOptionId: BankOptionId('mandiri'),
+                    ),
+                  ],
+                ),
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [paymentMethodOption],
+                ),
+              ],
+              isCreatingVirtualAccount: true,
+            ),
+            NewPaymentState.initial().copyWith(
+              createVirtualAccount: createVirtualAccount,
+              paymentMethods: [
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [
+                    paymentMethodOption.copyWith(
+                      bankOptionId: BankOptionId('mandiri'),
+                    ),
+                  ],
+                ),
+                NewPaymentMethod(
+                  paymentMethod: PaymentMethodValue('Bank-In'),
+                  options: [paymentMethodOption],
+                ),
+              ],
+            ),
+          ]),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        verify(
+          () => paymentSummaryDetailsBlocMock.add(
+            PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+              details: PaymentSummaryDetails.empty().copyWith(
+                paymentID: StringValue(createVirtualAccount.id),
+                zzAdvice: StringValue(createVirtualAccount.id),
+              ),
             ),
           ),
         ).called(1);

@@ -511,7 +511,9 @@ void main() {
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
-          details: details.copyWith(paymentItems: paymentList),
+          details: details.copyWith(
+            paymentItems: paymentList,
+          ),
         ),
       ],
     );

@@ -83,7 +83,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         customId: '',
         iban: '',
         status: FilterStatus(''),
-        paymentAmount: 0,
+        paymentAmount: invoice.paymentItems.totalInInvoice,
         paymentCardHolderName: '',
         paymentCardID: '',
         paymentCardMaskedNumber: '',

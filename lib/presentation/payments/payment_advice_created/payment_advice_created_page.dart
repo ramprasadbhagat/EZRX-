@@ -77,7 +77,7 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
                   current.isCreatingVirtualAccount &&
               !current.isCreatingVirtualAccount),
       listener: (context, state) {
-        if (!state.isCreatingVirtualAccount) {
+        if (state.canFetchPaymentDetails) {
           state.failureOrSuccessOption.fold(
             () {
               context.read<PaymentSummaryDetailsBloc>().add(

@@ -17,7 +17,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'payment_summary_details_event.dart';
+
 part 'payment_summary_details_state.dart';
+
 part 'payment_summary_details_bloc.freezed.dart';
 
 class PaymentSummaryDetailsBloc
@@ -77,6 +79,7 @@ class PaymentSummaryDetailsBloc
                   isDetailFetching: false,
                 ),
               );
+
               if (!state.salesOrganization.salesOrg.isID) {
                 add(
                   const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),

@@ -81,4 +81,8 @@ class NewPaymentState with _$NewPaymentState {
 
   bool get enableCreateVirtualAccount =>
       !negativeAmount && !isCreatingVirtualAccount && virtualBankPayable;
+
+  bool get canFetchPaymentDetails =>
+      !isCreatingVirtualAccount &&
+      createVirtualAccount != CreateVirtualAccount.empty();
 }
