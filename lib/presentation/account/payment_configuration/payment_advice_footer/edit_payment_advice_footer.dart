@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -508,7 +509,7 @@ class _UploadOptionPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformAlertDialog(
-      key: const ValueKey('uploadDialog'),
+      key: WidgetKeys.editPaymentAdviceUploadDialog,
       title: Text(
         'Upload Header Logo'.tr(),
       ),
@@ -517,7 +518,7 @@ class _UploadOptionPicker extends StatelessWidget {
       ),
       actions: [
         PlatformDialogAction(
-          key: const Key('PhotoUploadButton'),
+          key: WidgetKeys.editPaymentAdvicePhotoUploadButton,
           child: Column(
             children: [
               const Icon(
@@ -538,7 +539,7 @@ class _UploadOptionPicker extends StatelessWidget {
           ),
         ),
         PlatformDialogAction(
-          key: const Key('fileUploadButton'),
+          key: WidgetKeys.editPaymentAdviceFileUploadButton,
           child: Column(
             children: [
               const Icon(

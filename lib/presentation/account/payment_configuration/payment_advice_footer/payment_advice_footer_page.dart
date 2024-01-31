@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -126,6 +127,7 @@ class _PaymentAdviceFooter extends StatelessWidget {
               ),
             ],
             child: ListTile(
+              key: WidgetKeys.paymentAdviceFooter(paymentAdviceFooter.key),
               onTap: () {
                 context.read<ManagePaymentAdviceFooterBloc>().add(
                       ManagePaymentAdviceFooterEvent.setPaymentAdvice(

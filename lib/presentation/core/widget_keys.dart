@@ -1420,4 +1420,28 @@ class WidgetKeys {
   static Key customerBlockedBanner = const Key('customerBlockedBanner');
   static Key paymentAdviceFailed = const Key('paymentAdviceFailed');
   static Key totalAmountToPay = const Key('totalAmountToPay');
+
+  //============================================================
+  // Add Payment Advice Footer
+  //============================================================
+  static Key addPaymentAdvice = const Key('addPaymentAdvice');
+  static Key addPaymentAdviceSaleOrg(String saleOrg) => Key('salesOrg$saleOrg');
+  static Key addPaymentAdviceUploadDialog =
+      const Key('addPaymentAdviceUploadDialog');
+  static Key addPaymentAdvicePhotoUploadButton =
+      const Key('addPaymentAdvicePhotoUploadButton');
+  static Key addPaymentAdviceFileUploadButton =
+      const Key('addPaymentAdviceFileUploadButton');
+
+  //============================================================
+  // Edit Payment Advice Footer
+  //============================================================
+
+  static Key editPaymentAdviceUploadDialog =
+      const Key('editPaymentAdviceUploadDialog');
+  static Key editPaymentAdvicePhotoUploadButton =
+      const Key('editPaymentAdvicePhotoUploadButton');
+  static Key editPaymentAdviceFileUploadButton =
+      const Key('editPaymentAdviceFileUploadButton');
+  static Key paymentAdviceFooter(int key) => Key('paymentAdviceFooter$key');
 }

@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +24,7 @@ class AddPaymentAdviceFooterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('addPaymentAdvice'),
+      key: WidgetKeys.addPaymentAdvice,
       appBar: AppBar(title: const Text('Add Payment Advice Details').tr()),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
@@ -110,8 +111,8 @@ class _SalesOrgSelection extends StatelessWidget {
         final salesOrgs = context.read<UserBloc>().state.salesOrgValue;
 
         return DropdownButtonFormField2<String>(
-          key: ValueKey(
-            'salesOrg${state.paymentAdviceFooterData.salesOrg.getOrDefaultValue('')}',
+          key: WidgetKeys.addPaymentAdviceSaleOrg(
+            state.paymentAdviceFooterData.salesOrg.getOrDefaultValue(''),
           ),
           isExpanded: true,
           decoration: InputDecoration(
@@ -552,7 +553,7 @@ class _UploadOptionPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformAlertDialog(
-      key: const ValueKey('uploadDialog'),
+      key: WidgetKeys.addPaymentAdviceUploadDialog,
       title: Text(
         'Upload Header Logo'.tr(),
       ),
@@ -561,7 +562,7 @@ class _UploadOptionPicker extends StatelessWidget {
       ),
       actions: [
         PlatformDialogAction(
-          key: const Key('PhotoUploadButton'),
+          key: WidgetKeys.addPaymentAdvicePhotoUploadButton,
           child: Column(
             children: [
               const Icon(
@@ -582,7 +583,7 @@ class _UploadOptionPicker extends StatelessWidget {
           ),
         ),
         PlatformDialogAction(
-          key: const Key('fileUploadButton'),
+          key: WidgetKeys.addPaymentAdviceFileUploadButton,
           child: Column(
             children: [
               const Icon(
