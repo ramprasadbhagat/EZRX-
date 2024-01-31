@@ -343,6 +343,9 @@ class PaymentTermCode extends ValueObject<String> {
     return naIfEmpty(value.getOrElse(() => ''));
   }
 
+  bool get isOutsideOfSystem =>
+      isPaymentTermCodeOutsideOfSystem(value.getOrElse(() => ''));
+
   const PaymentTermCode._(this.value);
 }
 

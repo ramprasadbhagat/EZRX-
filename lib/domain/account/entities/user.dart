@@ -174,4 +174,7 @@ class User with _$User {
 
   String get _userCountryLanguage =>
       userSalesOrganisations.first.salesOrg.languageCode.toUpperCase();
+
+  bool get isCustomerWithPaymentsEnable =>
+      role.type.isCustomer && !disablePaymentAccess;
 }

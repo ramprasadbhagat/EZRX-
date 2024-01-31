@@ -42,6 +42,10 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get isPaymentEnabled {
+    if (salesOrg.isSg && customerCodeInfo.paymentTerm.isOutsideOfSystem) {
+      return false;
+    }
+
     if (user.role.type.hasAdminAccess) {
       return true;
     }
@@ -50,7 +54,7 @@ class EligibilityState with _$EligibilityState {
       return false;
     }
 
-    return user.role.type.isCustomer && !user.disablePaymentAccess;
+    return user.isCustomerWithPaymentsEnable;
   }
 
   bool get canOrderCovidMaterial {

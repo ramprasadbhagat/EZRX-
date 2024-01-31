@@ -248,3 +248,7 @@ String getDeliveryDateTitle(String status) {
 
   return 'Expected delivery';
 }
+
+bool isPaymentTermCodeOutsideOfSystem(String value) {
+  return value == 'C024' || value == 'A007';
+}
