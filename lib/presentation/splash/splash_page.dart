@@ -18,7 +18,6 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
@@ -411,12 +410,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   );
                 },
                 (_) {
-                  context.read<ProductDetailBloc>().add(
-                        ProductDetailEvent.fetch(
-                          materialInfo: state.material,
-                        ),
-                      );
-                  context.router.pushNamed('orders/material_details');
+                  context.router.push(
+                    ProductDetailsPageRoute(materialInfo: state.material),
+                  );
                   context.read<MaterialPriceBloc>().add(
                         MaterialPriceEvent.fetch(
                           comboDealEligible: context
@@ -426,38 +422,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                           materials: [state.material],
                         ),
                       );
-                },
-              ),
-            );
-          },
-        ),
-        BlocListener<ProductDetailBloc, ProductDetailState>(
-          listenWhen: (previous, current) =>
-              previous.failureOrSuccessOption !=
-                  current.failureOrSuccessOption ||
-              previous.productDetailAggregate != current.productDetailAggregate,
-          listener: (context, state) {
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {
-                  _fetchProductImage(
-                    context,
-                    state.productDetailAggregate.allMaterial,
-                  );
-                  if (state.productDetailAggregate.similarProduct.isNotEmpty) {
-                    _fetchMaterialPrice(
-                      context,
-                      state.productDetailAggregate.similarProduct,
-                    );
-                    _fetchProductImage(
-                      context,
-                      state.productDetailAggregate.similarProduct,
-                    );
-                  }
                 },
               ),
             );
@@ -689,13 +653,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                           materials: [materialInfo],
                         ),
                       );
-                  context.read<ProductDetailBloc>().add(
-                        ProductDetailEvent.fetch(
-                          materialInfo: materialInfo,
-                        ),
-                      );
 
-                  context.router.push(const ProductDetailsPageRoute());
+                  context.router.push(
+                    ProductDetailsPageRoute(materialInfo: materialInfo),
+                  );
                 } else {
                   noAccessSnackbar.show(context);
                 }
@@ -703,15 +664,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               redirectBundleDetail: (materialNumber) {
                 if (eligibilityState.user.userCanAccessProducts &&
                     !eligibilityState.salesOrgConfigs.disableBundles) {
-                  context.read<ProductDetailBloc>().add(
-                        ProductDetailEvent.fetch(
-                          materialInfo: MaterialInfo.empty().copyWith(
-                            materialNumber: materialNumber,
-                            type: MaterialInfoType.bundle(),
-                          ),
-                        ),
-                      );
-                  context.router.push(const BundleDetailPageRoute());
+                  context.router.push(
+                    BundleDetailPageRoute(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: materialNumber,
+                        type: MaterialInfoType.bundle(),
+                      ),
+                    ),
+                  );
                 } else {
                   noAccessSnackbar.show(context);
                 }
@@ -1088,15 +1048,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               customerCodeInfo: state.customerCodeInfo,
               user: user,
               shipToInfo: state.shipToInfo,
-            ),
-          );
-
-      context.read<ProductDetailBloc>().add(
-            ProductDetailEvent.initialized(
-              salesOrganisation: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: state.shipToInfo,
-              user: user,
             ),
           );
 

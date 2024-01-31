@@ -4,8 +4,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -22,6 +20,7 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/search_and_filter.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
@@ -165,26 +164,8 @@ class ProductsTab extends StatelessWidget {
         MixpanelProps.section: 'All product',
       },
     );
-    final eligibilityBlocState = context.read<EligibilityBloc>().state;
-    context.read<ProductDetailBloc>().add(
-          ProductDetailEvent.fetch(
-            materialInfo: materialInfo,
-          ),
-        );
-    if (eligibilityBlocState.isZDP5eligible) {
-      context.read<MaterialPriceBloc>().add(
-            MaterialPriceEvent.fetchPriceForZDP5Materials(
-              materialInfo: materialInfo,
-            ),
-          );
-    }
-    context.router.pushNamed('orders/material_details');
-    context.read<MaterialPriceBloc>().add(
-          MaterialPriceEvent.fetch(
-            comboDealEligible: eligibilityBlocState.comboDealEligible,
-            materials: [materialInfo],
-          ),
-        );
+
+    context.router.push(ProductDetailsPageRoute(materialInfo: materialInfo));
   }
 
   void onFavouriteTap(BuildContext context, MaterialInfo materialInfo) =>

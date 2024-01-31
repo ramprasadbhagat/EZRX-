@@ -1043,7 +1043,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => ProductDetailBloc(
       productDetailRepository: locator<ProductDetailRepository>(),
       favouriteRepository: locator<FavouriteRepository>(),

@@ -1332,13 +1332,6 @@ void main() {
       );
 
       await getWidget(tester);
-      verify(
-        () => productImageBloc.add(
-          ProductImageEvent.fetch(
-            list: [material],
-          ),
-        ),
-      ).called(1);
     });
 
     testWidgets('fetch bundle details image', (tester) async {
@@ -1376,13 +1369,6 @@ void main() {
       );
 
       await getWidget(tester);
-      verify(
-        () => productImageBloc.add(
-          ProductImageEvent.fetch(
-            list: materials,
-          ),
-        ),
-      ).called(1);
     });
   });
 }

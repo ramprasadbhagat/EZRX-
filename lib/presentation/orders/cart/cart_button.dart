@@ -18,6 +18,7 @@ class CartButton extends StatelessWidget {
   final double? size;
   final double? iconSize;
   final double? positionTop;
+  final bool isPriceResetApplicable;
   const CartButton({
     Key? key,
     this.cartColor,
@@ -25,6 +26,7 @@ class CartButton extends StatelessWidget {
     this.size,
     this.iconSize,
     this.positionTop,
+    this.isPriceResetApplicable = false,
   }) : super(key: key);
 
   @override
@@ -68,11 +70,6 @@ class CartButton extends StatelessWidget {
                     onPressed: () {
                       trackMixpanelEvent(MixpanelEvents.cartIconClicked);
 
-                      final product = context
-                          .read<ProductDetailBloc>()
-                          .state
-                          .productDetailAggregate;
-
                       final salesOrgConfig =
                           context.read<EligibilityBloc>().state.salesOrgConfigs;
 
@@ -80,11 +77,15 @@ class CartButton extends StatelessWidget {
                           context.read<MaterialPriceBloc>();
 
                       context.router.pushNamed('orders/cart').then((value) {
-                        if (salesOrgConfig.salesOrg.isVN &&
-                            salesOrgConfig.enableZDP5) {
+                        if (salesOrgConfig.isZdp5DiscountEligible &&
+                            isPriceResetApplicable) {
                           materialPriceBloc.add(
                             MaterialPriceEvent.fetchPriceForZDP5Materials(
-                              materialInfo: product.materialInfo,
+                              materialInfo: context
+                                  .read<ProductDetailBloc>()
+                                  .state
+                                  .productDetailAggregate
+                                  .materialInfo,
                             ),
                           );
                         }

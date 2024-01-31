@@ -12,29 +12,6 @@ class _MaterialDetailsSection extends StatelessWidget {
     this.isFixed = false,
   }) : super(key: key);
 
-  void _navigateToDetails(BuildContext context, MaterialInfo materialInfo) {
-    final eligibilityBlocState = context.read<EligibilityBloc>().state;
-    context.read<ProductDetailBloc>().add(
-          ProductDetailEvent.fetch(
-            materialInfo: materialInfo,
-          ),
-        );
-    if (eligibilityBlocState.isZDP5eligible) {
-      context.read<MaterialPriceBloc>().add(
-            MaterialPriceEvent.fetchPriceForZDP5Materials(
-              materialInfo: materialInfo,
-            ),
-          );
-    }
-    context.router.pushNamed('orders/material_details');
-    context.read<MaterialPriceBloc>().add(
-          MaterialPriceEvent.fetch(
-            comboDealEligible: eligibilityBlocState.comboDealEligible,
-            materials: [materialInfo],
-          ),
-        );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,7 +23,9 @@ class _MaterialDetailsSection extends StatelessWidget {
             key: WidgetKeys.comboItemImageDetail(
               comboItem.getMaterialNumber.displayMatNo,
             ),
-            onTap: () => _navigateToDetails(context, comboItem.materialInfo),
+            onTap: () => context.router.push(
+              ProductDetailsPageRoute(materialInfo: comboItem.materialInfo),
+            ),
             child: _MaterialImageSection(
               comboItem: comboItem,
               isFixed: isFixed,
@@ -58,8 +37,9 @@ class _MaterialDetailsSection extends StatelessWidget {
           _MaterialDetails(
             comboItem: comboItem,
             comboDealMaterial: comboDealMaterial,
-            onTapName: () =>
-                _navigateToDetails(context, comboItem.materialInfo),
+            onTapName: () => context.router.push(
+              ProductDetailsPageRoute(materialInfo: comboItem.materialInfo),
+            ),
             key: WidgetKeys.comboItemMaterialDetail(
               comboItem.getMaterialNumber.displayMatNo,
             ),

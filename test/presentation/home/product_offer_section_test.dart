@@ -473,8 +473,11 @@ void main() {
         when(() => autoRouterMock.currentPath).thenReturn(
           '',
         );
-        when(() => autoRouterMock.pushNamed('orders/material_details'))
-            .thenAnswer(
+        when(
+          () => autoRouterMock.push(
+            ProductDetailsPageRoute(materialInfo: fakeMaterialList.first),
+          ),
+        ).thenAnswer(
           (_) => Future.value(),
         );
         when(() => materialListBlocMock.state).thenReturn(
@@ -494,25 +497,11 @@ void main() {
         await tester.pump();
         final tileFinder = find.byKey(WidgetKeys.productOnOffer);
         await tester.tap(tileFinder.first);
-        verify(
-          () => productDetailBlocMock.add(
-            ProductDetailEvent.fetch(
-              materialInfo: fakeMaterialList.first,
-            ),
-          ),
-        ).called(1);
 
         verify(
-          () => materialPriceBlocMock.add(
-            MaterialPriceEvent.fetch(
-              comboDealEligible: false,
-              materials: [fakeMaterialList.first],
-            ),
+          () => autoRouterMock.push(
+            ProductDetailsPageRoute(materialInfo: fakeMaterialList.first),
           ),
-        ).called(1);
-
-        verify(
-          () => autoRouterMock.pushNamed('orders/material_details'),
         ).called(1);
       },
     );
@@ -568,7 +557,7 @@ void main() {
       },
     );
 
-testWidgets(
+    testWidgets(
       'ProductsOnOffer test - Tap on FavIcon',
       (tester) async {
         final fakeFavList = [

@@ -19,7 +19,6 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
 
 class BundleSection extends StatelessWidget {
@@ -230,11 +229,7 @@ class _BundleSectionItem extends StatelessWidget {
         MixpanelProps.section: 'Bundles',
       },
     );
-    context.read<ProductDetailBloc>().add(
-          ProductDetailEvent.fetch(
-            materialInfo: materialInfo,
-          ),
-        );
-    context.router.pushNamed('orders/bundle_detail_page');
+
+    context.router.push(BundleDetailPageRoute(materialInfo: materialInfo));
   }
 }

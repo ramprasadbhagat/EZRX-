@@ -170,6 +170,7 @@ void main() {
     registerFallbackValue(ShipToInfo.empty());
 
     locator.registerLazySingleton<MixpanelService>(() => MockMixPanelService());
+    locator.registerFactory<ProductDetailBloc>(() => productDetailMockBloc);
     materialInfo = await ProductDetailLocalDataSource().getProductDetails();
     similarProducts = await ProductDetailLocalDataSource().getSimilarProduct();
     materialPrice =
@@ -202,6 +203,7 @@ void main() {
         cartMockBloc = CartMockBloc();
         eligibilityBlocMock = EligibilityBlocMock();
         autoRouterMock = MockAppRouter();
+
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: fakeRootAdminUser,
@@ -259,7 +261,7 @@ void main() {
               create: (context) => comboDealListMockBloc,
             )
           ],
-          child: const ProductDetailsPage(),
+          child: ProductDetailsPage(materialInfo: materialInfo),
         );
       }
 
@@ -287,16 +289,15 @@ void main() {
         final cartButtonFinder =
             find.byKey(WidgetKeys.materialDetailsAddToCartButton);
         final addToCartButton = find.byType(ElevatedButton);
-        final itemAddedSnackBar =
-            find.byKey(WidgetKeys.materialDetailsAddToCartSnackBar);
+
         expect(cartButtonFinder, findsOneWidget);
         expect(addToCartButton, findsOneWidget);
         await tester.tap(
           addToCartButton,
           warnIfMissed: false,
         );
+
         await tester.pump(const Duration(seconds: 1));
-        expect(itemAddedSnackBar, findsOneWidget);
       });
 
       testWidgets(
@@ -1162,6 +1163,11 @@ void main() {
             ),
           ),
         );
+        when(
+          () => autoRouterMock.push(
+            ProductDetailsPageRoute(materialInfo: materialInfo),
+          ),
+        ).thenAnswer((invocation) => Future(() => null));
         whenListen(
           productDetailMockBloc,
           Stream.fromIterable([
@@ -1973,6 +1979,52 @@ void main() {
           ),
           findsNothing,
         );
+      });
+
+      testWidgets(
+          'Test Material Quantity field reset when item from similar product is selected',
+          (tester) async {
+        when(
+          () => autoRouterMock
+              .push(ProductDetailsPageRoute(materialInfo: materialInfo)),
+        ).thenAnswer((invocation) => Future(() => null));
+
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+              similarProduct: similarProducts,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.materialDetailsSimilarProductsSection),
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -200),
+        );
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(WidgetKeys.materialDetailsSimilarProductsSection),
+          findsOneWidget,
+        );
+
+        final relatedProduct =
+            find.byKey(WidgetKeys.materialDetailsSimilarProductItem).first;
+
+        expect(relatedProduct, findsOneWidget);
+
+        await tester.tap(relatedProduct);
+        verify(
+          () => autoRouterMock
+              .push(ProductDetailsPageRoute(materialInfo: materialInfo)),
+        ).called(1);
+
+        await tester.pumpAndSettle();
       });
     },
   );

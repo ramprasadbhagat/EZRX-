@@ -549,6 +549,14 @@ void main() {
             ),
           );
 
+          when(
+            () => autoRouterMock.push(
+              ProductDetailsPageRoute(
+                materialInfo: fakeCartCombo.materialInfo,
+              ),
+            ),
+          ).thenAnswer((invocation) => Future(() => null));
+
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
@@ -565,8 +573,11 @@ void main() {
             ),
           );
 
-          when(() => autoRouterMock.pushNamed('orders/material_details'))
-              .thenAnswer((invocation) async => true);
+          when(
+            () => autoRouterMock.push(
+              ProductDetailsPageRoute(materialInfo: MaterialInfo.empty()),
+            ),
+          ).thenAnswer((invocation) async => true);
 
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
@@ -589,31 +600,15 @@ void main() {
 
           await tester.tap(materialImage);
           await tester.pump();
-
           verify(
-            () => productDetailMockBloc.add(
-              ProductDetailEvent.fetch(
+            () => autoRouterMock.push(
+              ProductDetailsPageRoute(
                 materialInfo: fakeCartCombo.materialInfo,
               ),
             ),
           ).called(1);
 
-          verify(
-            () => materialPriceMockBloc.add(
-              MaterialPriceEvent.fetchPriceForZDP5Materials(
-                materialInfo: fakeCartCombo.materialInfo,
-              ),
-            ),
-          ).called(1);
-
-          verify(
-            () => materialPriceMockBloc.add(
-              MaterialPriceEvent.fetch(
-                materials: [fakeCartCombo.materialInfo],
-                comboDealEligible: true,
-              ),
-            ),
-          ).called(1);
+          await tester.pumpAndSettle();
         },
       );
 

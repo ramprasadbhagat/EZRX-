@@ -128,6 +128,7 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
+    locator.registerFactory<ProductDetailBloc>(() => productDetailMockBloc);
     materialResponseMock = await MaterialListLocalDataSource().getProductList();
     bundle = MaterialInfo.empty().copyWith(
       materialNumber: MaterialNumber('fake-bundle'),
@@ -238,7 +239,7 @@ void main() {
               create: ((context) => bundleAddToCartBloc),
             ),
           ],
-          child: const BundleDetailPage(),
+          child: BundleDetailPage(materialInfo: bundle),
         );
       }
 

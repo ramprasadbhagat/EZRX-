@@ -270,8 +270,10 @@ void main() {
     testWidgets(
       ' -> Tap Bundle Section List item test',
       (WidgetTester tester) async {
-        when(() => autoRouterMock.pushNamed(any()))
-            .thenAnswer((invocation) async => true);
+        when(
+          () => autoRouterMock
+              .push(BundleDetailPageRoute(materialInfo: materialList.first)),
+        ).thenAnswer((invocation) async => true);
 
         when(() => materialListBlocMock.state).thenReturn(
           MaterialListState.initial().copyWith(
@@ -293,15 +295,12 @@ void main() {
         expect(bundlesListItemFinder, findsWidgets);
         await tester.tap(bundlesListItemFinder.first);
         await tester.pump();
+
         verify(
-          () => productDetailBlocMock.add(
-            ProductDetailEvent.fetch(
-              materialInfo: materialList.first,
-            ),
+          () => autoRouterMock.push(
+            BundleDetailPageRoute(materialInfo: materialList.first),
           ),
         ).called(1);
-        verify(() => autoRouterMock.pushNamed('orders/bundle_detail_page'))
-            .called(1);
         verify(
           () => trackMixpanelEvent(
             MixpanelEvents.productItemClicked,

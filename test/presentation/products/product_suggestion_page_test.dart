@@ -198,29 +198,7 @@ void main() {
         expect(productTile, findsOneWidget);
         await tester.tap(productTile);
         await tester.pumpAndSettle();
-        verify(
-          () => productDetailBloc.add(
-            ProductDetailEvent.fetch(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('fake-material-number'),
-                type: MaterialInfoType('material'),
-              ),
-            ),
-          ),
-        ).called(1);
-        verify(
-          () => materialPriceBloc.add(
-            MaterialPriceEvent.fetch(
-              comboDealEligible: false,
-              materials: <MaterialInfo>[
-                MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('fake-material-number'),
-                  type: MaterialInfoType('material'),
-                ),
-              ],
-            ),
-          ),
-        ).called(1);
+
         expect(autoRouterMock.current.name, ProductDetailsPageRoute.name);
       });
 
@@ -254,16 +232,7 @@ void main() {
           expect(productTile, findsOneWidget);
           await tester.tap(productTile);
           await tester.pumpAndSettle();
-          verify(
-            () => productDetailBloc.add(
-              ProductDetailEvent.fetch(
-                materialInfo: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('fake-material-number'),
-                  type: MaterialInfoType('bundle'),
-                ),
-              ),
-            ),
-          ).called(1);
+
           expect(autoRouterMock.current.name, BundleDetailPageRoute.name);
         },
       );

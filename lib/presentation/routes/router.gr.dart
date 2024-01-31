@@ -14,11 +14,12 @@
 import 'package:auto_route/auto_route.dart' as _i90;
 import 'package:flutter/material.dart' as _i91;
 
-import '../../domain/account/entities/sales_organisation.dart' as _i95;
+import '../../domain/account/entities/sales_organisation.dart' as _i96;
 import '../../domain/account/value/value_objects.dart' as _i92;
 import '../../domain/announcement_info/entities/announcement_article_info.dart'
-    as _i94;
+    as _i95;
 import '../../domain/auth/value/value_objects.dart' as _i93;
+import '../../domain/order/entities/material_info.dart' as _i94;
 import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i48;
 import '../account/change_password/change_password_page.dart' as _i21;
 import '../account/contact_us/contact_us_page.dart' as _i22;
@@ -533,15 +534,23 @@ class AppRouter extends _i90.RootStackRouter {
       );
     },
     BundleDetailPageRoute.name: (routeData) {
+      final args = routeData.argsAs<BundleDetailPageRouteArgs>();
       return _i90.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i58.BundleDetailPage(),
+        child: _i58.BundleDetailPage(
+          key: args.key,
+          materialInfo: args.materialInfo,
+        ),
       );
     },
     ProductDetailsPageRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductDetailsPageRouteArgs>();
       return _i90.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i59.ProductDetailsPage(),
+        child: _i59.ProductDetailsPage(
+          key: args.key,
+          materialInfo: args.materialInfo,
+        ),
       );
     },
     ReturnRequestSummaryByItemDetailsRoute.name: (routeData) {
@@ -2019,26 +2028,72 @@ class ViewByOrderDetailsPageRoute extends _i90.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i58.BundleDetailPage]
-class BundleDetailPageRoute extends _i90.PageRouteInfo<void> {
-  const BundleDetailPageRoute()
-      : super(
+class BundleDetailPageRoute
+    extends _i90.PageRouteInfo<BundleDetailPageRouteArgs> {
+  BundleDetailPageRoute({
+    _i91.Key? key,
+    required _i94.MaterialInfo materialInfo,
+  }) : super(
           BundleDetailPageRoute.name,
           path: 'orders/bundle_detail_page',
+          args: BundleDetailPageRouteArgs(
+            key: key,
+            materialInfo: materialInfo,
+          ),
         );
 
   static const String name = 'BundleDetailPageRoute';
 }
 
+class BundleDetailPageRouteArgs {
+  const BundleDetailPageRouteArgs({
+    this.key,
+    required this.materialInfo,
+  });
+
+  final _i91.Key? key;
+
+  final _i94.MaterialInfo materialInfo;
+
+  @override
+  String toString() {
+    return 'BundleDetailPageRouteArgs{key: $key, materialInfo: $materialInfo}';
+  }
+}
+
 /// generated route for
 /// [_i59.ProductDetailsPage]
-class ProductDetailsPageRoute extends _i90.PageRouteInfo<void> {
-  const ProductDetailsPageRoute()
-      : super(
+class ProductDetailsPageRoute
+    extends _i90.PageRouteInfo<ProductDetailsPageRouteArgs> {
+  ProductDetailsPageRoute({
+    _i91.Key? key,
+    required _i94.MaterialInfo materialInfo,
+  }) : super(
           ProductDetailsPageRoute.name,
           path: 'orders/material_details',
+          args: ProductDetailsPageRouteArgs(
+            key: key,
+            materialInfo: materialInfo,
+          ),
         );
 
   static const String name = 'ProductDetailsPageRoute';
+}
+
+class ProductDetailsPageRouteArgs {
+  const ProductDetailsPageRouteArgs({
+    this.key,
+    required this.materialInfo,
+  });
+
+  final _i91.Key? key;
+
+  final _i94.MaterialInfo materialInfo;
+
+  @override
+  String toString() {
+    return 'ProductDetailsPageRouteArgs{key: $key, materialInfo: $materialInfo}';
+  }
 }
 
 /// generated route for
@@ -2071,7 +2126,7 @@ class AnnouncementsPageRoute extends _i90.PageRouteInfo<void> {
 class ArticleDetailsRoute extends _i90.PageRouteInfo<ArticleDetailsRouteArgs> {
   ArticleDetailsRoute({
     _i91.Key? key,
-    required _i94.AnnouncementArticleItem article,
+    required _i95.AnnouncementArticleItem article,
   }) : super(
           ArticleDetailsRoute.name,
           path: 'article_details',
@@ -2092,7 +2147,7 @@ class ArticleDetailsRouteArgs {
 
   final _i91.Key? key;
 
-  final _i94.AnnouncementArticleItem article;
+  final _i95.AnnouncementArticleItem article;
 
   @override
   String toString() {
@@ -2117,7 +2172,7 @@ class ReturnRequestDetailsRoute extends _i90.PageRouteInfo<void> {
 class SalesOrgSearchRoute extends _i90.PageRouteInfo<SalesOrgSearchRouteArgs> {
   SalesOrgSearchRoute({
     _i91.Key? key,
-    required List<_i95.SalesOrganisation> avialableSalesOrgList,
+    required List<_i96.SalesOrganisation> avialableSalesOrgList,
   }) : super(
           SalesOrgSearchRoute.name,
           path: 'salesOrg_search',
@@ -2138,7 +2193,7 @@ class SalesOrgSearchRouteArgs {
 
   final _i91.Key? key;
 
-  final List<_i95.SalesOrganisation> avialableSalesOrgList;
+  final List<_i96.SalesOrganisation> avialableSalesOrgList;
 
   @override
   String toString() {

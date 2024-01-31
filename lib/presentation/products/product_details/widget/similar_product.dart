@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -11,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/material_loading_sh
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,19 +111,7 @@ class _SimilarProductCard extends StatelessWidget {
         MixpanelProps.section: 'Related products',
       },
     );
-    final eligibilityState = context.read<EligibilityBloc>().state;
-
-    context.read<ProductDetailBloc>().add(
-          ProductDetailEvent.fetch(
-            materialInfo: materialInfo,
-          ),
-        );
-    context.read<MaterialPriceBloc>().add(
-          MaterialPriceEvent.fetch(
-            comboDealEligible: eligibilityState.comboDealEligible,
-            materials: [materialInfo],
-          ),
-        );
+    context.router.push(ProductDetailsPageRoute(materialInfo: materialInfo));
   }
 }
 

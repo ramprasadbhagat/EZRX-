@@ -13,10 +13,12 @@ import 'package:ezrxmobile/domain/core/product_images/entities/product_images.da
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
@@ -52,7 +54,9 @@ part 'widget/product_image_section.dart';
 part 'widget/stock_quantity.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  const ProductDetailsPage({Key? key}) : super(key: key);
+  final MaterialInfo materialInfo;
+  const ProductDetailsPage({Key? key, required this.materialInfo})
+      : super(key: key);
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -65,6 +69,20 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   void initState() {
     super.initState();
+    if (context.read<EligibilityBloc>().state.isZDP5eligible) {
+      context.read<MaterialPriceBloc>().add(
+            MaterialPriceEvent.fetchPriceForZDP5Materials(
+              materialInfo: widget.materialInfo,
+            ),
+          );
+    }
+    context.read<MaterialPriceBloc>().add(
+          MaterialPriceEvent.fetch(
+            comboDealEligible:
+                context.read<EligibilityBloc>().state.comboDealEligible,
+            materials: [widget.materialInfo],
+          ),
+        );
     _scrollController.addListener(_scrollListener);
   }
 
@@ -93,67 +111,84 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: CustomAppBar.commonAppBar(
-        automaticallyImplyLeading: false,
-        backGroundColor:
-            _isScrollAtInitialPosition ? Colors.transparent : ZPColors.white,
-        leadingWidget: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: CircleAvatar(
-            maxRadius: 16,
-            backgroundColor: _isScrollAtInitialPosition
-                ? ZPColors.darkGray
-                : ZPColors.transparent,
-            child: Icon(
-              Icons.chevron_left,
-              color:
-                  _isScrollAtInitialPosition ? ZPColors.white : ZPColors.black,
-              key: WidgetKeys.materialDetailsPageBack,
-            ),
+    return BlocProvider<ProductDetailBloc>(
+      create: (context) => locator<ProductDetailBloc>()
+        ..add(
+          ProductDetailEvent.fetch(
+            salesOrganisation:
+                context.read<EligibilityBloc>().state.salesOrganisation,
+            customerCodeInfo:
+                context.read<EligibilityBloc>().state.customerCodeInfo,
+            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
+            user: context.read<EligibilityBloc>().state.user,
+            materialInfo: widget.materialInfo,
           ),
         ),
-        actionWidget: [
-          Padding(
-            key: WidgetKeys.materialDetailsPageCartIcon,
-            padding: const EdgeInsets.all(10),
-            child: CartButton(
-              backgroundCartColor: _isScrollAtInitialPosition
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: CustomAppBar.commonAppBar(
+          automaticallyImplyLeading: false,
+          backGroundColor:
+              _isScrollAtInitialPosition ? Colors.transparent : ZPColors.white,
+          leadingWidget: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: CircleAvatar(
+              maxRadius: 16,
+              backgroundColor: _isScrollAtInitialPosition
                   ? ZPColors.darkGray
                   : ZPColors.transparent,
-              cartColor:
-                  _isScrollAtInitialPosition ? ZPColors.white : ZPColors.black,
-              iconSize: 20,
-              positionTop: -8,
+              child: Icon(
+                Icons.chevron_left,
+                color: _isScrollAtInitialPosition
+                    ? ZPColors.white
+                    : ZPColors.black,
+                key: WidgetKeys.materialDetailsPageBack,
+              ),
             ),
           ),
-        ],
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
-      ),
-      floatingActionButton: !_isScrollAtInitialPosition
-          ? FloatingActionButton(
-              key: WidgetKeys.materialDetailsFloatingButton,
-              onPressed: () => _scrollToTop(),
-              mini: true,
-              backgroundColor: ZPColors.secondaryMustard,
-              child: const Icon(
-                Icons.expand_less,
-                color: ZPColors.black,
+          actionWidget: [
+            Padding(
+              key: WidgetKeys.materialDetailsPageCartIcon,
+              padding: const EdgeInsets.all(10),
+              child: CartButton(
+                backgroundCartColor: _isScrollAtInitialPosition
+                    ? ZPColors.darkGray
+                    : ZPColors.transparent,
+                cartColor: _isScrollAtInitialPosition
+                    ? ZPColors.white
+                    : ZPColors.black,
+                iconSize: 20,
+                positionTop: -8,
+                isPriceResetApplicable: true,
               ),
-            )
-          : const SizedBox.shrink(),
-      body: ListView(
-        key: WidgetKeys.scrollList,
-        controller: _scrollController,
-        children: [
-          const _ProductImageSection(),
-          const _BodyContent(),
-          _SimilarProducts(),
-        ],
+            ),
+          ],
+          customerBlocked:
+              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        ),
+        floatingActionButton: !_isScrollAtInitialPosition
+            ? FloatingActionButton(
+                key: WidgetKeys.materialDetailsFloatingButton,
+                onPressed: () => _scrollToTop(),
+                mini: true,
+                backgroundColor: ZPColors.secondaryMustard,
+                child: const Icon(
+                  Icons.expand_less,
+                  color: ZPColors.black,
+                ),
+              )
+            : const SizedBox.shrink(),
+        body: ListView(
+          key: WidgetKeys.scrollList,
+          controller: _scrollController,
+          children: [
+            const _ProductImageSection(),
+            const _BodyContent(),
+            _SimilarProducts(),
+          ],
+        ),
+        bottomNavigationBar: const _Footer(),
       ),
-      bottomNavigationBar: const _Footer(),
     );
   }
 }
@@ -179,7 +214,37 @@ class _BodyContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
+    return BlocConsumer<ProductDetailBloc, ProductDetailState>(
+      listenWhen: (previous, current) =>
+          previous.failureOrSuccessOption != current.failureOrSuccessOption,
+      listener: (context, state) {
+        state.failureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              ErrorUtils.handleApiFailure(context, failure);
+            },
+            (_) {
+              context.read<ProductImageBloc>().add(
+                    ProductImageEvent.fetch(
+                      list: state.productDetailAggregate.allMaterial,
+                    ),
+                  );
+              if (state.productDetailAggregate.similarProduct.isNotEmpty) {
+                context.read<MaterialPriceBloc>().add(
+                      MaterialPriceEvent.fetch(
+                        comboDealEligible: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .comboDealEligible,
+                        materials: state.productDetailAggregate.similarProduct,
+                      ),
+                    );
+              }
+            },
+          ),
+        );
+      },
       buildWhen: (previous, current) =>
           previous.isDetailAndStockFetching !=
               current.isDetailAndStockFetching ||
@@ -559,6 +624,10 @@ class _FooterState extends State<_Footer> {
                         listenWhen: (previous, current) =>
                             previous.isUpserting != current.isUpserting,
                         listener: (context, state) {
+                          if (context.routeData != context.router.current) {
+                            return;
+                          }
+
                           state.apiFailureOrSuccessOption.fold(
                             () {
                               if (!state.isUpserting &&

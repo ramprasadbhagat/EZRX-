@@ -30,24 +30,15 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     required this.productDetailRepository,
     required this.favouriteRepository,
   }) : super(ProductDetailState.initial()) {
-    on<_Initialized>(
-      (e, emit) async => emit(
-        ProductDetailState.initial().copyWith(
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
-          user: e.user,
-        ),
-      ),
-    );
     on<_Fetch>(
       (e, emit) async {
         emit(
-          state.copyWith(
+          ProductDetailState.initial().copyWith(
+            customerCodeInfo: e.customerCodeInfo,
+            salesOrganisation: e.salesOrganisation,
+            shipToInfo: e.shipToInfo,
+            user: e.user,
             isDetailFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty(),
-            selectedImageIndex: 0,
-            failureOrSuccessOption: none(),
           ),
         );
         final failureOrSuccess = await productDetailRepository.getProductDetail(
@@ -73,6 +64,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 productDetailAggregate: state.productDetailAggregate.copyWith(
                   materialInfo: materialInfo,
                 ),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
             if (e.materialInfo.type.typeBundle) {

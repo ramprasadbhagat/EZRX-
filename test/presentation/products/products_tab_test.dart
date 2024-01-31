@@ -344,24 +344,19 @@ void main() {
               materialList: materialResponseMock.products,
             ),
           );
+
+          when(
+            () => autoRouterMock.push(
+              ProductDetailsPageRoute(materialInfo: MaterialInfo.empty()),
+            ),
+          ).thenAnswer((invocation) => Future(() => null));
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           await tester.tap(find.byType(MaterialGridItem).first);
           await tester.pumpAndSettle();
           verify(
-            () => productDetailBlocMock.add(
-              ProductDetailEvent.fetch(
-                materialInfo: materialResponseMock.products.first,
-              ),
-            ),
-          ).called(1);
-
-          verify(
-            () => materialPriceBlocMock.add(
-              MaterialPriceEvent.fetch(
-                comboDealEligible: false,
-                materials: [materialResponseMock.products.first],
-              ),
+            () => autoRouterMock.push(
+              ProductDetailsPageRoute(materialInfo: MaterialInfo.empty()),
             ),
           ).called(1);
         },
@@ -498,6 +493,13 @@ void main() {
               materialList: [materialResponseMock.products[12]],
             ),
           );
+          when(
+            () => autoRouterMock.push(
+              BundleDetailPageRoute(
+                materialInfo: materialResponseMock.products[12],
+              ),
+            ),
+          ).thenAnswer((invocation) async => true);
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
 
@@ -507,8 +509,8 @@ void main() {
           await tester.pumpAndSettle();
 
           verify(
-            () => productDetailBlocMock.add(
-              ProductDetailEvent.fetch(
+            () => autoRouterMock.push(
+              BundleDetailPageRoute(
                 materialInfo: materialResponseMock.products[12],
               ),
             ),

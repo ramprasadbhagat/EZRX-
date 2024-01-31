@@ -2,13 +2,11 @@ part of 'product_detail_bloc.dart';
 
 @freezed
 class ProductDetailEvent with _$ProductDetailEvent {
-  const factory ProductDetailEvent.initialized({
+  factory ProductDetailEvent.fetch({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
-  }) = _Initialized;
-  factory ProductDetailEvent.fetch({
     required MaterialInfo materialInfo,
   }) = _Fetch;
   factory ProductDetailEvent.fetchSimilarProduct() = _FetchSimilarProduct;

@@ -77,9 +77,10 @@ class _ProductTile extends StatelessWidget {
                                 ),
                               ),
                               FavouriteIcon(
-                                key: WidgetKeys.favIcon(materialInfo
-                                    .materialNumber
-                                    .getOrDefaultValue(''),),
+                                key: WidgetKeys.favIcon(
+                                  materialInfo.materialNumber
+                                      .getOrDefaultValue(''),
+                                ),
                                 isFavourite: materialInfo.isFavourite,
                                 visualDensity: const VisualDensity(
                                   horizontal: -4,
@@ -152,25 +153,7 @@ class _ProductTile extends StatelessWidget {
         MixpanelProps.section: 'Products on offer',
       },
     );
-    final eligibilityBlocState = context.read<EligibilityBloc>().state;
-    context.read<ProductDetailBloc>().add(
-          ProductDetailEvent.fetch(
-            materialInfo: materialInfo,
-          ),
-        );
-    if (eligibilityBlocState.isZDP5eligible) {
-      context.read<MaterialPriceBloc>().add(
-            MaterialPriceEvent.fetchPriceForZDP5Materials(
-              materialInfo: materialInfo,
-            ),
-          );
-    }
-    context.router.pushNamed('orders/material_details');
-    context.read<MaterialPriceBloc>().add(
-          MaterialPriceEvent.fetch(
-            comboDealEligible: eligibilityBlocState.comboDealEligible,
-            materials: [materialInfo],
-          ),
-        );
+
+    context.router.push(ProductDetailsPageRoute(materialInfo: materialInfo));
   }
 }

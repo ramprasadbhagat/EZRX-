@@ -40,5 +40,5 @@ class ProductDetailAggregate with _$ProductDetailAggregate {
 
   List<MaterialInfo> get allMaterial => materialInfo.type.typeBundle
       ? materialInfo.bundle.materials
-      : [materialInfo];
+      : [materialInfo, ...similarProduct];
 }

@@ -53,6 +53,7 @@ void main() {
     customerCodeInfo: fakeCustomerCodeInfo,
     salesOrganisation: fakeMYSalesOrganisation,
     shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+    user: fakeUserWithLanguageCode,
   );
 
   setUpAll(() async {
@@ -109,12 +110,27 @@ void main() {
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
+        setUp: () {
+          when(
+            () => productDetailMockRepository.getProductDetail(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+              language: fakeUserWithLanguageCode.preferredLanguage,
+              materialNumber: mockMaterialInfo.materialNumber,
+              type: mockMaterialInfo.type,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
+        },
         act: (ProductDetailBloc bloc) => bloc.add(
-          ProductDetailEvent.initialized(
+          ProductDetailEvent.fetch(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeUserWithLanguageCode,
+            materialInfo: mockMaterialInfo,
           ),
         ),
         expect: () => [
@@ -123,6 +139,15 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeUserWithLanguageCode,
+            isDetailFetching: true,
+          ),
+          ProductDetailState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeUserWithLanguageCode,
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('Fake-Error'))),
           ),
         ],
       );
@@ -178,6 +203,10 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetch(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+              user: fakeUserWithLanguageCode,
               materialInfo: mockMaterialInfo.copyWith(
                 type: materialInfoType,
               ),
@@ -187,8 +216,18 @@ void main() {
         seed: () => mockInitialState,
         expect: () => [
           mockInitialState.copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeUserWithLanguageCode,
             isDetailFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty(),
+          ),
+          mockInitialState.copyWith(
+            isStockFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+            ),
+            failureOrSuccessOption: optionOf(Right(mockMaterialInfo)),
           ),
           mockInitialState.copyWith(
             isStockFetching: true,
@@ -281,6 +320,10 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetch(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+              user: fakeUserWithLanguageCode,
               materialInfo: mockMaterialInfo.copyWith(
                 type: bundleInfoType,
               ),
@@ -292,6 +335,13 @@ void main() {
           mockInitialState.copyWith(
             isDetailFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
+          ),
+          mockInitialState.copyWith(
+            isStockFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+            ),
+            failureOrSuccessOption: optionOf(Right(mockMaterialInfo)),
           ),
           mockInitialState.copyWith(
             isStockFetching: true,
@@ -359,6 +409,10 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetch(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+              user: fakeUserWithLanguageCode,
               materialInfo: mockMaterialInfo.copyWith(
                 type: materialInfoType,
               ),

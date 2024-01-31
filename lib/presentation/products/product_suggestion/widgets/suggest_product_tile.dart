@@ -11,7 +11,11 @@ class _SuggestedProductTile extends StatelessWidget {
       children: [
         ListTile(
           key: WidgetKeys.searchedProduct(product.materialNumber.displayMatNo),
-          onTap: () => _onTap(context, product),
+          onTap: () => product.type.typeMaterial
+              ? context.router
+                  .push(ProductDetailsPageRoute(materialInfo: product))
+              : context.router
+                  .push(BundleDetailPageRoute(materialInfo: product)),
           horizontalTitleGap: 0,
           leading: const Icon(
             Icons.search,
@@ -31,36 +35,4 @@ class _SuggestedProductTile extends StatelessWidget {
       ],
     );
   }
-
-  void _onTap(BuildContext context, MaterialInfo product) {
-    context.read<ProductDetailBloc>().add(
-          ProductDetailEvent.fetch(
-            materialInfo: product,
-          ),
-        );
-    if (context.read<EligibilityBloc>().state.isZDP5eligible) {
-      context.read<MaterialPriceBloc>().add(
-            MaterialPriceEvent.fetchPriceForZDP5Materials(
-              materialInfo: product,
-            ),
-          );
-    }
-    product.type.typeMaterial
-        ? _toProductDetails(context, product)
-        : _toBundleDetails(context);
-  }
-
-  void _toProductDetails(BuildContext context, MaterialInfo product) {
-    final eligibilityBlocState = context.read<EligibilityBloc>().state;
-    context.read<MaterialPriceBloc>().add(
-          MaterialPriceEvent.fetch(
-            comboDealEligible: eligibilityBlocState.comboDealEligible,
-            materials: [product],
-          ),
-        );
-    context.router.pushNamed('orders/material_details');
-  }
-
-  void _toBundleDetails(BuildContext context) =>
-      context.router.pushNamed('orders/bundle_detail_page');
 }

@@ -98,12 +98,7 @@ class _BundleGridItem extends StatelessWidget {
         MixpanelProps.section: 'All product',
       },
     );
-    context.read<ProductDetailBloc>().add(
-          ProductDetailEvent.fetch(
-            materialInfo: materialInfo,
-          ),
-        );
-    context.router.pushNamed('orders/bundle_detail_page');
+    context.router.push(BundleDetailPageRoute(materialInfo: materialInfo));
   }
 }
 

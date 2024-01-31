@@ -79,6 +79,7 @@ void main() {
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerFactory<ProductDetailBloc>(() => productDetailBloc);
     // locator.registerFactory<ProductDetailEvent>(() => productDetailBloc);
   });
   group('ProductDetail page', () {
@@ -150,8 +151,8 @@ void main() {
               create: (context) => comboDealListMockBloc,
             )
           ],
-          child: const Scaffold(
-            body: ProductDetailsPage(),
+          child: Scaffold(
+            body: ProductDetailsPage(materialInfo: MaterialInfo.empty()),
           ),
         ),
       );

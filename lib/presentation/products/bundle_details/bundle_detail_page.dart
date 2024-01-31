@@ -2,10 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/curved_rectangle_widget.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
@@ -33,7 +36,9 @@ part 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_imag
 part 'package:ezrxmobile/presentation/products/bundle_details/widget/outline_text.dart';
 
 class BundleDetailPage extends StatefulWidget {
-  const BundleDetailPage({Key? key}) : super(key: key);
+  final MaterialInfo materialInfo;
+  const BundleDetailPage({Key? key, required this.materialInfo})
+      : super(key: key);
 
   @override
   State<BundleDetailPage> createState() => _BundleDetailPageState();
@@ -74,54 +79,68 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: WidgetKeys.bundleDetailPage,
-      appBar: AppBar(
-        actions: const [
-          Padding(
-            key: WidgetKeys.materialDetailsPageCartIcon,
-            padding: EdgeInsets.all(10),
-            child: CartButton(
-              backgroundCartColor: ZPColors.transparent,
-              cartColor: ZPColors.black,
-              iconSize: 20,
-              positionTop: -8,
-            ),
+    return BlocProvider<ProductDetailBloc>(
+      create: (context) => locator<ProductDetailBloc>()
+        ..add(
+          ProductDetailEvent.fetch(
+            salesOrganisation:
+                context.read<EligibilityBloc>().state.salesOrganisation,
+            customerCodeInfo:
+                context.read<EligibilityBloc>().state.customerCodeInfo,
+            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
+            user: context.read<EligibilityBloc>().state.user,
+            materialInfo: widget.materialInfo,
           ),
-        ],
-      ),
-      floatingActionButton: !_isScrollAtInitialPosition
-          ? FloatingActionButton(
-              key: WidgetKeys.materialDetailsFloatingButton,
-              onPressed: () => _scrollToTop(),
-              mini: true,
-              backgroundColor: ZPColors.secondaryMustard,
-              child: const Icon(
-                Icons.expand_less,
-                color: ZPColors.black,
+        ),
+      child: Scaffold(
+        key: WidgetKeys.bundleDetailPage,
+        appBar: AppBar(
+          actions: const [
+            Padding(
+              key: WidgetKeys.materialDetailsPageCartIcon,
+              padding: EdgeInsets.all(10),
+              child: CartButton(
+                backgroundCartColor: ZPColors.transparent,
+                cartColor: ZPColors.black,
+                iconSize: 20,
+                positionTop: -8,
               ),
-            )
-          : const SizedBox.shrink(),
-      body: ListView(
-        controller: _scrollController,
-        children: [
-          const _BundleImageSection(),
-          Align(
-            alignment: Alignment.topLeft,
-            child: ProductTag.bundleOffer(),
-          ),
-          const _BundleDetails(),
-          const SizedBox(height: 10),
-          const Divider(
-            indent: 0,
-            endIndent: 0,
-            height: 15,
-            color: ZPColors.lightGray2,
-          ),
-          const _BundleOfferDetails(),
-        ],
+            ),
+          ],
+        ),
+        floatingActionButton: !_isScrollAtInitialPosition
+            ? FloatingActionButton(
+                key: WidgetKeys.materialDetailsFloatingButton,
+                onPressed: () => _scrollToTop(),
+                mini: true,
+                backgroundColor: ZPColors.secondaryMustard,
+                child: const Icon(
+                  Icons.expand_less,
+                  color: ZPColors.black,
+                ),
+              )
+            : const SizedBox.shrink(),
+        body: ListView(
+          controller: _scrollController,
+          children: [
+            const _BundleImageSection(),
+            Align(
+              alignment: Alignment.topLeft,
+              child: ProductTag.bundleOffer(),
+            ),
+            const _BundleDetails(),
+            const SizedBox(height: 10),
+            const Divider(
+              indent: 0,
+              endIndent: 0,
+              height: 15,
+              color: ZPColors.lightGray2,
+            ),
+            const _BundleOfferDetails(),
+          ],
+        ),
+        bottomNavigationBar: const _AddToCartButton(),
       ),
-      bottomNavigationBar: const _AddToCartButton(),
     );
   }
 }
@@ -133,7 +152,24 @@ class _BundleDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
+    return BlocConsumer<ProductDetailBloc, ProductDetailState>(
+      listenWhen: (previous, current) =>
+          previous.failureOrSuccessOption != current.failureOrSuccessOption,
+      listener: (context, state) {
+        state.failureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              ErrorUtils.handleApiFailure(context, failure);
+            },
+            (_) => context.read<ProductImageBloc>().add(
+                  ProductImageEvent.fetch(
+                    list: state.productDetailAggregate.allMaterial,
+                  ),
+                ),
+          ),
+        );
+      },
       buildWhen: (previous, current) =>
           previous.productDetailAggregate.materialInfo !=
               current.productDetailAggregate.materialInfo ||

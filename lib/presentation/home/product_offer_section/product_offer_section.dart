@@ -25,7 +25,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 
 part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/product_offer_body_content.dart';
 part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/product_title.dart';

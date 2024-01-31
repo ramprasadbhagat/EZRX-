@@ -250,8 +250,13 @@ void main() {
     testWidgets(
       ' -> Tap Browse Product List item test',
       (WidgetTester tester) async {
-        when(() => autoRouterMock.pushNamed(any()))
-            .thenAnswer((invocation) async => true);
+        when(
+          () => autoRouterMock.push(
+            ProductDetailsPageRoute(materialInfo: materialList.first),
+          ),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
         when(() => materialListBlocMock.state).thenReturn(
           MaterialListState.initial().copyWith(
             materialList: materialList,
@@ -275,10 +280,8 @@ void main() {
         await tester.tap(browseProductsListFinder.first);
         await tester.pump();
         verify(
-          () => productDetailBlocMock.add(
-            ProductDetailEvent.fetch(
-              materialInfo: materialList.first,
-            ),
+          () => autoRouterMock.push(
+            ProductDetailsPageRoute(materialInfo: materialList.first),
           ),
         ).called(1);
       },
