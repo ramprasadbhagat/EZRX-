@@ -99,7 +99,6 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
           state.copyWith(
             isFetching: true,
             failureOrSuccessOption: none(),
-            fileUrl: [],
             fileOperationMode: FileOperationMode.none,
           ),
         );
@@ -127,7 +126,14 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
                 ),
               ),
               (files) async {
-                if (files.isEmpty) {
+                final newFiles = files
+                    .where(
+                      (platformFile) => !state.fileUrl.any(
+                        (poDocuments) => poDocuments.name == platformFile.name,
+                      ),
+                    )
+                    .toList();
+                if (newFiles.isEmpty) {
                   emit(
                     state.copyWith(
                       isFetching: false,
@@ -136,10 +142,9 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
 
                   return;
                 }
-
                 final uploadFilesFailureOrSuccess =
                     await poAttachmentRepository.uploadFiles(
-                  files: files,
+                  files: newFiles,
                   user: e.user,
                 );
                 uploadFilesFailureOrSuccess.fold(
@@ -148,14 +153,13 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
                       failureOrSuccessOption:
                           optionOf(uploadFilesFailureOrSuccess),
                       isFetching: false,
-                      fileUrl: [],
                     ),
                   ),
                   (r) => emit(
                     state.copyWith(
                       failureOrSuccessOption:
                           optionOf(uploadFilesFailureOrSuccess),
-                      fileUrl: r,
+                      fileUrl: [...r, ...state.fileUrl],
                       isFetching: false,
                       fileOperationMode: FileOperationMode.upload,
                     ),

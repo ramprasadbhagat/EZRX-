@@ -534,6 +534,79 @@ void main() {
       );
 
       blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc Upload file upload success with existing file',
+        seed: () => PoAttachmentState.initial().copyWith(
+          fileOperationMode: FileOperationMode.upload,
+          fileUrl: [fakePoDocument1],
+        ),
+        setUp: () {
+          when(
+            () => poAttachmentRepository.uploadFiles(
+              files: [
+                PlatformFile(
+                  name: fakePoDocument.name,
+                  size: 0,
+                ),
+              ],
+              user: fakeClientUser,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              uploadedFiles,
+            ),
+          );
+          when(
+            () => poAttachmentRepository.pickFiles(
+              uploadOptionType: UploadOptionType.file,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              [
+                PlatformFile(
+                  name: fakePoDocument.name,
+                  size: 0,
+                ),
+                PlatformFile(
+                  name: fakePoDocument1.name,
+                  size: 0,
+                ),
+              ],
+            ),
+          );
+          when(
+            () => poAttachmentRepository.getPermission(
+              uploadOptionType: UploadOptionType.file,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right(
+              PermissionStatus.granted,
+            ),
+          );
+        },
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.uploadFile(
+            uploadedPODocument: [],
+            uploadOptionType: UploadOptionType.file,
+            user: fakeClientUser,
+          ),
+        ),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+            fileOperationMode: FileOperationMode.none,
+            fileUrl: [fakePoDocument1],
+          ),
+          PoAttachmentState.initial().copyWith(
+            fileOperationMode: FileOperationMode.upload,
+            fileUrl: [fakePoDocument, fakePoDocument1],
+            failureOrSuccessOption: optionOf(Right(uploadedFiles)),
+          ),
+        ],
+      );
+
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc delete file failed',
         setUp: () {
           when(
