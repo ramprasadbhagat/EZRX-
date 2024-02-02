@@ -10,11 +10,10 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -29,6 +28,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
@@ -226,10 +226,7 @@ void main() {
       testWidgets('Out of stock material active', (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              addOosMaterials: OosMaterial(true),
-              oosValue: OosValue(1),
-            ),
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
           ),
         );
         when(() => bundleAddToCartBloc.state).thenReturn(
@@ -317,9 +314,7 @@ void main() {
           (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('SGD'),
-            ),
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
           ),
         );
         when(() => bundleAddToCartBloc.state).thenReturn(
@@ -354,9 +349,7 @@ void main() {
           (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('SGD'),
-            ),
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
           ),
         );
         when(() => bundleAddToCartBloc.state).thenReturn(
@@ -381,12 +374,13 @@ void main() {
         );
 
         whenListen(
-            bundleAddToCartBloc,
-            Stream.fromIterable([
-              bundleAddToCartBloc.state.copyWith(
-                showErrorMessage: true,
-              )
-            ]),);
+          bundleAddToCartBloc,
+          Stream.fromIterable([
+            bundleAddToCartBloc.state.copyWith(
+              showErrorMessage: true,
+            )
+          ]),
+        );
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
@@ -405,6 +399,65 @@ void main() {
           find.textContaining('Minimum total purchase qty'),
           findsOneWidget,
         );
+      });
+
+      testWidgets(
+          'Test CovidWarningMessageBottomSheet appeared when cart contains FOC materials',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+          ),
+        );
+        when(() => bundleAddToCartBloc.state).thenReturn(
+          BundleAddToCartState.initial().copyWith(
+            bundle: MaterialInfo.empty().copyWith(
+              bundle: Bundle.empty().copyWith(
+                bundleInformation: <BundleInfo>[
+                  BundleInfo.empty()
+                      .copyWith(quantity: 10, sequence: 1, rate: 20),
+                ],
+              ),
+            ),
+            bundleMaterials: <MaterialInfo>[
+              MaterialInfo.empty().copyWith(
+                quantity: MaterialQty(15),
+                materialNumber: MaterialNumber('fake-material-1'),
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+              ),
+            ],
+          ),
+        );
+
+        when(() => cartMockBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo:
+                    MaterialInfo.empty().copyWith(isFOCMaterial: true),
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final textField = find.descendant(
+          of: find.byKey(WidgetKeys.bundleMaterialItem('fake-material-1')),
+          matching: find.byKey(WidgetKeys.bundleQuantityTextKey),
+        );
+        await tester.tap(textField);
+        await tester.enterText(textField, '15');
+        expect(textField, findsWidgets);
+        final sheetAddToCartButton =
+            find.byKey(WidgetKeys.bundleAddToCartSheetSubmitButton);
+        await tester.tap(sheetAddToCartButton);
+        await tester.pumpAndSettle();
+        final addToCartErrorSection =
+            find.byKey(WidgetKeys.addToCartErrorSection);
+        expect(addToCartErrorSection, findsOneWidget);
       });
     },
   );

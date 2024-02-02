@@ -13,6 +13,9 @@ class AddToCartErrorSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartContainsFocProduct =
+        context.read<CartBloc>().state.containFocMaterialInCartProduct;
+
     return SafeArea(
       key: WidgetKeys.addToCartErrorSection,
       child: Padding(
@@ -41,7 +44,9 @@ class AddToCartErrorSection extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10, bottom: 30),
               child: Text(
                 context.tr(
-                  'Covid-19 vaccine cannot be added to cart with other commercial materials. By proceeding, your current cart will be cleared.',
+                  cartContainsFocProduct
+                      ? 'Commercial materials cannot be added to cart with Covid-19 vaccines. By proceeding, your current cart will be cleared.'
+                      : 'Covid-19 vaccine cannot be added to cart with other commercial materials. By proceeding, your current cart will be cleared.',
                 ),
                 maxLines: 3,
                 textAlign: TextAlign.start,

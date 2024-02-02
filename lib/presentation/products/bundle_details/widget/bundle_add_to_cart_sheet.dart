@@ -22,6 +22,7 @@ import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section_for_covid.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
@@ -304,34 +305,12 @@ class _BundleSheetFooter extends StatelessWidget {
 
                         return ElevatedButton(
                           key: WidgetKeys.bundleAddToCartSheetSubmitButton,
-                          onPressed: () {
-                            context.read<BundleAddToCartBloc>().add(
-                                  BundleAddToCartEvent.validateQuantity(
-                                    isError: !state.isBundleCountSatisfied,
-                                  ),
-                                );
-                            if (state.isBundleCountSatisfied &&
-                                !stateCart.isUpserting) {
-                              context.read<CartBloc>().add(
-                                    CartEvent.upsertCartItems(
-                                      priceAggregate:
-                                          PriceAggregate.empty().copyWith(
-                                        bundle: Bundle.empty().copyWith(
-                                          materials: state.selectedMaterialInfo(
-                                            materialInCart,
-                                          ),
-                                          bundleCode: state
-                                              .bundle.materialNumber
-                                              .getValue(),
-                                          bundleName: BundleName(
-                                            state.bundle.materialDescription,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                            }
-                          },
+                          onPressed: () => _addBundlesToCart(
+                            context,
+                            state: state,
+                            stateCart: stateCart,
+                            materialInCart: materialInCart,
+                          ),
                           child: LoadingShimmer.withChild(
                             enabled: stateCart.isUpserting,
                             child: Text(
@@ -379,4 +358,57 @@ class _BundleSheetFooter extends StatelessWidget {
               RouterUtils.buildRouteTrackingName(context.router.currentPath),
         },
       );
+
+  void _addBundlesToCart(
+    BuildContext context, {
+    required BundleAddToCartState state,
+    required CartState stateCart,
+    required PriceAggregate materialInCart,
+  }) {
+    context.read<BundleAddToCartBloc>().add(
+          BundleAddToCartEvent.validateQuantity(
+            isError: !state.isBundleCountSatisfied,
+          ),
+        );
+
+    if (!state.isBundleCountSatisfied || stateCart.isUpserting) return;
+
+    if (stateCart.containFocMaterialInCartProduct) {
+      _showCovidWarningMessageBottomSheet(
+        context: context,
+      );
+
+      return;
+    }
+
+    context.read<CartBloc>().add(
+          CartEvent.upsertCartItems(
+            priceAggregate: PriceAggregate.empty().copyWith(
+              bundle: Bundle.empty().copyWith(
+                materials: state.selectedMaterialInfo(
+                  materialInCart,
+                ),
+                bundleCode: state.bundle.materialNumber.getValue(),
+                bundleName: BundleName(
+                  state.bundle.materialDescription,
+                ),
+              ),
+            ),
+          ),
+        );
+  }
+
+  void _showCovidWarningMessageBottomSheet({
+    required BuildContext context,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      isDismissible: false,
+      builder: (_) {
+        return const AddToCartErrorSection();
+      },
+    );
+  }
 }
