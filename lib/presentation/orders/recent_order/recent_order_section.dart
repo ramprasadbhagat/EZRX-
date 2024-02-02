@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
+import 'package:ezrxmobile/presentation/core/icon_label.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -107,78 +108,93 @@ class _ProductTile extends StatelessWidget {
       onTap: () => _navigateToOrderDetails(context, product),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
-        child: CustomCard(
-          margin: const EdgeInsets.all(8.0),
-          child: ListTile(
-            key: WidgetKeys.listRecentlyOrdered,
-            contentPadding: const EdgeInsets.all(8),
-            title: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomCard(
-                  showBorder: true,
-                  showShadow: false,
-                  child: ProductImage(
-                    materialNumber: product.materialNumber,
-                    fit: BoxFit.fitHeight,
-                  ),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '${product.materialNumber.displayMatNo} | ${product.ezrxNumber.displayNAIfEmpty}',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall
-                            ?.copyWith(color: ZPColors.extraLightGrey4),
+        child: Stack(
+          children: [
+            CustomCard(
+              margin: const EdgeInsets.all(8.0),
+              child: ListTile(
+                key: WidgetKeys.listRecentlyOrdered,
+                contentPadding: const EdgeInsets.all(8),
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomCard(
+                      showBorder: true,
+                      showShadow: false,
+                      child: ProductImage(
+                        materialNumber: product.materialNumber,
+                        fit: BoxFit.fitHeight,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5.0),
-                        child: Text(
-                          product.materialDescription,
-                          style: Theme.of(context).textTheme.labelSmall,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          key: WidgetKeys.materialDescriptionRecentlyOrdered,
-                        ),
-                      ),
-                      Text(
-                        product.principalData.principalName
-                            .getOrDefaultValue(''),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: ZPColors.extraLightGrey4,
-                              fontSize: 10,
-                            ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      PriceComponent(
-                        price: product.itemUnitPrice(
-                          eligibilityState.salesOrg.isID,
-                        ),
-                        salesOrgConfig: eligibilityState.salesOrgConfigs,
-                      ),
-                      Flexible(
-                        child: GovtListPriceComponent(
-                          price: product.itemUnitPrice(
-                            eligibilityState.salesOrg.isID,
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '${product.materialNumber.displayMatNo} | ${product.ezrxNumber.displayNAIfEmpty}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(color: ZPColors.extraLightGrey4),
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Text(
+                              product.materialDescription,
+                              style: Theme.of(context).textTheme.labelSmall,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              key:
+                                  WidgetKeys.materialDescriptionRecentlyOrdered,
+                            ),
+                          ),
+                          Text(
+                            product.principalData.principalName
+                                .getOrDefaultValue(''),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: ZPColors.extraLightGrey4,
+                                      fontSize: 10,
+                                    ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          PriceComponent(
+                            price: product.itemUnitPrice(
+                              eligibilityState.salesOrg.isID,
+                            ),
+                            salesOrgConfig: eligibilityState.salesOrgConfigs,
+                          ),
+                          Flexible(
+                            child: GovtListPriceComponent(
+                              price: product.itemUnitPrice(
+                                eligibilityState.salesOrg.isID,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
+            if (product.isOfferItem)
+              const IconLabel(
+                key: WidgetKeys.iconLabelOffer,
+                icon: Icons.local_offer_outlined,
+                backgroundColor: ZPColors.darkYellow,
+                iconSize: 23,
+                labelText: '',
+                margin: EdgeInsets.only(left: 10, top: 10),
+              ),
+          ],
         ),
       ),
     );

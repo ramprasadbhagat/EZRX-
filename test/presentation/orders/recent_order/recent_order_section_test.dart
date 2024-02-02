@@ -288,4 +288,33 @@ void main() {
       expect(find.byType(GovtListPriceComponent), findsOneWidget);
     });
   });
+
+  testWidgets('Find Offer tag for offer items', (tester) async {
+    final fakeOrderHistory = OrderHistory.empty().copyWith(
+      orderHistoryItems: [
+        OrderHistoryItem.empty().copyWith(
+          promoStatus: true,
+          isBonusMaterial: false,
+        ),
+        OrderHistoryItem.empty().copyWith(
+          isBonusMaterial: true,
+          promoStatus: false,
+        )
+      ],
+    );
+    when(
+      () => viewByItemsBlocMock.state,
+    ).thenAnswer(
+      (invocation) => ViewByItemsState.initial().copyWith(
+        orderHistory: fakeOrderHistory,
+      ),
+    );
+
+    await tester.pumpWidget(getScopedWidget());
+    await tester.pumpAndSettle();
+
+    final offerTagProduct = find.byKey(WidgetKeys.iconLabelOffer);
+
+    expect(offerTagProduct, findsOneWidget);
+  });
 }
