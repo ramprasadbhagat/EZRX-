@@ -15,7 +15,7 @@ class TopAdvertBoxBanner extends StatelessWidget {
       create: (context) => locator<BannerBloc>(),
       child: BlocListener<EligibilityBloc, EligibilityState>(
         listenWhen: (previous, current) =>
-            previous.shipToInfo != current.shipToInfo && current.haveShipTo,
+            previous.isLoading != current.isLoading,
         listener: (context, state) {
           context.read<BannerBloc>().add(
                 BannerEvent.fetch(

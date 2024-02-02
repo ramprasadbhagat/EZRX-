@@ -480,8 +480,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           listenWhen: (previous, current) =>
               current != EligibilityState.initial() &&
               (previous.salesOrgConfigs != current.salesOrgConfigs ||
-                  (previous.customerCodeInfo != current.customerCodeInfo &&
-                      previous.shipToInfo != current.shipToInfo)),
+                  previous.customerCodeInfo != current.customerCodeInfo ||
+                  previous.shipToInfo != current.shipToInfo),
           listener: (context, state) {
             final orderDocumentTypeState =
                 context.read<OrderDocumentTypeBloc>().state;

@@ -4,10 +4,10 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
+import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner.dart';
 import 'package:ezrxmobile/presentation/home/combo_offers_section/combo_offers_section.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner.dart';
-import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
@@ -31,11 +31,10 @@ class HomeTab extends StatelessWidget {
     return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
           //check user role and accessRight as getter depends on both
-          previous.user.accessRight != current.user.accessRight ||
-          previous.user.role.type != current.user.role.type ||
-          previous.salesOrgConfigs.disableBundles !=
-              current.salesOrgConfigs.disableBundles ||
-          previous.shipToInfo.customerBlock != current.shipToInfo.customerBlock,
+
+          previous.salesOrgConfigs != current.salesOrgConfigs ||
+          previous.customerCodeInfo != current.customerCodeInfo ||
+          (previous.shipToInfo != current.shipToInfo && current.haveShipTo),
       builder: (context, state) {
         return Scaffold(
           key: WidgetKeys.homeScreen,

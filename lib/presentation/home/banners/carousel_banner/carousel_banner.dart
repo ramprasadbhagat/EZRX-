@@ -33,7 +33,7 @@ class _CarouselBannerState extends State<CarouselBanner> {
       create: (context) => locator<BannerBloc>(),
       child: BlocListener<EligibilityBloc, EligibilityState>(
         listenWhen: (previous, current) =>
-            previous.shipToInfo != current.shipToInfo && current.haveShipTo,
+            previous.isLoading != current.isLoading,
         listener: (context, state) {
           // ID uses targeted banner carousels for users so we need to include targetCustomerType and branchCode in the eZReach banner call.
           // This feature is not applicable for other markets.
