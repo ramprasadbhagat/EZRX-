@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -123,6 +124,16 @@ void main() {
         finalPrice: MaterialPrice(234.50),
       ),
       salesOrgConfig: fakeIDSalesOrgConfigs,
+      bonusSampleItems: [
+        BonusSampleItem.empty().copyWith(
+          materialNumber: MaterialNumber('fake-bonus-1'),
+          inStock: MaterialInStock('Yes'),
+        ),
+        BonusSampleItem.empty().copyWith(
+          materialNumber: MaterialNumber('fake-bonus-2'),
+          inStock: MaterialInStock('No'),
+        )
+      ],
     ),
   ];
 
@@ -549,6 +560,25 @@ void main() {
     );
 
     testWidgets(
+      'Find out of stock bonus items in pre order items list',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct,
+            config: fakeIDSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final preOrderList = find.byKey(WidgetKeys.preOrderModalItemList);
+        final preOrderBonus = find.text('fake-bonus-2');
+        expect(preOrderList, findsOneWidget);
+        expect(preOrderBonus, findsOneWidget);
+      },
+    );
+
+    testWidgets(
       '=> Find Offer Tag',
       (tester) async {
         when(() => cartBloc.state).thenReturn(
@@ -579,7 +609,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final offerTag = find.byType(OfferLabel);
-        expect(offerTag, findsOneWidget);
+        expect(offerTag, findsWidgets);
       },
     );
   });

@@ -14,7 +14,7 @@ class _MaterialDetails extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
+              Flexible(
                 child: Text(
                   cartItem.materialInfo.combinationCode(
                     showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
@@ -26,6 +26,9 @@ class _MaterialDetails extends StatelessWidget {
                       ),
                 ),
               ),
+              if (eligibilityState.salesOrg.showBonus &&
+                  cartItem.materialInfo.type.typeBonus)
+                const BonusTag(margin: EdgeInsets.only(left: 5)),
               const SizedBox(
                 width: 4,
               ),
@@ -57,6 +60,18 @@ class _MaterialDetails extends StatelessWidget {
               price: cartItem.display(PriceType.listPrice),
             ),
           ],
+          if (cartItem.materialInfo.type.typeBonus)
+            eligibilityState.isIDMarket
+                ? PriceComponent(
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
+                    price: '0',
+                  )
+                : Text(
+                    context.tr('FREE'),
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: ZPColors.textButtonColor,
+                        ),
+                  ),
         ],
       ),
     );

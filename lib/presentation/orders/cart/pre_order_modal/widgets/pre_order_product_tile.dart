@@ -11,7 +11,6 @@ class _PreOrderProductTile extends StatelessWidget {
         cartProduct.getMaterialNumber.displayMatNo,
       ),
       padding: const EdgeInsets.all(8.0),
-      margin: const EdgeInsets.only(top: 25.0),
       child: Column(
         children: [
           Row(
@@ -40,6 +39,25 @@ class _PreOrderProductTile extends StatelessWidget {
               ),
               if (cartProduct.materialInfo.type.typeMaterial)
                 _PriceSection(cartProduct: cartProduct),
+              if (cartProduct.materialInfo.type.typeBonus)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: context.read<EligibilityBloc>().state.isIDMarket
+                      ? PriceComponent(
+                          salesOrgConfig: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrgConfigs,
+                          price: '0',
+                        )
+                      : Text(
+                          context.tr('FREE'),
+                          style:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    color: ZPColors.textButtonColor,
+                                  ),
+                        ),
+                ),
             ],
           ),
         ],

@@ -10,7 +10,7 @@ class _ManufacturerName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 24.0),
+      padding: const EdgeInsets.symmetric(vertical: 24.0),
       child: Text(
         cartProduct.principalData.principalName.getValue(),
         style: Theme.of(context).textTheme.labelSmall?.copyWith(

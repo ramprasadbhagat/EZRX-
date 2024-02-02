@@ -421,7 +421,7 @@ class CartState with _$CartState {
       .expand(
         (e) => e.materialInfo.type.typeBundle
             ? e.bundleMaterialsPriceAggregate
-            : [e],
+            : [e, ...e.bonusMaterialPriceAggregate],
       )
       .toList();
 

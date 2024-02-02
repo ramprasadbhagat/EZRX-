@@ -26,17 +26,18 @@ class _PreOrderScrollSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                index == 0 ||
-                        preOrderItems[index]
-                                .materialInfo
-                                .principalData
-                                .principalName
-                                .getValue() !=
-                            preOrderItems[index - 1]
-                                .materialInfo
-                                .principalData
-                                .principalName
-                                .getValue()
+                !preOrderItems[index].materialInfo.type.typeBonus &&
+                        (index == 0 ||
+                            preOrderItems[index]
+                                    .materialInfo
+                                    .principalData
+                                    .principalName
+                                    .getValue() !=
+                                preOrderItems[index - 1]
+                                    .materialInfo
+                                    .principalData
+                                    .principalName
+                                    .getValue())
                     ? _ManufacturerName(
                         cartProduct: item.materialInfo,
                       )
@@ -44,16 +45,13 @@ class _PreOrderScrollSection extends StatelessWidget {
                 _PreOrderProductTile(
                   cartProduct: item,
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
                 index == state.cartProducts.length - 1
                     ? const SizedBox.shrink()
                     : const Divider(
                         color: ZPColors.lightGray2,
                         indent: 0,
                         endIndent: 0,
-                        height: 15,
+                        height: 30,
                       ),
               ],
             );

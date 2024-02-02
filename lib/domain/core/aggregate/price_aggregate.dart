@@ -869,6 +869,20 @@ class PriceAggregate with _$PriceAggregate {
         0,
         (sum, bonus) => sum + bonus.qty.intValue,
       );
+
+  List<PriceAggregate> get bonusMaterialPriceAggregate => bonusSampleItems
+      .map(
+        (e) => PriceAggregate.empty().copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: e.type,
+            materialNumber: e.materialNumber,
+            materialDescription: e.materialDescription,
+          ),
+          salesOrgConfig: salesOrgConfig,
+          stockInfoList: [StockInfo.empty().copyWith(inStock: e.inStock)],
+        ),
+      )
+      .toList();
 }
 
 enum PriceType {
