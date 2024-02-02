@@ -39,7 +39,10 @@ class MaterialInformation extends StatelessWidget {
         showModalBottomSheet(
           isScrollControlled: true,
           context: context,
-          builder: (_) => const _MaterialInfoDialog(),
+          builder: (_) => BlocProvider<ProductDetailBloc>.value(
+            value: context.read<ProductDetailBloc>(),
+            child: const _MaterialInfoDialog(),
+          ),
         );
       },
     );
