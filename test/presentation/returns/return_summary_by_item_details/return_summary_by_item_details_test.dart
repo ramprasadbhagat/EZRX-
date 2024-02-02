@@ -26,6 +26,7 @@ import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/r
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_request_summary_item_section.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_bonus_item_section.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_details_section.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/return_summary_item_price.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,6 +35,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -655,6 +657,161 @@ void main() {
           expect(bonusPrice, findsOneWidget);
         },
       );
+
+      testWidgets(
+        '=> return items details Display Overridden price & pro-rated price with strike through for Counter offer',
+        (tester) async {
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock,
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          final itemSummaryPriceFinder = find.byType(ReturnSummaryItemPrice);
+          expect(itemSummaryPriceFinder, findsOneWidget);
+          final unitPriceFinder = find.text('MYR 15.00', findRichText: true);
+          final counterOfferPriceFinder =
+              find.text('MYR 11.00', findRichText: true);
+          final counterOfferMsgFinder =
+              find.text('Requested return value counter offer');
+          expect(unitPriceFinder, findsOneWidget);
+          expect(counterOfferPriceFinder, findsOneWidget);
+          expect(counterOfferMsgFinder, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        '=> return items bonus details display overridden price & pro-rated price with strike through for Counter offer',
+        (tester) async {
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock,
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          final showButtonFinder =
+              find.byKey(WidgetKeys.returnDetailShowDetailButton);
+          await tester.dragUntilVisible(
+            showButtonFinder,
+            find.byKey(WidgetKeys.returnRequestDetailScrollList),
+            const Offset(0, 1000),
+          );
+          await tester.pumpAndSettle();
+          await tester.tap(showButtonFinder);
+          await tester.pumpAndSettle();
+          final itemSummaryPriceFinder = find.byType(ReturnSummaryItemPrice);
+          expect(itemSummaryPriceFinder, findsNWidgets(2));
+          final unitPriceFinder = find.text('MYR 15.00', findRichText: true);
+          final counterOfferPriceFinder =
+              find.text('MYR 11.00', findRichText: true);
+          final counterOfferMsgFinder =
+              find.text('Requested return value counter offer');
+          final bonusPriceMsgFinder = find.text(
+            'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).',
+          );
+          expect(unitPriceFinder, findsNWidgets(2));
+          expect(counterOfferPriceFinder, findsNWidgets(2));
+          expect(counterOfferMsgFinder, findsNWidgets(2));
+          expect(bonusPriceMsgFinder, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+          'return summary details item test display return price info icon',
+          (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+
+        when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+          ReturnSummaryDetailsState.initial().copyWith(
+            requestInformation: requestInformationMock.copyWith(
+              status: StatusType('APPROVED'),
+              initialQuantity: 0,
+            ),
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        final itemSummaryPriceFinder = find.byType(ReturnSummaryItemPrice);
+        expect(itemSummaryPriceFinder, findsOneWidget);
+        final itemPriceFinder = find.text('MYR 11.00', findRichText: true);
+        final itemPriceInfoIconFinder = find
+            .byKey(WidgetKeys.returnSummaryInfoIcon('Return value changed'));
+        expect(itemPriceFinder, findsOneWidget);
+        expect(itemPriceInfoIconFinder, findsOneWidget);
+
+        await tester.tap(itemPriceInfoIconFinder);
+        await tester.pump();
+
+        final returnSummaryInfoBottomSheetFinder =
+            find.byKey(WidgetKeys.returnSummaryInfoBottomSheet);
+        final itemPriceInfoIconContentFinder =
+            find.text('Request counter offer : <110.0>');
+        final itemPriceInfoIconSubContentFinder =
+            find.text('Approver updated the value');
+        expect(returnSummaryInfoBottomSheetFinder, findsOneWidget);
+        expect(itemPriceInfoIconContentFinder, findsOneWidget);
+        expect(itemPriceInfoIconSubContentFinder, findsOneWidget);
+      });
+
+      testWidgets(
+          'return summary details item test display return quantity info icon',
+          (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+          ReturnSummaryDetailsState.initial().copyWith(
+            requestInformation: requestInformationMock.copyWith(
+              status: StatusType('APPROVED'),
+              overrideValue: 0,
+              priceOverrideTrail: <PriceOverrideTrail>[],
+            ),
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        final itemSummaryPriceFinder = find.byType(ReturnSummaryItemPrice);
+        expect(itemSummaryPriceFinder, findsOneWidget);
+        final itemQuantityFinder = find.text('Qty: 2');
+        final itemQuantityInfoIconFinder = find
+            .byKey(WidgetKeys.returnSummaryInfoIcon('Return quantity changed'));
+        expect(itemQuantityFinder, findsOneWidget);
+        expect(itemQuantityInfoIconFinder, findsOneWidget);
+
+        await tester.tap(itemQuantityInfoIconFinder);
+        await tester.pump();
+
+        final returnSummaryInfoBottomSheetFinder =
+            find.byKey(WidgetKeys.returnSummaryInfoBottomSheet);
+        final itemQuantityInfoIconContentFinder =
+            find.text('Request Return quantity : <3>');
+        final itemQuantityInfoIconSubContentFinder =
+            find.text('Approver updated the QTY');
+        expect(returnSummaryInfoBottomSheetFinder, findsOneWidget);
+        expect(itemQuantityInfoIconContentFinder, findsOneWidget);
+        expect(itemQuantityInfoIconSubContentFinder, findsOneWidget);
+      });
 
       group('=> Attachment section', () {
         final scrollList = find.byKey(WidgetKeys.returnItemDetailScrollList);

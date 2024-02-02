@@ -463,6 +463,9 @@ class WidgetKeys {
   static const Key bonusPriceComponent = Key('bonusPriceComponent');
   static const Key returnRequestDetailSection =
       Key('returnRequestDetailSection');
+  static Key returnSummaryInfoIcon(String header) => Key(header);
+  static const Key returnSummaryInfoBottomSheet =
+      Key('returnSummaryInfoBottomSheet');
   //============================================================
   //============================================================
   //  Reset Password

@@ -88,4 +88,66 @@ void main() {
       },
     );
   });
+
+  group('Test OverrideRole Value Object', () {
+    test(
+      'should return true when role is user',
+      () async {
+        const input = 'USEROVR';
+        final overrideRole = OverrideRole(input);
+        final result = overrideRole.isUser;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return false when role is empty Approver',
+      () async {
+        const input = 'Approver';
+        final overrideRole = OverrideRole(input);
+        final result = overrideRole.isUser;
+        expect(result, false);
+      },
+    );
+
+    test(
+      'should return false when role is empty string',
+      () async {
+        const input = '';
+        final overrideRole = OverrideRole(input);
+        final result = overrideRole.isUser;
+        expect(result, false);
+      },
+    );
+
+    test(
+      'should return true when role is Approver',
+      () async {
+        const input = 'Approver';
+        final overrideRole = OverrideRole(input);
+        final result = overrideRole.isApprover;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return false when role is user',
+      () async {
+        const input = 'USEROVR';
+        final overrideRole = OverrideRole(input);
+        final result = overrideRole.isApprover;
+        expect(result, false);
+      },
+    );
+
+    test(
+      'should return false when role is empty string',
+      () async {
+        const input = '';
+        final overrideRole = OverrideRole(input);
+        final result = overrideRole.isApprover;
+        expect(result, false);
+      },
+    );
+  });
 }

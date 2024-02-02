@@ -58,10 +58,10 @@
                     "approvalTimeStamp": "",
                     "createdTimeStamp": "",
                     "poDate": "",
-                    "returnQuantity": "1",
+                    "returnQuantity": "2",
                     "unitPrice": "15",
-                    "totalPrice": "11",
-                    "initialQuantity": "2",
+                    "totalPrice": "22",
+                    "initialQuantity": "3",
                     "prsfd": "X",
                     "priceOverrideTrail": [
                         {
@@ -146,7 +146,7 @@
                             "createdTimeStamp": "",
                             "poDate": "",
                             "returnQuantity": "1",
-                            "unitPrice": "0",
+                            "unitPrice": "15",
                             "totalPrice": "0",
                             "billingItemNumber": "000011",
                             "salesDocumentItemNumber": "000011",
