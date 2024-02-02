@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -32,24 +31,21 @@ class _CarouselBannerState extends State<CarouselBanner> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => locator<BannerBloc>(),
-      child: BlocListener<CustomerCodeBloc, CustomerCodeState>(
+      child: BlocListener<EligibilityBloc, EligibilityState>(
         listenWhen: (previous, current) =>
-            previous.isFetching != current.isFetching && !current.isFetching,
+            previous.shipToInfo != current.shipToInfo && current.haveShipTo,
         listener: (context, state) {
-          final eligibilityState = context.read<EligibilityBloc>().state;
-
           // ID uses targeted banner carousels for users so we need to include targetCustomerType and branchCode in the eZReach banner call.
           // This feature is not applicable for other markets.
           context.read<BannerBloc>().add(
                 BannerEvent.fetch(
                   isPreSalesOrg: false,
-                  salesOrganisation: eligibilityState.salesOrganisation,
-                  country: eligibilityState.salesOrg.country,
-                  role: eligibilityState.user.role.type.getEZReachRoleType,
+                  salesOrganisation: state.salesOrganisation,
+                  country: state.salesOrg.country,
+                  role: state.user.role.type.getEZReachRoleType,
                   bannerType: 'banner_carousel',
-                  branchCode:
-                      eligibilityState.isIDMarket ? state.shipToInfo.plant : '',
-                  targetCustomerType: eligibilityState.isIDMarket
+                  branchCode: state.isIDMarket ? state.shipToInfo.plant : '',
+                  targetCustomerType: state.isIDMarket
                       ? state.shipToInfo.targetCustomerType
                       : '',
                 ),

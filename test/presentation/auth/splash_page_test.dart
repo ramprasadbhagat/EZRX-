@@ -911,19 +911,16 @@ void main() {
         'When PaymentCustomerInformation bloc event call when customer code changes',
         (tester) async {
       final expectedStates = [
-        CustomerCodeState.initial(),
-        CustomerCodeState.initial().copyWith(
+        EligibilityState.initial(),
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTWSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
         )
       ];
-      when(() => salesOrgBlocMock.state).thenAnswer(
-        (invocation) => SalesOrgState.initial().copyWith(
-          salesOrganisation: fakeTWSalesOrganisation,
-        ),
-      );
+
       whenListen(
-        customerCodeBlocMock,
+        eligibilityBlocMock,
         Stream.fromIterable(expectedStates),
       );
 

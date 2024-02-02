@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -14,17 +13,16 @@ class TopAdvertBoxBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => locator<BannerBloc>(),
-      child: BlocListener<CustomerCodeBloc, CustomerCodeState>(
+      child: BlocListener<EligibilityBloc, EligibilityState>(
         listenWhen: (previous, current) =>
-            previous.customerCodeInfo != current.customerCodeInfo,
+            previous.shipToInfo != current.shipToInfo && current.haveShipTo,
         listener: (context, state) {
-          final eligibilityState = context.read<EligibilityBloc>().state;
           context.read<BannerBloc>().add(
                 BannerEvent.fetch(
                   isPreSalesOrg: false,
-                  country: eligibilityState.salesOrg.country,
-                  salesOrganisation: eligibilityState.salesOrganisation,
-                  role: eligibilityState.user.role.type.getEZReachRoleType,
+                  country: state.salesOrg.country,
+                  salesOrganisation: state.salesOrganisation,
+                  role: state.user.role.type.getEZReachRoleType,
                   bannerType: 'top_advert_box',
                   branchCode: '',
                   targetCustomerType: '',

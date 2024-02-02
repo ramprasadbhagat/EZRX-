@@ -48,7 +48,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -161,10 +160,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               initial: (_) => _showLoadingDialog(context),
               loading: (_) => _showLoadingDialog(context),
               authenticated: (authState) {
-                //TODO: Revisit to uncomment this after change the endpoint for Announcement API
-                // context.read<AnnouncementBloc>().add(
-                //       const AnnouncementEvent.getAnnouncement(),
-                //     );
                 context.read<UserBloc>().add(const UserEvent.fetch());
 
                 context.read<IntroBloc>().add(
@@ -180,9 +175,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               unauthenticated: (unauthState) {
                 locator<MixpanelService>().onLogout();
-                // context.read<AnnouncementBloc>().add(
-                //       const AnnouncementEvent.getAnnouncement(),
-                //     );
                 context
                     .read<DeepLinkingBloc>()
                     .add(const DeepLinkingEvent.initialize());
@@ -248,17 +240,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           listenWhen: (previous, current) => previous.user != current.user,
           listener: (context, state) {
             _initializeSalesOrg(state);
-            final eligibilityState = context.read<EligibilityBloc>().state;
-            context.read<EligibilityBloc>().add(
-                  EligibilityEvent.update(
-                    user: state.user,
-                    salesOrganisation: eligibilityState.salesOrganisation,
-                    salesOrgConfigs: eligibilityState.salesOrgConfigs,
-                    customerCodeInfo: eligibilityState.customerCodeInfo,
-                    shipToInfo: eligibilityState.shipToInfo,
-                    selectedOrderType: eligibilityState.selectedOrderType,
-                  ),
-                );
             if (state.isSalesRep) {
               context.read<SalesRepBloc>().add(
                     SalesRepEvent.fetch(
@@ -497,122 +478,395 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
-              // context.read<UserBloc>().state.userCanCreateOrder &&
               current != EligibilityState.initial() &&
-              (previous.canOrderCovidMaterial !=
-                      current.canOrderCovidMaterial ||
-                  previous.salesOrgConfigs.disableBundles !=
-                      current.salesOrgConfigs.disableBundles ||
-                  previous.isOrderTypeEnable != current.isOrderTypeEnable ||
-                  previous.customerCodeInfo != current.customerCodeInfo ||
-                  previous.shipToInfo != current.shipToInfo),
+              (previous.salesOrgConfigs != current.salesOrgConfigs ||
+                  (previous.customerCodeInfo != current.customerCodeInfo &&
+                      previous.shipToInfo != current.shipToInfo)),
           listener: (context, state) {
-            _initializeProduct();
-            if (state.isOrderTypeEnable) {
-              context.read<OrderDocumentTypeBloc>().add(
-                    OrderDocumentTypeEvent.fetch(
+            final orderDocumentTypeState =
+                context.read<OrderDocumentTypeBloc>().state;
+            if (state.haveShipTo) {
+              _initializeProduct(state);
+              _initializeCart(state);
+              _initializeAccountSummary(state);
+
+              context.read<MaterialPriceBloc>().add(
+                    MaterialPriceEvent.initialized(
                       salesOrganisation: state.salesOrganisation,
-                      isEDI: state.customerCodeInfo.status.isEDI,
+                      salesConfigs: state.salesOrgConfigs,
+                      customerCodeInfo: state.customerCodeInfo,
+                      shipToInfo: state.shipToInfo,
                     ),
                   );
-            } else {
-              context
-                  .read<OrderDocumentTypeBloc>()
-                  .add(const OrderDocumentTypeEvent.initialized());
-              context.read<OrderDocumentTypeBloc>().add(
-                    OrderDocumentTypeEvent.selectedOrderType(
-                      isReasonSelected: false,
-                      selectedOrderType: OrderDocumentType.defaultSelected(
-                        salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-                      ),
+
+              context.read<ProductImageBloc>().add(
+                    ProductImageEvent.initialized(
+                      salesOrganisation: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
                     ),
                   );
-            }
-          },
-        ),
-        BlocListener<EligibilityBloc, EligibilityState>(
-          listenWhen: (previous, current) =>
-              current.salesOrganisation.salesOrg.isValid() &&
-              (previous.salesOrganisation.salesOrg !=
-                      current.salesOrganisation.salesOrg ||
-                  previous.isReturnsEnable != current.isReturnsEnable ||
-                  previous.user.role.type.hasReturnsAdminAccess !=
-                      current.user.role.type.hasReturnsAdminAccess),
-          listener: (context, state) {
-            final enableReturn = state.isReturnsEnable;
 
-            if (!enableReturn) return;
+              context.read<ViewByOrderFilterBloc>().add(
+                    ViewByOrderFilterEvent.initialized(
+                      salesOrganisation: state.salesOrganisation,
+                    ),
+                  );
 
-            if (state.user.role.type.isReturnApproverAccount) {
-              context.read<ReturnApproverBloc>().add(
-                    ReturnApproverEvent.fetch(
+              context.read<ViewByItemDetailsBloc>().add(
+                    ViewByItemDetailsEvent.initialized(
+                      salesOrganisation: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                      salesOrgConfig: state.salesOrgConfigs,
                       user: state.user,
-                      approverReturnFilter: context
-                          .read<ReturnApproverFilterBloc>()
+                      shipToInfo: state.shipToInfo,
+                    ),
+                  );
+              context.read<PaymentSummaryDetailsBloc>().add(
+                    PaymentSummaryDetailsEvent.initialized(
+                      salesOrganization: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                      user: state.user,
+                      shipToInfo: state.shipToInfo,
+                    ),
+                  );
+
+              context.read<ReturnListByRequestBloc>().add(
+                    ReturnListByRequestEvent.initialized(
+                      salesOrg: state.salesOrganisation.salesOrg,
+                      shipInfo: state.shipToInfo,
+                      user: state.user,
+                      customerCodeInfo: state.customerCodeInfo,
+                    ),
+                  );
+
+              context.read<DownloadPaymentAttachmentsBloc>().add(
+                    DownloadPaymentAttachmentEvent.initialized(
+                      salesOrganization: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                    ),
+                  );
+
+              context
+                  .read<PaymentCustomerInformationBloc>()
+                  .add(const PaymentCustomerInformationEvent.initialized());
+
+              context.read<PaymentCustomerInformationBloc>().add(
+                    PaymentCustomerInformationEvent.fetch(
+                      customeCodeInfo: state.customerCodeInfo,
+                      salesOrganisation: state.salesOrganisation,
+                      selectedShipToCode: state.shipToInfo.shipToCustomerCode,
+                    ),
+                  );
+
+              context.read<PaymentSummaryBloc>().add(
+                    PaymentSummaryEvent.initialized(
+                      salesOrganization: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                    ),
+                  );
+
+              context.read<PaymentSummaryBloc>().add(
+                    PaymentSummaryEvent.fetch(
+                      appliedFilter: context
+                          .read<PaymentSummaryBloc>()
                           .state
-                          .approverReturnFilter,
+                          .appliedFilter,
+                      searchKey: SearchKey.searchFilter(''),
+                    ),
+                  );
+
+              context.read<SoaBloc>().add(
+                    SoaEvent.fetch(
+                      customerCodeInfo: state.customerCodeInfo,
+                      salesOrg: state.salesOrg,
+                    ),
+                  );
+
+              context.read<AdditionalDetailsBloc>().add(
+                    AdditionalDetailsEvent.initialized(
+                      config: state.salesOrgConfigs,
+                      customerCodeInfo: state.customerCodeInfo,
+                    ),
+                  );
+
+              context.read<AllInvoicesBloc>().add(
+                    AllInvoicesEvent.fetch(
+                      appliedFilter: AllInvoicesFilter.empty(),
+                    ),
+                  );
+
+              context.read<AllCreditsBloc>().add(
+                    AllCreditsEvent.fetch(
+                      appliedFilter: AllCreditsFilter.empty(),
+                    ),
+                  );
+
+              context.read<FullSummaryBloc>().add(
+                    FullSummaryEvent.fetch(
+                      appliedFilter: FullSummaryFilter.empty(),
+                    ),
+                  );
+
+              context.read<AccountSummaryBloc>().add(
+                    AccountSummaryEvent.fetchInvoiceSummary(
+                      custCode: state.customerCodeInfo.customerCodeSoldTo,
+                      salesOrg: state.salesOrganisation.salesOrg,
+                    ),
+                  );
+              context.read<AccountSummaryBloc>().add(
+                    AccountSummaryEvent.fetchCreditSummary(
+                      custCode: state.customerCodeInfo.customerCodeSoldTo,
+                      salesOrg: state.salesOrganisation.salesOrg,
+                    ),
+                  );
+              context.read<PaymentInProgressBloc>().add(
+                    PaymentInProgressEvent.fetch(
+                      salesOrganization: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                    ),
+                  );
+
+              context.read<ComboDealMaterialDetailBloc>().add(
+                    ComboDealMaterialDetailEvent.initialize(
+                      salesOrganisation: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                      shipToInfo: state.shipToInfo,
+                      salesConfigs:
+                          context.read<EligibilityBloc>().state.salesOrgConfigs,
+                      user: state.user,
+                    ),
+                  );
+
+              context.read<OrderSummaryBloc>().add(
+                    OrderSummaryEvent.initialized(
+                      shipToInfo: state.shipToInfo,
+                      user: state.user,
+                      orderDocumentType:
+                          orderDocumentTypeState.selectedOrderType,
+                      customerCodeInfo: state.customerCodeInfo,
+                      salesOrganisation: state.salesOrganisation,
+                      salesOrg: state.salesOrg,
+                      salesOrgConfig: state.salesOrgConfigs,
+                    ),
+                  );
+
+              context.read<ProductSearchBloc>().add(
+                    ProductSearchEvent.initialized(
+                      configs: state.salesOrgConfigs,
+                      salesOrganization: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                      shipToInfo: state.shipToInfo,
+                      user: state.user,
+                    ),
+                  );
+              if (context.read<EligibilityBloc>().state.isReturnsEnable) {
+                context.read<ReturnListByItemBloc>().add(
+                      ReturnListByItemEvent.initialized(
+                        salesOrg: state.salesOrganisation.salesOrg,
+                        shipInfo: state.shipToInfo,
+                        user: state.user,
+                        customerCodeInfo: state.customerCodeInfo,
+                      ),
+                    );
+              }
+              context.read<AvailableCreditsBloc>().add(
+                    AvailableCreditsEvent.initialized(
+                      salesOrganization: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                    ),
+                  );
+
+              context.read<ReturnListByRequestBloc>().add(
+                    ReturnListByRequestEvent.initialized(
+                      salesOrg: state.salesOrganisation.salesOrg,
+                      shipInfo: state.shipToInfo,
+                      user: state.user,
+                      customerCodeInfo: state.customerCodeInfo,
+                    ),
+                  );
+
+              context.read<OutstandingInvoicesBloc>().add(
+                    OutstandingInvoicesEvent.initialized(
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                    ),
+                  );
+
+              context.read<ReturnItemsBloc>().add(
+                    ReturnItemsEvent.initialized(
+                      salesOrganisation: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                      shipToInfo: state.shipToInfo,
+                      user: state.user,
+                    ),
+                  );
+
+              if (state.user.userCanAccessOrderHistory) {
+                context.read<ViewByItemsBloc>().add(
+                      ViewByItemsEvent.initialized(
+                        customerCodeInfo: state.customerCodeInfo,
+                        salesOrgConfigs: state.salesOrgConfigs,
+                        shipToInfo: state.shipToInfo,
+                        user: state.user,
+                        salesOrganisation: state.salesOrganisation,
+                      ),
+                    );
+
+                context.read<ViewByOrderBloc>().add(
+                      ViewByOrderEvent.initialized(
+                        salesOrganisation: state.salesOrganisation,
+                        customerCodeInfo: state.customerCodeInfo,
+                        salesOrgConfigs: state.salesOrgConfigs,
+                        user: state.user,
+                        sortDirection: 'desc',
+                        shipToInfo: state.shipToInfo,
+                      ),
+                    );
+
+                context.read<ViewByOrderDetailsBloc>().add(
+                      ViewByOrderDetailsEvent.initialized(
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        user: context.read<UserBloc>().state.user,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        shipToInfo: state.shipToInfo,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                      ),
+                    );
+              }
+
+              context.read<PaymentSummaryFilterBloc>().add(
+                    PaymentSummaryFilterEvent.initialized(
+                      salesOrg: state.salesOrg,
+                    ),
+                  );
+
+              context.read<ReOrderPermissionBloc>().add(
+                    ReOrderPermissionEvent.initialized(
+                      customerCodeInfo: state.customerCodeInfo,
+                      shipToInfo: state.shipToInfo,
+                      salesOrganisation: state.salesOrganisation,
+                      salesOrganisationConfigs: state.salesOrgConfigs,
+                    ),
+                  );
+
+              context.read<ArticlesInfoBloc>().add(
+                    ArticlesInfoEvent.initialize(
+                      user: state.user,
+                      salesOrg: state.salesOrg,
+                      shipToInfo: state.shipToInfo,
+                    ),
+                  );
+              context.read<ArticlesInfoFilterBloc>().add(
+                    ArticlesInfoFilterEvent.fetchCategory(
+                      salesOrg: state.salesOrg,
+                    ),
+                  );
+              context.read<AnnouncementFilterBloc>().add(
+                    AnnouncementFilterEvent.fetchCategory(
+                      salesOrg: state.salesOrg,
+                    ),
+                  );
+
+              context.read<AnnouncementInfoBloc>().add(
+                    AnnouncementInfoEvent.initialize(
+                      user: state.user,
+                      salesOrg: state.salesOrg,
+                    ),
+                  );
+              context.read<ScanMaterialInfoBloc>().add(
+                    ScanMaterialInfoEvent.initialized(
+                      salesOrganisation: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                      user: state.user,
+                      shipToInfo: state.shipToInfo,
+                      salesOrgConfigs: state.salesOrgConfigs,
+                    ),
+                  );
+
+              context.read<CreditAndInvoiceDetailsBloc>().add(
+                    CreditAndInvoiceDetailsEvent.initialized(
+                      salesOrganisation: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                    ),
+                  );
+
+              final enableReturn = state.isReturnsEnable;
+
+              if (!enableReturn) return;
+
+              if (state.user.role.type.isReturnApproverAccount) {
+                context.read<ReturnApproverBloc>().add(
+                      ReturnApproverEvent.fetch(
+                        user: state.user,
+                        approverReturnFilter: context
+                            .read<ReturnApproverFilterBloc>()
+                            .state
+                            .approverReturnFilter,
+                      ),
+                    );
+              }
+
+              context.read<UsageCodeBloc>().add(
+                    UsageCodeEvent.fetch(
+                      salesOrg: state.salesOrganisation.salesOrg,
+                    ),
+                  );
+
+              context.read<ReturnRequestTypeCodeBloc>().add(
+                    ReturnRequestTypeCodeEvent.fetch(
+                      salesOrganisation: state.salesOrganisation,
+                    ),
+                  );
+
+              if (!state.user.role.type.hasReturnsAdminAccess) return;
+
+              context.read<UserRestrictionListBloc>().add(
+                    UserRestrictionListEvent.fetch(
+                      salesOrg: state.salesOrganisation.salesOrg,
+                    ),
+                  );
+              // Policy Configuration fetch event
+              context.read<PolicyConfigurationBloc>().add(
+                    PolicyConfigurationEvent.fetch(
+                      salesOrganisation: state.salesOrganisation,
+                      searchKey: '',
                     ),
                   );
             }
+            /**
+             * TODO: Need to revisit when special order type will be implemented also we removed the isOrderTypeEnable dependency
+             */
 
-            context.read<UsageCodeBloc>().add(
-                  UsageCodeEvent.fetch(
-                    salesOrg: state.salesOrganisation.salesOrg,
-                  ),
-                );
-
-            context.read<ReturnRequestTypeCodeBloc>().add(
-                  ReturnRequestTypeCodeEvent.fetch(
-                    salesOrganisation: state.salesOrganisation,
-                  ),
-                );
-
-            if (!state.user.role.type.hasReturnsAdminAccess) return;
-
-            context.read<UserRestrictionListBloc>().add(
-                  UserRestrictionListEvent.fetch(
-                    salesOrg: state.salesOrganisation.salesOrg,
-                  ),
-                );
-            // Policy Configuration fetch event
-            context.read<PolicyConfigurationBloc>().add(
-                  PolicyConfigurationEvent.fetch(
-                    salesOrganisation: state.salesOrganisation,
-                    searchKey: '',
-                  ),
-                );
-          },
-        ),
-        BlocListener<EligibilityBloc, EligibilityState>(
-          listenWhen: (previous, current) =>
-              (previous.shipToInfo != current.shipToInfo ||
-                  previous.salesOrgConfigs != current.salesOrgConfigs) &&
-              current != EligibilityState.initial(),
-          listener: (context, state) {
-            // _getAdminPoAttachment(state);
-            context.read<CartBloc>().add(
-                  const CartEvent.fetchProductsAddedToCart(),
-                );
-            if (!state.isCounterOfferVisible &&
-                context.read<PriceOverrideBloc>().state.item.price !=
-                    Price.empty()) {
-              context.read<PriceOverrideBloc>().add(
-                    const PriceOverrideEvent.initialized(),
-                  );
-            }
-            context.read<MaterialListBloc>().add(
-                  MaterialListEvent.fetch(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    configs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<EligibilityBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<EligibilityBloc>().state.shipToInfo,
-                    selectedMaterialFilter: MaterialFilter.empty(),
-                    user: context.read<UserBloc>().state.user,
-                  ),
-                );
+            // if (state.isOrderTypeEnable) {
+            //   context.read<OrderDocumentTypeBloc>().add(
+            //         OrderDocumentTypeEvent.fetch(
+            //           salesOrganisation: state.salesOrganisation,
+            //           isEDI: state.customerCodeInfo.status.isEDI,
+            //         ),
+            //       );
+            // } else {
+            //   context
+            //       .read<OrderDocumentTypeBloc>()
+            //       .add(const OrderDocumentTypeEvent.initialized());
+            //   context.read<OrderDocumentTypeBloc>().add(
+            //         OrderDocumentTypeEvent.selectedOrderType(
+            //           isReasonSelected: false,
+            //           selectedOrderType: OrderDocumentType.defaultSelected(
+            //             salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
+            //           ),
+            //         ),
+            //       );
+            // }
           },
         ),
         BlocListener<DeepLinkingBloc, DeepLinkingState>(
@@ -791,17 +1045,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               }
               if (state.haveSelectedSalesOrganisation &&
                   state.configs != SalesOrganisationConfigs.empty()) {
-                final eligibilityState = context.read<EligibilityBloc>().state;
-                context.read<EligibilityBloc>().add(
-                      EligibilityEvent.update(
-                        salesOrganisation: state.salesOrganisation,
-                        salesOrgConfigs: state.configs,
-                        user: eligibilityState.user,
-                        customerCodeInfo: eligibilityState.customerCodeInfo,
-                        shipToInfo: eligibilityState.shipToInfo,
-                        selectedOrderType: eligibilityState.selectedOrderType,
-                      ),
-                    );
                 context.read<CustomerCodeBloc>().add(
                       CustomerCodeEvent.initialized(
                         userInfo: context.read<UserBloc>().state.user,
@@ -960,14 +1203,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     }
   }
 
-  //ignore:long-method
   void _addDependentEvents(BuildContext context, CustomerCodeState state) {
     final salesOrgState = context.read<SalesOrgBloc>().state;
     final orderDocumentTypeState = context.read<OrderDocumentTypeBloc>().state;
     final user = context.read<UserBloc>().state.user;
-    //need to initialize the eligibility bloc
-    //so that when EligibilityBloc update event is call bloc listener will
-    //execute CartBloc fetch event
 
     context.read<MaterialFilterBloc>().add(
           const MaterialFilterEvent.resetFilter(),
@@ -979,107 +1218,28 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
 
-    context.read<MaterialPriceBloc>().add(
-          MaterialPriceEvent.initialized(
-            salesOrganisation: salesOrgState.salesOrganisation,
-            salesConfigs: salesOrgState.configs,
-            customerCodeInfo: state.customerCodeInfo,
-            shipToInfo: state.shipToInfo,
-          ),
-        );
-
-    context.read<ProductImageBloc>().add(
-          ProductImageEvent.initialized(
-            salesOrganisation: salesOrgState.salesOrganisation,
-            customerCodeInfo: state.customerCodeInfo,
-          ),
-        );
-
-    context.read<AllInvoicesBloc>().add(
-          AllInvoicesEvent.initialized(
-            salesOrganisation: salesOrgState.salesOrganisation,
-            customerCodeInfo: state.customerCodeInfo,
-          ),
-        );
-
-    context.read<AllCreditsBloc>().add(
-          AllCreditsEvent.initialized(
-            salesOrganisation: salesOrgState.salesOrganisation,
-            customerCodeInfo: state.customerCodeInfo,
-          ),
-        );
-    context.read<FullSummaryBloc>().add(
-          FullSummaryEvent.initialized(
-            salesOrganisation: salesOrgState.salesOrganisation,
-            customerCodeInfo: state.customerCodeInfo,
-          ),
-        );
-
     context
         .read<ViewByItemFilterBloc>()
         .add(const ViewByItemFilterEvent.initialize());
 
-    context.read<ViewByOrderFilterBloc>().add(
-          ViewByOrderFilterEvent.initialized(
-            salesOrganisation: salesOrgState.salesOrganisation,
-          ),
-        );
-
     context.read<AccountSummaryBloc>().add(
           const AccountSummaryEvent.initialize(),
         );
+
+    context.read<DeepLinkingBloc>().add(
+          const DeepLinkingEvent.initialize(),
+        );
+
+    context.read<NotificationBloc>().add(
+          const NotificationEvent.fetch(),
+        );
+
     /**
-     * Need to add all the initialized event which have dependency in ship here
-     * inside state.haveShipTo
+      Need to initialize the eligibility bloc
+      so that when EligibilityBloc update event is call bloc listener will
+      execute all initialize bloc events respective modules
      */
     if (state.haveShipTo) {
-      context.read<ViewByItemDetailsBloc>().add(
-            ViewByItemDetailsEvent.initialized(
-              salesOrganisation: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-              salesOrgConfig: salesOrgState.configs,
-              user: user,
-              shipToInfo: state.shipToInfo,
-            ),
-          );
-      context.read<PaymentSummaryDetailsBloc>().add(
-            PaymentSummaryDetailsEvent.initialized(
-              salesOrganization: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-              user: user,
-              shipToInfo: state.shipToInfo,
-            ),
-          );
-
-      context.read<ProductSearchBloc>().add(
-            ProductSearchEvent.initialized(
-              configs: salesOrgState.configs,
-              salesOrganization: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: state.shipToInfo,
-              user: user,
-            ),
-          );
-
-      context.read<ReturnListByRequestBloc>().add(
-            ReturnListByRequestEvent.initialized(
-              salesOrg: salesOrgState.salesOrganisation.salesOrg,
-              shipInfo: state.shipToInfo,
-              user: user,
-              customerCodeInfo: state.customerCodeInfo,
-            ),
-          );
-
-      context.read<CartBloc>().add(
-            CartEvent.initialized(
-              salesOrganisationConfigs: salesOrgState.configs,
-              salesOrganisation: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: state.shipToInfo,
-              user: user,
-            ),
-          );
-
       context.read<EligibilityBloc>().add(
             EligibilityEvent.update(
               customerCodeInfo: state.customerCodeInfo,
@@ -1089,264 +1249,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               user: user,
               selectedOrderType: orderDocumentTypeState.selectedOrderType,
             ),
-          );
-      context.read<DownloadPaymentAttachmentsBloc>().add(
-            DownloadPaymentAttachmentEvent.initialized(
-              salesOrganization: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-            ),
-          );
-      context.read<NotificationBloc>().add(
-            const NotificationEvent.fetch(),
-          );
-
-      context
-          .read<PaymentCustomerInformationBloc>()
-          .add(const PaymentCustomerInformationEvent.initialized());
-
-      context.read<PaymentCustomerInformationBloc>().add(
-            PaymentCustomerInformationEvent.fetch(
-              customeCodeInfo: state.customerCodeInfo,
-              salesOrganisation: salesOrgState.salesOrganisation,
-              selectedShipToCode: state.shipToInfo.shipToCustomerCode,
-            ),
-          );
-
-      context.read<PaymentSummaryBloc>().add(
-            PaymentSummaryEvent.initialized(
-              salesOrganization: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-            ),
-          );
-
-      context.read<PaymentSummaryBloc>().add(
-            PaymentSummaryEvent.fetch(
-              appliedFilter:
-                  context.read<PaymentSummaryBloc>().state.appliedFilter,
-              searchKey: SearchKey.searchFilter(''),
-            ),
-          );
-
-      context.read<SoaBloc>().add(
-            SoaEvent.fetch(
-              customerCodeInfo: state.customerCodeInfo,
-              salesOrg: salesOrgState.salesOrg,
-            ),
-          );
-
-      context.read<AdditionalDetailsBloc>().add(
-            AdditionalDetailsEvent.initialized(
-              config: salesOrgState.configs,
-              customerCodeInfo: state.customerCodeInfo,
-            ),
-          );
-
-      context.read<AllInvoicesBloc>().add(
-            AllInvoicesEvent.fetch(
-              appliedFilter: AllInvoicesFilter.empty(),
-            ),
-          );
-
-      context.read<AllCreditsBloc>().add(
-            AllCreditsEvent.fetch(
-              appliedFilter: AllCreditsFilter.empty(),
-            ),
-          );
-
-      context.read<FullSummaryBloc>().add(
-            FullSummaryEvent.fetch(
-              appliedFilter: FullSummaryFilter.empty(),
-            ),
-          );
-
-      context.read<AccountSummaryBloc>().add(
-            AccountSummaryEvent.fetchInvoiceSummary(
-              custCode: state.customerCodeInfo.customerCodeSoldTo,
-              salesOrg: salesOrgState.salesOrganisation.salesOrg,
-            ),
-          );
-      context.read<AccountSummaryBloc>().add(
-            AccountSummaryEvent.fetchCreditSummary(
-              custCode: state.customerCodeInfo.customerCodeSoldTo,
-              salesOrg: salesOrgState.salesOrganisation.salesOrg,
-            ),
-          );
-      context.read<PaymentInProgressBloc>().add(
-            PaymentInProgressEvent.fetch(
-              salesOrganization: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-            ),
-          );
-
-      context.read<ComboDealMaterialDetailBloc>().add(
-            ComboDealMaterialDetailEvent.initialize(
-              salesOrganisation: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: state.shipToInfo,
-              salesConfigs:
-                  context.read<EligibilityBloc>().state.salesOrgConfigs,
-              user: user,
-            ),
-          );
-
-      context.read<OrderSummaryBloc>().add(
-            OrderSummaryEvent.initialized(
-              shipToInfo: state.shipToInfo,
-              user: user,
-              orderDocumentType: orderDocumentTypeState.selectedOrderType,
-              customerCodeInfo: state.customerCodeInfo,
-              salesOrganisation: salesOrgState.salesOrganisation,
-              salesOrg: salesOrgState.salesOrg,
-              salesOrgConfig: salesOrgState.configs,
-            ),
-          );
-
-      context.read<ProductSearchBloc>().add(
-            ProductSearchEvent.initialized(
-              configs: salesOrgState.configs,
-              salesOrganization: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: state.shipToInfo,
-              user: user,
-            ),
-          );
-      if (context.read<EligibilityBloc>().state.isReturnsEnable) {
-        context.read<ReturnListByItemBloc>().add(
-              ReturnListByItemEvent.initialized(
-                salesOrg: salesOrgState.salesOrganisation.salesOrg,
-                shipInfo: state.shipToInfo,
-                user: user,
-                customerCodeInfo: state.customerCodeInfo,
-              ),
-            );
-      }
-      context.read<AvailableCreditsBloc>().add(
-            AvailableCreditsEvent.initialized(
-              salesOrganization: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-            ),
-          );
-
-      context.read<ReturnListByRequestBloc>().add(
-            ReturnListByRequestEvent.initialized(
-              salesOrg: salesOrgState.salesOrganisation.salesOrg,
-              shipInfo: state.shipToInfo,
-              user: user,
-              customerCodeInfo: state.customerCodeInfo,
-            ),
-          );
-
-      context.read<OutstandingInvoicesBloc>().add(
-            OutstandingInvoicesEvent.initialized(
-              salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            ),
-          );
-
-      context.read<ReturnItemsBloc>().add(
-            ReturnItemsEvent.initialized(
-              salesOrganisation: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: state.shipToInfo,
-              user: user,
-            ),
-          );
-
-      if (user.userCanAccessOrderHistory) {
-        context.read<ViewByItemsBloc>().add(
-              ViewByItemsEvent.initialized(
-                customerCodeInfo: state.customerCodeInfo,
-                salesOrgConfigs: salesOrgState.configs,
-                shipToInfo: state.shipToInfo,
-                user: user,
-                salesOrganisation: salesOrgState.salesOrganisation,
-              ),
-            );
-
-        context.read<ViewByOrderBloc>().add(
-              ViewByOrderEvent.initialized(
-                salesOrganisation: salesOrgState.salesOrganisation,
-                customerCodeInfo: state.customerCodeInfo,
-                salesOrgConfigs: salesOrgState.configs,
-                user: user,
-                sortDirection: 'desc',
-                shipToInfo: state.shipToInfo,
-              ),
-            );
-
-        context.read<ViewByOrderDetailsBloc>().add(
-              ViewByOrderDetailsEvent.initialized(
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                user: context.read<UserBloc>().state.user,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                shipToInfo: state.shipToInfo,
-                configs: context.read<SalesOrgBloc>().state.configs,
-              ),
-            );
-      }
-
-      context.read<PaymentSummaryFilterBloc>().add(
-            PaymentSummaryFilterEvent.initialized(
-              salesOrg: salesOrgState.salesOrg,
-            ),
-          );
-
-      context.read<ReOrderPermissionBloc>().add(
-            ReOrderPermissionEvent.initialized(
-              customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: state.shipToInfo,
-              salesOrganisation: salesOrgState.salesOrganisation,
-              salesOrganisationConfigs: salesOrgState.configs,
-            ),
-          );
-
-      context.read<ArticlesInfoBloc>().add(
-            ArticlesInfoEvent.initialize(
-              user: user,
-              salesOrg: salesOrgState.salesOrg,
-              shipToInfo: state.shipToInfo,
-            ),
-          );
-      context.read<ArticlesInfoFilterBloc>().add(
-            ArticlesInfoFilterEvent.fetchCategory(
-              salesOrg: salesOrgState.salesOrg,
-            ),
-          );
-      context.read<AnnouncementFilterBloc>().add(
-            AnnouncementFilterEvent.fetchCategory(
-              salesOrg: salesOrgState.salesOrg,
-            ),
-          );
-
-      context.read<AnnouncementInfoBloc>().add(
-            AnnouncementInfoEvent.initialize(
-              user: user,
-              salesOrg: salesOrgState.salesOrg,
-            ),
-          );
-      context.read<ScanMaterialInfoBloc>().add(
-            ScanMaterialInfoEvent.initialized(
-              salesOrganisation: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-              user: user,
-              shipToInfo: state.shipToInfo,
-              salesOrgConfigs: salesOrgState.configs,
-            ),
-          );
-
-      context.read<CreditAndInvoiceDetailsBloc>().add(
-            CreditAndInvoiceDetailsEvent.initialized(
-              salesOrganisation: salesOrgState.salesOrganisation,
-              customerCodeInfo: state.customerCodeInfo,
-            ),
-          );
-
-      context.read<DeepLinkingBloc>().add(
-            const DeepLinkingEvent.initialize(),
           );
     }
   }
@@ -1442,6 +1344,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     }
   }
 
+  /// Use for all payment configuration related initialized bloc event here
   void _initializePaymentConfiguration(UserState userState) {
     if (userState.user.role.type.isRootAdmin) {
       context.read<PaymentMethodsBloc>().add(
@@ -1462,37 +1365,83 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     }
   }
 
-  void _initializeProduct() {
-    final eligibilityBloc = context.read<EligibilityBloc>();
+  /// Use for all product related initialized bloc event here
+  void _initializeProduct(EligibilityState eligibilityState) {
     context.read<MaterialFilterBloc>().add(
           MaterialFilterEvent.fetch(
-            user: context.read<UserBloc>().state.user,
-            salesOrganisation: eligibilityBloc.state.salesOrganisation,
-            customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
-            shipToInfo: eligibilityBloc.state.shipToInfo,
-            hasAccessToCovidMaterial:
-                eligibilityBloc.state.canOrderCovidMaterial,
+            user: eligibilityState.user,
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+            hasAccessToCovidMaterial: eligibilityState.canOrderCovidMaterial,
           ),
         );
-    // context.read<MaterialFilterBloc>().add(
-    //   const MaterialFilterEvent.resetFilter(),
-    // );
     context.read<MaterialListBloc>().add(
           MaterialListEvent.fetch(
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-            configs: eligibilityBloc.state.salesOrgConfigs,
-            customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
-            shipToInfo: eligibilityBloc.state.shipToInfo,
+            salesOrganisation: eligibilityState.salesOrganisation,
+            configs: eligibilityState.salesOrgConfigs,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
             selectedMaterialFilter:
                 context.read<MaterialFilterBloc>().state.materialFilter,
-            user: context.read<UserBloc>().state.user,
+            user: eligibilityState.user,
+          ),
+        );
+
+    context.read<ProductSearchBloc>().add(
+          ProductSearchEvent.initialized(
+            configs: eligibilityState.salesOrgConfigs,
+            salesOrganization: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+            user: eligibilityState.user,
+          ),
+        );
+  }
+
+  /// Use for all cart related initialized bloc event here
+  void _initializeCart(EligibilityState eligibilityState) {
+    context.read<CartBloc>().add(
+          CartEvent.initialized(
+            salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+            user: eligibilityState.user,
+          ),
+        );
+    if (!eligibilityState.isCounterOfferVisible &&
+        context.read<PriceOverrideBloc>().state.item.price != Price.empty()) {
+      context.read<PriceOverrideBloc>().add(
+            const PriceOverrideEvent.initialized(),
+          );
+    }
+  }
+
+  /// Use for all account summary related initialized bloc event here
+  void _initializeAccountSummary(EligibilityState eligibilityState) {
+    context.read<AllInvoicesBloc>().add(
+          AllInvoicesEvent.initialized(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+          ),
+        );
+
+    context.read<AllCreditsBloc>().add(
+          AllCreditsEvent.initialized(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+          ),
+        );
+    context.read<FullSummaryBloc>().add(
+          FullSummaryEvent.initialized(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
           ),
         );
   }
 
   void _initBlocs(BuildContext context) {
-    //context.read<BannerBloc>().add(const BannerEvent.initialized());
     context
         .read<OrderDocumentTypeBloc>()
         .add(const OrderDocumentTypeEvent.initialized());
