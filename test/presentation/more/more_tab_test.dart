@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/presentation/more/section/help_and_support_section.dart';
@@ -34,6 +35,7 @@ import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
@@ -486,6 +488,48 @@ void main() {
                 type: RoleType('client_user'),
               ),
               fullName: const FullName(firstName: 'test', lastName: 'test'),
+            ),
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        final paymentsTile = find.byKey(WidgetKeys.paymentsTile);
+        expect(paymentsTile, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Hidden paymentsTile Sales Org SG and Customer Payment term is Outside of system --> A007',
+      (WidgetTester tester) async {
+        VisibilityDetectorController.instance.updateInterval = Duration.zero;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo.copyWith(
+              paymentTerm: PaymentTermCode('A007'),
+            ),
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        final paymentsTile = find.byKey(WidgetKeys.paymentsTile);
+        expect(paymentsTile, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Hidden paymentsTile Sales Org SG and Customer Payment term is Outside of system --> C024',
+      (WidgetTester tester) async {
+        VisibilityDetectorController.instance.updateInterval = Duration.zero;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo.copyWith(
+              paymentTerm: PaymentTermCode('C024'),
             ),
           ),
         );

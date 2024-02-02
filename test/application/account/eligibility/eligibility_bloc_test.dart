@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -464,6 +465,24 @@ void main() {
       eligibilityState = EligibilityState.initial().copyWith(
         user: fakeSalesRepUser.copyWith(disablePaymentAccess: false),
         salesOrgConfigs: fakeIDSalesOrgConfigs,
+      );
+
+      expect(eligibilityState.isPaymentEnabled, false);
+
+      eligibilityState = EligibilityState.initial().copyWith(
+        salesOrganisation: fakeSGSalesOrganisation,
+        customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+          paymentTerm: PaymentTermCode('C024'),
+        ),
+      );
+
+      expect(eligibilityState.isPaymentEnabled, false);
+
+      eligibilityState = EligibilityState.initial().copyWith(
+        salesOrganisation: fakeSGSalesOrganisation,
+        customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+          paymentTerm: PaymentTermCode('A007'),
+        ),
       );
 
       expect(eligibilityState.isPaymentEnabled, false);
