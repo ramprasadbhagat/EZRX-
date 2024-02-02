@@ -361,7 +361,10 @@ class _BundleOfferDetails extends StatelessWidget {
   }) {
     showModalBottomSheet(
       context: context,
-      builder: (_) => const BundleMaterialDescription(),
+      builder: (_) => BlocProvider<ProductDetailBloc>.value(
+        value: context.read<ProductDetailBloc>(),
+        child: const BundleMaterialDescription(),
+      ),
     );
   }
 
