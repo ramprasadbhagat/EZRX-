@@ -47,13 +47,16 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             }
             currentMarket.fold(
               (l) => newState = newState.copyWith(isSubmitting: false),
-              (currentMarket) => newState = newState.copyWith(
-                isSubmitting: false,
-                authFailureOrSuccessOption: none(),
-                currentMarket: currentMarket.isEmpty
+              (currentMarket) {
+                final setMarket = currentMarket.isEmpty
                     ? e.appMarket
-                    : AppMarket(currentMarket),
-              ),
+                    : AppMarket(currentMarket);
+                newState = newState.copyWith(
+                  isSubmitting: false,
+                );
+
+                add(_SetCurrentMarket(setMarket));
+              },
             );
 
             emit(newState);

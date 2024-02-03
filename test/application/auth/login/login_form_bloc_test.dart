@@ -59,6 +59,13 @@ void main() {
         );
         when(() => authRepoMock.loadCredential())
             .thenAnswer((invocation) async => Right(credMock));
+        when(
+          () => deviceRepoMock.setCurrentMarket(
+            currentMarket: AppMarket(mockDefaultCurrentMarket),
+          ),
+        ).thenAnswer(
+          (_) async => const Right(unit),
+        );
       },
       act: (LoginFormBloc bloc) => bloc.add(
         LoginFormEvent.loadLastSavedCred(
@@ -73,7 +80,13 @@ void main() {
           username: credMock.username,
           password: credMock.password,
           rememberPassword: true,
-          authFailureOrSuccessOption: none(),
+          currentMarket: AppMarket.defaultMarket(),
+        ),
+        loginFormState.copyWith(
+          username: credMock.username,
+          password: credMock.password,
+          rememberPassword: true,
+          authFailureOrSuccessOption: optionOf(const Right(unit)),
           isSubmitting: false,
           currentMarket: AppMarket.vietnam(),
         )
@@ -91,6 +104,13 @@ void main() {
             .thenAnswer((invocation) async => const Right(''));
         when(() => authRepoMock.loadCredential())
             .thenAnswer((invocation) async => Right(credMock));
+        when(
+          () => deviceRepoMock.setCurrentMarket(
+            currentMarket: AppMarket(mockDefaultCurrentMarket),
+          ),
+        ).thenAnswer(
+          (_) async => const Right(unit),
+        );
       },
       act: (LoginFormBloc bloc) => bloc.add(
         LoginFormEvent.loadLastSavedCred(
@@ -105,8 +125,13 @@ void main() {
           username: credMock.username,
           password: credMock.password,
           rememberPassword: true,
-          authFailureOrSuccessOption: none(),
-          isSubmitting: false,
+          currentMarket: AppMarket.defaultMarket(),
+        ),
+        loginFormState.copyWith(
+          username: credMock.username,
+          password: credMock.password,
+          rememberPassword: true,
+          authFailureOrSuccessOption: optionOf(const Right(unit)),
           currentMarket: AppMarket.vietnam(),
         )
       ],
@@ -121,6 +146,15 @@ void main() {
       setUp: () {
         when(() => authRepoMock.loadCredential())
             .thenAnswer((invocation) async => Right(credMock));
+        when(() => deviceRepoMock.getCurrentMarket())
+            .thenAnswer((invocation) async => const Right(''));
+        when(
+          () => deviceRepoMock.setCurrentMarket(
+            currentMarket: AppMarket(AppMarket.defaultMarket().getValue()),
+          ),
+        ).thenAnswer(
+          (_) async => const Right(unit),
+        );
       },
       act: (LoginFormBloc bloc) => bloc.add(
         LoginFormEvent.loadLastSavedCred(
@@ -135,8 +169,13 @@ void main() {
           username: credMock.username,
           password: credMock.password,
           rememberPassword: true,
-          authFailureOrSuccessOption: none(),
-          isSubmitting: false,
+        ),
+        loginFormState.copyWith(
+          username: credMock.username,
+          password: credMock.password,
+          rememberPassword: true,
+          authFailureOrSuccessOption: optionOf(const Right(unit)),
+          currentMarket: AppMarket.defaultMarket(),
         )
       ],
     );
