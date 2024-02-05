@@ -37,7 +37,6 @@
                     "MaterialDescription": "COZAAR TABS 100MG 30'S",
                     "DefaultMaterialDescription": "COZAAR TABS 100MG 30'S",
                     "GenericMaterialName": "LOSARTAN POTASSIUM",
-                    "MaterialImageURL": "",
                     "ItemRegistrationNumber": null
                 },
                 {
@@ -46,7 +45,6 @@
                     "MaterialDescription": "FOSAMAXTABS10MG30'S",
                     "DefaultMaterialDescription": "FOSAMAXTABS10MG30'S",
                     "GenericMaterialName": "ALENDRONATE SODIUM",
-                    "MaterialImageURL": "https://ezrxdev.blob.core.windows.net/assets/23046018/500x500",
                     "ItemRegistrationNumber": null
                 },
                 {
@@ -55,7 +53,6 @@
                     "MaterialDescription": "PROPECIA FP LPTABS1MG28'S",
                     "DefaultMaterialDescription": "PROPECIA FP LPTABS1MG28'S",
                     "GenericMaterialName": "FINASTERIDE",
-                    "MaterialImageURL": "",
                     "ItemRegistrationNumber": null
                 },
                 {
@@ -64,7 +61,6 @@
                     "MaterialDescription": "SINEMET CRTABS50/200MG 100'S",
                     "DefaultMaterialDescription": "SINEMET CRTABS50/200MG 100'S",
                     "GenericMaterialName": "CARBIDOPA, LEVODOPA",
-                    "MaterialImageURL": "",
                     "ItemRegistrationNumber": null
                 },
                 {
@@ -73,7 +69,6 @@
                     "MaterialDescription": "JANUVIATABS100MG28'S",
                     "DefaultMaterialDescription": "JANUVIATABS100MG28'S",
                     "GenericMaterialName": "SITAGLIPTIN",
-                    "MaterialImageURL": "",
                     "ItemRegistrationNumber": null
                 },
                 {
@@ -82,7 +77,6 @@
                     "MaterialDescription": "LIVIALTAB2.5MG1X28'S",
                     "DefaultMaterialDescription": "LIVIALTAB2.5MG1X28'S",
                     "GenericMaterialName": "TIBOLONE",
-                    "MaterialImageURL": "",
                     "ItemRegistrationNumber": null
                 }
             ],

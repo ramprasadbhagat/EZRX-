@@ -23,7 +23,6 @@
               "MaterialDescription": "A-CERUMEN 10 DOSES 2ML",
               "DefaultMaterialDescription": "A-CERUMEN 10 DOSES 2ML",
               "GenericMaterialName": "Alkylamido/Coco-Betaine/PEG120 methyl gl",
-              "MaterialImageURL": "https://ezrxdev.blob.core.windows.net/assets/Test/kh/21231548/background%20image.png-s",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -51,7 +50,6 @@
               "MaterialDescription": "DOLOGEL GEL GINGINVAL 25ML",
               "DefaultMaterialDescription": "DOLOGEL GEL GINGINVAL 25ML",
               "GenericMaterialName": "Extract Camomile+Valerian+Propalis",
-              "MaterialImageURL": "https://ezrxdev.blob.core.windows.net/assets/Test/kh/21231547/anh-thay-co-9%20-%20copy.jpg-s",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -79,7 +77,6 @@
               "MaterialDescription": "MARIMER SPRAY NEZ ALLERGY 100ML",
               "DefaultMaterialDescription": "MARIMER SPRAY NEZ ALLERGY 100ML",
               "GenericMaterialName": "Seawater sterile Isotonic",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -107,7 +104,6 @@
               "MaterialDescription": "MARIMER BABY ISOTONIC NASAL SPRAY 100ML",
               "DefaultMaterialDescription": "MARIMER BABY ISOTONIC NASAL SPRAY 100ML",
               "GenericMaterialName": "Seawater sterile Isotonic",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -135,7 +131,6 @@
               "MaterialDescription": "CHLORHEXIDINE 0.2% 10 x 5ml",
               "DefaultMaterialDescription": "CHLORHEXIDINE 0.2% 10 x 5ml",
               "GenericMaterialName": "Chlorhexidine 0.2g",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -163,7 +158,6 @@
               "MaterialDescription": "PHYSIODOSE B/30 X 5ML",
               "DefaultMaterialDescription": "PHYSIODOSE B/30 X 5ML",
               "GenericMaterialName": "NaCl 0.9g",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -191,7 +185,6 @@
               "MaterialDescription": "MARIMER ISOTONIC",
               "DefaultMaterialDescription": "MARIMER ISOTONIC",
               "GenericMaterialName": "Seawater sterile Isotonic",
-              "MaterialImageURL": "https://ezrxdev.blob.core.windows.net/assets/Test/kh/21231307/bird-thumbnail.jpg-s",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -219,7 +212,6 @@
               "MaterialDescription": "MARIMER HYPERTONIC",
               "DefaultMaterialDescription": "MARIMER HYPERTONIC",
               "GenericMaterialName": "Seawater sterile (Eq. Salt 22g/L)",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -247,7 +239,6 @@
               "MaterialDescription": "PHYSIOLAC ANTIREGURGITATION AR2 900G",
               "DefaultMaterialDescription": "PHYSIOLAC ANTIREGURGITATION AR2 900G",
               "GenericMaterialName": "Skimmed milk",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -275,7 +266,6 @@
               "MaterialDescription": "PHYSIOLAC ANTIREGURGITATION AR1 900G",
               "DefaultMaterialDescription": "PHYSIOLAC ANTIREGURGITATION AR1 900G",
               "GenericMaterialName": "Skimmed milk",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -303,7 +293,6 @@
               "MaterialDescription": "PHYSIOLAC EPISODES DIA",
               "DefaultMaterialDescription": "PHYSIOLAC EPISODES DIA",
               "GenericMaterialName": "Skimmed milk",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -331,7 +320,6 @@
               "MaterialDescription": "PHYSIOLAC RELAIS 1 400",
               "DefaultMaterialDescription": "PHYSIOLAC RELAIS 1 400",
               "GenericMaterialName": "Skimmed milk",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -359,7 +347,6 @@
               "MaterialDescription": "PHYSIOLAC HYPOALLERGENIQUE 400G",
               "DefaultMaterialDescription": "PHYSIOLAC HYPOALLERGENIQUE 400G",
               "GenericMaterialName": "Skimmed milk",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -387,7 +374,6 @@
               "MaterialDescription": "PHYSIOLAC 3A 900G",
               "DefaultMaterialDescription": "PHYSIOLAC 3A 900G",
               "GenericMaterialName": "Skimmed milk",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -415,7 +401,6 @@
               "MaterialDescription": "PHYSIOLAC 2A 900G",
               "DefaultMaterialDescription": "PHYSIOLAC 2A 900G",
               "GenericMaterialName": "Skimmed milk",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -443,7 +428,6 @@
               "MaterialDescription": "PHYSIOLAC 1A 900G",
               "DefaultMaterialDescription": "PHYSIOLAC 1A 900G",
               "GenericMaterialName": "Skimmed milk",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],
@@ -471,7 +455,6 @@
               "MaterialDescription": "LINIDERM BOTTLE 250ML",
               "DefaultMaterialDescription": "LINIDERM BOTTLE 250ML",
               "GenericMaterialName": "Olive oil extract",
-              "MaterialImageURL": "",
               "GovernmentMaterialCode": ""
             }
           ],

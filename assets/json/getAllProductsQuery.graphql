@@ -30,7 +30,6 @@ query ($request: GetAllProductsRequest!) {
         DefaultMaterialDescription
         GenericMaterialName
         Manufactured
-        MaterialImageURL
         GovernmentMaterialCode
       }
       DataTotalCount

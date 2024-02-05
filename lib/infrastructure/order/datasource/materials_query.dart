@@ -35,7 +35,6 @@ class MaterialsWithMetaQuery {
               DefaultMaterialDescription
               GenericMaterialName
               Manufactured
-              MaterialImageURL
               GovernmentMaterialCode
             }
             DataTotalCount
@@ -75,7 +74,6 @@ class MaterialsWithMetaQuery {
           MaterialDescription
           DefaultMaterialDescription
           GenericMaterialName
-          MaterialImageURL
           ItemRegistrationNumber
           __typename
         }
@@ -140,7 +138,6 @@ class MaterialsWithMetaQuery {
               DefaultMaterialDescription
               GenericMaterialName
               Manufactured
-              MaterialImageURL
               GovernmentMaterialCode
             }
             DataTotalCount

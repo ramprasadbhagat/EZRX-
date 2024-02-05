@@ -21,7 +21,6 @@ query GetProductDetails($request: GetProductDetailsRequest!) {
       MaterialDescription
       DefaultMaterialDescription
       GenericMaterialName
-      MaterialImageURL
       ItemRegistrationNumber
     }
     DataTotalCount

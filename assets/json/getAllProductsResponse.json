@@ -22,7 +22,6 @@
                             "MaterialDescription": "BIPOLAR PENANG 61",
                             "DefaultMaterialDescription": "BIPOLAR PENANG 61",
                             "GenericMaterialName": "BIPOLAR PENANG 61",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": "EZRX-1234"
                         }
                     ],
@@ -71,7 +70,6 @@
                             "MaterialDescription": "Entresto FCT 100mg 56s (4X14) SG",
                             "DefaultMaterialDescription": "Entresto FCT 100mg 56s (4X14) SG",
                             "GenericMaterialName": "",
-                            "MaterialImageURL": "https://ezrxprd.blob.core.windows.net/pmp-assets/Production/sg/23062280/thumb-23062280%20(1).png",
                             "GovernmentMaterialCode": "",
                             "ItemRegistrationNumber": null,
                             "__typename": "ProductMaterial"
@@ -83,7 +81,6 @@
                             "MaterialDescription": "Entresto FCT 200mg 56s (8X7) SG",
                             "DefaultMaterialDescription": "Entresto FCT 200mg 56s (8X7) SG",
                             "GenericMaterialName": "",
-                            "MaterialImageURL": "https://ezrxprd.blob.core.windows.net/pmp-assets/Production/sg/23062281/thumb-23062281%20(1).png",
                             "GovernmentMaterialCode": "",
                             "ItemRegistrationNumber": null,
                             "__typename": "ProductMaterial"
@@ -118,7 +115,6 @@
                             "MaterialDescription": "Bone Impactor V3",
                             "DefaultMaterialDescription": "Bone Impactor V3",
                             "GenericMaterialName": "",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -145,7 +141,6 @@
                             "MaterialDescription": "Calliper f/Corpectomy SSt ( Long)V2",
                             "DefaultMaterialDescription": "Calliper f/Corpectomy SSt ( Long)V2",
                             "GenericMaterialName": "",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -172,7 +167,6 @@
                             "MaterialDescription": "EXETER V40 KL 42",
                             "DefaultMaterialDescription": "EXETER V40 KL 42",
                             "GenericMaterialName": "EXETER V40 KL 42",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -199,7 +193,6 @@
                             "MaterialDescription": "SCORPIO NRG X3 PS TIBIAL INSERT#78MM V2",
                             "DefaultMaterialDescription": "SCORPIO NRG X3 PS TIBIAL INSERT#78MM V2",
                             "GenericMaterialName": "SCORPIO NRG X3 PS TIBIAL INSERT#7 8mm V2",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -226,7 +219,6 @@
                             "MaterialDescription": "SynMesh Cutter V3",
                             "DefaultMaterialDescription": "SynMesh Cutter V3",
                             "GenericMaterialName": "",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -253,7 +245,6 @@
                             "MaterialDescription": "TRI TS PLUS INSERT X3 POLY#1  11MM",
                             "DefaultMaterialDescription": "TRI TS PLUS INSERT X3 POLY#1  11MM",
                             "GenericMaterialName": "Tri TS Plus Tib Insert, X3 Poly, #1,11mm",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -280,7 +271,6 @@
                             "MaterialDescription": "Vario Case for SynMesh",
                             "DefaultMaterialDescription": "Vario Case for SynMesh",
                             "GenericMaterialName": "Generic MDD Case",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -307,7 +297,6 @@
                             "MaterialDescription": "Vario Case for SynMesh",
                             "DefaultMaterialDescription": "Vario Case for SynMesh",
                             "GenericMaterialName": "Generic MDD Case",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -334,7 +323,6 @@
                             "MaterialDescription": "Vario Case for SynMesh",
                             "DefaultMaterialDescription": "Vario Case for SynMesh",
                             "GenericMaterialName": "Generic MDD Case",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -361,7 +349,6 @@
                             "MaterialDescription": "Vario Case for SynMesh",
                             "DefaultMaterialDescription": "Vario Case for SynMesh",
                             "GenericMaterialName": "Generic MDD Case",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -407,7 +394,6 @@
                             "MaterialDescription": "(Z) JANUMET XR 100/1000 TABS 28'S",
                             "DefaultMaterialDescription": "(Z) JANUMET XR 100/1000 TABS 28'S",
                             "GenericMaterialName": "SITAGLIPTIN/METFORMIN",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         },
                         {
@@ -416,7 +402,6 @@
                             "MaterialDescription": "AVODARTCAP0.5MG30'S",
                             "DefaultMaterialDescription": "AVODARTCAP0.5MG30'S",
                             "GenericMaterialName": "DUTASTERIDE",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
@@ -468,7 +453,6 @@
                             "MaterialDescription": "COZAAR TABS 100MG 30'S",
                             "DefaultMaterialDescription": "COZAAR TABS 100MG 30'S",
                             "GenericMaterialName": "LOSARTAN POTASSIUM",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         },
                         {
@@ -477,7 +461,6 @@
                             "MaterialDescription": "FOSAMAXTABS10MG30'S",
                             "DefaultMaterialDescription": "FOSAMAXTABS10MG30'S",
                             "GenericMaterialName": "ALENDRONATE SODIUM",
-                            "MaterialImageURL": "https://ezrxdev.blob.core.windows.net/assets/23046018/500x500-s",
                             "GovernmentMaterialCode": "PPP"
                         },
                         {
@@ -486,7 +469,6 @@
                             "MaterialDescription": "PROPECIA FP LPTABS1MG28'S",
                             "DefaultMaterialDescription": "PROPECIA FP LPTABS1MG28'S",
                             "GenericMaterialName": "FINASTERIDE",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         },
                         {
@@ -495,7 +477,6 @@
                             "MaterialDescription": "FOSAMAXTABS10MG30'S",
                             "DefaultMaterialDescription": "FOSAMAXTABS10MG30'S",
                             "GenericMaterialName": "ALENDRONATE SODIUM",
-                            "MaterialImageURL": "https://ezrxdev.blob.core.windows.net/assets/23046018/500x500-s",
                             "GovernmentMaterialCode": "PPP"
                         },
                         {
@@ -504,7 +485,6 @@
                             "MaterialDescription": "PROPECIA FP LPTABS1MG28'S",
                             "DefaultMaterialDescription": "PROPECIA FP LPTABS1MG28'S",
                             "GenericMaterialName": "FINASTERIDE",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         },
                         {
@@ -513,7 +493,6 @@
                             "MaterialDescription": "PROPECIA FP LPTABS1MG28'S",
                             "DefaultMaterialDescription": "PROPECIA FP LPTABS1MG28'S",
                             "GenericMaterialName": "FINASTERIDE",
-                            "MaterialImageURL": "",
                             "GovernmentMaterialCode": ""
                         }
                     ],
