@@ -25,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'package:ezrxmobile/presentation/notification/widgets/notification_list.dart';
+part 'package:ezrxmobile/presentation/notification/widgets/delete_notifications_button.dart';
 
 class NotificationTab extends StatelessWidget {
   const NotificationTab({Key? key}) : super(key: key);
@@ -36,19 +37,8 @@ class NotificationTab extends StatelessWidget {
         title: Text(context.tr('Notifications')),
         automaticallyImplyLeading: false,
         titleSpacing: 20,
-        actionWidget: [
-          IconButton(
-            key: WidgetKeys.notificationDeleteButton,
-            onPressed: () {
-              context.read<NotificationBloc>().add(
-                    const NotificationEvent.deleteAllNotifications(),
-                  );
-            },
-            icon: const Icon(
-              Icons.delete_outline,
-              color: ZPColors.red,
-            ),
-          ),
+        actionWidget: const [
+          _DeleteNotificationButton(),
         ],
         customerBlocked:
             context.read<EligibilityBloc>().state.shipToInfo.customerBlock,

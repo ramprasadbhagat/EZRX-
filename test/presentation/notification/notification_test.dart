@@ -147,6 +147,11 @@ void main() {
     }
 
     testWidgets('Load notification_tab widget', (tester) async {
+      when(() => notificationBlocMock.state).thenReturn(
+        NotificationState.initial().copyWith(
+          notificationList: notifications,
+        ),
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final titleFinder = find.text('Notifications'.tr());
@@ -556,5 +561,17 @@ void main() {
         expect(find.text("You don't have access"), findsOneWidget);
       },
     );
+
+    testWidgets(
+        'Delete button should not be visible when notification list is empty ',
+        (tester) async {
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final titleFinder = find.text('Notifications'.tr());
+      expect(titleFinder, findsOneWidget);
+
+      final deleteIconFinder = find.byKey(WidgetKeys.notificationDeleteButton);
+      expect(deleteIconFinder, findsNothing);
+    });
   });
 }
