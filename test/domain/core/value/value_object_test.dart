@@ -403,5 +403,25 @@ void main() {
         );
       },
     );
+    test(
+      'Status Order FAILED',
+      () {
+        final statusType = FilterStatus('FAILED');
+        expect(
+          statusType.displayStatusLabelColor,
+          ZPColors.lightRedStatusColor,
+        );
+      },
+    );
+    test(
+      'Status Order PoFailed',
+      () {
+        final statusType = FilterStatus('PoFailed');
+        expect(
+          statusType.displayStatusLabelColor,
+          ZPColors.lightRedStatusColor,
+        );
+      },
+    );
   });
 }

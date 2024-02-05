@@ -269,7 +269,6 @@ Color getStatusLabelColor(String statusType) {
     'Processed': ZPColors.lightSecondary,
     'Successful': ZPColors.lightSecondary,
     'Approved for Return': ZPColors.lightSecondary,
-    'FAILED': ZPColors.lightSecondary,
     'Approved': ZPColors.lightSecondary,
     'Reviewed': ZPColors.lightSecondary,
     'Bonus': ZPColors.primary,
@@ -288,6 +287,8 @@ Color getStatusLabelColor(String statusType) {
     'Cancelled by Seller': ZPColors.lightRedStatusColor,
     'Overdue': ZPColors.lightRedStatusColor,
     'Rejected': ZPColors.lightRedStatusColor,
+    'PoFailed': ZPColors.lightRedStatusColor,
+    'FAILED': ZPColors.lightRedStatusColor,
   };
 
   final lightYellow = {
