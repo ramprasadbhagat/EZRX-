@@ -1,22 +1,23 @@
 part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 
 class _OrderSuccessMessage extends StatelessWidget {
-  const _OrderSuccessMessage({Key? key}) : super(key: key);
+  final OrderHistoryDetails orderHistoryDetails;
+  const _OrderSuccessMessage({Key? key, required this.orderHistoryDetails})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       key: WidgetKeys.orderSuccessMessage,
       children: [
-        Icon(
-          Icons.check_circle,
-          color: ZPColors.green,
-          size: MediaQuery.of(context).size.width * 0.2,
+        SvgPicture.asset(
+          orderHistoryDetails.processingStatus.orderConfirmationIcon,
+          fit: BoxFit.fitHeight,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Text(
-            '${'We’ll send a confirmation to'.tr()} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${'once your order has been confirmed'.tr()}',
+            '${context.tr(orderHistoryDetails.processingStatus.orderConfirmationPrefixMessage)} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${context.tr(orderHistoryDetails.processingStatus.orderConfirmationSuffixMessage)}',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),

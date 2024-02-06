@@ -894,6 +894,15 @@ class OrderStepValue extends ValueObject<String> {
 
   bool get isInQueue => checkIfInQueue(value.getOrElse(() => ''));
 
+  String get orderConfirmationIcon =>
+      queueStateToOrderConfirmationIcon(isInQueue);
+
+  String get orderConfirmationPrefixMessage =>
+      queueStateToOrderConfirmationPrefixMessage(isInQueue);
+
+  String get orderConfirmationSuffixMessage =>
+      queueStateToOrderConfirmationSuffixMessage(isInQueue);
+
   String get prefix => getOrderNumberPrefix(isInQueue);
 
   List<OrderHistoryStep> get viewByItemHistorySteps => getOrderHistorySteps(

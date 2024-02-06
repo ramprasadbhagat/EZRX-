@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/order/entities/order_history_step.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:flutter/material.dart';
 
 double totalPriceStringAsFixed(String value) {
@@ -119,6 +120,17 @@ String getOrderStatus(String status) {
 }
 
 bool checkIfInQueue(String value) => value.toLowerCase() == 'order creating';
+
+String queueStateToOrderConfirmationIcon(bool isInQueue) =>
+    isInQueue ? SvgImage.orderInQueue : SvgImage.orderCreated;
+
+String queueStateToOrderConfirmationPrefixMessage(bool isInQueue) => isInQueue
+    ? 'Your order is being created,please do not place a duplicate order while this order is being processed. We will send a confirmation email to'
+    : 'We’ll send a confirmation to';
+
+String queueStateToOrderConfirmationSuffixMessage(bool isInQueue) => isInQueue
+    ? 'once your order is successfully created.'
+    : 'once your order has been confirmed';
 
 String getOrderNumberPrefix(bool value) => value ? 'Queue' : 'Order';
 

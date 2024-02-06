@@ -43,6 +43,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_items.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/bundle_items.dart';
@@ -164,7 +165,9 @@ class _BodyContent extends StatelessWidget {
                 shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 children: [
-                  const _OrderSuccessMessage(),
+                  _OrderSuccessMessage(
+                    orderHistoryDetails: state.orderHistoryDetails,
+                  ),
                   if (!state.isOrderHistoryDetailsEmpty)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

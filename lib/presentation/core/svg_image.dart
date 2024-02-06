@@ -25,6 +25,8 @@ abstract class SvgImage {
   static const String checkCircle = '${_basePath}check_circle.svg';
   static const String documentIcon = '${_basePath}document_icon.svg';
   static const String pdfIcon = '${_basePath}pdf_icon.svg';
+  static const String orderInQueue = '${_basePath}order_queue_icon.svg';
+  static const String orderCreated = '${_basePath}order_success_icon.svg';
   static const String xlsIcon = '${_basePath}xls_icon.svg';
   static const String marketPlaceLogo = '${_basePath}market_place_logo.svg';
   static String paymentMethodOptionLogo(String optionID) =>
